@@ -212,7 +212,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.UserIp = null;
 
         /**
-         * The client-side session data, which is obtained from the SDK.
+         * The client-side session data, which is obtained from the SDK. If `RunMode` is `RunWithoutClient`, this parameter can be null.
          * @type {string || null}
          */
         this.ClientSession = null;
@@ -224,6 +224,29 @@ Empty string (default): Keep the application running on the cloud only when ther
          * @type {string || null}
          */
         this.RunMode = null;
+
+        /**
+         * Application startup parameter.
+If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
+If the user requests a prelaunch-enabled single-application project, this parameter is invalid.
+         * @type {string || null}
+         */
+        this.ApplicationParameters = null;
+
+        /**
+         * The user ID of the host in **multi-person interaction** scenarios, which is required.
+If the current user is the host, `HostUserId` must be the same as their `UserId`; otherwise, `HostUserId` should be the host's `UserId`.
+         * @type {string || null}
+         */
+        this.HostUserId = null;
+
+        /**
+         * The role in **multi-person interaction** scenarios. Valid values:
+`Player`: A user who can operate an application by using a keyboard and mouse
+`Viewer`: A user who can only watch the video in the room but cannot operate the application
+         * @type {string || null}
+         */
+        this.Role = null;
 
     }
 
@@ -238,6 +261,9 @@ Empty string (default): Keep the application running on the cloud only when ther
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
         this.RunMode = 'RunMode' in params ? params.RunMode : null;
+        this.ApplicationParameters = 'ApplicationParameters' in params ? params.ApplicationParameters : null;
+        this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }

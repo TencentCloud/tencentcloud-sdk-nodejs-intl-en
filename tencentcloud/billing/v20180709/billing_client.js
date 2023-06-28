@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const VoucherInfos = models.VoucherInfos;
 const UsageDetails = models.UsageDetails;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
+const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const BillResourceSummary = models.BillResourceSummary;
 const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
@@ -29,12 +30,15 @@ const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
+const SummaryDetail = models.SummaryDetail;
 const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const BillDetailComponent = models.BillDetailComponent;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const UsageRecords = models.UsageRecords;
+const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
+const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
@@ -46,7 +50,7 @@ const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryReq
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const SummaryTotal = models.SummaryTotal;
 const BillDetail = models.BillDetail;
-const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
+const BusinessSummaryInfo = models.BusinessSummaryInfo;
 const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
@@ -102,7 +106,8 @@ class BillingClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query bill details.
+     * This API is used to get bill details. 
+Notes: 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), bill data query via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
      * @param {DescribeBillDetailRequest} req
      * @param {function(string, DescribeBillDetailResponse):void} cb
      * @public
@@ -113,7 +118,18 @@ class BillingClient extends AbstractClient {
     }
 
     /**
-     * Gets the bill summarized according to billing mode
+     * This API is used to get bill details by product, project, region, billing mode, and tag through passing in parameters.
+     * @param {DescribeBillSummaryRequest} req
+     * @param {function(string, DescribeBillSummaryResponse):void} cb
+     * @public
+     */
+    DescribeBillSummary(req, cb) {
+        let resp = new DescribeBillSummaryResponse();
+        this.request("DescribeBillSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the bill summarized by billing mode.
      * @param {DescribeBillSummaryByPayModeRequest} req
      * @param {function(string, DescribeBillSummaryByPayModeResponse):void} cb
      * @public

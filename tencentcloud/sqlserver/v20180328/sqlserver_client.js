@@ -27,6 +27,7 @@ const CreateBusinessIntelligenceFileRequest = models.CreateBusinessIntelligenceF
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const CreateCloudDBInstancesResponse = models.CreateCloudDBInstancesResponse;
 const DeleteBusinessIntelligenceFileRequest = models.DeleteBusinessIntelligenceFileRequest;
 const CreateBusinessDBInstancesResponse = models.CreateBusinessDBInstancesResponse;
 const StartBackupMigrationResponse = models.StartBackupMigrationResponse;
@@ -50,7 +51,7 @@ const DBRemark = models.DBRemark;
 const CloseInterCommunicationRequest = models.CloseInterCommunicationRequest;
 const MigrateDB = models.MigrateDB;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const DescribeBackupsRequest = models.DescribeBackupsRequest;
+const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
@@ -75,12 +76,12 @@ const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstanc
 const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const DBCreateInfo = models.DBCreateInfo;
-const AccountPrivilege = models.AccountPrivilege;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
 const MigrationStep = models.MigrationStep;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const Events = models.Events;
@@ -93,6 +94,7 @@ const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest
 const MigrateSource = models.MigrateSource;
 const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
 const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
+const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const CreateBackupMigrationRequest = models.CreateBackupMigrationRequest;
 const DescribeXEventsResponse = models.DescribeXEventsResponse;
@@ -105,7 +107,7 @@ const ModifyDBNameRequest = models.ModifyDBNameRequest;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
 const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
-const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
+const AccountPrivilege = models.AccountPrivilege;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
@@ -130,6 +132,7 @@ const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const StartIncrementalMigrationResponse = models.StartIncrementalMigrationResponse;
 const InterInstanceFlow = models.InterInstanceFlow;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
+const CreateCloudReadOnlyDBInstancesResponse = models.CreateCloudReadOnlyDBInstancesResponse;
 const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
 const DbNormalDetail = models.DbNormalDetail;
 const AccountDetail = models.AccountDetail;
@@ -201,6 +204,7 @@ const DescribeDBInstancesAttributeRequest = models.DescribeDBInstancesAttributeR
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
 const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
+const CreateCloudDBInstancesRequest = models.CreateCloudDBInstancesRequest;
 const SlowlogInfo = models.SlowlogInfo;
 const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
@@ -208,7 +212,7 @@ const MigrateTarget = models.MigrateTarget;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const ModifyBackupMigrationRequest = models.ModifyBackupMigrationRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
-const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
+const DescribeBackupsRequest = models.DescribeBackupsRequest;
 
 
 /**
@@ -321,14 +325,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query migration task details.
-     * @param {DescribeMigrationDetailRequest} req
-     * @param {function(string, DescribeMigrationDetailResponse):void} cb
+     * This API is used to create a high-availability instance of cloud disk edition.
+     * @param {CreateCloudDBInstancesRequest} req
+     * @param {function(string, CreateCloudDBInstancesResponse):void} cb
      * @public
      */
-    DescribeMigrationDetail(req, cb) {
-        let resp = new DescribeMigrationDetailResponse();
-        this.request("DescribeMigrationDetail", req, resp, cb);
+    CreateCloudDBInstances(req, cb) {
+        let resp = new CreateCloudDBInstancesResponse();
+        this.request("CreateCloudDBInstances", req, resp, cb);
     }
 
     /**
@@ -351,6 +355,17 @@ class SqlserverClient extends AbstractClient {
     ModifyDBRemark(req, cb) {
         let resp = new ModifyDBRemarkResponse();
         this.request("ModifyDBRemark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start running a migration task.
+     * @param {RunMigrationRequest} req
+     * @param {function(string, RunMigrationResponse):void} cb
+     * @public
+     */
+    RunMigration(req, cb) {
+        let resp = new RunMigrationResponse();
+        this.request("RunMigration", req, resp, cb);
     }
 
     /**
@@ -642,14 +657,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to start running a migration task.
-     * @param {RunMigrationRequest} req
-     * @param {function(string, RunMigrationResponse):void} cb
+     * This API is used to query migration task details.
+     * @param {DescribeMigrationDetailRequest} req
+     * @param {function(string, DescribeMigrationDetailResponse):void} cb
      * @public
      */
-    RunMigration(req, cb) {
-        let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+    DescribeMigrationDetail(req, cb) {
+        let resp = new DescribeMigrationDetailResponse();
+        this.request("DescribeMigrationDetail", req, resp, cb);
     }
 
     /**
@@ -1002,6 +1017,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     RecycleDBInstance(req, cb) {
         let resp = new RecycleDBInstanceResponse();
         this.request("RecycleDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a read-only replica instance of cloud disk edition.
+     * @param {CreateCloudReadOnlyDBInstancesRequest} req
+     * @param {function(string, CreateCloudReadOnlyDBInstancesResponse):void} cb
+     * @public
+     */
+    CreateCloudReadOnlyDBInstances(req, cb) {
+        let resp = new CreateCloudReadOnlyDBInstancesResponse();
+        this.request("CreateCloudReadOnlyDBInstances", req, resp, cb);
     }
 
     /**

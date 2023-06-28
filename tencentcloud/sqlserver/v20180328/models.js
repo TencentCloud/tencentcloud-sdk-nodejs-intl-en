@@ -726,6 +726,41 @@ class RestartDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * CreateCloudDBInstances response structure.
+ * @class
+ */
+class CreateCloudDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order name
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteBusinessIntelligenceFile request structure.
  * @class
  */
@@ -775,6 +810,18 @@ class CreateBusinessDBInstancesResponse extends  AbstractModel {
         this.DealName = null;
 
         /**
+         * Process ID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * IDs of instances Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -790,6 +837,8 @@ class CreateBusinessDBInstancesResponse extends  AbstractModel {
             return;
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1625,90 +1674,24 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackups request structure.
+ * DescribeDBCharsets response structure.
  * @class
  */
-class DescribeBackupsRequest extends  AbstractModel {
+class DescribeDBCharsetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start name (yyyy-MM-dd HH:mm:ss)
+         * Database character set list
+         * @type {Array.<string> || null}
+         */
+        this.DatabaseCharsets = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time (yyyy-MM-dd HH:mm:ss)
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Instance ID in the format of mssql-njj2mtpl
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Number of results per page. Value range: 1-100. Default value: 20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Page number. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
-         * @type {string || null}
-         */
-        this.BackupName = null;
-
-        /**
-         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
-         * @type {number || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * Filter by backup mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup). Default value: `2`.
-         * @type {number || null}
-         */
-        this.BackupWay = null;
-
-        /**
-         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
-         * @type {number || null}
-         */
-        this.BackupId = null;
-
-        /**
-         * Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * Whether to group backup files by backup task. Valid value: `0` (no), `1` (yes). Default value: `0`. This parameter is valid only for unarchived backup files.
-         * @type {number || null}
-         */
-        this.Group = null;
-
-        /**
-         * Backup type. Valid values: `1` (data backup), `2` (log backup). Default value: `1`.
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Filter by backup file format. Valid values: `pkg` (archive file), `single` (Unarchived files).
-         * @type {string || null}
-         */
-        this.BackupFormat = null;
+        this.RequestId = null;
 
     }
 
@@ -1719,19 +1702,8 @@ class DescribeBackupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.BackupName = 'BackupName' in params ? params.BackupName : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
-        this.BackupId = 'BackupId' in params ? params.BackupId : null;
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.Group = 'Group' in params ? params.Group : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.BackupFormat = 'BackupFormat' in params ? params.BackupFormat : null;
+        this.DatabaseCharsets = 'DatabaseCharsets' in params ? params.DatabaseCharsets : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3255,48 +3227,6 @@ class DBCreateInfo extends  AbstractModel {
 }
 
 /**
- * Database account permission information, which is set when the database is created
- * @class
- */
-class AccountPrivilege extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Database username
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Database permission. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `Delete` (delete the database permissions of this account), `DBOwner` (owner).
-         * @type {string || null}
-         */
-        this.Privilege = null;
-
-        /**
-         * Account name. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account).
-         * @type {string || null}
-         */
-        this.AccountType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Privilege = 'Privilege' in params ? params.Privilege : null;
-        this.AccountType = 'AccountType' in params ? params.AccountType : null;
-
-    }
-}
-
-/**
  * InquiryPriceCreateDBInstances request structure.
  * @class
  */
@@ -3663,6 +3593,203 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
         this.UidSet = 'UidSet' in params ? params.UidSet : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * CreateCloudReadOnlyDBInstances request structure.
+ * @class
+ */
+class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of  `mssql-3l3fgqn7`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
+         * @type {number || null}
+         */
+        this.ReadOnlyGroupType = null;
+
+        /**
+         * Instance memory size in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Number of instance cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * The host type of purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Valid values: `0` (not upgrade the primary instance by default), `1` (upgrade the primary instance to complete the RO deployment).  You need to pass in `1` for this parameter and upgrade the primary instance to cluster edition.
+         * @type {number || null}
+         */
+        this.ReadOnlyGroupForcedUpgrade = null;
+
+        /**
+         * Existing read-only group ID, which is required when `ReadOnlyGroupType` is `3`.
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * New read-only group ID, which is required when `ReadOnlyGroupType` is `2`.
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupName = null;
+
+        /**
+         * Whether delayed read-only instance removal is enabled in a new read-only group, which is required when `ReadOnlyGroupType` is `2`. Valid values: `1` (enabled), `0` (disabled).  The read-only replica will be automatically removed when the delay between it and the primary instance exceeds the threshold.
+         * @type {number || null}
+         */
+        this.ReadOnlyGroupIsOfflineDelay = null;
+
+        /**
+         * The delay threshold for a new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
+         * @type {number || null}
+         */
+        this.ReadOnlyGroupMaxDelayTime = null;
+
+        /**
+         * Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
+         * @type {number || null}
+         */
+        this.ReadOnlyGroupMinInGroup = null;
+
+        /**
+         * Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Number of instances purchased this time. Default value: `1`.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Security group list, which contains security group IDs in the format of `sg-xxx`.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupList = null;
+
+        /**
+         * Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Array of voucher IDs (currently, only one voucher can be used per order)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Tags associated with the instances to be created
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Collation of system character sets. Default value:  Chinese_PRC_CI_AS
+         * @type {string || null}
+         */
+        this.Collation = null;
+
+        /**
+         * System time zone. Default value:  `China Standard Time`
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ReadOnlyGroupType = 'ReadOnlyGroupType' in params ? params.ReadOnlyGroupType : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.ReadOnlyGroupForcedUpgrade = 'ReadOnlyGroupForcedUpgrade' in params ? params.ReadOnlyGroupForcedUpgrade : null;
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.ReadOnlyGroupName = 'ReadOnlyGroupName' in params ? params.ReadOnlyGroupName : null;
+        this.ReadOnlyGroupIsOfflineDelay = 'ReadOnlyGroupIsOfflineDelay' in params ? params.ReadOnlyGroupIsOfflineDelay : null;
+        this.ReadOnlyGroupMaxDelayTime = 'ReadOnlyGroupMaxDelayTime' in params ? params.ReadOnlyGroupMaxDelayTime : null;
+        this.ReadOnlyGroupMinInGroup = 'ReadOnlyGroupMinInGroup' in params ? params.ReadOnlyGroupMinInGroup : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.SecurityGroupList = 'SecurityGroupList' in params ? params.SecurityGroupList : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Collation = 'Collation' in params ? params.Collation : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
 
     }
 }
@@ -4293,6 +4420,41 @@ class ModifyBackupMigrationResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFlowStatus response structure.
+ * @class
+ */
+class DescribeFlowStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow status. 0: succeeded, 1: failed, 2: running
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAccountPrivilege request structure.
  * @class
  */
@@ -4807,24 +4969,30 @@ class DescribeRegionsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeFlowStatus response structure.
+ * Database account permission information, which is set when the database is created
  * @class
  */
-class DescribeFlowStatusResponse extends  AbstractModel {
+class AccountPrivilege extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Flow status. 0: succeeded, 1: failed, 2: running
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Database username
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.UserName = null;
+
+        /**
+         * Database permission. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `Delete` (delete the database permissions of this account), `DBOwner` (owner).
+         * @type {string || null}
+         */
+        this.Privilege = null;
+
+        /**
+         * Account name. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account).
+         * @type {string || null}
+         */
+        this.AccountType = null;
 
     }
 
@@ -4835,8 +5003,9 @@ class DescribeFlowStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Privilege = 'Privilege' in params ? params.Privilege : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -5850,6 +6019,41 @@ class DbRollbackTimeInfo extends  AbstractModel {
         this.DBName = 'DBName' in params ? params.DBName : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CreateCloudReadOnlyDBInstances response structure.
+ * @class
+ */
+class CreateCloudReadOnlyDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order name in array
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9902,6 +10106,196 @@ class ModifyDatabaseCTResponse extends  AbstractModel {
 }
 
 /**
+ * CreateCloudDBInstances request structure.
+ * @class
+ */
+class CreateCloudDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance memory size in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * The host type of the purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Number of instances purchased this time. Default value: `1`.  Maximum value: `10`.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Array of voucher IDs (currently, only one voucher can be used per order)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * SQL Server version. Valid values:  `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard).  Default value: `2008R2`.  The available version varies by region, and you can pull the version information through the `DescribeProductConfig` API.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Auto-renewal flag, which takes effect only when purchasing a monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Security group list, which contains security group IDs in the format of `sg-xxx`.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupList = null;
+
+        /**
+         * Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday).
+         * @type {Array.<number> || null}
+         */
+        this.Weekly = null;
+
+        /**
+         * Configuration of the maintenance window, which specifies the start time of daily maintenance.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour
+         * @type {number || null}
+         */
+        this.Span = null;
+
+        /**
+         * Whether to deploy across AZs. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.MultiZones = null;
+
+        /**
+         * Tags associated with the instances to be created
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Collation of system character sets. Default value:  `Chinese_PRC_CI_AS`.
+         * @type {string || null}
+         */
+        this.Collation = null;
+
+        /**
+         * System time zone. Default value:  `China Standard Time`.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SecurityGroupList = 'SecurityGroupList' in params ? params.SecurityGroupList : null;
+        this.Weekly = 'Weekly' in params ? params.Weekly : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Span = 'Span' in params ? params.Span : null;
+        this.MultiZones = 'MultiZones' in params ? params.MultiZones : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Collation = 'Collation' in params ? params.Collation : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+
+    }
+}
+
+/**
  * Slow query log file information
  * @class
  */
@@ -10255,24 +10649,90 @@ class DeleteAccountResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBCharsets response structure.
+ * DescribeBackups request structure.
  * @class
  */
-class DescribeDBCharsetsResponse extends  AbstractModel {
+class DescribeBackupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database character set list
-         * @type {Array.<string> || null}
-         */
-        this.DatabaseCharsets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Start name (yyyy-MM-dd HH:mm:ss)
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * End time (yyyy-MM-dd HH:mm:ss)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Instance ID in the format of mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of results per page. Value range: 1-100. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter by backup name. If this parameter is left empty, backup name will not be used in filtering.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Filter by backup mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup). Default value: `2`.
+         * @type {number || null}
+         */
+        this.BackupWay = null;
+
+        /**
+         * Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * Filter backups by the database name. If the parameter is left empty, this filter criteria will not take effect.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * Whether to group backup files by backup task. Valid value: `0` (no), `1` (yes). Default value: `0`. This parameter is valid only for unarchived backup files.
+         * @type {number || null}
+         */
+        this.Group = null;
+
+        /**
+         * Backup type. Valid values: `1` (data backup), `2` (log backup). Default value: `1`.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Filter by backup file format. Valid values: `pkg` (archive file), `single` (Unarchived files).
+         * @type {string || null}
+         */
+        this.BackupFormat = null;
 
     }
 
@@ -10283,8 +10743,19 @@ class DescribeDBCharsetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseCharsets = 'DatabaseCharsets' in params ? params.DatabaseCharsets : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.BackupFormat = 'BackupFormat' in params ? params.BackupFormat : null;
 
     }
 }
@@ -10301,6 +10772,7 @@ module.exports = {
     CreateMigrationResponse: CreateMigrationResponse,
     DeleteBackupMigrationRequest: DeleteBackupMigrationRequest,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
+    CreateCloudDBInstancesResponse: CreateCloudDBInstancesResponse,
     DeleteBusinessIntelligenceFileRequest: DeleteBusinessIntelligenceFileRequest,
     CreateBusinessDBInstancesResponse: CreateBusinessDBInstancesResponse,
     StartBackupMigrationResponse: StartBackupMigrationResponse,
@@ -10324,7 +10796,7 @@ module.exports = {
     CloseInterCommunicationRequest: CloseInterCommunicationRequest,
     MigrateDB: MigrateDB,
     DescribeRegionsResponse: DescribeRegionsResponse,
-    DescribeBackupsRequest: DescribeBackupsRequest,
+    DescribeDBCharsetsResponse: DescribeDBCharsetsResponse,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeRollbackTimeResponse: DescribeRollbackTimeResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
@@ -10349,12 +10821,12 @@ module.exports = {
     OpenInterCommunicationResponse: OpenInterCommunicationResponse,
     ModifyAccountPrivilegeResponse: ModifyAccountPrivilegeResponse,
     DBCreateInfo: DBCreateInfo,
-    AccountPrivilege: AccountPrivilege,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyMigrationResponse: ModifyMigrationResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     DescribeDBsResponse: DescribeDBsResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    CreateCloudReadOnlyDBInstancesRequest: CreateCloudReadOnlyDBInstancesRequest,
     MigrationStep: MigrationStep,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     Events: Events,
@@ -10367,6 +10839,7 @@ module.exports = {
     MigrateSource: MigrateSource,
     ModifyDatabaseCTRequest: ModifyDatabaseCTRequest,
     ModifyBackupMigrationResponse: ModifyBackupMigrationResponse,
+    DescribeFlowStatusResponse: DescribeFlowStatusResponse,
     ModifyAccountPrivilegeRequest: ModifyAccountPrivilegeRequest,
     CreateBackupMigrationRequest: CreateBackupMigrationRequest,
     DescribeXEventsResponse: DescribeXEventsResponse,
@@ -10379,7 +10852,7 @@ module.exports = {
     ModifyDatabaseMdfRequest: ModifyDatabaseMdfRequest,
     DeleteIncrementalMigrationResponse: DeleteIncrementalMigrationResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
-    DescribeFlowStatusResponse: DescribeFlowStatusResponse,
+    AccountPrivilege: AccountPrivilege,
     DeleteMigrationRequest: DeleteMigrationRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     DescribeMigrationDetailRequest: DescribeMigrationDetailRequest,
@@ -10404,6 +10877,7 @@ module.exports = {
     StartIncrementalMigrationResponse: StartIncrementalMigrationResponse,
     InterInstanceFlow: InterInstanceFlow,
     DbRollbackTimeInfo: DbRollbackTimeInfo,
+    CreateCloudReadOnlyDBInstancesResponse: CreateCloudReadOnlyDBInstancesResponse,
     ModifyDBInstanceNetworkResponse: ModifyDBInstanceNetworkResponse,
     DbNormalDetail: DbNormalDetail,
     AccountDetail: AccountDetail,
@@ -10475,6 +10949,7 @@ module.exports = {
     RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeBackupCommandResponse: DescribeBackupCommandResponse,
     ModifyDatabaseCTResponse: ModifyDatabaseCTResponse,
+    CreateCloudDBInstancesRequest: CreateCloudDBInstancesRequest,
     SlowlogInfo: SlowlogInfo,
     DescribeIncrementalMigrationResponse: DescribeIncrementalMigrationResponse,
     ModifyDBRemarkResponse: ModifyDBRemarkResponse,
@@ -10482,6 +10957,6 @@ module.exports = {
     CreateDBInstancesResponse: CreateDBInstancesResponse,
     ModifyBackupMigrationRequest: ModifyBackupMigrationRequest,
     DeleteAccountResponse: DeleteAccountResponse,
-    DescribeDBCharsetsResponse: DescribeDBCharsetsResponse,
+    DescribeBackupsRequest: DescribeBackupsRequest,
 
 }

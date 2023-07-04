@@ -107,7 +107,7 @@ class BillingClient extends AbstractClient {
 
     /**
      * This API is used to get bill details. 
-Notes: 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), bill data query via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
+Notes: 1. The API request may fail due to network instability or other network exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), querying bill data via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
      * @param {DescribeBillDetailRequest} req
      * @param {function(string, DescribeBillDetailResponse):void} cb
      * @public
@@ -118,7 +118,7 @@ Notes: 1. The API request may fail due to network instability or other exception
     }
 
     /**
-     * This API is used to get bill details by product, project, region, billing mode, and tag through passing in parameters.
+     * This API is used to get bill details by product, project, region, billing mode, and tag by passing in parameters.
      * @param {DescribeBillSummaryRequest} req
      * @param {function(string, DescribeBillSummaryResponse):void} cb
      * @public

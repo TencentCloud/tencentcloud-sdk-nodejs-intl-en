@@ -16,88 +16,104 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteCfsFileSystemResponse = models.DeleteCfsFileSystemResponse;
-const SnapshotInfo = models.SnapshotInfo;
-const DescribeCfsFileSystemsRequest = models.DescribeCfsFileSystemsRequest;
-const DeleteMountTargetRequest = models.DeleteMountTargetRequest;
-const CreateCfsRuleRequest = models.CreateCfsRuleRequest;
-const FileSystemInfo = models.FileSystemInfo;
-const PGroup = models.PGroup;
-const DescribeAvailableZoneInfoResponse = models.DescribeAvailableZoneInfoResponse;
+const CreateMigrationTaskRequest = models.CreateMigrationTaskRequest;
+const ScaleUpFileSystemResponse = models.ScaleUpFileSystemResponse;
 const SnapshotStatistics = models.SnapshotStatistics;
-const UpdateCfsFileSystemNameRequest = models.UpdateCfsFileSystemNameRequest;
-const DeleteCfsSnapshotResponse = models.DeleteCfsSnapshotResponse;
 const DescribeCfsPGroupsResponse = models.DescribeCfsPGroupsResponse;
-const DescribeCfsFileSystemClientsResponse = models.DescribeCfsFileSystemClientsResponse;
-const SnapshotOperateLog = models.SnapshotOperateLog;
-const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
-const UpdateCfsRuleRequest = models.UpdateCfsRuleRequest;
-const DeleteAutoSnapshotPolicyResponse = models.DeleteAutoSnapshotPolicyResponse;
-const CreateCfsSnapshotRequest = models.CreateCfsSnapshotRequest;
+const DescribeMountTargetsResponse = models.DescribeMountTargetsResponse;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
-const DeleteCfsRuleResponse = models.DeleteCfsRuleResponse;
-const DescribeCfsSnapshotOverviewResponse = models.DescribeCfsSnapshotOverviewResponse;
-const DeleteCfsRuleRequest = models.DeleteCfsRuleRequest;
-const DeleteMountTargetResponse = models.DeleteMountTargetResponse;
-const UpdateCfsPGroupRequest = models.UpdateCfsPGroupRequest;
-const MountInfo = models.MountInfo;
-const UpdateCfsRuleResponse = models.UpdateCfsRuleResponse;
+const MigrationTaskInfo = models.MigrationTaskInfo;
 const FileSystemClient = models.FileSystemClient;
 const DescribeCfsFileSystemsResponse = models.DescribeCfsFileSystemsResponse;
-const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
 const CreateCfsFileSystemResponse = models.CreateCfsFileSystemResponse;
-const DescribeMountTargetsResponse = models.DescribeMountTargetsResponse;
+const FileSystemInfo = models.FileSystemInfo;
 const BindAutoSnapshotPolicyRequest = models.BindAutoSnapshotPolicyRequest;
-const DescribeCfsFileSystemClientsRequest = models.DescribeCfsFileSystemClientsRequest;
-const DeleteCfsSnapshotRequest = models.DeleteCfsSnapshotRequest;
-const DescribeCfsPGroupsRequest = models.DescribeCfsPGroupsRequest;
-const AvailableZone = models.AvailableZone;
+const ModifyFileSystemAutoScaleUpRuleRequest = models.ModifyFileSystemAutoScaleUpRuleRequest;
+const ScaleUpFileSystemRequest = models.ScaleUpFileSystemRequest;
 const CreateCfsPGroupRequest = models.CreateCfsPGroupRequest;
-const DeleteCfsPGroupResponse = models.DeleteCfsPGroupResponse;
-const DescribeCfsSnapshotsResponse = models.DescribeCfsSnapshotsResponse;
+const DescribeMigrationTasksResponse = models.DescribeMigrationTasksResponse;
 const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesRequest;
-const DeleteCfsFileSystemRequest = models.DeleteCfsFileSystemRequest;
-const AvailableRegion = models.AvailableRegion;
-const UpdateCfsSnapshotAttributeRequest = models.UpdateCfsSnapshotAttributeRequest;
-const CreateCfsFileSystemRequest = models.CreateCfsFileSystemRequest;
+const DescribeAvailableZoneInfoRequest = models.DescribeAvailableZoneInfoRequest;
 const DescribeMountTargetsRequest = models.DescribeMountTargetsRequest;
-const CreateCfsPGroupResponse = models.CreateCfsPGroupResponse;
-const TieringDetailInfo = models.TieringDetailInfo;
-const PGroupRuleInfo = models.PGroupRuleInfo;
-const UpdateCfsFileSystemNameResponse = models.UpdateCfsFileSystemNameResponse;
-const DescribeCfsServiceStatusRequest = models.DescribeCfsServiceStatusRequest;
-const UpdateCfsSnapshotAttributeResponse = models.UpdateCfsSnapshotAttributeResponse;
-const FileSystemByPolicy = models.FileSystemByPolicy;
-const PGroupInfo = models.PGroupInfo;
-const Filter = models.Filter;
-const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
+const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
+const StopMigrationTaskResponse = models.StopMigrationTaskResponse;
 const SignUpCfsServiceResponse = models.SignUpCfsServiceResponse;
 const AutoSnapshotPolicyInfo = models.AutoSnapshotPolicyInfo;
-const DescribeCfsServiceStatusResponse = models.DescribeCfsServiceStatusResponse;
-const CreateCfsRuleResponse = models.CreateCfsRuleResponse;
-const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
-const UpdateCfsFileSystemPGroupRequest = models.UpdateCfsFileSystemPGroupRequest;
-const UpdateCfsFileSystemPGroupResponse = models.UpdateCfsFileSystemPGroupResponse;
-const TagInfo = models.TagInfo;
-const AvailableProtoStatus = models.AvailableProtoStatus;
 const DescribeCfsRulesRequest = models.DescribeCfsRulesRequest;
-const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
+const UpdateCfsFileSystemNameRequest = models.UpdateCfsFileSystemNameRequest;
+const DeleteCfsPGroupRequest = models.DeleteCfsPGroupRequest;
+const UpdateCfsPGroupResponse = models.UpdateCfsPGroupResponse;
+const DeleteAutoSnapshotPolicyRequest = models.DeleteAutoSnapshotPolicyRequest;
+const DeleteCfsFileSystemResponse = models.DeleteCfsFileSystemResponse;
+const UpdateCfsRuleRequest = models.UpdateCfsRuleRequest;
+const DescribeAvailableZoneInfoResponse = models.DescribeAvailableZoneInfoResponse;
+const DeleteCfsSnapshotResponse = models.DeleteCfsSnapshotResponse;
+const DescribeCfsFileSystemClientsResponse = models.DescribeCfsFileSystemClientsResponse;
+const DeleteMountTargetResponse = models.DeleteMountTargetResponse;
+const CreateCfsSnapshotRequest = models.CreateCfsSnapshotRequest;
+const DescribeBucketListRequest = models.DescribeBucketListRequest;
+const DeleteCfsRuleRequest = models.DeleteCfsRuleRequest;
+const UpdateCfsRuleResponse = models.UpdateCfsRuleResponse;
+const DeleteMigrationTaskResponse = models.DeleteMigrationTaskResponse;
+const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
+const UpdateCfsFileSystemPGroupResponse = models.UpdateCfsFileSystemPGroupResponse;
+const DeleteCfsFileSystemRequest = models.DeleteCfsFileSystemRequest;
+const CreateCfsPGroupResponse = models.CreateCfsPGroupResponse;
+const DescribeCfsServiceStatusRequest = models.DescribeCfsServiceStatusRequest;
+const DeleteMigrationTaskRequest = models.DeleteMigrationTaskRequest;
+const PGroup = models.PGroup;
+const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
+const ModifyFileSystemAutoScaleUpRuleResponse = models.ModifyFileSystemAutoScaleUpRuleResponse;
+const AvailableType = models.AvailableType;
+const CreateCfsSnapshotResponse = models.CreateCfsSnapshotResponse;
+const DeleteMountTargetRequest = models.DeleteMountTargetRequest;
+const CreateCfsRuleRequest = models.CreateCfsRuleRequest;
+const BucketInfo = models.BucketInfo;
+const SnapshotOperateLog = models.SnapshotOperateLog;
+const DescribeBucketListResponse = models.DescribeBucketListResponse;
+const UpdateCfsFileSystemNameResponse = models.UpdateCfsFileSystemNameResponse;
+const DescribeCfsSnapshotOverviewResponse = models.DescribeCfsSnapshotOverviewResponse;
+const DeleteCfsSnapshotRequest = models.DeleteCfsSnapshotRequest;
+const DescribeCfsFileSystemClientsRequest = models.DescribeCfsFileSystemClientsRequest;
+const AvailableProtoStatus = models.AvailableProtoStatus;
+const DescribeCfsFileSystemsRequest = models.DescribeCfsFileSystemsRequest;
+const AvailableRegion = models.AvailableRegion;
+const CreateCfsFileSystemRequest = models.CreateCfsFileSystemRequest;
+const AvailableZone = models.AvailableZone;
+const DescribeMigrationTasksRequest = models.DescribeMigrationTasksRequest;
+const Filter = models.Filter;
+const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
+const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
+const DescribeCfsServiceStatusResponse = models.DescribeCfsServiceStatusResponse;
+const PGroupRuleInfo = models.PGroupRuleInfo;
 const DescribeCfsSnapshotsRequest = models.DescribeCfsSnapshotsRequest;
 const UpdateCfsFileSystemSizeLimitResponse = models.UpdateCfsFileSystemSizeLimitResponse;
-const DeleteCfsPGroupRequest = models.DeleteCfsPGroupRequest;
 const UpdateAutoSnapshotPolicyRequest = models.UpdateAutoSnapshotPolicyRequest;
-const DescribeCfsSnapshotOverviewRequest = models.DescribeCfsSnapshotOverviewRequest;
-const AvailableType = models.AvailableType;
-const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const UpdateCfsFileSystemSizeLimitRequest = models.UpdateCfsFileSystemSizeLimitRequest;
-const DescribeAvailableZoneInfoRequest = models.DescribeAvailableZoneInfoRequest;
-const UpdateCfsPGroupResponse = models.UpdateCfsPGroupResponse;
 const DescribeCfsRulesResponse = models.DescribeCfsRulesResponse;
 const SignUpCfsServiceRequest = models.SignUpCfsServiceRequest;
-const DeleteAutoSnapshotPolicyRequest = models.DeleteAutoSnapshotPolicyRequest;
-const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
 const UpdateAutoSnapshotPolicyResponse = models.UpdateAutoSnapshotPolicyResponse;
-const CreateCfsSnapshotResponse = models.CreateCfsSnapshotResponse;
+const FileSystemByPolicy = models.FileSystemByPolicy;
+const SnapshotInfo = models.SnapshotInfo;
+const MountInfo = models.MountInfo;
+const UpdateCfsFileSystemPGroupRequest = models.UpdateCfsFileSystemPGroupRequest;
+const CreateMigrationTaskResponse = models.CreateMigrationTaskResponse;
+const DeleteAutoSnapshotPolicyResponse = models.DeleteAutoSnapshotPolicyResponse;
+const DeleteCfsRuleResponse = models.DeleteCfsRuleResponse;
+const UpdateCfsSnapshotAttributeResponse = models.UpdateCfsSnapshotAttributeResponse;
+const UpdateCfsPGroupRequest = models.UpdateCfsPGroupRequest;
+const TagInfo = models.TagInfo;
+const DescribeCfsPGroupsRequest = models.DescribeCfsPGroupsRequest;
+const DeleteCfsPGroupResponse = models.DeleteCfsPGroupResponse;
+const UpdateCfsSnapshotAttributeRequest = models.UpdateCfsSnapshotAttributeRequest;
+const TieringDetailInfo = models.TieringDetailInfo;
+const PGroupInfo = models.PGroupInfo;
+const CreateCfsRuleResponse = models.CreateCfsRuleResponse;
+const DescribeCfsSnapshotsResponse = models.DescribeCfsSnapshotsResponse;
+const StopMigrationTaskRequest = models.StopMigrationTaskRequest;
+const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
+const DescribeCfsSnapshotOverviewRequest = models.DescribeCfsSnapshotOverviewRequest;
+const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
 
 
 /**
@@ -177,14 +193,14 @@ class CfsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind one or multiple file systems to a snapshot policy. A file system can be bound to only one policy.
-     * @param {BindAutoSnapshotPolicyRequest} req
-     * @param {function(string, BindAutoSnapshotPolicyResponse):void} cb
+     * This API is used to query the mount targets of a file system.
+     * @param {DescribeMountTargetsRequest} req
+     * @param {function(string, DescribeMountTargetsResponse):void} cb
      * @public
      */
-    BindAutoSnapshotPolicy(req, cb) {
-        let resp = new BindAutoSnapshotPolicyResponse();
-        this.request("BindAutoSnapshotPolicy", req, resp, cb);
+    DescribeMountTargets(req, cb) {
+        let resp = new DescribeMountTargetsResponse();
+        this.request("DescribeMountTargets", req, resp, cb);
     }
 
     /**
@@ -221,6 +237,30 @@ class CfsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to stop a migration task.
+To use this API, submit a ticket for us to add you to the allowlist.
+     * @param {StopMigrationTaskRequest} req
+     * @param {function(string, StopMigrationTaskResponse):void} cb
+     * @public
+     */
+    StopMigrationTask(req, cb) {
+        let resp = new StopMigrationTaskResponse();
+        this.request("StopMigrationTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of migration tasks.
+To use this API, submit a ticket for us to add you to the allowlist.
+     * @param {DescribeMigrationTasksRequest} req
+     * @param {function(string, DescribeMigrationTasksResponse):void} cb
+     * @public
+     */
+    DescribeMigrationTasks(req, cb) {
+        let resp = new DescribeMigrationTasksResponse();
+        this.request("DescribeMigrationTasks", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the availability of a region.
      * @param {DescribeAvailableZoneInfoRequest} req
      * @param {function(string, DescribeAvailableZoneInfoResponse):void} cb
@@ -240,6 +280,29 @@ class CfsClient extends AbstractClient {
     UpdateCfsFileSystemName(req, cb) {
         let resp = new UpdateCfsFileSystemNameResponse();
         this.request("UpdateCfsFileSystemName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a migration task.
+To use this API, submit a ticket for us to add you to the allowlist.
+     * @param {DeleteMigrationTaskRequest} req
+     * @param {function(string, DeleteMigrationTaskResponse):void} cb
+     * @public
+     */
+    DeleteMigrationTask(req, cb) {
+        let resp = new DeleteMigrationTaskResponse();
+        this.request("DeleteMigrationTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale up a Turbo file system.
+     * @param {ScaleUpFileSystemRequest} req
+     * @param {function(string, ScaleUpFileSystemResponse):void} cb
+     * @public
+     */
+    ScaleUpFileSystem(req, cb) {
+        let resp = new ScaleUpFileSystemResponse();
+        this.request("ScaleUpFileSystem", req, resp, cb);
     }
 
     /**
@@ -298,6 +361,17 @@ class CfsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the scaling policy of a file system.
+     * @param {ModifyFileSystemAutoScaleUpRuleRequest} req
+     * @param {function(string, ModifyFileSystemAutoScaleUpRuleResponse):void} cb
+     * @public
+     */
+    ModifyFileSystemAutoScaleUpRule(req, cb) {
+        let resp = new ModifyFileSystemAutoScaleUpRuleResponse();
+        this.request("ModifyFileSystemAutoScaleUpRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to update a scheduled snapshot policy.
      * @param {UpdateAutoSnapshotPolicyRequest} req
      * @param {function(string, UpdateAutoSnapshotPolicyResponse):void} cb
@@ -331,14 +405,14 @@ class CfsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the mount targets of a file system.
-     * @param {DescribeMountTargetsRequest} req
-     * @param {function(string, DescribeMountTargetsResponse):void} cb
+     * This API is used to bind one or multiple file systems to a snapshot policy. A file system can be bound to only one policy.
+     * @param {BindAutoSnapshotPolicyRequest} req
+     * @param {function(string, BindAutoSnapshotPolicyResponse):void} cb
      * @public
      */
-    DescribeMountTargets(req, cb) {
-        let resp = new DescribeMountTargetsResponse();
-        this.request("DescribeMountTargets", req, resp, cb);
+    BindAutoSnapshotPolicy(req, cb) {
+        let resp = new BindAutoSnapshotPolicyResponse();
+        this.request("BindAutoSnapshotPolicy", req, resp, cb);
     }
 
     /**
@@ -350,6 +424,30 @@ class CfsClient extends AbstractClient {
     DeleteCfsRule(req, cb) {
         let resp = new DeleteCfsRuleResponse();
         this.request("DeleteCfsRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of data source buckets.
+To use this API, submit a ticket for us to add you to the allowlist.
+     * @param {DescribeBucketListRequest} req
+     * @param {function(string, DescribeBucketListResponse):void} cb
+     * @public
+     */
+    DescribeBucketList(req, cb) {
+        let resp = new DescribeBucketListResponse();
+        this.request("DescribeBucketList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a migration task.
+To use this API, submit a ticket for us to add you to the allowlist.
+     * @param {CreateMigrationTaskRequest} req
+     * @param {function(string, CreateMigrationTaskResponse):void} cb
+     * @public
+     */
+    CreateMigrationTask(req, cb) {
+        let resp = new CreateMigrationTaskResponse();
+        this.request("CreateMigrationTask", req, resp, cb);
     }
 
     /**

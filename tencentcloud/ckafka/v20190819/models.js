@@ -331,6 +331,34 @@ class GroupInfoMember extends  AbstractModel {
 }
 
 /**
+ * RouteDTO
+ * @class
+ */
+class RouteDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RouteId11 Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+
+    }
+}
+
+/**
  * BatchCreateAcl request structure.
  * @class
  */
@@ -1138,7 +1166,7 @@ class BatchModifyTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * Response structure of creating a prepaid instance
+ * Data structure returned by monthly subscribed instance APIs
  * @class
  */
 class CreateInstancePreResp extends  AbstractModel {
@@ -1165,8 +1193,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Data = null;
 
         /**
-         * Deletion time.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Deletion time.  This parameter has been deprecated and will be deleted.  Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DeleteRouteTimestamp = null;
@@ -1564,11 +1591,16 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.DealNames = null;
 
         /**
-         * Instance ID.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DealInstanceDTO> || null}
+         */
+        this.DealNameInstanceIdMapping = null;
 
     }
 
@@ -1582,6 +1614,15 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.DealNameInstanceIdMapping) {
+            this.DealNameInstanceIdMapping = new Array();
+            for (let z in params.DealNameInstanceIdMapping) {
+                let obj = new DealInstanceDTO();
+                obj.deserialize(params.DealNameInstanceIdMapping[z]);
+                this.DealNameInstanceIdMapping.push(obj);
+            }
+        }
 
     }
 }
@@ -2500,6 +2541,53 @@ class InstanceChargeParam extends  AbstractModel {
 }
 
 /**
+ * Data structure returned by pay-as-you-go instance APIs
+ * @class
+ */
+class CreateInstancePostResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned code. `0` indicates normal status while other codes indicate errors.
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * Message returned by the API. An error message will be returned if the API reports an error. 
+         * @type {string || null}
+         */
+        this.ReturnMessage = null;
+
+        /**
+         * Returned data.  Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CreateInstancePostData || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new CreateInstancePostData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeDatahubTopic response structure.
  * @class
  */
@@ -2663,6 +2751,153 @@ class CreateConsumerResponse extends  AbstractModel {
 }
 
 /**
+ * CreatePostPaidInstance request structure.
+ * @class
+ */
+class CreatePostPaidInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name, which is a string of up to 64 letters, digits, and hyphens (-). It must start with a letter.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of the subnet  where the default access point of the created instance resides.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
+         * @type {number || null}
+         */
+        this.MsgRetentionTime = null;
+
+        /**
+         * Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+         * @type {string || null}
+         */
+        this.KafkaVersion = null;
+
+        /**
+         * Instance type. `standard` (Standard Edition),  `profession`  (Pro Edition)
+         * @type {string || null}
+         */
+        this.SpecificationsType = null;
+
+        /**
+         * Instance disk type.  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
+         * @type {number || null}
+         */
+        this.BandWidth = null;
+
+        /**
+         * Instance disk size, which must meet the requirement of the instance’s specification.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Whether the current instance is a multi-AZ instance
+         * @type {boolean || null}
+         */
+        this.MultiZoneFlag = null;
+
+        /**
+         * This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+         * @type {number || null}
+         */
+        this.InstanceNum = null;
+
+        /**
+         * Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
+         * @type {number || null}
+         */
+        this.PublicNetworkMonthly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.KafkaVersion = 'KafkaVersion' in params ? params.KafkaVersion : null;
+        this.SpecificationsType = 'SpecificationsType' in params ? params.SpecificationsType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.MultiZoneFlag = 'MultiZoneFlag' in params ? params.MultiZoneFlag : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
+
+    }
+}
+
+/**
  * Returned object for route information
  * @class
  */
@@ -2782,6 +3017,46 @@ class ModifyInstanceAttributesConfig extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskStatus response structure.
+ * @class
+ */
+class DescribeTaskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {TaskStatusResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TaskStatusResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Data structure returned by operation
  * @class
  */
@@ -2796,6 +3071,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.FlowId = null;
 
+        /**
+         * RouteIdDto Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RouteDTO || null}
+         */
+        this.RouteDTO = null;
+
     }
 
     /**
@@ -2806,6 +3087,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+        if (params.RouteDTO) {
+            let obj = new RouteDTO();
+            obj.deserialize(params.RouteDTO)
+            this.RouteDTO = obj;
+        }
 
     }
 }
@@ -2864,6 +3151,12 @@ class DescribeRouteRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Route ID
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
     }
 
     /**
@@ -2874,6 +3167,7 @@ class DescribeRouteRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
 
     }
 }
@@ -4752,6 +5046,41 @@ class DescribeTopicRequest extends  AbstractModel {
 }
 
 /**
+ * Mapping between orders and CKafka instances for monthly subscribed and pay-as-you-go instance APIs.
+ * @class
+ */
+class DealInstanceDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order list.  Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * ID list of the purchased CKafka instances corresponding to the order list.  Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+
+    }
+}
+
+/**
  * CreatePartition request structure.
  * @class
  */
@@ -5921,6 +6250,64 @@ class CreateAclRuleResponse extends  AbstractModel {
 }
 
 /**
+ * Data structure returned by the pay-as-you-go instance creation API
+ * @class
+ */
+class CreateInstancePostData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * This parameter has a fixed value of 0 returned by `CreateInstancePre`. It is only used for backend data alignment  and cannot be used as the query condition for `CheckTaskStatus`. 
+Note:  This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * List of order IDs Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DealInstanceDTO> || null}
+         */
+        this.DealNameInstanceIdMapping = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.DealNameInstanceIdMapping) {
+            this.DealNameInstanceIdMapping = new Array();
+            for (let z in params.DealNameInstanceIdMapping) {
+                let obj = new DealInstanceDTO();
+                obj.deserialize(params.DealNameInstanceIdMapping[z]);
+                this.DealNameInstanceIdMapping.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteTopic response structure.
  * @class
  */
@@ -6449,40 +6836,106 @@ class CreateInstancePostRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Instance bandwidth
+         * Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * VPC ID. If this parameter is left empty, the classic network will be used by default.
+         * ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID, which is required for a VPC but not for the classic network.
+         * ID of the subnet  where the default access point of the created instance resides. 
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * The maximum retention period for instance logs in minutes. Default value: 1,440 minutes (1 day). Max value: 12960 minutes (90 days). This parameter is optional.
+         * Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
          * @type {number || null}
          */
         this.MsgRetentionTime = null;
 
         /**
-         * AZ
+         * Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+         * @type {string || null}
+         */
+        this.KafkaVersion = null;
+
+        /**
+         * Instance type. Valid values: `standard` (Standard Edition),  `profession`  (Pro Edition)
+         * @type {string || null}
+         */
+        this.SpecificationsType = null;
+
+        /**
+         * Instance disk type. Valid values:  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Instance disk size, which must meet the requirement of the instance’s specification.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * Cluster ID, which can be selected when you create an instance.
+         * Whether the current instance is a multi-AZ instance
+         * @type {boolean || null}
+         */
+        this.MultiZoneFlag = null;
+
+        /**
+         * This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
          * @type {number || null}
          */
-        this.ClusterId = null;
+        this.InstanceNum = null;
+
+        /**
+         * Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`. The value must be an integer multiple of 3.
+         * @type {number || null}
+         */
+        this.PublicNetworkMonthly = null;
 
     }
 
@@ -6497,9 +6950,20 @@ class CreateInstancePostRequest extends  AbstractModel {
         this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.KafkaVersion = 'KafkaVersion' in params ? params.KafkaVersion : null;
+        this.SpecificationsType = 'SpecificationsType' in params ? params.SpecificationsType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.MultiZoneFlag = 'MultiZoneFlag' in params ? params.MultiZoneFlag : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
 
     }
 }
@@ -6928,6 +7392,34 @@ class DeleteTopicIpWhiteListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskStatus request structure.
+ * @class
+ */
+class DescribeTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail request structure.
  * @class
  */
@@ -7155,6 +7647,46 @@ class CreateDatahubTopicResponse extends  AbstractModel {
 
         if (params.Result) {
             let obj = new DatahubTopicResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreatePostPaidInstance response structure.
+ * @class
+ */
+class CreatePostPaidInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {CreateInstancePostResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new CreateInstancePostResp();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -7889,6 +8421,41 @@ class CreateTopicResp extends  AbstractModel {
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * Returned task status
+ * @class
+ */
+class TaskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. `0` (Successful), `1` (Failed), `2` ( Running)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Output information Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Output = 'Output' in params ? params.Output : null;
 
     }
 }
@@ -9986,6 +10553,7 @@ module.exports = {
     DeleteAclRequest: DeleteAclRequest,
     CreateInstancePostResponse: CreateInstancePostResponse,
     GroupInfoMember: GroupInfoMember,
+    RouteDTO: RouteDTO,
     BatchCreateAclRequest: BatchCreateAclRequest,
     DeleteUserRequest: DeleteUserRequest,
     PartitionOffset: PartitionOffset,
@@ -10028,13 +10596,16 @@ module.exports = {
     GroupResponse: GroupResponse,
     CreateDatahubTopicRequest: CreateDatahubTopicRequest,
     InstanceChargeParam: InstanceChargeParam,
+    CreateInstancePostResp: CreateInstancePostResp,
     DescribeDatahubTopicResponse: DescribeDatahubTopicResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
     FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     CreateConsumerResponse: CreateConsumerResponse,
+    CreatePostPaidInstanceRequest: CreatePostPaidInstanceRequest,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
+    DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     OperateResponseData: OperateResponseData,
     CreateUserResponse: CreateUserResponse,
     DescribeRouteRequest: DescribeRouteRequest,
@@ -10076,6 +10647,7 @@ module.exports = {
     DescribeUserResponse: DescribeUserResponse,
     AppIdResponse: AppIdResponse,
     DescribeTopicRequest: DescribeTopicRequest,
+    DealInstanceDTO: DealInstanceDTO,
     CreatePartitionRequest: CreatePartitionRequest,
     Group: Group,
     GroupInfoResponse: GroupInfoResponse,
@@ -10099,6 +10671,7 @@ module.exports = {
     ConsumerGroupTopic: ConsumerGroupTopic,
     User: User,
     CreateAclRuleResponse: CreateAclRuleResponse,
+    CreateInstancePostData: CreateInstancePostData,
     DeleteTopicResponse: DeleteTopicResponse,
     DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
     GroupOffsetPartition: GroupOffsetPartition,
@@ -10115,10 +10688,12 @@ module.exports = {
     InstanceDetailResponse: InstanceDetailResponse,
     DeleteRouteRequest: DeleteRouteRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     CreateConsumerRequest: CreateConsumerRequest,
     InquireCkafkaPriceResponse: InquireCkafkaPriceResponse,
     CreateDatahubTopicResponse: CreateDatahubTopicResponse,
+    CreatePostPaidInstanceResponse: CreatePostPaidInstanceResponse,
     InquiryDiskParam: InquiryDiskParam,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     SendMessageResponse: SendMessageResponse,
@@ -10132,6 +10707,7 @@ module.exports = {
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
+    TaskStatusResponse: TaskStatusResponse,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
     ModifyDatahubTopicResponse: ModifyDatahubTopicResponse,

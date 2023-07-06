@@ -20,6 +20,7 @@ const TopicDetail = models.TopicDetail;
 const DeleteAclRequest = models.DeleteAclRequest;
 const CreateInstancePostResponse = models.CreateInstancePostResponse;
 const GroupInfoMember = models.GroupInfoMember;
+const RouteDTO = models.RouteDTO;
 const BatchCreateAclRequest = models.BatchCreateAclRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
 const PartitionOffset = models.PartitionOffset;
@@ -62,13 +63,16 @@ const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
 const CreateDatahubTopicRequest = models.CreateDatahubTopicRequest;
 const InstanceChargeParam = models.InstanceChargeParam;
+const CreateInstancePostResp = models.CreateInstancePostResp;
 const DescribeDatahubTopicResponse = models.DescribeDatahubTopicResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
 const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
+const CreatePostPaidInstanceRequest = models.CreatePostPaidInstanceRequest;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
+const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
@@ -110,6 +114,7 @@ const DeleteRouteTriggerTimeResponse = models.DeleteRouteTriggerTimeResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
 const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
+const DealInstanceDTO = models.DealInstanceDTO;
 const CreatePartitionRequest = models.CreatePartitionRequest;
 const Group = models.Group;
 const GroupInfoResponse = models.GroupInfoResponse;
@@ -133,6 +138,7 @@ const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
 const CreateAclRuleResponse = models.CreateAclRuleResponse;
+const CreateInstancePostData = models.CreateInstancePostData;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const GroupOffsetPartition = models.GroupOffsetPartition;
@@ -149,10 +155,12 @@ const CreateUserRequest = models.CreateUserRequest;
 const InstanceDetailResponse = models.InstanceDetailResponse;
 const DeleteRouteRequest = models.DeleteRouteRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const CreateDatahubTopicResponse = models.CreateDatahubTopicResponse;
+const CreatePostPaidInstanceResponse = models.CreatePostPaidInstanceResponse;
 const InquiryDiskParam = models.InquiryDiskParam;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const SendMessageResponse = models.SendMessageResponse;
@@ -166,6 +174,7 @@ const JgwOperateResponse = models.JgwOperateResponse;
 const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
+const TaskStatusResponse = models.TaskStatusResponse;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
 const ModifyDatahubTopicResponse = models.ModifyDatahubTopicResponse;
@@ -255,7 +264,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a pay-as-you-go instance.
+     * This API is used to create a pay-as-you-go instance.  It will be deprecated in future versions. We recommend that you use the `CreatePostPaidInstance` API instead.  You can call this API via SDK or the TencentCloud API console to create a pay-as-you-go CKafka instance,  which is an alternate option for making a purchase in the console.
      * @param {CreateInstancePostRequest} req
      * @param {function(string, CreateInstancePostResponse):void} cb
      * @public
@@ -384,6 +393,17 @@ class CkafkaClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of a synced topic replica.
+     * @param {DescribeTopicSyncReplicaRequest} req
+     * @param {function(string, DescribeTopicSyncReplicaResponse):void} cb
+     * @public
+     */
+    DescribeTopicSyncReplica(req, cb) {
+        let resp = new DescribeTopicSyncReplicaResponse();
+        this.request("DescribeTopicSyncReplica", req, resp, cb);
     }
 
     /**
@@ -541,6 +561,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the task status.
+     * @param {DescribeTaskStatusRequest} req
+     * @param {function(string, DescribeTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeTaskStatus(req, cb) {
+        let resp = new DescribeTaskStatusResponse();
+        this.request("DescribeTaskStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a user.
      * @param {DeleteUserRequest} req
      * @param {function(string, DeleteUserResponse):void} cb
@@ -652,14 +683,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the details of a synced topic replica.
-     * @param {DescribeTopicSyncReplicaRequest} req
-     * @param {function(string, DescribeTopicSyncReplicaResponse):void} cb
+     * This API is used to replace `CreateInstancePost`  to create a pay-as-you-go instance.  You can call this API via SDK or the TencentCloud API console to create a pay-as-you-go CKafka instance,  which is an alternate option for making a purchase in the console.
+     * @param {CreatePostPaidInstanceRequest} req
+     * @param {function(string, CreatePostPaidInstanceResponse):void} cb
      * @public
      */
-    DescribeTopicSyncReplica(req, cb) {
-        let resp = new DescribeTopicSyncReplicaResponse();
-        this.request("DescribeTopicSyncReplica", req, resp, cb);
+    CreatePostPaidInstance(req, cb) {
+        let resp = new CreatePostPaidInstanceResponse();
+        this.request("CreatePostPaidInstance", req, resp, cb);
     }
 
     /**

@@ -885,18 +885,39 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
 }
 
 /**
- * ModifyStreamLiveChannel response structure.
+ * Relay destination address.
  * @class
  */
-class ModifyStreamLiveChannelResponse extends  AbstractModel {
+class DestinationInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Relay destination address. Length limit: [1,512].
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OutputUrl = null;
+
+        /**
+         * Authentication key. Length limit: [1,128].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AuthKey = null;
+
+        /**
+         * Authentication username. Length limit: [1,128].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
+         * Authentication password. Length limit: [1,128].
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
 
     }
 
@@ -907,7 +928,10 @@ class ModifyStreamLiveChannelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OutputUrl = 'OutputUrl' in params ? params.OutputUrl : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -1983,6 +2007,55 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * Distribution configuration information.
+ * @class
+ */
+class DeliveryRestrictionsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Corresponds to SCTE-35 web_delivery_allowed_flag parameter.
+         * @type {string || null}
+         */
+        this.WebDeliveryAllowed = null;
+
+        /**
+         * Corresponds to SCTE-35 no_regional_blackout_flag parameter.
+         * @type {string || null}
+         */
+        this.NoRegionalBlackout = null;
+
+        /**
+         * Corresponds to SCTE-35 archive_allowed_flag.
+         * @type {string || null}
+         */
+        this.ArchiveAllowed = null;
+
+        /**
+         * Corresponds to SCTE-35 device_restrictions parameter.
+         * @type {string || null}
+         */
+        this.DeviceRestrictions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WebDeliveryAllowed = 'WebDeliveryAllowed' in params ? params.WebDeliveryAllowed : null;
+        this.NoRegionalBlackout = 'NoRegionalBlackout' in params ? params.NoRegionalBlackout : null;
+        this.ArchiveAllowed = 'ArchiveAllowed' in params ? params.ArchiveAllowed : null;
+        this.DeviceRestrictions = 'DeviceRestrictions' in params ? params.DeviceRestrictions : null;
+
+    }
+}
+
+/**
  * Video transcoding template.
  * @class
  */
@@ -2241,6 +2314,109 @@ Value range: 1-1000.
         this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * SCTE-35 configuration information.
+ * @class
+ */
+class SegmentationDescriptorRespInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A 32-bit unique segmentation event identifier. Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+         * @type {number || null}
+         */
+        this.EventID = null;
+
+        /**
+         * Indicates that a previously sent segmentation event, identified by segmentation_event_id, has been cancelled.
+         * @type {number || null}
+         */
+        this.EventCancelIndicator = null;
+
+        /**
+         * Distribution configuration.
+         * @type {DeliveryRestrictionsInfo || null}
+         */
+        this.DeliveryRestrictions = null;
+
+        /**
+         * The duration of the segment in 90kHz ticks. indicat when the segment will be over and when the next segmentation message will occur.Shall be 0 for end messages.the time signal will continue until insert a cancellation message when not specify the duration.
+         * @type {string || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Corresponds to SCTE-35 segmentation_upid_type parameter.
+         * @type {number || null}
+         */
+        this.UPIDType = null;
+
+        /**
+         * Corresponds to SCTE-35 segmentation_upid. 
+         * @type {string || null}
+         */
+        this.UPID = null;
+
+        /**
+         * Corresponds to SCTE-35 segmentation_type_id.
+         * @type {number || null}
+         */
+        this.TypeID = null;
+
+        /**
+         * Corresponds to SCTE-35 segment_num。This field provides support for numbering segments within a given collection of segments.
+         * @type {number || null}
+         */
+        this.Num = null;
+
+        /**
+         * Corresponds to SCTE-35 segment_expected.This field provides a count of the expected number of individual segments within a collection of segments.
+         * @type {number || null}
+         */
+        this.Expected = null;
+
+        /**
+         * Corresponds to SCTE-35 sub_segment_num.This field provides identification for a specific sub-segment within a collection of sub-segments.
+         * @type {number || null}
+         */
+        this.SubSegmentNum = null;
+
+        /**
+         * Corresponds to SCTE-35 sub_segments_expected.This field provides a count of the expected number of individual sub-segments within the collection of sub-segments.
+         * @type {number || null}
+         */
+        this.SubSegmentsExpected = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventID = 'EventID' in params ? params.EventID : null;
+        this.EventCancelIndicator = 'EventCancelIndicator' in params ? params.EventCancelIndicator : null;
+
+        if (params.DeliveryRestrictions) {
+            let obj = new DeliveryRestrictionsInfo();
+            obj.deserialize(params.DeliveryRestrictions)
+            this.DeliveryRestrictions = obj;
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.UPIDType = 'UPIDType' in params ? params.UPIDType : null;
+        this.UPID = 'UPID' in params ? params.UPID : null;
+        this.TypeID = 'TypeID' in params ? params.TypeID : null;
+        this.Num = 'Num' in params ? params.Num : null;
+        this.Expected = 'Expected' in params ? params.Expected : null;
+        this.SubSegmentNum = 'SubSegmentNum' in params ? params.SubSegmentNum : null;
+        this.SubSegmentsExpected = 'SubSegmentsExpected' in params ? params.SubSegmentsExpected : null;
 
     }
 }
@@ -2637,6 +2813,24 @@ class EventSettingsResp extends  AbstractModel {
          */
         this.Destinations = null;
 
+        /**
+         * SCTE-35 configuration information.
+         * @type {Array.<SegmentationDescriptorRespInfo> || null}
+         */
+        this.SCTE35SegmentationDescriptor = null;
+
+        /**
+         * A 32-bit unique segmentation event identifier.Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+         * @type {number || null}
+         */
+        this.SpliceEventID = null;
+
+        /**
+         * The duration of the segment in 90kHz ticks.It used to  give the splicer an indication of when the break will be over and when the network In Point will occur. If not specifyed,the splice_insert will continue when enter a return_to_network to end the splice_insert at the appropriate time.
+         * @type {string || null}
+         */
+        this.SpliceDuration = null;
+
     }
 
     /**
@@ -2659,6 +2853,17 @@ class EventSettingsResp extends  AbstractModel {
                 this.Destinations.push(obj);
             }
         }
+
+        if (params.SCTE35SegmentationDescriptor) {
+            this.SCTE35SegmentationDescriptor = new Array();
+            for (let z in params.SCTE35SegmentationDescriptor) {
+                let obj = new SegmentationDescriptorRespInfo();
+                obj.deserialize(params.SCTE35SegmentationDescriptor[z]);
+                this.SCTE35SegmentationDescriptor.push(obj);
+            }
+        }
+        this.SpliceEventID = 'SpliceEventID' in params ? params.SpliceEventID : null;
+        this.SpliceDuration = 'SpliceDuration' in params ? params.SpliceDuration : null;
 
     }
 }
@@ -3827,6 +4032,24 @@ class EventSettingsReq extends  AbstractModel {
          */
         this.Destinations = null;
 
+        /**
+         * SCTE-35 configuration information.
+         * @type {Array.<SegmentationDescriptorInfo> || null}
+         */
+        this.SCTE35SegmentationDescriptor = null;
+
+        /**
+         * A 32-bit unique segmentation event identifier.Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+         * @type {number || null}
+         */
+        this.SpliceEventID = null;
+
+        /**
+         * The duration of the segment in 90kHz ticks.It used to  give the splicer an indication of when the break will be over and when the network In Point will occur. If not specifyed,the splice_insert will continue when enter a return_to_network to end the splice_insert at the appropriate time.
+         * @type {number || null}
+         */
+        this.SpliceDuration = null;
+
     }
 
     /**
@@ -3849,6 +4072,17 @@ class EventSettingsReq extends  AbstractModel {
                 this.Destinations.push(obj);
             }
         }
+
+        if (params.SCTE35SegmentationDescriptor) {
+            this.SCTE35SegmentationDescriptor = new Array();
+            for (let z in params.SCTE35SegmentationDescriptor) {
+                let obj = new SegmentationDescriptorInfo();
+                obj.deserialize(params.SCTE35SegmentationDescriptor[z]);
+                this.SCTE35SegmentationDescriptor.push(obj);
+            }
+        }
+        this.SpliceEventID = 'SpliceEventID' in params ? params.SpliceEventID : null;
+        this.SpliceDuration = 'SpliceDuration' in params ? params.SpliceDuration : null;
 
     }
 }
@@ -5050,39 +5284,18 @@ For other inputs, the quantity is 1.
 }
 
 /**
- * Relay destination address.
+ * ModifyStreamLiveChannel response structure.
  * @class
  */
-class DestinationInfo extends  AbstractModel {
+class ModifyStreamLiveChannelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Relay destination address. Length limit: [1,512].
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OutputUrl = null;
-
-        /**
-         * Authentication key. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AuthKey = null;
-
-        /**
-         * Authentication username. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Username = null;
-
-        /**
-         * Authentication password. Length limit: [1,128].
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Password = null;
+        this.RequestId = null;
 
     }
 
@@ -5093,10 +5306,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.OutputUrl = 'OutputUrl' in params ? params.OutputUrl : null;
-        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
-        this.Username = 'Username' in params ? params.Username : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5862,6 +6072,109 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * SCTE-35 configuration information.
+ * @class
+ */
+class SegmentationDescriptorInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A 32-bit unique segmentation event identifier. Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+         * @type {number || null}
+         */
+        this.EventID = null;
+
+        /**
+         * Indicates that a previously sent segmentation event, identified by segmentation_event_id, has been cancelled.
+         * @type {number || null}
+         */
+        this.EventCancelIndicator = null;
+
+        /**
+         * Distribution configuration.
+         * @type {DeliveryRestrictionsInfo || null}
+         */
+        this.DeliveryRestrictions = null;
+
+        /**
+         * The duration of the segment in 90kHz ticks. indicat when the segment will be over and when the next segmentation message will occur.Shall be 0 for end messages.the time signal will continue until insert a cancellation message when not specify the duration.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Corresponds to SCTE-35 segmentation_upid_type parameter.
+         * @type {number || null}
+         */
+        this.UPIDType = null;
+
+        /**
+         * Corresponds to SCTE-35 segmentation_upid. 
+         * @type {string || null}
+         */
+        this.UPID = null;
+
+        /**
+         * Corresponds to SCTE-35 segmentation_type_id.
+         * @type {number || null}
+         */
+        this.TypeID = null;
+
+        /**
+         * Corresponds to SCTE-35 segment_num。This field provides support for numbering segments within a given collection of segments.
+         * @type {number || null}
+         */
+        this.Num = null;
+
+        /**
+         * Corresponds to SCTE-35 segment_expected.This field provides a count of the expected number of individual segments within a collection of segments.
+         * @type {number || null}
+         */
+        this.Expected = null;
+
+        /**
+         * Corresponds to SCTE-35 sub_segment_num.This field provides identification for a specific sub-segment within a collection of sub-segments.
+         * @type {number || null}
+         */
+        this.SubSegmentNum = null;
+
+        /**
+         * Corresponds to SCTE-35 sub_segments_expected.This field provides a count of the expected number of individual sub-segments within the collection of sub-segments.
+         * @type {number || null}
+         */
+        this.SubSegmentsExpected = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventID = 'EventID' in params ? params.EventID : null;
+        this.EventCancelIndicator = 'EventCancelIndicator' in params ? params.EventCancelIndicator : null;
+
+        if (params.DeliveryRestrictions) {
+            let obj = new DeliveryRestrictionsInfo();
+            obj.deserialize(params.DeliveryRestrictions)
+            this.DeliveryRestrictions = obj;
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.UPIDType = 'UPIDType' in params ? params.UPIDType : null;
+        this.UPID = 'UPID' in params ? params.UPID : null;
+        this.TypeID = 'TypeID' in params ? params.TypeID : null;
+        this.Num = 'Num' in params ? params.Num : null;
+        this.Expected = 'Expected' in params ? params.Expected : null;
+        this.SubSegmentNum = 'SubSegmentNum' in params ? params.SubSegmentNum : null;
+        this.SubSegmentsExpected = 'SubSegmentsExpected' in params ? params.SubSegmentsExpected : null;
+
+    }
+}
+
+/**
  * The input settings.
 The format of an RTMP_PUSH address is ${InputAddress}/${AppName}/${StreamName}.
 The format of an SRT_PUSH address is ${InputAddress}?streamid=${StreamName},h=${InputDomain}.
@@ -6025,7 +6338,7 @@ module.exports = {
     ChannelPipelineAlerts: ChannelPipelineAlerts,
     InputInfo: InputInfo,
     AVTemplate: AVTemplate,
-    ModifyStreamLiveChannelResponse: ModifyStreamLiveChannelResponse,
+    DestinationInfo: DestinationInfo,
     DeleteStreamLiveInputRequest: DeleteStreamLiveInputRequest,
     ModifyStreamLiveInputSecurityGroupResponse: ModifyStreamLiveInputSecurityGroupResponse,
     ModifyStreamLiveInputRequest: ModifyStreamLiveInputRequest,
@@ -6049,10 +6362,12 @@ module.exports = {
     DescribeStreamLiveWatermarksRequest: DescribeStreamLiveWatermarksRequest,
     DescribeTranscodeDetailInfo: DescribeTranscodeDetailInfo,
     TimeShiftSettingsInfo: TimeShiftSettingsInfo,
+    DeliveryRestrictionsInfo: DeliveryRestrictionsInfo,
     VideoTemplateInfo: VideoTemplateInfo,
     TimingSettingsReq: TimingSettingsReq,
     ModifyStreamLiveWatermarkRequest: ModifyStreamLiveWatermarkRequest,
     DescribeStreamLiveTranscodeDetailRequest: DescribeStreamLiveTranscodeDetailRequest,
+    SegmentationDescriptorRespInfo: SegmentationDescriptorRespInfo,
     DescribeStreamLiveChannelLogsResponse: DescribeStreamLiveChannelLogsResponse,
     DescribeStreamLiveChannelInputStatisticsRequest: DescribeStreamLiveChannelInputStatisticsRequest,
     PipelineLogInfo: PipelineLogInfo,
@@ -6114,7 +6429,7 @@ module.exports = {
     ModifyStreamLiveInputSecurityGroupRequest: ModifyStreamLiveInputSecurityGroupRequest,
     ChannelAlertInfos: ChannelAlertInfos,
     PipelineInputStatistics: PipelineInputStatistics,
-    DestinationInfo: DestinationInfo,
+    ModifyStreamLiveChannelResponse: ModifyStreamLiveChannelResponse,
     DeleteStreamLiveInputSecurityGroupResponse: DeleteStreamLiveInputSecurityGroupResponse,
     StopStreamLiveChannelRequest: StopStreamLiveChannelRequest,
     DescribeStreamLiveInputResponse: DescribeStreamLiveInputResponse,
@@ -6130,6 +6445,7 @@ module.exports = {
     CreateStreamLiveInputResponse: CreateStreamLiveInputResponse,
     DescribeStreamLiveInputSecurityGroupResponse: DescribeStreamLiveInputSecurityGroupResponse,
     StreamLiveChannelInfo: StreamLiveChannelInfo,
+    SegmentationDescriptorInfo: SegmentationDescriptorInfo,
     InputSettingInfo: InputSettingInfo,
     DescribeStreamLiveInputSecurityGroupsRequest: DescribeStreamLiveInputSecurityGroupsRequest,
     DeleteStreamLiveChannelRequest: DeleteStreamLiveChannelRequest,

@@ -80,6 +80,56 @@ class DescribeRollbackTimeRangeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeResourcePackageList response structure.
+ * @class
+ */
+class DescribeResourcePackageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of resource packs
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Resource pack details Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Package> || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new Package();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquirePriceRenew request structure.
  * @class
  */
@@ -117,6 +167,41 @@ class InquirePriceRenewRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+
+    }
+}
+
+/**
+ * DescribeAccountPrivileges response structure.
+ * @class
+ */
+class DescribeAccountPrivilegesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of permissions, such as  ["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"]
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -174,12 +259,60 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Details of whether the parameter can be modified
+ * CreateResourcePackage request structure.
  * @class
  */
-class ModifiableInfo extends  AbstractModel {
+class CreateResourcePackageRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
+         * @type {string || null}
+         */
+        this.PackageRegion = null;
+
+        /**
+         * Resource pack type. Valid values:  `CCU` (compute resource pack), `DISK` (storage resource pack).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * Resource pack size. Unit of the compute resource pack: Ten thousand.  Unit of the storage resource pack:  GB
+         * @type {number || null}
+         */
+        this.PackageSpec = null;
+
+        /**
+         * Validity period of a resource pack in days
+         * @type {number || null}
+         */
+        this.ExpireDay = null;
+
+        /**
+         * Number of the resource packs to be purchased
+         * @type {number || null}
+         */
+        this.PackageCount = null;
+
+        /**
+         * Resource pack name
+         * @type {string || null}
+         */
+        this.PackageName = null;
 
     }
 
@@ -190,6 +323,63 @@ class ModifiableInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+        this.PackageSpec = 'PackageSpec' in params ? params.PackageSpec : null;
+        this.ExpireDay = 'ExpireDay' in params ? params.ExpireDay : null;
+        this.PackageCount = 'PackageCount' in params ? params.PackageCount : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+
+    }
+}
+
+/**
+ * DescribeClusterDetailDatabases request structure.
+ * @class
+ */
+class DescribeClusterDetailDatabasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: `20`. Maximum value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
     }
 }
@@ -453,24 +643,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeZones request structure.
+ * Billable resource information
  * @class
  */
-class DescribeZonesRequest extends  AbstractModel {
+class BillingResourceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether the virtual zone is included.–
-         * @type {boolean || null}
+         * Cluster ID
+         * @type {string || null}
          */
-        this.IncludeVirtualZones = null;
+        this.ClusterId = null;
 
         /**
-         * Whether to display all AZs in a region and the user’s permissions in each AZ.
-         * @type {boolean || null}
+         * Instance ID list
+         * @type {Array.<string> || null}
          */
-        this.ShowPermission = null;
+        this.InstanceIds = null;
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.DealName = null;
 
     }
 
@@ -481,8 +677,44 @@ class DescribeZonesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IncludeVirtualZones = 'IncludeVirtualZones' in params ? params.IncludeVirtualZones : null;
-        this.ShowPermission = 'ShowPermission' in params ? params.ShowPermission : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+
+    }
+}
+
+/**
+ * ModifyClusterPasswordComplexity response structure.
+ * @class
+ */
+class ModifyClusterPasswordComplexityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -551,31 +783,30 @@ class SwitchClusterZoneResponse extends  AbstractModel {
 }
 
 /**
- * Information of the modified instance parameter
+ * DescribeResourcePackageDetail response structure.
  * @class
  */
-class ModifyParamItem extends  AbstractModel {
+class DescribeResourcePackageDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
-         * @type {string || null}
+         * Total number of deducted resource packs
+         * @type {number || null}
          */
-        this.ParamName = null;
+        this.Total = null;
 
         /**
-         * Current parameter value
-         * @type {string || null}
+         * Resource pack details
+         * @type {Array.<PackageDetail> || null}
          */
-        this.CurrentValue = null;
+        this.Detail = null;
 
         /**
-         * Old parameter value, which is used only in output parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OldValue = null;
+        this.RequestId = null;
 
     }
 
@@ -586,9 +817,45 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new PackageDetail();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterPasswordComplexity request structure.
+ * @class
+ */
+class DescribeClusterPasswordComplexityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -748,6 +1015,69 @@ class ModifyInstanceNameRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterDatabase response structure.
+ * @class
+ */
+class ModifyClusterDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeClusterVersion response structure.
+ * @class
+ */
+class UpgradeClusterVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBSecurityGroups response structure.
  * @class
  */
@@ -791,18 +1121,24 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMaintainPeriod request structure.
+ * CloseWan response structure.
  * @class
  */
-class DescribeMaintainPeriodRequest extends  AbstractModel {
+class CloseWanResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -813,7 +1149,8 @@ class DescribeMaintainPeriodRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -870,6 +1207,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DeleteParamTemplate response structure.
+ * @class
+ */
+class DeleteParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstances response structure.
  * @class
  */
@@ -915,6 +1280,41 @@ class DescribeInstancesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeZones request structure.
+ * @class
+ */
+class DescribeZonesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the virtual zone is included.–
+         * @type {boolean || null}
+         */
+        this.IncludeVirtualZones = null;
+
+        /**
+         * Whether to display all AZs in a region and the user’s permissions in each AZ.
+         * @type {boolean || null}
+         */
+        this.ShowPermission = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IncludeVirtualZones = 'IncludeVirtualZones' in params ? params.IncludeVirtualZones : null;
+        this.ShowPermission = 'ShowPermission' in params ? params.ShowPermission : null;
 
     }
 }
@@ -1084,6 +1484,104 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Slow query information of the instance
+ * @class
+ */
+class SlowQueriesItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Execution timestamp
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Execution duration in seconds
+         * @type {number || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * SQL statement
+         * @type {string || null}
+         */
+        this.SqlText = null;
+
+        /**
+         * Client host
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * Username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Lock duration in seconds
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * Number of scanned rows
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * Number of returned rows
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+        /**
+         * SQL template
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * MD5 value of the SQL statement
+         * @type {string || null}
+         */
+        this.SqlMd5 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.SqlMd5 = 'SqlMd5' in params ? params.SqlMd5 : null;
+
+    }
+}
+
+/**
  * DescribeClusterParams response structure.
  * @class
  */
@@ -1130,6 +1628,69 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloseWan request structure.
+ * @class
+ */
+class CloseWanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance group ID
+         * @type {string || null}
+         */
+        this.InstanceGrpId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceGrpId = 'InstanceGrpId' in params ? params.InstanceGrpId : null;
+
+    }
+}
+
+/**
+ * BindClusterResourcePackages request structure.
+ * @class
+ */
+class BindClusterResourcePackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of a resource pack
+         * @type {Array.<string> || null}
+         */
+        this.PackageIds = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageIds = 'PackageIds' in params ? params.PackageIds : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1304,6 +1865,118 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * CopyClusterPasswordComplexity response structure.
+ * @class
+ */
+class CopyClusterPasswordComplexityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of tags associated with cluster, including `TagKey` and `TagValue`
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceParams request structure.
+ * @class
+ */
+class DescribeInstanceParamsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance ID, which supports batch query.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Search condition for a parameter name, which supports fuzzy search.
+         * @type {string || null}
+         */
+        this.ParamKeyword = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ParamKeyword = 'ParamKeyword' in params ? params.ParamKeyword : null;
+
+    }
+}
+
+/**
  * SearchClusterTables request structure.
  * @class
  */
@@ -1356,24 +2029,30 @@ class SearchClusterTablesRequest extends  AbstractModel {
 }
 
 /**
- * PauseServerless request structure.
+ * ModifyResourcePackageClusters request structure.
  * @class
  */
-class PauseServerlessRequest extends  AbstractModel {
+class ModifyResourcePackageClustersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * The unique ID of a resource pack
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.PackageId = null;
 
         /**
-         * Whether to pause forcibly and ignore the current user connections. Valid values: `0` (no), `1` (yes). Default value: `1`
-         * @type {number || null}
+         * ID of the cluster to be bound
+         * @type {Array.<string> || null}
          */
-        this.ForcePause = null;
+        this.BindClusterIds = null;
+
+        /**
+         * ID of the cluster to be unbound
+         * @type {Array.<string> || null}
+         */
+        this.UnbindClusterIds = null;
 
     }
 
@@ -1384,54 +2063,26 @@ class PauseServerlessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ForcePause = 'ForcePause' in params ? params.ForcePause : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.BindClusterIds = 'BindClusterIds' in params ? params.BindClusterIds : null;
+        this.UnbindClusterIds = 'UnbindClusterIds' in params ? params.UnbindClusterIds : null;
 
     }
 }
 
 /**
- * Task information
+ * DeleteParamTemplate request structure.
  * @class
  */
-class ObjectTask extends  AbstractModel {
+class DeleteParamTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Auto-Incrementing task ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Parameter template ID
          * @type {number || null}
          */
-        this.TaskId = null;
-
-        /**
-         * Task type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TaskType = null;
-
-        /**
-         * Task status
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TaskStatus = null;
-
-        /**
-         * Task ID (cluster ID | instance group ID | instance ID)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ObjectId = null;
-
-        /**
-         * Task type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ObjectType = null;
+        this.TemplateId = null;
 
     }
 
@@ -1442,11 +2093,120 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
-        this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
-        this.ObjectType = 'ObjectType' in params ? params.ObjectType : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * Database details
+ * @class
+ */
+class DbInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Character set
+         * @type {string || null}
+         */
+        this.CharacterSet = null;
+
+        /**
+         * Database status
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Collation rule
+         * @type {string || null}
+         */
+        this.CollateRule = null;
+
+        /**
+         * Database remarks Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * User permissions Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<UserHostPrivilege> || null}
+         */
+        this.UserHostPrivileges = null;
+
+        /**
+         * Database ID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DbId = null;
+
+        /**
+         * Creation time Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * User appid Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User Uin Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Cluster ID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CollateRule = 'CollateRule' in params ? params.CollateRule : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.UserHostPrivileges) {
+            this.UserHostPrivileges = new Array();
+            for (let z in params.UserHostPrivileges) {
+                let obj = new UserHostPrivilege();
+                obj.deserialize(params.UserHostPrivileges[z]);
+                this.UserHostPrivileges.push(obj);
+            }
+        }
+        this.DbId = 'DbId' in params ? params.DbId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1482,6 +2242,132 @@ class DescribeFlowResponse extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetRenewFlag response structure.
+ * @class
+ */
+class SetRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of successfully manipulated instances
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExportInstanceErrorLogs request structure.
+ * @class
+ */
+class ExportInstanceErrorLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Log start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Log end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The max number of returned results
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Log level
+         * @type {Array.<string> || null}
+         */
+        this.LogLevels = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.KeyWords = null;
+
+        /**
+         * The template type. Valid values: `csv`, `original`.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Valid value: `Timestamp`
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Valid values: `ASC` or `DESC`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.LogLevels = 'LogLevels' in params ? params.LogLevels : null;
+        this.KeyWords = 'KeyWords' in params ? params.KeyWords : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -1585,6 +2471,84 @@ class SetRenewFlagRequest extends  AbstractModel {
         }
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+
+    }
+}
+
+/**
+ * OfflineCluster request structure.
+ * @class
+ */
+class OfflineClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterDetailDatabases response structure.
+ * @class
+ */
+class DescribeClusterDetailDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database information Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DbInfo> || null}
+         */
+        this.DbInfos = null;
+
+        /**
+         * The total count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DbInfos) {
+            this.DbInfos = new Array();
+            for (let z in params.DbInfos) {
+                let obj = new DbInfo();
+                obj.deserialize(params.DbInfos[z]);
+                this.DbInfos.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1782,78 +2746,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Slow query information of the instance
+ * CreateParamTemplate response structure.
  * @class
  */
-class SlowQueriesItem extends  AbstractModel {
+class CreateParamTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Execution timestamp
+         * Template ID
          * @type {number || null}
          */
-        this.Timestamp = null;
+        this.TemplateId = null;
 
         /**
-         * Execution duration in seconds
-         * @type {number || null}
-         */
-        this.QueryTime = null;
-
-        /**
-         * SQL statement
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.SqlText = null;
-
-        /**
-         * Client host
-         * @type {string || null}
-         */
-        this.UserHost = null;
-
-        /**
-         * Username
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Database name
-         * @type {string || null}
-         */
-        this.Database = null;
-
-        /**
-         * Lock duration in seconds
-         * @type {number || null}
-         */
-        this.LockTime = null;
-
-        /**
-         * Number of scanned rows
-         * @type {number || null}
-         */
-        this.RowsExamined = null;
-
-        /**
-         * Number of returned rows
-         * @type {number || null}
-         */
-        this.RowsSent = null;
-
-        /**
-         * SQL template
-         * @type {string || null}
-         */
-        this.SqlTemplate = null;
-
-        /**
-         * MD5 value of the SQL statement
-         * @type {string || null}
-         */
-        this.SqlMd5 = null;
+        this.RequestId = null;
 
     }
 
@@ -1864,17 +2774,8 @@ class SlowQueriesItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
-        this.SqlText = 'SqlText' in params ? params.SqlText : null;
-        this.UserHost = 'UserHost' in params ? params.UserHost : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Database = 'Database' in params ? params.Database : null;
-        this.LockTime = 'LockTime' in params ? params.LockTime : null;
-        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
-        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
-        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
-        this.SqlMd5 = 'SqlMd5' in params ? params.SqlMd5 : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1982,6 +2883,125 @@ class AddClusterSlaveZoneRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+
+    }
+}
+
+/**
+ * RemoveClusterSlaveZone response structure.
+ * @class
+ */
+class RemoveClusterSlaveZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async FlowId
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Types of the returned error logs for an instance
+ * @class
+ */
+class CynosdbErrorLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log timestamp Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Log level Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Log content Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * UpgradeClusterVersion request structure.
+ * @class
+ */
+class UpgradeClusterVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Kernel version
+         * @type {string || null}
+         */
+        this.CynosVersion = null;
+
+        /**
+         * Upgrade time type. Valid values: `upgradeImmediate`, `upgradeInMaintain`.
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
 
     }
 }
@@ -2102,6 +3122,41 @@ class ModifyVipVportRequest extends  AbstractModel {
 }
 
 /**
+ * Database permission list
+ * @class
+ */
+class DatabasePrivileges extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Permission list
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Db = 'Db' in params ? params.Db : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * DescribeClusters request structure.
  * @class
  */
@@ -2177,24 +3232,18 @@ class DescribeClustersRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceDetail response structure.
+ * CloseClusterPasswordComplexity request structure.
  * @class
  */
-class DescribeInstanceDetailResponse extends  AbstractModel {
+class CloseClusterPasswordComplexityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance details
-         * @type {CynosdbInstanceDetail || null}
+         * Cluster IDs in array
+         * @type {Array.<string> || null}
          */
-        this.Detail = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ClusterIds = null;
 
     }
 
@@ -2205,13 +3254,7 @@ class DescribeInstanceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Detail) {
-            let obj = new CynosdbInstanceDetail();
-            obj.deserialize(params.Detail)
-            this.Detail = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
 
     }
 }
@@ -2239,6 +3282,41 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenReadOnlyInstanceExclusiveAccess response structure.
+ * @class
+ */
+class OpenReadOnlyInstanceExclusiveAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Activation process ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2546,6 +3624,120 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Resource pack
+ * @class
+ */
+class Package extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AppID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * The unique ID of a resource pack Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * Resource pack name Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageRegion = null;
+
+        /**
+         * Resource pack status. Valid values: `creating`, `using`, `expired`, `normal_finish` (used up), `apply_refund` (requesting a refund), `refund` (refunded). 
+Note:  This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Total number of resource packs Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PackageTotalSpec = null;
+
+        /**
+         * Consumed usage of resource packs Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PackageUsedSpec = null;
+
+        /**
+         * Remaining usage of resource packs Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.HasQuota = null;
+
+        /**
+         * Information of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BindInstanceInfo> || null}
+         */
+        this.BindInstanceInfos = null;
+
+        /**
+         * Validity time:  2022-07-01 00:00:00 Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Validity time:  2022-08-01 00:00:00 Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PackageTotalSpec = 'PackageTotalSpec' in params ? params.PackageTotalSpec : null;
+        this.PackageUsedSpec = 'PackageUsedSpec' in params ? params.PackageUsedSpec : null;
+        this.HasQuota = 'HasQuota' in params ? params.HasQuota : null;
+
+        if (params.BindInstanceInfos) {
+            this.BindInstanceInfos = new Array();
+            for (let z in params.BindInstanceInfos) {
+                let obj = new BindInstanceInfo();
+                obj.deserialize(params.BindInstanceInfos[z]);
+                this.BindInstanceInfos.push(obj);
+            }
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * SwitchClusterZone request structure.
  * @class
  */
@@ -2595,10 +3787,53 @@ class SwitchClusterZoneRequest extends  AbstractModel {
 }
 
 /**
- * RestartInstance request structure.
+ * Instance parameter information
  * @class
  */
-class RestartInstanceRequest extends  AbstractModel {
+class InstanceParamItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of instance parameters
+         * @type {Array.<ParamItemDetail> || null}
+         */
+        this.ParamsItems = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.ParamsItems) {
+            this.ParamsItems = new Array();
+            for (let z in params.ParamsItems) {
+                let obj = new ParamItemDetail();
+                obj.deserialize(params.ParamsItems[z]);
+                this.ParamsItems.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeInstanceDetail request structure.
+ * @class
+ */
+class DescribeInstanceDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2723,6 +3958,83 @@ class InstanceInitInfo extends  AbstractModel {
 }
 
 /**
+ * Resource pack details
+ * @class
+ */
+class PackageDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account ID of `AppId` Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * The unique ID of a resource pack Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * Instance ID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The successfully deducted capacity Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SuccessDeductSpec = null;
+
+        /**
+         * Used capacity of a resource pack as of now Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PackageTotalUsedSpec = null;
+
+        /**
+         * Deduction start time Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Deduction end time Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Extended information Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExtendInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SuccessDeductSpec = 'SuccessDeductSpec' in params ? params.SuccessDeductSpec : null;
+        this.PackageTotalUsedSpec = 'PackageTotalUsedSpec' in params ? params.PackageTotalUsedSpec : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ExtendInfo = 'ExtendInfo' in params ? params.ExtendInfo : null;
+
+    }
+}
+
+/**
  * UpgradeInstance request structure.
  * @class
  */
@@ -2802,6 +4114,34 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.DealMode = 'DealMode' in params ? params.DealMode : null;
         this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+
+    }
+}
+
+/**
+ * ModifyMaintainPeriodConfig response structure.
+ * @class
+ */
+class ModifyMaintainPeriodConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2898,24 +4238,42 @@ class DeleteBackupResponse extends  AbstractModel {
 }
 
 /**
- * Information of tags associated with cluster, including `TagKey` and `TagValue`
+ * ModifyInstanceParam request structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class ModifyInstanceParamRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
+         * Cluster ID
          * @type {string || null}
          */
-        this.TagKey = null;
+        this.ClusterId = null;
 
         /**
-         * Tag value
+         * Instance ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * List of cluster parameters
+         * @type {Array.<ModifyParamItem> || null}
+         */
+        this.ClusterParamList = null;
+
+        /**
+         * List of the instance parameters
+         * @type {Array.<ModifyParamItem> || null}
+         */
+        this.InstanceParamList = null;
+
+        /**
+         * Valid values: `yes` (modify in maintenance window),  `no`  (execute now by default).
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.IsInMaintainPeriod = null;
 
     }
 
@@ -2926,8 +4284,27 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.ClusterParamList) {
+            this.ClusterParamList = new Array();
+            for (let z in params.ClusterParamList) {
+                let obj = new ModifyParamItem();
+                obj.deserialize(params.ClusterParamList[z]);
+                this.ClusterParamList.push(obj);
+            }
+        }
+
+        if (params.InstanceParamList) {
+            this.InstanceParamList = new Array();
+            for (let z in params.InstanceParamList) {
+                let obj = new ModifyParamItem();
+                obj.deserialize(params.InstanceParamList[z]);
+                this.InstanceParamList.push(obj);
+            }
+        }
+        this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
 
     }
 }
@@ -2983,15 +4360,50 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * RemoveClusterSlaveZone response structure.
+ * ModifyResourcePackageName request structure.
  * @class
  */
-class RemoveClusterSlaveZoneResponse extends  AbstractModel {
+class ModifyResourcePackageNameRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async FlowId
+         * The unique ID of a resource pack
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * Custom resource pack name, which can contains up to 120 characters.
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+
+    }
+}
+
+/**
+ * OpenWan response structure.
+ * @class
+ */
+class OpenWanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -3053,18 +4465,108 @@ class PauseServerlessResponse extends  AbstractModel {
 }
 
 /**
- * OfflineCluster request structure.
+ * Instance parameter details
  * @class
  */
-class OfflineClusterRequest extends  AbstractModel {
+class ParamDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * Parameter name
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.ParamName = null;
+
+        /**
+         * Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * Whether `func` is supported. Valid values: `true` (supported), `false` (not supported).
+         * @type {boolean || null}
+         */
+        this.SupportFunc = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Current value of the parameter
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * Maximum value of the parameter
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Minimum value of the parameter
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Enumerated values of the parameter.  It is null if the parameter is non-enumerated. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Valid values: `1` (global parameter),  `0`  (non-global parameter).
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * The match type. Valid value: `multiVal`.
+         * @type {string || null}
+         */
+        this.MatchType = null;
+
+        /**
+         * Match values, which will be separated by comma when `MatchType` is `multiVal`.
+         * @type {string || null}
+         */
+        this.MatchValue = null;
+
+        /**
+         * Whether it is a `func` type. Valid values: `true` (yes), `false` (no). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsFunc = null;
+
+        /**
+         * Formula content returned when `ParamType` is `func`. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Func = null;
+
+        /**
+         * Whether the parameter can be modified Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ModifiableInfo || null}
+         */
+        this.ModifiableInfo = null;
 
     }
 
@@ -3075,7 +4577,55 @@ class OfflineClusterRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.SupportFunc = 'SupportFunc' in params ? params.SupportFunc : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.MatchType = 'MatchType' in params ? params.MatchType : null;
+        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+        this.IsFunc = 'IsFunc' in params ? params.IsFunc : null;
+        this.Func = 'Func' in params ? params.Func : null;
+
+        if (params.ModifiableInfo) {
+            let obj = new ModifiableInfo();
+            obj.deserialize(params.ModifiableInfo)
+            this.ModifiableInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteAccounts response structure.
+ * @class
+ */
+class DeleteAccountsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3272,6 +4822,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * MySQL table permission
+ * @class
+ */
+class TablePrivileges extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Permission list
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Db = 'Db' in params ? params.Db : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * DescribeBinlogDownloadUrl response structure.
  * @class
  */
@@ -3302,6 +4894,48 @@ class DescribeBinlogDownloadUrlResponse extends  AbstractModel {
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of the instance bound to the resource pack
+ * @class
+ */
+class BindInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Region of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceRegion = null;
+
+        /**
+         * Type of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -3351,6 +4985,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.Items[z]);
                 this.Items.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourcePackageName response structure.
+ * @class
+ */
+class ModifyResourcePackageNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3564,6 +5226,48 @@ class SwitchClusterVpcRequest extends  AbstractModel {
 }
 
 /**
+ * CreateResourcePackage response structure.
+ * @class
+ */
+class CreateResourcePackageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Big order number
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
+
+        /**
+         * Each item has only one `dealName`, through which you need to ensure the idempotency of the delivery API.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Instance information
  * @class
  */
@@ -3636,6 +5340,12 @@ class CynosdbInstance extends  AbstractModel {
          * @type {string || null}
          */
         this.StatusDesc = null;
+
+        /**
+         * Instance type, which is used to indicate whether it is a serverless instance.
+         * @type {string || null}
+         */
+        this.DbMode = null;
 
         /**
          * Database type
@@ -3881,6 +5591,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.InstanceNetInfo = null;
 
+        /**
+         * Information of the resource pack bound to an instance when `packageType` is `CCU`. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ResourcePackage> || null}
+         */
+        this.ResourcePackages = null;
+
     }
 
     /**
@@ -3901,6 +5617,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
@@ -3965,6 +5682,115 @@ Note: This field may return null, indicating that no valid value can be obtained
             }
         }
 
+        if (params.ResourcePackages) {
+            this.ResourcePackages = new Array();
+            for (let z in params.ResourcePackages) {
+                let obj = new ResourcePackage();
+                obj.deserialize(params.ResourcePackages[z]);
+                this.ResourcePackages.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeClusterPasswordComplexity response structure.
+ * @class
+ */
+class DescribeClusterPasswordComplexityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data dictionary parameter Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamInfo || null}
+         */
+        this.ValidatePasswordDictionary = null;
+
+        /**
+         * The length of the password Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamInfo || null}
+         */
+        this.ValidatePasswordLength = null;
+
+        /**
+         * Number of case-sensitive characters Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamInfo || null}
+         */
+        this.ValidatePasswordMixedCaseCount = null;
+
+        /**
+         * Number of digits Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamInfo || null}
+         */
+        this.ValidatePasswordNumberCount = null;
+
+        /**
+         * Password level Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamInfo || null}
+         */
+        this.ValidatePasswordPolicy = null;
+
+        /**
+         * Number of symbols Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ParamInfo || null}
+         */
+        this.ValidatePasswordSpecialCharCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ValidatePasswordDictionary) {
+            let obj = new ParamInfo();
+            obj.deserialize(params.ValidatePasswordDictionary)
+            this.ValidatePasswordDictionary = obj;
+        }
+
+        if (params.ValidatePasswordLength) {
+            let obj = new ParamInfo();
+            obj.deserialize(params.ValidatePasswordLength)
+            this.ValidatePasswordLength = obj;
+        }
+
+        if (params.ValidatePasswordMixedCaseCount) {
+            let obj = new ParamInfo();
+            obj.deserialize(params.ValidatePasswordMixedCaseCount)
+            this.ValidatePasswordMixedCaseCount = obj;
+        }
+
+        if (params.ValidatePasswordNumberCount) {
+            let obj = new ParamInfo();
+            obj.deserialize(params.ValidatePasswordNumberCount)
+            this.ValidatePasswordNumberCount = obj;
+        }
+
+        if (params.ValidatePasswordPolicy) {
+            let obj = new ParamInfo();
+            obj.deserialize(params.ValidatePasswordPolicy)
+            this.ValidatePasswordPolicy = obj;
+        }
+
+        if (params.ValidatePasswordSpecialCharCount) {
+            let obj = new ParamInfo();
+            obj.deserialize(params.ValidatePasswordSpecialCharCount)
+            this.ValidatePasswordSpecialCharCount = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
     }
 }
 
@@ -3992,6 +5818,49 @@ class DescribeAuditRuleWithInstanceIdsRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * ExportInstanceErrorLogs response structure.
+ * @class
+ */
+class ExportInstanceErrorLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Export content of the error log Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ErrorLogItemExport> || null}
+         */
+        this.ErrorLogItems = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrorLogItems) {
+            this.ErrorLogItems = new Array();
+            for (let z in params.ErrorLogItems) {
+                let obj = new ErrorLogItemExport();
+                obj.deserialize(params.ErrorLogItems[z]);
+                this.ErrorLogItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4027,6 +5896,111 @@ class ModifyClusterSlaveZoneResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance parameter information
+ * @class
+ */
+class ParamItemDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * Enumerated values of the parameter It is null if the parameter is non-enumerated.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Valid values: `1` (global parameter),  `0`  (non-global parameter).
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * Maximum value
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Minimum value
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes)
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Whether `ParamType` is a `func` Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsFunc = null;
+
+        /**
+         * Parameter configuration formula Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Func = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.IsFunc = 'IsFunc' in params ? params.IsFunc : null;
+        this.Func = 'Func' in params ? params.Func : null;
 
     }
 }
@@ -4118,6 +6092,49 @@ class BinlogItem extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
         this.BinlogId = 'BinlogId' in params ? params.BinlogId : null;
+
+    }
+}
+
+/**
+ * Information of the modified instance parameter
+ * @class
+ */
+class ModifyParamItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Current parameter value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Old parameter value, which is used only in output parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
 
     }
 }
@@ -4547,6 +6564,48 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
 }
 
 /**
+ * User host permissions
+ * @class
+ */
+class UserHostPrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Authorized user
+         * @type {string || null}
+         */
+        this.DbUserName = null;
+
+        /**
+         * Client IP Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbHost = null;
+
+        /**
+         * User permissions Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbPrivilege = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DbUserName = 'DbUserName' in params ? params.DbUserName : null;
+        this.DbHost = 'DbHost' in params ? params.DbHost : null;
+        this.DbPrivilege = 'DbPrivilege' in params ? params.DbPrivilege : null;
+
+    }
+}
+
+/**
  * DescribeClusters response structure.
  * @class
  */
@@ -4592,6 +6651,98 @@ class DescribeClustersResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenAuditService request structure.
+ * @class
+ */
+class OpenAuditServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Log retention period
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Frequent log retention period
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
+
+        /**
+         * Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+         * @type {Array.<AuditRuleFilters> || null}
+         */
+        this.AuditRuleFilters = null;
+
+        /**
+         * Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+         * @type {Array.<string> || null}
+         */
+        this.RuleTemplateIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
+
+        if (params.AuditRuleFilters) {
+            this.AuditRuleFilters = new Array();
+            for (let z in params.AuditRuleFilters) {
+                let obj = new AuditRuleFilters();
+                obj.deserialize(params.AuditRuleFilters[z]);
+                this.AuditRuleFilters.push(obj);
+            }
+        }
+        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+
+    }
+}
+
+/**
+ * RefundResourcePackage request structure.
+ * @class
+ */
+class RefundResourcePackageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of a resource pack
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
 
     }
 }
@@ -4662,10 +6813,45 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyVipVport response structure.
+ * ModifyBinlogSaveDays request structure.
  * @class
  */
-class ModifyVipVportResponse extends  AbstractModel {
+class ModifyBinlogSaveDaysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Binlog retention period in days
+         * @type {number || null}
+         */
+        this.BinlogSaveDays = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.BinlogSaveDays = 'BinlogSaveDays' in params ? params.BinlogSaveDays : null;
+
+    }
+}
+
+/**
+ * ResumeServerless response structure.
+ * @class
+ */
+class ResumeServerlessResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4912,49 +7098,48 @@ class Addr extends  AbstractModel {
 }
 
 /**
- * Parameter template information
+ * Resource pack details
  * @class
  */
-class ParamTemplateListInfo extends  AbstractModel {
+class SalePackageSpec extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter template ID
+         * Region of the resource pack Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageRegion = null;
+
+        /**
+         * Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * Minimum number of resources for the current edition of the resource pack.  Unit of the compute resources: pcs.  Unit of the storage resources: GB. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Id = null;
+        this.MinPackageSpec = null;
 
         /**
-         * Parameter template name
-         * @type {string || null}
+         * Maximum number of resources for the current edition of the resource pack.  Unit of the compute resources: pcs.  Unit of the storage resources: GB. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.TemplateName = null;
+        this.MaxPackageSpec = null;
 
         /**
-         * Parameter template description
-         * @type {string || null}
+         * Validity period of a resource pack in days Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.TemplateDescription = null;
-
-        /**
-         * Engine version
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * Database Type. Valid values: `NORMAL`, `SERVERLESS`.
-         * @type {string || null}
-         */
-        this.DbMode = null;
-
-        /**
-         * Parameter template details
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TemplateParamInfo> || null}
-         */
-        this.ParamInfoSet = null;
+        this.ExpireDay = null;
 
     }
 
@@ -4965,20 +7150,75 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+        this.MinPackageSpec = 'MinPackageSpec' in params ? params.MinPackageSpec : null;
+        this.MaxPackageSpec = 'MaxPackageSpec' in params ? params.MaxPackageSpec : null;
+        this.ExpireDay = 'ExpireDay' in params ? params.ExpireDay : null;
 
-        if (params.ParamInfoSet) {
-            this.ParamInfoSet = new Array();
-            for (let z in params.ParamInfoSet) {
-                let obj = new TemplateParamInfo();
-                obj.deserialize(params.ParamInfoSet[z]);
-                this.ParamInfoSet.push(obj);
-            }
+    }
+}
+
+/**
+ * PauseServerless request structure.
+ * @class
+ */
+class PauseServerlessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Whether to pause forcibly and ignore the current user connections. Valid values: `0` (no), `1` (yes). Default value: `1`
+         * @type {number || null}
+         */
+        this.ForcePause = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ForcePause = 'ForcePause' in params ? params.ForcePause : null;
+
+    }
+}
+
+/**
+ * ModifyParamTemplate response structure.
+ * @class
+ */
+class ModifyParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5290,6 +7530,34 @@ class SecurityGroup extends  AbstractModel {
 }
 
 /**
+ * BindClusterResourcePackages response structure.
+ * @class
+ */
+class BindClusterResourcePackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBackupDownloadUrl request structure.
  * @class
  */
@@ -5320,6 +7588,42 @@ class DescribeBackupDownloadUrlRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+
+    }
+}
+
+/**
+ * SearchClusterDatabases response structure.
+ * @class
+ */
+class SearchClusterDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database List
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Databases = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Databases = 'Databases' in params ? params.Databases : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5360,42 +7664,54 @@ class OfflineInstanceRequest extends  AbstractModel {
 }
 
 /**
- * OpenAuditService request structure.
+ * ModifyClusterPasswordComplexity request structure.
  * @class
  */
-class OpenAuditServiceRequest extends  AbstractModel {
+class ModifyClusterPasswordComplexityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Cluster ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ClusterId = null;
 
         /**
-         * Log retention period
+         * Password length
          * @type {number || null}
          */
-        this.LogExpireDay = null;
+        this.ValidatePasswordLength = null;
 
         /**
-         * Frequent log retention period
+         * Number of letters
          * @type {number || null}
          */
-        this.HighLogExpireDay = null;
+        this.ValidatePasswordMixedCaseCount = null;
 
         /**
-         * Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
-         * @type {Array.<AuditRuleFilters> || null}
+         * Number of symbols
+         * @type {number || null}
          */
-        this.AuditRuleFilters = null;
+        this.ValidatePasswordSpecialCharCount = null;
 
         /**
-         * Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+         * Number of digits
+         * @type {number || null}
+         */
+        this.ValidatePasswordNumberCount = null;
+
+        /**
+         * Password strength. Valid values: `MEDIUM`, `STRONG`.
+         * @type {string || null}
+         */
+        this.ValidatePasswordPolicy = null;
+
+        /**
+         * Data dictionary
          * @type {Array.<string> || null}
          */
-        this.RuleTemplateIds = null;
+        this.ValidatePasswordDictionary = null;
 
     }
 
@@ -5406,19 +7722,271 @@ class OpenAuditServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
-        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ValidatePasswordLength = 'ValidatePasswordLength' in params ? params.ValidatePasswordLength : null;
+        this.ValidatePasswordMixedCaseCount = 'ValidatePasswordMixedCaseCount' in params ? params.ValidatePasswordMixedCaseCount : null;
+        this.ValidatePasswordSpecialCharCount = 'ValidatePasswordSpecialCharCount' in params ? params.ValidatePasswordSpecialCharCount : null;
+        this.ValidatePasswordNumberCount = 'ValidatePasswordNumberCount' in params ? params.ValidatePasswordNumberCount : null;
+        this.ValidatePasswordPolicy = 'ValidatePasswordPolicy' in params ? params.ValidatePasswordPolicy : null;
+        this.ValidatePasswordDictionary = 'ValidatePasswordDictionary' in params ? params.ValidatePasswordDictionary : null;
 
-        if (params.AuditRuleFilters) {
-            this.AuditRuleFilters = new Array();
-            for (let z in params.AuditRuleFilters) {
-                let obj = new AuditRuleFilters();
-                obj.deserialize(params.AuditRuleFilters[z]);
-                this.AuditRuleFilters.push(obj);
+    }
+}
+
+/**
+ * OpenWan request structure.
+ * @class
+ */
+class OpenWanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance group ID
+         * @type {string || null}
+         */
+        this.InstanceGrpId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceGrpId = 'InstanceGrpId' in params ? params.InstanceGrpId : null;
+
+    }
+}
+
+/**
+ * UnbindClusterResourcePackages request structure.
+ * @class
+ */
+class UnbindClusterResourcePackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The unique ID of a resource pack. If this parameter is left empty, all resource packs of the instance will be unbound.
+         * @type {Array.<string> || null}
+         */
+        this.PackageIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PackageIds = 'PackageIds' in params ? params.PackageIds : null;
+
+    }
+}
+
+/**
+ * OpenClusterPasswordComplexity response structure.
+ * @class
+ */
+class OpenClusterPasswordComplexityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceDetail response structure.
+ * @class
+ */
+class DescribeInstanceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance details
+         * @type {CynosdbInstanceDetail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Detail) {
+            let obj = new CynosdbInstanceDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeResourcePackageSaleSpec response structure.
+ * @class
+ */
+class DescribeResourcePackageSaleSpecResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of available resource packs
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Resource pack details Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SalePackageSpec> || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new SalePackageSpec();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
             }
         }
-        this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OfflineInstance response structure.
+ * @class
+ */
+class OfflineInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceParam response structure.
+ * @class
+ */
+class ModifyInstanceParamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5501,6 +8069,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.WanStatus = null;
 
+        /**
+         * Instance group ID Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceGroupId = null;
+
     }
 
     /**
@@ -5520,6 +8094,112 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Description = 'Description' in params ? params.Description : null;
         this.WanIP = 'WanIP' in params ? params.WanIP : null;
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+
+    }
+}
+
+/**
+ * Information of a resource pack
+ * @class
+ */
+class ResourcePackage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of a resource pack Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * Resource pack type. Valid values:  `CCU` (compute resource pack),  `DISK`  (storage resource pack). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+
+    }
+}
+
+/**
+ * RestartInstance response structure.
+ * @class
+ */
+class RestartInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CopyClusterPasswordComplexity request structure.
+ * @class
+ */
+class CopyClusterPasswordComplexityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A parameter used to replicate the array of cluster IDs
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.SourceClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.SourceClusterId = 'SourceClusterId' in params ? params.SourceClusterId : null;
 
     }
 }
@@ -5676,6 +8356,34 @@ class CreateBackupResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountPrivileges response structure.
+ * @class
+ */
+class ModifyAccountPrivilegesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5853,6 +8561,34 @@ class DescribeInstanceSlowQueriesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAccountHost response structure.
+ * @class
+ */
+class ModifyAccountHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstances request structure.
  * @class
  */
@@ -5944,6 +8680,132 @@ offlined: Instance eliminated
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * OpenReadOnlyInstanceExclusiveAccess request structure.
+ * @class
+ */
+class OpenReadOnlyInstanceExclusiveAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * ID of the read-only instance with dedicated access to be enabled
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Specified VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Specified subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Security group
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * CloseClusterPasswordComplexity response structure.
+ * @class
+ */
+class CloseClusterPasswordComplexityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMaintainPeriod request structure.
+ * @class
+ */
+class DescribeMaintainPeriodRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6098,6 +8960,76 @@ class InquirePriceCreateRequest extends  AbstractModel {
         this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+
+    }
+}
+
+/**
+ * OpenClusterPasswordComplexity request structure.
+ * @class
+ */
+class OpenClusterPasswordComplexityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Password length
+         * @type {number || null}
+         */
+        this.ValidatePasswordLength = null;
+
+        /**
+         * Number of letters
+         * @type {number || null}
+         */
+        this.ValidatePasswordMixedCaseCount = null;
+
+        /**
+         * Number of symbols
+         * @type {number || null}
+         */
+        this.ValidatePasswordSpecialCharCount = null;
+
+        /**
+         * Number of digits
+         * @type {number || null}
+         */
+        this.ValidatePasswordNumberCount = null;
+
+        /**
+         * Password strength. Valid values: `MEDIUM`, `STRONG`.
+         * @type {string || null}
+         */
+        this.ValidatePasswordPolicy = null;
+
+        /**
+         * Data dictionary
+         * @type {Array.<string> || null}
+         */
+        this.ValidatePasswordDictionary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ValidatePasswordLength = 'ValidatePasswordLength' in params ? params.ValidatePasswordLength : null;
+        this.ValidatePasswordMixedCaseCount = 'ValidatePasswordMixedCaseCount' in params ? params.ValidatePasswordMixedCaseCount : null;
+        this.ValidatePasswordSpecialCharCount = 'ValidatePasswordSpecialCharCount' in params ? params.ValidatePasswordSpecialCharCount : null;
+        this.ValidatePasswordNumberCount = 'ValidatePasswordNumberCount' in params ? params.ValidatePasswordNumberCount : null;
+        this.ValidatePasswordPolicy = 'ValidatePasswordPolicy' in params ? params.ValidatePasswordPolicy : null;
+        this.ValidatePasswordDictionary = 'ValidatePasswordDictionary' in params ? params.ValidatePasswordDictionary : null;
 
     }
 }
@@ -6301,6 +9233,55 @@ class ExportInstanceSlowQueriesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAccountDescription request structure.
+ * @class
+ */
+class ModifyAccountDescriptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database account name
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
+        /**
+         * Database account description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Host. Default value: `%`
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Host = 'Host' in params ? params.Host : null;
+
+    }
+}
+
+/**
  * Parameter to be modified
  * @class
  */
@@ -6338,6 +9319,56 @@ class ParamItem extends  AbstractModel {
         this.ParamName = 'ParamName' in params ? params.ParamName : null;
         this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
         this.OldValue = 'OldValue' in params ? params.OldValue : null;
+
+    }
+}
+
+/**
+ * ModifyClusterParam request structure.
+ * @class
+ */
+class ModifyClusterParamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
+         * @type {Array.<ParamItem> || null}
+         */
+        this.ParamList = null;
+
+        /**
+         * Valid values: `yes` (execute during maintenance time), `no` (execute now)
+         * @type {string || null}
+         */
+        this.IsInMaintainPeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ParamItem();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+        this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
 
     }
 }
@@ -6647,6 +9678,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Ability = null;
 
+        /**
+         * Information of the resource pack bound to an instance when `packageType` is `DISK`. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ResourcePackage> || null}
+         */
+        this.ResourcePackages = null;
+
     }
 
     /**
@@ -6726,6 +9763,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new Ability();
             obj.deserialize(params.Ability)
             this.Ability = obj;
+        }
+
+        if (params.ResourcePackages) {
+            this.ResourcePackages = new Array();
+            for (let z in params.ResourcePackages) {
+                let obj = new ResourcePackage();
+                obj.deserialize(params.ResourcePackages[z]);
+                this.ResourcePackages.push(obj);
+            }
         }
 
     }
@@ -6855,6 +9901,91 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeResourcePackageList request structure.
+ * @class
+ */
+class DescribeResourcePackageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of a resource pack
+         * @type {Array.<string> || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * Resource pack name
+         * @type {Array.<string> || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
+         * @type {Array.<string> || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
+         * @type {Array.<string> || null}
+         */
+        this.PackageRegion = null;
+
+        /**
+         * Resource pack status. Valid values: `using`, `expired`, `normal_finish` (used up), `apply_refund` (requesting a refund), `refund` (refunded).
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * Sorting conditions. Valid values: `startTime` (effective time), `expireTime` (expiration date), `packageUsedSpec` (used capacity), `packageTotalSpec` (total storage capacity). 
+Sorting by array order
+         * @type {Array.<string> || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending).
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Information of a purchasable AZ
  * @class
  */
@@ -6937,24 +10068,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SetRenewFlag response structure.
+ * ModifyParamTemplate request structure.
  * @class
  */
-class SetRenewFlagResponse extends  AbstractModel {
+class ModifyParamTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of successfully manipulated instances
+         * Template ID
          * @type {number || null}
          */
-        this.Count = null;
+        this.TemplateId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Template Name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TemplateName = null;
+
+        /**
+         * The template description
+         * @type {string || null}
+         */
+        this.TemplateDescription = null;
+
+        /**
+         * Parameter list
+         * @type {Array.<ModifyParamItem> || null}
+         */
+        this.ParamList = null;
 
     }
 
@@ -6965,8 +10108,79 @@ class SetRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ModifyParamItem();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Task information
+ * @class
+ */
+class ObjectTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Auto-Incrementing task ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Task status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Task ID (cluster ID | instance group ID | instance ID)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ObjectId = null;
+
+        /**
+         * Task type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ObjectType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
+        this.ObjectType = 'ObjectType' in params ? params.ObjectType : null;
 
     }
 }
@@ -7070,24 +10284,18 @@ class SwitchProxyVpcResponse extends  AbstractModel {
 }
 
 /**
- * ResumeServerless response structure.
+ * DescribeParamTemplateDetail request structure.
  * @class
  */
-class ResumeServerlessResponse extends  AbstractModel {
+class DescribeParamTemplateDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID
+         * Parameter template ID
          * @type {number || null}
          */
-        this.FlowId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.TemplateId = null;
 
     }
 
@@ -7098,8 +10306,125 @@ class ResumeServerlessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountHost request structure.
+ * @class
+ */
+class ModifyAccountHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * New host
+         * @type {string || null}
+         */
+        this.NewHost = null;
+
+        /**
+         * Account infomation
+         * @type {InputAccount || null}
+         */
+        this.Account = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NewHost = 'NewHost' in params ? params.NewHost : null;
+
+        if (params.Account) {
+            let obj = new InputAccount();
+            obj.deserialize(params.Account)
+            this.Account = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateParamTemplate request structure.
+ * @class
+ */
+class CreateParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template name
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * MySQL version number
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * The description of a template
+         * @type {string || null}
+         */
+        this.TemplateDescription = null;
+
+        /**
+         * (Optional) ID of the template to be copied
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Database type. Valid values:  `NORMAL` (default), `SERVERLESS`.
+         * @type {string || null}
+         */
+        this.DbMode = null;
+
+        /**
+         * List of the parameters
+         * @type {Array.<ParamItem> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ParamItem();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
 
     }
 }
@@ -7283,6 +10608,34 @@ class DescribeFlowRequest extends  AbstractModel {
 }
 
 /**
+ * RestartInstance request structure.
+ * @class
+ */
+class RestartInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * IsolateInstance request structure.
  * @class
  */
@@ -7325,10 +10678,10 @@ class IsolateInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Billable resource information
+ * ModifyAccountPrivileges request structure.
  * @class
  */
-class BillingResourceInfo extends  AbstractModel {
+class ModifyAccountPrivilegesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -7339,16 +10692,28 @@ class BillingResourceInfo extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Instance ID list
-         * @type {Array.<string> || null}
+         * Account infomation
+         * @type {InputAccount || null}
          */
-        this.InstanceIds = null;
+        this.Account = null;
 
         /**
-         * Order ID
-         * @type {string || null}
+         * Array of global permissions
+         * @type {Array.<string> || null}
          */
-        this.DealName = null;
+        this.GlobalPrivileges = null;
+
+        /**
+         * Array of database permissions
+         * @type {Array.<DatabasePrivileges> || null}
+         */
+        this.DatabasePrivileges = null;
+
+        /**
+         * Array of table permissions
+         * @type {Array.<TablePrivileges> || null}
+         */
+        this.TablePrivileges = null;
 
     }
 
@@ -7360,8 +10725,31 @@ class BillingResourceInfo extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.DealName = 'DealName' in params ? params.DealName : null;
+
+        if (params.Account) {
+            let obj = new InputAccount();
+            obj.deserialize(params.Account)
+            this.Account = obj;
+        }
+        this.GlobalPrivileges = 'GlobalPrivileges' in params ? params.GlobalPrivileges : null;
+
+        if (params.DatabasePrivileges) {
+            this.DatabasePrivileges = new Array();
+            for (let z in params.DatabasePrivileges) {
+                let obj = new DatabasePrivileges();
+                obj.deserialize(params.DatabasePrivileges[z]);
+                this.DatabasePrivileges.push(obj);
+            }
+        }
+
+        if (params.TablePrivileges) {
+            this.TablePrivileges = new Array();
+            for (let z in params.TablePrivileges) {
+                let obj = new TablePrivileges();
+                obj.deserialize(params.TablePrivileges[z]);
+                this.TablePrivileges.push(obj);
+            }
+        }
 
     }
 }
@@ -7489,6 +10877,34 @@ class CreateBackupRequest extends  AbstractModel {
             }
         }
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
+
+    }
+}
+
+/**
+ * CreateClusterDatabase response structure.
+ * @class
+ */
+class CreateClusterDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7645,6 +11061,90 @@ class PolicyRule extends  AbstractModel {
         this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * DescribeResourcePackageSaleSpec request structure.
+ * @class
+ */
+class DescribeResourcePackageSaleSpecRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
+         * @type {string || null}
+         */
+        this.PackageRegion = null;
+
+        /**
+         * Resource pack type. Valid values: `CCU` (compute resource pack, `DISK` (storage resource pack).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * UnbindClusterResourcePackages response structure.
+ * @class
+ */
+class UnbindClusterResourcePackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7884,24 +11384,48 @@ class SaleRegion extends  AbstractModel {
 }
 
 /**
- * RestartInstance response structure.
+ * DescribeResourcePackageDetail request structure.
  * @class
  */
-class RestartInstanceResponse extends  AbstractModel {
+class DescribeResourcePackageDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID
-         * @type {number || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique ID of a resource pack
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PackageId = null;
+
+        /**
+         * Instance ID
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Offset
+         * @type {string || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit
+         * @type {string || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -7912,8 +11436,12 @@ class RestartInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -8039,6 +11567,34 @@ class ActivateInstanceResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountDescription response structure.
+ * @class
+ */
+class ModifyAccountDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8314,6 +11870,78 @@ class AddInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterDatabase request structure.
+ * @class
+ */
+class ModifyClusterDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Host permissions of the new authorized user
+         * @type {Array.<UserHostPrivilege> || null}
+         */
+        this.NewUserHostPrivileges = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Host permissions of previously authorized users
+         * @type {Array.<UserHostPrivilege> || null}
+         */
+        this.OldUserHostPrivileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+
+        if (params.NewUserHostPrivileges) {
+            this.NewUserHostPrivileges = new Array();
+            for (let z in params.NewUserHostPrivileges) {
+                let obj = new UserHostPrivilege();
+                obj.deserialize(params.NewUserHostPrivileges[z]);
+                this.NewUserHostPrivileges.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.OldUserHostPrivileges) {
+            this.OldUserHostPrivileges = new Array();
+            for (let z in params.OldUserHostPrivileges) {
+                let obj = new UserHostPrivilege();
+                obj.deserialize(params.OldUserHostPrivileges[z]);
+                this.OldUserHostPrivileges.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * InquirePriceCreate response structure.
  * @class
  */
@@ -8403,6 +12031,56 @@ class ModifyClusterSlaveZoneRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.OldSlaveZone = 'OldSlaveZone' in params ? params.OldSlaveZone : null;
         this.NewSlaveZone = 'NewSlaveZone' in params ? params.NewSlaveZone : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceErrorLogs response structure.
+ * @class
+ */
+class DescribeInstanceErrorLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of logs Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Error log list Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CynosdbErrorLogItem> || null}
+         */
+        this.ErrorLogs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ErrorLogs) {
+            this.ErrorLogs = new Array();
+            for (let z in params.ErrorLogs) {
+                let obj = new CynosdbErrorLogItem();
+                obj.deserialize(params.ErrorLogs[z]);
+                this.ErrorLogs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8711,6 +12389,69 @@ class RuleFilters extends  AbstractModel {
 }
 
 /**
+ * RefundResourcePackage response structure.
+ * @class
+ */
+class RefundResourcePackageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Each item has only one `dealName`, through which you can ensure the idempotency of the delivery API.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteClusterDatabase response structure.
+ * @class
+ */
+class DeleteClusterDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Cluster details
  * @class
  */
@@ -8737,6 +12478,19 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.Region = null;
 
         /**
+         * AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Physical AZ
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PhysicalZone = null;
+
+        /**
          * Status
          * @type {string || null}
          */
@@ -8747,6 +12501,51 @@ class CynosdbClusterDetail extends  AbstractModel {
          * @type {string || null}
          */
         this.StatusDesc = null;
+
+        /**
+         * Serverless cluster status when the database type is `SERVERLESS`. Valid values:
+resume
+resuming
+pause
+pausing
+         * @type {string || null}
+         */
+        this.ServerlessStatus = null;
+
+        /**
+         * Storage ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StorageId = null;
+
+        /**
+         * Storage capacity in GB
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Maximum storage specification in GB
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxStorageSize = null;
+
+        /**
+         * Minimum storage specification in GB
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinStorageSize = null;
+
+        /**
+         * Storage billing mode. Valid values: `1` (monthly subscription), `0` (pay-as-you-go).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StoragePayMode = null;
 
         /**
          * VPC name
@@ -8791,40 +12590,30 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.DbType = null;
 
         /**
+         * Database type. Valid values: `normal`, `serverless`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbMode = null;
+
+        /**
          * Database version
          * @type {string || null}
          */
         this.DbVersion = null;
 
         /**
+         * Maximum storage space
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StorageLimit = null;
+
+        /**
          * Used capacity
          * @type {number || null}
          */
         this.UsedStorage = null;
-
-        /**
-         * vport for read/write separation
-         * @type {Array.<Addr> || null}
-         */
-        this.RoAddr = null;
-
-        /**
-         * Instance information
-         * @type {Array.<ClusterInstanceDetail> || null}
-         */
-        this.InstanceSet = null;
-
-        /**
-         * Billing mode
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Expiration time
-         * @type {string || null}
-         */
-        this.PeriodEndTime = null;
 
         /**
          * VIP
@@ -8839,102 +12628,10 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.Vport = null;
 
         /**
-         * Project ID
-         * @type {number || null}
+         * vport for read/write separation
+         * @type {Array.<Addr> || null}
          */
-        this.ProjectID = null;
-
-        /**
-         * AZ
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Array of tags bound to instance
-         * @type {Array.<Tag> || null}
-         */
-        this.ResourceTags = null;
-
-        /**
-         * Serverless cluster status when the database type is `SERVERLESS`. Valid values:
-resume
-resuming
-pause
-pausing
-         * @type {string || null}
-         */
-        this.ServerlessStatus = null;
-
-        /**
-         * Binlog switch. Valid values: `ON`, `OFF`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LogBin = null;
-
-        /**
-         * PITR type. Valid values: `normal`, `redo_pitr`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PitrType = null;
-
-        /**
-         * Physical AZ
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PhysicalZone = null;
-
-        /**
-         * Storage ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StorageId = null;
-
-        /**
-         * Storage capacity in GB
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Maximum storage specification in GB
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxStorageSize = null;
-
-        /**
-         * Minimum storage specification in GB
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MinStorageSize = null;
-
-        /**
-         * Storage billing mode. Valid values: `1` (monthly subscription), `0` (pay-as-you-go).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.StoragePayMode = null;
-
-        /**
-         * Database type. Valid values: `normal`, `serverless`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DbMode = null;
-
-        /**
-         * Maximum storage space
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.StorageLimit = null;
+        this.RoAddr = null;
 
         /**
          * Features supported by the cluster
@@ -8993,6 +12690,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SlaveZones = null;
 
         /**
+         * Instance information
+         * @type {Array.<ClusterInstanceDetail> || null}
+         */
+        this.InstanceSet = null;
+
+        /**
+         * Billing mode
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Expiration time
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+        /**
+         * Array of tags bound to instance
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
          * Proxy status
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -9000,11 +12727,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProxyStatus = null;
 
         /**
+         * Binlog switch. Valid values: `ON`, `OFF`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogBin = null;
+
+        /**
          * Whether to skip the transaction
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IsSkipTrade = null;
+
+        /**
+         * PITR type. Valid values: `normal`, `redo_pitr`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PitrType = null;
 
         /**
          * Whether to enable password complexity
@@ -9020,6 +12761,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.NetworkStatus = null;
 
+        /**
+         * Information of the resource pack bound to a cluster Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ResourcePackage> || null}
+         */
+        this.ResourcePackages = null;
+
+        /**
+         * The auto-renewal flag. Valid values: `0`: (manual renewal, default), `1` (auto-renewal). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
     }
 
     /**
@@ -9032,8 +12785,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
         this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.PhysicalZone = 'PhysicalZone' in params ? params.PhysicalZone : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
+        this.StorageId = 'StorageId' in params ? params.StorageId : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.MaxStorageSize = 'MaxStorageSize' in params ? params.MaxStorageSize : null;
+        this.MinStorageSize = 'MinStorageSize' in params ? params.MinStorageSize : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
@@ -9041,8 +12802,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Charset = 'Charset' in params ? params.Charset : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
         this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.UsedStorage = 'UsedStorage' in params ? params.UsedStorage : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
         if (params.RoAddr) {
             this.RoAddr = new Array();
@@ -9052,41 +12817,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.RoAddr.push(obj);
             }
         }
-
-        if (params.InstanceSet) {
-            this.InstanceSet = new Array();
-            for (let z in params.InstanceSet) {
-                let obj = new ClusterInstanceDetail();
-                obj.deserialize(params.InstanceSet[z]);
-                this.InstanceSet.push(obj);
-            }
-        }
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-
-        if (params.ResourceTags) {
-            this.ResourceTags = new Array();
-            for (let z in params.ResourceTags) {
-                let obj = new Tag();
-                obj.deserialize(params.ResourceTags[z]);
-                this.ResourceTags.push(obj);
-            }
-        }
-        this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
-        this.LogBin = 'LogBin' in params ? params.LogBin : null;
-        this.PitrType = 'PitrType' in params ? params.PitrType : null;
-        this.PhysicalZone = 'PhysicalZone' in params ? params.PhysicalZone : null;
-        this.StorageId = 'StorageId' in params ? params.StorageId : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.MaxStorageSize = 'MaxStorageSize' in params ? params.MaxStorageSize : null;
-        this.MinStorageSize = 'MinStorageSize' in params ? params.MinStorageSize : null;
-        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
-        this.DbMode = 'DbMode' in params ? params.DbMode : null;
-        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
 
         if (params.Ability) {
             let obj = new Ability();
@@ -9108,10 +12838,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
         this.SlaveZones = 'SlaveZones' in params ? params.SlaveZones : null;
+
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new ClusterInstanceDetail();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
+            }
+        }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
         this.ProxyStatus = 'ProxyStatus' in params ? params.ProxyStatus : null;
+        this.LogBin = 'LogBin' in params ? params.LogBin : null;
         this.IsSkipTrade = 'IsSkipTrade' in params ? params.IsSkipTrade : null;
+        this.PitrType = 'PitrType' in params ? params.PitrType : null;
         this.IsOpenPasswordComplexity = 'IsOpenPasswordComplexity' in params ? params.IsOpenPasswordComplexity : null;
         this.NetworkStatus = 'NetworkStatus' in params ? params.NetworkStatus : null;
+
+        if (params.ResourcePackages) {
+            this.ResourcePackages = new Array();
+            for (let z in params.ResourcePackages) {
+                let obj = new ResourcePackage();
+                obj.deserialize(params.ResourcePackages[z]);
+                this.ResourcePackages.push(obj);
+            }
+        }
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -9166,46 +12929,10 @@ class ResetAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
- * SearchClusterDatabases response structure.
+ * DescribeInstanceErrorLogs request structure.
  * @class
  */
-class SearchClusterDatabasesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Database List
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Databases = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Databases = 'Databases' in params ? params.Databases : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeInstanceDetail request structure.
- * @class
- */
-class DescribeInstanceDetailRequest extends  AbstractModel {
+class DescribeInstanceErrorLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -9214,6 +12941,54 @@ class DescribeInstanceDetailRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Limit on the number of logs
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset of the log number
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Sorting field. Valid value: 'Timestamp'.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `ASC`, `DESC`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
+         * @type {Array.<string> || null}
+         */
+        this.LogLevels = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.KeyWords = null;
 
     }
 
@@ -9225,17 +13000,87 @@ class DescribeInstanceDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.LogLevels = 'LogLevels' in params ? params.LogLevels : null;
+        this.KeyWords = 'KeyWords' in params ? params.KeyWords : null;
 
     }
 }
 
 /**
- * ModifyMaintainPeriodConfig response structure.
+ * DeleteClusterDatabase request structure.
  * @class
  */
-class ModifyMaintainPeriodConfigResponse extends  AbstractModel {
+class DeleteClusterDatabaseRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DbNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.DbNames = 'DbNames' in params ? params.DbNames : null;
+
+    }
+}
+
+/**
+ * Details of whether the parameter can be modified
+ * @class
+ */
+class ModifiableInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeInstanceParams response structure.
+ * @class
+ */
+class DescribeInstanceParamsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of instance parameters
+         * @type {Array.<InstanceParamItem> || null}
+         */
+        this.Items = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9251,6 +13096,15 @@ class ModifyMaintainPeriodConfigResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new InstanceParamItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -9295,6 +13149,49 @@ class ModifyBackupNameRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
+
+    }
+}
+
+/**
+ * DeleteAccounts request structure.
+ * @class
+ */
+class DeleteAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Accounts in array, which contains `account` and `host`.
+         * @type {Array.<InputAccount> || null}
+         */
+        this.Accounts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new InputAccount();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
 
     }
 }
@@ -9371,10 +13268,10 @@ class DescribeBinlogSaveDaysResponse extends  AbstractModel {
 }
 
 /**
- * ModifyClusterParam request structure.
+ * DescribeAccountPrivileges request structure.
  * @class
  */
-class ModifyClusterParamRequest extends  AbstractModel {
+class DescribeAccountPrivilegesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -9385,16 +13282,34 @@ class ModifyClusterParamRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
-         * @type {Array.<ParamItem> || null}
-         */
-        this.ParamList = null;
-
-        /**
-         * Valid values: `yes` (execute during maintenance time), `no` (execute now)
+         * Account name
          * @type {string || null}
          */
-        this.IsInMaintainPeriod = null;
+        this.AccountName = null;
+
+        /**
+         * Host
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * When the database name is “*”, the value specified in `Type` and `TableName` will be ignored, indicating that the user's global permissions are being modified.
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Object type in a specified database. Valid values: `table`, `*`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The database name can be specified when `Type` is 'table'.
+         * @type {string || null}
+         */
+        this.TableName = null;
 
     }
 
@@ -9406,16 +13321,83 @@ class ModifyClusterParamRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
 
-        if (params.ParamList) {
-            this.ParamList = new Array();
-            for (let z in params.ParamList) {
-                let obj = new ParamItem();
-                obj.deserialize(params.ParamList[z]);
-                this.ParamList.push(obj);
+    }
+}
+
+/**
+ * Parameter template information
+ * @class
+ */
+class ParamTemplateListInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Parameter template name
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.TemplateDescription = null;
+
+        /**
+         * Engine version
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Database Type. Valid values: `NORMAL`, `SERVERLESS`.
+         * @type {string || null}
+         */
+        this.DbMode = null;
+
+        /**
+         * Parameter template details
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TemplateParamInfo> || null}
+         */
+        this.ParamInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+
+        if (params.ParamInfoSet) {
+            this.ParamInfoSet = new Array();
+            for (let z in params.ParamInfoSet) {
+                let obj = new TemplateParamInfo();
+                obj.deserialize(params.ParamInfoSet[z]);
+                this.ParamInfoSet.push(obj);
             }
         }
-        this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
 
     }
 }
@@ -9502,6 +13484,77 @@ class RollbackTimeRange extends  AbstractModel {
         }
         this.TimeRangeStart = 'TimeRangeStart' in params ? params.TimeRangeStart : null;
         this.TimeRangeEnd = 'TimeRangeEnd' in params ? params.TimeRangeEnd : null;
+
+    }
+}
+
+/**
+ * CreateClusterDatabase request structure.
+ * @class
+ */
+class CreateClusterDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Character set
+         * @type {string || null}
+         */
+        this.CharacterSet = null;
+
+        /**
+         * Collation
+         * @type {string || null}
+         */
+        this.CollateRule = null;
+
+        /**
+         * Host permissions of the authorized user
+         * @type {Array.<UserHostPrivilege> || null}
+         */
+        this.UserHostPrivileges = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
+        this.CollateRule = 'CollateRule' in params ? params.CollateRule : null;
+
+        if (params.UserHostPrivileges) {
+            this.UserHostPrivileges = new Array();
+            for (let z in params.UserHostPrivileges) {
+                let obj = new UserHostPrivilege();
+                obj.deserialize(params.UserHostPrivileges[z]);
+                this.UserHostPrivileges.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -9750,18 +13803,96 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * OfflineInstance response structure.
+ * The export format for an error log
  * @class
  */
-class OfflineInstanceResponse extends  AbstractModel {
+class ErrorLogItemExport extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task flow ID
+         * Time Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Log level. Valid values: `error`, `warning`, `note`. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Log content Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * DescribeParamTemplateDetail response structure.
+ * @class
+ */
+class DescribeParamTemplateDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.TemplateId = null;
+
+        /**
+         * Parameter template name
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.TemplateDescription = null;
+
+        /**
+         * Engine version
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Total number of parameters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of parameters
+         * @type {Array.<ParamDetail> || null}
+         */
+        this.Items = null;
+
+        /**
+         * Database type. Valid values:  `NORMAL`, `SERVERLESS`.
+         * @type {string || null}
+         */
+        this.DbMode = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9778,7 +13909,49 @@ class OfflineInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParamDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyBinlogSaveDays response structure.
+ * @class
+ */
+class ModifyBinlogSaveDaysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9871,6 +14044,41 @@ class Module extends  AbstractModel {
         }
         this.IsDisable = 'IsDisable' in params ? params.IsDisable : null;
         this.ModuleName = 'ModuleName' in params ? params.ModuleName : null;
+
+    }
+}
+
+/**
+ * ModifyVipVport response structure.
+ * @class
+ */
+class ModifyVipVportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10007,6 +14215,34 @@ class DescribeInstanceSlowQueriesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyResourcePackageClusters response structure.
+ * @class
+ */
+class ModifyResourcePackageClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBinlogs request structure.
  * @class
  */
@@ -10058,6 +14294,41 @@ class DescribeBinlogsRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Account. Valid values: `accountName`, `host`.
+ * @class
+ */
+class InputAccount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
+        /**
+         * Host. Default value: `%`
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -10234,175 +14505,262 @@ class ModifyAuditRuleTemplatesResponse extends  AbstractModel {
 module.exports = {
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
+    DescribeResourcePackageListResponse: DescribeResourcePackageListResponse,
     InquirePriceRenewRequest: InquirePriceRenewRequest,
+    DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     InstanceAuditRule: InstanceAuditRule,
-    ModifiableInfo: ModifiableInfo,
+    CreateResourcePackageRequest: CreateResourcePackageRequest,
+    DescribeClusterDetailDatabasesRequest: DescribeClusterDetailDatabasesRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     ModifyAuditRuleTemplatesRequest: ModifyAuditRuleTemplatesRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
-    DescribeZonesRequest: DescribeZonesRequest,
+    BillingResourceInfo: BillingResourceInfo,
+    ModifyClusterPasswordComplexityResponse: ModifyClusterPasswordComplexityResponse,
     ModifyBackupNameResponse: ModifyBackupNameResponse,
     SwitchClusterZoneResponse: SwitchClusterZoneResponse,
-    ModifyParamItem: ModifyParamItem,
+    DescribeResourcePackageDetailResponse: DescribeResourcePackageDetailResponse,
+    DescribeClusterPasswordComplexityRequest: DescribeClusterPasswordComplexityRequest,
     QueryFilter: QueryFilter,
     DescribeBinlogDownloadUrlRequest: DescribeBinlogDownloadUrlRequest,
     CreateAccountsResponse: CreateAccountsResponse,
     ModifyInstanceNameRequest: ModifyInstanceNameRequest,
+    ModifyClusterDatabaseResponse: ModifyClusterDatabaseResponse,
+    UpgradeClusterVersionResponse: UpgradeClusterVersionResponse,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
-    DescribeMaintainPeriodRequest: DescribeMaintainPeriodRequest,
+    CloseWanResponse: CloseWanResponse,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
+    DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    DescribeZonesRequest: DescribeZonesRequest,
     ClusterInstanceDetail: ClusterInstanceDetail,
     AddClusterSlaveZoneResponse: AddClusterSlaveZoneResponse,
     OldAddrInfo: OldAddrInfo,
+    SlowQueriesItem: SlowQueriesItem,
     DescribeClusterParamsResponse: DescribeClusterParamsResponse,
+    CloseWanRequest: CloseWanRequest,
+    BindClusterResourcePackagesRequest: BindClusterResourcePackagesRequest,
     IsolateInstanceResponse: IsolateInstanceResponse,
     ModifyInstanceNameResponse: ModifyInstanceNameResponse,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
+    CopyClusterPasswordComplexityResponse: CopyClusterPasswordComplexityResponse,
+    Tag: Tag,
+    DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     SearchClusterTablesRequest: SearchClusterTablesRequest,
-    PauseServerlessRequest: PauseServerlessRequest,
-    ObjectTask: ObjectTask,
+    ModifyResourcePackageClustersRequest: ModifyResourcePackageClustersRequest,
+    DeleteParamTemplateRequest: DeleteParamTemplateRequest,
+    DbInfo: DbInfo,
     DescribeFlowResponse: DescribeFlowResponse,
+    SetRenewFlagResponse: SetRenewFlagResponse,
+    ExportInstanceErrorLogsRequest: ExportInstanceErrorLogsRequest,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
+    OfflineClusterRequest: OfflineClusterRequest,
+    DescribeClusterDetailDatabasesResponse: DescribeClusterDetailDatabasesResponse,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
-    SlowQueriesItem: SlowQueriesItem,
+    CreateParamTemplateResponse: CreateParamTemplateResponse,
     ActivateInstanceRequest: ActivateInstanceRequest,
     DatabaseTables: DatabaseTables,
     AddClusterSlaveZoneRequest: AddClusterSlaveZoneRequest,
+    RemoveClusterSlaveZoneResponse: RemoveClusterSlaveZoneResponse,
+    CynosdbErrorLogItem: CynosdbErrorLogItem,
+    UpgradeClusterVersionRequest: UpgradeClusterVersionRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     ModifyVipVportRequest: ModifyVipVportRequest,
+    DatabasePrivileges: DatabasePrivileges,
     DescribeClustersRequest: DescribeClustersRequest,
-    DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
+    CloseClusterPasswordComplexityRequest: CloseClusterPasswordComplexityRequest,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    OpenReadOnlyInstanceExclusiveAccessResponse: OpenReadOnlyInstanceExclusiveAccessResponse,
     DescribeClusterInstanceGrpsRequest: DescribeClusterInstanceGrpsRequest,
     DescribeResourcesByDealNameResponse: DescribeResourcesByDealNameResponse,
     InstanceNetInfo: InstanceNetInfo,
     CreateAccountsRequest: CreateAccountsRequest,
     DeleteAuditRuleTemplatesRequest: DeleteAuditRuleTemplatesRequest,
     DescribeAuditRuleTemplatesResponse: DescribeAuditRuleTemplatesResponse,
+    Package: Package,
     SwitchClusterZoneRequest: SwitchClusterZoneRequest,
-    RestartInstanceRequest: RestartInstanceRequest,
+    InstanceParamItem: InstanceParamItem,
+    DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     Ability: Ability,
     InstanceInitInfo: InstanceInitInfo,
+    PackageDetail: PackageDetail,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
     SwitchClusterVpcResponse: SwitchClusterVpcResponse,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     DeleteBackupResponse: DeleteBackupResponse,
-    Tag: Tag,
+    ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
-    RemoveClusterSlaveZoneResponse: RemoveClusterSlaveZoneResponse,
+    ModifyResourcePackageNameRequest: ModifyResourcePackageNameRequest,
+    OpenWanResponse: OpenWanResponse,
     PauseServerlessResponse: PauseServerlessResponse,
-    OfflineClusterRequest: OfflineClusterRequest,
+    ParamDetail: ParamDetail,
+    DeleteAccountsResponse: DeleteAccountsResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     NewAccount: NewAccount,
     BackupFileInfo: BackupFileInfo,
+    TablePrivileges: TablePrivileges,
     DescribeBinlogDownloadUrlResponse: DescribeBinlogDownloadUrlResponse,
+    BindInstanceInfo: BindInstanceInfo,
     DescribeAuditRuleWithInstanceIdsResponse: DescribeAuditRuleWithInstanceIdsResponse,
+    ModifyResourcePackageNameResponse: ModifyResourcePackageNameResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
     SearchClusterDatabasesRequest: SearchClusterDatabasesRequest,
     SwitchClusterVpcRequest: SwitchClusterVpcRequest,
+    CreateResourcePackageResponse: CreateResourcePackageResponse,
     CynosdbInstance: CynosdbInstance,
+    DescribeClusterPasswordComplexityResponse: DescribeClusterPasswordComplexityResponse,
     DescribeAuditRuleWithInstanceIdsRequest: DescribeAuditRuleWithInstanceIdsRequest,
+    ExportInstanceErrorLogsResponse: ExportInstanceErrorLogsResponse,
     ModifyClusterSlaveZoneResponse: ModifyClusterSlaveZoneResponse,
+    ParamItemDetail: ParamItemDetail,
     RemoveClusterSlaveZoneRequest: RemoveClusterSlaveZoneRequest,
     BinlogItem: BinlogItem,
+    ModifyParamItem: ModifyParamItem,
     ModifyAuditServiceRequest: ModifyAuditServiceRequest,
     CreateClustersRequest: CreateClustersRequest,
+    UserHostPrivilege: UserHostPrivilege,
     DescribeClustersResponse: DescribeClustersResponse,
+    OpenAuditServiceRequest: OpenAuditServiceRequest,
+    RefundResourcePackageRequest: RefundResourcePackageRequest,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
-    ModifyVipVportResponse: ModifyVipVportResponse,
+    ModifyBinlogSaveDaysRequest: ModifyBinlogSaveDaysRequest,
+    ResumeServerlessResponse: ResumeServerlessResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     CloseAuditServiceRequest: CloseAuditServiceRequest,
     AddInstancesResponse: AddInstancesResponse,
     Addr: Addr,
-    ParamTemplateListInfo: ParamTemplateListInfo,
+    SalePackageSpec: SalePackageSpec,
+    PauseServerlessRequest: PauseServerlessRequest,
+    ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     ParamInfo: ParamInfo,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     ModifyClusterParamResponse: ModifyClusterParamResponse,
     SecurityGroup: SecurityGroup,
+    BindClusterResourcePackagesResponse: BindClusterResourcePackagesResponse,
     DescribeBackupDownloadUrlRequest: DescribeBackupDownloadUrlRequest,
+    SearchClusterDatabasesResponse: SearchClusterDatabasesResponse,
     OfflineInstanceRequest: OfflineInstanceRequest,
-    OpenAuditServiceRequest: OpenAuditServiceRequest,
+    ModifyClusterPasswordComplexityRequest: ModifyClusterPasswordComplexityRequest,
+    OpenWanRequest: OpenWanRequest,
+    UnbindClusterResourcePackagesRequest: UnbindClusterResourcePackagesRequest,
+    OpenClusterPasswordComplexityResponse: OpenClusterPasswordComplexityResponse,
+    DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
+    DescribeResourcePackageSaleSpecResponse: DescribeResourcePackageSaleSpecResponse,
+    OfflineInstanceResponse: OfflineInstanceResponse,
+    ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     NetAddr: NetAddr,
+    ResourcePackage: ResourcePackage,
+    RestartInstanceResponse: RestartInstanceResponse,
+    CopyClusterPasswordComplexityRequest: CopyClusterPasswordComplexityRequest,
     TemplateParamInfo: TemplateParamInfo,
     DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
     CreateBackupResponse: CreateBackupResponse,
+    ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,
     AuditRuleTemplateInfo: AuditRuleTemplateInfo,
     DescribeInstanceSlowQueriesResponse: DescribeInstanceSlowQueriesResponse,
+    ModifyAccountHostResponse: ModifyAccountHostResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
+    OpenReadOnlyInstanceExclusiveAccessRequest: OpenReadOnlyInstanceExclusiveAccessRequest,
+    CloseClusterPasswordComplexityResponse: CloseClusterPasswordComplexityResponse,
+    DescribeMaintainPeriodRequest: DescribeMaintainPeriodRequest,
     DescribeBackupDownloadUrlResponse: DescribeBackupDownloadUrlResponse,
     ResumeServerlessRequest: ResumeServerlessRequest,
     InquirePriceCreateRequest: InquirePriceCreateRequest,
+    OpenClusterPasswordComplexityRequest: OpenClusterPasswordComplexityRequest,
     CreateAuditRuleTemplateRequest: CreateAuditRuleTemplateRequest,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
     ExportInstanceSlowQueriesRequest: ExportInstanceSlowQueriesRequest,
+    ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ParamItem: ParamItem,
+    ModifyClusterParamRequest: ModifyClusterParamRequest,
     CynosdbCluster: CynosdbCluster,
     CreateAuditRuleTemplateResponse: CreateAuditRuleTemplateResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     IsolateClusterResponse: IsolateClusterResponse,
+    DescribeResourcePackageListRequest: DescribeResourcePackageListRequest,
     SaleZone: SaleZone,
-    SetRenewFlagResponse: SetRenewFlagResponse,
+    ModifyParamTemplateRequest: ModifyParamTemplateRequest,
+    ObjectTask: ObjectTask,
     OpenAuditServiceResponse: OpenAuditServiceResponse,
     OfflineClusterResponse: OfflineClusterResponse,
     SwitchProxyVpcResponse: SwitchProxyVpcResponse,
-    ResumeServerlessResponse: ResumeServerlessResponse,
+    DescribeParamTemplateDetailRequest: DescribeParamTemplateDetailRequest,
+    ModifyAccountHostRequest: ModifyAccountHostRequest,
+    CreateParamTemplateRequest: CreateParamTemplateRequest,
     DescribeAuditRuleTemplatesRequest: DescribeAuditRuleTemplatesRequest,
     InstanceSpec: InstanceSpec,
     DescribeFlowRequest: DescribeFlowRequest,
+    RestartInstanceRequest: RestartInstanceRequest,
     IsolateInstanceRequest: IsolateInstanceRequest,
-    BillingResourceInfo: BillingResourceInfo,
+    ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
+    CreateClusterDatabaseResponse: CreateClusterDatabaseResponse,
     ExportInstanceSlowQueriesResponse: ExportInstanceSlowQueriesResponse,
     SearchClusterTablesResponse: SearchClusterTablesResponse,
     PolicyRule: PolicyRule,
+    DescribeResourcePackageSaleSpecRequest: DescribeResourcePackageSaleSpecRequest,
+    UnbindClusterResourcePackagesResponse: UnbindClusterResourcePackagesResponse,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
     SwitchProxyVpcRequest: SwitchProxyVpcRequest,
     DescribeBackupListResponse: DescribeBackupListResponse,
     SaleRegion: SaleRegion,
-    RestartInstanceResponse: RestartInstanceResponse,
+    DescribeResourcePackageDetailRequest: DescribeResourcePackageDetailRequest,
     DescribeBinlogSaveDaysRequest: DescribeBinlogSaveDaysRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     ActivateInstanceResponse: ActivateInstanceResponse,
+    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DescribeRollbackTimeValidityRequest: DescribeRollbackTimeValidityRequest,
     IsolateClusterRequest: IsolateClusterRequest,
     DescribeClusterInstanceGrpsResponse: DescribeClusterInstanceGrpsResponse,
     AddInstancesRequest: AddInstancesRequest,
+    ModifyClusterDatabaseRequest: ModifyClusterDatabaseRequest,
     InquirePriceCreateResponse: InquirePriceCreateResponse,
     ModifyClusterSlaveZoneRequest: ModifyClusterSlaveZoneRequest,
+    DescribeInstanceErrorLogsResponse: DescribeInstanceErrorLogsResponse,
     CynosdbInstanceDetail: CynosdbInstanceDetail,
     RuleFilters: RuleFilters,
+    RefundResourcePackageResponse: RefundResourcePackageResponse,
+    DeleteClusterDatabaseResponse: DeleteClusterDatabaseResponse,
     CynosdbClusterDetail: CynosdbClusterDetail,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
-    SearchClusterDatabasesResponse: SearchClusterDatabasesResponse,
-    DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
-    ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
+    DescribeInstanceErrorLogsRequest: DescribeInstanceErrorLogsRequest,
+    DeleteClusterDatabaseRequest: DeleteClusterDatabaseRequest,
+    ModifiableInfo: ModifiableInfo,
+    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     ModifyBackupNameRequest: ModifyBackupNameRequest,
+    DeleteAccountsRequest: DeleteAccountsRequest,
     AuditRuleFilters: AuditRuleFilters,
     DescribeBinlogSaveDaysResponse: DescribeBinlogSaveDaysResponse,
-    ModifyClusterParamRequest: ModifyClusterParamRequest,
+    DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
+    ParamTemplateListInfo: ParamTemplateListInfo,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
+    CreateClusterDatabaseRequest: CreateClusterDatabaseRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     TradePrice: TradePrice,
     DescribeClusterParamsRequest: DescribeClusterParamsRequest,
     CloseAuditServiceResponse: CloseAuditServiceResponse,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
-    OfflineInstanceResponse: OfflineInstanceResponse,
+    ErrorLogItemExport: ErrorLogItemExport,
+    DescribeParamTemplateDetailResponse: DescribeParamTemplateDetailResponse,
+    ModifyBinlogSaveDaysResponse: ModifyBinlogSaveDaysResponse,
     ModifyAuditServiceResponse: ModifyAuditServiceResponse,
     DeleteAuditRuleTemplatesResponse: DeleteAuditRuleTemplatesResponse,
     Module: Module,
+    ModifyVipVportResponse: ModifyVipVportResponse,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     DescribeInstanceSlowQueriesRequest: DescribeInstanceSlowQueriesRequest,
+    ModifyResourcePackageClustersResponse: ModifyResourcePackageClustersResponse,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
+    InputAccount: InputAccount,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     ZoneStockInfo: ZoneStockInfo,
     InquirePriceRenewResponse: InquirePriceRenewResponse,

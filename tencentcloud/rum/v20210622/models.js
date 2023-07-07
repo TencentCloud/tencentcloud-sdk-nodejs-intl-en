@@ -90,6 +90,12 @@ class CreateTawInstanceRequest extends  AbstractModel {
          */
         this.ResourcePackageNum = null;
 
+        /**
+         * Instance type. `1`: Web; `2`: Application
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -118,6 +124,7 @@ class CreateTawInstanceRequest extends  AbstractModel {
         this.BuyingChannel = 'BuyingChannel' in params ? params.BuyingChannel : null;
         this.ResourcePackageType = 'ResourcePackageType' in params ? params.ResourcePackageType : null;
         this.ResourcePackageNum = 'ResourcePackageNum' in params ? params.ResourcePackageNum : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -7701,6 +7708,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.ProjectStatus = null;
 
+        /**
+         * Log access point, which can be ignored. 
+Note:  This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessPoint = null;
+
     }
 
     /**
@@ -7726,6 +7740,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.IsStar = 'IsStar' in params ? params.IsStar : null;
         this.ProjectStatus = 'ProjectStatus' in params ? params.ProjectStatus : null;
+        this.AccessPoint = 'AccessPoint' in params ? params.AccessPoint : null;
 
     }
 }

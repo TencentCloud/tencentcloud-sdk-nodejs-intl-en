@@ -52,6 +52,64 @@ class StatisticsItem extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordInfo response structure.
+ * @class
+ */
+class DescribeRecordInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information about the recording task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RecordInfo> || null}
+         */
+        this.RecordInfo = null;
+
+        /**
+         * Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * Room ID.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RecordInfo) {
+            this.RecordInfo = new Array();
+            for (let z in params.RecordInfo) {
+                let obj = new RecordInfo();
+                obj.deserialize(params.RecordInfo[z]);
+                this.RecordInfo.push(obj);
+            }
+        }
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Application usage statistics
  * @class
  */
@@ -1213,7 +1271,7 @@ class CreateAppResp extends  AbstractModel {
         this.RealtimeSpeechConf = null;
 
         /**
-         * Configuration information of Voice Message Service
+         * Configuration information of Voice Messaging
          * @type {VoiceMessageConf || null}
          */
         this.VoiceMessageConf = null;
@@ -1223,6 +1281,12 @@ class CreateAppResp extends  AbstractModel {
          * @type {VoiceFilterConf || null}
          */
         this.VoiceFilterConf = null;
+
+        /**
+         * Configuration information of Speech-to-Text
+         * @type {AsrConf || null}
+         */
+        this.AsrConf = null;
 
     }
 
@@ -1257,12 +1321,18 @@ class CreateAppResp extends  AbstractModel {
             this.VoiceFilterConf = obj;
         }
 
+        if (params.AsrConf) {
+            let obj = new AsrConf();
+            obj.deserialize(params.AsrConf)
+            this.AsrConf = obj;
+        }
+
     }
 }
 
 /**
  * Information about the recording task in a room.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
  * @class
  */
 class RecordInfo extends  AbstractModel {
@@ -1372,6 +1442,30 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * Scenario information. Valid values:
+`RealTime`: Voice Chat analysis;
+`VoiceMessage`: Voice Messaging;
+`GMECloudApi`: GME cloud APIs
+ * @class
+ */
+class SceneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1490,7 +1584,7 @@ class RealtimeSpeechConf extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Voice Chat sound quality. Valid value: `high`.
+         * Voice Chat sound quality type. Valid values: `high` (HD), `ordinary` (SD).
          * @type {string || null}
          */
         this.Quality = null;
@@ -1547,37 +1641,18 @@ class DescribeAppStatisticsResp extends  AbstractModel {
 }
 
 /**
- * DescribeRecordInfo response structure.
+ * Configuration information of Speech-to-Text
  * @class
  */
-class DescribeRecordInfoResponse extends  AbstractModel {
+class AsrConf extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Information about the recording task.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RecordInfo> || null}
-         */
-        this.RecordInfo = null;
-
-        /**
-         * Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
-         * @type {number || null}
-         */
-        this.RecordMode = null;
-
-        /**
-         * Room ID.
+         * Speech-to-Text status. Valid values: `open`, `close`.
          * @type {string || null}
          */
-        this.RoomId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Status = null;
 
     }
 
@@ -1588,18 +1663,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.RecordInfo) {
-            this.RecordInfo = new Array();
-            for (let z in params.RecordInfo) {
-                let obj = new RecordInfo();
-                obj.deserialize(params.RecordInfo[z]);
-                this.RecordInfo.push(obj);
-            }
-        }
-        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1728,13 +1792,15 @@ class CreateAppRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * List of engines to be supported. All values are selected by default.
+         * List of engines to be supported.
+Valid values: `android`, `ios`, `unity`, `cocos`, `unreal`, `windows`. All values are selected by default.
          * @type {Array.<string> || null}
          */
         this.EngineList = null;
 
         /**
-         * Service region list. All values are selected by default.
+         * List of regions.
+Valid values: `mainland` (Chinese mainland), `hmt` (Hong Kong, Macao and Taiwan (China)), `sea` (Southeast Asia), `na` (North America), `eu` (Europe), `jpkr` (Japan, Korea and Asia Pacific), `sa` (South America), `oc` (Oceania), `me` (Middle East). All values are selected by default.
          * @type {Array.<string> || null}
          */
         this.RegionList = null;
@@ -1746,7 +1812,7 @@ class CreateAppRequest extends  AbstractModel {
         this.RealtimeSpeechConf = null;
 
         /**
-         * Configuration information of Voice Message Service
+         * Configuration information of Voice Messaging
          * @type {VoiceMessageConf || null}
          */
         this.VoiceMessageConf = null;
@@ -1756,6 +1822,12 @@ class CreateAppRequest extends  AbstractModel {
          * @type {VoiceFilterConf || null}
          */
         this.VoiceFilterConf = null;
+
+        /**
+         * Configuration information of Speech-to-Text
+         * @type {AsrConf || null}
+         */
+        this.AsrConf = null;
 
         /**
          * List of tags to be added
@@ -1793,6 +1865,12 @@ class CreateAppRequest extends  AbstractModel {
             let obj = new VoiceFilterConf();
             obj.deserialize(params.VoiceFilterConf)
             this.VoiceFilterConf = obj;
+        }
+
+        if (params.AsrConf) {
+            let obj = new AsrConf();
+            obj.deserialize(params.AsrConf)
+            this.AsrConf = obj;
         }
 
         if (params.Tags) {
@@ -1861,6 +1939,13 @@ class VoiceFilterConf extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * Scenario configuration information, such as status and callback URL.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<SceneInfo> || null}
+         */
+        this.SceneInfos = null;
+
     }
 
     /**
@@ -1871,6 +1956,15 @@ class VoiceFilterConf extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.SceneInfos) {
+            this.SceneInfos = new Array();
+            for (let z in params.SceneInfos) {
+                let obj = new SceneInfo();
+                obj.deserialize(params.SceneInfos[z]);
+                this.SceneInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -1905,6 +1999,7 @@ class ModifyRecordInfoResponse extends  AbstractModel {
 
 module.exports = {
     StatisticsItem: StatisticsItem,
+    DescribeRecordInfoResponse: DescribeRecordInfoResponse,
     AppStatisticsItem: AppStatisticsItem,
     DeleteRoomMemberRequest: DeleteRoomMemberRequest,
     ModifyAppStatusRequest: ModifyAppStatusRequest,
@@ -1931,12 +2026,13 @@ module.exports = {
     RecordInfo: RecordInfo,
     SubscribeRecordUserIds: SubscribeRecordUserIds,
     RealtimeTextStatisticsItem: RealtimeTextStatisticsItem,
+    SceneInfo: SceneInfo,
     DeleteResult: DeleteResult,
     OverseaTextStatisticsItem: OverseaTextStatisticsItem,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     RealtimeSpeechConf: RealtimeSpeechConf,
     DescribeAppStatisticsResp: DescribeAppStatisticsResp,
-    DescribeRecordInfoResponse: DescribeRecordInfoResponse,
+    AsrConf: AsrConf,
     CreateAppResponse: CreateAppResponse,
     StopRecordRequest: StopRecordRequest,
     StopRecordResponse: StopRecordResponse,

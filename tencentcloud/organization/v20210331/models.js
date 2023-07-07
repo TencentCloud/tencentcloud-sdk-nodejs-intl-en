@@ -626,13 +626,13 @@ class ListOrganizationIdentityRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset.
+         * Offset.  It must be an integer multiple of the value of `Limit`.  Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of returned results. Maximum value: `50`.
+         * The limit for the number of query results.  Value range:  1-50.  Default value:  `10`.
          * @type {number || null}
          */
         this.Limit = null;
@@ -649,6 +649,12 @@ class ListOrganizationIdentityRequest extends  AbstractModel {
          */
         this.IdentityId = null;
 
+        /**
+         * Identity type.  Valid values: `1` (Preset), `2` (Custom).
+         * @type {number || null}
+         */
+        this.IdentityType = null;
+
     }
 
     /**
@@ -662,6 +668,7 @@ class ListOrganizationIdentityRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
         this.IdentityId = 'IdentityId' in params ? params.IdentityId : null;
+        this.IdentityType = 'IdentityType' in params ? params.IdentityType : null;
 
     }
 }

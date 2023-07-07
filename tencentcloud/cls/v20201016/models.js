@@ -366,12 +366,6 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the log topic to be queried
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
          * Start time of the log to be queried, which is a Unix timestamp in milliseconds
          * @type {number || null}
          */
@@ -390,10 +384,24 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         this.Query = null;
 
         /**
+         * ID of the log topic to be queried
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
          * Interval in milliseconds. Condition: (To – From) / Interval ≤ 200
          * @type {number || null}
          */
         this.Interval = null;
+
+        /**
+         * Search syntax. Valid values:
+`0` (default): Lucene; `1`: CQL
+For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Search Syntax</a>.
+         * @type {number || null}
+         */
+        this.SyntaxRule = null;
 
     }
 
@@ -404,11 +412,12 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.From = 'From' in params ? params.From : null;
         this.To = 'To' in params ? params.To : null;
         this.Query = 'Query' in params ? params.Query : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
+        this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
 
     }
 }
@@ -1129,39 +1138,28 @@ class DescribeAlarmsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> name
+         * name
+- Filter by **alarm policy name**
+- Type: String
+- Required: No
 
-Filter by **alarm policy name**
-Type: string
+alarmId
+- Filter by **alarm policy ID**
+- Type: String
+- Required: No
 
-Required: no
+topicId
+- Filter by **log topic ID**
+- Type: String
+- Required: No
 
-<br><li> alarmId
+enable
+- Filter by **enablement status**
+- Type: String
+- Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an "invalid parameter" error will be returned.
+- Required: No
 
-Filter by **alarm policy ID**
-Type: string
-
-Required: no
-
-<br><li> topicId
-
-Filter by **log topic ID**
-
-Type: string
-
-Required: no
-
-<br><li> enable
-
-Filter by **enablement status**
-
-Type: string
-
-Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an “invalid parameter” error will be returned.
-
-Required: no
-
-Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1785,6 +1783,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Metadata information
+ * @class
+ */
+class MetaTagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metadata key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Metadata value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeExports request structure.
  * @class
  */
@@ -1944,6 +1977,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ParseProtocol = null;
 
+        /**
+         * Metadata type. Valid values:
+0: Do not use metadata.
+1: Use machine group metadata.
+2: Use user-defined metadata.
+3: Use the collection path to extract metadata.
+         * @type {number || null}
+         */
+        this.MetadataType = null;
+
+        /**
+         * Regular expression of the collection path, which is required when `MetadataType` is set to `3`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PathRegex = null;
+
+        /**
+         * User-defined metadata, which is required when `MetadataType` is set to `2`.
+         * @type {Array.<MetaTagInfo> || null}
+         */
+        this.MetaTags = null;
+
     }
 
     /**
@@ -1976,6 +2032,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.Address = 'Address' in params ? params.Address : null;
         this.ParseProtocol = 'ParseProtocol' in params ? params.ParseProtocol : null;
+        this.MetadataType = 'MetadataType' in params ? params.MetadataType : null;
+        this.PathRegex = 'PathRegex' in params ? params.PathRegex : null;
+
+        if (params.MetaTags) {
+            this.MetaTags = new Array();
+            for (let z in params.MetaTags) {
+                let obj = new MetaTagInfo();
+                obj.deserialize(params.MetaTags[z]);
+                this.MetaTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3221,29 +3288,11 @@ class DescribeShippersRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> shipperName
+         * - shipperName: Filter by **shipping rule name**. Type: String. Required: No.
+- shipperId: Filter by **shipping rule ID**. Type: String. Required: No.
+- topicId: Filter by **log topic**. Type: String. Required: No.
 
-Filter by **shipping rule name**.
-Type: String
-
-Required: no
-
-<br><li> shipperId
-
-Filter by **shipping rule ID**.
-Type: String
-
-Required: no
-
-<br><li> topicId
-
-Filter by **log topic**.
-
-Type: String
-
-Required: no
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+Each request can have up to 10 `Filters` and 100 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3547,6 +3596,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ServiceLogging = null;
 
+        /**
+         * Metadata information list of a machine group
+         * @type {Array.<MetaTagInfo> || null}
+         */
+        this.MetaTags = null;
+
     }
 
     /**
@@ -3578,6 +3633,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.UpdateStartTime = 'UpdateStartTime' in params ? params.UpdateStartTime : null;
         this.UpdateEndTime = 'UpdateEndTime' in params ? params.UpdateEndTime : null;
         this.ServiceLogging = 'ServiceLogging' in params ? params.ServiceLogging : null;
+
+        if (params.MetaTags) {
+            this.MetaTags = new Array();
+            for (let z in params.MetaTags) {
+                let obj = new MetaTagInfo();
+                obj.deserialize(params.MetaTags[z]);
+                this.MetaTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3676,37 +3740,27 @@ class DescribeMachineGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> machineGroupName
+         * machineGroupName
+- Filter by **machine group name**
+- Type: String
+- Required: No
 
-Filter by **machine group name**.
-Type: String
+machineGroupId
+- Filter by **machine group ID**
+- Type: String
+- Required: No
 
-Required: no
+tagKey
+- Filter by **tag key**
+- Type: String
+- Required: No
 
-<br><li> machineGroupId
+tag:tagKey
+- Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+- Type: String
+- Required: No
 
-Filter by **machine group ID**.
-Type: String
-
-Required: no
-
-<br><li> tagKey
-
-Filter by **tag key**.
-
-Type: String
-
-Required: no
-
-<br><li> tag:tagKey
-
-Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
-Type: String
-
-Required: no
-
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+Each request can have up to 10 `Filters` and 100 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4295,6 +4349,14 @@ class AlarmTarget extends  AbstractModel {
          */
         this.LogsetId = null;
 
+        /**
+         * Search syntax. Valid values:
+`0` (default): Lucene; `1`: CQL
+For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Search Syntax</a>.
+         * @type {number || null}
+         */
+        this.SyntaxRule = null;
+
     }
 
     /**
@@ -4310,6 +4372,7 @@ class AlarmTarget extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
 
     }
 }
@@ -4684,27 +4747,20 @@ class DescribeConfigsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> configName
+         * configName
+- Filter by fuzzy match of **collection configuration name**
+- Type: String
+- Required: No
 
-Filter by fuzzy match of **collection configuration name**
-Type: String
+configId
+- Filter by **collection configuration ID**
+- Type: String
+- Required: No
 
-Required: no
-
-<br><li> configId
-
-Filter by **collection configuration ID**.
-Type: String
-
-Required: no
-
-<br><li> topicId
-
-Filter by **log topic**.
-
-Type: String
-
-Required: no
+topicId
+- Filter by **log topic**
+- Type: String
+- Required: No
 
 Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
@@ -5311,6 +5367,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MetaFields = null;
 
+        /**
+         * JSON format for shipping. `0`: String format; `1`: Structured format.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.JsonType = null;
+
     }
 
     /**
@@ -5322,6 +5385,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
         this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
+        this.JsonType = 'JsonType' in params ? params.JsonType : null;
 
     }
 }
@@ -5400,6 +5464,18 @@ class CreateShipperRequest extends  AbstractModel {
          */
         this.FilenameMode = null;
 
+        /**
+         * Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -5438,6 +5514,8 @@ class CreateShipperRequest extends  AbstractModel {
             this.Content = obj;
         }
         this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -7590,6 +7668,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.FilenameMode = null;
 
+        /**
+         * Start time for data shipping
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time for data shipping
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Progress of historical data shipping (valid only when the selected data scope contains historical data)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Remaining time required for shipping all historical data (valid only when the selected data scope contains historical data)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RemainTime = null;
+
+        /**
+         * Status of historical data shipping. Valid values:
+0: Real-time data is being shipped.
+1: The system is preparing for historical data shipping.
+2: Historical data is being shipped.
+3: An error occurred while shipping historical data.
+4: Historical data shipping ended.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HistoryStatus = null;
+
     }
 
     /**
@@ -7631,6 +7749,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RemainTime = 'RemainTime' in params ? params.RemainTime : null;
+        this.HistoryStatus = 'HistoryStatus' in params ? params.HistoryStatus : null;
 
     }
 }
@@ -7642,6 +7765,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
 class CreateCosRechargeResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * cos_recharge record ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7658,6 +7788,7 @@ class CreateCosRechargeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7843,6 +7974,12 @@ class ModifyMachineGroupRequest extends  AbstractModel {
          */
         this.ServiceLogging = null;
 
+        /**
+         * Metadata information list of a machine group
+         * @type {Array.<MetaTagInfo> || null}
+         */
+        this.MetaTags = null;
+
     }
 
     /**
@@ -7873,6 +8010,15 @@ class ModifyMachineGroupRequest extends  AbstractModel {
         this.UpdateStartTime = 'UpdateStartTime' in params ? params.UpdateStartTime : null;
         this.UpdateEndTime = 'UpdateEndTime' in params ? params.UpdateEndTime : null;
         this.ServiceLogging = 'ServiceLogging' in params ? params.ServiceLogging : null;
+
+        if (params.MetaTags) {
+            this.MetaTags = new Array();
+            for (let z in params.MetaTags) {
+                let obj = new MetaTagInfo();
+                obj.deserialize(params.MetaTags[z]);
+                this.MetaTags.push(obj);
+            }
+        }
 
     }
 }
@@ -8464,6 +8610,12 @@ class CreateMachineGroupRequest extends  AbstractModel {
          */
         this.ServiceLogging = null;
 
+        /**
+         * Metadata information list of a machine group
+         * @type {Array.<MetaTagInfo> || null}
+         */
+        this.MetaTags = null;
+
     }
 
     /**
@@ -8493,6 +8645,15 @@ class CreateMachineGroupRequest extends  AbstractModel {
         this.UpdateStartTime = 'UpdateStartTime' in params ? params.UpdateStartTime : null;
         this.UpdateEndTime = 'UpdateEndTime' in params ? params.UpdateEndTime : null;
         this.ServiceLogging = 'ServiceLogging' in params ? params.ServiceLogging : null;
+
+        if (params.MetaTags) {
+            this.MetaTags = new Array();
+            for (let z in params.MetaTags) {
+                let obj = new MetaTagInfo();
+                obj.deserialize(params.MetaTags[z]);
+                this.MetaTags.push(obj);
+            }
+        }
 
     }
 }
@@ -9033,37 +9194,27 @@ class DescribeLogsetsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> logsetName
+         * logsetName
+- Filter by **logset name**
+- Type: String
+- Required: No
 
-Filter by **logset name**.
-Type: String
+logsetId
+- Filter by **logset ID**
+- Type: String
+- Required: No
 
-Required: no
+tagKey
+- Filter by **tag key**
+- Type: String
+- Required: No
 
-<br><li> logsetId
+tag:tagKey
+- Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+- Type: String
+- Required: No
 
-Filter by **logset ID**.
-Type: String
-
-Required: no
-
-<br><li> tagKey
-
-Filter by **tag key**.
-
-Type: String
-
-Required: no
-
-<br><li> tag:tagKey
-
-Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
-Type: String
-
-Required: no
-
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+Each request can have up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -9554,6 +9705,7 @@ module.exports = {
     CreateLogsetResponse: CreateLogsetResponse,
     DeleteMachineGroupResponse: DeleteMachineGroupResponse,
     Tag: Tag,
+    MetaTagInfo: MetaTagInfo,
     DescribeExportsRequest: DescribeExportsRequest,
     ExtractRuleInfo: ExtractRuleInfo,
     TopicInfo: TopicInfo,

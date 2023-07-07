@@ -31,12 +31,14 @@ const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const OperationLog = models.OperationLog;
 const RootCertificates = models.RootCertificates;
 const UploadCertificateRequest = models.UploadCertificateRequest;
+const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const Tags = models.Tags;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
+const CreateCertificateResponse = models.CreateCertificateResponse;
 const DeleteCertificateResponse = models.DeleteCertificateResponse;
-const DvAuthDetail = models.DvAuthDetail;
+const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
@@ -44,15 +46,17 @@ const DescribeCertificateRequest = models.DescribeCertificateRequest;
 const ProjectInfo = models.ProjectInfo;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
 const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
-const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
+const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
+const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
 const UploadCertificateResponse = models.UploadCertificateResponse;
-const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const DvAuthDetail = models.DvAuthDetail;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
 const SubmittedData = models.SubmittedData;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
+const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
 const PreAuditInfo = models.PreAuditInfo;
 
 
@@ -78,6 +82,28 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * This API is used to upload the confirmation letter for a certificate.
+     * @param {UploadConfirmLetterRequest} req
+     * @param {function(string, UploadConfirmLetterResponse):void} cb
+     * @public
+     */
+    UploadConfirmLetter(req, cb) {
+        let resp = new UploadConfirmLetterResponse();
+        this.request("UploadConfirmLetter", req, resp, cb);
+    }
+
+    /**
+     * This API is used to purchase a certificate.
+     * @param {CreateCertificateRequest} req
+     * @param {function(string, CreateCertificateResponse):void} cb
+     * @public
+     */
+    CreateCertificate(req, cb) {
+        let resp = new CreateCertificateResponse();
+        this.request("CreateCertificate", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the projects of multiple certificates.
      * @param {ModifyCertificateProjectRequest} req
      * @param {function(string, ModifyCertificateProjectResponse):void} cb
@@ -86,17 +112,6 @@ class SslClient extends AbstractClient {
     ModifyCertificateProject(req, cb) {
         let resp = new ModifyCertificateProjectResponse();
         this.request("ModifyCertificateProject", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upload a certificate.
-     * @param {UploadCertificateRequest} req
-     * @param {function(string, UploadCertificateResponse):void} cb
-     * @public
-     */
-    UploadCertificate(req, cb) {
-        let resp = new UploadCertificateResponse();
-        this.request("UploadCertificate", req, resp, cb);
     }
 
     /**
@@ -130,6 +145,17 @@ class SslClient extends AbstractClient {
     DeleteCertificate(req, cb) {
         let resp = new DeleteCertificateResponse();
         this.request("DeleteCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upload a certificate.
+     * @param {UploadCertificateRequest} req
+     * @param {function(string, UploadCertificateResponse):void} cb
+     * @public
+     */
+    UploadCertificate(req, cb) {
+        let resp = new UploadCertificateResponse();
+        this.request("UploadCertificate", req, resp, cb);
     }
 
     /**

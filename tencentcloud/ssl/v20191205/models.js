@@ -151,6 +151,12 @@ class CommitCertificateInformationRequest extends  AbstractModel {
          */
         this.CertificateId = null;
 
+        /**
+         * Domain validation method
+         * @type {string || null}
+         */
+        this.VerifyType = null;
+
     }
 
     /**
@@ -161,6 +167,7 @@ class CommitCertificateInformationRequest extends  AbstractModel {
             return;
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
 
     }
 }
@@ -994,6 +1001,27 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Tags = null;
 
         /**
+         * All encryption algorithms of a CA certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CAEncryptAlgorithms = null;
+
+        /**
+         * All common names of a CA certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CACommonNames = null;
+
+        /**
+         * All expiration time of a CA certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CAEndTimes = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1063,6 +1091,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Tags.push(obj);
             }
         }
+        this.CAEncryptAlgorithms = 'CAEncryptAlgorithms' in params ? params.CAEncryptAlgorithms : null;
+        this.CACommonNames = 'CACommonNames' in params ? params.CACommonNames : null;
+        this.CAEndTimes = 'CAEndTimes' in params ? params.CAEndTimes : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1169,7 +1200,7 @@ class UploadCertificateRequest extends  AbstractModel {
         this.CertificatePrivateKey = null;
 
         /**
-         * Certificate type. `CA`: client certificate; `SVR`: server certificate. The default value is SVR.
+         * Certificate type. Valid values: `CA` (CA certificate) and `SVR` (server certificate). Default value: `SVR`
          * @type {string || null}
          */
         this.CertificateType = null;
@@ -1214,6 +1245,41 @@ class UploadCertificateRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.CertificateUse = 'CertificateUse' in params ? params.CertificateUse : null;
         this.Repeatable = 'Repeatable' in params ? params.Repeatable : null;
+
+    }
+}
+
+/**
+ * UploadConfirmLetter request structure.
+ * @class
+ */
+class UploadConfirmLetterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * Base64-encoded confirmation letter file, which must be a JPG, JPEG, PNG, or PDF file of 1 KB to 1.4 MB
+         * @type {string || null}
+         */
+        this.ConfirmLetter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.ConfirmLetter = 'ConfirmLetter' in params ? params.ConfirmLetter : null;
 
     }
 }
@@ -1332,13 +1398,13 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.ValidityPeriod = null;
 
         /**
-         * Encryption algorithm. Only RSA is supported.
+         * Encryption algorithm. RSA and ECC are supported.
          * @type {string || null}
          */
         this.CsrEncryptAlgo = null;
 
         /**
-         * Key pair parameter. Only the 2048-bit key pair is supported.
+         * Key pair parameter. RSA supports only the 2048-bit key and ECC supports only prime256v1.
          * @type {string || null}
          */
         this.CsrKeyParameter = null;
@@ -1464,6 +1530,48 @@ class ReplaceCertificateRequest extends  AbstractModel {
 }
 
 /**
+ * CreateCertificate response structure.
+ * @class
+ */
+class CreateCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of certificate IDs
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIds = null;
+
+        /**
+         * List of order IDs
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIds = 'CertificateIds' in params ? params.CertificateIds : null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteCertificate response structure.
  * @class
  */
@@ -1493,577 +1601,6 @@ class DeleteCertificateResponse extends  AbstractModel {
             return;
         }
         this.DeleteResult = 'DeleteResult' in params ? params.DeleteResult : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Content of the `DvAuthDetail` parameter returned by `DescribeCertificates`
- * @class
- */
-class DvAuthDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * DV authentication key
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthKey = null;
-
-        /**
-         * DV authentication value
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthValue = null;
-
-        /**
-         * Domain name of the DV authentication value
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthDomain = null;
-
-        /**
-         * Path of the DV authentication value
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthPath = null;
-
-        /**
-         * DV authentication sub-domain name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthKeySubDomain = null;
-
-        /**
-         * DV authentication information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<DvAuths> || null}
-         */
-        this.DvAuths = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
-        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
-        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
-        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
-        this.DvAuthKeySubDomain = 'DvAuthKeySubDomain' in params ? params.DvAuthKeySubDomain : null;
-
-        if (params.DvAuths) {
-            this.DvAuths = new Array();
-            for (let z in params.DvAuths) {
-                let obj = new DvAuths();
-                obj.deserialize(params.DvAuths[z]);
-                this.DvAuths.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * ModifyCertificateProject request structure.
- * @class
- */
-class ModifyCertificateProjectRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID list of certificates whose projects need to be modified. A maximum of 100 certificate IDs are supported.
-         * @type {Array.<string> || null}
-         */
-        this.CertificateIdList = null;
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateIdList = 'CertificateIdList' in params ? params.CertificateIdList : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-    }
-}
-
-/**
- * Content of the `DvAuths` parameter
- * @class
- */
-class DvAuths extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * DV authentication key
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthKey = null;
-
-        /**
-         * DV authentication value
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthValue = null;
-
-        /**
-         * Domain name of the DV authentication value
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthDomain = null;
-
-        /**
-         * Path of the DV authentication value
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthPath = null;
-
-        /**
-         * DV authentication sub-domain name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthSubDomain = null;
-
-        /**
-         * DV authentication type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DvAuthVerifyType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
-        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
-        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
-        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
-        this.DvAuthSubDomain = 'DvAuthSubDomain' in params ? params.DvAuthSubDomain : null;
-        this.DvAuthVerifyType = 'DvAuthVerifyType' in params ? params.DvAuthVerifyType : null;
-
-    }
-}
-
-/**
- * ModifyCertificateAlias request structure.
- * @class
- */
-class ModifyCertificateAliasRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * Alias
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-
-    }
-}
-
-/**
- * DescribeCertificate request structure.
- * @class
- */
-class DescribeCertificateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-
-    }
-}
-
-/**
- * Content of the `ProjectInfo` parameter. `ProjectInfo` is an element of `Certificates` array which is returned by `DescribeCertificates`.
- * @class
- */
-class ProjectInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Project name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProjectName = null;
-
-        /**
-         * UIN of the project creator
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProjectCreatorUin = null;
-
-        /**
-         * Project creation time
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProjectCreateTime = null;
-
-        /**
-         * Brief project information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProjectResume = null;
-
-        /**
-         * User UIN
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.OwnerUin = null;
-
-        /**
-         * Project ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.ProjectCreatorUin = 'ProjectCreatorUin' in params ? params.ProjectCreatorUin : null;
-        this.ProjectCreateTime = 'ProjectCreateTime' in params ? params.ProjectCreateTime : null;
-        this.ProjectResume = 'ProjectResume' in params ? params.ProjectResume : null;
-        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-    }
-}
-
-/**
- * DescribeCertificateOperateLogs request structure.
- * @class
- */
-class DescribeCertificateOperateLogsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offset. The default value is 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of requested logs. The default value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Start time. The default value is 15 days ago.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time. The default value is the current time.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * CancelCertificateOrder response structure.
- * @class
- */
-class CancelCertificateOrderResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the certificate whose order has been successfully cancelled
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SubmitCertificateInformation response structure.
- * @class
- */
-class SubmitCertificateInformationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCertificates response structure.
- * @class
- */
-class DescribeCertificatesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Certificates> || null}
-         */
-        this.Certificates = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Certificates) {
-            this.Certificates = new Array();
-            for (let z in params.Certificates) {
-                let obj = new Certificates();
-                obj.deserialize(params.Certificates[z]);
-                this.Certificates.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DownloadCertificate response structure.
- * @class
- */
-class DownloadCertificateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ZIP content encoded by using Base64. After the content is decoded by using Base64, it can be saved as a ZIP file.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * MIME type. `application/zip`: ZIP file
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ContentType = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Content = 'Content' in params ? params.Content : null;
-        this.ContentType = 'ContentType' in params ? params.ContentType : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UploadCertificate response structure.
- * @class
- */
-class UploadCertificateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * The ID of the repeatedly uploaded certificate.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RepeatCertId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RepeatCertId = 'RepeatCertId' in params ? params.RepeatCertId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2106,8 +1643,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CertificateType = null;
 
         /**
-         * Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Certificate plan type. null: User-uploaded certificate (no plan type); `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod SM2 DV; `34`: DNSPod SM2 DV multi-domain; `35`: DNSPod SM2 DV wildcard; `37`: DNSPod SM2 OV; `38`: DNSPod SM2 OV multi-domain; `39`: DNSPod SM2 OV wildcard: `40`: DNSPod SM2 EV; `41`: DNSPod SM2 EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
          * @type {string || null}
          */
         this.PackageType = null;
@@ -2441,6 +1977,626 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EncryptCertFingerprint = 'EncryptCertFingerprint' in params ? params.EncryptCertFingerprint : null;
         this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateProject request structure.
+ * @class
+ */
+class ModifyCertificateProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID list of certificates whose projects need to be modified. A maximum of 100 certificate IDs are supported.
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIdList = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIdList = 'CertificateIdList' in params ? params.CertificateIdList : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * Content of the `DvAuths` parameter
+ * @class
+ */
+class DvAuths extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DV authentication key
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthKey = null;
+
+        /**
+         * DV authentication value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthValue = null;
+
+        /**
+         * Domain name of the DV authentication value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthDomain = null;
+
+        /**
+         * Path of the DV authentication value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthPath = null;
+
+        /**
+         * DV authentication sub-domain name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthSubDomain = null;
+
+        /**
+         * DV authentication type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthVerifyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
+        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
+        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
+        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
+        this.DvAuthSubDomain = 'DvAuthSubDomain' in params ? params.DvAuthSubDomain : null;
+        this.DvAuthVerifyType = 'DvAuthVerifyType' in params ? params.DvAuthVerifyType : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateAlias request structure.
+ * @class
+ */
+class ModifyCertificateAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * Alias
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+
+    }
+}
+
+/**
+ * DescribeCertificate request structure.
+ * @class
+ */
+class DescribeCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+
+    }
+}
+
+/**
+ * Content of the `ProjectInfo` parameter. `ProjectInfo` is an element of `Certificates` array which is returned by `DescribeCertificates`.
+ * @class
+ */
+class ProjectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * UIN of the project creator
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectCreatorUin = null;
+
+        /**
+         * Project creation time
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectCreateTime = null;
+
+        /**
+         * Brief project information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectResume = null;
+
+        /**
+         * User UIN
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * Project ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.ProjectCreatorUin = 'ProjectCreatorUin' in params ? params.ProjectCreatorUin : null;
+        this.ProjectCreateTime = 'ProjectCreateTime' in params ? params.ProjectCreateTime : null;
+        this.ProjectResume = 'ProjectResume' in params ? params.ProjectResume : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeCertificateOperateLogs request structure.
+ * @class
+ */
+class DescribeCertificateOperateLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset. The default value is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of requested logs. The default value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Start time. The default value is 15 days ago.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time. The default value is the current time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CancelCertificateOrder response structure.
+ * @class
+ */
+class CancelCertificateOrderResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the certificate whose order has been successfully cancelled
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCertificate request structure.
+ * @class
+ */
+class CreateCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate product ID. `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod SM2 DV; `34`: DNSPod SM2 DV multi-domain; `35`: DNSPod SM2 DV wildcard; `37`: DNSPod SM2 OV; `38`: DNSPod SM2 OV multi-domain; `39`: DNSPod SM2 OV wildcard: `40`: DNSPod SM2 EV; `41`: DNSPod SM2 EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Number of domains associated with the certificate
+         * @type {number || null}
+         */
+        this.DomainNum = null;
+
+        /**
+         * Certificate validity period. Currently, you can only purchase 1-year certificates.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DomainNum = 'DomainNum' in params ? params.DomainNum : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+
+    }
+}
+
+/**
+ * DescribeCertificates response structure.
+ * @class
+ */
+class DescribeCertificatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Certificates> || null}
+         */
+        this.Certificates = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Certificates) {
+            this.Certificates = new Array();
+            for (let z in params.Certificates) {
+                let obj = new Certificates();
+                obj.deserialize(params.Certificates[z]);
+                this.Certificates.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadCertificate response structure.
+ * @class
+ */
+class DownloadCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ZIP content encoded by using Base64. After the content is decoded by using Base64, it can be saved as a ZIP file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * MIME type. `application/zip`: ZIP file
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContentType = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadConfirmLetter response structure.
+ * @class
+ */
+class UploadConfirmLetterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * Whether the operation is successful
+         * @type {boolean || null}
+         */
+        this.IsSuccess = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadCertificate response structure.
+ * @class
+ */
+class UploadCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * The ID of the repeatedly uploaded certificate.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RepeatCertId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RepeatCertId = 'RepeatCertId' in params ? params.RepeatCertId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Content of the `DvAuthDetail` parameter returned by `DescribeCertificates`
+ * @class
+ */
+class DvAuthDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DV authentication key
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthKey = null;
+
+        /**
+         * DV authentication value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthValue = null;
+
+        /**
+         * Domain name of the DV authentication value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthDomain = null;
+
+        /**
+         * Path of the DV authentication value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthPath = null;
+
+        /**
+         * DV authentication sub-domain name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DvAuthKeySubDomain = null;
+
+        /**
+         * DV authentication information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DvAuths> || null}
+         */
+        this.DvAuths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
+        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
+        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
+        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
+        this.DvAuthKeySubDomain = 'DvAuthKeySubDomain' in params ? params.DvAuthKeySubDomain : null;
+
+        if (params.DvAuths) {
+            this.DvAuths = new Array();
+            for (let z in params.DvAuths) {
+                let obj = new DvAuths();
+                obj.deserialize(params.DvAuths[z]);
+                this.DvAuths.push(obj);
+            }
+        }
 
     }
 }
@@ -3017,6 +3173,41 @@ class DescribeCertificatesRequest extends  AbstractModel {
 }
 
 /**
+ * SubmitCertificateInformation response structure.
+ * @class
+ */
+class SubmitCertificateInformationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * List of prereview information
  * @class
  */
@@ -3077,12 +3268,14 @@ module.exports = {
     OperationLog: OperationLog,
     RootCertificates: RootCertificates,
     UploadCertificateRequest: UploadCertificateRequest,
+    UploadConfirmLetterRequest: UploadConfirmLetterRequest,
     DescribeCertificateDetailRequest: DescribeCertificateDetailRequest,
     Tags: Tags,
     ApplyCertificateRequest: ApplyCertificateRequest,
     ReplaceCertificateRequest: ReplaceCertificateRequest,
+    CreateCertificateResponse: CreateCertificateResponse,
     DeleteCertificateResponse: DeleteCertificateResponse,
-    DvAuthDetail: DvAuthDetail,
+    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     ModifyCertificateProjectRequest: ModifyCertificateProjectRequest,
     DvAuths: DvAuths,
     ModifyCertificateAliasRequest: ModifyCertificateAliasRequest,
@@ -3090,15 +3283,17 @@ module.exports = {
     ProjectInfo: ProjectInfo,
     DescribeCertificateOperateLogsRequest: DescribeCertificateOperateLogsRequest,
     CancelCertificateOrderResponse: CancelCertificateOrderResponse,
-    SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
+    CreateCertificateRequest: CreateCertificateRequest,
     DescribeCertificatesResponse: DescribeCertificatesResponse,
     DownloadCertificateResponse: DownloadCertificateResponse,
+    UploadConfirmLetterResponse: UploadConfirmLetterResponse,
     UploadCertificateResponse: UploadCertificateResponse,
-    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    DvAuthDetail: DvAuthDetail,
     ModifyCertificateAliasResponse: ModifyCertificateAliasResponse,
     SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
     SubmittedData: SubmittedData,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
+    SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
     PreAuditInfo: PreAuditInfo,
 
 }

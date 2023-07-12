@@ -88,6 +88,7 @@ const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttrib
 const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
 const DeleteVpcEndPointServiceWhiteListRequest = models.DeleteVpcEndPointServiceWhiteListRequest;
 const DetachSnapshotInstancesResponse = models.DetachSnapshotInstancesResponse;
+const ReplaceSecurityGroupPoliciesRequest = models.ReplaceSecurityGroupPoliciesRequest;
 const DeleteVpcEndPointServiceRequest = models.DeleteVpcEndPointServiceRequest;
 const DeleteCcnResponse = models.DeleteCcnResponse;
 const ServiceTemplate = models.ServiceTemplate;
@@ -97,6 +98,7 @@ const DescribeNatGatewaySourceIpTranslationNatRulesRequest = models.DescribeNatG
 const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
+const ReplaceSecurityGroupPoliciesResponse = models.ReplaceSecurityGroupPoliciesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
 const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
 const AttachSnapshotInstancesRequest = models.AttachSnapshotInstancesRequest;
@@ -650,7 +652,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * This API (DownloadCustomerGatewayConfiguration) is used to download a VPN tunnel configuration.
+     * This API is used to download VPN tunnel configurations.
      * @param {DownloadCustomerGatewayConfigurationRequest} req
      * @param {function(string, DownloadCustomerGatewayConfigurationResponse):void} cb
      * @public
@@ -1152,7 +1154,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to query destination routes of a route-based VPN gateway.
+     * This API is used to query VPN gateway routes.
      * @param {DescribeVpnGatewayRoutesRequest} req
      * @param {function(string, DescribeVpnGatewayRoutesResponse):void} cb
      * @public
@@ -1163,7 +1165,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to modify the route status of a VPN gateway.
+     * This API is used to modify VPN gateway routes.
      * @param {ModifyVpnGatewayRoutesRequest} req
      * @param {function(string, ModifyVpnGatewayRoutesResponse):void} cb
      * @public
@@ -1171,6 +1173,18 @@ After unbinding the network instance, the corresponding routing policy will also
     ModifyVpnGatewayRoutes(req, cb) {
         let resp = new ModifyVpnGatewayRoutesResponse();
         this.request("ModifyVpnGatewayRoutes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch modify security group policies.
+Policies to modify must be in the same direction. `PolicyIndex` must be specified.
+     * @param {ReplaceSecurityGroupPoliciesRequest} req
+     * @param {function(string, ReplaceSecurityGroupPoliciesResponse):void} cb
+     * @public
+     */
+    ReplaceSecurityGroupPolicies(req, cb) {
+        let resp = new ReplaceSecurityGroupPoliciesResponse();
+        this.request("ReplaceSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1574,7 +1588,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (DescribeVpnGatewayCcnRoutes) is used to query VPN gateway-based CCN routes.
+     * This API is used to query VPN gateway-based CCN routes.
      * @param {DescribeVpnGatewayCcnRoutesRequest} req
      * @param {function(string, DescribeVpnGatewayCcnRoutesResponse):void} cb
      * @public
@@ -1647,7 +1661,7 @@ This API is used to query only the information of `IPv6` addresses that are alre
     }
 
     /**
-     * This API is used to specify whether to enable auto-renewal for the VPN gateway.
+     * This API is used set the auto-renewal configuration of a VPN gateway.
      * @param {SetVpnGatewaysRenewFlagRequest} req
      * @param {function(string, SetVpnGatewaysRenewFlagResponse):void} cb
      * @public
@@ -1897,7 +1911,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (ModifyVpnGatewayCcnRoutes) is used to modify VPN gateway-based CCN routes.
+     * This API is used to modify VPN gateway-based CCN routes.
      * @param {ModifyVpnGatewayCcnRoutesRequest} req
      * @param {function(string, ModifyVpnGatewayCcnRoutesResponse):void} cb
      * @public
@@ -1942,7 +1956,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to delete routes of a VPN gateway.
+     * This API is used to delete routes of a VPN gateway. 
      * @param {DeleteVpnGatewayRoutesRequest} req
      * @param {function(string, DeleteVpnGatewayRoutesResponse):void} cb
      * @public
@@ -2220,15 +2234,15 @@ If the IP is taken, the associated resource type and ID are returned. Otherwise 
     }
 
     /**
-     * This API is used to create a default VPC.
+     * This API is used to create a VPC with default settings.
 
-The default VPC is suitable for getting started with and launching public instances, and it can be used like any other VPCs. To create a standard VPC, for which you need to specify a VPC name, VPC IP range, subnet IP range, and subnet availability zone, use the regular CreateVpc API.
+To create a VPC with custom settings, such as VPC name, IP range, subnet IP range, and subnet availability zone, use `CreateVpc` instead.
 
-Under normal circumstances, this API may not create a default VPC. It depends on the network attributes (DescribeAccountAttributes) of your account.
-* If both basic network and VPC are supported, the returned VpcId is 0.
+This API may not create a default VPC. It depends on the network attributes (`DescribeAccountAttributes`) of your account.
+* If both basic network and VPC are supported, the returned `VpcId` is 0.
 * If only VPC is supported, the default VPC information is returned.
 
-You can also use the Force parameter to forcibly return a default VPC.
+You can also use the `Force` parameter to forcibly return a default VPC.
      * @param {CreateDefaultVpcRequest} req
      * @param {function(string, CreateDefaultVpcResponse):void} cb
      * @public
@@ -2304,7 +2318,7 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     }
 
     /**
-     * This API (DeleteNetDetect) is used to delete a network detection instance.
+     * This API is used to delete a network probe.
      * @param {DeleteNetDetectRequest} req
      * @param {function(string, DeleteNetDetectResponse):void} cb
      * @public
@@ -2727,7 +2741,7 @@ This API is completed asynchronously. If you need to query the execution result 
 
     /**
      * This API is used to query the location and network information of one or more IP addresses.
-This API is only available for existing customers. For any questions, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2).
+<font color="#FF0000">This API will be discontinued soon and is only available for existing users.</font>
      * @param {DescribeIpGeolocationInfosRequest} req
      * @param {function(string, DescribeIpGeolocationInfosResponse):void} cb
      * @public
@@ -3132,7 +3146,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (CreateHaVip) is used to create a highly available virtual IP (HAVIP)
+     * This API is used to create a highly available virtual IP (HAVIP).
      * @param {CreateHaVipRequest} req
      * @param {function(string, CreateHaVipResponse):void} cb
      * @public
@@ -3280,7 +3294,7 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
-     * This API is used to create a network detection instance.
+     * This API is used to create a network probe.
      * @param {CreateNetDetectRequest} req
      * @param {function(string, CreateNetDetectResponse):void} cb
      * @public
@@ -3415,6 +3429,7 @@ This API is used to verify whether there will be conflict with an existing route
 
     /**
      * This API is used to obtain the download link of an IP location database.
+<font color="#FF0000">This API will be discontinued soon and is only available for existing users.</font>
      * @param {DescribeIpGeolocationDatabaseUrlRequest} req
      * @param {function(string, DescribeIpGeolocationDatabaseUrlResponse):void} cb
      * @public

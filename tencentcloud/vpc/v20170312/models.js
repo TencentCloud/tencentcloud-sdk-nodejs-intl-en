@@ -2621,9 +2621,9 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter condition. `FlowLogIds` and `Filters` cannot be specified at the same time.
-<li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-<li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
+         * Filter condition. `FlowLogId` and `Filters` cannot be specified at the same time.
+<li> `tag-key` - String - Optional - Filter by the tag key.</li>
+<li> `tag:tag-key` - String - Optional - Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
          * @type {Filter || null}
          */
         this.Filters = null;
@@ -3707,6 +3707,58 @@ class DetachSnapshotInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ReplaceSecurityGroupPolicies request structure.
+ * @class
+ */
+class ReplaceSecurityGroupPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Security group policy set object.
+         * @type {SecurityGroupPolicySet || null}
+         */
+        this.SecurityGroupPolicySet = null;
+
+        /**
+         * (Optional) The old policy set of the security group, which is used for log records.
+         * @type {SecurityGroupPolicySet || null}
+         */
+        this.OriginalSecurityGroupPolicySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.SecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.SecurityGroupPolicySet)
+            this.SecurityGroupPolicySet = obj;
+        }
+
+        if (params.OriginalSecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.OriginalSecurityGroupPolicySet)
+            this.OriginalSecurityGroupPolicySet = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteVpcEndPointService request structure.
  * @class
  */
@@ -4122,6 +4174,34 @@ class DescribeBandwidthPackagesResponse extends  AbstractModel {
                 obj.deserialize(params.BandwidthPackageSet[z]);
                 this.BandwidthPackageSet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReplaceSecurityGroupPolicies response structure.
+ * @class
+ */
+class ReplaceSecurityGroupPoliciesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5094,7 +5174,7 @@ class ModifyVpnGatewayRoutesRequest extends  AbstractModel {
         super();
 
         /**
-         * VPN gateway ID
+         * Instance ID of the VPN gateway
          * @type {string || null}
          */
         this.VpnGatewayId = null;
@@ -7116,20 +7196,22 @@ class ModifyNetDetectRequest extends  AbstractModel {
 `DIRECTCONNECT`: Direct connect gateway;
 `PEERCONNECTION`: Peering connection;
 `NAT`: NAT gateway;
-`NORMAL_CVM`: normal CVM;
-`CCN`: CCN gateway.
+`NORMAL_CVM`: CVM instance;
+`CCN`: CCN instance;
+`NONEXTHOP`: No next hop.
          * @type {string || null}
          */
         this.NextHopType = null;
 
         /**
-         * Next-hop destination gateway. Its value is determined by `NextHopType`.
-If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+         * ID of the next-hop gateway. 
+`NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+`NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+`NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+`NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+`NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+`NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+`NextHopType` = `NONEXTHOP`: No next hop.
          * @type {string || null}
          */
         this.NextHopDestination = null;
@@ -7356,14 +7438,14 @@ class DescribeNetDetectStatesRequest extends  AbstractModel {
         super();
 
         /**
-         * The array of network detection instance `IDs`, such as [`netd-12345678`].
+         * The array of network probe IDs, such as [`netd-12345678`].
          * @type {Array.<string> || null}
          */
         this.NetDetectIds = null;
 
         /**
          * Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
-<li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
+<li>`net-detect-id` - String - The network probe ID, such as `netd-12345678`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8467,7 +8549,7 @@ class DescribeNetDetectsRequest extends  AbstractModel {
         super();
 
         /**
-         * The array of network detection instance `IDs`, such as [`netd-12345678`].
+         * The array of network probe IDs, such as [`netd-12345678`].
          * @type {Array.<string> || null}
          */
         this.NetDetectIds = null;
@@ -9136,13 +9218,13 @@ class VpnGatewayRoute extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Creation time
+         * The creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time
+         * The update time.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -10639,16 +10721,34 @@ class DefaultVpcSubnet extends  AbstractModel {
         super();
 
         /**
-         * Default VpcId
+         * Default VPC ID
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Default SubnetId
+         * Default subnet ID
          * @type {string || null}
          */
         this.SubnetId = null;
+
+        /**
+         * Default VPC name
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Default subnet name
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * Default subnet IP range
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
 
     }
 
@@ -10661,6 +10761,9 @@ class DefaultVpcSubnet extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
 
     }
 }
@@ -11338,25 +11441,27 @@ class NetDetect extends  AbstractModel {
         this.DetectSourceIp = null;
 
         /**
-         * Type of the next hop. Valid values:
+         * Type of the next hop. Currently supported types are:
 VPN: VPN gateway;
-DIRECTCONNECT: direct connect gateway;
-PEERCONNECTION: peering connection;
-NAT: NAT gateway;
-NORMAL_CVM: normal CVM.
-CCN: CCN gateway.
+`DIRECTCONNECT`: Direct connect gateway;
+`PEERCONNECTION`: Peering connection;
+`NAT`: NAT gateway;
+`NORMAL_CVM`: CVM instance;
+`CCN`: CCN instance;
+`NONEXTHOP`: No next hop.
          * @type {string || null}
          */
         this.NextHopType = null;
 
         /**
-         * Next-hop destination gateway. Its value is determined by `NextHopType`.
-If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+         * ID of the next-hop gateway. 
+`NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+`NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+`NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+`NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+`NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+`NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+`NextHopType` = `NONEXTHOP`: No next hop.
          * @type {string || null}
          */
         this.NextHopDestination = null;
@@ -12137,7 +12242,7 @@ class CreateNetDetectRequest extends  AbstractModel {
         super();
 
         /**
-         * The `ID` of a `VPC` instance, such as `vpc-12345678`.
+         * The ID of a VPC instance, such as `vpc-12345678`.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -12163,23 +12268,25 @@ class CreateNetDetectRequest extends  AbstractModel {
         /**
          * Type of the next hop. Valid values:
 `VPN`: VPN gateway;
-`DIRECTCONNECT`: direct connect gateway;
-`PEERCONNECTION`: peering connection;
+`DIRECTCONNECT`: Direct connect gateway;
+`PEERCONNECTION`: Peering connection;
 `NAT`: NAT gateway;
-`NORMAL_CVM`: normal CVM;
-`CCN`: CCN gateway.
+`NORMAL_CVM`: CVM instance;
+`CCN`: CCN instance;
+`NONEXTHOP`: No next hop.
          * @type {string || null}
          */
         this.NextHopType = null;
 
         /**
-         * Next-hop destination gateway. Its value is determined by `NextHopType`.
-If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+         * ID of the next-hop gateway. 
+`NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+`NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+`NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+`NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+`NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+`NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+`NextHopType` = `NONEXTHOP`: No next hop.
          * @type {string || null}
          */
         this.NextHopDestination = null;
@@ -12823,7 +12930,7 @@ class CreateNetworkAclRequest extends  AbstractModel {
         super();
 
         /**
-         * VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
+         * VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -14526,7 +14633,7 @@ class DescribeVpnGatewayCcnRoutesRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of the VPN gateway instance.
+         * Instance ID of the VPN gateway
          * @type {string || null}
          */
         this.VpnGatewayId = null;
@@ -15365,7 +15472,7 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
         this.NetworkInterfaceDescription = null;
 
         /**
-         * The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
+         * The number of private IP addresses you apply for. The total number of private IP addresses cannot exceed the quota.
          * @type {number || null}
          */
         this.SecondaryPrivateIpAddressCount = null;
@@ -16506,7 +16613,7 @@ class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
         this.PrivateIpAddresses = null;
 
         /**
-         * The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
+         * The number of private IP addresses you apply for. The total number of private IP addresses cannot exceed the quota.
          * @type {number || null}
          */
         this.SecondaryPrivateIpAddressCount = null;
@@ -17060,13 +17167,25 @@ class AddressTemplateItem extends  AbstractModel {
         super();
 
         /**
-         * Start address
+         * ipm-xxxxxxxx
+         * @type {string || null}
+         */
+        this.AddressTemplateId = null;
+
+        /**
+         * IP template name
+         * @type {string || null}
+         */
+        this.AddressTemplateName = null;
+
+        /**
+         * Disused
          * @type {string || null}
          */
         this.From = null;
 
         /**
-         * End address
+         * Disused
          * @type {string || null}
          */
         this.To = null;
@@ -17080,6 +17199,8 @@ class AddressTemplateItem extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
+        this.AddressTemplateName = 'AddressTemplateName' in params ? params.AddressTemplateName : null;
         this.From = 'From' in params ? params.From : null;
         this.To = 'To' in params ? params.To : null;
 
@@ -18140,13 +18261,13 @@ class GetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
         this.SortedBy = null;
 
         /**
-         * The offset.
+         * Offset
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The returned quantity.
+         * Quantity of returned items
          * @type {number || null}
          */
         this.Limit = null;
@@ -18411,6 +18532,13 @@ class DescribeVpnGatewayRoutesResponse extends  AbstractModel {
         this.Routes = null;
 
         /**
+         * 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -18434,6 +18562,7 @@ class DescribeVpnGatewayRoutesResponse extends  AbstractModel {
                 this.Routes.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19099,7 +19228,7 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * The description of the flow log instance
+         * The description of the flow log.
          * @type {string || null}
          */
         this.FlowLogDescription = null;
@@ -19111,7 +19240,7 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.CloudLogId = null;
 
         /**
-         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -19850,7 +19979,7 @@ class DescribeCustomerGatewaysRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
+         * Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Offset = null;
@@ -20470,7 +20599,7 @@ class DeleteNetDetectRequest extends  AbstractModel {
         super();
 
         /**
-         * The `ID` of a network detection instance, such as `netd-12345678`.
+         * ID of a network probe, such as `netd-12345678`.
          * @type {string || null}
          */
         this.NetDetectId = null;
@@ -21250,6 +21379,26 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TagSet = null;
 
+        /**
+         * The expiration time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeadlineDate = null;
+
+        /**
+         * The type of instance bound with the EIP
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AntiDDoSPackageId = null;
+
     }
 
     /**
@@ -21291,6 +21440,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.TagSet.push(obj);
             }
         }
+        this.DeadlineDate = 'DeadlineDate' in params ? params.DeadlineDate : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.AntiDDoSPackageId = 'AntiDDoSPackageId' in params ? params.AntiDDoSPackageId : null;
 
     }
 }
@@ -21486,6 +21638,7 @@ class EnableVpcEndPointConnectRequest extends  AbstractModel {
 
         /**
          * Whether to accept the request of connecting with an endpoint
+
          * @type {boolean || null}
          */
         this.AcceptFlag = null;
@@ -25095,6 +25248,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.MarketId = null;
 
+        /**
+         * The list of tags to be bound.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -25116,6 +25276,15 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             this.CcnRegionBandwidthLimit = obj;
         }
         this.MarketId = 'MarketId' in params ? params.MarketId : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -25496,7 +25665,7 @@ class ModifyVpnGatewayCcnRoutesRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of the VPN gateway instance.
+         * Instance ID of the VPN gateway
          * @type {string || null}
          */
         this.VpnGatewayId = null;
@@ -26229,7 +26398,7 @@ class DescribeVpnGatewayRoutesRequest extends  AbstractModel {
         super();
 
         /**
-         * VPN gateway ID
+         * Instance ID of the VPN gateway
          * @type {string || null}
          */
         this.VpnGatewayId = null;
@@ -26287,7 +26456,7 @@ class GetCcnRegionBandwidthLimitsResponse extends  AbstractModel {
 
         /**
          * The outbound bandwidth limits of regions in a CCN instance.
-Note: this field may return null, indicating that no valid value was found.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CcnBandwidthInfo> || null}
          */
         this.CcnBandwidthSet = null;
@@ -27064,6 +27233,12 @@ class CreateHaVipRequest extends  AbstractModel {
          */
         this.Vip = null;
 
+        /**
+         * The ID of the ENI associated with the HAVIP.
+         * @type {string || null}
+         */
+        this.NetworkInterfaceId = null;
+
     }
 
     /**
@@ -27077,6 +27252,7 @@ class CreateHaVipRequest extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.HaVipName = 'HaVipName' in params ? params.HaVipName : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
 
     }
 }
@@ -29330,6 +29506,7 @@ module.exports = {
     DescribeRouteTablesResponse: DescribeRouteTablesResponse,
     DeleteVpcEndPointServiceWhiteListRequest: DeleteVpcEndPointServiceWhiteListRequest,
     DetachSnapshotInstancesResponse: DetachSnapshotInstancesResponse,
+    ReplaceSecurityGroupPoliciesRequest: ReplaceSecurityGroupPoliciesRequest,
     DeleteVpcEndPointServiceRequest: DeleteVpcEndPointServiceRequest,
     DeleteCcnResponse: DeleteCcnResponse,
     ServiceTemplate: ServiceTemplate,
@@ -29339,6 +29516,7 @@ module.exports = {
     DescribeNatGatewaysRequest: DescribeNatGatewaysRequest,
     ModifyFlowLogAttributeResponse: ModifyFlowLogAttributeResponse,
     DescribeBandwidthPackagesResponse: DescribeBandwidthPackagesResponse,
+    ReplaceSecurityGroupPoliciesResponse: ReplaceSecurityGroupPoliciesResponse,
     DescribeDirectConnectGatewaysRequest: DescribeDirectConnectGatewaysRequest,
     DisassociateVpcEndPointSecurityGroupsRequest: DisassociateVpcEndPointSecurityGroupsRequest,
     AttachSnapshotInstancesRequest: AttachSnapshotInstancesRequest,

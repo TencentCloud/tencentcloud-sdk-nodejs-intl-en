@@ -2784,7 +2784,7 @@ class EventSettingsResp extends  AbstractModel {
         super();
 
         /**
-         * Only `INPUT_SWITCH` is supported currently.
+         * Valid values: INPUT_SWITCH, TIMED_RECORD, SCTE35_TIME_SIGNAL, SCTE35_SPLICE_INSERT, SCTE35_RETURN_TO_NETWORK.
          * @type {string || null}
          */
         this.EventType = null;
@@ -4003,7 +4003,7 @@ class EventSettingsReq extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `INPUT_SWITCH`, `TIMED_RECORD`. If it is not specified, `INPUT_SWITCH` will be used.
+         * Valid values: `INPUT_SWITCH`, `TIMED_RECORD`, SCTE35_TIME_SIGNAL, SCTE35_SPLICE_INSERT, SCTE35_RETURN_TO_NETWORK. If it is not specified, `INPUT_SWITCH` will be used.
          * @type {string || null}
          */
         this.EventType = null;

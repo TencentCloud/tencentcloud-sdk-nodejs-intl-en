@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const RegionDetail = models.RegionDetail;
 const DescribeUDPListenersRequest = models.DescribeUDPListenersRequest;
+const SupportFeature = models.SupportFeature;
 const DeleteProxyGroupRequest = models.DeleteProxyGroupRequest;
 const DescribeResourcesByTagRequest = models.DescribeResourcesByTagRequest;
 const DescribeListenerStatisticsRequest = models.DescribeListenerStatisticsRequest;
@@ -36,7 +37,7 @@ const DescribeResourcesByTagResponse = models.DescribeResourcesByTagResponse;
 const ModifyGroupDomainConfigRequest = models.ModifyGroupDomainConfigRequest;
 const BandwidthPriceGradient = models.BandwidthPriceGradient;
 const DescribeHTTPListenersRequest = models.DescribeHTTPListenersRequest;
-const DescribeCustomHeaderResponse = models.DescribeCustomHeaderResponse;
+const DescribeBlackHeaderRequest = models.DescribeBlackHeaderRequest;
 const ModifyRealServerNameResponse = models.ModifyRealServerNameResponse;
 const DescribeGroupDomainConfigResponse = models.DescribeGroupDomainConfigResponse;
 const ModifyCertificateResponse = models.ModifyCertificateResponse;
@@ -92,6 +93,7 @@ const DescribeAccessRegionsResponse = models.DescribeAccessRegionsResponse;
 const DeleteListenersRequest = models.DeleteListenersRequest;
 const DescribeSecurityRulesRequest = models.DescribeSecurityRulesRequest;
 const DescribeDestRegionsResponse = models.DescribeDestRegionsResponse;
+const DescribeAuthSignatureResponse = models.DescribeAuthSignatureResponse;
 const DescribeDomainErrorPageInfoByIdsResponse = models.DescribeDomainErrorPageInfoByIdsResponse;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const BindListenerRealServersResponse = models.BindListenerRealServersResponse;
@@ -120,7 +122,7 @@ const DescribeProxiesStatusRequest = models.DescribeProxiesStatusRequest;
 const ModifyTCPListenerAttributeRequest = models.ModifyTCPListenerAttributeRequest;
 const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const CreateDomainResponse = models.CreateDomainResponse;
-const ModifyProxiesProjectResponse = models.ModifyProxiesProjectResponse;
+const DescribeAuthSignatureRequest = models.DescribeAuthSignatureRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const ModifySecurityRuleRequest = models.ModifySecurityRuleRequest;
 const CreateCustomHeaderResponse = models.CreateCustomHeaderResponse;
@@ -197,10 +199,11 @@ const DescribeProxyStatisticsRequest = models.DescribeProxyStatisticsRequest;
 const DomainRuleSet = models.DomainRuleSet;
 const DescribeTCPListenersRequest = models.DescribeTCPListenersRequest;
 const CreateCertificateResponse = models.CreateCertificateResponse;
-const DescribeBlackHeaderRequest = models.DescribeBlackHeaderRequest;
+const DescribeCustomHeaderResponse = models.DescribeCustomHeaderResponse;
 const DescribeProxyStatisticsResponse = models.DescribeProxyStatisticsResponse;
 const DescribeRealServersStatusResponse = models.DescribeRealServersStatusResponse;
 const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest;
+const ModifyProxiesProjectResponse = models.ModifyProxiesProjectResponse;
 const CloseProxyGroupResponse = models.CloseProxyGroupResponse;
 const DeleteDomainErrorPageInfoResponse = models.DeleteDomainErrorPageInfoResponse;
 const ModifyProxiesAttributeResponse = models.ModifyProxiesAttributeResponse;
@@ -1103,6 +1106,17 @@ This API only supports connections of version 3.0.
     DescribeDomainErrorPageInfo(req, cb) {
         let resp = new DescribeDomainErrorPageInfoResponse();
         this.request("DescribeDomainErrorPageInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a request signature that can prevent parameter tampering in the process of triggering orders, getting quotes, or activating subscription services.
+     * @param {DescribeAuthSignatureRequest} req
+     * @param {function(string, DescribeAuthSignatureResponse):void} cb
+     * @public
+     */
+    DescribeAuthSignature(req, cb) {
+        let resp = new DescribeAuthSignatureResponse();
+        this.request("DescribeAuthSignature", req, resp, cb);
     }
 
     /**

@@ -71,6 +71,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.FeatureBitmap = null;
 
+        /**
+         * Network support 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SupportFeature || null}
+         */
+        this.SupportFeature = null;
+
     }
 
     /**
@@ -86,6 +93,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.RegionAreaName = 'RegionAreaName' in params ? params.RegionAreaName : null;
         this.IDCType = 'IDCType' in params ? params.IDCType : null;
         this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
+
+        if (params.SupportFeature) {
+            let obj = new SupportFeature();
+            obj.deserialize(params.SupportFeature)
+            this.SupportFeature = obj;
+        }
 
     }
 }
@@ -165,6 +178,34 @@ When GroupId is specified, the listener will be checked whether it belongs to th
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+
+    }
+}
+
+/**
+ * Network support
+ * @class
+ */
+class SupportFeature extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Supported network types. `normal`: General BGP; `cn2`: Dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland); `secure_eip`: Custom security EIPs.
+         * @type {Array.<string> || null}
+         */
+        this.NetworkType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
 
     }
 }
@@ -1053,32 +1094,12 @@ class DescribeHTTPListenersRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCustomHeader response structure.
+ * DescribeBlackHeader request structure.
  * @class
  */
-class DescribeCustomHeaderResponse extends  AbstractModel {
+class DescribeBlackHeaderRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Rule ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * List of custom headers
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<HttpHeaderParam> || null}
-         */
-        this.Headers = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -1089,17 +1110,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-
-        if (params.Headers) {
-            this.Headers = new Array();
-            for (let z in params.Headers) {
-                let obj = new HttpHeaderParam();
-                obj.deserialize(params.Headers[z]);
-                this.Headers.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3758,6 +3768,34 @@ class DescribeDestRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAuthSignature response structure.
+ * @class
+ */
+class DescribeAuthSignatureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDomainErrorPageInfoByIds response structure.
  * @class
  */
@@ -5451,18 +5489,12 @@ class CreateDomainResponse extends  AbstractModel {
 }
 
 /**
- * ModifyProxiesProject response structure.
+ * DescribeAuthSignature request structure.
  * @class
  */
-class ModifyProxiesProjectResponse extends  AbstractModel {
+class DescribeAuthSignatureRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -5473,7 +5505,6 @@ class ModifyProxiesProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9832,12 +9863,32 @@ class CreateCertificateResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBlackHeader request structure.
+ * DescribeCustomHeader response structure.
  * @class
  */
-class DescribeBlackHeaderRequest extends  AbstractModel {
+class DescribeCustomHeaderResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Rule ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * List of custom headers
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<HttpHeaderParam> || null}
+         */
+        this.Headers = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9848,6 +9899,17 @@ class DescribeBlackHeaderRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.Headers) {
+            this.Headers = new Array();
+            for (let z in params.Headers) {
+                let obj = new HttpHeaderParam();
+                obj.deserialize(params.Headers[z]);
+                this.Headers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9983,6 +10045,34 @@ class ModifyProxyGroupAttributeRequest extends  AbstractModel {
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * ModifyProxiesProject response structure.
+ * @class
+ */
+class ModifyProxiesProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11834,6 +11924,7 @@ class CreateDomainErrorPageInfoRequest extends  AbstractModel {
 module.exports = {
     RegionDetail: RegionDetail,
     DescribeUDPListenersRequest: DescribeUDPListenersRequest,
+    SupportFeature: SupportFeature,
     DeleteProxyGroupRequest: DeleteProxyGroupRequest,
     DescribeResourcesByTagRequest: DescribeResourcesByTagRequest,
     DescribeListenerStatisticsRequest: DescribeListenerStatisticsRequest,
@@ -11852,7 +11943,7 @@ module.exports = {
     ModifyGroupDomainConfigRequest: ModifyGroupDomainConfigRequest,
     BandwidthPriceGradient: BandwidthPriceGradient,
     DescribeHTTPListenersRequest: DescribeHTTPListenersRequest,
-    DescribeCustomHeaderResponse: DescribeCustomHeaderResponse,
+    DescribeBlackHeaderRequest: DescribeBlackHeaderRequest,
     ModifyRealServerNameResponse: ModifyRealServerNameResponse,
     DescribeGroupDomainConfigResponse: DescribeGroupDomainConfigResponse,
     ModifyCertificateResponse: ModifyCertificateResponse,
@@ -11908,6 +11999,7 @@ module.exports = {
     DeleteListenersRequest: DeleteListenersRequest,
     DescribeSecurityRulesRequest: DescribeSecurityRulesRequest,
     DescribeDestRegionsResponse: DescribeDestRegionsResponse,
+    DescribeAuthSignatureResponse: DescribeAuthSignatureResponse,
     DescribeDomainErrorPageInfoByIdsResponse: DescribeDomainErrorPageInfoByIdsResponse,
     DescribeProxiesRequest: DescribeProxiesRequest,
     BindListenerRealServersResponse: BindListenerRealServersResponse,
@@ -11936,7 +12028,7 @@ module.exports = {
     ModifyTCPListenerAttributeRequest: ModifyTCPListenerAttributeRequest,
     DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateDomainResponse: CreateDomainResponse,
-    ModifyProxiesProjectResponse: ModifyProxiesProjectResponse,
+    DescribeAuthSignatureRequest: DescribeAuthSignatureRequest,
     ModifyDomainRequest: ModifyDomainRequest,
     ModifySecurityRuleRequest: ModifySecurityRuleRequest,
     CreateCustomHeaderResponse: CreateCustomHeaderResponse,
@@ -12013,10 +12105,11 @@ module.exports = {
     DomainRuleSet: DomainRuleSet,
     DescribeTCPListenersRequest: DescribeTCPListenersRequest,
     CreateCertificateResponse: CreateCertificateResponse,
-    DescribeBlackHeaderRequest: DescribeBlackHeaderRequest,
+    DescribeCustomHeaderResponse: DescribeCustomHeaderResponse,
     DescribeProxyStatisticsResponse: DescribeProxyStatisticsResponse,
     DescribeRealServersStatusResponse: DescribeRealServersStatusResponse,
     ModifyProxyGroupAttributeRequest: ModifyProxyGroupAttributeRequest,
+    ModifyProxiesProjectResponse: ModifyProxiesProjectResponse,
     CloseProxyGroupResponse: CloseProxyGroupResponse,
     DeleteDomainErrorPageInfoResponse: DeleteDomainErrorPageInfoResponse,
     ModifyProxiesAttributeResponse: ModifyProxiesAttributeResponse,

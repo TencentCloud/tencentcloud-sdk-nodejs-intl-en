@@ -16,12 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
 const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
+const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
 const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
@@ -31,20 +33,25 @@ const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryRe
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
-const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
+const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
+const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
+const DescribeCustomerUinData = models.DescribeCustomerUinData;
+const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
+const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
-const GetCountryCodesResponse = models.GetCountryCodesResponse;
-const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
+const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
+const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
@@ -53,13 +60,16 @@ const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const CountryCodeItem = models.CountryCodeItem;
 const BillDetailData = models.BillDetailData;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
-const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
+const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
+const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
+const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
-const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
+const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
+const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
 
 
 /**
@@ -95,14 +105,14 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the credits of direct customers.
-     * @param {QueryDirectCustomersCreditRequest} req
-     * @param {function(string, QueryDirectCustomersCreditResponse):void} cb
+     * This API is used to query the customer information.
+     * @param {DescribeCustomerInfoRequest} req
+     * @param {function(string, DescribeCustomerInfoResponse):void} cb
      * @public
      */
-    QueryDirectCustomersCredit(req, cb) {
-        let resp = new QueryDirectCustomersCreditResponse();
-        this.request("QueryDirectCustomersCredit", req, resp, cb);
+    DescribeCustomerInfo(req, cb) {
+        let resp = new DescribeCustomerInfoResponse();
+        this.request("DescribeCustomerInfo", req, resp, cb);
     }
 
     /**
@@ -132,6 +142,17 @@ Notes:<br>
     }
 
     /**
+     * This API is used to query the list of customer UINs.
+     * @param {DescribeCustomerUinRequest} req
+     * @param {function(string, DescribeCustomerUinResponse):void} cb
+     * @public
+     */
+    DescribeCustomerUin(req, cb) {
+        let resp = new DescribeCustomerUinResponse();
+        this.request("DescribeCustomerUin", req, resp, cb);
+    }
+
+    /**
      * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
      * @param {QueryPartnerCreditRequest} req
      * @param {function(string, QueryPartnerCreditResponse):void} cb
@@ -155,6 +176,17 @@ Notes:<br>
     AllocateCustomerCredit(req, cb) {
         let resp = new AllocateCustomerCreditResponse();
         this.request("AllocateCustomerCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the voucher quota based on the customer UIN.
+     * @param {QueryVoucherAmountByUinRequest} req
+     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
+     * @public
+     */
+    QueryVoucherAmountByUin(req, cb) {
+        let resp = new QueryVoucherAmountByUinResponse();
+        this.request("QueryVoucherAmountByUin", req, resp, cb);
     }
 
     /**
@@ -188,6 +220,17 @@ Notes:<br>
     QueryCustomersCredit(req, cb) {
         let resp = new QueryCustomersCreditResponse();
         this.request("QueryCustomersCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the credits of direct customers.
+     * @param {QueryDirectCustomersCreditRequest} req
+     * @param {function(string, QueryDirectCustomersCreditResponse):void} cb
+     * @public
+     */
+    QueryDirectCustomersCredit(req, cb) {
+        let resp = new QueryDirectCustomersCreditResponse();
+        this.request("QueryDirectCustomersCredit", req, resp, cb);
     }
 
     /**
@@ -246,14 +289,25 @@ Notes:<br>
     }
 
     /**
-     * This API is used to query the voucher quota based on the customer UIN.
-     * @param {QueryVoucherAmountByUinRequest} req
-     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
+     * This API is used to query the account verification status.
+     * @param {QueryAccountVerificationStatusRequest} req
+     * @param {function(string, QueryAccountVerificationStatusResponse):void} cb
      * @public
      */
-    QueryVoucherAmountByUin(req, cb) {
-        let resp = new QueryVoucherAmountByUinResponse();
-        this.request("QueryVoucherAmountByUin", req, resp, cb);
+    QueryAccountVerificationStatus(req, cb) {
+        let resp = new QueryAccountVerificationStatusResponse();
+        this.request("QueryAccountVerificationStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query customer credits.
+     * @param {QueryCreditQuotaRequest} req
+     * @param {function(string, QueryCreditQuotaResponse):void} cb
+     * @public
+     */
+    QueryCreditQuota(req, cb) {
+        let resp = new QueryCreditQuotaResponse();
+        this.request("QueryCreditQuota", req, resp, cb);
     }
 
 

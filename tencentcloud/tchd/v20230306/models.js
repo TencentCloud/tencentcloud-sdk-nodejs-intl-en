@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Describes information on an event
+ * Describes information on an event.
  * @class
  */
 class EventDetail extends  AbstractModel {
@@ -25,31 +25,31 @@ class EventDetail extends  AbstractModel {
         super();
 
         /**
-         * Product ID
+         * Product ID.
          * @type {string || null}
          */
         this.ProductId = null;
 
         /**
-         * Product name
+         * Product name.
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * Region ID
+         * Region ID.
          * @type {string || null}
          */
         this.RegionId = null;
 
         /**
-         * Region name
+         * Region name.
          * @type {string || null}
          */
         this.RegionName = null;
 
         /**
-         * Event start time
+         * Event start time.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -61,7 +61,7 @@ class EventDetail extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Current status: Normally, Informational, Degradation
+         * Current status: Normally, Informational, Degradation.
          * @type {string || null}
          */
         this.CurrentStatus = null;
@@ -147,9 +147,8 @@ class DescribeEventsRequest extends  AbstractModel {
         this.ProductIds = null;
 
         /**
-         * 1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
-2. The region ID for non-region-specific products should be set to "non-regional".
-
+         *  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
+2. The region ID for non-region-specific products should be set to non-regional.
          * @type {Array.<string> || null}
          */
         this.RegionIds = null;
@@ -180,6 +179,7 @@ class ProductEventList extends  AbstractModel {
 
         /**
          * Detailed event information.
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {Array.<EventDetail> || null}
          */
         this.EventList = null;

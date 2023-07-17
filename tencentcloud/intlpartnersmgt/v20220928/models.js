@@ -17,6 +17,49 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * QueryDirectCustomersCredit response structure.
+ * @class
+ */
+class QueryDirectCustomersCreditResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Direct customer information list
+         * @type {Array.<QueryDirectCustomersCreditData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryDirectCustomersCreditData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QueryPartnerCredit response structure.
  * @class
  */
@@ -272,6 +315,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.SummaryOverview[z]);
                 this.SummaryOverview.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryCreditQuota response structure.
+ * @class
+ */
+class QueryCreditQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -627,30 +698,24 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
- * QueryCreditAllocationHistory request structure.
+ * QueryAccountVerificationStatus response structure.
  * @class
  */
-class QueryCreditAllocationHistoryRequest extends  AbstractModel {
+class QueryAccountVerificationStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Customer UIN
-         * @type {number || null}
+         * Account verification status
+         * @type {boolean || null}
          */
-        this.ClientUin = null;
+        this.AccountStatus = null;
 
         /**
-         * Page number
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Page = null;
-
-        /**
-         * Number of data entries per page
-         * @type {number || null}
-         */
-        this.PageSize = null;
+        this.RequestId = null;
 
     }
 
@@ -661,9 +726,8 @@ class QueryCreditAllocationHistoryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
-        this.Page = 'Page' in params ? params.Page : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.AccountStatus = 'AccountStatus' in params ? params.AccountStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -730,6 +794,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetCountryCodes response structure.
+ * @class
+ */
+class GetCountryCodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of country/region codes
+         * @type {Array.<CountryCodeItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CountryCodeItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QueryCreditByUinList response structure.
  * @class
  */
@@ -763,6 +870,49 @@ class QueryCreditByUinListResponse extends  AbstractModel {
             this.Data = new Array();
             for (let z in params.Data) {
                 let obj = new QueryDirectCustomersCreditData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCustomerInfo response structure.
+ * @class
+ */
+class DescribeCustomerInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer information Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DescribeCustomerInfoData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DescribeCustomerInfoData();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
@@ -829,6 +979,84 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
+ * List of customer UINs
+ * @class
+ */
+class DescribeCustomerUinData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CustomerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+
+    }
+}
+
+/**
+ * DescribeCustomerUin response structure.
+ * @class
+ */
+class DescribeCustomerUinResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of customer UINs Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DescribeCustomerUinData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The number of customers
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DescribeCustomerUinData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1083,6 +1311,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * QueryAccountVerificationStatus request structure.
+ * @class
+ */
+class QueryAccountVerificationStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
  * QueryCreditAllocationHistory response structure.
  * @class
  */
@@ -1312,24 +1568,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetCountryCodes response structure.
+ * DescribeCustomerInfo request structure.
  * @class
  */
-class GetCountryCodesResponse extends  AbstractModel {
+class DescribeCustomerInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of country/region codes
-         * @type {Array.<CountryCodeItem> || null}
+         * List of customer UINs
+         * @type {Array.<number> || null}
          */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.CustomerUin = null;
 
     }
 
@@ -1340,25 +1590,16 @@ class GetCountryCodesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new CountryCodeItem();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
 
     }
 }
 
 /**
- * QueryDirectCustomersCredit request structure.
+ * QueryCreditQuota request structure.
  * @class
  */
-class QueryDirectCustomersCreditRequest extends  AbstractModel {
+class QueryCreditQuotaRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -1917,18 +2158,67 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
 }
 
 /**
- * QueryDirectCustomersCredit response structure.
+ * QueryCreditAllocationHistory request structure.
  * @class
  */
-class QueryDirectCustomersCreditResponse extends  AbstractModel {
+class QueryCreditAllocationHistoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Direct customer information list
-         * @type {Array.<QueryDirectCustomersCreditData> || null}
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Number of data entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * QueryCustomersCredit response structure.
+ * @class
+ */
+class QueryCustomersCreditResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of queried customers
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<QueryCustomersCreditData> || null}
          */
         this.Data = null;
+
+        /**
+         * Number of customers
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1949,12 +2239,48 @@ class QueryDirectCustomersCreditResponse extends  AbstractModel {
         if (params.Data) {
             this.Data = new Array();
             for (let z in params.Data) {
-                let obj = new QueryDirectCustomersCreditData();
+                let obj = new QueryCustomersCreditData();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCustomerUin request structure.
+ * @class
+ */
+class DescribeCustomerUinRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Number of data entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -2024,31 +2350,60 @@ class QueryVoucherPoolRequest extends  AbstractModel {
 }
 
 /**
- * QueryCustomersCredit response structure.
+ * Customer information
  * @class
  */
-class QueryCustomersCreditResponse extends  AbstractModel {
+class DescribeCustomerInfoData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The list of queried customers
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<QueryCustomersCreditData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Number of customers
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Customer UIN Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CustomerUin = null;
+
+        /**
+         * Email Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * Mobile number Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * Remarks Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Mark = null;
+
+        /**
+         * Displayed name Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Binding time Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BindTime = null;
+
+        /**
+         * Account status Valid values: `0` (Not frozen),  `1` (Frozen).  Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccountStatus = null;
+
+        /**
+         * Identity verification status Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AuthStatus = null;
 
     }
 
@@ -2059,17 +2414,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QueryCustomersCreditData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Mark = 'Mark' in params ? params.Mark : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BindTime = 'BindTime' in params ? params.BindTime : null;
+        this.AccountStatus = 'AccountStatus' in params ? params.AccountStatus : null;
+        this.AuthStatus = 'AuthStatus' in params ? params.AuthStatus : null;
 
     }
 }
@@ -2349,13 +2701,36 @@ class DescribeCustomerBillSummaryRequest extends  AbstractModel {
     }
 }
 
+/**
+ * QueryDirectCustomersCredit request structure.
+ * @class
+ */
+class QueryDirectCustomersCreditRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
 module.exports = {
+    QueryDirectCustomersCreditResponse: QueryDirectCustomersCreditResponse,
     QueryPartnerCreditResponse: QueryPartnerCreditResponse,
     QueryVoucherListByUinRequest: QueryVoucherListByUinRequest,
     QueryVoucherAmountByUinResponse: QueryVoucherAmountByUinResponse,
     QueryVoucherAmountByUinItem: QueryVoucherAmountByUinItem,
     QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
+    QueryCreditQuotaResponse: QueryCreditQuotaResponse,
     QueryVoucherListByUinItem: QueryVoucherListByUinItem,
     DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
     QueryPartnerCreditRequest: QueryPartnerCreditRequest,
@@ -2365,20 +2740,25 @@ module.exports = {
     QueryCustomersCreditRequest: QueryCustomersCreditRequest,
     QueryCreditByUinListRequest: QueryCreditByUinListRequest,
     CreateAccountResponse: CreateAccountResponse,
-    QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
+    QueryAccountVerificationStatusResponse: QueryAccountVerificationStatusResponse,
     RegionSummaryOverviewItem: RegionSummaryOverviewItem,
+    GetCountryCodesResponse: GetCountryCodesResponse,
     QueryCreditByUinListResponse: QueryCreditByUinListResponse,
+    DescribeCustomerInfoResponse: DescribeCustomerInfoResponse,
     BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
+    DescribeCustomerUinData: DescribeCustomerUinData,
+    DescribeCustomerUinResponse: DescribeCustomerUinResponse,
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     QueryVoucherPoolResponse: QueryVoucherPoolResponse,
     DescribeCustomerBillDetailRequest: DescribeCustomerBillDetailRequest,
     DescribeCustomerBillDetailResponse: DescribeCustomerBillDetailResponse,
+    QueryAccountVerificationStatusRequest: QueryAccountVerificationStatusRequest,
     QueryCreditAllocationHistoryResponse: QueryCreditAllocationHistoryResponse,
     CreateAccountRequest: CreateAccountRequest,
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
-    GetCountryCodesResponse: GetCountryCodesResponse,
-    QueryDirectCustomersCreditRequest: QueryDirectCustomersCreditRequest,
+    DescribeCustomerInfoRequest: DescribeCustomerInfoRequest,
+    QueryCreditQuotaRequest: QueryCreditQuotaRequest,
     AllocateCustomerCreditResponse: AllocateCustomerCreditResponse,
     QueryVoucherListByUinVoucherItem: QueryVoucherListByUinVoucherItem,
     QueryVoucherAmountByUinRequest: QueryVoucherAmountByUinRequest,
@@ -2387,12 +2767,15 @@ module.exports = {
     CountryCodeItem: CountryCodeItem,
     BillDetailData: BillDetailData,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
-    QueryDirectCustomersCreditResponse: QueryDirectCustomersCreditResponse,
+    QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
+    QueryCustomersCreditResponse: QueryCustomersCreditResponse,
+    DescribeCustomerUinRequest: DescribeCustomerUinRequest,
     QueryVoucherListByUinResponse: QueryVoucherListByUinResponse,
     QueryVoucherPoolRequest: QueryVoucherPoolRequest,
-    QueryCustomersCreditResponse: QueryCustomersCreditResponse,
+    DescribeCustomerInfoData: DescribeCustomerInfoData,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     QueryCustomersCreditData: QueryCustomersCreditData,
     DescribeCustomerBillSummaryRequest: DescribeCustomerBillSummaryRequest,
+    QueryDirectCustomersCreditRequest: QueryDirectCustomersCreditRequest,
 
 }

@@ -157,28 +157,19 @@ class RedisBackupSet extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Backup ID
+         * Backup task ID
          * @type {string || null}
          */
         this.BackupId = null;
 
         /**
-         * Backup type
-
-- `1`: Manual backup initiated by the user.
-- `0`: Automatic backup in the early morning initiated by the system.
+         * Backup type. Valid values:  `1` (Automatic backup in the early morning initiated by the system.) `0`: Manual backup initiated by the user.
          * @type {string || null}
          */
         this.BackupType = null;
 
         /**
-         * Backup status 
-
-- `1`: The backup is locked by another process.
-- `2`: The backup is normal and not locked by any process.
-- `-1`: The backup expired.
-- `3`: The backup is being exported.
-- `4`: The backup was exported successfully.
+         * Backup status. Valid values:  - `1`: The backup is locked by another process. - `2`: The backup is normal and not locked by any process. - `-1`: The backup is expired. - `3`: The backup is being exported. - `4`: Exported the backup successfully.
          * @type {number || null}
          */
         this.Status = null;
@@ -190,10 +181,7 @@ class RedisBackupSet extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Whether the backup is locked
-
-- `0`: Not locked.
-- `1`: Locked.
+         * Whether the backup is locked. Valid values:  - `0` (no) - `1` (yes)
          * @type {number || null}
          */
         this.Locked = null;
@@ -335,7 +323,7 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Automatic backup type: 1 (scheduled rollback)
+         * Automatic backup type.  Valid value:  `1` (scheduled backup).
          * @type {number || null}
          */
         this.AutoBackupType = null;
@@ -347,7 +335,7 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         this.WeekDays = null;
 
         /**
-         * Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
+         * Time period for automatic scheduled backup  in the format of  “00:00-01:00, 01:00-02:00...... 23:00-00:00”.
          * @type {string || null}
          */
         this.TimePeriod = null;
@@ -806,7 +794,7 @@ class DescribeInstanceZoneInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, such as crs-6ubhgouj
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1459,13 +1447,13 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
-         * Private IP for which the security group takes effect
+         * Private IPv4 address of an instance
          * @type {string || null}
          */
         this.VIP = null;
 
         /**
-         * Private port for which the security group takes effect
+         * Private network port
          * @type {string || null}
          */
         this.VPort = null;
@@ -1551,7 +1539,7 @@ class RedisNodeInfo extends  AbstractModel {
         this.NodeType = null;
 
         /**
-         * Master or replica node ID. <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance. </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul>
+         * ID of the master or replica node <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance by deleting a replica.  </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul> </li></ul>
          * @type {number || null}
          */
         this.NodeId = null;
@@ -1835,43 +1823,43 @@ class Account extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance ID 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Account name (`root` for a root account)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Account name 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AccountName = null;
 
         /**
-         * Account description information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Account description information 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Read/write policy. r: read-only; w: write-only; rw: read/write
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Read/write permission policy. Valid values: `r` (read-only),  `w` (write-only),  `rw`  (read/write). 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Privilege = null;
 
         /**
-         * Routing policy. master: master node; replication: secondary node
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Read-only routing policy. Valid values: `master` (master node),  `replication`  (replica node). 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
 
         /**
-         * Sub-account status. 1: account is being changed; 2: account is valid; -4: account has been deleted
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Sub-account status. Valid values:  `1` (being changed),  `2` (valid). `4` (deleted). 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
@@ -1960,13 +1948,13 @@ class SecurityGroupsInboundAndOutbound extends  AbstractModel {
         super();
 
         /**
-         * Action to be executed
+         * Identify whether the IP and port for accessing the database are allowed
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * IP addresses
+         * IP address for accessing the database
          * @type {string || null}
          */
         this.Ip = null;
@@ -2516,7 +2504,8 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2534,7 +2523,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.TimePeriod = null;
 
         /**
-         * Automatic backup type. `1`: Scheduled rollback.
+         * Automatic backup type.  Valid value:  `1` (scheduled backup).
          * @type {number || null}
          */
         this.AutoBackupType = null;
@@ -2571,13 +2560,13 @@ class InstanceMultiParam extends  AbstractModel {
         this.ParamName = null;
 
         /**
-         * Parameter type: Multi
+         * Parameter Type such as  `MULTI`
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Valid values: true, false
+         * Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -2595,19 +2584,19 @@ class InstanceMultiParam extends  AbstractModel {
         this.CurrentValue = null;
 
         /**
-         * Parameter description
+         * Description
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Parameter description
+         * Description
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
 
         /**
-         * Parameter status. 1: modifying; 2: modified
+         * Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
          * @type {number || null}
          */
         this.Status = null;
@@ -2670,19 +2659,19 @@ class RedisNode extends  AbstractModel {
         super();
 
         /**
-         * Number of keys on the node
+         * Number of keys on Redis nodes
          * @type {number || null}
          */
         this.Keys = null;
 
         /**
-         * Distribution of node slots
+         * Slot distribution range for Redis node.  Value range:  0-5460.
          * @type {string || null}
          */
         this.Slot = null;
 
         /**
-         * Node ID
+         * Node sequence ID
          * @type {string || null}
          */
         this.NodeId = null;
@@ -2850,13 +2839,13 @@ class DescribeInstanceShardsResponse extends  AbstractModel {
         super();
 
         /**
-         * Information list of instance shards
+         * List information of the instance shards, which includes  node information, node ID, key count, used capacity, and capacity slope.
          * @type {Array.<InstanceClusterShard> || null}
          */
         this.InstanceShards = null;
 
         /**
-         * Total number of instance shard nodes
+         * Number of instance shard nodes
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2956,64 +2945,64 @@ class TaskInfoDetail extends  AbstractModel {
         super();
 
         /**
-         * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task ID 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * Start time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task start time 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Task type
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. Backup instance 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * Instance name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance name 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance ID 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Project ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Project ID 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Task progress
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task progress 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * End time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task end time 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Task status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed) 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Result = null;
@@ -3455,13 +3444,14 @@ class ChangeReplicaToMasterRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Replica group ID, which is required for multi-AZ instances.
+         * ID of the replica node group. You can get more ID information of the multi-AZ replica node group though the [DescribeInstanceZoneInfo](https://intl.cloud.tencent.com/document/product/239/50312?from_cn_redirect=1) API.  This parameter is not required for a single-AZ replica node group.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -4185,7 +4175,8 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4256,7 +4247,7 @@ class InstanceSecurityGroupDetail extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Security group information
+         * Security group information, which includes  security group ID, name, outbound and inbound rules.
          * @type {Array.<SecurityGroupDetail> || null}
          */
         this.SecurityGroupDetails = null;
@@ -4440,19 +4431,13 @@ class DelayDistribution extends  AbstractModel {
         super();
 
         /**
-         * Delay distribution. The mapping between delay range and `Ladder` value is as follows:
-[0ms,1ms]: 1;
-[1ms,5ms]: 5;
-[5ms,10ms]: 10;
-[10ms,50ms]: 50;
-[50ms,200ms]: 200;
-[200ms,∞]: -1.
+         * The delay distribution. The mapping between delay range and `Ladder` value is as follows:  - `1`: [0ms,1ms]. - `5`: [1ms,5ms]. - `10`: [5ms,10ms]. - `50`: [10ms,50ms]. - `200`:  [50ms,200ms]. - `-1`: [200ms,∞].
          * @type {number || null}
          */
         this.Ladder = null;
 
         /**
-         * The number of commands whose delay falls within the current delay range
+         * The number of commands with delay falling within the current delay range -
          * @type {number || null}
          */
         this.Size = null;
@@ -4821,25 +4806,19 @@ class KillMasterGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
-2. It cannot start with a slash (/).
-3. It must contain characters in at least two of the following types:
-    a. Lowercase letters (a–z)
-    b. Uppercase letters (A–Z)
-    c. Digits (0–9)
-    d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+         * A parameter used to configure the access password for a specified instance. If password-free authentication is enabled, this parameter will not be required. Required password strength. - It must contains 8-30 characters. We recommend that you use a password of more than 12 characters. - It must contain at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Node information of a single-AZ deployed instance
+         * Shard ID of a sharded cluster
          * @type {Array.<number> || null}
          */
         this.ShardIds = null;
@@ -5076,7 +5055,7 @@ class DescribeInstanceAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5088,7 +5067,7 @@ class DescribeInstanceAccountRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Page offset
+         * Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
          * @type {number || null}
          */
         this.Offset = null;
@@ -5124,13 +5103,13 @@ class InstanceTextParam extends  AbstractModel {
         this.ParamName = null;
 
         /**
-         * Parameter type: Text
+         * Parameter type such as  `Text`.
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Valid values: true, false
+         * Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -5148,19 +5127,19 @@ class InstanceTextParam extends  AbstractModel {
         this.CurrentValue = null;
 
         /**
-         * Parameter description
+         * Description
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Valid values of the parameter
+         * Acceptable values of the parameter
          * @type {Array.<string> || null}
          */
         this.TextValue = null;
 
         /**
-         * Parameter status. 1: modifying; 2: modified
+         * Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
          * @type {number || null}
          */
         this.Status = null;
@@ -5237,7 +5216,7 @@ class DescribeTaskListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5249,49 +5228,49 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Maximum number of results returned per page. Default value: 20. Maximum value: 100.
+         * Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit` (rounded down automatically).
+         * Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Project ID
+         * Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
 
         /**
-         * Task type
+         * Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. - `FLOW_BACKUPINSTANCE`: Back up an instance.
          * @type {Array.<string> || null}
          */
         this.TaskTypes = null;
 
         /**
-         * Start time
+         * Start time for executing a task,  in the format of  “2020-10-12 00:00:00”.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * End time
+         * End time for executing a task,  in the format of  “2021-12-30 20:59:35”.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Task status
+         * This parameter is only for internal use and can be ignored.
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
 
         /**
-         * Task status
+         * Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed)
          * @type {Array.<number> || null}
          */
         this.Result = null;
@@ -5303,7 +5282,7 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.OperatorUin = null;
 
         /**
-         * Operator Uin
+         * Operator account ID or UIN
          * @type {Array.<string> || null}
          */
         this.OperateUin = null;
@@ -5867,7 +5846,7 @@ class DescribeInstanceSecurityGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * List of instances
+         * List of instance IDs,  such as "crs-f2ho5rsz\n".
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -5954,7 +5933,7 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6109,13 +6088,13 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Whether to filter out the replica node information
+         * Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
          * @type {boolean || null}
          */
         this.FilterSlave = null;
@@ -6221,31 +6200,31 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Backup type. Automatic backup type: 1 (scheduled rollback)
+         * This parameter is retained due to compatibility and can be ignored.
          * @type {number || null}
          */
         this.AutoBackupType = null;
 
         /**
-         * Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+         * Backup cycle, which will be daily by default. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
 
         /**
-         * Time period.
+         * Time period for backup task initialization
          * @type {string || null}
          */
         this.TimePeriod = null;
 
         /**
-         * Number of days to retain full backup files
+         * Retention time of full backup files in days.  Default value: `7`.  To retain the files for more days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.
          * @type {number || null}
          */
         this.BackupStorageDays = null;
 
         /**
-         * Number of days to retain Tendis binlog backup files
+         * This parameter has been disused.
          * @type {number || null}
          */
         this.BinlogStorageDays = null;
@@ -6743,7 +6722,7 @@ class DescribeInstanceSecurityGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Security group information of the instance
+         * Security group information of an instance
          * @type {Array.<InstanceSecurityGroupDetail> || null}
          */
         this.InstanceSecurityGroupsDetail = null;
@@ -6991,7 +6970,7 @@ class InstanceNode extends  AbstractModel {
         super();
 
         /**
-         * Id
+         * Instance ID
          * @type {number || null}
          */
         this.Id = null;
@@ -7377,7 +7356,7 @@ class AssociateSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * Instance node information
+ * Information of the instance node group
  * @class
  */
 class ReplicaGroup extends  AbstractModel {
@@ -7743,19 +7722,21 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pagination offset, which is an integral multiple of `Limit`.
+         * Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Instance ID, such as crs-6ubhgouj.
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+
+
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance sorting criteria. The enumerated values are as listed below: <ul><li>projectId: Project ID. </li><li>createtime: Instance creation time. </li><li>instancename: Instance name. </li><li>type: Instance type. </li><li>curDeadline: Instance expiration time. </li></ul>
+         * Instance list sorting criteria. The enumerated values are as listed below:  <ul><li>`projectId`:  Project ID.  </li><li>`createtime`:  Instance creation time.  </li><li>`instancename`:  Instance name.  </li><li>`type`:  Instance type. </li><li>`curDeadline`:  Instance expiration time. </li></ul>
          * @type {string || null}
          */
         this.OrderBy = null;
@@ -7833,7 +7814,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.EngineName = null;
 
         /**
-         * Renewal mode. <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: No auto-renewal (set by user)</ul>
+         * Renewal mode. Valid values:  <ul><li>`0`:  Manual renewal </li><li>`1`:  Auto-renewal </li><li>`2`:  No renewal upon expiration </ul>
          * @type {Array.<number> || null}
          */
         this.AutoRenew = null;
@@ -7845,7 +7826,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * Instance type. <ul><li>`1`: Legacy Redis cluster edition. </li><li>`2`: Redis 2.8 master-replica edition. </li><li>`3`: CKV master-replica edition. </li><li>`4`: CKV cluster edition. </li><li>`5`: Redis 2.8 standalone edition. </li><li>`6`: Redis 4.0 master-replica edition. </li><li>`7`: Redis 4.0 cluster edition. </li><li>8: Redis 5.0 master-replica edition. </li><li>`9`: Redis 5.0 cluster edition. </li></ul>
+         * Instance type. Valid values:  - `2`: Redis 2.8 Memory Edition (Standard Architecture). - `3`: CKV 3.2 Memory Edition (Standard Architecture). - `4`: CKV 3.2 Memory Edition (Cluster Architecture). - `5`: Redis 2.8 Memory Edition (Standalone). - `6`: Redis 4.0 Memory Edition (Standard Architecture). - `7`: Redis 4.0 Memory Edition (Cluster Architecture). - `8`: Redis 5.0 Memory Edition (Standard Architecture). - `9`: Redis 5.0 Memory Edition (Cluster Architecture). - `15`: Redis 6.2 Memory Edition (Standard Architecture). - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
          * @type {number || null}
          */
         this.Type = null;
@@ -7881,7 +7862,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.TagKeys = null;
 
         /**
-         * Instance product version. If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default. <ul><li>`local`: local disk edition. </li><li>`cloud`: Cloud disk edition. </li><li>`cdc`: Dedicated cluster edition. </li></ul>
+         * Instance product version.  If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default.  <ul><li>`local`:  Local disk edition.  </li><li>`cdc`:  Dedicated cluster edition.  </li></ul>
          * @type {Array.<string> || null}
          */
         this.ProductVersions = null;
@@ -8035,37 +8016,38 @@ class DescribeSlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * The start time
+         * Start time for prequerying a slow log
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * The end time
+         * End time for prequerying a slow log
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * The average execution time threshold of slow query in ms.
+         * The average execution time threshold of slow query  in microseconds
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Number of slow queries displayed per page. Default value: `20`.
+         * Number of slow queries displayed per page. Default value: `20`. Value range:  [20,1000].
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Slow query offset, which is an integral multiple of `Limit`.
+         * Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
          * @type {number || null}
          */
         this.Offset = null;
@@ -8133,7 +8115,7 @@ class DescribeAutoBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8457,19 +8439,19 @@ class ManualBackupInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Backup remarks
+         * Remarks for manual backup task
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Retention time in days. 0 indicates the default retention time.
+         * Retention period of backup data in days.  Default value: 7 days.  Value range: [0,1825].  If the value exceeds 7 days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application. - If this parameter is not configured, it will set to be the same as the period of automatic backup retention. - If automatic backup is not set, the default value will be 7 days.
          * @type {number || null}
          */
         this.StorageDays = null;
@@ -9688,19 +9670,19 @@ class DescribeInstanceNodeInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * List size
+         * List size Size of node information returned per page.  Default value: `20`. Maximum value: `1000`.  This field has been disused.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * The offset value
+         * Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1). This field has been disused.
          * @type {number || null}
          */
         this.Offset = null;
@@ -9764,25 +9746,25 @@ class InstanceClusterNode extends  AbstractModel {
         this.Name = null;
 
         /**
-         * ID of the runtime node of the instance
+         * ID of the runtime node of an instance
          * @type {string || null}
          */
         this.RunId = null;
 
         /**
-         * Cluster role. 0: master; 1: replica
+         * Cluster role. Valid values:  - `0` (master) - `1` (replica)
          * @type {number || null}
          */
         this.Role = null;
 
         /**
-         * Node status. 0: readwrite; 1: read; 2: backup
+         * Node status. Valid values:  - `0` (read/write) - `1` (read) - `2` (backup)
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Service status. 0: down; 1: on
+         * Service status. Valid values: `0` (down), `1` (on).
          * @type {number || null}
          */
         this.Connected = null;
@@ -9800,7 +9782,7 @@ class InstanceClusterNode extends  AbstractModel {
         this.DownTime = null;
 
         /**
-         * Distribution of node slots
+         * Node slot distribution range
          * @type {string || null}
          */
         this.Slots = null;
@@ -9812,13 +9794,13 @@ class InstanceClusterNode extends  AbstractModel {
         this.Keys = null;
 
         /**
-         * Node QPS
+         * Node QPS Number of executions per second on sharded nodes Unit: Counts/sec
          * @type {number || null}
          */
         this.Qps = null;
 
         /**
-         * Node QPS slope
+         * QPS slope of a node
          * @type {number || null}
          */
         this.QpsSlope = null;
@@ -10002,31 +9984,32 @@ class DescribeProxySlowLogRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Start time
+         * Start time of slow query
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * End time
+         * End time of slow query
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Slow query threshold in milliseconds
+         * Slow query threshold  in milliseconds
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Maximum number of results returned per page
+         * Number of results per page.  Default value: `20`. Value range: [20,1000].
          * @type {number || null}
          */
         this.Limit = null;
@@ -10150,15 +10133,15 @@ class DescribeInstanceAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * Account details
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Account details 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Account> || null}
          */
         this.Accounts = null;
 
         /**
-         * Number of accounts
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of accounts 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -10444,7 +10427,7 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of instance parameters
+         * Total number of the parameter lists
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -10657,13 +10640,13 @@ class InstanceEnumParam extends  AbstractModel {
         this.ParamName = null;
 
         /**
-         * Parameter type: Enum
+         * Parameter type, such as `Enum`.
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Valid values: true, false
+         * Whether to restart the database after modifying the parameters. Valid values: - `true` (required) - `false` (not required)
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -10681,19 +10664,19 @@ class InstanceEnumParam extends  AbstractModel {
         this.CurrentValue = null;
 
         /**
-         * Parameter description
+         * Description
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Valid values of the parameter
+         * Acceptable values for the parameter
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
 
         /**
-         * Parameter status. 1: modifying; 2: modified
+         * Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
          * @type {number || null}
          */
         this.Status = null;
@@ -10880,7 +10863,7 @@ class SecurityGroupDetail extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Creation time
+         * Security group creation time
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -10904,7 +10887,7 @@ class SecurityGroupDetail extends  AbstractModel {
         this.SecurityGroupRemark = null;
 
         /**
-         * Security group inbound rule
+         * Inbound rules of the security group, which control the access source to the database.
          * @type {Array.<SecurityGroupsInboundAndOutbound> || null}
          */
         this.InboundRule = null;
@@ -11470,34 +11453,34 @@ class DescribeInstanceNodeInfoResponse extends  AbstractModel {
         this.ProxyCount = null;
 
         /**
-         * Proxy node information
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Proxy node information 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ProxyNodes> || null}
          */
         this.Proxy = null;
 
         /**
-         * The number of redis nodes
+         * The number of Redis nodes
          * @type {number || null}
          */
         this.RedisCount = null;
 
         /**
-         * Redis node information
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Redis node information 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RedisNodes> || null}
          */
         this.Redis = null;
 
         /**
-         * The number of tendis nodes
+         * This parameter has been disused.
          * @type {number || null}
          */
         this.TendisCount = null;
 
         /**
-         * Tendis node information
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * This parameter has been disused. 
+Note:  This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TendisNodes> || null}
          */
         this.Tendis = null;

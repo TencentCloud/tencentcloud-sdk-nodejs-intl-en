@@ -164,6 +164,12 @@ class Trigger extends  AbstractModel {
          */
         this.Qualifier = null;
 
+        /**
+         * Trigger description
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -185,6 +191,7 @@ class Trigger extends  AbstractModel {
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.TriggerAttribute = 'TriggerAttribute' in params ? params.TriggerAttribute : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -2553,6 +2560,12 @@ class CreateTriggerRequest extends  AbstractModel {
          */
         this.CustomArgument = null;
 
+        /**
+         * Trigger description
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -2570,6 +2583,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -2987,6 +3001,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.TriggerAttribute = null;
 
+        /**
+         * Description of a custom trigger 
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -3008,6 +3029,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.TriggerAttribute = 'TriggerAttribute' in params ? params.TriggerAttribute : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3239,7 +3261,8 @@ class PublishVersionResponse extends  AbstractModel {
         this.Timeout = null;
 
         /**
-         * Function running environment
+         * Function running environment 
+Note: This parameter may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Runtime = null;
@@ -5233,8 +5256,9 @@ class ListTriggersRequest extends  AbstractModel {
         this.Order = null;
 
         /**
-         * * Qualifier:
-Function version, alias
+         * * Qualifier: Version/Alias of trigger function 
+*TriggerName: Name of the trigger 
+*Description: Function trigger description
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5448,7 +5472,8 @@ class Function extends  AbstractModel {
         this.AddTime = null;
 
         /**
-         * Running
+         * Runtime 
+Note: This parameter may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Runtime = null;

@@ -34,6 +34,7 @@ const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeDataBackupOverviewResponse = models.DescribeDataBackupOverviewResponse;
 const BackupSummaryItem = models.BackupSummaryItem;
+const CreateDatabaseRequest = models.CreateDatabaseRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
@@ -125,6 +126,7 @@ const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
+const CreateDatabaseResponse = models.CreateDatabaseResponse;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
@@ -575,7 +577,7 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to set the default encryption status of an instance backup. 
+     * This API is used to set the encryption status of an instance backup.
      * @param {ModifyBackupEncryptionStatusRequest} req
      * @param {function(string, ModifyBackupEncryptionStatusResponse):void} cb
      * @public
@@ -1017,6 +1019,17 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     CreateCdbProxyAddress(req, cb) {
         let resp = new CreateCdbProxyAddressResponse();
         this.request("CreateCdbProxyAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a database in a TencentDB instance.
+     * @param {CreateDatabaseRequest} req
+     * @param {function(string, CreateDatabaseResponse):void} cb
+     * @public
+     */
+    CreateDatabase(req, cb) {
+        let resp = new CreateDatabaseResponse();
+        this.request("CreateDatabase", req, resp, cb);
     }
 
     /**

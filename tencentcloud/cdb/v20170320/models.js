@@ -1207,6 +1207,48 @@ class BackupSummaryItem extends  AbstractModel {
 }
 
 /**
+ * CreateDatabase request structure.
+ * @class
+ */
+class CreateDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBName = null;
+
+        /**
+         * Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
+         * @type {string || null}
+         */
+        this.CharacterSetName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.CharacterSetName = 'CharacterSetName' in params ? params.CharacterSetName : null;
+
+    }
+}
+
+/**
  * ModifyInstanceParam request structure.
  * @class
  */
@@ -2336,7 +2378,7 @@ class CreateCdbProxyAddressRequest extends  AbstractModel {
         this.SecurityGroup = null;
 
         /**
-         * 
+         * Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
          * @type {string || null}
          */
         this.ConnectionPoolType = null;
@@ -4971,13 +5013,13 @@ class DescribeBinlogsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Earliest Binlog start time in the format of  2016-03-17 02:10:37
+         * The earliest start time of binlog  in the format of 2016-03-17 02:10:37.
          * @type {string || null}
          */
         this.MinStartTime = null;
 
         /**
-         * Latest binlog start time in the format of  2016-03-17 02:10:37
+         * The latest start time of binlog  in the format of 2016-03-17 02:10:37.
          * @type {string || null}
          */
         this.MaxStartTime = null;
@@ -6140,6 +6182,34 @@ class BinlogInfo extends  AbstractModel {
         }
         this.CosStorageType = 'CosStorageType' in params ? params.CosStorageType : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * CreateDatabase response structure.
+ * @class
+ */
+class CreateDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12261,8 +12331,8 @@ class ProxyInst extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Instance type Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Instance type. Valid values:  `master` (source instance), `ro` (read-only instance), `dr` (disaster recovery instance), `sdr` (disaster recovery instance of small specifications). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
         this.InstanceType = null;
 
@@ -19673,6 +19743,7 @@ module.exports = {
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeDataBackupOverviewResponse: DescribeDataBackupOverviewResponse,
     BackupSummaryItem: BackupSummaryItem,
+    CreateDatabaseRequest: CreateDatabaseRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
@@ -19764,6 +19835,7 @@ module.exports = {
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
+    CreateDatabaseResponse: CreateDatabaseResponse,
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,

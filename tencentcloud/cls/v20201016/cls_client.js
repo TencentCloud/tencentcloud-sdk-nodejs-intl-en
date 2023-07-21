@@ -32,7 +32,10 @@ const DescribeShipperTasksResponse = models.DescribeShipperTasksResponse;
 const CreateMachineGroupResponse = models.CreateMachineGroupResponse;
 const Filter = models.Filter;
 const DescribeConfigMachineGroupsRequest = models.DescribeConfigMachineGroupsRequest;
+const KafkaRechargeInfo = models.KafkaRechargeInfo;
+const ModifyLogsetRequest = models.ModifyLogsetRequest;
 const CreateLogsetRequest = models.CreateLogsetRequest;
+const ModifyDataTransformRequest = models.ModifyDataTransformRequest;
 const LogItem = models.LogItem;
 const SearchLogResponse = models.SearchLogResponse;
 const DeleteTopicRequest = models.DeleteTopicRequest;
@@ -43,7 +46,7 @@ const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
 const MergePartitionRequest = models.MergePartitionRequest;
 const DescribeShippersResponse = models.DescribeShippersResponse;
 const ModifyShipperResponse = models.ModifyShipperResponse;
-const ModifyTopicRequest = models.ModifyTopicRequest;
+const DeleteKafkaRechargeResponse = models.DeleteKafkaRechargeResponse;
 const CallBackInfo = models.CallBackInfo;
 const OpenKafkaConsumerResponse = models.OpenKafkaConsumerResponse;
 const AlarmTargetInfo = models.AlarmTargetInfo;
@@ -52,19 +55,20 @@ const DescribeConfigsResponse = models.DescribeConfigsResponse;
 const DeleteMachineGroupInfoRequest = models.DeleteMachineGroupInfoRequest;
 const CreateLogsetResponse = models.CreateLogsetResponse;
 const DeleteMachineGroupResponse = models.DeleteMachineGroupResponse;
-const Tag = models.Tag;
+const KafkaProtocolInfo = models.KafkaProtocolInfo;
+const DescribeCosRechargesRequest = models.DescribeCosRechargesRequest;
 const MetaTagInfo = models.MetaTagInfo;
-const DescribeExportsRequest = models.DescribeExportsRequest;
+const CreateCosRechargeRequest = models.CreateCosRechargeRequest;
 const ExtractRuleInfo = models.ExtractRuleInfo;
 const TopicInfo = models.TopicInfo;
-const DescribeConsumerRequest = models.DescribeConsumerRequest;
+const DeleteDataTransformResponse = models.DeleteDataTransformResponse;
 const ShipperTaskInfo = models.ShipperTaskInfo;
 const ModifyConsumerRequest = models.ModifyConsumerRequest;
 const CreateIndexResponse = models.CreateIndexResponse;
 const DeleteConfigFromMachineGroupResponse = models.DeleteConfigFromMachineGroupResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
 const ModifyMachineGroupResponse = models.ModifyMachineGroupResponse;
-const RuleInfo = models.RuleInfo;
+const DataTransformResouceInfo = models.DataTransformResouceInfo;
 const DeleteMachineGroupRequest = models.DeleteMachineGroupRequest;
 const FullTextInfo = models.FullTextInfo;
 const DescribePartitionsResponse = models.DescribePartitionsResponse;
@@ -82,7 +86,7 @@ const ExcludePathInfo = models.ExcludePathInfo;
 const FilterRuleInfo = models.FilterRuleInfo;
 const RetryShipperTaskResponse = models.RetryShipperTaskResponse;
 const SplitPartitionRequest = models.SplitPartitionRequest;
-const DescribeCosRechargesRequest = models.DescribeCosRechargesRequest;
+const CheckRechargeKafkaServerRequest = models.CheckRechargeKafkaServerRequest;
 const MachineGroupInfo = models.MachineGroupInfo;
 const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
 const CloseKafkaConsumerResponse = models.CloseKafkaConsumerResponse;
@@ -93,8 +97,9 @@ const DeleteConsumerResponse = models.DeleteConsumerResponse;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const GetAlarmLogResponse = models.GetAlarmLogResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
-const CreateCosRechargeRequest = models.CreateCosRechargeRequest;
+const DescribeExportsRequest = models.DescribeExportsRequest;
 const AlarmTarget = models.AlarmTarget;
+const CreateKafkaRechargeResponse = models.CreateKafkaRechargeResponse;
 const OpenKafkaConsumerRequest = models.OpenKafkaConsumerRequest;
 const DeleteConfigResponse = models.DeleteConfigResponse;
 const ModifyIndexResponse = models.ModifyIndexResponse;
@@ -105,17 +110,23 @@ const UploadLogRequest = models.UploadLogRequest;
 const ModifyConsumerResponse = models.ModifyConsumerResponse;
 const DescribeAlertRecordHistoryRequest = models.DescribeAlertRecordHistoryRequest;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
+const KafkaConsumerContent = models.KafkaConsumerContent;
 const LogsetInfo = models.LogsetInfo;
+const DescribeConsumerRequest = models.DescribeConsumerRequest;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const AnalysisDimensional = models.AnalysisDimensional;
+const LogRechargeRuleInfo = models.LogRechargeRuleInfo;
 const CloseKafkaConsumerRequest = models.CloseKafkaConsumerRequest;
 const RuleTagInfo = models.RuleTagInfo;
 const CreateExportRequest = models.CreateExportRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
+const DeleteDataTransformRequest = models.DeleteDataTransformRequest;
 const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
 const ModifyConfigRequest = models.ModifyConfigRequest;
 const AddMachineGroupInfoRequest = models.AddMachineGroupInfoRequest;
+const DescribeKafkaRechargesRequest = models.DescribeKafkaRechargesRequest;
 const JsonInfo = models.JsonInfo;
+const PreviewKafkaRechargeResponse = models.PreviewKafkaRechargeResponse;
 const CreateShipperRequest = models.CreateShipperRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteAlarmResponse = models.DeleteAlarmResponse;
@@ -125,30 +136,40 @@ const CreateAlarmNoticeResponse = models.CreateAlarmNoticeResponse;
 const ModifyTopicResponse = models.ModifyTopicResponse;
 const CreateConfigRequest = models.CreateConfigRequest;
 const CreateShipperResponse = models.CreateShipperResponse;
+const DescribeKafkaRechargesResponse = models.DescribeKafkaRechargesResponse;
 const DeleteIndexResponse = models.DeleteIndexResponse;
 const AlarmAnalysisConfig = models.AlarmAnalysisConfig;
 const ModifyIndexRequest = models.ModifyIndexRequest;
 const Column = models.Column;
-const CompressInfo = models.CompressInfo;
+const ContentInfo = models.ContentInfo;
 const ValueInfo = models.ValueInfo;
-const GetAlarmLogRequest = models.GetAlarmLogRequest;
+const DescribeDataTransformInfoRequest = models.DescribeDataTransformInfoRequest;
 const DeleteShipperResponse = models.DeleteShipperResponse;
 const ExportInfo = models.ExportInfo;
 const GroupTriggerConditionInfo = models.GroupTriggerConditionInfo;
 const DescribeLogContextResponse = models.DescribeLogContextResponse;
 const ConfigInfo = models.ConfigInfo;
 const DeleteExportRequest = models.DeleteExportRequest;
+const PreviewKafkaRechargeRequest = models.PreviewKafkaRechargeRequest;
 const SplitPartitionResponse = models.SplitPartitionResponse;
+const CreateDataTransformResponse = models.CreateDataTransformResponse;
 const LogContextInfo = models.LogContextInfo;
 const ModifyShipperRequest = models.ModifyShipperRequest;
+const CreateKafkaRechargeRequest = models.CreateKafkaRechargeRequest;
+const DeleteKafkaRechargeRequest = models.DeleteKafkaRechargeRequest;
+const RuleInfo = models.RuleInfo;
 const AlertHistoryRecord = models.AlertHistoryRecord;
 const CreateConsumerRequest = models.CreateConsumerRequest;
+const MultiTopicSearchInformation = models.MultiTopicSearchInformation;
 const AlarmNotice = models.AlarmNotice;
 const ModifyConfigResponse = models.ModifyConfigResponse;
+const ModifyKafkaRechargeResponse = models.ModifyKafkaRechargeResponse;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
+const DataTransformTaskInfo = models.DataTransformTaskInfo;
 const DescribeMachinesResponse = models.DescribeMachinesResponse;
 const ModifyCosRechargeResponse = models.ModifyCosRechargeResponse;
-const ContentInfo = models.ContentInfo;
+const PreviewLogStatistic = models.PreviewLogStatistic;
+const CompressInfo = models.CompressInfo;
 const ApplyConfigToMachineGroupResponse = models.ApplyConfigToMachineGroupResponse;
 const AlertHistoryNotice = models.AlertHistoryNotice;
 const DeleteAlarmRequest = models.DeleteAlarmRequest;
@@ -163,6 +184,7 @@ const AddMachineGroupInfoResponse = models.AddMachineGroupInfoResponse;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
 const DescribeAlarmNoticesRequest = models.DescribeAlarmNoticesRequest;
 const NoticeReceiver = models.NoticeReceiver;
+const ModifyTopicRequest = models.ModifyTopicRequest;
 const Ckafka = models.Ckafka;
 const DescribeMachinesRequest = models.DescribeMachinesRequest;
 const DeleteAlarmNoticeRequest = models.DeleteAlarmNoticeRequest;
@@ -172,21 +194,27 @@ const ModifyLogsetResponse = models.ModifyLogsetResponse;
 const MonitorTime = models.MonitorTime;
 const SearchLogRequest = models.SearchLogRequest;
 const CreateMachineGroupRequest = models.CreateMachineGroupRequest;
+const Tag = models.Tag;
 const DescribeExportsResponse = models.DescribeExportsResponse;
 const ApplyConfigToMachineGroupRequest = models.ApplyConfigToMachineGroupRequest;
+const GetAlarmLogRequest = models.GetAlarmLogRequest;
 const DescribeMachineGroupConfigsResponse = models.DescribeMachineGroupConfigsResponse;
 const CsvInfo = models.CsvInfo;
 const CreateAlarmNoticeRequest = models.CreateAlarmNoticeRequest;
 const DescribeIndexResponse = models.DescribeIndexResponse;
 const HistogramInfo = models.HistogramInfo;
 const DescribeMachineGroupConfigsRequest = models.DescribeMachineGroupConfigsRequest;
-const ModifyLogsetRequest = models.ModifyLogsetRequest;
+const ModifyKafkaRechargeRequest = models.ModifyKafkaRechargeRequest;
+const CreateDataTransformRequest = models.CreateDataTransformRequest;
 const DeleteMachineGroupInfoResponse = models.DeleteMachineGroupInfoResponse;
+const CheckRechargeKafkaServerResponse = models.CheckRechargeKafkaServerResponse;
 const ModifyCosRechargeRequest = models.ModifyCosRechargeRequest;
 const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
 const ParquetInfo = models.ParquetInfo;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const CosRechargeInfo = models.CosRechargeInfo;
+const ModifyDataTransformResponse = models.ModifyDataTransformResponse;
+const DescribeDataTransformInfoResponse = models.DescribeDataTransformInfoResponse;
 const ConsumerContent = models.ConsumerContent;
 const RetryShipperTaskRequest = models.RetryShipperTaskRequest;
 const CreateExportResponse = models.CreateExportResponse;
@@ -447,14 +475,14 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to modify a logset.
-     * @param {ModifyLogsetRequest} req
-     * @param {function(string, ModifyLogsetResponse):void} cb
+     * This API is used to modify a Kafka data subscription task.
+     * @param {ModifyKafkaRechargeRequest} req
+     * @param {function(string, ModifyKafkaRechargeResponse):void} cb
      * @public
      */
-    ModifyLogset(req, cb) {
-        let resp = new ModifyLogsetResponse();
-        this.request("ModifyLogset", req, resp, cb);
+    ModifyKafkaRecharge(req, cb) {
+        let resp = new ModifyKafkaRechargeResponse();
+        this.request("ModifyKafkaRecharge", req, resp, cb);
     }
 
     /**
@@ -478,6 +506,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     ModifyIndex(req, cb) {
         let resp = new ModifyIndexResponse();
         this.request("ModifyIndex", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to ship to COS. Note: To use this API, you need to check whether you have configured the role and permission for shipping to COS. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+     * @param {CreateShipperRequest} req
+     * @param {function(string, CreateShipperResponse):void} cb
+     * @public
+     */
+    CreateShipper(req, cb) {
+        let resp = new CreateShipperResponse();
+        this.request("CreateShipper", req, resp, cb);
     }
 
     /**
@@ -525,14 +564,14 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to create a task to ship to COS. Note: To use this API, you need to check whether you have configured the role and permission for shipping to COS. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
-     * @param {CreateShipperRequest} req
-     * @param {function(string, CreateShipperResponse):void} cb
+     * This API is used to check whether the Kafka service cluster is accessible.
+     * @param {CheckRechargeKafkaServerRequest} req
+     * @param {function(string, CheckRechargeKafkaServerResponse):void} cb
      * @public
      */
-    CreateShipper(req, cb) {
-        let resp = new CreateShipperResponse();
-        this.request("CreateShipper", req, resp, cb);
+    CheckRechargeKafkaServer(req, cb) {
+        let resp = new CheckRechargeKafkaServerResponse();
+        this.request("CheckRechargeKafkaServer", req, resp, cb);
     }
 
     /**
@@ -544,6 +583,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     ModifyConsumer(req, cb) {
         let resp = new ModifyConsumerResponse();
         this.request("ModifyConsumer", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a Kafka data subscription task.
+     * @param {CreateKafkaRechargeRequest} req
+     * @param {function(string, CreateKafkaRechargeResponse):void} cb
+     * @public
+     */
+    CreateKafkaRecharge(req, cb) {
+        let resp = new CreateKafkaRechargeResponse();
+        this.request("CreateKafkaRecharge", req, resp, cb);
     }
 
     /**
@@ -588,6 +638,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DeleteMachineGroup(req, cb) {
         let resp = new DeleteMachineGroupResponse();
         this.request("DeleteMachineGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retry a failed shipping task.
+     * @param {RetryShipperTaskRequest} req
+     * @param {function(string, RetryShipperTaskResponse):void} cb
+     * @public
+     */
+    RetryShipperTask(req, cb) {
+        let resp = new RetryShipperTaskResponse();
+        this.request("RetryShipperTask", req, resp, cb);
     }
 
     /**
@@ -646,6 +707,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
+     * This API is used to delete a data processing task.
+     * @param {DeleteDataTransformRequest} req
+     * @param {function(string, DeleteDataTransformResponse):void} cb
+     * @public
+     */
+    DeleteDataTransform(req, cb) {
+        let resp = new DeleteDataTransformResponse();
+        this.request("DeleteDataTransform", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a logset. The ID of the created logset is returned.
      * @param {CreateLogsetRequest} req
      * @param {function(string, CreateLogsetResponse):void} cb
@@ -657,14 +729,25 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to get the alarm policy list.
-     * @param {DescribeAlarmsRequest} req
-     * @param {function(string, DescribeAlarmsResponse):void} cb
+     * This API is used to get the list of Kafka data subscription tasks.
+     * @param {DescribeKafkaRechargesRequest} req
+     * @param {function(string, DescribeKafkaRechargesResponse):void} cb
      * @public
      */
-    DescribeAlarms(req, cb) {
-        let resp = new DescribeAlarmsResponse();
-        this.request("DescribeAlarms", req, resp, cb);
+    DescribeKafkaRecharges(req, cb) {
+        let resp = new DescribeKafkaRechargesResponse();
+        this.request("DescribeKafkaRecharges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a data processing task.
+     * @param {CreateDataTransformRequest} req
+     * @param {function(string, CreateDataTransformResponse):void} cb
+     * @public
+     */
+    CreateDataTransform(req, cb) {
+        let resp = new CreateDataTransformResponse();
+        this.request("CreateDataTransform", req, resp, cb);
     }
 
     /**
@@ -676,6 +759,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     AddMachineGroupInfo(req, cb) {
         let resp = new AddMachineGroupInfoResponse();
         this.request("AddMachineGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the basic information of data processing tasks.
+     * @param {DescribeDataTransformInfoRequest} req
+     * @param {function(string, DescribeDataTransformInfoResponse):void} cb
+     * @public
+     */
+    DescribeDataTransformInfo(req, cb) {
+        let resp = new DescribeDataTransformInfoResponse();
+        this.request("DescribeDataTransformInfo", req, resp, cb);
     }
 
     /**
@@ -709,6 +803,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     ApplyConfigToMachineGroup(req, cb) {
         let resp = new ApplyConfigToMachineGroupResponse();
         this.request("ApplyConfigToMachineGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the alarm policy list.
+     * @param {DescribeAlarmsRequest} req
+     * @param {function(string, DescribeAlarmsResponse):void} cb
+     * @public
+     */
+    DescribeAlarms(req, cb) {
+        let resp = new DescribeAlarmsResponse();
+        this.request("DescribeAlarms", req, resp, cb);
     }
 
     /**
@@ -822,14 +927,14 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to modify an existing shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
-     * @param {ModifyShipperRequest} req
-     * @param {function(string, ModifyShipperResponse):void} cb
+     * This API is used to delete a Kafka data subscription task.
+     * @param {DeleteKafkaRechargeRequest} req
+     * @param {function(string, DeleteKafkaRechargeResponse):void} cb
      * @public
      */
-    ModifyShipper(req, cb) {
-        let resp = new ModifyShipperResponse();
-        this.request("ModifyShipper", req, resp, cb);
+    DeleteKafkaRecharge(req, cb) {
+        let resp = new DeleteKafkaRechargeResponse();
+        this.request("DeleteKafkaRecharge", req, resp, cb);
     }
 
     /**
@@ -855,7 +960,7 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to delete a shipping rule.
+     * This API is used to delete a COS shipping task.
      * @param {DeleteShipperRequest} req
      * @param {function(string, DeleteShipperResponse):void} cb
      * @public
@@ -874,6 +979,28 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DeleteIndex(req, cb) {
         let resp = new DeleteIndexResponse();
         this.request("DeleteIndex", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a data processing task.
+     * @param {ModifyDataTransformRequest} req
+     * @param {function(string, ModifyDataTransformResponse):void} cb
+     * @public
+     */
+    ModifyDataTransform(req, cb) {
+        let resp = new ModifyDataTransformResponse();
+        this.request("ModifyDataTransform", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an existing shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
+     * @param {ModifyShipperRequest} req
+     * @param {function(string, ModifyShipperResponse):void} cb
+     * @public
+     */
+    ModifyShipper(req, cb) {
+        let resp = new ModifyShipperResponse();
+        this.request("ModifyShipper", req, resp, cb);
     }
 
     /**
@@ -965,14 +1092,14 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to retry a failed shipping task.
-     * @param {RetryShipperTaskRequest} req
-     * @param {function(string, RetryShipperTaskResponse):void} cb
+     * This API is used to preview the logs of Kafka data subscription tasks.
+     * @param {PreviewKafkaRechargeRequest} req
+     * @param {function(string, PreviewKafkaRechargeResponse):void} cb
      * @public
      */
-    RetryShipperTask(req, cb) {
-        let resp = new RetryShipperTaskResponse();
-        this.request("RetryShipperTask", req, resp, cb);
+    PreviewKafkaRecharge(req, cb) {
+        let resp = new PreviewKafkaRechargeResponse();
+        this.request("PreviewKafkaRecharge", req, resp, cb);
     }
 
     /**
@@ -984,6 +1111,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DescribeConfigMachineGroups(req, cb) {
         let resp = new DescribeConfigMachineGroupsResponse();
         this.request("DescribeConfigMachineGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a logset.
+     * @param {ModifyLogsetRequest} req
+     * @param {function(string, ModifyLogsetResponse):void} cb
+     * @public
+     */
+    ModifyLogset(req, cb) {
+        let resp = new ModifyLogsetResponse();
+        this.request("ModifyLogset", req, resp, cb);
     }
 
     /**

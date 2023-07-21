@@ -174,7 +174,7 @@ class DescribeBillSummaryByTagResponse extends  AbstractModel {
         super();
 
         /**
-         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
          * @type {number || null}
          */
         this.Ready = null;
@@ -238,7 +238,7 @@ class DescribeBillSummaryResponse extends  AbstractModel {
         super();
 
         /**
-         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
+         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
          * @type {number || null}
          */
         this.Ready = null;
@@ -288,7 +288,7 @@ class DescribeBillSummaryByPayModeResponse extends  AbstractModel {
         super();
 
         /**
-         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
          * @type {number || null}
          */
         this.Ready = null;
@@ -690,7 +690,7 @@ class DescribeBillSummaryByProductResponse extends  AbstractModel {
         super();
 
         /**
-         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
          * @type {number || null}
          */
         this.Ready = null;
@@ -789,7 +789,7 @@ class DescribeBillSummaryByRegionResponse extends  AbstractModel {
         super();
 
         /**
-         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
          * @type {number || null}
          */
         this.Ready = null;
@@ -3202,7 +3202,7 @@ class DescribeBillSummaryByProjectResponse extends  AbstractModel {
         super();
 
         /**
-         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+         * Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
          * @type {number || null}
          */
         this.Ready = null;

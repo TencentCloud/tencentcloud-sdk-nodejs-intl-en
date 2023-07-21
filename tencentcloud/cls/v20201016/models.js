@@ -515,6 +515,8 @@ class DeleteShipperRequest extends  AbstractModel {
 
 /**
  * Dynamic index configuration
+
+Note: This feature is currently in a beta test. To use it, please contact technical support.
  * @class
  */
 class DynamicIndex extends  AbstractModel {
@@ -800,6 +802,206 @@ class DescribeConfigMachineGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * Kafka data import configuration
+ * @class
+ */
+class KafkaRechargeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Primary key ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Log topic ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Kafka data import task name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.KafkaType = null;
+
+        /**
+         * CKafka instance ID, which is required when `KafkaType` is set to `0`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KafkaInstance = null;
+
+        /**
+         * Service address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServerAddr = null;
+
+        /**
+         * Whether the service address uses an encrypted connection	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsEncryptionAddr = null;
+
+        /**
+         * Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+         * @type {KafkaProtocolInfo || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * List of Kafka topics to import data from. Separate multiple topics with commas (,).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserKafkaTopics = null;
+
+        /**
+         * Kafka consumer group name	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConsumerGroupName = null;
+
+        /**
+         * Status. Valid values: 1 (running) and 2 (suspended).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Position for data import. Valid values: -2 (earliest, default) and -1 (latest).  
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Creation time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Log import rule
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LogRechargeRuleInfo || null}
+         */
+        this.LogRechargeRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.KafkaType = 'KafkaType' in params ? params.KafkaType : null;
+        this.KafkaInstance = 'KafkaInstance' in params ? params.KafkaInstance : null;
+        this.ServerAddr = 'ServerAddr' in params ? params.ServerAddr : null;
+        this.IsEncryptionAddr = 'IsEncryptionAddr' in params ? params.IsEncryptionAddr : null;
+
+        if (params.Protocol) {
+            let obj = new KafkaProtocolInfo();
+            obj.deserialize(params.Protocol)
+            this.Protocol = obj;
+        }
+        this.UserKafkaTopics = 'UserKafkaTopics' in params ? params.UserKafkaTopics : null;
+        this.ConsumerGroupName = 'ConsumerGroupName' in params ? params.ConsumerGroupName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.LogRechargeRule) {
+            let obj = new LogRechargeRuleInfo();
+            obj.deserialize(params.LogRechargeRule)
+            this.LogRechargeRule = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyLogset request structure.
+ * @class
+ */
+class ModifyLogsetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Logset name
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * Tag key-value pair bound to logset. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key at any time.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateLogset request structure.
  * @class
  */
@@ -836,6 +1038,70 @@ class CreateLogsetRequest extends  AbstractModel {
                 let obj = new Tag();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyDataTransform request structure.
+ * @class
+ */
+class ModifyDataTransformRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data processing task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Data processing task name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Data processing statement
+         * @type {string || null}
+         */
+        this.EtlContent = null;
+
+        /**
+         * Task status. Valid values: 1 (enabled) and 2 (disabled).
+         * @type {number || null}
+         */
+        this.EnableFlag = null;
+
+        /**
+         * Destination topic ID and alias of the data processing task
+         * @type {Array.<DataTransformResouceInfo> || null}
+         */
+        this.DstResources = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.EtlContent = 'EtlContent' in params ? params.EtlContent : null;
+        this.EnableFlag = 'EnableFlag' in params ? params.EnableFlag : null;
+
+        if (params.DstResources) {
+            this.DstResources = new Array();
+            for (let z in params.DstResources) {
+                let obj = new DataTransformResouceInfo();
+                obj.deserialize(params.DstResources[z]);
+                this.DstResources.push(obj);
             }
         }
 
@@ -1315,73 +1581,18 @@ class ModifyShipperResponse extends  AbstractModel {
 }
 
 /**
- * ModifyTopic request structure.
+ * DeleteKafkaRecharge response structure.
  * @class
  */
-class ModifyTopicRequest extends  AbstractModel {
+class DeleteKafkaRechargeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TopicId = null;
-
-        /**
-         * Log topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether to start collection for this log topic
-         * @type {boolean || null}
-         */
-        this.Status = null;
-
-        /**
-         * Whether to enable automatic split
-         * @type {boolean || null}
-         */
-        this.AutoSplit = null;
-
-        /**
-         * Maximum number of partitions to split into for this topic if automatic split is enabled
-         * @type {number || null}
-         */
-        this.MaxSplitPartitions = null;
-
-        /**
-         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * Log topic description
-         * @type {string || null}
-         */
-        this.Describes = null;
-
-        /**
-         * `0`: Disable log transitioning.
-A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
-         * @type {number || null}
-         */
-        this.HotPeriod = null;
-
-        /**
-         * Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
-         * @type {boolean || null}
-         */
-        this.IsWebTracking = null;
+        this.RequestId = null;
 
     }
 
@@ -1392,24 +1603,7 @@ A value other than `0`: The number of STANDARD storage days after log transition
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
-        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.Describes = 'Describes' in params ? params.Describes : null;
-        this.HotPeriod = 'HotPeriod' in params ? params.HotPeriod : null;
-        this.IsWebTracking = 'IsWebTracking' in params ? params.IsWebTracking : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1746,26 +1940,40 @@ class DeleteMachineGroupResponse extends  AbstractModel {
 }
 
 /**
- * Description of the tag pair bound to a resource instance when it is created
+ * Kafka access protocol
  * @class
  */
-class Tag extends  AbstractModel {
+class KafkaProtocolInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The tag key.
+         * Protocol type. Valid values: `plaintext`, `sasl_plaintext`, and `sasl_ssl`. `sasl_ssl` is recommended. Using this protocol will encrypt the connection and implement user authentication.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Key = null;
+        this.Protocol = null;
 
         /**
-         * The tag value.
+         * Encryption type. Valid values: `PLAIN`, `SCRAM-SHA-256`, and SCRAM-SHA-512`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Value = null;
+        this.Mechanism = null;
+
+        /**
+         * Username
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * User password
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
 
     }
 
@@ -1776,8 +1984,52 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Mechanism = 'Mechanism' in params ? params.Mechanism : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * DescribeCosRecharges request structure.
+ * @class
+ */
+class DescribeCosRechargesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the log topic.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -1818,30 +2070,67 @@ class MetaTagInfo extends  AbstractModel {
 }
 
 /**
- * DescribeExports request structure.
+ * CreateCosRecharge request structure.
  * @class
  */
-class DescribeExportsRequest extends  AbstractModel {
+class CreateCosRechargeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic ID
+         * ID of the log topic.
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Page offset. Default value: 0
-         * @type {number || null}
+         * ID of the logset.
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.LogsetId = null;
 
         /**
-         * Maximum number of entries per page. Default value: 20. Maximum value: 100
-         * @type {number || null}
+         * Shipping task name.
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Name = null;
+
+        /**
+         * COS bucket.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Region where the COS bucket is located.
+         * @type {string || null}
+         */
+        this.BucketRegion = null;
+
+        /**
+         * The prefix of the folder where COS files are located.
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+        /**
+         * The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
+Default value: `minimalist_log`
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Valid values: "" (default), "gzip", "lzop", "snappy"
+         * @type {string || null}
+         */
+        this.Compress = null;
+
+        /**
+         * Extraction rule. If `ExtractRule` is set, `LogType` must be set.
+         * @type {ExtractRuleInfo || null}
+         */
+        this.ExtractRuleInfo = null;
 
     }
 
@@ -1853,8 +2142,19 @@ class DescribeExportsRequest extends  AbstractModel {
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.BucketRegion = 'BucketRegion' in params ? params.BucketRegion : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Compress = 'Compress' in params ? params.Compress : null;
+
+        if (params.ExtractRuleInfo) {
+            let obj = new ExtractRuleInfo();
+            obj.deserialize(params.ExtractRuleInfo)
+            this.ExtractRuleInfo = obj;
+        }
 
     }
 }
@@ -1903,8 +2203,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.BeginRegex = null;
 
         /**
-         * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if `log_type` is `delimiter_log`. `json_log` logs use the key of JSON itself
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if `log_type` is `delimiter_log`. `json_log` logs use the key of JSON itself. A maximum of 100 keys are supported.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Keys = null;
@@ -1988,7 +2288,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MetadataType = null;
 
         /**
-         * Regular expression of the collection path, which is required when `MetadataType` is set to `3`.
+         * Regular expression of the collection configuration path, which is required when `MetadataType` is set to `3`
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2199,18 +2499,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeConsumer request structure.
+ * DeleteDataTransform response structure.
  * @class
  */
-class DescribeConsumerRequest extends  AbstractModel {
+class DeleteDataTransformResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic ID bound to the task
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TopicId = null;
+        this.RequestId = null;
 
     }
 
@@ -2221,7 +2521,7 @@ class DescribeConsumerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2496,40 +2796,24 @@ class ModifyMachineGroupResponse extends  AbstractModel {
 }
 
 /**
- * Index rule. At least one of the `FullText`, `KeyValue`, and `Tag` parameters must be valid.
+ * Information about the resource for data processing
  * @class
  */
-class RuleInfo extends  AbstractModel {
+class DataTransformResouceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full-text index configuration. If the configuration is left empty, full-text indexing is not enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {FullTextInfo || null}
+         * Target topic ID
+         * @type {string || null}
          */
-        this.FullText = null;
+        this.TopicId = null;
 
         /**
-         * Key-value index configuration. If the configuration is left empty, key-value indexing is not enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {RuleKeyValueInfo || null}
+         * Alias
+         * @type {string || null}
          */
-        this.KeyValue = null;
-
-        /**
-         * Metadata field index configuration. If the configuration is left empty, metadata field indexing is not enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {RuleTagInfo || null}
-         */
-        this.Tag = null;
-
-        /**
-         * Dynamic index configuration. If the configuration is empty, dynamic indexing is not enabled.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {DynamicIndex || null}
-         */
-        this.DynamicIndex = null;
+        this.Alias = null;
 
     }
 
@@ -2540,30 +2824,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.FullText) {
-            let obj = new FullTextInfo();
-            obj.deserialize(params.FullText)
-            this.FullText = obj;
-        }
-
-        if (params.KeyValue) {
-            let obj = new RuleKeyValueInfo();
-            obj.deserialize(params.KeyValue)
-            this.KeyValue = obj;
-        }
-
-        if (params.Tag) {
-            let obj = new RuleTagInfo();
-            obj.deserialize(params.Tag)
-            this.Tag = obj;
-        }
-
-        if (params.DynamicIndex) {
-            let obj = new DynamicIndex();
-            obj.deserialize(params.DynamicIndex)
-            this.DynamicIndex = obj;
-        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -3488,30 +3750,42 @@ class SplitPartitionRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCosRecharges request structure.
+ * CheckRechargeKafkaServer request structure.
  * @class
  */
-class DescribeCosRechargesRequest extends  AbstractModel {
+class CheckRechargeKafkaServerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the log topic.
+         * Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+         * @type {number || null}
+         */
+        this.KafkaType = null;
+
+        /**
+         * CKafka instance ID, which is required when `KafkaType` is set to `0`
          * @type {string || null}
          */
-        this.TopicId = null;
+        this.KafkaInstance = null;
 
         /**
-         * Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
-         * @type {number || null}
+         * Service address
+         * @type {string || null}
          */
-        this.Status = null;
+        this.ServerAddr = null;
 
         /**
-         * Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
-         * @type {number || null}
+         * Whether the service address uses an encrypted connection
+         * @type {boolean || null}
          */
-        this.Enable = null;
+        this.IsEncryptionAddr = null;
+
+        /**
+         * Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+         * @type {KafkaProtocolInfo || null}
+         */
+        this.Protocol = null;
 
     }
 
@@ -3522,9 +3796,16 @@ class DescribeCosRechargesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.KafkaType = 'KafkaType' in params ? params.KafkaType : null;
+        this.KafkaInstance = 'KafkaInstance' in params ? params.KafkaInstance : null;
+        this.ServerAddr = 'ServerAddr' in params ? params.ServerAddr : null;
+        this.IsEncryptionAddr = 'IsEncryptionAddr' in params ? params.IsEncryptionAddr : null;
+
+        if (params.Protocol) {
+            let obj = new KafkaProtocolInfo();
+            obj.deserialize(params.Protocol)
+            this.Protocol = obj;
+        }
 
     }
 }
@@ -3954,7 +4235,7 @@ class DescribeTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+         * <li>topicName: Filter by **log topic name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required. No. <br><li>logsetName: Filter by **logset name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required: No. <br><li>topicId: Filter by **log topic ID**. Type: String. Required: No. <br><li>logsetId: Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset. Type: String. Required: No. <br><li>tagKey: Filter by **tag key**. Type: String. Required: No. <br><li>tag:tagKey: Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key, such as `tag:exampleKey`. Type: String. Required: No. <br><li>storageType: Filter by **log topic storage type**. Valid values: `hot` (standard storage) and `cold` (IA storage). Type: String. Required: No. Each request can have up to 10 `Filters` and 100 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3970,6 +4251,25 @@ class DescribeTopicsRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * Match mode for `Filters` fields.
+- 0: Fuzzy match for `topicName` and `logsetName`. This is the default value.
+- 1: Exact match for `topicName`.
+- 2: Exact match for `logsetName`.
+- 3: Exact match for `topicName` and `logsetName`.
+         * @type {number || null}
+         */
+        this.PreciseSearch = null;
+
+        /**
+         * Topic type
+- 0 (default): Log topic.
+- 1: Metric topic.
+
+         * @type {number || null}
+         */
+        this.BizType = null;
 
     }
 
@@ -3991,6 +4291,8 @@ class DescribeTopicsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PreciseSearch = 'PreciseSearch' in params ? params.PreciseSearch : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
 
     }
 }
@@ -4216,67 +4518,30 @@ A value other than `0`: The number of STANDARD storage days after log transition
 }
 
 /**
- * CreateCosRecharge request structure.
+ * DescribeExports request structure.
  * @class
  */
-class CreateCosRechargeRequest extends  AbstractModel {
+class DescribeExportsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the log topic.
+         * Log topic ID
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * ID of the logset.
-         * @type {string || null}
+         * Page offset. Default value: 0
+         * @type {number || null}
          */
-        this.LogsetId = null;
+        this.Offset = null;
 
         /**
-         * Shipping task name.
-         * @type {string || null}
+         * Maximum number of entries per page. Default value: 20. Maximum value: 100
+         * @type {number || null}
          */
-        this.Name = null;
-
-        /**
-         * COS bucket.
-         * @type {string || null}
-         */
-        this.Bucket = null;
-
-        /**
-         * Region where the COS bucket is located.
-         * @type {string || null}
-         */
-        this.BucketRegion = null;
-
-        /**
-         * The prefix of the folder where COS files are located.
-         * @type {string || null}
-         */
-        this.Prefix = null;
-
-        /**
-         * The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
-Default value: `minimalist_log`
-         * @type {string || null}
-         */
-        this.LogType = null;
-
-        /**
-         * Valid values: "" (default), "gzip", "lzop", "snappy"
-         * @type {string || null}
-         */
-        this.Compress = null;
-
-        /**
-         * Extraction rule. If `ExtractRule` is set, `LogType` must be set.
-         * @type {ExtractRuleInfo || null}
-         */
-        this.ExtractRuleInfo = null;
+        this.Limit = null;
 
     }
 
@@ -4288,19 +4553,8 @@ Default value: `minimalist_log`
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.BucketRegion = 'BucketRegion' in params ? params.BucketRegion : null;
-        this.Prefix = 'Prefix' in params ? params.Prefix : null;
-        this.LogType = 'LogType' in params ? params.LogType : null;
-        this.Compress = 'Compress' in params ? params.Compress : null;
-
-        if (params.ExtractRuleInfo) {
-            let obj = new ExtractRuleInfo();
-            obj.deserialize(params.ExtractRuleInfo)
-            this.ExtractRuleInfo = obj;
-        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4378,6 +4632,41 @@ For more information, see <a href="https://intl.cloud.tencent.com/document/produ
 }
 
 /**
+ * CreateKafkaRecharge response structure.
+ * @class
+ */
+class CreateKafkaRechargeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kafka data import configuration ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OpenKafkaConsumer request structure.
  * @class
  */
@@ -4397,6 +4686,12 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
          */
         this.Compression = null;
 
+        /**
+         * Kafka consumer data format
+         * @type {KafkaConsumerContent || null}
+         */
+        this.ConsumerContent = null;
+
     }
 
     /**
@@ -4408,6 +4703,12 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
         }
         this.FromTopicId = 'FromTopicId' in params ? params.FromTopicId : null;
         this.Compression = 'Compression' in params ? params.Compression : null;
+
+        if (params.ConsumerContent) {
+            let obj = new KafkaConsumerContent();
+            obj.deserialize(params.ConsumerContent)
+            this.ConsumerContent = obj;
+        }
 
     }
 }
@@ -4804,6 +5105,70 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
 }
 
 /**
+ * Kafka consumer content
+ * @class
+ */
+class KafkaConsumerContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Format. Valid values: 0 (full-text) and 1 (JSON).
+         * @type {number || null}
+         */
+        this.Format = null;
+
+        /**
+         * Whether to ship tag information
+This parameter does not need to be set when `Format` is set to `0`.
+         * @type {boolean || null}
+         */
+        this.EnableTag = null;
+
+        /**
+         * Metadata information list. Valid values: \_\_SOURCE\_\_, \_\_FILENAME\_\_,
+\_\_TIMESTAMP\_\_, \_\_HOSTNAME\_\_, and \_\_PKGID\_\_.
+This parameter does not need to be set when `Format` is set to `0`.
+         * @type {Array.<string> || null}
+         */
+        this.MetaFields = null;
+
+        /**
+         * Tag data processing mode. Valid values:
+1 (default): Do not tile data.
+2: Tile data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TagTransaction = null;
+
+        /**
+         * JSON data format. Valid values:
+1 (default): Not escaped.
+2: Escaped.
+         * @type {number || null}
+         */
+        this.JsonType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
+        this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
+        this.TagTransaction = 'TagTransaction' in params ? params.TagTransaction : null;
+        this.JsonType = 'JsonType' in params ? params.JsonType : null;
+
+    }
+}
+
+/**
  * Logset information
  * @class
  */
@@ -4879,6 +5244,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.TopicCount = 'TopicCount' in params ? params.TopicCount : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
+ * DescribeConsumer request structure.
+ * @class
+ */
+class DescribeConsumerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID bound to the task
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -4968,6 +5361,135 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.ConfigInfo.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Log import rule
+ * @class
+ */
+class LogRechargeRuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log u200d(single-line full regex)
+         * @type {string || null}
+         */
+        this.RechargeType = null;
+
+        /**
+         * Encoding format. Valid values: 0 (default, UTF-8) and 1 GBK).
+         * @type {number || null}
+         */
+        this.EncodingFormat = null;
+
+        /**
+         * Whether to use the default time. Valid values: `true` (default) and `false`.
+         * @type {boolean || null}
+         */
+        this.DefaultTimeSwitch = null;
+
+        /**
+         * Full log matching rule, which is valid only if `RechargeType` is `fullregex_log`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogRegex = null;
+
+        /**
+         * Whether to upload the logs that failed to be parsed. Valid values: `true` and `false`.
+         * @type {boolean || null}
+         */
+        this.UnMatchLogSwitch = null;
+
+        /**
+         * Key of the log that failed to be parsed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnMatchLogKey = null;
+
+        /**
+         * Time source of the log that failed to be parsed. Valid values: 0 (current system time) and 1 (Kafka message timestamp).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnMatchLogTimeSrc = null;
+
+        /**
+         * Default time source. Valid values: 0 (current system time) and 1 (Kafka message timestamp).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultTimeSrc = null;
+
+        /**
+         * Time field
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * Time regular expression
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeRegex = null;
+
+        /**
+         * Time field format
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * Time zone
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+        /**
+         * Metadata information. Kafka supports import of kafka_topic, kafka_partition, kafka_offset, and kafka_timestamp.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * List of log keys, which is required when `RechargeType` is set to `full_regex_log`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Keys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RechargeType = 'RechargeType' in params ? params.RechargeType : null;
+        this.EncodingFormat = 'EncodingFormat' in params ? params.EncodingFormat : null;
+        this.DefaultTimeSwitch = 'DefaultTimeSwitch' in params ? params.DefaultTimeSwitch : null;
+        this.LogRegex = 'LogRegex' in params ? params.LogRegex : null;
+        this.UnMatchLogSwitch = 'UnMatchLogSwitch' in params ? params.UnMatchLogSwitch : null;
+        this.UnMatchLogKey = 'UnMatchLogKey' in params ? params.UnMatchLogKey : null;
+        this.UnMatchLogTimeSrc = 'UnMatchLogTimeSrc' in params ? params.UnMatchLogTimeSrc : null;
+        this.DefaultTimeSrc = 'DefaultTimeSrc' in params ? params.DefaultTimeSrc : null;
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.TimeRegex = 'TimeRegex' in params ? params.TimeRegex : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.Metadata = 'Metadata' in params ? params.Metadata : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
 
     }
 }
@@ -5165,6 +5687,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteDataTransform request structure.
+ * @class
+ */
+class DeleteDataTransformRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data processing task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * DescribeMachineGroups response structure.
  * @class
  */
@@ -5347,6 +5897,48 @@ Supported types: `ip` and `label`
 }
 
 /**
+ * DescribeKafkaRecharges request structure.
+ * @class
+ */
+class DescribeKafkaRechargesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Import configuration ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Status. Valid values: 1 (running) and 2 (suspended).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * JSON type description
  * @class
  */
@@ -5391,6 +5983,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * PreviewKafkaRecharge response structure.
+ * @class
+ */
+class PreviewKafkaRechargeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log sample, which is returned when `PreviewType` is set to `2`
+         * @type {string || null}
+         */
+        this.LogSample = null;
+
+        /**
+         * Log preview result
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogData = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogSample = 'LogSample' in params ? params.LogSample : null;
+        this.LogData = 'LogData' in params ? params.LogData : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateShipper request structure.
  * @class
  */
@@ -5429,7 +6064,7 @@ class CreateShipperRequest extends  AbstractModel {
         this.Interval = null;
 
         /**
-         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100-256
+         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -5819,6 +6454,12 @@ class CreateConfigRequest extends  AbstractModel {
          */
         this.UserDefineRule = null;
 
+        /**
+         * Advanced collection configuration
+         * @type {string || null}
+         */
+        this.AdvancedConfig = null;
+
     }
 
     /**
@@ -5848,6 +6489,7 @@ class CreateConfigRequest extends  AbstractModel {
             }
         }
         this.UserDefineRule = 'UserDefineRule' in params ? params.UserDefineRule : null;
+        this.AdvancedConfig = 'AdvancedConfig' in params ? params.AdvancedConfig : null;
 
     }
 }
@@ -5882,6 +6524,56 @@ class CreateShipperResponse extends  AbstractModel {
             return;
         }
         this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeKafkaRecharges response structure.
+ * @class
+ */
+class DescribeKafkaRechargesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * KafkaRechargeInfo list
+         * @type {Array.<KafkaRechargeInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Total Kafka data records imported
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new KafkaRechargeInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6052,18 +6744,39 @@ class Column extends  AbstractModel {
 }
 
 /**
- * Compression configuration of shipped log
+ * Format configuration of shipped log content
  * @class
  */
-class CompressInfo extends  AbstractModel {
+class ContentInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Compression format. Valid values: `gzip`; `lzop`; `snappy`; `none` (no compression)
+         * Content format. Valid values: `json`, `csv`
          * @type {string || null}
          */
         this.Format = null;
+
+        /**
+         * CSV format content description
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {CsvInfo || null}
+         */
+        this.Csv = null;
+
+        /**
+         * JSON format content description
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {JsonInfo || null}
+         */
+        this.Json = null;
+
+        /**
+         * `Parquet` format description
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {ParquetInfo || null}
+         */
+        this.Parquet = null;
 
     }
 
@@ -6075,6 +6788,24 @@ class CompressInfo extends  AbstractModel {
             return;
         }
         this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.Csv) {
+            let obj = new CsvInfo();
+            obj.deserialize(params.Csv)
+            this.Csv = obj;
+        }
+
+        if (params.Json) {
+            let obj = new JsonInfo();
+            obj.deserialize(params.Json)
+            this.Json = obj;
+        }
+
+        if (params.Parquet) {
+            let obj = new ParquetInfo();
+            obj.deserialize(params.Parquet)
+            this.Parquet = obj;
+        }
 
     }
 }
@@ -6133,54 +6864,63 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetAlarmLog request structure.
+ * DescribeDataTransformInfo request structure.
  * @class
  */
-class GetAlarmLogRequest extends  AbstractModel {
+class DescribeDataTransformInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time of the log to be queried, which is a Unix timestamp in milliseconds
+         * <br><li>taskName
+
+Filter by **processing task name**.
+Type: String
+
+Required: No
+
+<br><li>taskId
+
+Filter by **processing task ID**.
+Type: String
+
+Required: No
+
+<br><li>srctopicId
+
+Filter by **source topic ID**.
+Type: String
+
+Required: No
+
+Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The pagination offset. Default value: 0.
          * @type {number || null}
          */
-        this.From = null;
+        this.Offset = null;
 
         /**
-         * End time of the log to be queried, which is a Unix timestamp in milliseconds
-         * @type {number || null}
-         */
-        this.To = null;
-
-        /**
-         * Query statement. Maximum length: 1024
-         * @type {string || null}
-         */
-        this.Query = null;
-
-        /**
-         * Number of logs returned in a single query. Maximum value: 1000
+         * Maximum number of entries per page. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * This field is used to load more logs. Pass through the last `Context` value returned to get more log content.
-         * @type {string || null}
+         * Task type. Valid values: 1: Get the details of a single task. 2 (default): Get the task list.
+         * @type {number || null}
          */
-        this.Context = null;
+        this.Type = null;
 
         /**
-         * Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
+         * Task ID, which is required when `Type` is set to `1`
          * @type {string || null}
          */
-        this.Sort = null;
-
-        /**
-         * If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
-         * @type {boolean || null}
-         */
-        this.UseNewAnalysis = null;
+        this.TaskId = null;
 
     }
 
@@ -6191,13 +6931,19 @@ class GetAlarmLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.From = 'From' in params ? params.From : null;
-        this.To = 'To' in params ? params.To : null;
-        this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Context = 'Context' in params ? params.Context : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
-        this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -6582,6 +7328,107 @@ class DeleteExportRequest extends  AbstractModel {
 }
 
 /**
+ * PreviewKafkaRecharge request structure.
+ * @class
+ */
+class PreviewKafkaRechargeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Preview type. Valid values: 1 (source data preview) and 2 (result preview).
+         * @type {number || null}
+         */
+        this.PreviewType = null;
+
+        /**
+         * Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+         * @type {number || null}
+         */
+        this.KafkaType = null;
+
+        /**
+         * List of Kafka topics to import data from. Separate multiple topics with commas (,).
+         * @type {string || null}
+         */
+        this.UserKafkaTopics = null;
+
+        /**
+         * Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * CKafka instance ID, which is required when `KafkaType` is set to `0`
+         * @type {string || null}
+         */
+        this.KafkaInstance = null;
+
+        /**
+         * Service address
+         * @type {string || null}
+         */
+        this.ServerAddr = null;
+
+        /**
+         * Whether the service address uses an encrypted connection
+         * @type {boolean || null}
+         */
+        this.IsEncryptionAddr = null;
+
+        /**
+         * Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+         * @type {KafkaProtocolInfo || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Kafka consumer group name
+         * @type {string || null}
+         */
+        this.ConsumerGroupName = null;
+
+        /**
+         * Log import rule
+         * @type {LogRechargeRuleInfo || null}
+         */
+        this.LogRechargeRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PreviewType = 'PreviewType' in params ? params.PreviewType : null;
+        this.KafkaType = 'KafkaType' in params ? params.KafkaType : null;
+        this.UserKafkaTopics = 'UserKafkaTopics' in params ? params.UserKafkaTopics : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.KafkaInstance = 'KafkaInstance' in params ? params.KafkaInstance : null;
+        this.ServerAddr = 'ServerAddr' in params ? params.ServerAddr : null;
+        this.IsEncryptionAddr = 'IsEncryptionAddr' in params ? params.IsEncryptionAddr : null;
+
+        if (params.Protocol) {
+            let obj = new KafkaProtocolInfo();
+            obj.deserialize(params.Protocol)
+            this.Protocol = obj;
+        }
+        this.ConsumerGroupName = 'ConsumerGroupName' in params ? params.ConsumerGroupName : null;
+
+        if (params.LogRechargeRule) {
+            let obj = new LogRechargeRuleInfo();
+            obj.deserialize(params.LogRechargeRule)
+            this.LogRechargeRule = obj;
+        }
+
+    }
+}
+
+/**
  * SplitPartition response structure.
  * @class
  */
@@ -6619,6 +7466,41 @@ class SplitPartitionResponse extends  AbstractModel {
                 this.Partitions.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDataTransform response structure.
+ * @class
+ */
+class CreateDataTransformResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6756,7 +7638,7 @@ class ModifyShipperRequest extends  AbstractModel {
         this.Interval = null;
 
         /**
-         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100–256
+         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -6830,6 +7712,224 @@ class ModifyShipperRequest extends  AbstractModel {
             this.Content = obj;
         }
         this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
+
+    }
+}
+
+/**
+ * CreateKafkaRecharge request structure.
+ * @class
+ */
+class CreateKafkaRechargeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Kafka data import configuration name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+         * @type {number || null}
+         */
+        this.KafkaType = null;
+
+        /**
+         * List of Kafka topics to import data from. Separate multiple topics with commas (,).
+         * @type {string || null}
+         */
+        this.UserKafkaTopics = null;
+
+        /**
+         * Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * CKafka instance ID, which is required when `KafkaType` is set to `0`
+         * @type {string || null}
+         */
+        this.KafkaInstance = null;
+
+        /**
+         * Service address, which is required when `KafkaType` is set to `1`
+         * @type {string || null}
+         */
+        this.ServerAddr = null;
+
+        /**
+         * Whether the service address uses an encrypted connection, which is required when `KafkaType` is set to `1`
+         * @type {boolean || null}
+         */
+        this.IsEncryptionAddr = null;
+
+        /**
+         * Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+         * @type {KafkaProtocolInfo || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Kafka consumer group name
+         * @type {string || null}
+         */
+        this.ConsumerGroupName = null;
+
+        /**
+         * Log import rule
+         * @type {LogRechargeRuleInfo || null}
+         */
+        this.LogRechargeRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.KafkaType = 'KafkaType' in params ? params.KafkaType : null;
+        this.UserKafkaTopics = 'UserKafkaTopics' in params ? params.UserKafkaTopics : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.KafkaInstance = 'KafkaInstance' in params ? params.KafkaInstance : null;
+        this.ServerAddr = 'ServerAddr' in params ? params.ServerAddr : null;
+        this.IsEncryptionAddr = 'IsEncryptionAddr' in params ? params.IsEncryptionAddr : null;
+
+        if (params.Protocol) {
+            let obj = new KafkaProtocolInfo();
+            obj.deserialize(params.Protocol)
+            this.Protocol = obj;
+        }
+        this.ConsumerGroupName = 'ConsumerGroupName' in params ? params.ConsumerGroupName : null;
+
+        if (params.LogRechargeRule) {
+            let obj = new LogRechargeRuleInfo();
+            obj.deserialize(params.LogRechargeRule)
+            this.LogRechargeRule = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteKafkaRecharge request structure.
+ * @class
+ */
+class DeleteKafkaRechargeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kafka data import configuration ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Target CLS log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
+ * Index rule. At least one of the `FullText`, `KeyValue`, and `Tag` parameters must be valid.
+ * @class
+ */
+class RuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full-text index configuration. If the configuration is left empty, full-text indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FullTextInfo || null}
+         */
+        this.FullText = null;
+
+        /**
+         * Key-value index configuration. If the configuration is left empty, key-value indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RuleKeyValueInfo || null}
+         */
+        this.KeyValue = null;
+
+        /**
+         * Metadata field index configuration. If the configuration is left empty, metadata field indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RuleTagInfo || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Dynamic index configuration. If the configuration is empty, dynamic indexing is not enabled.
+
+Note: This feature is currently in a beta test. To use it, please contact technical support.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {DynamicIndex || null}
+         */
+        this.DynamicIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FullText) {
+            let obj = new FullTextInfo();
+            obj.deserialize(params.FullText)
+            this.FullText = obj;
+        }
+
+        if (params.KeyValue) {
+            let obj = new RuleKeyValueInfo();
+            obj.deserialize(params.KeyValue)
+            this.KeyValue = obj;
+        }
+
+        if (params.Tag) {
+            let obj = new RuleTagInfo();
+            obj.deserialize(params.Tag)
+            this.Tag = obj;
+        }
+
+        if (params.DynamicIndex) {
+            let obj = new DynamicIndex();
+            obj.deserialize(params.DynamicIndex)
+            this.DynamicIndex = obj;
+        }
 
     }
 }
@@ -7054,6 +8154,41 @@ class CreateConsumerRequest extends  AbstractModel {
 }
 
 /**
+ * Log topic search information
+ * @class
+ */
+class MultiTopicSearchInformation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the log topic to be searched for
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+         * @type {string || null}
+         */
+        this.Context = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Context = 'Context' in params ? params.Context : null;
+
+    }
+}
+
+/**
  * Alarm notification template type
  * @class
  */
@@ -7176,6 +8311,34 @@ class ModifyConfigResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyKafkaRecharge response structure.
+ * @class
+ */
+class ModifyKafkaRechargeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAlarmNotice response structure.
  * @class
  */
@@ -7199,6 +8362,126 @@ class ModifyAlarmNoticeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Basic information of a data processing task
+ * @class
+ */
+class DataTransformTaskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data processing task name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Data processing task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task status. Valid values: 1 (enabled) and 2 (disabled).
+         * @type {number || null}
+         */
+        this.EnableFlag = null;
+
+        /**
+         * Task type. Valid values: 1 (DSL) and 2 (SQL).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Source log topic
+         * @type {string || null}
+         */
+        this.SrcTopicId = null;
+
+        /**
+         * Current task status. Valid values: 1 (preparing), 2 (in progress), 3 (being stopped), and 4 (stopped).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Task creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Last enabled time. If you need to rebuild a cluster, modify this time.
+         * @type {string || null}
+         */
+        this.LastEnableTime = null;
+
+        /**
+         * Log topic name
+         * @type {string || null}
+         */
+        this.SrcTopicName = null;
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Target topic ID and alias of the data processing task
+         * @type {Array.<DataTransformResouceInfo> || null}
+         */
+        this.DstResources = null;
+
+        /**
+         * Logical function for data processing
+         * @type {string || null}
+         */
+        this.EtlContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.EnableFlag = 'EnableFlag' in params ? params.EnableFlag : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SrcTopicId = 'SrcTopicId' in params ? params.SrcTopicId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.LastEnableTime = 'LastEnableTime' in params ? params.LastEnableTime : null;
+        this.SrcTopicName = 'SrcTopicName' in params ? params.SrcTopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+
+        if (params.DstResources) {
+            this.DstResources = new Array();
+            for (let z in params.DstResources) {
+                let obj = new DataTransformResouceInfo();
+                obj.deserialize(params.DstResources[z]);
+                this.DstResources.push(obj);
+            }
+        }
+        this.EtlContent = 'EtlContent' in params ? params.EtlContent : null;
 
     }
 }
@@ -7310,39 +8593,82 @@ class ModifyCosRechargeResponse extends  AbstractModel {
 }
 
 /**
- * Format configuration of shipped log content
+ * Preview data details
  * @class
  */
-class ContentInfo extends  AbstractModel {
+class PreviewLogStatistic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Content format. Valid values: `json`, `csv`
+         * Log content
+         * @type {string || null}
+         */
+        this.LogContent = null;
+
+        /**
+         * Line number
+         * @type {number || null}
+         */
+        this.LineNum = null;
+
+        /**
+         * Target log topic
+         * @type {string || null}
+         */
+        this.DstTopicId = null;
+
+        /**
+         * Error code. An empty string "" indicates no error.
+         * @type {string || null}
+         */
+        this.FailReason = null;
+
+        /**
+         * Log timestamp
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Target topic name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DstTopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogContent = 'LogContent' in params ? params.LogContent : null;
+        this.LineNum = 'LineNum' in params ? params.LineNum : null;
+        this.DstTopicId = 'DstTopicId' in params ? params.DstTopicId : null;
+        this.FailReason = 'FailReason' in params ? params.FailReason : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.DstTopicName = 'DstTopicName' in params ? params.DstTopicName : null;
+
+    }
+}
+
+/**
+ * Compression configuration of shipped log
+ * @class
+ */
+class CompressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Compression format. Valid values: `gzip`; `lzop`; `snappy`; `none` (no compression)
          * @type {string || null}
          */
         this.Format = null;
-
-        /**
-         * CSV format content description
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {CsvInfo || null}
-         */
-        this.Csv = null;
-
-        /**
-         * JSON format content description
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {JsonInfo || null}
-         */
-        this.Json = null;
-
-        /**
-         * `Parquet` format description
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {ParquetInfo || null}
-         */
-        this.Parquet = null;
 
     }
 
@@ -7354,24 +8680,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             return;
         }
         this.Format = 'Format' in params ? params.Format : null;
-
-        if (params.Csv) {
-            let obj = new CsvInfo();
-            obj.deserialize(params.Csv)
-            this.Csv = obj;
-        }
-
-        if (params.Json) {
-            let obj = new JsonInfo();
-            obj.deserialize(params.Json)
-            this.Json = obj;
-        }
-
-        if (params.Parquet) {
-            let obj = new ParquetInfo();
-            obj.deserialize(params.Parquet)
-            this.Parquet = obj;
-        }
 
     }
 }
@@ -8161,6 +9469,106 @@ Currently, other recipient types are not supported.
 }
 
 /**
+ * ModifyTopic request structure.
+ * @class
+ */
+class ModifyTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Log topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether to start collection for this log topic
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether to enable automatic split
+         * @type {boolean || null}
+         */
+        this.AutoSplit = null;
+
+        /**
+         * Maximum number of partitions to split into for this topic if automatic split is enabled
+         * @type {number || null}
+         */
+        this.MaxSplitPartitions = null;
+
+        /**
+         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Log topic description
+         * @type {string || null}
+         */
+        this.Describes = null;
+
+        /**
+         * `0`: Disable log transitioning.
+A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+         * @type {number || null}
+         */
+        this.HotPeriod = null;
+
+        /**
+         * Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+         * @type {boolean || null}
+         */
+        this.IsWebTracking = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
+        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Describes = 'Describes' in params ? params.Describes : null;
+        this.HotPeriod = 'HotPeriod' in params ? params.HotPeriod : null;
+        this.IsWebTracking = 'IsWebTracking' in params ? params.IsWebTracking : null;
+
+    }
+}
+
+/**
  * Information of the CKafka instance to ship to
  * @class
  */
@@ -8478,7 +9886,8 @@ Queries all logs using * or an empty string
         this.Query = null;
 
         /**
-         * ID of the log topic to be searched
+         * - The ID of the log topic to be searched for. Only one log topic can be specified.
+- To search for multiple log topics at a time, use the `Topics` parameter.
          * @type {string || null}
          */
         this.TopicId = null;
@@ -8537,6 +9946,14 @@ For more information, see <a href="https://intl.cloud.tencent.com/document/produ
          */
         this.SyntaxRule = null;
 
+        /**
+         * - The IDs of the log topics (up to 20) to be searched for.
+- To search for a single log topic, use the `TopicId` parameter.
+- You cannot use both `TopicId` and `Topics`.
+         * @type {Array.<MultiTopicSearchInformation> || null}
+         */
+        this.Topics = null;
+
     }
 
     /**
@@ -8556,6 +9973,15 @@ For more information, see <a href="https://intl.cloud.tencent.com/document/produ
         this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
         this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
         this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new MultiTopicSearchInformation();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
+            }
+        }
 
     }
 }
@@ -8659,6 +10085,43 @@ class CreateMachineGroupRequest extends  AbstractModel {
 }
 
 /**
+ * Description of the tag pair bound to a resource instance when it is created
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The tag key.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * The tag value.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeExports response structure.
  * @class
  */
@@ -8739,6 +10202,76 @@ class ApplyConfigToMachineGroupRequest extends  AbstractModel {
         }
         this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * GetAlarmLog request structure.
+ * @class
+ */
+class GetAlarmLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of the log to be queried, which is a Unix timestamp in milliseconds
+         * @type {number || null}
+         */
+        this.From = null;
+
+        /**
+         * End time of the log to be queried, which is a Unix timestamp in milliseconds
+         * @type {number || null}
+         */
+        this.To = null;
+
+        /**
+         * Query statement. Maximum length: 1024
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Number of logs returned in a single query. Maximum value: 1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * This field is used to load more logs. Pass through the last `Context` value returned to get more log content.
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+        /**
+         * If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
+         * @type {boolean || null}
+         */
+        this.UseNewAnalysis = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
 
     }
 }
@@ -9059,30 +10592,84 @@ class DescribeMachineGroupConfigsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLogset request structure.
+ * ModifyKafkaRecharge request structure.
  * @class
  */
-class ModifyLogsetRequest extends  AbstractModel {
+class ModifyKafkaRechargeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Logset ID
+         * Kafka data import configuration ID
          * @type {string || null}
          */
-        this.LogsetId = null;
+        this.Id = null;
 
         /**
-         * Logset name
+         * Target topic ID
          * @type {string || null}
          */
-        this.LogsetName = null;
+        this.TopicId = null;
 
         /**
-         * Tag key-value pair bound to logset. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key at any time.
-         * @type {Array.<Tag> || null}
+         * Kafka data import configuration name
+         * @type {string || null}
          */
-        this.Tags = null;
+        this.Name = null;
+
+        /**
+         * Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+         * @type {number || null}
+         */
+        this.KafkaType = null;
+
+        /**
+         * CKafka instance ID, which is required when `KafkaType` is set to `0`
+         * @type {string || null}
+         */
+        this.KafkaInstance = null;
+
+        /**
+         * Service address
+         * @type {string || null}
+         */
+        this.ServerAddr = null;
+
+        /**
+         * Whether the service address uses an encrypted connection
+         * @type {boolean || null}
+         */
+        this.IsEncryptionAddr = null;
+
+        /**
+         * Encryption access protocol, which is required when IsEncryptionAddr` is set to `true`
+         * @type {KafkaProtocolInfo || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * List of Kafka topics to import data from. Separate multiple topics with commas (,).
+         * @type {string || null}
+         */
+        this.UserKafkaTopics = null;
+
+        /**
+         * Kafka consumer group name
+         * @type {string || null}
+         */
+        this.ConsumerGroupName = null;
+
+        /**
+         * Log import rule
+         * @type {LogRechargeRuleInfo || null}
+         */
+        this.LogRechargeRule = null;
+
+        /**
+         * Import control. Valid values: 1 (suspend) and 2 (resume).
+         * @type {number || null}
+         */
+        this.StatusControl = null;
 
     }
 
@@ -9093,15 +10680,119 @@ class ModifyLogsetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.KafkaType = 'KafkaType' in params ? params.KafkaType : null;
+        this.KafkaInstance = 'KafkaInstance' in params ? params.KafkaInstance : null;
+        this.ServerAddr = 'ServerAddr' in params ? params.ServerAddr : null;
+        this.IsEncryptionAddr = 'IsEncryptionAddr' in params ? params.IsEncryptionAddr : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
+        if (params.Protocol) {
+            let obj = new KafkaProtocolInfo();
+            obj.deserialize(params.Protocol)
+            this.Protocol = obj;
+        }
+        this.UserKafkaTopics = 'UserKafkaTopics' in params ? params.UserKafkaTopics : null;
+        this.ConsumerGroupName = 'ConsumerGroupName' in params ? params.ConsumerGroupName : null;
+
+        if (params.LogRechargeRule) {
+            let obj = new LogRechargeRuleInfo();
+            obj.deserialize(params.LogRechargeRule)
+            this.LogRechargeRule = obj;
+        }
+        this.StatusControl = 'StatusControl' in params ? params.StatusControl : null;
+
+    }
+}
+
+/**
+ * CreateDataTransform request structure.
+ * @class
+ */
+class CreateDataTransformRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task type. Valid values: 1 (specified topic) and 2 (dynamically created).
+         * @type {number || null}
+         */
+        this.FuncType = null;
+
+        /**
+         * Source log topic
+         * @type {string || null}
+         */
+        this.SrcTopicId = null;
+
+        /**
+         * Data processing task name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Data processing statement
+         * @type {string || null}
+         */
+        this.EtlContent = null;
+
+        /**
+         * Data processing type. Valid values: `1`: Use random data from the source log topic for processing preview. `2`: Use user-defined test data for processing preview. `3`: Create a real processing task.
+         * @type {number || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Task status. Valid values: 1 (enabled) and 2 (disabled).
+         * @type {number || null}
+         */
+        this.EnableFlag = null;
+
+        /**
+         * Target topic ID and alias of the data processing task
+         * @type {Array.<DataTransformResouceInfo> || null}
+         */
+        this.DstResources = null;
+
+        /**
+         * Test data used for previewing the processing result
+         * @type {Array.<PreviewLogStatistic> || null}
+         */
+        this.PreviewLogStatistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FuncType = 'FuncType' in params ? params.FuncType : null;
+        this.SrcTopicId = 'SrcTopicId' in params ? params.SrcTopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.EtlContent = 'EtlContent' in params ? params.EtlContent : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.EnableFlag = 'EnableFlag' in params ? params.EnableFlag : null;
+
+        if (params.DstResources) {
+            this.DstResources = new Array();
+            for (let z in params.DstResources) {
+                let obj = new DataTransformResouceInfo();
+                obj.deserialize(params.DstResources[z]);
+                this.DstResources.push(obj);
+            }
+        }
+
+        if (params.PreviewLogStatistics) {
+            this.PreviewLogStatistics = new Array();
+            for (let z in params.PreviewLogStatistics) {
+                let obj = new PreviewLogStatistic();
+                obj.deserialize(params.PreviewLogStatistics[z]);
+                this.PreviewLogStatistics.push(obj);
             }
         }
 
@@ -9131,6 +10822,42 @@ class DeleteMachineGroupInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckRechargeKafkaServer response structure.
+ * @class
+ */
+class CheckRechargeKafkaServerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kafka cluster accessibility. 0: Accessible.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9467,6 +11194,84 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyDataTransform response structure.
+ * @class
+ */
+class ModifyDataTransformResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDataTransformInfo response structure.
+ * @class
+ */
+class DescribeDataTransformInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of data processing tasks
+         * @type {Array.<DataTransformTaskInfo> || null}
+         */
+        this.DataTransformTaskInfos = null;
+
+        /**
+         * Total tasks
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataTransformTaskInfos) {
+            this.DataTransformTaskInfos = new Array();
+            for (let z in params.DataTransformTaskInfos) {
+                let obj = new DataTransformTaskInfo();
+                obj.deserialize(params.DataTransformTaskInfos[z]);
+                this.DataTransformTaskInfos.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Shipping content
  * @class
  */
@@ -9684,7 +11489,10 @@ module.exports = {
     CreateMachineGroupResponse: CreateMachineGroupResponse,
     Filter: Filter,
     DescribeConfigMachineGroupsRequest: DescribeConfigMachineGroupsRequest,
+    KafkaRechargeInfo: KafkaRechargeInfo,
+    ModifyLogsetRequest: ModifyLogsetRequest,
     CreateLogsetRequest: CreateLogsetRequest,
+    ModifyDataTransformRequest: ModifyDataTransformRequest,
     LogItem: LogItem,
     SearchLogResponse: SearchLogResponse,
     DeleteTopicRequest: DeleteTopicRequest,
@@ -9695,7 +11503,7 @@ module.exports = {
     MergePartitionRequest: MergePartitionRequest,
     DescribeShippersResponse: DescribeShippersResponse,
     ModifyShipperResponse: ModifyShipperResponse,
-    ModifyTopicRequest: ModifyTopicRequest,
+    DeleteKafkaRechargeResponse: DeleteKafkaRechargeResponse,
     CallBackInfo: CallBackInfo,
     OpenKafkaConsumerResponse: OpenKafkaConsumerResponse,
     AlarmTargetInfo: AlarmTargetInfo,
@@ -9704,19 +11512,20 @@ module.exports = {
     DeleteMachineGroupInfoRequest: DeleteMachineGroupInfoRequest,
     CreateLogsetResponse: CreateLogsetResponse,
     DeleteMachineGroupResponse: DeleteMachineGroupResponse,
-    Tag: Tag,
+    KafkaProtocolInfo: KafkaProtocolInfo,
+    DescribeCosRechargesRequest: DescribeCosRechargesRequest,
     MetaTagInfo: MetaTagInfo,
-    DescribeExportsRequest: DescribeExportsRequest,
+    CreateCosRechargeRequest: CreateCosRechargeRequest,
     ExtractRuleInfo: ExtractRuleInfo,
     TopicInfo: TopicInfo,
-    DescribeConsumerRequest: DescribeConsumerRequest,
+    DeleteDataTransformResponse: DeleteDataTransformResponse,
     ShipperTaskInfo: ShipperTaskInfo,
     ModifyConsumerRequest: ModifyConsumerRequest,
     CreateIndexResponse: CreateIndexResponse,
     DeleteConfigFromMachineGroupResponse: DeleteConfigFromMachineGroupResponse,
     CreateConsumerResponse: CreateConsumerResponse,
     ModifyMachineGroupResponse: ModifyMachineGroupResponse,
-    RuleInfo: RuleInfo,
+    DataTransformResouceInfo: DataTransformResouceInfo,
     DeleteMachineGroupRequest: DeleteMachineGroupRequest,
     FullTextInfo: FullTextInfo,
     DescribePartitionsResponse: DescribePartitionsResponse,
@@ -9734,7 +11543,7 @@ module.exports = {
     FilterRuleInfo: FilterRuleInfo,
     RetryShipperTaskResponse: RetryShipperTaskResponse,
     SplitPartitionRequest: SplitPartitionRequest,
-    DescribeCosRechargesRequest: DescribeCosRechargesRequest,
+    CheckRechargeKafkaServerRequest: CheckRechargeKafkaServerRequest,
     MachineGroupInfo: MachineGroupInfo,
     DescribeLogHistogramResponse: DescribeLogHistogramResponse,
     CloseKafkaConsumerResponse: CloseKafkaConsumerResponse,
@@ -9745,8 +11554,9 @@ module.exports = {
     DescribeTopicsRequest: DescribeTopicsRequest,
     GetAlarmLogResponse: GetAlarmLogResponse,
     CreateTopicRequest: CreateTopicRequest,
-    CreateCosRechargeRequest: CreateCosRechargeRequest,
+    DescribeExportsRequest: DescribeExportsRequest,
     AlarmTarget: AlarmTarget,
+    CreateKafkaRechargeResponse: CreateKafkaRechargeResponse,
     OpenKafkaConsumerRequest: OpenKafkaConsumerRequest,
     DeleteConfigResponse: DeleteConfigResponse,
     ModifyIndexResponse: ModifyIndexResponse,
@@ -9757,17 +11567,23 @@ module.exports = {
     ModifyConsumerResponse: ModifyConsumerResponse,
     DescribeAlertRecordHistoryRequest: DescribeAlertRecordHistoryRequest,
     DescribeConfigsRequest: DescribeConfigsRequest,
+    KafkaConsumerContent: KafkaConsumerContent,
     LogsetInfo: LogsetInfo,
+    DescribeConsumerRequest: DescribeConsumerRequest,
     DeleteConfigRequest: DeleteConfigRequest,
     AnalysisDimensional: AnalysisDimensional,
+    LogRechargeRuleInfo: LogRechargeRuleInfo,
     CloseKafkaConsumerRequest: CloseKafkaConsumerRequest,
     RuleTagInfo: RuleTagInfo,
     CreateExportRequest: CreateExportRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
+    DeleteDataTransformRequest: DeleteDataTransformRequest,
     DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
     ModifyConfigRequest: ModifyConfigRequest,
     AddMachineGroupInfoRequest: AddMachineGroupInfoRequest,
+    DescribeKafkaRechargesRequest: DescribeKafkaRechargesRequest,
     JsonInfo: JsonInfo,
+    PreviewKafkaRechargeResponse: PreviewKafkaRechargeResponse,
     CreateShipperRequest: CreateShipperRequest,
     CreateTopicResponse: CreateTopicResponse,
     DeleteAlarmResponse: DeleteAlarmResponse,
@@ -9777,30 +11593,40 @@ module.exports = {
     ModifyTopicResponse: ModifyTopicResponse,
     CreateConfigRequest: CreateConfigRequest,
     CreateShipperResponse: CreateShipperResponse,
+    DescribeKafkaRechargesResponse: DescribeKafkaRechargesResponse,
     DeleteIndexResponse: DeleteIndexResponse,
     AlarmAnalysisConfig: AlarmAnalysisConfig,
     ModifyIndexRequest: ModifyIndexRequest,
     Column: Column,
-    CompressInfo: CompressInfo,
+    ContentInfo: ContentInfo,
     ValueInfo: ValueInfo,
-    GetAlarmLogRequest: GetAlarmLogRequest,
+    DescribeDataTransformInfoRequest: DescribeDataTransformInfoRequest,
     DeleteShipperResponse: DeleteShipperResponse,
     ExportInfo: ExportInfo,
     GroupTriggerConditionInfo: GroupTriggerConditionInfo,
     DescribeLogContextResponse: DescribeLogContextResponse,
     ConfigInfo: ConfigInfo,
     DeleteExportRequest: DeleteExportRequest,
+    PreviewKafkaRechargeRequest: PreviewKafkaRechargeRequest,
     SplitPartitionResponse: SplitPartitionResponse,
+    CreateDataTransformResponse: CreateDataTransformResponse,
     LogContextInfo: LogContextInfo,
     ModifyShipperRequest: ModifyShipperRequest,
+    CreateKafkaRechargeRequest: CreateKafkaRechargeRequest,
+    DeleteKafkaRechargeRequest: DeleteKafkaRechargeRequest,
+    RuleInfo: RuleInfo,
     AlertHistoryRecord: AlertHistoryRecord,
     CreateConsumerRequest: CreateConsumerRequest,
+    MultiTopicSearchInformation: MultiTopicSearchInformation,
     AlarmNotice: AlarmNotice,
     ModifyConfigResponse: ModifyConfigResponse,
+    ModifyKafkaRechargeResponse: ModifyKafkaRechargeResponse,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
+    DataTransformTaskInfo: DataTransformTaskInfo,
     DescribeMachinesResponse: DescribeMachinesResponse,
     ModifyCosRechargeResponse: ModifyCosRechargeResponse,
-    ContentInfo: ContentInfo,
+    PreviewLogStatistic: PreviewLogStatistic,
+    CompressInfo: CompressInfo,
     ApplyConfigToMachineGroupResponse: ApplyConfigToMachineGroupResponse,
     AlertHistoryNotice: AlertHistoryNotice,
     DeleteAlarmRequest: DeleteAlarmRequest,
@@ -9815,6 +11641,7 @@ module.exports = {
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     NoticeReceiver: NoticeReceiver,
+    ModifyTopicRequest: ModifyTopicRequest,
     Ckafka: Ckafka,
     DescribeMachinesRequest: DescribeMachinesRequest,
     DeleteAlarmNoticeRequest: DeleteAlarmNoticeRequest,
@@ -9824,21 +11651,27 @@ module.exports = {
     MonitorTime: MonitorTime,
     SearchLogRequest: SearchLogRequest,
     CreateMachineGroupRequest: CreateMachineGroupRequest,
+    Tag: Tag,
     DescribeExportsResponse: DescribeExportsResponse,
     ApplyConfigToMachineGroupRequest: ApplyConfigToMachineGroupRequest,
+    GetAlarmLogRequest: GetAlarmLogRequest,
     DescribeMachineGroupConfigsResponse: DescribeMachineGroupConfigsResponse,
     CsvInfo: CsvInfo,
     CreateAlarmNoticeRequest: CreateAlarmNoticeRequest,
     DescribeIndexResponse: DescribeIndexResponse,
     HistogramInfo: HistogramInfo,
     DescribeMachineGroupConfigsRequest: DescribeMachineGroupConfigsRequest,
-    ModifyLogsetRequest: ModifyLogsetRequest,
+    ModifyKafkaRechargeRequest: ModifyKafkaRechargeRequest,
+    CreateDataTransformRequest: CreateDataTransformRequest,
     DeleteMachineGroupInfoResponse: DeleteMachineGroupInfoResponse,
+    CheckRechargeKafkaServerResponse: CheckRechargeKafkaServerResponse,
     ModifyCosRechargeRequest: ModifyCosRechargeRequest,
     DescribeLogsetsRequest: DescribeLogsetsRequest,
     ParquetInfo: ParquetInfo,
     DeleteTopicResponse: DeleteTopicResponse,
     CosRechargeInfo: CosRechargeInfo,
+    ModifyDataTransformResponse: ModifyDataTransformResponse,
+    DescribeDataTransformInfoResponse: DescribeDataTransformInfoResponse,
     ConsumerContent: ConsumerContent,
     RetryShipperTaskRequest: RetryShipperTaskRequest,
     CreateExportResponse: CreateExportResponse,

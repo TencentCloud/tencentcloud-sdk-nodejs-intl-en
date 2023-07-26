@@ -31,10 +31,12 @@ const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const CustomerBillDetailData = models.CustomerBillDetailData;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
@@ -54,18 +56,19 @@ const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
 const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
-const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
+const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const CountryCodeItem = models.CountryCodeItem;
 const BillDetailData = models.BillDetailData;
-const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
+const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
+const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
@@ -176,6 +179,17 @@ Notes:<br>
     AllocateCustomerCredit(req, cb) {
         let resp = new AllocateCustomerCreditResponse();
         this.request("AllocateCustomerCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the customer bill details.
+     * @param {DescribeBillDetailRequest} req
+     * @param {function(string, DescribeBillDetailResponse):void} cb
+     * @public
+     */
+    DescribeBillDetail(req, cb) {
+        let resp = new DescribeBillDetailResponse();
+        this.request("DescribeBillDetail", req, resp, cb);
     }
 
     /**

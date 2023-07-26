@@ -106,6 +106,7 @@ const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const ModifyLiveDomainCertBindingsRequest = models.ModifyLiveDomainCertBindingsRequest;
+const DescribeRecordTaskRequest = models.DescribeRecordTaskRequest;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
 const TimeShiftTemplate = models.TimeShiftTemplate;
 const LiveCertDomainInfo = models.LiveCertDomainInfo;
@@ -117,6 +118,7 @@ const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const DescribeLiveDomainCertBindingsResponse = models.DescribeLiveDomainCertBindingsResponse;
 const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const DescribeLiveTimeShiftBillInfoListRequest = models.DescribeLiveTimeShiftBillInfoListRequest;
+const RecordTask = models.RecordTask;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const WatermarkInfo = models.WatermarkInfo;
@@ -170,6 +172,7 @@ const AuthenticateDomainOwnerRequest = models.AuthenticateDomainOwnerRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
 const DeleteLiveTimeShiftTemplateResponse = models.DeleteLiveTimeShiftTemplateResponse;
+const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
@@ -201,7 +204,7 @@ const BandwidthInfo = models.BandwidthInfo;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
-const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
+const DescribeRecordTaskResponse = models.DescribeRecordTaskResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
 const DeleteLiveTranscodeTemplateRequest = models.DeleteLiveTranscodeTemplateRequest;
 const DescribeLiveCallbackRulesRequest = models.DescribeLiveCallbackRulesRequest;
@@ -399,14 +402,17 @@ Note: If you call this API to pause an inactive stream, the request will be cons
     }
 
     /**
-     * This API is used to modify the recording template configuration.
-     * @param {ModifyLiveRecordTemplateRequest} req
-     * @param {function(string, ModifyLiveRecordTemplateResponse):void} cb
+     * This API is used to retrieve a list of recording tasks that were started and ended within a specified time range. 
+- Prerequisites: 
+1. This API is only used to query recording tasks created by the CreateRecordTask interface. 
+2. It cannot retrieve recording tasks that have been deleted by the DeleteRecordTask interface or tasks that have expired (platform retains for 3 months).
+     * @param {DescribeRecordTaskRequest} req
+     * @param {function(string, DescribeRecordTaskResponse):void} cb
      * @public
      */
-    ModifyLiveRecordTemplate(req, cb) {
-        let resp = new ModifyLiveRecordTemplateResponse();
-        this.request("ModifyLiveRecordTemplate", req, resp, cb);
+    DescribeRecordTask(req, cb) {
+        let resp = new DescribeRecordTaskResponse();
+        this.request("DescribeRecordTask", req, resp, cb);
     }
 
     /**
@@ -597,6 +603,17 @@ Referer information is included in HTTP requests. After you enable referer confi
     DescribeVisitTopSumInfoList(req, cb) {
         let resp = new DescribeVisitTopSumInfoListResponse();
         this.request("DescribeVisitTopSumInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the recording template configuration.
+     * @param {ModifyLiveRecordTemplateRequest} req
+     * @param {function(string, ModifyLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    ModifyLiveRecordTemplate(req, cb) {
+        let resp = new ModifyLiveRecordTemplateResponse();
+        this.request("ModifyLiveRecordTemplate", req, resp, cb);
     }
 
     /**

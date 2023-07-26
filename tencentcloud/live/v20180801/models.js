@@ -4710,6 +4710,69 @@ You can specify either `CloudCertId` or the public/private key. If both are spec
 }
 
 /**
+ * DescribeRecordTask request structure.
+ * @class
+ */
+class DescribeRecordTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start time of the tasks to retrieve in Unix timestamp. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time of the tasks to retrieve in Unix timestamp. The EndTime must be greater than the StartTime. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week. (Note: the start and end times of the task must be within the query time range).
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Push domain name.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Push path.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Page token used for batch retrieval: If a single request cannot retrieve all data, the interface will return a ScrollToken. The next request carrying this token will start retrieving from the next record.
+         * @type {string || null}
+         */
+        this.ScrollToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+
+    }
+}
+
+/**
  * CreateLiveTranscodeTemplate response structure.
  * @class
  */
@@ -5232,6 +5295,83 @@ Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.c
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+
+    }
+}
+
+/**
+ * Recording task.
+ * @class
+ */
+class RecordTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recording task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Push domain name.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Push path.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The start time of the recording task in Unix timestamp. 
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time of the recording task in Unix timestamp. 
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Recording template ID.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * The StopRecordTask API call stops the task at the Unix timestamp. A value of 0 indicates that the API has not been called to stop the task.
+         * @type {number || null}
+         */
+        this.Stopped = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Stopped = 'Stopped' in params ? params.Stopped : null;
 
     }
 }
@@ -8099,6 +8239,34 @@ class DeleteLiveTimeShiftTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLivePushAuthKey response structure.
+ * @class
+ */
+class ModifyLivePushAuthKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveWatermark response structure.
  * @class
  */
@@ -9803,12 +9971,24 @@ Note: Beijing time (UTC+8) is used.
 }
 
 /**
- * ModifyLivePushAuthKey response structure.
+ * DescribeRecordTask response structure.
  * @class
  */
-class ModifyLivePushAuthKeyResponse extends  AbstractModel {
+class DescribeRecordTaskResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Page token: When the request does not return all data, this field indicates the token of the next record. When this field is empty, it means there is no more data.
+         * @type {string || null}
+         */
+        this.ScrollToken = null;
+
+        /**
+         * List of recording tasks. When this field is empty, it means all data has been returned.
+         * @type {Array.<RecordTask> || null}
+         */
+        this.TaskList = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9824,6 +10004,16 @@ class ModifyLivePushAuthKeyResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+
+        if (params.TaskList) {
+            this.TaskList = new Array();
+            for (let z in params.TaskList) {
+                let obj = new RecordTask();
+                obj.deserialize(params.TaskList[z]);
+                this.TaskList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -15519,6 +15709,7 @@ module.exports = {
     RuleInfo: RuleInfo,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
     ModifyLiveDomainCertBindingsRequest: ModifyLiveDomainCertBindingsRequest,
+    DescribeRecordTaskRequest: DescribeRecordTaskRequest,
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
     TimeShiftTemplate: TimeShiftTemplate,
     LiveCertDomainInfo: LiveCertDomainInfo,
@@ -15530,6 +15721,7 @@ module.exports = {
     DescribeLiveDomainCertBindingsResponse: DescribeLiveDomainCertBindingsResponse,
     DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
     DescribeLiveTimeShiftBillInfoListRequest: DescribeLiveTimeShiftBillInfoListRequest,
+    RecordTask: RecordTask,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
     WatermarkInfo: WatermarkInfo,
@@ -15583,6 +15775,7 @@ module.exports = {
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
     DescribeStreamPushInfoListRequest: DescribeStreamPushInfoListRequest,
     DeleteLiveTimeShiftTemplateResponse: DeleteLiveTimeShiftTemplateResponse,
+    ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
@@ -15614,7 +15807,7 @@ module.exports = {
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
     CertInfo: CertInfo,
-    ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
+    DescribeRecordTaskResponse: DescribeRecordTaskResponse,
     DescribeLiveDelayInfoListResponse: DescribeLiveDelayInfoListResponse,
     DeleteLiveTranscodeTemplateRequest: DeleteLiveTranscodeTemplateRequest,
     DescribeLiveCallbackRulesRequest: DescribeLiveCallbackRulesRequest,

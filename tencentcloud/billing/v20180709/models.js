@@ -1071,7 +1071,7 @@ Note: To query the product codes used in the current month, call <a href="https:
         this.Context = null;
 
         /**
-         * 
+         * The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
          * @type {string || null}
          */
         this.PayerUin = null;
@@ -1515,13 +1515,13 @@ class BillDetailComponent extends  AbstractModel {
         this.UsedAmountUnit = null;
 
         /**
-         * 
+         * Raw usage/duration: The raw usage/duration of a component before deduction. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RealTotalMeasure = null;
 
         /**
-         * 
+         * Deducted usage/duration (including packages): The usage/duration deducted with a package. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DeductedMeasure = null;
@@ -2427,7 +2427,7 @@ Note: To query the product codes used in the current month, call <a href="https:
         this.BusinessCode = null;
 
         /**
-         * 
+         * The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
          * @type {string || null}
          */
         this.PayerUin = null;

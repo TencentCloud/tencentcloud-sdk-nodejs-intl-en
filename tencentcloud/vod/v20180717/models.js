@@ -12284,6 +12284,12 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
          */
         this.SubtitleFormat = null;
 
+        /**
+         * Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li>
+         * @type {string || null}
+         */
+        this.SrcLanguage = null;
+
     }
 
     /**
@@ -12301,6 +12307,7 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
             this.SubtitleFormatsOperation = obj;
         }
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.SrcLanguage = 'SrcLanguage' in params ? params.SrcLanguage : null;
 
     }
 }
@@ -27615,6 +27622,12 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
          */
         this.SubtitleFormat = null;
 
+        /**
+         * Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note：</font> If it fills in an empty string or leave this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
+         * @type {string || null}
+         */
+        this.SrcLanguage = null;
+
     }
 
     /**
@@ -27627,6 +27640,7 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.SubtitleFormats = 'SubtitleFormats' in params ? params.SubtitleFormats : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.SrcLanguage = 'SrcLanguage' in params ? params.SrcLanguage : null;
 
     }
 }

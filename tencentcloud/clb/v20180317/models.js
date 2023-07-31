@@ -501,7 +501,7 @@ Note: By default, the traffic goes to the primary AZ. The secondary AZs only car
         this.ZoneId = null;
 
         /**
-         * CLB network billing mode. This parameter is applicable only to public network CLB instances.
+         * It only works on LCU-supported instances on private networks and all instances on public networks.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
@@ -540,8 +540,8 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
         /**
          * Creates an LCU-supported instance.
 <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
-<ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
-<li>If you enable ultra-large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul></li><li>This parameter is not required when you create a shared instance.</li></ul>
+<ul><li>The default specification is Super Large 1.
+<li>If you have enabled Super u200dLarge LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
          * @type {string || null}
          */
         this.SlaType = null;
@@ -588,6 +588,12 @@ Note: The traffic only goes to the secondary AZ when the primary AZ is unavailab
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
+
+        /**
+         * Upgrades to domain name-based CLB
+         * @type {boolean || null}
+         */
+        this.DynamicVip = null;
 
     }
 
@@ -648,6 +654,7 @@ Note: The traffic only goes to the secondary AZ when the primary AZ is unavailab
         this.SlaveZoneId = 'SlaveZoneId' in params ? params.SlaveZoneId : null;
         this.EipAddressId = 'EipAddressId' in params ? params.EipAddressId : null;
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.DynamicVip = 'DynamicVip' in params ? params.DynamicVip : null;
 
     }
 }
@@ -1155,13 +1162,13 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.ForwardType = null;
 
         /**
-         * TRPC callee server route, which is required when `ForwardType` is "TRPC".
+         * TRPC callee server route, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
          * @type {string || null}
          */
         this.TrpcCallee = null;
 
         /**
-         * TRPC calling service API, which is required when `ForwardType` is "TRPC".
+         * TRPC calling service API, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
          * @type {string || null}
          */
         this.TrpcFunc = null;
@@ -3489,6 +3496,12 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
          */
         this.DeleteProtect = null;
 
+        /**
+         * Modifies the second-level domain name of CLB from mycloud.com to tencentclb.com. Note that the sub-domain names will be changed as well. After the modification, mycloud.com will be invalidated. 
+         * @type {boolean || null}
+         */
+        this.ModifyClassicDomain = null;
+
     }
 
     /**
@@ -3515,6 +3528,52 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
         this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
         this.DeleteProtect = 'DeleteProtect' in params ? params.DeleteProtect : null;
+        this.ModifyClassicDomain = 'ModifyClassicDomain' in params ? params.ModifyClassicDomain : null;
+
+    }
+}
+
+/**
+ * ISP Type
+ * @class
+ */
+class TypeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ISP Type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Specification availability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SpecAvailability> || null}
+         */
+        this.SpecAvailabilitySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.SpecAvailabilitySet) {
+            this.SpecAvailabilitySet = new Array();
+            for (let z in params.SpecAvailabilitySet) {
+                let obj = new SpecAvailability();
+                obj.deserialize(params.SpecAvailabilitySet[z]);
+                this.SpecAvailabilitySet.push(obj);
+            }
+        }
 
     }
 }
@@ -4132,6 +4191,43 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Specification availability
+ * @class
+ */
+class SpecAvailability extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specification type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SpecType = null;
+
+        /**
+         * Specification availability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Availability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecType = 'SpecType' in params ? params.SpecType : null;
+        this.Availability = 'Availability' in params ? params.Availability : null;
+
+    }
+}
+
+/**
  * Configuration content
  * @class
  */
@@ -4609,7 +4705,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TimeOut = null;
 
         /**
-         * Health check interval in seconds. Value range: 5-300. Default value: 5.
+         * Health check probing interval period. It defaults to `5`. For IPv4 CLB instances, the range is 2-300. u200dFor IPv6 CLB instances, the range is 5-300. Unit: second
+Note: For some IPv4 CLB instances created long ago, the range is 5-300.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -6585,15 +6682,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.WafDomainId = null;
 
         /**
-         * TRPC callee server route, which is valid when `ForwardType` is `TRPC`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * TRPC callee server route, which is valid when `ForwardType` is `TRPC`. This is now only for internal usage.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TrpcCallee = null;
 
         /**
-         * TRPC calling service API, which is valid when `ForwardType` is `TRPC`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * TRPC calling service API, which is valid when `ForwardType` is `TRPC`. This is now only for internal usage.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TrpcFunc = null;
@@ -9254,7 +9351,12 @@ BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is suppor
         this.InternetChargeType = null;
 
         /**
-         * Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+         * Maximum outgoing bandwidth in Mbps. It works on LCU-supported instances on private networks and all instances on public networks.
+- For shared and dedicated CLB instances on public networks, the range is 1Mbps-2048Mbps.
+- For all LCU-supported CLB instances:
+  - It defaults to General LCU-supported instance. SLA corresponds to Super Large 1, and the range of maximum outgoing bandwidth is 1 Mbps - 10240 Mbps.
+  - If you have enabled Super Large specification, the range of maximum outgoing bandwidth is 1 Mbps - 61440 Mbps Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
@@ -9674,7 +9776,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.Scheduler = null;
 
         /**
-         * Forwarding protocol between the CLB instance and real server. Currently, HTTP/HTTPS/TRPC are supported.
+         * Forwarding protocol between the CLB instance and real server. HTTP/HTTPS/TRPC are supported. TRPC is now only available for internal usage.
          * @type {string || null}
          */
         this.ForwardType = null;
@@ -9698,13 +9800,13 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.TargetType = null;
 
         /**
-         * TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+         * TRPC callee server route, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
          * @type {string || null}
          */
         this.TrpcCallee = null;
 
         /**
-         * TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+         * TRPC calling service API, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
          * @type {string || null}
          */
         this.TrpcFunc = null;
@@ -10090,6 +10192,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.AvailabilitySet = null;
 
+        /**
+         * ISP Type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TypeInfo> || null}
+         */
+        this.TypeSet = null;
+
     }
 
     /**
@@ -10108,6 +10217,15 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 let obj = new ResourceAvailability();
                 obj.deserialize(params.AvailabilitySet[z]);
                 this.AvailabilitySet.push(obj);
+            }
+        }
+
+        if (params.TypeSet) {
+            this.TypeSet = new Array();
+            for (let z in params.TypeSet) {
+                let obj = new TypeInfo();
+                obj.deserialize(params.TypeSet[z]);
+                this.TypeSet.push(obj);
             }
         }
 
@@ -11157,7 +11275,7 @@ class TargetHealth extends  AbstractModel {
         this.HealthStatusDetail = null;
 
         /**
-         * Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status. This parameter will be discarded soon. We recommend that you use the HealthStatusDetail parameter.
+         * (**This parameter will be disused soon. Please use `HealthStatusDetail` instead.**) Details of the current health status. Values: `Alive` (healthy), `Dead` (abnormal), `Unknown` (Health check not started/checking/unknown status)
          * @type {string || null}
          */
         this.HealthStatusDetial = null;
@@ -12086,6 +12204,7 @@ module.exports = {
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
+    TypeInfo: TypeInfo,
     DescribeLBListenersRequest: DescribeLBListenersRequest,
     SlaUpdateParam: SlaUpdateParam,
     Target: Target,
@@ -12096,6 +12215,7 @@ module.exports = {
     DescribeClsLogSetRequest: DescribeClsLogSetRequest,
     Listener: Listener,
     LoadBalancerTraffic: LoadBalancerTraffic,
+    SpecAvailability: SpecAvailability,
     ConfigListItem: ConfigListItem,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
     ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,

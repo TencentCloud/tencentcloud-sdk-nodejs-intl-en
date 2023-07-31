@@ -83,6 +83,7 @@ const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
+const TypeInfo = models.TypeInfo;
 const DescribeLBListenersRequest = models.DescribeLBListenersRequest;
 const SlaUpdateParam = models.SlaUpdateParam;
 const Target = models.Target;
@@ -93,6 +94,7 @@ const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealth
 const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
 const LoadBalancerTraffic = models.LoadBalancerTraffic;
+const SpecAvailability = models.SpecAvailability;
 const ConfigListItem = models.ConfigListItem;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
@@ -484,11 +486,10 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance.<br/>
+     * This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance. <br/>
 Limits
-- This API can be used to upgrade only a pay-as-you-go shared instance. A monthly subscription shared instance must be upgraded in the console.
-- An LCU-supported instance cannot be rolled back to a shared instance.
-- LCU-supported instances are in beta testing. To upgrade to an LCU-supported instance, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.
+- This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB u200dconsole.
+- An LCU-supported instance cannot be changed back to a shared instance.
 - Classic CLB instances cannot be upgraded to LCU-supported instances.
      * @param {ModifyLoadBalancerSlaRequest} req
      * @param {function(string, ModifyLoadBalancerSlaResponse):void} cb

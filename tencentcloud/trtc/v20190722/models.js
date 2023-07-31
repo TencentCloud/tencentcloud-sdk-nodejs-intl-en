@@ -91,6 +91,12 @@ Grey: `0x999999`
          */
         this.CustomCrop = null;
 
+        /**
+         * The display mode of the sub-background image during output: 0 for cropping, 1 for scaling and displaying the background, 2 for scaling and displaying the black background, 3 for proportional scaling. If not filled in, the default is 3.
+         * @type {number || null}
+         */
+        this.BackgroundRenderMode = null;
+
     }
 
     /**
@@ -120,6 +126,7 @@ Grey: `0x999999`
             obj.deserialize(params.CustomCrop)
             this.CustomCrop = obj;
         }
+        this.BackgroundRenderMode = 'BackgroundRenderMode' in params ? params.BackgroundRenderMode : null;
 
     }
 }
@@ -311,6 +318,12 @@ Grey: 0x999999
          */
         this.WaterMarkList = null;
 
+        /**
+         * Background image display mode during output: 0 for crop, 1 for scale and display with black background, 2 for proportional scaling. The backend default is proportional scaling.
+         * @type {number || null}
+         */
+        this.BackgroundRenderMode = null;
+
     }
 
     /**
@@ -343,6 +356,7 @@ Grey: 0x999999
                 this.WaterMarkList.push(obj);
             }
         }
+        this.BackgroundRenderMode = 'BackgroundRenderMode' in params ? params.BackgroundRenderMode : null;
 
     }
 }

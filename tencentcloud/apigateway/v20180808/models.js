@@ -2073,24 +2073,28 @@ class HealthCheckConf extends  AbstractModel {
 
         /**
          * Whether health check is enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsHealthCheck = null;
 
         /**
-         * Health check threshold.
+         * Health check threshold. 
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RequestVolumeThreshold = null;
 
         /**
-         * Window size.
+         * Window size. 
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SleepWindowInMilliseconds = null;
 
         /**
          * Threshold percentage.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ErrorThresholdPercentage = null;
@@ -3709,25 +3713,29 @@ class ConstantParameter extends  AbstractModel {
         super();
 
         /**
-         * Constant parameter name, which is used only if `ServiceType` is `HTTP`.
+         * Constant parameter name This is only applicable when `ServiceType` is `HTTP`.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Constant parameter description, which is used only if `ServiceType` is `HTTP`.
+         * Constant parameter description This is only applicable when `ServiceType` is `HTTP`.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Desc = null;
 
         /**
-         * Constant parameter position, which is used only if `ServiceType` is `HTTP`.
+         * Constant paramter location This is only applicable when `ServiceType` is `HTTP`.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Position = null;
 
         /**
-         * Default value of constant parameter, which is used only if `ServiceType` is `HTTP`.
+         * Default value of the constant parameter This is only applicable when `ServiceType` is `HTTP`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DefaultValue = null;
@@ -4534,41 +4542,6 @@ class DescribePluginRequest extends  AbstractModel {
         this.PluginId = 'PluginId' in params ? params.PluginId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * API document download
- * @class
- */
-class DocumentSDK extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Download link of generated file. Generated documents will be stored in COS.
-         * @type {string || null}
-         */
-        this.DocumentURL = null;
-
-        /**
-         * Download link of generated SDK file. Generated SDK files will be stored in COS.
-         * @type {string || null}
-         */
-        this.SdkURL = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DocumentURL = 'DocumentURL' in params ? params.DocumentURL : null;
-        this.SdkURL = 'SdkURL' in params ? params.SdkURL : null;
 
     }
 }
@@ -5422,7 +5395,8 @@ class UsagePlan extends  AbstractModel {
         this.UsagePlanName = null;
 
         /**
-         * Usage plan description.
+         * Usage plan description. 
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UsagePlanDesc = null;
@@ -7778,6 +7752,7 @@ class ApiIdStatus extends  AbstractModel {
 
         /**
          * API description
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApiDesc = null;
@@ -9207,48 +9182,6 @@ class ModifyApiIncrementRequest extends  AbstractModel {
         this.BusinessType = 'BusinessType' in params ? params.BusinessType : null;
         this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
         this.LoginRedirectUrl = 'LoginRedirectUrl' in params ? params.LoginRedirectUrl : null;
-
-    }
-}
-
-/**
- * GenerateApiDocument request structure.
- * @class
- */
-class GenerateApiDocumentRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique service ID of the document to be created.
-         * @type {string || null}
-         */
-        this.ServiceId = null;
-
-        /**
-         * Environment of the service for which to create an SDK.
-         * @type {string || null}
-         */
-        this.GenEnvironment = null;
-
-        /**
-         * Programming language of the SDK to be created. Currently, only Python and JavaScript are supported.
-         * @type {string || null}
-         */
-        this.GenLanguage = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.GenEnvironment = 'GenEnvironment' in params ? params.GenEnvironment : null;
-        this.GenLanguage = 'GenLanguage' in params ? params.GenLanguage : null;
 
     }
 }
@@ -11302,24 +11235,26 @@ class ModifyApiAppRequest extends  AbstractModel {
 }
 
 /**
- * GenerateApiDocument response structure.
+ * Returned result of service publishing
  * @class
  */
-class GenerateApiDocumentResponse extends  AbstractModel {
+class ReleaseService extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API document and SDK link.
-         * @type {DocumentSDK || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Release remarks.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ReleaseDesc = null;
+
+        /**
+         * Published version ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReleaseVersion = null;
 
     }
 
@@ -11330,13 +11265,8 @@ class GenerateApiDocumentResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new DocumentSDK();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+        this.ReleaseVersion = 'ReleaseVersion' in params ? params.ReleaseVersion : null;
 
     }
 }
@@ -13531,43 +13461,6 @@ class UnbindApiAppRequest extends  AbstractModel {
 }
 
 /**
- * Returned result of service publishing
- * @class
- */
-class ReleaseService extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Release remarks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ReleaseDesc = null;
-
-        /**
-         * Published version ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ReleaseVersion = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
-        this.ReleaseVersion = 'ReleaseVersion' in params ? params.ReleaseVersion : null;
-
-    }
-}
-
-/**
  * CreateService response structure.
  * @class
  */
@@ -15131,7 +15024,6 @@ module.exports = {
     IPStrategyApi: IPStrategyApi,
     DescribeIPStrategyResponse: DescribeIPStrategyResponse,
     DescribePluginRequest: DescribePluginRequest,
-    DocumentSDK: DocumentSDK,
     AttachedApiInfo: AttachedApiInfo,
     CreateApiResponse: CreateApiResponse,
     DescribeIPStrategyApisStatusRequest: DescribeIPStrategyApisStatusRequest,
@@ -15207,7 +15099,6 @@ module.exports = {
     APIDocInfo: APIDocInfo,
     CosConfig: CosConfig,
     ModifyApiIncrementRequest: ModifyApiIncrementRequest,
-    GenerateApiDocumentRequest: GenerateApiDocumentRequest,
     ServiceUsagePlanSet: ServiceUsagePlanSet,
     CreateUpstreamRequest: CreateUpstreamRequest,
     ModifyServiceEnvironmentStrategyResponse: ModifyServiceEnvironmentStrategyResponse,
@@ -15251,7 +15142,7 @@ module.exports = {
     DescribeApiAppBindApisStatusResponse: DescribeApiAppBindApisStatusResponse,
     DescribeServiceSubDomainsRequest: DescribeServiceSubDomainsRequest,
     ModifyApiAppRequest: ModifyApiAppRequest,
-    GenerateApiDocumentResponse: GenerateApiDocumentResponse,
+    ReleaseService: ReleaseService,
     DescribeUsagePlanEnvironmentsResponse: DescribeUsagePlanEnvironmentsResponse,
     DescribeServiceSubDomainsResponse: DescribeServiceSubDomainsResponse,
     AttachPluginRequest: AttachPluginRequest,
@@ -15295,7 +15186,6 @@ module.exports = {
     UsagePlanInfo: UsagePlanInfo,
     DescribeServiceEnvironmentReleaseHistoryRequest: DescribeServiceEnvironmentReleaseHistoryRequest,
     UnbindApiAppRequest: UnbindApiAppRequest,
-    ReleaseService: ReleaseService,
     CreateServiceResponse: CreateServiceResponse,
     DeleteAPIDocResponse: DeleteAPIDocResponse,
     DescribeServiceEnvironmentStrategyResponse: DescribeServiceEnvironmentStrategyResponse,

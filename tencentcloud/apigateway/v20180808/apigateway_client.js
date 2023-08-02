@@ -92,7 +92,6 @@ const BindApiAppRequest = models.BindApiAppRequest;
 const IPStrategyApi = models.IPStrategyApi;
 const DescribeIPStrategyResponse = models.DescribeIPStrategyResponse;
 const DescribePluginRequest = models.DescribePluginRequest;
-const DocumentSDK = models.DocumentSDK;
 const AttachedApiInfo = models.AttachedApiInfo;
 const CreateApiResponse = models.CreateApiResponse;
 const DescribeIPStrategyApisStatusRequest = models.DescribeIPStrategyApisStatusRequest;
@@ -168,7 +167,6 @@ const ReleaseServiceResponse = models.ReleaseServiceResponse;
 const APIDocInfo = models.APIDocInfo;
 const CosConfig = models.CosConfig;
 const ModifyApiIncrementRequest = models.ModifyApiIncrementRequest;
-const GenerateApiDocumentRequest = models.GenerateApiDocumentRequest;
 const ServiceUsagePlanSet = models.ServiceUsagePlanSet;
 const CreateUpstreamRequest = models.CreateUpstreamRequest;
 const ModifyServiceEnvironmentStrategyResponse = models.ModifyServiceEnvironmentStrategyResponse;
@@ -212,7 +210,7 @@ const CreateAPIDocRequest = models.CreateAPIDocRequest;
 const DescribeApiAppBindApisStatusResponse = models.DescribeApiAppBindApisStatusResponse;
 const DescribeServiceSubDomainsRequest = models.DescribeServiceSubDomainsRequest;
 const ModifyApiAppRequest = models.ModifyApiAppRequest;
-const GenerateApiDocumentResponse = models.GenerateApiDocumentResponse;
+const ReleaseService = models.ReleaseService;
 const DescribeUsagePlanEnvironmentsResponse = models.DescribeUsagePlanEnvironmentsResponse;
 const DescribeServiceSubDomainsResponse = models.DescribeServiceSubDomainsResponse;
 const AttachPluginRequest = models.AttachPluginRequest;
@@ -256,7 +254,6 @@ const UpdateServiceResponse = models.UpdateServiceResponse;
 const UsagePlanInfo = models.UsagePlanInfo;
 const DescribeServiceEnvironmentReleaseHistoryRequest = models.DescribeServiceEnvironmentReleaseHistoryRequest;
 const UnbindApiAppRequest = models.UnbindApiAppRequest;
-const ReleaseService = models.ReleaseService;
 const CreateServiceResponse = models.CreateServiceResponse;
 const DeleteAPIDocResponse = models.DeleteAPIDocResponse;
 const DescribeServiceEnvironmentStrategyResponse = models.DescribeServiceEnvironmentStrategyResponse;
@@ -377,7 +374,7 @@ In API Gateway, a usage plan can be bound to multiple key pairs. You can use thi
     }
 
     /**
-     * This API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
+     * u200dThis API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
      * @param {UpdateServiceRequest} req
      * @param {function(string, UpdateServiceResponse):void} cb
      * @public
@@ -562,17 +559,6 @@ In API Gateway, you can bind a custom domain name to a service and map its paths
     DescribeApi(req, cb) {
         let resp = new DescribeApiResponse();
         this.request("DescribeApi", req, resp, cb);
-    }
-
-    /**
-     * This API is used to automatically generate API documents and SDKs. One document and one SDK will be generated for each environment under each service, respectively.
-     * @param {GenerateApiDocumentRequest} req
-     * @param {function(string, GenerateApiDocumentResponse):void} cb
-     * @public
-     */
-    GenerateApiDocument(req, cb) {
-        let resp = new GenerateApiDocumentResponse();
-        this.request("GenerateApiDocument", req, resp, cb);
     }
 
     /**

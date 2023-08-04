@@ -273,6 +273,49 @@ class ExceptUserRuleCondition extends  AbstractModel {
 }
 
 /**
+ * CheckCnameStatus response structure.
+ * @class
+ */
+class CheckCnameStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of CNAME statuses.
+         * @type {Array.<CnameStatus> || null}
+         */
+        this.CnameStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CnameStatus) {
+            this.CnameStatus = new Array();
+            for (let z in params.CnameStatus) {
+                let obj = new CnameStatus();
+                obj.deserialize(params.CnameStatus[z]);
+                this.CnameStatus.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeOriginGroup response structure.
  * @class
  */
@@ -1769,7 +1812,7 @@ It is disabled if this parameter is not specified.
         this.ImageOptimize = null;
 
         /**
-         * 
+         * Standard debugging configuration.
          * @type {StandardDebug || null}
          */
         this.StandardDebug = null;
@@ -1904,6 +1947,51 @@ It is disabled if this parameter is not specified.
             obj.deserialize(params.StandardDebug)
             this.StandardDebug = obj;
         }
+
+    }
+}
+
+/**
+ * Parameter of the action for the HTTP request/response header of a rule engine condition.
+ * @class
+ */
+class RuleRewriteActionParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+<li>add: Add the HTTP header.</li>
+<li>set: Rewrite the HTTP header.</li>
+<li>del: Delete the HTTP header.</li>
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Parameter value
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -2304,11 +2392,12 @@ class OriginInfo extends  AbstractModel {
         super();
 
         /**
-         * The origin type. Values: 
+         * The origin type. Values:
 <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
-<li>`COS`: COS bucket address</li>
-<li>`ORIGIN_GROUP`: Origin group</li>
-<li>`AWS_S3`: AWS S3 bucket address</li>
+<li>`COS`: COS bucket address </li>
+<li>`ORIGIN_GROUP`: Origin group </li>
+<li>`AWS_S3`: AWS S3 bucket address </li>
+<li>`SPACE`: EdgeOne Shield Space </li>
          * @type {string || null}
          */
         this.OriginType = null;
@@ -2641,15 +2730,15 @@ class ModifyZoneRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * The site access method. Values:
-<li>`full`: Access through a name server.</li>
-<li>`partial`: Access through a CNAME record.</li>The original configuration will apply if this field is not specified.
+         * Access mode of the site. Values:
+<li> `full`: Access through a name server.</li>
+<li> `partial`: Access through a CNAME u200drecord. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * The custom name servers. If this field is not specified, the default name servers will be used.
+         * The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
          * @type {VanityNameServers || null}
          */
         this.VanityNameServers = null;
@@ -2659,6 +2748,21 @@ class ModifyZoneRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.AliasZoneName = null;
+
+        /**
+         * The region where the site requests access. Values:
+<li> `global`: Global coverage</li>
+<li> `mainland`: Chinese mainland</li>
+<li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
 
     }
 
@@ -2678,6 +2782,8 @@ class ModifyZoneRequest extends  AbstractModel {
             this.VanityNameServers = obj;
         }
         this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -3723,8 +3829,8 @@ class ModifyHostsCertificateRequest extends  AbstractModel {
 
         /**
          * Whether the certificate is managed by EdgeOne. Values:
-<li>`apply`: Managed by EdgeOne</li>
-<li>`none`: Not managed by EdgeOne</li>If it is left empty, the default value `apply` is used.
+<li>`apply`: Managed by EdgeOne.</li>
+<li>`none`: Not managed by EdgeOne.</li>If not specified, this field uses the default value `none`.
          * @type {string || null}
          */
         this.ApplyType = null;
@@ -3831,6 +3937,13 @@ Note that each rule can have up to 20 ports.
         this.SessionPersist = null;
 
         /**
+         * Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SessionPersistTime = null;
+
+        /**
          * The origin port, which can be:
 <li>A single port, such as 80</li>
 <li>A port range, such as 81-82</li>
@@ -3855,6 +3968,7 @@ Note that each rule can have up to 20 ports.
         this.Status = 'Status' in params ? params.Status : null;
         this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
         this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
 
     }
@@ -4045,9 +4159,10 @@ class Zone extends  AbstractModel {
         this.Status = null;
 
         /**
-         * The site access method. Values:
-<li>`full`: Access through a name server.</li>
-<li>`partial`: Access through a CNAME record.</li>
+         * Access mode of the site. Values:
+<li> `full`: Access through a name server.</li>
+<li> `partial`: Access through a CNAME record.</li>
+<li> `noDomainAccess`: Access without using a domain name </li>
          * @type {string || null}
          */
         this.Type = null;
@@ -4782,90 +4897,32 @@ class DescribeRulesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyApplicationProxyRule request structure.
+ * DescribeContentQuota response structure.
  * @class
  */
-class ModifyApplicationProxyRuleRequest extends  AbstractModel {
+class DescribeContentQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
+         * Purging quotas.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Quota> || null}
+         */
+        this.PurgeQuota = null;
+
+        /**
+         * Pre-warming quotas.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Quota> || null}
+         */
+        this.PrefetchQuota = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ZoneId = null;
-
-        /**
-         * The proxy ID.
-         * @type {string || null}
-         */
-        this.ProxyId = null;
-
-        /**
-         * The rule ID.
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * The origin type. Values:
-<li>`custom`: Specified origins</li>
-<li>`origins`: Origin group</li></li>The original configuration will apply if this field is not specified.
-         * @type {string || null}
-         */
-        this.OriginType = null;
-
-        /**
-         * The access port, which can be:
-<li>A single port, such as 80</li>
-<li>A port range, such as 81-90</li>
-         * @type {Array.<string> || null}
-         */
-        this.Port = null;
-
-        /**
-         * The protocol. Values:
-<li>`TCP`: TCP protocol</li>
-<li>`UDP`: UDP protocol</li>The original configuration will apply if this field is not specified.
-         * @type {string || null}
-         */
-        this.Proto = null;
-
-        /**
-         * Origin server information:
-<li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
-<li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
-
-The original configuration will apply if this field is not specified.
-         * @type {Array.<string> || null}
-         */
-        this.OriginValue = null;
-
-        /**
-         * Passes the client IP. Values:
-<li>`TOA`: Pass the client IP via TOA (available only when `Proto=TCP`).</li>
-<li>`PPV1`: Pass the client IP via Proxy Protocol V1 (available only when `Proto=TCP`).</li>
-<li>`PPV2`: Pass the client IP via Proxy Protocol V2.</li>
-<li>`OFF`: Not pass the client IP.</li>If not specified, this field uses the default value OFF.
-         * @type {string || null}
-         */
-        this.ForwardClientIp = null;
-
-        /**
-         * Whether to enable session persistence. Values:
-<li>`true`: Enable</li>
-<li>`false`: Disable</li>If it is left empty, the default value `false` is used.
-         * @type {boolean || null}
-         */
-        this.SessionPersist = null;
-
-        /**
-         * The origin port, which can be:
-<li>A single port, such as 80</li>
-<li>A port range, such as 81-82</li>
-         * @type {string || null}
-         */
-        this.OriginPort = null;
+        this.RequestId = null;
 
     }
 
@@ -4876,16 +4933,25 @@ The original configuration will apply if this field is not specified.
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.OriginType = 'OriginType' in params ? params.OriginType : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Proto = 'Proto' in params ? params.Proto : null;
-        this.OriginValue = 'OriginValue' in params ? params.OriginValue : null;
-        this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
-        this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
-        this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
+
+        if (params.PurgeQuota) {
+            this.PurgeQuota = new Array();
+            for (let z in params.PurgeQuota) {
+                let obj = new Quota();
+                obj.deserialize(params.PurgeQuota[z]);
+                this.PurgeQuota.push(obj);
+            }
+        }
+
+        if (params.PrefetchQuota) {
+            this.PrefetchQuota = new Array();
+            for (let z in params.PrefetchQuota) {
+                let obj = new Quota();
+                obj.deserialize(params.PrefetchQuota[z]);
+                this.PrefetchQuota.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6295,7 +6361,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.AccelerateMainland = null;
 
         /**
-         * 
+         * Standard debugging configuration.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {StandardDebug || null}
          */
         this.StandardDebug = null;
@@ -7708,8 +7775,9 @@ class CreateZoneRequest extends  AbstractModel {
 
         /**
          * The access mode. Values:
-<li>`full`: Access through a name server.</li>
-<li>`partial`: Access through a CNAME record. Note that you should verify your site with the IdentifyZone API before starting site access.</li>If it is left empty, the default value `full` is used.
+<li> `full`: Access through a name server.</li>
+<li> `partial`: Access through a CNAME. Before using this access mode, first verify your site with the site verification API (IdentifyZone).<li>`noDomainAccess`: Access without using a domain name. If this value is passed, only the Tags field needs to be set. </li>
+If not specified, this field uses the default value `full`.
          * @type {string || null}
          */
         this.Type = null;
@@ -8335,6 +8403,12 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
         this.SessionPersist = null;
 
         /**
+         * Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+         * @type {number || null}
+         */
+        this.SessionPersistTime = null;
+
+        /**
          * The origin port, which can be:
 <li>A single port, such as 80</li>
 <li>A port range, such as 81-82</li>
@@ -8359,6 +8433,7 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
         this.OriginValue = 'OriginValue' in params ? params.OriginValue : null;
         this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
         this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
 
     }
@@ -8391,8 +8466,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Whether to enable force cache. Values:
 <li>`on`: Enable</li>
-<li>`off`: Disable</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>`off`: Disable </li>
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
@@ -10823,6 +10898,32 @@ class Sv extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * Quota for a resource. Values:
+<li>`zone`: Quota for sites</li>
+<li>`custom-rule`: Quota for custom rules</li>
+<li>`rate-limiting-rule`: Quota for rate limiting rules</li>
+<li>`l4-proxy-instance`: Quota for L4 proxy instances </li>
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Pack = null;
+
+        /**
+         * ID of the L4 proxy instance.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The protection specification.
+Values: <li> `cm_30G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_60G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_100G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `anycast_300G`: 300 Gbps Anycast-based protection in **Global (MLC)** service area</li><li> `anycast_unlimited`: Unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_300G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_unlimited`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_300G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_unlimited`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_100G_anycast_300G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_100G_anycast_unlimited`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area </li>
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProtectionSpecs = null;
+
     }
 
     /**
@@ -10834,6 +10935,9 @@ class Sv extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Pack = 'Pack' in params ? params.Pack : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProtectionSpecs = 'ProtectionSpecs' in params ? params.ProtectionSpecs : null;
 
     }
 }
@@ -12957,33 +13061,96 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Parameter of the action for the HTTP request/response header of a rule engine condition.
+ * ModifyApplicationProxyRule request structure.
  * @class
  */
-class RuleRewriteActionParams extends  AbstractModel {
+class ModifyApplicationProxyRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
-<li>add: Add the HTTP header.</li>
-<li>set: Rewrite the HTTP header.</li>
-<li>del: Delete the HTTP header.</li>
+         * The site ID.
          * @type {string || null}
          */
-        this.Action = null;
+        this.ZoneId = null;
 
         /**
-         * Parameter name
+         * The proxy ID.
          * @type {string || null}
          */
-        this.Name = null;
+        this.ProxyId = null;
 
         /**
-         * Parameter value
+         * The rule ID.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * The origin type. Values:
+<li>`custom`: Specified origins</li>
+<li>`origins`: Origin group</li></li>The original configuration will apply if this field is not specified.
+         * @type {string || null}
+         */
+        this.OriginType = null;
+
+        /**
+         * The access port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-90</li>
          * @type {Array.<string> || null}
          */
-        this.Values = null;
+        this.Port = null;
+
+        /**
+         * The protocol. Values:
+<li>`TCP`: TCP protocol</li>
+<li>`UDP`: UDP protocol</li>The original configuration will apply if this field is not specified.
+         * @type {string || null}
+         */
+        this.Proto = null;
+
+        /**
+         * Origin server information:
+<li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+<li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
+
+The original configuration will apply if this field is not specified.
+         * @type {Array.<string> || null}
+         */
+        this.OriginValue = null;
+
+        /**
+         * Passes the client IP. Values:
+<li>`TOA`: Pass the client IP via TOA (available only when `Proto=TCP`).</li>
+<li>`PPV1`: Pass the client IP via Proxy Protocol V1 (available only when `Proto=TCP`).</li>
+<li>`PPV2`: Pass the client IP via Proxy Protocol V2.</li>
+<li>`OFF`: Not pass the client IP.</li>If not specified, this field uses the default value OFF.
+         * @type {string || null}
+         */
+        this.ForwardClientIp = null;
+
+        /**
+         * Whether to enable session persistence. Values:
+<li>`true`: Enable</li>
+<li>`false`: Disable</li>If it is left empty, the default value `false` is used.
+         * @type {boolean || null}
+         */
+        this.SessionPersist = null;
+
+        /**
+         * Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+         * @type {number || null}
+         */
+        this.SessionPersistTime = null;
+
+        /**
+         * The origin port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-82</li>
+         * @type {string || null}
+         */
+        this.OriginPort = null;
 
     }
 
@@ -12994,9 +13161,17 @@ class RuleRewriteActionParams extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.OriginType = 'OriginType' in params ? params.OriginType : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Proto = 'Proto' in params ? params.Proto : null;
+        this.OriginValue = 'OriginValue' in params ? params.OriginValue : null;
+        this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
+        this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
+        this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
 
     }
 }
@@ -13207,6 +13382,41 @@ class RewriteAction extends  AbstractModel {
 }
 
 /**
+ * CheckCnameStatus request structure.
+ * @class
+ */
+class CheckCnameStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * List of domain names.
+         * @type {Array.<string> || null}
+         */
+        this.RecordNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RecordNames = 'RecordNames' in params ? params.RecordNames : null;
+
+    }
+}
+
+/**
  * DeleteAliasDomain request structure.
  * @class
  */
@@ -13242,32 +13452,34 @@ class DeleteAliasDomainRequest extends  AbstractModel {
 }
 
 /**
- * DescribeContentQuota response structure.
+ * CNAME status
  * @class
  */
-class DescribeContentQuotaResponse extends  AbstractModel {
+class CnameStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Purging quotas.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Quota> || null}
-         */
-        this.PurgeQuota = null;
-
-        /**
-         * Pre-warming quotas.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Quota> || null}
-         */
-        this.PrefetchQuota = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RecordName = null;
+
+        /**
+         * The CNAME address.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+        /**
+         * The CNAME status. Values:
+<li>`active`: Activated</li>
+<li>`moved`: Not activated </li>
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -13278,25 +13490,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.PurgeQuota) {
-            this.PurgeQuota = new Array();
-            for (let z in params.PurgeQuota) {
-                let obj = new Quota();
-                obj.deserialize(params.PurgeQuota[z]);
-                this.PurgeQuota.push(obj);
-            }
-        }
-
-        if (params.PrefetchQuota) {
-            this.PrefetchQuota = new Array();
-            for (let z in params.PrefetchQuota) {
-                let obj = new Quota();
-                obj.deserialize(params.PrefetchQuota[z]);
-                this.PrefetchQuota.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RecordName = 'RecordName' in params ? params.RecordName : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -13381,7 +13577,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Standard debugging
  * @class
  */
 class StandardDebug extends  AbstractModel {
@@ -13389,19 +13585,21 @@ class StandardDebug extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable standard debugging. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable </li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * The client IP to allow. It can be an IPv4/IPv6 address or a CIDR block. If not specified, it means to allow any client IP
          * @type {Array.<string> || null}
          */
         this.AllowClientIPList = null;
 
         /**
-         * 
+         * The time when the standard debugging setting expires. If it is exceeded, this feature u200dbecomes invalid.
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -13472,35 +13670,24 @@ class CreatePurgeTaskRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Purging mode. Valid values: 
-<li>`purge_url`: Purge by URL;</li>
-<li>`purge_prefix`: Purge by directory;</li>
-<li>`purge_host`: Purge by hostname;</li>
-<li>`purge_all`: Puege all cache;</li>
-<li>`purge_cache_tag`: Purge by cache tag.</li>
+         * Type of cache purging. Values:
+<li>`purge_url`: Purge by the URL</li>
+<li>`purge_prefix`: Purge by the directory</li>
+<li>`purge_host`: Purge by the hostname</li>
+<li>`purge_all`: Purge all caches</li>
+<li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
          * @type {string || null}
          */
         this.Method = null;
 
         /**
-         * Resource to be purged, which depends on the `Type` field. 
-1. When `Type = purge_host`: 
-Enter the hostname, such as www.example.com and foo.bar.example.com. 
-2. When `Type = purge_prefix`: 
-Enter the prefix, such as http://www.example.com/example/. 
-3. When `Type = purge_url`: 
-Enter the URL, such as https://www.example.com/example.jpg. 
-4. When `Type = purge_all`: 
-`Targets` can be left empty. 
-5. When `Type = purge_cache_tag`: 
-Enter the cache tag, such as tag1. 
-Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
+         * List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
          * @type {Array.<string> || null}
          */
         this.Targets = null;
@@ -13608,6 +13795,23 @@ class Resource extends  AbstractModel {
          */
         this.Area = null;
 
+        /**
+         * The resource type. Values:
+<li>`plan`: Plan resources</li>
+<li>`pay-as-you-go`: Pay-as-you-go resources </li>
+<li>`value-added`: Value-added resources </li>
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * The sites that are associated with the current resources.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneNumber = null;
+
     }
 
     /**
@@ -13635,6 +13839,8 @@ class Resource extends  AbstractModel {
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.PlanId = 'PlanId' in params ? params.PlanId : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.ZoneNumber = 'ZoneNumber' in params ? params.ZoneNumber : null;
 
     }
 }
@@ -15282,6 +15488,7 @@ module.exports = {
     Compression: Compression,
     DeleteRulesRequest: DeleteRulesRequest,
     ExceptUserRuleCondition: ExceptUserRuleCondition,
+    CheckCnameStatusResponse: CheckCnameStatusResponse,
     DescribeOriginGroupResponse: DescribeOriginGroupResponse,
     DescribeTopL7CacheDataRequest: DescribeTopL7CacheDataRequest,
     DeleteApplicationProxyResponse: DeleteApplicationProxyResponse,
@@ -15306,6 +15513,7 @@ module.exports = {
     Waf: Waf,
     ModifyApplicationProxyRuleStatusResponse: ModifyApplicationProxyRuleStatusResponse,
     ModifyZoneSettingRequest: ModifyZoneSettingRequest,
+    RuleRewriteActionParams: RuleRewriteActionParams,
     CreateApplicationProxyResponse: CreateApplicationProxyResponse,
     BotUserRule: BotUserRule,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
@@ -15356,7 +15564,7 @@ module.exports = {
     Ipv6: Ipv6,
     ModifyAccelerationDomainRequest: ModifyAccelerationDomainRequest,
     DescribeRulesRequest: DescribeRulesRequest,
-    ModifyApplicationProxyRuleRequest: ModifyApplicationProxyRuleRequest,
+    DescribeContentQuotaResponse: DescribeContentQuotaResponse,
     TopDataRecord: TopDataRecord,
     AclConfig: AclConfig,
     ModifyZoneSettingResponse: ModifyZoneSettingResponse,
@@ -15497,15 +15705,16 @@ module.exports = {
     QueryCondition: QueryCondition,
     IdentifyZoneRequest: IdentifyZoneRequest,
     CacheConfig: CacheConfig,
-    RuleRewriteActionParams: RuleRewriteActionParams,
+    ModifyApplicationProxyRuleRequest: ModifyApplicationProxyRuleRequest,
     ModifyAccelerationDomainResponse: ModifyAccelerationDomainResponse,
     FailReason: FailReason,
     DescribeRulesSettingRequest: DescribeRulesSettingRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     ModifyAliasDomainResponse: ModifyAliasDomainResponse,
     RewriteAction: RewriteAction,
+    CheckCnameStatusRequest: CheckCnameStatusRequest,
     DeleteAliasDomainRequest: DeleteAliasDomainRequest,
-    DescribeContentQuotaResponse: DescribeContentQuotaResponse,
+    CnameStatus: CnameStatus,
     DeleteAccelerationDomainsResponse: DeleteAccelerationDomainsResponse,
     DescribeTopL7AnalysisDataResponse: DescribeTopL7AnalysisDataResponse,
     StandardDebug: StandardDebug,

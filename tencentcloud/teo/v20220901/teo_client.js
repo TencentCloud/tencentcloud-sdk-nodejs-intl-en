@@ -21,6 +21,7 @@ const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const Compression = models.Compression;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
+const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
 const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
@@ -45,6 +46,7 @@ const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
 const Waf = models.Waf;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
 const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
+const RuleRewriteActionParams = models.RuleRewriteActionParams;
 const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
@@ -95,7 +97,7 @@ const Quic = models.Quic;
 const Ipv6 = models.Ipv6;
 const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
 const DescribeRulesRequest = models.DescribeRulesRequest;
-const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
+const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
 const TopDataRecord = models.TopDataRecord;
 const AclConfig = models.AclConfig;
 const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
@@ -236,15 +238,16 @@ const DeleteRulesResponse = models.DeleteRulesResponse;
 const QueryCondition = models.QueryCondition;
 const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
-const RuleRewriteActionParams = models.RuleRewriteActionParams;
+const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
 const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
 const FailReason = models.FailReason;
 const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
 const RewriteAction = models.RewriteAction;
+const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
-const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
+const CnameStatus = models.CnameStatus;
 const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
 const DescribeTopL7AnalysisDataResponse = models.DescribeTopL7AnalysisDataResponse;
 const StandardDebug = models.StandardDebug;
@@ -323,7 +326,9 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a cache purging task.
+     * When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves u200dthe latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
+
+</li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1). </li>
      * @param {CreatePurgeTaskRequest} req
      * @param {function(string, CreatePurgeTaskResponse):void} cb
      * @public
@@ -716,6 +721,17 @@ class TeoClient extends AbstractClient {
     DeleteApplicationProxyRule(req, cb) {
         let resp = new DeleteApplicationProxyRuleResponse();
         this.request("DeleteApplicationProxyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CNAME status of a domain name.
+     * @param {CheckCnameStatusRequest} req
+     * @param {function(string, CheckCnameStatusResponse):void} cb
+     * @public
+     */
+    CheckCnameStatus(req, cb) {
+        let resp = new CheckCnameStatusResponse();
+        this.request("CheckCnameStatus", req, resp, cb);
     }
 
     /**

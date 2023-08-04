@@ -476,7 +476,7 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.ProjectId = null;
 
         /**
-         * IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
+         * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: `IPV6` indicates IPv6 NAT64, while `IPv6FullChain` indicates IPv6. 
          * @type {string || null}
          */
         this.AddressIPVersion = null;
@@ -507,7 +507,7 @@ Note: By default, the traffic goes to the primary AZ. The secondary AZs only car
         this.InternetAccessible = null;
 
         /**
-         * This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+         * It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
          * @type {string || null}
          */
         this.VipIsp = null;
@@ -539,9 +539,8 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
 
         /**
          * Creates an LCU-supported instance.
-<ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
-<ul><li>The default specification is Super Large 1.
-<li>If you have enabled Super Large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Super Large LCU-supported specification is in beta now. To join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
+<ul><li>To create an LCU-supported instance, this parameter must be set to `SLA`, which indicates the Super Large 1 specification. 
+<ul><li>If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
          * @type {string || null}
          */
         this.SlaType = null;
@@ -832,7 +831,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.InternetAccessible = null;
 
         /**
-         * This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+         * It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
          * @type {string || null}
          */
         this.VipIsp = null;
@@ -3629,9 +3628,8 @@ class SlaUpdateParam extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * This parameter is set to a fixed value of `SLA`, which specifies to upgrade to an LCU-supported instance of default specification.
-<ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
-<li>If you enable ultra-large LCU-supported instances, SLA corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul>
+         * u200dTo upgrade the instance to an LCU-support instance, set it to `SLA`. `SLA` indicates Super Large 1. 
+If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {string || null}
          */
         this.SlaType = null;
@@ -4467,13 +4465,13 @@ class ModifyListenerRequest extends  AbstractModel {
         this.SessionExpireTime = null;
 
         /**
-         * Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
+         * Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * Certificate information. This parameter is only applicable to HTTPS/TCP_SSL listeners. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+         * Certificate information. This parameter is only applicable to HTTPS/TCP_SSL/QUIC listeners. `Certificate` and `MultiCertInfo` cannot be both specified.
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -4742,8 +4740,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HttpCheckPath = null;
 
         /**
-         * The target domain name for health check. It’s applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. It’s required for TCP listeners.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Health check domain name. It is only applicable to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. For HTTP health checks of TCP listeners, this parameter is required.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpCheckDomain = null;
@@ -4784,22 +4782,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RecvContext = null;
 
         /**
-         * Health check protocol (a custom check parameter). Value range: TCP, HTTP, CUSTOM (applicable only to TCP/UDP listeners, where UDP listeners only support CUSTOM. If custom health check is used, this parameter is required).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * u200dHealth check protocol. Values: `TCP`, `HTTP`, `HTTPS`, `GRPC`, `PING`, and `CUSTOM`. UDP listeners support `PING`/`CUSTOM`. TCP listener support `TCP`/`HTTP`/`CUSTOM`. TCP_SSL and QUIC listeners support `TCP`/`HTTP`. HTTP rules support `HTTP`/`GRPC. HTTPS rules support `HTTP`/`HTTPS`/`GRPC`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CheckType = null;
 
         /**
-         * Health check protocol (a custom check parameter), which is required if the value of CheckType is HTTP. This parameter represents the HTTP version of the real server. Value range: HTTP/1.0, HTTP/1.1. (Applicable only to TCP listeners.)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * HTTP version. HTTP version of the backend service. Values: `HTTP/1.0`, HTTP/1.1`. It is only applicable to TCP listeners, and is required when `CheckType`=`HTTP`. 
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpVersion = null;
 
         /**
-         * Specifies the type of IP for health check. `0` (default): CLB VIP. `1`: Use the IP range starting with 100.64 as the source IP.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SourceIpType = null;
@@ -5798,7 +5796,7 @@ class DescribeListenersRequest extends  AbstractModel {
         this.ListenerIds = null;
 
         /**
-         * Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
+         * Type of the listener protocols to be queried. Values: TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -7520,7 +7518,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.ListenerNames = null;
 
         /**
-         * Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
+         * Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
@@ -7538,8 +7536,8 @@ class CreateListenerRequest extends  AbstractModel {
         this.SessionExpireTime = null;
 
         /**
-         * Forwarding method of a listener. Value range: WRR, LEAST_CONN.
-They represent weighted round robin and least connections, respectively. Default value: WRR. This parameter is applicable only to TCP/UDP/TCP_SSL listeners.
+         * Listener forwarding mode. u200dValues: `WRR` (weighted round robin) and `LEAST_CONN` (least connections). 
+Default value: `WRR`. This parameter is only applicable to TCP, UDP, TCP_SSL and QUIC listeners.
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -7881,7 +7879,7 @@ OPEN: public network; INTERNAL: private network.
         this.LoadBalancerName = null;
 
         /**
-         * Domain name assigned to a CLB instance by Tencent Cloud. This parameter is meaningful only for the public network classic CLB.
+         * The domain name that Tencent Cloud assigned for the CLB instance.
          * @type {string || null}
          */
         this.Domain = null;
@@ -9776,7 +9774,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.Scheduler = null;
 
         /**
-         * Forwarding protocol between the CLB instance and real server. HTTP/HTTPS/TRPC are supported. TRPC is now only available for internal usage.
+         * Forwarding protocol between the CLB instance and backend service. Values: `HTTP`, `HTTPS`, `GRPC` and `TRPC` (only for internal usage). It defaults to `HTTP`.
          * @type {string || null}
          */
         this.ForwardType = null;

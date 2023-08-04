@@ -329,7 +329,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
+     * This API is used to upgrade the instance to a later version or u200dto upgrade the current standard architecture to the cluster architecture.
      * @param {UpgradeInstanceVersionRequest} req
      * @param {function(string, UpgradeInstanceVersionResponse):void} cb
      * @public
@@ -351,7 +351,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the task result.
+     * This API is used to get the execution of a specified task.
      * @param {DescribeTaskInfoRequest} req
      * @param {function(string, DescribeTaskInfoResponse):void} cb
      * @public
@@ -1121,7 +1121,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to switch with master instance in a replication group.
+     * This API is used to set a read-only instance in a replication group as a master instance.
      * @param {ChangeMasterInstanceRequest} req
      * @param {function(string, ChangeMasterInstanceResponse):void} cb
      * @public

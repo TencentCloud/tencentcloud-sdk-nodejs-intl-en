@@ -5672,7 +5672,7 @@ class DescribeReplicationGroupRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get u200dthem in the global replication group list.
+         * Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get them in the global replication group list.
          * @type {string || null}
          */
         this.SearchKey = null;
@@ -7450,7 +7450,7 @@ class DescribeTaskInfoResponse extends  AbstractModel {
          * Task status. Valid values: 
 - `preparing`: To be run
 - `running`: Running
-- `succeed`: Succeedu200ded
+- `succeed`: Succeeded
 - `failed`: Failed
 - `Error`: Error occurred while running
          * @type {string || null}
@@ -7464,7 +7464,7 @@ class DescribeTaskInfoResponse extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Task type, including `Create`, `Configure`, u200d`Disable Instance`, `Clear Instance`, `Reset Password`, `Upgrade Version`, `Back up Instance`, `Modify Network`, `Migrate to New AZ` and `Promote to Master`.
+         * Task type, including `Create`, `Configure`, `Disable Instance`, `Clear Instance`, `Reset Password`, `Upgrade Version`, `Back up Instance`, `Modify Network`, `Migrate to New AZ` and `Promote to Master`.
          * @type {string || null}
          */
         this.TaskType = null;
@@ -7476,7 +7476,7 @@ class DescribeTaskInfoResponse extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Message returned by task execution, which will be au200dn error message when execution fails or be empty when the status is `running `or `succeed-`.
+         * Message returned by task execution, which will be an error message when execution fails or be empty when the status is `running `or `succeed-`.
          * @type {string || null}
          */
         this.TaskMessage = null;
@@ -11659,7 +11659,7 @@ class Instances extends  AbstractModel {
 
         /**
          * Instance disk size
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DiskSize = null;

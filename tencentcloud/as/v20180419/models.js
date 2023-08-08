@@ -1177,6 +1177,45 @@ class CreateLaunchConfigurationResponse extends  AbstractModel {
 }
 
 /**
+ * Information of the instances related to the current scaling activity.
+ * @class
+ */
+class RelatedInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Status of the instance in the scaling activity. Valid values:
+`INIT`: Initializing
+`RUNNING`: u200dProcessing u200dthe instance
+`SUCCESSFUL`: Task succeeded on the instance
+`FAILED`: Task failed on the instance
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+
+    }
+}
+
+/**
  * Suggestions for scaling group configurations.
  * @class
  */
@@ -1202,6 +1241,14 @@ class Advice extends  AbstractModel {
          */
         this.Solution = null;
 
+        /**
+         * u200dRisk level of the scaling group configuration. Valid values: <br>
+<li>WARNING<br>
+<li>CRITICAL<br>
+         * @type {string || null}
+         */
+        this.Level = null;
+
     }
 
     /**
@@ -1214,6 +1261,7 @@ class Advice extends  AbstractModel {
         this.Problem = 'Problem' in params ? params.Problem : null;
         this.Detail = 'Detail' in params ? params.Detail : null;
         this.Solution = 'Solution' in params ? params.Solution : null;
+        this.Level = 'Level' in params ? params.Level : null;
 
     }
 }
@@ -3934,8 +3982,8 @@ class ModifyScalingPolicyRequest extends  AbstractModel {
         this.DisableScaleIn = null;
 
         /**
-         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-If you want to clear the user group, you need to pass in the specific string "NULL" to the list.
+         * This parameter is diused. Please use [CreateNotificationConfiguration](https://intl.cloud.tencent.com/document/api/377/33185?from_cn_redirect=1) instead.
+Notification group ID, which is the set of user group IDs.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -7664,7 +7712,7 @@ class Activity extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * Information set of the instances related to the scaling activity.
+         * This parameter has been deprecated.
          * @type {Array.<ActivtyRelatedInstance> || null}
          */
         this.ActivityRelatedInstanceSet = null;
@@ -7692,6 +7740,12 @@ class Activity extends  AbstractModel {
          * @type {Array.<InvocationResult> || null}
          */
         this.InvocationResultSet = null;
+
+        /**
+         * Information set of the instances related to the scaling activity.
+         * @type {Array.<RelatedInstance> || null}
+         */
+        this.RelatedInstanceSet = null;
 
     }
 
@@ -7747,6 +7801,15 @@ class Activity extends  AbstractModel {
                 let obj = new InvocationResult();
                 obj.deserialize(params.InvocationResultSet[z]);
                 this.InvocationResultSet.push(obj);
+            }
+        }
+
+        if (params.RelatedInstanceSet) {
+            this.RelatedInstanceSet = new Array();
+            for (let z in params.RelatedInstanceSet) {
+                let obj = new RelatedInstance();
+                obj.deserialize(params.RelatedInstanceSet[z]);
+                this.RelatedInstanceSet.push(obj);
             }
         }
 
@@ -8245,6 +8308,7 @@ module.exports = {
     LaunchConfiguration: LaunchConfiguration,
     DescribeAccountLimitsResponse: DescribeAccountLimitsResponse,
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
+    RelatedInstance: RelatedInstance,
     Advice: Advice,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
     ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,

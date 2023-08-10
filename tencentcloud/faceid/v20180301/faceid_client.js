@@ -19,14 +19,17 @@ const AbstractClient = require('../../common/abstract_client')
 const GetLivenessResultResponse = models.GetLivenessResultResponse;
 const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
-const VerificationDetail = models.VerificationDetail;
+const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
 const LivenessCompareResponse = models.LivenessCompareResponse;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
+const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
 const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 const ApplyWebVerificationTokenResponse = models.ApplyWebVerificationTokenResponse;
 const GetWebVerificationResultRequest = models.GetWebVerificationResultRequest;
-const FileInfo = models.FileInfo;
+const VerificationDetail = models.VerificationDetail;
+const GetWebVerificationResultIntlResponse = models.GetWebVerificationResultIntlResponse;
+const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
@@ -40,11 +43,12 @@ const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenRespon
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse;
-const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
+const FileInfo = models.FileInfo;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
+const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 const CompareResult = models.CompareResult;
 
 
@@ -67,6 +71,17 @@ class FaceidClient extends AbstractClient {
     ApplyLivenessToken(req, cb) {
         let resp = new ApplyLivenessTokenResponse();
         this.request("ApplyLivenessToken", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the verification result with the corresponding BizToken after the u200dweb-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+     * @param {GetWebVerificationResultIntlRequest} req
+     * @param {function(string, GetWebVerificationResultIntlResponse):void} cb
+     * @public
+     */
+    GetWebVerificationResultIntl(req, cb) {
+        let resp = new GetWebVerificationResultIntlResponse();
+        this.request("GetWebVerificationResultIntl", req, resp, cb);
     }
 
     /**
@@ -94,14 +109,15 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
-     * This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
-     * @param {GetWebVerificationResultRequest} req
-     * @param {function(string, GetWebVerificationResultResponse):void} cb
+     * This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
+The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
+     * @param {GenerateReflectSequenceRequest} req
+     * @param {function(string, GenerateReflectSequenceResponse):void} cb
      * @public
      */
-    GetWebVerificationResult(req, cb) {
-        let resp = new GetWebVerificationResultResponse();
-        this.request("GetWebVerificationResult", req, resp, cb);
+    GenerateReflectSequence(req, cb) {
+        let resp = new GenerateReflectSequenceResponse();
+        this.request("GenerateReflectSequence", req, resp, cb);
     }
 
     /**
@@ -116,15 +132,14 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     }
 
     /**
-     * This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
-The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
-     * @param {GenerateReflectSequenceRequest} req
-     * @param {function(string, GenerateReflectSequenceResponse):void} cb
+     * This API is used to apply for a BizToken before calling the web-based verification service each time. This token is required for initiating a verification process and getting the result after the verification is completed.
+     * @param {ApplyWebVerificationBizTokenIntlRequest} req
+     * @param {function(string, ApplyWebVerificationBizTokenIntlResponse):void} cb
      * @public
      */
-    GenerateReflectSequence(req, cb) {
-        let resp = new GenerateReflectSequenceResponse();
-        this.request("GenerateReflectSequence", req, resp, cb);
+    ApplyWebVerificationBizTokenIntl(req, cb) {
+        let resp = new ApplyWebVerificationBizTokenIntlResponse();
+        this.request("ApplyWebVerificationBizTokenIntl", req, resp, cb);
     }
 
     /**
@@ -158,6 +173,17 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     GetFaceIdTokenIntl(req, cb) {
         let resp = new GetFaceIdTokenIntlResponse();
         this.request("GetFaceIdTokenIntl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
+     * @param {GetWebVerificationResultRequest} req
+     * @param {function(string, GetWebVerificationResultResponse):void} cb
+     * @public
+     */
+    GetWebVerificationResult(req, cb) {
+        let resp = new GetWebVerificationResultResponse();
+        this.request("GetWebVerificationResult", req, resp, cb);
     }
 
     /**

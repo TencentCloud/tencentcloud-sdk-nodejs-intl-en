@@ -204,75 +204,30 @@ class GetSdkVerificationResultResponse extends  AbstractModel {
 }
 
 /**
- * The details of the verification process.
+ * ApplyWebVerificationBizTokenIntl response structure.
  * @class
  */
-class VerificationDetail extends  AbstractModel {
+class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The final result of this verification. `0` indicates that the person is the same as that in the photo.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ErrorCode = null;
-
-        /**
-         * The description of the final verification result.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The URL of this verification process, which will be returned to the frontend of the browser for starting the process.
          * @type {string || null}
          */
-        this.ErrorMsg = null;
+        this.VerificationUrl = null;
 
         /**
-         * The result of this liveness detection process. `0` indicates success.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LivenessErrorCode = null;
-
-        /**
-         * The result description of this liveness detection process.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
          * @type {string || null}
          */
-        this.LivenessErrorMsg = null;
+        this.BizToken = null;
 
         /**
-         * The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CompareErrorCode = null;
-
-        /**
-         * The result description of this comparison process.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CompareErrorMsg = null;
-
-        /**
-         * The timestamp (ms) of this verification process.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ReqTimestamp = null;
-
-        /**
-         * The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Valid range: [0.00, 100.00]. By default, the person in the screenshot is judged as the same person in the image if the similarity is greater than or equal to 70.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Similarity = null;
-
-        /**
-         * Unique ID of this verification process.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Seq = null;
+        this.RequestId = null;
 
     }
 
@@ -283,15 +238,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.LivenessErrorCode = 'LivenessErrorCode' in params ? params.LivenessErrorCode : null;
-        this.LivenessErrorMsg = 'LivenessErrorMsg' in params ? params.LivenessErrorMsg : null;
-        this.CompareErrorCode = 'CompareErrorCode' in params ? params.CompareErrorCode : null;
-        this.CompareErrorMsg = 'CompareErrorMsg' in params ? params.CompareErrorMsg : null;
-        this.ReqTimestamp = 'ReqTimestamp' in params ? params.ReqTimestamp : null;
-        this.Similarity = 'Similarity' in params ? params.Similarity : null;
-        this.Seq = 'Seq' in params ? params.Seq : null;
+        this.VerificationUrl = 'VerificationUrl' in params ? params.VerificationUrl : null;
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -458,6 +407,49 @@ class DetectReflectLivenessAndCompareRequest extends  AbstractModel {
 }
 
 /**
+ * ApplyWebVerificationBizTokenIntl request structure.
+ * @class
+ */
+class ApplyWebVerificationBizTokenIntlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded string (max 8 MB in size) of the photo to be compared.
+         * @type {string || null}
+         */
+        this.CompareImageBase64 = null;
+
+        /**
+         * The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
+After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+         * @type {string || null}
+         */
+        this.RedirectURL = null;
+
+        /**
+         * The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompareImageBase64 = 'CompareImageBase64' in params ? params.CompareImageBase64 : null;
+        this.RedirectURL = 'RedirectURL' in params ? params.RedirectURL : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+
+    }
+}
+
+/**
  * VideoLivenessCompare request structure.
  * @class
  */
@@ -598,30 +590,75 @@ class GetWebVerificationResultRequest extends  AbstractModel {
 }
 
 /**
- * The description of a file, including a download URL and the MD5 checksum and size of the file.
+ * The details of the verification process.
  * @class
  */
-class FileInfo extends  AbstractModel {
+class VerificationDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The URL for downloading the file
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * The 32-bit MD5 checksum of the file
-         * @type {string || null}
-         */
-        this.MD5 = null;
-
-        /**
-         * The file size
+         * The final result of this verification. `0` indicates that the person is the same as that in the photo.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Size = null;
+        this.ErrorCode = null;
+
+        /**
+         * The description of the final verification result.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The result of this liveness detection process. `0` indicates success.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LivenessErrorCode = null;
+
+        /**
+         * The result description of this liveness detection process.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LivenessErrorMsg = null;
+
+        /**
+         * The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CompareErrorCode = null;
+
+        /**
+         * The result description of this comparison process.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CompareErrorMsg = null;
+
+        /**
+         * The timestamp (ms) of this verification process.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReqTimestamp = null;
+
+        /**
+         * The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Value range: [0.00, 100.00]. By default, the person in the screenshot is determined to be the same person in the image if the similarity is greater than or equal to 70.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Similarity = null;
+
+        /**
+         * Unique ID of this verification process.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Seq = null;
 
     }
 
@@ -632,9 +669,120 @@ class FileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.MD5 = 'MD5' in params ? params.MD5 : null;
-        this.Size = 'Size' in params ? params.Size : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.LivenessErrorCode = 'LivenessErrorCode' in params ? params.LivenessErrorCode : null;
+        this.LivenessErrorMsg = 'LivenessErrorMsg' in params ? params.LivenessErrorMsg : null;
+        this.CompareErrorCode = 'CompareErrorCode' in params ? params.CompareErrorCode : null;
+        this.CompareErrorMsg = 'CompareErrorMsg' in params ? params.CompareErrorMsg : null;
+        this.ReqTimestamp = 'ReqTimestamp' in params ? params.ReqTimestamp : null;
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
+
+    }
+}
+
+/**
+ * GetWebVerificationResultIntl response structure.
+ * @class
+ */
+class GetWebVerificationResultIntlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The final result of this verification. `0` indicates that the person is the same as that in the photo.
+For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * The description of the final verification result.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The detailed verification result list of this process. Retries are allowed, so a verification process may have several entries of results.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VerificationDetail> || null}
+         */
+        this.VerificationDetailList = null;
+
+        /**
+         * The Base64-encoded string of the video collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no video is collected, null is returned.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VideoBase64 = null;
+
+        /**
+         * The Base64-encoded string of the best face screenshot u200dcollected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+
+        if (params.VerificationDetailList) {
+            this.VerificationDetailList = new Array();
+            for (let z in params.VerificationDetailList) {
+                let obj = new VerificationDetail();
+                obj.deserialize(params.VerificationDetailList[z]);
+                this.VerificationDetailList.push(obj);
+            }
+        }
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetSdkVerificationResult request structure.
+ * @class
+ */
+class GetSdkVerificationResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token used to identify an SDK-based verification process.
+         * @type {string || null}
+         */
+        this.SdkToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
 
     }
 }
@@ -1422,18 +1570,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetSdkVerificationResult request structure.
+ * The description of a file, including a download URL and the MD5 checksum and size of the file.
  * @class
  */
-class GetSdkVerificationResultRequest extends  AbstractModel {
+class FileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token used to identify an SDK-based verification process.
+         * The URL for downloading the file
          * @type {string || null}
          */
-        this.SdkToken = null;
+        this.Url = null;
+
+        /**
+         * The 32-bit MD5 checksum of the file
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * The file size
+         * @type {number || null}
+         */
+        this.Size = null;
 
     }
 
@@ -1444,7 +1604,9 @@ class GetSdkVerificationResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -1699,6 +1861,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetWebVerificationResultIntl request structure.
+ * @class
+ */
+class GetWebVerificationResultIntlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
+         * @type {string || null}
+         */
+        this.BizToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+
+    }
+}
+
+/**
  * The description of a single comparison result.
  * @class
  */
@@ -1870,14 +2060,17 @@ module.exports = {
     GetLivenessResultResponse: GetLivenessResultResponse,
     GetFaceIdTokenIntlResponse: GetFaceIdTokenIntlResponse,
     GetSdkVerificationResultResponse: GetSdkVerificationResultResponse,
-    VerificationDetail: VerificationDetail,
+    ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
     LivenessCompareResponse: LivenessCompareResponse,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
+    ApplyWebVerificationBizTokenIntlRequest: ApplyWebVerificationBizTokenIntlRequest,
     VideoLivenessCompareRequest: VideoLivenessCompareRequest,
     ApplyWebVerificationTokenResponse: ApplyWebVerificationTokenResponse,
     GetWebVerificationResultRequest: GetWebVerificationResultRequest,
-    FileInfo: FileInfo,
+    VerificationDetail: VerificationDetail,
+    GetWebVerificationResultIntlResponse: GetWebVerificationResultIntlResponse,
+    GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
     GetFaceIdResultIntlRequest: GetFaceIdResultIntlRequest,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
@@ -1891,11 +2084,12 @@ module.exports = {
     CreateUploadUrlRequest: CreateUploadUrlRequest,
     GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
     GetWebVerificationResultResponse: GetWebVerificationResultResponse,
-    GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
+    FileInfo: FileInfo,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
     LivenessCompareRequest: LivenessCompareRequest,
     GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
+    GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
     CompareResult: CompareResult,
 
 }

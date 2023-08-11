@@ -22,7 +22,6 @@ const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const CreateCdbProxyRequest = models.CreateCdbProxyRequest;
 const CreateCdbProxyResponse = models.CreateCdbProxyResponse;
-const RWInfo = models.RWInfo;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
@@ -38,7 +37,6 @@ const CreateDatabaseRequest = models.CreateDatabaseRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
-const RWInstanceInfo = models.RWInstanceInfo;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const ModifyCdbProxyAddressVipAndVPortResponse = models.ModifyCdbProxyAddressVipAndVPortResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
@@ -69,9 +67,7 @@ const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVer
 const ErrlogItem = models.ErrlogItem;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const ModifyCDBProxyDescRequest = models.ModifyCDBProxyDescRequest;
 const BackupConfig = models.BackupConfig;
-const DescribeCDBProxyResponse = models.DescribeCDBProxyResponse;
 const Rule = models.Rule;
 const AuditPolicy = models.AuditPolicy;
 const ProxyNode = models.ProxyNode;
@@ -80,10 +76,8 @@ const DescribeTablesRequest = models.DescribeTablesRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const StartReplicationResponse = models.StartReplicationResponse;
-const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
-const ModifyCDBProxyConnectionPoolRequest = models.ModifyCDBProxyConnectionPoolRequest;
 const ModifyCdbProxyAddressVipAndVPortRequest = models.ModifyCdbProxyAddressVipAndVPortRequest;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
@@ -100,7 +94,6 @@ const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoRespon
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
 const ReleaseResult = models.ReleaseResult;
-const ProxyGroups = models.ProxyGroups;
 const AuditRule = models.AuditRule;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const DescribeCdbProxyInfoRequest = models.DescribeCdbProxyInfoRequest;
@@ -113,7 +106,6 @@ const DescribeDBFeaturesResponse = models.DescribeDBFeaturesResponse;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
-const Address = models.Address;
 const CustomConfig = models.CustomConfig;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
@@ -134,7 +126,6 @@ const Parameter = models.Parameter;
 const SlaveInfo = models.SlaveInfo;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
-const ModifyCDBProxyConnectionPoolResponse = models.ModifyCDBProxyConnectionPoolResponse;
 const Tag = models.Tag;
 const ModifyCdbProxyParamResponse = models.ModifyCdbProxyParamResponse;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
@@ -160,22 +151,19 @@ const DescribeCdbZoneConfigRequest = models.DescribeCdbZoneConfigRequest;
 const DeviceCpuInfo = models.DeviceCpuInfo;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
-const QueryCDBProxyRequest = models.QueryCDBProxyRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const DescribeLocalBinlogConfigRequest = models.DescribeLocalBinlogConfigRequest;
-const QueryCDBProxyResponse = models.QueryCDBProxyResponse;
+const TagsInfoOfInstance = models.TagsInfoOfInstance;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const StopRollbackRequest = models.StopRollbackRequest;
-const TagsInfoOfInstance = models.TagsInfoOfInstance;
 const ResetRootAccountRequest = models.ResetRootAccountRequest;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
-const PoolConf = models.PoolConf;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
@@ -183,7 +171,7 @@ const OpenDBInstanceEncryptionRequest = models.OpenDBInstanceEncryptionRequest;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const ModifyInstancePasswordComplexityResponse = models.ModifyInstancePasswordComplexityResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
-const AuditLogAggregationResult = models.AuditLogAggregationResult;
+const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const DescribeRemoteBackupConfigRequest = models.DescribeRemoteBackupConfigRequest;
 const TagInfo = models.TagInfo;
@@ -193,14 +181,15 @@ const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const ReloadBalanceProxyNodeRequest = models.ReloadBalanceProxyNodeRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
+const AuditLog = models.AuditLog;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const AggregationCondition = models.AggregationCondition;
 const LocalBinlogConfig = models.LocalBinlogConfig;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
-const DescribeProxyConnectionPoolConfRequest = models.DescribeProxyConnectionPoolConfRequest;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
+const DescribeAuditLogsRequest = models.DescribeAuditLogsRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
@@ -211,19 +200,16 @@ const CreateAccountsResponse = models.CreateAccountsResponse;
 const CdbSellType = models.CdbSellType;
 const MasterInfo = models.MasterInfo;
 const ResetRootAccountResponse = models.ResetRootAccountResponse;
-const ProxyNodeInfo = models.ProxyNodeInfo;
 const Account = models.Account;
 const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const AuditLogFilter = models.AuditLogFilter;
-const ConnectionPoolInfo = models.ConnectionPoolInfo;
 const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
 const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
 const SwitchDrInstanceToMasterRequest = models.SwitchDrInstanceToMasterRequest;
 const ModifyCdbProxyParamRequest = models.ModifyCdbProxyParamRequest;
 const RoGroup = models.RoGroup;
 const ParameterDetail = models.ParameterDetail;
-const ModifyCDBProxyVipVPortResponse = models.ModifyCDBProxyVipVPortResponse;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
@@ -253,6 +239,7 @@ const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
 const DeviceNetInfo = models.DeviceNetInfo;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
+const InstanceAuditLogFilters = models.InstanceAuditLogFilters;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
 const InstanceInfo = models.InstanceInfo;
 const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
@@ -271,23 +258,20 @@ const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
 const AccountInfo = models.AccountInfo;
 const DescribeRemoteBackupConfigResponse = models.DescribeRemoteBackupConfigResponse;
-const ModifyCDBProxyDescResponse = models.ModifyCDBProxyDescResponse;
 const AdjustCdbProxyAddressResponse = models.AdjustCdbProxyAddressResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
-const RWInfos = models.RWInfos;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
 const ModifyBackupEncryptionStatusResponse = models.ModifyBackupEncryptionStatusResponse;
-const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
+const AuditLogAggregationResult = models.AuditLogAggregationResult;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const Bucket = models.Bucket;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
-const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const CdbSellConfig = models.CdbSellConfig;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
@@ -312,6 +296,7 @@ const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const DBSwitchInfo = models.DBSwitchInfo;
 const DescribeTasksResponse = models.DescribeTasksResponse;
+const DescribeAuditLogsResponse = models.DescribeAuditLogsResponse;
 const DescribeAuditPoliciesResponse = models.DescribeAuditPoliciesResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const AdjustCdbProxyRequest = models.AdjustCdbProxyRequest;
@@ -319,7 +304,6 @@ const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse
 const ProxyAddress = models.ProxyAddress;
 const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
 const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
-const ProxyGroup = models.ProxyGroup;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const ModifyBackupEncryptionStatusRequest = models.ModifyBackupEncryptionStatusRequest;
 const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
@@ -343,7 +327,6 @@ const Outbound = models.Outbound;
 const ParamInfo = models.ParamInfo;
 const DescribeBackupDecryptionKeyResponse = models.DescribeBackupDecryptionKeyResponse;
 const SecurityGroup = models.SecurityGroup;
-const DescribeProxyConnectionPoolConfResponse = models.DescribeProxyConnectionPoolConfResponse;
 const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
@@ -362,7 +345,6 @@ const InstanceRebootTime = models.InstanceRebootTime;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const TablePrivilege = models.TablePrivilege;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
-const BaseGroupInfo = models.BaseGroupInfo;
 const AdjustCdbProxyResponse = models.AdjustCdbProxyResponse;
 const DescribeBackupEncryptionStatusRequest = models.DescribeBackupEncryptionStatusRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
@@ -596,21 +578,6 @@ Note that once an instance is deactivated, its resources and data will not be re
     OpenDBInstanceGTID(req, cb) {
         let resp = new OpenDBInstanceGTIDResponse();
         this.request("OpenDBInstanceGTID", req, resp, cb);
-    }
-
-    /**
-     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
-
-This API has been deprecated and replaced with `ModifyCdbProxyAddressDesc`. 
-
-This API is used to modify the description of a database proxy.
-     * @param {ModifyCDBProxyDescRequest} req
-     * @param {function(string, ModifyCDBProxyDescResponse):void} cb
-     * @public
-     */
-    ModifyCDBProxyDesc(req, cb) {
-        let resp = new ModifyCDBProxyDescResponse();
-        this.request("ModifyCDBProxyDesc", req, resp, cb);
     }
 
     /**
@@ -867,21 +834,6 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
-
-This API has been deprecated and replaced with `DescribeCdbProxyInfo`. 
-
-This API is used to query the proxy details.
-     * @param {QueryCDBProxyRequest} req
-     * @param {function(string, QueryCDBProxyResponse):void} cb
-     * @public
-     */
-    QueryCDBProxy(req, cb) {
-        let resp = new QueryCDBProxyResponse();
-        this.request("QueryCDBProxy", req, resp, cb);
-    }
-
-    /**
      * This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the primary instance being upgraded is pending switch.
      * @param {SwitchForUpgradeRequest} req
      * @param {function(string, SwitchForUpgradeResponse):void} cb
@@ -1041,21 +993,6 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     DescribeProjectSecurityGroups(req, cb) {
         let resp = new DescribeProjectSecurityGroupsResponse();
         this.request("DescribeProjectSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
-
-This API has been deprecated and replaced with `AdjustCdbProxyAddress`. 
-
-This API is used to configure the connection pool of database proxy. The supported configurations can be obtained by the `DescribeProxyConnectionPoolConf` API.
-     * @param {ModifyCDBProxyConnectionPoolRequest} req
-     * @param {function(string, ModifyCDBProxyConnectionPoolResponse):void} cb
-     * @public
-     */
-    ModifyCDBProxyConnectionPool(req, cb) {
-        let resp = new ModifyCDBProxyConnectionPoolResponse();
-        this.request("ModifyCDBProxyConnectionPool", req, resp, cb);
     }
 
     /**
@@ -1321,21 +1258,6 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
-
-This API has been deprecated and replaced with `ModifyCdbProxyAddressVipAndVPort`. 
-
-This API is used to modify the VIP or the port of a database proxy.
-     * @param {ModifyCDBProxyVipVPortRequest} req
-     * @param {function(string, ModifyCDBProxyVipVPortResponse):void} cb
-     * @public
-     */
-    ModifyCDBProxyVipVPort(req, cb) {
-        let resp = new ModifyCDBProxyVipVPortResponse();
-        this.request("ModifyCDBProxyVipVPort", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the minimum specification of a read-only instance that can be purchased or upgraded to.
      * @param {DescribeRoMinScaleRequest} req
      * @param {function(string, DescribeRoMinScaleResponse):void} cb
@@ -1421,6 +1343,17 @@ This API is used to modify the VIP or the port of a database proxy.
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a database audit log.
+     * @param {DescribeAuditLogsRequest} req
+     * @param {function(string, DescribeAuditLogsResponse):void} cb
+     * @public
+     */
+    DescribeAuditLogs(req, cb) {
+        let resp = new DescribeAuditLogsResponse();
+        this.request("DescribeAuditLogs", req, resp, cb);
     }
 
     /**
@@ -1606,21 +1539,6 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     DescribeUploadedFiles(req, cb) {
         let resp = new DescribeUploadedFilesResponse();
         this.request("DescribeUploadedFiles", req, resp, cb);
-    }
-
-    /**
-     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
-
-This API is deprecated and replaced by the `DescribeCdbProxyInfo` API. 
-
-This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
-     * @param {DescribeCDBProxyRequest} req
-     * @param {function(string, DescribeCDBProxyResponse):void} cb
-     * @public
-     */
-    DescribeCDBProxy(req, cb) {
-        let resp = new DescribeCDBProxyResponse();
-        this.request("DescribeCDBProxy", req, resp, cb);
     }
 
     /**
@@ -1813,21 +1731,6 @@ Note that before enabling public network access, you need to first [initialize t
     ModifyDBInstanceProject(req, cb) {
         let resp = new ModifyDBInstanceProjectResponse();
         this.request("ModifyDBInstanceProject", req, resp, cb);
-    }
-
-    /**
-     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
-
-This API has been deprecated and replaced by the `DescribeCdbProxyInfo` API. 
-
-This API is used to query the connection pool configuration of a database proxy.
-     * @param {DescribeProxyConnectionPoolConfRequest} req
-     * @param {function(string, DescribeProxyConnectionPoolConfResponse):void} cb
-     * @public
-     */
-    DescribeProxyConnectionPoolConf(req, cb) {
-        let resp = new DescribeProxyConnectionPoolConfResponse();
-        this.request("DescribeProxyConnectionPoolConf", req, resp, cb);
     }
 
     /**

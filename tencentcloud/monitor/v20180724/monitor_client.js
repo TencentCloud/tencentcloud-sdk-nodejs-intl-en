@@ -134,6 +134,7 @@ const PrometheusTag = models.PrometheusTag;
 const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const CreateServiceDiscoveryResponse = models.CreateServiceDiscoveryResponse;
+const DescribeClusterAgentCreatingProgressRequest = models.DescribeClusterAgentCreatingProgressRequest;
 const EnableSSOCamCheckResponse = models.EnableSSOCamCheckResponse;
 const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
 const CreatePrometheusScrapeJobResponse = models.CreatePrometheusScrapeJobResponse;
@@ -341,9 +342,8 @@ const DescribeRecordingRulesResponse = models.DescribeRecordingRulesResponse;
 const DeleteRecordingRulesResponse = models.DeleteRecordingRulesResponse;
 const UpdateGrafanaWhiteListRequest = models.UpdateGrafanaWhiteListRequest;
 const UpdatePrometheusAgentStatusRequest = models.UpdatePrometheusAgentStatusRequest;
-const DescribeAlarmNoticeCallbacksRequest = models.DescribeAlarmNoticeCallbacksRequest;
+const DescribeGrafanaInstancesResponse = models.DescribeGrafanaInstancesResponse;
 const CheckIsPrometheusNewUserResponse = models.CheckIsPrometheusNewUserResponse;
-const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const UpdateAlertRuleStateResponse = models.UpdateAlertRuleStateResponse;
 const ModifyPrometheusRecordRuleYamlRequest = models.ModifyPrometheusRecordRuleYamlRequest;
@@ -352,6 +352,7 @@ const DescribeProductEventListDimensions = models.DescribeProductEventListDimens
 const ModifyAlarmPolicyNoticeRequest = models.ModifyAlarmPolicyNoticeRequest;
 const DeleteAlarmPolicyRequest = models.DeleteAlarmPolicyRequest;
 const EventCondition = models.EventCondition;
+const DescribeClusterAgentCreatingProgressResponse = models.DescribeClusterAgentCreatingProgressResponse;
 const CreateAlertRuleResponse = models.CreateAlertRuleResponse;
 const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
 const ModifyAlarmPolicyTasksResponse = models.ModifyAlarmPolicyTasksResponse;
@@ -397,7 +398,6 @@ const Filter = models.Filter;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
 const UpdateSSOAccountRequest = models.UpdateSSOAccountRequest;
 const CreateSSOAccountResponse = models.CreateSSOAccountResponse;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const UpdatePrometheusScrapeJobResponse = models.UpdatePrometheusScrapeJobResponse;
 const DescribeAlarmPoliciesRequest = models.DescribeAlarmPoliciesRequest;
 const PrometheusScrapeJob = models.PrometheusScrapeJob;
@@ -413,7 +413,7 @@ const DescribeAlarmPolicyRequest = models.DescribeAlarmPolicyRequest;
 const UninstallGrafanaDashboardRequest = models.UninstallGrafanaDashboardRequest;
 const UpdateGrafanaIntegrationRequest = models.UpdateGrafanaIntegrationRequest;
 const DeletePrometheusRecordRuleYamlRequest = models.DeletePrometheusRecordRuleYamlRequest;
-const MetricDatum = models.MetricDatum;
+const DescribeAlarmNoticeCallbacksRequest = models.DescribeAlarmNoticeCallbacksRequest;
 const DescribeStatisticDataRequest = models.DescribeStatisticDataRequest;
 const GrafanaNotificationChannel = models.GrafanaNotificationChannel;
 const SetDefaultAlarmPolicyRequest = models.SetDefaultAlarmPolicyRequest;
@@ -421,7 +421,6 @@ const CLSNotice = models.CLSNotice;
 const LogAlarmReq = models.LogAlarmReq;
 const TerminatePrometheusInstancesResponse = models.TerminatePrometheusInstancesResponse;
 const UpdateSSOAccountResponse = models.UpdateSSOAccountResponse;
-const DescribeGrafanaInstancesResponse = models.DescribeGrafanaInstancesResponse;
 const RunPrometheusInstanceRequest = models.RunPrometheusInstanceRequest;
 const UpdateAlertRuleStateRequest = models.UpdateAlertRuleStateRequest;
 const SetDefaultAlarmPolicyResponse = models.SetDefaultAlarmPolicyResponse;
@@ -542,7 +541,7 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     }
 
     /**
-     * This API is used to create a Grafana instance.
+     * This API is used to create a monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
      * @param {CreateGrafanaInstanceRequest} req
      * @param {function(string, CreateGrafanaInstanceResponse):void} cb
      * @public
@@ -1139,7 +1138,7 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to delete a Grafana instance.
+     * This API is used to refund a monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
      * @param {DeleteGrafanaInstanceRequest} req
      * @param {function(string, DeleteGrafanaInstanceResponse):void} cb
      * @public
@@ -1227,7 +1226,7 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to restore a Grafana instance.
+     * This API is used to renew a monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
      * @param {ResumeGrafanaInstanceRequest} req
      * @param {function(string, ResumeGrafanaInstanceResponse):void} cb
      * @public
@@ -1785,27 +1784,6 @@ If you need to call a large number of APIs to pull metrics or objects at a time,
     }
 
     /**
-     * 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
-
-This API is not deprecated, but its related console features and backend services were deactivated two years ago.
-
-The default API request rate limit is 50 requests/sec.
-The default upper limit on metrics of a single tenant is 100.
-A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
-
-The reporting timestamp is the timestamp when you want to save the data. We recommend that you construct a timestamp at integer minutes.
-The time range of a timestamp is from 300 seconds before the current time to the current time.
-The data of the same IP metric/value pair must be reported by minute in chronological order.
-     * @param {PutMonitorDataRequest} req
-     * @param {function(string, PutMonitorDataResponse):void} cb
-     * @public
-     */
-    PutMonitorData(req, cb) {
-        let resp = new PutMonitorDataResponse();
-        this.request("PutMonitorData", req, resp, cb);
-    }
-
-    /**
      * This API is used to update the Grafana DNS configuration.
      * @param {UpdateDNSConfigRequest} req
      * @param {function(string, UpdateDNSConfigResponse):void} cb
@@ -2016,6 +1994,17 @@ The data of the same IP metric/value pair must be reported by minute in chronolo
     CreatePrometheusConfig(req, cb) {
         let resp = new CreatePrometheusConfigResponse();
         this.request("CreatePrometheusConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to u200dobtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
+     * @param {DescribeClusterAgentCreatingProgressRequest} req
+     * @param {function(string, DescribeClusterAgentCreatingProgressResponse):void} cb
+     * @public
+     */
+    DescribeClusterAgentCreatingProgress(req, cb) {
+        let resp = new DescribeClusterAgentCreatingProgressResponse();
+        this.request("DescribeClusterAgentCreatingProgress", req, resp, cb);
     }
 
     /**

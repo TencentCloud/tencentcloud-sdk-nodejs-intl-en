@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Database proxy specifications
+ * @class
+ */
+class ProxySpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of database proxy CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Database proxy memory
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+
+    }
+}
+
+/**
  * ModifyClusterName request structure.
  * @class
  */
@@ -47,6 +82,144 @@ class ModifyClusterNameRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+
+    }
+}
+
+/**
+ * ModifyProxyRwSplit request structure.
+ * @class
+ */
+class ModifyProxyRwSplitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+         * @type {string || null}
+         */
+        this.ConsistencyType = null;
+
+        /**
+         * Consistency timeout period
+         * @type {string || null}
+         */
+        this.ConsistencyTimeOut = null;
+
+        /**
+         * Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
+         * @type {string || null}
+         */
+        this.WeightMode = null;
+
+        /**
+         * Read-Only weight of an instance
+         * @type {Array.<ProxyInstanceWeight> || null}
+         */
+        this.InstanceWeights = null;
+
+        /**
+         * Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
+        /**
+         * Whether to automatically add read-only instances. Valid values: `true`, `false`
+         * @type {string || null}
+         */
+        this.AutoAddRo = null;
+
+        /**
+         * Whether to enable read/write separation
+         * @type {string || null}
+         */
+        this.OpenRw = null;
+
+        /**
+         * Read/Write type. Valid values:
+`READWRITE`, `READONLY`.
+         * @type {string || null}
+         */
+        this.RwType = null;
+
+        /**
+         * Transaction split
+         * @type {boolean || null}
+         */
+        this.TransSplit = null;
+
+        /**
+         * Connection mode. Valid values:
+`nearby`, `balance`.
+         * @type {string || null}
+         */
+        this.AccessMode = null;
+
+        /**
+         * Whether to enable the connection pool. Valid values: 
+`yes`, `no`.
+         * @type {string || null}
+         */
+        this.OpenConnectionPool = null;
+
+        /**
+         * Connection pool type. Valid values:
+`ConnectionPoolType`, `SessionConnectionPool`.
+         * @type {string || null}
+         */
+        this.ConnectionPoolType = null;
+
+        /**
+         * Connection u200dpersistence timeout
+         * @type {number || null}
+         */
+        this.ConnectionPoolTimeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
+        this.ConsistencyTimeOut = 'ConsistencyTimeOut' in params ? params.ConsistencyTimeOut : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+
+        if (params.InstanceWeights) {
+            this.InstanceWeights = new Array();
+            for (let z in params.InstanceWeights) {
+                let obj = new ProxyInstanceWeight();
+                obj.deserialize(params.InstanceWeights[z]);
+                this.InstanceWeights.push(obj);
+            }
+        }
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
+        this.AutoAddRo = 'AutoAddRo' in params ? params.AutoAddRo : null;
+        this.OpenRw = 'OpenRw' in params ? params.OpenRw : null;
+        this.RwType = 'RwType' in params ? params.RwType : null;
+        this.TransSplit = 'TransSplit' in params ? params.TransSplit : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
+        this.OpenConnectionPool = 'OpenConnectionPool' in params ? params.OpenConnectionPool : null;
+        this.ConnectionPoolType = 'ConnectionPoolType' in params ? params.ConnectionPoolType : null;
+        this.ConnectionPoolTimeOut = 'ConnectionPoolTimeOut' in params ? params.ConnectionPoolTimeOut : null;
 
     }
 }
@@ -259,6 +432,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Weight ratio between read-write instances and read-only instances
+ * @class
+ */
+class ProxyInstanceWeight extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * InstanID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance weight
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * CreateResourcePackage request structure.
  * @class
  */
@@ -279,7 +487,7 @@ class CreateResourcePackageRequest extends  AbstractModel {
         this.PackageRegion = null;
 
         /**
-         * Resource pack type. Valid values:  `CCU` (compute resource pack), `DISK` (storage resource pack).
+         * Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
          * @type {string || null}
          */
         this.PackageType = null;
@@ -515,6 +723,12 @@ This parameter has been disused.
          */
         this.Offset = null;
 
+        /**
+         * Keywords for fuzzy search (match `AccountName` and `AccountHost` at the same time), which supports regex. The union results will be returned.
+         * @type {string || null}
+         */
+        this.AccountRegular = null;
+
     }
 
     /**
@@ -530,6 +744,7 @@ This parameter has been disused.
         this.Hosts = 'Hosts' in params ? params.Hosts : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.AccountRegular = 'AccountRegular' in params ? params.AccountRegular : null;
 
     }
 }
@@ -685,6 +900,81 @@ class BillingResourceInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeProxies request structure.
+ * @class
+ */
+class DescribeProxiesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Number of returned results. Default value: `20`. Maximum value: `100`,
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Record offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting field. Valid values:
+<li> CREATETIME: Creation time</li>
+<li> PERIODENDTIME: Expiration time</li>
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values:
+<li> `ASC`: Ascending.</li>
+<li> `DESC`: Descending</li>
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+         * @type {Array.<QueryParamFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new QueryParamFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyClusterPasswordComplexity response structure.
  * @class
  */
@@ -778,6 +1068,51 @@ class SwitchClusterZoneResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Connection pool information for the database proxy
+ * @class
+ */
+class ProxyConnectionPoolInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection persistence timeout in seconds
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConnectionPoolTimeOut = null;
+
+        /**
+         * Whether the connection pool is enabled
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OpenConnectionPool = null;
+
+        /**
+         * Connection pool type. Valid value: `SessionConnectionPool` (session-level).
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConnectionPoolType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConnectionPoolTimeOut = 'ConnectionPoolTimeOut' in params ? params.ConnectionPoolTimeOut : null;
+        this.OpenConnectionPool = 'OpenConnectionPool' in params ? params.OpenConnectionPool : null;
+        this.ConnectionPoolType = 'ConnectionPoolType' in params ? params.ConnectionPoolType : null;
 
     }
 }
@@ -1381,6 +1716,33 @@ class ClusterInstanceDetail extends  AbstractModel {
          */
         this.InstanceRole = null;
 
+        /**
+         * Execution start time in seconds from 0:00	
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaintainStartTime = null;
+
+        /**
+         * Duration in seconds	
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaintainDuration = null;
+
+        /**
+         * Execution time. Valid values: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, Sat`, `Sun`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.MaintainWeekDays = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ServerlessStatus = null;
+
     }
 
     /**
@@ -1399,6 +1761,10 @@ class ClusterInstanceDetail extends  AbstractModel {
         this.InstanceMemory = 'InstanceMemory' in params ? params.InstanceMemory : null;
         this.InstanceStorage = 'InstanceStorage' in params ? params.InstanceStorage : null;
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.MaintainStartTime = 'MaintainStartTime' in params ? params.MaintainStartTime : null;
+        this.MaintainDuration = 'MaintainDuration' in params ? params.MaintainDuration : null;
+        this.MaintainWeekDays = 'MaintainWeekDays' in params ? params.MaintainWeekDays : null;
+        this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
 
     }
 }
@@ -1433,6 +1799,49 @@ class AddClusterSlaveZoneResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeProxySpecs response structure.
+ * @class
+ */
+class DescribeProxySpecsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of database proxyspecifications
+         * @type {Array.<ProxySpec> || null}
+         */
+        this.ProxySpecs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProxySpecs) {
+            this.ProxySpecs = new Array();
+            for (let z in params.ProxySpecs) {
+                let obj = new ProxySpec();
+                obj.deserialize(params.ProxySpecs[z]);
+                this.ProxySpecs.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1900,24 +2309,42 @@ class CopyClusterPasswordComplexityResponse extends  AbstractModel {
 }
 
 /**
- * Information of tags associated with cluster, including `TagKey` and `TagValue`
+ * UpgradeProxyVersion request structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class UpgradeProxyVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
+         * Cluster ID
          * @type {string || null}
          */
-        this.TagKey = null;
+        this.ClusterId = null;
 
         /**
-         * Tag value
+         * Current version of database proxy
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.SrcProxyVersion = null;
+
+        /**
+         * Target version of database proxy
+         * @type {string || null}
+         */
+        this.DstProxyVersion = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * Upgrade time. Valid values: `no` (upon upgrade completion), `yes` (upgrade during instance maintenance time)
+         * @type {string || null}
+         */
+        this.IsInMaintainPeriod = null;
 
     }
 
@@ -1928,8 +2355,60 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SrcProxyVersion = 'SrcProxyVersion' in params ? params.SrcProxyVersion : null;
+        this.DstProxyVersion = 'DstProxyVersion' in params ? params.DstProxyVersion : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
+
+    }
+}
+
+/**
+ * SwitchClusterVpc request structure.
+ * @class
+ */
+class SwitchClusterVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * VPC ID in string
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Subnet ID in string
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Valid hours of old IP
+         * @type {number || null}
+         */
+        this.OldIpReserveHours = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.OldIpReserveHours = 'OldIpReserveHours' in params ? params.OldIpReserveHours : null;
 
     }
 }
@@ -1977,39 +2456,38 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
 }
 
 /**
- * SearchClusterTables request structure.
+ * DescribeProxies response structure.
  * @class
  */
-class SearchClusterTablesRequest extends  AbstractModel {
+class DescribeProxiesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
+         * Number of database proxy groups
+         * @type {number || null}
          */
-        this.ClusterId = null;
+        this.TotalCount = null;
 
         /**
-         * Database name
-         * @type {string || null}
+         * List of database proxy groups
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {Array.<ProxyGroupInfo> || null}
          */
-        this.Database = null;
+        this.ProxyGroupInfos = null;
 
         /**
-         * Data table name
-         * @type {string || null}
+         * Database proxy node
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {Array.<ProxyNodeInfo> || null}
          */
-        this.Table = null;
+        this.ProxyNodeInfos = null;
 
         /**
-         * Data table type. Valid values:
-`view`: Only return to view,
-`base_table`: Only return to basic table,
-`all`: Return to view and table.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TableType = null;
+        this.RequestId = null;
 
     }
 
@@ -2020,10 +2498,26 @@ class SearchClusterTablesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Database = 'Database' in params ? params.Database : null;
-        this.Table = 'Table' in params ? params.Table : null;
-        this.TableType = 'TableType' in params ? params.TableType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ProxyGroupInfos) {
+            this.ProxyGroupInfos = new Array();
+            for (let z in params.ProxyGroupInfos) {
+                let obj = new ProxyGroupInfo();
+                obj.deserialize(params.ProxyGroupInfos[z]);
+                this.ProxyGroupInfos.push(obj);
+            }
+        }
+
+        if (params.ProxyNodeInfos) {
+            this.ProxyNodeInfos = new Array();
+            for (let z in params.ProxyNodeInfos) {
+                let obj = new ProxyNodeInfo();
+                obj.deserialize(params.ProxyNodeInfos[z]);
+                this.ProxyNodeInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2125,7 +2619,7 @@ class DbInfo extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Collation rule
+         * Collation
          * @type {string || null}
          */
         this.CollateRule = null;
@@ -2247,24 +2741,108 @@ class DescribeFlowResponse extends  AbstractModel {
 }
 
 /**
- * SetRenewFlag response structure.
+ * Instance parameter details
  * @class
  */
-class SetRenewFlagResponse extends  AbstractModel {
+class ParamDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of successfully manipulated instances
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Parameter name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ParamName = null;
+
+        /**
+         * Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * Whether `func` is supported. Valid values: `true` (supported), `false` (not supported).
+         * @type {boolean || null}
+         */
+        this.SupportFunc = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Current value of the parameter
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * Maximum value of the parameter
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Minimum value of the parameter
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Enumerated values of the parameter.  It is null if the parameter is non-enumerated. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Valid values: `1` (global parameter),  `0`  (non-global parameter).
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * The match type. Valid value: `multiVal`.
+         * @type {string || null}
+         */
+        this.MatchType = null;
+
+        /**
+         * Match values, which will be separated by comma when `MatchType` is `multiVal`.
+         * @type {string || null}
+         */
+        this.MatchValue = null;
+
+        /**
+         * Whether it is a `func` type. Valid values: `true` (yes), `false` (no). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsFunc = null;
+
+        /**
+         * Formula content returned when `ParamType` is `func`. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Func = null;
+
+        /**
+         * Whether the parameter can be modified Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ModifiableInfo || null}
+         */
+        this.ModifiableInfo = null;
 
     }
 
@@ -2275,8 +2853,83 @@ class SetRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.SupportFunc = 'SupportFunc' in params ? params.SupportFunc : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.MatchType = 'MatchType' in params ? params.MatchType : null;
+        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+        this.IsFunc = 'IsFunc' in params ? params.IsFunc : null;
+        this.Func = 'Func' in params ? params.Func : null;
+
+        if (params.ModifiableInfo) {
+            let obj = new ModifiableInfo();
+            obj.deserialize(params.ModifiableInfo)
+            this.ModifiableInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeResourcePackageSaleSpec request structure.
+ * @class
+ */
+class DescribeResourcePackageSaleSpecRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
+         * @type {string || null}
+         */
+        this.PackageRegion = null;
+
+        /**
+         * Resource pack type. Valid values: `CCU` (compute resource pack, `DISK` (storage resource pack).
+         * @type {string || null}
+         */
+        this.PackageType = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2471,6 +3124,48 @@ class SetRenewFlagRequest extends  AbstractModel {
         }
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+
+    }
+}
+
+/**
+ * Filter of the audit rule
+ * @class
+ */
+class RuleFilters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter parameter name of the audit rule. Valid values: `host` (client IP), `user` (database account), `dbName` (database name), `sqlType` (SQL type), `sql` (SQL statement).
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Filter match type of the audit rule. Valid values: `INC` (including), `EXC` (excluding), `EQS` (equal to), `NEQ` (not equal to).
+         * @type {string || null}
+         */
+        this.Compare = null;
+
+        /**
+         * Filter match value of the audit rule
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Compare = 'Compare' in params ? params.Compare : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -2848,6 +3543,93 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Database = 'Database' in params ? params.Database : null;
         this.Tables = 'Tables' in params ? params.Tables : null;
+
+    }
+}
+
+/**
+ * Proxy group
+ * @class
+ */
+class ProxyGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * Number of nodes in the proxy group
+         * @type {number || null}
+         */
+        this.ProxyNodeCount = null;
+
+        /**
+         * Database proxy u200dgroup status
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Current proxy version
+         * @type {string || null}
+         */
+        this.CurrentProxyVersion = null;
+
+        /**
+         * Cluster ID
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * User `AppId`
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Enabling read/write separation for database proxy
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OpenRw = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.ProxyNodeCount = 'ProxyNodeCount' in params ? params.ProxyNodeCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CurrentProxyVersion = 'CurrentProxyVersion' in params ? params.CurrentProxyVersion : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.OpenRw = 'OpenRw' in params ? params.OpenRw : null;
 
     }
 }
@@ -3232,6 +4014,104 @@ class DescribeClustersRequest extends  AbstractModel {
 }
 
 /**
+ * Parameter to be modified
+ * @class
+ */
+class ParamItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * New value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Original value
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+
+    }
+}
+
+/**
+ * DescribeSupportProxyVersion request structure.
+ * @class
+ */
+class DescribeSupportProxyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+
+    }
+}
+
+/**
+ * DescribeProxySpecs request structure.
+ * @class
+ */
+class DescribeProxySpecsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * CloseClusterPasswordComplexity request structure.
  * @class
  */
@@ -3318,6 +4198,106 @@ class OpenReadOnlyInstanceExclusiveAccessResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Read/write separation information of the database proxy u200dgroup
+ * @class
+ */
+class ProxyGroupRwInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+         * @type {string || null}
+         */
+        this.ConsistencyType = null;
+
+        /**
+         * Consistency timeout period
+         * @type {number || null}
+         */
+        this.ConsistencyTimeOut = null;
+
+        /**
+         * Weight mode. Valid values: `system` (auto-assigned), `custom`.
+         * @type {string || null}
+         */
+        this.WeightMode = null;
+
+        /**
+         * Whether to enable failover
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
+        /**
+         * Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+         * @type {string || null}
+         */
+        this.AutoAddRo = null;
+
+        /**
+         * Instance weight array
+         * @type {Array.<ProxyInstanceWeight> || null}
+         */
+        this.InstanceWeights = null;
+
+        /**
+         * Whether to enable read-write node. Valid values: `yes`, `no`.
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OpenRw = null;
+
+        /**
+         * Read/write attribute. Valid values: `READWRITE`, `READONLY`.
+         * @type {string || null}
+         */
+        this.RwType = null;
+
+        /**
+         * Transaction split
+         * @type {boolean || null}
+         */
+        this.TransSplit = null;
+
+        /**
+         * Connection mode. Valid values: `balance`, `nearby`.
+         * @type {string || null}
+         */
+        this.AccessMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
+        this.ConsistencyTimeOut = 'ConsistencyTimeOut' in params ? params.ConsistencyTimeOut : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
+        this.AutoAddRo = 'AutoAddRo' in params ? params.AutoAddRo : null;
+
+        if (params.InstanceWeights) {
+            this.InstanceWeights = new Array();
+            for (let z in params.InstanceWeights) {
+                let obj = new ProxyInstanceWeight();
+                obj.deserialize(params.InstanceWeights[z]);
+                this.InstanceWeights.push(obj);
+            }
+        }
+        this.OpenRw = 'OpenRw' in params ? params.OpenRw : null;
+        this.RwType = 'RwType' in params ? params.RwType : null;
+        this.TransSplit = 'TransSplit' in params ? params.TransSplit : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
 
     }
 }
@@ -3830,6 +4810,41 @@ class InstanceParamItem extends  AbstractModel {
 }
 
 /**
+ * ReloadBalanceProxyNode request structure.
+ * @class
+ */
+class ReloadBalanceProxyNodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceDetail request structure.
  * @class
  */
@@ -3853,6 +4868,41 @@ class DescribeInstanceDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Number of proxy nodes and their AZs
+ * @class
+ */
+class ProxyZone extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ u200dof the proxy node
+         * @type {string || null}
+         */
+        this.ProxyNodeZone = null;
+
+        /**
+         * The number of proxy nodes
+         * @type {number || null}
+         */
+        this.ProxyNodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyNodeZone = 'ProxyNodeZone' in params ? params.ProxyNodeZone : null;
+        this.ProxyNodeCount = 'ProxyNodeCount' in params ? params.ProxyNodeCount : null;
 
     }
 }
@@ -4147,6 +5197,50 @@ class ModifyMaintainPeriodConfigResponse extends  AbstractModel {
 }
 
 /**
+ * SearchClusterTables response structure.
+ * @class
+ */
+class SearchClusterTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data table list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DatabaseTables> || null}
+         */
+        this.Tables = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tables) {
+            this.Tables = new Array();
+            for (let z in params.Tables) {
+                let obj = new DatabaseTables();
+                obj.deserialize(params.Tables[z]);
+                this.Tables.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SwitchClusterVpc response structure.
  * @class
  */
@@ -4205,6 +5299,58 @@ class DescribeClusterDetailRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * SearchClusterTables request structure.
+ * @class
+ */
+class SearchClusterTablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Data table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Data table type. Valid values:
+`view`: Only return to view,
+`base_table`: Only return to basic table,
+`all`: Return to view and table.
+         * @type {string || null}
+         */
+        this.TableType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.TableType = 'TableType' in params ? params.TableType : null;
 
     }
 }
@@ -4465,108 +5611,18 @@ class PauseServerlessResponse extends  AbstractModel {
 }
 
 /**
- * Instance parameter details
+ * OpenClusterReadOnlyInstanceGroupAccess response structure.
  * @class
  */
-class ParamDetail extends  AbstractModel {
+class OpenClusterReadOnlyInstanceGroupAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ParamName = null;
-
-        /**
-         * Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
-         * @type {string || null}
-         */
-        this.ParamType = null;
-
-        /**
-         * Whether `func` is supported. Valid values: `true` (supported), `false` (not supported).
-         * @type {boolean || null}
-         */
-        this.SupportFunc = null;
-
-        /**
-         * Default value
-         * @type {string || null}
-         */
-        this.Default = null;
-
-        /**
-         * Parameter description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Current value of the parameter
-         * @type {string || null}
-         */
-        this.CurrentValue = null;
-
-        /**
-         * Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes).
-         * @type {number || null}
-         */
-        this.NeedReboot = null;
-
-        /**
-         * Maximum value of the parameter
-         * @type {string || null}
-         */
-        this.Max = null;
-
-        /**
-         * Minimum value of the parameter
-         * @type {string || null}
-         */
-        this.Min = null;
-
-        /**
-         * Enumerated values of the parameter.  It is null if the parameter is non-enumerated. Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.EnumValue = null;
-
-        /**
-         * Valid values: `1` (global parameter),  `0`  (non-global parameter).
-         * @type {number || null}
-         */
-        this.IsGlobal = null;
-
-        /**
-         * The match type. Valid value: `multiVal`.
-         * @type {string || null}
-         */
-        this.MatchType = null;
-
-        /**
-         * Match values, which will be separated by comma when `MatchType` is `multiVal`.
-         * @type {string || null}
-         */
-        this.MatchValue = null;
-
-        /**
-         * Whether it is a `func` type. Valid values: `true` (yes), `false` (no). Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.IsFunc = null;
-
-        /**
-         * Formula content returned when `ParamType` is `func`. Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Func = null;
-
-        /**
-         * Whether the parameter can be modified Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ModifiableInfo || null}
-         */
-        this.ModifiableInfo = null;
+        this.RequestId = null;
 
     }
 
@@ -4577,27 +5633,7 @@ class ParamDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.ParamType = 'ParamType' in params ? params.ParamType : null;
-        this.SupportFunc = 'SupportFunc' in params ? params.SupportFunc : null;
-        this.Default = 'Default' in params ? params.Default : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
-        this.Max = 'Max' in params ? params.Max : null;
-        this.Min = 'Min' in params ? params.Min : null;
-        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
-        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
-        this.MatchType = 'MatchType' in params ? params.MatchType : null;
-        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
-        this.IsFunc = 'IsFunc' in params ? params.IsFunc : null;
-        this.Func = 'Func' in params ? params.Func : null;
-
-        if (params.ModifiableInfo) {
-            let obj = new ModifiableInfo();
-            obj.deserialize(params.ModifiableInfo)
-            this.ModifiableInfo = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4625,6 +5661,48 @@ class DeleteAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeProxyVersion response structure.
+ * @class
+ */
+class UpgradeProxyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4859,6 +5937,91 @@ class TablePrivileges extends  AbstractModel {
         this.Db = 'Db' in params ? params.Db : null;
         this.TableName = 'TableName' in params ? params.TableName : null;
         this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
+ * UpgradeProxy request structure.
+ * @class
+ */
+class UpgradeProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * Number of nodes in the proxy group
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * ID of the database proxy group (disused)
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * Load rebalance mode. Valid values: `auto`, `manual`
+         * @type {string || null}
+         */
+        this.ReloadBalance = null;
+
+        /**
+         * Upgrade time. Valid values: `no` (upon upgrade completion), `timeWindow` (upgrade during instance maintenance time)
+         * @type {string || null}
+         */
+        this.IsInMaintainPeriod = null;
+
+        /**
+         * Node information of the atabase proxy
+         * @type {Array.<ProxyZone> || null}
+         */
+        this.ProxyZones = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.ReloadBalance = 'ReloadBalance' in params ? params.ReloadBalance : null;
+        this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
+
+        if (params.ProxyZones) {
+            this.ProxyZones = new Array();
+            for (let z in params.ProxyZones) {
+                let obj = new ProxyZone();
+                obj.deserialize(params.ProxyZones[z]);
+                this.ProxyZones.push(obj);
+            }
+        }
 
     }
 }
@@ -5133,54 +6296,10 @@ class DescribeBackupListRequest extends  AbstractModel {
 }
 
 /**
- * SearchClusterDatabases request structure.
+ * CloseProxy request structure.
  * @class
  */
-class SearchClusterDatabasesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Database name
-         * @type {string || null}
-         */
-        this.Database = null;
-
-        /**
-         * Whether to search exactly
-Valid values: `0` (fuzzy search), `1` (exact search). 
-Default value: `0`.
-         * @type {number || null}
-         */
-        this.MatchType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Database = 'Database' in params ? params.Database : null;
-        this.MatchType = 'MatchType' in params ? params.MatchType : null;
-
-    }
-}
-
-/**
- * SwitchClusterVpc request structure.
- * @class
- */
-class SwitchClusterVpcRequest extends  AbstractModel {
+class CloseProxyRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5191,22 +6310,16 @@ class SwitchClusterVpcRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * VPC ID in string
+         * Database proxy u200dgroup ID
          * @type {string || null}
          */
-        this.UniqVpcId = null;
+        this.ProxyGroupId = null;
 
         /**
-         * Subnet ID in string
-         * @type {string || null}
+         * Whether only to disable read/write separation. Valid values: `true`, `false`.
+         * @type {boolean || null}
          */
-        this.UniqSubnetId = null;
-
-        /**
-         * Valid hours of old IP
-         * @type {number || null}
-         */
-        this.OldIpReserveHours = null;
+        this.OnlyCloseRW = null;
 
     }
 
@@ -5218,9 +6331,36 @@ class SwitchClusterVpcRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
-        this.OldIpReserveHours = 'OldIpReserveHours' in params ? params.OldIpReserveHours : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.OnlyCloseRW = 'OnlyCloseRW' in params ? params.OnlyCloseRW : null;
+
+    }
+}
+
+/**
+ * ModifyProxyDesc response structure.
+ * @class
+ */
+class ModifyProxyDescResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5695,6 +6835,50 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * SearchClusterDatabases request structure.
+ * @class
+ */
+class SearchClusterDatabasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Whether to search exactly
+Valid values: `0` (fuzzy search), `1` (exact search). 
+Default value: `0`.
+         * @type {number || null}
+         */
+        this.MatchType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.MatchType = 'MatchType' in params ? params.MatchType : null;
+
+    }
+}
+
+/**
  * DescribeClusterPasswordComplexity response structure.
  * @class
  */
@@ -6092,6 +7276,48 @@ class BinlogItem extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
         this.BinlogId = 'BinlogId' in params ? params.BinlogId : null;
+
+    }
+}
+
+/**
+ * ModifyProxyDesc request structure.
+ * @class
+ */
+class ModifyProxyDescRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * Database proxy description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -7558,6 +8784,48 @@ class BindClusterResourcePackagesResponse extends  AbstractModel {
 }
 
 /**
+ * Filters for query
+ * @class
+ */
+class QueryParamFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Search string
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * Whether to use exact match
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
+
+    }
+}
+
+/**
  * DescribeBackupDownloadUrl request structure.
  * @class
  */
@@ -7797,6 +9065,119 @@ class UnbindClusterResourcePackagesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateProxy request structure.
+ * @class
+ */
+class CreateProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * VPC ID, which is the same as that of the cluster by defaultu200d.
+         * @type {string || null}
+         */
+        this.UniqueVpcId = null;
+
+        /**
+         * VPC subnet ID, which is the same as that of the cluster by default.
+         * @type {string || null}
+         */
+        this.UniqueSubnetId = null;
+
+        /**
+         * Number of nodes in the proxy group
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+         * @type {string || null}
+         */
+        this.ConnectionPoolType = null;
+
+        /**
+         * Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
+         * @type {string || null}
+         */
+        this.OpenConnectionPool = null;
+
+        /**
+         * Connection pool threshold in seconds
+         * @type {number || null}
+         */
+        this.ConnectionPoolTimeOut = null;
+
+        /**
+         * Array of security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Database node information
+         * @type {Array.<ProxyZone> || null}
+         */
+        this.ProxyZones = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.UniqueVpcId = 'UniqueVpcId' in params ? params.UniqueVpcId : null;
+        this.UniqueSubnetId = 'UniqueSubnetId' in params ? params.UniqueSubnetId : null;
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+        this.ConnectionPoolType = 'ConnectionPoolType' in params ? params.ConnectionPoolType : null;
+        this.OpenConnectionPool = 'OpenConnectionPool' in params ? params.OpenConnectionPool : null;
+        this.ConnectionPoolTimeOut = 'ConnectionPoolTimeOut' in params ? params.ConnectionPoolTimeOut : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.ProxyZones) {
+            this.ProxyZones = new Array();
+            for (let z in params.ProxyZones) {
+                let obj = new ProxyZone();
+                obj.deserialize(params.ProxyZones[z]);
+                this.ProxyZones.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * OpenClusterPasswordComplexity response structure.
  * @class
  */
@@ -7832,18 +9213,30 @@ class OpenClusterPasswordComplexityResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceDetail response structure.
+ * CreateProxyEndPoint response structure.
  * @class
  */
-class DescribeInstanceDetailResponse extends  AbstractModel {
+class CreateProxyEndPointResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance details
-         * @type {CynosdbInstanceDetail || null}
+         * Async flow ID
+         * @type {number || null}
          */
-        this.Detail = null;
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7860,12 +9253,9 @@ class DescribeInstanceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Detail) {
-            let obj = new CynosdbInstanceDetail();
-            obj.deserialize(params.Detail)
-            this.Detail = obj;
-        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8205,6 +9595,114 @@ class CopyClusterPasswordComplexityRequest extends  AbstractModel {
 }
 
 /**
+ * Database proxy group details
+ * @class
+ */
+class ProxyGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database proxy group
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {ProxyGroup || null}
+         */
+        this.ProxyGroup = null;
+
+        /**
+         * Read/write separation information of the database proxy u200dgroup
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {ProxyGroupRwInfo || null}
+         */
+        this.ProxyGroupRwInfo = null;
+
+        /**
+         * Node information of the u200ddatabase proxy
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {Array.<ProxyNodeInfo> || null}
+         */
+        this.ProxyNodes = null;
+
+        /**
+         * Connection pool information for the database proxy
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {ProxyConnectionPoolInfo || null}
+         */
+        this.ConnectionPool = null;
+
+        /**
+         * Network information for database proxy
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {Array.<NetAddr> || null}
+         */
+        this.NetAddrInfos = null;
+
+        /**
+         * Task set of the database proxy
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {Array.<ObjectTask> || null}
+         */
+        this.Tasks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProxyGroup) {
+            let obj = new ProxyGroup();
+            obj.deserialize(params.ProxyGroup)
+            this.ProxyGroup = obj;
+        }
+
+        if (params.ProxyGroupRwInfo) {
+            let obj = new ProxyGroupRwInfo();
+            obj.deserialize(params.ProxyGroupRwInfo)
+            this.ProxyGroupRwInfo = obj;
+        }
+
+        if (params.ProxyNodes) {
+            this.ProxyNodes = new Array();
+            for (let z in params.ProxyNodes) {
+                let obj = new ProxyNodeInfo();
+                obj.deserialize(params.ProxyNodes[z]);
+                this.ProxyNodes.push(obj);
+            }
+        }
+
+        if (params.ConnectionPool) {
+            let obj = new ProxyConnectionPoolInfo();
+            obj.deserialize(params.ConnectionPool)
+            this.ConnectionPool = obj;
+        }
+
+        if (params.NetAddrInfos) {
+            this.NetAddrInfos = new Array();
+            for (let z in params.NetAddrInfos) {
+                let obj = new NetAddr();
+                obj.deserialize(params.NetAddrInfos[z]);
+                this.NetAddrInfos.push(obj);
+            }
+        }
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new ObjectTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Parameter template details
  * @class
  */
@@ -8327,6 +9825,46 @@ class DescribeResourcesByDealNameRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceDetail response structure.
+ * @class
+ */
+class DescribeInstanceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance details
+         * @type {CynosdbInstanceDetail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Detail) {
+            let obj = new CynosdbInstanceDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateBackup response structure.
  * @class
  */
@@ -8357,6 +9895,165 @@ class CreateBackupResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateProxyEndPoint request structure.
+ * @class
+ */
+class CreateProxyEndPointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * VPC ID, which is the same as that of the cluster by defaultu200d.
+         * @type {string || null}
+         */
+        this.UniqueVpcId = null;
+
+        /**
+         * VPCe subnet ID, which is the same as that of the cluster by default.
+         * @type {string || null}
+         */
+        this.UniqueSubnetId = null;
+
+        /**
+         * Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+         * @type {string || null}
+         */
+        this.ConnectionPoolType = null;
+
+        /**
+         * Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
+         * @type {string || null}
+         */
+        this.OpenConnectionPool = null;
+
+        /**
+         * Connection pool threshold in seconds
+         * @type {number || null}
+         */
+        this.ConnectionPoolTimeOut = null;
+
+        /**
+         * Array of security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * VIP information
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Weight mode. 
+Valid values: `system` (system-assigned), `custom` (custom).
+         * @type {string || null}
+         */
+        this.WeightMode = null;
+
+        /**
+         * Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+         * @type {string || null}
+         */
+        this.AutoAddRo = null;
+
+        /**
+         * Whether to enable failover
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
+        /**
+         * Consistency type. Valid values: 
+`eventual`, `global`, `session`.
+         * @type {string || null}
+         */
+        this.ConsistencyType = null;
+
+        /**
+         * Read-write attribute. Valid values: 
+`READWRITE`, `READONLY`.
+         * @type {string || null}
+         */
+        this.RwType = null;
+
+        /**
+         * Consistency timeout period
+         * @type {number || null}
+         */
+        this.ConsistencyTimeOut = null;
+
+        /**
+         * Transaction split
+         * @type {boolean || null}
+         */
+        this.TransSplit = null;
+
+        /**
+         * Connection mode. Valid values:
+`nearby`, `balance`.
+         * @type {string || null}
+         */
+        this.AccessMode = null;
+
+        /**
+         * Instance weight
+         * @type {Array.<ProxyInstanceWeight> || null}
+         */
+        this.InstanceWeights = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.UniqueVpcId = 'UniqueVpcId' in params ? params.UniqueVpcId : null;
+        this.UniqueSubnetId = 'UniqueSubnetId' in params ? params.UniqueSubnetId : null;
+        this.ConnectionPoolType = 'ConnectionPoolType' in params ? params.ConnectionPoolType : null;
+        this.OpenConnectionPool = 'OpenConnectionPool' in params ? params.OpenConnectionPool : null;
+        this.ConnectionPoolTimeOut = 'ConnectionPoolTimeOut' in params ? params.ConnectionPoolTimeOut : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+        this.AutoAddRo = 'AutoAddRo' in params ? params.AutoAddRo : null;
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
+        this.RwType = 'RwType' in params ? params.RwType : null;
+        this.ConsistencyTimeOut = 'ConsistencyTimeOut' in params ? params.ConsistencyTimeOut : null;
+        this.TransSplit = 'TransSplit' in params ? params.TransSplit : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
+
+        if (params.InstanceWeights) {
+            this.InstanceWeights = new Array();
+            for (let z in params.InstanceWeights) {
+                let obj = new ProxyInstanceWeight();
+                obj.deserialize(params.InstanceWeights[z]);
+                this.InstanceWeights.push(obj);
+            }
+        }
 
     }
 }
@@ -9085,6 +10782,48 @@ class CreateAuditRuleTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeProxy response structure.
+ * @class
+ */
+class UpgradeProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyClusterName response structure.
  * @class
  */
@@ -9107,6 +10846,48 @@ class ModifyClusterNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyProxyRwSplit response structure.
+ * @class
+ */
+class ModifyProxyRwSplitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async FlowId
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9210,6 +10991,18 @@ class ExportInstanceSlowQueriesRequest extends  AbstractModel {
          */
         this.FileType = null;
 
+        /**
+         * Sorting field. Valid values: u200d`QueryTime`, `LockTime`, `RowsExamined`, and `RowsSent`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `asc`, `desc`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
     }
 
     /**
@@ -9228,6 +11021,8 @@ class ExportInstanceSlowQueriesRequest extends  AbstractModel {
         this.Host = 'Host' in params ? params.Host : null;
         this.Database = 'Database' in params ? params.Database : null;
         this.FileType = 'FileType' in params ? params.FileType : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -9282,30 +11077,30 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
 }
 
 /**
- * Parameter to be modified
+ * DescribeProxyNodes response structure.
  * @class
  */
-class ParamItem extends  AbstractModel {
+class DescribeProxyNodesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
-         * @type {string || null}
+         * Number of the database proxy nodes
+         * @type {number || null}
          */
-        this.ParamName = null;
+        this.TotalCount = null;
 
         /**
-         * New value
-         * @type {string || null}
+         * List of the database proxy nodes
+         * @type {Array.<ProxyNodeInfo> || null}
          */
-        this.CurrentValue = null;
+        this.ProxyNodeInfos = null;
 
         /**
-         * Original value
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OldValue = null;
+        this.RequestId = null;
 
     }
 
@@ -9316,9 +11111,17 @@ class ParamItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ProxyNodeInfos) {
+            this.ProxyNodeInfos = new Array();
+            for (let z in params.ProxyNodeInfos) {
+                let obj = new ProxyNodeInfo();
+                obj.deserialize(params.ProxyNodeInfos[z]);
+                this.ProxyNodeInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10082,13 +11885,13 @@ class ModifyParamTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * Template Name
+         * Template name
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
-         * The template description
+         * Template description
          * @type {string || null}
          */
         this.TemplateDescription = null;
@@ -10209,6 +12012,97 @@ class OpenAuditServiceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Node in the database proxy group
+ * @class
+ */
+class ProxyNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database proxy node ID
+         * @type {string || null}
+         */
+        this.ProxyNodeId = null;
+
+        /**
+         * Current node connections, which is not returned by the `DescribeProxyNodes` API.
+         * @type {number || null}
+         */
+        this.ProxyNodeConnections = null;
+
+        /**
+         * CPU of the database proxy node
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory of the database proxy node
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * Status of the database proxy node
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Database proxy group ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * User AppID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyNodeId = 'ProxyNodeId' in params ? params.ProxyNodeId : null;
+        this.ProxyNodeConnections = 'ProxyNodeConnections' in params ? params.ProxyNodeConnections : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -10379,13 +12273,13 @@ class CreateParamTemplateRequest extends  AbstractModel {
         this.EngineVersion = null;
 
         /**
-         * The description of a template
+         * Template description
          * @type {string || null}
          */
         this.TemplateDescription = null;
 
         /**
-         * (Optional) ID of the template to be copied
+         * ID of the template to be copied
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10424,6 +12318,27 @@ class CreateParamTemplateRequest extends  AbstractModel {
                 obj.deserialize(params.ParamList[z]);
                 this.ParamList.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * OpenClusterReadOnlyInstanceGroupAccess request structure.
+ * @class
+ */
+class OpenClusterReadOnlyInstanceGroupAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -10945,19 +12860,24 @@ class ExportInstanceSlowQueriesResponse extends  AbstractModel {
 }
 
 /**
- * SearchClusterTables response structure.
+ * CloseProxy response structure.
  * @class
  */
-class SearchClusterTablesResponse extends  AbstractModel {
+class CloseProxyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data table list
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<DatabaseTables> || null}
+         * Async flow ID
+         * @type {number || null}
          */
-        this.Tables = null;
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10974,15 +12894,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Tables) {
-            this.Tables = new Array();
-            for (let z in params.Tables) {
-                let obj = new DatabaseTables();
-                obj.deserialize(params.Tables[z]);
-                this.Tables.push(obj);
-            }
-        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11003,7 +12916,7 @@ class PolicyRule extends  AbstractModel {
         this.Action = null;
 
         /**
-         * Source IP or IP range, such as 192.168.0.0/16
+         * Source IP or source IP range, such as 192.168.0.0/16
          * @type {string || null}
          */
         this.CidrIp = null;
@@ -11066,42 +12979,46 @@ class PolicyRule extends  AbstractModel {
 }
 
 /**
- * DescribeResourcePackageSaleSpec request structure.
+ * DescribeProxyNodes request structure.
  * @class
  */
-class DescribeResourcePackageSaleSpecRequest extends  AbstractModel {
+class DescribeProxyNodesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance type
-         * @type {string || null}
+         * Number of returned results. Default value: `20`. Maximum value: `100`,
+         * @type {number || null}
          */
-        this.InstanceType = null;
+        this.Limit = null;
 
         /**
-         * Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-         * @type {string || null}
-         */
-        this.PackageRegion = null;
-
-        /**
-         * Resource pack type. Valid values: `CCU` (compute resource pack, `DISK` (storage resource pack).
-         * @type {string || null}
-         */
-        this.PackageType = null;
-
-        /**
-         * Offset
+         * Record offset. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit
-         * @type {number || null}
+         * Sorting field. Valid values:
+<li> CREATETIME: Creation time</li>
+<li> PERIODENDTIME: Expiration time</li>
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values:
+<li> `ASC`: Ascending.</li>
+<li> `DESC`: Descending</li>
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -11112,11 +13029,19 @@ class DescribeResourcePackageSaleSpecRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.PackageRegion = 'PackageRegion' in params ? params.PackageRegion : null;
-        this.PackageType = 'PackageType' in params ? params.PackageType : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -12347,30 +14272,32 @@ pause
 }
 
 /**
- * Filter of the audit rule
+ * DescribeSupportProxyVersion response structure.
  * @class
  */
-class RuleFilters extends  AbstractModel {
+class DescribeSupportProxyVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter parameter name of the audit rule. Valid values: `host` (client IP), `user` (database account), `dbName` (database name), `sqlType` (SQL type), `sql` (SQL statement).
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Filter match type of the audit rule. Valid values: `INC` (including), `EXC` (excluding), `EQS` (equal to), `NEQ` (not equal to).
-         * @type {string || null}
-         */
-        this.Compare = null;
-
-        /**
-         * Filter match value of the audit rule
+         * Collection of supported database proxy versions
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
-        this.Value = null;
+        this.SupportProxyVersions = null;
+
+        /**
+         * The current proxy version
+Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CurrentProxyVersion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -12381,9 +14308,9 @@ class RuleFilters extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Compare = 'Compare' in params ? params.Compare : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.SupportProxyVersions = 'SupportProxyVersions' in params ? params.SupportProxyVersions : null;
+        this.CurrentProxyVersion = 'CurrentProxyVersion' in params ? params.CurrentProxyVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13403,6 +15330,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ReloadBalanceProxyNode response structure.
+ * @class
+ */
+class ReloadBalanceProxyNodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccounts response structure.
  * @class
  */
@@ -13840,6 +15809,55 @@ class ErrorLogItemExport extends  AbstractModel {
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.Level = 'Level' in params ? params.Level : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * CreateProxy response structure.
+ * @class
+ */
+class CreateProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Database proxy u200dgroup ID
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14362,6 +16380,41 @@ class ModifyBackupConfigResponse extends  AbstractModel {
 }
 
 /**
+ * SetRenewFlag response structure.
+ * @class
+ */
+class SetRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of successfully manipulated instances
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Inventory information in an AZ
  * @class
  */
@@ -14475,6 +16528,41 @@ class InquirePriceRenewResponse extends  AbstractModel {
 }
 
 /**
+ * Information of tags associated with cluster, including `TagKey` and `TagValue`
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * ModifyAuditRuleTemplates response structure.
  * @class
  */
@@ -14503,12 +16591,15 @@ class ModifyAuditRuleTemplatesResponse extends  AbstractModel {
 }
 
 module.exports = {
+    ProxySpec: ProxySpec,
     ModifyClusterNameRequest: ModifyClusterNameRequest,
+    ModifyProxyRwSplitRequest: ModifyProxyRwSplitRequest,
     DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
     DescribeResourcePackageListResponse: DescribeResourcePackageListResponse,
     InquirePriceRenewRequest: InquirePriceRenewRequest,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     InstanceAuditRule: InstanceAuditRule,
+    ProxyInstanceWeight: ProxyInstanceWeight,
     CreateResourcePackageRequest: CreateResourcePackageRequest,
     DescribeClusterDetailDatabasesRequest: DescribeClusterDetailDatabasesRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
@@ -14517,9 +16608,11 @@ module.exports = {
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
     BillingResourceInfo: BillingResourceInfo,
+    DescribeProxiesRequest: DescribeProxiesRequest,
     ModifyClusterPasswordComplexityResponse: ModifyClusterPasswordComplexityResponse,
     ModifyBackupNameResponse: ModifyBackupNameResponse,
     SwitchClusterZoneResponse: SwitchClusterZoneResponse,
+    ProxyConnectionPoolInfo: ProxyConnectionPoolInfo,
     DescribeResourcePackageDetailResponse: DescribeResourcePackageDetailResponse,
     DescribeClusterPasswordComplexityRequest: DescribeClusterPasswordComplexityRequest,
     QueryFilter: QueryFilter,
@@ -14536,6 +16629,7 @@ module.exports = {
     DescribeZonesRequest: DescribeZonesRequest,
     ClusterInstanceDetail: ClusterInstanceDetail,
     AddClusterSlaveZoneResponse: AddClusterSlaveZoneResponse,
+    DescribeProxySpecsResponse: DescribeProxySpecsResponse,
     OldAddrInfo: OldAddrInfo,
     SlowQueriesItem: SlowQueriesItem,
     DescribeClusterParamsResponse: DescribeClusterParamsResponse,
@@ -14545,23 +16639,27 @@ module.exports = {
     ModifyInstanceNameResponse: ModifyInstanceNameResponse,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     CopyClusterPasswordComplexityResponse: CopyClusterPasswordComplexityResponse,
-    Tag: Tag,
+    UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
+    SwitchClusterVpcRequest: SwitchClusterVpcRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
-    SearchClusterTablesRequest: SearchClusterTablesRequest,
+    DescribeProxiesResponse: DescribeProxiesResponse,
     ModifyResourcePackageClustersRequest: ModifyResourcePackageClustersRequest,
     DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DbInfo: DbInfo,
     DescribeFlowResponse: DescribeFlowResponse,
-    SetRenewFlagResponse: SetRenewFlagResponse,
+    ParamDetail: ParamDetail,
+    DescribeResourcePackageSaleSpecRequest: DescribeResourcePackageSaleSpecRequest,
     ExportInstanceErrorLogsRequest: ExportInstanceErrorLogsRequest,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
+    RuleFilters: RuleFilters,
     OfflineClusterRequest: OfflineClusterRequest,
     DescribeClusterDetailDatabasesResponse: DescribeClusterDetailDatabasesResponse,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     ActivateInstanceRequest: ActivateInstanceRequest,
     DatabaseTables: DatabaseTables,
+    ProxyGroup: ProxyGroup,
     AddClusterSlaveZoneRequest: AddClusterSlaveZoneRequest,
     RemoveClusterSlaveZoneResponse: RemoveClusterSlaveZoneResponse,
     CynosdbErrorLogItem: CynosdbErrorLogItem,
@@ -14570,9 +16668,13 @@ module.exports = {
     ModifyVipVportRequest: ModifyVipVportRequest,
     DatabasePrivileges: DatabasePrivileges,
     DescribeClustersRequest: DescribeClustersRequest,
+    ParamItem: ParamItem,
+    DescribeSupportProxyVersionRequest: DescribeSupportProxyVersionRequest,
+    DescribeProxySpecsRequest: DescribeProxySpecsRequest,
     CloseClusterPasswordComplexityRequest: CloseClusterPasswordComplexityRequest,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     OpenReadOnlyInstanceExclusiveAccessResponse: OpenReadOnlyInstanceExclusiveAccessResponse,
+    ProxyGroupRwInfo: ProxyGroupRwInfo,
     DescribeClusterInstanceGrpsRequest: DescribeClusterInstanceGrpsRequest,
     DescribeResourcesByDealNameResponse: DescribeResourcesByDealNameResponse,
     InstanceNetInfo: InstanceNetInfo,
@@ -14582,35 +16684,42 @@ module.exports = {
     Package: Package,
     SwitchClusterZoneRequest: SwitchClusterZoneRequest,
     InstanceParamItem: InstanceParamItem,
+    ReloadBalanceProxyNodeRequest: ReloadBalanceProxyNodeRequest,
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
+    ProxyZone: ProxyZone,
     Ability: Ability,
     InstanceInitInfo: InstanceInitInfo,
     PackageDetail: PackageDetail,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
+    SearchClusterTablesResponse: SearchClusterTablesResponse,
     SwitchClusterVpcResponse: SwitchClusterVpcResponse,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
+    SearchClusterTablesRequest: SearchClusterTablesRequest,
     DeleteBackupResponse: DeleteBackupResponse,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ModifyResourcePackageNameRequest: ModifyResourcePackageNameRequest,
     OpenWanResponse: OpenWanResponse,
     PauseServerlessResponse: PauseServerlessResponse,
-    ParamDetail: ParamDetail,
+    OpenClusterReadOnlyInstanceGroupAccessResponse: OpenClusterReadOnlyInstanceGroupAccessResponse,
     DeleteAccountsResponse: DeleteAccountsResponse,
+    UpgradeProxyVersionResponse: UpgradeProxyVersionResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     NewAccount: NewAccount,
     BackupFileInfo: BackupFileInfo,
     TablePrivileges: TablePrivileges,
+    UpgradeProxyRequest: UpgradeProxyRequest,
     DescribeBinlogDownloadUrlResponse: DescribeBinlogDownloadUrlResponse,
     BindInstanceInfo: BindInstanceInfo,
     DescribeAuditRuleWithInstanceIdsResponse: DescribeAuditRuleWithInstanceIdsResponse,
     ModifyResourcePackageNameResponse: ModifyResourcePackageNameResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
-    SearchClusterDatabasesRequest: SearchClusterDatabasesRequest,
-    SwitchClusterVpcRequest: SwitchClusterVpcRequest,
+    CloseProxyRequest: CloseProxyRequest,
+    ModifyProxyDescResponse: ModifyProxyDescResponse,
     CreateResourcePackageResponse: CreateResourcePackageResponse,
     CynosdbInstance: CynosdbInstance,
+    SearchClusterDatabasesRequest: SearchClusterDatabasesRequest,
     DescribeClusterPasswordComplexityResponse: DescribeClusterPasswordComplexityResponse,
     DescribeAuditRuleWithInstanceIdsRequest: DescribeAuditRuleWithInstanceIdsRequest,
     ExportInstanceErrorLogsResponse: ExportInstanceErrorLogsResponse,
@@ -14618,6 +16727,7 @@ module.exports = {
     ParamItemDetail: ParamItemDetail,
     RemoveClusterSlaveZoneRequest: RemoveClusterSlaveZoneRequest,
     BinlogItem: BinlogItem,
+    ModifyProxyDescRequest: ModifyProxyDescRequest,
     ModifyParamItem: ModifyParamItem,
     ModifyAuditServiceRequest: ModifyAuditServiceRequest,
     CreateClustersRequest: CreateClustersRequest,
@@ -14641,14 +16751,16 @@ module.exports = {
     ModifyClusterParamResponse: ModifyClusterParamResponse,
     SecurityGroup: SecurityGroup,
     BindClusterResourcePackagesResponse: BindClusterResourcePackagesResponse,
+    QueryParamFilter: QueryParamFilter,
     DescribeBackupDownloadUrlRequest: DescribeBackupDownloadUrlRequest,
     SearchClusterDatabasesResponse: SearchClusterDatabasesResponse,
     OfflineInstanceRequest: OfflineInstanceRequest,
     ModifyClusterPasswordComplexityRequest: ModifyClusterPasswordComplexityRequest,
     OpenWanRequest: OpenWanRequest,
     UnbindClusterResourcePackagesRequest: UnbindClusterResourcePackagesRequest,
+    CreateProxyRequest: CreateProxyRequest,
     OpenClusterPasswordComplexityResponse: OpenClusterPasswordComplexityResponse,
-    DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
+    CreateProxyEndPointResponse: CreateProxyEndPointResponse,
     DescribeResourcePackageSaleSpecResponse: DescribeResourcePackageSaleSpecResponse,
     OfflineInstanceResponse: OfflineInstanceResponse,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
@@ -14656,9 +16768,12 @@ module.exports = {
     ResourcePackage: ResourcePackage,
     RestartInstanceResponse: RestartInstanceResponse,
     CopyClusterPasswordComplexityRequest: CopyClusterPasswordComplexityRequest,
+    ProxyGroupInfo: ProxyGroupInfo,
     TemplateParamInfo: TemplateParamInfo,
     DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
+    DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
     CreateBackupResponse: CreateBackupResponse,
+    CreateProxyEndPointRequest: CreateProxyEndPointRequest,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,
     AuditRuleTemplateInfo: AuditRuleTemplateInfo,
@@ -14673,11 +16788,13 @@ module.exports = {
     InquirePriceCreateRequest: InquirePriceCreateRequest,
     OpenClusterPasswordComplexityRequest: OpenClusterPasswordComplexityRequest,
     CreateAuditRuleTemplateRequest: CreateAuditRuleTemplateRequest,
+    UpgradeProxyResponse: UpgradeProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
+    ModifyProxyRwSplitResponse: ModifyProxyRwSplitResponse,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
     ExportInstanceSlowQueriesRequest: ExportInstanceSlowQueriesRequest,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
-    ParamItem: ParamItem,
+    DescribeProxyNodesResponse: DescribeProxyNodesResponse,
     ModifyClusterParamRequest: ModifyClusterParamRequest,
     CynosdbCluster: CynosdbCluster,
     CreateAuditRuleTemplateResponse: CreateAuditRuleTemplateResponse,
@@ -14688,11 +16805,13 @@ module.exports = {
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     ObjectTask: ObjectTask,
     OpenAuditServiceResponse: OpenAuditServiceResponse,
+    ProxyNodeInfo: ProxyNodeInfo,
     OfflineClusterResponse: OfflineClusterResponse,
     SwitchProxyVpcResponse: SwitchProxyVpcResponse,
     DescribeParamTemplateDetailRequest: DescribeParamTemplateDetailRequest,
     ModifyAccountHostRequest: ModifyAccountHostRequest,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
+    OpenClusterReadOnlyInstanceGroupAccessRequest: OpenClusterReadOnlyInstanceGroupAccessRequest,
     DescribeAuditRuleTemplatesRequest: DescribeAuditRuleTemplatesRequest,
     InstanceSpec: InstanceSpec,
     DescribeFlowRequest: DescribeFlowRequest,
@@ -14703,9 +16822,9 @@ module.exports = {
     CreateBackupRequest: CreateBackupRequest,
     CreateClusterDatabaseResponse: CreateClusterDatabaseResponse,
     ExportInstanceSlowQueriesResponse: ExportInstanceSlowQueriesResponse,
-    SearchClusterTablesResponse: SearchClusterTablesResponse,
+    CloseProxyResponse: CloseProxyResponse,
     PolicyRule: PolicyRule,
-    DescribeResourcePackageSaleSpecRequest: DescribeResourcePackageSaleSpecRequest,
+    DescribeProxyNodesRequest: DescribeProxyNodesRequest,
     UnbindClusterResourcePackagesResponse: UnbindClusterResourcePackagesResponse,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
     SwitchProxyVpcRequest: SwitchProxyVpcRequest,
@@ -14725,7 +16844,7 @@ module.exports = {
     ModifyClusterSlaveZoneRequest: ModifyClusterSlaveZoneRequest,
     DescribeInstanceErrorLogsResponse: DescribeInstanceErrorLogsResponse,
     CynosdbInstanceDetail: CynosdbInstanceDetail,
-    RuleFilters: RuleFilters,
+    DescribeSupportProxyVersionResponse: DescribeSupportProxyVersionResponse,
     RefundResourcePackageResponse: RefundResourcePackageResponse,
     DeleteClusterDatabaseResponse: DeleteClusterDatabaseResponse,
     CynosdbClusterDetail: CynosdbClusterDetail,
@@ -14740,6 +16859,7 @@ module.exports = {
     DescribeBinlogSaveDaysResponse: DescribeBinlogSaveDaysResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     ParamTemplateListInfo: ParamTemplateListInfo,
+    ReloadBalanceProxyNodeResponse: ReloadBalanceProxyNodeResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
     CreateClusterDatabaseRequest: CreateClusterDatabaseRequest,
@@ -14750,6 +16870,7 @@ module.exports = {
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     ErrorLogItemExport: ErrorLogItemExport,
+    CreateProxyResponse: CreateProxyResponse,
     DescribeParamTemplateDetailResponse: DescribeParamTemplateDetailResponse,
     ModifyBinlogSaveDaysResponse: ModifyBinlogSaveDaysResponse,
     ModifyAuditServiceResponse: ModifyAuditServiceResponse,
@@ -14762,8 +16883,10 @@ module.exports = {
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     InputAccount: InputAccount,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
+    SetRenewFlagResponse: SetRenewFlagResponse,
     ZoneStockInfo: ZoneStockInfo,
     InquirePriceRenewResponse: InquirePriceRenewResponse,
+    Tag: Tag,
     ModifyAuditRuleTemplatesResponse: ModifyAuditRuleTemplatesResponse,
 
 }

@@ -2737,7 +2737,7 @@ class HlsRemuxSettingsInfo extends  AbstractModel {
         this.PdtDuration = null;
 
         /**
-         * Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`
+         * Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`. Default value is: SEPARATE.
          * @type {string || null}
          */
         this.Scheme = null;
@@ -2755,6 +2755,24 @@ Currently, fMP4 segments do not support DRM or time shifting.
          */
         this.H265PackageType = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.LowLatency = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.PartialSegmentDuration = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.PartialSegmentPlaySite = null;
+
     }
 
     /**
@@ -2771,6 +2789,9 @@ Currently, fMP4 segments do not support DRM or time shifting.
         this.Scheme = 'Scheme' in params ? params.Scheme : null;
         this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
         this.H265PackageType = 'H265PackageType' in params ? params.H265PackageType : null;
+        this.LowLatency = 'LowLatency' in params ? params.LowLatency : null;
+        this.PartialSegmentDuration = 'PartialSegmentDuration' in params ? params.PartialSegmentDuration : null;
+        this.PartialSegmentPlaySite = 'PartialSegmentPlaySite' in params ? params.PartialSegmentPlaySite : null;
 
     }
 }

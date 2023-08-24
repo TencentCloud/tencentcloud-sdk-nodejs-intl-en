@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * GenerateVpnConnectionDefaultHealthCheckIp request structure.
+ * @class
+ */
+class GenerateVpnConnectionDefaultHealthCheckIpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPN gateway ID, such as `vpngw-1w9tue3d`
+         * @type {string || null}
+         */
+        this.VpnGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+
+    }
+}
+
+/**
  * CreateNetworkAcl response structure.
  * @class
  */
@@ -778,21 +806,22 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
 
         /**
          * Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-<li>`vpc-id` - String - VPC ID, such as `vpc-f49l6u0z`.</li>
-<li>`subnet-id` - String - Subnet ID, such as `subnet-f49l6u0z`.</li>
-<li>`network-interface-id` - String - ENI ID, such as `eni-5k56k7k7`.</li>
-<li>`attachment.instance-id` - String - ID of the bound CVM, such as `ins-3nqpdn3i`.</li>
-<li>`groups.security-group-id` - String - IDs of associated security groups, such as `sg-f9ekbxeq`.</li>
-<li>`network-interface-name` - String - ENI instance name.</li>
-<li>`network-interface-description` - String - ENI instance description.</li>
-<li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
-<li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
-<li>`tag-key` - String - Optional - Filter by the tag key. See Example 2 for the detailed usage.</li>
-<li>`tag:tag-key` - String - Optional - Filter by the tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
-<li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. Values: `true`, `false`. If this parameter is not specified, filter the both.</li>
-<li>`eni-type` - String - Optional - Filter by the ENI type. Values: `0` (Secondary ENI), `1` (Primary ENI), `2` (Relayed ENI)</li>
-<li>`eni-qos` - String - Optional - Filter by the ENI service level. Values: `AG` (Bronze), `AU` (Silver)</li>
-<li>`address-ipv6` - String - Optional - Filter by the private IPv6 address. Multiple IPv6 addresses can be used for query. If this field is used together with `address-ip`, their intersection will be used.</li>
+<li>`vpc-id` - String - VPC ID, such as `vpc-f49l6u0z`. </li>
+<li>`subnet-id` - String - Subnet ID, such as `subnet-f49l6u0z`. </li>
+<li>`network-interface-id` - String - ENI ID, such as `eni-5k56k7k7`. </li>
+<li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`. </li>
+<li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`. </li>
+<li>`network-interface-name` - String - ENI instance name. </li>
+<li>`network-interface-description` - String - ENI instance description. </li>
+<li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP. </li>
+<li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found. </li>
+<li>`tag-key` - String - u200dOptional - u200dTag key. See Example 2 to learn more details. </li>
+<li>`tag:tag-key` - String - Optional - Tag key-value pair. The `tag-key` should be replaced with a specific tag key. See Example 2 to learn more details. </li>
+<li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. Values: `true`, `false`. If this parameter is not specified, filter the both. </li>
+<li>`eni-type` - String - Optional - Filter by ENI type. Values: `0` (Secondary ENI), `1` (Primary ENI), `2` (Relayed ENI) </li>
+<li>`eni-qos` - String - Optional - Filter by ENI service level. Values: `AG` (Bronze), `AU` (Silver) </li>
+<li>`address-ipv6` - String - Optional - Filter by private IPv6 address. Multiple IPv6 addresses can be used for query. If this field is used together with `address-ip`, their intersection will be used. </li>
+<li>`public-address-ip` - String - Public IPv4 address. It supports exact matching. </li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -892,14 +921,14 @@ class SourceIpTranslationNatRule extends  AbstractModel {
         super();
 
         /**
-         * Resource ID
+         * Resource ID. It can be left empty if `ResourceType` is `USERDEFINED`.
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * Resource type. Valid values: SUBNET, NETWORKINTERFACE
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Resource type. Valid values: `SUBNET`, `NETWORKINTERFACE`, `USERDEFINED`
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -1541,7 +1570,7 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
         this.SecondaryPrivateIpAddressCount = null;
 
         /**
-         * IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+         * IP u200dservice level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT` u200d(Gold), `AU` u200d(Silver), `AG `(Bronze) and DEFAULT (Default).
          * @type {string || null}
          */
         this.QosLevel = null;
@@ -2675,7 +2704,7 @@ class CloneSecurityGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the security group to be cloned, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+         * Security group instance ID, such as `esg-33ocnj9n`, which can be obtained through the <a href="https://intl.cloud.tencent.com/document/product/215/15808?from_cn_redirect=1">DescribeSecurityGroups</a> API.
          * @type {string || null}
          */
         this.SecurityGroupId = null;
@@ -2693,7 +2722,7 @@ class CloneSecurityGroupRequest extends  AbstractModel {
         this.GroupDescription = null;
 
         /**
-         * Project ID of the security group clone. The default is 0. You can query it on the project management page of the Tencent Cloud console.
+         * Project ID. Default value: 0. You can query it on the <a href="https://console.cloud.tencent.com/project">project management page</a> of the Tencent Cloud console.
          * @type {string || null}
          */
         this.ProjectId = null;
@@ -3900,10 +3929,10 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
 
         /**
          * Filter conditions:
-<li>ccn-id - String - (Filter condition) The CCN instance ID.</li>
-<li>instance-type - String - (Filter condition) The associated instance type.</li>
-<li>instance-region - String - (Filter condition) The associated instance region.</li>
-<li>instance-type - String - (Filter condition) The instance ID of the associated instance.</li>
+<li>`ccn-id` - String - The CCN instance ID. </li>
+<li>`instance-type` - String - The associated instance type. </li>
+<li>`instance-region` - String - The associated instance region. </li>
+<li>`instance-id` - String - The instance ID of the associated instance. </li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4843,7 +4872,7 @@ class DescribeSnapshotFilesRequest extends  AbstractModel {
         this.BusinessType = null;
 
         /**
-         * ID of the instance.
+         * Service instance ID. It's corresponding to the `BusinessType`. 
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4867,7 +4896,7 @@ class DescribeSnapshotFilesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 200.
+         * Number of returned results. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -5863,7 +5892,7 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through `DescribeSecurityGroups`. Each request can have a maximum of 100 instances. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
+         * Security group ID, such as `sg-33ocnj9n`. Each request can contain up to 100 instances at a time. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -5891,6 +5920,18 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Sorting field. Values: `CreatedTime`, `UpdateTime` Note: This field does not have default value.
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * Sorting method Order methods. Ascending: `ASC`, Descending: `DESC`. Default: `ASC`
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -5912,6 +5953,8 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -7204,12 +7247,12 @@ class ModifyNetDetectRequest extends  AbstractModel {
         this.NextHopType = null;
 
         /**
-         * ID of the next-hop gateway. 
-`NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+         * ID of the next-hop gateway.
+If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
 `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
 `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
 `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
-`NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
 `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
 `NextHopType` = `NONEXTHOP`: No next hop.
          * @type {string || null}
@@ -9630,6 +9673,34 @@ class DescribeSnapshotPoliciesRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteTrafficPackages request structure.
+ * @class
+ */
+class DeleteTrafficPackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID array of traffic packages to delete
+         * @type {Array.<string> || null}
+         */
+        this.TrafficPackageIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TrafficPackageIds = 'TrafficPackageIds' in params ? params.TrafficPackageIds : null;
+
+    }
+}
+
+/**
  * NotifyRoutes request structure.
  * @class
  */
@@ -10078,6 +10149,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RestrictState = null;
 
+        /**
+         * NAT gateway major version. `1`: Classic, `2`: Standard
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NatProductVersion = null;
+
     }
 
     /**
@@ -10138,6 +10216,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsExclusive = 'IsExclusive' in params ? params.IsExclusive : null;
         this.ExclusiveGatewayBandwidth = 'ExclusiveGatewayBandwidth' in params ? params.ExclusiveGatewayBandwidth : null;
         this.RestrictState = 'RestrictState' in params ? params.RestrictState : null;
+        this.NatProductVersion = 'NatProductVersion' in params ? params.NatProductVersion : null;
 
     }
 }
@@ -11454,12 +11533,12 @@ VPN: VPN gateway;
         this.NextHopType = null;
 
         /**
-         * ID of the next-hop gateway. 
-`NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+         * ID of the next-hop gateway.
+If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
 `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
 `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
 `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
-`NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
 `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
 `NextHopType` = `NONEXTHOP`: No next hop.
          * @type {string || null}
@@ -12279,12 +12358,12 @@ class CreateNetDetectRequest extends  AbstractModel {
         this.NextHopType = null;
 
         /**
-         * ID of the next-hop gateway. 
-`NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+         * ID of the next-hop gateway.
+If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
 `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
 `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
 `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
-`NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
 `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
 `NextHopType` = `NONEXTHOP`: No next hop.
          * @type {string || null}
@@ -12779,10 +12858,11 @@ class DescribeVpcEndPointServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter condition
-<li> service-id - String - (Filter condition) Unique endpoint service ID.</li>
-<li>service-name - String - (Filter condition) Endpoint service instance name.</li>
-<li>service-instance-id - String - (Filter condition) Unique real server ID in the format of `lb-xxx`.</li>
+         * Filters. `EndPointServiceIds` and `Filters` cannot be both passed in. 
+<li>`service-id` - String - Unique endpoint service ID. </li>
+<li>`service-name` - String - Endpoint service instance name. </li>
+<li>`service-instance-id` - String - Unique backend service ID in the format of `lb-xxx`. </li>
+<li>`service-type` - String - Backend PaaS service type. It can be `CLB`, `CDB` or `CRS`. It defaults to `CLB` if not specified. </li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -12800,10 +12880,16 @@ class DescribeVpcEndPointServiceRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Endpoint service ID
+         * Endpoint service ID `EndPointServiceIds` and `Filters` cannot be both passed in. 
          * @type {Array.<string> || null}
          */
         this.EndPointServiceIds = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsListAuthorizedEndPointService = null;
 
     }
 
@@ -12826,6 +12912,7 @@ class DescribeVpcEndPointServiceRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.EndPointServiceIds = 'EndPointServiceIds' in params ? params.EndPointServiceIds : null;
+        this.IsListAuthorizedEndPointService = 'IsListAuthorizedEndPointService' in params ? params.IsListAuthorizedEndPointService : null;
 
     }
 }
@@ -15478,7 +15565,7 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
         this.SecondaryPrivateIpAddressCount = null;
 
         /**
-         * IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+         * IP u200dservice level. It is used together with `SecondaryPrivateIpAddressCount`. Values: `PT` u200d(Gold), `AU` u200d(Silver), `AG` (Bronze) and `DEFAULT` (Default).
          * @type {string || null}
          */
         this.QosLevel = null;
@@ -16575,6 +16662,48 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
+ * GenerateVpnConnectionDefaultHealthCheckIp response structure.
+ * @class
+ */
+class GenerateVpnConnectionDefaultHealthCheckIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Local IP used for VPN tunnel health check
+         * @type {string || null}
+         */
+        this.HealthCheckLocalIp = null;
+
+        /**
+         * Remote IP used for VPN tunnel health check
+         * @type {string || null}
+         */
+        this.HealthCheckRemoteIp = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
+        this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateAndAttachNetworkInterface request structure.
  * @class
  */
@@ -16619,7 +16748,7 @@ class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
         this.SecondaryPrivateIpAddressCount = null;
 
         /**
-         * IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+         * IP u200dservice level. It is used together with `SecondaryPrivateIpAddressCount`. Values: `PT` u200d(Gold), `AU` u200d(Silver), `AG` (Bronze) and `DEFAULT` (Default).
          * @type {string || null}
          */
         this.QosLevel = null;
@@ -16780,11 +16909,11 @@ class AllocateAddressesRequest extends  AbstractModel {
 
         /**
          * The EIP outbound bandwidth cap, in Mbps.
-<ul style="margin:0"><li>For bill-by-IP account beta users, valid values:<ul><li>BANDWIDTH_PACKAGE: 1 Mbps to 1000 Mbps</li>
-<li>BANDWIDTH_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li>
-<li>BANDWIDTH_PREPAID_BY_MONTH: 1 Mbps to 200 Mbps</li>
-<li>TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li></ul>Default value: 1 Mbps</li>
-<li>If you are not a bill-by-IP account beta user, the EIP outbound bandwidth cap is subject to that of the instance bound to the EIP. Therefore, you do not need to pass in this parameter.</li></ul>
+<ul style="margin:0"><li>For bill-by-IP account beta users, the bandwidth cap range is determined by the EIP billing mode. <ul><li>`BANDWIDTH_PACKAGE`: 1 Mbps to 2000 Mbps</li>
+<li>`BANDWIDTH_POSTPAID_BY_HOUR`: 1 Mbps to 100 Mbps</li>
+<li>`BANDWIDTH_PREPAID_BY_MONTH`: 1 Mbps to 200 Mbps</li>
+<li>`TRAFFIC_POSTPAID_BY_HOUR`: 1 Mbps to 100 Mbps</li></ul>Default value: 1 Mbps </li>
+<li>If you are not a bill-by-IP account beta user, the EIP outbound bandwidth cap is subject to the bandwidth cap of the instance bound to the EIP. Therefore, you do not need to pass in this parameter. </li></ul>
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
@@ -16796,9 +16925,11 @@ class AllocateAddressesRequest extends  AbstractModel {
         this.AddressChargePrepaid = null;
 
         /**
-         * The EIP type. Default: `EIP`.
-<ul style="margin:0"><li>For AIA beta users, the value should be:<ul><li>`AnycastEIP`: an AIA IP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Anycast EIPs are only supported in some of the regions.</li></ul>
-<ul style="margin:0"><li>For high-quality IP beta users, the value should be: <ul><li>`HighQualityEIP`: high-quality IP</li></ul>Note: High-quality IPs are only supported in some of the regions.</li></ul>
+         * EIP type. Default value: EIP.
+<ul style="margin:0"><li>For beta users of AIA, the value can be:</li></ul>`AnycastEIP`: an AIA IP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Anycast EIPs are supported only in partial regions. </li></ul>
+<ul style="margin:0"><li>For beta users of dedicated IP, the value can be: <ul><li>`HighQualityEIP`: Dedicated IP</li></ul>Note that dedicated IPs are only available in partial regions. </li></ul>
+</ul>
+<ul style="margin:0"><li>For beta users of Anti-DDoS IP, the value can be: <ul><li>`AntiDDoSEIP`: Anti-DDoS EIP</li></ul>Note that Anti-DDoS IPs are only available in partial regions. </li></ul>
          * @type {string || null}
          */
         this.AddressType = null;
@@ -16843,6 +16974,18 @@ Whether the Anycast EIP can be bound to CLB instances.
          */
         this.Egress = null;
 
+        /**
+         * Anti-DDoS service package ID. This is required when you want to request an u200dAnti-DDoS IP.
+         * @type {string || null}
+         */
+        this.AntiDDoSPackageId = null;
+
+        /**
+         * A string used to ensure the idempotency of the request. Generate a value based on your client. This can ensure that the value is unique for different requests. It only supports ASCII characters and can contain up to 64 characters. 
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -16877,6 +17020,8 @@ Whether the Anycast EIP can be bound to CLB instances.
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.AddressName = 'AddressName' in params ? params.AddressName : null;
         this.Egress = 'Egress' in params ? params.Egress : null;
+        this.AntiDDoSPackageId = 'AntiDDoSPackageId' in params ? params.AntiDDoSPackageId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }
@@ -17125,7 +17270,7 @@ class AssociateDirectConnectGatewayNatGatewayRequest extends  AbstractModel {
         super();
 
         /**
-         * The direct connect gateway ID.
+         * VPC instance ID. VPC instance ID, which can be obtained from the `VpcId` field in the response of the `DescribeVpcs` API.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -17137,7 +17282,7 @@ class AssociateDirectConnectGatewayNatGatewayRequest extends  AbstractModel {
         this.NatGatewayId = null;
 
         /**
-         * The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+         * The direct connect gateway ID.
          * @type {string || null}
          */
         this.DirectConnectGatewayId = null;
@@ -18825,7 +18970,7 @@ AVAILABLE: Available
         this.State = null;
 
         /**
-         * IP service level. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+         * IP u200dservice level. Values: PT` u200d(Gold), `AU` u200d(Silver), `AG `(Bronze) and DEFAULT` (Default).
          * @type {string || null}
          */
         this.QosLevel = null;
@@ -18935,19 +19080,19 @@ class DescribeUsedIpAddressRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * IPs to query
+         * List of IPs to be queried. The IPs must be within the VPC or subnet. Up to 100 IPs can be queried at a time.
          * @type {Array.<string> || null}
          */
         this.IpAddresses = null;
 
         /**
-         * Offset
+         * The offset. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of requested objects.
+         * The number of returned results. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -21394,7 +21539,7 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.InstanceType = null;
 
         /**
-         * 
+         * ID of the Anti-DDoS service package. It is returned if the EIP is an u200dAnti-DDoS EIP. 
          * @type {string || null}
          */
         this.AntiDDoSPackageId = null;
@@ -21821,6 +21966,34 @@ class AllocateAddressesResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteTrafficPackages response structure.
+ * @class
+ */
+class DeleteTrafficPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The structure of information of the bandwidth package.
  * @class
  */
@@ -21943,6 +22116,12 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
          */
         this.DomainName = null;
 
+        /**
+         * Whether to publish the CDC subnet to CCN. `true`: Publish; `false`: u200dDo not publish
+         * @type {boolean || null}
+         */
+        this.EnableCdcPublish = null;
+
     }
 
     /**
@@ -21957,6 +22136,7 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
         this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.EnableCdcPublish = 'EnableCdcPublish' in params ? params.EnableCdcPublish : null;
 
     }
 }
@@ -28695,7 +28875,7 @@ class CreateSecurityGroupWithPoliciesRequest extends  AbstractModel {
         this.GroupDescription = null;
 
         /**
-         * The project id is 0 by default. You can query this in the project management page of the Qcloud console.
+         * Project ID. Default value: 0. You can query it on the <a href="https://console.cloud.tencent.com/project">project management page</a> of the Tencent Cloud console.
          * @type {string || null}
          */
         this.ProjectId = null;
@@ -29434,6 +29614,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 module.exports = {
+    GenerateVpnConnectionDefaultHealthCheckIpRequest: GenerateVpnConnectionDefaultHealthCheckIpRequest,
     CreateNetworkAclResponse: CreateNetworkAclResponse,
     NetworkAcl: NetworkAcl,
     ModifyAddressTemplateAttributeResponse: ModifyAddressTemplateAttributeResponse,
@@ -29625,6 +29806,7 @@ module.exports = {
     RenewVpnGatewayRequest: RenewVpnGatewayRequest,
     SecurityGroupPolicy: SecurityGroupPolicy,
     DescribeSnapshotPoliciesRequest: DescribeSnapshotPoliciesRequest,
+    DeleteTrafficPackagesRequest: DeleteTrafficPackagesRequest,
     NotifyRoutesRequest: NotifyRoutesRequest,
     DeleteVpcRequest: DeleteVpcRequest,
     ModifyServiceTemplateAttributeResponse: ModifyServiceTemplateAttributeResponse,
@@ -29760,6 +29942,7 @@ module.exports = {
     ModifySnapshotPoliciesResponse: ModifySnapshotPoliciesResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
     DescribeCcnRoutesRequest: DescribeCcnRoutesRequest,
+    GenerateVpnConnectionDefaultHealthCheckIpResponse: GenerateVpnConnectionDefaultHealthCheckIpResponse,
     CreateAndAttachNetworkInterfaceRequest: CreateAndAttachNetworkInterfaceRequest,
     DeleteVpcEndPointResponse: DeleteVpcEndPointResponse,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
@@ -29871,6 +30054,7 @@ module.exports = {
     Resource: Resource,
     CustomerGateway: CustomerGateway,
     AllocateAddressesResponse: AllocateAddressesResponse,
+    DeleteTrafficPackagesResponse: DeleteTrafficPackagesResponse,
     BandwidthPackage: BandwidthPackage,
     ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest: ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest,

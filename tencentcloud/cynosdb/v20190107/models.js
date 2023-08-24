@@ -1738,7 +1738,8 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.MaintainWeekDays = null;
 
         /**
-         * 
+         * Serverless instance u200denablement status
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServerlessStatus = null;
@@ -4990,6 +4991,30 @@ class InstanceInitInfo extends  AbstractModel {
          */
         this.InstanceCount = null;
 
+        /**
+         * Minimum number of serverless instances. Value range: 1-15.
+         * @type {number || null}
+         */
+        this.MinRoCount = null;
+
+        /**
+         * Maximum number of serverless instances. Value range: 1-15.
+         * @type {number || null}
+         */
+        this.MaxRoCount = null;
+
+        /**
+         * Minimum specifications for serverless instance
+         * @type {number || null}
+         */
+        this.MinRoCpu = null;
+
+        /**
+         * Maximum specifications for serverless instance
+         * @type {number || null}
+         */
+        this.MaxRoCpu = null;
+
     }
 
     /**
@@ -5003,6 +5028,10 @@ class InstanceInitInfo extends  AbstractModel {
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.MinRoCount = 'MinRoCount' in params ? params.MinRoCount : null;
+        this.MaxRoCount = 'MaxRoCount' in params ? params.MaxRoCount : null;
+        this.MinRoCpu = 'MinRoCpu' in params ? params.MinRoCpu : null;
+        this.MaxRoCpu = 'MaxRoCpu' in params ? params.MaxRoCpu : null;
 
     }
 }
@@ -6070,7 +6099,8 @@ class BindInstanceInfo extends  AbstractModel {
         super();
 
         /**
-         * The ID of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
+         * ID of the bound cluster
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6087,6 +6117,13 @@ class BindInstanceInfo extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * ID of the instance in the bound cluster
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ExtendIds = null;
+
     }
 
     /**
@@ -6099,6 +6136,7 @@ class BindInstanceInfo extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ExtendIds = 'ExtendIds' in params ? params.ExtendIds : null;
 
     }
 }
@@ -8297,7 +8335,7 @@ class Addr extends  AbstractModel {
         super();
 
         /**
-         * IP
+         * IP address
          * @type {string || null}
          */
         this.IP = null;
@@ -13323,7 +13361,7 @@ class DescribeResourcePackageDetailRequest extends  AbstractModel {
         this.PackageId = null;
 
         /**
-         * Instance ID
+         * Cluster ID
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
@@ -13352,6 +13390,12 @@ class DescribeResourcePackageDetailRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Instance D
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
     }
 
     /**
@@ -13367,6 +13411,7 @@ class DescribeResourcePackageDetailRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -14555,7 +14600,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Vport = null;
 
         /**
-         * vport for read/write separation
+         * VIP u200dand vport of the read-only instance in a cluster
          * @type {Array.<Addr> || null}
          */
         this.RoAddr = null;

@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const GenerateVpnConnectionDefaultHealthCheckIpRequest = models.GenerateVpnConnectionDefaultHealthCheckIpRequest;
 const CreateNetworkAclResponse = models.CreateNetworkAclResponse;
 const NetworkAcl = models.NetworkAcl;
 const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttributeResponse;
@@ -207,6 +208,7 @@ const AdjustPublicAddressResponse = models.AdjustPublicAddressResponse;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DescribeSnapshotPoliciesRequest = models.DescribeSnapshotPoliciesRequest;
+const DeleteTrafficPackagesRequest = models.DeleteTrafficPackagesRequest;
 const NotifyRoutesRequest = models.NotifyRoutesRequest;
 const DeleteVpcRequest = models.DeleteVpcRequest;
 const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
@@ -342,6 +344,7 @@ const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsRe
 const ModifySnapshotPoliciesResponse = models.ModifySnapshotPoliciesResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
+const GenerateVpnConnectionDefaultHealthCheckIpResponse = models.GenerateVpnConnectionDefaultHealthCheckIpResponse;
 const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInterfaceRequest;
 const DeleteVpcEndPointResponse = models.DeleteVpcEndPointResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
@@ -453,6 +456,7 @@ const EnableGatewayFlowMonitorResponse = models.EnableGatewayFlowMonitorResponse
 const Resource = models.Resource;
 const CustomerGateway = models.CustomerGateway;
 const AllocateAddressesResponse = models.AllocateAddressesResponse;
+const DeleteTrafficPackagesResponse = models.DeleteTrafficPackagesResponse;
 const BandwidthPackage = models.BandwidthPackage;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest;
@@ -686,8 +690,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API is used to change the IP address. It supports changing the common public IPs and EIPs billed by monthly subscribed bandwidth of a CVM instance.
-
+     * This API is used to change the public IP of a CVM or the EIP of the associated bandwidth package.
      * @param {AdjustPublicAddressRequest} req
      * @param {function(string, AdjustPublicAddressResponse):void} cb
      * @public
@@ -754,7 +757,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     *  This API (DescribeRouteTables) is used to query route tables.
+     * This API is used to query route tables.
      * @param {DescribeRouteTablesRequest} req
      * @param {function(string, DescribeRouteTablesResponse):void} cb
      * @public
@@ -1327,15 +1330,25 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
-     * This API (ReplaceRouteTableAssociation) is used to modify the route table associated with a subnet.
-* A subnet can only be associated with one route table.
-     * @param {ReplaceRouteTableAssociationRequest} req
-     * @param {function(string, ReplaceRouteTableAssociationResponse):void} cb
+     * This API is used to get a pair of VPN tunnel health check addresses. 
+     * @param {GenerateVpnConnectionDefaultHealthCheckIpRequest} req
+     * @param {function(string, GenerateVpnConnectionDefaultHealthCheckIpResponse):void} cb
      * @public
      */
-    ReplaceRouteTableAssociation(req, cb) {
-        let resp = new ReplaceRouteTableAssociationResponse();
-        this.request("ReplaceRouteTableAssociation", req, resp, cb);
+    GenerateVpnConnectionDefaultHealthCheckIp(req, cb) {
+        let resp = new GenerateVpnConnectionDefaultHealthCheckIpResponse();
+        this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete traffic packages. Note that only non-valid traffic packages can be deleted. 
+     * @param {DeleteTrafficPackagesRequest} req
+     * @param {function(string, DeleteTrafficPackagesResponse):void} cb
+     * @public
+     */
+    DeleteTrafficPackages(req, cb) {
+        let resp = new DeleteTrafficPackagesResponse();
+        this.request("DeleteTrafficPackages", req, resp, cb);
     }
 
     /**
@@ -1683,8 +1696,8 @@ This API is used to query only the information of `IPv6` addresses that are alre
     }
 
     /**
-     * This API (AttachCcnInstances) is used to load a network instance to a CCN instance. Network instances include VPCs and Direct Connect gateways.<br />
-The number of network instances that each CCN can be associated with is limited. For more information, see the product documentation. If you need to associate more instances, please contact online customer service.
+     * This API is used to add a network instance to a CCN instance. Network instances include VPCs and Direct Connect gateways. <br />
+The number of network instances that each CCN can be associated with is limited. For more information, see the product documentation. If you need to associate more instances, please submit a ticket.
      * @param {AttachCcnInstancesRequest} req
      * @param {function(string, AttachCcnInstancesResponse):void} cb
      * @public
@@ -1723,8 +1736,8 @@ The number of network instances that each CCN can be associated with is limited.
     }
 
     /**
-     * This API (DeleteSubnet) is used to delete subnets.
-Before deleting a subnet, you need to remove all resources in the subnet, including CVMs, load balancers, cloud data, NoSQL databases, and ENIs.
+     * This API is used to delete a subnet.
+* Remove all resources in the subnet before deleting it
      * @param {DeleteSubnetRequest} req
      * @param {function(string, DeleteSubnetResponse):void} cb
      * @public
@@ -2142,6 +2155,18 @@ When a NAT gateway is deleted, all routes containing this gateway are deleted au
     }
 
     /**
+     * This API (ReplaceRouteTableAssociation) is used to modify the route table associated with a subnet.
+* A subnet can only be associated with one route table.
+     * @param {ReplaceRouteTableAssociationRequest} req
+     * @param {function(string, ReplaceRouteTableAssociationResponse):void} cb
+     * @public
+     */
+    ReplaceRouteTableAssociation(req, cb) {
+        let resp = new ReplaceRouteTableAssociationResponse();
+        this.request("ReplaceRouteTableAssociation", req, resp, cb);
+    }
+
+    /**
      * This API is used to withdraw a route from CCN. 
      * @param {WithdrawNotifyRoutesRequest} req
      * @param {function(string, WithdrawNotifyRoutesResponse):void} cb
@@ -2189,8 +2214,8 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to query IP usage of a subnet or VPC. 
-If the IP is taken, the associated resource type and ID are returned. Otherwise it returns null.
+     * This API is used to query the IP usage of a subnet or VPC.
+If the IP is occupied, the resource type and ID associated with the are is returned. If the IP is not used, it returns null.
      * @param {DescribeUsedIpAddressRequest} req
      * @param {function(string, DescribeUsedIpAddressResponse):void} cb
      * @public
@@ -3590,19 +3615,20 @@ For parameters of `SecurityGroupPolicySet`,
     }
 
     /**
-     * This API (CreateSecurityGroupWithPolicies) is used to create security groups, and add security group policies.
-* Note the<a href="https://intl.cloud.tencent.com/document/product/213/12453?from_cn_redirect=1">maximum number of security groups</a>per project in each region under each account.
-* Both the inbound and outbound policies for a newly created security group are Deny All by default. You need to call CreateSecurityGroupPolicies to set security group policies according to your needs.
+     * This API is used to create u200da security group, and add security group policies.
+* For the the upper limit of security groups per project in each region under each account, <a href="https://intl.cloud.tencent.com/document/product/213/12453?from_cn_redirect=1">see here</a>
+* u200dFor u200dnewly u200dcreated security groups, u200dthe inbound and outbound policies are set to `Deny All` by default. You need to call <a href="https://intl.cloud.tencent.com/document/product/215/15807?from_cn_redirect=1">CreateSecurityGroupPolicies</a>
+to change it.
 
 Description:
-* `Version`: Indicates the version number of a security group policy, which will automatically increment by 1 every time you update the security policy, to prevent the expiration of the updated policies. If this field is left empty, any conflicts will be ignored.
-* `Protocol`: Values can be TCP, UDP, ICMP, ICMPV6, GRE, or ALL.
-* `CidrBlock`:  A CIDR block in the correct format. In a basic network, if a CidrBlock contains private IPs on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
-* `Ipv6CidrBlock`: An IPv6 CIDR block in the correct format. In a basic network, if an Ipv6CidrBlock contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.
-* `SecurityGroupId`: ID of the security group. It can be in the same project as the security group to be modified, including the ID of the security group itself, to represent private IP addresses of all CVMs under the security group. If this field is used, the policy will change without manual modification according to the CVM associated with the policy ID while being used to match network messages.
-* `Port`: A single port number, or a port range in the format of “8000-8010”. The Port field is accepted only if the value of the `Protocol` field is `TCP` or `UDP`. Otherwise Protocol and Port are mutually exclusive. 
+* `Version`: The version number of a security group policy. It automatically increments by 1 every time you update the security policy, so to prevent the expiration of the updated policies. If this field is left empty, any conflicts will be ignored.
+* `Protocol`: Values can be `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, and `ALL`.
+* `CidrBlock`: Enter a CIDR block in the correct format. In the classic network, even if the CIDR block specified in u200d`CidrBlock` contains the Tencent Cloud private IPs not used for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups.
+* `Ipv6CidrBlock`: Enter an IPv6 CIDR block in the correct format. In the classic network, even if the CIDR block specified in `Ipv6CidrBlock` contains the Tencent Cloud private IPv6 addresses not used for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups.
+* `SecurityGroupId`: ID of the security group. It can be the ID of a security group to be modified, or the ID of another security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don't need to change it manually.
+* `Port`: Enter a single port number (such as `80`), or a port range (such as `8000-8010`). `Port` is only applicable when `Protocol` is `TCP` or `UDP`. If `Protocol` is not `TCP` or `UDP`, `Protocol` and `Port` cannot be both specified. 
 * `Action`: Values can be `ACCEPT` or `DROP`.
-* CidrBlock, Ipv6CidrBlock, SecurityGroupId, and AddressTemplate are exclusive and cannot be entered at the same time. “Protocol + Port” and ServiceTemplate are mutually exclusive and cannot be entered at the same time.
+* `CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are exclusive u200dto one another. “Protocol + Port” and `ServiceTemplate` are mutually exclusive.
 * Only policies in one direction can be created in each request. If you need to specify the `PolicyIndex` parameter, the indexes of policies must be consistent.
      * @param {CreateSecurityGroupWithPoliciesRequest} req
      * @param {function(string, CreateSecurityGroupWithPoliciesResponse):void} cb

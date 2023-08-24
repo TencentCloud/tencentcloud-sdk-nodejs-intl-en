@@ -363,6 +363,7 @@ const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest
 const AiReviewProhibitedOcrTaskInput = models.AiReviewProhibitedOcrTaskInput;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
+const AddOnSubtitle = models.AddOnSubtitle;
 const AwsSQS = models.AwsSQS;
 const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const QualityControlData = models.QualityControlData;

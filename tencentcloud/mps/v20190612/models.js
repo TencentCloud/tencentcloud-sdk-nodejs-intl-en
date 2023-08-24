@@ -364,13 +364,15 @@ class OverrideTranscodeParameter extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
-         * TESHD transcoding parameter.
+         * The TSC transcoding parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TEHDConfigForUpdate || null}
          */
         this.TEHDConfig = null;
 
         /**
          * The subtitle settings.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
@@ -381,6 +383,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {Array.<MediaInputInfo> || null}
          */
         this.AddonAudioStream = null;
+
+        /**
+         * An extended field for transcoding.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StdExtInfo = null;
+
+        /**
+         * The subtitle file to add.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {Array.<AddOnSubtitle> || null}
+         */
+        this.AddOnSubtitles = null;
 
     }
 
@@ -425,6 +441,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new MediaInputInfo();
                 obj.deserialize(params.AddonAudioStream[z]);
                 this.AddonAudioStream.push(obj);
+            }
+        }
+        this.StdExtInfo = 'StdExtInfo' in params ? params.StdExtInfo : null;
+
+        if (params.AddOnSubtitles) {
+            this.AddOnSubtitles = new Array();
+            for (let z in params.AddOnSubtitles) {
+                let obj = new AddOnSubtitle();
+                obj.deserialize(params.AddOnSubtitles[z]);
+                this.AddOnSubtitles.push(obj);
             }
         }
 
@@ -13852,44 +13878,50 @@ class SubtitleTemplate extends  AbstractModel {
 
         /**
          * The URL of the subtitles to add to the video.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
          * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StreamIndex = null;
 
         /**
          * The font. Valid values:
-<li>hei.ttf</li>
-<li>song.ttf</li>
-<li>simkai.ttf</li>
-<li>arial.ttf (for English only)</li>
+<li>`hei.ttf`: Heiti.</li>
+<li>`song.ttf`: Songti.</li>
+<li>`simkai.ttf`: Kaiti.</li>
+<li>`arial.ttf`: Arial.</li>
 The default is `hei.ttf`.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontType = null;
 
         /**
          * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontSize = null;
 
         /**
          * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontColor = null;
 
         /**
          * The text transparency. Value range: 0-1.
-<li>0: Completely transparent</li>
-<li>1: Completely opaque</li>
+<li>`0`: Fully transparent.</li>
+<li>`1`: u200dFully opaque.</li>
 Default value: 1.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FontAlpha = null;
@@ -15428,15 +15460,18 @@ class TEHDConfigForUpdate extends  AbstractModel {
         super();
 
         /**
-         * TESHD type. Valid values:
-<li>TEHD-100: TESHD-100.</li>
+         * The TSC type. Valid values:
+<li>`TEHD-100`: TSC-100 (video TSC). </li>
+<li>`TEHD-200`: TSC-200 (audio TSC). </li>
 If this parameter is left blank, no modification will be made.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Maximum bitrate. If this parameter is left empty, no modification will be made.
+         * u200dThe maximum video bitrate. If this parameter is not specified, no modifications will be made.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxVideoBitrate = null;
@@ -17361,6 +17396,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SegmentObjectName = null;
 
+        /**
+         * The subtitle file to add.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {Array.<AddOnSubtitle> || null}
+         */
+        this.AddOnSubtitles = null;
+
     }
 
     /**
@@ -17389,6 +17431,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
         this.SubStreamObjectName = 'SubStreamObjectName' in params ? params.SubStreamObjectName : null;
         this.SegmentObjectName = 'SegmentObjectName' in params ? params.SegmentObjectName : null;
+
+        if (params.AddOnSubtitles) {
+            this.AddOnSubtitles = new Array();
+            for (let z in params.AddOnSubtitles) {
+                let obj = new AddOnSubtitle();
+                obj.deserialize(params.AddOnSubtitles[z]);
+                this.AddOnSubtitles.push(obj);
+            }
+        }
 
     }
 }
@@ -19996,6 +20047,51 @@ You can select multiple elements, which are connected by OR logic. If a usage co
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * The information of the subtitles to add.
+ * @class
+ */
+class AddOnSubtitle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The mode. Valid values:
+<li>`subtitle-stream`: Add a subtitle track.</li>
+<li>`close-caption-708`: u200dEmbed EA-708 subtitles in SEI frames.</li>
+<li>`close-caption-608`: Embed CEA-608 subtitles in SEI frames.</li>
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The subtitle file.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {MediaInputInfo || null}
+         */
+        this.Subtitle = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Subtitle) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.Subtitle)
+            this.Subtitle = obj;
+        }
 
     }
 }
@@ -24292,6 +24388,7 @@ module.exports = {
     AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
+    AddOnSubtitle: AddOnSubtitle,
     AwsSQS: AwsSQS,
     LiveStreamProcessTask: LiveStreamProcessTask,
     QualityControlData: QualityControlData,

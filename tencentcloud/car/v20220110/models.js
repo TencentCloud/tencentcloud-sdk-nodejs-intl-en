@@ -52,10 +52,94 @@ class CreateSessionResponse extends  AbstractModel {
 }
 
 /**
+ * StopPublishStream request structure.
+ * @class
+ */
+class StopPublishStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique user ID, which is customized by you and is not understood by CAR. It can also be randomly generated using the timestamp and should be kept unchanged during user reconnection.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * StopPublishStream response structure.
+ * @class
+ */
+class StopPublishStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DestroySession response structure.
  * @class
  */
 class DestroySessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartPublishStream response structure.
+ * @class
+ */
+class StartPublishStreamResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -192,6 +276,41 @@ class DestroySessionRequest extends  AbstractModel {
 }
 
 /**
+ * StartPublishStream request structure.
+ * @class
+ */
+class StartPublishStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Push parameter, which is a custom parameter carried during stream pushing.
+         * @type {string || null}
+         */
+        this.PublishStreamArgs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PublishStreamArgs = 'PublishStreamArgs' in params ? params.PublishStreamArgs : null;
+
+    }
+}
+
+/**
  * CreateSession request structure.
  * @class
  */
@@ -228,7 +347,11 @@ Empty string (default): Keep the application running on the cloud only when ther
         /**
          * Application startup parameter.
 If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
+ 
 If the user requests a prelaunch-enabled single-application project, this parameter is invalid.
+
+Note: When this parameter takes effect, the `ApplicationParameters` parameter will be appended to the end of the application startup parameter. The application startup parameter is set in the application or project configuration in the console.
+For example, for a prelaunch-disabled single-application project, if its application startup parameter `bar` is `0` and the `ApplicationParameters` parameter `foo` is `1`, the actual application startup parameters will be `bar=0 foo=1`.
          * @type {string || null}
          */
         this.ApplicationParameters = null;
@@ -270,10 +393,14 @@ If the current user is the host, `HostUserId` must be the same as their `UserId`
 
 module.exports = {
     CreateSessionResponse: CreateSessionResponse,
+    StopPublishStreamRequest: StopPublishStreamRequest,
+    StopPublishStreamResponse: StopPublishStreamResponse,
     DestroySessionResponse: DestroySessionResponse,
+    StartPublishStreamResponse: StartPublishStreamResponse,
     ApplyConcurrentResponse: ApplyConcurrentResponse,
     ApplyConcurrentRequest: ApplyConcurrentRequest,
     DestroySessionRequest: DestroySessionRequest,
+    StartPublishStreamRequest: StartPublishStreamRequest,
     CreateSessionRequest: CreateSessionRequest,
 
 }

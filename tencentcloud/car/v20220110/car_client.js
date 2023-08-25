@@ -17,10 +17,14 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateSessionResponse = models.CreateSessionResponse;
+const StopPublishStreamRequest = models.StopPublishStreamRequest;
+const StopPublishStreamResponse = models.StopPublishStreamResponse;
 const DestroySessionResponse = models.DestroySessionResponse;
+const StartPublishStreamResponse = models.StartPublishStreamResponse;
 const ApplyConcurrentResponse = models.ApplyConcurrentResponse;
 const ApplyConcurrentRequest = models.ApplyConcurrentRequest;
 const DestroySessionRequest = models.DestroySessionRequest;
+const StartPublishStreamRequest = models.StartPublishStreamRequest;
 const CreateSessionRequest = models.CreateSessionRequest;
 
 
@@ -35,7 +39,7 @@ class CarClient extends AbstractClient {
     }
     
     /**
-     * This API is used to request concurrency quota.
+     * This API is used to request a concurrency. The timeout period of the API is 20 seconds.
      * @param {ApplyConcurrentRequest} req
      * @param {function(string, ApplyConcurrentResponse):void} cb
      * @public
@@ -43,6 +47,17 @@ class CarClient extends AbstractClient {
     ApplyConcurrent(req, cb) {
         let resp = new ApplyConcurrentResponse();
         this.request("ApplyConcurrent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop stream push.
+     * @param {StopPublishStreamRequest} req
+     * @param {function(string, StopPublishStreamResponse):void} cb
+     * @public
+     */
+    StopPublishStream(req, cb) {
+        let resp = new StopPublishStreamResponse();
+        this.request("StopPublishStream", req, resp, cb);
     }
 
     /**
@@ -57,7 +72,7 @@ class CarClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a session.
+     * This API is used to create a session. The timeout period of the API is 5 seconds.
      * @param {CreateSessionRequest} req
      * @param {function(string, CreateSessionResponse):void} cb
      * @public
@@ -65,6 +80,17 @@ class CarClient extends AbstractClient {
     CreateSession(req, cb) {
         let resp = new CreateSessionResponse();
         this.request("CreateSession", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start stream push.
+     * @param {StartPublishStreamRequest} req
+     * @param {function(string, StartPublishStreamResponse):void} cb
+     * @public
+     */
+    StartPublishStream(req, cb) {
+        let resp = new StartPublishStreamResponse();
+        this.request("StartPublishStream", req, resp, cb);
     }
 
 

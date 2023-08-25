@@ -372,7 +372,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The subtitle settings.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
@@ -386,14 +386,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * An extended field for transcoding.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StdExtInfo = null;
 
         /**
          * The subtitle file to add.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
@@ -13878,14 +13878,14 @@ class SubtitleTemplate extends  AbstractModel {
 
         /**
          * The URL of the subtitles to add to the video.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
          * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StreamIndex = null;
@@ -13897,21 +13897,21 @@ Note: u200dThis field may returnu200d·nullu200d, indicating that no valid value
 <li>`simkai.ttf`: Kaiti.</li>
 <li>`arial.ttf`: Arial.</li>
 The default is `hei.ttf`.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontType = null;
 
         /**
          * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontSize = null;
 
         /**
          * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontColor = null;
@@ -13919,9 +13919,9 @@ Note: u200dThis field may returnu200d·nullu200d, indicating that no valid value
         /**
          * The text transparency. Value range: 0-1.
 <li>`0`: Fully transparent.</li>
-<li>`1`: u200dFully opaque.</li>
+<li>`1`: Fully opaque.</li>
 Default value: 1.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FontAlpha = null;
@@ -15464,14 +15464,14 @@ class TEHDConfigForUpdate extends  AbstractModel {
 <li>`TEHD-100`: TSC-100 (video TSC). </li>
 <li>`TEHD-200`: TSC-200 (audio TSC). </li>
 If this parameter is left blank, no modification will be made.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * u200dThe maximum video bitrate. If this parameter is not specified, no modifications will be made.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * The maximum video bitrate. If this parameter is not specified, no modifications will be made.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxVideoBitrate = null;
@@ -17398,7 +17398,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * The subtitle file to add.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
@@ -20062,16 +20062,16 @@ class AddOnSubtitle extends  AbstractModel {
         /**
          * The mode. Valid values:
 <li>`subtitle-stream`: Add a subtitle track.</li>
-<li>`close-caption-708`: u200dEmbed EA-708 subtitles in SEI frames.</li>
+<li>`close-caption-708`: Embed EA-708 subtitles in SEI frames.</li>
 <li>`close-caption-608`: Embed CEA-608 subtitles in SEI frames.</li>
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * The subtitle file.
-Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {MediaInputInfo || null}
          */
         this.Subtitle = null;

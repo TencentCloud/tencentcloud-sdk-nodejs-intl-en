@@ -160,6 +160,7 @@ const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const AwsPrivateAccess = models.AwsPrivateAccess;
+const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
@@ -205,12 +206,14 @@ const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const ColorEnhanceInfo = models.ColorEnhanceInfo;
+const EditMediaOutputConfig = models.EditMediaOutputConfig;
 const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitionTaskAsrFullTextResultOutputSubtitleItem;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const VideoFrameInterpolationInfo = models.VideoFrameInterpolationInfo;
+const EditMediaRequest = models.EditMediaRequest;
 const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
 const LicenseUsageDataItem = models.LicenseUsageDataItem;
 const RebuildMediaTargetAudioStream = models.RebuildMediaTargetAudioStream;
@@ -324,6 +327,7 @@ const DescribeDailyPlayStatFileListRequest = models.DescribeDailyPlayStatFileLis
 const DescribeSuperPlayerConfigsResponse = models.DescribeSuperPlayerConfigsResponse;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const DescribeStorageDataRequest = models.DescribeStorageDataRequest;
+const LiveRealTimeClipMediaSegmentInfo = models.LiveRealTimeClipMediaSegmentInfo;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const LowLightEnhanceInfo = models.LowLightEnhanceInfo;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
@@ -783,6 +787,27 @@ The files must be in HLS format. Preferably, they should have the same bitrate a
     DescribeFileAttributes(req, cb) {
         let resp = new DescribeFileAttributesResponse();
         this.request("DescribeFileAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
+
+1. Clipping a file in VOD to generate a new video;
+2. Splicing multiple files in VOD to generate a new video;
+3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
+4. Directly generating a new video from a stream in VOD;
+5. Clipping a stream in VOD to generate a new video;
+6. Splicing multiple streams in VOD to generate a new video;
+7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
+
+You can also specify whether to perform a task flow for the generated new video.
+     * @param {EditMediaRequest} req
+     * @param {function(string, EditMediaResponse):void} cb
+     * @public
+     */
+    EditMedia(req, cb) {
+        let resp = new EditMediaResponse();
+        this.request("EditMedia", req, resp, cb);
     }
 
     /**

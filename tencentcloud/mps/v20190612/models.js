@@ -10334,6 +10334,48 @@ class AiSamplePerson extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class SimpleAesDrm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Uri = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Vector = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uri = 'Uri' in params ? params.Uri : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Vector = 'Vector' in params ? params.Vector : null;
+
+    }
+}
+
+/**
  * DescribeWorkflows response structure.
  * @class
  */
@@ -17403,6 +17445,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
          */
         this.AddOnSubtitles = null;
 
+        /**
+         * Information of Drm.   Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {DrmInfo || null}
+         */
+        this.DrmInfo = null;
+
     }
 
     /**
@@ -17439,6 +17487,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
                 obj.deserialize(params.AddOnSubtitles[z]);
                 this.AddOnSubtitles.push(obj);
             }
+        }
+
+        if (params.DrmInfo) {
+            let obj = new DrmInfo();
+            obj.deserialize(params.DrmInfo)
+            this.DrmInfo = obj;
         }
 
     }
@@ -20302,6 +20356,46 @@ class CreateWatermarkTemplateResponse extends  AbstractModel {
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DrmInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {SimpleAesDrm || null}
+         */
+        this.SimpleAesDrm = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.SimpleAesDrm) {
+            let obj = new SimpleAesDrm();
+            obj.deserialize(params.SimpleAesDrm)
+            this.SimpleAesDrm = obj;
+        }
 
     }
 }
@@ -24223,6 +24317,7 @@ module.exports = {
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
     LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
     AiSamplePerson: AiSamplePerson,
+    SimpleAesDrm: SimpleAesDrm,
     DescribeWorkflowsResponse: DescribeWorkflowsResponse,
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
@@ -24393,6 +24488,7 @@ module.exports = {
     LiveStreamProcessTask: LiveStreamProcessTask,
     QualityControlData: QualityControlData,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
+    DrmInfo: DrmInfo,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     AiContentReviewResult: AiContentReviewResult,

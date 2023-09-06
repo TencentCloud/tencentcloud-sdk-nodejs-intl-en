@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const InitDCDBInstancesResponse = models.InitDCDBInstancesResponse;
+const DescribeDBTmpInstancesRequest = models.DescribeDBTmpInstancesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
@@ -38,8 +39,9 @@ const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
+const UpgradeDedicatedDCDBInstanceResponse = models.UpgradeDedicatedDCDBInstanceResponse;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
-const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
@@ -59,7 +61,8 @@ const ConfigValue = models.ConfigValue;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const NodeInfo = models.NodeInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
-const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
+const CreateDedicatedClusterDCDBInstanceRequest = models.CreateDedicatedClusterDCDBInstanceRequest;
+const DcnDetailItem = models.DcnDetailItem;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
@@ -86,6 +89,7 @@ const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
 const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
 const DBParamValue = models.DBParamValue;
+const TmpInstance = models.TmpInstance;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DCDBInstanceInfo = models.DCDBInstanceInfo;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
@@ -95,7 +99,7 @@ const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const DCDBShardInfo = models.DCDBShardInfo;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
-const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
+const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
 const KillSessionRequest = models.KillSessionRequest;
 const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
@@ -106,6 +110,7 @@ const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
 const SplitShardConfig = models.SplitShardConfig;
+const UpgradeDedicatedDCDBInstanceRequest = models.UpgradeDedicatedDCDBInstanceRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const InstanceBackupFileItem = models.InstanceBackupFileItem;
@@ -119,7 +124,7 @@ const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
 const ReservedNetResource = models.ReservedNetResource;
 const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
-const DcnDetailItem = models.DcnDetailItem;
+const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
@@ -139,7 +144,9 @@ const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
+const CreateDedicatedClusterDCDBInstanceResponse = models.CreateDedicatedClusterDCDBInstanceResponse;
 const DatabaseProcedure = models.DatabaseProcedure;
+const DescribeDBTmpInstancesResponse = models.DescribeDBTmpInstancesResponse;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const ModifyAccountConfigResponse = models.ModifyAccountConfigResponse;
@@ -147,6 +154,7 @@ const IsolateDCDBInstanceResponse = models.IsolateDCDBInstanceResponse;
 const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
+const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
 const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
@@ -160,6 +168,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
+const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
@@ -199,6 +208,17 @@ Note: Accounts with the same username but different hosts are considered as diff
     ModifyAccountConfig(req, cb) {
         let resp = new ModifyAccountConfigResponse();
         this.request("ModifyAccountConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to u200dupgrade a dedicated TDSQL cluster instance.
+     * @param {UpgradeDedicatedDCDBInstanceRequest} req
+     * @param {function(string, UpgradeDedicatedDCDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDedicatedDCDBInstance(req, cb) {
+        let resp = new UpgradeDedicatedDCDBInstanceResponse();
+        this.request("UpgradeDedicatedDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -256,6 +276,17 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
         this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query TDSQL order information. You can pass in an order ID to query the TDSQL instance associated with the order and the corresponding task process ID.
+     * @param {DescribeOrdersRequest} req
+     * @param {function(string, DescribeOrdersResponse):void} cb
+     * @public
+     */
+    DescribeOrders(req, cb) {
+        let resp = new DescribeOrdersResponse();
+        this.request("DescribeOrders", req, resp, cb);
     }
 
     /**
@@ -348,14 +379,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to query TDSQL order information. You can pass in an order ID to query the TDSQL instance associated with the order and the corresponding task process ID.
-     * @param {DescribeOrdersRequest} req
-     * @param {function(string, DescribeOrdersResponse):void} cb
+     * This API is used to create a dedicated TDSQL cluster instance.
+     * @param {CreateDedicatedClusterDCDBInstanceRequest} req
+     * @param {function(string, CreateDedicatedClusterDCDBInstanceResponse):void} cb
      * @public
      */
-    DescribeOrders(req, cb) {
-        let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+    CreateDedicatedClusterDCDBInstance(req, cb) {
+        let resp = new CreateDedicatedClusterDCDBInstanceResponse();
+        this.request("CreateDedicatedClusterDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -546,6 +577,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to view the backup log retention days.
+     * @param {DescribeLogFileRetentionPeriodRequest} req
+     * @param {function(string, DescribeLogFileRetentionPeriodResponse):void} cb
+     * @public
+     */
+    DescribeLogFileRetentionPeriod(req, cb) {
+        let resp = new DescribeLogFileRetentionPeriodResponse();
+        this.request("DescribeLogFileRetentionPeriod", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable public network access for a TencentDB instance, which will make the public IP address inaccessible. The `DescribeDCDBInstances` API will not return the public domain name and port information of the corresponding instance.
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
@@ -622,6 +664,17 @@ Note: Accounts with the same username but different hosts are different accounts
     CopyAccountPrivileges(req, cb) {
         let resp = new CopyAccountPrivilegesResponse();
         this.request("CopyAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain u200da temp rollback instance.
+     * @param {DescribeDBTmpInstancesRequest} req
+     * @param {function(string, DescribeDBTmpInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBTmpInstances(req, cb) {
+        let resp = new DescribeDBTmpInstancesResponse();
+        this.request("DescribeDBTmpInstances", req, resp, cb);
     }
 
     /**

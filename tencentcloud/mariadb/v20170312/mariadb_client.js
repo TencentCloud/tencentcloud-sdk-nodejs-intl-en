@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const DescribeDBTmpInstancesRequest = models.DescribeDBTmpInstancesRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
@@ -77,6 +78,7 @@ const DescribeDBEncryptAttributesRequest = models.DescribeDBEncryptAttributesReq
 const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DBParamValue = models.DBParamValue;
+const TmpInstance = models.TmpInstance;
 const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
 const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
 const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
@@ -118,6 +120,7 @@ const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DCNReplicaConfig = models.DCNReplicaConfig;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
+const DescribeDBTmpInstancesResponse = models.DescribeDBTmpInstancesResponse;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CloneAccountRequest = models.CloneAccountRequest;
@@ -558,6 +561,17 @@ Note: accounts with the same username but different hosts are different accounts
     CopyAccountPrivileges(req, cb) {
         let resp = new CopyAccountPrivilegesResponse();
         this.request("CopyAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain a temp u200drollback instance.
+     * @param {DescribeDBTmpInstancesRequest} req
+     * @param {function(string, DescribeDBTmpInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBTmpInstances(req, cb) {
+        let resp = new DescribeDBTmpInstancesResponse();
+        this.request("DescribeDBTmpInstances", req, resp, cb);
     }
 
     /**

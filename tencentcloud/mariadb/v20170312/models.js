@@ -197,6 +197,34 @@ class CreateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBTmpInstances request structure.
+ * @class
+ */
+class DescribeDBTmpInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeAccountPrivileges response structure.
  * @class
  */
@@ -2792,7 +2820,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReservedNetResources = null;
 
         /**
-         * 
+         * Whether physical replication is supported.
          * @type {boolean || null}
          */
         this.IsPhysicalReplicationSupported = null;
@@ -3387,6 +3415,147 @@ class DBParamValue extends  AbstractModel {
         }
         this.Param = 'Param' in params ? params.Param : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Temp instance
+ * @class
+ */
+class TmpInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Creation time
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Instance remarks
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceRemark = null;
+
+        /**
+         * Whether it is a temp instance. Valid values: `0` (non-temp instance), `1` (invalid temp instance), `2` (valid temp rollback instance).
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TempType = null;
+
+        /**
+         * Instance status. Valid values: `0` (to be initialized), `1` (in process), `2` (running), `-1` (isolated), `-2` (eliminated).
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Virtual instance IP
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Virtual instance port
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Validity end time
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * Source instance ID in the format of `tdsql-ow728lmc`
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SrcInstanceId = null;
+
+        /**
+         * Instance status description
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Instance region
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * AZ of the instance
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Virtual IPv6 of the instance
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * Instance IPv6 flag
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.InstanceRemark = 'InstanceRemark' in params ? params.InstanceRemark : null;
+        this.TempType = 'TempType' in params ? params.TempType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
 
     }
 }
@@ -5838,6 +6007,49 @@ class DatabaseProcedure extends  AbstractModel {
 }
 
 /**
+ * DescribeDBTmpInstances response structure.
+ * @class
+ */
+class DescribeDBTmpInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Temp instance
+         * @type {Array.<TmpInstance> || null}
+         */
+        this.TmpInstances = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TmpInstances) {
+            this.TmpInstances = new Array();
+            for (let z in params.TmpInstances) {
+                let obj = new TmpInstance();
+                obj.deserialize(params.TmpInstances[z]);
+                this.TmpInstances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBSyncMode request structure.
  * @class
  */
@@ -7242,6 +7454,7 @@ class DeleteAccountResponse extends  AbstractModel {
 
 module.exports = {
     CreateDBInstanceRequest: CreateDBInstanceRequest,
+    DescribeDBTmpInstancesRequest: DescribeDBTmpInstancesRequest,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     ParamDesc: ParamDesc,
@@ -7302,6 +7515,7 @@ module.exports = {
     Deal: Deal,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DBParamValue: DBParamValue,
+    TmpInstance: TmpInstance,
     ModifyDBParametersRequest: ModifyDBParametersRequest,
     DescribeDcnDetailRequest: DescribeDcnDetailRequest,
     DescribeFileDownloadUrlResponse: DescribeFileDownloadUrlResponse,
@@ -7343,6 +7557,7 @@ module.exports = {
     DCNReplicaConfig: DCNReplicaConfig,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DatabaseProcedure: DatabaseProcedure,
+    DescribeDBTmpInstancesResponse: DescribeDBTmpInstancesResponse,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     CloneAccountRequest: CloneAccountRequest,

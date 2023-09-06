@@ -36,7 +36,8 @@ const ReplicationRule = models.ReplicationRule;
 const DescribeWebhookTriggerLogResponse = models.DescribeWebhookTriggerLogResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
-const CreateImmutableTagRulesRequest = models.CreateImmutableTagRulesRequest;
+const CreateCustomAccountRequest = models.CreateCustomAccountRequest;
+const CreateServiceAccountRequest = models.CreateServiceAccountRequest;
 const DescribeRepositoriesResponse = models.DescribeRepositoriesResponse;
 const DeleteInstanceTokenResponse = models.DeleteInstanceTokenResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
@@ -46,14 +47,16 @@ const DescribeTagRetentionRulesRequest = models.DescribeTagRetentionRulesRequest
 const RegistryCondition = models.RegistryCondition;
 const ModifyImmutableTagRulesResponse = models.ModifyImmutableTagRulesResponse;
 const Region = models.Region;
+const ModifyServiceAccountRequest = models.ModifyServiceAccountRequest;
 const CreateImageAccelerationServiceResponse = models.CreateImageAccelerationServiceResponse;
 const CreateMultipleSecurityPolicyResponse = models.CreateMultipleSecurityPolicyResponse;
 const CreateTagRetentionRuleResponse = models.CreateTagRetentionRuleResponse;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DescribeChartDownloadInfoResponse = models.DescribeChartDownloadInfoResponse;
+const DescribeServiceAccountsRequest = models.DescribeServiceAccountsRequest;
 const DescribeExternalEndpointStatusRequest = models.DescribeExternalEndpointStatusRequest;
 const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
-const DescribeInstanceAllNamespacesRequest = models.DescribeInstanceAllNamespacesRequest;
+const CreateImmutableTagRulesRequest = models.CreateImmutableTagRulesRequest;
 const DownloadHelmChartResponse = models.DownloadHelmChartResponse;
 const ManageReplicationRequest = models.ManageReplicationRequest;
 const DeleteWebhookTriggerResponse = models.DeleteWebhookTriggerResponse;
@@ -67,12 +70,15 @@ const DescribeInternalEndpointsResponse = models.DescribeInternalEndpointsRespon
 const DeleteImmutableTagRulesResponse = models.DeleteImmutableTagRulesResponse;
 const ModifyTagRetentionRuleResponse = models.ModifyTagRetentionRuleResponse;
 const CreateTagRetentionRuleRequest = models.CreateTagRetentionRuleRequest;
+const DescribeCustomAccountsRequest = models.DescribeCustomAccountsRequest;
 const WebhookTarget = models.WebhookTarget;
-const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest;
+const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
 const DescribeGCJobsResponse = models.DescribeGCJobsResponse;
+const DescribeWebhookTriggerResponse = models.DescribeWebhookTriggerResponse;
 const ModifyInstanceTokenRequest = models.ModifyInstanceTokenRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const ModifyImmutableTagRulesRequest = models.ModifyImmutableTagRulesRequest;
+const Permission = models.Permission;
 const DescribeSecurityPoliciesResponse = models.DescribeSecurityPoliciesResponse;
 const CreateSignatureResponse = models.CreateSignatureResponse;
 const DeleteRepositoryTagsRequest = models.DeleteRepositoryTagsRequest;
@@ -81,26 +87,28 @@ const DescribeReplicationInstanceSyncStatusRequest = models.DescribeReplicationI
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DescribeInstanceStatusRequest = models.DescribeInstanceStatusRequest;
 const ModifyWebhookTriggerRequest = models.ModifyWebhookTriggerRequest;
-const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
+const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
-const CreateSignatureRequest = models.CreateSignatureRequest;
+const CreateWebhookTriggerRequest = models.CreateWebhookTriggerRequest;
 const CreateSecurityPolicyResponse = models.CreateSecurityPolicyResponse;
 const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const DescribeTagRetentionExecutionTaskRequest = models.DescribeTagRetentionExecutionTaskRequest;
+const DeleteServiceAccountResponse = models.DeleteServiceAccountResponse;
 const ModifyNamespaceResponse = models.ModifyNamespaceResponse;
 const TcrNamespaceInfo = models.TcrNamespaceInfo;
-const DescribeWebhookTriggerLogRequest = models.DescribeWebhookTriggerLogRequest;
+const CreateSignatureRequest = models.CreateSignatureRequest;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const Schedule = models.Schedule;
 const DeleteTagRetentionRuleResponse = models.DeleteTagRetentionRuleResponse;
 const DeleteMultipleSecurityPolicyRequest = models.DeleteMultipleSecurityPolicyRequest;
-const DescribeImmutableTagRulesResponse = models.DescribeImmutableTagRulesResponse;
+const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const CreateSignaturePolicyResponse = models.CreateSignaturePolicyResponse;
 const WebhookTrigger = models.WebhookTrigger;
 const RegistryStatus = models.RegistryStatus;
 const SecurityPolicy = models.SecurityPolicy;
 const ReplicationFilter = models.ReplicationFilter;
 const CreateInstanceTokenResponse = models.CreateInstanceTokenResponse;
+const TagSpecification = models.TagSpecification;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const RetentionTask = models.RetentionTask;
 const DescribeImageAccelerateServiceResponse = models.DescribeImageAccelerateServiceResponse;
@@ -108,26 +116,31 @@ const DescribeReplicationInstancesRequest = models.DescribeReplicationInstancesR
 const DeleteWebhookTriggerRequest = models.DeleteWebhookTriggerRequest;
 const DeleteSignaturePolicyResponse = models.DeleteSignaturePolicyResponse;
 const CustomizedDomainInfo = models.CustomizedDomainInfo;
-const DescribeWebhookTriggerResponse = models.DescribeWebhookTriggerResponse;
+const DeleteServiceAccountRequest = models.DeleteServiceAccountRequest;
 const DescribeImageManifestsRequest = models.DescribeImageManifestsRequest;
 const RegistryChargePrepaid = models.RegistryChargePrepaid;
-const TagSpecification = models.TagSpecification;
+const ModifyCustomAccountRequest = models.ModifyCustomAccountRequest;
 const CreateMultipleSecurityPolicyRequest = models.CreateMultipleSecurityPolicyRequest;
 const KeyValueString = models.KeyValueString;
 const DeleteSecurityPolicyRequest = models.DeleteSecurityPolicyRequest;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const DescribeInstanceTokenRequest = models.DescribeInstanceTokenRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
+const CreateServiceAccountResponse = models.CreateServiceAccountResponse;
 const DeleteReplicationInstanceResponse = models.DeleteReplicationInstanceResponse;
 const GCJobInfo = models.GCJobInfo;
 const Registry = models.Registry;
 const DescribeChartDownloadInfoRequest = models.DescribeChartDownloadInfoRequest;
+const DescribeCustomAccountsResponse = models.DescribeCustomAccountsResponse;
+const ModifyCustomAccountResponse = models.ModifyCustomAccountResponse;
 const DescribeExternalEndpointStatusResponse = models.DescribeExternalEndpointStatusResponse;
 const CheckInstanceResponse = models.CheckInstanceResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const ServiceAccount = models.ServiceAccount;
 const DescribeImmutableTagRulesRequest = models.DescribeImmutableTagRulesRequest;
 const Filter = models.Filter;
 const RetentionExecution = models.RetentionExecution;
+const DescribeWebhookTriggerLogRequest = models.DescribeWebhookTriggerLogRequest;
 const ManageReplicationResponse = models.ManageReplicationResponse;
 const DescribeReplicationInstanceCreateTasksRequest = models.DescribeReplicationInstanceCreateTasksRequest;
 const DeleteSignaturePolicyRequest = models.DeleteSignaturePolicyRequest;
@@ -139,7 +152,7 @@ const ImmutableTagRule = models.ImmutableTagRule;
 const Header = models.Header;
 const RetentionPolicy = models.RetentionPolicy;
 const CreateSecurityPolicyRequest = models.CreateSecurityPolicyRequest;
-const CreateWebhookTriggerRequest = models.CreateWebhookTriggerRequest;
+const CustomAccount = models.CustomAccount;
 const DeleteImageAccelerateServiceResponse = models.DeleteImageAccelerateServiceResponse;
 const DescribeInstanceCustomizedDomainResponse = models.DescribeInstanceCustomizedDomainResponse;
 const CreateImageAccelerationServiceRequest = models.CreateImageAccelerationServiceRequest;
@@ -147,15 +160,18 @@ const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
 const DeleteMultipleSecurityPolicyResponse = models.DeleteMultipleSecurityPolicyResponse;
 const ManageInternalEndpointResponse = models.ManageInternalEndpointResponse;
 const CreateInstanceCustomizedDomainRequest = models.CreateInstanceCustomizedDomainRequest;
+const ReplicationLog = models.ReplicationLog;
 const CreateTagRetentionExecutionResponse = models.CreateTagRetentionExecutionResponse;
 const CheckInstanceNameResponse = models.CheckInstanceNameResponse;
 const DeleteImageAccelerateServiceRequest = models.DeleteImageAccelerateServiceRequest;
 const DescribeTagRetentionRulesResponse = models.DescribeTagRetentionRulesResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const ManageExternalEndpointResponse = models.ManageExternalEndpointResponse;
-const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
+const DescribeImmutableTagRulesResponse = models.DescribeImmutableTagRulesResponse;
 const CreateReplicationInstanceResponse = models.CreateReplicationInstanceResponse;
+const CreateCustomAccountResponse = models.CreateCustomAccountResponse;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
+const DescribeServiceAccountsResponse = models.DescribeServiceAccountsResponse;
 const CreateInstanceCustomizedDomainResponse = models.CreateInstanceCustomizedDomainResponse;
 const PeerReplicationOption = models.PeerReplicationOption;
 const DescribeSecurityPoliciesRequest = models.DescribeSecurityPoliciesRequest;
@@ -165,6 +181,7 @@ const CheckInstanceRequest = models.CheckInstanceRequest;
 const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const CreateRepositoryRequest = models.CreateRepositoryRequest;
 const DeleteImageResponse = models.DeleteImageResponse;
+const DeleteCustomAccountResponse = models.DeleteCustomAccountResponse;
 const DescribeImageAccelerateServiceRequest = models.DescribeImageAccelerateServiceRequest;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
@@ -172,11 +189,13 @@ const DescribeGCJobsRequest = models.DescribeGCJobsRequest;
 const DescribeTagRetentionExecutionRequest = models.DescribeTagRetentionExecutionRequest;
 const CreateRepositoryResponse = models.CreateRepositoryResponse;
 const CheckInstanceNameRequest = models.CheckInstanceNameRequest;
+const DescribeInstanceAllNamespacesRequest = models.DescribeInstanceAllNamespacesRequest;
 const DescribeInstanceTokenResponse = models.DescribeInstanceTokenResponse;
 const DescribeInstanceCustomizedDomainRequest = models.DescribeInstanceCustomizedDomainRequest;
 const DescribeTagRetentionExecutionResponse = models.DescribeTagRetentionExecutionResponse;
 const DeleteImmutableTagRulesRequest = models.DeleteImmutableTagRulesRequest;
 const CreateWebhookTriggerResponse = models.CreateWebhookTriggerResponse;
+const ModifyServiceAccountResponse = models.ModifyServiceAccountResponse;
 const CreateSignaturePolicyRequest = models.CreateSignaturePolicyRequest;
 const DeleteTagRetentionRuleRequest = models.DeleteTagRetentionRuleRequest;
 const TcrRepositoryInfo = models.TcrRepositoryInfo;
@@ -184,7 +203,7 @@ const TcrInstanceToken = models.TcrInstanceToken;
 const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
 const DeleteImageRequest = models.DeleteImageRequest;
 const CreateTagRetentionExecutionRequest = models.CreateTagRetentionExecutionRequest;
-const ReplicationLog = models.ReplicationLog;
+const DeleteCustomAccountRequest = models.DeleteCustomAccountRequest;
 const DescribeInstanceAllNamespacesResponse = models.DescribeInstanceAllNamespacesResponse;
 const ManageInternalEndpointRequest = models.ManageInternalEndpointRequest;
 const ModifyWebhookTriggerResponse = models.ModifyWebhookTriggerResponse;
@@ -213,14 +232,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a namespace in an Enterprise Edition instance.
-     * @param {CreateNamespaceRequest} req
-     * @param {function(string, CreateNamespaceResponse):void} cb
+     * This API is used to delete a TCR Enterprise Edition instance.
+     * @param {DeleteInstanceRequest} req
+     * @param {function(string, DeleteInstanceResponse):void} cb
      * @public
      */
-    CreateNamespace(req, cb) {
-        let resp = new CreateNamespaceResponse();
-        this.request("CreateNamespace", req, resp, cb);
+    DeleteInstance(req, cb) {
+        let resp = new DeleteInstanceResponse();
+        this.request("DeleteInstance", req, resp, cb);
     }
 
     /**
@@ -235,7 +254,9 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a public network access allowlist policy of an instance.
+     * This API is used to delete a public network access allow policy.
+
+Note: When both `PolicyIndex` and `CidrBlock` are specified, `CidrBlock` takes the higher priority
      * @param {DeleteSecurityPolicyRequest} req
      * @param {function(string, DeleteSecurityPolicyResponse):void} cb
      * @public
@@ -290,14 +311,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a TCR Enterprise Edition instance.
-     * @param {DeleteInstanceRequest} req
-     * @param {function(string, DeleteInstanceResponse):void} cb
+     * This API is used to create a namespace in an Enterprise Edition instance.
+     * @param {CreateNamespaceRequest} req
+     * @param {function(string, CreateNamespaceResponse):void} cb
      * @public
      */
-    DeleteInstance(req, cb) {
-        let resp = new DeleteInstanceResponse();
-        this.request("DeleteInstance", req, resp, cb);
+    CreateNamespace(req, cb) {
+        let resp = new CreateNamespaceResponse();
+        this.request("CreateNamespace", req, resp, cb);
     }
 
     /**
@@ -345,14 +366,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a custom domain name.
-     * @param {DeleteInstanceCustomizedDomainRequest} req
-     * @param {function(string, DeleteInstanceCustomizedDomainResponse):void} cb
+     * This API is used to create a custom account.
+     * @param {CreateCustomAccountRequest} req
+     * @param {function(string, CreateCustomAccountResponse):void} cb
      * @public
      */
-    DeleteInstanceCustomizedDomain(req, cb) {
-        let resp = new DeleteInstanceCustomizedDomainResponse();
-        this.request("DeleteInstanceCustomizedDomain", req, resp, cb);
+    CreateCustomAccount(req, cb) {
+        let resp = new CreateCustomAccountResponse();
+        this.request("CreateCustomAccount", req, resp, cb);
     }
 
     /**
@@ -386,6 +407,17 @@ class TcrClient extends AbstractClient {
     DescribeImageAccelerateService(req, cb) {
         let resp = new DescribeImageAccelerateServiceResponse();
         this.request("DescribeImageAccelerateService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a service account.
+     * @param {CreateServiceAccountRequest} req
+     * @param {function(string, CreateServiceAccountResponse):void} cb
+     * @public
+     */
+    CreateServiceAccount(req, cb) {
+        let resp = new CreateServiceAccountResponse();
+        this.request("CreateServiceAccount", req, resp, cb);
     }
 
     /**
@@ -466,14 +498,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a namespace.
-     * @param {DeleteNamespaceRequest} req
-     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * This API is used to delete a custom domain name.
+     * @param {DeleteInstanceCustomizedDomainRequest} req
+     * @param {function(string, DeleteInstanceCustomizedDomainResponse):void} cb
      * @public
      */
-    DeleteNamespace(req, cb) {
-        let resp = new DeleteNamespaceResponse();
-        this.request("DeleteNamespace", req, resp, cb);
+    DeleteInstanceCustomizedDomain(req, cb) {
+        let resp = new DeleteInstanceCustomizedDomainResponse();
+        this.request("DeleteInstanceCustomizedDomain", req, resp, cb);
     }
 
     /**
@@ -496,6 +528,17 @@ class TcrClient extends AbstractClient {
     CreateImmutableTagRules(req, cb) {
         let resp = new CreateImmutableTagRulesResponse();
         this.request("CreateImmutableTagRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query service accounts.
+     * @param {DescribeServiceAccountsRequest} req
+     * @param {function(string, DescribeServiceAccountsResponse):void} cb
+     * @public
+     */
+    DescribeServiceAccounts(req, cb) {
+        let resp = new DescribeServiceAccountsResponse();
+        this.request("DescribeServiceAccounts", req, resp, cb);
     }
 
     /**
@@ -598,6 +641,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to update a service account.
+     * @param {ModifyServiceAccountRequest} req
+     * @param {function(string, ModifyServiceAccountResponse):void} cb
+     * @public
+     */
+    ModifyServiceAccount(req, cb) {
+        let resp = new ModifyServiceAccountResponse();
+        this.request("ModifyServiceAccount", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an image acceleration service.
      * @param {CreateImageAccelerationServiceRequest} req
      * @param {function(string, CreateImageAccelerationServiceResponse):void} cb
@@ -675,14 +729,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of replication instances.
-     * @param {DescribeReplicationInstancesRequest} req
-     * @param {function(string, DescribeReplicationInstancesResponse):void} cb
+     * This API is used to delete a custom account.
+     * @param {DeleteCustomAccountRequest} req
+     * @param {function(string, DeleteCustomAccountResponse):void} cb
      * @public
      */
-    DescribeReplicationInstances(req, cb) {
-        let resp = new DescribeReplicationInstancesResponse();
-        this.request("DescribeReplicationInstances", req, resp, cb);
+    DeleteCustomAccount(req, cb) {
+        let resp = new DeleteCustomAccountResponse();
+        this.request("DeleteCustomAccount", req, resp, cb);
     }
 
     /**
@@ -738,6 +792,17 @@ class TcrClient extends AbstractClient {
     CreateReplicationInstance(req, cb) {
         let resp = new CreateReplicationInstanceResponse();
         this.request("CreateReplicationInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a custom account.
+     * @param {ModifyCustomAccountRequest} req
+     * @param {function(string, ModifyCustomAccountResponse):void} cb
+     * @public
+     */
+    ModifyCustomAccount(req, cb) {
+        let resp = new ModifyCustomAccountResponse();
+        this.request("ModifyCustomAccount", req, resp, cb);
     }
 
     /**
@@ -818,6 +883,39 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a service account.
+     * @param {DeleteServiceAccountRequest} req
+     * @param {function(string, DeleteServiceAccountResponse):void} cb
+     * @public
+     */
+    DeleteServiceAccount(req, cb) {
+        let resp = new DeleteServiceAccountResponse();
+        this.request("DeleteServiceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a namespace.
+     * @param {DeleteNamespaceRequest} req
+     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * @public
+     */
+    DeleteNamespace(req, cb) {
+        let resp = new DeleteNamespaceResponse();
+        this.request("DeleteNamespace", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a tag retention rule.
+     * @param {ModifyTagRetentionRuleRequest} req
+     * @param {function(string, ModifyTagRetentionRuleResponse):void} cb
+     * @public
+     */
+    ModifyTagRetentionRule(req, cb) {
+        let resp = new ModifyTagRetentionRuleResponse();
+        this.request("ModifyTagRetentionRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to query tag retention execution tasks.
      * @param {DescribeTagRetentionExecutionTaskRequest} req
      * @param {function(string, DescribeTagRetentionExecutionTaskResponse):void} cb
@@ -848,6 +946,17 @@ class TcrClient extends AbstractClient {
     DeleteReplicationInstance(req, cb) {
         let resp = new DeleteReplicationInstanceResponse();
         this.request("DeleteReplicationInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of replication instances.
+     * @param {DescribeReplicationInstancesRequest} req
+     * @param {function(string, DescribeReplicationInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstances(req, cb) {
+        let resp = new DescribeReplicationInstancesResponse();
+        this.request("DescribeReplicationInstances", req, resp, cb);
     }
 
     /**
@@ -928,14 +1037,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a tag retention rule.
-     * @param {ModifyTagRetentionRuleRequest} req
-     * @param {function(string, ModifyTagRetentionRuleResponse):void} cb
+     * This API is used to query custom accounts.
+     * @param {DescribeCustomAccountsRequest} req
+     * @param {function(string, DescribeCustomAccountsResponse):void} cb
      * @public
      */
-    ModifyTagRetentionRule(req, cb) {
-        let resp = new ModifyTagRetentionRuleResponse();
-        this.request("ModifyTagRetentionRule", req, resp, cb);
+    DescribeCustomAccounts(req, cb) {
+        let resp = new DescribeCustomAccountsResponse();
+        this.request("DescribeCustomAccounts", req, resp, cb);
     }
 
     /**

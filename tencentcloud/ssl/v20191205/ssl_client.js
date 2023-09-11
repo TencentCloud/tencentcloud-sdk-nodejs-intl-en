@@ -16,48 +16,101 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ApplyCertificateResponse = models.ApplyCertificateResponse;
-const DeleteCertificateRequest = models.DeleteCertificateRequest;
-const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
-const CommitCertificateInformationRequest = models.CommitCertificateInformationRequest;
-const CommitCertificateInformationResponse = models.CommitCertificateInformationResponse;
-const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
-const DownloadCertificateRequest = models.DownloadCertificateRequest;
+const DescribeCertificateBindResourceTaskDetailRequest = models.DescribeCertificateBindResourceTaskDetailRequest;
+const DownloadCertificateResponse = models.DownloadCertificateResponse;
+const ModifyCSRRequest = models.ModifyCSRRequest;
+const TCBAccessInstance = models.TCBAccessInstance;
 const CancelCertificateOrderRequest = models.CancelCertificateOrderRequest;
 const ModifyCertificateProjectResponse = models.ModifyCertificateProjectResponse;
 const Certificates = models.Certificates;
 const CertificateExtra = models.CertificateExtra;
-const DescribeCertificateResponse = models.DescribeCertificateResponse;
-const OperationLog = models.OperationLog;
+const TeoInstanceList = models.TeoInstanceList;
 const RootCertificates = models.RootCertificates;
-const UploadCertificateRequest = models.UploadCertificateRequest;
-const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
+const CdnInstanceDetail = models.CdnInstanceDetail;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
-const Tags = models.Tags;
-const ApplyCertificateRequest = models.ApplyCertificateRequest;
-const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
-const CreateCertificateResponse = models.CreateCertificateResponse;
-const DeleteCertificateResponse = models.DeleteCertificateResponse;
-const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
-const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
+const TkeNameSpaceDetail = models.TkeNameSpaceDetail;
+const CreateCertificateBindResourceSyncTaskResponse = models.CreateCertificateBindResourceSyncTaskResponse;
+const TCBHostInstance = models.TCBHostInstance;
+const ClbListener = models.ClbListener;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
-const DescribeCertificateRequest = models.DescribeCertificateRequest;
+const BatchDeleteCSRRequest = models.BatchDeleteCSRRequest;
 const ProjectInfo = models.ProjectInfo;
+const TCBEnvironments = models.TCBEnvironments;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
 const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
+const DdosInstanceList = models.DdosInstanceList;
+const DescribeCSRSetResponse = models.DescribeCSRSetResponse;
+const DescribeCSRRequest = models.DescribeCSRRequest;
+const DescribeCertificateBindResourceTaskResultRequest = models.DescribeCertificateBindResourceTaskResultRequest;
+const BindResourceResult = models.BindResourceResult;
+const ApplyCertificateResponse = models.ApplyCertificateResponse;
+const CreateCertificateBindResourceSyncTaskRequest = models.CreateCertificateBindResourceSyncTaskRequest;
+const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
+const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
+const SyncTaskBindResourceResult = models.SyncTaskBindResourceResult;
+const ClbInstanceDetail = models.ClbInstanceDetail;
+const OperationLog = models.OperationLog;
+const VodInstanceDetail = models.VodInstanceDetail;
+const DescribeCertificateBindResourceTaskDetailResponse = models.DescribeCertificateBindResourceTaskDetailResponse;
+const DvAuthDetail = models.DvAuthDetail;
+const ModifyCSRResponse = models.ModifyCSRResponse;
+const CdnInstanceList = models.CdnInstanceList;
+const DdosInstanceDetail = models.DdosInstanceDetail;
 const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
-const DownloadCertificateResponse = models.DownloadCertificateResponse;
-const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
+const CommitCertificateInformationResponse = models.CommitCertificateInformationResponse;
 const UploadCertificateResponse = models.UploadCertificateResponse;
-const DvAuthDetail = models.DvAuthDetail;
-const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
+const LiveInstanceDetail = models.LiveInstanceDetail;
 const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
-const SubmittedData = models.SubmittedData;
+const TCBEnvironment = models.TCBEnvironment;
+const WafInstanceDetail = models.WafInstanceDetail;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
-const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
+const ApiGatewayInstanceList = models.ApiGatewayInstanceList;
+const TeoInstanceDetail = models.TeoInstanceDetail;
 const PreAuditInfo = models.PreAuditInfo;
+const CreateCSRResponse = models.CreateCSRResponse;
+const Certificate = models.Certificate;
+const BatchDeleteCSRResponse = models.BatchDeleteCSRResponse;
+const CommitCertificateInformationRequest = models.CommitCertificateInformationRequest;
+const CSRItem = models.CSRItem;
+const DownloadCertificateRequest = models.DownloadCertificateRequest;
+const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
+const DescribeCertificateResponse = models.DescribeCertificateResponse;
+const TkeSecretDetail = models.TkeSecretDetail;
+const Tags = models.Tags;
+const DeleteCertificateResponse = models.DeleteCertificateResponse;
+const CreateCSRRequest = models.CreateCSRRequest;
+const TCBInstanceList = models.TCBInstanceList;
+const DescribeCertificateRequest = models.DescribeCertificateRequest;
+const WafInstanceList = models.WafInstanceList;
+const TCBHostService = models.TCBHostService;
+const TkeInstanceList = models.TkeInstanceList;
+const Error = models.Error;
+const CertTaskId = models.CertTaskId;
+const TCBAccessService = models.TCBAccessService;
+const DescribeCSRSetRequest = models.DescribeCSRSetRequest;
+const SubmittedData = models.SubmittedData;
+const ApiGatewayInstanceDetail = models.ApiGatewayInstanceDetail;
+const LiveInstanceList = models.LiveInstanceList;
+const DeleteCertificateRequest = models.DeleteCertificateRequest;
+const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
+const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
+const UploadCertificateRequest = models.UploadCertificateRequest;
+const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
+const ApplyCertificateRequest = models.ApplyCertificateRequest;
+const CreateCertificateResponse = models.CreateCertificateResponse;
+const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const DescribeCertificateBindResourceTaskResultResponse = models.DescribeCertificateBindResourceTaskResultResponse;
+const ClbListenerRule = models.ClbListenerRule;
+const BindResourceRegionResult = models.BindResourceRegionResult;
+const TkeInstanceDetail = models.TkeInstanceDetail;
+const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
+const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
+const DescribeCSRResponse = models.DescribeCSRResponse;
+const ClbInstanceList = models.ClbInstanceList;
+const TkeIngressDetail = models.TkeIngressDetail;
+const VODInstanceList = models.VODInstanceList;
 
 
 /**
@@ -82,36 +135,58 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upload the confirmation letter for a certificate.
-     * @param {UploadConfirmLetterRequest} req
-     * @param {function(string, UploadConfirmLetterResponse):void} cb
+     * This API is used to batch delete CSRs.
+     * @param {BatchDeleteCSRRequest} req
+     * @param {function(string, BatchDeleteCSRResponse):void} cb
      * @public
      */
-    UploadConfirmLetter(req, cb) {
-        let resp = new UploadConfirmLetterResponse();
-        this.request("UploadConfirmLetter", req, resp, cb);
+    BatchDeleteCSR(req, cb) {
+        let resp = new BatchDeleteCSRResponse();
+        this.request("BatchDeleteCSR", req, resp, cb);
     }
 
     /**
-     * This API is used to purchase a certificate.
-     * @param {CreateCertificateRequest} req
-     * @param {function(string, CreateCertificateResponse):void} cb
+     * This API is used to query the CSR list.
+     * @param {DescribeCSRSetRequest} req
+     * @param {function(string, DescribeCSRSetResponse):void} cb
      * @public
      */
-    CreateCertificate(req, cb) {
-        let resp = new CreateCertificateResponse();
-        this.request("CreateCertificate", req, resp, cb);
+    DescribeCSRSet(req, cb) {
+        let resp = new DescribeCSRSetResponse();
+        this.request("DescribeCSRSet", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the projects of multiple certificates.
-     * @param {ModifyCertificateProjectRequest} req
-     * @param {function(string, ModifyCertificateProjectResponse):void} cb
+     * This API is used to submit certificate information.
+     * @param {SubmitCertificateInformationRequest} req
+     * @param {function(string, SubmitCertificateInformationResponse):void} cb
      * @public
      */
-    ModifyCertificateProject(req, cb) {
-        let resp = new ModifyCertificateProjectResponse();
-        this.request("ModifyCertificateProject", req, resp, cb);
+    SubmitCertificateInformation(req, cb) {
+        let resp = new SubmitCertificateInformationResponse();
+        this.request("SubmitCertificateInformation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a CSR.
+     * @param {DescribeCSRRequest} req
+     * @param {function(string, DescribeCSRResponse):void} cb
+     * @public
+     */
+    DescribeCSR(req, cb) {
+        let resp = new DescribeCSRResponse();
+        this.request("DescribeCSR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a CSR.
+     * @param {CreateCSRRequest} req
+     * @param {function(string, CreateCSRResponse):void} cb
+     * @public
+     */
+    CreateCSR(req, cb) {
+        let resp = new CreateCSRResponse();
+        this.request("CreateCSR", req, resp, cb);
     }
 
     /**
@@ -126,14 +201,14 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to submit a certificate order.
-     * @param {CommitCertificateInformationRequest} req
-     * @param {function(string, CommitCertificateInformationResponse):void} cb
+     * This API is used to download a certificate.
+     * @param {DownloadCertificateRequest} req
+     * @param {function(string, DownloadCertificateResponse):void} cb
      * @public
      */
-    CommitCertificateInformation(req, cb) {
-        let resp = new CommitCertificateInformationResponse();
-        this.request("CommitCertificateInformation", req, resp, cb);
+    DownloadCertificate(req, cb) {
+        let resp = new DownloadCertificateResponse();
+        this.request("DownloadCertificate", req, resp, cb);
     }
 
     /**
@@ -159,6 +234,61 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the information of a CSR.
+     * @param {ModifyCSRRequest} req
+     * @param {function(string, ModifyCSRResponse):void} cb
+     * @public
+     */
+    ModifyCSR(req, cb) {
+        let resp = new ModifyCSRResponse();
+        this.request("ModifyCSR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get certificate information.
+     * @param {DescribeCertificateRequest} req
+     * @param {function(string, DescribeCertificateResponse):void} cb
+     * @public
+     */
+    DescribeCertificate(req, cb) {
+        let resp = new DescribeCertificateResponse();
+        this.request("DescribeCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get certificate details.
+     * @param {DescribeCertificateDetailRequest} req
+     * @param {function(string, DescribeCertificateDetailResponse):void} cb
+     * @public
+     */
+    DescribeCertificateDetail(req, cb) {
+        let resp = new DescribeCertificateDetailResponse();
+        this.request("DescribeCertificateDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+     * @param {DescribeCertificateBindResourceTaskResultRequest} req
+     * @param {function(string, DescribeCertificateBindResourceTaskResultResponse):void} cb
+     * @public
+     */
+    DescribeCertificateBindResourceTaskResult(req, cb) {
+        let resp = new DescribeCertificateBindResourceTaskResultResponse();
+        this.request("DescribeCertificateBindResourceTaskResult", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the projects of multiple certificates.
+     * @param {ModifyCertificateProjectRequest} req
+     * @param {function(string, ModifyCertificateProjectResponse):void} cb
+     * @public
+     */
+    ModifyCertificateProject(req, cb) {
+        let resp = new ModifyCertificateProjectResponse();
+        this.request("ModifyCertificateProject", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a certificate alias by passing in the certificate ID and new alias.
      * @param {ModifyCertificateAliasRequest} req
      * @param {function(string, ModifyCertificateAliasResponse):void} cb
@@ -170,14 +300,58 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to download a certificate.
-     * @param {DownloadCertificateRequest} req
-     * @param {function(string, DownloadCertificateResponse):void} cb
+     * This API is used to purchase a certificate.
+     * @param {CreateCertificateRequest} req
+     * @param {function(string, CreateCertificateResponse):void} cb
      * @public
      */
-    DownloadCertificate(req, cb) {
-        let resp = new DownloadCertificateResponse();
-        this.request("DownloadCertificate", req, resp, cb);
+    CreateCertificate(req, cb) {
+        let resp = new CreateCertificateResponse();
+        this.request("CreateCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upload the confirmation letter for a certificate.
+     * @param {UploadConfirmLetterRequest} req
+     * @param {function(string, UploadConfirmLetterResponse):void} cb
+     * @public
+     */
+    UploadConfirmLetter(req, cb) {
+        let resp = new UploadConfirmLetterResponse();
+        this.request("UploadConfirmLetter", req, resp, cb);
+    }
+
+    /**
+     * This API is used to submit a certificate order.
+     * @param {CommitCertificateInformationRequest} req
+     * @param {function(string, CommitCertificateInformationResponse):void} cb
+     * @public
+     */
+    CommitCertificateInformation(req, cb) {
+        let resp = new CommitCertificateInformationResponse();
+        this.request("CommitCertificateInformation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get certificate operation logs in the current account.
+     * @param {DescribeCertificateOperateLogsRequest} req
+     * @param {function(string, DescribeCertificateOperateLogsResponse):void} cb
+     * @public
+     */
+    DescribeCertificateOperateLogs(req, cb) {
+        let resp = new DescribeCertificateOperateLogsResponse();
+        this.request("DescribeCertificateOperateLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an async task for querying the cloud resources associated with a certificate. If such a task already exists under the certificate ID, the ID of this task is returned as the result. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE). You can query the result of this task using the `DescribeCertificateBindResourceTaskResult` API.
+     * @param {CreateCertificateBindResourceSyncTaskRequest} req
+     * @param {function(string, CreateCertificateBindResourceSyncTaskResponse):void} cb
+     * @public
+     */
+    CreateCertificateBindResourceSyncTask(req, cb) {
+        let resp = new CreateCertificateBindResourceSyncTaskResponse();
+        this.request("CreateCertificateBindResourceSyncTask", req, resp, cb);
     }
 
     /**
@@ -203,47 +377,14 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get certificate operation logs in the current account.
-     * @param {DescribeCertificateOperateLogsRequest} req
-     * @param {function(string, DescribeCertificateOperateLogsResponse):void} cb
+     * This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+     * @param {DescribeCertificateBindResourceTaskDetailRequest} req
+     * @param {function(string, DescribeCertificateBindResourceTaskDetailResponse):void} cb
      * @public
      */
-    DescribeCertificateOperateLogs(req, cb) {
-        let resp = new DescribeCertificateOperateLogsResponse();
-        this.request("DescribeCertificateOperateLogs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to submit certificate information.
-     * @param {SubmitCertificateInformationRequest} req
-     * @param {function(string, SubmitCertificateInformationResponse):void} cb
-     * @public
-     */
-    SubmitCertificateInformation(req, cb) {
-        let resp = new SubmitCertificateInformationResponse();
-        this.request("SubmitCertificateInformation", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get certificate details.
-     * @param {DescribeCertificateDetailRequest} req
-     * @param {function(string, DescribeCertificateDetailResponse):void} cb
-     * @public
-     */
-    DescribeCertificateDetail(req, cb) {
-        let resp = new DescribeCertificateDetailResponse();
-        this.request("DescribeCertificateDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get certificate information.
-     * @param {DescribeCertificateRequest} req
-     * @param {function(string, DescribeCertificateResponse):void} cb
-     * @public
-     */
-    DescribeCertificate(req, cb) {
-        let resp = new DescribeCertificateResponse();
-        this.request("DescribeCertificate", req, resp, cb);
+    DescribeCertificateBindResourceTaskDetail(req, cb) {
+        let resp = new DescribeCertificateBindResourceTaskDetailResponse();
+        this.request("DescribeCertificateBindResourceTaskDetail", req, resp, cb);
     }
 
 

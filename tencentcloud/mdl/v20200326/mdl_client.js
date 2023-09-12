@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DeleteStreamLiveChannelResponse = models.DeleteStreamLiveChannelResponse;
 const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
 const CreateStreamLiveInputSecurityGroupResponse = models.CreateStreamLiveInputSecurityGroupResponse;
+const InputLossBehaviorInfo = models.InputLossBehaviorInfo;
 const StreamVideoInfo = models.StreamVideoInfo;
 const CreateStreamLivePlanRequest = models.CreateStreamLivePlanRequest;
 const DescribeStreamLiveWatermarksResponse = models.DescribeStreamLiveWatermarksResponse;

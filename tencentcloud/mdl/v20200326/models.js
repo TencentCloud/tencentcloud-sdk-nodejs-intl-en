@@ -122,6 +122,55 @@ class CreateStreamLiveInputSecurityGroupResponse extends  AbstractModel {
 }
 
 /**
+ * Complement the last video frame related settings.
+ * @class
+ */
+class InputLossBehaviorInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The time to fill in the last video frame, unit ms, range 0-1000000, 1000000 means always inserting, default 0 means filling in black screen frame.
+         * @type {number || null}
+         */
+        this.RepeatLastFrameMs = null;
+
+        /**
+         * Fill frame type, COLOR means solid color filling, IMAGE means picture filling, the default is COLOR.
+         * @type {string || null}
+         */
+        this.InputLossImageType = null;
+
+        /**
+         * When the type is COLOR, the corresponding rgb value
+         * @type {string || null}
+         */
+        this.ColorRGB = null;
+
+        /**
+         * When the type is IMAGE, the corresponding image url value
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepeatLastFrameMs = 'RepeatLastFrameMs' in params ? params.RepeatLastFrameMs : null;
+        this.InputLossImageType = 'InputLossImageType' in params ? params.InputLossImageType : null;
+        this.ColorRGB = 'ColorRGB' in params ? params.ColorRGB : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
  * Video information of pushed streams.
  * @class
  */
@@ -3396,6 +3445,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
          */
         this.EventNotifySettings = null;
 
+        /**
+         * Complement the last video frame settings.
+         * @type {InputLossBehaviorInfo || null}
+         */
+        this.InputLossBehavior = null;
+
     }
 
     /**
@@ -3462,6 +3517,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
             let obj = new EventNotifySetting();
             obj.deserialize(params.EventNotifySettings)
             this.EventNotifySettings = obj;
+        }
+
+        if (params.InputLossBehavior) {
+            let obj = new InputLossBehaviorInfo();
+            obj.deserialize(params.InputLossBehavior)
+            this.InputLossBehavior = obj;
         }
 
     }
@@ -5652,6 +5713,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
          */
         this.EventNotifySettings = null;
 
+        /**
+         * Complement the last video frame settings.
+         * @type {InputLossBehaviorInfo || null}
+         */
+        this.InputLossBehavior = null;
+
     }
 
     /**
@@ -5719,6 +5786,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
             let obj = new EventNotifySetting();
             obj.deserialize(params.EventNotifySettings)
             this.EventNotifySettings = obj;
+        }
+
+        if (params.InputLossBehavior) {
+            let obj = new InputLossBehaviorInfo();
+            obj.deserialize(params.InputLossBehavior)
+            this.InputLossBehavior = obj;
         }
 
     }
@@ -6019,6 +6092,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.EventNotifySettings = null;
 
+        /**
+         * Supplement the last video frame configuration settings.
+         * @type {InputLossBehaviorInfo || null}
+         */
+        this.InputLossBehavior = null;
+
     }
 
     /**
@@ -6087,6 +6166,12 @@ Note: This field may return `null`, indicating that no valid value was found.
             let obj = new EventNotifySetting();
             obj.deserialize(params.EventNotifySettings)
             this.EventNotifySettings = obj;
+        }
+
+        if (params.InputLossBehavior) {
+            let obj = new InputLossBehaviorInfo();
+            obj.deserialize(params.InputLossBehavior)
+            this.InputLossBehavior = obj;
         }
 
     }
@@ -6345,6 +6430,7 @@ module.exports = {
     DeleteStreamLiveChannelResponse: DeleteStreamLiveChannelResponse,
     VideoPipelineInputStatistics: VideoPipelineInputStatistics,
     CreateStreamLiveInputSecurityGroupResponse: CreateStreamLiveInputSecurityGroupResponse,
+    InputLossBehaviorInfo: InputLossBehaviorInfo,
     StreamVideoInfo: StreamVideoInfo,
     CreateStreamLivePlanRequest: CreateStreamLivePlanRequest,
     DescribeStreamLiveWatermarksResponse: DescribeStreamLiveWatermarksResponse,

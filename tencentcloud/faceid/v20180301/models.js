@@ -224,6 +224,12 @@ class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
         this.BizToken = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.VerificationURL = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -240,6 +246,7 @@ class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
         }
         this.VerificationUrl = 'VerificationUrl' in params ? params.VerificationUrl : null;
         this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.VerificationURL = 'VerificationURL' in params ? params.VerificationURL : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -433,6 +440,12 @@ After the verification process is completed, the `BizToken` of this process will
          */
         this.Extra = null;
 
+        /**
+         * The parameter control the page configuration.
+         * @type {WebVerificationConfigIntl || null}
+         */
+        this.Config = null;
+
     }
 
     /**
@@ -445,6 +458,12 @@ After the verification process is completed, the `BizToken` of this process will
         this.CompareImageBase64 = 'CompareImageBase64' in params ? params.CompareImageBase64 : null;
         this.RedirectURL = 'RedirectURL' in params ? params.RedirectURL : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
+
+        if (params.Config) {
+            let obj = new WebVerificationConfigIntl();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
 
     }
 }
@@ -1687,6 +1706,34 @@ class GenerateReflectSequenceResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class WebVerificationConfigIntl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to automatically redirect to `RedirectUrl` after successful verification. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.AutoSkip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoSkip = 'AutoSkip' in params ? params.AutoSkip : null;
+
+    }
+}
+
+/**
  * LivenessCompare request structure.
  * @class
  */
@@ -2087,6 +2134,7 @@ module.exports = {
     FileInfo: FileInfo,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
+    WebVerificationConfigIntl: WebVerificationConfigIntl,
     LivenessCompareRequest: LivenessCompareRequest,
     GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,

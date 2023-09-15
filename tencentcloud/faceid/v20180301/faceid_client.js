@@ -46,6 +46,7 @@ const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse
 const FileInfo = models.FileInfo;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
+const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;

@@ -298,6 +298,41 @@ class DealInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyDBEncryptAttributes response structure.
+ * @class
+ */
+class ModifyDBEncryptAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyBackupStrategy request structure.
  * @class
  */
@@ -1350,6 +1385,49 @@ class DescribeProductConfigRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDBEncryptAttributes request structure.
+ * @class
+ */
+class ModifyDBEncryptAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * A parameter used to enable or disable TDE of the database
+         * @type {Array.<DBTDEEncrypt> || null}
+         */
+        this.DBTDEEncrypt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.DBTDEEncrypt) {
+            this.DBTDEEncrypt = new Array();
+            for (let z in params.DBTDEEncrypt) {
+                let obj = new DBTDEEncrypt();
+                obj.deserialize(params.DBTDEEncrypt[z]);
+                this.DBTDEEncrypt.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateAccount request structure.
  * @class
  */
@@ -2040,6 +2118,34 @@ class ParameterDetail extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceByOrders request structure.
+ * @class
+ */
+class DescribeInstanceByOrdersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID set
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+
+    }
+}
+
+/**
  * DescribeBusinessIntelligenceFile response structure.
  * @class
  */
@@ -2166,13 +2272,13 @@ class DescribeXEventsRequest extends  AbstractModel {
         this.EventType = null;
 
         /**
-         * Generation start time of an extended file
+         * Generation start time of an extended file in the format of yyyy-MM-dd HH:mm:ss.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Generation end time of an extended file
+         * Generation end time of an extended file in the format of yyyy-MM-dd HH:mm:ss.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2557,6 +2663,48 @@ class RecycleDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceEncryptAttributes request structure.
+ * @class
+ */
+class ModifyInstanceEncryptAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Certificate u200downership. Valid values: `self` (certificate of this account), `others` (certificate of the other account). Default value: `self`.
+         * @type {string || null}
+         */
+        this.CertificateAttribution = null;
+
+        /**
+         * ID of the other referenced root account, which is required when `CertificateAttribution` is `others`.
+         * @type {string || null}
+         */
+        this.QuoteUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CertificateAttribution = 'CertificateAttribution' in params ? params.CertificateAttribution : null;
+        this.QuoteUin = 'QuoteUin' in params ? params.QuoteUin : null;
 
     }
 }
@@ -3271,7 +3419,7 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). Default value: 2008R2.
+         * SQL version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), `201402` (SQL Server 2014 Standard)`, `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The purchasable version varies by region. It can be queried by the `DescribeProductConfig` API.
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -3283,13 +3431,14 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * The type of purchased instance. Valid values: HA (high-availability edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (basic edition). Default value: HA.
+         * The type of instance to be purchased. Valid values: `HA` (high-availability edition, including dual-server high-availability and AlwaysOn cluster u200deditionu200d), `RO` (read-only replica edition), `SI` (single-node edition), `cvmHA` (dual-server high-availability edition u200dfor CVM), `cvmRO` (read-only edition u200dfor CVM).
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * The host type of purchased instance. Valid values: PM (physical machine), CLOUD_PREMIUM (physical machine with premium cloud disk), CLOUD_SSD (physical machine with SSD). Default value: PM.
+         * The host type of the instance to be purchased. Valid values: `PM` (physical machine), `CLOUD_PREMIUM` (virtual machine with premium cloud disk), `CLOUD_SSD` (virtual machine with SSD), 
+`CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
          * @type {string || null}
          */
         this.MachineType = null;
@@ -3690,7 +3839,7 @@ class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
         this.InstanceChargeType = null;
 
         /**
-         * Number of instances purchased this time. Default value: `1`.
+         * Number of read-only instances to be purchased this time. Default value: `2`.
          * @type {number || null}
          */
         this.GoodsNum = null;
@@ -3790,6 +3939,41 @@ class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
         }
         this.Collation = 'Collation' in params ? params.Collation : null;
         this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceEncryptAttributes response structure.
+ * @class
+ */
+class ModifyInstanceEncryptAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4455,6 +4639,49 @@ class DescribeFlowStatusResponse extends  AbstractModel {
 }
 
 /**
+ * TDE u200dconfiguration
+ * @class
+ */
+class TDEConfigAttribute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
+        /**
+         * Certificate u200downership. Valid values: `self` (u200dcertificate of the this account), `others` (u200dcertificate of the other account), `none` (no certificate).
+         * @type {string || null}
+         */
+        this.CertificateAttribution = null;
+
+        /**
+         * ID of the u200dother referenced root account when enabling TDE
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QuoteUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
+        this.CertificateAttribution = 'CertificateAttribution' in params ? params.CertificateAttribution : null;
+        this.QuoteUin = 'QuoteUin' in params ? params.QuoteUin : null;
+
+    }
+}
+
+/**
  * ModifyAccountPrivilege request structure.
  * @class
  */
@@ -4717,6 +4944,41 @@ class DescribeMigrationsRequest extends  AbstractModel {
 }
 
 /**
+ * List of the resource IDs corresponding to order number
+ * @class
+ */
+class DealInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+
+    }
+}
+
+/**
  * DescribeDBCharsets request structure.
  * @class
  */
@@ -4824,6 +5086,12 @@ class DescribeDBsRequest extends  AbstractModel {
          */
         this.OrderByType = null;
 
+        /**
+         * TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
     }
 
     /**
@@ -4838,35 +5106,30 @@ class DescribeDBsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
 
     }
 }
 
 /**
- * ModifyDBName request structure.
+ * DescribeInstanceByOrders response structure.
  * @class
  */
-class ModifyDBNameRequest extends  AbstractModel {
+class DescribeInstanceByOrdersResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * 
+         * @type {Array.<DealInstance> || null}
          */
-        this.InstanceId = null;
+        this.DealInstance = null;
 
         /**
-         * Old database name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OldDBName = null;
-
-        /**
-         * New name of database
-         * @type {string || null}
-         */
-        this.NewDBName = null;
+        this.RequestId = null;
 
     }
 
@@ -4877,9 +5140,16 @@ class ModifyDBNameRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.OldDBName = 'OldDBName' in params ? params.OldDBName : null;
-        this.NewDBName = 'NewDBName' in params ? params.NewDBName : null;
+
+        if (params.DealInstance) {
+            this.DealInstance = new Array();
+            for (let z in params.DealInstance) {
+                let obj = new DealInstance();
+                obj.deserialize(params.DealInstance[z]);
+                this.DealInstance.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5293,7 +5563,7 @@ class DescribeBackupFilesRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API
+         * Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API (Querying archived backup record is not supported).
          * @type {string || null}
          */
         this.GroupId = null;
@@ -5631,13 +5901,13 @@ class DescribeSlowlogsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Query start time
+         * Start time in the format of `yyyy-MM-dd HH:mm:ss`
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time
+         * End time in the format of `yyyy-MM-dd HH:mm:ss`
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6607,7 +6877,7 @@ class DBInstance extends  AbstractModel {
         this.Version = null;
 
         /**
-         * Physical server code
+         * Instance type. Valid values: `TS85` (physical machine, local SSD), `Z3` (early version of physical machine, local SSD), `CLOUD_BASIC` (virtual machine, HDD cloud disk), `CLOUD_PREMIUM` (virtual machine, premium cloud disk), `CLOUD_SSD` (virtual machine, SSD), `CLOUD_HSSD` (virtual machine, enhanced SSD), `CLOUD_TSSD` (virtual machine, ulTra SSD), `CLOUD_BSSD` virtual machine, balanced SSD).
          * @type {string || null}
          */
         this.Type = null;
@@ -6759,8 +7029,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SlaveZones = null;
 
         /**
-         * Architecture type. Valid values: `SINGLE` (single-node), `DOUBLE` (two-node), `TRIPLE` (three-node).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Architecture type. Valid values: `SINGLE` (single-node), `DOUBLE` (two-node).
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Architecture = null;
@@ -6933,6 +7203,41 @@ class DescribeRollbackTimeRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DBs = 'DBs' in params ? params.DBs : null;
+
+    }
+}
+
+/**
+ * This example shows you how to enable or disable TDE of a database.
+ * @class
+ */
+class DBTDEEncrypt extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBName = null;
+
+        /**
+         * TDE u200dstatus. Valid values: `enable` (enabled), `disable` (disabled).
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
 
     }
 }
@@ -7384,6 +7689,48 @@ class CosUploadBackupFile extends  AbstractModel {
 }
 
 /**
+ * ModifyDBName request structure.
+ * @class
+ */
+class ModifyDBNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Old database name
+         * @type {string || null}
+         */
+        this.OldDBName = null;
+
+        /**
+         * New name of database
+         * @type {string || null}
+         */
+        this.NewDBName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OldDBName = 'OldDBName' in params ? params.OldDBName : null;
+        this.NewDBName = 'NewDBName' in params ? params.NewDBName : null;
+
+    }
+}
+
+/**
  * StartBackupMigration request structure.
  * @class
  */
@@ -7475,6 +7822,12 @@ class DescribeDBInstancesAttributeResponse extends  AbstractModel {
         this.EventSaveDays = null;
 
         /**
+         * TDE u200dconfiguration
+         * @type {TDEConfigAttribute || null}
+         */
+        this.TDEConfig = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7497,6 +7850,12 @@ class DescribeDBInstancesAttributeResponse extends  AbstractModel {
         this.RegularBackupStartTime = 'RegularBackupStartTime' in params ? params.RegularBackupStartTime : null;
         this.BlockedThreshold = 'BlockedThreshold' in params ? params.BlockedThreshold : null;
         this.EventSaveDays = 'EventSaveDays' in params ? params.EventSaveDays : null;
+
+        if (params.TDEConfig) {
+            let obj = new TDEConfigAttribute();
+            obj.deserialize(params.TDEConfig)
+            this.TDEConfig = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7896,7 +8255,7 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
         this.DBPrivileges = null;
 
         /**
-         * Whether the account has the admin permission. Valid values: `true` (Yes. It is an admin account when the instance is a basic edition type and `AccountType` is `L0`; it is a privileged account when the instance is a dual-server high availability edition type and `AccountType` is `L1`.), `false` (No. The admin permission is disabled by default).
+         * Whether it is an instance admin account. Valid values: `true` (Yes. When the instance is single-node and `AccountType` is `L0`, it's an admin account; when the instance is two-node and `AccountType` is `L1`, it's a privileged account), `false` (No. It's a standard account and `AccountType` is `L3`).
          * @type {boolean || null}
          */
         this.IsAdmin = null;
@@ -8440,7 +8799,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.DBNames = null;
 
         /**
-         * Instance ID in the format of mssql-i1z41iwd
+         * (Required) Instance ID in the format of mssql-i1z41iwd
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8450,6 +8809,12 @@ class CreateBackupRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.BackupName = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.StorageStrategy = null;
 
     }
 
@@ -8464,6 +8829,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.DBNames = 'DBNames' in params ? params.DBNames : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.StorageStrategy = 'StorageStrategy' in params ? params.StorageStrategy : null;
 
     }
 }
@@ -9625,6 +9991,12 @@ class DBDetail extends  AbstractModel {
          */
         this.InternalStatus = null;
 
+        /**
+         * TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
     }
 
     /**
@@ -9649,6 +10021,7 @@ class DBDetail extends  AbstractModel {
             }
         }
         this.InternalStatus = 'InternalStatus' in params ? params.InternalStatus : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
 
     }
 }
@@ -10764,6 +11137,7 @@ module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
     CloneDBResponse: CloneDBResponse,
     DealInfo: DealInfo,
+    ModifyDBEncryptAttributesResponse: ModifyDBEncryptAttributesResponse,
     ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
     RestoreInstanceRequest: RestoreInstanceRequest,
     CrossRegionStatus: CrossRegionStatus,
@@ -10788,6 +11162,7 @@ module.exports = {
     CreateBusinessIntelligenceFileResponse: CreateBusinessIntelligenceFileResponse,
     OpenInterCommunicationRequest: OpenInterCommunicationRequest,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
+    ModifyDBEncryptAttributesRequest: ModifyDBEncryptAttributesRequest,
     CreateAccountRequest: CreateAccountRequest,
     ParamRecord: ParamRecord,
     RollbackInstanceResponse: RollbackInstanceResponse,
@@ -10803,6 +11178,7 @@ module.exports = {
     DescribeIncrementalMigrationRequest: DescribeIncrementalMigrationRequest,
     DeleteBusinessIntelligenceFileResponse: DeleteBusinessIntelligenceFileResponse,
     ParameterDetail: ParameterDetail,
+    DescribeInstanceByOrdersRequest: DescribeInstanceByOrdersRequest,
     DescribeBusinessIntelligenceFileResponse: DescribeBusinessIntelligenceFileResponse,
     ZoneInfo: ZoneInfo,
     DescribeXEventsRequest: DescribeXEventsRequest,
@@ -10811,6 +11187,7 @@ module.exports = {
     ModifyDBInstanceNetworkRequest: ModifyDBInstanceNetworkRequest,
     MigrationDetail: MigrationDetail,
     RecycleDBInstanceRequest: RecycleDBInstanceRequest,
+    ModifyInstanceEncryptAttributesRequest: ModifyInstanceEncryptAttributesRequest,
     BusinessIntelligenceFile: BusinessIntelligenceFile,
     DescribeFlowStatusRequest: DescribeFlowStatusRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
@@ -10827,6 +11204,7 @@ module.exports = {
     DescribeDBsResponse: DescribeDBsResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     CreateCloudReadOnlyDBInstancesRequest: CreateCloudReadOnlyDBInstancesRequest,
+    ModifyInstanceEncryptAttributesResponse: ModifyInstanceEncryptAttributesResponse,
     MigrationStep: MigrationStep,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     Events: Events,
@@ -10840,15 +11218,17 @@ module.exports = {
     ModifyDatabaseCTRequest: ModifyDatabaseCTRequest,
     ModifyBackupMigrationResponse: ModifyBackupMigrationResponse,
     DescribeFlowStatusResponse: DescribeFlowStatusResponse,
+    TDEConfigAttribute: TDEConfigAttribute,
     ModifyAccountPrivilegeRequest: ModifyAccountPrivilegeRequest,
     CreateBackupMigrationRequest: CreateBackupMigrationRequest,
     DescribeXEventsResponse: DescribeXEventsResponse,
     DescribeDBsNormalResponse: DescribeDBsNormalResponse,
     DescribeMigrationsRequest: DescribeMigrationsRequest,
+    DealInstance: DealInstance,
     DescribeDBCharsetsRequest: DescribeDBCharsetsRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeDBsRequest: DescribeDBsRequest,
-    ModifyDBNameRequest: ModifyDBNameRequest,
+    DescribeInstanceByOrdersResponse: DescribeInstanceByOrdersResponse,
     ModifyDatabaseMdfRequest: ModifyDatabaseMdfRequest,
     DeleteIncrementalMigrationResponse: DeleteIncrementalMigrationResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
@@ -10886,6 +11266,7 @@ module.exports = {
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     DescribeRollbackTimeRequest: DescribeRollbackTimeRequest,
+    DBTDEEncrypt: DBTDEEncrypt,
     DescribeUploadBackupInfoResponse: DescribeUploadBackupInfoResponse,
     CreateMigrationRequest: CreateMigrationRequest,
     DescribeDBInstanceInterRequest: DescribeDBInstanceInterRequest,
@@ -10893,6 +11274,7 @@ module.exports = {
     DescribeUploadBackupInfoRequest: DescribeUploadBackupInfoRequest,
     ModifyDBNameResponse: ModifyDBNameResponse,
     CosUploadBackupFile: CosUploadBackupFile,
+    ModifyDBNameRequest: ModifyDBNameRequest,
     StartBackupMigrationRequest: StartBackupMigrationRequest,
     DescribeDBInstancesAttributeResponse: DescribeDBInstancesAttributeResponse,
     Backup: Backup,

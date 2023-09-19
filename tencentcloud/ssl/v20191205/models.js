@@ -648,6 +648,27 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.AutoRenewFlag = null;
 
+        /**
+         * The hosting status. Valid values: `0` (hosting), `5` (replacing resources), `10` (hosting completed), and `-1` (not hosted). 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HostingStatus = null;
+
+        /**
+         * The hosting completion time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HostingCompleteTime = null;
+
+        /**
+         * The hosted new certificate ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HostingRenewCertId = null;
+
     }
 
     /**
@@ -718,6 +739,9 @@ Note: This field may return null, indicating that no valid value can be obtained
             this.PreAuditInfo = obj;
         }
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.HostingStatus = 'HostingStatus' in params ? params.HostingStatus : null;
+        this.HostingCompleteTime = 'HostingCompleteTime' in params ? params.HostingCompleteTime : null;
+        this.HostingRenewCertId = 'HostingRenewCertId' in params ? params.HostingRenewCertId : null;
 
     }
 }
@@ -1645,6 +1669,34 @@ class DescribeCSRRequest extends  AbstractModel {
             return;
         }
         this.CSRId = 'CSRId' in params ? params.CSRId : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateResubmit request structure.
+ * @class
+ */
+class ModifyCertificateResubmitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The certificate ID.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
 
     }
 }
@@ -5067,6 +5119,69 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
 }
 
 /**
+ * CancelAuditCertificate request structure.
+ * @class
+ */
+class CancelAuditCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The certificate ID.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateResubmit response structure.
+ * @class
+ */
+class ModifyCertificateResubmitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The certificate ID.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UploadCertificate request structure.
  * @class
  */
@@ -6259,6 +6374,41 @@ class TkeIngressDetail extends  AbstractModel {
 }
 
 /**
+ * CancelAuditCertificate response structure.
+ * @class
+ */
+class CancelAuditCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the operation succeeded.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details of VOD instances - data structure of an async task for querying associated cloud resources
  * @class
  */
@@ -6329,6 +6479,7 @@ module.exports = {
     DdosInstanceList: DdosInstanceList,
     DescribeCSRSetResponse: DescribeCSRSetResponse,
     DescribeCSRRequest: DescribeCSRRequest,
+    ModifyCertificateResubmitRequest: ModifyCertificateResubmitRequest,
     DescribeCertificateBindResourceTaskResultRequest: DescribeCertificateBindResourceTaskResultRequest,
     BindResourceResult: BindResourceResult,
     ApplyCertificateResponse: ApplyCertificateResponse,
@@ -6383,6 +6534,8 @@ module.exports = {
     DeleteCertificateRequest: DeleteCertificateRequest,
     DescribeCertificateOperateLogsResponse: DescribeCertificateOperateLogsResponse,
     ModifyCertificateProjectRequest: ModifyCertificateProjectRequest,
+    CancelAuditCertificateRequest: CancelAuditCertificateRequest,
+    ModifyCertificateResubmitResponse: ModifyCertificateResubmitResponse,
     UploadCertificateRequest: UploadCertificateRequest,
     ModifyCertificateAliasResponse: ModifyCertificateAliasResponse,
     ApplyCertificateRequest: ApplyCertificateRequest,
@@ -6397,6 +6550,7 @@ module.exports = {
     DescribeCSRResponse: DescribeCSRResponse,
     ClbInstanceList: ClbInstanceList,
     TkeIngressDetail: TkeIngressDetail,
+    CancelAuditCertificateResponse: CancelAuditCertificateResponse,
     VODInstanceList: VODInstanceList,
 
 }

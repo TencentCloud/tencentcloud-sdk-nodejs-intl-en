@@ -242,6 +242,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TargetUin = null;
 
         /**
+         * Additional configuration of the Secret
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AdditionalConfig = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -272,6 +279,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
         this.AssociatedInstanceIDs = 'AssociatedInstanceIDs' in params ? params.AssociatedInstanceIDs : null;
         this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+        this.AdditionalConfig = 'AdditionalConfig' in params ? params.AdditionalConfig : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -388,13 +396,13 @@ class CreateSecretRequest extends  AbstractModel {
         super();
 
         /**
-         * Secret name, which must be unique within a region. The name can be up to 128 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
+         * Secret name, which must be unique in the same region. It can contain 128 bytes ([a-z], [A-Z], [0-9], [-_]). It must begin with a letter or digit. Note that it cannot be modified once created. 
          * @type {string || null}
          */
         this.SecretName = null;
 
         /**
-         * Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information.
+         * Secret version. It can contain up to 64 bytes ([a-z], [A-Z], [0-9], [-_.]). It must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information. If it is left empty, the initial Secret version number is used by default.
          * @type {string || null}
          */
         this.VersionId = null;
@@ -412,6 +420,12 @@ class CreateSecretRequest extends  AbstractModel {
         this.KmsKeyId = null;
 
         /**
+         * Secret type. It defaults to `custom`.
+         * @type {number || null}
+         */
+        this.SecretType = null;
+
+        /**
          * Base64-encoded plaintext of a binary Secret. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
          * @type {string || null}
          */
@@ -422,6 +436,12 @@ class CreateSecretRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SecretString = null;
+
+        /**
+         * Additional configuration of the Secret in JSON format
+         * @type {string || null}
+         */
+        this.AdditionalConfig = null;
 
         /**
          * List of tags.
@@ -442,8 +462,10 @@ class CreateSecretRequest extends  AbstractModel {
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.SecretType = 'SecretType' in params ? params.SecretType : null;
         this.SecretBinary = 'SecretBinary' in params ? params.SecretBinary : null;
         this.SecretString = 'SecretString' in params ? params.SecretString : null;
+        this.AdditionalConfig = 'AdditionalConfig' in params ? params.AdditionalConfig : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -903,6 +925,27 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TargetUin = null;
 
+        /**
+         * Rotation frequency in days. It takes effect when the rotation feature is enabled. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RotationFrequency = null;
+
+        /**
+         * ID of Tencent Cloud resource corresponding with the Secret. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceID = null;
+
+        /**
+         * The rotation start time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RotationBeginTime = null;
+
     }
 
     /**
@@ -928,6 +971,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
         this.AssociatedInstanceIDs = 'AssociatedInstanceIDs' in params ? params.AssociatedInstanceIDs : null;
         this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+        this.RotationFrequency = 'RotationFrequency' in params ? params.RotationFrequency : null;
+        this.ResourceID = 'ResourceID' in params ? params.ResourceID : null;
+        this.RotationBeginTime = 'RotationBeginTime' in params ? params.RotationBeginTime : null;
 
     }
 }

@@ -42,6 +42,7 @@ const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
 const DdosInstanceList = models.DdosInstanceList;
 const DescribeCSRSetResponse = models.DescribeCSRSetResponse;
 const DescribeCSRRequest = models.DescribeCSRRequest;
+const ModifyCertificateResubmitRequest = models.ModifyCertificateResubmitRequest;
 const DescribeCertificateBindResourceTaskResultRequest = models.DescribeCertificateBindResourceTaskResultRequest;
 const BindResourceResult = models.BindResourceResult;
 const ApplyCertificateResponse = models.ApplyCertificateResponse;
@@ -96,6 +97,8 @@ const LiveInstanceList = models.LiveInstanceList;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
+const CancelAuditCertificateRequest = models.CancelAuditCertificateRequest;
+const ModifyCertificateResubmitResponse = models.ModifyCertificateResubmitResponse;
 const UploadCertificateRequest = models.UploadCertificateRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
@@ -110,6 +113,7 @@ const SubmitCertificateInformationResponse = models.SubmitCertificateInformation
 const DescribeCSRResponse = models.DescribeCSRResponse;
 const ClbInstanceList = models.ClbInstanceList;
 const TkeIngressDetail = models.TkeIngressDetail;
+const CancelAuditCertificateResponse = models.CancelAuditCertificateResponse;
 const VODInstanceList = models.VODInstanceList;
 
 
@@ -278,6 +282,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * This API is used to cancel certificate review.
+     * @param {CancelAuditCertificateRequest} req
+     * @param {function(string, CancelAuditCertificateResponse):void} cb
+     * @public
+     */
+    CancelAuditCertificate(req, cb) {
+        let resp = new CancelAuditCertificateResponse();
+        this.request("CancelAuditCertificate", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the projects of multiple certificates.
      * @param {ModifyCertificateProjectRequest} req
      * @param {function(string, ModifyCertificateProjectResponse):void} cb
@@ -385,6 +400,17 @@ class SslClient extends AbstractClient {
     DescribeCertificateBindResourceTaskDetail(req, cb) {
         let resp = new DescribeCertificateBindResourceTaskDetailResponse();
         this.request("DescribeCertificateBindResourceTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to re-submit a review application for a paid certificate whose review failed or was canceled.
+     * @param {ModifyCertificateResubmitRequest} req
+     * @param {function(string, ModifyCertificateResubmitResponse):void} cb
+     * @public
+     */
+    ModifyCertificateResubmit(req, cb) {
+        let resp = new ModifyCertificateResubmitResponse();
+        this.request("ModifyCertificateResubmit", req, resp, cb);
     }
 
 

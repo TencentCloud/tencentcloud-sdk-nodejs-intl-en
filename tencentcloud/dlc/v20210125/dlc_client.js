@@ -16,89 +16,93 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const TableBaseInfo = models.TableBaseInfo;
 const DescribeResultDownloadResponse = models.DescribeResultDownloadResponse;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
+const PrestoMonitorMetrics = models.PrestoMonitorMetrics;
+const DescribeSparkAppJobRequest = models.DescribeSparkAppJobRequest;
+const CosPermission = models.CosPermission;
+const CreateResultDownloadResponse = models.CreateResultDownloadResponse;
+const ModifyGovernEventRuleResponse = models.ModifyGovernEventRuleResponse;
+const SparkMonitorMetrics = models.SparkMonitorMetrics;
+const TagInfo = models.TagInfo;
+const SwitchDataEngineRequest = models.SwitchDataEngineRequest;
+const SessionResourceTemplate = models.SessionResourceTemplate;
+const Task = models.Task;
+const TaskResultInfo = models.TaskResultInfo;
+const DescribeSparkAppTasksResponse = models.DescribeSparkAppTasksResponse;
+const DescribeTasksResponse = models.DescribeTasksResponse;
+const CommonMetrics = models.CommonMetrics;
+const UserRole = models.UserRole;
+const DescribeSparkSessionBatchSqlLogResponse = models.DescribeSparkSessionBatchSqlLogResponse;
+const GenerateCreateMangedTableSqlRequest = models.GenerateCreateMangedTableSqlRequest;
+const SwitchDataEngineResponse = models.SwitchDataEngineResponse;
+const DescribeLakeFsInfoRequest = models.DescribeLakeFsInfoRequest;
+const ModifySparkAppRequest = models.ModifySparkAppRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const CreateSparkAppTaskRequest = models.CreateSparkAppTaskRequest;
-const PrestoMonitorMetrics = models.PrestoMonitorMetrics;
-const ModifySparkAppBatchResponse = models.ModifySparkAppBatchResponse;
-const DescribeForbiddenTableProResponse = models.DescribeForbiddenTableProResponse;
+const DescribeEngineUsageInfoResponse = models.DescribeEngineUsageInfoResponse;
 const KVPair = models.KVPair;
-const CreateSparkSessionBatchSQLResponse = models.CreateSparkSessionBatchSQLResponse;
-const DescribeLakeFsDirSummaryRequest = models.DescribeLakeFsDirSummaryRequest;
-const GenerateCreateMangedTableSqlResponse = models.GenerateCreateMangedTableSqlResponse;
-const CreateInternalTableRequest = models.CreateInternalTableRequest;
-const ModifySparkAppRequest = models.ModifySparkAppRequest;
-const DescribeSparkAppJobRequest = models.DescribeSparkAppJobRequest;
-const TasksInfo = models.TasksInfo;
+const TableBaseInfo = models.TableBaseInfo;
 const CreateSparkAppTaskResponse = models.CreateSparkAppTaskResponse;
-const CancelTaskRequest = models.CancelTaskRequest;
-const TaskResponseInfo = models.TaskResponseInfo;
-const CreateSparkAppResponse = models.CreateSparkAppResponse;
-const CreateTaskResponse = models.CreateTaskResponse;
-const DescribeSparkSessionBatchSqlLogResponse = models.DescribeSparkSessionBatchSqlLogResponse;
-const DeleteSparkAppResponse = models.DeleteSparkAppResponse;
-const CreateResultDownloadResponse = models.CreateResultDownloadResponse;
-const CreateTasksRequest = models.CreateTasksRequest;
-const SuspendResumeDataEngineRequest = models.SuspendResumeDataEngineRequest;
-const DataEngineConfigPair = models.DataEngineConfigPair;
-const DescribeSparkAppJobsResponse = models.DescribeSparkAppJobsResponse;
-const DescribeSparkAppTasksResponse = models.DescribeSparkAppTasksResponse;
-const SparkMonitorMetrics = models.SparkMonitorMetrics;
-const SuspendResumeDataEngineResponse = models.SuspendResumeDataEngineResponse;
-const Task = models.Task;
-const CancelSparkSessionBatchSQLRequest = models.CancelSparkSessionBatchSQLRequest;
-const SessionResourceTemplate = models.SessionResourceTemplate;
-const SparkSessionBatchLog = models.SparkSessionBatchLog;
+const CreateInternalTableRequest = models.CreateInternalTableRequest;
+const TasksInfo = models.TasksInfo;
+const CreateSparkAppRequest = models.CreateSparkAppRequest;
 const DescribeEngineUsageInfoRequest = models.DescribeEngineUsageInfoRequest;
-const DeleteSparkAppRequest = models.DeleteSparkAppRequest;
 const DescribeForbiddenTableProRequest = models.DescribeForbiddenTableProRequest;
 const CreateDataEngineResponse = models.CreateDataEngineResponse;
 const DescribeSparkAppJobsRequest = models.DescribeSparkAppJobsRequest;
-const TagInfo = models.TagInfo;
-const SparkSessionBatchLogOperate = models.SparkSessionBatchLogOperate;
-const CreateTasksResponse = models.CreateTasksResponse;
-const DescribeTasksResponse = models.DescribeTasksResponse;
-const SwitchDataEngineRequest = models.SwitchDataEngineRequest;
-const CreateSparkAppRequest = models.CreateSparkAppRequest;
-const CrontabResumeSuspendStrategy = models.CrontabResumeSuspendStrategy;
-const Column = models.Column;
-const CreateSparkSessionBatchSQLRequest = models.CreateSparkSessionBatchSQLRequest;
-const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
-const UpdateRowFilterRequest = models.UpdateRowFilterRequest;
 const CreateDataEngineRequest = models.CreateDataEngineRequest;
 const ModifySparkAppBatchRequest = models.ModifySparkAppBatchRequest;
-const Filter = models.Filter;
-const DescribeLakeFsDirSummaryResponse = models.DescribeLakeFsDirSummaryResponse;
 const CreateTaskRequest = models.CreateTaskRequest;
 const ModifySparkAppResponse = models.ModifySparkAppResponse;
-const TasksOverview = models.TasksOverview;
-const CreateInternalTableResponse = models.CreateInternalTableResponse;
+const SparkSessionBatchLog = models.SparkSessionBatchLog;
 const SparkJobInfo = models.SparkJobInfo;
-const DescribeSparkAppTasksRequest = models.DescribeSparkAppTasksRequest;
+const DescribeSparkSessionBatchSqlLogRequest = models.DescribeSparkSessionBatchSqlLogRequest;
+const DescribeSparkAppJobResponse = models.DescribeSparkAppJobResponse;
+const DescribeUserRolesResponse = models.DescribeUserRolesResponse;
+const DataEngineConfigPair = models.DataEngineConfigPair;
+const SuspendResumeDataEngineResponse = models.SuspendResumeDataEngineResponse;
+const StreamingStatistics = models.StreamingStatistics;
+const GenerateCreateMangedTableSqlResponse = models.GenerateCreateMangedTableSqlResponse;
+const CancelTaskRequest = models.CancelTaskRequest;
+const TaskResponseInfo = models.TaskResponseInfo;
 const Property = models.Property;
-const GenerateCreateMangedTableSqlRequest = models.GenerateCreateMangedTableSqlRequest;
+const DeleteSparkAppRequest = models.DeleteSparkAppRequest;
+const DescribeUserRolesRequest = models.DescribeUserRolesRequest;
+const Execution = models.Execution;
+const Column = models.Column;
+const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
+const Filter = models.Filter;
+const DescribeLakeFsDirSummaryResponse = models.DescribeLakeFsDirSummaryResponse;
+const DescribeForbiddenTableProResponse = models.DescribeForbiddenTableProResponse;
 const CancelTaskResponse = models.CancelTaskResponse;
 const DataGovernPolicy = models.DataGovernPolicy;
-const ModifyGovernEventRuleResponse = models.ModifyGovernEventRuleResponse;
-const SwitchDataEngineResponse = models.SwitchDataEngineResponse;
-const Execution = models.Execution;
-const SQLTask = models.SQLTask;
-const DescribeSparkSessionBatchSqlLogRequest = models.DescribeSparkSessionBatchSqlLogRequest;
-const DescribeLakeFsInfoRequest = models.DescribeLakeFsInfoRequest;
-const UpdateRowFilterResponse = models.UpdateRowFilterResponse;
-const CreateResultDownloadRequest = models.CreateResultDownloadRequest;
-const DescribeSparkAppJobResponse = models.DescribeSparkAppJobResponse;
-const DescribeEngineUsageInfoResponse = models.DescribeEngineUsageInfoResponse;
-const StreamingStatistics = models.StreamingStatistics;
-const ModifyGovernEventRuleRequest = models.ModifyGovernEventRuleRequest;
-const Policy = models.Policy;
-const CommonMetrics = models.CommonMetrics;
+const ModifySparkAppBatchResponse = models.ModifySparkAppBatchResponse;
 const TPartition = models.TPartition;
-const TaskResultInfo = models.TaskResultInfo;
 const DescribeLakeFsInfoResponse = models.DescribeLakeFsInfoResponse;
 const CancelSparkSessionBatchSQLResponse = models.CancelSparkSessionBatchSQLResponse;
+const CreateSparkSessionBatchSQLResponse = models.CreateSparkSessionBatchSQLResponse;
+const DescribeLakeFsDirSummaryRequest = models.DescribeLakeFsDirSummaryRequest;
+const Policy = models.Policy;
+const CreateSparkAppResponse = models.CreateSparkAppResponse;
+const CreateTaskResponse = models.CreateTaskResponse;
+const DeleteSparkAppResponse = models.DeleteSparkAppResponse;
+const CreateTasksRequest = models.CreateTasksRequest;
+const SuspendResumeDataEngineRequest = models.SuspendResumeDataEngineRequest;
+const DescribeSparkAppJobsResponse = models.DescribeSparkAppJobsResponse;
+const CrontabResumeSuspendStrategy = models.CrontabResumeSuspendStrategy;
+const CancelSparkSessionBatchSQLRequest = models.CancelSparkSessionBatchSQLRequest;
+const TasksOverview = models.TasksOverview;
+const CreateTasksResponse = models.CreateTasksResponse;
+const SparkSessionBatchLogOperate = models.SparkSessionBatchLogOperate;
+const CreateSparkSessionBatchSQLRequest = models.CreateSparkSessionBatchSQLRequest;
+const CreateInternalTableResponse = models.CreateInternalTableResponse;
+const DescribeSparkAppTasksRequest = models.DescribeSparkAppTasksRequest;
+const SQLTask = models.SQLTask;
+const UpdateRowFilterResponse = models.UpdateRowFilterResponse;
+const CreateResultDownloadRequest = models.CreateResultDownloadRequest;
+const ModifyGovernEventRuleRequest = models.ModifyGovernEventRuleRequest;
+const UpdateRowFilterRequest = models.UpdateRowFilterRequest;
 const TColumn = models.TColumn;
 const DescribeResultDownloadRequest = models.DescribeResultDownloadRequest;
 
@@ -114,7 +118,7 @@ class DlcClient extends AbstractClient {
     }
     
     /**
-     * This API is used to create a SQL query task. (We recommend you use the `CreateTasks` API instead.)
+     * This API is used to create and execute a SQL task. (`CreateTasks` is recommended.)
      * @param {CreateTaskRequest} req
      * @param {function(string, CreateTaskResponse):void} cb
      * @public
@@ -136,7 +140,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of disabled table attributes.
+     * This API is used to get the list of disabled table attributes (new).
      * @param {DescribeForbiddenTableProRequest} req
      * @param {function(string, DescribeForbiddenTableProResponse):void} cb
      * @public
@@ -147,7 +151,18 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of Spark applications.
+     * This API is used to enumerate user roles.
+     * @param {DescribeUserRolesRequest} req
+     * @param {function(string, DescribeUserRolesResponse):void} cb
+     * @public
+     */
+    DescribeUserRoles(req, cb) {
+        let resp = new DescribeUserRolesResponse();
+        this.request("DescribeUserRoles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of Spark jobs.
      * @param {DescribeSparkAppJobsRequest} req
      * @param {function(string, DescribeSparkAppJobsResponse):void} cb
      * @public
@@ -169,7 +184,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a Spark application.
+     * This API is used to delete a Spark job.
      * @param {DeleteSparkAppRequest} req
      * @param {function(string, DeleteSparkAppResponse):void} cb
      * @public
@@ -180,7 +195,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create tasks in batches.
+     * This API is used to create and execute SQL tasks in batches.
      * @param {CreateTasksRequest} req
      * @param {function(string, CreateTasksResponse):void} cb
      * @public
@@ -191,7 +206,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query a specific Spark application.
+     * u200cThis API is used to query the information of a Spark job.
      * @param {DescribeSparkAppJobRequest} req
      * @param {function(string, DescribeSparkAppJobResponse):void} cb
      * @public
@@ -257,7 +272,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a Spark application.
+     * This API is used to create a Spark job.
      * @param {CreateSparkAppRequest} req
      * @param {function(string, CreateSparkAppResponse):void} cb
      * @public
@@ -290,7 +305,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to submit a Spark SQL batch task.
+     * This API is used to submit a Spark SQL batch task to the job engine.
      * @param {CreateSparkSessionBatchSQLRequest} req
      * @param {function(string, CreateSparkSessionBatchSQLResponse):void} cb
      * @public
@@ -312,7 +327,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a Spark application.
+     * This API is used to update a Spark job.
      * @param {ModifySparkAppRequest} req
      * @param {function(string, ModifySparkAppResponse):void} cb
      * @public
@@ -334,7 +349,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to suspend or resume a data engine.
+     * This API is used to suspend or start a data engine.
      * @param {SuspendResumeDataEngineRequest} req
      * @param {function(string, SuspendResumeDataEngineResponse):void} cb
      * @public
@@ -345,7 +360,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a Spark task.
+     * This API is used to start a Spark job.
      * @param {CreateSparkAppTaskRequest} req
      * @param {function(string, CreateSparkAppTaskResponse):void} cb
      * @public
@@ -411,7 +426,7 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of running task instances of a Spark application.
+     * This API is used to query the list of running task instances of a Spark job.
      * @param {DescribeSparkAppTasksRequest} req
      * @param {function(string, DescribeSparkAppTasksResponse):void} cb
      * @public

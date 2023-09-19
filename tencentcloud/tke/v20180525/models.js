@@ -838,6 +838,34 @@ class RunAutomationServiceEnabled extends  AbstractModel {
 }
 
 /**
+ * UpdateAddon response structure.
+ * @class
+ */
+class UpdateAddonResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpoint response structure.
  * @class
  */
@@ -894,107 +922,24 @@ class DescribeClusterStatusRequest extends  AbstractModel {
 }
 
 /**
- * amp alarm channel configuration
+ * DescribeAddon response structure.
  * @class
  */
-class PrometheusNotification extends  AbstractModel {
+class DescribeAddonResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether it is enabled
-         * @type {boolean || null}
+         * List of add-ons
+         * @type {Array.<Addon> || null}
          */
-        this.Enabled = null;
+        this.Addons = null;
 
         /**
-         * Convergence time
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.RepeatInterval = null;
-
-        /**
-         * Start time
-         * @type {string || null}
-         */
-        this.TimeRangeStart = null;
-
-        /**
-         * End time
-         * @type {string || null}
-         */
-        this.TimeRangeEnd = null;
-
-        /**
-         * Alarm delivery method. Valid values: `SMS`, `EMAIL`, `CALL`, and `WECHAT`
-It respectively represents SMS, email, phone calls, and WeChat.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.NotifyWay = null;
-
-        /**
-         * The alarm recipient group (user group)
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.ReceiverGroups = null;
-
-        /**
-         * The alarm sequence of phone calls
-This parameter is used when you specify `CALL` for `NotifyWay`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.PhoneNotifyOrder = null;
-
-        /**
-         * The number of phone call alarms
-This parameter is used when you specify `CALL` for `NotifyWay`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.PhoneCircleTimes = null;
-
-        /**
-         * Dialing interval in seconds within one polling
-This parameter is used when you specify `CALL` for `NotifyWay`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.PhoneInnerInterval = null;
-
-        /**
-         * Polling interval in seconds
-This parameter is used when you specify `CALL` for `NotifyWay`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.PhoneCircleInterval = null;
-
-        /**
-         * Phone call alarm arrival notification
-This parameter is used when you specify `CALL` for `NotifyWay`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {boolean || null}
-         */
-        this.PhoneArriveNotice = null;
-
-        /**
-         * Channel type. Default value: `amp`. The following channels are supported:
-amp
-webhook
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * This parameter is required if `Type` is `webhook`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.WebHook = null;
+        this.RequestId = null;
 
     }
 
@@ -1005,19 +950,16 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
-        this.TimeRangeStart = 'TimeRangeStart' in params ? params.TimeRangeStart : null;
-        this.TimeRangeEnd = 'TimeRangeEnd' in params ? params.TimeRangeEnd : null;
-        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
-        this.ReceiverGroups = 'ReceiverGroups' in params ? params.ReceiverGroups : null;
-        this.PhoneNotifyOrder = 'PhoneNotifyOrder' in params ? params.PhoneNotifyOrder : null;
-        this.PhoneCircleTimes = 'PhoneCircleTimes' in params ? params.PhoneCircleTimes : null;
-        this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
-        this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
-        this.PhoneArriveNotice = 'PhoneArriveNotice' in params ? params.PhoneArriveNotice : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.WebHook = 'WebHook' in params ? params.WebHook : null;
+
+        if (params.Addons) {
+            this.Addons = new Array();
+            for (let z in params.Addons) {
+                let obj = new Addon();
+                obj.deserialize(params.Addons[z]);
+                this.Addons.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1123,6 +1065,88 @@ class CreateEdgeLogConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Virtual node pool
+ * @class
+ */
+class VirtualNodePool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * List of subnets
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Node pool lifecycle status
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * Virtual node labels
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Virtual node taint
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
 
     }
 }
@@ -1820,6 +1844,65 @@ class DescribeTKEEdgeClusterCredentialRequest extends  AbstractModel {
 }
 
 /**
+ * Add-on description
+ * @class
+ */
+class Addon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Add-on name
+         * @type {string || null}
+         */
+        this.AddonName = null;
+
+        /**
+         * Add-on version
+         * @type {string || null}
+         */
+        this.AddonVersion = null;
+
+        /**
+         * Add-on parameters, which are base64-encoded strings in JSON/
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RawValues = null;
+
+        /**
+         * Add-on status
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Phase = null;
+
+        /**
+         * Reason for add-on failure
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
+        this.AddonVersion = 'AddonVersion' in params ? params.AddonVersion : null;
+        this.RawValues = 'RawValues' in params ? params.RawValues : null;
+        this.Phase = 'Phase' in params ? params.Phase : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
  * Auto-upgrades cluster specification
  * @class
  */
@@ -1889,6 +1972,34 @@ class CheckEdgeClusterCIDRResponse extends  AbstractModel {
         }
         this.ConflictCode = 'ConflictCode' in params ? params.ConflictCode : null;
         this.ConflictMsg = 'ConflictMsg' in params ? params.ConflictMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableEncryptionProtection response structure.
+ * @class
+ */
+class DisableEncryptionProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2219,6 +2330,55 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateAddon request structure.
+ * @class
+ */
+class UpdateAddonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Add-on name
+         * @type {string || null}
+         */
+        this.AddonName = null;
+
+        /**
+         * Add-on version. The add-on version is not updated if this parameter is not specified.
+         * @type {string || null}
+         */
+        this.AddonVersion = null;
+
+        /**
+         * Add-on parameters in a base64-encoded JSON string. You can query add-on parameters via `DescribeAddonValues`.
+         * @type {string || null}
+         */
+        this.RawValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
+        this.AddonVersion = 'AddonVersion' in params ? params.AddonVersion : null;
+        this.RawValues = 'RawValues' in params ? params.RawValues : null;
+
+    }
+}
+
+/**
  * Node custom parameter
  * @class
  */
@@ -2428,6 +2588,12 @@ class ClusterLevelChangeRecord extends  AbstractModel {
         this.TriggerType = null;
 
         /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
          * Start time
          * @type {string || null}
          */
@@ -2455,6 +2621,7 @@ class ClusterLevelChangeRecord extends  AbstractModel {
         this.OldLevel = 'OldLevel' in params ? params.OldLevel : null;
         this.NewLevel = 'NewLevel' in params ? params.NewLevel : null;
         this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.StartedAt = 'StartedAt' in params ? params.StartedAt : null;
         this.EndedAt = 'EndedAt' in params ? params.EndedAt : null;
 
@@ -2853,6 +3020,48 @@ Note: this field may return null, indicating that no valid value was found.
 }
 
 /**
+ * Combination of the ECM instance AZ, number of instances, and ISP
+ * @class
+ */
+class ECMZoneInstanceCountISP extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Number of instances to be created in the current AZ
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * ISP
+         * @type {string || null}
+         */
+        this.ISP = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ISP = 'ISP' in params ? params.ISP : null;
+
+    }
+}
+
+/**
  * Cluster's instance information
  * @class
  */
@@ -3059,6 +3268,69 @@ Note: this field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * Task step information
+ * @class
+ */
+class TaskStepInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Step name
+         * @type {string || null}
+         */
+        this.Step = null;
+
+        /**
+         * Lifecycle
+pending: the step is not started
+running: the step is in progress
+success: the step is completed
+failed: the step failed
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * Step start time
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.StartAt = null;
+
+        /**
+         * Step end time
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.EndAt = null;
+
+        /**
+         * If the lifecycle of the step is failed, this field will display the error information.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.FailedMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Step = 'Step' in params ? params.Step : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.StartAt = 'StartAt' in params ? params.StartAt : null;
+        this.EndAt = 'EndAt' in params ? params.EndAt : null;
+        this.FailedMsg = 'FailedMsg' in params ? params.FailedMsg : null;
+
+    }
+}
+
+/**
  * DescribeVersions response structure.
  * @class
  */
@@ -3238,24 +3510,63 @@ class DeleteEdgeClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
- * The type of resource the label is bound to. Type currently supported is **cluster**.
+ * PROM instance alarm rule
  * @class
  */
-class Tag extends  AbstractModel {
+class PrometheusAlertRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key.
+         * Rule name
          * @type {string || null}
          */
-        this.Key = null;
+        this.Name = null;
 
         /**
-         * Tag value.
+         * PromQL contents
          * @type {string || null}
          */
-        this.Value = null;
+        this.Rule = null;
+
+        /**
+         * Additional labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Alarm delivery template
+         * @type {string || null}
+         */
+        this.Template = null;
+
+        /**
+         * Duration
+         * @type {string || null}
+         */
+        this.For = null;
+
+        /**
+         * Rule description
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * Refer to annotations in prometheus rule
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Label> || null}
+         */
+        this.Annotations = null;
+
+        /**
+         * Alarm rule status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RuleState = null;
 
     }
 
@@ -3266,8 +3577,30 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Rule = 'Rule' in params ? params.Rule : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.Template = 'Template' in params ? params.Template : null;
+        this.For = 'For' in params ? params.For : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+
+        if (params.Annotations) {
+            this.Annotations = new Array();
+            for (let z in params.Annotations) {
+                let obj = new Label();
+                obj.deserialize(params.Annotations[z]);
+                this.Annotations.push(obj);
+            }
+        }
+        this.RuleState = 'RuleState' in params ? params.RuleState : null;
 
     }
 }
@@ -3634,6 +3967,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UninstallEdgeLogAgent request structure.
+ * @class
+ */
+class UninstallEdgeLogAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -4331,7 +4692,7 @@ all clusters under the account are obtained)
         this.Limit = null;
 
         /**
-         * Filter condition (only filtering by a single ClusterName is supported)
+         * Filter conditions. Values: `ClusterName` and tags in the format of ["key1:value1","key2:value2"].
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4527,26 +4888,24 @@ class DescribeClusterRouteTablesResponse extends  AbstractModel {
 }
 
 /**
- * SetNodePoolNodeProtection response structure.
+ * DescribeAddonValues response structure.
  * @class
  */
-class SetNodePoolNodeProtectionResponse extends  AbstractModel {
+class DescribeAddonValuesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the node that has successfully set the removal protection
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * Parameters in a JSON string. If the add-on has been installed, the configured parameters are used for rendering.
+         * @type {string || null}
          */
-        this.SucceedInstanceIds = null;
+        this.Values = null;
 
         /**
-         * ID of the node that fails to set the removal protection
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * List of parameters supported by the add-on in a JSON string. The default values are used.
+         * @type {string || null}
          */
-        this.FailedInstanceIds = null;
+        this.DefaultValues = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4563,8 +4922,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.SucceedInstanceIds = 'SucceedInstanceIds' in params ? params.SucceedInstanceIds : null;
-        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.DefaultValues = 'DefaultValues' in params ? params.DefaultValues : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4754,6 +5113,12 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
          */
         this.RegistryPrefix = null;
 
+        /**
+         * u200dTags bound with the cluster
+         * @type {TagSpecification || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -4787,6 +5152,12 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
         this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
         this.RegistryPrefix = 'RegistryPrefix' in params ? params.RegistryPrefix : null;
+
+        if (params.TagSpecification) {
+            let obj = new TagSpecification();
+            obj.deserialize(params.TagSpecification)
+            this.TagSpecification = obj;
+        }
 
     }
 }
@@ -5100,39 +5471,30 @@ class ClusterBasicSettings extends  AbstractModel {
 }
 
 /**
- * Object of route table conflict
+ * RemoveNodeFromNodePool request structure.
  * @class
  */
-class RouteTableConflict extends  AbstractModel {
+class RemoveNodeFromNodePoolRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Route table type.
+         * Cluster ID
          * @type {string || null}
          */
-        this.RouteTableType = null;
+        this.ClusterId = null;
 
         /**
-         * Route table CIDR.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node pool ID
          * @type {string || null}
          */
-        this.RouteTableCidrBlock = null;
+        this.NodePoolId = null;
 
         /**
-         * Route table name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * The node ID list. Up to 100 nodes can be removed at a time.
+         * @type {Array.<string> || null}
          */
-        this.RouteTableName = null;
-
-        /**
-         * Route table ID.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RouteTableId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -5143,10 +5505,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.RouteTableType = 'RouteTableType' in params ? params.RouteTableType : null;
-        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
-        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
-        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -5583,6 +5944,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * The type of resource the label is bound to. Type currently supported is **cluster**.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DeleteClusterNodePool request structure.
  * @class
  */
@@ -5782,6 +6178,135 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.EniSubnetIds = 'EniSubnetIds' in params ? params.EniSubnetIds : null;
         this.ClaimExpiredSeconds = 'ClaimExpiredSeconds' in params ? params.ClaimExpiredSeconds : null;
         this.IgnoreServiceCIDRConflict = 'IgnoreServiceCIDRConflict' in params ? params.IgnoreServiceCIDRConflict : null;
+
+    }
+}
+
+/**
+ * amp alarm channel configuration
+ * @class
+ */
+class PrometheusNotification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether it is enabled
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Convergence time
+         * @type {string || null}
+         */
+        this.RepeatInterval = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.TimeRangeStart = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.TimeRangeEnd = null;
+
+        /**
+         * Alarm delivery method. Valid values: `SMS`, `EMAIL`, `CALL`, and `WECHAT`
+It respectively represents SMS, email, phone calls, and WeChat.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * The alarm recipient group (user group)
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverGroups = null;
+
+        /**
+         * The alarm sequence of phone calls
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.PhoneNotifyOrder = null;
+
+        /**
+         * The number of phone call alarms
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneCircleTimes = null;
+
+        /**
+         * Dialing interval in seconds within one polling
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneInnerInterval = null;
+
+        /**
+         * Polling interval in seconds
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneCircleInterval = null;
+
+        /**
+         * Phone call alarm arrival notification
+This parameter is used when you specify `CALL` for `NotifyWay`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.PhoneArriveNotice = null;
+
+        /**
+         * Channel type. Default value: `amp`. The following channels are supported:
+amp
+webhook
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * This parameter is required if `Type` is `webhook`.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.WebHook = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
+        this.TimeRangeStart = 'TimeRangeStart' in params ? params.TimeRangeStart : null;
+        this.TimeRangeEnd = 'TimeRangeEnd' in params ? params.TimeRangeEnd : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+        this.ReceiverGroups = 'ReceiverGroups' in params ? params.ReceiverGroups : null;
+        this.PhoneNotifyOrder = 'PhoneNotifyOrder' in params ? params.PhoneNotifyOrder : null;
+        this.PhoneCircleTimes = 'PhoneCircleTimes' in params ? params.PhoneCircleTimes : null;
+        this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
+        this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
+        this.PhoneArriveNotice = 'PhoneArriveNotice' in params ? params.PhoneArriveNotice : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.WebHook = 'WebHook' in params ? params.WebHook : null;
 
     }
 }
@@ -6080,6 +6605,114 @@ class ModifyClusterAsGroupOptionAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeEncryptionStatus request structure.
+ * @class
+ */
+class DescribeEncryptionStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * KMS encryption parameters
+ * @class
+ */
+class KMSConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * KMS ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * KMS region
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+
+    }
+}
+
+/**
+ * OIDC authentication related configurations
+ * @class
+ */
+class OIDCConfigAuthenticationOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creating an identity provider
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoCreateOIDCConfig = null;
+
+        /**
+         * Creating ClientId of the identity provider
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AutoCreateClientId = null;
+
+        /**
+         * Creating the PodIdentityWebhook component
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoInstallPodIdentityWebhookAddon = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoCreateOIDCConfig = 'AutoCreateOIDCConfig' in params ? params.AutoCreateOIDCConfig : null;
+        this.AutoCreateClientId = 'AutoCreateClientId' in params ? params.AutoCreateClientId : null;
+        this.AutoInstallPodIdentityWebhookAddon = 'AutoInstallPodIdentityWebhookAddon' in params ? params.AutoInstallPodIdentityWebhookAddon : null;
+
+    }
+}
+
+/**
  * DeleteClusterVirtualNodePool request structure.
  * @class
  */
@@ -6157,43 +6790,24 @@ class CreateClusterVirtualNodePoolResponse extends  AbstractModel {
 }
 
 /**
- * Upgradeable node information
+ * DeleteAddon request structure.
  * @class
  */
-class UpgradeAbleInstancesItem extends  AbstractModel {
+class DeleteAddonRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID
+         * Cluster ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ClusterId = null;
 
         /**
-         * The current version of the node
+         * Add-on name
          * @type {string || null}
          */
-        this.Version = null;
-
-        /**
-         * The latest minor version of the current version
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.LatestVersion = null;
-
-        /**
-         * RuntimeVersion
-         * @type {string || null}
-         */
-        this.RuntimeVersion = null;
-
-        /**
-         * RuntimeLatestVersion
-         * @type {string || null}
-         */
-        this.RuntimeLatestVersion = null;
+        this.AddonName = null;
 
     }
 
@@ -6204,11 +6818,8 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
-        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
-        this.RuntimeLatestVersion = 'RuntimeLatestVersion' in params ? params.RuntimeLatestVersion : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
 
     }
 }
@@ -7276,18 +7887,18 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.AutoFormatAndMount = null;
 
         /**
-         * Mounting directory
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.MountTarget = null;
-
-        /**
          * Mounted device name or partition name (only required when adding an existing node)
 Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskPartition = null;
+
+        /**
+         * Mounting directory
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.MountTarget = null;
 
     }
 
@@ -7302,8 +7913,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.AutoFormatAndMount = 'AutoFormatAndMount' in params ? params.AutoFormatAndMount : null;
-        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
         this.DiskPartition = 'DiskPartition' in params ? params.DiskPartition : null;
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
 
     }
 }
@@ -7862,63 +8473,24 @@ class GetClusterLevelPriceResponse extends  AbstractModel {
 }
 
 /**
- * PROM instance alarm rule
+ * EnableEncryptionProtection request structure.
  * @class
  */
-class PrometheusAlertRule extends  AbstractModel {
+class EnableEncryptionProtectionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule name
+         * Cluster ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.ClusterId = null;
 
         /**
-         * PromQL contents
-         * @type {string || null}
+         * KMS encryption configuration
+         * @type {KMSConfiguration || null}
          */
-        this.Rule = null;
-
-        /**
-         * Additional labels
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Alarm delivery template
-         * @type {string || null}
-         */
-        this.Template = null;
-
-        /**
-         * Duration
-         * @type {string || null}
-         */
-        this.For = null;
-
-        /**
-         * Rule description
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.Describe = null;
-
-        /**
-         * Refer to annotations in prometheus rule
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<Label> || null}
-         */
-        this.Annotations = null;
-
-        /**
-         * Alarm rule status
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RuleState = null;
+        this.KMSConfiguration = null;
 
     }
 
@@ -7929,30 +8501,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Rule = 'Rule' in params ? params.Rule : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
+        if (params.KMSConfiguration) {
+            let obj = new KMSConfiguration();
+            obj.deserialize(params.KMSConfiguration)
+            this.KMSConfiguration = obj;
         }
-        this.Template = 'Template' in params ? params.Template : null;
-        this.For = 'For' in params ? params.For : null;
-        this.Describe = 'Describe' in params ? params.Describe : null;
-
-        if (params.Annotations) {
-            this.Annotations = new Array();
-            for (let z in params.Annotations) {
-                let obj = new Label();
-                obj.deserialize(params.Annotations[z]);
-                this.Annotations.push(obj);
-            }
-        }
-        this.RuleState = 'RuleState' in params ? params.RuleState : null;
 
     }
 }
@@ -7976,6 +8531,12 @@ class DescribeResourceUsageResponse extends  AbstractModel {
          * @type {number || null}
          */
         this.PodUsage = null;
+
+        /**
+         * ReplicaSet usage
+         * @type {number || null}
+         */
+        this.RSUsage = null;
 
         /**
          * ConfigMap usage
@@ -8011,6 +8572,7 @@ class DescribeResourceUsageResponse extends  AbstractModel {
             this.CRDUsage = obj;
         }
         this.PodUsage = 'PodUsage' in params ? params.PodUsage : null;
+        this.RSUsage = 'RSUsage' in params ? params.RSUsage : null;
         this.ConfigMapUsage = 'ConfigMapUsage' in params ? params.ConfigMapUsage : null;
 
         if (params.OtherUsage) {
@@ -8269,49 +8831,18 @@ class CreateClusterResponse extends  AbstractModel {
 }
 
 /**
- * Task step information
+ * DeleteAddon response structure.
  * @class
  */
-class TaskStepInfo extends  AbstractModel {
+class DeleteAddonResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Step name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Step = null;
-
-        /**
-         * Lifecycle
-pending: the step is not started
-running: the step is in progress
-success: the step is completed
-failed: the step failed
-         * @type {string || null}
-         */
-        this.LifeState = null;
-
-        /**
-         * Step start time
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.StartAt = null;
-
-        /**
-         * Step end time
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.EndAt = null;
-
-        /**
-         * If the lifecycle of the step is failed, this field will display the error information.
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.FailedMsg = null;
+        this.RequestId = null;
 
     }
 
@@ -8322,11 +8853,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.Step = 'Step' in params ? params.Step : null;
-        this.LifeState = 'LifeState' in params ? params.LifeState : null;
-        this.StartAt = 'StartAt' in params ? params.StartAt : null;
-        this.EndAt = 'EndAt' in params ? params.EndAt : null;
-        this.FailedMsg = 'FailedMsg' in params ? params.FailedMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8880,30 +9407,24 @@ class DescribePrometheusInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Combination of the ECM instance AZ, number of instances, and ISP
+ * DescribeAddonValues request structure.
  * @class
  */
-class ECMZoneInstanceCountISP extends  AbstractModel {
+class DescribeAddonValuesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance AZ
+         * Cluster ID
          * @type {string || null}
          */
-        this.Zone = null;
+        this.ClusterId = null;
 
         /**
-         * Number of instances to be created in the current AZ
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * ISP
+         * Add-on name
          * @type {string || null}
          */
-        this.ISP = null;
+        this.AddonName = null;
 
     }
 
@@ -8914,9 +9435,8 @@ class ECMZoneInstanceCountISP extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.ISP = 'ISP' in params ? params.ISP : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
 
     }
 }
@@ -8993,89 +9513,18 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
- * Describes K8s cluster configuration and related information.
+ * InstallAddon response structure.
  * @class
  */
-class InstanceAdvancedSettings extends  AbstractModel {
+class InstallAddonResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DesiredPodNumber = null;
-
-        /**
-         * GPU driver parameters
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {GPUArgs || null}
-         */
-        this.GPUArgs = null;
-
-        /**
-         * Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PreStartUserScript = null;
-
-        /**
-         * Node taint
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<Taint> || null}
-         */
-        this.Taints = null;
-
-        /**
-         * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 (xfs for tlinux system) and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
-Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MountTarget = null;
-
-        /**
-         * Specified value of dockerd --graph. Default value: /var/lib/docker
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.DockerGraphPath = null;
-
-        /**
-         * Base64-encoded user script, which will be executed after the K8s component starts running. You need to ensure the reentrant and retry logic of the script. The script and its log files can be viewed at the node path: /data/ccs_userscript/. If you want to initialize nodes before adding them to the scheduling list, you can use this parameter together with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to enable the node for scheduling.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.UserScript = null;
-
-        /**
-         * Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run kubectl uncordon nodename to enable this node for scheduling.
-         * @type {number || null}
-         */
-        this.Unschedulable = null;
-
-        /**
-         * Node label array
-Note: This field may return null, indicating that no valid value was found.
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Mounting information of multiple data disks. When you create a node, ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. For example, the `DataDisks` under `RunInstancesPara` of the `CreateClusterInstances` API should be configured accordingly (Referto document of CreateClusterInstances API). When you add an existing node, ensure that the specified partition exists in the node.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * Information about node custom parameters
-Note: This field may return null, indicating that no valid value was found.
-         * @type {InstanceExtraArgs || null}
-         */
-        this.ExtraArgs = null;
+        this.RequestId = null;
 
     }
 
@@ -9086,51 +9535,7 @@ Note: This field may return null, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
-
-        if (params.GPUArgs) {
-            let obj = new GPUArgs();
-            obj.deserialize(params.GPUArgs)
-            this.GPUArgs = obj;
-        }
-        this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
-
-        if (params.Taints) {
-            this.Taints = new Array();
-            for (let z in params.Taints) {
-                let obj = new Taint();
-                obj.deserialize(params.Taints[z]);
-                this.Taints.push(obj);
-            }
-        }
-        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
-        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
-        this.UserScript = 'UserScript' in params ? params.UserScript : null;
-        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.ExtraArgs) {
-            let obj = new InstanceExtraArgs();
-            obj.deserialize(params.ExtraArgs)
-            this.ExtraArgs = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9351,33 +9756,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * OIDC authentication related configurations
+ * DescribeAddon request structure.
  * @class
  */
-class OIDCConfigAuthenticationOptions extends  AbstractModel {
+class DescribeAddonRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Creating an identity provider
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {boolean || null}
+         * Cluster ID
+         * @type {string || null}
          */
-        this.AutoCreateOIDCConfig = null;
+        this.ClusterId = null;
 
         /**
-         * Creating ClientId of the identity provider
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
+         * Add-on name (all add-ons in the cluster are returned if this parameter is not specified)
+         * @type {string || null}
          */
-        this.AutoCreateClientId = null;
-
-        /**
-         * Creating the PodIdentityWebhook component
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {boolean || null}
-         */
-        this.AutoInstallPodIdentityWebhookAddon = null;
+        this.AddonName = null;
 
     }
 
@@ -9388,9 +9784,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.AutoCreateOIDCConfig = 'AutoCreateOIDCConfig' in params ? params.AutoCreateOIDCConfig : null;
-        this.AutoCreateClientId = 'AutoCreateClientId' in params ? params.AutoCreateClientId : null;
-        this.AutoInstallPodIdentityWebhookAddon = 'AutoInstallPodIdentityWebhookAddon' in params ? params.AutoInstallPodIdentityWebhookAddon : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
 
     }
 }
@@ -9731,6 +10126,63 @@ class DescribeEdgeLogSwitchesRequest extends  AbstractModel {
 }
 
 /**
+ * Upgradeable node information
+ * @class
+ */
+class UpgradeAbleInstancesItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The current version of the node
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * The latest minor version of the current version
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.LatestVersion = null;
+
+        /**
+         * RuntimeVersion
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
+        /**
+         * RuntimeLatestVersion
+         * @type {string || null}
+         */
+        this.RuntimeLatestVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.RuntimeLatestVersion = 'RuntimeLatestVersion' in params ? params.RuntimeLatestVersion : null;
+
+    }
+}
+
+/**
  * DescribeECMInstances response structure.
  * @class
  */
@@ -9858,51 +10310,18 @@ class DescribeEdgeClusterUpgradeInfoRequest extends  AbstractModel {
 }
 
 /**
- * Virtual node pool
+ * EnableEncryptionProtection response structure.
  * @class
  */
-class VirtualNodePool extends  AbstractModel {
+class EnableEncryptionProtectionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node pool ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.NodePoolId = null;
-
-        /**
-         * List of subnets
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.SubnetIds = null;
-
-        /**
-         * Node pool name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Node pool lifecycle status
-         * @type {string || null}
-         */
-        this.LifeState = null;
-
-        /**
-         * Virtual node labels
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Virtual node taint
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Taint> || null}
-         */
-        this.Taints = null;
+        this.RequestId = null;
 
     }
 
@@ -9913,28 +10332,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.LifeState = 'LifeState' in params ? params.LifeState : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-
-        if (params.Taints) {
-            this.Taints = new Array();
-            for (let z in params.Taints) {
-                let obj = new Taint();
-                obj.deserialize(params.Taints[z]);
-                this.Taints.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11104,6 +11502,50 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * SetNodePoolNodeProtection response structure.
+ * @class
+ */
+class SetNodePoolNodeProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the node that has successfully set the removal protection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SucceedInstanceIds = null;
+
+        /**
+         * ID of the node that fails to set the removal protection
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SucceedInstanceIds = 'SucceedInstanceIds' in params ? params.SucceedInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Cluster status information
  * @class
  */
@@ -11632,12 +12074,12 @@ class CreateClusterEndpointRequest extends  AbstractModel {
         this.SecurityGroup = null;
 
         /**
-         * Parameters used to create a CLB in JSON format. It’s only required for public network access. Example: `{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}`. 
-Parameters: 
-`InternetAccessible.InternetChargeType`: `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR`, `InternetAccessible.BANDWIDTH_PACKAGE` (Bill by the bandwidth package) 
-`InternetMaxBandwidthOut`: Outbound bandwidth cap in Mbps. Range: 0 - 2048. It defaults to 10. 
-`VipIsp`: The VIP provider. Values: `CMCC` (China Mobile), `CTCC` (China Telecom), `CUCC` (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode. 
-`BandwidthPackageId`: Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
+         * LB parameters in a JSON string. It is only required for public network access: {"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":200},"VipIsp":"","BandwidthPackageId":""}.
+Description of parameters:
+`InternetAccessible.InternetChargeType`: `TRAFFIC_POSTPAID_BY_HOUR` (Pay-as-you-go by traffic on an hourly basis); `BANDWIDTH_POSTPAID_BY_HOUR` (Pay-as-you-go by bandwidth on an hourly basis); `InternetAccessible.BANDWIDTH_PACKAGE` (Bill-by-bandwidth package).
+`InternetMaxBandwidthOut`: Outbound bandwidth cap in Mbps. Value range: 0 - 2048. Default value: 10.
+`VipIsp`: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, call `DescribeSingleIsp`. If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+`BandwidthPackageId`: Bandwidth package ID. If this parameter is specified, only `BANDWIDTH_PACKAGE` is supported for `InternetAccessible.InternetChargeType`.
          * @type {string || null}
          */
         this.ExtensiveParameters = null;
@@ -11981,15 +12423,15 @@ Note: this field may return null, indicating that no valid value was found.
         this.ScaleDownUtilizationThreshold = null;
 
         /**
-         * During scale-in, ignore nodes with local storage pods (default value: False)
-Note: this field may return null, indicating that no valid value was found.
+         * Do not scale in a node if it contains local storage Pods. Default: `true`.
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.SkipNodesWithLocalStorage = null;
 
         /**
-         * During scale-in, ignore nodes with pods in the kube-system namespace that are not managed by DaemonSet (default value: False)
-Note: this field may return null, indicating that no valid value was found.
+         * Do not scale in a node if it contains Pods in the kube-system namespace that are not managed by DaemonSet. Default: `true`.
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.SkipNodesWithSystemPods = null;
@@ -12502,6 +12944,12 @@ class ClusterLevelAttribute extends  AbstractModel {
         this.ConfigMapCount = null;
 
         /**
+         * Number of ReplicaSets
+         * @type {number || null}
+         */
+        this.RSCount = null;
+
+        /**
          * Number of CRDs
          * @type {number || null}
          */
@@ -12534,6 +12982,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
         this.PodCount = 'PodCount' in params ? params.PodCount : null;
         this.ConfigMapCount = 'ConfigMapCount' in params ? params.ConfigMapCount : null;
+        this.RSCount = 'RSCount' in params ? params.RSCount : null;
         this.CRDCount = 'CRDCount' in params ? params.CRDCount : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.OtherCount = 'OtherCount' in params ? params.OtherCount : null;
@@ -12751,6 +13200,107 @@ class PrometheusGrafanaInfo extends  AbstractModel {
         this.Address = 'Address' in params ? params.Address : null;
         this.Internet = 'Internet' in params ? params.Internet : null;
         this.AdminUser = 'AdminUser' in params ? params.AdminUser : null;
+
+    }
+}
+
+/**
+ * Object of route table conflict
+ * @class
+ */
+class RouteTableConflict extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Route table type.
+         * @type {string || null}
+         */
+        this.RouteTableType = null;
+
+        /**
+         * Route table CIDR.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RouteTableCidrBlock = null;
+
+        /**
+         * Route table name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RouteTableName = null;
+
+        /**
+         * Route table ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableType = 'RouteTableType' in params ? params.RouteTableType : null;
+        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+
+    }
+}
+
+/**
+ * InstallAddon request structure.
+ * @class
+ */
+class InstallAddonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Add-on name
+         * @type {string || null}
+         */
+        this.AddonName = null;
+
+        /**
+         * Add-on version. If it is not specified, the latest version is installed by default.
+         * @type {string || null}
+         */
+        this.AddonVersion = null;
+
+        /**
+         * Add-on parameters in a base64-encoded JSON string. You can query add-on parameters via `DescribeAddonValues`.
+         * @type {string || null}
+         */
+        this.RawValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
+        this.AddonVersion = 'AddonVersion' in params ? params.AddonVersion : null;
+        this.RawValues = 'RawValues' in params ? params.RawValues : null;
 
     }
 }
@@ -13014,18 +13564,30 @@ class DescribeImagesRequest extends  AbstractModel {
 }
 
 /**
- * UninstallEdgeLogAgent request structure.
+ * DescribeEncryptionStatus response structure.
  * @class
  */
-class UninstallEdgeLogAgentRequest extends  AbstractModel {
+class DescribeEncryptionStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * Encryption status
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.Status = null;
+
+        /**
+         * Encryption error message
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -13036,7 +13598,9 @@ class UninstallEdgeLogAgentRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14018,6 +14582,12 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.GridDaemon = null;
 
         /**
+         * Access kins clusters over the public network
+         * @type {string || null}
+         */
+        this.UnitCluster = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -14063,6 +14633,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.HealthRegion = 'HealthRegion' in params ? params.HealthRegion : null;
         this.Health = 'Health' in params ? params.Health : null;
         this.GridDaemon = 'GridDaemon' in params ? params.GridDaemon : null;
+        this.UnitCluster = 'UnitCluster' in params ? params.UnitCluster : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14341,6 +14912,12 @@ class ModifyClusterVirtualNodePoolRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * List of security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
          * Virtual node labels
          * @type {Array.<Label> || null}
          */
@@ -14370,6 +14947,7 @@ class ModifyClusterVirtualNodePoolRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
         if (params.Labels) {
             this.Labels = new Array();
@@ -14466,10 +15044,10 @@ Note: This parameter may return null, indicating that no valid values can be obt
 }
 
 /**
- * RemoveNodeFromNodePool request structure.
+ * DisableEncryptionProtection request structure.
  * @class
  */
-class RemoveNodeFromNodePoolRequest extends  AbstractModel {
+class DisableEncryptionProtectionRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -14478,18 +15056,6 @@ class RemoveNodeFromNodePoolRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClusterId = null;
-
-        /**
-         * Node pool ID
-         * @type {string || null}
-         */
-        this.NodePoolId = null;
-
-        /**
-         * The node ID list. Up to 100 nodes can be removed at a time.
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
 
     }
 
@@ -14501,8 +15067,6 @@ class RemoveNodeFromNodePoolRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -14795,7 +15359,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EdgeVersion = null;
 
         /**
-         * 
+         * u200dTags bound with the cluster
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
          * @type {TagSpecification || null}
          */
         this.TagSpecification = null;
@@ -14835,6 +15400,149 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new TagSpecification();
             obj.deserialize(params.TagSpecification)
             this.TagSpecification = obj;
+        }
+
+    }
+}
+
+/**
+ * Describes K8s cluster configuration and related information.
+ * @class
+ */
+class InstanceAdvancedSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DesiredPodNumber = null;
+
+        /**
+         * GPU driver parameters
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {GPUArgs || null}
+         */
+        this.GPUArgs = null;
+
+        /**
+         * Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PreStartUserScript = null;
+
+        /**
+         * Node taint
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 (xfs for tlinux system) and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
+Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MountTarget = null;
+
+        /**
+         * Specified value of dockerd --graph. Default value: /var/lib/docker
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.DockerGraphPath = null;
+
+        /**
+         * Base64-encoded user script, which will be executed after the K8s component starts running. You need to ensure the reentrant and retry logic of the script. The script and its log files can be viewed at the node path: /data/ccs_userscript/. If you want to initialize nodes before adding them to the scheduling list, you can use this parameter together with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to enable the node for scheduling.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+        /**
+         * Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run kubectl uncordon nodename to enable this node for scheduling.
+         * @type {number || null}
+         */
+        this.Unschedulable = null;
+
+        /**
+         * Node label array
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Mounting information of multiple data disks. When you create a node, ensure that the CVM purchase parameter specifies the information required for the purchase of multiple data disks. For example, the `DataDisks` under `RunInstancesPara` of the `CreateClusterInstances` API should be configured accordingly (Referto document of CreateClusterInstances API). When you add an existing node, ensure that the specified partition exists in the node.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * Information about node custom parameters
+Note: This field may return null, indicating that no valid value was found.
+         * @type {InstanceExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+
+        if (params.GPUArgs) {
+            let obj = new GPUArgs();
+            obj.deserialize(params.GPUArgs)
+            this.GPUArgs = obj;
+        }
+        this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
+        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.ExtraArgs) {
+            let obj = new InstanceExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
         }
 
     }
@@ -14991,12 +15699,14 @@ module.exports = {
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
     RunAutomationServiceEnabled: RunAutomationServiceEnabled,
+    UpdateAddonResponse: UpdateAddonResponse,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     DescribeClusterStatusRequest: DescribeClusterStatusRequest,
-    PrometheusNotification: PrometheusNotification,
+    DescribeAddonResponse: DescribeAddonResponse,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
     CreateEdgeLogConfigResponse: CreateEdgeLogConfigResponse,
+    VirtualNodePool: VirtualNodePool,
     ClusterCondition: ClusterCondition,
     DescribeAvailableTKEEdgeVersionResponse: DescribeAvailableTKEEdgeVersionResponse,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
@@ -15008,8 +15718,10 @@ module.exports = {
     DescribeClusterVirtualNodePoolsResponse: DescribeClusterVirtualNodePoolsResponse,
     IPAddress: IPAddress,
     DescribeTKEEdgeClusterCredentialRequest: DescribeTKEEdgeClusterCredentialRequest,
+    Addon: Addon,
     AutoUpgradeClusterLevel: AutoUpgradeClusterLevel,
     CheckEdgeClusterCIDRResponse: CheckEdgeClusterCIDRResponse,
+    DisableEncryptionProtectionResponse: DisableEncryptionProtectionResponse,
     RunInstancesForNode: RunInstancesForNode,
     SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
     DescribeTKEEdgeExternalKubeconfigRequest: DescribeTKEEdgeExternalKubeconfigRequest,
@@ -15017,6 +15729,7 @@ module.exports = {
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeClusterVirtualNodeRequest: DescribeClusterVirtualNodeRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
+    UpdateAddonRequest: UpdateAddonRequest,
     InstanceExtraArgs: InstanceExtraArgs,
     VirtualNode: VirtualNode,
     UpdateEdgeClusterVersionResponse: UpdateEdgeClusterVersionResponse,
@@ -15031,20 +15744,23 @@ module.exports = {
     DrainClusterVirtualNodeResponse: DrainClusterVirtualNodeResponse,
     EnableClusterDeletionProtectionResponse: EnableClusterDeletionProtectionResponse,
     ClusterAsGroup: ClusterAsGroup,
+    ECMZoneInstanceCountISP: ECMZoneInstanceCountISP,
     Instance: Instance,
     ImageInstance: ImageInstance,
     DescribeVpcCniPodLimitsResponse: DescribeVpcCniPodLimitsResponse,
+    TaskStepInfo: TaskStepInfo,
     DescribeVersionsResponse: DescribeVersionsResponse,
     CreateBackupStorageLocationResponse: CreateBackupStorageLocationResponse,
     ECMRunMonitorServiceEnabled: ECMRunMonitorServiceEnabled,
     UpdateClusterKubeconfigResponse: UpdateClusterKubeconfigResponse,
     DeleteEdgeClusterInstancesRequest: DeleteEdgeClusterInstancesRequest,
-    Tag: Tag,
+    PrometheusAlertRule: PrometheusAlertRule,
     NodePoolOption: NodePoolOption,
     ForwardTKEEdgeApplicationRequestV3Response: ForwardTKEEdgeApplicationRequestV3Response,
     CreateClusterVirtualNodePoolRequest: CreateClusterVirtualNodePoolRequest,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
+    UninstallEdgeLogAgentRequest: UninstallEdgeLogAgentRequest,
     DeleteBackupStorageLocationResponse: DeleteBackupStorageLocationResponse,
     ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
@@ -15063,7 +15779,7 @@ module.exports = {
     Label: Label,
     PodLimitsByType: PodLimitsByType,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
-    SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
+    DescribeAddonValuesResponse: DescribeAddonValuesResponse,
     DescribeEdgeClusterInstancesRequest: DescribeEdgeClusterInstancesRequest,
     ResourceUsageDetail: ResourceUsageDetail,
     CreateTKEEdgeClusterRequest: CreateTKEEdgeClusterRequest,
@@ -15072,7 +15788,7 @@ module.exports = {
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     CreateEdgeLogConfigRequest: CreateEdgeLogConfigRequest,
     ClusterBasicSettings: ClusterBasicSettings,
-    RouteTableConflict: RouteTableConflict,
+    RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
     UpgradeNodeResetParam: UpgradeNodeResetParam,
     DescribeTKEEdgeClusterStatusResponse: DescribeTKEEdgeClusterStatusResponse,
@@ -15082,10 +15798,12 @@ module.exports = {
     DeleteBackupStorageLocationRequest: DeleteBackupStorageLocationRequest,
     CreateBackupStorageLocationRequest: CreateBackupStorageLocationRequest,
     VersionInstance: VersionInstance,
+    Tag: Tag,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     VirtualNodeSpec: VirtualNodeSpec,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
+    PrometheusNotification: PrometheusNotification,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     CreateClusterVirtualNodeResponse: CreateClusterVirtualNodeResponse,
     UpdateClusterKubeconfigRequest: UpdateClusterKubeconfigRequest,
@@ -15093,9 +15811,12 @@ module.exports = {
     CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     CreateECMInstancesResponse: CreateECMInstancesResponse,
     ModifyClusterAsGroupOptionAttributeRequest: ModifyClusterAsGroupOptionAttributeRequest,
+    DescribeEncryptionStatusRequest: DescribeEncryptionStatusRequest,
+    KMSConfiguration: KMSConfiguration,
+    OIDCConfigAuthenticationOptions: OIDCConfigAuthenticationOptions,
     DeleteClusterVirtualNodePoolRequest: DeleteClusterVirtualNodePoolRequest,
     CreateClusterVirtualNodePoolResponse: CreateClusterVirtualNodePoolResponse,
-    UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
+    DeleteAddonRequest: DeleteAddonRequest,
     UnavailableReason: UnavailableReason,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
     DescribeClusterEndpointsRequest: DescribeClusterEndpointsRequest,
@@ -15133,7 +15854,7 @@ module.exports = {
     DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     GetClusterLevelPriceResponse: GetClusterLevelPriceResponse,
-    PrometheusAlertRule: PrometheusAlertRule,
+    EnableEncryptionProtectionRequest: EnableEncryptionProtectionRequest,
     DescribeResourceUsageResponse: DescribeResourceUsageResponse,
     DescribeClusterStatusResponse: DescribeClusterStatusResponse,
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
@@ -15141,7 +15862,7 @@ module.exports = {
     EdgeClusterInternalLB: EdgeClusterInternalLB,
     DescribeVersionsRequest: DescribeVersionsRequest,
     CreateClusterResponse: CreateClusterResponse,
-    TaskStepInfo: TaskStepInfo,
+    DeleteAddonResponse: DeleteAddonResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
     DescribeAvailableClusterVersionRequest: DescribeAvailableClusterVersionRequest,
@@ -15156,22 +15877,23 @@ module.exports = {
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     EnableClusterDeletionProtectionRequest: EnableClusterDeletionProtectionRequest,
     DescribePrometheusInstanceRequest: DescribePrometheusInstanceRequest,
-    ECMZoneInstanceCountISP: ECMZoneInstanceCountISP,
+    DescribeAddonValuesRequest: DescribeAddonValuesRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
-    InstanceAdvancedSettings: InstanceAdvancedSettings,
+    InstallAddonResponse: InstallAddonResponse,
     RegionInstance: RegionInstance,
     EdgeClusterExtraArgs: EdgeClusterExtraArgs,
     PodLimitsInstance: PodLimitsInstance,
     DescribeEnableVpcCniProgressResponse: DescribeEnableVpcCniProgressResponse,
-    OIDCConfigAuthenticationOptions: OIDCConfigAuthenticationOptions,
+    DescribeAddonRequest: DescribeAddonRequest,
     DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
     DeleteEdgeCVMInstancesRequest: DeleteEdgeCVMInstancesRequest,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     DescribeEdgeLogSwitchesRequest: DescribeEdgeLogSwitchesRequest,
+    UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     DescribeECMInstancesResponse: DescribeECMInstancesResponse,
     EdgeClusterAdvancedSettings: EdgeClusterAdvancedSettings,
     DescribeEdgeClusterUpgradeInfoRequest: DescribeEdgeClusterUpgradeInfoRequest,
-    VirtualNodePool: VirtualNodePool,
+    EnableEncryptionProtectionResponse: EnableEncryptionProtectionResponse,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     DescribeTKEEdgeClusterStatusRequest: DescribeTKEEdgeClusterStatusRequest,
     CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
@@ -15189,6 +15911,7 @@ module.exports = {
     CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
+    SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
     ClusterStatus: ClusterStatus,
     UpgradeClusterInstancesResponse: UpgradeClusterInstancesResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
@@ -15223,12 +15946,14 @@ module.exports = {
     EnhancedService: EnhancedService,
     DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
     PrometheusGrafanaInfo: PrometheusGrafanaInfo,
+    RouteTableConflict: RouteTableConflict,
+    InstallAddonRequest: InstallAddonRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DescribeClusterEndpointsResponse: DescribeClusterEndpointsResponse,
     InstanceUpgradePreCheckResult: InstanceUpgradePreCheckResult,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
-    UninstallEdgeLogAgentRequest: UninstallEdgeLogAgentRequest,
+    DescribeEncryptionStatusResponse: DescribeEncryptionStatusResponse,
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
     TagSpecification: TagSpecification,
     DescribeClusterLevelChangeRecordsRequest: DescribeClusterLevelChangeRecordsRequest,
@@ -15258,12 +15983,13 @@ module.exports = {
     ModifyClusterVirtualNodePoolRequest: ModifyClusterVirtualNodePoolRequest,
     RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
     DescribeBackupStorageLocationsResponse: DescribeBackupStorageLocationsResponse,
-    RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
+    DisableEncryptionProtectionRequest: DisableEncryptionProtectionRequest,
     GetClusterLevelPriceRequest: GetClusterLevelPriceRequest,
     NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
     DescribeClusterVirtualNodeResponse: DescribeClusterVirtualNodeResponse,
     EdgeCluster: EdgeCluster,
+    InstanceAdvancedSettings: InstanceAdvancedSettings,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     DescribeBackupStorageLocationsRequest: DescribeBackupStorageLocationsRequest,

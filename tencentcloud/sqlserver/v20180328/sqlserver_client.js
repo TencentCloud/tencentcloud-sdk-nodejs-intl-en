@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const CloneDBResponse = models.CloneDBResponse;
 const DealInfo = models.DealInfo;
+const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const CrossRegionStatus = models.CrossRegionStatus;
@@ -43,6 +44,7 @@ const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
 const CreateBusinessIntelligenceFileResponse = models.CreateBusinessIntelligenceFileResponse;
 const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
+const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const ParamRecord = models.ParamRecord;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
@@ -58,6 +60,7 @@ const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecords
 const DescribeIncrementalMigrationRequest = models.DescribeIncrementalMigrationRequest;
 const DeleteBusinessIntelligenceFileResponse = models.DeleteBusinessIntelligenceFileResponse;
 const ParameterDetail = models.ParameterDetail;
+const DescribeInstanceByOrdersRequest = models.DescribeInstanceByOrdersRequest;
 const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeXEventsRequest = models.DescribeXEventsRequest;
@@ -66,6 +69,7 @@ const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const MigrationDetail = models.MigrationDetail;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
+const ModifyInstanceEncryptAttributesRequest = models.ModifyInstanceEncryptAttributesRequest;
 const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
 const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
@@ -82,6 +86,7 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
+const ModifyInstanceEncryptAttributesResponse = models.ModifyInstanceEncryptAttributesResponse;
 const MigrationStep = models.MigrationStep;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const Events = models.Events;
@@ -95,15 +100,17 @@ const MigrateSource = models.MigrateSource;
 const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
 const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
+const TDEConfigAttribute = models.TDEConfigAttribute;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const CreateBackupMigrationRequest = models.CreateBackupMigrationRequest;
 const DescribeXEventsResponse = models.DescribeXEventsResponse;
 const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
+const DealInstance = models.DealInstance;
 const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeDBsRequest = models.DescribeDBsRequest;
-const ModifyDBNameRequest = models.ModifyDBNameRequest;
+const DescribeInstanceByOrdersResponse = models.DescribeInstanceByOrdersResponse;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
 const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
@@ -141,6 +148,7 @@ const CreateBackupResponse = models.CreateBackupResponse;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
+const DBTDEEncrypt = models.DBTDEEncrypt;
 const DescribeUploadBackupInfoResponse = models.DescribeUploadBackupInfoResponse;
 const CreateMigrationRequest = models.CreateMigrationRequest;
 const DescribeDBInstanceInterRequest = models.DescribeDBInstanceInterRequest;
@@ -148,6 +156,7 @@ const InterInstance = models.InterInstance;
 const DescribeUploadBackupInfoRequest = models.DescribeUploadBackupInfoRequest;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const CosUploadBackupFile = models.CosUploadBackupFile;
+const ModifyDBNameRequest = models.ModifyDBNameRequest;
 const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
 const DescribeDBInstancesAttributeResponse = models.DescribeDBInstancesAttributeResponse;
 const Backup = models.Backup;
@@ -322,6 +331,17 @@ class SqlserverClient extends AbstractClient {
     DescribeBackups(req, cb) {
         let resp = new DescribeBackupsResponse();
         this.request("DescribeBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable TDE of an instance.
+     * @param {ModifyInstanceEncryptAttributesRequest} req
+     * @param {function(string, ModifyInstanceEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyInstanceEncryptAttributes(req, cb) {
+        let resp = new ModifyInstanceEncryptAttributesResponse();
+        this.request("ModifyInstanceEncryptAttributes", req, resp, cb);
     }
 
     /**
@@ -712,7 +732,8 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query the upgrade price of an instance.
+     * This API is used to query the upgrade prices of a monthly subscribed instance
+.
      * @param {InquiryPriceUpgradeDBInstanceRequest} req
      * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb
      * @public
@@ -844,7 +865,7 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query the list of unarchived database backup files.
+     * This API is used to query the details of an unarchived backup.
      * @param {DescribeBackupFilesRequest} req
      * @param {function(string, DescribeBackupFilesResponse):void} cb
      * @public
@@ -863,6 +884,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DescribeXEvents(req, cb) {
         let resp = new DescribeXEventsResponse();
         this.request("DescribeXEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance ID by the order number.
+     * @param {DescribeInstanceByOrdersRequest} req
+     * @param {function(string, DescribeInstanceByOrdersResponse):void} cb
+     * @public
+     */
+    DescribeInstanceByOrders(req, cb) {
+        let resp = new DescribeInstanceByOrdersResponse();
+        this.request("DescribeInstanceByOrders", req, resp, cb);
     }
 
     /**
@@ -885,6 +917,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     ModifyIncrementalMigration(req, cb) {
         let resp = new ModifyIncrementalMigrationResponse();
         this.request("ModifyIncrementalMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to u200denable or disable TDE of a database.
+     * @param {ModifyDBEncryptAttributesRequest} req
+     * @param {function(string, ModifyDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyDBEncryptAttributes(req, cb) {
+        let resp = new ModifyDBEncryptAttributesResponse();
+        this.request("ModifyDBEncryptAttributes", req, resp, cb);
     }
 
     /**

@@ -79,7 +79,7 @@ class DownloadL7LogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * List of sites to be queried. All sites will be selected if this field is not specified.
+         * List of sites. This parameter is required. A `null` will be returned if it is left empty.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -281,7 +281,7 @@ class CheckCnameStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * List of CNAME statuses.
+         * CNAME status of accelerated domain names.
          * @type {Array.<CnameStatus> || null}
          */
         this.CnameStatus = null;
@@ -837,43 +837,54 @@ class L4OfflineLog extends  AbstractModel {
         super();
 
         /**
-         * The start time of the log packaging.
-         * @type {number || null}
-         */
-        this.LogTime = null;
-
-        /**
-         * The L4 proxy ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * L4 proxy instance ID.
          * @type {string || null}
          */
         this.ProxyId = null;
 
         /**
-         * The log size, in bytes.
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * The download address.
+         * Log query area. Valid values:
+<li>`mainland`: Chinese mainland;</li>
+<li>`overseas`: Global (outside the Chinese mainland). </li>
          * @type {string || null}
          */
-        this.Url = null;
+        this.Area = null;
 
         /**
-         * The log package name.
+         * Log packet name.
          * @type {string || null}
          */
         this.LogPacketName = null;
 
         /**
-         * The acceleration region. Values:
-<li>`mainland`: Chinese mainland;</li>
-<li>`overseas`: Global (outside the Chinese mainland);</li>
+         * Log download address.
          * @type {string || null}
          */
-        this.Area = null;
+        this.Url = null;
+
+        /**
+         * (Disused) Log packaging time. 
+         * @type {number || null}
+         */
+        this.LogTime = null;
+
+        /**
+         * Start time of log packaging.
+         * @type {string || null}
+         */
+        this.LogStartTime = null;
+
+        /**
+         * End time of the log package.
+         * @type {string || null}
+         */
+        this.LogEndTime = null;
+
+        /**
+         * Log size (in bytes).
+         * @type {number || null}
+         */
+        this.Size = null;
 
     }
 
@@ -884,12 +895,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.LogTime = 'LogTime' in params ? params.LogTime : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.LogPacketName = 'LogPacketName' in params ? params.LogPacketName : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.LogPacketName = 'LogPacketName' in params ? params.LogPacketName : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.LogTime = 'LogTime' in params ? params.LogTime : null;
+        this.LogStartTime = 'LogStartTime' in params ? params.LogStartTime : null;
+        this.LogEndTime = 'LogEndTime' in params ? params.LogEndTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -3429,24 +3442,25 @@ class AclCondition extends  AbstractModel {
         super();
 
         /**
-         * The field to match. Values:
-<li>`host`: Request domain name</li>
-<li>`sip`: Client IP</li>
-<li>`ua`: User-Agent</li>
-<li>`cookie`: Cookie</li>
-<li>`cgi`: CGI script</li>
-<li>`xff`: XFF header</li>
-<li>`url`: Request URL</li>
-<li>`accept`: Request content type</li>
-<li>`method`: Request method</li>
-<li>`header`: Request header</li>
-<li>`app_proto`: Application layer protocol</li>
-<li>`sip_proto`: Network layer protocol</li>
-<li>`uabot`: UA rules (only available in custom bot rules)</li>
-<li>`idcid`: IDC rules (only available in custom bot rules)</li>
-<li>`sipbot`: Search engine rules (only available in custom bot rules)</li>
-<li>`portrait`: Client reputation (only available in custom bot rules)</li>
-<li>`header_seq`: Header sequence (only available in custom bot rules)</li>
+         * Filters: 
+<li>`host`: Request domain name;</li>
+<li>`sip`: Client IP;</li>
+<li>`ua`: User-Agent;</li>
+<li>`cookie`: Cookie;</li>
+<li>`cgi`: CGI script;</li>
+<li>`xff`: XFF header;</li></li>
+<li>`url`: Request URL;<li></li>
+<li>`accept`: Request content type;</li>
+<li>`method`: Request method<;/li>
+<li>`header`: Request header;</li>
+<li>`app_proto`: Application layer protocol;</li>
+<li>`sip_proto`: Network layer protocol;</li>
+<li>`uabot`: UA rules (only available in custom bot rules);</li>
+<li>`idcid`: IDC rules (only available in custom bot rules);</li>
+<li>`sipbot`: Search engine rules (only available in custom bot rules);</li>
+<li>`portrait`: Client reputation (only available in custom bot rules);</li>
+<li>`header_seq`: Header sequence (only available in custom bot rules);</li>
+<li>`hdr`: Request body (only available in custom Web protection rules). </li>
          * @type {string || null}
          */
         this.MatchFrom = null;
@@ -3737,7 +3751,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Layer-7 offline log details
+ * Details of L7 logs.
  * @class
  */
 class L7OfflineLog extends  AbstractModel {
@@ -3745,42 +3759,54 @@ class L7OfflineLog extends  AbstractModel {
         super();
 
         /**
-         * Start time of the log packaging
-         * @type {number || null}
-         */
-        this.LogTime = null;
-
-        /**
-         * The subdomain name.
+         * Log domain name.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Log size, in bytes.
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Download address
+         * Log query area. Valid values:
+<li>`mainland`: Chinese mainland;</li>
+<li>`overseas`: Global (outside the Chinese mainland). </li>
          * @type {string || null}
          */
-        this.Url = null;
+        this.Area = null;
 
         /**
-         * Log package name
+         * Log packet name.	
          * @type {string || null}
          */
         this.LogPacketName = null;
 
         /**
-         * Acceleration region. Values:
-<li>`mainland`: Chinese mainland;</li>
-<li>`overseas`: Global (outside the Chinese mainland);</li>
+         * Log download address.	
          * @type {string || null}
          */
-        this.Area = null;
+        this.Url = null;
+
+        /**
+         * (Disused) Log packaging time. 
+         * @type {number || null}
+         */
+        this.LogTime = null;
+
+        /**
+         * Start time of log packaging.
+         * @type {string || null}
+         */
+        this.LogStartTime = null;
+
+        /**
+         * End time of the log package.
+         * @type {string || null}
+         */
+        this.LogEndTime = null;
+
+        /**
+         * Original log size (in bytes).
+         * @type {number || null}
+         */
+        this.Size = null;
 
     }
 
@@ -3791,12 +3817,14 @@ class L7OfflineLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogTime = 'LogTime' in params ? params.LogTime : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.LogPacketName = 'LogPacketName' in params ? params.LogPacketName : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.LogPacketName = 'LogPacketName' in params ? params.LogPacketName : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.LogTime = 'LogTime' in params ? params.LogTime : null;
+        this.LogStartTime = 'LogStartTime' in params ? params.LogStartTime : null;
+        this.LogEndTime = 'LogEndTime' in params ? params.LogEndTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -3951,6 +3979,13 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
          */
         this.OriginPort = null;
 
+        /**
+         * Rule tag.
+Note: u200dThis field may returnu200d·`nullu200d`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleTag = null;
+
     }
 
     /**
@@ -3970,6 +4005,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
         this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
         this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
+        this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
 
     }
 }
@@ -8416,6 +8452,12 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
          */
         this.OriginPort = null;
 
+        /**
+         * Rule tag. This parameter is left empty by default.
+         * @type {string || null}
+         */
+        this.RuleTag = null;
+
     }
 
     /**
@@ -8435,6 +8477,7 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
         this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
         this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
+        this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
 
     }
 }
@@ -8636,13 +8679,13 @@ class DownloadL4LogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * List of sites to be queried. All sites will be selected if this field is not specified.
+         * List of sites. This parameter is required. A `null` will be returned if it is left empty.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
 
         /**
-         * List of L4 proxy IDs.
+         * List of L4 proxy instance IDs.
          * @type {Array.<string> || null}
          */
         this.ProxyIds = null;
@@ -9356,7 +9399,7 @@ class DescribeApplicationProxiesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No</li>
+         * Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>u200d, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -10305,10 +10348,7 @@ class RateLimitUserRule extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * The action. Values:
-<li>`monitor`: Observe</li>
-<li>`drop`: Block</li>
-<li>`alg`: JavaScript challenge</li>
+         * Action. Valid values: <li>`monitor`: Observe;</li>`<li>drop`: Block;</li> <li>`alg`: JavaScript challenge. </li>	
          * @type {string || null}
          */
         this.Action = null;
@@ -10349,8 +10389,8 @@ class RateLimitUserRule extends  AbstractModel {
         this.RulePriority = null;
 
         /**
-         * The rule ID, which is only used as an output parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rule ID, which is only used as an output parameter.
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleID = null;
@@ -10371,10 +10411,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UpdateTime = null;
 
         /**
-         * The statistical dimension. Values:
-<li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
-<li>`client_to_eo`: Requests from the client to EdgeOne</li>
-Note: A null value indicates responses from the origin server to EdgeOne are recorded.
+         * Statistical dimension. `source_to_eo` is entered by default when this parameter is not specified. Valid values:
+<li>`source_to_eo`: (Response) Traffic going from the origin to EdgeOne. </li>
+<li>`client_to_eo`: (Request) Traffic going from the client to EdgeOne.</li>
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.FreqScope = null;
@@ -11640,17 +11680,16 @@ class DownloadL4LogsResponse extends  AbstractModel {
         super();
 
         /**
-         * The list of L4 log data.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<L4OfflineLog> || null}
-         */
-        this.Data = null;
-
-        /**
          * Total number of query results.
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * List of L4 logs.
+         * @type {Array.<L4OfflineLog> || null}
+         */
+        this.Data = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11667,6 +11706,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -11676,7 +11716,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Data.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13152,6 +13191,12 @@ The original configuration will apply if this field is not specified.
          */
         this.OriginPort = null;
 
+        /**
+         * Rule tag. The original configuration will apply if it is not specified.
+         * @type {string || null}
+         */
+        this.RuleTag = null;
+
     }
 
     /**
@@ -13172,6 +13217,7 @@ The original configuration will apply if this field is not specified.
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
         this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
         this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
+        this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
 
     }
 }
@@ -13390,13 +13436,13 @@ class CheckCnameStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the site.
+         * Site ID.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * List of domain names.
+         * List of accelerated domain names.
          * @type {Array.<string> || null}
          */
         this.RecordNames = null;
@@ -13891,17 +13937,16 @@ class DownloadL7LogsResponse extends  AbstractModel {
         super();
 
         /**
-         * The list of L7 log data.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<L7OfflineLog> || null}
-         */
-        this.Data = null;
-
-        /**
          * Total number of query results.
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * List of L7 logs.
+         * @type {Array.<L7OfflineLog> || null}
+         */
+        this.Data = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -13918,6 +13963,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -13927,7 +13973,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Data.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

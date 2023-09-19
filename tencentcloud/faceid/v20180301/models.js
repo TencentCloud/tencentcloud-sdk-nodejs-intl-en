@@ -224,7 +224,7 @@ class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
         this.BizToken = null;
 
         /**
-         * 
+         * The verification URL to be opened with a browser to start the verification process.
          * @type {string || null}
          */
         this.VerificationURL = null;

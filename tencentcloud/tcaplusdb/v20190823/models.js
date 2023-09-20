@@ -32,6 +32,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.TaskId = null;
 
         /**
+         * `ApplicationId` is in the format of `AppInstanceId-applicationId`, which is used to identify applications of different clusters.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -47,6 +54,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6040,7 +6048,7 @@ class DescribeTablesRequest extends  AbstractModel {
         this.TableGroupIds = null;
 
         /**
-         * Information list of tables to be queried
+         * Information list of tables to be queriedu200d. If you need to filter the tables, use the`Filter` parameter.
          * @type {Array.<SelectedTableInfoNew> || null}
          */
         this.SelectedTables = null;

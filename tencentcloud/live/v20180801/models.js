@@ -7074,6 +7074,34 @@ class DescribeGroupProIspPlayInfoListRequest extends  AbstractModel {
 }
 
 /**
+ * RestartLivePullStreamTask response structure.
+ * @class
+ */
+class RestartLivePullStreamTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStreamDayPlayInfoList request structure.
  * @class
  */
@@ -7141,80 +7169,24 @@ Default: query data for all regions.
 }
 
 /**
- * Transcoding details.
+ * RestartLivePullStreamTask request structure.
  * @class
  */
-class TranscodeDetailInfo extends  AbstractModel {
+class RestartLivePullStreamTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Stream name.
+         * Task Id.
          * @type {string || null}
          */
-        this.StreamName = null;
+        this.TaskId = null;
 
         /**
-         * Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
+         * task operator.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Transcoding duration in minutes.
-Note: given the possible interruptions during push, duration here is the sum of actual duration of transcoding instead of the interval between the start time and end time.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Codec with modules,
-Example:
-liveprocessor_H264: LVB transcoding - H264,
-liveprocessor_H265: LVB transcoding - H265,
-topspeed_H264: top speed codec - H264,
-topspeed_H265: top speed codec - H265.
-         * @type {string || null}
-         */
-        this.ModuleCodec = null;
-
-        /**
-         * Bitrate.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Push domain name.
-         * @type {string || null}
-         */
-        this.PushDomain = null;
-
-        /**
-         * Resolution.
-         * @type {string || null}
-         */
-        this.Resolution = null;
-
-        /**
-         * The region. Valid values:
-`Mainland`: Inside the Chinese mainland.
-`Overseas`: Outside the Chinese mainland.
-         * @type {string || null}
-         */
-        this.MainlandOrOversea = null;
+        this.Operator = null;
 
     }
 
@@ -7225,16 +7197,8 @@ topspeed_H265: top speed codec - H265.
         if (!params) {
             return;
         }
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
-        this.Resolution = 'Resolution' in params ? params.Resolution : null;
-        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -9990,6 +9954,105 @@ Note: Beijing time (UTC+8) is used.
         this.CertType = 'CertType' in params ? params.CertType : null;
         this.CertExpireTime = 'CertExpireTime' in params ? params.CertExpireTime : null;
         this.DomainList = 'DomainList' in params ? params.DomainList : null;
+
+    }
+}
+
+/**
+ * Transcoding details.
+ * @class
+ */
+class TranscodeDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Transcoding duration in minutes.
+Note: given the possible interruptions during push, duration here is the sum of actual duration of transcoding instead of the interval between the start time and end time.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Codec with modules,
+Example:
+liveprocessor_H264: LVB transcoding - H264,
+liveprocessor_H265: LVB transcoding - H265,
+topspeed_H264: top speed codec - H264,
+topspeed_H265: top speed codec - H265.
+         * @type {string || null}
+         */
+        this.ModuleCodec = null;
+
+        /**
+         * Bitrate.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Push domain name.
+         * @type {string || null}
+         */
+        this.PushDomain = null;
+
+        /**
+         * Resolution.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * The region. Valid values:
+`Mainland`: Inside the Chinese mainland.
+`Overseas`: Outside the Chinese mainland.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
 
     }
 }
@@ -14499,6 +14562,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.VodLocalMode = null;
 
+        /**
+         *  Recording template ID.
+         * @type {string || null}
+         */
+        this.RecordTemplateId = null;
+
+        /**
+         * Newly added streaming address. Used for the scenario of pushing two streams with a single task.
+         * @type {string || null}
+         */
+        this.BackupToUrl = null;
+
     }
 
     /**
@@ -14548,6 +14623,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.VodLocalMode = 'VodLocalMode' in params ? params.VodLocalMode : null;
+        this.RecordTemplateId = 'RecordTemplateId' in params ? params.RecordTemplateId : null;
+        this.BackupToUrl = 'BackupToUrl' in params ? params.BackupToUrl : null;
 
     }
 }
@@ -15795,8 +15872,9 @@ module.exports = {
     PushDataInfo: PushDataInfo,
     CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeGroupProIspPlayInfoListRequest: DescribeGroupProIspPlayInfoListRequest,
+    RestartLivePullStreamTaskResponse: RestartLivePullStreamTaskResponse,
     DescribeStreamDayPlayInfoListRequest: DescribeStreamDayPlayInfoListRequest,
-    TranscodeDetailInfo: TranscodeDetailInfo,
+    RestartLivePullStreamTaskRequest: RestartLivePullStreamTaskRequest,
     DescribeLiveSnapshotTemplateResponse: DescribeLiveSnapshotTemplateResponse,
     DescribeLiveTranscodeRulesResponse: DescribeLiveTranscodeRulesResponse,
     CreateLiveTimeShiftTemplateRequest: CreateLiveTimeShiftTemplateRequest,
@@ -15849,6 +15927,7 @@ module.exports = {
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
     CertInfo: CertInfo,
+    TranscodeDetailInfo: TranscodeDetailInfo,
     DescribeRecordTaskResponse: DescribeRecordTaskResponse,
     DescribeLiveDelayInfoListResponse: DescribeLiveDelayInfoListResponse,
     DeleteLiveTranscodeTemplateRequest: DeleteLiveTranscodeTemplateRequest,

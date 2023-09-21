@@ -150,8 +150,9 @@ const DescribeTimeShiftRecordDetailRequest = models.DescribeTimeShiftRecordDetai
 const PushDataInfo = models.PushDataInfo;
 const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
+const RestartLivePullStreamTaskResponse = models.RestartLivePullStreamTaskResponse;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
-const TranscodeDetailInfo = models.TranscodeDetailInfo;
+const RestartLivePullStreamTaskRequest = models.RestartLivePullStreamTaskRequest;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
 const CreateLiveTimeShiftTemplateRequest = models.CreateLiveTimeShiftTemplateRequest;
@@ -204,6 +205,7 @@ const BandwidthInfo = models.BandwidthInfo;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
+const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DescribeRecordTaskResponse = models.DescribeRecordTaskResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
 const DeleteLiveTranscodeTemplateRequest = models.DeleteLiveTranscodeTemplateRequest;
@@ -1448,6 +1450,17 @@ Note:
     DeleteLiveTimeShiftRule(req, cb) {
         let resp = new DeleteLiveTimeShiftRuleResponse();
         this.request("DeleteLiveTimeShiftRule", req, resp, cb);
+    }
+
+    /**
+     * Restart the running live streaming pull task.
+     * @param {RestartLivePullStreamTaskRequest} req
+     * @param {function(string, RestartLivePullStreamTaskResponse):void} cb
+     * @public
+     */
+    RestartLivePullStreamTask(req, cb) {
+        let resp = new RestartLivePullStreamTaskResponse();
+        this.request("RestartLivePullStreamTask", req, resp, cb);
     }
 
     /**

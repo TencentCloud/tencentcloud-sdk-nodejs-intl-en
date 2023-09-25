@@ -4414,26 +4414,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * List of TCB services subject to static hosting
+ * List of filter parameters
  * @class
  */
-class TCBHostService extends  AbstractModel {
+class Filter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The list of instances.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TCBHostInstance> || null}
+         * The key of the filter parameter.
+         * @type {string || null}
          */
-        this.InstanceList = null;
+        this.FilterKey = null;
 
         /**
-         * The instance count.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * u200cThe value of the filter parameter.
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.FilterValue = null;
 
     }
 
@@ -4444,16 +4442,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.InstanceList) {
-            this.InstanceList = new Array();
-            for (let z in params.InstanceList) {
-                let obj = new TCBHostInstance();
-                obj.deserialize(params.InstanceList[z]);
-                this.InstanceList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.FilterKey = 'FilterKey' in params ? params.FilterKey : null;
+        this.FilterValue = 'FilterValue' in params ? params.FilterValue : null;
 
     }
 }
@@ -5114,6 +5104,57 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
         }
         this.CertificateIdList = 'CertificateIdList' in params ? params.CertificateIdList : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeHostTeoInstanceList response structure.
+ * @class
+ */
+class DescribeHostTeoInstanceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of EDGEONE instances.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TeoInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * The total count.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new TeoInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5961,6 +6002,91 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeHostTeoInstanceList request structure.
+ * @class
+ */
+class DescribeHostTeoInstanceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the certificate to be deployed.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * The type of resource for certificate deployment.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Whether to query the cached results. Valid values: `1` (yes) and `0` (no). By default, the cached results within 30 minutes are queried.
+         * @type {number || null}
+         */
+        this.IsCache = null;
+
+        /**
+         * The list of filter parameters. FilterKey: domainMatch (query the list of instances with matching or non-matching domains). FilterValue: `1` (default; query the list of instances with matching domains) or `0` (query the list of instances with non-matching domains).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The ID of the deployed certificate.
+         * @type {string || null}
+         */
+        this.OldCertificateId = null;
+
+        /**
+         * The pagination offset, starting from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of instances on each page. Default value: 10.	
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Whether the query is asynchronous.
+         * @type {number || null}
+         */
+        this.AsyncCache = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.IsCache = 'IsCache' in params ? params.IsCache : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.OldCertificateId = 'OldCertificateId' in params ? params.OldCertificateId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AsyncCache = 'AsyncCache' in params ? params.AsyncCache : null;
+
+    }
+}
+
+/**
  * Region of associated cloud resources
  * @class
  */
@@ -6332,6 +6458,51 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * List of TCB services subject to static hosting
+ * @class
+ */
+class TCBHostService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of instances.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TCBHostInstance> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * The instance count.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new TCBHostInstance();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * Details of a TKE Ingress instance
  * @class
  */
@@ -6522,7 +6693,7 @@ module.exports = {
     TCBInstanceList: TCBInstanceList,
     DescribeCertificateRequest: DescribeCertificateRequest,
     WafInstanceList: WafInstanceList,
-    TCBHostService: TCBHostService,
+    Filter: Filter,
     TkeInstanceList: TkeInstanceList,
     Error: Error,
     CertTaskId: CertTaskId,
@@ -6534,6 +6705,7 @@ module.exports = {
     DeleteCertificateRequest: DeleteCertificateRequest,
     DescribeCertificateOperateLogsResponse: DescribeCertificateOperateLogsResponse,
     ModifyCertificateProjectRequest: ModifyCertificateProjectRequest,
+    DescribeHostTeoInstanceListResponse: DescribeHostTeoInstanceListResponse,
     CancelAuditCertificateRequest: CancelAuditCertificateRequest,
     ModifyCertificateResubmitResponse: ModifyCertificateResubmitResponse,
     UploadCertificateRequest: UploadCertificateRequest,
@@ -6543,12 +6715,14 @@ module.exports = {
     DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     DescribeCertificateBindResourceTaskResultResponse: DescribeCertificateBindResourceTaskResultResponse,
     ClbListenerRule: ClbListenerRule,
+    DescribeHostTeoInstanceListRequest: DescribeHostTeoInstanceListRequest,
     BindResourceRegionResult: BindResourceRegionResult,
     TkeInstanceDetail: TkeInstanceDetail,
     UploadConfirmLetterRequest: UploadConfirmLetterRequest,
     SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
     DescribeCSRResponse: DescribeCSRResponse,
     ClbInstanceList: ClbInstanceList,
+    TCBHostService: TCBHostService,
     TkeIngressDetail: TkeIngressDetail,
     CancelAuditCertificateResponse: CancelAuditCertificateResponse,
     VODInstanceList: VODInstanceList,

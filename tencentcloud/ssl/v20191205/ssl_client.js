@@ -85,7 +85,7 @@ const CreateCSRRequest = models.CreateCSRRequest;
 const TCBInstanceList = models.TCBInstanceList;
 const DescribeCertificateRequest = models.DescribeCertificateRequest;
 const WafInstanceList = models.WafInstanceList;
-const TCBHostService = models.TCBHostService;
+const Filter = models.Filter;
 const TkeInstanceList = models.TkeInstanceList;
 const Error = models.Error;
 const CertTaskId = models.CertTaskId;
@@ -97,6 +97,7 @@ const LiveInstanceList = models.LiveInstanceList;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
+const DescribeHostTeoInstanceListResponse = models.DescribeHostTeoInstanceListResponse;
 const CancelAuditCertificateRequest = models.CancelAuditCertificateRequest;
 const ModifyCertificateResubmitResponse = models.ModifyCertificateResubmitResponse;
 const UploadCertificateRequest = models.UploadCertificateRequest;
@@ -106,12 +107,14 @@ const CreateCertificateResponse = models.CreateCertificateResponse;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const DescribeCertificateBindResourceTaskResultResponse = models.DescribeCertificateBindResourceTaskResultResponse;
 const ClbListenerRule = models.ClbListenerRule;
+const DescribeHostTeoInstanceListRequest = models.DescribeHostTeoInstanceListRequest;
 const BindResourceRegionResult = models.BindResourceRegionResult;
 const TkeInstanceDetail = models.TkeInstanceDetail;
 const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
 const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
 const DescribeCSRResponse = models.DescribeCSRResponse;
 const ClbInstanceList = models.ClbInstanceList;
+const TCBHostService = models.TCBHostService;
 const TkeIngressDetail = models.TkeIngressDetail;
 const CancelAuditCertificateResponse = models.CancelAuditCertificateResponse;
 const VODInstanceList = models.VODInstanceList;
@@ -183,14 +186,14 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a CSR.
-     * @param {CreateCSRRequest} req
-     * @param {function(string, CreateCSRResponse):void} cb
+     * This API is used to query the list of EDGEONE instances to which a certificate can be deployed.
+     * @param {DescribeHostTeoInstanceListRequest} req
+     * @param {function(string, DescribeHostTeoInstanceListResponse):void} cb
      * @public
      */
-    CreateCSR(req, cb) {
-        let resp = new CreateCSRResponse();
-        this.request("CreateCSR", req, resp, cb);
+    DescribeHostTeoInstanceList(req, cb) {
+        let resp = new DescribeHostTeoInstanceListResponse();
+        this.request("DescribeHostTeoInstanceList", req, resp, cb);
     }
 
     /**
@@ -268,6 +271,17 @@ class SslClient extends AbstractClient {
     DescribeCertificateDetail(req, cb) {
         let resp = new DescribeCertificateDetailResponse();
         this.request("DescribeCertificateDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reissue a certificate. Note that if you have applied for a free certificate, only an RSA-2048 certificate will be reissued, and the certificate can be reissued only once.
+     * @param {ReplaceCertificateRequest} req
+     * @param {function(string, ReplaceCertificateResponse):void} cb
+     * @public
+     */
+    ReplaceCertificate(req, cb) {
+        let resp = new ReplaceCertificateResponse();
+        this.request("ReplaceCertificate", req, resp, cb);
     }
 
     /**
@@ -370,14 +384,14 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reissue a certificate. Note that if you have applied for a free certificate, only an RSA-2048 certificate will be reissued, and the certificate can be reissued only once.
-     * @param {ReplaceCertificateRequest} req
-     * @param {function(string, ReplaceCertificateResponse):void} cb
+     * This API is used to create a CSR.
+     * @param {CreateCSRRequest} req
+     * @param {function(string, CreateCSRResponse):void} cb
      * @public
      */
-    ReplaceCertificate(req, cb) {
-        let resp = new ReplaceCertificateResponse();
-        this.request("ReplaceCertificate", req, resp, cb);
+    CreateCSR(req, cb) {
+        let resp = new CreateCSRResponse();
+        this.request("CreateCSR", req, resp, cb);
     }
 
     /**

@@ -532,7 +532,6 @@ Note: only data from the last 90 days will be queried.
 
     /**
      * This API is used to query CDN IP ownership.
-(Note: the request rate limit of this API is subject to the limit in CDN, which is 200 calls/10 minutes).  
      * @param {DescribeCdnIpRequest} req
      * @param {function(string, DescribeCdnIpResponse):void} cb
      * @public

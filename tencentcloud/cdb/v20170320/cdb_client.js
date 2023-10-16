@@ -45,7 +45,7 @@ const CdbRegionSellConf = models.CdbRegionSellConf;
 const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
 const DescribeBackupDecryptionKeyRequest = models.DescribeBackupDecryptionKeyRequest;
 const CreateCdbProxyAddressResponse = models.CreateCdbProxyAddressResponse;
-const SlowLogInfo = models.SlowLogInfo;
+const RollbackTableName = models.RollbackTableName;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
@@ -59,6 +59,7 @@ const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const ProxyAllocation = models.ProxyAllocation;
+const StopCpuExpandRequest = models.StopCpuExpandRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
@@ -140,12 +141,14 @@ const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
 const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
+const StopCpuExpandResponse = models.StopCpuExpandResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const ZoneConf = models.ZoneConf;
 const SlaveInstanceInfo = models.SlaveInstanceInfo;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const StopReplicationRequest = models.StopReplicationRequest;
+const StartCpuExpandResponse = models.StartCpuExpandResponse;
 const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
 const DescribeCdbZoneConfigRequest = models.DescribeCdbZoneConfigRequest;
 const DeviceCpuInfo = models.DeviceCpuInfo;
@@ -171,7 +174,7 @@ const OpenDBInstanceEncryptionRequest = models.OpenDBInstanceEncryptionRequest;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const ModifyInstancePasswordComplexityResponse = models.ModifyInstancePasswordComplexityResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
-const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
+const AuditLogAggregationResult = models.AuditLogAggregationResult;
 const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const DescribeRemoteBackupConfigRequest = models.DescribeRemoteBackupConfigRequest;
 const TagInfo = models.TagInfo;
@@ -220,7 +223,7 @@ const CreateAccountsRequest = models.CreateAccountsRequest;
 const BackupInfo = models.BackupInfo;
 const CloseWanServiceResponse = models.CloseWanServiceResponse;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
-const RollbackTableName = models.RollbackTableName;
+const SlowLogInfo = models.SlowLogInfo;
 const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
 const DescribeCloneListRequest = models.DescribeCloneListRequest;
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
@@ -263,9 +266,11 @@ const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
+const StartCpuExpandRequest = models.StartCpuExpandRequest;
+const DescribeCpuExpandStrategyRequest = models.DescribeCpuExpandStrategyRequest;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
 const ModifyBackupEncryptionStatusResponse = models.ModifyBackupEncryptionStatusResponse;
-const AuditLogAggregationResult = models.AuditLogAggregationResult;
+const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
@@ -341,6 +346,7 @@ const RoGroupAttr = models.RoGroupAttr;
 const UpgradeCDBProxyVersionResponse = models.UpgradeCDBProxyVersionResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
+const DescribeCpuExpandStrategyResponse = models.DescribeCpuExpandStrategyResponse;
 const InstanceRebootTime = models.InstanceRebootTime;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const TablePrivilege = models.TablePrivilege;
@@ -508,6 +514,17 @@ Note:
     StopReplication(req, cb) {
         let resp = new StopReplicationResponse();
         this.request("StopReplication", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable elastic CPU expansion.
+     * @param {StopCpuExpandRequest} req
+     * @param {function(string, StopCpuExpandResponse):void} cb
+     * @public
+     */
+    StopCpuExpand(req, cb) {
+        let resp = new StopCpuExpandResponse();
+        this.request("StopCpuExpand", req, resp, cb);
     }
 
     /**
@@ -1390,14 +1407,14 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
-     * @param {DescribeDBInstanceCharsetRequest} req
-     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
+     * This API is used to query the list of SQL files imported by users. The common request parameter `Region` must be `ap-shanghai`.
+     * @param {DescribeUploadedFilesRequest} req
+     * @param {function(string, DescribeUploadedFilesResponse):void} cb
      * @public
      */
-    DescribeDBInstanceCharset(req, cb) {
-        let resp = new DescribeDBInstanceCharsetResponse();
-        this.request("DescribeDBInstanceCharset", req, resp, cb);
+    DescribeUploadedFiles(req, cb) {
+        let resp = new DescribeUploadedFilesResponse();
+        this.request("DescribeUploadedFiles", req, resp, cb);
     }
 
     /**
@@ -1487,6 +1504,17 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
+     * This API is used to query the elastic expansion policy of an instance.
+     * @param {DescribeCpuExpandStrategyRequest} req
+     * @param {function(string, DescribeCpuExpandStrategyResponse):void} cb
+     * @public
+     */
+    DescribeCpuExpandStrategy(req, cb) {
+        let resp = new DescribeCpuExpandStrategyResponse();
+        this.request("DescribeCpuExpandStrategy", req, resp, cb);
+    }
+
+    /**
      * This API is used to rebalance the load on database proxy.
      * @param {ReloadBalanceProxyNodeRequest} req
      * @param {function(string, ReloadBalanceProxyNodeResponse):void} cb
@@ -1531,14 +1559,14 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API is used to query the list of SQL files imported by users. The common request parameter `Region` must be `ap-shanghai`.
-     * @param {DescribeUploadedFilesRequest} req
-     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
+     * @param {DescribeDBInstanceCharsetRequest} req
+     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
      * @public
      */
-    DescribeUploadedFiles(req, cb) {
-        let resp = new DescribeUploadedFilesResponse();
-        this.request("DescribeUploadedFiles", req, resp, cb);
+    DescribeDBInstanceCharset(req, cb) {
+        let resp = new DescribeDBInstanceCharsetResponse();
+        this.request("DescribeDBInstanceCharset", req, resp, cb);
     }
 
     /**
@@ -1731,6 +1759,17 @@ Note that before enabling public network access, you need to first [initialize t
     ModifyDBInstanceProject(req, cb) {
         let resp = new ModifyDBInstanceProjectResponse();
         this.request("ModifyDBInstanceProject", req, resp, cb);
+    }
+
+    /**
+     * u200cThis API is used to enable elastic CPU expansion manually or automatically.
+     * @param {StartCpuExpandRequest} req
+     * @param {function(string, StartCpuExpandResponse):void} cb
+     * @public
+     */
+    StartCpuExpand(req, cb) {
+        let resp = new StartCpuExpandResponse();
+        this.request("StartCpuExpand", req, resp, cb);
     }
 
     /**

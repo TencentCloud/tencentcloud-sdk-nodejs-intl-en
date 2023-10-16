@@ -33,7 +33,9 @@ const CreateBaseBackupRequest = models.CreateBaseBackupRequest;
 const ModifyDBInstanceReadOnlyGroupResponse = models.ModifyDBInstanceReadOnlyGroupResponse;
 const ClassInfo = models.ClassInfo;
 const DescribeCloneDBInstanceSpecRequest = models.DescribeCloneDBInstanceSpecRequest;
+const DescribeDBInstanceSecurityGroupsResponse = models.DescribeDBInstanceSecurityGroupsResponse;
 const BackupPlan = models.BackupPlan;
+const SwitchDBInstancePrimaryRequest = models.SwitchDBInstancePrimaryRequest;
 const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
@@ -100,6 +102,8 @@ const RemoveDBInstanceFromReadOnlyGroupResponse = models.RemoveDBInstanceFromRea
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DescribeParameterTemplatesResponse = models.DescribeParameterTemplatesResponse;
 const ParamSpecRelation = models.ParamSpecRelation;
+const SwitchDBInstancePrimaryResponse = models.SwitchDBInstancePrimaryResponse;
+const ModifyDBInstanceHAConfigRequest = models.ModifyDBInstanceHAConfigRequest;
 const PgDeal = models.PgDeal;
 const DeleteReadOnlyGroupNetworkAccessResponse = models.DeleteReadOnlyGroupNetworkAccessResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
@@ -125,7 +129,7 @@ const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGro
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const EventItem = models.EventItem;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
-const DescribeDBInstanceSecurityGroupsResponse = models.DescribeDBInstanceSecurityGroupsResponse;
+const DescribeDBInstanceHAConfigRequest = models.DescribeDBInstanceHAConfigRequest;
 const CreateParameterTemplateResponse = models.CreateParameterTemplateResponse;
 const ParamInfo = models.ParamInfo;
 const DescribeLogBackupsResponse = models.DescribeLogBackupsResponse;
@@ -134,6 +138,7 @@ const SecurityGroup = models.SecurityGroup;
 const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
+const DescribeDBInstanceHAConfigResponse = models.DescribeDBInstanceHAConfigResponse;
 const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const EncryptionKey = models.EncryptionKey;
@@ -203,12 +208,13 @@ const ModifyBaseBackupExpireTimeRequest = models.ModifyBaseBackupExpireTimeReque
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeDBInstanceSecurityGroupsRequest = models.DescribeDBInstanceSecurityGroupsRequest;
 const DescribeBackupPlansRequest = models.DescribeBackupPlansRequest;
+const ModifyDBInstanceHAConfigResponse = models.ModifyDBInstanceHAConfigResponse;
 const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeSlowQueryAnalysisResponse = models.DescribeSlowQueryAnalysisResponse;
 const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersRequest;
 const RawSlowQuery = models.RawSlowQuery;
-const CreateReadOnlyGroupNetworkAccessResponse = models.CreateReadOnlyGroupNetworkAccessResponse;
+const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const ModifyDBInstanceChargeTypeRequest = models.ModifyDBInstanceChargeTypeRequest;
 const DescribeParameterTemplateAttributesResponse = models.DescribeParameterTemplateAttributesResponse;
@@ -227,7 +233,7 @@ const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const UpgradeDBInstanceKernelVersionRequest = models.UpgradeDBInstanceKernelVersionRequest;
 const DescribeBaseBackupsRequest = models.DescribeBaseBackupsRequest;
 const DescribeEncryptionKeysResponse = models.DescribeEncryptionKeysResponse;
-const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
+const CreateReadOnlyGroupNetworkAccessResponse = models.CreateReadOnlyGroupNetworkAccessResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const ModifyDBInstanceChargeTypeResponse = models.ModifyDBInstanceChargeTypeResponse;
 
@@ -243,7 +249,7 @@ class PostgresClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get the download URL of a backup.
+     * u200cThis API is used to query the download address of a specified backup set, including full backup sets and incremental log backup sets.
      * @param {DescribeBackupDownloadURLRequest} req
      * @param {function(string, DescribeBackupDownloadURLResponse):void} cb
      * @public
@@ -265,7 +271,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get error logs.
+     * This API is used to query an error log.
      * @param {DescribeDBErrlogsRequest} req
      * @param {function(string, DescribeDBErrlogsResponse):void} cb
      * @public
@@ -273,6 +279,19 @@ class PostgresClient extends AbstractClient {
     DescribeDBErrlogs(req, cb) {
         let resp = new DescribeDBErrlogsResponse();
         this.request("DescribeDBErrlogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the HA configuration of an instance, u200cwhich includes:
+<li>Allow a standby node to promote to a primary node.
+<li>Allow a semi-sync instance to adopt sync or async replication.
+     * @param {DescribeDBInstanceHAConfigRequest} req
+     * @param {function(string, DescribeDBInstanceHAConfigResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceHAConfig(req, cb) {
+        let resp = new DescribeDBInstanceHAConfigResponse();
+        this.request("DescribeDBInstanceHAConfig", req, resp, cb);
     }
 
     /**
@@ -331,7 +350,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of modifiable parameters of an instance.
+     * This API is used to query the parameters of an instance.
      * @param {DescribeDBInstanceParametersRequest} req
      * @param {function(string, DescribeDBInstanceParametersResponse):void} cb
      * @public
@@ -353,7 +372,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a network for an instance.
+     * This API is used to create a network for an instance.
      * @param {CreateDBInstanceNetworkAccessRequest} req
      * @param {function(string, CreateDBInstanceNetworkAccessResponse):void} cb
      * @public
@@ -364,7 +383,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance specifications including memory and disk size.
+     * This API is used to modify instance specifications, including memory and disk size.
      * @param {ModifyDBInstanceSpecRequest} req
      * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
      * @public
@@ -397,7 +416,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pull the list of databases.
+     * This API is used to query the database list of an instance.
      * @param {DescribeDatabasesRequest} req
      * @param {function(string, DescribeDatabasesResponse):void} cb
      * @public
@@ -419,7 +438,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the purchasable specification configuration.
+     * This API is used to query the purchasable specification configuration. u200cThis API is disused and replaced by the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
      * @param {DescribeProductConfigRequest} req
      * @param {function(string, DescribeProductConfigResponse):void} cb
      * @public
@@ -430,7 +449,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
+     * This API is used to get a slow query log. Since it was deprecated on September 1, 2021, it has no longer returned data. You need to use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
      * @param {DescribeDBSlowlogsRequest} req
      * @param {function(string, DescribeDBSlowlogsResponse):void} cb
      * @public
@@ -463,7 +482,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an terminated instance will be deleted and cannot be recovered.
+     * This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of a terminated instance will be deleted and cannot be recovered. Be cautious with this API calling. Only the instance in isolation can be terminated.
      * @param {DestroyDBInstanceRequest} req
      * @param {function(string, DestroyDBInstanceResponse):void} cb
      * @public
@@ -474,7 +493,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the instance backup list.
+     * This API is used to query the backup list of an instance. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
      * @param {DescribeDBBackupsRequest} req
      * @param {function(string, DescribeDBBackupsResponse):void} cb
      * @public
@@ -496,7 +515,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the purchase price of one or multiple instances.
+     * This API is used to query the purchase price of an instance.
      * @param {InquiryPriceCreateDBInstancesRequest} req
      * @param {function(string, InquiryPriceCreateDBInstancesResponse):void} cb
      * @public
@@ -507,7 +526,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the security group information of an instance.
+     * This API is used to query the security group of an instance.
      * @param {DescribeDBInstanceSecurityGroupsRequest} req
      * @param {function(string, DescribeDBInstanceSecurityGroupsResponse):void} cb
      * @public
@@ -540,7 +559,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable public network access for a PostgreSQL for Serverless instance.
+     * This API is used to disable the public network address of a PostgreSQL for Serverless instance.
      * @param {CloseServerlessDBExtranetAccessRequest} req
      * @param {function(string, CloseServerlessDBExtranetAccessResponse):void} cb
      * @public
@@ -573,7 +592,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify parameters in batches.
+     * This API is used to modify instance parameters.
      * @param {ModifyDBInstanceParametersRequest} req
      * @param {function(string, ModifyDBInstanceParametersResponse):void} cb
      * @public
@@ -617,7 +636,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable public network access for a PostgreSQL for Serverless instance.
+     * This API is used to enable the public network address of a PostgreSQL for Serverless instance.
      * @param {OpenServerlessDBExtranetAccessRequest} req
      * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
      * @public
@@ -683,7 +702,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the parameter template name and description, and add or delete parameter template parameters.
+     * This API is used to modify the configurations, such as parameter template name and description. It can also be used to manage the parameter list in the parameter template.
      * @param {ModifyParameterTemplateRequest} req
      * @param {function(string, ModifyParameterTemplateResponse):void} cb
      * @public
@@ -738,7 +757,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a network for an RO group.
+     * This API is used to create a network for an RO group.
      * @param {CreateReadOnlyGroupNetworkAccessRequest} req
      * @param {function(string, CreateReadOnlyGroupNetworkAccessResponse):void} cb
      * @public
@@ -749,7 +768,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get instance key list.
+     * This API is used to query the instance key list.
      * @param {DescribeEncryptionKeysRequest} req
      * @param {function(string, DescribeEncryptionKeysResponse):void} cb
      * @public
@@ -793,14 +812,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an instance.
-     * @param {RestartDBInstanceRequest} req
-     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * This API is used to query the details of one instance.
+     * @param {DescribeDBInstanceAttributeRequest} req
+     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
      * @public
      */
-    RestartDBInstance(req, cb) {
-        let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+    DescribeDBInstanceAttribute(req, cb) {
+        let resp = new DescribeDBInstanceAttributeResponse();
+        this.request("DescribeDBInstanceAttribute", req, resp, cb);
     }
 
     /**
@@ -815,7 +834,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to transfer an instance to another project.
+     * This API is used to modify the project of an instance.
      * @param {ModifyDBInstancesProjectRequest} req
      * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
      * @public
@@ -826,7 +845,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the instance Xlog list.
+     * This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
      * @param {DescribeDBXlogsRequest} req
      * @param {function(string, DescribeDBXlogsResponse):void} cb
      * @public
@@ -837,18 +856,18 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of one instance.
-     * @param {DescribeDBInstanceAttributeRequest} req
-     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * This API is used to restart an instance.
+     * @param {RestartDBInstanceRequest} req
+     * @param {function(string, RestartDBInstanceResponse):void} cb
      * @public
      */
-    DescribeDBInstanceAttribute(req, cb) {
-        let resp = new DescribeDBInstanceAttributeResponse();
-        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+    RestartDBInstance(req, cb) {
+        let resp = new RestartDBInstanceResponse();
+        this.request("RestartDBInstance", req, resp, cb);
     }
 
     /**
-     * This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
+     * This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
      * @param {CreateDBInstancesRequest} req
      * @param {function(string, CreateDBInstancesResponse):void} cb
      * @public
@@ -856,6 +875,19 @@ class PostgresClient extends AbstractClient {
     CreateDBInstances(req, cb) {
         let resp = new CreateDBInstancesResponse();
         this.request("CreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the HA configuration of an instance. u200cwhich includes:
+<li>Allow the standby node to promote to the primary node.
+<li>Allow a semi-sync instance to adopt sync or async replication.
+     * @param {ModifyDBInstanceHAConfigRequest} req
+     * @param {function(string, ModifyDBInstanceHAConfigResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceHAConfig(req, cb) {
+        let resp = new ModifyDBInstanceHAConfigResponse();
+        this.request("ModifyDBInstanceHAConfig", req, resp, cb);
     }
 
     /**
@@ -870,7 +902,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate one or more instances.
+     * This API is used to isolate an instance.
      * @param {IsolateDBInstancesRequest} req
      * @param {function(string, IsolateDBInstancesResponse):void} cb
      * @public
@@ -881,7 +913,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the expiration time of the specified full backup of an instance.
+     * This API is used to modify the specified expiration time of a full backup for an instance.
      * @param {ModifyBaseBackupExpireTimeRequest} req
      * @param {function(string, ModifyBaseBackupExpireTimeResponse):void} cb
      * @public
@@ -925,7 +957,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable the public network link to an instance.
+     * This API is used to disable the public network address of an instance.
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
      * @public
@@ -947,7 +979,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the instance user list.
+     * This API is used to query the list of the database accounts for an instance.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
@@ -1013,7 +1045,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the details of parameter modification events.
+     * This API is used to query the parameter modification event.
      * @param {DescribeParamsEventRequest} req
      * @param {function(string, DescribeParamsEventResponse):void} cb
      * @public
@@ -1035,7 +1067,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get order information.
+     * This API is used to query the order information.
      * @param {DescribeOrdersRequest} req
      * @param {function(string, DescribeOrdersResponse):void} cb
      * @public
@@ -1043,6 +1075,20 @@ class PostgresClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable the primary-standby switch of an instance.
+<li>By initiating a switch, you can verify whether the primary-standby switch is performed correctly.
+<li>By using forced switch, you can forcibly initiate the primary-standby switch when the delay of replica node failed to meet the switch requirement.
+<li>This operation can only be performed for the primary instance.
+     * @param {SwitchDBInstancePrimaryRequest} req
+     * @param {function(string, SwitchDBInstancePrimaryResponse):void} cb
+     * @public
+     */
+    SwitchDBInstancePrimary(req, cb) {
+        let resp = new SwitchDBInstancePrimaryResponse();
+        this.request("SwitchDBInstancePrimary", req, resp, cb);
     }
 
     /**
@@ -1068,7 +1114,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable public network access.
+     * This API is used to enable the public network access of an instance.
      * @param {OpenDBExtranetAccessRequest} req
      * @param {function(string, OpenDBExtranetAccessResponse):void} cb
      * @public
@@ -1090,7 +1136,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to initialize a TencentDB for PostgreSQL instance.
+     * This API is used to initialize a TencentDB for PostgreSQL instance. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
      * @param {InitDBInstancesRequest} req
      * @param {function(string, InitDBInstancesResponse):void} cb
      * @public
@@ -1156,7 +1202,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query RO group information by specifying the primary instance IDs.
+     * This API is used to query the list of RO groups.
      * @param {DescribeReadOnlyGroupsRequest} req
      * @param {function(string, DescribeReadOnlyGroupsResponse):void} cb
      * @public
@@ -1167,7 +1213,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade instance configurations.
+     * This API is used to upgrade instance configurations. u200cThis API is disused and replaced by the [ModifyDBInstanceSpec](https://intl.cloud.tencent.com/document/api/409/63689?from_cn_redirect=1) API.
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
      * @public
@@ -1179,6 +1225,8 @@ class PostgresClient extends AbstractClient {
 
     /**
      * This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
+<li>After an instance is created successfully, it will start up automatically and enter the "Running" status.
+<li>If you create a monthly subscribed instance, you will be billed for the instance before the creation; if you create a pay-as-you-go instance billed on an hourly basis, the amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
      * @param {CreateInstancesRequest} req
      * @param {function(string, CreateInstancesResponse):void} cb
      * @public

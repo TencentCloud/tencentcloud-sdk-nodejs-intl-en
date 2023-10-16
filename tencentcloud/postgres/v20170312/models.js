@@ -25,7 +25,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
          * @type {string || null}
          */
         this.SpecCode = null;
@@ -496,7 +496,14 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * Primary AZ of the instance in the format of `ap-guangzhou-3`. To support multiple AZs, add information of the primary and standby AZs in the `DBNodeSet.N` field.
+The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.SpecCode = null;
@@ -508,61 +515,115 @@ class CreateInstancesRequest extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * The number of instances purchased at a time. Value range: 1-10.
+         * The number of instances to be purchased at a time. Value range: 1-10. To purchase more than 10 instances each time, you can make multiple calls.
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * Validity period in months.
+<li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+<li>Pay-as-you-go: `1`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Instance character set. Valid values: `UTF8`, `LATIN1`.
+         * Instance character set. Valid values: 
+<li> `UTF8`
+<li> `LATIN1`
          * @type {string || null}
          */
         this.Charset = null;
 
         /**
-         * Instance root account name
+         * Username of the instance root account, which has the following rules:
+<li>It must contain 1–16 letters , digits, or underscores
+<li>It can't be `postgres`.
+<li>It can't start with a digit or `pg_`.
+<li>All rules are case-insensitive.
          * @type {string || null}
          */
         this.AdminName = null;
 
         /**
-         * Instance root account password
+         * Password of the instance root account, which must contain 8-32 characters (above 12 characters preferably). It cannot begin with "/",
+and must contain the following 4 types of characters.
+<li>Lowercase letters: [a–z]
+<li>Uppercase letters: [A–Z]
+<li>Digits: 0-9
+<li>Symbols: ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
          * @type {string || null}
          */
         this.AdminPassword = null;
 
         /**
-         * Project ID
-         * @type {number || null}
+         * The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
+When only this parameter is specified, an instance running the latest kernel version of the latest minor version will be created based on this major version.
+You must pass in at least one of the following parameters: `DBMajorVersion`, `DBVersion`, DBKernelVersion`. If you don't need a minor version, just pass in `DBMajorVersion`.
+
+         * @type {string || null}
          */
-        this.ProjectId = null;
+        this.DBMajorVersion = null;
 
         /**
-         * PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
+         * Number of the major PostgreSQL community version and minor version, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+If it is specified, an instance running the latest kernel version will be created based on the community minor version.
+You must pass in at least one of the following parameters: `DBMajorVersion`, `DBVersion`, DBKernelVersion`.
          * @type {string || null}
          */
         this.DBVersion = null;
 
         /**
-         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+         * PostgreSQL kernel version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+PostgreSQL kernel version number. If it is specified, an instance running the specified kernel version will be created. Passing in this parameter in other scenarios is not supported.This parameter is only used to specify a kernel version, which serves no other purposes.
+
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * Instance billing mode. Valid values:
+<li>`PREPAID`: Monthly subscription
+<li>`POSTPAID_BY_HOUR`: Pay-as-you-go
+Default value: `PREPAID`.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * VPC ID in the format of `vpc-xxxxxxx`. To obtain valid VPC IDs, you can log in to the console or call [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) and look for the `unVpcId` fields in the response.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID in the format of `subnet-xxxxxxxx`, u200cwhich can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
+
+        /**
+         * Auto-renewal flag. Valid values:
+<li>`0`: Manual renewal.
+<li> `1`: Automatic renewal.
+Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Whether to use vouchers automatically. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -574,22 +635,10 @@ class CreateInstancesRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * ID of a subnet in the VPC specified by `VpcId`
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * Project ID
          * @type {number || null}
          */
-        this.AutoRenewFlag = null;
+        this.ProjectId = null;
 
         /**
          * Campaign ID
@@ -598,70 +647,54 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * Instance name
+         * Instance name, which can contain up to 60 letters, digits, hyphens, and symbols (_-). If this parameter is not specified, "Unnamed" will be displayed by default.
+
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no). Default value: `0`
-         * @type {number || null}
-         */
-        this.NeedSupportIpv6 = null;
-
-        /**
-         * The information of tags to be associated with instances. This parameter is left empty by default.
+         * The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
          * @type {Array.<Tag> || null}
          */
         this.TagList = null;
 
         /**
-         * Security group IDs
+         * Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
+
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * PostgreSQL major version. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
-         * @type {string || null}
-         */
-        this.DBMajorVersion = null;
-
-        /**
-         * PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
-         * @type {string || null}
-         */
-        this.DBKernelVersion = null;
-
-        /**
-         * Instance node information, which is required if you purchase a multi-AZ deployed instance.
-         * @type {Array.<DBNode> || null}
-         */
-        this.DBNodeSet = null;
-
-        /**
-         * Whether to support transparent data encryption. Valid values: 1 (yes), 0 (no). Default value: 0.
+         * Whether to support TDE. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
+For more information, see [TDE]u200d(https://www.tencentcloud.com/document/product/409/47765).
          * @type {number || null}
          */
         this.NeedSupportTDE = null;
 
         /**
          * KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
+For more information on creating `KeyId`, see [Enabling TDE](https://www.tencentcloud.com/document/product/409/47762).
          * @type {string || null}
          */
         this.KMSKeyId = null;
 
         /**
-         * The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
+         * The region where the KMS service is enabled. When `KMSRegion` is left empty, the current region will be selected by default.  If the current region does not support KMS, you must select another region that does.
+For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
          * @type {string || null}
          */
         this.KMSRegion = null;
 
         /**
-         * Database engine. Valid values:
-1. `postgresql` (TencentDB for PostgreSQL)
-2. `mssql_compatible`（MSSQL compatible-TencentDB for PostgreSQL)
-Default value: `postgresql`
+         * Database engines. Valid values:
+<li>`postgresql`: TencentDB for PostgreSQL
+<li>`mssql_compatible`: MSSQL compatible-TencentDB for PostgreSQL
+Default value: `postgresql`.
          * @type {string || null}
          */
         this.DBEngine = null;
@@ -669,17 +702,34 @@ Default value: `postgresql`
         /**
          * Configuration information of database engine in the following format:
 {"$key1":"$value1", "$key2":"$value2"}
-
 Valid values:
-1. mssql_compatible engine：
-`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
-`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+mssql_compatible engine:
+<li>`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+<li>`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
 "af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
-`serverCollationName`: Name of collation rule, which can’t be modified after the initialization. Default value: `sql_latin1_general_cp1_ci_as`. Valid values:
-"bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+<li>`serverCollationName`: Default collation name, which can’t be modified after the initialization. Default value: "bbf_unicode_general_ci_as". Valid values: "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。
          * @type {string || null}
          */
         this.DBEngineConfig = null;
+
+        /**
+         * Primary-standby sync mode. Valid values:  
+<li>`Semi-sync`
+<li>`Async`
+Default value for the primary instance: `Semi-sync`.
+Default value for the standby instance: `Async`.
+         * @type {string || null}
+         */
+        this.SyncMode = null;
+
+        /**
+         * Whether IPv6 is supported.
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
+         * @type {number || null}
+         */
+        this.NeedSupportIpv6 = null;
 
     }
 
@@ -690,25 +740,35 @@ Valid values:
         if (!params) {
             return;
         }
+        this.Zone = 'Zone' in params ? params.Zone : null;
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
         this.Charset = 'Charset' in params ? params.Charset : null;
         this.AdminName = 'AdminName' in params ? params.AdminName : null;
         this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.DBNodeSet) {
+            this.DBNodeSet = new Array();
+            for (let z in params.DBNodeSet) {
+                let obj = new DBNode();
+                obj.deserialize(params.DBNodeSet[z]);
+                this.DBNodeSet.push(obj);
+            }
+        }
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
 
         if (params.TagList) {
             this.TagList = new Array();
@@ -719,22 +779,13 @@ Valid values:
             }
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
-        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
-
-        if (params.DBNodeSet) {
-            this.DBNodeSet = new Array();
-            for (let z in params.DBNodeSet) {
-                let obj = new DBNode();
-                obj.deserialize(params.DBNodeSet[z]);
-                this.DBNodeSet.push(obj);
-            }
-        }
         this.NeedSupportTDE = 'NeedSupportTDE' in params ? params.NeedSupportTDE : null;
         this.KMSKeyId = 'KMSKeyId' in params ? params.KMSKeyId : null;
         this.KMSRegion = 'KMSRegion' in params ? params.KMSRegion : null;
         this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
         this.DBEngineConfig = 'DBEngineConfig' in params ? params.DBEngineConfig : null;
+        this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+        this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
 
     }
 }
@@ -1157,6 +1208,49 @@ class DescribeCloneDBInstanceSpecRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceSecurityGroups response structure.
+ * @class
+ */
+class DescribeDBInstanceSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of security groups in array
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.SecurityGroupSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityGroupSet) {
+            this.SecurityGroupSet = new Array();
+            for (let z in params.SecurityGroupSet) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.SecurityGroupSet[z]);
+                this.SecurityGroupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Backup plan
  * @class
  */
@@ -1201,6 +1295,67 @@ class BackupPlan extends  AbstractModel {
         this.BaseBackupRetentionPeriod = 'BaseBackupRetentionPeriod' in params ? params.BaseBackupRetentionPeriod : null;
         this.MinBackupStartTime = 'MinBackupStartTime' in params ? params.MinBackupStartTime : null;
         this.MaxBackupStartTime = 'MaxBackupStartTime' in params ? params.MaxBackupStartTime : null;
+
+    }
+}
+
+/**
+ * SwitchDBInstancePrimary request structure.
+ * @class
+ */
+class SwitchDBInstancePrimaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Whether to perform forced switch. As long as the standby node can be accessed, the switch will be performed regardless of the primary-standby sync delay. You can switch immediately only when `SwitchTag` is `0.
+<li>Default: `false`.
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
+        /**
+         * Switch time for the specified instance after configuration modification.
+<li>`0`: Switch now. 
+<li>`1`: Switch at the specified time.
+<li>`2`: Switch in the maintenance time.
+<li>Default value: `0`. 
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+        /**
+         * The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00". This parameter is invalid when `SwitchTag` is `0` or `2`.
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00". This parameter is invalid when `SwitchTag` is `0` or `2`. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.Force = 'Force' in params ? params.Force : null;
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
 
     }
 }
@@ -2025,13 +2180,18 @@ class ModifyDBInstanceDeploymentRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Instance node information.
+         * Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+The information of AZ can be obtained from the `Zone` field in the returned value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
          * @type {Array.<DBNode> || null}
          */
         this.DBNodeSet = null;
 
         /**
-         * Switch time. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
+         * Switch time for the specified instance after configuration modification.
+<li>`0`: Switch now. 
+<li>`1`: Switch at the specified time.
+<li>`2`: Switch in the maintenance time.
+Default value: `0`. 
          * @type {number || null}
          */
         this.SwitchTag = null;
@@ -3348,7 +3508,7 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
          * @type {string || null}
          */
         this.SpecCode = null;
@@ -3848,7 +4008,10 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * Whether to use vouchers automatically. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -3866,7 +4029,11 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * Switch time after instance configurations are modified. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
+         * Switch time for the specified instance after configuration modification.
+<li>`0`: Switch now. 
+<li>`1`: Switch at the specified time.
+<li>`2`: Switch in the maintenance time.
+Default value: `0`. 
          * @type {number || null}
          */
         this.SwitchTag = null;
@@ -4628,6 +4795,110 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SwitchDBInstancePrimary response structure.
+ * @class
+ */
+class SwitchDBInstancePrimaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceHAConfig request structure.
+ * @class
+ */
+class ModifyDBInstanceHAConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Primary-standby sync mode. Valid values:
+<li>`Semi-sync`
+<li>`Async`
+
+         * @type {string || null}
+         */
+        this.SyncMode = null;
+
+        /**
+         * u200cMaximum data lag for high-availability standby server. The standby node can be promoted to the primary node when its data lag and the delay time are both less than the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+<li>Unit: byte
+<li>Value range: 1073741824-322122547200
+         * @type {number || null}
+         */
+        this.MaxStandbyLatency = null;
+
+        /**
+         * The maximum delay for high-availability standby server The standby node can be promoted to the primary node when its data lag and the delay time are both less or equals to the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+<li>Unit: s
+<li>Value range: 5-10
+         * @type {number || null}
+         */
+        this.MaxStandbyLag = null;
+
+        /**
+         * Maximum data sync lag for u200dstandby server. If data lag of the standby node and the delay ime are both less than or equals to the values of `MaxSyncStandbyLatency` and `MaxSyncStandbyLag`, the standby server adopts semi-sync replication; if not, it adopts async replication.
+This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+When the semi-sync replication mode of the instance is not allowed to downgrade to async replication, `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` are not required.
+When the semi-sync instance is allowed to downgrade to async replication, `MaxSyncStandbyLatency` is required and `MaxSyncStandbyLag` must be left empty for PostgreSQL 9; `MaxSyncStandbyLatency` and MaxSyncStandbyLag` are required for PostgreSQL 10 and later.
+         * @type {number || null}
+         */
+        this.MaxSyncStandbyLatency = null;
+
+        /**
+         * Maximum delay for u200dsync u200dstandby server. If the delay time for u200dstandby server and the data lag are both less than or equals to the value of `MaxSyncStandbyLag` and `MaxSyncStandbyLatency` respectively, the standby server adopts sync replication mode; if not, it adopts async replication.
+This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+When the semi-sync replication mode of the instance is not allowed to downgrade to async replication, `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` are not required.
+When the semi-sync instance is allowed to downgrade to async replication, `MaxSyncStandbyLatency` is required and `MaxSyncStandbyLag` must be left empty for PostgreSQL 9; `MaxSyncStandbyLatency` and MaxSyncStandbyLag` are required for PostgreSQL 10 and later.
+         * @type {number || null}
+         */
+        this.MaxSyncStandbyLag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+        this.MaxStandbyLatency = 'MaxStandbyLatency' in params ? params.MaxStandbyLatency : null;
+        this.MaxStandbyLag = 'MaxStandbyLag' in params ? params.MaxStandbyLag : null;
+        this.MaxSyncStandbyLatency = 'MaxSyncStandbyLatency' in params ? params.MaxSyncStandbyLatency : null;
+        this.MaxSyncStandbyLag = 'MaxSyncStandbyLag' in params ? params.MaxSyncStandbyLag : null;
+
+    }
+}
+
+/**
  * Order details
  * @class
  */
@@ -4785,19 +5056,19 @@ class DescribeDBErrlogsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID in the format of postgres-5bq3wfjd
+         * Instance ID	
          * @type {string || null}
          */
         this.DBInstanceId = null;
 
         /**
-         * Query start time in the format of 2018-01-01 00:00:00, which cannot be more than 7 days ago
+         * u200cu200cu200cQuery start time in the format of 2018-01-01 00:00:00. The log is retained for seven days by default, so the start time must fall within the retention period.	
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time in the format of 2018-01-01 00:00:00
+         * u200cu200cu200cu200cQuery end time in the format of 2018-01-01 00:00:00	
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4809,19 +5080,19 @@ class DescribeDBErrlogsRequest extends  AbstractModel {
         this.DatabaseName = null;
 
         /**
-         * Search keyword
+         * Keywords used for search
          * @type {Array.<string> || null}
          */
         this.SearchKeys = null;
 
         /**
-         * Number of entries returned per page. Value range: 1-100
+         * Number of results returned per page. Value range: 1-100. Default value: `50`.	
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Page number for data return in paged query. Pagination starts from 0
+         * Data offset, which starts from 0. Default value: `0`.	
          * @type {number || null}
          */
         this.Offset = null;
@@ -5012,7 +5283,7 @@ class CloneDBInstanceRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.SpecCode = null;
@@ -5024,43 +5295,52 @@ class CloneDBInstanceRequest extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * Validity period in months. Valid values:
+<li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+<li>Pay-as-you-go: `1`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * Auto-renewal flag. Valid values:
+<li>`0`: Manual renewal.
+<li>`1`: Automatic renewal.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * VPC ID.
+         * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * ID of a subnet in the VPC specified by `VpcId`.
+         * VPC subnet ID in the format of `subnet-xxxxxxxx`, which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Name of the purchased instance.
+         * Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+         * Instance billing mode. Valid values:
+<li>`PREPAID`: Monthly subscription.
+<li>`POSTPAID_BY_HOUR`: Pay-as-you-go.
+Default value: `PREPAID`.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Security group ID.
+         * Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
+
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -5072,19 +5352,23 @@ class CloneDBInstanceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+         * The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
          * @type {Array.<Tag> || null}
          */
         this.TagList = null;
 
         /**
-         * This parameter is required if you purchase a multi-AZ deployed instance.
+         * Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
          * @type {Array.<DBNode> || null}
          */
         this.DBNodeSet = null;
 
         /**
-         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * Whether to use vouchers automatically. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -5112,6 +5396,16 @@ class CloneDBInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.RecoveryTargetTime = null;
+
+        /**
+         * Primary-standby sync mode. Valid values:  
+<li>`Semi-sync`
+<li>`Async`
+Default value for the primary instance: `Semi-sync`.
+Default value for the standby instance: `Async`.
+         * @type {string || null}
+         */
+        this.SyncMode = null;
 
     }
 
@@ -5156,6 +5450,7 @@ class CloneDBInstanceRequest extends  AbstractModel {
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.BackupSetId = 'BackupSetId' in params ? params.BackupSetId : null;
         this.RecoveryTargetTime = 'RecoveryTargetTime' in params ? params.RecoveryTargetTime : null;
+        this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
 
     }
 }
@@ -6109,7 +6404,9 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * The list of security groups to be associated with the instance or RO groups
+         * The list of security groups to be associated with the instance or RO groups.
+Information of security groups can be obtained from the `sgld` field in the returned value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API.
+
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdSet = null;
@@ -6252,24 +6549,18 @@ class RestartDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceSecurityGroups response structure.
+ * DescribeDBInstanceHAConfig request structure.
  * @class
  */
-class DescribeDBInstanceSecurityGroupsResponse extends  AbstractModel {
+class DescribeDBInstanceHAConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Information of security groups in array
-         * @type {Array.<SecurityGroup> || null}
-         */
-        this.SecurityGroupSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DBInstanceId = null;
 
     }
 
@@ -6280,16 +6571,7 @@ class DescribeDBInstanceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.SecurityGroupSet) {
-            this.SecurityGroupSet = new Array();
-            for (let z in params.SecurityGroupSet) {
-                let obj = new SecurityGroup();
-                obj.deserialize(params.SecurityGroupSet[z]);
-                this.SecurityGroupSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -6829,6 +7111,83 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceHAConfig response structure.
+ * @class
+ */
+class DescribeDBInstanceHAConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Primary-standby sync mode. Valid values:
+<li>`Semi-sync`
+<li>`Async`
+         * @type {string || null}
+         */
+        this.SyncMode = null;
+
+        /**
+         * Maximum data lag for high-availability standby server. The standby node can be promoted to the primary node when its data lag and the delay time are both less than the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+<li>Unit: byte
+<li>Value range: 1073741824-322122547200
+         * @type {number || null}
+         */
+        this.MaxStandbyLatency = null;
+
+        /**
+         * The maximum delay for high-availability standby server The standby node can be promoted to the primary node when its data lag and the delay time are both less than or equals to the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+<li>Unit: s
+<li>Value range: 5-10
+         * @type {number || null}
+         */
+        this.MaxStandbyLag = null;
+
+        /**
+         * Maximum data sync lag for u200du200dstandby server. If data lag of the standby node and the delay time are both less than or equals to the values of `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` respectively, the standby server adopts semi-sync replication; if not, it adopts async replication.
+This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+This field returns null for async instance
+and semi-sync (non-downgradable to async) instance.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxSyncStandbyLatency = null;
+
+        /**
+         * Maximum sync delay time for u200dstandby server. If the delay time for u200dstandby server and the data lag are both less than or equals to the values of `MaxSyncStandbyLag` and `MaxSyncStandbyLatency` respectively, the standby server adopts sync replication mode; if not, it adopts async replication.
+This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+This field will not return for async instance
+and semi-sync (non-downgradable to async) instance.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxSyncStandbyLag = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+        this.MaxStandbyLatency = 'MaxStandbyLatency' in params ? params.MaxStandbyLatency : null;
+        this.MaxStandbyLag = 'MaxStandbyLag' in params ? params.MaxStandbyLag : null;
+        this.MaxSyncStandbyLatency = 'MaxSyncStandbyLatency' in params ? params.MaxSyncStandbyLatency : null;
+        this.MaxSyncStandbyLag = 'MaxSyncStandbyLag' in params ? params.MaxSyncStandbyLag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IsolateDBInstances request structure.
  * @class
  */
@@ -6871,7 +7230,8 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * New name of database instance
+         * Instance name, which can contain up to 60 letters, digits, hyphens, and symbols (_-). If this parameter is not specified, "Unnamed" will be displayed by default.
+
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -7547,31 +7907,25 @@ class DBInstance extends  AbstractModel {
         super();
 
         /**
-         * Instance region such as ap-guangzhou, which corresponds to the `Region` field of `RegionSet`
+         * Instance region such as ap-guangzhou, which corresponds to the`Region` field in `RegionSet`.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`
+         * Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * VPC ID
+         * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * SubnetId
+         * VPC subnet ID in the format of `subnet-xxxxxxxx`, which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets ](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -7589,7 +7943,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status.  Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolating`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, `upgrading` (upgrading kernel version).
+         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolating`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, `upgrading` (upgrading kernel version), `audit-switching` (changing audit status), `primary-switching` (primary-standby switching).
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -7619,28 +7973,48 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceClass = null;
 
         /**
-         * Instance type. 1: primary (master instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
+         * The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * Number of the major PostgreSQL community version and minor version, such as 12.4, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * PostgreSQL kernel version number (like v12.7_r1.8), which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * Instance type. Valid values:
+<li>`primary`: Primary instance
+<li>`readonly`: Read-only instance
+<li>`guard`: Disaster recovery instance
+<li>`temp`: Temp instance
          * @type {string || null}
          */
         this.DBInstanceType = null;
 
         /**
-         * Instance edition. Currently, only `standard` edition (dual-server high-availability one-master-one-slave edition) is supported
+         * Instance version. Valid value: `standard` (dual-server high-availability; one-primary-one-standby).
          * @type {string || null}
          */
         this.DBInstanceVersion = null;
 
         /**
-         * Instance database character set
+         * Instance character set. Valid values:
+<li>`UTF8`
+<li>`LATIN1`
          * @type {string || null}
          */
         this.DBCharset = null;
-
-        /**
-         * PostgreSQL version number
-         * @type {string || null}
-         */
-        this.DBVersion = null;
 
         /**
          * Instance creation time
@@ -7649,7 +8023,7 @@ class DBInstance extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Instance last modified time
+         * Last updated time of the instance attribute
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -7667,13 +8041,18 @@ class DBInstance extends  AbstractModel {
         this.IsolatedTime = null;
 
         /**
-         * Billing mode. postpaid: pay-as-you-go
+         * Billing mode. Valid values:
+<li>`PREPAID`: Monthly subscription
+<li>`postpaid`: Pay-as-you-go
          * @type {string || null}
          */
         this.PayType = null;
 
         /**
-         * Whether to renew automatically. 1: yes, 0: no
+         * Whether auto-renewal is enabled. Valid values:
+<li>`0`: Manual renewal.
+<li>`1`: Automatic renewal.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -7703,52 +8082,87 @@ class DBInstance extends  AbstractModel {
         this.Uid = null;
 
         /**
-         * Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
+         * Project ID
          * @type {number || null}
          */
-        this.SupportIpv6 = null;
+        this.ProjectId = null;
 
         /**
-         * The information of tags associated with instances.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The information of tags associated with instances
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.TagList = null;
 
         /**
-         * Primary instance information, which is returned only when the instance is read-only
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Primary instance information, which is returned only when the instance is read-only.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MasterDBInstanceId = null;
 
         /**
          * Number of read-only instances
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReadOnlyInstanceNum = null;
 
         /**
-         * The status of a instance in a read-only group
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The status of a read-only instance in a read-only group
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusInReadonlyGroup = null;
 
         /**
-         * Elimination time
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Offline time
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OfflineTime = null;
 
         /**
-         * Database kernel version
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Instance node information
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
+
+        /**
+         * Whether the instance supports TDE. Valid values: 
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
+For more information, see [TDE](https://intl.cloud.tencent.com/document/product/409/71748?from_cn_redirect=1).
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsSupportTDE = null;
+
+        /**
+         * Database engines. Valid values:
+<li>`postgresql`: TencentDB for PostgreSQL
+<li>`mssql_compatible`: MSSQL compatible-TencentDB for PostgreSQL
+Default value: `postgresql`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.DBKernelVersion = null;
+        this.DBEngine = null;
+
+        /**
+         * Configuration information of database engine in the following format:
+{"$key1":"$value1", "$key2":"$value2"}
+Valid values:
+mssql_compatible engine:
+<li>`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+<li>`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+"af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
+<li>`serverCollationName`: Default collation name, which can’t be modified after the initialization. Default value: "sql_latin1_general_cp1_ci_as". Valid values: "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBEngineConfig = null;
 
         /**
          * Network access list of the instance (this field has been deprecated)
@@ -7758,38 +8172,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.NetworkAccessList = null;
 
         /**
-         * PostgreSQL major version number
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DBMajorVersion = null;
-
-        /**
-         * Instance node information
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<DBNode> || null}
-         */
-        this.DBNodeSet = null;
-
-        /**
-         * Whether the instance supports TDE data encryption. Valid values: 0 (no), 1 (yes)
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Whether the instance supports IPv6. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
          * @type {number || null}
          */
-        this.IsSupportTDE = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.DBEngine = null;
-
-        /**
-         * Configuration information of database engine
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DBEngineConfig = null;
+        this.SupportIpv6 = null;
 
     }
 
@@ -7802,7 +8191,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Region = 'Region' in params ? params.Region : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
@@ -7812,10 +8200,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DBInstanceStorage = 'DBInstanceStorage' in params ? params.DBInstanceStorage : null;
         this.DBInstanceCpu = 'DBInstanceCpu' in params ? params.DBInstanceCpu : null;
         this.DBInstanceClass = 'DBInstanceClass' in params ? params.DBInstanceClass : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
         this.DBInstanceType = 'DBInstanceType' in params ? params.DBInstanceType : null;
         this.DBInstanceVersion = 'DBInstanceVersion' in params ? params.DBInstanceVersion : null;
         this.DBCharset = 'DBCharset' in params ? params.DBCharset : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
@@ -7834,7 +8224,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Type = 'Type' in params ? params.Type : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.Uid = 'Uid' in params ? params.Uid : null;
-        this.SupportIpv6 = 'SupportIpv6' in params ? params.SupportIpv6 : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
         if (params.TagList) {
             this.TagList = new Array();
@@ -7848,17 +8238,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReadOnlyInstanceNum = 'ReadOnlyInstanceNum' in params ? params.ReadOnlyInstanceNum : null;
         this.StatusInReadonlyGroup = 'StatusInReadonlyGroup' in params ? params.StatusInReadonlyGroup : null;
         this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
-        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
-
-        if (params.NetworkAccessList) {
-            this.NetworkAccessList = new Array();
-            for (let z in params.NetworkAccessList) {
-                let obj = new NetworkAccess();
-                obj.deserialize(params.NetworkAccessList[z]);
-                this.NetworkAccessList.push(obj);
-            }
-        }
-        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
 
         if (params.DBNodeSet) {
             this.DBNodeSet = new Array();
@@ -7871,6 +8250,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsSupportTDE = 'IsSupportTDE' in params ? params.IsSupportTDE : null;
         this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
         this.DBEngineConfig = 'DBEngineConfig' in params ? params.DBEngineConfig : null;
+
+        if (params.NetworkAccessList) {
+            this.NetworkAccessList = new Array();
+            for (let z in params.NetworkAccessList) {
+                let obj = new NetworkAccess();
+                obj.deserialize(params.NetworkAccessList[z]);
+                this.NetworkAccessList.push(obj);
+            }
+        }
+        this.SupportIpv6 = 'SupportIpv6' in params ? params.SupportIpv6 : null;
 
     }
 }
@@ -8481,7 +8870,20 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * Primary AZ of an instance, such as "ap-guangzhou-3".
+The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * ID of the primary instance to which the read-only instance belongs
+         * @type {string || null}
+         */
+        this.MasterDBInstanceId = null;
+
+        /**
+         * Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.SpecCode = null;
@@ -8493,49 +8895,45 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * Number of instances purchased at a time. Value range: 1–100.
+         * The number of instances to be purchased at a time. Value range: 1-10. To purchase more than 10 instances each time, you can make multiple calls.
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * Validity period in months, valid values:
+<li>Monthly subscription: `1`, `2`, `3`, 4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+<li>Pay-as-you-go: `1`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * ID of the primary instance to which the read-only replica belongs
+         * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
          * @type {string || null}
          */
-        this.MasterDBInstanceId = null;
+        this.VpcId = null;
 
         /**
-         * Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+         * VPC subnet ID in the format of `subnet-xxxxxxxx` which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
          * @type {string || null}
          */
-        this.Zone = null;
+        this.SubnetId = null;
 
         /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
-         * Instance billing mode. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go). If the source instance is pay-as-you-go, so is the read-only instance.
+         * Instance billing mode. Valid values: 
+<li>`PREPAID`: Monthly subscription
+<li>`POSTPAID_BY_HOUR`: Pay-as-you-go
+Default value: `PREPAID`. If the primary instance is pay-as-you-go, so is the read-only instance.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * Whether to use vouchers automatically. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -8547,22 +8945,19 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * Auto-renewal flag. Valid values:
+<li>`0`: Manual renewal.
+<li>`1`: Automatic renewal.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * VPC ID
-         * @type {string || null}
+         * Project ID
+         * @type {number || null}
          */
-        this.VpcId = null;
-
-        /**
-         * VPC subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
+        this.ProjectId = null;
 
         /**
          * Special offer ID
@@ -8571,34 +8966,44 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * Instance name (which will be supported in the future)
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
-         * @type {number || null}
-         */
-        this.NeedSupportIpv6 = null;
-
-        /**
          * RO group ID
          * @type {string || null}
          */
         this.ReadOnlyGroupId = null;
 
         /**
-         * The information of tags to be bound with the purchased instance, which is left empty by default (type: tag array).
+         * The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
          * @type {Tag || null}
          */
         this.TagList = null;
 
         /**
-         * Security group ID
+         * Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
+
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
+
+        /**
+         * Whether IPv6 is supported.
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
+         * @type {number || null}
+         */
+        this.NeedSupportIpv6 = null;
+
+        /**
+         * Instance name (which will be supported in the future)
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
 
     }
 
@@ -8609,23 +9014,20 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.MasterDBInstanceId = 'MasterDBInstanceId' in params ? params.MasterDBInstanceId : null;
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
-        this.MasterDBInstanceId = 'MasterDBInstanceId' in params ? params.MasterDBInstanceId : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
         this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
 
         if (params.TagList) {
@@ -8634,6 +9036,9 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
             this.TagList = obj;
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
 
     }
 }
@@ -9541,13 +9946,13 @@ class DescribeDBErrlogsResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of date entries returned for this call
+         * Number of logs returned in a single query. Maximum value: `10000`.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Error log list
+         * Detailed sets of error logs
          * @type {Array.<ErrLogDetail> || null}
          */
         this.Details = null;
@@ -9609,7 +10014,7 @@ class ModifyBackupPlanRequest extends  AbstractModel {
         this.MaxBackupStartTime = null;
 
         /**
-         * Backup retention period in days. Value range: 3-7
+         * Backup retention period in days. Value range: 7-1830
          * @type {number || null}
          */
         this.BaseBackupRetentionPeriod = null;
@@ -10062,19 +10467,24 @@ class DisIsolateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
+         * Instance ID list. Currently, you can't remove multiple instances from isolation in batches. Only one instance ID can be passed in here.
          * @type {Array.<string> || null}
          */
         this.DBInstanceIdSet = null;
 
         /**
-         * The valid period (in months) of the monthly-subscribed instance when removing it from isolation
+         * Validity period in months
+<li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+<li>Pay-as-you-go: `1`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Whether to use vouchers. Valid values: `true` (yes), `false` (no). Default value: `false`.
+         * Whether to use vouchers. Valid values:
+<li>`true`: Yes.
+u200c<li>`false`: No.
+Default value: `false`.
          * @type {boolean || null}
          */
         this.AutoVoucher = null;
@@ -10288,6 +10698,34 @@ class DescribeBackupPlansRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceHAConfig response structure.
+ * @class
+ */
+class ModifyDBInstanceHAConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10516,19 +10954,24 @@ class RawSlowQuery extends  AbstractModel {
 }
 
 /**
- * CreateReadOnlyGroupNetworkAccess response structure.
+ * DescribeDBSlowlogs response structure.
  * @class
  */
-class CreateReadOnlyGroupNetworkAccessResponse extends  AbstractModel {
+class DescribeDBSlowlogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Number of date entries returned this time
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.TotalCount = null;
+
+        /**
+         * Slow query log details
+         * @type {SlowlogDetail || null}
+         */
+        this.Detail = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10545,7 +10988,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Detail) {
+            let obj = new SlowlogDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10616,25 +11065,36 @@ class ModifyDBInstanceChargeTypeRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Instance billing mode.  Valid values:  `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go). Default value:  `PREPAID`.
+         * Instance billing mode. Valid values:
+<li>`PREPAID`: Monthly subscription.
+<li>`POSTPAID_BY_HOUR`: Pay-as-you-go.
+Default value: `PREPAID`.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Validity period  in months. Valid values:  Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * Validity period in months
+<li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+<li>Pay-as-you-go: `1`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Renewal flag. Valid values；  Valid values: `0` (manual renewal), `1` (auto-renewal).
+         * Auto-renewal flag. Valid values:
+<li>`0`: Manual renewal.
+<li>`1`: Automatic renewal.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * Whether to use vouchers automatically. Valid values:
+<li>`0`: No.
+<li>`1`: Yes.
+Default value: `0`.
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -11268,16 +11728,18 @@ class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field returned by the `DescribeDBVersions` API.
+         * Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field in the returned value of the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+
          * @type {string || null}
          */
         this.TargetDBKernelVersion = null;
 
         /**
-         * Switch time after the kernel version upgrade. Valid values:
-`0` (default value): Switch now.
-`1`: Switch at the specified time.
-`2`: Switch in the maintenance time.
+         * Switch time after the kernel version upgrade for the specified instance. Valid values:
+<li>`0`: Switch now.
+<li>`1`: Switch at the specified time.
+<li>`2`: Switch in the maintenance time.
+Default value: `0`. 
          * @type {number || null}
          */
         this.SwitchTag = null;
@@ -11295,9 +11757,10 @@ class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
         this.SwitchEndTime = null;
 
         /**
-         * Whether to perform a precheck on the current operation of upgrading the instance kernel version. Valid values:
-`true`: Performs a precheck without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
-`false` (default value): Sends a normal request and upgrades the kernel version directly after the check is passed.
+         * Whether to perform a pre-check on the current operation of upgrading the instance kernel version. Valid values:
+u200c<li>u200c`true`: Performs a pre-check without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
+u200cu200c<li>`false`: Sends a normal request and upgrades the kernel version directly after the check is passed.
+Default value: `false`.
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -11444,24 +11907,19 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * DescribeDBSlowlogs response structure.
+ * CreateReadOnlyGroupNetworkAccess response structure.
  * @class
  */
-class DescribeDBSlowlogsResponse extends  AbstractModel {
+class CreateReadOnlyGroupNetworkAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of date entries returned this time
+         * Task ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Slow query log details
-         * @type {SlowlogDetail || null}
-         */
-        this.Detail = null;
+        this.FlowId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11478,13 +11936,7 @@ class DescribeDBSlowlogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Detail) {
-            let obj = new SlowlogDetail();
-            obj.deserialize(params.Detail)
-            this.Detail = obj;
-        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11592,7 +12044,9 @@ module.exports = {
     ModifyDBInstanceReadOnlyGroupResponse: ModifyDBInstanceReadOnlyGroupResponse,
     ClassInfo: ClassInfo,
     DescribeCloneDBInstanceSpecRequest: DescribeCloneDBInstanceSpecRequest,
+    DescribeDBInstanceSecurityGroupsResponse: DescribeDBInstanceSecurityGroupsResponse,
     BackupPlan: BackupPlan,
+    SwitchDBInstancePrimaryRequest: SwitchDBInstancePrimaryRequest,
     OpenServerlessDBExtranetAccessRequest: OpenServerlessDBExtranetAccessRequest,
     RenewInstanceResponse: RenewInstanceResponse,
     DeleteServerlessDBInstanceResponse: DeleteServerlessDBInstanceResponse,
@@ -11659,6 +12113,8 @@ module.exports = {
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     DescribeParameterTemplatesResponse: DescribeParameterTemplatesResponse,
     ParamSpecRelation: ParamSpecRelation,
+    SwitchDBInstancePrimaryResponse: SwitchDBInstancePrimaryResponse,
+    ModifyDBInstanceHAConfigRequest: ModifyDBInstanceHAConfigRequest,
     PgDeal: PgDeal,
     DeleteReadOnlyGroupNetworkAccessResponse: DeleteReadOnlyGroupNetworkAccessResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
@@ -11684,7 +12140,7 @@ module.exports = {
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
     EventItem: EventItem,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
-    DescribeDBInstanceSecurityGroupsResponse: DescribeDBInstanceSecurityGroupsResponse,
+    DescribeDBInstanceHAConfigRequest: DescribeDBInstanceHAConfigRequest,
     CreateParameterTemplateResponse: CreateParameterTemplateResponse,
     ParamInfo: ParamInfo,
     DescribeLogBackupsResponse: DescribeLogBackupsResponse,
@@ -11693,6 +12149,7 @@ module.exports = {
     IsolateDBInstancesResponse: IsolateDBInstancesResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
+    DescribeDBInstanceHAConfigResponse: DescribeDBInstanceHAConfigResponse,
     IsolateDBInstancesRequest: IsolateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     EncryptionKey: EncryptionKey,
@@ -11762,12 +12219,13 @@ module.exports = {
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeDBInstanceSecurityGroupsRequest: DescribeDBInstanceSecurityGroupsRequest,
     DescribeBackupPlansRequest: DescribeBackupPlansRequest,
+    ModifyDBInstanceHAConfigResponse: ModifyDBInstanceHAConfigResponse,
     RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeSlowQueryAnalysisResponse: DescribeSlowQueryAnalysisResponse,
     ModifyDBInstanceParametersRequest: ModifyDBInstanceParametersRequest,
     RawSlowQuery: RawSlowQuery,
-    CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
+    DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     ModifyDBInstanceChargeTypeRequest: ModifyDBInstanceChargeTypeRequest,
     DescribeParameterTemplateAttributesResponse: DescribeParameterTemplateAttributesResponse,
@@ -11786,7 +12244,7 @@ module.exports = {
     UpgradeDBInstanceKernelVersionRequest: UpgradeDBInstanceKernelVersionRequest,
     DescribeBaseBackupsRequest: DescribeBaseBackupsRequest,
     DescribeEncryptionKeysResponse: DescribeEncryptionKeysResponse,
-    DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
+    CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
     CreateDBInstancesResponse: CreateDBInstancesResponse,
     ModifyDBInstanceChargeTypeResponse: ModifyDBInstanceChargeTypeResponse,
 

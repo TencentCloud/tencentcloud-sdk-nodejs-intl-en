@@ -1869,48 +1869,26 @@ class CreateCdbProxyAddressResponse extends  AbstractModel {
 }
 
 /**
- * Slow log details
+ * Name of the table for rollback
  * @class
  */
-class SlowLogInfo extends  AbstractModel {
+class RollbackTableName extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Backup filename
+         * Original table name before rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Name = null;
+        this.TableName = null;
 
         /**
-         * Backup file size in bytes
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
+         * New table name after rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Date = null;
-
-        /**
-         * Download address on the private network
-         * @type {string || null}
-         */
-        this.IntranetUrl = null;
-
-        /**
-         * Download address on the public network
-         * @type {string || null}
-         */
-        this.InternetUrl = null;
-
-        /**
-         * Log type. Value range: slowlog (slow log)
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.NewTableName = null;
 
     }
 
@@ -1921,12 +1899,8 @@ class SlowLogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Date = 'Date' in params ? params.Date : null;
-        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
-        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.NewTableName = 'NewTableName' in params ? params.NewTableName : null;
 
     }
 }
@@ -2574,6 +2548,34 @@ class ProxyAllocation extends  AbstractModel {
                 this.ProxyInstance.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * StopCpuExpand request structure.
+ * @class
+ */
+class StopCpuExpandRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6731,6 +6733,41 @@ class DescribeTimeWindowResponse extends  AbstractModel {
 }
 
 /**
+ * StopCpuExpand response structure.
+ * @class
+ */
+class StopCpuExpandResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBackupConfig response structure.
  * @class
  */
@@ -7096,6 +7133,41 @@ class StopReplicationRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * StartCpuExpand response structure.
+ * @class
+ */
+class StartCpuExpandResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8141,42 +8213,26 @@ class DeviceMemInfo extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstanceEngineVersion request structure.
+ * Analysis result of an audit log
  * @class
  */
-class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
+class AuditLogAggregationResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * Aggregation dimension
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.AggregationField = null;
 
         /**
-         * Version of primary instance database engine. Value range: 5.6, 5.7
-         * @type {string || null}
+         * Result set of an aggregation bucket
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Bucket> || null}
          */
-        this.EngineVersion = null;
-
-        /**
-         * Switch mode for accessing the new instance.  Valid values:  `0` (switch immediately), `1` (switch within a time window). Default value: `0`. If the value is `1`, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
-         * @type {number || null}
-         */
-        this.WaitSwitch = null;
-
-        /**
-         * Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
-         * @type {number || null}
-         */
-        this.UpgradeSubversion = null;
-
-        /**
-         * Delay threshold. Value range: 1-10
-         * @type {number || null}
-         */
-        this.MaxDelayTime = null;
+        this.Buckets = null;
 
     }
 
@@ -8187,11 +8243,16 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
-        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
-        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+        this.AggregationField = 'AggregationField' in params ? params.AggregationField : null;
+
+        if (params.Buckets) {
+            this.Buckets = new Array();
+            for (let z in params.Buckets) {
+                let obj = new Bucket();
+                obj.deserialize(params.Buckets[z]);
+                this.Buckets.push(obj);
+            }
+        }
 
     }
 }
@@ -9040,7 +9101,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.EngineVersion = null;
 
         /**
-         * The root account password. It can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing a replica instance and is invalid for read-only or disaster recovery instances.
+         * The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
          * @type {string || null}
          */
         this.Password = null;
@@ -9136,7 +9197,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.ParamTemplateId = null;
 
         /**
-         * Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+         * Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
          * @type {Array.<number> || null}
          */
         this.AlarmPolicyList = null;
@@ -9450,7 +9511,7 @@ class DescribeAuditLogsRequest extends  AbstractModel {
         this.OrderBy = null;
 
         /**
-         * Filter, which can be used to filter logs.
+         * Filter. Multiple values are in `AND` relationship.
          * @type {Array.<InstanceAuditLogFilters> || null}
          */
         this.LogFilter = null;
@@ -11397,26 +11458,48 @@ class RenewDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Name of the table for rollback
+ * Slow log details
  * @class
  */
-class RollbackTableName extends  AbstractModel {
+class SlowLogInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Original table name before rollback
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Backup filename
          * @type {string || null}
          */
-        this.TableName = null;
+        this.Name = null;
 
         /**
-         * New table name after rollback
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Backup file size in bytes
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
          * @type {string || null}
          */
-        this.NewTableName = null;
+        this.Date = null;
+
+        /**
+         * Download address on the private network
+         * @type {string || null}
+         */
+        this.IntranetUrl = null;
+
+        /**
+         * Download address on the public network
+         * @type {string || null}
+         */
+        this.InternetUrl = null;
+
+        /**
+         * Log type. Value range: slowlog (slow log)
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -11427,8 +11510,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TableName = 'TableName' in params ? params.TableName : null;
-        this.NewTableName = 'NewTableName' in params ? params.NewTableName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
+        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -12239,19 +12326,22 @@ class InstanceAuditLogFilters extends  AbstractModel {
         super();
 
         /**
-         * Filter condition, which is not supported for `SQL`. The search conditions are supported as follows:
+         * Filter condition. The search conditions are supported as follows:
 
-`Equal to`, `Not equal to`, `Include`, and `Exclude` can be used to search for 
-`host` (Client IP),
-`user` (Username),
-and `DBName` (Database name).
+Include/Exclude, and Include/Exclude (segment dimension) can be used to search for:
+`sql` - SQL details.
 
-`Equal to` and `Not equal to` can be used to search for 
-`sqlType`- SQL u200dtype,
+`Equal to`, `Not equal to`, `Include`, and `Exclude` can be used to search for:
+`host` - Client IP,
+`user` - Username,
+`DBName` - Database name.
+
+`Equal to` and `Not equal to` can be used to search for:
+`sqlType` - SQL u200dtype,
 `errCode` - Error code,
-`threadId`- Thread ID.
+`threadId` - Thread ID.
 
-Range search is supported for the fields, such as 
+Range search is supported for:
 `execTime`- Execution time (μs),
 `lockWaitTime`u200d - Lock wait time (μs),
 `ioWaitTime` - IO wait time (μs),
@@ -12265,9 +12355,11 @@ Range search is supported for the fields, such as
         this.Type = null;
 
         /**
-         * Filter, including:
+         * Filter. Valid values:
+`WINC` - Include (segment dimension)
+`WEXC` - Exclude (segment dimension)
 `INC` - Include,
-`EXC` -Exclude,
+`EXC` - Exclude,
 `EQS` - Equal to,
 `NEQ` - Not equal to.
 u200d`RA` - Range
@@ -12276,7 +12368,7 @@ u200d`RA` - Range
         this.Compare = null;
 
         /**
-         * The filter value
+         * The filter value. In a reverse query, multiple values are in an "AND" relationship; while in a forward query, multiple values are in an "OR" relationship.
          * @type {Array.<string> || null}
          */
         this.Value = null;
@@ -14018,6 +14110,55 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
 }
 
 /**
+ * StartCpuExpand request structure.
+ * @class
+ */
+class StartCpuExpandRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeCpuExpandStrategy request structure.
+ * @class
+ */
+class DescribeCpuExpandStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * CloseCDBProxy response structure.
  * @class
  */
@@ -14074,26 +14215,42 @@ class ModifyBackupEncryptionStatusResponse extends  AbstractModel {
 }
 
 /**
- * Analysis result of an audit log
+ * UpgradeDBInstanceEngineVersion request structure.
  * @class
  */
-class AuditLogAggregationResult extends  AbstractModel {
+class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Aggregation dimension
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
          * @type {string || null}
          */
-        this.AggregationField = null;
+        this.InstanceId = null;
 
         /**
-         * Result set of an aggregation bucket
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Bucket> || null}
+         * Version of primary instance database engine. Value range: 5.6, 5.7
+         * @type {string || null}
          */
-        this.Buckets = null;
+        this.EngineVersion = null;
+
+        /**
+         * Switch mode for accessing the new instance.  Valid values:  `0` (switch immediately), `1` (switch within a time window). Default value: `0`. If the value is `1`, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
+        /**
+         * Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
+         * @type {number || null}
+         */
+        this.UpgradeSubversion = null;
+
+        /**
+         * Delay threshold. Value range: 1-10
+         * @type {number || null}
+         */
+        this.MaxDelayTime = null;
 
     }
 
@@ -14104,16 +14261,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.AggregationField = 'AggregationField' in params ? params.AggregationField : null;
-
-        if (params.Buckets) {
-            this.Buckets = new Array();
-            for (let z in params.Buckets) {
-                let obj = new Bucket();
-                obj.deserialize(params.Buckets[z]);
-                this.Buckets.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
+        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
 
     }
 }
@@ -17983,6 +18135,58 @@ class ModifyAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCpuExpandStrategy response structure.
+ * @class
+ */
+class DescribeCpuExpandStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy type. Valid values: `auto`, `manual`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Manually expanded CPU, which is valid when `Type` is `manual`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpandCpu = null;
+
+        /**
+         * Automatic expansion policy, which is valid when `Type` is `auto`.
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AutoStrategy = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ExpandCpu = 'ExpandCpu' in params ? params.ExpandCpu : null;
+        this.AutoStrategy = 'AutoStrategy' in params ? params.AutoStrategy : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Estimated time of instance restart
  * @class
  */
@@ -18857,7 +19061,7 @@ module.exports = {
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeBackupDecryptionKeyRequest: DescribeBackupDecryptionKeyRequest,
     CreateCdbProxyAddressResponse: CreateCdbProxyAddressResponse,
-    SlowLogInfo: SlowLogInfo,
+    RollbackTableName: RollbackTableName,
     CloseWanServiceRequest: CloseWanServiceRequest,
     OpenAuditServiceResponse: OpenAuditServiceResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
@@ -18871,6 +19075,7 @@ module.exports = {
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
     ProxyAllocation: ProxyAllocation,
+    StopCpuExpandRequest: StopCpuExpandRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
     OpenAuditServiceRequest: OpenAuditServiceRequest,
@@ -18952,12 +19157,14 @@ module.exports = {
     CreateAuditPolicyRequest: CreateAuditPolicyRequest,
     CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
+    StopCpuExpandResponse: StopCpuExpandResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     ZoneConf: ZoneConf,
     SlaveInstanceInfo: SlaveInstanceInfo,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     StopReplicationRequest: StopReplicationRequest,
+    StartCpuExpandResponse: StartCpuExpandResponse,
     CreateCloneInstanceResponse: CreateCloneInstanceResponse,
     DescribeCdbZoneConfigRequest: DescribeCdbZoneConfigRequest,
     DeviceCpuInfo: DeviceCpuInfo,
@@ -18983,7 +19190,7 @@ module.exports = {
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     ModifyInstancePasswordComplexityResponse: ModifyInstancePasswordComplexityResponse,
     DeviceMemInfo: DeviceMemInfo,
-    UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
+    AuditLogAggregationResult: AuditLogAggregationResult,
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
     TagInfo: TagInfo,
@@ -19032,7 +19239,7 @@ module.exports = {
     BackupInfo: BackupInfo,
     CloseWanServiceResponse: CloseWanServiceResponse,
     RenewDBInstanceRequest: RenewDBInstanceRequest,
-    RollbackTableName: RollbackTableName,
+    SlowLogInfo: SlowLogInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
     DescribeCloneListRequest: DescribeCloneListRequest,
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
@@ -19075,9 +19282,11 @@ module.exports = {
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
+    StartCpuExpandRequest: StartCpuExpandRequest,
+    DescribeCpuExpandStrategyRequest: DescribeCpuExpandStrategyRequest,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
     ModifyBackupEncryptionStatusResponse: ModifyBackupEncryptionStatusResponse,
-    AuditLogAggregationResult: AuditLogAggregationResult,
+    UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeDBInstanceInfoRequest: DescribeDBInstanceInfoRequest,
     BackupLimitVpcItem: BackupLimitVpcItem,
@@ -19153,6 +19362,7 @@ module.exports = {
     UpgradeCDBProxyVersionResponse: UpgradeCDBProxyVersionResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,
+    DescribeCpuExpandStrategyResponse: DescribeCpuExpandStrategyResponse,
     InstanceRebootTime: InstanceRebootTime,
     RenewDBInstanceResponse: RenewDBInstanceResponse,
     TablePrivilege: TablePrivilege,

@@ -18,22 +18,27 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SchemaSpaceTimeSeries = models.SchemaSpaceTimeSeries;
 const SlowLogUser = models.SlowLogUser;
+const DescribeRedisTopKeyPrefixListRequest = models.DescribeRedisTopKeyPrefixListRequest;
 const HealthReportTask = models.HealthReportTask;
+const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
 const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
 const ScoreItem = models.ScoreItem;
-const InstanceConfs = models.InstanceConfs;
+const CreateRedisBigKeyAnalysisTaskResponse = models.CreateRedisBigKeyAnalysisTaskResponse;
 const CreateSecurityAuditLogExportTaskRequest = models.CreateSecurityAuditLogExportTaskRequest;
 const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
 const DescribeDBDiagEventsResponse = models.DescribeDBDiagEventsResponse;
 const DescribeDBDiagReportTasksResponse = models.DescribeDBDiagReportTasksResponse;
 const AddUserContactResponse = models.AddUserContactResponse;
+const AuditInstanceInfo = models.AuditInstanceInfo;
 const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
 const DescribeTopSpaceSchemaTimeSeriesResponse = models.DescribeTopSpaceSchemaTimeSeriesResponse;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const DescribeAuditInstanceListResponse = models.DescribeAuditInstanceListResponse;
 const DescribeProxySessionKillTasksRequest = models.DescribeProxySessionKillTasksRequest;
+const CreateRedisBigKeyAnalysisTaskRequest = models.CreateRedisBigKeyAnalysisTaskRequest;
 const DescribeMySqlProcessListResponse = models.DescribeMySqlProcessListResponse;
 const SessionItem = models.SessionItem;
 const HealthStatus = models.HealthStatus;
@@ -56,8 +61,11 @@ const DiagHistoryEventItem = models.DiagHistoryEventItem;
 const MySqlProcess = models.MySqlProcess;
 const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
 const CreateKillTaskResponse = models.CreateKillTaskResponse;
+const AuditInstance = models.AuditInstance;
 const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
 const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
+const ScoreDetail = models.ScoreDetail;
+const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const CreateKillTaskRequest = models.CreateKillTaskRequest;
 const DeleteDBDiagReportTasksResponse = models.DeleteDBDiagReportTasksResponse;
 const DescribeProxyProcessStatisticsResponse = models.DescribeProxyProcessStatisticsResponse;
@@ -68,12 +76,14 @@ const MailConfiguration = models.MailConfiguration;
 const DescribeSlowLogUserHostStatsResponse = models.DescribeSlowLogUserHostStatsResponse;
 const TableSpaceData = models.TableSpaceData;
 const EventInfo = models.EventInfo;
+const AuditInstanceFilter = models.AuditInstanceFilter;
 const DescribeMailProfileRequest = models.DescribeMailProfileRequest;
 const DeleteSecurityAuditLogExportTasksResponse = models.DeleteSecurityAuditLogExportTasksResponse;
 const KillMySqlThreadsRequest = models.KillMySqlThreadsRequest;
 const CreateDBDiagReportUrlRequest = models.CreateDBDiagReportUrlRequest;
 const DescribeSecurityAuditLogExportTasksResponse = models.DescribeSecurityAuditLogExportTasksResponse;
-const DescribeRedisTopKeyPrefixListRequest = models.DescribeRedisTopKeyPrefixListRequest;
+const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
+const InstanceConfs = models.InstanceConfs;
 const HealthScoreInfo = models.HealthScoreInfo;
 const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
 const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
@@ -88,10 +98,12 @@ const SchemaSpaceData = models.SchemaSpaceData;
 const DescribeAllUserContactRequest = models.DescribeAllUserContactRequest;
 const DescribeDiagDBInstancesRequest = models.DescribeDiagDBInstancesRequest;
 const InstanceInfo = models.InstanceInfo;
+const DescribeAuditInstanceListRequest = models.DescribeAuditInstanceListRequest;
 const DescribeSecurityAuditLogExportTasksRequest = models.DescribeSecurityAuditLogExportTasksRequest;
 const DeleteSecurityAuditLogExportTasksRequest = models.DeleteSecurityAuditLogExportTasksRequest;
 const CreateSchedulerMailProfileResponse = models.CreateSchedulerMailProfileResponse;
 const DescribeTopSpaceSchemaTimeSeriesRequest = models.DescribeTopSpaceSchemaTimeSeriesRequest;
+const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
 const DescribeMailProfileResponse = models.DescribeMailProfileResponse;
 const DescribeHealthScoreRequest = models.DescribeHealthScoreRequest;
@@ -119,9 +131,10 @@ const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
 const SlowLogInfoItem = models.SlowLogInfoItem;
 const SecLogExportTaskInfo = models.SecLogExportTaskInfo;
 const DescribeHealthScoreResponse = models.DescribeHealthScoreResponse;
-const ScoreDetail = models.ScoreDetail;
+const CloseAuditServiceResponse = models.CloseAuditServiceResponse;
 const DescribeTopSpaceSchemasRequest = models.DescribeTopSpaceSchemasRequest;
 const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
+const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const DescribeUserSqlAdviceRequest = models.DescribeUserSqlAdviceRequest;
 const DescribeMySqlProcessListRequest = models.DescribeMySqlProcessListRequest;
 const DescribeSecurityAuditLogDownloadUrlsResponse = models.DescribeSecurityAuditLogDownloadUrlsResponse;
@@ -227,6 +240,28 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable database audit.
+     * @param {OpenAuditServiceRequest} req
+     * @param {function(string, OpenAuditServiceResponse):void} cb
+     * @public
+     */
+    OpenAuditService(req, cb) {
+        let resp = new OpenAuditServiceResponse();
+        this.request("OpenAuditService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an ad hoc big key analysis task for Redis instances. By default, there can only be up to five running ad hoc analysis tasks.
+     * @param {CreateRedisBigKeyAnalysisTaskRequest} req
+     * @param {function(string, CreateRedisBigKeyAnalysisTaskResponse):void} cb
+     * @public
+     */
+    CreateRedisBigKeyAnalysisTask(req, cb) {
+        let resp = new CreateRedisBigKeyAnalysisTaskResponse();
+        this.request("CreateRedisBigKeyAnalysisTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the information of the recipient group in the email.
      * @param {DescribeAllUserGroupRequest} req
      * @param {function(string, DescribeAllUserGroupResponse):void} cb
@@ -246,6 +281,17 @@ class DbbrainClient extends AbstractClient {
     DescribeDBDiagEvents(req, cb) {
         let resp = new DescribeDBDiagEventsResponse();
         this.request("DescribeDBDiagEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance list.
+     * @param {DescribeAuditInstanceListRequest} req
+     * @param {function(string, DescribeAuditInstanceListResponse):void} cb
+     * @public
+     */
+    DescribeAuditInstanceList(req, cb) {
+        let resp = new DescribeAuditInstanceListResponse();
+        this.request("DescribeAuditInstanceList", req, resp, cb);
     }
 
     /**
@@ -326,6 +372,17 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
+     * This API is used to disable database audit as needed.
+     * @param {CloseAuditServiceRequest} req
+     * @param {function(string, CloseAuditServiceResponse):void} cb
+     * @public
+     */
+    CloseAuditService(req, cb) {
+        let resp = new CloseAuditServiceResponse();
+        this.request("CloseAuditService", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a security audit log export task.
      * @param {DeleteSecurityAuditLogExportTasksRequest} req
      * @param {function(string, DeleteSecurityAuditLogExportTasksResponse):void} cb
@@ -334,6 +391,17 @@ class DbbrainClient extends AbstractClient {
     DeleteSecurityAuditLogExportTasks(req, cb) {
         let resp = new DeleteSecurityAuditLogExportTasksResponse();
         this.request("DeleteSecurityAuditLogExportTasks", req, resp, cb);
+    }
+
+    /**
+     * u200cThis API is used to modify audit configurations such as the frequent access storage period.
+     * @param {ModifyAuditServiceRequest} req
+     * @param {function(string, ModifyAuditServiceResponse):void} cb
+     * @public
+     */
+    ModifyAuditService(req, cb) {
+        let resp = new ModifyAuditServiceResponse();
+        this.request("ModifyAuditService", req, resp, cb);
     }
 
     /**

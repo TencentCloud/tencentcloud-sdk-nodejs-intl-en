@@ -313,6 +313,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * IsolateMigrateJob request structure.
+ * @class
+ */
+class IsolateMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * ResizeSyncJob response structure.
  * @class
  */
@@ -692,18 +720,201 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * IsolateMigrateJob request structure.
+ * Information of the source and target databases in data sync
  * @class
  */
-class IsolateMigrateJobRequest extends  AbstractModel {
+class Endpoint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
+         * Region name, such as `ap-guangzhou`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.JobId = null;
+        this.Region = null;
+
+        /**
+         * Node type of TDSQL for MySQL. Enumerated values: `proxy`, `set`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * Database kernel type, which is used to distinguish between different kernels in TDSQL. Valid values: `percona`, `mariadb`, `mysql`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbKernel = null;
+
+        /**
+         * Database instance ID in the format of `cdb-powiqx8q`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance IP address, which is required if the access type is not `cdb`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Instance port, which is required if the access type is not `cdb`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Username, which is required for an instance authenticated by username and password.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Password, which is required for an instance authenticated by username and password.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Database name, which is required if the database type is `cdwpg`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * VPC ID in the format of `vpc-92jblxto`, which is required if the access type is `vpc`, `dcg`, or `vpncloud`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of the subnet in the VPC in the format of `subnet-3paxmkdz`, which is required if the access type is `vpc`, `dcg`, or `vpncloud`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Short CVM instance ID in the format of `ins-olgl39y8`, which is required if the access type is `cvm`. It is the same as the instance ID displayed in the CVM console.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CvmInstanceId = null;
+
+        /**
+         * Direct Connect gateway ID in the format of `dcg-0rxtqqxb`, which is required if the access type is `dcg`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqDcgId = null;
+
+        /**
+         * VPN gateway ID in the format of `vpngw-9ghexg7q`, which is required if the access type is `vpncloud`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqVpnGwId = null;
+
+        /**
+         * CCN instance ID in the format of `ccn-afp6kltc`, which is required if the access type is `ccn`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * Cloud vendor type. For Alibaba Cloud ApsaraDB for RDS instances, enter `aliyun`; otherwise, enter `others`. Default value: `others`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Supplier = null;
+
+        /**
+         * Database version in the format of `5.6` or `5.7`, which takes effect only if the instance is an RDS instance. Default value: `5.6`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Instance account, which is required if the operation is performed across accounts.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Account = null;
+
+        /**
+         * The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccountMode = null;
+
+        /**
+         * The role used for cross-account sync, which can contain [a-zA-Z0-9\-\_]+ and is required if the operation is performed across accounts.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccountRole = null;
+
+        /**
+         * External role ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RoleExternalId = null;
+
+        /**
+         * ID of the temporary key, which is required if the operation is performed across accounts.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TmpSecretId = null;
+
+        /**
+         * Key of the temporary key, which is required if the operation is performed across accounts.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TmpSecretKey = null;
+
+        /**
+         * Temporary token, which is required if the operation is performed across accounts.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TmpToken = null;
+
+        /**
+         * Whether to enable encrypted transfer (`UnEncrypted`: No; `Encrypted`: Yes). Default value: `UnEncrypted`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptConn = null;
+
+        /**
+         * Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatabaseNetEnv = null;
+
+        /**
+         * The root account of CCN in the scenario where the database is connected to CCN under another Tencent Cloud account
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CcnOwnerUin = null;
 
     }
 
@@ -714,7 +925,33 @@ class IsolateMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.DbKernel = 'DbKernel' in params ? params.DbKernel : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.CvmInstanceId = 'CvmInstanceId' in params ? params.CvmInstanceId : null;
+        this.UniqDcgId = 'UniqDcgId' in params ? params.UniqDcgId : null;
+        this.UniqVpnGwId = 'UniqVpnGwId' in params ? params.UniqVpnGwId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.Supplier = 'Supplier' in params ? params.Supplier : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.Account = 'Account' in params ? params.Account : null;
+        this.AccountMode = 'AccountMode' in params ? params.AccountMode : null;
+        this.AccountRole = 'AccountRole' in params ? params.AccountRole : null;
+        this.RoleExternalId = 'RoleExternalId' in params ? params.RoleExternalId : null;
+        this.TmpSecretId = 'TmpSecretId' in params ? params.TmpSecretId : null;
+        this.TmpSecretKey = 'TmpSecretKey' in params ? params.TmpSecretKey : null;
+        this.TmpToken = 'TmpToken' in params ? params.TmpToken : null;
+        this.EncryptConn = 'EncryptConn' in params ? params.EncryptConn : null;
+        this.DatabaseNetEnv = 'DatabaseNetEnv' in params ? params.DatabaseNetEnv : null;
+        this.CcnOwnerUin = 'CcnOwnerUin' in params ? params.CcnOwnerUin : null;
 
     }
 }
@@ -2007,69 +2244,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Topic description
- * @class
- */
-class TopicRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Topic partitioning policy. If the topic sync policy is delivering data to multiple custom topics (`TopicType` = `Multi`), the value of this parameter is `Random` (deliver to a random partition). If the topic sync policy is delivering all data to a single topic (`TopicType` = `Single`), this parameter has three valid values: `AllInPartitionZero` (deliver all data to partition0), `PartitionByTable` (partition by table name), `PartitionByTableAndKey` (partition by table name and primary key).
-         * @type {string || null}
-         */
-        this.PartitionType = null;
-
-        /**
-         * Database name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
-         * @type {string || null}
-         */
-        this.DbMatchMode = null;
-
-        /**
-         * Database name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
-         * @type {string || null}
-         */
-        this.DbName = null;
-
-        /**
-         * Table name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
-         * @type {string || null}
-         */
-        this.TableMatchMode = null;
-
-        /**
-         * Table name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
-         * @type {string || null}
-         */
-        this.TableName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
-        this.DbMatchMode = 'DbMatchMode' in params ? params.DbMatchMode : null;
-        this.DbName = 'DbName' in params ? params.DbName : null;
-        this.TableMatchMode = 'TableMatchMode' in params ? params.TableMatchMode : null;
-        this.TableName = 'TableName' in params ? params.TableName : null;
-
-    }
-}
-
-/**
  * ContinueSyncJob response structure.
  * @class
  */
@@ -2161,6 +2335,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.KafkaOption = null;
 
+        /**
+         * Task speed limit information. This parameter can only be used as an output parameter.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {RateLimitOption || null}
+         */
+        this.RateLimitOption = null;
+
+        /**
+         * Settings of the automatic retry time range
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRetryTimeRangeMinutes = null;
+
     }
 
     /**
@@ -2196,6 +2384,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.KafkaOption)
             this.KafkaOption = obj;
         }
+
+        if (params.RateLimitOption) {
+            let obj = new RateLimitOption();
+            obj.deserialize(params.RateLimitOption)
+            this.RateLimitOption = obj;
+        }
+        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -2612,8 +2807,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Additional information. You can set additional parameters for certain database types. For Redis, you can define the following parameters: 
-["ClientOutputBufferHardLimit":512, 	Hard limit of the replica buffer zone capacity in MB	"ClientOutputBufferSoftLimit":512, 	Soft limit of the replica buffer zone capacity in MB	"ClientOutputBufferPersistTime":60, Soft limit duration of the replica buffer zone in seconds	"ReplBacklogSize":512, 	Limit of the circular buffer zone capacity in MB	"ReplTimeout":120, 		Replication timeout period in seconds]
-Note: This field may return null, indicating that no valid values can be obtained.
+["DstWriteMode": `normal`. 	Target database write mode. Valid values: `clearData` (Clear the target instance data), overwrite` (Execute the task in overwriting mode), `normal` (Follow the normal steps) 	"IsDstReadOnly": `true`. 	Whether to set the target database to read-only for a migration task. Valid values: `true` (Yes), `false` (No) 	"ClientOutputBufferHardLimit": 512. 	Hard limit of the replica buffer zone capacity in MB. 	"ClientOutputBufferSoftLimit": 512. 	Soft limit of the replica buffer zone capacity in MB. 	"ClientOutputBufferPersistTime": 60. Soft limit duration of the replica buffer zone in seconds. 	"ReplBacklogSize": 512, 	Limit of the circular buffer zone capacity in MB. 	"ReplTimeout":120，		Replication timeout period in seconds]
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {Array.<KeyValuePairOption> || null}
          */
         this.ExtraAttr = null;
@@ -2757,7 +2952,7 @@ class ModifyMigrationJobRequest extends  AbstractModel {
         this.RunMode = null;
 
         /**
-         * Migration task configuration options, which describe how the task performs migration.
+         * Migration task configuration options, which describe how the task performs migration. The `RateLimitOption` option cannot be configured. To modify the speed limit settings of the task, use the `ModifyMigrateRateLimit` API after the task starts running.
          * @type {MigrateOption || null}
          */
         this.MigrateOption = null;
@@ -2839,6 +3034,34 @@ class ModifyMigrationJobRequest extends  AbstractModel {
             }
         }
         this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
+
+    }
+}
+
+/**
+ * StopCompare response structure.
+ * @class
+ */
+class StopCompareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3643,194 +3866,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information of the source and target databases in data sync
+ * Topic description
  * @class
  */
-class Endpoint extends  AbstractModel {
+class TopicRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region name, such as `ap-guangzhou`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Topic name
          * @type {string || null}
          */
-        this.Region = null;
+        this.TopicName = null;
 
         /**
-         * Node type of TDSQL for MySQL. Enumerated values: `proxy`, `set`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Topic partitioning policy. If the topic sync policy is delivering data to multiple custom topics (`TopicType` = `Multi`), the value of this parameter is `Random` (deliver to a random partition). If the topic sync policy is delivering all data to a single topic (`TopicType` = `Single`), this parameter has three valid values: `AllInPartitionZero` (deliver all data to partition0), `PartitionByTable` (partition by table name), `PartitionByTableAndKey` (partition by table name and primary key).
          * @type {string || null}
          */
-        this.Role = null;
+        this.PartitionType = null;
 
         /**
-         * Database kernel type, which is used to distinguish between different kernels in TDSQL. Valid values: `percona`, `mariadb`, `mysql`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Database name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
          * @type {string || null}
          */
-        this.DbKernel = null;
+        this.DbMatchMode = null;
 
         /**
-         * Database instance ID in the format of `cdb-powiqx8q`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance IP address, which is required if the access type is not `cdb`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Instance port, which is required if the access type is not `cdb`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * Username, which is required for an instance authenticated by username and password.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.User = null;
-
-        /**
-         * Password, which is required for an instance authenticated by username and password.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Database name, which is required if the database type is `cdwpg`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Database name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
          * @type {string || null}
          */
         this.DbName = null;
 
         /**
-         * VPC ID in the format of `vpc-92jblxto`, which is required if the access type is `vpc`, `dcg`, or `vpncloud`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Table name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.TableMatchMode = null;
 
         /**
-         * ID of the subnet in the VPC in the format of `subnet-3paxmkdz`, which is required if the access type is `vpc`, `dcg`, or `vpncloud`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Table name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
          * @type {string || null}
          */
-        this.SubnetId = null;
-
-        /**
-         * Short CVM instance ID in the format of `ins-olgl39y8`, which is required if the access type is `cvm`. It is the same as the instance ID displayed in the CVM console.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CvmInstanceId = null;
-
-        /**
-         * Direct Connect gateway ID in the format of `dcg-0rxtqqxb`, which is required if the access type is `dcg`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UniqDcgId = null;
-
-        /**
-         * VPN gateway ID in the format of `vpngw-9ghexg7q`, which is required if the access type is `vpncloud`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UniqVpnGwId = null;
-
-        /**
-         * CCN instance ID in the format of `ccn-afp6kltc`, which is required if the access type is `ccn`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CcnId = null;
-
-        /**
-         * Cloud vendor type. For Alibaba Cloud ApsaraDB for RDS instances, enter `aliyun`; otherwise, enter `others`. Default value: `others`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Supplier = null;
-
-        /**
-         * Database version in the format of `5.6` or `5.7`, which takes effect only if the instance is an RDS instance. Default value: `5.6`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * Instance account, which is required if the operation is performed across accounts.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Account = null;
-
-        /**
-         * The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AccountMode = null;
-
-        /**
-         * The role used for cross-account sync, which can contain [a-zA-Z0-9\-\_]+ and is required if the operation is performed across accounts.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AccountRole = null;
-
-        /**
-         * External role ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RoleExternalId = null;
-
-        /**
-         * ID of the temporary key, which is required if the operation is performed across accounts.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TmpSecretId = null;
-
-        /**
-         * Key of the temporary key, which is required if the operation is performed across accounts.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TmpSecretKey = null;
-
-        /**
-         * Temporary token, which is required if the operation is performed across accounts.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TmpToken = null;
-
-        /**
-         * Whether to enable encrypted transfer (`UnEncrypted`: No; `Encrypted`: Yes). Default value: `UnEncrypted`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EncryptConn = null;
-
-        /**
-         * Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DatabaseNetEnv = null;
+        this.TableName = null;
 
     }
 
@@ -3841,32 +3918,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.DbKernel = 'DbKernel' in params ? params.DbKernel : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.User = 'User' in params ? params.User : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
+        this.DbMatchMode = 'DbMatchMode' in params ? params.DbMatchMode : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.CvmInstanceId = 'CvmInstanceId' in params ? params.CvmInstanceId : null;
-        this.UniqDcgId = 'UniqDcgId' in params ? params.UniqDcgId : null;
-        this.UniqVpnGwId = 'UniqVpnGwId' in params ? params.UniqVpnGwId : null;
-        this.CcnId = 'CcnId' in params ? params.CcnId : null;
-        this.Supplier = 'Supplier' in params ? params.Supplier : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.Account = 'Account' in params ? params.Account : null;
-        this.AccountMode = 'AccountMode' in params ? params.AccountMode : null;
-        this.AccountRole = 'AccountRole' in params ? params.AccountRole : null;
-        this.RoleExternalId = 'RoleExternalId' in params ? params.RoleExternalId : null;
-        this.TmpSecretId = 'TmpSecretId' in params ? params.TmpSecretId : null;
-        this.TmpSecretKey = 'TmpSecretKey' in params ? params.TmpSecretKey : null;
-        this.TmpToken = 'TmpToken' in params ? params.TmpToken : null;
-        this.EncryptConn = 'EncryptConn' in params ? params.EncryptConn : null;
-        this.DatabaseNetEnv = 'DatabaseNetEnv' in params ? params.DatabaseNetEnv : null;
+        this.TableMatchMode = 'TableMatchMode' in params ? params.TableMatchMode : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
 
     }
 }
@@ -4130,7 +4187,7 @@ class ConfigureSyncJobRequest extends  AbstractModel {
         this.DstNodeType = null;
 
         /**
-         * Sync task options
+         * Sync task options. The `RateLimitOption` option cannot take effect currently. To modify the speed limit settings, use the `ModifySyncRateLimit` API.
          * @type {Options || null}
          */
         this.Options = null;
@@ -4884,6 +4941,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AutoRetryTimeRangeMinutes = null;
 
+        /**
+         * Whether the task can be reentered in the full export stage. Valid values: `yes`, `no`. `yes`: The current task can be reentered. `no`: The current task is in the full export stage which cannot be reentered. If the value of this parameter is `no`, the checkpoint restart is not supported when the task is restarted in the export stage.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DumperResumeCtrl = null;
+
     }
 
     /**
@@ -4949,6 +5013,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
+        this.DumperResumeCtrl = 'DumperResumeCtrl' in params ? params.DumperResumeCtrl : null;
 
     }
 }
@@ -5089,8 +5154,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Progress = null;
 
         /**
-         * Progress of the current step
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Progress of the current step. Value range: 0-100. The value of `-1` indicates that you can't check the progress of the current step.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CurrentStepProgress = null;
@@ -5130,6 +5195,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CauseOfCompareDisable = null;
 
+        /**
+         * Task error and the corresponding solution
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {ErrInfo || null}
+         */
+        this.ErrInfo = null;
+
     }
 
     /**
@@ -5156,6 +5228,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.CauseOfCompareDisable = 'CauseOfCompareDisable' in params ? params.CauseOfCompareDisable : null;
+
+        if (params.ErrInfo) {
+            let obj = new ErrInfo();
+            obj.deserialize(params.ErrInfo)
+            this.ErrInfo = obj;
+        }
 
     }
 }
@@ -5673,18 +5751,89 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * StopCompare response structure.
+ * Speed limit details of migration and sync tasks
  * @class
  */
-class StopCompareResponse extends  AbstractModel {
+class RateLimitOption extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The number of full export threads that have taken effect.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CurrentDumpThread = null;
+
+        /**
+         * The default number of full export threads.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultDumpThread = null;
+
+        /**
+         * The full export RPS that has taken effect.	
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CurrentDumpRps = null;
+
+        /**
+         * The default full export RPS.	
+Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultDumpRps = null;
+
+        /**
+         * The number of full import threads that have taken effect.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CurrentLoadThread = null;
+
+        /**
+         * The default number of full import threads.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultLoadThread = null;
+
+        /**
+         * The full import RPS that has taken effect.	
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CurrentLoadRps = null;
+
+        /**
+         * The default full import RPS.	
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultLoadRps = null;
+
+        /**
+         * The number of incremental import threads that have taken effect.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CurrentSinkerThread = null;
+
+        /**
+         * The default number of incremental import threads.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultSinkerThread = null;
+
+        /**
+         * Whether the speed limit has been set. Valid values: `no` (No), `yes` (Yes).
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.HasUserSetRateLimit = null;
 
     }
 
@@ -5695,7 +5844,17 @@ class StopCompareResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CurrentDumpThread = 'CurrentDumpThread' in params ? params.CurrentDumpThread : null;
+        this.DefaultDumpThread = 'DefaultDumpThread' in params ? params.DefaultDumpThread : null;
+        this.CurrentDumpRps = 'CurrentDumpRps' in params ? params.CurrentDumpRps : null;
+        this.DefaultDumpRps = 'DefaultDumpRps' in params ? params.DefaultDumpRps : null;
+        this.CurrentLoadThread = 'CurrentLoadThread' in params ? params.CurrentLoadThread : null;
+        this.DefaultLoadThread = 'DefaultLoadThread' in params ? params.DefaultLoadThread : null;
+        this.CurrentLoadRps = 'CurrentLoadRps' in params ? params.CurrentLoadRps : null;
+        this.DefaultLoadRps = 'DefaultLoadRps' in params ? params.DefaultLoadRps : null;
+        this.CurrentSinkerThread = 'CurrentSinkerThread' in params ? params.CurrentSinkerThread : null;
+        this.DefaultSinkerThread = 'DefaultSinkerThread' in params ? params.DefaultSinkerThread : null;
+        this.HasUserSetRateLimit = 'HasUserSetRateLimit' in params ? params.HasUserSetRateLimit : null;
 
     }
 }
@@ -6253,6 +6412,50 @@ class CreateCompareTaskRequest extends  AbstractModel {
 }
 
 /**
+ * Error information and the corresponding solution
+ * @class
+ */
+class ErrInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cause of the error
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Error message
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Solution
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Solution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
+
+    }
+}
+
+/**
  * StartCompare request structure.
  * @class
  */
@@ -6463,6 +6666,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErrorInfo = null;
 
         /**
+         * Whether the task can be reentered in the full export stage. Valid values: `yes`, `no`. `yes`: The current task can be reentered. `no`: The current task is in the full export stage which cannot be reentered. If the value of this parameter is `no`, the checkpoint restart is not supported when the task is restarted in the export stage.
+         * @type {string || null}
+         */
+        this.DumperResumeCtrl = null;
+
+        /**
+         * Task throttling information
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {RateLimitOption || null}
+         */
+        this.RateLimitOption = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6552,6 +6768,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.ErrorInfo[z]);
                 this.ErrorInfo.push(obj);
             }
+        }
+        this.DumperResumeCtrl = 'DumperResumeCtrl' in params ? params.DumperResumeCtrl : null;
+
+        if (params.RateLimitOption) {
+            let obj = new RateLimitOption();
+            obj.deserialize(params.RateLimitOption)
+            this.RateLimitOption = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7220,6 +7443,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SrcInfo = null;
 
         /**
+         * Valid values: `cluster`, `single`. `single`: For single-node source databases; `cluster`: For multi-node source databases.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SrcNodeType = null;
+
+        /**
+         * Source database information. This parameter is used for multi-node databases.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {SyncDBEndpointInfos || null}
+         */
+        this.SrcInfos = null;
+
+        /**
          * Target database region, such as `ap-guangzhou`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -7246,6 +7483,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {Endpoint || null}
          */
         this.DstInfo = null;
+
+        /**
+         * Valid values: `cluster`, `single`. `single`: For single-node target databases; `cluster`: For multi-node target databases.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DstNodeType = null;
+
+        /**
+         * Target database information. This parameter is used for multi-node databases.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {SyncDBEndpointInfos || null}
+         */
+        this.DstInfos = null;
 
         /**
          * Creation time in the format of `yyyy-mm-dd hh:mm:ss`
@@ -7324,6 +7575,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AutoRetryTimeRangeMinutes = null;
 
+        /**
+         * Whether the task can be reentered in the full export stage. Valid values: `yes`, `no`. `yes`: The current task can be reentered. `no`: The current task is in the full export stage which cannot be reentered. If the value of this parameter is `no`, the checkpoint restart is not supported when the task is restarted in the export stage.
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DumperResumeCtrl = null;
+
     }
 
     /**
@@ -7363,6 +7621,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.SrcInfo)
             this.SrcInfo = obj;
         }
+        this.SrcNodeType = 'SrcNodeType' in params ? params.SrcNodeType : null;
+
+        if (params.SrcInfos) {
+            let obj = new SyncDBEndpointInfos();
+            obj.deserialize(params.SrcInfos)
+            this.SrcInfos = obj;
+        }
         this.DstRegion = 'DstRegion' in params ? params.DstRegion : null;
         this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
         this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
@@ -7371,6 +7636,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new Endpoint();
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
+        }
+        this.DstNodeType = 'DstNodeType' in params ? params.DstNodeType : null;
+
+        if (params.DstInfos) {
+            let obj = new SyncDBEndpointInfos();
+            obj.deserialize(params.DstInfos)
+            this.DstInfos = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
@@ -7396,6 +7668,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
         this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
         this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
+        this.DumperResumeCtrl = 'DumperResumeCtrl' in params ? params.DumperResumeCtrl : null;
 
     }
 }
@@ -8325,6 +8598,7 @@ module.exports = {
     StepTip: StepTip,
     DestroyMigrateJobRequest: DestroyMigrateJobRequest,
     SkipCheckItemResponse: SkipCheckItemResponse,
+    IsolateMigrateJobRequest: IsolateMigrateJobRequest,
     ResizeSyncJobResponse: ResizeSyncJobResponse,
     ResumeMigrateJobResponse: ResumeMigrateJobResponse,
     DifferenceItem: DifferenceItem,
@@ -8335,7 +8609,7 @@ module.exports = {
     DescribeCheckSyncJobResultRequest: DescribeCheckSyncJobResultRequest,
     DestroySyncJobResponse: DestroySyncJobResponse,
     DescribeCompareReportResponse: DescribeCompareReportResponse,
-    IsolateMigrateJobRequest: IsolateMigrateJobRequest,
+    Endpoint: Endpoint,
     StopMigrateJobResponse: StopMigrateJobResponse,
     TableItem: TableItem,
     ModifyCompareTaskNameRequest: ModifyCompareTaskNameRequest,
@@ -8366,7 +8640,6 @@ module.exports = {
     MigrateAction: MigrateAction,
     DeleteCompareTaskResponse: DeleteCompareTaskResponse,
     DBEndpointInfo: DBEndpointInfo,
-    TopicRule: TopicRule,
     ContinueSyncJobResponse: ContinueSyncJobResponse,
     Options: Options,
     CompleteMigrateJobRequest: CompleteMigrateJobRequest,
@@ -8381,6 +8654,7 @@ module.exports = {
     ModifyMigrateNameResponse: ModifyMigrateNameResponse,
     DescribeMigrationJobsResponse: DescribeMigrationJobsResponse,
     ModifyMigrationJobRequest: ModifyMigrationJobRequest,
+    StopCompareResponse: StopCompareResponse,
     DestroyMigrateJobResponse: DestroyMigrateJobResponse,
     ProcessProgress: ProcessProgress,
     SkipSyncCheckItemRequest: SkipSyncCheckItemRequest,
@@ -8395,7 +8669,7 @@ module.exports = {
     KafkaOption: KafkaOption,
     DescribeMigrationCheckJobResponse: DescribeMigrationCheckJobResponse,
     DBInfo: DBInfo,
-    Endpoint: Endpoint,
+    TopicRule: TopicRule,
     DifferenceDetail: DifferenceDetail,
     CreateCheckSyncJobResponse: CreateCheckSyncJobResponse,
     CompareObjectItem: CompareObjectItem,
@@ -8422,7 +8696,7 @@ module.exports = {
     StartCompareResponse: StartCompareResponse,
     DynamicOptions: DynamicOptions,
     CreateCompareTaskResponse: CreateCompareTaskResponse,
-    StopCompareResponse: StopCompareResponse,
+    RateLimitOption: RateLimitOption,
     SkipCheckItemRequest: SkipCheckItemRequest,
     CompareAbstractInfo: CompareAbstractInfo,
     CheckStep: CheckStep,
@@ -8430,6 +8704,7 @@ module.exports = {
     ModifyMigrateJobSpecResponse: ModifyMigrateJobSpecResponse,
     CreateSyncJobResponse: CreateSyncJobResponse,
     CreateCompareTaskRequest: CreateCompareTaskRequest,
+    ErrInfo: ErrInfo,
     StartCompareRequest: StartCompareRequest,
     DescribeMigrationCheckJobRequest: DescribeMigrationCheckJobRequest,
     DescribeMigrationDetailResponse: DescribeMigrationDetailResponse,

@@ -99,6 +99,55 @@ class SlowLogUser extends  AbstractModel {
 }
 
 /**
+ * DescribeRedisTopKeyPrefixList request structure.
+ * @class
+ */
+class DescribeRedisTopKeyPrefixListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Date for query, such as `2021-05-27`. You can select a date as early as in the last 30 days for query.
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * Service type. Valid value: `redis` (TencentDB for Redis).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * The number of queried items. Default value: `20`. Max value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Details of the health report task.
  * @class
  */
@@ -181,6 +230,41 @@ class HealthReportTask extends  AbstractModel {
             obj.deserialize(params.HealthStatus)
             this.HealthStatus = obj;
         }
+
+    }
+}
+
+/**
+ * OpenAuditService response structure.
+ * @class
+ */
+class OpenAuditServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit is successfully enabled only when the value of this parameter is `0`.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -520,31 +604,24 @@ class ScoreItem extends  AbstractModel {
 }
 
 /**
- * Instance configuration.
+ * CreateRedisBigKeyAnalysisTask response structure.
  * @class
  */
-class InstanceConfs extends  AbstractModel {
+class CreateRedisBigKeyAnalysisTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable database inspection. Valid values: Yes, No.
-         * @type {string || null}
+         * Async task ID
+         * @type {number || null}
          */
-        this.DailyInspection = null;
+        this.AsyncRequestId = null;
 
         /**
-         * Whether to enable instance overview. Valid values: Yes, No.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OverviewDisplay = null;
-
-        /**
-         * Custom big key analysis separator for Redis only
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.KeyDelimiters = null;
+        this.RequestId = null;
 
     }
 
@@ -555,9 +632,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.DailyInspection = 'DailyInspection' in params ? params.DailyInspection : null;
-        this.OverviewDisplay = 'OverviewDisplay' in params ? params.OverviewDisplay : null;
-        this.KeyDelimiters = 'KeyDelimiters' in params ? params.KeyDelimiters : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -860,6 +936,77 @@ class AddUserContactResponse extends  AbstractModel {
 }
 
 /**
+ * Instance details
+ * @class
+ */
+class AuditInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * appId
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Audit status. Valid values: `0` (Not enabled), `1` (Enabled).
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The region where the instance resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Resource tags
+Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.ResourceTags = 'ResourceTags' in params ? params.ResourceTags : null;
+
+    }
+}
+
+/**
  * ModifyDiagDBInstanceConf response structure.
  * @class
  */
@@ -1127,6 +1274,57 @@ class SlowLogTopSqlItem extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditInstanceList response structure.
+ * @class
+ */
+class DescribeAuditInstanceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of eligible instances.
+Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance details
+         * @type {Array.<AuditInstance> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditInstance();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProxySessionKillTasks request structure.
  * @class
  */
@@ -1164,6 +1362,56 @@ class DescribeProxySessionKillTasksRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.AsyncRequestIds = 'AsyncRequestIds' in params ? params.AsyncRequestIds : null;
         this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * CreateRedisBigKeyAnalysisTask request structure.
+ * @class
+ */
+class CreateRedisBigKeyAnalysisTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Service type. Valid value: `redis` (TencentDB for Redis).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * The list of the serial numbers of shard nodes. When the list is empty, all shard nodes will be selected.
+         * @type {Array.<number> || null}
+         */
+        this.ShardIds = null;
+
+        /**
+         * The list of separators of top key prefixes.
+Currently, the following separators are supported: ",", ";", ":", "_", "-", "+", "@", "=", "|", "#", ".". When the list is empty, all separators will be selected by default.
+         * @type {Array.<string> || null}
+         */
+        this.KeyDelimiterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.ShardIds = 'ShardIds' in params ? params.ShardIds : null;
+        this.KeyDelimiterList = 'KeyDelimiterList' in params ? params.KeyDelimiterList : null;
 
     }
 }
@@ -2287,6 +2535,109 @@ class CreateKillTaskResponse extends  AbstractModel {
 }
 
 /**
+ * Instance details
+ * @class
+ */
+class AuditInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit status. Valid values: `ON` (Enabled), `OFF` (Not enabled).
+         * @type {string || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * Audit log size. This parameter is only used for the free trial edition of Database Audit.
+         * @type {number || null}
+         */
+        this.BillingAmount = null;
+
+        /**
+         * Billing confirmation status. Valid values: `0` (Unconfirmed), `1` (Confirmed).
+         * @type {number || null}
+         */
+        this.BillingConfirmed = null;
+
+        /**
+         * Infrequent access storage period
+         * @type {number || null}
+         */
+        this.ColdLogExpireDay = null;
+
+        /**
+         * Storage size of infrequently accessed logs in MB
+         * @type {number || null}
+         */
+        this.ColdLogSize = null;
+
+        /**
+         * Storage period of frequently accessed logs in days
+         * @type {number || null}
+         */
+        this.HotLogExpireDay = null;
+
+        /**
+         * Storage size of frequently accessed logs in MB
+         * @type {number || null}
+         */
+        this.HotLogSize = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Log retention period in days, which is the sum of the frequent and infrequent access storage periods.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Instance creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Instance details
+         * @type {AuditInstanceInfo || null}
+         */
+        this.InstanceInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.BillingAmount = 'BillingAmount' in params ? params.BillingAmount : null;
+        this.BillingConfirmed = 'BillingConfirmed' in params ? params.BillingConfirmed : null;
+        this.ColdLogExpireDay = 'ColdLogExpireDay' in params ? params.ColdLogExpireDay : null;
+        this.ColdLogSize = 'ColdLogSize' in params ? params.ColdLogSize : null;
+        this.HotLogExpireDay = 'HotLogExpireDay' in params ? params.HotLogExpireDay : null;
+        this.HotLogSize = 'HotLogSize' in params ? params.HotLogSize : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.InstanceInfo) {
+            let obj = new AuditInstanceInfo();
+            obj.deserialize(params.InstanceInfo)
+            this.InstanceInfo = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeDBDiagEvents request structure.
  * @class
  */
@@ -2387,6 +2738,120 @@ class CreateDBDiagReportUrlResponse extends  AbstractModel {
         this.ReportUrl = 'ReportUrl' in params ? params.ReportUrl : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Deduction details.
+ * @class
+ */
+class ScoreDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deduction item type. Valid values: `Availability`, `Maintainability`, `Performance`, `Reliability`.
+         * @type {string || null}
+         */
+        this.IssueType = null;
+
+        /**
+         * Total deducted scores.
+         * @type {number || null}
+         */
+        this.ScoreLost = null;
+
+        /**
+         * Upper limit of the deducted scores.
+         * @type {number || null}
+         */
+        this.ScoreLostMax = null;
+
+        /**
+         * List of deduction items.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ScoreItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IssueType = 'IssueType' in params ? params.IssueType : null;
+        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
+        this.ScoreLostMax = 'ScoreLostMax' in params ? params.ScoreLostMax : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ScoreItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * OpenAuditService request structure.
+ * @class
+ */
+class OpenAuditServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+         * @type {string || null}
+         */
+        this.NodeRequestType = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Total log retention period in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Storage period of frequently accessed logs in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+         * @type {number || null}
+         */
+        this.HotLogExpireDay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.NodeRequestType = 'NodeRequestType' in params ? params.NodeRequestType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HotLogExpireDay = 'HotLogExpireDay' in params ? params.HotLogExpireDay : null;
 
     }
 }
@@ -3007,6 +3472,41 @@ class EventInfo extends  AbstractModel {
 }
 
 /**
+ * Query condition of the instance list
+ * @class
+ */
+class AuditInstanceFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filter value
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
  * DescribeMailProfile request structure.
  * @class
  */
@@ -3246,36 +3746,30 @@ class DescribeSecurityAuditLogExportTasksResponse extends  AbstractModel {
 }
 
 /**
- * DescribeRedisTopKeyPrefixList request structure.
+ * CloseAuditService request structure.
  * @class
  */
-class DescribeRedisTopKeyPrefixListRequest extends  AbstractModel {
+class CloseAuditServiceRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+         * @type {string || null}
+         */
+        this.NodeRequestType = null;
 
         /**
          * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Date for query, such as `2021-05-27`. You can select a date as early as in the last 30 days for query.
-         * @type {string || null}
-         */
-        this.Date = null;
-
-        /**
-         * Service type. Valid value: `redis` (TencentDB for Redis).
-         * @type {string || null}
-         */
-        this.Product = null;
-
-        /**
-         * The number of queried items. Default value: `20`. Max value: `100`.
-         * @type {number || null}
-         */
-        this.Limit = null;
 
     }
 
@@ -3286,10 +3780,52 @@ class DescribeRedisTopKeyPrefixListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Date = 'Date' in params ? params.Date : null;
         this.Product = 'Product' in params ? params.Product : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NodeRequestType = 'NodeRequestType' in params ? params.NodeRequestType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Instance configuration.
+ * @class
+ */
+class InstanceConfs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable database inspection. Valid values: Yes, No.
+         * @type {string || null}
+         */
+        this.DailyInspection = null;
+
+        /**
+         * Whether to enable instance overview. Valid values: Yes, No.
+         * @type {string || null}
+         */
+        this.OverviewDisplay = null;
+
+        /**
+         * Custom big key analysis separator for Redis only
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KeyDelimiters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DailyInspection = 'DailyInspection' in params ? params.DailyInspection : null;
+        this.OverviewDisplay = 'OverviewDisplay' in params ? params.OverviewDisplay : null;
+        this.KeyDelimiters = 'KeyDelimiters' in params ? params.KeyDelimiters : null;
 
     }
 }
@@ -4228,6 +4764,77 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeAuditInstanceList request structure.
+ * @class
+ */
+class DescribeAuditInstanceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+         * @type {string || null}
+         */
+        this.NodeRequestType = null;
+
+        /**
+         * Audit status. Valid values: `0` (Not enabled), `1` (Enabled). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AuditSwitch = null;
+
+        /**
+         * The offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of queried items. Default value: `20`. Max value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filters for querying instances
+         * @type {Array.<AuditInstanceFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.NodeRequestType = 'NodeRequestType' in params ? params.NodeRequestType : null;
+        this.AuditSwitch = 'AuditSwitch' in params ? params.AuditSwitch : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AuditInstanceFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeSecurityAuditLogExportTasks request structure.
  * @class
  */
@@ -4412,6 +5019,62 @@ class DescribeTopSpaceSchemaTimeSeriesRequest extends  AbstractModel {
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * ModifyAuditService request structure.
+ * @class
+ */
+class ModifyAuditServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+         * @type {string || null}
+         */
+        this.NodeRequestType = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Total log retention period in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Storage period of frequently accessed logs in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+         * @type {number || null}
+         */
+        this.HotLogExpireDay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.NodeRequestType = 'NodeRequestType' in params ? params.NodeRequestType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HotLogExpireDay = 'HotLogExpireDay' in params ? params.HotLogExpireDay : null;
 
     }
 }
@@ -4875,7 +5538,7 @@ class DescribeSlowLogUserHostStatsRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * MD5 value of SOL template
+         * MD5 value of the SQL template
          * @type {string || null}
          */
         this.Md5 = null;
@@ -5914,37 +6577,24 @@ class DescribeHealthScoreResponse extends  AbstractModel {
 }
 
 /**
- * Deduction details.
+ * CloseAuditService response structure.
  * @class
  */
-class ScoreDetail extends  AbstractModel {
+class CloseAuditServiceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Deduction item type. Valid values: `Availability`, `Maintainability`, `Performance`, `Reliability`.
+         * If `0` is returned, audit is successfully disabled; otherwise, an exception will be returned, indicating that audit has failed to be disabled.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.IssueType = null;
-
-        /**
-         * Total deducted scores.
-         * @type {number || null}
-         */
-        this.ScoreLost = null;
-
-        /**
-         * Upper limit of the deducted scores.
-         * @type {number || null}
-         */
-        this.ScoreLostMax = null;
-
-        /**
-         * List of deduction items.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ScoreItem> || null}
-         */
-        this.Items = null;
+        this.RequestId = null;
 
     }
 
@@ -5955,18 +6605,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.IssueType = 'IssueType' in params ? params.IssueType : null;
-        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
-        this.ScoreLostMax = 'ScoreLostMax' in params ? params.ScoreLostMax : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new ScoreItem();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6065,6 +6705,41 @@ class DescribeSlowLogTopSqlsResponse extends  AbstractModel {
                 this.Rows.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAuditService response structure.
+ * @class
+ */
+class ModifyAuditServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audit configuration modification result. If `0` is returned, the modification is successful; otherwise, an exception will be returned, indicating that the modification failed.
+         * @type {number || null}
+         */
+        this.Success = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Success = 'Success' in params ? params.Success : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6305,22 +6980,27 @@ class DescribeProxySessionKillTasksResponse extends  AbstractModel {
 module.exports = {
     SchemaSpaceTimeSeries: SchemaSpaceTimeSeries,
     SlowLogUser: SlowLogUser,
+    DescribeRedisTopKeyPrefixListRequest: DescribeRedisTopKeyPrefixListRequest,
     HealthReportTask: HealthReportTask,
+    OpenAuditServiceResponse: OpenAuditServiceResponse,
     CreateDBDiagReportTaskRequest: CreateDBDiagReportTaskRequest,
     TableSpaceTimeSeries: TableSpaceTimeSeries,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     DescribeTopSpaceTablesRequest: DescribeTopSpaceTablesRequest,
     ScoreItem: ScoreItem,
-    InstanceConfs: InstanceConfs,
+    CreateRedisBigKeyAnalysisTaskResponse: CreateRedisBigKeyAnalysisTaskResponse,
     CreateSecurityAuditLogExportTaskRequest: CreateSecurityAuditLogExportTaskRequest,
     DescribeDBDiagEventResponse: DescribeDBDiagEventResponse,
     DescribeDBDiagEventsResponse: DescribeDBDiagEventsResponse,
     DescribeDBDiagReportTasksResponse: DescribeDBDiagReportTasksResponse,
     AddUserContactResponse: AddUserContactResponse,
+    AuditInstanceInfo: AuditInstanceInfo,
     ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
     DescribeTopSpaceSchemaTimeSeriesResponse: DescribeTopSpaceSchemaTimeSeriesResponse,
     SlowLogTopSqlItem: SlowLogTopSqlItem,
+    DescribeAuditInstanceListResponse: DescribeAuditInstanceListResponse,
     DescribeProxySessionKillTasksRequest: DescribeProxySessionKillTasksRequest,
+    CreateRedisBigKeyAnalysisTaskRequest: CreateRedisBigKeyAnalysisTaskRequest,
     DescribeMySqlProcessListResponse: DescribeMySqlProcessListResponse,
     SessionItem: SessionItem,
     HealthStatus: HealthStatus,
@@ -6343,8 +7023,11 @@ module.exports = {
     MySqlProcess: MySqlProcess,
     DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
     CreateKillTaskResponse: CreateKillTaskResponse,
+    AuditInstance: AuditInstance,
     DescribeDBDiagEventsRequest: DescribeDBDiagEventsRequest,
     CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
+    ScoreDetail: ScoreDetail,
+    OpenAuditServiceRequest: OpenAuditServiceRequest,
     CreateKillTaskRequest: CreateKillTaskRequest,
     DeleteDBDiagReportTasksResponse: DeleteDBDiagReportTasksResponse,
     DescribeProxyProcessStatisticsResponse: DescribeProxyProcessStatisticsResponse,
@@ -6355,12 +7038,14 @@ module.exports = {
     DescribeSlowLogUserHostStatsResponse: DescribeSlowLogUserHostStatsResponse,
     TableSpaceData: TableSpaceData,
     EventInfo: EventInfo,
+    AuditInstanceFilter: AuditInstanceFilter,
     DescribeMailProfileRequest: DescribeMailProfileRequest,
     DeleteSecurityAuditLogExportTasksResponse: DeleteSecurityAuditLogExportTasksResponse,
     KillMySqlThreadsRequest: KillMySqlThreadsRequest,
     CreateDBDiagReportUrlRequest: CreateDBDiagReportUrlRequest,
     DescribeSecurityAuditLogExportTasksResponse: DescribeSecurityAuditLogExportTasksResponse,
-    DescribeRedisTopKeyPrefixListRequest: DescribeRedisTopKeyPrefixListRequest,
+    CloseAuditServiceRequest: CloseAuditServiceRequest,
+    InstanceConfs: InstanceConfs,
     HealthScoreInfo: HealthScoreInfo,
     DescribeTopSpaceTableTimeSeriesResponse: DescribeTopSpaceTableTimeSeriesResponse,
     DescribeDBDiagHistoryResponse: DescribeDBDiagHistoryResponse,
@@ -6375,10 +7060,12 @@ module.exports = {
     DescribeAllUserContactRequest: DescribeAllUserContactRequest,
     DescribeDiagDBInstancesRequest: DescribeDiagDBInstancesRequest,
     InstanceInfo: InstanceInfo,
+    DescribeAuditInstanceListRequest: DescribeAuditInstanceListRequest,
     DescribeSecurityAuditLogExportTasksRequest: DescribeSecurityAuditLogExportTasksRequest,
     DeleteSecurityAuditLogExportTasksRequest: DeleteSecurityAuditLogExportTasksRequest,
     CreateSchedulerMailProfileResponse: CreateSchedulerMailProfileResponse,
     DescribeTopSpaceSchemaTimeSeriesRequest: DescribeTopSpaceSchemaTimeSeriesRequest,
+    ModifyAuditServiceRequest: ModifyAuditServiceRequest,
     DescribeSlowLogTopSqlsRequest: DescribeSlowLogTopSqlsRequest,
     DescribeMailProfileResponse: DescribeMailProfileResponse,
     DescribeHealthScoreRequest: DescribeHealthScoreRequest,
@@ -6406,9 +7093,10 @@ module.exports = {
     SlowLogInfoItem: SlowLogInfoItem,
     SecLogExportTaskInfo: SecLogExportTaskInfo,
     DescribeHealthScoreResponse: DescribeHealthScoreResponse,
-    ScoreDetail: ScoreDetail,
+    CloseAuditServiceResponse: CloseAuditServiceResponse,
     DescribeTopSpaceSchemasRequest: DescribeTopSpaceSchemasRequest,
     DescribeSlowLogTopSqlsResponse: DescribeSlowLogTopSqlsResponse,
+    ModifyAuditServiceResponse: ModifyAuditServiceResponse,
     DescribeUserSqlAdviceRequest: DescribeUserSqlAdviceRequest,
     DescribeMySqlProcessListRequest: DescribeMySqlProcessListRequest,
     DescribeSecurityAuditLogDownloadUrlsResponse: DescribeSecurityAuditLogDownloadUrlsResponse,

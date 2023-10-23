@@ -1922,6 +1922,34 @@ class DescribeStreamLiveWatermarksRequest extends  AbstractModel {
 }
 
 /**
+ * Transparent transmission of meta information plan configuration.
+ * @class
+ */
+class TimedMetadataInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded id3 metadata information, with a maximum limit of 1024 characters.
+         * @type {string || null}
+         */
+        this.ID3 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID3 = 'ID3' in params ? params.ID3 : null;
+
+    }
+}
+
+/**
  * Transcoding details.
  * @class
  */
@@ -2901,6 +2929,12 @@ class EventSettingsResp extends  AbstractModel {
          */
         this.SpliceDuration = null;
 
+        /**
+         * Meta information plan configuration.
+         * @type {TimedMetadataInfo || null}
+         */
+        this.TimedMetadataSetting = null;
+
     }
 
     /**
@@ -2935,43 +2969,28 @@ class EventSettingsResp extends  AbstractModel {
         this.SpliceEventID = 'SpliceEventID' in params ? params.SpliceEventID : null;
         this.SpliceDuration = 'SpliceDuration' in params ? params.SpliceDuration : null;
 
+        if (params.TimedMetadataSetting) {
+            let obj = new TimedMetadataInfo();
+            obj.deserialize(params.TimedMetadataSetting)
+            this.TimedMetadataSetting = obj;
+        }
+
     }
 }
 
 /**
- * Event trigger time settings
+ * Transparent transmission of ID3 information configuration.
  * @class
  */
-class TimingSettingsResp extends  AbstractModel {
+class TimedMetadataSettingInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event trigger type
-         * @type {string || null}
+         * Whether to transparently transmit ID3 information, optional values: 0:NO_PASSTHROUGH, 1:PASSTHROUGH, default 0.
+         * @type {number || null}
          */
-        this.StartType = null;
-
-        /**
-         * Not empty if `StartType` is `FIXED_TIME`
-UTC time, such as `2020-01-01T12:00:00Z`
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
-It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
-It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.Behavior = null;
 
     }
 
@@ -2982,10 +3001,7 @@ It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:0
         if (!params) {
             return;
         }
-        this.StartType = 'StartType' in params ? params.StartType : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Behavior = 'Behavior' in params ? params.Behavior : null;
 
     }
 }
@@ -4132,6 +4148,12 @@ class EventSettingsReq extends  AbstractModel {
          */
         this.SpliceDuration = null;
 
+        /**
+         * Meta information plan configuration.
+         * @type {TimedMetadataInfo || null}
+         */
+        this.TimedMetadataSetting = null;
+
     }
 
     /**
@@ -4165,6 +4187,12 @@ class EventSettingsReq extends  AbstractModel {
         }
         this.SpliceEventID = 'SpliceEventID' in params ? params.SpliceEventID : null;
         this.SpliceDuration = 'SpliceDuration' in params ? params.SpliceDuration : null;
+
+        if (params.TimedMetadataSetting) {
+            let obj = new TimedMetadataInfo();
+            obj.deserialize(params.TimedMetadataSetting)
+            this.TimedMetadataSetting = obj;
+        }
 
     }
 }
@@ -4305,6 +4333,12 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.AVTemplateNames = null;
 
+        /**
+         * Meta information controls configuration.
+         * @type {TimedMetadataSettingInfo || null}
+         */
+        this.TimedMetadataSettings = null;
+
     }
 
     /**
@@ -4324,6 +4358,12 @@ Note: this field may return `null`, indicating that no valid value was found.
             this.Scte35Settings = obj;
         }
         this.AVTemplateNames = 'AVTemplateNames' in params ? params.AVTemplateNames : null;
+
+        if (params.TimedMetadataSettings) {
+            let obj = new TimedMetadataSettingInfo();
+            obj.deserialize(params.TimedMetadataSettings)
+            this.TimedMetadataSettings = obj;
+        }
 
     }
 }
@@ -4933,6 +4973,58 @@ class StartStreamLiveChannelRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * Event trigger time settings
+ * @class
+ */
+class TimingSettingsResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event trigger type
+         * @type {string || null}
+         */
+        this.StartType = null;
+
+        /**
+         * Not empty if `StartType` is `FIXED_TIME`
+UTC time, such as `2020-01-01T12:00:00Z`
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartType = 'StartType' in params ? params.StartType : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -6467,6 +6559,7 @@ module.exports = {
     AttachedInput: AttachedInput,
     QueryInputStreamStateResponse: QueryInputStreamStateResponse,
     DescribeStreamLiveWatermarksRequest: DescribeStreamLiveWatermarksRequest,
+    TimedMetadataInfo: TimedMetadataInfo,
     DescribeTranscodeDetailInfo: DescribeTranscodeDetailInfo,
     TimeShiftSettingsInfo: TimeShiftSettingsInfo,
     DeliveryRestrictionsInfo: DeliveryRestrictionsInfo,
@@ -6484,7 +6577,7 @@ module.exports = {
     ChannelInputStatistics: ChannelInputStatistics,
     HlsRemuxSettingsInfo: HlsRemuxSettingsInfo,
     EventSettingsResp: EventSettingsResp,
-    TimingSettingsResp: TimingSettingsResp,
+    TimedMetadataSettingInfo: TimedMetadataSettingInfo,
     AudioTemplateInfo: AudioTemplateInfo,
     StreamPackageSettingsInfo: StreamPackageSettingsInfo,
     DescribeStreamLiveChannelsResponse: DescribeStreamLiveChannelsResponse,
@@ -6527,6 +6620,7 @@ module.exports = {
     EventNotifySetting: EventNotifySetting,
     DeleteStreamLiveInputResponse: DeleteStreamLiveInputResponse,
     StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,
+    TimingSettingsResp: TimingSettingsResp,
     DescribeStreamLiveWatermarkResponse: DescribeStreamLiveWatermarkResponse,
     StreamScte35Info: StreamScte35Info,
     StreamAudioInfo: StreamAudioInfo,

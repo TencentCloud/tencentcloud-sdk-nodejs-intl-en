@@ -80,6 +80,34 @@ class StopPublishStreamRequest extends  AbstractModel {
 }
 
 /**
+ * StartPublishStreamWithURL response structure.
+ * @class
+ */
+class StartPublishStreamWithURLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopPublishStream response structure.
  * @class
  */
@@ -103,6 +131,41 @@ class StopPublishStreamResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartPublishStreamWithURL request structure.
+ * @class
+ */
+class StartPublishStreamWithURLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique user ID, which is customized by you and is not understood by CAR.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Push address. Only RTMP is supported for push currently.
+         * @type {string || null}
+         */
+        this.PublishStreamURL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PublishStreamURL = 'PublishStreamURL' in params ? params.PublishStreamURL : null;
 
     }
 }
@@ -394,7 +457,9 @@ If the current user is the host, `HostUserId` must be the same as their `UserId`
 module.exports = {
     CreateSessionResponse: CreateSessionResponse,
     StopPublishStreamRequest: StopPublishStreamRequest,
+    StartPublishStreamWithURLResponse: StartPublishStreamWithURLResponse,
     StopPublishStreamResponse: StopPublishStreamResponse,
+    StartPublishStreamWithURLRequest: StartPublishStreamWithURLRequest,
     DestroySessionResponse: DestroySessionResponse,
     StartPublishStreamResponse: StartPublishStreamResponse,
     ApplyConcurrentResponse: ApplyConcurrentResponse,

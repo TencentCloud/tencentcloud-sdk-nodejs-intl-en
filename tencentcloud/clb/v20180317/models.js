@@ -488,8 +488,8 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.Number = null;
 
         /**
-         * Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+         * ID of the primary AZ for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It's only available to public CLB instances. 
+Note: The traffic only goes to the primary AZ in normal cases. The secondary AZ is used only when the primary AZ is unavailable. To query the list of primary AZs in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
          * @type {string || null}
          */
         this.MasterZoneId = null;
@@ -507,7 +507,7 @@ Note: By default, the traffic goes to the primary AZ. The secondary AZs only car
         this.InternetAccessible = null;
 
         /**
-         * It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+         * ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
          * @type {string || null}
          */
         this.VipIsp = null;
@@ -538,9 +538,8 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
         this.ExclusiveCluster = null;
 
         /**
-         * Creates an LCU-supported instance.
-<ul><li>To create an LCU-supported instance, this parameter must be set to `SLA`, which indicates the Super Large 1 specification. 
-<ul><li>If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
+         * Specification of LCU-supported instance.
+<ul><li>This parameter is required to create LCU-supported instances. Values: <ul><li>`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4.</li><li>`clb.c2.medium`: Standard</li><li>`clb.c3.small`: Advanced 1</li><li>`clb.c3.medium`: Advanced 1</li><li>`clb.c4.small`: Super Large 1</li><li>`clb.c4.medium`: Super Large 2</li><li>`clb.c4.large`: Super Large 3</li><li>`clb.c4.xlarge`: Super Large 4</li> For Super Large 2 and above models, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).</ul></li><li> This parameter is not required for creating shared instances.</li></ul>For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SlaType = null;
@@ -593,6 +592,12 @@ Note: The traffic only goes to the secondary AZ when the primary AZ is unavailab
          * @type {boolean || null}
          */
         this.DynamicVip = null;
+
+        /**
+         * Network egress point
+         * @type {string || null}
+         */
+        this.Egress = null;
 
     }
 
@@ -654,6 +659,7 @@ Note: The traffic only goes to the secondary AZ when the primary AZ is unavailab
         this.EipAddressId = 'EipAddressId' in params ? params.EipAddressId : null;
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
         this.DynamicVip = 'DynamicVip' in params ? params.DynamicVip : null;
+        this.Egress = 'Egress' in params ? params.Egress : null;
 
     }
 }
@@ -831,7 +837,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.InternetAccessible = null;
 
         /**
-         * It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+         * ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
          * @type {string || null}
          */
         this.VipIsp = null;
@@ -1857,18 +1863,24 @@ class DeregisterTargetsFromClassicalLBRequest extends  AbstractModel {
 }
 
 /**
- * SetSecurityGroupForLoadbalancers response structure.
+ * InquiryPriceModifyLoadBalancer request structure.
  * @class
  */
-class SetSecurityGroupForLoadbalancersResponse extends  AbstractModel {
+class InquiryPriceModifyLoadBalancerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * CLB instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LoadBalancerId = null;
+
+        /**
+         * New bandwidth bandwidth specification
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
 
     }
 
@@ -1879,7 +1891,13 @@ class SetSecurityGroupForLoadbalancersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
 
     }
 }
@@ -2005,6 +2023,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.EdgeZone = null;
 
+        /**
+         * Network egress
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Egress = null;
+
     }
 
     /**
@@ -2030,6 +2055,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
         this.ZoneResourceType = 'ZoneResourceType' in params ? params.ZoneResourceType : null;
         this.EdgeZone = 'EdgeZone' in params ? params.EdgeZone : null;
+        this.Egress = 'Egress' in params ? params.Egress : null;
 
     }
 }
@@ -2793,18 +2819,66 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyLoadBalancerSla response structure.
+ * InquiryPriceCreateLoadBalancer request structure.
  * @class
  */
-class ModifyLoadBalancerSlaResponse extends  AbstractModel {
+class InquiryPriceCreateLoadBalancerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Network type of the CLB to query. `OPEN`: Public network; `INTERNAL`: Private network is intranet type
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LoadBalancerType = null;
+
+        /**
+         * The billing mode to query. `POSTPAID`:Pay as you go
+         * @type {string || null}
+         */
+        this.LoadBalancerChargeType = null;
+
+        /**
+         * Reserved field
+         * @type {LBChargePrepaid || null}
+         */
+        this.LoadBalancerChargePrepaid = null;
+
+        /**
+         * The network billing mode to query 
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * Number of CLB instances to query. Default value: 1.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Availability zone in the format of "ap-guangzhou-1"
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * To query the price of monthly subscribed LCU-supported instances, specify the instance specification in this parameter, such as `clb.c3.small`. For PAYG instances, use `SLA`.
+         * @type {string || null}
+         */
+        this.SlaType = null;
+
+        /**
+         * IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). 
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
+         * @type {string || null}
+         */
+        this.VipIsp = null;
 
     }
 
@@ -2815,7 +2889,25 @@ class ModifyLoadBalancerSlaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+        this.LoadBalancerChargeType = 'LoadBalancerChargeType' in params ? params.LoadBalancerChargeType : null;
+
+        if (params.LoadBalancerChargePrepaid) {
+            let obj = new LBChargePrepaid();
+            obj.deserialize(params.LoadBalancerChargePrepaid)
+            this.LoadBalancerChargePrepaid = obj;
+        }
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.SlaType = 'SlaType' in params ? params.SlaType : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+        this.VipIsp = 'VipIsp' in params ? params.VipIsp : null;
 
     }
 }
@@ -2949,6 +3041,46 @@ class DescribeClassicalLBTargetsRequest extends  AbstractModel {
             return;
         }
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceRenewLoadBalancer response structure.
+ * @class
+ */
+class InquiryPriceRenewLoadBalancerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price to renew
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3533,26 +3665,24 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
 }
 
 /**
- * ISP Type
+ * InquiryPriceModifyLoadBalancer response structure.
  * @class
  */
-class TypeInfo extends  AbstractModel {
+class InquiryPriceModifyLoadBalancerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ISP Type
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Pricing information
+         * @type {Price || null}
          */
-        this.Type = null;
+        this.Price = null;
 
         /**
-         * Specification availability
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SpecAvailability> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.SpecAvailabilitySet = null;
+        this.RequestId = null;
 
     }
 
@@ -3563,16 +3693,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.SpecAvailabilitySet) {
-            this.SpecAvailabilitySet = new Array();
-            for (let z in params.SpecAvailabilitySet) {
-                let obj = new SpecAvailability();
-                obj.deserialize(params.SpecAvailabilitySet[z]);
-                this.SpecAvailabilitySet.push(obj);
-            }
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3628,8 +3755,15 @@ class SlaUpdateParam extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * u200dTo upgrade the instance to an LCU-support instance, set it to `SLA`. `SLA` indicates Super Large 1. 
-If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * LCU-supported instance specification. Value:
+<li>`SLA`: If you have activated Super Large LCU-supported instances, `SLA` indicates Super Large 4.</li>
+<li>`clb.c2.medium`: Standard</li>
+<li>`clb.c3.small`: Advanced 1</li>
+<li>`clb.c3.medium`: Advanced 2</li>
+<li>`clb.c4.small`: Super Large 1</li>
+<li>`clb.c4.medium`: Super Large 2</li>
+<li>`clb.c4.large`: Super Large 3</li>
+<li>`clb.c4.xlarge`: Super Large 4</li> For Super Large 2 and above specifications, please [submit a ticket](https://console.cloud.tencent.com/workorder/category). For more specifications, see [Specifications Comparison](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1)
          * @type {string || null}
          */
         this.SlaType = null;
@@ -3871,6 +4005,34 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * ModifyLoadBalancerSla response structure.
+ * @class
+ */
+class ModifyLoadBalancerSlaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClsLogSet request structure.
  * @class
  */
@@ -3946,8 +4108,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionExpireTime = null;
 
         /**
-         * Whether to enable the SNI feature (this parameter is only meaningful for HTTPS listeners)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to enable SNI. `1`: Enable; `0`: Do not enable. This parameter is only meaningful for HTTPS listeners.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SniSwitch = null;
@@ -4740,8 +4902,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HttpCheckPath = null;
 
         /**
-         * Health check domain name. It is only applicable to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. For HTTP health checks of TCP listeners, this parameter is required.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Health check domain name. It’s applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. It’s required for HTTP health check of TCP listeners.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpCheckDomain = null;
@@ -5450,6 +5612,46 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * InquiryPriceRefundLoadBalancer response structure.
+ * @class
+ */
+class InquiryPriceRefundLoadBalancerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price of the instance with the specified configurations.
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeResources response structure.
  * @class
  */
@@ -6126,6 +6328,41 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyLoadBalancersProject request structure.
+ * @class
+ */
+class ModifyLoadBalancersProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of CLB instances ID(s).
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * Certificate information
  * @class
  */
@@ -6233,6 +6470,41 @@ class ResourceAvailability extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Availability = 'Availability' in params ? params.Availability : null;
+
+    }
+}
+
+/**
+ * SetLoadBalancerSecurityGroups request structure.
+ * @class
+ */
+class SetLoadBalancerSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * Array of security group IDs. One CLB instance can be bound to up to 50 security groups. If you want to unbind all security groups, you do not need to pass in this parameter, or you can pass in an empty array.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
 
     }
 }
@@ -7172,6 +7444,34 @@ class ManualRewriteRequest extends  AbstractModel {
 }
 
 /**
+ * InquiryPriceRefundLoadBalancer request structure.
+ * @class
+ */
+class InquiryPriceRefundLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+    }
+}
+
+/**
  * ModifyListener response structure.
  * @class
  */
@@ -7686,6 +7986,51 @@ class CreateClsLogSetRequest extends  AbstractModel {
         this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.LogsetType = 'LogsetType' in params ? params.LogsetType : null;
+
+    }
+}
+
+/**
+ * ISP Type
+ * @class
+ */
+class TypeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ISP Type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Specification availability
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SpecAvailability> || null}
+         */
+        this.SpecAvailabilitySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.SpecAvailabilitySet) {
+            this.SpecAvailabilitySet = new Array();
+            for (let z in params.SpecAvailabilitySet) {
+                let obj = new SpecAvailability();
+                obj.deserialize(params.SpecAvailabilitySet[z]);
+                this.SpecAvailabilitySet.push(obj);
+            }
+        }
 
     }
 }
@@ -8214,6 +8559,77 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Pricing information of an item
+ * @class
+ */
+class ItemPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * PAYG unit price, in USD.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Subsequent billing unit. Value Range: 
+`HOUR`: Calculate the cost by hour. It's available when "InternetChargeType=POSTPAID_BY_HOUR".
+`GB`: Calculate the cost by traffic in GB. It's available when "InternetChargeType=TRAFFIC_POSTPAID_BY_HOUR".
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * Reserved field
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Reserved field
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * Discount unit price of a pay-as-you-go instance, in USD.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Discount. For example, 20.0 indicates 80% off.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+
+    }
+}
+
+/**
  * ModifyTargetWeight request structure.
  * @class
  */
@@ -8603,8 +9019,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Zones = null;
 
         /**
-         * Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable SNI. `1`: Enable; `0`: Do not enable. This parameter is only meaningful for HTTPS listeners.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SniSwitch = null;
@@ -8615,6 +9031,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.LoadBalancerDomain = null;
+
+        /**
+         * Network egress
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Egress = null;
 
     }
 
@@ -8686,6 +9109,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Zones = 'Zones' in params ? params.Zones : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.LoadBalancerDomain = 'LoadBalancerDomain' in params ? params.LoadBalancerDomain : null;
+        this.Egress = 'Egress' in params ? params.Egress : null;
 
     }
 }
@@ -9334,37 +9758,24 @@ class DeregisterTargetsRequest extends  AbstractModel {
 }
 
 /**
- * Network billing mode based on maximum outbound bandwidth
+ * InquiryPriceCreateLoadBalancer response structure.
  * @class
  */
-class InternetAccessible extends  AbstractModel {
+class InquiryPriceCreateLoadBalancerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;
-BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
-         * @type {string || null}
+         * Price of the instance with the specified configurations.
+         * @type {Price || null}
          */
-        this.InternetChargeType = null;
+        this.Price = null;
 
         /**
-         * Maximum outgoing bandwidth in Mbps. It works on LCU-supported instances on private networks and all instances on public networks.
-- For shared and dedicated CLB instances on public networks, the range is 1Mbps-2048Mbps.
-- For all LCU-supported CLB instances:
-  - It defaults to General LCU-supported instance. SLA corresponds to Super Large 1, and the range of maximum outgoing bandwidth is 1 Mbps - 10240 Mbps.
-  - If you have enabled Super Large specification, the range of maximum outgoing bandwidth is 1 Mbps - 61440 Mbps Super Large LCU-supported specification is in beta now. To join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
-        /**
-         * Bandwidth package type, such as SINGLEISP
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.BandwidthpkgSubType = null;
+        this.RequestId = null;
 
     }
 
@@ -9375,9 +9786,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
-        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
-        this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9561,6 +9976,66 @@ class DeleteTargetGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * Price of CLB instances.
+ * @class
+ */
+class Price extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance price.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {ItemPrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * Network price.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {ItemPrice || null}
+         */
+        this.BandwidthPrice = null;
+
+        /**
+         * LCU price.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {ItemPrice || null}
+         */
+        this.LcuPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstancePrice) {
+            let obj = new ItemPrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.BandwidthPrice) {
+            let obj = new ItemPrice();
+            obj.deserialize(params.BandwidthPrice)
+            this.BandwidthPrice = obj;
+        }
+
+        if (params.LcuPrice) {
+            let obj = new ItemPrice();
+            obj.deserialize(params.LcuPrice)
+            this.LcuPrice = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyTargetGroupInstancesPort request structure.
  * @class
  */
@@ -9724,6 +10199,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.EndPort = 'EndPort' in params ? params.EndPort : null;
+
+    }
+}
+
+/**
+ * SetSecurityGroupForLoadbalancers response structure.
+ * @class
+ */
+class SetSecurityGroupForLoadbalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10658,24 +11161,37 @@ class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
 }
 
 /**
- * SetLoadBalancerSecurityGroups request structure.
+ * Network billing mode based on maximum outbound bandwidth
  * @class
  */
-class SetLoadBalancerSecurityGroupsRequest extends  AbstractModel {
+class InternetAccessible extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
+         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;
+BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
+        this.InternetChargeType = null;
 
         /**
-         * Array of security group IDs. One CLB instance can be bound to up to 50 security groups. If you want to unbind all security groups, you do not need to pass in this parameter, or you can pass in an empty array.
-         * @type {Array.<string> || null}
+         * Maximum outgoing bandwidth in Mbps. It works on LCU-supported instances on private networks and all instances on public networks.
+- For shared and dedicated CLB instances on public networks, the range is 1Mbps-2048Mbps.
+- For all LCU-supported CLB instances:
+  - It defaults to General LCU-supported instance. SLA corresponds to Super Large 1, and the range of maximum outgoing bandwidth is 1 Mbps - 10240 Mbps.
+  - If you have enabled Super Large specification, the range of maximum outgoing bandwidth is 1 Mbps - 61440 Mbps Super Large LCU-supported specification is in beta now. To join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.SecurityGroups = null;
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * Bandwidth package type, such as SINGLEISP
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BandwidthpkgSubType = null;
 
     }
 
@@ -10686,8 +11202,9 @@ class SetLoadBalancerSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
 
     }
 }
@@ -10751,7 +11268,7 @@ class RewriteLocationMap extends  AbstractModel {
         this.SourceLocationId = null;
 
         /**
-         * Forwarding rule ID of a redirect target
+         * ID of the forwarding rule of the destination
          * @type {string || null}
          */
         this.TargetLocationId = null;
@@ -10866,6 +11383,34 @@ class ModifyTargetPortRequest extends  AbstractModel {
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * ModifyLoadBalancersProject response structure.
+ * @class
+ */
+class ModifyLoadBalancersProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11095,6 +11640,46 @@ class DeleteLoadBalancerSnatIpsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceRenewLoadBalancer request structure.
+ * @class
+ */
+class InquiryPriceRenewLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * Renewal period
+         * @type {LBChargePrepaid || null}
+         */
+        this.LoadBalancerChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.LoadBalancerChargePrepaid) {
+            let obj = new LBChargePrepaid();
+            obj.deserialize(params.LoadBalancerChargePrepaid)
+            this.LoadBalancerChargePrepaid = obj;
+        }
 
     }
 }
@@ -12013,6 +12598,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.LoadBalancerDomain = null;
 
+        /**
+         * Network egress
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Egress = null;
+
     }
 
     /**
@@ -12130,6 +12722,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
         this.AttributeFlags = 'AttributeFlags' in params ? params.AttributeFlags : null;
         this.LoadBalancerDomain = 'LoadBalancerDomain' in params ? params.LoadBalancerDomain : null;
+        this.Egress = 'Egress' in params ? params.Egress : null;
 
     }
 }
@@ -12166,7 +12759,7 @@ module.exports = {
     RsWeightRule: RsWeightRule,
     RegisterFunctionTargetsRequest: RegisterFunctionTargetsRequest,
     DeregisterTargetsFromClassicalLBRequest: DeregisterTargetsFromClassicalLBRequest,
-    SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
+    InquiryPriceModifyLoadBalancerRequest: InquiryPriceModifyLoadBalancerRequest,
     BasicTargetGroupInfo: BasicTargetGroupInfo,
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
     ZoneResource: ZoneResource,
@@ -12185,11 +12778,12 @@ module.exports = {
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
-    ModifyLoadBalancerSlaResponse: ModifyLoadBalancerSlaResponse,
+    InquiryPriceCreateLoadBalancerRequest: InquiryPriceCreateLoadBalancerRequest,
     DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
+    InquiryPriceRenewLoadBalancerResponse: InquiryPriceRenewLoadBalancerResponse,
     DeregisterFunctionTargetsResponse: DeregisterFunctionTargetsResponse,
     DescribeCustomizedConfigListRequest: DescribeCustomizedConfigListRequest,
     AutoRewriteRequest: AutoRewriteRequest,
@@ -12202,7 +12796,7 @@ module.exports = {
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
-    TypeInfo: TypeInfo,
+    InquiryPriceModifyLoadBalancerResponse: InquiryPriceModifyLoadBalancerResponse,
     DescribeLBListenersRequest: DescribeLBListenersRequest,
     SlaUpdateParam: SlaUpdateParam,
     Target: Target,
@@ -12210,6 +12804,7 @@ module.exports = {
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
+    ModifyLoadBalancerSlaResponse: ModifyLoadBalancerSlaResponse,
     DescribeClsLogSetRequest: DescribeClsLogSetRequest,
     Listener: Listener,
     LoadBalancerTraffic: LoadBalancerTraffic,
@@ -12235,6 +12830,7 @@ module.exports = {
     DeregisterFunctionTargetsRequest: DeregisterFunctionTargetsRequest,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     FunctionTarget: FunctionTarget,
+    InquiryPriceRefundLoadBalancerResponse: InquiryPriceRefundLoadBalancerResponse,
     DescribeResourcesResponse: DescribeResourcesResponse,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     ManualRewriteResponse: ManualRewriteResponse,
@@ -12248,8 +12844,10 @@ module.exports = {
     LBChargePrepaid: LBChargePrepaid,
     ClassicalListener: ClassicalListener,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
+    ModifyLoadBalancersProjectRequest: ModifyLoadBalancersProjectRequest,
     CertificateInput: CertificateInput,
     ResourceAvailability: ResourceAvailability,
+    SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeCustomizedConfigAssociateListResponse: DescribeCustomizedConfigAssociateListResponse,
     SetCustomizedConfigForLoadBalancerRequest: SetCustomizedConfigForLoadBalancerRequest,
     CreateListenerResponse: CreateListenerResponse,
@@ -12268,6 +12866,7 @@ module.exports = {
     BatchDeregisterTargetsRequest: BatchDeregisterTargetsRequest,
     DeregisterTargetGroupInstancesRequest: DeregisterTargetGroupInstancesRequest,
     ManualRewriteRequest: ManualRewriteRequest,
+    InquiryPriceRefundLoadBalancerRequest: InquiryPriceRefundLoadBalancerRequest,
     ModifyListenerResponse: ModifyListenerResponse,
     DescribeTargetHealthResponse: DescribeTargetHealthResponse,
     CertInfo: CertInfo,
@@ -12276,6 +12875,7 @@ module.exports = {
     BindDetailItem: BindDetailItem,
     CreateListenerRequest: CreateListenerRequest,
     CreateClsLogSetRequest: CreateClsLogSetRequest,
+    TypeInfo: TypeInfo,
     DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
     Filter: Filter,
     ModifyDomainResponse: ModifyDomainResponse,
@@ -12288,6 +12888,7 @@ module.exports = {
     DeregisterTargetsResponse: DeregisterTargetsResponse,
     DescribeLoadBalancerOverviewRequest: DescribeLoadBalancerOverviewRequest,
     RewriteTarget: RewriteTarget,
+    ItemPrice: ItemPrice,
     ModifyTargetWeightRequest: ModifyTargetWeightRequest,
     DescribeLoadBalancersDetailResponse: DescribeLoadBalancersDetailResponse,
     LoadBalancerDetail: LoadBalancerDetail,
@@ -12305,14 +12906,16 @@ module.exports = {
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
-    InternetAccessible: InternetAccessible,
+    InquiryPriceCreateLoadBalancerResponse: InquiryPriceCreateLoadBalancerResponse,
     CreateLoadBalancerSnatIpsRequest: CreateLoadBalancerSnatIpsRequest,
     DescribeTargetGroupInstancesResponse: DescribeTargetGroupInstancesResponse,
     DescribeQuotaResponse: DescribeQuotaResponse,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
+    Price: Price,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
     BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
     ListenerBackend: ListenerBackend,
+    SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
     RuleInput: RuleInput,
     TagInfo: TagInfo,
     SnatIp: SnatIp,
@@ -12332,15 +12935,17 @@ module.exports = {
     DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeIdleLoadBalancersRequest: DescribeIdleLoadBalancersRequest,
     DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
-    SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
+    InternetAccessible: InternetAccessible,
     DescribeClassicalLBTargetsResponse: DescribeClassicalLBTargetsResponse,
     RewriteLocationMap: RewriteLocationMap,
     ModifyTargetPortRequest: ModifyTargetPortRequest,
+    ModifyLoadBalancersProjectResponse: ModifyLoadBalancersProjectResponse,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DescribeLBListenersResponse: DescribeLBListenersResponse,
     TargetGroupInfo: TargetGroupInfo,
     DeleteListenerResponse: DeleteListenerResponse,
     DeleteLoadBalancerSnatIpsResponse: DeleteLoadBalancerSnatIpsResponse,
+    InquiryPriceRenewLoadBalancerRequest: InquiryPriceRenewLoadBalancerRequest,
     CertificateOutput: CertificateOutput,
     DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
     DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,

@@ -47,7 +47,7 @@ const ListenerItem = models.ListenerItem;
 const RsWeightRule = models.RsWeightRule;
 const RegisterFunctionTargetsRequest = models.RegisterFunctionTargetsRequest;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
-const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
+const InquiryPriceModifyLoadBalancerRequest = models.InquiryPriceModifyLoadBalancerRequest;
 const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const ZoneResource = models.ZoneResource;
@@ -66,11 +66,12 @@ const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
-const ModifyLoadBalancerSlaResponse = models.ModifyLoadBalancerSlaResponse;
+const InquiryPriceCreateLoadBalancerRequest = models.InquiryPriceCreateLoadBalancerRequest;
 const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
+const InquiryPriceRenewLoadBalancerResponse = models.InquiryPriceRenewLoadBalancerResponse;
 const DeregisterFunctionTargetsResponse = models.DeregisterFunctionTargetsResponse;
 const DescribeCustomizedConfigListRequest = models.DescribeCustomizedConfigListRequest;
 const AutoRewriteRequest = models.AutoRewriteRequest;
@@ -83,7 +84,7 @@ const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
-const TypeInfo = models.TypeInfo;
+const InquiryPriceModifyLoadBalancerResponse = models.InquiryPriceModifyLoadBalancerResponse;
 const DescribeLBListenersRequest = models.DescribeLBListenersRequest;
 const SlaUpdateParam = models.SlaUpdateParam;
 const Target = models.Target;
@@ -91,6 +92,7 @@ const DescribeLoadBalancerTrafficRequest = models.DescribeLoadBalancerTrafficReq
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
+const ModifyLoadBalancerSlaResponse = models.ModifyLoadBalancerSlaResponse;
 const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
 const LoadBalancerTraffic = models.LoadBalancerTraffic;
@@ -116,6 +118,7 @@ const TargetGroupBackend = models.TargetGroupBackend;
 const DeregisterFunctionTargetsRequest = models.DeregisterFunctionTargetsRequest;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const FunctionTarget = models.FunctionTarget;
+const InquiryPriceRefundLoadBalancerResponse = models.InquiryPriceRefundLoadBalancerResponse;
 const DescribeResourcesResponse = models.DescribeResourcesResponse;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
@@ -129,8 +132,10 @@ const DescribeCrossTargetsRequest = models.DescribeCrossTargetsRequest;
 const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
+const ModifyLoadBalancersProjectRequest = models.ModifyLoadBalancersProjectRequest;
 const CertificateInput = models.CertificateInput;
 const ResourceAvailability = models.ResourceAvailability;
+const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeCustomizedConfigAssociateListResponse = models.DescribeCustomizedConfigAssociateListResponse;
 const SetCustomizedConfigForLoadBalancerRequest = models.SetCustomizedConfigForLoadBalancerRequest;
 const CreateListenerResponse = models.CreateListenerResponse;
@@ -149,6 +154,7 @@ const RuleTargets = models.RuleTargets;
 const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
 const DeregisterTargetGroupInstancesRequest = models.DeregisterTargetGroupInstancesRequest;
 const ManualRewriteRequest = models.ManualRewriteRequest;
+const InquiryPriceRefundLoadBalancerRequest = models.InquiryPriceRefundLoadBalancerRequest;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
 const CertInfo = models.CertInfo;
@@ -157,6 +163,7 @@ const ClusterItem = models.ClusterItem;
 const BindDetailItem = models.BindDetailItem;
 const CreateListenerRequest = models.CreateListenerRequest;
 const CreateClsLogSetRequest = models.CreateClsLogSetRequest;
+const TypeInfo = models.TypeInfo;
 const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
 const Filter = models.Filter;
 const ModifyDomainResponse = models.ModifyDomainResponse;
@@ -169,6 +176,7 @@ const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
 const DescribeLoadBalancerOverviewRequest = models.DescribeLoadBalancerOverviewRequest;
 const RewriteTarget = models.RewriteTarget;
+const ItemPrice = models.ItemPrice;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeLoadBalancersDetailResponse = models.DescribeLoadBalancersDetailResponse;
 const LoadBalancerDetail = models.LoadBalancerDetail;
@@ -186,14 +194,16 @@ const DescribeClsLogSetResponse = models.DescribeClsLogSetResponse;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
-const InternetAccessible = models.InternetAccessible;
+const InquiryPriceCreateLoadBalancerResponse = models.InquiryPriceCreateLoadBalancerResponse;
 const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
 const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstancesResponse;
 const DescribeQuotaResponse = models.DescribeQuotaResponse;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
+const Price = models.Price;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const ListenerBackend = models.ListenerBackend;
+const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
 const RuleInput = models.RuleInput;
 const TagInfo = models.TagInfo;
 const SnatIp = models.SnatIp;
@@ -213,15 +223,17 @@ const LBItem = models.LBItem;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeIdleLoadBalancersRequest = models.DescribeIdleLoadBalancersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
-const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
+const InternetAccessible = models.InternetAccessible;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
 const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
+const ModifyLoadBalancersProjectResponse = models.ModifyLoadBalancersProjectResponse;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const DescribeLBListenersResponse = models.DescribeLBListenersResponse;
 const TargetGroupInfo = models.TargetGroupInfo;
 const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
+const InquiryPriceRenewLoadBalancerRequest = models.InquiryPriceRenewLoadBalancerRequest;
 const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
@@ -254,6 +266,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     RegisterTargets(req, cb) {
         let resp = new RegisterTargetsResponse();
         this.request("RegisterTargets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind a real server with a classic CLB instance. This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
+     * @param {RegisterTargetsWithClassicalLBRequest} req
+     * @param {function(string, RegisterTargetsWithClassicalLBResponse):void} cb
+     * @public
+     */
+    RegisterTargetsWithClassicalLB(req, cb) {
+        let resp = new RegisterTargetsWithClassicalLBResponse();
+        this.request("RegisterTargetsWithClassicalLB", req, resp, cb);
     }
 
     /**
@@ -291,14 +314,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to bind a real server with a classic CLB instance. This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
-     * @param {RegisterTargetsWithClassicalLBRequest} req
-     * @param {function(string, RegisterTargetsWithClassicalLBResponse):void} cb
+     * This API is used to query the refund amount of returning a CLB instance. 
+     * @param {InquiryPriceRefundLoadBalancerRequest} req
+     * @param {function(string, InquiryPriceRefundLoadBalancerResponse):void} cb
      * @public
      */
-    RegisterTargetsWithClassicalLB(req, cb) {
-        let resp = new RegisterTargetsWithClassicalLBResponse();
-        this.request("RegisterTargetsWithClassicalLB", req, resp, cb);
+    InquiryPriceRefundLoadBalancer(req, cb) {
+        let resp = new InquiryPriceRefundLoadBalancerResponse();
+        this.request("InquiryPriceRefundLoadBalancer", req, resp, cb);
     }
 
     /**
@@ -357,6 +380,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     DeleteListener(req, cb) {
         let resp = new DeleteListenerResponse();
         this.request("DeleteListener", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price of adjusting the specification of a CLB instance.
+     * @param {InquiryPriceModifyLoadBalancerRequest} req
+     * @param {function(string, InquiryPriceModifyLoadBalancerResponse):void} cb
+     * @public
+     */
+    InquiryPriceModifyLoadBalancer(req, cb) {
+        let resp = new InquiryPriceModifyLoadBalancerResponse();
+        this.request("InquiryPriceModifyLoadBalancer", req, resp, cb);
     }
 
     /**
@@ -464,6 +498,17 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
+     * This API is used to query the price of renewing a CLB instance. It's only available to prepaid CLB instances.
+     * @param {InquiryPriceRenewLoadBalancerRequest} req
+     * @param {function(string, InquiryPriceRenewLoadBalancerResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewLoadBalancer(req, cb) {
+        let resp = new InquiryPriceRenewLoadBalancerResponse();
+        this.request("InquiryPriceRenewLoadBalancer", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the cloud functions associated with a load balancing forwarding rule.
      * @param {ModifyFunctionTargetsRequest} req
      * @param {function(string, ModifyFunctionTargetsResponse):void} cb
@@ -558,6 +603,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * This API is used to query the price of creating a CLB instance.
+     * @param {InquiryPriceCreateLoadBalancerRequest} req
+     * @param {function(string, InquiryPriceCreateLoadBalancerResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateLoadBalancer(req, cb) {
+        let resp = new InquiryPriceCreateLoadBalancerResponse();
+        this.request("InquiryPriceCreateLoadBalancer", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of AZs and resources supported for the user in the current region.
      * @param {DescribeResourcesRequest} req
      * @param {function(string, DescribeResourcesResponse):void} cb
@@ -627,6 +683,19 @@ This is an async API. After it is returned successfully, you can call the `Descr
     AssociateTargetGroups(req, cb) {
         let resp = new AssociateTargetGroupsResponse();
         this.request("AssociateTargetGroups", req, resp, cb);
+    }
+
+    /**
+     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
+During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
+During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -764,16 +833,14 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
-During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
-During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
-     * @param {SetLoadBalancerSecurityGroupsRequest} req
-     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * This API is used to modify the projects of CLB instances. 
+     * @param {ModifyLoadBalancersProjectRequest} req
+     * @param {function(string, ModifyLoadBalancersProjectResponse):void} cb
      * @public
      */
-    SetLoadBalancerSecurityGroups(req, cb) {
-        let resp = new SetLoadBalancerSecurityGroupsResponse();
-        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    ModifyLoadBalancersProject(req, cb) {
+        let resp = new ModifyLoadBalancersProjectResponse();
+        this.request("ModifyLoadBalancersProject", req, resp, cb);
     }
 
     /**

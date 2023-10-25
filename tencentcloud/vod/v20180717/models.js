@@ -1891,7 +1891,7 @@ class CloneCDNDomainRequest extends  AbstractModel {
         this.ReferenceDomain = null;
 
         /**
-         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * VOD[Subapplication](https://www.tencentcloud.com/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -4235,7 +4235,7 @@ class CreateCDNDomainRequest extends  AbstractModel {
         this.Config = null;
 
         /**
-         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * VOD[Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -9823,6 +9823,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
+ * ProcessMedia response structure.
+ * @class
+ */
+class ProcessMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15962,6 +15997,125 @@ For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
         this.Format = 'Format' in params ? params.Format : null;
         this.Content = 'Content' in params ? params.Content : null;
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * ProcessMedia request structure.
+ * @class
+ */
+class ProcessMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Parameter of video processing task.
+         * @type {MediaProcessTaskInput || null}
+         */
+        this.MediaProcessTask = null;
+
+        /**
+         * The information of the audio/video moderation task\*.
+This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.AiContentReviewTask = null;
+
+        /**
+         * Video content analysis task parameter.
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.AiAnalysisTask = null;
+
+        /**
+         * Type parameter of video content recognition task.
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.AiRecognitionTask = null;
+
+        /**
+         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+         * @type {string || null}
+         */
+        this.TasksNotifyMode = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Reserved field for special purposes.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.MediaProcessTask) {
+            let obj = new MediaProcessTaskInput();
+            obj.deserialize(params.MediaProcessTask)
+            this.MediaProcessTask = obj;
+        }
+
+        if (params.AiContentReviewTask) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.AiContentReviewTask)
+            this.AiContentReviewTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -40041,18 +40195,18 @@ class TerrorismConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Parameters for recognition of terrorism content in images
-Note: This field may return `null`, indicating that no valid value can be found.
-         * @type {TerrorismImgReviewTemplateInfo || null}
-         */
-        this.ImgReviewInfo = null;
-
-        /**
          * Parameters for OCR-based recognition of terrorism content
 Note: This field may return `null`, indicating that no valid value can be found.
          * @type {TerrorismOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
+
+        /**
+         * Parameters for recognition of terrorism content in images
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {TerrorismImgReviewTemplateInfo || null}
+         */
+        this.ImgReviewInfo = null;
 
     }
 
@@ -40064,16 +40218,16 @@ Note: This field may return `null`, indicating that no valid value can be found.
             return;
         }
 
-        if (params.ImgReviewInfo) {
-            let obj = new TerrorismImgReviewTemplateInfo();
-            obj.deserialize(params.ImgReviewInfo)
-            this.ImgReviewInfo = obj;
-        }
-
         if (params.OcrReviewInfo) {
             let obj = new TerrorismOcrReviewTemplateInfo();
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
+        }
+
+        if (params.ImgReviewInfo) {
+            let obj = new TerrorismImgReviewTemplateInfo();
+            obj.deserialize(params.ImgReviewInfo)
+            this.ImgReviewInfo = obj;
         }
 
     }
@@ -41829,6 +41983,7 @@ module.exports = {
     SuperResolutionInfo: SuperResolutionInfo,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
+    ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
@@ -41934,6 +42089,7 @@ module.exports = {
     ReviewImageSegmentItem: ReviewImageSegmentItem,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
+    ProcessMediaRequest: ProcessMediaRequest,
     DeleteCDNDomainResponse: DeleteCDNDomainResponse,
     PornImageResult: PornImageResult,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,

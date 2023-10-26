@@ -166,6 +166,48 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * DescribeBillSummaryForOrganization request structure.
+ * @class
+ */
+class DescribeBillSummaryForOrganizationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bill month in the format of "yyyy-mm".
+         * @type {string || null}
+         */
+        this.Month = null;
+
+        /**
+         * Bill dimension. Valid values: `business`, `project`, `region`, `payMode`, and `tag`.
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * Tag key. Pass in it when `GroupType` is `tag`.
+         * @type {Array.<string> || null}
+         */
+        this.TagKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Month = 'Month' in params ? params.Month : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByTag response structure.
  * @class
  */
@@ -225,6 +267,43 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.SummaryTotal = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Bill details configuration descriptions
+ * @class
+ */
+class BillDetailComponentConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration description name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Configuration description value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -326,6 +405,42 @@ Note: This field may return null, indicating that no valid value was found.
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Total cost
+ * @class
+ */
+class SummaryTotal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total amount after discount. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -781,6 +896,49 @@ class BillTagInfo extends  AbstractModel {
 }
 
 /**
+ * Tag information.
+ * @class
+ */
+class TagDataInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cost allocation tag key.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag type. Valid values: `0` (general tags), `1` (cost allocation tags).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Time to set the cost allocation tag. It will not be returned if `Status` is `0`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByRegion response structure.
  * @class
  */
@@ -825,6 +983,34 @@ Note: This field may return null, indicating that no valid value was found.
                 obj.deserialize(params.SummaryOverview[z]);
                 this.SummaryOverview.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAllocationTag response structure.
+ * @class
+ */
+class CreateAllocationTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1105,6 +1291,135 @@ Note: To query the product codes used in the current month, call <a href="https:
 }
 
 /**
+ * DescribeBillResourceSummaryForOrganization request structure.
+ * @class
+ */
+class DescribeBillResourceSummaryForOrganizationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of entries returned at a time. The maximum value is `1000`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Bill month in the format of "yyyy-mm". This value must be no earlier than the month when Bill 2.0 is activated.
+         * @type {string || null}
+         */
+        this.Month = null;
+
+        /**
+         * Cycle type, which can be `byUsedTime` (by billing cycle) or `byPayTime` (by deduction time). This value must be the same as the billing period type in Billing Center for that particular month. You can check your billing cycle at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+         * @type {string || null}
+         */
+        this.PeriodType = null;
+
+        /**
+         * Indicates whether the total number of records is required, used for pagination.
+Valid values: `1` (required), `0` (not required).
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
+        /**
+         * Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
+Monthly subscription purchase
+Monthly subscription renewal
+Monthly subscription upgrade/downgrade
+Monthly subscription refund 
+Pay-as-you-go deduction 
+Offline project deduction 
+Offline product deduction 
+Adjustment deduction 
+Adjustment compensation 
+Hourly pay-as-you-go 
+Daily pay-as-you-go 
+Monthly pay-as-you-go 
+Hourly spot instance 
+Offline project adjustment compensation 
+Offline product adjustment compensation 
+Offer deduction 
+Offer compensation 
+Pay-as-you-go resource migration in 
+Pay-as-you-go resource migration out 
+Monthly subscription resource migration in 
+Monthly subscription resource migration out 
+Prepaid 
+Hourly 
+RI refund 
+Pay-as-you-go reversal 
+Monthly subscription to pay-as-you-go 
+Minimum spend deduction 
+Hourly savings plan fee
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * ID of the instance to be queried.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Billing mode. Valid values: `prePay`, `postPay`.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Product code
+Note: To query the product codes (`BusinessCode`) used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Cost allocation tag key, which can be customized. This parameter can be used for querying bills after January 2021.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Resource tag value. If it is left empty, there are no records with tag values set under this tag key.
+This parameter can be used for querying bills after January 2021.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeVoucherInfo response structure.
  * @class
  */
@@ -1156,6 +1471,34 @@ Note: This field may return `null`, indicating that no valid value was found.
                 obj.deserialize(params.VoucherInfos[z]);
                 this.VoucherInfos.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAllocationTag response structure.
+ * @class
+ */
+class DeleteAllocationTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1374,72 +1717,102 @@ class DescribeAccountBalanceResponse extends  AbstractModel {
 }
 
 /**
- * Summarize product details by product
+ * DescribeVoucherInfo request structure.
  * @class
  */
-class BusinessSummaryOverviewItem extends  AbstractModel {
+class DescribeVoucherInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Product code. Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * The number of records per page. The default is 20, and the maximum is 1,000.
+         * @type {number || null}
          */
-        this.BusinessCode = null;
+        this.Limit = null;
 
         /**
-         * Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
-         * @type {string || null}
+         * The page number the records start from. The default is 1.
+         * @type {number || null}
          */
-        this.BusinessCodeName = null;
+        this.Offset = null;
 
         /**
-         * Cost ratio, to two decimal points
+         * The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
          * @type {string || null}
          */
-        this.RealTotalCostRatio = null;
+        this.Status = null;
 
         /**
-         * Total amount after discount
+         * The voucher ID.
          * @type {string || null}
          */
-        this.RealTotalCost = null;
+        this.VoucherId = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash account
+         * The voucher order ID.
          * @type {string || null}
          */
-        this.CashPayAmount = null;
+        this.CodeId = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
+         * The product code.
          * @type {string || null}
          */
-        this.IncentivePayAmount = null;
+        this.ProductCode = null;
 
         /**
-         * Voucher payment: The voucher deduction amount
+         * The campaign ID.
          * @type {string || null}
          */
-        this.VoucherPayAmount = null;
+        this.ActivityId = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit.
+         * The voucher name.
          * @type {string || null}
          */
-        this.TransferPayAmount = null;
+        this.VoucherName = null;
 
         /**
-         * Billing month, e.g. `2019-08`
+         * The start date of the voucher issuance, such as `2021-01-01`.
          * @type {string || null}
          */
-        this.BillMonth = null;
+        this.TimeFrom = null;
 
         /**
-         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * The end date of the voucher issuance, such as `2021-01-01`.
          * @type {string || null}
          */
-        this.TotalCost = null;
+        this.TimeTo = null;
+
+        /**
+         * The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
+         * @type {string || null}
+         */
+        this.SortField = null;
+
+        /**
+         * Whether to sort the records in ascending or descending order. Valid values: desc, asc.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+         * @type {string || null}
+         */
+        this.PayScene = null;
+
+        /**
+         * The operator. The default is the UIN of the current user.
+         * @type {string || null}
+         */
+        this.Operator = null;
 
     }
 
@@ -1450,16 +1823,80 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
-        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.CodeId = 'CodeId' in params ? params.CodeId : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.VoucherName = 'VoucherName' in params ? params.VoucherName : null;
+        this.TimeFrom = 'TimeFrom' in params ? params.TimeFrom : null;
+        this.TimeTo = 'TimeTo' in params ? params.TimeTo : null;
+        this.SortField = 'SortField' in params ? params.SortField : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayScene = 'PayScene' in params ? params.PayScene : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * DescribeBillDetailForOrganization response structure.
+ * @class
+ */
+class DescribeBillDetailForOrganizationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Details list.
+         * @type {Array.<DistributionBillDetail> || null}
+         */
+        this.DetailSet = null;
+
+        /**
+         * Total number of records, which is cached every 24 hours and may be less than the actual total number of records.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Context information of the current request, which can be used in the parameters of the next request to speed up the query.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetailSet) {
+            this.DetailSet = new Array();
+            for (let z in params.DetailSet) {
+                let obj = new DistributionBillDetail();
+                obj.deserialize(params.DetailSet[z]);
+                this.DetailSet.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1646,6 +2083,13 @@ class BillDetailComponent extends  AbstractModel {
          */
         this.BlendedDiscount = null;
 
+        /**
+         * Configuration description: The specification configuration of an instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BillDetailComponentConfig> || null}
+         */
+        this.ComponentConfig = null;
+
     }
 
     /**
@@ -1685,34 +2129,50 @@ class BillDetailComponent extends  AbstractModel {
         this.OriginalCostWithSP = 'OriginalCostWithSP' in params ? params.OriginalCostWithSP : null;
         this.BlendedDiscount = 'BlendedDiscount' in params ? params.BlendedDiscount : null;
 
+        if (params.ComponentConfig) {
+            this.ComponentConfig = new Array();
+            for (let z in params.ComponentConfig) {
+                let obj = new BillDetailComponentConfig();
+                obj.deserialize(params.ComponentConfig[z]);
+                this.ComponentConfig.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * DescribeBillSummaryByRegion request structure.
+ * DescribeBillDownloadUrl request structure.
  * @class
  */
-class DescribeBillSummaryByRegionRequest extends  AbstractModel {
+class DescribeBillDownloadUrlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+         * Bill type. Valid values:
+`billOverview` (L0: PDF bills)
+`billSummary` (L1: Bill summary)	
+`billResource` (L2: Bill by instance)	
+`billDetail` (L3: Bill details)	
+`billPack` (Bill packs)
          * @type {string || null}
          */
-        this.BeginTime = null;
+        this.FileType = null;
 
         /**
-         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+         * Bill month.
+The earliest month that can be queried is January 2021.
+L0 bills and bill packs cannot be downloaded for the current month. Please download the current month's bills after it is generated at 19:00 on the 1st day of the next month.
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.Month = null;
 
         /**
-         * Queries bill data user's UIN
-         * @type {string || null}
+         * List of account IDs for downloading the bill. By default, it queries the bill for the current account. If you are an admin account and need to download bills for member accounts with their own payment, input the member account's UIN for this parameter.
+         * @type {Array.<string> || null}
          */
-        this.PayerUin = null;
+        this.ChildUin = null;
 
     }
 
@@ -1723,9 +2183,9 @@ class DescribeBillSummaryByRegionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.ChildUin = 'ChildUin' in params ? params.ChildUin : null;
 
     }
 }
@@ -2050,102 +2510,120 @@ class ActionSummaryOverviewItem extends  AbstractModel {
 }
 
 /**
- * DescribeVoucherInfo request structure.
+ * DescribeBillDetailForOrganization request structure.
  * @class
  */
-class DescribeVoucherInfoRequest extends  AbstractModel {
+class DescribeBillDetailForOrganizationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of records per page. The default is 20, and the maximum is 1,000.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * The page number the records start from. The default is 1.
+         * Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
-         * @type {string || null}
+         * The number of entries returned at a time. The maximum value is `100`.
+         * @type {number || null}
          */
-        this.Status = null;
+        this.Limit = null;
 
         /**
-         * The voucher ID.
+         * Cycle type, which can be `byUsedTime` (by billing cycle) or `byPayTime` (by deduction time). This value must be the same as the billing period type in Billing Center for that particular month. You can check your billing cycle at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
          * @type {string || null}
          */
-        this.VoucherId = null;
+        this.PeriodType = null;
 
         /**
-         * The voucher order ID.
+         * Bill month in the format of "yyyy-mm". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
          * @type {string || null}
          */
-        this.CodeId = null;
+        this.Month = null;
 
         /**
-         * The product code.
+         * Start time of the cycle in the format of "yyyy-mm-dd hh:ii:ss". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. `BeginTime` and `EndTime` must be passed together, and their values must be of the same month. Query period must start and end on the same month, andthe query result returned will be of the entire month. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
          * @type {string || null}
          */
-        this.ProductCode = null;
+        this.BeginTime = null;
 
         /**
-         * The campaign ID.
+         * End time of the cycle in the format of "yyyy-mm-dd hh:ii:ss". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. `BeginTime` and `EndTime` must be passed together, and their values must be of the same month. Query period must start and end on the same month, andthe query result returned will be of the entire month. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
          * @type {string || null}
          */
-        this.ActivityId = null;
+        this.EndTime = null;
 
         /**
-         * The voucher name.
-         * @type {string || null}
+         * Indicates whether the total number of records is required, used for pagination.
+Valid values: `1` (required), `0` (not required).
+         * @type {number || null}
          */
-        this.VoucherName = null;
+        this.NeedRecordNum = null;
 
         /**
-         * The start date of the voucher issuance, such as `2021-01-01`.
-         * @type {string || null}
-         */
-        this.TimeFrom = null;
-
-        /**
-         * The end date of the voucher issuance, such as `2021-01-01`.
-         * @type {string || null}
-         */
-        this.TimeTo = null;
-
-        /**
-         * The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
-         * @type {string || null}
-         */
-        this.SortField = null;
-
-        /**
-         * Whether to sort the records in ascending or descending order. Valid values: desc, asc.
-         * @type {string || null}
-         */
-        this.SortOrder = null;
-
-        /**
-         * The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+         * Billing mode, which can be `prePay` (monthly subscription) or `postPay` (pay-as-you-go).
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
-         * If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+         * ID of the instance to be queried.
          * @type {string || null}
          */
-        this.PayScene = null;
+        this.ResourceId = null;
 
         /**
-         * The operator. The default is the UIN of the current user.
+         * Transaction type. This parameter needs to be input using the `ActionTypeName` value. Valid values:
+Monthly subscription purchase
+Monthly subscription renewal
+Monthly subscription upgrade/downgrade
+Monthly subscription refund 
+Pay-as-you-go deduction 
+Offline project deduction 
+Offline product deduction 
+Adjustment deduction 
+Adjustment compensation 
+Hourly pay-as-you-go 
+Daily pay-as-you-go 
+Monthly pay-as-you-go 
+Hourly spot instance 
+Offline project adjustment compensation 
+Offline product adjustment compensation 
+Offer deduction 
+Offer compensation 
+Pay-as-you-go resource migration in 
+Pay-as-you-go resource migration out 
+Monthly subscription resource migration in 
+Monthly subscription resource migration out 
+Prepaid 
+Hourly 
+RI refund 
+Pay-as-you-go reversal 
+Monthly subscription to pay-as-you-go 
+Minimum spend deduction 
+Hourly savings plan fee
          * @type {string || null}
          */
-        this.Operator = null;
+        this.ActionType = null;
+
+        /**
+         * Project ID: The ID of the project to which the resource belongs.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Product code.
+Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Context information returned by the last response. You can view multiple pages when querying for data after May 2023 to speed up the query. We recommend you use this query method if your data volume is above 100 thousand entries, which can improve query speed by 2-10 times.
+         * @type {string || null}
+         */
+        this.Context = null;
 
     }
 
@@ -2156,21 +2634,19 @@ class DescribeVoucherInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
-        this.CodeId = 'CodeId' in params ? params.CodeId : null;
-        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
-        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
-        this.VoucherName = 'VoucherName' in params ? params.VoucherName : null;
-        this.TimeFrom = 'TimeFrom' in params ? params.TimeFrom : null;
-        this.TimeTo = 'TimeTo' in params ? params.TimeTo : null;
-        this.SortField = 'SortField' in params ? params.SortField : null;
-        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.PayScene = 'PayScene' in params ? params.PayScene : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.Context = 'Context' in params ? params.Context : null;
 
     }
 }
@@ -2206,6 +2682,246 @@ class ApplicableProducts extends  AbstractModel {
         }
         this.GoodsName = 'GoodsName' in params ? params.GoodsName : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+    }
+}
+
+/**
+ * Objects of reseller bill details
+ * @class
+ */
+class DistributionBillDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM - Standard S1.
+         * @type {string || null}
+         */
+        this.ProductCodeName = null;
+
+        /**
+         * Billing mode: The billing mode, which can be monthly subscription or pay-as-you-go.
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * Project Name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Region: The region of a resource, e.g. South China (Guangzhou).
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Availability zone: availability zone of a resource, e.g. Guangzhou Zone 3.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Instance ID: The object ID of a billed resource, such as a CVM instance ID. This object ID may vary due to various forms and contents of resources in different products.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Instance name: The resource name set by the user in the console. If it is not set, it will be empty by default.
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, pay-as-you-go deduction, etc.
+         * @type {string || null}
+         */
+        this.ActionTypeName = null;
+
+        /**
+         * Order ID: The ID of a monthly subscription order.
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * Transaction ID: The ID of a settlement bill.
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * Deduction time: The settlement cost deduction time.
+         * @type {string || null}
+         */
+        this.PayTime = null;
+
+        /**
+         * Usage start time: The time at which product or service usage starts.
+         * @type {string || null}
+         */
+        this.FeeBeginTime = null;
+
+        /**
+         * Usage end time: The time at which product or service usage ends.
+         * @type {string || null}
+         */
+        this.FeeEndTime = null;
+
+        /**
+         * List of components.
+         * @type {Array.<BillDetailComponent> || null}
+         */
+        this.ComponentSet = null;
+
+        /**
+         * Owner account ID: The account ID of the actual resource user.
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * Operator account ID: The account or role ID of the operator who purchases or activates a resource.
+         * @type {string || null}
+         */
+        this.OperateUin = null;
+
+        /**
+         * Tag information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BillTagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Product code.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Subproduct code.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * Transaction type code.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * Region ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Price attribute: A set of attributes which will determine the price of a component, apart from unit price and usage duration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PriceInfo = null;
+
+        /**
+         * Associated transaction document ID: The ID of the document associated with a transaction, such as a write-off order, the original order showing a deduction error during first settlement, a restructured order, or the original purchase order corresponding to a refund order.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {BillDetailAssociatedOrder || null}
+         */
+        this.AssociatedOrder = null;
+
+        /**
+         * Calculation formula: The detailed calculation formula for a specific transaction type, such as refund or configuration change.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Formula = null;
+
+        /**
+         * Billing rules: Official website links for detailed billing rules of each product.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FormulaUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.ProductCodeName = 'ProductCodeName' in params ? params.ProductCodeName : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.PayTime = 'PayTime' in params ? params.PayTime : null;
+        this.FeeBeginTime = 'FeeBeginTime' in params ? params.FeeBeginTime : null;
+        this.FeeEndTime = 'FeeEndTime' in params ? params.FeeEndTime : null;
+
+        if (params.ComponentSet) {
+            this.ComponentSet = new Array();
+            for (let z in params.ComponentSet) {
+                let obj = new BillDetailComponent();
+                obj.deserialize(params.ComponentSet[z]);
+                this.ComponentSet.push(obj);
+            }
+        }
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new BillTagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.PriceInfo = 'PriceInfo' in params ? params.PriceInfo : null;
+
+        if (params.AssociatedOrder) {
+            let obj = new BillDetailAssociatedOrder();
+            obj.deserialize(params.AssociatedOrder)
+            this.AssociatedOrder = obj;
+        }
+        this.Formula = 'Formula' in params ? params.Formula : null;
+        this.FormulaUrl = 'FormulaUrl' in params ? params.FormulaUrl : null;
 
     }
 }
@@ -2432,6 +3148,19 @@ Note: To query the product codes used in the current month, call <a href="https:
          */
         this.PayerUin = null;
 
+        /**
+         * Cost allocation tag key, which can be customized. This parameter can be used for querying bills after January 2021.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Resource tag value. If it is left empty, there are no records with tag values set under this tag key.
+This parameter can be used for querying bills after January 2021.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
     }
 
     /**
@@ -2451,6 +3180,127 @@ Note: To query the product codes used in the current month, call <a href="https:
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DeleteAllocationTag request structure.
+ * @class
+ */
+class DeleteAllocationTagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cost allocation tag key
+         * @type {Array.<string> || null}
+         */
+        this.TagKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+
+    }
+}
+
+/**
+ * Summarize product details by product
+ * @class
+ */
+class BusinessSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product code. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * Cost ratio, to two decimal points
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * Total amount after discount
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Cash credit: The amount paid from the user’s cash account
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Free credit: The amount paid with the user’s free credit
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Voucher payment: The voucher deduction amount
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Commission credit: The amount paid with the user’s commission credit.
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
+        /**
+         * Billing month, e.g. `2019-08`
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -2510,25 +3360,236 @@ Valid values:
 }
 
 /**
- * Total cost
+ * Summary objects for a reseller bill
  * @class
  */
-class SummaryTotal extends  AbstractModel {
+class BillDistributionResourceSummary extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total amount after discount. Note: This field may return null, indicating that no valid values can be obtained.
+         * Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM - Standard S1.
+         * @type {string || null}
+         */
+        this.ProductCodeName = null;
+
+        /**
+         * Billing mode: The billing mode, which can be monthly subscription or pay-as-you-go.
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * Project Name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Region: The region of a resource, e.g. South China (Guangzhou).
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Availability zone: The availability zone of a resource, e.g. Guangzhou Zone 3.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Instance ID: The object ID of a billed resource, such as a CVM instance ID. This object ID may vary due to various forms and contents of resources in different products.	
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Instance name: The resource name set by the user in the console. If it is not set, it will be empty by default.
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * Transaction type, which can be monthly subscription purchase, monthly subscription renewal, pay-as-you-go deduction, etc.
+         * @type {string || null}
+         */
+        this.ActionTypeName = null;
+
+        /**
+         * Order ID: The ID of a monthly subscription order.
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * Deduction time: The settlement cost deduction time.
+         * @type {string || null}
+         */
+        this.PayTime = null;
+
+        /**
+         * Usage start time: The time at which product or service usage starts.
+         * @type {string || null}
+         */
+        this.FeeBeginTime = null;
+
+        /**
+         * Usage end time: The time at which product or service usage ends.
+         * @type {string || null}
+         */
+        this.FeeEndTime = null;
+
+        /**
+         * Configuration description: The billable item names and usage of a resource, which are displayed on the resource bill only.
+         * @type {string || null}
+         */
+        this.ConfigDesc = null;
+
+        /**
+         * Extended Field 1: The extended attribute information of a product, which is displayed on the resource bill only.
+         * @type {string || null}
+         */
+        this.ExtendField1 = null;
+
+        /**
+         * Extended field 2: The extended attribute information of a product, which is displayed on the resource bill only.
+         * @type {string || null}
+         */
+        this.ExtendField2 = null;
+
+        /**
+         * Original cost. The original cost of a component = Component price x Usage x Usage duration. If a customer has applied for a fixed preferential price or contract price or if a customer is in a refund scenario, this parameter will not be displayed by default.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * Discount multiplier: The discount multiplier that applies to the component. If a customer has applied for a fixed preferential price or contract price or if a customer is in a refund scenario, this parameter will not be displayed by default.
+         * @type {string || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Offer type.
+         * @type {string || null}
+         */
+        this.ReduceType = null;
+
+        /**
+         * Total amount after discount.
          * @type {string || null}
          */
         this.RealTotalCost = null;
 
         /**
-         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Voucher payment: The voucher deduction amount.
          * @type {string || null}
          */
-        this.TotalCost = null;
+        this.VoucherPayAmount = null;
+
+        /**
+         * Cash credit payment: The amount paid through the user's cash account.
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Free credit payment: The amount paid with the user's free credit.
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Commission credit payment: The amount paid with the user's commission credit.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
+        /**
+         * Extended field 3: The extended attribute information of a product, which is displayed on the resource bill only.
+         * @type {string || null}
+         */
+        this.ExtendField3 = null;
+
+        /**
+         * Extended field 4: The extended attribute information of a product, which is displayed on the resource bill only.
+         * @type {string || null}
+         */
+        this.ExtendField4 = null;
+
+        /**
+         * Extended field 5: The extended attribute information of a product, which is displayed on the resource bill only.
+         * @type {string || null}
+         */
+        this.ExtendField5 = null;
+
+        /**
+         * Tag information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BillTagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Owner account ID: The account ID of the actual resource user.
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * Operator account ID: The account or role ID of the operator who purchases or activates a resource.
+         * @type {string || null}
+         */
+        this.OperateUin = null;
+
+        /**
+         * Product code.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Subproduct code.
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * Region ID.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Instance type: The instance type of a product or service purchased, which can be resource package, RI, SP, or spot instance. Other instance types are not displayed by default.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * RI deduction (cost): The amount deducted from the original cost by RI.	
+         * @type {string || null}
+         */
+        this.OriginalCostWithRI = null;
+
+        /**
+         * Savings plan deduction (disused).
+         * @type {string || null}
+         */
+        this.SPDeduction = null;
+
+        /**
+         * SP deduction (cost): The amount of cost deducted by a savings plan based on the component's original cost. SP deduction (cost) = Cost deduction by SP / SP deduction rate	
+         * @type {string || null}
+         */
+        this.OriginalCostWithSP = null;
 
     }
 
@@ -2539,8 +3600,120 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.ProductCodeName = 'ProductCodeName' in params ? params.ProductCodeName : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.PayTime = 'PayTime' in params ? params.PayTime : null;
+        this.FeeBeginTime = 'FeeBeginTime' in params ? params.FeeBeginTime : null;
+        this.FeeEndTime = 'FeeEndTime' in params ? params.FeeEndTime : null;
+        this.ConfigDesc = 'ConfigDesc' in params ? params.ConfigDesc : null;
+        this.ExtendField1 = 'ExtendField1' in params ? params.ExtendField1 : null;
+        this.ExtendField2 = 'ExtendField2' in params ? params.ExtendField2 : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.ReduceType = 'ReduceType' in params ? params.ReduceType : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
+        this.ExtendField3 = 'ExtendField3' in params ? params.ExtendField3 : null;
+        this.ExtendField4 = 'ExtendField4' in params ? params.ExtendField4 : null;
+        this.ExtendField5 = 'ExtendField5' in params ? params.ExtendField5 : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new BillTagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.OriginalCostWithRI = 'OriginalCostWithRI' in params ? params.OriginalCostWithRI : null;
+        this.SPDeduction = 'SPDeduction' in params ? params.SPDeduction : null;
+        this.OriginalCostWithSP = 'OriginalCostWithSP' in params ? params.OriginalCostWithSP : null;
+
+    }
+}
+
+/**
+ * Information of the document associated with bill details
+ * @class
+ */
+class BillDetailAssociatedOrder extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Purchase order.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrepayPurchase = null;
+
+        /**
+         * Renewal order.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrepayRenew = null;
+
+        /**
+         * Upgrade order.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrepayModifyUp = null;
+
+        /**
+         * Write-off order.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReverseOrder = null;
+
+        /**
+         * The order after discount.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NewOrder = null;
+
+        /**
+         * The original order before discount.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Original = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PrepayPurchase = 'PrepayPurchase' in params ? params.PrepayPurchase : null;
+        this.PrepayRenew = 'PrepayRenew' in params ? params.PrepayRenew : null;
+        this.PrepayModifyUp = 'PrepayModifyUp' in params ? params.PrepayModifyUp : null;
+        this.ReverseOrder = 'ReverseOrder' in params ? params.ReverseOrder : null;
+        this.NewOrder = 'NewOrder' in params ? params.NewOrder : null;
+        this.Original = 'Original' in params ? params.Original : null;
 
     }
 }
@@ -2698,11 +3871,32 @@ class BillDetail extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Price attribute
+         * Price attribute: A set of attributes which will determine the price of a component, apart from unit price and usage duration.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.PriceInfo = null;
+
+        /**
+         * Associated transaction document ID: The ID of the document associated with a transaction, such as a write-off order, the original order showing a deduction error during first settlement, a restructured order, or the original purchase order corresponding to a refund order.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {BillDetailAssociatedOrder || null}
+         */
+        this.AssociatedOrder = null;
+
+        /**
+         * Calculation formula: The detailed calculation formula for a specific transaction type, such as refund or configuration change.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Formula = null;
+
+        /**
+         * Billing rules: Official website links for detailed billing rules of each product.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FormulaUrl = null;
 
     }
 
@@ -2754,6 +3948,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.PriceInfo = 'PriceInfo' in params ? params.PriceInfo : null;
+
+        if (params.AssociatedOrder) {
+            let obj = new BillDetailAssociatedOrder();
+            obj.deserialize(params.AssociatedOrder)
+            this.AssociatedOrder = obj;
+        }
+        this.Formula = 'Formula' in params ? params.Formula : null;
+        this.FormulaUrl = 'FormulaUrl' in params ? params.FormulaUrl : null;
 
     }
 }
@@ -3066,6 +4268,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeBillSummaryForOrganization response structure.
+ * @class
+ */
+class DescribeBillSummaryForOrganizationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Indicates whether the data is ready. Valid values: `0` (not ready), `1` (ready). If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * Bills summarized by multiple dimensions.
+         * @type {Array.<SummaryDetail> || null}
+         */
+        this.SummaryDetail = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.SummaryDetail) {
+            this.SummaryDetail = new Array();
+            for (let z in params.SummaryDetail) {
+                let obj = new SummaryDetail();
+                obj.deserialize(params.SummaryDetail[z]);
+                this.SummaryDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeVoucherUsageDetails response structure.
  * @class
  */
@@ -3116,6 +4368,98 @@ Note: This field may return `null`, indicating that no valid value was found.
                 let obj = new UsageRecords();
                 obj.deserialize(params.UsageRecords[z]);
                 this.UsageRecords.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByRegion request structure.
+ * @class
+ */
+class DescribeBillSummaryByRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Queries bill data user's UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+
+    }
+}
+
+/**
+ * DescribeTagList response structure.
+ * @class
+ */
+class DescribeTagListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of records.
+         * @type {number || null}
+         */
+        this.RecordNum = null;
+
+        /**
+         * Tag information.
+         * @type {Array.<TagDataInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new TagDataInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -3194,6 +4538,62 @@ class CosDetailSets extends  AbstractModel {
 }
 
 /**
+ * DescribeTagList request structure.
+ * @class
+ */
+class DescribeTagListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The number of entries returned at a time. The maximum value is `1000`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Cost allocation tag key, used for fuzzy search.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag type, used for tag filtering. Valid values: `0` (general tags), `1` (cost allocation tags). If it is not specified, all tag keys will be queried.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending order), `desc` (descending order).
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByProject response structure.
  * @class
  */
@@ -3240,6 +4640,128 @@ Note: This field may return null, indicating that no valid value was found.
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBillDownloadUrl response structure.
+ * @class
+ */
+class DescribeBillDownloadUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Indicates whether the bill file is ready. Valid values: `0` (the file is being generated), `1` (the file has been generated).
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * Bill download URL, valid for one hour.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBillResourceSummaryForOrganization response structure.
+ * @class
+ */
+class DescribeBillResourceSummaryForOrganizationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource summary list.
+         * @type {Array.<BillDistributionResourceSummary> || null}
+         */
+        this.ResourceSummarySet = null;
+
+        /**
+         * Total number of resource summary lists. It will not be returned if `NeedRecordNum` is `0`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResourceSummarySet) {
+            this.ResourceSummarySet = new Array();
+            for (let z in params.ResourceSummarySet) {
+                let obj = new BillDistributionResourceSummary();
+                obj.deserialize(params.ResourceSummarySet[z]);
+                this.ResourceSummarySet.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAllocationTag request structure.
+ * @class
+ */
+class CreateAllocationTagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cost allocation tag key.
+         * @type {Array.<string> || null}
+         */
+        this.TagKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
 
     }
 }
@@ -3445,45 +4967,64 @@ class BusinessSummaryTotal extends  AbstractModel {
 module.exports = {
     VoucherInfos: VoucherInfos,
     UsageDetails: UsageDetails,
+    DescribeBillSummaryForOrganizationRequest: DescribeBillSummaryForOrganizationRequest,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
+    BillDetailComponentConfig: BillDetailComponentConfig,
     DescribeBillSummaryResponse: DescribeBillSummaryResponse,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
+    SummaryTotal: SummaryTotal,
     BillResourceSummary: BillResourceSummary,
     DescribeBillSummaryByTagRequest: DescribeBillSummaryByTagRequest,
     DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
     BillTagInfo: BillTagInfo,
+    TagDataInfo: TagDataInfo,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
+    CreateAllocationTagResponse: CreateAllocationTagResponse,
     RegionSummaryOverviewItem: RegionSummaryOverviewItem,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
+    DescribeBillResourceSummaryForOrganizationRequest: DescribeBillResourceSummaryForOrganizationRequest,
     DescribeVoucherInfoResponse: DescribeVoucherInfoResponse,
+    DeleteAllocationTagResponse: DeleteAllocationTagResponse,
     SummaryDetail: SummaryDetail,
     DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
-    BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
+    DescribeVoucherInfoRequest: DescribeVoucherInfoRequest,
+    DescribeBillDetailForOrganizationResponse: DescribeBillDetailForOrganizationResponse,
     BillDetailComponent: BillDetailComponent,
-    DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
+    DescribeBillDownloadUrlRequest: DescribeBillDownloadUrlRequest,
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
     UsageRecords: UsageRecords,
     DescribeDosageCosDetailByDateResponse: DescribeDosageCosDetailByDateResponse,
     DescribeBillSummaryRequest: DescribeBillSummaryRequest,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
-    DescribeVoucherInfoRequest: DescribeVoucherInfoRequest,
+    DescribeBillDetailForOrganizationRequest: DescribeBillDetailForOrganizationRequest,
     ApplicableProducts: ApplicableProducts,
+    DistributionBillDetail: DistributionBillDetail,
     DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
     DescribeVoucherUsageDetailsRequest: DescribeVoucherUsageDetailsRequest,
     DescribeDosageCosDetailByDateRequest: DescribeDosageCosDetailByDateRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
+    DeleteAllocationTagRequest: DeleteAllocationTagRequest,
+    BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
-    SummaryTotal: SummaryTotal,
+    BillDistributionResourceSummary: BillDistributionResourceSummary,
+    BillDetailAssociatedOrder: BillDetailAssociatedOrder,
     BillDetail: BillDetail,
     BusinessSummaryInfo: BusinessSummaryInfo,
     TagSummaryOverviewItem: TagSummaryOverviewItem,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
+    DescribeBillSummaryForOrganizationResponse: DescribeBillSummaryForOrganizationResponse,
     DescribeVoucherUsageDetailsResponse: DescribeVoucherUsageDetailsResponse,
+    DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
+    DescribeTagListResponse: DescribeTagListResponse,
     CosDetailSets: CosDetailSets,
+    DescribeTagListRequest: DescribeTagListRequest,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
+    DescribeBillDownloadUrlResponse: DescribeBillDownloadUrlResponse,
+    DescribeBillResourceSummaryForOrganizationResponse: DescribeBillResourceSummaryForOrganizationResponse,
+    CreateAllocationTagRequest: CreateAllocationTagRequest,
     ExcludedProducts: ExcludedProducts,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     BusinessSummaryTotal: BusinessSummaryTotal,

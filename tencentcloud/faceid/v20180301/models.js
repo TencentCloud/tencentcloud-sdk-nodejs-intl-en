@@ -204,6 +204,34 @@ class GetSdkVerificationResultResponse extends  AbstractModel {
 }
 
 /**
+ * GetSdkVerificationResult request structure.
+ * @class
+ */
+class GetSdkVerificationResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token used to identify an SDK-based verification process.
+         * @type {string || null}
+         */
+        this.SdkToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+
+    }
+}
+
+/**
  * ApplyWebVerificationBizTokenIntl response structure.
  * @class
  */
@@ -212,13 +240,13 @@ class ApplyWebVerificationBizTokenIntlResponse extends  AbstractModel {
         super();
 
         /**
-         * The URL of this verification process, which will be returned to the frontend of the browser for starting the process.
+         * The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
          * @type {string || null}
          */
         this.VerificationUrl = null;
 
         /**
-         * The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
+         * The token for the web-based verification, which is generated using the ApplyWebVerificationBizTokenIntl API.
          * @type {string || null}
          */
         this.BizToken = null;
@@ -428,14 +456,15 @@ class ApplyWebVerificationBizTokenIntlRequest extends  AbstractModel {
         this.CompareImageBase64 = null;
 
         /**
-         * The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
-After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+         * The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
+Example: https://www.tencentcloud.com/products/faceid.
+After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
          * @type {string || null}
          */
         this.RedirectURL = null;
 
         /**
-         * The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
+         * The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
          * @type {string || null}
          */
         this.Extra = null;
@@ -779,18 +808,54 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 }
 
 /**
- * GetSdkVerificationResult request structure.
+ * CompareFaceLiveness request structure.
  * @class
  */
-class GetSdkVerificationResultRequest extends  AbstractModel {
+class CompareFaceLivenessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token used to identify an SDK-based verification process.
+         * Base64 value of photos used for face comparison. 
+The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
+Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
          * @type {string || null}
          */
-        this.SdkToken = null;
+        this.ImageBase64 = null;
+
+        /**
+         * Base64 value of photos used for face comparison. 
+The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
+Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+         * @type {string || null}
+         */
+        this.VideoBase64 = null;
+
+        /**
+         * The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
+`LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+Example value: "SILENT"
+         * @type {string || null}
+         */
+        this.LivenessType = null;
+
+        /**
+         * When the “LivenessType” parameter is “ACTION”, it must be specified.
+It is used to control the action sequence. Action types: 
+1 (open mouth)
+2 (blink)
+3 (nod)
+4 (shake head). 
+Select one or two from the four actions.
+Example of passing single action parameter: "1".
+Example of passing multiple action parameters: "4,2".
+When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
+Example value: ""
+         * @type {string || null}
+         */
+        this.ValidateData = null;
 
     }
 
@@ -801,7 +866,10 @@ class GetSdkVerificationResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
 
     }
 }
@@ -1377,6 +1445,68 @@ class GetLivenessResultRequest extends  AbstractModel {
 }
 
 /**
+ * CompareFaceLiveness response structure.
+ * @class
+ */
+class CompareFaceLivenessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service error code. When the return value is "Success", it indicates that the liveness detection and face comparison succeeded. It is determined that they are the same person. When the return value is "FailedOperation.CompareLowSimilarity", it indicates that the liveness detection succeeded, and the face comparison similarity is lower than 70 points. It is determined that they are not the same person. For other error cases, please refer to Liveness Face Comparison (Pure API) Error Code (https://www.tencentcloud.com/document/product/1061/55390). 
+Example Value: "Success".
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * Description of business results. 
+Example value: "Success"
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * This value is valid when the “Result” parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
+This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 1,000. 
+Example value: 80.00
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * The optimal screenshot of the video after verification is the value encoded by BASE64, jpg format. 
+Note: This field may return “null”, indicating that no valid value can be obtained. 
+Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ApplySdkVerificationToken response structure.
  * @class
  */
@@ -1706,7 +1836,7 @@ class GenerateReflectSequenceResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * eKYC Web related configuration
  * @class
  */
 class WebVerificationConfigIntl extends  AbstractModel {
@@ -1714,7 +1844,7 @@ class WebVerificationConfigIntl extends  AbstractModel {
         super();
 
         /**
-         * Whether to automatically redirect to `RedirectUrl` after successful verification. Default value: `false`.
+         * Whether to automatically redirect to RedirectUrl after successful verification. Default value: false.
          * @type {boolean || null}
          */
         this.AutoSkip = null;
@@ -2107,6 +2237,7 @@ module.exports = {
     GetLivenessResultResponse: GetLivenessResultResponse,
     GetFaceIdTokenIntlResponse: GetFaceIdTokenIntlResponse,
     GetSdkVerificationResultResponse: GetSdkVerificationResultResponse,
+    GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
     ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
     LivenessCompareResponse: LivenessCompareResponse,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
@@ -2117,7 +2248,7 @@ module.exports = {
     GetWebVerificationResultRequest: GetWebVerificationResultRequest,
     VerificationDetail: VerificationDetail,
     GetWebVerificationResultIntlResponse: GetWebVerificationResultIntlResponse,
-    GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
+    CompareFaceLivenessRequest: CompareFaceLivenessRequest,
     GetFaceIdResultIntlRequest: GetFaceIdResultIntlRequest,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
@@ -2127,6 +2258,7 @@ module.exports = {
     ApplyWebVerificationTokenRequest: ApplyWebVerificationTokenRequest,
     ApplyLivenessTokenResponse: ApplyLivenessTokenResponse,
     GetLivenessResultRequest: GetLivenessResultRequest,
+    CompareFaceLivenessResponse: CompareFaceLivenessResponse,
     ApplySdkVerificationTokenResponse: ApplySdkVerificationTokenResponse,
     CreateUploadUrlRequest: CreateUploadUrlRequest,
     GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,

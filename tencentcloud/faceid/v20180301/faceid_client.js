@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const GetLivenessResultResponse = models.GetLivenessResultResponse;
 const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
+const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
 const LivenessCompareResponse = models.LivenessCompareResponse;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
@@ -29,7 +30,7 @@ const ApplyWebVerificationTokenResponse = models.ApplyWebVerificationTokenRespon
 const GetWebVerificationResultRequest = models.GetWebVerificationResultRequest;
 const VerificationDetail = models.VerificationDetail;
 const GetWebVerificationResultIntlResponse = models.GetWebVerificationResultIntlResponse;
-const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
+const CompareFaceLivenessRequest = models.CompareFaceLivenessRequest;
 const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
@@ -39,6 +40,7 @@ const CardVerifyResult = models.CardVerifyResult;
 const ApplyWebVerificationTokenRequest = models.ApplyWebVerificationTokenRequest;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
+const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
 const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenResponse;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
@@ -197,6 +199,17 @@ The data will be stored in a COS bucket in the region specified by the parameter
     CreateUploadUrl(req, cb) {
         let resp = new CreateUploadUrlResponse();
         this.request("CreateUploadUrl", req, resp, cb);
+    }
+
+    /**
+     * This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
+     * @param {CompareFaceLivenessRequest} req
+     * @param {function(string, CompareFaceLivenessResponse):void} cb
+     * @public
+     */
+    CompareFaceLiveness(req, cb) {
+        let resp = new CompareFaceLivenessResponse();
+        this.request("CompareFaceLiveness", req, resp, cb);
     }
 
     /**

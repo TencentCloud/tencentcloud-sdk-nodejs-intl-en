@@ -614,6 +614,34 @@ class InputStreamInfo extends  AbstractModel {
 }
 
 /**
+ * Pipeline failover information.
+ * @class
+ */
+class PipelineInputSettingsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pipeline failover configuration, the valid value is: 1.PIPELINE_FAILOVER (channels are mutually failover); 2.PIPELINE_FILLING (channels fill in themselves). Default value: PIPELINE_FILLING. The specific content is specified by FaultBehavior.
+         * @type {string || null}
+         */
+        this.FaultBehavior = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FaultBehavior = 'FaultBehavior' in params ? params.FaultBehavior : null;
+
+    }
+}
+
+/**
  * DescribeStreamLiveChannelOutputStatistics request structure.
  * @class
  */
@@ -1351,8 +1379,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.SDMCSettings = null;
 
         /**
-         * The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`. For HLS, this can be `FAIRPLAY` or `AES128`. For DASH, this can only be `WIDEVINE`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`, `PLAYREADY`. For HLS, this can be `FAIRPLAY` or `AES128` or `PLAYREADY`. For DASH, valid values: `WIDEVINE` or `PLAYREADY`. 
          * @type {string || null}
          */
         this.DrmType = null;
@@ -2061,8 +2088,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.PlayDomain = null;
 
         /**
-         * Allowable time-shift period (s). Value range: [600, 1209600]. Default value: 300
-Note: This field may return `null`, indicating that no valid value was found.
+         * Allowable time-shift period (s). Value range: [300, 2592000]. Default value: 300Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.StartoverWindow = null;
@@ -2833,22 +2859,34 @@ Currently, fMP4 segments do not support DRM or time shifting.
         this.H265PackageType = null;
 
         /**
-         * 
+         * Whether to enable low latency 0:CLOSE, 1:OPEN, default value: 0.
          * @type {number || null}
          */
         this.LowLatency = null;
 
         /**
-         * 
+         * Low latency slice size, unit ms. Value range: integer [200-HlsRemuxSettings.SegmentDuration] Default value: 500ms.
          * @type {number || null}
          */
         this.PartialSegmentDuration = null;
 
         /**
-         * 
+         * Low latency slice playback position, unit ms. Value range: integer [3*HlsRemuxSettings.PartiSegmentDuration - 3*HlsRemuxSettings.SegmentDuration], Default value: 3*HlsRemuxSettings.PartiSegmentDuration.
          * @type {number || null}
          */
         this.PartialSegmentPlaySite = null;
+
+        /**
+         * Hls main m3u8 file sorting rules by bitrate, optional values: 1: video bitrate ascending order; 2: video bitrate descending order. Default value: 1.
+         * @type {number || null}
+         */
+        this.StreamOrder = null;
+
+        /**
+         * Whether the Hls main m3u8 file contains resolution information, optional values: 1: INCLUDE includes video resolution; 2: EXCLUDE does not include video resolution. Default value: 1.
+         * @type {number || null}
+         */
+        this.VideoResolution = null;
 
     }
 
@@ -2869,6 +2907,8 @@ Currently, fMP4 segments do not support DRM or time shifting.
         this.LowLatency = 'LowLatency' in params ? params.LowLatency : null;
         this.PartialSegmentDuration = 'PartialSegmentDuration' in params ? params.PartialSegmentDuration : null;
         this.PartialSegmentPlaySite = 'PartialSegmentPlaySite' in params ? params.PartialSegmentPlaySite : null;
+        this.StreamOrder = 'StreamOrder' in params ? params.StreamOrder : null;
+        this.VideoResolution = 'VideoResolution' in params ? params.VideoResolution : null;
 
     }
 }
@@ -3467,6 +3507,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
          */
         this.InputLossBehavior = null;
 
+        /**
+         * Pipeline configuration.
+         * @type {PipelineInputSettingsInfo || null}
+         */
+        this.PipelineInputSettings = null;
+
     }
 
     /**
@@ -3539,6 +3585,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
             let obj = new InputLossBehaviorInfo();
             obj.deserialize(params.InputLossBehavior)
             this.InputLossBehavior = obj;
+        }
+
+        if (params.PipelineInputSettings) {
+            let obj = new PipelineInputSettingsInfo();
+            obj.deserialize(params.PipelineInputSettings)
+            this.PipelineInputSettings = obj;
         }
 
     }
@@ -5811,6 +5863,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
          */
         this.InputLossBehavior = null;
 
+        /**
+         * Pipeline configuration.
+         * @type {PipelineInputSettingsInfo || null}
+         */
+        this.PipelineInputSettings = null;
+
     }
 
     /**
@@ -5884,6 +5942,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
             let obj = new InputLossBehaviorInfo();
             obj.deserialize(params.InputLossBehavior)
             this.InputLossBehavior = obj;
+        }
+
+        if (params.PipelineInputSettings) {
+            let obj = new PipelineInputSettingsInfo();
+            obj.deserialize(params.PipelineInputSettings)
+            this.PipelineInputSettings = obj;
         }
 
     }
@@ -6190,6 +6254,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.InputLossBehavior = null;
 
+        /**
+         * Pipeline configuration.
+         * @type {PipelineInputSettingsInfo || null}
+         */
+        this.PipelineInputSettings = null;
+
     }
 
     /**
@@ -6264,6 +6334,12 @@ Note: This field may return `null`, indicating that no valid value was found.
             let obj = new InputLossBehaviorInfo();
             obj.deserialize(params.InputLossBehavior)
             this.InputLossBehavior = obj;
+        }
+
+        if (params.PipelineInputSettings) {
+            let obj = new PipelineInputSettingsInfo();
+            obj.deserialize(params.PipelineInputSettings)
+            this.PipelineInputSettings = obj;
         }
 
     }
@@ -6533,6 +6609,7 @@ module.exports = {
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     CreateStreamLivePlanResponse: CreateStreamLivePlanResponse,
     InputStreamInfo: InputStreamInfo,
+    PipelineInputSettingsInfo: PipelineInputSettingsInfo,
     DescribeStreamLiveChannelOutputStatisticsRequest: DescribeStreamLiveChannelOutputStatisticsRequest,
     ChannelPipelineAlerts: ChannelPipelineAlerts,
     InputInfo: InputInfo,

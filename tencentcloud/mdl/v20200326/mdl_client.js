@@ -30,6 +30,7 @@ const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
 const AudioPipelineInputStatistics = models.AudioPipelineInputStatistics;
 const CreateStreamLivePlanResponse = models.CreateStreamLivePlanResponse;
 const InputStreamInfo = models.InputStreamInfo;
+const PipelineInputSettingsInfo = models.PipelineInputSettingsInfo;
 const DescribeStreamLiveChannelOutputStatisticsRequest = models.DescribeStreamLiveChannelOutputStatisticsRequest;
 const ChannelPipelineAlerts = models.ChannelPipelineAlerts;
 const InputInfo = models.InputInfo;

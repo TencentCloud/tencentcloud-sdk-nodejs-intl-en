@@ -4884,6 +4884,27 @@ Note: This parameter may return null, indicating that no valid values can be obt
         this.Ext = null;
 
         /**
+         * Document transcoding task creation time, unit: seconds.
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Document transcoding task assignment time, unit: seconds.
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AssignTime = null;
+
+        /**
+         * Document transcoding task finished time, unit: seconds.
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FinishedTime = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4910,6 +4931,9 @@ Note: This parameter may return null, indicating that no valid values can be obt
         this.CompressFileUrl = 'CompressFileUrl' in params ? params.CompressFileUrl : null;
         this.ResourceListUrl = 'ResourceListUrl' in params ? params.ResourceListUrl : null;
         this.Ext = 'Ext' in params ? params.Ext : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AssignTime = 'AssignTime' in params ? params.AssignTime : null;
+        this.FinishedTime = 'FinishedTime' in params ? params.FinishedTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

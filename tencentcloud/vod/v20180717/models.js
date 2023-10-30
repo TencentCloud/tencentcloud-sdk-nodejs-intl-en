@@ -34,15 +34,13 @@ Default value: Black.
         this.Color = null;
 
         /**
-         * Canvas width, which is the width of the output video. Value range: 0-4096 px.
-Default value: 0, which means that the value is the same as the video width of the first video segment in the first video track.
+         * 
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Canvas height, which is the height (or long side) of the output video. Value range: 0-4096 px.
-Default value: 0, which means that the value is the same as the video height of the first video segment in the first video track.
+         * 
          * @type {number || null}
          */
         this.Height = null;
@@ -505,7 +503,7 @@ class UserAgentFilterRule extends  AbstractModel {
         super();
 
         /**
-         * UserAgent blacklist/whitelist type: <li>whitelist:whitelist;</li> <li>blacklist:blacklist.</li>
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
@@ -517,13 +515,13 @@ class UserAgentFilterRule extends  AbstractModel {
         this.UserAgents = null;
 
         /**
-         * Rule type: <li>all: All files take effect;</li> <li>file: The specified file suffix takes effect;</li> <li>directory: The specified path takes effect;</li> <li>path: The specified absolute path takes effect.</li>
+         * 
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Matching content under the corresponding type of RuleType:<li>For `all`, enter an asterisk (*).</li> <li>For `file`, enter the suffix, such as jpg, txt.</li> <li>For `directory`, enter the path, such as /xxx/test/.</li> <li>For `path`, enter the corresponding absolute path, such as /xxx/test.html.</li>
+         * 
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -1083,8 +1081,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VodTaskId = null;
 
         /**
-         * Metadata of clipped video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {MediaMetaData || null}
          */
         this.MetaData = null;
@@ -1357,7 +1354,7 @@ class HttpHeaderPathRule extends  AbstractModel {
         super();
 
         /**
-         * HTTP header setting methods: <li>set: sets a value for an existing header parameter, a new header parameter, or multiple header parameters. Multiple header parameters will be merged into one.</li> <li>del: deletes a header parameter.</li> <li>add: adds a header parameter. By default, you can repeat the same action to add the same header parameter, which may affect browser response. Please consider the set operation first.</li>
+         * 
          * @type {string || null}
          */
         this.HeaderMode = null;
@@ -1369,19 +1366,19 @@ class HttpHeaderPathRule extends  AbstractModel {
         this.HeaderName = null;
 
         /**
-         * HTTP header value. Up to 1000 characters can be set.<li>Not required when Mode is del.</li> <li>Required when Mode is add/set.</li>
+         * 
          * @type {string || null}
          */
         this.HeaderValue = null;
 
         /**
-         * Rule types:<li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
+         * 
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
+         * 
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -1413,7 +1410,7 @@ class UserAgentFilter extends  AbstractModel {
         super();
 
         /**
-         * UserAgent blacklist and whitelist configuration switches, the values are: <li>on:Enable; </li> <li>off: Disable. </li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -1891,7 +1888,7 @@ class CloneCDNDomainRequest extends  AbstractModel {
         this.ReferenceDomain = null;
 
         /**
-         * VOD[Subapplication](https://www.tencentcloud.com/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * 
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -1964,6 +1961,63 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
 }
 
 /**
+ * Media quality inspection task generates.
+ * @class
+ */
+class QualityInspectTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the media files have no audio track, range: <li>0: No, that is, there is an audio track;</li> <li>1: Yes, that is, there is no audio track.</li>
+         * @type {number || null}
+         */
+        this.NoAudio = null;
+
+        /**
+         * Whether the media files have no video track, range: <li>0: No, that is, there is a video track;</li> <li>1: Yes, that is, there is no video track.</li>
+         * @type {number || null}
+         */
+        this.NoVideo = null;
+
+        /**
+         * Quality score, value range: [0, 100].
+         * @type {number || null}
+         */
+        this.QualityEvaluationScore = null;
+
+        /**
+         * Abnormal items list detected of media quality inspection task
+         * @type {Array.<QualityInspectResultItem> || null}
+         */
+        this.QualityInspectResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NoAudio = 'NoAudio' in params ? params.NoAudio : null;
+        this.NoVideo = 'NoVideo' in params ? params.NoVideo : null;
+        this.QualityEvaluationScore = 'QualityEvaluationScore' in params ? params.QualityEvaluationScore : null;
+
+        if (params.QualityInspectResultSet) {
+            this.QualityInspectResultSet = new Array();
+            for (let z in params.QualityInspectResultSet) {
+                let obj = new QualityInspectResultItem();
+                obj.deserialize(params.QualityInspectResultSet[z]);
+                this.QualityInspectResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Parameters for custom OCR-based recognition
  * @class
  */
@@ -2016,6 +2070,34 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
 }
 
 /**
+ * ResetProcedureTemplate response structure.
+ * @class
+ */
+class ResetProcedureTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Origin Server Configuration
  * @class
  */
@@ -2024,37 +2106,37 @@ class Origin extends  AbstractModel {
         super();
 
         /**
-         * Primary origin server list When modifying the origin server, you need to enter the corresponding OriginType. Note: This field may return null, indicating that no valid value was found.
+         * 
          * @type {Array.<string> || null}
          */
         this.Origins = null;
 
         /**
-         * Primary origin server type The following types are supported for input parameters: <li> domain:domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
+         * 
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.When the origin server type is object storage, the ServerName field is required.
+         * 
          * @type {string || null}
          */
         this.ServerName = null;
 
         /**
-         * Origin-pull protocol configuration http: forced HTTP origin-pull follow: protocol follow origin-pull https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull. Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
         this.OriginPullProtocol = null;
 
         /**
-         * Backup origin server list When modifying the backup origin server, you need to enter the corresponding BackupOriginType. Note: This field may return null, indicating that no valid value can be obtained.
+         * 
          * @type {Array.<string> || null}
          */
         this.BackupOrigins = null;
 
         /**
-         *  Backup origin server type, which supports the following types: <li>domain：Domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
+         * 
          * @type {string || null}
          */
         this.BackupOriginType = null;
@@ -2066,7 +2148,7 @@ class Origin extends  AbstractModel {
         this.BackupServerName = null;
 
         /**
-         * The object storage returns to the source vendor. It is required when the source site type is a third-party storage source site (third_party). The optional values include the following:<li>aws_s3：AWS S3;</li> <li>ali_oss：Alibaba Cloud OSS;</li> <li>hw_obs：Huawei OBS;</li> <li>others：Object storage from other vendors only supports object storage compatible with the AWS signature algorithm, such as Tencent Cloud COS.</li>
+         * 
          * @type {string || null}
          */
         this.OriginCompany = null;
@@ -2674,6 +2756,12 @@ Note: This field may return `null`, indicating that no valid value can be found.
          */
         this.Output = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Progress = null;
+
     }
 
     /**
@@ -2699,6 +2787,7 @@ Note: This field may return `null`, indicating that no valid value can be found.
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -2760,7 +2849,7 @@ class AiSampleWord extends  AbstractModel {
 }
 
 /**
- * Path cache configuration, choose one from the following three cache modes.
+ * 
  * @class
  */
 class RuleCacheConfig extends  AbstractModel {
@@ -2768,19 +2857,19 @@ class RuleCacheConfig extends  AbstractModel {
         super();
 
         /**
-         * Cache configuration
+         * 
          * @type {CacheConfigCache || null}
          */
         this.Cache = null;
 
         /**
-         * No cache configuration
+         * 
          * @type {CacheConfigNoCache || null}
          */
         this.NoCache = null;
 
         /**
-         * Follows the origin server configuration
+         * 
          * @type {CacheConfigFollowOrigin || null}
          */
         this.FollowOrigin = null;
@@ -2841,13 +2930,13 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.SampleInterval = null;
 
         /**
-         * Subimage row count of an image sprite.
+         * 
          * @type {number || null}
          */
         this.RowCount = null;
 
         /**
-         * Subimage column count of an image sprite.
+         * 
          * @type {number || null}
          */
         this.ColumnCount = null;
@@ -2880,23 +2969,13 @@ Default value: black.
         this.FillType = null;
 
         /**
-         * Maximum value of the width (or long side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
+         * 
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Maximum value of the height (or short side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
+         * 
          * @type {number || null}
          */
         this.Height = null;
@@ -3411,7 +3490,7 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.ImageSpriteDefinition = null;
 
         /**
-         * Display name of player for substreams with different resolutions.
+         * 
          * @type {Array.<ResolutionNameInfo> || null}
          */
         this.ResolutionNames = null;
@@ -3703,6 +3782,24 @@ class RoundPlayInfo extends  AbstractModel {
          */
         this.Desc = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PlayBackMode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
     }
 
     /**
@@ -3725,6 +3822,9 @@ class RoundPlayInfo extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PlayBackMode = 'PlayBackMode' in params ? params.PlayBackMode : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -4223,19 +4323,19 @@ class CreateCDNDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain.
+         * 
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Domain configuration.
+         * 
          * @type {CDNDomainConfig || null}
          */
         this.Config = null;
 
         /**
-         * VOD[Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * 
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -4481,13 +4581,13 @@ class ModifyRebuildMediaTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * The video remaster parameters.
+         * 
          * @type {RebuildVideoInfo || null}
          */
         this.RebuildVideoInfo = null;
 
         /**
-         * The audio remaster parameters.
+         * 
          * @type {RebuildAudioInfo || null}
          */
         this.RebuildAudioInfo = null;
@@ -4897,6 +4997,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -4923,6 +5035,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -4991,11 +5105,7 @@ Note: the frame rate of all substreams must be the same; otherwise, the frame ra
         this.Name = null;
 
         /**
-         * The DRM type. Valid values:
-<li>SimpleAES</li>
-<li>Widevine</li>
-<li>FairPlay</li>
-If this parameter is an empty string, it indicates that the video is not protected by DRM.
+         * 
          * @type {string || null}
          */
         this.DrmType = null;
@@ -5153,6 +5263,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -5179,6 +5301,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -5428,8 +5552,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * ath-based cache rule configuration
-The cache expiration time for all files is 30 days by default.
+ * 
  * @class
  */
 class RuleCache extends  AbstractModel {
@@ -5437,13 +5560,13 @@ class RuleCache extends  AbstractModel {
         super();
 
         /**
-         * Rule types:<li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
+         * 
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each CacheType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li>
+         * 
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -6465,6 +6588,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Transitions = null;
 
+        /**
+         * 
+         * @type {Array.<TransitionOperation> || null}
+         */
+        this.MediaTransitions = null;
+
     }
 
     /**
@@ -6482,6 +6611,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new TransitionOpertion();
                 obj.deserialize(params.Transitions[z]);
                 this.Transitions.push(obj);
+            }
+        }
+
+        if (params.MediaTransitions) {
+            this.MediaTransitions = new Array();
+            for (let z in params.MediaTransitions) {
+                let obj = new TransitionOperation();
+                obj.deserialize(params.MediaTransitions[z]);
+                this.MediaTransitions.push(obj);
             }
         }
 
@@ -7002,6 +7140,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -7028,6 +7178,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -7170,6 +7322,105 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
 }
 
 /**
+ * Media quality inspection task information.
+ * @class
+ */
+class QualityInspectTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media quality inspection task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task status, value: <li>PROCESSING: processing;</li> <li>FINISH: Completed.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code, an empty string indicates success, other values indicate failure. Please refer to the [Video Processing Error Code](https://intl.cloud.tencent.com/document/product/266/50368?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) list for values.
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error information.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Media quality inpection input metadata of audio and video.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * Media quality inspection task input.
+         * @type {QualityInspectTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Media quality inspection task generates.
+         * @type {QualityInspectTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Used for deduplication, if there has been a request with the same recognition code within seven days, this request will return an error. Maximum length of 50 characters, without or with an empty string indicates no deduplication.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Source context, used for transparent transmission of user request information. Upon completion of media quality inpection, the callback will return the value of this field, with a maximum length of 1000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+
+        if (params.Input) {
+            let obj = new QualityInspectTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new QualityInspectTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
  * Path cache/no cache configuration.
  * @class
  */
@@ -7178,13 +7429,13 @@ class CacheConfigNoCache extends  AbstractModel {
         super();
 
         /**
-         * No-cache configuration switch: <li>on: Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Always forwards to the origin server for verification:<li>on: Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Revalidate = null;
@@ -7384,6 +7635,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -7410,6 +7673,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -7535,7 +7800,7 @@ class AiSampleFaceInfo extends  AbstractModel {
 }
 
 /**
- * CDN DomainInfo
+ * 
  * @class
  */
 class CDNDomainInfo extends  AbstractModel {
@@ -7543,31 +7808,31 @@ class CDNDomainInfo extends  AbstractModel {
         super();
 
         /**
-         * Domain.
+         * 
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Deployment status.
+         * 
          * @type {string || null}
          */
         this.DeployStatus = null;
 
         /**
-         * CNAME record.
+         * 
          * @type {string || null}
          */
         this.Cname = null;
 
         /**
-         * Creation time.
+         * 
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * CDN domain configuration information.
+         * 
          * @type {CDNDomainConfig || null}
          */
         this.Config = null;
@@ -7799,6 +8064,18 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
          */
         this.Output = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -7825,6 +8102,8 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -8089,7 +8368,7 @@ class MaxAge extends  AbstractModel {
         super();
 
         /**
-         * MaxAge rule.
+         * MaxAge rule
          * @type {Array.<MaxAgeRule> || null}
          */
         this.MaxAgeRules = null;
@@ -8271,7 +8550,7 @@ class AwsPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         *  Aws S3 back-to-origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -8314,41 +8593,6 @@ class AwsPrivateAccess extends  AbstractModel {
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
-
-    }
-}
-
-/**
- * EditMedia response structure.
- * @class
- */
-class EditMediaResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Video editing task ID, which can be used to query the status of editing task (with task type being `EditMedia`).
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9075,7 +9319,7 @@ class DescribeCDNDomainsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * The starting offset for page fetching. Default value: 0.
+         * 
          * @type {number || null}
          */
         this.Offset = null;
@@ -9563,12 +9807,6 @@ class CreateVodDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Region to enable acceleration. Valid values:
 <li>`Chinese Mainland`</li>
 <li>`Outside Chinese Mainland`</li>
@@ -9577,6 +9815,12 @@ If `AccelerateArea` is not specified, VOD will enable acceleration in or outside
          * @type {string || null}
          */
         this.AccelerateArea = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -9588,8 +9832,8 @@ If `AccelerateArea` is not specified, VOD will enable acceleration in or outside
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.AccelerateArea = 'AccelerateArea' in params ? params.AccelerateArea : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9797,6 +10041,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -9823,41 +10079,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
-
-    }
-}
-
-/**
- * ProcessMedia response structure.
- * @class
- */
-class ProcessMediaResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -10099,10 +10322,7 @@ class AiSampleFaceOperation extends  AbstractModel {
         this.FaceIds = null;
 
         /**
-         * String set generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the face image.
-<li>This field is required if `Type` is `add` or `reset`;</li>
-<li>Array length limit: 5 images.</li>
-Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+         * 
          * @type {Array.<string> || null}
          */
         this.FaceContents = null;
@@ -10323,6 +10543,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -10349,6 +10581,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -10449,6 +10683,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -10475,6 +10721,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -10488,7 +10736,7 @@ class RequestHeader extends  AbstractModel {
         super();
 
         /**
-         * Custom request header configuration switch: <li>on：Enable;</li> <li>off：Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -10938,56 +11186,6 @@ Default value: `weak`.
 }
 
 /**
- * Result file output of video editing.
- * @class
- */
-class EditMediaOutputConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output filename of up to 64 characters, which is generated by the system by default.
-         * @type {string || null}
-         */
-        this.MediaName = null;
-
-        /**
-         * Output file format. Valid values: mp4, hls. Default value: mp4.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
-<li>Default value: 0, which means "Other".</li>
-         * @type {number || null}
-         */
-        this.ClassId = null;
-
-        /**
-         * Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.ExpireTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MediaName = 'MediaName' in params ? params.MediaName : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.ClassId = 'ClassId' in params ? params.ClassId : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-
-    }
-}
-
-/**
  * Information of a video splitting task.
  * @class
  */
@@ -11281,127 +11479,6 @@ class VideoFrameInterpolationInfo extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
-
-    }
-}
-
-/**
- * EditMedia request structure.
- * @class
- */
-class EditMediaRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Input video type. Valid values: File, Stream.
-         * @type {string || null}
-         */
-        this.InputType = null;
-
-        /**
-         * Information of input video file, which is required if `InputType` is `File`.
-         * @type {Array.<EditMediaFileInfo> || null}
-         */
-        this.FileInfos = null;
-
-        /**
-         * Input stream information, which is required if `InputType` is `Stream`.
-         * @type {Array.<EditMediaStreamInfo> || null}
-         */
-        this.StreamInfos = null;
-
-        /**
-         * Editing template ID. Valid values: 10, 20. If this parameter is left empty, template 10 will be used.
-<li>10: the input with the highest resolution will be used as the benchmark;</li>
-<li>20: the input with the highest bitrate will be used as the benchmark;</li>
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
-         * @type {string || null}
-         */
-        this.ProcedureName = null;
-
-        /**
-         * Configuration of file generated after editing.
-         * @type {EditMediaOutputConfig || null}
-         */
-        this.OutputConfig = null;
-
-        /**
-         * Identifies the source context which is used to pass through the user request information. The `EditMediaComplete` callback and task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
-
-        /**
-         * Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-         * @type {number || null}
-         */
-        this.TasksPriority = null;
-
-        /**
-         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * Reserved field for special purposes.
-         * @type {string || null}
-         */
-        this.ExtInfo = null;
-
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InputType = 'InputType' in params ? params.InputType : null;
-
-        if (params.FileInfos) {
-            this.FileInfos = new Array();
-            for (let z in params.FileInfos) {
-                let obj = new EditMediaFileInfo();
-                obj.deserialize(params.FileInfos[z]);
-                this.FileInfos.push(obj);
-            }
-        }
-
-        if (params.StreamInfos) {
-            this.StreamInfos = new Array();
-            for (let z in params.StreamInfos) {
-                let obj = new EditMediaStreamInfo();
-                obj.deserialize(params.StreamInfos[z]);
-                this.StreamInfos.push(obj);
-            }
-        }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
-
-        if (params.OutputConfig) {
-            let obj = new EditMediaOutputConfig();
-            obj.deserialize(params.OutputConfig)
-            this.OutputConfig = obj;
-        }
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11778,6 +11855,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -11804,6 +11893,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -12196,7 +12287,7 @@ class CacheConfigCache extends  AbstractModel {
         super();
 
         /**
-         * Cache configuration switch: <li>on:enable；</li> <li>off: disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -12208,19 +12299,19 @@ class CacheConfigCache extends  AbstractModel {
         this.CacheTime = null;
 
         /**
-         * Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node: <li>on: Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.CompareMaxAge = null;
 
         /**
-         * Force cache: <li>on: Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
 
         /**
-         * Whether to ignore the header and body on cache nodes if the origin server returns the header Set-Cookie. <li>on: Ignore; do not cache the header and body.</li> <li>off: Do not ignore; follow the custom cache rules of cache nodes.</li>
+         * 
          * @type {string || null}
          */
         this.IgnoreSetCookie = null;
@@ -12383,6 +12474,18 @@ class ModifyRoundPlayRequest extends  AbstractModel {
          */
         this.Desc = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PlayBackMode = null;
+
     }
 
     /**
@@ -12406,6 +12509,8 @@ class ModifyRoundPlayRequest extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PlayBackMode = 'PlayBackMode' in params ? params.PlayBackMode : null;
 
     }
 }
@@ -12451,6 +12556,12 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
          */
         this.RepeatType = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Transparency = null;
+
     }
 
     /**
@@ -12464,6 +12575,7 @@ Default value: 0 px, which means that `Height` will be proportionally scaled acc
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+        this.Transparency = 'Transparency' in params ? params.Transparency : null;
 
     }
 }
@@ -12619,6 +12731,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -12645,6 +12769,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -13326,19 +13452,19 @@ class RefererRule extends  AbstractModel {
         super();
 
         /**
-         * Rule types: <li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
+         * 
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
+         * 
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
-         * Referer configuration types:<li>whitelist：Allowlist;</li> <li>blacklist:Blocklist.</li>
+         * 
          * @type {string || null}
          */
         this.RefererType = null;
@@ -13350,7 +13476,7 @@ class RefererRule extends  AbstractModel {
         this.Referers = null;
 
         /**
-         * Whether to allow empty referer：true: Allow empty referer when RefererType = whitelist; false: Reject empty refer when RefererType = blacklist.
+         * 
          * @type {boolean || null}
          */
         this.AllowEmpty = null;
@@ -13382,7 +13508,7 @@ class CacheConfigFollowOrigin extends  AbstractModel {
         super();
 
         /**
-         * Follow origin server switch configuration: <li>on: Enable.</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -14401,6 +14527,48 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * Live streaming recording information.
+ * @class
+ */
+class LiveRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Live streaming recording ID
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * Recording start time, using [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.RecordStartTime = null;
+
+        /**
+         * Recording end time, using [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.RecordEndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.RecordStartTime = 'RecordStartTime' in params ? params.RecordStartTime : null;
+        this.RecordEndTime = 'RecordEndTime' in params ? params.RecordEndTime : null;
+
+    }
+}
+
+/**
  * Split video segment.
  * @class
  */
@@ -14919,6 +15087,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Panoramic recording information
+ * @class
+ */
+class WebPageRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Panoramic recording Url.
+         * @type {string || null}
+         */
+        this.RecordUrl = null;
+
+        /**
+         * Panoramic recording task ID.
+         * @type {string || null}
+         */
+        this.RecordTaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordUrl = 'RecordUrl' in params ? params.RecordUrl : null;
+        this.RecordTaskId = 'RecordTaskId' in params ? params.RecordTaskId : null;
+
+    }
+}
+
+/**
  * DescribeCDNUsageData response structure.
  * @class
  */
@@ -15325,6 +15528,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -15351,6 +15566,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -15501,7 +15718,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Node cache expiration time configuration.
+ * 
  * @class
  */
 class Cache extends  AbstractModel {
@@ -15509,7 +15726,7 @@ class Cache extends  AbstractModel {
         super();
 
         /**
-         * Advanced path cache configuration.
+         * 
          * @type {Array.<RuleCache> || null}
          */
         this.RuleCache = null;
@@ -15606,7 +15823,7 @@ class ModifyMediaStorageClassRequest extends  AbstractModel {
         super();
 
         /**
-         * The unique IDs of media files
+         * 
          * @type {Array.<string> || null}
          */
         this.FileIds = null;
@@ -16002,125 +16219,6 @@ For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
 }
 
 /**
- * ProcessMedia request structure.
- * @class
- */
-class ProcessMediaRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Parameter of video processing task.
-         * @type {MediaProcessTaskInput || null}
-         */
-        this.MediaProcessTask = null;
-
-        /**
-         * The information of the audio/video moderation task\*.
-This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-         * @type {AiContentReviewTaskInput || null}
-         */
-        this.AiContentReviewTask = null;
-
-        /**
-         * Video content analysis task parameter.
-         * @type {AiAnalysisTaskInput || null}
-         */
-        this.AiAnalysisTask = null;
-
-        /**
-         * Type parameter of video content recognition task.
-         * @type {AiRecognitionTaskInput || null}
-         */
-        this.AiRecognitionTask = null;
-
-        /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-         * @type {number || null}
-         */
-        this.TasksPriority = null;
-
-        /**
-         * Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-         * @type {string || null}
-         */
-        this.TasksNotifyMode = null;
-
-        /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
-
-        /**
-         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * Reserved field for special purposes.
-         * @type {string || null}
-         */
-        this.ExtInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-
-        if (params.MediaProcessTask) {
-            let obj = new MediaProcessTaskInput();
-            obj.deserialize(params.MediaProcessTask)
-            this.MediaProcessTask = obj;
-        }
-
-        if (params.AiContentReviewTask) {
-            let obj = new AiContentReviewTaskInput();
-            obj.deserialize(params.AiContentReviewTask)
-            this.AiContentReviewTask = obj;
-        }
-
-        if (params.AiAnalysisTask) {
-            let obj = new AiAnalysisTaskInput();
-            obj.deserialize(params.AiAnalysisTask)
-            this.AiAnalysisTask = obj;
-        }
-
-        if (params.AiRecognitionTask) {
-            let obj = new AiRecognitionTaskInput();
-            obj.deserialize(params.AiRecognitionTask)
-            this.AiRecognitionTask = obj;
-        }
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-
-    }
-}
-
-/**
  * DeleteCDNDomain response structure.
  * @class
  */
@@ -16355,6 +16453,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -16381,6 +16491,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -16493,6 +16605,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -16519,6 +16643,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -17325,14 +17451,7 @@ This parameter is required if `AudioVideoType` is `Transcode`.
         this.ImageSpriteDefinition = null;
 
         /**
-         * Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used:
-<li>MinEdgeLength: 240, Name: LD;</li>
-<li>MinEdgeLength: 480, Name: SD;</li>
-<li>MinEdgeLength: 720, Name: HD;</li>
-<li>MinEdgeLength: 1080, Name: FHD;</li>
-<li>MinEdgeLength: 1440, Name: 2K;</li>
-<li>MinEdgeLength: 2160, Name: 4K;</li>
-<li>MinEdgeLength: 4320, Name: 8K.</li>
+         * 
          * @type {Array.<ResolutionNameInfo> || null}
          */
         this.ResolutionNames = null;
@@ -17435,6 +17554,12 @@ class ImageWatermarkTemplate extends  AbstractModel {
          */
         this.RepeatType = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Transparency = null;
+
     }
 
     /**
@@ -17448,6 +17573,7 @@ class ImageWatermarkTemplate extends  AbstractModel {
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+        this.Transparency = 'Transparency' in params ? params.Transparency : null;
 
     }
 }
@@ -17533,7 +17659,7 @@ class StartCDNDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Domain operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+         * 
          * @type {string || null}
          */
         this.Operation = null;
@@ -17717,8 +17843,7 @@ This parameter is valid only if `IsPersistence` is `1`.
 }
 
 /**
- * Content to be deleted when a VOD video is deleted
-
+ * 
  * @class
  */
 class MediaDeleteItem extends  AbstractModel {
@@ -18441,19 +18566,19 @@ class IpFilter extends  AbstractModel {
         super();
 
         /**
-         * IP blocklist/allowlist configuration switch :<li>on：Enable;</li> <li>off：Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * IP blocklist/allowlist type <li>whitelist: IP allowlist;</li> <li>blacklist:IP blocklist.</li>
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * IP blocklist/allowlist Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format. Up to 50 whitelists or blacklists can be entered
+         * 
          * @type {Array.<string> || null}
          */
         this.Filters = null;
@@ -18581,6 +18706,34 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CopyRightWatermarkInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -18748,6 +18901,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -18774,6 +18939,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -19121,25 +19288,25 @@ class IpFilterPathRule extends  AbstractModel {
         super();
 
         /**
-         * IP blocklist/allowlist type: <li>whitelist: allowlist IPs;</li> <li>blacklist: blocklist IPs.</li>
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * IP blocklist/allowlist list Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+         * 
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
-         * Rule types: <li>all: Effective for all files;</li> <li>file: Effective for specified file suffixes;</li> <li>directory: Effective for specified paths;</li> <li>path: Effective for specified absolute paths.</li>
+         * 
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each RuleType: <li>For all, enter an asterisk (*).</li> <li>For file, enter the suffix, such as jpg, txt.</li> <li>For directory, enter the path, such as /xxx/test/.</li> <li>For path, enter the corresponding absolute path, such as /xxx/test.html.</li>
+         * 
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -19527,7 +19694,7 @@ class OthersPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Other vendor object storage back-to-source authentication configuration switches, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -19644,7 +19811,7 @@ class Authentication extends  AbstractModel {
         super();
 
         /**
-         * Hotlink protection configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -19989,6 +20156,12 @@ class AiRecognitionTaskObjectResultItem extends  AbstractModel {
          */
         this.SegmentSet = null;
 
+        /**
+         * 
+         * @type {Array.<AiRecognitionTaskObjectSegmentItem> || null}
+         */
+        this.RecognitionSegmentSet = null;
+
     }
 
     /**
@@ -20006,6 +20179,15 @@ class AiRecognitionTaskObjectResultItem extends  AbstractModel {
                 let obj = new AiRecognitionTaskObjectSeqmentItem();
                 obj.deserialize(params.SegmentSet[z]);
                 this.SegmentSet.push(obj);
+            }
+        }
+
+        if (params.RecognitionSegmentSet) {
+            this.RecognitionSegmentSet = new Array();
+            for (let z in params.RecognitionSegmentSet) {
+                let obj = new AiRecognitionTaskObjectSegmentItem();
+                obj.deserialize(params.RecognitionSegmentSet[z]);
+                this.RecognitionSegmentSet.push(obj);
             }
         }
 
@@ -20237,7 +20419,7 @@ class RebuildMediaByTemplateRequest extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * The parameters for the output file of remastering.
+         * 
          * @type {RebuildMediaOutputConfig || null}
          */
         this.OutputConfig = null;
@@ -20902,18 +21084,24 @@ class DescribeImageProcessingTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * ResetProcedureTemplate response structure.
+ * Input of media quality inspection task.
  * @class
  */
-class ResetProcedureTemplateResponse extends  AbstractModel {
+class QualityInspectTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Media file ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FileId = null;
+
+        /**
+         * Media quality inspect template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
 
     }
 
@@ -20924,7 +21112,8 @@ class ResetProcedureTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -21289,6 +21478,12 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
          */
         this.RepeatType = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Transparency = null;
+
     }
 
     /**
@@ -21302,6 +21497,7 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+        this.Transparency = 'Transparency' in params ? params.Transparency : null;
 
     }
 }
@@ -21479,13 +21675,13 @@ class DeleteCDNDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain.
+         * 
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * 
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -23589,24 +23785,36 @@ class TaskStatDataItem extends  AbstractModel {
 }
 
 /**
- * ParseStreamingManifest response structure.
+ * 
  * @class
  */
-class ParseStreamingManifestResponse extends  AbstractModel {
+class AiRecognitionTaskObjectSegmentItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Segment file list.
-         * @type {Array.<string> || null}
+         * 
+         * @type {number || null}
          */
-        this.MediaSegmentSet = null;
+        this.StartTimeOffset = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.EndTimeOffset = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
 
     }
 
@@ -23617,8 +23825,10 @@ class ParseStreamingManifestResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MediaSegmentSet = 'MediaSegmentSet' in params ? params.MediaSegmentSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -23862,19 +24072,19 @@ class ModifyCDNDomainConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain.
+         * 
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Domain configuration.
+         * 
          * @type {CDNDomainConfigForUpdate || null}
          */
         this.Config = null;
 
         /**
-         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * 
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -24318,7 +24528,7 @@ class Ipv6Access extends  AbstractModel {
         super();
 
         /**
-         * Enable the ipv6 access configuration switch for the domain name, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -24382,7 +24592,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+         * 
          * @type {string || null}
          */
         this.SessionId = null;
@@ -24920,6 +25130,12 @@ class DescribeFileAttributesTaskOutput extends  AbstractModel {
          */
         this.Md5 = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Sha1 = null;
+
     }
 
     /**
@@ -24930,6 +25146,7 @@ class DescribeFileAttributesTaskOutput extends  AbstractModel {
             return;
         }
         this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.Sha1 = 'Sha1' in params ? params.Sha1 : null;
 
     }
 }
@@ -25192,6 +25409,41 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 }
 
 /**
+ * ParseStreamingManifest response structure.
+ * @class
+ */
+class ParseStreamingManifestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Segment file list.
+         * @type {Array.<string> || null}
+         */
+        this.MediaSegmentSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaSegmentSet = 'MediaSegmentSet' in params ? params.MediaSegmentSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Parameters for OCR-based recognition of terrorism content
  * @class
  */
@@ -25274,6 +25526,12 @@ class CreateRoundPlayRequest extends  AbstractModel {
          */
         this.Desc = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PlayBackMode = null;
+
     }
 
     /**
@@ -25296,6 +25554,7 @@ class CreateRoundPlayRequest extends  AbstractModel {
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+        this.PlayBackMode = 'PlayBackMode' in params ? params.PlayBackMode : null;
 
     }
 }
@@ -25762,6 +26021,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -25788,6 +26059,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -26057,10 +26330,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TraceWatermark = null;
 
         /**
-         * List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
-         * @type {Array.<HeadTailTaskInput> || null}
+         * 
+         * @type {CopyRightWatermarkInput || null}
          */
-        this.HeadTailSet = null;
+        this.CopyRightWatermark = null;
 
         /**
          * List of blurs. Up to 10 ones can be supported.
@@ -26069,13 +26342,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MosaicSet = null;
 
         /**
-         * End time offset of a transcoded video, in seconds.
-<li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
-<li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
-<li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
-         * @type {number || null}
+         * List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+         * @type {Array.<HeadTailTaskInput> || null}
          */
-        this.EndTimeOffset = null;
+        this.HeadTailSet = null;
 
         /**
          * Start time offset of a transcoded video, in seconds.
@@ -26085,6 +26355,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a transcoded video, in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
 
     }
 
@@ -26112,13 +26391,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.TraceWatermark = obj;
         }
 
-        if (params.HeadTailSet) {
-            this.HeadTailSet = new Array();
-            for (let z in params.HeadTailSet) {
-                let obj = new HeadTailTaskInput();
-                obj.deserialize(params.HeadTailSet[z]);
-                this.HeadTailSet.push(obj);
-            }
+        if (params.CopyRightWatermark) {
+            let obj = new CopyRightWatermarkInput();
+            obj.deserialize(params.CopyRightWatermark)
+            this.CopyRightWatermark = obj;
         }
 
         if (params.MosaicSet) {
@@ -26129,8 +26405,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.MosaicSet.push(obj);
             }
         }
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+        if (params.HeadTailSet) {
+            this.HeadTailSet = new Array();
+            for (let z in params.HeadTailSet) {
+                let obj = new HeadTailTaskInput();
+                obj.deserialize(params.HeadTailSet[z]);
+                this.HeadTailSet.push(obj);
+            }
+        }
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
@@ -26404,7 +26689,7 @@ class OssPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Alibaba Cloud OSS back-to-origin authentication configuration switch, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -26568,10 +26853,7 @@ class DescribeCDNStatDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * Metrics to query. Valid values:
-<li>`Traffic`: traffic in bytes</li>
-<li>`Bandwidth`: bandwidth in bps</li>
-<li>`Requests`: the number of requests</li>
+         * 
          * @type {string || null}
          */
         this.Metric = null;
@@ -26917,7 +27199,7 @@ class AccelerateAreaInfo extends  AbstractModel {
 }
 
 /**
- * Source file information
+ * Source file information.
  * @class
  */
 class MediaSourceData extends  AbstractModel {
@@ -26925,22 +27207,22 @@ class MediaSourceData extends  AbstractModel {
         super();
 
         /**
-         * Source of a media file:
-<li>`Record`: recording, such as live or time-shift recording</li>
-<li>`Upload`: upload, such as pull for upload, upload from server, and UGC upload from client</li>
-<li>`VideoProcessing`: video processing, such as video splicing and video clipping</li>
-<li>`WebPageRecord`: panoramic recording </li>
-<li>`Unknown`: unknown source</li>
+         * Media files source category: <li>Record: From recording. Such as live streaming recording, live time shift recording, etc.</li> <li>Upload: From upload. Such as pull upload, upload from server, client UGC upload, etc.</li> <li>VideoProcessing: From video processing. Such as video splicing, video editing, etc.</li> <li>TrtcRecord: From TRTC accompanying recording.</li> <li>WebPageRecord: From panoramic recording.</li> <li>Unknown: Unknown source.</li>
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * Field passed through when a file is created.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * User-transparent transmission field when creating a file.
          * @type {string || null}
          */
         this.SourceContext = null;
+
+        /**
+         * Live streaming recording information, valid when the file source is Record.
+         * @type {LiveRecordInfo || null}
+         */
+        this.LiveRecordInfo = null;
 
         /**
          * The TRTC recording information.
@@ -26948,6 +27230,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {TrtcRecordInfo || null}
          */
         this.TrtcRecordInfo = null;
+
+        /**
+         * Panoramic recording information, valid when the file source is WebPageRecord.
+         * @type {WebPageRecordInfo || null}
+         */
+        this.WebPageRecordInfo = null;
 
     }
 
@@ -26961,10 +27249,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
+        if (params.LiveRecordInfo) {
+            let obj = new LiveRecordInfo();
+            obj.deserialize(params.LiveRecordInfo)
+            this.LiveRecordInfo = obj;
+        }
+
         if (params.TrtcRecordInfo) {
             let obj = new TrtcRecordInfo();
             obj.deserialize(params.TrtcRecordInfo)
             this.TrtcRecordInfo = obj;
+        }
+
+        if (params.WebPageRecordInfo) {
+            let obj = new WebPageRecordInfo();
+            obj.deserialize(params.WebPageRecordInfo)
+            this.WebPageRecordInfo = obj;
         }
 
     }
@@ -27155,36 +27455,31 @@ class EventContent extends  AbstractModel {
         this.EventType = null;
 
         /**
-         * Video upload completion event, which is valid if the event type is `NewFileUpload`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {FileUploadTask || null}
          */
         this.FileUploadEvent = null;
 
         /**
-         * Task flow status change event, which is valid if the event type is `ProcedureStateChanged`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ProcedureTask || null}
          */
         this.ProcedureStateChangeEvent = null;
 
         /**
-         * File deletion event, which is valid if the event type is `FileDeleted`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {FileDeleteTask || null}
          */
         this.FileDeleteEvent = null;
 
         /**
-         * Video pull for upload completion event, which is valid if the event type is `PullComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {PullUploadTask || null}
          */
         this.PullCompleteEvent = null;
 
         /**
-         * Video editing completion event, which is valid if the event type is `EditMediaComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {EditMediaTask || null}
          */
         this.EditMediaCompleteEvent = null;
@@ -27197,57 +27492,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SplitMediaCompleteEvent = null;
 
         /**
-         * Media file composing task completion event, which is valid when the event type is `ComposeMediaComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ComposeMediaTask || null}
          */
         this.ComposeMediaCompleteEvent = null;
 
         /**
-         * Video clipping completion event, which is valid if the event type is `ClipComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ClipTask2017 || null}
          */
         this.ClipCompleteEvent = null;
 
         /**
-         * Video transcoding completion event, which is valid if the event type is `TranscodeComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TranscodeTask2017 || null}
          */
         this.TranscodeCompleteEvent = null;
 
         /**
-         * Image sprite generating completion event, which is valid if the event type is `CreateImageSpriteComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {CreateImageSpriteTask2017 || null}
          */
         this.CreateImageSpriteCompleteEvent = null;
 
         /**
-         * Video splicing completion event, which is valid if the event type is `ConcatComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ConcatTask2017 || null}
          */
         this.ConcatCompleteEvent = null;
 
         /**
-         * Time point screencapturing completion event, which is valid when the event type is `CreateSnapshotByTimeOffsetComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SnapshotByTimeOffsetTask2017 || null}
          */
         this.SnapshotByTimeOffsetCompleteEvent = null;
 
         /**
-         * Release on WeChat completion event, which is valid if the event type is `WechatPublishComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {WechatPublishTask || null}
          */
         this.WechatPublishCompleteEvent = null;
 
         /**
-         * Release on WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {WechatMiniProgramPublishTask || null}
          */
         this.WechatMiniProgramPublishCompleteEvent = null;
@@ -27281,25 +27568,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExtractTraceWatermarkCompleteEvent = null;
 
         /**
-         * The callback for the completion of the moderation task. This parameter is valid only if `EventType` is `ReviewAudioVideoComplete`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
+         * @type {ExtractCopyRightWatermarkTask || null}
+         */
+        this.ExtractCopyRightWatermarkCompleteEvent = null;
+
+        /**
+         * 
          * @type {ReviewAudioVideoTask || null}
          */
         this.ReviewAudioVideoCompleteEvent = null;
 
         /**
-         * This parameter is invalid now.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ReduceMediaBitrateTask || null}
          */
         this.ReduceMediaBitrateCompleteEvent = null;
 
         /**
-         * The event of finishing getting file attributes. This parameter is valid only if `EventType` is `DescribeFileAttributesComplete`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {DescribeFileAttributesTask || null}
          */
         this.DescribeFileAttributesCompleteEvent = null;
+
+        /**
+         * 
+         * @type {QualityInspectTask || null}
+         */
+        this.QualityInspectCompleteEvent = null;
 
     }
 
@@ -27421,6 +27717,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.ExtractTraceWatermarkCompleteEvent = obj;
         }
 
+        if (params.ExtractCopyRightWatermarkCompleteEvent) {
+            let obj = new ExtractCopyRightWatermarkTask();
+            obj.deserialize(params.ExtractCopyRightWatermarkCompleteEvent)
+            this.ExtractCopyRightWatermarkCompleteEvent = obj;
+        }
+
         if (params.ReviewAudioVideoCompleteEvent) {
             let obj = new ReviewAudioVideoTask();
             obj.deserialize(params.ReviewAudioVideoCompleteEvent)
@@ -27437,6 +27739,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new DescribeFileAttributesTask();
             obj.deserialize(params.DescribeFileAttributesCompleteEvent)
             this.DescribeFileAttributesCompleteEvent = obj;
+        }
+
+        if (params.QualityInspectCompleteEvent) {
+            let obj = new QualityInspectTask();
+            obj.deserialize(params.QualityInspectCompleteEvent)
+            this.QualityInspectCompleteEvent = obj;
         }
 
     }
@@ -27543,6 +27851,12 @@ class ExtractTraceWatermarkTaskInput extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FileId = null;
+
     }
 
     /**
@@ -27553,6 +27867,7 @@ class ExtractTraceWatermarkTaskInput extends  AbstractModel {
             return;
         }
         this.Url = 'Url' in params ? params.Url : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
 
     }
 }
@@ -28484,6 +28799,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -28510,6 +28837,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -28687,6 +29016,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Output = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -28712,6 +29059,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -28953,7 +29303,7 @@ class CDNCertInfo extends  AbstractModel {
         super();
 
         /**
-         * Server certificate ID, which is auto-generated when the certificate is being managed by the SSL Certificate Service
+         * 
          * @type {string || null}
          */
         this.CertId = null;
@@ -28971,7 +29321,7 @@ class CDNCertInfo extends  AbstractModel {
         this.PrivateKey = null;
 
         /**
-         * Time when the certificate expires;Can be left blank when used as an input parameter.
+         * 
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -29416,9 +29766,7 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Size = null;
 
         /**
-         * The watermark type. Valid values:
-<li>Trace: Digital watermark</li>
-<li>None: Regular watermark</li>
+         * 
          * @type {string || null}
          */
         this.DigitalWatermarkType = null;
@@ -29428,6 +29776,12 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
          * @type {Array.<MediaSubStreamInfoItem> || null}
          */
         this.SubStreamSet = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CopyRightWatermarkText = null;
 
     }
 
@@ -29453,6 +29807,7 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
                 this.SubStreamSet.push(obj);
             }
         }
+        this.CopyRightWatermarkText = 'CopyRightWatermarkText' in params ? params.CopyRightWatermarkText : null;
 
     }
 }
@@ -30324,6 +30679,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TraceWatermark = null;
 
         /**
+         * 
+         * @type {CopyRightWatermarkInput || null}
+         */
+        this.CopyRightWatermark = null;
+
+        /**
          * List of subtitle IDs (maximum: 16)
          * @type {Array.<string> || null}
          */
@@ -30353,6 +30714,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new TraceWatermarkInput();
             obj.deserialize(params.TraceWatermark)
             this.TraceWatermark = obj;
+        }
+
+        if (params.CopyRightWatermark) {
+            let obj = new CopyRightWatermarkInput();
+            obj.deserialize(params.CopyRightWatermark)
+            this.CopyRightWatermark = obj;
         }
         this.SubtitleSet = 'SubtitleSet' in params ? params.SubtitleSet : null;
 
@@ -30405,6 +30772,34 @@ class DescribeImageSpriteTemplatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class TransitionOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -30638,13 +31033,13 @@ class Https extends  AbstractModel {
         super();
 
         /**
-         * HTTPS configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Whether to enable HTTP2: <li>on:Enable;</li> <li>off:Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Http2 = null;
@@ -30964,130 +31359,124 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.FinishTime = null;
 
         /**
-         * Video processing task information. This field has a value only when `TaskType` is `Procedure`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ProcedureTask || null}
          */
         this.ProcedureTask = null;
 
         /**
-         * Video editing task information. This field has a value only when `TaskType` is `EditMedia`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {EditMediaTask || null}
          */
         this.EditMediaTask = null;
 
         /**
-         * Release on WeChat task information. This field has a value only when `TaskType` is `WechatPublish`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {WechatPublishTask || null}
          */
         this.WechatPublishTask = null;
 
         /**
-         * Media file composing task information. This field has a value only when `TaskType` is `ComposeMedia`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ComposeMediaTask || null}
          */
         this.ComposeMediaTask = null;
 
         /**
-         * Video splitting task information. This field has a value only when `TaskType` is `EditMedia`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * 
          * @type {SplitMediaTask || null}
          */
         this.SplitMediaTask = null;
 
         /**
-         * Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {WechatMiniProgramPublishTask || null}
          */
         this.WechatMiniProgramPublishTask = null;
 
         /**
-         * Media file pulling for upload task information. This field has a value only when `TaskType` is `PullUpload`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {PullUploadTask || null}
          */
         this.PullUploadTask = null;
 
         /**
-         * Video transcoding task information. This field has a value only when `TaskType` is `Transcode`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {TranscodeTask2017 || null}
          */
         this.TranscodeTask = null;
 
         /**
-         * Video splicing task information. This field has a value only when `TaskType` is `Concat`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ConcatTask2017 || null}
          */
         this.ConcatTask = null;
 
         /**
-         * Video clipping task information. This field has a value only when `TaskType` is `Clip`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ClipTask2017 || null}
          */
         this.ClipTask = null;
 
         /**
-         * Image sprite creating task information. This field has a value only when `TaskType` is `ImageSprite`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {CreateImageSpriteTask2017 || null}
          */
         this.CreateImageSpriteTask = null;
 
         /**
-         * Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {SnapshotByTimeOffsetTask2017 || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * The information of a watermark removal task. This parameter is valid only if `TaskType` is `RemoveWatermark`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {RemoveWatermarkTask || null}
          */
         this.RemoveWatermarkTask = null;
 
         /**
-         * The information of an audio/video remastering task. This parameter is valid only if `TaskType` is `RebuildMedia`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {RebuildMediaTask || null}
          */
         this.RebuildMediaTask = null;
 
         /**
-         * The information of a digital watermark extraction task. This parameter is valid only if `TaskType` is `ExtractTraceWatermark`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ExtractTraceWatermarkTask || null}
          */
         this.ExtractTraceWatermarkTask = null;
 
         /**
-         * The information of a moderation task. This parameter is valid only if `TaskType` is `ReviewAudioVideo`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
+         * @type {ExtractCopyRightWatermarkTask || null}
+         */
+        this.ExtractCopyRightWatermarkTask = null;
+
+        /**
+         * 
          * @type {ReviewAudioVideoTask || null}
          */
         this.ReviewAudioVideoTask = null;
 
         /**
-         * This parameter is invalid now.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {ReduceMediaBitrateTask || null}
          */
         this.ReduceMediaBitrateTask = null;
 
         /**
-         * The information of a task to get file attributes. This parameter is valid only if `TaskType` is `DescribeFileAttributes`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {DescribeFileAttributesTask || null}
          */
         this.DescribeFileAttributesTask = null;
+
+        /**
+         * 
+         * @type {QualityInspectTask || null}
+         */
+        this.QualityInspectTask = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -31200,6 +31589,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.ExtractTraceWatermarkTask = obj;
         }
 
+        if (params.ExtractCopyRightWatermarkTask) {
+            let obj = new ExtractCopyRightWatermarkTask();
+            obj.deserialize(params.ExtractCopyRightWatermarkTask)
+            this.ExtractCopyRightWatermarkTask = obj;
+        }
+
         if (params.ReviewAudioVideoTask) {
             let obj = new ReviewAudioVideoTask();
             obj.deserialize(params.ReviewAudioVideoTask)
@@ -31216,6 +31611,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new DescribeFileAttributesTask();
             obj.deserialize(params.DescribeFileAttributesTask)
             this.DescribeFileAttributesTask = obj;
+        }
+
+        if (params.QualityInspectTask) {
+            let obj = new QualityInspectTask();
+            obj.deserialize(params.QualityInspectTask)
+            this.QualityInspectTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -31497,7 +31898,7 @@ class FollowRedirect extends  AbstractModel {
         super();
 
         /**
-         * Access forced redirect configuration switch <li>on：Enable;</li> <li>off：Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -31908,13 +32309,13 @@ class ForceRedirect extends  AbstractModel {
         super();
 
         /**
-         * Access forced redirect configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Access forced redirect types: <li>http:forced HTTP redirect</li> <li>https: forced HTTPS redirect</li>
+         * 
          * @type {string || null}
          */
         this.RedirectType = null;
@@ -32936,7 +33337,7 @@ class CDNDomainConfig extends  AbstractModel {
         super();
 
         /**
-         * Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
+         * 
          * @type {string || null}
          */
         this.Area = null;
@@ -33912,7 +34313,7 @@ class CDNDomainConfigForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
+         * 
          * @type {string || null}
          */
         this.Area = null;
@@ -34361,7 +34762,7 @@ class Quic extends  AbstractModel {
         super();
 
         /**
-         * Quic function configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -34745,7 +35146,7 @@ class Referer extends  AbstractModel {
         super();
 
         /**
-         * Referer blacklist/whitelist configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -34923,7 +35324,7 @@ class HeuristicCacheConfig extends  AbstractModel {
         super();
 
         /**
-         * Heuristic cache configuration switch:<li>on:Enable.</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.HeuristicCacheTimeSwitch = null;
@@ -35238,19 +35639,19 @@ class MaxAgeRule extends  AbstractModel {
         super();
 
         /**
-         * Rule types: <li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
+         * 
          * @type {string || null}
          */
         this.MaxAgeType = null;
 
         /**
-         * Content for each MaxAgeType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li> <b>Note: the all rule cannot be deleted, and it follows the origin site by default, which can be modified.</b>
+         * 
          * @type {Array.<string> || null}
          */
         this.MaxAgeContents = null;
 
         /**
-         * Note: The value 0 means not to cache. <b>Note: The value 0 means not to cache.</b>
+         * 
          * @type {number || null}
          */
         this.MaxAgeTime = null;
@@ -35274,6 +35675,34 @@ class MaxAgeRule extends  AbstractModel {
         this.MaxAgeContents = 'MaxAgeContents' in params ? params.MaxAgeContents : null;
         this.MaxAgeTime = 'MaxAgeTime' in params ? params.MaxAgeTime : null;
         this.FollowOrigin = 'FollowOrigin' in params ? params.FollowOrigin : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ExtractCopyRightWatermarkTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -35329,10 +35758,7 @@ class DescribeSampleSnapshotTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Timestamp hotlink protection mode D configuration
-The access URL format of timestamp hotlink protection mode D is as follows: http://DomainName/FileName?sign=md5hash&t=timestamp
-Here, timestamp is a decimal or hexadecimal timestamp in Unix format;
-md5hash: MD5 (custom key + file path + timestamp)
+ * 
  * @class
  */
 class AuthenticationTypeD extends  AbstractModel {
@@ -35340,49 +35766,49 @@ class AuthenticationTypeD extends  AbstractModel {
         super();
 
         /**
-         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * Signature expiration time;Unit: second. The maximum value is 630720000.
+         * 
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+         * 
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+         * 
          * @type {string || null}
          */
         this.SignParam = null;
 
         /**
-         * Timestamp parameter name;Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+         * 
          * @type {string || null}
          */
         this.TimeParam = null;
 
         /**
-         * Timestamp settings: <li>dec: Decimal</li> <li>hex: Hexadecimal</li>
+         * 
          * @type {string || null}
          */
         this.TimeFormat = null;
 
         /**
-         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35409,10 +35835,7 @@ class AuthenticationTypeD extends  AbstractModel {
 }
 
 /**
- * Timestamp hotlink protection mode C configuration
-The access URL format of timestamp hotlink protection mode C is as follows: http://DomainName/md5hash/timestamp/FileName
-Here, timestamp is a hexadecimal timestamp in Unix format;
-md5hash: MD5 (custom key + file path + timestamp)
+ * 
  * @class
  */
 class AuthenticationTypeC extends  AbstractModel {
@@ -35420,37 +35843,37 @@ class AuthenticationTypeC extends  AbstractModel {
         super();
 
         /**
-         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * Signature expiration time;Unit: second. The maximum value is 630720000.
+         * 
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+         * 
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * Timestamp settings:<li>dec: Decimal</li> <li>hex: Hexadecimal</li>
+         * 
          * @type {string || null}
          */
         this.TimeFormat = null;
 
         /**
-         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35483,31 +35906,31 @@ class AuthenticationTypeB extends  AbstractModel {
         super();
 
         /**
-         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+         * 
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+         * 
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35531,12 +35954,7 @@ class AuthenticationTypeB extends  AbstractModel {
 }
 
 /**
- * Timestamp hotlink protection mode A configuration
-The access URL format of timestamp hotlink protection mode A is as follows: http://DomainName/Filename?sign=timestamp-rand-uid-md5hash
-Here, timestamp is a decimal timestamp in Unix format;
-rand is a random string composed of 0-100 characters, including digits, upper and lower-case letters.
-uid is 0;
-md5hash: MD5 (file path-timestamp-rand-uid-custom key)
+ * 
  * @class
  */
 class AuthenticationTypeA extends  AbstractModel {
@@ -35544,37 +35962,37 @@ class AuthenticationTypeA extends  AbstractModel {
         super();
 
         /**
-         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+         * 
          * @type {string || null}
          */
         this.SignParam = null;
 
         /**
-         * Signature expiration time;Unit: second. The maximum value is 630720000.
+         * 
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+         * 
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+         * 
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+         * 
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -36095,13 +36513,13 @@ class DescribeCDNDomainsResponse extends  AbstractModel {
         super();
 
         /**
-         * List of domain information.
+         * 
          * @type {Array.<CDNDomainInfo> || null}
          */
         this.DomainSet = null;
 
         /**
-         * The total number of CDN domain under the current application.
+         * 
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -36343,9 +36761,7 @@ class ImageOperation extends  AbstractModel {
         super();
 
         /**
-         * The image processing type. Valid values:
-<li>`Scale`: Scaling</li>
-<li>`CenterCut`: Cropping</li>
+         * 
          * @type {string || null}
          */
         this.Type = null;
@@ -37338,8 +37754,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.Definition = null;
@@ -37415,6 +37830,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DigitalWatermarkType = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CopyRightWatermarkText = null;
+
     }
 
     /**
@@ -37452,6 +37873,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.DigitalWatermarkType = 'DigitalWatermarkType' in params ? params.DigitalWatermarkType : null;
+        this.CopyRightWatermarkText = 'CopyRightWatermarkText' in params ? params.CopyRightWatermarkText : null;
 
     }
 }
@@ -37502,6 +37924,34 @@ class DescribePersonSamplesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ExtractCopyRightWatermarkTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -37697,6 +38147,12 @@ class RestoreMediaRequest extends  AbstractModel {
         this.FileIds = null;
 
         /**
+         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * The number of days during which the restored files will remain available.
          * @type {number || null}
          */
@@ -37714,12 +38170,6 @@ If the current storage class is DEEP ARCHIVE, the valid values for this paramete
          */
         this.RestoreTier = null;
 
-        /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -37730,9 +38180,9 @@ If the current storage class is DEEP ARCHIVE, the valid values for this paramete
             return;
         }
         this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.RestoreDay = 'RestoreDay' in params ? params.RestoreDay : null;
         this.RestoreTier = 'RestoreTier' in params ? params.RestoreTier : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -37823,6 +38273,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -37849,6 +38311,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -38049,6 +38513,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Progress = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
     }
 
     /**
@@ -38075,6 +38551,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -38263,44 +38741,6 @@ class SearchMediaRequest extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * Sorting order.
-<li>Valid value of `Sort.Field`: CreateTime.</li>
-<li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
-         * @type {SortBy || null}
-         */
-        this.Sort = null;
-
-        /**
-         * <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-<li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-<li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-<li>basicInfo (basic video information).</li>
-<li>metaData (video metadata).</li>
-<li>transcodeInfo (result information of video transcoding).</li>
-<li>animatedGraphicsInfo (result information of animated image generating task).</li>
-<li>imageSpriteInfo (image sprite information).</li>
-<li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
-<li>sampleSnapshotInfo (sampled screenshot information).</li>
-<li>keyFrameDescInfo (timestamp information).</li>
-<li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-<li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-         * @type {Array.<string> || null}
-         */
-        this.Filters = null;
-
-        /**
          * Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 <li>Length limit for a single region: 20 characters</li>
 <li>Array length limit: 20</li>
@@ -38358,6 +38798,44 @@ class SearchMediaRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.TrtcRoomIds = null;
+
+        /**
+         * Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
+<li>basicInfo (basic video information).</li>
+<li>metaData (video metadata).</li>
+<li>transcodeInfo (result information of video transcoding).</li>
+<li>animatedGraphicsInfo (result information of animated image generating task).</li>
+<li>imageSpriteInfo (image sprite information).</li>
+<li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
+<li>sampleSnapshotInfo (sampled screenshot information).</li>
+<li>keyFrameDescInfo (timestamp information).</li>
+<li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
+<li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+         * @type {Array.<string> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting order.
+<li>Valid value of `Sort.Field`: CreateTime.</li>
+<li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
+         * @type {SortBy || null}
+         */
+        this.Sort = null;
+
+        /**
+         * <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
+<li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
+<li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+         * @type {number || null}
+         */
+        this.Limit = null;
 
         /**
          * (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
@@ -38443,6 +38921,14 @@ End time in the creation time range.
             obj.deserialize(params.ExpireTime)
             this.ExpireTime = obj;
         }
+        this.StorageRegions = 'StorageRegions' in params ? params.StorageRegions : null;
+        this.StorageClasses = 'StorageClasses' in params ? params.StorageClasses : null;
+        this.MediaTypes = 'MediaTypes' in params ? params.MediaTypes : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ReviewResults = 'ReviewResults' in params ? params.ReviewResults : null;
+        this.TrtcSdkAppIds = 'TrtcSdkAppIds' in params ? params.TrtcSdkAppIds : null;
+        this.TrtcRoomIds = 'TrtcRoomIds' in params ? params.TrtcRoomIds : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
 
         if (params.Sort) {
             let obj = new SortBy();
@@ -38451,14 +38937,6 @@ End time in the creation time range.
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Filters = 'Filters' in params ? params.Filters : null;
-        this.StorageRegions = 'StorageRegions' in params ? params.StorageRegions : null;
-        this.StorageClasses = 'StorageClasses' in params ? params.StorageClasses : null;
-        this.MediaTypes = 'MediaTypes' in params ? params.MediaTypes : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ReviewResults = 'ReviewResults' in params ? params.ReviewResults : null;
-        this.TrtcSdkAppIds = 'TrtcSdkAppIds' in params ? params.TrtcSdkAppIds : null;
-        this.TrtcRoomIds = 'TrtcRoomIds' in params ? params.TrtcRoomIds : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
@@ -38880,15 +39358,13 @@ class EditMediaFileInfo extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * Start time offset of video clipping in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of video clipping in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -39844,6 +40320,100 @@ class DescribeAnimatedGraphicsTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ExtractCopyRightWatermarkTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 
+         * @type {ExtractCopyRightWatermarkTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 
+         * @type {ExtractCopyRightWatermarkTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+
+        if (params.Input) {
+            let obj = new ExtractCopyRightWatermarkTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new ExtractCopyRightWatermarkTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
  * Result information of intelligent frame-specific tagging
  * @class
  */
@@ -39881,6 +40451,55 @@ For example, if the `Tag` is "tower", and `CategorySet` contains two elements (`
         }
         this.Tag = 'Tag' in params ? params.Tag : null;
         this.CategorySet = 'CategorySet' in params ? params.CategorySet : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * Abnormal segment information of media quality inspection.
+ * @class
+ */
+class QualityInspectItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Abnormal segment start offset time, unit: seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * Abnormal segment termination's offset time, unit: seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Detect abnormality in the area coordinates. The array contains 4 elements [x1, y1, x2, y2], which indicate the horizontal and vertical coordinates of the upper left and lower right points of the area in sequence. <font color=red>Pay attention to:</font> The value of this field is valid only when Type is one of the following: <li>BlackWhiteEdge: black and white edge;</li> <li>Mosaic: mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Mini Program code;</li> <li>BarCode: bar code.</li>
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * Confidence threshold, range: [0, 100]. <font color=red>Pay attention to:</font> This field is valid only when Type has one of the following values: <li>Mosaic: Mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Mini Program code;</li> <li>BarCode: Bar code.</li>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
@@ -40195,18 +40814,18 @@ class TerrorismConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Parameters for OCR-based recognition of terrorism content
-Note: This field may return `null`, indicating that no valid value can be found.
-         * @type {TerrorismOcrReviewTemplateInfo || null}
-         */
-        this.OcrReviewInfo = null;
-
-        /**
          * Parameters for recognition of terrorism content in images
 Note: This field may return `null`, indicating that no valid value can be found.
          * @type {TerrorismImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
+
+        /**
+         * Parameters for OCR-based recognition of terrorism content
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {TerrorismOcrReviewTemplateInfo || null}
+         */
+        this.OcrReviewInfo = null;
 
     }
 
@@ -40218,16 +40837,16 @@ Note: This field may return `null`, indicating that no valid value can be found.
             return;
         }
 
-        if (params.OcrReviewInfo) {
-            let obj = new TerrorismOcrReviewTemplateInfo();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
-        }
-
         if (params.ImgReviewInfo) {
             let obj = new TerrorismImgReviewTemplateInfo();
             obj.deserialize(params.ImgReviewInfo)
             this.ImgReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new TerrorismOcrReviewTemplateInfo();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
         }
 
     }
@@ -40321,7 +40940,7 @@ class HwPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Huawei Cloud OBS origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -40657,21 +41276,7 @@ The value is set according to query period length by default. 5-minute granulari
         this.Interval = null;
 
         /**
-         * Storage class to query. Valid values:
-<li>`TotalStorage`: total storage usage in classes of STANDARD, STANDARD_IA, ARCHIVE, and DEEP ARCHIVE, excluding the storage usage for data deleted in advance.</li>
-<li>`StandardStorage`: STANDARD</li>
-<li>`InfrequentStorage`: STANDARD_IA</li>
-<li>`ArchiveStorage`: ARCHIVE</li>
-<li>`DeepArchiveStorage`: DEEP ARCHIVE</li>
-<li>`DeletedInfrequentStorage`: STANDARD_IA data deleted in advance</li>
-<li>`DeletedArchiveStorage`: ARCHIVE data deleted in advance</li>
-<li>`DeletedDeepArchiveStorage`: DEEP ARCHIVE data deleted in advance</li>
-<li>`ArchiveStandardRetrieval`: ARCHIVE data retrieved using standard retrievals</li>
-<li>`ArchiveExpeditedRetrieval`: ARCHIVE data retrieved using expedited retrievals</li>
-<li>`ArchiveBulkRetrieval`: ARCHIVE data retrieved using bulk retrievals</li>
-<li>`DeepArchiveStandardRetrieval`: DEEP ARCHIVE data retrieved using standard retrievals</li>
-<li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
-Default value: `TotalStorage`
+         * 
          * @type {string || null}
          */
         this.StorageType = null;
@@ -40984,7 +41589,7 @@ class ResponseHeader extends  AbstractModel {
         super();
 
         /**
-         * Custom response header switch: <li>on：Enable;</li> <li>off：Disable.</li>
+         * 
          * @type {string || null}
          */
         this.Switch = null;
@@ -41014,6 +41619,63 @@ class ResponseHeader extends  AbstractModel {
                 this.HeaderRules.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Abnormal result Information of media quality inspection.
+ * @class
+ */
+class QualityInspectResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Abnormal type, range: <li>Jitter: Jitter;</li> <li>Blur: Blur;</li> <li>LowLighting: Low lighting;</li> <li>HighLighting: Overexposure;</li> <li>CrashScreen: Crash screen;</li> <li>BlackWhiteEdge: Black and white edges;</li> <li>SolidColorScreen: Solid color screen;</li> <li>Noise: Noise;</li> <li>Mosaic: Mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Applet code;</li> <li>BarCode: Bar code;</li> <li>LowVoice: Low voice;</li> <li>HighVoice: High voice;</li> <li>NoVoice: mutes;</li> <li>LowEvaluation: No reference scoring below the threshold.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Abnormal segment List. <font color=red>Pay attention to:</font> This list will only show the first 100 elements at most. If you wish to get the complete result, please get it from the file corresponding to SegmentSetFileUrl.
+         * @type {Array.<QualityInspectItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * Abnormal segment List file URL. The file content is JSON, and the data structure is consistent with the SegmentSet Field. (The file will not be permanently stored, and will be deleted after reaching the SegmentSetFileUrlExpireTime Time point).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * Abnormal segment List file URL expiration time, using [ISO date supported](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new QualityInspectItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -41847,7 +42509,9 @@ module.exports = {
     ModifyDefaultStorageRegionRequest: ModifyDefaultStorageRegionRequest,
     CloneCDNDomainRequest: CloneCDNDomainRequest,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
+    QualityInspectTaskOutput: QualityInspectTaskOutput,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
+    ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
     Origin: Origin,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     RebuildMediaTargetInfo: RebuildMediaTargetInfo,
@@ -41936,6 +42600,7 @@ module.exports = {
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
+    QualityInspectTask: QualityInspectTask,
     CacheConfigNoCache: CacheConfigNoCache,
     FileDeleteTask: FileDeleteTask,
     ResourceTag: ResourceTag,
@@ -41958,7 +42623,6 @@ module.exports = {
     ForbidMediaDistributionRequest: ForbidMediaDistributionRequest,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
     AwsPrivateAccess: AwsPrivateAccess,
-    EditMediaResponse: EditMediaResponse,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     TaskOutputMediaInfo: TaskOutputMediaInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
@@ -41983,7 +42647,6 @@ module.exports = {
     SuperResolutionInfo: SuperResolutionInfo,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
-    ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
@@ -42005,14 +42668,12 @@ module.exports = {
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     ColorEnhanceInfo: ColorEnhanceInfo,
-    EditMediaOutputConfig: EditMediaOutputConfig,
     SplitMediaTaskSegmentInfo: SplitMediaTaskSegmentInfo,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     AiRecognitionTaskAsrFullTextResultOutputSubtitleItem: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     VideoFrameInterpolationInfo: VideoFrameInterpolationInfo,
-    EditMediaRequest: EditMediaRequest,
     DescribeFileAttributesResponse: DescribeFileAttributesResponse,
     LicenseUsageDataItem: LicenseUsageDataItem,
     RebuildMediaTargetAudioStream: RebuildMediaTargetAudioStream,
@@ -42062,6 +42723,7 @@ module.exports = {
     SegmentConfigureInfoForUpdate: SegmentConfigureInfoForUpdate,
     RebuildMediaTaskInput: RebuildMediaTaskInput,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
+    LiveRecordInfo: LiveRecordInfo,
     AiRecognitionTaskSegmentSegmentItem: AiRecognitionTaskSegmentSegmentItem,
     RestoreMediaTask: RestoreMediaTask,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
@@ -42071,6 +42733,7 @@ module.exports = {
     DeleteReviewTemplateResponse: DeleteReviewTemplateResponse,
     ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
+    WebPageRecordInfo: WebPageRecordInfo,
     DescribeCDNUsageDataResponse: DescribeCDNUsageDataResponse,
     ModifyWordSampleRequest: ModifyWordSampleRequest,
     EditMediaTask: EditMediaTask,
@@ -42089,7 +42752,6 @@ module.exports = {
     ReviewImageSegmentItem: ReviewImageSegmentItem,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
-    ProcessMediaRequest: ProcessMediaRequest,
     DeleteCDNDomainResponse: DeleteCDNDomainResponse,
     PornImageResult: PornImageResult,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
@@ -42137,6 +42799,7 @@ module.exports = {
     IpFilter: IpFilter,
     TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
+    CopyRightWatermarkInput: CopyRightWatermarkInput,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     ExtractTraceWatermarkTaskOutput: ExtractTraceWatermarkTaskOutput,
@@ -42177,7 +42840,7 @@ module.exports = {
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
     DescribeImageProcessingTemplatesRequest: DescribeImageProcessingTemplatesRequest,
-    ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
+    QualityInspectTaskInput: QualityInspectTaskInput,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
     DrmStreamingsInfo: DrmStreamingsInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
@@ -42225,7 +42888,7 @@ module.exports = {
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     RefererAuthPolicy: RefererAuthPolicy,
     TaskStatDataItem: TaskStatDataItem,
-    ParseStreamingManifestResponse: ParseStreamingManifestResponse,
+    AiRecognitionTaskObjectSegmentItem: AiRecognitionTaskObjectSegmentItem,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ApplyUploadRequest: ApplyUploadRequest,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
@@ -42251,6 +42914,7 @@ module.exports = {
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
     CreateRoundPlayRequest: CreateRoundPlayRequest,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
@@ -42336,6 +43000,7 @@ module.exports = {
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
     AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
+    TransitionOperation: TransitionOperation,
     AiAnalysisTaskFrameTagInput: AiAnalysisTaskFrameTagInput,
     MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
@@ -42412,6 +43077,7 @@ module.exports = {
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     CommitUploadResponse: CommitUploadResponse,
     MaxAgeRule: MaxAgeRule,
+    ExtractCopyRightWatermarkTaskInput: ExtractCopyRightWatermarkTaskInput,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
@@ -42445,6 +43111,7 @@ module.exports = {
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     MediaTranscodeItem: MediaTranscodeItem,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
+    ExtractCopyRightWatermarkTaskOutput: ExtractCopyRightWatermarkTaskOutput,
     SplitMediaTaskInput: SplitMediaTaskInput,
     PornConfigureInfo: PornConfigureInfo,
     AiRecognitionTaskObjectSeqmentItem: AiRecognitionTaskObjectSeqmentItem,
@@ -42485,7 +43152,9 @@ module.exports = {
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
+    ExtractCopyRightWatermarkTask: ExtractCopyRightWatermarkTask,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
+    QualityInspectItem: QualityInspectItem,
     DescribeImageProcessingTemplatesResponse: DescribeImageProcessingTemplatesResponse,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     ReviewImageRequest: ReviewImageRequest,
@@ -42505,6 +43174,7 @@ module.exports = {
     TranscodeTask2017: TranscodeTask2017,
     DescribeFileAttributesRequest: DescribeFileAttributesRequest,
     ResponseHeader: ResponseHeader,
+    QualityInspectResultItem: QualityInspectResultItem,
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,
     HighlightSegmentItem: HighlightSegmentItem,

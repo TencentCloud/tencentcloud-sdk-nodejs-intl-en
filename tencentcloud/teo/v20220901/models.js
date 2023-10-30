@@ -91,7 +91,7 @@ class DownloadL7LogsRequest extends  AbstractModel {
         this.Domains = null;
 
         /**
-         * Limit on paginated queries. Default value: 20. Maximum value: 1000.
+         * Limit on paginated queries. Default value: 20. Maximum value: 300.
          * @type {number || null}
          */
         this.Limit = null;
@@ -309,6 +309,34 @@ class CheckCnameStatusResponse extends  AbstractModel {
                 obj.deserialize(params.CnameStatus[z]);
                 this.CnameStatus.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyZone response structure.
+ * @class
+ */
+class ModifyZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1509,6 +1537,41 @@ class ModifyZoneStatusRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class FileVerification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
  * DescribeIdentifications response structure.
  * @class
  */
@@ -2407,10 +2470,11 @@ class OriginInfo extends  AbstractModel {
         /**
          * The origin type. Values:
 <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
-<li>`COS`: COS bucket address </li>
-<li>`ORIGIN_GROUP`: Origin group </li>
-<li>`AWS_S3`: AWS S3 bucket address </li>
-<li>`SPACE`: EdgeOne Shield Space </li>
+<li>`COS`: COS bucket address</li>
+<li>`ORIGIN_GROUP`: Origin group</li>
+<li>`AWS_S3`: AWS S3 bucket address</li>
+<li>`LB`: Tencent Cloud CLB instance</li>
+<li>`SPACE`: EdgeOne Shield Space</li>
          * @type {string || null}
          */
         this.OriginType = null;
@@ -2422,15 +2486,15 @@ class OriginInfo extends  AbstractModel {
         this.Origin = null;
 
         /**
-         * ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates that secondary origins are not used.
+         * ID of the backup origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates not to use backup origins.
          * @type {string || null}
          */
         this.BackupOrigin = null;
 
         /**
-         * Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: 
-<li>`on`: Enable private authentication.</li>
-<li>`off`: Disable private authentication.</li>If this field is not specified, the default value `off` is used.
+         * Whether to allow access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values:
+u200c<li>`on`: Enable private authentication.</li>
+<li>`off`: (Default) Disable private authentication.</li>
          * @type {string || null}
          */
         this.PrivateAccess = null;
@@ -2611,18 +2675,30 @@ class ModifyZoneStatusResponse extends  AbstractModel {
 }
 
 /**
- * ModifyZone response structure.
+ * 
  * @class
  */
-class ModifyZoneResponse extends  AbstractModel {
+class DnsVerification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Subdomain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RecordValue = null;
 
     }
 
@@ -2633,7 +2709,9 @@ class ModifyZoneResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RecordValue = 'RecordValue' in params ? params.RecordValue : null;
 
     }
 }
@@ -5629,10 +5707,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Type of the certificate. Values:
-<li>`default`: Default certificate</lil>
-<li>`upload`: Specified certificate</li>
-<li>`managed`: Tencent Cloud-managed certificate</li>
-Note: This field may return `null`, indicating that no valid value can be obtained.
+u200c<li>`default`: Default certificate</li>
+u200c<li>`upload`: Custom certificate</li>
+u200c<li>`managed`: Tencent Cloud-managed certificate</li>
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -8691,7 +8769,7 @@ class DownloadL4LogsRequest extends  AbstractModel {
         this.ProxyIds = null;
 
         /**
-         * Limit on paginated queries. Default value: 20. Maximum value: 1000.
+         * Limit on paginated queries. Default value: 20. Maximum value: 300.
          * @type {number || null}
          */
         this.Limit = null;
@@ -10088,6 +10166,34 @@ class VanityNameServersIps extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class NsVerification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.NameServers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NameServers = 'NameServers' in params ? params.NameServers : null;
+
+    }
+}
+
+/**
  * Slow attack defense configuration.
  * @class
  */
@@ -11095,6 +11201,12 @@ class CreateAccelerationDomainResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {OwnershipVerification || null}
+         */
+        this.OwnershipVerification = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -11108,6 +11220,12 @@ class CreateAccelerationDomainResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.OwnershipVerification) {
+            let obj = new OwnershipVerification();
+            obj.deserialize(params.OwnershipVerification)
+            this.OwnershipVerification = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -13727,7 +13845,7 @@ class CreatePurgeTaskRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
+         * Configures how cache are purged. It works when `Type` is `purge_prefix`, `purge_host` or `purge_all`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated.</li>Note that when Type` is `purge_prefix`, it defaults to `invalidate`.
          * @type {string || null}
          */
         this.Method = null;
@@ -14487,6 +14605,98 @@ class CreateSecurityIPGroupResponse extends  AbstractModel {
 }
 
 /**
+ * CreateSharedCNAME response structure.
+ * @class
+ */
+class CreateSharedCNAMEResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shared CNAME. Format: <Custom Prefix> + <12-bit random string in ZoneId> + "share.eo.dnse[0-5].com"
+         * @type {string || null}
+         */
+        this.SharedCNAME = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SharedCNAME = 'SharedCNAME' in params ? params.SharedCNAME : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class OwnershipVerification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {DnsVerification || null}
+         */
+        this.DnsVerification = null;
+
+        /**
+         * 
+         * @type {FileVerification || null}
+         */
+        this.FileVerification = null;
+
+        /**
+         * 
+         * @type {NsVerification || null}
+         */
+        this.NsVerification = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DnsVerification) {
+            let obj = new DnsVerification();
+            obj.deserialize(params.DnsVerification)
+            this.DnsVerification = obj;
+        }
+
+        if (params.FileVerification) {
+            let obj = new FileVerification();
+            obj.deserialize(params.FileVerification)
+            this.FileVerification = obj;
+        }
+
+        if (params.NsVerification) {
+            let obj = new NsVerification();
+            obj.deserialize(params.NsVerification)
+            this.NsVerification = obj;
+        }
+
+    }
+}
+
+/**
  * DescribePurgeTasks response structure.
  * @class
  */
@@ -15032,6 +15242,50 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * CreateSharedCNAME request structure.
+ * @class
+ */
+class CreateSharedCNAMERequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site to which the shared CNAME belongs.	
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Prefix of the shared CNAME. Format: "test-api","test-api.com". Up 50 characters allowed.
+The full format of the shared CNAME is: <custom prefix> + <12-bit random string in ZoneId> + "share.eo.dns[0-5].com". For example, if the prefix is "example.com", the created shared CNAME is "example.com.sai2ig51kaa5.share.eo.dnse2.com"
+Example: example.com
+         * @type {string || null}
+         */
+        this.SharedCNAMEPrefix = null;
+
+        /**
+         * Description. It supports 1-50 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.SharedCNAMEPrefix = 'SharedCNAMEPrefix' in params ? params.SharedCNAMEPrefix : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * DescribeAccelerationDomains request structure.
  * @class
  */
@@ -15534,6 +15788,7 @@ module.exports = {
     DeleteRulesRequest: DeleteRulesRequest,
     ExceptUserRuleCondition: ExceptUserRuleCondition,
     CheckCnameStatusResponse: CheckCnameStatusResponse,
+    ModifyZoneResponse: ModifyZoneResponse,
     DescribeOriginGroupResponse: DescribeOriginGroupResponse,
     DescribeTopL7CacheDataRequest: DescribeTopL7CacheDataRequest,
     DeleteApplicationProxyResponse: DeleteApplicationProxyResponse,
@@ -15553,6 +15808,7 @@ module.exports = {
     DescribeDDoSAttackDataResponse: DescribeDDoSAttackDataResponse,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
     ModifyZoneStatusRequest: ModifyZoneStatusRequest,
+    FileVerification: FileVerification,
     DescribeIdentificationsResponse: DescribeIdentificationsResponse,
     ModifySecurityPolicyRequest: ModifySecurityPolicyRequest,
     Waf: Waf,
@@ -15571,7 +15827,7 @@ module.exports = {
     ModifySecurityPolicyResponse: ModifySecurityPolicyResponse,
     DescribeHostsSettingResponse: DescribeHostsSettingResponse,
     ModifyZoneStatusResponse: ModifyZoneStatusResponse,
-    ModifyZoneResponse: ModifyZoneResponse,
+    DnsVerification: DnsVerification,
     AlgDetectSession: AlgDetectSession,
     ModifyZoneRequest: ModifyZoneRequest,
     ModifyApplicationProxyStatusResponse: ModifyApplicationProxyStatusResponse,
@@ -15691,6 +15947,7 @@ module.exports = {
     TemplateConfig: TemplateConfig,
     TopEntry: TopEntry,
     VanityNameServersIps: VanityNameServersIps,
+    NsVerification: NsVerification,
     SlowPostConfig: SlowPostConfig,
     AccelerateMainland: AccelerateMainland,
     ExceptUserRule: ExceptUserRule,
@@ -15775,6 +16032,8 @@ module.exports = {
     DescribeHostsSettingRequest: DescribeHostsSettingRequest,
     SubRuleItem: SubRuleItem,
     CreateSecurityIPGroupResponse: CreateSecurityIPGroupResponse,
+    CreateSharedCNAMEResponse: CreateSharedCNAMEResponse,
+    OwnershipVerification: OwnershipVerification,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     DescribeAvailablePlansResponse: DescribeAvailablePlansResponse,
     DescribeDDoSAttackEventRequest: DescribeDDoSAttackEventRequest,
@@ -15783,6 +16042,7 @@ module.exports = {
     AlgDetectResult: AlgDetectResult,
     QueryString: QueryString,
     DefaultServerCertInfo: DefaultServerCertInfo,
+    CreateSharedCNAMERequest: CreateSharedCNAMERequest,
     DescribeAccelerationDomainsRequest: DescribeAccelerationDomainsRequest,
     UpstreamHttp2: UpstreamHttp2,
     TopEntryValue: TopEntryValue,

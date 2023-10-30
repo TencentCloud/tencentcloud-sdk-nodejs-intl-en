@@ -337,7 +337,9 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the offline recording callback URL.
+     * 课后录制服务已下线
+
+This API is used to set the offline recording callback URL.
      * @param {SetOfflineRecordCallbackRequest} req
      * @param {function(string, SetOfflineRecordCallbackResponse):void} cb
      * @public
@@ -538,7 +540,9 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the offline recording callback URL.
+     * 课后录制服务已下线
+
+This API is used to query the offline recording callback URL.
      * @param {DescribeOfflineRecordCallbackRequest} req
      * @param {function(string, DescribeOfflineRecordCallbackResponse):void} cb
      * @public
@@ -560,7 +564,9 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an offline recording task.
+     * 课后录制服务已下线
+
+This API is used to create an offline recording task.
      * @param {CreateOfflineRecordRequest} req
      * @param {function(string, CreateOfflineRecordResponse):void} cb
      * @public
@@ -673,7 +679,9 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information about an offline recording task, including the recording progress and recording result.
+     * 课后录制服务已下线
+
+This API is used to query the information about an offline recording task, including the recording progress and recording result.
      * @param {DescribeOfflineRecordRequest} req
      * @param {function(string, DescribeOfflineRecordResponse):void} cb
      * @public

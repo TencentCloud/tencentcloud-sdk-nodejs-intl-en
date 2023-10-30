@@ -22,6 +22,7 @@ const Compression = models.Compression;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
 const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
+const ModifyZoneResponse = models.ModifyZoneResponse;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
 const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
@@ -41,6 +42,7 @@ const OriginDetail = models.OriginDetail;
 const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
 const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
+const FileVerification = models.FileVerification;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
 const Waf = models.Waf;
@@ -59,7 +61,7 @@ const Tag = models.Tag;
 const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
 const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
 const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
-const ModifyZoneResponse = models.ModifyZoneResponse;
+const DnsVerification = models.DnsVerification;
 const AlgDetectSession = models.AlgDetectSession;
 const ModifyZoneRequest = models.ModifyZoneRequest;
 const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatusResponse;
@@ -179,6 +181,7 @@ const CreateRuleRequest = models.CreateRuleRequest;
 const TemplateConfig = models.TemplateConfig;
 const TopEntry = models.TopEntry;
 const VanityNameServersIps = models.VanityNameServersIps;
+const NsVerification = models.NsVerification;
 const SlowPostConfig = models.SlowPostConfig;
 const AccelerateMainland = models.AccelerateMainland;
 const ExceptUserRule = models.ExceptUserRule;
@@ -263,6 +266,8 @@ const DescribeTimingL4DataRequest = models.DescribeTimingL4DataRequest;
 const DescribeHostsSettingRequest = models.DescribeHostsSettingRequest;
 const SubRuleItem = models.SubRuleItem;
 const CreateSecurityIPGroupResponse = models.CreateSecurityIPGroupResponse;
+const CreateSharedCNAMEResponse = models.CreateSharedCNAMEResponse;
+const OwnershipVerification = models.OwnershipVerification;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const DescribeAvailablePlansResponse = models.DescribeAvailablePlansResponse;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
@@ -271,6 +276,7 @@ const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
 const AlgDetectResult = models.AlgDetectResult;
 const QueryString = models.QueryString;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
+const CreateSharedCNAMERequest = models.CreateSharedCNAMERequest;
 const DescribeAccelerationDomainsRequest = models.DescribeAccelerationDomainsRequest;
 const UpstreamHttp2 = models.UpstreamHttp2;
 const TopEntryValue = models.TopEntryValue;
@@ -315,6 +321,17 @@ class TeoClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a shared CNAME.
+     * @param {CreateSharedCNAMERequest} req
+     * @param {function(string, CreateSharedCNAMEResponse):void} cb
+     * @public
+     */
+    CreateSharedCNAME(req, cb) {
+        let resp = new CreateSharedCNAMEResponse();
+        this.request("CreateSharedCNAME", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a site.
      * @param {DeleteZoneRequest} req
      * @param {function(string, DeleteZoneResponse):void} cb
@@ -326,9 +343,9 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves u200dthe latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
+     * When the origin server resource is updated but the node cache TTL has not expired, the user will still access the old resource. To solve this problem, you can use this API to purge the node cache. There are two action options: <li>Delete directly: Delete the node cache directly without any verification. Trigger origin-pull when the resource is requested.</li><li>Mark as expired: Set the node resource as expired, and trigger origin-pull verification when the resource, that is, send an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin responds with 200, the node pulls new resources from the origin and update the cache. If the origin responds with 304, the node does not update the cache</li>.
 
-</li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1). </li>
+For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
      * @param {CreatePurgeTaskRequest} req
      * @param {function(string, CreatePurgeTaskResponse):void} cb
      * @public

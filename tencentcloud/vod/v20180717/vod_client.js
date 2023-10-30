@@ -49,7 +49,9 @@ const CreateImageProcessingTemplateRequest = models.CreateImageProcessingTemplat
 const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionRequest;
 const CloneCDNDomainRequest = models.CloneCDNDomainRequest;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
+const QualityInspectTaskOutput = models.QualityInspectTaskOutput;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
 const Origin = models.Origin;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const RebuildMediaTargetInfo = models.RebuildMediaTargetInfo;
@@ -138,6 +140,7 @@ const AttachMediaSubtitlesRequest = models.AttachMediaSubtitlesRequest;
 const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const QualityInspectTask = models.QualityInspectTask;
 const CacheConfigNoCache = models.CacheConfigNoCache;
 const FileDeleteTask = models.FileDeleteTask;
 const ResourceTag = models.ResourceTag;
@@ -160,7 +163,6 @@ const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const AwsPrivateAccess = models.AwsPrivateAccess;
-const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
@@ -185,7 +187,6 @@ const DeleteRoundPlayRequest = models.DeleteRoundPlayRequest;
 const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
-const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
 const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
@@ -207,14 +208,12 @@ const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const ColorEnhanceInfo = models.ColorEnhanceInfo;
-const EditMediaOutputConfig = models.EditMediaOutputConfig;
 const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitionTaskAsrFullTextResultOutputSubtitleItem;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const VideoFrameInterpolationInfo = models.VideoFrameInterpolationInfo;
-const EditMediaRequest = models.EditMediaRequest;
 const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
 const LicenseUsageDataItem = models.LicenseUsageDataItem;
 const RebuildMediaTargetAudioStream = models.RebuildMediaTargetAudioStream;
@@ -264,6 +263,7 @@ const CoverBySnapshotTaskInput = models.CoverBySnapshotTaskInput;
 const SegmentConfigureInfoForUpdate = models.SegmentConfigureInfoForUpdate;
 const RebuildMediaTaskInput = models.RebuildMediaTaskInput;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
+const LiveRecordInfo = models.LiveRecordInfo;
 const AiRecognitionTaskSegmentSegmentItem = models.AiRecognitionTaskSegmentSegmentItem;
 const RestoreMediaTask = models.RestoreMediaTask;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
@@ -273,6 +273,7 @@ const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
 const DeleteReviewTemplateResponse = models.DeleteReviewTemplateResponse;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
+const WebPageRecordInfo = models.WebPageRecordInfo;
 const DescribeCDNUsageDataResponse = models.DescribeCDNUsageDataResponse;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
 const EditMediaTask = models.EditMediaTask;
@@ -291,7 +292,6 @@ const DescribeRebuildMediaTemplatesRequest = models.DescribeRebuildMediaTemplate
 const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
 const CreateRoundPlayResponse = models.CreateRoundPlayResponse;
 const MediaSubtitleInput = models.MediaSubtitleInput;
-const ProcessMediaRequest = models.ProcessMediaRequest;
 const DeleteCDNDomainResponse = models.DeleteCDNDomainResponse;
 const PornImageResult = models.PornImageResult;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
@@ -339,6 +339,7 @@ const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const IpFilter = models.IpFilter;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
+const CopyRightWatermarkInput = models.CopyRightWatermarkInput;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const ExtractTraceWatermarkTaskOutput = models.ExtractTraceWatermarkTaskOutput;
@@ -379,7 +380,7 @@ const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const ModifyReviewTemplateResponse = models.ModifyReviewTemplateResponse;
 const DescribeImageProcessingTemplatesRequest = models.DescribeImageProcessingTemplatesRequest;
-const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
+const QualityInspectTaskInput = models.QualityInspectTaskInput;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DrmStreamingsInfo = models.DrmStreamingsInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
@@ -427,7 +428,7 @@ const FileDeleteResultItem = models.FileDeleteResultItem;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const RefererAuthPolicy = models.RefererAuthPolicy;
 const TaskStatDataItem = models.TaskStatDataItem;
-const ParseStreamingManifestResponse = models.ParseStreamingManifestResponse;
+const AiRecognitionTaskObjectSegmentItem = models.AiRecognitionTaskObjectSegmentItem;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
 const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
@@ -453,6 +454,7 @@ const DescribeReviewDetailsRequest = models.DescribeReviewDetailsRequest;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
+const ParseStreamingManifestResponse = models.ParseStreamingManifestResponse;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const CreateRoundPlayRequest = models.CreateRoundPlayRequest;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
@@ -538,6 +540,7 @@ const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateReq
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
 const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
+const TransitionOperation = models.TransitionOperation;
 const AiAnalysisTaskFrameTagInput = models.AiAnalysisTaskFrameTagInput;
 const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegmentItem;
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
@@ -614,6 +617,7 @@ const ImageCenterCut = models.ImageCenterCut;
 const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
 const CommitUploadResponse = models.CommitUploadResponse;
 const MaxAgeRule = models.MaxAgeRule;
+const ExtractCopyRightWatermarkTaskInput = models.ExtractCopyRightWatermarkTaskInput;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
 const AuthenticationTypeD = models.AuthenticationTypeD;
 const AuthenticationTypeC = models.AuthenticationTypeC;
@@ -647,6 +651,7 @@ const DescribeLicenseUsageDataRequest = models.DescribeLicenseUsageDataRequest;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
+const ExtractCopyRightWatermarkTaskOutput = models.ExtractCopyRightWatermarkTaskOutput;
 const SplitMediaTaskInput = models.SplitMediaTaskInput;
 const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
@@ -687,7 +692,9 @@ const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResp
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
+const ExtractCopyRightWatermarkTask = models.ExtractCopyRightWatermarkTask;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
+const QualityInspectItem = models.QualityInspectItem;
 const DescribeImageProcessingTemplatesResponse = models.DescribeImageProcessingTemplatesResponse;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const ReviewImageRequest = models.ReviewImageRequest;
@@ -707,6 +714,7 @@ const StorageStatData = models.StorageStatData;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const DescribeFileAttributesRequest = models.DescribeFileAttributesRequest;
 const ResponseHeader = models.ResponseHeader;
+const QualityInspectResultItem = models.QualityInspectResultItem;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
@@ -789,27 +797,6 @@ The files must be in HLS format. Preferably, they should have the same bitrate a
     DescribeFileAttributes(req, cb) {
         let resp = new DescribeFileAttributesResponse();
         this.request("DescribeFileAttributes", req, resp, cb);
-    }
-
-    /**
-     * This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
-
-1. Clipping a file in VOD to generate a new video;
-2. Splicing multiple files in VOD to generate a new video;
-3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
-4. Directly generating a new video from a stream in VOD;
-5. Clipping a stream in VOD to generate a new video;
-6. Splicing multiple streams in VOD to generate a new video;
-7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
-
-You can also specify whether to perform a task flow for the generated new video.
-     * @param {EditMediaRequest} req
-     * @param {function(string, EditMediaResponse):void} cb
-     * @public
-     */
-    EditMedia(req, cb) {
-        let resp = new EditMediaResponse();
-        this.request("EditMedia", req, resp, cb);
     }
 
     /**
@@ -972,7 +959,7 @@ This API returns the video content duration for intelligent recognition in secon
     }
 
     /**
-     * This API is used to delete a custom task flow template.  
+     * 
      * @param {DeleteProcedureTemplateRequest} req
      * @param {function(string, DeleteProcedureTemplateResponse):void} cb
      * @public
@@ -1362,30 +1349,7 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * Live clipping means that during a live broadcast (before it ends), you can select a segment of previous live broadcast content to generate a new video (in HLS format) in real time and share it immediately or store it persistently.
-
-VOD supports two live clipping modes:
-- Persistent clipping: in this mode, the clipped video is saved as an independent video file with a `FileId`, which is suitable for **persistently storing** highlights;
-- Temporary clipping: in this mode, the clipped video is part of the LVB recording file with no `FileId`, which is suitable for **temporarily sharing** highlights;
-
-Note:
-- The live clipping feature can be used only when [time shifting](https://intl.cloud.tencent.com/document/product/267/32742?from_cn_redirect=1) has been enabled for the target live stream.
-- Live clipping is performed based on the m3u8 file generated by LVB recording, so its minimum clipping granularity is one ts segment rather than at or below the second level.
-
-
-### Persistent clipping
-In persistent clipping mode, the clipped video is saved as an independent video file with a `FileId`, and its lifecycle is not subject to the source LVB recording video (even if the source video is deleted, the clipped video will not be affected in any way). It can be further processed (transcoded, published on WeChat, etc.).
-
-An example is as follows: for a complete football match, the source LVB recording video may be up to 2 hours in length. You want to store this video for only 2 months for the purpose of cost savings. However, you want to specify a longer retention period for the "highlights" video created by live clipping and perform additional VOD operations on it such as transcoding and release on WeChat. In this case, you need to choose the persistent clipping mode of live clipping.
-
-The advantage of persistent clipping is that the clipped video has a lifecycle independent of the source recording video and can be managed independently and stored persistently.
-
-### Temporary clipping
-In temporary clipping mode, the clipped video (m3u8 file) shares the same ts segments with the LVB recording video instead of being an independent video. It only has a playback URL but has no `FileId`, and its validity period is the same as that of the LVB recording video; therefore, if the LVB recording video is deleted, it cannot be played back.
-
-For temporary clipping, as the clipping result is not an independent video, it will not be included in VOD's media asset management (for example, it will not be counted in the total videos in the console), and no video processing operations can be separately performed on it, such as transcoding and release on WeChat.
-
-The advantage of temporary clipping is that the clipping operation is very "lightweight" and does not incur additional storage fees. However, the clipped video has the same lifecycle as the source recording video and cannot be further transcoded or processed.
+     * 
      * @param {LiveRealTimeClipRequest} req
      * @param {function(string, LiveRealTimeClipResponse):void} cb
      * @public
@@ -1768,17 +1732,6 @@ This API is used to get the information of custom and [preset](https://intl.clou
     DeleteImageProcessingTemplate(req, cb) {
         let resp = new DeleteImageProcessingTemplateResponse();
         this.request("DeleteImageProcessingTemplate", req, resp, cb);
-    }
-
-    /**
-     * 
-     * @param {ProcessMediaRequest} req
-     * @param {function(string, ProcessMediaResponse):void} cb
-     * @public
-     */
-    ProcessMedia(req, cb) {
-        let resp = new ProcessMediaResponse();
-        this.request("ProcessMedia", req, resp, cb);
     }
 
     /**

@@ -32,6 +32,7 @@ const SecEntryValue = models.SecEntryValue;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const L4OfflineLog = models.L4OfflineLog;
 const DiffIPWhitelist = models.DiffIPWhitelist;
+const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
 const DeleteSecurityIPGroupResponse = models.DeleteSecurityIPGroupResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const OriginRecord = models.OriginRecord;
@@ -152,6 +153,7 @@ const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest
 const Task = models.Task;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const AscriptionInfo = models.AscriptionInfo;
+const VerifyOwnershipResponse = models.VerifyOwnershipResponse;
 const RuleItem = models.RuleItem;
 const FirstPartConfig = models.FirstPartConfig;
 const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
@@ -188,6 +190,7 @@ const ExceptUserRule = models.ExceptUserRule;
 const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResponse;
 const RateLimitUserRule = models.RateLimitUserRule;
 const SubRule = models.SubRule;
+const CertificateInfo = models.CertificateInfo;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
 const TimingDataItem = models.TimingDataItem;
@@ -273,6 +276,7 @@ const DescribeAvailablePlansResponse = models.DescribeAvailablePlansResponse;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
+const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
 const AlgDetectResult = models.AlgDetectResult;
 const QueryString = models.QueryString;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
@@ -422,7 +426,9 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to modify the certificate of a domain name.
+     * This API is used to configure the certificate of a site. You can use your own certificate or [apply for a free certificate](https://intl.cloud.tencent.com/document/product/1552/90437?from_cn_redirect=1).
+To use an external certificate, upload the certificate to [SSL Certificates Console](https://console.cloud.tencent.com/certoview) first, and then input the certificate ID in this API. For details, see [Deploying Own Certificates to EdgeOne Domains](https://intl.cloud.tencent.com/document/product/1552/88874?from_cn_redirect=1).
+ 
      * @param {ModifyHostsCertificateRequest} req
      * @param {function(string, ModifyHostsCertificateResponse):void} cb
      * @public
@@ -488,7 +494,9 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to access a new site.
+     * This API is used to create a site. After you create the site, you can connect it to EdgeOne via the CNAME or NS (see [Quick Start](https://intl.cloud.tencent.com/document/product/1552/87601?from_cn_redirect=1)), or connect it without a domain name (see [Quick Access to L4 Proxy Service](https://intl.cloud.tencent.com/document/product/1552/96051?from_cn_redirect=1)).
+
+If there are already EdgeOne plans under the current account, it is recommended to pass in the `PlanId` to bind the site with the plan directly. If `PlanId` is not passed in, the created site is not activated. You need to call [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1) to bind the site with a plan. To purchase a plan, please go to the EdgeOne console.
      * @param {CreateZoneRequest} req
      * @param {function(string, CreateZoneResponse):void} cb
      * @public
@@ -565,6 +573,19 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
+     * This API is used to verify your ownership of a site or domain name. It's required in the CNAME access mode. After a site is verified, you don't need to verify the ownership again for domain names added to it in the future. For details, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+
+For sites connected via the NS, you can query whether the NS is successfully switched through this API. For details, see [Modifying DNS Servers](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
+     * @param {VerifyOwnershipRequest} req
+     * @param {function(string, VerifyOwnershipResponse):void} cb
+     * @public
+     */
+    VerifyOwnership(req, cb) {
+        let resp = new VerifyOwnershipResponse();
+        this.request("VerifyOwnership", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the site configuration.
      * @param {DescribeZoneSettingRequest} req
      * @param {function(string, DescribeZoneSettingResponse):void} cb
@@ -587,7 +608,7 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to query accelerated domain names. Paging, sorting and filtering are supported.
+     * This API is used to query domain name information of a site, including the acceleration domain name, origin, and domain name status. You can query the information of all domain names, or specific domain names by specifying filters information.
      * @param {DescribeAccelerationDomainsRequest} req
      * @param {function(string, DescribeAccelerationDomainsResponse):void} cb
      * @public
@@ -642,7 +663,7 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to query the list of user sites.
+     * This API is used to query the information of sites that you have access to. You can filter sites based on different query criteria.
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
      * @public
@@ -895,7 +916,9 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to connect a domain to EdgeOne.
+     * This API is used to create an acceleration domain name. 
+
+For sites connected via the CNAME, if you have not verified the ownership of the domain name, the ownership verification information of the domain name is returned. To verify your ownership of the domain name, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
      * @param {CreateAccelerationDomainRequest} req
      * @param {function(string, CreateAccelerationDomainResponse):void} cb
      * @public

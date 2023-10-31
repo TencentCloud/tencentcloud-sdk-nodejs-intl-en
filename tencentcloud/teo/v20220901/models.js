@@ -798,34 +798,34 @@ class DescribeZonesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * The paginated query limit. Default value: 20. Maximum value: 1000.
+         * Limit on paginated queries. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li><li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No</li><li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li><li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>Only `zone-name` supports fuzzy query.
+         * Filter conditions. Up to 20 values for each filter. If this parameter is not filled in, the information of all sites under the current account is returned. Detailed filtering conditions are as follows:
+<li>`zone-name`: Site name </li><li>`zone-id`: Site ID, such as zone-2noz78a8ev6k</li><li>`status`: Site status </li><li>`tag-key`: Tag key </li><li>`tag-value`: Tag value </li>Only `zone-name` supports fuzzy query.
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
 
         /**
-         * The sorting field. Values:
-<li>`type`: Access mode</li>
+         * Sort the returned results according to this field. Values include:
+<li>`type`: Connection mode</li>
 <li>`area`: Acceleration region</li>
-<li>`create-time`: Creation date</li>
+<li>`create-time`: Creation time</li>
 <li>`zone-name`: Site name</li>
-<li>`use-time`: Last used date</li>
-<li>`active-status`: Activation status</li>If it is left empty, the default value `create-time` is used.
+<li>`use-time`: Last used time</li>
+<li>`active-status` Effective status</li> Default value: `create-time`
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * The sorting direction. Values:
-<li>`asc`: From smallest to largest</li>
-<li>`desc`: From largest to smallest</li>If it is left empty, the default value `desc` is used.
+         * Sort direction. If the field value is a number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include:
+<li>`asc`: From the smallest to largest</li>
+<li>`desc`: From the largest to smallest.</li>Default value: `desc`
          * @type {string || null}
          */
         this.Direction = null;
@@ -1000,6 +1000,34 @@ class DiffIPWhitelist extends  AbstractModel {
             obj.deserialize(params.NoChangeIPWhitelist)
             this.NoChangeIPWhitelist = obj;
         }
+
+    }
+}
+
+/**
+ * VerifyOwnership request structure.
+ * @class
+ */
+class VerifyOwnershipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Site or acceleration domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -1537,7 +1565,7 @@ class ModifyZoneStatusRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Information required for verifying via a file. It's applicable to sites connected via CNAMEs.
  * @class
  */
 class FileVerification extends  AbstractModel {
@@ -1545,13 +1573,13 @@ class FileVerification extends  AbstractModel {
         super();
 
         /**
-         * 
+         * EdgeOne obtains the file verification information in the format of "Scheme + Host + URL Path", (e.g. https://www.example.com/.well-known/teo-verification/z12h416twn.txt). This field is the URL path section of the URL you need to create.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * 
+         * Content of the verification file. The contents of this field need to be filled into the text file returned by `Path`.
          * @type {string || null}
          */
         this.Content = null;
@@ -2474,7 +2502,7 @@ class OriginInfo extends  AbstractModel {
 <li>`ORIGIN_GROUP`: Origin group</li>
 <li>`AWS_S3`: AWS S3 bucket address</li>
 <li>`LB`: Tencent Cloud CLB instance</li>
-<li>`SPACE`: EdgeOne Shield Space</li>
+<li>`SPACE`: EdgeOne Shield Space</li>  
          * @type {string || null}
          */
         this.OriginType = null;
@@ -2683,19 +2711,19 @@ class DnsVerification extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The host record.
          * @type {string || null}
          */
         this.Subdomain = null;
 
         /**
-         * 
+         * The record type.
          * @type {string || null}
          */
         this.RecordType = null;
 
         /**
-         * 
+         * The record value.
          * @type {string || null}
          */
         this.RecordValue = null;
@@ -3922,21 +3950,31 @@ class ModifyHostsCertificateRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * List of domain names that the certificate will be attached to.
+         * Domain names that you need to modify the certificate configuration
          * @type {Array.<string> || null}
          */
         this.Hosts = null;
 
         /**
-         * Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
+         * Certificate configuration mode. Values:
+<li>`disable`: (Default) Do not configure the certificate</li>
+<li>`eofreecert`: Use a free certificate provided by EdgeOne</li>
+<li>`sslcert`: Configure an SSL certificate.</li>
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * ID of the SSL certificate. It takes effect when `mode=sslcert`. To check the certificate ID, go to the [SSL Certificate](https://console.cloud.tencent.com/certoview) console.
          * @type {Array.<ServerCertInfo> || null}
          */
         this.ServerCertInfo = null;
 
         /**
          * Whether the certificate is managed by EdgeOne. Values:
-<li>`apply`: Managed by EdgeOne.</li>
-<li>`none`: Not managed by EdgeOne.</li>If not specified, this field uses the default value `none`.
+<li>`none`: Not managed by EdgeOne</li>
+<li>`apply`: Managed by EdgeOne</li>
+Default value: `none`.
          * @type {string || null}
          */
         this.ApplyType = null;
@@ -3952,6 +3990,7 @@ class ModifyHostsCertificateRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
 
         if (params.ServerCertInfo) {
             this.ServerCertInfo = new Array();
@@ -4239,7 +4278,7 @@ class Zone extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * Site ID.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -4264,19 +4303,21 @@ class Zone extends  AbstractModel {
 
         /**
          * The site status. Values:
-<li>`active`: The name server is switched.</li>
-<li>`pending`: The name server is not switched.</li>
-<li>`moved`: The name server is moved.</li>
-<li>`deactivated`: The site is blocked.</li>
+u200c<li>`active`: The name server is switched to EdgeOne.</li>
+u200c<li>`pending`: The name server is not switched.</li>
+u200c<li>`moved`: The name server is changed to other service providers.</li>
+u200c<li>`deactivated`: The site is blocked.</li>
+<li>`initializing`: The site is not bound with any plan. </li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Access mode of the site. Values:
-<li> `full`: Access through a name server.</li>
-<li> `partial`: Access through a CNAME record.</li>
-<li> `noDomainAccess`: Access without using a domain name </li>
+         * Connection mode of the site. Values:
+<li>`full`: Connect via the name server.</li>
+<li>`partial`: Connect via the CNAME record.</li>
+<li>`noDomainAccess`: Connect without using a domain name
+ 
          * @type {string || null}
          */
         this.Type = null;
@@ -4375,10 +4416,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsFake = null;
 
         /**
-         * Lock status. Valid values: <li>`enable`: Normal. Modifying is allowed;</li><li>`disable`: Locked. Modifying is not allowed.</li>
+         * Lock status. Values: <li>`enable`: Normal. Modification is allowed.</li><li>`disable`: Locked. Modification is not allowed.</li><li>`plan_migrate`: Adjusting the plan. Modification is not allowed.</li> 
          * @type {string || null}
          */
         this.LockStatus = null;
+
+        /**
+         * Ownership verification information
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {OwnershipVerification || null}
+         */
+        this.OwnershipVerification = null;
 
     }
 
@@ -4438,6 +4486,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
         this.IsFake = 'IsFake' in params ? params.IsFake : null;
         this.LockStatus = 'LockStatus' in params ? params.LockStatus : null;
+
+        if (params.OwnershipVerification) {
+            let obj = new OwnershipVerification();
+            obj.deserialize(params.OwnershipVerification)
+            this.OwnershipVerification = obj;
+        }
 
     }
 }
@@ -5285,35 +5339,16 @@ class AccelerationDomain extends  AbstractModel {
         super();
 
         /**
-         * Details of the origin.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {OriginDetail || null}
-         */
-        this.OriginDetail = null;
-
-        /**
-         * Creation time of the accelerated domain name.
+         * ID of the site.
          * @type {string || null}
          */
-        this.CreatedOn = null;
+        this.ZoneId = null;
 
         /**
          * Accelerated domain name
          * @type {string || null}
          */
         this.DomainName = null;
-
-        /**
-         * Modification time of the accelerated domain name.
-         * @type {string || null}
-         */
-        this.ModifiedOn = null;
-
-        /**
-         * ID of the site.
-         * @type {string || null}
-         */
-        this.ZoneId = null;
 
         /**
          * Status of the accelerated domain name. Values:
@@ -5325,6 +5360,37 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.DomainStatus = null;
+
+        /**
+         * Details of the origin.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {OriginDetail || null}
+         */
+        this.OriginDetail = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OriginProtocol = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.HttpOriginPort = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.HttpsOriginPort = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IPv6Status = null;
 
         /**
          * The CNAME address.
@@ -5339,6 +5405,32 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.IdentificationStatus = null;
 
+        /**
+         * Creation time of the accelerated domain name.
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * Modification time of the accelerated domain name.
+         * @type {string || null}
+         */
+        this.ModifiedOn = null;
+
+        /**
+         * Information required to verify the ownership of a domain name.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {OwnershipVerification || null}
+         */
+        this.OwnershipVerification = null;
+
+        /**
+         * Domain name certificate information
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {AccelerationDomainCertificate || null}
+         */
+        this.Certificate = null;
+
     }
 
     /**
@@ -5348,19 +5440,35 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
 
         if (params.OriginDetail) {
             let obj = new OriginDetail();
             obj.deserialize(params.OriginDetail)
             this.OriginDetail = obj;
         }
-        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
+        this.OriginProtocol = 'OriginProtocol' in params ? params.OriginProtocol : null;
+        this.HttpOriginPort = 'HttpOriginPort' in params ? params.HttpOriginPort : null;
+        this.HttpsOriginPort = 'HttpsOriginPort' in params ? params.HttpsOriginPort : null;
+        this.IPv6Status = 'IPv6Status' in params ? params.IPv6Status : null;
         this.Cname = 'Cname' in params ? params.Cname : null;
         this.IdentificationStatus = 'IdentificationStatus' in params ? params.IdentificationStatus : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
+
+        if (params.OwnershipVerification) {
+            let obj = new OwnershipVerification();
+            obj.deserialize(params.OwnershipVerification)
+            this.OwnershipVerification = obj;
+        }
+
+        if (params.Certificate) {
+            let obj = new AccelerationDomainCertificate();
+            obj.deserialize(params.Certificate)
+            this.Certificate = obj;
+        }
 
     }
 }
@@ -6271,13 +6379,13 @@ class DescribeAccelerationDomainsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of matched accelerated domain names.
+         * Total of matched alias domain names.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of accelerated domain names.
+         * Information of all matched acceleration domain names
          * @type {Array.<AccelerationDomain> || null}
          */
         this.AccelerationDomains = null;
@@ -7882,28 +7990,43 @@ class CreateZoneRequest extends  AbstractModel {
         super();
 
         /**
-         * The site name.
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * The access mode. Values:
-<li> `full`: Access through a name server.</li>
-<li> `partial`: Access through a CNAME. Before using this access mode, first verify your site with the site verification API (IdentifyZone).<li>`noDomainAccess`: Access without using a domain name. If this value is passed, only the Tags field needs to be set. </li>
-If not specified, this field uses the default value `full`.
+         * Site access types. Options include:
+<li>`partial`: (Default) Access through a CNAME record</li>
+<li>`full`: Access through a name server</li>
+<li>`noDomainAccess`: Access without using a domain name</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Whether to skip scanning the existing DNS records of the site. Default value: false.
-         * @type {boolean || null}
+         * Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
+         * @type {string || null}
          */
-        this.JumpStart = null;
+        this.ZoneName = null;
 
         /**
-         * The resource tag.
+         * The acceleration area of the L7 domain name when `Type` is `partial` or `full`. When Type is `noDomainAccess`, please leave it blank.
+<li>`global`: Global AZs</li>
+<li>`mainland`: AZs in the Chinese mainland</li>
+<li>`overseas`: (Default) AZs outside the Chinese mainland </li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * ID of the plan to which you want to bind the site. If you don't have an EdgeOne plan, purchase one in the EdgeOne console.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * The site alias. It allows up to 20 characters, including [0-9], [a-z], [A-Z] and [-_]. For details, see [Glossary](https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). If you don't want to use it, just leave it blank.
+         * @type {string || null}
+         */
+        this.AliasZoneName = null;
+
+        /**
+         * Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -7917,10 +8040,10 @@ If not specified, this field uses the default value `full`.
         this.AllowDuplicates = null;
 
         /**
-         * The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
-         * @type {string || null}
+         * Whether to skip scanning the existing DNS records of the site. Default value: false.
+         * @type {boolean || null}
          */
-        this.AliasZoneName = null;
+        this.JumpStart = null;
 
     }
 
@@ -7931,9 +8054,11 @@ If not specified, this field uses the default value `full`.
         if (!params) {
             return;
         }
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.JumpStart = 'JumpStart' in params ? params.JumpStart : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -7944,7 +8069,7 @@ If not specified, this field uses the default value `full`.
             }
         }
         this.AllowDuplicates = 'AllowDuplicates' in params ? params.AllowDuplicates : null;
-        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
+        this.JumpStart = 'JumpStart' in params ? params.JumpStart : null;
 
     }
 }
@@ -8279,6 +8404,50 @@ class AscriptionInfo extends  AbstractModel {
         this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
         this.RecordType = 'RecordType' in params ? params.RecordType : null;
         this.RecordValue = 'RecordValue' in params ? params.RecordValue : null;
+
+    }
+}
+
+/**
+ * VerifyOwnership response structure.
+ * @class
+ */
+class VerifyOwnershipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Result of ownership verification
+<li>`success`: Verification passed</li>
+<li>`fail`: Verification failed</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * When the ownership verification result is `fail`, this field returns the reason of failure.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9622,14 +9791,7 @@ class RuleCondition extends  AbstractModel {
         this.Operator = null;
 
         /**
-         * The match type. Values:
-<li>`filename`: File name</li>
-<li>`extension`: File extension</li>
-<li>`host`: Host</li>
-<li>`full_url`: Full URL, which indicates the complete URL path under the current site and must contain the HTTP protocol, host, and path.</li>
-<li>`url`: Partial URL under the current site</li><li>`client_country`: Country/Region of the client</li>
-<li>`query_string`: Query string in the request URL</li>
-<li>`request_header`: HTTP request header</li>
+         * Match fields. Values: <li>`filename`: File name;</li><li>`extension`: File suffix;</li><li>`host`: HOST;</li><li>`full_url`: The complete URL path under the current site, including the HTTP protocol, Host and path;</li><li>`url`: The URL path request under the current site;</li><li>`client_country`: Client country;</li><li>`query_string`: The query string of the URL requested under the current site;</li><li>`request_header`: HTTP request header. </li>
          * @type {string || null}
          */
         this.Target = null;
@@ -10166,7 +10328,7 @@ class VanityNameServersIps extends  AbstractModel {
 }
 
 /**
- * 
+ * Information required for switching DNS servers. It's applicable to sites connected via NSs.
  * @class
  */
 class NsVerification extends  AbstractModel {
@@ -10174,7 +10336,7 @@ class NsVerification extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The DNS server address assigned to the user when connecting a site to EO via NS. You need to switch the NameServer of the domain name to this address.
          * @type {Array.<string> || null}
          */
         this.NameServers = null;
@@ -10607,6 +10769,84 @@ Note: If any condition in the array is met, the feature will run.
                 this.Actions.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * HTTPS server certificate configuration
+ * @class
+ */
+class CertificateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the server certificate.
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Alias of the certificate.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Type of the certificate. Values:
+<li>`default`: Default certificate</li>
+<li>`upload`: Specified certificate</li>
+<li>`managed`: Tencent Cloud-managed certificate</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The certificate expiration time.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Time when the certificate is deployed.
+         * @type {string || null}
+         */
+        this.DeployTime = null;
+
+        /**
+         * Signature algorithm.
+         * @type {string || null}
+         */
+        this.SignAlgo = null;
+
+        /**
+         * Status of the certificate. Values:
+u200c<li>`deployed`: The deployment has completed</li>
+u200c<li>`processing`: Deployment in progress</li>
+u200c<li>`applying`: Application in progress</li>
+u200c<li>`failed`: Application rejected</li>
+<li>`issued`: Binding failed.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.DeployTime = 'DeployTime' in params ? params.DeployTime : null;
+        this.SignAlgo = 'SignAlgo' in params ? params.SignAlgo : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -11201,7 +11441,8 @@ class CreateAccelerationDomainResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Use the information returned by this parameter to verify the ownership of a domain name. For details, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {OwnershipVerification || null}
          */
         this.OwnershipVerification = null;
@@ -11292,10 +11533,23 @@ class CreateZoneResponse extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * Site ID.
          * @type {string || null}
          */
         this.ZoneId = null;
+
+        /**
+         * Site ownership verification information. After the site is created, you need to complete the ownership verification before the site can serve normally.
+
+If `Type=partial`, add TXT records to your DNS provider or add files to the root DNS server, and then call [VerifyOwnership]() to complete verification. For more information, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+
+If `Type = full`, switch the DNS server as instructed by [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1). Then call [VerifyOwnership]() to check the result.
+
+If `Type = noDomainAccess`, leave it blank. No action is required.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {OwnershipVerification || null}
+         */
+        this.OwnershipVerification = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11313,6 +11567,12 @@ class CreateZoneResponse extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.OwnershipVerification) {
+            let obj = new OwnershipVerification();
+            obj.deserialize(params.OwnershipVerification)
+            this.OwnershipVerification = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12523,13 +12783,13 @@ class CreateAccelerationDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the site related with the accelerated domain name.
+         * ID of the site related with the acceleration domain name.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Accelerated domain name
+         * Acceleration domain name
          * @type {string || null}
          */
         this.DomainName = null;
@@ -12539,6 +12799,30 @@ class CreateAccelerationDomainRequest extends  AbstractModel {
          * @type {OriginInfo || null}
          */
         this.OriginInfo = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OriginProtocol = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.HttpOriginPort = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.HttpsOriginPort = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IPv6Status = null;
 
     }
 
@@ -12557,6 +12841,10 @@ class CreateAccelerationDomainRequest extends  AbstractModel {
             obj.deserialize(params.OriginInfo)
             this.OriginInfo = obj;
         }
+        this.OriginProtocol = 'OriginProtocol' in params ? params.OriginProtocol : null;
+        this.HttpOriginPort = 'HttpOriginPort' in params ? params.HttpOriginPort : null;
+        this.HttpsOriginPort = 'HttpsOriginPort' in params ? params.HttpsOriginPort : null;
+        this.IPv6Status = 'IPv6Status' in params ? params.IPv6Status : null;
 
     }
 }
@@ -13439,7 +13727,7 @@ class DescribeZonesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Details of sites
+         * Details of sites.
          * @type {Array.<Zone> || null}
          */
         this.Zones = null;
@@ -14640,7 +14928,7 @@ class CreateSharedCNAMEResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Information of domain name ownership verification.
  * @class
  */
 class OwnershipVerification extends  AbstractModel {
@@ -14648,19 +14936,24 @@ class OwnershipVerification extends  AbstractModel {
         super();
 
         /**
-         * 
+         * u200cInformation required for authentication using DNS resolution. It's applicable to sites connected via CNAME. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+ 
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {DnsVerification || null}
          */
         this.DnsVerification = null;
 
         /**
-         * 
+         * u200cInformation required for verifying via a file. It's applicable to sites connected via CNAMEs. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+ 
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {FileVerification || null}
          */
         this.FileVerification = null;
 
         /**
-         * 
+         * u200cInformation required for switching DNS servers. It's applicable to sites connected via NSs. For details, see [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {NsVerification || null}
          */
         this.NsVerification = null;
@@ -15038,6 +15331,50 @@ class ModifySecurityIPGroupRequest extends  AbstractModel {
 }
 
 /**
+ * Information of the acceleration domain name certificate.
+ * @class
+ */
+class AccelerationDomainCertificate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate configuration mode. Values: <li>`disable`: Do not configure the certificate;</li><li>`eofreecert`: Use a free certificate provided by EdgeOne; </li><li>`sslcert`: Configure an SSL certificate.</li>
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * List of certificates
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<CertificateInfo> || null}
+         */
+        this.List = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new CertificateInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Active bot detection results.
  * @class
  */
@@ -15294,27 +15631,47 @@ class DescribeAccelerationDomainsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the site related with the accelerated domain name.
+         * ID of the site related with the acceleration domain name.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Filters. Each filter can have up to 20 entries. See below for details: 
-<li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No 
-<li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No 
-<li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No 
-<li>`backup-origin`:<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No 
-<li>`domain-cname`:<br>   <strong>Accelerated CNAME</strong><br>   Type: String<br>   Required: No 
-<li>`share-cname`:<br>   <strong> Shared CNAME</strong><br>   Type: String<br>   Required: No
+         * Offset for paginated queries. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit on paginated queries. Default value: 20. Maximum value: 200.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter conditions. Up to 20 values for each filter. If it is not passed in, all domain names related with the specific zone-id are returned. 
+<li>`domain-name`: Acceleration domain name</li>
+<li>`origin-type`: Type of the origin</li>
+<li>`origin`: Primary origin address</li>
+<li>`backup-origin`: Secondary origin address</li>
+<li>`domain-cname`: CNAME</li>
+<li>`share-cname`: Shared CNAME</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
 
         /**
-         * The sorting order. Values:
+         * Sort the returned results according to this field. Values include:
+<li>`created_on`: Creation time of the acceleration domain name</li>
+<li>`domain-name`: (Default) Acceleration domain name.</li> 
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort direction. If the field value is number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include:
 <li>`asc`: Ascending order.</li>
-<li>`desc`: Descending order.</li>Default value: `asc`.
+<li>`desc`: Descending order.</li> Default value: `asc`.
          * @type {string || null}
          */
         this.Direction = null;
@@ -15327,27 +15684,6 @@ class DescribeAccelerationDomainsRequest extends  AbstractModel {
          */
         this.Match = null;
 
-        /**
-         * Limit on paginated queries. Default value: 20. Maximum value: 200.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset for paginated queries. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The sorting criteria. Values:
-<li>`created_on`: Creation time of the accelerated domain name.</li>
-<li>`domain-name`: Acceleration domain name.</li>
-</li>Default value: `domain-name`.
-         * @type {string || null}
-         */
-        this.Order = null;
-
     }
 
     /**
@@ -15358,6 +15694,8 @@ class DescribeAccelerationDomainsRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -15367,11 +15705,9 @@ class DescribeAccelerationDomainsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
         this.Direction = 'Direction' in params ? params.Direction : null;
         this.Match = 'Match' in params ? params.Match : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -15798,6 +16134,7 @@ module.exports = {
     DescribeZonesRequest: DescribeZonesRequest,
     L4OfflineLog: L4OfflineLog,
     DiffIPWhitelist: DiffIPWhitelist,
+    VerifyOwnershipRequest: VerifyOwnershipRequest,
     DeleteSecurityIPGroupResponse: DeleteSecurityIPGroupResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     OriginRecord: OriginRecord,
@@ -15918,6 +16255,7 @@ module.exports = {
     Task: Task,
     ModifyRuleResponse: ModifyRuleResponse,
     AscriptionInfo: AscriptionInfo,
+    VerifyOwnershipResponse: VerifyOwnershipResponse,
     RuleItem: RuleItem,
     FirstPartConfig: FirstPartConfig,
     DescribeDDoSAttackEventResponse: DescribeDDoSAttackEventResponse,
@@ -15954,6 +16292,7 @@ module.exports = {
     CreateApplicationProxyRuleResponse: CreateApplicationProxyRuleResponse,
     RateLimitUserRule: RateLimitUserRule,
     SubRule: SubRule,
+    CertificateInfo: CertificateInfo,
     CreatePlanForZoneRequest: CreatePlanForZoneRequest,
     ModifyAliasDomainStatusRequest: ModifyAliasDomainStatusRequest,
     TimingDataItem: TimingDataItem,
@@ -16039,6 +16378,7 @@ module.exports = {
     DescribeDDoSAttackEventRequest: DescribeDDoSAttackEventRequest,
     OriginGroup: OriginGroup,
     ModifySecurityIPGroupRequest: ModifySecurityIPGroupRequest,
+    AccelerationDomainCertificate: AccelerationDomainCertificate,
     AlgDetectResult: AlgDetectResult,
     QueryString: QueryString,
     DefaultServerCertInfo: DefaultServerCertInfo,

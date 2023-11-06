@@ -163,6 +163,7 @@ const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const AwsPrivateAccess = models.AwsPrivateAccess;
+const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
@@ -187,6 +188,7 @@ const DeleteRoundPlayRequest = models.DeleteRoundPlayRequest;
 const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
+const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
 const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
@@ -208,12 +210,14 @@ const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const ColorEnhanceInfo = models.ColorEnhanceInfo;
+const EditMediaOutputConfig = models.EditMediaOutputConfig;
 const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitionTaskAsrFullTextResultOutputSubtitleItem;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const VideoFrameInterpolationInfo = models.VideoFrameInterpolationInfo;
+const EditMediaRequest = models.EditMediaRequest;
 const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
 const LicenseUsageDataItem = models.LicenseUsageDataItem;
 const RebuildMediaTargetAudioStream = models.RebuildMediaTargetAudioStream;
@@ -292,6 +296,7 @@ const DescribeRebuildMediaTemplatesRequest = models.DescribeRebuildMediaTemplate
 const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
 const CreateRoundPlayResponse = models.CreateRoundPlayResponse;
 const MediaSubtitleInput = models.MediaSubtitleInput;
+const ProcessMediaRequest = models.ProcessMediaRequest;
 const DeleteCDNDomainResponse = models.DeleteCDNDomainResponse;
 const PornImageResult = models.PornImageResult;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
@@ -307,6 +312,7 @@ const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsRe
 const ModifyAdaptiveDynamicStreamingTemplateResponse = models.ModifyAdaptiveDynamicStreamingTemplateResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const DomainDetailInfo = models.DomainDetailInfo;
+const EditMediaVideoStream = models.EditMediaVideoStream;
 const ExtractTraceWatermarkTask = models.ExtractTraceWatermarkTask;
 const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
@@ -721,12 +727,13 @@ const HighlightSegmentItem = models.HighlightSegmentItem;
 const CreateReviewTemplateResponse = models.CreateReviewTemplateResponse;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const ComposeMediaOutput = models.ComposeMediaOutput;
+const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const PullUploadTask = models.PullUploadTask;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
 const HDRInfo = models.HDRInfo;
-const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
+const EditMediaTEHDConfig = models.EditMediaTEHDConfig;
 const AiRecognitionResult = models.AiRecognitionResult;
 
 
@@ -797,6 +804,17 @@ The files must be in HLS format. Preferably, they should have the same bitrate a
     DescribeFileAttributes(req, cb) {
         let resp = new DescribeFileAttributesResponse();
         this.request("DescribeFileAttributes", req, resp, cb);
+    }
+
+    /**
+     * 
+     * @param {EditMediaRequest} req
+     * @param {function(string, EditMediaResponse):void} cb
+     * @public
+     */
+    EditMedia(req, cb) {
+        let resp = new EditMediaResponse();
+        this.request("EditMedia", req, resp, cb);
     }
 
     /**
@@ -1732,6 +1750,29 @@ This API is used to get the information of custom and [preset](https://intl.clou
     DeleteImageProcessingTemplate(req, cb) {
         let resp = new DeleteImageProcessingTemplateResponse();
         this.request("DeleteImageProcessingTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate a media processing task on a VOD file. The task may include:
+1. Video transcoding (with watermark)
+2. Animated image generating
+3. Time point screenshot
+4. Sampled screenshot
+5. Image sprite generating
+6. Taking a screenshot to use as the thumbnail
+7. Adaptive bitrate streaming and encryption
+8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
+10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
+
+If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+     * @param {ProcessMediaRequest} req
+     * @param {function(string, ProcessMediaResponse):void} cb
+     * @public
+     */
+    ProcessMedia(req, cb) {
+        let resp = new ProcessMediaResponse();
+        this.request("ProcessMedia", req, resp, cb);
     }
 
     /**

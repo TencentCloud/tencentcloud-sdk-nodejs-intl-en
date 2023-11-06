@@ -8598,6 +8598,41 @@ class AwsPrivateAccess extends  AbstractModel {
 }
 
 /**
+ * EditMedia response structure.
+ * @class
+ */
+class EditMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Parameters for OCR-based recognition of politically sensitive content
  * @class
  */
@@ -10086,6 +10121,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ProcessMedia response structure.
+ * @class
+ */
+class ProcessMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateWordSamples response structure.
  * @class
  */
@@ -11186,6 +11256,79 @@ Default value: `weak`.
 }
 
 /**
+ * 
+ * @class
+ */
+class EditMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 
+         * @type {EditMediaVideoStream || null}
+         */
+        this.VideoStream = null;
+
+        /**
+         * 
+         * @type {EditMediaTEHDConfig || null}
+         */
+        this.TEHDConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+        if (params.VideoStream) {
+            let obj = new EditMediaVideoStream();
+            obj.deserialize(params.VideoStream)
+            this.VideoStream = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new EditMediaTEHDConfig();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
+        }
+
+    }
+}
+
+/**
  * Information of a video splitting task.
  * @class
  */
@@ -11479,6 +11622,125 @@ class VideoFrameInterpolationInfo extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
+
+    }
+}
+
+/**
+ * EditMedia request structure.
+ * @class
+ */
+class EditMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InputType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 
+         * @type {Array.<EditMediaFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * 
+         * @type {Array.<EditMediaStreamInfo> || null}
+         */
+        this.StreamInfos = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ProcedureName = null;
+
+        /**
+         * 
+         * @type {EditMediaOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Reserved field for special purposes.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputType = 'InputType' in params ? params.InputType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new EditMediaFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new EditMediaStreamInfo();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
+            }
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
+
+        if (params.OutputConfig) {
+            let obj = new EditMediaOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -16219,6 +16481,125 @@ For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
 }
 
 /**
+ * ProcessMedia request structure.
+ * @class
+ */
+class ProcessMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Parameter of video processing task.
+         * @type {MediaProcessTaskInput || null}
+         */
+        this.MediaProcessTask = null;
+
+        /**
+         * The information of the audio/video moderation task\*.
+This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.AiContentReviewTask = null;
+
+        /**
+         * Video content analysis task parameter.
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.AiAnalysisTask = null;
+
+        /**
+         * Type parameter of video content recognition task.
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.AiRecognitionTask = null;
+
+        /**
+         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+         * @type {string || null}
+         */
+        this.TasksNotifyMode = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Reserved field for special purposes.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.MediaProcessTask) {
+            let obj = new MediaProcessTaskInput();
+            obj.deserialize(params.MediaProcessTask)
+            this.MediaProcessTask = obj;
+        }
+
+        if (params.AiContentReviewTask) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.AiContentReviewTask)
+            this.AiContentReviewTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
  * DeleteCDNDomain response structure.
  * @class
  */
@@ -17050,6 +17431,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.QUICConfig)
             this.QUICConfig = obj;
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class EditMediaVideoStream extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
 
     }
 }
@@ -42001,6 +42431,42 @@ Default value: 0.
 }
 
 /**
+ * ModifyWatermarkTemplate response structure.
+ * @class
+ */
+class ModifyWatermarkTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image watermark address. This field has a value only when `ImageTemplate.ImageContent` is not empty.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The information of a pull and upload task.
  * @class
  */
@@ -42293,25 +42759,18 @@ Note:
 }
 
 /**
- * ModifyWatermarkTemplate response structure.
+ * 
  * @class
  */
-class ModifyWatermarkTemplateResponse extends  AbstractModel {
+class EditMediaTEHDConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image watermark address. This field has a value only when `ImageTemplate.ImageContent` is not empty.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
-        this.ImageUrl = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Type = null;
 
     }
 
@@ -42322,8 +42781,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -42623,6 +43081,7 @@ module.exports = {
     ForbidMediaDistributionRequest: ForbidMediaDistributionRequest,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
     AwsPrivateAccess: AwsPrivateAccess,
+    EditMediaResponse: EditMediaResponse,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     TaskOutputMediaInfo: TaskOutputMediaInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
@@ -42647,6 +43106,7 @@ module.exports = {
     SuperResolutionInfo: SuperResolutionInfo,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
+    ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
@@ -42668,12 +43128,14 @@ module.exports = {
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     ColorEnhanceInfo: ColorEnhanceInfo,
+    EditMediaOutputConfig: EditMediaOutputConfig,
     SplitMediaTaskSegmentInfo: SplitMediaTaskSegmentInfo,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     AiRecognitionTaskAsrFullTextResultOutputSubtitleItem: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     VideoFrameInterpolationInfo: VideoFrameInterpolationInfo,
+    EditMediaRequest: EditMediaRequest,
     DescribeFileAttributesResponse: DescribeFileAttributesResponse,
     LicenseUsageDataItem: LicenseUsageDataItem,
     RebuildMediaTargetAudioStream: RebuildMediaTargetAudioStream,
@@ -42752,6 +43214,7 @@ module.exports = {
     ReviewImageSegmentItem: ReviewImageSegmentItem,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
+    ProcessMediaRequest: ProcessMediaRequest,
     DeleteCDNDomainResponse: DeleteCDNDomainResponse,
     PornImageResult: PornImageResult,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
@@ -42767,6 +43230,7 @@ module.exports = {
     ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     DomainDetailInfo: DomainDetailInfo,
+    EditMediaVideoStream: EditMediaVideoStream,
     ExtractTraceWatermarkTask: ExtractTraceWatermarkTask,
     AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
@@ -43181,12 +43645,13 @@ module.exports = {
     CreateReviewTemplateResponse: CreateReviewTemplateResponse,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     ComposeMediaOutput: ComposeMediaOutput,
+    ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     PullUploadTask: PullUploadTask,
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,
     HDRInfo: HDRInfo,
-    ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
+    EditMediaTEHDConfig: EditMediaTEHDConfig,
     AiRecognitionResult: AiRecognitionResult,
 
 }

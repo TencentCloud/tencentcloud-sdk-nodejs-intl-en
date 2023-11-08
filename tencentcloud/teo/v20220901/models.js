@@ -2333,6 +2333,56 @@ class DeleteAccelerationDomainsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeApplicationProxies response structure.
+ * @class
+ */
+class DescribeApplicationProxiesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of application proxies.
+         * @type {Array.<ApplicationProxy> || null}
+         */
+        this.ApplicationProxies = null;
+
+        /**
+         * Total number of records.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ApplicationProxies) {
+            this.ApplicationProxies = new Array();
+            for (let z in params.ApplicationProxies) {
+                let obj = new ApplicationProxy();
+                obj.deserialize(params.ApplicationProxies[z]);
+                this.ApplicationProxies.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The scope to which the exception rule applies
  * @class
  */
@@ -4316,8 +4366,7 @@ u200c<li>`deactivated`: The site is blocked.</li>
          * Connection mode of the site. Values:
 <li>`full`: Connect via the name server.</li>
 <li>`partial`: Connect via the CNAME record.</li>
-<li>`noDomainAccess`: Connect without using a domain name
- 
+<li>`noDomainAccess`: Connect without using a domain name</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -4583,6 +4632,41 @@ Note: If the value of `Id` is `StatusCode`, values in the array are all integer 
         this.Id = 'Id' in params ? params.Id : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Choices = 'Choices' in params ? params.Choices : null;
+
+    }
+}
+
+/**
+ * Bindings between a shared CNAME and connected domain names
+ * @class
+ */
+class BindSharedCNAMEMap extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The shared CNAME to be bound with or unbound from.
+         * @type {string || null}
+         */
+        this.SharedCNAME = null;
+
+        /**
+         * Acceleration domains (up to 20).
+         * @type {Array.<string> || null}
+         */
+        this.DomainNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SharedCNAME = 'SharedCNAME' in params ? params.SharedCNAME : null;
+        this.DomainNames = 'DomainNames' in params ? params.DomainNames : null;
 
     }
 }
@@ -4969,6 +5053,43 @@ class Ipv6 extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * WebSocket configuration
+ * @class
+ */
+class WebSocket extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable WebSocket connection timeout. Values:
+<li>`on`: The field "Timeout" can be configured.</li>
+<li>`off`: The field "Timeout" is fixed to 15 seconds.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The timeout period in seconds. Maximum value: 120.
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
     }
 }
@@ -6156,24 +6277,12 @@ class DeleteApplicationProxyRuleRequest extends  AbstractModel {
 }
 
 /**
- * DescribeApplicationProxies response structure.
+ * BindSharedCNAME response structure.
  * @class
  */
-class DescribeApplicationProxiesResponse extends  AbstractModel {
+class BindSharedCNAMEResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * List of application proxies.
-         * @type {Array.<ApplicationProxy> || null}
-         */
-        this.ApplicationProxies = null;
-
-        /**
-         * Total number of records.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6190,16 +6299,6 @@ class DescribeApplicationProxiesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ApplicationProxies) {
-            this.ApplicationProxies = new Array();
-            for (let z in params.ApplicationProxies) {
-                let obj = new ApplicationProxy();
-                obj.deserialize(params.ApplicationProxies[z]);
-                this.ApplicationProxies.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6366,6 +6465,41 @@ class FileAscriptionInfo extends  AbstractModel {
         }
         this.IdentifyPath = 'IdentifyPath' in params ? params.IdentifyPath : null;
         this.IdentifyContent = 'IdentifyContent' in params ? params.IdentifyContent : null;
+
+    }
+}
+
+/**
+ * DeleteSharedCNAME request structure.
+ * @class
+ */
+class DeleteSharedCNAMERequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site to which the shared CNAME belongs.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The shared CNAME to be deleted
+         * @type {string || null}
+         */
+        this.SharedCNAME = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.SharedCNAME = 'SharedCNAME' in params ? params.SharedCNAME : null;
 
     }
 }
@@ -6979,26 +7113,18 @@ class IdentifyZoneResponse extends  AbstractModel {
 }
 
 /**
- * WebSocket configuration
+ * DeleteSharedCNAME response structure.
  * @class
  */
-class WebSocket extends  AbstractModel {
+class DeleteSharedCNAMEResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable WebSocket connection timeout. Values:
-<li>`on`: The field "Timeout" can be configured.</li>
-<li>`off`: The field "Timeout" is fixed to 15 seconds.</li>
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * The timeout period in seconds. Maximum value: 120.
-         * @type {number || null}
-         */
-        this.Timeout = null;
+        this.RequestId = null;
 
     }
 
@@ -7009,8 +7135,7 @@ class WebSocket extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7837,30 +7962,24 @@ class DescribeDefaultCertificatesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAliasDomains response structure.
+ * BindZoneToPlan request structure.
  * @class
  */
-class DescribeAliasDomainsResponse extends  AbstractModel {
+class BindZoneToPlanRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total eligible alias domain names.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Information of the eligible alias domain names.
-         * @type {Array.<AliasDomain> || null}
-         */
-        this.AliasDomains = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the site to be bound.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneId = null;
+
+        /**
+         * ID of the target plan.
+         * @type {string || null}
+         */
+        this.PlanId = null;
 
     }
 
@@ -7871,17 +7990,8 @@ class DescribeAliasDomainsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.AliasDomains) {
-            this.AliasDomains = new Array();
-            for (let z in params.AliasDomains) {
-                let obj = new AliasDomain();
-                obj.deserialize(params.AliasDomains[z]);
-                this.AliasDomains.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
 
     }
 }
@@ -10121,6 +10231,48 @@ class RateLimitTemplate extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class OriginGroupReference extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+    }
+}
+
+/**
  * ModifyHostsCertificate response structure.
  * @class
  */
@@ -12151,6 +12303,58 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * BindSharedCNAME request structure.
+ * @class
+ */
+class BindSharedCNAMERequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site related with the acceleration domain name.	
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Action type. Values:
+<li>`bind`: To bind</li>
+<li>`unbind`: To unbind</li>
+         * @type {string || null}
+         */
+        this.BindType = null;
+
+        /**
+         * Bindings between domain names and a shared CNAME
+         * @type {Array.<BindSharedCNAMEMap> || null}
+         */
+        this.BindSharedCNAMEMaps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.BindType = 'BindType' in params ? params.BindType : null;
+
+        if (params.BindSharedCNAMEMaps) {
+            this.BindSharedCNAMEMaps = new Array();
+            for (let z in params.BindSharedCNAMEMaps) {
+                let obj = new BindSharedCNAMEMap();
+                obj.deserialize(params.BindSharedCNAMEMaps[z]);
+                this.BindSharedCNAMEMaps.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Client filtering
  * @class
  */
@@ -12740,24 +12944,30 @@ class AccelerateType extends  AbstractModel {
 }
 
 /**
- * BindZoneToPlan request structure.
+ * DescribeAliasDomains response structure.
  * @class
  */
-class BindZoneToPlanRequest extends  AbstractModel {
+class DescribeAliasDomainsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the site to be bound.
-         * @type {string || null}
+         * Total eligible alias domain names.
+         * @type {number || null}
          */
-        this.ZoneId = null;
+        this.TotalCount = null;
 
         /**
-         * ID of the target plan.
+         * Information of the eligible alias domain names.
+         * @type {Array.<AliasDomain> || null}
+         */
+        this.AliasDomains = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PlanId = null;
+        this.RequestId = null;
 
     }
 
@@ -12768,8 +12978,17 @@ class BindZoneToPlanRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AliasDomains) {
+            this.AliasDomains = new Array();
+            for (let z in params.AliasDomains) {
+                let obj = new AliasDomain();
+                obj.deserialize(params.AliasDomains[z]);
+                this.AliasDomains.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14045,7 +14264,7 @@ class StandardDebug extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * The client IP to allow. It can be an IPv4/IPv6 address or a CIDR block. If not specified, it means to allow any client IP
+         * Allowed client source. It supports IPv4/IPv6 addresses and CIDR blocks.
          * @type {Array.<string> || null}
          */
         this.AllowClientIPList = null;
@@ -14901,7 +15120,7 @@ class CreateSharedCNAMEResponse extends  AbstractModel {
         super();
 
         /**
-         * Shared CNAME. Format: <Custom Prefix> + <12-bit random string in ZoneId> + "share.eo.dnse[0-5].com"
+         * Shared CNAME. Format: <Custom prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
          * @type {string || null}
          */
         this.SharedCNAME = null;
@@ -15190,52 +15409,40 @@ class OriginGroup extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * 
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.GroupId = null;
 
         /**
-         * The site name.
+         * 
          * @type {string || null}
          */
-        this.ZoneName = null;
+        this.Name = null;
 
         /**
-         * The ID of the origin group.
+         * 
          * @type {string || null}
          */
-        this.OriginGroupId = null;
+        this.Type = null;
 
         /**
-         * The origin type. Values:
-<li>`self`: Customer origin</li>
-<li>`third_party`: Third-party origin</li>
-<li>`cos`: Tencent Cloud COS origin</li>
-         * @type {string || null}
-         */
-        this.OriginType = null;
-
-        /**
-         * The name of the origin group.
-         * @type {string || null}
-         */
-        this.OriginGroupName = null;
-
-        /**
-         * The origin configuration type when `OriginType=self`. Values:
-<li>`area`: Configure by region.</li>
-<li>`weight`: Configure by weight.</li>
-<li>`proto`: Configure by HTTP protocol.</li>When `OriginType=third_party/cos`, leave this field empty.
-         * @type {string || null}
-         */
-        this.ConfigurationType = null;
-
-        /**
-         * The origin record information.
+         * 
          * @type {Array.<OriginRecord> || null}
          */
-        this.OriginRecords = null;
+        this.Records = null;
+
+        /**
+         * 
+         * @type {Array.<OriginGroupReference> || null}
+         */
+        this.References = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
         /**
          * The update time of the origin group.
@@ -15244,8 +15451,8 @@ class OriginGroup extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * The origin domain when `OriginType=self`.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Origin-pull host header
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -15259,21 +15466,28 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.OriginGroupId = 'OriginGroupId' in params ? params.OriginGroupId : null;
-        this.OriginType = 'OriginType' in params ? params.OriginType : null;
-        this.OriginGroupName = 'OriginGroupName' in params ? params.OriginGroupName : null;
-        this.ConfigurationType = 'ConfigurationType' in params ? params.ConfigurationType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.OriginRecords) {
-            this.OriginRecords = new Array();
-            for (let z in params.OriginRecords) {
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
                 let obj = new OriginRecord();
-                obj.deserialize(params.OriginRecords[z]);
-                this.OriginRecords.push(obj);
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
             }
         }
+
+        if (params.References) {
+            this.References = new Array();
+            for (let z in params.References) {
+                let obj = new OriginGroupReference();
+                obj.deserialize(params.References[z]);
+                this.References.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.HostHeader = 'HostHeader' in params ? params.HostHeader : null;
 
@@ -15593,9 +15807,11 @@ class CreateSharedCNAMERequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Prefix of the shared CNAME. Format: "test-api","test-api.com". Up 50 characters allowed.
-The full format of the shared CNAME is: <custom prefix> + <12-bit random string in ZoneId> + "share.eo.dns[0-5].com". For example, if the prefix is "example.com", the created shared CNAME is "example.com.sai2ig51kaa5.share.eo.dnse2.com"
-Example: example.com
+         * Prefix of the shared CNAME (up to 50 characters). Format: "test-api", "test-api.com". 
+
+The complete format of a shared CNAME: <Custom Prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+
+For example, if the prefix is `example.com`, the generated shared CNAME is `example.com.sai2ig51kaa5.share.dnse2.com`.
          * @type {string || null}
          */
         this.SharedCNAMEPrefix = null;
@@ -16156,6 +16372,7 @@ module.exports = {
     BotUserRule: BotUserRule,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
     DeleteAccelerationDomainsRequest: DeleteAccelerationDomainsRequest,
+    DescribeApplicationProxiesResponse: DescribeApplicationProxiesResponse,
     ExceptUserRuleScope: ExceptUserRuleScope,
     ModifyAliasDomainRequest: ModifyAliasDomainRequest,
     DescribeAvailablePlansRequest: DescribeAvailablePlansRequest,
@@ -16194,12 +16411,14 @@ module.exports = {
     Zone: Zone,
     DescribeRulesSettingResponse: DescribeRulesSettingResponse,
     RuleExtraParameter: RuleExtraParameter,
+    BindSharedCNAMEMap: BindSharedCNAMEMap,
     RulesSettingAction: RulesSettingAction,
     DDoSAttackEvent: DDoSAttackEvent,
     ClientIpHeader: ClientIpHeader,
     DescribeDDoSAttackTopDataRequest: DescribeDDoSAttackTopDataRequest,
     Quic: Quic,
     Ipv6: Ipv6,
+    WebSocket: WebSocket,
     ModifyAccelerationDomainRequest: ModifyAccelerationDomainRequest,
     DescribeRulesRequest: DescribeRulesRequest,
     DescribeContentQuotaResponse: DescribeContentQuotaResponse,
@@ -16221,16 +16440,17 @@ module.exports = {
     ClientIpCountry: ClientIpCountry,
     CreatePrefetchTaskRequest: CreatePrefetchTaskRequest,
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
-    DescribeApplicationProxiesResponse: DescribeApplicationProxiesResponse,
+    BindSharedCNAMEResponse: BindSharedCNAMEResponse,
     DescribeTopL7AnalysisDataRequest: DescribeTopL7AnalysisDataRequest,
     FileAscriptionInfo: FileAscriptionInfo,
+    DeleteSharedCNAMERequest: DeleteSharedCNAMERequest,
     DescribeAccelerationDomainsResponse: DescribeAccelerationDomainsResponse,
     ZoneSetting: ZoneSetting,
     DescribeTopL7CacheDataResponse: DescribeTopL7CacheDataResponse,
     DescribeOverviewL7DataRequest: DescribeOverviewL7DataRequest,
     SwitchConfig: SwitchConfig,
     IdentifyZoneResponse: IdentifyZoneResponse,
-    WebSocket: WebSocket,
+    DeleteSharedCNAMEResponse: DeleteSharedCNAMEResponse,
     DDoSBlockData: DDoSBlockData,
     VanityNameServers: VanityNameServers,
     RuleChoicePropertiesItem: RuleChoicePropertiesItem,
@@ -16245,7 +16465,7 @@ module.exports = {
     CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
     NoCache: NoCache,
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
-    DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
+    BindZoneToPlanRequest: BindZoneToPlanRequest,
     SecurityType: SecurityType,
     IPWhitelist: IPWhitelist,
     DDoS: DDoS,
@@ -16280,6 +16500,7 @@ module.exports = {
     DescribeOverviewL7DataResponse: DescribeOverviewL7DataResponse,
     Hsts: Hsts,
     RateLimitTemplate: RateLimitTemplate,
+    OriginGroupReference: OriginGroupReference,
     ModifyHostsCertificateResponse: ModifyHostsCertificateResponse,
     CreateRuleRequest: CreateRuleRequest,
     TemplateConfig: TemplateConfig,
@@ -16315,6 +16536,7 @@ module.exports = {
     ModifyOriginGroupRequest: ModifyOriginGroupRequest,
     DownloadL4LogsResponse: DownloadL4LogsResponse,
     DescribeTimingL7CacheDataResponse: DescribeTimingL7CacheDataResponse,
+    BindSharedCNAMERequest: BindSharedCNAMERequest,
     RateLimitIntelligence: RateLimitIntelligence,
     IpTableConfig: IpTableConfig,
     ModifyApplicationProxyStatusRequest: ModifyApplicationProxyStatusRequest,
@@ -16329,7 +16551,7 @@ module.exports = {
     CreateOriginGroupResponse: CreateOriginGroupResponse,
     ModifyApplicationProxyRuleStatusRequest: ModifyApplicationProxyRuleStatusRequest,
     AccelerateType: AccelerateType,
-    BindZoneToPlanRequest: BindZoneToPlanRequest,
+    DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
     CreateAccelerationDomainRequest: CreateAccelerationDomainRequest,
     FollowOrigin: FollowOrigin,
     DeleteZoneRequest: DeleteZoneRequest,

@@ -54,6 +54,7 @@ const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
+const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
 const ExceptUserRuleScope = models.ExceptUserRuleScope;
 const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
@@ -92,12 +93,14 @@ const ModifyAccelerationDomainStatusesResponse = models.ModifyAccelerationDomain
 const Zone = models.Zone;
 const DescribeRulesSettingResponse = models.DescribeRulesSettingResponse;
 const RuleExtraParameter = models.RuleExtraParameter;
+const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
 const RulesSettingAction = models.RulesSettingAction;
 const DDoSAttackEvent = models.DDoSAttackEvent;
 const ClientIpHeader = models.ClientIpHeader;
 const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
 const Quic = models.Quic;
 const Ipv6 = models.Ipv6;
+const WebSocket = models.WebSocket;
 const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
 const DescribeRulesRequest = models.DescribeRulesRequest;
 const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
@@ -119,16 +122,17 @@ const DescribeOriginProtectionRequest = models.DescribeOriginProtectionRequest;
 const ClientIpCountry = models.ClientIpCountry;
 const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
 const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
-const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
+const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
 const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest;
 const FileAscriptionInfo = models.FileAscriptionInfo;
+const DeleteSharedCNAMERequest = models.DeleteSharedCNAMERequest;
 const DescribeAccelerationDomainsResponse = models.DescribeAccelerationDomainsResponse;
 const ZoneSetting = models.ZoneSetting;
 const DescribeTopL7CacheDataResponse = models.DescribeTopL7CacheDataResponse;
 const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
 const SwitchConfig = models.SwitchConfig;
 const IdentifyZoneResponse = models.IdentifyZoneResponse;
-const WebSocket = models.WebSocket;
+const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
 const DDoSBlockData = models.DDoSBlockData;
 const VanityNameServers = models.VanityNameServers;
 const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
@@ -143,7 +147,7 @@ const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataR
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const NoCache = models.NoCache;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
-const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
+const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const SecurityType = models.SecurityType;
 const IPWhitelist = models.IPWhitelist;
 const DDoS = models.DDoS;
@@ -178,6 +182,7 @@ const RulesProperties = models.RulesProperties;
 const DescribeOverviewL7DataResponse = models.DescribeOverviewL7DataResponse;
 const Hsts = models.Hsts;
 const RateLimitTemplate = models.RateLimitTemplate;
+const OriginGroupReference = models.OriginGroupReference;
 const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const TemplateConfig = models.TemplateConfig;
@@ -213,6 +218,7 @@ const CacheKey = models.CacheKey;
 const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
 const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
 const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
+const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
 const RateLimitIntelligence = models.RateLimitIntelligence;
 const IpTableConfig = models.IpTableConfig;
 const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
@@ -227,7 +233,7 @@ const PartialModule = models.PartialModule;
 const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
 const AccelerateType = models.AccelerateType;
-const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
+const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const CreateAccelerationDomainRequest = models.CreateAccelerationDomainRequest;
 const FollowOrigin = models.FollowOrigin;
 const DeleteZoneRequest = models.DeleteZoneRequest;
@@ -325,7 +331,7 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a shared CNAME.
+     * This API is used to create a shared CNAME. It is now only available to beta users.
      * @param {CreateSharedCNAMERequest} req
      * @param {function(string, CreateSharedCNAMEResponse):void} cb
      * @public
@@ -540,6 +546,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
+     * This API is used to bind/unbind a domain name to/from a shared CNAME. It is now only available to beta users.
+     * @param {BindSharedCNAMERequest} req
+     * @param {function(string, BindSharedCNAMEResponse):void} cb
+     * @public
+     */
+    BindSharedCNAME(req, cb) {
+        let resp = new BindSharedCNAMEResponse();
+        this.request("BindSharedCNAME", req, resp, cb);
+    }
+
+    /**
      * This API is used to verify ownership of the site.
      * @param {IdentifyZoneRequest} req
      * @param {function(string, IdentifyZoneResponse):void} cb
@@ -548,6 +565,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     IdentifyZone(req, cb) {
         let resp = new IdentifyZoneResponse();
         this.request("IdentifyZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of an alias domain name.
+     * @param {ModifyAliasDomainStatusRequest} req
+     * @param {function(string, ModifyAliasDomainStatusResponse):void} cb
+     * @public
+     */
+    ModifyAliasDomainStatus(req, cb) {
+        let resp = new ModifyAliasDomainStatusResponse();
+        this.request("ModifyAliasDomainStatus", req, resp, cb);
     }
 
     /**
@@ -729,14 +757,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to modify the status of an alias domain name.
-     * @param {ModifyAliasDomainStatusRequest} req
-     * @param {function(string, ModifyAliasDomainStatusResponse):void} cb
+     * This API is used to obtain a list of origin groups.
+     * @param {DescribeOriginGroupRequest} req
+     * @param {function(string, DescribeOriginGroupResponse):void} cb
      * @public
      */
-    ModifyAliasDomainStatus(req, cb) {
-        let resp = new ModifyAliasDomainStatusResponse();
-        this.request("ModifyAliasDomainStatus", req, resp, cb);
+    DescribeOriginGroup(req, cb) {
+        let resp = new DescribeOriginGroupResponse();
+        this.request("DescribeOriginGroup", req, resp, cb);
     }
 
     /**
@@ -839,14 +867,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to query DDoS attack events.
-     * @param {DescribeDDoSAttackEventRequest} req
-     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
+     * This API is used to delete a shared CNAME. It is now only available to beta users.
+     * @param {DeleteSharedCNAMERequest} req
+     * @param {function(string, DeleteSharedCNAMEResponse):void} cb
      * @public
      */
-    DescribeDDoSAttackEvent(req, cb) {
-        let resp = new DescribeDDoSAttackEventResponse();
-        this.request("DescribeDDoSAttackEvent", req, resp, cb);
+    DeleteSharedCNAME(req, cb) {
+        let resp = new DeleteSharedCNAMEResponse();
+        this.request("DeleteSharedCNAME", req, resp, cb);
     }
 
     /**
@@ -984,14 +1012,14 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
-     * This API is used to obtain a list of origin groups.
-     * @param {DescribeOriginGroupRequest} req
-     * @param {function(string, DescribeOriginGroupResponse):void} cb
+     * This API is used to query DDoS attack events.
+     * @param {DescribeDDoSAttackEventRequest} req
+     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
      * @public
      */
-    DescribeOriginGroup(req, cb) {
-        let resp = new DescribeOriginGroupResponse();
-        this.request("DescribeOriginGroup", req, resp, cb);
+    DescribeDDoSAttackEvent(req, cb) {
+        let resp = new DescribeDDoSAttackEventResponse();
+        this.request("DescribeDDoSAttackEvent", req, resp, cb);
     }
 
     /**

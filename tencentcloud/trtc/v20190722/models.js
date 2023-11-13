@@ -2142,7 +2142,7 @@ class RecordParams extends  AbstractModel {
         this.SubscribeStreamUserIds = null;
 
         /**
-         * The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
+         * The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC;  `3` : MP4,  `4` : AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
          * @type {number || null}
          */
         this.OutputFormat = null;
@@ -3193,7 +3193,7 @@ The default value is `0`, which means others.
         this.SourceContext = null;
 
         /**
-         * The format of recording files uploaded to VOD. `0` (default): MP4; `1`: HLS; `2`: AAC (valid only if `StreamType` is `1`).
+         * The format of recording files uploaded to VOD. `0` (default): MP4; `1`: HLS; `2`: AAC (valid only if `StreamType` is `1`); `3`: HLS+MP4; `4`: HLS+AAC.
          * @type {number || null}
          */
         this.MediaType = null;

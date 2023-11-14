@@ -4546,13 +4546,13 @@ class DescribeTagListRequest extends  AbstractModel {
         super();
 
         /**
-         * Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+         * The number of entries returned at a time. The maximum value is `1000`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * The number of entries returned at a time. The maximum value is `1000`.
+         * Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
          * @type {number || null}
          */
         this.Offset = null;

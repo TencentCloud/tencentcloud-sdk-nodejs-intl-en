@@ -17,130 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * RTMP configuration information of the queried output.
- * @class
- */
-class DescribeOutputRTMPSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Idle timeout period.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IdleTimeout = null;
-
-        /**
-         * Chunk size.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ChunkSize = null;
-
-        /**
-         * Destination address information list of RTMP push.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RTMPAddressDestination> || null}
-         */
-        this.Destinations = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
-        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new RTMPAddressDestination();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowLogs response structure.
- * @class
- */
-class DescribeStreamLinkFlowLogsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * A list of the logs.
-         * @type {Array.<FlowLogInfo> || null}
-         */
-        this.Infos = null;
-
-        /**
-         * The current page number.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * The number of records per page.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * The total number of records.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * The total number of pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new FlowLogInfo();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
-            }
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Output destination address.
  * @class
  */
@@ -169,24 +45,24 @@ class OutputAddress extends  AbstractModel {
 }
 
 /**
- * The listen address for an SRT output.
+ * RTMP pull URL of the output
  * @class
  */
-class OutputSRTSourceAddressResp extends  AbstractModel {
+class DescribeOutputRTMPPullServerUrl extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The listen IP.
+         * `tcUrl` of the RTMP pull URL
          * @type {string || null}
          */
-        this.Ip = null;
+        this.TcUrl = null;
 
         /**
-         * The listen port.
-         * @type {number || null}
+         * Stream key of the RTMP pull URL
+         * @type {string || null}
          */
-        this.Port = null;
+        this.StreamKey = null;
 
     }
 
@@ -197,43 +73,8 @@ class OutputSRTSourceAddressResp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * Input address information.
- * @class
- */
-class InputAddress extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Input address IP.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Input address port.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
+        this.TcUrl = 'TcUrl' in params ? params.TcUrl : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
 
     }
 }
@@ -323,41 +164,6 @@ class DescribeStreamLinkRegionsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyStreamLinkFlow request structure.
- * @class
- */
-class ModifyStreamLinkFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Name of the flow to modify
-         * @type {string || null}
-         */
-        this.FlowName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.FlowName = 'FlowName' in params ? params.FlowName : null;
-
-    }
-}
-
-/**
  * DeleteStreamLinkFlow request structure.
  * @class
  */
@@ -381,49 +187,6 @@ class DeleteStreamLinkFlowRequest extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowMediaStatistics response structure.
- * @class
- */
-class DescribeStreamLinkFlowMediaStatisticsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * A list of the media data.
-         * @type {Array.<FlowMediaInfo> || null}
-         */
-        this.Infos = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new FlowMediaInfo();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -469,134 +232,6 @@ class ModifyStreamLinkInputResponse extends  AbstractModel {
 }
 
 /**
- * The RTP configuration of the output to create.
- * @class
- */
-class CreateOutputInfoRTPSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The relay destination addresses. One or two addresses are allowed.
-         * @type {Array.<CreateOutputRTPSettingsDestinations> || null}
-         */
-        this.Destinations = null;
-
-        /**
-         * This parameter must be set to `none`.
-         * @type {string || null}
-         */
-        this.FEC = null;
-
-        /**
-         * The timeout period (ms).
-         * @type {number || null}
-         */
-        this.IdleTimeout = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new CreateOutputRTPSettingsDestinations();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-        this.FEC = 'FEC' in params ? params.FEC : null;
-        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
-
-    }
-}
-
-/**
- * CreateStreamLinkFlow request structure.
- * @class
- */
-class CreateStreamLinkFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow name
-         * @type {string || null}
-         */
-        this.FlowName = null;
-
-        /**
-         * Maximum bandwidth in bps. Valid values: `10000000`, `20000000`, `50000000`
-         * @type {number || null}
-         */
-        this.MaxBandwidth = null;
-
-        /**
-         * Flow input group
-         * @type {Array.<CreateInput> || null}
-         */
-        this.InputGroup = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowName = 'FlowName' in params ? params.FlowName : null;
-        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
-
-        if (params.InputGroup) {
-            this.InputGroup = new Array();
-            for (let z in params.InputGroup) {
-                let obj = new CreateInput();
-                obj.deserialize(params.InputGroup[z]);
-                this.InputGroup.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * StartStreamLinkFlow request structure.
- * @class
- */
-class StartStreamLinkFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-    }
-}
-
-/**
  * The SRT destination address of the output to create.
  * @class
  */
@@ -612,41 +247,6 @@ class CreateOutputSrtSettingsDestinations extends  AbstractModel {
 
         /**
          * The output port.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * Push destination address information.
- * @class
- */
-class SRTAddressDestination extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Destination address IP.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Destination address port.
          * @type {number || null}
          */
         this.Port = null;
@@ -739,522 +339,10 @@ It must be in UTC format, such as `2020-01-01T12:00:00Z`.
 }
 
 /**
- * The SRT input address.
+ * StopStreamLinkFlow response structure.
  * @class
  */
-class SRTSourceAddressReq extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The peer IP.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * The peer port.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * Configuration information of the queried output.
- * @class
- */
-class DescribeOutput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output ID.
-         * @type {string || null}
-         */
-        this.OutputId = null;
-
-        /**
-         * Output name.
-         * @type {string || null}
-         */
-        this.OutputName = null;
-
-        /**
-         * Output type.
-         * @type {string || null}
-         */
-        this.OutputType = null;
-
-        /**
-         * Output description.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Output protocol.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Output destination address information list.
-         * @type {Array.<OutputAddress> || null}
-         */
-        this.OutputAddressList = null;
-
-        /**
-         * Output region.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OutputRegion = null;
-
-        /**
-         * SRT configuration information of output.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {DescribeOutputSRTSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * RTP configuration information of output.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {DescribeOutputRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-        /**
-         * RTMP configuration information of output.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {DescribeOutputRTMPSettings || null}
-         */
-        this.RTMPSettings = null;
-
-        /**
-         * RTMP pull configuration of the output
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {DescribeOutputRTMPPullSettings || null}
-         */
-        this.RTMPPullSettings = null;
-
-        /**
-         * CIDR allowlist
-This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {Array.<string> || null}
-         */
-        this.AllowIpList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OutputId = 'OutputId' in params ? params.OutputId : null;
-        this.OutputName = 'OutputName' in params ? params.OutputName : null;
-        this.OutputType = 'OutputType' in params ? params.OutputType : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-
-        if (params.OutputAddressList) {
-            this.OutputAddressList = new Array();
-            for (let z in params.OutputAddressList) {
-                let obj = new OutputAddress();
-                obj.deserialize(params.OutputAddressList[z]);
-                this.OutputAddressList.push(obj);
-            }
-        }
-        this.OutputRegion = 'OutputRegion' in params ? params.OutputRegion : null;
-
-        if (params.SRTSettings) {
-            let obj = new DescribeOutputSRTSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
-        }
-
-        if (params.RTPSettings) {
-            let obj = new DescribeOutputRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
-        }
-
-        if (params.RTMPSettings) {
-            let obj = new DescribeOutputRTMPSettings();
-            obj.deserialize(params.RTMPSettings)
-            this.RTMPSettings = obj;
-        }
-
-        if (params.RTMPPullSettings) {
-            let obj = new DescribeOutputRTMPPullSettings();
-            obj.deserialize(params.RTMPPullSettings)
-            this.RTMPPullSettings = obj;
-        }
-        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
-
-    }
-}
-
-/**
- * Configuration information of the queried flow.
- * @class
- */
-class DescribeFlow extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Flow name.
-         * @type {string || null}
-         */
-        this.FlowName = null;
-
-        /**
-         * Flow status. Valid values: `IDLE`, `RUNNING`
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * Maximum bandwidth value.
-         * @type {number || null}
-         */
-        this.MaxBandwidth = null;
-
-        /**
-         * Input group.
-         * @type {Array.<DescribeInput> || null}
-         */
-        this.InputGroup = null;
-
-        /**
-         * Output group.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<DescribeOutput> || null}
-         */
-        this.OutputGroup = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.FlowName = 'FlowName' in params ? params.FlowName : null;
-        this.State = 'State' in params ? params.State : null;
-        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
-
-        if (params.InputGroup) {
-            this.InputGroup = new Array();
-            for (let z in params.InputGroup) {
-                let obj = new DescribeInput();
-                obj.deserialize(params.InputGroup[z]);
-                this.InputGroup.push(obj);
-            }
-        }
-
-        if (params.OutputGroup) {
-            this.OutputGroup = new Array();
-            for (let z in params.OutputGroup) {
-                let obj = new DescribeOutput();
-                obj.deserialize(params.OutputGroup[z]);
-                this.OutputGroup.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DeleteStreamLinkOutput request structure.
- * @class
- */
-class DeleteStreamLinkOutputRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Output ID
-         * @type {string || null}
-         */
-        this.OutputId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.OutputId = 'OutputId' in params ? params.OutputId : null;
-
-    }
-}
-
-/**
- * A list of the flow statistics.
- * @class
- */
-class FlowStatisticsArray extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The timestamp.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * The statistics of all the sessions.
-         * @type {Array.<FlowStatistics> || null}
-         */
-        this.FlowStatistics = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-
-        if (params.FlowStatistics) {
-            this.FlowStatistics = new Array();
-            for (let z in params.FlowStatistics) {
-                let obj = new FlowStatistics();
-                obj.deserialize(params.FlowStatistics[z]);
-                this.FlowStatistics.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * SRT configuration information of the created input.
- * @class
- */
-class CreateInputSRTSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The SRT mode. Valid values: LISTENER (default), CALLER.
-         * @type {string || null}
-         */
-        this.Mode = null;
-
-        /**
-         * Stream ID, which can contain 0 to 512 letters, digits, and special characters (.#!:&,=_-).
-         * @type {string || null}
-         */
-        this.StreamId = null;
-
-        /**
-         * Latency in ms. Default value: 0. Value range: [0, 3000].
-         * @type {number || null}
-         */
-        this.Latency = null;
-
-        /**
-         * Receive latency in ms. Default value: 120. Value range: [0, 3000].
-         * @type {number || null}
-         */
-        this.RecvLatency = null;
-
-        /**
-         * Peer latency in ms. Default value: 0. Value range: [0, 3000].
-         * @type {number || null}
-         */
-        this.PeerLatency = null;
-
-        /**
-         * Peer timeout period in ms. Default value: 5000. Value range: [1000, 10000].
-         * @type {number || null}
-         */
-        this.PeerIdleTimeout = null;
-
-        /**
-         * Decryption key, which is empty by default, indicating not to encrypt. Only ASCII codes can be filled. Length: [10, 79].
-         * @type {string || null}
-         */
-        this.Passphrase = null;
-
-        /**
-         * Key length. Default value: 0. Valid values: 0, 16, 24, 32.
-         * @type {number || null}
-         */
-        this.PbKeyLen = null;
-
-        /**
-         * The SRT peer address, which is required if `Mode` is `CALLER`. Only one address is allowed.
-         * @type {Array.<SRTSourceAddressReq> || null}
-         */
-        this.SourceAddresses = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.Latency = 'Latency' in params ? params.Latency : null;
-        this.RecvLatency = 'RecvLatency' in params ? params.RecvLatency : null;
-        this.PeerLatency = 'PeerLatency' in params ? params.PeerLatency : null;
-        this.PeerIdleTimeout = 'PeerIdleTimeout' in params ? params.PeerIdleTimeout : null;
-        this.Passphrase = 'Passphrase' in params ? params.Passphrase : null;
-        this.PbKeyLen = 'PbKeyLen' in params ? params.PbKeyLen : null;
-
-        if (params.SourceAddresses) {
-            this.SourceAddresses = new Array();
-            for (let z in params.SourceAddresses) {
-                let obj = new SRTSourceAddressReq();
-                obj.deserialize(params.SourceAddresses[z]);
-                this.SourceAddresses.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * The audio data of a flow.
- * @class
- */
-class FlowMediaAudio extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The frame rate.
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * The bitrate (bps).
-         * @type {number || null}
-         */
-        this.Rate = null;
-
-        /**
-         * The audio PID.
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * The ID of a push session.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-
-    }
-}
-
-/**
- * RTMP configuration information of the queried input
- * @class
- */
-class DescribeInputRTMPSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Path for RTMP stream pushing
-Note: this field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * StreamKey for RTMP stream pushing
-Format of an RTMP stream pushing URL: rtmp://IP address:1935/AppName/StreamKey
-         * @type {string || null}
-         */
-        this.StreamKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
-
-    }
-}
-
-/**
- * ModifyStreamLinkFlow response structure.
- * @class
- */
-class ModifyStreamLinkFlowResponse extends  AbstractModel {
+class StopStreamLinkFlowResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1274,176 +362,6 @@ class ModifyStreamLinkFlowResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlow request structure.
- * @class
- */
-class DescribeStreamLinkFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-    }
-}
-
-/**
- * Region information
- * @class
- */
-class RegionInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Region name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowMediaStatistics request structure.
- * @class
- */
-class DescribeStreamLinkFlowMediaStatisticsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Whether to query the inputs or outputs. Valid values: input, output.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * The input or output ID.
-         * @type {string || null}
-         */
-        this.InputOutputId = null;
-
-        /**
-         * Whether to query the primary or backup pipeline. Valid values: 0, 1.
-         * @type {string || null}
-         */
-        this.Pipeline = null;
-
-        /**
-         * The query interval. Valid values: 5s, 1min, 5min, 15min.
-         * @type {string || null}
-         */
-        this.Period = null;
-
-        /**
-         * The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
-It must be in UTC format, such as `2020-01-01T12:00:00Z`.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
-It must be in UTC format, such as `2020-01-01T12:00:00Z`.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InputOutputId = 'InputOutputId' in params ? params.InputOutputId : null;
-        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowRealtimeStatus request structure.
- * @class
- */
-class DescribeStreamLinkFlowRealtimeStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The IDs of the inputs to query. If this parameter and `OutputIds` are both empty, all inputs and outputs are queried.
-         * @type {Array.<string> || null}
-         */
-        this.InputIds = null;
-
-        /**
-         * The IDs of the outputs to query. If this parameter and `OutputIds` are both empty, all inputs and outputs are queried.
-         * @type {Array.<string> || null}
-         */
-        this.OutputIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.InputIds = 'InputIds' in params ? params.InputIds : null;
-        this.OutputIds = 'OutputIds' in params ? params.OutputIds : null;
 
     }
 }
@@ -1482,74 +400,6 @@ class ModifyStreamLinkOutputInfoResponse extends  AbstractModel {
             let obj = new DescribeOutput();
             obj.deserialize(params.Info)
             this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlow response structure.
- * @class
- */
-class DescribeStreamLinkFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Configuration information of a flow
-         * @type {DescribeFlow || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new DescribeFlow();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StopStreamLinkFlow response structure.
- * @class
- */
-class StopStreamLinkFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1641,257 +491,21 @@ class FlowSRTInfo extends  AbstractModel {
 }
 
 /**
- * The flow statistics.
+ * The SRT input address.
  * @class
  */
-class FlowStatistics extends  AbstractModel {
+class SRTSourceAddressResp extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * The session ID.
-         * @type {string || null}
-         */
-        this.SessionId = null;
 
         /**
          * The peer IP.
          * @type {string || null}
          */
-        this.ClientIp = null;
-
-        /**
-         * The total bandwidth.
-         * @type {number || null}
-         */
-        this.Network = null;
-
-        /**
-         * The video data.
-         * @type {Array.<FlowVideo> || null}
-         */
-        this.Video = null;
-
-        /**
-         * The audio data.
-         * @type {Array.<FlowAudio> || null}
-         */
-        this.Audio = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
-        this.Network = 'Network' in params ? params.Network : null;
-
-        if (params.Video) {
-            this.Video = new Array();
-            for (let z in params.Video) {
-                let obj = new FlowVideo();
-                obj.deserialize(params.Video[z]);
-                this.Video.push(obj);
-            }
-        }
-
-        if (params.Audio) {
-            this.Audio = new Array();
-            for (let z in params.Audio) {
-                let obj = new FlowAudio();
-                obj.deserialize(params.Audio[z]);
-                this.Audio.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowSRTStatistics request structure.
- * @class
- */
-class DescribeStreamLinkFlowSRTStatisticsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Whether to query the inputs or outputs. Valid values: input, output.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * The input or output ID.
-         * @type {string || null}
-         */
-        this.InputOutputId = null;
-
-        /**
-         * Whether to query the primary or backup pipeline. Valid values: 0, 1.
-         * @type {string || null}
-         */
-        this.Pipeline = null;
-
-        /**
-         * The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
-It must be in UTC format, such as `2020-01-01T12:00:00Z`.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
-It must be in UTC format, such as `2020-01-01T12:00:00Z`.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The query interval. Valid values: 5s, 1min, 5min, 15min.
-         * @type {string || null}
-         */
-        this.Period = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InputOutputId = 'InputOutputId' in params ? params.InputOutputId : null;
-        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Period = 'Period' in params ? params.Period : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowRealtimeStatus response structure.
- * @class
- */
-class DescribeStreamLinkFlowRealtimeStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The timestamp (seconds) of the query.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * A list of the real-time data.
-         * @type {Array.<FlowRealtimeStatusItem> || null}
-         */
-        this.Datas = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-
-        if (params.Datas) {
-            this.Datas = new Array();
-            for (let z in params.Datas) {
-                let obj = new FlowRealtimeStatusItem();
-                obj.deserialize(params.Datas[z]);
-                this.Datas.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * The audio data of the flow.
- * @class
- */
-class FlowAudio extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The frame rate.
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * The bitrate (bps).
-         * @type {number || null}
-         */
-        this.Rate = null;
-
-        /**
-         * The audio PID.
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-
-    }
-}
-
-/**
- * The RTP destination address of the output to create.
- * @class
- */
-class CreateOutputRTPSettingsDestinations extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The relay destination IP.
-         * @type {string || null}
-         */
         this.Ip = null;
 
         /**
-         * The relay destination port.
+         * The peer port.
          * @type {number || null}
          */
         this.Port = null;
@@ -1907,234 +521,6 @@ class CreateOutputRTPSettingsDestinations extends  AbstractModel {
         }
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * The video data of a flow.
- * @class
- */
-class FlowVideo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The frame rate.
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * The bitrate (bps).
-         * @type {number || null}
-         */
-        this.Rate = null;
-
-        /**
-         * The audio PID.
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-
-    }
-}
-
-/**
- * StopStreamLinkFlow request structure.
- * @class
- */
-class StopStreamLinkFlowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Flow ID
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-    }
-}
-
-/**
- * Configuration information of the created input.
- * @class
- */
-class CreateInput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Input name, which can contain 1 to 32 letters, digits, and underscores.
-         * @type {string || null}
-         */
-        this.InputName = null;
-
-        /**
-         * Input protocol. Valid values: `SRT`, `RTP`, `RTMP`
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Input description. Length: [0, 255].
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Allowlist of input IPs in CIDR format.
-         * @type {Array.<string> || null}
-         */
-        this.AllowIpList = null;
-
-        /**
-         * SRT configuration information of input.
-         * @type {CreateInputSRTSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * RTP configuration information of input.
-         * @type {CreateInputRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-        /**
-         * Input failover. Valid values: `OPEN`, `CLOSE` (default)
-         * @type {string || null}
-         */
-        this.FailOver = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InputName = 'InputName' in params ? params.InputName : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
-
-        if (params.SRTSettings) {
-            let obj = new CreateInputSRTSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
-        }
-
-        if (params.RTPSettings) {
-            let obj = new CreateInputRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
-        }
-        this.FailOver = 'FailOver' in params ? params.FailOver : null;
-
-    }
-}
-
-/**
- * The RTMP configuration of the output to create.
- * @class
- */
-class CreateOutputRTMPSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The relay destination addresses. One or two addresses are allowed.
-         * @type {Array.<CreateOutputRtmpSettingsDestinations> || null}
-         */
-        this.Destinations = null;
-
-        /**
-         * The RTMP chunk size. Value range: [4096, 40960].
-         * @type {number || null}
-         */
-        this.ChunkSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new CreateOutputRtmpSettingsDestinations();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
-
-    }
-}
-
-/**
- * RTMP pull URL of the output
- * @class
- */
-class DescribeOutputRTMPPullServerUrl extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `tcUrl` of the RTMP pull URL
-         * @type {string || null}
-         */
-        this.TcUrl = null;
-
-        /**
-         * Stream key of the RTMP pull URL
-         * @type {string || null}
-         */
-        this.StreamKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TcUrl = 'TcUrl' in params ? params.TcUrl : null;
-        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
 
     }
 }
@@ -2217,6 +603,36 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.FailOver = null;
 
+        /**
+         * 
+         * @type {DescribeInputRTMPPullSettings || null}
+         */
+        this.RTMPPullSettings = null;
+
+        /**
+         * 
+         * @type {DescribeInputRTSPPullSettings || null}
+         */
+        this.RTSPPullSettings = null;
+
+        /**
+         * 
+         * @type {DescribeInputHLSPullSettings || null}
+         */
+        this.HLSPullSettings = null;
+
+        /**
+         * 
+         * @type {ResilientStreamConf || null}
+         */
+        this.ResilientStream = null;
+
+        /**
+         * The bound security group ID.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -2261,224 +677,30 @@ Note: this field may return `null`, indicating that no valid value was found.
         }
         this.FailOver = 'FailOver' in params ? params.FailOver : null;
 
-    }
-}
-
-/**
- * The RTMP destination address of the output to create.
- * @class
- */
-class CreateOutputRtmpSettingsDestinations extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The relay URL. Format: `rtmp://domain/live`.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * The `StreamKey` for relay. Format: `stream?key=value`.
-         * @type {string || null}
-         */
-        this.StreamKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
-
-    }
-}
-
-/**
- * The information of the output to create.
- * @class
- */
-class CreateOutputInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The output name.
-         * @type {string || null}
-         */
-        this.OutputName = null;
-
-        /**
-         * Description of the output.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * The output protocol. Valid values: SRT, RTP, RTMP, RTMP_PULL.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * The output region.
-         * @type {string || null}
-         */
-        this.OutputRegion = null;
-
-        /**
-         * The SRT configuration.
-         * @type {CreateOutputSrtSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * The RTMP configuration.
-         * @type {CreateOutputRTMPSettings || null}
-         */
-        this.RTMPSettings = null;
-
-        /**
-         * The RTP configuration.
-         * @type {CreateOutputInfoRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-        /**
-         * The IP allowlist. The address must be in CIDR format, such as `0.0.0.0/0`.
-This parameter is valid if `Protocol` is set to `RTMP_PULL`. If it is left empty, there is no restriction on clients’ IP addresses.
-         * @type {Array.<string> || null}
-         */
-        this.AllowIpList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OutputName = 'OutputName' in params ? params.OutputName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.OutputRegion = 'OutputRegion' in params ? params.OutputRegion : null;
-
-        if (params.SRTSettings) {
-            let obj = new CreateOutputSrtSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
+        if (params.RTMPPullSettings) {
+            let obj = new DescribeInputRTMPPullSettings();
+            obj.deserialize(params.RTMPPullSettings)
+            this.RTMPPullSettings = obj;
         }
 
-        if (params.RTMPSettings) {
-            let obj = new CreateOutputRTMPSettings();
-            obj.deserialize(params.RTMPSettings)
-            this.RTMPSettings = obj;
+        if (params.RTSPPullSettings) {
+            let obj = new DescribeInputRTSPPullSettings();
+            obj.deserialize(params.RTSPPullSettings)
+            this.RTSPPullSettings = obj;
         }
 
-        if (params.RTPSettings) {
-            let obj = new CreateOutputInfoRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
+        if (params.HLSPullSettings) {
+            let obj = new DescribeInputHLSPullSettings();
+            obj.deserialize(params.HLSPullSettings)
+            this.HLSPullSettings = obj;
         }
-        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
 
-    }
-}
-
-/**
- * The logs of a flow.
- * @class
- */
-class FlowLogInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The timestamp (seconds).
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * Whether it is an input or output.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * The input or output ID.
-         * @type {string || null}
-         */
-        this.InputOutputId = null;
-
-        /**
-         * The protocol.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * The event code.
-         * @type {string || null}
-         */
-        this.EventCode = null;
-
-        /**
-         * The event information.
-         * @type {string || null}
-         */
-        this.EventMessage = null;
-
-        /**
-         * The peer IP.
-         * @type {string || null}
-         */
-        this.RemoteIp = null;
-
-        /**
-         * The peer port.
-         * @type {string || null}
-         */
-        this.RemotePort = null;
-
-        /**
-         * Whether it is a primary or backup pipeline. Valid values: 0 (primary), 1 (backup).
-         * @type {string || null}
-         */
-        this.Pipeline = null;
-
-        /**
-         * The input or output name.
-         * @type {string || null}
-         */
-        this.InputOutputName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.ResilientStream) {
+            let obj = new ResilientStreamConf();
+            obj.deserialize(params.ResilientStream)
+            this.ResilientStream = obj;
         }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InputOutputId = 'InputOutputId' in params ? params.InputOutputId : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.EventCode = 'EventCode' in params ? params.EventCode : null;
-        this.EventMessage = 'EventMessage' in params ? params.EventMessage : null;
-        this.RemoteIp = 'RemoteIp' in params ? params.RemoteIp : null;
-        this.RemotePort = 'RemotePort' in params ? params.RemotePort : null;
-        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
-        this.InputOutputName = 'InputOutputName' in params ? params.InputOutputName : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -2680,18 +902,24 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * DeleteStreamLinkOutput response structure.
+ * 
  * @class
  */
-class DeleteStreamLinkOutputResponse extends  AbstractModel {
+class DescribeRTMPPullSourceAddress extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TcUrl = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StreamKey = null;
 
     }
 
@@ -2702,35 +930,8 @@ class DeleteStreamLinkOutputResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartStreamLinkFlow response structure.
- * @class
- */
-class StartStreamLinkFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TcUrl = 'TcUrl' in params ? params.TcUrl : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
 
     }
 }
@@ -2768,234 +969,6 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.ServerUrls.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlows response structure.
- * @class
- */
-class DescribeStreamLinkFlowsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of the configuration information of the flows
-         * @type {Array.<DescribeFlow> || null}
-         */
-        this.Infos = null;
-
-        /**
-         * Number of the current page
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of entries per page
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Total number of entries
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Total number of pages
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new DescribeFlow();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
-            }
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * The video data of a flow.
- * @class
- */
-class FlowMediaVideo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The frame rate.
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * The bitrate (bps).
-         * @type {number || null}
-         */
-        this.Rate = null;
-
-        /**
-         * The video PID.
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * The ID of a push session.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-
-    }
-}
-
-/**
- * CreateStreamLinkOutputInfo request structure.
- * @class
- */
-class CreateStreamLinkOutputInfoRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The output configuration of the flow.
-         * @type {CreateOutputInfo || null}
-         */
-        this.Output = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-
-        if (params.Output) {
-            let obj = new CreateOutputInfo();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-
-    }
-}
-
-/**
- * DeleteStreamLinkFlow response structure.
- * @class
- */
-class DeleteStreamLinkFlowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkRegions response structure.
- * @class
- */
-class DescribeStreamLinkRegionsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * StreamLink region information
-         * @type {StreamLinkRegionInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new StreamLinkRegionInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3100,6 +1073,18 @@ This parameter is valid if `Protocol` is set to `RTMP_PULL`. If it is left empty
          */
         this.AllowIpList = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxConcurrent = null;
+
+        /**
+         * The bound security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -3132,29 +1117,541 @@ This parameter is valid if `Protocol` is set to `RTMP_PULL`. If it is left empty
             this.RTMPSettings = obj;
         }
         this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
+        this.MaxConcurrent = 'MaxConcurrent' in params ? params.MaxConcurrent : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
 
 /**
- * ModifyStreamLinkInput request structure.
+ * RTP configuration information of the created input.
  * @class
  */
-class ModifyStreamLinkInputRequest extends  AbstractModel {
+class CreateInputRTPSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The flow ID.
+         * Default value: none. Valid values: ['none'].
+         * @type {string || null}
+         */
+        this.FEC = null;
+
+        /**
+         * Idle timeout period in ms. Default value: 5000. Value range: [1000, 10000].
+         * @type {number || null}
+         */
+        this.IdleTimeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FEC = 'FEC' in params ? params.FEC : null;
+        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
+
+    }
+}
+
+/**
+ * CreateStreamLinkOutputInfo response structure.
+ * @class
+ */
+class CreateStreamLinkOutputInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The information of the created output.
+         * @type {DescribeOutput || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new DescribeOutput();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Destination address information of RTP push.
+ * @class
+ */
+class RTPAddressDestination extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Push destination address IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Push destination address port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowLogs response structure.
+ * @class
+ */
+class DescribeStreamLinkFlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A list of the logs.
+         * @type {Array.<FlowLogInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The current page number.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * The number of records per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * The total number of records.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * The total number of pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new FlowLogInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Configuration information of the queried output.
+ * @class
+ */
+class DescribeOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output ID.
+         * @type {string || null}
+         */
+        this.OutputId = null;
+
+        /**
+         * Output name.
+         * @type {string || null}
+         */
+        this.OutputName = null;
+
+        /**
+         * Output type.
+         * @type {string || null}
+         */
+        this.OutputType = null;
+
+        /**
+         * Output description.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Output protocol.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Output destination address information list.
+         * @type {Array.<OutputAddress> || null}
+         */
+        this.OutputAddressList = null;
+
+        /**
+         * Output region.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutputRegion = null;
+
+        /**
+         * SRT configuration information of output.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {DescribeOutputSRTSettings || null}
+         */
+        this.SRTSettings = null;
+
+        /**
+         * RTP configuration information of output.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {DescribeOutputRTPSettings || null}
+         */
+        this.RTPSettings = null;
+
+        /**
+         * RTMP configuration information of output.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {DescribeOutputRTMPSettings || null}
+         */
+        this.RTMPSettings = null;
+
+        /**
+         * RTMP pull configuration of the output
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {DescribeOutputRTMPPullSettings || null}
+         */
+        this.RTMPPullSettings = null;
+
+        /**
+         * CIDR allowlist
+This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.AllowIpList = null;
+
+        /**
+         * 
+         * @type {DescribeOutputRTSPPullSettings || null}
+         */
+        this.RTSPPullSettings = null;
+
+        /**
+         * 
+         * @type {DescribeOutputHLSPullSettings || null}
+         */
+        this.HLSPullSettings = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxConcurrent = null;
+
+        /**
+         * The bound security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputId = 'OutputId' in params ? params.OutputId : null;
+        this.OutputName = 'OutputName' in params ? params.OutputName : null;
+        this.OutputType = 'OutputType' in params ? params.OutputType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.OutputAddressList) {
+            this.OutputAddressList = new Array();
+            for (let z in params.OutputAddressList) {
+                let obj = new OutputAddress();
+                obj.deserialize(params.OutputAddressList[z]);
+                this.OutputAddressList.push(obj);
+            }
+        }
+        this.OutputRegion = 'OutputRegion' in params ? params.OutputRegion : null;
+
+        if (params.SRTSettings) {
+            let obj = new DescribeOutputSRTSettings();
+            obj.deserialize(params.SRTSettings)
+            this.SRTSettings = obj;
+        }
+
+        if (params.RTPSettings) {
+            let obj = new DescribeOutputRTPSettings();
+            obj.deserialize(params.RTPSettings)
+            this.RTPSettings = obj;
+        }
+
+        if (params.RTMPSettings) {
+            let obj = new DescribeOutputRTMPSettings();
+            obj.deserialize(params.RTMPSettings)
+            this.RTMPSettings = obj;
+        }
+
+        if (params.RTMPPullSettings) {
+            let obj = new DescribeOutputRTMPPullSettings();
+            obj.deserialize(params.RTMPPullSettings)
+            this.RTMPPullSettings = obj;
+        }
+        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
+
+        if (params.RTSPPullSettings) {
+            let obj = new DescribeOutputRTSPPullSettings();
+            obj.deserialize(params.RTSPPullSettings)
+            this.RTSPPullSettings = obj;
+        }
+
+        if (params.HLSPullSettings) {
+            let obj = new DescribeOutputHLSPullSettings();
+            obj.deserialize(params.HLSPullSettings)
+            this.HLSPullSettings = obj;
+        }
+        this.MaxConcurrent = 'MaxConcurrent' in params ? params.MaxConcurrent : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CreateInputHLSPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<HLSPullSourceAddress> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new HLSPullSourceAddress();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * The SRT configuration of the output to create.
+ * @class
+ */
+class CreateOutputSrtSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The relay destination address, which is required if `Mode` is `CALLER`. Only one address is allowed.
+         * @type {Array.<CreateOutputSrtSettingsDestinations> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * The stream ID for relay, which can contain 0 to 512 letters, digits, and special characters (.#!:&,=_-).
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * The total latency (ms) of SRT relay. Value range: [0, 3000]. Default: 0.
+         * @type {number || null}
+         */
+        this.Latency = null;
+
+        /**
+         * The receive latency (ms) of SRT relay. Value range: [0, 3000]. Default: 120.
+         * @type {number || null}
+         */
+        this.RecvLatency = null;
+
+        /**
+         * The peer-to-peer latency (ms) of SRT relay. Value range: [0, 3000]. Default: 0.
+         * @type {number || null}
+         */
+        this.PeerLatency = null;
+
+        /**
+         * The timeout period (ms) for the SRT relay peer. Value range: [1000, 10000]. Default: 5000.
+         * @type {number || null}
+         */
+        this.PeerIdleTimeout = null;
+
+        /**
+         * The encryption key for SRT relay, which is empty by default, indicating not to encrypt. Only ASCII codes are allowed. Length: [10, 79].
+         * @type {string || null}
+         */
+        this.Passphrase = null;
+
+        /**
+         * The key length for SRT relay. Valid values: 0 (default), 16, 24, 32.
+         * @type {number || null}
+         */
+        this.PbKeyLen = null;
+
+        /**
+         * The SRT mode. Valid values: LISTENER, CALLER (default).
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new CreateOutputSrtSettingsDestinations();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.Latency = 'Latency' in params ? params.Latency : null;
+        this.RecvLatency = 'RecvLatency' in params ? params.RecvLatency : null;
+        this.PeerLatency = 'PeerLatency' in params ? params.PeerLatency : null;
+        this.PeerIdleTimeout = 'PeerIdleTimeout' in params ? params.PeerIdleTimeout : null;
+        this.Passphrase = 'Passphrase' in params ? params.Passphrase : null;
+        this.PbKeyLen = 'PbKeyLen' in params ? params.PbKeyLen : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+    }
+}
+
+/**
+ * ModifyStreamLinkFlow response structure.
+ * @class
+ */
+class ModifyStreamLinkFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartStreamLinkFlow request structure.
+ * @class
+ */
+class StartStreamLinkFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID
          * @type {string || null}
          */
         this.FlowId = null;
-
-        /**
-         * The input information to modify.
-         * @type {ModifyInput || null}
-         */
-        this.Input = null;
 
     }
 
@@ -3167,11 +1664,381 @@ class ModifyStreamLinkInputRequest extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
-        if (params.Input) {
-            let obj = new ModifyInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
+    }
+}
+
+/**
+ * StartStreamLinkFlow response structure.
+ * @class
+ */
+class StartStreamLinkFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The RTP destination address of the output to create.
+ * @class
+ */
+class CreateOutputRTPSettingsDestinations extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The relay destination IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * The relay destination port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * The information of the output to create.
+ * @class
+ */
+class CreateOutputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The output name.
+         * @type {string || null}
+         */
+        this.OutputName = null;
+
+        /**
+         * Description of the output.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The output protocol. Valid values: SRT, RTP, RTMP, RTMP_PULL.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * The output region.
+         * @type {string || null}
+         */
+        this.OutputRegion = null;
+
+        /**
+         * The SRT configuration.
+         * @type {CreateOutputSrtSettings || null}
+         */
+        this.SRTSettings = null;
+
+        /**
+         * The RTMP configuration.
+         * @type {CreateOutputRTMPSettings || null}
+         */
+        this.RTMPSettings = null;
+
+        /**
+         * The RTP configuration.
+         * @type {CreateOutputInfoRTPSettings || null}
+         */
+        this.RTPSettings = null;
+
+        /**
+         * The IP allowlist. The address must be in CIDR format, such as `0.0.0.0/0`.
+This parameter is valid if `Protocol` is set to `RTMP_PULL`. If it is left empty, there is no restriction on clients’ IP addresses.
+         * @type {Array.<string> || null}
+         */
+        this.AllowIpList = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxConcurrent = null;
+
+        /**
+         * The bound security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputName = 'OutputName' in params ? params.OutputName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.OutputRegion = 'OutputRegion' in params ? params.OutputRegion : null;
+
+        if (params.SRTSettings) {
+            let obj = new CreateOutputSrtSettings();
+            obj.deserialize(params.SRTSettings)
+            this.SRTSettings = obj;
+        }
+
+        if (params.RTMPSettings) {
+            let obj = new CreateOutputRTMPSettings();
+            obj.deserialize(params.RTMPSettings)
+            this.RTMPSettings = obj;
+        }
+
+        if (params.RTPSettings) {
+            let obj = new CreateOutputInfoRTPSettings();
+            obj.deserialize(params.RTPSettings)
+            this.RTPSettings = obj;
+        }
+        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
+        this.MaxConcurrent = 'MaxConcurrent' in params ? params.MaxConcurrent : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowRealtimeStatus response structure.
+ * @class
+ */
+class DescribeStreamLinkFlowRealtimeStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The timestamp (seconds) of the query.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * A list of the real-time data.
+         * @type {Array.<FlowRealtimeStatusItem> || null}
+         */
+        this.Datas = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+        if (params.Datas) {
+            this.Datas = new Array();
+            for (let z in params.Datas) {
+                let obj = new FlowRealtimeStatusItem();
+                obj.deserialize(params.Datas[z]);
+                this.Datas.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlows response structure.
+ * @class
+ */
+class DescribeStreamLinkFlowsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of the configuration information of the flows
+         * @type {Array.<DescribeFlow> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Number of the current page
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Total number of entries
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Total number of pages
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new DescribeFlow();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeInputRTSPPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<DescribeRTSPPullSourceAddress> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new DescribeRTSPPullSourceAddress();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * The audio data of a flow.
+ * @class
+ */
+class FlowMediaAudio extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The frame rate.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * The bitrate (bps).
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * The audio PID.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * The ID of a push session.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -3225,6 +2092,1183 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.FEC = 'FEC' in params ? params.FEC : null;
         this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
+
+    }
+}
+
+/**
+ * The new input configuration.
+ * @class
+ */
+class ModifyInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The input ID.
+         * @type {string || null}
+         */
+        this.InputId = null;
+
+        /**
+         * The input name.
+         * @type {string || null}
+         */
+        this.InputName = null;
+
+        /**
+         * The description of the input.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The IP addresses (CIDR) allowed to push streams.
+         * @type {Array.<string> || null}
+         */
+        this.AllowIpList = null;
+
+        /**
+         * The SRT configuration information.
+         * @type {CreateInputSRTSettings || null}
+         */
+        this.SRTSettings = null;
+
+        /**
+         * The RTP configuration information.
+         * @type {CreateInputRTPSettings || null}
+         */
+        this.RTPSettings = null;
+
+        /**
+         * The input protocol. Valid values: SRT, RTP, RTMP.
+If there is an RTP input, the output must be RTP.
+If there is an RTMP input, the output must be SRT or RTMP.
+If there is an SRT input, the output must be SRT.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Whether to enable input failover. Valid values: OPEN, CLOSE.
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
+        /**
+         * 
+         * @type {CreateInputRTMPPullSettings || null}
+         */
+        this.RTMPPullSettings = null;
+
+        /**
+         * 
+         * @type {CreateInputRTSPPullSettings || null}
+         */
+        this.RTSPPullSettings = null;
+
+        /**
+         * 
+         * @type {CreateInputHLSPullSettings || null}
+         */
+        this.HLSPullSettings = null;
+
+        /**
+         * 
+         * @type {ResilientStreamConf || null}
+         */
+        this.ResilientStream = null;
+
+        /**
+         * The bound security group IDs. 
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputId = 'InputId' in params ? params.InputId : null;
+        this.InputName = 'InputName' in params ? params.InputName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
+
+        if (params.SRTSettings) {
+            let obj = new CreateInputSRTSettings();
+            obj.deserialize(params.SRTSettings)
+            this.SRTSettings = obj;
+        }
+
+        if (params.RTPSettings) {
+            let obj = new CreateInputRTPSettings();
+            obj.deserialize(params.RTPSettings)
+            this.RTPSettings = obj;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
+
+        if (params.RTMPPullSettings) {
+            let obj = new CreateInputRTMPPullSettings();
+            obj.deserialize(params.RTMPPullSettings)
+            this.RTMPPullSettings = obj;
+        }
+
+        if (params.RTSPPullSettings) {
+            let obj = new CreateInputRTSPPullSettings();
+            obj.deserialize(params.RTSPPullSettings)
+            this.RTSPPullSettings = obj;
+        }
+
+        if (params.HLSPullSettings) {
+            let obj = new CreateInputHLSPullSettings();
+            obj.deserialize(params.HLSPullSettings)
+            this.HLSPullSettings = obj;
+        }
+
+        if (params.ResilientStream) {
+            let obj = new ResilientStreamConf();
+            obj.deserialize(params.ResilientStream)
+            this.ResilientStream = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowLogs request structure.
+ * @class
+ */
+class DescribeStreamLinkFlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Whether to query the inputs or outputs. Valid values: input, output.
+         * @type {Array.<string> || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether to query the primary or backup pipeline. Valid values: 0, 1.
+         * @type {Array.<string> || null}
+         */
+        this.Pipeline = null;
+
+        /**
+         * The page size. Value range: [1, 1000]. Default: 100.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Whether to sort the records by timestamp in descending or ascending order. Valid values: desc (default), asc.
+         * @type {string || null}
+         */
+        this.SortType = null;
+
+        /**
+         * The page number. Value range: [1, 1000]. Default: 1.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.SortType = 'SortType' in params ? params.SortType : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+
+    }
+}
+
+/**
+ * RTMP configuration information of the queried input
+ * @class
+ */
+class DescribeInputRTMPSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Path for RTMP stream pushing
+Note: this field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * StreamKey for RTMP stream pushing
+Format of an RTMP stream pushing URL: rtmp://IP address:1935/AppName/StreamKey
+         * @type {string || null}
+         */
+        this.StreamKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
+
+    }
+}
+
+/**
+ * RTMP configuration information of the queried output.
+ * @class
+ */
+class DescribeOutputRTMPSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Idle timeout period.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IdleTimeout = null;
+
+        /**
+         * Chunk size.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ChunkSize = null;
+
+        /**
+         * Destination address information list of RTMP push.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RTMPAddressDestination> || null}
+         */
+        this.Destinations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
+        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new RTMPAddressDestination();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * The listen address for an SRT output.
+ * @class
+ */
+class OutputSRTSourceAddressResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The listen IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * The listen port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CreateInputRTMPPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<RTMPPullSourceAddress> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new RTMPPullSourceAddress();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * The video data of a flow.
+ * @class
+ */
+class FlowVideo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The frame rate.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * The bitrate (bps).
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * The audio PID.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+
+    }
+}
+
+/**
+ * ModifyStreamLinkFlow request structure.
+ * @class
+ */
+class ModifyStreamLinkFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Name of the flow to modify
+         * @type {string || null}
+         */
+        this.FlowName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.FlowName = 'FlowName' in params ? params.FlowName : null;
+
+    }
+}
+
+/**
+ * Destination address information of RTMP push.
+ * @class
+ */
+class RTMPAddressDestination extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Destination URL of RTMP push in the format of 'rtmp://domain/live'.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Destination `StreamKey` of RTMP push in the format of 'streamid?key=value'.
+         * @type {string || null}
+         */
+        this.StreamKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowMediaStatistics response structure.
+ * @class
+ */
+class DescribeStreamLinkFlowMediaStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A list of the media data.
+         * @type {Array.<FlowMediaInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new FlowMediaInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The RTP configuration of the output to create.
+ * @class
+ */
+class CreateOutputInfoRTPSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The relay destination addresses. One or two addresses are allowed.
+         * @type {Array.<CreateOutputRTPSettingsDestinations> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * This parameter must be set to `none`.
+         * @type {string || null}
+         */
+        this.FEC = null;
+
+        /**
+         * The timeout period (ms).
+         * @type {number || null}
+         */
+        this.IdleTimeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new CreateOutputRTPSettingsDestinations();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+        this.FEC = 'FEC' in params ? params.FEC : null;
+        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
+
+    }
+}
+
+/**
+ * The SRT input address.
+ * @class
+ */
+class SRTSourceAddressReq extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The peer IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * The peer port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * Configuration information of the queried flow.
+ * @class
+ */
+class DescribeFlow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Flow name.
+         * @type {string || null}
+         */
+        this.FlowName = null;
+
+        /**
+         * Flow status. Valid values: `IDLE`, `RUNNING`
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Maximum bandwidth value.
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+        /**
+         * Input group.
+         * @type {Array.<DescribeInput> || null}
+         */
+        this.InputGroup = null;
+
+        /**
+         * Output group.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DescribeOutput> || null}
+         */
+        this.OutputGroup = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.FlowName = 'FlowName' in params ? params.FlowName : null;
+        this.State = 'State' in params ? params.State : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+
+        if (params.InputGroup) {
+            this.InputGroup = new Array();
+            for (let z in params.InputGroup) {
+                let obj = new DescribeInput();
+                obj.deserialize(params.InputGroup[z]);
+                this.InputGroup.push(obj);
+            }
+        }
+
+        if (params.OutputGroup) {
+            this.OutputGroup = new Array();
+            for (let z in params.OutputGroup) {
+                let obj = new DescribeOutput();
+                obj.deserialize(params.OutputGroup[z]);
+                this.OutputGroup.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeRTSPPullSourceAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * DeleteStreamLinkFlow response structure.
+ * @class
+ */
+class DeleteStreamLinkFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeOutputRTSPPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<DescribeOutputRTSPPullServerUrl> || null}
+         */
+        this.ServerUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServerUrls) {
+            this.ServerUrls = new Array();
+            for (let z in params.ServerUrls) {
+                let obj = new DescribeOutputRTSPPullServerUrl();
+                obj.deserialize(params.ServerUrls[z]);
+                this.ServerUrls.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowRealtimeStatus request structure.
+ * @class
+ */
+class DescribeStreamLinkFlowRealtimeStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The IDs of the inputs to query. If this parameter and `OutputIds` are both empty, all inputs and outputs are queried.
+         * @type {Array.<string> || null}
+         */
+        this.InputIds = null;
+
+        /**
+         * The IDs of the outputs to query. If this parameter and `OutputIds` are both empty, all inputs and outputs are queried.
+         * @type {Array.<string> || null}
+         */
+        this.OutputIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InputIds = 'InputIds' in params ? params.InputIds : null;
+        this.OutputIds = 'OutputIds' in params ? params.OutputIds : null;
+
+    }
+}
+
+/**
+ * The audio data of the flow.
+ * @class
+ */
+class FlowAudio extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The frame rate.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * The bitrate (bps).
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * The audio PID.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+
+    }
+}
+
+/**
+ * The video data of a flow.
+ * @class
+ */
+class FlowMediaVideo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The frame rate.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * The bitrate (bps).
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * The video PID.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * The ID of a push session.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeOutputHLSPullServerUrl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowSRTStatistics request structure.
+ * @class
+ */
+class DescribeStreamLinkFlowSRTStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Whether to query the inputs or outputs. Valid values: input, output.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The input or output ID.
+         * @type {string || null}
+         */
+        this.InputOutputId = null;
+
+        /**
+         * Whether to query the primary or backup pipeline. Valid values: 0, 1.
+         * @type {string || null}
+         */
+        this.Pipeline = null;
+
+        /**
+         * The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The query interval. Valid values: 5s, 1min, 5min, 15min.
+         * @type {string || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InputOutputId = 'InputOutputId' in params ? params.InputOutputId : null;
+        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlow request structure.
+ * @class
+ */
+class DescribeStreamLinkFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeOutputHLSPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<DescribeOutputHLSPullServerUrl> || null}
+         */
+        this.ServerUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServerUrls) {
+            this.ServerUrls = new Array();
+            for (let z in params.ServerUrls) {
+                let obj = new DescribeOutputHLSPullServerUrl();
+                obj.deserialize(params.ServerUrls[z]);
+                this.ServerUrls.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * A list of the flow statistics.
+ * @class
+ */
+class FlowStatisticsArray extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The timestamp.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * The statistics of all the sessions.
+         * @type {Array.<FlowStatistics> || null}
+         */
+        this.FlowStatistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+        if (params.FlowStatistics) {
+            this.FlowStatistics = new Array();
+            for (let z in params.FlowStatistics) {
+                let obj = new FlowStatistics();
+                obj.deserialize(params.FlowStatistics[z]);
+                this.FlowStatistics.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeStreamLinkRegions response structure.
+ * @class
+ */
+class DescribeStreamLinkRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * StreamLink region information
+         * @type {StreamLinkRegionInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new StreamLinkRegionInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3324,41 +3368,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * The SRT input address.
- * @class
- */
-class SRTSourceAddressResp extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The peer IP.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * The peer port.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
  * DescribeStreamLinkFlowStatistics response structure.
  * @class
  */
@@ -3397,202 +3406,6 @@ class DescribeStreamLinkFlowStatisticsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StreamLink region information
- * @class
- */
-class StreamLinkRegionInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of StreamLink regions
-         * @type {Array.<RegionInfo> || null}
-         */
-        this.Regions = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Regions) {
-            this.Regions = new Array();
-            for (let z in params.Regions) {
-                let obj = new RegionInfo();
-                obj.deserialize(params.Regions[z]);
-                this.Regions.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * The new input configuration.
- * @class
- */
-class ModifyInput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The input ID.
-         * @type {string || null}
-         */
-        this.InputId = null;
-
-        /**
-         * The input name.
-         * @type {string || null}
-         */
-        this.InputName = null;
-
-        /**
-         * The description of the input.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * The IP addresses (CIDR) allowed to push streams.
-         * @type {Array.<string> || null}
-         */
-        this.AllowIpList = null;
-
-        /**
-         * The SRT configuration information.
-         * @type {CreateInputSRTSettings || null}
-         */
-        this.SRTSettings = null;
-
-        /**
-         * The RTP configuration information.
-         * @type {CreateInputRTPSettings || null}
-         */
-        this.RTPSettings = null;
-
-        /**
-         * The input protocol. Valid values: SRT, RTP, RTMP.
-If there is an RTP input, the output must be RTP.
-If there is an RTMP input, the output must be SRT or RTMP.
-If there is an SRT input, the output must be SRT.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Whether to enable input failover. Valid values: OPEN, CLOSE.
-         * @type {string || null}
-         */
-        this.FailOver = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InputId = 'InputId' in params ? params.InputId : null;
-        this.InputName = 'InputName' in params ? params.InputName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
-
-        if (params.SRTSettings) {
-            let obj = new CreateInputSRTSettings();
-            obj.deserialize(params.SRTSettings)
-            this.SRTSettings = obj;
-        }
-
-        if (params.RTPSettings) {
-            let obj = new CreateInputRTPSettings();
-            obj.deserialize(params.RTPSettings)
-            this.RTPSettings = obj;
-        }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.FailOver = 'FailOver' in params ? params.FailOver : null;
-
-    }
-}
-
-/**
- * The real-time SRT streaming information of a flow.
- * @class
- */
-class FlowRealtimeStatusSRT extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The latency (ms).
-         * @type {number || null}
-         */
-        this.Latency = null;
-
-        /**
-         * RTT (ms).
-         * @type {number || null}
-         */
-        this.RTT = null;
-
-        /**
-         * The number of packets sent or received.
-         * @type {number || null}
-         */
-        this.Packets = null;
-
-        /**
-         * The packet loss rate.
-         * @type {number || null}
-         */
-        this.PacketLossRate = null;
-
-        /**
-         * The retransmission rate.
-         * @type {number || null}
-         */
-        this.RetransmitRate = null;
-
-        /**
-         * The number of packets dropped.
-         * @type {number || null}
-         */
-        this.DroppedPackets = null;
-
-        /**
-         * Whether to encrypt the stream. Valid values: On, Off.
-         * @type {string || null}
-         */
-        this.Encryption = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Latency = 'Latency' in params ? params.Latency : null;
-        this.RTT = 'RTT' in params ? params.RTT : null;
-        this.Packets = 'Packets' in params ? params.Packets : null;
-        this.PacketLossRate = 'PacketLossRate' in params ? params.PacketLossRate : null;
-        this.RetransmitRate = 'RetransmitRate' in params ? params.RetransmitRate : null;
-        this.DroppedPackets = 'DroppedPackets' in params ? params.DroppedPackets : null;
-        this.Encryption = 'Encryption' in params ? params.Encryption : null;
 
     }
 }
@@ -3638,21 +3451,57 @@ class CreateStreamLinkFlowResponse extends  AbstractModel {
 }
 
 /**
- * Destination address information of RTP push.
+ * 
  * @class
  */
-class RTPAddressDestination extends  AbstractModel {
+class DescribeInputHLSPullSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push destination address IP.
+         * 
+         * @type {Array.<DescribeHLSPullSourceAddress> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new DescribeHLSPullSourceAddress();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Push destination address information.
+ * @class
+ */
+class SRTAddressDestination extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Destination address IP.
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * Push destination address port.
+         * Destination address port.
          * @type {number || null}
          */
         this.Port = null;
@@ -3668,287 +3517,6 @@ class RTPAddressDestination extends  AbstractModel {
         }
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Port = 'Port' in params ? params.Port : null;
-
-    }
-}
-
-/**
- * The SRT configuration of the output to create.
- * @class
- */
-class CreateOutputSrtSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The relay destination address, which is required if `Mode` is `CALLER`. Only one address is allowed.
-         * @type {Array.<CreateOutputSrtSettingsDestinations> || null}
-         */
-        this.Destinations = null;
-
-        /**
-         * The stream ID for relay, which can contain 0 to 512 letters, digits, and special characters (.#!:&,=_-).
-         * @type {string || null}
-         */
-        this.StreamId = null;
-
-        /**
-         * The total latency (ms) of SRT relay. Value range: [0, 3000]. Default: 0.
-         * @type {number || null}
-         */
-        this.Latency = null;
-
-        /**
-         * The receive latency (ms) of SRT relay. Value range: [0, 3000]. Default: 120.
-         * @type {number || null}
-         */
-        this.RecvLatency = null;
-
-        /**
-         * The peer-to-peer latency (ms) of SRT relay. Value range: [0, 3000]. Default: 0.
-         * @type {number || null}
-         */
-        this.PeerLatency = null;
-
-        /**
-         * The timeout period (ms) for the SRT relay peer. Value range: [1000, 10000]. Default: 5000.
-         * @type {number || null}
-         */
-        this.PeerIdleTimeout = null;
-
-        /**
-         * The encryption key for SRT relay, which is empty by default, indicating not to encrypt. Only ASCII codes are allowed. Length: [10, 79].
-         * @type {string || null}
-         */
-        this.Passphrase = null;
-
-        /**
-         * The key length for SRT relay. Valid values: 0 (default), 16, 24, 32.
-         * @type {number || null}
-         */
-        this.PbKeyLen = null;
-
-        /**
-         * The SRT mode. Valid values: LISTENER, CALLER (default).
-         * @type {string || null}
-         */
-        this.Mode = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new CreateOutputSrtSettingsDestinations();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.Latency = 'Latency' in params ? params.Latency : null;
-        this.RecvLatency = 'RecvLatency' in params ? params.RecvLatency : null;
-        this.PeerLatency = 'PeerLatency' in params ? params.PeerLatency : null;
-        this.PeerIdleTimeout = 'PeerIdleTimeout' in params ? params.PeerIdleTimeout : null;
-        this.Passphrase = 'Passphrase' in params ? params.Passphrase : null;
-        this.PbKeyLen = 'PbKeyLen' in params ? params.PbKeyLen : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
-
-    }
-}
-
-/**
- * Destination address information of RTMP push.
- * @class
- */
-class RTMPAddressDestination extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Destination URL of RTMP push in the format of 'rtmp://domain/live'.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Destination `StreamKey` of RTMP push in the format of 'streamid?key=value'.
-         * @type {string || null}
-         */
-        this.StreamKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
-
-    }
-}
-
-/**
- * RTP configuration information of the created input.
- * @class
- */
-class CreateInputRTPSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Default value: none. Valid values: ['none'].
-         * @type {string || null}
-         */
-        this.FEC = null;
-
-        /**
-         * Idle timeout period in ms. Default value: 5000. Value range: [1000, 10000].
-         * @type {number || null}
-         */
-        this.IdleTimeout = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FEC = 'FEC' in params ? params.FEC : null;
-        this.IdleTimeout = 'IdleTimeout' in params ? params.IdleTimeout : null;
-
-    }
-}
-
-/**
- * CreateStreamLinkOutputInfo response structure.
- * @class
- */
-class CreateStreamLinkOutputInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The information of the created output.
-         * @type {DescribeOutput || null}
-         */
-        this.Info = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new DescribeOutput();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeStreamLinkFlowLogs request structure.
- * @class
- */
-class DescribeStreamLinkFlowLogsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The flow ID.
-         * @type {string || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
-It must be in UTC format, such as `2020-01-01T12:00:00Z`.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
-It must be in UTC format, such as `2020-01-01T12:00:00Z`.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Whether to query the inputs or outputs. Valid values: input, output.
-         * @type {Array.<string> || null}
-         */
-        this.Type = null;
-
-        /**
-         * Whether to query the primary or backup pipeline. Valid values: 0, 1.
-         * @type {Array.<string> || null}
-         */
-        this.Pipeline = null;
-
-        /**
-         * The page size. Value range: [1, 1000]. Default: 100.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Whether to sort the records by timestamp in descending or ascending order. Valid values: desc (default), asc.
-         * @type {string || null}
-         */
-        this.SortType = null;
-
-        /**
-         * The page number. Value range: [1, 1000]. Default: 1.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.SortType = 'SortType' in params ? params.SortType : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
 
     }
 }
@@ -3984,97 +3552,6 @@ class DescribeStreamLinkFlowsRequest extends  AbstractModel {
         }
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * The real-time RTMP streaming information of a flow.
- * @class
- */
-class FlowRealtimeStatusRTMP extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The video frame rate.
-         * @type {number || null}
-         */
-        this.VideoFPS = null;
-
-        /**
-         * The audio frame rate.
-         * @type {number || null}
-         */
-        this.AudioFPS = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VideoFPS = 'VideoFPS' in params ? params.VideoFPS : null;
-        this.AudioFPS = 'AudioFPS' in params ? params.AudioFPS : null;
-
-    }
-}
-
-/**
- * The common real-time status information of a flow.
- * @class
- */
-class FlowRealtimeStatusCommon extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The connection status. Valid values: Connected, Waiting, Idle.
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * The connection mode. Valid values: Listener, Caller.
-         * @type {string || null}
-         */
-        this.Mode = null;
-
-        /**
-         * The connected time.
-         * @type {number || null}
-         */
-        this.ConnectedTime = null;
-
-        /**
-         * The real-time bitrate (bps).
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * The number of retries.
-         * @type {number || null}
-         */
-        this.Reconnections = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.State = 'State' in params ? params.State : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.ConnectedTime = 'ConnectedTime' in params ? params.ConnectedTime : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Reconnections = 'Reconnections' in params ? params.Reconnections : null;
 
     }
 }
@@ -4233,87 +3710,1419 @@ class ModifyStreamLinkOutputInfoRequest extends  AbstractModel {
     }
 }
 
+/**
+ * 
+ * @class
+ */
+class CreateInputRTSPPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<RTSPPullSourceAddress> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new RTSPPullSourceAddress();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * The real-time SRT streaming information of a flow.
+ * @class
+ */
+class FlowRealtimeStatusSRT extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The latency (ms).
+         * @type {number || null}
+         */
+        this.Latency = null;
+
+        /**
+         * RTT (ms).
+         * @type {number || null}
+         */
+        this.RTT = null;
+
+        /**
+         * The number of packets sent or received.
+         * @type {number || null}
+         */
+        this.Packets = null;
+
+        /**
+         * The packet loss rate.
+         * @type {number || null}
+         */
+        this.PacketLossRate = null;
+
+        /**
+         * The retransmission rate.
+         * @type {number || null}
+         */
+        this.RetransmitRate = null;
+
+        /**
+         * The number of packets dropped.
+         * @type {number || null}
+         */
+        this.DroppedPackets = null;
+
+        /**
+         * Whether to encrypt the stream. Valid values: On, Off.
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Latency = 'Latency' in params ? params.Latency : null;
+        this.RTT = 'RTT' in params ? params.RTT : null;
+        this.Packets = 'Packets' in params ? params.Packets : null;
+        this.PacketLossRate = 'PacketLossRate' in params ? params.PacketLossRate : null;
+        this.RetransmitRate = 'RetransmitRate' in params ? params.RetransmitRate : null;
+        this.DroppedPackets = 'DroppedPackets' in params ? params.DroppedPackets : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
+
+    }
+}
+
+/**
+ * CreateStreamLinkFlow request structure.
+ * @class
+ */
+class CreateStreamLinkFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow name
+         * @type {string || null}
+         */
+        this.FlowName = null;
+
+        /**
+         * Maximum bandwidth in bps. Valid values: `10000000`, `20000000`, `50000000`
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+        /**
+         * Flow input group
+         * @type {Array.<CreateInput> || null}
+         */
+        this.InputGroup = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowName = 'FlowName' in params ? params.FlowName : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+
+        if (params.InputGroup) {
+            this.InputGroup = new Array();
+            for (let z in params.InputGroup) {
+                let obj = new CreateInput();
+                obj.deserialize(params.InputGroup[z]);
+                this.InputGroup.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * The flow statistics.
+ * @class
+ */
+class FlowStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The session ID.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The peer IP.
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * The total bandwidth.
+         * @type {number || null}
+         */
+        this.Network = null;
+
+        /**
+         * The video data.
+         * @type {Array.<FlowVideo> || null}
+         */
+        this.Video = null;
+
+        /**
+         * The audio data.
+         * @type {Array.<FlowAudio> || null}
+         */
+        this.Audio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.Network = 'Network' in params ? params.Network : null;
+
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new FlowVideo();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
+        }
+
+        if (params.Audio) {
+            this.Audio = new Array();
+            for (let z in params.Audio) {
+                let obj = new FlowAudio();
+                obj.deserialize(params.Audio[z]);
+                this.Audio.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteStreamLinkOutput request structure.
+ * @class
+ */
+class DeleteStreamLinkOutputRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Output ID
+         * @type {string || null}
+         */
+        this.OutputId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.OutputId = 'OutputId' in params ? params.OutputId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RTSPPullSourceAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeHLSPullSourceAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * The common real-time status information of a flow.
+ * @class
+ */
+class FlowRealtimeStatusCommon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The connection status. Valid values: Connected, Waiting, Idle.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * The connection mode. Valid values: Listener, Caller.
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * The connected time.
+         * @type {number || null}
+         */
+        this.ConnectedTime = null;
+
+        /**
+         * The real-time bitrate (bps).
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * The number of retries.
+         * @type {number || null}
+         */
+        this.Reconnections = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.State = 'State' in params ? params.State : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.ConnectedTime = 'ConnectedTime' in params ? params.ConnectedTime : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Reconnections = 'Reconnections' in params ? params.Reconnections : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlowMediaStatistics request structure.
+ * @class
+ */
+class DescribeStreamLinkFlowMediaStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Whether to query the inputs or outputs. Valid values: input, output.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The input or output ID.
+         * @type {string || null}
+         */
+        this.InputOutputId = null;
+
+        /**
+         * Whether to query the primary or backup pipeline. Valid values: 0, 1.
+         * @type {string || null}
+         */
+        this.Pipeline = null;
+
+        /**
+         * The query interval. Valid values: 5s, 1min, 5min, 15min.
+         * @type {string || null}
+         */
+        this.Period = null;
+
+        /**
+         * The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InputOutputId = 'InputOutputId' in params ? params.InputOutputId : null;
+        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * Region information
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkFlow response structure.
+ * @class
+ */
+class DescribeStreamLinkFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration information of a flow
+         * @type {DescribeFlow || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new DescribeFlow();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The real-time RTMP streaming information of a flow.
+ * @class
+ */
+class FlowRealtimeStatusRTMP extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The video frame rate.
+         * @type {number || null}
+         */
+        this.VideoFPS = null;
+
+        /**
+         * The audio frame rate.
+         * @type {number || null}
+         */
+        this.AudioFPS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoFPS = 'VideoFPS' in params ? params.VideoFPS : null;
+        this.AudioFPS = 'AudioFPS' in params ? params.AudioFPS : null;
+
+    }
+}
+
+/**
+ * StopStreamLinkFlow request structure.
+ * @class
+ */
+class StopStreamLinkFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
+ * Configuration information of the created input.
+ * @class
+ */
+class CreateInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input name, which can contain 1 to 32 letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.InputName = null;
+
+        /**
+         * Input protocol. Valid values: `SRT`, `RTP`, `RTMP`
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Input description. Length: [0, 255].
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Allowlist of input IPs in CIDR format.
+         * @type {Array.<string> || null}
+         */
+        this.AllowIpList = null;
+
+        /**
+         * SRT configuration information of input.
+         * @type {CreateInputSRTSettings || null}
+         */
+        this.SRTSettings = null;
+
+        /**
+         * RTP configuration information of input.
+         * @type {CreateInputRTPSettings || null}
+         */
+        this.RTPSettings = null;
+
+        /**
+         * Input failover. Valid values: `OPEN`, `CLOSE` (default)
+         * @type {string || null}
+         */
+        this.FailOver = null;
+
+        /**
+         * 
+         * @type {CreateInputRTMPPullSettings || null}
+         */
+        this.RTMPPullSettings = null;
+
+        /**
+         * 
+         * @type {CreateInputRTSPPullSettings || null}
+         */
+        this.RTSPPullSettings = null;
+
+        /**
+         * 
+         * @type {CreateInputHLSPullSettings || null}
+         */
+        this.HLSPullSettings = null;
+
+        /**
+         * 
+         * @type {ResilientStreamConf || null}
+         */
+        this.ResilientStream = null;
+
+        /**
+         * The bound security group IDs.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputName = 'InputName' in params ? params.InputName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AllowIpList = 'AllowIpList' in params ? params.AllowIpList : null;
+
+        if (params.SRTSettings) {
+            let obj = new CreateInputSRTSettings();
+            obj.deserialize(params.SRTSettings)
+            this.SRTSettings = obj;
+        }
+
+        if (params.RTPSettings) {
+            let obj = new CreateInputRTPSettings();
+            obj.deserialize(params.RTPSettings)
+            this.RTPSettings = obj;
+        }
+        this.FailOver = 'FailOver' in params ? params.FailOver : null;
+
+        if (params.RTMPPullSettings) {
+            let obj = new CreateInputRTMPPullSettings();
+            obj.deserialize(params.RTMPPullSettings)
+            this.RTMPPullSettings = obj;
+        }
+
+        if (params.RTSPPullSettings) {
+            let obj = new CreateInputRTSPPullSettings();
+            obj.deserialize(params.RTSPPullSettings)
+            this.RTSPPullSettings = obj;
+        }
+
+        if (params.HLSPullSettings) {
+            let obj = new CreateInputHLSPullSettings();
+            obj.deserialize(params.HLSPullSettings)
+            this.HLSPullSettings = obj;
+        }
+
+        if (params.ResilientStream) {
+            let obj = new ResilientStreamConf();
+            obj.deserialize(params.ResilientStream)
+            this.ResilientStream = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * The RTMP configuration of the output to create.
+ * @class
+ */
+class CreateOutputRTMPSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The relay destination addresses. One or two addresses are allowed.
+         * @type {Array.<CreateOutputRtmpSettingsDestinations> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * The RTMP chunk size. Value range: [4096, 40960].
+         * @type {number || null}
+         */
+        this.ChunkSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new CreateOutputRtmpSettingsDestinations();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+        this.ChunkSize = 'ChunkSize' in params ? params.ChunkSize : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class HLSPullSourceAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * The RTMP destination address of the output to create.
+ * @class
+ */
+class CreateOutputRtmpSettingsDestinations extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The relay URL. Format: `rtmp://domain/live`.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * The `StreamKey` for relay. Format: `stream?key=value`.
+         * @type {string || null}
+         */
+        this.StreamKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
+
+    }
+}
+
+/**
+ * The logs of a flow.
+ * @class
+ */
+class FlowLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The timestamp (seconds).
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Whether it is an input or output.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The input or output ID.
+         * @type {string || null}
+         */
+        this.InputOutputId = null;
+
+        /**
+         * The protocol.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * The event code.
+         * @type {string || null}
+         */
+        this.EventCode = null;
+
+        /**
+         * The event information.
+         * @type {string || null}
+         */
+        this.EventMessage = null;
+
+        /**
+         * The peer IP.
+         * @type {string || null}
+         */
+        this.RemoteIp = null;
+
+        /**
+         * The peer port.
+         * @type {string || null}
+         */
+        this.RemotePort = null;
+
+        /**
+         * Whether it is a primary or backup pipeline. Valid values: 0 (primary), 1 (backup).
+         * @type {string || null}
+         */
+        this.Pipeline = null;
+
+        /**
+         * The input or output name.
+         * @type {string || null}
+         */
+        this.InputOutputName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InputOutputId = 'InputOutputId' in params ? params.InputOutputId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.EventCode = 'EventCode' in params ? params.EventCode : null;
+        this.EventMessage = 'EventMessage' in params ? params.EventMessage : null;
+        this.RemoteIp = 'RemoteIp' in params ? params.RemoteIp : null;
+        this.RemotePort = 'RemotePort' in params ? params.RemotePort : null;
+        this.Pipeline = 'Pipeline' in params ? params.Pipeline : null;
+        this.InputOutputName = 'InputOutputName' in params ? params.InputOutputName : null;
+
+    }
+}
+
+/**
+ * DeleteStreamLinkOutput response structure.
+ * @class
+ */
+class DeleteStreamLinkOutputResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateStreamLinkOutputInfo request structure.
+ * @class
+ */
+class CreateStreamLinkOutputInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The output configuration of the flow.
+         * @type {CreateOutputInfo || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+        if (params.Output) {
+            let obj = new CreateOutputInfo();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyStreamLinkInput request structure.
+ * @class
+ */
+class ModifyStreamLinkInputRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The flow ID.
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The input information to modify.
+         * @type {ModifyInput || null}
+         */
+        this.Input = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+        if (params.Input) {
+            let obj = new ModifyInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ResilientStreamConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.BufferTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.BufferTime = 'BufferTime' in params ? params.BufferTime : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeOutputRTSPPullServerUrl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * Input address information.
+ * @class
+ */
+class InputAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input address IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Input address port.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DescribeInputRTMPPullSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<DescribeRTMPPullSourceAddress> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new DescribeRTMPPullSourceAddress();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * SRT configuration information of the created input.
+ * @class
+ */
+class CreateInputSRTSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SRT mode. Valid values: LISTENER (default), CALLER.
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Stream ID, which can contain 0 to 512 letters, digits, and special characters (.#!:&,=_-).
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * Latency in ms. Default value: 0. Value range: [0, 3000].
+         * @type {number || null}
+         */
+        this.Latency = null;
+
+        /**
+         * Receive latency in ms. Default value: 120. Value range: [0, 3000].
+         * @type {number || null}
+         */
+        this.RecvLatency = null;
+
+        /**
+         * Peer latency in ms. Default value: 0. Value range: [0, 3000].
+         * @type {number || null}
+         */
+        this.PeerLatency = null;
+
+        /**
+         * Peer timeout period in ms. Default value: 5000. Value range: [1000, 10000].
+         * @type {number || null}
+         */
+        this.PeerIdleTimeout = null;
+
+        /**
+         * Decryption key, which is empty by default, indicating not to encrypt. Only ASCII codes can be filled. Length: [10, 79].
+         * @type {string || null}
+         */
+        this.Passphrase = null;
+
+        /**
+         * Key length. Default value: 0. Valid values: 0, 16, 24, 32.
+         * @type {number || null}
+         */
+        this.PbKeyLen = null;
+
+        /**
+         * The SRT peer address, which is required if `Mode` is `CALLER`. Only one address is allowed.
+         * @type {Array.<SRTSourceAddressReq> || null}
+         */
+        this.SourceAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.Latency = 'Latency' in params ? params.Latency : null;
+        this.RecvLatency = 'RecvLatency' in params ? params.RecvLatency : null;
+        this.PeerLatency = 'PeerLatency' in params ? params.PeerLatency : null;
+        this.PeerIdleTimeout = 'PeerIdleTimeout' in params ? params.PeerIdleTimeout : null;
+        this.Passphrase = 'Passphrase' in params ? params.Passphrase : null;
+        this.PbKeyLen = 'PbKeyLen' in params ? params.PbKeyLen : null;
+
+        if (params.SourceAddresses) {
+            this.SourceAddresses = new Array();
+            for (let z in params.SourceAddresses) {
+                let obj = new SRTSourceAddressReq();
+                obj.deserialize(params.SourceAddresses[z]);
+                this.SourceAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RTMPPullSourceAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TcUrl = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StreamKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TcUrl = 'TcUrl' in params ? params.TcUrl : null;
+        this.StreamKey = 'StreamKey' in params ? params.StreamKey : null;
+
+    }
+}
+
+/**
+ * StreamLink region information
+ * @class
+ */
+class StreamLinkRegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of StreamLink regions
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.Regions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Regions) {
+            this.Regions = new Array();
+            for (let z in params.Regions) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.Regions[z]);
+                this.Regions.push(obj);
+            }
+        }
+
+    }
+}
+
 module.exports = {
-    DescribeOutputRTMPSettings: DescribeOutputRTMPSettings,
-    DescribeStreamLinkFlowLogsResponse: DescribeStreamLinkFlowLogsResponse,
     OutputAddress: OutputAddress,
-    OutputSRTSourceAddressResp: OutputSRTSourceAddressResp,
-    InputAddress: InputAddress,
+    DescribeOutputRTMPPullServerUrl: DescribeOutputRTMPPullServerUrl,
     DescribeInputRTPSettings: DescribeInputRTPSettings,
     FlowRealtimeStatusRTP: FlowRealtimeStatusRTP,
     DescribeStreamLinkRegionsRequest: DescribeStreamLinkRegionsRequest,
-    ModifyStreamLinkFlowRequest: ModifyStreamLinkFlowRequest,
     DeleteStreamLinkFlowRequest: DeleteStreamLinkFlowRequest,
-    DescribeStreamLinkFlowMediaStatisticsResponse: DescribeStreamLinkFlowMediaStatisticsResponse,
     ModifyStreamLinkInputResponse: ModifyStreamLinkInputResponse,
-    CreateOutputInfoRTPSettings: CreateOutputInfoRTPSettings,
-    CreateStreamLinkFlowRequest: CreateStreamLinkFlowRequest,
-    StartStreamLinkFlowRequest: StartStreamLinkFlowRequest,
     CreateOutputSrtSettingsDestinations: CreateOutputSrtSettingsDestinations,
-    SRTAddressDestination: SRTAddressDestination,
     DescribeStreamLinkFlowStatisticsRequest: DescribeStreamLinkFlowStatisticsRequest,
-    SRTSourceAddressReq: SRTSourceAddressReq,
-    DescribeOutput: DescribeOutput,
-    DescribeFlow: DescribeFlow,
-    DeleteStreamLinkOutputRequest: DeleteStreamLinkOutputRequest,
-    FlowStatisticsArray: FlowStatisticsArray,
-    CreateInputSRTSettings: CreateInputSRTSettings,
-    FlowMediaAudio: FlowMediaAudio,
-    DescribeInputRTMPSettings: DescribeInputRTMPSettings,
-    ModifyStreamLinkFlowResponse: ModifyStreamLinkFlowResponse,
-    DescribeStreamLinkFlowRequest: DescribeStreamLinkFlowRequest,
-    RegionInfo: RegionInfo,
-    DescribeStreamLinkFlowMediaStatisticsRequest: DescribeStreamLinkFlowMediaStatisticsRequest,
-    DescribeStreamLinkFlowRealtimeStatusRequest: DescribeStreamLinkFlowRealtimeStatusRequest,
-    ModifyStreamLinkOutputInfoResponse: ModifyStreamLinkOutputInfoResponse,
-    DescribeStreamLinkFlowResponse: DescribeStreamLinkFlowResponse,
     StopStreamLinkFlowResponse: StopStreamLinkFlowResponse,
+    ModifyStreamLinkOutputInfoResponse: ModifyStreamLinkOutputInfoResponse,
     FlowSRTInfo: FlowSRTInfo,
-    FlowStatistics: FlowStatistics,
-    DescribeStreamLinkFlowSRTStatisticsRequest: DescribeStreamLinkFlowSRTStatisticsRequest,
-    DescribeStreamLinkFlowRealtimeStatusResponse: DescribeStreamLinkFlowRealtimeStatusResponse,
-    FlowAudio: FlowAudio,
+    SRTSourceAddressResp: SRTSourceAddressResp,
+    DescribeInput: DescribeInput,
+    FlowMediaInfo: FlowMediaInfo,
+    DescribeOutputSRTSettings: DescribeOutputSRTSettings,
+    DescribeRTMPPullSourceAddress: DescribeRTMPPullSourceAddress,
+    DescribeOutputRTMPPullSettings: DescribeOutputRTMPPullSettings,
+    DescribeStreamLinkFlowSRTStatisticsResponse: DescribeStreamLinkFlowSRTStatisticsResponse,
+    ModifyOutputInfo: ModifyOutputInfo,
+    CreateInputRTPSettings: CreateInputRTPSettings,
+    CreateStreamLinkOutputInfoResponse: CreateStreamLinkOutputInfoResponse,
+    RTPAddressDestination: RTPAddressDestination,
+    DescribeStreamLinkFlowLogsResponse: DescribeStreamLinkFlowLogsResponse,
+    DescribeOutput: DescribeOutput,
+    CreateInputHLSPullSettings: CreateInputHLSPullSettings,
+    CreateOutputSrtSettings: CreateOutputSrtSettings,
+    ModifyStreamLinkFlowResponse: ModifyStreamLinkFlowResponse,
+    StartStreamLinkFlowRequest: StartStreamLinkFlowRequest,
+    StartStreamLinkFlowResponse: StartStreamLinkFlowResponse,
     CreateOutputRTPSettingsDestinations: CreateOutputRTPSettingsDestinations,
+    CreateOutputInfo: CreateOutputInfo,
+    DescribeStreamLinkFlowRealtimeStatusResponse: DescribeStreamLinkFlowRealtimeStatusResponse,
+    DescribeStreamLinkFlowsResponse: DescribeStreamLinkFlowsResponse,
+    DescribeInputRTSPPullSettings: DescribeInputRTSPPullSettings,
+    FlowMediaAudio: FlowMediaAudio,
+    DescribeOutputRTPSettings: DescribeOutputRTPSettings,
+    ModifyInput: ModifyInput,
+    DescribeStreamLinkFlowLogsRequest: DescribeStreamLinkFlowLogsRequest,
+    DescribeInputRTMPSettings: DescribeInputRTMPSettings,
+    DescribeOutputRTMPSettings: DescribeOutputRTMPSettings,
+    OutputSRTSourceAddressResp: OutputSRTSourceAddressResp,
+    CreateInputRTMPPullSettings: CreateInputRTMPPullSettings,
     FlowVideo: FlowVideo,
+    ModifyStreamLinkFlowRequest: ModifyStreamLinkFlowRequest,
+    RTMPAddressDestination: RTMPAddressDestination,
+    DescribeStreamLinkFlowMediaStatisticsResponse: DescribeStreamLinkFlowMediaStatisticsResponse,
+    CreateOutputInfoRTPSettings: CreateOutputInfoRTPSettings,
+    SRTSourceAddressReq: SRTSourceAddressReq,
+    DescribeFlow: DescribeFlow,
+    DescribeRTSPPullSourceAddress: DescribeRTSPPullSourceAddress,
+    DeleteStreamLinkFlowResponse: DeleteStreamLinkFlowResponse,
+    DescribeOutputRTSPPullSettings: DescribeOutputRTSPPullSettings,
+    DescribeStreamLinkFlowRealtimeStatusRequest: DescribeStreamLinkFlowRealtimeStatusRequest,
+    FlowAudio: FlowAudio,
+    FlowMediaVideo: FlowMediaVideo,
+    DescribeOutputHLSPullServerUrl: DescribeOutputHLSPullServerUrl,
+    DescribeStreamLinkFlowSRTStatisticsRequest: DescribeStreamLinkFlowSRTStatisticsRequest,
+    DescribeStreamLinkFlowRequest: DescribeStreamLinkFlowRequest,
+    DescribeOutputHLSPullSettings: DescribeOutputHLSPullSettings,
+    FlowStatisticsArray: FlowStatisticsArray,
+    DescribeStreamLinkRegionsResponse: DescribeStreamLinkRegionsResponse,
+    DescribeInputSRTSettings: DescribeInputSRTSettings,
+    DescribeStreamLinkFlowStatisticsResponse: DescribeStreamLinkFlowStatisticsResponse,
+    CreateStreamLinkFlowResponse: CreateStreamLinkFlowResponse,
+    DescribeInputHLSPullSettings: DescribeInputHLSPullSettings,
+    SRTAddressDestination: SRTAddressDestination,
+    DescribeStreamLinkFlowsRequest: DescribeStreamLinkFlowsRequest,
+    FlowRealtimeStatusItem: FlowRealtimeStatusItem,
+    ModifyStreamLinkOutputInfoRequest: ModifyStreamLinkOutputInfoRequest,
+    CreateInputRTSPPullSettings: CreateInputRTSPPullSettings,
+    FlowRealtimeStatusSRT: FlowRealtimeStatusSRT,
+    CreateStreamLinkFlowRequest: CreateStreamLinkFlowRequest,
+    FlowStatistics: FlowStatistics,
+    DeleteStreamLinkOutputRequest: DeleteStreamLinkOutputRequest,
+    RTSPPullSourceAddress: RTSPPullSourceAddress,
+    DescribeHLSPullSourceAddress: DescribeHLSPullSourceAddress,
+    FlowRealtimeStatusCommon: FlowRealtimeStatusCommon,
+    DescribeStreamLinkFlowMediaStatisticsRequest: DescribeStreamLinkFlowMediaStatisticsRequest,
+    RegionInfo: RegionInfo,
+    DescribeStreamLinkFlowResponse: DescribeStreamLinkFlowResponse,
+    FlowRealtimeStatusRTMP: FlowRealtimeStatusRTMP,
     StopStreamLinkFlowRequest: StopStreamLinkFlowRequest,
     CreateInput: CreateInput,
     CreateOutputRTMPSettings: CreateOutputRTMPSettings,
-    DescribeOutputRTMPPullServerUrl: DescribeOutputRTMPPullServerUrl,
-    DescribeInput: DescribeInput,
+    HLSPullSourceAddress: HLSPullSourceAddress,
     CreateOutputRtmpSettingsDestinations: CreateOutputRtmpSettingsDestinations,
-    CreateOutputInfo: CreateOutputInfo,
     FlowLogInfo: FlowLogInfo,
-    FlowMediaInfo: FlowMediaInfo,
-    DescribeOutputSRTSettings: DescribeOutputSRTSettings,
     DeleteStreamLinkOutputResponse: DeleteStreamLinkOutputResponse,
-    StartStreamLinkFlowResponse: StartStreamLinkFlowResponse,
-    DescribeOutputRTMPPullSettings: DescribeOutputRTMPPullSettings,
-    DescribeStreamLinkFlowsResponse: DescribeStreamLinkFlowsResponse,
-    FlowMediaVideo: FlowMediaVideo,
     CreateStreamLinkOutputInfoRequest: CreateStreamLinkOutputInfoRequest,
-    DeleteStreamLinkFlowResponse: DeleteStreamLinkFlowResponse,
-    DescribeStreamLinkRegionsResponse: DescribeStreamLinkRegionsResponse,
-    DescribeStreamLinkFlowSRTStatisticsResponse: DescribeStreamLinkFlowSRTStatisticsResponse,
-    ModifyOutputInfo: ModifyOutputInfo,
     ModifyStreamLinkInputRequest: ModifyStreamLinkInputRequest,
-    DescribeOutputRTPSettings: DescribeOutputRTPSettings,
-    DescribeInputSRTSettings: DescribeInputSRTSettings,
-    SRTSourceAddressResp: SRTSourceAddressResp,
-    DescribeStreamLinkFlowStatisticsResponse: DescribeStreamLinkFlowStatisticsResponse,
+    ResilientStreamConf: ResilientStreamConf,
+    DescribeOutputRTSPPullServerUrl: DescribeOutputRTSPPullServerUrl,
+    InputAddress: InputAddress,
+    DescribeInputRTMPPullSettings: DescribeInputRTMPPullSettings,
+    CreateInputSRTSettings: CreateInputSRTSettings,
+    RTMPPullSourceAddress: RTMPPullSourceAddress,
     StreamLinkRegionInfo: StreamLinkRegionInfo,
-    ModifyInput: ModifyInput,
-    FlowRealtimeStatusSRT: FlowRealtimeStatusSRT,
-    CreateStreamLinkFlowResponse: CreateStreamLinkFlowResponse,
-    RTPAddressDestination: RTPAddressDestination,
-    CreateOutputSrtSettings: CreateOutputSrtSettings,
-    RTMPAddressDestination: RTMPAddressDestination,
-    CreateInputRTPSettings: CreateInputRTPSettings,
-    CreateStreamLinkOutputInfoResponse: CreateStreamLinkOutputInfoResponse,
-    DescribeStreamLinkFlowLogsRequest: DescribeStreamLinkFlowLogsRequest,
-    DescribeStreamLinkFlowsRequest: DescribeStreamLinkFlowsRequest,
-    FlowRealtimeStatusRTMP: FlowRealtimeStatusRTMP,
-    FlowRealtimeStatusCommon: FlowRealtimeStatusCommon,
-    FlowRealtimeStatusItem: FlowRealtimeStatusItem,
-    ModifyStreamLinkOutputInfoRequest: ModifyStreamLinkOutputInfoRequest,
 
 }

@@ -92,6 +92,7 @@ const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
 const ModifyAccelerationDomainStatusesResponse = models.ModifyAccelerationDomainStatusesResponse;
 const Zone = models.Zone;
 const DescribeRulesSettingResponse = models.DescribeRulesSettingResponse;
+const BindSecurityTemplateToEntityResponse = models.BindSecurityTemplateToEntityResponse;
 const RuleExtraParameter = models.RuleExtraParameter;
 const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
 const RulesSettingAction = models.RulesSettingAction;
@@ -123,6 +124,7 @@ const ClientIpCountry = models.ClientIpCountry;
 const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
 const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
 const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
+const TemplateScope = models.TemplateScope;
 const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest;
 const FileAscriptionInfo = models.FileAscriptionInfo;
 const DeleteSharedCNAMERequest = models.DeleteSharedCNAMERequest;
@@ -139,6 +141,7 @@ const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
 const WafRule = models.WafRule;
 const SecurityConfig = models.SecurityConfig;
 const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
+const DescribeSecurityTemplateBindingsResponse = models.DescribeSecurityTemplateBindingsResponse;
 const MaxAge = models.MaxAge;
 const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
 const RuleCodeActionParams = models.RuleCodeActionParams;
@@ -198,6 +201,7 @@ const SubRule = models.SubRule;
 const CertificateInfo = models.CertificateInfo;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
+const BindSecurityTemplateToEntityRequest = models.BindSecurityTemplateToEntityRequest;
 const TimingDataItem = models.TimingDataItem;
 const CreateApplicationProxyRequest = models.CreateApplicationProxyRequest;
 const CC = models.CC;
@@ -225,6 +229,7 @@ const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusR
 const DeleteOriginGroupResponse = models.DeleteOriginGroupResponse;
 const Header = models.Header;
 const RuleAndConditions = models.RuleAndConditions;
+const SecurityTemplateBinding = models.SecurityTemplateBinding;
 const DropPageConfig = models.DropPageConfig;
 const SecEntry = models.SecEntry;
 const DescribeIdentificationsRequest = models.DescribeIdentificationsRequest;
@@ -256,6 +261,7 @@ const FailReason = models.FailReason;
 const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
+const EntityStatus = models.EntityStatus;
 const RewriteAction = models.RewriteAction;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
@@ -283,6 +289,7 @@ const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
 const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
+const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
 const AlgDetectResult = models.AlgDetectResult;
 const QueryString = models.QueryString;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
@@ -320,7 +327,7 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete an origin group.
+     * This API is used to delete an origin group. Note that an origin group can not be deleted if it is referenced by services (e.g. L4 Proxy, domain name service, load balancing, rule engines). 
      * @param {DeleteOriginGroupRequest} req
      * @param {function(string, DeleteOriginGroupResponse):void} cb
      * @public
@@ -366,7 +373,7 @@ For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/prod
     }
 
     /**
-     * This API is used to create an origin group.
+     * This API is used to create an origin group for easy management. The created origin server group can be used for **adding acceleration domain names** and **layer-4 proxy configuration**.
      * @param {CreateOriginGroupRequest} req
      * @param {function(string, CreateOriginGroupResponse):void} cb
      * @public
@@ -535,6 +542,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
+     * This API is used to query bindings of a policy template.
+     * @param {DescribeSecurityTemplateBindingsRequest} req
+     * @param {function(string, DescribeSecurityTemplateBindingsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityTemplateBindings(req, cb) {
+        let resp = new DescribeSecurityTemplateBindingsResponse();
+        this.request("DescribeSecurityTemplateBindings", req, resp, cb);
+    }
+
+    /**
      * This API is used to query plan options available for purchase.
      * @param {DescribeAvailablePlansRequest} req
      * @param {function(string, DescribeAvailablePlansResponse):void} cb
@@ -647,7 +665,7 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to modify an origin group.
+     * This API is used to modify the configuration of an origin group. The original configuration will be overwritten. 
      * @param {ModifyOriginGroupRequest} req
      * @param {function(string, ModifyOriginGroupResponse):void} cb
      * @public
@@ -1031,6 +1049,17 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     ModifyApplicationProxyStatus(req, cb) {
         let resp = new ModifyApplicationProxyStatusResponse();
         this.request("ModifyApplicationProxyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind/unbind a domain name to/from a specific policy template. 
+     * @param {BindSecurityTemplateToEntityRequest} req
+     * @param {function(string, BindSecurityTemplateToEntityResponse):void} cb
+     * @public
+     */
+    BindSecurityTemplateToEntity(req, cb) {
+        let resp = new BindSecurityTemplateToEntityResponse();
+        this.request("BindSecurityTemplateToEntity", req, resp, cb);
     }
 
     /**

@@ -114,7 +114,7 @@ class DescribeRiskCenterAssetViewWeakPasswordRiskListResponse extends  AbstractM
         this.Data = null;
 
         /**
-         * List of status
+         * List of risk handling status
          * @type {Array.<FilterDataObject> || null}
          */
         this.StatusLists = null;
@@ -662,21 +662,21 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.PortCount = null;
 
         /**
-         * Network attacks
+         * Number of network attacks
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Attack = null;
 
         /**
-         * Network access
+         * Number of network access requests
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Access = null;
 
         /**
-         * Network interception
+         * Number of blocked attacks
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -2238,7 +2238,7 @@ class DescribeRiskCenterWebsiteRiskListResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * List of status
+         * List of risk handling status
          * @type {Array.<FilterDataObject> || null}
          */
         this.StatusLists = null;
@@ -3531,7 +3531,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.Region = null;
 
         /**
-         * Unique ID of Multi-cloud asset
+         * The ID specific for an asset synched from another cloud platform
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -3669,21 +3669,21 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.IsCloud = null;
 
         /**
-         * Network attacks
+         * Number of network attacks
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Attack = null;
 
         /**
-         * Network access
+         * Number of network access requests
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Access = null;
 
         /**
-         * Network Interception
+         * Number of blocked attacks
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5035,7 +5035,7 @@ class DescribeRiskCenterAssetViewCFGRiskListResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * List of status
+         * List of risk handling status
          * @type {Array.<FilterDataObject> || null}
          */
         this.StatusLists = null;
@@ -6059,7 +6059,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.AssetLocationList = null;
 
         /**
-         * List of IPs
+         * List of IP types
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {Array.<FilterDataObject> || null}
          */
@@ -8051,7 +8051,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.Access = null;
 
         /**
-         * Network interception
+         * Number of blocked attacks
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -8226,7 +8226,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.VerifyStatus = null;
 
         /**
-         * Bot access data
+         * u200cNumber of bot attacks
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -8424,7 +8424,7 @@ class BugInfoDetail extends  AbstractModel {
         super();
 
         /**
-         * Type of the query action. `1`: Query emergency vulnerabilities; `2`: Query all vulnerabilities; `3`: Query a specific vulnerability. When `Id=3`, `CVEId` is required. 
+         * Vulnerability ID
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -8529,28 +8529,28 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.ProSupport = null;
 
         /**
-         * Published or not, `0`: Not published; `1`: Published.
+         * Specify whether the vulnerability is published as an emergency vulnerability. `1`: Published as an emergency vulnerability; `0`: Not an emergency vulnerability.
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsPublish = null;
 
         /**
-         * Release time
+         * Disclosure time of the vulnerability. 
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ReleaseTime = null;
 
         /**
-         * Creation time
+         * The time when the vulnerability is added to the vulnerability database.
 Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time
+         * The last update time of the vulnerability in the database
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -8619,7 +8619,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.Data = null;
 
         /**
-         * List of protection status
+         * List of WAF protection status
 Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {Array.<FilterDataObject> || null}
          */
@@ -8849,7 +8849,7 @@ class DescribeRiskCenterAssetViewVULRiskListResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * List of status
+         * List of risk handling status
          * @type {Array.<FilterDataObject> || null}
          */
         this.StatusLists = null;
@@ -9367,7 +9367,7 @@ class DescribeRiskCenterAssetViewPortRiskListResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * List of status
+         * List of risk handling status
          * @type {Array.<FilterDataObject> || null}
          */
         this.StatusLists = null;

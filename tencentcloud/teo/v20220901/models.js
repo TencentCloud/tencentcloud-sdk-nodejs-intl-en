@@ -1148,58 +1148,38 @@ class OriginRecord extends  AbstractModel {
         this.Record = null;
 
         /**
+         * The origin type. Values:
+<li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
+<li>`COS`: COS bucket address</li>
+<li>`AWS_S3`: AWS S3 bucket address
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
          * The origin record ID.
          * @type {string || null}
          */
         this.RecordId = null;
 
         /**
-         * The origin port. Value rang: 1-65535.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * The weight when `ConfigurationType=weight`.
-If 0 or no value is passed, the weight of each origin in a group will be 0 or left empty, indicating that origin-pull is performed by round-robin.
-If a value between 1-100 is passed, the total weight of multiple origins in a group should be 100, indicating that origin-pull is performed by weight.
-The weight when `ConfigurationType=proto`.
-If 0 or no value is passed, the weight of each origin in a group will be 0 or left empty, indicating that origin-pull is performed by round-robin.
-If a value between 1-100 is passed, the total weight of multiple origins with the same protocol in a group should be 100, indicating that origin-pull is performed by weight.
+         * Weight of an origin. Range: 0-100. If it is not specified, a random weight is assigned. If `0` is passed in, there is no traffic scheduled to this origin.
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * The origin protocol when `ConfigurationType=proto`, indicating that origin-pull is performed by protocol.
-<li>`http`: HTTP protocol</li>
-<li>`https`: HTTPS protocol</li>
-         * @type {string || null}
-         */
-        this.Proto = null;
-
-        /**
-         * The region when `ConfigurationType=area`, which is specified by country code (ISO 3166 alpha-2) or continent code. If not specified, it indicates all regions. Supported continent codes:
-<li>`Asia`</li>
-<li>`Europe`</li>
-<li>`Africa`</li>
-<li>`Oceania`</li>
-<li>`Americas`</li>An origin group must have at least one origin configured with all regions.
-         * @type {Array.<string> || null}
-         */
-        this.Area = null;
-
-        /**
-         * It is valid only when `OriginType=third_part`.
-Whether the origin group is private. Values:
+         * Whether to enable private authentication. It is valid when `OriginType=COS/AWS_S3`. Values:
 <li>`true`: Yes.</li>
-<li>`false`: No.</li>If not specified, it defaults to false.
+<li>`false`: No.</li>Default: `false`.
+
          * @type {boolean || null}
          */
         this.Private = null;
 
         /**
-         * The authentication parameter, which is used when `Private=true`.
+         * Private authentication parameters. This field is valid when `Private=true`.
          * @type {Array.<PrivateParameter> || null}
          */
         this.PrivateParameters = null;
@@ -1214,11 +1194,9 @@ Whether the origin group is private. Values:
             return;
         }
         this.Record = 'Record' in params ? params.Record : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.Port = 'Port' in params ? params.Port : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
-        this.Proto = 'Proto' in params ? params.Proto : null;
-        this.Area = 'Area' in params ? params.Area : null;
         this.Private = 'Private' in params ? params.Private : null;
 
         if (params.PrivateParameters) {
@@ -2064,10 +2042,10 @@ class RuleRewriteActionParams extends  AbstractModel {
         super();
 
         /**
-         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
-<li>add: Add the HTTP header.</li>
-<li>set: Rewrite the HTTP header.</li>
-<li>del: Delete the HTTP header.</li>
+         * Feature parameter name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1).
+<li>`add`: Add the HTTP header.</li>
+<li>`set`: Rewrite the HTTP header.</li>
+<li>`del`: Delete the HTTP header.</li>
          * @type {string || null}
          */
         this.Action = null;
@@ -2150,16 +2128,18 @@ class BotUserRule extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * Action. Valid values: 
-<li>`drop`: Block;</li>
-<li>`monitor`: Observe;</li>
-<li>`trans`: Allow;</li>
-<li>`alg`: JavaScript challenge;</li>
-<li>`captcha`: Managed challenge;</li>
-<li>`random`: Random action;</li>
-<li>`silence`: Silence;</li>
-<li>`shortdelay`: Add short latency;</li>
-<li>`longdelay`: Add long latency.</li>
+         * The action. Values:
+<li>`drop`: Block the request</li>
+<li>`monitor`: Observe</li>
+<li>`trans`: Allow</li>
+<li>`redirect`: Redirect the request</li>
+<li>`page`: Return the specified page</li>
+<li>`alg`: JavaScript challenge</li>
+<li>`captcha`: Managed challenge</li>
+<li>`random`: Handle the request randomly by the weight</li>
+<li>`silence`: Keep the connection but do not response to the client</li>
+<li>`shortdelay`: Add a short latency period</li>
+<li>`longdelay`: Add a long latency period</li>
          * @type {string || null}
          */
         this.Action = null;
@@ -2185,8 +2165,7 @@ class BotUserRule extends  AbstractModel {
         this.RulePriority = null;
 
         /**
-         * The rule ID, which is only used as an output parameter.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Rule ID, which is only used as an output parameter.
          * @type {number || null}
          */
         this.RuleID = null;
@@ -2200,26 +2179,49 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         /**
          * The filter. Values:
 <li>`sip`: Client IP</li>
-Note: This field may return `null`, indicating that no valid values can be obtained.
+This parameter is left empty by default.
          * @type {Array.<string> || null}
          */
         this.FreqFields = null;
 
         /**
-         * Updated time
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * The update time, which is only used as an output parameter.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * The statistical dimension. Values:
-<li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
-<li>`client_to_eo`: Requests from the client to EdgeOne</li>
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Query scope. Values:
+<li>`source_to_eo`: (Response) Traffic going from the origin to EdgeOne.</li>
+<li>`client_to_eo`: (Request) Traffic going from the client to EdgeOne.</li>
+Default: `source_to_eo`.
          * @type {Array.<string> || null}
          */
         this.FreqScope = null;
+
+        /**
+         * Name of the custom return page. It's required when `Action=page`.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * ID of custom response. The ID can be obtained via the `DescribeCustomErrorPages` API. It's required when `Action=page`.	
+         * @type {string || null}
+         */
+        this.CustomResponseId = null;
+
+        /**
+         * The response code to trigger the return page. It's required when `Action=page`. Value: 100-600. 3xx response codes are not supported. Default value: 567.
+         * @type {number || null}
+         */
+        this.ResponseCode = null;
+
+        /**
+         * The redirection URL. It's required when `Action=redirect`.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
 
     }
 
@@ -2256,6 +2258,10 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.FreqFields = 'FreqFields' in params ? params.FreqFields : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FreqScope = 'FreqScope' in params ? params.FreqScope : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CustomResponseId = 'CustomResponseId' in params ? params.CustomResponseId : null;
+        this.ResponseCode = 'ResponseCode' in params ? params.ResponseCode : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -3486,16 +3492,16 @@ class DeleteOriginGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * ID of the site.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The ID of the origin group.
+         * (Required) Origin group IDe group ID. This parameter is required.
          * @type {string || null}
          */
-        this.OriginGroupId = null;
+        this.GroupId = null;
 
     }
 
@@ -3507,7 +3513,7 @@ class DeleteOriginGroupRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.OriginGroupId = 'OriginGroupId' in params ? params.OriginGroupId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -4589,6 +4595,34 @@ class DescribeRulesSettingResponse extends  AbstractModel {
 }
 
 /**
+ * BindSecurityTemplateToEntity response structure.
+ * @class
+ */
+class BindSecurityTemplateToEntityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Rule engine parameter details and special parameter types.
  * @class
  */
@@ -5120,6 +5154,38 @@ class ModifyAccelerationDomainRequest extends  AbstractModel {
          */
         this.OriginInfo = null;
 
+        /**
+         * Origin-pull protocol configuration. Values:
+<li>`FOLLOW`: Follow the protocol of origin</li>
+<li>`HTTP`: Send requests to the origin over HTTP</li>
+<li>`HTTPS`: Send requests to the origin over HTTPS</li>
+<li>The original configuration applies if this field is not specified.</li>
+         * @type {string || null}
+         */
+        this.OriginProtocol = null;
+
+        /**
+         * Ports for HTTP origin-pull requests. Range: 1-65535. It takes effect when `OriginProtocol=FOLLOW/HTTP`. The original configuration is used if it's not specified.
+         * @type {number || null}
+         */
+        this.HttpOriginPort = null;
+
+        /**
+         * Ports for HTTPS origin-pull requests. Range: 1-65535. It takes effect when `OriginProtocol=FOLLOW/HTTPS`. The original configuration is used if it's not specified.
+         * @type {number || null}
+         */
+        this.HttpsOriginPort = null;
+
+        /**
+         * IPv6 status. Values:
+<li>`follow`: Follow the IPv6 configuration of the site</li>
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+<li>The original configuration applies if this field is not specified.</li>
+         * @type {string || null}
+         */
+        this.IPv6Status = null;
+
     }
 
     /**
@@ -5137,6 +5203,10 @@ class ModifyAccelerationDomainRequest extends  AbstractModel {
             obj.deserialize(params.OriginInfo)
             this.OriginInfo = obj;
         }
+        this.OriginProtocol = 'OriginProtocol' in params ? params.OriginProtocol : null;
+        this.HttpOriginPort = 'HttpOriginPort' in params ? params.HttpOriginPort : null;
+        this.HttpsOriginPort = 'HttpsOriginPort' in params ? params.HttpsOriginPort : null;
+        this.IPv6Status = 'IPv6Status' in params ? params.IPv6Status : null;
 
     }
 }
@@ -5490,25 +5560,35 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OriginDetail = null;
 
         /**
-         * 
+         * Origin-pull protocol configuration. Values:
+<li>`FOLLOW`: Follow the protocol of origin</li>
+<li>`HTTP`: Send requests to the origin over HTTP</li>
+<li>`HTTPS`: Send requests to the origin over HTTPS</li>
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginProtocol = null;
 
         /**
-         * 
+         * The port used for HTTP origin-pull requests
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HttpOriginPort = null;
 
         /**
-         * 
+         * The port used for HTTPS origin-pull requests
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HttpsOriginPort = null;
 
         /**
-         * 
+         * IPv6 status. Values:
+<li>`follow`: Follow the IPv6 configuration of the site</li>
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IPv6Status = null;
@@ -6305,6 +6385,51 @@ class BindSharedCNAMEResponse extends  AbstractModel {
 }
 
 /**
+ * Domain names bound with the template. 
+ * @class
+ */
+class TemplateScope extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * List of instance statuses
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<EntityStatus> || null}
+         */
+        this.EntityStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.EntityStatus) {
+            this.EntityStatus = new Array();
+            for (let z in params.EntityStatus) {
+                let obj = new EntityStatus();
+                obj.deserialize(params.EntityStatus[z]);
+                this.EntityStatus.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTopL7AnalysisData request structure.
  * @class
  */
@@ -6365,23 +6490,23 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
 
         /**
          * Filters
-<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-<li>`province`:<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`.</li>
-<li>`isp`:<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-<li>`domain`:<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-<li>`url`:<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`referer`:<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`resourceType`:<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
-<li>`socket`<br>   Filter by the specified <strong>HTTP protocol type</strong><br>   Values:<br>   `HTTP`: HTTP protocol;<br>   `HTTPS`: HTTPS protocol;<br>   `QUIC`: QUIC protocol.</li>
-<li>`statusCode`:<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>  In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-<li>`browserType`:<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-<li>`deviceType`:<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-<li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-<li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-<li>`ipVersion`:<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
-<li>`tagKey`:<br>   Filter by the specified <strong>tag key</strong></li>
-<li>`tagValue`:<br>   Filter by the specified <strong>tag value</strong></li>
+<li>`country`<br>Filter by the <strong> Country/Region</strong>. The country/region follows <a href="https://baike.baidu.com/item/ISO%203166-1/5269555">ISO 3166</a> specification. </li>
+<li>`province`<br>Filter by the <strong>specified province name</strong>. It’s only available when `Area` is `mainland`.</li>
+<li>`isp`<br>:   Filter by the specified ISP. It’s only available when `Area` is `mainland`.<br>Values: <br>`2`: CTCC; <br>`26`: CUCC; <br>`1046`: CMCC; <br>`3947`: CTT; <br>`38`: CERNET; <br>`43`: GWBN; <br>`0`: Others.</li>
+<li>`domain`<br>: Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+<li>`url`:<br>Filter by the <strong>specified URL Path (such as `/content` or `content/test.jpg`. <br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li>
+<li>`referer`:<br>Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li>
+<li>`resourceType`:<br>Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li>
+<li>`protocol`:<br> Filter by the specified <strong>HTTP protocol</strong> version <br>Values: <br>`HTTP/1.0`: HTTP 1.0;<br>`HTTP/1.1`: HTTP 1.1;<br>`HTTP/2.0`: HTTP 2.0;<br>`HTTP/3.0`: HTTP 3.0;<br>`WebSocket`: WebSocket.</li>
+<li>`socket`:<br>Filter by the specified <strong>HTTP protocol type</strong> <br>Values:<br>`HTTP`: HTTP protocol; <br>`HTTPS`: HTTPS protocol;<br>`QUIC`: QUIC protocol.
+<li>`statusCode`:<br> Filter by the <strong> Status Code</strong><br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values:<br>1XX: Status code of type 1xx <br>100: 100 status code <br>101: 101 status code <br>102: 102 status code <br>2XX: Status code of type 2xx <br>200: 200 status code <br>201: 201 status code <br>202: 202 status code <br>203: 203 status code <br>204: 204 status code <br>205: 205 status code <br>206: 206 status code <br>207: 207 status code <br>3XX: Status code of type 3xx <br>300: 300 status code <br>301: 301 status code <br>302: 302 status code <br>303: 303 status code <br>304: 304 status code <br>305: 305 status code <br>307: 307 status code <br>4XX: Status code of type 4xx <br>400: 400 status code <br>401: 401 status code <br>402: 402 status code <br>403: 403 status code <br>404: 404 status code <br>405: 405 status code <br>406: 406 status code <br>407: 407 status code <br>408: 408 status code <br>409: 409 status code <br>410: 410 status code <br>411: 411 status code <br>412: 412 status code <br>412: 413 Status Code <br>414: 414 status code <br>415: 415 status code <br>416: 416 status code <br>417: 417 status code <br>422: 422 status code <br>423: 423 status code <br>424: 424 status code <br>426: 426 status code <br>451: 451 status code <br>5XX: Status code of type 5xx <br>500: 500 status code <br>501: 501 status code <br>502:502 status code <br>503: 503 status code <br>504: 504 status code <br>505: 505 status code <br>506: 506 status code <br>507: 507 status code <br>510: 510 status code <br>514: 514 status code <br>544: 544 Status Code. </li>
+<li>`browserType`:<br>Filter by the specified <strong>browser type</strong>. <br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li><br>Values: <br>`Firefox`: Firefox browser; <br>`Chrome`: Chrome browser; <br>`Safari`: Safari browser; <br>`MicrosoftEdge`: Microsoft Edge browser; <br>`IE`: IE browser; <br>`Opera`: Opera browser; <br>`QQBrowser`: QQ browser; <br>`LBBrowser`: LB browser; <br>`MaxthonBrowser`: Maxthon browser; <br>`SouGouBrowser`: Sogou browser; <br>`BIDUBrowser`: Baidu browser; <br>`TaoBrowser`: Tao browser; <br>`UBrowser`: UC browser; <br>`Other`: Other browsers; <br>`Empty`: The browser type is not specified; <br>`Bot`: Web crawler.</li>
+<li>`deviceType`:<br>Filter by the <strong>device type</strong>.<br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values:<br>`TV`: TV; <br>`Tablet`: Tablet;<br>`Mobile`: Mobile phone; <br>`Desktop`: Desktop device;<br>`Other`: Other device;<br>`Empty`: Device type not specified.</li>
+<li>`operatingSystemType`:<br>Filter by the <strong>operating system</strong>.<br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values: <br>`Linux`: Linux OS; <br>`MacOS`: Mac OS;<br>`Android`: Android OS;<br>`IOS`: iOS OS;<br>`Windows`: Windows OS;<br>`NetBSD`: NetBSD OS;<br>`ChromiumOS`: Chromium OS; <br>`Bot`: Web crawler:<br>`Other`: Other OS;   <br>`Empty`: The OS is not specified.</li>
+<li>`tlsVersion`:<br>Filter by the <strong>TLS version</strong>. <br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values: <br>`TLS1.0`: TLS 1.0;<br>`TLS1.1`: TLS 1.1; <br>`TLS1.2`: TLS 1.2;<br>`TLS1.3`: TLS 1.3.</li>
+<li>`ipVersion`<br>Filter by the <strong>specified IP version. <br>Values: <br>`4`: IPv4; <br>`6`: IPv6.
+<li>`tagKey`<br>Filter by the <strong>Tag Key</strong>. </li>
+<li>`tagValue`<br>Filter by the <strong>Tag Value</strong>. </li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -7570,6 +7695,55 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityTemplateBindings response structure.
+ * @class
+ */
+class DescribeSecurityTemplateBindingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bindings of the specified policy template.
+
+When a domain name of a site is bound with the specified policy template, `TemplateScope` includes the `ZoneId` of the related site and the bindings of the domain name. 
+
+Note: If the template is not bound with any domain name, and there is not any existing binding, `TemplateScope=0` is returned.
+
+In the binding list, the same domain name may appear repeatedly in the `EntityStatus` list with different `Status`. For example, when a domain name is being bound to another policy template, it's marked both `online` and `pending`.
+         * @type {Array.<SecurityTemplateBinding> || null}
+         */
+        this.SecurityTemplate = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityTemplate) {
+            this.SecurityTemplate = new Array();
+            for (let z in params.SecurityTemplate) {
+                let obj = new SecurityTemplateBinding();
+                obj.deserialize(params.SecurityTemplate[z]);
+                this.SecurityTemplate.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Browser cache rule configuration, which is used to set the default value of `MaxAge` and is disabled by default.
  * @class
  */
@@ -7650,7 +7824,7 @@ class RuleCodeActionParams extends  AbstractModel {
         this.StatusCode = null;
 
         /**
-         * The parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name.
+         * The parameter name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Name = null;
@@ -7771,23 +7945,23 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 
         /**
          * Filters
-<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-<li>`province`:<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`. </li>
-<li>`isp`:<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others.</li>
-<li>`domain`:<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-<li>`url`:<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`referer`:<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`resourceType`<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
-<li>`socket`:<br>   Filter by the specified <strong>HTTP protocol type</strong><br>   Values:<br>   `HTTP`: HTTP protocol;<br>   `HTTPS`: HTTPS protocol;<br>   `QUIC`: QUIC protocol.</li>
-<li>`statusCode`:<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-<li>`browserType`:<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-<li>`deviceType`:<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-<li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-<li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-<li>`ipVersion`:<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
-<li>`tagKey`:<br>   Filter by the specified <strong>tag key</strong></li>
-<li>`tagValue`<br>   Filter by the specified <strong>tag value</strong></li>
+<li>country<br>Filter by the <strong> Country/Region</strong>. The country/region follows <a href="https://baike.baidu.com/item/ISO%203166-1/5269555">ISO 3166</a> specification. </li>
+<li>`province`<br>Filter by the <strong>specified province name</strong>. It’s only available when `Area` is `mainland`.</li>
+<li>`isp`<br>:   Filter by the specified ISP. It’s only available when `Area` is `mainland`.<br>Values: <br>`2`: CTCC; <br>`26`: CUCC; <br>`1046`: CMCC; <br>`3947`: CTT; <br>`38`: CERNET; <br>`43`: GWBN; <br>`0`: Others.</li>
+<li>`domain`<br>: Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+<li>`url`:<br>Filter by the specified <strong>URL path<strong> (such as `/content` or `content/test.jpg`.<br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li>
+<li>`referer`:<br>Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>If this parameter is specified, the max query period is the last 30 days.<br>The<a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li>
+<li>`resourceType`:<br>Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>Note that if this parameter is specified, the max data query period is the last 30 days. <br>The [data query scope stated in the specifications of service package]<a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90"> related with the `ZoneIds` becomes invalid.</li>
+<li>`protocol`:<br> Filter by the specified <strong>HTTP protocol</strong> version <br>Values: <br>`HTTP/1.0`: HTTP 1.0;<br>`HTTP/1.1`: HTTP 1.1;<br>`HTTP/2.0`: HTTP 2.0;<br>`HTTP/3.0`: HTTP 3.0;<br>`WebSocket`: WebSocket.</li>
+<li>`socket`:<br>Filter by the specified <strong>HTTP protocol</strong> type <br>Values: <br>`HTTP`: HTTP protocol;<br>`HTTPS`: HTTPS protocol;<br>`QUIC`: QUIC protocol.</li>
+<li>statusCode<br>u2003u2003 Filter by [strong> Status Code/strong>]. lt;br>u2003u2003 If you only fill in statusCode parameter, you can query data of nearly 30 days at most; br>u2003u2003 If statusCode+Zonelds parameter is filled in at the same time, the supported query data range is the smaller of a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90"> Maximum query range of data analysis/a> and 30 days supported by package. lt;br>u2003u2003 The corresponding Value options are as follows: br>u2003u2003 1XX: Status code of type 1xx; br>u2003u2003 100:100 status code; br>u2003u2003 101:101 status code; br>u2003u2003 102:102 status code; br>u2003u2003 2XX: Status code of type 2xx; br>u2003u2003 200:200 status code; br>u2003u2003 201:201 status code; br>u2003u2003 202:202 status code; br>u2003u2003 203:203 status code; br>u2003u2003 204:204 status code; br>u2003u2003 205:205 status code; br>u2003u2003 206:206 status code; br>u2003u2003 207:207 status code; br>u2003u2003 3XX: Status code of type 3xx; br>u2003u2003 300:300 status code; br>u2003u2003 301:301 status code; br>u2003u2003 302:302 status code; br>u2003u2003 303:303 status code; br>u2003u2003 304:304 status code; br>u2003u2003 305:305 status code; br>u2003u2003 307:307 status code; br>u2003u2003 4XX: Status code of type 4xx; br>u2003u2003 400:400 status code; br>u2003u2003 401:401 status code; br>u2003u2003 402:402 status code; br>u2003u2003 403:403 status code; br>u2003u2003 404:404 status code; br>u2003u2003 405:405 status code; br>u2003u2003 406:406 status code; br>u2003u2003 407:407 status code; br>u2003u2003 408:408 status code; br>u2003u2003 409:409 status code; br>u2003u2003 410:410 status code; br>u2003u2003 411:411 status code; br>u2003u2003 412:412 status code; br>u2003u2003 412:413 Status Code; br>u2003u2003 414:414 status code; br>u2003u2003 415:415 status code; br>u2003u2003 416:416 status code; br>u2003u2003 417:417 status code; br>u2003u2003 422:422 status code; br>u2003u2003 423:423 status code; br>u2003u2003 424:424 status code; br>u2003u2003 426:426 status code; br>u2003u2003 451:451 status code; br>u2003u2003 5XX: Status code of type 5xx; br>u2003u2003 500:500 status code; br>u2003u2003 501:501 status code; br>u2003u2003 502:502 status code; br>u2003u2003 503:503 status code; br>u2003u2003 504:504 status code; br>u2003u2003 505:505 status code; br>u2003u2003 506:506 status code; br>u2003u2003 507:507 status code; br>u2003u2003 510:510 status code; br>u2003u2003 514:514 status code; br>u2003u2003 544:544 Status Code.& lt</li>
+<li>`browserType`:<br>Filter by the specified <strong>browser type</strong>. <br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.</li><br>Values: <br>`Firefox`: Firefox browser; <br>`Chrome`: Chrome browser; <br>`Safari`: Safari browser; <br>`MicrosoftEdge`: Microsoft Edge browser; <br>`IE`: IE browser; <br>`Opera`: Opera browser; <br>`QQBrowser`: QQ browser; <br>`LBBrowser`: LB browser; <br>`MaxthonBrowser`: Maxthon browser; <br>`SouGouBrowser`: Sogou browser; <br>`BIDUBrowser`: Baidu browser; <br>`TaoBrowser`: Tao browser; <br>`UBrowser`: UC browser; <br>`Other`: Other browsers; <br>`Empty`: The browser type is not specified; <br>`Bot`: Web crawler.</li>
+<li>`deviceType`:<br>Filter by the <strong>device type</strong>.<br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values:<br>`TV`: TV; <br>`Tablet`: Tablet;<br>`Mobile`: Mobile phone; <br>`Desktop`: Desktop device;<br>`Other`: Other device;<br>`Empty`: Device type not specified.</li>
+<li>`operatingSystemType`:<br>Filter by the <strong>operating system</strong>.<br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values: <br>`Linux`: Linux OS; <br>`MacOS`: Mac OS;<br>`Android`: Android OS;<br>`IOS`: iOS OS;<br>`Windows`: Windows OS;<br>`NetBSD`: NetBSD OS;<br>`ChromiumOS`: Chromium OS; <br>`Bot`: Web crawler:<br>`Other`: Other OS;   <br>`Empty`: The OS is not specified.</li>
+<li>`tlsVersion`:<br>Filter by the <strong>TLS version</strong>. <br>If this parameter is specified, the max query period is the last 30 days.<br>The <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query scope stated in the service package specifications</a> of the site (if `ZoneIds` specified) becomes invalid.<br>Values: <br>`TLS1.0`: TLS 1.0;<br>`TLS1.1`: TLS 1.1; <br>`TLS1.2`: TLS 1.2;<br>`TLS1.3`: TLS 1.3.</li>
+<li>`ipVersion`<br>Filter by the <strong>specified IP version. <br>Values: <br>`4`: IPv4; <br>`6`: IPv6.
+<li>`tagKey`<br>Filter by the <strong>Tag Key</strong>. </li>
+<li>`tagValue`<br>Filter by the <strong>Tag Value</strong>. </li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -9087,7 +9261,7 @@ class CodeAction extends  AbstractModel {
         super();
 
         /**
-         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
+         * Feature name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1) API
          * @type {string || null}
          */
         this.Action = null;
@@ -9989,12 +10163,12 @@ Note: If `Type` is `CUSTOM_NUM` or `CUSTOM_STRING`, this parameter will be an em
         this.ChoicesValue = null;
 
         /**
-         * Parameter value type.
-<li>`CHOICE`: The parameter value can be selected only from `ChoicesValue`.</li>
-<li>`TOGGLE`: The parameter value is of switch type and can be selected from `ChoicesValue`.</li>
-<li>`OBJECT`: The parameter value is of object type, and `ChoiceProperties` indicates the attributes associated with the object type.</li>
-<li>`CUSTOM_NUM`: Custom integer</li>
-<li>`CUSTOM_STRING`: Custom string.</li>Note: If `OBJECT` is selected, refer to [Example 2. Create a rule with parameters of OBJECT type](https://tcloud4api.woa.com/document/product/1657/79382?!preview&!document=1).
+         * The parameter value type.
+<li>`CHOICE`: `If Type=CHOICE`, choose a value in `ChoiceValue`.</li>
+<li>`TOGGLE`: If `Type=TOGGLE`, choose `on` or `off` from `ChoicesValue`.</li>
+<li>`OBJECT`: Specify an object. If this is specified, `ChoiceProperties` includes attributes of the specified object. See [Example 2. Create a rule with Type=OBJECT](https://intl.cloud.tencent.com/document/product/1552/80622?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B2-.E5.8F.82.E6.95.B0.E4.B8.BA-OBJECT-.E7.B1.BB.E5.9E.8B.E7.9A.84.E5.88.9B.E5.BB.BA)</li>
+<li>`CUSTOM_NUM`: (Integer) Custom value.</li>
+<li>`CUSTOM_STRING`: (String) Custom value.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -10231,7 +10405,7 @@ class RateLimitTemplate extends  AbstractModel {
 }
 
 /**
- * 
+ * Services referencing this origin group
  * @class
  */
 class OriginGroupReference extends  AbstractModel {
@@ -10239,19 +10413,23 @@ class OriginGroupReference extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Services referencing the origin group. Values:
+<li>`AccelerationDomain`: Acceleration domain name</li>
+<li>`RuleEngine`: Rules engine</li>
+<li>`Loadbalance`: Load balancer</li>
+<li>`ApplicationProxy`: L4 proxy</li>
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * ID of the instances referencing the origin group
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Name of the instance referencing the origin group
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -10768,7 +10946,7 @@ class RateLimitUserRule extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * Action. Valid values: <li>`monitor`: Observe;</li>`<li>drop`: Block;</li> <li>`alg`: JavaScript challenge. </li>	
+         * Action. Values:<li>`monitor`: Observe;</li><li>`drop`: Block;</li><li>`redirect`: Redirect;</li><li>`page`: Return a specific page;</li><li>`alg`: JavaScript challenge. </li>	
          * @type {string || null}
          */
         this.Action = null;
@@ -10791,7 +10969,7 @@ class RateLimitUserRule extends  AbstractModel {
         /**
          * The rule status. Values:
 <li>`on`: Enabled</li>
-<li>`off`: Disabled</li>Default value: on
+<li>`off`: Disabled</li>Default value: `on`
          * @type {string || null}
          */
         this.RuleStatus = null;
@@ -10810,7 +10988,6 @@ class RateLimitUserRule extends  AbstractModel {
 
         /**
          * Rule ID, which is only used as an output parameter.
-Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RuleID = null;
@@ -10818,26 +10995,49 @@ Note: This field may return·`null`, indicating that no valid values can be obta
         /**
          * The filter. Values:
 <li>`sip`: Client IP</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+This parameter is left empty by default.
          * @type {Array.<string> || null}
          */
         this.FreqFields = null;
 
         /**
-         * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Update time. It is only used as a response parameter, and defaults to the current time. 
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Statistical dimension. `source_to_eo` is entered by default when this parameter is not specified. Valid values:
-<li>`source_to_eo`: (Response) Traffic going from the origin to EdgeOne. </li>
+         * Query scope. Values:
+<li>`source_to_eo`: (Response) Traffic going from the origin to EdgeOne.</li>
 <li>`client_to_eo`: (Request) Traffic going from the client to EdgeOne.</li>
-Note: This field may return·`null`, indicating that no valid values can be obtained.
+Default: `source_to_eo`.
          * @type {Array.<string> || null}
          */
         this.FreqScope = null;
+
+        /**
+         * Name of the custom return page. It's required when `Action=page`.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * ID of custom response. The ID can be obtained via the `DescribeCustomErrorPages` API. It's required when `Action=page`.	
+         * @type {string || null}
+         */
+        this.CustomResponseId = null;
+
+        /**
+         * The response code to trigger the return page. It's required when `Action=page`. Value: 100-600. 3xx response codes are not supported. Default value: 567.
+         * @type {number || null}
+         */
+        this.ResponseCode = null;
+
+        /**
+         * The redirection URL. It's required when `Action=redirect`.
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
 
     }
 
@@ -10869,6 +11069,10 @@ Note: This field may return·`null`, indicating that no valid values can be obta
         this.FreqFields = 'FreqFields' in params ? params.FreqFields : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FreqScope = 'FreqScope' in params ? params.FreqScope : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CustomResponseId = 'CustomResponseId' in params ? params.CustomResponseId : null;
+        this.ResponseCode = 'ResponseCode' in params ? params.ResponseCode : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -11090,6 +11294,67 @@ class ModifyAliasDomainStatusRequest extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Paused = 'Paused' in params ? params.Paused : null;
         this.AliasNames = 'AliasNames' in params ? params.AliasNames : null;
+
+    }
+}
+
+/**
+ * BindSecurityTemplateToEntity request structure.
+ * @class
+ */
+class BindSecurityTemplateToEntityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Site ID of the policy template to be bound to or unbound from.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * List of domain names to bind to/unbind from a policy template
+         * @type {Array.<string> || null}
+         */
+        this.Entities = null;
+
+        /**
+         * Action options. Values include:
+<li>`bind`: Bind the domain names to the specified policy template </li>
+<li>`unbind-keep-policy`: Unbind a domain name from a policy template and keep the current policy when unbinding</li>
+<li>`unbind-use-default`: Unbind domain names from policy templates and use default blank policy.</li> Note: Only one domain name can be unbound at one time. When `Operate` is `unbind-keep-policy` or `unbind-use-default`, there can only be one domain name specified in `Entities`.
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+        /**
+         * Specifies the policy template ID to bind or unbind.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Whether to replace the existing policy template bound with the domain name. Values: 
+<li>`true`: Replace the template bound to the domain. </li>
+<li>`false`: Do not replace the template.</li> Note: In this case, the API returns an error if there is already a policy template bound to the specified domain name.
+         * @type {boolean || null}
+         */
+        this.OverWrite = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Entities = 'Entities' in params ? params.Entities : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.OverWrite = 'OverWrite' in params ? params.OverWrite : null;
 
     }
 }
@@ -11731,7 +11996,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * Rule engine feature operation. A feature can be of only one of the following three types, so each item in the `RuleAction` array can be of only one of the following types. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view more requirements for entering feature items.
+ * Rule engine action. Each feature supports only one of the following three action types. The `RuleAction` array can be of only one of the following types. For all details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1).
  * @class
  */
 class Action extends  AbstractModel {
@@ -12125,50 +12390,39 @@ class ModifyOriginGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * Site ID
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The ID of the origin group.
+         * (Required) Origin group ID
          * @type {string || null}
          */
-        this.OriginGroupId = null;
+        this.GroupId = null;
 
         /**
-         * The origin type. Values:
-<li>`self`: Customer origin</li>
-<li>`third_party`: Third-party origin</li>
-<li>`cos`: Tencent Cloud COS origin</li>
+         * Origin group name. It can contain 1 to 200 characters ([a-z], [A-Z], [0-9] and [_-]). The original configuration applies if this field is not specified.	
          * @type {string || null}
          */
-        this.OriginType = null;
+        this.Name = null;
 
         /**
-         * The name of the origin group.
+         * The origin grouptype. Values:
+<li>`GENERAL`: General origin groups. It supports IPs and domain names. It can be referenced by DNS, Rule Engine, Layer 4 Proxy and General LoadBalancer.</li>
+<li>`HTTP`: HTTP-specific origin groups. It supports IPs/domain names and object storage buckets. It can be referenced by acceleration domain names, rule engines and HTTP LoadBalancer. It cannot be referenced by L4 proxies. </li>The original configuration is used if it's not specified.
          * @type {string || null}
          */
-        this.OriginGroupName = null;
+        this.Type = null;
 
         /**
-         * The origin configuration type when `OriginType=self`. Values:
-<li>`area`: Configure by region.</li>
-<li>`weight`: Configure by weight.</li>
-<li>`proto`: Configure by HTTP protocol.</li> When `OriginType=third_party/cos`, leave this field empty.
-         * @type {string || null}
-         */
-        this.ConfigurationType = null;
-
-        /**
-         * Details of the origin record.
+         * Origin information. The original configuration is used if it's not specified.
          * @type {Array.<OriginRecord> || null}
          */
-        this.OriginRecords = null;
+        this.Records = null;
 
         /**
-         * The origin domain. This field can be specified only when `OriginType=self`.
-If it is left empty, the existing configuration is used.
+         * Host header used for origin-pull. It only works when `Type=HTTP`. If it's not specified, no specific Host header is configured. The `HostHeader` specified in `RuleEngine` takes a higher priority over this configuration. 
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -12183,17 +12437,16 @@ If it is left empty, the existing configuration is used.
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.OriginGroupId = 'OriginGroupId' in params ? params.OriginGroupId : null;
-        this.OriginType = 'OriginType' in params ? params.OriginType : null;
-        this.OriginGroupName = 'OriginGroupName' in params ? params.OriginGroupName : null;
-        this.ConfigurationType = 'ConfigurationType' in params ? params.ConfigurationType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.OriginRecords) {
-            this.OriginRecords = new Array();
-            for (let z in params.OriginRecords) {
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
                 let obj = new OriginRecord();
-                obj.deserialize(params.OriginRecords[z]);
-                this.OriginRecords.push(obj);
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
             }
         }
         this.HostHeader = 'HostHeader' in params ? params.HostHeader : null;
@@ -12584,6 +12837,49 @@ class RuleAndConditions extends  AbstractModel {
                 let obj = new RuleCondition();
                 obj.deserialize(params.Conditions[z]);
                 this.Conditions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Bindings of a security policy template
+ * @class
+ */
+class SecurityTemplateBinding extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * template ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Binding status of the template.
+         * @type {Array.<TemplateScope> || null}
+         */
+        this.TemplateScope = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.TemplateScope) {
+            this.TemplateScope = new Array();
+            for (let z in params.TemplateScope) {
+                let obj = new TemplateScope();
+                obj.deserialize(params.TemplateScope[z]);
+                this.TemplateScope.push(obj);
             }
         }
 
@@ -13020,25 +13316,33 @@ class CreateAccelerationDomainRequest extends  AbstractModel {
         this.OriginInfo = null;
 
         /**
-         * 
+         * Origin-pull protocol configuration. Values:
+<li>`FOLLOW`: Follow the protocol of origin</li>
+<li>`HTTP`: Send requests to the origin over HTTP</li>
+<li>`HTTPS`: Send requests to the origin over HTTPS</li>
+<li>Default: `FOLLOW`</li>
          * @type {string || null}
          */
         this.OriginProtocol = null;
 
         /**
-         * 
+         * Ports for HTTP origin-pull requests. Range: 1-65535. It takes effect when `OriginProtocol=FOLLOW/HTTP`. Port 80 is used if it's not specified. 
          * @type {number || null}
          */
         this.HttpOriginPort = null;
 
         /**
-         * 
+         * Ports for HTTPS origin-pull requests. Range: 1-65535. It takes effect when `OriginProtocol=FOLLOW/HTTPS`. Port 443 is used if it's not specified. 
          * @type {number || null}
          */
         this.HttpsOriginPort = null;
 
         /**
-         * 
+         * IPv6 status. Values:
+<li>`follow`: Follow the IPv6 configuration of the site</li>
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+<li>Default: `follow`</li>
          * @type {string || null}
          */
         this.IPv6Status = null;
@@ -13238,7 +13542,7 @@ class NormalAction extends  AbstractModel {
         super();
 
         /**
-         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
+         * Feature name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1) API
          * @type {string || null}
          */
         this.Action = null;
@@ -13316,20 +13620,26 @@ class DescribeOriginGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset for paginated queries. Default value: 0.
+         * (Required) Site ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The paginated query offset. Default value: 0
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit on paginated queries. Value range: 1-1000. Default value: 10.
+         * Limit on paginated queries. Value range: 1-1000. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
          * Filters. Each filter can have up to 20 entries. See below for details:
-<li>`zone-id`<br>   Filter by the specified <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-id`:<br>   Filter by the specified <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-name`:<br>   Filter by the specified <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)</li>
+<li>`origin-group-id`<br>Filter by the <strong>origin group ID</strong>. Format: `origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a`<br>Fuzzy query is not supported</li><li>`origin-group-name`<br>Filter by the <strong>origin group name</strong><br>Fuzzy query is supported. When fuzzy query is used, only one origin groupsource site group name is supported</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -13343,6 +13653,7 @@ class DescribeOriginGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -13507,14 +13818,14 @@ class DropPageDetail extends  AbstractModel {
         super();
 
         /**
-         * The ID of the block page, which can be obtained from the CreateSecurityDropPage API.
-If 0 is passed, the default block page will be used.
+         * The ID of the block page. Specify `0` to use the default block page. 
+(Disused) If 0 is passed, the default block page will be used.
          * @type {number || null}
          */
         this.PageId = null;
 
         /**
-         * The HTTP status code of the block page. Value range: 100-600.
+         * The HTTP status code to trigger the block page. Range: 100-600, excluding 3xx codes. Code 566: Requests blocked by managed rules. Code 567: Requests blocked by web security rules (except managed rules).
          * @type {number || null}
          */
         this.StatusCode = null;
@@ -13527,11 +13838,17 @@ If 0 is passed, the default block page will be used.
 
         /**
          * Type of the block page. Values:
-<li>`file`: Block page file</li>
-<li>`url`: Block page URL</li>
+<li>`page`: Return the specified page.</li>
+
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * ID of custom response. The ID can be obtained via the `DescribeCustomErrorPages` API. It's required when `Type=page`.
+         * @type {string || null}
+         */
+        this.CustomResponseId = null;
 
     }
 
@@ -13546,6 +13863,7 @@ If 0 is passed, the default block page will be used.
         this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.CustomResponseId = 'CustomResponseId' in params ? params.CustomResponseId : null;
 
     }
 }
@@ -14010,6 +14328,49 @@ class ModifyAliasDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Status of domain names bound with this template.
+ * @class
+ */
+class EntityStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name. Only subdomain names are supported.
+         * @type {string || null}
+         */
+        this.Entity = null;
+
+        /**
+         * Instance configuration status. Values:
+<li>`online`: Configuration has taken effect;</li><li>`fail`: Configuration failed;</li><li>`process`: Configuration is being delivered. </li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Message returned after the operation completed. 
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Entity = 'Entity' in params ? params.Entity : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * Rule engine action for the HTTP request/response header
  * @class
  */
@@ -14018,7 +14379,7 @@ class RewriteAction extends  AbstractModel {
         super();
 
         /**
-         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
+         * Feature name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1) API
          * @type {string || null}
          */
         this.Action = null;
@@ -14300,7 +14661,7 @@ class RuleNormalActionParams extends  AbstractModel {
         super();
 
         /**
-         * Parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name.
+         * The parameter name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Name = null;
@@ -14517,7 +14878,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 }
 
 /**
- * Origin authentication parameter
+ * Private authentication parameters of object storage origins
  * @class
  */
 class PrivateParameter extends  AbstractModel {
@@ -14528,6 +14889,8 @@ class PrivateParameter extends  AbstractModel {
          * The parameter name. Values
 <li>`AccessKeyId`: Access Key ID</li>
 <li>`SecretAccessKey`: Secret Access Key</li>
+<li>`SignatureVersion`: Signature version. Values: `v2`, `v4`</li>
+<li>`Region`: Region of the storage bucket</li>
          * @type {string || null}
          */
         this.Name = null;
@@ -14618,14 +14981,14 @@ class AclUserRule extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * The rule action. Values:
-<li>`trans`: Allow the request.</li>
-<li>`drop`: Block the request.</li>
-<li>`monitor`: Observe the request.</li>
-<li>`ban`: Block the IP.</li>
-<li>`redirect`: Redirect the request.</li>
-<li>`page`: Return the specified page.</li>
-<li>`alg`: Verify the request by Javascript challenge.</li>
+         * The action. Values:
+<li>`trans`: Allow</li>
+<li>`drop`: Block the request</li>
+<li>`monitor`: Observe</li>
+<li>`ban`: Block the IP</li>
+<li>`redirect`: Redirect the request</li>
+<li>`page`: Return the specified page</li>
+<li>`alg`: JavaScript challenge</li>
          * @type {string || null}
          */
         this.Action = null;
@@ -14651,63 +15014,61 @@ class AclUserRule extends  AbstractModel {
         this.RulePriority = null;
 
         /**
-         * The rule ID, which is only used as an output parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rule ID, which is only used as an output parameter.
          * @type {number || null}
          */
         this.RuleID = null;
 
         /**
          * The update time, which is only used as an output parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * The IP blocking duration. Value range: 0 seconds - 2 days. Default value: 0 seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * IP ban duration. Range: 0-2 days. It's required when `Action=ban`. 
          * @type {number || null}
          */
         this.PunishTime = null;
 
         /**
-         * The unit of the IP blocking duration. Values:
+         * The unit of the IP ban duration. Values:
 <li>`second`: Second</li>
 <li>`minutes`: Minute</li>
-<li>`hour`: Hour</li>Default value: second.
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>`hour`: Hour</li>Default value: `second`.
          * @type {string || null}
          */
         this.PunishTimeUnit = null;
 
         /**
-         * The name of the custom page, which defaults to an empty string.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Name of the custom return page. It's required when `Action=page`.	
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The ID of the custom page, which defaults to 0.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * (Disused) ID of the custom return page. The default value is 0, which means that the system default blocking page is used. 
          * @type {number || null}
          */
         this.PageId = null;
 
         /**
-         * The redirection URL, which must be a subdomain name of the site. It defaults to an empty string.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * ID of custom response. The ID can be obtained via the `DescribeCustomErrorPages` API. It's required when `Action=page`.	
          * @type {string || null}
          */
-        this.RedirectUrl = null;
+        this.CustomResponseId = null;
 
         /**
-         * The response code returned after redirection, which defaults to 0.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The response code to trigger the return page. It's required when `Action=page`. Value: 100-600. 3xx response codes are not supported. Default value: 567.
          * @type {number || null}
          */
         this.ResponseCode = null;
+
+        /**
+         * The redirection URL. It's required when `Action=redirect`.	
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
 
     }
 
@@ -14737,8 +15098,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PunishTimeUnit = 'PunishTimeUnit' in params ? params.PunishTimeUnit : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.PageId = 'PageId' in params ? params.PageId : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.CustomResponseId = 'CustomResponseId' in params ? params.CustomResponseId : null;
         this.ResponseCode = 'ResponseCode' in params ? params.ResponseCode : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -14806,43 +15168,33 @@ class CreateOriginGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * Site ID
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The origin type. Values:
-<li>`self`: Customer origin</li>
-<li>`third_party`: Third-party origin</li>
-<li>`cos`: Tencent Cloud COS origin</li>
+         * Origin group name. It can contain 1 to 200 characters ([a-z], [A-Z], [0-9] and [_-]).
          * @type {string || null}
          */
-        this.OriginType = null;
+        this.Name = null;
 
         /**
-         * The name of the origin group.
+         * (Required) Origin group type. Values:
+<li>`GENERAL`: General origin groups. It supports IPs and domain names. It can be referenced by DNS, Rule Engine, Layer 4 Proxy and General LoadBalancer. </li>
+<li>`HTTP`: HTTP-specific origin groups. It supports IPs/domain names and object storage buckets. It can be referenced by acceleration domain names, rule engines and HTTP LoadBalancer. It cannot be referenced by L4 proxies. </li>
          * @type {string || null}
          */
-        this.OriginGroupName = null;
+        this.Type = null;
 
         /**
-         * The origin configuration type when `OriginType=self`. Values:
-<li>`area`: Configure by region.</li>
-<li>`weight`: Configure by weight.</li>
-<li>`proto`: Configure by HTTP protocol.</li>When `OriginType=third_party/cos`, leave this field empty.
-         * @type {string || null}
-         */
-        this.ConfigurationType = null;
-
-        /**
-         * Details of the origin record.
+         * (Required) Origins in the origin group.
          * @type {Array.<OriginRecord> || null}
          */
-        this.OriginRecords = null;
+        this.Records = null;
 
         /**
-         * The origin domain. This field can be specified only when `OriginType=self`.
+         * Host header used for origin-pull. It only works when `Type=HTTP`. The `HostHeader` specified in `RuleEngine` takes a higher priority over this configuration.
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -14857,16 +15209,15 @@ class CreateOriginGroupRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.OriginType = 'OriginType' in params ? params.OriginType : null;
-        this.OriginGroupName = 'OriginGroupName' in params ? params.OriginGroupName : null;
-        this.ConfigurationType = 'ConfigurationType' in params ? params.ConfigurationType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.OriginRecords) {
-            this.OriginRecords = new Array();
-            for (let z in params.OriginRecords) {
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
                 let obj = new OriginRecord();
-                obj.deserialize(params.OriginRecords[z]);
-                this.OriginRecords.push(obj);
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
             }
         }
         this.HostHeader = 'HostHeader' in params ? params.HostHeader : null;
@@ -15409,37 +15760,39 @@ class OriginGroup extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The ID of the origin group.
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * 
+         * The name of the origin group.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * The origin group type. Values:
+<li>`GENERAL`: General origin group</li>
+<li>`HTTP`: HTTP-specific origin group</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Details of the origin record.
          * @type {Array.<OriginRecord> || null}
          */
         this.Records = null;
 
         /**
-         * 
+         * List of instances referencing this origin group.	
          * @type {Array.<OriginGroupReference> || null}
          */
         this.References = null;
 
         /**
-         * 
+         * Creation time of the origin group.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -15584,6 +15937,41 @@ Note: This field may return·null, indicating that no valid values can be obtain
                 this.List.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeSecurityTemplateBindings request structure.
+ * @class
+ */
+class DescribeSecurityTemplateBindingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site to query
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * ID of the policy template to query.
+         * @type {Array.<string> || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -16410,6 +16798,7 @@ module.exports = {
     ModifyAccelerationDomainStatusesResponse: ModifyAccelerationDomainStatusesResponse,
     Zone: Zone,
     DescribeRulesSettingResponse: DescribeRulesSettingResponse,
+    BindSecurityTemplateToEntityResponse: BindSecurityTemplateToEntityResponse,
     RuleExtraParameter: RuleExtraParameter,
     BindSharedCNAMEMap: BindSharedCNAMEMap,
     RulesSettingAction: RulesSettingAction,
@@ -16441,6 +16830,7 @@ module.exports = {
     CreatePrefetchTaskRequest: CreatePrefetchTaskRequest,
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
     BindSharedCNAMEResponse: BindSharedCNAMEResponse,
+    TemplateScope: TemplateScope,
     DescribeTopL7AnalysisDataRequest: DescribeTopL7AnalysisDataRequest,
     FileAscriptionInfo: FileAscriptionInfo,
     DeleteSharedCNAMERequest: DeleteSharedCNAMERequest,
@@ -16457,6 +16847,7 @@ module.exports = {
     WafRule: WafRule,
     SecurityConfig: SecurityConfig,
     DescribePrefetchTasksRequest: DescribePrefetchTasksRequest,
+    DescribeSecurityTemplateBindingsResponse: DescribeSecurityTemplateBindingsResponse,
     MaxAge: MaxAge,
     ModifyAliasDomainStatusResponse: ModifyAliasDomainStatusResponse,
     RuleCodeActionParams: RuleCodeActionParams,
@@ -16516,6 +16907,7 @@ module.exports = {
     CertificateInfo: CertificateInfo,
     CreatePlanForZoneRequest: CreatePlanForZoneRequest,
     ModifyAliasDomainStatusRequest: ModifyAliasDomainStatusRequest,
+    BindSecurityTemplateToEntityRequest: BindSecurityTemplateToEntityRequest,
     TimingDataItem: TimingDataItem,
     CreateApplicationProxyRequest: CreateApplicationProxyRequest,
     CC: CC,
@@ -16543,6 +16935,7 @@ module.exports = {
     DeleteOriginGroupResponse: DeleteOriginGroupResponse,
     Header: Header,
     RuleAndConditions: RuleAndConditions,
+    SecurityTemplateBinding: SecurityTemplateBinding,
     DropPageConfig: DropPageConfig,
     SecEntry: SecEntry,
     DescribeIdentificationsRequest: DescribeIdentificationsRequest,
@@ -16574,6 +16967,7 @@ module.exports = {
     DescribeRulesSettingRequest: DescribeRulesSettingRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     ModifyAliasDomainResponse: ModifyAliasDomainResponse,
+    EntityStatus: EntityStatus,
     RewriteAction: RewriteAction,
     CheckCnameStatusRequest: CheckCnameStatusRequest,
     DeleteAliasDomainRequest: DeleteAliasDomainRequest,
@@ -16601,6 +16995,7 @@ module.exports = {
     OriginGroup: OriginGroup,
     ModifySecurityIPGroupRequest: ModifySecurityIPGroupRequest,
     AccelerationDomainCertificate: AccelerationDomainCertificate,
+    DescribeSecurityTemplateBindingsRequest: DescribeSecurityTemplateBindingsRequest,
     AlgDetectResult: AlgDetectResult,
     QueryString: QueryString,
     DefaultServerCertInfo: DefaultServerCertInfo,

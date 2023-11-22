@@ -53,7 +53,7 @@ class CreateStreamPackageHarvestJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID, a globally unique identifier, ID can contain up to 128 characters. Supported characters are numbers, letters, underscores (_), and dashes (-).
+         * HarvestJob ID, a globally unique identifier.
          * @type {string || null}
          */
         this.ID = null;
@@ -65,43 +65,37 @@ class CreateStreamPackageHarvestJobRequest extends  AbstractModel {
         this.ChannelName = null;
 
         /**
-         * The associated endpoint name, StreamPackage only supports harvesting content from HLS and DASH endpoints that have startover turned on.
+         * The associated endpoint name.
          * @type {string || null}
          */
         this.EndpointName = null;
 
         /**
-         * Time format, supports the following types: 
-1. Epoch seconds 
-2. ISO-8601.
+         * Time format, supports the following types: 1. Epoch seconds 2. ISO-8601
          * @type {string || null}
          */
         this.TimeFormat = null;
 
         /**
-         * Task start time supports two formats for TimeFormat input: 
-1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
-2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+         * Task start time supports two formats for TimeFormat input: 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Task end time supports two formats for TimeFormat input: 
-1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
-2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+         * Task end time supports two formats for TimeFormat input: 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * The COS bucket address where the recording file is stored in COS, format: https://{Bucket_name}-{AppId}.cos.{Region}.myqcloud.com/.
+         * The path where the recording file is stored in Cos.
          * @type {string || null}
          */
         this.Destination = null;
 
         /**
-         * The path in the cos bucket and identifier for the parent manifest for the live-to-VOD asset, fotmat: {path 1}/xxx/{path n}/{name}.m3u8.
+         * The file name of the recording file stored in Cos.
          * @type {string || null}
          */
         this.Manifest = null;
@@ -136,7 +130,7 @@ class DescribeStreamPackageHarvestJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID, a globally unique identifier.
+         * HarvestJob ID, a globally unique identifier.
          * @type {string || null}
          */
         this.ID = null;
@@ -639,7 +633,7 @@ class DeleteStreamPackageHarvestJobsRequest extends  AbstractModel {
         super();
 
         /**
-         * Task IDs, id is a globally unique identifier.
+         * HarvestJob IDs, id is a globally unique identifier.
          * @type {Array.<string> || null}
          */
         this.IDs = null;
@@ -1059,7 +1053,7 @@ class UnbindCdnDomainWithChannelRequest extends  AbstractModel {
 }
 
 /**
- * HarvestJob Response parameter structure
+ * HarvestJob response info.
  * @class
  */
 class HarvestJobResp extends  AbstractModel {
@@ -1067,7 +1061,7 @@ class HarvestJobResp extends  AbstractModel {
         super();
 
         /**
-         * Job ID, a globally unique identifier.
+         * HarvestJob ID, a globally unique identifier.
          * @type {string || null}
          */
         this.ID = null;
@@ -1091,13 +1085,13 @@ class HarvestJobResp extends  AbstractModel {
         this.TimeFormat = null;
 
         /**
-         * Job start time.
+         * HarvestJob start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Job end time.
+         * HarvestJob end time.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1121,13 +1115,13 @@ class HarvestJobResp extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Job error message.
+         * HarvestJob error message.
          * @type {string || null}
          */
         this.ErrMessage = null;
 
         /**
-         * Job creation time, timestamp in seconds.
+         * HarvestJob creation time, timestamp in seconds.
          * @type {number || null}
          */
         this.CreateTime = null;
@@ -1539,7 +1533,7 @@ class DeleteStreamPackageHarvestJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID, a globally unique identifier.
+         * HarvestJob ID, a globally unique identifier.
          * @type {string || null}
          */
         this.ID = null;

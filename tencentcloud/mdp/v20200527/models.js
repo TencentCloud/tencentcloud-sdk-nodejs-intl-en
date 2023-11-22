@@ -45,6 +45,117 @@ class DeleteStreamPackageChannelsRequest extends  AbstractModel {
 }
 
 /**
+ * CreateStreamPackageHarvestJob request structure.
+ * @class
+ */
+class CreateStreamPackageHarvestJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, a globally unique identifier, ID can contain up to 128 characters. Supported characters are numbers, letters, underscores (_), and dashes (-).
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * The associated channel name.
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * The associated endpoint name, StreamPackage only supports harvesting content from HLS and DASH endpoints that have startover turned on.
+         * @type {string || null}
+         */
+        this.EndpointName = null;
+
+        /**
+         * Time format, supports the following types: 
+1. Epoch seconds 
+2. ISO-8601.
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * Task start time supports two formats for TimeFormat input: 
+1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
+2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task end time supports two formats for TimeFormat input: 
+1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
+2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The COS bucket address where the recording file is stored in COS, format: https://{Bucket_name}-{AppId}.cos.{Region}.myqcloud.com/.
+         * @type {string || null}
+         */
+        this.Destination = null;
+
+        /**
+         * The path in the cos bucket and identifier for the parent manifest for the live-to-VOD asset, fotmat: {path 1}/xxx/{path n}/{name}.m3u8.
+         * @type {string || null}
+         */
+        this.Manifest = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.EndpointName = 'EndpointName' in params ? params.EndpointName : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Destination = 'Destination' in params ? params.Destination : null;
+        this.Manifest = 'Manifest' in params ? params.Manifest : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageHarvestJob request structure.
+ * @class
+ */
+class DescribeStreamPackageHarvestJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, a globally unique identifier.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
  * Channel input and output.
  * @class
  */
@@ -184,6 +295,46 @@ class BindNewLVBDomainWithChannelResponse extends  AbstractModel {
             return;
         }
         this.LVBDomain = 'LVBDomain' in params ? params.LVBDomain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageHarvestJob response structure.
+ * @class
+ */
+class DescribeStreamPackageHarvestJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HarvestJob information.
+         * @type {HarvestJobResp || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new HarvestJobResp();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -365,6 +516,149 @@ class ModifyStreamPackageChannelInputAuthInfoResponse extends  AbstractModel {
 }
 
 /**
+ * The authentication information of channel endpoints.
+ * @class
+ */
+class EndpointAuthInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The security group allowlist in CIDR format.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.WhiteIpList = null;
+
+        /**
+         * The security group blocklist in CIDR format.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BlackIpList = null;
+
+        /**
+         * The authentication key. Its value is same as `X-TENCENT-PACKAGE` set in the HTTP request header.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AuthKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageHarvestJobs request structure.
+ * @class
+ */
+class DescribeStreamPackageHarvestJobsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The bound channel name. If not passed, all channels will be queried by default.
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * PageSize.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * DeleteStreamPackageHarvestJob response structure.
+ * @class
+ */
+class DeleteStreamPackageHarvestJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteStreamPackageHarvestJobs request structure.
+ * @class
+ */
+class DeleteStreamPackageHarvestJobsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task IDs, id is a globally unique identifier.
+         * @type {Array.<string> || null}
+         */
+        this.IDs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IDs = 'IDs' in params ? params.IDs : null;
+
+    }
+}
+
+/**
  * CreateStreamPackageChannel response structure.
  * @class
  */
@@ -475,6 +769,46 @@ class DeleteStreamPackageChannelEndpointsRequest extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
+ * CreateStreamPackageHarvestJob response structure.
+ * @class
+ */
+class CreateStreamPackageHarvestJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HarvestJob information.
+         * @type {HarvestJobResp || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new HarvestJobResp();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -725,6 +1059,118 @@ class UnbindCdnDomainWithChannelRequest extends  AbstractModel {
 }
 
 /**
+ * HarvestJob Response parameter structure
+ * @class
+ */
+class HarvestJobResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Job ID, a globally unique identifier.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * The associated channel name.
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * The associated endpoint name.
+         * @type {string || null}
+         */
+        this.EndpointName = null;
+
+        /**
+         * Time format, supports the following types: 1. Epoch seconds 2. ISO-8601
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * Job start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Job end time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The path where the recording file is stored in COS.
+         * @type {string || null}
+         */
+        this.Destination = null;
+
+        /**
+         * The file name of the recording file stored in COS.
+         * @type {string || null}
+         */
+        this.Manifest = null;
+
+        /**
+         * The task status is divided into running: Running, execution completed: Completed, and execution failure: Failed.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Job error message.
+         * @type {string || null}
+         */
+        this.ErrMessage = null;
+
+        /**
+         * Job creation time, timestamp in seconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The associated ChannelID.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * The region corresponding to the harvest job.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.EndpointName = 'EndpointName' in params ? params.EndpointName : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Destination = 'Destination' in params ? params.Destination : null;
+        this.Manifest = 'Manifest' in params ? params.Manifest : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrMessage = 'ErrMessage' in params ? params.ErrMessage : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * Channel endpoint information.
  * @class
  */
@@ -795,6 +1241,70 @@ class DescribeStreamPackageChannelRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeStreamPackageHarvestJobs response structure.
+ * @class
+ */
+class DescribeStreamPackageHarvestJobsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HarvestJob information list.
+         * @type {Array.<HarvestJobResp> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * PageSize
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * TotalNum
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new HarvestJobResp();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1021,6 +1531,34 @@ class UnbindCdnDomainWithChannelResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteStreamPackageHarvestJob request structure.
+ * @class
+ */
+class DeleteStreamPackageHarvestJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, a globally unique identifier.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
  * CreateStreamPackageChannel request structure.
  * @class
  */
@@ -1215,33 +1753,18 @@ class ModifyStreamPackageChannelResponse extends  AbstractModel {
 }
 
 /**
- * The authentication information of channel endpoints.
+ * DeleteStreamPackageHarvestJobs response structure.
  * @class
  */
-class EndpointAuthInfo extends  AbstractModel {
+class DeleteStreamPackageHarvestJobsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The security group allowlist in CIDR format.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.WhiteIpList = null;
-
-        /**
-         * The security group blocklist in CIDR format.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.BlackIpList = null;
-
-        /**
-         * The authentication key. Its value is same as `X-TENCENT-PACKAGE` set in the HTTP request header.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AuthKey = null;
+        this.RequestId = null;
 
     }
 
@@ -1252,43 +1775,52 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
-        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
-        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 module.exports = {
     DeleteStreamPackageChannelsRequest: DeleteStreamPackageChannelsRequest,
+    CreateStreamPackageHarvestJobRequest: CreateStreamPackageHarvestJobRequest,
+    DescribeStreamPackageHarvestJobRequest: DescribeStreamPackageHarvestJobRequest,
     PointInfo: PointInfo,
     DeleteStreamPackageChannelsResponse: DeleteStreamPackageChannelsResponse,
     BindNewLVBDomainWithChannelResponse: BindNewLVBDomainWithChannelResponse,
+    DescribeStreamPackageHarvestJobResponse: DescribeStreamPackageHarvestJobResponse,
     DescribeStreamPackageChannelsResponse: DescribeStreamPackageChannelsResponse,
     DescribeStreamPackageChannelsRequest: DescribeStreamPackageChannelsRequest,
     ModifyStreamPackageChannelEndpointResponse: ModifyStreamPackageChannelEndpointResponse,
     ModifyStreamPackageChannelInputAuthInfoResponse: ModifyStreamPackageChannelInputAuthInfoResponse,
+    EndpointAuthInfo: EndpointAuthInfo,
+    DescribeStreamPackageHarvestJobsRequest: DescribeStreamPackageHarvestJobsRequest,
+    DeleteStreamPackageHarvestJobResponse: DeleteStreamPackageHarvestJobResponse,
+    DeleteStreamPackageHarvestJobsRequest: DeleteStreamPackageHarvestJobsRequest,
     CreateStreamPackageChannelResponse: CreateStreamPackageChannelResponse,
     CreateStreamPackageChannelEndpointResponse: CreateStreamPackageChannelEndpointResponse,
     DeleteStreamPackageChannelEndpointsRequest: DeleteStreamPackageChannelEndpointsRequest,
+    CreateStreamPackageHarvestJobResponse: CreateStreamPackageHarvestJobResponse,
     ChannelInfo: ChannelInfo,
     CacheInfo: CacheInfo,
     DeleteStreamPackageChannelEndpointsResponse: DeleteStreamPackageChannelEndpointsResponse,
     InputInfo: InputInfo,
     InputAuthInfo: InputAuthInfo,
     UnbindCdnDomainWithChannelRequest: UnbindCdnDomainWithChannelRequest,
+    HarvestJobResp: HarvestJobResp,
     EndpointInfo: EndpointInfo,
     DescribeStreamPackageChannelRequest: DescribeStreamPackageChannelRequest,
+    DescribeStreamPackageHarvestJobsResponse: DescribeStreamPackageHarvestJobsResponse,
     ModifyStreamPackageChannelRequest: ModifyStreamPackageChannelRequest,
     ModifyStreamPackageChannelEndpointRequest: ModifyStreamPackageChannelEndpointRequest,
     CacheInfoInfo: CacheInfoInfo,
     CreateStreamPackageChannelEndpointRequest: CreateStreamPackageChannelEndpointRequest,
     UnbindCdnDomainWithChannelResponse: UnbindCdnDomainWithChannelResponse,
+    DeleteStreamPackageHarvestJobRequest: DeleteStreamPackageHarvestJobRequest,
     CreateStreamPackageChannelRequest: CreateStreamPackageChannelRequest,
     ModifyStreamPackageChannelInputAuthInfoRequest: ModifyStreamPackageChannelInputAuthInfoRequest,
     BindNewLVBDomainWithChannelRequest: BindNewLVBDomainWithChannelRequest,
     DescribeStreamPackageChannelResponse: DescribeStreamPackageChannelResponse,
     ModifyStreamPackageChannelResponse: ModifyStreamPackageChannelResponse,
-    EndpointAuthInfo: EndpointAuthInfo,
+    DeleteStreamPackageHarvestJobsResponse: DeleteStreamPackageHarvestJobsResponse,
 
 }

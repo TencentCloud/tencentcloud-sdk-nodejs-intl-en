@@ -17,35 +17,46 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
+const CreateStreamPackageHarvestJobRequest = models.CreateStreamPackageHarvestJobRequest;
+const DescribeStreamPackageHarvestJobRequest = models.DescribeStreamPackageHarvestJobRequest;
 const PointInfo = models.PointInfo;
 const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
 const BindNewLVBDomainWithChannelResponse = models.BindNewLVBDomainWithChannelResponse;
+const DescribeStreamPackageHarvestJobResponse = models.DescribeStreamPackageHarvestJobResponse;
 const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
 const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
 const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
 const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
+const EndpointAuthInfo = models.EndpointAuthInfo;
+const DescribeStreamPackageHarvestJobsRequest = models.DescribeStreamPackageHarvestJobsRequest;
+const DeleteStreamPackageHarvestJobResponse = models.DeleteStreamPackageHarvestJobResponse;
+const DeleteStreamPackageHarvestJobsRequest = models.DeleteStreamPackageHarvestJobsRequest;
 const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
 const CreateStreamPackageChannelEndpointResponse = models.CreateStreamPackageChannelEndpointResponse;
 const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
+const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
 const ChannelInfo = models.ChannelInfo;
 const CacheInfo = models.CacheInfo;
 const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
 const InputInfo = models.InputInfo;
 const InputAuthInfo = models.InputAuthInfo;
 const UnbindCdnDomainWithChannelRequest = models.UnbindCdnDomainWithChannelRequest;
+const HarvestJobResp = models.HarvestJobResp;
 const EndpointInfo = models.EndpointInfo;
 const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
+const DescribeStreamPackageHarvestJobsResponse = models.DescribeStreamPackageHarvestJobsResponse;
 const ModifyStreamPackageChannelRequest = models.ModifyStreamPackageChannelRequest;
 const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
 const CacheInfoInfo = models.CacheInfoInfo;
 const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
 const UnbindCdnDomainWithChannelResponse = models.UnbindCdnDomainWithChannelResponse;
+const DeleteStreamPackageHarvestJobRequest = models.DeleteStreamPackageHarvestJobRequest;
 const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelRequest;
 const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
 const BindNewLVBDomainWithChannelRequest = models.BindNewLVBDomainWithChannelRequest;
 const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
 const ModifyStreamPackageChannelResponse = models.ModifyStreamPackageChannelResponse;
-const EndpointAuthInfo = models.EndpointAuthInfo;
+const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
 
 
 /**
@@ -81,6 +92,17 @@ class MdpClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the information of a StreamPackage channel.
+     * @param {DescribeStreamPackageChannelRequest} req
+     * @param {function(string, DescribeStreamPackageChannelResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageChannel(req, cb) {
+        let resp = new DescribeStreamPackageChannelResponse();
+        this.request("DescribeStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a StreamPackage channel.
      * @param {CreateStreamPackageChannelRequest} req
      * @param {function(string, CreateStreamPackageChannelResponse):void} cb
@@ -100,6 +122,17 @@ class MdpClient extends AbstractClient {
     DeleteStreamPackageChannelEndpoints(req, cb) {
         let resp = new DeleteStreamPackageChannelEndpointsResponse();
         this.request("DeleteStreamPackageChannelEndpoints", req, resp, cb);
+    }
+
+    /**
+     * Deleting HarvestJobs in Batch.
+     * @param {DeleteStreamPackageHarvestJobsRequest} req
+     * @param {function(string, DeleteStreamPackageHarvestJobsResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageHarvestJobs(req, cb) {
+        let resp = new DeleteStreamPackageHarvestJobsResponse();
+        this.request("DeleteStreamPackageHarvestJobs", req, resp, cb);
     }
 
     /**
@@ -136,14 +169,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of a StreamPackage channel.
-     * @param {DescribeStreamPackageChannelRequest} req
-     * @param {function(string, DescribeStreamPackageChannelResponse):void} cb
+     * Delete HarvestJob.
+     * @param {DeleteStreamPackageHarvestJobRequest} req
+     * @param {function(string, DeleteStreamPackageHarvestJobResponse):void} cb
      * @public
      */
-    DescribeStreamPackageChannel(req, cb) {
-        let resp = new DescribeStreamPackageChannelResponse();
-        this.request("DescribeStreamPackageChannel", req, resp, cb);
+    DeleteStreamPackageHarvestJob(req, cb) {
+        let resp = new DeleteStreamPackageHarvestJobResponse();
+        this.request("DeleteStreamPackageHarvestJob", req, resp, cb);
     }
 
     /**
@@ -158,6 +191,28 @@ class MdpClient extends AbstractClient {
     }
 
     /**
+     * Create HarvestJob.
+     * @param {CreateStreamPackageHarvestJobRequest} req
+     * @param {function(string, CreateStreamPackageHarvestJobResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageHarvestJob(req, cb) {
+        let resp = new CreateStreamPackageHarvestJobResponse();
+        this.request("CreateStreamPackageHarvestJob", req, resp, cb);
+    }
+
+    /**
+     * Query HarvestJob.
+     * @param {DescribeStreamPackageHarvestJobRequest} req
+     * @param {function(string, DescribeStreamPackageHarvestJobResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageHarvestJob(req, cb) {
+        let resp = new DescribeStreamPackageHarvestJobResponse();
+        this.request("DescribeStreamPackageHarvestJob", req, resp, cb);
+    }
+
+    /**
      * This API is used to unbind a CDN playback domain name from a channel.
      * @param {UnbindCdnDomainWithChannelRequest} req
      * @param {function(string, UnbindCdnDomainWithChannelResponse):void} cb
@@ -166,6 +221,17 @@ class MdpClient extends AbstractClient {
     UnbindCdnDomainWithChannel(req, cb) {
         let resp = new UnbindCdnDomainWithChannelResponse();
         this.request("UnbindCdnDomainWithChannel", req, resp, cb);
+    }
+
+    /**
+     * Batch query HarvestJob.
+     * @param {DescribeStreamPackageHarvestJobsRequest} req
+     * @param {function(string, DescribeStreamPackageHarvestJobsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageHarvestJobs(req, cb) {
+        let resp = new DescribeStreamPackageHarvestJobsResponse();
+        this.request("DescribeStreamPackageHarvestJobs", req, resp, cb);
     }
 
     /**

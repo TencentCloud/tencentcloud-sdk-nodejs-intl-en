@@ -79,7 +79,7 @@ class DownloadL7LogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * List of sites. This parameter is required. A `null` will be returned if it is left empty.
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -424,7 +424,7 @@ class DescribeTopL7CacheDataRequest extends  AbstractModel {
         this.MetricName = null;
 
         /**
-         * Specifies sites by ID. All sites will be selected if this field is not specified.
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -6477,7 +6477,7 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.MetricName = null;
 
         /**
-         * (Required) List of sites. No query results are returned if this field is not specified.
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -7075,14 +7075,13 @@ class DescribeOverviewL7DataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * List of sites
-Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
 
         /**
-         * List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
+         * Queried domain name set. This parameter has been discarded.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
@@ -7108,10 +7107,11 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
         this.Interval = null;
 
         /**
-         * Filters
-<li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
-<li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
-<li>`tagValue`<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
+         * Filtering condition. The detailed filtering condition key values are as follows: 
+<li>socket<br>    Filter based on [<strong>HTTP protocol type</strong>]. <br>    Corresponding value options: <br>    HTTP: HTTP protocol；<br>    HTTPS: HTTPS protocol;<br>    QUIC: QUIC protocol. </li>
+<li>domains<br>    Filter based on [<strong>domain name</strong>]. </li>
+<li>tagKey<br>    Filter based on [<strong>Tag Key</strong>]. </li>
+<li>tagValue<br>    Filter based on [<strong>Tag Value</strong>]. </li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -7638,6 +7638,13 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
         super();
 
         /**
+         * ZoneId. 
+The parameter is required.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
          * Start time of the query.
          * @type {string || null}
          */
@@ -7662,8 +7669,7 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.</li>
+         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>target<br>    Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on [<strong>task status</strong>]. <br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -7677,6 +7683,7 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
@@ -7914,21 +7921,20 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The metric to query. Values:
-<li>`l7Flow_outFlux`: Traffic used for EdgeOne responses</li>
-<li>`l7Flow_inFlux`: Traffic used for EdgeOne requests</li>
-<li>`l7Flow_outBandwidth`: Bandwidth used for EdgeOne responses</li>
-<li>`l7Flow_inBandwidth`: Bandwidth used for EdgeOne requests</li>
-<li>`l7Flow_request`: Access requests</li>
-<li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
-<li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
+         * Indicator list. Values: 
+<li>l7Flow_outFlux: Edgeone response traffic;</li>
+<li>l7Flow_inFlux: Edgeone request traffic;</li>
+<li>l7Flow_outBandwidth: Edgeone response bandwidth;</li>
+<li>l7Flow_inBandwidth: Edgeone request bandwidth;</li>
+<li>l7Flow_request: Number of access requests;</li>
+<li>l7Flow_flux: Uplink + downlink traffic of access requests;< li>
+<li>l7Flow_bandwidth: Uplink + downlink bandwidth of access requests. </li>
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
 
         /**
-         * List of sites
-Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -8487,7 +8493,7 @@ class DescribeTimingL7CacheDataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * List of sites to be queried. All sites will be selected if this field is not specified.
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -9210,7 +9216,7 @@ class DownloadL4LogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * List of sites. This parameter is required. A `null` will be returned if it is left empty.
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -9766,7 +9772,8 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * Disused. Use "zone-id" in "Filters" instead.
+         * ZoneId. 
+The parameter is required.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -9796,7 +9803,7 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
+         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>target<br>    Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on <strong>task status</strong>.<br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li><li>type<br>    Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.<br>    Options:<br>    purge_url: URL<br>    purge_prefix: Prefix<br>    purge_all: All cache content<br>    purge_host: Hostname<br>    purge_cache_tag: CacheTag</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -14625,7 +14632,7 @@ class StandardDebug extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Allowed client source. It supports IPv4/IPv6 addresses and CIDR blocks.
+         * Allowed client source. IPv4 and IPv6 addresses and network segments are supported. 0.0.0.0/0 indicates that all IPv4 clients can be debugged, and ::/0 indicates that all IPv6 clients can be debugged.
          * @type {Array.<string> || null}
          */
         this.AllowClientIPList = null;
@@ -15246,20 +15253,17 @@ class DescribeTimingL4DataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Metric to query. Values:
-<li>`l4Flow_connections`: Access connections;</li>
-<li>`l4Flow_flux`: Access traffic;</li>
-<li>`l4Flow_inFlux`: Inbound traffic;</li>
-<li>`l4Flow_outFlux`: Outbound traffic;</li>
-<li>`l4Flow_outPkt`: Outbound packets.</li>
+         * Query indicator. Values: 
+<li>l4Flow_connections: Number of access connections;</li>
+<li>l4Flow_flux: Total access traffic;</li>
+<li>l4Flow_inFlux: Ingress access traffic;</li>
+<li>l4Flow_outFlux: Egress access traffic. </li>
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
 
         /**
-         * List of sites
-If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
-Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
+         * ZoneId set. This parameter is required.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -15471,7 +15475,7 @@ class CreateSharedCNAMEResponse extends  AbstractModel {
         super();
 
         /**
-         * Shared CNAME. Format: <Custom prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+         * Shared CNAME. Format: '<Custom prefix>+<A 12-character random string in ZoneId>+share.dnse[0-5].com'.
          * @type {string || null}
          */
         this.SharedCNAME = null;
@@ -16195,11 +16199,11 @@ class CreateSharedCNAMERequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Prefix of the shared CNAME (up to 50 characters). Format: "test-api", "test-api.com". 
+         * Shared CNAME prefix. Enter a valid domain name prefix, such as "test-api" and "test-api.com". A maximum of 50 characters are allowed. 
 
-The complete format of a shared CNAME: <Custom Prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+Complete format of the shared CNAME: '<Custom prefix>+<A 12-character random string in ZoneId>+share.dnse[0-5].com'. 
 
-For example, if the prefix is `example.com`, the generated shared CNAME is `example.com.sai2ig51kaa5.share.dnse2.com`.
+For example, if the prefix is example.com, EdgeOne will create the shared CNAME: example.com.sai2ig51kaa5.share.dnse2.com.
          * @type {string || null}
          */
         this.SharedCNAMEPrefix = null;

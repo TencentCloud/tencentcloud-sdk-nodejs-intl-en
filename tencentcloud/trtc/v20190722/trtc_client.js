@@ -31,10 +31,12 @@ const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
 const AbnormalEvent = models.AbnormalEvent;
 const ScaleInfomation = models.ScaleInfomation;
 const AgentParams = models.AgentParams;
+const VideoEncodeParams = models.VideoEncodeParams;
 const DescribeUserEventResponse = models.DescribeUserEventResponse;
 const VideoEncode = models.VideoEncode;
 const DescribeCallDetailInfoRequest = models.DescribeCallDetailInfoRequest;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
+const AudioEncodeParams = models.AudioEncodeParams;
 const CloudStorage = models.CloudStorage;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
@@ -46,7 +48,9 @@ const CloudVod = models.CloudVod;
 const DescribeCallDetailInfoResponse = models.DescribeCallDetailInfoResponse;
 const McuCustomCrop = models.McuCustomCrop;
 const DescribeMixTranscodingUsageRequest = models.DescribeMixTranscodingUsageRequest;
+const DescribeStreamIngestResponse = models.DescribeStreamIngestResponse;
 const MixTranscodeParams = models.MixTranscodeParams;
+const StopStreamIngestRequest = models.StopStreamIngestRequest;
 const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
 const WaterMarkImage = models.WaterMarkImage;
 const McuUserInfoParams = models.McuUserInfoParams;
@@ -55,7 +59,7 @@ const EventList = models.EventList;
 const DescribeTrtcUsageRequest = models.DescribeTrtcUsageRequest;
 const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
 const McuLayoutParams = models.McuLayoutParams;
-const RecordParams = models.RecordParams;
+const StartStreamIngestRequest = models.StartStreamIngestRequest;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
@@ -85,6 +89,7 @@ const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
 const VideoParams = models.VideoParams;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
+const StartStreamIngestResponse = models.StartStreamIngestResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
@@ -94,14 +99,17 @@ const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeUnusualEventResponse = models.DescribeUnusualEventResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
+const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const MixUserInfo = models.MixUserInfo;
 const DismissRoomResponse = models.DismissRoomResponse;
+const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const MaxVideoUser = models.MaxVideoUser;
 const McuSeiParams = models.McuSeiParams;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
-const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
+const RecordParams = models.RecordParams;
+const DescribeStreamIngestRequest = models.DescribeStreamIngestRequest;
 const McuAudioParams = models.McuAudioParams;
 const McuPublishCdnParam = models.McuPublishCdnParam;
 const AudioParams = models.AudioParams;
@@ -244,6 +252,17 @@ Usage Precautions:
     }
 
     /**
+     * You can query the status of the Relay task.
+     * @param {DescribeStreamIngestRequest} req
+     * @param {function(string, DescribeStreamIngestResponse):void} cb
+     * @public
+     */
+    DescribeStreamIngest(req, cb) {
+        let resp = new DescribeStreamIngestResponse();
+        this.request("DescribeStreamIngest", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable or enable the audio and video of a user. It can be used by an anchor, room owner, or admin to block or unblock a user. It supports platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API if the room ID is a number.
      * @param {SetUserBlockedRequest} req
      * @param {function(string, SetUserBlockedResponse):void} cb
@@ -264,6 +283,28 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     UpdatePublishCdnStream(req, cb) {
         let resp = new UpdatePublishCdnStreamResponse();
         this.request("UpdatePublishCdnStream", req, resp, cb);
+    }
+
+    /**
+     * Push an online media stream to the TRTC room.
+     * @param {StartStreamIngestRequest} req
+     * @param {function(string, StartStreamIngestResponse):void} cb
+     * @public
+     */
+    StartStreamIngest(req, cb) {
+        let resp = new StartStreamIngestResponse();
+        this.request("StartStreamIngest", req, resp, cb);
+    }
+
+    /**
+     * Stop a Pull stream Relay task.
+     * @param {StopStreamIngestRequest} req
+     * @param {function(string, StopStreamIngestResponse):void} cb
+     * @public
+     */
+    StopStreamIngest(req, cb) {
+        let resp = new StopStreamIngestResponse();
+        this.request("StopStreamIngest", req, resp, cb);
     }
 
     /**

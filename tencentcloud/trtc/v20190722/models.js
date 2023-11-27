@@ -859,6 +859,62 @@ class AgentParams extends  AbstractModel {
 }
 
 /**
+ * Video transcoding parameters
+ * @class
+ */
+class VideoEncodeParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Width. Value range [0,1920], unit is pixel value.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Height. Value range [0,1080], unit is pixel value.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Frame Rate. Value range [1,60], indicating that the frame rate can be selected from 1 to 60fps.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Bitrate. Value range [1,10000], unit is kbps.
+         * @type {number || null}
+         */
+        this.BitRate = null;
+
+        /**
+         * Gop. Value range [1,2], unit is second.
+         * @type {number || null}
+         */
+        this.Gop = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.BitRate = 'BitRate' in params ? params.BitRate : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
+
+    }
+}
+
+/**
  * DescribeUserEvent response structure.
  * @class
  */
@@ -1124,6 +1180,48 @@ Array length: 1-100.
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
         this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * Audio transcoding parameters
+ * @class
+ */
+class AudioEncodeParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audio Sample rate, Value range [48000, 44100], unit is Hz.
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+        /**
+         * Audio Channel number, Value range [1,2], 1 means Audio is Mono-channel, 2 means Audio is Dual-channel.
+         * @type {number || null}
+         */
+        this.Channel = null;
+
+        /**
+         * Audio Bitrate, Value range [8,500], unit is kbps.
+         * @type {number || null}
+         */
+        this.BitRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.BitRate = 'BitRate' in params ? params.BitRate : null;
 
     }
 }
@@ -1677,6 +1775,41 @@ The period queried per request cannot be longer than 31 days.
 }
 
 /**
+ * DescribeStreamIngest response structure.
+ * @class
+ */
+class DescribeStreamIngestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status information. InProgress: Indicates that the current task is in progress. NotExist: Indicates that the current task does not exist. Example value: InProgress
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The audio and video parameters for recording.
  * @class
  */
@@ -1717,6 +1850,41 @@ class MixTranscodeParams extends  AbstractModel {
             obj.deserialize(params.AudioParams)
             this.AudioParams = obj;
         }
+
+    }
+}
+
+/**
+ * StopStreamIngest request structure.
+ * @class
+ */
+class StopStreamIngestRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the task's room.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The unique Task ID, which will be returned after the task is successfully started.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2105,66 +2273,67 @@ class McuLayoutParams extends  AbstractModel {
 }
 
 /**
- * The on-cloud recording parameters.
+ * StartStreamIngest request structure.
  * @class
  */
-class RecordParams extends  AbstractModel {
+class StartStreamIngestRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The recording mode.
-1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files to the cloud.
-2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files to the cloud.
+         * TRTC's [SdkAppId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#sdkappid), the same as the SdkAppId corresponding to the Record room.
          * @type {number || null}
          */
-        this.RecordMode = null;
+        this.SdkAppId = null;
 
         /**
-         * The time period (seconds) to wait to automatically stop recording after there are no anchors (users who publish streams) in a room. Value range: 5-86400 (max 24 hours). Default value: 30.
+         * TRTC's [RoomId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#roomid), the RoomId corresponding to the Record TRTC room.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * Type of TRTC RoomId. 【*Note】Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
          * @type {number || null}
          */
-        this.MaxIdleTime = null;
+        this.RoomIdType = null;
 
         /**
-         * The media type of the streams to record.
-0: Audio and video streams (default)
-1: Audio streams only
-2: Video streams only
-         * @type {number || null}
+         * UserId of the Pull stream Relay Robot, used to enter the room and initiate the Pull stream Relay Task.
+         * @type {string || null}
          */
-        this.StreamType = null;
+        this.UserId = null;
 
         /**
-         * The allowlist/blocklist for stream subscription.
-         * @type {SubscribeStreamUserIds || null}
+         * UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://intl.cloud.tencent.com/document/product/647/45910?from_cn_redirect=1#UserSig) Scheme.
+         * @type {string || null}
          */
-        this.SubscribeStreamUserIds = null;
+        this.UserSig = null;
 
         /**
-         * The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC;  `3` : MP4,  `4` : AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
-         * @type {number || null}
+         * 	
+Source URL. Example value: https://a.b/test.mp4
+         * @type {Array.<string> || null}
          */
-        this.OutputFormat = null;
+        this.SourceUrl = null;
 
         /**
-         * Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
-         * @type {number || null}
+         * TRTC room permission Encryption ticket, only needed when advanced permission control is enabled in the Console. After enabling advanced permission control in the TRTC Console, TRTC's backend service system will verify a so-called [PrivateMapKey] 'Permission ticket', which contains an encrypted RoomId and an encrypted 'Permission bit list'. Since PrivateMapKey contains RoomId, providing only UserSig without PrivateMapKey does not allow entry into the specified room.
+         * @type {string || null}
          */
-        this.AvMerge = null;
+        this.PrivateMapKey = null;
 
         /**
-         * The maximum file duration allowed (minutes). If the output format is AAC or MP4, and the maximum file duration is exceeded, the file will be segmented. Value range: 1-1440. Default value: 1440 (24 hours). The maximum file size allowed is 2 GB. If the file size exceeds 2 GB, or the file duration exceeds 24 hours, the file will also be segmented.
-This parameter is invalid if the output format is HLS.
-         * @type {number || null}
+         * Video Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+         * @type {VideoEncodeParams || null}
          */
-        this.MaxMediaFileDuration = null;
+        this.VideoEncodeParams = null;
 
         /**
-         * The type of stream to record. `0` (default): The primary stream and substream; `1`: The primary stream; `2`: The substream.
-         * @type {number || null}
+         * Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+         * @type {AudioEncodeParams || null}
          */
-        this.MediaId = null;
+        this.AudioEncodeParams = null;
 
     }
 
@@ -2175,19 +2344,25 @@ This parameter is invalid if the output format is HLS.
         if (!params) {
             return;
         }
-        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
-        this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
-        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.RoomIdType = 'RoomIdType' in params ? params.RoomIdType : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserSig = 'UserSig' in params ? params.UserSig : null;
+        this.SourceUrl = 'SourceUrl' in params ? params.SourceUrl : null;
+        this.PrivateMapKey = 'PrivateMapKey' in params ? params.PrivateMapKey : null;
 
-        if (params.SubscribeStreamUserIds) {
-            let obj = new SubscribeStreamUserIds();
-            obj.deserialize(params.SubscribeStreamUserIds)
-            this.SubscribeStreamUserIds = obj;
+        if (params.VideoEncodeParams) {
+            let obj = new VideoEncodeParams();
+            obj.deserialize(params.VideoEncodeParams)
+            this.VideoEncodeParams = obj;
         }
-        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
-        this.AvMerge = 'AvMerge' in params ? params.AvMerge : null;
-        this.MaxMediaFileDuration = 'MaxMediaFileDuration' in params ? params.MaxMediaFileDuration : null;
-        this.MediaId = 'MediaId' in params ? params.MediaId : null;
+
+        if (params.AudioEncodeParams) {
+            let obj = new AudioEncodeParams();
+            obj.deserialize(params.AudioEncodeParams)
+            this.AudioEncodeParams = obj;
+        }
 
     }
 }
@@ -3848,6 +4023,41 @@ class DismissRoomByStrRoomIdRequest extends  AbstractModel {
 }
 
 /**
+ * StartStreamIngest response structure.
+ * @class
+ */
+class StartStreamIngestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Task ID of the Pull stream Relay. The Task ID is a unique identifier for a Pull stream Relay lifecycle process, and it loses its meaning when the task ends. The Task ID needs to be saved by the business as a parameter for the next operation on this task.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteCloudRecording request structure.
  * @class
  */
@@ -4270,6 +4480,34 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * StopStreamIngest response structure.
+ * @class
+ */
+class StopStreamIngestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The user information.
  * @class
  */
@@ -4335,6 +4573,133 @@ class DismissRoomResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdatePublishCdnStream request structure.
+ * @class
+ */
+class UpdatePublishCdnStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The sequence of a request. This parameter ensures the requests to change the parameters of the same relaying task are in the correct order. It increases each time a new request is made.
+         * @type {number || null}
+         */
+        this.SequenceNumber = null;
+
+        /**
+         * Whether to transcode the streams. 0: No; 1: Yes.
+         * @type {number || null}
+         */
+        this.WithTranscoding = null;
+
+        /**
+         * Pass this parameter to change the users whose audios are mixed. If you do not pass this parameter, no changes will be made.
+         * @type {McuAudioParams || null}
+         */
+        this.AudioParams = null;
+
+        /**
+         * Pass this parameter to change video parameters other than the codec, including the video layout, background image, background color, and watermark information. This parameter is valid only if streams are transcoded. If you do not pass it, no changes will be made.
+         * @type {McuVideoParams || null}
+         */
+        this.VideoParams = null;
+
+        /**
+         * Pass this parameter to change the single stream that is relayed. This parameter is valid only if streams are not transcoded. If you do not pass this parameter, no changes will be made.
+         * @type {SingleSubscribeParams || null}
+         */
+        this.SingleSubscribeParams = null;
+
+        /**
+         * Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
+         * @type {Array.<McuPublishCdnParam> || null}
+         */
+        this.PublishCdnParams = null;
+
+        /**
+         * The stream mixing SEI parameters.
+         * @type {McuSeiParams || null}
+         */
+        this.SeiParams = null;
+
+        /**
+         * The information of the room to which streams are relayed.
+         * @type {Array.<McuFeedBackRoomParams> || null}
+         */
+        this.FeedBackRoomParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SequenceNumber = 'SequenceNumber' in params ? params.SequenceNumber : null;
+        this.WithTranscoding = 'WithTranscoding' in params ? params.WithTranscoding : null;
+
+        if (params.AudioParams) {
+            let obj = new McuAudioParams();
+            obj.deserialize(params.AudioParams)
+            this.AudioParams = obj;
+        }
+
+        if (params.VideoParams) {
+            let obj = new McuVideoParams();
+            obj.deserialize(params.VideoParams)
+            this.VideoParams = obj;
+        }
+
+        if (params.SingleSubscribeParams) {
+            let obj = new SingleSubscribeParams();
+            obj.deserialize(params.SingleSubscribeParams)
+            this.SingleSubscribeParams = obj;
+        }
+
+        if (params.PublishCdnParams) {
+            this.PublishCdnParams = new Array();
+            for (let z in params.PublishCdnParams) {
+                let obj = new McuPublishCdnParam();
+                obj.deserialize(params.PublishCdnParams[z]);
+                this.PublishCdnParams.push(obj);
+            }
+        }
+
+        if (params.SeiParams) {
+            let obj = new McuSeiParams();
+            obj.deserialize(params.SeiParams)
+            this.SeiParams = obj;
+        }
+
+        if (params.FeedBackRoomParams) {
+            this.FeedBackRoomParams = new Array();
+            for (let z in params.FeedBackRoomParams) {
+                let obj = new McuFeedBackRoomParams();
+                obj.deserialize(params.FeedBackRoomParams[z]);
+                this.FeedBackRoomParams.push(obj);
+            }
+        }
 
     }
 }
@@ -4572,72 +4937,112 @@ class RemoveUserByStrRoomIdRequest extends  AbstractModel {
 }
 
 /**
- * UpdatePublishCdnStream request structure.
+ * The on-cloud recording parameters.
  * @class
  */
-class UpdatePublishCdnStreamRequest extends  AbstractModel {
+class RecordParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+         * The recording mode.
+1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files to the cloud.
+2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files to the cloud.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * The time period (seconds) to wait to automatically stop recording after there are no anchors (users who publish streams) in a room. Value range: 5-86400 (max 24 hours). Default value: 30.
+         * @type {number || null}
+         */
+        this.MaxIdleTime = null;
+
+        /**
+         * The media type of the streams to record.
+0: Audio and video streams (default)
+1: Audio streams only
+2: Video streams only
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * The allowlist/blocklist for stream subscription.
+         * @type {SubscribeStreamUserIds || null}
+         */
+        this.SubscribeStreamUserIds = null;
+
+        /**
+         * The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC;  `3` : MP4,  `4` : AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
+         * @type {number || null}
+         */
+        this.OutputFormat = null;
+
+        /**
+         * Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
+         * @type {number || null}
+         */
+        this.AvMerge = null;
+
+        /**
+         * The maximum file duration allowed (minutes). If the output format is AAC or MP4, and the maximum file duration is exceeded, the file will be segmented. Value range: 1-1440. Default value: 1440 (24 hours). The maximum file size allowed is 2 GB. If the file size exceeds 2 GB, or the file duration exceeds 24 hours, the file will also be segmented.
+This parameter is invalid if the output format is HLS.
+         * @type {number || null}
+         */
+        this.MaxMediaFileDuration = null;
+
+        /**
+         * The type of stream to record. `0` (default): The primary stream and substream; `1`: The primary stream; `2`: The substream.
+         * @type {number || null}
+         */
+        this.MediaId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+        this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+
+        if (params.SubscribeStreamUserIds) {
+            let obj = new SubscribeStreamUserIds();
+            obj.deserialize(params.SubscribeStreamUserIds)
+            this.SubscribeStreamUserIds = obj;
+        }
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+        this.AvMerge = 'AvMerge' in params ? params.AvMerge : null;
+        this.MaxMediaFileDuration = 'MaxMediaFileDuration' in params ? params.MaxMediaFileDuration : null;
+        this.MediaId = 'MediaId' in params ? params.MediaId : null;
+
+    }
+}
+
+/**
+ * DescribeStreamIngest request structure.
+ * @class
+ */
+class DescribeStreamIngestRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SDKAppId of TRTC should be the same as the SDKAppId corresponding to the task room.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The task ID.
+         * The unique Id of the task, will return after successfully starting the task.
          * @type {string || null}
          */
         this.TaskId = null;
-
-        /**
-         * The sequence of a request. This parameter ensures the requests to change the parameters of the same relaying task are in the correct order. It increases each time a new request is made.
-         * @type {number || null}
-         */
-        this.SequenceNumber = null;
-
-        /**
-         * Whether to transcode the streams. 0: No; 1: Yes.
-         * @type {number || null}
-         */
-        this.WithTranscoding = null;
-
-        /**
-         * Pass this parameter to change the users whose audios are mixed. If you do not pass this parameter, no changes will be made.
-         * @type {McuAudioParams || null}
-         */
-        this.AudioParams = null;
-
-        /**
-         * Pass this parameter to change video parameters other than the codec, including the video layout, background image, background color, and watermark information. This parameter is valid only if streams are transcoded. If you do not pass it, no changes will be made.
-         * @type {McuVideoParams || null}
-         */
-        this.VideoParams = null;
-
-        /**
-         * Pass this parameter to change the single stream that is relayed. This parameter is valid only if streams are not transcoded. If you do not pass this parameter, no changes will be made.
-         * @type {SingleSubscribeParams || null}
-         */
-        this.SingleSubscribeParams = null;
-
-        /**
-         * Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
-         * @type {Array.<McuPublishCdnParam> || null}
-         */
-        this.PublishCdnParams = null;
-
-        /**
-         * The stream mixing SEI parameters.
-         * @type {McuSeiParams || null}
-         */
-        this.SeiParams = null;
-
-        /**
-         * The information of the room to which streams are relayed.
-         * @type {Array.<McuFeedBackRoomParams> || null}
-         */
-        this.FeedBackRoomParams = null;
 
     }
 
@@ -4650,50 +5055,6 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.SequenceNumber = 'SequenceNumber' in params ? params.SequenceNumber : null;
-        this.WithTranscoding = 'WithTranscoding' in params ? params.WithTranscoding : null;
-
-        if (params.AudioParams) {
-            let obj = new McuAudioParams();
-            obj.deserialize(params.AudioParams)
-            this.AudioParams = obj;
-        }
-
-        if (params.VideoParams) {
-            let obj = new McuVideoParams();
-            obj.deserialize(params.VideoParams)
-            this.VideoParams = obj;
-        }
-
-        if (params.SingleSubscribeParams) {
-            let obj = new SingleSubscribeParams();
-            obj.deserialize(params.SingleSubscribeParams)
-            this.SingleSubscribeParams = obj;
-        }
-
-        if (params.PublishCdnParams) {
-            this.PublishCdnParams = new Array();
-            for (let z in params.PublishCdnParams) {
-                let obj = new McuPublishCdnParam();
-                obj.deserialize(params.PublishCdnParams[z]);
-                this.PublishCdnParams.push(obj);
-            }
-        }
-
-        if (params.SeiParams) {
-            let obj = new McuSeiParams();
-            obj.deserialize(params.SeiParams)
-            this.SeiParams = obj;
-        }
-
-        if (params.FeedBackRoomParams) {
-            this.FeedBackRoomParams = new Array();
-            for (let z in params.FeedBackRoomParams) {
-                let obj = new McuFeedBackRoomParams();
-                obj.deserialize(params.FeedBackRoomParams[z]);
-                this.FeedBackRoomParams.push(obj);
-            }
-        }
 
     }
 }
@@ -5136,10 +5497,12 @@ module.exports = {
     AbnormalEvent: AbnormalEvent,
     ScaleInfomation: ScaleInfomation,
     AgentParams: AgentParams,
+    VideoEncodeParams: VideoEncodeParams,
     DescribeUserEventResponse: DescribeUserEventResponse,
     VideoEncode: VideoEncode,
     DescribeCallDetailInfoRequest: DescribeCallDetailInfoRequest,
     DescribeUserInfoRequest: DescribeUserInfoRequest,
+    AudioEncodeParams: AudioEncodeParams,
     CloudStorage: CloudStorage,
     DescribeTrtcUsageResponse: DescribeTrtcUsageResponse,
     TimeValue: TimeValue,
@@ -5151,7 +5514,9 @@ module.exports = {
     DescribeCallDetailInfoResponse: DescribeCallDetailInfoResponse,
     McuCustomCrop: McuCustomCrop,
     DescribeMixTranscodingUsageRequest: DescribeMixTranscodingUsageRequest,
+    DescribeStreamIngestResponse: DescribeStreamIngestResponse,
     MixTranscodeParams: MixTranscodeParams,
+    StopStreamIngestRequest: StopStreamIngestRequest,
     SubscribeStreamUserIds: SubscribeStreamUserIds,
     WaterMarkImage: WaterMarkImage,
     McuUserInfoParams: McuUserInfoParams,
@@ -5160,7 +5525,7 @@ module.exports = {
     DescribeTrtcUsageRequest: DescribeTrtcUsageRequest,
     DescribeRoomInfoResponse: DescribeRoomInfoResponse,
     McuLayoutParams: McuLayoutParams,
-    RecordParams: RecordParams,
+    StartStreamIngestRequest: StartStreamIngestRequest,
     DescribeUserInfoResponse: DescribeUserInfoResponse,
     McuWaterMarkImage: McuWaterMarkImage,
     StartPublishCdnStreamResponse: StartPublishCdnStreamResponse,
@@ -5190,6 +5555,7 @@ module.exports = {
     VideoParams: VideoParams,
     StartPublishCdnStreamRequest: StartPublishCdnStreamRequest,
     DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
+    StartStreamIngestResponse: StartStreamIngestResponse,
     DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
     SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
     DescribeTrtcRoomUsageRequest: DescribeTrtcRoomUsageRequest,
@@ -5199,14 +5565,17 @@ module.exports = {
     DescribeUnusualEventResponse: DescribeUnusualEventResponse,
     ModifyCloudRecordingResponse: ModifyCloudRecordingResponse,
     DescribeCloudRecordingResponse: DescribeCloudRecordingResponse,
+    StopStreamIngestResponse: StopStreamIngestResponse,
     MixUserInfo: MixUserInfo,
     DismissRoomResponse: DismissRoomResponse,
+    UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     MaxVideoUser: MaxVideoUser,
     McuSeiParams: McuSeiParams,
     UpdatePublishCdnStreamResponse: UpdatePublishCdnStreamResponse,
     McuWaterMarkText: McuWaterMarkText,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
-    UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
+    RecordParams: RecordParams,
+    DescribeStreamIngestRequest: DescribeStreamIngestRequest,
     McuAudioParams: McuAudioParams,
     McuPublishCdnParam: McuPublishCdnParam,
     AudioParams: AudioParams,

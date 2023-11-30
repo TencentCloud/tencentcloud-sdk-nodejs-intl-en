@@ -39,7 +39,7 @@ const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
 const AiReviewTaskProhibitedAsrResult = models.AiReviewTaskProhibitedAsrResult;
 const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
-const UserAgentFilter = models.UserAgentFilter;
+const DeleteJustInTimeTranscodeTemplateRequest = models.DeleteJustInTimeTranscodeTemplateRequest;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
 const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
@@ -51,18 +51,20 @@ const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionReque
 const CloneCDNDomainRequest = models.CloneCDNDomainRequest;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const QualityInspectTaskOutput = models.QualityInspectTaskOutput;
-const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const QualityEnhanceTaskInput = models.QualityEnhanceTaskInput;
 const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
 const Origin = models.Origin;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const RebuildMediaTargetInfo = models.RebuildMediaTargetInfo;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
+const ModifyJustInTimeTranscodeTemplateRequest = models.ModifyJustInTimeTranscodeTemplateRequest;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
 const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
+const QualityEnhanceTask = models.QualityEnhanceTask;
 const AiSampleWord = models.AiSampleWord;
 const RuleCacheConfig = models.RuleCacheConfig;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
@@ -129,6 +131,7 @@ const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const JitterConfigureInfoForUpdate = models.JitterConfigureInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
+const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const RemoveWatermarkTask = models.RemoveWatermarkTask;
@@ -155,6 +158,7 @@ const FileDeleteTask = models.FileDeleteTask;
 const ResourceTag = models.ResourceTag;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
 const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
+const SetVodDomainCertificateRequest = models.SetVodDomainCertificateRequest;
 const CreateRebuildMediaTemplateResponse = models.CreateRebuildMediaTemplateResponse;
 const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
 const AiSampleFaceInfo = models.AiSampleFaceInfo;
@@ -171,6 +175,7 @@ const WatermarkTemplate = models.WatermarkTemplate;
 const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
 const ModifyQualityInspectTemplateResponse = models.ModifyQualityInspectTemplateResponse;
 const MaxAge = models.MaxAge;
+const VideoConfigureInfoForUpdate = models.VideoConfigureInfoForUpdate;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
@@ -201,7 +206,7 @@ const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpda
 const DeleteRoundPlayRequest = models.DeleteRoundPlayRequest;
 const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
-const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
+const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
 const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
@@ -214,6 +219,7 @@ const WechatMiniProgramPublishTaskInput = models.WechatMiniProgramPublishTaskInp
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
 const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
 const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
+const WatermarkConfigureInfoForUpdate = models.WatermarkConfigureInfoForUpdate;
 const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
@@ -242,7 +248,7 @@ const RebuildMediaTargetAudioStream = models.RebuildMediaTargetAudioStream;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
-const ReduceMediaBitrateTask = models.ReduceMediaBitrateTask;
+const DescribeJustInTimeTranscodeTemplatesResponse = models.DescribeJustInTimeTranscodeTemplatesResponse;
 const CrashScreenConfigureInfo = models.CrashScreenConfigureInfo;
 const CreateReviewTemplateRequest = models.CreateReviewTemplateRequest;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
@@ -304,7 +310,8 @@ const WebPageRecordInfo = models.WebPageRecordInfo;
 const DescribeCDNUsageDataResponse = models.DescribeCDNUsageDataResponse;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
 const EditMediaTask = models.EditMediaTask;
-const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
+const CreateJustInTimeTranscodeTemplateResponse = models.CreateJustInTimeTranscodeTemplateResponse;
+const WatermarkConfigureData = models.WatermarkConfigureData;
 const DeleteMediaResponse = models.DeleteMediaResponse;
 const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOffsetTemplateResponse;
 const DeleteHeadTailTemplateRequest = models.DeleteHeadTailTemplateRequest;
@@ -332,6 +339,7 @@ const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const EnhanceMediaByTemplateResponse = models.EnhanceMediaByTemplateResponse;
+const CreateJustInTimeTranscodeTemplateRequest = models.CreateJustInTimeTranscodeTemplateRequest;
 const ManageTaskRequest = models.ManageTaskRequest;
 const RoundPlayListItemInfo = models.RoundPlayListItemInfo;
 const ModifyEventConfigRequest = models.ModifyEventConfigRequest;
@@ -378,9 +386,11 @@ const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextRev
 const CopyRightWatermarkInput = models.CopyRightWatermarkInput;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
+const SetVodDomainCertificateResponse = models.SetVodDomainCertificateResponse;
 const ExtractTraceWatermarkTaskOutput = models.ExtractTraceWatermarkTaskOutput;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
+const UserAgentFilter = models.UserAgentFilter;
 const BlackWhiteEdgeConfigureInfo = models.BlackWhiteEdgeConfigureInfo;
 const SortBy = models.SortBy;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
@@ -392,6 +402,7 @@ const IpFilterPathRule = models.IpFilterPathRule;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const ImageScale = models.ImageScale;
+const ModifyJustInTimeTranscodeTemplateResponse = models.ModifyJustInTimeTranscodeTemplateResponse;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
 const SplitMediaTask = models.SplitMediaTask;
 const OthersPrivateAccess = models.OthersPrivateAccess;
@@ -405,6 +416,7 @@ const AiRecognitionTaskObjectResultItem = models.AiRecognitionTaskObjectResultIt
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
 const ModifyVodDomainConfigResponse = models.ModifyVodDomainConfigResponse;
 const MediaSnapshotByTimeOffsetInfo = models.MediaSnapshotByTimeOffsetInfo;
+const VideoConfigureInfo = models.VideoConfigureInfo;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const ModifyRebuildMediaTemplateResponse = models.ModifyRebuildMediaTemplateResponse;
 const CreateEnhanceMediaTemplateRequest = models.CreateEnhanceMediaTemplateRequest;
@@ -494,6 +506,7 @@ const VoiceConfigureInfo = models.VoiceConfigureInfo;
 const ClipTask2017 = models.ClipTask2017;
 const TranscodeTemplate = models.TranscodeTemplate;
 const DescribeCDNUsageDataRequest = models.DescribeCDNUsageDataRequest;
+const JustInTimeTranscodeTemplate = models.JustInTimeTranscodeTemplate;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const DescribeFileAttributesTaskOutput = models.DescribeFileAttributesTaskOutput;
@@ -597,6 +610,7 @@ const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInp
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const InspectMediaQualityRequest = models.InspectMediaQualityRequest;
 const TransitionOperation = models.TransitionOperation;
+const WatermarkConfigureInfo = models.WatermarkConfigureInfo;
 const AiAnalysisTaskFrameTagInput = models.AiAnalysisTaskFrameTagInput;
 const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegmentItem;
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
@@ -682,11 +696,13 @@ const AuthenticationTypeC = models.AuthenticationTypeC;
 const AuthenticationTypeB = models.AuthenticationTypeB;
 const AuthenticationTypeA = models.AuthenticationTypeA;
 const AiContentReviewResult = models.AiContentReviewResult;
+const ReduceMediaBitrateTask = models.ReduceMediaBitrateTask;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const ApplyUploadResponse = models.ApplyUploadResponse;
 const ReviewAudioVideoResponse = models.ReviewAudioVideoResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
+const QualityEnhanceTaskOutput = models.QualityEnhanceTaskOutput;
 const ReviewTemplate = models.ReviewTemplate;
 const DescribeCDNDomainsResponse = models.DescribeCDNDomainsResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
@@ -759,7 +775,9 @@ const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphic
 const ExtractCopyRightWatermarkTask = models.ExtractCopyRightWatermarkTask;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const QualityInspectItem = models.QualityInspectItem;
+const PullUploadTask = models.PullUploadTask;
 const DescribeImageProcessingTemplatesResponse = models.DescribeImageProcessingTemplatesResponse;
+const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const ReviewImageRequest = models.ReviewImageRequest;
 const RebuildVideoInfo = models.RebuildVideoInfo;
@@ -789,8 +807,9 @@ const CreateReviewTemplateResponse = models.CreateReviewTemplateResponse;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const DeleteQualityInspectTemplateRequest = models.DeleteQualityInspectTemplateRequest;
 const ComposeMediaOutput = models.ComposeMediaOutput;
+const DeleteJustInTimeTranscodeTemplateResponse = models.DeleteJustInTimeTranscodeTemplateResponse;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
-const PullUploadTask = models.PullUploadTask;
+const DescribeJustInTimeTranscodeTemplatesRequest = models.DescribeJustInTimeTranscodeTemplatesRequest;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
@@ -1467,25 +1486,14 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * 1. This API is used to get the information of multiple media files. Specifically, the information returned is as follows:
-    1. `basicInfo`: Basic information including the file name, category, playback URL, and thumbnail.
-    2. `metaData`: Metadata including the file size, duration, video stream information, and audio stream information.
-    3. `transcodeInfo`: Transcoding information including the URLs, video stream parameters, and audio stream parameters of transcoding outputs.
-    4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
-    5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
-    6. `imageSpriteInfo`: The information of the image sprites generated.
-    7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
-    8. `keyFrameDescInfo`: The video timestamp information.
-    9. `adaptiveDynamicStreamingInfo`: Adaptive bitrate information including the specifications, encryption type, and formats of the streams.
-    10. `reviewInfo`: Moderation details for audio/video content and thumbnails.
-2. You can specify what information to return.
-     * @param {DescribeMediaInfosRequest} req
-     * @param {function(string, DescribeMediaInfosResponse):void} cb
+     * This API is used to query DRM key information.
+     * @param {DescribeDrmKeyProviderInfoRequest} req
+     * @param {function(string, DescribeDrmKeyProviderInfoResponse):void} cb
      * @public
      */
-    DescribeMediaInfos(req, cb) {
-        let resp = new DescribeMediaInfosResponse();
-        this.request("DescribeMediaInfos", req, resp, cb);
+    DescribeDrmKeyProviderInfo(req, cb) {
+        let resp = new DescribeDrmKeyProviderInfoResponse();
+        this.request("DescribeDrmKeyProviderInfo", req, resp, cb);
     }
 
     /**
@@ -1853,6 +1861,17 @@ This API is used to delete a custom audio/video moderation template.
     RefreshUrlCache(req, cb) {
         let resp = new RefreshUrlCacheResponse();
         this.request("RefreshUrlCache", req, resp, cb);
+    }
+
+    /**
+     * Modify Just In Time Transcode Template.
+     * @param {ModifyJustInTimeTranscodeTemplateRequest} req
+     * @param {function(string, ModifyJustInTimeTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    ModifyJustInTimeTranscodeTemplate(req, cb) {
+        let resp = new ModifyJustInTimeTranscodeTemplateResponse();
+        this.request("ModifyJustInTimeTranscodeTemplate", req, resp, cb);
     }
 
     /**
@@ -2313,14 +2332,14 @@ This API is used to modify a player configuration.
     }
 
     /**
-     * Rebuild media by template.
-     * @param {RebuildMediaByTemplateRequest} req
-     * @param {function(string, RebuildMediaByTemplateResponse):void} cb
+     * Describe Just In Time Transcode Templates.
+     * @param {DescribeJustInTimeTranscodeTemplatesRequest} req
+     * @param {function(string, DescribeJustInTimeTranscodeTemplatesResponse):void} cb
      * @public
      */
-    RebuildMediaByTemplate(req, cb) {
-        let resp = new RebuildMediaByTemplateResponse();
-        this.request("RebuildMediaByTemplate", req, resp, cb);
+    DescribeJustInTimeTranscodeTemplates(req, cb) {
+        let resp = new DescribeJustInTimeTranscodeTemplatesResponse();
+        this.request("DescribeJustInTimeTranscodeTemplates", req, resp, cb);
     }
 
     /**
@@ -2366,6 +2385,17 @@ This API is used to modify a player configuration.
     DescribeQualityInspectTemplates(req, cb) {
         let resp = new DescribeQualityInspectTemplatesResponse();
         this.request("DescribeQualityInspectTemplates", req, resp, cb);
+    }
+
+    /**
+     * Create Just In Time Transcode Template.
+     * @param {CreateJustInTimeTranscodeTemplateRequest} req
+     * @param {function(string, CreateJustInTimeTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    CreateJustInTimeTranscodeTemplate(req, cb) {
+        let resp = new CreateJustInTimeTranscodeTemplateResponse();
+        this.request("CreateJustInTimeTranscodeTemplate", req, resp, cb);
     }
 
     /**
@@ -2507,6 +2537,17 @@ This API is used to query player configurations. It supports pagination.
     DeleteWatermarkTemplate(req, cb) {
         let resp = new DeleteWatermarkTemplateResponse();
         this.request("DeleteWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * Delete Just In Time Transcode Template.
+     * @param {DeleteJustInTimeTranscodeTemplateRequest} req
+     * @param {function(string, DeleteJustInTimeTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    DeleteJustInTimeTranscodeTemplate(req, cb) {
+        let resp = new DeleteJustInTimeTranscodeTemplateResponse();
+        this.request("DeleteJustInTimeTranscodeTemplate", req, resp, cb);
     }
 
     /**
@@ -2658,14 +2699,47 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     }
 
     /**
-     * This API is used to query DRM key information.
-     * @param {DescribeDrmKeyProviderInfoRequest} req
-     * @param {function(string, DescribeDrmKeyProviderInfoResponse):void} cb
+     * Set Vod Domain Certificate.
+     * @param {SetVodDomainCertificateRequest} req
+     * @param {function(string, SetVodDomainCertificateResponse):void} cb
      * @public
      */
-    DescribeDrmKeyProviderInfo(req, cb) {
-        let resp = new DescribeDrmKeyProviderInfoResponse();
-        this.request("DescribeDrmKeyProviderInfo", req, resp, cb);
+    SetVodDomainCertificate(req, cb) {
+        let resp = new SetVodDomainCertificateResponse();
+        this.request("SetVodDomainCertificate", req, resp, cb);
+    }
+
+    /**
+     * 1. This API is used to get the information of multiple media files. Specifically, the information returned is as follows:
+    1. `basicInfo`: Basic information including the file name, category, playback URL, and thumbnail.
+    2. `metaData`: Metadata including the file size, duration, video stream information, and audio stream information.
+    3. `transcodeInfo`: Transcoding information including the URLs, video stream parameters, and audio stream parameters of transcoding outputs.
+    4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
+    5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
+    6. `imageSpriteInfo`: The information of the image sprites generated.
+    7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
+    8. `keyFrameDescInfo`: The video timestamp information.
+    9. `adaptiveDynamicStreamingInfo`: Adaptive bitrate information including the specifications, encryption type, and formats of the streams.
+    10. `reviewInfo`: Moderation details for audio/video content and thumbnails.
+2. You can specify what information to return.
+     * @param {DescribeMediaInfosRequest} req
+     * @param {function(string, DescribeMediaInfosResponse):void} cb
+     * @public
+     */
+    DescribeMediaInfos(req, cb) {
+        let resp = new DescribeMediaInfosResponse();
+        this.request("DescribeMediaInfos", req, resp, cb);
+    }
+
+    /**
+     * Rebuild media by template.
+     * @param {RebuildMediaByTemplateRequest} req
+     * @param {function(string, RebuildMediaByTemplateResponse):void} cb
+     * @public
+     */
+    RebuildMediaByTemplate(req, cb) {
+        let resp = new RebuildMediaByTemplateResponse();
+        this.request("RebuildMediaByTemplate", req, resp, cb);
     }
 
     /**

@@ -746,6 +746,12 @@ class ParamRecord extends  AbstractModel {
          */
         this.ModifyTime = null;
 
+        /**
+         * Indicates whether the parameter is modified successfully.
+         * @type {boolean || null}
+         */
+        this.IsSuccess = null;
+
     }
 
     /**
@@ -761,6 +767,7 @@ class ParamRecord extends  AbstractModel {
         this.NewValue = 'NewValue' in params ? params.NewValue : null;
         this.IsSucess = 'IsSucess' in params ? params.IsSucess : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
 
     }
 }
@@ -829,7 +836,7 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Whether the clone instance and the source instance are in one AZ. Valid values: `true` (yes), `false` (no).
+         * Whether the clone instance and the source instance are in the same AZ. Valid values: `true` (yes), `false` (no).
          * @type {string || null}
          */
         this.IsRemoteZone = null;
@@ -2053,6 +2060,59 @@ class CreateAuditPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * Basic information on the rule template hit by the audit log.
+ * @class
+ */
+class LogRuleTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID. 
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.RuleTemplateId = null;
+
+        /**
+         * Template name.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.RuleTemplateName = null;
+
+        /**
+         * Alarm level. Valid values: 1: Low risk; 2: Medium risk; 3: High risk. 
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Template change status. Valid values: 0: Unchanged; 1: Changed; 2: Deleted.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {number || null}
+         */
+        this.RuleTemplateStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleTemplateId = 'RuleTemplateId' in params ? params.RuleTemplateId : null;
+        this.RuleTemplateName = 'RuleTemplateName' in params ? params.RuleTemplateName : null;
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.RuleTemplateStatus = 'RuleTemplateStatus' in params ? params.RuleTemplateStatus : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParamRecords request structure.
  * @class
  */
@@ -2683,10 +2743,16 @@ class OpenAuditServiceRequest extends  AbstractModel {
         this.AuditRuleFilters = null;
 
         /**
-         * Rule template ID If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+         * Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
          * @type {Array.<string> || null}
          */
         this.RuleTemplateIds = null;
+
+        /**
+         * Audit type. Valid values: true: Record all; false: Record by rules (default value).
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
 
     }
 
@@ -2710,6 +2776,7 @@ class OpenAuditServiceRequest extends  AbstractModel {
             }
         }
         this.RuleTemplateIds = 'RuleTemplateIds' in params ? params.RuleTemplateIds : null;
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
 
     }
 }
@@ -3624,6 +3691,60 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         this.BinlogArchiveCount = 'BinlogArchiveCount' in params ? params.BinlogArchiveCount : null;
         this.BinlogStandbyVolume = 'BinlogStandbyVolume' in params ? params.BinlogStandbyVolume : null;
         this.BinlogStandbyCount = 'BinlogStandbyCount' in params ? params.BinlogStandbyCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceLogToCLS response structure.
+ * @class
+ */
+class DescribeDBInstanceLogToCLSResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configurations of sending error logs to CLS.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {LogToCLSConfig || null}
+         */
+        this.ErrorLog = null;
+
+        /**
+         * Configurations of sending slow logs to CLS.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {LogToCLSConfig || null}
+         */
+        this.SlowLog = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrorLog) {
+            let obj = new LogToCLSConfig();
+            obj.deserialize(params.ErrorLog)
+            this.ErrorLog = obj;
+        }
+
+        if (params.SlowLog) {
+            let obj = new LogToCLSConfig();
+            obj.deserialize(params.SlowLog)
+            this.SlowLog = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6473,6 +6594,90 @@ class ModifyCdbProxyAddressDescResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceLogToCLS request structure.
+ * @class
+ */
+class ModifyDBInstanceLogToCLSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Log type. Valid values: error and slowLog.
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Enabling status. Valid values: ON and OFF.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Indicates whether a log set needs to be created.
+         * @type {boolean || null}
+         */
+        this.CreateLogset = null;
+
+        /**
+         * Log set name if the log set is to be created or ID of the selected existing log set.
+         * @type {string || null}
+         */
+        this.Logset = null;
+
+        /**
+         * Indicates whether a log topic needs to be created.
+         * @type {boolean || null}
+         */
+        this.CreateLogTopic = null;
+
+        /**
+         * Log topic name if the topic is to be created or ID of the selected existing topic.
+         * @type {string || null}
+         */
+        this.LogTopic = null;
+
+        /**
+         * Log topic validity period, which is 30 days by default if not specified.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Indicates whether to create an index when creating the log topic.
+         * @type {boolean || null}
+         */
+        this.CreateIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateLogset = 'CreateLogset' in params ? params.CreateLogset : null;
+        this.Logset = 'Logset' in params ? params.Logset : null;
+        this.CreateLogTopic = 'CreateLogTopic' in params ? params.CreateLogTopic : null;
+        this.LogTopic = 'LogTopic' in params ? params.LogTopic : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.CreateIndex = 'CreateIndex' in params ? params.CreateIndex : null;
+
+    }
+}
+
+/**
  * DeleteTimeWindow response structure.
  * @class
  */
@@ -6741,7 +6946,7 @@ class StopCpuExpandResponse extends  AbstractModel {
         super();
 
         /**
-         * Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+         * Async task ID, which can be passed in by calling the `DescribeAsyncRequest` API for task progress query.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -7146,7 +7351,7 @@ class StartCpuExpandResponse extends  AbstractModel {
         super();
 
         /**
-         * Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+         * Async task ID, which can be passed in by calling the `DescribeAsyncRequest` API for task progress query.
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -7759,6 +7964,51 @@ class StopRollbackRequest extends  AbstractModel {
 }
 
 /**
+ * Configurations of sending slow and error logs of a CDB instance to CLS.
+ * @class
+ */
+class LogToCLSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Enabling status of the feature.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * CLS log set ID.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * Log topic ID.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+
+    }
+}
+
+/**
  * ResetRootAccount request structure.
  * @class
  */
@@ -7950,6 +8200,34 @@ class DescribeCloneListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceLogToCLS request structure.
+ * @class
+ */
+class DescribeDBInstanceLogToCLSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8678,45 +8956,52 @@ class AuditLog extends  AbstractModel {
 
         /**
          * Number of scanned rows
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CheckRows = null;
 
         /**
-         * CPU u200dexecution time (μs)
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * CPU execution time (μs)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CpuTime = null;
 
         /**
          * IO wait time (μs)
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IoWaitTime = null;
 
         /**
          * Lock wait time (μs)
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LockWaitTime = null;
 
         /**
          * Start time, which forms a time accurate to nanoseconds with·`timestamp`.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NsTime = null;
 
         /**
-         * Transaction u200dduration (μs)
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Transaction duration (μs)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TrxLivingTime = null;
+
+        /**
+         * Basic information on the rule template hit by the log.
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {Array.<LogRuleTemplateInfo> || null}
+         */
+        this.TemplateInfo = null;
 
     }
 
@@ -8745,6 +9030,15 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.LockWaitTime = 'LockWaitTime' in params ? params.LockWaitTime : null;
         this.NsTime = 'NsTime' in params ? params.NsTime : null;
         this.TrxLivingTime = 'TrxLivingTime' in params ? params.TrxLivingTime : null;
+
+        if (params.TemplateInfo) {
+            this.TemplateInfo = new Array();
+            for (let z in params.TemplateInfo) {
+                let obj = new LogRuleTemplateInfo();
+                obj.deserialize(params.TemplateInfo[z]);
+                this.TemplateInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -12318,6 +12612,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * IsolateDBInstance request structure.
+ * @class
+ */
+class IsolateDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * Search filter for audit log
  * @class
  */
@@ -12337,13 +12659,13 @@ Include/Exclude, and Include/Exclude (segment dimension) can be used to search f
 `DBName` - Database name.
 
 `Equal to` and `Not equal to` can be used to search for:
-`sqlType` - SQL u200dtype,
+`sqlType` - SQL type,
 `errCode` - Error code,
 `threadId` - Thread ID.
 
 Range search is supported for:
 `execTime`- Execution time (μs),
-`lockWaitTime`u200d - Lock wait time (μs),
+`lockWaitTime` - Lock wait time (μs),
 `ioWaitTime` - IO wait time (μs),
 `trxLivingTime` - Transaction duration (μs),
 `cpuTime` - CPU time (μs),
@@ -12362,7 +12684,7 @@ Range search is supported for:
 `EXC` - Exclude,
 `EQS` - Equal to,
 `NEQ` - Not equal to.
-u200d`RA` - Range
+`RA` - Range
          * @type {string || null}
          */
         this.Compare = null;
@@ -14117,6 +14439,31 @@ class StartCpuExpandRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Scale-out mode. Valid values: auto and
+manual.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Number of CPU cores to increase during manual scale-out. This parameter is required when Type is set to manual.
+         * @type {number || null}
+         */
+        this.ExpandCpu = null;
+
+        /**
+         * Automatic scale-out policy. This parameter is required when Type is set to auto.
+         * @type {AutoStrategy || null}
+         */
+        this.AutoStrategy = null;
+
     }
 
     /**
@@ -14125,6 +14472,15 @@ class StartCpuExpandRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ExpandCpu = 'ExpandCpu' in params ? params.ExpandCpu : null;
+
+        if (params.AutoStrategy) {
+            let obj = new AutoStrategy();
+            obj.deserialize(params.AutoStrategy)
+            this.AutoStrategy = obj;
         }
 
     }
@@ -15525,7 +15881,7 @@ class DescribeAuditLogsResponse extends  AbstractModel {
 
         /**
          * Audit log details
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AuditLog> || null}
          */
         this.Items = null;
@@ -17246,6 +17602,55 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * Automatic scale-out policy for elastic CPU scale-out.
+ * @class
+ */
+class AutoStrategy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CPU utilization threshold (percent value). Valid values: 70, 80, and 90. Automatic scale-out will be triggered when CPU utilization reaches the set threshold.
+         * @type {number || null}
+         */
+        this.ExpandThreshold = null;
+
+        /**
+         * Interval, in seconds. Valid values: 1, 3, 5, 10, 15, and 30. The system backend determines whether automatic scale-out is required at the set interval.
+         * @type {number || null}
+         */
+        this.ExpandPeriod = null;
+
+        /**
+         * CPU utilization threshold (percent value). Valid values: 10, 20, and 30. Automatic scale-in will be triggered when CPU utilization reaches the set threshold.
+         * @type {number || null}
+         */
+        this.ShrinkThreshold = null;
+
+        /**
+         * Interval, in seconds. Valid values: 5, 10, 15, and 30. The system backend determines whether automatic scale-in is required at the set interval.
+         * @type {number || null}
+         */
+        this.ShrinkPeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExpandThreshold = 'ExpandThreshold' in params ? params.ExpandThreshold : null;
+        this.ExpandPeriod = 'ExpandPeriod' in params ? params.ExpandPeriod : null;
+        this.ShrinkThreshold = 'ShrinkThreshold' in params ? params.ShrinkThreshold : null;
+        this.ShrinkPeriod = 'ShrinkPeriod' in params ? params.ShrinkPeriod : null;
+
+    }
+}
+
+/**
  * ModifyAccountMaxUserConnections response structure.
  * @class
  */
@@ -18144,21 +18549,21 @@ class DescribeCpuExpandStrategyResponse extends  AbstractModel {
 
         /**
          * Policy type. Valid values: `auto`, `manual`.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * Manually expanded CPU, which is valid when `Type` is `manual`.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExpandCpu = null;
 
         /**
          * Automatic expansion policy, which is valid when `Type` is `auto`.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AutoStrategy = null;
@@ -18390,18 +18795,18 @@ class DescribeBackupEncryptionStatusRequest extends  AbstractModel {
 }
 
 /**
- * IsolateDBInstance request structure.
+ * ModifyDBInstanceLogToCLS response structure.
  * @class
  */
-class IsolateDBInstanceRequest extends  AbstractModel {
+class ModifyDBInstanceLogToCLSResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -18412,7 +18817,7 @@ class IsolateDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -19066,6 +19471,7 @@ module.exports = {
     OpenAuditServiceResponse: OpenAuditServiceResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     CreateAuditPolicyResponse: CreateAuditPolicyResponse,
+    LogRuleTemplateInfo: LogRuleTemplateInfo,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     StopRollbackResponse: StopRollbackResponse,
     CreateCdbProxyAddressRequest: CreateCdbProxyAddressRequest,
@@ -19094,6 +19500,7 @@ module.exports = {
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     StartReplicationResponse: StartReplicationResponse,
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
+    DescribeDBInstanceLogToCLSResponse: DescribeDBInstanceLogToCLSResponse,
     SwitchDBInstanceMasterSlaveRequest: SwitchDBInstanceMasterSlaveRequest,
     ModifyCdbProxyAddressVipAndVPortRequest: ModifyCdbProxyAddressVipAndVPortRequest,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
@@ -19152,6 +19559,7 @@ module.exports = {
     DeleteAccountsResponse: DeleteAccountsResponse,
     ParamTemplateInfo: ParamTemplateInfo,
     ModifyCdbProxyAddressDescResponse: ModifyCdbProxyAddressDescResponse,
+    ModifyDBInstanceLogToCLSRequest: ModifyDBInstanceLogToCLSRequest,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBackupsResponse: DescribeBackupsResponse,
     CreateAuditPolicyRequest: CreateAuditPolicyRequest,
@@ -19179,11 +19587,13 @@ module.exports = {
     SlaveConfig: SlaveConfig,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     StopRollbackRequest: StopRollbackRequest,
+    LogToCLSConfig: LogToCLSConfig,
     ResetRootAccountRequest: ResetRootAccountRequest,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
     DescribeProxyCustomConfResponse: DescribeProxyCustomConfResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeCloneListResponse: DescribeCloneListResponse,
+    DescribeDBInstanceLogToCLSRequest: DescribeDBInstanceLogToCLSRequest,
     DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
     StartBatchRollbackRequest: StartBatchRollbackRequest,
     OpenDBInstanceEncryptionRequest: OpenDBInstanceEncryptionRequest,
@@ -19258,6 +19668,7 @@ module.exports = {
     BalanceRoGroupLoadResponse: BalanceRoGroupLoadResponse,
     DeviceNetInfo: DeviceNetInfo,
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
+    IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     InstanceAuditLogFilters: InstanceAuditLogFilters,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
     InstanceInfo: InstanceInfo,
@@ -19343,6 +19754,7 @@ module.exports = {
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
+    AutoStrategy: AutoStrategy,
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
     Outbound: Outbound,
     ParamInfo: ParamInfo,
@@ -19369,7 +19781,7 @@ module.exports = {
     AddTimeWindowResponse: AddTimeWindowResponse,
     AdjustCdbProxyResponse: AdjustCdbProxyResponse,
     DescribeBackupEncryptionStatusRequest: DescribeBackupEncryptionStatusRequest,
-    IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    ModifyDBInstanceLogToCLSResponse: ModifyDBInstanceLogToCLSResponse,
     CloseCdbProxyAddressResponse: CloseCdbProxyAddressResponse,
     RollbackTables: RollbackTables,
     LocalBinlogConfigDefault: LocalBinlogConfigDefault,

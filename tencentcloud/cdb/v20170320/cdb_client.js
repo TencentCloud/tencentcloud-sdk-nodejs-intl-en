@@ -50,6 +50,7 @@ const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
+const LogRuleTemplateInfo = models.LogRuleTemplateInfo;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const StopRollbackResponse = models.StopRollbackResponse;
 const CreateCdbProxyAddressRequest = models.CreateCdbProxyAddressRequest;
@@ -78,6 +79,7 @@ const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const StartReplicationResponse = models.StartReplicationResponse;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
+const DescribeDBInstanceLogToCLSResponse = models.DescribeDBInstanceLogToCLSResponse;
 const SwitchDBInstanceMasterSlaveRequest = models.SwitchDBInstanceMasterSlaveRequest;
 const ModifyCdbProxyAddressVipAndVPortRequest = models.ModifyCdbProxyAddressVipAndVPortRequest;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
@@ -136,6 +138,7 @@ const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const ModifyCdbProxyAddressDescResponse = models.ModifyCdbProxyAddressDescResponse;
+const ModifyDBInstanceLogToCLSRequest = models.ModifyDBInstanceLogToCLSRequest;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
@@ -163,11 +166,13 @@ const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const StopRollbackRequest = models.StopRollbackRequest;
+const LogToCLSConfig = models.LogToCLSConfig;
 const ResetRootAccountRequest = models.ResetRootAccountRequest;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
+const DescribeDBInstanceLogToCLSRequest = models.DescribeDBInstanceLogToCLSRequest;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
 const OpenDBInstanceEncryptionRequest = models.OpenDBInstanceEncryptionRequest;
@@ -242,6 +247,7 @@ const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
 const DeviceNetInfo = models.DeviceNetInfo;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const InstanceAuditLogFilters = models.InstanceAuditLogFilters;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
 const InstanceInfo = models.InstanceInfo;
@@ -327,6 +333,7 @@ const DescribeDBFeaturesRequest = models.DescribeDBFeaturesRequest;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const AutoStrategy = models.AutoStrategy;
 const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
 const Outbound = models.Outbound;
 const ParamInfo = models.ParamInfo;
@@ -353,7 +360,7 @@ const TablePrivilege = models.TablePrivilege;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const AdjustCdbProxyResponse = models.AdjustCdbProxyResponse;
 const DescribeBackupEncryptionStatusRequest = models.DescribeBackupEncryptionStatusRequest;
-const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const ModifyDBInstanceLogToCLSResponse = models.ModifyDBInstanceLogToCLSResponse;
 const CloseCdbProxyAddressResponse = models.CloseCdbProxyAddressResponse;
 const RollbackTables = models.RollbackTables;
 const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
@@ -514,6 +521,17 @@ Note:
     StopReplication(req, cb) {
         let resp = new StopReplicationResponse();
         this.request("StopReplication", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable the feature of sending CDB slow and error logs to CLS.
+     * @param {ModifyDBInstanceLogToCLSRequest} req
+     * @param {function(string, ModifyDBInstanceLogToCLSResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceLogToCLS(req, cb) {
+        let resp = new ModifyDBInstanceLogToCLSResponse();
+        this.request("ModifyDBInstanceLogToCLS", req, resp, cb);
     }
 
     /**
@@ -785,17 +803,6 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
-     * @param {DeleteTimeWindowRequest} req
-     * @param {function(string, DeleteTimeWindowResponse):void} cb
-     * @public
-     */
-    DeleteTimeWindow(req, cb) {
-        let resp = new DeleteTimeWindowResponse();
-        this.request("DeleteTimeWindow", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
@@ -1013,7 +1020,7 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API (DescribeSlowLogs) is used to query the slow logs of a TencentDB instance.
+     * The API DescribeSlowLogs is used to obtain slow query logs of a cloud database (CDB) instance. Note: If the size of logs to be queried is too large, the operation may time out. It is recommended that you select a shorter time range, such as one hour.
      * @param {DescribeSlowLogsRequest} req
      * @param {function(string, DescribeSlowLogsResponse):void} cb
      * @public
@@ -1352,6 +1359,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
+     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+     * @param {ModifyAccountMaxUserConnectionsRequest} req
+     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * @public
+     */
+    ModifyAccountMaxUserConnections(req, cb) {
+        let resp = new ModifyAccountMaxUserConnectionsResponse();
+        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeAsyncRequestInfo) is used to query the async task execution result of a TencentDB instance.
      * @param {DescribeAsyncRequestInfoRequest} req
      * @param {function(string, DescribeAsyncRequestInfoResponse):void} cb
@@ -1661,6 +1679,17 @@ Note: To query prices in a specific region, you need to use the access point of 
     }
 
     /**
+     * The API DescribeDBInstanceLogToCLS is used to query the configurations of sending slow and error logs of an instance (InstanceId) filtered by AppId and Region to Cloud Log Service (CLS).
+     * @param {DescribeDBInstanceLogToCLSRequest} req
+     * @param {function(string, DescribeDBInstanceLogToCLSResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceLogToCLS(req, cb) {
+        let resp = new DescribeDBInstanceLogToCLSResponse();
+        this.request("DescribeDBInstanceLogToCLS", req, resp, cb);
+    }
+
+    /**
      * This API is used create a database proxy for a source instance.
      * @param {CreateCdbProxyRequest} req
      * @param {function(string, CreateCdbProxyResponse):void} cb
@@ -1872,14 +1901,14 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
-     * @param {ModifyAccountMaxUserConnectionsRequest} req
-     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
+     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
+     * @param {DeleteTimeWindowRequest} req
+     * @param {function(string, DeleteTimeWindowResponse):void} cb
      * @public
      */
-    ModifyAccountMaxUserConnections(req, cb) {
-        let resp = new ModifyAccountMaxUserConnectionsResponse();
-        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
+    DeleteTimeWindow(req, cb) {
+        let resp = new DeleteTimeWindowResponse();
+        this.request("DeleteTimeWindow", req, resp, cb);
     }
 
 

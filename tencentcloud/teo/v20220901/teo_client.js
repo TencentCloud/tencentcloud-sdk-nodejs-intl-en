@@ -17,7 +17,8 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreatePlanForZoneResponse = models.CreatePlanForZoneResponse;
-const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
+const DeployConfigGroupVersionRequest = models.DeployConfigGroupVersionRequest;
+const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
 const Compression = models.Compression;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
@@ -39,6 +40,7 @@ const OriginRecord = models.OriginRecord;
 const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const AdvancedFilter = models.AdvancedFilter;
 const DeleteApplicationProxyRequest = models.DeleteApplicationProxyRequest;
+const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
 const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
@@ -56,7 +58,7 @@ const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
 const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
 const ExceptUserRuleScope = models.ExceptUserRuleScope;
-const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
+const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
 const OriginInfo = models.OriginInfo;
 const Tag = models.Tag;
@@ -79,7 +81,9 @@ const DescribeOriginProtectionResponse = models.DescribeOriginProtectionResponse
 const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const ExceptConfig = models.ExceptConfig;
 const DeleteOriginGroupRequest = models.DeleteOriginGroupRequest;
+const ImageOptimize = models.ImageOptimize;
 const AliasDomain = models.AliasDomain;
+const WebSocket = models.WebSocket;
 const AclCondition = models.AclCondition;
 const DescribeAliasDomainsRequest = models.DescribeAliasDomainsRequest;
 const SkipCondition = models.SkipCondition;
@@ -100,12 +104,12 @@ const DDoSAttackEvent = models.DDoSAttackEvent;
 const ClientIpHeader = models.ClientIpHeader;
 const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
 const Quic = models.Quic;
-const Ipv6 = models.Ipv6;
-const WebSocket = models.WebSocket;
+const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersionDetailRequest;
+const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
 const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
 const DescribeRulesRequest = models.DescribeRulesRequest;
 const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
-const TopDataRecord = models.TopDataRecord;
+const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const AclConfig = models.AclConfig;
 const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
 const AlgDetectJS = models.AlgDetectJS;
@@ -151,7 +155,7 @@ const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const NoCache = models.NoCache;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
-const SecurityType = models.SecurityType;
+const EnvInfo = models.EnvInfo;
 const IPWhitelist = models.IPWhitelist;
 const DDoS = models.DDoS;
 const CreateZoneRequest = models.CreateZoneRequest;
@@ -159,6 +163,7 @@ const PlanInfo = models.PlanInfo;
 const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
 const Task = models.Task;
 const ModifyRuleResponse = models.ModifyRuleResponse;
+const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
 const AscriptionInfo = models.AscriptionInfo;
 const VerifyOwnershipResponse = models.VerifyOwnershipResponse;
 const RuleItem = models.RuleItem;
@@ -176,7 +181,7 @@ const DescribeDDoSAttackDataRequest = models.DescribeDDoSAttackDataRequest;
 const CachePrefresh = models.CachePrefresh;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisDataResponse;
-const ImageOptimize = models.ImageOptimize;
+const DescribeConfigGroupVersionsResponse = models.DescribeConfigGroupVersionsResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const BotPortraitRule = models.BotPortraitRule;
@@ -190,6 +195,7 @@ const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const TemplateConfig = models.TemplateConfig;
 const TopEntry = models.TopEntry;
+const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const VanityNameServersIps = models.VanityNameServersIps;
 const NsVerification = models.NsVerification;
 const SlowPostConfig = models.SlowPostConfig;
@@ -198,11 +204,13 @@ const ExceptUserRule = models.ExceptUserRule;
 const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResponse;
 const RateLimitUserRule = models.RateLimitUserRule;
 const SubRule = models.SubRule;
+const DeployRecord = models.DeployRecord;
 const CertificateInfo = models.CertificateInfo;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
 const BindSecurityTemplateToEntityRequest = models.BindSecurityTemplateToEntityRequest;
 const TimingDataItem = models.TimingDataItem;
+const ConfigGroupVersionInfo = models.ConfigGroupVersionInfo;
 const CreateApplicationProxyRequest = models.CreateApplicationProxyRequest;
 const CC = models.CC;
 const IntelligenceRuleItem = models.IntelligenceRuleItem;
@@ -238,13 +246,16 @@ const PartialModule = models.PartialModule;
 const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
 const AccelerateType = models.AccelerateType;
+const Ipv6 = models.Ipv6;
 const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const CreateAccelerationDomainRequest = models.CreateAccelerationDomainRequest;
 const FollowOrigin = models.FollowOrigin;
 const DeleteZoneRequest = models.DeleteZoneRequest;
+const SecurityType = models.SecurityType;
 const BotManagedRule = models.BotManagedRule;
 const NormalAction = models.NormalAction;
 const TopDetailData = models.TopDetailData;
+const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
 const DescribeOriginGroupRequest = models.DescribeOriginGroupRequest;
 const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
 const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
@@ -263,7 +274,9 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
 const EntityStatus = models.EntityStatus;
 const RewriteAction = models.RewriteAction;
+const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
+const TopDataRecord = models.TopDataRecord;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const CnameStatus = models.CnameStatus;
 const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
@@ -273,7 +286,7 @@ const RuleNormalActionParams = models.RuleNormalActionParams;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const Resource = models.Resource;
 const PrivateParameter = models.PrivateParameter;
-const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
+const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
 const AclUserRule = models.AclUserRule;
 const Quota = models.Quota;
 const CreateOriginGroupRequest = models.CreateOriginGroupRequest;
@@ -289,8 +302,10 @@ const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
 const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
+const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
 const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
 const AlgDetectResult = models.AlgDetectResult;
+const DescribeDeployHistoryResponse = models.DescribeDeployHistoryResponse;
 const QueryString = models.QueryString;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
 const CreateSharedCNAMERequest = models.CreateSharedCNAMERequest;
@@ -360,9 +375,9 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * When the origin server resource is updated but the node cache TTL has not expired, the user will still access the old resource. To solve this problem, you can use this API to purge the node cache. There are two action options: <li>Delete directly: Delete the node cache directly without any verification. Trigger origin-pull when the resource is requested.</li><li>Mark as expired: Set the node resource as expired, and trigger origin-pull verification when the resource, that is, send an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin responds with 200, the node pulls new resources from the origin and update the cache. If the origin responds with 304, the node does not update the cache</li>.
+     * When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves the latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
 
-For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
+</li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1). </li>
      * @param {CreatePurgeTaskRequest} req
      * @param {function(string, CreatePurgeTaskResponse):void} cb
      * @public
@@ -452,6 +467,17 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
+     * This API is used to query the release history of versions in the production or test environment in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeDeployHistoryRequest} req
+     * @param {function(string, DescribeDeployHistoryResponse):void} cb
+     * @public
+     */
+    DescribeDeployHistory(req, cb) {
+        let resp = new DescribeDeployHistoryResponse();
+        this.request("DescribeDeployHistory", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a rule in the rule engine.
      * @param {CreateRuleRequest} req
      * @param {function(string, CreateRuleResponse):void} cb
@@ -463,14 +489,14 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
-     * This API is used to purchase a plan for a new site.
-     * @param {CreatePlanForZoneRequest} req
-     * @param {function(string, CreatePlanForZoneResponse):void} cb
+     * This API is used to create a new version for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {CreateConfigGroupVersionRequest} req
+     * @param {function(string, CreateConfigGroupVersionResponse):void} cb
      * @public
      */
-    CreatePlanForZone(req, cb) {
-        let resp = new CreatePlanForZoneResponse();
-        this.request("CreatePlanForZone", req, resp, cb);
+    CreateConfigGroupVersion(req, cb) {
+        let resp = new CreateConfigGroupVersionResponse();
+        this.request("CreateConfigGroupVersion", req, resp, cb);
     }
 
     /**
@@ -665,6 +691,17 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
+     * This API is used to query the version list for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeConfigGroupVersionsRequest} req
+     * @param {function(string, DescribeConfigGroupVersionsResponse):void} cb
+     * @public
+     */
+    DescribeConfigGroupVersions(req, cb) {
+        let resp = new DescribeConfigGroupVersionsResponse();
+        this.request("DescribeConfigGroupVersions", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the configuration of an origin group. The original configuration will be overwritten. 
      * @param {ModifyOriginGroupRequest} req
      * @param {function(string, ModifyOriginGroupResponse):void} cb
@@ -695,6 +732,17 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     CreateApplicationProxyRule(req, cb) {
         let resp = new CreateApplicationProxyRuleResponse();
         this.request("CreateApplicationProxyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the time sequence traffic data of the monitoring category in L7. This API is to be discarded. Please use the API <a href="https://intl.cloud.tencent.com/document/product/1552/80648?from_cn_redirect=1">DescribeTimingL7AnalysisData</a>.
+     * @param {DescribeOverviewL7DataRequest} req
+     * @param {function(string, DescribeOverviewL7DataResponse):void} cb
+     * @public
+     */
+    DescribeOverviewL7Data(req, cb) {
+        let resp = new DescribeOverviewL7DataResponse();
+        this.request("DescribeOverviewL7Data", req, resp, cb);
     }
 
     /**
@@ -794,6 +842,17 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     DownloadL7Logs(req, cb) {
         let resp = new DownloadL7LogsResponse();
         this.request("DownloadL7Logs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeEnvironmentsRequest} req
+     * @param {function(string, DescribeEnvironmentsResponse):void} cb
+     * @public
+     */
+    DescribeEnvironments(req, cb) {
+        let resp = new DescribeEnvironmentsResponse();
+        this.request("DescribeEnvironments", req, resp, cb);
     }
 
     /**
@@ -940,14 +999,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to query the time sequence traffic data of the monitoring category in L7. This API is to be discarded. Please use the API <a href="https://intl.cloud.tencent.com/document/product/1552/80648?from_cn_redirect=1">DescribeTimingL7AnalysisData</a>.
-     * @param {DescribeOverviewL7DataRequest} req
-     * @param {function(string, DescribeOverviewL7DataResponse):void} cb
+     * This API is used to query DDoS attack events.
+     * @param {DescribeDDoSAttackEventRequest} req
+     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
      * @public
      */
-    DescribeOverviewL7Data(req, cb) {
-        let resp = new DescribeOverviewL7DataResponse();
-        this.request("DescribeOverviewL7Data", req, resp, cb);
+    DescribeDDoSAttackEvent(req, cb) {
+        let resp = new DescribeDDoSAttackEventResponse();
+        this.request("DescribeDDoSAttackEvent", req, resp, cb);
     }
 
     /**
@@ -983,6 +1042,17 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     DescribeAliasDomains(req, cb) {
         let resp = new DescribeAliasDomainsResponse();
         this.request("DescribeAliasDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an alias domain name.
+     * @param {ModifyAliasDomainRequest} req
+     * @param {function(string, ModifyAliasDomainResponse):void} cb
+     * @public
+     */
+    ModifyAliasDomain(req, cb) {
+        let resp = new ModifyAliasDomainResponse();
+        this.request("ModifyAliasDomain", req, resp, cb);
     }
 
     /**
@@ -1030,14 +1100,14 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
-     * This API is used to query DDoS attack events.
-     * @param {DescribeDDoSAttackEventRequest} req
-     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
+     * This API is used to obtain detailed information about a version in version management mode. The response includes the version ID, description, status, creation time, configuration group information, and the content of the version configuration file. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeConfigGroupVersionDetailRequest} req
+     * @param {function(string, DescribeConfigGroupVersionDetailResponse):void} cb
      * @public
      */
-    DescribeDDoSAttackEvent(req, cb) {
-        let resp = new DescribeDDoSAttackEventResponse();
-        this.request("DescribeDDoSAttackEvent", req, resp, cb);
+    DescribeConfigGroupVersionDetail(req, cb) {
+        let resp = new DescribeConfigGroupVersionDetailResponse();
+        this.request("DescribeConfigGroupVersionDetail", req, resp, cb);
     }
 
     /**
@@ -1074,14 +1144,25 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
-     * This API is used to modify an alias domain name.
-     * @param {ModifyAliasDomainRequest} req
-     * @param {function(string, ModifyAliasDomainResponse):void} cb
+     * This API is used to release versions in version management mode. Users can deploy the version to either the testing environment or the production environment by specifying the EnvId parameter. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DeployConfigGroupVersionRequest} req
+     * @param {function(string, DeployConfigGroupVersionResponse):void} cb
      * @public
      */
-    ModifyAliasDomain(req, cb) {
-        let resp = new ModifyAliasDomainResponse();
-        this.request("ModifyAliasDomain", req, resp, cb);
+    DeployConfigGroupVersion(req, cb) {
+        let resp = new DeployConfigGroupVersionResponse();
+        this.request("DeployConfigGroupVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of application proxies.
+     * @param {DescribeApplicationProxiesRequest} req
+     * @param {function(string, DescribeApplicationProxiesResponse):void} cb
+     * @public
+     */
+    DescribeApplicationProxies(req, cb) {
+        let resp = new DescribeApplicationProxiesResponse();
+        this.request("DescribeApplicationProxies", req, resp, cb);
     }
 
     /**
@@ -1096,14 +1177,14 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
-     * This API is used to query the list of application proxies.
-     * @param {DescribeApplicationProxiesRequest} req
-     * @param {function(string, DescribeApplicationProxiesResponse):void} cb
+     * This API is used to purchase a plan for a new site.
+     * @param {CreatePlanForZoneRequest} req
+     * @param {function(string, CreatePlanForZoneResponse):void} cb
      * @public
      */
-    DescribeApplicationProxies(req, cb) {
-        let resp = new DescribeApplicationProxiesResponse();
-        this.request("DescribeApplicationProxies", req, resp, cb);
+    CreatePlanForZone(req, cb) {
+        let resp = new CreatePlanForZoneResponse();
+        this.request("CreatePlanForZone", req, resp, cb);
     }
 
 

@@ -76,7 +76,10 @@ class AdvancedAuthentication extends  AbstractModel {
         super();
 
         /**
-         * Hotlink protection configuration switch (which can be on or off). If it is enabled, only one mode can and must be configured, while other modes are null.
+         * Whether to enable hot linking protection. Values:
+`on`: Enable
+`off`: Disable
+Only one advanced configuration can be enabled. Set the rests to `null`.
          * @type {string || null}
          */
         this.Switch = null;
@@ -264,8 +267,11 @@ class Revalidate extends  AbstractModel {
         super();
 
         /**
-         * Whether to always forward to the origin server for verification. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable origin-pull authentication. Values:
+`on`: Enable
+`off`: Disable
+
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -401,7 +407,9 @@ class OthersPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable access authentication. Valid values: `on`, `off`.
+         * Whether to enable origin-pull authentication for other object storage origins. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -639,13 +647,23 @@ class Authentication extends  AbstractModel {
         super();
 
         /**
-         * Hotlink protection configuration switch
+         * Whether to enable hot linking protection. Values:
 `on`: Enable
 `off`: Disable
-When this is enabled, one mode needs to be configured. Other modes need to be set to null.
+Only one advanced configuration can be enabled. Set the rests to `null`.
          * @type {string || null}
          */
         this.Switch = null;
+
+        /**
+         * Authentication algorithm. Values:
+`md5`: Calculate the hash using MD5.
+`sha256`: Calculate the hash using SHA-256.
+Default value: `md5`.
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AuthAlgorithm = null;
 
         /**
          * Timestamp hotlink protection mode A configuration
@@ -685,6 +703,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AuthAlgorithm = 'AuthAlgorithm' in params ? params.AuthAlgorithm : null;
 
         if (params.TypeA) {
             let obj = new AuthenticationTypeA();
@@ -795,10 +814,10 @@ class Https extends  AbstractModel {
         super();
 
         /**
-         * HTTPS configuration switch
+         * Whether to enable HTTPS. Values:
 `on`: Enable
 `off`: Disable
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -1065,8 +1084,10 @@ class AvifAdapter extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: `on`, `off`.
-Note: This field may return `null`, indicating that no valid value was found.
+         * Whether to enable `AvifAdapter` for image optimization. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -1166,7 +1187,7 @@ class Compression extends  AbstractModel {
         super();
 
         /**
-         * Smart compression configuration switch
+         * Whether to enable smart compression. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -1247,17 +1268,17 @@ class DomainFilter extends  AbstractModel {
         super();
 
         /**
-         * Filters by the field name, which includes:
+         * Filter filter. Values:
 - `origin`: Primary origin server.
 - `domain`: Domain name.
 - `resourceId`: Domain name ID.
-- `status`: Domain name status. Valid values: `online`, `offline`, and `processing`.
-- `serviceType`: Service type. Valid values: `web`, `download`, `media`, `hybrid` and `dynamic`.
+- `status`: Domain name status. Values: `online`, `offline`, and `processing`.
+- `serviceType`: Service type. Values: `web`, `download`, `media`, `hybrid` and `dynamic`.
 - `projectId`: Project ID.
-- `domainType`: Primary origin server type. Valid values: `cname` (customer origin), `COS` (COS origin), and `third_party` (third-party object storage origin).
-- `fullUrlCache`: Whether to enable full-path cache, which can be `on` or `off`.
-- `https`: Whether to configure HTTPS, which can be `on`, `off` or `processing`.
-- `originPullProtocol`: Origin-pull protocol type, which can be `http`, `follow`, or `https`.
+- `domainType`: Primary origin type. Values: `cname` (customer origin), `COS` (COS origin), `third_party` (third-party object storage origin), and `igtm` (IGTM origin).
+- `fullUrlCache`: Whether to enable path cache. Values: `on`, `off`.
+- `https`: Whether to configure HTTPS. Values: `on`, `off` and `processing`.
+- `originPullProtocol`: Origin-pull protocol type. Value: `http`, `follow`, and `https`.
 - `tagKey`: Tag key.
          * @type {string || null}
          */
@@ -1398,7 +1419,7 @@ class FollowRedirect extends  AbstractModel {
         super();
 
         /**
-         * Origin-pull follow-redirect switch
+         * Whether to enable origin-pull to follow the origin configuration. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -1441,7 +1462,7 @@ class RequestHeader extends  AbstractModel {
         super();
 
         /**
-         * Custom request header configuration switch
+         * Whether to enable custom request headers. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -1508,7 +1529,7 @@ class Referer extends  AbstractModel {
         super();
 
         /**
-         * Referer blacklist/whitelist configuration switch
+         * Whether to enable referer blocklist/allowlist. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -1554,9 +1575,10 @@ class PostSize extends  AbstractModel {
         super();
 
         /**
-         * Limit the size of POST requests. The default value is 32 MB.
-off: Disable
-on: Enable
+         * Maximum size of the file uploaded for streaming via a POST request. Values:
+`on`: Enable. When enabled, it is set to 32 MB by default.
+`off`: Disable
+
          * @type {string || null}
          */
         this.Switch = null;
@@ -1687,10 +1709,10 @@ class CacheConfigNoCache extends  AbstractModel {
         super();
 
         /**
-         * No-cache configuration switch
+         * Whether to enable no-caching at the path. Values:
 `on`: Enable
 `off`: Disable
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -1729,7 +1751,9 @@ class OriginCombine extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the merging pull requests feature. Valid values: `on` and `off`.
+         * Whether to enable origin-pull merge. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -1786,38 +1810,39 @@ class DescribePayTypeResponse extends  AbstractModel {
         super();
 
         /**
-         * Billing modes:
+         * Billing type
 `flux`: Bill by traffic
 `bandwidth`: Bill by bandwidth
 `request`: Bill by the number of requests
-`flux_sep`: Disused field
-`bandwidth_sep`: Disused field
-When you change a daily billing mode to another, and there is network usage on the day of change, this field shows the new billing mode, which takes effect from the next day. If there is no network usage on the day of change, this field shows the new billing mode directly.
+`flux_sep`: Bill by dynamic and static traffic separately 
+`bandwidth_sep`: Bill by dynamic and static bandwidth separately
+If you incur any usage when switching the billing mode, the new mode will take effect the next day. If no usage is incurred, the new mode takes effect immediately.
          * @type {string || null}
          */
         this.PayType = null;
 
         /**
-         * Billing cycle:
+         * Billing cycle
 `day`: Daily
-`month`: Monthly 
-`hour`: Hourly 
+`month`: Monthly
+`hour`: Hourly
          * @type {string || null}
          */
         this.BillingCycle = null;
 
         /**
-         * `monthMax`: Billed by the monthly average of daily peak traffic (monthly settlement)
-`day95`: Billed by the daily 95th percentile bandwidth (monthly settlement)
-`month95`: Billed by the monthly 95th percentile bandwidth (monthly settlement)
-`sum`: Billed by the total traffic/total requests (daily or monthly settlement)
-`max`: Billed by the peak bandwidth (daily settlement)
+         * Statistic data
+`monthMax`: Billed monthly based on the monthly average daily peak traffic
+`day95`: Billed monthly based on the daily 95th percentile bandwidth
+`month95`: Billed monthly based on the monthly 95th percentile bandwidth
+`sum`: Billed daily/monthly based on the total traffic or requests
+`max`: Billed daily based on the peak bandwidth
          * @type {string || null}
          */
         this.StatType = null;
 
         /**
-         * Billing method for regions outside the Chinese mainland:
+         * Regionl billing
 `all`: Unified billing for all regions
 `multiple`: Region-specific billing
          * @type {string || null}
@@ -1825,12 +1850,12 @@ When you change a daily billing mode to another, and there is network usage on t
         this.RegionType = null;
 
         /**
-         * The current billing mode in effect:
-`flux`: Billed by traffic
-`bandwidth`: Billed by bandwidth
-`request`: Billed by the number of requests
-`flux_sep`: Disused field
-`bandwidth_sep`: Disused field
+         * Current billing mode
+`flux`: Bill by traffic
+`bandwidth`: Bill by bandwidth
+`request`: Bill by the number of requests
+`flux_sep`: Bill by dynamic and static traffic separately 
+`bandwidth_sep`: Bill by dynamic and static bandwidth separately
          * @type {string || null}
          */
         this.CurrentPayType = null;
@@ -1970,18 +1995,16 @@ class ListTopDataRequest extends  AbstractModel {
 
         /**
          * Query start time in the format of `yyyy-MM-dd HH:mm:ss`
-Only supports data query at daily granularity. The date in the input parameter is used as the start date.
-If the specified start date is greater than 00:00:00, it will be rounded down to 00:00:00 on the date. For example, if `StartTime` is 2018-09-04 10:40:00, it will be rounded down to 2018-09-04 00:00:00.
-Only data from the last 90 days will be queried.
+Only data queries at the granularity of minutes are supported. The start time is truncated to minutes. For example, if the value of `StartTime` is 2018-09-04 10:40:23, the start time of the data returned is 2018-09-04 10:40:00.
+Only data for the last 90 days can be queried.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
          * Query end time in the format of `yyyy-MM-dd HH:mm:ss`
-Only supports data query at daily granularity. The date in the input parameter is used as the end date.
-If the specified end date is smaller than 23:59:59, it will be rounded up to 23:59:59 on the date. For example, if `EndTime` is 2018-09-05 22:40:00, it will be rounded up to 2018-09-05 23:59:59.
-`EndTime` must be later than or equal to `StartTime`
+Only data queries at the granularity of days are supported. Take the day in the input parameter as the end date, and the data generated on or before 23:59:59 on the end date is returned. For example, if the value of `EndTime` is 2018-09-05 22:40:00, the end time of the data returned is 2018-09-05 23:59:59.
+`EndTime` must be later than or equal to `StartTime`.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2198,10 +2221,11 @@ class DescribePayTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies a service region.
-`mainland`: queries billing methods within Mainland China;
-`overseas`: queries billing methods outside Mainland China.
-Default value: `mainland`.
+         * Specifies the service area.
+`mainland`: Queries billing methods available in the Chinese mainland.
+`overseas`: Queries billing methods available in the regions outside the Chinese mainland.
+`Global`: Queries billing methods available across the globe.
+If it is not specified, it defaults to `mainland`.
          * @type {string || null}
          */
         this.Area = null;
@@ -2211,6 +2235,15 @@ Default value: `mainland`.
          * @type {string || null}
          */
         this.Product = null;
+
+        /**
+         * Specifies resources.
+`flux`: Traffic package
+`https`: HTTPS requests
+It defaults to `flux` if not specified. 
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -2223,6 +2256,7 @@ Default value: `mainland`.
         }
         this.Area = 'Area' in params ? params.Area : null;
         this.Product = 'Product' in params ? params.Product : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2391,7 +2425,9 @@ class RedirectConfig extends  AbstractModel {
         super();
 
         /**
-         * Configuration switch
+         * Whether to enable the custom origin-pull request to follow the host when a 302 code is returned. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -2433,8 +2469,10 @@ class GuetzliAdapter extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable AvifAdapter for image optimization. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -2495,7 +2533,7 @@ class UpdateScdnDomainResponse extends  AbstractModel {
 + Origin-pull domain name configuration
 + Cloud Object Storage (COS) specified as origin server
 + Hot backup origin server specified as a single domain name
-+ Hot backup origin server specified as multiple IPs. Supported port range: 1-65535. At present, weight configuration is not supported.
++ Hot backup origin server specified as multiple IPs. Supported port range: 1-65535. Weight configuration is not supported.
 + Hot backup origin server origin-pull domain name configuration
  * @class
  */
@@ -2504,47 +2542,51 @@ class Origin extends  AbstractModel {
         super();
 
         /**
-         * Primary origin server list
-When modifying the origin server, you need to enter the corresponding OriginType.
-Note: This field may return `null`, indicating that no valid value was found.
+         * List of primary origin servers
+<font color=red>When modifying the origins, you need to specify `OriginType`.</font>
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Origins = null;
 
         /**
          * Primary origin server type
-The following types are supported for input parameters:
-`domain`: domain name
+<font color=red>This field is used together with `Origins`.</font>
+Input:
+`domain`: Domain name
 `domainv6`: IPv6 domain name
-cos: COS origin
+`cos`: COS bucket address
+`third_party`: Third-party object storage origin
+`igtm`: IGTM origin
 `ip`: IP address
-ipv6: origin server list is a single IPv6 address
-`ip_ipv6`: multiple IPv4 addresses and one IPv6 address
+`ipv6`: One IPv6 address
+`ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
 `ip_domain`: IP addresses and domain names (only available to beta users)
 `ip_domainv6`: Multiple IPv4 addresses and one IPv6 domain name
-`ipv6_domain`: multiple IPv6 addresses and one domain name
+`ipv6_domain`: Multiple IPv6 addresses and one domain name
 `ipv6_domainv6`: Multiple IPv6 addresses and one IPv6 domain name
 `domain_domainv6`: Multiple IPv4 domain names and one IPv6 domain name
-`ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
+`ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
 `ip_ipv6_domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name
 `ip_domain_domainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name
 `ipv6_domain_domainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name
 `ip_ipv6_domain_domainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name
-The following types of output parameters are added:
-image: Cloud Infinite origin
-ftp: legacy FTP origin, which is no longer maintained.
-When modifying `Origins`, you need to enter the corresponding OriginType.
-The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Output:
+`image`: Cloud Infinite origin
+`ftp`: FTP origin (disused)
+When modifying `Origins`, you need to specify `OriginType`.
+The IPv6 feature is now only available to beta users. Submit a ticket if you need it.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * It is required when a COS origin or third-party origin is used for acceleration.
-Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.
-If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Origin-pull host header.
+<font color=red>This field is required when `OriginType=cos/third-party`.</font>
+If not specified, this field defaults to the acceleration domain name.
+For a wildcard domain name, the sub-domain name during the access is used by default.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ServerName = null;
@@ -2568,24 +2610,25 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.OriginPullProtocol = null;
 
         /**
-         * Backup origin server list
-When modifying the backup origin server, you need to enter the corresponding BackupOriginType.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * List of secondary origin servers
+<font color=red>This field is used together with `BackupOriginType`.</font>
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BackupOrigins = null;
 
         /**
-         * Backup origin server type, which supports the following types:
+         * Secondary origin type
+<font color=red>This field is used together with `BackupOrigins`.</font>
+Values:
 `domain`: Domain name
 `ip`: IP address
-When modifying BackupOrigins, you need to enter the corresponding BackupOriginType.
-The following backup origin servers are only available to beta users. Submit an application if you want to become a beta user.
+The following secondary origin types are only available to beta users. Submit a ticket to use it.
 `ipv6_domain`: Multiple IPv6 addresses and one domain name
 `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
 `ipv6_domain`: Multiple IPv6 addresses and one domain name
 `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BackupOriginType = null;
@@ -2619,6 +2662,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.PathBasedOrigin = null;
 
         /**
+         * HTTPS origin-pull SNI
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {OriginSni || null}
+         */
+        this.Sni = null;
+
+        /**
          * HTTPS advanced origin-pull configuration
 Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AdvanceHttps || null}
@@ -2626,8 +2676,15 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AdvanceHttps = null;
 
         /**
-         * Object storage vendor
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Third-party object storage service vendor
+<font color=red>This field is required when `OriginType=third-party`.</font>
+Values:
+`aws_s3`: AWS S3
+`ali_oss`: Alibaba Cloud OSS
+`hw_obs`: Huawei Cloud OBS
+`Qiniu_kodo`: Qiniu Kodo
+`Others`: Other object storage service vendors. Only AWS signature-compatible object storage services are supported, such as Tencent Cloud COS for Finance Zone.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginCompany = null;
@@ -2667,6 +2724,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
                 obj.deserialize(params.PathBasedOrigin[z]);
                 this.PathBasedOrigin.push(obj);
             }
+        }
+
+        if (params.Sni) {
+            let obj = new OriginSni();
+            obj.deserialize(params.Sni)
+            this.Sni = obj;
         }
 
         if (params.AdvanceHttps) {
@@ -2880,8 +2943,10 @@ class HeaderKey extends  AbstractModel {
         super();
 
         /**
-         * Whether to use it as part of `CacheKey`
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable Cachekey control. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -3167,8 +3232,10 @@ class UserAgentFilter extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable User-Agent blocklist/allowlist. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -3199,6 +3266,48 @@ Note: This field may return `null`, indicating that no valid value can be obtain
                 this.FilterRules.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyDomainConfig request structure.
+ * @class
+ */
+class ModifyDomainConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Name of the configuration parameter.
+         * @type {string || null}
+         */
+        this.Route = null;
+
+        /**
+         * Value of the configuration parameter. This field is serialized to a JSON string {key:value}, where **key** is fixed to `update`.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Route = 'Route' in params ? params.Route : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -3347,8 +3456,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.FrequencyLimit = null;
 
         /**
-         * Whether to enable IP penalty. Valid values: `on` and `off`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable IP blocking. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PunishmentSwitch = null;
@@ -3382,8 +3493,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Configure = null;
 
         /**
-         * Whether to enable the rule. Values: `on` (enable), `off` (disable).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to enable custom CC rules. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -3668,8 +3781,10 @@ class TpgAdapter extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: `on`, `off`
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable TpgAdapter for image optimization. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -3697,10 +3812,10 @@ class CacheConfigCache extends  AbstractModel {
         super();
 
         /**
-         * Cache configuration switch
-on: enable
-off: disable
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable path cache. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -4016,7 +4131,9 @@ class BotCookie extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `on` and `off`.
+         * Whether to enable bot cookie policies. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -4101,7 +4218,7 @@ class DescribeCdnIpRequest extends  AbstractModel {
 }
 
 /**
- * IPv6 activation configurations, which cannot be changed.
+ * IPv6 origin configuration (changes not allowed).
  * @class
  */
 class Ipv6 extends  AbstractModel {
@@ -4109,8 +4226,10 @@ class Ipv6 extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable an IPv6 address for the origin server. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -4138,7 +4257,9 @@ class WafSubRuleStatus extends  AbstractModel {
         super();
 
         /**
-         * Sub-rule status. Valid values: `on` and `off`.
+         * Whether to enable WAF sub-rules. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -4173,10 +4294,10 @@ class StatusCodeCache extends  AbstractModel {
         super();
 
         /**
-         * Status code cache expiration configuration switch
+         * Whether to enable status code caching. Values:
 `on`: Enable
 `off`: Disable
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -4444,7 +4565,7 @@ Default: `RETURN_200`
 }
 
 /**
- * Specific configuration for domain names outside mainland China. UpdateDomainConfig API only supports modification of some region configurations. A list of differences that may exist for older configurations will be provided for a compatibility check. The supported configuration list is as follows:
+ * Specific configuration for domain names outside the Chinese mainland. The `UpdateDomainConfig` API only supports modification of some region configurations. A list of differences that may exist for older configurations will be provided for a compatibility check. The supported configuration list is as follows:
 + Authentication
 + BandwidthAlert
 + ErrorPage
@@ -5455,7 +5576,7 @@ class UpdateDomainConfigRequest extends  AbstractModel {
         this.ErrorPage = null;
 
         /**
-         * Request header configuration
+         * Origin-pull request header configuration.
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
@@ -6018,7 +6139,7 @@ class CacheConfigFollowOrigin extends  AbstractModel {
         super();
 
         /**
-         * Follow origin server switch configuration
+         * Whether to follow the origin configuration for path cache. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -6580,8 +6701,10 @@ class WebpAdapter extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable WebpAdapter for image optimization. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -6638,7 +6761,9 @@ class QnPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: `on`, `off`.
+         * Whether to enable origin-pull authentication for QiNiu Cloud Kodo. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -6674,6 +6799,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 
 /**
  * WebSocket configuration.
+WebSocket is an ECDN feature. You can enable it in the ECDN domain name configuration.
  * @class
  */
 class WebSocket extends  AbstractModel {
@@ -6681,9 +6807,10 @@ class WebSocket extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
+         * Whether to enable WebSocket connection timeout. Values:
+`on`: When it's enabled, the connection timeout can be configured.
+`off`: When it's disabled, the connection timeout is set to 15 seconds by default.
 
-* WebSocket is an ECDN feature. You can enable it in the ECDN domain name configuration.
          * @type {string || null}
          */
         this.Switch = null;
@@ -6798,7 +6925,9 @@ class ScdnBotConfig extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `on` and `off`.
+         * Whether to enable SCDN bot configuration. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -7773,7 +7902,9 @@ class Hsts extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable. Valid values: on, off.
+         * Whether to enable HSTS. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -8714,7 +8845,7 @@ class RuleEngine extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether to enable rule engine
+         * Whether to enable rule engine. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -8804,8 +8935,10 @@ class Ipv6Access extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable IPv6 access. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -8833,14 +8966,17 @@ class HeuristicCache extends  AbstractModel {
         super();
 
         /**
-         * `on`: Enable
+         * Whether to enable heuristic caching. Values:
+`on`: Enable
 `off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Heuristic cache validity configuration
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {CacheConfig || null}
          */
         this.CacheConfig = null;
@@ -8874,7 +9010,7 @@ class ResponseHeader extends  AbstractModel {
         super();
 
         /**
-         * Custom response header switch
+         * Whether to enable custom response headers. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -9234,7 +9370,9 @@ class ScdnWafConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable WAF. Valid values: `on` and `off`.
+         * Whether to enable SCDN WAF configuration. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -9254,8 +9392,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ErrorPage = null;
 
         /**
-         * Whether to enable Web shell blocking. Valid values: `on` and `off`. Default value: `off`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable webshell blocking. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.WebShellSwitch = null;
@@ -9275,8 +9415,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Level = null;
 
         /**
-         * WAF sub-rule switch
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable WAF sub-rules. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<WafSubRuleStatus> || null}
          */
         this.SubRuleSwitch = null;
@@ -9431,10 +9573,10 @@ class ForceRedirect extends  AbstractModel {
         super();
 
         /**
-         * Access forced redirect configuration switch
+         * Whether to enable forced HTTPS redirects. Values:
 `on`: Enable
 `off`: Disable
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -9597,7 +9739,7 @@ class RangeOriginPull extends  AbstractModel {
         super();
 
         /**
-         * Range GETs configuration switch
+         * Whether to enable Range GETs. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -9661,11 +9803,11 @@ class ViolationUrl extends  AbstractModel {
         this.DownloadUrl = null;
 
         /**
-         * Current status of the resources in violation
+         * Current status of non-compliant resource
 `forbid`: Blocked
 `release`: Unblocked
 `delay`: Processing delayed
-`reject`: Appeal dismissed. The status is still blocked.
+`reject`: Appeal dismissed. It is still in `forbid` status.
 `complain`: Appeal in process
          * @type {string || null}
          */
@@ -9890,7 +10032,7 @@ This feature is in beta test.
 }
 
 /**
- * Specific configuration for domain names in the mainland China by region. UpdateDomainConfig API only supports modification of certain region configurations. A list of differences that may exist for older configurations will be provided for a compatibility check. The supported configuration list is as follows:
+ * Specific configuration for domain names in the Chinese mainland. Specific configuration by region. The `UpdateDomainConfig` API only supports modification of some region configurations. A list of differences that may exist for older configurations will be provided for a compatibility check. The supported configuration list is as follows:
 + Authentication
 + BandwidthAlert
 + ErrorPage
@@ -10402,7 +10544,7 @@ You must specify either a task ID or a starting time.
         this.Limit = null;
 
         /**
-         * Specifies a region for your query:
+         * Specifies a region to query the prefetch records
 `mainland`: Chinese mainland
 `overseas`: Outside the Chinese mainland
 `global`: Globe
@@ -10597,8 +10739,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.FrequencyLimit = null;
 
         /**
-         * Whether to block or redirect requests from suspicious IPs. Valid values: `on` and `off`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable IP blocking. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PunishmentSwitch = null;
@@ -10647,7 +10791,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Access limit configuration for a single IP of a single node. This is disabled by default. 
+ * Access limit configuration for a single IP of a single node. This is disabled by default.
  * @class
  */
 class IpFreqLimit extends  AbstractModel {
@@ -10655,7 +10799,7 @@ class IpFreqLimit extends  AbstractModel {
         super();
 
         /**
-         * IP access limit configuration switch
+         * Whether to enable IP rate limit. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -10775,6 +10919,44 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         }
         this.SuccessUrls = 'SuccessUrls' in params ? params.SuccessUrls : null;
         this.FailUrls = 'FailUrls' in params ? params.FailUrls : null;
+
+    }
+}
+
+/**
+ * HTTPS origin-pull SNI
+ * @class
+ */
+class OriginSni extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable HTTPS origin-pull SNI. Values:
+`on`: Enable
+`off`: Disable
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Origin-pull domain name.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
 
     }
 }
@@ -10971,8 +11153,11 @@ class RuleQueryString extends  AbstractModel {
         super();
 
         /**
-         * Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to include query string parameters. Values:
+`on`: Include `QueryString` as part of `CacheKey`.
+`off`: Do not include `QueryString` as part of `CacheKey`.
+
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -11051,7 +11236,7 @@ class AdvancedScdnAclRule extends  AbstractModel {
         this.LogicOperator = null;
 
         /**
-         * Match value
+         * Matched value.
 When `MatchKey` is `protocol`,
 Values: `HTTP` and `HTTPS`.
 
@@ -11114,11 +11299,10 @@ When `MatchKey` is `ipCountry`, valid values include:
 `AI`: Anguilla
 `VA`: Vatican
 `SK`: Slovakia
-`RU`: Russia
 `GB`: United Kingdom
 `CZ`: Czech Republic
 `UA`: Ukraine
-`TR`: Turkey
+`TR`: Türkiye
 `SI`: Slovenia
 `SE`: Sweden
 `RS`: Republic of Serbia
@@ -11255,7 +11439,7 @@ When `MatchKey` is `ipCountry`, valid values include:
 `AO`: Angola
 
 When MatchKey is `ipArea`, valid values include:
-`OTHER`: other areas
+`OTHER`: Other areas
 `AS`: Asia
 `EU`: Europe
 `AN`: Antarctica
@@ -11504,7 +11688,9 @@ class ScdnConfig extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `on` and `off`.
+         * Whether to enable SCDN CC configuration. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -11611,6 +11797,13 @@ class DomainLog extends  AbstractModel {
          */
         this.LogName = null;
 
+        /**
+         * File size, in bytes.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
     }
 
     /**
@@ -11625,6 +11818,7 @@ class DomainLog extends  AbstractModel {
         this.LogPath = 'LogPath' in params ? params.LogPath : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.LogName = 'LogName' in params ? params.LogName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
 
     }
 }
@@ -11745,7 +11939,9 @@ class BotJavaScript extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `on` and `off`.
+         * Whether to enable bot JS policies. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -11941,8 +12137,10 @@ class SchemeKey extends  AbstractModel {
         super();
 
         /**
-         * Whether to use the scheme as part of the cache key. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable scheme as part of the cache key. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -12005,8 +12203,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AlertPercentage = null;
 
         /**
-         * Whether to enable the alarm threshold trigger. Values: `on`, `off`.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable alerts for cumulative usage limit. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AlertSwitch = null;
@@ -12025,8 +12225,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Cycle = null;
 
         /**
-         * Whether to enable usage limit configuration. Values: `on`, `off`.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable cumulative usage limit. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -12062,7 +12264,9 @@ class RangeOriginPullRule extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether Range GETs is enabled
+         * Whether to enable Range GETs. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -12261,7 +12465,9 @@ class AccessControl extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable request header and request URL access control. Valid values: on, off
+         * Whether to enable access control based on the request header and request URL. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -12469,7 +12675,7 @@ class UrlRedirect extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable URL rewriting
+         * Whether to enable URL rewriting. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -12515,7 +12721,7 @@ class DownstreamCapping extends  AbstractModel {
         super();
 
         /**
-         * Downstream speed configuration switch
+         * Whether to enable downstream speed limit. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -12561,8 +12767,10 @@ class CookieKey extends  AbstractModel {
         super();
 
         /**
-         * Whether to use `Cookie` as part of `CacheKey`. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to include Cookie as part of CacheKey. Values:
+`on`: Yes
+`off`: No
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -12600,10 +12808,10 @@ class RemoteAuthentication extends  AbstractModel {
         super();
 
         /**
-         * Remote authentication switch
-`on`: enable
-`off`: disable
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable remote authentication. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -12782,6 +12990,7 @@ For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 
 /**
  * Shared CNAME configuration
+ShareCname is only available to beta users. Submit a ticket if you need it.
  * @class
  */
 class ShareCname extends  AbstractModel {
@@ -12789,9 +12998,10 @@ class ShareCname extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether to enable Shared CNAME. If it is set to `off`, the default CNAME is used. If it is set to `on`, a shared CNAME is used.
+         * Whether to enable Shared CNAME. Values:
+`on`: Enable. When enabled, it uses a shared CNAME.
+`off`: Disable. When disabled, it uses a default CNAME.
 
-* ShareCname is only available to beta users. To use this feature, please submit a ticket for application.
          * @type {string || null}
          */
         this.Switch = null;
@@ -12855,10 +13065,10 @@ class Seo extends  AbstractModel {
         super();
 
         /**
-         * SEO configuration switch
+         * Whether to enable SEO. Values:
 `on`: Enable
 `off`: Disable
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -12886,7 +13096,7 @@ class BandwidthAlert extends  AbstractModel {
         super();
 
         /**
-         * Specifies whether to enable the bandwidth cap
+         * Whether to enable usage limit. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -12916,10 +13126,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.LastTriggerTime = null;
 
         /**
-         * Indicates whether to trigger alerts when the upper limit is reached
+         * Whether to enable alerts for usage limit. Values:
 `on`: Enable
 `off`: Disable
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AlertSwitch = null;
@@ -13138,6 +13348,34 @@ The specified region to purge should match the domain name’s acceleration regi
 }
 
 /**
+ * ModifyDomainConfig response structure.
+ * @class
+ */
+class ModifyDomainConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateScdnFailedLogTask response structure.
  * @class
  */
@@ -13293,7 +13531,7 @@ class OriginPullOptimization extends  AbstractModel {
         super();
 
         /**
-         * Cross-border origin-pull optimization configuration switch
+         * Whether to enable cross-MLC-border origin-pull optimization. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -13333,10 +13571,10 @@ class ErrorPage extends  AbstractModel {
         super();
 
         /**
-         * Status code redirect configuration switch
+         * Whether to enable status code-based redirection. Values:
 `on`: Enable
 `off`: Disable
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -13605,7 +13843,7 @@ class ResponseHeaderCache extends  AbstractModel {
         super();
 
         /**
-         * Origin server header cache switch
+         * Whether to enable response header caching. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -13805,7 +14043,7 @@ You must specify either a task ID or a starting time for your query.
 }
 
 /**
- *  Access authentication for Huawei Cloud OBS origin
+ * Origin-pull authentication for Huawei Cloud OBS origin
  * @class
  */
 class HwPrivateAccess extends  AbstractModel {
@@ -13813,7 +14051,9 @@ class HwPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable access authentication. Valid values: `on`, `off`.
+         *  Whether to enable origin-pull authentication for Huawei Cloud OBS origin. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -13865,14 +14105,17 @@ class CacheConfig extends  AbstractModel {
         super();
 
         /**
-         * `on`: Enable
+         * Whether to enable heuristic cache validity. Values:
+`on`: Enable
 `off`: Disable
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HeuristicCacheTimeSwitch = null;
 
         /**
          * Unit: Second
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HeuristicCacheTime = null;
@@ -13964,8 +14207,10 @@ class QueryStringKey extends  AbstractModel {
         super();
 
         /**
-         * Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to include `QueryString` as part of `CacheKey`. Values:
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -13978,8 +14223,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Reorder = null;
 
         /**
-         * Includes/excludes query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeCustom`
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to include URL parameters. Values:
+`includeAll`: Include all parameters.
+`excludeAll`: Exclude all parameters.
+`includeCustom`: Include custom parameters.
+`excludeCustom`: Exclude custom parameters.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Action = null;
@@ -14060,10 +14309,10 @@ class MaxAge extends  AbstractModel {
         super();
 
         /**
-         * Browser cache configuration switch
+         * Whether to enable browser caching. Values:
 `on`: Enable
 `off`: Disable
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -14148,7 +14397,9 @@ class OssPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable access authentication. Valid values: `on`, `off`.
+         * Whether to enable OSS origin-pull authentication. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -14302,7 +14553,9 @@ class SecurityConfig extends  AbstractModel {
         super();
 
         /**
-         * on|off
+         * Whether to enable SCDN. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -14453,7 +14706,9 @@ class AwsPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * Switch, which can be set to on or off.
+         * Whether to enable origin-pull authentication for S3 buckets.
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -14582,7 +14837,7 @@ class VideoSeek extends  AbstractModel {
         super();
 
         /**
-         * Video dragging switch
+         * Whether to enable video dragging. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -14669,7 +14924,10 @@ class HttpsBilling extends  AbstractModel {
         super();
 
         /**
-         * HTTPS (enabled by default), which will incur charges.
+         * Whether to enable HTTPS. Values:
+`on`: When it's enabled, HTTPS requests are allowed and incur charges. If not specified, his field uses the default value `on`.
+`off`: When it's disabled, HTTPS requests are blocked.
+
          * @type {string || null}
          */
         this.Switch = null;
@@ -14903,7 +15161,7 @@ class IpFilter extends  AbstractModel {
         super();
 
         /**
-         * IP blocklist/allowlist configuration switch
+         * Whether to enable IP blocklist/allowlist. Values:
 `on`: Enable
 `off`: Disable
          * @type {string || null}
@@ -14977,7 +15235,9 @@ class ScdnAclConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable. Valid values: `on` and `off`.
+         * Whether to enable SCDN access. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -15050,7 +15310,9 @@ class ScdnDdosConfig extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable DDoS defense. Valid values: `on` and `off`.
+         * Whether to enable SCDN DDoS configuration. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -15130,8 +15392,11 @@ class OriginAuthentication extends  AbstractModel {
         super();
 
         /**
-         * Authentication switch, which can be on or off.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable advanced origin-pull authentication. Values:
+`on`: Enable
+`off`: Disable
+
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -15738,8 +16003,10 @@ class CacheTagKey extends  AbstractModel {
         super();
 
         /**
-         * Whether to use `CacheTag` as part of `CacheKey`
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to include `CacheTag` as part of `CacheKey`. Values:
+`on`: Yes
+`off`: No
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -15775,7 +16042,9 @@ class Quic extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable QUIC
+         * Whether to enable QUIC. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -15853,7 +16122,9 @@ class OfflineCache extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable offline cache. Valid values: `on` and `off`.
+         * Whether to enable offline caching. Values:
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -16127,6 +16398,7 @@ module.exports = {
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
     UserAgentFilter: UserAgentFilter,
+    ModifyDomainConfigRequest: ModifyDomainConfigRequest,
     DescribeCdnOriginIpRequest: DescribeCdnOriginIpRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
@@ -16220,6 +16492,7 @@ module.exports = {
     IpFreqLimit: IpFreqLimit,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
+    OriginSni: OriginSni,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
     DescribeMapInfoRequest: DescribeMapInfoRequest,
@@ -16260,6 +16533,7 @@ module.exports = {
     ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
+    ModifyDomainConfigResponse: ModifyDomainConfigResponse,
     CreateScdnFailedLogTaskResponse: CreateScdnFailedLogTaskResponse,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,

@@ -17,6 +17,43 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Describes how to transform data
+
+ * @class
+ */
+class Transform extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Describes how to transform data
+         * @type {Array.<OutputStructParam> || null}
+         */
+        this.OutputStructs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OutputStructs) {
+            this.OutputStructs = new Array();
+            for (let z in params.OutputStructs) {
+                let obj = new OutputStructParam();
+                obj.deserialize(params.OutputStructs[z]);
+                this.OutputStructs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ListConnections response structure.
  * @class
  */
@@ -529,31 +566,54 @@ class DeleteTargetResponse extends  AbstractModel {
 }
 
 /**
- * Describes how to extract data
+ * DescribeLogTagValue request structure.
  * @class
  */
-class Extraction extends  AbstractModel {
+class DescribeLogTagValueRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * JsonPath, which will be `$.` by default if not specified
-         * @type {string || null}
+         * The query start time.
+         * @type {number || null}
          */
-        this.ExtractionInputPath = null;
+        this.StartTime = null;
 
         /**
-         * Valid values: TEXT/JSON
-         * @type {string || null}
+         * The query end time.
+         * @type {number || null}
          */
-        this.Format = null;
+        this.EndTime = null;
 
         /**
-         * Only required for `Text`
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {TextParams || null}
+         * Event bus ID
+         * @type {string || null}
          */
-        this.TextParams = null;
+        this.EventBusId = null;
+
+        /**
+         * Aggregation field
+         * @type {string || null}
+         */
+        this.GroupField = null;
+
+        /**
+         * Number of pages.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Logs returned per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter conditions
+         * @type {Array.<LogFilter> || null}
+         */
+        this.Filter = null;
 
     }
 
@@ -564,13 +624,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ExtractionInputPath = 'ExtractionInputPath' in params ? params.ExtractionInputPath : null;
-        this.Format = 'Format' in params ? params.Format : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
+        this.GroupField = 'GroupField' in params ? params.GroupField : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
-        if (params.TextParams) {
-            let obj = new TextParams();
-            obj.deserialize(params.TextParams)
-            this.TextParams = obj;
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new LogFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
         }
 
     }
@@ -1315,18 +1382,31 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UpdateTransformation response structure.
+ * Log filters
  * @class
  */
-class UpdateTransformationResponse extends  AbstractModel {
+class LogFilters extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Field name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Key = null;
+
+        /**
+         * Operator. Values: `eq` (Equal to), `neq` (Not equal to), `like`, `not like`, `lt` (Smaller than), `lte` (Smaller than and equal to), `gt` (Greater than), `gte` (Greater than and equal to), `range` (Within the range) and `norange` (Not in the range).
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Filter value. Two values should be entered for range operation, separated by a comma (,)
+
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -1337,7 +1417,9 @@ class UpdateTransformationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1894,6 +1976,74 @@ class EtlFilter extends  AbstractModel {
 }
 
 /**
+ * SearchLog response structure.
+ * @class
+ */
+class SearchLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of logs
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Number of entries per page.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Log searching results
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<SearchLogResult> || null}
+         */
+        this.Results = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Page = 'Page' in params ? params.Page : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new SearchLogResult();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CheckTransformation response structure.
  * @class
  */
@@ -2119,6 +2269,91 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.DTSParams)
             this.DTSParams = obj;
         }
+
+    }
+}
+
+/**
+ * Retails of returned logs
+ * @class
+ */
+class SearchLogResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log reported time
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Log details
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Event source
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * The event type.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Event matching rule
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleIds = null;
+
+        /**
+         * The instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Subject = null;
+
+        /**
+         * The region.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Event status
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RuleIds = 'RuleIds' in params ? params.RuleIds : null;
+        this.Subject = 'Subject' in params ? params.Subject : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2918,18 +3153,31 @@ class DeleteTransformationRequest extends  AbstractModel {
 }
 
 /**
- * GetEventBus request structure.
+ * Describes how to extract data
  * @class
  */
-class GetEventBusRequest extends  AbstractModel {
+class Extraction extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event bus ID
+         * JsonPath, which will be `$.` by default if not specified
          * @type {string || null}
          */
-        this.EventBusId = null;
+        this.ExtractionInputPath = null;
+
+        /**
+         * Valid values: TEXT/JSON
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Only required for `Text`
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {TextParams || null}
+         */
+        this.TextParams = null;
 
     }
 
@@ -2940,7 +3188,14 @@ class GetEventBusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
+        this.ExtractionInputPath = 'ExtractionInputPath' in params ? params.ExtractionInputPath : null;
+        this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.TextParams) {
+            let obj = new TextParams();
+            obj.deserialize(params.TextParams)
+            this.TextParams = obj;
+        }
 
     }
 }
@@ -2997,6 +3252,34 @@ class UpdateConnectionRequest extends  AbstractModel {
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.ConnectionName = 'ConnectionName' in params ? params.ConnectionName : null;
+
+    }
+}
+
+/**
+ * GetEventBus request structure.
+ * @class
+ */
+class GetEventBusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event bus ID
+         * @type {string || null}
+         */
+        this.EventBusId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
 
     }
 }
@@ -3079,6 +3362,70 @@ class CkafkaParams extends  AbstractModel {
 }
 
 /**
+ * DescribeLogTagValue response structure.
+ * @class
+ */
+class DescribeLogTagValueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query searching metric value. 
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Results = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Results = 'Results' in params ? params.Results : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateTransformation response structure.
+ * @class
+ */
+class UpdateTransformationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * `Transform` output parameter
  * @class
  */
@@ -3121,19 +3468,60 @@ class OutputStructParam extends  AbstractModel {
 }
 
 /**
- * Describes how to transform data
-
+ * SearchLog request structure.
  * @class
  */
-class Transform extends  AbstractModel {
+class SearchLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Describes how to transform data
-         * @type {Array.<OutputStructParam> || null}
+         * Query start time (UNIX in ms)
+         * @type {number || null}
          */
-        this.OutputStructs = null;
+        this.StartTime = null;
+
+        /**
+         * Query end time (UNIX in ms)
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Event bus ID
+         * @type {string || null}
+         */
+        this.EventBusId = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Logs returned per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter conditions
+         * @type {Array.<LogFilter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * Sorting array
+         * @type {Array.<string> || null}
+         */
+        this.OrderFields = null;
+
+        /**
+         * Sorting order. Values: `asc` (earliest first); `desc` (latest first)
+         * @type {string || null}
+         */
+        this.OrderBy = null;
 
     }
 
@@ -3144,15 +3532,22 @@ class Transform extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
-        if (params.OutputStructs) {
-            this.OutputStructs = new Array();
-            for (let z in params.OutputStructs) {
-                let obj = new OutputStructParam();
-                obj.deserialize(params.OutputStructs[z]);
-                this.OutputStructs.push(obj);
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new LogFilter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
             }
         }
+        this.OrderFields = 'OrderFields' in params ? params.OrderFields : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }
@@ -3327,6 +3722,71 @@ class UpdateTargetRequest extends  AbstractModel {
 }
 
 /**
+ * Definition of filter parameters of log query-related API
+ * @class
+ */
+class LogFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Field name
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Operator. Values: `eq` (Equal to), `neq` (Not equal to), `like`, `not like`, `lt` (Smaller than), `lte` (Smaller than and equal to), `gt` (Greater than), `gte` (Greater than and equal to), `range` (Within the range) and `norange` (Not in the range).
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Filter value. Two values should be entered for range operation, separated by a comma (,).
+
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * The logical relationship between conditions. Values: `AND` and `OR`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * LogFilters array
+         * @type {Array.<LogFilters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new LogFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * UpdateEventBus response structure.
  * @class
  */
@@ -3390,6 +3850,7 @@ class APIGWParams extends  AbstractModel {
 }
 
 module.exports = {
+    Transform: Transform,
     ListConnectionsResponse: ListConnectionsResponse,
     ESTargetParams: ESTargetParams,
     GetEventBusResponse: GetEventBusResponse,
@@ -3400,7 +3861,7 @@ module.exports = {
     UpdateRuleResponse: UpdateRuleResponse,
     CreateTargetRequest: CreateTargetRequest,
     DeleteTargetResponse: DeleteTargetResponse,
-    Extraction: Extraction,
+    DescribeLogTagValueRequest: DescribeLogTagValueRequest,
     TargetBrief: TargetBrief,
     DTSParams: DTSParams,
     ListRulesResponse: ListRulesResponse,
@@ -3415,7 +3876,7 @@ module.exports = {
     ListRulesRequest: ListRulesRequest,
     SCFParams: SCFParams,
     DeadLetterConfig: DeadLetterConfig,
-    UpdateTransformationResponse: UpdateTransformationResponse,
+    LogFilters: LogFilters,
     UpdateEventBusRequest: UpdateEventBusRequest,
     CreateEventBusRequest: CreateEventBusRequest,
     UpdateRuleRequest: UpdateRuleRequest,
@@ -3427,11 +3888,13 @@ module.exports = {
     Rule: Rule,
     CreateTransformationRequest: CreateTransformationRequest,
     EtlFilter: EtlFilter,
+    SearchLogResponse: SearchLogResponse,
     CheckTransformationResponse: CheckTransformationResponse,
     ListTargetsResponse: ListTargetsResponse,
     ListEventBusesResponse: ListEventBusesResponse,
     CheckRuleResponse: CheckRuleResponse,
     ConnectionDescription: ConnectionDescription,
+    SearchLogResult: SearchLogResult,
     CkafkaDeliveryParams: CkafkaDeliveryParams,
     UpdateTargetResponse: UpdateTargetResponse,
     CreateConnectionRequest: CreateConnectionRequest,
@@ -3450,16 +3913,20 @@ module.exports = {
     TargetDescription: TargetDescription,
     DeleteTransformationResponse: DeleteTransformationResponse,
     DeleteTransformationRequest: DeleteTransformationRequest,
-    GetEventBusRequest: GetEventBusRequest,
+    Extraction: Extraction,
     UpdateConnectionRequest: UpdateConnectionRequest,
+    GetEventBusRequest: GetEventBusRequest,
     DeleteTargetRequest: DeleteTargetRequest,
     CkafkaParams: CkafkaParams,
+    DescribeLogTagValueResponse: DescribeLogTagValueResponse,
+    UpdateTransformationResponse: UpdateTransformationResponse,
     OutputStructParam: OutputStructParam,
-    Transform: Transform,
+    SearchLogRequest: SearchLogRequest,
     CheckTransformationRequest: CheckTransformationRequest,
     UpdateConnectionResponse: UpdateConnectionResponse,
     GetRuleRequest: GetRuleRequest,
     UpdateTargetRequest: UpdateTargetRequest,
+    LogFilter: LogFilter,
     UpdateEventBusResponse: UpdateEventBusResponse,
     APIGWParams: APIGWParams,
 

@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const Transform = models.Transform;
 const ListConnectionsResponse = models.ListConnectionsResponse;
 const ESTargetParams = models.ESTargetParams;
 const GetEventBusResponse = models.GetEventBusResponse;
@@ -26,7 +27,7 @@ const DeleteRuleRequest = models.DeleteRuleRequest;
 const UpdateRuleResponse = models.UpdateRuleResponse;
 const CreateTargetRequest = models.CreateTargetRequest;
 const DeleteTargetResponse = models.DeleteTargetResponse;
-const Extraction = models.Extraction;
+const DescribeLogTagValueRequest = models.DescribeLogTagValueRequest;
 const TargetBrief = models.TargetBrief;
 const DTSParams = models.DTSParams;
 const ListRulesResponse = models.ListRulesResponse;
@@ -41,7 +42,7 @@ const Target = models.Target;
 const ListRulesRequest = models.ListRulesRequest;
 const SCFParams = models.SCFParams;
 const DeadLetterConfig = models.DeadLetterConfig;
-const UpdateTransformationResponse = models.UpdateTransformationResponse;
+const LogFilters = models.LogFilters;
 const UpdateEventBusRequest = models.UpdateEventBusRequest;
 const CreateEventBusRequest = models.CreateEventBusRequest;
 const UpdateRuleRequest = models.UpdateRuleRequest;
@@ -53,11 +54,13 @@ const GetTransformationResponse = models.GetTransformationResponse;
 const Rule = models.Rule;
 const CreateTransformationRequest = models.CreateTransformationRequest;
 const EtlFilter = models.EtlFilter;
+const SearchLogResponse = models.SearchLogResponse;
 const CheckTransformationResponse = models.CheckTransformationResponse;
 const ListTargetsResponse = models.ListTargetsResponse;
 const ListEventBusesResponse = models.ListEventBusesResponse;
 const CheckRuleResponse = models.CheckRuleResponse;
 const ConnectionDescription = models.ConnectionDescription;
+const SearchLogResult = models.SearchLogResult;
 const CkafkaDeliveryParams = models.CkafkaDeliveryParams;
 const UpdateTargetResponse = models.UpdateTargetResponse;
 const CreateConnectionRequest = models.CreateConnectionRequest;
@@ -76,16 +79,20 @@ const CreateRuleResponse = models.CreateRuleResponse;
 const TargetDescription = models.TargetDescription;
 const DeleteTransformationResponse = models.DeleteTransformationResponse;
 const DeleteTransformationRequest = models.DeleteTransformationRequest;
-const GetEventBusRequest = models.GetEventBusRequest;
+const Extraction = models.Extraction;
 const UpdateConnectionRequest = models.UpdateConnectionRequest;
+const GetEventBusRequest = models.GetEventBusRequest;
 const DeleteTargetRequest = models.DeleteTargetRequest;
 const CkafkaParams = models.CkafkaParams;
+const DescribeLogTagValueResponse = models.DescribeLogTagValueResponse;
+const UpdateTransformationResponse = models.UpdateTransformationResponse;
 const OutputStructParam = models.OutputStructParam;
-const Transform = models.Transform;
+const SearchLogRequest = models.SearchLogRequest;
 const CheckTransformationRequest = models.CheckTransformationRequest;
 const UpdateConnectionResponse = models.UpdateConnectionResponse;
 const GetRuleRequest = models.GetRuleRequest;
 const UpdateTargetRequest = models.UpdateTargetRequest;
+const LogFilter = models.LogFilter;
 const UpdateEventBusResponse = models.UpdateEventBusResponse;
 const APIGWParams = models.APIGWParams;
 
@@ -222,14 +229,14 @@ class EbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update an event rule.
-     * @param {UpdateRuleRequest} req
-     * @param {function(string, UpdateRuleResponse):void} cb
+     * This API is used to update an event bus.
+     * @param {UpdateEventBusRequest} req
+     * @param {function(string, UpdateEventBusResponse):void} cb
      * @public
      */
-    UpdateRule(req, cb) {
-        let resp = new UpdateRuleResponse();
-        this.request("UpdateRule", req, resp, cb);
+    UpdateEventBus(req, cb) {
+        let resp = new UpdateEventBusResponse();
+        this.request("UpdateEventBus", req, resp, cb);
     }
 
     /**
@@ -244,14 +251,25 @@ class EbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update an event bus.
-     * @param {UpdateEventBusRequest} req
-     * @param {function(string, UpdateEventBusResponse):void} cb
+     * This API is used to update an event rule.
+     * @param {UpdateRuleRequest} req
+     * @param {function(string, UpdateRuleResponse):void} cb
      * @public
      */
-    UpdateEventBus(req, cb) {
-        let resp = new UpdateEventBusResponse();
-        this.request("UpdateEventBus", req, resp, cb);
+    UpdateRule(req, cb) {
+        let resp = new UpdateRuleResponse();
+        this.request("UpdateRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query log searching metric values.
+     * @param {DescribeLogTagValueRequest} req
+     * @param {function(string, DescribeLogTagValueResponse):void} cb
+     * @public
+     */
+    DescribeLogTagValue(req, cb) {
+        let resp = new DescribeLogTagValueResponse();
+        this.request("DescribeLogTagValue", req, resp, cb);
     }
 
     /**
@@ -285,6 +303,17 @@ class EbClient extends AbstractClient {
     GetRule(req, cb) {
         let resp = new GetRuleResponse();
         this.request("GetRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query logs. 
+     * @param {SearchLogRequest} req
+     * @param {function(string, SearchLogResponse):void} cb
+     * @public
+     */
+    SearchLog(req, cb) {
+        let resp = new SearchLogResponse();
+        this.request("SearchLog", req, resp, cb);
     }
 
     /**

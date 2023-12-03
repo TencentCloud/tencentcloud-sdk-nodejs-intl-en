@@ -59,48 +59,36 @@ class CreatePlanForZoneResponse extends  AbstractModel {
 }
 
 /**
- * DownloadL7Logs request structure.
+ * DeployConfigGroupVersion request structure.
  * @class
  */
-class DownloadL7LogsRequest extends  AbstractModel {
+class DeployConfigGroupVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The start time.
+         * Zone ID.
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.ZoneId = null;
 
         /**
-         * The end time.
+         * Environment ID. Please specify the environment ID to which the version should be released.
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.EnvId = null;
 
         /**
-         * ZoneId set. This parameter is required.
-         * @type {Array.<string> || null}
+         * Version information required for release. Multiple versions of different configuration groups can be modified simultaneously, while each group allows modifying only one version at a time.
+         * @type {Array.<ConfigGroupVersionInfo> || null}
          */
-        this.ZoneIds = null;
+        this.ConfigGroupVersionInfos = null;
 
         /**
-         * List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-         * @type {Array.<string> || null}
+         * Change description. It is used to describe the content and reasons for this change. A maximum of 100 characters are supported.
+         * @type {string || null}
          */
-        this.Domains = null;
-
-        /**
-         * Limit on paginated queries. Default value: 20. Maximum value: 300.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * The page offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Description = null;
 
     }
 
@@ -111,12 +99,46 @@ class DownloadL7LogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
-        this.Domains = 'Domains' in params ? params.Domains : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+        if (params.ConfigGroupVersionInfos) {
+            this.ConfigGroupVersionInfos = new Array();
+            for (let z in params.ConfigGroupVersionInfos) {
+                let obj = new ConfigGroupVersionInfo();
+                obj.deserialize(params.ConfigGroupVersionInfos[z]);
+                this.ConfigGroupVersionInfos.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeEnvironments request structure.
+ * @class
+ */
+class DescribeEnvironmentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -1341,6 +1363,53 @@ class DeleteApplicationProxyRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeConfigGroupVersionDetail response structure.
+ * @class
+ */
+class DescribeConfigGroupVersionDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version information.
+         * @type {ConfigGroupVersionInfo || null}
+         */
+        this.ConfigGroupVersionInfo = null;
+
+        /**
+         * Version file content. It is returned in JSON format.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConfigGroupVersionInfo) {
+            let obj = new ConfigGroupVersionInfo();
+            obj.deserialize(params.ConfigGroupVersionInfo)
+            this.ConfigGroupVersionInfo = obj;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details of the origin.
  * @class
  */
@@ -2464,45 +2533,31 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * ModifyAliasDomain request structure.
+ * DescribeDeployHistory request structure.
  * @class
  */
-class ModifyAliasDomainRequest extends  AbstractModel {
+class DescribeDeployHistoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
+         * Zone ID.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The alias domain name.
+         * Environment ID.
          * @type {string || null}
          */
-        this.AliasName = null;
+        this.EnvId = null;
 
         /**
-         * The target domain name.
-         * @type {string || null}
+         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+<li>record-id: Filter by release record ID. </li>
+         * @type {Array.<AdvancedFilter> || null}
          */
-        this.TargetName = null;
-
-        /**
-         * Certificate configuration. Values:
-<li>`none`: Off</li>
-<li>`hosting`: Managed SSL certificate</li>
-<li>`apply`: Free certificate</li>The original configuration will apply if this field is not specified.
-         * @type {string || null}
-         */
-        this.CertType = null;
-
-        /**
-         * The certificate ID. This field is required when `CertType=hosting`.
-         * @type {Array.<string> || null}
-         */
-        this.CertId = null;
+        this.Filters = null;
 
     }
 
@@ -2514,10 +2569,16 @@ class ModifyAliasDomainRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.AliasName = 'AliasName' in params ? params.AliasName : null;
-        this.TargetName = 'TargetName' in params ? params.TargetName : null;
-        this.CertType = 'CertType' in params ? params.CertType : null;
-        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -2907,7 +2968,7 @@ class ModifyZoneRequest extends  AbstractModel {
         /**
          * Access mode of the site. Values:
 <li> `full`: Access through a name server.</li>
-<li> `partial`: Access through a CNAME u200drecord. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
+<li> `partial`: Access through a CNAME record. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
          * @type {string || null}
          */
         this.Type = null;
@@ -3519,6 +3580,36 @@ class DeleteOriginGroupRequest extends  AbstractModel {
 }
 
 /**
+ * Image optimization configuration.
+ * @class
+ */
+class ImageOptimize extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable configuration. Values: 
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Information of the alias domain name
  * @class
  */
@@ -3591,6 +3682,43 @@ class AliasDomain extends  AbstractModel {
         this.ForbidMode = 'ForbidMode' in params ? params.ForbidMode : null;
         this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
         this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
+
+    }
+}
+
+/**
+ * WebSocket configuration
+ * @class
+ */
+class WebSocket extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable WebSocket connection timeout. Values:
+<li>`on`: The field "Timeout" can be configured.</li>
+<li>`off`: The field "Timeout" is fixed to 15 seconds.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The timeout period in seconds. Maximum value: 120.
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
     }
 }
@@ -4154,7 +4282,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 
         /**
          * Rule tag.
-Note: u200dThis field may returnu200d·`nullu200d`, indicating that no valid values can be obtained.
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleTag = null;
@@ -4248,9 +4376,8 @@ The original configuration will apply if this field is not specified.
         this.SessionPersistTime = null;
 
         /**
-         * The proxy type. Values:
-<li>`hostname`: The proxy is created by subdomain name.</li>
-<li>`instance`: The proxy is created by instance.</li>If not specified, this field uses the default value `instance`.
+         * L4 proxy mode. Valid values: 
+<li>instance: Instance mode. </li>If it is not specified, instance is used by default.
          * @type {string || null}
          */
         this.ProxyType = null;
@@ -5062,20 +5189,24 @@ class Quic extends  AbstractModel {
 }
 
 /**
- * The IPv6 access configuration.
+ * DescribeConfigGroupVersionDetail request structure.
  * @class
  */
-class Ipv6 extends  AbstractModel {
+class DescribeConfigGroupVersionDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable IPv6 access. Valid values: 
-<li>`on`: Enable;</li>
-<li>`off`: Disable.</li>
+         * Zone ID.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.ZoneId = null;
+
+        /**
+         * Version ID.
+         * @type {string || null}
+         */
+        this.VersionId = null;
 
     }
 
@@ -5086,32 +5217,37 @@ class Ipv6 extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
 
 /**
- * WebSocket configuration
+ * DownloadL7Logs response structure.
  * @class
  */
-class WebSocket extends  AbstractModel {
+class DownloadL7LogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable WebSocket connection timeout. Values:
-<li>`on`: The field "Timeout" can be configured.</li>
-<li>`off`: The field "Timeout" is fixed to 15 seconds.</li>
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * The timeout period in seconds. Maximum value: 120.
+         * Total number of query results.
          * @type {number || null}
          */
-        this.Timeout = null;
+        this.TotalCount = null;
+
+        /**
+         * List of L7 logs.
+         * @type {Array.<L7OfflineLog> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5122,8 +5258,17 @@ class WebSocket extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new L7OfflineLog();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5316,24 +5461,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The top-ranked data record
+ * DownloadL7Logs request structure.
  * @class
  */
-class TopDataRecord extends  AbstractModel {
+class DownloadL7LogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The query dimension value.
+         * The start time.
          * @type {string || null}
          */
-        this.TypeKey = null;
+        this.StartTime = null;
 
         /**
-         * Top data rankings
-         * @type {Array.<TopDetailData> || null}
+         * The end time.
+         * @type {string || null}
          */
-        this.DetailData = null;
+        this.EndTime = null;
+
+        /**
+         * ZoneId set. This parameter is required.
+         * @type {Array.<string> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * Limit on paginated queries. Default value: 20. Maximum value: 300.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The page offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -5344,16 +5513,12 @@ class TopDataRecord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TypeKey = 'TypeKey' in params ? params.TypeKey : null;
-
-        if (params.DetailData) {
-            this.DetailData = new Array();
-            for (let z in params.DetailData) {
-                let obj = new TopDetailData();
-                obj.deserialize(params.DetailData[z]);
-                this.DetailData.push(obj);
-            }
-        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -6843,7 +7008,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Standard debugging configuration.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {StandardDebug || null}
          */
         this.StandardDebug = null;
@@ -7108,10 +7273,10 @@ class DescribeOverviewL7DataRequest extends  AbstractModel {
 
         /**
          * Filtering condition. The detailed filtering condition key values are as follows: 
-<li>socket<br>    Filter based on [<strong>HTTP protocol type</strong>]. <br>    Corresponding value options: <br>    HTTP: HTTP protocol；<br>    HTTPS: HTTPS protocol;<br>    QUIC: QUIC protocol. </li>
-<li>domains<br>    Filter based on [<strong>domain name</strong>]. </li>
-<li>tagKey<br>    Filter based on [<strong>Tag Key</strong>]. </li>
-<li>tagValue<br>    Filter based on [<strong>Tag Value</strong>]. </li>
+<li>socket<br>u2003u2003 Filter based on [<strong>HTTP protocol type</strong>]. <br>u2003u2003 Corresponding value options: <br>u2003u2003 HTTP: HTTP protocol；<br>u2003u2003 HTTPS: HTTPS protocol;<br>u2003u2003 QUIC: QUIC protocol. </li>
+<li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. </li>
+<li>tagKey<br>u2003u2003 Filter based on [<strong>Tag Key</strong>]. </li>
+<li>tagValue<br>u2003u2003 Filter based on [<strong>Tag Value</strong>]. </li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -7669,7 +7834,7 @@ The parameter is required.
         this.Limit = null;
 
         /**
-         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>target<br>    Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on [<strong>task status</strong>]. <br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li>
+         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>target<br>u2003u2003 Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on [<strong>task status</strong>]. <br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -8177,20 +8342,62 @@ class BindZoneToPlanRequest extends  AbstractModel {
 }
 
 /**
- * The security type setting item.
+ * Environment information.
  * @class
  */
-class SecurityType extends  AbstractModel {
+class EnvInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable the security type setting. Values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
+         * Environment ID.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.EnvId = null;
+
+        /**
+         * Environment type. Valid values: 
+<li>production: Production environment.</li><li> staging: Test environment. </li>
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * Environment status. Valid values: 
+<li>creating: Being created.</li>
+<li>running: The environment is stable, with version changes allowed.</li>
+<li>version_deploying: The version is currently being deployed, with no more changes allowed. </li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Effective scope of the configuration in the current environment. Valid values: 
+<li>ALL: It takes effect on the entire network when EnvType is set to production.</li>
+<li>It returns the IP address of the test node for host binding during testing when EnvType is set to staging. </li>
+         * @type {Array.<string> || null}
+         */
+        this.Scope = null;
+
+        /**
+         * For the effective versions of each configuration group in the current environment, there are two possible scenarios based on the value of Status: 
+<li>When Status is set to version_deploying, the returned value of this field represents the previously effective version. In other words, during the deployment of the new version, the effective version is the one that was in effect before any changes were made.</li>
+<li>When Status is set to running, the value returned by this field is the currently effective version. </li>
+         * @type {Array.<ConfigGroupVersionInfo> || null}
+         */
+        this.CurrentConfigGroupVersionInfos = null;
+
+        /**
+         * Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -8201,7 +8408,21 @@ class SecurityType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+
+        if (params.CurrentConfigGroupVersionInfos) {
+            this.CurrentConfigGroupVersionInfos = new Array();
+            for (let z in params.CurrentConfigGroupVersionInfos) {
+                let obj = new ConfigGroupVersionInfo();
+                obj.deserialize(params.CurrentConfigGroupVersionInfos[z]);
+                this.CurrentConfigGroupVersionInfos.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -8657,6 +8878,41 @@ class ModifyRuleResponse extends  AbstractModel {
 }
 
 /**
+ * CreateConfigGroupVersion response structure.
+ * @class
+ */
+class CreateConfigGroupVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version ID.
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The site ownership information
  * @class
  */
@@ -9047,7 +9303,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * Whether to enable force cache. Values:
 <li>`on`: Enable</li>
 <li>`off`: Disable </li>
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
@@ -9803,7 +10059,7 @@ The parameter is required.
         this.Limit = null;
 
         /**
-         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>target<br>    Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on <strong>task status</strong>.<br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li><li>type<br>    Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.<br>    Options:<br>    purge_url: URL<br>    purge_prefix: Prefix<br>    purge_all: All cache content<br>    purge_host: Hostname<br>    purge_cache_tag: CacheTag</li>
+         * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>target<br>u2003u2003 Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on <strong>task status</strong>.<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li><li>type<br>u2003u2003 Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.<br>u2003u2003 Options:<br>u2003u2003 purge_url: URL<br>u2003u2003 purge_prefix: Prefix<br>u2003u2003 purge_all: All cache content<br>u2003u2003 purge_host: Hostname<br>u2003u2003 purge_cache_tag: CacheTag</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -9887,20 +10143,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Image optimization configuration.
+ * DescribeConfigGroupVersions response structure.
  * @class
  */
-class ImageOptimize extends  AbstractModel {
+class DescribeConfigGroupVersionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable configuration. Values: 
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
+         * Total versions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Version information list.
+         * @type {Array.<ConfigGroupVersionInfo> || null}
+         */
+        this.ConfigGroupVersionInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.RequestId = null;
 
     }
 
@@ -9911,7 +10177,17 @@ class ImageOptimize extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ConfigGroupVersionInfos) {
+            this.ConfigGroupVersionInfos = new Array();
+            for (let z in params.ConfigGroupVersionInfos) {
+                let obj = new ConfigGroupVersionInfo();
+                obj.deserialize(params.ConfigGroupVersionInfos[z]);
+                this.ConfigGroupVersionInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9937,7 +10213,7 @@ class DescribeApplicationProxiesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>u200d, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
+         * Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -10630,6 +10906,56 @@ class TopEntry extends  AbstractModel {
 }
 
 /**
+ * DescribeEnvironments response structure.
+ * @class
+ */
+class DescribeEnvironmentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total environments.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Environment list.
+         * @type {Array.<EnvInfo> || null}
+         */
+        this.EnvInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EnvInfos) {
+            this.EnvInfos = new Array();
+            for (let z in params.EnvInfos) {
+                let obj = new EnvInfo();
+                obj.deserialize(params.EnvInfos[z]);
+                this.EnvInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IP information of the custom name server
  * @class
  */
@@ -11137,6 +11463,81 @@ Note: If any condition in the array is met, the feature will run.
 }
 
 /**
+ * Version release record details for the configuration group.
+ * @class
+ */
+class DeployRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Details about the released version.
+         * @type {Array.<ConfigGroupVersionInfo> || null}
+         */
+        this.ConfigGroupVersionInfos = null;
+
+        /**
+         * Release time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+         * @type {string || null}
+         */
+        this.DeployTime = null;
+
+        /**
+         * Release status. Valid values: 
+<li>deploying: Being released.</li>
+<li>failure: Release failed.</li>
+<li>success: Released successfully. </li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Release result information.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Release record ID. 
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * Change description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConfigGroupVersionInfos) {
+            this.ConfigGroupVersionInfos = new Array();
+            for (let z in params.ConfigGroupVersionInfos) {
+                let obj = new ConfigGroupVersionInfo();
+                obj.deserialize(params.ConfigGroupVersionInfos[z]);
+                this.ConfigGroupVersionInfos.push(obj);
+            }
+        }
+        this.DeployTime = 'DeployTime' in params ? params.DeployTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * HTTPS server certificate configuration
  * @class
  */
@@ -11397,6 +11798,81 @@ class TimingDataItem extends  AbstractModel {
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Version information about the configuration group.
+ * @class
+ */
+class ConfigGroupVersionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version ID.
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * Version No.
+         * @type {string || null}
+         */
+        this.VersionNumber = null;
+
+        /**
+         * Configuraration group ID.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Configuration group type. Valid values: 
+<li>l7_acceleration: L7 acceleration configuration group. </li>
+<li>edge_functions: Edge function configuration group. </li>
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * Version description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Version status. Valid values: 
+<li>creating: Being created.</li>
+<li>inactive: Not effective.</li>
+<li>active: Effective. </li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -11714,14 +12190,14 @@ class Sv extends  AbstractModel {
 <li>`custom-rule`: Quota for custom rules</li>
 <li>`rate-limiting-rule`: Quota for rate limiting rules</li>
 <li>`l4-proxy-instance`: Quota for L4 proxy instances </li>
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Pack = null;
 
         /**
          * ID of the L4 proxy instance.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11729,7 +12205,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         /**
          * The protection specification.
 Values: <li> `cm_30G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_60G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_100G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `anycast_300G`: 300 Gbps Anycast-based protection in **Global (MLC)** service area</li><li> `anycast_unlimited`: Unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_300G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_unlimited`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_300G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_unlimited`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_100G_anycast_300G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_100G_anycast_unlimited`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area </li>
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProtectionSpecs = null;
@@ -13247,6 +13723,36 @@ class AccelerateType extends  AbstractModel {
 }
 
 /**
+ * The IPv6 access configuration.
+ * @class
+ */
+class Ipv6 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable IPv6 access. Valid values: 
+<li>`on`: Enable;</li>
+<li>`off`: Disable.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * DescribeAliasDomains response structure.
  * @class
  */
@@ -13462,6 +13968,36 @@ class DeleteZoneRequest extends  AbstractModel {
 }
 
 /**
+ * The security type setting item.
+ * @class
+ */
+class SecurityType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the security type setting. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Bot managed rules. The rule IDs can be obtained from the output of DescribeBotManagedRules.
  * @class
  */
@@ -13614,6 +14150,71 @@ class TopDetailData extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeConfigGroupVersions request structure.
+ * @class
+ */
+class DescribeConfigGroupVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Configuraration group ID.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Filtering condition. The maximum value of Filters.Values is 20. If this parameter is not specified, all version information for the selected configuration group is returned. Detailed filtering conditions: 
+<li>version-id: Filter by version ID.</li>
+         * @type {Array.<AdvancedFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Paging query offset. The default value is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limited entries in paging queries. The default value is 20 and the maximum value is 100. 
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -14421,6 +15022,65 @@ class RewriteAction extends  AbstractModel {
 }
 
 /**
+ * ModifyAliasDomain request structure.
+ * @class
+ */
+class ModifyAliasDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The alias domain name.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+        /**
+         * The target domain name.
+         * @type {string || null}
+         */
+        this.TargetName = null;
+
+        /**
+         * Certificate configuration. Values:
+<li>`none`: Off</li>
+<li>`hosting`: Managed SSL certificate</li>
+<li>`apply`: Free certificate</li>The original configuration will apply if this field is not specified.
+         * @type {string || null}
+         */
+        this.CertType = null;
+
+        /**
+         * The certificate ID. This field is required when `CertType=hosting`.
+         * @type {Array.<string> || null}
+         */
+        this.CertId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
+        this.TargetName = 'TargetName' in params ? params.TargetName : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+
+    }
+}
+
+/**
  * CheckCnameStatus request structure.
  * @class
  */
@@ -14451,6 +15111,49 @@ class CheckCnameStatusRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.RecordNames = 'RecordNames' in params ? params.RecordNames : null;
+
+    }
+}
+
+/**
+ * The top-ranked data record
+ * @class
+ */
+class TopDataRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The query dimension value.
+         * @type {string || null}
+         */
+        this.TypeKey = null;
+
+        /**
+         * Top data rankings
+         * @type {Array.<TopDetailData> || null}
+         */
+        this.DetailData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TypeKey = 'TypeKey' in params ? params.TypeKey : null;
+
+        if (params.DetailData) {
+            this.DetailData = new Array();
+            for (let z in params.DetailData) {
+                let obj = new TopDetailData();
+                obj.deserialize(params.DetailData[z]);
+                this.DetailData.push(obj);
+            }
+        }
 
     }
 }
@@ -14506,7 +15209,7 @@ class CnameStatus extends  AbstractModel {
 
         /**
          * The CNAME address.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Cname = null;
@@ -14515,7 +15218,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
          * The CNAME status. Values:
 <li>`active`: Activated</li>
 <li>`moved`: Not activated </li>
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
@@ -14632,13 +15335,13 @@ class StandardDebug extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Allowed client source. IPv4 and IPv6 addresses and network segments are supported. 0.0.0.0/0 indicates that all IPv4 clients can be debugged, and ::/0 indicates that all IPv6 clients can be debugged.
+         * The client IP to allow. It can be an IPv4/IPv6 address or a CIDR block. If not specified, it means to allow any client IP
          * @type {Array.<string> || null}
          */
         this.AllowClientIPList = null;
 
         /**
-         * The time when the standard debugging setting expires. If it is exceeded, this feature u200dbecomes invalid.
+         * The time when the standard debugging setting expires. If it is exceeded, this feature becomes invalid.
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -14720,13 +15423,13 @@ class CreatePurgeTaskRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Configures how cache are purged. It works when `Type` is `purge_prefix`, `purge_host` or `purge_all`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated.</li>Note that when Type` is `purge_prefix`, it defaults to `invalidate`.
+         * Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
          * @type {string || null}
          */
         this.Method = null;
 
         /**
-         * List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
+         * List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters are escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
          * @type {Array.<string> || null}
          */
         this.Targets = null;
@@ -14839,14 +15542,14 @@ class Resource extends  AbstractModel {
 <li>`plan`: Plan resources</li>
 <li>`pay-as-you-go`: Pay-as-you-go resources </li>
 <li>`value-added`: Value-added resources </li>
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Group = null;
 
         /**
          * The sites that are associated with the current resources.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ZoneNumber = null;
@@ -14924,30 +15627,36 @@ class PrivateParameter extends  AbstractModel {
 }
 
 /**
- * DownloadL7Logs response structure.
+ * CreateConfigGroupVersion request structure.
  * @class
  */
-class DownloadL7LogsResponse extends  AbstractModel {
+class CreateConfigGroupVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of query results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of L7 logs.
-         * @type {Array.<L7OfflineLog> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Zone ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneId = null;
+
+        /**
+         * GroupId of the version to be created.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -14958,17 +15667,10 @@ class DownloadL7LogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new L7OfflineLog();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -15946,6 +16648,41 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * DeployConfigGroupVersion response structure.
+ * @class
+ */
+class DeployConfigGroupVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Release record ID.
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSecurityTemplateBindings request structure.
  * @class
  */
@@ -16025,6 +16762,56 @@ class AlgDetectResult extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.Action = 'Action' in params ? params.Action : null;
+
+    }
+}
+
+/**
+ * DescribeDeployHistory response structure.
+ * @class
+ */
+class DescribeDeployHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total release records.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Release record details.
+         * @type {Array.<DeployRecord> || null}
+         */
+        this.Records = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new DeployRecord();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16727,7 +17514,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
 module.exports = {
     CreatePlanForZoneResponse: CreatePlanForZoneResponse,
-    DownloadL7LogsRequest: DownloadL7LogsRequest,
+    DeployConfigGroupVersionRequest: DeployConfigGroupVersionRequest,
+    DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
     Compression: Compression,
     DeleteRulesRequest: DeleteRulesRequest,
     ExceptUserRuleCondition: ExceptUserRuleCondition,
@@ -16749,6 +17537,7 @@ module.exports = {
     DescribePrefetchTasksResponse: DescribePrefetchTasksResponse,
     AdvancedFilter: AdvancedFilter,
     DeleteApplicationProxyRequest: DeleteApplicationProxyRequest,
+    DescribeConfigGroupVersionDetailResponse: DescribeConfigGroupVersionDetailResponse,
     OriginDetail: OriginDetail,
     DescribeDDoSAttackDataResponse: DescribeDDoSAttackDataResponse,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
@@ -16766,7 +17555,7 @@ module.exports = {
     DeleteAccelerationDomainsRequest: DeleteAccelerationDomainsRequest,
     DescribeApplicationProxiesResponse: DescribeApplicationProxiesResponse,
     ExceptUserRuleScope: ExceptUserRuleScope,
-    ModifyAliasDomainRequest: ModifyAliasDomainRequest,
+    DescribeDeployHistoryRequest: DescribeDeployHistoryRequest,
     DescribeAvailablePlansRequest: DescribeAvailablePlansRequest,
     OriginInfo: OriginInfo,
     Tag: Tag,
@@ -16789,7 +17578,9 @@ module.exports = {
     BindZoneToPlanResponse: BindZoneToPlanResponse,
     ExceptConfig: ExceptConfig,
     DeleteOriginGroupRequest: DeleteOriginGroupRequest,
+    ImageOptimize: ImageOptimize,
     AliasDomain: AliasDomain,
+    WebSocket: WebSocket,
     AclCondition: AclCondition,
     DescribeAliasDomainsRequest: DescribeAliasDomainsRequest,
     SkipCondition: SkipCondition,
@@ -16810,12 +17601,12 @@ module.exports = {
     ClientIpHeader: ClientIpHeader,
     DescribeDDoSAttackTopDataRequest: DescribeDDoSAttackTopDataRequest,
     Quic: Quic,
-    Ipv6: Ipv6,
-    WebSocket: WebSocket,
+    DescribeConfigGroupVersionDetailRequest: DescribeConfigGroupVersionDetailRequest,
+    DownloadL7LogsResponse: DownloadL7LogsResponse,
     ModifyAccelerationDomainRequest: ModifyAccelerationDomainRequest,
     DescribeRulesRequest: DescribeRulesRequest,
     DescribeContentQuotaResponse: DescribeContentQuotaResponse,
-    TopDataRecord: TopDataRecord,
+    DownloadL7LogsRequest: DownloadL7LogsRequest,
     AclConfig: AclConfig,
     ModifyZoneSettingResponse: ModifyZoneSettingResponse,
     AlgDetectJS: AlgDetectJS,
@@ -16861,7 +17652,7 @@ module.exports = {
     NoCache: NoCache,
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
     BindZoneToPlanRequest: BindZoneToPlanRequest,
-    SecurityType: SecurityType,
+    EnvInfo: EnvInfo,
     IPWhitelist: IPWhitelist,
     DDoS: DDoS,
     CreateZoneRequest: CreateZoneRequest,
@@ -16869,6 +17660,7 @@ module.exports = {
     DescribeTimingL7CacheDataRequest: DescribeTimingL7CacheDataRequest,
     Task: Task,
     ModifyRuleResponse: ModifyRuleResponse,
+    CreateConfigGroupVersionResponse: CreateConfigGroupVersionResponse,
     AscriptionInfo: AscriptionInfo,
     VerifyOwnershipResponse: VerifyOwnershipResponse,
     RuleItem: RuleItem,
@@ -16886,7 +17678,7 @@ module.exports = {
     CachePrefresh: CachePrefresh,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     DescribeTimingL7AnalysisDataResponse: DescribeTimingL7AnalysisDataResponse,
-    ImageOptimize: ImageOptimize,
+    DescribeConfigGroupVersionsResponse: DescribeConfigGroupVersionsResponse,
     DescribeApplicationProxiesRequest: DescribeApplicationProxiesRequest,
     DescribeContentQuotaRequest: DescribeContentQuotaRequest,
     BotPortraitRule: BotPortraitRule,
@@ -16900,6 +17692,7 @@ module.exports = {
     CreateRuleRequest: CreateRuleRequest,
     TemplateConfig: TemplateConfig,
     TopEntry: TopEntry,
+    DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     VanityNameServersIps: VanityNameServersIps,
     NsVerification: NsVerification,
     SlowPostConfig: SlowPostConfig,
@@ -16908,11 +17701,13 @@ module.exports = {
     CreateApplicationProxyRuleResponse: CreateApplicationProxyRuleResponse,
     RateLimitUserRule: RateLimitUserRule,
     SubRule: SubRule,
+    DeployRecord: DeployRecord,
     CertificateInfo: CertificateInfo,
     CreatePlanForZoneRequest: CreatePlanForZoneRequest,
     ModifyAliasDomainStatusRequest: ModifyAliasDomainStatusRequest,
     BindSecurityTemplateToEntityRequest: BindSecurityTemplateToEntityRequest,
     TimingDataItem: TimingDataItem,
+    ConfigGroupVersionInfo: ConfigGroupVersionInfo,
     CreateApplicationProxyRequest: CreateApplicationProxyRequest,
     CC: CC,
     IntelligenceRuleItem: IntelligenceRuleItem,
@@ -16948,13 +17743,16 @@ module.exports = {
     CreateOriginGroupResponse: CreateOriginGroupResponse,
     ModifyApplicationProxyRuleStatusRequest: ModifyApplicationProxyRuleStatusRequest,
     AccelerateType: AccelerateType,
+    Ipv6: Ipv6,
     DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
     CreateAccelerationDomainRequest: CreateAccelerationDomainRequest,
     FollowOrigin: FollowOrigin,
     DeleteZoneRequest: DeleteZoneRequest,
+    SecurityType: SecurityType,
     BotManagedRule: BotManagedRule,
     NormalAction: NormalAction,
     TopDetailData: TopDetailData,
+    DescribeConfigGroupVersionsRequest: DescribeConfigGroupVersionsRequest,
     DescribeOriginGroupRequest: DescribeOriginGroupRequest,
     ModifyApplicationProxyRuleResponse: ModifyApplicationProxyRuleResponse,
     DescribeZoneSettingResponse: DescribeZoneSettingResponse,
@@ -16973,7 +17771,9 @@ module.exports = {
     ModifyAliasDomainResponse: ModifyAliasDomainResponse,
     EntityStatus: EntityStatus,
     RewriteAction: RewriteAction,
+    ModifyAliasDomainRequest: ModifyAliasDomainRequest,
     CheckCnameStatusRequest: CheckCnameStatusRequest,
+    TopDataRecord: TopDataRecord,
     DeleteAliasDomainRequest: DeleteAliasDomainRequest,
     CnameStatus: CnameStatus,
     DeleteAccelerationDomainsResponse: DeleteAccelerationDomainsResponse,
@@ -16983,7 +17783,7 @@ module.exports = {
     CreatePurgeTaskRequest: CreatePurgeTaskRequest,
     Resource: Resource,
     PrivateParameter: PrivateParameter,
-    DownloadL7LogsResponse: DownloadL7LogsResponse,
+    CreateConfigGroupVersionRequest: CreateConfigGroupVersionRequest,
     AclUserRule: AclUserRule,
     Quota: Quota,
     CreateOriginGroupRequest: CreateOriginGroupRequest,
@@ -16999,8 +17799,10 @@ module.exports = {
     OriginGroup: OriginGroup,
     ModifySecurityIPGroupRequest: ModifySecurityIPGroupRequest,
     AccelerationDomainCertificate: AccelerationDomainCertificate,
+    DeployConfigGroupVersionResponse: DeployConfigGroupVersionResponse,
     DescribeSecurityTemplateBindingsRequest: DescribeSecurityTemplateBindingsRequest,
     AlgDetectResult: AlgDetectResult,
+    DescribeDeployHistoryResponse: DescribeDeployHistoryResponse,
     QueryString: QueryString,
     DefaultServerCertInfo: DefaultServerCertInfo,
     CreateSharedCNAMERequest: CreateSharedCNAMERequest,

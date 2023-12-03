@@ -70,6 +70,7 @@ const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
 const UserAgentFilter = models.UserAgentFilter;
+const ModifyDomainConfigRequest = models.ModifyDomainConfigRequest;
 const DescribeCdnOriginIpRequest = models.DescribeCdnOriginIpRequest;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
@@ -163,6 +164,7 @@ const ScdnCCRules = models.ScdnCCRules;
 const IpFreqLimit = models.IpFreqLimit;
 const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CacheOptResult = models.CacheOptResult;
+const OriginSni = models.OriginSni;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
 const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
@@ -203,6 +205,7 @@ const BandwidthAlert = models.BandwidthAlert;
 const ClsLogObject = models.ClsLogObject;
 const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
+const ModifyDomainConfigResponse = models.ModifyDomainConfigResponse;
 const CreateScdnFailedLogTaskResponse = models.CreateScdnFailedLogTaskResponse;
 const CdnData = models.CdnData;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
@@ -283,6 +286,21 @@ class CdnClient extends AbstractClient {
     AddCLSTopicDomains(req, cb) {
         let resp = new AddCLSTopicDomainsResponse();
         this.request("AddCLSTopicDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the configuration of a CDN acceleration domain name in a finer manner than `UpdateDomainConfig`.
+Notes:
+In `Route`, separate values by dots (.). The last value is called a leaf node. For non-leaf nodes, keep the configuration unchanged.
+The Value field is serialized to a JSON string {key:value}, where **key** is fixed to `update` and **value** is used to specify the value of the configuration parameter. To specify configurations with complex types, see https://intl.cloud.tencent.com/document/product/228/41116.?from_cn_redirect=1
+The input parameters of this API are not reported to CloudAudit as it may contain sensitive data, such as keys and secrets.
+     * @param {ModifyDomainConfigRequest} req
+     * @param {function(string, ModifyDomainConfigResponse):void} cb
+     * @public
+     */
+    ModifyDomainConfig(req, cb) {
+        let resp = new ModifyDomainConfigResponse();
+        this.request("ModifyDomainConfig", req, resp, cb);
     }
 
     /**
@@ -579,7 +597,8 @@ By default, a maximum of 10,000 URLs can be purged per day for acceleration regi
 
     /**
      * This API is used to modify the configuration of CDN acceleration domain names.
-Note: if you need to update complex configuration items, you must pass all the attributes of the entire object. The default value will be used for attributes that are not passed. We recommend calling the querying API to obtain the configuration attributes first. You can then modify and pass the attributes to the API. The certificate and key fields do not need to be passed for HTTPS configuration.
+Note: To update complex configuration items, all attributes of the object must be specified, or the default values are used. We recommend calling the querying API to get attributes before modifying and passing them to this API.
+The input parameters of this API are not reported to CloudAudit as it may contain sensitive data, such as keys and secrets.
      * @param {UpdateDomainConfigRequest} req
      * @param {function(string, UpdateDomainConfigResponse):void} cb
      * @public

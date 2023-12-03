@@ -86,6 +86,18 @@ class QueryPartnerCreditResponse extends  AbstractModel {
         this.RemainingCredit = null;
 
         /**
+         * Allocated quota for the client
+         * @type {number || null}
+         */
+        this.CustomerTotalCredit = null;
+
+        /**
+         * Remaining quota for the client
+         * @type {number || null}
+         */
+        this.CustomerRemainingCredit = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -103,6 +115,8 @@ class QueryPartnerCreditResponse extends  AbstractModel {
         this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
         this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
         this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+        this.CustomerTotalCredit = 'CustomerTotalCredit' in params ? params.CustomerTotalCredit : null;
+        this.CustomerRemainingCredit = 'CustomerRemainingCredit' in params ? params.CustomerRemainingCredit : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -260,6 +274,13 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
          */
         this.AllocatedCredit = null;
 
+        /**
+         * Available credits after allocation
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {number || null}
+         */
+        this.ClientCreditAfter = null;
+
     }
 
     /**
@@ -273,6 +294,7 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
         this.Operator = 'Operator' in params ? params.Operator : null;
         this.Credit = 'Credit' in params ? params.Credit : null;
         this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
+        this.ClientCreditAfter = 'ClientCreditAfter' in params ? params.ClientCreditAfter : null;
 
     }
 }
@@ -649,7 +671,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.Month = null;
 
         /**
-         * A pagination parameter that specifies the number of entries per page
+         * Page parameter: Indicates the number of entries per page. The maximum value is 200.
          * @type {number || null}
          */
         this.PageSize = null;
@@ -1053,6 +1075,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TotalCost = null;
 
+        /**
+         * ID
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
     }
 
     /**
@@ -1089,6 +1118,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1480,7 +1510,7 @@ class DescribeCustomerBillDetailRequest extends  AbstractModel {
         this.Month = null;
 
         /**
-         * A pagination parameter that specifies the number of entries per page
+         * Page parameter: Indicates the number of entries per page. The maximum value is 200.
          * @type {number || null}
          */
         this.PageSize = null;
@@ -2386,6 +2416,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TotalCost = null;
 
+        /**
+         * ID
+Note: The return value may be null, indicating that no valid data can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
     }
 
     /**
@@ -2425,6 +2462,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TotalAmountAfterDiscount = 'TotalAmountAfterDiscount' in params ? params.TotalAmountAfterDiscount : null;
         this.VoucherDeduction = 'VoucherDeduction' in params ? params.VoucherDeduction : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -2718,13 +2756,23 @@ class DescribeCustomerInfoData extends  AbstractModel {
         this.BindTime = null;
 
         /**
-         * Account status Valid values: `0` (Not frozen),  `1` (Frozen).  Note: This field may return null, indicating that no valid values can be obtained.
+         * Account status
+0: Normal
+1: Forcibly mandatory (this function is not supported yet)
+2. Mandatory arrears
+Note: The return value may be null, indicating that no valid data can be obtained.
          * @type {string || null}
          */
         this.AccountStatus = null;
 
         /**
-         * Identity verification status Note: This field may return null, indicating that no valid values can be obtained.
+         * Identity verification status
+-1: Files not uploaded
+0: Not submitted for review
+1: Under review
+2: Review error
+3: Approved
+Note: The return value may be null, indicating that no valid data can be obtained.
          * @type {string || null}
          */
         this.AuthStatus = null;

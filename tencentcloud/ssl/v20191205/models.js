@@ -73,32 +73,47 @@ class DescribeCertificateBindResourceTaskDetailRequest extends  AbstractModel {
 }
 
 /**
- * DownloadCertificate response structure.
+ * Cloud-native gateway certificate information
  * @class
  */
-class DownloadCertificateResponse extends  AbstractModel {
+class GatewayCertificate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ZIP content encoded by using Base64. After the content is decoded by using Base64, it can be saved as a ZIP file.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Gateway certificate ID
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.Content = null;
+        this.Id = null;
 
         /**
-         * MIME type. `application/zip`: ZIP file
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Gateway certificate information
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.ContentType = null;
+        this.Name = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Bound domain name
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BindDomains = null;
+
+        /**
+         * Certificate source
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CertSource = null;
+
+        /**
+         * SSL certificate ID that is currently bound
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CertId = null;
 
     }
 
@@ -109,9 +124,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
-        this.ContentType = 'ContentType' in params ? params.ContentType : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BindDomains = 'BindDomains' in params ? params.BindDomains : null;
+        this.CertSource = 'CertSource' in params ? params.CertSource : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+
+    }
+}
+
+/**
+ * Errors
+ * @class
+ */
+class Error extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The error code.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * The error message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -558,8 +612,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsVulnerability = null;
 
         /**
-         * Whether the certificate can be reissued
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether it can be renewed 
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {boolean || null}
          */
         this.RenewAble = null;
@@ -669,6 +723,86 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.HostingRenewCertId = null;
 
+        /**
+         * Existing renewed certificate ID
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.HasRenewOrder = null;
+
+        /**
+         * Whether the original certificate is deleted when a certificate is reissued.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.ReplaceOriCertIsDelete = null;
+
+        /**
+         * Whether the certificate is expiring soon. A certificate is considered to be expiring soon when there are 30 days or less left.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsExpiring = null;
+
+        /**
+         * Validation expiration time for the addition of the DV certificate
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.DVAuthDeadline = null;
+
+        /**
+         * Domain name validation pass time
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ValidationPassedTime = null;
+
+        /**
+         * Multiple domain names with which the certificate is associated
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CertSANs = null;
+
+        /**
+         * Domain name validation rejection information
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AwaitingValidationMsg = null;
+
+        /**
+         * Whether downloading is allowed
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.AllowDownload = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsDNSPODResolve = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsPackage = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.KeyPasswordCustomFlag = null;
+
+        /**
+         * 
+         * @type {SupportDownloadType || null}
+         */
+        this.SupportDownloadType = null;
+
     }
 
     /**
@@ -742,6 +876,23 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HostingStatus = 'HostingStatus' in params ? params.HostingStatus : null;
         this.HostingCompleteTime = 'HostingCompleteTime' in params ? params.HostingCompleteTime : null;
         this.HostingRenewCertId = 'HostingRenewCertId' in params ? params.HostingRenewCertId : null;
+        this.HasRenewOrder = 'HasRenewOrder' in params ? params.HasRenewOrder : null;
+        this.ReplaceOriCertIsDelete = 'ReplaceOriCertIsDelete' in params ? params.ReplaceOriCertIsDelete : null;
+        this.IsExpiring = 'IsExpiring' in params ? params.IsExpiring : null;
+        this.DVAuthDeadline = 'DVAuthDeadline' in params ? params.DVAuthDeadline : null;
+        this.ValidationPassedTime = 'ValidationPassedTime' in params ? params.ValidationPassedTime : null;
+        this.CertSANs = 'CertSANs' in params ? params.CertSANs : null;
+        this.AwaitingValidationMsg = 'AwaitingValidationMsg' in params ? params.AwaitingValidationMsg : null;
+        this.AllowDownload = 'AllowDownload' in params ? params.AllowDownload : null;
+        this.IsDNSPODResolve = 'IsDNSPODResolve' in params ? params.IsDNSPODResolve : null;
+        this.IsPackage = 'IsPackage' in params ? params.IsPackage : null;
+        this.KeyPasswordCustomFlag = 'KeyPasswordCustomFlag' in params ? params.KeyPasswordCustomFlag : null;
+
+        if (params.SupportDownloadType) {
+            let obj = new SupportDownloadType();
+            obj.deserialize(params.SupportDownloadType)
+            this.SupportDownloadType = obj;
+        }
 
     }
 }
@@ -796,6 +947,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SMCert = null;
 
+        /**
+         * Company type
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.CompanyType = null;
+
     }
 
     /**
@@ -811,6 +969,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReplacedFor = 'ReplacedFor' in params ? params.ReplacedFor : null;
         this.RenewOrder = 'RenewOrder' in params ? params.RenewOrder : null;
         this.SMCert = 'SMCert' in params ? params.SMCert : null;
+        this.CompanyType = 'CompanyType' in params ? params.CompanyType : null;
 
     }
 }
@@ -1646,6 +1805,56 @@ class DescribeCSRSetResponse extends  AbstractModel {
 }
 
 /**
+ * Update record detail list
+ * @class
+ */
+class UpdateRecordDetails extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deployment resource type
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Deployment resource detail list
+         * @type {Array.<UpdateRecordDetail> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total deployment resource count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new UpdateRecordDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * DescribeCSR request structure.
  * @class
  */
@@ -1702,6 +1911,76 @@ class ModifyCertificateResubmitRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class SupportDownloadType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.NGINX = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.APACHE = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.TOMCAT = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IIS = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.JKS = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.OTHER = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.ROOT = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NGINX = 'NGINX' in params ? params.NGINX : null;
+        this.APACHE = 'APACHE' in params ? params.APACHE : null;
+        this.TOMCAT = 'TOMCAT' in params ? params.TOMCAT : null;
+        this.IIS = 'IIS' in params ? params.IIS : null;
+        this.JKS = 'JKS' in params ? params.JKS : null;
+        this.OTHER = 'OTHER' in params ? params.OTHER : null;
+        this.ROOT = 'ROOT' in params ? params.ROOT : null;
+
+    }
+}
+
+/**
  * DescribeCertificateBindResourceTaskResult request structure.
  * @class
  */
@@ -1725,6 +2004,196 @@ class DescribeCertificateBindResourceTaskResultRequest extends  AbstractModel {
             return;
         }
         this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+
+    }
+}
+
+/**
+ * Update record details
+ * @class
+ */
+class UpdateRecordDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Detail record ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * New certificate ID
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Old certificate ID
+         * @type {string || null}
+         */
+        this.OldCertId = null;
+
+        /**
+         * Deployment domain name list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * Deployment resource type
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Deployment region
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Deployment status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Deployment error message
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * Deployment time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last update time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Deployment instance ID
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Deployment instance name
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Deployment listener ID (only for CLB)
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Deployment listener name (only for CLB)
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+        /**
+         * Protocol
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Whether SNI is enabled (only for CLB)
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.SniSwitch = null;
+
+        /**
+         * Bucket name (only for COS)
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Port
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Namespace (only for TKE)
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Secret name (only for TKE)
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * Environment ID
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * TCB deployment type
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TCBType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.OldCertId = 'OldCertId' in params ? params.OldCertId : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.TCBType = 'TCBType' in params ? params.TCBType : null;
 
     }
 }
@@ -1880,6 +2349,48 @@ class UploadConfirmLetterResponse extends  AbstractModel {
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
         this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeHostUpdateRecordDetail request structure.
+ * @class
+ */
+class DescribeHostUpdateRecordDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * One-click update record ID
+         * @type {string || null}
+         */
+        this.DeployRecordId = null;
+
+        /**
+         * Number per page, 10 by default.
+         * @type {string || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Paging offset, starting from 0
+         * @type {string || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2042,6 +2553,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * 
+ * @class
+ */
+class UpdateSyncProgress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 
+         * @type {Array.<UpdateSyncProgressRegion> || null}
+         */
+        this.UpdateSyncProgressRegions = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.UpdateSyncProgressRegions) {
+            this.UpdateSyncProgressRegions = new Array();
+            for (let z in params.UpdateSyncProgressRegions) {
+                let obj = new UpdateSyncProgressRegion();
+                obj.deserialize(params.UpdateSyncProgressRegions[z]);
+                this.UpdateSyncProgressRegions.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * Certificate operation logs
  * @class
  */
@@ -2107,6 +2668,156 @@ class VodInstanceDetail extends  AbstractModel {
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.CertId = 'CertId' in params ? params.CertId : null;
+
+    }
+}
+
+/**
+ * Cloud resource region list
+ * @class
+ */
+class ResourceTypeRegions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud resource type
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Region list
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Regions = 'Regions' in params ? params.Regions : null;
+
+    }
+}
+
+/**
+ * UpdateCertificateRecordRollback request structure.
+ * @class
+ */
+class UpdateCertificateRecordRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * To-be-redeployed record ID
+         * @type {number || null}
+         */
+        this.DeployRecordId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
+
+    }
+}
+
+/**
+ * DescribeHostUpdateRecord response structure.
+ * @class
+ */
+class DescribeHostUpdateRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total count
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Certificate deployment record list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<UpdateRecordInfo> || null}
+         */
+        this.DeployRecordList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DeployRecordList) {
+            this.DeployRecordList = new Array();
+            for (let z in params.DeployRecordList) {
+                let obj = new UpdateRecordInfo();
+                obj.deserialize(params.DeployRecordList[z]);
+                this.DeployRecordList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateCertificateRecordRollback response structure.
+ * @class
+ */
+class UpdateCertificateRecordRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rollback deployment record ID
+         * @type {number || null}
+         */
+        this.DeployRecordId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2200,6 +2911,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.CacheTime = null;
+
+        /**
+         * Associated TSE resource details
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<TSEInstanceList> || null}
+         */
+        this.TSE = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2308,6 +3026,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+        if (params.TSE) {
+            this.TSE = new Array();
+            for (let z in params.TSE) {
+                let obj = new TSEInstanceList();
+                obj.deserialize(params.TSE[z]);
+                this.TSE.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2465,6 +3192,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.InstanceList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * UpdateCertificateRecordRetry request structure.
+ * @class
+ */
+class UpdateCertificateRecordRetryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * To-be-redeployed record ID
+         * @type {number || null}
+         */
+        this.DeployRecordId = null;
+
+        /**
+         * To-be-redeployed record detail ID
+         * @type {number || null}
+         */
+        this.DeployRecordDetailId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
+        this.DeployRecordDetailId = 'DeployRecordDetailId' in params ? params.DeployRecordDetailId : null;
 
     }
 }
@@ -3633,6 +4395,127 @@ class DownloadCertificateRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateCertificateInstance request structure.
+ * @class
+ */
+class UpdateCertificateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * One-click update old certificate ID
+         * @type {string || null}
+         */
+        this.OldCertificateId = null;
+
+        /**
+         * Type of the resource that needs to be deployed. The following parameter values are optional: clb, cdn, waf, live, ddos, teo, apigateway, vod, tke, and tcb.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceTypes = null;
+
+        /**
+         * One-click update new certificate ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * List of regions that need to be deployed (deprecated)
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+        /**
+         * List of regions for which cloud resources need to be deployed
+         * @type {Array.<ResourceTypeRegions> || null}
+         */
+        this.ResourceTypesRegions = null;
+
+        /**
+         * Public key of the certificate. If the public key of the certificate is uploaded, CertificateId does not need to be uploaded.
+         * @type {string || null}
+         */
+        this.CertificatePublicKey = null;
+
+        /**
+         * Private key of the certificate. If the public key of the certificate is uploaded, the private key of the certificate is required.
+         * @type {string || null}
+         */
+        this.CertificatePrivateKey = null;
+
+        /**
+         * Whether an expiration reminder is ignored for the old certificate. 0: The notification is not ignored. 1: The notification is ignored.
+         * @type {number || null}
+         */
+        this.ExpiringNotificationSwitch = null;
+
+        /**
+         * Whether repeated uploading of the same certificate is allowed. If the public key of the certificate is uploaded, this parameter can be configured.
+         * @type {boolean || null}
+         */
+        this.Repeatable = null;
+
+        /**
+         * Whether downloading is allowed. If the public key of the certificate is uploaded, this parameter can be configured.
+         * @type {boolean || null}
+         */
+        this.AllowDownload = null;
+
+        /**
+         * Tag list. If the public key of the certificate is uploaded, this parameter can be configured.
+         * @type {Array.<Tags> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Project ID. If the public key of the certificate is uploaded, this parameter can be configured.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldCertificateId = 'OldCertificateId' in params ? params.OldCertificateId : null;
+        this.ResourceTypes = 'ResourceTypes' in params ? params.ResourceTypes : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Regions = 'Regions' in params ? params.Regions : null;
+
+        if (params.ResourceTypesRegions) {
+            this.ResourceTypesRegions = new Array();
+            for (let z in params.ResourceTypesRegions) {
+                let obj = new ResourceTypeRegions();
+                obj.deserialize(params.ResourceTypesRegions[z]);
+                this.ResourceTypesRegions.push(obj);
+            }
+        }
+        this.CertificatePublicKey = 'CertificatePublicKey' in params ? params.CertificatePublicKey : null;
+        this.CertificatePrivateKey = 'CertificatePrivateKey' in params ? params.CertificatePrivateKey : null;
+        this.ExpiringNotificationSwitch = 'ExpiringNotificationSwitch' in params ? params.ExpiringNotificationSwitch : null;
+        this.Repeatable = 'Repeatable' in params ? params.Repeatable : null;
+        this.AllowDownload = 'AllowDownload' in params ? params.AllowDownload : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * ReplaceCertificate request structure.
  * @class
  */
@@ -4363,6 +5246,59 @@ class DescribeCertificateRequest extends  AbstractModel {
 }
 
 /**
+ * TSE instance details
+ * @class
+ */
+class TSEInstanceDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Gateway ID
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GatewayId = null;
+
+        /**
+         * Gateway name
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GatewayName = null;
+
+        /**
+         * Gateway certificate list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<GatewayCertificate> || null}
+         */
+        this.CertificateList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GatewayId = 'GatewayId' in params ? params.GatewayId : null;
+        this.GatewayName = 'GatewayName' in params ? params.GatewayName : null;
+
+        if (params.CertificateList) {
+            this.CertificateList = new Array();
+            for (let z in params.CertificateList) {
+                let obj = new GatewayCertificate();
+                obj.deserialize(params.CertificateList[z]);
+                this.CertificateList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Details of WAF instances - data structure of an async task for querying associated cloud resources
  * @class
  */
@@ -4449,31 +5385,53 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * Details of TKE instances - data structure of an async task for querying associated cloud resources
+ * DescribeHostUpdateRecordDetail response structure.
  * @class
  */
-class TkeInstanceList extends  AbstractModel {
+class DescribeHostUpdateRecordDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The region.
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * The list of TKE instances.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TkeInstanceDetail> || null}
-         */
-        this.InstanceList = null;
-
-        /**
-         * The total number of TKE instances in this region.	
+         * Total count
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * Certificate deployment record list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<UpdateRecordDetails> || null}
+         */
+        this.RecordDetailList = null;
+
+        /**
+         * Total successful deployments
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.SuccessTotalCount = null;
+
+        /**
+         * Total failed deployments
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.FailedTotalCount = null;
+
+        /**
+         * Total running deployments
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.RunningTotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4484,42 +5442,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.InstanceList) {
-            this.InstanceList = new Array();
-            for (let z in params.InstanceList) {
-                let obj = new TkeInstanceDetail();
-                obj.deserialize(params.InstanceList[z]);
-                this.InstanceList.push(obj);
+        if (params.RecordDetailList) {
+            this.RecordDetailList = new Array();
+            for (let z in params.RecordDetailList) {
+                let obj = new UpdateRecordDetails();
+                obj.deserialize(params.RecordDetailList[z]);
+                this.RecordDetailList.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.SuccessTotalCount = 'SuccessTotalCount' in params ? params.SuccessTotalCount : null;
+        this.FailedTotalCount = 'FailedTotalCount' in params ? params.FailedTotalCount : null;
+        this.RunningTotalCount = 'RunningTotalCount' in params ? params.RunningTotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Errors
+ * DescribeHostUpdateRecord request structure.
  * @class
  */
-class Error extends  AbstractModel {
+class DescribeHostUpdateRecordRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The error code.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Paging offset, starting from 0
+         * @type {number || null}
          */
-        this.Code = null;
+        this.Offset = null;
 
         /**
-         * The error message.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number per page, 10 by default.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * New certificate ID
          * @type {string || null}
          */
-        this.Message = null;
+        this.CertificateId = null;
+
+        /**
+         * Old certificate ID
+         * @type {string || null}
+         */
+        this.OldCertificateId = null;
 
     }
 
@@ -4530,8 +5501,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.OldCertificateId = 'OldCertificateId' in params ? params.OldCertificateId : null;
 
     }
 }
@@ -4887,6 +5860,106 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * 
+ * @class
+ */
+class UpdateSyncProgressRegion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.OffsetCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.OffsetCount = 'OffsetCount' in params ? params.OffsetCount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Details of TKE instances - data structure of an async task for querying associated cloud resources
+ * @class
+ */
+class TkeInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * The list of TKE instances.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TkeInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * The total number of TKE instances in this region.	
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new TkeInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * Details of an APIGATEWAY instance
  * @class
  */
@@ -5223,6 +6296,64 @@ class ModifyCertificateResubmitResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateCertificateInstance response structure.
+ * @class
+ */
+class UpdateCertificateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud resource deployment task ID
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.DeployRecordId = null;
+
+        /**
+         * Deployment status. 1 indicates that the deployment succeeded, and 0 indicates that the deployment failed.
+         * @type {number || null}
+         */
+        this.DeployStatus = null;
+
+        /**
+         * 
+         * @type {Array.<UpdateSyncProgress> || null}
+         */
+        this.UpdateSyncProgress = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployRecordId = 'DeployRecordId' in params ? params.DeployRecordId : null;
+        this.DeployStatus = 'DeployStatus' in params ? params.DeployStatus : null;
+
+        if (params.UpdateSyncProgress) {
+            this.UpdateSyncProgress = new Array();
+            for (let z in params.UpdateSyncProgress) {
+                let obj = new UpdateSyncProgress();
+                obj.deserialize(params.UpdateSyncProgress[z]);
+                this.UpdateSyncProgress.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UploadCertificate request structure.
  * @class
  */
@@ -5399,7 +6530,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.CsrEncryptAlgo = null;
 
         /**
-         * Key pair parameter. RSA supports only the 2048-bit key and ECC supports only prime256v1.
+         * Key pair parameters. RSA supports only 2048. ECC supports only prime256v1. When the encryption algorithm is set to ECC, this parameter is mandatory.
          * @type {string || null}
          */
         this.CsrKeyParameter = null;
@@ -5499,6 +6630,84 @@ class CreateCertificateResponse extends  AbstractModel {
         this.CertificateIds = 'CertificateIds' in params ? params.CertificateIds : null;
         this.DealIds = 'DealIds' in params ? params.DealIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Deployment record information
+ * @class
+ */
+class UpdateRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * New certificate ID
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Old certificate ID
+         * @type {string || null}
+         */
+        this.OldCertId = null;
+
+        /**
+         * Deployment resource type list
+         * @type {Array.<string> || null}
+         */
+        this.ResourceTypes = null;
+
+        /**
+         * Deployment region list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+        /**
+         * Deployment status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Deployment time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last update time
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.OldCertId = 'OldCertId' in params ? params.OldCertId : null;
+        this.ResourceTypes = 'ResourceTypes' in params ? params.ResourceTypes : null;
+        this.Regions = 'Regions' in params ? params.Regions : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -5933,6 +7142,50 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.SyncTaskBindResourceResult.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadCertificate response structure.
+ * @class
+ */
+class DownloadCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ZIP content encoded by using Base64. After the content is decoded by using Base64, it can be saved as a ZIP file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * MIME type. `application/zip`: ZIP file
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContentType = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6458,6 +7711,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * UpdateCertificateRecordRetry response structure.
+ * @class
+ */
+class UpdateCertificateRecordRetryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * List of TCB services subject to static hosting
  * @class
  */
@@ -6580,6 +7861,57 @@ class CancelAuditCertificateResponse extends  AbstractModel {
 }
 
 /**
+ * TSE instance details - asynchronously associated cloud resource data structure
+ * @class
+ */
+class TSEInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TSE instance details
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<TSEInstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * Total TSE instances in this region	
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Region	
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new TSEInstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * Details of VOD instances - data structure of an async task for querying associated cloud resources
  * @class
  */
@@ -6625,7 +7957,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
 module.exports = {
     DescribeCertificateBindResourceTaskDetailRequest: DescribeCertificateBindResourceTaskDetailRequest,
-    DownloadCertificateResponse: DownloadCertificateResponse,
+    GatewayCertificate: GatewayCertificate,
+    Error: Error,
     ModifyCSRRequest: ModifyCSRRequest,
     TCBAccessInstance: TCBAccessInstance,
     CancelCertificateOrderRequest: CancelCertificateOrderRequest,
@@ -6649,22 +7982,32 @@ module.exports = {
     CancelCertificateOrderResponse: CancelCertificateOrderResponse,
     DdosInstanceList: DdosInstanceList,
     DescribeCSRSetResponse: DescribeCSRSetResponse,
+    UpdateRecordDetails: UpdateRecordDetails,
     DescribeCSRRequest: DescribeCSRRequest,
     ModifyCertificateResubmitRequest: ModifyCertificateResubmitRequest,
+    SupportDownloadType: SupportDownloadType,
     DescribeCertificateBindResourceTaskResultRequest: DescribeCertificateBindResourceTaskResultRequest,
+    UpdateRecordDetail: UpdateRecordDetail,
     BindResourceResult: BindResourceResult,
     ApplyCertificateResponse: ApplyCertificateResponse,
     CreateCertificateBindResourceSyncTaskRequest: CreateCertificateBindResourceSyncTaskRequest,
     UploadConfirmLetterResponse: UploadConfirmLetterResponse,
+    DescribeHostUpdateRecordDetailRequest: DescribeHostUpdateRecordDetailRequest,
     ReplaceCertificateResponse: ReplaceCertificateResponse,
     SyncTaskBindResourceResult: SyncTaskBindResourceResult,
     ClbInstanceDetail: ClbInstanceDetail,
+    UpdateSyncProgress: UpdateSyncProgress,
     OperationLog: OperationLog,
     VodInstanceDetail: VodInstanceDetail,
+    ResourceTypeRegions: ResourceTypeRegions,
+    UpdateCertificateRecordRollbackRequest: UpdateCertificateRecordRollbackRequest,
+    DescribeHostUpdateRecordResponse: DescribeHostUpdateRecordResponse,
+    UpdateCertificateRecordRollbackResponse: UpdateCertificateRecordRollbackResponse,
     DescribeCertificateBindResourceTaskDetailResponse: DescribeCertificateBindResourceTaskDetailResponse,
     DvAuthDetail: DvAuthDetail,
     ModifyCSRResponse: ModifyCSRResponse,
     CdnInstanceList: CdnInstanceList,
+    UpdateCertificateRecordRetryRequest: UpdateCertificateRecordRetryRequest,
     DdosInstanceDetail: DdosInstanceDetail,
     CreateCertificateRequest: CreateCertificateRequest,
     DescribeCertificatesResponse: DescribeCertificatesResponse,
@@ -6684,6 +8027,7 @@ module.exports = {
     CommitCertificateInformationRequest: CommitCertificateInformationRequest,
     CSRItem: CSRItem,
     DownloadCertificateRequest: DownloadCertificateRequest,
+    UpdateCertificateInstanceRequest: UpdateCertificateInstanceRequest,
     ReplaceCertificateRequest: ReplaceCertificateRequest,
     DescribeCertificateResponse: DescribeCertificateResponse,
     TkeSecretDetail: TkeSecretDetail,
@@ -6692,14 +8036,17 @@ module.exports = {
     CreateCSRRequest: CreateCSRRequest,
     TCBInstanceList: TCBInstanceList,
     DescribeCertificateRequest: DescribeCertificateRequest,
+    TSEInstanceDetail: TSEInstanceDetail,
     WafInstanceList: WafInstanceList,
     Filter: Filter,
-    TkeInstanceList: TkeInstanceList,
-    Error: Error,
+    DescribeHostUpdateRecordDetailResponse: DescribeHostUpdateRecordDetailResponse,
+    DescribeHostUpdateRecordRequest: DescribeHostUpdateRecordRequest,
     CertTaskId: CertTaskId,
     TCBAccessService: TCBAccessService,
     DescribeCSRSetRequest: DescribeCSRSetRequest,
     SubmittedData: SubmittedData,
+    UpdateSyncProgressRegion: UpdateSyncProgressRegion,
+    TkeInstanceList: TkeInstanceList,
     ApiGatewayInstanceDetail: ApiGatewayInstanceDetail,
     LiveInstanceList: LiveInstanceList,
     DeleteCertificateRequest: DeleteCertificateRequest,
@@ -6708,12 +8055,15 @@ module.exports = {
     DescribeHostTeoInstanceListResponse: DescribeHostTeoInstanceListResponse,
     CancelAuditCertificateRequest: CancelAuditCertificateRequest,
     ModifyCertificateResubmitResponse: ModifyCertificateResubmitResponse,
+    UpdateCertificateInstanceResponse: UpdateCertificateInstanceResponse,
     UploadCertificateRequest: UploadCertificateRequest,
     ModifyCertificateAliasResponse: ModifyCertificateAliasResponse,
     ApplyCertificateRequest: ApplyCertificateRequest,
     CreateCertificateResponse: CreateCertificateResponse,
+    UpdateRecordInfo: UpdateRecordInfo,
     DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     DescribeCertificateBindResourceTaskResultResponse: DescribeCertificateBindResourceTaskResultResponse,
+    DownloadCertificateResponse: DownloadCertificateResponse,
     ClbListenerRule: ClbListenerRule,
     DescribeHostTeoInstanceListRequest: DescribeHostTeoInstanceListRequest,
     BindResourceRegionResult: BindResourceRegionResult,
@@ -6722,9 +8072,11 @@ module.exports = {
     SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
     DescribeCSRResponse: DescribeCSRResponse,
     ClbInstanceList: ClbInstanceList,
+    UpdateCertificateRecordRetryResponse: UpdateCertificateRecordRetryResponse,
     TCBHostService: TCBHostService,
     TkeIngressDetail: TkeIngressDetail,
     CancelAuditCertificateResponse: CancelAuditCertificateResponse,
+    TSEInstanceList: TSEInstanceList,
     VODInstanceList: VODInstanceList,
 
 }

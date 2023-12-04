@@ -4610,9 +4610,28 @@ class AssetClusterListItem extends  AbstractModel {
          * Cluster type:
 `CT_TKE`: TKE cluster
 `CT_USER_CREATE`: External cluster
+`CT_TKE_SERVERLESS`: TKE Serverless cluster
          * @type {string || null}
          */
         this.ClusterType = null;
+
+        /**
+         * Cluster version
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * MEM usage
+         * @type {number || null}
+         */
+        this.MemLimit = null;
+
+        /**
+         * cpu
+         * @type {number || null}
+         */
+        this.CpuLimit = null;
 
     }
 
@@ -4628,6 +4647,9 @@ class AssetClusterListItem extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.BindRuleName = 'BindRuleName' in params ? params.BindRuleName : null;
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.MemLimit = 'MemLimit' in params ? params.MemLimit : null;
+        this.CpuLimit = 'CpuLimit' in params ? params.CpuLimit : null;
 
     }
 }
@@ -4934,49 +4956,24 @@ class CreateVulDefenceEventExportJobRequest extends  AbstractModel {
 }
 
 /**
- * DescribeNetworkFirewallPolicyList request structure.
+ * Custom parameters of the cluster
  * @class
  */
-class DescribeNetworkFirewallPolicyListRequest extends  AbstractModel {
+class ClusterCustomParameters extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * Parameter name
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.Name = null;
 
         /**
-         * Offset
-         * @type {number || null}
+         * Parameter value
+         * @type {Array.<string> || null}
          */
-        this.Offset = null;
-
-        /**
-         * Maximum number of records per query
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Name - String
-Name. Valid values: `ClusterName`, `ClusterId`, `ClusterType`, `Region`, `ClusterCheckMode`, `ClusterAutoCheck`.
-         * @type {Array.<ComplianceFilters> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Sorting field
-         * @type {string || null}
-         */
-        this.By = null;
-
-        /**
-         * Sorting order. Valid values: `asc`, `desc`.
-         * @type {string || null}
-         */
-        this.Order = null;
+        this.Values = null;
 
     }
 
@@ -4987,20 +4984,8 @@ Name. Valid values: `ClusterName`, `ClusterId`, `ClusterType`, `Region`, `Cluste
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new ComplianceFilters();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.By = 'By' in params ? params.By : null;
-        this.Order = 'Order' in params ? params.Order : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -6483,6 +6468,36 @@ class ProcessInfo extends  AbstractModel {
          */
         this.PublicIp = null;
 
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Node type.
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * UID of the super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
     }
 
     /**
@@ -6504,6 +6519,11 @@ class ProcessInfo extends  AbstractModel {
         this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
 
     }
 }
@@ -6877,9 +6897,13 @@ class DescribeVulDefenceHostRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter
-<li>Status- String - Required: No - Plugin status. Valid values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENCE` (not defended).</li>
-<li>KeyWords- string - Required: No - Server name/IP</li>
+         * Filter condition
+<li>`Status`: String - Required: No - Plugin status. Values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENCE` (not defended).</li>
+<li>`HostName`: String - Required: No - Server/Super node name</li>
+<li>`HostIP`: String - Required: No - Server IP </li>
+<li>`NodeType`: String  - Required: No - Node type</li>
+<li>`HostName` - String - Required: No - Super node name </li>
+<li>`NodeSubNetCIDR`: String - Required: No - Super node CIDR block</li>
          * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
@@ -7468,10 +7492,16 @@ class SecLogJoinInfo extends  AbstractModel {
         super();
 
         /**
-         * Number of accessed servers
+         * Number of connected general nodes
          * @type {number || null}
          */
         this.Count = null;
+
+        /**
+         * Number of connected super nodes
+         * @type {number || null}
+         */
+        this.SuperNodeCount = null;
 
         /**
          * Whether it is accessed. Valid values: `true` (accessed); `false` (not accessed).
@@ -7499,6 +7529,7 @@ K8s API: "k8s_api"
             return;
         }
         this.Count = 'Count' in params ? params.Count : null;
+        this.SuperNodeCount = 'SuperNodeCount' in params ? params.SuperNodeCount : null;
         this.IsJoined = 'IsJoined' in params ? params.IsJoined : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
 
@@ -8812,16 +8843,28 @@ class ModifyVulDefenceSettingRequest extends  AbstractModel {
         this.IsEnabled = null;
 
         /**
-         * Scope of servers for which to enable exploit prevention. Valid values: `0` (specified servers); `1` (all servers). This parameter is required when `IsEnabled` is `1`.
+         * Servers to enable exploit prevention. Values: `0` (custom); `1` (all).
          * @type {number || null}
          */
         this.Scope = null;
 
         /**
-         * Specified servers for which to enable exploit prevention. This parameter is required when `Scope` is `0`.
+         * Specified servers with exploit prevention enabled
          * @type {Array.<string> || null}
          */
         this.HostIDs = null;
+
+        /**
+         * Super nodes to enable exploit prevention. Values: `0` (custom); `1` (all).
+         * @type {number || null}
+         */
+        this.SuperScope = null;
+
+        /**
+         * List of super node IDs
+         * @type {Array.<string> || null}
+         */
+        this.NodeIds = null;
 
     }
 
@@ -8835,6 +8878,8 @@ class ModifyVulDefenceSettingRequest extends  AbstractModel {
         this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
         this.Scope = 'Scope' in params ? params.Scope : null;
         this.HostIDs = 'HostIDs' in params ? params.HostIDs : null;
+        this.SuperScope = 'SuperScope' in params ? params.SuperScope : null;
+        this.NodeIds = 'NodeIds' in params ? params.NodeIds : null;
 
     }
 }
@@ -8968,6 +9013,42 @@ class DescribeAssetSummaryResponse extends  AbstractModel {
         this.HostUnInstallCnt = null;
 
         /**
+         * Number of super nodes
+         * @type {number || null}
+         */
+        this.SuperNodeCnt = null;
+
+        /**
+         * Number of running super nodes
+         * @type {number || null}
+         */
+        this.SuperNodeRunningCnt = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TodayNewImageCnt = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TodayUnsafeImageCnt = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RecommendedFixImageCnt = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ScannedImageCnt = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -9002,6 +9083,12 @@ class DescribeAssetSummaryResponse extends  AbstractModel {
         this.LatestImageScanTime = 'LatestImageScanTime' in params ? params.LatestImageScanTime : null;
         this.ImageUnsafeCnt = 'ImageUnsafeCnt' in params ? params.ImageUnsafeCnt : null;
         this.HostUnInstallCnt = 'HostUnInstallCnt' in params ? params.HostUnInstallCnt : null;
+        this.SuperNodeCnt = 'SuperNodeCnt' in params ? params.SuperNodeCnt : null;
+        this.SuperNodeRunningCnt = 'SuperNodeRunningCnt' in params ? params.SuperNodeRunningCnt : null;
+        this.TodayNewImageCnt = 'TodayNewImageCnt' in params ? params.TodayNewImageCnt : null;
+        this.TodayUnsafeImageCnt = 'TodayUnsafeImageCnt' in params ? params.TodayUnsafeImageCnt : null;
+        this.RecommendedFixImageCnt = 'RecommendedFixImageCnt' in params ? params.RecommendedFixImageCnt : null;
+        this.ScannedImageCnt = 'ScannedImageCnt' in params ? params.ScannedImageCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9486,8 +9573,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerIsolateOperationSrc = null;
 
         /**
-         * Server QUuid
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node QUuid/Super node ID
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.QUUID = null;
@@ -9500,11 +9587,47 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HostIP = null;
 
         /**
-         * Server name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * General node/Super node name
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostName = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Public IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * UID of a super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * ID of a super node
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
 
     }
 
@@ -9537,6 +9660,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.QUUID = 'QUUID' in params ? params.QUUID : null;
         this.HostIP = 'HostIP' in params ? params.HostIP : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -10139,14 +10268,19 @@ class DescribeAssetContainerListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter
-<li>ContainerName - String - Required: No - Container name</li>
-<li>Status - String - Required: No - Container status. Valid values: `0` (created); `1` (running); `2` (paused); `3` (restarting); `4` (removing); `5` (exited); `6` (dead).</li>
-<li>Runas - String - Required: No - Operator</li>
-<li>ImageName- String - Required: No - Image name</li>
-<li>HostIP- string - Required: No - Server IP</li>
-<li>OrderBy - String - Required: No - Sorting field, which supports dynamic sorting by `cpu_usage` or `mem_usage` such as ["cpu_usage","+"]. '+' indicates ascending, and '-' indicates descending.</li>
-<li>NetStatus - String - Required: No - Container network status. Valid values: `normal`, `isolated`, `isolating`, `isolate_failed`, `restoring`, `restore_failed`.</li>
+         * Filter condition
+<li>`ContainerName`: String - Required: No - Container name</li>
+<li>`Status` - String - Required: No - Container status. Values: `0` (created); `1` (running); `2` (paused); `3` (restarting); `4` (removing); `5` (exited); `6` (dead).</li>
+<li>`Runas`: String - Required: No - Operator</li>
+<li>`ImageName`: String - Required: No - Image name</li>
+<li>`HostIP`: String - Required: No - Server IP</li>
+<li>`OrderBy` - String - Required: No - Sorting field, which supports dynamic sorting by `cpu_usage` or `mem_usage` such as ["cpu_usage","+"]. '+' indicates ascending, and '-' indicates descending.</li>
+<li>`NetStatus`: String - Required: No - Container network status. Values: `normal`, `isolated`, `isolating`, `isolate_failed`, `restoring`, `restore_failed`.</li>
+<li>`PodID`: String - Required: No- Pod ID </li>
+<li>`NodeUniqueID`: String - Required: No - Super Node</li>
+<li>`PodUid`: String - Required: No - Pod</li>
+<li>`PodIP`: String - Required: No - Pod IP</li>
+<li>`NodeType`: String - Required: No - Values: `NORMAL` (general nodes), `SUPER` (super nodes)</li>
          * @type {Array.<AssetFilters> || null}
          */
         this.Filters = null;
@@ -10276,6 +10410,41 @@ class CreateDefenceVulExportJobResponse extends  AbstractModel {
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopVirusScanTask request structure.
+ * @class
+ */
+class StopVirusScanTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * ID of the container to be stopped. If it is left empty, the entire task will be stopped.
+         * @type {Array.<string> || null}
+         */
+        this.ContainerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ContainerIds = 'ContainerIds' in params ? params.ContainerIds : null;
 
     }
 }
@@ -10728,7 +10897,8 @@ class DescribeReverseShellEventsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
+         * Filter parameters
+`InnerNetAlarmShow` - int - Required: Values: `1` (show private network alert); `0` (do not show)
          * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
@@ -11136,6 +11306,72 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CheckPlatform = null;
 
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod (instance) name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * ID of the cluster where the node resides
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Public IP of the node
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Node private IP
+         * @type {string || null}
+         */
+        this.InnerIP = null;
+
+        /**
+         * UID of the node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * ID for u200dthe general node
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
     }
 
     /**
@@ -11166,6 +11402,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MD5 = 'MD5' in params ? params.MD5 : null;
         this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
         this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.InnerIP = 'InnerIP' in params ? params.InnerIP : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -13391,6 +13638,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Id = null;
 
         /**
+         * Whether to scan the latest image tag
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Latest = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ScanEndTime = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RegistryType = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.ContainerRunning = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ScanScope = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Namespace = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -13420,6 +13704,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.Id = 'Id' in params ? params.Id : null;
+        this.Latest = 'Latest' in params ? params.Latest : null;
+        this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+        this.ContainerRunning = 'ContainerRunning' in params ? params.ContainerRunning : null;
+        this.ScanScope = 'ScanScope' in params ? params.ScanScope : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14010,6 +14300,72 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ContainerStatus = null;
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Node public IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * uuid
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * Private IP of the node
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
     }
 
     /**
@@ -14045,6 +14401,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
         this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -14276,6 +14643,12 @@ class DescribeAgentDaemonSetCmdRequest extends  AbstractModel {
          */
         this.ExpireDate = null;
 
+        /**
+         * Custom parameters of the cluster
+         * @type {Array.<ClusterCustomParameters> || null}
+         */
+        this.ClusterCustomParameters = null;
+
     }
 
     /**
@@ -14290,6 +14663,15 @@ class DescribeAgentDaemonSetCmdRequest extends  AbstractModel {
         this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
+
+        if (params.ClusterCustomParameters) {
+            this.ClusterCustomParameters = new Array();
+            for (let z in params.ClusterCustomParameters) {
+                let obj = new ClusterCustomParameters();
+                obj.deserialize(params.ClusterCustomParameters[z]);
+                this.ClusterCustomParameters.push(obj);
+            }
+        }
 
     }
 }
@@ -14568,6 +14950,72 @@ class AccessControlEventInfo extends  AbstractModel {
          */
         this.ContainerStatus = null;
 
+        /**
+         * Node name: For super nodes, the node_id is displayed.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Node unique ID. It's used for super nodes.
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Node public IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * uuid
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * Private IP of the node
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
     }
 
     /**
@@ -14604,6 +15052,17 @@ class AccessControlEventInfo extends  AbstractModel {
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
         this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -14683,6 +15142,30 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.NotImportedClusterCount = null;
 
         /**
+         * Number of EKS clusters
+         * @type {number || null}
+         */
+        this.ServerlessClusterCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TkeClusterCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.UserCreateTencentClusterCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.UserCreateHybridClusterCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -14708,6 +15191,10 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.ManualCheckClusterCount = 'ManualCheckClusterCount' in params ? params.ManualCheckClusterCount : null;
         this.FailedClusterCount = 'FailedClusterCount' in params ? params.FailedClusterCount : null;
         this.NotImportedClusterCount = 'NotImportedClusterCount' in params ? params.NotImportedClusterCount : null;
+        this.ServerlessClusterCount = 'ServerlessClusterCount' in params ? params.ServerlessClusterCount : null;
+        this.TkeClusterCount = 'TkeClusterCount' in params ? params.TkeClusterCount : null;
+        this.UserCreateTencentClusterCount = 'UserCreateTencentClusterCount' in params ? params.UserCreateTencentClusterCount : null;
+        this.UserCreateHybridClusterCount = 'UserCreateHybridClusterCount' in params ? params.UserCreateHybridClusterCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15873,7 +16360,7 @@ class VulDefenceHost extends  AbstractModel {
         super();
 
         /**
-         * Server name
+         * General node/Super node name
          * @type {string || null}
          */
         this.HostName = null;
@@ -15885,7 +16372,7 @@ class VulDefenceHost extends  AbstractModel {
         this.HostIP = null;
 
         /**
-         * Server QUuid
+         * Node QUuid/Super node ID
          * @type {string || null}
          */
         this.HostID = null;
@@ -15914,6 +16401,54 @@ class VulDefenceHost extends  AbstractModel {
          */
         this.ModifyTime = null;
 
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Super node subnet name
+         * @type {string || null}
+         */
+        this.NodeSubNetName = null;
+
+        /**
+         * Super node subnet IP range
+         * @type {string || null}
+         */
+        this.NodeSubNetCIDR = null;
+
+        /**
+         * Super node subnet ID
+         * @type {string || null}
+         */
+        this.NodeSubNetID = null;
+
+        /**
+         * UID of a super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * ID of a super node
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
     }
 
     /**
@@ -15930,6 +16465,14 @@ class VulDefenceHost extends  AbstractModel {
         this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeSubNetName = 'NodeSubNetName' in params ? params.NodeSubNetName : null;
+        this.NodeSubNetCIDR = 'NodeSubNetCIDR' in params ? params.NodeSubNetCIDR : null;
+        this.NodeSubNetID = 'NodeSubNetID' in params ? params.NodeSubNetID : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
 
     }
 }
@@ -16200,6 +16743,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.NetworkPolicyPluginError = null;
 
+        /**
+         * Cluster network plugin
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterNetworkSettings = null;
+
     }
 
     /**
@@ -16221,6 +16771,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EnableRuleCount = 'EnableRuleCount' in params ? params.EnableRuleCount : null;
         this.NetworkPolicyPluginStatus = 'NetworkPolicyPluginStatus' in params ? params.NetworkPolicyPluginStatus : null;
         this.NetworkPolicyPluginError = 'NetworkPolicyPluginError' in params ? params.NetworkPolicyPluginError : null;
+        this.ClusterNetworkSettings = 'ClusterNetworkSettings' in params ? params.ClusterNetworkSettings : null;
 
     }
 }
@@ -17857,6 +18408,12 @@ class CreateAssetImageRegistryScanTaskOneKeyResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.TaskID = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -17871,6 +18428,7 @@ class CreateAssetImageRegistryScanTaskOneKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -18718,6 +19276,12 @@ class CreateAssetImageRegistryScanTaskResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.TaskID = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -18732,6 +19296,7 @@ class CreateAssetImageRegistryScanTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -18850,6 +19415,36 @@ class PortInfo extends  AbstractModel {
          */
         this.PublicIp = null;
 
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Node type.
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * UID of the super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
     }
 
     /**
@@ -18873,6 +19468,11 @@ class PortInfo extends  AbstractModel {
         this.RunAs = 'RunAs' in params ? params.RunAs : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
 
     }
 }
@@ -18885,6 +19485,12 @@ class DescribeAssetImageRegistrySummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -18893,6 +19499,15 @@ class DescribeAssetImageRegistrySummaryRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -19108,6 +19723,24 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.Tags = null;
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClusterAccessedStatus = null;
+
     }
 
     /**
@@ -19147,6 +19780,9 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.Tags.push(obj);
             }
         }
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterAccessedStatus = 'ClusterAccessedStatus' in params ? params.ClusterAccessedStatus : null;
 
     }
 }
@@ -19300,6 +19936,18 @@ class CreateRefreshTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIDs = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsSyncListOnly = null;
+
     }
 
     /**
@@ -19309,6 +19957,8 @@ class CreateRefreshTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterIDs = 'ClusterIDs' in params ? params.ClusterIDs : null;
+        this.IsSyncListOnly = 'IsSyncListOnly' in params ? params.IsSyncListOnly : null;
 
     }
 }
@@ -21670,6 +22320,42 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
          */
         this.Id = null;
 
+        /**
+         * Whether to scan for the latest version
+         * @type {boolean || null}
+         */
+        this.Latest = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.ContainerRunning = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ScanEndTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ScanScope = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RegistryType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Namespace = null;
+
     }
 
     /**
@@ -21694,6 +22380,12 @@ class UpdateImageRegistryTimingScanTaskRequest extends  AbstractModel {
         }
         this.All = 'All' in params ? params.All : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.Latest = 'Latest' in params ? params.Latest : null;
+        this.ContainerRunning = 'ContainerRunning' in params ? params.ContainerRunning : null;
+        this.ScanEndTime = 'ScanEndTime' in params ? params.ScanEndTime : null;
+        this.ScanScope = 'ScanScope' in params ? params.ScanScope : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -22046,24 +22738,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * StopVirusScanTask request structure.
+ * Port of the custom rule of the network cluster policy
  * @class
  */
-class StopVirusScanTaskRequest extends  AbstractModel {
+class NetworkPorts extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
+         * Protocol of the network policy
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.Protocol = null;
 
         /**
-         * ID of the container to be stopped. If it is left empty, the entire task will be stopped.
-         * @type {Array.<string> || null}
+         * Port of the network policy
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.ContainerIds = null;
+        this.Port = null;
 
     }
 
@@ -22074,8 +22768,8 @@ class StopVirusScanTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.ContainerIds = 'ContainerIds' in params ? params.ContainerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -22456,6 +23150,60 @@ class RiskSyscallEventInfo extends  AbstractModel {
          */
         this.ContainerStatus = null;
 
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Unique node ID
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Node public IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * uuid
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * Private IP of the node
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
     }
 
     /**
@@ -22487,6 +23235,15 @@ class RiskSyscallEventInfo extends  AbstractModel {
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
         this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -23462,6 +24219,91 @@ class ModifyVirusFileStatusRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.AutoIsolate = 'AutoIsolate' in params ? params.AutoIsolate : null;
+
+    }
+}
+
+/**
+ * This API is used to query the list of repository images u200daffected by a specific vulnerability.
+ * @class
+ */
+class VulAffectedRegistryImageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image ID
+         * @type {string || null}
+         */
+        this.ImageID = null;
+
+        /**
+         * Image name
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Image tag
+         * @type {string || null}
+         */
+        this.ImageTag = null;
+
+        /**
+         * Image namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Image address
+         * @type {string || null}
+         */
+        this.ImageRepoAddress = null;
+
+        /**
+         * List of components
+         * @type {Array.<VulAffectedImageComponentInfo> || null}
+         */
+        this.ComponentList = null;
+
+        /**
+         * Whether it is the latest image tag
+         * @type {boolean || null}
+         */
+        this.IsLatestImage = null;
+
+        /**
+         * Internal image asset ID
+         * @type {number || null}
+         */
+        this.ImageAssetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageID = 'ImageID' in params ? params.ImageID : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.ImageRepoAddress = 'ImageRepoAddress' in params ? params.ImageRepoAddress : null;
+
+        if (params.ComponentList) {
+            this.ComponentList = new Array();
+            for (let z in params.ComponentList) {
+                let obj = new VulAffectedImageComponentInfo();
+                obj.deserialize(params.ComponentList[z]);
+                this.ComponentList.push(obj);
+            }
+        }
+        this.IsLatestImage = 'IsLatestImage' in params ? params.IsLatestImage : null;
+        this.ImageAssetId = 'ImageAssetId' in params ? params.ImageAssetId : null;
 
     }
 }
@@ -25017,13 +25859,14 @@ class EscapeEventInfo extends  AbstractModel {
         super();
 
         /**
-         * Event type
-   `ESCAPE_HOST_ACESS_FILE`: Host file access escape.
-   `ESCAPE_MOUNT_NAMESPACE`: Mount namespace escape.
-   `ESCAPE_PRIVILEDGE`: Program privilege escalation escape.
-   `ESCAPE_PRIVILEDGE_CONTAINER_START`: Privileged container startup escape.
-   `ESCAPE_MOUNT_SENSITIVE_PTAH`: Sensitive path mount.
-   `ESCAPE_SYSCALL`: Syscall escape.
+         * Event type.
+   `ESCAPE_CGROUPS`: Cgroup escape.
+   `ESCAPE_TAMPER_SENSITIVE_FILE`: File tamper escape.
+   `ESCAPE_DOCKER_API`: Docker API access escape.
+   `ESCAPE_VUL_OCCURRED`: Vulnerability exploit.
+   `MOUNT_SENSITIVE_PTAH`: Sensitive path mount.
+   `PRIVILEGE_CONTAINER_START`: Privileged container.
+   `PRIVILEGE`: Program privilege escalation escape.
          * @type {string || null}
          */
         this.EventType = null;
@@ -25179,6 +26022,54 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ContainerStatus = null;
 
+        /**
+         * ID of the cluster where the node resides
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Unique node ID
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Node public IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Private IP of the node
+         * @type {string || null}
+         */
+        this.HostIP = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
     }
 
     /**
@@ -25209,6 +26100,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
         this.ContainerStatus = 'ContainerStatus' in params ? params.ContainerStatus : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.HostIP = 'HostIP' in params ? params.HostIP : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -25672,6 +26571,42 @@ class VulAffectedContainerInfo extends  AbstractModel {
          */
         this.PublicIP = null;
 
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * UID of a super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * ID of a super node
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Super node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
     }
 
     /**
@@ -25689,6 +26624,12 @@ class VulAffectedContainerInfo extends  AbstractModel {
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.HostID = 'HostID' in params ? params.HostID : null;
         this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
 
     }
 }
@@ -25942,6 +26883,84 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsolateTime = null;
 
         /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node subnet ID
+         * @type {string || null}
+         */
+        this.NodeSubNetID = null;
+
+        /**
+         * Node subnet name
+         * @type {string || null}
+         */
+        this.NodeSubNetName = null;
+
+        /**
+         * Subnet IP range
+         * @type {string || null}
+         */
+        this.NodeSubNetCIDR = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod status
+         * @type {string || null}
+         */
+        this.PodStatus = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Node type. Values: `NORMAL` (default), `SUPER`
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * UID of the super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Public IP
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -25996,6 +27015,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NetSubStatus = 'NetSubStatus' in params ? params.NetSubStatus : null;
         this.IsolateSource = 'IsolateSource' in params ? params.IsolateSource : null;
         this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeSubNetID = 'NodeSubNetID' in params ? params.NodeSubNetID : null;
+        this.NodeSubNetName = 'NodeSubNetName' in params ? params.NodeSubNetName : null;
+        this.NodeSubNetCIDR = 'NodeSubNetCIDR' in params ? params.NodeSubNetCIDR : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodStatus = 'PodStatus' in params ? params.PodStatus : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -26055,6 +27087,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SupportDefenseVulCount = null;
 
         /**
+         * Number of normal nodes
+         * @type {number || null}
+         */
+        this.HostNodeCount = null;
+
+        /**
+         * Super node scope
+         * @type {number || null}
+         */
+        this.SuperScope = null;
+
+        /**
+         * Number of super nodes
+         * @type {number || null}
+         */
+        this.SuperNodeCount = null;
+
+        /**
+         * List of super node IDs
+         * @type {Array.<string> || null}
+         */
+        this.SuperNodeIds = null;
+
+        /**
+         * Total number of super nodes with TCSS activated
+         * @type {number || null}
+         */
+        this.NodeTotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -26076,6 +27138,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HostIDs = 'HostIDs' in params ? params.HostIDs : null;
         this.HostTotalCount = 'HostTotalCount' in params ? params.HostTotalCount : null;
         this.SupportDefenseVulCount = 'SupportDefenseVulCount' in params ? params.SupportDefenseVulCount : null;
+        this.HostNodeCount = 'HostNodeCount' in params ? params.HostNodeCount : null;
+        this.SuperScope = 'SuperScope' in params ? params.SuperScope : null;
+        this.SuperNodeCount = 'SuperNodeCount' in params ? params.SuperNodeCount : null;
+        this.SuperNodeIds = 'SuperNodeIds' in params ? params.SuperNodeIds : null;
+        this.NodeTotalCount = 'NodeTotalCount' in params ? params.NodeTotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -27483,6 +28550,18 @@ class SyncAssetImageRegistryAssetRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.All = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.RegistryIds = null;
+
     }
 
     /**
@@ -27492,6 +28571,8 @@ class SyncAssetImageRegistryAssetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.All = 'All' in params ? params.All : null;
+        this.RegistryIds = 'RegistryIds' in params ? params.RegistryIds : null;
 
     }
 }
@@ -29263,7 +30344,7 @@ class VulDefenceEventDetail extends  AbstractModel {
         this.EventID = null;
 
         /**
-         * Server name
+         * General node/Super node name
          * @type {string || null}
          */
         this.HostName = null;
@@ -29354,8 +30435,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ServerArg = null;
 
         /**
-         * Server QUuid
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node QUuid/Super node ID
+Note: This field may return·`null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.QUUID = null;
@@ -29422,6 +30503,72 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.RaspDetail = null;
 
+        /**
+         * Super node subnet name
+         * @type {string || null}
+         */
+        this.NodeSubNetName = null;
+
+        /**
+         * Super node subnet IP range
+         * @type {string || null}
+         */
+        this.NodeSubNetCIDR = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * ID of a super node
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * UID of a super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Super node subnet ID
+         * @type {string || null}
+         */
+        this.NodeSubNetID = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WorkloadType = null;
+
     }
 
     /**
@@ -29474,6 +30621,17 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.RaspDetail.push(obj);
             }
         }
+        this.NodeSubNetName = 'NodeSubNetName' in params ? params.NodeSubNetName : null;
+        this.NodeSubNetCIDR = 'NodeSubNetCIDR' in params ? params.NodeSubNetCIDR : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.NodeSubNetID = 'NodeSubNetID' in params ? params.NodeSubNetID : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.WorkloadType = 'WorkloadType' in params ? params.WorkloadType : null;
 
     }
 }
@@ -29556,6 +30714,85 @@ class DescribeK8sApiAbnormalRuleInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVulRegistryImageList request structure.
+ * @class
+ */
+class DescribeVulRegistryImageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vulnerability ID
+         * @type {string || null}
+         */
+        this.PocID = null;
+
+        /**
+         * The number of results returned. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter condition
+`OnlyAffectedNewestImage`: (bool) Whether the latest image is affected.
+`ImageDigest`: Image digest. Fuzzy query is supported.
+`ImageId`: Image ID.
+`Namespace`: Namespace. Fuzzy query is supported.
+`ImageTag`: Image tag. Fuzzy query is supported.
+`InstanceName`: Instance name. Fuzzy query is supported.
+`ImageName`: Image name. Fuzzy query is supported.
+`ImageRepoAddress`: Image address. Fuzzy query is supported.
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting order
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PocID = 'PocID' in params ? params.PocID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
  * Runtime security - Basic event information
  * @class
  */
@@ -29604,12 +30841,6 @@ class RunTimeEventBaseInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.NodeName = null;
-
-        /**
-         * Pod name
-         * @type {string || null}
-         */
-        this.PodName = null;
 
         /**
          * Status. `EVENT_UNDEAL`: Pending.
@@ -29705,6 +30936,90 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ContainerIsolateOperationSrc = null;
 
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Node type. Valid values: `NORMAL` (general node), `SUPER` (super node)
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Node subnet ID
+         * @type {string || null}
+         */
+        this.NodeSubNetID = null;
+
+        /**
+         * Node subnet name
+         * @type {string || null}
+         */
+        this.NodeSubNetName = null;
+
+        /**
+         * Subnet IP range
+         * @type {string || null}
+         */
+        this.NodeSubNetCIDR = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod status
+         * @type {string || null}
+         */
+        this.PodStatus = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Unique node ID
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * uuid
+         * @type {string || null}
+         */
+        this.HostID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WorkloadType = null;
+
     }
 
     /**
@@ -29721,7 +31036,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.ImageName = 'ImageName' in params ? params.ImageName : null;
         this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.PodName = 'PodName' in params ? params.PodName : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.EventName = 'EventName' in params ? params.EventName : null;
         this.EventType = 'EventType' in params ? params.EventType : null;
@@ -29732,6 +31046,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerNetStatus = 'ContainerNetStatus' in params ? params.ContainerNetStatus : null;
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeSubNetID = 'NodeSubNetID' in params ? params.NodeSubNetID : null;
+        this.NodeSubNetName = 'NodeSubNetName' in params ? params.NodeSubNetName : null;
+        this.NodeSubNetCIDR = 'NodeSubNetCIDR' in params ? params.NodeSubNetCIDR : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodStatus = 'PodStatus' in params ? params.PodStatus : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.HostID = 'HostID' in params ? params.HostID : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.WorkloadType = 'WorkloadType' in params ? params.WorkloadType : null;
 
     }
 }
@@ -32675,6 +34003,15 @@ K8s API: k8s_api
          */
         this.UnBindList = null;
 
+        /**
+         * Node type.
+`NORMAL`: General node (default)
+`SUPER`: Super node
+
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
     }
 
     /**
@@ -32687,6 +34024,7 @@ K8s API: k8s_api
         this.LogType = 'LogType' in params ? params.LogType : null;
         this.BindList = 'BindList' in params ? params.BindList : null;
         this.UnBindList = 'UnBindList' in params ? params.UnBindList : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
 
     }
 }
@@ -34122,26 +35460,30 @@ class DescribeEscapeSafeStateRequest extends  AbstractModel {
 }
 
 /**
- * Port of the custom rule of the network cluster policy
+ * DescribeVirusManualScanEstimateTimeout request structure.
  * @class
  */
-class NetworkPorts extends  AbstractModel {
+class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Protocol of the network policy
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Scanning scope. Valid values: `0` (container); `1` (server).
+         * @type {number || null}
          */
-        this.Protocol = null;
+        this.ScanRangeType = null;
 
         /**
-         * Port of the network policy
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Valid values: `true` (all); `false` (specified).
+         * @type {boolean || null}
          */
-        this.Port = null;
+        this.ScanRangeAll = null;
+
+        /**
+         * ID of the specified container or server to be scanned, which is based on `ScanRangeType`.
+         * @type {Array.<string> || null}
+         */
+        this.ScanIds = null;
 
     }
 
@@ -34152,8 +35494,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
+        this.ScanRangeType = 'ScanRangeType' in params ? params.ScanRangeType : null;
+        this.ScanRangeAll = 'ScanRangeAll' in params ? params.ScanRangeAll : null;
+        this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
 
     }
 }
@@ -35003,30 +36346,49 @@ class DescribeEscapeWhiteListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVirusManualScanEstimateTimeout request structure.
+ * DescribeNetworkFirewallPolicyList request structure.
  * @class
  */
-class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
+class DescribeNetworkFirewallPolicyListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Scanning scope. Valid values: `0` (container); `1` (server).
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Offset
          * @type {number || null}
          */
-        this.ScanRangeType = null;
+        this.Offset = null;
 
         /**
-         * Valid values: `true` (all); `false` (specified).
-         * @type {boolean || null}
+         * Maximum number of records per query
+         * @type {number || null}
          */
-        this.ScanRangeAll = null;
+        this.Limit = null;
 
         /**
-         * ID of the specified container or server to be scanned, which is based on `ScanRangeType`.
-         * @type {Array.<string> || null}
+         * Name - String
+Name. Valid values: `ClusterName`, `ClusterId`, `ClusterType`, `Region`, `ClusterCheckMode`, `ClusterAutoCheck`.
+         * @type {Array.<ComplianceFilters> || null}
          */
-        this.ScanIds = null;
+        this.Filters = null;
+
+        /**
+         * Sorting field
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Sorting order. Valid values: `asc`, `desc`.
+         * @type {string || null}
+         */
+        this.Order = null;
 
     }
 
@@ -35037,9 +36399,20 @@ class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScanRangeType = 'ScanRangeType' in params ? params.ScanRangeType : null;
-        this.ScanRangeAll = 'ScanRangeAll' in params ? params.ScanRangeAll : null;
-        this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new ComplianceFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -35316,6 +36689,56 @@ Name. Valid values: `ClusterName`, `ClusterId`, `ClusterType`, `Region`, `Cluste
         }
         this.By = 'By' in params ? params.By : null;
         this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * DescribeVulRegistryImageList response structure.
+ * @class
+ */
+class DescribeVulRegistryImageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of images
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 
+         * @type {Array.<VulAffectedRegistryImageInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulAffectedRegistryImageInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -36363,6 +37786,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Version = null;
 
+        /**
+         * Fixed version
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FixedVersion = null;
+
+        /**
+         * Path
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Type
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Add-on name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -36374,6 +37825,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Component = 'Component' in params ? params.Component : null;
         this.Version = 'Version' in params ? params.Version : null;
+        this.FixedVersion = 'FixedVersion' in params ? params.FixedVersion : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -37081,6 +38536,12 @@ class DescribeContainerAssetSummaryResponse extends  AbstractModel {
         this.HostUnInstallCnt = null;
 
         /**
+         * Number of super nodes
+         * @type {number || null}
+         */
+        this.HostSuperNodeCnt = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -37106,6 +38567,7 @@ class DescribeContainerAssetSummaryResponse extends  AbstractModel {
         this.ImageRegistryCnt = 'ImageRegistryCnt' in params ? params.ImageRegistryCnt : null;
         this.ImageTotalCnt = 'ImageTotalCnt' in params ? params.ImageTotalCnt : null;
         this.HostUnInstallCnt = 'HostUnInstallCnt' in params ? params.HostUnInstallCnt : null;
+        this.HostSuperNodeCnt = 'HostSuperNodeCnt' in params ? params.HostSuperNodeCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -37423,6 +38885,12 @@ class AffectedNodeItem extends  AbstractModel {
          */
         this.VerifyInfo = null;
 
+        /**
+         * Node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
     }
 
     /**
@@ -37441,6 +38909,7 @@ class AffectedNodeItem extends  AbstractModel {
         this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.VerifyInfo = 'VerifyInfo' in params ? params.VerifyInfo : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
 
     }
 }
@@ -39476,13 +40945,13 @@ class VirusTaskInfo extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * Server name
+         * Node name
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Server IP
+         * Private IP of the node
          * @type {string || null}
          */
         this.HostIp = null;
@@ -39543,6 +41012,24 @@ class VirusTaskInfo extends  AbstractModel {
          */
         this.ErrorMsg = null;
 
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Public IP of the node
+         * @type {string || null}
+         */
+        this.PublicIP = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
     }
 
     /**
@@ -39564,6 +41051,9 @@ class VirusTaskInfo extends  AbstractModel {
         this.RiskCnt = 'RiskCnt' in params ? params.RiskCnt : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.PublicIP = 'PublicIP' in params ? params.PublicIP : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
 
     }
 }
@@ -41255,13 +42745,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SourceType = null;
 
         /**
-         * Cluster name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PodName = null;
-
-        /**
          * Tag
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
@@ -41309,6 +42792,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.EventType = null;
+
+        /**
+         * Cluster name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PodName = null;
 
         /**
          * `DEAL_NONE`: Pending.
@@ -41463,6 +42953,78 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FileModifyTime = null;
 
         /**
+         * Node subnet ID
+         * @type {string || null}
+         */
+        this.NodeSubNetID = null;
+
+        /**
+         * Node subnet name
+         * @type {string || null}
+         */
+        this.NodeSubNetName = null;
+
+        /**
+         * Subnet IP range
+         * @type {string || null}
+         */
+        this.NodeSubNetCIDR = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod status
+         * @type {string || null}
+         */
+        this.PodStatus = null;
+
+        /**
+         * UID of the node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WorkloadType = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -41499,7 +43061,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProcessStartAccount = 'ProcessStartAccount' in params ? params.ProcessStartAccount : null;
         this.ProcessFileAuthority = 'ProcessFileAuthority' in params ? params.ProcessFileAuthority : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.PodName = 'PodName' in params ? params.PodName : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.HarmDescribe = 'HarmDescribe' in params ? params.HarmDescribe : null;
         this.SuggestScheme = 'SuggestScheme' in params ? params.SuggestScheme : null;
@@ -41507,6 +43068,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FileName = 'FileName' in params ? params.FileName : null;
         this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
         this.EventType = 'EventType' in params ? params.EventType : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.SubStatus = 'SubStatus' in params ? params.SubStatus : null;
         this.HostIP = 'HostIP' in params ? params.HostIP : null;
@@ -41526,6 +43088,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
         this.FileAccessTime = 'FileAccessTime' in params ? params.FileAccessTime : null;
         this.FileModifyTime = 'FileModifyTime' in params ? params.FileModifyTime : null;
+        this.NodeSubNetID = 'NodeSubNetID' in params ? params.NodeSubNetID : null;
+        this.NodeSubNetName = 'NodeSubNetName' in params ? params.NodeSubNetName : null;
+        this.NodeSubNetCIDR = 'NodeSubNetCIDR' in params ? params.NodeSubNetCIDR : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodStatus = 'PodStatus' in params ? params.PodStatus : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.WorkloadType = 'WorkloadType' in params ? params.WorkloadType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -42910,7 +44484,7 @@ class DescribeVulDefencePluginRequest extends  AbstractModel {
         super();
 
         /**
-         * Server host ID, i.e., QUuid
+         * Host ID or unique super node ID
          * @type {string || null}
          */
         this.HostID = null;
@@ -42928,8 +44502,10 @@ class DescribeVulDefencePluginRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter
-<li>Status- String - Required: No - Plugin status. Valid values: `INJECTING` (injecting); `SUCCESS` (injected successfully); `FAIL` (injection failed); `TIMEOUT` (plugin timed out); `QUIT` (plugin exited).</li>
+         * Filter condition
+<li>
+Status- String - Required: No - Plugin status. Valid values: `INJECTING` (injecting); `SUCCESS` (injected successfully); `FAIL` (injection failed); `TIMEOUT` (plugin timed out); `QUIT` (plugin exited).
+</li>
          * @type {Array.<RunTimeFilters> || null}
          */
         this.Filters = null;
@@ -43095,6 +44671,66 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.IsolateTime = null;
 
+        /**
+         * Super node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Node type. Valid values: `NORMAL` (general node), `SUPER` (super node)
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * UID of the super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
+        /**
+         * Number of CPU cores used by the pod
+         * @type {number || null}
+         */
+        this.PodCpu = null;
+
+        /**
+         * Memory specification of the Pod
+         * @type {number || null}
+         */
+        this.PodMem = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PodUid = null;
+
     }
 
     /**
@@ -43124,6 +44760,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NetSubStatus = 'NetSubStatus' in params ? params.NetSubStatus : null;
         this.IsolateSource = 'IsolateSource' in params ? params.IsolateSource : null;
         this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
+        this.PodCpu = 'PodCpu' in params ? params.PodCpu : null;
+        this.PodMem = 'PodMem' in params ? params.PodMem : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.PodUid = 'PodUid' in params ? params.PodUid : null;
 
     }
 }
@@ -43313,6 +44959,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Uin = null;
 
+        /**
+         * The policy ID.
+Note: This field may return·`null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -43331,6 +44984,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OperationTime = 'OperationTime' in params ? params.OperationTime : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -43619,6 +45273,36 @@ class ServiceInfo extends  AbstractModel {
          */
         this.PublicIp = null;
 
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeID = null;
+
+        /**
+         * Pod IP
+         * @type {string || null}
+         */
+        this.PodIP = null;
+
+        /**
+         * Pod name
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * Node type.
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * UID of the super node
+         * @type {string || null}
+         */
+        this.NodeUniqueID = null;
+
     }
 
     /**
@@ -43649,6 +45333,11 @@ class ServiceInfo extends  AbstractModel {
         this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.NodeID = 'NodeID' in params ? params.NodeID : null;
+        this.PodIP = 'PodIP' in params ? params.PodIP : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeUniqueID = 'NodeUniqueID' in params ? params.NodeUniqueID : null;
 
     }
 }
@@ -44811,7 +46500,7 @@ module.exports = {
     DescribeAssetImageRiskListResponse: DescribeAssetImageRiskListResponse,
     CreateEmergencyVulExportJobResponse: CreateEmergencyVulExportJobResponse,
     CreateVulDefenceEventExportJobRequest: CreateVulDefenceEventExportJobRequest,
-    DescribeNetworkFirewallPolicyListRequest: DescribeNetworkFirewallPolicyListRequest,
+    ClusterCustomParameters: ClusterCustomParameters,
     DeleteIgnoreVulRequest: DeleteIgnoreVulRequest,
     DescribeReverseShellEventsResponse: DescribeReverseShellEventsResponse,
     ImageSimpleInfo: ImageSimpleInfo,
@@ -44903,6 +46592,7 @@ module.exports = {
     DescribeEscapeSafeStateResponse: DescribeEscapeSafeStateResponse,
     DescribeImageRiskSummaryRequest: DescribeImageRiskSummaryRequest,
     CreateDefenceVulExportJobResponse: CreateDefenceVulExportJobResponse,
+    StopVirusScanTaskRequest: StopVirusScanTaskRequest,
     AbnormalProcessRuleInfo: AbnormalProcessRuleInfo,
     ScanComplianceAssetsByPolicyItemResponse: ScanComplianceAssetsByPolicyItemResponse,
     CreateRiskDnsEventExportJobRequest: CreateRiskDnsEventExportJobRequest,
@@ -45126,7 +46816,7 @@ module.exports = {
     DescribeVirusAutoIsolateSampleListResponse: DescribeVirusAutoIsolateSampleListResponse,
     DescribeVirusEventTendencyRequest: DescribeVirusEventTendencyRequest,
     DescribeAssetImageRegistryVulListExportResponse: DescribeAssetImageRegistryVulListExportResponse,
-    StopVirusScanTaskRequest: StopVirusScanTaskRequest,
+    NetworkPorts: NetworkPorts,
     DescribeAssetContainerDetailRequest: DescribeAssetContainerDetailRequest,
     ModifyAccessControlStatusRequest: ModifyAccessControlStatusRequest,
     CreateProcessEventsExportJobRequest: CreateProcessEventsExportJobRequest,
@@ -45151,6 +46841,7 @@ module.exports = {
     ScanComplianceAssetsRequest: ScanComplianceAssetsRequest,
     DescribeAbnormalProcessRuleDetailResponse: DescribeAbnormalProcessRuleDetailResponse,
     ModifyVirusFileStatusRequest: ModifyVirusFileStatusRequest,
+    VulAffectedRegistryImageInfo: VulAffectedRegistryImageInfo,
     CreateVulContainerExportJobResponse: CreateVulContainerExportJobResponse,
     DescribeAssetImageRegistryListExportRequest: DescribeAssetImageRegistryListExportRequest,
     CreateK8sApiAbnormalRuleInfoResponse: CreateK8sApiAbnormalRuleInfoResponse,
@@ -45257,6 +46948,7 @@ module.exports = {
     VulDefenceEventDetail: VulDefenceEventDetail,
     UpdateNetworkFirewallPolicyYamlDetailRequest: UpdateNetworkFirewallPolicyYamlDetailRequest,
     DescribeK8sApiAbnormalRuleInfoRequest: DescribeK8sApiAbnormalRuleInfoRequest,
+    DescribeVulRegistryImageListRequest: DescribeVulRegistryImageListRequest,
     RunTimeEventBaseInfo: RunTimeEventBaseInfo,
     DescribeSystemVulListResponse: DescribeSystemVulListResponse,
     ModifyIgnoreVul: ModifyIgnoreVul,
@@ -45331,7 +47023,7 @@ module.exports = {
     DescribeSupportDefenceVulResponse: DescribeSupportDefenceVulResponse,
     DescribeAssetImageRiskListRequest: DescribeAssetImageRiskListRequest,
     DescribeEscapeSafeStateRequest: DescribeEscapeSafeStateRequest,
-    NetworkPorts: NetworkPorts,
+    DescribeVirusManualScanEstimateTimeoutRequest: DescribeVirusManualScanEstimateTimeoutRequest,
     CreateVulScanTaskResponse: CreateVulScanTaskResponse,
     DescribeTcssSummaryRequest: DescribeTcssSummaryRequest,
     ModifyContainerNetStatusResponse: ModifyContainerNetStatusResponse,
@@ -45352,7 +47044,7 @@ module.exports = {
     ModifyAssetRequest: ModifyAssetRequest,
     RegionInfo: RegionInfo,
     DescribeEscapeWhiteListRequest: DescribeEscapeWhiteListRequest,
-    DescribeVirusManualScanEstimateTimeoutRequest: DescribeVirusManualScanEstimateTimeoutRequest,
+    DescribeNetworkFirewallPolicyListRequest: DescribeNetworkFirewallPolicyListRequest,
     ComponentInfo: ComponentInfo,
     ConfirmNetworkFirewallPolicyResponse: ConfirmNetworkFirewallPolicyResponse,
     CreateNetworkFirewallPublishResponse: CreateNetworkFirewallPublishResponse,
@@ -45360,6 +47052,7 @@ module.exports = {
     CreateClusterCheckTaskRequest: CreateClusterCheckTaskRequest,
     RaspInfo: RaspInfo,
     DescribeNetworkFirewallClusterListRequest: DescribeNetworkFirewallClusterListRequest,
+    DescribeVulRegistryImageListResponse: DescribeVulRegistryImageListResponse,
     CreateVulDefenceEventExportJobResponse: CreateVulDefenceEventExportJobResponse,
     AutoAuthorizedRuleHostInfo: AutoAuthorizedRuleHostInfo,
     CreateExportComplianceStatusListJobRequest: CreateExportComplianceStatusListJobRequest,

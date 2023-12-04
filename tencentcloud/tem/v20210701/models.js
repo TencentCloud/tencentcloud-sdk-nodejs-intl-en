@@ -837,6 +837,12 @@ class RollingUpdateApplicationByVersionRequest extends  AbstractModel {
          */
         this.MinAvailable = null;
 
+        /**
+         * Whether to enable force release
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -856,6 +862,7 @@ class RollingUpdateApplicationByVersionRequest extends  AbstractModel {
         this.BatchInterval = 'BatchInterval' in params ? params.BatchInterval : null;
         this.BetaBatchNum = 'BetaBatchNum' in params ? params.BetaBatchNum : null;
         this.MinAvailable = 'MinAvailable' in params ? params.MinAvailable : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }

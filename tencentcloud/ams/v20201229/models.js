@@ -134,19 +134,22 @@ class BucketInfo extends  AbstractModel {
         super();
 
         /**
-         * This field indicates a bucket name in Tencent Cloud COS. For more information on buckets, see [Basic Concepts](https://intl.cloud.tencent.com/document/product/436/44352?from_cn_redirect=1).
+         * This field indicates a bucket name in Tencent Cloud COS. For more information on buckets, see Basic Concepts (https://intl.cloud.tencent.com/document/product/436/44352?from_cn_redirect=1). 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * This field indicates a region where a Tencent Cloud managed data center is deployed. COS data is stored in buckets in these regions.
+         * This field indicates a region where a Tencent Cloud COS managed data center is deployed. COS data is stored in buckets in these regions. 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * This field indicates an object key in Tencent Cloud COS. An object is stored in a bucket as a basic storage unit. You can manage objects through the Tencent Cloud console, API, or SDK. For more information on objects, see [Object Overview](https://intl.cloud.tencent.com/document/product/436/13324?from_cn_redirect=1).
+         * This field indicates an object key in Tencent Cloud COS. Object z is stored in a bucket as a basic storage unit. You can manage objects through the Tencent Cloud console, API, or SDK. For more information on objects, see Object Overview (https://intl.cloud.tencent.com/document/product/436/13324?from_cn_redirect=1). 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Object = null;
@@ -301,114 +304,113 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * This field is used to return the task ID (in the `Results` parameter) after an audio moderation task is created. It is used to identify the moderation task for which to query the details.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * This field is used to return the data ID parameter passed in within the `Tasks` parameter when the audio moderation API is called for easier data identification and management.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DataId = null;
 
         /**
-         * This field is used to return the `BizType` parameter passed in when the audio moderation API is called for easier data identification and management.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BizType = null;
 
         /**
-         * This field is used to return the task name in the `TaskInput` parameter passed in when the audio moderation API is called for easier task identification and management.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * This field is used to return the task status of the queried content.
-<br>Valid values: **FINISH** (task completed), **PENDING** (task pending), **RUNNING** (task in progress), **ERROR** (task error), **CANCELLED** (task canceled).
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * This field is used to return the audio moderation type passed in when the audio moderation API is called. Valid values: **AUDIO** (audio on demand), **LIVE_AUDIO** (audio live streaming). Default value: AUDIO.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * This field is used to return the operation suggestion for the maliciousness tag. When you get the determination result, the returned value indicates the operation suggested by the system. We recommend you handle different types of violations and suggestions according to your business needs. <br>Returned values: **Block**, **Review**, **Pass**.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Label of the malicious content detected. <br>Values: **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TaskLabel> || null}
          */
         this.Labels = null;
 
         /**
-         * This field is used to return the media content information of the moderation service, mainly including the input file type and access URL.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {InputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * This field is used to return the recognized text content of an audio file. **Up to the first 1,000 characters** can be recognized.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AudioText = null;
 
         /**
-         * This field is used to return the moderation result of an audio segment, mainly including the start time and audio moderation result.<br>For the specific output content, see the detailed description of the `AudioSegments` and `AudioResult` data structures.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AudioSegments> || null}
          */
         this.AudioSegments = null;
 
         /**
-         * If the task status is `Error`, this field will return the error type; otherwise, null will be returned by default.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ErrorType = null;
 
         /**
-         * If the task status is `Error`, this field will return the error message; otherwise, null will be returned by default.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ErrorDescription = null;
 
         /**
-         * This field is used to return the creation time of the queried task in ISO 8601 format.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreatedAt = null;
 
         /**
-         * This field is used to return the last update time of the queried task in ISO 8601 format.
+         * 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdatedAt = null;
 
         /**
-         * If the recognition result is normal, this parameter is returned with the value `Normal`. If malicious content is recognized, the tag with the highest priority in the result of `Labels` is returned.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * 
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Label = null;
@@ -852,14 +854,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Score = null;
 
         /**
-         * This parameter is used to return the start time of the segment of an audio file under the corresponding language tag in milliseconds.
+         * This parameter is used to return the start time of the segment of an audio file under the corresponding language tag in seconds. 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * This parameter is used to return the end time of the segment of an audio file under the corresponding language tag in milliseconds.
+         * This parameter is used to return the end time of the segment of an audio file under the corresponding language tag in seconds. 
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -1100,7 +1102,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * This field is used to return the length of an audio file in seconds.
+         * This field is used to return the length of an audio file in milliseconds.
          * @type {string || null}
          */
         this.Duration = null;
@@ -1223,13 +1225,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Score = null;
 
         /**
-         * This field is used to return the start time of the segment of an audio file under the corresponding moan tag in milliseconds.
+         * This field is used to return the start time of the segment of an audio file under the corresponding moan tag in seconds.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * This field is used to return the end time of the segment of an audio file under the corresponding moan tag in milliseconds.
+         * This field is used to return the end time of the segment of an audio file under the corresponding moan tag in seconds.
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1408,7 +1410,7 @@ class MediaInfo extends  AbstractModel {
         this.Codecs = null;
 
         /**
-         * This field is used to return the segment length of the input streaming media file in seconds. It is **15 seconds by default** and is customizable.
+         * This field is used to return the segment length of the input streaming media file in milliseconds.** It is 15 seconds** by default and is customizable.
          * @type {number || null}
          */
         this.Duration = null;

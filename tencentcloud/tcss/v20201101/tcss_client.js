@@ -112,7 +112,7 @@ const NetworkPolicyInfoItem = models.NetworkPolicyInfoItem;
 const DescribeAssetImageRiskListResponse = models.DescribeAssetImageRiskListResponse;
 const CreateEmergencyVulExportJobResponse = models.CreateEmergencyVulExportJobResponse;
 const CreateVulDefenceEventExportJobRequest = models.CreateVulDefenceEventExportJobRequest;
-const DescribeNetworkFirewallPolicyListRequest = models.DescribeNetworkFirewallPolicyListRequest;
+const ClusterCustomParameters = models.ClusterCustomParameters;
 const DeleteIgnoreVulRequest = models.DeleteIgnoreVulRequest;
 const DescribeReverseShellEventsResponse = models.DescribeReverseShellEventsResponse;
 const ImageSimpleInfo = models.ImageSimpleInfo;
@@ -204,6 +204,7 @@ const DescribeAssetContainerListRequest = models.DescribeAssetContainerListReque
 const DescribeEscapeSafeStateResponse = models.DescribeEscapeSafeStateResponse;
 const DescribeImageRiskSummaryRequest = models.DescribeImageRiskSummaryRequest;
 const CreateDefenceVulExportJobResponse = models.CreateDefenceVulExportJobResponse;
+const StopVirusScanTaskRequest = models.StopVirusScanTaskRequest;
 const AbnormalProcessRuleInfo = models.AbnormalProcessRuleInfo;
 const ScanComplianceAssetsByPolicyItemResponse = models.ScanComplianceAssetsByPolicyItemResponse;
 const CreateRiskDnsEventExportJobRequest = models.CreateRiskDnsEventExportJobRequest;
@@ -427,7 +428,7 @@ const DescribeVulDefenceEventDetailRequest = models.DescribeVulDefenceEventDetai
 const DescribeVirusAutoIsolateSampleListResponse = models.DescribeVirusAutoIsolateSampleListResponse;
 const DescribeVirusEventTendencyRequest = models.DescribeVirusEventTendencyRequest;
 const DescribeAssetImageRegistryVulListExportResponse = models.DescribeAssetImageRegistryVulListExportResponse;
-const StopVirusScanTaskRequest = models.StopVirusScanTaskRequest;
+const NetworkPorts = models.NetworkPorts;
 const DescribeAssetContainerDetailRequest = models.DescribeAssetContainerDetailRequest;
 const ModifyAccessControlStatusRequest = models.ModifyAccessControlStatusRequest;
 const CreateProcessEventsExportJobRequest = models.CreateProcessEventsExportJobRequest;
@@ -452,6 +453,7 @@ const ComplianceScanFailedAsset = models.ComplianceScanFailedAsset;
 const ScanComplianceAssetsRequest = models.ScanComplianceAssetsRequest;
 const DescribeAbnormalProcessRuleDetailResponse = models.DescribeAbnormalProcessRuleDetailResponse;
 const ModifyVirusFileStatusRequest = models.ModifyVirusFileStatusRequest;
+const VulAffectedRegistryImageInfo = models.VulAffectedRegistryImageInfo;
 const CreateVulContainerExportJobResponse = models.CreateVulContainerExportJobResponse;
 const DescribeAssetImageRegistryListExportRequest = models.DescribeAssetImageRegistryListExportRequest;
 const CreateK8sApiAbnormalRuleInfoResponse = models.CreateK8sApiAbnormalRuleInfoResponse;
@@ -558,6 +560,7 @@ const ModifyAssetImageRegistryScanStopOneKeyResponse = models.ModifyAssetImageRe
 const VulDefenceEventDetail = models.VulDefenceEventDetail;
 const UpdateNetworkFirewallPolicyYamlDetailRequest = models.UpdateNetworkFirewallPolicyYamlDetailRequest;
 const DescribeK8sApiAbnormalRuleInfoRequest = models.DescribeK8sApiAbnormalRuleInfoRequest;
+const DescribeVulRegistryImageListRequest = models.DescribeVulRegistryImageListRequest;
 const RunTimeEventBaseInfo = models.RunTimeEventBaseInfo;
 const DescribeSystemVulListResponse = models.DescribeSystemVulListResponse;
 const ModifyIgnoreVul = models.ModifyIgnoreVul;
@@ -632,7 +635,7 @@ const InitializeUserComplianceEnvironmentRequest = models.InitializeUserComplian
 const DescribeSupportDefenceVulResponse = models.DescribeSupportDefenceVulResponse;
 const DescribeAssetImageRiskListRequest = models.DescribeAssetImageRiskListRequest;
 const DescribeEscapeSafeStateRequest = models.DescribeEscapeSafeStateRequest;
-const NetworkPorts = models.NetworkPorts;
+const DescribeVirusManualScanEstimateTimeoutRequest = models.DescribeVirusManualScanEstimateTimeoutRequest;
 const CreateVulScanTaskResponse = models.CreateVulScanTaskResponse;
 const DescribeTcssSummaryRequest = models.DescribeTcssSummaryRequest;
 const ModifyContainerNetStatusResponse = models.ModifyContainerNetStatusResponse;
@@ -653,7 +656,7 @@ const DescribeRiskListResponse = models.DescribeRiskListResponse;
 const ModifyAssetRequest = models.ModifyAssetRequest;
 const RegionInfo = models.RegionInfo;
 const DescribeEscapeWhiteListRequest = models.DescribeEscapeWhiteListRequest;
-const DescribeVirusManualScanEstimateTimeoutRequest = models.DescribeVirusManualScanEstimateTimeoutRequest;
+const DescribeNetworkFirewallPolicyListRequest = models.DescribeNetworkFirewallPolicyListRequest;
 const ComponentInfo = models.ComponentInfo;
 const ConfirmNetworkFirewallPolicyResponse = models.ConfirmNetworkFirewallPolicyResponse;
 const CreateNetworkFirewallPublishResponse = models.CreateNetworkFirewallPublishResponse;
@@ -661,6 +664,7 @@ const DescribeAssetSummaryRequest = models.DescribeAssetSummaryRequest;
 const CreateClusterCheckTaskRequest = models.CreateClusterCheckTaskRequest;
 const RaspInfo = models.RaspInfo;
 const DescribeNetworkFirewallClusterListRequest = models.DescribeNetworkFirewallClusterListRequest;
+const DescribeVulRegistryImageListResponse = models.DescribeVulRegistryImageListResponse;
 const CreateVulDefenceEventExportJobResponse = models.CreateVulDefenceEventExportJobResponse;
 const AutoAuthorizedRuleHostInfo = models.AutoAuthorizedRuleHostInfo;
 const CreateExportComplianceStatusListJobRequest = models.CreateExportComplianceStatusListJobRequest;
@@ -3015,6 +3019,17 @@ class TcssClient extends AbstractClient {
     DescribeImageRiskSummary(req, cb) {
         let resp = new DescribeImageRiskSummaryResponse();
         this.request("DescribeImageRiskSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of repository images affected by vulnerabilities.
+     * @param {DescribeVulRegistryImageListRequest} req
+     * @param {function(string, DescribeVulRegistryImageListResponse):void} cb
+     * @public
+     */
+    DescribeVulRegistryImageList(req, cb) {
+        let resp = new DescribeVulRegistryImageListResponse();
+        this.request("DescribeVulRegistryImageList", req, resp, cb);
     }
 
     /**

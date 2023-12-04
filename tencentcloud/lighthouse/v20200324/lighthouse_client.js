@@ -18,7 +18,9 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeInstancesTrafficPackagesRequest = models.DescribeInstancesTrafficPackagesRequest;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
+const RenewInstancesRequest = models.RenewInstancesRequest;
 const DescribeDisksDeniedActionsRequest = models.DescribeDisksDeniedActionsRequest;
+const InquirePriceCreateBlueprintRequest = models.InquirePriceCreateBlueprintRequest;
 const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTrafficPackagesResponse;
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
@@ -31,7 +33,7 @@ const InstanceDeniedActions = models.InstanceDeniedActions;
 const InquirePriceCreateDisksRequest = models.InquirePriceCreateDisksRequest;
 const ModifyBundle = models.ModifyBundle;
 const DetachCcnResponse = models.DetachCcnResponse;
-const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
+const BlueprintPrice = models.BlueprintPrice;
 const DescribeScenesResponse = models.DescribeScenesResponse;
 const InquirePriceRenewInstancesResponse = models.InquirePriceRenewInstancesResponse;
 const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
@@ -51,6 +53,7 @@ const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsReque
 const AttachCcnResponse = models.AttachCcnResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const ResetAttachCcnRequest = models.ResetAttachCcnRequest;
+const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
@@ -79,9 +82,11 @@ const DetailPrice = models.DetailPrice;
 const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
 const InstanceReturnable = models.InstanceReturnable;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
+const RenewDisksRequest = models.RenewDisksRequest;
 const ModifyDisksAttributeRequest = models.ModifyDisksAttributeRequest;
 const DockerContainerPublishPort = models.DockerContainerPublishPort;
 const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedActionsResponse;
+const DescribeScenesRequest = models.DescribeScenesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const SnapshotDeniedActions = models.SnapshotDeniedActions;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
@@ -102,7 +107,7 @@ const IsolateInstancesRequest = models.IsolateInstancesRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
-const DescribeScenesRequest = models.DescribeScenesRequest;
+const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const InquirePriceCreateBlueprintResponse = models.InquirePriceCreateBlueprintResponse;
@@ -143,7 +148,7 @@ const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
 const ModifyFirewallRuleDescriptionResponse = models.ModifyFirewallRuleDescriptionResponse;
 const DescribeDiskDiscountRequest = models.DescribeDiskDiscountRequest;
-const InquirePriceCreateBlueprintRequest = models.InquirePriceCreateBlueprintRequest;
+const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
 const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
 const Software = models.Software;
@@ -172,6 +177,7 @@ const RenewDiskChargePrepaid = models.RenewDiskChargePrepaid;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const ResetInstanceRequest = models.ResetInstanceRequest;
 const DescribeDiskConfigsResponse = models.DescribeDiskConfigsResponse;
+const RenewDisksResponse = models.RenewDisksResponse;
 const InternetAccessible = models.InternetAccessible;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeDisksDeniedActionsResponse = models.DescribeDisksDeniedActionsResponse;
@@ -179,21 +185,24 @@ const DescribeInstanceLoginKeyPairAttributeRequest = models.DescribeInstanceLogi
 const DescribeBundleDiscountRequest = models.DescribeBundleDiscountRequest;
 const Price = models.Price;
 const DescribeDisksReturnableResponse = models.DescribeDisksReturnableResponse;
-const BlueprintPrice = models.BlueprintPrice;
+const IsolateDisksRequest = models.IsolateDisksRequest;
+const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
 const ModifyInstancesBundleResponse = models.ModifyInstancesBundleResponse;
 const GeneralResourceQuota = models.GeneralResourceQuota;
 const DescribeResetInstanceBlueprintsResponse = models.DescribeResetInstanceBlueprintsResponse;
 const DescribeDisksReturnableRequest = models.DescribeDisksReturnableRequest;
 const SoftwareDetail = models.SoftwareDetail;
+const AutoMountConfiguration = models.AutoMountConfiguration;
 const InstancePrice = models.InstancePrice;
 const Tag = models.Tag;
 const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
-const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
+const RenewInstancesResponse = models.RenewInstancesResponse;
 const ResetInstanceResponse = models.ResetInstanceResponse;
+const IsolateDisksResponse = models.IsolateDisksResponse;
 const DescribeFirewallRulesRequest = models.DescribeFirewallRulesRequest;
 const DiskDeniedActions = models.DiskDeniedActions;
 const InquirePriceCreateInstancesRequest = models.InquirePriceCreateInstancesRequest;
@@ -256,6 +265,21 @@ In the `FirewallRule` parameter:
     }
 
     /**
+     * This API is used to terminate one or more instances.
+
+* Instances in `SHUTDOWN` status can be terminated through this API and cannot be recovered.
+* Batch operations are supported. The allowed maximum number of instances in each request is 100.
+* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * @param {TerminateInstancesRequest} req
+     * @param {function(string, TerminateInstancesResponse):void} cb
+     * @public
+     */
+    TerminateInstances(req, cb) {
+        let resp = new TerminateInstancesResponse();
+        this.request("TerminateInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an image.
      * @param {DeleteBlueprintsRequest} req
      * @param {function(string, DeleteBlueprintsResponse):void} cb
@@ -264,6 +288,17 @@ In the `FirewallRule` parameter:
     DeleteBlueprints(req, cb) {
         let resp = new DeleteBlueprintsResponse();
         this.request("DeleteBlueprints", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an image attribute.
+     * @param {ModifyBlueprintAttributeRequest} req
+     * @param {function(string, ModifyBlueprintAttributeResponse):void} cb
+     * @public
+     */
+    ModifyBlueprintAttribute(req, cb) {
+        let resp = new ModifyBlueprintAttributeResponse();
+        this.request("ModifyBlueprintAttribute", req, resp, cb);
     }
 
     /**
@@ -658,14 +693,14 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     }
 
     /**
-     * This API is used to modify an image attribute.
-     * @param {ModifyBlueprintAttributeRequest} req
-     * @param {function(string, ModifyBlueprintAttributeResponse):void} cb
+     * This API is used to create one or more cloud disks.
+     * @param {CreateDisksRequest} req
+     * @param {function(string, CreateDisksResponse):void} cb
      * @public
      */
-    ModifyBlueprintAttribute(req, cb) {
-        let resp = new ModifyBlueprintAttributeResponse();
-        this.request("ModifyBlueprintAttribute", req, resp, cb);
+    CreateDisks(req, cb) {
+        let resp = new CreateDisksResponse();
+        this.request("CreateDisks", req, resp, cb);
     }
 
     /**
@@ -835,7 +870,7 @@ The snapshot must be in `NORMAL` status. To query the status of a snapshot, you 
     }
 
     /**
-     * This API is used to unassociate a CCN instance.
+     * This API is used to disassociate with a CCN instance.
      * @param {DetachCcnRequest} req
      * @param {function(string, DetachCcnResponse):void} cb
      * @public
@@ -879,18 +914,32 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to terminate one or more instances.
+     * This API is used to renew one or more Lighthouse cloud disks.
 
-* Instances in `SHUTDOWN` status can be terminated through this API and cannot be recovered.
-* Batch operations are supported. The allowed maximum number of instances in each request is 100.
-* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
-     * @param {TerminateInstancesRequest} req
-     * @param {function(string, TerminateInstancesResponse):void} cb
+This operation can only be performed on data disks with the status of `ATTACHED`, `UNATTACHED` or `SHUTDOWN`.
+Up to 50 cloud disks are supported at one time.
+This API is async. After the request is sent, a `RequestId` is returned. At this time, the operation is not completed yet. To check the result, you need to call  [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1). If the latest operation status (LatestOperationState) of the disk is `SUCCESS`, the operation is successful.
+     * @param {RenewDisksRequest} req
+     * @param {function(string, RenewDisksResponse):void} cb
      * @public
      */
-    TerminateInstances(req, cb) {
-        let resp = new TerminateInstancesResponse();
-        this.request("TerminateInstances", req, resp, cb);
+    RenewDisks(req, cb) {
+        let resp = new RenewDisksResponse();
+        this.request("RenewDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to renew one or more Lighthouse instances.
+* You can only perform this operation on instances whose status is `RUNNING`, `STOPPED` and `SHUTDOWN`.
+* Batch operations are supported. Up to 100 instances are supported in each request.
+* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * @param {RenewInstancesRequest} req
+     * @param {function(string, RenewInstancesResponse):void} cb
+     * @public
+     */
+    RenewInstances(req, cb) {
+        let resp = new RenewInstancesResponse();
+        this.request("RenewInstances", req, resp, cb);
     }
 
     /**
@@ -926,6 +975,22 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     TerminateDisks(req, cb) {
         let resp = new TerminateDisksResponse();
         this.request("TerminateDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return one or more Lighthouse cloud disks.
+
+You can only perform this operation on `UNATTACHED` disks.
+After the successful call of the API, the cloud disk goes to the SHUTDOWN state.
+Up to 20 instances are supported at one time. 
+This API is async. After the request is sent, a `RequestId` is returned. At this time, the operation is not completed yet. To check the result, you need to call  [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1). If the latest operation status (LatestOperationState) of the disk is `SUCCESS`, the operation is successful.
+     * @param {IsolateDisksRequest} req
+     * @param {function(string, IsolateDisksResponse):void} cb
+     * @public
+     */
+    IsolateDisks(req, cb) {
+        let resp = new IsolateDisksResponse();
+        this.request("IsolateDisks", req, resp, cb);
     }
 
     /**

@@ -206,6 +206,7 @@ const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpda
 const DeleteRoundPlayRequest = models.DeleteRoundPlayRequest;
 const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
+const EnhanceMediaQualityRequest = models.EnhanceMediaQualityRequest;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
@@ -478,6 +479,7 @@ const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
+const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const ImageProcessingTemplate = models.ImageProcessingTemplate;
@@ -616,7 +618,7 @@ const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegment
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
 const CreateQualityInspectTemplateResponse = models.CreateQualityInspectTemplateResponse;
 const RebuildMediaTaskOutput = models.RebuildMediaTaskOutput;
-const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
+const EnhanceMediaQualityOutputConfig = models.EnhanceMediaQualityOutputConfig;
 const Https = models.Https;
 const RebuildMediaRequest = models.RebuildMediaRequest;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
@@ -793,6 +795,7 @@ const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
 const DeleteEnhanceMediaTemplateRequest = models.DeleteEnhanceMediaTemplateRequest;
 const SetDrmKeyProviderInfoResponse = models.SetDrmKeyProviderInfoResponse;
 const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
+const EnhanceMediaQualityResponse = models.EnhanceMediaQualityResponse;
 const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
 const MediaTrack = models.MediaTrack;
 const StorageStatData = models.StorageStatData;
@@ -1669,6 +1672,17 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     DeleteCDNDomain(req, cb) {
         let resp = new DeleteCDNDomainResponse();
         this.request("DeleteCDNDomain", req, resp, cb);
+    }
+
+    /**
+     * Initiate a Remaster task for audio and video media in VOD
+     * @param {EnhanceMediaQualityRequest} req
+     * @param {function(string, EnhanceMediaQualityResponse):void} cb
+     * @public
+     */
+    EnhanceMediaQuality(req, cb) {
+        let resp = new EnhanceMediaQualityResponse();
+        this.request("EnhanceMediaQuality", req, resp, cb);
     }
 
     /**

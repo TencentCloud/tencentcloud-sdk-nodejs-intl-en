@@ -8298,6 +8298,32 @@ class SetVodDomainCertificateRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The operation type of this API call, optional value:
+<li>Set: Set the certificate required for the domain name HTTPS;</li>
+<li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
+         * @type {string || null}
+         */
+        this.CertID = null;
+
     }
 
     /**
@@ -8307,6 +8333,10 @@ class SetVodDomainCertificateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.CertID = 'CertID' in params ? params.CertID : null;
 
     }
 }
@@ -10342,7 +10372,7 @@ class DescribeCDNDomainsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * VOD [Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -11004,6 +11034,81 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.ImageSpriteSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * EnhanceMediaQuality request structure.
+ * @class
+ */
+class EnhanceMediaQualityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media file ID, that is, the globally unique identifier of the file on VOD, which is assigned by the VOD backend after successful upload. This field can be obtained from [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media).
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Remaster template ID, please contact Tencent Cloud for details
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Configuration of media files after Remaster
+         * @type {EnhanceMediaQualityOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
+         * The identification code used for deduplication. If there has been a request with the same identification code within three days, this request will return an error. Up to 50 characters, without or with an empty string means no deduplication
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Source context, used to pass through user request information, Remaster completion callback will return this field value, up to 1000 characters
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The priority of the task, the higher the value, the higher the priority, the range is -10 to 10, not filled in means 0
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.OutputConfig) {
+            let obj = new EnhanceMediaQualityOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
 
     }
 }
@@ -26272,6 +26377,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Result information of intelligent tagging
+ * @class
+ */
+class MediaAiAnalysisTagItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag name.
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Confidence of tag between 0 and 100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
  * DescribeStorageData response structure.
  * @class
  */
@@ -30883,6 +31023,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.QualityInspectCompleteEvent = null;
 
+        /**
+         * Remaster completion event, valid when the event type is QualityEnhanceComplete.
+Pay attention to: this field may return null, indicating that no valid value can be obtained
+         * @type {QualityEnhanceTask || null}
+         */
+        this.QualityEnhanceCompleteEvent = null;
+
     }
 
     /**
@@ -31031,6 +31178,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new QualityInspectTask();
             obj.deserialize(params.QualityInspectCompleteEvent)
             this.QualityInspectCompleteEvent = obj;
+        }
+
+        if (params.QualityEnhanceCompleteEvent) {
+            let obj = new QualityEnhanceTask();
+            obj.deserialize(params.QualityEnhanceCompleteEvent)
+            this.QualityEnhanceCompleteEvent = obj;
         }
 
     }
@@ -34670,24 +34823,31 @@ class RebuildMediaTaskOutput extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent tagging
+ * Remaster result file output
  * @class
  */
-class MediaAiAnalysisTagItem extends  AbstractModel {
+class EnhanceMediaQualityOutputConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag name.
+         * Output file name, up to 64 characters. The system will specify the file name by default
          * @type {string || null}
          */
-        this.Tag = null;
+        this.MediaName = null;
 
         /**
-         * Confidence of tag between 0 and 100.
+         * Category ID, used for media classification management, can be obtained by [creating a category](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) interface, create a category, get the category ID.
+<li>Default value: 0, which means other categories.</li>
          * @type {number || null}
          */
-        this.Confidence = null;
+        this.ClassId = null;
+
+        /**
+         * The expiration time of the output file, the file will be deleted after this time, the default is never to expire, the format is in accordance with the ISO 8601 standard, see [ISO date format description](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I)。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
 
     }
 
@@ -34698,8 +34858,9 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -35004,9 +35165,9 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>`FastClipMedia`: Quick clipping</li>
 <li>`RemoveWatermarkTask`: Watermark removal</li>
 <li>`DescribeFileAttributesTask`: Getting file attributes</li>
-<li>`RebuildMedia`; Remastering audio/video</li>
 <li> `ReviewAudioVideo`: Moderation</li>
 <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+<li>`QualityEnhance：Enhance audio/video</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -46057,6 +46218,41 @@ Default value: Chinese Mainland
 }
 
 /**
+ * EnhanceMediaQuality response structure.
+ * @class
+ */
+class EnhanceMediaQualityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Remaster task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The modification of the subtitle format list.
  * @class
  */
@@ -47519,6 +47715,7 @@ module.exports = {
     DeleteRoundPlayRequest: DeleteRoundPlayRequest,
     SuperResolutionInfo: SuperResolutionInfo,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
+    EnhanceMediaQualityRequest: EnhanceMediaQualityRequest,
     AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
     ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
@@ -47791,6 +47988,7 @@ module.exports = {
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
+    MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     DescribeStorageDataResponse: DescribeStorageDataResponse,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     ImageProcessingTemplate: ImageProcessingTemplate,
@@ -47929,7 +48127,7 @@ module.exports = {
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
     CreateQualityInspectTemplateResponse: CreateQualityInspectTemplateResponse,
     RebuildMediaTaskOutput: RebuildMediaTaskOutput,
-    MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
+    EnhanceMediaQualityOutputConfig: EnhanceMediaQualityOutputConfig,
     Https: Https,
     RebuildMediaRequest: RebuildMediaRequest,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
@@ -48106,6 +48304,7 @@ module.exports = {
     DeleteEnhanceMediaTemplateRequest: DeleteEnhanceMediaTemplateRequest,
     SetDrmKeyProviderInfoResponse: SetDrmKeyProviderInfoResponse,
     DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,
+    EnhanceMediaQualityResponse: EnhanceMediaQualityResponse,
     SubtitleFormatsOperation: SubtitleFormatsOperation,
     MediaTrack: MediaTrack,
     StorageStatData: StorageStatData,

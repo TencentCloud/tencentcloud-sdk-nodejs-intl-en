@@ -17,34 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeOfflineRecordCallback request structure.
- * @class
- */
-class DescribeOfflineRecordCallbackRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SdkAppId of the whiteboard application.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
  * Mixed stream canvas parameter
  * @class
  */
@@ -551,34 +523,6 @@ class CreateSnapshotTaskResponse extends  AbstractModel {
             return;
         }
         this.TaskID = 'TaskID' in params ? params.TaskID : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeOfflineRecord response structure.
- * @class
- */
-class DescribeOfflineRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2092,62 +2036,6 @@ Note: This parameter may return null, indicating that no valid values can be obt
 }
 
 /**
- * DescribeOfflineRecordCallback response structure.
- * @class
- */
-class DescribeOfflineRecordCallbackResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateOfflineRecord response structure.
- * @class
- */
-class CreateOfflineRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * SetVideoGenerationTaskCallbackKey response structure.
  * @class
  */
@@ -2777,10 +2665,10 @@ class DescribeUserListResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAutoRenewFlag response structure.
+ * ModifyWhiteboardBucketConfig response structure.
  * @class
  */
-class ModifyAutoRenewFlagResponse extends  AbstractModel {
+class ModifyWhiteboardBucketConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3072,7 +2960,7 @@ class SetWhiteboardPushCallbackKeyRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Callback authentication key for whiteboard push. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key is deleted. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+         * Callback authentication key for whiteboard push. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key is deleted. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -3438,73 +3326,6 @@ TRTC room entrance mode for whiteboard push. Default value: `TRTCAppSceneVideoCa
             this.TRTCAuthParam = obj;
         }
         this.TRTCEnterRoomMode = 'TRTCEnterRoomMode' in params ? params.TRTCEnterRoomMode : null;
-
-    }
-}
-
-/**
- * CreateOfflineRecord request structure.
- * @class
- */
-class CreateOfflineRecordRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SdkAppId of the whiteboard application.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Room ID corresponding to the recording task.
-         * @type {number || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * Group ID corresponding to the recording task.
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * Stream mixing parameters.
-The Custom parameter is not supported for offline recording tasks.
-         * @type {MixStream || null}
-         */
-        this.MixStream = null;
-
-        /**
-         * Whiteboard parameters.
-         * @type {Whiteboard || null}
-         */
-        this.Whiteboard = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-        if (params.MixStream) {
-            let obj = new MixStream();
-            obj.deserialize(params.MixStream)
-            this.MixStream = obj;
-        }
-
-        if (params.Whiteboard) {
-            let obj = new Whiteboard();
-            obj.deserialize(params.Whiteboard)
-            this.Whiteboard = obj;
-        }
 
     }
 }
@@ -4125,41 +3946,6 @@ class StopOnlineRecordRequest extends  AbstractModel {
 }
 
 /**
- * SetOfflineRecordCallback request structure.
- * @class
- */
-class SetOfflineRecordCallbackRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SdkAppId of the whiteboard application.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Callback URL of the offline recording task result. If it is specified as null, the set callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`.
-         * @type {string || null}
-         */
-        this.Callback = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Callback = 'Callback' in params ? params.Callback : null;
-
-    }
-}
-
-/**
  * SetVideoGenerationTaskCallback response structure.
  * @class
  */
@@ -4322,7 +4108,7 @@ class SetWhiteboardPushCallbackRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Callback URL of the whiteboard push task result. If an empty string is passed in, the existing callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`. For the callback format, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+         * Callback URL of the whiteboard push task result. If an empty string is passed in, the existing callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`. For the callback format, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
          * @type {string || null}
          */
         this.Callback = null;
@@ -4686,10 +4472,10 @@ class PauseOnlineRecordResponse extends  AbstractModel {
 }
 
 /**
- * ModifyWhiteboardBucketConfig response structure.
+ * ModifyAutoRenewFlag response structure.
  * @class
  */
-class ModifyWhiteboardBucketConfigResponse extends  AbstractModel {
+class ModifyAutoRenewFlagResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4954,7 +4740,7 @@ class SetOnlineRecordCallbackKeyRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+         * Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -5046,34 +4832,6 @@ class DescribeOnlineRecordCallbackResponse extends  AbstractModel {
         }
         this.Callback = 'Callback' in params ? params.Callback : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SetOfflineRecordCallback response structure.
- * @class
- */
-class SetOfflineRecordCallbackResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5338,7 +5096,7 @@ class SetOnlineRecordCallbackRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+         * Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
          * @type {string || null}
          */
         this.Callback = null;
@@ -6549,7 +6307,7 @@ class SetTranscodeCallbackKeyRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+         * Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -6585,7 +6343,7 @@ class SetTranscodeCallbackRequest extends  AbstractModel {
 
         /**
          * Callback address for the document transcoding progress. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`.
-For more information about the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+For more information about the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
          * @type {string || null}
          */
         this.Callback = null;
@@ -6933,41 +6691,6 @@ class StopWhiteboardPushRequest extends  AbstractModel {
 }
 
 /**
- * DescribeOfflineRecord request structure.
- * @class
- */
-class DescribeOfflineRecordRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SdkAppId of the whiteboard application.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * ID of the offline recording task.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-    }
-}
-
-/**
  * DescribeRecordSearch request structure.
  * @class
  */
@@ -6989,7 +6712,6 @@ class DescribeRecordSearchRequest extends  AbstractModel {
 }
 
 module.exports = {
-    DescribeOfflineRecordCallbackRequest: DescribeOfflineRecordCallbackRequest,
     Canvas: Canvas,
     StopOnlineRecordResponse: StopOnlineRecordResponse,
     SetVideoGenerationTaskCallbackKeyRequest: SetVideoGenerationTaskCallbackKeyRequest,
@@ -7001,7 +6723,6 @@ module.exports = {
     DescribeWhiteboardApplicationConfigResponse: DescribeWhiteboardApplicationConfigResponse,
     WhiteboardPushResult: WhiteboardPushResult,
     CreateSnapshotTaskResponse: CreateSnapshotTaskResponse,
-    DescribeOfflineRecordResponse: DescribeOfflineRecordResponse,
     ModifyApplicationResponse: ModifyApplicationResponse,
     CreateTranscodeResponse: CreateTranscodeResponse,
     DescribeUserResourcesResponse: DescribeUserResourcesResponse,
@@ -7035,8 +6756,6 @@ module.exports = {
     DescribeApplicationInfosRequest: DescribeApplicationInfosRequest,
     DescribeApplicationUsageRequest: DescribeApplicationUsageRequest,
     SnapshotResult: SnapshotResult,
-    DescribeOfflineRecordCallbackResponse: DescribeOfflineRecordCallbackResponse,
-    CreateOfflineRecordResponse: CreateOfflineRecordResponse,
     SetVideoGenerationTaskCallbackKeyResponse: SetVideoGenerationTaskCallbackKeyResponse,
     DescribeVideoGenerationTaskResponse: DescribeVideoGenerationTaskResponse,
     DataItem: DataItem,
@@ -7049,7 +6768,7 @@ module.exports = {
     ApplyTiwTrialRequest: ApplyTiwTrialRequest,
     DescribeTranscodeCallbackResponse: DescribeTranscodeCallbackResponse,
     DescribeUserListResponse: DescribeUserListResponse,
-    ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
+    ModifyWhiteboardBucketConfigResponse: ModifyWhiteboardBucketConfigResponse,
     DescribeTIWDailyUsageRequest: DescribeTIWDailyUsageRequest,
     DescribeWhiteboardBucketConfigResponse: DescribeWhiteboardBucketConfigResponse,
     MixStream: MixStream,
@@ -7060,7 +6779,6 @@ module.exports = {
     AuthParam: AuthParam,
     Detail: Detail,
     StartWhiteboardPushRequest: StartWhiteboardPushRequest,
-    CreateOfflineRecordRequest: CreateOfflineRecordRequest,
     UserListItem: UserListItem,
     DescribeVideoGenerationTaskCallbackResponse: DescribeVideoGenerationTaskCallbackResponse,
     WhiteboardPushTaskSearchResult: WhiteboardPushTaskSearchResult,
@@ -7073,7 +6791,6 @@ module.exports = {
     RecordTaskSearchResult: RecordTaskSearchResult,
     SetTranscodeCallbackResponse: SetTranscodeCallbackResponse,
     StopOnlineRecordRequest: StopOnlineRecordRequest,
-    SetOfflineRecordCallbackRequest: SetOfflineRecordCallbackRequest,
     SetVideoGenerationTaskCallbackResponse: SetVideoGenerationTaskCallbackResponse,
     ApplicationItem: ApplicationItem,
     ModifyWhiteboardApplicationConfigResponse: ModifyWhiteboardApplicationConfigResponse,
@@ -7087,13 +6804,12 @@ module.exports = {
     CreateVideoGenerationTaskResponse: CreateVideoGenerationTaskResponse,
     Whiteboard: Whiteboard,
     PauseOnlineRecordResponse: PauseOnlineRecordResponse,
-    ModifyWhiteboardBucketConfigResponse: ModifyWhiteboardBucketConfigResponse,
+    ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     CreateSnapshotTaskRequest: CreateSnapshotTaskRequest,
     DescribeTranscodeResponse: DescribeTranscodeResponse,
     SetOnlineRecordCallbackKeyRequest: SetOnlineRecordCallbackKeyRequest,
     ModifyApplicationRequest: ModifyApplicationRequest,
     DescribeOnlineRecordCallbackResponse: DescribeOnlineRecordCallbackResponse,
-    SetOfflineRecordCallbackResponse: SetOfflineRecordCallbackResponse,
     RecordControl: RecordControl,
     DescribeQualityMetricsResponse: DescribeQualityMetricsResponse,
     TranscodeTaskResult: TranscodeTaskResult,
@@ -7130,7 +6846,6 @@ module.exports = {
     TranscodeTaskSearchResult: TranscodeTaskSearchResult,
     CreateApplicationResponse: CreateApplicationResponse,
     StopWhiteboardPushRequest: StopWhiteboardPushRequest,
-    DescribeOfflineRecordRequest: DescribeOfflineRecordRequest,
     DescribeRecordSearchRequest: DescribeRecordSearchRequest,
 
 }

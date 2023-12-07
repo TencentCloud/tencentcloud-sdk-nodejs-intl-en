@@ -16,7 +16,6 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeOfflineRecordCallbackRequest = models.DescribeOfflineRecordCallbackRequest;
 const Canvas = models.Canvas;
 const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
 const SetVideoGenerationTaskCallbackKeyRequest = models.SetVideoGenerationTaskCallbackKeyRequest;
@@ -28,7 +27,6 @@ const UsageDataItem = models.UsageDataItem;
 const DescribeWhiteboardApplicationConfigResponse = models.DescribeWhiteboardApplicationConfigResponse;
 const WhiteboardPushResult = models.WhiteboardPushResult;
 const CreateSnapshotTaskResponse = models.CreateSnapshotTaskResponse;
-const DescribeOfflineRecordResponse = models.DescribeOfflineRecordResponse;
 const ModifyApplicationResponse = models.ModifyApplicationResponse;
 const CreateTranscodeResponse = models.CreateTranscodeResponse;
 const DescribeUserResourcesResponse = models.DescribeUserResourcesResponse;
@@ -62,8 +60,6 @@ const DescribeUsageSummaryResponse = models.DescribeUsageSummaryResponse;
 const DescribeApplicationInfosRequest = models.DescribeApplicationInfosRequest;
 const DescribeApplicationUsageRequest = models.DescribeApplicationUsageRequest;
 const SnapshotResult = models.SnapshotResult;
-const DescribeOfflineRecordCallbackResponse = models.DescribeOfflineRecordCallbackResponse;
-const CreateOfflineRecordResponse = models.CreateOfflineRecordResponse;
 const SetVideoGenerationTaskCallbackKeyResponse = models.SetVideoGenerationTaskCallbackKeyResponse;
 const DescribeVideoGenerationTaskResponse = models.DescribeVideoGenerationTaskResponse;
 const DataItem = models.DataItem;
@@ -76,7 +72,7 @@ const SetOnlineRecordCallbackResponse = models.SetOnlineRecordCallbackResponse;
 const ApplyTiwTrialRequest = models.ApplyTiwTrialRequest;
 const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
 const DescribeUserListResponse = models.DescribeUserListResponse;
-const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
+const ModifyWhiteboardBucketConfigResponse = models.ModifyWhiteboardBucketConfigResponse;
 const DescribeTIWDailyUsageRequest = models.DescribeTIWDailyUsageRequest;
 const DescribeWhiteboardBucketConfigResponse = models.DescribeWhiteboardBucketConfigResponse;
 const MixStream = models.MixStream;
@@ -87,7 +83,6 @@ const DescribeTranscodeSearchRequest = models.DescribeTranscodeSearchRequest;
 const AuthParam = models.AuthParam;
 const Detail = models.Detail;
 const StartWhiteboardPushRequest = models.StartWhiteboardPushRequest;
-const CreateOfflineRecordRequest = models.CreateOfflineRecordRequest;
 const UserListItem = models.UserListItem;
 const DescribeVideoGenerationTaskCallbackResponse = models.DescribeVideoGenerationTaskCallbackResponse;
 const WhiteboardPushTaskSearchResult = models.WhiteboardPushTaskSearchResult;
@@ -100,7 +95,6 @@ const DescribeOnlineRecordCallbackRequest = models.DescribeOnlineRecordCallbackR
 const RecordTaskSearchResult = models.RecordTaskSearchResult;
 const SetTranscodeCallbackResponse = models.SetTranscodeCallbackResponse;
 const StopOnlineRecordRequest = models.StopOnlineRecordRequest;
-const SetOfflineRecordCallbackRequest = models.SetOfflineRecordCallbackRequest;
 const SetVideoGenerationTaskCallbackResponse = models.SetVideoGenerationTaskCallbackResponse;
 const ApplicationItem = models.ApplicationItem;
 const ModifyWhiteboardApplicationConfigResponse = models.ModifyWhiteboardApplicationConfigResponse;
@@ -114,13 +108,12 @@ const SnapshotCOS = models.SnapshotCOS;
 const CreateVideoGenerationTaskResponse = models.CreateVideoGenerationTaskResponse;
 const Whiteboard = models.Whiteboard;
 const PauseOnlineRecordResponse = models.PauseOnlineRecordResponse;
-const ModifyWhiteboardBucketConfigResponse = models.ModifyWhiteboardBucketConfigResponse;
+const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const CreateSnapshotTaskRequest = models.CreateSnapshotTaskRequest;
 const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
 const SetOnlineRecordCallbackKeyRequest = models.SetOnlineRecordCallbackKeyRequest;
 const ModifyApplicationRequest = models.ModifyApplicationRequest;
 const DescribeOnlineRecordCallbackResponse = models.DescribeOnlineRecordCallbackResponse;
-const SetOfflineRecordCallbackResponse = models.SetOfflineRecordCallbackResponse;
 const RecordControl = models.RecordControl;
 const DescribeQualityMetricsResponse = models.DescribeQualityMetricsResponse;
 const TranscodeTaskResult = models.TranscodeTaskResult;
@@ -157,7 +150,6 @@ const WhiteboardApplicationConfig = models.WhiteboardApplicationConfig;
 const TranscodeTaskSearchResult = models.TranscodeTaskSearchResult;
 const CreateApplicationResponse = models.CreateApplicationResponse;
 const StopWhiteboardPushRequest = models.StopWhiteboardPushRequest;
-const DescribeOfflineRecordRequest = models.DescribeOfflineRecordRequest;
 const DescribeRecordSearchRequest = models.DescribeRecordSearchRequest;
 
 
@@ -183,7 +175,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the real-time recording callback address. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+     * This API is used to set the real-time recording callback address. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
      * @param {SetOnlineRecordCallbackRequest} req
      * @param {function(string, SetOnlineRecordCallbackResponse):void} cb
      * @public
@@ -191,17 +183,6 @@ class TiwClient extends AbstractClient {
     SetOnlineRecordCallback(req, cb) {
         let resp = new SetOnlineRecordCallbackResponse();
         this.request("SetOnlineRecordCallback", req, resp, cb);
-    }
-
-    /**
-     * This API is used to stop real-time recording.
-     * @param {StopOnlineRecordRequest} req
-     * @param {function(string, StopOnlineRecordResponse):void} cb
-     * @public
-     */
-    StopOnlineRecord(req, cb) {
-        let resp = new StopOnlineRecordResponse();
-        this.request("StopOnlineRecord", req, resp, cb);
     }
 
     /**
@@ -260,7 +241,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+     * This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
      * @param {SetOnlineRecordCallbackKeyRequest} req
      * @param {function(string, SetOnlineRecordCallbackKeyResponse):void} cb
      * @public
@@ -282,7 +263,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+     * This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
      * @param {SetTranscodeCallbackRequest} req
      * @param {function(string, SetTranscodeCallbackResponse):void} cb
      * @public
@@ -326,7 +307,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+     * This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
      * @param {SetTranscodeCallbackKeyRequest} req
      * @param {function(string, SetTranscodeCallbackKeyResponse):void} cb
      * @public
@@ -334,19 +315,6 @@ class TiwClient extends AbstractClient {
     SetTranscodeCallbackKey(req, cb) {
         let resp = new SetTranscodeCallbackKeyResponse();
         this.request("SetTranscodeCallbackKey", req, resp, cb);
-    }
-
-    /**
-     * 课后录制服务已下线
-
-This API is used to set the offline recording callback URL.
-     * @param {SetOfflineRecordCallbackRequest} req
-     * @param {function(string, SetOfflineRecordCallbackResponse):void} cb
-     * @public
-     */
-    SetOfflineRecordCallback(req, cb) {
-        let resp = new SetOfflineRecordCallbackResponse();
-        this.request("SetOfflineRecordCallback", req, resp, cb);
     }
 
     /**
@@ -438,6 +406,17 @@ This API is used to set the offline recording callback URL.
     }
 
     /**
+     * This API is used to create a whiteboard application.
+     * @param {CreateApplicationRequest} req
+     * @param {function(string, CreateApplicationResponse):void} cb
+     * @public
+     */
+    CreateApplication(req, cb) {
+        let resp = new CreateApplicationResponse();
+        this.request("CreateApplication", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the information about other cloud products by using the service role.
      * @param {DescribeAPIServiceRequest} req
      * @param {function(string, DescribeAPIServiceResponse):void} cb
@@ -468,17 +447,6 @@ This API is used to set the offline recording callback URL.
     DescribeApplicationInfos(req, cb) {
         let resp = new DescribeApplicationInfosResponse();
         this.request("DescribeApplicationInfos", req, resp, cb);
-    }
-
-    /**
-     * This API is used to start a real-time recording task.
-     * @param {StartOnlineRecordRequest} req
-     * @param {function(string, StartOnlineRecordResponse):void} cb
-     * @public
-     */
-    StartOnlineRecord(req, cb) {
-        let resp = new StartOnlineRecordResponse();
-        this.request("StartOnlineRecord", req, resp, cb);
     }
 
     /**
@@ -529,7 +497,7 @@ This API is used to set the offline recording callback URL.
     }
 
     /**
-     * This API is used to set the whiteboard push callback URL. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+     * This API is used to set the whiteboard push callback URL. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
      * @param {SetWhiteboardPushCallbackRequest} req
      * @param {function(string, SetWhiteboardPushCallbackResponse):void} cb
      * @public
@@ -540,40 +508,25 @@ This API is used to set the offline recording callback URL.
     }
 
     /**
-     * 课后录制服务已下线
-
-This API is used to query the offline recording callback URL.
-     * @param {DescribeOfflineRecordCallbackRequest} req
-     * @param {function(string, DescribeOfflineRecordCallbackResponse):void} cb
+     * This API is used to start a real-time recording task.
+     * @param {StartOnlineRecordRequest} req
+     * @param {function(string, StartOnlineRecordResponse):void} cb
      * @public
      */
-    DescribeOfflineRecordCallback(req, cb) {
-        let resp = new DescribeOfflineRecordCallbackResponse();
-        this.request("DescribeOfflineRecordCallback", req, resp, cb);
+    StartOnlineRecord(req, cb) {
+        let resp = new StartOnlineRecordResponse();
+        this.request("StartOnlineRecord", req, resp, cb);
     }
 
     /**
-     * This API is used to query the progress and result of a document transcoding task.
-     * @param {DescribeTranscodeRequest} req
-     * @param {function(string, DescribeTranscodeResponse):void} cb
+     * This API is used to stop real-time recording.
+     * @param {StopOnlineRecordRequest} req
+     * @param {function(string, StopOnlineRecordResponse):void} cb
      * @public
      */
-    DescribeTranscode(req, cb) {
-        let resp = new DescribeTranscodeResponse();
-        this.request("DescribeTranscode", req, resp, cb);
-    }
-
-    /**
-     * 课后录制服务已下线
-
-This API is used to create an offline recording task.
-     * @param {CreateOfflineRecordRequest} req
-     * @param {function(string, CreateOfflineRecordResponse):void} cb
-     * @public
-     */
-    CreateOfflineRecord(req, cb) {
-        let resp = new CreateOfflineRecordResponse();
-        this.request("CreateOfflineRecord", req, resp, cb);
+    StopOnlineRecord(req, cb) {
+        let resp = new StopOnlineRecordResponse();
+        this.request("StopOnlineRecord", req, resp, cb);
     }
 
     /**
@@ -588,7 +541,7 @@ This API is used to create an offline recording task.
     }
 
     /**
-     * This API is used to set the callback authentication key for whiteboard push. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+     * This API is used to set the callback authentication key for whiteboard push. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
      * @param {SetWhiteboardPushCallbackKeyRequest} req
      * @param {function(string, SetWhiteboardPushCallbackKeyResponse):void} cb
      * @public
@@ -621,14 +574,14 @@ This API is used to create an offline recording task.
     }
 
     /**
-     * This API is used to create a whiteboard application.
-     * @param {CreateApplicationRequest} req
-     * @param {function(string, CreateApplicationResponse):void} cb
+     * This API is used to query the progress and result of a document transcoding task.
+     * @param {DescribeTranscodeRequest} req
+     * @param {function(string, DescribeTranscodeResponse):void} cb
      * @public
      */
-    CreateApplication(req, cb) {
-        let resp = new CreateApplicationResponse();
-        this.request("CreateApplication", req, resp, cb);
+    DescribeTranscode(req, cb) {
+        let resp = new DescribeTranscodeResponse();
+        this.request("DescribeTranscode", req, resp, cb);
     }
 
     /**
@@ -676,19 +629,6 @@ This API is used to create an offline recording task.
     DescribeQualityMetrics(req, cb) {
         let resp = new DescribeQualityMetricsResponse();
         this.request("DescribeQualityMetrics", req, resp, cb);
-    }
-
-    /**
-     * 课后录制服务已下线
-
-This API is used to query the information about an offline recording task, including the recording progress and recording result.
-     * @param {DescribeOfflineRecordRequest} req
-     * @param {function(string, DescribeOfflineRecordResponse):void} cb
-     * @public
-     */
-    DescribeOfflineRecord(req, cb) {
-        let resp = new DescribeOfflineRecordResponse();
-        this.request("DescribeOfflineRecord", req, resp, cb);
     }
 
     /**

@@ -30837,27 +30837,7 @@ class EventContent extends  AbstractModel {
         this.EventHandle = null;
 
         /**
-         * <b>Supported event types:</b>
-<li>`NewFileUpload`: Video uploaded.</li>
-<li>`ProcedureStateChanged`: Task flow status changed.</li>
-<li>`FileDeleted`: Video deleted.</li>
-<li>`RestoreMediaComplete`: Video retrieved.</li>
-<li>`PullComplete`: Finished video pulling.</li>
-<li>`EditMediaComplete`: Finished video editing.</li>
-<li>`SplitMediaComplete`: Finished video splitting.</li>
-<li>`ComposeMediaComplete`: Finished producing the media file.</li>
-<li>`WechatMiniProgramPublishComplete`: Finished publishing on Weixin Mini Program.</li>
-<li>`RemoveWatermark`: Watermark removed.</li>
-<li>`RebuildMediaComplete`: Finished audio/video remastering.</li>
-<li>`ReviewAudioVideoComplete`: Finished moderation.</li>
-<li>`ExtractTraceWatermarkComplete`: Finished digital watermark extraction.</li>
-<li>`DescribeFileAttributesComplete`: Finished getting file attributes.</li>
-<b>v2017 task types:</b>
-<li>`TranscodeComplete`: Finished video transcoding.</li>
-<li>`ConcatComplete`: Finished video splicing.</li>
-<li>`ClipComplete`: Finished video clipping.</li>
-<li>`CreateImageSpriteComplete`: Finished image sprite generation.</li>
-<li>`CreateSnapshotByTimeOffsetComplete`: Finished time point screencapturing.</li>
+         * <b>Supported event types:</b><li>`NewFileUpload`: Video uploaded.</li><li>`ProcedureStateChanged`: Task flow status changed.</li><li>`FileDeleted`: Video deleted.</li><li>`RestoreMediaComplete`: Video retrieved.</li><li>`PullComplete`: Finished video pulling.</li><li>`EditMediaComplete`: Finished video editing.</li><li>`SplitMediaComplete`: Finished video splitting.</li><li>`ComposeMediaComplete`: Finished producing the media file.</li><li>`WechatMiniProgramPublishComplete`: Finished publishing on Weixin Mini Program.</li><li>`RemoveWatermark`: Watermark removed.</li><li>`RebuildMediaComplete`: Finished audio/video remastering.</li><li>`ReviewAudioVideoComplete`: Finished moderation.</li><li>`ExtractTraceWatermarkComplete`: Finished digital watermark extraction.</li><li>`DescribeFileAttributesComplete`: Finished getting file attributes.</li><li>`QualityEnhanceComplete`: FinishedQualityEnhance.</li><b>v2017 task types:</b><li>`TranscodeComplete`: Finished video transcoding.</li><li>`ConcatComplete`: Finished video splicing.</li><li>`ClipComplete`: Finished video clipping.</li><li>`CreateImageSpriteComplete`: Finished image sprite generation.</li><li>`CreateSnapshotByTimeOffsetComplete`: Finished time point screencapturing.</li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -35167,7 +35147,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>`DescribeFileAttributesTask`: Getting file attributes</li>
 <li> `ReviewAudioVideo`: Moderation</li>
 <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
-<li>`QualityEnhance：Enhance audio/video</li>
+<li>`QualityEnhance`：Enhance audio/video</li>
          * @type {string || null}
          */
         this.TaskType = null;

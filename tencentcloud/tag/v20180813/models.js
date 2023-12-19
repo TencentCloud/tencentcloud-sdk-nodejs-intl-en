@@ -87,6 +87,12 @@ class TagWithDelete extends  AbstractModel {
          */
         this.CanDelete = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.Note: This field may return null, indicating that no value is obtained.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -99,6 +105,7 @@ class TagWithDelete extends  AbstractModel {
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
         this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -434,13 +441,13 @@ class DescribeResourceTagsByTagKeysRequest extends  AbstractModel {
         this.ResourceRegion = null;
 
         /**
-         * Unique resource ID
+         * List of unique resource IDs, which can contain no more than 20 IDs.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
-         * Resource tag key
+         * List of resource tag keys, which can contain no more than 20 keys.
          * @type {Array.<string> || null}
          */
         this.TagKeys = null;
@@ -649,6 +656,12 @@ class DescribeTagValuesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -662,6 +675,7 @@ class DescribeTagValuesRequest extends  AbstractModel {
         this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -929,7 +943,7 @@ class DescribeTagKeysRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Page size. The default value is 0.
+         * Number of entries per page. Default: 15; maximum: 1,000.
          * @type {number || null}
          */
         this.Limit = null;
@@ -939,6 +953,12 @@ class DescribeTagKeysRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ShowProject = null;
+
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+         * @type {string || null}
+         */
+        this.Category = null;
 
     }
 
@@ -953,6 +973,7 @@ class DescribeTagKeysRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ShowProject = 'ShowProject' in params ? params.ShowProject : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -1276,6 +1297,12 @@ class DescribeResourceTagsByResourceIdsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -1291,6 +1318,7 @@ class DescribeResourceTagsByResourceIdsRequest extends  AbstractModel {
         this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -1581,6 +1609,12 @@ Note: this field may return null, indicating that no valid values found.
          */
         this.ServiceType = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag.Note: This field may return null, indicating that no value is obtained.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -1596,6 +1630,7 @@ Note: this field may return null, indicating that no valid values found.
         this.TagKeyMd5 = 'TagKeyMd5' in params ? params.TagKeyMd5 : null;
         this.TagValueMd5 = 'TagValueMd5' in params ? params.TagValueMd5 : null;
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -1622,6 +1657,12 @@ Default value: 50.
          */
         this.MaxResults = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -1633,6 +1674,7 @@ Default value: 50.
         }
         this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -1739,19 +1781,19 @@ class AddResourceTagRequest extends  AbstractModel {
         super();
 
         /**
-         * Tag key.
+         * The tag key that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value.
+         * The tag value that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
          * @type {string || null}
          */
         this.TagValue = null;
 
         /**
-         * [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+         * Resource to be associated, represented in the standard six-segment resource format. For the correct format, see https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1
          * @type {string || null}
          */
         this.Resource = null;
@@ -2225,6 +2267,12 @@ class Tag extends  AbstractModel {
          */
         this.TagValue = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.Note: This field may return null, indicating that no value is obtained.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -2236,6 +2284,7 @@ class Tag extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -2249,7 +2298,7 @@ class AttachResourcesTagRequest extends  AbstractModel {
         super();
 
         /**
-         * Resource service name (the third segment in the six-segment resource description)
+         * Service short name, which is the third segment of the six-segment resource format. For more information on the format, see https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -2261,19 +2310,19 @@ class AttachResourcesTagRequest extends  AbstractModel {
         this.ResourceIds = null;
 
         /**
-         * Tag key
+         * The tag key that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value
+         * The tag value that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
          * @type {string || null}
          */
         this.TagValue = null;
 
         /**
-         * Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
+         * Region of the resource. This parameter can be left blank if region is not involved. The region must correspond to resources specified by ResourceIds.N. Once the region is specified, all resources specified by ResourceIds.N must locate in this region. Example: ap-beijing.
          * @type {string || null}
          */
         this.ResourceRegion = null;
@@ -2875,6 +2924,12 @@ Maximum length: 20
          */
         this.TagKeys = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -2887,6 +2942,7 @@ Maximum length: 20
         this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -2985,9 +3041,8 @@ class TagResourcesRequest extends  AbstractModel {
         super();
 
         /**
-         * Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
-Value range of N: 0–9
+         * Cloud resource to be bound, represented in the standard six-segment resource format. For the correct format, see [Resource Description Method](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1) and [Tagging-enabled Resources](https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1).
+Value range of N: 0-9.
          * @type {Array.<string> || null}
          */
         this.ResourceList = null;
@@ -3286,6 +3341,12 @@ Default value: 50.
          */
         this.MaxResults = null;
 
+        /**
+         * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -3298,6 +3359,7 @@ Default value: 50.
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }

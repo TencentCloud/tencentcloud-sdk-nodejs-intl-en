@@ -665,19 +665,19 @@ class DescribeBillDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
+         * The queried month in the format of “YYYY-MM”, such as 2023-01.
          * @type {string || null}
          */
         this.Month = null;
 
         /**
-         * Page parameter: Indicates the number of entries per page. The maximum value is 200.
+         * Page parameter: Indicates the number of entries per page. Value range: [1, 200]
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * A pagination parameter that specifies the current page number
+         * Page parameter: Indicates the current page number. The minimum value is 1.
          * @type {number || null}
          */
         this.Page = null;
@@ -1510,13 +1510,13 @@ class DescribeCustomerBillDetailRequest extends  AbstractModel {
         this.Month = null;
 
         /**
-         * Page parameter: Indicates the number of entries per page. The maximum value is 200.
+         * Page parameter: Indicates the number of entries per page. Value range: [1, 200]
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * A pagination parameter that specifies the current page number
+         * Page parameter: Indicates the current page number. The minimum value is 1.
          * @type {number || null}
          */
         this.Page = null;

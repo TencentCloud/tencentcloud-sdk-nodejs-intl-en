@@ -329,8 +329,7 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query existing tag lists.
-
+     * This API is used to query the list of created tags.
      * @param {DescribeTagsRequest} req
      * @param {function(string, DescribeTagsResponse):void} cb
      * @public
@@ -352,8 +351,7 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query tag keys in an existing tag list.
-
+     * This API is used to query tag keys in the list of created tags.
      * @param {DescribeTagKeysRequest} req
      * @param {function(string, DescribeTagKeysResponse):void} cb
      * @public

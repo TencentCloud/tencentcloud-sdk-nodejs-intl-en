@@ -118,6 +118,115 @@ class GetFaceIdTokenIntlResponse extends  AbstractModel {
 }
 
 /**
+ * ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+ * @class
+ */
+class InternationalIDPassport extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Passport ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Full name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Surname = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Gender (F-Female, M-Male)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Expiration date
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DateOfExpiration = null;
+
+        /**
+         * Issuing country
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuingCountry = null;
+
+        /**
+         * Nationality code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NationalityCode = null;
+
+        /**
+         * The first line at the bottom, the MRZ Code sequence
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PassportCodeFirst = null;
+
+        /**
+         * The second line at the bottom, the MRZ Code sequence
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PassportCodeSecond = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.Surname = 'Surname' in params ? params.Surname : null;
+        this.GivenName = 'GivenName' in params ? params.GivenName : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.DateOfExpiration = 'DateOfExpiration' in params ? params.DateOfExpiration : null;
+        this.IssuingCountry = 'IssuingCountry' in params ? params.IssuingCountry : null;
+        this.NationalityCode = 'NationalityCode' in params ? params.NationalityCode : null;
+        this.PassportCodeFirst = 'PassportCodeFirst' in params ? params.PassportCodeFirst : null;
+        this.PassportCodeSecond = 'PassportCodeSecond' in params ? params.PassportCodeSecond : null;
+
+    }
+}
+
+/**
  * GetSdkVerificationResult response structure.
  * @class
  */
@@ -442,38 +551,44 @@ class DetectReflectLivenessAndCompareRequest extends  AbstractModel {
 }
 
 /**
- * ApplyWebVerificationBizTokenIntl request structure.
+ * GetFaceIdTokenIntl request structure.
  * @class
  */
-class ApplyWebVerificationBizTokenIntlRequest extends  AbstractModel {
+class GetFaceIdTokenIntlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded string (max 8 MB in size) of the photo to be compared.
+         * The detection mode. Valid values:
+`liveness`: Liveness detection only.
+`compare`: Liveness detection and face comparison.
+Default value: `liveness`.
          * @type {string || null}
          */
-        this.CompareImageBase64 = null;
+        this.CheckMode = null;
 
         /**
-         * The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
-Example: https://www.tencentcloud.com/products/faceid.
-After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
+         * The verification security level. Valid values:
+`1`: Video-based liveness detection.
+`2`: Motion-based liveness detection.
+`3`: Reflection-based liveness detection.
+`4`: Motion- and reflection-based liveness detection.
+Default value: `4`.
          * @type {string || null}
          */
-        this.RedirectURL = null;
+        this.SecureLevel = null;
 
         /**
-         * The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
+         * The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * The pass-through parameter, which can be omitted if there are no special requirements.
          * @type {string || null}
          */
         this.Extra = null;
-
-        /**
-         * The parameter control the page configuration.
-         * @type {WebVerificationConfigIntl || null}
-         */
-        this.Config = null;
 
     }
 
@@ -484,15 +599,10 @@ After the verification process is completed, the BizToken of this process will b
         if (!params) {
             return;
         }
-        this.CompareImageBase64 = 'CompareImageBase64' in params ? params.CompareImageBase64 : null;
-        this.RedirectURL = 'RedirectURL' in params ? params.RedirectURL : null;
+        this.CheckMode = 'CheckMode' in params ? params.CheckMode : null;
+        this.SecureLevel = 'SecureLevel' in params ? params.SecureLevel : null;
+        this.Image = 'Image' in params ? params.Image : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
-
-        if (params.Config) {
-            let obj = new WebVerificationConfigIntl();
-            obj.deserialize(params.Config)
-            this.Config = obj;
-        }
 
     }
 }
@@ -638,6 +748,83 @@ class GetWebVerificationResultRequest extends  AbstractModel {
 }
 
 /**
+ * Thailand ID Card
+ * @class
+ */
+class ThailandIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DateOfBirth = null;
+
+        /**
+         * Date of expiry
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DateOfExpiry = null;
+
+        /**
+         * Date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DateOfIssue = null;
+
+        /**
+         * Issuing country
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.DateOfBirth = 'DateOfBirth' in params ? params.DateOfBirth : null;
+        this.DateOfExpiry = 'DateOfExpiry' in params ? params.DateOfExpiry : null;
+        this.DateOfIssue = 'DateOfIssue' in params ? params.DateOfIssue : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+
+    }
+}
+
+/**
  * The details of the verification process.
  * @class
  */
@@ -775,6 +962,19 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.BestFrameBase64 = null;
 
         /**
+         * Card recognize result.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<OCRResult> || null}
+         */
+        this.OCRResult = null;
+
+        /**
+         * The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -802,6 +1002,16 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         }
         this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
         this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+
+        if (params.OCRResult) {
+            this.OCRResult = new Array();
+            for (let z in params.OCRResult) {
+                let obj = new OCRResult();
+                obj.deserialize(params.OCRResult[z]);
+                this.OCRResult.push(obj);
+            }
+        }
+        this.Extra = 'Extra' in params ? params.Extra : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -870,6 +1080,311 @@ Example value: ""
         this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
         this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
         this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+
+    }
+}
+
+/**
+ * Hong Kong ID card.
+ * @class
+ */
+class HKIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CnName = null;
+
+        /**
+         * English name
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: SAN, Nan
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * Telex code correspondint to the Chinese name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TelexCode = null;
+
+        /**
+         * Gender: "Male-M" or "Female-F"
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: 01-01-2001
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Permanent resident ID card: 0-non-permanent; 1-permanent; -1-unknown
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Permanent = null;
+
+        /**
+         * ID card number
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: C000000(E)
+         * @type {string || null}
+         */
+        this.IdNum = null;
+
+        /**
+         * Lisence symbol, which is the symbol below Birthday. Example: "***AZ"
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Symbol = null;
+
+        /**
+         * The first date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstIssueDate = null;
+
+        /**
+         * The current date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CurrentIssueDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CnName = 'CnName' in params ? params.CnName : null;
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.TelexCode = 'TelexCode' in params ? params.TelexCode : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Permanent = 'Permanent' in params ? params.Permanent : null;
+        this.IdNum = 'IdNum' in params ? params.IdNum : null;
+        this.Symbol = 'Symbol' in params ? params.Symbol : null;
+        this.FirstIssueDate = 'FirstIssueDate' in params ? params.FirstIssueDate : null;
+        this.CurrentIssueDate = 'CurrentIssueDate' in params ? params.CurrentIssueDate : null;
+
+    }
+}
+
+/**
+ * Singapore ID Card
+ * @class
+ */
+class SingaporeIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Chinese name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChName = null;
+
+        /**
+         * English name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Country of birth
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CountryOfBirth = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Address (on the back)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Nationality (on the back)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Race = null;
+
+        /**
+         *  NRIC number (on the back)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NRICCode = null;
+
+        /**
+         * Post number (on the front)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PostCode = null;
+
+        /**
+         * Date of expiry (on the back)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DateOfExpiration = null;
+
+        /**
+         * Date of issue (on the back)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DateOfIssue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChName = 'ChName' in params ? params.ChName : null;
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.CountryOfBirth = 'CountryOfBirth' in params ? params.CountryOfBirth : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Race = 'Race' in params ? params.Race : null;
+        this.NRICCode = 'NRICCode' in params ? params.NRICCode : null;
+        this.PostCode = 'PostCode' in params ? params.PostCode : null;
+        this.DateOfExpiration = 'DateOfExpiration' in params ? params.DateOfExpiration : null;
+        this.DateOfIssue = 'DateOfIssue' in params ? params.DateOfIssue : null;
+
+    }
+}
+
+/**
+ * Indonesia driving license.
+ * @class
+ */
+class IndonesiaDrivingLicense extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Expiration date
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedDate = null;
+
+        /**
+         * Issuing country
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
 
     }
 }
@@ -1445,6 +1960,384 @@ class GetLivenessResultRequest extends  AbstractModel {
 }
 
 /**
+ * License OCR result
+ * @class
+ */
+class CardInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Hong Kong ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HKIDCard || null}
+         */
+        this.HKIDCard = null;
+
+        /**
+         * Malaysia ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MLIDCard || null}
+         */
+        this.MLIDCard = null;
+
+        /**
+         * Philippines VoteID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PhilippinesVoteID || null}
+         */
+        this.PhilippinesVoteID = null;
+
+        /**
+         * Indonesia ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {IndonesiaIDCard || null}
+         */
+        this.IndonesiaIDCard = null;
+
+        /**
+         * Philippines Driving License
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PhilippinesDrivingLicense || null}
+         */
+        this.PhilippinesDrivingLicense = null;
+
+        /**
+         * Philippines TinID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PhilippinesTinID || null}
+         */
+        this.PhilippinesTinID = null;
+
+        /**
+         * Philippines SSSID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PhilippinesSSSID || null}
+         */
+        this.PhilippinesSSSID = null;
+
+        /**
+         * Philippines UMID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PhilippinesUMID || null}
+         */
+        this.PhilippinesUMID = null;
+
+        /**
+         * ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InternationalIDPassport || null}
+         */
+        this.InternationalIDPassport = null;
+
+        /**
+         * General license information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {GeneralCard || null}
+         */
+        this.GeneralCard = null;
+
+        /**
+         * Indonesia Driving License
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {IndonesiaDrivingLicense || null}
+         */
+        this.IndonesiaDrivingLicense = null;
+
+        /**
+         * Thailand ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ThailandIDCard || null}
+         */
+        this.ThailandIDCard = null;
+
+        /**
+         * Singapore ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SingaporeIDCard || null}
+         */
+        this.SingaporeIDCard = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HKIDCard) {
+            let obj = new HKIDCard();
+            obj.deserialize(params.HKIDCard)
+            this.HKIDCard = obj;
+        }
+
+        if (params.MLIDCard) {
+            let obj = new MLIDCard();
+            obj.deserialize(params.MLIDCard)
+            this.MLIDCard = obj;
+        }
+
+        if (params.PhilippinesVoteID) {
+            let obj = new PhilippinesVoteID();
+            obj.deserialize(params.PhilippinesVoteID)
+            this.PhilippinesVoteID = obj;
+        }
+
+        if (params.IndonesiaIDCard) {
+            let obj = new IndonesiaIDCard();
+            obj.deserialize(params.IndonesiaIDCard)
+            this.IndonesiaIDCard = obj;
+        }
+
+        if (params.PhilippinesDrivingLicense) {
+            let obj = new PhilippinesDrivingLicense();
+            obj.deserialize(params.PhilippinesDrivingLicense)
+            this.PhilippinesDrivingLicense = obj;
+        }
+
+        if (params.PhilippinesTinID) {
+            let obj = new PhilippinesTinID();
+            obj.deserialize(params.PhilippinesTinID)
+            this.PhilippinesTinID = obj;
+        }
+
+        if (params.PhilippinesSSSID) {
+            let obj = new PhilippinesSSSID();
+            obj.deserialize(params.PhilippinesSSSID)
+            this.PhilippinesSSSID = obj;
+        }
+
+        if (params.PhilippinesUMID) {
+            let obj = new PhilippinesUMID();
+            obj.deserialize(params.PhilippinesUMID)
+            this.PhilippinesUMID = obj;
+        }
+
+        if (params.InternationalIDPassport) {
+            let obj = new InternationalIDPassport();
+            obj.deserialize(params.InternationalIDPassport)
+            this.InternationalIDPassport = obj;
+        }
+
+        if (params.GeneralCard) {
+            let obj = new GeneralCard();
+            obj.deserialize(params.GeneralCard)
+            this.GeneralCard = obj;
+        }
+
+        if (params.IndonesiaDrivingLicense) {
+            let obj = new IndonesiaDrivingLicense();
+            obj.deserialize(params.IndonesiaDrivingLicense)
+            this.IndonesiaDrivingLicense = obj;
+        }
+
+        if (params.ThailandIDCard) {
+            let obj = new ThailandIDCard();
+            obj.deserialize(params.ThailandIDCard)
+            this.ThailandIDCard = obj;
+        }
+
+        if (params.SingaporeIDCard) {
+            let obj = new SingaporeIDCard();
+            obj.deserialize(params.SingaporeIDCard)
+            this.SingaporeIDCard = obj;
+        }
+
+    }
+}
+
+/**
+ * Philippines VoteID Card
+ * @class
+ */
+class PhilippinesVoteID extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VIN of Philippines VoteID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VIN = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Civil status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CivilStatus = null;
+
+        /**
+         * Nationality
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Citizenship = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Region
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrecinctNo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VIN = 'VIN' in params ? params.VIN : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.CivilStatus = 'CivilStatus' in params ? params.CivilStatus : null;
+        this.Citizenship = 'Citizenship' in params ? params.Citizenship : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.PrecinctNo = 'PrecinctNo' in params ? params.PrecinctNo : null;
+
+    }
+}
+
+/**
+ * eKYC Web related configuration
+ * @class
+ */
+class WebVerificationConfigIntl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * When the verification passed, whether to skip the result page and automatically jump to RedirectURL. The default value is false.
+Example value: false
+         * @type {boolean || null}
+         */
+        this.AutoSkip = null;
+
+        /**
+         * Detection mode, parameter values are as follows:
+1: OCR+living detection & face comparison;
+2: Living detection & face comparison;
+3: Living detection;
+The default value is 2.
+Example value: 3
+         * @type {number || null}
+         */
+        this.CheckMode = null;
+
+        /**
+         * The type of lisence used for verification. The following types are supported.
+1.HKIDCard: Hong Kong (China) ID card
+2.MLIDCard: Malaysia ID card
+3.IndonesiaIDCard: Indonesia ID card
+4.PhilippinesVoteID: Philippines VoteID card
+5.PhilippinesDrivingLicense: Philippines driving license
+6.PhilippinesTinID: Philippines TinID card
+7.PhilippinesSSSID: Philippines SSSID card
+8.PhilippinesUMID: Philippines UMID card
+9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+Example: HKIDCard
+         * @type {string || null}
+         */
+        this.IDCardType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoSkip = 'AutoSkip' in params ? params.AutoSkip : null;
+        this.CheckMode = 'CheckMode' in params ? params.CheckMode : null;
+        this.IDCardType = 'IDCardType' in params ? params.IDCardType : null;
+
+    }
+}
+
+/**
+ * Philippines SSSID Card
+ * @class
+ */
+class PhilippinesSSSID extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Full name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+
+    }
+}
+
+/**
  * CompareFaceLiveness response structure.
  * @class
  */
@@ -1502,6 +2395,163 @@ Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
         this.Sim = 'Sim' in params ? params.Sim : null;
         this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Indonesia ID card.
+ * @class
+ */
+class IndonesiaIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NIK = null;
+
+        /**
+         * Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nama = null;
+
+        /**
+         * Birth place/Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TempatTglLahir = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.JenisKelamin = null;
+
+        /**
+         * Blood type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GolDarah = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alamat = null;
+
+        /**
+         * Street
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RTRW = null;
+
+        /**
+         * Village
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KelDesa = null;
+
+        /**
+         * Region
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Kecamatan = null;
+
+        /**
+         * Religious beliefs
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Agama = null;
+
+        /**
+         * Marital status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StatusPerkawinan = null;
+
+        /**
+         * Job
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Perkerjaan = null;
+
+        /**
+         * Nationality
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KewargaNegaraan = null;
+
+        /**
+         * ID card validity period
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BerlakuHingga = null;
+
+        /**
+         * Date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedDate = null;
+
+        /**
+         * Province
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Provinsi = null;
+
+        /**
+         * City
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Kota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NIK = 'NIK' in params ? params.NIK : null;
+        this.Nama = 'Nama' in params ? params.Nama : null;
+        this.TempatTglLahir = 'TempatTglLahir' in params ? params.TempatTglLahir : null;
+        this.JenisKelamin = 'JenisKelamin' in params ? params.JenisKelamin : null;
+        this.GolDarah = 'GolDarah' in params ? params.GolDarah : null;
+        this.Alamat = 'Alamat' in params ? params.Alamat : null;
+        this.RTRW = 'RTRW' in params ? params.RTRW : null;
+        this.KelDesa = 'KelDesa' in params ? params.KelDesa : null;
+        this.Kecamatan = 'Kecamatan' in params ? params.Kecamatan : null;
+        this.Agama = 'Agama' in params ? params.Agama : null;
+        this.StatusPerkawinan = 'StatusPerkawinan' in params ? params.StatusPerkawinan : null;
+        this.Perkerjaan = 'Perkerjaan' in params ? params.Perkerjaan : null;
+        this.KewargaNegaraan = 'KewargaNegaraan' in params ? params.KewargaNegaraan : null;
+        this.BerlakuHingga = 'BerlakuHingga' in params ? params.BerlakuHingga : null;
+        this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
+        this.Provinsi = 'Provinsi' in params ? params.Provinsi : null;
+        this.Kota = 'Kota' in params ? params.Kota : null;
 
     }
 }
@@ -1570,44 +2620,38 @@ class CreateUploadUrlRequest extends  AbstractModel {
 }
 
 /**
- * GetFaceIdTokenIntl request structure.
+ * ApplyWebVerificationBizTokenIntl request structure.
  * @class
  */
-class GetFaceIdTokenIntlRequest extends  AbstractModel {
+class ApplyWebVerificationBizTokenIntlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The detection mode. Valid values:
-`liveness`: Liveness detection only.
-`compare`: Liveness detection and face comparison.
-Default value: `liveness`.
+         * The Base64-encoded string (max 8 MB in size) of the photo to be compared.
          * @type {string || null}
          */
-        this.CheckMode = null;
+        this.CompareImageBase64 = null;
 
         /**
-         * The verification security level. Valid values:
-`1`: Video-based liveness detection.
-`2`: Motion-based liveness detection.
-`3`: Reflection-based liveness detection.
-`4`: Motion- and reflection-based liveness detection.
-Default value: `4`.
+         * The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
+Example: https://www.tencentcloud.com/products/faceid.
+After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
          * @type {string || null}
          */
-        this.SecureLevel = null;
+        this.RedirectURL = null;
 
         /**
-         * The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * The pass-through parameter, which can be omitted if there are no special requirements.
+         * The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
          * @type {string || null}
          */
         this.Extra = null;
+
+        /**
+         * The parameter control the page configuration.
+         * @type {WebVerificationConfigIntl || null}
+         */
+        this.Config = null;
 
     }
 
@@ -1618,10 +2662,15 @@ Default value: `4`.
         if (!params) {
             return;
         }
-        this.CheckMode = 'CheckMode' in params ? params.CheckMode : null;
-        this.SecureLevel = 'SecureLevel' in params ? params.SecureLevel : null;
-        this.Image = 'Image' in params ? params.Image : null;
+        this.CompareImageBase64 = 'CompareImageBase64' in params ? params.CompareImageBase64 : null;
+        this.RedirectURL = 'RedirectURL' in params ? params.RedirectURL : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
+
+        if (params.Config) {
+            let obj = new WebVerificationConfigIntl();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
 
     }
 }
@@ -1794,6 +2843,116 @@ Their meanings are as follows:
 }
 
 /**
+ * Philippines driving license
+ * @class
+ */
+class PhilippinesDrivingLicense extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Last name
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * Middle name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * Nationality
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNo = null;
+
+        /**
+         * Date of expiry
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpiresDate = null;
+
+        /**
+         * Agency code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AgencyCode = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.MiddleName = 'MiddleName' in params ? params.MiddleName : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.LicenseNo = 'LicenseNo' in params ? params.LicenseNo : null;
+        this.ExpiresDate = 'ExpiresDate' in params ? params.ExpiresDate : null;
+        this.AgencyCode = 'AgencyCode' in params ? params.AgencyCode : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+
+    }
+}
+
+/**
  * GenerateReflectSequence response structure.
  * @class
  */
@@ -1836,18 +2995,61 @@ class GenerateReflectSequenceResponse extends  AbstractModel {
 }
 
 /**
- * eKYC Web related configuration
+ * Philippines UMID Card
  * @class
  */
-class WebVerificationConfigIntl extends  AbstractModel {
+class PhilippinesUMID extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to automatically redirect to RedirectUrl after successful verification. Default value: false.
-         * @type {boolean || null}
+         * Surname
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.AutoSkip = null;
+        this.Surname = null;
+
+        /**
+         * Middle Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * CRN code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CRN = null;
 
     }
 
@@ -1858,7 +3060,245 @@ class WebVerificationConfigIntl extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoSkip = 'AutoSkip' in params ? params.AutoSkip : null;
+        this.Surname = 'Surname' in params ? params.Surname : null;
+        this.MiddleName = 'MiddleName' in params ? params.MiddleName : null;
+        this.GivenName = 'GivenName' in params ? params.GivenName : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.CRN = 'CRN' in params ? params.CRN : null;
+
+    }
+}
+
+/**
+ * General liscense information.
+ * @class
+ */
+class GeneralCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Personal number, which is returned when it is a passport
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PersonalNumber = null;
+
+        /**
+         * The first line of passport machine reading code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PassportCodeFirst = null;
+
+        /**
+         * The first line of passport machine reading code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PassportCodeSecond = null;
+
+        /**
+         * Date of expiry in the format of YYYY-MM-DD
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Valid date in the format of YYYY-MM-DD
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DueDate = null;
+
+        /**
+         * Date of issue in the format of YYYY-MM-DD
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedDate = null;
+
+        /**
+         * Issuing authority
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedAuthority = null;
+
+        /**
+         * Issuing country, which is returned following the ISO 3166 country coding specification
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: MYS
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * Full Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * Gender on the license
+- M：male
+- F：female
+- X：other gender
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: M
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Age. 0 indicates that no valid information is obtained.
+Example: 0
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Birth place
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BirthPlace = null;
+
+        /**
+         * Nationality, which is returned following the ISO 3166 country coding specification
+Note: This field may return null, indicating that no valid values can be obtained.
+Example: IND
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * Registration number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegistrationNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.PersonalNumber = 'PersonalNumber' in params ? params.PersonalNumber : null;
+        this.PassportCodeFirst = 'PassportCodeFirst' in params ? params.PassportCodeFirst : null;
+        this.PassportCodeSecond = 'PassportCodeSecond' in params ? params.PassportCodeSecond : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.DueDate = 'DueDate' in params ? params.DueDate : null;
+        this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
+        this.IssuedAuthority = 'IssuedAuthority' in params ? params.IssuedAuthority : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.BirthPlace = 'BirthPlace' in params ? params.BirthPlace : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.RegistrationNumber = 'RegistrationNumber' in params ? params.RegistrationNumber : null;
+
+    }
+}
+
+/**
+ * Philippines TinID Card
+ * @class
+ */
+class PhilippinesTinID extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Full name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Date of issue
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssueDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
 
     }
 }
@@ -1951,6 +3391,137 @@ We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can gu
         this.Optional = 'Optional' in params ? params.Optional : null;
         this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
         this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
+
+    }
+}
+
+/**
+ * Malaysia ID card.
+ * @class
+ */
+class MLIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Lisence type
+MyKad ID card
+MyPR Permanent resident ID card
+MyTentera Military ID card
+MyKAS Temporary ID card
+POLIS Police ID card
+IKAD Labor ID card
+MyKid Juvenile ID card
+Example: MyKad
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Birthday (Currently, this filed only supports IKAD labor ID card and MyKad ID card)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+
+    }
+}
+
+/**
+ * The content of a single license in the license information.
+ * @class
+ */
+class OCRResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Is the indentity verification or OCR process passed
+         * @type {boolean || null}
+         */
+        this.IsPass = null;
+
+        /**
+         * The Base64 of ID card image
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CardImageBase64 = null;
+
+        /**
+         * OCR result of the ID card.
+         * @type {CardInfo || null}
+         */
+        this.CardInfo = null;
+
+        /**
+         * The request id
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsPass = 'IsPass' in params ? params.IsPass : null;
+        this.CardImageBase64 = 'CardImageBase64' in params ? params.CardImageBase64 : null;
+
+        if (params.CardInfo) {
+            let obj = new CardInfo();
+            obj.deserialize(params.CardInfo)
+            this.CardInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2236,19 +3807,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 module.exports = {
     GetLivenessResultResponse: GetLivenessResultResponse,
     GetFaceIdTokenIntlResponse: GetFaceIdTokenIntlResponse,
+    InternationalIDPassport: InternationalIDPassport,
     GetSdkVerificationResultResponse: GetSdkVerificationResultResponse,
     GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
     ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
     LivenessCompareResponse: LivenessCompareResponse,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
-    ApplyWebVerificationBizTokenIntlRequest: ApplyWebVerificationBizTokenIntlRequest,
+    GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
     VideoLivenessCompareRequest: VideoLivenessCompareRequest,
     ApplyWebVerificationTokenResponse: ApplyWebVerificationTokenResponse,
     GetWebVerificationResultRequest: GetWebVerificationResultRequest,
+    ThailandIDCard: ThailandIDCard,
     VerificationDetail: VerificationDetail,
     GetWebVerificationResultIntlResponse: GetWebVerificationResultIntlResponse,
     CompareFaceLivenessRequest: CompareFaceLivenessRequest,
+    HKIDCard: HKIDCard,
+    SingaporeIDCard: SingaporeIDCard,
+    IndonesiaDrivingLicense: IndonesiaDrivingLicense,
     GetFaceIdResultIntlRequest: GetFaceIdResultIntlRequest,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
@@ -2258,16 +3834,26 @@ module.exports = {
     ApplyWebVerificationTokenRequest: ApplyWebVerificationTokenRequest,
     ApplyLivenessTokenResponse: ApplyLivenessTokenResponse,
     GetLivenessResultRequest: GetLivenessResultRequest,
+    CardInfo: CardInfo,
+    PhilippinesVoteID: PhilippinesVoteID,
+    WebVerificationConfigIntl: WebVerificationConfigIntl,
+    PhilippinesSSSID: PhilippinesSSSID,
     CompareFaceLivenessResponse: CompareFaceLivenessResponse,
+    IndonesiaIDCard: IndonesiaIDCard,
     ApplySdkVerificationTokenResponse: ApplySdkVerificationTokenResponse,
     CreateUploadUrlRequest: CreateUploadUrlRequest,
-    GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
+    ApplyWebVerificationBizTokenIntlRequest: ApplyWebVerificationBizTokenIntlRequest,
     GetWebVerificationResultResponse: GetWebVerificationResultResponse,
     FileInfo: FileInfo,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
+    PhilippinesDrivingLicense: PhilippinesDrivingLicense,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
-    WebVerificationConfigIntl: WebVerificationConfigIntl,
+    PhilippinesUMID: PhilippinesUMID,
+    GeneralCard: GeneralCard,
+    PhilippinesTinID: PhilippinesTinID,
     LivenessCompareRequest: LivenessCompareRequest,
+    MLIDCard: MLIDCard,
+    OCRResult: OCRResult,
     GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
     CompareResult: CompareResult,

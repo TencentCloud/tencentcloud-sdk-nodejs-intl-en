@@ -131,7 +131,7 @@ class QueryVoucherListByUinRequest extends  AbstractModel {
         super();
 
         /**
-         * Customer UIN list
+         * List of customer UIN. Array length value:1-20.
          * @type {Array.<number> || null}
          */
         this.ClientUins = null;
@@ -721,7 +721,7 @@ class QueryCreditByUinListRequest extends  AbstractModel {
         super();
 
         /**
-         * User list
+         * List of user. Array length value: 1-50.
          * @type {Array.<number> || null}
          */
         this.UinList = null;
@@ -1906,7 +1906,7 @@ class DescribeCustomerInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * List of customer UINs
+         * List of customer UIN. Array length value: 1-20.
          * @type {Array.<number> || null}
          */
         this.CustomerUin = null;
@@ -2807,7 +2807,7 @@ class QueryVoucherAmountByUinRequest extends  AbstractModel {
         super();
 
         /**
-         * Customer UIN list
+         * List of customer UIN. Array length value: 1-20.
          * @type {Array.<number> || null}
          */
         this.ClientUins = null;

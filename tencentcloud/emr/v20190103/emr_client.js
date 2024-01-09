@@ -18,17 +18,22 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PodSpecInfo = models.PodSpecInfo;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
+const ModifyUserManagerPwdResponse = models.ModifyUserManagerPwdResponse;
 const PodVolume = models.PodVolume;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const TerminateTasksRequest = models.TerminateTasksRequest;
 const HostVolumeContext = models.HostVolumeContext;
 const ScaleOutClusterRequest = models.ScaleOutClusterRequest;
 const DiskSpecInfo = models.DiskSpecInfo;
+const HiveQuery = models.HiveQuery;
+const KeyValue = models.KeyValue;
 const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
 const UserManagerFilter = models.UserManagerFilter;
 const DynamicPodSpec = models.DynamicPodSpec;
+const ModifyUserManagerPwdRequest = models.ModifyUserManagerPwdRequest;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
+const SubnetInfo = models.SubnetInfo;
 const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 const ZoneDetailPriceResult = models.ZoneDetailPriceResult;
 const PodNewSpec = models.PodNewSpec;
@@ -37,10 +42,11 @@ const ModifyResourceScheduleConfigResponse = models.ModifyResourceScheduleConfig
 const TopologyInfo = models.TopologyInfo;
 const NodeDetailPriceResult = models.NodeDetailPriceResult;
 const Tag = models.Tag;
+const ClusterIDToFlowID = models.ClusterIDToFlowID;
 const EmrListInstance = models.EmrListInstance;
 const AddUsersForUserManagerResponse = models.AddUsersForUserManagerResponse;
 const EmrProductConfigOutter = models.EmrProductConfigOutter;
-const DescribeInstancesListResponse = models.DescribeInstancesListResponse;
+const CustomServiceDefine = models.CustomServiceDefine;
 const TerminateTasksResponse = models.TerminateTasksResponse;
 const PartDetailPriceItem = models.PartDetailPriceItem;
 const DependService = models.DependService;
@@ -49,6 +55,7 @@ const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceRespon
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const StartStopServiceOrMonitorRequest = models.StartStopServiceOrMonitorRequest;
 const TerminateInstanceRequest = models.TerminateInstanceRequest;
+const AutoScaleRecord = models.AutoScaleRecord;
 const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
 const Placement = models.Placement;
 const PodParameter = models.PodParameter;
@@ -59,20 +66,24 @@ const StartStopServiceOrMonitorResponse = models.StartStopServiceOrMonitorRespon
 const MultiDisk = models.MultiDisk;
 const PodNewParameter = models.PodNewParameter;
 const SearchItem = models.SearchItem;
+const ModifyResourcesTagsResponse = models.ModifyResourcesTagsResponse;
 const MultiZoneSetting = models.MultiZoneSetting;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
-const SoftDependInfo = models.SoftDependInfo;
+const NewResourceSpec = models.NewResourceSpec;
 const PersistentVolumeContext = models.PersistentVolumeContext;
 const ScaleOutNodeConfig = models.ScaleOutNodeConfig;
+const ModifyResourceTags = models.ModifyResourceTags;
+const ModifyResourcesTagsRequest = models.ModifyResourcesTagsRequest;
 const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
+const DescribeHiveQueriesResponse = models.DescribeHiveQueriesResponse;
 const TerminateClusterNodesResponse = models.TerminateClusterNodesResponse;
 const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
 const LoginSettings = models.LoginSettings;
 const PriceResource = models.PriceResource;
-const CustomServiceDefine = models.CustomServiceDefine;
+const DescribeHiveQueriesRequest = models.DescribeHiveQueriesRequest;
 const CreateClusterResponse = models.CreateClusterResponse;
-const SubnetInfo = models.SubnetInfo;
+const DescribeAutoScaleRecordsResponse = models.DescribeAutoScaleRecordsResponse;
 const CreateClusterRequest = models.CreateClusterRequest;
 const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
 const ComponentBasicRestartInfo = models.ComponentBasicRestartInfo;
@@ -85,6 +96,7 @@ const TerminateClusterNodesRequest = models.TerminateClusterNodesRequest;
 const DescribeInstancesListRequest = models.DescribeInstancesListRequest;
 const OutterResource = models.OutterResource;
 const OpScope = models.OpScope;
+const DescribeInstancesListResponse = models.DescribeInstancesListResponse;
 const VPCSettings = models.VPCSettings;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeUsersForUserManagerResponse = models.DescribeUsersForUserManagerResponse;
@@ -100,10 +112,11 @@ const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceReque
 const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const ModifyResourceScheduleConfigRequest = models.ModifyResourceScheduleConfigRequest;
 const UserInfoForUserManager = models.UserInfoForUserManager;
+const ScaleOutClusterResponse = models.ScaleOutClusterResponse;
 const ExternalService = models.ExternalService;
 const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const ClusterExternalServiceInfo = models.ClusterExternalServiceInfo;
-const NewResourceSpec = models.NewResourceSpec;
+const SoftDependInfo = models.SoftDependInfo;
 const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
 const Resource = models.Resource;
 const DescribeEmrApplicationStaticsResponse = models.DescribeEmrApplicationStaticsResponse;
@@ -117,7 +130,7 @@ const ShortNodeInfo = models.ShortNodeInfo;
 const EmrPrice = models.EmrPrice;
 const NodeHardwareInfo = models.NodeHardwareInfo;
 const ServiceBasicRestartInfo = models.ServiceBasicRestartInfo;
-const ScaleOutClusterResponse = models.ScaleOutClusterResponse;
+const DescribeAutoScaleRecordsRequest = models.DescribeAutoScaleRecordsRequest;
 const Filters = models.Filters;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 
@@ -133,25 +146,14 @@ class EmrClient extends AbstractClient {
     }
     
     /**
-     * This API is used to scale out instances.
-     * @param {ScaleOutInstanceRequest} req
-     * @param {function(string, ScaleOutInstanceResponse):void} cb
+     * This API is used to forcibly modify tags.
+     * @param {ModifyResourcesTagsRequest} req
+     * @param {function(string, ModifyResourcesTagsResponse):void} cb
      * @public
      */
-    ScaleOutInstance(req, cb) {
-        let resp = new ScaleOutInstanceResponse();
-        this.request("ScaleOutInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information of instances in a cluster.
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
-     * @public
-     */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
+    ModifyResourcesTags(req, cb) {
+        let resp = new ModifyResourcesTagsResponse();
+        this.request("ModifyResourcesTags", req, resp, cb);
     }
 
     /**
@@ -166,17 +168,6 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of nodes in a cluster.
-     * @param {DescribeClusterNodesRequest} req
-     * @param {function(string, DescribeClusterNodesResponse):void} cb
-     * @public
-     */
-    DescribeClusterNodes(req, cb) {
-        let resp = new DescribeClusterNodesResponse();
-        this.request("DescribeClusterNodes", req, resp, cb);
-    }
-
-    /**
      * This API is used to create an EMR cluster instance.
      * @param {CreateClusterRequest} req
      * @param {function(string, CreateClusterResponse):void} cb
@@ -185,17 +176,6 @@ class EmrClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the cluster list.
-     * @param {DescribeInstancesListRequest} req
-     * @param {function(string, DescribeInstancesListResponse):void} cb
-     * @public
-     */
-    DescribeInstancesList(req, cb) {
-        let resp = new DescribeInstancesListResponse();
-        this.request("DescribeInstancesList", req, resp, cb);
     }
 
     /**
@@ -210,25 +190,58 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start or stop the monitor or services.
-     * @param {StartStopServiceOrMonitorRequest} req
-     * @param {function(string, StartStopServiceOrMonitorResponse):void} cb
+     * This API is used to query price of scale-out.
+     * @param {InquiryPriceScaleOutInstanceRequest} req
+     * @param {function(string, InquiryPriceScaleOutInstanceResponse):void} cb
      * @public
      */
-    StartStopServiceOrMonitor(req, cb) {
-        let resp = new StartStopServiceOrMonitorResponse();
-        this.request("StartStopServiceOrMonitor", req, resp, cb);
+    InquiryPriceScaleOutInstance(req, cb) {
+        let resp = new InquiryPriceScaleOutInstanceResponse();
+        this.request("InquiryPriceScaleOutInstance", req, resp, cb);
     }
 
     /**
-     * This API is used to create an EMR cluster instance.
-     * @param {CreateInstanceRequest} req
-     * @param {function(string, CreateInstanceResponse):void} cb
+     * This API is used to inquiry detailed records of cluster autoscaling.
+     * @param {DescribeAutoScaleRecordsRequest} req
+     * @param {function(string, DescribeAutoScaleRecordsResponse):void} cb
      * @public
      */
-    CreateInstance(req, cb) {
-        let resp = new CreateInstanceResponse();
-        this.request("CreateInstance", req, resp, cb);
+    DescribeAutoScaleRecords(req, cb) {
+        let resp = new DescribeAutoScaleRecordsResponse();
+        this.request("DescribeAutoScaleRecords", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale out instances.
+     * @param {ScaleOutInstanceRequest} req
+     * @param {function(string, ScaleOutInstanceResponse):void} cb
+     * @public
+     */
+    ScaleOutInstance(req, cb) {
+        let resp = new ScaleOutInstanceResponse();
+        this.request("ScaleOutInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change user password (user management).
+     * @param {ModifyUserManagerPwdRequest} req
+     * @param {function(string, ModifyUserManagerPwdResponse):void} cb
+     * @public
+     */
+    ModifyUserManagerPwd(req, cb) {
+        let resp = new ModifyUserManagerPwdResponse();
+        this.request("ModifyUserManagerPwd", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of instances in a cluster.
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -240,6 +253,63 @@ class EmrClient extends AbstractClient {
     TerminateClusterNodes(req, cb) {
         let resp = new TerminateClusterNodesResponse();
         this.request("TerminateClusterNodes", req, resp, cb);
+    }
+
+    /**
+     * This API is available for clusters with OpenLDAP components configured.
+This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
+     * @param {DescribeUsersForUserManagerRequest} req
+     * @param {function(string, DescribeUsersForUserManagerResponse):void} cb
+     * @public
+     */
+    DescribeUsersForUserManager(req, cb) {
+        let resp = new DescribeUsersForUserManagerResponse();
+        this.request("DescribeUsersForUserManager", req, resp, cb);
+    }
+
+    /**
+     * This API is available for clusters with OpenLDAP components configured.
+This API is used to add user lists (user management).
+     * @param {AddUsersForUserManagerRequest} req
+     * @param {function(string, AddUsersForUserManagerResponse):void} cb
+     * @public
+     */
+    AddUsersForUserManager(req, cb) {
+        let resp = new AddUsersForUserManagerResponse();
+        this.request("AddUsersForUserManager", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale out a cluster.
+     * @param {ScaleOutClusterRequest} req
+     * @param {function(string, ScaleOutClusterResponse):void} cb
+     * @public
+     */
+    ScaleOutCluster(req, cb) {
+        let resp = new ScaleOutClusterResponse();
+        this.request("ScaleOutCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the YARN resource scheduler (the change will take effect after you click Apply).
+     * @param {ModifyResourceSchedulerRequest} req
+     * @param {function(string, ModifyResourceSchedulerResponse):void} cb
+     * @public
+     */
+    ModifyResourceScheduler(req, cb) {
+        let resp = new ModifyResourceSchedulerResponse();
+        this.request("ModifyResourceScheduler", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an EMR cluster instance.
+     * @param {CreateInstanceRequest} req
+     * @param {function(string, CreateInstanceResponse):void} cb
+     * @public
+     */
+    CreateInstance(req, cb) {
+        let resp = new CreateInstanceResponse();
+        this.request("CreateInstance", req, resp, cb);
     }
 
     /**
@@ -265,26 +335,36 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is available for clusters with OpenLDAP components configured.
-This API is used to add user lists (user management).
-     * @param {AddUsersForUserManagerRequest} req
-     * @param {function(string, AddUsersForUserManagerResponse):void} cb
+     * This API is used to modify the resource configuration of YARN Resource Scheduling.
+     * @param {ModifyResourceScheduleConfigRequest} req
+     * @param {function(string, ModifyResourceScheduleConfigResponse):void} cb
      * @public
      */
-    AddUsersForUserManager(req, cb) {
-        let resp = new AddUsersForUserManagerResponse();
-        this.request("AddUsersForUserManager", req, resp, cb);
+    ModifyResourceScheduleConfig(req, cb) {
+        let resp = new ModifyResourceScheduleConfigResponse();
+        this.request("ModifyResourceScheduleConfig", req, resp, cb);
     }
 
     /**
-     * This API is used to query price of scale-out.
-     * @param {InquiryPriceScaleOutInstanceRequest} req
-     * @param {function(string, InquiryPriceScaleOutInstanceResponse):void} cb
+     * This API is used to inquiry Hive query data.
+     * @param {DescribeHiveQueriesRequest} req
+     * @param {function(string, DescribeHiveQueriesResponse):void} cb
      * @public
      */
-    InquiryPriceScaleOutInstance(req, cb) {
-        let resp = new InquiryPriceScaleOutInstanceResponse();
-        this.request("InquiryPriceScaleOutInstance", req, resp, cb);
+    DescribeHiveQueries(req, cb) {
+        let resp = new DescribeHiveQueriesResponse();
+        this.request("DescribeHiveQueries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start, stop, or restart services.
+     * @param {StartStopServiceOrMonitorRequest} req
+     * @param {function(string, StartStopServiceOrMonitorResponse):void} cb
+     * @public
+     */
+    StartStopServiceOrMonitor(req, cb) {
+        let resp = new StartStopServiceOrMonitorResponse();
+        this.request("StartStopServiceOrMonitor", req, resp, cb);
     }
 
     /**
@@ -299,51 +379,6 @@ This API is used to add user lists (user management).
     }
 
     /**
-     * This API is used to modify the resource configuration of YARN Resource Scheduling.
-     * @param {ModifyResourceScheduleConfigRequest} req
-     * @param {function(string, ModifyResourceScheduleConfigResponse):void} cb
-     * @public
-     */
-    ModifyResourceScheduleConfig(req, cb) {
-        let resp = new ModifyResourceScheduleConfigResponse();
-        this.request("ModifyResourceScheduleConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the YARN resource scheduler (the change will take effect after you click Apply).
-     * @param {ModifyResourceSchedulerRequest} req
-     * @param {function(string, ModifyResourceSchedulerResponse):void} cb
-     * @public
-     */
-    ModifyResourceScheduler(req, cb) {
-        let resp = new ModifyResourceSchedulerResponse();
-        this.request("ModifyResourceScheduler", req, resp, cb);
-    }
-
-    /**
-     * This API is available for clusters with OpenLDAP components configured.
-This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
-     * @param {DescribeUsersForUserManagerRequest} req
-     * @param {function(string, DescribeUsersForUserManagerResponse):void} cb
-     * @public
-     */
-    DescribeUsersForUserManager(req, cb) {
-        let resp = new DescribeUsersForUserManagerResponse();
-        this.request("DescribeUsersForUserManager", req, resp, cb);
-    }
-
-    /**
-     * This API is used to scale out a cluster.
-     * @param {ScaleOutClusterRequest} req
-     * @param {function(string, ScaleOutClusterResponse):void} cb
-     * @public
-     */
-    ScaleOutCluster(req, cb) {
-        let resp = new ScaleOutClusterResponse();
-        this.request("ScaleOutCluster", req, resp, cb);
-    }
-
-    /**
      * This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
      * @param {TerminateInstanceRequest} req
      * @param {function(string, TerminateInstanceResponse):void} cb
@@ -352,6 +387,28 @@ This API is used to export users in batches. For a Kerberos cluster, set `NeedKe
     TerminateInstance(req, cb) {
         let resp = new TerminateInstanceResponse();
         this.request("TerminateInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of nodes in a cluster.
+     * @param {DescribeClusterNodesRequest} req
+     * @param {function(string, DescribeClusterNodesResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodes(req, cb) {
+        let resp = new DescribeClusterNodesResponse();
+        this.request("DescribeClusterNodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the cluster list.
+     * @param {DescribeInstancesListRequest} req
+     * @param {function(string, DescribeInstancesListResponse):void} cb
+     * @public
+     */
+    DescribeInstancesList(req, cb) {
+        let resp = new DescribeInstancesListResponse();
+        this.request("DescribeInstancesList", req, resp, cb);
     }
 
     /**

@@ -4,6 +4,7 @@ const ClientProfile = require("./profile/client_profile");
 const Sign = require("./sign");
 const HttpConnection = require("./http/http_connection");
 const TencentCloudSDKHttpException = require("./exception/tencent_cloud_sdk_exception");
+const SSEResponseModel = require("./sse_response_model");
 
 /**
  * @inner
@@ -133,13 +134,17 @@ class AbstractClient {
             tcError.httpCode = res.status
             throw tcError;
         } else {
-            const data = await res.json();
-            if (data.Response.Error) {
-                const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId)
-                tcError.code = data.Response.Error.Code
-                throw tcError;
+            if (res.headers.get("content-type") === "text/event-stream") {
+                return new SSEResponseModel(res.body)
             } else {
-                return data.Response;
+                const data = await res.json();
+                if (data.Response.Error) {
+                    const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId)
+                    tcError.code = data.Response.Error.Code
+                    throw tcError;
+                } else {
+                    return data.Response;
+                }
             }
         }
     }

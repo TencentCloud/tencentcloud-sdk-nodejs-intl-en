@@ -4,4 +4,5 @@ module.exports = {
     HttpProfile: require("./profile/http_profile"),
     Credential: require("./credential"),
     SSEResponseModel: require("./sse_response_model"),
+    CommonClient: require("./common_client"),
 };

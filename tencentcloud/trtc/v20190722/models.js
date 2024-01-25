@@ -362,18 +362,36 @@ Grey: 0x999999
 }
 
 /**
- * RemoveUserByStrRoomId response structure.
+ * DescribeTRTCRealTimeScaleData request structure.
  * @class
  */
-class RemoveUserByStrRoomIdResponse extends  AbstractModel {
+class DescribeTRTCRealTimeScaleDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * User SDKAppId (e.g., 1400xxxxxx)
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SdkAppId = null;
+
+        /**
+         * Start time, unix timestamp, Unit: seconds (Query time range depends on the function version of the monitoring dashboard, premium edition can query up to 1 hours)
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, unix timestamp, Unit: seconds
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Room ID
+         * @type {string || null}
+         */
+        this.RoomId = null;
 
     }
 
@@ -384,7 +402,61 @@ class RemoveUserByStrRoomIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * DescribeTRTCMarketScaleData request structure.
+ * @class
+ */
+class DescribeTRTCMarketScaleDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User SDKAppId
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 60 days)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end time, format is YYYY-MM-DD.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The granularity of the returned data, which can be set to the following values:
+ d: by day. This returns data for the entire UTC day of the query time range.
+ h: by hour. This returns data for the entire UTC hour of the query time range.
+         * @type {string || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -737,7 +809,7 @@ class AbnormalEvent extends  AbstractModel {
         super();
 
         /**
-         * The error event ID. For details, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+         * The error event ID. For details, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
          * @type {number || null}
          */
         this.AbnormalEventId = null;
@@ -1110,6 +1182,46 @@ If `DataType` is null, the length of the array `UserIds` and the value of `PageS
 }
 
 /**
+ * DescribeTRTCMarketScaleData response structure.
+ * @class
+ */
+class DescribeTRTCMarketScaleDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC Data Dashboard output parameters
+         * @type {TRTCDataResult || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TRTCDataResult();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeUserInfo request structure.
  * @class
  */
@@ -1411,46 +1523,25 @@ class CreateCloudRecordingResponse extends  AbstractModel {
 }
 
 /**
- * The event information, including the timestamp and event ID.
+ * DescribeTRTCRealTimeScaleData response structure.
  * @class
  */
-class EventMessage extends  AbstractModel {
+class DescribeTRTCRealTimeScaleDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The video stream type. Valid values:
-`0`: A non-video event
-`2`: The big video
-`3`: The small video
-`7`: A relayed video
-         * @type {number || null}
+         * TRTC Real- Time Monitoring
+ output parameter
+         * @type {TRTCDataResult || null}
          */
-        this.Type = null;
+        this.Data = null;
 
         /**
-         * The event reporting time in the format of UNIX timestamp (milliseconds), such as `1589891188801`.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Time = null;
-
-        /**
-         * The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * The first event parameter, such as the video width.
-         * @type {number || null}
-         */
-        this.ParamOne = null;
-
-        /**
-         * The second event parameter, such as the video height.
-         * @type {number || null}
-         */
-        this.ParamTwo = null;
+        this.RequestId = null;
 
     }
 
@@ -1461,11 +1552,13 @@ class EventMessage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
-        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
+
+        if (params.Data) {
+            let obj = new TRTCDataResult();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1683,6 +1776,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeTRTCRealTimeQualityData response structure.
+ * @class
+ */
+class DescribeTRTCRealTimeQualityDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC Real- Time Monitoring output parameters
+         * @type {TRTCDataResult || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TRTCDataResult();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The cropping parameters for mixed videos.
  * @class
  */
@@ -1885,6 +2018,46 @@ class StopStreamIngestRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeTRTCMarketQualityData response structure.
+ * @class
+ */
+class DescribeTRTCMarketQualityDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC Data Dashboard output parameters
+         * @type {TRTCDataResult || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TRTCDataResult();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2412,6 +2585,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.UserList[z]);
                 this.UserList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveUserByStrRoomId response structure.
+ * @class
+ */
+class RemoveUserByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3486,6 +3687,105 @@ class SetUserBlockedByStrRoomIdResponse extends  AbstractModel {
 }
 
 /**
+ * TRTC Data Dashboard/Real-Time Monitoring API output parameters
+ * @class
+ */
+class TRTCDataResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * StatementID value, fixed at 0 for Monitoring Dashboard.
+         * @type {number || null}
+         */
+        this.StatementID = null;
+
+        /**
+         * Query result data, returned in Columns-Values format.
+         * @type {Array.<SeriesInfos> || null}
+         */
+        this.Series = null;
+
+        /**
+         * Total value, fixed at 1 for Monitoring Dashboard.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatementID = 'StatementID' in params ? params.StatementID : null;
+
+        if (params.Series) {
+            this.Series = new Array();
+            for (let z in params.Series) {
+                let obj = new SeriesInfos();
+                obj.deserialize(params.Series[z]);
+                this.Series.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
+ * DescribeTRTCRealTimeQualityData request structure.
+ * @class
+ */
+class DescribeTRTCRealTimeQualityDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User SDKAppId (e.g., 1400xxxxxx)
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Start time, unix timestamp, Unit: seconds (Query time range depends on the monitoring dashboard function version, standard edition can query the last 3 hours, premium edition can query the last 12 hours)
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, unix timestamp, Unit: seconds
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Room ID
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * CreateCloudRecording request structure.
  * @class
  */
@@ -3983,6 +4283,34 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
                 this.FeedBackRoomParams.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Two-dimensional array of SeriesInfo type
+ * @class
+ */
+class RowValues extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data value
+         * @type {Array.<number> || null}
+         */
+        this.RowValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RowValue = 'RowValue' in params ? params.RowValue : null;
 
     }
 }
@@ -4578,6 +4906,57 @@ class DismissRoomResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTRTCMarketQualityData request structure.
+ * @class
+ */
+class DescribeTRTCMarketQualityDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User SDKAppId (e.g., 1400xxxxxx)
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 30 days)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end time, format is YYYY-MM-DD.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The granularity of the returned data, which can be set to the following values:
+d: by day. This returns data for the entire UTC day of the query time range. 
+h: by hour. This returns data for the entire UTC hour of the query time range.
+         * @type {string || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+    }
+}
+
+/**
  * UpdatePublishCdnStream request structure.
  * @class
  */
@@ -4783,6 +5162,66 @@ class McuSeiParams extends  AbstractModel {
 }
 
 /**
+ * The event information, including the timestamp and event ID.
+ * @class
+ */
+class EventMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The video stream type. Valid values:
+`0`: A non-video event
+`2`: The big video
+`3`: The small video
+`7`: A relayed video
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * The event reporting time in the format of UNIX timestamp (milliseconds), such as `1589891188801`.
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * The first event parameter, such as the video width.
+         * @type {number || null}
+         */
+        this.ParamOne = null;
+
+        /**
+         * The second event parameter, such as the video height.
+         * @type {number || null}
+         */
+        this.ParamTwo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
+        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
+
+    }
+}
+
+/**
  * UpdatePublishCdnStream response structure.
  * @class
  */
@@ -4890,6 +5329,69 @@ class McuWaterMarkText extends  AbstractModel {
         this.FontSize = 'FontSize' in params ? params.FontSize : null;
         this.FontColor = 'FontColor' in params ? params.FontColor : null;
         this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
+
+    }
+}
+
+/**
+ * The room information.
+ * @class
+ */
+class RoomState extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The call ID, which uniquely identifies a call.
+         * @type {string || null}
+         */
+        this.CommId = null;
+
+        /**
+         * The room ID.
+         * @type {string || null}
+         */
+        this.RoomString = null;
+
+        /**
+         * The room creation time.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The room termination time.
+         * @type {number || null}
+         */
+        this.DestroyTime = null;
+
+        /**
+         * Whether the room is terminated.
+         * @type {boolean || null}
+         */
+        this.IsFinished = null;
+
+        /**
+         * The user ID of the room creator.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CommId = 'CommId' in params ? params.CommId : null;
+        this.RoomString = 'RoomString' in params ? params.RoomString : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DestroyTime = 'DestroyTime' in params ? params.DestroyTime : null;
+        this.IsFinished = 'IsFinished' in params ? params.IsFinished : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -5391,48 +5893,24 @@ class AbnormalExperience extends  AbstractModel {
 }
 
 /**
- * The room information.
+ * SeriesInfos type
  * @class
  */
-class RoomState extends  AbstractModel {
+class SeriesInfos extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The call ID, which uniquely identifies a call.
-         * @type {string || null}
+         * Data columns
+         * @type {Array.<string> || null}
          */
-        this.CommId = null;
+        this.Columns = null;
 
         /**
-         * The room ID.
-         * @type {string || null}
+         * Data values
+         * @type {Array.<RowValues> || null}
          */
-        this.RoomString = null;
-
-        /**
-         * The room creation time.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The room termination time.
-         * @type {number || null}
-         */
-        this.DestroyTime = null;
-
-        /**
-         * Whether the room is terminated.
-         * @type {boolean || null}
-         */
-        this.IsFinished = null;
-
-        /**
-         * The user ID of the room creator.
-         * @type {string || null}
-         */
-        this.UserId = null;
+        this.Values = null;
 
     }
 
@@ -5443,12 +5921,16 @@ class RoomState extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CommId = 'CommId' in params ? params.CommId : null;
-        this.RoomString = 'RoomString' in params ? params.RoomString : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.DestroyTime = 'DestroyTime' in params ? params.DestroyTime : null;
-        this.IsFinished = 'IsFinished' in params ? params.IsFinished : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Columns = 'Columns' in params ? params.Columns : null;
+
+        if (params.Values) {
+            this.Values = new Array();
+            for (let z in params.Values) {
+                let obj = new RowValues();
+                obj.deserialize(params.Values[z]);
+                this.Values.push(obj);
+            }
+        }
 
     }
 }
@@ -5486,7 +5968,8 @@ module.exports = {
     DescribeRelayUsageRequest: DescribeRelayUsageRequest,
     MixLayout: MixLayout,
     McuVideoParams: McuVideoParams,
-    RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
+    DescribeTRTCRealTimeScaleDataRequest: DescribeTRTCRealTimeScaleDataRequest,
+    DescribeTRTCMarketScaleDataRequest: DescribeTRTCMarketScaleDataRequest,
     McuLayoutVolume: McuLayoutVolume,
     SetUserBlockedRequest: SetUserBlockedRequest,
     DescribeUserEventRequest: DescribeUserEventRequest,
@@ -5501,22 +5984,25 @@ module.exports = {
     DescribeUserEventResponse: DescribeUserEventResponse,
     VideoEncode: VideoEncode,
     DescribeCallDetailInfoRequest: DescribeCallDetailInfoRequest,
+    DescribeTRTCMarketScaleDataResponse: DescribeTRTCMarketScaleDataResponse,
     DescribeUserInfoRequest: DescribeUserInfoRequest,
     AudioEncodeParams: AudioEncodeParams,
     CloudStorage: CloudStorage,
     DescribeTrtcUsageResponse: DescribeTrtcUsageResponse,
     TimeValue: TimeValue,
     CreateCloudRecordingResponse: CreateCloudRecordingResponse,
-    EventMessage: EventMessage,
+    DescribeTRTCRealTimeScaleDataResponse: DescribeTRTCRealTimeScaleDataResponse,
     DescribeRoomInfoRequest: DescribeRoomInfoRequest,
     StorageParams: StorageParams,
     CloudVod: CloudVod,
     DescribeCallDetailInfoResponse: DescribeCallDetailInfoResponse,
+    DescribeTRTCRealTimeQualityDataResponse: DescribeTRTCRealTimeQualityDataResponse,
     McuCustomCrop: McuCustomCrop,
     DescribeMixTranscodingUsageRequest: DescribeMixTranscodingUsageRequest,
     DescribeStreamIngestResponse: DescribeStreamIngestResponse,
     MixTranscodeParams: MixTranscodeParams,
     StopStreamIngestRequest: StopStreamIngestRequest,
+    DescribeTRTCMarketQualityDataResponse: DescribeTRTCMarketQualityDataResponse,
     SubscribeStreamUserIds: SubscribeStreamUserIds,
     WaterMarkImage: WaterMarkImage,
     McuUserInfoParams: McuUserInfoParams,
@@ -5527,6 +6013,7 @@ module.exports = {
     McuLayoutParams: McuLayoutParams,
     StartStreamIngestRequest: StartStreamIngestRequest,
     DescribeUserInfoResponse: DescribeUserInfoResponse,
+    RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
     McuWaterMarkImage: McuWaterMarkImage,
     StartPublishCdnStreamResponse: StartPublishCdnStreamResponse,
     TrtcUsage: TrtcUsage,
@@ -5547,6 +6034,8 @@ module.exports = {
     TencentVod: TencentVod,
     McuPassThrough: McuPassThrough,
     SetUserBlockedByStrRoomIdResponse: SetUserBlockedByStrRoomIdResponse,
+    TRTCDataResult: TRTCDataResult,
+    DescribeTRTCRealTimeQualityDataRequest: DescribeTRTCRealTimeQualityDataRequest,
     CreateCloudRecordingRequest: CreateCloudRecordingRequest,
     DeleteCloudRecordingResponse: DeleteCloudRecordingResponse,
     QualityData: QualityData,
@@ -5554,6 +6043,7 @@ module.exports = {
     ModifyCloudRecordingRequest: ModifyCloudRecordingRequest,
     VideoParams: VideoParams,
     StartPublishCdnStreamRequest: StartPublishCdnStreamRequest,
+    RowValues: RowValues,
     DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     StartStreamIngestResponse: StartStreamIngestResponse,
     DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
@@ -5568,11 +6058,14 @@ module.exports = {
     StopStreamIngestResponse: StopStreamIngestResponse,
     MixUserInfo: MixUserInfo,
     DismissRoomResponse: DismissRoomResponse,
+    DescribeTRTCMarketQualityDataRequest: DescribeTRTCMarketQualityDataRequest,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     MaxVideoUser: MaxVideoUser,
     McuSeiParams: McuSeiParams,
+    EventMessage: EventMessage,
     UpdatePublishCdnStreamResponse: UpdatePublishCdnStreamResponse,
     McuWaterMarkText: McuWaterMarkText,
+    RoomState: RoomState,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     RecordParams: RecordParams,
     DescribeStreamIngestRequest: DescribeStreamIngestRequest,
@@ -5583,7 +6076,7 @@ module.exports = {
     SingleSubscribeParams: SingleSubscribeParams,
     McuWaterMarkParams: McuWaterMarkParams,
     AbnormalExperience: AbnormalExperience,
-    RoomState: RoomState,
+    SeriesInfos: SeriesInfos,
     RemoveUserResponse: RemoveUserResponse,
 
 }

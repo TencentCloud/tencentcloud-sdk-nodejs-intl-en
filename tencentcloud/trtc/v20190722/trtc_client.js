@@ -20,7 +20,8 @@ const McuLayout = models.McuLayout;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const MixLayout = models.MixLayout;
 const McuVideoParams = models.McuVideoParams;
-const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
+const DescribeTRTCRealTimeScaleDataRequest = models.DescribeTRTCRealTimeScaleDataRequest;
+const DescribeTRTCMarketScaleDataRequest = models.DescribeTRTCMarketScaleDataRequest;
 const McuLayoutVolume = models.McuLayoutVolume;
 const SetUserBlockedRequest = models.SetUserBlockedRequest;
 const DescribeUserEventRequest = models.DescribeUserEventRequest;
@@ -35,22 +36,25 @@ const VideoEncodeParams = models.VideoEncodeParams;
 const DescribeUserEventResponse = models.DescribeUserEventResponse;
 const VideoEncode = models.VideoEncode;
 const DescribeCallDetailInfoRequest = models.DescribeCallDetailInfoRequest;
+const DescribeTRTCMarketScaleDataResponse = models.DescribeTRTCMarketScaleDataResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
 const AudioEncodeParams = models.AudioEncodeParams;
 const CloudStorage = models.CloudStorage;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
 const CreateCloudRecordingResponse = models.CreateCloudRecordingResponse;
-const EventMessage = models.EventMessage;
+const DescribeTRTCRealTimeScaleDataResponse = models.DescribeTRTCRealTimeScaleDataResponse;
 const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
 const StorageParams = models.StorageParams;
 const CloudVod = models.CloudVod;
 const DescribeCallDetailInfoResponse = models.DescribeCallDetailInfoResponse;
+const DescribeTRTCRealTimeQualityDataResponse = models.DescribeTRTCRealTimeQualityDataResponse;
 const McuCustomCrop = models.McuCustomCrop;
 const DescribeMixTranscodingUsageRequest = models.DescribeMixTranscodingUsageRequest;
 const DescribeStreamIngestResponse = models.DescribeStreamIngestResponse;
 const MixTranscodeParams = models.MixTranscodeParams;
 const StopStreamIngestRequest = models.StopStreamIngestRequest;
+const DescribeTRTCMarketQualityDataResponse = models.DescribeTRTCMarketQualityDataResponse;
 const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
 const WaterMarkImage = models.WaterMarkImage;
 const McuUserInfoParams = models.McuUserInfoParams;
@@ -61,6 +65,7 @@ const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
 const McuLayoutParams = models.McuLayoutParams;
 const StartStreamIngestRequest = models.StartStreamIngestRequest;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
+const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
@@ -81,6 +86,8 @@ const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
 const TencentVod = models.TencentVod;
 const McuPassThrough = models.McuPassThrough;
 const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
+const TRTCDataResult = models.TRTCDataResult;
+const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
 const QualityData = models.QualityData;
@@ -88,6 +95,7 @@ const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
 const VideoParams = models.VideoParams;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
+const RowValues = models.RowValues;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartStreamIngestResponse = models.StartStreamIngestResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
@@ -102,11 +110,14 @@ const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const MixUserInfo = models.MixUserInfo;
 const DismissRoomResponse = models.DismissRoomResponse;
+const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const MaxVideoUser = models.MaxVideoUser;
 const McuSeiParams = models.McuSeiParams;
+const EventMessage = models.EventMessage;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
+const RoomState = models.RoomState;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const RecordParams = models.RecordParams;
 const DescribeStreamIngestRequest = models.DescribeStreamIngestRequest;
@@ -117,7 +128,7 @@ const WaterMarkTimestamp = models.WaterMarkTimestamp;
 const SingleSubscribeParams = models.SingleSubscribeParams;
 const McuWaterMarkParams = models.McuWaterMarkParams;
 const AbnormalExperience = models.AbnormalExperience;
-const RoomState = models.RoomState;
+const SeriesInfos = models.SeriesInfos;
 const RemoveUserResponse = models.RemoveUserResponse;
 
 
@@ -297,14 +308,14 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
-     * Stop a Pull stream Relay task.
-     * @param {StopStreamIngestRequest} req
-     * @param {function(string, StopStreamIngestResponse):void} cb
+     * Query TRTC Monitoring Dashboard - Real-Time Monitoring Scale Metrics (the following metrics will be returned) -userCount (Online users) -roomCount (Online rooms) Note: 1. To call the interface, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling. For monitoring dashboard version features and billing overview, please visit: https://trtc.io/document/54481. 2. The query time range depends on the function version of the monitoring dashboard. The premium edition can query the last 1 hours
+     * @param {DescribeTRTCRealTimeScaleDataRequest} req
+     * @param {function(string, DescribeTRTCRealTimeScaleDataResponse):void} cb
      * @public
      */
-    StopStreamIngest(req, cb) {
-        let resp = new StopStreamIngestResponse();
-        this.request("StopStreamIngest", req, resp, cb);
+    DescribeTRTCRealTimeScaleData(req, cb) {
+        let resp = new DescribeTRTCRealTimeScaleDataResponse();
+        this.request("DescribeTRTCRealTimeScaleData", req, resp, cb);
     }
 
     /**
@@ -341,6 +352,24 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     DescribeUserEvent(req, cb) {
         let resp = new DescribeUserEventResponse();
         this.request("DescribeUserEvent", req, resp, cb);
+    }
+
+    /**
+     * Query TRTC Monitoring Dashboard - Data Dashboard Scale Metrics (will return userCount, roomCount, peakCurrentUsers, peakCurrentChannels)
+- userCount: number of users in the call,
+- roomCount: number of rooms in the call, counted as one call channel from the time a user joins the channel to the time all users leave the channel.
+- peakCurrentChannels: peak number of channels online at the same time.
+- peakCurrentUsers: peak number of users online at the same time.
+Note:
+1. To call the interface, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling, for monitoring dashboard version features and billing overview: https://trtc.io/document/54481.
+2. The query time range depends on the monitoring dashboard function version, premium edition can query up to 60 days.
+     * @param {DescribeTRTCMarketScaleDataRequest} req
+     * @param {function(string, DescribeTRTCMarketScaleDataResponse):void} cb
+     * @public
+     */
+    DescribeTRTCMarketScaleData(req, cb) {
+        let resp = new DescribeTRTCMarketScaleDataResponse();
+        this.request("DescribeTRTCMarketScaleData", req, resp, cb);
     }
 
     /**
@@ -404,6 +433,17 @@ Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`)
     DescribeUserInfo(req, cb) {
         let resp = new DescribeUserInfoResponse();
         this.request("DescribeUserInfo", req, resp, cb);
+    }
+
+    /**
+     * Stop a Pull stream Relay task.
+     * @param {StopStreamIngestRequest} req
+     * @param {function(string, StopStreamIngestResponse):void} cb
+     * @public
+     */
+    StopStreamIngest(req, cb) {
+        let resp = new StopStreamIngestResponse();
+        this.request("StopStreamIngest", req, resp, cb);
     }
 
     /**
@@ -498,6 +538,22 @@ If a recording file is being uploaded to VOD, the response parameter `StorageFil
     }
 
     /**
+     * Query TRTC Monitoring Dashboard - Real-Time Monitoring Quality Metrics (return the following metrics)
+ -Video stutter rate
+ -Audio stutter rate
+ Note:
+ 1. To call the API, you need to activate the Monitoring Dashboard Standard Edition and Premium Edition. The Monitoring Dashboard Free Edition does not support calling. For monitoring dashboard version features and billing overview, please visit: https://trtc.io/document/54481.
+ 2. The query time range depends on the monitoring dashboard function version. The premium edition can query up to 1 hours
+     * @param {DescribeTRTCRealTimeQualityDataRequest} req
+     * @param {function(string, DescribeTRTCRealTimeQualityDataResponse):void} cb
+     * @public
+     */
+    DescribeTRTCRealTimeQualityData(req, cb) {
+        let resp = new DescribeTRTCRealTimeQualityDataResponse();
+        this.request("DescribeTRTCRealTimeQualityData", req, resp, cb);
+    }
+
+    /**
      * This API is used to stop a recording task. If a task is stopped successfully, but the uploading of recording files has not completed, the backend will continue to upload the files and will notify you via a callback when the upload is completed.
      * @param {DeleteCloudRecordingRequest} req
      * @param {function(string, DeleteCloudRecordingResponse):void} cb
@@ -506,6 +562,25 @@ If a recording file is being uploaded to VOD, the response parameter `StorageFil
     DeleteCloudRecording(req, cb) {
         let resp = new DeleteCloudRecordingResponse();
         this.request("DeleteCloudRecording", req, resp, cb);
+    }
+
+    /**
+     * Query TRTC Monitoring Dashboard - Data Dashboard Quality Metrics (including the following metrics)
+joinSuccessRate: Join channel success rate.
+joinSuccessIn5sRate: Join channel success rate within 5s.
+audioFreezeRate: Audio stutter rate.
+videoFreezeRate: Video stutter rate.
+networkDelay: Lag rate.
+Note:
+1. To call the API, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling. Monitoring dashboard version features and billing overview: https://trtc.io/document/54481.
+2. The query time range depends on the monitoring dashboard function version, premium edition can query the last 30 days.
+     * @param {DescribeTRTCMarketQualityDataRequest} req
+     * @param {function(string, DescribeTRTCMarketQualityDataResponse):void} cb
+     * @public
+     */
+    DescribeTRTCMarketQualityData(req, cb) {
+        let resp = new DescribeTRTCMarketQualityDataResponse();
+        this.request("DescribeTRTCMarketQualityData", req, resp, cb);
     }
 
     /**

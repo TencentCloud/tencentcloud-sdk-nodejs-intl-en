@@ -4726,7 +4726,7 @@ If the type is RTMP or RTP, only one output is allowed; if it is HLS or DASH, 1-
         this.Destinations = null;
 
         /**
-         * HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE outputs
+         * HLS protocol configuration information, which takes effect only for HLS/HLS_ARCHIVE/HLS_STREAM_PACKAGE outputs.
 Note: this field may return `null`, indicating that no valid value was found.
          * @type {HlsRemuxSettingsInfo || null}
          */

@@ -29,22 +29,24 @@ class Sign {
         secretId,
         secretKey,
         multipart,
-        boundary
+        boundary,
+        headers: configHeaders = {},
     }) {
         const urlObj = new URL(url)
+        const contentType = configHeaders["Content-Type"]
     
         // 通用头部
         let headers = ''
         let signedHeaders = ''
         if (method === 'GET') {
             signedHeaders = 'content-type'
-            headers = 'content-type:application/x-www-form-urlencoded\n'
+            headers = `content-type:${contentType}\n`
         } else if (method === 'POST') {
             signedHeaders = 'content-type'
             if (multipart) {
                 headers = `content-type:multipart/form-data; boundary=${boundary}\n`
             } else {
-                headers = 'content-type:application/json\n'
+                headers = `content-type:${contentType}\n`
             }
         }
         headers += `host:${urlObj.hostname}\n`
@@ -72,7 +74,8 @@ class Sign {
             hash.update(`--\r\n`)
             payload_hash = hash.digest('hex')
         } else {
-            payload_hash = payload ? getHash(JSON.stringify(payload)) : getHash('')
+            const hashMessage = Buffer.isBuffer(payload) ? payload : JSON.stringify(payload)
+            payload_hash = payload ? getHash(hashMessage) : getHash('')
         }
     
         const canonicalRequest =

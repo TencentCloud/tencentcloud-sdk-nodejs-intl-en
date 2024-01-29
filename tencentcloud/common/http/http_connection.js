@@ -10,10 +10,10 @@ const fetch = require('./fetch');
  * @inner
  */
 class HttpConnection {
-    static async doRequest({ method, url, data, timeout }) {
+    static async doRequest({ method, url, data, timeout, headers }) {
         let config = {
             method: method,
-            headers: {},
+            headers,
             timeout
         };
         if (method === "GET") {
@@ -38,7 +38,8 @@ class HttpConnection {
         multipart = false,
         timeout = 60000,
         token,
-        requestClient
+        requestClient,
+        headers = {}
     }) {
         // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
         // 所以这里把 readStream 转为 Buffer
@@ -68,7 +69,8 @@ class HttpConnection {
                 'X-TC-Timestamp': timestamp,
                 'X-TC-Version': version,
                 'X-TC-Token': token,
-                'X-TC-RequestClient': requestClient
+                'X-TC-RequestClient': requestClient,
+                ...headers,
             }
         }
 
@@ -81,8 +83,10 @@ class HttpConnection {
             config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         }
         if (method === 'POST' && !multipart) {
-            config.body = JSON.stringify(data)
-            config.headers['Content-Type'] = 'application/json'
+            config.body = data
+            const contentType = config.headers["Content-Type"] || "application/json"
+            if (!isBuffer(data)) config.body = JSON.stringify(data)
+            config.headers["Content-Type"] = contentType
         }
         if (method === 'POST' && multipart) {
             form = new FormData();
@@ -102,7 +106,8 @@ class HttpConnection {
             secretId,
             secretKey,
             multipart,
-            boundary: form ? form.getBoundary() : undefined
+            boundary: form ? form.getBoundary() : undefined,
+            headers: config.headers,
         })
 
         config.headers['Authorization'] = signature

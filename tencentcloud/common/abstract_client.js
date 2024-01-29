@@ -84,6 +84,26 @@ class AbstractClient {
     /**
      * @inner
      */
+    requestOctetStream(action, req, resp, options, cb) {
+        if (typeof options === 'function') {
+            cb = options
+            options = {}
+        }
+        options = Object.assign({}, options, {
+            headers: {
+              "Content-Type": "application/octet-stream; charset=utf-8",
+            }
+        })
+        if (this.profile.signMethod === 'TC3-HMAC-SHA256') {
+            this.doRequestWithSign3(action, req, options).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+        } else {
+            this.doRequest(action, req).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+        }
+    }
+
+    /**
+     * @inner
+     */
     async doRequest(action, req) {
         let params = this.mergeData(req);
         params = this.formatRequestData(action, params);
@@ -93,7 +113,8 @@ class AbstractClient {
                 method: this.profile.httpProfile.reqMethod,
                 url: this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
                 data: params,
-                timeout: this.profile.httpProfile.reqTimeout * 1000
+                timeout: this.profile.httpProfile.reqTimeout * 1000,
+                headers: Object.assign({}, this.profile.httpProfile.headers),
             });
         } catch (error) {
             throw new TencentCloudSDKHttpException(error.message);
@@ -120,7 +141,8 @@ class AbstractClient {
                 multipart: options.multipart,
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
                 token: this.credential.token,
-                requestClient: this.sdkVersion
+                requestClient: this.sdkVersion,
+                headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
             })
         } catch (e) {
             throw new TencentCloudSDKHttpException(e.message)

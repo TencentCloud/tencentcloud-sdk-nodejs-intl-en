@@ -19,6 +19,13 @@ class CommonClient extends AbstractClient {
   request(action, params, options, cb) {
     super.request(action, params, null, options, cb);
   }
+
+  /**
+   * @inner
+   */
+  requestOctetStream(action, params, options, cb) {
+    super.requestOctetStream(action, params, null, options, cb);
+  }
 }
 
 module.exports = CommonClient;

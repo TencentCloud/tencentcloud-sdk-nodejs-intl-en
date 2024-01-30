@@ -6370,7 +6370,7 @@ class RemoteBackupInfo extends  AbstractModel {
 
         /**
          * ID of the remote backup subtask
-         * @type {Array.<number> || null}
+         * @type {number || null}
          */
         this.SubBackupId = null;
 

@@ -20,14 +20,16 @@ const CreateSessionResponse = models.CreateSessionResponse;
 const StopPublishStreamRequest = models.StopPublishStreamRequest;
 const StartPublishStreamWithURLResponse = models.StartPublishStreamWithURLResponse;
 const StopPublishStreamResponse = models.StopPublishStreamResponse;
-const StartPublishStreamWithURLRequest = models.StartPublishStreamWithURLRequest;
 const DestroySessionResponse = models.DestroySessionResponse;
-const StartPublishStreamResponse = models.StartPublishStreamResponse;
+const StartPublishStreamWithURLRequest = models.StartPublishStreamWithURLRequest;
 const ApplyConcurrentResponse = models.ApplyConcurrentResponse;
-const ApplyConcurrentRequest = models.ApplyConcurrentRequest;
-const DestroySessionRequest = models.DestroySessionRequest;
-const StartPublishStreamRequest = models.StartPublishStreamRequest;
+const StartPublishStreamResponse = models.StartPublishStreamResponse;
 const CreateSessionRequest = models.CreateSessionRequest;
+const ApplyConcurrentRequest = models.ApplyConcurrentRequest;
+const DescribeConcurrentCountResponse = models.DescribeConcurrentCountResponse;
+const DestroySessionRequest = models.DestroySessionRequest;
+const DescribeConcurrentCountRequest = models.DescribeConcurrentCountRequest;
+const StartPublishStreamRequest = models.StartPublishStreamRequest;
 
 
 /**
@@ -52,7 +54,18 @@ class CarClient extends AbstractClient {
     }
 
     /**
-     * This API is used to terminate a session.
+     * Obtain the concurrency count.
+     * @param {DescribeConcurrentCountRequest} req
+     * @param {function(string, DescribeConcurrentCountResponse):void} cb
+     * @public
+     */
+    DescribeConcurrentCount(req, cb) {
+        let resp = new DescribeConcurrentCountResponse();
+        this.request("DescribeConcurrentCount", req, resp, cb);
+    }
+
+    /**
+     * Terminate the session. If stream push has been initiated in this session, then the stream push will end upon session termination.
      * @param {DestroySessionRequest} req
      * @param {function(string, DestroySessionResponse):void} cb
      * @public
@@ -63,7 +76,7 @@ class CarClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start stream push.
+     * Initiate stream push. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9.
      * @param {StartPublishStreamRequest} req
      * @param {function(string, StartPublishStreamResponse):void} cb
      * @public
@@ -85,7 +98,7 @@ class CarClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start stream push to the specified URL. It is billed separately. For billing details, see the [Push to third-party address](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6) section.
+     * Initiate stream push to the specified URL. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9. This stream push method will be charged separately. For details about the charging method, see [Charging for Stream Push to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
      * @param {StartPublishStreamWithURLRequest} req
      * @param {function(string, StartPublishStreamWithURLResponse):void} cb
      * @public

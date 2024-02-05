@@ -136,6 +136,34 @@ class StopPublishStreamResponse extends  AbstractModel {
 }
 
 /**
+ * DestroySession response structure.
+ * @class
+ */
+class DestroySessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StartPublishStreamWithURL request structure.
  * @class
  */
@@ -171,10 +199,10 @@ class StartPublishStreamWithURLRequest extends  AbstractModel {
 }
 
 /**
- * DestroySession response structure.
+ * ApplyConcurrent response structure.
  * @class
  */
-class DestroySessionResponse extends  AbstractModel {
+class ApplyConcurrentResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -222,153 +250,6 @@ class StartPublishStreamResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ApplyConcurrent response structure.
- * @class
- */
-class ApplyConcurrentResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ApplyConcurrent request structure.
- * @class
- */
-class ApplyConcurrentRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Public IP of user’s application client, which is used for nearby scheduling.
-         * @type {string || null}
-         */
-        this.UserIp = null;
-
-        /**
-         * The project ID.
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * The application version ID.
-         * @type {string || null}
-         */
-        this.ApplicationVersionId = null;
-
-        /**
-         * Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.UserIp = 'UserIp' in params ? params.UserIp : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-
-    }
-}
-
-/**
- * DestroySession request structure.
- * @class
- */
-class DestroySessionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-
-    }
-}
-
-/**
- * StartPublishStream request structure.
- * @class
- */
-class StartPublishStreamRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Push parameter, which is a custom parameter carried during stream pushing.
-         * @type {string || null}
-         */
-        this.PublishStreamArgs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.PublishStreamArgs = 'PublishStreamArgs' in params ? params.PublishStreamArgs : null;
 
     }
 }
@@ -454,18 +335,209 @@ If the current user is the host, `HostUserId` must be the same as their `UserId`
     }
 }
 
+/**
+ * ApplyConcurrent request structure.
+ * @class
+ */
+class ApplyConcurrentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Public IP of user’s application client, which is used for nearby scheduling.
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * The project ID.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Application version ID. If the application of the current version is requested, you do not need to fill in this field. If the application of other versions is requested, you need to specify the version through this field.
+         * @type {string || null}
+         */
+        this.ApplicationVersionId = null;
+
+        /**
+         * Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+    }
+}
+
+/**
+ * DescribeConcurrentCount response structure.
+ * @class
+ */
+class DescribeConcurrentCountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total Concurrency Count
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The number of concurrent executions, including those in pre-launch, connected, waiting for reconnection, to be cleaned up or recovered, and all non-idle concurrent executions. Therefore, refreshing projects or disconnecting user connections with concurrency packages will affect this value.
+         * @type {number || null}
+         */
+        this.Running = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Running = 'Running' in params ? params.Running : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroySession request structure.
+ * @class
+ */
+class DestroySessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * DescribeConcurrentCount request structure.
+ * @class
+ */
+class DescribeConcurrentCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * StartPublishStream request structure.
+ * @class
+ */
+class StartPublishStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Push parameter, which is a custom parameter carried during stream pushing.
+         * @type {string || null}
+         */
+        this.PublishStreamArgs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PublishStreamArgs = 'PublishStreamArgs' in params ? params.PublishStreamArgs : null;
+
+    }
+}
+
 module.exports = {
     CreateSessionResponse: CreateSessionResponse,
     StopPublishStreamRequest: StopPublishStreamRequest,
     StartPublishStreamWithURLResponse: StartPublishStreamWithURLResponse,
     StopPublishStreamResponse: StopPublishStreamResponse,
-    StartPublishStreamWithURLRequest: StartPublishStreamWithURLRequest,
     DestroySessionResponse: DestroySessionResponse,
-    StartPublishStreamResponse: StartPublishStreamResponse,
+    StartPublishStreamWithURLRequest: StartPublishStreamWithURLRequest,
     ApplyConcurrentResponse: ApplyConcurrentResponse,
-    ApplyConcurrentRequest: ApplyConcurrentRequest,
-    DestroySessionRequest: DestroySessionRequest,
-    StartPublishStreamRequest: StartPublishStreamRequest,
+    StartPublishStreamResponse: StartPublishStreamResponse,
     CreateSessionRequest: CreateSessionRequest,
+    ApplyConcurrentRequest: ApplyConcurrentRequest,
+    DescribeConcurrentCountResponse: DescribeConcurrentCountResponse,
+    DestroySessionRequest: DestroySessionRequest,
+    DescribeConcurrentCountRequest: DescribeConcurrentCountRequest,
+    StartPublishStreamRequest: StartPublishStreamRequest,
 
 }

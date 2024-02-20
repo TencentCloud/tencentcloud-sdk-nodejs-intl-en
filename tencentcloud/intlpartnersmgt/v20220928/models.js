@@ -131,7 +131,7 @@ class QueryVoucherListByUinRequest extends  AbstractModel {
         super();
 
         /**
-         * List of customer UIN. Array length value:1-20.
+         * Customer UIN list. Array length value: 1-20.
          * @type {Array.<number> || null}
          */
         this.ClientUins = null;
@@ -1082,6 +1082,12 @@ Note: The return value may be null, indicating that no valid data can be obtaine
          */
         this.Id = null;
 
+        /**
+         * Tag informationNote: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1119,6 +1125,15 @@ Note: The return value may be null, indicating that no valid data can be obtaine
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
         this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1485,6 +1500,41 @@ class QueryVoucherPoolResponse extends  AbstractModel {
         this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
         this.IssuedNum = 'IssuedNum' in params ? params.IssuedNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cost Allocation Tags
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag keyNote: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag valueNote: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -2807,7 +2857,7 @@ class QueryVoucherAmountByUinRequest extends  AbstractModel {
         super();
 
         /**
-         * List of customer UIN. Array length value: 1-20.
+         * Customer UIN list. Array length value: 1-20.
          * @type {Array.<number> || null}
          */
         this.ClientUins = null;
@@ -3152,6 +3202,7 @@ module.exports = {
     DescribeCustomerUinResponse: DescribeCustomerUinResponse,
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     QueryVoucherPoolResponse: QueryVoucherPoolResponse,
+    TagInfo: TagInfo,
     DescribeCustomerBillDetailRequest: DescribeCustomerBillDetailRequest,
     DescribeCustomerBillDetailResponse: DescribeCustomerBillDetailResponse,
     QueryAccountVerificationStatusRequest: QueryAccountVerificationStatusRequest,

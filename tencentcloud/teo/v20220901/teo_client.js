@@ -19,10 +19,12 @@ const AbstractClient = require('../../common/abstract_client')
 const CreatePlanForZoneResponse = models.CreatePlanForZoneResponse;
 const DeployConfigGroupVersionRequest = models.DeployConfigGroupVersionRequest;
 const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
+const ModifyL4ProxyRulesStatusResponse = models.ModifyL4ProxyRulesStatusResponse;
 const Compression = models.Compression;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
 const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
+const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
 const ModifyZoneResponse = models.ModifyZoneResponse;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
@@ -36,6 +38,8 @@ const DiffIPWhitelist = models.DiffIPWhitelist;
 const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
 const DeleteSecurityIPGroupResponse = models.DeleteSecurityIPGroupResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
+const OwnershipVerification = models.OwnershipVerification;
+const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const OriginRecord = models.OriginRecord;
 const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const AdvancedFilter = models.AdvancedFilter;
@@ -44,24 +48,24 @@ const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersi
 const OriginDetail = models.OriginDetail;
 const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
-const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
+const ModifyL4ProxyStatusResponse = models.ModifyL4ProxyStatusResponse;
 const FileVerification = models.FileVerification;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
-const Waf = models.Waf;
+const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
-const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
+const DescribeL4ProxyResponse = models.DescribeL4ProxyResponse;
 const RuleRewriteActionParams = models.RuleRewriteActionParams;
 const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
 const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
-const ExceptUserRuleScope = models.ExceptUserRuleScope;
+const DescribeL4ProxyRulesResponse = models.DescribeL4ProxyRulesResponse;
 const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
 const OriginInfo = models.OriginInfo;
-const Tag = models.Tag;
+const BillingData = models.BillingData;
 const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
 const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
 const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
@@ -72,19 +76,24 @@ const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatus
 const DeleteZoneResponse = models.DeleteZoneResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
 const BotExtendAction = models.BotExtendAction;
+const TimingDataRecord = models.TimingDataRecord;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
 const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResponse;
+const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
 const DescribeRulesResponse = models.DescribeRulesResponse;
-const TimingDataRecord = models.TimingDataRecord;
+const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
 const OriginProtectionInfo = models.OriginProtectionInfo;
 const DescribeOriginProtectionResponse = models.DescribeOriginProtectionResponse;
 const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const ExceptConfig = models.ExceptConfig;
 const DeleteOriginGroupRequest = models.DeleteOriginGroupRequest;
 const ImageOptimize = models.ImageOptimize;
+const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const AliasDomain = models.AliasDomain;
 const WebSocket = models.WebSocket;
+const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
 const AclCondition = models.AclCondition;
+const TimingTypeValue = models.TimingTypeValue;
 const DescribeAliasDomainsRequest = models.DescribeAliasDomainsRequest;
 const SkipCondition = models.SkipCondition;
 const IpTableRule = models.IpTableRule;
@@ -100,13 +109,14 @@ const BindSecurityTemplateToEntityResponse = models.BindSecurityTemplateToEntity
 const RuleExtraParameter = models.RuleExtraParameter;
 const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
 const RulesSettingAction = models.RulesSettingAction;
+const ModifyL4ProxyRulesResponse = models.ModifyL4ProxyRulesResponse;
 const DDoSAttackEvent = models.DDoSAttackEvent;
 const ClientIpHeader = models.ClientIpHeader;
 const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
 const Quic = models.Quic;
 const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersionDetailRequest;
 const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
-const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
+const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
 const DescribeRulesRequest = models.DescribeRulesRequest;
 const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
 const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
@@ -117,7 +127,7 @@ const AccelerationDomain = models.AccelerationDomain;
 const DeleteSecurityIPGroupRequest = models.DeleteSecurityIPGroupRequest;
 const RateLimitTemplateDetail = models.RateLimitTemplateDetail;
 const Origin = models.Origin;
-const WafConfig = models.WafConfig;
+const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
 const Grpc = models.Grpc;
 const SlowRateConfig = models.SlowRateConfig;
 const ServerCertInfo = models.ServerCertInfo;
@@ -139,21 +149,25 @@ const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
 const SwitchConfig = models.SwitchConfig;
 const IdentifyZoneResponse = models.IdentifyZoneResponse;
 const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
+const L4ProxyRule = models.L4ProxyRule;
 const DDoSBlockData = models.DDoSBlockData;
 const VanityNameServers = models.VanityNameServers;
 const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
+const ModifyL4ProxyResponse = models.ModifyL4ProxyResponse;
 const WafRule = models.WafRule;
 const SecurityConfig = models.SecurityConfig;
-const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
+const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const DescribeSecurityTemplateBindingsResponse = models.DescribeSecurityTemplateBindingsResponse;
 const MaxAge = models.MaxAge;
-const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
+const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
 const RuleCodeActionParams = models.RuleCodeActionParams;
 const IPGroup = models.IPGroup;
+const WafConfig = models.WafConfig;
 const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataRequest;
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const NoCache = models.NoCache;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
+const SlowPostConfig = models.SlowPostConfig;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const EnvInfo = models.EnvInfo;
 const IPWhitelist = models.IPWhitelist;
@@ -161,9 +175,12 @@ const DDoS = models.DDoS;
 const CreateZoneRequest = models.CreateZoneRequest;
 const PlanInfo = models.PlanInfo;
 const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
+const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
 const Task = models.Task;
+const Waf = models.Waf;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
+const DeleteL4ProxyRequest = models.DeleteL4ProxyRequest;
 const AscriptionInfo = models.AscriptionInfo;
 const VerifyOwnershipResponse = models.VerifyOwnershipResponse;
 const RuleItem = models.RuleItem;
@@ -177,9 +194,10 @@ const DownloadL4LogsRequest = models.DownloadL4LogsRequest;
 const CodeAction = models.CodeAction;
 const DetailHost = models.DetailHost;
 const Identification = models.Identification;
+const DDosProtectionConfig = models.DDosProtectionConfig;
 const DescribeDDoSAttackDataRequest = models.DescribeDDoSAttackDataRequest;
 const CachePrefresh = models.CachePrefresh;
-const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
+const CreateL4ProxyRequest = models.CreateL4ProxyRequest;
 const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisDataResponse;
 const DescribeConfigGroupVersionsResponse = models.DescribeConfigGroupVersionsResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
@@ -193,16 +211,17 @@ const RateLimitTemplate = models.RateLimitTemplate;
 const OriginGroupReference = models.OriginGroupReference;
 const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
-const TemplateConfig = models.TemplateConfig;
+const ModifyL4ProxyStatusRequest = models.ModifyL4ProxyStatusRequest;
 const TopEntry = models.TopEntry;
 const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const VanityNameServersIps = models.VanityNameServersIps;
 const NsVerification = models.NsVerification;
-const SlowPostConfig = models.SlowPostConfig;
+const Rule = models.Rule;
 const AccelerateMainland = models.AccelerateMainland;
 const ExceptUserRule = models.ExceptUserRule;
 const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResponse;
 const RateLimitUserRule = models.RateLimitUserRule;
+const StandardDebug = models.StandardDebug;
 const SubRule = models.SubRule;
 const DeployRecord = models.DeployRecord;
 const CertificateInfo = models.CertificateInfo;
@@ -217,18 +236,21 @@ const IntelligenceRuleItem = models.IntelligenceRuleItem;
 const IntelligenceRule = models.IntelligenceRule;
 const PostMaxSize = models.PostMaxSize;
 const Sv = models.Sv;
-const Rule = models.Rule;
+const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
+const ModifyL4ProxyRulesStatusRequest = models.ModifyL4ProxyRulesStatusRequest;
 const Filter = models.Filter;
 const CreateAccelerationDomainResponse = models.CreateAccelerationDomainResponse;
+const CreateL4ProxyRulesResponse = models.CreateL4ProxyRulesResponse;
 const DescribeTimingL4DataResponse = models.DescribeTimingL4DataResponse;
 const CreateZoneResponse = models.CreateZoneResponse;
+const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
 const Action = models.Action;
 const ApplicationProxy = models.ApplicationProxy;
 const ModifyApplicationProxyResponse = models.ModifyApplicationProxyResponse;
 const ModifySecurityIPGroupResponse = models.ModifySecurityIPGroupResponse;
 const CacheKey = models.CacheKey;
 const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
-const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
+const BillingDataFilter = models.BillingDataFilter;
 const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
 const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
 const RateLimitIntelligence = models.RateLimitIntelligence;
@@ -239,8 +261,10 @@ const Header = models.Header;
 const RuleAndConditions = models.RuleAndConditions;
 const SecurityTemplateBinding = models.SecurityTemplateBinding;
 const DropPageConfig = models.DropPageConfig;
+const DescribeL4ProxyRequest = models.DescribeL4ProxyRequest;
 const SecEntry = models.SecEntry;
 const DescribeIdentificationsRequest = models.DescribeIdentificationsRequest;
+const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
 const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
 const PartialModule = models.PartialModule;
 const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
@@ -253,7 +277,7 @@ const FollowOrigin = models.FollowOrigin;
 const DeleteZoneRequest = models.DeleteZoneRequest;
 const SecurityType = models.SecurityType;
 const BotManagedRule = models.BotManagedRule;
-const NormalAction = models.NormalAction;
+const IPRegionInfo = models.IPRegionInfo;
 const TopDetailData = models.TopDetailData;
 const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
 const DescribeOriginGroupRequest = models.DescribeOriginGroupRequest;
@@ -267,21 +291,24 @@ const QueryCondition = models.QueryCondition;
 const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
 const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
-const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
+const ExceptUserRuleScope = models.ExceptUserRuleScope;
 const FailReason = models.FailReason;
+const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
+const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
 const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
 const EntityStatus = models.EntityStatus;
+const TemplateConfig = models.TemplateConfig;
 const RewriteAction = models.RewriteAction;
-const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
+const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
 const TopDataRecord = models.TopDataRecord;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const CnameStatus = models.CnameStatus;
 const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
 const DescribeTopL7AnalysisDataResponse = models.DescribeTopL7AnalysisDataResponse;
-const StandardDebug = models.StandardDebug;
+const OfflineCache = models.OfflineCache;
 const RuleNormalActionParams = models.RuleNormalActionParams;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const Resource = models.Resource;
@@ -295,7 +322,7 @@ const DescribeHostsSettingRequest = models.DescribeHostsSettingRequest;
 const SubRuleItem = models.SubRuleItem;
 const CreateSecurityIPGroupResponse = models.CreateSecurityIPGroupResponse;
 const CreateSharedCNAMEResponse = models.CreateSharedCNAMEResponse;
-const OwnershipVerification = models.OwnershipVerification;
+const NormalAction = models.NormalAction;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const DescribeAvailablePlansResponse = models.DescribeAvailablePlansResponse;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
@@ -304,20 +331,23 @@ const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
 const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
 const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
 const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
+const CreateL4ProxyResponse = models.CreateL4ProxyResponse;
 const AlgDetectResult = models.AlgDetectResult;
 const DescribeDeployHistoryResponse = models.DescribeDeployHistoryResponse;
+const L4Proxy = models.L4Proxy;
 const QueryString = models.QueryString;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
 const CreateSharedCNAMERequest = models.CreateSharedCNAMERequest;
 const DescribeAccelerationDomainsRequest = models.DescribeAccelerationDomainsRequest;
 const UpstreamHttp2 = models.UpstreamHttp2;
 const TopEntryValue = models.TopEntryValue;
-const OfflineCache = models.OfflineCache;
+const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
 const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
 const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
+const DescribeIPRegionRequest = models.DescribeIPRegionRequest;
 const ModifyAccelerationDomainStatusesRequest = models.ModifyAccelerationDomainStatusesRequest;
 const BotConfig = models.BotConfig;
-const TimingTypeValue = models.TimingTypeValue;
+const Tag = models.Tag;
 
 
 /**
@@ -330,50 +360,6 @@ class TeoClient extends AbstractClient {
         super("teo.tencentcloudapi.com", "2022-09-01", credential, region, profile);
     }
     
-    /**
-     * This API is used to modify an application proxy rule.
-     * @param {ModifyApplicationProxyRuleRequest} req
-     * @param {function(string, ModifyApplicationProxyRuleResponse):void} cb
-     * @public
-     */
-    ModifyApplicationProxyRule(req, cb) {
-        let resp = new ModifyApplicationProxyRuleResponse();
-        this.request("ModifyApplicationProxyRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an origin group. Note that an origin group can not be deleted if it is referenced by services (e.g. L4 Proxy, domain name service, load balancing, rule engines). 
-     * @param {DeleteOriginGroupRequest} req
-     * @param {function(string, DeleteOriginGroupResponse):void} cb
-     * @public
-     */
-    DeleteOriginGroup(req, cb) {
-        let resp = new DeleteOriginGroupResponse();
-        this.request("DeleteOriginGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a shared CNAME. It is now only available to beta users.
-     * @param {CreateSharedCNAMERequest} req
-     * @param {function(string, CreateSharedCNAMEResponse):void} cb
-     * @public
-     */
-    CreateSharedCNAME(req, cb) {
-        let resp = new CreateSharedCNAMEResponse();
-        this.request("CreateSharedCNAME", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a site.
-     * @param {DeleteZoneRequest} req
-     * @param {function(string, DeleteZoneResponse):void} cb
-     * @public
-     */
-    DeleteZone(req, cb) {
-        let resp = new DeleteZoneResponse();
-        this.request("DeleteZone", req, resp, cb);
-    }
-
     /**
      * When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves the latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
 
@@ -388,14 +374,283 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an origin group for easy management. The created origin server group can be used for **adding acceleration domain names** and **layer-4 proxy configuration**.
-     * @param {CreateOriginGroupRequest} req
-     * @param {function(string, CreateOriginGroupResponse):void} cb
+     * This API is used to download L4 logs.
+     * @param {DownloadL4LogsRequest} req
+     * @param {function(string, DownloadL4LogsResponse):void} cb
      * @public
      */
-    CreateOriginGroup(req, cb) {
-        let resp = new CreateOriginGroupResponse();
-        this.request("CreateOriginGroup", req, resp, cb);
+    DownloadL4Logs(req, cb) {
+        let resp = new DownloadL4LogsResponse();
+        this.request("DownloadL4Logs", req, resp, cb);
+    }
+
+    /**
+     * DescribePrefetchTasks is used to query the submission history and execution progress of preheating tasks. This interface can be used to query the tasks submitted by the CreatePrefetchTasks interface.
+     * @param {DescribePrefetchTasksRequest} req
+     * @param {function(string, DescribePrefetchTasksResponse):void} cb
+     * @public
+     */
+    DescribePrefetchTasks(req, cb) {
+        let resp = new DescribePrefetchTasksResponse();
+        this.request("DescribePrefetchTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query content management quotas.
+     * @param {DescribeContentQuotaRequest} req
+     * @param {function(string, DescribeContentQuotaResponse):void} cb
+     * @public
+     */
+    DescribeContentQuota(req, cb) {
+        let resp = new DescribeContentQuotaResponse();
+        this.request("DescribeContentQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the verification information of a site.
+     * @param {DescribeIdentificationsRequest} req
+     * @param {function(string, DescribeIdentificationsResponse):void} cb
+     * @public
+     */
+    DescribeIdentifications(req, cb) {
+        let resp = new DescribeIdentificationsResponse();
+        this.request("DescribeIdentifications", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify your ownership of a site or domain name. It's required in the CNAME access mode. After a site is verified, you don't need to verify the ownership again for domain names added to it in the future. For details, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+
+For sites connected via the NS, you can query whether the NS is successfully switched through this API. For details, see [Modifying DNS Servers](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
+     * @param {VerifyOwnershipRequest} req
+     * @param {function(string, VerifyOwnershipResponse):void} cb
+     * @public
+     */
+    VerifyOwnership(req, cb) {
+        let resp = new VerifyOwnershipResponse();
+        this.request("VerifyOwnership", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify ownership of the site.
+     * @param {IdentifyZoneRequest} req
+     * @param {function(string, IdentifyZoneResponse):void} cb
+     * @public
+     */
+    IdentifyZone(req, cb) {
+        let resp = new IdentifyZoneResponse();
+        this.request("IdentifyZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a list of default certificates.
+     * @param {DescribeDefaultCertificatesRequest} req
+     * @param {function(string, DescribeDefaultCertificatesResponse):void} cb
+     * @public
+     */
+    DescribeDefaultCertificates(req, cb) {
+        let resp = new DescribeDefaultCertificatesResponse();
+        this.request("DescribeDefaultCertificates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query domain name information of a site, including the acceleration domain name, origin, and domain name status. You can query the information of all domain names, or specific domain names by specifying filters information.
+     * @param {DescribeAccelerationDomainsRequest} req
+     * @param {function(string, DescribeAccelerationDomainsResponse):void} cb
+     * @public
+     */
+    DescribeAccelerationDomains(req, cb) {
+        let resp = new DescribeAccelerationDomainsResponse();
+        this.request("DescribeAccelerationDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the configuration of an origin group. The original configuration will be overwritten. 
+     * @param {ModifyOriginGroupRequest} req
+     * @param {function(string, ModifyOriginGroupResponse):void} cb
+     * @public
+     */
+    ModifyOriginGroup(req, cb) {
+        let resp = new ModifyOriginGroupResponse();
+        this.request("ModifyOriginGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [DeleteL4Proxy] (https://intl.cloud.tencent.com/document/product/1552/103415?from_cn_redirect=1).
+     * @param {DeleteApplicationProxyRequest} req
+     * @param {function(string, DeleteApplicationProxyResponse):void} cb
+     * @public
+     */
+    DeleteApplicationProxy(req, cb) {
+        let resp = new DeleteApplicationProxyResponse();
+        this.request("DeleteApplicationProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable a Layer 4 proxy instance.
+     * @param {ModifyL4ProxyStatusRequest} req
+     * @param {function(string, ModifyL4ProxyStatusResponse):void} cb
+     * @public
+     */
+    ModifyL4ProxyStatus(req, cb) {
+        let resp = new ModifyL4ProxyStatusResponse();
+        this.request("ModifyL4ProxyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to download L7 logs.
+     * @param {DownloadL7LogsRequest} req
+     * @param {function(string, DownloadL7LogsResponse):void} cb
+     * @public
+     */
+    DownloadL7Logs(req, cb) {
+        let resp = new DownloadL7LogsResponse();
+        this.request("DownloadL7Logs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeEnvironmentsRequest} req
+     * @param {function(string, DescribeEnvironmentsResponse):void} cb
+     * @public
+     */
+    DescribeEnvironments(req, cb) {
+        let resp = new DescribeEnvironmentsResponse();
+        this.request("DescribeEnvironments", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [DeleteL4ProxyRules] (https://intl.cloud.tencent.com/document/product/1552/103414?from_cn_redirect=1).
+     * @param {DeleteApplicationProxyRuleRequest} req
+     * @param {function(string, DeleteApplicationProxyRuleResponse):void} cb
+     * @public
+     */
+    DeleteApplicationProxyRule(req, cb) {
+        let resp = new DeleteApplicationProxyRuleResponse();
+        this.request("DeleteApplicationProxyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CNAME status of a domain name.
+     * @param {CheckCnameStatusRequest} req
+     * @param {function(string, CheckCnameStatusResponse):void} cb
+     * @public
+     */
+    CheckCnameStatus(req, cb) {
+        let resp = new CheckCnameStatusResponse();
+        this.request("CheckCnameStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a site.
+     * @param {ModifyZoneRequest} req
+     * @param {function(string, ModifyZoneResponse):void} cb
+     * @public
+     */
+    ModifyZone(req, cb) {
+        let resp = new ModifyZoneResponse();
+        this.request("ModifyZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a pre-warming task.
+     * @param {CreatePrefetchTaskRequest} req
+     * @param {function(string, CreatePrefetchTaskResponse):void} cb
+     * @public
+     */
+    CreatePrefetchTask(req, cb) {
+        let resp = new CreatePrefetchTaskResponse();
+        this.request("CreatePrefetchTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an alias domain name.
+     * @param {DeleteAliasDomainRequest} req
+     * @param {function(string, DeleteAliasDomainResponse):void} cb
+     * @public
+     */
+    DeleteAliasDomain(req, cb) {
+        let resp = new DeleteAliasDomainResponse();
+        this.request("DeleteAliasDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the time sequence traffic data of the monitoring category in L7. This API is to be discarded. Please use the API <a href="https://intl.cloud.tencent.com/document/product/1552/80648?from_cn_redirect=1">DescribeTimingL7AnalysisData</a>.
+     * @param {DescribeOverviewL7DataRequest} req
+     * @param {function(string, DescribeOverviewL7DataResponse):void} cb
+     * @public
+     */
+    DescribeOverviewL7Data(req, cb) {
+        let resp = new DescribeOverviewL7DataResponse();
+        this.request("DescribeOverviewL7Data", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an acceleration domain name. 
+
+For sites connected via the CNAME, if you have not verified the ownership of the domain name, the ownership verification information of the domain name is returned. To verify your ownership of the domain name, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+     * @param {CreateAccelerationDomainRequest} req
+     * @param {function(string, CreateAccelerationDomainResponse):void} cb
+     * @public
+     */
+    CreateAccelerationDomain(req, cb) {
+        let resp = new CreateAccelerationDomainResponse();
+        this.request("CreateAccelerationDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain detailed information about a version in version management mode. The response includes the version ID, description, status, creation time, configuration group information, and the content of the version configuration file. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeConfigGroupVersionDetailRequest} req
+     * @param {function(string, DescribeConfigGroupVersionDetailResponse):void} cb
+     * @public
+     */
+    DescribeConfigGroupVersionDetail(req, cb) {
+        let resp = new DescribeConfigGroupVersionDetailResponse();
+        this.request("DescribeConfigGroupVersionDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind/unbind a domain name to/from a specific policy template. 
+     * @param {BindSecurityTemplateToEntityRequest} req
+     * @param {function(string, BindSecurityTemplateToEntityResponse):void} cb
+     * @public
+     */
+    BindSecurityTemplateToEntity(req, cb) {
+        let resp = new BindSecurityTemplateToEntityResponse();
+        this.request("BindSecurityTemplateToEntity", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4ProxyRulesStatus
+] (https://intl.cloud.tencent.com/document/product/1552/103409?from_cn_redirect=1).
+     * @param {ModifyApplicationProxyRuleStatusRequest} req
+     * @param {function(string, ModifyApplicationProxyRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyApplicationProxyRuleStatus(req, cb) {
+        let resp = new ModifyApplicationProxyRuleStatusResponse();
+        this.request("ModifyApplicationProxyRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to purchase a plan for a new site.
+     * @param {CreatePlanForZoneRequest} req
+     * @param {function(string, CreatePlanForZoneResponse):void} cb
+     * @public
+     */
+    CreatePlanForZone(req, cb) {
+        let resp = new CreatePlanForZoneResponse();
+        this.request("CreatePlanForZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an origin group. Note that an origin group can not be deleted if it is referenced by services (e.g. L4 Proxy, domain name service, load balancing, rule engines). 
+     * @param {DeleteOriginGroupRequest} req
+     * @param {function(string, DeleteOriginGroupResponse):void} cb
+     * @public
+     */
+    DeleteOriginGroup(req, cb) {
+        let resp = new DeleteOriginGroupResponse();
+        this.request("DeleteOriginGroup", req, resp, cb);
     }
 
     /**
@@ -410,25 +665,47 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * DescribePurgeTasks is used to query the submitted URL refreshing and directory refreshing records and execution progress. This interface can be used to query the tasks submitted by the CreatePurgeTasks API.
-     * @param {DescribePurgeTasksRequest} req
-     * @param {function(string, DescribePurgeTasksResponse):void} cb
+     * This API is used to check if the IP is an EdgeOne IP.
+     * @param {DescribeIPRegionRequest} req
+     * @param {function(string, DescribeIPRegionResponse):void} cb
      * @public
      */
-    DescribePurgeTasks(req, cb) {
-        let resp = new DescribePurgeTasksResponse();
-        this.request("DescribePurgeTasks", req, resp, cb);
+    DescribeIPRegion(req, cb) {
+        let resp = new DescribeIPRegionResponse();
+        this.request("DescribeIPRegion", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the site configuration.
-     * @param {ModifyZoneSettingRequest} req
-     * @param {function(string, ModifyZoneSettingResponse):void} cb
+     * This API is used to batch remove accelerated domain names.
+     * @param {DeleteAccelerationDomainsRequest} req
+     * @param {function(string, DeleteAccelerationDomainsResponse):void} cb
      * @public
      */
-    ModifyZoneSetting(req, cb) {
-        let resp = new ModifyZoneSettingResponse();
-        this.request("ModifyZoneSetting", req, resp, cb);
+    DeleteAccelerationDomains(req, cb) {
+        let resp = new DeleteAccelerationDomainsResponse();
+        this.request("DeleteAccelerationDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the configuration of a Layer 4 proxy instance.
+     * @param {ModifyL4ProxyRequest} req
+     * @param {function(string, ModifyL4ProxyResponse):void} cb
+     * @public
+     */
+    ModifyL4Proxy(req, cb) {
+        let resp = new ModifyL4ProxyResponse();
+        this.request("ModifyL4Proxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an alias domain name.
+     * @param {CreateAliasDomainRequest} req
+     * @param {function(string, CreateAliasDomainResponse):void} cb
+     * @public
+     */
+    CreateAliasDomain(req, cb) {
+        let resp = new CreateAliasDomainResponse();
+        this.request("CreateAliasDomain", req, resp, cb);
     }
 
     /**
@@ -443,14 +720,435 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to batch remove accelerated domain names.
-     * @param {DeleteAccelerationDomainsRequest} req
-     * @param {function(string, DeleteAccelerationDomainsResponse):void} cb
+     * This API is used to query the version list for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeConfigGroupVersionsRequest} req
+     * @param {function(string, DescribeConfigGroupVersionsResponse):void} cb
      * @public
      */
-    DeleteAccelerationDomains(req, cb) {
-        let resp = new DeleteAccelerationDomainsResponse();
-        this.request("DeleteAccelerationDomains", req, resp, cb);
+    DescribeConfigGroupVersions(req, cb) {
+        let resp = new DescribeConfigGroupVersionsResponse();
+        this.request("DescribeConfigGroupVersions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the site configuration.
+     * @param {ModifyZoneSettingRequest} req
+     * @param {function(string, ModifyZoneSettingResponse):void} cb
+     * @public
+     */
+    ModifyZoneSetting(req, cb) {
+        let resp = new ModifyZoneSettingResponse();
+        this.request("ModifyZoneSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify Layer 4 proxy forwarding rules, supporting both individual and batch modification.
+     * @param {ModifyL4ProxyRulesRequest} req
+     * @param {function(string, ModifyL4ProxyRulesResponse):void} cb
+     * @public
+     */
+    ModifyL4ProxyRules(req, cb) {
+        let resp = new ModifyL4ProxyRulesResponse();
+        this.request("ModifyL4ProxyRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of an alias domain name.
+     * @param {ModifyAliasDomainStatusRequest} req
+     * @param {function(string, ModifyAliasDomainStatusResponse):void} cb
+     * @public
+     */
+    ModifyAliasDomainStatus(req, cb) {
+        let resp = new ModifyAliasDomainStatusResponse();
+        this.request("ModifyAliasDomainStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create Layer 4 proxy instance rules, supporting both individual and batch creation.
+     * @param {CreateL4ProxyRulesRequest} req
+     * @param {function(string, CreateL4ProxyRulesResponse):void} cb
+     * @public
+     */
+    CreateL4ProxyRules(req, cb) {
+        let resp = new CreateL4ProxyRulesResponse();
+        this.request("CreateL4ProxyRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the cached L7 top-ranked data.
+     * @param {DescribeTopL7CacheDataRequest} req
+     * @param {function(string, DescribeTopL7CacheDataResponse):void} cb
+     * @public
+     */
+    DescribeTopL7CacheData(req, cb) {
+        let resp = new DescribeTopL7CacheDataResponse();
+        this.request("DescribeTopL7CacheData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of L4 traffic data recorded over time.
+     * @param {DescribeTimingL4DataRequest} req
+     * @param {function(string, DescribeTimingL4DataResponse):void} cb
+     * @public
+     */
+    DescribeTimingL4Data(req, cb) {
+        let resp = new DescribeTimingL4DataResponse();
+        this.request("DescribeTimingL4Data", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a rule in the rule engine.
+     * @param {ModifyRuleRequest} req
+     * @param {function(string, ModifyRuleResponse):void} cb
+     * @public
+     */
+    ModifyRule(req, cb) {
+        let resp = new ModifyRuleResponse();
+        this.request("ModifyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the top-ranked L7 traffic data.
+     * @param {DescribeTopL7AnalysisDataRequest} req
+     * @param {function(string, DescribeTopL7AnalysisDataResponse):void} cb
+     * @public
+     */
+    DescribeTopL7AnalysisData(req, cb) {
+        let resp = new DescribeTopL7AnalysisDataResponse();
+        this.request("DescribeTopL7AnalysisData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the web and bot security configurations.
+     * @param {ModifySecurityPolicyRequest} req
+     * @param {function(string, ModifySecurityPolicyResponse):void} cb
+     * @public
+     */
+    ModifySecurityPolicy(req, cb) {
+        let resp = new ModifySecurityPolicyResponse();
+        this.request("ModifySecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind a site to a plan.
+     * @param {BindZoneToPlanRequest} req
+     * @param {function(string, BindZoneToPlanResponse):void} cb
+     * @public
+     */
+    BindZoneToPlan(req, cb) {
+        let resp = new BindZoneToPlanResponse();
+        this.request("BindZoneToPlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query DDoS attack events.
+     * @param {DescribeDDoSAttackEventRequest} req
+     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
+     * @public
+     */
+    DescribeDDoSAttackEvent(req, cb) {
+        let resp = new DescribeDDoSAttackEventResponse();
+        this.request("DescribeDDoSAttackEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete Layer 4 proxy forwarding rules, supporting both individual and batch operation.
+     * @param {DeleteL4ProxyRulesRequest} req
+     * @param {function(string, DeleteL4ProxyRulesResponse):void} cb
+     * @public
+     */
+    DeleteL4ProxyRules(req, cb) {
+        let resp = new DeleteL4ProxyRulesResponse();
+        this.request("DeleteL4ProxyRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an accelerated domain name.
+     * @param {ModifyAccelerationDomainRequest} req
+     * @param {function(string, ModifyAccelerationDomainResponse):void} cb
+     * @public
+     */
+    ModifyAccelerationDomain(req, cb) {
+        let resp = new ModifyAccelerationDomainResponse();
+        this.request("ModifyAccelerationDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create Layer 4 proxy instances.
+     * @param {CreateL4ProxyRequest} req
+     * @param {function(string, CreateL4ProxyResponse):void} cb
+     * @public
+     */
+    CreateL4Proxy(req, cb) {
+        let resp = new CreateL4ProxyResponse();
+        this.request("CreateL4Proxy", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4ProxyStatus] (https://intl.cloud.tencent.com/document/product/1552/103408?from_cn_redirect=1).
+     * @param {ModifyApplicationProxyStatusRequest} req
+     * @param {function(string, ModifyApplicationProxyStatusResponse):void} cb
+     * @public
+     */
+    ModifyApplicationProxyStatus(req, cb) {
+        let resp = new ModifyApplicationProxyStatusResponse();
+        this.request("ModifyApplicationProxyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the L7 data recorded over time.
+     * @param {DescribeTimingL7AnalysisDataRequest} req
+     * @param {function(string, DescribeTimingL7AnalysisDataResponse):void} cb
+     * @public
+     */
+    DescribeTimingL7AnalysisData(req, cb) {
+        let resp = new DescribeTimingL7AnalysisDataResponse();
+        this.request("DescribeTimingL7AnalysisData", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. In the latest version, this API has been split into two APIs: one for querying the Layer 4 proxy instance list and the other for querying Layer 4 forwarding rules. For details, see [DescribeL4Proxy] (https://intl.cloud.tencent.com/document/product/1552/103413?from_cn_redirect=1) and [DescribeL4ProxyRules] (https://intl.cloud.tencent.com/document/product/1552/103412?from_cn_redirect=1).
+     * @param {DescribeApplicationProxiesRequest} req
+     * @param {function(string, DescribeApplicationProxiesResponse):void} cb
+     * @public
+     */
+    DescribeApplicationProxies(req, cb) {
+        let resp = new DescribeApplicationProxiesResponse();
+        this.request("DescribeApplicationProxies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a shared CNAME. It is now only available to beta users.
+     * @param {CreateSharedCNAMERequest} req
+     * @param {function(string, CreateSharedCNAMEResponse):void} cb
+     * @public
+     */
+    CreateSharedCNAME(req, cb) {
+        let resp = new CreateSharedCNAMEResponse();
+        this.request("CreateSharedCNAME", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a rule in the rule engine.
+     * @param {CreateRuleRequest} req
+     * @param {function(string, CreateRuleResponse):void} cb
+     * @public
+     */
+    CreateRule(req, cb) {
+        let resp = new CreateRuleResponse();
+        this.request("CreateRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a new version for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {CreateConfigGroupVersionRequest} req
+     * @param {function(string, CreateConfigGroupVersionResponse):void} cb
+     * @public
+     */
+    CreateConfigGroupVersion(req, cb) {
+        let resp = new CreateConfigGroupVersionResponse();
+        this.request("CreateConfigGroupVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4Proxy
+] (https://intl.cloud.tencent.com/document/product/1552/103411?from_cn_redirect=1).
+     * @param {ModifyApplicationProxyRequest} req
+     * @param {function(string, ModifyApplicationProxyResponse):void} cb
+     * @public
+     */
+    ModifyApplicationProxy(req, cb) {
+        let resp = new ModifyApplicationProxyResponse();
+        this.request("ModifyApplicationProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a site. After you create the site, you can connect it to EdgeOne via the CNAME or NS (see [Quick Start](https://intl.cloud.tencent.com/document/product/1552/87601?from_cn_redirect=1)), or connect it without a domain name (see [Quick Access to L4 Proxy Service](https://intl.cloud.tencent.com/document/product/1552/96051?from_cn_redirect=1)).
+
+If there are already EdgeOne plans under the current account, it is recommended to pass in the `PlanId` to bind the site with the plan directly. If `PlanId` is not passed in, the created site is not activated. You need to call [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1) to bind the site with a plan. To purchase a plan, please go to the EdgeOne console.
+     * @param {CreateZoneRequest} req
+     * @param {function(string, CreateZoneResponse):void} cb
+     * @public
+     */
+    CreateZone(req, cb) {
+        let resp = new CreateZoneResponse();
+        this.request("CreateZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query plan options available for purchase.
+     * @param {DescribeAvailablePlansRequest} req
+     * @param {function(string, DescribeAvailablePlansResponse):void} cb
+     * @public
+     */
+    DescribeAvailablePlans(req, cb) {
+        let resp = new DescribeAvailablePlansResponse();
+        this.request("DescribeAvailablePlans", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return the list of the settings of the rule engine that can be used for request match and their detailed recommended configuration information.
+     * @param {DescribeRulesSettingRequest} req
+     * @param {function(string, DescribeRulesSettingResponse):void} cb
+     * @public
+     */
+    DescribeRulesSetting(req, cb) {
+        let resp = new DescribeRulesSettingResponse();
+        this.request("DescribeRulesSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch modify the status of accelerated domains.
+     * @param {ModifyAccelerationDomainStatusesRequest} req
+     * @param {function(string, ModifyAccelerationDomainStatusesResponse):void} cb
+     * @public
+     */
+    ModifyAccelerationDomainStatuses(req, cb) {
+        let resp = new ModifyAccelerationDomainStatusesResponse();
+        this.request("ModifyAccelerationDomainStatuses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a security IP group.
+     * @param {ModifySecurityIPGroupRequest} req
+     * @param {function(string, ModifySecurityIPGroupResponse):void} cb
+     * @public
+     */
+    ModifySecurityIPGroup(req, cb) {
+        let resp = new ModifySecurityIPGroupResponse();
+        this.request("ModifySecurityIPGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the top-ranked DDoS attack data.
+     * @param {DescribeDDoSAttackTopDataRequest} req
+     * @param {function(string, DescribeDDoSAttackTopDataResponse):void} cb
+     * @public
+     */
+    DescribeDDoSAttackTopData(req, cb) {
+        let resp = new DescribeDDoSAttackTopDataResponse();
+        this.request("DescribeDDoSAttackTopData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the site status.
+     * @param {ModifyZoneStatusRequest} req
+     * @param {function(string, ModifyZoneStatusResponse):void} cb
+     * @public
+     */
+    ModifyZoneStatus(req, cb) {
+        let resp = new ModifyZoneStatusResponse();
+        this.request("ModifyZoneStatus", req, resp, cb);
+    }
+
+    /**
+     * DescribePurgeTasks is used to query the submitted URL refreshing and directory refreshing records and execution progress. This interface can be used to query the tasks submitted by the CreatePurgeTasks API.
+     * @param {DescribePurgeTasksRequest} req
+     * @param {function(string, DescribePurgeTasksResponse):void} cb
+     * @public
+     */
+    DescribePurgeTasks(req, cb) {
+        let resp = new DescribePurgeTasksResponse();
+        this.request("DescribePurgeTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch delete rules from the rule engine.
+     * @param {DeleteRulesRequest} req
+     * @param {function(string, DeleteRulesResponse):void} cb
+     * @public
+     */
+    DeleteRules(req, cb) {
+        let resp = new DeleteRulesResponse();
+        this.request("DeleteRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the forwarding rule list under a Layer 4 proxy instance.
+     * @param {DescribeL4ProxyRulesRequest} req
+     * @param {function(string, DescribeL4ProxyRulesResponse):void} cb
+     * @public
+     */
+    DescribeL4ProxyRules(req, cb) {
+        let resp = new DescribeL4ProxyRulesResponse();
+        this.request("DescribeL4ProxyRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a Layer 4 proxy instance list.
+     * @param {DescribeL4ProxyRequest} req
+     * @param {function(string, DescribeL4ProxyResponse):void} cb
+     * @public
+     */
+    DescribeL4Proxy(req, cb) {
+        let resp = new DescribeL4ProxyResponse();
+        this.request("DescribeL4Proxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the rules in the rule engine.
+     * @param {DescribeRulesRequest} req
+     * @param {function(string, DescribeRulesResponse):void} cb
+     * @public
+     */
+    DescribeRules(req, cb) {
+        let resp = new DescribeRulesResponse();
+        this.request("DescribeRules", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version [CreateL4Proxy] (https://intl.cloud.tencent.com/document/product/1552/103417?from_cn_redirect=1).
+     * @param {CreateApplicationProxyRequest} req
+     * @param {function(string, CreateApplicationProxyResponse):void} cb
+     * @public
+     */
+    CreateApplicationProxy(req, cb) {
+        let resp = new CreateApplicationProxyResponse();
+        this.request("CreateApplicationProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain a list of origin groups.
+     * @param {DescribeOriginGroupRequest} req
+     * @param {function(string, DescribeOriginGroupResponse):void} cb
+     * @public
+     */
+    DescribeOriginGroup(req, cb) {
+        let resp = new DescribeOriginGroupResponse();
+        this.request("DescribeOriginGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an alias domain name.
+     * @param {ModifyAliasDomainRequest} req
+     * @param {function(string, ModifyAliasDomainResponse):void} cb
+     * @public
+     */
+    ModifyAliasDomain(req, cb) {
+        let resp = new ModifyAliasDomainResponse();
+        this.request("ModifyAliasDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4ProxyRules] (https://intl.cloud.tencent.com/document/product/1552/103410?from_cn_redirect=1).
+     * @param {ModifyApplicationProxyRuleRequest} req
+     * @param {function(string, ModifyApplicationProxyRuleResponse):void} cb
+     * @public
+     */
+    ModifyApplicationProxyRule(req, cb) {
+        let resp = new ModifyApplicationProxyRuleResponse();
+        this.request("ModifyApplicationProxyRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an origin group for easy management. The created origin server group can be used for **adding acceleration domain names** and **layer-4 proxy configuration**.
+     * @param {CreateOriginGroupRequest} req
+     * @param {function(string, CreateOriginGroupResponse):void} cb
+     * @public
+     */
+    CreateOriginGroup(req, cb) {
+        let resp = new CreateOriginGroupResponse();
+        this.request("CreateOriginGroup", req, resp, cb);
     }
 
     /**
@@ -478,82 +1176,14 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
-     * This API is used to create a rule in the rule engine.
-     * @param {CreateRuleRequest} req
-     * @param {function(string, CreateRuleResponse):void} cb
+     * This API is used to release versions in version management mode. Users can deploy the version to either the testing environment or the production environment by specifying the EnvId parameter. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DeployConfigGroupVersionRequest} req
+     * @param {function(string, DeployConfigGroupVersionResponse):void} cb
      * @public
      */
-    CreateRule(req, cb) {
-        let resp = new CreateRuleResponse();
-        this.request("CreateRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a new version for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
-     * @param {CreateConfigGroupVersionRequest} req
-     * @param {function(string, CreateConfigGroupVersionResponse):void} cb
-     * @public
-     */
-    CreateConfigGroupVersion(req, cb) {
-        let resp = new CreateConfigGroupVersionResponse();
-        this.request("CreateConfigGroupVersion", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query content management quotas.
-     * @param {DescribeContentQuotaRequest} req
-     * @param {function(string, DescribeContentQuotaResponse):void} cb
-     * @public
-     */
-    DescribeContentQuota(req, cb) {
-        let resp = new DescribeContentQuotaResponse();
-        this.request("DescribeContentQuota", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify an application proxy.
-     * @param {ModifyApplicationProxyRequest} req
-     * @param {function(string, ModifyApplicationProxyResponse):void} cb
-     * @public
-     */
-    ModifyApplicationProxy(req, cb) {
-        let resp = new ModifyApplicationProxyResponse();
-        this.request("ModifyApplicationProxy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the verification information of a site.
-     * @param {DescribeIdentificationsRequest} req
-     * @param {function(string, DescribeIdentificationsResponse):void} cb
-     * @public
-     */
-    DescribeIdentifications(req, cb) {
-        let resp = new DescribeIdentificationsResponse();
-        this.request("DescribeIdentifications", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a site. After you create the site, you can connect it to EdgeOne via the CNAME or NS (see [Quick Start](https://intl.cloud.tencent.com/document/product/1552/87601?from_cn_redirect=1)), or connect it without a domain name (see [Quick Access to L4 Proxy Service](https://intl.cloud.tencent.com/document/product/1552/96051?from_cn_redirect=1)).
-
-If there are already EdgeOne plans under the current account, it is recommended to pass in the `PlanId` to bind the site with the plan directly. If `PlanId` is not passed in, the created site is not activated. You need to call [BindZoneToPlan](https://intl.cloud.tencent.com/document/product/1552/83042?from_cn_redirect=1) to bind the site with a plan. To purchase a plan, please go to the EdgeOne console.
-     * @param {CreateZoneRequest} req
-     * @param {function(string, CreateZoneResponse):void} cb
-     * @public
-     */
-    CreateZone(req, cb) {
-        let resp = new CreateZoneResponse();
-        this.request("CreateZone", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a site.
-     * @param {ModifyZoneRequest} req
-     * @param {function(string, ModifyZoneResponse):void} cb
-     * @public
-     */
-    ModifyZone(req, cb) {
-        let resp = new ModifyZoneResponse();
-        this.request("ModifyZone", req, resp, cb);
+    DeployConfigGroupVersion(req, cb) {
+        let resp = new DeployConfigGroupVersionResponse();
+        this.request("DeployConfigGroupVersion", req, resp, cb);
     }
 
     /**
@@ -579,14 +1209,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to query plan options available for purchase.
-     * @param {DescribeAvailablePlansRequest} req
-     * @param {function(string, DescribeAvailablePlansResponse):void} cb
+     * This API is used to delete a Layer 4 proxy instance.
+     * @param {DeleteL4ProxyRequest} req
+     * @param {function(string, DeleteL4ProxyResponse):void} cb
      * @public
      */
-    DescribeAvailablePlans(req, cb) {
-        let resp = new DescribeAvailablePlansResponse();
-        this.request("DescribeAvailablePlans", req, resp, cb);
+    DeleteL4Proxy(req, cb) {
+        let resp = new DeleteL4ProxyResponse();
+        this.request("DeleteL4Proxy", req, resp, cb);
     }
 
     /**
@@ -601,28 +1231,6 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to verify ownership of the site.
-     * @param {IdentifyZoneRequest} req
-     * @param {function(string, IdentifyZoneResponse):void} cb
-     * @public
-     */
-    IdentifyZone(req, cb) {
-        let resp = new IdentifyZoneResponse();
-        this.request("IdentifyZone", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the status of an alias domain name.
-     * @param {ModifyAliasDomainStatusRequest} req
-     * @param {function(string, ModifyAliasDomainStatusResponse):void} cb
-     * @public
-     */
-    ModifyAliasDomainStatus(req, cb) {
-        let resp = new ModifyAliasDomainStatusResponse();
-        this.request("ModifyAliasDomainStatus", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the origin protection configuration.
      * @param {DescribeOriginProtectionRequest} req
      * @param {function(string, DescribeOriginProtectionResponse):void} cb
@@ -634,27 +1242,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to query a list of default certificates.
-     * @param {DescribeDefaultCertificatesRequest} req
-     * @param {function(string, DescribeDefaultCertificatesResponse):void} cb
+     * This API is used to start or stop Layer 4 proxy forwarding rules, supporting both individual and batch operation.
+     * @param {ModifyL4ProxyRulesStatusRequest} req
+     * @param {function(string, ModifyL4ProxyRulesStatusResponse):void} cb
      * @public
      */
-    DescribeDefaultCertificates(req, cb) {
-        let resp = new DescribeDefaultCertificatesResponse();
-        this.request("DescribeDefaultCertificates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to verify your ownership of a site or domain name. It's required in the CNAME access mode. After a site is verified, you don't need to verify the ownership again for domain names added to it in the future. For details, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
-
-For sites connected via the NS, you can query whether the NS is successfully switched through this API. For details, see [Modifying DNS Servers](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
-     * @param {VerifyOwnershipRequest} req
-     * @param {function(string, VerifyOwnershipResponse):void} cb
-     * @public
-     */
-    VerifyOwnership(req, cb) {
-        let resp = new VerifyOwnershipResponse();
-        this.request("VerifyOwnership", req, resp, cb);
+    ModifyL4ProxyRulesStatus(req, cb) {
+        let resp = new ModifyL4ProxyRulesStatusResponse();
+        this.request("ModifyL4ProxyRulesStatus", req, resp, cb);
     }
 
     /**
@@ -669,50 +1264,6 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to return the list of the settings of the rule engine that can be used for request match and their detailed recommended configuration information.
-     * @param {DescribeRulesSettingRequest} req
-     * @param {function(string, DescribeRulesSettingResponse):void} cb
-     * @public
-     */
-    DescribeRulesSetting(req, cb) {
-        let resp = new DescribeRulesSettingResponse();
-        this.request("DescribeRulesSetting", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query domain name information of a site, including the acceleration domain name, origin, and domain name status. You can query the information of all domain names, or specific domain names by specifying filters information.
-     * @param {DescribeAccelerationDomainsRequest} req
-     * @param {function(string, DescribeAccelerationDomainsResponse):void} cb
-     * @public
-     */
-    DescribeAccelerationDomains(req, cb) {
-        let resp = new DescribeAccelerationDomainsResponse();
-        this.request("DescribeAccelerationDomains", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the version list for the specified configuration group in version management mode. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
-     * @param {DescribeConfigGroupVersionsRequest} req
-     * @param {function(string, DescribeConfigGroupVersionsResponse):void} cb
-     * @public
-     */
-    DescribeConfigGroupVersions(req, cb) {
-        let resp = new DescribeConfigGroupVersionsResponse();
-        this.request("DescribeConfigGroupVersions", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the configuration of an origin group. The original configuration will be overwritten. 
-     * @param {ModifyOriginGroupRequest} req
-     * @param {function(string, ModifyOriginGroupResponse):void} cb
-     * @public
-     */
-    ModifyOriginGroup(req, cb) {
-        let resp = new ModifyOriginGroupResponse();
-        this.request("ModifyOriginGroup", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete a specified security IP group. Note that the security IP group cannot be deleted if it is referenced in a rule.
      * @param {DeleteSecurityIPGroupRequest} req
      * @param {function(string, DeleteSecurityIPGroupResponse):void} cb
@@ -724,7 +1275,7 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to create an application proxy rule.
+     * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [CreateL4ProxyRules] (https://intl.cloud.tencent.com/document/product/1552/103416?from_cn_redirect=1).
      * @param {CreateApplicationProxyRuleRequest} req
      * @param {function(string, CreateApplicationProxyRuleResponse):void} cb
      * @public
@@ -732,28 +1283,6 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     CreateApplicationProxyRule(req, cb) {
         let resp = new CreateApplicationProxyRuleResponse();
         this.request("CreateApplicationProxyRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the time sequence traffic data of the monitoring category in L7. This API is to be discarded. Please use the API <a href="https://intl.cloud.tencent.com/document/product/1552/80648?from_cn_redirect=1">DescribeTimingL7AnalysisData</a>.
-     * @param {DescribeOverviewL7DataRequest} req
-     * @param {function(string, DescribeOverviewL7DataResponse):void} cb
-     * @public
-     */
-    DescribeOverviewL7Data(req, cb) {
-        let resp = new DescribeOverviewL7DataResponse();
-        this.request("DescribeOverviewL7Data", req, resp, cb);
-    }
-
-    /**
-     * DescribePrefetchTasks is used to query the submission history and execution progress of preheating tasks. This interface can be used to query the tasks submitted by the CreatePrefetchTasks interface.
-     * @param {DescribePrefetchTasksRequest} req
-     * @param {function(string, DescribePrefetchTasksResponse):void} cb
-     * @public
-     */
-    DescribePrefetchTasks(req, cb) {
-        let resp = new DescribePrefetchTasksResponse();
-        this.request("DescribePrefetchTasks", req, resp, cb);
     }
 
     /**
@@ -768,168 +1297,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to query the top-ranked DDoS attack data.
-     * @param {DescribeDDoSAttackTopDataRequest} req
-     * @param {function(string, DescribeDDoSAttackTopDataResponse):void} cb
+     * This API is used to delete a site.
+     * @param {DeleteZoneRequest} req
+     * @param {function(string, DeleteZoneResponse):void} cb
      * @public
      */
-    DescribeDDoSAttackTopData(req, cb) {
-        let resp = new DescribeDDoSAttackTopDataResponse();
-        this.request("DescribeDDoSAttackTopData", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an application proxy.
-     * @param {DeleteApplicationProxyRequest} req
-     * @param {function(string, DeleteApplicationProxyResponse):void} cb
-     * @public
-     */
-    DeleteApplicationProxy(req, cb) {
-        let resp = new DeleteApplicationProxyResponse();
-        this.request("DeleteApplicationProxy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the cached L7 top-ranked data.
-     * @param {DescribeTopL7CacheDataRequest} req
-     * @param {function(string, DescribeTopL7CacheDataResponse):void} cb
-     * @public
-     */
-    DescribeTopL7CacheData(req, cb) {
-        let resp = new DescribeTopL7CacheDataResponse();
-        this.request("DescribeTopL7CacheData", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create an alias domain name.
-     * @param {CreateAliasDomainRequest} req
-     * @param {function(string, CreateAliasDomainResponse):void} cb
-     * @public
-     */
-    CreateAliasDomain(req, cb) {
-        let resp = new CreateAliasDomainResponse();
-        this.request("CreateAliasDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to change the site status.
-     * @param {ModifyZoneStatusRequest} req
-     * @param {function(string, ModifyZoneStatusResponse):void} cb
-     * @public
-     */
-    ModifyZoneStatus(req, cb) {
-        let resp = new ModifyZoneStatusResponse();
-        this.request("ModifyZoneStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain a list of origin groups.
-     * @param {DescribeOriginGroupRequest} req
-     * @param {function(string, DescribeOriginGroupResponse):void} cb
-     * @public
-     */
-    DescribeOriginGroup(req, cb) {
-        let resp = new DescribeOriginGroupResponse();
-        this.request("DescribeOriginGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to download L7 logs.
-     * @param {DownloadL7LogsRequest} req
-     * @param {function(string, DownloadL7LogsResponse):void} cb
-     * @public
-     */
-    DownloadL7Logs(req, cb) {
-        let resp = new DownloadL7LogsResponse();
-        this.request("DownloadL7Logs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
-     * @param {DescribeEnvironmentsRequest} req
-     * @param {function(string, DescribeEnvironmentsResponse):void} cb
-     * @public
-     */
-    DescribeEnvironments(req, cb) {
-        let resp = new DescribeEnvironmentsResponse();
-        this.request("DescribeEnvironments", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an application proxy rule.
-     * @param {DeleteApplicationProxyRuleRequest} req
-     * @param {function(string, DeleteApplicationProxyRuleResponse):void} cb
-     * @public
-     */
-    DeleteApplicationProxyRule(req, cb) {
-        let resp = new DeleteApplicationProxyRuleResponse();
-        this.request("DeleteApplicationProxyRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the CNAME status of a domain name.
-     * @param {CheckCnameStatusRequest} req
-     * @param {function(string, CheckCnameStatusResponse):void} cb
-     * @public
-     */
-    CheckCnameStatus(req, cb) {
-        let resp = new CheckCnameStatusResponse();
-        this.request("CheckCnameStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to batch delete rules from the rule engine.
-     * @param {DeleteRulesRequest} req
-     * @param {function(string, DeleteRulesResponse):void} cb
-     * @public
-     */
-    DeleteRules(req, cb) {
-        let resp = new DeleteRulesResponse();
-        this.request("DeleteRules", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of L4 traffic data recorded over time.
-     * @param {DescribeTimingL4DataRequest} req
-     * @param {function(string, DescribeTimingL4DataResponse):void} cb
-     * @public
-     */
-    DescribeTimingL4Data(req, cb) {
-        let resp = new DescribeTimingL4DataResponse();
-        this.request("DescribeTimingL4Data", req, resp, cb);
-    }
-
-    /**
-     * This API is used to batch modify the status of accelerated domains.
-     * @param {ModifyAccelerationDomainStatusesRequest} req
-     * @param {function(string, ModifyAccelerationDomainStatusesResponse):void} cb
-     * @public
-     */
-    ModifyAccelerationDomainStatuses(req, cb) {
-        let resp = new ModifyAccelerationDomainStatusesResponse();
-        this.request("ModifyAccelerationDomainStatuses", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a rule in the rule engine.
-     * @param {ModifyRuleRequest} req
-     * @param {function(string, ModifyRuleResponse):void} cb
-     * @public
-     */
-    ModifyRule(req, cb) {
-        let resp = new ModifyRuleResponse();
-        this.request("ModifyRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the top-ranked L7 traffic data.
-     * @param {DescribeTopL7AnalysisDataRequest} req
-     * @param {function(string, DescribeTopL7AnalysisDataResponse):void} cb
-     * @public
-     */
-    DescribeTopL7AnalysisData(req, cb) {
-        let resp = new DescribeTopL7AnalysisDataResponse();
-        this.request("DescribeTopL7AnalysisData", req, resp, cb);
+    DeleteZone(req, cb) {
+        let resp = new DeleteZoneResponse();
+        this.request("DeleteZone", req, resp, cb);
     }
 
     /**
@@ -955,85 +1330,6 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * This API is used to modify the web and bot security configurations.
-     * @param {ModifySecurityPolicyRequest} req
-     * @param {function(string, ModifySecurityPolicyResponse):void} cb
-     * @public
-     */
-    ModifySecurityPolicy(req, cb) {
-        let resp = new ModifySecurityPolicyResponse();
-        this.request("ModifySecurityPolicy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to download L4 logs.
-     * @param {DownloadL4LogsRequest} req
-     * @param {function(string, DownloadL4LogsResponse):void} cb
-     * @public
-     */
-    DownloadL4Logs(req, cb) {
-        let resp = new DownloadL4LogsResponse();
-        this.request("DownloadL4Logs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a pre-warming task.
-     * @param {CreatePrefetchTaskRequest} req
-     * @param {function(string, CreatePrefetchTaskResponse):void} cb
-     * @public
-     */
-    CreatePrefetchTask(req, cb) {
-        let resp = new CreatePrefetchTaskResponse();
-        this.request("CreatePrefetchTask", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an alias domain name.
-     * @param {DeleteAliasDomainRequest} req
-     * @param {function(string, DeleteAliasDomainResponse):void} cb
-     * @public
-     */
-    DeleteAliasDomain(req, cb) {
-        let resp = new DeleteAliasDomainResponse();
-        this.request("DeleteAliasDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query DDoS attack events.
-     * @param {DescribeDDoSAttackEventRequest} req
-     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
-     * @public
-     */
-    DescribeDDoSAttackEvent(req, cb) {
-        let resp = new DescribeDDoSAttackEventResponse();
-        this.request("DescribeDDoSAttackEvent", req, resp, cb);
-    }
-
-    /**
-     * This API is used to bind a site to a plan.
-     * @param {BindZoneToPlanRequest} req
-     * @param {function(string, BindZoneToPlanResponse):void} cb
-     * @public
-     */
-    BindZoneToPlan(req, cb) {
-        let resp = new BindZoneToPlanResponse();
-        this.request("BindZoneToPlan", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create an acceleration domain name. 
-
-For sites connected via the CNAME, if you have not verified the ownership of the domain name, the ownership verification information of the domain name is returned. To verify your ownership of the domain name, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
-     * @param {CreateAccelerationDomainRequest} req
-     * @param {function(string, CreateAccelerationDomainResponse):void} cb
-     * @public
-     */
-    CreateAccelerationDomain(req, cb) {
-        let resp = new CreateAccelerationDomainResponse();
-        this.request("CreateAccelerationDomain", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the information of alias domain names.
      * @param {DescribeAliasDomainsRequest} req
      * @param {function(string, DescribeAliasDomainsResponse):void} cb
@@ -1045,146 +1341,14 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
-     * This API is used to modify an alias domain name.
-     * @param {ModifyAliasDomainRequest} req
-     * @param {function(string, ModifyAliasDomainResponse):void} cb
+     * This API is used to query billing data.
+     * @param {DescribeBillingDataRequest} req
+     * @param {function(string, DescribeBillingDataResponse):void} cb
      * @public
      */
-    ModifyAliasDomain(req, cb) {
-        let resp = new ModifyAliasDomainResponse();
-        this.request("ModifyAliasDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify an accelerated domain name.
-     * @param {ModifyAccelerationDomainRequest} req
-     * @param {function(string, ModifyAccelerationDomainResponse):void} cb
-     * @public
-     */
-    ModifyAccelerationDomain(req, cb) {
-        let resp = new ModifyAccelerationDomainResponse();
-        this.request("ModifyAccelerationDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a security IP group.
-     * @param {ModifySecurityIPGroupRequest} req
-     * @param {function(string, ModifySecurityIPGroupResponse):void} cb
-     * @public
-     */
-    ModifySecurityIPGroup(req, cb) {
-        let resp = new ModifySecurityIPGroupResponse();
-        this.request("ModifySecurityIPGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the rules in the rule engine.
-     * @param {DescribeRulesRequest} req
-     * @param {function(string, DescribeRulesResponse):void} cb
-     * @public
-     */
-    DescribeRules(req, cb) {
-        let resp = new DescribeRulesResponse();
-        this.request("DescribeRules", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create an application proxy.
-     * @param {CreateApplicationProxyRequest} req
-     * @param {function(string, CreateApplicationProxyResponse):void} cb
-     * @public
-     */
-    CreateApplicationProxy(req, cb) {
-        let resp = new CreateApplicationProxyResponse();
-        this.request("CreateApplicationProxy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain detailed information about a version in version management mode. The response includes the version ID, description, status, creation time, configuration group information, and the content of the version configuration file. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
-     * @param {DescribeConfigGroupVersionDetailRequest} req
-     * @param {function(string, DescribeConfigGroupVersionDetailResponse):void} cb
-     * @public
-     */
-    DescribeConfigGroupVersionDetail(req, cb) {
-        let resp = new DescribeConfigGroupVersionDetailResponse();
-        this.request("DescribeConfigGroupVersionDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the status of an application proxy.
-     * @param {ModifyApplicationProxyStatusRequest} req
-     * @param {function(string, ModifyApplicationProxyStatusResponse):void} cb
-     * @public
-     */
-    ModifyApplicationProxyStatus(req, cb) {
-        let resp = new ModifyApplicationProxyStatusResponse();
-        this.request("ModifyApplicationProxyStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to bind/unbind a domain name to/from a specific policy template. 
-     * @param {BindSecurityTemplateToEntityRequest} req
-     * @param {function(string, BindSecurityTemplateToEntityResponse):void} cb
-     * @public
-     */
-    BindSecurityTemplateToEntity(req, cb) {
-        let resp = new BindSecurityTemplateToEntityResponse();
-        this.request("BindSecurityTemplateToEntity", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the L7 data recorded over time.
-     * @param {DescribeTimingL7AnalysisDataRequest} req
-     * @param {function(string, DescribeTimingL7AnalysisDataResponse):void} cb
-     * @public
-     */
-    DescribeTimingL7AnalysisData(req, cb) {
-        let resp = new DescribeTimingL7AnalysisDataResponse();
-        this.request("DescribeTimingL7AnalysisData", req, resp, cb);
-    }
-
-    /**
-     * This API is used to release versions in version management mode. Users can deploy the version to either the testing environment or the production environment by specifying the EnvId parameter. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
-     * @param {DeployConfigGroupVersionRequest} req
-     * @param {function(string, DeployConfigGroupVersionResponse):void} cb
-     * @public
-     */
-    DeployConfigGroupVersion(req, cb) {
-        let resp = new DeployConfigGroupVersionResponse();
-        this.request("DeployConfigGroupVersion", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of application proxies.
-     * @param {DescribeApplicationProxiesRequest} req
-     * @param {function(string, DescribeApplicationProxiesResponse):void} cb
-     * @public
-     */
-    DescribeApplicationProxies(req, cb) {
-        let resp = new DescribeApplicationProxiesResponse();
-        this.request("DescribeApplicationProxies", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the status of an application proxy rule.
-     * @param {ModifyApplicationProxyRuleStatusRequest} req
-     * @param {function(string, ModifyApplicationProxyRuleStatusResponse):void} cb
-     * @public
-     */
-    ModifyApplicationProxyRuleStatus(req, cb) {
-        let resp = new ModifyApplicationProxyRuleStatusResponse();
-        this.request("ModifyApplicationProxyRuleStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to purchase a plan for a new site.
-     * @param {CreatePlanForZoneRequest} req
-     * @param {function(string, CreatePlanForZoneResponse):void} cb
-     * @public
-     */
-    CreatePlanForZone(req, cb) {
-        let resp = new CreatePlanForZoneResponse();
-        this.request("CreatePlanForZone", req, resp, cb);
+    DescribeBillingData(req, cb) {
+        let resp = new DescribeBillingDataResponse();
+        this.request("DescribeBillingData", req, resp, cb);
     }
 
 

@@ -1822,6 +1822,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RequestId = null;
 
+        /**
+         * The recognition results of ID card
+         * @type {CardInfo || null}
+         */
+        this.CardInfo = null;
+
     }
 
     /**
@@ -1851,6 +1857,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.CardInfoOcrJson = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.CardInfo) {
+            let obj = new CardInfo();
+            obj.deserialize(params.CardInfo)
+            this.CardInfo = obj;
+        }
 
     }
 }

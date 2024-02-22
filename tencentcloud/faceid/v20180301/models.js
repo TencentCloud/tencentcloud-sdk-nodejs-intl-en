@@ -1912,6 +1912,97 @@ class ApplyWebVerificationTokenRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class Address extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Nationality.
+         * @type {string || null}
+         */
+        this.Country = null;
+
+        /**
+         * Post code.
+         * @type {string || null}
+         */
+        this.PostalCode = null;
+
+        /**
+         * Subregion.
+         * @type {string || null}
+         */
+        this.Subdivision = null;
+
+        /**
+         * City.
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * Complete address.
+         * @type {string || null}
+         */
+        this.FormattedAddress = null;
+
+        /**
+         * The first line of address.
+         * @type {string || null}
+         */
+        this.LineOne = null;
+
+        /**
+         * The second line of address.
+         * @type {string || null}
+         */
+        this.LineTwo = null;
+
+        /**
+         * The third line of address.
+         * @type {string || null}
+         */
+        this.LineThree = null;
+
+        /**
+         * The fourth line of address.
+         * @type {string || null}
+         */
+        this.LineFour = null;
+
+        /**
+         * The fifth line of address.
+         * @type {string || null}
+         */
+        this.LineFive = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Country = 'Country' in params ? params.Country : null;
+        this.PostalCode = 'PostalCode' in params ? params.PostalCode : null;
+        this.Subdivision = 'Subdivision' in params ? params.Subdivision : null;
+        this.City = 'City' in params ? params.City : null;
+        this.FormattedAddress = 'FormattedAddress' in params ? params.FormattedAddress : null;
+        this.LineOne = 'LineOne' in params ? params.LineOne : null;
+        this.LineTwo = 'LineTwo' in params ? params.LineTwo : null;
+        this.LineThree = 'LineThree' in params ? params.LineThree : null;
+        this.LineFour = 'LineFour' in params ? params.LineFour : null;
+        this.LineFive = 'LineFive' in params ? params.LineFive : null;
+
+    }
+}
+
+/**
  * ApplyLivenessToken response structure.
  * @class
  */
@@ -2258,6 +2349,12 @@ class WebVerificationConfigIntl extends  AbstractModel {
         super();
 
         /**
+         * When starting verification, whether to skip the starting verification page. If true, enter the verification process directly. The default is false. This configuration will not take effect if the downgrade policy is triggered.
+         * @type {boolean || null}
+         */
+        this.AutoSkipStartPage = null;
+
+        /**
          * When the verification passed, whether to skip the result page and automatically jump to RedirectURL. The default value is false.
 Example value: false
          * @type {boolean || null}
@@ -2291,6 +2388,12 @@ Example: HKIDCard
          */
         this.IDCardType = null;
 
+        /**
+         * Whether to turn off document alarms, the default is false (the alarm detection function is turned on). When enabled, the identity authentication process will be intercepted based on the alarm status of the certificate. If you need to use the document authentication function, please contact us.
+         * @type {boolean || null}
+         */
+        this.DisableCheckOcrWarnings = null;
+
     }
 
     /**
@@ -2300,9 +2403,11 @@ Example: HKIDCard
         if (!params) {
             return;
         }
+        this.AutoSkipStartPage = 'AutoSkipStartPage' in params ? params.AutoSkipStartPage : null;
         this.AutoSkip = 'AutoSkip' in params ? params.AutoSkip : null;
         this.CheckMode = 'CheckMode' in params ? params.CheckMode : null;
         this.IDCardType = 'IDCardType' in params ? params.IDCardType : null;
+        this.DisableCheckOcrWarnings = 'DisableCheckOcrWarnings' in params ? params.DisableCheckOcrWarnings : null;
 
     }
 }
@@ -3183,9 +3288,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Gender on the license
-- M：male
-- F：female
-- X：other gender
+- M: male
+- F: female
+- X: other gender
 Note: This field may return null, indicating that no valid values can be obtained.
 Example: M
          * @type {string || null}
@@ -3228,6 +3333,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RegistrationNumber = null;
 
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Address || null}
+         */
+        this.Address = null;
+
     }
 
     /**
@@ -3255,6 +3367,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BirthPlace = 'BirthPlace' in params ? params.BirthPlace : null;
         this.Nationality = 'Nationality' in params ? params.Nationality : null;
         this.RegistrationNumber = 'RegistrationNumber' in params ? params.RegistrationNumber : null;
+
+        if (params.Address) {
+            let obj = new Address();
+            obj.deserialize(params.Address)
+            this.Address = obj;
+        }
 
     }
 }
@@ -3849,6 +3967,7 @@ module.exports = {
     VideoLivenessCompareResponse: VideoLivenessCompareResponse,
     CardVerifyResult: CardVerifyResult,
     ApplyWebVerificationTokenRequest: ApplyWebVerificationTokenRequest,
+    Address: Address,
     ApplyLivenessTokenResponse: ApplyLivenessTokenResponse,
     GetLivenessResultRequest: GetLivenessResultRequest,
     CardInfo: CardInfo,

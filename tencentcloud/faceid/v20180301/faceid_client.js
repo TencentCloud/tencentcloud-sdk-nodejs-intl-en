@@ -43,6 +43,7 @@ const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndC
 const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const CardVerifyResult = models.CardVerifyResult;
 const ApplyWebVerificationTokenRequest = models.ApplyWebVerificationTokenRequest;
+const Address = models.Address;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CardInfo = models.CardInfo;

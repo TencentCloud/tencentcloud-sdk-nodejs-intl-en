@@ -6,11 +6,7 @@ class CommonClient extends AbstractClient {
    * @inner
    */
   succRequest(resp, cb, data) {
-    if (data instanceof SSEResponseModel) {
-      cb(null, data);
-      return;
-    }
-    cb(null, JSON.stringify(data))
+    cb(null, data);
   }
 
   /**

@@ -24,6 +24,7 @@ const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
 const LivenessCompareResponse = models.LivenessCompareResponse;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
+const ApplyCardVerificationResponse = models.ApplyCardVerificationResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
@@ -45,7 +46,7 @@ const CardVerifyResult = models.CardVerifyResult;
 const ApplyWebVerificationTokenRequest = models.ApplyWebVerificationTokenRequest;
 const Address = models.Address;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
-const GetLivenessResultRequest = models.GetLivenessResultRequest;
+const GetCardVerificationResultRequest = models.GetCardVerificationResultRequest;
 const CardInfo = models.CardInfo;
 const PhilippinesVoteID = models.PhilippinesVoteID;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
@@ -59,15 +60,18 @@ const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse
 const FileInfo = models.FileInfo;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
+const GetCardVerificationResultResponse = models.GetCardVerificationResultResponse;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
-const PhilippinesUMID = models.PhilippinesUMID;
+const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 const GeneralCard = models.GeneralCard;
+const PhilippinesUMID = models.PhilippinesUMID;
 const PhilippinesTinID = models.PhilippinesTinID;
+const ApplyCardVerificationRequest = models.ApplyCardVerificationRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const OCRResult = models.OCRResult;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
-const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
+const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CompareResult = models.CompareResult;
 
 
@@ -81,6 +85,17 @@ class FaceidClient extends AbstractClient {
         super("faceid.tencentcloudapi.com", "2018-03-01", credential, region, profile);
     }
     
+    /**
+     * The interface supports obtaining the certificate authentication result based on the token.
+     * @param {GetCardVerificationResultRequest} req
+     * @param {function(string, GetCardVerificationResultResponse):void} cb
+     * @public
+     */
+    GetCardVerificationResult(req, cb) {
+        let resp = new GetCardVerificationResultResponse();
+        this.request("GetCardVerificationResult", req, resp, cb);
+    }
+
     /**
      * This API is used to apply for a token before calling the liveness detection service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
      * @param {ApplyLivenessTokenRequest} req
@@ -137,6 +152,17 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     GenerateReflectSequence(req, cb) {
         let resp = new GenerateReflectSequenceResponse();
         this.request("GenerateReflectSequence", req, resp, cb);
+    }
+
+    /**
+     * The types of national cards supported by the API and whether instructions on the back of the card are required are as follows:  <table> <thead> <tr> <td style="width:200px"Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Drving license</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Drving license</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Drving license</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Drving license</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Drving license</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Drving license</td> <td>No</td> </tr> </tbody> </table>
+     * @param {ApplyCardVerificationRequest} req
+     * @param {function(string, ApplyCardVerificationResponse):void} cb
+     * @public
+     */
+    ApplyCardVerification(req, cb) {
+        let resp = new ApplyCardVerificationResponse();
+        this.request("ApplyCardVerification", req, resp, cb);
     }
 
     /**

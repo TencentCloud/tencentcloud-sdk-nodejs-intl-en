@@ -505,6 +505,55 @@ class CreateUploadUrlResponse extends  AbstractModel {
 }
 
 /**
+ * ApplyCardVerification response structure.
+ * @class
+ */
+class ApplyCardVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+         * @type {string || null}
+         */
+        this.CardVerificationToken = null;
+
+        /**
+         * The maximum number of polls for calling the pull result interface polling.
+         * @type {number || null}
+         */
+        this.AsyncCardVerificationMaxPollingTimes = null;
+
+        /**
+         * The interval for polling when calling the pull result interface (in seconds).
+         * @type {number || null}
+         */
+        this.AsyncCardVerificationPollingWaitTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CardVerificationToken = 'CardVerificationToken' in params ? params.CardVerificationToken : null;
+        this.AsyncCardVerificationMaxPollingTimes = 'AsyncCardVerificationMaxPollingTimes' in params ? params.AsyncCardVerificationMaxPollingTimes : null;
+        this.AsyncCardVerificationPollingWaitTime = 'AsyncCardVerificationPollingWaitTime' in params ? params.AsyncCardVerificationPollingWaitTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetectReflectLivenessAndCompare request structure.
  * @class
  */
@@ -2038,18 +2087,18 @@ class ApplyLivenessTokenResponse extends  AbstractModel {
 }
 
 /**
- * GetLivenessResult request structure.
+ * GetCardVerificationResult request structure.
  * @class
  */
-class GetLivenessResultRequest extends  AbstractModel {
+class GetCardVerificationResultRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token used to identify an SDK-based verification process.
+         * The token used to identify an verification process. It can be used to get the verification result after the process is completed.
          * @type {string || null}
          */
-        this.SdkToken = null;
+        this.CardVerificationToken = null;
 
     }
 
@@ -2060,7 +2109,7 @@ class GetLivenessResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+        this.CardVerificationToken = 'CardVerificationToken' in params ? params.CardVerificationToken : null;
 
     }
 }
@@ -3075,6 +3124,100 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetCardVerificationResult response structure.
+ * @class
+ */
+class GetCardVerificationResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pass status. When Warning and Rejected are returned, please check the specific reasons in the WarnInfo structure return. Example values are as follows:
+Passed
+Warning
+Rejected
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Warning information returned by document verification.
+         * @type {Array.<string> || null}
+         */
+        this.WarnInfo = null;
+
+        /**
+         * Nationality code. Complies with standard ISO 3166-1 alpha-3. 
+
+Example value: IDN
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * Card Type. The supported options are:
+ID_CARD
+PASSPORT
+DRIVING_LICENSE
+AUTO
+
+Example value: ID_CARD
+         * @type {string || null}
+         */
+        this.CardType = null;
+
+        /**
+         * Subtype of the ID document.
+
+         * @type {string || null}
+         */
+        this.CardSubType = null;
+
+        /**
+         * Recognition results of the ID document.
+         * @type {CardInfo || null}
+         */
+        this.CardInfo = null;
+
+        /**
+         * The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+         * @type {string || null}
+         */
+        this.IDVerificationToken = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.WarnInfo = 'WarnInfo' in params ? params.WarnInfo : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.CardType = 'CardType' in params ? params.CardType : null;
+        this.CardSubType = 'CardSubType' in params ? params.CardSubType : null;
+
+        if (params.CardInfo) {
+            let obj = new CardInfo();
+            obj.deserialize(params.CardInfo)
+            this.CardInfo = obj;
+        }
+        this.IDVerificationToken = 'IDVerificationToken' in params ? params.IDVerificationToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GenerateReflectSequence response structure.
  * @class
  */
@@ -3117,61 +3260,18 @@ class GenerateReflectSequenceResponse extends  AbstractModel {
 }
 
 /**
- * Philippines UMID Card
+ * GetWebVerificationResultIntl request structure.
  * @class
  */
-class PhilippinesUMID extends  AbstractModel {
+class GetWebVerificationResultIntlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Surname
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
          * @type {string || null}
          */
-        this.Surname = null;
-
-        /**
-         * Middle Name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MiddleName = null;
-
-        /**
-         * First name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.GivenName = null;
-
-        /**
-         * Gender
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Birthday
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Address
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * CRN code
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CRN = null;
+        this.BizToken = null;
 
     }
 
@@ -3182,13 +3282,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Surname = 'Surname' in params ? params.Surname : null;
-        this.MiddleName = 'MiddleName' in params ? params.MiddleName : null;
-        this.GivenName = 'GivenName' in params ? params.GivenName : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.CRN = 'CRN' in params ? params.CRN : null;
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
 
     }
 }
@@ -3378,6 +3472,83 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Philippines UMID Card
+ * @class
+ */
+class PhilippinesUMID extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Surname
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Surname = null;
+
+        /**
+         * Middle Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * CRN code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CRN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Surname = 'Surname' in params ? params.Surname : null;
+        this.MiddleName = 'MiddleName' in params ? params.MiddleName : null;
+        this.GivenName = 'GivenName' in params ? params.GivenName : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.CRN = 'CRN' in params ? params.CRN : null;
+
+    }
+}
+
+/**
  * Philippines TinID Card
  * @class
  */
@@ -3434,6 +3605,81 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Address = 'Address' in params ? params.Address : null;
         this.Birthday = 'Birthday' in params ? params.Birthday : null;
         this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
+
+    }
+}
+
+/**
+ * ApplyCardVerification request structure.
+ * @class
+ */
+class ApplyCardVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Please select the country code of ID document.
+IDN: Indonesia
+HKG: Hong Kong
+THA: Thailand
+MYS: Malaysia
+SGP: Singapore
+JPN: Japan
+AUTO: Automatic Identification
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * Please select the type of ID document. The supported options are:
+ID_CARD
+PASSPORT
+DRIVING_LICENSE
+AUTO
+         * @type {string || null}
+         */
+        this.CardType = null;
+
+        /**
+         * Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
+The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+         * @type {string || null}
+         */
+        this.ImageBase64Front = null;
+
+        /**
+         * Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+         * @type {string || null}
+         */
+        this.ImageBase64Back = null;
+
+        /**
+         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+         * @type {string || null}
+         */
+        this.ImageUrlFront = null;
+
+        /**
+         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+         * @type {string || null}
+         */
+        this.ImageUrlBack = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.CardType = 'CardType' in params ? params.CardType : null;
+        this.ImageBase64Front = 'ImageBase64Front' in params ? params.ImageBase64Front : null;
+        this.ImageBase64Back = 'ImageBase64Back' in params ? params.ImageBase64Back : null;
+        this.ImageUrlFront = 'ImageUrlFront' in params ? params.ImageUrlFront : null;
+        this.ImageUrlBack = 'ImageUrlBack' in params ? params.ImageUrlBack : null;
 
     }
 }
@@ -3744,18 +3990,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetWebVerificationResultIntl request structure.
+ * GetLivenessResult request structure.
  * @class
  */
-class GetWebVerificationResultIntlRequest extends  AbstractModel {
+class GetLivenessResultRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
+         * The token used to identify an SDK-based verification process.
          * @type {string || null}
          */
-        this.BizToken = null;
+        this.SdkToken = null;
 
     }
 
@@ -3766,7 +4012,7 @@ class GetWebVerificationResultIntlRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
 
     }
 }
@@ -3948,6 +4194,7 @@ module.exports = {
     ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
     LivenessCompareResponse: LivenessCompareResponse,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
+    ApplyCardVerificationResponse: ApplyCardVerificationResponse,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
     GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
     VideoLivenessCompareRequest: VideoLivenessCompareRequest,
@@ -3969,7 +4216,7 @@ module.exports = {
     ApplyWebVerificationTokenRequest: ApplyWebVerificationTokenRequest,
     Address: Address,
     ApplyLivenessTokenResponse: ApplyLivenessTokenResponse,
-    GetLivenessResultRequest: GetLivenessResultRequest,
+    GetCardVerificationResultRequest: GetCardVerificationResultRequest,
     CardInfo: CardInfo,
     PhilippinesVoteID: PhilippinesVoteID,
     WebVerificationConfigIntl: WebVerificationConfigIntl,
@@ -3983,15 +4230,18 @@ module.exports = {
     FileInfo: FileInfo,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
     PhilippinesDrivingLicense: PhilippinesDrivingLicense,
+    GetCardVerificationResultResponse: GetCardVerificationResultResponse,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
-    PhilippinesUMID: PhilippinesUMID,
+    GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
     GeneralCard: GeneralCard,
+    PhilippinesUMID: PhilippinesUMID,
     PhilippinesTinID: PhilippinesTinID,
+    ApplyCardVerificationRequest: ApplyCardVerificationRequest,
     LivenessCompareRequest: LivenessCompareRequest,
     MLIDCard: MLIDCard,
     OCRResult: OCRResult,
     GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
-    GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
+    GetLivenessResultRequest: GetLivenessResultRequest,
     CompareResult: CompareResult,
 
 }

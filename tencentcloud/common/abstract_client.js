@@ -55,6 +55,10 @@ class AbstractClient {
      * @inner
      */
     succRequest(resp, cb, data) {
+        if (data instanceof SSEResponseModel) {
+            cb(null, data);
+            return;
+        }
         resp.deserialize(data);
         cb(null, resp);
     }

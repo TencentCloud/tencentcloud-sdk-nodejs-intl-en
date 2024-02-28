@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
 const ModifyLaunchConfigurationAttributesRequest = models.ModifyLaunchConfigurationAttributesRequest;
 const DisableAutoScalingGroupRequest = models.DisableAutoScalingGroupRequest;
+const DescribeRefreshActivitiesResponse = models.DescribeRefreshActivitiesResponse;
 const ModifyAutoScalingGroupRequest = models.ModifyAutoScalingGroupRequest;
 const ScaleOutInstancesRequest = models.ScaleOutInstancesRequest;
 const AutoScalingNotification = models.AutoScalingNotification;
@@ -33,6 +34,7 @@ const CreateLifecycleHookResponse = models.CreateLifecycleHookResponse;
 const ClearLaunchConfigurationAttributesResponse = models.ClearLaunchConfigurationAttributesResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
 const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
+const ExitStandbyRequest = models.ExitStandbyRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
@@ -48,6 +50,7 @@ const StartAutoScalingInstancesResponse = models.StartAutoScalingInstancesRespon
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
 const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
+const DescribeRefreshActivitiesRequest = models.DescribeRefreshActivitiesRequest;
 const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurationsResponse;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
@@ -57,16 +60,19 @@ const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesR
 const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const ModifyScalingPolicyResponse = models.ModifyScalingPolicyResponse;
+const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
 const SetInstancesProtectionRequest = models.SetInstancesProtectionRequest;
 const DeleteNotificationConfigurationResponse = models.DeleteNotificationConfigurationResponse;
 const DetachInstancesResponse = models.DetachInstancesResponse;
+const RollingUpdateSettings = models.RollingUpdateSettings;
 const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
 const AttachInstancesResponse = models.AttachInstancesResponse;
 const DescribeAutoScalingGroupLastActivitiesResponse = models.DescribeAutoScalingGroupLastActivitiesResponse;
 const DescribeAccountLimitsRequest = models.DescribeAccountLimitsRequest;
-const UpgradeLifecycleHookRequest = models.UpgradeLifecycleHookRequest;
+const ScaleInInstancesResponse = models.ScaleInInstancesResponse;
+const CancelInstanceRefreshRequest = models.CancelInstanceRefreshRequest;
 const DetachLoadBalancersResponse = models.DetachLoadBalancersResponse;
 const ScalingPolicy = models.ScalingPolicy;
 const DescribeAutoScalingGroupLastActivitiesRequest = models.DescribeAutoScalingGroupLastActivitiesRequest;
@@ -74,13 +80,15 @@ const HostNameSettings = models.HostNameSettings;
 const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
 const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
+const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
 const ModifyLoadBalancerTargetAttributesResponse = models.ModifyLoadBalancerTargetAttributesResponse;
 const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
-const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
+const ExitStandbyResponse = models.ExitStandbyResponse;
 const InvocationResult = models.InvocationResult;
 const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
+const RefreshBatch = models.RefreshBatch;
 const UpgradeLifecycleHookResponse = models.UpgradeLifecycleHookResponse;
 const InstanceTag = models.InstanceTag;
 const ModifyLifecycleHookResponse = models.ModifyLifecycleHookResponse;
@@ -92,6 +100,7 @@ const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationReque
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
 const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const DataDisk = models.DataDisk;
+const RollbackInstanceRefreshResponse = models.RollbackInstanceRefreshResponse;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const LoginSettings = models.LoginSettings;
 const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
@@ -104,15 +113,18 @@ const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationRespon
 const IPv6InternetAccessible = models.IPv6InternetAccessible;
 const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const RefreshBatchRelatedInstance = models.RefreshBatchRelatedInstance;
 const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;
 const DescribeAutoScalingActivitiesRequest = models.DescribeAutoScalingActivitiesRequest;
 const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
 const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
+const StartInstanceRefreshResponse = models.StartInstanceRefreshResponse;
 const CreateLifecycleHookRequest = models.CreateLifecycleHookRequest;
 const ScheduledAction = models.ScheduledAction;
 const ModifyLifecycleHookRequest = models.ModifyLifecycleHookRequest;
 const CompleteLifecycleActionResponse = models.CompleteLifecycleActionResponse;
 const ScaleOutInstancesResponse = models.ScaleOutInstancesResponse;
+const RefreshSettings = models.RefreshSettings;
 const Filter = models.Filter;
 const DescribeLifecycleHooksRequest = models.DescribeLifecycleHooksRequest;
 const ServiceSettings = models.ServiceSettings;
@@ -122,34 +134,42 @@ const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigu
 const LimitedLoginSettings = models.LimitedLoginSettings;
 const DescribeLifecycleHooksResponse = models.DescribeLifecycleHooksResponse;
 const CreateScalingPolicyRequest = models.CreateScalingPolicyRequest;
-const ScaleInInstancesResponse = models.ScaleInInstancesResponse;
+const ResumeInstanceRefreshRequest = models.ResumeInstanceRefreshRequest;
 const DescribeAutoScalingAdvicesRequest = models.DescribeAutoScalingAdvicesRequest;
 const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigurationRequest;
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
 const ModifyLoadBalancerTargetAttributesRequest = models.ModifyLoadBalancerTargetAttributesRequest;
+const RollbackInstanceRefreshRequest = models.RollbackInstanceRefreshRequest;
+const StartInstanceRefreshRequest = models.StartInstanceRefreshRequest;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
 const LifecycleActionResultInfo = models.LifecycleActionResultInfo;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
 const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
+const StopInstanceRefreshRequest = models.StopInstanceRefreshRequest;
 const MetricAlarm = models.MetricAlarm;
+const RefreshActivity = models.RefreshActivity;
 const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
 const ScaleInInstancesRequest = models.ScaleInInstancesRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
+const InstanceNameIndexSettings = models.InstanceNameIndexSettings;
 const ForwardLoadBalancerIdentification = models.ForwardLoadBalancerIdentification;
 const AutoScalingAdvice = models.AutoScalingAdvice;
 const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
+const StopInstanceRefreshResponse = models.StopInstanceRefreshResponse;
 const AttachLoadBalancersRequest = models.AttachLoadBalancersRequest;
 const SpotMixedAllocationPolicy = models.SpotMixedAllocationPolicy;
+const UpgradeLifecycleHookRequest = models.UpgradeLifecycleHookRequest;
+const ResumeInstanceRefreshResponse = models.ResumeInstanceRefreshResponse;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const StopAutoScalingInstancesRequest = models.StopAutoScalingInstancesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
+const CancelInstanceRefreshResponse = models.CancelInstanceRefreshResponse;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const InternetAccessible = models.InternetAccessible;
@@ -170,6 +190,19 @@ class AsClient extends AbstractClient {
         super("as.tencentcloudapi.com", "2018-04-19", credential, region, profile);
     }
     
+    /**
+     * This API is used to pause the ongoing instance refresh activity.
+* In the paused status, the scaling group will also be disabled.
+* Instances that are currently being updated will not be paused, instances pending updates will have their updates paused.
+     * @param {StopInstanceRefreshRequest} req
+     * @param {function(string, StopInstanceRefreshResponse):void} cb
+     * @public
+     */
+    StopInstanceRefresh(req, cb) {
+        let resp = new StopInstanceRefreshResponse();
+        this.request("StopInstanceRefresh", req, resp, cb);
+    }
+
     /**
      * This API is used to execute a scaling policy.
 
@@ -205,6 +238,22 @@ class AsClient extends AbstractClient {
     ClearLaunchConfigurationAttributes(req, cb) {
         let resp = new ClearLaunchConfigurationAttributesResponse();
         this.request("ClearLaunchConfigurationAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to refresh running CVM instances in the scaling group and return the RefreshActivityId for the instance refresh activity based on parameters in the launch configuration.
+* For refresh methods involving reinstallation (currently only reinstallation is supported), during reinstallation, only the ImageId, UserData, EnhancedService, HostName, and LoginSettings parameters will be fetched from the launch configuration for refreshing; other parameters of the instance will not be refreshed.
+* During the instance refresh process (including paused status), the scaling group will be disabled. It is not recommended to modify the associated launch configuration during a refresh, as this may impact the refresh parameters, leading to inconsistent instance configurations.
+* In rolling update mode, instance refreshes are performed in multiple batches. If there are failed refreshes within a batch, the activity will enter a failed paused status.
+* Instances pending refresh that are removed or destroyed will be marked as NOT_FOUND status, but they will not block the instance refresh activity.
+* Even if a running instance has parameters consistent with the latest launch configuration, it can still undergo another refresh.
+     * @param {StartInstanceRefreshRequest} req
+     * @param {function(string, StartInstanceRefreshResponse):void} cb
+     * @public
+     */
+    StartInstanceRefresh(req, cb) {
+        let resp = new StartInstanceRefreshResponse();
+        this.request("StartInstanceRefresh", req, resp, cb);
     }
 
     /**
@@ -271,6 +320,19 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
+     * This API is used to exit instances from the standby status in the scaling group.
+* When an instance is in standby status, its load balancer weight is set to 0. Upon exiting the standby status, the weight value automatically gets restored.
+* Initiating power-on/power-off actions on instances that are in standby status also results in them exiting from the standby status.
+     * @param {ExitStandbyRequest} req
+     * @param {function(string, ExitStandbyResponse):void} cb
+     * @public
+     */
+    ExitStandby(req, cb) {
+        let resp = new ExitStandbyResponse();
+        this.request("ExitStandby", req, resp, cb);
+    }
+
+    /**
      * This API is used to start up CVM instances in a scaling group.
 * After startup, the instance will be in the `IN_SERVICE` status, which will increase the desired capacity. Please note that the desired capacity cannot exceed the maximum value.
 * This API supports batch operation. Up to 100 instances can be started up in each request.
@@ -284,10 +346,12 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
-     * This API is used to upgrade a launch configuration.
+     * 已有替代接口ModifyLaunchConfiguration。该接口存在覆盖参数风险，目前官网已隐藏
 
-* This API is used to upgrade a launch configuration in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
-* After the launch configuration is upgraded, the existing instances that have been created by it will not be changed, but new instances will be created according to the new configuration.
+There is a replacement API: ModifyLaunchConfiguration. This API carries the risk of parameter overwriting, and it has currently been hidden on the official website.
+This API (UpgradeLaunchConfiguration) is used to upgrade the launch configuration.
+* This API is used to upgrade the launch configuration, adopting an "entirely overwrite" approach. Regardless of previous parameter settings, they will be uniformly replaced with new configurations as specified in the interface parameters. For non-mandatory fields, if not filled in, default values will be assigned.
+* After upgrading and modifying the launch configuration, existing instances that have been scaled out using this configuration will not undergo any changes. Subsequently, newly added instances using this upgraded launch configuration will be scaled out according to the new configuration.
      * @param {UpgradeLaunchConfigurationRequest} req
      * @param {function(string, UpgradeLaunchConfigurationResponse):void} cb
      * @public
@@ -295,6 +359,17 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     UpgradeLaunchConfiguration(req, cb) {
         let resp = new UpgradeLaunchConfigurationResponse();
         this.request("UpgradeLaunchConfiguration", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeRefreshActivities) is used to query the instance refresh activity records of a scaling group.
+     * @param {DescribeRefreshActivitiesRequest} req
+     * @param {function(string, DescribeRefreshActivitiesResponse):void} cb
+     * @public
+     */
+    DescribeRefreshActivities(req, cb) {
+        let resp = new DescribeRefreshActivitiesResponse();
+        this.request("DescribeRefreshActivities", req, resp, cb);
     }
 
     /**
@@ -409,6 +484,18 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
+     * This API is used to enable scale-in protection for an instance.
+When scale-in protection is enabled, the instance will not be removed in scale-in activities triggered by replacement of unhealthy instances, alarm threshold reached, change of desired quantity, etc.
+     * @param {SetInstancesProtectionRequest} req
+     * @param {function(string, SetInstancesProtectionResponse):void} cb
+     * @public
+     */
+    SetInstancesProtection(req, cb) {
+        let resp = new SetInstancesProtectionResponse();
+        this.request("SetInstancesProtection", req, resp, cb);
+    }
+
+    /**
      * This API is used to query suggestions for scaling group configurations.
      * @param {DescribeAutoScalingAdvicesRequest} req
      * @param {function(string, DescribeAutoScalingAdvicesResponse):void} cb
@@ -484,15 +571,18 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
-     * This API is used to enable scale-in protection for an instance.
-When scale-in protection is enabled, the instance will not be removed in scale-in activities triggered by replacement of unhealthy instances, alarm threshold reached, change of desired quantity, etc.
-     * @param {SetInstancesProtectionRequest} req
-     * @param {function(string, SetInstancesProtectionResponse):void} cb
+     * This API is used to generate a new instance refresh activity, which also supports batched refreshing and operations such as pausing, resuming, and canceling. The interface returns the RefreshActivityId for the rollback activity.
+* Instances pending refresh in the original activity are updated to a canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
+* Instances that were being refreshed in the original activity will not be immediately terminated; instead, the rollback activity will be executed after their refresh has been completed.
+* Rollback is supported for activities that are in a paused status or those with the most recent successful refresh; it is not supported for activities in other statuses.
+* When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically restore to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be retrieved from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+     * @param {RollbackInstanceRefreshRequest} req
+     * @param {function(string, RollbackInstanceRefreshResponse):void} cb
      * @public
      */
-    SetInstancesProtection(req, cb) {
-        let resp = new SetInstancesProtectionResponse();
-        this.request("SetInstancesProtection", req, resp, cb);
+    RollbackInstanceRefresh(req, cb) {
+        let resp = new RollbackInstanceRefreshResponse();
+        this.request("RollbackInstanceRefresh", req, resp, cb);
     }
 
     /**
@@ -827,6 +917,31 @@ If you configured a notification, Auto Scaling will notify the TDMQ queue of the
     DeleteNotificationConfiguration(req, cb) {
         let resp = new DeleteNotificationConfigurationResponse();
         this.request("DeleteNotificationConfiguration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this interface is ineffective when the activity is not in a paused status.
+     * @param {ResumeInstanceRefreshRequest} req
+     * @param {function(string, ResumeInstanceRefreshResponse):void} cb
+     * @public
+     */
+    ResumeInstanceRefresh(req, cb) {
+        let resp = new ResumeInstanceRefreshResponse();
+        this.request("ResumeInstanceRefresh", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel the instance refresh activity of the scaling group.
+* Batches that have already been refreshed or are currently being refreshed remain unaffected; batches pending refresh will be canceled.
+* If a refresh fails, the affected instances will remain in the standby status and require manual intervention by the user to either attempt to exit the standby status or destroy the instances.
+* Rollback operations are not allowed after cancellation, and resuming is also unsupported.
+     * @param {CancelInstanceRefreshRequest} req
+     * @param {function(string, CancelInstanceRefreshResponse):void} cb
+     * @public
+     */
+    CancelInstanceRefresh(req, cb) {
+        let resp = new CancelInstanceRefreshResponse();
+        this.request("CancelInstanceRefresh", req, resp, cb);
     }
 
     /**

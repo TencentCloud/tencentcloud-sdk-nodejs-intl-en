@@ -943,10 +943,10 @@ class RenewInstanceResponse extends  AbstractModel {
 }
 
 /**
- * CreateCustomAccount request structure.
+ * CreateImmutableTagRules request structure.
  * @class
  */
-class CreateCustomAccountRequest extends  AbstractModel {
+class CreateImmutableTagRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -957,40 +957,16 @@ class CreateCustomAccountRequest extends  AbstractModel {
         this.RegistryId = null;
 
         /**
-         * Custom account name
+         * Namespace
          * @type {string || null}
          */
-        this.Name = null;
+        this.NamespaceName = null;
 
         /**
-         * Policy list
-         * @type {Array.<Permission> || null}
+         * Rule
+         * @type {ImmutableTagRule || null}
          */
-        this.Permissions = null;
-
-        /**
-         * Custom account description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Expiry time of the custom account (timestamp, in milliseconds)
-         * @type {number || null}
-         */
-        this.ExpiresAt = null;
-
-        /**
-         * Whether to disable the custom account
-         * @type {boolean || null}
-         */
-        this.Disable = null;
+        this.Rule = null;
 
     }
 
@@ -1002,98 +978,13 @@ class CreateCustomAccountRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
 
-        if (params.Permissions) {
-            this.Permissions = new Array();
-            for (let z in params.Permissions) {
-                let obj = new Permission();
-                obj.deserialize(params.Permissions[z]);
-                this.Permissions.push(obj);
-            }
+        if (params.Rule) {
+            let obj = new ImmutableTagRule();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
         }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.ExpiresAt = 'ExpiresAt' in params ? params.ExpiresAt : null;
-        this.Disable = 'Disable' in params ? params.Disable : null;
-
-    }
-}
-
-/**
- * CreateServiceAccount request structure.
- * @class
- */
-class CreateServiceAccountRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * Service account name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Policy list
-         * @type {Array.<Permission> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * Service account description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Expiry time (timestamp, in milliseconds)
-         * @type {number || null}
-         */
-        this.ExpiresAt = null;
-
-        /**
-         * Whether to disable the service account
-         * @type {boolean || null}
-         */
-        this.Disable = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.Permissions) {
-            this.Permissions = new Array();
-            for (let z in params.Permissions) {
-                let obj = new Permission();
-                obj.deserialize(params.Permissions[z]);
-                this.Permissions.push(obj);
-            }
-        }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.ExpiresAt = 'ExpiresAt' in params ? params.ExpiresAt : null;
-        this.Disable = 'Disable' in params ? params.Disable : null;
 
     }
 }
@@ -1783,7 +1674,7 @@ class DescribeServiceAccountsRequest extends  AbstractModel {
         this.All = null;
 
         /**
-         * Whether to fill in permission information
+         * Whether to fill in permission information.
          * @type {boolean || null}
          */
         this.EmbedPermission = null;
@@ -1890,30 +1781,24 @@ class DeleteRepositoryResponse extends  AbstractModel {
 }
 
 /**
- * CreateImmutableTagRules request structure.
+ * DescribeInstanceAllNamespaces request structure.
  * @class
  */
-class CreateImmutableTagRulesRequest extends  AbstractModel {
+class DescribeInstanceAllNamespacesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Number of entries per page
+         * @type {number || null}
          */
-        this.RegistryId = null;
+        this.Limit = null;
 
         /**
-         * Namespace
-         * @type {string || null}
+         * Start position offset
+         * @type {number || null}
          */
-        this.NamespaceName = null;
-
-        /**
-         * Rule
-         * @type {ImmutableTagRule || null}
-         */
-        this.Rule = null;
+        this.Offset = null;
 
     }
 
@@ -1924,14 +1809,8 @@ class CreateImmutableTagRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-
-        if (params.Rule) {
-            let obj = new ImmutableTagRule();
-            obj.deserialize(params.Rule)
-            this.Rule = obj;
-        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2326,13 +2205,13 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Cloud tag key
+         * Cloud tag key.Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Cloud tag value
+         * Cloud tag value.Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -2566,77 +2445,6 @@ class CreateTagRetentionRuleRequest extends  AbstractModel {
         }
         this.CronSetting = 'CronSetting' in params ? params.CronSetting : null;
         this.Disabled = 'Disabled' in params ? params.Disabled : null;
-
-    }
-}
-
-/**
- * DescribeCustomAccounts request structure.
- * @class
- */
-class DescribeCustomAccountsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * All custom accounts
-         * @type {boolean || null}
-         */
-        this.All = null;
-
-        /**
-         * Whether to enter the policy
-         * @type {boolean || null}
-         */
-        this.EmbedPermission = null;
-
-        /**
-         * Filters
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Offset. Default value: `0`
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of output entries. Default value: `20`. Maximum value: 100`.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.All = 'All' in params ? params.All : null;
-        this.EmbedPermission = 'EmbedPermission' in params ? params.EmbedPermission : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2975,8 +2783,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Resource = null;
 
         /**
-         * Action. Valid values: `tcr:PushRepository`, `tcr:PullRepository`
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Actions. Currently only support: tcr:PushRepository, tcr:PullRepository, tcr:CreateRepository, tcr:CreateHelmChart, tcr:DescribeHelmCharts.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.Actions = null;
@@ -3419,10 +3227,10 @@ class DeleteNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * CreateWebhookTrigger request structure.
+ * CreateSignature request structure.
  * @class
  */
-class CreateWebhookTriggerRequest extends  AbstractModel {
+class CreateSignatureRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3433,16 +3241,22 @@ class CreateWebhookTriggerRequest extends  AbstractModel {
         this.RegistryId = null;
 
         /**
-         * Trigger parameter
-         * @type {WebhookTrigger || null}
-         */
-        this.Trigger = null;
-
-        /**
-         * Namespace
+         * Namespace name
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.NamespaceName = null;
+
+        /**
+         * Repository name
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
+        /**
+         * Tag name
+         * @type {string || null}
+         */
+        this.ImageVersion = null;
 
     }
 
@@ -3454,13 +3268,9 @@ class CreateWebhookTriggerRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-
-        if (params.Trigger) {
-            let obj = new WebhookTrigger();
-            obj.deserialize(params.Trigger)
-            this.Trigger = obj;
-        }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
 
     }
 }
@@ -3754,10 +3564,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CreateSignature request structure.
+ * DescribeWebhookTriggerLog request structure.
  * @class
  */
-class CreateSignatureRequest extends  AbstractModel {
+class DescribeWebhookTriggerLogRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3768,22 +3578,28 @@ class CreateSignatureRequest extends  AbstractModel {
         this.RegistryId = null;
 
         /**
-         * Namespace name
+         * Namespace
          * @type {string || null}
          */
-        this.NamespaceName = null;
+        this.Namespace = null;
 
         /**
-         * Repository name
-         * @type {string || null}
+         * Trigger ID
+         * @type {number || null}
          */
-        this.RepositoryName = null;
+        this.Id = null;
 
         /**
-         * Tag name
-         * @type {string || null}
+         * Number of entries per page
+         * @type {number || null}
          */
-        this.ImageVersion = null;
+        this.Limit = null;
+
+        /**
+         * Pagination offset
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -3795,9 +3611,10 @@ class CreateSignatureRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
-        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3949,18 +3766,32 @@ class DeleteMultipleSecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
- * DeleteSecurityPolicy response structure.
+ * DescribeImmutableTagRules response structure.
  * @class
  */
-class DeleteSecurityPolicyResponse extends  AbstractModel {
+class DescribeImmutableTagRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Rule list
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<ImmutableTagRule> || null}
          */
-        this.RegistryId = null;
+        this.Rules = null;
+
+        /**
+         * Namespace with no rules created
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EmptyNs = null;
+
+        /**
+         * Total rules
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3977,7 +3808,17 @@ class DeleteSecurityPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new ImmutableTagRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.EmptyNs = 'EmptyNs' in params ? params.EmptyNs : null;
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4290,51 +4131,6 @@ Note: this field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * Cloud tag
- * @class
- */
-class TagSpecification extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Default value: instance.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ResourceType = null;
-
-        /**
-         * Cloud tag array
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * ModifyInstance response structure.
  * @class
  */
@@ -4489,6 +4285,55 @@ class DescribeImageAccelerateServiceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyServiceAccountPassword request structure.
+ * @class
+ */
+class ModifyServiceAccountPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Service level account name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Whether to randomly generate a password.
+         * @type {boolean || null}
+         */
+        this.Random = null;
+
+        /**
+         * Service level account password, 8 to 20 characters, contains at least one uppercase letter, one lowercase letter, and one number.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Random = 'Random' in params ? params.Random : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
  * DescribeReplicationInstances request structure.
  * @class
  */
@@ -4596,6 +4441,84 @@ class DeleteSignaturePolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateServiceAccount request structure.
+ * @class
+ */
+class CreateServiceAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Service account name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Policy list
+         * @type {Array.<Permission> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * Service account description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Expiry time (timestamp, in milliseconds)
+         * @type {number || null}
+         */
+        this.ExpiresAt = null;
+
+        /**
+         * Whether to disable the service account
+         * @type {boolean || null}
+         */
+        this.Disable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Permissions) {
+            this.Permissions = new Array();
+            for (let z in params.Permissions) {
+                let obj = new Permission();
+                obj.deserialize(params.Permissions[z]);
+                this.Permissions.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ExpiresAt = 'ExpiresAt' in params ? params.ExpiresAt : null;
+        this.Disable = 'Disable' in params ? params.Disable : null;
 
     }
 }
@@ -4769,54 +4692,26 @@ class RegistryChargePrepaid extends  AbstractModel {
 }
 
 /**
- * ModifyCustomAccount request structure.
+ * Cloud tag
  * @class
  */
-class ModifyCustomAccountRequest extends  AbstractModel {
+class TagSpecification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Default value: instance.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RegistryId = null;
+        this.ResourceType = null;
 
         /**
-         * Custom account name
-         * @type {string || null}
+         * Cloud tag array
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
          */
-        this.Name = null;
-
-        /**
-         * Custom account description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Expiry time of the custom account (timestamp)
-         * @type {number || null}
-         */
-        this.ExpiresAt = null;
-
-        /**
-         * Whether to disable the custom account
-         * @type {boolean || null}
-         */
-        this.Disable = null;
-
-        /**
-         * Policy list
-         * @type {Array.<Permission> || null}
-         */
-        this.Permissions = null;
+        this.Tags = null;
 
     }
 
@@ -4827,19 +4722,14 @@ class ModifyCustomAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.ExpiresAt = 'ExpiresAt' in params ? params.ExpiresAt : null;
-        this.Disable = 'Disable' in params ? params.Disable : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
 
-        if (params.Permissions) {
-            this.Permissions = new Array();
-            for (let z in params.Permissions) {
-                let obj = new Permission();
-                obj.deserialize(params.Permissions[z]);
-                this.Permissions.push(obj);
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -5403,6 +5293,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RenewFlag = null;
 
+        /**
+         * Whether to enable instance deletion protection. false indicates it is not enabled.
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
+
     }
 
     /**
@@ -5432,6 +5328,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExpiredAt = 'ExpiredAt' in params ? params.ExpiredAt : null;
         this.PayMod = 'PayMod' in params ? params.PayMod : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }
@@ -5481,85 +5378,6 @@ class DescribeChartDownloadInfoRequest extends  AbstractModel {
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.ChartName = 'ChartName' in params ? params.ChartName : null;
         this.ChartVersion = 'ChartVersion' in params ? params.ChartVersion : null;
-
-    }
-}
-
-/**
- * DescribeCustomAccounts response structure.
- * @class
- */
-class DescribeCustomAccountsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of custom accounts
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<CustomAccount> || null}
-         */
-        this.CustomAccounts = null;
-
-        /**
-         * Number of custom accounts
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CustomAccounts) {
-            this.CustomAccounts = new Array();
-            for (let z in params.CustomAccounts) {
-                let obj = new CustomAccount();
-                obj.deserialize(params.CustomAccounts[z]);
-                this.CustomAccounts.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyCustomAccount response structure.
- * @class
- */
-class ModifyCustomAccountResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5919,66 +5737,10 @@ class RetentionExecution extends  AbstractModel {
 }
 
 /**
- * DescribeWebhookTriggerLog request structure.
+ * DuplicateImage response structure.
  * @class
  */
-class DescribeWebhookTriggerLogRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * Trigger ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Number of entries per page
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pagination offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * ManageReplication response structure.
- * @class
- */
-class ManageReplicationResponse extends  AbstractModel {
+class DuplicateImageResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6459,61 +6221,30 @@ class CreateSecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
- * Custom account
+ * CreateWebhookTrigger request structure.
  * @class
  */
-class CustomAccount extends  AbstractModel {
+class CreateWebhookTriggerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Custom account name
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Instance ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.RegistryId = null;
 
         /**
-         * Description
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Trigger parameter
+         * @type {WebhookTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * Namespace
          * @type {string || null}
          */
-        this.Description = null;
-
-        /**
-         * Whether to disable
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Disable = null;
-
-        /**
-         * Expiry time
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ExpiresAt = null;
-
-        /**
-         * Creation time
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Policy
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<Permission> || null}
-         */
-        this.Permissions = null;
+        this.Namespace = null;
 
     }
 
@@ -6524,21 +6255,14 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Disable = 'Disable' in params ? params.Disable : null;
-        this.ExpiresAt = 'ExpiresAt' in params ? params.ExpiresAt : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
 
-        if (params.Permissions) {
-            this.Permissions = new Array();
-            for (let z in params.Permissions) {
-                let obj = new Permission();
-                obj.deserialize(params.Permissions[z]);
-                this.Permissions.push(obj);
-            }
+        if (params.Trigger) {
+            let obj = new WebhookTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
         }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -6888,75 +6612,6 @@ class CreateInstanceCustomizedDomainRequest extends  AbstractModel {
 }
 
 /**
- * Synchronization log
- * @class
- */
-class ReplicationLog extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Resource type
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ResourceType = null;
-
-        /**
-         * Path of the source resource
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Source = null;
-
-        /**
-         * Path of the destination resource
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Destination = null;
-
-        /**
-         * Synchronization status
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Start time
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.Source = 'Source' in params ? params.Source : null;
-        this.Destination = 'Destination' in params ? params.Destination : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
  * CreateTagRetentionExecution response structure.
  * @class
  */
@@ -7154,32 +6809,18 @@ class ManageExternalEndpointResponse extends  AbstractModel {
 }
 
 /**
- * DescribeImmutableTagRules response structure.
+ * DeleteSecurityPolicy response structure.
  * @class
  */
-class DescribeImmutableTagRulesResponse extends  AbstractModel {
+class DeleteSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule list
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<ImmutableTagRule> || null}
+         * Instance ID
+         * @type {string || null}
          */
-        this.Rules = null;
-
-        /**
-         * Namespace with no rules created
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.EmptyNs = null;
-
-        /**
-         * Total rules
-         * @type {number || null}
-         */
-        this.Total = null;
+        this.RegistryId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7196,17 +6837,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new ImmutableTagRule();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-        this.EmptyNs = 'EmptyNs' in params ? params.EmptyNs : null;
-        this.Total = 'Total' in params ? params.Total : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7242,62 +6873,6 @@ class CreateReplicationInstanceResponse extends  AbstractModel {
             return;
         }
         this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateCustomAccount response structure.
- * @class
- */
-class CreateCustomAccountResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Custom username (the prefix `tcr$` is automatically added)
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Custom password, which is displayed only once
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Custom expiry time (timestamp)
-         * @type {number || null}
-         */
-        this.ExpiresAt = null;
-
-        /**
-         * Custom account creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.ExpiresAt = 'ExpiresAt' in params ? params.ExpiresAt : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7361,7 +6936,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.ServiceAccounts = null;
 
         /**
-         * Number of service accounts
+         * Number of service level accounts.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7740,34 +7315,6 @@ class DeleteImageResponse extends  AbstractModel {
 }
 
 /**
- * DeleteCustomAccount response structure.
- * @class
- */
-class DeleteCustomAccountResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeImageAccelerateService request structure.
  * @class
  */
@@ -8036,41 +7583,6 @@ class CheckInstanceNameRequest extends  AbstractModel {
             return;
         }
         this.RegistryName = 'RegistryName' in params ? params.RegistryName : null;
-
-    }
-}
-
-/**
- * DescribeInstanceAllNamespaces request structure.
- * @class
- */
-class DescribeInstanceAllNamespacesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of entries per page
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Start position offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -8659,6 +8171,83 @@ class DeleteImageRequest extends  AbstractModel {
 }
 
 /**
+ * DuplicateImage request structure.
+ * @class
+ */
+class DuplicateImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * Source namespace name.
+         * @type {string || null}
+         */
+        this.SourceNamespace = null;
+
+        /**
+         * Source image repository name.
+         * @type {string || null}
+         */
+        this.SourceRepo = null;
+
+        /**
+         * Source image tag or digest value. Currently, only tag is supported.
+         * @type {string || null}
+         */
+        this.SourceReference = null;
+
+        /**
+         * Destination image version.
+         * @type {string || null}
+         */
+        this.DestinationTag = null;
+
+        /**
+         * Destination namespace. Defaults to the same as the source if not filled.
+         * @type {string || null}
+         */
+        this.DestinationNamespace = null;
+
+        /**
+         * Destination image repository. Defaults to the same as the source if not filled.
+         * @type {string || null}
+         */
+        this.DestinationRepo = null;
+
+        /**
+         * Whether to overwrite.
+         * @type {boolean || null}
+         */
+        this.Override = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.SourceNamespace = 'SourceNamespace' in params ? params.SourceNamespace : null;
+        this.SourceRepo = 'SourceRepo' in params ? params.SourceRepo : null;
+        this.SourceReference = 'SourceReference' in params ? params.SourceReference : null;
+        this.DestinationTag = 'DestinationTag' in params ? params.DestinationTag : null;
+        this.DestinationNamespace = 'DestinationNamespace' in params ? params.DestinationNamespace : null;
+        this.DestinationRepo = 'DestinationRepo' in params ? params.DestinationRepo : null;
+        this.Override = 'Override' in params ? params.Override : null;
+
+    }
+}
+
+/**
  * CreateTagRetentionExecution request structure.
  * @class
  */
@@ -8701,24 +8290,54 @@ class CreateTagRetentionExecutionRequest extends  AbstractModel {
 }
 
 /**
- * DeleteCustomAccount request structure.
+ * Synchronization log
  * @class
  */
-class DeleteCustomAccountRequest extends  AbstractModel {
+class ReplicationLog extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID	
+         * Resource type
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RegistryId = null;
+        this.ResourceType = null;
 
         /**
-         * Custom account name
+         * Path of the source resource
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Name = null;
+        this.Source = null;
+
+        /**
+         * Path of the destination resource
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Destination = null;
+
+        /**
+         * Synchronization status
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Start time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -8729,8 +8348,12 @@ class DeleteCustomAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Destination = 'Destination' in params ? params.Destination : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -8758,6 +8381,41 @@ class DescribeInstanceAllNamespacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyServiceAccountPassword response structure.
+ * @class
+ */
+class ModifyServiceAccountPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom user password, displayed only once. Please make sure to retain it securely.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8882,6 +8540,34 @@ class CreateImmutableTagRulesResponse extends  AbstractModel {
     }
 }
 
+/**
+ * ManageReplication response structure.
+ * @class
+ */
+class ManageReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DeleteInstanceCustomizedDomainResponse: DeleteInstanceCustomizedDomainResponse,
     ManageExternalEndpointRequest: ManageExternalEndpointRequest,
@@ -8903,8 +8589,7 @@ module.exports = {
     DescribeWebhookTriggerLogResponse: DescribeWebhookTriggerLogResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
     RenewInstanceResponse: RenewInstanceResponse,
-    CreateCustomAccountRequest: CreateCustomAccountRequest,
-    CreateServiceAccountRequest: CreateServiceAccountRequest,
+    CreateImmutableTagRulesRequest: CreateImmutableTagRulesRequest,
     DescribeRepositoriesResponse: DescribeRepositoriesResponse,
     DeleteInstanceTokenResponse: DeleteInstanceTokenResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
@@ -8923,7 +8608,7 @@ module.exports = {
     DescribeServiceAccountsRequest: DescribeServiceAccountsRequest,
     DescribeExternalEndpointStatusRequest: DescribeExternalEndpointStatusRequest,
     DeleteRepositoryResponse: DeleteRepositoryResponse,
-    CreateImmutableTagRulesRequest: CreateImmutableTagRulesRequest,
+    DescribeInstanceAllNamespacesRequest: DescribeInstanceAllNamespacesRequest,
     DownloadHelmChartResponse: DownloadHelmChartResponse,
     ManageReplicationRequest: ManageReplicationRequest,
     DeleteWebhookTriggerResponse: DeleteWebhookTriggerResponse,
@@ -8937,7 +8622,6 @@ module.exports = {
     DeleteImmutableTagRulesResponse: DeleteImmutableTagRulesResponse,
     ModifyTagRetentionRuleResponse: ModifyTagRetentionRuleResponse,
     CreateTagRetentionRuleRequest: CreateTagRetentionRuleRequest,
-    DescribeCustomAccountsRequest: DescribeCustomAccountsRequest,
     WebhookTarget: WebhookTarget,
     DescribeInstanceStatusResponse: DescribeInstanceStatusResponse,
     DescribeGCJobsResponse: DescribeGCJobsResponse,
@@ -8956,37 +8640,38 @@ module.exports = {
     ModifyWebhookTriggerRequest: ModifyWebhookTriggerRequest,
     DeleteReplicationInstanceRequest: DeleteReplicationInstanceRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
-    CreateWebhookTriggerRequest: CreateWebhookTriggerRequest,
+    CreateSignatureRequest: CreateSignatureRequest,
     CreateSecurityPolicyResponse: CreateSecurityPolicyResponse,
     DescribeRepositoriesRequest: DescribeRepositoriesRequest,
     DescribeTagRetentionExecutionTaskRequest: DescribeTagRetentionExecutionTaskRequest,
     DeleteServiceAccountResponse: DeleteServiceAccountResponse,
     ModifyNamespaceResponse: ModifyNamespaceResponse,
     TcrNamespaceInfo: TcrNamespaceInfo,
-    CreateSignatureRequest: CreateSignatureRequest,
+    DescribeWebhookTriggerLogRequest: DescribeWebhookTriggerLogRequest,
     RenewInstanceRequest: RenewInstanceRequest,
     Schedule: Schedule,
     DeleteTagRetentionRuleResponse: DeleteTagRetentionRuleResponse,
     DeleteMultipleSecurityPolicyRequest: DeleteMultipleSecurityPolicyRequest,
-    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
+    DescribeImmutableTagRulesResponse: DescribeImmutableTagRulesResponse,
     CreateSignaturePolicyResponse: CreateSignaturePolicyResponse,
     WebhookTrigger: WebhookTrigger,
     RegistryStatus: RegistryStatus,
     SecurityPolicy: SecurityPolicy,
     ReplicationFilter: ReplicationFilter,
     CreateInstanceTokenResponse: CreateInstanceTokenResponse,
-    TagSpecification: TagSpecification,
     ModifyInstanceResponse: ModifyInstanceResponse,
     RetentionTask: RetentionTask,
     DescribeImageAccelerateServiceResponse: DescribeImageAccelerateServiceResponse,
+    ModifyServiceAccountPasswordRequest: ModifyServiceAccountPasswordRequest,
     DescribeReplicationInstancesRequest: DescribeReplicationInstancesRequest,
     DeleteWebhookTriggerRequest: DeleteWebhookTriggerRequest,
     DeleteSignaturePolicyResponse: DeleteSignaturePolicyResponse,
+    CreateServiceAccountRequest: CreateServiceAccountRequest,
     CustomizedDomainInfo: CustomizedDomainInfo,
     DeleteServiceAccountRequest: DeleteServiceAccountRequest,
     DescribeImageManifestsRequest: DescribeImageManifestsRequest,
     RegistryChargePrepaid: RegistryChargePrepaid,
-    ModifyCustomAccountRequest: ModifyCustomAccountRequest,
+    TagSpecification: TagSpecification,
     CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
     KeyValueString: KeyValueString,
     DeleteSecurityPolicyRequest: DeleteSecurityPolicyRequest,
@@ -8998,8 +8683,6 @@ module.exports = {
     GCJobInfo: GCJobInfo,
     Registry: Registry,
     DescribeChartDownloadInfoRequest: DescribeChartDownloadInfoRequest,
-    DescribeCustomAccountsResponse: DescribeCustomAccountsResponse,
-    ModifyCustomAccountResponse: ModifyCustomAccountResponse,
     DescribeExternalEndpointStatusResponse: DescribeExternalEndpointStatusResponse,
     CheckInstanceResponse: CheckInstanceResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
@@ -9007,8 +8690,7 @@ module.exports = {
     DescribeImmutableTagRulesRequest: DescribeImmutableTagRulesRequest,
     Filter: Filter,
     RetentionExecution: RetentionExecution,
-    DescribeWebhookTriggerLogRequest: DescribeWebhookTriggerLogRequest,
-    ManageReplicationResponse: ManageReplicationResponse,
+    DuplicateImageResponse: DuplicateImageResponse,
     DescribeReplicationInstanceCreateTasksRequest: DescribeReplicationInstanceCreateTasksRequest,
     DeleteSignaturePolicyRequest: DeleteSignaturePolicyRequest,
     ModifySecurityPolicyResponse: ModifySecurityPolicyResponse,
@@ -9019,7 +8701,7 @@ module.exports = {
     Header: Header,
     RetentionPolicy: RetentionPolicy,
     CreateSecurityPolicyRequest: CreateSecurityPolicyRequest,
-    CustomAccount: CustomAccount,
+    CreateWebhookTriggerRequest: CreateWebhookTriggerRequest,
     DeleteImageAccelerateServiceResponse: DeleteImageAccelerateServiceResponse,
     DescribeInstanceCustomizedDomainResponse: DescribeInstanceCustomizedDomainResponse,
     CreateImageAccelerationServiceRequest: CreateImageAccelerationServiceRequest,
@@ -9027,16 +8709,14 @@ module.exports = {
     DeleteMultipleSecurityPolicyResponse: DeleteMultipleSecurityPolicyResponse,
     ManageInternalEndpointResponse: ManageInternalEndpointResponse,
     CreateInstanceCustomizedDomainRequest: CreateInstanceCustomizedDomainRequest,
-    ReplicationLog: ReplicationLog,
     CreateTagRetentionExecutionResponse: CreateTagRetentionExecutionResponse,
     CheckInstanceNameResponse: CheckInstanceNameResponse,
     DeleteImageAccelerateServiceRequest: DeleteImageAccelerateServiceRequest,
     DescribeTagRetentionRulesResponse: DescribeTagRetentionRulesResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     ManageExternalEndpointResponse: ManageExternalEndpointResponse,
-    DescribeImmutableTagRulesResponse: DescribeImmutableTagRulesResponse,
+    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateReplicationInstanceResponse: CreateReplicationInstanceResponse,
-    CreateCustomAccountResponse: CreateCustomAccountResponse,
     CreateInstanceTokenRequest: CreateInstanceTokenRequest,
     DescribeServiceAccountsResponse: DescribeServiceAccountsResponse,
     CreateInstanceCustomizedDomainResponse: CreateInstanceCustomizedDomainResponse,
@@ -9048,7 +8728,6 @@ module.exports = {
     ModifyNamespaceRequest: ModifyNamespaceRequest,
     CreateRepositoryRequest: CreateRepositoryRequest,
     DeleteImageResponse: DeleteImageResponse,
-    DeleteCustomAccountResponse: DeleteCustomAccountResponse,
     DescribeImageAccelerateServiceRequest: DescribeImageAccelerateServiceRequest,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     DescribeImagesRequest: DescribeImagesRequest,
@@ -9056,7 +8735,6 @@ module.exports = {
     DescribeTagRetentionExecutionRequest: DescribeTagRetentionExecutionRequest,
     CreateRepositoryResponse: CreateRepositoryResponse,
     CheckInstanceNameRequest: CheckInstanceNameRequest,
-    DescribeInstanceAllNamespacesRequest: DescribeInstanceAllNamespacesRequest,
     DescribeInstanceTokenResponse: DescribeInstanceTokenResponse,
     DescribeInstanceCustomizedDomainRequest: DescribeInstanceCustomizedDomainRequest,
     DescribeTagRetentionExecutionResponse: DescribeTagRetentionExecutionResponse,
@@ -9069,11 +8747,14 @@ module.exports = {
     TcrInstanceToken: TcrInstanceToken,
     DeleteRepositoryRequest: DeleteRepositoryRequest,
     DeleteImageRequest: DeleteImageRequest,
+    DuplicateImageRequest: DuplicateImageRequest,
     CreateTagRetentionExecutionRequest: CreateTagRetentionExecutionRequest,
-    DeleteCustomAccountRequest: DeleteCustomAccountRequest,
+    ReplicationLog: ReplicationLog,
     DescribeInstanceAllNamespacesResponse: DescribeInstanceAllNamespacesResponse,
+    ModifyServiceAccountPasswordResponse: ModifyServiceAccountPasswordResponse,
     ManageInternalEndpointRequest: ManageInternalEndpointRequest,
     ModifyWebhookTriggerResponse: ModifyWebhookTriggerResponse,
     CreateImmutableTagRulesResponse: CreateImmutableTagRulesResponse,
+    ManageReplicationResponse: ManageReplicationResponse,
 
 }

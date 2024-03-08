@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const UpgradeSmallVersionRequest = models.UpgradeSmallVersionRequest;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
 const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
+const ModifyInstanceAvailabilityZonesRequest = models.ModifyInstanceAvailabilityZonesRequest;
 const RedisBackupSet = models.RedisBackupSet;
 const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
@@ -111,6 +112,7 @@ const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMul
 const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const KillMasterGroupRequest = models.KillMasterGroupRequest;
+const SwitchAccessNewInstanceResponse = models.SwitchAccessNewInstanceResponse;
 const CloneInstancesResponse = models.CloneInstancesResponse;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
@@ -174,10 +176,12 @@ const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
 const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
 const ChangeInstanceRoleRequest = models.ChangeInstanceRoleRequest;
+const DescribeInstanceSupportFeatureRequest = models.DescribeInstanceSupportFeatureRequest;
 const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const SwitchAccessNewInstanceRequest = models.SwitchAccessNewInstanceRequest;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
@@ -199,10 +203,12 @@ const BackupDownloadInfo = models.BackupDownloadInfo;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
+const DescribeInstanceSupportFeatureResponse = models.DescribeInstanceSupportFeatureResponse;
 const InstanceClusterNode = models.InstanceClusterNode;
 const DescribeSSLStatusResponse = models.DescribeSSLStatusResponse;
 const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
+const ModifyInstanceAvailabilityZonesResponse = models.ModifyInstanceAvailabilityZonesResponse;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const ModifyInstanceReadOnlyRequest = models.ModifyInstanceReadOnlyRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
@@ -304,6 +310,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceAccount(req, cb) {
         let resp = new DescribeInstanceAccountResponse();
         this.request("DescribeInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to immediately switch instances that are in the time window pending switch operation. Users can manually initiate this operation.
+     * @param {SwitchAccessNewInstanceRequest} req
+     * @param {function(string, SwitchAccessNewInstanceResponse):void} cb
+     * @public
+     */
+    SwitchAccessNewInstance(req, cb) {
+        let resp = new SwitchAccessNewInstanceResponse();
+        this.request("SwitchAccessNewInstance", req, resp, cb);
     }
 
     /**
@@ -494,7 +511,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an instance sub-account.
+     * This API is used to customize the account for accessing the instance.
      * @param {CreateInstanceAccountRequest} req
      * @param {function(string, CreateInstanceAccountResponse):void} cb
      * @public
@@ -667,6 +684,17 @@ class RedisClient extends AbstractClient {
     InquiryPriceCreateInstance(req, cb) {
         let resp = new InquiryPriceCreateInstanceResponse();
         this.request("InquiryPriceCreateInstance", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeInstanceSupportFeature) is used to query the supported features of the instance.
+     * @param {DescribeInstanceSupportFeatureRequest} req
+     * @param {function(string, DescribeInstanceSupportFeatureResponse):void} cb
+     * @public
+     */
+    DescribeInstanceSupportFeature(req, cb) {
+        let resp = new DescribeInstanceSupportFeatureResponse();
+        this.request("DescribeInstanceSupportFeature", req, resp, cb);
     }
 
     /**
@@ -1107,6 +1135,17 @@ class RedisClient extends AbstractClient {
     DescribeProxySlowLog(req, cb) {
         let resp = new DescribeProxySlowLogResponse();
         this.request("DescribeProxySlowLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the availability zone of the instance.
+     * @param {ModifyInstanceAvailabilityZonesRequest} req
+     * @param {function(string, ModifyInstanceAvailabilityZonesResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAvailabilityZones(req, cb) {
+        let resp = new ModifyInstanceAvailabilityZonesResponse();
+        this.request("ModifyInstanceAvailabilityZones", req, resp, cb);
     }
 
     /**

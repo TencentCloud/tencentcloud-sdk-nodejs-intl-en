@@ -27,11 +27,12 @@ const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChanne
 const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
 const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
 const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
-const EndpointAuthInfo = models.EndpointAuthInfo;
+const AliasValueConf = models.AliasValueConf;
 const DescribeStreamPackageHarvestJobsRequest = models.DescribeStreamPackageHarvestJobsRequest;
 const DeleteStreamPackageHarvestJobResponse = models.DeleteStreamPackageHarvestJobResponse;
 const DeleteStreamPackageHarvestJobsRequest = models.DeleteStreamPackageHarvestJobsRequest;
 const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
+const EndpointAuthInfo = models.EndpointAuthInfo;
 const CreateStreamPackageChannelEndpointResponse = models.CreateStreamPackageChannelEndpointResponse;
 const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
 const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
@@ -41,6 +42,7 @@ const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageCh
 const InputInfo = models.InputInfo;
 const InputAuthInfo = models.InputAuthInfo;
 const UnbindCdnDomainWithChannelRequest = models.UnbindCdnDomainWithChannelRequest;
+const SSAIConf = models.SSAIConf;
 const HarvestJobResp = models.HarvestJobResp;
 const EndpointInfo = models.EndpointInfo;
 const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
@@ -57,6 +59,7 @@ const BindNewLVBDomainWithChannelRequest = models.BindNewLVBDomainWithChannelReq
 const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
 const ModifyStreamPackageChannelResponse = models.ModifyStreamPackageChannelResponse;
 const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
+const ConfigAliasesInfo = models.ConfigAliasesInfo;
 
 
 /**

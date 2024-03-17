@@ -8923,7 +8923,7 @@ class InstanceSet extends  AbstractModel {
         this.Size = null;
 
         /**
-         * This field has been disused. You can use the TCOP’s [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
+         * This field has been disused. You can use the TCOP [GetMonitorData](https://www.tencentcloud.com/zh/document/product/248/33881) API to query the capacity used by the instance.
          * @type {number || null}
          */
         this.SizeUsed = null;

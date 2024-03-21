@@ -16,338 +16,354 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreatePlanForZoneResponse = models.CreatePlanForZoneResponse;
 const DeployConfigGroupVersionRequest = models.DeployConfigGroupVersionRequest;
-const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
-const ModifyL4ProxyRulesStatusResponse = models.ModifyL4ProxyRulesStatusResponse;
 const Compression = models.Compression;
-const DeleteRulesRequest = models.DeleteRulesRequest;
-const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
-const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
 const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
-const ModifyZoneResponse = models.ModifyZoneResponse;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
-const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
-const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
-const Https = models.Https;
-const AlgDetectRule = models.AlgDetectRule;
-const SecEntryValue = models.SecEntryValue;
-const DescribeZonesRequest = models.DescribeZonesRequest;
-const L4OfflineLog = models.L4OfflineLog;
-const DiffIPWhitelist = models.DiffIPWhitelist;
-const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
-const DeleteSecurityIPGroupResponse = models.DeleteSecurityIPGroupResponse;
-const ModifyRuleRequest = models.ModifyRuleRequest;
-const OwnershipVerification = models.OwnershipVerification;
-const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
-const OriginRecord = models.OriginRecord;
-const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
-const AdvancedFilter = models.AdvancedFilter;
-const DeleteApplicationProxyRequest = models.DeleteApplicationProxyRequest;
+const SlowPostConfig = models.SlowPostConfig;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
-const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
+const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
+const TopEntryValue = models.TopEntryValue;
+const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
+const Origin = models.Origin;
+const DescribeRulesResponse = models.DescribeRulesResponse;
+const TimingDataRecord = models.TimingDataRecord;
+const CreateCLSIndexResponse = models.CreateCLSIndexResponse;
+const DescribeRealtimeLogDeliveryTasksRequest = models.DescribeRealtimeLogDeliveryTasksRequest;
+const DescribeOriginProtectionResponse = models.DescribeOriginProtectionResponse;
+const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
+const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
+const DescribeAliasDomainsRequest = models.DescribeAliasDomainsRequest;
+const RateLimitConfig = models.RateLimitConfig;
+const CreateRealtimeLogDeliveryTaskRequest = models.CreateRealtimeLogDeliveryTaskRequest;
+const ModifyAccelerationDomainStatusesResponse = models.ModifyAccelerationDomainStatusesResponse;
+const DeployRecord = models.DeployRecord;
+const RuleExtraParameter = models.RuleExtraParameter;
+const WebSocket = models.WebSocket;
+const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
+const WafConfig = models.WafConfig;
+const CreateAliasDomainRequest = models.CreateAliasDomainRequest;
+const CLSTopic = models.CLSTopic;
+const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
+const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
+const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest;
+const DescribeAccelerationDomainsResponse = models.DescribeAccelerationDomainsResponse;
+const SwitchConfig = models.SwitchConfig;
+const IdentifyZoneResponse = models.IdentifyZoneResponse;
+const ModifyL4ProxyResponse = models.ModifyL4ProxyResponse;
+const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
+const EnvInfo = models.EnvInfo;
+const PlanInfo = models.PlanInfo;
+const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
+const S3 = models.S3;
+const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
+const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
+const ForceRedirect = models.ForceRedirect;
+const CodeAction = models.CodeAction;
+const CachePrefresh = models.CachePrefresh;
+const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisDataResponse;
+const ImageOptimize = models.ImageOptimize;
+const BotPortraitRule = models.BotPortraitRule;
+const RulesProperties = models.RulesProperties;
+const RuleCodeActionParams = models.RuleCodeActionParams;
+const OriginGroupReference = models.OriginGroupReference;
+const ExceptUserRule = models.ExceptUserRule;
+const AccelerateType = models.AccelerateType;
+const SubRule = models.SubRule;
+const ConfigGroupVersionInfo = models.ConfigGroupVersionInfo;
+const VerifyOwnershipResponse = models.VerifyOwnershipResponse;
+const Sv = models.Sv;
+const Rule = models.Rule;
+const DownloadL4LogsRequest = models.DownloadL4LogsRequest;
+const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
+const BillingDataFilter = models.BillingDataFilter;
+const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
+const DescribeZonesResponse = models.DescribeZonesResponse;
+const Header = models.Header;
+const CustomField = models.CustomField;
+const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
+const DeleteZoneRequest = models.DeleteZoneRequest;
+const BotManagedRule = models.BotManagedRule;
+const SecurityConfig = models.SecurityConfig;
+const L4OfflineLog = models.L4OfflineLog;
+const ExceptUserRuleScope = models.ExceptUserRuleScope;
+const SecEntryValue = models.SecEntryValue;
+const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
+const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
+const EntityStatus = models.EntityStatus;
+const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
+const RuleNormalActionParams = models.RuleNormalActionParams;
+const PrivateParameter = models.PrivateParameter;
+const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
+const CreateOriginGroupRequest = models.CreateOriginGroupRequest;
+const TopDataRecord = models.TopDataRecord;
+const CreateSecurityIPGroupResponse = models.CreateSecurityIPGroupResponse;
+const CreateSharedCNAMEResponse = models.CreateSharedCNAMEResponse;
+const DescribeAvailablePlansResponse = models.DescribeAvailablePlansResponse;
+const RateLimitTemplate = models.RateLimitTemplate;
+const ModifyRealtimeLogDeliveryTaskResponse = models.ModifyRealtimeLogDeliveryTaskResponse;
+const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
+const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
+const AlgDetectResult = models.AlgDetectResult;
+const DefaultServerCertInfo = models.DefaultServerCertInfo;
+const StandardDebug = models.StandardDebug;
+const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
+const DeleteRulesRequest = models.DeleteRulesRequest;
+const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
+const MaxAge = models.MaxAge;
+const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
+const AlgDetectRule = models.AlgDetectRule;
+const DiffIPWhitelist = models.DiffIPWhitelist;
+const DeleteSecurityIPGroupResponse = models.DeleteSecurityIPGroupResponse;
+const ModifyRuleRequest = models.ModifyRuleRequest;
+const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
 const ModifyL4ProxyStatusResponse = models.ModifyL4ProxyStatusResponse;
 const FileVerification = models.FileVerification;
-const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
-const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
-const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
-const DescribeL4ProxyResponse = models.DescribeL4ProxyResponse;
-const RuleRewriteActionParams = models.RuleRewriteActionParams;
+const SmartRouting = models.SmartRouting;
 const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
-const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
-const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
-const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
+const Task = models.Task;
 const DescribeL4ProxyRulesResponse = models.DescribeL4ProxyRulesResponse;
-const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
-const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
-const OriginInfo = models.OriginInfo;
-const BillingData = models.BillingData;
-const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
-const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
-const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
-const DnsVerification = models.DnsVerification;
-const AlgDetectSession = models.AlgDetectSession;
-const ModifyZoneRequest = models.ModifyZoneRequest;
-const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatusResponse;
-const DeleteZoneResponse = models.DeleteZoneResponse;
-const CreateRuleResponse = models.CreateRuleResponse;
-const BotExtendAction = models.BotExtendAction;
-const TimingDataRecord = models.TimingDataRecord;
+const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
+const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
 const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResponse;
-const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
-const DescribeRulesResponse = models.DescribeRulesResponse;
-const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
-const OriginProtectionInfo = models.OriginProtectionInfo;
-const DescribeOriginProtectionResponse = models.DescribeOriginProtectionResponse;
-const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const ExceptConfig = models.ExceptConfig;
 const DeleteOriginGroupRequest = models.DeleteOriginGroupRequest;
-const ImageOptimize = models.ImageOptimize;
-const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
-const AliasDomain = models.AliasDomain;
-const WebSocket = models.WebSocket;
-const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
 const AclCondition = models.AclCondition;
-const TimingTypeValue = models.TimingTypeValue;
-const DescribeAliasDomainsRequest = models.DescribeAliasDomainsRequest;
-const SkipCondition = models.SkipCondition;
-const IpTableRule = models.IpTableRule;
 const L7OfflineLog = models.L7OfflineLog;
-const ModifyHostsCertificateRequest = models.ModifyHostsCertificateRequest;
+const ModifyRuleResponse = models.ModifyRuleResponse;
 const ApplicationProxyRule = models.ApplicationProxyRule;
-const SmartRouting = models.SmartRouting;
-const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
-const ModifyAccelerationDomainStatusesResponse = models.ModifyAccelerationDomainStatusesResponse;
 const Zone = models.Zone;
 const DescribeRulesSettingResponse = models.DescribeRulesSettingResponse;
 const BindSecurityTemplateToEntityResponse = models.BindSecurityTemplateToEntityResponse;
-const RuleExtraParameter = models.RuleExtraParameter;
-const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
-const RulesSettingAction = models.RulesSettingAction;
 const ModifyL4ProxyRulesResponse = models.ModifyL4ProxyRulesResponse;
 const DDoSAttackEvent = models.DDoSAttackEvent;
-const ClientIpHeader = models.ClientIpHeader;
-const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
-const Quic = models.Quic;
 const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersionDetailRequest;
-const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
-const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
-const DescribeRulesRequest = models.DescribeRulesRequest;
-const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
-const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
-const AclConfig = models.AclConfig;
-const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
-const AlgDetectJS = models.AlgDetectJS;
-const AccelerationDomain = models.AccelerationDomain;
-const DeleteSecurityIPGroupRequest = models.DeleteSecurityIPGroupRequest;
-const RateLimitTemplateDetail = models.RateLimitTemplateDetail;
-const Origin = models.Origin;
-const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
-const Grpc = models.Grpc;
-const SlowRateConfig = models.SlowRateConfig;
+const DropPageDetail = models.DropPageDetail;
+const CnameStatus = models.CnameStatus;
 const ServerCertInfo = models.ServerCertInfo;
-const CreateAliasDomainRequest = models.CreateAliasDomainRequest;
-const CreateAliasDomainResponse = models.CreateAliasDomainResponse;
-const DescribeOriginProtectionRequest = models.DescribeOriginProtectionRequest;
-const ClientIpCountry = models.ClientIpCountry;
-const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
-const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
+const DescribeZonesRequest = models.DescribeZonesRequest;
+const OriginRecord = models.OriginRecord;
+const Tag = models.Tag;
 const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
-const TemplateScope = models.TemplateScope;
-const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest;
-const FileAscriptionInfo = models.FileAscriptionInfo;
 const DeleteSharedCNAMERequest = models.DeleteSharedCNAMERequest;
-const DescribeAccelerationDomainsResponse = models.DescribeAccelerationDomainsResponse;
-const ZoneSetting = models.ZoneSetting;
-const DescribeTopL7CacheDataResponse = models.DescribeTopL7CacheDataResponse;
-const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
-const SwitchConfig = models.SwitchConfig;
-const IdentifyZoneResponse = models.IdentifyZoneResponse;
-const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
-const L4ProxyRule = models.L4ProxyRule;
-const DDoSBlockData = models.DDoSBlockData;
+const ModifyRealtimeLogDeliveryTaskRequest = models.ModifyRealtimeLogDeliveryTaskRequest;
 const VanityNameServers = models.VanityNameServers;
-const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
-const ModifyL4ProxyResponse = models.ModifyL4ProxyResponse;
-const WafRule = models.WafRule;
-const SecurityConfig = models.SecurityConfig;
-const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
-const DescribeSecurityTemplateBindingsResponse = models.DescribeSecurityTemplateBindingsResponse;
-const MaxAge = models.MaxAge;
-const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
-const RuleCodeActionParams = models.RuleCodeActionParams;
 const IPGroup = models.IPGroup;
-const WafConfig = models.WafConfig;
-const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataRequest;
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
-const NoCache = models.NoCache;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
-const SlowPostConfig = models.SlowPostConfig;
-const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
-const EnvInfo = models.EnvInfo;
-const IPWhitelist = models.IPWhitelist;
+const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
 const DDoS = models.DDoS;
-const CreateZoneRequest = models.CreateZoneRequest;
-const PlanInfo = models.PlanInfo;
-const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
-const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
-const Task = models.Task;
-const Waf = models.Waf;
-const ModifyRuleResponse = models.ModifyRuleResponse;
 const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
-const DeleteL4ProxyRequest = models.DeleteL4ProxyRequest;
-const AscriptionInfo = models.AscriptionInfo;
-const VerifyOwnershipResponse = models.VerifyOwnershipResponse;
+const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const RuleItem = models.RuleItem;
-const FirstPartConfig = models.FirstPartConfig;
-const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
-const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
 const Cache = models.Cache;
-const ForceRedirect = models.ForceRedirect;
-const RateLimitConfig = models.RateLimitConfig;
-const DownloadL4LogsRequest = models.DownloadL4LogsRequest;
-const CodeAction = models.CodeAction;
 const DetailHost = models.DetailHost;
-const Identification = models.Identification;
+const DescribeRealtimeLogDeliveryTasksResponse = models.DescribeRealtimeLogDeliveryTasksResponse;
+const DescribeConfigGroupVersionsResponse = models.DescribeConfigGroupVersionsResponse;
+const DeleteRealtimeLogDeliveryTaskResponse = models.DeleteRealtimeLogDeliveryTaskResponse;
+const RuleCondition = models.RuleCondition;
+const DescribeOverviewL7DataResponse = models.DescribeOverviewL7DataResponse;
+const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
+const TimingDataItem = models.TimingDataItem;
+const RateLimitUserRule = models.RateLimitUserRule;
+const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
+const CreateL4ProxyRulesResponse = models.CreateL4ProxyRulesResponse;
+const CacheKey = models.CacheKey;
+const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
+const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
+const IpTableConfig = models.IpTableConfig;
+const DeleteOriginGroupResponse = models.DeleteOriginGroupResponse;
+const DescribeL4ProxyRequest = models.DescribeL4ProxyRequest;
+const DescribeIdentificationsRequest = models.DescribeIdentificationsRequest;
+const TemplateScope = models.TemplateScope;
+const CreateAccelerationDomainRequest = models.CreateAccelerationDomainRequest;
+const NormalAction = models.NormalAction;
+const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
+const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
+const IdentifyZoneRequest = models.IdentifyZoneRequest;
+const CacheConfig = models.CacheConfig;
+const OfflineCache = models.OfflineCache;
+const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
+const AclUserRule = models.AclUserRule;
+const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
+const CreateL4ProxyResponse = models.CreateL4ProxyResponse;
+const DescribeOriginGroupRequest = models.DescribeOriginGroupRequest;
+const DescribeIPRegionRequest = models.DescribeIPRegionRequest;
+const TimingTypeValue = models.TimingTypeValue;
+const CreatePlanForZoneResponse = models.CreatePlanForZoneResponse;
+const ModifyL4ProxyRulesStatusResponse = models.ModifyL4ProxyRulesStatusResponse;
+const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
+const CustomEndpoint = models.CustomEndpoint;
+const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
+const DeleteL4ProxyRequest = models.DeleteL4ProxyRequest;
+const DeleteApplicationProxyRequest = models.DeleteApplicationProxyRequest;
+const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
+const FailReason = models.FailReason;
+const DescribeL4ProxyResponse = models.DescribeL4ProxyResponse;
+const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
+const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
+const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
+const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
+const BillingData = models.BillingData;
+const DeleteZoneResponse = models.DeleteZoneResponse;
+const CreateRuleResponse = models.CreateRuleResponse;
+const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
+const WafRule = models.WafRule;
+const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
+const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
+const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
+const DeleteRealtimeLogDeliveryTaskRequest = models.DeleteRealtimeLogDeliveryTaskRequest;
+const RulesSettingAction = models.RulesSettingAction;
+const Ipv6 = models.Ipv6;
+const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
+const AclConfig = models.AclConfig;
+const AlgDetectJS = models.AlgDetectJS;
+const SubRuleItem = models.SubRuleItem;
+const DeleteSecurityIPGroupRequest = models.DeleteSecurityIPGroupRequest;
+const Grpc = models.Grpc;
+const CreateAliasDomainResponse = models.CreateAliasDomainResponse;
+const ClientIpCountry = models.ClientIpCountry;
+const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
+const FileAscriptionInfo = models.FileAscriptionInfo;
+const CreateRealtimeLogDeliveryTaskResponse = models.CreateRealtimeLogDeliveryTaskResponse;
+const DescribeTopL7CacheDataResponse = models.DescribeTopL7CacheDataResponse;
+const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
+const DescribeSecurityTemplateBindingsResponse = models.DescribeSecurityTemplateBindingsResponse;
+const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
+const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataRequest;
+const NoCache = models.NoCache;
+const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
+const CreateZoneRequest = models.CreateZoneRequest;
+const AscriptionInfo = models.AscriptionInfo;
+const FirstPartConfig = models.FirstPartConfig;
+const Waf = models.Waf;
+const ModifyZoneRequest = models.ModifyZoneRequest;
 const DDosProtectionConfig = models.DDosProtectionConfig;
 const DescribeDDoSAttackDataRequest = models.DescribeDDoSAttackDataRequest;
-const CachePrefresh = models.CachePrefresh;
 const CreateL4ProxyRequest = models.CreateL4ProxyRequest;
-const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisDataResponse;
-const DescribeConfigGroupVersionsResponse = models.DescribeConfigGroupVersionsResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
-const BotPortraitRule = models.BotPortraitRule;
-const RuleCondition = models.RuleCondition;
-const RulesProperties = models.RulesProperties;
-const DescribeOverviewL7DataResponse = models.DescribeOverviewL7DataResponse;
 const Hsts = models.Hsts;
-const RateLimitTemplate = models.RateLimitTemplate;
-const OriginGroupReference = models.OriginGroupReference;
 const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyL4ProxyStatusRequest = models.ModifyL4ProxyStatusRequest;
-const TopEntry = models.TopEntry;
-const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
-const VanityNameServersIps = models.VanityNameServersIps;
-const NsVerification = models.NsVerification;
-const Rule = models.Rule;
-const AccelerateMainland = models.AccelerateMainland;
-const ExceptUserRule = models.ExceptUserRule;
+const RateLimitTemplateDetail = models.RateLimitTemplateDetail;
 const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResponse;
-const RateLimitUserRule = models.RateLimitUserRule;
-const StandardDebug = models.StandardDebug;
-const SubRule = models.SubRule;
-const DeployRecord = models.DeployRecord;
 const CertificateInfo = models.CertificateInfo;
-const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
-const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
-const BindSecurityTemplateToEntityRequest = models.BindSecurityTemplateToEntityRequest;
-const TimingDataItem = models.TimingDataItem;
-const ConfigGroupVersionInfo = models.ConfigGroupVersionInfo;
 const CreateApplicationProxyRequest = models.CreateApplicationProxyRequest;
 const CC = models.CC;
-const IntelligenceRuleItem = models.IntelligenceRuleItem;
-const IntelligenceRule = models.IntelligenceRule;
-const PostMaxSize = models.PostMaxSize;
-const Sv = models.Sv;
-const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const ModifyL4ProxyRulesStatusRequest = models.ModifyL4ProxyRulesStatusRequest;
-const Filter = models.Filter;
-const CreateAccelerationDomainResponse = models.CreateAccelerationDomainResponse;
-const CreateL4ProxyRulesResponse = models.CreateL4ProxyRulesResponse;
 const DescribeTimingL4DataResponse = models.DescribeTimingL4DataResponse;
-const CreateZoneResponse = models.CreateZoneResponse;
-const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
 const Action = models.Action;
 const ApplicationProxy = models.ApplicationProxy;
 const ModifyApplicationProxyResponse = models.ModifyApplicationProxyResponse;
 const ModifySecurityIPGroupResponse = models.ModifySecurityIPGroupResponse;
-const CacheKey = models.CacheKey;
-const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
-const BillingDataFilter = models.BillingDataFilter;
-const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
-const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
-const RateLimitIntelligence = models.RateLimitIntelligence;
-const IpTableConfig = models.IpTableConfig;
-const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
-const DeleteOriginGroupResponse = models.DeleteOriginGroupResponse;
-const Header = models.Header;
+const ZoneSetting = models.ZoneSetting;
+const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
 const RuleAndConditions = models.RuleAndConditions;
-const SecurityTemplateBinding = models.SecurityTemplateBinding;
 const DropPageConfig = models.DropPageConfig;
-const DescribeL4ProxyRequest = models.DescribeL4ProxyRequest;
-const SecEntry = models.SecEntry;
-const DescribeIdentificationsRequest = models.DescribeIdentificationsRequest;
-const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
-const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
 const PartialModule = models.PartialModule;
-const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
-const AccelerateType = models.AccelerateType;
-const Ipv6 = models.Ipv6;
-const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
-const CreateAccelerationDomainRequest = models.CreateAccelerationDomainRequest;
+const SecEntry = models.SecEntry;
+const DeliveryCondition = models.DeliveryCondition;
 const FollowOrigin = models.FollowOrigin;
-const DeleteZoneRequest = models.DeleteZoneRequest;
-const SecurityType = models.SecurityType;
-const BotManagedRule = models.BotManagedRule;
 const IPRegionInfo = models.IPRegionInfo;
-const TopDetailData = models.TopDetailData;
-const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
-const DescribeOriginGroupRequest = models.DescribeOriginGroupRequest;
-const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
-const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
-const AiRule = models.AiRule;
-const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
-const DropPageDetail = models.DropPageDetail;
-const DeleteRulesResponse = models.DeleteRulesResponse;
 const QueryCondition = models.QueryCondition;
-const IdentifyZoneRequest = models.IdentifyZoneRequest;
-const CacheConfig = models.CacheConfig;
-const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
-const ExceptUserRuleScope = models.ExceptUserRuleScope;
-const FailReason = models.FailReason;
-const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
-const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
-const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
-const DescribeZonesResponse = models.DescribeZonesResponse;
+const RuleRewriteActionParams = models.RuleRewriteActionParams;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
-const EntityStatus = models.EntityStatus;
-const TemplateConfig = models.TemplateConfig;
-const RewriteAction = models.RewriteAction;
-const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
-const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
-const TopDataRecord = models.TopDataRecord;
-const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
-const CnameStatus = models.CnameStatus;
+const ModifyHostsCertificateRequest = models.ModifyHostsCertificateRequest;
 const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
 const DescribeTopL7AnalysisDataResponse = models.DescribeTopL7AnalysisDataResponse;
-const OfflineCache = models.OfflineCache;
-const RuleNormalActionParams = models.RuleNormalActionParams;
-const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
+const ClientIpHeader = models.ClientIpHeader;
 const Resource = models.Resource;
-const PrivateParameter = models.PrivateParameter;
-const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
-const AclUserRule = models.AclUserRule;
-const Quota = models.Quota;
-const CreateOriginGroupRequest = models.CreateOriginGroupRequest;
-const DescribeTimingL4DataRequest = models.DescribeTimingL4DataRequest;
+const DescribeOriginProtectionRequest = models.DescribeOriginProtectionRequest;
 const DescribeHostsSettingRequest = models.DescribeHostsSettingRequest;
-const SubRuleItem = models.SubRuleItem;
-const CreateSecurityIPGroupResponse = models.CreateSecurityIPGroupResponse;
-const CreateSharedCNAMEResponse = models.CreateSharedCNAMEResponse;
-const NormalAction = models.NormalAction;
-const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
-const DescribeAvailablePlansResponse = models.DescribeAvailablePlansResponse;
-const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
+const DeleteRulesResponse = models.DeleteRulesResponse;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
-const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
-const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
-const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
-const CreateL4ProxyResponse = models.CreateL4ProxyResponse;
-const AlgDetectResult = models.AlgDetectResult;
-const DescribeDeployHistoryResponse = models.DescribeDeployHistoryResponse;
 const L4Proxy = models.L4Proxy;
-const QueryString = models.QueryString;
-const DefaultServerCertInfo = models.DefaultServerCertInfo;
+const SkipCondition = models.SkipCondition;
 const CreateSharedCNAMERequest = models.CreateSharedCNAMERequest;
-const DescribeAccelerationDomainsRequest = models.DescribeAccelerationDomainsRequest;
 const UpstreamHttp2 = models.UpstreamHttp2;
-const TopEntryValue = models.TopEntryValue;
-const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
-const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
 const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
-const DescribeIPRegionRequest = models.DescribeIPRegionRequest;
-const ModifyAccelerationDomainStatusesRequest = models.ModifyAccelerationDomainStatusesRequest;
 const BotConfig = models.BotConfig;
-const Tag = models.Tag;
+const DnsVerification = models.DnsVerification;
+const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
+const OriginInfo = models.OriginInfo;
+const Https = models.Https;
+const L4ProxyRule = models.L4ProxyRule;
+const AdvancedFilter = models.AdvancedFilter;
+const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
+const TemplateConfig = models.TemplateConfig;
+const BotExtendAction = models.BotExtendAction;
+const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
+const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
+const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
+const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
+const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
+const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
+const ModifyZoneResponse = models.ModifyZoneResponse;
+const AlgDetectSession = models.AlgDetectSession;
+const OriginProtectionInfo = models.OriginProtectionInfo;
+const AliasDomain = models.AliasDomain;
+const RewriteAction = models.RewriteAction;
+const IpTableRule = models.IpTableRule;
+const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
+const Quic = models.Quic;
+const CreateCLSIndexRequest = models.CreateCLSIndexRequest;
+const DescribeRulesRequest = models.DescribeRulesRequest;
+const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
+const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
+const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
+const AccelerationDomain = models.AccelerationDomain;
+const SlowRateConfig = models.SlowRateConfig;
+const TopDetailData = models.TopDetailData;
+const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
+const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
+const DDoSBlockData = models.DDoSBlockData;
+const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
+const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
+const SecurityType = models.SecurityType;
+const IPWhitelist = models.IPWhitelist;
+const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatusResponse;
+const Identification = models.Identification;
+const TopEntry = models.TopEntry;
+const NsVerification = models.NsVerification;
+const AccelerateMainland = models.AccelerateMainland;
+const BindSecurityTemplateToEntityRequest = models.BindSecurityTemplateToEntityRequest;
+const IntelligenceRuleItem = models.IntelligenceRuleItem;
+const IntelligenceRule = models.IntelligenceRule;
+const PostMaxSize = models.PostMaxSize;
+const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
+const Filter = models.Filter;
+const CreateAccelerationDomainResponse = models.CreateAccelerationDomainResponse;
+const ModifyAccelerationDomainStatusesRequest = models.ModifyAccelerationDomainStatusesRequest;
+const CreateZoneResponse = models.CreateZoneResponse;
+const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
+const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
+const SecurityTemplateBinding = models.SecurityTemplateBinding;
+const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
+const OwnershipVerification = models.OwnershipVerification;
+const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
+const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
+const AiRule = models.AiRule;
+const Quota = models.Quota;
+const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
+const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
+const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
+const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
+const RateLimitIntelligence = models.RateLimitIntelligence;
+const DescribeDeployHistoryResponse = models.DescribeDeployHistoryResponse;
+const QueryString = models.QueryString;
+const DescribeAccelerationDomainsRequest = models.DescribeAccelerationDomainsRequest;
+const DescribeTimingL4DataRequest = models.DescribeTimingL4DataRequest;
+const VanityNameServersIps = models.VanityNameServersIps;
 
 
 /**
@@ -415,6 +431,17 @@ class TeoClient extends AbstractClient {
     DescribeIdentifications(req, cb) {
         let resp = new DescribeIdentificationsResponse();
         this.request("DescribeIdentifications", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the real-time log delivery task list.
+     * @param {DescribeRealtimeLogDeliveryTasksRequest} req
+     * @param {function(string, DescribeRealtimeLogDeliveryTasksResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeLogDeliveryTasks(req, cb) {
+        let resp = new DescribeRealtimeLogDeliveryTasksResponse();
+        this.request("DescribeRealtimeLogDeliveryTasks", req, resp, cb);
     }
 
     /**
@@ -684,6 +711,18 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     DeleteAccelerationDomains(req, cb) {
         let resp = new DeleteAccelerationDomainsResponse();
         this.request("DeleteAccelerationDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create real-time log delivery tasks. This API has the following restrictions:
+Under the same combination of data delivery type (LogType) and data delivery area (Area), an entity (Layer 7 domain or Layer 4 proxy instance) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://tcloud4api.woa.com/document/product/1657/343539?!preview&!document=1) API to check whether an entity has been added to a real-time log delivery task.
+     * @param {CreateRealtimeLogDeliveryTaskRequest} req
+     * @param {function(string, CreateRealtimeLogDeliveryTaskResponse):void} cb
+     * @public
+     */
+    CreateRealtimeLogDeliveryTask(req, cb) {
+        let resp = new CreateRealtimeLogDeliveryTaskResponse();
+        this.request("CreateRealtimeLogDeliveryTask", req, resp, cb);
     }
 
     /**
@@ -1020,6 +1059,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
+     * This API is used to delete a real-time log delivery task.
+     * @param {DeleteRealtimeLogDeliveryTaskRequest} req
+     * @param {function(string, DeleteRealtimeLogDeliveryTaskResponse):void} cb
+     * @public
+     */
+    DeleteRealtimeLogDeliveryTask(req, cb) {
+        let resp = new DeleteRealtimeLogDeliveryTaskResponse();
+        this.request("DeleteRealtimeLogDeliveryTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the top-ranked DDoS attack data.
      * @param {DescribeDDoSAttackTopDataRequest} req
      * @param {function(string, DescribeDDoSAttackTopDataResponse):void} cb
@@ -1094,6 +1144,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     DescribeRules(req, cb) {
         let resp = new DescribeRulesResponse();
         this.request("DescribeRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create key-value indexes for relevant delivered log fields in the corresponding Tencent Cloud CLS log topic for a specified real-time log delivery task (task-id). If such indexes have been created in CLS, this API will append indexes through merging.
+     * @param {CreateCLSIndexRequest} req
+     * @param {function(string, CreateCLSIndexResponse):void} cb
+     * @public
+     */
+    CreateCLSIndex(req, cb) {
+        let resp = new CreateCLSIndexResponse();
+        this.request("CreateCLSIndex", req, resp, cb);
     }
 
     /**
@@ -1228,6 +1289,17 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     BindSharedCNAME(req, cb) {
         let resp = new BindSharedCNAMEResponse();
         this.request("BindSharedCNAME", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the real-time log delivery task configuration. This API has the following restrictions:<li>Does not support modifying the destination type of the real-time log delivery task (TaskType);</li><li>Does not support modifying the data delivery type (LogType)</li><li>Does not support modifying the data delivery area (Area)</li><li>Does not support modifying the detailed destination configuration, such as log set and log topic, when the destination of the original real-time log delivery task is Tencent Cloud CLS.</li>
+     * @param {ModifyRealtimeLogDeliveryTaskRequest} req
+     * @param {function(string, ModifyRealtimeLogDeliveryTaskResponse):void} cb
+     * @public
+     */
+    ModifyRealtimeLogDeliveryTask(req, cb) {
+        let resp = new ModifyRealtimeLogDeliveryTaskResponse();
+        this.request("ModifyRealtimeLogDeliveryTask", req, resp, cb);
     }
 
     /**

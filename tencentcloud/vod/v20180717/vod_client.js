@@ -276,6 +276,7 @@ const CreateHeadTailTemplateRequest = models.CreateHeadTailTemplateRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
 const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
+const FastEditMediaResponse = models.FastEditMediaResponse;
 const EmptyTrackItem = models.EmptyTrackItem;
 const RefererRule = models.RefererRule;
 const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
@@ -383,7 +384,7 @@ const ExtractCopyRightWatermarkRequest = models.ExtractCopyRightWatermarkRequest
 const IpFilter = models.IpFilter;
 const DescribeEnhanceMediaTemplatesRequest = models.DescribeEnhanceMediaTemplatesRequest;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
-const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
+const FastEditMediaRequest = models.FastEditMediaRequest;
 const CopyRightWatermarkInput = models.CopyRightWatermarkInput;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
@@ -706,6 +707,7 @@ const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const QualityEnhanceTaskOutput = models.QualityEnhanceTaskOutput;
 const ReviewTemplate = models.ReviewTemplate;
+const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const DescribeCDNDomainsResponse = models.DescribeCDNDomainsResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const CreateRebuildMediaTemplateRequest = models.CreateRebuildMediaTemplateRequest;
@@ -798,6 +800,7 @@ const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
 const EnhanceMediaQualityResponse = models.EnhanceMediaQualityResponse;
 const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
 const MediaTrack = models.MediaTrack;
+const FastEditMediaFileInfo = models.FastEditMediaFileInfo;
 const StorageStatData = models.StorageStatData;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const DescribeFileAttributesRequest = models.DescribeFileAttributesRequest;
@@ -2093,6 +2096,17 @@ If using event notification, the event notification type is [task flow status ch
     DeleteWordSamples(req, cb) {
         let resp = new DeleteWordSamplesResponse();
         this.request("DeleteWordSamples", req, resp, cb);
+    }
+
+    /**
+     * Implement fast splicing and editing of HLS videos to generate new HLS format media.
+     * @param {FastEditMediaRequest} req
+     * @param {function(string, FastEditMediaResponse):void} cb
+     * @public
+     */
+    FastEditMedia(req, cb) {
+        let resp = new FastEditMediaResponse();
+        this.request("FastEditMedia", req, resp, cb);
     }
 
     /**

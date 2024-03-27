@@ -62,7 +62,7 @@ class HttpConnection {
         const config = {
             method,
             timeout,
-            headers: {
+            headers: Object.assign({}, headers, {
                 'Host': new URL(url).host,
                 'X-TC-Action': action,
                 'X-TC-Region': region,
@@ -70,8 +70,7 @@ class HttpConnection {
                 'X-TC-Version': version,
                 'X-TC-Token': token,
                 'X-TC-RequestClient': requestClient,
-                ...headers,
-            }
+            })
         }
 
         if (token === null) {

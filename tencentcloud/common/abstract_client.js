@@ -5,6 +5,7 @@ const Sign = require("./sign");
 const HttpConnection = require("./http/http_connection");
 const TencentCloudSDKHttpException = require("./exception/tencent_cloud_sdk_exception");
 const SSEResponseModel = require("./sse_response_model");
+const uuidv4 = require("uuid").v4;
 
 /**
  * @inner
@@ -81,7 +82,7 @@ class AbstractClient {
         if (this.profile.signMethod === 'TC3-HMAC-SHA256') {
             this.doRequestWithSign3(action, req, options).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
         } else {
-            this.doRequest(action, req).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+            this.doRequest(action, req, options).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
         }
     }
 
@@ -101,16 +102,34 @@ class AbstractClient {
         if (this.profile.signMethod === 'TC3-HMAC-SHA256') {
             this.doRequestWithSign3(action, req, options).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
         } else {
-            this.doRequest(action, req).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+            this.doRequest(action, req, options).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
         }
     }
 
     /**
      * @inner
      */
-    async doRequest(action, req) {
+    async doRequest(action, req, options) {
         let params = this.mergeData(req);
         params = this.formatRequestData(action, params);
+
+        const headers = Object.assign(
+            {},
+            this.profile.httpProfile.headers,
+            options.headers
+        )
+        let traceId = ""
+        for (let key in headers) {
+            if (key.toLowerCase() === "x-tc-traceid") {
+                traceId = headers[key]
+                break
+            }
+        }
+        if (!traceId) {
+            traceId = uuidv4()
+            headers["X-TC-TraceId"] = traceId
+        }
+
         let res;
         try {
             res = await HttpConnection.doRequest({
@@ -118,10 +137,10 @@ class AbstractClient {
                 url: this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
                 data: params,
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
-                headers: Object.assign({}, this.profile.httpProfile.headers),
+                headers,
             });
         } catch (error) {
-            throw new TencentCloudSDKHttpException(error.message);
+            throw new TencentCloudSDKHttpException(error.message, "", traceId);
         }
         return await this.parseResponse(res)
     }
@@ -130,6 +149,23 @@ class AbstractClient {
      * @inner
      */
     async doRequestWithSign3(action, params, options) {
+        const headers = Object.assign(
+            {},
+            this.profile.httpProfile.headers,
+            options.headers
+        )
+        let traceId = ""
+        for (let key in headers) {
+            if (key.toLowerCase() === "x-tc-traceid") {
+                traceId = headers[key]
+                break
+            }
+        }
+        if (!traceId) {
+            traceId = uuidv4()
+            headers["X-TC-TraceId"] = traceId
+        }
+
         let res;
         try {
             res = await HttpConnection.doRequestWithSign3({
@@ -146,17 +182,18 @@ class AbstractClient {
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
                 token: this.credential.token,
                 requestClient: this.sdkVersion,
-                headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+                headers,
             })
         } catch (e) {
-            throw new TencentCloudSDKHttpException(e.message)
+            throw new TencentCloudSDKHttpException(e.message, "", traceId)
         }
         return await this.parseResponse(res)
     }
 
     async parseResponse(res) {
+        const traceId = res.headers.get("x-tc-traceid")
         if (res.status !== 200) {
-            const tcError = new TencentCloudSDKHttpException(res.statusText)
+            const tcError = new TencentCloudSDKHttpException(res.statusText, "", traceId)
             tcError.httpCode = res.status
             throw tcError;
         } else {
@@ -165,7 +202,7 @@ class AbstractClient {
             } else {
                 const data = await res.json();
                 if (data.Response.Error) {
-                    const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId)
+                    const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId, traceId)
                     tcError.code = data.Response.Error.Code
                     throw tcError;
                 } else {

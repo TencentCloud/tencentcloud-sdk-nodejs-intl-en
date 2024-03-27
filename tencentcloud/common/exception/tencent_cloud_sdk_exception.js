@@ -2,9 +2,10 @@
  * @inner
  */
 class TencentCloudSDKHttpException extends Error {
-    constructor(error, requestId="") {
+    constructor(error, requestId="", traceId="") {
         super(error);
         this.requestId = requestId || '';
+        this.traceId = traceId || '';
     }
 
     getMessage() {
@@ -15,12 +16,32 @@ class TencentCloudSDKHttpException extends Error {
         return this.requestId;
     }
 
+    getTraceId() {
+        return this.traceId;
+    }
+
     toString() {
-        return "[TencentCloudSDKException]" + "message:" + this.getMessage() + "  requestId:" + this.getRequestId();
+        return (
+            "[TencentCloudSDKException]" +
+            "message:" +
+            this.getMessage() +
+            "  requestId:" +
+            this.getRequestId() +
+            "  traceId:" +
+            this.getTraceId()
+        );
     }
 
     toLocaleString() {
-        return "[TencentCloudSDKException]" + "message:" + this.getMessage() + "  requestId:" + this.getRequestId();
+        return (
+            "[TencentCloudSDKException]" +
+            "message:" +
+            this.getMessage() +
+            "  requestId:" +
+            this.getRequestId() +
+            "  traceId:" +
+            this.getTraceId()
+          );
     }
 }
 module.exports = TencentCloudSDKHttpException

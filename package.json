@@ -24,7 +24,8 @@
     "get-stream": "^4.1.0",
     "https-proxy-agent": "^2.2.1",
     "is-stream": "^1.1.0",
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.2.0",
+    "uuid": "^9.0.1"
   },
   "directories": {
     "example": "examples",

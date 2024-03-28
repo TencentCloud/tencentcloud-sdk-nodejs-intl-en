@@ -9,6 +9,7 @@ module.exports = {
     captcha: require("./captcha"),
     car: require("./car"),
     cbs: require("./cbs"),
+    ccc: require("./ccc"),
     cdb: require("./cdb"),
     cdn: require("./cdn"),
     cfs: require("./cfs"),

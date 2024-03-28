@@ -46412,7 +46412,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * VOD  fast media editing information
  * @class
  */
 class FastEditMediaFileInfo extends  AbstractModel {
@@ -46420,31 +46420,31 @@ class FastEditMediaFileInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Media file ID.
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * 
+         * The types of media. Valid values: <li>Transcode:Transcoded output; </li> <li>Original: Original audio and video. </li>The audio and video being operated on must be in HLS format.
          * @type {string || null}
          */
         this.AudioVideoType = null;
 
         /**
-         * 
+         * When AudioVideoType is set to Transcode, it is valid and indicates the transcoding template ID for the media being operated on.
          * @type {number || null}
          */
         this.TranscodeDefinition = null;
 
         /**
-         * 
+         * Offset time of the start of the video clip, unit: seconds.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * 
+         * Offset time at the end of the video clip, unit: seconds.
          * @type {number || null}
          */
         this.EndTimeOffset = null;

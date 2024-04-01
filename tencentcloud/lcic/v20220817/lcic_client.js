@@ -116,6 +116,7 @@ const RoomInfo = models.RoomInfo;
 const ModifyRoomRequest = models.ModifyRoomRequest;
 const AnswerInfo = models.AnswerInfo;
 const DescribeRoomStatisticsRequest = models.DescribeRoomStatisticsRequest;
+const CustomMsgContent = models.CustomMsgContent;
 const DescribeDocumentsByRoomResponse = models.DescribeDocumentsByRoomResponse;
 const LoginOriginIdResponse = models.LoginOriginIdResponse;
 const DescribeQuestionListResponse = models.DescribeQuestionListResponse;

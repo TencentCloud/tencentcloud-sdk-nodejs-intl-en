@@ -3920,6 +3920,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RequestId = null;
 
+        /**
+         * Base64 of cropped image of ID card
+         * @type {string || null}
+         */
+        this.CardCutImageBase64 = null;
+
+        /**
+         * Base64 of the cropped image on the reverse side of the ID card
+         * @type {string || null}
+         */
+        this.CardBackCutImageBase64 = null;
+
     }
 
     /**
@@ -3938,6 +3950,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.CardInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CardCutImageBase64 = 'CardCutImageBase64' in params ? params.CardCutImageBase64 : null;
+        this.CardBackCutImageBase64 = 'CardBackCutImageBase64' in params ? params.CardBackCutImageBase64 : null;
 
     }
 }

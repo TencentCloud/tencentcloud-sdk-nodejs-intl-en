@@ -20,6 +20,7 @@ const DeployConfigGroupVersionRequest = models.DeployConfigGroupVersionRequest;
 const Compression = models.Compression;
 const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
+const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoResponse;
 const SlowPostConfig = models.SlowPostConfig;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
@@ -267,6 +268,7 @@ const ZoneSetting = models.ZoneSetting;
 const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
 const RuleAndConditions = models.RuleAndConditions;
 const DropPageConfig = models.DropPageConfig;
+const DescribeSecurityIPGroupInfoRequest = models.DescribeSecurityIPGroupInfoRequest;
 const PartialModule = models.PartialModule;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
 const SecEntry = models.SecEntry;
@@ -317,7 +319,7 @@ const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest
 const Quic = models.Quic;
 const CreateCLSIndexRequest = models.CreateCLSIndexRequest;
 const DescribeRulesRequest = models.DescribeRulesRequest;
-const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
+const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
 const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
 const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
 const AccelerationDomain = models.AccelerationDomain;
@@ -354,7 +356,7 @@ const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
 const AiRule = models.AiRule;
 const Quota = models.Quota;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
-const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
+const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
@@ -714,8 +716,8 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
-     * This API is used to create real-time log delivery tasks. This API has the following restrictions:
-Under the same combination of data delivery type (LogType) and data delivery area (Area), an entity (Layer 7 domain or Layer 4 proxy instance) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://tcloud4api.woa.com/document/product/1657/343539?!preview&!document=1) API to check whether an entity has been added to a real-time log delivery task.
+     * This API is used to create a real-time log delivery task. The following limits apply:
+An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combination of the same data delivery type (LogType) and data delivery area (Area) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://intl.cloud.tencent.com/document/product/1552/104110?from_cn_redirect=1) API to check whether the entity has been added to another real-time log delivery task.
      * @param {CreateRealtimeLogDeliveryTaskRequest} req
      * @param {function(string, CreateRealtimeLogDeliveryTaskResponse):void} cb
      * @public
@@ -1377,6 +1379,17 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     DeleteZone(req, cb) {
         let resp = new DeleteZoneResponse();
         this.request("DeleteZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the configuration information of an IP group, including the IP group name, IP group content, and the site the IP group belongs to.
+     * @param {DescribeSecurityIPGroupInfoRequest} req
+     * @param {function(string, DescribeSecurityIPGroupInfoResponse):void} cb
+     * @public
+     */
+    DescribeSecurityIPGroupInfo(req, cb) {
+        let resp = new DescribeSecurityIPGroupInfoResponse();
+        this.request("DescribeSecurityIPGroupInfo", req, resp, cb);
     }
 
     /**

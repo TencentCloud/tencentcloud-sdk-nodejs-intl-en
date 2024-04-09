@@ -72,6 +72,7 @@ const TrainTicket = models.TrainTicket;
 const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const MotorVehicleSaleInvoice = models.MotorVehicleSaleInvoice;
 const TableOCRRequest = models.TableOCRRequest;
+const PassportRecognizeInfos = models.PassportRecognizeInfos;
 const TaxiTicket = models.TaxiTicket;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
@@ -252,8 +253,6 @@ A maximum of 2 requests can be initiated per second for this API.
 
     /**
      * This API is used to recognize a passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions. Recognizable fields include passport ID, name, date of birth, gender, expiration date, issuing country/region, and nationality. It has the features of cropping identity photos and alarming for photographed or photocopied documents.
-
-This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
      * @param {MLIDPassportOCRRequest} req
      * @param {function(string, MLIDPassportOCRResponse):void} cb
      * @public

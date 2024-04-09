@@ -294,10 +294,21 @@ class MLIDPassportOCRRequest extends  AbstractModel {
         this.ImageBase64 = null;
 
         /**
-         * Whether to return an image. Default value: false.
+         * Whether to return an image. 
+Default value: false.
          * @type {boolean || null}
          */
         this.RetImage = null;
+
+        /**
+         * URL address of image. (This field is not supported outside Chinese mainland)
+Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
+We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
 
     }
 
@@ -310,6 +321,7 @@ class MLIDPassportOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.RetImage = 'RetImage' in params ? params.RetImage : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -5106,6 +5118,125 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 }
 
 /**
+ * 
+ * @class
+ */
+class PassportRecognizeInfos extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IssuingCountry = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PassportID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Surname = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DateOfBirth = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DateOfIssuance = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DateOfExpiration = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Signature = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IssuePlace = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IssuingAuthority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.IssuingCountry = 'IssuingCountry' in params ? params.IssuingCountry : null;
+        this.PassportID = 'PassportID' in params ? params.PassportID : null;
+        this.Surname = 'Surname' in params ? params.Surname : null;
+        this.GivenName = 'GivenName' in params ? params.GivenName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.DateOfBirth = 'DateOfBirth' in params ? params.DateOfBirth : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.DateOfIssuance = 'DateOfIssuance' in params ? params.DateOfIssuance : null;
+        this.DateOfExpiration = 'DateOfExpiration' in params ? params.DateOfExpiration : null;
+        this.Signature = 'Signature' in params ? params.Signature : null;
+        this.IssuePlace = 'IssuePlace' in params ? params.IssuePlace : null;
+        this.IssuingAuthority = 'IssuingAuthority' in params ? params.IssuingAuthority : null;
+
+    }
+}
+
+/**
  * Taxi receipt
  * @class
  */
@@ -6177,8 +6308,8 @@ class MLIDPassportOCRResponse extends  AbstractModel {
 
         /**
          * Alarm codes
--9103 Alarm for spoofed document
--9102 Alarm for photocopied document (including black & white and color ones)
+-9102 Alarm for photocopy on a paper document (including black & white and color ones)
+-9103 Alarm for photocopy on an electronic device
 -9106 Alarm for covered card
          * @type {Array.<number> || null}
          */
@@ -6231,7 +6362,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.GivenName = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Type (in Machine Readable Zone)
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Document content in Information Zone
+         * @type {PassportRecognizeInfos || null}
+         */
+        this.PassportRecognizeInfos = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6259,6 +6402,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CodeCrc = 'CodeCrc' in params ? params.CodeCrc : null;
         this.Surname = 'Surname' in params ? params.Surname : null;
         this.GivenName = 'GivenName' in params ? params.GivenName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.PassportRecognizeInfos) {
+            let obj = new PassportRecognizeInfos();
+            obj.deserialize(params.PassportRecognizeInfos)
+            this.PassportRecognizeInfos = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8866,6 +9016,7 @@ module.exports = {
     RecognizeThaiIDCardOCRRequest: RecognizeThaiIDCardOCRRequest,
     MotorVehicleSaleInvoice: MotorVehicleSaleInvoice,
     TableOCRRequest: TableOCRRequest,
+    PassportRecognizeInfos: PassportRecognizeInfos,
     TaxiTicket: TaxiTicket,
     LicensePlateOCRRequest: LicensePlateOCRRequest,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,

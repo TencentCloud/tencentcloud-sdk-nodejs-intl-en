@@ -434,7 +434,7 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         this.TopicId = null;
 
         /**
-         * Interval in milliseconds. Condition: (To – From) / Interval ≤ 200
+         * Interval in milliseconds. Condition: (To-From) / Interval <= 200
          * @type {number || null}
          */
         this.Interval = null;
@@ -825,7 +825,7 @@ class CheckFunctionRequest extends  AbstractModel {
         super();
 
         /**
-         * The processing statement entered by the user
+         * Processing statement entered by the user
          * @type {string || null}
          */
         this.EtlContent = null;
@@ -837,7 +837,7 @@ class CheckFunctionRequest extends  AbstractModel {
         this.DstResources = null;
 
         /**
-         * The type of the target topic for data processing. Valid values: 1 (fixed Topic) and 2 (dynamic creation)
+         * Type of the target topic for data processing. Valid values: 1 (fixed Topic) and 2 (dynamic creation)
          * @type {number || null}
          */
         this.FuncType = null;
@@ -996,7 +996,7 @@ class SearchCosRechargeInfoRequest extends  AbstractModel {
         this.Prefix = null;
 
         /**
-         * Compression mode: "", "gzip", "lzop", and "snappy”. The default mode is "".
+         * Compression mode: "", "gzip", "lzop", and "snappy". The default mode is "".
          * @type {string || null}
          */
         this.Compress = null;
@@ -2037,7 +2037,7 @@ class DescribeKafkaConsumerResponse extends  AbstractModel {
         this.TopicID = null;
 
         /**
-         * Compression mode [0:NONE；2:SNAPPY；3:LZ4]
+         * Compression mode [0: NONE; 2: SNAPPY; 3: LZ4]
          * @type {number || null}
          */
         this.Compression = null;
@@ -3586,7 +3586,7 @@ class ModifyConsumerRequest extends  AbstractModel {
         this.Ckafka = null;
 
         /**
-         * Compression method during delivery. Valid values: 0, 2, and 3. [0：NONE；2：SNAPPY；3：LZ4]
+         * Compression method during delivery. Valid values: 0, 2, and 3. [0: NONE; 2: SNAPPY; 3: LZ4]
          * @type {number || null}
          */
         this.Compression = null;
@@ -4055,7 +4055,7 @@ class ModifyAlarmRequest extends  AbstractModel {
         this.MonitorTime = null;
 
         /**
-         * Trigger condition.Note:- Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+         * Trigger condition. Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
          * @type {string || null}
          */
         this.Condition = null;
@@ -4063,25 +4063,25 @@ class ModifyAlarmRequest extends  AbstractModel {
         /**
          * Alarm level.0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical)
 
-Note:- Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
          * @type {number || null}
          */
         this.AlarmLevel = null;
 
         /**
-         * Multiple ttrigger conditions.Note:- Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+         * Multiple trigger conditions. Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
          * @type {Array.<MultiCondition> || null}
          */
         this.MultiConditions = null;
 
         /**
-         * Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1–10.
+         * Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1 to 10
          * @type {number || null}
          */
         this.TriggerCount = null;
 
         /**
-         * Repeated alarm interval in minutes. Value range: 0–1440.
+         * Repeated alarm interval in minutes. Value range: 0 to 1440
          * @type {number || null}
          */
         this.AlarmPeriod = null;
@@ -4129,7 +4129,7 @@ Note:- Condition and AlarmLevel are one set of configurations, MultiConditions i
         this.Analysis = null;
 
         /**
-         * Group trigger status. true: enabled, false: disabled (default)
+         * Group trigger status. true: enabled; false: disabled (default)
          * @type {boolean || null}
          */
         this.GroupTriggerStatus = null;
@@ -5088,7 +5088,7 @@ class ModifyKafkaConsumerRequest extends  AbstractModel {
         this.FromTopicId = null;
 
         /**
-         * Compression mode [0:NONE；2:SNAPPY；3:LZ4]
+         * Compression mode [0: NONE; 2: SNAPPY; 3: LZ4]
          * @type {number || null}
          */
         this.Compression = null;
@@ -5953,7 +5953,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.StorageType = null;
 
         /**
-         * lifetime. Unit: days. Standard storage value range: 1~3600. Infrequent storage value range: 7~3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+         * lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
          * @type {number || null}
          */
         this.Period = null;
@@ -6287,7 +6287,7 @@ class ModifyScheduledSqlRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * Source Log Topic
+         * Source log topic
          * @type {string || null}
          */
         this.SrcTopicId = null;
@@ -7292,7 +7292,7 @@ class CloseKafkaConsumerRequest extends  AbstractModel {
         super();
 
         /**
-         * Log Topic ID
+         * Log topic ID
          * @type {string || null}
          */
         this.FromTopicId = null;
@@ -9311,13 +9311,13 @@ class CheckFunctionResponse extends  AbstractModel {
         super();
 
         /**
-         * Failure Error Code
+         * Failure error code
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
-         * Failure Error Message
+         * Failure error message
          * @type {string || null}
          */
         this.ErrorMsg = null;
@@ -9694,13 +9694,13 @@ class ModifyShipperRequest extends  AbstractModel {
         this.ShipperName = null;
 
         /**
-         * Shipping time interval in seconds. Default value: 300. Value range: 300–900
+         * Shipping time interval in seconds. Default value: 300. Value range: 300 to 900
          * @type {number || null}
          */
         this.Interval = null;
 
         /**
-         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
+         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5 to 256
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -9736,7 +9736,7 @@ class ModifyShipperRequest extends  AbstractModel {
         this.FilenameMode = null;
 
         /**
-         * COS Bucket Type
+         * COS bucket type
          * @type {string || null}
          */
         this.StorageType = null;
@@ -10069,7 +10069,7 @@ class CreateConsumerRequest extends  AbstractModel {
         this.Ckafka = null;
 
         /**
-         * Compression method during delivery. Valid values: 0, 2, and 3. [0：NONE；2：SNAPPY；3：LZ4]
+         * Compression method during delivery. Valid values: 0, 2, and 3. [0: NONE; 2: SNAPPY; 3: LZ4]
          * @type {number || null}
          */
         this.Compression = null;
@@ -11762,7 +11762,7 @@ class ModifyTopicRequest extends  AbstractModel {
         this.MaxSplitPartitions = null;
 
         /**
-         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
+         * Lifecycle in days. Value range: 1 to 3600 (STANDARD storage); 7 to 3600 (IA storage). 3640 indicates permanent retention.
          * @type {number || null}
          */
         this.Period = null;
@@ -12287,7 +12287,7 @@ Notes:
         /**
          * Indicates whether to sample raw logs before statistical analysis (`Query` includes SQL statements).
 `0`: Auto-sample.
-`0–1`: Sample by the specified sample rate, such as `0.02`.
+`0-1`: Sample by the specified sample rate, such as `0.02`.
 `1`: Precise analysis without sampling.
 Default value: `1`
          * @type {number || null}
@@ -14052,13 +14052,13 @@ class CreateScheduledSqlRequest extends  AbstractModel {
         super();
 
         /**
-         * Source Log Topic
+         * Source log topic
          * @type {string || null}
          */
         this.SrcTopicId = null;
 
         /**
-         * Task Name
+         * Task name
          * @type {string || null}
          */
         this.Name = null;
@@ -14076,25 +14076,25 @@ class CreateScheduledSqlRequest extends  AbstractModel {
         this.DstResource = null;
 
         /**
-         * Query Statement
+         * Query statement
          * @type {string || null}
          */
         this.ScheduledSqlContent = null;
 
         /**
-         * Schedule Start Time, Unix timestamp, in milliseconds
+         * Schedule start time, Unix timestamp, in milliseconds
          * @type {number || null}
          */
         this.ProcessStartTime = null;
 
         /**
-         * Schedule Type: 1 Continuous Running 2 Specified Time Range
+         * Schedule type: 1: Continuous running; 2: Specified time range
          * @type {number || null}
          */
         this.ProcessType = null;
 
         /**
-         * Scheduling Interval (Minutes)
+         * Scheduling interval (minutes)
          * @type {number || null}
          */
         this.ProcessPeriod = null;
@@ -14106,19 +14106,19 @@ class CreateScheduledSqlRequest extends  AbstractModel {
         this.ProcessTimeWindow = null;
 
         /**
-         * Execution Delay (Seconds)
+         * Execution delay (Seconds)
          * @type {number || null}
          */
         this.ProcessDelay = null;
 
         /**
-         * Source Topic ID Region Information
+         * Source topic ID region information
          * @type {string || null}
          */
         this.SrcTopicRegion = null;
 
         /**
-         * Schedule End Time. Required field when ProcessType=2, Unix timestamp, in milliseconds
+         * Schedule end time. Required field when ProcessType=2, Unix timestamp, in milliseconds
          * @type {number || null}
          */
         this.ProcessEndTime = null;

@@ -275,7 +275,7 @@ class ClsClient extends AbstractClient {
     }
     
     /**
-     * Modifies Kafka Protocol consumption information
+     * This API is used to modify Kafka protocol consumption information.
      * @param {ModifyKafkaConsumerRequest} req
      * @param {function(string, ModifyKafkaConsumerResponse):void} cb
      * @public
@@ -319,7 +319,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * Queries the latest metric value at a specified time
+     * This API is used to query the latest metric value at a specified time.
      * @param {QueryMetricRequest} req
      * @param {function(string, QueryMetricResponse):void} cb
      * @public
@@ -341,7 +341,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a collection rule configuration.
+     * This API is used to get collection rule configuration.
      * @param {DescribeConfigsRequest} req
      * @param {function(string, DescribeConfigsResponse):void} cb
      * @public
@@ -451,7 +451,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a collection rule configuration.
+     * This API is used to create collection rule configuration.
      * @param {CreateConfigRequest} req
      * @param {function(string, CreateConfigResponse):void} cb
      * @public
@@ -506,7 +506,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete scheduled SQL analysis tasks.
+     * This API is used to delete a scheduled SQL analysis task.
      * @param {DeleteScheduledSqlRequest} req
      * @param {function(string, DeleteScheduledSqlResponse):void} cb
      * @public
@@ -517,7 +517,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a download task. To get the returned download address, call `DescribeExports` to view the task list. The `CosPath` parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
+     * This API is used to create a download task. To get the returned download address, call DescribeExports to view the task list. The CosPath parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
      * @param {CreateExportRequest} req
      * @param {function(string, CreateExportResponse):void} cb
      * @public
@@ -583,7 +583,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a CKafka delivery task
+     * This API is used to modify a CKafka delivery task.
      * @param {ModifyConsumerRequest} req
      * @param {function(string, ModifyConsumerResponse):void} cb
      * @public
@@ -649,7 +649,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to apply the collection configuration to the specified machine group.
+     * This API is used to apply the collection configuration to a specified machine group.
      * @param {ApplyConfigToMachineGroupRequest} req
      * @param {function(string, ApplyConfigToMachineGroupResponse):void} cb
      * @public
@@ -671,7 +671,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a log count histogram. 
+     * This API is used to get a log count histogram.
      * @param {DescribeLogHistogramRequest} req
      * @param {function(string, DescribeLogHistogramResponse):void} cb
      * @public
@@ -726,7 +726,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * Accesses Kafka protocol consumption information
+     * This API is used to access Kafka protocol consumption information.
      * @param {DescribeKafkaConsumerRequest} req
      * @param {function(string, DescribeKafkaConsumerResponse):void} cb
      * @public
@@ -759,7 +759,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * Accesses alarm blocking configuration rules
+     * This API is used to access alarm blocking configuration rules.
      * @param {DescribeAlarmShieldsRequest} req
      * @param {function(string, DescribeAlarmShieldsResponse):void} cb
      * @public
@@ -770,7 +770,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify scheduled SQL analysis tasks.
+     * This API is used to modify a scheduled SQL analysis task.
      * @param {ModifyScheduledSqlRequest} req
      * @param {function(string, ModifyScheduledSqlResponse):void} cb
      * @public
@@ -957,7 +957,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the machine group bound to a collection rule configuration.
+     * This API is used to get the machine group bound to collection rule configuration.
      * @param {DescribeConfigMachineGroupsRequest} req
      * @param {function(string, DescribeConfigMachineGroupsResponse):void} cb
      * @public
@@ -1045,7 +1045,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a collection rule configuration.
+     * This API is used to delete collection rule configuration.
      * @param {DeleteConfigRequest} req
      * @param {function(string, DeleteConfigResponse):void} cb
      * @public
@@ -1078,7 +1078,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the configuration of the task of shipping to COS.
+     * This API is used to get the configuration of the task shipped to COS.
      * @param {DescribeShippersRequest} req
      * @param {function(string, DescribeShippersResponse):void} cb
      * @public
@@ -1100,7 +1100,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a collection rule configuration.
+     * This API is used to modify collection rule configuration.
      * @param {ModifyConfigRequest} req
      * @param {function(string, ModifyConfigResponse):void} cb
      * @public
@@ -1177,7 +1177,7 @@ This example shows you how to use the protoc compiler to compile a pb descriptio
 
 > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 
-#### 1. Install Protocol Buffers
+#### 1. Install protocol buffers
 
 Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the example is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
 
@@ -1343,7 +1343,7 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * Gets the status of a machine under the specified machine group
+     * This API is used to get the status of a machine under the specified machine group.
      * @param {DescribeMachinesRequest} req
      * @param {function(string, DescribeMachinesResponse):void} cb
      * @public

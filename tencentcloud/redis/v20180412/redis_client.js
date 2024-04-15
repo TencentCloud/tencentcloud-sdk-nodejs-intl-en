@@ -28,8 +28,10 @@ const AllocateWanAddressRequest = models.AllocateWanAddressRequest;
 const ApplyParamsTemplateRequest = models.ApplyParamsTemplateRequest;
 const UpgradeInstanceVersionResponse = models.UpgradeInstanceVersionResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
+const CreateReplicationGroupRequest = models.CreateReplicationGroupRequest;
 const ModifyInstanceReadOnlyResponse = models.ModifyInstanceReadOnlyResponse;
 const DescribeInstanceZoneInfoRequest = models.DescribeInstanceZoneInfoRequest;
+const ModifyConnectionConfigResponse = models.ModifyConnectionConfigResponse;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
@@ -60,7 +62,9 @@ const BigKeyInfo = models.BigKeyInfo;
 const DescribeBandwidthRangeResponse = models.DescribeBandwidthRangeResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const RenewInstanceRequest = models.RenewInstanceRequest;
+const RedisInstanceEvent = models.RedisInstanceEvent;
 const UpgradeVersionToMultiAvailabilityZonesResponse = models.UpgradeVersionToMultiAvailabilityZonesResponse;
+const SecurityGroup = models.SecurityGroup;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
@@ -78,7 +82,9 @@ const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
 const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
+const DescribeInstanceEventsRequest = models.DescribeInstanceEventsRequest;
 const ChangeMasterInstanceResponse = models.ChangeMasterInstanceResponse;
+const AddReplicationInstanceResponse = models.AddReplicationInstanceResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
@@ -99,7 +105,7 @@ const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
-const BackupLimitVpcItem = models.BackupLimitVpcItem;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const UpgradeProxyVersionResponse = models.UpgradeProxyVersionResponse;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
@@ -111,6 +117,7 @@ const InstanceIntegerParam = models.InstanceIntegerParam;
 const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMultiAvailabilityZonesRequest;
 const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
+const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest;
 const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const SwitchAccessNewInstanceResponse = models.SwitchAccessNewInstanceResponse;
 const CloneInstancesResponse = models.CloneInstancesResponse;
@@ -122,6 +129,7 @@ const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
+const ModifyInstanceEventRequest = models.ModifyInstanceEventRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
@@ -144,7 +152,7 @@ const InquiryPriceUpgradeInstanceRequest = models.InquiryPriceUpgradeInstanceReq
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
-const SecurityGroup = models.SecurityGroup;
+const DescribeInstanceEventsResponse = models.DescribeInstanceEventsResponse;
 const CreateInstanceAccountRequest = models.CreateInstanceAccountRequest;
 const RemoveReplicationInstanceRequest = models.RemoveReplicationInstanceRequest;
 const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
@@ -152,6 +160,7 @@ const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowRespon
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ReleaseWanAddressResponse = models.ReleaseWanAddressResponse;
 const ProductConf = models.ProductConf;
+const ModifyConnectionConfigRequest = models.ModifyConnectionConfigRequest;
 const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const InstanceNode = models.InstanceNode;
 const TendisNodes = models.TendisNodes;
@@ -164,6 +173,7 @@ const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ReplicaGroup = models.ReplicaGroup;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
+const DeleteReplicationInstanceResponse = models.DeleteReplicationInstanceResponse;
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
 const DescribeInstanceDealDetailResponse = models.DescribeInstanceDealDetailResponse;
 const Groups = models.Groups;
@@ -190,6 +200,7 @@ const InstanceSet = models.InstanceSet;
 const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
 const CloseSSLResponse = models.CloseSSLResponse;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
+const CreateReplicationGroupResponse = models.CreateReplicationGroupResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
@@ -204,6 +215,7 @@ const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const DescribeInstanceSupportFeatureResponse = models.DescribeInstanceSupportFeatureResponse;
+const AddReplicationInstanceRequest = models.AddReplicationInstanceRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
 const DescribeSSLStatusResponse = models.DescribeSSLStatusResponse;
 const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
@@ -218,7 +230,7 @@ const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoRespon
 const SwitchProxyRequest = models.SwitchProxyRequest;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
 const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
@@ -236,6 +248,7 @@ const TendisSlowLogDetail = models.TendisSlowLogDetail;
 const ChangeInstanceRoleResponse = models.ChangeInstanceRoleResponse;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const ZoneCapacityConf = models.ZoneCapacityConf;
+const ModifyInstanceEventResponse = models.ModifyInstanceEventResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DescribeProjectSecurityGroupResponse = models.DescribeProjectSecurityGroupResponse;
@@ -288,6 +301,17 @@ class RedisClient extends AbstractClient {
     DescribeTaskList(req, cb) {
         let resp = new DescribeTaskListResponse();
         this.request("DescribeTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove replication group members. Note: The API is being deprecated. Please use RemoveReplicationInstance instead.
+     * @param {DeleteReplicationInstanceRequest} req
+     * @param {function(string, DeleteReplicationInstanceResponse):void} cb
+     * @public
+     */
+    DeleteReplicationInstance(req, cb) {
+        let resp = new DeleteReplicationInstanceResponse();
+        this.request("DeleteReplicationInstance", req, resp, cb);
     }
 
     /**
@@ -467,14 +491,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to unbind a security group from instances in batches.
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * This API is used to modify the connection configuration of an instance, including the bandwidth and maximum number of connections.
+     * @param {ModifyConnectionConfigRequest} req
+     * @param {function(string, ModifyConnectionConfigResponse):void} cb
      * @public
      */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
+    ModifyConnectionConfig(req, cb) {
+        let resp = new ModifyConnectionConfigResponse();
+        this.request("ModifyConnectionConfig", req, resp, cb);
     }
 
     /**
@@ -522,6 +546,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the operations event execution schedule of an instance.
+     * @param {ModifyInstanceEventRequest} req
+     * @param {function(string, ModifyInstanceEventResponse):void} cb
+     * @public
+     */
+    ModifyInstanceEvent(req, cb) {
+        let resp = new ModifyInstanceEventResponse();
+        this.request("ModifyInstanceEvent", req, resp, cb);
+    }
+
+    /**
      * This API is used to upgrade instance proxy version.
      * @param {UpgradeProxyVersionRequest} req
      * @param {function(string, UpgradeProxyVersionResponse):void} cb
@@ -563,6 +598,17 @@ class RedisClient extends AbstractClient {
     DeleteParamTemplate(req, cb) {
         let resp = new DeleteParamTemplateResponse();
         this.request("DeleteParamTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add replication group members.
+     * @param {AddReplicationInstanceRequest} req
+     * @param {function(string, AddReplicationInstanceResponse):void} cb
+     * @public
+     */
+    AddReplicationInstance(req, cb) {
+        let resp = new AddReplicationInstanceResponse();
+        this.request("AddReplicationInstance", req, resp, cb);
     }
 
     /**
@@ -731,6 +777,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to unbind a security group from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to manually back up a Redis instance.
      * @param {ManualBackupInstanceRequest} req
      * @param {function(string, ManualBackupInstanceResponse):void} cb
@@ -860,6 +917,17 @@ class RedisClient extends AbstractClient {
     UpgradeSmallVersion(req, cb) {
         let resp = new UpgradeSmallVersionResponse();
         this.request("UpgradeSmallVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a replication group.
+     * @param {CreateReplicationGroupRequest} req
+     * @param {function(string, CreateReplicationGroupResponse):void} cb
+     * @public
+     */
+    CreateReplicationGroup(req, cb) {
+        let resp = new CreateReplicationGroupResponse();
+        this.request("CreateReplicationGroup", req, resp, cb);
     }
 
     /**
@@ -1003,6 +1071,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceZoneInfo(req, cb) {
         let resp = new DescribeInstanceZoneInfoResponse();
         this.request("DescribeInstanceZoneInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the event information on a TecentDB for Redis instance.
+     * @param {DescribeInstanceEventsRequest} req
+     * @param {function(string, DescribeInstanceEventsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceEvents(req, cb) {
+        let resp = new DescribeInstanceEventsResponse();
+        this.request("DescribeInstanceEvents", req, resp, cb);
     }
 
     /**

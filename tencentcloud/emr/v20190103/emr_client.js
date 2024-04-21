@@ -67,6 +67,7 @@ const MultiDisk = models.MultiDisk;
 const PodNewParameter = models.PodNewParameter;
 const SearchItem = models.SearchItem;
 const ModifyResourcesTagsResponse = models.ModifyResourcesTagsResponse;
+const ScaleOutServiceConfGroupsInfo = models.ScaleOutServiceConfGroupsInfo;
 const MultiZoneSetting = models.MultiZoneSetting;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;

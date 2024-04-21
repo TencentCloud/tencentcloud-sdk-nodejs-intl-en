@@ -7576,7 +7576,7 @@ class DescribeMachineGroupsResponse extends  AbstractModel {
 
         /**
          * Machine group information list
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return "null", indicating that no valid values can be obtained.
          * @type {Array.<MachineGroupInfo> || null}
          */
         this.MachineGroups = null;

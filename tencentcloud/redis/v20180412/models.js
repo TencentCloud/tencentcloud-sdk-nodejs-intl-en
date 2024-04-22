@@ -751,6 +751,12 @@ Node information of an instance. Currently, information about the node type (mas
          */
         this.RedisClusterId = null;
 
+        /**
+         * Alarm policy ID array.- Please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to access the alarm policy ID.- If this parameter is not configured, the default alarm policy will be bound. For the specific information about the default alarm policy, please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to view.
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyList = null;
+
     }
 
     /**
@@ -801,6 +807,7 @@ Node information of an instance. Currently, information about the node type (mas
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
         this.RedisClusterId = 'RedisClusterId' in params ? params.RedisClusterId : null;
+        this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
 
     }
 }

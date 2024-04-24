@@ -5,4 +5,6 @@ module.exports = {
     Credential: require("./credential"),
     SSEResponseModel: require("./sse_response_model"),
     CommonClient: require("./common_client"),
+    AbstractClient: require("./abstract_client"),
+    AbstractModel: require("./abstract_model"),
 };

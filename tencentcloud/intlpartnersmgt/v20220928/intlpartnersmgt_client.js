@@ -17,13 +17,17 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
+const SummaryDetails = models.SummaryDetails;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
+const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
 const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
+const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
+const BusinessInfo = models.BusinessInfo;
 const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
@@ -51,6 +55,7 @@ const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResp
 const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
+const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
@@ -65,11 +70,12 @@ const BillDetailData = models.BillDetailData;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
+const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
-const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
+const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
@@ -87,50 +93,6 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the credit of users in the list.
-     * @param {QueryCreditByUinListRequest} req
-     * @param {function(string, QueryCreditByUinListResponse):void} cb
-     * @public
-     */
-    QueryCreditByUinList(req, cb) {
-        let resp = new QueryCreditByUinListResponse();
-        this.request("QueryCreditByUinList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the voucher quota pool.
-     * @param {QueryVoucherPoolRequest} req
-     * @param {function(string, QueryVoucherPoolResponse):void} cb
-     * @public
-     */
-    QueryVoucherPool(req, cb) {
-        let resp = new QueryVoucherPoolResponse();
-        this.request("QueryVoucherPool", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the customer information.
-     * @param {DescribeCustomerInfoRequest} req
-     * @param {function(string, DescribeCustomerInfoResponse):void} cb
-     * @public
-     */
-    DescribeCustomerInfo(req, cb) {
-        let resp = new DescribeCustomerInfoResponse();
-        this.request("DescribeCustomerInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create Tencent Cloud customer accounts for first-level resellers/second-level resellers. After the account is created, it will be automatically bound to the partner account.Note:1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.2. Customers need to add personal information when logging in for the first time.3. This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
-     * @param {CreateAccountRequest} req
-     * @param {function(string, CreateAccountResponse):void} cb
-     * @public
-     */
-    CreateAccount(req, cb) {
-        let resp = new CreateAccountResponse();
-        this.request("CreateAccount", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the voucher list based on the customer UIN.
      * @param {QueryVoucherListByUinRequest} req
      * @param {function(string, QueryVoucherListByUinResponse):void} cb
@@ -139,28 +101,6 @@ class IntlpartnersmgtClient extends AbstractClient {
     QueryVoucherListByUin(req, cb) {
         let resp = new QueryVoucherListByUinResponse();
         this.request("QueryVoucherListByUin", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of customer UINs.
-     * @param {DescribeCustomerUinRequest} req
-     * @param {function(string, DescribeCustomerUinResponse):void} cb
-     * @public
-     */
-    DescribeCustomerUin(req, cb) {
-        let resp = new DescribeCustomerUinResponse();
-        this.request("DescribeCustomerUin", req, resp, cb);
-    }
-
-    /**
-     * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
-     * @param {QueryPartnerCreditRequest} req
-     * @param {function(string, QueryPartnerCreditResponse):void} cb
-     * @public
-     */
-    QueryPartnerCredit(req, cb) {
-        let resp = new QueryPartnerCreditResponse();
-        this.request("QueryPartnerCredit", req, resp, cb);
     }
 
     /**
@@ -179,6 +119,61 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain country/region codes.
+     * @param {GetCountryCodesRequest} req
+     * @param {function(string, GetCountryCodesResponse):void} cb
+     * @public
+     */
+    GetCountryCodes(req, cb) {
+        let resp = new GetCountryCodesResponse();
+        this.request("GetCountryCodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+     * @param {QueryPartnerCreditRequest} req
+     * @param {function(string, QueryPartnerCreditResponse):void} cb
+     * @public
+     */
+    QueryPartnerCredit(req, cb) {
+        let resp = new QueryPartnerCreditResponse();
+        this.request("QueryPartnerCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query customer credits.
+     * @param {QueryCreditQuotaRequest} req
+     * @param {function(string, QueryCreditQuotaResponse):void} cb
+     * @public
+     */
+    QueryCreditQuota(req, cb) {
+        let resp = new QueryCreditQuotaResponse();
+        this.request("QueryCreditQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the customer information.
+     * @param {DescribeCustomerInfoRequest} req
+     * @param {function(string, DescribeCustomerInfoResponse):void} cb
+     * @public
+     */
+    DescribeCustomerInfo(req, cb) {
+        let resp = new DescribeCustomerInfoResponse();
+        this.request("DescribeCustomerInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of customer UINs.
+     * @param {DescribeCustomerUinRequest} req
+     * @param {function(string, DescribeCustomerUinResponse):void} cb
+     * @public
+     */
+    DescribeCustomerUin(req, cb) {
+        let resp = new DescribeCustomerUinResponse();
+        this.request("DescribeCustomerUin", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the customer bill details.
      * @param {DescribeBillDetailRequest} req
      * @param {function(string, DescribeBillDetailResponse):void} cb
@@ -190,14 +185,14 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the voucher quota based on the customer UIN.
-     * @param {QueryVoucherAmountByUinRequest} req
-     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
+     * External API for the L1 billing of the customer billing center
+     * @param {DescribeBillSummaryRequest} req
+     * @param {function(string, DescribeBillSummaryResponse):void} cb
      * @public
      */
-    QueryVoucherAmountByUin(req, cb) {
-        let resp = new QueryVoucherAmountByUinResponse();
-        this.request("QueryVoucherAmountByUin", req, resp, cb);
+    DescribeBillSummary(req, cb) {
+        let resp = new DescribeBillSummaryResponse();
+        this.request("DescribeBillSummary", req, resp, cb);
     }
 
     /**
@@ -212,25 +207,25 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain country/region codes.
-     * @param {GetCountryCodesRequest} req
-     * @param {function(string, GetCountryCodesResponse):void} cb
+     * This API is used to download billing files and return billing file URLs by customers.
+     * @param {DescribeBillDownloadUrlRequest} req
+     * @param {function(string, DescribeBillDownloadUrlResponse):void} cb
      * @public
      */
-    GetCountryCodes(req, cb) {
-        let resp = new GetCountryCodesResponse();
-        this.request("GetCountryCodes", req, resp, cb);
+    DescribeBillDownloadUrl(req, cb) {
+        let resp = new DescribeBillDownloadUrlResponse();
+        this.request("DescribeBillDownloadUrl", req, resp, cb);
     }
 
     /**
-     * This API is used for a partner to the credits and basic information of cutomers.
-     * @param {QueryCustomersCreditRequest} req
-     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * This API is used to query the credit of users in the list.
+     * @param {QueryCreditByUinListRequest} req
+     * @param {function(string, QueryCreditByUinListResponse):void} cb
      * @public
      */
-    QueryCustomersCredit(req, cb) {
-        let resp = new QueryCustomersCreditResponse();
-        this.request("QueryCustomersCredit", req, resp, cb);
+    QueryCreditByUinList(req, cb) {
+        let resp = new QueryCreditByUinListResponse();
+        this.request("QueryCreditByUinList", req, resp, cb);
     }
 
     /**
@@ -245,14 +240,25 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query all the credit allocation records of a single customer.
-     * @param {QueryCreditAllocationHistoryRequest} req
-     * @param {function(string, QueryCreditAllocationHistoryResponse):void} cb
+     * This API is used to create Tencent Cloud customer accounts for first-level resellers/second-level resellers. After the account is created, it will be automatically bound to the partner account.Note:1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.2. Customers need to add personal information when logging in for the first time.3. This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+     * @param {CreateAccountRequest} req
+     * @param {function(string, CreateAccountResponse):void} cb
      * @public
      */
-    QueryCreditAllocationHistory(req, cb) {
-        let resp = new QueryCreditAllocationHistoryResponse();
-        this.request("QueryCreditAllocationHistory", req, resp, cb);
+    CreateAccount(req, cb) {
+        let resp = new CreateAccountResponse();
+        this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total amount of customer bills by product.
+     * @param {DescribeBillSummaryByProductRequest} req
+     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
+     * @public
+     */
+    DescribeBillSummaryByProduct(req, cb) {
+        let resp = new DescribeBillSummaryByProductResponse();
+        this.request("DescribeBillSummaryByProduct", req, resp, cb);
     }
 
     /**
@@ -289,17 +295,6 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the total amount of customer bills by product.
-     * @param {DescribeBillSummaryByProductRequest} req
-     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
-     * @public
-     */
-    DescribeBillSummaryByProduct(req, cb) {
-        let resp = new DescribeBillSummaryByProductResponse();
-        this.request("DescribeBillSummaryByProduct", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the account verification status.
      * @param {QueryAccountVerificationStatusRequest} req
      * @param {function(string, QueryAccountVerificationStatusResponse):void} cb
@@ -311,14 +306,47 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query customer credits.
-     * @param {QueryCreditQuotaRequest} req
-     * @param {function(string, QueryCreditQuotaResponse):void} cb
+     * This API is used to query the voucher quota pool.
+     * @param {QueryVoucherPoolRequest} req
+     * @param {function(string, QueryVoucherPoolResponse):void} cb
      * @public
      */
-    QueryCreditQuota(req, cb) {
-        let resp = new QueryCreditQuotaResponse();
-        this.request("QueryCreditQuota", req, resp, cb);
+    QueryVoucherPool(req, cb) {
+        let resp = new QueryVoucherPoolResponse();
+        this.request("QueryVoucherPool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the voucher quota based on the customer UIN.
+     * @param {QueryVoucherAmountByUinRequest} req
+     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
+     * @public
+     */
+    QueryVoucherAmountByUin(req, cb) {
+        let resp = new QueryVoucherAmountByUinResponse();
+        this.request("QueryVoucherAmountByUin", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all the credit allocation records of a single customer.
+     * @param {QueryCreditAllocationHistoryRequest} req
+     * @param {function(string, QueryCreditAllocationHistoryResponse):void} cb
+     * @public
+     */
+    QueryCreditAllocationHistory(req, cb) {
+        let resp = new QueryCreditAllocationHistoryResponse();
+        this.request("QueryCreditAllocationHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used for a partner to the credits and basic information of cutomers.
+     * @param {QueryCustomersCreditRequest} req
+     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * @public
+     */
+    QueryCustomersCredit(req, cb) {
+        let resp = new QueryCustomersCreditResponse();
+        this.request("QueryCustomersCredit", req, resp, cb);
     }
 
 

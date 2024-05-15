@@ -52,6 +52,7 @@ const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const TagInfo = models.TagInfo;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
+const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
 const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
@@ -62,6 +63,7 @@ const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
 const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
+const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
@@ -93,14 +95,14 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the voucher list based on the customer UIN.
-     * @param {QueryVoucherListByUinRequest} req
-     * @param {function(string, QueryVoucherListByUinResponse):void} cb
+     * This API is used to query the list of customer UINs.
+     * @param {DescribeCustomerUinRequest} req
+     * @param {function(string, DescribeCustomerUinResponse):void} cb
      * @public
      */
-    QueryVoucherListByUin(req, cb) {
-        let resp = new QueryVoucherListByUinResponse();
-        this.request("QueryVoucherListByUin", req, resp, cb);
+    DescribeCustomerUin(req, cb) {
+        let resp = new DescribeCustomerUinResponse();
+        this.request("DescribeCustomerUin", req, resp, cb);
     }
 
     /**
@@ -127,6 +129,17 @@ class IntlpartnersmgtClient extends AbstractClient {
     GetCountryCodes(req, cb) {
         let resp = new GetCountryCodesResponse();
         this.request("GetCountryCodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify customer remarks.
+     * @param {ModifyClientRemarkRequest} req
+     * @param {function(string, ModifyClientRemarkResponse):void} cb
+     * @public
+     */
+    ModifyClientRemark(req, cb) {
+        let resp = new ModifyClientRemarkResponse();
+        this.request("ModifyClientRemark", req, resp, cb);
     }
 
     /**
@@ -163,14 +176,14 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of customer UINs.
-     * @param {DescribeCustomerUinRequest} req
-     * @param {function(string, DescribeCustomerUinResponse):void} cb
+     * This API is used to query the voucher list based on the customer UIN.
+     * @param {QueryVoucherListByUinRequest} req
+     * @param {function(string, QueryVoucherListByUinResponse):void} cb
      * @public
      */
-    DescribeCustomerUin(req, cb) {
-        let resp = new DescribeCustomerUinResponse();
-        this.request("DescribeCustomerUin", req, resp, cb);
+    QueryVoucherListByUin(req, cb) {
+        let resp = new QueryVoucherListByUinResponse();
+        this.request("QueryVoucherListByUin", req, resp, cb);
     }
 
     /**

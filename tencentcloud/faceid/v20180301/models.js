@@ -2473,6 +2473,12 @@ Example: HKIDCard
          */
         this.Language = null;
 
+        /**
+         * Automatic downgrade mode, with the following parameter values: 1: Downgrade to silent live mode; 2: Disable downgrade mode. The default value is 1.
+         * @type {number || null}
+         */
+        this.AutoDowngrade = null;
+
     }
 
     /**
@@ -2492,6 +2498,7 @@ Example: HKIDCard
         this.IdCardCutReturn = 'IdCardCutReturn' in params ? params.IdCardCutReturn : null;
         this.ThemeColor = 'ThemeColor' in params ? params.ThemeColor : null;
         this.Language = 'Language' in params ? params.Language : null;
+        this.AutoDowngrade = 'AutoDowngrade' in params ? params.AutoDowngrade : null;
 
     }
 }

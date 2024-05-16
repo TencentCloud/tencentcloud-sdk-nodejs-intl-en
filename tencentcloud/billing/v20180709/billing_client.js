@@ -17,54 +17,70 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const VoucherInfos = models.VoucherInfos;
+const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const AnalyseHeaderDetail = models.AnalyseHeaderDetail;
 const UsageDetails = models.UsageDetails;
 const DescribeBillSummaryForOrganizationRequest = models.DescribeBillSummaryForOrganizationRequest;
-const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
-const BillDetailComponentConfig = models.BillDetailComponentConfig;
+const AnalysePayModeDetail = models.AnalysePayModeDetail;
+const AnalyseBusinessDetail = models.AnalyseBusinessDetail;
+const AnalyseConditions = models.AnalyseConditions;
+const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
+const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const SummaryTotal = models.SummaryTotal;
 const BillResourceSummary = models.BillResourceSummary;
 const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
-const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
 const BillTagInfo = models.BillTagInfo;
 const TagDataInfo = models.TagDataInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const AnalyseTimeDetail = models.AnalyseTimeDetail;
+const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
 const CreateAllocationTagResponse = models.CreateAllocationTagResponse;
-const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const AnalyseAmountDetail = models.AnalyseAmountDetail;
+const AnalyseActionTypeDetail = models.AnalyseActionTypeDetail;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
-const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const AnalyseRegionDetail = models.AnalyseRegionDetail;
+const DescribeCostExplorerSummaryRequest = models.DescribeCostExplorerSummaryRequest;
 const DescribeBillResourceSummaryForOrganizationRequest = models.DescribeBillResourceSummaryForOrganizationRequest;
+const AnalyseZoneDetail = models.AnalyseZoneDetail;
+const AnalyseDetail = models.AnalyseDetail;
 const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
-const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
-const SummaryDetail = models.SummaryDetail;
+const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
+const BillDetailAssociatedOrder = models.BillDetailAssociatedOrder;
+const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
-const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
-const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOrganizationResponse;
-const BillDetailComponent = models.BillDetailComponent;
+const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
+const BillDetailComponentConfig = models.BillDetailComponentConfig;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const SummaryDetail = models.SummaryDetail;
+const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
 const UsageRecords = models.UsageRecords;
+const DescribeCostExplorerSummaryResponse = models.DescribeCostExplorerSummaryResponse;
 const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeBillDetailForOrganizationRequest = models.DescribeBillDetailForOrganizationRequest;
 const ApplicableProducts = models.ApplicableProducts;
+const AnalyseProjectDetail = models.AnalyseProjectDetail;
 const DistributionBillDetail = models.DistributionBillDetail;
 const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
 const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
 const DeleteAllocationTagRequest = models.DeleteAllocationTagRequest;
-const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
+const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOrganizationResponse;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const BillDistributionResourceSummary = models.BillDistributionResourceSummary;
-const BillDetailAssociatedOrder = models.BillDetailAssociatedOrder;
+const BillDetailComponent = models.BillDetailComponent;
 const BillDetail = models.BillDetail;
 const BusinessSummaryInfo = models.BusinessSummaryInfo;
 const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
-const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
+const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
 const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
@@ -75,9 +91,9 @@ const DescribeTagListRequest = models.DescribeTagListRequest;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeBillResourceSummaryForOrganizationResponse = models.DescribeBillResourceSummaryForOrganizationResponse;
-const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
+const AnalyseConditionDetail = models.AnalyseConditionDetail;
 const ExcludedProducts = models.ExcludedProducts;
-const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
+const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 
 
@@ -115,14 +131,14 @@ Note: The API request may fail due to network instability or other exceptions. I
     }
 
     /**
-     * This API is used to query vouchers.
-     * @param {DescribeVoucherInfoRequest} req
-     * @param {function(string, DescribeVoucherInfoResponse):void} cb
+     * This API is used to view cost analysis details.
+     * @param {DescribeCostExplorerSummaryRequest} req
+     * @param {function(string, DescribeCostExplorerSummaryResponse):void} cb
      * @public
      */
-    DescribeVoucherInfo(req, cb) {
-        let resp = new DescribeVoucherInfoResponse();
-        this.request("DescribeVoucherInfo", req, resp, cb);
+    DescribeCostExplorerSummary(req, cb) {
+        let resp = new DescribeCostExplorerSummaryResponse();
+        this.request("DescribeCostExplorerSummary", req, resp, cb);
     }
 
     /**
@@ -302,6 +318,17 @@ Note:
     CreateAllocationTag(req, cb) {
         let resp = new CreateAllocationTagResponse();
         this.request("CreateAllocationTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query vouchers.
+     * @param {DescribeVoucherInfoRequest} req
+     * @param {function(string, DescribeVoucherInfoResponse):void} cb
+     * @public
+     */
+    DescribeVoucherInfo(req, cb) {
+        let resp = new DescribeVoucherInfoResponse();
+        this.request("DescribeVoucherInfo", req, resp, cb);
     }
 
 

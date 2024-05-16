@@ -93,6 +93,7 @@ const RecognizeKoreanDrivingLicenseOCRResponse = models.RecognizeKoreanDrivingLi
 const VatElectronicItemInfo = models.VatElectronicItemInfo;
 const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
 const ItemCoord = models.ItemCoord;
+const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
 const VatInvoiceRoll = models.VatInvoiceRoll;
 const Polygon = models.Polygon;
 const TextDetectionResult = models.TextDetectionResult;
@@ -102,6 +103,7 @@ const MedicalInvoice = models.MedicalInvoice;
 const TextTable = models.TextTable;
 const RecognizeTableAccurateOCRResponse = models.RecognizeTableAccurateOCRResponse;
 const SmartStructuralOCRV2Response = models.SmartStructuralOCRV2Response;
+const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResponse;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
 const NonTaxItem = models.NonTaxItem;
 const TollInvoice = models.TollInvoice;
@@ -367,6 +369,18 @@ A maximum of 10 requests can be initiated per second for this API.
     RecognizeKoreanIDCardOCR(req, cb) {
         let resp = new RecognizeKoreanIDCardOCRResponse();
         this.request("RecognizeKoreanIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+     * @param {RecognizeMainlandIDCardOCRRequest} req
+     * @param {function(string, RecognizeMainlandIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeMainlandIDCardOCR(req, cb) {
+        let resp = new RecognizeMainlandIDCardOCRResponse();
+        this.request("RecognizeMainlandIDCardOCR", req, resp, cb);
     }
 
     /**

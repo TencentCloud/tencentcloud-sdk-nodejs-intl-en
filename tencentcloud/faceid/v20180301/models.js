@@ -4320,7 +4320,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Macao ID Card
  * @class
  */
 class MacaoIDCard extends  AbstractModel {
@@ -4328,61 +4328,71 @@ class MacaoIDCard extends  AbstractModel {
         super();
 
         /**
-         * 
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FirstName = null;
 
         /**
-         * 
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastName = null;
 
         /**
-         * 
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Birthday = null;
 
         /**
-         * 
+         * Expiration date
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExpirationDate = null;
 
         /**
-         * 
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LicenseNumber = null;
 
         /**
-         * 
+         * Sex
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * 
+         * Age
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Age = null;
 
         /**
-         * 
+         * Issued country
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IssuedCountry = null;
 
         /**
-         * 
+         * MRZ1 on card
+Note: This field may return null, indicating that no valid values can be obtained. 
          * @type {string || null}
          */
         this.Field1 = null;
 
         /**
-         * 
+         * MRZ2 on card
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Field2 = null;

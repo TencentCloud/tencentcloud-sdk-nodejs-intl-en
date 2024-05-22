@@ -1734,6 +1734,30 @@ class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
          */
         this.AuthInfo = null;
 
+        /**
+         * Endpoint protocol type, supports HLS, DASH, CMAF (only HLS type input can create CMAF Endpoint).
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Mainifest name, default is main.
+         * @type {string || null}
+         */
+        this.Manifest = null;
+
+        /**
+         * Whether to turn on the TimeShift function, true: on, false: off, the default is off.
+         * @type {boolean || null}
+         */
+        this.TimeShiftEnable = null;
+
+        /**
+         * The number of days to look back in TimeShift, up to 30 days is supported.
+         * @type {number || null}
+         */
+        this.TimeShiftDuration = null;
+
     }
 
     /**
@@ -1751,6 +1775,10 @@ class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
             obj.deserialize(params.AuthInfo)
             this.AuthInfo = obj;
         }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Manifest = 'Manifest' in params ? params.Manifest : null;
+        this.TimeShiftEnable = 'TimeShiftEnable' in params ? params.TimeShiftEnable : null;
+        this.TimeShiftDuration = 'TimeShiftDuration' in params ? params.TimeShiftDuration : null;
 
     }
 }

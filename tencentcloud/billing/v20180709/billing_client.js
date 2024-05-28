@@ -16,85 +16,109 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const VoucherInfos = models.VoucherInfos;
-const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
-const AnalyseHeaderDetail = models.AnalyseHeaderDetail;
-const UsageDetails = models.UsageDetails;
-const DescribeBillSummaryForOrganizationRequest = models.DescribeBillSummaryForOrganizationRequest;
-const AnalysePayModeDetail = models.AnalysePayModeDetail;
-const AnalyseBusinessDetail = models.AnalyseBusinessDetail;
-const AnalyseConditions = models.AnalyseConditions;
-const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
-const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
-const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
-const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
-const SummaryTotal = models.SummaryTotal;
-const BillResourceSummary = models.BillResourceSummary;
-const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
-const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
-const BillTagInfo = models.BillTagInfo;
-const TagDataInfo = models.TagDataInfo;
-const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
-const AnalyseTimeDetail = models.AnalyseTimeDetail;
-const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
-const CreateAllocationTagResponse = models.CreateAllocationTagResponse;
-const AnalyseAmountDetail = models.AnalyseAmountDetail;
-const AnalyseActionTypeDetail = models.AnalyseActionTypeDetail;
-const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
-const AnalyseRegionDetail = models.AnalyseRegionDetail;
-const DescribeCostExplorerSummaryRequest = models.DescribeCostExplorerSummaryRequest;
-const DescribeBillResourceSummaryForOrganizationRequest = models.DescribeBillResourceSummaryForOrganizationRequest;
-const AnalyseZoneDetail = models.AnalyseZoneDetail;
-const AnalyseDetail = models.AnalyseDetail;
-const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
-const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
-const BillDetailAssociatedOrder = models.BillDetailAssociatedOrder;
-const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
-const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
-const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
-const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
-const BillDetailComponentConfig = models.BillDetailComponentConfig;
-const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
-const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
-const SummaryDetail = models.SummaryDetail;
-const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
-const UsageRecords = models.UsageRecords;
+const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
 const DescribeCostExplorerSummaryResponse = models.DescribeCostExplorerSummaryResponse;
-const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
+const ConsumptionBusinessSummaryDataItem = models.ConsumptionBusinessSummaryDataItem;
+const BillTagInfo = models.BillTagInfo;
+const ConditionBusiness = models.ConditionBusiness;
+const AnalyseActionTypeDetail = models.AnalyseActionTypeDetail;
+const DescribeCostExplorerSummaryRequest = models.DescribeCostExplorerSummaryRequest;
+const DescribeCostSummaryByProductResponse = models.DescribeCostSummaryByProductResponse;
+const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
+const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOrganizationResponse;
+const BillDetailComponentConfig = models.BillDetailComponentConfig;
+const DescribeCostSummaryByResourceResponse = models.DescribeCostSummaryByResourceResponse;
+const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
+const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
+const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
-const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
-const DescribeBillDetailForOrganizationRequest = models.DescribeBillDetailForOrganizationRequest;
-const ApplicableProducts = models.ApplicableProducts;
-const AnalyseProjectDetail = models.AnalyseProjectDetail;
 const DistributionBillDetail = models.DistributionBillDetail;
-const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
-const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
-const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
 const DeleteAllocationTagRequest = models.DeleteAllocationTagRequest;
-const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOrganizationResponse;
-const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const BillDistributionResourceSummary = models.BillDistributionResourceSummary;
-const BillDetailComponent = models.BillDetailComponent;
-const BillDetail = models.BillDetail;
 const BusinessSummaryInfo = models.BusinessSummaryInfo;
-const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
-const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
-const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
-const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
+const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
-const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
-const DescribeTagListResponse = models.DescribeTagListResponse;
-const CosDetailSets = models.CosDetailSets;
-const DescribeTagListRequest = models.DescribeTagListRequest;
+const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
+const DescribeCostDetailResponse = models.DescribeCostDetailResponse;
+const VoucherInfos = models.VoucherInfos;
+const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
+const AnalyseProjectDetail = models.AnalyseProjectDetail;
+const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
+const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
+const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
+const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
+const SummaryDetail = models.SummaryDetail;
+const AnalyseAmountDetail = models.AnalyseAmountDetail;
+const DescribeBillResourceSummaryForOrganizationRequest = models.DescribeBillResourceSummaryForOrganizationRequest;
+const AnalyseDetail = models.AnalyseDetail;
+const DescribeCostSummaryByRegionRequest = models.DescribeCostSummaryByRegionRequest;
+const ConsumptionSummaryTrend = models.ConsumptionSummaryTrend;
+const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
+const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const ApplicableProducts = models.ApplicableProducts;
+const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
+const BillDetail = models.BillDetail;
+const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const ConditionPayMode = models.ConditionPayMode;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
-const DescribeBillResourceSummaryForOrganizationResponse = models.DescribeBillResourceSummaryForOrganizationResponse;
-const AnalyseConditionDetail = models.AnalyseConditionDetail;
-const ExcludedProducts = models.ExcludedProducts;
-const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
+const TagDataInfo = models.TagDataInfo;
+const SummaryTotal = models.SummaryTotal;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
+const CostComponentSet = models.CostComponentSet;
+const AnalyseHeaderDetail = models.AnalyseHeaderDetail;
+const AnalysePayModeDetail = models.AnalysePayModeDetail;
+const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
+const BillResourceSummary = models.BillResourceSummary;
+const Conditions = models.Conditions;
+const AnalyseTimeDetail = models.AnalyseTimeDetail;
+const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataItem;
+const AnalyseRegionDetail = models.AnalyseRegionDetail;
+const DescribeBillSummaryForOrganizationRequest = models.DescribeBillSummaryForOrganizationRequest;
+const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
+const DescribeBillDetailForOrganizationRequest = models.DescribeBillDetailForOrganizationRequest;
+const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
+const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
+const BillDetailComponent = models.BillDetailComponent;
+const ConditionRegion = models.ConditionRegion;
+const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
+const ConsumptionResourceSummaryConditionValue = models.ConsumptionResourceSummaryConditionValue;
+const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
+const DescribeTagListRequest = models.DescribeTagListRequest;
+const DescribeBillResourceSummaryForOrganizationResponse = models.DescribeBillResourceSummaryForOrganizationResponse;
+const DescribeCostSummaryByResourceRequest = models.DescribeCostSummaryByResourceRequest;
+const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
+const ExcludedProducts = models.ExcludedProducts;
+const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
+const UsageDetails = models.UsageDetails;
+const AnalyseBusinessDetail = models.AnalyseBusinessDetail;
+const AnalyseConditions = models.AnalyseConditions;
+const CostDetail = models.CostDetail;
+const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const CreateAllocationTagResponse = models.CreateAllocationTagResponse;
+const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
+const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
+const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const AnalyseZoneDetail = models.AnalyseZoneDetail;
+const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
+const BillDetailAssociatedOrder = models.BillDetailAssociatedOrder;
+const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
+const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
+const UsageRecords = models.UsageRecords;
+const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
+const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
+const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
+const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
+const ConditionProject = models.ConditionProject;
+const DescribeTagListResponse = models.DescribeTagListResponse;
+const CosDetailSets = models.CosDetailSets;
+const AnalyseConditionDetail = models.AnalyseConditionDetail;
+const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
+const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
 
 
 /**
@@ -108,26 +132,69 @@ class BillingClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get pay-on-behalf bills of the admin account (bill details).
-Note: The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
-     * @param {DescribeBillDetailForOrganizationRequest} req
-     * @param {function(string, DescribeBillDetailForOrganizationResponse):void} cb
+     * This API is used to obtain consumption details summarized by resource.
+     * @param {DescribeCostSummaryByResourceRequest} req
+     * @param {function(string, DescribeCostSummaryByResourceResponse):void} cb
      * @public
      */
-    DescribeBillDetailForOrganization(req, cb) {
-        let resp = new DescribeBillDetailForOrganizationResponse();
-        this.request("DescribeBillDetailForOrganization", req, resp, cb);
+    DescribeCostSummaryByResource(req, cb) {
+        let resp = new DescribeCostSummaryByResourceResponse();
+        this.request("DescribeCostSummaryByResource", req, resp, cb);
     }
 
     /**
-     * This API is used to check the Tencent Cloud account balance.
-     * @param {DescribeAccountBalanceRequest} req
-     * @param {function(string, DescribeAccountBalanceResponse):void} cb
+     * This API is used to obtain consumption details summarized by region.
+     * @param {DescribeCostSummaryByRegionRequest} req
+     * @param {function(string, DescribeCostSummaryByRegionResponse):void} cb
      * @public
      */
-    DescribeAccountBalance(req, cb) {
-        let resp = new DescribeAccountBalanceResponse();
-        this.request("DescribeAccountBalance", req, resp, cb);
+    DescribeCostSummaryByRegion(req, cb) {
+        let resp = new DescribeCostSummaryByRegionResponse();
+        this.request("DescribeCostSummaryByRegion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the bill summarized by instance.
+     * @param {DescribeBillResourceSummaryRequest} req
+     * @param {function(string, DescribeBillResourceSummaryResponse):void} cb
+     * @public
+     */
+    DescribeBillResourceSummary(req, cb) {
+        let resp = new DescribeBillResourceSummaryResponse();
+        this.request("DescribeBillResourceSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch set cost allocation tags.
+     * @param {CreateAllocationTagRequest} req
+     * @param {function(string, CreateAllocationTagResponse):void} cb
+     * @public
+     */
+    CreateAllocationTag(req, cb) {
+        let resp = new CreateAllocationTagResponse();
+        this.request("CreateAllocationTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query vouchers.
+     * @param {DescribeVoucherInfoRequest} req
+     * @param {function(string, DescribeVoucherInfoResponse):void} cb
+     * @public
+     */
+    DescribeVoucherInfo(req, cb) {
+        let resp = new DescribeVoucherInfoResponse();
+        this.request("DescribeVoucherInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain consumption details summarized by project.
+     * @param {DescribeCostSummaryByProjectRequest} req
+     * @param {function(string, DescribeCostSummaryByProjectResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByProject(req, cb) {
+        let resp = new DescribeCostSummaryByProjectResponse();
+        this.request("DescribeCostSummaryByProject", req, resp, cb);
     }
 
     /**
@@ -153,17 +220,6 @@ Note: The API request may fail due to network instability or other exceptions. I
     }
 
     /**
-     * This API is used to query COS usage details.
-     * @param {DescribeDosageCosDetailByDateRequest} req
-     * @param {function(string, DescribeDosageCosDetailByDateResponse):void} cb
-     * @public
-     */
-    DescribeDosageCosDetailByDate(req, cb) {
-        let resp = new DescribeDosageCosDetailByDateResponse();
-        this.request("DescribeDosageCosDetailByDate", req, resp, cb);
-    }
-
-    /**
      * u200cThis API is used to get bill details.
 Note:
 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
@@ -178,17 +234,6 @@ Note:
     }
 
     /**
-     * u200cThis API is used to batch cancel cost allocation tags.
-     * @param {DeleteAllocationTagRequest} req
-     * @param {function(string, DeleteAllocationTagResponse):void} cb
-     * @public
-     */
-    DeleteAllocationTag(req, cb) {
-        let resp = new DeleteAllocationTagResponse();
-        this.request("DeleteAllocationTag", req, resp, cb);
-    }
-
-    /**
      * This API is used to get bill details by product, project, region, billing mode, and tag by passing in parameters.
      * @param {DescribeBillSummaryRequest} req
      * @param {function(string, DescribeBillSummaryResponse):void} cb
@@ -197,17 +242,6 @@ Note:
     DescribeBillSummary(req, cb) {
         let resp = new DescribeBillSummaryResponse();
         this.request("DescribeBillSummary", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get cost allocation tags.
-     * @param {DescribeTagListRequest} req
-     * @param {function(string, DescribeTagListResponse):void} cb
-     * @public
-     */
-    DescribeTagList(req, cb) {
-        let resp = new DescribeTagListResponse();
-        this.request("DescribeTagList", req, resp, cb);
     }
 
     /**
@@ -222,14 +256,48 @@ Note:
     }
 
     /**
-     * This API is used to get the bill summarized by instance.
-     * @param {DescribeBillResourceSummaryRequest} req
-     * @param {function(string, DescribeBillResourceSummaryResponse):void} cb
+     * This API is used to query COS usage details.
+     * @param {DescribeDosageCosDetailByDateRequest} req
+     * @param {function(string, DescribeDosageCosDetailByDateResponse):void} cb
      * @public
      */
-    DescribeBillResourceSummary(req, cb) {
-        let resp = new DescribeBillResourceSummaryResponse();
-        this.request("DescribeBillResourceSummary", req, resp, cb);
+    DescribeDosageCosDetailByDate(req, cb) {
+        let resp = new DescribeDosageCosDetailByDateResponse();
+        this.request("DescribeDosageCosDetailByDate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain consumption details summarized by product.
+     * @param {DescribeCostSummaryByProductRequest} req
+     * @param {function(string, DescribeCostSummaryByProductResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByProduct(req, cb) {
+        let resp = new DescribeCostSummaryByProductResponse();
+        this.request("DescribeCostSummaryByProduct", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get pay-on-behalf bills of the admin account (bill details).
+Note: The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
+     * @param {DescribeBillDetailForOrganizationRequest} req
+     * @param {function(string, DescribeBillDetailForOrganizationResponse):void} cb
+     * @public
+     */
+    DescribeBillDetailForOrganization(req, cb) {
+        let resp = new DescribeBillDetailForOrganizationResponse();
+        this.request("DescribeBillDetailForOrganization", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check the Tencent Cloud account balance.
+     * @param {DescribeAccountBalanceRequest} req
+     * @param {function(string, DescribeAccountBalanceResponse):void} cb
+     * @public
+     */
+    DescribeAccountBalance(req, cb) {
+        let resp = new DescribeAccountBalanceResponse();
+        this.request("DescribeAccountBalance", req, resp, cb);
     }
 
     /**
@@ -266,17 +334,6 @@ Note:
     }
 
     /**
-     * Gets the bill summarized according to product
-     * @param {DescribeBillSummaryByProductRequest} req
-     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
-     * @public
-     */
-    DescribeBillSummaryByProduct(req, cb) {
-        let resp = new DescribeBillSummaryByProductResponse();
-        this.request("DescribeBillSummaryByProduct", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the cost distribution over different tags.
      * @param {DescribeBillSummaryByTagRequest} req
      * @param {function(string, DescribeBillSummaryByTagResponse):void} cb
@@ -299,6 +356,17 @@ Note:
     }
 
     /**
+     * This API is used to get cost allocation tags.
+     * @param {DescribeTagListRequest} req
+     * @param {function(string, DescribeTagListResponse):void} cb
+     * @public
+     */
+    DescribeTagList(req, cb) {
+        let resp = new DescribeTagListResponse();
+        this.request("DescribeTagList", req, resp, cb);
+    }
+
+    /**
      * This API is used to get bill download URLs for L0, L1, L2, and L3 bills and bill packs.
      * @param {DescribeBillDownloadUrlRequest} req
      * @param {function(string, DescribeBillDownloadUrlResponse):void} cb
@@ -310,25 +378,36 @@ Note:
     }
 
     /**
-     * This API is used to batch set cost allocation tags.
-     * @param {CreateAllocationTagRequest} req
-     * @param {function(string, CreateAllocationTagResponse):void} cb
+     * u200cThis API is used to batch cancel cost allocation tags.
+     * @param {DeleteAllocationTagRequest} req
+     * @param {function(string, DeleteAllocationTagResponse):void} cb
      * @public
      */
-    CreateAllocationTag(req, cb) {
-        let resp = new CreateAllocationTagResponse();
-        this.request("CreateAllocationTag", req, resp, cb);
+    DeleteAllocationTag(req, cb) {
+        let resp = new DeleteAllocationTagResponse();
+        this.request("DeleteAllocationTag", req, resp, cb);
     }
 
     /**
-     * This API is used to query vouchers.
-     * @param {DescribeVoucherInfoRequest} req
-     * @param {function(string, DescribeVoucherInfoResponse):void} cb
+     * Gets the bill summarized according to product
+     * @param {DescribeBillSummaryByProductRequest} req
+     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
      * @public
      */
-    DescribeVoucherInfo(req, cb) {
-        let resp = new DescribeVoucherInfoResponse();
-        this.request("DescribeVoucherInfo", req, resp, cb);
+    DescribeBillSummaryByProduct(req, cb) {
+        let resp = new DescribeBillSummaryByProductResponse();
+        this.request("DescribeBillSummaryByProduct", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query consumption details.
+     * @param {DescribeCostDetailRequest} req
+     * @param {function(string, DescribeCostDetailResponse):void} cb
+     * @public
+     */
+    DescribeCostDetail(req, cb) {
+        let resp = new DescribeCostDetailResponse();
+        this.request("DescribeCostDetail", req, resp, cb);
     }
 
 

@@ -74,6 +74,36 @@ class DeployConfigGroupVersionRequest extends  AbstractModel {
 }
 
 /**
+ * Auto-renewal configuration item in a prepaid plan.
+ * @class
+ */
+class RenewFlag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The auto-renewal flag for prepaid plan has the following values:
+<li> on: Enable auto-renewal;</li>
+<li> off: Disable auto-renewal. </li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Smart compression configuration.
  * @class
  */
@@ -386,25 +416,24 @@ class OriginDetail extends  AbstractModel {
 
         /**
          * Origin server type. Valid values:
-<li>IP_DOMAIN: IPV4, IPV6, or domain type origin server;</li>
-<li>COS: Tencent Cloud Object Storage origin server;</li>
-<li>AWS_S3: AWS S3 Cloud Object Storage origin server;</li>
-<li>ORIGIN_GROUP: Origin group type origin server;</li>
-<li>VODEO: Video on Demand (hybrid cloud edition);</li>
-<li>SPACE: Origin shield, currently only available to the whitelist;</li>
-<li>LB: Cloud Load Balancer, currently only available to the whitelist.</li>
+<li>IP_DOMAIN: IPv4, IPv6, or domain name-typed origin servers;</li>
+<li>COS: Tencent Cloud COS origin servers;</li>
+<li>AWS_S3: AWS S3 object storage origin servers;</li>
+<li>ORIGIN_GROUP: origin server group-typed origin servers;</li>
+<li>VODEO: Cloud VOD (Hybrid Cloud Edition);</li>
+<li>SPACE: uninstalling origin servers. Currently only available to the allowlist;</li>
+<li>LB: load balancing. Currently only available to the allowlist. </li>
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Origin server address, varying depending on the value of OriginType:
-<li>When OriginType is IP_DOMAIN, this parameter is IPv4 address, IPv6 address, or domain name;</li>
-<li>When OriginType is COS, this parameter is the COS bucket's access domain;</li>
-<li>When OriginType is AWS_S3, this parameter is the S3 bucket's access domain;</li>
-<li>When OriginType is ORIGIN_GROUP, this parameter is the origin group ID;</li>
-<li>When OriginType is VODEO, if VodeoDistributionRange is ALL, this parameter is "all-buckets-in-vodeo-application"; if VodeoDistributionRange is Bucket, this parameter is the corresponding bucket domain.</li>
-
+         * Origin server address, which varies according to the value of OriginType:
+<li>For OriginType = IP_DOMAIN, this parameter is an IPv4, IPv6 address or domain name;</li>
+<li>For OriginType = COS, this parameter is the access domain name of the COS bucket;</li>
+<li>For OriginType = AWS_S3, this parameter is the access domain name of the S3 bucket;</li>
+<li>For OriginType = ORIGIN_GROUP, this parameter is the origin server group ID;</li>
+<li>When OriginType = VODEO, if VodeoDistributionRange = ALL, then this parameter is "all-buckets-in-vodeo-application"; if VodeoDistributionRange = Bucket, then this parameter is the domain name of the corresponding bucket. </li>
          * @type {string || null}
          */
         this.Origin = null;
@@ -428,10 +457,10 @@ class OriginDetail extends  AbstractModel {
         this.BackOriginGroupName = null;
 
         /**
-         * Whether access to the private Cloud Object Storage origin server is allowed. This parameter is valid only when OriginType is COS or AWS_S3. Valid values:
+         * Whether access to the private object storage origin server is allowed. This parameter is valid only when the origin server type OriginType is COS or AWS_S3. Valid values:
 <li>on: Enable private authentication;</li>
-<li>off: Disable private authentication.</li>
-If it is not specified, off is the default value.
+<li>off: Disable private authentication. </li>
+If this field is not specified, the default value 'off' will be used.
          * @type {string || null}
          */
         this.PrivateAccess = null;
@@ -450,7 +479,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VodeoSubAppId = null;
 
         /**
-         * MO distribution range. Valid values: <li>All: All</li> <li>Bucket: Bucket</li>
+         * MO distribution range. Valid values: <li>All: all</li> <li>Bucket: bucket</li>
          * @type {string || null}
          */
         this.VodeoDistributionRange = null;
@@ -488,6 +517,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VodeoSubAppId = 'VodeoSubAppId' in params ? params.VodeoSubAppId : null;
         this.VodeoDistributionRange = 'VodeoDistributionRange' in params ? params.VodeoDistributionRange : null;
         this.VodeoBucketId = 'VodeoBucketId' in params ? params.VodeoBucketId : null;
+
+    }
+}
+
+/**
+ * Prepaid Plan Billing Parameters
+ * @class
+ */
+class PrepaidPlanParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prepaid plan duration, unit: month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+
+If this field is not specified, the default value '1' will be used.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * The auto-renewal flag for prepaid plan has the following values:
+<li> on: Enable auto-renewal;</li>
+<li> off: Disable auto-renewal. </li>
+If this field is not specified, the default value 'off' will be used. When auto-renewal is enabled, it defaults to renewing for one month.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -980,6 +1049,84 @@ class DescribeBillingDataRequest extends  AbstractModel {
 }
 
 /**
+ * Output format for real-time log delivery. You can directly use the specified predefined log output format (JSON Lines / csv) through the FormatType parameter, or define a variant output format through additional parameters based on the predefined log output format.
+ * @class
+ */
+class LogFormat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Predefined output format type for log delivery. Valid values:
+<li>json: Use the predefined log output format JSON Lines, where fields in each log record are presented as key-value pairs;</li>
+<li>csv: Use the predefined log output format csv, where fields in each log record is only presented as field values, excluding field names. </li>
+         * @type {string || null}
+         */
+        this.FormatType = null;
+
+        /**
+         * A string added before each log delivery batch. Each log delivery batch may contain multiple log records.
+         * @type {string || null}
+         */
+        this.BatchPrefix = null;
+
+        /**
+         * A string appended after each log delivery batch.
+         * @type {string || null}
+         */
+        this.BatchSuffix = null;
+
+        /**
+         * A string added before each log record.
+         * @type {string || null}
+         */
+        this.RecordPrefix = null;
+
+        /**
+         * A string appended after each log record.
+         * @type {string || null}
+         */
+        this.RecordSuffix = null;
+
+        /**
+         * A string inserted between log records as a separator. Valid values:
+<li>\n: Line break;</li>
+<li>\t: Tab character;</li>
+<li>,: Half-width comma. </li>
+         * @type {string || null}
+         */
+        this.RecordDelimiter = null;
+
+        /**
+         * A string inserted between fields as a separator within a single log record. Valid values:
+<li>\t: Tab character;</li>
+<li>,: Half-width comma;</li>
+<li>;: Half-width semicolon. </li>
+         * @type {string || null}
+         */
+        this.FieldDelimiter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FormatType = 'FormatType' in params ? params.FormatType : null;
+        this.BatchPrefix = 'BatchPrefix' in params ? params.BatchPrefix : null;
+        this.BatchSuffix = 'BatchSuffix' in params ? params.BatchSuffix : null;
+        this.RecordPrefix = 'RecordPrefix' in params ? params.RecordPrefix : null;
+        this.RecordSuffix = 'RecordSuffix' in params ? params.RecordSuffix : null;
+        this.RecordDelimiter = 'RecordDelimiter' in params ? params.RecordDelimiter : null;
+        this.FieldDelimiter = 'FieldDelimiter' in params ? params.FieldDelimiter : null;
+
+    }
+}
+
+/**
  * DescribeEnvironments request structure.
  * @class
  */
@@ -1235,6 +1382,14 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
         this.Sample = null;
 
         /**
+         * Output format for log delivery. If this field is not specified, the default format is used, which works as follows:
+<li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
+<li>When TaskType is 's3', the default format is JSON Lines;</li>Specifically, when TaskType is 'cls', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
+         * @type {LogFormat || null}
+         */
+        this.LogFormat = null;
+
+        /**
          * The configuration information of CLS. This parameter is required when TaskType is cls.
          * @type {CLSTopic || null}
          */
@@ -1287,6 +1442,12 @@ class CreateRealtimeLogDeliveryTaskRequest extends  AbstractModel {
             }
         }
         this.Sample = 'Sample' in params ? params.Sample : null;
+
+        if (params.LogFormat) {
+            let obj = new LogFormat();
+            obj.deserialize(params.LogFormat)
+            this.LogFormat = obj;
+        }
 
         if (params.CLS) {
             let obj = new CLSTopic();
@@ -2638,10 +2799,14 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
 
         /**
          * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
-<li>job-id<br> Filter based on task ID.  job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported. </li>
-<li>target<br> Filter based on target resource information. target format: http://www.qq.com/1.txt. Multiple values are not supported, Fuzzy search is not supported. </li>
-<li>domains<br> Filter based on domain name. domains format: www.qq.com. Fuzzy search is not supported.</li>
-<li>statuses<br> Filter based on task status.  Fuzzy search is not supported. Options:<br> processing: Processing<br> success: Success<br> failed: Failure<br> timeout: Timeout</li>
+<li>job-id 
+Filter based on task ID.  job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported. </li>
+<li>target
+Filter based on target resource information. target format: http://www.qq.com/1.txt. Multiple values are not supported, Fuzzy search is not supported. </li>
+<li>domains 
+Filter based on domain name. domains format: www.qq.com. Fuzzy search is not supported.</li>
+<li>statuses
+Filter based on task status.  Fuzzy search is not supported. Options:<br> processing: Processing<br> success: Success<br> failed: Failure<br> timeout: Timeout</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -4518,6 +4683,46 @@ class L4OfflineLog extends  AbstractModel {
 }
 
 /**
+ * ModifyPlan request structure.
+ * @class
+ */
+class ModifyPlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plan ID, formatted as edgeone-2unuvzjmmn2q.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * Auto-renewal configuration item in a prepaid plan. If auto-renewal is enabled, the plan will be automatically renewed one day before it expires. This feature is only available for Personal, Basic, and Standard Edition Plans. If this field is not specified, the original configuration will be retained.
+         * @type {RenewFlag || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+
+        if (params.RenewFlag) {
+            let obj = new RenewFlag();
+            obj.deserialize(params.RenewFlag)
+            this.RenewFlag = obj;
+        }
+
+    }
+}
+
+/**
  * The scope to which the exception rule applies
  * @class
  */
@@ -6020,6 +6225,48 @@ class ModifyRuleRequest extends  AbstractModel {
 }
 
 /**
+ * RenewPlan request structure.
+ * @class
+ */
+class RenewPlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plan ID, formatted as edgeone-2unuvzjmmn2q.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * Renewal plan duration, unit: month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Whether to automatically use a voucher. Valid values: <li>true: Yes;</li><li>false: No. </li> If this field is not specified, the default value 'false' will be used.
+         * @type {string || null}
+         */
+        this.AutoUseVoucher = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.AutoUseVoucher = 'AutoUseVoucher' in params ? params.AutoUseVoucher : null;
+
+    }
+}
+
+/**
  * DescribePrefetchTasks response structure.
  * @class
  */
@@ -6453,12 +6700,6 @@ class Task extends  AbstractModel {
         this.JobId = null;
 
         /**
-         * Status of the task.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
          * Resource.
          * @type {string || null}
          */
@@ -6469,6 +6710,22 @@ class Task extends  AbstractModel {
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * Status. Valid values:
+<li>processing: Processing;</li>
+<li>success: Succeeded;</li>
+<li>failed: Failed;</li>
+<li>timeout: Timed out. </li>
+         * @type {string || null}
+         */
+        this.Status = null;
 
         /**
          * Creation time of the task.
@@ -6492,9 +6749,10 @@ class Task extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
-        this.Status = 'Status' in params ? params.Status : null;
         this.Target = 'Target' in params ? params.Target : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
@@ -7587,6 +7845,34 @@ class DescribeConfigGroupVersionDetailRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyPlan response structure.
+ * @class
+ */
+class ModifyPlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The configuration details of the block page
  * @class
  */
@@ -8089,6 +8375,12 @@ class ModifyRealtimeLogDeliveryTaskRequest extends  AbstractModel {
         this.Sample = null;
 
         /**
+         * Output format for log delivery. If this field is not specified, the original configuration will be retained.
+         * @type {LogFormat || null}
+         */
+        this.LogFormat = null;
+
+        /**
          * The configuration information of the custom HTTP service. If this field is not filled in, the original configuration will be retained.
          * @type {CustomEndpoint || null}
          */
@@ -8134,6 +8426,12 @@ class ModifyRealtimeLogDeliveryTaskRequest extends  AbstractModel {
             }
         }
         this.Sample = 'Sample' in params ? params.Sample : null;
+
+        if (params.LogFormat) {
+            let obj = new LogFormat();
+            obj.deserialize(params.LogFormat)
+            this.LogFormat = obj;
+        }
 
         if (params.CustomEndpoint) {
             let obj = new CustomEndpoint();
@@ -8183,6 +8481,85 @@ class VanityNameServers extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Servers = 'Servers' in params ? params.Servers : null;
+
+    }
+}
+
+/**
+ * DestroyPlan request structure.
+ * @class
+ */
+class DestroyPlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plan ID, in the format of edgeone-2wdo315m2y4c.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+
+    }
+}
+
+/**
+ * CreatePlan request structure.
+ * @class
+ */
+class CreatePlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of plan subscribed to. Valid values:<li>personal: Personal Edition Plan, prepaid;</li><li>basic: Basic Edition Plan, prepaid;</li><li>standard: Standard Edition Plan, prepaid;</li><li>enterprise: Enterprise Edition Plan, post-paid. </li>When subscribing to a prepaid plan, ensure there is sufficient balance in the account, as insufficient balance will result in a pending payment order.
+For an overview of billing, refer to [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/94156?from_cn_redirect=1).
+For differences between plans, refer to [ Comparison of EdgeOne Plan](https://intl.cloud.tencent.com/document/product/1552/94165?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.PlanType = null;
+
+        /**
+         * Whether to automatically use a voucher. Valid values: <li>true: Yes;</li><li>false: No. </li> This parameter is valid only when PlanType is personal, basic, or standard.
+If this field is not specified, the default value 'false' will be used.
+         * @type {string || null}
+         */
+        this.AutoUseVoucher = null;
+
+        /**
+         * Parameters for subscribing to prepaid plans. When PlanType is personal, basic, or standard, this parameter can be optionally set to specify the subscription duration and whether to enable auto-renewal for the plan.
+If this field is not specified, the default plan duration is 1 month, with auto-renewal disabled.
+         * @type {PrepaidPlanParam || null}
+         */
+        this.PrepaidPlanParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanType = 'PlanType' in params ? params.PlanType : null;
+        this.AutoUseVoucher = 'AutoUseVoucher' in params ? params.AutoUseVoucher : null;
+
+        if (params.PrepaidPlanParam) {
+            let obj = new PrepaidPlanParam();
+            obj.deserialize(params.PrepaidPlanParam)
+            this.PrepaidPlanParam = obj;
+        }
 
     }
 }
@@ -9105,8 +9482,7 @@ class DescribeOverviewL7DataResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * The list of L7 traffic summary statistics recorded over time.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Note: This field may return 'null', which indicates a failure to obtain a valid value.
          * @type {Array.<TimingDataRecord> || null}
          */
         this.Data = null;
@@ -9807,26 +10183,18 @@ class DescribeIdentificationsRequest extends  AbstractModel {
 }
 
 /**
- * Domain names bound with the template. 
+ * ModifyHostsCertificate response structure.
  * @class
  */
-class TemplateScope extends  AbstractModel {
+class ModifyHostsCertificateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the site.
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ZoneId = null;
-
-        /**
-         * List of instance statuses
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<EntityStatus> || null}
-         */
-        this.EntityStatus = null;
+        this.RequestId = null;
 
     }
 
@@ -9837,16 +10205,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-
-        if (params.EntityStatus) {
-            this.EntityStatus = new Array();
-            for (let z in params.EntityStatus) {
-                let obj = new EntityStatus();
-                obj.deserialize(params.EntityStatus[z]);
-                this.EntityStatus.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9978,6 +10337,41 @@ class NormalAction extends  AbstractModel {
 }
 
 /**
+ * The top-ranked data details
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The field name.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * The field value.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeZoneSetting response structure.
  * @class
  */
@@ -10058,11 +10452,16 @@ class DescribePurgeTasksRequest extends  AbstractModel {
 
         /**
          * Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
-<li>job-id: Filter based on task ID. job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported;</li>
-<li>target: Filter based on: target resource information. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported, Fuzzy search is not supported; </li>
-<li>domains: Filter based on domain name. domains format: www.qq.com, Fuzzy search is not supported; </li>
-<li>statuses: Filter based on task status, Fuzzy search is not supported. Options: <br>processing: Processing<br>success: Success<br>failed: Failure<br>timeout: Timeout</li>
-<li>type: Filter based on cleared cache type. Multiple values are not supported, Fuzzy search is not supported. Options:<br> purge_url: URL<br> purge_prefix: Prefix<br> purge_all: All cache content<br> purge_host: Hostname<br> purge_cache_tag: CacheTag</li>
+<li>job-id
+Filter based on task ID. job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported;</li>
+<li>target
+Filter based on: target resource information. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported, Fuzzy search is not supported; </li>
+<li>domains
+Filter based on domain name. domains format: www.qq.com, Fuzzy search is not supported; </li>
+<li>statuses
+Filter based on task status, Fuzzy search is not supported. Options: <br>processing: Processing<br>success: Success<br>failed: Failure<br>timeout: Timeout</li>
+<li>type
+Filter based on cleared cache type. Multiple values are not supported, Fuzzy search is not supported. Options:<br> purge_url: URL<br> purge_prefix: Prefix<br> purge_all: All cache content<br> purge_host: Hostname<br> purge_cache_tag: CacheTag</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -10186,6 +10585,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.FollowOrigin)
             this.FollowOrigin = obj;
         }
+
+    }
+}
+
+/**
+ * UpgradePlan response structure.
+ * @class
+ */
+class UpgradePlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order number.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11171,6 +11605,41 @@ class DeleteAccelerationDomainsRequest extends  AbstractModel {
 }
 
 /**
+ * RenewPlan response structure.
+ * @class
+ */
+class RenewPlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order number.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Real-time log delivery task
  * @class
  */
@@ -11245,6 +11714,15 @@ class RealtimeLogDeliveryTask extends  AbstractModel {
         this.Sample = null;
 
         /**
+         * Output format for log delivery. When the output parameter is null, the default format is used, which works as follows:
+<li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>
+<li>When TaskType is 's3', the default format is JSON Lines. </li>
+Note: This field may return 'null', which indicates a failure to obtain a valid value.
+         * @type {LogFormat || null}
+         */
+        this.LogFormat = null;
+
+        /**
          * Note: This field may return null, indicating that no valid values can be obtained.
          * @type {CLSTopic || null}
          */
@@ -11310,6 +11788,12 @@ class RealtimeLogDeliveryTask extends  AbstractModel {
             }
         }
         this.Sample = 'Sample' in params ? params.Sample : null;
+
+        if (params.LogFormat) {
+            let obj = new LogFormat();
+            obj.deserialize(params.LogFormat)
+            this.LogFormat = obj;
+        }
 
         if (params.CLS) {
             let obj = new CLSTopic();
@@ -13090,8 +13574,10 @@ class DDosProtectionConfig extends  AbstractModel {
         super();
 
         /**
-         * Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1).<li>PLATFORM: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled;</li>
-<li>BASE30_MAX300: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps;</li><li>BASE60_MAX600: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps.</li>If no parameters are filled, the default value PLATFORM is used.
+         * Dedicated anti-DDoS specifications in the Chinese mainland. For details, refer to [Dedicated Anti-DDoS Related Fees](https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1).
+<li>PLATFORM: uses the default protection. Dedicated anti-DDoS is not enabled;</li>
+<li>BASE30_MAX300: uses dedicated anti-DDoS, which provides 30 Gbps guaranteed protection bandwidth and up to 300 Gbps elastic protection bandwidth;</li>
+<li>BASE60_MAX600: uses dedicated anti-DDoS, which provides 60 Gbps guaranteed protection bandwidth and up to 600 Gbps elastic protection bandwidth. </li>If this field is not specified, the default value 'PLATFORM' will be used.
          * @type {string || null}
          */
         this.LevelMainland = null;
@@ -13103,8 +13589,10 @@ class DDosProtectionConfig extends  AbstractModel {
         this.MaxBandwidthMainland = null;
 
         /**
-         * Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland).<li>PLATFORM: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled;</li><li>ANYCAST300: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps;</li>
-<li>ANYCAST_ALLIN: Exclusive DDoS protection enabled, utilizing all available protection resources for protection.</li>When no parameters are filled, the default value PLATFORM is used.
+         * Dedicated anti-DDoS specifications in global regions (excluding the Chinese mainland).
+<li>PLATFORM: uses the default protection. Dedicated anti-DDoS is not enabled;</li>
+<li>ANYCAST300: uses dedicated anti-DDoS, which provides 300 Gbps protection bandwidth;</li>
+<li>ANYCAST_ALLIN: uses dedicated anti-DDoS, which provides all available protection resources. </li>If this field is not specified, the default value 'PLATFORM' will be used.
          * @type {string || null}
          */
         this.LevelOverseas = null;
@@ -13288,6 +13776,48 @@ class CreateL4ProxyRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePlan response structure.
+ * @class
+ */
+class CreatePlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plan ID, formatted as edgeone-2unuvzjmmn2q.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * Order number.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeApplicationProxies request structure.
  * @class
  */
@@ -13431,12 +13961,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyHostsCertificate response structure.
+ * CreateOriginGroup response structure.
  * @class
  */
-class ModifyHostsCertificateResponse extends  AbstractModel {
+class CreateOriginGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The ID of the origin group.
+         * @type {string || null}
+         */
+        this.OriginGroupId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13453,6 +13989,7 @@ class ModifyHostsCertificateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.OriginGroupId = 'OriginGroupId' in params ? params.OriginGroupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15100,6 +15637,34 @@ class IPRegionInfo extends  AbstractModel {
         }
         this.IP = 'IP' in params ? params.IP : null;
         this.IsEdgeOneIP = 'IsEdgeOneIP' in params ? params.IsEdgeOneIP : null;
+
+    }
+}
+
+/**
+ * DestroyPlan response structure.
+ * @class
+ */
+class DestroyPlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17093,6 +17658,41 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
 }
 
 /**
+ * IncreasePlanQuota response structure.
+ * @class
+ */
+class IncreasePlanQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order number.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeIPRegion response structure.
  * @class
  */
@@ -17152,41 +17752,6 @@ class DescribeAvailablePlansRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-    }
-}
-
-/**
- * CreateOriginGroup response structure.
- * @class
- */
-class CreateOriginGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID of the origin group.
-         * @type {string || null}
-         */
-        this.OriginGroupId = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginGroupId = 'OriginGroupId' in params ? params.OriginGroupId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17483,49 +18048,6 @@ class AliasDomain extends  AbstractModel {
 }
 
 /**
- * Rule engine action for the HTTP request/response header
- * @class
- */
-class RewriteAction extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Feature name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1) API
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * Parameter
-         * @type {Array.<RuleRewriteActionParams> || null}
-         */
-        this.Parameters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Action = 'Action' in params ? params.Action : null;
-
-        if (params.Parameters) {
-            this.Parameters = new Array();
-            for (let z in params.Parameters) {
-                let obj = new RuleRewriteActionParams();
-                obj.deserialize(params.Parameters[z]);
-                this.Parameters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * IP blocklist/allowlist rule details
  * @class
  */
@@ -17615,6 +18137,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Status = 'Status' in params ? params.Status : null;
         this.RuleName = 'RuleName' in params ? params.RuleName : null;
         this.MatchContent = 'MatchContent' in params ? params.MatchContent : null;
+
+    }
+}
+
+/**
+ * IncreasePlanQuota request structure.
+ * @class
+ */
+class IncreasePlanQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plan ID, formatted as edgeone-2unuvzjmmn2q.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * The types of new plan quotas available include:<li> site: Number of sites;</li><li> precise_access_control_rule: the number of rules under "Web Protection - Custom Rules - Precision Matching Policy";</li><li> rate_limiting_rule: the number of rules under "Web Protection - Rate Limiting - Precision Rate Limiting Module". </li>
+         * @type {string || null}
+         */
+        this.QuotaType = null;
+
+        /**
+         * Number of new quotas. The maximum number of quotas that can be added at one time is 100.
+         * @type {number || null}
+         */
+        this.QuotaNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.QuotaType = 'QuotaType' in params ? params.QuotaType : null;
+        this.QuotaNumber = 'QuotaNumber' in params ? params.QuotaNumber : null;
 
     }
 }
@@ -18171,24 +18735,24 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * The top-ranked data details
+ * Rule engine action for the HTTP request/response header
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class RewriteAction extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The field name.
+         * Feature name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1) API
          * @type {string || null}
          */
-        this.Key = null;
+        this.Action = null;
 
         /**
-         * The field value.
-         * @type {number || null}
+         * Parameter
+         * @type {Array.<RuleRewriteActionParams> || null}
          */
-        this.Value = null;
+        this.Parameters = null;
 
     }
 
@@ -18199,8 +18763,61 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Action = 'Action' in params ? params.Action : null;
+
+        if (params.Parameters) {
+            this.Parameters = new Array();
+            for (let z in params.Parameters) {
+                let obj = new RuleRewriteActionParams();
+                obj.deserialize(params.Parameters[z]);
+                this.Parameters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Domain names bound with the template. 
+ * @class
+ */
+class TemplateScope extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * List of instance statuses
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<EntityStatus> || null}
+         */
+        this.EntityStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.EntityStatus) {
+            this.EntityStatus = new Array();
+            for (let z in params.EntityStatus) {
+                let obj = new EntityStatus();
+                obj.deserialize(params.EntityStatus[z]);
+                this.EntityStatus.push(obj);
+            }
+        }
 
     }
 }
@@ -19681,6 +20298,48 @@ class ModifyZoneStatusResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradePlan request structure.
+ * @class
+ */
+class UpgradePlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plan ID, formatted as edgeone-2unuvzjmmn2q.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * Target plan version for upgrade. Valid values: <li>basic: Basic Edition Plan;</li><li>standard: Standard Edition Plan. </li>
+         * @type {string || null}
+         */
+        this.PlanType = null;
+
+        /**
+         * Whether to automatically use a voucher. Valid values: <li>true: Yes;</li><li>false: No. </li> If this field is not specified, the default value 'false' will be used.
+         * @type {string || null}
+         */
+        this.AutoUseVoucher = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.PlanType = 'PlanType' in params ? params.PlanType : null;
+        this.AutoUseVoucher = 'AutoUseVoucher' in params ? params.AutoUseVoucher : null;
+
+    }
+}
+
+/**
  * CreatePurgeTask request structure.
  * @class
  */
@@ -20199,6 +20858,7 @@ class VanityNameServersIps extends  AbstractModel {
 
 module.exports = {
     DeployConfigGroupVersionRequest: DeployConfigGroupVersionRequest,
+    RenewFlag: RenewFlag,
     Compression: Compression,
     DeleteL4ProxyRulesRequest: DeleteL4ProxyRulesRequest,
     DescribeOriginGroupResponse: DescribeOriginGroupResponse,
@@ -20206,6 +20866,7 @@ module.exports = {
     SlowPostConfig: SlowPostConfig,
     DescribeConfigGroupVersionDetailResponse: DescribeConfigGroupVersionDetailResponse,
     OriginDetail: OriginDetail,
+    PrepaidPlanParam: PrepaidPlanParam,
     ModifyAccelerationDomainResponse: ModifyAccelerationDomainResponse,
     TopEntryValue: TopEntryValue,
     DescribeHostsSettingResponse: DescribeHostsSettingResponse,
@@ -20216,6 +20877,7 @@ module.exports = {
     DescribeRealtimeLogDeliveryTasksRequest: DescribeRealtimeLogDeliveryTasksRequest,
     DescribeOriginProtectionResponse: DescribeOriginProtectionResponse,
     DescribeBillingDataRequest: DescribeBillingDataRequest,
+    LogFormat: LogFormat,
     DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
     DescribeAliasDomainsRequest: DescribeAliasDomainsRequest,
     RateLimitConfig: RateLimitConfig,
@@ -20270,6 +20932,7 @@ module.exports = {
     BotManagedRule: BotManagedRule,
     SecurityConfig: SecurityConfig,
     L4OfflineLog: L4OfflineLog,
+    ModifyPlanRequest: ModifyPlanRequest,
     ExceptUserRuleScope: ExceptUserRuleScope,
     SecEntryValue: SecEntryValue,
     ModifyL4ProxyRulesRequest: ModifyL4ProxyRulesRequest,
@@ -20300,6 +20963,7 @@ module.exports = {
     DiffIPWhitelist: DiffIPWhitelist,
     DeleteSecurityIPGroupResponse: DeleteSecurityIPGroupResponse,
     ModifyRuleRequest: ModifyRuleRequest,
+    RenewPlanRequest: RenewPlanRequest,
     DescribePrefetchTasksResponse: DescribePrefetchTasksResponse,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
     ModifyL4ProxyStatusResponse: ModifyL4ProxyStatusResponse,
@@ -20326,6 +20990,7 @@ module.exports = {
     ModifyL4ProxyRulesResponse: ModifyL4ProxyRulesResponse,
     DDoSAttackEvent: DDoSAttackEvent,
     DescribeConfigGroupVersionDetailRequest: DescribeConfigGroupVersionDetailRequest,
+    ModifyPlanResponse: ModifyPlanResponse,
     DropPageDetail: DropPageDetail,
     CnameStatus: CnameStatus,
     ServerCertInfo: ServerCertInfo,
@@ -20336,6 +21001,8 @@ module.exports = {
     DeleteSharedCNAMERequest: DeleteSharedCNAMERequest,
     ModifyRealtimeLogDeliveryTaskRequest: ModifyRealtimeLogDeliveryTaskRequest,
     VanityNameServers: VanityNameServers,
+    DestroyPlanRequest: DestroyPlanRequest,
+    CreatePlanRequest: CreatePlanRequest,
     IPGroup: IPGroup,
     CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
@@ -20363,13 +21030,15 @@ module.exports = {
     DeleteOriginGroupResponse: DeleteOriginGroupResponse,
     DescribeL4ProxyRequest: DescribeL4ProxyRequest,
     DescribeIdentificationsRequest: DescribeIdentificationsRequest,
-    TemplateScope: TemplateScope,
+    ModifyHostsCertificateResponse: ModifyHostsCertificateResponse,
     CreateAccelerationDomainRequest: CreateAccelerationDomainRequest,
     NormalAction: NormalAction,
+    TopDetailData: TopDetailData,
     DescribeZoneSettingResponse: DescribeZoneSettingResponse,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     IdentifyZoneRequest: IdentifyZoneRequest,
     CacheConfig: CacheConfig,
+    UpgradePlanResponse: UpgradePlanResponse,
     OfflineCache: OfflineCache,
     CreateConfigGroupVersionRequest: CreateConfigGroupVersionRequest,
     AclUserRule: AclUserRule,
@@ -20390,6 +21059,7 @@ module.exports = {
     DescribeL4ProxyResponse: DescribeL4ProxyResponse,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
     DeleteAccelerationDomainsRequest: DeleteAccelerationDomainsRequest,
+    RenewPlanResponse: RenewPlanResponse,
     RealtimeLogDeliveryTask: RealtimeLogDeliveryTask,
     DescribeDeployHistoryRequest: DescribeDeployHistoryRequest,
     BillingData: BillingData,
@@ -20429,10 +21099,11 @@ module.exports = {
     DDosProtectionConfig: DDosProtectionConfig,
     DescribeDDoSAttackDataRequest: DescribeDDoSAttackDataRequest,
     CreateL4ProxyRequest: CreateL4ProxyRequest,
+    CreatePlanResponse: CreatePlanResponse,
     DescribeApplicationProxiesRequest: DescribeApplicationProxiesRequest,
     DescribeContentQuotaRequest: DescribeContentQuotaRequest,
     Hsts: Hsts,
-    ModifyHostsCertificateResponse: ModifyHostsCertificateResponse,
+    CreateOriginGroupResponse: CreateOriginGroupResponse,
     CreateRuleRequest: CreateRuleRequest,
     ModifyL4ProxyStatusRequest: ModifyL4ProxyStatusRequest,
     RateLimitTemplateDetail: RateLimitTemplateDetail,
@@ -20457,6 +21128,7 @@ module.exports = {
     DeliveryCondition: DeliveryCondition,
     FollowOrigin: FollowOrigin,
     IPRegionInfo: IPRegionInfo,
+    DestroyPlanResponse: DestroyPlanResponse,
     QueryCondition: QueryCondition,
     RuleRewriteActionParams: RuleRewriteActionParams,
     ModifyAliasDomainResponse: ModifyAliasDomainResponse,
@@ -20488,15 +21160,15 @@ module.exports = {
     DeleteL4ProxyResponse: DeleteL4ProxyResponse,
     ModifyApplicationProxyRuleStatusResponse: ModifyApplicationProxyRuleStatusResponse,
     CreateApplicationProxyRuleRequest: CreateApplicationProxyRuleRequest,
+    IncreasePlanQuotaResponse: IncreasePlanQuotaResponse,
     DescribeIPRegionResponse: DescribeIPRegionResponse,
     DescribeAvailablePlansRequest: DescribeAvailablePlansRequest,
-    CreateOriginGroupResponse: CreateOriginGroupResponse,
     ModifyZoneResponse: ModifyZoneResponse,
     AlgDetectSession: AlgDetectSession,
     OriginProtectionInfo: OriginProtectionInfo,
     AliasDomain: AliasDomain,
-    RewriteAction: RewriteAction,
     IpTableRule: IpTableRule,
+    IncreasePlanQuotaRequest: IncreasePlanQuotaRequest,
     DescribeDDoSAttackTopDataRequest: DescribeDDoSAttackTopDataRequest,
     Quic: Quic,
     CreateCLSIndexRequest: CreateCLSIndexRequest,
@@ -20506,7 +21178,8 @@ module.exports = {
     DownloadL7LogsResponse: DownloadL7LogsResponse,
     AccelerationDomain: AccelerationDomain,
     SlowRateConfig: SlowRateConfig,
-    TopDetailData: TopDetailData,
+    RewriteAction: RewriteAction,
+    TemplateScope: TemplateScope,
     DescribeOverviewL7DataRequest: DescribeOverviewL7DataRequest,
     DeleteSharedCNAMEResponse: DeleteSharedCNAMEResponse,
     DDoSBlockData: DDoSBlockData,
@@ -20539,6 +21212,7 @@ module.exports = {
     Quota: Quota,
     CheckCnameStatusRequest: CheckCnameStatusRequest,
     ModifyZoneStatusResponse: ModifyZoneStatusResponse,
+    UpgradePlanRequest: UpgradePlanRequest,
     CreatePurgeTaskRequest: CreatePurgeTaskRequest,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     DeployConfigGroupVersionResponse: DeployConfigGroupVersionResponse,

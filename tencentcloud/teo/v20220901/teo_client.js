@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeployConfigGroupVersionRequest = models.DeployConfigGroupVersionRequest;
+const RenewFlag = models.RenewFlag;
 const Compression = models.Compression;
 const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
@@ -24,6 +25,7 @@ const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoRe
 const SlowPostConfig = models.SlowPostConfig;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
+const PrepaidPlanParam = models.PrepaidPlanParam;
 const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
 const TopEntryValue = models.TopEntryValue;
 const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
@@ -34,6 +36,7 @@ const CreateCLSIndexResponse = models.CreateCLSIndexResponse;
 const DescribeRealtimeLogDeliveryTasksRequest = models.DescribeRealtimeLogDeliveryTasksRequest;
 const DescribeOriginProtectionResponse = models.DescribeOriginProtectionResponse;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
+const LogFormat = models.LogFormat;
 const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
 const DescribeAliasDomainsRequest = models.DescribeAliasDomainsRequest;
 const RateLimitConfig = models.RateLimitConfig;
@@ -88,6 +91,7 @@ const DeleteZoneRequest = models.DeleteZoneRequest;
 const BotManagedRule = models.BotManagedRule;
 const SecurityConfig = models.SecurityConfig;
 const L4OfflineLog = models.L4OfflineLog;
+const ModifyPlanRequest = models.ModifyPlanRequest;
 const ExceptUserRuleScope = models.ExceptUserRuleScope;
 const SecEntryValue = models.SecEntryValue;
 const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
@@ -118,6 +122,7 @@ const AlgDetectRule = models.AlgDetectRule;
 const DiffIPWhitelist = models.DiffIPWhitelist;
 const DeleteSecurityIPGroupResponse = models.DeleteSecurityIPGroupResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
+const RenewPlanRequest = models.RenewPlanRequest;
 const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
 const ModifyL4ProxyStatusResponse = models.ModifyL4ProxyStatusResponse;
@@ -144,6 +149,7 @@ const BindSecurityTemplateToEntityResponse = models.BindSecurityTemplateToEntity
 const ModifyL4ProxyRulesResponse = models.ModifyL4ProxyRulesResponse;
 const DDoSAttackEvent = models.DDoSAttackEvent;
 const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersionDetailRequest;
+const ModifyPlanResponse = models.ModifyPlanResponse;
 const DropPageDetail = models.DropPageDetail;
 const CnameStatus = models.CnameStatus;
 const ServerCertInfo = models.ServerCertInfo;
@@ -154,6 +160,8 @@ const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
 const DeleteSharedCNAMERequest = models.DeleteSharedCNAMERequest;
 const ModifyRealtimeLogDeliveryTaskRequest = models.ModifyRealtimeLogDeliveryTaskRequest;
 const VanityNameServers = models.VanityNameServers;
+const DestroyPlanRequest = models.DestroyPlanRequest;
+const CreatePlanRequest = models.CreatePlanRequest;
 const IPGroup = models.IPGroup;
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
@@ -181,13 +189,15 @@ const IpTableConfig = models.IpTableConfig;
 const DeleteOriginGroupResponse = models.DeleteOriginGroupResponse;
 const DescribeL4ProxyRequest = models.DescribeL4ProxyRequest;
 const DescribeIdentificationsRequest = models.DescribeIdentificationsRequest;
-const TemplateScope = models.TemplateScope;
+const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
 const CreateAccelerationDomainRequest = models.CreateAccelerationDomainRequest;
 const NormalAction = models.NormalAction;
+const TopDetailData = models.TopDetailData;
 const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
+const UpgradePlanResponse = models.UpgradePlanResponse;
 const OfflineCache = models.OfflineCache;
 const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
 const AclUserRule = models.AclUserRule;
@@ -208,6 +218,7 @@ const FailReason = models.FailReason;
 const DescribeL4ProxyResponse = models.DescribeL4ProxyResponse;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
+const RenewPlanResponse = models.RenewPlanResponse;
 const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
 const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
 const BillingData = models.BillingData;
@@ -247,10 +258,11 @@ const ModifyZoneRequest = models.ModifyZoneRequest;
 const DDosProtectionConfig = models.DDosProtectionConfig;
 const DescribeDDoSAttackDataRequest = models.DescribeDDoSAttackDataRequest;
 const CreateL4ProxyRequest = models.CreateL4ProxyRequest;
+const CreatePlanResponse = models.CreatePlanResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const Hsts = models.Hsts;
-const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
+const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyL4ProxyStatusRequest = models.ModifyL4ProxyStatusRequest;
 const RateLimitTemplateDetail = models.RateLimitTemplateDetail;
@@ -275,6 +287,7 @@ const SecEntry = models.SecEntry;
 const DeliveryCondition = models.DeliveryCondition;
 const FollowOrigin = models.FollowOrigin;
 const IPRegionInfo = models.IPRegionInfo;
+const DestroyPlanResponse = models.DestroyPlanResponse;
 const QueryCondition = models.QueryCondition;
 const RuleRewriteActionParams = models.RuleRewriteActionParams;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
@@ -306,15 +319,15 @@ const BotExtendAction = models.BotExtendAction;
 const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
 const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
+const IncreasePlanQuotaResponse = models.IncreasePlanQuotaResponse;
 const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
-const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const ModifyZoneResponse = models.ModifyZoneResponse;
 const AlgDetectSession = models.AlgDetectSession;
 const OriginProtectionInfo = models.OriginProtectionInfo;
 const AliasDomain = models.AliasDomain;
-const RewriteAction = models.RewriteAction;
 const IpTableRule = models.IpTableRule;
+const IncreasePlanQuotaRequest = models.IncreasePlanQuotaRequest;
 const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
 const Quic = models.Quic;
 const CreateCLSIndexRequest = models.CreateCLSIndexRequest;
@@ -324,7 +337,8 @@ const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
 const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
 const AccelerationDomain = models.AccelerationDomain;
 const SlowRateConfig = models.SlowRateConfig;
-const TopDetailData = models.TopDetailData;
+const RewriteAction = models.RewriteAction;
+const TemplateScope = models.TemplateScope;
 const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
 const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
 const DDoSBlockData = models.DDoSBlockData;
@@ -357,6 +371,7 @@ const AiRule = models.AiRule;
 const Quota = models.Quota;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
 const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
+const UpgradePlanRequest = models.UpgradePlanRequest;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
@@ -378,6 +393,24 @@ class TeoClient extends AbstractClient {
         super("teo.tencentcloudapi.com", "2022-09-01", credential, region, profile);
     }
     
+    /**
+     * To stop billing for your EdgeOne plan, you can use this interface to terminate the billing plan.
+> Terminating a billing plan requires the following conditions:
+    1. The plan has expired (except for the Enterprise Edition Plan);
+    2. All sites under the plan have been either shut down or deleted.
+
+> The site status can be queried through the [Query Site List](https://intl.cloud.tencent.com/document/product/1552/80713?from_cn_redirect=1) interface.
+A site can be deactivated by switching the site to a closed status through the [Switch Site Status](https://intl.cloud.tencent.com/document/product/1552/80707?from_cn_redirect=1) interface.
+A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/document/product/1552/80717?from_cn_redirect=1) interface.
+     * @param {DestroyPlanRequest} req
+     * @param {function(string, DestroyPlanResponse):void} cb
+     * @public
+     */
+    DestroyPlan(req, cb) {
+        let resp = new DestroyPlanResponse();
+        this.request("DestroyPlan", req, resp, cb);
+    }
+
     /**
      * When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves the latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
 
@@ -545,6 +578,18 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     DescribeEnvironments(req, cb) {
         let resp = new DescribeEnvironmentsResponse();
         this.request("DescribeEnvironments", req, resp, cb);
+    }
+
+    /**
+     * When the number of sites bound to your plan, the number of rules under "Web Protection - Custom Rules - Precision Matching Policy", or the number of rules under "Web Protection - Rate Limiting - Precision Rate Limiting Module" reaches the plan's quota, you can use this interface to purchase additional quotas.
+> This interface only supports the Enterprise Edition Plan.
+     * @param {IncreasePlanQuotaRequest} req
+     * @param {function(string, IncreasePlanQuotaResponse):void} cb
+     * @public
+     */
+    IncreasePlanQuota(req, cb) {
+        let resp = new IncreasePlanQuotaResponse();
+        this.request("IncreasePlanQuota", req, resp, cb);
     }
 
     /**
@@ -739,14 +784,14 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to create an alias domain name.
-     * @param {CreateAliasDomainRequest} req
-     * @param {function(string, CreateAliasDomainResponse):void} cb
+     * This API is used to modify Layer 4 proxy forwarding rules, supporting both individual and batch modification.
+     * @param {ModifyL4ProxyRulesRequest} req
+     * @param {function(string, ModifyL4ProxyRulesResponse):void} cb
      * @public
      */
-    CreateAliasDomain(req, cb) {
-        let resp = new CreateAliasDomainResponse();
-        this.request("CreateAliasDomain", req, resp, cb);
+    ModifyL4ProxyRules(req, cb) {
+        let resp = new ModifyL4ProxyRulesResponse();
+        this.request("ModifyL4ProxyRules", req, resp, cb);
     }
 
     /**
@@ -783,14 +828,14 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to modify Layer 4 proxy forwarding rules, supporting both individual and batch modification.
-     * @param {ModifyL4ProxyRulesRequest} req
-     * @param {function(string, ModifyL4ProxyRulesResponse):void} cb
+     * This API is used to create an alias domain name.
+     * @param {CreateAliasDomainRequest} req
+     * @param {function(string, CreateAliasDomainResponse):void} cb
      * @public
      */
-    ModifyL4ProxyRules(req, cb) {
-        let resp = new ModifyL4ProxyRulesResponse();
-        this.request("ModifyL4ProxyRules", req, resp, cb);
+    CreateAliasDomain(req, cb) {
+        let resp = new CreateAliasDomainResponse();
+        this.request("CreateAliasDomain", req, resp, cb);
     }
 
     /**
@@ -871,6 +916,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * Modify the plan settings. Currently, only the auto-renewal switch of prepaid plans can be modified.
+     * @param {ModifyPlanRequest} req
+     * @param {function(string, ModifyPlanResponse):void} cb
+     * @public
+     */
+    ModifyPlan(req, cb) {
+        let resp = new ModifyPlanResponse();
+        this.request("ModifyPlan", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind a site to a plan.
      * @param {BindZoneToPlanRequest} req
      * @param {function(string, BindZoneToPlanResponse):void} cb
@@ -934,6 +990,18 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     ModifyApplicationProxyStatus(req, cb) {
         let resp = new ModifyApplicationProxyStatusResponse();
         this.request("ModifyApplicationProxyStatus", req, resp, cb);
+    }
+
+    /**
+     * If you need to use the EdgeOne product, you must create a billing plan through this interface.
+> After creating a plan, you need to complete the process of creating a site and binding the plan through [CreateZone](https://intl.cloud.tencent.com/document/product/1552/80719?from_cn_redirect=1), so that the EdgeOne can provide services properly.
+     * @param {CreatePlanRequest} req
+     * @param {function(string, CreatePlanResponse):void} cb
+     * @public
+     */
+    CreatePlan(req, cb) {
+        let resp = new CreatePlanResponse();
+        this.request("CreatePlan", req, resp, cb);
     }
 
     /**
@@ -1138,6 +1206,20 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
+     * When you need features available only in higher-tier plans, you can upgrade your plan through this interface. Upgrades are only supported for Personal and Basic Edition Plans.
+> For differences between EdgeOne billing plans, refer to [Comparison of EdgeOne Plans](https://intl.cloud.tencent.com/document/product/1552/94165?from_cn_redirect=1).
+For EdgeOne plan upgrade rules and pricing details, refer to [EdgeOne Plan Upgrade Guide](https://intl.cloud.tencent.com/document/product/1552/95291?from_cn_redirect=1).
+If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {UpgradePlanRequest} req
+     * @param {function(string, UpgradePlanResponse):void} cb
+     * @public
+     */
+    UpgradePlan(req, cb) {
+        let resp = new UpgradePlanResponse();
+        this.request("UpgradePlan", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the rules in the rule engine.
      * @param {DescribeRulesRequest} req
      * @param {function(string, DescribeRulesResponse):void} cb
@@ -1324,6 +1406,18 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     ModifyL4ProxyRulesStatus(req, cb) {
         let resp = new ModifyL4ProxyRulesStatusResponse();
         this.request("ModifyL4ProxyRulesStatus", req, resp, cb);
+    }
+
+    /**
+     * When your plan needs to be extended, you can use this interface to renew it. Plan renewal is only supported for the Personal, Basic, and Standard Editions.
+> For cost details, refer to [Plan Fees](https://intl.cloud.tencent.com/document/product/1552/94158?from_cn_redirect=1).
+     * @param {RenewPlanRequest} req
+     * @param {function(string, RenewPlanResponse):void} cb
+     * @public
+     */
+    RenewPlan(req, cb) {
+        let resp = new RenewPlanResponse();
+        this.request("RenewPlan", req, resp, cb);
     }
 
     /**

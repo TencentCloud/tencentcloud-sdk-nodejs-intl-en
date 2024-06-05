@@ -415,13 +415,13 @@ class OriginDetail extends  AbstractModel {
         super();
 
         /**
-         * Origin server type. Valid values:
-<li>IP_DOMAIN: IPv4, IPv6, or domain name-typed origin servers;</li>
-<li>COS: Tencent Cloud COS origin servers;</li>
-<li>AWS_S3: AWS S3 object storage origin servers;</li>
-<li>ORIGIN_GROUP: origin server group-typed origin servers;</li>
-<li>VODEO: Cloud VOD (Hybrid Cloud Edition);</li>
-<li>SPACE: uninstalling origin servers. Currently only available to the allowlist;</li>
+         * The origin server type, with values:
+<li>IP_DOMAIN: IPv4, IPv6, or domain name type origin server;</li>
+<li>COS: Tencent Cloud COS origin server;</li>
+<li>AWS_S3: AWS S3 origin server;</li>
+<li>ORIGIN_GROUP: origin server group type origin server;</li>
+<li>VODEO: VOD on EO;</li>
+<li>SPACE: origin server uninstallation. Currently only available to the allowlist;</li>
 <li>LB: load balancing. Currently only available to the allowlist. </li>
          * @type {string || null}
          */
@@ -3671,12 +3671,6 @@ class Rule extends  AbstractModel {
         super();
 
         /**
-         * Feature to be executed.
-         * @type {Array.<Action> || null}
-         */
-        this.Actions = null;
-
-        /**
          * Feature execution conditions.
 Note: If any condition in the array is met, the feature will run.
          * @type {Array.<RuleAndConditions> || null}
@@ -3684,7 +3678,15 @@ Note: If any condition in the array is met, the feature will run.
         this.Conditions = null;
 
         /**
+         * Feature to be executed.
+Note: Actions and SubRules cannot both be empty.
+         * @type {Array.<Action> || null}
+         */
+        this.Actions = null;
+
+        /**
          * The nested rule.
+Note: Actions and SubRules cannot both be empty.
          * @type {Array.<SubRuleItem> || null}
          */
         this.SubRules = null;
@@ -3699,21 +3701,21 @@ Note: If any condition in the array is met, the feature will run.
             return;
         }
 
-        if (params.Actions) {
-            this.Actions = new Array();
-            for (let z in params.Actions) {
-                let obj = new Action();
-                obj.deserialize(params.Actions[z]);
-                this.Actions.push(obj);
-            }
-        }
-
         if (params.Conditions) {
             this.Conditions = new Array();
             for (let z in params.Conditions) {
                 let obj = new RuleAndConditions();
                 obj.deserialize(params.Conditions[z]);
                 this.Conditions.push(obj);
+            }
+        }
+
+        if (params.Actions) {
+            this.Actions = new Array();
+            for (let z in params.Actions) {
+                let obj = new Action();
+                obj.deserialize(params.Actions[z]);
+                this.Actions.push(obj);
             }
         }
 
@@ -6712,7 +6714,10 @@ class Task extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 
+         * Node cache purge method, with values:
+<li>invalidate: Marks as expired. A back-to-origin validation is triggered upon user request, sending an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin server responds with 200, the node will fetch new resources from the origin and update the cache; if the origin server responds with 304, the cache will not be updated;</li>
+<li>delete: Directly deletes the node's cache, triggering a resource fetch from the origin upon user request.</li>
+Note: This field may return null, which indicates a failure to obtain a valid value.
          * @type {string || null}
          */
         this.Method = null;
@@ -8375,7 +8380,7 @@ class ModifyRealtimeLogDeliveryTaskRequest extends  AbstractModel {
         this.Sample = null;
 
         /**
-         * Output format for log delivery. If this field is not specified, the original configuration will be retained.
+         * Output format for log delivery. If this field is not specified, the original configuration will be retained.Specifically, when TaskType is set to cls, the value of LogFormat.FormatType can only be json, and other parameters in LogFormat will be ignored. It is recommended not to input LogFormat.
          * @type {LogFormat || null}
          */
         this.LogFormat = null;
@@ -16982,14 +16987,14 @@ class OriginInfo extends  AbstractModel {
         super();
 
         /**
-         * Origin server type. Valid values:
-<li>IP_DOMAIN: IPV4, IPV6, or domain type origin server;</li>
-<li>COS: Tencent Cloud Object Storage origin server;</li>
-<li>AWS_S3: AWS S3 Cloud Object Storage origin server;</li>
-<li>ORIGIN_GROUP: Origin group type origin server;</li>
-<li>VODEO: Video on Demand (hybrid cloud edition);</li>
-<li>SPACE: Origin shield, currently only available to the whitelist;</li>
-<li>LB: Cloud Load Balancer, currently only available to the whitelist.</li>
+         * The origin server type, with values:
+<li>IP_DOMAIN: IPv4, IPv6, or domain name type origin server;</li>
+<li>COS: Tencent Cloud COS origin server;</li>
+<li>AWS_S3: AWS S3 origin server;</li>
+<li>ORIGIN_GROUP: origin server group type origin server;</li>
+<li>VODEO: VOD on EO;</li>
+<li>SPACE: origin server uninstallation. Currently only available to the allowlist;</li>
+<li>LB: load balancing. Currently only available to the allowlist. </li>
          * @type {string || null}
          */
         this.OriginType = null;
@@ -17138,11 +17143,11 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ApplyType = null;
 
         /**
-         * Cipher suite. Values:
-<li>`loose-v2023`: Offer the highest compatibility but relatively lower security. It supports TLS 1.0-1.3.</li>
-<li>`general-v2023`: Keep a balance between the compatibility and security. It supports TLS 1.2-1.3.</li>
-<li>`strict-v2023`: Provides high security, disabling all insecure cipher suites. It supports TLS 1.2-1.3.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * The cipher suite, with values:
+<li>loose-v2023: Provides high compatibility with general security, and supports TLS 1.0-1.3 cipher suites;</li>
+<li>general-v2023: Provides relatively high compatibility with moderate security, and supports TLS 1.2-1.3 cipher suites;</li>
+<li>strict-v2023: Provides high security, disables all cipher suites with security risks, and supports TLS 1.2-1.3 cipher suites.</li>
+Note: This field may return null, which indicates a failure to obtain a valid value.
          * @type {string || null}
          */
         this.CipherSuite = null;
@@ -19136,6 +19141,43 @@ class IPWhitelist extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityIPGroup request structure.
+ * @class
+ */
+class DescribeSecurityIPGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Site ID, used to specify the scope of the queried site.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Specifies the ID of a security IP group.
+<li>When this parameter is provided, only the configuration of the security IP group with the specified ID is queried.</li>
+<li>When this parameter is not provided, information of all security IP groups under the site is returned.</li>
+         * @type {Array.<number> || null}
+         */
+        this.GroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+
+    }
+}
+
+/**
  * ModifyApplicationProxyStatus response structure.
  * @class
  */
@@ -19909,6 +19951,34 @@ class SecurityTemplateBinding extends  AbstractModel {
 }
 
 /**
+ * The information attached when the node cache purge type is set to purge_cache_tag.
+ * @class
+ */
+class CacheTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of domain names to purge cache for.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+
+    }
+}
+
+/**
  * DescribeDefaultCertificates response structure.
  * @class
  */
@@ -20298,6 +20368,49 @@ class ModifyZoneStatusResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityIPGroup response structure.
+ * @class
+ */
+class DescribeSecurityIPGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Detailed configuration information of security IP groups, including the ID, name, and IP/IP range list information of each security IP group.
+         * @type {Array.<IPGroup> || null}
+         */
+        this.IPGroups = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.IPGroups) {
+            this.IPGroups = new Array();
+            for (let z in params.IPGroups) {
+                let obj = new IPGroup();
+                obj.deserialize(params.IPGroups[z]);
+                this.IPGroups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradePlan request structure.
  * @class
  */
@@ -20383,6 +20496,12 @@ Note that if it’s enabled, the purging is based on the converted URLs.
          */
         this.EncodeUrl = null;
 
+        /**
+         * The information attached when the node cache purge type is set to purge_cache_tag.
+         * @type {CacheTag || null}
+         */
+        this.CacheTag = null;
+
     }
 
     /**
@@ -20397,6 +20516,12 @@ Note that if it’s enabled, the purging is based on the converted URLs.
         this.Method = 'Method' in params ? params.Method : null;
         this.Targets = 'Targets' in params ? params.Targets : null;
         this.EncodeUrl = 'EncodeUrl' in params ? params.EncodeUrl : null;
+
+        if (params.CacheTag) {
+            let obj = new CacheTag();
+            obj.deserialize(params.CacheTag)
+            this.CacheTag = obj;
+        }
 
     }
 }
@@ -21187,6 +21312,7 @@ module.exports = {
     BindZoneToPlanRequest: BindZoneToPlanRequest,
     SecurityType: SecurityType,
     IPWhitelist: IPWhitelist,
+    DescribeSecurityIPGroupRequest: DescribeSecurityIPGroupRequest,
     ModifyApplicationProxyStatusResponse: ModifyApplicationProxyStatusResponse,
     Identification: Identification,
     TopEntry: TopEntry,
@@ -21204,6 +21330,7 @@ module.exports = {
     ModifySecurityPolicyResponse: ModifySecurityPolicyResponse,
     ModifyOriginGroupRequest: ModifyOriginGroupRequest,
     SecurityTemplateBinding: SecurityTemplateBinding,
+    CacheTag: CacheTag,
     DescribeDefaultCertificatesResponse: DescribeDefaultCertificatesResponse,
     OwnershipVerification: OwnershipVerification,
     DescribeConfigGroupVersionsRequest: DescribeConfigGroupVersionsRequest,
@@ -21212,6 +21339,7 @@ module.exports = {
     Quota: Quota,
     CheckCnameStatusRequest: CheckCnameStatusRequest,
     ModifyZoneStatusResponse: ModifyZoneStatusResponse,
+    DescribeSecurityIPGroupResponse: DescribeSecurityIPGroupResponse,
     UpgradePlanRequest: UpgradePlanRequest,
     CreatePurgeTaskRequest: CreatePurgeTaskRequest,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,

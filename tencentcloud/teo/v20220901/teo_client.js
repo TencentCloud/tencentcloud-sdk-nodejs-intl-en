@@ -346,6 +346,7 @@ const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const SecurityType = models.SecurityType;
 const IPWhitelist = models.IPWhitelist;
+const DescribeSecurityIPGroupRequest = models.DescribeSecurityIPGroupRequest;
 const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatusResponse;
 const Identification = models.Identification;
 const TopEntry = models.TopEntry;
@@ -363,6 +364,7 @@ const CreateZoneResponse = models.CreateZoneResponse;
 const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
 const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
 const SecurityTemplateBinding = models.SecurityTemplateBinding;
+const CacheTag = models.CacheTag;
 const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
 const OwnershipVerification = models.OwnershipVerification;
 const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
@@ -371,6 +373,7 @@ const AiRule = models.AiRule;
 const Quota = models.Quota;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
 const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
+const DescribeSecurityIPGroupResponse = models.DescribeSecurityIPGroupResponse;
 const UpgradePlanRequest = models.UpgradePlanRequest;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
@@ -1476,7 +1479,10 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
-     * This API is used to query the configuration information of an IP group, including the IP group name, IP group content, and the site the IP group belongs to.
+     * The API is deprecated and will be discontinued on June 30, 2024. Please use the API [DescribeSecurityIPGroup
+](https://intl.cloud.tencent.com/document/product/1552/105866?from_cn_redirect=1).
+
+This API is used to query the configuration information of an IP group, including the IP group name, IP group content, and the site the IP group belongs to.
      * @param {DescribeSecurityIPGroupInfoRequest} req
      * @param {function(string, DescribeSecurityIPGroupInfoResponse):void} cb
      * @public
@@ -1484,6 +1490,17 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     DescribeSecurityIPGroupInfo(req, cb) {
         let resp = new DescribeSecurityIPGroupInfoResponse();
         this.request("DescribeSecurityIPGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the configuration information of a security IP group, including the ID, name, and content of the security IP group.
+     * @param {DescribeSecurityIPGroupRequest} req
+     * @param {function(string, DescribeSecurityIPGroupResponse):void} cb
+     * @public
+     */
+    DescribeSecurityIPGroup(req, cb) {
+        let resp = new DescribeSecurityIPGroupResponse();
+        this.request("DescribeSecurityIPGroup", req, resp, cb);
     }
 
     /**

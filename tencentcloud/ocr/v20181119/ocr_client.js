@@ -73,6 +73,7 @@ const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const MotorVehicleSaleInvoice = models.MotorVehicleSaleInvoice;
 const TableOCRRequest = models.TableOCRRequest;
 const PassportRecognizeInfos = models.PassportRecognizeInfos;
+const RecognizeSingaporeIDCardOCRRequest = models.RecognizeSingaporeIDCardOCRRequest;
 const TaxiTicket = models.TaxiTicket;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
@@ -98,6 +99,7 @@ const VatInvoiceRoll = models.VatInvoiceRoll;
 const Polygon = models.Polygon;
 const TextDetectionResult = models.TextDetectionResult;
 const RecognizeGeneralInvoiceResponse = models.RecognizeGeneralInvoiceResponse;
+const RecognizeSingaporeIDCardOCRResponse = models.RecognizeSingaporeIDCardOCRResponse;
 const SealOCRRequest = models.SealOCRRequest;
 const MedicalInvoice = models.MedicalInvoice;
 const TextTable = models.TextTable;
@@ -418,6 +420,18 @@ The API request rate is limited to 20 requests/sec by default.
     RecognizePhilippinesUMIDOCR(req, cb) {
         let resp = new RecognizePhilippinesUMIDOCRResponse();
         this.request("RecognizePhilippinesUMIDOCR", req, resp, cb);
+    }
+
+    /**
+     * This interface supports the identification of all fields on the front side of ID card for Singapore residents.The identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+     * @param {RecognizeSingaporeIDCardOCRRequest} req
+     * @param {function(string, RecognizeSingaporeIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeSingaporeIDCardOCR(req, cb) {
+        let resp = new RecognizeSingaporeIDCardOCRResponse();
+        this.request("RecognizeSingaporeIDCardOCR", req, resp, cb);
     }
 
     /**

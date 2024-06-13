@@ -74,6 +74,7 @@ const RuleCodeActionParams = models.RuleCodeActionParams;
 const OriginGroupReference = models.OriginGroupReference;
 const ExceptUserRule = models.ExceptUserRule;
 const AccelerateType = models.AccelerateType;
+const ModifyCustomErrorPageResponse = models.ModifyCustomErrorPageResponse;
 const SubRule = models.SubRule;
 const ConfigGroupVersionInfo = models.ConfigGroupVersionInfo;
 const VerifyOwnershipResponse = models.VerifyOwnershipResponse;
@@ -82,17 +83,18 @@ const Rule = models.Rule;
 const DownloadL4LogsRequest = models.DownloadL4LogsRequest;
 const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
 const BillingDataFilter = models.BillingDataFilter;
+const DeleteCustomErrorPageResponse = models.DeleteCustomErrorPageResponse;
 const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const Header = models.Header;
+const DeleteCustomErrorPageRequest = models.DeleteCustomErrorPageRequest;
 const CustomField = models.CustomField;
-const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
 const DeleteZoneRequest = models.DeleteZoneRequest;
 const BotManagedRule = models.BotManagedRule;
 const SecurityConfig = models.SecurityConfig;
 const L4OfflineLog = models.L4OfflineLog;
 const ModifyPlanRequest = models.ModifyPlanRequest;
-const ExceptUserRuleScope = models.ExceptUserRuleScope;
+const CustomErrorPage = models.CustomErrorPage;
 const SecEntryValue = models.SecEntryValue;
 const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
 const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
@@ -112,11 +114,12 @@ const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
 const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
 const AlgDetectResult = models.AlgDetectResult;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
-const StandardDebug = models.StandardDebug;
+const OfflineCache = models.OfflineCache;
 const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
 const MaxAge = models.MaxAge;
+const DescribeCustomErrorPagesResponse = models.DescribeCustomErrorPagesResponse;
 const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
 const AlgDetectRule = models.AlgDetectRule;
 const DiffIPWhitelist = models.DiffIPWhitelist;
@@ -170,6 +173,7 @@ const DDoS = models.DDoS;
 const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
 const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const RuleItem = models.RuleItem;
+const SlowRateConfig = models.SlowRateConfig;
 const Cache = models.Cache;
 const DetailHost = models.DetailHost;
 const DescribeRealtimeLogDeliveryTasksResponse = models.DescribeRealtimeLogDeliveryTasksResponse;
@@ -182,6 +186,7 @@ const TimingDataItem = models.TimingDataItem;
 const RateLimitUserRule = models.RateLimitUserRule;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const CreateL4ProxyRulesResponse = models.CreateL4ProxyRulesResponse;
+const ModifyCustomErrorPageRequest = models.ModifyCustomErrorPageRequest;
 const CacheKey = models.CacheKey;
 const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
 const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
@@ -198,7 +203,7 @@ const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
 const UpgradePlanResponse = models.UpgradePlanResponse;
-const OfflineCache = models.OfflineCache;
+const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
 const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
 const AclUserRule = models.AclUserRule;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
@@ -271,6 +276,7 @@ const CertificateInfo = models.CertificateInfo;
 const CreateApplicationProxyRequest = models.CreateApplicationProxyRequest;
 const CC = models.CC;
 const ModifyL4ProxyRulesStatusRequest = models.ModifyL4ProxyRulesStatusRequest;
+const DescribeCustomErrorPagesRequest = models.DescribeCustomErrorPagesRequest;
 const DescribeTimingL4DataResponse = models.DescribeTimingL4DataResponse;
 const Action = models.Action;
 const ApplicationProxy = models.ApplicationProxy;
@@ -281,6 +287,7 @@ const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
 const RuleAndConditions = models.RuleAndConditions;
 const DropPageConfig = models.DropPageConfig;
 const DescribeSecurityIPGroupInfoRequest = models.DescribeSecurityIPGroupInfoRequest;
+const ExceptUserRuleScope = models.ExceptUserRuleScope;
 const PartialModule = models.PartialModule;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
 const SecEntry = models.SecEntry;
@@ -315,6 +322,7 @@ const L4ProxyRule = models.L4ProxyRule;
 const AdvancedFilter = models.AdvancedFilter;
 const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
 const TemplateConfig = models.TemplateConfig;
+const ErrorPageReference = models.ErrorPageReference;
 const BotExtendAction = models.BotExtendAction;
 const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
@@ -336,7 +344,7 @@ const DescribeContentQuotaResponse = models.DescribeContentQuotaResponse;
 const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
 const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
 const AccelerationDomain = models.AccelerationDomain;
-const SlowRateConfig = models.SlowRateConfig;
+const CreateCustomizeErrorPageResponse = models.CreateCustomizeErrorPageResponse;
 const RewriteAction = models.RewriteAction;
 const TemplateScope = models.TemplateScope;
 const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
@@ -346,12 +354,14 @@ const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const SecurityType = models.SecurityType;
 const IPWhitelist = models.IPWhitelist;
+const CreateCustomizeErrorPageRequest = models.CreateCustomizeErrorPageRequest;
 const DescribeSecurityIPGroupRequest = models.DescribeSecurityIPGroupRequest;
 const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatusResponse;
 const Identification = models.Identification;
 const TopEntry = models.TopEntry;
 const NsVerification = models.NsVerification;
 const AccelerateMainland = models.AccelerateMainland;
+const StandardDebug = models.StandardDebug;
 const BindSecurityTemplateToEntityRequest = models.BindSecurityTemplateToEntityRequest;
 const IntelligenceRuleItem = models.IntelligenceRuleItem;
 const IntelligenceRule = models.IntelligenceRule;
@@ -963,6 +973,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * This API is used to create a custom response page.
+     * @param {CreateCustomizeErrorPageRequest} req
+     * @param {function(string, CreateCustomizeErrorPageResponse):void} cb
+     * @public
+     */
+    CreateCustomizeErrorPage(req, cb) {
+        let resp = new CreateCustomizeErrorPageResponse();
+        this.request("CreateCustomizeErrorPage", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify an accelerated domain name.
      * @param {ModifyAccelerationDomainRequest} req
      * @param {function(string, ModifyAccelerationDomainResponse):void} cb
@@ -1099,6 +1120,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
+     * This API is used to query the custom response page list.
+     * @param {DescribeCustomErrorPagesRequest} req
+     * @param {function(string, DescribeCustomErrorPagesResponse):void} cb
+     * @public
+     */
+    DescribeCustomErrorPages(req, cb) {
+        let resp = new DescribeCustomErrorPagesResponse();
+        this.request("DescribeCustomErrorPages", req, resp, cb);
+    }
+
+    /**
      * This API is used to return the list of the settings of the rule engine that can be used for request match and their detailed recommended configuration information.
      * @param {DescribeRulesSettingRequest} req
      * @param {function(string, DescribeRulesSettingResponse):void} cb
@@ -1198,14 +1230,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to query a Layer 4 proxy instance list.
-     * @param {DescribeL4ProxyRequest} req
-     * @param {function(string, DescribeL4ProxyResponse):void} cb
+     * This API is used to delete a custom response page.
+     * @param {DeleteCustomErrorPageRequest} req
+     * @param {function(string, DeleteCustomErrorPageResponse):void} cb
      * @public
      */
-    DescribeL4Proxy(req, cb) {
-        let resp = new DescribeL4ProxyResponse();
-        this.request("DescribeL4Proxy", req, resp, cb);
+    DeleteCustomErrorPage(req, cb) {
+        let resp = new DeleteCustomErrorPageResponse();
+        this.request("DeleteCustomErrorPage", req, resp, cb);
     }
 
     /**
@@ -1504,6 +1536,17 @@ This API is used to query the configuration information of an IP group, includin
     }
 
     /**
+     * This API is used to modify a custom response page.
+     * @param {ModifyCustomErrorPageRequest} req
+     * @param {function(string, ModifyCustomErrorPageResponse):void} cb
+     * @public
+     */
+    ModifyCustomErrorPage(req, cb) {
+        let resp = new ModifyCustomErrorPageResponse();
+        this.request("ModifyCustomErrorPage", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the time-series data of DDoS attacks.
      * @param {DescribeDDoSAttackDataRequest} req
      * @param {function(string, DescribeDDoSAttackDataResponse):void} cb
@@ -1534,6 +1577,17 @@ This API is used to query the configuration information of an IP group, includin
     DescribeAliasDomains(req, cb) {
         let resp = new DescribeAliasDomainsResponse();
         this.request("DescribeAliasDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a Layer 4 proxy instance list.
+     * @param {DescribeL4ProxyRequest} req
+     * @param {function(string, DescribeL4ProxyResponse):void} cb
+     * @public
+     */
+    DescribeL4Proxy(req, cb) {
+        let resp = new DescribeL4ProxyResponse();
+        this.request("DescribeL4Proxy", req, resp, cb);
     }
 
     /**

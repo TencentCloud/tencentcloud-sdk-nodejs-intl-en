@@ -1360,6 +1360,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ChName = null;
 
         /**
+         * Chinese name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChineseName = null;
+
+        /**
          * English name
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -1367,11 +1374,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EnName = null;
 
         /**
+         * English name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
          * License number
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ID = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
 
         /**
          * Gender
@@ -1388,6 +1409,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CountryOfBirth = null;
 
         /**
+         * Nationality
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
          * Birthday
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -1402,7 +1430,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Address = null;
 
         /**
-         * Nationality (on the back)
+         * Race (on the back)
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1446,10 +1474,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.ChName = 'ChName' in params ? params.ChName : null;
+        this.ChineseName = 'ChineseName' in params ? params.ChineseName : null;
         this.EnName = 'EnName' in params ? params.EnName : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
         this.ID = 'ID' in params ? params.ID : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
         this.Sex = 'Sex' in params ? params.Sex : null;
         this.CountryOfBirth = 'CountryOfBirth' in params ? params.CountryOfBirth : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
         this.Birthday = 'Birthday' in params ? params.Birthday : null;
         this.Address = 'Address' in params ? params.Address : null;
         this.Race = 'Race' in params ? params.Race : null;
@@ -1680,13 +1712,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MacaoIDCard = null;
 
-        /**
-         * Mainland ID Card
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MainlandIDCard || null}
-         */
-        this.MainlandIDCard = null;
-
     }
 
     /**
@@ -1779,12 +1804,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new MacaoIDCard();
             obj.deserialize(params.MacaoIDCard)
             this.MacaoIDCard = obj;
-        }
-
-        if (params.MainlandIDCard) {
-            let obj = new MainlandIDCard();
-            obj.deserialize(params.MainlandIDCard)
-            this.MainlandIDCard = obj;
         }
 
     }

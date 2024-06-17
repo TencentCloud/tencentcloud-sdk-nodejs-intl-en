@@ -35,6 +35,7 @@ const ClassInfo = models.ClassInfo;
 const DescribeCloneDBInstanceSpecRequest = models.DescribeCloneDBInstanceSpecRequest;
 const DescribeDBInstanceSecurityGroupsResponse = models.DescribeDBInstanceSecurityGroupsResponse;
 const BackupPlan = models.BackupPlan;
+const RestoreDBInstanceObjectsResponse = models.RestoreDBInstanceObjectsResponse;
 const SwitchDBInstancePrimaryRequest = models.SwitchDBInstancePrimaryRequest;
 const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
@@ -51,6 +52,7 @@ const RenewInstanceRequest = models.RenewInstanceRequest;
 const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ModifyBaseBackupExpireTimeResponse = models.ModifyBaseBackupExpireTimeResponse;
+const UpgradeDBInstanceMajorVersionResponse = models.UpgradeDBInstanceMajorVersionResponse;
 const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const BackupDownloadRestriction = models.BackupDownloadRestriction;
@@ -166,6 +168,7 @@ const SlowlogDetail = models.SlowlogDetail;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DBNode = models.DBNode;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const UpgradeDBInstanceMajorVersionRequest = models.UpgradeDBInstanceMajorVersionRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
 const CreateReadOnlyDBInstanceRequest = models.CreateReadOnlyDBInstanceRequest;
@@ -215,6 +218,7 @@ const DescribeSlowQueryAnalysisResponse = models.DescribeSlowQueryAnalysisRespon
 const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersRequest;
 const RawSlowQuery = models.RawSlowQuery;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
+const RestoreDBInstanceObjectsRequest = models.RestoreDBInstanceObjectsRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const ModifyDBInstanceChargeTypeRequest = models.ModifyDBInstanceChargeTypeRequest;
 const DescribeParameterTemplateAttributesResponse = models.DescribeParameterTemplateAttributesResponse;
@@ -537,7 +541,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a full backup of an instance.
+     * This API is used to create a data backup of an instance.
      * @param {CreateBaseBackupRequest} req
      * @param {function(string, CreateBaseBackupResponse):void} cb
      * @public
@@ -603,7 +607,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of full backups.
+     * This API is used to query the list of data backups.
      * @param {DescribeBaseBackupsRequest} req
      * @param {function(string, DescribeBaseBackupsResponse):void} cb
      * @public
@@ -746,6 +750,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to upgrade the major kernel version of an instance, for example, from PostgreSQL 12 to PostgreSQL 15.
+     * @param {UpgradeDBInstanceMajorVersionRequest} req
+     * @param {function(string, UpgradeDBInstanceMajorVersionResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstanceMajorVersion(req, cb) {
+        let resp = new UpgradeDBInstanceMajorVersionResponse();
+        this.request("UpgradeDBInstanceMajorVersion", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the backup overview. It will return the current number and size of backups, free backup space size, and paid backup space size (all size values are in bytes).
      * @param {DescribeBackupOverviewRequest} req
      * @param {function(string, DescribeBackupOverviewResponse):void} cb
@@ -812,14 +827,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of one instance.
-     * @param {DescribeDBInstanceAttributeRequest} req
-     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * This API is used to recover database-related objects such as databases and tables on the original instance based on the backup set or recovery target time.
+     * @param {RestoreDBInstanceObjectsRequest} req
+     * @param {function(string, RestoreDBInstanceObjectsResponse):void} cb
      * @public
      */
-    DescribeDBInstanceAttribute(req, cb) {
-        let resp = new DescribeDBInstanceAttributeResponse();
-        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+    RestoreDBInstanceObjects(req, cb) {
+        let resp = new RestoreDBInstanceObjectsResponse();
+        this.request("RestoreDBInstanceObjects", req, resp, cb);
     }
 
     /**
@@ -845,7 +860,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
+     * This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://www.tencentcloud.com/zh/document/product/409/54343) API.
      * @param {DescribeDBXlogsRequest} req
      * @param {function(string, DescribeDBXlogsResponse):void} cb
      * @public
@@ -913,7 +928,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the specified expiration time of a full backup for an instance.
+     * This API is used to modify the expiration time of a specified data backup for an instance.
      * @param {ModifyBaseBackupExpireTimeRequest} req
      * @param {function(string, ModifyBaseBackupExpireTimeResponse):void} cb
      * @public
@@ -1191,7 +1206,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete the specified full backup of an instance.
+     * This API is used to delete a specified data backup for an instance.
      * @param {DeleteBaseBackupRequest} req
      * @param {function(string, DeleteBaseBackupResponse):void} cb
      * @public
@@ -1213,6 +1228,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the details of one instance.
+     * @param {DescribeDBInstanceAttributeRequest} req
+     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceAttribute(req, cb) {
+        let resp = new DescribeDBInstanceAttributeResponse();
+        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to upgrade instance configurations. u200cThis API is disused and replaced by the [ModifyDBInstanceSpec](https://intl.cloud.tencent.com/document/api/409/63689?from_cn_redirect=1) API.
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
@@ -1224,9 +1250,9 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
-<li>After an instance is created successfully, it will start up automatically and enter the "Running" status.
-<li>If you create a monthly subscribed instance, you will be billed for the instance before the creation; if you create a pay-as-you-go instance billed on an hourly basis, the amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
+     * This API is used to create one or more PostgreSQL instances. Instances created through this interface do not need to be initialized and can be used directly.
+<li>After an instance is successfully created, it will automatically start up, and its status changes to "Running".</li>
+<li>For prepaid instances, the required amount for the instance purchase will be deducted in advance. For post-paid hourly instances, the amount required for the purchase within the first hour will be temporarily frozen. Please ensure that your account balance is sufficient before calling this interface.</li>
      * @param {CreateInstancesRequest} req
      * @param {function(string, CreateInstancesResponse):void} cb
      * @public

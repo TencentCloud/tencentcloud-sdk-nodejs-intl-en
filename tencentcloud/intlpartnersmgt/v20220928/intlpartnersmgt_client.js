@@ -187,7 +187,7 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the customer bill details.
+     * This API is used to query bill details by customers.
      * @param {DescribeBillDetailRequest} req
      * @param {function(string, DescribeBillDetailResponse):void} cb
      * @public
@@ -286,7 +286,7 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the customer bill details.
+     * This API is used to query the customer bill details by resellers.
      * @param {DescribeCustomerBillDetailRequest} req
      * @param {function(string, DescribeCustomerBillDetailResponse):void} cb
      * @public

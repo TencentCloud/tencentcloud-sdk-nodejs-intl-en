@@ -321,7 +321,7 @@ class GetSdkVerificationResultRequest extends  AbstractModel {
         super();
 
         /**
-         * The token used to identify an SDK-based verification process.
+         * The token used to identify an SDK-based verification process. 
          * @type {string || null}
          */
         this.SdkToken = null;
@@ -1712,6 +1712,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MacaoIDCard = null;
 
+        /**
+         * Mainland ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MainlandIDCard || null}
+         */
+        this.MainlandIDCard = null;
+
     }
 
     /**
@@ -1804,6 +1811,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new MacaoIDCard();
             obj.deserialize(params.MacaoIDCard)
             this.MacaoIDCard = obj;
+        }
+
+        if (params.MainlandIDCard) {
+            let obj = new MainlandIDCard();
+            obj.deserialize(params.MainlandIDCard)
+            this.MainlandIDCard = obj;
         }
 
     }
@@ -2884,7 +2897,7 @@ Example: HKIDCard
         this.DisableCheckOcrWarnings = null;
 
         /**
-         * Liveness security level: 1:Silent mode;2:Action mode;3:Lighting mode;4:Action+Lighting mode;default value is 3
+         * Liveness security level: 1:Silent mode;2:Action mode;3:Lighting mode;4:Action+Lighting mode;5:Action+Lighting(High security) mode; default value is 3
          * @type {number || null}
          */
         this.SecurityLevel = null;

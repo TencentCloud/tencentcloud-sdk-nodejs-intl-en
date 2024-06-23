@@ -95,6 +95,7 @@ module.exports = {
     vm: require("./vm"),
     vod: require("./vod"),
     vpc: require("./vpc"),
+    wedata: require("./wedata"),
     yunjing: require("./yunjing")
 };
 

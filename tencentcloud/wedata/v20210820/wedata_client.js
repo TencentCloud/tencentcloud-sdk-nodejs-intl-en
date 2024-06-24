@@ -126,6 +126,8 @@ const DescribeInstanceLogDetailRequest = models.DescribeInstanceLogDetailRequest
 const BatchSuspendIntegrationTasksRequest = models.BatchSuspendIntegrationTasksRequest;
 const DeleteDsFolderResponse = models.DeleteDsFolderResponse;
 const DescribeDrInstancePageResponse = models.DescribeDrInstancePageResponse;
+const MoveTasksToFolderRequest = models.MoveTasksToFolderRequest;
+const MoveTasksToFolderResponse = models.MoveTasksToFolderResponse;
 const UpdateWorkflowOwnerRequest = models.UpdateWorkflowOwnerRequest;
 const DescribeSchedulerTaskTypeCntResponse = models.DescribeSchedulerTaskTypeCntResponse;
 const DeleteCustomFunctionResponse = models.DeleteCustomFunctionResponse;
@@ -198,6 +200,7 @@ const ResourcePathTree = models.ResourcePathTree;
 const DescribeRuleExecLogResponse = models.DescribeRuleExecLogResponse;
 const ParamInfo = models.ParamInfo;
 const DescribeDsFolderTreeRequest = models.DescribeDsFolderTreeRequest;
+const TableMetaProperty = models.TableMetaProperty;
 const BatchDeleteIntegrationTasksRequest = models.BatchDeleteIntegrationTasksRequest;
 const KillOpsMakePlanInstancesResponse = models.KillOpsMakePlanInstancesResponse;
 const TaskLogRequest = models.TaskLogRequest;
@@ -257,6 +260,7 @@ const DagInstancesResponse = models.DagInstancesResponse;
 const DimensionScore = models.DimensionScore;
 const SubscribeWebHook = models.SubscribeWebHook;
 const DescribeTableLineageInfoRequest = models.DescribeTableLineageInfoRequest;
+const CreateTaskFolderRequest = models.CreateTaskFolderRequest;
 const IntegrationNodeDetail = models.IntegrationNodeDetail;
 const DescribeEventResponse = models.DescribeEventResponse;
 const DescribeOpsMakePlanInstancesRequest = models.DescribeOpsMakePlanInstancesRequest;
@@ -317,7 +321,7 @@ const DescribeStatisticInstanceStatusTrendOpsRequest = models.DescribeStatisticI
 const RuleExecConfig = models.RuleExecConfig;
 const SuspendIntegrationTaskResponse = models.SuspendIntegrationTaskResponse;
 const DescribeSchedulerRunTimeInstanceCntByStatusResponse = models.DescribeSchedulerRunTimeInstanceCntByStatusResponse;
-const RecordField = models.RecordField;
+const CreateTaskFolderResponse = models.CreateTaskFolderResponse;
 const RunForceSucScheduleInstancesRequest = models.RunForceSucScheduleInstancesRequest;
 const DescribeQualityScoreResponse = models.DescribeQualityScoreResponse;
 const DescribeRulesByPageResponse = models.DescribeRulesByPageResponse;
@@ -343,6 +347,7 @@ const CheckIntegrationTaskNameExistsResponse = models.CheckIntegrationTaskNameEx
 const BatchOperateResultOpsDto = models.BatchOperateResultOpsDto;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const ApproveType = models.ApproveType;
+const TableNameFilter = models.TableNameFilter;
 const RealTimeTaskInstanceNodeInfo = models.RealTimeTaskInstanceNodeInfo;
 const DeleteResourceFilesResponse = models.DeleteResourceFilesResponse;
 const DescribeFieldBasicInfoRequest = models.DescribeFieldBasicInfoRequest;
@@ -565,6 +570,7 @@ const DescribeApply = models.DescribeApply;
 const CreateDataSourceResponse = models.CreateDataSourceResponse;
 const TaskByStatus = models.TaskByStatus;
 const DescribeFolderWorkflowListResponse = models.DescribeFolderWorkflowListResponse;
+const RecordField = models.RecordField;
 const DescribeIntegrationVersionNodesInfoResponse = models.DescribeIntegrationVersionNodesInfoResponse;
 const DescribeRulesRequest = models.DescribeRulesRequest;
 const DescribeRuleResponse = models.DescribeRuleResponse;
@@ -784,7 +790,7 @@ class WedataClient extends AbstractClient {
     }
 
     /**
-     * Instance Diagnosis
+     * Instance diagnosis for diagnosing instances in INITIAL, DEPENDENCE, ALLOCATED, LAUNCHED, EVENT_LISTENING, BEFORE_ASPECT, EXPIRED, FAILED states
      * @param {DiagnoseProRequest} req
      * @param {function(string, DiagnoseProResponse):void} cb
      * @public
@@ -1101,6 +1107,17 @@ Register Event Listener
     DeleteProjectParamDs(req, cb) {
         let resp = new DeleteProjectParamDsResponse();
         this.request("DeleteProjectParamDs", req, resp, cb);
+    }
+
+    /**
+     * Orchestration Space - Workflow - Move Task to Workflow Folder
+     * @param {MoveTasksToFolderRequest} req
+     * @param {function(string, MoveTasksToFolderResponse):void} cb
+     * @public
+     */
+    MoveTasksToFolder(req, cb) {
+        let resp = new MoveTasksToFolderResponse();
+        this.request("MoveTasksToFolder", req, resp, cb);
     }
 
     /**
@@ -2891,6 +2908,17 @@ Registration Event
     DescribeDatabaseMetas(req, cb) {
         let resp = new DescribeDatabaseMetasResponse();
         this.request("DescribeDatabaseMetas", req, resp, cb);
+    }
+
+    /**
+     * Orchestration Space - Workflow - Create Task Folder
+     * @param {CreateTaskFolderRequest} req
+     * @param {function(string, CreateTaskFolderResponse):void} cb
+     * @public
+     */
+    CreateTaskFolder(req, cb) {
+        let resp = new CreateTaskFolderResponse();
+        this.request("CreateTaskFolder", req, resp, cb);
     }
 
     /**

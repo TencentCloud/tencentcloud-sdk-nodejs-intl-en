@@ -577,7 +577,9 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get an Anti-DDoS IP blocklist/allowlist.
+     * 接口变更
+
+This API is used to get an Anti-DDoS IP blocklist/allowlist.
      * @param {DescribeBlackWhiteIpListRequest} req
      * @param {function(string, DescribeBlackWhiteIpListResponse):void} cb
      * @public
@@ -709,7 +711,9 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
+     * 接口变更
+
+This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
      * @param {DescribeListProtectThresholdConfigRequest} req
      * @param {function(string, DescribeListProtectThresholdConfigResponse):void} cb
      * @public

@@ -3637,13 +3637,13 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Tag key.
+         * Tag key
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Tag value.
+         * Tag value
          * @type {string || null}
          */
         this.Value = null;

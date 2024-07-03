@@ -2921,7 +2921,7 @@ Example: HKIDCard
         this.ThemeColor = null;
 
         /**
-         * International language, the default value is en (English). Currently supported: th: Thai; en: English;
+         * International language, the default value is en (English). Currently supported: th: Thai; en: English; zh-cn: Simplified Chinese; zh-tc: Tradionnal Chinese; id: Bahasa Indonesia.
          * @type {string || null}
          */
         this.Language = null;

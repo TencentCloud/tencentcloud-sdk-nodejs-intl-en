@@ -6524,6 +6524,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ComponentConfig = null;
 
+        /**
+         * Tag information.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6572,6 +6578,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PayTime = 'PayTime' in params ? params.PayTime : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.ComponentConfig = 'ComponentConfig' in params ? params.ComponentConfig : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
 
     }
 }

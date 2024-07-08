@@ -68,6 +68,7 @@ const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const MigrationDetail = models.MigrationDetail;
+const SSLConfig = models.SSLConfig;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
 const ModifyInstanceEncryptAttributesRequest = models.ModifyInstanceEncryptAttributesRequest;
 const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
@@ -184,6 +185,7 @@ const DescribeDBsNormalRequest = models.DescribeDBsNormalRequest;
 const BackupFile = models.BackupFile;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const ModifyIncrementalMigrationResponse = models.ModifyIncrementalMigrationResponse;
+const OldVip = models.OldVip;
 const MigrationAction = models.MigrationAction;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const CloneDBRequest = models.CloneDBRequest;
@@ -210,6 +212,7 @@ const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackInstanceRequest = models.RollbackInstanceRequest;
 const DescribeDBInstancesAttributeRequest = models.DescribeDBInstancesAttributeRequest;
+const DrReadableInfo = models.DrReadableInfo;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
 const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
@@ -920,7 +923,7 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to u200denable or disable TDE of a database.
+     * This API is used to enable or disable TDE of a database.
      * @param {ModifyDBEncryptAttributesRequest} req
      * @param {function(string, ModifyDBEncryptAttributesResponse):void} cb
      * @public

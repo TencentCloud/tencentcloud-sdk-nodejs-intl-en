@@ -40,9 +40,10 @@ const SingaporeIDCard = models.SingaporeIDCard;
 const IndonesiaDrivingLicense = models.IndonesiaDrivingLicense;
 const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const NormalCardInfo = models.NormalCardInfo;
+const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
-const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
+const EditDetail = models.EditDetail;
 const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const PhilippinesSSSID = models.PhilippinesSSSID;
 const CardVerifyResult = models.CardVerifyResult;
@@ -77,7 +78,7 @@ const ApplyCardVerificationRequest = models.ApplyCardVerificationRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const OCRResult = models.OCRResult;
-const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
+const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const CompareResult = models.CompareResult;
 
@@ -115,7 +116,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the verification result with the corresponding BizToken after the u200dweb-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+     * This API is used to get the verification result with the corresponding BizToken after the web-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
      * @param {GetWebVerificationResultIntlRequest} req
      * @param {function(string, GetWebVerificationResultIntlResponse):void} cb
      * @public

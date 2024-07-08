@@ -1997,7 +1997,7 @@ If you need to call a large number of APIs to pull metrics or objects at a time,
     }
 
     /**
-     * This API is used to u200dobtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
+     * This API is used to obtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
      * @param {DescribeClusterAgentCreatingProgressRequest} req
      * @param {function(string, DescribeClusterAgentCreatingProgressResponse):void} cb
      * @public

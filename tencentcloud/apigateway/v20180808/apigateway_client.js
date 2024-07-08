@@ -374,7 +374,7 @@ In API Gateway, a usage plan can be bound to multiple key pairs. You can use thi
     }
 
     /**
-     * u200dThis API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
+     * This API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
      * @param {UpdateServiceRequest} req
      * @param {function(string, UpdateServiceResponse):void} cb
      * @public

@@ -991,21 +991,21 @@ class VerificationDetail extends  AbstractModel {
 
         /**
          * The final result of this verification. `0` indicates that the person is the same as that in the photo.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
          * The description of the final verification result.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ErrorMsg = null;
 
         /**
          * The result of this liveness detection process. `0` indicates success.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LivenessErrorCode = null;
@@ -1019,14 +1019,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CompareErrorCode = null;
 
         /**
          * The result description of this comparison process.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CompareErrorMsg = null;
@@ -1040,7 +1040,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Value range: [0.00, 100.00]. By default, the person in the screenshot is determined to be the same person in the image if the similarity is greater than or equal to 70.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Similarity = null;
@@ -1085,35 +1085,35 @@ class GetWebVerificationResultIntlResponse extends  AbstractModel {
         /**
          * The final result of this verification. `0` indicates that the person is the same as that in the photo.
 For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ErrorCode = null;
 
         /**
          * The description of the final verification result.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ErrorMsg = null;
 
         /**
          * The detailed verification result list of this process. Retries are allowed, so a verification process may have several entries of results.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VerificationDetail> || null}
          */
         this.VerificationDetailList = null;
 
         /**
          * The Base64-encoded string of the video collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no video is collected, null is returned.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VideoBase64 = null;
 
         /**
-         * The Base64-encoded string of the best face screenshot u200dcollected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * The Base64-encoded string of the best face screenshot collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BestFrameBase64 = null;
@@ -1823,6 +1823,88 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * GetFaceIdResultIntl response structure.
+ * @class
+ */
+class GetFaceIdResultIntlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The return code of the verification result.
+0: Succeeded.
+1001: System error.
+1004: Liveness detection and face comparison failed.
+2004: The image passed in is too large or too small.
+2012: Several faces were detected.
+2013: No face was detected, or the face detected was incomplete.
+2014: The image resolution is too low or the quality does not meet the requirements.
+2015: Face comparison failed.
+2016: The similarity did not reach the standard passing threshold.
+-999: The verification process wasn't finished.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The description of the verification result.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The best frame screenshot (in Base64) obtained during the verification.
+         * @type {string || null}
+         */
+        this.BestFrame = null;
+
+        /**
+         * The video file (Base64) for verification.
+         * @type {string || null}
+         */
+        this.Video = null;
+
+        /**
+         * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Similarity = null;
+
+        /**
+         * The pass-through parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
+        this.Video = 'Video' in params ? params.Video : null;
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ApplySdkVerificationToken request structure.
  * @class
  */
@@ -1974,48 +2056,30 @@ class GenerateReflectSequenceRequest extends  AbstractModel {
 }
 
 /**
- * DetectReflectLivenessAndCompare response structure.
+ * 
  * @class
  */
-class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
+class EditDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Temporary URL of the best screenshot (.jpg) of the video after successful verification. Both the screenshot and the URL are valid for two hours only, so you need to download the screenshot within this period.
+         * Modified Field Name
          * @type {string || null}
          */
-        this.BestFrameUrl = null;
+        this.FieldName = null;
 
         /**
-         * MD5 hash value (32-bit) of the best screenshot of the video after successful verification, which is used to verify the `BestFrame` consistency.
+         * Value of the field before modification, the original OCR result
          * @type {string || null}
          */
-        this.BestFrameMd5 = null;
+        this.OriginalFieldValue = null;
 
         /**
-         * Service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
+         * Value of the field after modification,the user's manually entered result
          * @type {string || null}
          */
-        this.Result = null;
-
-        /**
-         * Service result description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two faces are of the same person. You can adjust the threshold according to your specific scenario (the FAR at the threshold of 70 is 0.1%, and FAR at the threshold of 80 is 0.01%).
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.RevisedFieldValue = null;
 
     }
 
@@ -2026,12 +2090,9 @@ class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameUrl = 'BestFrameUrl' in params ? params.BestFrameUrl : null;
-        this.BestFrameMd5 = 'BestFrameMd5' in params ? params.BestFrameMd5 : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FieldName = 'FieldName' in params ? params.FieldName : null;
+        this.OriginalFieldValue = 'OriginalFieldValue' in params ? params.OriginalFieldValue : null;
+        this.RevisedFieldValue = 'RevisedFieldValue' in params ? params.RevisedFieldValue : null;
 
     }
 }
@@ -2309,6 +2370,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.WarnCardInfos = null;
 
+        /**
+         * Details of the OCR modifications for this EKYC card, when the user manually modifies the card recognition results (IsEdit=true), EditDetails will return the modified fields. When IsEdit=false, EditDetails is empty.
+         * @type {Array.<EditDetail> || null}
+         */
+        this.EditDetails = null;
+
     }
 
     /**
@@ -2352,6 +2419,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.NormalCardInfo = obj;
         }
         this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
+
+        if (params.EditDetails) {
+            this.EditDetails = new Array();
+            for (let z in params.EditDetails) {
+                let obj = new EditDetail();
+                obj.deserialize(params.EditDetails[z]);
+                this.EditDetails.push(obj);
+            }
+        }
 
     }
 }
@@ -4910,60 +4986,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetFaceIdResultIntl response structure.
+ * DetectReflectLivenessAndCompare response structure.
  * @class
  */
-class GetFaceIdResultIntlResponse extends  AbstractModel {
+class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The return code of the verification result.
-0: Succeeded.
-1001: System error.
-1004: Liveness detection and face comparison failed.
-2004: The image passed in is too large or too small.
-2012: Several faces were detected.
-2013: No face was detected, or the face detected was incomplete.
-2014: The image resolution is too low or the quality does not meet the requirements.
-2015: Face comparison failed.
-2016: The similarity did not reach the standard passing threshold.
--999: The verification process wasn't finished.
+         * Temporary URL of the best screenshot (.jpg) of the video after successful verification. Both the screenshot and the URL are valid for two hours only, so you need to download the screenshot within this period.
+         * @type {string || null}
+         */
+        this.BestFrameUrl = null;
+
+        /**
+         * MD5 hash value (32-bit) of the best screenshot of the video after successful verification, which is used to verify the `BestFrame` consistency.
+         * @type {string || null}
+         */
+        this.BestFrameMd5 = null;
+
+        /**
+         * Service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
          * @type {string || null}
          */
         this.Result = null;
 
         /**
-         * The description of the verification result.
+         * Service result description
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * The best frame screenshot (in Base64) obtained during the verification.
-         * @type {string || null}
-         */
-        this.BestFrame = null;
-
-        /**
-         * The video file (Base64) for verification.
-         * @type {string || null}
-         */
-        this.Video = null;
-
-        /**
-         * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two faces are of the same person. You can adjust the threshold according to your specific scenario (the FAR at the threshold of 70 is 0.1%, and FAR at the threshold of 80 is 0.01%).
          * @type {number || null}
          */
-        this.Similarity = null;
-
-        /**
-         * The pass-through parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Extra = null;
+        this.Sim = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4980,12 +5038,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.BestFrameUrl = 'BestFrameUrl' in params ? params.BestFrameUrl : null;
+        this.BestFrameMd5 = 'BestFrameMd5' in params ? params.BestFrameMd5 : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
-        this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
-        this.Video = 'Video' in params ? params.Video : null;
-        this.Similarity = 'Similarity' in params ? params.Similarity : null;
-        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5212,9 +5269,10 @@ module.exports = {
     IndonesiaDrivingLicense: IndonesiaDrivingLicense,
     GetFaceIdResultIntlRequest: GetFaceIdResultIntlRequest,
     NormalCardInfo: NormalCardInfo,
+    GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
-    DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
+    EditDetail: EditDetail,
     VideoLivenessCompareResponse: VideoLivenessCompareResponse,
     PhilippinesSSSID: PhilippinesSSSID,
     CardVerifyResult: CardVerifyResult,
@@ -5249,7 +5307,7 @@ module.exports = {
     LivenessCompareRequest: LivenessCompareRequest,
     MLIDCard: MLIDCard,
     OCRResult: OCRResult,
-    GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
+    DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
     GetLivenessResultRequest: GetLivenessResultRequest,
     CompareResult: CompareResult,
 

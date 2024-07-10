@@ -7413,7 +7413,7 @@ Note that each rule can have up to 20 ports.
 
         /**
          * Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SessionPersistTime = null;
@@ -7428,7 +7428,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 
         /**
          * Rule tag.
-Note: This field may return·`null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleTag = null;

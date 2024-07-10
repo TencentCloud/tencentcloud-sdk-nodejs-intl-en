@@ -151,6 +151,12 @@ class AudioTrackInfo extends  AbstractModel {
          */
         this.AudioNormalization = null;
 
+        /**
+         * Audio encoding configuration.
+         * @type {AudioCodecDetail || null}
+         */
+        this.AudioCodecDetails = null;
+
     }
 
     /**
@@ -170,6 +176,12 @@ class AudioTrackInfo extends  AbstractModel {
             let obj = new AudioNormalizationSettings();
             obj.deserialize(params.AudioNormalization)
             this.AudioNormalization = obj;
+        }
+
+        if (params.AudioCodecDetails) {
+            let obj = new AudioCodecDetail();
+            obj.deserialize(params.AudioCodecDetails)
+            this.AudioCodecDetails = obj;
         }
 
     }
@@ -1225,6 +1237,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Password = null;
 
+        /**
+         * The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard.
+         * @type {string || null}
+         */
+        this.DestinationType = null;
+
     }
 
     /**
@@ -1238,6 +1256,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
         this.Username = 'Username' in params ? params.Username : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.DestinationType = 'DestinationType' in params ? params.DestinationType : null;
 
     }
 }

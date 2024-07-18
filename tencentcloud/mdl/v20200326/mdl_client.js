@@ -16,11 +16,11 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InputLossBehaviorInfo = models.InputLossBehaviorInfo;
+const DeleteStreamLiveChannelResponse = models.DeleteStreamLiveChannelResponse;
 const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
 const AudioTrackInfo = models.AudioTrackInfo;
 const CreateStreamLiveInputSecurityGroupResponse = models.CreateStreamLiveInputSecurityGroupResponse;
-const DeleteStreamLiveChannelResponse = models.DeleteStreamLiveChannelResponse;
+const InputLossBehaviorInfo = models.InputLossBehaviorInfo;
 const StreamVideoInfo = models.StreamVideoInfo;
 const CreateStreamLivePlanRequest = models.CreateStreamLivePlanRequest;
 const DescribeStreamLiveWatermarksResponse = models.DescribeStreamLiveWatermarksResponse;
@@ -29,6 +29,7 @@ const AudioCodecDetail = models.AudioCodecDetail;
 const QueryDispatchInputInfo = models.QueryDispatchInputInfo;
 const CreateStreamLiveInputRequest = models.CreateStreamLiveInputRequest;
 const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
+const SubtitleFontConf = models.SubtitleFontConf;
 const AudioPipelineInputStatistics = models.AudioPipelineInputStatistics;
 const CreateStreamLivePlanResponse = models.CreateStreamLivePlanResponse;
 const InputStreamInfo = models.InputStreamInfo;
@@ -36,6 +37,7 @@ const PipelineInputSettingsInfo = models.PipelineInputSettingsInfo;
 const DescribeStreamLiveChannelOutputStatisticsRequest = models.DescribeStreamLiveChannelOutputStatisticsRequest;
 const ChannelPipelineAlerts = models.ChannelPipelineAlerts;
 const InputInfo = models.InputInfo;
+const InputAnalysisInfo = models.InputAnalysisInfo;
 const AVTemplate = models.AVTemplate;
 const DestinationInfo = models.DestinationInfo;
 const DeleteStreamLiveInputRequest = models.DeleteStreamLiveInputRequest;
@@ -60,6 +62,7 @@ const AttachedInput = models.AttachedInput;
 const QueryInputStreamStateResponse = models.QueryInputStreamStateResponse;
 const DescribeStreamLiveWatermarksRequest = models.DescribeStreamLiveWatermarksRequest;
 const TimedMetadataInfo = models.TimedMetadataInfo;
+const Tag = models.Tag;
 const DescribeTranscodeDetailInfo = models.DescribeTranscodeDetailInfo;
 const TimeShiftSettingsInfo = models.TimeShiftSettingsInfo;
 const DeliveryRestrictionsInfo = models.DeliveryRestrictionsInfo;
@@ -71,6 +74,7 @@ const SegmentationDescriptorRespInfo = models.SegmentationDescriptorRespInfo;
 const DescribeStreamLiveChannelLogsResponse = models.DescribeStreamLiveChannelLogsResponse;
 const DescribeStreamLiveChannelInputStatisticsRequest = models.DescribeStreamLiveChannelInputStatisticsRequest;
 const PipelineLogInfo = models.PipelineLogInfo;
+const HighlightInfo = models.HighlightInfo;
 const DeleteStreamLivePlanRequest = models.DeleteStreamLivePlanRequest;
 const DescribeStreamLiveChannelsRequest = models.DescribeStreamLiveChannelsRequest;
 const FailOverSettings = models.FailOverSettings;
@@ -90,10 +94,13 @@ const TimedRecordSettings = models.TimedRecordSettings;
 const StreamLiveRegionInfo = models.StreamLiveRegionInfo;
 const DescribeStreamLiveChannelRequest = models.DescribeStreamLiveChannelRequest;
 const DescribeStreamLivePlansRequest = models.DescribeStreamLivePlansRequest;
+const SubtitleConf = models.SubtitleConf;
 const DescribeStreamLiveRegionsResponse = models.DescribeStreamLiveRegionsResponse;
 const DescribeStreamLiveTranscodeDetailResponse = models.DescribeStreamLiveTranscodeDetailResponse;
 const CreateStreamLiveWatermarkResponse = models.CreateStreamLiveWatermarkResponse;
 const DescribeStreamLiveInputsResponse = models.DescribeStreamLiveInputsResponse;
+const HighlightResInfoResp = models.HighlightResInfoResp;
+const ModifyStreamLiveChannelRequest = models.ModifyStreamLiveChannelRequest;
 const ModifyStreamLiveInputResponse = models.ModifyStreamLiveInputResponse;
 const DescribeStreamLiveChannelAlertsResponse = models.DescribeStreamLiveChannelAlertsResponse;
 const PlanResp = models.PlanResp;
@@ -112,6 +119,7 @@ const DescribeStreamLiveInputSecurityGroupRequest = models.DescribeStreamLiveInp
 const VideoCodecDetail = models.VideoCodecDetail;
 const CreateStreamLiveChannelResponse = models.CreateStreamLiveChannelResponse;
 const DescribeStreamLiveChannelInputStatisticsResponse = models.DescribeStreamLiveChannelInputStatisticsResponse;
+const DescribeMediaLiveHighlightResultResponse = models.DescribeMediaLiveHighlightResultResponse;
 const StopStreamLiveChannelResponse = models.StopStreamLiveChannelResponse;
 const PushEventSetting = models.PushEventSetting;
 const InputTrack = models.InputTrack;
@@ -144,7 +152,7 @@ const LogMessageInfo = models.LogMessageInfo;
 const DescribeStreamLiveInputsRequest = models.DescribeStreamLiveInputsRequest;
 const Scte35SettingsInfo = models.Scte35SettingsInfo;
 const ModifyStreamLiveWatermarkResponse = models.ModifyStreamLiveWatermarkResponse;
-const ModifyStreamLiveChannelRequest = models.ModifyStreamLiveChannelRequest;
+const DescribeMediaLiveHighlightResultRequest = models.DescribeMediaLiveHighlightResultRequest;
 const DescribeTextSettings = models.DescribeTextSettings;
 const DescribeImageSettings = models.DescribeImageSettings;
 const DeleteStreamLiveWatermarkResponse = models.DeleteStreamLiveWatermarkResponse;
@@ -377,14 +385,14 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query a watermark.
-     * @param {DescribeStreamLiveWatermarkRequest} req
-     * @param {function(string, DescribeStreamLiveWatermarkResponse):void} cb
+     * This API is used to delete a watermark.
+     * @param {DeleteStreamLiveWatermarkRequest} req
+     * @param {function(string, DeleteStreamLiveWatermarkResponse):void} cb
      * @public
      */
-    DescribeStreamLiveWatermark(req, cb) {
-        let resp = new DescribeStreamLiveWatermarkResponse();
-        this.request("DescribeStreamLiveWatermark", req, resp, cb);
+    DeleteStreamLiveWatermark(req, cb) {
+        let resp = new DeleteStreamLiveWatermarkResponse();
+        this.request("DeleteStreamLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -421,14 +429,14 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a watermark.
-     * @param {DeleteStreamLiveWatermarkRequest} req
-     * @param {function(string, DeleteStreamLiveWatermarkResponse):void} cb
+     * Query the highlight result information corresponding to the media live broadcast channel.
+     * @param {DescribeMediaLiveHighlightResultRequest} req
+     * @param {function(string, DescribeMediaLiveHighlightResultResponse):void} cb
      * @public
      */
-    DeleteStreamLiveWatermark(req, cb) {
-        let resp = new DeleteStreamLiveWatermarkResponse();
-        this.request("DeleteStreamLiveWatermark", req, resp, cb);
+    DescribeMediaLiveHighlightResult(req, cb) {
+        let resp = new DescribeMediaLiveHighlightResultResponse();
+        this.request("DescribeMediaLiveHighlightResult", req, resp, cb);
     }
 
     /**
@@ -484,6 +492,17 @@ class MdlClient extends AbstractClient {
     StopStreamLiveChannel(req, cb) {
         let resp = new StopStreamLiveChannelResponse();
         this.request("StopStreamLiveChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a watermark.
+     * @param {DescribeStreamLiveWatermarkRequest} req
+     * @param {function(string, DescribeStreamLiveWatermarkResponse):void} cb
+     * @public
+     */
+    DescribeStreamLiveWatermark(req, cb) {
+        let resp = new DescribeStreamLiveWatermarkResponse();
+        this.request("DescribeStreamLiveWatermark", req, resp, cb);
     }
 
     /**

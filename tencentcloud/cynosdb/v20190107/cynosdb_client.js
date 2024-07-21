@@ -199,6 +199,7 @@ const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameReq
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const CreateBackupResponse = models.CreateBackupResponse;
 const CreateProxyEndPointRequest = models.CreateProxyEndPointRequest;
+const SlaveZoneAttrItem = models.SlaveZoneAttrItem;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
 const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
@@ -436,7 +437,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable u200dthe database proxy.
+     * This API is used to disable the database proxy.
      * @param {CloseProxyRequest} req
      * @param {function(string, CloseProxyResponse):void} cb
      * @public

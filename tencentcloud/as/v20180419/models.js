@@ -1270,7 +1270,7 @@ class RelatedInstance extends  AbstractModel {
         /**
          * Status of the instance in the scaling activity. Valid values:
 `INIT`: Initializing
-`RUNNING`: u200dProcessing u200dthe instance
+`RUNNING`: Processing the instance
 `SUCCESSFUL`: Task succeeded on the instance
 `FAILED`: Task failed on the instance
          * @type {string || null}
@@ -1319,7 +1319,7 @@ class Advice extends  AbstractModel {
         this.Solution = null;
 
         /**
-         * u200dRisk level of the scaling group configuration. Valid values: <br>
+         * Risk level of the scaling group configuration. Valid values: <br>
 <li>WARNING<br>
 <li>CRITICAL<br>
          * @type {string || null}

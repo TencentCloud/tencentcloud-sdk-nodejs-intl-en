@@ -2466,7 +2466,7 @@ class StartStreamIngestRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * Type of TRTC RoomId. 【*Note】Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
+         * Type of TRTC RoomId. [*Note] Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
          * @type {number || null}
          */
         this.RoomIdType = null;
@@ -2478,7 +2478,7 @@ class StartStreamIngestRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://intl.cloud.tencent.com/document/product/647/45910?from_cn_redirect=1#UserSig) Scheme.
+         * UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://www.tencentcloud.com/zh/document/product/647/39074) Scheme.
          * @type {string || null}
          */
         this.UserSig = null;
@@ -2508,6 +2508,12 @@ Source URL. Example value: https://a.b/test.mp4
          */
         this.AudioEncodeParams = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StreamUrl = null;
+
     }
 
     /**
@@ -2536,6 +2542,7 @@ Source URL. Example value: https://a.b/test.mp4
             obj.deserialize(params.AudioEncodeParams)
             this.AudioEncodeParams = obj;
         }
+        this.StreamUrl = 'StreamUrl' in params ? params.StreamUrl : null;
 
     }
 }

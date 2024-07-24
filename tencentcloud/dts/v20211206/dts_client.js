@@ -108,6 +108,7 @@ const ProcessStepTip = models.ProcessStepTip;
 const ModifyCompareTaskRequest = models.ModifyCompareTaskRequest;
 const RecoverSyncJobRequest = models.RecoverSyncJobRequest;
 const Database = models.Database;
+const Column = models.Column;
 const JobItem = models.JobItem;
 const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
 const SyncDetailInfo = models.SyncDetailInfo;

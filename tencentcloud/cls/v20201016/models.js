@@ -7163,7 +7163,7 @@ class LogRechargeRuleInfo extends  AbstractModel {
         super();
 
         /**
-         * Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log u200d(single-line full regex)
+         * Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log (single-line full regex)
          * @type {string || null}
          */
         this.RechargeType = null;

@@ -65,6 +65,7 @@ module.exports = {
     mps: require("./mps"),
     msp: require("./msp"),
     ocr: require("./ocr"),
+    omics: require("./omics"),
     organization: require("./organization"),
     postgres: require("./postgres"),
     privatedns: require("./privatedns"),

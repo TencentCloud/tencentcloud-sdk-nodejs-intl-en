@@ -4096,9 +4096,10 @@ class GetCardVerificationResultResponse extends  AbstractModel {
 
         /**
          * Pass status. When Warning and Rejected are returned, please check the specific reasons in the WarnInfo structure return. Example values are as follows:
-Passed
-Warning
-Rejected
+PASSED
+WARNING
+REJECTED
+PROCESSING
          * @type {string || null}
          */
         this.Status = null;

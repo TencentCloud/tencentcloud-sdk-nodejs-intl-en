@@ -24,6 +24,7 @@ const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const ItemInfo = models.ItemInfo;
 const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
 const OtherInvoiceList = models.OtherInvoiceList;
+const RecognizeMacaoIDCardOCRResponse = models.RecognizeMacaoIDCardOCRResponse;
 const PermitOCRResponse = models.PermitOCRResponse;
 const Rect = models.Rect;
 const LicensePlateInfo = models.LicensePlateInfo;
@@ -81,6 +82,7 @@ const VatElectronicInfo = models.VatElectronicInfo;
 const IDCardOCRRequest = models.IDCardOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const UsedCarPurchaseInvoice = models.UsedCarPurchaseInvoice;
+const RecognizeMacaoIDCardOCRRequest = models.RecognizeMacaoIDCardOCRRequest;
 const NonTaxIncomeBill = models.NonTaxIncomeBill;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const AirTransport = models.AirTransport;
@@ -321,6 +323,19 @@ A maximum of 10 requests can be initiated per second for this API.
     RecognizeThaiIDCardOCR(req, cb) {
         let resp = new RecognizeThaiIDCardOCRResponse();
         this.request("RecognizeThaiIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize key fields on the photo side of a Hong Kong (China) identity card, including name in Chinese, name in English, telecode for name, date of birth, gender, document symbol, date of the first issue, date of the last receipt, identity card number, and permanent residency attribute. 
+
+This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
+     * @param {RecognizeMacaoIDCardOCRRequest} req
+     * @param {function(string, RecognizeMacaoIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeMacaoIDCardOCR(req, cb) {
+        let resp = new RecognizeMacaoIDCardOCRResponse();
+        this.request("RecognizeMacaoIDCardOCR", req, resp, cb);
     }
 
     /**

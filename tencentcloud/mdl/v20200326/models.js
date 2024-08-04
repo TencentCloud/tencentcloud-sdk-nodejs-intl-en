@@ -834,6 +834,76 @@ class InputStreamInfo extends  AbstractModel {
 }
 
 /**
+ * Frame capture template.
+ * @class
+ */
+class FrameCaptureTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of frame capture template, limited to uppercase and lowercase letters and numbers, with a length between 1 and 20 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Width of frame capture, optional, input range is from 0 to 3000, must be a multiple of 2.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Height of frame capture, optional, input range is from 0 to 3000, must be a multiple of 2.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Interval of frame capture, an integer between 1 and 3600.
+         * @type {number || null}
+         */
+        this.CaptureInterval = null;
+
+        /**
+         * Interval units of frame capture, only supports SECONDS.
+         * @type {string || null}
+         */
+        this.CaptureIntervalUnits = null;
+
+        /**
+         * Scaling behavior of frame capture, supports DEFAULT or STRETCH_TO_OUTPUT, with DEFAULT being the default option.
+         * @type {string || null}
+         */
+        this.ScalingBehavior = null;
+
+        /**
+         * Sharpness, an integer between 0 and 100.
+         * @type {number || null}
+         */
+        this.Sharpness = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.CaptureInterval = 'CaptureInterval' in params ? params.CaptureInterval : null;
+        this.CaptureIntervalUnits = 'CaptureIntervalUnits' in params ? params.CaptureIntervalUnits : null;
+        this.ScalingBehavior = 'ScalingBehavior' in params ? params.ScalingBehavior : null;
+        this.Sharpness = 'Sharpness' in params ? params.Sharpness : null;
+
+    }
+}
+
+/**
  * Pipeline failover information.
  * @class
  */
@@ -1376,10 +1446,22 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Password = null;
 
         /**
-         * The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard.
+         * The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard. When the output group type is FRAME_CAPTURE, valid values are: AWS_AmazonS3, COS.
          * @type {string || null}
          */
         this.DestinationType = null;
+
+        /**
+         * Aws S3 destination setting.
+         * @type {AmazonS3Settings || null}
+         */
+        this.AmazonS3Settings = null;
+
+        /**
+         * Cos destination setting.
+         * @type {CosSettings || null}
+         */
+        this.CosSettings = null;
 
     }
 
@@ -1395,6 +1477,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Username = 'Username' in params ? params.Username : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.DestinationType = 'DestinationType' in params ? params.DestinationType : null;
+
+        if (params.AmazonS3Settings) {
+            let obj = new AmazonS3Settings();
+            obj.deserialize(params.AmazonS3Settings)
+            this.AmazonS3Settings = obj;
+        }
+
+        if (params.CosSettings) {
+            let obj = new CosSettings();
+            obj.deserialize(params.CosSettings)
+            this.CosSettings = obj;
+        }
 
     }
 }
@@ -1451,6 +1545,83 @@ class ModifyStreamLiveInputSecurityGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Amazon S3 destination setting.
+ * @class
+ */
+class AmazonS3Settings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access key ID of the S3 sub-account.
+         * @type {string || null}
+         */
+        this.AccessKeyID = null;
+
+        /**
+         * Secret access key of the S3 sub-account.
+         * @type {string || null}
+         */
+        this.SecretAccessKey = null;
+
+        /**
+         * Region of S3.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Bucket name of S3.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * File output path, which can be empty. If it is not empty, it starts with / and ends with /.
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * User-defined name, supports alphanumeric characters, underscores, and hyphens, with a length between 1 and 32 characters.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * File suffix, only supports `jpg`.
+         * @type {string || null}
+         */
+        this.FileExt = null;
+
+        /**
+         * Support `unix` or `utc0`, default unix.
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyID = 'AccessKeyID' in params ? params.AccessKeyID : null;
+        this.SecretAccessKey = 'SecretAccessKey' in params ? params.SecretAccessKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileExt = 'FileExt' in params ? params.FileExt : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
 
     }
 }
@@ -4026,6 +4197,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Frame capture templates.
+         * @type {Array.<FrameCaptureTemplate> || null}
+         */
+        this.FrameCaptureTemplates = null;
+
     }
 
     /**
@@ -4130,6 +4307,15 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
             }
         }
 
+        if (params.FrameCaptureTemplates) {
+            this.FrameCaptureTemplates = new Array();
+            for (let z in params.FrameCaptureTemplates) {
+                let obj = new FrameCaptureTemplate();
+                obj.deserialize(params.FrameCaptureTemplates[z]);
+                this.FrameCaptureTemplates.push(obj);
+            }
+        }
+
     }
 }
 
@@ -4159,6 +4345,69 @@ Note: This field may return `null`, indicating that no valid value was found.
             return;
         }
         this.AutoClear = 'AutoClear' in params ? params.AutoClear : null;
+
+    }
+}
+
+/**
+ * Cos destination setting.
+ * @class
+ */
+class CosSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of COS.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Bucket name of COS.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * File output path, which can be empty. If it is not empty, it  ends with /.
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * User-defined name, supports alphanumeric characters, underscores, and hyphens, with a length between 1 and 32 characters.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * File suffix, only supports `jpg`.
+         * @type {string || null}
+         */
+        this.FileExt = null;
+
+        /**
+         * Support `unix` or `utc0`, default unix.
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileExt = 'FileExt' in params ? params.FileExt : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
 
     }
 }
@@ -4698,6 +4947,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Frame capture templates.
+         * @type {Array.<FrameCaptureTemplate> || null}
+         */
+        this.FrameCaptureTemplates = null;
+
     }
 
     /**
@@ -4800,6 +5055,15 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
                 let obj = new Tag();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
+            }
+        }
+
+        if (params.FrameCaptureTemplates) {
+            this.FrameCaptureTemplates = new Array();
+            for (let z in params.FrameCaptureTemplates) {
+                let obj = new FrameCaptureTemplate();
+                obj.deserialize(params.FrameCaptureTemplates[z]);
+                this.FrameCaptureTemplates.push(obj);
             }
         }
 
@@ -5492,6 +5756,12 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.TimedMetadataSettings = null;
 
+        /**
+         * Frame capture template name array. Quantity limit: [0,1].
+         * @type {Array.<string> || null}
+         */
+        this.FrameCaptureTemplateNames = null;
+
     }
 
     /**
@@ -5518,6 +5788,7 @@ Note: this field may return `null`, indicating that no valid value was found.
             obj.deserialize(params.TimedMetadataSettings)
             this.TimedMetadataSettings = obj;
         }
+        this.FrameCaptureTemplateNames = 'FrameCaptureTemplateNames' in params ? params.FrameCaptureTemplateNames : null;
 
     }
 }
@@ -5978,7 +6249,7 @@ class StreamLiveOutputGroupsInfo extends  AbstractModel {
 
         /**
          * Output protocol
-Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`
+Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`
          * @type {string || null}
          */
         this.Type = null;
@@ -7496,6 +7767,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.Tags = null;
 
+        /**
+         * Frame capture templates.
+         * @type {Array.<FrameCaptureTemplate> || null}
+         */
+        this.FrameCaptureTemplates = null;
+
     }
 
     /**
@@ -7599,6 +7876,15 @@ Note: This field may return `null`, indicating that no valid value was found.
                 let obj = new Tag();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
+            }
+        }
+
+        if (params.FrameCaptureTemplates) {
+            this.FrameCaptureTemplates = new Array();
+            for (let z in params.FrameCaptureTemplates) {
+                let obj = new FrameCaptureTemplate();
+                obj.deserialize(params.FrameCaptureTemplates[z]);
+                this.FrameCaptureTemplates.push(obj);
             }
         }
 
@@ -7872,6 +8158,7 @@ module.exports = {
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     CreateStreamLivePlanResponse: CreateStreamLivePlanResponse,
     InputStreamInfo: InputStreamInfo,
+    FrameCaptureTemplate: FrameCaptureTemplate,
     PipelineInputSettingsInfo: PipelineInputSettingsInfo,
     DescribeStreamLiveChannelOutputStatisticsRequest: DescribeStreamLiveChannelOutputStatisticsRequest,
     ChannelPipelineAlerts: ChannelPipelineAlerts,
@@ -7881,6 +8168,7 @@ module.exports = {
     DestinationInfo: DestinationInfo,
     DeleteStreamLiveInputRequest: DeleteStreamLiveInputRequest,
     ModifyStreamLiveInputSecurityGroupResponse: ModifyStreamLiveInputSecurityGroupResponse,
+    AmazonS3Settings: AmazonS3Settings,
     ModifyStreamLiveInputRequest: ModifyStreamLiveInputRequest,
     DescribeStreamLiveChannelResponse: DescribeStreamLiveChannelResponse,
     DescribeStreamLiveRegionsRequest: DescribeStreamLiveRegionsRequest,
@@ -7930,6 +8218,7 @@ module.exports = {
     DeleteStreamLiveWatermarkRequest: DeleteStreamLiveWatermarkRequest,
     CreateStreamLiveChannelRequest: CreateStreamLiveChannelRequest,
     TimedRecordSettings: TimedRecordSettings,
+    CosSettings: CosSettings,
     StreamLiveRegionInfo: StreamLiveRegionInfo,
     DescribeStreamLiveChannelRequest: DescribeStreamLiveChannelRequest,
     DescribeStreamLivePlansRequest: DescribeStreamLivePlansRequest,

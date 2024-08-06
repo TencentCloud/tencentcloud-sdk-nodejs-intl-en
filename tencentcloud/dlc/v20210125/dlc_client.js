@@ -26,7 +26,7 @@ const StatementInformation = models.StatementInformation;
 const DescribeUpdatableDataEnginesResponse = models.DescribeUpdatableDataEnginesResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DescribeUserDataEngineConfigResponse = models.DescribeUserDataEngineConfigResponse;
-const DescribeSparkAppJobRequest = models.DescribeSparkAppJobRequest;
+const Asset = models.Asset;
 const DataEngineScaleInfoDetail = models.DataEngineScaleInfoDetail;
 const SparkSessionBatchLogOperate = models.SparkSessionBatchLogOperate;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
@@ -37,15 +37,17 @@ const CreateResultDownloadResponse = models.CreateResultDownloadResponse;
 const ModifyGovernEventRuleResponse = models.ModifyGovernEventRuleResponse;
 const SparkMonitorMetrics = models.SparkMonitorMetrics;
 const RestartDataEngineRequest = models.RestartDataEngineRequest;
-const DescribeDataEngineImageVersionsResponse = models.DescribeDataEngineImageVersionsResponse;
+const CreateDMSDatabaseResponse = models.CreateDMSDatabaseResponse;
 const CreateStoreLocationResponse = models.CreateStoreLocationResponse;
-const DescribeSubUserAccessPolicyResponse = models.DescribeSubUserAccessPolicyResponse;
+const DescribeDMSDatabaseResponse = models.DescribeDMSDatabaseResponse;
 const DescribeTablesNameRequest = models.DescribeTablesNameRequest;
 const Policys = models.Policys;
+const DropDMSDatabaseRequest = models.DropDMSDatabaseRequest;
 const ModifyWorkGroupResponse = models.ModifyWorkGroupResponse;
 const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
 const SparkJobInfo = models.SparkJobInfo;
 const SwitchDataEngineRequest = models.SwitchDataEngineRequest;
+const SuspendResumeDataEngineResponse = models.SuspendResumeDataEngineResponse;
 const DeleteSparkAppRequest = models.DeleteSparkAppRequest;
 const DLCCatalogAccess = models.DLCCatalogAccess;
 const DescribeDLCCatalogAccessRequest = models.DescribeDLCCatalogAccessRequest;
@@ -82,6 +84,7 @@ const DescribeAdvancedStoreLocationResponse = models.DescribeAdvancedStoreLocati
 const DescribeTablesNameResponse = models.DescribeTablesNameResponse;
 const DescribeAdvancedStoreLocationRequest = models.DescribeAdvancedStoreLocationRequest;
 const UpdateDataEngineRequest = models.UpdateDataEngineRequest;
+const DescribeSparkAppJobRequest = models.DescribeSparkAppJobRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const CreateSparkAppTaskRequest = models.CreateSparkAppTaskRequest;
 const ModifySparkAppBatchResponse = models.ModifySparkAppBatchResponse;
@@ -96,7 +99,7 @@ const DeleteThirdPartyAccessUserRequest = models.DeleteThirdPartyAccessUserReque
 const AttachWorkGroupPolicyRequest = models.AttachWorkGroupPolicyRequest;
 const TagInfo = models.TagInfo;
 const CreateUserResponse = models.CreateUserResponse;
-const CreateSparkAppRequest = models.CreateSparkAppRequest;
+const DescribeDataEngineResponse = models.DescribeDataEngineResponse;
 const RevokeDLCCatalogAccessResponse = models.RevokeDLCCatalogAccessResponse;
 const DeleteCHDFSBindingProductRequest = models.DeleteCHDFSBindingProductRequest;
 const UpdateDataEngineResponse = models.UpdateDataEngineResponse;
@@ -115,6 +118,7 @@ const QueryResultRequest = models.QueryResultRequest;
 const CheckDataEngineImageCanBeRollbackRequest = models.CheckDataEngineImageCanBeRollbackRequest;
 const CreateDataEngineRequest = models.CreateDataEngineRequest;
 const ModifySparkAppBatchRequest = models.ModifySparkAppBatchRequest;
+const DescribeDataEnginePythonSparkImagesRequest = models.DescribeDataEnginePythonSparkImagesRequest;
 const SmartOptimizerPolicy = models.SmartOptimizerPolicy;
 const CreateTaskRequest = models.CreateTaskRequest;
 const RegisterThirdPartyAccessUserResponse = models.RegisterThirdPartyAccessUserResponse;
@@ -145,7 +149,7 @@ const DataEngineConfigPair = models.DataEngineConfigPair;
 const SessionResourceTemplate = models.SessionResourceTemplate;
 const AttachWorkGroupPolicyResponse = models.AttachWorkGroupPolicyResponse;
 const ModifyAdvancedStoreLocationResponse = models.ModifyAdvancedStoreLocationResponse;
-const SuspendResumeDataEngineResponse = models.SuspendResumeDataEngineResponse;
+const DescribeSubUserAccessPolicyResponse = models.DescribeSubUserAccessPolicyResponse;
 const TaskResponseInfo = models.TaskResponseInfo;
 const UpgradeDataEngineImageResponse = models.UpgradeDataEngineImageResponse;
 const CreateCHDFSBindingProductResponse = models.CreateCHDFSBindingProductResponse;
@@ -204,7 +208,9 @@ const DeleteDataEngineRequest = models.DeleteDataEngineRequest;
 const TasksInfo = models.TasksInfo;
 const DataEngineImageVersion = models.DataEngineImageVersion;
 const CreateSparkSessionBatchSQLResponse = models.CreateSparkSessionBatchSQLResponse;
+const DescribeDMSDatabaseRequest = models.DescribeDMSDatabaseRequest;
 const DescribeLakeFsDirSummaryRequest = models.DescribeLakeFsDirSummaryRequest;
+const DropDMSDatabaseResponse = models.DropDMSDatabaseResponse;
 const ModifyGovernEventRuleRequest = models.ModifyGovernEventRuleRequest;
 const DeleteUsersFromWorkGroupRequest = models.DeleteUsersFromWorkGroupRequest;
 const Policy = models.Policy;
@@ -221,7 +227,7 @@ const DeleteThirdPartyAccessUserResponse = models.DeleteThirdPartyAccessUserResp
 const DescribeSparkAppTasksResponse = models.DescribeSparkAppTasksResponse;
 const UpdateUserDataEngineConfigResponse = models.UpdateUserDataEngineConfigResponse;
 const ModifyUserTypeResponse = models.ModifyUserTypeResponse;
-const DescribeDataEnginePythonSparkImagesRequest = models.DescribeDataEnginePythonSparkImagesRequest;
+const DescribeDataEngineImageVersionsResponse = models.DescribeDataEngineImageVersionsResponse;
 const CancelSparkSessionBatchSQLRequest = models.CancelSparkSessionBatchSQLRequest;
 const DescribeWorkGroupsRequest = models.DescribeWorkGroupsRequest;
 const DescribeUserDataEngineConfigRequest = models.DescribeUserDataEngineConfigRequest;
@@ -230,18 +236,20 @@ const UpdateRowFilterResponse = models.UpdateRowFilterResponse;
 const UserInfo = models.UserInfo;
 const CreateTasksResponse = models.CreateTasksResponse;
 const GrantDLCCatalogAccessResponse = models.GrantDLCCatalogAccessResponse;
-const DescribeDataEngineResponse = models.DescribeDataEngineResponse;
+const CreateSparkAppRequest = models.CreateSparkAppRequest;
 const DataEngineScaleInfo = models.DataEngineScaleInfo;
 const CreateSparkSessionBatchSQLRequest = models.CreateSparkSessionBatchSQLRequest;
 const UnbindWorkGroupsFromUserResponse = models.UnbindWorkGroupsFromUserResponse;
 const QueryTaskCostDetailRequest = models.QueryTaskCostDetailRequest;
 const ModifyDataEngineDescriptionResponse = models.ModifyDataEngineDescriptionResponse;
+const AlterDMSDatabaseResponse = models.AlterDMSDatabaseResponse;
 const UpdateDataEngineConfigRequest = models.UpdateDataEngineConfigRequest;
 const CreateWorkGroupRequest = models.CreateWorkGroupRequest;
 const CreateInternalTableResponse = models.CreateInternalTableResponse;
 const DataEngineInfo = models.DataEngineInfo;
 const DescribeSparkAppTasksRequest = models.DescribeSparkAppTasksRequest;
 const DescribeSubUserAccessPolicyRequest = models.DescribeSubUserAccessPolicyRequest;
+const AlterDMSDatabaseRequest = models.AlterDMSDatabaseRequest;
 const CheckDataEngineImageCanBeUpgradeRequest = models.CheckDataEngineImageCanBeUpgradeRequest;
 const SQLTask = models.SQLTask;
 const UserMessage = models.UserMessage;
@@ -249,6 +257,7 @@ const DescribeOtherCHDFSBindingListResponse = models.DescribeOtherCHDFSBindingLi
 const DescribeUsersResponse = models.DescribeUsersResponse;
 const SwitchDataEngineImageRequest = models.SwitchDataEngineImageRequest;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const CreateDMSDatabaseRequest = models.CreateDMSDatabaseRequest;
 const DetachWorkGroupPolicyRequest = models.DetachWorkGroupPolicyRequest;
 const DeleteCHDFSBindingProductResponse = models.DeleteCHDFSBindingProductResponse;
 const DescribeDataEnginePythonSparkImagesResponse = models.DescribeDataEnginePythonSparkImagesResponse;
@@ -720,6 +729,17 @@ class DlcClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create databases in the DMS metadata module.
+     * @param {CreateDMSDatabaseRequest} req
+     * @param {function(string, CreateDMSDatabaseResponse):void} cb
+     * @public
+     */
+    CreateDMSDatabase(req, cb) {
+        let resp = new CreateDMSDatabaseResponse();
+        this.request("CreateDMSDatabase", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind the authentication policy to the user.
      * @param {AttachUserPolicyRequest} req
      * @param {function(string, AttachUserPolicyResponse):void} cb
@@ -761,6 +781,28 @@ class DlcClient extends AbstractClient {
     ModifyAdvancedStoreLocation(req, cb) {
         let resp = new ModifyAdvancedStoreLocationResponse();
         this.request("ModifyAdvancedStoreLocation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update databases in the DMS metadata module.
+     * @param {AlterDMSDatabaseRequest} req
+     * @param {function(string, AlterDMSDatabaseResponse):void} cb
+     * @public
+     */
+    AlterDMSDatabase(req, cb) {
+        let resp = new AlterDMSDatabaseResponse();
+        this.request("AlterDMSDatabase", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete databases in the DMS metadata module.
+     * @param {DropDMSDatabaseRequest} req
+     * @param {function(string, DropDMSDatabaseResponse):void} cb
+     * @public
+     */
+    DropDMSDatabase(req, cb) {
+        let resp = new DropDMSDatabaseResponse();
+        this.request("DropDMSDatabase", req, resp, cb);
     }
 
     /**
@@ -1124,6 +1166,17 @@ class DlcClient extends AbstractClient {
     DeleteThirdPartyAccessUser(req, cb) {
         let resp = new DeleteThirdPartyAccessUserResponse();
         this.request("DeleteThirdPartyAccessUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain databases in the DMS metadata module.
+     * @param {DescribeDMSDatabaseRequest} req
+     * @param {function(string, DescribeDMSDatabaseResponse):void} cb
+     * @public
+     */
+    DescribeDMSDatabase(req, cb) {
+        let resp = new DescribeDMSDatabaseResponse();
+        this.request("DescribeDMSDatabase", req, resp, cb);
     }
 
     /**

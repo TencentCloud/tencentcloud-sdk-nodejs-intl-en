@@ -521,24 +521,100 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeSparkAppJob request structure.
+ * Basic metadata object
  * @class
  */
-class DescribeSparkAppJobRequest extends  AbstractModel {
+class Asset extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Spark job ID. If it co-exists with `JobName`, `JobName` is invalid. At least `JobId` or `JobName` must be used.
-         * @type {string || null}
+         * Primary key
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.JobId = null;
+        this.Id = null;
 
         /**
-         * Spark job name
+         * Name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.JobName = null;
+        this.Name = null;
+
+        /**
+         * Object GUID value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Guid = null;
+
+        /**
+         * Data directory
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Catalog = null;
+
+        /**
+         * Description information
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Object owner
+         * @type {string || null}
+         */
+        this.Owner = null;
+
+        /**
+         * Object owner account
+         * @type {string || null}
+         */
+        this.OwnerAccount = null;
+
+        /**
+         * Permission
+         * @type {Array.<KVPair> || null}
+         */
+        this.PermValues = null;
+
+        /**
+         * Additional attributes
+         * @type {Array.<KVPair> || null}
+         */
+        this.Params = null;
+
+        /**
+         * Additional business attributes
+         * @type {Array.<KVPair> || null}
+         */
+        this.BizParams = null;
+
+        /**
+         * Data version
+         * @type {number || null}
+         */
+        this.DataVersion = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * Data source primary key
+         * @type {number || null}
+         */
+        this.DatasourceId = null;
 
     }
 
@@ -549,8 +625,44 @@ class DescribeSparkAppJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Guid = 'Guid' in params ? params.Guid : null;
+        this.Catalog = 'Catalog' in params ? params.Catalog : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
+        this.OwnerAccount = 'OwnerAccount' in params ? params.OwnerAccount : null;
+
+        if (params.PermValues) {
+            this.PermValues = new Array();
+            for (let z in params.PermValues) {
+                let obj = new KVPair();
+                obj.deserialize(params.PermValues[z]);
+                this.PermValues.push(obj);
+            }
+        }
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new KVPair();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+
+        if (params.BizParams) {
+            this.BizParams = new Array();
+            for (let z in params.BizParams) {
+                let obj = new KVPair();
+                obj.deserialize(params.BizParams[z]);
+                this.BizParams.push(obj);
+            }
+        }
+        this.DataVersion = 'DataVersion' in params ? params.DataVersion : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.DatasourceId = 'DatasourceId' in params ? params.DatasourceId : null;
 
     }
 }
@@ -919,24 +1031,12 @@ class RestartDataEngineRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDataEngineImageVersions response structure.
+ * CreateDMSDatabase response structure.
  * @class
  */
-class DescribeDataEngineImageVersionsResponse extends  AbstractModel {
+class CreateDMSDatabaseResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Major version of the image information list of clusters
-         * @type {Array.<DataEngineImageVersion> || null}
-         */
-        this.ImageParentVersions = null;
-
-        /**
-         * Total
-         * @type {number || null}
-         */
-        this.Total = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -953,16 +1053,6 @@ class DescribeDataEngineImageVersionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ImageParentVersions) {
-            this.ImageParentVersions = new Array();
-            for (let z in params.ImageParentVersions) {
-                let obj = new DataEngineImageVersion();
-                obj.deserialize(params.ImageParentVersions[z]);
-                this.ImageParentVersions.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -997,18 +1087,40 @@ class CreateStoreLocationResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSubUserAccessPolicy response structure.
+ * DescribeDMSDatabase response structure.
  * @class
  */
-class DescribeSubUserAccessPolicyResponse extends  AbstractModel {
+class DescribeDMSDatabaseResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sub-user's visiting policy
+         * Database name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.PolicyDocument = null;
+        this.Name = null;
+
+        /**
+         * Schema name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * Storage address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * Data object
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Asset || null}
+         */
+        this.Asset = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1025,7 +1137,15 @@ class DescribeSubUserAccessPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Location = 'Location' in params ? params.Location : null;
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1180,6 +1300,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * DropDMSDatabase request structure.
+ * @class
+ */
+class DropDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Whether to delete the data.
+         * @type {boolean || null}
+         */
+        this.DeleteData = null;
+
+        /**
+         * Whether to use cascade delete.
+         * @type {boolean || null}
+         */
+        this.Cascade = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DeleteData = 'DeleteData' in params ? params.DeleteData : null;
+        this.Cascade = 'Cascade' in params ? params.Cascade : null;
 
     }
 }
@@ -1591,6 +1753,41 @@ class SwitchDataEngineRequest extends  AbstractModel {
         }
         this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
         this.StartStandbyCluster = 'StartStandbyCluster' in params ? params.StartStandbyCluster : null;
+
+    }
+}
+
+/**
+ * SuspendResumeDataEngine response structure.
+ * @class
+ */
+class SuspendResumeDataEngineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The details of the virtual cluster.
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3767,6 +3964,41 @@ class UpdateDataEngineRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSparkAppJob request structure.
+ * @class
+ */
+class DescribeSparkAppJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Spark job ID. If it co-exists with `JobName`, `JobName` is invalid. At least `JobId` or `JobName` must be used.
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * Spark job name
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+
+    }
+}
+
+/**
  * DescribeTasks request structure.
  * @class
  */
@@ -4385,186 +4617,24 @@ class CreateUserResponse extends  AbstractModel {
 }
 
 /**
- * CreateSparkApp request structure.
+ * DescribeDataEngine response structure.
  * @class
  */
-class CreateSparkAppRequest extends  AbstractModel {
+class DescribeDataEngineResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Spark job name.
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * The Spark job type. Valid values: `1` for Spark JAR job and `2` for Spark streaming job.
-         * @type {number || null}
-         */
-        this.AppType = null;
-
-        /**
-         * The data engine executing the Spark job.
-         * @type {string || null}
+         * Data engine details
+         * @type {DataEngineInfo || null}
          */
         this.DataEngine = null;
 
         /**
-         * The path of the Spark job package.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AppFile = null;
-
-        /**
-         * Data visiting policy achieved through CAM Role arn; the console can obtain it through Data Job -> Job Configuration; SDK can obtain corresponding values through the DescribeUserRoles API.
-         * @type {number || null}
-         */
-        this.RoleArn = null;
-
-        /**
-         * The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
-         * @type {string || null}
-         */
-        this.AppDriverSize = null;
-
-        /**
-         * The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
-         * @type {string || null}
-         */
-        this.AppExecutorSize = null;
-
-        /**
-         * Number of Spark job executors
-         * @type {number || null}
-         */
-        this.AppExecutorNums = null;
-
-        /**
-         * This field has been disused. Use the `Datasource` field instead.
-         * @type {string || null}
-         */
-        this.Eni = null;
-
-        /**
-         * The source of the Spark job package. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
-         * @type {string || null}
-         */
-        this.IsLocal = null;
-
-        /**
-         * The main class of the Spark job.
-         * @type {string || null}
-         */
-        this.MainClass = null;
-
-        /**
-         * Spark configurations separated by line break
-         * @type {string || null}
-         */
-        this.AppConf = null;
-
-        /**
-         * The source of the dependency JAR packages of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
-         * @type {string || null}
-         */
-        this.IsLocalJars = null;
-
-        /**
-         * The dependency JAR packages of the Spark JAR job (JAR packages), separated by comma.
-         * @type {string || null}
-         */
-        this.AppJars = null;
-
-        /**
-         * The source of the dependency files of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
-         * @type {string || null}
-         */
-        this.IsLocalFiles = null;
-
-        /**
-         * The dependency files of the Spark job (files other than JAR and ZIP packages) separated by comma.
-         * @type {string || null}
-         */
-        this.AppFiles = null;
-
-        /**
-         * The input parameters of the Spark job, separated by comma.
-         * @type {string || null}
-         */
-        this.CmdArgs = null;
-
-        /**
-         * The maximum number of retries, valid for Spark streaming tasks only.
-         * @type {number || null}
-         */
-        this.MaxRetries = null;
-
-        /**
-         * The data source name.
-         * @type {string || null}
-         */
-        this.DataSource = null;
-
-        /**
-         * The source of the PySpark dependencies. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
-         * @type {string || null}
-         */
-        this.IsLocalPythonFiles = null;
-
-        /**
-         * The PySpark dependencies (Python files), separated by comma, with .py, .zip, and .egg formats supported.
-         * @type {string || null}
-         */
-        this.AppPythonFiles = null;
-
-        /**
-         * The source of the dependency archives of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
-         * @type {string || null}
-         */
-        this.IsLocalArchives = null;
-
-        /**
-         * The dependency archives of the Spark job, separated by comma, with tar.gz, .tgz, and .tar formats supported.
-         * @type {string || null}
-         */
-        this.AppArchives = null;
-
-        /**
-         * The Spark image version.
-         * @type {string || null}
-         */
-        this.SparkImage = null;
-
-        /**
-         * The Spark image version name.
-         * @type {string || null}
-         */
-        this.SparkImageVersion = null;
-
-        /**
-         * The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
-         * @type {number || null}
-         */
-        this.AppExecutorMaxNumbers = null;
-
-        /**
-         * The ID of the associated Data Lake Compute query script.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
-         * @type {number || null}
-         */
-        this.IsInherit = null;
-
-        /**
-         * Whether to run the task with the session SQLs. Valid values: `false` for no and `true` for yes.
-         * @type {boolean || null}
-         */
-        this.IsSessionStarted = null;
+        this.RequestId = null;
 
     }
 
@@ -4575,35 +4645,13 @@ class CreateSparkAppRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.AppType = 'AppType' in params ? params.AppType : null;
-        this.DataEngine = 'DataEngine' in params ? params.DataEngine : null;
-        this.AppFile = 'AppFile' in params ? params.AppFile : null;
-        this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
-        this.AppDriverSize = 'AppDriverSize' in params ? params.AppDriverSize : null;
-        this.AppExecutorSize = 'AppExecutorSize' in params ? params.AppExecutorSize : null;
-        this.AppExecutorNums = 'AppExecutorNums' in params ? params.AppExecutorNums : null;
-        this.Eni = 'Eni' in params ? params.Eni : null;
-        this.IsLocal = 'IsLocal' in params ? params.IsLocal : null;
-        this.MainClass = 'MainClass' in params ? params.MainClass : null;
-        this.AppConf = 'AppConf' in params ? params.AppConf : null;
-        this.IsLocalJars = 'IsLocalJars' in params ? params.IsLocalJars : null;
-        this.AppJars = 'AppJars' in params ? params.AppJars : null;
-        this.IsLocalFiles = 'IsLocalFiles' in params ? params.IsLocalFiles : null;
-        this.AppFiles = 'AppFiles' in params ? params.AppFiles : null;
-        this.CmdArgs = 'CmdArgs' in params ? params.CmdArgs : null;
-        this.MaxRetries = 'MaxRetries' in params ? params.MaxRetries : null;
-        this.DataSource = 'DataSource' in params ? params.DataSource : null;
-        this.IsLocalPythonFiles = 'IsLocalPythonFiles' in params ? params.IsLocalPythonFiles : null;
-        this.AppPythonFiles = 'AppPythonFiles' in params ? params.AppPythonFiles : null;
-        this.IsLocalArchives = 'IsLocalArchives' in params ? params.IsLocalArchives : null;
-        this.AppArchives = 'AppArchives' in params ? params.AppArchives : null;
-        this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
-        this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
-        this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
-        this.IsSessionStarted = 'IsSessionStarted' in params ? params.IsSessionStarted : null;
+
+        if (params.DataEngine) {
+            let obj = new DataEngineInfo();
+            obj.deserialize(params.DataEngine)
+            this.DataEngine = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5593,6 +5641,34 @@ Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and
         this.AppExecutorNums = 'AppExecutorNums' in params ? params.AppExecutorNums : null;
         this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
         this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
+
+    }
+}
+
+/**
+ * DescribeDataEnginePythonSparkImages request structure.
+ * @class
+ */
+class DescribeDataEnginePythonSparkImagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the minor version of the cluster image
+         * @type {string || null}
+         */
+        this.ChildImageVersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChildImageVersionId = 'ChildImageVersionId' in params ? params.ChildImageVersionId : null;
 
     }
 }
@@ -6849,18 +6925,18 @@ class ModifyAdvancedStoreLocationResponse extends  AbstractModel {
 }
 
 /**
- * SuspendResumeDataEngine response structure.
+ * DescribeSubUserAccessPolicy response structure.
  * @class
  */
-class SuspendResumeDataEngineResponse extends  AbstractModel {
+class DescribeSubUserAccessPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The details of the virtual cluster.
+         * Sub-user's visiting policy
          * @type {string || null}
          */
-        this.DataEngineName = null;
+        this.PolicyDocument = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6877,7 +6953,7 @@ class SuspendResumeDataEngineResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9908,6 +9984,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeDMSDatabase request structure.
+ * @class
+ */
+class DescribeDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Schema name
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * Match rules
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+
+    }
+}
+
+/**
  * DescribeLakeFsDirSummary request structure.
  * @class
  */
@@ -9924,6 +10042,34 @@ class DescribeLakeFsDirSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DropDMSDatabase response structure.
+ * @class
+ */
+class DropDMSDatabaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10910,18 +11056,30 @@ class ModifyUserTypeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDataEnginePythonSparkImages request structure.
+ * DescribeDataEngineImageVersions response structure.
  * @class
  */
-class DescribeDataEnginePythonSparkImagesRequest extends  AbstractModel {
+class DescribeDataEngineImageVersionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the minor version of the cluster image
+         * Major version of the image information list of clusters
+         * @type {Array.<DataEngineImageVersion> || null}
+         */
+        this.ImageParentVersions = null;
+
+        /**
+         * Total
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ChildImageVersionId = null;
+        this.RequestId = null;
 
     }
 
@@ -10932,7 +11090,17 @@ class DescribeDataEnginePythonSparkImagesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ChildImageVersionId = 'ChildImageVersionId' in params ? params.ChildImageVersionId : null;
+
+        if (params.ImageParentVersions) {
+            this.ImageParentVersions = new Array();
+            for (let z in params.ImageParentVersions) {
+                let obj = new DataEngineImageVersion();
+                obj.deserialize(params.ImageParentVersions[z]);
+                this.ImageParentVersions.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11347,24 +11515,186 @@ class GrantDLCCatalogAccessResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDataEngine response structure.
+ * CreateSparkApp request structure.
  * @class
  */
-class DescribeDataEngineResponse extends  AbstractModel {
+class CreateSparkAppRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data engine details
-         * @type {DataEngineInfo || null}
+         * The Spark job name.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The Spark job type. Valid values: `1` for Spark JAR job and `2` for Spark streaming job.
+         * @type {number || null}
+         */
+        this.AppType = null;
+
+        /**
+         * The data engine executing the Spark job.
+         * @type {string || null}
          */
         this.DataEngine = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The path of the Spark job package.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AppFile = null;
+
+        /**
+         * Data visiting policy achieved through CAM Role arn; the console can obtain it through Data Job -> Job Configuration; SDK can obtain corresponding values through the DescribeUserRoles API.
+         * @type {number || null}
+         */
+        this.RoleArn = null;
+
+        /**
+         * The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+         * @type {string || null}
+         */
+        this.AppDriverSize = null;
+
+        /**
+         * The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+         * @type {string || null}
+         */
+        this.AppExecutorSize = null;
+
+        /**
+         * Number of Spark job executors
+         * @type {number || null}
+         */
+        this.AppExecutorNums = null;
+
+        /**
+         * This field has been disused. Use the `Datasource` field instead.
+         * @type {string || null}
+         */
+        this.Eni = null;
+
+        /**
+         * The source of the Spark job package. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
+         * @type {string || null}
+         */
+        this.IsLocal = null;
+
+        /**
+         * The main class of the Spark job.
+         * @type {string || null}
+         */
+        this.MainClass = null;
+
+        /**
+         * Spark configurations separated by line break
+         * @type {string || null}
+         */
+        this.AppConf = null;
+
+        /**
+         * The source of the dependency JAR packages of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
+         * @type {string || null}
+         */
+        this.IsLocalJars = null;
+
+        /**
+         * The dependency JAR packages of the Spark JAR job (JAR packages), separated by comma.
+         * @type {string || null}
+         */
+        this.AppJars = null;
+
+        /**
+         * The source of the dependency files of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
+         * @type {string || null}
+         */
+        this.IsLocalFiles = null;
+
+        /**
+         * The dependency files of the Spark job (files other than JAR and ZIP packages) separated by comma.
+         * @type {string || null}
+         */
+        this.AppFiles = null;
+
+        /**
+         * The input parameters of the Spark job, separated by comma.
+         * @type {string || null}
+         */
+        this.CmdArgs = null;
+
+        /**
+         * The maximum number of retries, valid for Spark streaming tasks only.
+         * @type {number || null}
+         */
+        this.MaxRetries = null;
+
+        /**
+         * The data source name.
+         * @type {string || null}
+         */
+        this.DataSource = null;
+
+        /**
+         * The source of the PySpark dependencies. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
+         * @type {string || null}
+         */
+        this.IsLocalPythonFiles = null;
+
+        /**
+         * The PySpark dependencies (Python files), separated by comma, with .py, .zip, and .egg formats supported.
+         * @type {string || null}
+         */
+        this.AppPythonFiles = null;
+
+        /**
+         * The source of the dependency archives of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
+         * @type {string || null}
+         */
+        this.IsLocalArchives = null;
+
+        /**
+         * The dependency archives of the Spark job, separated by comma, with tar.gz, .tgz, and .tar formats supported.
+         * @type {string || null}
+         */
+        this.AppArchives = null;
+
+        /**
+         * The Spark image version.
+         * @type {string || null}
+         */
+        this.SparkImage = null;
+
+        /**
+         * The Spark image version name.
+         * @type {string || null}
+         */
+        this.SparkImageVersion = null;
+
+        /**
+         * The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
+         * @type {number || null}
+         */
+        this.AppExecutorMaxNumbers = null;
+
+        /**
+         * The ID of the associated Data Lake Compute query script.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.IsInherit = null;
+
+        /**
+         * Whether to run the task with the session SQLs. Valid values: `false` for no and `true` for yes.
+         * @type {boolean || null}
+         */
+        this.IsSessionStarted = null;
 
     }
 
@@ -11375,13 +11705,35 @@ class DescribeDataEngineResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.DataEngine) {
-            let obj = new DataEngineInfo();
-            obj.deserialize(params.DataEngine)
-            this.DataEngine = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.DataEngine = 'DataEngine' in params ? params.DataEngine : null;
+        this.AppFile = 'AppFile' in params ? params.AppFile : null;
+        this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
+        this.AppDriverSize = 'AppDriverSize' in params ? params.AppDriverSize : null;
+        this.AppExecutorSize = 'AppExecutorSize' in params ? params.AppExecutorSize : null;
+        this.AppExecutorNums = 'AppExecutorNums' in params ? params.AppExecutorNums : null;
+        this.Eni = 'Eni' in params ? params.Eni : null;
+        this.IsLocal = 'IsLocal' in params ? params.IsLocal : null;
+        this.MainClass = 'MainClass' in params ? params.MainClass : null;
+        this.AppConf = 'AppConf' in params ? params.AppConf : null;
+        this.IsLocalJars = 'IsLocalJars' in params ? params.IsLocalJars : null;
+        this.AppJars = 'AppJars' in params ? params.AppJars : null;
+        this.IsLocalFiles = 'IsLocalFiles' in params ? params.IsLocalFiles : null;
+        this.AppFiles = 'AppFiles' in params ? params.AppFiles : null;
+        this.CmdArgs = 'CmdArgs' in params ? params.CmdArgs : null;
+        this.MaxRetries = 'MaxRetries' in params ? params.MaxRetries : null;
+        this.DataSource = 'DataSource' in params ? params.DataSource : null;
+        this.IsLocalPythonFiles = 'IsLocalPythonFiles' in params ? params.IsLocalPythonFiles : null;
+        this.AppPythonFiles = 'AppPythonFiles' in params ? params.AppPythonFiles : null;
+        this.IsLocalArchives = 'IsLocalArchives' in params ? params.IsLocalArchives : null;
+        this.AppArchives = 'AppArchives' in params ? params.AppArchives : null;
+        this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
+        this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
+        this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
+        this.IsSessionStarted = 'IsSessionStarted' in params ? params.IsSessionStarted : null;
 
     }
 }
@@ -11662,6 +12014,34 @@ task-operator- string (filtering sub-UIN)
  * @class
  */
 class ModifyDataEngineDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AlterDMSDatabase response structure.
+ * @class
+ */
+class AlterDMSDatabaseResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -12378,6 +12758,60 @@ class DescribeSubUserAccessPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * AlterDMSDatabase request structure.
+ * @class
+ */
+class AlterDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current name
+         * @type {string || null}
+         */
+        this.CurrentName = null;
+
+        /**
+         * Schema name
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * Path
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * Basic object
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentName = 'CurrentName' in params ? params.CurrentName : null;
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Location = 'Location' in params ? params.Location : null;
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+
+    }
+}
+
+/**
  * CheckDataEngineImageCanBeUpgrade request structure.
  * @class
  */
@@ -12664,6 +13098,60 @@ class AttachUserPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDMSDatabase request structure.
+ * @class
+ */
+class CreateDMSDatabaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Basic metadata object
+         * @type {Asset || null}
+         */
+        this.Asset = null;
+
+        /**
+         * Schema directory
+         * @type {string || null}
+         */
+        this.SchemaName = null;
+
+        /**
+         * Db storage path
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Asset) {
+            let obj = new Asset();
+            obj.deserialize(params.Asset)
+            this.Asset = obj;
+        }
+        this.SchemaName = 'SchemaName' in params ? params.SchemaName : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -12967,7 +13455,7 @@ module.exports = {
     DescribeUpdatableDataEnginesResponse: DescribeUpdatableDataEnginesResponse,
     DeleteUserRequest: DeleteUserRequest,
     DescribeUserDataEngineConfigResponse: DescribeUserDataEngineConfigResponse,
-    DescribeSparkAppJobRequest: DescribeSparkAppJobRequest,
+    Asset: Asset,
     DataEngineScaleInfoDetail: DataEngineScaleInfoDetail,
     SparkSessionBatchLogOperate: SparkSessionBatchLogOperate,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
@@ -12978,15 +13466,17 @@ module.exports = {
     ModifyGovernEventRuleResponse: ModifyGovernEventRuleResponse,
     SparkMonitorMetrics: SparkMonitorMetrics,
     RestartDataEngineRequest: RestartDataEngineRequest,
-    DescribeDataEngineImageVersionsResponse: DescribeDataEngineImageVersionsResponse,
+    CreateDMSDatabaseResponse: CreateDMSDatabaseResponse,
     CreateStoreLocationResponse: CreateStoreLocationResponse,
-    DescribeSubUserAccessPolicyResponse: DescribeSubUserAccessPolicyResponse,
+    DescribeDMSDatabaseResponse: DescribeDMSDatabaseResponse,
     DescribeTablesNameRequest: DescribeTablesNameRequest,
     Policys: Policys,
+    DropDMSDatabaseRequest: DropDMSDatabaseRequest,
     ModifyWorkGroupResponse: ModifyWorkGroupResponse,
     DetachUserPolicyResponse: DetachUserPolicyResponse,
     SparkJobInfo: SparkJobInfo,
     SwitchDataEngineRequest: SwitchDataEngineRequest,
+    SuspendResumeDataEngineResponse: SuspendResumeDataEngineResponse,
     DeleteSparkAppRequest: DeleteSparkAppRequest,
     DLCCatalogAccess: DLCCatalogAccess,
     DescribeDLCCatalogAccessRequest: DescribeDLCCatalogAccessRequest,
@@ -13023,6 +13513,7 @@ module.exports = {
     DescribeTablesNameResponse: DescribeTablesNameResponse,
     DescribeAdvancedStoreLocationRequest: DescribeAdvancedStoreLocationRequest,
     UpdateDataEngineRequest: UpdateDataEngineRequest,
+    DescribeSparkAppJobRequest: DescribeSparkAppJobRequest,
     DescribeTasksRequest: DescribeTasksRequest,
     CreateSparkAppTaskRequest: CreateSparkAppTaskRequest,
     ModifySparkAppBatchResponse: ModifySparkAppBatchResponse,
@@ -13037,7 +13528,7 @@ module.exports = {
     AttachWorkGroupPolicyRequest: AttachWorkGroupPolicyRequest,
     TagInfo: TagInfo,
     CreateUserResponse: CreateUserResponse,
-    CreateSparkAppRequest: CreateSparkAppRequest,
+    DescribeDataEngineResponse: DescribeDataEngineResponse,
     RevokeDLCCatalogAccessResponse: RevokeDLCCatalogAccessResponse,
     DeleteCHDFSBindingProductRequest: DeleteCHDFSBindingProductRequest,
     UpdateDataEngineResponse: UpdateDataEngineResponse,
@@ -13056,6 +13547,7 @@ module.exports = {
     CheckDataEngineImageCanBeRollbackRequest: CheckDataEngineImageCanBeRollbackRequest,
     CreateDataEngineRequest: CreateDataEngineRequest,
     ModifySparkAppBatchRequest: ModifySparkAppBatchRequest,
+    DescribeDataEnginePythonSparkImagesRequest: DescribeDataEnginePythonSparkImagesRequest,
     SmartOptimizerPolicy: SmartOptimizerPolicy,
     CreateTaskRequest: CreateTaskRequest,
     RegisterThirdPartyAccessUserResponse: RegisterThirdPartyAccessUserResponse,
@@ -13086,7 +13578,7 @@ module.exports = {
     SessionResourceTemplate: SessionResourceTemplate,
     AttachWorkGroupPolicyResponse: AttachWorkGroupPolicyResponse,
     ModifyAdvancedStoreLocationResponse: ModifyAdvancedStoreLocationResponse,
-    SuspendResumeDataEngineResponse: SuspendResumeDataEngineResponse,
+    DescribeSubUserAccessPolicyResponse: DescribeSubUserAccessPolicyResponse,
     TaskResponseInfo: TaskResponseInfo,
     UpgradeDataEngineImageResponse: UpgradeDataEngineImageResponse,
     CreateCHDFSBindingProductResponse: CreateCHDFSBindingProductResponse,
@@ -13145,7 +13637,9 @@ module.exports = {
     TasksInfo: TasksInfo,
     DataEngineImageVersion: DataEngineImageVersion,
     CreateSparkSessionBatchSQLResponse: CreateSparkSessionBatchSQLResponse,
+    DescribeDMSDatabaseRequest: DescribeDMSDatabaseRequest,
     DescribeLakeFsDirSummaryRequest: DescribeLakeFsDirSummaryRequest,
+    DropDMSDatabaseResponse: DropDMSDatabaseResponse,
     ModifyGovernEventRuleRequest: ModifyGovernEventRuleRequest,
     DeleteUsersFromWorkGroupRequest: DeleteUsersFromWorkGroupRequest,
     Policy: Policy,
@@ -13162,7 +13656,7 @@ module.exports = {
     DescribeSparkAppTasksResponse: DescribeSparkAppTasksResponse,
     UpdateUserDataEngineConfigResponse: UpdateUserDataEngineConfigResponse,
     ModifyUserTypeResponse: ModifyUserTypeResponse,
-    DescribeDataEnginePythonSparkImagesRequest: DescribeDataEnginePythonSparkImagesRequest,
+    DescribeDataEngineImageVersionsResponse: DescribeDataEngineImageVersionsResponse,
     CancelSparkSessionBatchSQLRequest: CancelSparkSessionBatchSQLRequest,
     DescribeWorkGroupsRequest: DescribeWorkGroupsRequest,
     DescribeUserDataEngineConfigRequest: DescribeUserDataEngineConfigRequest,
@@ -13171,18 +13665,20 @@ module.exports = {
     UserInfo: UserInfo,
     CreateTasksResponse: CreateTasksResponse,
     GrantDLCCatalogAccessResponse: GrantDLCCatalogAccessResponse,
-    DescribeDataEngineResponse: DescribeDataEngineResponse,
+    CreateSparkAppRequest: CreateSparkAppRequest,
     DataEngineScaleInfo: DataEngineScaleInfo,
     CreateSparkSessionBatchSQLRequest: CreateSparkSessionBatchSQLRequest,
     UnbindWorkGroupsFromUserResponse: UnbindWorkGroupsFromUserResponse,
     QueryTaskCostDetailRequest: QueryTaskCostDetailRequest,
     ModifyDataEngineDescriptionResponse: ModifyDataEngineDescriptionResponse,
+    AlterDMSDatabaseResponse: AlterDMSDatabaseResponse,
     UpdateDataEngineConfigRequest: UpdateDataEngineConfigRequest,
     CreateWorkGroupRequest: CreateWorkGroupRequest,
     CreateInternalTableResponse: CreateInternalTableResponse,
     DataEngineInfo: DataEngineInfo,
     DescribeSparkAppTasksRequest: DescribeSparkAppTasksRequest,
     DescribeSubUserAccessPolicyRequest: DescribeSubUserAccessPolicyRequest,
+    AlterDMSDatabaseRequest: AlterDMSDatabaseRequest,
     CheckDataEngineImageCanBeUpgradeRequest: CheckDataEngineImageCanBeUpgradeRequest,
     SQLTask: SQLTask,
     UserMessage: UserMessage,
@@ -13190,6 +13686,7 @@ module.exports = {
     DescribeUsersResponse: DescribeUsersResponse,
     SwitchDataEngineImageRequest: SwitchDataEngineImageRequest,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    CreateDMSDatabaseRequest: CreateDMSDatabaseRequest,
     DetachWorkGroupPolicyRequest: DetachWorkGroupPolicyRequest,
     DeleteCHDFSBindingProductResponse: DeleteCHDFSBindingProductResponse,
     DescribeDataEnginePythonSparkImagesResponse: DescribeDataEnginePythonSparkImagesResponse,

@@ -1192,8 +1192,8 @@ Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
         this.ImageBase64 = null;
 
         /**
-         * Base64 value of photos used for face comparison. 
-The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+         * Base64 value of videos used for face comparison. 
+The size of videos data encoded by Base64 shall not exceed 8M, only mp4,avi,flv are supported. 
 Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
          * @type {string || null}
@@ -1209,7 +1209,7 @@ Example value: "SILENT"
         this.LivenessType = null;
 
         /**
-         * When the “LivenessType” parameter is “ACTION”, it must be specified.
+         * When the "LivenessType" parameter is "ACTION", it must be specified.
 It is used to control the action sequence. Action types: 
 1 (open mouth)
 2 (blink)
@@ -1218,7 +1218,7 @@ It is used to control the action sequence. Action types:
 Select one or two from the four actions.
 Example of passing single action parameter: "1".
 Example of passing multiple action parameters: "4,2".
-When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
+When the "LivenessType" parameter value is "SILENT", it shall be unspecified.
 Example value: ""
          * @type {string || null}
          */
@@ -3367,8 +3367,8 @@ Example value: "Success"
         this.Description = null;
 
         /**
-         * This value is valid when the “Result” parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
-This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 1,000. 
+         * This value is valid when the "Result" parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
+This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 10,000. 
 Example value: 80.00
          * @type {number || null}
          */
@@ -3376,7 +3376,7 @@ Example value: 80.00
 
         /**
          * The optimal screenshot of the video after verification is the value encoded by BASE64, jpg format. 
-Note: This field may return “null”, indicating that no valid value can be obtained. 
+Note: This field may return "null", indicating that no valid value can be obtained. 
 Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
          * @type {string || null}
          */
@@ -4706,26 +4706,26 @@ AUTO
         this.CardType = null;
 
         /**
-         * Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
+         * Base64 value for the front of the document. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding.
 The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
          * @type {string || null}
          */
         this.ImageBase64Front = null;
 
         /**
-         * Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+         * Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
          * @type {string || null}
          */
         this.ImageBase64Back = null;
 
         /**
-         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
          * @type {string || null}
          */
         this.ImageUrlFront = null;
 
         /**
-         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+         * The URL value on the back of the certificate. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
          * @type {string || null}
          */
         this.ImageUrlBack = null;

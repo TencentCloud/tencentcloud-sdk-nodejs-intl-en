@@ -1,4 +1,5 @@
 module.exports = {
+    advisor: require("./advisor"),
     ams: require("./ams"),
     antiddos: require("./antiddos"),
     apigateway: require("./apigateway"),

@@ -60,7 +60,7 @@ const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const CrontabResumeSuspendStrategy = models.CrontabResumeSuspendStrategy;
 const CreateCHDFSBindingProductRequest = models.CreateCHDFSBindingProductRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
-const VpcInfo = models.VpcInfo;
+const DropDMSTableResponse = models.DropDMSTableResponse;
 const CommonMetrics = models.CommonMetrics;
 const UserRole = models.UserRole;
 const DataEngineBasicInfo = models.DataEngineBasicInfo;
@@ -110,6 +110,7 @@ const SmartOptimizerWrittenPolicy = models.SmartOptimizerWrittenPolicy;
 const TPartition = models.TPartition;
 const DescribeForbiddenTableProRequest = models.DescribeForbiddenTableProRequest;
 const CreateDataEngineResponse = models.CreateDataEngineResponse;
+const VpcInfo = models.VpcInfo;
 const DescribeSparkAppJobsRequest = models.DescribeSparkAppJobsRequest;
 const DescribeDataEngineRequest = models.DescribeDataEngineRequest;
 const RollbackDataEngineImageResponse = models.RollbackDataEngineImageResponse;
@@ -147,6 +148,7 @@ const Users = models.Users;
 const GrantDLCCatalogAccessRequest = models.GrantDLCCatalogAccessRequest;
 const DataEngineConfigPair = models.DataEngineConfigPair;
 const SessionResourceTemplate = models.SessionResourceTemplate;
+const DropDMSTableRequest = models.DropDMSTableRequest;
 const AttachWorkGroupPolicyResponse = models.AttachWorkGroupPolicyResponse;
 const ModifyAdvancedStoreLocationResponse = models.ModifyAdvancedStoreLocationResponse;
 const DescribeSubUserAccessPolicyResponse = models.DescribeSubUserAccessPolicyResponse;
@@ -1221,6 +1223,17 @@ class DlcClient extends AbstractClient {
     ModifyDataEngineDescription(req, cb) {
         let resp = new ModifyDataEngineDescriptionResponse();
         this.request("ModifyDataEngineDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete tables in the DMS metadata module.
+     * @param {DropDMSTableRequest} req
+     * @param {function(string, DropDMSTableResponse):void} cb
+     * @public
+     */
+    DropDMSTable(req, cb) {
+        let resp = new DropDMSTableResponse();
+        this.request("DropDMSTable", req, resp, cb);
     }
 
     /**

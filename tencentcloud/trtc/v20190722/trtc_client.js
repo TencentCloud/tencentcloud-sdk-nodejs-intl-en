@@ -66,6 +66,7 @@ const McuLayoutParams = models.McuLayoutParams;
 const StartStreamIngestRequest = models.StartStreamIngestRequest;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
+const UpdateStreamIngestResponse = models.UpdateStreamIngestResponse;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
@@ -113,6 +114,7 @@ const DismissRoomResponse = models.DismissRoomResponse;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const MaxVideoUser = models.MaxVideoUser;
+const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
 const McuSeiParams = models.McuSeiParams;
 const EventMessage = models.EventMessage;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
@@ -305,6 +307,17 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     StartStreamIngest(req, cb) {
         let resp = new StartStreamIngestResponse();
         this.request("StartStreamIngest", req, resp, cb);
+    }
+
+    /**
+     * You can update the StreamUrl of the Relay task.
+     * @param {UpdateStreamIngestRequest} req
+     * @param {function(string, UpdateStreamIngestResponse):void} cb
+     * @public
+     */
+    UpdateStreamIngest(req, cb) {
+        let resp = new UpdateStreamIngestResponse();
+        this.request("UpdateStreamIngest", req, resp, cb);
     }
 
     /**

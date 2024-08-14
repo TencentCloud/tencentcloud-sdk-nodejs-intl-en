@@ -17,6 +17,99 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Authorization relationship between the member and sub-account
+ * @class
+ */
+class OrgMemberAuthAccount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Organization sub-account UIN.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OrgSubAccountUin = null;
+
+        /**
+         * Policy ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * Identity ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IdentityId = null;
+
+        /**
+         * Identity role name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IdentityRoleName = null;
+
+        /**
+         * Identity role alias.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IdentityRoleAliasName = null;
+
+        /**
+         * Creation time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Sub-account name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OrgSubAccountName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrgSubAccountUin = 'OrgSubAccountUin' in params ? params.OrgSubAccountUin : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.IdentityId = 'IdentityId' in params ? params.IdentityId : null;
+        this.IdentityRoleName = 'IdentityRoleName' in params ? params.IdentityRoleName : null;
+        this.IdentityRoleAliasName = 'IdentityRoleAliasName' in params ? params.IdentityRoleAliasName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.OrgSubAccountName = 'OrgSubAccountName' in params ? params.OrgSubAccountName : null;
+
+    }
+}
+
+/**
  * Relationship policy permission
  * @class
  */
@@ -94,222 +187,75 @@ class BindOrganizationMemberAuthAccountRequest extends  AbstractModel {
 }
 
 /**
- * CreateOrganizationMember request structure.
+ * Information on the delegated member of the organization service.
  * @class
  */
-class CreateOrganizationMemberRequest extends  AbstractModel {
+class OrganizationServiceAssignMember extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Member name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Relationship policy. Valid value: `Financial`.
-         * @type {string || null}
-         */
-        this.PolicyType = null;
-
-        /**
-         * List of member financial permission IDs. `7` indicates paying, which is the default value.
-         * @type {Array.<number> || null}
-         */
-        this.PermissionIds = null;
-
-        /**
-         * ID of the node of the member's department, which can be obtained through the `DescribeOrganizationNodes` API.
+         * Organization service ID.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.NodeId = null;
+        this.ServiceId = null;
 
         /**
-         * Account name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
+         * Organization service product name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AccountName = null;
+        this.ProductName = null;
 
         /**
-         * Remarks.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Member creation record ID, which is required during retry upon creation exception.
-         * @type {number || null}
-         */
-        this.RecordId = null;
-
-        /**
-         * Payer UIN, which is required during paying for a member.
-         * @type {string || null}
-         */
-        this.PayUin = null;
-
-        /**
-         * List of member access identity IDs, which can be obtained through the `ListOrganizationIdentity` API. `1` indicates supported, which is the default value.
-         * @type {Array.<number> || null}
-         */
-        this.IdentityRoleID = null;
-
-        /**
-         * Verified entity relationship ID, which is required during creating members for different entities.
-         * @type {number || null}
-         */
-        this.AuthRelationId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
-        this.PermissionIds = 'PermissionIds' in params ? params.PermissionIds : null;
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.AccountName = 'AccountName' in params ? params.AccountName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.PayUin = 'PayUin' in params ? params.PayUin : null;
-        this.IdentityRoleID = 'IdentityRoleID' in params ? params.IdentityRoleID : null;
-        this.AuthRelationId = 'AuthRelationId' in params ? params.AuthRelationId : null;
-
-    }
-}
-
-/**
- * Organization member
- * @class
- */
-class OrgMember extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Member UIN
+         * Uin of the delegated admin.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MemberUin = null;
 
         /**
-         * Member name
+         * Name of the delegated admin.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Name = null;
+        this.MemberName = null;
 
         /**
-         * Member type. Valid values: `Invite` (invited); `Create` (created).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MemberType = null;
-
-        /**
-         * Relationship policy type
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OrgPolicyType = null;
-
-        /**
-         * Relationship policy name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OrgPolicyName = null;
-
-        /**
-         * Relationship policy permission
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<OrgPermission> || null}
-         */
-        this.OrgPermission = null;
-
-        /**
-         * Node ID
+         * Activation status. Valid values: 0 (the service has no activation status), 1 (activated), 2 (not activated).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.NodeId = null;
+        this.UsageStatus = null;
 
         /**
-         * Node name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NodeName = null;
-
-        /**
-         * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Creation time
+         * Delegation time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time
+         * Management scope of the delegated admin. Valid values: 1 (all members), 2 (partial members).
 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.UpdateTime = null;
+        this.ManagementScope = null;
 
         /**
-         * Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.
+         * Uin list of managed members. This parameter is valid when ManagementScope is 2.
 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {Array.<MemberMainInfo> || null}
          */
-        this.IsAllowQuit = null;
+        this.ManagementScopeMembers = null;
 
         /**
-         * Payer UIN
+         * ID list of the managed departments. This parameter is valid when ManagementScope is 2.
 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {Array.<NodeMainInfo> || null}
          */
-        this.PayUin = null;
-
-        /**
-         * Payer name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PayName = null;
-
-        /**
-         * Management identity
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MemberIdentity> || null}
-         */
-        this.OrgIdentity = null;
-
-        /**
-         * Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BindStatus = null;
-
-        /**
-         * Member permission status. Valid values: `Confirmed`, `UnConfirmed`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PermissionStatus = null;
+        this.ManagementScopeNodes = null;
 
     }
 
@@ -320,39 +266,139 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.MemberType = 'MemberType' in params ? params.MemberType : null;
-        this.OrgPolicyType = 'OrgPolicyType' in params ? params.OrgPolicyType : null;
-        this.OrgPolicyName = 'OrgPolicyName' in params ? params.OrgPolicyName : null;
-
-        if (params.OrgPermission) {
-            this.OrgPermission = new Array();
-            for (let z in params.OrgPermission) {
-                let obj = new OrgPermission();
-                obj.deserialize(params.OrgPermission[z]);
-                this.OrgPermission.push(obj);
-            }
-        }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MemberName = 'MemberName' in params ? params.MemberName : null;
+        this.UsageStatus = 'UsageStatus' in params ? params.UsageStatus : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.IsAllowQuit = 'IsAllowQuit' in params ? params.IsAllowQuit : null;
-        this.PayUin = 'PayUin' in params ? params.PayUin : null;
-        this.PayName = 'PayName' in params ? params.PayName : null;
+        this.ManagementScope = 'ManagementScope' in params ? params.ManagementScope : null;
 
-        if (params.OrgIdentity) {
-            this.OrgIdentity = new Array();
-            for (let z in params.OrgIdentity) {
-                let obj = new MemberIdentity();
-                obj.deserialize(params.OrgIdentity[z]);
-                this.OrgIdentity.push(obj);
+        if (params.ManagementScopeMembers) {
+            this.ManagementScopeMembers = new Array();
+            for (let z in params.ManagementScopeMembers) {
+                let obj = new MemberMainInfo();
+                obj.deserialize(params.ManagementScopeMembers[z]);
+                this.ManagementScopeMembers.push(obj);
             }
         }
-        this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
-        this.PermissionStatus = 'PermissionStatus' in params ? params.PermissionStatus : null;
+
+        if (params.ManagementScopeNodes) {
+            this.ManagementScopeNodes = new Array();
+            for (let z in params.ManagementScopeNodes) {
+                let obj = new NodeMainInfo();
+                obj.deserialize(params.ManagementScopeNodes[z]);
+                this.ManagementScopeNodes.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteOrganizationMembers response structure.
+ * @class
+ */
+class DeleteOrganizationMembersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListOrgServiceAssignMember response structure.
+ * @class
+ */
+class ListOrgServiceAssignMemberResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total quantity.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of the delegated admins.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<OrganizationServiceAssignMember> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new OrganizationServiceAssignMember();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateOrgServiceAssign response structure.
+ * @class
+ */
+class CreateOrgServiceAssignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -395,6 +441,41 @@ class DescribeOrganizationMemberAuthIdentitiesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
+
+    }
+}
+
+/**
+ * AddOrganizationNode response structure.
+ * @class
+ */
+class AddOrganizationNodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID.
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -444,6 +525,41 @@ class CreateOrganizationMemberPolicyRequest extends  AbstractModel {
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
         this.IdentityId = 'IdentityId' in params ? params.IdentityId : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DeleteOrgServiceAssign request structure.
+ * @class
+ */
+class DeleteOrgServiceAssignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Organization service ID, which can be obtained through [ListOrganizationService](https://intl.cloud.tencent.com/document/product/850/109561?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Uin of the delegated admin.
+         * @type {number || null}
+         */
+        this.MemberUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
 
     }
 }
@@ -767,6 +883,58 @@ class DeleteOrganizationMembersRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeOrganizationMemberPolicies response structure.
+ * @class
+ */
+class DescribeOrganizationMemberPoliciesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<OrgMemberPolicy> || null}
+         */
+        this.Items = null;
+
+        /**
+         * Total number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new OrgMemberPolicy();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteOrganizationNodes request structure.
  * @class
  */
@@ -795,21 +963,15 @@ class DeleteOrganizationNodesRequest extends  AbstractModel {
 }
 
 /**
- * AddOrganizationNode response structure.
+ * DeleteOrgServiceAssign response structure.
  * @class
  */
-class AddOrganizationNodeResponse extends  AbstractModel {
+class DeleteOrgServiceAssignResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID.
-         * @type {number || null}
-         */
-        this.NodeId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -823,7 +985,6 @@ class AddOrganizationNodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1055,6 +1216,58 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ListOrganizationService response structure.
+ * @class
+ */
+class ListOrganizationServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total quantity.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Organization service list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<OrganizationServiceAssign> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new OrganizationServiceAssign();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CancelOrganizationMemberAuthAccount response structure.
  * @class
  */
@@ -1247,6 +1460,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ListOrgServiceAssignMember request structure.
+ * @class
+ */
+class ListOrgServiceAssignMemberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset. Its value must be an integer multiple of the limit. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit. Value range: 1-50. Default value: 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Organization service ID, which can be obtained through [ListOrganizationService](https://intl.cloud.tencent.com/document/product/850/109561?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ServiceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+
+    }
+}
+
+/**
  * DescribeOrganizationMemberPolicies request structure.
  * @class
  */
@@ -1291,6 +1546,62 @@ class DescribeOrganizationMemberPoliciesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+    }
+}
+
+/**
+ * CreateOrgServiceAssign request structure.
+ * @class
+ */
+class CreateOrgServiceAssignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Organization service ID, which can be obtained through [ListOrganizationService](https://intl.cloud.tencent.com/document/product/850/109561?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Uin list of the delegated admins, including up to 20 items.
+         * @type {Array.<number> || null}
+         */
+        this.MemberUins = null;
+
+        /**
+         * Management scope of the delegated admin. Valid values: 1 (all members), 2 (partial members). Default value: 1.
+         * @type {number || null}
+         */
+        this.ManagementScope = null;
+
+        /**
+         * Uin list of the managed members. This parameter is valid when ManagementScope is 2.
+         * @type {Array.<number> || null}
+         */
+        this.ManagementScopeUins = null;
+
+        /**
+         * ID list of the managed departments. This parameter is valid when ManagementScope is 2.
+         * @type {Array.<number> || null}
+         */
+        this.ManagementScopeNodeIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.MemberUins = 'MemberUins' in params ? params.MemberUins : null;
+        this.ManagementScope = 'ManagementScope' in params ? params.ManagementScope : null;
+        this.ManagementScopeUins = 'ManagementScopeUins' in params ? params.ManagementScopeUins : null;
+        this.ManagementScopeNodeIds = 'ManagementScopeNodeIds' in params ? params.ManagementScopeNodeIds : null;
 
     }
 }
@@ -1594,6 +1905,132 @@ class CancelOrganizationMemberAuthAccountRequest extends  AbstractModel {
 }
 
 /**
+ * Organization service settings.
+ * @class
+ */
+class OrganizationServiceAssign extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Organization service ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Organization service product name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Whether to support delegation. Valid values: 1 (yes), 2 (no).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsAssign = null;
+
+        /**
+         * Organization service description.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Number of the current delegated admins.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MemberNum = null;
+
+        /**
+         * Help documentation.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Document = null;
+
+        /**
+         * Console path of the organization service product.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConsoleUrl = null;
+
+        /**
+         * Whether to access the usage status. Valid values: 1 (yes), 
+ 2 (no).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsUsageStatus = null;
+
+        /**
+         * Limit for the number of delegated admins.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CanAssignCount = null;
+
+        /**
+         * Organization service product identifier.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Whether to support organization service authorization. Valid values: 1 (yes), 2 (no).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ServiceGrant = null;
+
+        /**
+         * Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GrantStatus = null;
+
+        /**
+         * Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsSetManagementScope = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.IsAssign = 'IsAssign' in params ? params.IsAssign : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.MemberNum = 'MemberNum' in params ? params.MemberNum : null;
+        this.Document = 'Document' in params ? params.Document : null;
+        this.ConsoleUrl = 'ConsoleUrl' in params ? params.ConsoleUrl : null;
+        this.IsUsageStatus = 'IsUsageStatus' in params ? params.IsUsageStatus : null;
+        this.CanAssignCount = 'CanAssignCount' in params ? params.CanAssignCount : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.ServiceGrant = 'ServiceGrant' in params ? params.ServiceGrant : null;
+        this.GrantStatus = 'GrantStatus' in params ? params.GrantStatus : null;
+        this.IsSetManagementScope = 'IsSetManagementScope' in params ? params.IsSetManagementScope : null;
+
+    }
+}
+
+/**
  * DeleteOrganizationNodes response structure.
  * @class
  */
@@ -1674,75 +2111,131 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Authorization relationship between the member and sub-account
+ * Organization member
  * @class
  */
-class OrgMemberAuthAccount extends  AbstractModel {
+class OrgMember extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Organization sub-account UIN.
+         * Member UIN
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.OrgSubAccountUin = null;
+        this.MemberUin = null;
 
         /**
-         * Policy ID.
+         * Member name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Member type. Valid values: `Invite` (invited); `Create` (created).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MemberType = null;
+
+        /**
+         * Relationship policy type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OrgPolicyType = null;
+
+        /**
+         * Relationship policy name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OrgPolicyName = null;
+
+        /**
+         * Relationship policy permission
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<OrgPermission> || null}
+         */
+        this.OrgPermission = null;
+
+        /**
+         * Node ID
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.PolicyId = null;
+        this.NodeId = null;
 
         /**
-         * Policy name.
+         * Node name
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.PolicyName = null;
+        this.NodeName = null;
 
         /**
-         * Identity ID.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IdentityId = null;
-
-        /**
-         * Identity role name.
+         * Remarks
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.IdentityRoleName = null;
+        this.Remark = null;
 
         /**
-         * Identity role alias.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IdentityRoleAliasName = null;
-
-        /**
-         * Creation time.
+         * Creation time
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time.
+         * Update time
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Sub-account name
+         * Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.OrgSubAccountName = null;
+        this.IsAllowQuit = null;
+
+        /**
+         * Payer UIN
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PayUin = null;
+
+        /**
+         * Payer name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PayName = null;
+
+        /**
+         * Management identity
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MemberIdentity> || null}
+         */
+        this.OrgIdentity = null;
+
+        /**
+         * Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BindStatus = null;
+
+        /**
+         * Member permission status. Valid values: `Confirmed`, `UnConfirmed`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PermissionStatus = null;
 
     }
 
@@ -1753,15 +2246,39 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.OrgSubAccountUin = 'OrgSubAccountUin' in params ? params.OrgSubAccountUin : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
-        this.IdentityId = 'IdentityId' in params ? params.IdentityId : null;
-        this.IdentityRoleName = 'IdentityRoleName' in params ? params.IdentityRoleName : null;
-        this.IdentityRoleAliasName = 'IdentityRoleAliasName' in params ? params.IdentityRoleAliasName : null;
+        this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MemberType = 'MemberType' in params ? params.MemberType : null;
+        this.OrgPolicyType = 'OrgPolicyType' in params ? params.OrgPolicyType : null;
+        this.OrgPolicyName = 'OrgPolicyName' in params ? params.OrgPolicyName : null;
+
+        if (params.OrgPermission) {
+            this.OrgPermission = new Array();
+            for (let z in params.OrgPermission) {
+                let obj = new OrgPermission();
+                obj.deserialize(params.OrgPermission[z]);
+                this.OrgPermission.push(obj);
+            }
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.OrgSubAccountName = 'OrgSubAccountName' in params ? params.OrgSubAccountName : null;
+        this.IsAllowQuit = 'IsAllowQuit' in params ? params.IsAllowQuit : null;
+        this.PayUin = 'PayUin' in params ? params.PayUin : null;
+        this.PayName = 'PayName' in params ? params.PayName : null;
+
+        if (params.OrgIdentity) {
+            this.OrgIdentity = new Array();
+            for (let z in params.OrgIdentity) {
+                let obj = new MemberIdentity();
+                obj.deserialize(params.OrgIdentity[z]);
+                this.OrgIdentity.push(obj);
+            }
+        }
+        this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
+        this.PermissionStatus = 'PermissionStatus' in params ? params.PermissionStatus : null;
 
     }
 }
@@ -1844,32 +2361,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeOrganizationMemberPolicies response structure.
+ * Main member information.
  * @class
  */
-class DescribeOrganizationMemberPoliciesResponse extends  AbstractModel {
+class MemberMainInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<OrgMemberPolicy> || null}
-         */
-        this.Items = null;
-
-        /**
-         * Total number.
+         * Member UIN
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Total = null;
+        this.MemberUin = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Member name j.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.MemberName = null;
 
     }
 
@@ -1880,17 +2391,99 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
+        this.MemberName = 'MemberName' in params ? params.MemberName : null;
 
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new OrgMemberPolicy();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
+    }
+}
+
+/**
+ * CreateOrganizationMember request structure.
+ * @class
+ */
+class CreateOrganizationMemberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Member name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Relationship policy. Valid value: `Financial`.
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * List of member financial permission IDs. `7` indicates paying, which is the default value.
+         * @type {Array.<number> || null}
+         */
+        this.PermissionIds = null;
+
+        /**
+         * ID of the node of the member's department, which can be obtained through the `DescribeOrganizationNodes` API.
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Account name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Member creation record ID, which is required during retry upon creation exception.
+         * @type {number || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * Payer UIN, which is required during paying for a member.
+         * @type {string || null}
+         */
+        this.PayUin = null;
+
+        /**
+         * List of member access identity IDs, which can be obtained through the `ListOrganizationIdentity` API. `1` indicates supported, which is the default value.
+         * @type {Array.<number> || null}
+         */
+        this.IdentityRoleID = null;
+
+        /**
+         * Verified entity relationship ID, which is required during creating members for different entities.
+         * @type {number || null}
+         */
+        this.AuthRelationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PermissionIds = 'PermissionIds' in params ? params.PermissionIds : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.PayUin = 'PayUin' in params ? params.PayUin : null;
+        this.IdentityRoleID = 'IdentityRoleID' in params ? params.IdentityRoleID : null;
+        this.AuthRelationId = 'AuthRelationId' in params ? params.AuthRelationId : null;
 
     }
 }
@@ -2036,6 +2629,48 @@ class DescribeOrganizationMembersRequest extends  AbstractModel {
 }
 
 /**
+ * ListOrganizationService request structure.
+ * @class
+ */
+class ListOrganizationServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset. Its value must be an integer multiple of the limit. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit. Value range: 1-50. Default value: 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Keyword for search by name.
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+    }
+}
+
+/**
  * UpdateOrganizationNode request structure.
  * @class
  */
@@ -2147,18 +2782,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteOrganizationMembers response structure.
+ * Main department information.
  * @class
  */
-class DeleteOrganizationMembersResponse extends  AbstractModel {
+class NodeMainInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Department ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Department name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NodeName = null;
 
     }
 
@@ -2169,18 +2812,24 @@ class DeleteOrganizationMembersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
 
     }
 }
 
 module.exports = {
+    OrgMemberAuthAccount: OrgMemberAuthAccount,
     OrgPermission: OrgPermission,
     BindOrganizationMemberAuthAccountRequest: BindOrganizationMemberAuthAccountRequest,
-    CreateOrganizationMemberRequest: CreateOrganizationMemberRequest,
-    OrgMember: OrgMember,
+    OrganizationServiceAssignMember: OrganizationServiceAssignMember,
+    DeleteOrganizationMembersResponse: DeleteOrganizationMembersResponse,
+    ListOrgServiceAssignMemberResponse: ListOrgServiceAssignMemberResponse,
+    CreateOrgServiceAssignResponse: CreateOrgServiceAssignResponse,
     DescribeOrganizationMemberAuthIdentitiesRequest: DescribeOrganizationMemberAuthIdentitiesRequest,
+    AddOrganizationNodeResponse: AddOrganizationNodeResponse,
     CreateOrganizationMemberPolicyRequest: CreateOrganizationMemberPolicyRequest,
+    DeleteOrgServiceAssignRequest: DeleteOrgServiceAssignRequest,
     DescribeOrganizationRequest: DescribeOrganizationRequest,
     DescribeOrganizationNodesRequest: DescribeOrganizationNodesRequest,
     BindOrganizationMemberAuthAccountResponse: BindOrganizationMemberAuthAccountResponse,
@@ -2190,31 +2839,38 @@ module.exports = {
     MemberIdentity: MemberIdentity,
     MoveOrganizationNodeMembersResponse: MoveOrganizationNodeMembersResponse,
     DeleteOrganizationMembersRequest: DeleteOrganizationMembersRequest,
+    DescribeOrganizationMemberPoliciesResponse: DescribeOrganizationMemberPoliciesResponse,
     DeleteOrganizationNodesRequest: DeleteOrganizationNodesRequest,
-    AddOrganizationNodeResponse: AddOrganizationNodeResponse,
+    DeleteOrgServiceAssignResponse: DeleteOrgServiceAssignResponse,
     IdentityPolicy: IdentityPolicy,
     ListOrganizationIdentityResponse: ListOrganizationIdentityResponse,
     DescribeOrganizationNodesResponse: DescribeOrganizationNodesResponse,
     DescribeOrganizationMembersResponse: DescribeOrganizationMembersResponse,
     CreateOrganizationMemberPolicyResponse: CreateOrganizationMemberPolicyResponse,
+    ListOrganizationServiceResponse: ListOrganizationServiceResponse,
     CancelOrganizationMemberAuthAccountResponse: CancelOrganizationMemberAuthAccountResponse,
     DescribeOrganizationResponse: DescribeOrganizationResponse,
+    ListOrgServiceAssignMemberRequest: ListOrgServiceAssignMemberRequest,
     DescribeOrganizationMemberPoliciesRequest: DescribeOrganizationMemberPoliciesRequest,
+    CreateOrgServiceAssignRequest: CreateOrgServiceAssignRequest,
     AddOrganizationNodeRequest: AddOrganizationNodeRequest,
     DescribeOrganizationMemberAuthIdentitiesResponse: DescribeOrganizationMemberAuthIdentitiesResponse,
     OrgMemberPolicy: OrgMemberPolicy,
     UpdateOrganizationNodeResponse: UpdateOrganizationNodeResponse,
     DescribeOrganizationMemberAuthAccountsRequest: DescribeOrganizationMemberAuthAccountsRequest,
     CancelOrganizationMemberAuthAccountRequest: CancelOrganizationMemberAuthAccountRequest,
+    OrganizationServiceAssign: OrganizationServiceAssign,
     DeleteOrganizationNodesResponse: DeleteOrganizationNodesResponse,
     DescribeOrganizationMemberAuthAccountsResponse: DescribeOrganizationMemberAuthAccountsResponse,
-    OrgMemberAuthAccount: OrgMemberAuthAccount,
+    OrgMember: OrgMember,
     OrgMemberAuthIdentity: OrgMemberAuthIdentity,
-    DescribeOrganizationMemberPoliciesResponse: DescribeOrganizationMemberPoliciesResponse,
+    MemberMainInfo: MemberMainInfo,
+    CreateOrganizationMemberRequest: CreateOrganizationMemberRequest,
     OrgIdentity: OrgIdentity,
     DescribeOrganizationMembersRequest: DescribeOrganizationMembersRequest,
+    ListOrganizationServiceRequest: ListOrganizationServiceRequest,
     UpdateOrganizationNodeRequest: UpdateOrganizationNodeRequest,
     OrgNode: OrgNode,
-    DeleteOrganizationMembersResponse: DeleteOrganizationMembersResponse,
+    NodeMainInfo: NodeMainInfo,
 
 }

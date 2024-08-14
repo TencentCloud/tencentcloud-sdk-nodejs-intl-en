@@ -16,12 +16,17 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const OrgMemberAuthAccount = models.OrgMemberAuthAccount;
 const OrgPermission = models.OrgPermission;
 const BindOrganizationMemberAuthAccountRequest = models.BindOrganizationMemberAuthAccountRequest;
-const CreateOrganizationMemberRequest = models.CreateOrganizationMemberRequest;
-const OrgMember = models.OrgMember;
+const OrganizationServiceAssignMember = models.OrganizationServiceAssignMember;
+const DeleteOrganizationMembersResponse = models.DeleteOrganizationMembersResponse;
+const ListOrgServiceAssignMemberResponse = models.ListOrgServiceAssignMemberResponse;
+const CreateOrgServiceAssignResponse = models.CreateOrgServiceAssignResponse;
 const DescribeOrganizationMemberAuthIdentitiesRequest = models.DescribeOrganizationMemberAuthIdentitiesRequest;
+const AddOrganizationNodeResponse = models.AddOrganizationNodeResponse;
 const CreateOrganizationMemberPolicyRequest = models.CreateOrganizationMemberPolicyRequest;
+const DeleteOrgServiceAssignRequest = models.DeleteOrgServiceAssignRequest;
 const DescribeOrganizationRequest = models.DescribeOrganizationRequest;
 const DescribeOrganizationNodesRequest = models.DescribeOrganizationNodesRequest;
 const BindOrganizationMemberAuthAccountResponse = models.BindOrganizationMemberAuthAccountResponse;
@@ -31,32 +36,39 @@ const ListOrganizationIdentityRequest = models.ListOrganizationIdentityRequest;
 const MemberIdentity = models.MemberIdentity;
 const MoveOrganizationNodeMembersResponse = models.MoveOrganizationNodeMembersResponse;
 const DeleteOrganizationMembersRequest = models.DeleteOrganizationMembersRequest;
+const DescribeOrganizationMemberPoliciesResponse = models.DescribeOrganizationMemberPoliciesResponse;
 const DeleteOrganizationNodesRequest = models.DeleteOrganizationNodesRequest;
-const AddOrganizationNodeResponse = models.AddOrganizationNodeResponse;
+const DeleteOrgServiceAssignResponse = models.DeleteOrgServiceAssignResponse;
 const IdentityPolicy = models.IdentityPolicy;
 const ListOrganizationIdentityResponse = models.ListOrganizationIdentityResponse;
 const DescribeOrganizationNodesResponse = models.DescribeOrganizationNodesResponse;
 const DescribeOrganizationMembersResponse = models.DescribeOrganizationMembersResponse;
 const CreateOrganizationMemberPolicyResponse = models.CreateOrganizationMemberPolicyResponse;
+const ListOrganizationServiceResponse = models.ListOrganizationServiceResponse;
 const CancelOrganizationMemberAuthAccountResponse = models.CancelOrganizationMemberAuthAccountResponse;
 const DescribeOrganizationResponse = models.DescribeOrganizationResponse;
+const ListOrgServiceAssignMemberRequest = models.ListOrgServiceAssignMemberRequest;
 const DescribeOrganizationMemberPoliciesRequest = models.DescribeOrganizationMemberPoliciesRequest;
+const CreateOrgServiceAssignRequest = models.CreateOrgServiceAssignRequest;
 const AddOrganizationNodeRequest = models.AddOrganizationNodeRequest;
 const DescribeOrganizationMemberAuthIdentitiesResponse = models.DescribeOrganizationMemberAuthIdentitiesResponse;
 const OrgMemberPolicy = models.OrgMemberPolicy;
 const UpdateOrganizationNodeResponse = models.UpdateOrganizationNodeResponse;
 const DescribeOrganizationMemberAuthAccountsRequest = models.DescribeOrganizationMemberAuthAccountsRequest;
 const CancelOrganizationMemberAuthAccountRequest = models.CancelOrganizationMemberAuthAccountRequest;
+const OrganizationServiceAssign = models.OrganizationServiceAssign;
 const DeleteOrganizationNodesResponse = models.DeleteOrganizationNodesResponse;
 const DescribeOrganizationMemberAuthAccountsResponse = models.DescribeOrganizationMemberAuthAccountsResponse;
-const OrgMemberAuthAccount = models.OrgMemberAuthAccount;
+const OrgMember = models.OrgMember;
 const OrgMemberAuthIdentity = models.OrgMemberAuthIdentity;
-const DescribeOrganizationMemberPoliciesResponse = models.DescribeOrganizationMemberPoliciesResponse;
+const MemberMainInfo = models.MemberMainInfo;
+const CreateOrganizationMemberRequest = models.CreateOrganizationMemberRequest;
 const OrgIdentity = models.OrgIdentity;
 const DescribeOrganizationMembersRequest = models.DescribeOrganizationMembersRequest;
+const ListOrganizationServiceRequest = models.ListOrganizationServiceRequest;
 const UpdateOrganizationNodeRequest = models.UpdateOrganizationNodeRequest;
 const OrgNode = models.OrgNode;
-const DeleteOrganizationMembersResponse = models.DeleteOrganizationMembersResponse;
+const NodeMainInfo = models.NodeMainInfo;
 
 
 /**
@@ -125,6 +137,39 @@ class OrganizationClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a delegated admin of the organization service.
+     * @param {DeleteOrgServiceAssignRequest} req
+     * @param {function(string, DeleteOrgServiceAssignResponse):void} cb
+     * @public
+     */
+    DeleteOrgServiceAssign(req, cb) {
+        let resp = new DeleteOrgServiceAssignResponse();
+        this.request("DeleteOrgServiceAssign", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of organization service settings.
+     * @param {ListOrganizationServiceRequest} req
+     * @param {function(string, ListOrganizationServiceResponse):void} cb
+     * @public
+     */
+    ListOrganizationService(req, cb) {
+        let resp = new ListOrganizationServiceResponse();
+        this.request("ListOrganizationService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of delegated admins of the organization service.
+     * @param {ListOrgServiceAssignMemberRequest} req
+     * @param {function(string, ListOrgServiceAssignMemberResponse):void} cb
+     * @public
+     */
+    ListOrgServiceAssignMember(req, cb) {
+        let resp = new ListOrgServiceAssignMemberResponse();
+        this.request("ListOrgServiceAssignMember", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of sub-accounts bound to an organization member.
      * @param {DescribeOrganizationMemberAuthAccountsRequest} req
      * @param {function(string, DescribeOrganizationMemberAuthAccountsResponse):void} cb
@@ -159,14 +204,14 @@ class OrganizationClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the organization information.
-     * @param {DescribeOrganizationRequest} req
-     * @param {function(string, DescribeOrganizationResponse):void} cb
+     * This API is used to add a delegated admin of the organization service.
+     * @param {CreateOrgServiceAssignRequest} req
+     * @param {function(string, CreateOrgServiceAssignResponse):void} cb
      * @public
      */
-    DescribeOrganization(req, cb) {
-        let resp = new DescribeOrganizationResponse();
-        this.request("DescribeOrganization", req, resp, cb);
+    CreateOrgServiceAssign(req, cb) {
+        let resp = new CreateOrgServiceAssignResponse();
+        this.request("CreateOrgServiceAssign", req, resp, cb);
     }
 
     /**
@@ -200,6 +245,17 @@ class OrganizationClient extends AbstractClient {
     DescribeOrganizationMemberPolicies(req, cb) {
         let resp = new DescribeOrganizationMemberPoliciesResponse();
         this.request("DescribeOrganizationMemberPolicies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the organization information.
+     * @param {DescribeOrganizationRequest} req
+     * @param {function(string, DescribeOrganizationResponse):void} cb
+     * @public
+     */
+    DescribeOrganization(req, cb) {
+        let resp = new DescribeOrganizationResponse();
+        this.request("DescribeOrganization", req, resp, cb);
     }
 
     /**

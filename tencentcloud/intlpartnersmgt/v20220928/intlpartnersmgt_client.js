@@ -60,10 +60,11 @@ const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
+const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
 const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
-const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
@@ -78,6 +79,7 @@ const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
+const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
@@ -184,6 +186,17 @@ class IntlpartnersmgtClient extends AbstractClient {
     QueryVoucherListByUin(req, cb) {
         let resp = new QueryVoucherListByUinResponse();
         this.request("QueryVoucherListByUin", req, resp, cb);
+    }
+
+    /**
+     * This API is used to allocate credit pools to second-level resellers by distributors.
+     * @param {AllocateCreditPoolRequest} req
+     * @param {function(string, AllocateCreditPoolResponse):void} cb
+     * @public
+     */
+    AllocateCreditPool(req, cb) {
+        let resp = new AllocateCreditPoolResponse();
+        this.request("AllocateCreditPool", req, resp, cb);
     }
 
     /**
@@ -308,14 +321,14 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the account verification status.
-     * @param {QueryAccountVerificationStatusRequest} req
-     * @param {function(string, QueryAccountVerificationStatusResponse):void} cb
+     * This API is used to query the voucher quota based on the customer UIN.
+     * @param {QueryVoucherAmountByUinRequest} req
+     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
      * @public
      */
-    QueryAccountVerificationStatus(req, cb) {
-        let resp = new QueryAccountVerificationStatusResponse();
-        this.request("QueryAccountVerificationStatus", req, resp, cb);
+    QueryVoucherAmountByUin(req, cb) {
+        let resp = new QueryVoucherAmountByUinResponse();
+        this.request("QueryVoucherAmountByUin", req, resp, cb);
     }
 
     /**
@@ -330,14 +343,14 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the voucher quota based on the customer UIN.
-     * @param {QueryVoucherAmountByUinRequest} req
-     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
+     * This API is used to query the account verification status.
+     * @param {QueryAccountVerificationStatusRequest} req
+     * @param {function(string, QueryAccountVerificationStatusResponse):void} cb
      * @public
      */
-    QueryVoucherAmountByUin(req, cb) {
-        let resp = new QueryVoucherAmountByUinResponse();
-        this.request("QueryVoucherAmountByUin", req, resp, cb);
+    QueryAccountVerificationStatus(req, cb) {
+        let resp = new QueryAccountVerificationStatusResponse();
+        this.request("QueryAccountVerificationStatus", req, resp, cb);
     }
 
     /**

@@ -1911,6 +1911,41 @@ class DescribeStreamLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
+ * Caption selector.
+ * @class
+ */
+class CaptionSelector extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Caption selector name, which can contain 1-32 letters, digits, and underscores.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Caption source type, only support `SCTE-128`.
+         * @type {string || null}
+         */
+        this.CaptionSourceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CaptionSourceType = 'CaptionSourceType' in params ? params.CaptionSourceType : null;
+
+    }
+}
+
+/**
  * DRM configuration information, which takes effect only for HLS and DASH.
  * @class
  */
@@ -2433,6 +2468,12 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.FailOverSettings = null;
 
+        /**
+         * Caption selector for the input. There can be 0 to 1 audio selectors.
+         * @type {Array.<CaptionSelector> || null}
+         */
+        this.CaptionSelectors = null;
+
     }
 
     /**
@@ -2458,6 +2499,15 @@ Note: this field may return `null`, indicating that no valid value was found.
             let obj = new FailOverSettings();
             obj.deserialize(params.FailOverSettings)
             this.FailOverSettings = obj;
+        }
+
+        if (params.CaptionSelectors) {
+            this.CaptionSelectors = new Array();
+            for (let z in params.CaptionSelectors) {
+                let obj = new CaptionSelector();
+                obj.deserialize(params.CaptionSelectors[z]);
+                this.CaptionSelectors.push(obj);
+            }
         }
 
     }
@@ -4519,51 +4569,57 @@ class SubtitleConf extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Optional values: INPUT (source subtitle information), ANALYSIS (intelligent speech recognition to subtitles, currently only supports this option).
+         * Name of caption selector. Required when CaptionSource selects `INPUT`.
+         * @type {string || null}
+         */
+        this.CaptionSelectorName = null;
+
+        /**
+         * Optional values: INPUT (source subtitle information), ANALYSIS (intelligent speech recognition to subtitles).
          * @type {string || null}
          */
         this.CaptionSource = null;
 
         /**
-         * Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language).
+         * Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language). Required when CaptionSource selects `ANALYSIS `.
          * @type {number || null}
          */
         this.ContentType = null;
 
         /**
-         * Output mode: 1 Burn in (currently only this option is supported).
+         * Output mode: 1 Burn in, 2 Embedded. Support `2` when CaptionSource selects `INPUT`. Support `1` when CaptionSource selects `ANALYSIS `.
          * @type {number || null}
          */
         this.TargetType = null;
 
         /**
          * Original phonetic language.
-Optional values: Chinese, English, Japanese, Korean.
+Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource selects `ANALYSIS `.
          * @type {string || null}
          */
         this.SourceLanguage = null;
 
         /**
          * Target language.
-Optional values: Chinese, English, Japanese, Korean.
+Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource selects `ANALYSIS `.
          * @type {string || null}
          */
         this.TargetLanguage = null;
 
         /**
-         * Font style configuration.
+         * Font style configuration. Required when CaptionSource selects `ANALYSIS `.
          * @type {SubtitleFontConf || null}
          */
         this.FontStyle = null;
 
         /**
-         * There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY.
+         * There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY. Required when CaptionSource selects `ANALYSIS `.
          * @type {string || null}
          */
         this.StateEffectMode = null;
 
         /**
-         * Steady-state delay time, unit seconds; optional values: 10, 20, default 10.
+         * Steady-state delay time, unit seconds; optional values: 10, 20, default 10. Required when CaptionSource selects `ANALYSIS `.
          * @type {number || null}
          */
         this.SteadyStateDelayedTime = null;
@@ -4578,6 +4634,7 @@ Optional values: Chinese, English, Japanese, Korean.
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.CaptionSelectorName = 'CaptionSelectorName' in params ? params.CaptionSelectorName : null;
         this.CaptionSource = 'CaptionSource' in params ? params.CaptionSource : null;
         this.ContentType = 'ContentType' in params ? params.ContentType : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
@@ -7506,42 +7563,12 @@ class DescribeTextSettings extends  AbstractModel {
 }
 
 /**
- * Watermark image settings
+ * DescribeStreamLiveInputSecurityGroups request structure.
  * @class
  */
-class DescribeImageSettings extends  AbstractModel {
+class DescribeStreamLiveInputSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Origin
-         * @type {string || null}
-         */
-        this.Location = null;
-
-        /**
-         * The watermark image’s horizontal distance from the origin as a percentage of the video width
-         * @type {number || null}
-         */
-        this.XPos = null;
-
-        /**
-         * The watermark image’s vertical distance from the origin as a percentage of the video height
-         * @type {number || null}
-         */
-        this.YPos = null;
-
-        /**
-         * The watermark image’s width as a percentage of the video width
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * The watermark image’s height as a percentage of the video height
-         * @type {number || null}
-         */
-        this.Height = null;
 
     }
 
@@ -7552,11 +7579,6 @@ class DescribeImageSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Location = 'Location' in params ? params.Location : null;
-        this.XPos = 'XPos' in params ? params.XPos : null;
-        this.YPos = 'YPos' in params ? params.YPos : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -8092,12 +8114,42 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * DescribeStreamLiveInputSecurityGroups request structure.
+ * Watermark image settings
  * @class
  */
-class DescribeStreamLiveInputSecurityGroupsRequest extends  AbstractModel {
+class DescribeImageSettings extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Origin
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * The watermark image’s horizontal distance from the origin as a percentage of the video width
+         * @type {number || null}
+         */
+        this.XPos = null;
+
+        /**
+         * The watermark image’s vertical distance from the origin as a percentage of the video height
+         * @type {number || null}
+         */
+        this.YPos = null;
+
+        /**
+         * The watermark image’s width as a percentage of the video width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The watermark image’s height as a percentage of the video height
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -8108,6 +8160,11 @@ class DescribeStreamLiveInputSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Location = 'Location' in params ? params.Location : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -8176,6 +8233,7 @@ module.exports = {
     AudioSelectorInfo: AudioSelectorInfo,
     LogInfo: LogInfo,
     DescribeStreamLiveWatermarkRequest: DescribeStreamLiveWatermarkRequest,
+    CaptionSelector: CaptionSelector,
     DrmSettingsInfo: DrmSettingsInfo,
     PipelineOutputStatistics: PipelineOutputStatistics,
     DeleteStreamLivePlanResponse: DeleteStreamLivePlanResponse,
@@ -8282,14 +8340,14 @@ module.exports = {
     ModifyStreamLiveWatermarkResponse: ModifyStreamLiveWatermarkResponse,
     DescribeMediaLiveHighlightResultRequest: DescribeMediaLiveHighlightResultRequest,
     DescribeTextSettings: DescribeTextSettings,
-    DescribeImageSettings: DescribeImageSettings,
+    DescribeStreamLiveInputSecurityGroupsRequest: DescribeStreamLiveInputSecurityGroupsRequest,
     DeleteStreamLiveWatermarkResponse: DeleteStreamLiveWatermarkResponse,
     CreateStreamLiveInputResponse: CreateStreamLiveInputResponse,
     DescribeStreamLiveInputSecurityGroupResponse: DescribeStreamLiveInputSecurityGroupResponse,
     StreamLiveChannelInfo: StreamLiveChannelInfo,
     SegmentationDescriptorInfo: SegmentationDescriptorInfo,
     InputSettingInfo: InputSettingInfo,
-    DescribeStreamLiveInputSecurityGroupsRequest: DescribeStreamLiveInputSecurityGroupsRequest,
+    DescribeImageSettings: DescribeImageSettings,
     DeleteStreamLiveChannelRequest: DeleteStreamLiveChannelRequest,
 
 }

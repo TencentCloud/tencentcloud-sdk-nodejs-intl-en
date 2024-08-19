@@ -51,6 +51,7 @@ const DescribeStreamLiveChannelAlertsRequest = models.DescribeStreamLiveChannelA
 const AudioSelectorInfo = models.AudioSelectorInfo;
 const LogInfo = models.LogInfo;
 const DescribeStreamLiveWatermarkRequest = models.DescribeStreamLiveWatermarkRequest;
+const CaptionSelector = models.CaptionSelector;
 const DrmSettingsInfo = models.DrmSettingsInfo;
 const PipelineOutputStatistics = models.PipelineOutputStatistics;
 const DeleteStreamLivePlanResponse = models.DeleteStreamLivePlanResponse;
@@ -157,14 +158,14 @@ const Scte35SettingsInfo = models.Scte35SettingsInfo;
 const ModifyStreamLiveWatermarkResponse = models.ModifyStreamLiveWatermarkResponse;
 const DescribeMediaLiveHighlightResultRequest = models.DescribeMediaLiveHighlightResultRequest;
 const DescribeTextSettings = models.DescribeTextSettings;
-const DescribeImageSettings = models.DescribeImageSettings;
+const DescribeStreamLiveInputSecurityGroupsRequest = models.DescribeStreamLiveInputSecurityGroupsRequest;
 const DeleteStreamLiveWatermarkResponse = models.DeleteStreamLiveWatermarkResponse;
 const CreateStreamLiveInputResponse = models.CreateStreamLiveInputResponse;
 const DescribeStreamLiveInputSecurityGroupResponse = models.DescribeStreamLiveInputSecurityGroupResponse;
 const StreamLiveChannelInfo = models.StreamLiveChannelInfo;
 const SegmentationDescriptorInfo = models.SegmentationDescriptorInfo;
 const InputSettingInfo = models.InputSettingInfo;
-const DescribeStreamLiveInputSecurityGroupsRequest = models.DescribeStreamLiveInputSecurityGroupsRequest;
+const DescribeImageSettings = models.DescribeImageSettings;
 const DeleteStreamLiveChannelRequest = models.DeleteStreamLiveChannelRequest;
 
 

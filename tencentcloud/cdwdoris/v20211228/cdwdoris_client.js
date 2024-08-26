@@ -16,52 +16,184 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyInstanceResponse = models.ModifyInstanceResponse;
-const DestroyInstanceResponse = models.DestroyInstanceResponse;
-const DescribeSlowQueryRecordsDownloadRequest = models.DescribeSlowQueryRecordsDownloadRequest;
-const ResizeDiskRequest = models.ResizeDiskRequest;
-const NodeInfo = models.NodeInfo;
-const RestartClusterForNodeResponse = models.RestartClusterForNodeResponse;
-const DescribeInstanceNodesResponse = models.DescribeInstanceNodesResponse;
+const UpdateDatabaseRequest = models.UpdateDatabaseRequest;
+const DescribeInstanceUsedSubnetsResponse = models.DescribeInstanceUsedSubnetsResponse;
+const CreateInstanceNewResponse = models.CreateInstanceNewResponse;
 const DescribeInstanceStateRequest = models.DescribeInstanceStateRequest;
+const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
 const DescribeClusterConfigsResponse = models.DescribeClusterConfigsResponse;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
-const SlowQueryRecord = models.SlowQueryRecord;
-const DescribeInstanceNodesRequest = models.DescribeInstanceNodesRequest;
-const ModifyInstanceRequest = models.ModifyInstanceRequest;
-const ChargeProperties = models.ChargeProperties;
-const ClusterConfigsInfoFromEMR = models.ClusterConfigsInfoFromEMR;
-const InstanceNode = models.InstanceNode;
-const CreateInstanceNewResponse = models.CreateInstanceNewResponse;
+const ModifyNodeStatusResponse = models.ModifyNodeStatusResponse;
+const ModifyUserPrivilegesV3Response = models.ModifyUserPrivilegesV3Response;
+const UpdateTableSchemaResponse = models.UpdateTableSchemaResponse;
+const ModifyUserPrivilegesV3Request = models.ModifyUserPrivilegesV3Request;
+const ExecuteSelectQueryResponse = models.ExecuteSelectQueryResponse;
+const BindUser = models.BindUser;
+const CancelBackupJobRequest = models.CancelBackupJobRequest;
+const ModifyWorkloadGroupRequest = models.ModifyWorkloadGroupRequest;
+const UserWorkloadGroup = models.UserWorkloadGroup;
 const DescribeSlowQueryRecordsDownloadResponse = models.DescribeSlowQueryRecordsDownloadResponse;
-const DestroyInstanceRequest = models.DestroyInstanceRequest;
-const CreateInstanceNewRequest = models.CreateInstanceNewRequest;
-const InstanceInfo = models.InstanceInfo;
+const DeleteWorkloadGroupRequest = models.DeleteWorkloadGroupRequest;
+const WorkloadGroupConfig = models.WorkloadGroupConfig;
+const DescribeInstanceOperationHistoryResponse = models.DescribeInstanceOperationHistoryResponse;
+const InsertDatasToTableRequest = models.InsertDatasToTableRequest;
+const ModifyDatabaseTableAccessRequest = models.ModifyDatabaseTableAccessRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const DescribeSlowQueryRecordsRequest = models.DescribeSlowQueryRecordsRequest;
-const DescribeClusterConfigsRequest = models.DescribeClusterConfigsRequest;
-const ResizeDiskResponse = models.ResizeDiskResponse;
-const AttachCBSSpec = models.AttachCBSSpec;
-const DataBaseAuditRecord = models.DataBaseAuditRecord;
+const CosSourceInfo = models.CosSourceInfo;
+const ReduceInstanceResponse = models.ReduceInstanceResponse;
+const DescribeBackUpTaskDetailRequest = models.DescribeBackUpTaskDetailRequest;
+const RecoverBackUpJobRequest = models.RecoverBackUpJobRequest;
+const DiskSpec = models.DiskSpec;
+const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
+const DescribeUserBindWorkloadGroupResponse = models.DescribeUserBindWorkloadGroupResponse;
 const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
-const DescribeSlowQueryRecordsResponse = models.DescribeSlowQueryRecordsResponse;
-const DescribeDatabaseAuditRecordsResponse = models.DescribeDatabaseAuditRecordsResponse;
-const DescribeInstanceResponse = models.DescribeInstanceResponse;
-const RestartClusterForNodeRequest = models.RestartClusterForNodeRequest;
-const ScaleUpInstanceRequest = models.ScaleUpInstanceRequest;
-const NodesSummary = models.NodesSummary;
+const UpdateUserPrivileges = models.UpdateUserPrivileges;
+const DescribeQueryAnalyseRequest = models.DescribeQueryAnalyseRequest;
+const DescribeClusterConfigsHistoryResponse = models.DescribeClusterConfigsHistoryResponse;
 const NetworkInfo = models.NetworkInfo;
-const CreateInstanceSpec = models.CreateInstanceSpec;
-const SearchTags = models.SearchTags;
-const DescribeInstanceRequest = models.DescribeInstanceRequest;
+const ZoneInfo = models.ZoneInfo;
+const DescribeRestoreTaskDetailResponse = models.DescribeRestoreTaskDetailResponse;
+const DeleteBackUpDataRequest = models.DeleteBackUpDataRequest;
+const ExecuteParametrizedQueryResponse = models.ExecuteParametrizedQueryResponse;
+const CreateDatabaseRequest = models.CreateDatabaseRequest;
 const ConfigKeyValue = models.ConfigKeyValue;
 const Tag = models.Tag;
+const ResizeDiskResponse = models.ResizeDiskResponse;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const DescribeSlowQueryRecordsDownloadRequest = models.DescribeSlowQueryRecordsDownloadRequest;
+const DescribeAreaRegionResponse = models.DescribeAreaRegionResponse;
+const DescribeUserPolicyResponse = models.DescribeUserPolicyResponse;
+const ModifyNodeStatusRequest = models.ModifyNodeStatusRequest;
+const RestartClusterForNodeResponse = models.RestartClusterForNodeResponse;
+const UpdateTableSchemaRequest = models.UpdateTableSchemaRequest;
+const CancelBackupJobResponse = models.CancelBackupJobResponse;
+const DescribeAreaRegionRequest = models.DescribeAreaRegionRequest;
+const SlowQueryRecord = models.SlowQueryRecord;
+const DescribeInstanceNodesRequest = models.DescribeInstanceNodesRequest;
+const ChargeProperties = models.ChargeProperties;
+const DescribeWorkloadGroupRequest = models.DescribeWorkloadGroupRequest;
+const InstanceOperation = models.InstanceOperation;
+const BackupTableContent = models.BackupTableContent;
+const DescribeInstanceNodesResponse = models.DescribeInstanceNodesResponse;
+const DescribeSqlApisRequest = models.DescribeSqlApisRequest;
+const ModifySecurityGroupsRequest = models.ModifySecurityGroupsRequest;
+const PermissionHostInfo = models.PermissionHostInfo;
+const CreateInstanceNewRequest = models.CreateInstanceNewRequest;
+const DescribeDatabaseResponse = models.DescribeDatabaseResponse;
+const Partition = models.Partition;
+const RangeInfo = models.RangeInfo;
+const DorisSourceInfo = models.DorisSourceInfo;
+const AttachCBSSpec = models.AttachCBSSpec;
+const DataBaseAuditRecord = models.DataBaseAuditRecord;
+const CopyTableDatasResponse = models.CopyTableDatasResponse;
+const ClusterConfigsHistory = models.ClusterConfigsHistory;
+const InstanceConfigItem = models.InstanceConfigItem;
+const Distribution = models.Distribution;
+const AccountDetailInfo = models.AccountDetailInfo;
+const CreateTableRequest = models.CreateTableRequest;
+const Property = models.Property;
+const TablePermissions = models.TablePermissions;
+const CreateBackUpScheduleRequest = models.CreateBackUpScheduleRequest;
+const DeleteTableRequest = models.DeleteTableRequest;
+const BackupCosInfo = models.BackupCosInfo;
+const DescribeClusterConfigsHistoryRequest = models.DescribeClusterConfigsHistoryRequest;
+const DeleteTableResponse = models.DeleteTableResponse;
 const DescribeInstanceStateResponse = models.DescribeInstanceStateResponse;
-const DescribeDatabaseAuditRecordsRequest = models.DescribeDatabaseAuditRecordsRequest;
 const DescribeInstanceNodesInfoRequest = models.DescribeInstanceNodesInfoRequest;
-const DescribeDatabaseAuditDownloadResponse = models.DescribeDatabaseAuditDownloadResponse;
+const DescribeInstancesHealthStateResponse = models.DescribeInstancesHealthStateResponse;
+const DescribeSlowQueryRecordsRequest = models.DescribeSlowQueryRecordsRequest;
+const DescribeInstanceNodesRoleResponse = models.DescribeInstanceNodesRoleResponse;
+const DestroyInstanceResponse = models.DestroyInstanceResponse;
+const QueryTableDataResponse = models.QueryTableDataResponse;
+const ResizeDiskRequest = models.ResizeDiskRequest;
+const CopyTableDatasRequest = models.CopyTableDatasRequest;
+const DescribeSlowQueryRecordsResponse = models.DescribeSlowQueryRecordsResponse;
+const ModifyWorkloadGroupStatusRequest = models.ModifyWorkloadGroupStatusRequest;
+const DbInfo = models.DbInfo;
+const ModifyUserBindWorkloadGroupRequest = models.ModifyUserBindWorkloadGroupRequest;
+const DescribeSqlApisResponse = models.DescribeSqlApisResponse;
+const ModifyInstanceRequest = models.ModifyInstanceRequest;
+const DescribeSpecResponse = models.DescribeSpecResponse;
+const ModifyInstanceKeyValConfigsResponse = models.ModifyInstanceKeyValConfigsResponse;
+const QueryDetails = models.QueryDetails;
+const DescribeBackUpSchedulesResponse = models.DescribeBackUpSchedulesResponse;
+const DescribeBackUpTablesResponse = models.DescribeBackUpTablesResponse;
+const DescribeDatabaseAuditRecordsResponse = models.DescribeDatabaseAuditRecordsResponse;
+const InstanceNode = models.InstanceNode;
+const DescribeInstancesHealthStateRequest = models.DescribeInstancesHealthStateRequest;
+const NodeInfo = models.NodeInfo;
+const FrontEndRule = models.FrontEndRule;
+const RestartClusterForConfigsResponse = models.RestartClusterForConfigsResponse;
+const InstanceInfo = models.InstanceInfo;
+const CreateTableResponse = models.CreateTableResponse;
+const DescribeUserBindWorkloadGroupRequest = models.DescribeUserBindWorkloadGroupRequest;
+const ScaleUpInstanceRequest = models.ScaleUpInstanceRequest;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DescribeBackUpSchedulesRequest = models.DescribeBackUpSchedulesRequest;
+const DescribeClusterConfigsRequest = models.DescribeClusterConfigsRequest;
+const ExecuteSelectQueryRequest = models.ExecuteSelectQueryRequest;
+const ModifyWorkloadGroupResponse = models.ModifyWorkloadGroupResponse;
+const DescribeRestoreTaskDetailRequest = models.DescribeRestoreTaskDetailRequest;
+const CreateBackUpScheduleResponse = models.CreateBackUpScheduleResponse;
+const ModifyDatabaseTableAccessResponse = models.ModifyDatabaseTableAccessResponse;
+const DescribeInstanceResponse = models.DescribeInstanceResponse;
+const DescribeBackUpJobResponse = models.DescribeBackUpJobResponse;
+const DescribeDatabaseRequest = models.DescribeDatabaseRequest;
+const RestartClusterForNodeRequest = models.RestartClusterForNodeRequest;
+const BackupStatus = models.BackupStatus;
+const SearchTags = models.SearchTags;
+const DescribeInstanceUsedSubnetsRequest = models.DescribeInstanceUsedSubnetsRequest;
+const ListInfo = models.ListInfo;
+const QueryTableDataRequest = models.QueryTableDataRequest;
+const DescribeDatabaseAuditRecordsRequest = models.DescribeDatabaseAuditRecordsRequest;
+const DescribeUserPolicyRequest = models.DescribeUserPolicyRequest;
+const DescribeBackUpJobDetailResponse = models.DescribeBackUpJobDetailResponse;
+const DescribeBackUpJobDetailRequest = models.DescribeBackUpJobDetailRequest;
+const Rows = models.Rows;
+const DescribeTableListRequest = models.DescribeTableListRequest;
+const DescribeWorkloadGroupResponse = models.DescribeWorkloadGroupResponse;
+const ModifySecurityGroupsResponse = models.ModifySecurityGroupsResponse;
+const DescribeTableRequest = models.DescribeTableRequest;
+const DescribeSpecRequest = models.DescribeSpecRequest;
+const DescribeBackUpTaskDetailResponse = models.DescribeBackUpTaskDetailResponse;
+const DatabasePermissions = models.DatabasePermissions;
+const ReduceInstanceRequest = models.ReduceInstanceRequest;
+const InsertDatasToTableResponse = models.InsertDatasToTableResponse;
+const DeleteWorkloadGroupResponse = models.DeleteWorkloadGroupResponse;
+const UpdateDatabaseResponse = models.UpdateDatabaseResponse;
+const DescribeInstanceOperationHistoryRequest = models.DescribeInstanceOperationHistoryRequest;
+const ClusterConfigsInfoFromEMR = models.ClusterConfigsInfoFromEMR;
+const DescribeQueryAnalyseResponse = models.DescribeQueryAnalyseResponse;
+const IndexInfo = models.IndexInfo;
+const ModifyWorkloadGroupStatusResponse = models.ModifyWorkloadGroupStatusResponse;
+const ExecuteParametrizedQueryRequest = models.ExecuteParametrizedQueryRequest;
+const DestroyInstanceRequest = models.DestroyInstanceRequest;
+const Column = models.Column;
+const RegionInfo = models.RegionInfo;
+const RestartClusterForConfigsRequest = models.RestartClusterForConfigsRequest;
+const CreateWorkloadGroupResponse = models.CreateWorkloadGroupResponse;
+const CreateWorkloadGroupRequest = models.CreateWorkloadGroupRequest;
+const CreateDatabaseResponse = models.CreateDatabaseResponse;
+const PropertiesMap = models.PropertiesMap;
+const ResourceSpec = models.ResourceSpec;
+const RestoreStatus = models.RestoreStatus;
+const DeleteBackUpDataResponse = models.DeleteBackUpDataResponse;
+const ModifyInstanceKeyValConfigsRequest = models.ModifyInstanceKeyValConfigsRequest;
+const BackUpJobDisplay = models.BackUpJobDisplay;
+const ModifyUserBindWorkloadGroupResponse = models.ModifyUserBindWorkloadGroupResponse;
+const RecoverBackUpJobResponse = models.RecoverBackUpJobResponse;
+const DescribeTableResponse = models.DescribeTableResponse;
+const DescribeTableListResponse = models.DescribeTableListResponse;
+const NodesSummary = models.NodesSummary;
 const DescribeDatabaseAuditDownloadRequest = models.DescribeDatabaseAuditDownloadRequest;
+const CreateInstanceSpec = models.CreateInstanceSpec;
+const DescribeInstanceRequest = models.DescribeInstanceRequest;
+const DescribeBackUpJobRequest = models.DescribeBackUpJobRequest;
+const DescribeBackUpTablesRequest = models.DescribeBackUpTablesRequest;
+const RegionAreaInfo = models.RegionAreaInfo;
+const DescribeInstanceNodesRoleRequest = models.DescribeInstanceNodesRoleRequest;
+const DescribeDatabaseAuditDownloadResponse = models.DescribeDatabaseAuditDownloadResponse;
+const NodeInfos = models.NodeInfos;
 const DescribeInstanceNodesInfoResponse = models.DescribeInstanceNodesInfoResponse;
 const ScaleUpInstanceResponse = models.ScaleUpInstanceResponse;
 
@@ -77,25 +209,47 @@ class CdwdorisClient extends AbstractClient {
     }
     
     /**
-     * This API is used to scale up/down computing resources.
-     * @param {ScaleUpInstanceRequest} req
-     * @param {function(string, ScaleUpInstanceResponse):void} cb
+     * This API is used to create or modify backup policies.
+     * @param {CreateBackUpScheduleRequest} req
+     * @param {function(string, CreateBackUpScheduleResponse):void} cb
      * @public
      */
-    ScaleUpInstance(req, cb) {
-        let resp = new ScaleUpInstanceResponse();
-        this.request("ScaleUpInstance", req, resp, cb);
+    CreateBackUpSchedule(req, cb) {
+        let resp = new CreateBackUpScheduleResponse();
+        this.request("CreateBackUpSchedule", req, resp, cb);
     }
 
     /**
-     * This API is used to get the list of clusters.
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
+     * This API is used to copy the source table to the target table.
+     * @param {CopyTableDatasRequest} req
+     * @param {function(string, CopyTableDatasResponse):void} cb
      * @public
      */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
+    CopyTableDatas(req, cb) {
+        let resp = new CopyTableDatasResponse();
+        this.request("CopyTableDatas", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the scheduled task information for the backup and migration.
+     * @param {DescribeBackUpSchedulesRequest} req
+     * @param {function(string, DescribeBackUpSchedulesResponse):void} cb
+     * @public
+     */
+    DescribeBackUpSchedules(req, cb) {
+        let resp = new DescribeBackUpSchedulesResponse();
+        this.request("DescribeBackUpSchedules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of backup instances.
+     * @param {DescribeBackUpJobRequest} req
+     * @param {function(string, DescribeBackUpJobResponse):void} cb
+     * @public
+     */
+    DescribeBackUpJob(req, cb) {
+        let resp = new DescribeBackUpJobResponse();
+        this.request("DescribeBackUpJob", req, resp, cb);
     }
 
     /**
@@ -110,17 +264,6 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to display cluster status, process progress, etc. in the cluster details page.
-     * @param {DescribeInstanceStateRequest} req
-     * @param {function(string, DescribeInstanceStateResponse):void} cb
-     * @public
-     */
-    DescribeInstanceState(req, cb) {
-        let resp = new DescribeInstanceStateResponse();
-        this.request("DescribeInstanceState", req, resp, cb);
-    }
-
-    /**
      * This API is used to get database audit records.
      * @param {DescribeDatabaseAuditRecordsRequest} req
      * @param {function(string, DescribeDatabaseAuditRecordsResponse):void} cb
@@ -132,25 +275,25 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the contents of the latest configuration files (config.xml, metrika.xml, and user.xml) of the cluster and display them to the user.
-     * @param {DescribeClusterConfigsRequest} req
-     * @param {function(string, DescribeClusterConfigsResponse):void} cb
+     * This API is used to query the progress details of the recovery task.
+     * @param {DescribeRestoreTaskDetailRequest} req
+     * @param {function(string, DescribeRestoreTaskDetailResponse):void} cb
      * @public
      */
-    DescribeClusterConfigs(req, cb) {
-        let resp = new DescribeClusterConfigsResponse();
-        this.request("DescribeClusterConfigs", req, resp, cb);
+    DescribeRestoreTaskDetail(req, cb) {
+        let resp = new DescribeRestoreTaskDetailResponse();
+        this.request("DescribeRestoreTaskDetail", req, resp, cb);
     }
 
     /**
-     * This API is used to expand cloud disks.
-     * @param {ResizeDiskRequest} req
-     * @param {function(string, ResizeDiskResponse):void} cb
+     * This API is used to create resource groups.
+     * @param {CreateWorkloadGroupRequest} req
+     * @param {function(string, CreateWorkloadGroupResponse):void} cb
      * @public
      */
-    ResizeDisk(req, cb) {
-        let resp = new ResizeDiskResponse();
-        this.request("ResizeDisk", req, resp, cb);
+    CreateWorkloadGroup(req, cb) {
+        let resp = new CreateWorkloadGroupResponse();
+        this.request("CreateWorkloadGroup", req, resp, cb);
     }
 
     /**
@@ -165,47 +308,25 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the specific information of a cluster based on the cluster ID.
-     * @param {DescribeInstanceRequest} req
-     * @param {function(string, DescribeInstanceResponse):void} cb
+     * This API is used to obtain the resource information bound to each user in the current cluster.
+     * @param {DescribeUserBindWorkloadGroupRequest} req
+     * @param {function(string, DescribeUserBindWorkloadGroupResponse):void} cb
      * @public
      */
-    DescribeInstance(req, cb) {
-        let resp = new DescribeInstanceResponse();
-        this.request("DescribeInstance", req, resp, cb);
+    DescribeUserBindWorkloadGroup(req, cb) {
+        let resp = new DescribeUserBindWorkloadGroupResponse();
+        this.request("DescribeUserBindWorkloadGroup", req, resp, cb);
     }
 
     /**
-     * This API is used to indicate the rolling restart of the clusters.
-     * @param {RestartClusterForNodeRequest} req
-     * @param {function(string, RestartClusterForNodeResponse):void} cb
+     * This API is used to create a TCHouse-D table under the specified database.
+     * @param {CreateTableRequest} req
+     * @param {function(string, CreateTableResponse):void} cb
      * @public
      */
-    RestartClusterForNode(req, cb) {
-        let resp = new RestartClusterForNodeResponse();
-        this.request("RestartClusterForNode", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of cluster node information.
-     * @param {DescribeInstanceNodesRequest} req
-     * @param {function(string, DescribeInstanceNodesResponse):void} cb
-     * @public
-     */
-    DescribeInstanceNodes(req, cb) {
-        let resp = new DescribeInstanceNodesResponse();
-        this.request("DescribeInstanceNodes", req, resp, cb);
-    }
-
-    /**
-     * This API is used to download slow log files.
-     * @param {DescribeSlowQueryRecordsDownloadRequest} req
-     * @param {function(string, DescribeSlowQueryRecordsDownloadResponse):void} cb
-     * @public
-     */
-    DescribeSlowQueryRecordsDownload(req, cb) {
-        let resp = new DescribeSlowQueryRecordsDownloadResponse();
-        this.request("DescribeSlowQueryRecordsDownload", req, resp, cb);
+    CreateTable(req, cb) {
+        let resp = new CreateTableResponse();
+        this.request("CreateTable", req, resp, cb);
     }
 
     /**
@@ -220,14 +341,36 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create clusters.
-     * @param {CreateInstanceNewRequest} req
-     * @param {function(string, CreateInstanceNewResponse):void} cb
+     * This API is used to obtain the information of subnets used by the cluster.
+     * @param {DescribeInstanceUsedSubnetsRequest} req
+     * @param {function(string, DescribeInstanceUsedSubnetsResponse):void} cb
      * @public
      */
-    CreateInstanceNew(req, cb) {
-        let resp = new CreateInstanceNewResponse();
-        this.request("CreateInstanceNew", req, resp, cb);
+    DescribeInstanceUsedSubnets(req, cb) {
+        let resp = new DescribeInstanceUsedSubnetsResponse();
+        this.request("DescribeInstanceUsedSubnets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of tables under the specified data source and database.
+     * @param {DescribeTableListRequest} req
+     * @param {function(string, DescribeTableListResponse):void} cb
+     * @public
+     */
+    DescribeTableList(req, cb) {
+        let resp = new DescribeTableListResponse();
+        this.request("DescribeTableList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the information of the table available for backup.
+     * @param {DescribeBackUpTablesRequest} req
+     * @param {function(string, DescribeBackUpTablesResponse):void} cb
+     * @public
+     */
+    DescribeBackUpTables(req, cb) {
+        let resp = new DescribeBackUpTablesResponse();
+        this.request("DescribeBackUpTables", req, resp, cb);
     }
 
     /**
@@ -242,14 +385,25 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the cluster's name.
-     * @param {ModifyInstanceRequest} req
-     * @param {function(string, ModifyInstanceResponse):void} cb
+     * This API is used to change the node status.
+     * @param {ModifyNodeStatusRequest} req
+     * @param {function(string, ModifyNodeStatusResponse):void} cb
      * @public
      */
-    ModifyInstance(req, cb) {
-        let resp = new ModifyInstanceResponse();
-        this.request("ModifyInstance", req, resp, cb);
+    ModifyNodeStatus(req, cb) {
+        let resp = new ModifyNodeStatusResponse();
+        this.request("ModifyNodeStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the modification history of cluster configuration files.
+     * @param {DescribeClusterConfigsHistoryRequest} req
+     * @param {function(string, DescribeClusterConfigsHistoryResponse):void} cb
+     * @public
+     */
+    DescribeClusterConfigsHistory(req, cb) {
+        let resp = new DescribeClusterConfigsHistoryResponse();
+        this.request("DescribeClusterConfigsHistory", req, resp, cb);
     }
 
     /**
@@ -261,6 +415,512 @@ class CdwdorisClient extends AbstractClient {
     DescribeSlowQueryRecords(req, cb) {
         let resp = new DescribeSlowQueryRecordsResponse();
         this.request("DescribeSlowQueryRecords", req, resp, cb);
+    }
+
+    /**
+     * This API is used to back up and recover.
+     * @param {RecoverBackUpJobRequest} req
+     * @param {function(string, RecoverBackUpJobResponse):void} cb
+     * @public
+     */
+    RecoverBackUpJob(req, cb) {
+        let resp = new RecoverBackUpJobResponse();
+        this.request("RecoverBackUpJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the resource group bound to the user.
+     * @param {ModifyUserBindWorkloadGroupRequest} req
+     * @param {function(string, ModifyUserBindWorkloadGroupResponse):void} cb
+     * @public
+     */
+    ModifyUserBindWorkloadGroup(req, cb) {
+        let resp = new ModifyUserBindWorkloadGroupResponse();
+        this.request("ModifyUserBindWorkloadGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete backup data.
+     * @param {DeleteBackUpDataRequest} req
+     * @param {function(string, DeleteBackUpDataResponse):void} cb
+     * @public
+     */
+    DeleteBackUpData(req, cb) {
+        let resp = new DeleteBackUpDataResponse();
+        this.request("DeleteBackUpData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of clusters.
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query data according to the specified database and table name, and support field selection and pagination.
+     * @param {ExecuteSelectQueryRequest} req
+     * @param {function(string, ExecuteSelectQueryResponse):void} cb
+     * @public
+     */
+    ExecuteSelectQuery(req, cb) {
+        let resp = new ExecuteSelectQueryResponse();
+        this.request("ExecuteSelectQuery", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the resource group information.
+     * @param {ModifyWorkloadGroupRequest} req
+     * @param {function(string, ModifyWorkloadGroupResponse):void} cb
+     * @public
+     */
+    ModifyWorkloadGroup(req, cb) {
+        let resp = new ModifyWorkloadGroupResponse();
+        this.request("ModifyWorkloadGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull the operation list of the cluster. The API supports pagination query and filtering operation records by time range.
+     * @param {DescribeInstanceOperationHistoryRequest} req
+     * @param {function(string, DescribeInstanceOperationHistoryResponse):void} cb
+     * @public
+     */
+    DescribeInstanceOperationHistory(req, cb) {
+        let resp = new DescribeInstanceOperationHistoryResponse();
+        this.request("DescribeInstanceOperationHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to display cluster status, process progress, etc. in the cluster details page.
+     * @param {DescribeInstanceStateRequest} req
+     * @param {function(string, DescribeInstanceStateResponse):void} cb
+     * @public
+     */
+    DescribeInstanceState(req, cb) {
+        let resp = new DescribeInstanceStateResponse();
+        this.request("DescribeInstanceState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the contents of the latest configuration files (config.xml, metrika.xml, and user.xml) of the cluster and display them to the user.
+     * @param {DescribeClusterConfigsRequest} req
+     * @param {function(string, DescribeClusterConfigsResponse):void} cb
+     * @public
+     */
+    DescribeClusterConfigs(req, cb) {
+        let resp = new DescribeClusterConfigsResponse();
+        this.request("DescribeClusterConfigs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete resource groups.
+     * @param {DeleteWorkloadGroupRequest} req
+     * @param {function(string, DeleteWorkloadGroupResponse):void} cb
+     * @public
+     */
+    DeleteWorkloadGroup(req, cb) {
+        let resp = new DeleteWorkloadGroupResponse();
+        this.request("DeleteWorkloadGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to insert data into TCHouse-D.
+     * @param {InsertDatasToTableRequest} req
+     * @param {function(string, InsertDatasToTableResponse):void} cb
+     * @public
+     */
+    InsertDatasToTable(req, cb) {
+        let resp = new InsertDatasToTableResponse();
+        this.request("InsertDatasToTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit security groups.
+     * @param {ModifySecurityGroupsRequest} req
+     * @param {function(string, ModifySecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifySecurityGroups(req, cb) {
+        let resp = new ModifySecurityGroupsResponse();
+        this.request("ModifySecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale up/down computing resources.
+     * @param {ScaleUpInstanceRequest} req
+     * @param {function(string, ScaleUpInstanceResponse):void} cb
+     * @public
+     */
+    ScaleUpInstance(req, cb) {
+        let resp = new ScaleUpInstanceResponse();
+        this.request("ScaleUpInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the database information under a specific data source.
+     * @param {DescribeDatabaseRequest} req
+     * @param {function(string, DescribeDatabaseResponse):void} cb
+     * @public
+     */
+    DescribeDatabase(req, cb) {
+        let resp = new DescribeDatabaseResponse();
+        this.request("DescribeDatabase", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a TCHouse-D database.
+     * @param {CreateDatabaseRequest} req
+     * @param {function(string, CreateDatabaseResponse):void} cb
+     * @public
+     */
+    CreateDatabase(req, cb) {
+        let resp = new CreateDatabaseResponse();
+        this.request("CreateDatabase", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain detailed information of Doris users, including account information, permission host, and permission configuration.
+     * @param {DescribeUserPolicyRequest} req
+     * @param {function(string, DescribeUserPolicyResponse):void} cb
+     * @public
+     */
+    DescribeUserPolicy(req, cb) {
+        let resp = new DescribeUserPolicyResponse();
+        this.request("DescribeUserPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify user permissions and support three permission setting categories: catalog, all db, and some db tables.
+     * @param {ModifyUserPrivilegesV3Request} req
+     * @param {function(string, ModifyUserPrivilegesV3Response):void} cb
+     * @public
+     */
+    ModifyUserPrivilegesV3(req, cb) {
+        let resp = new ModifyUserPrivilegesV3Response();
+        this.request("ModifyUserPrivilegesV3", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull operations of the cluster on the cluster details page.
+     * @param {DescribeInstanceOperationsRequest} req
+     * @param {function(string, DescribeInstanceOperationsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceOperations(req, cb) {
+        let resp = new DescribeInstanceOperationsResponse();
+        this.request("DescribeInstanceOperations", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable resource groups.
+     * @param {ModifyWorkloadGroupStatusRequest} req
+     * @param {function(string, ModifyWorkloadGroupStatusResponse):void} cb
+     * @public
+     */
+    ModifyWorkloadGroupStatus(req, cb) {
+        let resp = new ModifyWorkloadGroupStatusResponse();
+        this.request("ModifyWorkloadGroupStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the table information. It only supports querying table information in the TCHouse-D internal catalog.
+     * @param {DescribeTableRequest} req
+     * @param {function(string, DescribeTableResponse):void} cb
+     * @public
+     */
+    DescribeTable(req, cb) {
+        let resp = new DescribeTableResponse();
+        this.request("DescribeTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CK cluster API for the driver SQL command.
+     * @param {DescribeSqlApisRequest} req
+     * @param {function(string, DescribeSqlApisResponse):void} cb
+     * @public
+     */
+    DescribeSqlApis(req, cb) {
+        let resp = new DescribeSqlApisResponse();
+        this.request("DescribeSqlApis", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the progress details of backup tasks.
+     * @param {DescribeBackUpTaskDetailRequest} req
+     * @param {function(string, DescribeBackUpTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeBackUpTaskDetail(req, cb) {
+        let resp = new DescribeBackUpTaskDetailResponse();
+        this.request("DescribeBackUpTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the specific information of a cluster based on the cluster ID.
+     * @param {DescribeInstanceRequest} req
+     * @param {function(string, DescribeInstanceResponse):void} cb
+     * @public
+     */
+    DescribeInstance(req, cb) {
+        let resp = new DescribeInstanceResponse();
+        this.request("DescribeInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to execute an SQL query statement with parameters and return the query results.
+     * @param {ExecuteParametrizedQueryRequest} req
+     * @param {function(string, ExecuteParametrizedQueryResponse):void} cb
+     * @public
+     */
+    ExecuteParametrizedQuery(req, cb) {
+        let resp = new ExecuteParametrizedQueryResponse();
+        this.request("ExecuteParametrizedQuery", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create clusters.
+     * @param {CreateInstanceNewRequest} req
+     * @param {function(string, CreateInstanceNewResponse):void} cb
+     * @public
+     */
+    CreateInstanceNew(req, cb) {
+        let resp = new CreateInstanceNewResponse();
+        this.request("CreateInstanceNew", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel the corresponding backup instance task.
+     * @param {CancelBackupJobRequest} req
+     * @param {function(string, CancelBackupJobResponse):void} cb
+     * @public
+     */
+    CancelBackupJob(req, cb) {
+        let resp = new CancelBackupJobResponse();
+        this.request("CancelBackupJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query data according to the specified database and table names, and support field selection and pagination.
+     * @param {QueryTableDataRequest} req
+     * @param {function(string, QueryTableDataResponse):void} cb
+     * @public
+     */
+    QueryTableData(req, cb) {
+        let resp = new QueryTableDataResponse();
+        this.request("QueryTableData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to GRANT and REVOKE the database and table in the Doris database.
+     * @param {ModifyDatabaseTableAccessRequest} req
+     * @param {function(string, ModifyDatabaseTableAccessResponse):void} cb
+     * @public
+     */
+    ModifyDatabaseTableAccess(req, cb) {
+        let resp = new ModifyDatabaseTableAccessResponse();
+        this.request("ModifyDatabaseTableAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the specified table in the specified database.
+     * @param {DeleteTableRequest} req
+     * @param {function(string, DeleteTableResponse):void} cb
+     * @public
+     */
+    DeleteTable(req, cb) {
+        let resp = new DeleteTableResponse();
+        this.request("DeleteTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a specified table. The API parameters are consistent with those for creating a table.
+     * @param {UpdateTableSchemaRequest} req
+     * @param {function(string, UpdateTableSchemaResponse):void} cb
+     * @public
+     */
+    UpdateTableSchema(req, cb) {
+        let resp = new UpdateTableSchemaResponse();
+        this.request("UpdateTableSchema", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query backup task details.
+     * @param {DescribeBackUpJobDetailRequest} req
+     * @param {function(string, DescribeBackUpJobDetailResponse):void} cb
+     * @public
+     */
+    DescribeBackUpJobDetail(req, cb) {
+        let resp = new DescribeBackUpJobDetailResponse();
+        this.request("DescribeBackUpJobDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to expand cloud disks.
+     * @param {ResizeDiskRequest} req
+     * @param {function(string, ResizeDiskResponse):void} cb
+     * @public
+     */
+    ResizeDisk(req, cb) {
+        let resp = new ResizeDiskResponse();
+        this.request("ResizeDisk", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain cluster node roles.
+     * @param {DescribeInstanceNodesRoleRequest} req
+     * @param {function(string, DescribeInstanceNodesRoleResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodesRole(req, cb) {
+        let resp = new DescribeInstanceNodesRoleResponse();
+        this.request("DescribeInstanceNodesRole", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart the cluster to make the configuration file take effect.
+     * @param {RestartClusterForConfigsRequest} req
+     * @param {function(string, RestartClusterForConfigsResponse):void} cb
+     * @public
+     */
+    RestartClusterForConfigs(req, cb) {
+        let resp = new RestartClusterForConfigsResponse();
+        this.request("RestartClusterForConfigs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull the specification list of data nodes and zookeeper nodes for the cluster on the purchase page.
+     * @param {DescribeSpecRequest} req
+     * @param {function(string, DescribeSpecResponse):void} cb
+     * @public
+     */
+    DescribeSpec(req, cb) {
+        let resp = new DescribeSpecResponse();
+        this.request("DescribeSpec", req, resp, cb);
+    }
+
+    /**
+     * This API is used to display region information and the total number of clusters in each region on the cluster list page.
+     * @param {DescribeAreaRegionRequest} req
+     * @param {function(string, DescribeAreaRegionResponse):void} cb
+     * @public
+     */
+    DescribeAreaRegion(req, cb) {
+        let resp = new DescribeAreaRegionResponse();
+        this.request("DescribeAreaRegion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale in clusters.
+     * @param {ReduceInstanceRequest} req
+     * @param {function(string, ReduceInstanceResponse):void} cb
+     * @public
+     */
+    ReduceInstance(req, cb) {
+        let resp = new ReduceInstanceResponse();
+        this.request("ReduceInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the SQL query details of the Doris user.
+     * @param {DescribeQueryAnalyseRequest} req
+     * @param {function(string, DescribeQueryAnalyseResponse):void} cb
+     * @public
+     */
+    DescribeQueryAnalyse(req, cb) {
+        let resp = new DescribeQueryAnalyseResponse();
+        this.request("DescribeQueryAnalyse", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check cluster health
+     * @param {DescribeInstancesHealthStateRequest} req
+     * @param {function(string, DescribeInstancesHealthStateResponse):void} cb
+     * @public
+     */
+    DescribeInstancesHealthState(req, cb) {
+        let resp = new DescribeInstancesHealthStateResponse();
+        this.request("DescribeInstancesHealthState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to indicate the rolling restart of the clusters.
+     * @param {RestartClusterForNodeRequest} req
+     * @param {function(string, RestartClusterForNodeResponse):void} cb
+     * @public
+     */
+    RestartClusterForNode(req, cb) {
+        let resp = new RestartClusterForNodeResponse();
+        this.request("RestartClusterForNode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to download slow log files.
+     * @param {DescribeSlowQueryRecordsDownloadRequest} req
+     * @param {function(string, DescribeSlowQueryRecordsDownloadResponse):void} cb
+     * @public
+     */
+    DescribeSlowQueryRecordsDownload(req, cb) {
+        let resp = new DescribeSlowQueryRecordsDownloadResponse();
+        this.request("DescribeSlowQueryRecordsDownload", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of cluster node information.
+     * @param {DescribeInstanceNodesRequest} req
+     * @param {function(string, DescribeInstanceNodesResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodes(req, cb) {
+        let resp = new DescribeInstanceNodesResponse();
+        this.request("DescribeInstanceNodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a specified database, including setting the data volume quota, renaming the database, setting the replica quantity quota, and modifying other attributes of the database.
+     * @param {UpdateDatabaseRequest} req
+     * @param {function(string, UpdateDatabaseResponse):void} cb
+     * @public
+     */
+    UpdateDatabase(req, cb) {
+        let resp = new UpdateDatabaseResponse();
+        this.request("UpdateDatabase", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain resource group information.
+     * @param {DescribeWorkloadGroupRequest} req
+     * @param {function(string, DescribeWorkloadGroupResponse):void} cb
+     * @public
+     */
+    DescribeWorkloadGroup(req, cb) {
+        let resp = new DescribeWorkloadGroupResponse();
+        this.request("DescribeWorkloadGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the cluster's name.
+     * @param {ModifyInstanceRequest} req
+     * @param {function(string, ModifyInstanceResponse):void} cb
+     * @public
+     */
+    ModifyInstance(req, cb) {
+        let resp = new ModifyInstanceResponse();
+        this.request("ModifyInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify configurations in the KV mode.
+     * @param {ModifyInstanceKeyValConfigsRequest} req
+     * @param {function(string, ModifyInstanceKeyValConfigsResponse):void} cb
+     * @public
+     */
+    ModifyInstanceKeyValConfigs(req, cb) {
+        let resp = new ModifyInstanceKeyValConfigsResponse();
+        this.request("ModifyInstanceKeyValConfigs", req, resp, cb);
     }
 
 

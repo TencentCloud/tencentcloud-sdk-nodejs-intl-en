@@ -1,0 +1,6353 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+const models = require("./models");
+const AbstractClient = require('../../common/abstract_client')
+const ExportBashEventsRequest = models.ExportBashEventsRequest;
+const DescribeSearchTemplatesResponse = models.DescribeSearchTemplatesResponse;
+const ModifyJavaMemShellPluginSwitchResponse = models.ModifyJavaMemShellPluginSwitchResponse;
+const ExportReverseShellEventsResponse = models.ExportReverseShellEventsResponse;
+const DescribeBaselineTopResponse = models.DescribeBaselineTopResponse;
+const AlarmInfo = models.AlarmInfo;
+const DescribeLogHistogramRequest = models.DescribeLogHistogramRequest;
+const ModifyWarningSettingResponse = models.ModifyWarningSettingResponse;
+const DescribeAssetWebServiceInfoListResponse = models.DescribeAssetWebServiceInfoListResponse;
+const ModifyVulDefenceEventStatusRequest = models.ModifyVulDefenceEventStatusRequest;
+const DescribeAssetAppProcessListResponse = models.DescribeAssetAppProcessListResponse;
+const ModifyWebHookPolicyRequest = models.ModifyWebHookPolicyRequest;
+const DescribeBashPoliciesRequest = models.DescribeBashPoliciesRequest;
+const DescribeLoginWhiteHostListRequest = models.DescribeLoginWhiteHostListRequest;
+const ExportRansomDefenseBackupListResponse = models.ExportRansomDefenseBackupListResponse;
+const CKafkaTopicInfo = models.CKafkaTopicInfo;
+const DeleteWebHookPolicyResponse = models.DeleteWebHookPolicyResponse;
+const DescribeAssetAppCountResponse = models.DescribeAssetAppCountResponse;
+const DescribeAttackTopResponse = models.DescribeAttackTopResponse;
+const ModifyLicenseOrderRequest = models.ModifyLicenseOrderRequest;
+const RuleInfo = models.RuleInfo;
+const DeleteBaselineStrategyResponse = models.DeleteBaselineStrategyResponse;
+const ModifyWebHookRuleRequest = models.ModifyWebHookRuleRequest;
+const MachineLicenseDetail = models.MachineLicenseDetail;
+const DescribeBashEventsInfoRequest = models.DescribeBashEventsInfoRequest;
+const ExportAssetDatabaseListRequest = models.ExportAssetDatabaseListRequest;
+const HostLoginWhiteObj = models.HostLoginWhiteObj;
+const ClearLocalStorageResponse = models.ClearLocalStorageResponse;
+const CreateNetAttackWhiteListRequest = models.CreateNetAttackWhiteListRequest;
+const DescribeUndoVulCountsResponse = models.DescribeUndoVulCountsResponse;
+const DescribeBaselineScanScheduleResponse = models.DescribeBaselineScanScheduleResponse;
+const MaliciousRequestWhiteListInfo = models.MaliciousRequestWhiteListInfo;
+const DeleteBashEventsResponse = models.DeleteBashEventsResponse;
+const DescribeAssetProcessInfoListRequest = models.DescribeAssetProcessInfoListRequest;
+const VulEmergentMsgInfo = models.VulEmergentMsgInfo;
+const SearchLogResponse = models.SearchLogResponse;
+const AssetNetworkCardInfo = models.AssetNetworkCardInfo;
+const DescribeAssetWebFrameListRequest = models.DescribeAssetWebFrameListRequest;
+const DescribeMonthInspectionReportResponse = models.DescribeMonthInspectionReportResponse;
+const DescribeBaselineHostTopResponse = models.DescribeBaselineHostTopResponse;
+const HostDesc = models.HostDesc;
+const DeleteBashRulesResponse = models.DeleteBashRulesResponse;
+const DescribeDirectConnectInstallCommandResponse = models.DescribeDirectConnectInstallCommandResponse;
+const ModifyFileTamperEventsRequest = models.ModifyFileTamperEventsRequest;
+const RetryVulFixResponse = models.RetryVulFixResponse;
+const ExportVulListResponse = models.ExportVulListResponse;
+const AssetMachineBaseInfo = models.AssetMachineBaseInfo;
+const ExportRansomDefenseMachineListRequest = models.ExportRansomDefenseMachineListRequest;
+const DescribeHistoryServiceResponse = models.DescribeHistoryServiceResponse;
+const BaselineEffectHost = models.BaselineEffectHost;
+const DescribeRiskProcessEventsRequest = models.DescribeRiskProcessEventsRequest;
+const DescribeAssetTypesResponse = models.DescribeAssetTypesResponse;
+const DescribeScreenEmergentMsgRequest = models.DescribeScreenEmergentMsgRequest;
+const DescribeCloudProtectServiceOrderListResponse = models.DescribeCloudProtectServiceOrderListResponse;
+const ModifyAutoOpenProVersionConfigResponse = models.ModifyAutoOpenProVersionConfigResponse;
+const DescribeVulInfoCvssResponse = models.DescribeVulInfoCvssResponse;
+const DescribeBaselineStrategyDetailRequest = models.DescribeBaselineStrategyDetailRequest;
+const ModifyLicenseBindsRequest = models.ModifyLicenseBindsRequest;
+const MalWareList = models.MalWareList;
+const WebHookPolicy = models.WebHookPolicy;
+const DescribeAssetUserInfoResponse = models.DescribeAssetUserInfoResponse;
+const DescribeRansomDefenseStrategyListRequest = models.DescribeRansomDefenseStrategyListRequest;
+const DescribeMachineClearHistoryRequest = models.DescribeMachineClearHistoryRequest;
+const DescribeServersAndRiskAndFirstInfoResponse = models.DescribeServersAndRiskAndFirstInfoResponse;
+const ModifyMalwareWhiteListRequest = models.ModifyMalwareWhiteListRequest;
+const DescribeSecurityProtectionStatResponse = models.DescribeSecurityProtectionStatResponse;
+const DescribeAssetJarListRequest = models.DescribeAssetJarListRequest;
+const DescribeJavaMemShellPluginInfoRequest = models.DescribeJavaMemShellPluginInfoRequest;
+const DescribeMachineFileTamperRulesRequest = models.DescribeMachineFileTamperRulesRequest;
+const ExportVulDefenceEventResponse = models.ExportVulDefenceEventResponse;
+const SetLocalStorageItemRequest = models.SetLocalStorageItemRequest;
+const ExportRansomDefenseMachineListResponse = models.ExportRansomDefenseMachineListResponse;
+const VulDefenceRangeDetail = models.VulDefenceRangeDetail;
+const DescribeFileTamperRuleCountRequest = models.DescribeFileTamperRuleCountRequest;
+const DescribeBaselineBasicInfoRequest = models.DescribeBaselineBasicInfoRequest;
+const DescribeDefenceEventDetailRequest = models.DescribeDefenceEventDetailRequest;
+const DescribeMachineGeneralResponse = models.DescribeMachineGeneralResponse;
+const DescribeMachineClearHistoryResponse = models.DescribeMachineClearHistoryResponse;
+const DescribeProVersionInfoRequest = models.DescribeProVersionInfoRequest;
+const RemoveMachineResponse = models.RemoveMachineResponse;
+const DescribeVulCountByDatesRequest = models.DescribeVulCountByDatesRequest;
+const EditReverseShellRulesRequest = models.EditReverseShellRulesRequest;
+const DescribeAssetWebServiceCountRequest = models.DescribeAssetWebServiceCountRequest;
+const Broadcasts = models.Broadcasts;
+const CreateLicenseOrderResponse = models.CreateLicenseOrderResponse;
+const ModifyBashPolicyStatusRequest = models.ModifyBashPolicyStatusRequest;
+const DescribeAssetWebLocationPathListRequest = models.DescribeAssetWebLocationPathListRequest;
+const BroadcastInfo = models.BroadcastInfo;
+const DefendAttackLog = models.DefendAttackLog;
+const DeleteRiskDnsEventRequest = models.DeleteRiskDnsEventRequest;
+const PrivilegeEventInfo = models.PrivilegeEventInfo;
+const RansomDefenseRollbackResponse = models.RansomDefenseRollbackResponse;
+const ExportAssetSystemPackageListRequest = models.ExportAssetSystemPackageListRequest;
+const ExportTasksRequest = models.ExportTasksRequest;
+const DescribeNetAttackWhiteListRequest = models.DescribeNetAttackWhiteListRequest;
+const DescribeOverviewStatisticsResponse = models.DescribeOverviewStatisticsResponse;
+const ModifyMalwareTimingScanSettingsRequest = models.ModifyMalwareTimingScanSettingsRequest;
+const DescribeAssetTotalCountRequest = models.DescribeAssetTotalCountRequest;
+const DescribeWebHookRulesResponse = models.DescribeWebHookRulesResponse;
+const VulDetailInfo = models.VulDetailInfo;
+const VulLevelCountInfo = models.VulLevelCountInfo;
+const ExportBashEventsResponse = models.ExportBashEventsResponse;
+const DescribeMonthInspectionReportRequest = models.DescribeMonthInspectionReportRequest;
+const DescribeDirectConnectInstallCommandRequest = models.DescribeDirectConnectInstallCommandRequest;
+const VertexInfo = models.VertexInfo;
+const DescribeNetAttackSettingResponse = models.DescribeNetAttackSettingResponse;
+const ReverseShellRule = models.ReverseShellRule;
+const DescribeAESKeyResponse = models.DescribeAESKeyResponse;
+const DescribeBashRulesResponse = models.DescribeBashRulesResponse;
+const DescribeAvailableExpertServiceDetailResponse = models.DescribeAvailableExpertServiceDetailResponse;
+const DescribeCloudProtectServiceOrderListRequest = models.DescribeCloudProtectServiceOrderListRequest;
+const DescribeLogStorageConfigRequest = models.DescribeLogStorageConfigRequest;
+const ExportAssetWebLocationListResponse = models.ExportAssetWebLocationListResponse;
+const ScreenBroadcasts = models.ScreenBroadcasts;
+const ChangeRuleEventsIgnoreStatusRequest = models.ChangeRuleEventsIgnoreStatusRequest;
+const AssetType = models.AssetType;
+const ModifyWebHookReceiverResponse = models.ModifyWebHookReceiverResponse;
+const OpenPortStatistics = models.OpenPortStatistics;
+const DescribeRansomDefenseMachineListRequest = models.DescribeRansomDefenseMachineListRequest;
+const ExportAssetCoreModuleListRequest = models.ExportAssetCoreModuleListRequest;
+const DescribeComponentStatisticsResponse = models.DescribeComponentStatisticsResponse;
+const ModifyNetAttackWhiteListResponse = models.ModifyNetAttackWhiteListResponse;
+const DescribeMachineRegionsRequest = models.DescribeMachineRegionsRequest;
+const DescribeAttackLogsRequest = models.DescribeAttackLogsRequest;
+const ModifyMachineAutoClearConfigRequest = models.ModifyMachineAutoClearConfigRequest;
+const ModifyEventAttackStatusRequest = models.ModifyEventAttackStatusRequest;
+const DescribeVulLevelCountResponse = models.DescribeVulLevelCountResponse;
+const FileTamperRuleInfo = models.FileTamperRuleInfo;
+const DescribeVersionStatisticsResponse = models.DescribeVersionStatisticsResponse;
+const DescribeAvailableExpertServiceDetailRequest = models.DescribeAvailableExpertServiceDetailRequest;
+const DescribeMachineFileTamperRulesResponse = models.DescribeMachineFileTamperRulesResponse;
+const DeleteLogExportRequest = models.DeleteLogExportRequest;
+const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
+const DescribeAttackEventsRequest = models.DescribeAttackEventsRequest;
+const DescribeRiskDnsListRequest = models.DescribeRiskDnsListRequest;
+const CreateWhiteListOrderRequest = models.CreateWhiteListOrderRequest;
+const DescribeBaselineBasicInfoResponse = models.DescribeBaselineBasicInfoResponse;
+const DescribeRansomDefenseStrategyDetailResponse = models.DescribeRansomDefenseStrategyDetailResponse;
+const EditBashRulesResponse = models.EditBashRulesResponse;
+const ModifyBruteAttackRulesResponse = models.ModifyBruteAttackRulesResponse;
+const DescribeRansomDefenseBackupListRequest = models.DescribeRansomDefenseBackupListRequest;
+const ModifyFileTamperRuleStatusRequest = models.ModifyFileTamperRuleStatusRequest;
+const ScanVulResponse = models.ScanVulResponse;
+const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
+const DeleteMalwareWhiteListResponse = models.DeleteMalwareWhiteListResponse;
+const DescribeOverviewStatisticsRequest = models.DescribeOverviewStatisticsRequest;
+const DeleteScanTaskRequest = models.DeleteScanTaskRequest;
+const DescribeRiskBatchStatusResponse = models.DescribeRiskBatchStatusResponse;
+const DescribeAlarmIncidentNodesRequest = models.DescribeAlarmIncidentNodesRequest;
+const DescribeAssetWebAppPluginListRequest = models.DescribeAssetWebAppPluginListRequest;
+const DescribeRansomDefenseMachineListResponse = models.DescribeRansomDefenseMachineListResponse;
+const DescribeTagMachinesRequest = models.DescribeTagMachinesRequest;
+const DescribeScreenAttackHotspotRequest = models.DescribeScreenAttackHotspotRequest;
+const ScanVulAgainRequest = models.ScanVulAgainRequest;
+const DeleteSearchTemplateRequest = models.DeleteSearchTemplateRequest;
+const CreateCloudProtectServiceOrderRecordRequest = models.CreateCloudProtectServiceOrderRecordRequest;
+const ExportJavaMemShellPluginsResponse = models.ExportJavaMemShellPluginsResponse;
+const DescribeAssetTotalCountResponse = models.DescribeAssetTotalCountResponse;
+const ExportNonlocalLoginPlacesRequest = models.ExportNonlocalLoginPlacesRequest;
+const DescribeTagsResponse = models.DescribeTagsResponse;
+const DescribeRansomDefenseTrendRequest = models.DescribeRansomDefenseTrendRequest;
+const DescribeLicenseListResponse = models.DescribeLicenseListResponse;
+const DescribeJavaMemShellListResponse = models.DescribeJavaMemShellListResponse;
+const DescribeVulOverviewRequest = models.DescribeVulOverviewRequest;
+const DescribeMachinesSimpleResponse = models.DescribeMachinesSimpleResponse;
+const DescribeNetAttackSettingRequest = models.DescribeNetAttackSettingRequest;
+const HostLoginList = models.HostLoginList;
+const DescribeScreenRiskAssetsTopRequest = models.DescribeScreenRiskAssetsTopRequest;
+const DeletePrivilegeEventsRequest = models.DeletePrivilegeEventsRequest;
+const AssetMachineDetail = models.AssetMachineDetail;
+const ModifyNetAttackWhiteListRequest = models.ModifyNetAttackWhiteListRequest;
+const DescribeVulDefenceSettingRequest = models.DescribeVulDefenceSettingRequest;
+const DescribeTrialReportRequest = models.DescribeTrialReportRequest;
+const IgnoreRuleEffectHostInfo = models.IgnoreRuleEffectHostInfo;
+const DescribeFileTamperEventsRequest = models.DescribeFileTamperEventsRequest;
+const DescribeScreenMachineRegionsResponse = models.DescribeScreenMachineRegionsResponse;
+const ExportVulDefencePluginEventResponse = models.ExportVulDefencePluginEventResponse;
+const ExportAssetMachineDetailRequest = models.ExportAssetMachineDetailRequest;
+const DescribeBanModeRequest = models.DescribeBanModeRequest;
+const StopAssetScanRequest = models.StopAssetScanRequest;
+const DescribeSecurityEventStatRequest = models.DescribeSecurityEventStatRequest;
+const DescribeESAggregationsResponse = models.DescribeESAggregationsResponse;
+const ExportVulInfoResponse = models.ExportVulInfoResponse;
+const EmergencyVul = models.EmergencyVul;
+const ExportAssetRecentMachineInfoRequest = models.ExportAssetRecentMachineInfoRequest;
+const ExportReverseShellEventsRequest = models.ExportReverseShellEventsRequest;
+const BashEventNew = models.BashEventNew;
+const DeleteLoginWhiteListResponse = models.DeleteLoginWhiteListResponse;
+const DescribeVertexDetailResponse = models.DescribeVertexDetailResponse;
+const DeleteRiskDnsEventResponse = models.DeleteRiskDnsEventResponse;
+const DescribeAttackLogsResponse = models.DescribeAttackLogsResponse;
+const ModifyLoginWhiteRecordRequest = models.ModifyLoginWhiteRecordRequest;
+const ModifyRiskDnsPolicyResponse = models.ModifyRiskDnsPolicyResponse;
+const DescribeScanTaskDetailsRequest = models.DescribeScanTaskDetailsRequest;
+const ProductStatusInfo = models.ProductStatusInfo;
+const DeleteMalwaresResponse = models.DeleteMalwaresResponse;
+const ExportRiskDnsEventListResponse = models.ExportRiskDnsEventListResponse;
+const DescribeAssetInitServiceListRequest = models.DescribeAssetInitServiceListRequest;
+const ScanVulAgainResponse = models.ScanVulAgainResponse;
+const DescribeWebHookReceiverUsageRequest = models.DescribeWebHookReceiverUsageRequest;
+const DescribeAssetUserKeyListRequest = models.DescribeAssetUserKeyListRequest;
+const VulTopInfo = models.VulTopInfo;
+const CKafkaRouteInfo = models.CKafkaRouteInfo;
+const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
+const DescribeTagsRequest = models.DescribeTagsRequest;
+const ExportAssetJarListResponse = models.ExportAssetJarListResponse;
+const ExportVulEffectHostListRequest = models.ExportVulEffectHostListRequest;
+const DescribeNetAttackWhiteListResponse = models.DescribeNetAttackWhiteListResponse;
+const CheckBashPolicyParamsRequest = models.CheckBashPolicyParamsRequest;
+const DescribeStrategyExistRequest = models.DescribeStrategyExistRequest;
+const DescribeSecurityDynamicsRequest = models.DescribeSecurityDynamicsRequest;
+const CheckBashRuleParamsRequest = models.CheckBashRuleParamsRequest;
+const DescribeRiskDnsEventInfoRequest = models.DescribeRiskDnsEventInfoRequest;
+const DescribeIgnoreBaselineRuleRequest = models.DescribeIgnoreBaselineRuleRequest;
+const DescribeAssetTypeTopRequest = models.DescribeAssetTypeTopRequest;
+const CheckFileTamperRuleResponse = models.CheckFileTamperRuleResponse;
+const ExportNonlocalLoginPlacesResponse = models.ExportNonlocalLoginPlacesResponse;
+const DeleteMaliciousRequestWhiteListRequest = models.DeleteMaliciousRequestWhiteListRequest;
+const DescribeAssetJarListResponse = models.DescribeAssetJarListResponse;
+const ExportAssetProcessInfoListResponse = models.ExportAssetProcessInfoListResponse;
+const ExportMaliciousRequestsRequest = models.ExportMaliciousRequestsRequest;
+const DeleteNetAttackWhiteListResponse = models.DeleteNetAttackWhiteListResponse;
+const DescribeWebHookPolicyResponse = models.DescribeWebHookPolicyResponse;
+const BanWhiteList = models.BanWhiteList;
+const SetLocalStorageItemResponse = models.SetLocalStorageItemResponse;
+const ExportBashEventsNewRequest = models.ExportBashEventsNewRequest;
+const AssetJarDetail = models.AssetJarDetail;
+const ModifyFileTamperRuleResponse = models.ModifyFileTamperRuleResponse;
+const StartBaselineDetectResponse = models.StartBaselineDetectResponse;
+const ReverseShellEventInfo = models.ReverseShellEventInfo;
+const ExportVulDetectionReportRequest = models.ExportVulDetectionReportRequest;
+const ModifyWarningHostConfigRequest = models.ModifyWarningHostConfigRequest;
+const ExportMalwaresResponse = models.ExportMalwaresResponse;
+const DescribeScanVulSettingRequest = models.DescribeScanVulSettingRequest;
+const DescribeMalwareRiskWarningRequest = models.DescribeMalwareRiskWarningRequest;
+const KeyValueInfo = models.KeyValueInfo;
+const StartBaselineDetectRequest = models.StartBaselineDetectRequest;
+const DescribeVulStoreListRequest = models.DescribeVulStoreListRequest;
+const EditPrivilegeRulesRequest = models.EditPrivilegeRulesRequest;
+const DescribeAssetDiskListRequest = models.DescribeAssetDiskListRequest;
+const ScreenAttackHotspot = models.ScreenAttackHotspot;
+const DescribeClientExceptionRequest = models.DescribeClientExceptionRequest;
+const DescribeAssetPlanTaskListResponse = models.DescribeAssetPlanTaskListResponse;
+const DescribeBaselineRuleRequest = models.DescribeBaselineRuleRequest;
+const ExportAssetPortInfoListRequest = models.ExportAssetPortInfoListRequest;
+const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
+const DescribeAssetMachineDetailRequest = models.DescribeAssetMachineDetailRequest;
+const CancelIgnoreVulResponse = models.CancelIgnoreVulResponse;
+const DescribeSecurityBroadcastInfoRequest = models.DescribeSecurityBroadcastInfoRequest;
+const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
+const DescribeCanFixVulMachineRequest = models.DescribeCanFixVulMachineRequest;
+const DescribeRansomDefenseStrategyMachinesResponse = models.DescribeRansomDefenseStrategyMachinesResponse;
+const ExportRansomDefenseEventsListResponse = models.ExportRansomDefenseEventsListResponse;
+const DescribeAssetMachineDetailResponse = models.DescribeAssetMachineDetailResponse;
+const DescribeRansomDefenseStrategyListResponse = models.DescribeRansomDefenseStrategyListResponse;
+const DescribeAttackTrendsRequest = models.DescribeAttackTrendsRequest;
+const DeleteNetAttackWhiteListRequest = models.DeleteNetAttackWhiteListRequest;
+const HistoryAccount = models.HistoryAccount;
+const DescribeStrategyExistResponse = models.DescribeStrategyExistResponse;
+const DeleteReverseShellEventsRequest = models.DeleteReverseShellEventsRequest;
+const DeleteBashPoliciesRequest = models.DeleteBashPoliciesRequest;
+const ExportAssetAppListResponse = models.ExportAssetAppListResponse;
+const DescribeLogTypeRequest = models.DescribeLogTypeRequest;
+const DescribeVulTopResponse = models.DescribeVulTopResponse;
+const TaskStatus = models.TaskStatus;
+const DescribeMachineOsListResponse = models.DescribeMachineOsListResponse;
+const DescribeAssetWebServiceProcessListResponse = models.DescribeAssetWebServiceProcessListResponse;
+const ChangeStrategyEnableStatusResponse = models.ChangeStrategyEnableStatusResponse;
+const ExportRansomDefenseStrategyListResponse = models.ExportRansomDefenseStrategyListResponse;
+const IgnoreImpactedHostsRequest = models.IgnoreImpactedHostsRequest;
+const SearchLogRequest = models.SearchLogRequest;
+const DescribeBaselineWeakPasswordListRequest = models.DescribeBaselineWeakPasswordListRequest;
+const VulDefenceEvent = models.VulDefenceEvent;
+const ModifyFileTamperRuleRequest = models.ModifyFileTamperRuleRequest;
+const ExportBaselineFixListRequest = models.ExportBaselineFixListRequest;
+const AssetUserDetail = models.AssetUserDetail;
+const DescribeAssetPortCountRequest = models.DescribeAssetPortCountRequest;
+const ModifyWebHookPolicyResponse = models.ModifyWebHookPolicyResponse;
+const DescribeFileTamperEventsResponse = models.DescribeFileTamperEventsResponse;
+const DescribeVulLabelsResponse = models.DescribeVulLabelsResponse;
+const DescribeMachinesRequest = models.DescribeMachinesRequest;
+const DescribeRansomDefenseBackupListResponse = models.DescribeRansomDefenseBackupListResponse;
+const DescribeVulEffectHostListRequest = models.DescribeVulEffectHostListRequest;
+const DeliverTypeDetails = models.DeliverTypeDetails;
+const ModifyNetAttackSettingResponse = models.ModifyNetAttackSettingResponse;
+const AssetWebAppPluginInfo = models.AssetWebAppPluginInfo;
+const DeletePrivilegeRulesRequest = models.DeletePrivilegeRulesRequest;
+const ScanTaskDetails = models.ScanTaskDetails;
+const DescribeLicenseBindScheduleResponse = models.DescribeLicenseBindScheduleResponse;
+const DescribeMalwareInfoRequest = models.DescribeMalwareInfoRequest;
+const DescribeVersionStatisticsRequest = models.DescribeVersionStatisticsRequest;
+const DescribeLogTypeResponse = models.DescribeLogTypeResponse;
+const ModifyRiskDnsPolicyStatusResponse = models.ModifyRiskDnsPolicyStatusResponse;
+const ExportPrivilegeEventsResponse = models.ExportPrivilegeEventsResponse;
+const ExportAssetRecentMachineInfoResponse = models.ExportAssetRecentMachineInfoResponse;
+const DescribeMachineRegionListRequest = models.DescribeMachineRegionListRequest;
+const UsualPlace = models.UsualPlace;
+const ModifyBaselinePolicyResponse = models.ModifyBaselinePolicyResponse;
+const MachineSimple = models.MachineSimple;
+const DescribeReverseShellEventsRequest = models.DescribeReverseShellEventsRequest;
+const DescribeCanNotSeparateMachineResponse = models.DescribeCanNotSeparateMachineResponse;
+const ExportAssetPortInfoListResponse = models.ExportAssetPortInfoListResponse;
+const DescribeEventByTableResponse = models.DescribeEventByTableResponse;
+const ModifyLogStorageConfigRequest = models.ModifyLogStorageConfigRequest;
+const DescribeAttackVulTypeListRequest = models.DescribeAttackVulTypeListRequest;
+const AssetLoadDetail = models.AssetLoadDetail;
+const DescribeLogStorageStatisticRequest = models.DescribeLogStorageStatisticRequest;
+const DeleteBaselinePolicyRequest = models.DeleteBaselinePolicyRequest;
+const SetLocalStorageExpireRequest = models.SetLocalStorageExpireRequest;
+const ExportAssetInitServiceListRequest = models.ExportAssetInitServiceListRequest;
+const DeleteWebHookReceiverRequest = models.DeleteWebHookReceiverRequest;
+const DescribeAssetRecentMachineInfoRequest = models.DescribeAssetRecentMachineInfoRequest;
+const CheckBashRuleParamsResponse = models.CheckBashRuleParamsResponse;
+const DeleteLicenseRecordRequest = models.DeleteLicenseRecordRequest;
+const ExportBaselineListRequest = models.ExportBaselineListRequest;
+const DescribeAssetWebLocationPathListResponse = models.DescribeAssetWebLocationPathListResponse;
+const RansomDefenseStrategyMachineDetail = models.RansomDefenseStrategyMachineDetail;
+const ExportIgnoreBaselineRuleResponse = models.ExportIgnoreBaselineRuleResponse;
+const BruteAttackRuleList = models.BruteAttackRuleList;
+const ExportFileTamperEventsResponse = models.ExportFileTamperEventsResponse;
+const DescribeBanStatusResponse = models.DescribeBanStatusResponse;
+const DescribeVulListRequest = models.DescribeVulListRequest;
+const DescribeLicenseBindListResponse = models.DescribeLicenseBindListResponse;
+const BaselineInfo = models.BaselineInfo;
+const DescribeWebHookReceiverUsageResponse = models.DescribeWebHookReceiverUsageResponse;
+const AssetAppBaseInfo = models.AssetAppBaseInfo;
+const DescribeJavaMemShellInfoRequest = models.DescribeJavaMemShellInfoRequest;
+const DescribePrivilegeRulesRequest = models.DescribePrivilegeRulesRequest;
+const ExportAssetAppListRequest = models.ExportAssetAppListRequest;
+const TestWebHookRuleRequest = models.TestWebHookRuleRequest;
+const JavaMemShellInfo = models.JavaMemShellInfo;
+const DescribeAssetSystemPackageListResponse = models.DescribeAssetSystemPackageListResponse;
+const ExportAssetWebFrameListResponse = models.ExportAssetWebFrameListResponse;
+const CheckBashPolicyParamsResponse = models.CheckBashPolicyParamsResponse;
+const DescribeClientExceptionResponse = models.DescribeClientExceptionResponse;
+const DescribeAssetMachineListResponse = models.DescribeAssetMachineListResponse;
+const VersionWhiteConfig = models.VersionWhiteConfig;
+const DescribeBaselineDetailRequest = models.DescribeBaselineDetailRequest;
+const NetAttackEventInfo = models.NetAttackEventInfo;
+const GetLocalStorageItemResponse = models.GetLocalStorageItemResponse;
+const DescribeScreenDefenseTrendsRequest = models.DescribeScreenDefenseTrendsRequest;
+const LogStorageRecord = models.LogStorageRecord;
+const DescribeBruteAttackListResponse = models.DescribeBruteAttackListResponse;
+const DescribeAssetInfoRequest = models.DescribeAssetInfoRequest;
+const DescribeJavaMemShellPluginListRequest = models.DescribeJavaMemShellPluginListRequest;
+const CanFixVulInfo = models.CanFixVulInfo;
+const DescribeWebHookPolicyRequest = models.DescribeWebHookPolicyRequest;
+const EditReverseShellRulesResponse = models.EditReverseShellRulesResponse;
+const VulOverview = models.VulOverview;
+const DescribeAssetUserKeyListResponse = models.DescribeAssetUserKeyListResponse;
+const DescribeVulLabelsRequest = models.DescribeVulLabelsRequest;
+const DescribeAssetAppListRequest = models.DescribeAssetAppListRequest;
+const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
+const ZoneInfo = models.ZoneInfo;
+const DescribeExpertServiceListResponse = models.DescribeExpertServiceListResponse;
+const DescribeAccountStatisticsResponse = models.DescribeAccountStatisticsResponse;
+const DescribeBashEventsInfoNewRequest = models.DescribeBashEventsInfoNewRequest;
+const ScreenTrendsChart = models.ScreenTrendsChart;
+const ModifyLoginWhiteInfoResponse = models.ModifyLoginWhiteInfoResponse;
+const DescribeBaselineRuleResponse = models.DescribeBaselineRuleResponse;
+const AttackSourceNode = models.AttackSourceNode;
+const DescribeRiskDnsPolicyListRequest = models.DescribeRiskDnsPolicyListRequest;
+const DeleteMaliciousRequestsResponse = models.DeleteMaliciousRequestsResponse;
+const DescribeWebHookReceiverRequest = models.DescribeWebHookReceiverRequest;
+const VulStoreListInfo = models.VulStoreListInfo;
+const DescribeScreenEventsCntResponse = models.DescribeScreenEventsCntResponse;
+const CreateIncidentBacktrackingRequest = models.CreateIncidentBacktrackingRequest;
+const DescribeVulDefencePluginStatusRequest = models.DescribeVulDefencePluginStatusRequest;
+const DescribeBashEventsInfoNewResponse = models.DescribeBashEventsInfoNewResponse;
+const GetLocalStorageItemRequest = models.GetLocalStorageItemRequest;
+const WebHookEventKv = models.WebHookEventKv;
+const ExportBruteAttacksRequest = models.ExportBruteAttacksRequest;
+const DeleteMachineResponse = models.DeleteMachineResponse;
+const RansomDefenseEvent = models.RansomDefenseEvent;
+const DeleteMalwareWhiteListRequest = models.DeleteMalwareWhiteListRequest;
+const LoginWhiteCombinedInfo = models.LoginWhiteCombinedInfo;
+const SetLocalStorageExpireResponse = models.SetLocalStorageExpireResponse;
+const WebHookReceiver = models.WebHookReceiver;
+const DescribeAttackSourceResponse = models.DescribeAttackSourceResponse;
+const DescribeAssetTypeTopResponse = models.DescribeAssetTypeTopResponse;
+const DescribeVulDefencePluginExceptionCountRequest = models.DescribeVulDefencePluginExceptionCountRequest;
+const DescribeLogIndexRequest = models.DescribeLogIndexRequest;
+const TagMachine = models.TagMachine;
+const DescribeAssetCoreModuleInfoResponse = models.DescribeAssetCoreModuleInfoResponse;
+const LicenseBindTaskDetail = models.LicenseBindTaskDetail;
+const DescribeAssetEnvListRequest = models.DescribeAssetEnvListRequest;
+const Tag = models.Tag;
+const StopNoticeBanTipsRequest = models.StopNoticeBanTipsRequest;
+const ScreenProtection = models.ScreenProtection;
+const DescribeScanMalwareScheduleRequest = models.DescribeScanMalwareScheduleRequest;
+const BaselineDetectParam = models.BaselineDetectParam;
+const DescribeBashEventsResponse = models.DescribeBashEventsResponse;
+const ValueInfo = models.ValueInfo;
+const ModifyVulDefenceSettingResponse = models.ModifyVulDefenceSettingResponse;
+const DescribeEventByTableRequest = models.DescribeEventByTableRequest;
+const DescribeTrialReportResponse = models.DescribeTrialReportResponse;
+const DescribeBashEventsRequest = models.DescribeBashEventsRequest;
+const DeleteMachineClearHistoryRequest = models.DeleteMachineClearHistoryRequest;
+const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
+const DescribeUsersConfigRequest = models.DescribeUsersConfigRequest;
+const DeleteMachineRequest = models.DeleteMachineRequest;
+const DescribeAssetWebLocationListResponse = models.DescribeAssetWebLocationListResponse;
+const DescribeAssetDiskListResponse = models.DescribeAssetDiskListResponse;
+const ExportAssetPlanTaskListRequest = models.ExportAssetPlanTaskListRequest;
+const RecordInfo = models.RecordInfo;
+const DescribeAssetHostTotalCountResponse = models.DescribeAssetHostTotalCountResponse;
+const DescribeMachineSnapshotRequest = models.DescribeMachineSnapshotRequest;
+const StopAssetScanResponse = models.StopAssetScanResponse;
+const BruteAttackRule = models.BruteAttackRule;
+const LoginWhiteLists = models.LoginWhiteLists;
+const TrustMalwaresRequest = models.TrustMalwaresRequest;
+const AssetKeyVal = models.AssetKeyVal;
+const AssetWebLocationInfo = models.AssetWebLocationInfo;
+const ChangeRuleEventsIgnoreStatusResponse = models.ChangeRuleEventsIgnoreStatusResponse;
+const DeleteWebHookRuleResponse = models.DeleteWebHookRuleResponse;
+const SeparateMalwaresRequest = models.SeparateMalwaresRequest;
+const AssetDatabaseBaseInfo = models.AssetDatabaseBaseInfo;
+const LicenseOrder = models.LicenseOrder;
+const DeletePrivilegeRulesResponse = models.DeletePrivilegeRulesResponse;
+const CreateMalwareWhiteListResponse = models.CreateMalwareWhiteListResponse;
+const CreateWhiteListOrderResponse = models.CreateWhiteListOrderResponse;
+const ModifyBashPolicyStatusResponse = models.ModifyBashPolicyStatusResponse;
+const CreateEmergencyVulScanResponse = models.CreateEmergencyVulScanResponse;
+const DescribeTagMachinesResponse = models.DescribeTagMachinesResponse;
+const DescribeHotVulTopResponse = models.DescribeHotVulTopResponse;
+const DescribeRansomDefenseMachineStrategyInfoRequest = models.DescribeRansomDefenseMachineStrategyInfoRequest;
+const DescribeAssetCoreModuleInfoRequest = models.DescribeAssetCoreModuleInfoRequest;
+const DescribeProductStatusResponse = models.DescribeProductStatusResponse;
+const DescribeIndexListResponse = models.DescribeIndexListResponse;
+const ModifyJavaMemShellPluginSwitchRequest = models.ModifyJavaMemShellPluginSwitchRequest;
+const DescribeIgnoreHostAndItemConfigResponse = models.DescribeIgnoreHostAndItemConfigResponse;
+const RemoveLocalStorageItemResponse = models.RemoveLocalStorageItemResponse;
+const DescribeFileTamperRuleInfoResponse = models.DescribeFileTamperRuleInfoResponse;
+const DescribeSafeInfoRequest = models.DescribeSafeInfoRequest;
+const DescribeVdbAndPocInfoResponse = models.DescribeVdbAndPocInfoResponse;
+const DescribeAttackEventsResponse = models.DescribeAttackEventsResponse;
+const DescribeRansomDefenseMachineStrategyInfoResponse = models.DescribeRansomDefenseMachineStrategyInfoResponse;
+const DescribeReverseShellEventInfoResponse = models.DescribeReverseShellEventInfoResponse;
+const ExportJavaMemShellPluginsRequest = models.ExportJavaMemShellPluginsRequest;
+const DescribeBanWhiteListResponse = models.DescribeBanWhiteListResponse;
+const CreateVulFixResponse = models.CreateVulFixResponse;
+const DescribeOpenPortStatisticsResponse = models.DescribeOpenPortStatisticsResponse;
+const ExportRiskDnsEventListRequest = models.ExportRiskDnsEventListRequest;
+const SecurityDynamic = models.SecurityDynamic;
+const DescribeMachineGeneralRequest = models.DescribeMachineGeneralRequest;
+const ExportRiskProcessEventsResponse = models.ExportRiskProcessEventsResponse;
+const DescribeAssetDatabaseCountResponse = models.DescribeAssetDatabaseCountResponse;
+const DescribeMalWareListRequest = models.DescribeMalWareListRequest;
+const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
+const DeleteTagsResponse = models.DeleteTagsResponse;
+const DescribeSecurityEventsCntRequest = models.DescribeSecurityEventsCntRequest;
+const AssetUserBaseInfo = models.AssetUserBaseInfo;
+const ModifyRiskEventsStatusRequest = models.ModifyRiskEventsStatusRequest;
+const ExportBaselineEffectHostListRequest = models.ExportBaselineEffectHostListRequest;
+const ExportMaliciousRequestsResponse = models.ExportMaliciousRequestsResponse;
+const ScanBaselineRequest = models.ScanBaselineRequest;
+const RansomDefenseRollbackRequest = models.RansomDefenseRollbackRequest;
+const DescribeVulCountByDatesResponse = models.DescribeVulCountByDatesResponse;
+const CreateVulFixTaskQuuids = models.CreateVulFixTaskQuuids;
+const DescribeServersAndRiskAndFirstInfoRequest = models.DescribeServersAndRiskAndFirstInfoRequest;
+const FieldValueRatioInfo = models.FieldValueRatioInfo;
+const DescribeVulDefenceEventRequest = models.DescribeVulDefenceEventRequest;
+const AttackSource = models.AttackSource;
+const DescribeIndexListRequest = models.DescribeIndexListRequest;
+const RetryVulFixRequest = models.RetryVulFixRequest;
+const DescribeRiskDnsEventListRequest = models.DescribeRiskDnsEventListRequest;
+const DescribeLogKafkaDeliverInfoResponse = models.DescribeLogKafkaDeliverInfoResponse;
+const DeleteBashRulesRequest = models.DeleteBashRulesRequest;
+const DescribeVulEffectModulesResponse = models.DescribeVulEffectModulesResponse;
+const ExportRansomDefenseStrategyMachinesRequest = models.ExportRansomDefenseStrategyMachinesRequest;
+const DescribeMalwareWhiteListAffectListResponse = models.DescribeMalwareWhiteListAffectListResponse;
+const VulDefencePluginStatus = models.VulDefencePluginStatus;
+const DescribeRansomDefenseEventsListRequest = models.DescribeRansomDefenseEventsListRequest;
+const RansomDefenseStrategyMachineBackupInfo = models.RansomDefenseStrategyMachineBackupInfo;
+const ExportAssetPlanTaskListResponse = models.ExportAssetPlanTaskListResponse;
+const ExportRansomDefenseBackupListRequest = models.ExportRansomDefenseBackupListRequest;
+const DescribeWarningHostConfigResponse = models.DescribeWarningHostConfigResponse;
+const DescribeABTestConfigRequest = models.DescribeABTestConfigRequest;
+const ModifyRansomDefenseEventsStatusRequest = models.ModifyRansomDefenseEventsStatusRequest;
+const DescribeUsersConfigResponse = models.DescribeUsersConfigResponse;
+const DescribeAttackStatisticsResponse = models.DescribeAttackStatisticsResponse;
+const DescribeRansomDefenseStateRequest = models.DescribeRansomDefenseStateRequest;
+const ExportAssetJarListRequest = models.ExportAssetJarListRequest;
+const CreateVulFixRequest = models.CreateVulFixRequest;
+const CheckFirstScanBaselineResponse = models.CheckFirstScanBaselineResponse;
+const ModifyBanStatusRequest = models.ModifyBanStatusRequest;
+const DescribeBaselineHostTopRequest = models.DescribeBaselineHostTopRequest;
+const DescribeVulDefenceListResponse = models.DescribeVulDefenceListResponse;
+const RemoveLocalStorageItemRequest = models.RemoveLocalStorageItemRequest;
+const CreateBuyBindTaskRequest = models.CreateBuyBindTaskRequest;
+const HostInfo = models.HostInfo;
+const EditPrivilegeRulesResponse = models.EditPrivilegeRulesResponse;
+const DescribeVulHostTopResponse = models.DescribeVulHostTopResponse;
+const SyncMachinesResponse = models.SyncMachinesResponse;
+const TrustMalwaresResponse = models.TrustMalwaresResponse;
+const DescribeHistoryServiceRequest = models.DescribeHistoryServiceRequest;
+const CreateMaliciousRequestWhiteListRequest = models.CreateMaliciousRequestWhiteListRequest;
+const DescribeWarningListRequest = models.DescribeWarningListRequest;
+const SyncAssetScanRequest = models.SyncAssetScanRequest;
+const RecoverMalwaresRequest = models.RecoverMalwaresRequest;
+const DefaultStrategyInfo = models.DefaultStrategyInfo;
+const ExportSecurityTrendsRequest = models.ExportSecurityTrendsRequest;
+const ModifyBanWhiteListRequest = models.ModifyBanWhiteListRequest;
+const DescribeESAggregationsRequest = models.DescribeESAggregationsRequest;
+const BaselineHostTopList = models.BaselineHostTopList;
+const DescribeReverseShellRulesResponse = models.DescribeReverseShellRulesResponse;
+const DeleteWebHookRuleRequest = models.DeleteWebHookRuleRequest;
+const DescribeBruteAttackListRequest = models.DescribeBruteAttackListRequest;
+const DescribeVdbAndPocInfoRequest = models.DescribeVdbAndPocInfoRequest;
+const NetAttackTopInfo = models.NetAttackTopInfo;
+const DescribeVulListResponse = models.DescribeVulListResponse;
+const BaselineHost = models.BaselineHost;
+const KeysLocalStorageRequest = models.KeysLocalStorageRequest;
+const DescribeUndoVulCountsRequest = models.DescribeUndoVulCountsRequest;
+const RemoveMachineRequest = models.RemoveMachineRequest;
+const ModifyLicenseBindsResponse = models.ModifyLicenseBindsResponse;
+const CheckFileTamperRuleRequest = models.CheckFileTamperRuleRequest;
+const DescribeBaselineStrategyListResponse = models.DescribeBaselineStrategyListResponse;
+const CreateRansomDefenseStrategyRequest = models.CreateRansomDefenseStrategyRequest;
+const DeleteLoginWhiteListRequest = models.DeleteLoginWhiteListRequest;
+const DescribeLicenseListRequest = models.DescribeLicenseListRequest;
+const CreateMalwareWhiteListRequest = models.CreateMalwareWhiteListRequest;
+const ExportAssetWebLocationListRequest = models.ExportAssetWebLocationListRequest;
+const DescribeVulOverviewResponse = models.DescribeVulOverviewResponse;
+const AttackSourceEdge = models.AttackSourceEdge;
+const DeleteMaliciousRequestsRequest = models.DeleteMaliciousRequestsRequest;
+const DescribeBanWhiteListRequest = models.DescribeBanWhiteListRequest;
+const VulInfoHostInfo = models.VulInfoHostInfo;
+const DescribeJavaMemShellPluginListResponse = models.DescribeJavaMemShellPluginListResponse;
+const ModifyLogKafkaStateResponse = models.ModifyLogKafkaStateResponse;
+const BaselinePolicy = models.BaselinePolicy;
+const DescribeMalwareRiskOverviewResponse = models.DescribeMalwareRiskOverviewResponse;
+const DeleteMaliciousRequestWhiteListResponse = models.DeleteMaliciousRequestWhiteListResponse;
+const DescribeJavaMemShellListRequest = models.DescribeJavaMemShellListRequest;
+const SwitchBashRulesRequest = models.SwitchBashRulesRequest;
+const DescribeAgentInstallationTokenResponse = models.DescribeAgentInstallationTokenResponse;
+const ScreenEmergentMsg = models.ScreenEmergentMsg;
+const DescribeAssetMachineTagTopResponse = models.DescribeAssetMachineTagTopResponse;
+const CreateScanMalwareSettingResponse = models.CreateScanMalwareSettingResponse;
+const DescribeRansomDefenseTrendResponse = models.DescribeRansomDefenseTrendResponse;
+const CKafkaInstanceInfo = models.CKafkaInstanceInfo;
+const AssetWebFrameBaseInfo = models.AssetWebFrameBaseInfo;
+const ModifyJavaMemShellsStatusRequest = models.ModifyJavaMemShellsStatusRequest;
+const DescribeFileTamperRuleInfoRequest = models.DescribeFileTamperRuleInfoRequest;
+const ExportAttackEventsRequest = models.ExportAttackEventsRequest;
+const ModifyAutoOpenProVersionConfigRequest = models.ModifyAutoOpenProVersionConfigRequest;
+const DescribeLogDeliveryKafkaOptionsRequest = models.DescribeLogDeliveryKafkaOptionsRequest;
+const DescribeAssetWebLocationInfoResponse = models.DescribeAssetWebLocationInfoResponse;
+const CreateIncidentBacktrackingResponse = models.CreateIncidentBacktrackingResponse;
+const RiskProcessEvent = models.RiskProcessEvent;
+const ExportVulListRequest = models.ExportVulListRequest;
+const ModifyBashPolicyResponse = models.ModifyBashPolicyResponse;
+const ExportLicenseDetailRequest = models.ExportLicenseDetailRequest;
+const ScreenNameValue = models.ScreenNameValue;
+const CreateLicenseOrderRequest = models.CreateLicenseOrderRequest;
+const CreateNetAttackWhiteListResponse = models.CreateNetAttackWhiteListResponse;
+const CreateLogExportResponse = models.CreateLogExportResponse;
+const EmergencyResponseInfo = models.EmergencyResponseInfo;
+const ExportVulDefenceListResponse = models.ExportVulDefenceListResponse;
+const CloudProtectService = models.CloudProtectService;
+const ModifyLogKafkaDeliverTypeResponse = models.ModifyLogKafkaDeliverTypeResponse;
+const DescribeBaselineScanScheduleRequest = models.DescribeBaselineScanScheduleRequest;
+const RetryCreateSnapshotRequest = models.RetryCreateSnapshotRequest;
+const ExportVulDefenceEventRequest = models.ExportVulDefenceEventRequest;
+const RansomDefenseStrategyDetail = models.RansomDefenseStrategyDetail;
+const DescribeEmergencyVulListResponse = models.DescribeEmergencyVulListResponse;
+const DestroyOrderResponse = models.DestroyOrderResponse;
+const DescribeAssetUserListResponse = models.DescribeAssetUserListResponse;
+const StandardModeConfig = models.StandardModeConfig;
+const BashEvent = models.BashEvent;
+const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
+const RecoverMalwaresResponse = models.RecoverMalwaresResponse;
+const RegionSet = models.RegionSet;
+const WebHookHostLabel = models.WebHookHostLabel;
+const RansomDefenseStrategy = models.RansomDefenseStrategy;
+const DescribeIgnoreHostAndItemConfigRequest = models.DescribeIgnoreHostAndItemConfigRequest;
+const DescribeReverseShellRulesRequest = models.DescribeReverseShellRulesRequest;
+const DescribeScanVulSettingResponse = models.DescribeScanVulSettingResponse;
+const MachineClearHistory = models.MachineClearHistory;
+const DescribeSecurityBroadcastsResponse = models.DescribeSecurityBroadcastsResponse;
+const DescribeSearchLogsResponse = models.DescribeSearchLogsResponse;
+const AssetFilters = models.AssetFilters;
+const DescribeAssetDatabaseInfoResponse = models.DescribeAssetDatabaseInfoResponse;
+const SyncMachinesRequest = models.SyncMachinesRequest;
+const MonthInspectionReport = models.MonthInspectionReport;
+const SetBashEventsStatusRequest = models.SetBashEventsStatusRequest;
+const ReverseShell = models.ReverseShell;
+const AssetAppProcessInfo = models.AssetAppProcessInfo;
+const DescribeBaselineEffectHostListResponse = models.DescribeBaselineEffectHostListResponse;
+const DescribeWebHookRuleResponse = models.DescribeWebHookRuleResponse;
+const DescribeBaselineStrategyListRequest = models.DescribeBaselineStrategyListRequest;
+const ExportJavaMemShellsRequest = models.ExportJavaMemShellsRequest;
+const DescribeVersionCompareChartResponse = models.DescribeVersionCompareChartResponse;
+const NetAttackEvent = models.NetAttackEvent;
+const DescribeMachineDefenseCntResponse = models.DescribeMachineDefenseCntResponse;
+const BaselineItemInfo = models.BaselineItemInfo;
+const NetAttackTrend = models.NetAttackTrend;
+const DescribeVertexDetailRequest = models.DescribeVertexDetailRequest;
+const ComponentStatistics = models.ComponentStatistics;
+const ExportAssetWebServiceInfoListRequest = models.ExportAssetWebServiceInfoListRequest;
+const SetBashEventsStatusResponse = models.SetBashEventsStatusResponse;
+const DescribeAssetUserInfoRequest = models.DescribeAssetUserInfoRequest;
+const UpdateBaselineStrategyResponse = models.UpdateBaselineStrategyResponse;
+const DescribeAgentInstallCommandRequest = models.DescribeAgentInstallCommandRequest;
+const DescribeMachineRegionListResponse = models.DescribeMachineRegionListResponse;
+const ExportPrivilegeEventsRequest = models.ExportPrivilegeEventsRequest;
+const ModifyWebPageProtectSwitchRequest = models.ModifyWebPageProtectSwitchRequest;
+const DescribeScreenGeneralStatRequest = models.DescribeScreenGeneralStatRequest;
+const DescribeExpertServiceListRequest = models.DescribeExpertServiceListRequest;
+const ModifyUsersConfigResponse = models.ModifyUsersConfigResponse;
+const MachineExtraInfo = models.MachineExtraInfo;
+const DescribeAttackEventInfoRequest = models.DescribeAttackEventInfoRequest;
+const FileTamperEvent = models.FileTamperEvent;
+const CreateLogExportRequest = models.CreateLogExportRequest;
+const DescribeLicenseResponse = models.DescribeLicenseResponse;
+const OrderResource = models.OrderResource;
+const DescribeMalwareFileResponse = models.DescribeMalwareFileResponse;
+const DescribeWebHookRuleRequest = models.DescribeWebHookRuleRequest;
+const DescribeSecurityBroadcastInfoResponse = models.DescribeSecurityBroadcastInfoResponse;
+const DescribeLogDeliveryKafkaOptionsResponse = models.DescribeLogDeliveryKafkaOptionsResponse;
+const DescribeScreenRiskAssetsTopResponse = models.DescribeScreenRiskAssetsTopResponse;
+const StopBaselineDetectRequest = models.StopBaselineDetectRequest;
+const ScanBaselineResponse = models.ScanBaselineResponse;
+const CheckLogKafkaConnectionStateRequest = models.CheckLogKafkaConnectionStateRequest;
+const ModifyNetAttackSettingRequest = models.ModifyNetAttackSettingRequest;
+const DescribeRiskDnsListResponse = models.DescribeRiskDnsListResponse;
+const ExportRiskDnsPolicyListRequest = models.ExportRiskDnsPolicyListRequest;
+const DescribeAssetWebAppListResponse = models.DescribeAssetWebAppListResponse;
+const ExportAssetProcessInfoListRequest = models.ExportAssetProcessInfoListRequest;
+const DescribeAssetWebAppCountResponse = models.DescribeAssetWebAppCountResponse;
+const AssetDatabaseDetail = models.AssetDatabaseDetail;
+const DescribeScanTaskStatusRequest = models.DescribeScanTaskStatusRequest;
+const DescribeVulStoreListResponse = models.DescribeVulStoreListResponse;
+const DescribeLoginWhiteHostListResponse = models.DescribeLoginWhiteHostListResponse;
+const ExportIgnoreBaselineRuleRequest = models.ExportIgnoreBaselineRuleRequest;
+const ModifyMaliciousRequestWhiteListResponse = models.ModifyMaliciousRequestWhiteListResponse;
+const DeleteMachineTagRequest = models.DeleteMachineTagRequest;
+const AssetDiskPartitionInfo = models.AssetDiskPartitionInfo;
+const DescribeScreenMachineRegionsRequest = models.DescribeScreenMachineRegionsRequest;
+const ModifyWebHookPolicyStatusRequest = models.ModifyWebHookPolicyStatusRequest;
+const RiskDnsEvent = models.RiskDnsEvent;
+const BaselineRuleInfo = models.BaselineRuleInfo;
+const DescribeExportMachinesResponse = models.DescribeExportMachinesResponse;
+const DescribeScanTaskStatusResponse = models.DescribeScanTaskStatusResponse;
+const DescribeRansomDefenseStrategyMachinesRequest = models.DescribeRansomDefenseStrategyMachinesRequest;
+const DescribeAssetLoadInfoResponse = models.DescribeAssetLoadInfoResponse;
+const DescribeMachineRiskCntResponse = models.DescribeMachineRiskCntResponse;
+const ScreenRegionMachines = models.ScreenRegionMachines;
+const UpdateHostLoginWhiteObj = models.UpdateHostLoginWhiteObj;
+const ModifyWebPageProtectSwitchResponse = models.ModifyWebPageProtectSwitchResponse;
+const DescribeAssetWebFrameCountResponse = models.DescribeAssetWebFrameCountResponse;
+const CanNotSeparateInfo = models.CanNotSeparateInfo;
+const DescribeAssetWebLocationCountResponse = models.DescribeAssetWebLocationCountResponse;
+const DescribeBashEventsNewResponse = models.DescribeBashEventsNewResponse;
+const VulFixStatusInfo = models.VulFixStatusInfo;
+const DeleteWebHookReceiverResponse = models.DeleteWebHookReceiverResponse;
+const ExportAssetSystemPackageListResponse = models.ExportAssetSystemPackageListResponse;
+const DescribeLogExportsResponse = models.DescribeLogExportsResponse;
+const DescribeVulTrendResponse = models.DescribeVulTrendResponse;
+const DescribeOpenPortStatisticsRequest = models.DescribeOpenPortStatisticsRequest;
+const OsName = models.OsName;
+const DescribeMalwareTimingScanSettingRequest = models.DescribeMalwareTimingScanSettingRequest;
+const FullTextInfo = models.FullTextInfo;
+const DescribeFileTamperRuleCountResponse = models.DescribeFileTamperRuleCountResponse;
+const ExportAssetUserListRequest = models.ExportAssetUserListRequest;
+const VulLevelInfo = models.VulLevelInfo;
+const CreateBanWhiteListResponse = models.CreateBanWhiteListResponse;
+const DescribeLogStorageStatisticResponse = models.DescribeLogStorageStatisticResponse;
+const RegionInfo = models.RegionInfo;
+const DescribeCanFixVulMachineResponse = models.DescribeCanFixVulMachineResponse;
+const CreateSearchTemplateResponse = models.CreateSearchTemplateResponse;
+const IncidentVertexInfo = models.IncidentVertexInfo;
+const BaselineItemDetect = models.BaselineItemDetect;
+const DescribeVulDefenceSettingResponse = models.DescribeVulDefenceSettingResponse;
+const DescribeAssetProcessCountResponse = models.DescribeAssetProcessCountResponse;
+const DescribeEmergencyResponseListRequest = models.DescribeEmergencyResponseListRequest;
+const DescribeScanStateResponse = models.DescribeScanStateResponse;
+const BaselineHostDetect = models.BaselineHostDetect;
+const EditTagsRequest = models.EditTagsRequest;
+const DeleteReverseShellRulesRequest = models.DeleteReverseShellRulesRequest;
+const ScreenVulInfo = models.ScreenVulInfo;
+const UntrustMalwaresRequest = models.UntrustMalwaresRequest;
+const DescribeScreenEventsCntRequest = models.DescribeScreenEventsCntRequest;
+const DescribeBaselineEffectHostListRequest = models.DescribeBaselineEffectHostListRequest;
+const WebHookCustomField = models.WebHookCustomField;
+const DescribeDefenceEventDetailResponse = models.DescribeDefenceEventDetailResponse;
+const ExportBaselineHostDetectListRequest = models.ExportBaselineHostDetectListRequest;
+const DescribeAssetDatabaseInfoRequest = models.DescribeAssetDatabaseInfoRequest;
+const ModifyFileTamperEventsResponse = models.ModifyFileTamperEventsResponse;
+const ExportAssetDatabaseListResponse = models.ExportAssetDatabaseListResponse;
+const DescribeAssetUserCountRequest = models.DescribeAssetUserCountRequest;
+const CreateRansomDefenseStrategyResponse = models.CreateRansomDefenseStrategyResponse;
+const ExportVulDefencePluginEventRequest = models.ExportVulDefencePluginEventRequest;
+const DescribeRansomDefenseRollBackTaskListRequest = models.DescribeRansomDefenseRollBackTaskListRequest;
+const DescribeWarningHostConfigRequest = models.DescribeWarningHostConfigRequest;
+const BashPolicy = models.BashPolicy;
+const ModifyBanWhiteListResponse = models.ModifyBanWhiteListResponse;
+const ExportAssetWebServiceInfoListResponse = models.ExportAssetWebServiceInfoListResponse;
+const ExportAssetMachineListResponse = models.ExportAssetMachineListResponse;
+const ExportSecurityTrendsResponse = models.ExportSecurityTrendsResponse;
+const DescribeReverseShellEventInfoRequest = models.DescribeReverseShellEventInfoRequest;
+const ModifyMalwareTimingScanSettingsResponse = models.ModifyMalwareTimingScanSettingsResponse;
+const DescribeRiskDnsInfoResponse = models.DescribeRiskDnsInfoResponse;
+const ExportRiskProcessEventsRequest = models.ExportRiskProcessEventsRequest;
+const DescribeLogKafkaDeliverInfoRequest = models.DescribeLogKafkaDeliverInfoRequest;
+const DescribeBaselineWeakPasswordListResponse = models.DescribeBaselineWeakPasswordListResponse;
+const DeleteNonlocalLoginPlacesResponse = models.DeleteNonlocalLoginPlacesResponse;
+const ExportAssetMachineDetailResponse = models.ExportAssetMachineDetailResponse;
+const ModifyLogKafkaAccessResponse = models.ModifyLogKafkaAccessResponse;
+const DeleteMalwareScanTaskResponse = models.DeleteMalwareScanTaskResponse;
+const MalwareWhiteListInfo = models.MalwareWhiteListInfo;
+const DescribeBaselineDetailResponse = models.DescribeBaselineDetailResponse;
+const DescribeWebHookReceiverResponse = models.DescribeWebHookReceiverResponse;
+const ExportAttackEventsResponse = models.ExportAttackEventsResponse;
+const ExportIgnoreRuleEffectHostListResponse = models.ExportIgnoreRuleEffectHostListResponse;
+const ScreenRegionInfo = models.ScreenRegionInfo;
+const DescribeBaselinePolicyListResponse = models.DescribeBaselinePolicyListResponse;
+const DescribeBanRegionsResponse = models.DescribeBanRegionsResponse;
+const DescribeLogStorageRecordResponse = models.DescribeLogStorageRecordResponse;
+const DeletePrivilegeEventsResponse = models.DeletePrivilegeEventsResponse;
+const VulHostTopInfo = models.VulHostTopInfo;
+const OrderModifyObject = models.OrderModifyObject;
+const DescribeRansomDefenseRollBackTaskListResponse = models.DescribeRansomDefenseRollBackTaskListResponse;
+const VertexDetail = models.VertexDetail;
+const ExportAssetEnvListRequest = models.ExportAssetEnvListRequest;
+const DescribeVulEffectHostListResponse = models.DescribeVulEffectHostListResponse;
+const RegionListDetail = models.RegionListDetail;
+const DescribeSearchLogsRequest = models.DescribeSearchLogsRequest;
+const ScanVulSettingResponse = models.ScanVulSettingResponse;
+const DescribeAssetJarInfoResponse = models.DescribeAssetJarInfoResponse;
+const DescribeVulInfoCvssRequest = models.DescribeVulInfoCvssRequest;
+const SwitchBashRulesResponse = models.SwitchBashRulesResponse;
+const DescribeFileTamperRulesResponse = models.DescribeFileTamperRulesResponse;
+const DescribeComponentStatisticsRequest = models.DescribeComponentStatisticsRequest;
+const DescribeAssetProcessCountRequest = models.DescribeAssetProcessCountRequest;
+const ModifyBanStatusResponse = models.ModifyBanStatusResponse;
+const DescribeLoginWhiteListResponse = models.DescribeLoginWhiteListResponse;
+const DescribeUsualLoginPlacesRequest = models.DescribeUsualLoginPlacesRequest;
+const ModifyWebHookReceiverRequest = models.ModifyWebHookReceiverRequest;
+const ExportAssetInitServiceListResponse = models.ExportAssetInitServiceListResponse;
+const DescribeScanMalwareScheduleResponse = models.DescribeScanMalwareScheduleResponse;
+const ExportRansomDefenseEventsListRequest = models.ExportRansomDefenseEventsListRequest;
+const DescribeScreenProtectionCntRequest = models.DescribeScreenProtectionCntRequest;
+const AssetWebLocationBaseInfo = models.AssetWebLocationBaseInfo;
+const DescribeBaselineItemListRequest = models.DescribeBaselineItemListRequest;
+const DescribeScreenHostInvasionRequest = models.DescribeScreenHostInvasionRequest;
+const BashRule = models.BashRule;
+const ExportVulInfoRequest = models.ExportVulInfoRequest;
+const DescribeAssetUserCountResponse = models.DescribeAssetUserCountResponse;
+const DescribeScreenBroadcastsRequest = models.DescribeScreenBroadcastsRequest;
+const CreateSearchLogResponse = models.CreateSearchLogResponse;
+const DescribeRiskDnsPolicyListResponse = models.DescribeRiskDnsPolicyListResponse;
+const DescribeSecurityTrendsResponse = models.DescribeSecurityTrendsResponse;
+const BashEventsInfo = models.BashEventsInfo;
+const StopNoticeBanTipsResponse = models.StopNoticeBanTipsResponse;
+const NetAttackWhiteRule = models.NetAttackWhiteRule;
+const AssetSystemPackageInfo = models.AssetSystemPackageInfo;
+const DescribeEmergencyVulListRequest = models.DescribeEmergencyVulListRequest;
+const DescribeSecurityDynamicsResponse = models.DescribeSecurityDynamicsResponse;
+const DeleteReverseShellEventsResponse = models.DeleteReverseShellEventsResponse;
+const ExportAssetEnvListResponse = models.ExportAssetEnvListResponse;
+const LicenseBindDetail = models.LicenseBindDetail;
+const DescribeAttackTrendsResponse = models.DescribeAttackTrendsResponse;
+const DescribeVulTrendRequest = models.DescribeVulTrendRequest;
+const ModifyLogStorageConfigResponse = models.ModifyLogStorageConfigResponse;
+const DescribeAttackStatisticsRequest = models.DescribeAttackStatisticsRequest;
+const ExportFileTamperRulesRequest = models.ExportFileTamperRulesRequest;
+const AddLoginWhiteListsResponse = models.AddLoginWhiteListsResponse;
+const ModifyLogKafkaStateRequest = models.ModifyLogKafkaStateRequest;
+const AssetWebServiceBaseInfo = models.AssetWebServiceBaseInfo;
+const RiskDnsPolicy = models.RiskDnsPolicy;
+const DeleteAllJavaMemShellsResponse = models.DeleteAllJavaMemShellsResponse;
+const DescribeMalwareWhiteListRequest = models.DescribeMalwareWhiteListRequest;
+const ModifyUsersConfigRequest = models.ModifyUsersConfigRequest;
+const DescribeGeneralStatRequest = models.DescribeGeneralStatRequest;
+const DescribeHotVulTopRequest = models.DescribeHotVulTopRequest;
+const AssetInitServiceBaseInfo = models.AssetInitServiceBaseInfo;
+const DeleteBanWhiteListRequest = models.DeleteBanWhiteListRequest;
+const DescribeAssetWebFrameCountRequest = models.DescribeAssetWebFrameCountRequest;
+const DescribeIgnoreRuleEffectHostListRequest = models.DescribeIgnoreRuleEffectHostListRequest;
+const ExportAssetMachineListRequest = models.ExportAssetMachineListRequest;
+const ExportInfo = models.ExportInfo;
+const DescribeScreenProtectionStatResponse = models.DescribeScreenProtectionStatResponse;
+const ExportBaselineItemDetectListRequest = models.ExportBaselineItemDetectListRequest;
+const DescribeAttackSourceRequest = models.DescribeAttackSourceRequest;
+const DescribeMalwareInfoResponse = models.DescribeMalwareInfoResponse;
+const DeleteRiskDnsPolicyResponse = models.DeleteRiskDnsPolicyResponse;
+const DuplicateHosts = models.DuplicateHosts;
+const DescribeLogStorageRecordRequest = models.DescribeLogStorageRecordRequest;
+const ExportBaselineHostDetectListResponse = models.ExportBaselineHostDetectListResponse;
+const MalwareWhiteListAffectEvent = models.MalwareWhiteListAffectEvent;
+const CreateBanWhiteListRequest = models.CreateBanWhiteListRequest;
+const DescribeMachineRiskCntRequest = models.DescribeMachineRiskCntRequest;
+const ExportRansomDefenseStrategyMachinesResponse = models.ExportRansomDefenseStrategyMachinesResponse;
+const BaselineRuleTopInfo = models.BaselineRuleTopInfo;
+const ExportAssetWebFrameListRequest = models.ExportAssetWebFrameListRequest;
+const DescribeSecurityBroadcastsRequest = models.DescribeSecurityBroadcastsRequest;
+const DescribeVulDefenceEventResponse = models.DescribeVulDefenceEventResponse;
+const ExportBaselineEffectHostListResponse = models.ExportBaselineEffectHostListResponse;
+const BashEventsInfoNew = models.BashEventsInfoNew;
+const ModifyLogKafkaAccessRequest = models.ModifyLogKafkaAccessRequest;
+const EventStat = models.EventStat;
+const DescribeLicenseBindScheduleRequest = models.DescribeLicenseBindScheduleRequest;
+const DeleteRiskDnsPolicyRequest = models.DeleteRiskDnsPolicyRequest;
+const DescribeBruteAttackRulesRequest = models.DescribeBruteAttackRulesRequest;
+const DescribeProcessStatisticsResponse = models.DescribeProcessStatisticsResponse;
+const DescribeLogIndexResponse = models.DescribeLogIndexResponse;
+const DescribeAttackVulTypeListResponse = models.DescribeAttackVulTypeListResponse;
+const VulEffectModuleInfo = models.VulEffectModuleInfo;
+const DescribeAssetWebAppPluginListResponse = models.DescribeAssetWebAppPluginListResponse;
+const DescribeAssetWebAppCountRequest = models.DescribeAssetWebAppCountRequest;
+const DescribeAssetTypesRequest = models.DescribeAssetTypesRequest;
+const BaselineEventLevelInfo = models.BaselineEventLevelInfo;
+const DescribeMalwareFileRequest = models.DescribeMalwareFileRequest;
+const DescribeLoginWhiteCombinedListRequest = models.DescribeLoginWhiteCombinedListRequest;
+const Strategy = models.Strategy;
+const DeleteSearchTemplateResponse = models.DeleteSearchTemplateResponse;
+const DeleteBashPoliciesResponse = models.DeleteBashPoliciesResponse;
+const DescribeEmergencyResponseListResponse = models.DescribeEmergencyResponseListResponse;
+const ScreenProtectionCnt = models.ScreenProtectionCnt;
+const AssetPlanTask = models.AssetPlanTask;
+const VulDefenceOverview = models.VulDefenceOverview;
+const DescribeFileTamperEventRuleInfoResponse = models.DescribeFileTamperEventRuleInfoResponse;
+const DeleteBaselinePolicyResponse = models.DeleteBaselinePolicyResponse;
+const ModifyVulDefenceSettingRequest = models.ModifyVulDefenceSettingRequest;
+const ModifyLoginWhiteRecordResponse = models.ModifyLoginWhiteRecordResponse;
+const DescribeMalwareWhiteListAffectListRequest = models.DescribeMalwareWhiteListAffectListRequest;
+const DeleteWebHookPolicyRequest = models.DeleteWebHookPolicyRequest;
+const ModifyRansomDefenseStrategyStatusRequest = models.ModifyRansomDefenseStrategyStatusRequest;
+const DescribeAssetAppListResponse = models.DescribeAssetAppListResponse;
+const ScreenDefendAttackLog = models.ScreenDefendAttackLog;
+const DescribeVulDefencePluginStatusResponse = models.DescribeVulDefencePluginStatusResponse;
+const HostTagInfo = models.HostTagInfo;
+const DescribeRansomDefenseEventsListResponse = models.DescribeRansomDefenseEventsListResponse;
+const DescribeVulEffectModulesRequest = models.DescribeVulEffectModulesRequest;
+const ModifyRiskDnsPolicyStatusRequest = models.ModifyRiskDnsPolicyStatusRequest;
+const DescribeScreenProtectionCntResponse = models.DescribeScreenProtectionCntResponse;
+const ModifyRansomDefenseEventsStatusResponse = models.ModifyRansomDefenseEventsStatusResponse;
+const DescribeBaselineDefaultStrategyListRequest = models.DescribeBaselineDefaultStrategyListRequest;
+const CreateScanMalwareSettingRequest = models.CreateScanMalwareSettingRequest;
+const AssetLoadSummary = models.AssetLoadSummary;
+const DescribeMalwareTimingScanSettingResponse = models.DescribeMalwareTimingScanSettingResponse;
+const DescribeHostLoginListRequest = models.DescribeHostLoginListRequest;
+const ModifyRansomDefenseStrategyStatusResponse = models.ModifyRansomDefenseStrategyStatusResponse;
+const ExportRansomDefenseStrategyListRequest = models.ExportRansomDefenseStrategyListRequest;
+const Machine = models.Machine;
+const FileTamperRule = models.FileTamperRule;
+const SecurityTrend = models.SecurityTrend;
+const ScanTaskAgainResponse = models.ScanTaskAgainResponse;
+const DescribeAssetWebServiceProcessListRequest = models.DescribeAssetWebServiceProcessListRequest;
+const DescribeScreenMachinesResponse = models.DescribeScreenMachinesResponse;
+const LicenseDetail = models.LicenseDetail;
+const PrivilegeRule = models.PrivilegeRule;
+const ScanVulSettingRequest = models.ScanVulSettingRequest;
+const ExportVulDetectionExcelRequest = models.ExportVulDetectionExcelRequest;
+const CreateEmergencyVulScanRequest = models.CreateEmergencyVulScanRequest;
+const ModifyWebHookRuleStatusResponse = models.ModifyWebHookRuleStatusResponse;
+const ExportVulEffectHostListResponse = models.ExportVulEffectHostListResponse;
+const DescribeAssetWebServiceCountResponse = models.DescribeAssetWebServiceCountResponse;
+const AssetCoreModuleDetail = models.AssetCoreModuleDetail;
+const ExportScanTaskDetailsResponse = models.ExportScanTaskDetailsResponse;
+const DescribeVulTopRequest = models.DescribeVulTopRequest;
+const DescribeScreenProtectionStatRequest = models.DescribeScreenProtectionStatRequest;
+const ModifyLogKafkaDeliverTypeRequest = models.ModifyLogKafkaDeliverTypeRequest;
+const IgnoreBaselineRule = models.IgnoreBaselineRule;
+const DescribeBaselineItemDetectListRequest = models.DescribeBaselineItemDetectListRequest;
+const ExportBaselineItemDetectListResponse = models.ExportBaselineItemDetectListResponse;
+const DescribeBanStatusRequest = models.DescribeBanStatusRequest;
+const DescribeAssetRecentMachineInfoResponse = models.DescribeAssetRecentMachineInfoResponse;
+const BaselineItem = models.BaselineItem;
+const DescribeMalWareListResponse = models.DescribeMalWareListResponse;
+const DescribeWebHookRulesRequest = models.DescribeWebHookRulesRequest;
+const ModifyMalwareWhiteListResponse = models.ModifyMalwareWhiteListResponse;
+const DescribeAssetPortInfoListResponse = models.DescribeAssetPortInfoListResponse;
+const DescribeMalwareRiskOverviewRequest = models.DescribeMalwareRiskOverviewRequest;
+const DescribeMaliciousRequestWhiteListResponse = models.DescribeMaliciousRequestWhiteListResponse;
+const DescribeBaselinePolicyListRequest = models.DescribeBaselinePolicyListRequest;
+const VulDefenceEventDetail = models.VulDefenceEventDetail;
+const DeleteBruteAttacksResponse = models.DeleteBruteAttacksResponse;
+const ExportTasksResponse = models.ExportTasksResponse;
+const ExportAssetWebAppListResponse = models.ExportAssetWebAppListResponse;
+const DescribeIgnoreBaselineRuleResponse = models.DescribeIgnoreBaselineRuleResponse;
+const DescribeVulEmergentMsgRequest = models.DescribeVulEmergentMsgRequest;
+const DescribeMachineOsListRequest = models.DescribeMachineOsListRequest;
+const DescribeMalwareRiskWarningResponse = models.DescribeMalwareRiskWarningResponse;
+const DescribeBashRulesRequest = models.DescribeBashRulesRequest;
+const ExportLicenseDetailResponse = models.ExportLicenseDetailResponse;
+const BaselineBasicInfo = models.BaselineBasicInfo;
+const DescribeBanModeResponse = models.DescribeBanModeResponse;
+const DescribeScreenAttackHotspotResponse = models.DescribeScreenAttackHotspotResponse;
+const FileTamperRuleCount = models.FileTamperRuleCount;
+const DescribeRiskDnsEventInfoResponse = models.DescribeRiskDnsEventInfoResponse;
+const DescribeSecurityEventStatResponse = models.DescribeSecurityEventStatResponse;
+const DescribeAssetDatabaseListRequest = models.DescribeAssetDatabaseListRequest;
+const ModifyWebHookRuleStatusRequest = models.ModifyWebHookRuleStatusRequest;
+const KeysLocalStorageResponse = models.KeysLocalStorageResponse;
+const DescribeAssetMachineListRequest = models.DescribeAssetMachineListRequest;
+const ABTestConfig = models.ABTestConfig;
+const ScreenBaselineInfo = models.ScreenBaselineInfo;
+const DescribeProductStatusRequest = models.DescribeProductStatusRequest;
+const Filter = models.Filter;
+const DescribeAssetMachineTagTopRequest = models.DescribeAssetMachineTagTopRequest;
+const DescribeAgentInstallationTokenRequest = models.DescribeAgentInstallationTokenRequest;
+const DescribeVulDefencePluginDetailResponse = models.DescribeVulDefencePluginDetailResponse;
+const JavaMemShellPluginInfo = models.JavaMemShellPluginInfo;
+const DescribeAssetDatabaseListResponse = models.DescribeAssetDatabaseListResponse;
+const ExportMalwaresRequest = models.ExportMalwaresRequest;
+const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest;
+const RiskDnsList = models.RiskDnsList;
+const SyncAssetScanResponse = models.SyncAssetScanResponse;
+const MalwareRiskOverview = models.MalwareRiskOverview;
+const AssetCoreModuleBaseInfo = models.AssetCoreModuleBaseInfo;
+const CheckLogKafkaConnectionStateResponse = models.CheckLogKafkaConnectionStateResponse;
+const ExportBashPoliciesRequest = models.ExportBashPoliciesRequest;
+const DescribeScreenBroadcastsResponse = models.DescribeScreenBroadcastsResponse;
+const CreateBaselineStrategyRequest = models.CreateBaselineStrategyRequest;
+const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
+const VulFixStatusHostInfo = models.VulFixStatusHostInfo;
+const AttackSourceEvent = models.AttackSourceEvent;
+const DescribePrivilegeRulesResponse = models.DescribePrivilegeRulesResponse;
+const DescribeReverseShellEventsResponse = models.DescribeReverseShellEventsResponse;
+const DescribeAssetAppCountRequest = models.DescribeAssetAppCountRequest;
+const DescribeMaliciousRequestWhiteListRequest = models.DescribeMaliciousRequestWhiteListRequest;
+const DescribeBashEventsNewRequest = models.DescribeBashEventsNewRequest;
+const MalwareRisk = models.MalwareRisk;
+const DescribeAssetPortInfoListRequest = models.DescribeAssetPortInfoListRequest;
+const DescribeVulDefencePluginDetailRequest = models.DescribeVulDefencePluginDetailRequest;
+const DescribeExportMachinesRequest = models.DescribeExportMachinesRequest;
+const DescribeAssetInfoResponse = models.DescribeAssetInfoResponse;
+const WarningObject = models.WarningObject;
+const DescribeAssetPortCountResponse = models.DescribeAssetPortCountResponse;
+const DescribeScreenMachinesRequest = models.DescribeScreenMachinesRequest;
+const DeleteMalwareScanTaskRequest = models.DeleteMalwareScanTaskRequest;
+const ScreenInvasion = models.ScreenInvasion;
+const ExportBashPoliciesResponse = models.ExportBashPoliciesResponse;
+const ModifyEventAttackStatusResponse = models.ModifyEventAttackStatusResponse;
+const DescribeIgnoreRuleEffectHostListResponse = models.DescribeIgnoreRuleEffectHostListResponse;
+const FileTamperRuleDetail = models.FileTamperRuleDetail;
+const CreateBaselineStrategyResponse = models.CreateBaselineStrategyResponse;
+const ExportAssetCoreModuleListResponse = models.ExportAssetCoreModuleListResponse;
+const ModifyMachineAutoClearConfigResponse = models.ModifyMachineAutoClearConfigResponse;
+const DescribeHistoryAccountsResponse = models.DescribeHistoryAccountsResponse;
+const BaselineCustomRuleIdName = models.BaselineCustomRuleIdName;
+const DescribeLogStorageConfigResponse = models.DescribeLogStorageConfigResponse;
+const DescribeVulEmergentMsgResponse = models.DescribeVulEmergentMsgResponse;
+const DescribeLoginWhiteListRequest = models.DescribeLoginWhiteListRequest;
+const DescribeAssetDatabaseCountRequest = models.DescribeAssetDatabaseCountRequest;
+const ModifyWarningSettingRequest = models.ModifyWarningSettingRequest;
+const ExportVulDetectionReportResponse = models.ExportVulDetectionReportResponse;
+const DescribeScanScheduleRequest = models.DescribeScanScheduleRequest;
+const CheckFirstScanBaselineRequest = models.CheckFirstScanBaselineRequest;
+const DescribeLicenseGeneralResponse = models.DescribeLicenseGeneralResponse;
+const ScreenEventsCnt = models.ScreenEventsCnt;
+const DescribeFastAnalysisResponse = models.DescribeFastAnalysisResponse;
+const ScreenMachine = models.ScreenMachine;
+const DescribeAESKeyRequest = models.DescribeAESKeyRequest;
+const ModifyWebHookRuleResponse = models.ModifyWebHookRuleResponse;
+const DescribeAssetLoadInfoRequest = models.DescribeAssetLoadInfoRequest;
+const ModifyMaliciousRequestWhiteListRequest = models.ModifyMaliciousRequestWhiteListRequest;
+const RetryCreateSnapshotResponse = models.RetryCreateSnapshotResponse;
+const CreateBuyBindTaskResponse = models.CreateBuyBindTaskResponse;
+const ExportScanTaskDetailsRequest = models.ExportScanTaskDetailsRequest;
+const ExportBaselineListResponse = models.ExportBaselineListResponse;
+const DescribeBruteAttackRulesResponse = models.DescribeBruteAttackRulesResponse;
+const ModifyBanModeResponse = models.ModifyBanModeResponse;
+const DescribeVulDefencePluginExceptionCountResponse = models.DescribeVulDefencePluginExceptionCountResponse;
+const DeleteLicenseRecordResponse = models.DeleteLicenseRecordResponse;
+const AssetProcessBaseInfo = models.AssetProcessBaseInfo;
+const DescribeVulDefenceOverviewRequest = models.DescribeVulDefenceOverviewRequest;
+const DescribeCanNotSeparateMachineRequest = models.DescribeCanNotSeparateMachineRequest;
+const DescribeRiskDnsEventListResponse = models.DescribeRiskDnsEventListResponse;
+const DeleteBruteAttacksRequest = models.DeleteBruteAttacksRequest;
+const DescribeAssetCoreModuleListResponse = models.DescribeAssetCoreModuleListResponse;
+const DescribeRansomDefenseStateResponse = models.DescribeRansomDefenseStateResponse;
+const DescribeFastAnalysisRequest = models.DescribeFastAnalysisRequest;
+const DescribeRiskBatchStatusRequest = models.DescribeRiskBatchStatusRequest;
+const DescribeLoginWhiteCombinedListResponse = models.DescribeLoginWhiteCombinedListResponse;
+const DeleteMachineClearHistoryResponse = models.DeleteMachineClearHistoryResponse;
+const DescribeLicenseWhiteConfigResponse = models.DescribeLicenseWhiteConfigResponse;
+const ExportVulDetectionExcelResponse = models.ExportVulDetectionExcelResponse;
+const ModifyWarningHostConfigResponse = models.ModifyWarningHostConfigResponse;
+const LogHistogram = models.LogHistogram;
+const DescribeVulCveIdInfoResponse = models.DescribeVulCveIdInfoResponse;
+const DescribeAlarmVertexIdResponse = models.DescribeAlarmVertexIdResponse;
+const CreateSearchTemplateRequest = models.CreateSearchTemplateRequest;
+const DeleteTagsRequest = models.DeleteTagsRequest;
+const DescribeScanStateRequest = models.DescribeScanStateRequest;
+const SyncBaselineDetectSummaryResponse = models.SyncBaselineDetectSummaryResponse;
+const ExportFileTamperRulesResponse = models.ExportFileTamperRulesResponse;
+const DescribeAgentInstallCommandResponse = models.DescribeAgentInstallCommandResponse;
+const DescribeSafeInfoResponse = models.DescribeSafeInfoResponse;
+const AssetEnvBaseInfo = models.AssetEnvBaseInfo;
+const ModifyVulDefenceEventStatusResponse = models.ModifyVulDefenceEventStatusResponse;
+const MalwareInfo = models.MalwareInfo;
+const Place = models.Place;
+const DescribeSecurityProtectionStatRequest = models.DescribeSecurityProtectionStatRequest;
+const LogInfo = models.LogInfo;
+const DescribeHostInfoResponse = models.DescribeHostInfoResponse;
+const ModifyWebHookPolicyStatusResponse = models.ModifyWebHookPolicyStatusResponse;
+const ExportRiskDnsPolicyListResponse = models.ExportRiskDnsPolicyListResponse;
+const ModifyBruteAttackRulesRequest = models.ModifyBruteAttackRulesRequest;
+const DescribeScreenDefenseTrendsResponse = models.DescribeScreenDefenseTrendsResponse;
+const KeyValueArrayInfo = models.KeyValueArrayInfo;
+const SyncBaselineDetectSummaryRequest = models.SyncBaselineDetectSummaryRequest;
+const DescribeExpertServiceOrderListResponse = models.DescribeExpertServiceOrderListResponse;
+const DeleteReverseShellRulesResponse = models.DeleteReverseShellRulesResponse;
+const DescribeAssetPlanTaskListRequest = models.DescribeAssetPlanTaskListRequest;
+const DescribePrivilegeEventInfoResponse = models.DescribePrivilegeEventInfoResponse;
+const DescribeMachineLicenseDetailRequest = models.DescribeMachineLicenseDetailRequest;
+const VulFixStatusSnapshotInfo = models.VulFixStatusSnapshotInfo;
+const Tags = models.Tags;
+const DescribeBaselineItemListResponse = models.DescribeBaselineItemListResponse;
+const DescribeMachinesSimpleRequest = models.DescribeMachinesSimpleRequest;
+const StopBaselineDetectResponse = models.StopBaselineDetectResponse;
+const BaselineWeakPassword = models.BaselineWeakPassword;
+const DescribeBanRegionsRequest = models.DescribeBanRegionsRequest;
+const DescribeBashPoliciesResponse = models.DescribeBashPoliciesResponse;
+const SecurityEventInfo = models.SecurityEventInfo;
+const MachineSnapshotInfo = models.MachineSnapshotInfo;
+const ExportFileTamperEventsRequest = models.ExportFileTamperEventsRequest;
+const DeleteLicenseRecordAllResponse = models.DeleteLicenseRecordAllResponse;
+const ModifyBanModeRequest = models.ModifyBanModeRequest;
+const DescribeBaselineDefaultStrategyListResponse = models.DescribeBaselineDefaultStrategyListResponse;
+const BanWhiteListDetail = models.BanWhiteListDetail;
+const DeleteScanTaskResponse = models.DeleteScanTaskResponse;
+const DescribeScreenGeneralStatResponse = models.DescribeScreenGeneralStatResponse;
+const EditBashRulesRequest = models.EditBashRulesRequest;
+const RansomDefenseRollbackTask = models.RansomDefenseRollbackTask;
+const DescribeMachineRegionsResponse = models.DescribeMachineRegionsResponse;
+const ExportVulDefenceListRequest = models.ExportVulDefenceListRequest;
+const SecurityButlerInfo = models.SecurityButlerInfo;
+const WebHookReceiverUsage = models.WebHookReceiverUsage;
+const DestroyOrderRequest = models.DestroyOrderRequest;
+const AssetWebAppBaseInfo = models.AssetWebAppBaseInfo;
+const DescribeRiskDnsInfoRequest = models.DescribeRiskDnsInfoRequest;
+const AssetCoreModuleParam = models.AssetCoreModuleParam;
+const DescribeMachineLicenseDetailResponse = models.DescribeMachineLicenseDetailResponse;
+const DescribeHostInfoRequest = models.DescribeHostInfoRequest;
+const DeleteBashEventsRequest = models.DeleteBashEventsRequest;
+const DescribeLicenseWhiteConfigRequest = models.DescribeLicenseWhiteConfigRequest;
+const TopInfo = models.TopInfo;
+const AssetJarBaseInfo = models.AssetJarBaseInfo;
+const DescribeFileTamperEventRuleInfoRequest = models.DescribeFileTamperEventRuleInfoRequest;
+const VulInfoList = models.VulInfoList;
+const ExportIgnoreRuleEffectHostListRequest = models.ExportIgnoreRuleEffectHostListRequest;
+const JavaMemShellPluginSetting = models.JavaMemShellPluginSetting;
+const MachineFileTamperRule = models.MachineFileTamperRule;
+const ModifyLicenseOrderResponse = models.ModifyLicenseOrderResponse;
+const DescribeAttackEventInfoResponse = models.DescribeAttackEventInfoResponse;
+const DescribeMachineSnapshotResponse = models.DescribeMachineSnapshotResponse;
+const DescribeVulHostCountScanTimeResponse = models.DescribeVulHostCountScanTimeResponse;
+const WarningInfoObj = models.WarningInfoObj;
+const WebHookRuleSummary = models.WebHookRuleSummary;
+const DescribeAssetWebLocationCountRequest = models.DescribeAssetWebLocationCountRequest;
+const DescribeAssetCoreModuleListRequest = models.DescribeAssetCoreModuleListRequest;
+const VulInfoByCveId = models.VulInfoByCveId;
+const DeleteLogExportResponse = models.DeleteLogExportResponse;
+const TestWebHookRuleResponse = models.TestWebHookRuleResponse;
+const DeleteBanWhiteListResponse = models.DeleteBanWhiteListResponse;
+const DescribeBaselineStrategyDetailResponse = models.DescribeBaselineStrategyDetailResponse;
+const DescribeBaselineListRequest = models.DescribeBaselineListRequest;
+const DescribePublicProxyInstallCommandRequest = models.DescribePublicProxyInstallCommandRequest;
+const ExportJavaMemShellsResponse = models.ExportJavaMemShellsResponse;
+const CreateCloudProtectServiceOrderRecordResponse = models.CreateCloudProtectServiceOrderRecordResponse;
+const DescribeRiskProcessEventsResponse = models.DescribeRiskProcessEventsResponse;
+const DescribeScreenHostInvasionResponse = models.DescribeScreenHostInvasionResponse;
+const ExportBaselineFixListResponse = models.ExportBaselineFixListResponse;
+const ExportBashEventsNewResponse = models.ExportBashEventsNewResponse;
+const DescribeMachineDefenseCntRequest = models.DescribeMachineDefenseCntRequest;
+const ModifyFileTamperRuleStatusResponse = models.ModifyFileTamperRuleStatusResponse;
+const DescribeBaselineTopRequest = models.DescribeBaselineTopRequest;
+const DescribeAssetAppProcessListRequest = models.DescribeAssetAppProcessListRequest;
+const ScanTaskAgainRequest = models.ScanTaskAgainRequest;
+const ExportAssetWebAppListRequest = models.ExportAssetWebAppListRequest;
+const DescribeRecommendedProtectCpuResponse = models.DescribeRecommendedProtectCpuResponse;
+const DescribeLicenseBindListRequest = models.DescribeLicenseBindListRequest;
+const DeleteLicenseRecordAllRequest = models.DeleteLicenseRecordAllRequest;
+const DescribeAccountStatisticsRequest = models.DescribeAccountStatisticsRequest;
+const ExportBruteAttacksResponse = models.ExportBruteAttacksResponse;
+const JavaMemShellDetail = models.JavaMemShellDetail;
+const DescribeBaselineHostDetectListResponse = models.DescribeBaselineHostDetectListResponse;
+const AssetWebLocationPath = models.AssetWebLocationPath;
+const DescribeAssetProcessInfoListResponse = models.DescribeAssetProcessInfoListResponse;
+const ChangeStrategyEnableStatusRequest = models.ChangeStrategyEnableStatusRequest;
+const ProcessStatistics = models.ProcessStatistics;
+const DescribeScanScheduleResponse = models.DescribeScanScheduleResponse;
+const BaselineDetail = models.BaselineDetail;
+const DescribeVulDefenceOverviewResponse = models.DescribeVulDefenceOverviewResponse;
+const DescribeAssetWebAppListRequest = models.DescribeAssetWebAppListRequest;
+const ExpertServiceOrderInfo = models.ExpertServiceOrderInfo;
+const DescribeAssetEnvListResponse = models.DescribeAssetEnvListResponse;
+const WebHookRuleDetail = models.WebHookRuleDetail;
+const DescribePrivilegeEventInfoRequest = models.DescribePrivilegeEventInfoRequest;
+const ModifyBashPolicyRequest = models.ModifyBashPolicyRequest;
+const DescribeScreenEmergentMsgResponse = models.DescribeScreenEmergentMsgResponse;
+const DeleteAllJavaMemShellsRequest = models.DeleteAllJavaMemShellsRequest;
+const VulDefencePluginDetail = models.VulDefencePluginDetail;
+const DescribeVersionCompareChartRequest = models.DescribeVersionCompareChartRequest;
+const DescribeLicenseRequest = models.DescribeLicenseRequest;
+const DescribeLicenseGeneralRequest = models.DescribeLicenseGeneralRequest;
+const DescribeAssetJarInfoRequest = models.DescribeAssetJarInfoRequest;
+const AccountStatistics = models.AccountStatistics;
+const AssetUserKeyInfo = models.AssetUserKeyInfo;
+const DescribeMachinesResponse = models.DescribeMachinesResponse;
+const DescribeMalwareWhiteListResponse = models.DescribeMalwareWhiteListResponse;
+const RansomDefenseStrategyMachineInfo = models.RansomDefenseStrategyMachineInfo;
+const DescribeAssetWebLocationListRequest = models.DescribeAssetWebLocationListRequest;
+const DescribeAssetHostTotalCountRequest = models.DescribeAssetHostTotalCountRequest;
+const CreateMaliciousRequestWhiteListResponse = models.CreateMaliciousRequestWhiteListResponse;
+const DescribeVulLevelCountRequest = models.DescribeVulLevelCountRequest;
+const ScanVulRequest = models.ScanVulRequest;
+const AddLoginWhiteListsRequest = models.AddLoginWhiteListsRequest;
+const DescribeVulHostCountScanTimeRequest = models.DescribeVulHostCountScanTimeRequest;
+const DescribeProVersionStatusRequest = models.DescribeProVersionStatusRequest;
+const DescribeBaselineListResponse = models.DescribeBaselineListResponse;
+const DescribeBashEventsInfoResponse = models.DescribeBashEventsInfoResponse;
+const DescribeJavaMemShellPluginInfoResponse = models.DescribeJavaMemShellPluginInfoResponse;
+const VulEffectHostList = models.VulEffectHostList;
+const DescribeAlarmIncidentNodesResponse = models.DescribeAlarmIncidentNodesResponse;
+const DescribeExpertServiceOrderListRequest = models.DescribeExpertServiceOrderListRequest;
+const DescribeFileTamperRulesRequest = models.DescribeFileTamperRulesRequest;
+const DescribeJavaMemShellInfoResponse = models.DescribeJavaMemShellInfoResponse;
+const DescribeRecommendedProtectCpuRequest = models.DescribeRecommendedProtectCpuRequest;
+const DescribeABTestConfigResponse = models.DescribeABTestConfigResponse;
+const RansomDefenseBackup = models.RansomDefenseBackup;
+const DescribeProVersionStatusResponse = models.DescribeProVersionStatusResponse;
+const SearchTemplate = models.SearchTemplate;
+const DescribeVulFixStatusResponse = models.DescribeVulFixStatusResponse;
+const DescribeGeneralStatResponse = models.DescribeGeneralStatResponse;
+const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
+const DeleteMachineTagResponse = models.DeleteMachineTagResponse;
+const UpdateMachineTagsResponse = models.UpdateMachineTagsResponse;
+const BruteAttackInfo = models.BruteAttackInfo;
+const ModifyLoginWhiteInfoRequest = models.ModifyLoginWhiteInfoRequest;
+const DescribeVulFixStatusRequest = models.DescribeVulFixStatusRequest;
+const UpdateMachineTagsRequest = models.UpdateMachineTagsRequest;
+const DescribeBaselineItemDetectListResponse = models.DescribeBaselineItemDetectListResponse;
+const DescribeScanTaskDetailsResponse = models.DescribeScanTaskDetailsResponse;
+const UpdateBaselineStrategyRequest = models.UpdateBaselineStrategyRequest;
+const DescribeHostLoginListResponse = models.DescribeHostLoginListResponse;
+const DescribePublicProxyInstallCommandResponse = models.DescribePublicProxyInstallCommandResponse;
+const DescribeAttackTopRequest = models.DescribeAttackTopRequest;
+const ModifyRiskEventsStatusResponse = models.ModifyRiskEventsStatusResponse;
+const DescribeVulCveIdInfoRequest = models.DescribeVulCveIdInfoRequest;
+const ModifyJavaMemShellsStatusResponse = models.ModifyJavaMemShellsStatusResponse;
+const AssetPortBaseInfo = models.AssetPortBaseInfo;
+const DescribeAssetWebLocationInfoRequest = models.DescribeAssetWebLocationInfoRequest;
+const DescribeAlarmVertexIdRequest = models.DescribeAlarmVertexIdRequest;
+const DescribeAttackSourceEventsRequest = models.DescribeAttackSourceEventsRequest;
+const DescribeAssetInitServiceListResponse = models.DescribeAssetInitServiceListResponse;
+const ModifyBaselinePolicyRequest = models.ModifyBaselinePolicyRequest;
+const DescribeBaselineHostDetectListRequest = models.DescribeBaselineHostDetectListRequest;
+const DescribeVulDefenceListRequest = models.DescribeVulDefenceListRequest;
+const EditTagsResponse = models.EditTagsResponse;
+const DescribeAssetWebFrameListResponse = models.DescribeAssetWebFrameListResponse;
+const DescribeRansomDefenseStrategyDetailRequest = models.DescribeRansomDefenseStrategyDetailRequest;
+const ModifyRiskDnsPolicyRequest = models.ModifyRiskDnsPolicyRequest;
+const DescribeWarningListResponse = models.DescribeWarningListResponse;
+const DescribeAttackSourceEventsResponse = models.DescribeAttackSourceEventsResponse;
+const ClearLocalStorageRequest = models.ClearLocalStorageRequest;
+const DescribeAssetUserListRequest = models.DescribeAssetUserListRequest;
+const DeleteBaselineStrategyRequest = models.DeleteBaselineStrategyRequest;
+const DescribeAssetSystemPackageListRequest = models.DescribeAssetSystemPackageListRequest;
+const DescribeVulHostTopRequest = models.DescribeVulHostTopRequest;
+const MachineTag = models.MachineTag;
+const DescribeSecurityEventsCntResponse = models.DescribeSecurityEventsCntResponse;
+const Filters = models.Filters;
+const DescribeAssetWebServiceInfoListRequest = models.DescribeAssetWebServiceInfoListRequest;
+const CreateSearchLogRequest = models.CreateSearchLogRequest;
+const DescribeSearchTemplatesRequest = models.DescribeSearchTemplatesRequest;
+const CancelIgnoreVulRequest = models.CancelIgnoreVulRequest;
+const ExportAssetUserListResponse = models.ExportAssetUserListResponse;
+
+
+/**
+ * cwp client
+ * @class
+ */
+class CwpClient extends AbstractClient {
+
+    constructor(credential, region, profile) {
+        super("cwp.tencentcloudapi.com", "2018-02-28", credential, region, profile);
+    }
+    
+    /**
+     * This API is used to obtain the list of asset management ports.
+     * @param {DescribeAssetPortInfoListRequest} req
+     * @param {function(string, DescribeAssetPortInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAssetPortInfoList(req, cb) {
+        let resp = new DescribeAssetPortInfoListResponse();
+        this.request("DescribeAssetPortInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the data of the component statistics list.
+     * @param {DescribeComponentStatisticsRequest} req
+     * @param {function(string, DescribeComponentStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeComponentStatistics(req, cb) {
+        let resp = new DescribeComponentStatisticsResponse();
+        this.request("DescribeComponentStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the configured aeskey and aesiv.
+     * @param {DescribeAESKeyRequest} req
+     * @param {function(string, DescribeAESKeyResponse):void} cb
+     * @public
+     */
+    DescribeAESKey(req, cb) {
+        let resp = new DescribeAESKeyResponse();
+        this.request("DescribeAESKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the anti-ransomware policy status in batches.
+     * @param {ModifyRansomDefenseStrategyStatusRequest} req
+     * @param {function(string, ModifyRansomDefenseStrategyStatusResponse):void} cb
+     * @public
+     */
+    ModifyRansomDefenseStrategyStatus(req, cb) {
+        let resp = new ModifyRansomDefenseStrategyStatusResponse();
+        this.request("ModifyRansomDefenseStrategyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of anti-ransomware policies.
+     * @param {DescribeRansomDefenseStrategyListRequest} req
+     * @param {function(string, DescribeRansomDefenseStrategyListResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseStrategyList(req, cb) {
+        let resp = new DescribeRansomDefenseStrategyListResponse();
+        this.request("DescribeRansomDefenseStrategyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of Jar packages.
+     * @param {ExportAssetJarListRequest} req
+     * @param {function(string, ExportAssetJarListResponse):void} cb
+     * @public
+     */
+    ExportAssetJarList(req, cb) {
+        let resp = new ExportAssetJarListResponse();
+        this.request("ExportAssetJarList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the brute-force blocking mode.
+     * @param {DescribeBanModeRequest} req
+     * @param {function(string, DescribeBanModeResponse):void} cb
+     * @public
+     */
+    DescribeBanMode(req, cb) {
+        let resp = new DescribeBanModeResponse();
+        this.request("DescribeBanMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop the asset scan task.
+     * @param {StopAssetScanRequest} req
+     * @param {function(string, StopAssetScanResponse):void} cb
+     * @public
+     */
+    StopAssetScan(req, cb) {
+        let resp = new StopAssetScanResponse();
+        this.request("StopAssetScan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of locally stored key values.
+     * @param {KeysLocalStorageRequest} req
+     * @param {function(string, KeysLocalStorageResponse):void} cb
+     * @public
+     */
+    KeysLocalStorage(req, cb) {
+        let resp = new KeysLocalStorageResponse();
+        this.request("KeysLocalStorage", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the Java webshell plugin information.
+     * @param {ExportJavaMemShellPluginsRequest} req
+     * @param {function(string, ExportJavaMemShellPluginsResponse):void} cb
+     * @public
+     */
+    ExportJavaMemShellPlugins(req, cb) {
+        let resp = new ExportJavaMemShellPluginsResponse();
+        this.request("ExportJavaMemShellPlugins", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the retrieval template.
+     * @param {DeleteSearchTemplateRequest} req
+     * @param {function(string, DeleteSearchTemplateResponse):void} cb
+     * @public
+     */
+    DeleteSearchTemplate(req, cb) {
+        let resp = new DeleteSearchTemplateResponse();
+        this.request("DeleteSearchTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify parameters entered for adding and editing high-risk command user rules.
+     * @param {CheckBashRuleParamsRequest} req
+     * @param {function(string, CheckBashRuleParamsResponse):void} cb
+     * @public
+     */
+    CheckBashRuleParams(req, cb) {
+        let resp = new CheckBashRuleParamsResponse();
+        this.request("CheckBashRuleParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the scan task details and scan progress information/exceptions.
+     * @param {DescribeScanTaskDetailsRequest} req
+     * @param {function(string, DescribeScanTaskDetailsResponse):void} cb
+     * @public
+     */
+    DescribeScanTaskDetails(req, cb) {
+        let resp = new DescribeScanTaskDetailsResponse();
+        this.request("DescribeScanTaskDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the high-risk command policy.
+     * @param {ExportBashPoliciesRequest} req
+     * @param {function(string, ExportBashPoliciesResponse):void} cb
+     * @public
+     */
+    ExportBashPolicies(req, cb) {
+        let resp = new ExportBashPoliciesResponse();
+        this.request("ExportBashPolicies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of vulnerability defenses.
+     * @param {ExportVulDefenceListRequest} req
+     * @param {function(string, ExportVulDefenceListResponse):void} cb
+     * @public
+     */
+    ExportVulDefenceList(req, cb) {
+        let resp = new ExportVulDefenceListResponse();
+        this.request("ExportVulDefenceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the detection progress by taskid.
+     * @param {DescribeScanScheduleRequest} req
+     * @param {function(string, DescribeScanScheduleResponse):void} cb
+     * @public
+     */
+    DescribeScanSchedule(req, cb) {
+        let resp = new DescribeScanScheduleResponse();
+        this.request("DescribeScanSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a baseline policy based on the policy information.
+     * @param {CreateBaselineStrategyRequest} req
+     * @param {function(string, CreateBaselineStrategyResponse):void} cb
+     * @public
+     */
+    CreateBaselineStrategy(req, cb) {
+        let resp = new CreateBaselineStrategyResponse();
+        this.request("CreateBaselineStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the host and tag information.
+     * @param {DescribeHostInfoRequest} req
+     * @param {function(string, DescribeHostInfoResponse):void} cb
+     * @public
+     */
+    DescribeHostInfo(req, cb) {
+        let resp = new DescribeHostInfoResponse();
+        this.request("DescribeHostInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to count today's risky assets.
+     * @param {DescribeScreenRiskAssetsTopRequest} req
+     * @param {function(string, DescribeScreenRiskAssetsTopResponse):void} cb
+     * @public
+     */
+    DescribeScreenRiskAssetsTop(req, cb) {
+        let resp = new DescribeScreenRiskAssetsTopResponse();
+        this.request("DescribeScreenRiskAssetsTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of all software applications.
+     * @param {DescribeAssetAppCountRequest} req
+     * @param {function(string, DescribeAssetAppCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetAppCount(req, cb) {
+        let resp = new DescribeAssetAppCountResponse();
+        this.request("DescribeAssetAppCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return Top N risky servers.
+     * @param {DescribeBaselineHostTopRequest} req
+     * @param {function(string, DescribeBaselineHostTopResponse):void} cb
+     * @public
+     */
+    DescribeBaselineHostTop(req, cb) {
+        let resp = new DescribeBaselineHostTopResponse();
+        this.request("DescribeBaselineHostTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of Java webshell events.
+     * @param {DescribeJavaMemShellListRequest} req
+     * @param {function(string, DescribeJavaMemShellListResponse):void} cb
+     * @public
+     */
+    DescribeJavaMemShellList(req, cb) {
+        let resp = new DescribeJavaMemShellListResponse();
+        this.request("DescribeJavaMemShellList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to visually obtain the attacked hot spots across the entire network on the large screen.
+     * @param {DescribeScreenAttackHotspotRequest} req
+     * @param {function(string, DescribeScreenAttackHotspotResponse):void} cb
+     * @public
+     */
+    DescribeScreenAttackHotspot(req, cb) {
+        let resp = new DescribeScreenAttackHotspotResponse();
+        this.request("DescribeScreenAttackHotspot", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Reverse Shell rules.
+     * @param {DescribeReverseShellRulesRequest} req
+     * @param {function(string, DescribeReverseShellRulesResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellRules(req, cb) {
+        let resp = new DescribeReverseShellRulesResponse();
+        this.request("DescribeReverseShellRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the vulnerability defense overview information, including event trend and plugin enabling status.
+     * @param {DescribeVulDefenceOverviewRequest} req
+     * @param {function(string, DescribeVulDefenceOverviewResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceOverview(req, cb) {
+        let resp = new DescribeVulDefenceOverviewResponse();
+        this.request("DescribeVulDefenceOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total number of accounts.
+     * @param {DescribeAssetUserCountRequest} req
+     * @param {function(string, DescribeAssetUserCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetUserCount(req, cb) {
+        let resp = new DescribeAssetUserCountResponse();
+        this.request("DescribeAssetUserCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of asset management environment variables.
+     * @param {DescribeAssetEnvListRequest} req
+     * @param {function(string, DescribeAssetEnvListResponse):void} cb
+     * @public
+     */
+    DescribeAssetEnvList(req, cb) {
+        let resp = new DescribeAssetEnvListResponse();
+        this.request("DescribeAssetEnvList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total number of Web sites.
+     * @param {DescribeAssetWebLocationCountRequest} req
+     * @param {function(string, DescribeAssetWebLocationCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebLocationCount(req, cb) {
+        let resp = new DescribeAssetWebLocationCountResponse();
+        this.request("DescribeAssetWebLocationCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Web sites' virtual directories.
+     * @param {DescribeAssetWebLocationPathListRequest} req
+     * @param {function(string, DescribeAssetWebLocationPathListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebLocationPathList(req, cb) {
+        let resp = new DescribeAssetWebLocationPathListResponse();
+        this.request("DescribeAssetWebLocationPathList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the visualized host intrusion details on the large screen.
+     * @param {DescribeScreenHostInvasionRequest} req
+     * @param {function(string, DescribeScreenHostInvasionResponse):void} cb
+     * @public
+     */
+    DescribeScreenHostInvasion(req, cb) {
+        let resp = new DescribeScreenHostInvasionResponse();
+        this.request("DescribeScreenHostInvasion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the rule details API when an event occurs.
+     * @param {DescribeFileTamperEventRuleInfoRequest} req
+     * @param {function(string, DescribeFileTamperEventRuleInfoResponse):void} cb
+     * @public
+     */
+    DescribeFileTamperEventRuleInfo(req, cb) {
+        let resp = new DescribeFileTamperEventRuleInfoResponse();
+        this.request("DescribeFileTamperEventRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the index.
+     * @param {DescribeLogIndexRequest} req
+     * @param {function(string, DescribeLogIndexResponse):void} cb
+     * @public
+     */
+    DescribeLogIndex(req, cb) {
+        let resp = new DescribeLogIndexResponse();
+        this.request("DescribeLogIndex", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate resources.
+     * @param {DestroyOrderRequest} req
+     * @param {function(string, DestroyOrderResponse):void} cb
+     * @public
+     */
+    DestroyOrder(req, cb) {
+        let resp = new DestroyOrderResponse();
+        this.request("DestroyOrder", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or update the alarm recipient.
+     * @param {ModifyWebHookReceiverRequest} req
+     * @param {function(string, ModifyWebHookReceiverResponse):void} cb
+     * @public
+     */
+    ModifyWebHookReceiver(req, cb) {
+        let resp = new ModifyWebHookReceiverResponse();
+        this.request("ModifyWebHookReceiver", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the visualized statistics data of hosts on the screen.
+     * @param {DescribeScreenGeneralStatRequest} req
+     * @param {function(string, DescribeScreenGeneralStatResponse):void} cb
+     * @public
+     */
+    DescribeScreenGeneralStat(req, cb) {
+        let resp = new DescribeScreenGeneralStatResponse();
+        this.request("DescribeScreenGeneralStat", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query high-risk command event details (new).
+     * @param {DescribeBashEventsInfoNewRequest} req
+     * @param {function(string, DescribeBashEventsInfoNewResponse):void} cb
+     * @public
+     */
+    DescribeBashEventsInfoNew(req, cb) {
+        let resp = new DescribeBashEventsInfoNewResponse();
+        this.request("DescribeBashEventsInfoNew", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of processes associated with Web services.
+     * @param {DescribeAssetWebServiceProcessListRequest} req
+     * @param {function(string, DescribeAssetWebServiceProcessListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebServiceProcessList(req, cb) {
+        let resp = new DescribeAssetWebServiceProcessListResponse();
+        this.request("DescribeAssetWebServiceProcessList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the downloaded malicious request files.
+     * @param {ExportMaliciousRequestsRequest} req
+     * @param {function(string, ExportMaliciousRequestsResponse):void} cb
+     * @public
+     */
+    ExportMaliciousRequests(req, cb) {
+        let resp = new ExportMaliciousRequestsResponse();
+        this.request("ExportMaliciousRequests", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the utilization of the system load, memory, and hard disk.
+     * @param {DescribeAssetLoadInfoRequest} req
+     * @param {function(string, DescribeAssetLoadInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetLoadInfo(req, cb) {
+        let resp = new DescribeAssetLoadInfoResponse();
+        this.request("DescribeAssetLoadInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete all authorization records.
+     * @param {DeleteLicenseRecordAllRequest} req
+     * @param {function(string, DeleteLicenseRecordAllResponse):void} cb
+     * @public
+     */
+    DeleteLicenseRecordAll(req, cb) {
+        let resp = new DeleteLicenseRecordAllResponse();
+        this.request("DeleteLicenseRecordAll", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the overview statistics.
+     * @param {DescribeOverviewStatisticsRequest} req
+     * @param {function(string, DescribeOverviewStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeOverviewStatistics(req, cb) {
+        let resp = new DescribeOverviewStatisticsResponse();
+        this.request("DescribeOverviewStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export baseline check items.
+     * @param {ExportBaselineItemDetectListRequest} req
+     * @param {function(string, ExportBaselineItemDetectListResponse):void} cb
+     * @public
+     */
+    ExportBaselineItemDetectList(req, cb) {
+        let resp = new ExportBaselineItemDetectListResponse();
+        this.request("ExportBaselineItemDetectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the log-in audit allowlist information. (The number of server lists needs to be less than 1,000.)
+     * @param {ModifyLoginWhiteRecordRequest} req
+     * @param {function(string, ModifyLoginWhiteRecordResponse):void} cb
+     * @public
+     */
+    ModifyLoginWhiteRecord(req, cb) {
+        let resp = new ModifyLoginWhiteRecordResponse();
+        this.request("ModifyLoginWhiteRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the baseline detection progress by task ID.
+     * @param {DescribeBaselineScanScheduleRequest} req
+     * @param {function(string, DescribeBaselineScanScheduleResponse):void} cb
+     * @public
+     */
+    DescribeBaselineScanSchedule(req, cb) {
+        let resp = new DescribeBaselineScanScheduleResponse();
+        this.request("DescribeBaselineScanSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query network attack settings.
+     * @param {DescribeNetAttackSettingRequest} req
+     * @param {function(string, DescribeNetAttackSettingResponse):void} cb
+     * @public
+     */
+    DescribeNetAttackSetting(req, cb) {
+        let resp = new DescribeNetAttackSettingResponse();
+        this.request("DescribeNetAttackSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management Web frameworks.
+     * @param {ExportAssetWebFrameListRequest} req
+     * @param {function(string, ExportAssetWebFrameListResponse):void} cb
+     * @public
+     */
+    ExportAssetWebFrameList(req, cb) {
+        let resp = new ExportAssetWebFrameListResponse();
+        this.request("ExportAssetWebFrameList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check the rule parameters entered at the core file monitoring frontend.
+     * @param {CheckFileTamperRuleRequest} req
+     * @param {function(string, CheckFileTamperRuleResponse):void} cb
+     * @public
+     */
+    CheckFileTamperRule(req, cb) {
+        let resp = new CheckFileTamperRuleResponse();
+        this.request("CheckFileTamperRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the network attack allowlist list.
+     * @param {DescribeNetAttackWhiteListRequest} req
+     * @param {function(string, DescribeNetAttackWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeNetAttackWhiteList(req, cb) {
+        let resp = new DescribeNetAttackWhiteListResponse();
+        this.request("DescribeNetAttackWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete local privilege elevation rules.
+     * @param {DeletePrivilegeRulesRequest} req
+     * @param {function(string, DeletePrivilegeRulesResponse):void} cb
+     * @public
+     */
+    DeletePrivilegeRules(req, cb) {
+        let resp = new DeletePrivilegeRulesResponse();
+        this.request("DeletePrivilegeRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to switch the statuses of high-risk command policies.
+     * @param {ModifyBashPolicyStatusRequest} req
+     * @param {function(string, ModifyBashPolicyStatusResponse):void} cb
+     * @public
+     */
+    ModifyBashPolicyStatus(req, cb) {
+        let resp = new ModifyBashPolicyStatusResponse();
+        this.request("ModifyBashPolicyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete malicious request events.
+     * @param {DeleteRiskDnsEventRequest} req
+     * @param {function(string, DeleteRiskDnsEventResponse):void} cb
+     * @public
+     */
+    DeleteRiskDnsEvent(req, cb) {
+        let resp = new DeleteRiskDnsEventResponse();
+        this.request("DeleteRiskDnsEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the locally stored data.
+     * @param {SetLocalStorageItemRequest} req
+     * @param {function(string, SetLocalStorageItemResponse):void} cb
+     * @public
+     */
+    SetLocalStorageItem(req, cb) {
+        let resp = new SetLocalStorageItemResponse();
+        this.request("SetLocalStorageItem", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the cross-region log-in allowlist rules.
+     * @param {DeleteLoginWhiteListRequest} req
+     * @param {function(string, DeleteLoginWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteLoginWhiteList(req, cb) {
+        let resp = new DeleteLoginWhiteListResponse();
+        this.request("DeleteLoginWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete log download tasks.
+     * @param {DeleteLogExportRequest} req
+     * @param {function(string, DeleteLogExportResponse):void} cb
+     * @public
+     */
+    DeleteLogExport(req, cb) {
+        let resp = new DeleteLogExportResponse();
+        this.request("DeleteLogExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of hosts in a specific region.
+     * @param {DescribeExportMachinesRequest} req
+     * @param {function(string, DescribeExportMachinesResponse):void} cb
+     * @public
+     */
+    DescribeExportMachines(req, cb) {
+        let resp = new DescribeExportMachinesResponse();
+        this.request("DescribeExportMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to clean up the locally stored data.
+     * @param {ClearLocalStorageRequest} req
+     * @param {function(string, ClearLocalStorageResponse):void} cb
+     * @public
+     */
+    ClearLocalStorage(req, cb) {
+        let resp = new ClearLocalStorageResponse();
+        this.request("ClearLocalStorage", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of all Web frameworks.
+     * @param {DescribeAssetWebFrameCountRequest} req
+     * @param {function(string, DescribeAssetWebFrameCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebFrameCount(req, cb) {
+        let resp = new DescribeAssetWebFrameCountResponse();
+        this.request("DescribeAssetWebFrameCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the policy by baseline policy ID.
+     * @param {DeleteBaselineStrategyRequest} req
+     * @param {function(string, DeleteBaselineStrategyResponse):void} cb
+     * @public
+     */
+    DeleteBaselineStrategy(req, cb) {
+        let resp = new DeleteBaselineStrategyResponse();
+        this.request("DeleteBaselineStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the authorization information.
+     * @param {DescribeLicenseRequest} req
+     * @param {function(string, DescribeLicenseResponse):void} cb
+     * @public
+     */
+    DescribeLicense(req, cb) {
+        let resp = new DescribeLicenseResponse();
+        this.request("DescribeLicense", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the machine authorization information.
+     * @param {DescribeMachineLicenseDetailRequest} req
+     * @param {function(string, DescribeMachineLicenseDetailResponse):void} cb
+     * @public
+     */
+    DescribeMachineLicenseDetail(req, cb) {
+        let resp = new DescribeMachineLicenseDetailResponse();
+        this.request("DescribeMachineLicenseDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to switch the statuses of high-risk command rules.
+     * @param {SwitchBashRulesRequest} req
+     * @param {function(string, SwitchBashRulesResponse):void} cb
+     * @public
+     */
+    SwitchBashRules(req, cb) {
+        let resp = new SwitchBashRulesResponse();
+        this.request("SwitchBashRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of accounts.
+     * @param {DescribeAssetUserListRequest} req
+     * @param {function(string, DescribeAssetUserListResponse):void} cb
+     * @public
+     */
+    DescribeAssetUserList(req, cb) {
+        let resp = new DescribeAssetUserListResponse();
+        this.request("DescribeAssetUserList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the Web site details.
+     * @param {DescribeAssetWebLocationInfoRequest} req
+     * @param {function(string, DescribeAssetWebLocationInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebLocationInfo(req, cb) {
+        let resp = new DescribeAssetWebLocationInfoResponse();
+        this.request("DescribeAssetWebLocationInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the Java webshell plugin information of the given host.
+     * @param {DescribeJavaMemShellPluginInfoRequest} req
+     * @param {function(string, DescribeJavaMemShellPluginInfoResponse):void} cb
+     * @public
+     */
+    DescribeJavaMemShellPluginInfo(req, cb) {
+        let resp = new DescribeJavaMemShellPluginInfoResponse();
+        this.request("DescribeJavaMemShellPluginInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of password cracking.
+     * @param {DescribeBruteAttackListRequest} req
+     * @param {function(string, DescribeBruteAttackListResponse):void} cb
+     * @public
+     */
+    DescribeBruteAttackList(req, cb) {
+        let resp = new DescribeBruteAttackListResponse();
+        this.request("DescribeBruteAttackList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of asset management databases.
+     * @param {DescribeAssetDatabaseListRequest} req
+     * @param {function(string, DescribeAssetDatabaseListResponse):void} cb
+     * @public
+     */
+    DescribeAssetDatabaseList(req, cb) {
+        let resp = new DescribeAssetDatabaseListResponse();
+        this.request("DescribeAssetDatabaseList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of hosts affected by vulnerabilities.
+     * @param {DescribeVulEffectHostListRequest} req
+     * @param {function(string, DescribeVulEffectHostListResponse):void} cb
+     * @public
+     */
+    DescribeVulEffectHostList(req, cb) {
+        let resp = new DescribeVulEffectHostListResponse();
+        this.request("DescribeVulEffectHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query whether the baseline is detected for the first time.
+     * @param {CheckFirstScanBaselineRequest} req
+     * @param {function(string, CheckFirstScanBaselineResponse):void} cb
+     * @public
+     */
+    CheckFirstScanBaseline(req, cb) {
+        let resp = new CheckFirstScanBaselineResponse();
+        this.request("CheckFirstScanBaseline", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of quick retrievals.
+     * @param {DescribeSearchTemplatesRequest} req
+     * @param {function(string, DescribeSearchTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSearchTemplates(req, cb) {
+        let resp = new DescribeSearchTemplatesResponse();
+        this.request("DescribeSearchTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management Web services.
+     * @param {ExportAssetWebServiceInfoListRequest} req
+     * @param {function(string, ExportAssetWebServiceInfoListResponse):void} cb
+     * @public
+     */
+    ExportAssetWebServiceInfoList(req, cb) {
+        let resp = new ExportAssetWebServiceInfoListResponse();
+        this.request("ExportAssetWebServiceInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate Trojans.
+     * @param {SeparateMalwaresRequest} req
+     * @param {function(string, SeparateMalwaresResponse):void} cb
+     * @public
+     */
+    SeparateMalwares(req, cb) {
+        let resp = new SeparateMalwaresResponse();
+        this.request("SeparateMalwares", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the network attack allowlist.
+     * @param {DeleteNetAttackWhiteListRequest} req
+     * @param {function(string, DeleteNetAttackWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteNetAttackWhiteList(req, cb) {
+        let resp = new DeleteNetAttackWhiteListResponse();
+        this.request("DeleteNetAttackWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of log download tasks.
+     * @param {DescribeLogExportsRequest} req
+     * @param {function(string, DescribeLogExportsResponse):void} cb
+     * @public
+     */
+    DescribeLogExports(req, cb) {
+        let resp = new DescribeLogExportsResponse();
+        this.request("DescribeLogExports", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the visualized list of host regions on the large screen.
+     * @param {DescribeScreenMachinesRequest} req
+     * @param {function(string, DescribeScreenMachinesResponse):void} cb
+     * @public
+     */
+    DescribeScreenMachines(req, cb) {
+        let resp = new DescribeScreenMachinesResponse();
+        this.request("DescribeScreenMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the security protection status on the large screen.
+     * @param {DescribeScreenProtectionStatRequest} req
+     * @param {function(string, DescribeScreenProtectionStatResponse):void} cb
+     * @public
+     */
+    DescribeScreenProtectionStat(req, cb) {
+        let resp = new DescribeScreenProtectionStatResponse();
+        this.request("DescribeScreenProtectionStat", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of high-risk commands (new).
+     * @param {DescribeBashEventsNewRequest} req
+     * @param {function(string, DescribeBashEventsNewResponse):void} cb
+     * @public
+     */
+    DescribeBashEventsNew(req, cb) {
+        let resp = new DescribeBashEventsNewResponse();
+        this.request("DescribeBashEventsNew", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the resource monitoring list of the asset fingerprint page.
+     * @param {DescribeAssetMachineListRequest} req
+     * @param {function(string, DescribeAssetMachineListResponse):void} cb
+     * @public
+     */
+    DescribeAssetMachineList(req, cb) {
+        let resp = new DescribeAssetMachineListResponse();
+        this.request("DescribeAssetMachineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete all records of the host. Currently, it only supports non-Tencent Cloud hosts, and the host needs to be offline.
+     * @param {RemoveMachineRequest} req
+     * @param {function(string, RemoveMachineResponse):void} cb
+     * @public
+     */
+    RemoveMachine(req, cb) {
+        let resp = new RemoveMachineResponse();
+        this.request("RemoveMachine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total number of resources of the host.
+     * @param {DescribeAssetHostTotalCountRequest} req
+     * @param {function(string, DescribeAssetHostTotalCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetHostTotalCount(req, cb) {
+        let resp = new DescribeAssetHostTotalCountResponse();
+        this.request("DescribeAssetHostTotalCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Web sites.
+     * @param {DescribeAssetWebLocationListRequest} req
+     * @param {function(string, DescribeAssetWebLocationListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebLocationList(req, cb) {
+        let resp = new DescribeAssetWebLocationListResponse();
+        this.request("DescribeAssetWebLocationList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query malicious request event details.
+     * @param {DescribeRiskDnsEventInfoRequest} req
+     * @param {function(string, DescribeRiskDnsEventInfoResponse):void} cb
+     * @public
+     */
+    DescribeRiskDnsEventInfo(req, cb) {
+        let resp = new DescribeRiskDnsEventInfoResponse();
+        this.request("DescribeRiskDnsEventInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export high-risk command events (new).
+     * @param {ExportBashEventsNewRequest} req
+     * @param {function(string, ExportBashEventsNewResponse):void} cb
+     * @public
+     */
+    ExportBashEventsNew(req, cb) {
+        let resp = new ExportBashEventsNewResponse();
+        this.request("ExportBashEventsNew", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query if the intrusion detection event update task is completed.
+     * @param {DescribeRiskBatchStatusRequest} req
+     * @param {function(string, DescribeRiskBatchStatusResponse):void} cb
+     * @public
+     */
+    DescribeRiskBatchStatus(req, cb) {
+        let resp = new DescribeRiskBatchStatusResponse();
+        this.request("DescribeRiskBatchStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of asset management processes.
+     * @param {DescribeAssetProcessInfoListRequest} req
+     * @param {function(string, DescribeAssetProcessInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAssetProcessInfoList(req, cb) {
+        let resp = new DescribeAssetProcessInfoListResponse();
+        this.request("DescribeAssetProcessInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of alarm recipients.
+     * @param {DescribeWebHookReceiverRequest} req
+     * @param {function(string, DescribeWebHookReceiverResponse):void} cb
+     * @public
+     */
+    DescribeWebHookReceiver(req, cb) {
+        let resp = new DescribeWebHookReceiverResponse();
+        this.request("DescribeWebHookReceiver", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable the configuration of automatically enabling the professional protection configuration for newly added hosts.
+     * @param {ModifyAutoOpenProVersionConfigRequest} req
+     * @param {function(string, ModifyAutoOpenProVersionConfigResponse):void} cb
+     * @public
+     */
+    ModifyAutoOpenProVersionConfig(req, cb) {
+        let resp = new ModifyAutoOpenProVersionConfigResponse();
+        this.request("ModifyAutoOpenProVersionConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the expiration time of the locally stored data.
+     * @param {SetLocalStorageExpireRequest} req
+     * @param {function(string, SetLocalStorageExpireResponse):void} cb
+     * @public
+     */
+    SetLocalStorageExpire(req, cb) {
+        let resp = new SetLocalStorageExpireResponse();
+        this.request("SetLocalStorageExpire", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the fixable host information.
+     * @param {DescribeCanFixVulMachineRequest} req
+     * @param {function(string, DescribeCanFixVulMachineResponse):void} cb
+     * @public
+     */
+    DescribeCanFixVulMachine(req, cb) {
+        let resp = new DescribeCanFixVulMachineResponse();
+        this.request("DescribeCanFixVulMachine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to test the rules of WeCom chatbots.
+     * @param {TestWebHookRuleRequest} req
+     * @param {function(string, TestWebHookRuleResponse):void} cb
+     * @public
+     */
+    TestWebHookRule(req, cb) {
+        let resp = new TestWebHookRuleResponse();
+        this.request("TestWebHookRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate the scan tasks.
+     * @param {DeleteMalwareScanTaskRequest} req
+     * @param {function(string, DeleteMalwareScanTaskResponse):void} cb
+     * @public
+     */
+    DeleteMalwareScanTask(req, cb) {
+        let resp = new DeleteMalwareScanTaskResponse();
+        this.request("DeleteMalwareScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the statistics of advanced defense events for hosts.
+     * @param {DescribeMachineDefenseCntRequest} req
+     * @param {function(string, DescribeMachineDefenseCntResponse):void} cb
+     * @public
+     */
+    DescribeMachineDefenseCnt(req, cb) {
+        let resp = new DescribeMachineDefenseCntResponse();
+        this.request("DescribeMachineDefenseCnt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the overview information of the Professional edition.
+     * @param {DescribeProVersionInfoRequest} req
+     * @param {function(string, DescribeProVersionInfoResponse):void} cb
+     * @public
+     */
+    DescribeProVersionInfo(req, cb) {
+        let resp = new DescribeProVersionInfoResponse();
+        this.request("DescribeProVersionInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify network attack settings.
+     * @param {ModifyNetAttackSettingRequest} req
+     * @param {function(string, ModifyNetAttackSettingResponse):void} cb
+     * @public
+     */
+    ModifyNetAttackSetting(req, cb) {
+        let resp = new ModifyNetAttackSettingResponse();
+        this.request("ModifyNetAttackSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the list of blocking allowlists.
+     * @param {DeleteBanWhiteListRequest} req
+     * @param {function(string, DeleteBanWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteBanWhiteList(req, cb) {
+        let resp = new DeleteBanWhiteListResponse();
+        this.request("DeleteBanWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain Top5 resources of various types.
+     * @param {DescribeAssetTypeTopRequest} req
+     * @param {function(string, DescribeAssetTypeTopResponse):void} cb
+     * @public
+     */
+    DescribeAssetTypeTop(req, cb) {
+        let resp = new DescribeAssetTypeTopResponse();
+        this.request("DescribeAssetTypeTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of machines bound to ransomware defense policies.
+     * @param {ExportRansomDefenseStrategyMachinesRequest} req
+     * @param {function(string, ExportRansomDefenseStrategyMachinesResponse):void} cb
+     * @public
+     */
+    ExportRansomDefenseStrategyMachines(req, cb) {
+        let resp = new ExportRansomDefenseStrategyMachinesResponse();
+        this.request("ExportRansomDefenseStrategyMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics of the used log retrieval capacity.
+     * @param {DescribeLogStorageStatisticRequest} req
+     * @param {function(string, DescribeLogStorageStatisticResponse):void} cb
+     * @public
+     */
+    DescribeLogStorageStatistic(req, cb) {
+        let resp = new DescribeLogStorageStatisticResponse();
+        this.request("DescribeLogStorageStatistic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the information of affected inspection items and hosts ignored with one click.
+     * @param {DescribeIgnoreHostAndItemConfigRequest} req
+     * @param {function(string, DescribeIgnoreHostAndItemConfigResponse):void} cb
+     * @public
+     */
+    DescribeIgnoreHostAndItemConfig(req, cb) {
+        let resp = new DescribeIgnoreHostAndItemConfigResponse();
+        this.request("DescribeIgnoreHostAndItemConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of ignored inspection items.
+     * @param {DescribeIgnoreBaselineRuleRequest} req
+     * @param {function(string, DescribeIgnoreBaselineRuleResponse):void} cb
+     * @public
+     */
+    DescribeIgnoreBaselineRule(req, cb) {
+        let resp = new DescribeIgnoreBaselineRuleResponse();
+        this.request("DescribeIgnoreBaselineRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of logs available for shipping to Kafka.
+     * @param {DescribeLogDeliveryKafkaOptionsRequest} req
+     * @param {function(string, DescribeLogDeliveryKafkaOptionsResponse):void} cb
+     * @public
+     */
+    DescribeLogDeliveryKafkaOptions(req, cb) {
+        let resp = new DescribeLogDeliveryKafkaOptionsResponse();
+        this.request("DescribeLogDeliveryKafkaOptions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the statistics of host intrusion detection events.
+     * @param {DescribeMachineRiskCntRequest} req
+     * @param {function(string, DescribeMachineRiskCntResponse):void} cb
+     * @public
+     */
+    DescribeMachineRiskCnt(req, cb) {
+        let resp = new DescribeMachineRiskCntResponse();
+        this.request("DescribeMachineRiskCnt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the security report on the large screen.
+     * @param {DescribeScreenBroadcastsRequest} req
+     * @param {function(string, DescribeScreenBroadcastsResponse):void} cb
+     * @public
+     */
+    DescribeScreenBroadcasts(req, cb) {
+        let resp = new DescribeScreenBroadcastsResponse();
+        this.request("DescribeScreenBroadcasts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create allowlist orders.
+     * @param {CreateWhiteListOrderRequest} req
+     * @param {function(string, CreateWhiteListOrderResponse):void} cb
+     * @public
+     */
+    CreateWhiteListOrder(req, cb) {
+        let resp = new CreateWhiteListOrderResponse();
+        this.request("CreateWhiteListOrder", req, resp, cb);
+    }
+
+    /**
+     * This API is used to untrust Trojan files.
+     * @param {UntrustMalwaresRequest} req
+     * @param {function(string, UntrustMalwaresResponse):void} cb
+     * @public
+     */
+    UntrustMalwares(req, cb) {
+        let resp = new UntrustMalwaresResponse();
+        this.request("UntrustMalwares", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the version comparison information.
+     * @param {DescribeVersionCompareChartRequest} req
+     * @param {function(string, DescribeVersionCompareChartResponse):void} cb
+     * @public
+     */
+    DescribeVersionCompareChart(req, cb) {
+        let resp = new DescribeVersionCompareChartResponse();
+        this.request("DescribeVersionCompareChart", req, resp, cb);
+    }
+
+    /**
+     * This API is used to detect the intrusion and virus scanning.
+     * @param {CreateScanMalwareSettingRequest} req
+     * @param {function(string, CreateScanMalwareSettingResponse):void} cb
+     * @public
+     */
+    CreateScanMalwareSetting(req, cb) {
+        let resp = new CreateScanMalwareSettingResponse();
+        this.request("CreateScanMalwareSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the ransomware situation across the entire network.
+     * @param {DescribeRansomDefenseTrendRequest} req
+     * @param {function(string, DescribeRansomDefenseTrendResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseTrend(req, cb) {
+        let resp = new DescribeRansomDefenseTrendResponse();
+        this.request("DescribeRansomDefenseTrend", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management Web applications.
+     * @param {ExportAssetWebAppListRequest} req
+     * @param {function(string, ExportAssetWebAppListResponse):void} cb
+     * @public
+     */
+    ExportAssetWebAppList(req, cb) {
+        let resp = new ExportAssetWebAppListResponse();
+        this.request("ExportAssetWebAppList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of authorized machines bound to an authorization under the Settings Center-Authorization Management.
+     * @param {DescribeLicenseBindListRequest} req
+     * @param {function(string, DescribeLicenseBindListResponse):void} cb
+     * @public
+     */
+    DescribeLicenseBindList(req, cb) {
+        let resp = new DescribeLicenseBindListResponse();
+        this.request("DescribeLicenseBindList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the kernel module details.
+     * @param {DescribeAssetCoreModuleInfoRequest} req
+     * @param {function(string, DescribeAssetCoreModuleInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetCoreModuleInfo(req, cb) {
+        let resp = new DescribeAssetCoreModuleInfoResponse();
+        this.request("DescribeAssetCoreModuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics data of hosts.
+     * @param {DescribeGeneralStatRequest} req
+     * @param {function(string, DescribeGeneralStatResponse):void} cb
+     * @public
+     */
+    DescribeGeneralStat(req, cb) {
+        let resp = new DescribeGeneralStatResponse();
+        this.request("DescribeGeneralStat", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable and disable Java webshell plugins.
+     * @param {ModifyJavaMemShellPluginSwitchRequest} req
+     * @param {function(string, ModifyJavaMemShellPluginSwitchResponse):void} cb
+     * @public
+     */
+    ModifyJavaMemShellPluginSwitch(req, cb) {
+        let resp = new ModifyJavaMemShellPluginSwitchResponse();
+        this.request("ModifyJavaMemShellPluginSwitch", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the asset management database details.
+     * @param {DescribeAssetDatabaseInfoRequest} req
+     * @param {function(string, DescribeAssetDatabaseInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetDatabaseInfo(req, cb) {
+        let resp = new DescribeAssetDatabaseInfoResponse();
+        this.request("DescribeAssetDatabaseInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Trojan allowlists.
+     * @param {DescribeMalwareWhiteListRequest} req
+     * @param {function(string, DescribeMalwareWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeMalwareWhiteList(req, cb) {
+        let resp = new DescribeMalwareWhiteListResponse();
+        this.request("DescribeMalwareWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the configuration for regular detection.
+     * @param {DescribeScanVulSettingRequest} req
+     * @param {function(string, DescribeScanVulSettingResponse):void} cb
+     * @public
+     */
+    DescribeScanVulSetting(req, cb) {
+        let resp = new DescribeScanVulSettingResponse();
+        this.request("DescribeScanVulSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create the Trojan allowlist.
+     * @param {CreateMalwareWhiteListRequest} req
+     * @param {function(string, CreateMalwareWhiteListResponse):void} cb
+     * @public
+     */
+    CreateMalwareWhiteList(req, cb) {
+        let resp = new CreateMalwareWhiteListResponse();
+        this.request("CreateMalwareWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to uninstall the CWPP client.
+     * @param {DeleteMachineRequest} req
+     * @param {function(string, DeleteMachineResponse):void} cb
+     * @public
+     */
+    DeleteMachine(req, cb) {
+        let resp = new DeleteMachineResponse();
+        this.request("DeleteMachine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the core file events.
+     * @param {ModifyFileTamperEventsRequest} req
+     * @param {function(string, ModifyFileTamperEventsResponse):void} cb
+     * @public
+     */
+    ModifyFileTamperEvents(req, cb) {
+        let resp = new ModifyFileTamperEventsResponse();
+        this.request("ModifyFileTamperEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of security report articles.
+     * @param {DescribeSecurityBroadcastInfoRequest} req
+     * @param {function(string, DescribeSecurityBroadcastInfoResponse):void} cb
+     * @public
+     */
+    DescribeSecurityBroadcastInfo(req, cb) {
+        let resp = new DescribeSecurityBroadcastInfoResponse();
+        this.request("DescribeSecurityBroadcastInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart the scan task. Specifying the machine is supported.
+     * @param {ScanTaskAgainRequest} req
+     * @param {function(string, ScanTaskAgainResponse):void} cb
+     * @public
+     */
+    ScanTaskAgain(req, cb) {
+        let resp = new ScanTaskAgainResponse();
+        this.request("ScanTaskAgain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the data for the vulnerability overview.
+     * @param {DescribeVulOverviewRequest} req
+     * @param {function(string, DescribeVulOverviewResponse):void} cb
+     * @public
+     */
+    DescribeVulOverview(req, cb) {
+        let resp = new DescribeVulOverviewResponse();
+        this.request("DescribeVulOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain log types, and the returned result of this API indicates temporarily filterable log types.
+     * @param {DescribeLogTypeRequest} req
+     * @param {function(string, DescribeLogTypeResponse):void} cb
+     * @public
+     */
+    DescribeLogType(req, cb) {
+        let resp = new DescribeLogTypeResponse();
+        this.request("DescribeLogType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain network attack details.
+     * @param {DescribeAttackEventInfoRequest} req
+     * @param {function(string, DescribeAttackEventInfoResponse):void} cb
+     * @public
+     */
+    DescribeAttackEventInfo(req, cb) {
+        let resp = new DescribeAttackEventInfoResponse();
+        this.request("DescribeAttackEventInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query logs.
+     * @param {SearchLogRequest} req
+     * @param {function(string, SearchLogResponse):void} cb
+     * @public
+     */
+    SearchLog(req, cb) {
+        let resp = new SearchLogResponse();
+        this.request("SearchLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of fixing baselines.
+     * @param {ExportBaselineFixListRequest} req
+     * @param {function(string, ExportBaselineFixListResponse):void} cb
+     * @public
+     */
+    ExportBaselineFixList(req, cb) {
+        let resp = new ExportBaselineFixListResponse();
+        this.request("ExportBaselineFixList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check whether a single host or all hosts enable the professional version.
+     * @param {DescribeProVersionStatusRequest} req
+     * @param {function(string, DescribeProVersionStatusResponse):void} cb
+     * @public
+     */
+    DescribeProVersionStatus(req, cb) {
+        let resp = new DescribeProVersionStatusResponse();
+        this.request("DescribeProVersionStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of hosts in a specific region.
+     * @param {DescribeMachinesRequest} req
+     * @param {function(string, DescribeMachinesResponse):void} cb
+     * @public
+     */
+    DescribeMachines(req, cb) {
+        let resp = new DescribeMachinesResponse();
+        this.request("DescribeMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of hosts for baseline detection.
+     * @param {DescribeBaselineHostDetectListRequest} req
+     * @param {function(string, DescribeBaselineHostDetectListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineHostDetectList(req, cb) {
+        let resp = new DescribeBaselineHostDetectListResponse();
+        this.request("DescribeBaselineHostDetectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of asset management Web services.
+     * @param {DescribeAssetWebServiceInfoListRequest} req
+     * @param {function(string, DescribeAssetWebServiceInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebServiceInfoList(req, cb) {
+        let resp = new DescribeAssetWebServiceInfoListResponse();
+        this.request("DescribeAssetWebServiceInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total number of processes.
+     * @param {DescribeAssetProcessCountRequest} req
+     * @param {function(string, DescribeAssetProcessCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetProcessCount(req, cb) {
+        let resp = new DescribeAssetProcessCountResponse();
+        this.request("DescribeAssetProcessCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete tags associated with the server.
+     * @param {DeleteMachineTagRequest} req
+     * @param {function(string, DeleteMachineTagResponse):void} cb
+     * @public
+     */
+    DeleteMachineTag(req, cb) {
+        let resp = new DeleteMachineTagResponse();
+        this.request("DeleteMachineTag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain information of the vulnerability situation.
+     * @param {DescribeVulTrendRequest} req
+     * @param {function(string, DescribeVulTrendResponse):void} cb
+     * @public
+     */
+    DescribeVulTrend(req, cb) {
+        let resp = new DescribeVulTrendResponse();
+        this.request("DescribeVulTrend", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the attribute information of the specified point.
+     * @param {DescribeVertexDetailRequest} req
+     * @param {function(string, DescribeVertexDetailResponse):void} cb
+     * @public
+     */
+    DescribeVertexDetail(req, cb) {
+        let resp = new DescribeVertexDetailResponse();
+        this.request("DescribeVertexDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to display the list of network attack logs in pagination.
+     * @param {DescribeAttackLogsRequest} req
+     * @param {function(string, DescribeAttackLogsResponse):void} cb
+     * @public
+     */
+    DescribeAttackLogs(req, cb) {
+        let resp = new DescribeAttackLogsResponse();
+        this.request("DescribeAttackLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the alarm policy switch.
+     * @param {ModifyWebHookPolicyStatusRequest} req
+     * @param {function(string, ModifyWebHookPolicyStatusResponse):void} cb
+     * @public
+     */
+    ModifyWebHookPolicyStatus(req, cb) {
+        let resp = new ModifyWebHookPolicyStatusResponse();
+        this.request("ModifyWebHookPolicyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management applications.
+     * @param {ExportAssetAppListRequest} req
+     * @param {function(string, ExportAssetAppListResponse):void} cb
+     * @public
+     */
+    ExportAssetAppList(req, cb) {
+        let resp = new ExportAssetAppListResponse();
+        this.request("ExportAssetAppList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of baseline policies under the same user.
+     * @param {DescribeBaselineStrategyListRequest} req
+     * @param {function(string, DescribeBaselineStrategyListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineStrategyList(req, cb) {
+        let resp = new DescribeBaselineStrategyListResponse();
+        this.request("DescribeBaselineStrategyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management ports.
+     * @param {ExportAssetPortInfoListRequest} req
+     * @param {function(string, ExportAssetPortInfoListResponse):void} cb
+     * @public
+     */
+    ExportAssetPortInfoList(req, cb) {
+        let resp = new ExportAssetPortInfoListResponse();
+        this.request("ExportAssetPortInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of resource monitoring.
+     * @param {ExportAssetMachineListRequest} req
+     * @param {function(string, ExportAssetMachineListResponse):void} cb
+     * @public
+     */
+    ExportAssetMachineList(req, cb) {
+        let resp = new ExportAssetMachineListResponse();
+        this.request("ExportAssetMachineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the record of stored log size.
+     * @param {DescribeLogStorageRecordRequest} req
+     * @param {function(string, DescribeLogStorageRecordResponse):void} cb
+     * @public
+     */
+    DescribeLogStorageRecord(req, cb) {
+        let resp = new DescribeLogStorageRecordResponse();
+        this.request("DescribeLogStorageRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify parameters entered for adding and editing high-risk command user rules.
+     * @param {CheckBashPolicyParamsRequest} req
+     * @param {function(string, CheckBashPolicyParamsResponse):void} cb
+     * @public
+     */
+    CheckBashPolicyParams(req, cb) {
+        let resp = new CheckBashPolicyParamsResponse();
+        this.request("CheckBashPolicyParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of network attack events.
+     * @param {ModifyEventAttackStatusRequest} req
+     * @param {function(string, ModifyEventAttackStatusResponse):void} cb
+     * @public
+     */
+    ModifyEventAttackStatus(req, cb) {
+        let resp = new ModifyEventAttackStatusResponse();
+        this.request("ModifyEventAttackStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to trigger event investigation and alarm backtracking for Ultimate Edition machines.
+     * @param {CreateIncidentBacktrackingRequest} req
+     * @param {function(string, CreateIncidentBacktrackingResponse):void} cb
+     * @public
+     */
+    CreateIncidentBacktracking(req, cb) {
+        let resp = new CreateIncidentBacktrackingResponse();
+        this.request("CreateIncidentBacktracking", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete high-risk command events based on IDs.
+     * @param {DeleteBashEventsRequest} req
+     * @param {function(string, DeleteBashEventsResponse):void} cb
+     * @public
+     */
+    DeleteBashEvents(req, cb) {
+        let resp = new DeleteBashEventsResponse();
+        this.request("DeleteBashEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of hosts affected by a baseline based on baseline ID.
+     * @param {DescribeBaselineEffectHostListRequest} req
+     * @param {function(string, DescribeBaselineEffectHostListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineEffectHostList(req, cb) {
+        let resp = new DescribeBaselineEffectHostListResponse();
+        this.request("DescribeBaselineEffectHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete malicious request records.
+     * @param {DeleteMaliciousRequestsRequest} req
+     * @param {function(string, DeleteMaliciousRequestsResponse):void} cb
+     * @public
+     */
+    DeleteMaliciousRequests(req, cb) {
+        let resp = new DeleteMaliciousRequestsResponse();
+        this.request("DeleteMaliciousRequests", req, resp, cb);
+    }
+
+    /**
+     * This API is used to count the number of machines of Professional and Basic editions.
+     * @param {DescribeVersionStatisticsRequest} req
+     * @param {function(string, DescribeVersionStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeVersionStatistics(req, cb) {
+        let resp = new DescribeVersionStatisticsResponse();
+        this.request("DescribeVersionStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch recover quarantined Trojan files.
+     * @param {RecoverMalwaresRequest} req
+     * @param {function(string, RecoverMalwaresResponse):void} cb
+     * @public
+     */
+    RecoverMalwares(req, cb) {
+        let resp = new RecoverMalwaresResponse();
+        this.request("RecoverMalwares", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete Reverse Shell rules.
+     * @param {DeleteReverseShellRulesRequest} req
+     * @param {function(string, DeleteReverseShellRulesResponse):void} cb
+     * @public
+     */
+    DeleteReverseShellRules(req, cb) {
+        let resp = new DeleteReverseShellRulesResponse();
+        this.request("DeleteReverseShellRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of asset management web applications.
+     * @param {DescribeAssetWebAppListRequest} req
+     * @param {function(string, DescribeAssetWebAppListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebAppList(req, cb) {
+        let resp = new DescribeAssetWebAppListResponse();
+        this.request("DescribeAssetWebAppList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the baseline for host detection.
+     * @param {ExportBaselineHostDetectListRequest} req
+     * @param {function(string, ExportBaselineHostDetectListResponse):void} cb
+     * @public
+     */
+    ExportBaselineHostDetectList(req, cb) {
+        let resp = new ExportBaselineHostDetectListResponse();
+        this.request("ExportBaselineHostDetectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the locally stored data.
+     * @param {RemoveLocalStorageItemRequest} req
+     * @param {function(string, RemoveLocalStorageItemResponse):void} cb
+     * @public
+     */
+    RemoveLocalStorageItem(req, cb) {
+        let resp = new RemoveLocalStorageItemResponse();
+        this.request("RemoveLocalStorageItem", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete brute force attack records.
+     * @param {DeleteBruteAttacksRequest} req
+     * @param {function(string, DeleteBruteAttacksResponse):void} cb
+     * @public
+     */
+    DeleteBruteAttacks(req, cb) {
+        let resp = new DeleteBruteAttacksResponse();
+        this.request("DeleteBruteAttacks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the alert recipient.
+     * @param {DeleteWebHookReceiverRequest} req
+     * @param {function(string, DeleteWebHookReceiverResponse):void} cb
+     * @public
+     */
+    DeleteWebHookReceiver(req, cb) {
+        let resp = new DeleteWebHookReceiverResponse();
+        this.request("DeleteWebHookReceiver", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export high-risk command events.
+     * @param {ExportBashEventsRequest} req
+     * @param {function(string, ExportBashEventsResponse):void} cb
+     * @public
+     */
+    ExportBashEvents(req, cb) {
+        let resp = new ExportBashEventsResponse();
+        this.request("ExportBashEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the malicious request allowlist.
+     * @param {DeleteMaliciousRequestWhiteListRequest} req
+     * @param {function(string, DeleteMaliciousRequestWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteMaliciousRequestWhiteList(req, cb) {
+        let resp = new DeleteMaliciousRequestWhiteListResponse();
+        this.request("DeleteMaliciousRequestWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the host overview.
+     * @param {DescribeMachineGeneralRequest} req
+     * @param {function(string, DescribeMachineGeneralResponse):void} cb
+     * @public
+     */
+    DescribeMachineGeneral(req, cb) {
+        let resp = new DescribeMachineGeneralResponse();
+        this.request("DescribeMachineGeneral", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of malicious request policies.
+     * @param {DescribeRiskDnsPolicyListRequest} req
+     * @param {function(string, DescribeRiskDnsPolicyListResponse):void} cb
+     * @public
+     */
+    DescribeRiskDnsPolicyList(req, cb) {
+        let resp = new DescribeRiskDnsPolicyListResponse();
+        this.request("DescribeRiskDnsPolicyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of emergency vulnerabilities.
+     * @param {DescribeEmergencyVulListRequest} req
+     * @param {function(string, DescribeEmergencyVulListResponse):void} cb
+     * @public
+     */
+    DescribeEmergencyVulList(req, cb) {
+        let resp = new DescribeEmergencyVulListResponse();
+        this.request("DescribeEmergencyVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query Java webshell event details.
+     * @param {DescribeJavaMemShellInfoRequest} req
+     * @param {function(string, DescribeJavaMemShellInfoResponse):void} cb
+     * @public
+     */
+    DescribeJavaMemShellInfo(req, cb) {
+        let resp = new DescribeJavaMemShellInfoResponse();
+        this.request("DescribeJavaMemShellInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or modify the access configuration of logs shipped to Kafka.
+     * @param {ModifyLogKafkaAccessRequest} req
+     * @param {function(string, ModifyLogKafkaAccessResponse):void} cb
+     * @public
+     */
+    ModifyLogKafkaAccess(req, cb) {
+        let resp = new ModifyLogKafkaAccessResponse();
+        this.request("ModifyLogKafkaAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of local privilege escalation rules.
+     * @param {DescribePrivilegeRulesRequest} req
+     * @param {function(string, DescribePrivilegeRulesResponse):void} cb
+     * @public
+     */
+    DescribePrivilegeRules(req, cb) {
+        let resp = new DescribePrivilegeRulesResponse();
+        this.request("DescribePrivilegeRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of Jar packages.
+     * @param {DescribeAssetJarListRequest} req
+     * @param {function(string, DescribeAssetJarListResponse):void} cb
+     * @public
+     */
+    DescribeAssetJarList(req, cb) {
+        let resp = new DescribeAssetJarListResponse();
+        this.request("DescribeAssetJarList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain vulnerability defense event details.
+     * @param {DescribeDefenceEventDetailRequest} req
+     * @param {function(string, DescribeDefenceEventDetailResponse):void} cb
+     * @public
+     */
+    DescribeDefenceEventDetail(req, cb) {
+        let resp = new DescribeDefenceEventDetailResponse();
+        this.request("DescribeDefenceEventDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the information of virus scanning overview.
+     * @param {DescribeMalwareRiskOverviewRequest} req
+     * @param {function(string, DescribeMalwareRiskOverviewResponse):void} cb
+     * @public
+     */
+    DescribeMalwareRiskOverview(req, cb) {
+        let resp = new DescribeMalwareRiskOverviewResponse();
+        this.request("DescribeMalwareRiskOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the block switch status.
+     * @param {ModifyBanStatusRequest} req
+     * @param {function(string, ModifyBanStatusResponse):void} cb
+     * @public
+     */
+    ModifyBanStatus(req, cb) {
+        let resp = new ModifyBanStatusResponse();
+        this.request("ModifyBanStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the clearing history records of a machine.
+     * @param {DescribeMachineClearHistoryRequest} req
+     * @param {function(string, DescribeMachineClearHistoryResponse):void} cb
+     * @public
+     */
+    DescribeMachineClearHistory(req, cb) {
+        let resp = new DescribeMachineClearHistoryResponse();
+        this.request("DescribeMachineClearHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of tags associated with machines.
+     * @param {UpdateMachineTagsRequest} req
+     * @param {function(string, UpdateMachineTagsResponse):void} cb
+     * @public
+     */
+    UpdateMachineTags(req, cb) {
+        let resp = new UpdateMachineTagsResponse();
+        this.request("UpdateMachineTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the agent installation command.
+     * @param {DescribeAgentInstallCommandRequest} req
+     * @param {function(string, DescribeAgentInstallCommandResponse):void} cb
+     * @public
+     */
+    DescribeAgentInstallCommand(req, cb) {
+        let resp = new DescribeAgentInstallCommandResponse();
+        this.request("DescribeAgentInstallCommand", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete Reverse Shell events based on IDs.
+     * @param {DeleteReverseShellEventsRequest} req
+     * @param {function(string, DeleteReverseShellEventsResponse):void} cb
+     * @public
+     */
+    DeleteReverseShellEvents(req, cb) {
+        let resp = new DeleteReverseShellEventsResponse();
+        this.request("DeleteReverseShellEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the specified scan task details by task ID.
+     * @param {ExportScanTaskDetailsRequest} req
+     * @param {function(string, ExportScanTaskDetailsResponse):void} cb
+     * @public
+     */
+    ExportScanTaskDetails(req, cb) {
+        let resp = new ExportScanTaskDetailsResponse();
+        this.request("ExportScanTaskDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of host regions.
+     * @param {DescribeMachineRegionListRequest} req
+     * @param {function(string, DescribeMachineRegionListResponse):void} cb
+     * @public
+     */
+    DescribeMachineRegionList(req, cb) {
+        let resp = new DescribeMachineRegionListResponse();
+        this.request("DescribeMachineRegionList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management startup services.
+     * @param {ExportAssetInitServiceListRequest} req
+     * @param {function(string, ExportAssetInitServiceListResponse):void} cb
+     * @public
+     */
+    ExportAssetInitServiceList(req, cb) {
+        let resp = new ExportAssetInitServiceListResponse();
+        this.request("ExportAssetInitServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the log-in audit allowlist information.
+     * @param {ModifyLoginWhiteInfoRequest} req
+     * @param {function(string, ModifyLoginWhiteInfoResponse):void} cb
+     * @public
+     */
+    ModifyLoginWhiteInfo(req, cb) {
+        let resp = new ModifyLoginWhiteInfoResponse();
+        this.request("ModifyLoginWhiteInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management kernel modules.
+     * @param {ExportAssetCoreModuleListRequest} req
+     * @param {function(string, ExportAssetCoreModuleListResponse):void} cb
+     * @public
+     */
+    ExportAssetCoreModuleList(req, cb) {
+        let resp = new ExportAssetCoreModuleListResponse();
+        this.request("ExportAssetCoreModuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of the current user's alarms.
+     * @param {DescribeWarningListRequest} req
+     * @param {function(string, DescribeWarningListResponse):void} cb
+     * @public
+     */
+    DescribeWarningList(req, cb) {
+        let resp = new DescribeWarningListResponse();
+        this.request("DescribeWarningList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of core file monitoring rules.
+     * @param {DescribeFileTamperRulesRequest} req
+     * @param {function(string, DescribeFileTamperRulesResponse):void} cb
+     * @public
+     */
+    DescribeFileTamperRules(req, cb) {
+        let resp = new DescribeFileTamperRulesResponse();
+        this.request("DescribeFileTamperRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of baseline basic information.
+     * @param {DescribeBaselineBasicInfoRequest} req
+     * @param {function(string, DescribeBaselineBasicInfoResponse):void} cb
+     * @public
+     */
+    DescribeBaselineBasicInfo(req, cb) {
+        let resp = new DescribeBaselineBasicInfoResponse();
+        this.request("DescribeBaselineBasicInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of machine regions.
+     * @param {DescribeMachineRegionsRequest} req
+     * @param {function(string, DescribeMachineRegionsResponse):void} cb
+     * @public
+     */
+    DescribeMachineRegions(req, cb) {
+        let resp = new DescribeMachineRegionsResponse();
+        this.request("DescribeMachineRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the current vulnerability defense plugin settings.
+     * @param {DescribeVulDefenceSettingRequest} req
+     * @param {function(string, DescribeVulDefenceSettingResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceSetting(req, cb) {
+        let resp = new DescribeVulDefenceSettingResponse();
+        this.request("DescribeVulDefenceSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of vulnerabilities pending to be processed and affected hosts.
+     * @param {DescribeVulHostCountScanTimeRequest} req
+     * @param {function(string, DescribeVulHostCountScanTimeResponse):void} cb
+     * @public
+     */
+    DescribeVulHostCountScanTime(req, cb) {
+        let resp = new DescribeVulHostCountScanTimeResponse();
+        this.request("DescribeVulHostCountScanTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the log storage configuration.
+     * @param {DescribeLogStorageConfigRequest} req
+     * @param {function(string, DescribeLogStorageConfigResponse):void} cb
+     * @public
+     */
+    DescribeLogStorageConfig(req, cb) {
+        let resp = new DescribeLogStorageConfigResponse();
+        this.request("DescribeLogStorageConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete clearing records of a machine.
+     * @param {DeleteMachineClearHistoryRequest} req
+     * @param {function(string, DeleteMachineClearHistoryResponse):void} cb
+     * @public
+     */
+    DeleteMachineClearHistory(req, cb) {
+        let resp = new DeleteMachineClearHistoryResponse();
+        this.request("DeleteMachineClearHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query snapshots created by the host.
+     * @param {DescribeMachineSnapshotRequest} req
+     * @param {function(string, DescribeMachineSnapshotResponse):void} cb
+     * @public
+     */
+    DescribeMachineSnapshot(req, cb) {
+        let resp = new DescribeMachineSnapshotResponse();
+        this.request("DescribeMachineSnapshot", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the available configurations for authorization allowlists.
+     * @param {DescribeLicenseWhiteConfigRequest} req
+     * @param {function(string, DescribeLicenseWhiteConfigResponse):void} cb
+     * @public
+     */
+    DescribeLicenseWhiteConfig(req, cb) {
+        let resp = new DescribeLicenseWhiteConfigResponse();
+        this.request("DescribeLicenseWhiteConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of malicious request allowlists.
+     * @param {DescribeMaliciousRequestWhiteListRequest} req
+     * @param {function(string, DescribeMaliciousRequestWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeMaliciousRequestWhiteList(req, cb) {
+        let resp = new DescribeMaliciousRequestWhiteListResponse();
+        this.request("DescribeMaliciousRequestWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Top 5 network attacks.
+     * @param {DescribeAttackTopRequest} req
+     * @param {function(string, DescribeAttackTopResponse):void} cb
+     * @public
+     */
+    DescribeAttackTop(req, cb) {
+        let resp = new DescribeAttackTopResponse();
+        this.request("DescribeAttackTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query policy details by baseline policy ID.
+     * @param {DescribeBaselineStrategyDetailRequest} req
+     * @param {function(string, DescribeBaselineStrategyDetailResponse):void} cb
+     * @public
+     */
+    DescribeBaselineStrategyDetail(req, cb) {
+        let resp = new DescribeBaselineStrategyDetailResponse();
+        this.request("DescribeBaselineStrategyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the baseline policy settings.
+     * @param {ModifyBaselinePolicyRequest} req
+     * @param {function(string, ModifyBaselinePolicyResponse):void} cb
+     * @public
+     */
+    ModifyBaselinePolicy(req, cb) {
+        let resp = new ModifyBaselinePolicyResponse();
+        this.request("ModifyBaselinePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query attack backtracking events.
+     * @param {DescribeAttackSourceEventsRequest} req
+     * @param {function(string, DescribeAttackSourceEventsResponse):void} cb
+     * @public
+     */
+    DescribeAttackSourceEvents(req, cb) {
+        let resp = new DescribeAttackSourceEventsResponse();
+        this.request("DescribeAttackSourceEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain Jar package details.
+     * @param {DescribeAssetJarInfoRequest} req
+     * @param {function(string, DescribeAssetJarInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetJarInfo(req, cb) {
+        let resp = new DescribeAssetJarInfoResponse();
+        this.request("DescribeAssetJarInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the baseline policy configuration.
+     * @param {DeleteBaselinePolicyRequest} req
+     * @param {function(string, DeleteBaselinePolicyResponse):void} cb
+     * @public
+     */
+    DeleteBaselinePolicy(req, cb) {
+        let resp = new DeleteBaselinePolicyResponse();
+        this.request("DeleteBaselinePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of machine scan statuses for filtering.
+     * @param {DescribeScanTaskStatusRequest} req
+     * @param {function(string, DescribeScanTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeScanTaskStatus(req, cb) {
+        let resp = new DescribeScanTaskStatusResponse();
+        this.request("DescribeScanTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create Professional/Flagship edition orders
+.This API is used to support creating orders through prepaid and pay-as-you-go.
+This API is used to directly create postpaid orders.
+This API is used to call the billing payment API for payment since prepaid orders are only placed but not paid.
+     * @param {CreateLicenseOrderRequest} req
+     * @param {function(string, CreateLicenseOrderResponse):void} cb
+     * @public
+     */
+    CreateLicenseOrder(req, cb) {
+        let resp = new CreateLicenseOrderResponse();
+        this.request("CreateLicenseOrder", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of available visualized host regions on the large screen.
+     * @param {DescribeScreenMachineRegionsRequest} req
+     * @param {function(string, DescribeScreenMachineRegionsResponse):void} cb
+     * @public
+     */
+    DescribeScreenMachineRegions(req, cb) {
+        let resp = new DescribeScreenMachineRegionsResponse();
+        this.request("DescribeScreenMachineRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit tags.
+     * @param {EditTagsRequest} req
+     * @param {function(string, EditTagsResponse):void} cb
+     * @public
+     */
+    EditTags(req, cb) {
+        let resp = new EditTagsResponse();
+        this.request("EditTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create log download tasks.
+     * @param {CreateLogExportRequest} req
+     * @param {function(string, CreateLogExportResponse):void} cb
+     * @public
+     */
+    CreateLogExport(req, cb) {
+        let resp = new CreateLogExportResponse();
+        this.request("CreateLogExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of cross-region log-in allowlists after merge.
+     * @param {DescribeLoginWhiteCombinedListRequest} req
+     * @param {function(string, DescribeLoginWhiteCombinedListResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteCombinedList(req, cb) {
+        let resp = new DescribeLoginWhiteCombinedListResponse();
+        this.request("DescribeLoginWhiteCombinedList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export cross-region log-in event records in CSV format.
+     * @param {ExportNonlocalLoginPlacesRequest} req
+     * @param {function(string, ExportNonlocalLoginPlacesResponse):void} cb
+     * @public
+     */
+    ExportNonlocalLoginPlaces(req, cb) {
+        let resp = new ExportNonlocalLoginPlacesResponse();
+        this.request("ExportNonlocalLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of risky files pending to be processed + the number of affected servers + whether to try to detect + last detection time.
+     * @param {DescribeServersAndRiskAndFirstInfoRequest} req
+     * @param {function(string, DescribeServersAndRiskAndFirstInfoResponse):void} cb
+     * @public
+     */
+    DescribeServersAndRiskAndFirstInfo(req, cb) {
+        let resp = new DescribeServersAndRiskAndFirstInfoResponse();
+        this.request("DescribeServersAndRiskAndFirstInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of software's associated processes.
+     * @param {DescribeAssetAppProcessListRequest} req
+     * @param {function(string, DescribeAssetAppProcessListResponse):void} cb
+     * @public
+     */
+    DescribeAssetAppProcessList(req, cb) {
+        let resp = new DescribeAssetAppProcessListResponse();
+        this.request("DescribeAssetAppProcessList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to sync the machine information.
+     * @param {SyncMachinesRequest} req
+     * @param {function(string, SyncMachinesResponse):void} cb
+     * @public
+     */
+    SyncMachines(req, cb) {
+        let resp = new SyncMachinesResponse();
+        this.request("SyncMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of Reverse Shell.
+     * @param {DescribeReverseShellEventsRequest} req
+     * @param {function(string, DescribeReverseShellEventsResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellEvents(req, cb) {
+        let resp = new DescribeReverseShellEventsResponse();
+        this.request("DescribeReverseShellEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the scheduled scan configuration.
+     * @param {DescribeMalwareTimingScanSettingRequest} req
+     * @param {function(string, DescribeMalwareTimingScanSettingResponse):void} cb
+     * @public
+     */
+    DescribeMalwareTimingScanSetting(req, cb) {
+        let resp = new DescribeMalwareTimingScanSettingResponse();
+        this.request("DescribeMalwareTimingScanSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete malicious request policies.
+     * @param {DeleteRiskDnsPolicyRequest} req
+     * @param {function(string, DeleteRiskDnsPolicyResponse):void} cb
+     * @public
+     */
+    DeleteRiskDnsPolicy(req, cb) {
+        let resp = new DeleteRiskDnsPolicyResponse();
+        this.request("DeleteRiskDnsPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the vulnerability information, including the list of affected hosts and component information.
+     * @param {ExportVulInfoRequest} req
+     * @param {function(string, ExportVulInfoResponse):void} cb
+     * @public
+     */
+    ExportVulInfo(req, cb) {
+        let resp = new ExportVulInfoResponse();
+        this.request("ExportVulInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management databases.
+     * @param {ExportAssetDatabaseListRequest} req
+     * @param {function(string, ExportAssetDatabaseListResponse):void} cb
+     * @public
+     */
+    ExportAssetDatabaseList(req, cb) {
+        let resp = new ExportAssetDatabaseListResponse();
+        this.request("ExportAssetDatabaseList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export core file monitoring rules.
+     * @param {ExportFileTamperRulesRequest} req
+     * @param {function(string, ExportFileTamperRulesResponse):void} cb
+     * @public
+     */
+    ExportFileTamperRules(req, cb) {
+        let resp = new ExportFileTamperRulesResponse();
+        this.request("ExportFileTamperRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify alarm settings.
+     * @param {ModifyWarningSettingRequest} req
+     * @param {function(string, ModifyWarningSettingResponse):void} cb
+     * @public
+     */
+    ModifyWarningSetting(req, cb) {
+        let resp = new ModifyWarningSettingResponse();
+        this.request("ModifyWarningSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the visualized introduction of CWPP engine on the large screen.
+     * @param {DescribeScreenProtectionCntRequest} req
+     * @param {function(string, DescribeScreenProtectionCntResponse):void} cb
+     * @public
+     */
+    DescribeScreenProtectionCnt(req, cb) {
+        let resp = new DescribeScreenProtectionCntResponse();
+        this.request("DescribeScreenProtectionCnt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or modify high-risk command policies.
+     * @param {ModifyBashPolicyRequest} req
+     * @param {function(string, ModifyBashPolicyResponse):void} cb
+     * @public
+     */
+    ModifyBashPolicy(req, cb) {
+        let resp = new ModifyBashPolicyResponse();
+        this.request("ModifyBashPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the .security notification information.
+     * @param {DescribeSafeInfoRequest} req
+     * @param {function(string, DescribeSafeInfoResponse):void} cb
+     * @public
+     */
+    DescribeSafeInfo(req, cb) {
+        let resp = new DescribeSafeInfoResponse();
+        this.request("DescribeSafeInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of Web sites.
+     * @param {ExportAssetWebLocationListRequest} req
+     * @param {function(string, ExportAssetWebLocationListResponse):void} cb
+     * @public
+     */
+    ExportAssetWebLocationList(req, cb) {
+        let resp = new ExportAssetWebLocationListResponse();
+        this.request("ExportAssetWebLocationList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of host snapshot backups.
+     * @param {DescribeRansomDefenseBackupListRequest} req
+     * @param {function(string, DescribeRansomDefenseBackupListResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseBackupList(req, cb) {
+        let resp = new DescribeRansomDefenseBackupListResponse();
+        this.request("DescribeRansomDefenseBackupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of baseline detection items.
+     * @param {DescribeBaselineItemDetectListRequest} req
+     * @param {function(string, DescribeBaselineItemDetectListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineItemDetectList(req, cb) {
+        let resp = new DescribeBaselineItemDetectListResponse();
+        this.request("DescribeBaselineItemDetectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of hosts.
+     * @param {DescribeMachinesSimpleRequest} req
+     * @param {function(string, DescribeMachinesSimpleResponse):void} cb
+     * @public
+     */
+    DescribeMachinesSimple(req, cb) {
+        let resp = new DescribeMachinesSimpleResponse();
+        this.request("DescribeMachinesSimple", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the policy details.
+     * @param {DescribeRansomDefenseStrategyDetailRequest} req
+     * @param {function(string, DescribeRansomDefenseStrategyDetailResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseStrategyDetail(req, cb) {
+        let resp = new DescribeRansomDefenseStrategyDetailResponse();
+        this.request("DescribeRansomDefenseStrategyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the vulnerability detection Excel document.
+     * @param {ExportVulDetectionExcelRequest} req
+     * @param {function(string, ExportVulDetectionExcelResponse):void} cb
+     * @public
+     */
+    ExportVulDetectionExcel(req, cb) {
+        let resp = new ExportVulDetectionExcelResponse();
+        this.request("ExportVulDetectionExcel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the block region.
+     * @param {DescribeBanRegionsRequest} req
+     * @param {function(string, DescribeBanRegionsResponse):void} cb
+     * @public
+     */
+    DescribeBanRegions(req, cb) {
+        let resp = new DescribeBanRegionsResponse();
+        this.request("DescribeBanRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or modify local privilege escalation rules (multiple servers supported).
+     * @param {EditPrivilegeRulesRequest} req
+     * @param {function(string, EditPrivilegeRulesResponse):void} cb
+     * @public
+     */
+    EditPrivilegeRules(req, cb) {
+        let resp = new EditPrivilegeRulesResponse();
+        this.request("EditPrivilegeRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add the list of block allowlists.
+     * @param {CreateBanWhiteListRequest} req
+     * @param {function(string, CreateBanWhiteListResponse):void} cb
+     * @public
+     */
+    CreateBanWhiteList(req, cb) {
+        let resp = new CreateBanWhiteListResponse();
+        this.request("CreateBanWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain vulnerability details with the CVSS version.
+     * @param {DescribeVulInfoCvssRequest} req
+     * @param {function(string, DescribeVulInfoCvssResponse):void} cb
+     * @public
+     */
+    DescribeVulInfoCvss(req, cb) {
+        let resp = new DescribeVulInfoCvssResponse();
+        this.request("DescribeVulInfoCvss", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the user's custom configurations.
+     * @param {DescribeUsersConfigRequest} req
+     * @param {function(string, DescribeUsersConfigResponse):void} cb
+     * @public
+     */
+    DescribeUsersConfig(req, cb) {
+        let resp = new DescribeUsersConfigResponse();
+        this.request("DescribeUsersConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the information of log shipping statuses.
+     * @param {ModifyLogKafkaStateRequest} req
+     * @param {function(string, ModifyLogKafkaStateResponse):void} cb
+     * @public
+     */
+    ModifyLogKafkaState(req, cb) {
+        let resp = new ModifyLogKafkaStateResponse();
+        this.request("ModifyLogKafkaState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of Java webshell events.
+     * @param {ExportJavaMemShellsRequest} req
+     * @param {function(string, ExportJavaMemShellsResponse):void} cb
+     * @public
+     */
+    ExportJavaMemShells(req, cb) {
+        let resp = new ExportJavaMemShellsResponse();
+        this.request("ExportJavaMemShells", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of baseline weak passwords.
+     * @param {DescribeBaselineWeakPasswordListRequest} req
+     * @param {function(string, DescribeBaselineWeakPasswordListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineWeakPasswordList(req, cb) {
+        let resp = new DescribeBaselineWeakPasswordListResponse();
+        this.request("DescribeBaselineWeakPasswordList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the recommended number of protection cores for purchase.
+     * @param {DescribeRecommendedProtectCpuRequest} req
+     * @param {function(string, DescribeRecommendedProtectCpuResponse):void} cb
+     * @public
+     */
+    DescribeRecommendedProtectCpu(req, cb) {
+        let resp = new DescribeRecommendedProtectCpuResponse();
+        this.request("DescribeRecommendedProtectCpu", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the security report list page.
+     * @param {DescribeSecurityBroadcastsRequest} req
+     * @param {function(string, DescribeSecurityBroadcastsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityBroadcasts(req, cb) {
+        let resp = new DescribeSecurityBroadcastsResponse();
+        this.request("DescribeSecurityBroadcasts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of asset management start services.
+     * @param {DescribeAssetInitServiceListRequest} req
+     * @param {function(string, DescribeAssetInitServiceListResponse):void} cb
+     * @public
+     */
+    DescribeAssetInitServiceList(req, cb) {
+        let resp = new DescribeAssetInitServiceListResponse();
+        this.request("DescribeAssetInitServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export network attack events.
+     * @param {ExportAttackEventsRequest} req
+     * @param {function(string, ExportAttackEventsResponse):void} cb
+     * @public
+     */
+    ExportAttackEvents(req, cb) {
+        let resp = new ExportAttackEventsResponse();
+        this.request("ExportAttackEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the alarming machine scope settings.
+     * @param {DescribeWarningHostConfigRequest} req
+     * @param {function(string, DescribeWarningHostConfigResponse):void} cb
+     * @public
+     */
+    DescribeWarningHostConfig(req, cb) {
+        let resp = new DescribeWarningHostConfigResponse();
+        this.request("DescribeWarningHostConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the cleanup configuration of the machine.
+     * @param {ModifyMachineAutoClearConfigRequest} req
+     * @param {function(string, ModifyMachineAutoClearConfigResponse):void} cb
+     * @public
+     */
+    ModifyMachineAutoClearConfig(req, cb) {
+        let resp = new ModifyMachineAutoClearConfigResponse();
+        this.request("ModifyMachineAutoClearConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to redetect the API.
+     * @param {ScanVulAgainRequest} req
+     * @param {function(string, ScanVulAgainResponse):void} cb
+     * @public
+     */
+    ScanVulAgain(req, cb) {
+        let resp = new ScanVulAgainResponse();
+        this.request("ScanVulAgain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of vulnerability defense events.
+     * @param {DescribeVulDefenceEventRequest} req
+     * @param {function(string, DescribeVulDefenceEventResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceEvent(req, cb) {
+        let resp = new DescribeVulDefenceEventResponse();
+        this.request("DescribeVulDefenceEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of malicious request policies.
+     * @param {ModifyRiskDnsPolicyStatusRequest} req
+     * @param {function(string, ModifyRiskDnsPolicyStatusResponse):void} cb
+     * @public
+     */
+    ModifyRiskDnsPolicyStatus(req, cb) {
+        let resp = new ModifyRiskDnsPolicyStatusResponse();
+        this.request("ModifyRiskDnsPolicyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the data of the vulnerability list.
+     * @param {DescribeVulListRequest} req
+     * @param {function(string, DescribeVulListResponse):void} cb
+     * @public
+     */
+    DescribeVulList(req, cb) {
+        let resp = new DescribeVulListResponse();
+        this.request("DescribeVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the rules of WeCom chatbots.
+     * @param {ModifyWebHookRuleStatusRequest} req
+     * @param {function(string, ModifyWebHookRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyWebHookRuleStatus(req, cb) {
+        let resp = new ModifyWebHookRuleStatusResponse();
+        this.request("ModifyWebHookRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of baselines.
+     * @param {ExportBaselineListRequest} req
+     * @param {function(string, ExportBaselineListResponse):void} cb
+     * @public
+     */
+    ExportBaselineList(req, cb) {
+        let resp = new ExportBaselineListResponse();
+        this.request("ExportBaselineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query details of a monitoring rule.
+     * @param {DescribeFileTamperRuleInfoRequest} req
+     * @param {function(string, DescribeFileTamperRuleInfoResponse):void} cb
+     * @public
+     */
+    DescribeFileTamperRuleInfo(req, cb) {
+        let resp = new DescribeFileTamperRuleInfoResponse();
+        this.request("DescribeFileTamperRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain baseline detection and re-detection APIs.
+     * @param {ScanBaselineRequest} req
+     * @param {function(string, ScanBaselineResponse):void} cb
+     * @public
+     */
+    ScanBaseline(req, cb) {
+        let resp = new ScanBaselineResponse();
+        this.request("ScanBaseline", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the log storage configuration.
+     * @param {ModifyLogStorageConfigRequest} req
+     * @param {function(string, ModifyLogStorageConfigResponse):void} cb
+     * @public
+     */
+    ModifyLogStorageConfig(req, cb) {
+        let resp = new ModifyLogStorageConfigResponse();
+        this.request("ModifyLogStorageConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit and add core file monitoring rules.
+     * @param {ModifyFileTamperRuleRequest} req
+     * @param {function(string, ModifyFileTamperRuleResponse):void} cb
+     * @public
+     */
+    ModifyFileTamperRule(req, cb) {
+        let resp = new ModifyFileTamperRuleResponse();
+        this.request("ModifyFileTamperRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain Trojan file download addresses.
+     * @param {DescribeMalwareFileRequest} req
+     * @param {function(string, DescribeMalwareFileResponse):void} cb
+     * @public
+     */
+    DescribeMalwareFile(req, cb) {
+        let resp = new DescribeMalwareFileResponse();
+        this.request("DescribeMalwareFile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of malicious request events.
+     * @param {DescribeRiskDnsEventListRequest} req
+     * @param {function(string, DescribeRiskDnsEventListResponse):void} cb
+     * @public
+     */
+    DescribeRiskDnsEventList(req, cb) {
+        let resp = new DescribeRiskDnsEventListResponse();
+        this.request("DescribeRiskDnsEventList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete local privilege escalation based on IDs.
+     * @param {DeletePrivilegeEventsRequest} req
+     * @param {function(string, DeletePrivilegeEventsResponse):void} cb
+     * @public
+     */
+    DeletePrivilegeEvents(req, cb) {
+        let resp = new DeletePrivilegeEventsResponse();
+        this.request("DeletePrivilegeEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query alarm policies.
+     * @param {DescribeWebHookPolicyRequest} req
+     * @param {function(string, DescribeWebHookPolicyResponse):void} cb
+     * @public
+     */
+    DescribeWebHookPolicy(req, cb) {
+        let resp = new DescribeWebHookPolicyResponse();
+        this.request("DescribeWebHookPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of anti-ransomware events.
+     * @param {ModifyRansomDefenseEventsStatusRequest} req
+     * @param {function(string, ModifyRansomDefenseEventsStatusResponse):void} cb
+     * @public
+     */
+    ModifyRansomDefenseEventsStatus(req, cb) {
+        let resp = new ModifyRansomDefenseEventsStatusResponse();
+        this.request("ModifyRansomDefenseEventsStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of asset management plan tasks.
+     * @param {DescribeAssetPlanTaskListRequest} req
+     * @param {function(string, DescribeAssetPlanTaskListResponse):void} cb
+     * @public
+     */
+    DescribeAssetPlanTaskList(req, cb) {
+        let resp = new DescribeAssetPlanTaskListResponse();
+        this.request("DescribeAssetPlanTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to display the list of network attack detection events in pagination.
+     * @param {DescribeAttackEventsRequest} req
+     * @param {function(string, DescribeAttackEventsResponse):void} cb
+     * @public
+     */
+    DescribeAttackEvents(req, cb) {
+        let resp = new DescribeAttackEventsResponse();
+        this.request("DescribeAttackEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of asset management Web application plugins.
+     * @param {DescribeAssetWebAppPluginListRequest} req
+     * @param {function(string, DescribeAssetWebAppPluginListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebAppPluginList(req, cb) {
+        let resp = new DescribeAssetWebAppPluginListResponse();
+        this.request("DescribeAssetWebAppPluginList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of allowlisted machines after merge.
+     * @param {DescribeLoginWhiteHostListRequest} req
+     * @param {function(string, DescribeLoginWhiteHostListResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteHostList(req, cb) {
+        let resp = new DescribeLoginWhiteHostListResponse();
+        this.request("DescribeLoginWhiteHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain historical search records.
+     * @param {DescribeSearchLogsRequest} req
+     * @param {function(string, DescribeSearchLogsResponse):void} cb
+     * @public
+     */
+    DescribeSearchLogs(req, cb) {
+        let resp = new DescribeSearchLogsResponse();
+        this.request("DescribeSearchLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query TOP baseline detection items based on policy IDs.
+     * @param {DescribeBaselineTopRequest} req
+     * @param {function(string, DescribeBaselineTopResponse):void} cb
+     * @public
+     */
+    DescribeBaselineTop(req, cb) {
+        let resp = new DescribeBaselineTopResponse();
+        this.request("DescribeBaselineTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to quickly analyze and count logs.
+     * @param {DescribeFastAnalysisRequest} req
+     * @param {function(string, DescribeFastAnalysisResponse):void} cb
+     * @public
+     */
+    DescribeFastAnalysis(req, cb) {
+        let resp = new DescribeFastAnalysisResponse();
+        this.request("DescribeFastAnalysis", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CWPP authorized trial report (only available for console applications).
+     * @param {DescribeTrialReportRequest} req
+     * @param {function(string, DescribeTrialReportResponse):void} cb
+     * @public
+     */
+    DescribeTrialReport(req, cb) {
+        let resp = new DescribeTrialReportResponse();
+        this.request("DescribeTrialReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query common log-in locations.
+     * @param {DescribeUsualLoginPlacesRequest} req
+     * @param {function(string, DescribeUsualLoginPlacesResponse):void} cb
+     * @public
+     */
+    DescribeUsualLoginPlaces(req, cb) {
+        let resp = new DescribeUsualLoginPlacesResponse();
+        this.request("DescribeUsualLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export core file events.
+     * @param {ExportFileTamperEventsRequest} req
+     * @param {function(string, ExportFileTamperEventsResponse):void} cb
+     * @public
+     */
+    ExportFileTamperEvents(req, cb) {
+        let resp = new ExportFileTamperEventsResponse();
+        this.request("ExportFileTamperEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add cross-region log-in allowlists in batches.
+     * @param {AddLoginWhiteListsRequest} req
+     * @param {function(string, AddLoginWhiteListsResponse):void} cb
+     * @public
+     */
+    AddLoginWhiteLists(req, cb) {
+        let resp = new AddLoginWhiteListsResponse();
+        this.request("AddLoginWhiteLists", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the index list.
+     * @param {DescribeIndexListRequest} req
+     * @param {function(string, DescribeIndexListResponse):void} cb
+     * @public
+     */
+    DescribeIndexList(req, cb) {
+        let resp = new DescribeIndexListResponse();
+        this.request("DescribeIndexList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export log files with large data volumes asynchronously.
+     * @param {ExportTasksRequest} req
+     * @param {function(string, ExportTasksResponse):void} cb
+     * @public
+     */
+    ExportTasks(req, cb) {
+        let resp = new ExportTasksResponse();
+        this.request("ExportTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of hosts affected by ignored detection items based on detection item IDs.
+     * @param {ExportIgnoreRuleEffectHostListRequest} req
+     * @param {function(string, ExportIgnoreRuleEffectHostListResponse):void} cb
+     * @public
+     */
+    ExportIgnoreRuleEffectHostList(req, cb) {
+        let resp = new ExportIgnoreRuleEffectHostListResponse();
+        this.request("ExportIgnoreRuleEffectHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query malicious request details.
+     * @param {DescribeRiskDnsInfoRequest} req
+     * @param {function(string, DescribeRiskDnsInfoResponse):void} cb
+     * @public
+     */
+    DescribeRiskDnsInfo(req, cb) {
+        let resp = new DescribeRiskDnsInfoResponse();
+        this.request("DescribeRiskDnsInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of anti-ransomware events.
+     * @param {ExportRansomDefenseEventsListRequest} req
+     * @param {function(string, ExportRansomDefenseEventsListResponse):void} cb
+     * @public
+     */
+    ExportRansomDefenseEventsList(req, cb) {
+        let resp = new ExportRansomDefenseEventsListResponse();
+        this.request("ExportRansomDefenseEventsList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or modify the rules of WeCom chatbots.
+     * @param {ModifyWebHookRuleRequest} req
+     * @param {function(string, ModifyWebHookRuleResponse):void} cb
+     * @public
+     */
+    ModifyWebHookRule(req, cb) {
+        let resp = new ModifyWebHookRuleResponse();
+        this.request("ModifyWebHookRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the current number of abnormal plugins.
+     * @param {DescribeVulDefencePluginExceptionCountRequest} req
+     * @param {function(string, DescribeVulDefencePluginExceptionCountResponse):void} cb
+     * @public
+     */
+    DescribeVulDefencePluginExceptionCount(req, cb) {
+        let resp = new DescribeVulDefencePluginExceptionCountResponse();
+        this.request("DescribeVulDefencePluginExceptionCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information on the list of hosts affected by ignored detection items based on detection item IDs and filter criteria.
+     * @param {DescribeIgnoreRuleEffectHostListRequest} req
+     * @param {function(string, DescribeIgnoreRuleEffectHostListResponse):void} cb
+     * @public
+     */
+    DescribeIgnoreRuleEffectHostList(req, cb) {
+        let resp = new DescribeIgnoreRuleEffectHostListResponse();
+        this.request("DescribeIgnoreRuleEffectHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the application list.
+     * @param {DescribeAssetAppListRequest} req
+     * @param {function(string, DescribeAssetAppListResponse):void} cb
+     * @public
+     */
+    DescribeAssetAppList(req, cb) {
+        let resp = new DescribeAssetAppListResponse();
+        this.request("DescribeAssetAppList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to backtrack attacks.
+     * @param {DescribeAttackSourceRequest} req
+     * @param {function(string, DescribeAttackSourceResponse):void} cb
+     * @public
+     */
+    DescribeAttackSource(req, cb) {
+        let resp = new DescribeAttackSourceResponse();
+        this.request("DescribeAttackSource", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the information of Kafka shipping.
+     * @param {DescribeLogKafkaDeliverInfoRequest} req
+     * @param {function(string, DescribeLogKafkaDeliverInfoResponse):void} cb
+     * @public
+     */
+    DescribeLogKafkaDeliverInfo(req, cb) {
+        let resp = new DescribeLogKafkaDeliverInfoResponse();
+        this.request("DescribeLogKafkaDeliverInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the aggregation result of the ES field.
+     * @param {DescribeESAggregationsRequest} req
+     * @param {function(string, DescribeESAggregationsResponse):void} cb
+     * @public
+     */
+    DescribeESAggregations(req, cb) {
+        let resp = new DescribeESAggregationsResponse();
+        this.request("DescribeESAggregations", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add history search records.
+     * @param {CreateSearchLogRequest} req
+     * @param {function(string, CreateSearchLogResponse):void} cb
+     * @public
+     */
+    CreateSearchLog(req, cb) {
+        let resp = new CreateSearchLogResponse();
+        this.request("CreateSearchLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the rules of WeCom chatbots.
+     * @param {DeleteWebHookRuleRequest} req
+     * @param {function(string, DeleteWebHookRuleResponse):void} cb
+     * @public
+     */
+    DeleteWebHookRule(req, cb) {
+        let resp = new DeleteWebHookRuleResponse();
+        this.request("DeleteWebHookRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add the	retrieval template.
+     * @param {CreateSearchTemplateRequest} req
+     * @param {function(string, CreateSearchTemplateResponse):void} cb
+     * @public
+     */
+    CreateSearchTemplate(req, cb) {
+        let resp = new CreateSearchTemplateResponse();
+        this.request("CreateSearchTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export information of ignored baseline detection items.
+     * @param {ExportIgnoreBaselineRuleRequest} req
+     * @param {function(string, ExportIgnoreBaselineRuleResponse):void} cb
+     * @public
+     */
+    ExportIgnoreBaselineRule(req, cb) {
+        let resp = new ExportIgnoreBaselineRuleResponse();
+        this.request("ExportIgnoreBaselineRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain local privilege escalation information details.
+     * @param {DescribePrivilegeEventInfoRequest} req
+     * @param {function(string, DescribePrivilegeEventInfoResponse):void} cb
+     * @public
+     */
+    DescribePrivilegeEventInfo(req, cb) {
+        let resp = new DescribePrivilegeEventInfoResponse();
+        this.request("DescribePrivilegeEventInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to open Intrusion Detection - Virus Scanning, and the risk warning content pops up.
+     * @param {DescribeMalwareRiskWarningRequest} req
+     * @param {function(string, DescribeMalwareRiskWarningResponse):void} cb
+     * @public
+     */
+    DescribeMalwareRiskWarning(req, cb) {
+        let resp = new DescribeMalwareRiskWarningResponse();
+        this.request("DescribeMalwareRiskWarning", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list information of default policies of the baseline.
+     * @param {DescribeBaselineDefaultStrategyListRequest} req
+     * @param {function(string, DescribeBaselineDefaultStrategyListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineDefaultStrategyList(req, cb) {
+        let resp = new DescribeBaselineDefaultStrategyListResponse();
+        this.request("DescribeBaselineDefaultStrategyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to submit the vulnerabilities and fix them.
+     * @param {CreateVulFixRequest} req
+     * @param {function(string, CreateVulFixResponse):void} cb
+     * @public
+     */
+    CreateVulFix(req, cb) {
+        let resp = new CreateVulFixResponse();
+        this.request("CreateVulFix", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the server information associated with the specified tag.
+     * @param {DescribeTagMachinesRequest} req
+     * @param {function(string, DescribeTagMachinesResponse):void} cb
+     * @public
+     */
+    DescribeTagMachines(req, cb) {
+        let resp = new DescribeTagMachinesResponse();
+        this.request("DescribeTagMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of abnormal processes.
+     * @param {DescribeRiskProcessEventsRequest} req
+     * @param {function(string, DescribeRiskProcessEventsResponse):void} cb
+     * @public
+     */
+    DescribeRiskProcessEvents(req, cb) {
+        let resp = new DescribeRiskProcessEventsResponse();
+        this.request("DescribeRiskProcessEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain available order details.
+     * @param {DescribeAvailableExpertServiceDetailRequest} req
+     * @param {function(string, DescribeAvailableExpertServiceDetailResponse):void} cb
+     * @public
+     */
+    DescribeAvailableExpertServiceDetail(req, cb) {
+        let resp = new DescribeAvailableExpertServiceDetailResponse();
+        this.request("DescribeAvailableExpertServiceDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query alarm event details based on event table names and IDs.
+     * @param {DescribeEventByTableRequest} req
+     * @param {function(string, DescribeEventByTableResponse):void} cb
+     * @public
+     */
+    DescribeEventByTable(req, cb) {
+        let resp = new DescribeEventByTableResponse();
+        this.request("DescribeEventByTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete expired orders in Authorization Management - Order List. (Deleted orders are not counted in statistics.)
+     * @param {DeleteLicenseRecordRequest} req
+     * @param {function(string, DeleteLicenseRecordResponse):void} cb
+     * @public
+     */
+    DeleteLicenseRecord(req, cb) {
+        let resp = new DeleteLicenseRecordResponse();
+        this.request("DeleteLicenseRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the dynamic message data of security events.
+     * @param {DescribeSecurityDynamicsRequest} req
+     * @param {function(string, DescribeSecurityDynamicsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityDynamics(req, cb) {
+        let resp = new DescribeSecurityDynamicsResponse();
+        this.request("DescribeSecurityDynamics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics of security events.
+     * @param {DescribeSecurityEventStatRequest} req
+     * @param {function(string, DescribeSecurityEventStatResponse):void} cb
+     * @public
+     */
+    DescribeSecurityEventStat(req, cb) {
+        let resp = new DescribeSecurityEventStatResponse();
+        this.request("DescribeSecurityEventStat", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of all databases.
+     * @param {DescribeAssetDatabaseCountRequest} req
+     * @param {function(string, DescribeAssetDatabaseCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetDatabaseCount(req, cb) {
+        let resp = new DescribeAssetDatabaseCountResponse();
+        this.request("DescribeAssetDatabaseCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the log histogram information.
+     * @param {DescribeLogHistogramRequest} req
+     * @param {function(string, DescribeLogHistogramResponse):void} cb
+     * @public
+     */
+    DescribeLogHistogram(req, cb) {
+        let resp = new DescribeLogHistogramResponse();
+        this.request("DescribeLogHistogram", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of host-related core file monitoring rules.
+     * @param {DescribeMachineFileTamperRulesRequest} req
+     * @param {function(string, DescribeMachineFileTamperRulesResponse):void} cb
+     * @public
+     */
+    DescribeMachineFileTamperRules(req, cb) {
+        let resp = new DescribeMachineFileTamperRulesResponse();
+        this.request("DescribeMachineFileTamperRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit CWPP - pay-as-you-go authorization orders.
+     * @param {ModifyLicenseOrderRequest} req
+     * @param {function(string, ModifyLicenseOrderResponse):void} cb
+     * @public
+     */
+    ModifyLicenseOrder(req, cb) {
+        let resp = new ModifyLicenseOrderResponse();
+        this.request("ModifyLicenseOrder", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the installation command of the public network access proxy.
+     * @param {DescribePublicProxyInstallCommandRequest} req
+     * @param {function(string, DescribePublicProxyInstallCommandResponse):void} cb
+     * @public
+     */
+    DescribePublicProxyInstallCommand(req, cb) {
+        let resp = new DescribePublicProxyInstallCommandResponse();
+        this.request("DescribePublicProxyInstallCommand", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics of vulnerability quantity and level distribution.
+     * @param {DescribeVulLevelCountRequest} req
+     * @param {function(string, DescribeVulLevelCountResponse):void} cb
+     * @public
+     */
+    DescribeVulLevelCount(req, cb) {
+        let resp = new DescribeVulLevelCountResponse();
+        this.request("DescribeVulLevelCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the account list.
+     * @param {ExportAssetUserListRequest} req
+     * @param {function(string, ExportAssetUserListResponse):void} cb
+     * @public
+     */
+    ExportAssetUserList(req, cb) {
+        let resp = new ExportAssetUserListResponse();
+        this.request("ExportAssetUserList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the log-in audit list.
+     * @param {DescribeHostLoginListRequest} req
+     * @param {function(string, DescribeHostLoginListResponse):void} cb
+     * @public
+     */
+    DescribeHostLoginList(req, cb) {
+        let resp = new DescribeHostLoginListResponse();
+        this.request("DescribeHostLoginList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the policy information based on baseline policy IDs.
+     * @param {UpdateBaselineStrategyRequest} req
+     * @param {function(string, UpdateBaselineStrategyResponse):void} cb
+     * @public
+     */
+    UpdateBaselineStrategy(req, cb) {
+        let resp = new UpdateBaselineStrategyResponse();
+        this.request("UpdateBaselineStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unignore the vulnerabilities.
+     * @param {CancelIgnoreVulRequest} req
+     * @param {function(string, CancelIgnoreVulResponse):void} cb
+     * @public
+     */
+    CancelIgnoreVul(req, cb) {
+        let resp = new CancelIgnoreVulResponse();
+        this.request("CancelIgnoreVul", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of asset management kernel modules.
+     * @param {DescribeAssetCoreModuleListRequest} req
+     * @param {function(string, DescribeAssetCoreModuleListResponse):void} cb
+     * @public
+     */
+    DescribeAssetCoreModuleList(req, cb) {
+        let resp = new DescribeAssetCoreModuleListResponse();
+        this.request("DescribeAssetCoreModuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of port statistics.
+     * @param {DescribeOpenPortStatisticsRequest} req
+     * @param {function(string, DescribeOpenPortStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeOpenPortStatistics(req, cb) {
+        let resp = new DescribeOpenPortStatisticsResponse();
+        this.request("DescribeOpenPortStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the summary of security protection statuses.
+     * @param {DescribeSecurityProtectionStatRequest} req
+     * @param {function(string, DescribeSecurityProtectionStatResponse):void} cb
+     * @public
+     */
+    DescribeSecurityProtectionStat(req, cb) {
+        let resp = new DescribeSecurityProtectionStatResponse();
+        this.request("DescribeSecurityProtectionStat", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the brute-force blocking mode.
+     * @param {ModifyBanModeRequest} req
+     * @param {function(string, ModifyBanModeResponse):void} cb
+     * @public
+     */
+    ModifyBanMode(req, cb) {
+        let resp = new ModifyBanModeResponse();
+        this.request("ModifyBanMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain DC agent installation command, including the token.
+     * @param {DescribeDirectConnectInstallCommandRequest} req
+     * @param {function(string, DescribeDirectConnectInstallCommandResponse):void} cb
+     * @public
+     */
+    DescribeDirectConnectInstallCommand(req, cb) {
+        let resp = new DescribeDirectConnectInstallCommandResponse();
+        this.request("DescribeDirectConnectInstallCommand", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of WeCom chatbot rules.
+     * @param {DescribeWebHookRulesRequest} req
+     * @param {function(string, DescribeWebHookRulesResponse):void} cb
+     * @public
+     */
+    DescribeWebHookRules(req, cb) {
+        let resp = new DescribeWebHookRulesResponse();
+        this.request("DescribeWebHookRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of baseline policies.
+     * @param {DescribeBaselinePolicyListRequest} req
+     * @param {function(string, DescribeBaselinePolicyListResponse):void} cb
+     * @public
+     */
+    DescribeBaselinePolicyList(req, cb) {
+        let resp = new DescribeBaselinePolicyListResponse();
+        this.request("DescribeBaselinePolicyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of all web applications.
+     * @param {DescribeAssetWebAppCountRequest} req
+     * @param {function(string, DescribeAssetWebAppCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebAppCount(req, cb) {
+        let resp = new DescribeAssetWebAppCountResponse();
+        this.request("DescribeAssetWebAppCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the shipping configuration and switch of the specified log category.
+     * @param {ModifyLogKafkaDeliverTypeRequest} req
+     * @param {function(string, ModifyLogKafkaDeliverTypeResponse):void} cb
+     * @public
+     */
+    ModifyLogKafkaDeliverType(req, cb) {
+        let resp = new ModifyLogKafkaDeliverTypeResponse();
+        this.request("ModifyLogKafkaDeliverType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query high-risk command event details.
+     * @param {DescribeBashEventsInfoRequest} req
+     * @param {function(string, DescribeBashEventsInfoResponse):void} cb
+     * @public
+     */
+    DescribeBashEventsInfo(req, cb) {
+        let resp = new DescribeBashEventsInfoResponse();
+        this.request("DescribeBashEventsInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of alarm IDs.
+     * @param {DescribeAlarmVertexIdRequest} req
+     * @param {function(string, DescribeAlarmVertexIdResponse):void} cb
+     * @public
+     */
+    DescribeAlarmVertexId(req, cb) {
+        let resp = new DescribeAlarmVertexIdResponse();
+        this.request("DescribeAlarmVertexId", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query vulnerability details by CveId.
+     * @param {DescribeVulCveIdInfoRequest} req
+     * @param {function(string, DescribeVulCveIdInfoResponse):void} cb
+     * @public
+     */
+    DescribeVulCveIdInfo(req, cb) {
+        let resp = new DescribeVulCveIdInfoResponse();
+        this.request("DescribeVulCveIdInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of host snapshot backups.
+     * @param {ExportRansomDefenseBackupListRequest} req
+     * @param {function(string, ExportRansomDefenseBackupListResponse):void} cb
+     * @public
+     */
+    ExportRansomDefenseBackupList(req, cb) {
+        let resp = new ExportRansomDefenseBackupListResponse();
+        this.request("ExportRansomDefenseBackupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics of network attack data.
+     * @param {DescribeAttackStatisticsRequest} req
+     * @param {function(string, DescribeAttackStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeAttackStatistics(req, cb) {
+        let resp = new DescribeAttackStatisticsResponse();
+        this.request("DescribeAttackStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of host account Keys.
+     * @param {DescribeAssetUserKeyListRequest} req
+     * @param {function(string, DescribeAssetUserKeyListResponse):void} cb
+     * @public
+     */
+    DescribeAssetUserKeyList(req, cb) {
+        let resp = new DescribeAssetUserKeyListResponse();
+        this.request("DescribeAssetUserKeyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the Trojan scan progress.
+     * @param {DescribeScanMalwareScheduleRequest} req
+     * @param {function(string, DescribeScanMalwareScheduleResponse):void} cb
+     * @public
+     */
+    DescribeScanMalwareSchedule(req, cb) {
+        let resp = new DescribeScanMalwareScheduleResponse();
+        this.request("DescribeScanMalwareSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit the Trojan allowlist.
+     * @param {ModifyMalwareWhiteListRequest} req
+     * @param {function(string, ModifyMalwareWhiteListResponse):void} cb
+     * @public
+     */
+    ModifyMalwareWhiteList(req, cb) {
+        let resp = new ModifyMalwareWhiteListResponse();
+        this.request("ModifyMalwareWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the details of the WeCom chatbot rules.
+     * @param {DescribeWebHookRuleRequest} req
+     * @param {function(string, DescribeWebHookRuleResponse):void} cb
+     * @public
+     */
+    DescribeWebHookRule(req, cb) {
+        let resp = new DescribeWebHookRuleResponse();
+        this.request("DescribeWebHookRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to fix vulnerabilities on a single host when the fix fails.
+     * @param {RetryVulFixRequest} req
+     * @param {function(string, RetryVulFixResponse):void} cb
+     * @public
+     */
+    RetryVulFix(req, cb) {
+        let resp = new RetryVulFixResponse();
+        this.request("RetryVulFix", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete high-risk command rules.
+     * @param {DeleteBashRulesRequest} req
+     * @param {function(string, DeleteBashRulesResponse):void} cb
+     * @public
+     */
+    DeleteBashRules(req, cb) {
+        let resp = new DeleteBashRulesResponse();
+        this.request("DeleteBashRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retry to create snapshots and automatically fix vulnerabilities when the creation fails.
+     * @param {RetryCreateSnapshotRequest} req
+     * @param {function(string, RetryCreateSnapshotResponse):void} cb
+     * @public
+     */
+    RetryCreateSnapshot(req, cb) {
+        let resp = new RetryCreateSnapshotResponse();
+        this.request("RetryCreateSnapshot", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the latest trend of hosts.
+     * @param {DescribeAssetRecentMachineInfoRequest} req
+     * @param {function(string, DescribeAssetRecentMachineInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetRecentMachineInfo(req, cb) {
+        let resp = new DescribeAssetRecentMachineInfoResponse();
+        this.request("DescribeAssetRecentMachineInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of components affected by vulnerabilities.
+     * @param {DescribeVulEffectModulesRequest} req
+     * @param {function(string, DescribeVulEffectModulesResponse):void} cb
+     * @public
+     */
+    DescribeVulEffectModules(req, cb) {
+        let resp = new DescribeVulEffectModulesResponse();
+        this.request("DescribeVulEffectModules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to count top vulnerabilities.
+     * @param {DescribeVulTopRequest} req
+     * @param {function(string, DescribeVulTopResponse):void} cb
+     * @public
+     */
+    DescribeVulTop(req, cb) {
+        let resp = new DescribeVulTopResponse();
+        this.request("DescribeVulTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain brute force cracking rules.
+     * @param {DescribeBruteAttackRulesRequest} req
+     * @param {function(string, DescribeBruteAttackRulesResponse):void} cb
+     * @public
+     */
+    DescribeBruteAttackRules(req, cb) {
+        let resp = new DescribeBruteAttackRulesResponse();
+        this.request("DescribeBruteAttackRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export asset management host resource details.
+     * @param {ExportAssetMachineDetailRequest} req
+     * @param {function(string, ExportAssetMachineDetailResponse):void} cb
+     * @public
+     */
+    ExportAssetMachineDetail(req, cb) {
+        let resp = new ExportAssetMachineDetailResponse();
+        this.request("ExportAssetMachineDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics data of security overview-related events.
+     * @param {DescribeSecurityEventsCntRequest} req
+     * @param {function(string, DescribeSecurityEventsCntResponse):void} cb
+     * @public
+     */
+    DescribeSecurityEventsCnt(req, cb) {
+        let resp = new DescribeSecurityEventsCntResponse();
+        this.request("DescribeSecurityEventsCnt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the Trojan whitelist.
+     * @param {DeleteMalwareWhiteListRequest} req
+     * @param {function(string, DeleteMalwareWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteMalwareWhiteList(req, cb) {
+        let resp = new DeleteMalwareWhiteListResponse();
+        this.request("DeleteMalwareWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to sync the summary of baseline detection progress.
+     * @param {SyncBaselineDetectSummaryRequest} req
+     * @param {function(string, SyncBaselineDetectSummaryResponse):void} cb
+     * @public
+     */
+    SyncBaselineDetectSummary(req, cb) {
+        let resp = new SyncBaselineDetectSummaryResponse();
+        this.request("SyncBaselineDetectSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the binding task progress of the authorization.
+     * @param {DescribeLicenseBindScheduleRequest} req
+     * @param {function(string, DescribeLicenseBindScheduleResponse):void} cb
+     * @public
+     */
+    DescribeLicenseBindSchedule(req, cb) {
+        let resp = new DescribeLicenseBindScheduleResponse();
+        this.request("DescribeLicenseBindSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit the network attack whitelist.
+     * @param {ModifyNetAttackWhiteListRequest} req
+     * @param {function(string, ModifyNetAttackWhiteListResponse):void} cb
+     * @public
+     */
+    ModifyNetAttackWhiteList(req, cb) {
+        let resp = new ModifyNetAttackWhiteListResponse();
+        this.request("ModifyNetAttackWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the data of the account change history list.
+     * @param {DescribeHistoryAccountsRequest} req
+     * @param {function(string, DescribeHistoryAccountsResponse):void} cb
+     * @public
+     */
+    DescribeHistoryAccounts(req, cb) {
+        let resp = new DescribeHistoryAccountsResponse();
+        this.request("DescribeHistoryAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete high-risk command policies.
+     * @param {DeleteBashPoliciesRequest} req
+     * @param {function(string, DeleteBashPoliciesResponse):void} cb
+     * @public
+     */
+    DeleteBashPolicies(req, cb) {
+        let resp = new DeleteBashPoliciesResponse();
+        this.request("DeleteBashPolicies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the baseline list.
+     * @param {DescribeBaselineListRequest} req
+     * @param {function(string, DescribeBaselineListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineList(req, cb) {
+        let resp = new DescribeBaselineListResponse();
+        this.request("DescribeBaselineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain asset management host resource details.
+     * @param {DescribeAssetMachineDetailRequest} req
+     * @param {function(string, DescribeAssetMachineDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetMachineDetail(req, cb) {
+        let resp = new DescribeAssetMachineDetailResponse();
+        this.request("DescribeAssetMachineDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of top server risks.
+     * @param {DescribeVulHostTopRequest} req
+     * @param {function(string, DescribeVulHostTopResponse):void} cb
+     * @public
+     */
+    DescribeVulHostTop(req, cb) {
+        let resp = new DescribeVulHostTopResponse();
+        this.request("DescribeVulHostTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the current grayscale configuration of the user.
+     * @param {DescribeABTestConfigRequest} req
+     * @param {function(string, DescribeABTestConfigResponse):void} cb
+     * @public
+     */
+    DescribeABTestConfig(req, cb) {
+        let resp = new DescribeABTestConfigResponse();
+        this.request("DescribeABTestConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of asset management Web frameworks.
+     * @param {DescribeAssetWebFrameListRequest} req
+     * @param {function(string, DescribeAssetWebFrameListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebFrameList(req, cb) {
+        let resp = new DescribeAssetWebFrameListResponse();
+        this.request("DescribeAssetWebFrameList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the Trojan list.
+     * @param {DescribeMalWareListRequest} req
+     * @param {function(string, DescribeMalWareListResponse):void} cb
+     * @public
+     */
+    DescribeMalWareList(req, cb) {
+        let resp = new DescribeMalWareListResponse();
+        this.request("DescribeMalWareList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set scheduled scan.
+     * @param {ModifyMalwareTimingScanSettingsRequest} req
+     * @param {function(string, ModifyMalwareTimingScanSettingsResponse):void} cb
+     * @public
+     */
+    ModifyMalwareTimingScanSettings(req, cb) {
+        let resp = new ModifyMalwareTimingScanSettingsResponse();
+        this.request("ModifyMalwareTimingScanSettings", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add malicious request allowlists.
+     * @param {CreateMaliciousRequestWhiteListRequest} req
+     * @param {function(string, CreateMaliciousRequestWhiteListResponse):void} cb
+     * @public
+     */
+    CreateMaliciousRequestWhiteList(req, cb) {
+        let resp = new CreateMaliciousRequestWhiteListResponse();
+        this.request("CreateMaliciousRequestWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of all web services.
+     * @param {DescribeAssetWebServiceCountRequest} req
+     * @param {function(string, DescribeAssetWebServiceCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebServiceCount(req, cb) {
+        let resp = new DescribeAssetWebServiceCountResponse();
+        this.request("DescribeAssetWebServiceCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the visualized attack and defense trends on the large screen.
+     * @param {DescribeScreenDefenseTrendsRequest} req
+     * @param {function(string, DescribeScreenDefenseTrendsResponse):void} cb
+     * @public
+     */
+    DescribeScreenDefenseTrends(req, cb) {
+        let resp = new DescribeScreenDefenseTrendsResponse();
+        this.request("DescribeScreenDefenseTrends", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the high-risk command event status.
+     * @param {SetBashEventsStatusRequest} req
+     * @param {function(string, SetBashEventsStatusResponse):void} cb
+     * @public
+     */
+    SetBashEventsStatus(req, cb) {
+        let resp = new SetBashEventsStatusResponse();
+        this.request("SetBashEventsStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the policy availability status by policy ID.
+     * @param {ChangeStrategyEnableStatusRequest} req
+     * @param {function(string, ChangeStrategyEnableStatusResponse):void} cb
+     * @public
+     */
+    ChangeStrategyEnableStatus(req, cb) {
+        let resp = new ChangeStrategyEnableStatusResponse();
+        this.request("ChangeStrategyEnableStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the expert service order list.
+     * @param {DescribeExpertServiceOrderListRequest} req
+     * @param {function(string, DescribeExpertServiceOrderListResponse):void} cb
+     * @public
+     */
+    DescribeExpertServiceOrderList(req, cb) {
+        let resp = new DescribeExpertServiceOrderListResponse();
+        this.request("DescribeExpertServiceOrderList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check the connectivity for log shipping from Kafka.
+     * @param {CheckLogKafkaConnectionStateRequest} req
+     * @param {function(string, CheckLogKafkaConnectionStateResponse):void} cb
+     * @public
+     */
+    CheckLogKafkaConnectionState(req, cb) {
+        let resp = new CheckLogKafkaConnectionStateResponse();
+        this.request("CheckLogKafkaConnectionState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the vulnerability defense plugin status of each host.
+     * @param {DescribeVulDefencePluginStatusRequest} req
+     * @param {function(string, DescribeVulDefencePluginStatusResponse):void} cb
+     * @public
+     */
+    DescribeVulDefencePluginStatus(req, cb) {
+        let resp = new DescribeVulDefencePluginStatusResponse();
+        this.request("DescribeVulDefencePluginStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain all host tags.
+     * @param {DescribeTagsRequest} req
+     * @param {function(string, DescribeTagsResponse):void} cb
+     * @public
+     */
+    DescribeTags(req, cb) {
+        let resp = new DescribeTagsResponse();
+        this.request("DescribeTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the vulnerability defense plugin information on a single host.
+     * @param {DescribeVulDefencePluginDetailRequest} req
+     * @param {function(string, DescribeVulDefencePluginDetailResponse):void} cb
+     * @public
+     */
+    DescribeVulDefencePluginDetail(req, cb) {
+        let resp = new DescribeVulDefencePluginDetailResponse();
+        this.request("DescribeVulDefencePluginDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable website anti-tampering protection.
+     * @param {ModifyWebPageProtectSwitchRequest} req
+     * @param {function(string, ModifyWebPageProtectSwitchResponse):void} cb
+     * @public
+     */
+    ModifyWebPageProtectSwitch(req, cb) {
+        let resp = new ModifyWebPageProtectSwitchResponse();
+        this.request("ModifyWebPageProtectSwitch", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the vulnerability defense event status. (Vulnerability fixing is carried out using another API.)
+     * @param {ModifyVulDefenceEventStatusRequest} req
+     * @param {function(string, ModifyVulDefenceEventStatusResponse):void} cb
+     * @public
+     */
+    ModifyVulDefenceEventStatus(req, cb) {
+        let resp = new ModifyVulDefenceEventStatusResponse();
+        this.request("ModifyVulDefenceEventStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the locally stored data.
+     * @param {GetLocalStorageItemRequest} req
+     * @param {function(string, GetLocalStorageItemResponse):void} cb
+     * @public
+     */
+    GetLocalStorageItem(req, cb) {
+        let resp = new GetLocalStorageItemResponse();
+        this.request("GetLocalStorageItem", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the backup details list.
+     * @param {ExportRansomDefenseMachineListRequest} req
+     * @param {function(string, ExportRansomDefenseMachineListResponse):void} cb
+     * @public
+     */
+    ExportRansomDefenseMachineList(req, cb) {
+        let resp = new ExportRansomDefenseMachineListResponse();
+        this.request("ExportRansomDefenseMachineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the anti-ransomware event list.
+     * @param {DescribeRansomDefenseEventsListRequest} req
+     * @param {function(string, DescribeRansomDefenseEventsListResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseEventsList(req, cb) {
+        let resp = new DescribeRansomDefenseEventsListResponse();
+        this.request("DescribeRansomDefenseEventsList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the asset management process list.
+     * @param {ExportAssetProcessInfoListRequest} req
+     * @param {function(string, ExportAssetProcessInfoListResponse):void} cb
+     * @public
+     */
+    ExportAssetProcessInfoList(req, cb) {
+        let resp = new ExportAssetProcessInfoListResponse();
+        this.request("ExportAssetProcessInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of policies bound to a host.
+     * @param {DescribeRansomDefenseMachineStrategyInfoRequest} req
+     * @param {function(string, DescribeRansomDefenseMachineStrategyInfoResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseMachineStrategyInfo(req, cb) {
+        let resp = new DescribeRansomDefenseMachineStrategyInfoResponse();
+        this.request("DescribeRansomDefenseMachineStrategyInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the high-risk command list.
+     * @param {DescribeBashEventsRequest} req
+     * @param {function(string, DescribeBashEventsResponse):void} cb
+     * @public
+     */
+    DescribeBashEvents(req, cb) {
+        let resp = new DescribeBashEventsResponse();
+        this.request("DescribeBashEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the vulnerability detection report.
+     * @param {ExportVulDetectionReportRequest} req
+     * @param {function(string, ExportVulDetectionReportResponse):void} cb
+     * @public
+     */
+    ExportVulDetectionReport(req, cb) {
+        let resp = new ExportVulDetectionReportResponse();
+        this.request("ExportVulDetectionReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the alarming machine scope settings.
+     * @param {ModifyWarningHostConfigRequest} req
+     * @param {function(string, ModifyWarningHostConfigResponse):void} cb
+     * @public
+     */
+    ModifyWarningHostConfig(req, cb) {
+        let resp = new ModifyWarningHostConfigResponse();
+        this.request("ModifyWarningHostConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain all authorization orders of a user.
+     * @param {DescribeLicenseListRequest} req
+     * @param {function(string, DescribeLicenseListResponse):void} cb
+     * @public
+     */
+    DescribeLicenseList(req, cb) {
+        let resp = new DescribeLicenseListResponse();
+        this.request("DescribeLicenseList", req, resp, cb);
+    }
+
+    /**
+     * 云护航计费产品已下线
+
+This API is used to confirm the receipt after using the cloud escort service.
+     * @param {CreateCloudProtectServiceOrderRecordRequest} req
+     * @param {function(string, CreateCloudProtectServiceOrderRecordResponse):void} cb
+     * @public
+     */
+    CreateCloudProtectServiceOrderRecord(req, cb) {
+        let resp = new CreateCloudProtectServiceOrderRecordResponse();
+        this.request("CreateCloudProtectServiceOrderRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform baseline checks.
+     * @param {StartBaselineDetectRequest} req
+     * @param {function(string, StartBaselineDetectResponse):void} cb
+     * @public
+     */
+    StartBaselineDetect(req, cb) {
+        let resp = new StartBaselineDetectResponse();
+        this.request("StartBaselineDetect", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete tags.
+     * @param {DeleteTagsRequest} req
+     * @param {function(string, DeleteTagsResponse):void} cb
+     * @public
+     */
+    DeleteTags(req, cb) {
+        let resp = new DeleteTagsResponse();
+        this.request("DeleteTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to mark identified Trojan files as Trusted.
+     * @param {TrustMalwaresRequest} req
+     * @param {function(string, TrustMalwaresResponse):void} cb
+     * @public
+     */
+    TrustMalwares(req, cb) {
+        let resp = new TrustMalwaresResponse();
+        this.request("TrustMalwares", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the usage of policies associated with the specified alarm recipient.
+     * @param {DescribeWebHookReceiverUsageRequest} req
+     * @param {function(string, DescribeWebHookReceiverUsageResponse):void} cb
+     * @public
+     */
+    DescribeWebHookReceiverUsage(req, cb) {
+        let resp = new DescribeWebHookReceiverUsageResponse();
+        this.request("DescribeWebHookReceiverUsage", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the malicious request allowlist.
+     * @param {ModifyMaliciousRequestWhiteListRequest} req
+     * @param {function(string, ModifyMaliciousRequestWhiteListResponse):void} cb
+     * @public
+     */
+    ModifyMaliciousRequestWhiteList(req, cb) {
+        let resp = new ModifyMaliciousRequestWhiteListResponse();
+        this.request("ModifyMaliciousRequestWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to ignore events or cancel ignoring in batches based on check item ID or event ID.
+     * @param {ChangeRuleEventsIgnoreStatusRequest} req
+     * @param {function(string, ChangeRuleEventsIgnoreStatusResponse):void} cb
+     * @public
+     */
+    ChangeRuleEventsIgnoreStatus(req, cb) {
+        let resp = new ChangeRuleEventsIgnoreStatusResponse();
+        this.request("ChangeRuleEventsIgnoreStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to roll back anti-ransomware snapshots.
+     * @param {RansomDefenseRollbackRequest} req
+     * @param {function(string, RansomDefenseRollbackResponse):void} cb
+     * @public
+     */
+    RansomDefenseRollback(req, cb) {
+        let resp = new RansomDefenseRollbackResponse();
+        this.request("RansomDefenseRollback", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of system installation packages for asset management.
+     * @param {DescribeAssetSystemPackageListRequest} req
+     * @param {function(string, DescribeAssetSystemPackageListResponse):void} cb
+     * @public
+     */
+    DescribeAssetSystemPackageList(req, cb) {
+        let resp = new DescribeAssetSystemPackageListResponse();
+        this.request("DescribeAssetSystemPackageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the asset fingerprint type list.
+     * @param {DescribeAssetTypesRequest} req
+     * @param {function(string, DescribeAssetTypesResponse):void} cb
+     * @public
+     */
+    DescribeAssetTypes(req, cb) {
+        let resp = new DescribeAssetTypesResponse();
+        this.request("DescribeAssetTypes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of all user vulnerability tags.
+     * @param {DescribeVulLabelsRequest} req
+     * @param {function(string, DescribeVulLabelsResponse):void} cb
+     * @public
+     */
+    DescribeVulLabels(req, cb) {
+        let resp = new DescribeVulLabelsResponse();
+        this.request("DescribeVulLabels", req, resp, cb);
+    }
+
+    /**
+     * 云护航计费产品已下线
+
+This API is used to query the list of cloud escort service orders.
+     * @param {DescribeCloudProtectServiceOrderListRequest} req
+     * @param {function(string, DescribeCloudProtectServiceOrderListResponse):void} cb
+     * @public
+     */
+    DescribeCloudProtectServiceOrderList(req, cb) {
+        let resp = new DescribeCloudProtectServiceOrderListResponse();
+        this.request("DescribeCloudProtectServiceOrderList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop baseline check.
+     * @param {StopBaselineDetectRequest} req
+     * @param {function(string, StopBaselineDetectResponse):void} cb
+     * @public
+     */
+    StopBaselineDetect(req, cb) {
+        let resp = new StopBaselineDetectResponse();
+        this.request("StopBaselineDetect", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of high-risk command rules.
+     * @param {DescribeBashRulesRequest} req
+     * @param {function(string, DescribeBashRulesResponse):void} cb
+     * @public
+     */
+    DescribeBashRules(req, cb) {
+        let resp = new DescribeBashRulesResponse();
+        this.request("DescribeBashRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the host disk partition list.
+     * @param {DescribeAssetDiskListRequest} req
+     * @param {function(string, DescribeAssetDiskListResponse):void} cb
+     * @public
+     */
+    DescribeAssetDiskList(req, cb) {
+        let resp = new DescribeAssetDiskListResponse();
+        this.request("DescribeAssetDiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify vulnerability defense plugin settings.
+1) The new settings apply to new hosts automatically. scope is set to 1, and quuids is left blank.
+2) The new settings do not apply to Ultimate Edition hosts. scope is set to 0, and the current QUUID list is specified as the value of quuids.
+3) For a given QUUID list, when scope is set to 0, QUUID selected by the user is specified as the value of quuids.
+     * @param {ModifyVulDefenceSettingRequest} req
+     * @param {function(string, ModifyVulDefenceSettingResponse):void} cb
+     * @public
+     */
+    ModifyVulDefenceSetting(req, cb) {
+        let resp = new ModifyVulDefenceSettingResponse();
+        this.request("ModifyVulDefenceSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export vulnerability defense events.
+     * @param {ExportVulDefenceEventRequest} req
+     * @param {function(string, ExportVulDefenceEventResponse):void} cb
+     * @public
+     */
+    ExportVulDefenceEvent(req, cb) {
+        let resp = new ExportVulDefenceEventResponse();
+        this.request("ExportVulDefenceEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to synchronize the asset scan information.
+     * @param {SyncAssetScanRequest} req
+     * @param {function(string, SyncAssetScanResponse):void} cb
+     * @public
+     */
+    SyncAssetScan(req, cb) {
+        let resp = new SyncAssetScanResponse();
+        this.request("SyncAssetScan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the status of recent scan tasks of the corresponding module.
+     * @param {DescribeScanStateRequest} req
+     * @param {function(string, DescribeScanStateResponse):void} cb
+     * @public
+     */
+    DescribeScanState(req, cb) {
+        let resp = new DescribeScanStateResponse();
+        this.request("DescribeScanState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop scan tasks of a specified type.
+     * @param {DeleteScanTaskRequest} req
+     * @param {function(string, DeleteScanTaskResponse):void} cb
+     * @public
+     */
+    DeleteScanTask(req, cb) {
+        let resp = new DeleteScanTaskResponse();
+        this.request("DeleteScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create or modify user custom settings.
+     * @param {ModifyUsersConfigRequest} req
+     * @param {function(string, ModifyUsersConfigResponse):void} cb
+     * @public
+     */
+    ModifyUsersConfig(req, cb) {
+        let resp = new ModifyUsersConfigResponse();
+        this.request("ModifyUsersConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or modify alarm policies.
+     * @param {ModifyWebHookPolicyRequest} req
+     * @param {function(string, ModifyWebHookPolicyResponse):void} cb
+     * @public
+     */
+    ModifyWebHookPolicy(req, cb) {
+        let resp = new ModifyWebHookPolicyResponse();
+        this.request("ModifyWebHookPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete all Java webshell events.
+     * @param {DeleteAllJavaMemShellsRequest} req
+     * @param {function(string, DeleteAllJavaMemShellsResponse):void} cb
+     * @public
+     */
+    DeleteAllJavaMemShells(req, cb) {
+        let resp = new DeleteAllJavaMemShellsResponse();
+        this.request("DeleteAllJavaMemShells", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of check results on baseline check items.
+     * @param {DescribeBaselineItemListRequest} req
+     * @param {function(string, DescribeBaselineItemListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineItemList(req, cb) {
+        let resp = new DescribeBaselineItemListResponse();
+        this.request("DescribeBaselineItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of high-risk command policies.
+     * @param {DescribeBashPoliciesRequest} req
+     * @param {function(string, DescribeBashPoliciesResponse):void} cb
+     * @public
+     */
+    DescribeBashPolicies(req, cb) {
+        let resp = new DescribeBashPoliciesResponse();
+        this.request("DescribeBashPolicies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of machines bound to an anti-ransomware policy.
+     * @param {DescribeRansomDefenseStrategyMachinesRequest} req
+     * @param {function(string, DescribeRansomDefenseStrategyMachinesResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseStrategyMachines(req, cb) {
+        let resp = new DescribeRansomDefenseStrategyMachinesResponse();
+        this.request("DescribeRansomDefenseStrategyMachines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the log retrieval service information.
+     * @param {DescribeHistoryServiceRequest} req
+     * @param {function(string, DescribeHistoryServiceResponse):void} cb
+     * @public
+     */
+    DescribeHistoryService(req, cb) {
+        let resp = new DescribeHistoryServiceResponse();
+        this.request("DescribeHistoryService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of vulnerabilities of specified types in recent days and the number of hosts.
+     * @param {DescribeVulCountByDatesRequest} req
+     * @param {function(string, DescribeVulCountByDatesResponse):void} cb
+     * @public
+     */
+    DescribeVulCountByDates(req, cb) {
+        let resp = new DescribeVulCountByDatesResponse();
+        this.request("DescribeVulCountByDates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of hosts affected by vulnerabilities.
+     * @param {ExportVulEffectHostListRequest} req
+     * @param {function(string, ExportVulEffectHostListResponse):void} cb
+     * @public
+     */
+    ExportVulEffectHostList(req, cb) {
+        let resp = new ExportVulEffectHostListResponse();
+        this.request("ExportVulEffectHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the vulnerability database list.
+     * @param {DescribeVulStoreListRequest} req
+     * @param {function(string, DescribeVulStoreListResponse):void} cb
+     * @public
+     */
+    DescribeVulStoreList(req, cb) {
+        let resp = new DescribeVulStoreListResponse();
+        this.request("DescribeVulStoreList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain all node information on the event corresponding to an alarm.
+     * @param {DescribeAlarmIncidentNodesRequest} req
+     * @param {function(string, DescribeAlarmIncidentNodesResponse):void} cb
+     * @public
+     */
+    DescribeAlarmIncidentNodes(req, cb) {
+        let resp = new DescribeAlarmIncidentNodesResponse();
+        this.request("DescribeAlarmIncidentNodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics data of events on the security overview page.
+     * @param {DescribeScreenEventsCntRequest} req
+     * @param {function(string, DescribeScreenEventsCntResponse):void} cb
+     * @public
+     */
+    DescribeScreenEventsCnt(req, cb) {
+        let resp = new DescribeScreenEventsCntResponse();
+        this.request("DescribeScreenEventsCnt", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of resources, including hosts, accounts, ports, processes, software, databases, web applications, web frameworks, web services, and web sites.
+     * @param {DescribeAssetTotalCountRequest} req
+     * @param {function(string, DescribeAssetTotalCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetTotalCount(req, cb) {
+        let resp = new DescribeAssetTotalCountResponse();
+        this.request("DescribeAssetTotalCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain hot spot vulnerabilities across the entire network.
+     * @param {DescribeHotVulTopRequest} req
+     * @param {function(string, DescribeHotVulTopResponse):void} cb
+     * @public
+     */
+    DescribeHotVulTop(req, cb) {
+        let resp = new DescribeHotVulTopResponse();
+        this.request("DescribeHotVulTop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete cross-region log-in records.
+     * @param {DeleteNonlocalLoginPlacesRequest} req
+     * @param {function(string, DeleteNonlocalLoginPlacesResponse):void} cb
+     * @public
+     */
+    DeleteNonlocalLoginPlaces(req, cb) {
+        let resp = new DeleteNonlocalLoginPlacesResponse();
+        this.request("DeleteNonlocalLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of system installation packages for asset management.
+     * @param {ExportAssetSystemPackageListRequest} req
+     * @param {function(string, ExportAssetSystemPackageListResponse):void} cb
+     * @public
+     */
+    ExportAssetSystemPackageList(req, cb) {
+        let resp = new ExportAssetSystemPackageListResponse();
+        this.request("ExportAssetSystemPackageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit reverse shell rules (multiple servers supported).
+
+     * @param {EditReverseShellRulesRequest} req
+     * @param {function(string, EditReverseShellRulesResponse):void} cb
+     * @public
+     */
+    EditReverseShellRules(req, cb) {
+        let resp = new EditReverseShellRulesResponse();
+        this.request("EditReverseShellRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete alarm policies.
+     * @param {DeleteWebHookPolicyRequest} req
+     * @param {function(string, DeleteWebHookPolicyResponse):void} cb
+     * @public
+     */
+    DeleteWebHookPolicy(req, cb) {
+        let resp = new DeleteWebHookPolicyResponse();
+        this.request("DeleteWebHookPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export local privilege escalation events.
+     * @param {ExportPrivilegeEventsRequest} req
+     * @param {function(string, ExportPrivilegeEventsResponse):void} cb
+     * @public
+     */
+    ExportPrivilegeEvents(req, cb) {
+        let resp = new ExportPrivilegeEventsResponse();
+        this.request("ExportPrivilegeEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of intrusion detection events, including virus scanning, abnormal log-ins, password cracking, high-risk commands, reverse shells, and local privilege escalations.
+     * @param {ModifyRiskEventsStatusRequest} req
+     * @param {function(string, ModifyRiskEventsStatusResponse):void} cb
+     * @public
+     */
+    ModifyRiskEventsStatus(req, cb) {
+        let resp = new ModifyRiskEventsStatusResponse();
+        this.request("ModifyRiskEventsStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain host account details.
+     * @param {DescribeAssetUserInfoRequest} req
+     * @param {function(string, DescribeAssetUserInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetUserInfo(req, cb) {
+        let resp = new DescribeAssetUserInfoResponse();
+        this.request("DescribeAssetUserInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete Trojan records.
+     * @param {DeleteMalwaresRequest} req
+     * @param {function(string, DeleteMalwaresResponse):void} cb
+     * @public
+     */
+    DeleteMalwares(req, cb) {
+        let resp = new DeleteMalwaresResponse();
+        this.request("DeleteMalwares", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export vulnerability defense plugin events.
+     * @param {ExportVulDefencePluginEventRequest} req
+     * @param {function(string, ExportVulDefencePluginEventResponse):void} cb
+     * @public
+     */
+    ExportVulDefencePluginEvent(req, cb) {
+        let resp = new ExportVulDefencePluginEventResponse();
+        this.request("ExportVulDefencePluginEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to complete regular vulnerability scan settings.
+     * @param {ScanVulSettingRequest} req
+     * @param {function(string, ScanVulSettingResponse):void} cb
+     * @public
+     */
+    ScanVulSetting(req, cb) {
+        let resp = new ScanVulSettingResponse();
+        this.request("ScanVulSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the account statistics data.
+     * @param {DescribeAccountStatisticsRequest} req
+     * @param {function(string, DescribeAccountStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeAccountStatistics(req, cb) {
+        let resp = new DescribeAccountStatisticsResponse();
+        this.request("DescribeAccountStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export abnormal process events.
+     * @param {ExportRiskProcessEventsRequest} req
+     * @param {function(string, ExportRiskProcessEventsResponse):void} cb
+     * @public
+     */
+    ExportRiskProcessEvents(req, cb) {
+        let resp = new ExportRiskProcessEventsResponse();
+        this.request("ExportRiskProcessEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of pending vulnerabilities of a specified category and the number of hosts in the vulnerability management module.
+     * @param {DescribeUndoVulCountsRequest} req
+     * @param {function(string, DescribeUndoVulCountsResponse):void} cb
+     * @public
+     */
+    DescribeUndoVulCounts(req, cb) {
+        let resp = new DescribeUndoVulCountsResponse();
+        this.request("DescribeUndoVulCounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain hosts where Trojans cannot be isolated.
+     * @param {DescribeCanNotSeparateMachineRequest} req
+     * @param {function(string, DescribeCanNotSeparateMachineResponse):void} cb
+     * @public
+     */
+    DescribeCanNotSeparateMachine(req, cb) {
+        let resp = new DescribeCanNotSeparateMachineResponse();
+        this.request("DescribeCanNotSeparateMachine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export password cracking records to a CSV file.
+     * @param {ExportBruteAttacksRequest} req
+     * @param {function(string, ExportBruteAttacksResponse):void} cb
+     * @public
+     */
+    ExportBruteAttacks(req, cb) {
+        let resp = new ExportBruteAttacksResponse();
+        this.request("ExportBruteAttacks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of asset management environment variables.
+     * @param {ExportAssetEnvListRequest} req
+     * @param {function(string, ExportAssetEnvListResponse):void} cb
+     * @public
+     */
+    ExportAssetEnvList(req, cb) {
+        let resp = new ExportAssetEnvListResponse();
+        this.request("ExportAssetEnvList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export risk trends.
+     * @param {ExportSecurityTrendsRequest} req
+     * @param {function(string, ExportSecurityTrendsResponse):void} cb
+     * @public
+     */
+    ExportSecurityTrends(req, cb) {
+        let resp = new ExportSecurityTrendsResponse();
+        this.request("ExportSecurityTrends", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export Trojan records to a CSV file.
+     * @param {ExportMalwaresRequest} req
+     * @param {function(string, ExportMalwaresResponse):void} cb
+     * @public
+     */
+    ExportMalwares(req, cb) {
+        let resp = new ExportMalwaresResponse();
+        this.request("ExportMalwares", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the core file rule status (batch deletion and disabling supported).
+     * @param {ModifyFileTamperRuleStatusRequest} req
+     * @param {function(string, ModifyFileTamperRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyFileTamperRuleStatus(req, cb) {
+        let resp = new ModifyFileTamperRuleStatusResponse();
+        this.request("ModifyFileTamperRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the blocking allowlist.
+     * @param {ModifyBanWhiteListRequest} req
+     * @param {function(string, ModifyBanWhiteListResponse):void} cb
+     * @public
+     */
+    ModifyBanWhiteList(req, cb) {
+        let resp = new ModifyBanWhiteListResponse();
+        this.request("ModifyBanWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the malicious request event list.
+     * @param {ExportRiskDnsEventListRequest} req
+     * @param {function(string, ExportRiskDnsEventListResponse):void} cb
+     * @public
+     */
+    ExportRiskDnsEventList(req, cb) {
+        let resp = new ExportRiskDnsEventListResponse();
+        this.request("ExportRiskDnsEventList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export authorization details.
+     * @param {ExportLicenseDetailRequest} req
+     * @param {function(string, ExportLicenseDetailResponse):void} cb
+     * @public
+     */
+    ExportLicenseDetail(req, cb) {
+        let resp = new ExportLicenseDetailResponse();
+        this.request("ExportLicenseDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the emergency response list.
+     * @param {DescribeEmergencyResponseListRequest} req
+     * @param {function(string, DescribeEmergencyResponseListResponse):void} cb
+     * @public
+     */
+    DescribeEmergencyResponseList(req, cb) {
+        let resp = new DescribeEmergencyResponseListResponse();
+        this.request("DescribeEmergencyResponseList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the network attack trend data.
+     * @param {DescribeAttackTrendsRequest} req
+     * @param {function(string, DescribeAttackTrendsResponse):void} cb
+     * @public
+     */
+    DescribeAttackTrends(req, cb) {
+        let resp = new DescribeAttackTrendsResponse();
+        this.request("DescribeAttackTrends", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create or modify anti-ransomware policies.
+     * @param {CreateRansomDefenseStrategyRequest} req
+     * @param {function(string, CreateRansomDefenseStrategyResponse):void} cb
+     * @public
+     */
+    CreateRansomDefenseStrategy(req, cb) {
+        let resp = new CreateRansomDefenseStrategyResponse();
+        this.request("CreateRansomDefenseStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the visualized emergency notification on the large screen.
+     * @param {DescribeScreenEmergentMsgRequest} req
+     * @param {function(string, DescribeScreenEmergentMsgResponse):void} cb
+     * @public
+     */
+    DescribeScreenEmergentMsg(req, cb) {
+        let resp = new DescribeScreenEmergentMsgResponse();
+        this.request("DescribeScreenEmergentMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop displaying pop-up prompts about brute force cracking blocking.
+     * @param {StopNoticeBanTipsRequest} req
+     * @param {function(string, StopNoticeBanTipsResponse):void} cb
+     * @public
+     */
+    StopNoticeBanTips(req, cb) {
+        let resp = new StopNoticeBanTipsResponse();
+        this.request("StopNoticeBanTips", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information on corresponding check items based on baseline ID.
+     * @param {DescribeBaselineRuleRequest} req
+     * @param {function(string, DescribeBaselineRuleResponse):void} cb
+     * @public
+     */
+    DescribeBaselineRule(req, cb) {
+        let resp = new DescribeBaselineRuleResponse();
+        this.request("DescribeBaselineRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of hosts affected by baseline.
+     * @param {ExportBaselineEffectHostListRequest} req
+     * @param {function(string, ExportBaselineEffectHostListResponse):void} cb
+     * @public
+     */
+    ExportBaselineEffectHostList(req, cb) {
+        let resp = new ExportBaselineEffectHostListResponse();
+        this.request("ExportBaselineEffectHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of core file monitoring events.
+     * @param {DescribeFileTamperEventsRequest} req
+     * @param {function(string, DescribeFileTamperEventsResponse):void} cb
+     * @public
+     */
+    DescribeFileTamperEvents(req, cb) {
+        let resp = new DescribeFileTamperEventsResponse();
+        this.request("DescribeFileTamperEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind machines to an authorization in batches.
+     * @param {ModifyLicenseBindsRequest} req
+     * @param {function(string, ModifyLicenseBindsResponse):void} cb
+     * @public
+     */
+    ModifyLicenseBinds(req, cb) {
+        let resp = new ModifyLicenseBindsResponse();
+        this.request("ModifyLicenseBinds", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the block button status.
+     * @param {DescribeBanStatusRequest} req
+     * @param {function(string, DescribeBanStatusResponse):void} cb
+     * @public
+     */
+    DescribeBanStatus(req, cb) {
+        let resp = new DescribeBanStatusResponse();
+        this.request("DescribeBanStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the vulnerability defense list.
+     * @param {DescribeVulDefenceListRequest} req
+     * @param {function(string, DescribeVulDefenceListResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceList(req, cb) {
+        let resp = new DescribeVulDefenceListResponse();
+        this.request("DescribeVulDefenceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the process statistics data.
+     * @param {DescribeProcessStatisticsRequest} req
+     * @param {function(string, DescribeProcessStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeProcessStatistics(req, cb) {
+        let resp = new DescribeProcessStatisticsResponse();
+        this.request("DescribeProcessStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view malicious file details.
+     * @param {DescribeMalwareInfoRequest} req
+     * @param {function(string, DescribeMalwareInfoResponse):void} cb
+     * @public
+     */
+    DescribeMalwareInfo(req, cb) {
+        let resp = new DescribeMalwareInfoResponse();
+        this.request("DescribeMalwareInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain user anti-ransomware trends.
+     * @param {DescribeRansomDefenseStateRequest} req
+     * @param {function(string, DescribeRansomDefenseStateResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseState(req, cb) {
+        let resp = new DescribeRansomDefenseStateResponse();
+        this.request("DescribeRansomDefenseState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the malicious request policy list.
+     * @param {ExportRiskDnsPolicyListRequest} req
+     * @param {function(string, ExportRiskDnsPolicyListResponse):void} cb
+     * @public
+     */
+    ExportRiskDnsPolicyList(req, cb) {
+        let resp = new ExportRiskDnsPolicyListResponse();
+        this.request("ExportRiskDnsPolicyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query whether a policy exists by policy name.
+     * @param {DescribeStrategyExistRequest} req
+     * @param {function(string, DescribeStrategyExistResponse):void} cb
+     * @public
+     */
+    DescribeStrategyExist(req, cb) {
+        let resp = new DescribeStrategyExistResponse();
+        this.request("DescribeStrategyExist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an automatic binding task for newly purchased authorizations.
+     * @param {CreateBuyBindTaskRequest} req
+     * @param {function(string, CreateBuyBindTaskResponse):void} cb
+     * @public
+     */
+    CreateBuyBindTask(req, cb) {
+        let resp = new CreateBuyBindTaskResponse();
+        this.request("CreateBuyBindTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the number of rules for monitoring files associated with a host.
+     * @param {DescribeFileTamperRuleCountRequest} req
+     * @param {function(string, DescribeFileTamperRuleCountResponse):void} cb
+     * @public
+     */
+    DescribeFileTamperRuleCount(req, cb) {
+        let resp = new DescribeFileTamperRuleCountResponse();
+        this.request("DescribeFileTamperRuleCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the Java webshell plugin list.
+     * @param {DescribeJavaMemShellPluginListRequest} req
+     * @param {function(string, DescribeJavaMemShellPluginListResponse):void} cb
+     * @public
+     */
+    DescribeJavaMemShellPluginList(req, cb) {
+        let resp = new DescribeJavaMemShellPluginListResponse();
+        this.request("DescribeJavaMemShellPluginList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create emergency vulnerability scan tasks.
+     * @param {CreateEmergencyVulScanRequest} req
+     * @param {function(string, CreateEmergencyVulScanResponse):void} cb
+     * @public
+     */
+    CreateEmergencyVulScan(req, cb) {
+        let resp = new CreateEmergencyVulScanResponse();
+        this.request("CreateEmergencyVulScan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the product trial status.
+     * @param {DescribeProductStatusRequest} req
+     * @param {function(string, DescribeProductStatusResponse):void} cb
+     * @public
+     */
+    DescribeProductStatus(req, cb) {
+        let resp = new DescribeProductStatusResponse();
+        this.request("DescribeProductStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query reverse shell details.
+     * @param {DescribeReverseShellEventInfoRequest} req
+     * @param {function(string, DescribeReverseShellEventInfoResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellEventInfo(req, cb) {
+        let resp = new DescribeReverseShellEventInfoResponse();
+        this.request("DescribeReverseShellEventInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the blocking allowlist list.
+     * @param {DescribeBanWhiteListRequest} req
+     * @param {function(string, DescribeBanWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeBanWhiteList(req, cb) {
+        let resp = new DescribeBanWhiteListResponse();
+        this.request("DescribeBanWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform one-click vulnerability scans.
+     * @param {ScanVulRequest} req
+     * @param {function(string, ScanVulResponse):void} cb
+     * @public
+     */
+    ScanVul(req, cb) {
+        let resp = new ScanVulResponse();
+        this.request("ScanVul", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of network attack threat types.
+     * @param {DescribeAttackVulTypeListRequest} req
+     * @param {function(string, DescribeAttackVulTypeListResponse):void} cb
+     * @public
+     */
+    DescribeAttackVulTypeList(req, cb) {
+        let resp = new DescribeAttackVulTypeListResponse();
+        this.request("DescribeAttackVulTypeList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the cross-region log-in allowlist list.
+     * @param {DescribeLoginWhiteListRequest} req
+     * @param {function(string, DescribeLoginWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteList(req, cb) {
+        let resp = new DescribeLoginWhiteListResponse();
+        this.request("DescribeLoginWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query baseline details by baseline ID.
+     * @param {DescribeBaselineDetailRequest} req
+     * @param {function(string, DescribeBaselineDetailResponse):void} cb
+     * @public
+     */
+    DescribeBaselineDetail(req, cb) {
+        let resp = new DescribeBaselineDetailResponse();
+        this.request("DescribeBaselineDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total number of ports.
+     * @param {DescribeAssetPortCountRequest} req
+     * @param {function(string, DescribeAssetPortCountResponse):void} cb
+     * @public
+     */
+    DescribeAssetPortCount(req, cb) {
+        let resp = new DescribeAssetPortCountResponse();
+        this.request("DescribeAssetPortCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the malicious request list.
+     * @param {DescribeRiskDnsListRequest} req
+     * @param {function(string, DescribeRiskDnsListResponse):void} cb
+     * @public
+     */
+    DescribeRiskDnsList(req, cb) {
+        let resp = new DescribeRiskDnsListResponse();
+        this.request("DescribeRiskDnsList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain virus database and POC updates.
+     * @param {DescribeVdbAndPocInfoRequest} req
+     * @param {function(string, DescribeVdbAndPocInfoResponse):void} cb
+     * @public
+     */
+    DescribeVdbAndPocInfo(req, cb) {
+        let resp = new DescribeVdbAndPocInfoResponse();
+        this.request("DescribeVdbAndPocInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify brute force cracking rules.
+     * @param {ModifyBruteAttackRulesRequest} req
+     * @param {function(string, ModifyBruteAttackRulesResponse):void} cb
+     * @public
+     */
+    ModifyBruteAttackRules(req, cb) {
+        let resp = new ModifyBruteAttackRulesResponse();
+        this.request("ModifyBruteAttackRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the machine operating system list.
+     * @param {DescribeMachineOsListRequest} req
+     * @param {function(string, DescribeMachineOsListResponse):void} cb
+     * @public
+     */
+    DescribeMachineOsList(req, cb) {
+        let resp = new DescribeMachineOsListResponse();
+        this.request("DescribeMachineOsList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain vulnerability emergency notifications.
+     * @param {DescribeVulEmergentMsgRequest} req
+     * @param {function(string, DescribeVulEmergentMsgResponse):void} cb
+     * @public
+     */
+    DescribeVulEmergentMsg(req, cb) {
+        let resp = new DescribeVulEmergentMsgResponse();
+        this.request("DescribeVulEmergentMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the authorization overview information.
+     * @param {DescribeLicenseGeneralRequest} req
+     * @param {function(string, DescribeLicenseGeneralResponse):void} cb
+     * @public
+     */
+    DescribeLicenseGeneral(req, cb) {
+        let resp = new DescribeLicenseGeneralResponse();
+        this.request("DescribeLicenseGeneral", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the rollback task list.
+     * @param {DescribeRansomDefenseRollBackTaskListRequest} req
+     * @param {function(string, DescribeRansomDefenseRollBackTaskListResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseRollBackTaskList(req, cb) {
+        let resp = new DescribeRansomDefenseRollBackTaskListResponse();
+        this.request("DescribeRansomDefenseRollBackTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export host trends of recent days (up to last 90 days).
+     * @param {ExportAssetRecentMachineInfoRequest} req
+     * @param {function(string, ExportAssetRecentMachineInfoResponse):void} cb
+     * @public
+     */
+    ExportAssetRecentMachineInfo(req, cb) {
+        let resp = new ExportAssetRecentMachineInfoResponse();
+        this.request("ExportAssetRecentMachineInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export reverse shell events.
+     * @param {ExportReverseShellEventsRequest} req
+     * @param {function(string, ExportReverseShellEventsResponse):void} cb
+     * @public
+     */
+    ExportReverseShellEvents(req, cb) {
+        let resp = new ExportReverseShellEventsResponse();
+        this.request("ExportReverseShellEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a network attack allowlist.
+     * @param {CreateNetAttackWhiteListRequest} req
+     * @param {function(string, CreateNetAttackWhiteListResponse):void} cb
+     * @public
+     */
+    CreateNetAttackWhiteList(req, cb) {
+        let resp = new CreateNetAttackWhiteListResponse();
+        this.request("CreateNetAttackWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify malicious request policies.
+     * @param {ModifyRiskDnsPolicyRequest} req
+     * @param {function(string, ModifyRiskDnsPolicyResponse):void} cb
+     * @public
+     */
+    ModifyRiskDnsPolicy(req, cb) {
+        let resp = new ModifyRiskDnsPolicyResponse();
+        this.request("ModifyRiskDnsPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the security manager list.
+     * @param {DescribeExpertServiceListRequest} req
+     * @param {function(string, DescribeExpertServiceListResponse):void} cb
+     * @public
+     */
+    DescribeExpertServiceList(req, cb) {
+        let resp = new DescribeExpertServiceListResponse();
+        this.request("DescribeExpertServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the anti-ransomware policy list.
+     * @param {ExportRansomDefenseStrategyListRequest} req
+     * @param {function(string, ExportRansomDefenseStrategyListResponse):void} cb
+     * @public
+     */
+    ExportRansomDefenseStrategyList(req, cb) {
+        let resp = new ExportRansomDefenseStrategyListResponse();
+        this.request("ExportRansomDefenseStrategyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check the host vulnerability fixing progress.
+     * @param {DescribeVulFixStatusRequest} req
+     * @param {function(string, DescribeVulFixStatusResponse):void} cb
+     * @public
+     */
+    DescribeVulFixStatus(req, cb) {
+        let resp = new DescribeVulFixStatusResponse();
+        this.request("DescribeVulFixStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain client exception events.
+     * @param {DescribeClientExceptionRequest} req
+     * @param {function(string, DescribeClientExceptionResponse):void} cb
+     * @public
+     */
+    DescribeClientException(req, cb) {
+        let resp = new DescribeClientExceptionResponse();
+        this.request("DescribeClientException", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the security event statistics data.
+     * @param {DescribeSecurityTrendsRequest} req
+     * @param {function(string, DescribeSecurityTrendsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityTrends(req, cb) {
+        let resp = new DescribeSecurityTrendsResponse();
+        this.request("DescribeSecurityTrends", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of backup details.
+     * @param {DescribeRansomDefenseMachineListRequest} req
+     * @param {function(string, DescribeRansomDefenseMachineListResponse):void} cb
+     * @public
+     */
+    DescribeRansomDefenseMachineList(req, cb) {
+        let resp = new DescribeRansomDefenseMachineListResponse();
+        this.request("DescribeRansomDefenseMachineList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to download the monthly inspection report of the security manager.
+     * @param {DescribeMonthInspectionReportRequest} req
+     * @param {function(string, DescribeMonthInspectionReportResponse):void} cb
+     * @public
+     */
+    DescribeMonthInspectionReport(req, cb) {
+        let resp = new DescribeMonthInspectionReportResponse();
+        this.request("DescribeMonthInspectionReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the number of assets, including hosts, accounts, ports, processes, software, databases, web applications, web frameworks, web services, and web sites.
+     * @param {DescribeAssetInfoRequest} req
+     * @param {function(string, DescribeAssetInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetInfo(req, cb) {
+        let resp = new DescribeAssetInfoResponse();
+        this.request("DescribeAssetInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of affected Trojan allowlists.
+     * @param {DescribeMalwareWhiteListAffectListRequest} req
+     * @param {function(string, DescribeMalwareWhiteListAffectListResponse):void} cb
+     * @public
+     */
+    DescribeMalwareWhiteListAffectList(req, cb) {
+        let resp = new DescribeMalwareWhiteListAffectListResponse();
+        this.request("DescribeMalwareWhiteListAffectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to ignore vulnerabilities.
+     * @param {IgnoreImpactedHostsRequest} req
+     * @param {function(string, IgnoreImpactedHostsResponse):void} cb
+     * @public
+     */
+    IgnoreImpactedHosts(req, cb) {
+        let resp = new IgnoreImpactedHostsResponse();
+        this.request("IgnoreImpactedHosts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the vulnerability list.
+     * @param {ExportVulListRequest} req
+     * @param {function(string, ExportVulListResponse):void} cb
+     * @public
+     */
+    ExportVulList(req, cb) {
+        let resp = new ExportVulListResponse();
+        this.request("ExportVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the Java webshell event status.
+     * @param {ModifyJavaMemShellsStatusRequest} req
+     * @param {function(string, ModifyJavaMemShellsStatusResponse):void} cb
+     * @public
+     */
+    ModifyJavaMemShellsStatus(req, cb) {
+        let resp = new ModifyJavaMemShellsStatusResponse();
+        this.request("ModifyJavaMemShellsStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of scheduled asset management tasks.
+     * @param {ExportAssetPlanTaskListRequest} req
+     * @param {function(string, ExportAssetPlanTaskListResponse):void} cb
+     * @public
+     */
+    ExportAssetPlanTaskList(req, cb) {
+        let resp = new ExportAssetPlanTaskListResponse();
+        this.request("ExportAssetPlanTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or modify high-risk command rules.
+     * @param {EditBashRulesRequest} req
+     * @param {function(string, EditBashRulesResponse):void} cb
+     * @public
+     */
+    EditBashRules(req, cb) {
+        let resp = new EditBashRulesResponse();
+        this.request("EditBashRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the token for installing the agent in a hybrid cloud environment.
+     * @param {DescribeAgentInstallationTokenRequest} req
+     * @param {function(string, DescribeAgentInstallationTokenResponse):void} cb
+     * @public
+     */
+    DescribeAgentInstallationToken(req, cb) {
+        let resp = new DescribeAgentInstallationTokenResponse();
+        this.request("DescribeAgentInstallationToken", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain top 5 host tags.
+     * @param {DescribeAssetMachineTagTopRequest} req
+     * @param {function(string, DescribeAssetMachineTagTopResponse):void} cb
+     * @public
+     */
+    DescribeAssetMachineTagTop(req, cb) {
+        let resp = new DescribeAssetMachineTagTopResponse();
+        this.request("DescribeAssetMachineTagTop", req, resp, cb);
+    }
+
+
+}
+module.exports = CwpClient;

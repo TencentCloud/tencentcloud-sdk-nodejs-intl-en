@@ -27,6 +27,7 @@ module.exports = {
     controlcenter: require("./controlcenter"),
     csip: require("./csip"),
     cvm: require("./cvm"),
+    cwp: require("./cwp"),
     cynosdb: require("./cynosdb"),
     dataintegration: require("./dataintegration"),
     dayu: require("./dayu"),

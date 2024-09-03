@@ -18,8 +18,8 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpdateDatabaseRequest = models.UpdateDatabaseRequest;
 const DescribeInstanceUsedSubnetsResponse = models.DescribeInstanceUsedSubnetsResponse;
-const CreateInstanceNewResponse = models.CreateInstanceNewResponse;
-const DescribeInstanceStateRequest = models.DescribeInstanceStateRequest;
+const DescribeInstanceNodesResponse = models.DescribeInstanceNodesResponse;
+const DescribeClusterConfigsHistoryResponse = models.DescribeClusterConfigsHistoryResponse;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
 const DescribeClusterConfigsResponse = models.DescribeClusterConfigsResponse;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
@@ -27,7 +27,7 @@ const ModifyNodeStatusResponse = models.ModifyNodeStatusResponse;
 const ModifyUserPrivilegesV3Response = models.ModifyUserPrivilegesV3Response;
 const UpdateTableSchemaResponse = models.UpdateTableSchemaResponse;
 const ModifyUserPrivilegesV3Request = models.ModifyUserPrivilegesV3Request;
-const ExecuteSelectQueryResponse = models.ExecuteSelectQueryResponse;
+const DestroyInstanceRequest = models.DestroyInstanceRequest;
 const BindUser = models.BindUser;
 const CancelBackupJobRequest = models.CancelBackupJobRequest;
 const ModifyWorkloadGroupRequest = models.ModifyWorkloadGroupRequest;
@@ -37,33 +37,41 @@ const DeleteWorkloadGroupRequest = models.DeleteWorkloadGroupRequest;
 const WorkloadGroupConfig = models.WorkloadGroupConfig;
 const DescribeInstanceOperationHistoryResponse = models.DescribeInstanceOperationHistoryResponse;
 const InsertDatasToTableRequest = models.InsertDatasToTableRequest;
+const InstanceDetail = models.InstanceDetail;
 const ModifyDatabaseTableAccessRequest = models.ModifyDatabaseTableAccessRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const CosSourceInfo = models.CosSourceInfo;
 const ReduceInstanceResponse = models.ReduceInstanceResponse;
+const ModifyCoolDownPolicyRequest = models.ModifyCoolDownPolicyRequest;
 const DescribeBackUpTaskDetailRequest = models.DescribeBackUpTaskDetailRequest;
 const RecoverBackUpJobRequest = models.RecoverBackUpJobRequest;
 const DiskSpec = models.DiskSpec;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
 const DescribeUserBindWorkloadGroupResponse = models.DescribeUserBindWorkloadGroupResponse;
+const CreateTablesDDL = models.CreateTablesDDL;
 const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 const UpdateUserPrivileges = models.UpdateUserPrivileges;
+const ModifyClusterConfigsRequest = models.ModifyClusterConfigsRequest;
 const DescribeQueryAnalyseRequest = models.DescribeQueryAnalyseRequest;
-const DescribeClusterConfigsHistoryResponse = models.DescribeClusterConfigsHistoryResponse;
+const DescribeInstanceStateRequest = models.DescribeInstanceStateRequest;
 const NetworkInfo = models.NetworkInfo;
 const ZoneInfo = models.ZoneInfo;
-const DescribeRestoreTaskDetailResponse = models.DescribeRestoreTaskDetailResponse;
+const DescribeAreaRegionResponse = models.DescribeAreaRegionResponse;
 const DeleteBackUpDataRequest = models.DeleteBackUpDataRequest;
 const ExecuteParametrizedQueryResponse = models.ExecuteParametrizedQueryResponse;
 const CreateDatabaseRequest = models.CreateDatabaseRequest;
 const ConfigKeyValue = models.ConfigKeyValue;
 const Tag = models.Tag;
 const ResizeDiskResponse = models.ResizeDiskResponse;
+const OpenCoolDownRequest = models.OpenCoolDownRequest;
+const DescribeCoolDownTableDataRequest = models.DescribeCoolDownTableDataRequest;
+const CheckCoolDownWorkingVariableConfigCorrectResponse = models.CheckCoolDownWorkingVariableConfigCorrectResponse;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const DescribeSlowQueryRecordsDownloadRequest = models.DescribeSlowQueryRecordsDownloadRequest;
-const DescribeAreaRegionResponse = models.DescribeAreaRegionResponse;
+const DescribeRestoreTaskDetailResponse = models.DescribeRestoreTaskDetailResponse;
 const DescribeUserPolicyResponse = models.DescribeUserPolicyResponse;
 const ModifyNodeStatusRequest = models.ModifyNodeStatusRequest;
+const DescribeCreateTablesDDLRequest = models.DescribeCreateTablesDDLRequest;
 const RestartClusterForNodeResponse = models.RestartClusterForNodeResponse;
 const UpdateTableSchemaRequest = models.UpdateTableSchemaRequest;
 const CancelBackupJobResponse = models.CancelBackupJobResponse;
@@ -72,17 +80,23 @@ const SlowQueryRecord = models.SlowQueryRecord;
 const DescribeInstanceNodesRequest = models.DescribeInstanceNodesRequest;
 const ChargeProperties = models.ChargeProperties;
 const DescribeWorkloadGroupRequest = models.DescribeWorkloadGroupRequest;
+const DescribeCoolDownBackendsRequest = models.DescribeCoolDownBackendsRequest;
+const CheckCoolDownWorkingVariableConfigCorrectRequest = models.CheckCoolDownWorkingVariableConfigCorrectRequest;
 const InstanceOperation = models.InstanceOperation;
 const BackupTableContent = models.BackupTableContent;
-const DescribeInstanceNodesResponse = models.DescribeInstanceNodesResponse;
+const CreateInstanceNewResponse = models.CreateInstanceNewResponse;
 const DescribeSqlApisRequest = models.DescribeSqlApisRequest;
 const ModifySecurityGroupsRequest = models.ModifySecurityGroupsRequest;
 const PermissionHostInfo = models.PermissionHostInfo;
 const CreateInstanceNewRequest = models.CreateInstanceNewRequest;
 const DescribeDatabaseResponse = models.DescribeDatabaseResponse;
+const UpdateCoolDownRequest = models.UpdateCoolDownRequest;
 const Partition = models.Partition;
+const CoolDownPolicyInfo = models.CoolDownPolicyInfo;
+const OpenCoolDownPolicyRequest = models.OpenCoolDownPolicyRequest;
 const RangeInfo = models.RangeInfo;
 const DorisSourceInfo = models.DorisSourceInfo;
+const OpenCoolDownResponse = models.OpenCoolDownResponse;
 const AttachCBSSpec = models.AttachCBSSpec;
 const DataBaseAuditRecord = models.DataBaseAuditRecord;
 const CopyTableDatasResponse = models.CopyTableDatasResponse;
@@ -95,14 +109,16 @@ const Property = models.Property;
 const TablePermissions = models.TablePermissions;
 const CreateBackUpScheduleRequest = models.CreateBackUpScheduleRequest;
 const DeleteTableRequest = models.DeleteTableRequest;
+const ActionAlterUserResponse = models.ActionAlterUserResponse;
 const BackupCosInfo = models.BackupCosInfo;
 const DescribeClusterConfigsHistoryRequest = models.DescribeClusterConfigsHistoryRequest;
 const DeleteTableResponse = models.DeleteTableResponse;
-const DescribeInstanceStateResponse = models.DescribeInstanceStateResponse;
+const CreateWorkloadGroupRequest = models.CreateWorkloadGroupRequest;
 const DescribeInstanceNodesInfoRequest = models.DescribeInstanceNodesInfoRequest;
 const DescribeInstancesHealthStateResponse = models.DescribeInstancesHealthStateResponse;
-const DescribeSlowQueryRecordsRequest = models.DescribeSlowQueryRecordsRequest;
+const DescribeDatabaseAuditDownloadRequest = models.DescribeDatabaseAuditDownloadRequest;
 const DescribeInstanceNodesRoleResponse = models.DescribeInstanceNodesRoleResponse;
+const ExecuteSelectQueryResponse = models.ExecuteSelectQueryResponse;
 const DestroyInstanceResponse = models.DestroyInstanceResponse;
 const QueryTableDataResponse = models.QueryTableDataResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
@@ -110,28 +126,33 @@ const CopyTableDatasRequest = models.CopyTableDatasRequest;
 const DescribeSlowQueryRecordsResponse = models.DescribeSlowQueryRecordsResponse;
 const ModifyWorkloadGroupStatusRequest = models.ModifyWorkloadGroupStatusRequest;
 const DbInfo = models.DbInfo;
-const ModifyUserBindWorkloadGroupRequest = models.ModifyUserBindWorkloadGroupRequest;
+const CreateCoolDownPolicyRequest = models.CreateCoolDownPolicyRequest;
 const DescribeSqlApisResponse = models.DescribeSqlApisResponse;
+const DescribeCreateTablesDDLResponse = models.DescribeCreateTablesDDLResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const DescribeSpecResponse = models.DescribeSpecResponse;
 const ModifyInstanceKeyValConfigsResponse = models.ModifyInstanceKeyValConfigsResponse;
 const QueryDetails = models.QueryDetails;
 const DescribeBackUpSchedulesResponse = models.DescribeBackUpSchedulesResponse;
+const TablesDDL = models.TablesDDL;
 const DescribeBackUpTablesResponse = models.DescribeBackUpTablesResponse;
 const DescribeDatabaseAuditRecordsResponse = models.DescribeDatabaseAuditRecordsResponse;
 const InstanceNode = models.InstanceNode;
+const ModifyCoolDownPolicyResponse = models.ModifyCoolDownPolicyResponse;
 const DescribeInstancesHealthStateRequest = models.DescribeInstancesHealthStateRequest;
 const NodeInfo = models.NodeInfo;
 const FrontEndRule = models.FrontEndRule;
 const RestartClusterForConfigsResponse = models.RestartClusterForConfigsResponse;
 const InstanceInfo = models.InstanceInfo;
+const DescribeSlowQueryRecordsRequest = models.DescribeSlowQueryRecordsRequest;
 const CreateTableResponse = models.CreateTableResponse;
 const DescribeUserBindWorkloadGroupRequest = models.DescribeUserBindWorkloadGroupRequest;
 const ScaleUpInstanceRequest = models.ScaleUpInstanceRequest;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const Column = models.Column;
 const DescribeBackUpSchedulesRequest = models.DescribeBackUpSchedulesRequest;
 const DescribeClusterConfigsRequest = models.DescribeClusterConfigsRequest;
 const ExecuteSelectQueryRequest = models.ExecuteSelectQueryRequest;
+const CreateCoolDownPolicyResponse = models.CreateCoolDownPolicyResponse;
 const ModifyWorkloadGroupResponse = models.ModifyWorkloadGroupResponse;
 const DescribeRestoreTaskDetailRequest = models.DescribeRestoreTaskDetailRequest;
 const CreateBackUpScheduleResponse = models.CreateBackUpScheduleResponse;
@@ -140,8 +161,10 @@ const DescribeInstanceResponse = models.DescribeInstanceResponse;
 const DescribeBackUpJobResponse = models.DescribeBackUpJobResponse;
 const DescribeDatabaseRequest = models.DescribeDatabaseRequest;
 const RestartClusterForNodeRequest = models.RestartClusterForNodeRequest;
+const UpdateCoolDownResponse = models.UpdateCoolDownResponse;
 const BackupStatus = models.BackupStatus;
 const SearchTags = models.SearchTags;
+const UserInfo = models.UserInfo;
 const DescribeInstanceUsedSubnetsRequest = models.DescribeInstanceUsedSubnetsRequest;
 const ListInfo = models.ListInfo;
 const QueryTableDataRequest = models.QueryTableDataRequest;
@@ -149,12 +172,15 @@ const DescribeDatabaseAuditRecordsRequest = models.DescribeDatabaseAuditRecordsR
 const DescribeUserPolicyRequest = models.DescribeUserPolicyRequest;
 const DescribeBackUpJobDetailResponse = models.DescribeBackUpJobDetailResponse;
 const DescribeBackUpJobDetailRequest = models.DescribeBackUpJobDetailRequest;
-const Rows = models.Rows;
+const DescribeCoolDownBackendsResponse = models.DescribeCoolDownBackendsResponse;
+const DescribeCoolDownPoliciesResponse = models.DescribeCoolDownPoliciesResponse;
 const DescribeTableListRequest = models.DescribeTableListRequest;
 const DescribeWorkloadGroupResponse = models.DescribeWorkloadGroupResponse;
+const CoolDownTableDataInfo = models.CoolDownTableDataInfo;
 const ModifySecurityGroupsResponse = models.ModifySecurityGroupsResponse;
 const DescribeTableRequest = models.DescribeTableRequest;
 const DescribeSpecRequest = models.DescribeSpecRequest;
+const CoolDownBackend = models.CoolDownBackend;
 const DescribeBackUpTaskDetailResponse = models.DescribeBackUpTaskDetailResponse;
 const DatabasePermissions = models.DatabasePermissions;
 const ReduceInstanceRequest = models.ReduceInstanceRequest;
@@ -162,33 +188,40 @@ const InsertDatasToTableResponse = models.InsertDatasToTableResponse;
 const DeleteWorkloadGroupResponse = models.DeleteWorkloadGroupResponse;
 const UpdateDatabaseResponse = models.UpdateDatabaseResponse;
 const DescribeInstanceOperationHistoryRequest = models.DescribeInstanceOperationHistoryRequest;
-const ClusterConfigsInfoFromEMR = models.ClusterConfigsInfoFromEMR;
+const DescribeCoolDownTableDataResponse = models.DescribeCoolDownTableDataResponse;
 const DescribeQueryAnalyseResponse = models.DescribeQueryAnalyseResponse;
 const IndexInfo = models.IndexInfo;
 const ModifyWorkloadGroupStatusResponse = models.ModifyWorkloadGroupStatusResponse;
+const OpenCoolDownPolicyResponse = models.OpenCoolDownPolicyResponse;
 const ExecuteParametrizedQueryRequest = models.ExecuteParametrizedQueryRequest;
-const DestroyInstanceRequest = models.DestroyInstanceRequest;
-const Column = models.Column;
+const ConfigSubmitContext = models.ConfigSubmitContext;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const RegionInfo = models.RegionInfo;
+const Rows = models.Rows;
 const RestartClusterForConfigsRequest = models.RestartClusterForConfigsRequest;
 const CreateWorkloadGroupResponse = models.CreateWorkloadGroupResponse;
-const CreateWorkloadGroupRequest = models.CreateWorkloadGroupRequest;
+const DescribeInstanceStateResponse = models.DescribeInstanceStateResponse;
 const CreateDatabaseResponse = models.CreateDatabaseResponse;
 const PropertiesMap = models.PropertiesMap;
+const DescribeCoolDownPoliciesRequest = models.DescribeCoolDownPoliciesRequest;
 const ResourceSpec = models.ResourceSpec;
+const ModifyClusterConfigsResponse = models.ModifyClusterConfigsResponse;
 const RestoreStatus = models.RestoreStatus;
 const DeleteBackUpDataResponse = models.DeleteBackUpDataResponse;
 const ModifyInstanceKeyValConfigsRequest = models.ModifyInstanceKeyValConfigsRequest;
 const BackUpJobDisplay = models.BackUpJobDisplay;
 const ModifyUserBindWorkloadGroupResponse = models.ModifyUserBindWorkloadGroupResponse;
+const ClusterConfigsInfoFromEMR = models.ClusterConfigsInfoFromEMR;
 const RecoverBackUpJobResponse = models.RecoverBackUpJobResponse;
 const DescribeTableResponse = models.DescribeTableResponse;
 const DescribeTableListResponse = models.DescribeTableListResponse;
+const ModifyUserBindWorkloadGroupRequest = models.ModifyUserBindWorkloadGroupRequest;
 const NodesSummary = models.NodesSummary;
-const DescribeDatabaseAuditDownloadRequest = models.DescribeDatabaseAuditDownloadRequest;
 const CreateInstanceSpec = models.CreateInstanceSpec;
+const DbTablesInfo = models.DbTablesInfo;
 const DescribeInstanceRequest = models.DescribeInstanceRequest;
 const DescribeBackUpJobRequest = models.DescribeBackUpJobRequest;
+const ActionAlterUserRequest = models.ActionAlterUserRequest;
 const DescribeBackUpTablesRequest = models.DescribeBackUpTablesRequest;
 const RegionAreaInfo = models.RegionAreaInfo;
 const DescribeInstanceNodesRoleRequest = models.DescribeInstanceNodesRoleRequest;
@@ -231,6 +264,17 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable and describe the cold storage policy.
+     * @param {OpenCoolDownPolicyRequest} req
+     * @param {function(string, OpenCoolDownPolicyResponse):void} cb
+     * @public
+     */
+    OpenCoolDownPolicy(req, cb) {
+        let resp = new OpenCoolDownPolicyResponse();
+        this.request("OpenCoolDownPolicy", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the scheduled task information for the backup and migration.
      * @param {DescribeBackUpSchedulesRequest} req
      * @param {function(string, DescribeBackUpSchedulesResponse):void} cb
@@ -261,6 +305,17 @@ class CdwdorisClient extends AbstractClient {
     DestroyInstance(req, cb) {
         let resp = new DestroyInstanceResponse();
         this.request("DestroyInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the layered hot and cold data in a table.
+     * @param {DescribeCoolDownTableDataRequest} req
+     * @param {function(string, DescribeCoolDownTableDataResponse):void} cb
+     * @public
+     */
+    DescribeCoolDownTableData(req, cb) {
+        let resp = new DescribeCoolDownTableDataResponse();
+        this.request("DescribeCoolDownTableData", req, resp, cb);
     }
 
     /**
@@ -349,6 +404,17 @@ class CdwdorisClient extends AbstractClient {
     DescribeInstanceUsedSubnets(req, cb) {
         let resp = new DescribeInstanceUsedSubnetsResponse();
         this.request("DescribeInstanceUsedSubnets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale in clusters.
+     * @param {ReduceInstanceRequest} req
+     * @param {function(string, ReduceInstanceResponse):void} cb
+     * @public
+     */
+    ReduceInstance(req, cb) {
+        let resp = new ReduceInstanceResponse();
+        this.request("ReduceInstance", req, resp, cb);
     }
 
     /**
@@ -473,14 +539,47 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the resource group information.
-     * @param {ModifyWorkloadGroupRequest} req
-     * @param {function(string, ModifyWorkloadGroupResponse):void} cb
+     * This API is used to expand cloud disks.
+     * @param {ResizeDiskRequest} req
+     * @param {function(string, ResizeDiskResponse):void} cb
      * @public
      */
-    ModifyWorkloadGroup(req, cb) {
-        let resp = new ModifyWorkloadGroupResponse();
-        this.request("ModifyWorkloadGroup", req, resp, cb);
+    ResizeDisk(req, cb) {
+        let resp = new ResizeDiskResponse();
+        this.request("ResizeDisk", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the XML cluster configuration file on the cluster configuration page.
+     * @param {ModifyClusterConfigsRequest} req
+     * @param {function(string, ModifyClusterConfigsResponse):void} cb
+     * @public
+     */
+    ModifyClusterConfigs(req, cb) {
+        let resp = new ModifyClusterConfigsResponse();
+        this.request("ModifyClusterConfigs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a hot/cold data layering policy.
+     * @param {CreateCoolDownPolicyRequest} req
+     * @param {function(string, CreateCoolDownPolicyResponse):void} cb
+     * @public
+     */
+    CreateCoolDownPolicy(req, cb) {
+        let resp = new CreateCoolDownPolicyResponse();
+        this.request("CreateCoolDownPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the hot/cold data layering information on a cluster.
+     * @param {UpdateCoolDownRequest} req
+     * @param {function(string, UpdateCoolDownResponse):void} cb
+     * @public
+     */
+    UpdateCoolDown(req, cb) {
+        let resp = new UpdateCoolDownResponse();
+        this.request("UpdateCoolDown", req, resp, cb);
     }
 
     /**
@@ -547,6 +646,17 @@ class CdwdorisClient extends AbstractClient {
     ModifySecurityGroups(req, cb) {
         let resp = new ModifySecurityGroupsResponse();
         this.request("ModifySecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of backend nodes supporting hot/cold data layering.
+     * @param {DescribeCoolDownBackendsRequest} req
+     * @param {function(string, DescribeCoolDownBackendsResponse):void} cb
+     * @public
+     */
+    DescribeCoolDownBackends(req, cb) {
+        let resp = new DescribeCoolDownBackendsResponse();
+        this.request("DescribeCoolDownBackends", req, resp, cb);
     }
 
     /**
@@ -627,6 +737,28 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the hot/cold data layering policy.
+     * @param {ModifyCoolDownPolicyRequest} req
+     * @param {function(string, ModifyCoolDownPolicyResponse):void} cb
+     * @public
+     */
+    ModifyCoolDownPolicy(req, cb) {
+        let resp = new ModifyCoolDownPolicyResponse();
+        this.request("ModifyCoolDownPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add and modify a user.
+     * @param {ActionAlterUserRequest} req
+     * @param {function(string, ActionAlterUserResponse):void} cb
+     * @public
+     */
+    ActionAlterUser(req, cb) {
+        let resp = new ActionAlterUserResponse();
+        this.request("ActionAlterUser", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the table information. It only supports querying table information in the TCHouse-D internal catalog.
      * @param {DescribeTableRequest} req
      * @param {function(string, DescribeTableResponse):void} cb
@@ -638,7 +770,7 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the CK cluster API for the driver SQL command.
+     * This API is used to query the cluster information by executing SQL commands.
      * @param {DescribeSqlApisRequest} req
      * @param {function(string, DescribeSqlApisResponse):void} cb
      * @public
@@ -649,14 +781,14 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the progress details of backup tasks.
-     * @param {DescribeBackUpTaskDetailRequest} req
-     * @param {function(string, DescribeBackUpTaskDetailResponse):void} cb
+     * This API is used to check whether variables and configurations for hot/cold data layering are correct.
+     * @param {CheckCoolDownWorkingVariableConfigCorrectRequest} req
+     * @param {function(string, CheckCoolDownWorkingVariableConfigCorrectResponse):void} cb
      * @public
      */
-    DescribeBackUpTaskDetail(req, cb) {
-        let resp = new DescribeBackUpTaskDetailResponse();
-        this.request("DescribeBackUpTaskDetail", req, resp, cb);
+    CheckCoolDownWorkingVariableConfigCorrect(req, cb) {
+        let resp = new CheckCoolDownWorkingVariableConfigCorrectResponse();
+        this.request("CheckCoolDownWorkingVariableConfigCorrect", req, resp, cb);
     }
 
     /**
@@ -693,6 +825,17 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the resource group information.
+     * @param {ModifyWorkloadGroupRequest} req
+     * @param {function(string, ModifyWorkloadGroupResponse):void} cb
+     * @public
+     */
+    ModifyWorkloadGroup(req, cb) {
+        let resp = new ModifyWorkloadGroupResponse();
+        this.request("ModifyWorkloadGroup", req, resp, cb);
+    }
+
+    /**
      * This API is used to cancel the corresponding backup instance task.
      * @param {CancelBackupJobRequest} req
      * @param {function(string, CancelBackupJobResponse):void} cb
@@ -723,6 +866,17 @@ class CdwdorisClient extends AbstractClient {
     ModifyDatabaseTableAccess(req, cb) {
         let resp = new ModifyDatabaseTableAccessResponse();
         this.request("ModifyDatabaseTableAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch obtain the table creation DDL.
+     * @param {DescribeCreateTablesDDLRequest} req
+     * @param {function(string, DescribeCreateTablesDDLResponse):void} cb
+     * @public
+     */
+    DescribeCreateTablesDDL(req, cb) {
+        let resp = new DescribeCreateTablesDDLResponse();
+        this.request("DescribeCreateTablesDDL", req, resp, cb);
     }
 
     /**
@@ -759,14 +913,14 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to expand cloud disks.
-     * @param {ResizeDiskRequest} req
-     * @param {function(string, ResizeDiskResponse):void} cb
+     * This API is used to query the progress details of backup tasks.
+     * @param {DescribeBackUpTaskDetailRequest} req
+     * @param {function(string, DescribeBackUpTaskDetailResponse):void} cb
      * @public
      */
-    ResizeDisk(req, cb) {
-        let resp = new ResizeDiskResponse();
-        this.request("ResizeDisk", req, resp, cb);
+    DescribeBackUpTaskDetail(req, cb) {
+        let resp = new DescribeBackUpTaskDetailResponse();
+        this.request("DescribeBackUpTaskDetail", req, resp, cb);
     }
 
     /**
@@ -814,14 +968,14 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to scale in clusters.
-     * @param {ReduceInstanceRequest} req
-     * @param {function(string, ReduceInstanceResponse):void} cb
+     * This API is used to enable hot/cold data layering.
+     * @param {OpenCoolDownRequest} req
+     * @param {function(string, OpenCoolDownResponse):void} cb
      * @public
      */
-    ReduceInstance(req, cb) {
-        let resp = new ReduceInstanceResponse();
-        this.request("ReduceInstance", req, resp, cb);
+    OpenCoolDown(req, cb) {
+        let resp = new OpenCoolDownResponse();
+        this.request("OpenCoolDown", req, resp, cb);
     }
 
     /**
@@ -833,6 +987,17 @@ class CdwdorisClient extends AbstractClient {
     DescribeQueryAnalyse(req, cb) {
         let resp = new DescribeQueryAnalyseResponse();
         this.request("DescribeQueryAnalyse", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a specified database, including setting the data volume quota, renaming the database, setting the replica quantity quota, and modifying other attributes of the database.
+     * @param {UpdateDatabaseRequest} req
+     * @param {function(string, UpdateDatabaseResponse):void} cb
+     * @public
+     */
+    UpdateDatabase(req, cb) {
+        let resp = new UpdateDatabaseResponse();
+        this.request("UpdateDatabase", req, resp, cb);
     }
 
     /**
@@ -880,14 +1045,14 @@ class CdwdorisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the attributes of a specified database, including setting the data volume quota, renaming the database, setting the replica quantity quota, and modifying other attributes of the database.
-     * @param {UpdateDatabaseRequest} req
-     * @param {function(string, UpdateDatabaseResponse):void} cb
+     * This API is used to query the list of hot/cold data layering policies.
+     * @param {DescribeCoolDownPoliciesRequest} req
+     * @param {function(string, DescribeCoolDownPoliciesResponse):void} cb
      * @public
      */
-    UpdateDatabase(req, cb) {
-        let resp = new UpdateDatabaseResponse();
-        this.request("UpdateDatabase", req, resp, cb);
+    DescribeCoolDownPolicies(req, cb) {
+        let resp = new DescribeCoolDownPoliciesResponse();
+        this.request("DescribeCoolDownPolicies", req, resp, cb);
     }
 
     /**

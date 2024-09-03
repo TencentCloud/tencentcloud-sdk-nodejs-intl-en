@@ -538,7 +538,7 @@ class CreateStreamLiveInputRequest extends  AbstractModel {
 
         /**
          * Input type
-Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
+Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`,`RTP-FEC_PUSH`,`RTSP_PULL`,`SRT_PUSH `,`SRT_PULL `
          * @type {string || null}
          */
         this.Type = null;
@@ -551,7 +551,11 @@ You can attach only one security group to an input.
         this.SecurityGroupIds = null;
 
         /**
-         * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+         * Input settings. 
+For the type:
+`RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`,`RTSP_PULL`,`SRT_PULL` or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+For the type:
+`SRT_PUSH`, 0 or 2 inputs of the corresponding type can be configured.
          * @type {Array.<InputSettingInfo> || null}
          */
         this.InputSettings = null;

@@ -31,9 +31,11 @@ const DescribeLoadBalancerOverviewResponse = models.DescribeLoadBalancerOverview
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const CloneLoadBalancerRequest = models.CloneLoadBalancerRequest;
 const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
+const SetLoadBalancerStartStatusResponse = models.SetLoadBalancerStartStatusResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const DescribeLoadBalancerTrafficResponse = models.DescribeLoadBalancerTrafficResponse;
 const MultiCertInfo = models.MultiCertInfo;
+const RsTagRule = models.RsTagRule;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeCustomizedConfigListResponse = models.DescribeCustomizedConfigListResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
@@ -59,6 +61,7 @@ const CrossTargets = models.CrossTargets;
 const RuleHealth = models.RuleHealth;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const IdleLoadBalancer = models.IdleLoadBalancer;
+const BatchModifyTargetTagRequest = models.BatchModifyTargetTagRequest;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
@@ -179,9 +182,11 @@ const RewriteTarget = models.RewriteTarget;
 const ItemPrice = models.ItemPrice;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeLoadBalancersDetailResponse = models.DescribeLoadBalancersDetailResponse;
+const TargetHealth = models.TargetHealth;
 const LoadBalancerDetail = models.LoadBalancerDetail;
 const LbRsTargets = models.LbRsTargets;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
+const BatchModifyTargetTagResponse = models.BatchModifyTargetTagResponse;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
 const DescribeLoadBalancerListByCertIdRequest = models.DescribeLoadBalancerListByCertIdRequest;
@@ -224,6 +229,7 @@ const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersRe
 const DescribeIdleLoadBalancersRequest = models.DescribeIdleLoadBalancersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
 const InternetAccessible = models.InternetAccessible;
+const OAuth = models.OAuth;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
 const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
@@ -237,7 +243,7 @@ const InquiryPriceRenewLoadBalancerRequest = models.InquiryPriceRenewLoadBalance
 const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
-const TargetHealth = models.TargetHealth;
+const SetLoadBalancerStartStatusRequest = models.SetLoadBalancerStartStatusRequest;
 const TargetGroupAssociation = models.TargetGroupAssociation;
 const ListenerHealth = models.ListenerHealth;
 const AssociationItem = models.AssociationItem;
@@ -394,14 +400,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to bind or unbind a security group for multiple public network CLB instances. Note: Private network CLB do not support binding security groups.
-     * @param {SetSecurityGroupForLoadbalancersRequest} req
-     * @param {function(string, SetSecurityGroupForLoadbalancersResponse):void} cb
+     * After the original access address and the address to be redirected are configured manually, the system will automatically redirect requests made to the original access address to the target address of the corresponding path. Multiple paths can be configured as a redirection policy under one domain name to achieve automatic redirection between HTTP and HTTPS. A redirection policy should meet the following rules: if A has already been redirected to B, then it cannot be redirected to C (unless the original redirection relationship is deleted and a new one is created), and B cannot be redirected to any other addresses.
+     * @param {ManualRewriteRequest} req
+     * @param {function(string, ManualRewriteResponse):void} cb
      * @public
      */
-    SetSecurityGroupForLoadbalancers(req, cb) {
-        let resp = new SetSecurityGroupForLoadbalancersResponse();
-        this.request("SetSecurityGroupForLoadbalancers", req, resp, cb);
+    ManualRewrite(req, cb) {
+        let resp = new ManualRewriteResponse();
+        this.request("ManualRewrite", req, resp, cb);
     }
 
     /**
@@ -546,6 +552,17 @@ Limits
     }
 
     /**
+     * This API is used to enable or disable a CLB instance or listener.This is an asynchronous API. After it returns a result successfully, the obtained RequestID should be used as an input parameter to call the DescribeTaskStatus API, for checking whether this task succeeds.This feature is currently in beta test. To use it, submit a [ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1) for application.
+     * @param {SetLoadBalancerStartStatusRequest} req
+     * @param {function(string, SetLoadBalancerStartStatusResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerStartStatus(req, cb) {
+        let resp = new SetLoadBalancerStartStatusResponse();
+        this.request("SetLoadBalancerStartStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the client IP blocklist of a CLB instance. One forwarding rule supports blocking up to 2,000,000 IPs. One blocklist can contain up to 2,000,000 entries.
 (This API is in beta test. To use it, please submit a ticket.)
      * @param {ModifyBlockIPListRequest} req
@@ -686,9 +703,7 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
-During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
-During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
+     * This API is used to configure (bind and unbind) security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups currently bound to a CLB instance. This API follows the set semantics.For binding operations, the input parameters should specify all security groups that should be bound (have been bound and will be bound) to the CLB instance.For unbinding operations, the input parameters should specify all security groups bound to a CLB instance after unbinding. If you want to unbind all security groups, you can omit this parameter or input an empty array. Note: After a private network CLB is bound to an EIP, the security groups on the CLB do not take effect for the traffic from the EIP, but take effect for the traffic from the private network CLB.
      * @param {SetLoadBalancerSecurityGroupsRequest} req
      * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
      * @public
@@ -1001,6 +1016,17 @@ This is an async API. After it is returned successfully, you can check the actio
     }
 
     /**
+     * This API is used to bind or unbind a security group for multiple public network CLB instances. Note: Private network CLB do not support binding security groups.
+     * @param {SetSecurityGroupForLoadbalancersRequest} req
+     * @param {function(string, SetSecurityGroupForLoadbalancersResponse):void} cb
+     * @public
+     */
+    SetSecurityGroupForLoadbalancers(req, cb) {
+        let resp = new SetSecurityGroupForLoadbalancersResponse();
+        this.request("SetSecurityGroupForLoadbalancers", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the target group information.
      * @param {DescribeTargetGroupsRequest} req
      * @param {function(string, DescribeTargetGroupsResponse):void} cb
@@ -1057,8 +1083,9 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to modify the attributes of a CLB instance such as name and cross-region attributes.
-This is an async API. After it is returned successfully, you can check the task result by calling `DescribeTaskStatus` with the returned `RequestID`.
+     * This API is used to modify the attributes of a CLB instance, such as name and cross-region attributes.
+
+Note: For CLB instances of bill-by-CVM users, cross-region attributes can be set only after a bandwidth package is purchased.This is an asynchronous API. After it returns a result successfully, the obtained RequestID should be used as an input parameter to call the DescribeTaskStatus API, for checking whether this task succeeds.
      * @param {ModifyLoadBalancerAttributesRequest} req
      * @param {function(string, ModifyLoadBalancerAttributesResponse):void} cb
      * @public
@@ -1115,29 +1142,7 @@ This is an async API. After it is returned successfully, you can check the task 
     }
 
     /**
-     * This API is used to create a clone of the source CLB instance with the same forwarding rules and binding relations. Note that this API is asynchronous, which means that changes to the source CLB after invocation of the API are not included in the clone.
-
-Limits:
-Instance attribute restrictions
-  Only pay-as-you-go instances can be cloned. Monthly-subscribed instances cannot be cloned. 
-  CLB instances without any billable items cannot be cloned.
-  Classic CLB instances and CLB instances created for Anti-DDoS service cannot be cloned.
-  Classic network-based instances cannot be cloned.
-  IPv6 instances, IPv6 NAT64 instances, and instances bound with both IPv4 and IPv6 cannot be cloned.
-  The following settings will not be cloned: **Custom configuration**, **Redirection configurations**, and **Allow Traffic by Default** in security groups.
-  Before cloning an instance, make sure all certificates used on the instance are valid. Cloning will fail if there are any expired certificates.
-Listener restrictions
-  Instances with QUIC listeners or port range listeners cannot be cloned.
-  Private network CLB instances with TCP_SSL listeners cannot be cloned.
-  Instances with layer-7 listeners that have no forwarding rules cannot be cloned.
-  Instances with more than 50 listeners cannot be cloned. 
-Backend service restrictions
-  Instances with target groups and SCF cloud functions as the backend services cannot be cloned.
-
-Notes:
-If you are using a BGP bandwidth package, you need to pass the package ID.
-To create a dedicated cluster-based CLB by cloning the source CLB, you need to pass the cluster ID. Otherwise, a normal CLB is created.
-This API is only available for beta users. To try it out, [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
+     * This API is used to clone a CLB instance. CLB instance cloning indicates copying a specified CLB instance to create one with the same rules and binding relationships. The operation of this cloning API is asynchronous. The cloned data is based on the state when CloneLoadBalancer is called. If the cloned CLB instance changes after CloneLoadBalancer is called, the changed rules will not be cloned.Note: You can query the instance creation status by calling the [DescribeTaskStatus](https://intl.cloud.tencent.com/document/product/214/30683?from_cn_redirect=1) API with the returned requestId.RestrictionsInstance attribute restrictions:- Instances billed in pay-as-you-go and monthly subscription modes can be cloned. For a new instance cloned from a monthly subscription instance, its network billing mode will switch to billing by hourly bandwidth, but its bandwidth and specifications will remain the same as the settings of the original instance.- CLB instances not associated with any billable items cannot be cloned.- Classic CLB instances and CLB instances with Anti-DDoS Pro cannot be cloned.- Classic network-based instances cannot be cloned.- Anycast instances cannot be cloned.- IPv6 NAT64 instances cannot be cloned.- Blocked or frozen instances cannot be cloned.- Before cloning an instance, make sure that all certificates used on the instance have not expired; otherwise, the cloning will fail.Quota restrictions:- Instances with more than 50 listeners cannot be cloned.- Shared instances with the public network bandwidth cap exceeding 2 Gbps cannot be cloned.API calling restrictions:The bandwidth package ID must be input for BGP bandwidth packages.Corresponding parameters should be input for cloning of an exclusive cluster; otherwise, a shared instance will be created.The feature is in beta test. You can submit a [beta test application](https://intl.cloud.tencent.com/apply/p/1akuvsmyn0g?from_cn_redirect=1).
      * @param {CloneLoadBalancerRequest} req
      * @param {function(string, CloneLoadBalancerResponse):void} cb
      * @public
@@ -1193,14 +1198,14 @@ This API is only available for beta users. To try it out, [submit a ticket](http
     }
 
     /**
-     * After the original access address and the address to be redirected are configured manually, the system will automatically redirect requests made to the original access address to the target address of the corresponding path. Multiple paths can be configured as a redirection policy under one domain name to achieve automatic redirection between HTTP and HTTPS. A redirection policy should meet the following rules: if A has already been redirected to B, then it cannot be redirected to C (unless the original redirection relationship is deleted and a new one is created), and B cannot be redirected to any other addresses.
-     * @param {ManualRewriteRequest} req
-     * @param {function(string, ManualRewriteResponse):void} cb
+     * This API is used to modify the tags of real servers bound to CLB listeners in batches. The maximum number of resources that can be modified in a batch is 500. This is a synchronous API. <br/> It is supported for Layer-4 and Layer-7 listeners of CLB instances, but not for classic CLB instances.
+     * @param {BatchModifyTargetTagRequest} req
+     * @param {function(string, BatchModifyTargetTagResponse):void} cb
      * @public
      */
-    ManualRewrite(req, cb) {
-        let resp = new ManualRewriteResponse();
-        this.request("ManualRewrite", req, resp, cb);
+    BatchModifyTargetTag(req, cb) {
+        let resp = new BatchModifyTargetTagResponse();
+        this.request("BatchModifyTargetTag", req, resp, cb);
     }
 
     /**

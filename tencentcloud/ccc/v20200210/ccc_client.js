@@ -18,9 +18,11 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeExtensionRequest = models.DescribeExtensionRequest;
 const StopAutoCalloutTaskRequest = models.StopAutoCalloutTaskRequest;
+const CreateIVRSessionRequest = models.CreateIVRSessionRequest;
 const HangUpCallRequest = models.HangUpCallRequest;
 const CreateSDKLoginTokenResponse = models.CreateSDKLoginTokenResponse;
 const ModifyStaffRequest = models.ModifyStaffRequest;
+const DescribeIvrAudioListResponse = models.DescribeIvrAudioListResponse;
 const BindNumberCallOutSkillGroupResponse = models.BindNumberCallOutSkillGroupResponse;
 const ResetExtensionPasswordRequest = models.ResetExtensionPasswordRequest;
 const DisableCCCPhoneNumberResponse = models.DisableCCCPhoneNumberResponse;
@@ -30,7 +32,9 @@ const CreateAdminURLResponse = models.CreateAdminURLResponse;
 const PausePredictiveDialingCampaignRequest = models.PausePredictiveDialingCampaignRequest;
 const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
 const DisableCCCPhoneNumberRequest = models.DisableCCCPhoneNumberRequest;
+const ModifyStaffPasswordResponse = models.ModifyStaffPasswordResponse;
 const CreatePredictiveDialingCampaignRequest = models.CreatePredictiveDialingCampaignRequest;
+const AbortAgentCruiseDialingCampaignResponse = models.AbortAgentCruiseDialingCampaignResponse;
 const ServeParticipant = models.ServeParticipant;
 const DescribeTelCallInfoResponse = models.DescribeTelCallInfoResponse;
 const DescribeExtensionsResponse = models.DescribeExtensionsResponse;
@@ -42,12 +46,13 @@ const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
 const DescribeAutoCalloutTasksResponse = models.DescribeAutoCalloutTasksResponse;
 const PackageBuyInfo = models.PackageBuyInfo;
 const ModifyExtensionResponse = models.ModifyExtensionResponse;
-const SeatUserInfo = models.SeatUserInfo;
+const CreateAgentCruiseDialingCampaignRequest = models.CreateAgentCruiseDialingCampaignRequest;
 const CreateStaffResponse = models.CreateStaffResponse;
 const DescribePredictiveDialingCampaignsRequest = models.DescribePredictiveDialingCampaignsRequest;
 const DescribeSkillGroupInfoListResponse = models.DescribeSkillGroupInfoListResponse;
 const DescribeNumbersResponse = models.DescribeNumbersResponse;
 const DeletePredictiveDialingCampaignRequest = models.DeletePredictiveDialingCampaignRequest;
+const UploadIvrAudioRequest = models.UploadIvrAudioRequest;
 const DescribeStaffInfoListResponse = models.DescribeStaffInfoListResponse;
 const UnbindNumberCallOutSkillGroupRequest = models.UnbindNumberCallOutSkillGroupRequest;
 const CreateAutoCalloutTaskRequest = models.CreateAutoCalloutTaskRequest;
@@ -60,6 +65,7 @@ const CreateCCCSkillGroupResponse = models.CreateCCCSkillGroupResponse;
 const DescribeTelSessionRequest = models.DescribeTelSessionRequest;
 const DescribeSkillGroupInfoListRequest = models.DescribeSkillGroupInfoListRequest;
 const AutoCalloutTaskCalleeInfo = models.AutoCalloutTaskCalleeInfo;
+const SeatUserInfo = models.SeatUserInfo;
 const UpdateCCCSkillGroupResponse = models.UpdateCCCSkillGroupResponse;
 const DescribePredictiveDialingSessionsResponse = models.DescribePredictiveDialingSessionsResponse;
 const ErrStaffItem = models.ErrStaffItem;
@@ -68,9 +74,11 @@ const PSTNSession = models.PSTNSession;
 const UpdatePredictiveDialingCampaignRequest = models.UpdatePredictiveDialingCampaignRequest;
 const DescribeStaffInfoListRequest = models.DescribeStaffInfoListRequest;
 const AutoCalloutTaskInfo = models.AutoCalloutTaskInfo;
+const DescribeIvrAudioListRequest = models.DescribeIvrAudioListRequest;
 const SkillGroupInfoItem = models.SkillGroupInfoItem;
 const ResetExtensionPasswordResponse = models.ResetExtensionPasswordResponse;
 const UpdateCCCSkillGroupRequest = models.UpdateCCCSkillGroupRequest;
+const ModifyStaffPasswordRequest = models.ModifyStaffPasswordRequest;
 const ModifyStaffResponse = models.ModifyStaffResponse;
 const ModifyExtensionRequest = models.ModifyExtensionRequest;
 const CreatePredictiveDialingCampaignResponse = models.CreatePredictiveDialingCampaignResponse;
@@ -83,22 +91,25 @@ const BindNumberCallOutSkillGroupRequest = models.BindNumberCallOutSkillGroupReq
 const DeletePredictiveDialingCampaignResponse = models.DeletePredictiveDialingCampaignResponse;
 const IVRKeyPressedElement = models.IVRKeyPressedElement;
 const UnbindNumberCallOutSkillGroupResponse = models.UnbindNumberCallOutSkillGroupResponse;
-const StaffInfo = models.StaffInfo;
+const DescribeAgentCruiseDialingCampaignRequest = models.DescribeAgentCruiseDialingCampaignRequest;
+const DescribePSTNActiveSessionListRequest = models.DescribePSTNActiveSessionListRequest;
 const CreateAutoCalloutTaskResponse = models.CreateAutoCalloutTaskResponse;
 const TelCdrInfo = models.TelCdrInfo;
+const UploadIvrAudioResponse = models.UploadIvrAudioResponse;
 const NumberInfo = models.NumberInfo;
 const DeleteStaffRequest = models.DeleteStaffRequest;
 const CallInMetrics = models.CallInMetrics;
 const DescribeCCCBuyInfoListRequest = models.DescribeCCCBuyInfoListRequest;
+const StaffInfo = models.StaffInfo;
 const DescribePredictiveDialingCampaignsResponse = models.DescribePredictiveDialingCampaignsResponse;
 const DescribeTelCallInfoRequest = models.DescribeTelCallInfoRequest;
 const Variable = models.Variable;
 const CallInNumberMetrics = models.CallInNumberMetrics;
 const CreateExtensionRequest = models.CreateExtensionRequest;
 const StaffSkillGroupList = models.StaffSkillGroupList;
-const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
+const AbortAgentCruiseDialingCampaignRequest = models.AbortAgentCruiseDialingCampaignRequest;
 const DescribePredictiveDialingCampaignsElement = models.DescribePredictiveDialingCampaignsElement;
-const CreateCallOutSessionRequest = models.CreateCallOutSessionRequest;
+const HangUpCallResponse = models.HangUpCallResponse;
 const StopAutoCalloutTaskResponse = models.StopAutoCalloutTaskResponse;
 const AbortPredictiveDialingCampaignRequest = models.AbortPredictiveDialingCampaignRequest;
 const SkillGroupItem = models.SkillGroupItem;
@@ -106,10 +117,15 @@ const PhoneNumBuyInfo = models.PhoneNumBuyInfo;
 const DescribeCCCBuyInfoListResponse = models.DescribeCCCBuyInfoListResponse;
 const UnbindStaffSkillGroupListResponse = models.UnbindStaffSkillGroupListResponse;
 const ResumePredictiveDialingCampaignRequest = models.ResumePredictiveDialingCampaignRequest;
+const UploadAudioInfo = models.UploadAudioInfo;
 const DeleteExtensionResponse = models.DeleteExtensionResponse;
 const BindStaffSkillGroupListRequest = models.BindStaffSkillGroupListRequest;
-const DescribePSTNActiveSessionListRequest = models.DescribePSTNActiveSessionListRequest;
+const CreateAgentCruiseDialingCampaignResponse = models.CreateAgentCruiseDialingCampaignResponse;
+const UploadIvrAudioFailedInfo = models.UploadIvrAudioFailedInfo;
 const DescribeCallInMetricsResponse = models.DescribeCallInMetricsResponse;
+const DescribeAgentCruiseDialingCampaignResponse = models.DescribeAgentCruiseDialingCampaignResponse;
+const CreateIVRSessionResponse = models.CreateIVRSessionResponse;
+const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
 const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
 const DescribeStaffStatusMetricsRequest = models.DescribeStaffStatusMetricsRequest;
 const DeleteStaffResponse = models.DeleteStaffResponse;
@@ -122,7 +138,8 @@ const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
 const CreateAdminURLRequest = models.CreateAdminURLRequest;
 const DescribeStaffStatusMetricsResponse = models.DescribeStaffStatusMetricsResponse;
-const HangUpCallResponse = models.HangUpCallResponse;
+const AudioFileInfo = models.AudioFileInfo;
+const CreateCallOutSessionRequest = models.CreateCallOutSessionRequest;
 const BindStaffSkillGroupListResponse = models.BindStaffSkillGroupListResponse;
 const DescribeExtensionsRequest = models.DescribeExtensionsRequest;
 const DescribeProtectedTelCdrRequest = models.DescribeProtectedTelCdrRequest;
@@ -177,6 +194,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * If you want to stop running agent's individual auto task, then call AbortAgentCruiseDialingCampaign to terminate.
+     * @param {AbortAgentCruiseDialingCampaignRequest} req
+     * @param {function(string, AbortAgentCruiseDialingCampaignResponse):void} cb
+     * @public
+     */
+    AbortAgentCruiseDialingCampaign(req, cb) {
+        let resp = new AbortAgentCruiseDialingCampaignResponse();
+        this.request("AbortAgentCruiseDialingCampaign", req, resp, cb);
+    }
+
+    /**
      * This API is used to access the agent information list.
      * @param {DescribeStaffInfoListRequest} req
      * @param {function(string, DescribeStaffInfoListResponse):void} cb
@@ -185,6 +213,17 @@ class CccClient extends AbstractClient {
     DescribeStaffInfoList(req, cb) {
         let resp = new DescribeStaffInfoListResponse();
         this.request("DescribeStaffInfoList", req, resp, cb);
+    }
+
+    /**
+     * Query Agent Cruise-style Outbound Call Task
+     * @param {DescribeAgentCruiseDialingCampaignRequest} req
+     * @param {function(string, DescribeAgentCruiseDialingCampaignResponse):void} cb
+     * @public
+     */
+    DescribeAgentCruiseDialingCampaign(req, cb) {
+        let resp = new DescribeAgentCruiseDialingCampaignResponse();
+        this.request("DescribeAgentCruiseDialingCampaign", req, resp, cb);
     }
 
     /**
@@ -221,7 +260,7 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind the agent's skill group.
+     * This API is used to assign an agent to skill group
      * @param {BindStaffSkillGroupListRequest} req
      * @param {function(string, BindStaffSkillGroupListResponse):void} cb
      * @public
@@ -232,7 +271,7 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind outbound skill group of number.
+     * This API is used to assign outbound skill group(s) to your number
      * @param {BindNumberCallOutSkillGroupRequest} req
      * @param {function(string, BindNumberCallOutSkillGroupResponse):void} cb
      * @public
@@ -240,6 +279,17 @@ class CccClient extends AbstractClient {
     BindNumberCallOutSkillGroup(req, cb) {
         let resp = new BindNumberCallOutSkillGroupResponse();
         this.request("BindNumberCallOutSkillGroup", req, resp, cb);
+    }
+
+    /**
+     * Query IVR Audio File List Information
+     * @param {DescribeIvrAudioListRequest} req
+     * @param {function(string, DescribeIvrAudioListResponse):void} cb
+     * @public
+     */
+    DescribeIvrAudioList(req, cb) {
+        let resp = new DescribeIvrAudioListResponse();
+        this.request("DescribeIvrAudioList", req, resp, cb);
     }
 
     /**
@@ -254,7 +304,7 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the customer service account.
+     * This API is used to modify  customer service / agent account.
      * @param {ModifyStaffRequest} req
      * @param {function(string, ModifyStaffResponse):void} cb
      * @public
@@ -265,7 +315,7 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query auto-task outbound calls in batch.
+     * Batch Query Automatic Outbound Call Tasks
      * @param {DescribeAutoCalloutTasksRequest} req
      * @param {function(string, DescribeAutoCalloutTasksResponse):void} cb
      * @public
@@ -287,7 +337,7 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to access telephone consumption statistics by instance.
+     * This API is used to access call detail records by application
      * @param {DescribeTelCallInfoRequest} req
      * @param {function(string, DescribeTelCallInfoResponse):void} cb
      * @public
@@ -408,6 +458,28 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * Upload audio files used in IVR, with a daily upload limit of 50 files. (It is recommended to use temporary links stored in Tencent Cloud Cos for the audio file URL in the parameters)
+     * @param {UploadIvrAudioRequest} req
+     * @param {function(string, UploadIvrAudioResponse):void} cb
+     * @public
+     */
+    UploadIvrAudio(req, cb) {
+        let resp = new UploadIvrAudioResponse();
+        this.request("UploadIvrAudio", req, resp, cb);
+    }
+
+    /**
+     * This document shows how to call API to create an individual auto dialing campaign for agent
+     * @param {CreateAgentCruiseDialingCampaignRequest} req
+     * @param {function(string, CreateAgentCruiseDialingCampaignResponse):void} cb
+     * @public
+     */
+    CreateAgentCruiseDialingCampaign(req, cb) {
+        let resp = new CreateAgentCruiseDialingCampaignResponse();
+        this.request("CreateAgentCruiseDialingCampaign", req, resp, cb);
+    }
+
+    /**
      * This API is used to access the user purchasing information list.
      * @param {DescribeCCCBuyInfoListRequest} req
      * @param {function(string, DescribeCCCBuyInfoListResponse):void} cb
@@ -452,6 +524,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * Modify Agent's Password
+     * @param {ModifyStaffPasswordRequest} req
+     * @param {function(string, ModifyStaffPasswordResponse):void} cb
+     * @public
+     */
+    ModifyStaffPassword(req, cb) {
+        let resp = new ModifyStaffPasswordResponse();
+        this.request("ModifyStaffPassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the predictive outbound call task.
      * @param {DescribePredictiveDialingCampaignRequest} req
      * @param {function(string, DescribePredictiveDialingCampaignResponse):void} cb
@@ -482,6 +565,17 @@ class CccClient extends AbstractClient {
     CreateStaff(req, cb) {
         let resp = new CreateStaffResponse();
         this.request("CreateStaff", req, resp, cb);
+    }
+
+    /**
+     * Create a session associated with IVR. This feature is supported only in the Advanced Version. Currently, it supports inbound and automatic outbound IVR types. Upon receiving the request, TCCC will first attempt to call the callee, then enter the IVR flow.
+     * @param {CreateIVRSessionRequest} req
+     * @param {function(string, CreateIVRSessionResponse):void} cb
+     * @public
+     */
+    CreateIVRSession(req, cb) {
+        let resp = new CreateIVRSessionResponse();
+        this.request("CreateIVRSession", req, resp, cb);
     }
 
     /**
@@ -595,7 +689,7 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pause the predictive outbound call task.
+     * This API is used to pause predictive dialing campaign
      * @param {AbortPredictiveDialingCampaignRequest} req
      * @param {function(string, AbortPredictiveDialingCampaignResponse):void} cb
      * @public

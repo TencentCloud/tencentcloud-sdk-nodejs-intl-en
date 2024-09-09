@@ -5137,7 +5137,7 @@ class DeleteTableRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * The name of the database where the table belongs needs to be deleted
+         * The name of the database where the table belongs needs to be deleted.
          * @type {string || null}
          */
         this.DbName = null;

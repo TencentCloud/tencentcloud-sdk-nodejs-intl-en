@@ -97,6 +97,7 @@ const FlowRealtimeStatusCommon = models.FlowRealtimeStatusCommon;
 const DescribeStreamLinkFlowMediaStatisticsRequest = models.DescribeStreamLinkFlowMediaStatisticsRequest;
 const RegionInfo = models.RegionInfo;
 const DescribeStreamLinkFlowResponse = models.DescribeStreamLinkFlowResponse;
+const CreateStreamLinkInputResponse = models.CreateStreamLinkInputResponse;
 const FlowRealtimeStatusRTMP = models.FlowRealtimeStatusRTMP;
 const StopStreamLinkFlowRequest = models.StopStreamLinkFlowRequest;
 const CreateInput = models.CreateInput;
@@ -108,6 +109,7 @@ const DeleteStreamLinkOutputResponse = models.DeleteStreamLinkOutputResponse;
 const CreateStreamLinkOutputInfoRequest = models.CreateStreamLinkOutputInfoRequest;
 const ModifyStreamLinkInputRequest = models.ModifyStreamLinkInputRequest;
 const ResilientStreamConf = models.ResilientStreamConf;
+const CreateStreamLinkInputRequest = models.CreateStreamLinkInputRequest;
 const DescribeOutputRTSPPullServerUrl = models.DescribeOutputRTSPPullServerUrl;
 const InputAddress = models.InputAddress;
 const DescribeInputRTMPPullSettings = models.DescribeInputRTMPPullSettings;
@@ -160,14 +162,14 @@ class MdcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a StreamLink flow.
-     * @param {DeleteStreamLinkFlowRequest} req
-     * @param {function(string, DeleteStreamLinkFlowResponse):void} cb
+     * Create an input configuration for the StreamLink.
+     * @param {CreateStreamLinkInputRequest} req
+     * @param {function(string, CreateStreamLinkInputResponse):void} cb
      * @public
      */
-    DeleteStreamLinkFlow(req, cb) {
-        let resp = new DeleteStreamLinkFlowResponse();
-        this.request("DeleteStreamLinkFlow", req, resp, cb);
+    CreateStreamLinkInput(req, cb) {
+        let resp = new CreateStreamLinkInputResponse();
+        this.request("CreateStreamLinkInput", req, resp, cb);
     }
 
     /**
@@ -313,6 +315,17 @@ class MdcClient extends AbstractClient {
     DescribeStreamLinkFlowStatistics(req, cb) {
         let resp = new DescribeStreamLinkFlowStatisticsResponse();
         this.request("DescribeStreamLinkFlowStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a StreamLink flow.
+     * @param {DeleteStreamLinkFlowRequest} req
+     * @param {function(string, DeleteStreamLinkFlowResponse):void} cb
+     * @public
+     */
+    DeleteStreamLinkFlow(req, cb) {
+        let resp = new DeleteStreamLinkFlowResponse();
+        this.request("DeleteStreamLinkFlow", req, resp, cb);
     }
 
 

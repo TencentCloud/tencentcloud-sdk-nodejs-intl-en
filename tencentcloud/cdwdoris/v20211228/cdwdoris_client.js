@@ -74,6 +74,7 @@ const ModifyNodeStatusRequest = models.ModifyNodeStatusRequest;
 const DescribeCreateTablesDDLRequest = models.DescribeCreateTablesDDLRequest;
 const RestartClusterForNodeResponse = models.RestartClusterForNodeResponse;
 const UpdateTableSchemaRequest = models.UpdateTableSchemaRequest;
+const CatalogPermission = models.CatalogPermission;
 const CancelBackupJobResponse = models.CancelBackupJobResponse;
 const DescribeAreaRegionRequest = models.DescribeAreaRegionRequest;
 const SlowQueryRecord = models.SlowQueryRecord;

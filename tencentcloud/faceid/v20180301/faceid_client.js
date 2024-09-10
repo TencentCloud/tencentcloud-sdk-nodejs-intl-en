@@ -27,6 +27,7 @@ const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const ApplyCardVerificationResponse = models.ApplyCardVerificationResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
+const JapanIDCard = models.JapanIDCard;
 const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 const ApplyWebVerificationTokenResponse = models.ApplyWebVerificationTokenResponse;
 const NormalHKIDCard = models.NormalHKIDCard;
@@ -55,6 +56,7 @@ const CardInfo = models.CardInfo;
 const PhilippinesVoteID = models.PhilippinesVoteID;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const MainlandIDCard = models.MainlandIDCard;
+const TaiWanIDCard = models.TaiWanIDCard;
 const NormalMLIDCard = models.NormalMLIDCard;
 const NormalIndonesiaIDCard = models.NormalIndonesiaIDCard;
 const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
@@ -164,7 +166,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
 
     /**
      * The types of national cards supported by the API and whether instructions on the back of the card are required are as follows:  
-<table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> </tbody> </table>
+<table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Taiwan</td> <td>ID Card</td> <td>Yes</td> </tr> </tbody> </table>
      * @param {ApplyCardVerificationRequest} req
      * @param {function(string, ApplyCardVerificationResponse):void} cb
      * @public

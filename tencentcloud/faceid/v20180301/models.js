@@ -660,6 +660,75 @@ Default value: `4`.
 }
 
 /**
+ * Japan ID card.
+ * @class
+ */
+class JapanIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Expire date
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FormattedAddress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.FormattedAddress = 'FormattedAddress' in params ? params.FormattedAddress : null;
+
+    }
+}
+
+/**
  * VideoLivenessCompare request structure.
  * @class
  */
@@ -1719,6 +1788,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MainlandIDCard = null;
 
+        /**
+         * Japan ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {JapanIDCard || null}
+         */
+        this.JapanIDCard = null;
+
+        /**
+         * Taiwan ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaiWanIDCard || null}
+         */
+        this.TaiWanIDCard = null;
+
     }
 
     /**
@@ -1817,6 +1900,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new MainlandIDCard();
             obj.deserialize(params.MainlandIDCard)
             this.MainlandIDCard = obj;
+        }
+
+        if (params.JapanIDCard) {
+            let obj = new JapanIDCard();
+            obj.deserialize(params.JapanIDCard)
+            this.JapanIDCard = obj;
+        }
+
+        if (params.TaiWanIDCard) {
+            let obj = new TaiWanIDCard();
+            obj.deserialize(params.TaiWanIDCard)
+            this.TaiWanIDCard = obj;
         }
 
     }
@@ -2736,6 +2831,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MacaoIDCard = null;
 
+        /**
+         * TaiWan ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaiWanIDCard || null}
+         */
+        this.TaiWanIDCard = null;
+
+        /**
+         * Japan ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {JapanIDCard || null}
+         */
+        this.JapanIDCard = null;
+
     }
 
     /**
@@ -2828,6 +2937,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new MacaoIDCard();
             obj.deserialize(params.MacaoIDCard)
             this.MacaoIDCard = obj;
+        }
+
+        if (params.TaiWanIDCard) {
+            let obj = new TaiWanIDCard();
+            obj.deserialize(params.TaiWanIDCard)
+            this.TaiWanIDCard = obj;
+        }
+
+        if (params.JapanIDCard) {
+            let obj = new JapanIDCard();
+            obj.deserialize(params.JapanIDCard)
+            this.JapanIDCard = obj;
         }
 
     }
@@ -3107,6 +3228,67 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Address = 'Address' in params ? params.Address : null;
         this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
         this.FormattedAddress = 'FormattedAddress' in params ? params.FormattedAddress : null;
+
+    }
+}
+
+/**
+ * Taiwan ID card.
+ * @class
+ */
+class TaiWanIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Issued country
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * Registration number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegistrationNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.RegistrationNumber = 'RegistrationNumber' in params ? params.RegistrationNumber : null;
 
     }
 }
@@ -4690,6 +4872,7 @@ THA: Thailand
 MYS: Malaysia
 SGP: Singapore
 JPN: Japan
+TWN:Taiwan
 AUTO: Automatic Identification
          * @type {string || null}
          */
@@ -5257,6 +5440,7 @@ module.exports = {
     ApplyCardVerificationResponse: ApplyCardVerificationResponse,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
     GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
+    JapanIDCard: JapanIDCard,
     VideoLivenessCompareRequest: VideoLivenessCompareRequest,
     ApplyWebVerificationTokenResponse: ApplyWebVerificationTokenResponse,
     NormalHKIDCard: NormalHKIDCard,
@@ -5285,6 +5469,7 @@ module.exports = {
     PhilippinesVoteID: PhilippinesVoteID,
     WebVerificationConfigIntl: WebVerificationConfigIntl,
     MainlandIDCard: MainlandIDCard,
+    TaiWanIDCard: TaiWanIDCard,
     NormalMLIDCard: NormalMLIDCard,
     NormalIndonesiaIDCard: NormalIndonesiaIDCard,
     CompareFaceLivenessResponse: CompareFaceLivenessResponse,

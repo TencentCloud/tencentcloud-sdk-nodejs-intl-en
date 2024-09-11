@@ -3082,6 +3082,17 @@ Example value: 3
 7.PhilippinesSSSID: Philippines SSSID card
 8.PhilippinesUMID: Philippines UMID card
 9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+10.IndonesiaDrivingLicense:Indonesia driving license
+11.ThailandIDCard: Thailand ID card
+12.ThailandDrivingLicense: Thailand driving license
+13.MLDrivingLicense: Malaysia driving license
+14.SingaporeIDCard: Singapore ID card
+15.SingaporeDrivingLicense: Singapore driving license
+16.JapanIDCard: Japan ID card
+17.JapanDrivingLicense: Japan driving license
+18.PhilippinesIDCard: Philippines ID card
+19.MainlandIDCard: Mainland ID card
+20.MacaoIDCard: Macao ID card
 Example: HKIDCard
          * @type {string || null}
          */
@@ -5128,6 +5139,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CardInfo = null;
 
         /**
+         * OCR result of the ID card.
+         * @type {NormalCardInfo || null}
+         */
+        this.NormalCardInfo = null;
+
+        /**
          * The request id
          * @type {string || null}
          */
@@ -5161,6 +5178,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new CardInfo();
             obj.deserialize(params.CardInfo)
             this.CardInfo = obj;
+        }
+
+        if (params.NormalCardInfo) {
+            let obj = new NormalCardInfo();
+            obj.deserialize(params.NormalCardInfo)
+            this.NormalCardInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
         this.CardCutImageBase64 = 'CardCutImageBase64' in params ? params.CardCutImageBase64 : null;

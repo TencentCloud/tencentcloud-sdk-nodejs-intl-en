@@ -1889,7 +1889,7 @@ class DescribeQueryAnalyseRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time of operation period
+         * End time of operation period.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -3141,7 +3141,7 @@ class CancelBackupJobResponse extends  AbstractModel {
 
         /**
          * Error message
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained
          * @type {string || null}
          */
         this.ErrorMsg = null;
@@ -6025,7 +6025,7 @@ class CopyTableDatasRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Name of the database where the source table is located
+         * Name of the database where the source table is located.
          * @type {string || null}
          */
         this.CopiedFromDb = null;

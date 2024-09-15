@@ -1408,7 +1408,7 @@ Note:
     }
 
     /**
-     * This API is used to query the data of billable LVB bandwidth and traffic.
+     * This API is used to query the data of billable bandwidth and traffic.
      * @param {DescribeBillBandwidthAndFluxListRequest} req
      * @param {function(string, DescribeBillBandwidthAndFluxListResponse):void} cb
      * @public

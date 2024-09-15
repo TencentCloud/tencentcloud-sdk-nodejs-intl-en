@@ -37,6 +37,12 @@ class UpdateDatabaseRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
+         * InstanceId
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * Quota value, which is used to set the quota of data volume or replicas.
          * @type {string || null}
          */
@@ -67,10 +73,10 @@ class UpdateDatabaseRequest extends  AbstractModel {
         this.PassWord = null;
 
         /**
-         * InstanceId
+         * The name of the catalog, if left unspecified, defaults to "internal".
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.CatalogName = null;
 
     }
 
@@ -83,6 +89,7 @@ class UpdateDatabaseRequest extends  AbstractModel {
         }
         this.DbName = 'DbName' in params ? params.DbName : null;
         this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Quota = 'Quota' in params ? params.Quota : null;
         this.NewDbName = 'NewDbName' in params ? params.NewDbName : null;
 
@@ -96,7 +103,7 @@ class UpdateDatabaseRequest extends  AbstractModel {
         }
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
 
     }
 }
@@ -502,7 +509,7 @@ class UpdateTableSchemaResponse extends  AbstractModel {
 
         /**
          * Is it successful
-         * @type {string || null}
+         * @type {boolean || null}
          */
         this.Success = null;
 
@@ -968,18 +975,6 @@ class InsertDatasToTableRequest extends  AbstractModel {
         this.Table = null;
 
         /**
-         * Whether to use the strict mode
-         * @type {boolean || null}
-         */
-        this.Strict = null;
-
-        /**
-         * Maximum filtration ratio, ranging from 0 to 1.0
-         * @type {number || null}
-         */
-        this.MaxFilterRatio = null;
-
-        /**
          * Array of column names
          * @type {Array.<string> || null}
          */
@@ -990,6 +985,31 @@ class InsertDatasToTableRequest extends  AbstractModel {
          * @type {Array.<Rows> || null}
          */
         this.Rows = null;
+
+        /**
+         * Array of column types
+
+         * @type {Array.<string> || null}
+         */
+        this.Types = null;
+
+        /**
+         * InstanceId
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether to use the strict mode
+         * @type {boolean || null}
+         */
+        this.Strict = null;
+
+        /**
+         * Maximum filtration ratio, ranging from 0 to 1.0
+         * @type {number || null}
+         */
+        this.MaxFilterRatio = null;
 
         /**
          * Tags for inserting data
@@ -1010,29 +1030,10 @@ class InsertDatasToTableRequest extends  AbstractModel {
         this.PassWord = null;
 
         /**
-         * Column type, this field has been deprecated, please use Types
-         * @type {string || null}
-         */
-        this.ColumnTypes = null;
-
-        /**
-         * Array of column types
-
-         * @type {Array.<string> || null}
-         */
-        this.Types = null;
-
-        /**
          * Catalog name, defaults to 'internal' if not specified.
          * @type {string || null}
          */
         this.CatalogName = null;
-
-        /**
-         * InstanceId
-         * @type {string || null}
-         */
-        this.InstanceId = null;
 
     }
 
@@ -1045,8 +1046,6 @@ class InsertDatasToTableRequest extends  AbstractModel {
         }
         this.Database = 'Database' in params ? params.Database : null;
         this.Table = 'Table' in params ? params.Table : null;
-        this.Strict = 'Strict' in params ? params.Strict : null;
-        this.MaxFilterRatio = 'MaxFilterRatio' in params ? params.MaxFilterRatio : null;
         this.Columns = 'Columns' in params ? params.Columns : null;
 
         if (params.Rows) {
@@ -1057,13 +1056,14 @@ class InsertDatasToTableRequest extends  AbstractModel {
                 this.Rows.push(obj);
             }
         }
+        this.Types = 'Types' in params ? params.Types : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Strict = 'Strict' in params ? params.Strict : null;
+        this.MaxFilterRatio = 'MaxFilterRatio' in params ? params.MaxFilterRatio : null;
         this.Label = 'Label' in params ? params.Label : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
-        this.ColumnTypes = 'ColumnTypes' in params ? params.ColumnTypes : null;
-        this.Types = 'Types' in params ? params.Types : null;
         this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1112,28 +1112,34 @@ class ModifyDatabaseTableAccessRequest extends  AbstractModel {
         this.Database = null;
 
         /**
-         * Table name. If it is null, it indicates that the entire database is authorized.
-         * @type {string || null}
-         */
-        this.Table = null;
-
-        /**
          * Permission list
          * @type {Array.<string> || null}
          */
         this.Privileges = null;
 
         /**
-         * Role name, if authorized to the role
-         * @type {string || null}
-         */
-        this.Role = null;
-
-        /**
          * Operation type: GRANT or REVOKE
          * @type {string || null}
          */
         this.GrantOrRevoke = null;
+
+        /**
+         * InstanceId
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Table name. If it is null, it indicates that the entire database is authorized.
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Role name, if authorized to the role
+         * @type {string || null}
+         */
+        this.Role = null;
 
         /**
          * Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
@@ -1154,12 +1160,6 @@ class ModifyDatabaseTableAccessRequest extends  AbstractModel {
         this.CatalogName = null;
 
         /**
-         * InstanceId
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
          * Machine Group, defaults to % if not specified.
          * @type {string || null}
          */
@@ -1175,14 +1175,14 @@ class ModifyDatabaseTableAccessRequest extends  AbstractModel {
             return;
         }
         this.Database = 'Database' in params ? params.Database : null;
-        this.Table = 'Table' in params ? params.Table : null;
         this.Privileges = 'Privileges' in params ? params.Privileges : null;
-        this.Role = 'Role' in params ? params.Role : null;
         this.GrantOrRevoke = 'GrantOrRevoke' in params ? params.GrantOrRevoke : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Role = 'Role' in params ? params.Role : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
         this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.WhiteHost = 'WhiteHost' in params ? params.WhiteHost : null;
 
     }
@@ -1936,6 +1936,18 @@ class DescribeQueryAnalyseRequest extends  AbstractModel {
          */
         this.QueryTime = null;
 
+        /**
+         * Page number, defaults to 1.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of records per page, defaults to 10.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
     }
 
     /**
@@ -1957,6 +1969,8 @@ class DescribeQueryAnalyseRequest extends  AbstractModel {
         this.SortField = 'SortField' in params ? params.SortField : null;
         this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
         this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -2991,18 +3005,6 @@ class UpdateTableSchemaRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
-         * @type {string || null}
-         */
-        this.PassWord = null;
-
-        /**
          * Database name
          * @type {string || null}
          */
@@ -3021,16 +3023,28 @@ class UpdateTableSchemaRequest extends  AbstractModel {
         this.Columns = null;
 
         /**
-         * Index information. The inverted index and N-Gram index can be configured through this parameter. The Prefix index is related to the sort key and key column, and do not require additional configuration. Configure bloom_filter_columns in the table attribute when BloomFilter index is required.
-         * @type {Array.<IndexInfo> || null}
-         */
-        this.IndexInfos = null;
-
-        /**
          * Bucket information
          * @type {Distribution || null}
          */
         this.Distribution = null;
+
+        /**
+         * Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+         * @type {string || null}
+         */
+        this.PassWord = null;
+
+        /**
+         * Index information. The inverted index and N-Gram index can be configured through this parameter. The Prefix index is related to the sort key and key column, and do not require additional configuration. Configure bloom_filter_columns in the table attribute when BloomFilter index is required.
+         * @type {Array.<IndexInfo> || null}
+         */
+        this.IndexInfos = null;
 
         /**
          * Table description
@@ -3054,8 +3068,6 @@ class UpdateTableSchemaRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.PassWord = 'PassWord' in params ? params.PassWord : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
         this.TableName = 'TableName' in params ? params.TableName : null;
 
@@ -3068,6 +3080,14 @@ class UpdateTableSchemaRequest extends  AbstractModel {
             }
         }
 
+        if (params.Distribution) {
+            let obj = new Distribution();
+            obj.deserialize(params.Distribution)
+            this.Distribution = obj;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.PassWord = 'PassWord' in params ? params.PassWord : null;
+
         if (params.IndexInfos) {
             this.IndexInfos = new Array();
             for (let z in params.IndexInfos) {
@@ -3075,12 +3095,6 @@ class UpdateTableSchemaRequest extends  AbstractModel {
                 obj.deserialize(params.IndexInfos[z]);
                 this.IndexInfos.push(obj);
             }
-        }
-
-        if (params.Distribution) {
-            let obj = new Distribution();
-            obj.deserialize(params.Distribution)
-            this.Distribution = obj;
         }
         this.TableComment = 'TableComment' in params ? params.TableComment : null;
 
@@ -8020,6 +8034,12 @@ class ExecuteSelectQueryRequest extends  AbstractModel {
         this.Query = null;
 
         /**
+         * InstanceId
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * Page number, which is 1 by default.
          * @type {number || null}
          */
@@ -8050,12 +8070,6 @@ class ExecuteSelectQueryRequest extends  AbstractModel {
          */
         this.CatalogName = null;
 
-        /**
-         * InstanceId
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
     }
 
     /**
@@ -8067,12 +8081,12 @@ class ExecuteSelectQueryRequest extends  AbstractModel {
         }
         this.Database = 'Database' in params ? params.Database : null;
         this.Query = 'Query' in params ? params.Query : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
         this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8843,6 +8857,12 @@ class QueryTableDataRequest extends  AbstractModel {
         this.Table = null;
 
         /**
+         * InstanceId
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * Array of fields to be queried
          * @type {Array.<string> || null}
          */
@@ -8879,12 +8899,6 @@ class QueryTableDataRequest extends  AbstractModel {
          */
         this.CatalogName = null;
 
-        /**
-         * InstanceId
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
     }
 
     /**
@@ -8896,13 +8910,13 @@ class QueryTableDataRequest extends  AbstractModel {
         }
         this.Database = 'Database' in params ? params.Database : null;
         this.Table = 'Table' in params ? params.Table : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SelectedFields = 'SelectedFields' in params ? params.SelectedFields : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
         this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -9782,7 +9796,7 @@ class InsertDatasToTableResponse extends  AbstractModel {
 
         /**
          * Number of inserted data rows
-         * @type {string || null}
+         * @type {number || null}
          */
         this.InsertCount = null;
 
@@ -9936,13 +9950,6 @@ class DescribeInstanceOperationHistoryRequest extends  AbstractModel {
          */
         this.PassWord = null;
 
-        /**
-         * Information, deprecated.
-
-         * @type {string || null}
-         */
-        this.Message = null;
-
     }
 
     /**
@@ -9959,7 +9966,6 @@ class DescribeInstanceOperationHistoryRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
-        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -10265,6 +10271,12 @@ class ExecuteParametrizedQueryRequest extends  AbstractModel {
         this.Sql = null;
 
         /**
+         * InstanceId
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * Query parameter array.
          * @type {Array.<PropertiesMap> || null}
          */
@@ -10300,12 +10312,6 @@ class ExecuteParametrizedQueryRequest extends  AbstractModel {
          */
         this.CatalogName = null;
 
-        /**
-         * InstanceId
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
     }
 
     /**
@@ -10317,6 +10323,7 @@ class ExecuteParametrizedQueryRequest extends  AbstractModel {
         }
         this.Database = 'Database' in params ? params.Database : null;
         this.Sql = 'Sql' in params ? params.Sql : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.QueryParameter) {
             this.QueryParameter = new Array();
@@ -10331,7 +10338,6 @@ class ExecuteParametrizedQueryRequest extends  AbstractModel {
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.PassWord = 'PassWord' in params ? params.PassWord : null;
         this.CatalogName = 'CatalogName' in params ? params.CatalogName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }

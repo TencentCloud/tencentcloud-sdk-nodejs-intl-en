@@ -85,6 +85,286 @@ class DeleteApplicationRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyApplicationProject request structure.
+ * @class
+ */
+class ModifyApplicationProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID returned by cloud.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Project name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Concurrency type required for project operation.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether to Enable Pre-launch.
+         * @type {boolean || null}
+         */
+        this.IsPreload = null;
+
+        /**
+         * Application startup parameters.
+         * @type {string || null}
+         */
+        this.ApplicationParams = null;
+
+        /**
+         * Cloud application project description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Resolution, in the format of widthxheight, such as 1920x1080.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * Frame rate.
+         * @type {number || null}
+         */
+        this.FPS = null;
+
+        /**
+         * Waiting time for application pre-launch.
+         * @type {string || null}
+         */
+        this.PreloadDuration = null;
+
+        /**
+         * Waiting time for reconnection.
+         * @type {string || null}
+         */
+        this.ReconnectTimeout = null;
+
+        /**
+         * Minimum bitrate, in Mbps.
+         * @type {number || null}
+         */
+        this.MinBitrate = null;
+
+        /**
+         * Maximum bitrate, in Mbps.
+         * @type {number || null}
+         */
+        this.MaxBitrate = null;
+
+        /**
+         * Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.
+         * @type {string || null}
+         */
+        this.UpstreamAudioOption = null;
+
+        /**
+         * Video encoding configuration.
+         * @type {VideoEncodeConfig || null}
+         */
+        this.VideoEncodeConfig = null;
+
+        /**
+         * Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.
+         * @type {number || null}
+         */
+        this.XRMaxWidth = null;
+
+        /**
+         * ID of the background image COS file.
+         * @type {string || null}
+         */
+        this.BackgroundImageCOSFileId = null;
+
+        /**
+         * Disabled code list.
+         * @type {Array.<string> || null}
+         */
+        this.DisableVideoCodecs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.IsPreload = 'IsPreload' in params ? params.IsPreload : null;
+        this.ApplicationParams = 'ApplicationParams' in params ? params.ApplicationParams : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.FPS = 'FPS' in params ? params.FPS : null;
+        this.PreloadDuration = 'PreloadDuration' in params ? params.PreloadDuration : null;
+        this.ReconnectTimeout = 'ReconnectTimeout' in params ? params.ReconnectTimeout : null;
+        this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
+        this.MaxBitrate = 'MaxBitrate' in params ? params.MaxBitrate : null;
+        this.UpstreamAudioOption = 'UpstreamAudioOption' in params ? params.UpstreamAudioOption : null;
+
+        if (params.VideoEncodeConfig) {
+            let obj = new VideoEncodeConfig();
+            obj.deserialize(params.VideoEncodeConfig)
+            this.VideoEncodeConfig = obj;
+        }
+        this.XRMaxWidth = 'XRMaxWidth' in params ? params.XRMaxWidth : null;
+        this.BackgroundImageCOSFileId = 'BackgroundImageCOSFileId' in params ? params.BackgroundImageCOSFileId : null;
+        this.DisableVideoCodecs = 'DisableVideoCodecs' in params ? params.DisableVideoCodecs : null;
+
+    }
+}
+
+/**
+ * BindConcurrentPackagesToProject request structure.
+ * @class
+ */
+class BindConcurrentPackagesToProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Concurrency pack ID list.
+         * @type {Array.<string> || null}
+         */
+        this.ConcurrentIds = null;
+
+        /**
+         * Cloud application project ID.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConcurrentIds = 'ConcurrentIds' in params ? params.ConcurrentIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeApplicationList response structure.
+ * @class
+ */
+class DescribeApplicationListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application list information.
+         * @type {Array.<UserApplicationInfo> || null}
+         */
+        this.UserApplicationList = null;
+
+        /**
+         * Total number of applications.
+         * @type {number || null}
+         */
+        this.ApplicationTotal = null;
+
+        /**
+         * Mobile application list information.
+         * @type {Array.<UserMobileApplicationInfo> || null}
+         */
+        this.UserMobileApplicationList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UserApplicationList) {
+            this.UserApplicationList = new Array();
+            for (let z in params.UserApplicationList) {
+                let obj = new UserApplicationInfo();
+                obj.deserialize(params.UserApplicationList[z]);
+                this.UserApplicationList.push(obj);
+            }
+        }
+        this.ApplicationTotal = 'ApplicationTotal' in params ? params.ApplicationTotal : null;
+
+        if (params.UserMobileApplicationList) {
+            this.UserMobileApplicationList = new Array();
+            for (let z in params.UserMobileApplicationList) {
+                let obj = new UserMobileApplicationInfo();
+                obj.deserialize(params.UserMobileApplicationList[z]);
+                this.UserMobileApplicationList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyConcurrentPackage request structure.
+ * @class
+ */
+class ModifyConcurrentPackageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Concurrency pack ID.
+         * @type {string || null}
+         */
+        this.ConcurrentId = null;
+
+        /**
+         * Concurrency pack name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConcurrentId = 'ConcurrentId' in params ? params.ConcurrentId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * Application basic data.
  * @class
  */
@@ -247,24 +527,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyMobileApplicationInfo request structure.
+ * BindConcurrentPackagesToProject response structure.
  * @class
  */
-class ModifyMobileApplicationInfoRequest extends  AbstractModel {
+class BindConcurrentPackagesToProjectResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ApplicationId = null;
-
-        /**
-         * Application name.
-         * @type {string || null}
-         */
-        this.ApplicationName = null;
+        this.RequestId = null;
 
     }
 
@@ -275,8 +549,7 @@ class ModifyMobileApplicationInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -304,6 +577,104 @@ class StartPublishStreamWithURLResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UnbindConcurrentPackagesFromProject response structure.
+ * @class
+ */
+class UnbindConcurrentPackagesFromProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteApplicationVersion request structure.
+ * @class
+ */
+class DeleteApplicationVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Application version ID.
+         * @type {string || null}
+         */
+        this.ApplicationVersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
+
+    }
+}
+
+/**
+ * CreateApplicationProject response structure.
+ * @class
+ */
+class CreateApplicationProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Generated project ID.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -345,24 +716,32 @@ class CreateApplicationSnapshotRequest extends  AbstractModel {
 }
 
 /**
- * DeleteApplicationVersion request structure.
+ * DescribeApplicationProjects response structure.
  * @class
  */
-class DeleteApplicationVersionRequest extends  AbstractModel {
+class DescribeApplicationProjectsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID.
-         * @type {string || null}
+         * Project list.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ApplicationProject> || null}
          */
-        this.ApplicationId = null;
+        this.Projects = null;
 
         /**
-         * Application version ID.
+         * Total number.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ApplicationVersionId = null;
+        this.RequestId = null;
 
     }
 
@@ -373,8 +752,17 @@ class DeleteApplicationVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
+
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new ApplicationProject();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -607,6 +995,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Video encoding configuration.
+ * @class
+ */
+class VideoEncodeConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Streaming GOP length, in seconds.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StreamPushGOPSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamPushGOPSeconds = 'StreamPushGOPSeconds' in params ? params.StreamPushGOPSeconds : null;
+
+    }
+}
+
+/**
  * ModifyMobileApplicationInfo response structure.
  * @class
  */
@@ -746,6 +1162,58 @@ class ModifyApplicationBaseInfoResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeConcurrentPackages response structure.
+ * @class
+ */
+class DescribeConcurrentPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Concurrency pack list.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ApplicationConcurrentPackage> || null}
+         */
+        this.ConcurrentPackages = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.ConcurrentPackages) {
+            this.ConcurrentPackages = new Array();
+            for (let z in params.ConcurrentPackages) {
+                let obj = new ApplicationConcurrentPackage();
+                obj.deserialize(params.ConcurrentPackages[z]);
+                this.ConcurrentPackages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeApplicationVersion request structure.
  * @class
  */
@@ -774,30 +1242,40 @@ class DescribeApplicationVersionRequest extends  AbstractModel {
 }
 
 /**
- * DescribeApplicationList response structure.
+ * DescribeApplicationProjectAdvancedConfig request structure.
  * @class
  */
-class DescribeApplicationListResponse extends  AbstractModel {
+class DescribeApplicationProjectAdvancedConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application list information.
-         * @type {Array.<UserApplicationInfo> || null}
+         * Application project ID.
+         * @type {string || null}
          */
-        this.UserApplicationList = null;
+        this.ProjectId = null;
 
-        /**
-         * Total number of applications.
-         * @type {number || null}
-         */
-        this.ApplicationTotal = null;
+    }
 
-        /**
-         * Mobile application list information.
-         * @type {Array.<UserMobileApplicationInfo> || null}
-         */
-        this.UserMobileApplicationList = null;
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DeleteApplicationProjects response structure.
+ * @class
+ */
+class DeleteApplicationProjectsResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -813,25 +1291,6 @@ class DescribeApplicationListResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.UserApplicationList) {
-            this.UserApplicationList = new Array();
-            for (let z in params.UserApplicationList) {
-                let obj = new UserApplicationInfo();
-                obj.deserialize(params.UserApplicationList[z]);
-                this.UserApplicationList.push(obj);
-            }
-        }
-        this.ApplicationTotal = 'ApplicationTotal' in params ? params.ApplicationTotal : null;
-
-        if (params.UserMobileApplicationList) {
-            this.UserMobileApplicationList = new Array();
-            for (let z in params.UserMobileApplicationList) {
-                let obj = new UserMobileApplicationInfo();
-                obj.deserialize(params.UserMobileApplicationList[z]);
-                this.UserMobileApplicationList.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1014,6 +1473,159 @@ class DescribeConcurrentCountRequest extends  AbstractModel {
 }
 
 /**
+ * Cloud application project type.
+ * @class
+ */
+class ApplicationProject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Project name.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Project description.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Concurrency type required for project operation.S1: concurrency for rendering small cloud applications.M1: concurrency for rendering medium cloud applications.L1: concurrency for rendering large cloud applications.L2: concurrency for rendering large cloud applications.XL2: concurrency for rendering extra large cloud applications.MM1_HD: concurrency for performance-based cloud ARM (HD).MM1_FHD: concurrency for performance-based cloud ARM (FHD).Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Cloud application ID.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Pre-launch.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsPreload = null;
+
+        /**
+         * Number of concurrencies already configured.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Amount = null;
+
+        /**
+         * Number of concurrencies in use.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Using = null;
+
+        /**
+         * Application status. NoConcurrent: no concurrency pack configured; Online: activated. Cloud application status: applicationCreating: creating; applicationCreateFail: creation failed; applicationDeleting: deleting; applicationNoConfigured: startup parameters not configured.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * Application startup parameters.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationParams = null;
+
+        /**
+         * Creation time.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Application name.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * Resolution, in the format of widthxheight, such as 1920x1080.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * Project type.SHARED: shared by all applications.EXCLUSIVE (default value): dedicated for one application.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectType = null;
+
+        /**
+         * Purpose.EXPERIENCE: Experience.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Purpose = null;
+
+        /**
+         * Application distribution area. Standard areas are as follows. ap-chinese-mainland: Chinese mainland; na-north-america: North America; eu-frankfurt: Frankfurt; ap-mumbai: Mumbai; ap-tokyo: Tokyo; ap-seoul: Seoul; ap-singapore: Singapore; ap-bangkok: Bangkok; ap-hongkong: Hong Kong (China). Fusion areas are as follows. me-middle-east-fusion: Middle East; na-north-america-fusion: North America; sa-south-america-fusion: South America; ap-tokyo-fusion: Tokyo; ap-seoul-fusion: Seoul; eu-frankfurt-fusion: Frankfurt; ap-singapore-fusion: Singapore; ap-hongkong-fusion: Hong Kong (China).Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationRegions = null;
+
+        /**
+         * Concurrency area. Standard areas are as follows. ap-chinese-mainland: Chinese mainland; na-north-america: North America; eu-frankfurt: Frankfurt; ap-mumbai: Mumbai; ap-tokyo: Tokyo; ap-seoul: Seoul; ap-singapore: Singapore; ap-bangkok: Bangkok; ap-hongkong: Hong Kong (China). Fusion areas are as follows. me-middle-east-fusion: Middle East; na-north-america-fusion: North America; sa-south-america-fusion: South America; ap-tokyo-fusion: Tokyo; ap-seoul-fusion: Seoul; eu-frankfurt-fusion: Frankfurt; ap-singapore-fusion: Singapore; ap-hongkong-fusion: Hong Kong (China).Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ConcurrentRegions = null;
+
+        /**
+         * Project category.DESKTOP: desktop (default value).MOBILE: mobile.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectCategory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.IsPreload = 'IsPreload' in params ? params.IsPreload : null;
+        this.Amount = 'Amount' in params ? params.Amount : null;
+        this.Using = 'Using' in params ? params.Using : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.ApplicationParams = 'ApplicationParams' in params ? params.ApplicationParams : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
+        this.Purpose = 'Purpose' in params ? params.Purpose : null;
+        this.ApplicationRegions = 'ApplicationRegions' in params ? params.ApplicationRegions : null;
+        this.ConcurrentRegions = 'ConcurrentRegions' in params ? params.ConcurrentRegions : null;
+        this.ProjectCategory = 'ProjectCategory' in params ? params.ProjectCategory : null;
+
+    }
+}
+
+/**
  * DeleteApplicationVersion response structure.
  * @class
  */
@@ -1037,6 +1649,27 @@ class DeleteApplicationVersionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConcurrentSummary request structure.
+ * @class
+ */
+class DescribeConcurrentSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1128,6 +1761,186 @@ class StopPublishStreamResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateApplicationProject request structure.
+ * @class
+ */
+class CreateApplicationProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project name, which is user-defined.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Bound application ID.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Concurrency type required for project operation.S1: concurrency for rendering small cloud applications.M1: concurrency for rendering medium cloud applications.L1: concurrency for rendering large cloud applications.L2: concurrency for rendering large cloud applications.XL2: concurrency for rendering extra large cloud applications.MM1_HD: concurrency for performance-based cloud ARM (HD).MM1_FHD: concurrency for performance-based cloud ARM (FHD).
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether to enable warm-up. The default value is false.
+         * @type {boolean || null}
+         */
+        this.IsPreload = null;
+
+        /**
+         * Application startup parameters.
+         * @type {string || null}
+         */
+        this.ApplicationParams = null;
+
+        /**
+         * Resolution, in the format of widthxheight, such as 1920x1080.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * Project type.SHARED: shared by all applications.EXCLUSIVE (default value): dedicated for one application.
+         * @type {string || null}
+         */
+        this.ProjectType = null;
+
+        /**
+         * Frame rate.
+         * @type {number || null}
+         */
+        this.FPS = null;
+
+        /**
+         * Waiting time for application pre-launch.
+         * @type {string || null}
+         */
+        this.PreloadDuration = null;
+
+        /**
+         * Waiting time for reconnection.
+         * @type {string || null}
+         */
+        this.ReconnectTimeout = null;
+
+        /**
+         * Minimum bitrate, in Mbps.
+         * @type {number || null}
+         */
+        this.MinBitrate = null;
+
+        /**
+         * Maximum bitrate, in Mbps.
+         * @type {number || null}
+         */
+        this.MaxBitrate = null;
+
+        /**
+         * Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.
+         * @type {string || null}
+         */
+        this.UpstreamAudioOption = null;
+
+        /**
+         * Video encoding configuration.
+         * @type {VideoEncodeConfig || null}
+         */
+        this.VideoEncodeConfig = null;
+
+        /**
+         * Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.
+         * @type {number || null}
+         */
+        this.XRMaxWidth = null;
+
+        /**
+         * ID of the background image COS file.
+         * @type {string || null}
+         */
+        this.BackgroundImageCOSFileId = null;
+
+        /**
+         * Project category.DESKTOP: desktop (default value).MOBILE: mobile.
+         * @type {string || null}
+         */
+        this.ProjectCategory = null;
+
+        /**
+         * Disabled code list.
+         * @type {Array.<string> || null}
+         */
+        this.DisableVideoCodecs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.IsPreload = 'IsPreload' in params ? params.IsPreload : null;
+        this.ApplicationParams = 'ApplicationParams' in params ? params.ApplicationParams : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
+        this.FPS = 'FPS' in params ? params.FPS : null;
+        this.PreloadDuration = 'PreloadDuration' in params ? params.PreloadDuration : null;
+        this.ReconnectTimeout = 'ReconnectTimeout' in params ? params.ReconnectTimeout : null;
+        this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
+        this.MaxBitrate = 'MaxBitrate' in params ? params.MaxBitrate : null;
+        this.UpstreamAudioOption = 'UpstreamAudioOption' in params ? params.UpstreamAudioOption : null;
+
+        if (params.VideoEncodeConfig) {
+            let obj = new VideoEncodeConfig();
+            obj.deserialize(params.VideoEncodeConfig)
+            this.VideoEncodeConfig = obj;
+        }
+        this.XRMaxWidth = 'XRMaxWidth' in params ? params.XRMaxWidth : null;
+        this.BackgroundImageCOSFileId = 'BackgroundImageCOSFileId' in params ? params.BackgroundImageCOSFileId : null;
+        this.ProjectCategory = 'ProjectCategory' in params ? params.ProjectCategory : null;
+        this.DisableVideoCodecs = 'DisableVideoCodecs' in params ? params.DisableVideoCodecs : null;
+
+    }
+}
+
+/**
+ * StopPublishStream request structure.
+ * @class
+ */
+class StopPublishStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique user ID, which is customized by you and is not parsed by CAR. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -1331,6 +2144,34 @@ class DescribeApplicationPathListRequest extends  AbstractModel {
 }
 
 /**
+ * ResetConcurrentPackages request structure.
+ * @class
+ */
+class ResetConcurrentPackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Concurrency pack ID array.
+         * @type {Array.<string> || null}
+         */
+        this.ConcurrentPackageIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConcurrentPackageIds = 'ConcurrentPackageIds' in params ? params.ConcurrentPackageIds : null;
+
+    }
+}
+
+/**
  * StartPublishStream response structure.
  * @class
  */
@@ -1388,6 +2229,87 @@ class CreateSessionResponse extends  AbstractModel {
             return;
         }
         this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Background image information.
+ * @class
+ */
+class BackgroundImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the COS file.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.COSFileId = null;
+
+        /**
+         * Download URL.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.URL = null;
+
+        /**
+         * Name
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Creation time.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.COSFileId = 'COSFileId' in params ? params.COSFileId : null;
+        this.URL = 'URL' in params ? params.URL : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * ModifyApplicationProject response structure.
+ * @class
+ */
+class ModifyApplicationProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1481,6 +2403,118 @@ class StartPublishStreamRequest extends  AbstractModel {
         }
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.PublishStreamArgs = 'PublishStreamArgs' in params ? params.PublishStreamArgs : null;
+
+    }
+}
+
+/**
+ * ModifyConcurrentPackage response structure.
+ * @class
+ */
+class ModifyConcurrentPackageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UnbindConcurrentPackagesFromProject request structure.
+ * @class
+ */
+class UnbindConcurrentPackagesFromProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Concurrency pack ID list.
+         * @type {Array.<string> || null}
+         */
+        this.ConcurrentIds = null;
+
+        /**
+         * Cloud application project ID.
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConcurrentIds = 'ConcurrentIds' in params ? params.ConcurrentIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * Application status information.
+ * @class
+ */
+class UserApplicationStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Application running status (ApplicationDeleting: application deletion in progress; ApplicationCreateFail: application creation failed; ApplicationCreating: application creation in progress; ApplicationRunning: normal running; ApplicationNoConfigured: main execution program path not configured; ApplicationNoPackage: no available package).
+         * @type {string || null}
+         */
+        this.ApplicationRunStatus = null;
+
+        /**
+         * Application update status (ApplicationUpdateCreating: version creation in progress; ApplicationUpdateCreateFail: version creation failed; ApplicationUpdateNoReleased: version to be released; ApplicationUpdateReleased: version release completed; ApplicationUpdateNormal: none).
+         * @type {string || null}
+         */
+        this.ApplicationUpdateStatus = null;
+
+        /**
+         * Application update progress.
+         * @type {number || null}
+         */
+        this.ApplicationUpdateProgress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationRunStatus = 'ApplicationRunStatus' in params ? params.ApplicationRunStatus : null;
+        this.ApplicationUpdateStatus = 'ApplicationUpdateStatus' in params ? params.ApplicationUpdateStatus : null;
+        this.ApplicationUpdateProgress = 'ApplicationUpdateProgress' in params ? params.ApplicationUpdateProgress : null;
 
     }
 }
@@ -1654,36 +2688,18 @@ class DeleteApplicationResponse extends  AbstractModel {
 }
 
 /**
- * Application status information.
+ * DeleteApplicationProjects request structure.
  * @class
  */
-class UserApplicationStatus extends  AbstractModel {
+class DeleteApplicationProjectsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID.
-         * @type {string || null}
+         * ID list of cloud application projects.
+         * @type {Array.<string> || null}
          */
-        this.ApplicationId = null;
-
-        /**
-         * Application running status (ApplicationDeleting: application deletion in progress; ApplicationCreateFail: application creation failed; ApplicationCreating: application creation in progress; ApplicationRunning: normal running; ApplicationNoConfigured: main execution program path not configured; ApplicationNoPackage: no available package).
-         * @type {string || null}
-         */
-        this.ApplicationRunStatus = null;
-
-        /**
-         * Application update status (ApplicationUpdateCreating: version creation in progress; ApplicationUpdateCreateFail: version creation failed; ApplicationUpdateNoReleased: version to be released; ApplicationUpdateReleased: version release completed; ApplicationUpdateNormal: none).
-         * @type {string || null}
-         */
-        this.ApplicationUpdateStatus = null;
-
-        /**
-         * Application update progress.
-         * @type {number || null}
-         */
-        this.ApplicationUpdateProgress = null;
+        this.ProjectIds = null;
 
     }
 
@@ -1694,27 +2710,36 @@ class UserApplicationStatus extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationRunStatus = 'ApplicationRunStatus' in params ? params.ApplicationRunStatus : null;
-        this.ApplicationUpdateStatus = 'ApplicationUpdateStatus' in params ? params.ApplicationUpdateStatus : null;
-        this.ApplicationUpdateProgress = 'ApplicationUpdateProgress' in params ? params.ApplicationUpdateProgress : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
 
     }
 }
 
 /**
- * StopPublishStream request structure.
+ * DescribeConcurrentPackages request structure.
  * @class
  */
-class StopPublishStreamRequest extends  AbstractModel {
+class DescribeConcurrentPackagesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique user ID, which is customized by you and is not parsed by CAR. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-         * @type {string || null}
+         * Subscript.
+         * @type {number || null}
          */
-        this.UserId = null;
+        this.Offset = null;
+
+        /**
+         * Number of entries per page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter List
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -1725,7 +2750,59 @@ class StopPublishStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeConcurrentSummary response structure.
+ * @class
+ */
+class DescribeConcurrentSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of prepaid (monthly subscription) concurrencies.
+         * @type {number || null}
+         */
+        this.PrepaidConcurrentTotal = null;
+
+        /**
+         * Remaining duration of an hourly package.
+         * @type {string || null}
+         */
+        this.HourlyRemainDuration = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PrepaidConcurrentTotal = 'PrepaidConcurrentTotal' in params ? params.PrepaidConcurrentTotal : null;
+        this.HourlyRemainDuration = 'HourlyRemainDuration' in params ? params.HourlyRemainDuration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1766,26 +2843,24 @@ class CreateApplicationResponse extends  AbstractModel {
 }
 
 /**
- * Application file information.
+ * StartPublishStreamWithURL request structure.
  * @class
  */
-class UserApplicationFileInfo extends  AbstractModel {
+class StartPublishStreamWithURLRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application file path.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Unique user ID, which is customized by you and is not parsed by CAR.
          * @type {string || null}
          */
-        this.FilePath = null;
+        this.UserId = null;
 
         /**
-         * File status. NO_EXIST: The file does not exist; EXIST: The file exists.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Streaming address. Only RTMP is supported for streaming currently.
          * @type {string || null}
          */
-        this.FileState = null;
+        this.PublishStreamURL = null;
 
     }
 
@@ -1796,8 +2871,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FilePath = 'FilePath' in params ? params.FilePath : null;
-        this.FileState = 'FileState' in params ? params.FileState : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PublishStreamURL = 'PublishStreamURL' in params ? params.PublishStreamURL : null;
+
+    }
+}
+
+/**
+ * ResetConcurrentPackages response structure.
+ * @class
+ */
+class ResetConcurrentPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1897,24 +3000,92 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * StartPublishStreamWithURL request structure.
+ * DescribeApplicationProjectAdvancedConfig response structure.
  * @class
  */
-class StartPublishStreamWithURLRequest extends  AbstractModel {
+class DescribeApplicationProjectAdvancedConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique user ID, which is customized by you and is not parsed by CAR.
+         * Application startup parameters.
+
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.UserId = null;
+        this.ApplicationParams = null;
 
         /**
-         * Streaming address. Only RTMP is supported for streaming currently.
+         * Resolution, in the format of widthxheight, such as 1920x1080.Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.PublishStreamURL = null;
+        this.Resolution = null;
+
+        /**
+         * Frame rate. Valid values: 0, 30, 60.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FPS = null;
+
+        /**
+         * Minimum bitrate, in Mbps.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinBitrate = null;
+
+        /**
+         * Maximum bitrate, in Mbps.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxBitrate = null;
+
+        /**
+         * Waiting time for application pre-launch.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PreloadDuration = null;
+
+        /**
+         * Waiting time for reconnection.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReconnectTimeout = null;
+
+        /**
+         * Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpstreamAudioOption = null;
+
+        /**
+         * Video encoding configuration.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoEncodeConfig || null}
+         */
+        this.VideoEncodeConfig = null;
+
+        /**
+         * Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.XRMaxWidth = null;
+
+        /**
+         * Background image information.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {BackgroundImage || null}
+         */
+        this.BackgroundImage = null;
+
+        /**
+         * Disabled code list.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DisableVideoCodecs = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1925,8 +3096,29 @@ class StartPublishStreamWithURLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.PublishStreamURL = 'PublishStreamURL' in params ? params.PublishStreamURL : null;
+        this.ApplicationParams = 'ApplicationParams' in params ? params.ApplicationParams : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.FPS = 'FPS' in params ? params.FPS : null;
+        this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
+        this.MaxBitrate = 'MaxBitrate' in params ? params.MaxBitrate : null;
+        this.PreloadDuration = 'PreloadDuration' in params ? params.PreloadDuration : null;
+        this.ReconnectTimeout = 'ReconnectTimeout' in params ? params.ReconnectTimeout : null;
+        this.UpstreamAudioOption = 'UpstreamAudioOption' in params ? params.UpstreamAudioOption : null;
+
+        if (params.VideoEncodeConfig) {
+            let obj = new VideoEncodeConfig();
+            obj.deserialize(params.VideoEncodeConfig)
+            this.VideoEncodeConfig = obj;
+        }
+        this.XRMaxWidth = 'XRMaxWidth' in params ? params.XRMaxWidth : null;
+
+        if (params.BackgroundImage) {
+            let obj = new BackgroundImage();
+            obj.deserialize(params.BackgroundImage)
+            this.BackgroundImage = obj;
+        }
+        this.DisableVideoCodecs = 'DisableVideoCodecs' in params ? params.DisableVideoCodecs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2059,6 +3251,78 @@ class ApplyConcurrentRequest extends  AbstractModel {
 }
 
 /**
+ * Application file information.
+ * @class
+ */
+class UserApplicationFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application file path.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * File status. NO_EXIST: The file does not exist; EXIST: The file exists.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileState = 'FileState' in params ? params.FileState : null;
+
+    }
+}
+
+/**
+ * ModifyMobileApplicationInfo request structure.
+ * @class
+ */
+class ModifyMobileApplicationInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Application name.
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+
+    }
+}
+
+/**
  * DescribeConcurrentCount response structure.
  * @class
  */
@@ -2164,30 +3428,12 @@ class DescribeApplicationFileInfoRequest extends  AbstractModel {
 }
 
 /**
- * ModifyApplicationVersion request structure.
+ * Cloud application concurrency packs.
  * @class
  */
-class ModifyApplicationVersionRequest extends  AbstractModel {
+class ApplicationConcurrentPackage extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Application ID.
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * Application version ID.
-         * @type {string || null}
-         */
-        this.ApplicationVersionId = null;
-
-        /**
-         * Application version name.
-         * @type {string || null}
-         */
-        this.ApplicationVersionName = null;
 
     }
 
@@ -2198,9 +3444,6 @@ class ModifyApplicationVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
-        this.ApplicationVersionName = 'ApplicationVersionName' in params ? params.ApplicationVersionName : null;
 
     }
 }
@@ -2266,58 +3509,183 @@ Note: This field may return null, indicating that no valid values can be obtaine
     }
 }
 
+/**
+ * ModifyApplicationVersion request structure.
+ * @class
+ */
+class ModifyApplicationVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Application version ID.
+         * @type {string || null}
+         */
+        this.ApplicationVersionId = null;
+
+        /**
+         * Application version name.
+         * @type {string || null}
+         */
+        this.ApplicationVersionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
+        this.ApplicationVersionName = 'ApplicationVersionName' in params ? params.ApplicationVersionName : null;
+
+    }
+}
+
+/**
+ * DescribeApplicationProjects request structure.
+ * @class
+ */
+class DescribeApplicationProjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subscript.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Project category.DESKTOP: desktop (default value).MOBILE: mobile.
+         * @type {string || null}
+         */
+        this.ProjectCategory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.ProjectCategory = 'ProjectCategory' in params ? params.ProjectCategory : null;
+
+    }
+}
+
 module.exports = {
     CreateApplicationVersionResponse: CreateApplicationVersionResponse,
     DeleteApplicationRequest: DeleteApplicationRequest,
+    ModifyApplicationProjectRequest: ModifyApplicationProjectRequest,
+    BindConcurrentPackagesToProjectRequest: BindConcurrentPackagesToProjectRequest,
+    DescribeApplicationListResponse: DescribeApplicationListResponse,
+    ModifyConcurrentPackageRequest: ModifyConcurrentPackageRequest,
     ApplicationBaseInfo: ApplicationBaseInfo,
     CreateSessionRequest: CreateSessionRequest,
     DescribeApplicationPathListResponse: DescribeApplicationPathListResponse,
-    ModifyMobileApplicationInfoRequest: ModifyMobileApplicationInfoRequest,
+    BindConcurrentPackagesToProjectResponse: BindConcurrentPackagesToProjectResponse,
     StartPublishStreamWithURLResponse: StartPublishStreamWithURLResponse,
-    CreateApplicationSnapshotRequest: CreateApplicationSnapshotRequest,
+    UnbindConcurrentPackagesFromProjectResponse: UnbindConcurrentPackagesFromProjectResponse,
     DeleteApplicationVersionRequest: DeleteApplicationVersionRequest,
+    CreateApplicationProjectResponse: CreateApplicationProjectResponse,
+    CreateApplicationSnapshotRequest: CreateApplicationSnapshotRequest,
+    DescribeApplicationProjectsResponse: DescribeApplicationProjectsResponse,
     UserMobileApplicationInfo: UserMobileApplicationInfo,
     Filter: Filter,
     SetApplicationVersionOnlineRequest: SetApplicationVersionOnlineRequest,
     CreateApplicationSnapshotResponse: CreateApplicationSnapshotResponse,
     DescribeApplicationFileInfoResponse: DescribeApplicationFileInfoResponse,
+    VideoEncodeConfig: VideoEncodeConfig,
     ModifyMobileApplicationInfoResponse: ModifyMobileApplicationInfoResponse,
     ModifyApplicationBaseInfoRequest: ModifyApplicationBaseInfoRequest,
     ModifyApplicationBaseInfoResponse: ModifyApplicationBaseInfoResponse,
+    DescribeConcurrentPackagesResponse: DescribeConcurrentPackagesResponse,
     DescribeApplicationVersionRequest: DescribeApplicationVersionRequest,
-    DescribeApplicationListResponse: DescribeApplicationListResponse,
+    DescribeApplicationProjectAdvancedConfigRequest: DescribeApplicationProjectAdvancedConfigRequest,
+    DeleteApplicationProjectsResponse: DeleteApplicationProjectsResponse,
     DescribeCosCredentialResponse: DescribeCosCredentialResponse,
     DescribeApplicationStatusRequest: DescribeApplicationStatusRequest,
     CreateApplicationRequest: CreateApplicationRequest,
     DescribeConcurrentCountRequest: DescribeConcurrentCountRequest,
+    ApplicationProject: ApplicationProject,
     DeleteApplicationVersionResponse: DeleteApplicationVersionResponse,
+    DescribeConcurrentSummaryRequest: DescribeConcurrentSummaryRequest,
     ModifyApplicationVersionResponse: ModifyApplicationVersionResponse,
     DescribeCosCredentialRequest: DescribeCosCredentialRequest,
     StopPublishStreamResponse: StopPublishStreamResponse,
+    CreateApplicationProjectRequest: CreateApplicationProjectRequest,
+    StopPublishStreamRequest: StopPublishStreamRequest,
     CreateApplicationVersionRequest: CreateApplicationVersionRequest,
     DescribeApplicationStatusResponse: DescribeApplicationStatusResponse,
     DestroySessionResponse: DestroySessionResponse,
     DescribeApplicationVersionResponse: DescribeApplicationVersionResponse,
     DescribeApplicationPathListRequest: DescribeApplicationPathListRequest,
+    ResetConcurrentPackagesRequest: ResetConcurrentPackagesRequest,
     StartPublishStreamResponse: StartPublishStreamResponse,
     CreateSessionResponse: CreateSessionResponse,
+    BackgroundImage: BackgroundImage,
+    ModifyApplicationProjectResponse: ModifyApplicationProjectResponse,
     DescribeApplicationListRequest: DescribeApplicationListRequest,
     StartPublishStreamRequest: StartPublishStreamRequest,
+    ModifyConcurrentPackageResponse: ModifyConcurrentPackageResponse,
+    UnbindConcurrentPackagesFromProjectRequest: UnbindConcurrentPackagesFromProjectRequest,
+    UserApplicationStatus: UserApplicationStatus,
     UserApplicationInfo: UserApplicationInfo,
     DeleteApplicationResponse: DeleteApplicationResponse,
-    UserApplicationStatus: UserApplicationStatus,
-    StopPublishStreamRequest: StopPublishStreamRequest,
+    DeleteApplicationProjectsRequest: DeleteApplicationProjectsRequest,
+    DescribeConcurrentPackagesRequest: DescribeConcurrentPackagesRequest,
+    DescribeConcurrentSummaryResponse: DescribeConcurrentSummaryResponse,
     CreateApplicationResponse: CreateApplicationResponse,
-    UserApplicationFileInfo: UserApplicationFileInfo,
-    UserApplicationVersion: UserApplicationVersion,
     StartPublishStreamWithURLRequest: StartPublishStreamWithURLRequest,
+    ResetConcurrentPackagesResponse: ResetConcurrentPackagesResponse,
+    UserApplicationVersion: UserApplicationVersion,
+    DescribeApplicationProjectAdvancedConfigResponse: DescribeApplicationProjectAdvancedConfigResponse,
     ApplyConcurrentResponse: ApplyConcurrentResponse,
     SetApplicationVersionOnlineResponse: SetApplicationVersionOnlineResponse,
     ApplyConcurrentRequest: ApplyConcurrentRequest,
+    UserApplicationFileInfo: UserApplicationFileInfo,
+    ModifyMobileApplicationInfoRequest: ModifyMobileApplicationInfoRequest,
     DescribeConcurrentCountResponse: DescribeConcurrentCountResponse,
     DestroySessionRequest: DestroySessionRequest,
     DescribeApplicationFileInfoRequest: DescribeApplicationFileInfoRequest,
-    ModifyApplicationVersionRequest: ModifyApplicationVersionRequest,
+    ApplicationConcurrentPackage: ApplicationConcurrentPackage,
     UserApplicationStore: UserApplicationStore,
+    ModifyApplicationVersionRequest: ModifyApplicationVersionRequest,
+    DescribeApplicationProjectsRequest: DescribeApplicationProjectsRequest,
 
 }

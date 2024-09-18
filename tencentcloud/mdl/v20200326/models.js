@@ -45,30 +45,24 @@ class DeleteStreamLiveChannelResponse extends  AbstractModel {
 }
 
 /**
- * Pipeline input video statistics.
+ * 
  * @class
  */
-class VideoPipelineInputStatistics extends  AbstractModel {
+class VideoEnhanceSetting extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video FPS.
-         * @type {number || null}
+         * 
+         * @type {string || null}
          */
-        this.Fps = null;
+        this.Type = null;
 
         /**
-         * Video bitrate in bps.
+         * 
          * @type {number || null}
          */
-        this.Rate = null;
-
-        /**
-         * Video `Pid`, which is available only if the input is `rtp/udp`.
-         * @type {number || null}
-         */
-        this.Pid = null;
+        this.Strength = null;
 
     }
 
@@ -79,9 +73,8 @@ class VideoPipelineInputStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Strength = 'Strength' in params ? params.Strength : null;
 
     }
 }
@@ -1230,7 +1223,7 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.VideoBitrate = null;
 
         /**
-         * Bitrate control mode. Valid values: `CBR`, `ABR` (default)
+         * Bitrate control mode. Valid values: `CBR`, `ABR` (default), `VBR`.
          * @type {string || null}
          */
         this.RateControlMode = null;
@@ -1343,6 +1336,18 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
          */
         this.AudioTracks = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.VideoEnhanceEnabled = null;
+
+        /**
+         * 
+         * @type {Array.<VideoEnhanceSetting> || null}
+         */
+        this.VideoEnhanceSettings = null;
+
     }
 
     /**
@@ -1408,6 +1413,16 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
                 let obj = new AudioTrackInfo();
                 obj.deserialize(params.AudioTracks[z]);
                 this.AudioTracks.push(obj);
+            }
+        }
+        this.VideoEnhanceEnabled = 'VideoEnhanceEnabled' in params ? params.VideoEnhanceEnabled : null;
+
+        if (params.VideoEnhanceSettings) {
+            this.VideoEnhanceSettings = new Array();
+            for (let z in params.VideoEnhanceSettings) {
+                let obj = new VideoEnhanceSetting();
+                obj.deserialize(params.VideoEnhanceSettings[z]);
+                this.VideoEnhanceSettings.push(obj);
             }
         }
 
@@ -1657,9 +1672,13 @@ class ModifyStreamLiveInputRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * Input settings
-For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+         * Input settings. 
+For the type:
+`RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`,`RTSP_PULL`,`SRT_PULL` or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+For the type:
+`SRT_PUSH`, 0 or 2 inputs of the corresponding type can be configured.
 This parameter can be left empty for RTP_PUSH and UDP_PUSH inputs.
+
 Note: If this parameter is not specified or empty, the original input settings will be used.
          * @type {Array.<InputSettingInfo> || null}
          */
@@ -1994,7 +2013,14 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.SDMCSettings = null;
 
         /**
-         * The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`, `PLAYREADY`. For HLS, this can be `FAIRPLAY` or `AES128` or `PLAYREADY`. For DASH, valid values: `WIDEVINE` or `PLAYREADY`. 
+         * Optional Types:
+`FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`
+
+HLS-TS supports `FAIRPLAY` and `AES128`.
+
+HLS-FMP4 supports `FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`, and combinations of two or three from `FAIRPLAY`, `WIDEVINE`, and `PLAYREADY` (concatenated with commas, e.g., "FAIRPLAY,WIDEVINE,PLAYREADY").
+
+DASH supports `WIDEVINE`, `PLAYREADY`, and combinations of `PLAYREADY` and `WIDEVINE` (concatenated with commas, e.g., "PLAYREADY,WIDEVINE").
          * @type {string || null}
          */
         this.DrmType = null;
@@ -2887,7 +2913,7 @@ class VideoTemplateInfo extends  AbstractModel {
         this.BitrateCompressionRatio = null;
 
         /**
-         * Bitrate control mode. Valid values: `CBR`, `ABR` (default)
+         * Bitrate control mode. Valid values: `CBR`, `ABR` (default), `VBR`.
          * @type {string || null}
          */
         this.RateControlMode = null;
@@ -2947,6 +2973,18 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.VideoCodecDetails = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.VideoEnhanceEnabled = null;
+
+        /**
+         * 
+         * @type {Array.<VideoEnhanceSetting> || null}
+         */
+        this.VideoEnhanceSettings = null;
+
     }
 
     /**
@@ -2983,6 +3021,16 @@ Note: This field may return `null`, indicating that no valid value was found.
             let obj = new VideoCodecDetail();
             obj.deserialize(params.VideoCodecDetails)
             this.VideoCodecDetails = obj;
+        }
+        this.VideoEnhanceEnabled = 'VideoEnhanceEnabled' in params ? params.VideoEnhanceEnabled : null;
+
+        if (params.VideoEnhanceSettings) {
+            this.VideoEnhanceSettings = new Array();
+            for (let z in params.VideoEnhanceSettings) {
+                let obj = new VideoEnhanceSetting();
+                obj.deserialize(params.VideoEnhanceSettings[z]);
+                this.VideoEnhanceSettings.push(obj);
+            }
         }
 
     }
@@ -3637,7 +3685,7 @@ class HlsRemuxSettingsInfo extends  AbstractModel {
         this.SegmentDuration = null;
 
         /**
-         * Number of segments. Value range: [1,30]. Default value: 5.
+         * Number of segments. Value range: [3,30]. Default value: 5.
          * @type {number || null}
          */
         this.SegmentNumber = null;
@@ -5252,7 +5300,7 @@ class PlanResp extends  AbstractModel {
 }
 
 /**
- * 
+ * Special configuration information for audio transcoding.
  * @class
  */
 class AudioNormalizationSettings extends  AbstractModel {
@@ -5260,13 +5308,13 @@ class AudioNormalizationSettings extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable special configuration for audio transcoding: 1: Enable 0: Disable, the default value is 0.
          * @type {number || null}
          */
         this.AudioNormalizationEnabled = null;
 
         /**
-         * 
+         * Loudness value, floating-point number, rounded to one decimal place, range -5 to -70.
          * @type {number || null}
          */
         this.TargetLUFS = null;
@@ -5560,6 +5608,48 @@ class EventSettingsDestinationReq extends  AbstractModel {
             return;
         }
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * Pipeline input video statistics.
+ * @class
+ */
+class VideoPipelineInputStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video FPS.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Video bitrate in bps.
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * Video `Pid`, which is available only if the input is `rtp/udp`.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -6310,7 +6400,7 @@ class StreamLiveOutputGroupsInfo extends  AbstractModel {
 
         /**
          * Output protocol
-Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`
+Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `DASH_ARCHIVE`,`HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`,`RTP`,`RTMP`.
          * @type {string || null}
          */
         this.Type = null;
@@ -8075,8 +8165,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.DelayTime = null;
 
         /**
-         * The domain of an SRT_PUSH address. If this is a request parameter, you don’t need to specify it.
-Note: This field may return `null`, indicating that no valid value was found.
+         * The domain name of the SRT_PUSH push address. No need to fill in the input parameter.
          * @type {string || null}
          */
         this.InputDomain = null;
@@ -8094,6 +8183,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.Password = null;
+
+        /**
+         * This parameter is valid when the input source is HLS_PULL and MP4_PULL. It indicates the type of file the source is. The optional values are: LIVE, VOD. Please note that if you do not enter this parameter, the system will take the default input value VOD.
+         * @type {string || null}
+         */
+        this.ContentType = null;
 
     }
 
@@ -8113,6 +8208,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.InputDomain = 'InputDomain' in params ? params.InputDomain : null;
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
 
     }
 }
@@ -8203,7 +8299,7 @@ class DeleteStreamLiveChannelRequest extends  AbstractModel {
 
 module.exports = {
     DeleteStreamLiveChannelResponse: DeleteStreamLiveChannelResponse,
-    VideoPipelineInputStatistics: VideoPipelineInputStatistics,
+    VideoEnhanceSetting: VideoEnhanceSetting,
     AudioTrackInfo: AudioTrackInfo,
     CreateStreamLiveInputSecurityGroupResponse: CreateStreamLiveInputSecurityGroupResponse,
     InputLossBehaviorInfo: InputLossBehaviorInfo,
@@ -8301,6 +8397,7 @@ module.exports = {
     DescribeStreamLiveChannelOutputStatisticsResponse: DescribeStreamLiveChannelOutputStatisticsResponse,
     DescribeWatermarkInfo: DescribeWatermarkInfo,
     EventSettingsDestinationReq: EventSettingsDestinationReq,
+    VideoPipelineInputStatistics: VideoPipelineInputStatistics,
     EventSettingsReq: EventSettingsReq,
     DrmKey: DrmKey,
     EventSettingsDestinationResp: EventSettingsDestinationResp,

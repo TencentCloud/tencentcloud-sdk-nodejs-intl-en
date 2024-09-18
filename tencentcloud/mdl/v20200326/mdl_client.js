@@ -17,7 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteStreamLiveChannelResponse = models.DeleteStreamLiveChannelResponse;
-const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
+const VideoEnhanceSetting = models.VideoEnhanceSetting;
 const AudioTrackInfo = models.AudioTrackInfo;
 const CreateStreamLiveInputSecurityGroupResponse = models.CreateStreamLiveInputSecurityGroupResponse;
 const InputLossBehaviorInfo = models.InputLossBehaviorInfo;
@@ -115,6 +115,7 @@ const CreateStreamLiveInputSecurityGroupRequest = models.CreateStreamLiveInputSe
 const DescribeStreamLiveChannelOutputStatisticsResponse = models.DescribeStreamLiveChannelOutputStatisticsResponse;
 const DescribeWatermarkInfo = models.DescribeWatermarkInfo;
 const EventSettingsDestinationReq = models.EventSettingsDestinationReq;
+const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
 const EventSettingsReq = models.EventSettingsReq;
 const DrmKey = models.DrmKey;
 const EventSettingsDestinationResp = models.EventSettingsDestinationResp;

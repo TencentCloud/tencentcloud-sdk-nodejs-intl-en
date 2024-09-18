@@ -2788,7 +2788,7 @@ class DescribeUserPolicyResponse extends  AbstractModel {
 
         /**
          * Permission configuration information associated with different hosts
-         * @type {Array.<PermissionHostInfo> || null}
+         * @type {PermissionHostInfo || null}
          */
         this.Permissions = null;
 
@@ -2815,12 +2815,9 @@ class DescribeUserPolicyResponse extends  AbstractModel {
         }
 
         if (params.Permissions) {
-            this.Permissions = new Array();
-            for (let z in params.Permissions) {
-                let obj = new PermissionHostInfo();
-                obj.deserialize(params.Permissions[z]);
-                this.Permissions.push(obj);
-            }
+            let obj = new PermissionHostInfo();
+            obj.deserialize(params.Permissions)
+            this.Permissions = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 

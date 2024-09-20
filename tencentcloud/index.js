@@ -14,6 +14,7 @@ module.exports = {
     cdb: require("./cdb"),
     cdn: require("./cdn"),
     cdwdoris: require("./cdwdoris"),
+    cfg: require("./cfg"),
     cfs: require("./cfs"),
     cfw: require("./cfw"),
     chdfs: require("./chdfs"),

@@ -21,21 +21,22 @@ const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const InternationalIDPassport = models.InternationalIDPassport;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
-const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
-const LivenessCompareResponse = models.LivenessCompareResponse;
+const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
+const AttackRiskDetail = models.AttackRiskDetail;
+const ExtraInfo = models.ExtraInfo;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const ApplyCardVerificationResponse = models.ApplyCardVerificationResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const JapanIDCard = models.JapanIDCard;
-const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
+const EditDetail = models.EditDetail;
 const ApplyWebVerificationTokenResponse = models.ApplyWebVerificationTokenResponse;
 const NormalHKIDCard = models.NormalHKIDCard;
 const GetWebVerificationResultRequest = models.GetWebVerificationResultRequest;
 const ThailandIDCard = models.ThailandIDCard;
 const VerificationDetail = models.VerificationDetail;
 const GetWebVerificationResultIntlResponse = models.GetWebVerificationResultIntlResponse;
-const CompareFaceLivenessRequest = models.CompareFaceLivenessRequest;
+const FileInfo = models.FileInfo;
 const HKIDCard = models.HKIDCard;
 const SingaporeIDCard = models.SingaporeIDCard;
 const IndonesiaDrivingLicense = models.IndonesiaDrivingLicense;
@@ -44,19 +45,23 @@ const NormalCardInfo = models.NormalCardInfo;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
-const EditDetail = models.EditDetail;
+const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
 const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const PhilippinesSSSID = models.PhilippinesSSSID;
 const CardVerifyResult = models.CardVerifyResult;
+const TaiWanIDCard = models.TaiWanIDCard;
+const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 const ApplyWebVerificationTokenRequest = models.ApplyWebVerificationTokenRequest;
-const Address = models.Address;
+const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
+const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const GetCardVerificationResultRequest = models.GetCardVerificationResultRequest;
 const CardInfo = models.CardInfo;
 const PhilippinesVoteID = models.PhilippinesVoteID;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const MainlandIDCard = models.MainlandIDCard;
-const TaiWanIDCard = models.TaiWanIDCard;
+const Encryption = models.Encryption;
+const Address = models.Address;
 const NormalMLIDCard = models.NormalMLIDCard;
 const NormalIndonesiaIDCard = models.NormalIndonesiaIDCard;
 const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
@@ -65,7 +70,7 @@ const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenRespon
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
 const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse;
-const FileInfo = models.FileInfo;
+const CompareFaceLivenessRequest = models.CompareFaceLivenessRequest;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const NormalThailandIDCard = models.NormalThailandIDCard;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
@@ -73,6 +78,7 @@ const GetCardVerificationResultResponse = models.GetCardVerificationResultRespon
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 const GeneralCard = models.GeneralCard;
+const LivenessCompareResponse = models.LivenessCompareResponse;
 const MacaoIDCard = models.MacaoIDCard;
 const PhilippinesUMID = models.PhilippinesUMID;
 const PhilippinesTinID = models.PhilippinesTinID;
@@ -274,6 +280,17 @@ The data will be stored in a COS bucket in the region specified by the parameter
     ApplySdkVerificationToken(req, cb) {
         let resp = new ApplySdkVerificationTokenResponse();
         this.request("ApplySdkVerificationToken", req, resp, cb);
+    }
+
+    /**
+     * Based on the multimodal AI large model algorithm, it provides anti-attack detection capabilities for facial images and videos. It can effectively identify highly simulated AIGC face-changing, high-definition remakes, batch black market attacks, watermarks and other attack traces, and enhance the anti-counterfeiting security capabilities of images and videos.
+     * @param {DetectAIFakeFacesRequest} req
+     * @param {function(string, DetectAIFakeFacesResponse):void} cb
+     * @public
+     */
+    DetectAIFakeFaces(req, cb) {
+        let resp = new DetectAIFakeFacesResponse();
+        this.request("DetectAIFakeFaces", req, resp, cb);
     }
 
     /**

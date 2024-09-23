@@ -2207,6 +2207,45 @@ class GetTaskStatusResponse extends  AbstractModel {
 }
 
 /**
+ * Tag key-value pair.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * ListRoleAssignments response structure.
  * @class
  */
@@ -3488,6 +3527,120 @@ class RemovePermissionPolicyFromRoleConfigurationRequest extends  AbstractModel 
 }
 
 /**
+ * InviteOrganizationMember request structure.
+ * @class
+ */
+class InviteOrganizationMemberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UIN of an invited account.
+         * @type {number || null}
+         */
+        this.MemberUin = null;
+
+        /**
+         * Member name, which contains up to 25 characters, including English letters, digits, and symbols `+@&._[]-:,`.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Relationship policy. Valid value: `Financial`.
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * List of member financial permission IDs. Valid values: 1: View bills. 2: View balance. 3: Transfer funds. 4: Consolidate bills. 5: Issue invoice. 6: Inherit discounts. 7: Pay on behalf. 1 and 2 are required by default.
+         * @type {Array.<number> || null}
+         */
+        this.PermissionIds = null;
+
+        /**
+         * Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Whether to allow a member to exit. Valid values: Allow, Denied.
+         * @type {string || null}
+         */
+        this.IsAllowQuit = null;
+
+        /**
+         * Payer UIN, which is required when pay-on-behalf mode is used.
+         * @type {string || null}
+         */
+        this.PayUin = null;
+
+        /**
+         * Name of a mutual trust real-name entity.
+         * @type {string || null}
+         */
+        this.RelationAuthName = null;
+
+        /**
+         * List of proof files of a mutual trust entity.
+         * @type {Array.<AuthRelationFile> || null}
+         */
+        this.AuthFile = null;
+
+        /**
+         * Member tag list, with a maximum of 10.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberUin = 'MemberUin' in params ? params.MemberUin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PermissionIds = 'PermissionIds' in params ? params.PermissionIds : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.IsAllowQuit = 'IsAllowQuit' in params ? params.IsAllowQuit : null;
+        this.PayUin = 'PayUin' in params ? params.PayUin : null;
+        this.RelationAuthName = 'RelationAuthName' in params ? params.RelationAuthName : null;
+
+        if (params.AuthFile) {
+            this.AuthFile = new Array();
+            for (let z in params.AuthFile) {
+                let obj = new AuthRelationFile();
+                obj.deserialize(params.AuthFile[z]);
+                this.AuthFile.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ListTasks response structure.
  * @class
  */
@@ -3584,6 +3737,12 @@ class AddOrganizationNodeRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * Department tag list, with a maximum of 10.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3596,6 +3755,15 @@ class AddOrganizationNodeRequest extends  AbstractModel {
         this.ParentNodeId = 'ParentNodeId' in params ? params.ParentNodeId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -3650,6 +3818,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * Member tag list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3665,6 +3840,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -4049,48 +4233,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeOrganizationMembers request structure.
+ * DescribeIdentityCenter request structure.
  * @class
  */
-class DescribeOrganizationMembersRequest extends  AbstractModel {
+class DescribeIdentityCenterRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Limit, which defaults to `10`. Value range: 1-50.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
-         * @type {string || null}
-         */
-        this.Lang = null;
-
-        /**
-         * Search by member name or ID.
-         * @type {string || null}
-         */
-        this.SearchKey = null;
-
-        /**
-         * Entity name.
-         * @type {string || null}
-         */
-        this.AuthName = null;
-
-        /**
-         * Abbreviation of the trusted service, which is required during querying the trusted service admin.
-         * @type {string || null}
-         */
-        this.Product = null;
 
     }
 
@@ -4101,12 +4249,6 @@ class DescribeOrganizationMembersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Lang = 'Lang' in params ? params.Lang : null;
-        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
-        this.AuthName = 'AuthName' in params ? params.AuthName : null;
-        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -6481,6 +6623,12 @@ class CreateOrganizationMemberRequest extends  AbstractModel {
          */
         this.AuthRelationId = null;
 
+        /**
+         * Member tag list, with a maximum of 10.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6500,6 +6648,53 @@ class CreateOrganizationMemberRequest extends  AbstractModel {
         this.PayUin = 'PayUin' in params ? params.PayUin : null;
         this.IdentityRoleID = 'IdentityRoleID' in params ? params.IdentityRoleID : null;
         this.AuthRelationId = 'AuthRelationId' in params ? params.AuthRelationId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Real-name mutual trust application proof file.
+ * @class
+ */
+class AuthRelationFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * File path.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -7211,6 +7406,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.PermissionStatus = null;
 
+        /**
+         * Member tag list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -7253,6 +7455,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.PermissionStatus = 'PermissionStatus' in params ? params.PermissionStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -7489,12 +7700,54 @@ class RemoveUserFromGroupResponse extends  AbstractModel {
 }
 
 /**
- * DescribeIdentityCenter request structure.
+ * DescribeOrganizationMembers request structure.
  * @class
  */
-class DescribeIdentityCenterRequest extends  AbstractModel {
+class DescribeOrganizationMembersRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit, which defaults to `10`. Value range: 1-50.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
+         * @type {string || null}
+         */
+        this.Lang = null;
+
+        /**
+         * Search by member name or ID.
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+        /**
+         * Entity name.
+         * @type {string || null}
+         */
+        this.AuthName = null;
+
+        /**
+         * Abbreviation of the trusted service, which is required during querying the trusted service admin.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Member tag search list, with a maximum of 10.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -7504,6 +7757,21 @@ class DescribeIdentityCenterRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Lang = 'Lang' in params ? params.Lang : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.AuthName = 'AuthName' in params ? params.AuthName : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -7613,6 +7881,12 @@ class DescribeOrganizationNodesRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Department tag search list, with a maximum of 10.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -7624,6 +7898,43 @@ class DescribeOrganizationNodesRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * InviteOrganizationMember response structure.
+ * @class
+ */
+class InviteOrganizationMemberResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8849,6 +9160,7 @@ module.exports = {
     MemberMainInfo: MemberMainInfo,
     CreateRoleAssignmentRequest: CreateRoleAssignmentRequest,
     GetTaskStatusResponse: GetTaskStatusResponse,
+    Tag: Tag,
     ListRoleAssignmentsResponse: ListRoleAssignmentsResponse,
     UpdateUserResponse: UpdateUserResponse,
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
@@ -8878,6 +9190,7 @@ module.exports = {
     GetZoneStatisticsRequest: GetZoneStatisticsRequest,
     NodeMainInfo: NodeMainInfo,
     RemovePermissionPolicyFromRoleConfigurationRequest: RemovePermissionPolicyFromRoleConfigurationRequest,
+    InviteOrganizationMemberRequest: InviteOrganizationMemberRequest,
     ListTasksResponse: ListTasksResponse,
     AddOrganizationNodeRequest: AddOrganizationNodeRequest,
     OrgNode: OrgNode,
@@ -8888,7 +9201,7 @@ module.exports = {
     RoleAssignmentInfo: RoleAssignmentInfo,
     ListRoleConfigurationProvisioningsRequest: ListRoleConfigurationProvisioningsRequest,
     OrgIdentity: OrgIdentity,
-    DescribeOrganizationMembersRequest: DescribeOrganizationMembersRequest,
+    DescribeIdentityCenterRequest: DescribeIdentityCenterRequest,
     UserInfo: UserInfo,
     JoinedGroups: JoinedGroups,
     TaskInfo: TaskInfo,
@@ -8933,6 +9246,7 @@ module.exports = {
     ListRoleConfigurationsResponse: ListRoleConfigurationsResponse,
     UpdateUserSyncProvisioningResponse: UpdateUserSyncProvisioningResponse,
     CreateOrganizationMemberRequest: CreateOrganizationMemberRequest,
+    AuthRelationFile: AuthRelationFile,
     PolicyDetail: PolicyDetail,
     OrgMemberAuthIdentity: OrgMemberAuthIdentity,
     AddExternalSAMLIdPCertificateRequest: AddExternalSAMLIdPCertificateRequest,
@@ -8951,9 +9265,10 @@ module.exports = {
     GetRoleConfigurationRequest: GetRoleConfigurationRequest,
     AddUserToGroupRequest: AddUserToGroupRequest,
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
-    DescribeIdentityCenterRequest: DescribeIdentityCenterRequest,
+    DescribeOrganizationMembersRequest: DescribeOrganizationMembersRequest,
     ZoneStatistics: ZoneStatistics,
     DescribeOrganizationNodesRequest: DescribeOrganizationNodesRequest,
+    InviteOrganizationMemberResponse: InviteOrganizationMemberResponse,
     AddExternalSAMLIdPCertificateResponse: AddExternalSAMLIdPCertificateResponse,
     SAMLServiceProvider: SAMLServiceProvider,
     CreateUserResponse: CreateUserResponse,

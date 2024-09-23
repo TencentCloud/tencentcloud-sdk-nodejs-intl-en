@@ -56,6 +56,7 @@ const OrgMemberAuthAccount = models.OrgMemberAuthAccount;
 const MemberMainInfo = models.MemberMainInfo;
 const CreateRoleAssignmentRequest = models.CreateRoleAssignmentRequest;
 const GetTaskStatusResponse = models.GetTaskStatusResponse;
+const Tag = models.Tag;
 const ListRoleAssignmentsResponse = models.ListRoleAssignmentsResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
@@ -85,6 +86,7 @@ const RoleAssignments = models.RoleAssignments;
 const GetZoneStatisticsRequest = models.GetZoneStatisticsRequest;
 const NodeMainInfo = models.NodeMainInfo;
 const RemovePermissionPolicyFromRoleConfigurationRequest = models.RemovePermissionPolicyFromRoleConfigurationRequest;
+const InviteOrganizationMemberRequest = models.InviteOrganizationMemberRequest;
 const ListTasksResponse = models.ListTasksResponse;
 const AddOrganizationNodeRequest = models.AddOrganizationNodeRequest;
 const OrgNode = models.OrgNode;
@@ -95,7 +97,7 @@ const DescribeOrganizationMemberAuthAccountsResponse = models.DescribeOrganizati
 const RoleAssignmentInfo = models.RoleAssignmentInfo;
 const ListRoleConfigurationProvisioningsRequest = models.ListRoleConfigurationProvisioningsRequest;
 const OrgIdentity = models.OrgIdentity;
-const DescribeOrganizationMembersRequest = models.DescribeOrganizationMembersRequest;
+const DescribeIdentityCenterRequest = models.DescribeIdentityCenterRequest;
 const UserInfo = models.UserInfo;
 const JoinedGroups = models.JoinedGroups;
 const TaskInfo = models.TaskInfo;
@@ -140,6 +142,7 @@ const RemovePermissionPolicyFromRoleConfigurationResponse = models.RemovePermiss
 const ListRoleConfigurationsResponse = models.ListRoleConfigurationsResponse;
 const UpdateUserSyncProvisioningResponse = models.UpdateUserSyncProvisioningResponse;
 const CreateOrganizationMemberRequest = models.CreateOrganizationMemberRequest;
+const AuthRelationFile = models.AuthRelationFile;
 const PolicyDetail = models.PolicyDetail;
 const OrgMemberAuthIdentity = models.OrgMemberAuthIdentity;
 const AddExternalSAMLIdPCertificateRequest = models.AddExternalSAMLIdPCertificateRequest;
@@ -158,9 +161,10 @@ const CreateRoleConfigurationRequest = models.CreateRoleConfigurationRequest;
 const GetRoleConfigurationRequest = models.GetRoleConfigurationRequest;
 const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
-const DescribeIdentityCenterRequest = models.DescribeIdentityCenterRequest;
+const DescribeOrganizationMembersRequest = models.DescribeOrganizationMembersRequest;
 const ZoneStatistics = models.ZoneStatistics;
 const DescribeOrganizationNodesRequest = models.DescribeOrganizationNodesRequest;
+const InviteOrganizationMemberResponse = models.InviteOrganizationMemberResponse;
 const AddExternalSAMLIdPCertificateResponse = models.AddExternalSAMLIdPCertificateResponse;
 const SAMLServiceProvider = models.SAMLServiceProvider;
 const CreateUserResponse = models.CreateUserResponse;
@@ -580,6 +584,17 @@ class OrganizationClient extends AbstractClient {
     GetGroup(req, cb) {
         let resp = new GetGroupResponse();
         this.request("GetGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to invite a member.
+     * @param {InviteOrganizationMemberRequest} req
+     * @param {function(string, InviteOrganizationMemberResponse):void} cb
+     * @public
+     */
+    InviteOrganizationMember(req, cb) {
+        let resp = new InviteOrganizationMemberResponse();
+        this.request("InviteOrganizationMember", req, resp, cb);
     }
 
     /**

@@ -94,7 +94,7 @@ class AudioTrackInfo extends  AbstractModel {
         this.TrackName = null;
 
         /**
-         * Only AAC is supported.
+         * Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
          * @type {string || null}
          */
         this.AudioCodec = null;
@@ -1204,7 +1204,7 @@ class AVTemplate extends  AbstractModel {
         this.NeedAudio = null;
 
         /**
-         * Audio codec. Valid value: `AAC` (default)
+         * Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
          * @type {string || null}
          */
         this.Acodec = null;
@@ -3930,7 +3930,7 @@ class AudioTemplateInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Audio codec. Valid value: AAC. Default value: AAC.
+         * Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
          * @type {string || null}
          */
         this.Acodec = null;

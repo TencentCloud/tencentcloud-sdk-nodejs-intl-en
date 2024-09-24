@@ -11379,7 +11379,7 @@ class AttachPluginRequest extends  AbstractModel {
         this.EnvironmentName = null;
 
         /**
-         * List of APIs bound with the plugin.
+         * List of APIs bound with the plugin
          * @type {Array.<string> || null}
          */
         this.ApiIds = null;

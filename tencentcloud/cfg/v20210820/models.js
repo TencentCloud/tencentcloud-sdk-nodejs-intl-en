@@ -365,7 +365,7 @@ class CreateTaskFromActionRequest extends  AbstractModel {
         this.TaskActionId = null;
 
         /**
-         * ID of the instance participating in the experiment
+         * ID of the instance participating in the experiment.
          * @type {Array.<string> || null}
          */
         this.TaskInstances = null;

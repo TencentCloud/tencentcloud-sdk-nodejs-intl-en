@@ -1,5 +1,6 @@
 module.exports = {
     advisor: require("./advisor"),
+    aiart: require("./aiart"),
     ams: require("./ams"),
     antiddos: require("./antiddos"),
     apigateway: require("./apigateway"),
@@ -46,6 +47,7 @@ module.exports = {
     eiam: require("./eiam"),
     emr: require("./emr"),
     es: require("./es"),
+    facefusion: require("./facefusion"),
     faceid: require("./faceid"),
     gaap: require("./gaap"),
     gme: require("./gme"),
@@ -102,6 +104,7 @@ module.exports = {
     vm: require("./vm"),
     vod: require("./vod"),
     vpc: require("./vpc"),
+    waf: require("./waf"),
     wedata: require("./wedata"),
     yunjing: require("./yunjing")
 };

@@ -16,21 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const MetaData = models.MetaData;
 const LogoParam = models.LogoParam;
-const QueryVideoFaceFusionJobResponse = models.QueryVideoFaceFusionJobResponse;
-const QueryVideoFaceFusionJobRequest = models.QueryVideoFaceFusionJobRequest;
-const SubmitVideoFaceFusionJobResponse = models.SubmitVideoFaceFusionJobResponse;
-const FuseFaceReviewDetail = models.FuseFaceReviewDetail;
-const VideoFaceFusionOutput = models.VideoFaceFusionOutput;
+const FuseParam = models.FuseParam;
 const ImageCodecParam = models.ImageCodecParam;
 const MergeInfo = models.MergeInfo;
-const FuseFaceReviewResult = models.FuseFaceReviewResult;
+const FuseFaceResponse = models.FuseFaceResponse;
 const FuseFaceRequest = models.FuseFaceRequest;
 const FaceRect = models.FaceRect;
-const FuseParam = models.FuseParam;
-const SubmitVideoFaceFusionJobRequest = models.SubmitVideoFaceFusionJobRequest;
-const FuseFaceResponse = models.FuseFaceResponse;
+const MetaData = models.MetaData;
 
 
 /**
@@ -43,28 +36,6 @@ class FacefusionClient extends AbstractClient {
         super("facefusion.tencentcloudapi.com", "2022-09-27", credential, region, profile);
     }
     
-    /**
-     * This API is used to query the progress and status of video face fusion tasks by Job ID.
-     * @param {QueryVideoFaceFusionJobRequest} req
-     * @param {function(string, QueryVideoFaceFusionJobResponse):void} cb
-     * @public
-     */
-    QueryVideoFaceFusionJob(req, cb) {
-        let resp = new QueryVideoFaceFusionJobResponse();
-        this.request("QueryVideoFaceFusionJob", req, resp, cb);
-    }
-
-    /**
-     * This API is used to submit asynchronous processing tasks of video face fusion. After a task is submitted, the Job ID, estimated completion time, and current queue length will be returned.
-     * @param {SubmitVideoFaceFusionJobRequest} req
-     * @param {function(string, SubmitVideoFaceFusionJobResponse):void} cb
-     * @public
-     */
-    SubmitVideoFaceFusionJob(req, cb) {
-        let resp = new SubmitVideoFaceFusionJobResponse();
-        this.request("SubmitVideoFaceFusionJob", req, resp, cb);
-    }
-
     /**
      * This API is used to perform the fusion of a single face, multiple faces, and specified faces with the material template by uploading face images. Users can add logos to generated images. See <a href="https://intl.cloud.tencent.com/document/product/670/38247?from_cn_redirect=1" target="_blank">Fusion Access Guide</a>.
 

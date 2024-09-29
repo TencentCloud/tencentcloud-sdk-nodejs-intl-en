@@ -55,7 +55,9 @@ class CreateRoomRequest extends  AbstractModel {
         this.Resolution = null;
 
         /**
-         * Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
+         * Maximum number of mic-on users (excluding teachers). Value range: [0, 16]. This value affects billing, please set it according to the actual business situation. For billing rules, see "Billing Overview" under "Purchase Guide". Example:
+1: Billing based on the 1v1 rule;
+10: Billing based on the 1v7-12 rule.
          * @type {number || null}
          */
         this.MaxMicNumber = null;
@@ -200,6 +202,12 @@ class CreateRoomRequest extends  AbstractModel {
          */
         this.RecordLang = null;
 
+        /**
+         * Recording type. 0: Records only mixed streams (default); 1: Records mixed streams and single streams. In this mode, in addition to the mixed streams, the audio and video streams of the teacher and students on stage are recorded separately. Each recording incurs corresponding recording fees. Example: 0.
+         * @type {number || null}
+         */
+        this.RecordStream = null;
+
     }
 
     /**
@@ -238,6 +246,7 @@ class CreateRoomRequest extends  AbstractModel {
         this.RecordBackground = 'RecordBackground' in params ? params.RecordBackground : null;
         this.RecordScene = 'RecordScene' in params ? params.RecordScene : null;
         this.RecordLang = 'RecordLang' in params ? params.RecordLang : null;
+        this.RecordStream = 'RecordStream' in params ? params.RecordStream : null;
 
     }
 }

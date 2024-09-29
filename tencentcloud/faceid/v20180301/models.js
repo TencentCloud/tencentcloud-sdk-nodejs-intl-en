@@ -1752,6 +1752,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TaiWanIDCard = null;
 
+        /**
+         * exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HMTPermit || null}
+         */
+        this.HMTPermitCard = null;
+
     }
 
     /**
@@ -1862,6 +1869,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new TaiWanIDCard();
             obj.deserialize(params.TaiWanIDCard)
             this.TaiWanIDCard = obj;
+        }
+
+        if (params.HMTPermitCard) {
+            let obj = new HMTPermit();
+            obj.deserialize(params.HMTPermitCard)
+            this.HMTPermitCard = obj;
         }
 
     }
@@ -1999,6 +2012,8 @@ Default value: 4
 17.ThailandDrivingLicense: Thailand Driving License
 18.SingaporeDrivingLicense: Singapore Driving License
 19.JapanDrivingLicense: Japan Driving License
+20.TaiWanIDCard:Taiwan ID Card
+21.HMTPermit: exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
          * @type {string || null}
          */
         this.IdCardType = null;
@@ -4227,6 +4242,107 @@ Example value: ""
 }
 
 /**
+ * Macao ID Card
+ * @class
+ */
+class MacaoIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * First name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * Last name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * Birthday
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Expiration date
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Sex
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Age
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Issued country
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * MRZ1 on card
+Note: This field may return null, indicating that no valid values can be obtained. 
+         * @type {string || null}
+         */
+        this.Field1 = null;
+
+        /**
+         * MRZ2 on card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Field2 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.Field1 = 'Field1' in params ? params.Field1 : null;
+        this.Field2 = 'Field2' in params ? params.Field2 : null;
+
+    }
+}
+
+/**
  * ApplyLivenessToken request structure.
  * @class
  */
@@ -4907,82 +5023,60 @@ class LivenessCompareResponse extends  AbstractModel {
 }
 
 /**
- * Macao ID Card
+ * Exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
  * @class
  */
-class MacaoIDCard extends  AbstractModel {
+class HMTPermit extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * First name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Name
          * @type {string || null}
          */
-        this.FirstName = null;
+        this.Name = null;
 
         /**
-         * Last name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * English name
          * @type {string || null}
          */
-        this.LastName = null;
-
-        /**
-         * Birthday
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Expiration date
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExpirationDate = null;
+        this.EnglishName = null;
 
         /**
          * License number
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.LicenseNumber = null;
+        this.Number = null;
 
         /**
-         * Sex
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Gender
          * @type {string || null}
          */
         this.Sex = null;
 
         /**
-         * Age
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Valid date
          * @type {string || null}
          */
-        this.Age = null;
+        this.ValidDate = null;
 
         /**
-         * Issued country
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Issued authority
          * @type {string || null}
          */
-        this.IssuedCountry = null;
+        this.IssueAuthority = null;
 
         /**
-         * MRZ1 on card
-Note: This field may return null, indicating that no valid values can be obtained. 
+         * Issued address
          * @type {string || null}
          */
-        this.Field1 = null;
+        this.IssueAddress = null;
 
         /**
-         * MRZ2 on card
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Birthday
          * @type {string || null}
          */
-        this.Field2 = null;
+        this.Birthday = null;
 
     }
 
@@ -4993,16 +5087,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FirstName = 'FirstName' in params ? params.FirstName : null;
-        this.LastName = 'LastName' in params ? params.LastName : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
-        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.EnglishName = 'EnglishName' in params ? params.EnglishName : null;
+        this.Number = 'Number' in params ? params.Number : null;
         this.Sex = 'Sex' in params ? params.Sex : null;
-        this.Age = 'Age' in params ? params.Age : null;
-        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
-        this.Field1 = 'Field1' in params ? params.Field1 : null;
-        this.Field2 = 'Field2' in params ? params.Field2 : null;
+        this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
+        this.IssueAuthority = 'IssueAuthority' in params ? params.IssueAuthority : null;
+        this.IssueAddress = 'IssueAddress' in params ? params.IssueAddress : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
 
     }
 }
@@ -5789,6 +5881,7 @@ module.exports = {
     ApplyWebVerificationBizTokenIntlRequest: ApplyWebVerificationBizTokenIntlRequest,
     GetWebVerificationResultResponse: GetWebVerificationResultResponse,
     CompareFaceLivenessRequest: CompareFaceLivenessRequest,
+    MacaoIDCard: MacaoIDCard,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
     NormalThailandIDCard: NormalThailandIDCard,
     PhilippinesDrivingLicense: PhilippinesDrivingLicense,
@@ -5797,7 +5890,7 @@ module.exports = {
     GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
     GeneralCard: GeneralCard,
     LivenessCompareResponse: LivenessCompareResponse,
-    MacaoIDCard: MacaoIDCard,
+    HMTPermit: HMTPermit,
     PhilippinesUMID: PhilippinesUMID,
     PhilippinesTinID: PhilippinesTinID,
     ApplyCardVerificationRequest: ApplyCardVerificationRequest,

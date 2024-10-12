@@ -23289,7 +23289,7 @@ class OpsTaskCanvasInfoList extends  AbstractModel {
         /**
          * Canvas Cyclic Dependency Task Information
 Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {OpsTaskCanvasDto || null}
+         * @type {Array.<OpsTaskCanvasDto> || null}
          */
         this.CirculateTaskList = null;
 
@@ -23322,9 +23322,12 @@ Note: This field may return null, indicating that no valid value can be obtained
         }
 
         if (params.CirculateTaskList) {
-            let obj = new OpsTaskCanvasDto();
-            obj.deserialize(params.CirculateTaskList)
-            this.CirculateTaskList = obj;
+            this.CirculateTaskList = new Array();
+            for (let z in params.CirculateTaskList) {
+                let obj = new OpsTaskCanvasDto();
+                obj.deserialize(params.CirculateTaskList[z]);
+                this.CirculateTaskList.push(obj);
+            }
         }
 
     }

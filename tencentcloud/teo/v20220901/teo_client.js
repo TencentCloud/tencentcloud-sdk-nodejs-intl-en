@@ -19,13 +19,16 @@ const AbstractClient = require('../../common/abstract_client')
 const DeployConfigGroupVersionRequest = models.DeployConfigGroupVersionRequest;
 const RenewFlag = models.RenewFlag;
 const Compression = models.Compression;
+const DescribeFunctionsResponse = models.DescribeFunctionsResponse;
 const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoResponse;
 const SlowPostConfig = models.SlowPostConfig;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
-const PrepaidPlanParam = models.PrepaidPlanParam;
+const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
+const ModifyApplicationProxyResponse = models.ModifyApplicationProxyResponse;
+const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
 const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
 const TopEntryValue = models.TopEntryValue;
 const DescribeHostsSettingResponse = models.DescribeHostsSettingResponse;
@@ -51,15 +54,18 @@ const CreateAliasDomainRequest = models.CreateAliasDomainRequest;
 const CLSTopic = models.CLSTopic;
 const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
 const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
+const VanityNameServers = models.VanityNameServers;
 const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest;
 const DescribeAccelerationDomainsResponse = models.DescribeAccelerationDomainsResponse;
 const SwitchConfig = models.SwitchConfig;
 const IdentifyZoneResponse = models.IdentifyZoneResponse;
 const ModifyL4ProxyResponse = models.ModifyL4ProxyResponse;
+const CreateFunctionRuleRequest = models.CreateFunctionRuleRequest;
 const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const EnvInfo = models.EnvInfo;
 const PlanInfo = models.PlanInfo;
 const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
+const CreateFunctionRequest = models.CreateFunctionRequest;
 const S3 = models.S3;
 const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
 const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
@@ -72,8 +78,9 @@ const BotPortraitRule = models.BotPortraitRule;
 const RulesProperties = models.RulesProperties;
 const RuleCodeActionParams = models.RuleCodeActionParams;
 const OriginGroupReference = models.OriginGroupReference;
+const ModifyFunctionRulePriorityResponse = models.ModifyFunctionRulePriorityResponse;
 const ExceptUserRule = models.ExceptUserRule;
-const AccelerateType = models.AccelerateType;
+const SecEntry = models.SecEntry;
 const ModifyCustomErrorPageResponse = models.ModifyCustomErrorPageResponse;
 const SubRule = models.SubRule;
 const ConfigGroupVersionInfo = models.ConfigGroupVersionInfo;
@@ -90,16 +97,18 @@ const Header = models.Header;
 const DeleteCustomErrorPageRequest = models.DeleteCustomErrorPageRequest;
 const CustomField = models.CustomField;
 const DeleteZoneRequest = models.DeleteZoneRequest;
+const SecurityType = models.SecurityType;
 const BotManagedRule = models.BotManagedRule;
 const SecurityConfig = models.SecurityConfig;
 const L4OfflineLog = models.L4OfflineLog;
 const ModifyPlanRequest = models.ModifyPlanRequest;
-const CustomErrorPage = models.CustomErrorPage;
-const SecEntryValue = models.SecEntryValue;
+const ExceptUserRuleScope = models.ExceptUserRuleScope;
+const MaxAge = models.MaxAge;
 const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
 const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
 const EntityStatus = models.EntityStatus;
 const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
+const CreateFunctionRuleResponse = models.CreateFunctionRuleResponse;
 const RuleNormalActionParams = models.RuleNormalActionParams;
 const PrivateParameter = models.PrivateParameter;
 const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
@@ -112,13 +121,14 @@ const RateLimitTemplate = models.RateLimitTemplate;
 const ModifyRealtimeLogDeliveryTaskResponse = models.ModifyRealtimeLogDeliveryTaskResponse;
 const AccelerationDomainCertificate = models.AccelerationDomainCertificate;
 const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateBindingsRequest;
+const L4ProxyRemoteAuth = models.L4ProxyRemoteAuth;
 const AlgDetectResult = models.AlgDetectResult;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
 const OfflineCache = models.OfflineCache;
 const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
-const MaxAge = models.MaxAge;
+const SecEntryValue = models.SecEntryValue;
 const DescribeCustomErrorPagesResponse = models.DescribeCustomErrorPagesResponse;
 const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
 const AlgDetectRule = models.AlgDetectRule;
@@ -136,10 +146,12 @@ const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
 const Task = models.Task;
 const DescribeL4ProxyRulesResponse = models.DescribeL4ProxyRulesResponse;
+const DescribeFunctionsRequest = models.DescribeFunctionsRequest;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
 const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResponse;
+const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
 const ExceptConfig = models.ExceptConfig;
 const DeleteOriginGroupRequest = models.DeleteOriginGroupRequest;
 const AclCondition = models.AclCondition;
@@ -159,12 +171,13 @@ const ServerCertInfo = models.ServerCertInfo;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const OriginRecord = models.OriginRecord;
 const Tag = models.Tag;
-const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
+const ModifyFunctionRulePriorityRequest = models.ModifyFunctionRulePriorityRequest;
 const DeleteSharedCNAMERequest = models.DeleteSharedCNAMERequest;
 const ModifyRealtimeLogDeliveryTaskRequest = models.ModifyRealtimeLogDeliveryTaskRequest;
-const VanityNameServers = models.VanityNameServers;
+const DescribeHostsSettingRequest = models.DescribeHostsSettingRequest;
 const DestroyPlanRequest = models.DestroyPlanRequest;
 const CreatePlanRequest = models.CreatePlanRequest;
+const DescribeFunctionRuntimeEnvironmentRequest = models.DescribeFunctionRuntimeEnvironmentRequest;
 const IPGroup = models.IPGroup;
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
@@ -178,6 +191,7 @@ const Cache = models.Cache;
 const DetailHost = models.DetailHost;
 const DescribeRealtimeLogDeliveryTasksResponse = models.DescribeRealtimeLogDeliveryTasksResponse;
 const DescribeConfigGroupVersionsResponse = models.DescribeConfigGroupVersionsResponse;
+const FunctionEnvironmentVariable = models.FunctionEnvironmentVariable;
 const DeleteRealtimeLogDeliveryTaskResponse = models.DeleteRealtimeLogDeliveryTaskResponse;
 const RuleCondition = models.RuleCondition;
 const DescribeOverviewL7DataResponse = models.DescribeOverviewL7DataResponse;
@@ -187,6 +201,8 @@ const RateLimitUserRule = models.RateLimitUserRule;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const CreateL4ProxyRulesResponse = models.CreateL4ProxyRulesResponse;
 const ModifyCustomErrorPageRequest = models.ModifyCustomErrorPageRequest;
+const ModifyFunctionRuleResponse = models.ModifyFunctionRuleResponse;
+const DescribeFunctionRulesResponse = models.DescribeFunctionRulesResponse;
 const CacheKey = models.CacheKey;
 const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
 const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
@@ -203,11 +219,13 @@ const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
 const UpgradePlanResponse = models.UpgradePlanResponse;
+const AclConfig = models.AclConfig;
 const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
 const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
 const AclUserRule = models.AclUserRule;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
-const CreateL4ProxyResponse = models.CreateL4ProxyResponse;
+const FunctionRuleCondition = models.FunctionRuleCondition;
+const ModifyFunctionResponse = models.ModifyFunctionResponse;
 const DescribeOriginGroupRequest = models.DescribeOriginGroupRequest;
 const DescribeIPRegionRequest = models.DescribeIPRegionRequest;
 const TimingTypeValue = models.TimingTypeValue;
@@ -224,7 +242,7 @@ const DescribeL4ProxyResponse = models.DescribeL4ProxyResponse;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
 const RenewPlanResponse = models.RenewPlanResponse;
-const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
+const CustomErrorPage = models.CustomErrorPage;
 const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
 const BillingData = models.BillingData;
 const DeleteZoneResponse = models.DeleteZoneResponse;
@@ -233,12 +251,13 @@ const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const WafRule = models.WafRule;
 const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
 const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
+const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
 const DeleteRealtimeLogDeliveryTaskRequest = models.DeleteRealtimeLogDeliveryTaskRequest;
 const RulesSettingAction = models.RulesSettingAction;
 const Ipv6 = models.Ipv6;
 const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
-const AclConfig = models.AclConfig;
+const CreateFunctionResponse = models.CreateFunctionResponse;
 const AlgDetectJS = models.AlgDetectJS;
 const SubRuleItem = models.SubRuleItem;
 const DeleteSecurityIPGroupRequest = models.DeleteSecurityIPGroupRequest;
@@ -249,11 +268,14 @@ const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleReque
 const FileAscriptionInfo = models.FileAscriptionInfo;
 const CreateRealtimeLogDeliveryTaskResponse = models.CreateRealtimeLogDeliveryTaskResponse;
 const DescribeTopL7CacheDataResponse = models.DescribeTopL7CacheDataResponse;
+const DescribeFunctionRuntimeEnvironmentResponse = models.DescribeFunctionRuntimeEnvironmentResponse;
 const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
 const DescribeSecurityTemplateBindingsResponse = models.DescribeSecurityTemplateBindingsResponse;
 const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
+const DeleteFunctionRulesRequest = models.DeleteFunctionRulesRequest;
 const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataRequest;
 const NoCache = models.NoCache;
+const ModifyFunctionRequest = models.ModifyFunctionRequest;
 const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
 const CreateZoneRequest = models.CreateZoneRequest;
 const AscriptionInfo = models.AscriptionInfo;
@@ -275,22 +297,22 @@ const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResp
 const CertificateInfo = models.CertificateInfo;
 const CreateApplicationProxyRequest = models.CreateApplicationProxyRequest;
 const CC = models.CC;
+const HandleFunctionRuntimeEnvironmentRequest = models.HandleFunctionRuntimeEnvironmentRequest;
 const ModifyL4ProxyRulesStatusRequest = models.ModifyL4ProxyRulesStatusRequest;
 const DescribeCustomErrorPagesRequest = models.DescribeCustomErrorPagesRequest;
 const DescribeTimingL4DataResponse = models.DescribeTimingL4DataResponse;
 const Action = models.Action;
 const ApplicationProxy = models.ApplicationProxy;
-const ModifyApplicationProxyResponse = models.ModifyApplicationProxyResponse;
+const PrepaidPlanParam = models.PrepaidPlanParam;
 const ModifySecurityIPGroupResponse = models.ModifySecurityIPGroupResponse;
 const ZoneSetting = models.ZoneSetting;
 const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
 const RuleAndConditions = models.RuleAndConditions;
 const DropPageConfig = models.DropPageConfig;
 const DescribeSecurityIPGroupInfoRequest = models.DescribeSecurityIPGroupInfoRequest;
-const ExceptUserRuleScope = models.ExceptUserRuleScope;
 const PartialModule = models.PartialModule;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
-const SecEntry = models.SecEntry;
+const AccelerateType = models.AccelerateType;
 const DeliveryCondition = models.DeliveryCondition;
 const FollowOrigin = models.FollowOrigin;
 const IPRegionInfo = models.IPRegionInfo;
@@ -299,12 +321,12 @@ const QueryCondition = models.QueryCondition;
 const RuleRewriteActionParams = models.RuleRewriteActionParams;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
 const ModifyHostsCertificateRequest = models.ModifyHostsCertificateRequest;
-const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
+const DeleteFunctionRulesResponse = models.DeleteFunctionRulesResponse;
 const DescribeTopL7AnalysisDataResponse = models.DescribeTopL7AnalysisDataResponse;
 const ClientIpHeader = models.ClientIpHeader;
 const Resource = models.Resource;
 const DescribeOriginProtectionRequest = models.DescribeOriginProtectionRequest;
-const DescribeHostsSettingRequest = models.DescribeHostsSettingRequest;
+const HandleFunctionRuntimeEnvironmentResponse = models.HandleFunctionRuntimeEnvironmentResponse;
 const DeleteRulesResponse = models.DeleteRulesResponse;
 const OriginGroup = models.OriginGroup;
 const ModifySecurityIPGroupRequest = models.ModifySecurityIPGroupRequest;
@@ -335,7 +357,9 @@ const AlgDetectSession = models.AlgDetectSession;
 const OriginProtectionInfo = models.OriginProtectionInfo;
 const AliasDomain = models.AliasDomain;
 const IpTableRule = models.IpTableRule;
+const ModifyFunctionRuleRequest = models.ModifyFunctionRuleRequest;
 const IncreasePlanQuotaRequest = models.IncreasePlanQuotaRequest;
+const FunctionRule = models.FunctionRule;
 const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
 const Quic = models.Quic;
 const CreateCLSIndexRequest = models.CreateCLSIndexRequest;
@@ -352,7 +376,7 @@ const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
 const DDoSBlockData = models.DDoSBlockData;
 const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
-const SecurityType = models.SecurityType;
+const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const IPWhitelist = models.IPWhitelist;
 const CreateCustomizeErrorPageRequest = models.CreateCustomizeErrorPageRequest;
 const DescribeSecurityIPGroupRequest = models.DescribeSecurityIPGroupRequest;
@@ -371,6 +395,7 @@ const Filter = models.Filter;
 const CreateAccelerationDomainResponse = models.CreateAccelerationDomainResponse;
 const ModifyAccelerationDomainStatusesRequest = models.ModifyAccelerationDomainStatusesRequest;
 const CreateZoneResponse = models.CreateZoneResponse;
+const CreateL4ProxyResponse = models.CreateL4ProxyResponse;
 const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
 const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
 const SecurityTemplateBinding = models.SecurityTemplateBinding;
@@ -380,6 +405,7 @@ const OwnershipVerification = models.OwnershipVerification;
 const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
 const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
 const AiRule = models.AiRule;
+const Function = models.Function;
 const Quota = models.Quota;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
 const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
@@ -387,6 +413,7 @@ const DescribeSecurityIPGroupResponse = models.DescribeSecurityIPGroupResponse;
 const UpgradePlanRequest = models.UpgradePlanRequest;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const DescribeFunctionRulesRequest = models.DescribeFunctionRulesRequest;
 const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
 const RateLimitIntelligence = models.RateLimitIntelligence;
 const DescribeDeployHistoryResponse = models.DescribeDeployHistoryResponse;
@@ -422,6 +449,17 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     DestroyPlan(req, cb) {
         let resp = new DestroyPlanResponse();
         this.request("DestroyPlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an edge function. Once deleted, the function cannot be recovered, and associated trigger rules are also deleted.
+     * @param {DeleteFunctionRequest} req
+     * @param {function(string, DeleteFunctionResponse):void} cb
+     * @public
+     */
+    DeleteFunction(req, cb) {
+        let resp = new DeleteFunctionResponse();
+        this.request("DeleteFunction", req, resp, cb);
     }
 
     /**
@@ -506,6 +544,28 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
+     * This API is used to create a trigger rule for an edge function.
+     * @param {CreateFunctionRuleRequest} req
+     * @param {function(string, CreateFunctionRuleResponse):void} cb
+     * @public
+     */
+    CreateFunctionRule(req, cb) {
+        let resp = new CreateFunctionRuleResponse();
+        this.request("CreateFunctionRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a trigger rule for an edge function.
+     * @param {DeleteFunctionRulesRequest} req
+     * @param {function(string, DeleteFunctionRulesResponse):void} cb
+     * @public
+     */
+    DeleteFunctionRules(req, cb) {
+        let resp = new DeleteFunctionRulesResponse();
+        this.request("DeleteFunctionRules", req, resp, cb);
+    }
+
+    /**
      * This API is used to verify ownership of the site.
      * @param {IdentifyZoneRequest} req
      * @param {function(string, IdentifyZoneResponse):void} cb
@@ -536,6 +596,17 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     DescribeAccelerationDomains(req, cb) {
         let resp = new DescribeAccelerationDomainsResponse();
         this.request("DescribeAccelerationDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the runtime environment of an edge function, including environment variables.
+     * @param {DescribeFunctionRuntimeEnvironmentRequest} req
+     * @param {function(string, DescribeFunctionRuntimeEnvironmentResponse):void} cb
+     * @public
+     */
+    DescribeFunctionRuntimeEnvironment(req, cb) {
+        let resp = new DescribeFunctionRuntimeEnvironmentResponse();
+        this.request("DescribeFunctionRuntimeEnvironment", req, resp, cb);
     }
 
     /**
@@ -874,17 +945,6 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to query the cached L7 top-ranked data.
-     * @param {DescribeTopL7CacheDataRequest} req
-     * @param {function(string, DescribeTopL7CacheDataResponse):void} cb
-     * @public
-     */
-    DescribeTopL7CacheData(req, cb) {
-        let resp = new DescribeTopL7CacheDataResponse();
-        this.request("DescribeTopL7CacheData", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the list of L4 traffic data recorded over time.
      * @param {DescribeTimingL4DataRequest} req
      * @param {function(string, DescribeTimingL4DataResponse):void} cb
@@ -893,6 +953,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     DescribeTimingL4Data(req, cb) {
         let resp = new DescribeTimingL4DataResponse();
         this.request("DescribeTimingL4Data", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the cached L7 top-ranked data.
+     * @param {DescribeTopL7CacheDataRequest} req
+     * @param {function(string, DescribeTopL7CacheDataResponse):void} cb
+     * @public
+     */
+    DescribeTopL7CacheData(req, cb) {
+        let resp = new DescribeTopL7CacheDataResponse();
+        this.request("DescribeTopL7CacheData", req, resp, cb);
     }
 
     /**
@@ -1040,6 +1111,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * This API is used to create and deploy an edge function to EdgeOne edge nodes.
+     * @param {CreateFunctionRequest} req
+     * @param {function(string, CreateFunctionResponse):void} cb
+     * @public
+     */
+    CreateFunction(req, cb) {
+        let resp = new CreateFunctionResponse();
+        this.request("CreateFunction", req, resp, cb);
+    }
+
+    /**
      * This API is on an earlier version. If you want to call it, please switch to the latest version. In the latest version, this API has been split into two APIs: one for querying the Layer 4 proxy instance list and the other for querying Layer 4 forwarding rules. For details, see [DescribeL4Proxy] (https://intl.cloud.tencent.com/document/product/1552/103413?from_cn_redirect=1) and [DescribeL4ProxyRules] (https://intl.cloud.tencent.com/document/product/1552/103412?from_cn_redirect=1).
      * @param {DescribeApplicationProxiesRequest} req
      * @param {function(string, DescribeApplicationProxiesResponse):void} cb
@@ -1084,6 +1166,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * This API is used to modify an edge function. It supports modifying the function content and description. The function will take effect immediately after modification and redeployment.
+     * @param {ModifyFunctionRequest} req
+     * @param {function(string, ModifyFunctionResponse):void} cb
+     * @public
+     */
+    ModifyFunction(req, cb) {
+        let resp = new ModifyFunctionResponse();
+        this.request("ModifyFunction", req, resp, cb);
+    }
+
+    /**
      * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4Proxy
 ] (https://intl.cloud.tencent.com/document/product/1552/103411?from_cn_redirect=1).
      * @param {ModifyApplicationProxyRequest} req
@@ -1106,6 +1199,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     CreateZone(req, cb) {
         let resp = new CreateZoneResponse();
         this.request("CreateZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description.
+     * @param {ModifyFunctionRuleRequest} req
+     * @param {function(string, ModifyFunctionRuleResponse):void} cb
+     * @public
+     */
+    ModifyFunctionRule(req, cb) {
+        let resp = new ModifyFunctionRuleResponse();
+        this.request("ModifyFunctionRule", req, resp, cb);
     }
 
     /**
@@ -1153,14 +1257,14 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
-     * This API is used to modify a security IP group.
-     * @param {ModifySecurityIPGroupRequest} req
-     * @param {function(string, ModifySecurityIPGroupResponse):void} cb
+     * This API is used to query the list of trigger rules for an edge function. It supports filtering by rule ID, function ID, rule description, and so on.
+     * @param {DescribeFunctionRulesRequest} req
+     * @param {function(string, DescribeFunctionRulesResponse):void} cb
      * @public
      */
-    ModifySecurityIPGroup(req, cb) {
-        let resp = new ModifySecurityIPGroupResponse();
-        this.request("ModifySecurityIPGroup", req, resp, cb);
+    DescribeFunctionRules(req, cb) {
+        let resp = new DescribeFunctionRulesResponse();
+        this.request("DescribeFunctionRules", req, resp, cb);
     }
 
     /**
@@ -1241,6 +1345,18 @@ If there are already EdgeOne plans under the current account, it is recommended 
     }
 
     /**
+     * This API is used to operate the runtime environment of an edge function. It supports related settings for environment variables.
+After the environment variables are set, they can be used in the function code. For details, see [Edge Functions Referencing Environment Variables](https://intl.cloud.tencent.com/document/product/1552/109151?from_cn_redirect=1#0151fd9a-8b0e-407b-ae37-54553a60ded6).
+     * @param {HandleFunctionRuntimeEnvironmentRequest} req
+     * @param {function(string, HandleFunctionRuntimeEnvironmentResponse):void} cb
+     * @public
+     */
+    HandleFunctionRuntimeEnvironment(req, cb) {
+        let resp = new HandleFunctionRuntimeEnvironmentResponse();
+        this.request("HandleFunctionRuntimeEnvironment", req, resp, cb);
+    }
+
+    /**
      * When you need features available only in higher-tier plans, you can upgrade your plan through this interface. Upgrades are only supported for Personal and Basic Edition Plans.
 > For differences between EdgeOne billing plans, refer to [Comparison of EdgeOne Plans](https://intl.cloud.tencent.com/document/product/1552/94165?from_cn_redirect=1).
 For EdgeOne plan upgrade rules and pricing details, refer to [EdgeOne Plan Upgrade Guide](https://intl.cloud.tencent.com/document/product/1552/95291?from_cn_redirect=1).
@@ -1252,6 +1368,28 @@ If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://in
     UpgradePlan(req, cb) {
         let resp = new UpgradePlanResponse();
         this.request("UpgradePlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the priority of trigger rules for an edge function.
+     * @param {ModifyFunctionRulePriorityRequest} req
+     * @param {function(string, ModifyFunctionRulePriorityResponse):void} cb
+     * @public
+     */
+    ModifyFunctionRulePriority(req, cb) {
+        let resp = new ModifyFunctionRulePriorityResponse();
+        this.request("ModifyFunctionRulePriority", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a security IP group.
+     * @param {ModifySecurityIPGroupRequest} req
+     * @param {function(string, ModifySecurityIPGroupResponse):void} cb
+     * @public
+     */
+    ModifySecurityIPGroup(req, cb) {
+        let resp = new ModifySecurityIPGroupResponse();
+        this.request("ModifySecurityIPGroup", req, resp, cb);
     }
 
     /**
@@ -1497,6 +1635,17 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     DescribeZones(req, cb) {
         let resp = new DescribeZonesResponse();
         this.request("DescribeZones", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of edge functions. It supports filtering by function ID, name, description, and so on.
+     * @param {DescribeFunctionsRequest} req
+     * @param {function(string, DescribeFunctionsResponse):void} cb
+     * @public
+     */
+    DescribeFunctions(req, cb) {
+        let resp = new DescribeFunctionsResponse();
+        this.request("DescribeFunctions", req, resp, cb);
     }
 
     /**

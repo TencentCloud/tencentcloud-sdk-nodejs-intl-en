@@ -5536,6 +5536,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CardBackCutImageBase64 = null;
 
+        /**
+         * Card Warning Information
+
+-9101 Alarm for covered certificate,
+-9102 Alarm for photocopied certificate,
+-9103 Alarm for photographed certificate,
+-9104 Alarm for PS certificate,
+-9107 Alarm for reflective certificate,
+-9108 Alarm for blurry image,
+-9109 This capability is not enabled.
+         * @type {Array.<number> || null}
+         */
+        this.WarnCardInfos = null;
+
     }
 
     /**
@@ -5562,6 +5576,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
         this.CardCutImageBase64 = 'CardCutImageBase64' in params ? params.CardCutImageBase64 : null;
         this.CardBackCutImageBase64 = 'CardBackCutImageBase64' in params ? params.CardBackCutImageBase64 : null;
+        this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
 
     }
 }

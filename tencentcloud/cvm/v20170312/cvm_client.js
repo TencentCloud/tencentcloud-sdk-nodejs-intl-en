@@ -63,6 +63,7 @@ const RemoveChcAssistVpcResponse = models.RemoveChcAssistVpcResponse;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
+const CpuTopology = models.CpuTopology;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const TagSpecification = models.TagSpecification;

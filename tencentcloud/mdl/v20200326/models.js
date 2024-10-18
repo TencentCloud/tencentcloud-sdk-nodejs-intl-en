@@ -8135,7 +8135,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.StreamName = null;
 
         /**
-         * Source URL, which is valid if `Type` is `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL` and can contain 1-512 characters
+         * Source URL, which is valid if `Type` is `RTMP_PULL`, `HLS_PULL`,  `MP4_PULL`, `RTSP_PULL` or `SRT_PULL`, and can contain 1-512 characters
 Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */

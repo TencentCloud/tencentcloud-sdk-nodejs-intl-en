@@ -1348,6 +1348,18 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
          */
         this.VideoEnhanceSettings = null;
 
+        /**
+         * Key frame interval, 300-10000, optional.
+         * @type {number || null}
+         */
+        this.GopSize = null;
+
+        /**
+         * Keyframe units, only support MILLISECONDS (milliseconds).
+         * @type {string || null}
+         */
+        this.GopSizeUnits = null;
+
     }
 
     /**
@@ -1425,6 +1437,8 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
                 this.VideoEnhanceSettings.push(obj);
             }
         }
+        this.GopSize = 'GopSize' in params ? params.GopSize : null;
+        this.GopSizeUnits = 'GopSizeUnits' in params ? params.GopSizeUnits : null;
 
     }
 }
@@ -6400,14 +6414,17 @@ class StreamLiveOutputGroupsInfo extends  AbstractModel {
 
         /**
          * Output protocol
-Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `DASH_ARCHIVE`,`HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`,`RTP`,`RTMP`.
+Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, 
+ `DASH_ARCHIVE`, `HLS_STREAM_PACKAGE`, 
+ `DASH_STREAM_PACKAGE`, 
+ `FRAME_CAPTURE`, `RTP`, `RTMP`, `M2TS`.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * Output information
-If the type is RTMP or RTP, only one output is allowed; if it is HLS or DASH, 1-10 outputs are allowed.
+If the type is RTMP, RTP or FRAME_CAPTURE, only one output is allowed; if it is HLS or DASH, 1-10 outputs are allowed.
          * @type {Array.<OutputInfo> || null}
          */
         this.Outputs = null;

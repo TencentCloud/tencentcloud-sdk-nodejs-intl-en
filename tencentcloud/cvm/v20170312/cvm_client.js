@@ -41,10 +41,10 @@ const DescribeHostsResponse = models.DescribeHostsResponse;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceRequest = models.ResetInstanceRequest;
-const LaunchTemplate = models.LaunchTemplate;
+const ExitRescueModeResponse = models.ExitRescueModeResponse;
 const DescribeChcHostsResponse = models.DescribeChcHostsResponse;
 const AllocateHostsRequest = models.AllocateHostsRequest;
-const LoginSettings = models.LoginSettings;
+const DescribeImageFromFamilyRequest = models.DescribeImageFromFamilyRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const PurchaseReservedInstancesOfferingRequest = models.PurchaseReservedInstancesOfferingRequest;
 const RebootInstancesRequest = models.RebootInstancesRequest;
@@ -66,6 +66,7 @@ const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeRe
 const CpuTopology = models.CpuTopology;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
+const EnterRescueModeRequest = models.EnterRescueModeRequest;
 const TagSpecification = models.TagSpecification;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
@@ -80,6 +81,7 @@ const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfi
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
 const RemoveChcAssistVpcRequest = models.RemoveChcAssistVpcRequest;
+const ConvertOperatingSystemsRequest = models.ConvertOperatingSystemsRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
@@ -111,9 +113,11 @@ const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const OperationCountLimit = models.OperationCountLimit;
 const ReservedInstanceConfigInfoItem = models.ReservedInstanceConfigInfoItem;
 const LaunchTemplateVersionData = models.LaunchTemplateVersionData;
+const TargetOS = models.TargetOS;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
+const ConvertOperatingSystemsResponse = models.ConvertOperatingSystemsResponse;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const CreateLaunchTemplateVersionRequest = models.CreateLaunchTemplateVersionRequest;
@@ -121,6 +125,7 @@ const EnhancedService = models.EnhancedService;
 const DescribeLaunchTemplatesResponse = models.DescribeLaunchTemplatesResponse;
 const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
 const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
+const ExitRescueModeRequest = models.ExitRescueModeRequest;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const ExportImagesRequest = models.ExportImagesRequest;
 const ActionTimer = models.ActionTimer;
@@ -140,13 +145,14 @@ const InstanceStatus = models.InstanceStatus;
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
 const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
-const DisasterRecoverGroup = models.DisasterRecoverGroup;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
 const Filter = models.Filter;
 const LaunchTemplateInfo = models.LaunchTemplateInfo;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
+const EnterRescueModeResponse = models.EnterRescueModeResponse;
 const ModifyChcAttributeResponse = models.ModifyChcAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
@@ -174,21 +180,23 @@ const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverG
 const ConfigureChcAssistVpcResponse = models.ConfigureChcAssistVpcResponse;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeChcHostsRequest = models.DescribeChcHostsRequest;
+const LaunchTemplate = models.LaunchTemplate;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const CreateLaunchTemplateVersionResponse = models.CreateLaunchTemplateVersionResponse;
 const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const GPUInfo = models.GPUInfo;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const RegionInfo = models.RegionInfo;
 const DescribeChcDeniedActionsRequest = models.DescribeChcDeniedActionsRequest;
-const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const DescribeImageFromFamilyResponse = models.DescribeImageFromFamilyResponse;
 const ModifyLaunchTemplateDefaultVersionRequest = models.ModifyLaunchTemplateDefaultVersionRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
 const DescribeInternetChargeTypeConfigsRequest = models.DescribeInternetChargeTypeConfigsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
+const LoginSettings = models.LoginSettings;
 const InquirePricePurchaseReservedInstancesOfferingResponse = models.InquirePricePurchaseReservedInstancesOfferingResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
@@ -214,6 +222,7 @@ const Snapshot = models.Snapshot;
 const ModifyInstancesProjectResponse = models.ModifyInstancesProjectResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const Price = models.Price;
+const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
 
 
 /**
@@ -249,6 +258,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enter the rescue mode.
+     * @param {EnterRescueModeRequest} req
+     * @param {function(string, EnterRescueModeResponse):void} cb
+     * @public
+     */
+    EnterRescueMode(req, cb) {
+        let resp = new EnterRescueModeResponse();
+        this.request("EnterRescueMode", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the status of instances.
 
 * You can query the status of an instance with its `ID`.
@@ -265,11 +285,10 @@ class CvmClient extends AbstractClient {
     /**
      * This API is used to modify image sharing information.
 
-* The accounts with which an image is shared can use the shared image to create instances.
-* Each custom image can be shared with up to 50 accounts.
-* You can use a shared image to create instances, but you cannot change its name and description.
-* If an image is shared with another account, the shared image will be in the same region as the original image.
-
+* The account with shared image access can use the image to create instances.
+* Each custom image can be shared with a maximum of 500 accounts.
+* Shared images cannot have their names or description changed. They can only be used to create instances.
+* Sharing is only supported within the same region as the recipient's account.
      * @param {ModifyImageSharePermissionRequest} req
      * @param {function(string, ModifyImageSharePermissionResponse):void} cb
      * @public
@@ -302,17 +321,6 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * The API is used to import an image. The image imported can be used to create instances. Currently, this API can import images in formats like RAW, VHD, QCOW2, and VMDK.
-     * @param {ImportImageRequest} req
-     * @param {function(string, ImportImageResponse):void} cb
-     * @public
-     */
-    ImportImage(req, cb) {
-        let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the price of creating instances. You can only use this API for instances whose configuration is within the purchase limit. For more information, see [RunInstances](https://intl.cloud.tencent.com/document/api/213/15730?from_cn_redirect=1).
      * @param {InquiryPriceRunInstancesRequest} req
      * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
@@ -335,17 +343,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to view the list of images.
-
-* You specify the image ID or set filters to query the details of certain images.
-* You can specify `Offset` and `Limit` to select a certain part of the results. By default, the information on the first 20 matching results is returned.
-     * @param {DescribeImagesRequest} req
-     * @param {function(string, DescribeImagesResponse):void} cb
+     * This API is used to associate security groups with specified instances.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
      * @public
      */
-    DescribeImages(req, cb) {
-        let resp = new DescribeImagesResponse();
-        this.request("DescribeImages", req, resp, cb);
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -495,19 +500,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to shut down instances.
-
-* You can only perform this operation on instances whose status is `RUNNING`.
-* The instance status will become `STOPPING` when the API is called successfully and `STOPPED` when the instance is successfully shut down.
-* Forced shutdown is supported. A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be sht down normally.
-* Batch operations are supported. The maximum number of instances in each request is 100.
-     * @param {StopInstancesRequest} req
-     * @param {function(string, StopInstancesResponse):void} cb
+     * This API is used to exit the rescue mode.
+     * @param {ExitRescueModeRequest} req
+     * @param {function(string, ExitRescueModeResponse):void} cb
      * @public
      */
-    StopInstances(req, cb) {
-        let resp = new StopInstancesResponse();
-        this.request("StopInstances", req, resp, cb);
+    ExitRescueMode(req, cb) {
+        let resp = new ExitRescueModeResponse();
+        this.request("ExitRescueMode", req, resp, cb);
     }
 
     /**
@@ -637,11 +637,11 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query the price for reinstalling an instance.
+     * This API is used to inquire about the price for reinstalling an instance.
 
-* If you have specified the `ImageId` parameter, the price query is performed with the specified image. Otherwise, the image used by the current instance is used.
-* You can only query the price for reinstallation caused by switching between Linux and Windows OS. And the [system disk type](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#SystemDisk) of the instance must be `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
-* Currently, this API only supports instances in Mainland China regions.
+* If you have specified the parameter `ImageId`, inquire about the price for reinstallation by using the specified image. Otherwise, inquire about the price for reinstallation based on the image currently used by the instance.
+* Currently, only instances with a [system disk type](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#SystemDisk) of `CLOUD_BSSD`, `CLOUD_PREMIUM`, or `CLOUD_SSD` are supported for inquiring about the price for reinstallation caused by switching between `Linux` and `Windows` operating systems through this API.
+* Currently, instances in regions outside the Chinese mainland are not supported for inquiring about the price for reinstallation caused by switching between `Linux` and `Windows` operating systems through this API.
      * @param {InquiryPriceResetInstanceRequest} req
      * @param {function(string, InquiryPriceResetInstanceResponse):void} cb
      * @public
@@ -679,14 +679,17 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to purchase one or more specific Reserved Instances.
-     * @param {PurchaseReservedInstancesOfferingRequest} req
-     * @param {function(string, PurchaseReservedInstancesOfferingResponse):void} cb
+     * This API is used to query the price for adjusting the instance model.
+
+* Currently, you can only use this API to query the prices of instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+* Currently, you cannot use this API to query the prices of [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
+     * @param {InquiryPriceResetInstancesTypeRequest} req
+     * @param {function(string, InquiryPriceResetInstancesTypeResponse):void} cb
      * @public
      */
-    PurchaseReservedInstancesOffering(req, cb) {
-        let resp = new PurchaseReservedInstancesOfferingResponse();
-        this.request("PurchaseReservedInstancesOffering", req, resp, cb);
+    InquiryPriceResetInstancesType(req, cb) {
+        let resp = new InquiryPriceResetInstancesTypeResponse();
+        this.request("InquiryPriceResetInstancesType", req, resp, cb);
     }
 
     /**
@@ -786,17 +789,30 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query the price for adjusting the instance model.
-
-* Currently, you can only use this API to query the prices of instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
-* Currently, you cannot use this API to query the prices of [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
-     * @param {InquiryPriceResetInstancesTypeRequest} req
-     * @param {function(string, InquiryPriceResetInstancesTypeResponse):void} cb
+     * This API is used to switch the operating system of an instance with CentOS 7 or CentOS 8 as the source operating system.
+     * @param {ConvertOperatingSystemsRequest} req
+     * @param {function(string, ConvertOperatingSystemsResponse):void} cb
      * @public
      */
-    InquiryPriceResetInstancesType(req, cb) {
-        let resp = new InquiryPriceResetInstancesTypeResponse();
-        this.request("InquiryPriceResetInstancesType", req, resp, cb);
+    ConvertOperatingSystems(req, cb) {
+        let resp = new ConvertOperatingSystemsResponse();
+        this.request("ConvertOperatingSystems", req, resp, cb);
+    }
+
+    /**
+     * This API is used to shut down instances.
+
+* You can only perform this operation on instances whose status is `RUNNING`.
+* The instance status will become `STOPPING` when the API is called successfully and `STOPPED` when the instance is successfully shut down.
+* Forced shutdown is supported. A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be sht down normally.
+* Batch operations are supported. The maximum number of instances in each request is 100.
+     * @param {StopInstancesRequest} req
+     * @param {function(string, StopInstancesResponse):void} cb
+     * @public
+     */
+    StopInstances(req, cb) {
+        let resp = new StopInstancesResponse();
+        this.request("StopInstances", req, resp, cb);
     }
 
     /**
@@ -880,14 +896,15 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to reinstall the operating system of the specified instance.
+     * This API (ResetInstance) is used to reinstall the operating system on a specified instance.
 
-* If you specify an `ImageId`, the specified image is used. Otherwise, the image used by the current instance is used.
-* The system disk will be formatted and reset. Therefore, make sure that no important files are stored on the system disk.
-* If the operating system switches between `Linux` and `Windows`, the system disk `ID` of the instance will change, and the snapshots that are associated with the system disk can no longer be used to roll back and restore data.
-* If no password is specified, you will get a random password via internal message.
-* You can only use this API to switch the operating system between `Linux` and `Windows` for instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#SystemDisk) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
-* Currently, this API only supports instances in Mainland China regions.
+
+
+* If you have specified the parameter `ImageId`, use the specified image for reinstallation. Otherwise, perform reinstallation based on the image currently used by the instance.
+* The system disk will be formatted and reset. Ensure that there are no important files in the system disk.
+* If you do not specify a password, a random password will be sent via Message Center.
+* Currently, only instances with a [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#SystemDisk) of `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, or `CLOUD_BSSD` are supported for implementing operating system switching through this API.
+* You can query the result of the instance operation by calling the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
      * @param {ResetInstanceRequest} req
      * @param {function(string, ResetInstanceResponse):void} cb
      * @public
@@ -898,11 +915,11 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to sync a custom image to other regions.
+     * This API is used to synchronize custom images to other regions.
 
-* Each API call syncs a single image.
-* This API supports syncing an image to multiple regions.
-* Each account can have up to 10 custom images in each region. 
+* This API only supports synchronizing one image per call.
+* This API supports multiple synchronization regions.
+* A single account can have a maximum of 500 custom images in each region.
      * @param {SyncImagesRequest} req
      * @param {function(string, SyncImagesResponse):void} cb
      * @public
@@ -913,11 +930,13 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to modify the attributes of key pairs.
+     * This API is used to modify attributes of a key pair.
 
-* This API modifies the name and description of the key pair identified by the key pair ID.
-* The name of the key pair must be unique.
-* Key pair ID is the unique identifier of a key pair and cannot be modified.
+* Modify the name and description information of the key pair specified by the key pair ID.
+* The key pair name should not be the same as the name of an existing key pair.
+* The key pair ID is the unique identifier of a key pair and cannot be modified.
+
+* Either the key pair name or description information should be specified, and both can also be specified simultaneously.
      * @param {ModifyKeyPairAttributeRequest} req
      * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
      * @public
@@ -928,14 +947,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to disassociate security groups from instances.
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * This API is used to import an image. The image imported can be used to create instances. Currently, this API supports RAW, VHD, QCOW2, and VMDK image formats.
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
      * @public
      */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
     }
 
     /**
@@ -1114,14 +1133,50 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to associate security groups with specified instances.
-     * @param {AssociateSecurityGroupsRequest} req
-     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * This API is used to view the list of images.
+
+* You specify the image ID or set filters to query the details of certain images.
+* You can specify `Offset` and `Limit` to select a certain part of the results. By default, the information on the first 20 matching results is returned.
+     * @param {DescribeImagesRequest} req
+     * @param {function(string, DescribeImagesResponse):void} cb
      * @public
      */
-    AssociateSecurityGroups(req, cb) {
-        let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, cb);
+    DescribeImages(req, cb) {
+        let resp = new DescribeImagesResponse();
+        this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to purchase one or more specific Reserved Instances.
+     * @param {PurchaseReservedInstancesOfferingRequest} req
+     * @param {function(string, PurchaseReservedInstancesOfferingResponse):void} cb
+     * @public
+     */
+    PurchaseReservedInstancesOffering(req, cb) {
+        let resp = new PurchaseReservedInstancesOfferingResponse();
+        this.request("PurchaseReservedInstancesOffering", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disassociate security groups from instances.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view information about available images within an image family.
+     * @param {DescribeImageFromFamilyRequest} req
+     * @param {function(string, DescribeImageFromFamilyResponse):void} cb
+     * @public
+     */
+    DescribeImageFromFamily(req, cb) {
+        let resp = new DescribeImageFromFamilyResponse();
+        this.request("DescribeImageFromFamily", req, resp, cb);
     }
 
     /**

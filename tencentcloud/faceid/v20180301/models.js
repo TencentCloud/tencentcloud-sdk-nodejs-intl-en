@@ -395,7 +395,7 @@ class DetectAIFakeFacesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Suspected attack detail
  * @class
  */
 class AttackRiskDetail extends  AbstractModel {
@@ -403,7 +403,10 @@ class AttackRiskDetail extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Suspected attack trace types
+SuspectedSpoofingAttack: Suspected spoofing attack
+ SuspectedSynthesisImage: Suspected synthesis image SuspectedSynthesisVideo: Suspected synthesis video SuspectedeAnomalyAttack: Suspected anomaly attack SuspectedAdversarialAttack: Suspected adversarial attack SuspectedBlackIndustry: Suspected batch generation attack
+SuspectedWatermark: Suspected watermark
          * @type {string || null}
          */
         this.Type = null;

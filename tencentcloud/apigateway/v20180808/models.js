@@ -4559,7 +4559,7 @@ class BindApiAppRequest extends  AbstractModel {
         this.Environment = null;
 
         /**
-         * Unique ID of the service to be bound
+         * Unique ID of the service to be bound.
          * @type {string || null}
          */
         this.ServiceId = null;

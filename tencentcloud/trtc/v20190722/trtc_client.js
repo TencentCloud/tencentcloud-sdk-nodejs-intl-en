@@ -16,11 +16,15 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const McuLayout = models.McuLayout;
-const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
+const AgentConfig = models.AgentConfig;
+const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
+const AudioEncodeParams = models.AudioEncodeParams;
+const ServerPushText = models.ServerPushText;
 const MixLayout = models.MixLayout;
 const McuVideoParams = models.McuVideoParams;
 const DescribeTRTCRealTimeScaleDataRequest = models.DescribeTRTCRealTimeScaleDataRequest;
+const StartAIConversationResponse = models.StartAIConversationResponse;
+const StartAIConversationRequest = models.StartAIConversationRequest;
 const DescribeTRTCMarketScaleDataRequest = models.DescribeTRTCMarketScaleDataRequest;
 const McuLayoutVolume = models.McuLayoutVolume;
 const SetUserBlockedRequest = models.SetUserBlockedRequest;
@@ -32,13 +36,15 @@ const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
 const AbnormalEvent = models.AbnormalEvent;
 const ScaleInfomation = models.ScaleInfomation;
 const AgentParams = models.AgentParams;
+const ControlAIConversationResponse = models.ControlAIConversationResponse;
 const VideoEncodeParams = models.VideoEncodeParams;
+const UpdateAIConversationResponse = models.UpdateAIConversationResponse;
 const DescribeUserEventResponse = models.DescribeUserEventResponse;
 const VideoEncode = models.VideoEncode;
 const DescribeCallDetailInfoRequest = models.DescribeCallDetailInfoRequest;
 const DescribeTRTCMarketScaleDataResponse = models.DescribeTRTCMarketScaleDataResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
-const AudioEncodeParams = models.AudioEncodeParams;
+const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const CloudStorage = models.CloudStorage;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
@@ -62,8 +68,10 @@ const UserMediaStream = models.UserMediaStream;
 const EventList = models.EventList;
 const DescribeTrtcUsageRequest = models.DescribeTrtcUsageRequest;
 const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
-const McuLayoutParams = models.McuLayoutParams;
+const DismissRoomRequest = models.DismissRoomRequest;
 const StartStreamIngestRequest = models.StartStreamIngestRequest;
+const DescribeAITranscriptionRequest = models.DescribeAITranscriptionRequest;
+const DescribeAIConversationResponse = models.DescribeAIConversationResponse;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const UpdateStreamIngestResponse = models.UpdateStreamIngestResponse;
@@ -71,7 +79,7 @@ const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
 const DescribeRelayUsageResponse = models.DescribeRelayUsageResponse;
-const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
+const McuLayout = models.McuLayout;
 const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
 const StorageFile = models.StorageFile;
 const WaterMark = models.WaterMark;
@@ -81,7 +89,7 @@ const DescribeMixTranscodingUsageResponse = models.DescribeMixTranscodingUsageRe
 const McuFeedBackRoomParams = models.McuFeedBackRoomParams;
 const AudioEncode = models.AudioEncode;
 const RemoveUserRequest = models.RemoveUserRequest;
-const DismissRoomRequest = models.DismissRoomRequest;
+const McuLayoutParams = models.McuLayoutParams;
 const DescribeUnusualEventRequest = models.DescribeUnusualEventRequest;
 const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
 const TencentVod = models.TencentVod;
@@ -90,12 +98,14 @@ const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdRespon
 const TRTCDataResult = models.TRTCDataResult;
 const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
+const RecognizeConfig = models.RecognizeConfig;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
 const QualityData = models.QualityData;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
 const VideoParams = models.VideoParams;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
+const DescribeAIConversationRequest = models.DescribeAIConversationRequest;
 const RowValues = models.RowValues;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartStreamIngestResponse = models.StartStreamIngestResponse;
@@ -104,10 +114,12 @@ const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
 const UserInformation = models.UserInformation;
 const DescribeScaleInfoRequest = models.DescribeScaleInfoRequest;
+const ControlAIConversationRequest = models.ControlAIConversationRequest;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeUnusualEventResponse = models.DescribeUnusualEventResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
+const StartAITranscriptionRequest = models.StartAITranscriptionRequest;
 const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const MixUserInfo = models.MixUserInfo;
 const DismissRoomResponse = models.DismissRoomResponse;
@@ -115,22 +127,29 @@ const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDat
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const MaxVideoUser = models.MaxVideoUser;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
+const STTConfig = models.STTConfig;
 const McuSeiParams = models.McuSeiParams;
+const StopAITranscriptionRequest = models.StopAITranscriptionRequest;
 const EventMessage = models.EventMessage;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
-const RoomState = models.RoomState;
+const TranscriptionParams = models.TranscriptionParams;
+const SeriesInfos = models.SeriesInfos;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const RecordParams = models.RecordParams;
 const DescribeStreamIngestRequest = models.DescribeStreamIngestRequest;
 const McuAudioParams = models.McuAudioParams;
 const McuPublishCdnParam = models.McuPublishCdnParam;
 const AudioParams = models.AudioParams;
+const StopAITranscriptionResponse = models.StopAITranscriptionResponse;
 const WaterMarkTimestamp = models.WaterMarkTimestamp;
 const SingleSubscribeParams = models.SingleSubscribeParams;
+const DescribeAITranscriptionResponse = models.DescribeAITranscriptionResponse;
 const McuWaterMarkParams = models.McuWaterMarkParams;
 const AbnormalExperience = models.AbnormalExperience;
-const SeriesInfos = models.SeriesInfos;
+const UpdateAIConversationRequest = models.UpdateAIConversationRequest;
+const RoomState = models.RoomState;
+const StartAITranscriptionResponse = models.StartAITranscriptionResponse;
 const RemoveUserResponse = models.RemoveUserResponse;
 
 
@@ -156,6 +175,17 @@ class TrtcClient extends AbstractClient {
     DescribeRoomInfo(req, cb) {
         let resp = new DescribeRoomInfoResponse();
         this.request("DescribeRoomInfo", req, resp, cb);
+    }
+
+    /**
+     * Update AI conversation task parameters
+     * @param {UpdateAIConversationRequest} req
+     * @param {function(string, UpdateAIConversationResponse):void} cb
+     * @public
+     */
+    UpdateAIConversation(req, cb) {
+        let resp = new UpdateAIConversationResponse();
+        this.request("UpdateAIConversation", req, resp, cb);
     }
 
     /**
@@ -287,6 +317,17 @@ Usage Precautions:
     }
 
     /**
+     * Describe the AI conversation task status
+     * @param {DescribeAIConversationRequest} req
+     * @param {function(string, DescribeAIConversationResponse):void} cb
+     * @public
+     */
+    DescribeAIConversation(req, cb) {
+        let resp = new DescribeAIConversationResponse();
+        this.request("DescribeAIConversation", req, resp, cb);
+    }
+
+    /**
      * This API is used to change the parameters of a relaying task.
 Note: For details about how to use this API, see the `StartPublishCdnStream` document.
      * @param {UpdatePublishCdnStreamRequest} req
@@ -310,6 +351,17 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
+     * Initiate AI conversation task, where the AI bot enters the TRTC room to engage in AI conversation with specified members in the room. This is suitable for scenarios such as intelligent customer service and AI language teachers. The TRTC AI conversation feature has built-in speech-to-text capabilities , allowing customers to flexibly specify third-party AI model (LLM) services and text-to-speech (TTS) services. For more [feature details](https://cloud.tencent.com/document/product/647/108901).
+     * @param {StartAIConversationRequest} req
+     * @param {function(string, StartAIConversationResponse):void} cb
+     * @public
+     */
+    StartAIConversation(req, cb) {
+        let resp = new StartAIConversationResponse();
+        this.request("StartAIConversation", req, resp, cb);
+    }
+
+    /**
      * You can update the StreamUrl of the Relay task.
      * @param {UpdateStreamIngestRequest} req
      * @param {function(string, UpdateStreamIngestResponse):void} cb
@@ -318,6 +370,17 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     UpdateStreamIngest(req, cb) {
         let resp = new UpdateStreamIngestResponse();
         this.request("UpdateStreamIngest", req, resp, cb);
+    }
+
+    /**
+     * Stop AI Transcription task
+     * @param {StopAITranscriptionRequest} req
+     * @param {function(string, StopAITranscriptionResponse):void} cb
+     * @public
+     */
+    StopAITranscription(req, cb) {
+        let resp = new StopAITranscriptionResponse();
+        this.request("StopAITranscription", req, resp, cb);
     }
 
     /**
@@ -365,6 +428,21 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     DescribeUserEvent(req, cb) {
         let resp = new DescribeUserEventResponse();
         this.request("DescribeUserEvent", req, resp, cb);
+    }
+
+    /**
+     * Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
+- Pull the stream of the entire room.
+- Pull the stream of a specific user.
+
+The server delivers subtitles and transcription messages in real-time through TRTC's custom messages, with `CmdId` fixed at 1. The client only needs to listen for the callback of custom messages. For example, see the [C++ callback](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565). Other clients, such as Android, Web, etc., can also be found at the same link.
+     * @param {StartAITranscriptionRequest} req
+     * @param {function(string, StartAITranscriptionResponse):void} cb
+     * @public
+     */
+    StartAITranscription(req, cb) {
+        let resp = new StartAITranscriptionResponse();
+        this.request("StartAITranscription", req, resp, cb);
     }
 
     /**
@@ -551,6 +629,17 @@ If a recording file is being uploaded to VOD, the response parameter `StorageFil
     }
 
     /**
+     * Describe AI transcription task status
+     * @param {DescribeAITranscriptionRequest} req
+     * @param {function(string, DescribeAITranscriptionResponse):void} cb
+     * @public
+     */
+    DescribeAITranscription(req, cb) {
+        let resp = new DescribeAITranscriptionResponse();
+        this.request("DescribeAITranscription", req, resp, cb);
+    }
+
+    /**
      * Query TRTC Monitoring Dashboard - Real-Time Monitoring Quality Metrics (return the following metrics)
  -Video stutter rate
  -Audio stutter rate
@@ -594,6 +683,17 @@ Note:
     DescribeTRTCMarketQualityData(req, cb) {
         let resp = new DescribeTRTCMarketQualityDataResponse();
         this.request("DescribeTRTCMarketQualityData", req, resp, cb);
+    }
+
+    /**
+     * Provides server-side control of AI Conversation
+     * @param {ControlAIConversationRequest} req
+     * @param {function(string, ControlAIConversationResponse):void} cb
+     * @public
+     */
+    ControlAIConversation(req, cb) {
+        let resp = new ControlAIConversationResponse();
+        this.request("ControlAIConversation", req, resp, cb);
     }
 
     /**

@@ -6318,6 +6318,154 @@ class DeleteAbnormalProcessRulesResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ImageRepoRegistryInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RegistryType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RegistryRegion = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RegistryVersion = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ConnectMsg = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ConnDetectType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ConnDetectHostCount = null;
+
+        /**
+         * 
+         * @type {Array.<RegistryConnDetectResult> || null}
+         */
+        this.ConnDetectDetail = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LatestSyncTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SyncStatus = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SyncFailReason = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SyncSolution = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SyncMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.RegistryRegion = 'RegistryRegion' in params ? params.RegistryRegion : null;
+        this.RegistryVersion = 'RegistryVersion' in params ? params.RegistryVersion : null;
+        this.ConnectMsg = 'ConnectMsg' in params ? params.ConnectMsg : null;
+        this.ConnDetectType = 'ConnDetectType' in params ? params.ConnDetectType : null;
+        this.ConnDetectHostCount = 'ConnDetectHostCount' in params ? params.ConnDetectHostCount : null;
+
+        if (params.ConnDetectDetail) {
+            this.ConnDetectDetail = new Array();
+            for (let z in params.ConnDetectDetail) {
+                let obj = new RegistryConnDetectResult();
+                obj.deserialize(params.ConnDetectDetail[z]);
+                this.ConnDetectDetail.push(obj);
+            }
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.LatestSyncTime = 'LatestSyncTime' in params ? params.LatestSyncTime : null;
+        this.SyncStatus = 'SyncStatus' in params ? params.SyncStatus : null;
+        this.SyncFailReason = 'SyncFailReason' in params ? params.SyncFailReason : null;
+        this.SyncSolution = 'SyncSolution' in params ? params.SyncSolution : null;
+        this.SyncMessage = 'SyncMessage' in params ? params.SyncMessage : null;
+
+    }
+}
+
+/**
  * Runtime security - Basic policy information
  * @class
  */
@@ -22960,6 +23108,69 @@ class DescribeVulDetailResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class RegistryConnDetectResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ConnDetectStatus = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ConnDetectMessage = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Solution = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FailReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.ConnDetectStatus = 'ConnDetectStatus' in params ? params.ConnDetectStatus : null;
+        this.ConnDetectMessage = 'ConnDetectMessage' in params ? params.ConnDetectMessage : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
+        this.FailReason = 'FailReason' in params ? params.FailReason : null;
+
+    }
+}
+
+/**
  * ModifyCompliancePeriodTask response structure.
  * @class
  */
@@ -28988,6 +29199,36 @@ class DescribeAssetImageRegistryRegistryListRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Number to return, default is 10, maximum is 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, the default is 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter field IsAuthorized Whether to authorize. The value can be all, 0 unauthorized, 1 authorized
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sort field
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Sort by asc, desc
+         * @type {string || null}
+         */
+        this.Order = null;
+
     }
 
     /**
@@ -28997,6 +29238,19 @@ class DescribeAssetImageRegistryRegistryListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.By = 'By' in params ? params.By : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -41722,7 +41976,19 @@ class DescribeAssetImageRegistryRegistryListResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Mirror repository list
+         * @type {Array.<ImageRepoRegistryInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total quantity
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -41736,6 +42002,16 @@ class DescribeAssetImageRegistryRegistryListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ImageRepoRegistryInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -46527,6 +46803,7 @@ module.exports = {
     UpdateAssetImageRegistryRegistryDetailResponse: UpdateAssetImageRegistryRegistryDetailResponse,
     ModifySecLogDeliveryKafkaSettingResponse: ModifySecLogDeliveryKafkaSettingResponse,
     DeleteAbnormalProcessRulesResponse: DeleteAbnormalProcessRulesResponse,
+    ImageRepoRegistryInfo: ImageRepoRegistryInfo,
     RuleBaseInfo: RuleBaseInfo,
     ProcessInfo: ProcessInfo,
     ImageInfo: ImageInfo,
@@ -46821,6 +47098,7 @@ module.exports = {
     ModifyAccessControlStatusRequest: ModifyAccessControlStatusRequest,
     CreateProcessEventsExportJobRequest: CreateProcessEventsExportJobRequest,
     DescribeVulDetailResponse: DescribeVulDetailResponse,
+    RegistryConnDetectResult: RegistryConnDetectResult,
     ModifyCompliancePeriodTaskResponse: ModifyCompliancePeriodTaskResponse,
     RiskSyscallEventInfo: RiskSyscallEventInfo,
     DescribeEscapeEventTendencyResponse: DescribeEscapeEventTendencyResponse,

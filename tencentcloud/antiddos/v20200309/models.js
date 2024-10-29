@@ -2031,6 +2031,69 @@ class CreateWaterPrintConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class IpBlockData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BlockTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.UnBlockTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProtectFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.BlockTime = 'BlockTime' in params ? params.BlockTime : null;
+        this.UnBlockTime = 'UnBlockTime' in params ? params.UnBlockTime : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ProtectFlag = 'ProtectFlag' in params ? params.ProtectFlag : null;
+
+    }
+}
+
+/**
  * DescribeListBGPIPInstances request structure.
  * @class
  */
@@ -2235,6 +2298,104 @@ class DescribeNewL7RulesResponse extends  AbstractModel {
         }
         this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DDoS events recorded
+ * @class
+ */
+class OverviewDDoSEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Attack type
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * Attack status. `0`: The attack is ongoing; `1`: The attack ends.
+         * @type {number || null}
+         */
+        this.AttackStatus = null;
+
+        /**
+         * Attack traffic, in Mbps
+         * @type {number || null}
+         */
+        this.Mbps = null;
+
+        /**
+         * Attack packets, in PPS
+         * @type {number || null}
+         */
+        this.Pps = null;
+
+        /**
+         * Anti-DDoS service type. `bgp-multip`: Anti-DDoS Pro; `bgpip`: Anti-DDoS Advanced; `basic`: Anti-DDoS Basic.
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Anti-DDoS instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Anti-DDoS instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.AttackStatus = 'AttackStatus' in params ? params.AttackStatus : null;
+        this.Mbps = 'Mbps' in params ? params.Mbps : null;
+        this.Pps = 'Pps' in params ? params.Pps : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -6013,6 +6174,27 @@ class DescribeListListenerResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeIpBlockList request structure.
+ * @class
+ */
+class DescribeIpBlockListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -9956,78 +10138,24 @@ class DescribeBizTrendRequest extends  AbstractModel {
 }
 
 /**
- * DDoS events recorded
+ * DescribeIpBlockList response structure.
  * @class
  */
-class OverviewDDoSEvent extends  AbstractModel {
+class DescribeIpBlockListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event ID
+         * IP block list
+         * @type {Array.<IpBlockData> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Id = null;
-
-        /**
-         * IP
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * Start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Attack type
-         * @type {string || null}
-         */
-        this.AttackType = null;
-
-        /**
-         * Attack status. `0`: The attack is ongoing; `1`: The attack ends.
-         * @type {number || null}
-         */
-        this.AttackStatus = null;
-
-        /**
-         * Attack traffic, in Mbps
-         * @type {number || null}
-         */
-        this.Mbps = null;
-
-        /**
-         * Attack packets, in PPS
-         * @type {number || null}
-         */
-        this.Pps = null;
-
-        /**
-         * Anti-DDoS service type. `bgp-multip`: Anti-DDoS Pro; `bgpip`: Anti-DDoS Advanced; `basic`: Anti-DDoS Basic.
-         * @type {string || null}
-         */
-        this.Business = null;
-
-        /**
-         * Anti-DDoS instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Anti-DDoS instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
+        this.RequestId = null;
 
     }
 
@@ -10038,17 +10166,16 @@ class OverviewDDoSEvent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.AttackType = 'AttackType' in params ? params.AttackType : null;
-        this.AttackStatus = 'AttackStatus' in params ? params.AttackStatus : null;
-        this.Mbps = 'Mbps' in params ? params.Mbps : null;
-        this.Pps = 'Pps' in params ? params.Pps : null;
-        this.Business = 'Business' in params ? params.Business : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new IpBlockData();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11304,8 +11431,10 @@ module.exports = {
     L7RuleHealth: L7RuleHealth,
     DescribeCCLevelPolicyRequest: DescribeCCLevelPolicyRequest,
     CreateWaterPrintConfigResponse: CreateWaterPrintConfigResponse,
+    IpBlockData: IpBlockData,
     DescribeListBGPIPInstancesRequest: DescribeListBGPIPInstancesRequest,
     DescribeNewL7RulesResponse: DescribeNewL7RulesResponse,
+    OverviewDDoSEvent: OverviewDDoSEvent,
     StaticPackRelation: StaticPackRelation,
     DescribeCCThresholdListResponse: DescribeCCThresholdListResponse,
     DescribeL7RulesBySSLCertIdRequest: DescribeL7RulesBySSLCertIdRequest,
@@ -11380,6 +11509,7 @@ module.exports = {
     IPLineInfo: IPLineInfo,
     DescribeCcBlackWhiteIpListRequest: DescribeCcBlackWhiteIpListRequest,
     DescribeListListenerResponse: DescribeListListenerResponse,
+    DescribeIpBlockListRequest: DescribeIpBlockListRequest,
     DescribePendingRiskInfoRequest: DescribePendingRiskInfoRequest,
     IpSegment: IpSegment,
     CreateL7RuleCertsResponse: CreateL7RuleCertsResponse,
@@ -11446,7 +11576,7 @@ module.exports = {
     CCPrecisionPlyRecord: CCPrecisionPlyRecord,
     DescribeCCPrecisionPlyListResponse: DescribeCCPrecisionPlyListResponse,
     DescribeBizTrendRequest: DescribeBizTrendRequest,
-    OverviewDDoSEvent: OverviewDDoSEvent,
+    DescribeIpBlockListResponse: DescribeIpBlockListResponse,
     DescribeCCLevelPolicyResponse: DescribeCCLevelPolicyResponse,
     DescribeListWaterPrintConfigResponse: DescribeListWaterPrintConfigResponse,
     TagFilter: TagFilter,

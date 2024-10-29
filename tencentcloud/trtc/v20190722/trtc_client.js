@@ -37,6 +37,7 @@ const AbnormalEvent = models.AbnormalEvent;
 const ScaleInfomation = models.ScaleInfomation;
 const AgentParams = models.AgentParams;
 const ControlAIConversationResponse = models.ControlAIConversationResponse;
+const StopAITranscriptionRequest = models.StopAITranscriptionRequest;
 const VideoEncodeParams = models.VideoEncodeParams;
 const UpdateAIConversationResponse = models.UpdateAIConversationResponse;
 const DescribeUserEventResponse = models.DescribeUserEventResponse;
@@ -103,7 +104,7 @@ const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
 const QualityData = models.QualityData;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
-const VideoParams = models.VideoParams;
+const StopAIConversationResponse = models.StopAIConversationResponse;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
 const DescribeAIConversationRequest = models.DescribeAIConversationRequest;
 const RowValues = models.RowValues;
@@ -128,8 +129,9 @@ const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const MaxVideoUser = models.MaxVideoUser;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
 const STTConfig = models.STTConfig;
+const VideoParams = models.VideoParams;
 const McuSeiParams = models.McuSeiParams;
-const StopAITranscriptionRequest = models.StopAITranscriptionRequest;
+const StopAIConversationRequest = models.StopAIConversationRequest;
 const EventMessage = models.EventMessage;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
@@ -202,6 +204,17 @@ class TrtcClient extends AbstractClient {
     DescribeTrtcUsage(req, cb) {
         let resp = new DescribeTrtcUsageResponse();
         this.request("DescribeTrtcUsage", req, resp, cb);
+    }
+
+    /**
+     * Stop AI conversation task
+     * @param {StopAIConversationRequest} req
+     * @param {function(string, StopAIConversationResponse):void} cb
+     * @public
+     */
+    StopAIConversation(req, cb) {
+        let resp = new StopAIConversationResponse();
+        this.request("StopAIConversation", req, resp, cb);
     }
 
     /**

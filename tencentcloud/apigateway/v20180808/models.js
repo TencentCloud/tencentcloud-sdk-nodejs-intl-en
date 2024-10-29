@@ -11686,25 +11686,25 @@ class AttachPluginRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the plugin to be bound.
+         * ID of the bound API gateway plugin.
          * @type {string || null}
          */
         this.PluginId = null;
 
         /**
-         * Service ID.
+         * ID of the service to be operated
          * @type {string || null}
          */
         this.ServiceId = null;
 
         /**
-         * API environment.
+         * Environment for operating the API.
          * @type {string || null}
          */
         this.EnvironmentName = null;
 
         /**
-         * List of APIs bound with the plugin
+         * List of APIs to be bound.
          * @type {Array.<string> || null}
          */
         this.ApiIds = null;
@@ -13055,7 +13055,7 @@ class AttachPluginResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether binding succeeded.
+         * Whether the binding operation is successful.
          * @type {boolean || null}
          */
         this.Result = null;

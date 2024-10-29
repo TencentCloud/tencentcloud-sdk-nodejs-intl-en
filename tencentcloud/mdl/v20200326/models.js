@@ -3765,6 +3765,12 @@ Currently, fMP4 segments do not support DRM or time shifting.
          */
         this.VideoResolution = null;
 
+        /**
+         * Whether to include the `EXT-X-ENDLIST` tag, 1 includes  `EXT-X-ENDLIST` tag, 2 does not include  `EXT-X-ENDLIST` tag; the default value is 1.
+         * @type {number || null}
+         */
+        this.EndListTag = null;
+
     }
 
     /**
@@ -3786,6 +3792,7 @@ Currently, fMP4 segments do not support DRM or time shifting.
         this.PartialSegmentPlaySite = 'PartialSegmentPlaySite' in params ? params.PartialSegmentPlaySite : null;
         this.StreamOrder = 'StreamOrder' in params ? params.StreamOrder : null;
         this.VideoResolution = 'VideoResolution' in params ? params.VideoResolution : null;
+        this.EndListTag = 'EndListTag' in params ? params.EndListTag : null;
 
     }
 }

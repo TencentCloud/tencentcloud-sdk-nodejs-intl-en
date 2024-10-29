@@ -57,8 +57,10 @@ const CcBlackWhiteIpPolicy = models.CcBlackWhiteIpPolicy;
 const L7RuleHealth = models.L7RuleHealth;
 const DescribeCCLevelPolicyRequest = models.DescribeCCLevelPolicyRequest;
 const CreateWaterPrintConfigResponse = models.CreateWaterPrintConfigResponse;
+const IpBlockData = models.IpBlockData;
 const DescribeListBGPIPInstancesRequest = models.DescribeListBGPIPInstancesRequest;
 const DescribeNewL7RulesResponse = models.DescribeNewL7RulesResponse;
+const OverviewDDoSEvent = models.OverviewDDoSEvent;
 const StaticPackRelation = models.StaticPackRelation;
 const DescribeCCThresholdListResponse = models.DescribeCCThresholdListResponse;
 const DescribeL7RulesBySSLCertIdRequest = models.DescribeL7RulesBySSLCertIdRequest;
@@ -133,6 +135,7 @@ const PackInfo = models.PackInfo;
 const IPLineInfo = models.IPLineInfo;
 const DescribeCcBlackWhiteIpListRequest = models.DescribeCcBlackWhiteIpListRequest;
 const DescribeListListenerResponse = models.DescribeListListenerResponse;
+const DescribeIpBlockListRequest = models.DescribeIpBlockListRequest;
 const DescribePendingRiskInfoRequest = models.DescribePendingRiskInfoRequest;
 const IpSegment = models.IpSegment;
 const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
@@ -199,7 +202,7 @@ const BGPInstance = models.BGPInstance;
 const CCPrecisionPlyRecord = models.CCPrecisionPlyRecord;
 const DescribeCCPrecisionPlyListResponse = models.DescribeCCPrecisionPlyListResponse;
 const DescribeBizTrendRequest = models.DescribeBizTrendRequest;
-const OverviewDDoSEvent = models.OverviewDDoSEvent;
+const DescribeIpBlockListResponse = models.DescribeIpBlockListResponse;
 const DescribeCCLevelPolicyResponse = models.DescribeCCLevelPolicyResponse;
 const DescribeListWaterPrintConfigResponse = models.DescribeListWaterPrintConfigResponse;
 const TagFilter = models.TagFilter;
@@ -697,6 +700,17 @@ This API is used to get an Anti-DDoS IP blocklist/allowlist.
     DescribeListDDoSSpeedLimitConfig(req, cb) {
         let resp = new DescribeListDDoSSpeedLimitConfigResponse();
         this.request("DescribeListDDoSSpeedLimitConfig", req, resp, cb);
+    }
+
+    /**
+     * 
+     * @param {DescribeIpBlockListRequest} req
+     * @param {function(string, DescribeIpBlockListResponse):void} cb
+     * @public
+     */
+    DescribeIpBlockList(req, cb) {
+        let resp = new DescribeIpBlockListResponse();
+        this.request("DescribeIpBlockList", req, resp, cb);
     }
 
     /**

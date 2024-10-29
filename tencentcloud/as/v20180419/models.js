@@ -72,12 +72,11 @@ The launch configuration uses `InstanceType` to indicate one single instance typ
         this.InstanceTypes = null;
 
         /**
-         * Instance type verification policy which works when InstanceTypes is actually modified. Value range: ALL, ANY. Default value: ANY.
-<br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-<br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
-
-Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+         * InstanceType verification policy, which is effective when actual modification is made to InstanceTypes. Valid values include ALL and ANY and the default value is ANY.
+<li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
+<li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
+Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
          * @type {string || null}
          */
         this.InstanceTypesCheckPolicy = null;
@@ -135,9 +134,9 @@ This field can be modified only when the current billing mode is spot instance.
         this.InstanceMarketOptions = null;
 
         /**
-         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-<br><li>ORIGINAL: uses the configured cloud disk type
-<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * Cloud disk type selection policy. Valid values:
+<li>ORIGINAL: Use the set cloud disk type.</li>
+<li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
@@ -208,6 +207,19 @@ Note: This field is default to empty
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
+
+        /**
+         * Instance tag list. By specifying this parameter, the instances added through scale-out can be bound to the tag. Up to 10 Tags can be specified.
+This parameter will overwrite the original instance tag list. To add new tags, you need to pass the new tags along with the original tags.
+         * @type {Array.<InstanceTag> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * Image family name.
+         * @type {string || null}
+         */
+        this.ImageFamily = null;
 
     }
 
@@ -293,6 +305,16 @@ Note: This field is default to empty
             obj.deserialize(params.LoginSettings)
             this.LoginSettings = obj;
         }
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+        this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
 
     }
 }
@@ -438,9 +460,9 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.SubnetIds = null;
 
         /**
-         * Termination policy. Currently, the maximum length is 1. Value range: OLDEST_INSTANCE, NEWEST_INSTANCE.
-<br><li> OLDEST_INSTANCE: The oldest instance in the auto scaling group will be terminated first.
-<br><li> NEWEST_INSTANCE: The newest instance in the auto scaling group will be terminated first.
+         * Termination policy, whose maximum length is currently 1. Valid values include OLDEST_INSTANCE and NEWEST_INSTANCE.
+<li>OLDEST_INSTANCE: Terminate the oldest instance in the scaling group first.</li>
+<li>NEWEST_INSTANCE: Terminate the newest instance in the scaling group first.</li>
          * @type {Array.<string> || null}
          */
         this.TerminationPolicies = null;
@@ -458,23 +480,21 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * Retry policy. Valid values: `IMMEDIATE_RETRY` (default), `INCREMENTAL_INTERVALS`, `NO_RETRY`. A partially successful scaling is judged as a failed one.
-<br><li>
-`IMMEDIATE_RETRY`: Retrying immediately in a short period of time and stopping after five consecutive failures.
-<br><li>
-`INCREMENTAL_INTERVALS`: Retrying at incremental intervals. As the number of consecutive failures increases, the retry interval gradually increases, ranging from seconds to one day.
-<br><li>`NO_RETRY`: Do not retry. Actions are taken when the next call or alarm message comes.
+         * Retry policy, whose valid values include IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY, with the default value being IMMEDIATE_RETRY. A partially successful scaling activity is considered a failed activity.
+<li>IMMEDIATE_RETRY: Immediately retry, and quickly retry in a short period. There will be no retry anymore after a certain number of consecutive failures (5).</li>
+<li>INCREMENTAL_INTERVALS: Retry with incremental intervals. As the number of consecutive failures increases, the retry intervals gradually become longer, ranging from seconds to one day.</li>
+<li>NO_RETRY: There will be no retry until another user call or alarm information is received.</li>
          * @type {string || null}
          */
         this.RetryPolicy = null;
 
         /**
-         * Availability zone verification policy. Value range: ALL, ANY. Default value: ANY. This will work when the resource-related fields (launch configuration, availability zone, or subnet) of the auto scaling group are actually modified.
-<br><li> ALL: The verification will succeed only if all availability zones (Zone) or subnets (SubnetId) are available; otherwise, an error will be reported.
-<br><li> ANY: The verification will success if any availability zone (Zone) or subnet (SubnetId) is available; otherwise, an error will be reported.
+         * AZ verification policy, whose valid values include ALL and ANY, with the default value being ANY. This policy comes into effect when actual changes are made to resource-related fields in the scaling group (such as launch configuration, AZ, or subnet).
+<li>ALL: Verification passes if all AZs or subnets are available; otherwise, a verification error will be reported.<li>
+<li>ANY: Verification passes if any AZ or subnet is available; otherwise, a verification error will be reported.</li>
 
-Common reasons why an availability zone or subnet is unavailable include stock-out of CVM instances or CBS cloud disks in the availability zone, insufficient quota in the availability zone, or insufficient IPs in the subnet.
-If an availability zone or subnet in Zones/SubnetIds does not exist, a verification error will be reported regardless of the value of ZonesCheckPolicy.
+Common reasons for unavailable AZs or subnets include the CVM InstanceType in the AZ being sold out, the CBS cloud disk in the AZ being sold out, insufficient quota in the AZ, and insufficient IP addresses in the subnet.
+If there is no AZ or subnet in Zones/SubnetIds, a verification error will be reported regardless of the values of ZonesCheckPolicy.
          * @type {string || null}
          */
         this.ZonesCheckPolicy = null;
@@ -492,20 +512,22 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
         this.Ipv6AddressCount = null;
 
         /**
-         * Multi-availability zone/subnet policy. Valid values: `PRIORITY` and `EQUALITY`. Default value: `PRIORITY`.
-<br><li>`PRIORITY`: When an instance is being created, the availability zone/subnet is chosen from top to bottom in the list. The first availability zone/subnet is always used as long as instances can be created.
-<br><li>`EQUALITY`: Instances created for scaling out are distributed to multiple availability zones/subnets, so as to keep the number of instances in different availability zone/subnet in balance.
+         * Multi-AZ/multi-subnet policy, whose valid values include PRIORITY and EQUALITY, with the default value being PRIORITY.
+<li>PRIORITY: Instances are attempted to be created taking the order of the AZ/subnet list as the priority. If the highest-priority AZ/subnet can create instances successfully, instances can always be created in that AZ/subnet.</li>
+<li>EQUALITY: The instances added through scale-out will be distributed across multiple AZs/subnets to ensure a relatively balanced number of instances in each AZ/subnet after scaling out.</li>
 
-Notes:
-<br><li> When the scaling group is based on the classic network, this policy applies to multiple availability zones. When the scaling group is based on a VPC, this policy applies to multiple subnets, and you do not need to consider availability zones. For example, if you have four subnets (A, B, C, and D) and A, B, and C are in availability zone 1 and D is in availability zone 2, you only need to decide the order of the four subnets, without worrying about the issue of availability zones.
-<br><li> This policy is applicable to multiple availability zones/subnets, but is not applicable to multiple models with launch configurations. Specify the models according to the model priority.
-<br><li> When `PRIORITY` policy is used, the multi-model policy prevails the multi-availability zones/subnet policy. For example, if you have Model A/B, and Subnet 1/2/3, the model-subnet combinations are tried in the following order: A1 -> A2 -> A3 -> B1 -> B2 -> B3. If A1 is sold out, A2 (not B1) is tried next.
+Points to consider regarding this policy:
+<li>When the scaling group is based on a classic network, this policy applies to the multi-AZ; when the scaling group is based on a VPC network, this policy applies to the multi-subnet, in this case, the AZs are no longer considered. For example, if there are four subnets labeled A, B, C, and D, where A, B, and C are in AZ 1 and D is in AZ 2, the subnets A, B, C, and D are considered for sorting without regard to AZs 1 and 2.</li>
+<li>This policy applies to the multi-AZ/multi-subnet and not to the InstanceTypes parameter of the launch configuration, which is selected according to the priority policy.</li>
+<li>When instances are created according to the PRIORITY policy, ensure the policy for multiple models first, followed by the policy for the multi-AZ/subnet. For example, with models A and B and subnets 1, 2, and 3, attempts will be made in the order of A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 will be attempted (instead of B1).</li>
          * @type {string || null}
          */
         this.MultiZoneSubnetPolicy = null;
 
         /**
-         * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+         * Scaling group instance health check type, whose valid values include:
+<li>CVM: Determines whether an instance is unhealthy based on its network status. An unhealthy network status is indicated by an event where instances become unreachable via PING. Detailed criteria of judgment can be found in [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1).</li>
+<li>CLB: Determines whether an instance is unhealthy based on the health check status of CLB. For principles behind CLB health checks, see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).</li>
          * @type {string || null}
          */
         this.HealthCheckType = null;
@@ -517,9 +539,9 @@ Notes:
         this.LoadBalancerHealthCheckGracePeriod = null;
 
         /**
-         * Specifies how to assign instances. Valid values: `LAUNCH_CONFIGURATION` and `SPOT_MIXED`.
-<br><li>`LAUNCH_CONFIGURATION`: the launch configuration mode.
-<br><li>`SPOT_MIXED`: a mixed instance mode. Currently, this mode is supported only when the launch configuration takes the pay-as-you-go billing mode. With this mode, the scaling group can provision a combination of pay-as-you-go instances and spot instances to meet the configured capacity. Note that the billing mode of the associated launch configuration cannot be modified when this mode is used.
+         * Instance assignment policy, whose valid values include LAUNCH_CONFIGURATION and SPOT_MIXED.
+<li>LAUNCH_CONFIGURATION: Represent the traditional mode of assigning instances according to the launch configuration.</li>
+<li>SPOT_MIXED: Represent the spot mixed mode. Currently, this mode is supported only when the launch configuration is set to the pay-as-you-go billing mode. In the mixed mode, the scaling group will scale out pay-as-you-go models or spot models based on the predefined settings. When the mixed mode is used, the billing type of the associated launch configuration cannot be modified.</li>
          * @type {string || null}
          */
         this.InstanceAllocationPolicy = null;
@@ -532,9 +554,9 @@ This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIX
         this.SpotMixedAllocationPolicy = null;
 
         /**
-         * Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
-<br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-<br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
+         * Capacity rebalancing feature, which is applicable only to spot instances within the scaling group. Valid values:
+<li>TRUE: Enable this feature. When spot instances in the scaling group are about to be automatically recycled by the spot instance service, AS proactively initiates the termination process of the spot instances. If there is a configured scale-in hook, it will be triggered before termination. After the termination process starts, AS asynchronously initiates the scale-out to reach the expected number of instances.</li>
+<li>FALSE: Disable this feature. AS waits for the spot instance to be terminated before scaling out to reach the number of instances expected by the scaling group.</li>
          * @type {boolean || null}
          */
         this.CapacityRebalance = null;
@@ -1041,6 +1063,13 @@ Note: This field is default to empty
          */
         this.DisasterRecoverGroupIds = null;
 
+        /**
+         * Image family name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageFamily = null;
+
     }
 
     /**
@@ -1158,6 +1187,7 @@ Note: This field is default to empty
             this.IPv6InternetAccessible = obj;
         }
         this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
+        this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
 
     }
 }
@@ -1762,6 +1792,15 @@ class InstanceNameSettings extends  AbstractModel {
          */
         this.InstanceNameStyle = null;
 
+        /**
+         * CVM instance name suffix. The length of the character is within the range of [1, 105], and the combined length with InstanceName should not exceed 107.
+
+Assume the suffix name is suffix and the original instance name is test.0, then the final instance name is test.0.suffix.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceNameSuffix = null;
+
     }
 
     /**
@@ -1773,6 +1812,7 @@ class InstanceNameSettings extends  AbstractModel {
         }
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.InstanceNameStyle = 'InstanceNameStyle' in params ? params.InstanceNameStyle : null;
+        this.InstanceNameSuffix = 'InstanceNameSuffix' in params ? params.InstanceNameSuffix : null;
 
     }
 }
@@ -2905,12 +2945,12 @@ Note that this project ID is not the same as the project ID of the scaling group
         this.CamRoleName = null;
 
         /**
-         * Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
-<br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-<br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
+         * InstanceType verification policy, whose valid values include ALL and ANY, with the default value being ANY.
+<li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
+<li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
 
-Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
          * @type {string || null}
          */
         this.InstanceTypesCheckPolicy = null;
@@ -2947,9 +2987,9 @@ If this field is configured in a launch configuration, the `InstanceName` of a C
         this.InstanceChargePrepaid = null;
 
         /**
-         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-<br><li>ORIGINAL: uses the configured cloud disk type
-<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * Cloud disk type selection policy, whose default value is ORIGINAL. Valid values:
+<li>ORIGINAL: Use the set cloud disk type.</li>
+<li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
          * @type {string || null}
          */
         this.DiskTypePolicy = null;
@@ -2972,6 +3012,12 @@ Note: This field is default to empty
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
+
+        /**
+         * Image family name. Either image ID or image family name should be filled in, and only one of which can be filled.
+         * @type {string || null}
+         */
+        this.ImageFamily = null;
 
     }
 
@@ -3076,6 +3122,7 @@ Note: This field is default to empty
             this.IPv6InternetAccessible = obj;
         }
         this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
+        this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
 
     }
 }
@@ -3754,23 +3801,34 @@ class HostNameSettings extends  AbstractModel {
         super();
 
         /**
-         * Hostname of a CVM
-<br><li>The `HostName` cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
-<br><li>This field is unavailable to CVM instances.
-<br><li>Other types of instances (such as Linux): the name contains 2 to 40 characters, and supports multiple periods (.). The string between two periods can consist of letters (case insensitive), numbers, and hyphens (-), and cannot be all numbers.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * CVM HostName.
+<li>Dots (.) and hyphens (-) cannot be used as the first or last character of HostName, and cannot be used consecutively.</li>
+<li>Windows instances are not supported.</li>
+<li>Instances of other types (e.g., Linux): The length of the character should be within the range of [2, 40]. Multiple dots (.) are allowed. Each segment between dot marks can consist of letters (case-insensitive), digits, and hyphens (-). Using only digits is not allowed.</li>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Type of CVM host name. Valid values: "ORIGINAL" and "UNIQUE". Default value: "ORIGINAL"
-<br><li> ORIGINAL. Auto Scaling transfers the HostName set in input parameters to the CVM directly. CVM may adds serial numbers for the HostName. The HostName of instances within the auto scaling group may conflict.
-<br><li> UNIQUE. The HostName set in input parameters is the prefix of a host name. Auto Scaling and CVM expand it. The HostName of an instance in the auto scaling group is unique.
+         * The style of the CVM HostName. Valid values include ORIGINAL and UNIQUE, and the default value is ORIGINAL.
+<li>ORIGINAL: AS passes HostName filled in the input parameters to CVM. CVM may append serial numbers to HostName, which can result in conflicts with HostName of instances in the scaling group.</li>
+<li> UNIQUE: HostName filled in the input parameters acts as a prefix for the HostName. AS and CVM will expand this prefix to ensure that HostName of the instance in the scaling group is unique.</li>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HostNameStyle = null;
+
+        /**
+         * HostName suffix for CVM.
+<li>Dots (.) and hyphens (-) cannot be used as the first or last character of HostNameSuffix, and cannot be used consecutively.</li>
+<li>Windows instances are not supported.</li>
+<li>Instances of other types (e.g., Linux): The length of the character should be within the range of [1, 37], and the combined length with HostName should not exceed 39. Multiple dots (.) are allowed. Each segment between dots can consist of letters (case-insensitive), digits, and hyphens (-).</li>
+Assume the suffix name is suffix and the original HostName is test.0, then the final HostName is test.0.suffix.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HostNameSuffix = null;
 
     }
 
@@ -3783,6 +3841,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.HostNameStyle = 'HostNameStyle' in params ? params.HostNameStyle : null;
+        this.HostNameSuffix = 'HostNameSuffix' in params ? params.HostNameSuffix : null;
 
     }
 }
@@ -4233,7 +4292,7 @@ class ModifyScalingPolicyRequest extends  AbstractModel {
         this.AdjustmentType = null;
 
         /**
-         * Specifies how to adjust the number of desired capacity when the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Values: <br><li>`AdjustmentType`=`CHANGE_IN_CAPACITY`: Number of instances to add (positive number) or remove (negative number). </li> <li>`AdjustmentType`=`EXACT_CAPACITY`: Set the desired capacity to the specified number. It must be ≥ 0. </li> <li>`AdjustmentType`=`PERCENT_CHANGE_IN_CAPACITY`: Percentage of instance number. Add instances (positive value) or remove instances (negative value) accordingly.
+         * The adjustment value for the expected number of instances after an alarm is triggered. It applies only to simple policies. <li>When AdjustmentType is CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase in the number of instances after the alarm is triggered, and a negative AdjustmentValue indicates a decrease in the number of instances after the alarm is triggered.</li> <li>When AdjustmentType is EXACT_CAPACITY, the value of AdjustmentValue represents the expected number of instances after the alarm is triggered, which should be greater than or equal to 0.</li> <li>When AdjustmentType is PERCENT_CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase in the number of instances by percentage after the alarm is triggered, and a negative AdjustmentValue indicates a decrease in the number of instances by percentage after the alarm is triggered. The unit is: %.</li>
          * @type {number || null}
          */
         this.AdjustmentValue = null;
@@ -5224,8 +5283,16 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk type. See [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>`LOCAL_BASIC`: Local disk<br><li>`LOCAL_SSD`: Local SSD disk<br><li>`CLOUD_BASIC`: HDD cloud disk<br><li>`CLOUD_PREMIUM`: Premium cloud storage<br><li>`CLOUD_SSD`: SSD cloud disk<br><li>`CLOUD_HSSD`: Enhanced SSD<br><li>`CLOUD_TSSD`: Tremendous SSD<br><br>The default value should be the same as the `DiskType` field under `SystemDisk`.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Data disk type. For restrictions on data disk type, see [Cloud Block Storage Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
+<li>LOCAL_BASIC: Local hard disk.</li>
+<li>LOCAL_SSD: Local SSD.</li>
+<li>CLOUD_BASIC: General cloud disk.</li>
+<li>CLOUD_PREMIUM: Premium cloud disk.</li>
+<li>CLOUD_SSD: Cloud SSD.</li>
+<li>CLOUD_HSSD: Enhanced SSD.</li>
+<li>CLOUD_TSSD: Ultra SSD.</li>
+The default value is consistent with the system disk type (SystemDisk.DiskType).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -5245,15 +5312,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SnapshotId = null;
 
         /**
-         * Specifies whether the data disk is terminated along with the termination of the associated CVM instance.  Values: <br><li>`TRUE` (only available for pay-as-you-go cloud disks that are billed by hour) and `FALSE`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * Whether the data disk is terminated along with the instance. Valid values:
+<li>TRUE: When the instance is terminated, the data disk is also terminated. This option is only supported for hourly postpaid cloud disks.</li>
+<li>FALSE: When the instance is terminated, the data disk is retained.</li>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
 
         /**
-         * Data disk encryption. Valid values: <br><li>`TRUE`: Encrypted<br><li>`FALSE`: Not encrypted
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether the data disk is encrypted. Valid values:
+<li>TRUE: Encrypted.</li>
+<li>FALSE: Not encrypted.</li>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.Encrypt = null;
@@ -5265,6 +5336,15 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          * @type {number || null}
          */
         this.ThroughputPerformance = null;
+
+        /**
+         * Burst performance: Whether to enable burst performance. The default value is false.
+
+Note: This feature is in beta test and requires a ticket to be submitted for usage.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.BurstPerformance = null;
 
     }
 
@@ -5281,6 +5361,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.BurstPerformance = 'BurstPerformance' in params ? params.BurstPerformance : null;
 
     }
 }
@@ -6720,6 +6801,16 @@ Default value: CLASSIC_SCALING
          */
         this.ReplaceLoadBalancerUnhealthy = null;
 
+        /**
+         * Replace mode of unhealthy replacement service. Valid values:
+RECREATE: Rebuild an instance to replace the original unhealthy instance.
+RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration.
+Default value: RECREATE.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReplaceMode = null;
+
     }
 
     /**
@@ -6732,6 +6823,7 @@ Default value: CLASSIC_SCALING
         this.ReplaceMonitorUnhealthy = 'ReplaceMonitorUnhealthy' in params ? params.ReplaceMonitorUnhealthy : null;
         this.ScalingMode = 'ScalingMode' in params ? params.ScalingMode : null;
         this.ReplaceLoadBalancerUnhealthy = 'ReplaceLoadBalancerUnhealthy' in params ? params.ReplaceLoadBalancerUnhealthy : null;
+        this.ReplaceMode = 'ReplaceMode' in params ? params.ReplaceMode : null;
 
     }
 }
@@ -7136,15 +7228,15 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
         this.LaunchConfigurationIds = null;
 
         /**
-         * Filters
-<li> `launch-configuration-id` - String - Required: No - Filter by launch configuration ID.</li>
-<li> `launch-configuration-name` - String - Required: No - Filter by launch configuration name.</li>
-<li> `launch-configuration-name` - String - Required: No - Fuzzy search by launch configuration name.</li>
-<li> `tag-key` - String - Required: No - Filter by the tag key.</li>
-<li> `tag-value` - String - Required: No - Filter by the tag value.</li>
-<li>tag:tag-key - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
+         * Filter criteria
+
+<li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration ID.</li>
+<li>launch-configuration-name - String - required: no - (filter condition) filter by launch configuration name.</li>
+<li>vague-launch-configuration-name - String - required: no - (filter condition) fuzzy search by launch configuration name.</li>
+<li>tag-key - String - required: no - (filter condition) filter by tag key.</li>
+<li>tag-value - String - required: no - (filter condition) filter by tag value.</li>
+<li>tag:tag-key - String - required: no - (filter condition) filter by Tag key-value pair. Replace tag-key with a specific tag key. See Example 3 for usage.</li>
+The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. The parameter does not support specifying both `LaunchConfigurationIds` and `Filters`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8089,6 +8181,13 @@ Setting it to `true` will clear the instance name settings, which means that CVM
          */
         this.ClearDisasterRecoverGroupIds = null;
 
+        /**
+         * Whether to clear the instance tag list. This parameter is optional, and its default value is false.
+If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.
+         * @type {boolean || null}
+         */
+        this.ClearInstanceTags = null;
+
     }
 
     /**
@@ -8103,6 +8202,7 @@ Setting it to `true` will clear the instance name settings, which means that CVM
         this.ClearHostNameSettings = 'ClearHostNameSettings' in params ? params.ClearHostNameSettings : null;
         this.ClearInstanceNameSettings = 'ClearInstanceNameSettings' in params ? params.ClearInstanceNameSettings : null;
         this.ClearDisasterRecoverGroupIds = 'ClearDisasterRecoverGroupIds' in params ? params.ClearDisasterRecoverGroupIds : null;
+        this.ClearInstanceTags = 'ClearInstanceTags' in params ? params.ClearInstanceTags : null;
 
     }
 }

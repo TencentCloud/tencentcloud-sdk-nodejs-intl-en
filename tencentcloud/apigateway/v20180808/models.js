@@ -15392,16 +15392,22 @@ class CreateApiKeyRequest extends  AbstractModel {
         this.AccessKeyType = null;
 
         /**
-         * Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5–50 letters, digits, and underscores.
+         * Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5-50 letters, digits, and underscores.
          * @type {string || null}
          */
         this.AccessKeyId = null;
 
         /**
-         * Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10–50 letters, digits, and underscores.
+         * Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10-50 letters, digits, and underscores.
          * @type {string || null}
          */
         this.AccessKeySecret = null;
+
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -15416,6 +15422,15 @@ class CreateApiKeyRequest extends  AbstractModel {
         this.AccessKeyType = 'AccessKeyType' in params ? params.AccessKeyType : null;
         this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
         this.AccessKeySecret = 'AccessKeySecret' in params ? params.AccessKeySecret : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

@@ -1942,57 +1942,6 @@ class CloneCDNDomainRequest extends  AbstractModel {
 }
 
 /**
- * Result information of intelligent cover generating
- * @class
- */
-class AiAnalysisTaskCoverOutput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of intelligently generated thumbnails
-<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `CoverSetFileUrl`.
-         * @type {Array.<MediaAiAnalysisCoverItem> || null}
-         */
-        this.CoverSet = null;
-
-        /**
-         * URL to the file for intelligently generated thumbnails. The file is in JSON format and has the same data structure as `CoverSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `CoverSetFileUrlExpireTime`.
-         * @type {string || null}
-         */
-        this.CoverSetFileUrl = null;
-
-        /**
-         * Expiration time of the URL to the file for intelligently generated thumbnails, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
-         * @type {string || null}
-         */
-        this.CoverSetFileUrlExpireTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CoverSet) {
-            this.CoverSet = new Array();
-            for (let z in params.CoverSet) {
-                let obj = new MediaAiAnalysisCoverItem();
-                obj.deserialize(params.CoverSet[z]);
-                this.CoverSet.push(obj);
-            }
-        }
-        this.CoverSetFileUrl = 'CoverSetFileUrl' in params ? params.CoverSetFileUrl : null;
-        this.CoverSetFileUrlExpireTime = 'CoverSetFileUrlExpireTime' in params ? params.CoverSetFileUrlExpireTime : null;
-
-    }
-}
-
-/**
  * Media quality inspection task generates.
  * @class
  */
@@ -5151,7 +5100,7 @@ class ComposeMediaRequest extends  AbstractModel {
 }
 
 /**
- * Video content recognition template details
+ * Video content recognition template details.
  * @class
  */
 class AIRecognitionTemplateItem extends  AbstractModel {
@@ -5175,6 +5124,14 @@ class AIRecognitionTemplateItem extends  AbstractModel {
          * @type {string || null}
          */
         this.Comment = null;
+
+        /**
+         * Template type, values:
+<li>Preset: system preset template;</li>
+<li>Custom: user-defined template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
 
         /**
          * Control parameter of opening and closing credits recognition.
@@ -5226,6 +5183,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AsrWordsConfigure = null;
 
         /**
+         * Voice translation control parameter.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AsrTranslateConfigureInfo || null}
+         */
+        this.AsrTranslateConfigure = null;
+
+        /**
          * Control parameter of object recognition.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {ObjectConfigureInfo || null}
@@ -5262,6 +5226,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
         if (params.HeadTailConfigure) {
             let obj = new HeadTailConfigureInfo();
@@ -5303,6 +5268,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new AsrWordsConfigureInfo();
             obj.deserialize(params.AsrWordsConfigure)
             this.AsrWordsConfigure = obj;
+        }
+
+        if (params.AsrTranslateConfigure) {
+            let obj = new AsrTranslateConfigureInfo();
+            obj.deserialize(params.AsrTranslateConfigure)
+            this.AsrTranslateConfigure = obj;
         }
 
         if (params.ObjectConfigure) {
@@ -12086,10 +12057,19 @@ class MediaSubtitleItem extends  AbstractModel {
 
         /**
          * Subtitle language. Common values:
-<li>`cn`: Chinese</li>
+<li>`zh`: Chinese</li>
+<li>`en`: English</li>
 <li>`ja`: Japanese</li>
-<li>`en-US`: English</li>
-For other values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+<li>`ko`: Korean</li>
+<li>`vi`: Vietnamese</li>
+<li>`ms`: Malay</li>
+<li>`th`: Thai</li>
+<li>`pt`: Portuguese</li>
+<li>`tr`: Turkish</li>
+<li>`ar`: Arabic</li>
+<li>`es`: Spanish</li>
+<li>`hi`: Hindi</li>
+<li>`fr`: French</li>For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
          * @type {string || null}
          */
         this.Language = null;
@@ -12107,6 +12087,14 @@ For other values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
          */
         this.Url = null;
 
+        /**
+         * Subtitle source, values:
+<li>UserUploaded: user uploaded;</li>
+<li>AIRecognition: AI recognition, generated through asr full text recognition or voice translation.</li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
     }
 
     /**
@@ -12121,6 +12109,7 @@ For other values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
         this.Language = 'Language' in params ? params.Language : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.Source = 'Source' in params ? params.Source : null;
 
     }
 }
@@ -12193,6 +12182,62 @@ class ModifyAnimatedGraphicsTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Voice translation segment.
+ * @class
+ */
+class AiRecognitionTaskAsrTranslateSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Confidence level of the voice translation segment. Value: 0~100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Start time offset of the voice translation segment in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of the voice translation segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Recognized text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The translation.
+         * @type {string || null}
+         */
+        this.Translation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Translation = 'Translation' in params ? params.Translation : null;
 
     }
 }
@@ -12753,12 +12798,32 @@ class RequestHeader extends  AbstractModel {
 }
 
 /**
- * The subtitle information.
+ * Subtitle information.
  * @class
  */
 class AiRecognitionTaskAsrFullTextResultOutputSubtitleItem extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Media asset subtitle ID, used for media asset subtitle management, only valid when Format is vtt.
+<font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Media asset subtitle name, used for player display, only valid when Format is vtt.
+<font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subtitle Language.
+         * @type {string || null}
+         */
+        this.Language = null;
 
         /**
          * The format of the subtitle files. Valid values:
@@ -12783,6 +12848,9 @@ class AiRecognitionTaskAsrFullTextResultOutputSubtitleItem extends  AbstractMode
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Language = 'Language' in params ? params.Language : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Url = 'Url' in params ? params.Url : null;
 
@@ -13039,6 +13107,101 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
+ * Voice translation result.
+ * @class
+ */
+class AiRecognitionTaskAsrTranslateResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. It is not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input information of the voice translation task.
+         * @type {AiRecognitionTaskAsrTranslateResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information of the voice translation task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskAsrTranslateResultOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Progress of the voice translation task, value range [0-100].
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Begin process time of the voice translation task, in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * The time when the voice translation task is completed, in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskAsrTranslateResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskAsrTranslateResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -14186,6 +14349,12 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
          */
         this.SrcLanguage = null;
 
+        /**
+         * Specify subtitle name, length limit: 64 characters. This value will be used for player display.
+         * @type {string || null}
+         */
+        this.SubtitleName = null;
+
     }
 
     /**
@@ -14204,6 +14373,7 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
         }
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
         this.SrcLanguage = 'SrcLanguage' in params ? params.SrcLanguage : null;
+        this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
 
     }
 }
@@ -16750,6 +16920,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Input of voice translation.
+ * @class
+ */
+class AiRecognitionTaskAsrTranslateResultInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice translation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * Panoramic recording information
  * @class
  */
@@ -17947,10 +18145,19 @@ class MediaSubtitleInput extends  AbstractModel {
 
         /**
          * Subtitle language. Common values:
-<li>`cn`: Chinese</li>
+<li>`zh`: Chinese</li>
+<li>`en`: English</li>
 <li>`ja`: Japanese</li>
-<li>`en-US`: English</li>
-For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+<li>`ko`: Korean</li>
+<li>`vi`: Vietnamese</li>
+<li>`ms`: Malay</li>
+<li>`th`: Thai</li>
+<li>`pt`: Portuguese</li>
+<li>`tr`: Turkish</li>
+<li>`ar`: Arabic</li>
+<li>`es`: Spanish</li>
+<li>`hi`: Hindi</li>
+<li>`fr`: French</li>For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
          * @type {string || null}
          */
         this.Language = null;
@@ -23206,6 +23413,172 @@ class MediaKeyFrameDescItem extends  AbstractModel {
 }
 
 /**
+ * Control parameters of voice translation.
+ * @class
+ */
+class AsrTranslateConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice translation task switch, optional values:
+<li>ON: switch on;</li>
+<li>OFF: switch off.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Media source language, value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`ja`: Japanese;</li>
+<li>`ko`: Korean;</li>
+<li>`vi`: Vietnamese;</li>
+<li>`ms`: Malay;</li>
+<li>`th`: Thai;</li>
+<li>`pt`: Portuguese;</li>
+<li>`tr`: Turkish;</li>
+<li>`ar`: Arabic;</li>
+<li>`es`: Spanish;</li>
+<li>`hi`: Hindi;</li>
+<li>`fr`: French.</li>
+         * @type {string || null}
+         */
+        this.SrcLanguage = null;
+
+        /**
+         * Translation target language.
+When SrcLanguage is zh(Chinese), value range:
+<li>`en`: English;</li>
+<li>`ja`: Japanese;</li>
+<li>`ko`: Korean;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese;</li>
+<li>`vi`: Vietnamese;</li>
+<li>`id`: Indonesian;</li>
+<li>`th`: Thai;</li>
+<li>`ms`: Malay.</li>
+
+When SrcLanguage is en(English), value range:
+<li>`zh`: Chinese;</li>
+<li>`ja`: Japanese;</li>
+<li>`ko`: Korean;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese;</li>
+<li>`vi`: Vietnamese;</li>
+<li>`id`: Indonesian;</li>
+<li>`th`: Thai;</li>
+<li>`ms`: Malay;</li>
+<li>`ar`: Arabic;</li>
+<li>`hi`: Hindi.</li>
+
+When SrcLanguage is ja (Japanese), value range:
+<li>zh: Chinese;</li>
+<li>en: English;</li>
+<li>ko: Korean.</li>
+
+When SrcLanguage is ko (Korean), value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`ja`: Japanese.</li>
+
+When SrcLanguage is vi (Vietnamese) or ms (Malay) or th (Thai), value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English.</li>
+
+When SrcLanguage is pt (Portuguese), value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian.</li>
+
+When SrcLanguage is tr (Turkish), value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese.</li>
+
+When SrcLanguage is es (Spanish), value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`fr`: French;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese.</li>
+
+When SrcLanguage is ar (Arabic) or hi (Hindi), value range:
+<li>`en`: English.</li>
+
+When SrcLanguage is fr (French), value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese.</li>
+         * @type {string || null}
+         */
+        this.DstLanguage = null;
+
+        /**
+         * Operation information about subtitle format list.
+         * @type {SubtitleFormatsOperation || null}
+         */
+        this.SubtitleFormatsOperation = null;
+
+        /**
+         * Specify subtitle name, length limit: 64 characters. This value will be used for player display.
+         * @type {string || null}
+         */
+        this.SubtitleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SrcLanguage = 'SrcLanguage' in params ? params.SrcLanguage : null;
+        this.DstLanguage = 'DstLanguage' in params ? params.DstLanguage : null;
+
+        if (params.SubtitleFormatsOperation) {
+            let obj = new SubtitleFormatsOperation();
+            obj.deserialize(params.SubtitleFormatsOperation)
+            this.SubtitleFormatsOperation = obj;
+        }
+        this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
+
+    }
+}
+
+/**
  * RebuildMediaByTemplate request structure.
  * @class
  */
@@ -24336,49 +24709,18 @@ class ReduceMediaBitrateAdaptiveDynamicStreamingResult extends  AbstractModel {
 }
 
 /**
- * Input parameter of image watermarking template
+ * AttachMediaSubtitles response structure.
  * @class
  */
-class ImageWatermarkInputForUpdate extends  AbstractModel {
+class AttachMediaSubtitlesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ImageContent = null;
-
-        /**
-         * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
-         * @type {string || null}
-         */
-        this.Width = null;
-
-        /**
-         * Watermark height. % and px formats are supported:
-<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
-<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
-         * @type {string || null}
-         */
-        this.Height = null;
-
-        /**
-         * Repeat type of an animated watermark. Valid values:
-<li>once: no longer appears after watermark playback ends.</li>
-<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
-<li>repeat (default): repeats the playback until the video ends.</li>
-         * @type {string || null}
-         */
-        this.RepeatType = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.Transparency = null;
+        this.RequestId = null;
 
     }
 
@@ -24389,11 +24731,7 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
-        this.Transparency = 'Transparency' in params ? params.Transparency : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -26399,18 +26737,31 @@ class DeleteReviewTemplateRequest extends  AbstractModel {
 }
 
 /**
- * AttachMediaSubtitles response structure.
+ * Result information of intelligent cover generating
  * @class
  */
-class AttachMediaSubtitlesResponse extends  AbstractModel {
+class AiAnalysisTaskCoverOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * List of intelligently generated thumbnails
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `CoverSetFileUrl`.
+         * @type {Array.<MediaAiAnalysisCoverItem> || null}
+         */
+        this.CoverSet = null;
+
+        /**
+         * URL to the file for intelligently generated thumbnails. The file is in JSON format and has the same data structure as `CoverSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `CoverSetFileUrlExpireTime`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CoverSetFileUrl = null;
+
+        /**
+         * Expiration time of the URL to the file for intelligently generated thumbnails, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+         * @type {string || null}
+         */
+        this.CoverSetFileUrlExpireTime = null;
 
     }
 
@@ -26421,7 +26772,17 @@ class AttachMediaSubtitlesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.CoverSet) {
+            this.CoverSet = new Array();
+            for (let z in params.CoverSet) {
+                let obj = new MediaAiAnalysisCoverItem();
+                obj.deserialize(params.CoverSet[z]);
+                this.CoverSet.push(obj);
+            }
+        }
+        this.CoverSetFileUrl = 'CoverSetFileUrl' in params ? params.CoverSetFileUrl : null;
+        this.CoverSetFileUrlExpireTime = 'CoverSetFileUrlExpireTime' in params ? params.CoverSetFileUrlExpireTime : null;
 
     }
 }
@@ -30145,6 +30506,12 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
         this.AsrWordsConfigure = null;
 
         /**
+         * Control parameter of voice translation.
+         * @type {AsrTranslateConfigureInfoForUpdate || null}
+         */
+        this.AsrTranslateConfigure = null;
+
+        /**
          * Control parameter of object recognition.
          * @type {ObjectConfigureInfoForUpdate || null}
          */
@@ -30210,6 +30577,12 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
             let obj = new AsrWordsConfigureInfoForUpdate();
             obj.deserialize(params.AsrWordsConfigure)
             this.AsrWordsConfigure = obj;
+        }
+
+        if (params.AsrTranslateConfigure) {
+            let obj = new AsrTranslateConfigureInfoForUpdate();
+            obj.deserialize(params.AsrTranslateConfigure)
+            this.AsrTranslateConfigure = obj;
         }
 
         if (params.ObjectConfigure) {
@@ -32076,10 +32449,18 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         this.SubtitleFormat = null;
 
         /**
-         * Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note：</font> If it fills in an empty string or leave this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
+         * Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note: </font> If it fills in an empty string or leaves this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
          * @type {string || null}
          */
         this.SrcLanguage = null;
+
+        /**
+         * Specify subtitle name, length limit: 64 characters. This value will be displayed by the player. If not provided, VOD will automatically generate it.
+<font color=red>Note:</font> This field is valid only when SubtitleFormats includes vtt.
+
+         * @type {string || null}
+         */
+        this.SubtitleName = null;
 
     }
 
@@ -32094,6 +32475,7 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         this.SubtitleFormats = 'SubtitleFormats' in params ? params.SubtitleFormats : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
         this.SrcLanguage = 'SrcLanguage' in params ? params.SrcLanguage : null;
+        this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
 
     }
 }
@@ -32330,6 +32712,12 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
         this.AsrWordsConfigure = null;
 
         /**
+         * Control parameter of voice translation.
+         * @type {AsrTranslateConfigureInfo || null}
+         */
+        this.AsrTranslateConfigure = null;
+
+        /**
          * Control parameter of object recognition.
          * @type {ObjectConfigureInfo || null}
          */
@@ -32394,6 +32782,12 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
             let obj = new AsrWordsConfigureInfo();
             obj.deserialize(params.AsrWordsConfigure)
             this.AsrWordsConfigure = obj;
+        }
+
+        if (params.AsrTranslateConfigure) {
+            let obj = new AsrTranslateConfigureInfo();
+            obj.deserialize(params.AsrTranslateConfigure)
+            this.AsrTranslateConfigure = obj;
         }
 
         if (params.ObjectConfigure) {
@@ -32869,6 +33263,72 @@ class PlayStatInfo extends  AbstractModel {
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.PlayTimes = 'PlayTimes' in params ? params.PlayTimes : null;
         this.Traffic = 'Traffic' in params ? params.Traffic : null;
+
+    }
+}
+
+/**
+ * Voice translation result.
+ * @class
+ */
+class AiRecognitionTaskAsrTranslateResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice translation segments list.
+<font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
+         * @type {Array.<AiRecognitionTaskAsrTranslateSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * URL to the file of the list for voice translation segments. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * The expiration time of the URLs of voice translation segments in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
+
+        /**
+         * Generated subtitle list.
+         * @type {Array.<AiRecognitionTaskAsrFullTextResultOutputSubtitleItem> || null}
+         */
+        this.SubtitleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskAsrTranslateSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+        if (params.SubtitleSet) {
+            this.SubtitleSet = new Array();
+            for (let z in params.SubtitleSet) {
+                let obj = new AiRecognitionTaskAsrFullTextResultOutputSubtitleItem();
+                obj.deserialize(params.SubtitleSet[z]);
+                this.SubtitleSet.push(obj);
+            }
+        }
 
     }
 }
@@ -39950,6 +40410,170 @@ class ExtractCopyRightWatermarkTaskInput extends  AbstractModel {
 }
 
 /**
+ * Control parameters of voice translation recognition task.
+ * @class
+ */
+class AsrTranslateConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice translation task switch, optional values:
+<li>ON: switch on;</li>
+<li>OFF: switch off.</li><font color=red>Note:</font> The task results of voice translation include asr full text recognition result. To avoid duplicate charges, simultaneous activation of voice translation and asr full text recognition features is prohibited.
+
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Media source language. When the Switch is ON, this parameter is mandatory. Value range:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`ja`: Japanese;</li>
+<li>`ko`: Korean;</li>
+<li>`vi`: Vietnamese;</li>
+<li>`ms`: Malay;</li>
+<li>`th`: Thai;</li>
+<li>`pt`: Portuguese;</li>
+<li>`tr`: Turkish;</li>
+<li>`ar`: Arabic;</li>
+<li>`es`: Spanish;</li>
+<li>`hi`: Hindi;</li>
+<li>`fr`: French.</li>
+         * @type {string || null}
+         */
+        this.SrcLanguage = null;
+
+        /**
+         * Translation target language. When the Switch is ON, this parameter is mandatory.
+When SrcLanguage is zh (Chinese), the value range:
+<li>`en`: English;</li>
+<li>`ja`: Japanese;</li>
+<li>`ko`: Korean;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese;</li>
+<li>`vi`: Vietnamese;</li>
+<li>`id`: Indonesian;</li>
+<li>`th`: Thai;</li>
+<li>`ms`: Malay.</li>
+
+When SrcLanguage is en (English), the value range:
+<li>`zh`: Chinese;</li>
+<li>`ja`: Japanese;</li>
+<li>`ko`: Korean;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese;</li>
+<li>`vi`: Vietnamese;</li>
+<li>`id`: Indonesian;</li>
+<li>`th`: Thai;</li>
+<li>`ms`: Malay;</li>
+<li>`ar`: Arabic;</li>
+<li>`hi`: Hindi.</li>
+
+When SrcLanguage is ja (Japanese), the valid options are:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`ko`: Korean.</li>
+
+When SrcLanguage is ko (Korean), the valid options are:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`ja`: Japanese.</li>
+
+When SrcLanguage is vi (Vietnamese), ms (Malay), or th (Thai), the valid options are:
+<li>`zh`: Chinese;</li>
+<li>`en`: English.</li>
+
+When SrcLanguage is pt (Portuguese), the valid options are:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian.</li>
+
+When SrcLanguage is tr (Turkish), the value range is:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`fr`: French;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese.</li>
+
+When SrcLanguage is es (Spanish), the value range is:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`fr`: French;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese.</li>
+
+When SrcLanguage is ar (Arabic) or hi (Hindi), the value range is:
+<li>`en`: English.</li>
+
+When SrcLanguage is fr (French), the value range is:
+<li>`zh`: Chinese;</li>
+<li>`en`: English;</li>
+<li>`es`: Spanish;</li>
+<li>`it`: Italian;</li>
+<li>`de`: German;</li>
+<li>`tr`: Turkish;</li>
+<li>`ru`: Russian;</li>
+<li>`pt`: Portuguese.</li>
+         * @type {string || null}
+         */
+        this.DstLanguage = null;
+
+        /**
+         * Generated subtitle file format list. If not filled or an empty array is provided, no subtitle file will be generated. Optional values:
+<li>vtt: generate WebVTT subtitle file;</li>
+<li>srt: generate SRT subtitle files.</li><font color=red>Note:</font> VOD media assets only support adding vtt subtitles. Therefore, VOD will add generated subtitles to media assets only when SubtitleFormats includes vtt.
+         * @type {Array.<string> || null}
+         */
+        this.SubtitleFormats = null;
+
+        /**
+         * Specify subtitle name, length limit: 64 characters. This value will be displayed by the player. If not provided, VOD will automatically generate it.
+         * @type {string || null}
+         */
+        this.SubtitleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SrcLanguage = 'SrcLanguage' in params ? params.SrcLanguage : null;
+        this.DstLanguage = 'DstLanguage' in params ? params.DstLanguage : null;
+        this.SubtitleFormats = 'SubtitleFormats' in params ? params.SubtitleFormats : null;
+        this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
+
+    }
+}
+
+/**
  * DescribeSampleSnapshotTemplates response structure.
  * @class
  */
@@ -44096,6 +44720,69 @@ class EditMediaFileInfo extends  AbstractModel {
 }
 
 /**
+ * Input parameter of image watermarking template
+ * @class
+ */
+class ImageWatermarkInputForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+         * @type {string || null}
+         */
+        this.ImageContent = null;
+
+        /**
+         * Watermark width. % and px formats are supported:
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height. % and px formats are supported:
+<li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;</li>
+<li>If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096].</li>
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Transparency = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+        this.Transparency = 'Transparency' in params ? params.Transparency : null;
+
+    }
+}
+
+/**
  * ProcessMediaByProcedure response structure.
  * @class
  */
@@ -47615,6 +48302,14 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         this.Definitions = null;
 
         /**
+         * Template type filter. Optional values:
+<li>Preset: preset template;</li>
+<li>Custom: user-defined template.</li>If not filled default is empty, i.e., no template type filter.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
          * Pagination offset. Default value: 0.
          * @type {number || null}
          */
@@ -47637,6 +48332,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -47728,6 +48424,7 @@ class AiRecognitionResult extends  AbstractModel {
 <li>AsrWordsRecognition: speech keyword recognition,</li>
 <li>OcrWordsRecognition: text keyword recognition,</li>
 <li>AsrFullTextRecognition: full speech recognition,</li>
+<li>AsrTranslateRecognition: voice translation recognition,</li>
 <li>OcrFullTextRecognition: full text recognition,</li>
 <li>HeadTailRecognition: video opening and ending credits recognition,</li>
 <li>ObjectRecognition: object recognition.</li>
@@ -47774,6 +48471,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {AiRecognitionTaskAsrFullTextResult || null}
          */
         this.AsrFullTextTask = null;
+
+        /**
+         * Voice translation result, valid when Type is AsrTranslateRecognition.
+         * @type {AiRecognitionTaskAsrTranslateResult || null}
+         */
+        this.AsrTranslateTask = null;
 
         /**
          * Text keyword recognition result, which is valid when `Type` is
@@ -47840,6 +48543,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.AsrFullTextTask = obj;
         }
 
+        if (params.AsrTranslateTask) {
+            let obj = new AiRecognitionTaskAsrTranslateResult();
+            obj.deserialize(params.AsrTranslateTask)
+            this.AsrTranslateTask = obj;
+        }
+
         if (params.OcrWordsTask) {
             let obj = new AiRecognitionTaskOcrWordsResult();
             obj.deserialize(params.OcrWordsTask)
@@ -47895,7 +48604,6 @@ module.exports = {
     CreateImageProcessingTemplateRequest: CreateImageProcessingTemplateRequest,
     ModifyDefaultStorageRegionRequest: ModifyDefaultStorageRegionRequest,
     CloneCDNDomainRequest: CloneCDNDomainRequest,
-    AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     QualityInspectTaskOutput: QualityInspectTaskOutput,
     QualityEnhanceTaskInput: QualityEnhanceTaskInput,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
@@ -48076,6 +48784,7 @@ module.exports = {
     MediaSubtitleItem: MediaSubtitleItem,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
+    AiRecognitionTaskAsrTranslateSegmentItem: AiRecognitionTaskAsrTranslateSegmentItem,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
@@ -48091,6 +48800,7 @@ module.exports = {
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     VideoFrameInterpolationInfo: VideoFrameInterpolationInfo,
     EditMediaRequest: EditMediaRequest,
+    AiRecognitionTaskAsrTranslateResult: AiRecognitionTaskAsrTranslateResult,
     DescribeFileAttributesResponse: DescribeFileAttributesResponse,
     LicenseUsageDataItem: LicenseUsageDataItem,
     RebuildMediaTargetAudioStream: RebuildMediaTargetAudioStream,
@@ -48156,6 +48866,7 @@ module.exports = {
     DeleteReviewTemplateResponse: DeleteReviewTemplateResponse,
     DNSVerifyInfo: DNSVerifyInfo,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
+    AiRecognitionTaskAsrTranslateResultInput: AiRecognitionTaskAsrTranslateResultInput,
     WebPageRecordInfo: WebPageRecordInfo,
     DescribeCDNUsageDataResponse: DescribeCDNUsageDataResponse,
     ModifyWordSampleRequest: ModifyWordSampleRequest,
@@ -48271,6 +48982,7 @@ module.exports = {
     ModifyRebuildMediaTemplateResponse: ModifyRebuildMediaTemplateResponse,
     CreateEnhanceMediaTemplateRequest: CreateEnhanceMediaTemplateRequest,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
+    AsrTranslateConfigureInfoForUpdate: AsrTranslateConfigureInfoForUpdate,
     RebuildMediaByTemplateRequest: RebuildMediaByTemplateRequest,
     ModifyVodDomainConfigRequest: ModifyVodDomainConfigRequest,
     AiSampleTagOperation: AiSampleTagOperation,
@@ -48290,7 +49002,7 @@ module.exports = {
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     AiAnalysisResult: AiAnalysisResult,
     ReduceMediaBitrateAdaptiveDynamicStreamingResult: ReduceMediaBitrateAdaptiveDynamicStreamingResult,
-    ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
+    AttachMediaSubtitlesResponse: AttachMediaSubtitlesResponse,
     CreateDomainVerifyRecordResponse: CreateDomainVerifyRecordResponse,
     ExtractCopyRightWatermarkResponse: ExtractCopyRightWatermarkResponse,
     MediaTranscodeInfo: MediaTranscodeInfo,
@@ -48324,7 +49036,7 @@ module.exports = {
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
     ImageSpriteTemplate: ImageSpriteTemplate,
     DeleteReviewTemplateRequest: DeleteReviewTemplateRequest,
-    AttachMediaSubtitlesResponse: AttachMediaSubtitlesResponse,
+    AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
@@ -48432,6 +49144,7 @@ module.exports = {
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
     DeleteQualityInspectTemplateResponse: DeleteQualityInspectTemplateResponse,
     PlayStatInfo: PlayStatInfo,
+    AiRecognitionTaskAsrTranslateResultOutput: AiRecognitionTaskAsrTranslateResultOutput,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
     HighlightsConfigureInfo: HighlightsConfigureInfo,
@@ -48543,6 +49256,7 @@ module.exports = {
     CommitUploadResponse: CommitUploadResponse,
     MaxAgeRule: MaxAgeRule,
     ExtractCopyRightWatermarkTaskInput: ExtractCopyRightWatermarkTaskInput,
+    AsrTranslateConfigureInfo: AsrTranslateConfigureInfo,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
@@ -48605,6 +49319,7 @@ module.exports = {
     ModifyClassResponse: ModifyClassResponse,
     BlackWhiteEdgeConfigureInfoForUpdate: BlackWhiteEdgeConfigureInfoForUpdate,
     EditMediaFileInfo: EditMediaFileInfo,
+    ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     ProcessMediaByProcedureResponse: ProcessMediaByProcedureResponse,
     PullUploadResponse: PullUploadResponse,
     RemoveWaterMarkTaskInput: RemoveWaterMarkTaskInput,

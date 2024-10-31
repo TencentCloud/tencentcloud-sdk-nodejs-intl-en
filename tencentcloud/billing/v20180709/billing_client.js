@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DeleteAllocationTagRequest = models.DeleteAllocationTagRequest;
 const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
 const DescribeCostExplorerSummaryResponse = models.DescribeCostExplorerSummaryResponse;
 const ConsumptionBusinessSummaryDataItem = models.ConsumptionBusinessSummaryDataItem;
@@ -29,13 +30,13 @@ const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOr
 const BillDetailComponentConfig = models.BillDetailComponentConfig;
 const DescribeCostSummaryByResourceResponse = models.DescribeCostSummaryByResourceResponse;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
-const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
+const AdjustInfoDetail = models.AdjustInfoDetail;
 const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const DistributionBillDetail = models.DistributionBillDetail;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
-const DeleteAllocationTagRequest = models.DeleteAllocationTagRequest;
+const DescribeBillAdjustInfoResponse = models.DescribeBillAdjustInfoResponse;
 const BillDistributionResourceSummary = models.BillDistributionResourceSummary;
 const BusinessSummaryInfo = models.BusinessSummaryInfo;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
@@ -48,11 +49,10 @@ const AnalyseProjectDetail = models.AnalyseProjectDetail;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
-const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
+const AnalyseDetail = models.AnalyseDetail;
 const SummaryDetail = models.SummaryDetail;
 const AnalyseAmountDetail = models.AnalyseAmountDetail;
 const DescribeBillResourceSummaryForOrganizationRequest = models.DescribeBillResourceSummaryForOrganizationRequest;
-const AnalyseDetail = models.AnalyseDetail;
 const DescribeCostSummaryByRegionRequest = models.DescribeCostSummaryByRegionRequest;
 const ConsumptionSummaryTrend = models.ConsumptionSummaryTrend;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
@@ -63,7 +63,7 @@ const BillDetail = models.BillDetail;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const ConditionPayMode = models.ConditionPayMode;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
-const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
+const DescribeBillAdjustInfoRequest = models.DescribeBillAdjustInfoRequest;
 const TagDataInfo = models.TagDataInfo;
 const SummaryTotal = models.SummaryTotal;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
@@ -71,7 +71,7 @@ const CostComponentSet = models.CostComponentSet;
 const AnalyseHeaderDetail = models.AnalyseHeaderDetail;
 const AnalysePayModeDetail = models.AnalysePayModeDetail;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
-const BillResourceSummary = models.BillResourceSummary;
+const AnalyseOwnerUinDetail = models.AnalyseOwnerUinDetail;
 const Conditions = models.Conditions;
 const AnalyseTimeDetail = models.AnalyseTimeDetail;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
@@ -89,6 +89,7 @@ const ConsumptionResourceSummaryConditionValue = models.ConsumptionResourceSumma
 const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
 const DescribeTagListRequest = models.DescribeTagListRequest;
 const DescribeBillResourceSummaryForOrganizationResponse = models.DescribeBillResourceSummaryForOrganizationResponse;
+const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
 const DescribeCostSummaryByResourceRequest = models.DescribeCostSummaryByResourceRequest;
 const CreateAllocationTagRequest = models.CreateAllocationTagRequest;
 const ExcludedProducts = models.ExcludedProducts;
@@ -100,6 +101,7 @@ const CostDetail = models.CostDetail;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const CreateAllocationTagResponse = models.CreateAllocationTagResponse;
+const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
@@ -117,6 +119,7 @@ const ConditionProject = models.ConditionProject;
 const DescribeTagListResponse = models.DescribeTagListResponse;
 const CosDetailSets = models.CosDetailSets;
 const AnalyseConditionDetail = models.AnalyseConditionDetail;
+const BillResourceSummary = models.BillResourceSummary;
 const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
 const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
 
@@ -298,6 +301,17 @@ Note: The API request may fail due to network instability or other exceptions. I
     DescribeAccountBalance(req, cb) {
         let resp = new DescribeAccountBalanceResponse();
         this.request("DescribeAccountBalance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check whether the current UIN has any adjustment, enabling customers to proactively obtain the adjustment status faster.
+     * @param {DescribeBillAdjustInfoRequest} req
+     * @param {function(string, DescribeBillAdjustInfoResponse):void} cb
+     * @public
+     */
+    DescribeBillAdjustInfo(req, cb) {
+        let resp = new DescribeBillAdjustInfoResponse();
+        this.request("DescribeBillAdjustInfo", req, resp, cb);
     }
 
     /**

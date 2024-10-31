@@ -43,7 +43,7 @@ Image restrictions: The single-edge resolution must be less than 5,000 and great
         /**
          * Text description.
 It is used to increase the possibility that the generation result contains the described content.
-Chinese is recommended. A maximum of 256 UTF-8 characters are supported.
+A maximum of 256 UTF-8 characters are supported.
          * @type {string || null}
          */
         this.Prompt = null;
@@ -51,7 +51,7 @@ Chinese is recommended. A maximum of 256 UTF-8 characters are supported.
         /**
          * Negative text description.
 It is used to reduce the possibility that the generation result contains the described content, but such content cannot be completely avoided.
-Chinese is recommended. A maximum of 256 UTF-8 characters are supported.
+English is recommended. A maximum of 256 UTF-8 characters are supported.
          * @type {string || null}
          */
         this.NegativePrompt = null;
@@ -109,7 +109,7 @@ The URL is valid for 1 hour.
          * Switch indicating whether to  enhance image clarity. Default value: 0.
 1: on
 0: off
-If the switch is turned on, the image clarity will be enhanced, but the generation time will increase.
+If the switch is turned on, the image clarity will be enhanced and the generation time will increase.
          * @type {number || null}
          */
         this.EnhanceImage = null;

@@ -137,6 +137,7 @@ const ModifyNetworkAclEntriesResponse = models.ModifyNetworkAclEntriesResponse;
 const ModifyVpcEndPointAttributeResponse = models.ModifyVpcEndPointAttributeResponse;
 const DescribeFlowLogRequest = models.DescribeFlowLogRequest;
 const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
+const ModifyAddressesRenewFlagRequest = models.ModifyAddressesRenewFlagRequest;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
 const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
 const RefreshDirectConnectGatewayRouteToNatGatewayRequest = models.RefreshDirectConnectGatewayRouteToNatGatewayRequest;
@@ -358,6 +359,7 @@ const AddressTemplateItem = models.AddressTemplateItem;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
 const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
+const ModifyAddressesRenewFlagResponse = models.ModifyAddressesRenewFlagResponse;
 const Subnet = models.Subnet;
 const DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse;
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
@@ -1330,6 +1332,17 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
+     * This API is used to modify the bandwidth limit policy of a postpaid CCN instance.
+     * @param {ModifyCcnRegionBandwidthLimitsTypeRequest} req
+     * @param {function(string, ModifyCcnRegionBandwidthLimitsTypeResponse):void} cb
+     * @public
+     */
+    ModifyCcnRegionBandwidthLimitsType(req, cb) {
+        let resp = new ModifyCcnRegionBandwidthLimitsTypeResponse();
+        this.request("ModifyCcnRegionBandwidthLimitsType", req, resp, cb);
+    }
+
+    /**
      * This API is used to get a pair of VPN tunnel health check addresses. 
      * @param {GenerateVpnConnectionDefaultHealthCheckIpRequest} req
      * @param {function(string, GenerateVpnConnectionDefaultHealthCheckIpResponse):void} cb
@@ -1980,14 +1993,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to modify the bandwidth limit policy of a postpaid CCN instance.
-     * @param {ModifyCcnRegionBandwidthLimitsTypeRequest} req
-     * @param {function(string, ModifyCcnRegionBandwidthLimitsTypeResponse):void} cb
+     * This API is used to adjust the renewal flag for the monthly subscription EIP.
+     * @param {ModifyAddressesRenewFlagRequest} req
+     * @param {function(string, ModifyAddressesRenewFlagResponse):void} cb
      * @public
      */
-    ModifyCcnRegionBandwidthLimitsType(req, cb) {
-        let resp = new ModifyCcnRegionBandwidthLimitsTypeResponse();
-        this.request("ModifyCcnRegionBandwidthLimitsType", req, resp, cb);
+    ModifyAddressesRenewFlag(req, cb) {
+        let resp = new ModifyAddressesRenewFlagResponse();
+        this.request("ModifyAddressesRenewFlag", req, resp, cb);
     }
 
     /**

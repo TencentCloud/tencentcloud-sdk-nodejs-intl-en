@@ -259,6 +259,7 @@ A maximum of 2 requests can be initiated per second for this API.
 
     /**
      * This API is used to recognize a passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions. Recognizable fields include passport ID, name, date of birth, gender, expiration date, issuing country/region, and nationality. It has the features of cropping identity photos and alarming for photographed or photocopied documents.
+This interface supports regional scope: countries with machine-readable passports
      * @param {MLIDPassportOCRRequest} req
      * @param {function(string, MLIDPassportOCRResponse):void} cb
      * @public

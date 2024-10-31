@@ -602,7 +602,6 @@ In API Gateway, you can bind a custom domain name to a service and map its paths
 
     /**
      * This API is used to query the information of one or more API keys.
- 
      * @param {DescribeApiKeysStatusRequest} req
      * @param {function(string, DescribeApiKeysStatusResponse):void} cb
      * @public

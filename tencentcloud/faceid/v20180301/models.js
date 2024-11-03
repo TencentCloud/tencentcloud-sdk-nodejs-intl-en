@@ -648,6 +648,21 @@ Default value: `4`.
          */
         this.Extra = null;
 
+        /**
+         * This interface is used to control th action sequences.
+Action types are as follows:
+"blink"
+"mouth"
+"nod"
+"shake"
+You can choose 1-2 actions out of the four.
+Single action example: "blink"
+Multiple action example: "blink,mouth"
+The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+         * @type {string || null}
+         */
+        this.ActionList = null;
+
     }
 
     /**
@@ -661,6 +676,7 @@ Default value: `4`.
         this.SecureLevel = 'SecureLevel' in params ? params.SecureLevel : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
+        this.ActionList = 'ActionList' in params ? params.ActionList : null;
 
     }
 }
@@ -2052,6 +2068,21 @@ This feature applies only to Hong Kong (China) identity cards, Malaysian identit
          */
         this.Extra = null;
 
+        /**
+         * This interface is used to control th action sequences.
+Action types are as follows:
+"blink"
+"mouth"
+"nod"
+"shake"
+You can choose 1-2 actions out of the four.
+Single action example: "blink"
+Multiple action example: "blink,mouth"
+The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+         * @type {string || null}
+         */
+        this.ActionList = null;
+
     }
 
     /**
@@ -2069,6 +2100,7 @@ This feature applies only to Hong Kong (China) identity cards, Malaysian identit
         this.DisableChangeOcrResult = 'DisableChangeOcrResult' in params ? params.DisableChangeOcrResult : null;
         this.DisableCheckOcrWarnings = 'DisableCheckOcrWarnings' in params ? params.DisableCheckOcrWarnings : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
+        this.ActionList = 'ActionList' in params ? params.ActionList : null;
 
     }
 }
@@ -3262,6 +3294,21 @@ Example: HKIDCard
          */
         this.AutoDowngrade = null;
 
+        /**
+         * This interface is used to control th action sequences.
+Action types are as follows:
+"blink"
+"mouth"
+"nod"
+"shake"
+You can choose 1-2 actions out of the four.
+Single action example: "blink"
+Multiple action example: "blink,mouth"
+The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2, 4, or 5; otherwise, the interface reports an error.
+         * @type {string || null}
+         */
+        this.ActionList = null;
+
     }
 
     /**
@@ -3282,6 +3329,7 @@ Example: HKIDCard
         this.ThemeColor = 'ThemeColor' in params ? params.ThemeColor : null;
         this.Language = 'Language' in params ? params.Language : null;
         this.AutoDowngrade = 'AutoDowngrade' in params ? params.AutoDowngrade : null;
+        this.ActionList = 'ActionList' in params ? params.ActionList : null;
 
     }
 }

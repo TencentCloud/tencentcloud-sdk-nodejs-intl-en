@@ -17,11 +17,12 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
-const SummaryDetails = models.SummaryDetails;
+const SendVerifyCodeRequest = models.SendVerifyCodeRequest;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
+const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
 const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
@@ -77,6 +78,7 @@ const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
+const SummaryDetails = models.SummaryDetails;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
@@ -175,6 +177,17 @@ class IntlpartnersmgtClient extends AbstractClient {
     DescribeCustomerInfo(req, cb) {
         let resp = new DescribeCustomerInfoResponse();
         this.request("DescribeCustomerInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send a verification code for account registration.
+     * @param {SendVerifyCodeRequest} req
+     * @param {function(string, SendVerifyCodeResponse):void} cb
+     * @public
+     */
+    SendVerifyCode(req, cb) {
+        let resp = new SendVerifyCodeResponse();
+        this.request("SendVerifyCode", req, resp, cb);
     }
 
     /**

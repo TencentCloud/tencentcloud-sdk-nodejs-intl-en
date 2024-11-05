@@ -111,7 +111,7 @@ class UpdateApiKeyRequest extends  AbstractModel {
         this.AccessKeyId = null;
 
         /**
-         * Key to be updated, which is required when a custom key is updated. It can contain 10–50 letters, digits, and underscores.
+         * Key to be updated, which is required when a custom key is updated. It can contain 10-50 letters, digits, and underscores.
          * @type {string || null}
          */
         this.AccessKeySecret = null;

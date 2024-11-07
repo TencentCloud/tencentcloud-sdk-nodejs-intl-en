@@ -398,7 +398,7 @@ class UserDefineOcrTextReviewTemplateInfoForUpdate extends  AbstractModel {
         /**
          * Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
 There can be up to 10 tags, each with a length limit of 16 characters.
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.LabelSet = null;
 
@@ -9890,22 +9890,21 @@ class VideoTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Video stream encoding format. Valid values:
-<li>h264: H.264 encoding.</li>
-<li>h265: H.265 encoding.</li>
-<li>h266: H.266 encoding.</li>
-<li>av1: AOMedia Video 1 encoding.</li>
-<li>vp8: VP8 encoding.</li>
-<li>vp9: VP9 encoding.</li>
-<li>mpeg2: MPEG2 encoding.</li>
-<li>dnxhd: DNxHD encoding.</li>
-<li>mv-hevc: MV-HEVC encoding.</li>
-Note: A resolution within 640x480 should be specified for H.265 encoding.
+         * Encoding format for video streams. Optional values:
+<li>h264: H.264 encoding</li>
+<li>h265: H.265 encoding</li>
+<li>h266: H.266 encoding</li>
+<li>av1: AOMedia Video 1 encoding</li>
+<li>vp8: VP8 encoding</li>
+<li>vp9: VP9 encoding</li>
+<li>mpeg2: MPEG2 encoding</li>
+<li>dnxhd: DNxHD encoding</li>
+<li>mv-hevc: MV-HEVC encoding</li>
 
-Note: AV1 encoding containers only support mp4, webm, and mkv.
-Note: H.266 encoding containers only support mp4, hls, ts, and mov.
-Note: VP8 and VP9 encoding containers only support webm and mkv.
-Note: MPEG2 and DNxHD encoding containers only support mxf.
+Note: AV1 encoding containers currently only support mp4, webm, and mkv.
+Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
+Note: VP8 and VP9 encoding containers currently only support webm and mkv.
+Note: MPEG2 and DNxHD encoding containers currently only support mxf.
 Note: MV-HEVC encoding containers only support mp4, hls, and mov. Among them, the hls format only supports mp4 segmentation format.
          * @type {string || null}
          */
@@ -9959,30 +9958,57 @@ Default value: 0.
         this.Height = null;
 
         /**
-         * Interval between I-frames, in frames. Value range: 0 and [1, 100000]. When it is set to 0 or not set, the system will automatically set the gop length.
+         * Interval between I-frames (keyframes), which can be customized in frames or seconds. GOP value range: 0 and [1, 100000].
+If this parameter is 0 or left blank, the system will automatically set the GOP length.
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * The fill mode, which indicates how a video is resized when the video’s original aspect ratio is different from the target aspect ratio. Valid values:
-<li>stretch: Stretch the image frame by frame to fill the entire screen. The video image may become "squashed" or "stretched" after transcoding.</li>
-<li>black: Keep the image's original aspect ratio and fill the blank space with black bars.</li>
-<li>white: Keep the image’s original aspect ratio and fill the blank space with white bars.</li>
-<li>gauss: Keep the image’s original aspect ratio and apply Gaussian blur to the blank space.</li>
+         * GOP value unit. Optional values:
+frame: indicates frame
+second: indicates second
+Default value: frame
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GopUnit = null;
+
+        /**
+         * Filling mode. When the configured aspect ratio parameter for video streams differs from the aspect ratio of the original video, the processing method for transcoding is "filling". Optional filling modes:
+<li>stretch: Each frame is stretched to fill the entire screen, which may cause the transcoded video to be "flattened" or "stretched".</li>
+<li>black: The aspect ratio of the video is kept unchanged, and the rest of the edges is filled with black.</li>
+<li>white: The aspect ratio of the video is kept unchanged, and the rest of the edges is filled with white.</li>
+<li>gauss: The aspect ratio of the video is kept unchanged, and the rest of the edges is filled with a Gaussian blur.</li>
+
+<li>smarttailor: Video images are smartly selected to ensure proportional image cropping.</li>
 Default value: black.
-Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
+Note: Only stretch and black are supported for adaptive bitrate streaming.
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
-         * The control factor of video constant bitrate. Value range: [1, 51]
-If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)
-It is not recommended to specify this parameter if there are no special requirements.
+         * Control factor for constant video bitrate. Value range: [0, 51].
+If this parameter is specified, the bitrate control mode for the CRF will be used for transcoding (the video bitrate will no longer take effect).
+It is recommended not to specify this parameter if there are no special requirements.
+
+Note:
+If Mode is set to ABR, the Vcrf value does not need to be configured.
+If Mode is set to CBR, the Vcrf value does not need to be configured.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Vcrf = null;
+
+        /**
+         * Average segment duration. Value range: (0-10], unit: second
+Default value: 10
+Note: It can be used only in the container format of hls.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.HlsTime = null;
 
         /**
          * HLS segment type. Valid values:
@@ -10015,6 +10041,99 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Stereo3dType = null;
 
+        /**
+         * Profile, suitable for different scenarios.
+baseline: It only supports I/P-frames and non-interlaced scenarios, and is suitable for scenarios such as video calls and mobile videos.
+main: It offers I-frames, P-frames, and B-frames, and supports both interlaced and non-interlaced modes. It is mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices.
+high: the highest encoding level, with 8x8 prediction added to the main profile and support for custom quantification. It is widely used in scenarios such as Blu-ray storage and HDTV.
+default: automatic filling along with the original video.    
+
+This configuration appears only when the encoding standard is set to H264. baseline/main/high is supported. Default value: default
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VideoProfile = null;
+
+        /**
+         * Encoder level. Default value: auto ("")
+If the encoding standard is set to H264, the following options are supported: "", 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, and 5.1.
+If the encoding standard is set to H265, the following options are supported: "", 1, 2, 2.1, 3, 3.1, 4, 4.1, 5, 5.1, 5.2, 6, 6.1, 6.2, and 8.5.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VideoLevel = null;
+
+        /**
+         * Number of B-frames between reference frames. The default is auto, and a range of 0 - 16 is supported.
+Note: Leaving it blank means using the auto option.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Bframes = null;
+
+        /**
+         * Bitrate control mode. Optional values:
+VBR: variable bitrate. The output bitrate is adjusted based on the complexity of the video image, ensuring higher image quality. This mode is suitable for storage scenarios as well as applications with high image quality requirements.
+ABR: average bitrate. The average bitrate of the output video is kept stable to the greatest extent, but short-term bitrate fluctuations are allowed. This mode is suitable for scenarios where it is necessary to minimize the overall bitrate while a certain quality is maintained.
+CBR: constant bitrate. The output bitrate remains constant during the video encoding process, regardless of changes in image complexity. This mode is suitable for scenarios with strict network bandwidth requirements, such as live streaming.
+VCRF: constant rate factor. The video quality is controlled by setting a quality factor, achieving constant quality encoding of videos. The bitrate is automatically adjusted based on the complexity of the content. This mode is suitable for scenarios where maintaining a certain quality is desired.
+VBR is selected by default.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Display aspect ratio. Optional values: [1:1, 2:1, default]
+Default value: default
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Sar = null;
+
+        /**
+         * Adaptive I-frame decision. When it is enabled, Media Processing Service will automatically identify transition points between different scenarios in the video (usually they are visually distinct frames, such as those of switching from one shot to another) and adaptively insert keyframes (I-frames) at these points to improve the random accessibility and encoding efficiency of the video. Optional values:
+0: Disable the adaptive I-frame decision 
+1: Enable the adaptive I-frame decision
+Default value: 0
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.NoScenecut = null;
+
+        /**
+         * Bit: 8/10 is supported. Default value: 8
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BitDepth = null;
+
+        /**
+         * Preservation of original timestamp. Optional values:
+0: Disabled
+1: Enabled
+Default value: Disabled
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.RawPts = null;
+
+        /**
+         * Proportional compression bitrate. When it is enabled, the bitrate of the output video will be adjusted according to the proportion. After the compression ratio is entered, the system will automatically calculate the target output bitrate based on the source video bitrate. Compression ratio range: 0-100
+Leaving this value blank means it is not enabled by default.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Compress = null;
+
+        /**
+         * Special segment configuration
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SegmentSpecificInfo || null}
+         */
+        this.SegmentSpecificInfo = null;
+
     }
 
     /**
@@ -10031,11 +10150,28 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
+        this.GopUnit = 'GopUnit' in params ? params.GopUnit : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
+        this.HlsTime = 'HlsTime' in params ? params.HlsTime : null;
         this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
         this.FpsDenominator = 'FpsDenominator' in params ? params.FpsDenominator : null;
         this.Stereo3dType = 'Stereo3dType' in params ? params.Stereo3dType : null;
+        this.VideoProfile = 'VideoProfile' in params ? params.VideoProfile : null;
+        this.VideoLevel = 'VideoLevel' in params ? params.VideoLevel : null;
+        this.Bframes = 'Bframes' in params ? params.Bframes : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Sar = 'Sar' in params ? params.Sar : null;
+        this.NoScenecut = 'NoScenecut' in params ? params.NoScenecut : null;
+        this.BitDepth = 'BitDepth' in params ? params.BitDepth : null;
+        this.RawPts = 'RawPts' in params ? params.RawPts : null;
+        this.Compress = 'Compress' in params ? params.Compress : null;
+
+        if (params.SegmentSpecificInfo) {
+            let obj = new SegmentSpecificInfo();
+            obj.deserialize(params.SegmentSpecificInfo)
+            this.SegmentSpecificInfo = obj;
+        }
 
     }
 }
@@ -11102,7 +11238,7 @@ class DescribeQualityControlTemplatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Preset: preset template. Custom: custom template.
+         * "Preset": preset template, "Custom": custom template
          * @type {string || null}
          */
         this.Type = null;
@@ -11573,7 +11709,9 @@ class ProcessMediaRequest extends  AbstractModel {
         this.InputInfo = null;
 
         /**
-         * The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
+         * Target storage for Media Processing Service output files. If left blank, it inherits the storage location in InputInfo.
+
+Note: When InputInfo.Type is URL, this parameter is required.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -16900,6 +17038,54 @@ class LiveStreamAiAnalysisResultInfo extends  AbstractModel {
 }
 
 /**
+ * Information on special segment configuration.
+ * @class
+ */
+class SegmentSpecificInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch for segment duration at startup. Optional values:
+on: Turn on the switch
+off: Turn off the switch
+Default value: off
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Segment duration at startup. Unit: second
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.FragmentTime = null;
+
+        /**
+         * Number of effective segments, indicating the first FragmentEndNum segments with FragmentTime. Value range: >=1
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.FragmentEndNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.FragmentTime = 'FragmentTime' in params ? params.FragmentTime : null;
+        this.FragmentEndNum = 'FragmentEndNum' in params ? params.FragmentEndNum : null;
+
+    }
+}
+
+/**
  * Result information of intelligent tagging
  * @class
  */
@@ -18137,16 +18323,16 @@ class AdaptiveStreamTemplate extends  AbstractModel {
         super();
 
         /**
-         * Video parameter information.
-         * @type {VideoTemplateInfo || null}
-         */
-        this.Video = null;
-
-        /**
          * Audio parameter information.
          * @type {AudioTemplateInfo || null}
          */
         this.Audio = null;
+
+        /**
+         * Video parameter information.
+         * @type {VideoTemplateInfo || null}
+         */
+        this.Video = null;
 
         /**
          * Whether to remove audio stream. Valid values:
@@ -18174,16 +18360,16 @@ class AdaptiveStreamTemplate extends  AbstractModel {
             return;
         }
 
-        if (params.Video) {
-            let obj = new VideoTemplateInfo();
-            obj.deserialize(params.Video)
-            this.Video = obj;
-        }
-
         if (params.Audio) {
             let obj = new AudioTemplateInfo();
             obj.deserialize(params.Audio)
             this.Audio = obj;
+        }
+
+        if (params.Video) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.Video)
+            this.Video = obj;
         }
         this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
         this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
@@ -20737,23 +20923,24 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Video stream encoding format. Valid values:
-<li>h264: H.264 encoding.</li>
-<li>h265: H.265 encoding.</li>
-<li>h266: H.266 encoding.</li>
-<li>av1: AOMedia Video 1 encoding.</li>
-<li>vp8: VP8 encoding.</li>
-<li>vp9: VP9 encoding.</li>
-<li>mpeg2: MPEG2 encoding.</li>
-<li>dnxhd: DNxHD encoding.</li>
-<li>mv-hevc: MV-HEVC encoding.</li>
-Note: A resolution within 640x480 should be specified for H.265 encoding.
+         * Encoding format for video streams. Optional values:
+<li>h264: H.264 encoding</li>
+<li>h265: H.265 encoding</li>
+<li>h266: H.266 encoding</li>
+<li>av1: AOMedia Video 1 encoding</li>
+<li>vp8: VP8 encoding</li>
+<li>vp9: VP9 encoding</li>
+<li>mpeg2: MPEG2 encoding</li>
+<li>dnxhd: DNxHD encoding</li>
+<li>mv-hevc: MV-HEVC encoding</li>
 
-Note: AV1 encoding containers only support mp4, webm, and mkv.
-Note: H.266 encoding containers only support mp4, hls, ts, and mov.
-Note: VP8 and VP9 encoding containers only support webm and mkv.
-Note: MPEG2 and DNxHD encoding containers only support mxf.
-Note: MV-HEVC encoding containers only support mp4, hls, and mov. Among them, the hls format only supports mp4 segmentation format.Note: This field may return null, indicating that no valid values can be obtained.
+Note: AV1 encoding containers currently only support mp4, webm, and mkv.
+Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
+Note: VP8 and VP9 encoding containers currently only support webm and mkv.
+Note: MPEG2 and DNxHD encoding containers currently only support mxf.
+Note: MV-HEVC encoding containers only support mp4, hls, and mov. Among them, the hls format only supports mp4 segmentation format.
+
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Codec = null;
@@ -20799,24 +20986,49 @@ Note: When resolution adaption is enabled, `Width` cannot be smaller than `Heigh
         this.Height = null;
 
         /**
-         * Frame interval between I keyframes. Value range: 0 and [1,100000]. If this parameter is 0, the system will automatically set the GOP length.
+         * Interval between I-frames (keyframes), which can be customized in frames or seconds. GOP value range: 0 and [1, 100000].
+If this parameter is 0, the system will automatically set the GOP length.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+         * GOP value unit. Optional values: 
+frame: indicates frame 
+second: indicates second
+Default value: frame
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GopUnit = null;
+
+        /**
+         * Filling mode. When the configured aspect ratio parameter for video streams differs from the aspect ratio of the original video, the processing method for transcoding is "filling". Optional filling modes:
+ <li>stretch: Each frame is stretched to fill the entire screen, which may cause the transcoded video to be "flattened" or "stretched".</li>
+<li>black: The aspect ratio of the video is kept unchanged, and the rest of the edges is filled with black.</li>
+<li>white: The aspect ratio of the video is kept unchanged, and the rest of the edges is filled with white.</li>
+<li>gauss: The aspect ratio of the video is kept unchanged, and the rest of the edges is filled with a Gaussian blur.</li>
+
+<li>smarttailor: Video images are smartly selected to ensure proportional image cropping.</li>
+Default value: black.
+
+Note: Only stretch and black are supported for adaptive bitrate streaming.
+
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FillType = null;
 
         /**
-         * The control factor of video constant bitrate. Value range: [0, 51]. This parameter will be disabled if you enter `0`.
-It is not recommended to specify this parameter if there are no special requirements.
+         * Control factor for constant video bitrate. Value range: [0, 51] and 100.
+It is recommended not to specify this parameter if there are no special requirements.
+
+Note:
+When you need to set it to auto, fill in 100.
+If Mode is set to ABR, the Vcrf value does not need to be configured.
+If Mode is set to CBR, the Vcrf value does not need to be configured.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Vcrf = null;
@@ -20829,6 +21041,15 @@ Default value: 0. If this parameter is set to `1`, multiple streams with differe
          * @type {number || null}
          */
         this.ContentAdaptStream = null;
+
+        /**
+         * Average segment duration. Value range: (0-10], unit: second
+Default value: 10
+Note: It is used only in the format of HLS.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.HlsTime = null;
 
         /**
          * HLS segment type. Valid values:
@@ -20861,6 +21082,101 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Stereo3dType = null;
 
+        /**
+         * Profile, suitable for different scenarios. 
+baseline: It only supports I/P-frames and non-interlaced scenarios, and is suitable for scenarios such as video calls and mobile videos. 
+main: It offers I-frames, P-frames, and B-frames, and supports both interlaced and non-interlaced modes. It is mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices. 
+high: the highest encoding level, with 8x8 prediction added to the main profile and support for custom quantification. It is widely used in scenarios such as Blu-ray storage and HDTV.
+default: automatic filling along with the original video
+
+This configuration appears only when the encoding standard is set to H264. Default value: default
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VideoProfile = null;
+
+        /**
+         * Encoder level. Default value: auto ("")
+If the encoding standard is set to H264, the following options are supported: "", 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, and 5.1. 
+If the encoding standard is set to H265, the following options are supported: "", 1, 2, 2.1, 3, 3.1, 4, 4.1, 5, 5.1, 5.2, 6, 6.1, 6.2, and 8.5.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VideoLevel = null;
+
+        /**
+         * Maximum number of consecutive B-frames. The default is auto, and 0 - 16 and -1 are supported.
+Note:
+
+-1 indicates auto.	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Bframes = null;
+
+        /**
+         * Bitrate control mode. Optional values: 
+VBR: variable bitrate. The output bitrate is adjusted based on the complexity of the video image, ensuring higher image quality. This mode is suitable for storage scenarios as well as applications with high image quality requirements. 
+ABR: average bitrate. The average bitrate of the output video is kept stable to the greatest extent, but short-term bitrate fluctuations are allowed. This mode is suitable for scenarios where it is necessary to minimize the overall bitrate while a certain quality is maintained. 
+CBR: constant bitrate. The output bitrate remains constant during the video encoding process, regardless of changes in image complexity. This mode is suitable for scenarios with strict network bandwidth requirements, such as live streaming. 
+VCRF: constant rate factor. The video quality is controlled by setting a quality factor, achieving constant quality encoding of videos. The bitrate is automatically adjusted based on the complexity of the content. This mode is suitable for scenarios where maintaining a certain quality is desired. 
+VBR is selected by default.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Display aspect ratio. Optional values: [1:1, 2:1, default]
+Default value: default
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Sar = null;
+
+        /**
+         * Adaptive I-frame decision. When it is enabled, Media Processing Service will automatically identify transition points between different scenarios in the video (usually they are visually distinct frames, such as those of switching from one shot to another) and adaptively insert keyframes (I-frames) at these points to improve the random accessibility and encoding efficiency of the video. Optional values: 
+0: Disable the adaptive I-frame decision 
+1: Enable the adaptive I-frame decision 
+Default value: 0	
+	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.NoScenecut = null;
+
+        /**
+         * Bit: 8/10 is supported. Default value: 8	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BitDepth = null;
+
+        /**
+         * Preservation of original timestamp. Optional values: 
+0: Disabled 
+1: Enabled 
+Default value: Disabled	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.RawPts = null;
+
+        /**
+         * Proportional compression bitrate. When it is enabled, the bitrate of the output video will be adjusted according to the proportion. After the compression ratio is entered, the system will automatically calculate the target output bitrate based on the source video bitrate. Compression ratio range: 0-100, optional values: [0-100] and -1 
+Note: -1 indicates auto.	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Compress = null;
+
+        /**
+         * Special segment configuration	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SegmentSpecificInfo || null}
+         */
+        this.SegmentSpecificInfo = null;
+
     }
 
     /**
@@ -20877,12 +21193,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
+        this.GopUnit = 'GopUnit' in params ? params.GopUnit : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
         this.ContentAdaptStream = 'ContentAdaptStream' in params ? params.ContentAdaptStream : null;
+        this.HlsTime = 'HlsTime' in params ? params.HlsTime : null;
         this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
         this.FpsDenominator = 'FpsDenominator' in params ? params.FpsDenominator : null;
         this.Stereo3dType = 'Stereo3dType' in params ? params.Stereo3dType : null;
+        this.VideoProfile = 'VideoProfile' in params ? params.VideoProfile : null;
+        this.VideoLevel = 'VideoLevel' in params ? params.VideoLevel : null;
+        this.Bframes = 'Bframes' in params ? params.Bframes : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Sar = 'Sar' in params ? params.Sar : null;
+        this.NoScenecut = 'NoScenecut' in params ? params.NoScenecut : null;
+        this.BitDepth = 'BitDepth' in params ? params.BitDepth : null;
+        this.RawPts = 'RawPts' in params ? params.RawPts : null;
+        this.Compress = 'Compress' in params ? params.Compress : null;
+
+        if (params.SegmentSpecificInfo) {
+            let obj = new SegmentSpecificInfo();
+            obj.deserialize(params.SegmentSpecificInfo)
+            this.SegmentSpecificInfo = obj;
+        }
 
     }
 }
@@ -21052,52 +21385,59 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Adaptive bitrate streaming template ID.
+         * Adaptive dynamic streaming template ID.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * List of up to 10 image or text watermarks.
+         * Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
 
         /**
-         * 
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Target storage for files after adaptive dynamic streaming. If left blank, it inherits the upper-level OutputStorage value.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
+         * Output path for the manifest file after adaptive dynamic streaming. It can be either a relative path or an absolute path.
+If you need to define an output path, the path must end with `.{format}`. Refer to [Filename Variable Description](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1) for variable names.
+Example of relative path:
+<li>filename_{variable name}.{format}</li>
+<li>filename.{format}</li>
+Example of absolute path:
+<li>/custom path/filename_{variable name}.{format}</li>
+If not filled in, it is a relative path by default: {inputName}_adaptiveDynamicStreaming_{definition}.{format}.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
 
         /**
-         * The relative output path of the substream file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+         * After adaptive dynamic streaming, the output path of substream files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
          * @type {string || null}
          */
         this.SubStreamObjectName = null;
 
         /**
-         * The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+         * After adaptive dynamic streaming (for HLS only), the output path of segment files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
          * @type {string || null}
          */
         this.SegmentObjectName = null;
 
         /**
-         * 
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Subtitle file to be inserted.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
 
         /**
-         * 
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Drm information.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {DrmInfo || null}
          */
         this.DrmInfo = null;
@@ -22471,12 +22811,6 @@ class AiRecognitionTaskTransTextResultOutput extends  AbstractModel {
          */
         this.SubtitlePath = null;
 
-        /**
-         * The subtitle storage location.
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
     }
 
     /**
@@ -22496,12 +22830,6 @@ class AiRecognitionTaskTransTextResultOutput extends  AbstractModel {
             }
         }
         this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
-
-        if (params.OutputStorage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.OutputStorage)
-            this.OutputStorage = obj;
-        }
 
     }
 }
@@ -27730,16 +28058,16 @@ class TerrorismConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * The parameters for detecting sensitive information based on OCR.
-         * @type {TerrorismOcrReviewTemplateInfo || null}
-         */
-        this.OcrReviewInfo = null;
-
-        /**
          * The parameters for detecting sensitive information in images.
          * @type {TerrorismImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
+
+        /**
+         * The parameters for detecting sensitive information based on OCR.
+         * @type {TerrorismOcrReviewTemplateInfo || null}
+         */
+        this.OcrReviewInfo = null;
 
     }
 
@@ -27751,16 +28079,16 @@ class TerrorismConfigureInfo extends  AbstractModel {
             return;
         }
 
-        if (params.OcrReviewInfo) {
-            let obj = new TerrorismOcrReviewTemplateInfo();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
-        }
-
         if (params.ImgReviewInfo) {
             let obj = new TerrorismImgReviewTemplateInfo();
             obj.deserialize(params.ImgReviewInfo)
             this.ImgReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new TerrorismOcrReviewTemplateInfo();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
         }
 
     }
@@ -29378,6 +29706,7 @@ module.exports = {
     SegmentRecognitionItem: SegmentRecognitionItem,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     LiveStreamAiAnalysisResultInfo: LiveStreamAiAnalysisResultInfo,
+    SegmentSpecificInfo: SegmentSpecificInfo,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     TranscodeTemplate: TranscodeTemplate,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,

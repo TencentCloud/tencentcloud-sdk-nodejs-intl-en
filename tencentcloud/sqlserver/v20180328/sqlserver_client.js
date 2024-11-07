@@ -207,6 +207,7 @@ const DBDetail = models.DBDetail;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const SlowLog = models.SlowLog;
 const DBRenameRes = models.DBRenameRes;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;

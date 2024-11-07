@@ -3317,55 +3317,6 @@ class RefreshUrlCacheRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAIAnalysisTemplates request structure.
- * @class
- */
-class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Unique ID filter of video content analysis templates. Array length limit: 100.
-         * @type {Array.<number> || null}
-         */
-        this.Definitions = null;
-
-        /**
-         * Pagination offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
  * Intelligent recognition template details
  * @class
  */
@@ -7245,6 +7196,43 @@ class MediaAiAnalysisCoverItem extends  AbstractModel {
 }
 
 /**
+ * Input parameters for subtitles in the complex adaptive bitrate streaming task.
+ * @class
+ */
+class ComplexAdaptiveDynamicStreamingTaskSubtitleInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subtitle ID, which must belongs to the main media.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Whether to set as the default subtitle for adaptive bitrate streaming.
+<li>YES: Set as the default subtitle;</li>
+<li>NO: Not set as the default subtitle (default value).</li>
+         * @type {string || null}
+         */
+        this.Default = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Default = 'Default' in params ? params.Default : null;
+
+    }
+}
+
+/**
  * Control parameter of intelligent tagging task
  * @class
  */
@@ -9170,18 +9158,44 @@ class ModifyQualityInspectTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
+ * DescribeProcedureTemplates request structure.
  * @class
  */
-class MaxAge extends  AbstractModel {
+class DescribeProcedureTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * MaxAge rule
-         * @type {Array.<MaxAgeRule> || null}
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
          */
-        this.MaxAgeRules = null;
+        this.SubAppId = null;
+
+        /**
+         * Name filter of task flow template. Array length limit: 100.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Filter of task flow template types. Valid values:
+<li>Preset: preset task flow template;</li>
+<li>Custom: custom task flow template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -9192,15 +9206,11 @@ class MaxAge extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.MaxAgeRules) {
-            this.MaxAgeRules = new Array();
-            for (let z in params.MaxAgeRules) {
-                let obj = new MaxAgeRule();
-                obj.deserialize(params.MaxAgeRules[z]);
-                this.MaxAgeRules.push(obj);
-            }
-        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -11407,6 +11417,42 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
+ * Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
+ * @class
+ */
+class MaxAge extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MaxAge rule
+         * @type {Array.<MaxAgeRule> || null}
+         */
+        this.MaxAgeRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MaxAgeRules) {
+            this.MaxAgeRules = new Array();
+            for (let z in params.MaxAgeRules) {
+                let obj = new MaxAgeRule();
+                obj.deserialize(params.MaxAgeRules[z]);
+                this.MaxAgeRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Control parameters for video blur detection.
  * @class
  */
@@ -13107,6 +13153,101 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
+ * CreateComplexAdaptiveDynamicStreamingTask request structure.
+ * @class
+ */
+class CreateComplexAdaptiveDynamicStreamingTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The VOD application ID.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Media ID of the main media.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Adaptive bitrate streaming parameters, supporting up to 8 entries.
+         * @type {Array.<ComplexAdaptiveDynamicStreamingTaskStreamPara> || null}
+         */
+        this.StreamParaSet = null;
+
+        /**
+         * List of video opening/closing credits configuration template IDs, supporting up to 4 entries. If this field is filled in, the start times of the media specified in AudioSet and SubtitleSet will be automatically adjusted to stay in sync with the main media.
+         * @type {Array.<HeadTailTaskInput> || null}
+         */
+        this.HeadTailSet = null;
+
+        /**
+         * Audio media parameters, supporting up to 16 entries. Each array element corresponds to an audio stream in the output. If you want to add the audio stream from the main media file to the output, you also need to specify it here. The order of elements in the array will determine the order of audio streams in the output. If the input media file contains both video and audio streams, the video stream will be ignored.
+         * @type {Array.<ComplexAdaptiveDynamicStreamingTaskAudioInput> || null}
+         */
+        this.AudioSet = null;
+
+        /**
+         * List of subtitle IDs, supporting up to 16 entries. Each array element corresponds to an subtitle stream in the output. The order of elements in the array will determine the order of subtitles in the output.
+         * @type {Array.<ComplexAdaptiveDynamicStreamingTaskSubtitleInput> || null}
+         */
+        this.SubtitleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.StreamParaSet) {
+            this.StreamParaSet = new Array();
+            for (let z in params.StreamParaSet) {
+                let obj = new ComplexAdaptiveDynamicStreamingTaskStreamPara();
+                obj.deserialize(params.StreamParaSet[z]);
+                this.StreamParaSet.push(obj);
+            }
+        }
+
+        if (params.HeadTailSet) {
+            this.HeadTailSet = new Array();
+            for (let z in params.HeadTailSet) {
+                let obj = new HeadTailTaskInput();
+                obj.deserialize(params.HeadTailSet[z]);
+                this.HeadTailSet.push(obj);
+            }
+        }
+
+        if (params.AudioSet) {
+            this.AudioSet = new Array();
+            for (let z in params.AudioSet) {
+                let obj = new ComplexAdaptiveDynamicStreamingTaskAudioInput();
+                obj.deserialize(params.AudioSet[z]);
+                this.AudioSet.push(obj);
+            }
+        }
+
+        if (params.SubtitleSet) {
+            this.SubtitleSet = new Array();
+            for (let z in params.SubtitleSet) {
+                let obj = new ComplexAdaptiveDynamicStreamingTaskSubtitleInput();
+                obj.deserialize(params.SubtitleSet[z]);
+                this.SubtitleSet.push(obj);
+            }
+        }
 
     }
 }
@@ -14814,10 +14955,10 @@ Default value: open.
 }
 
 /**
- * DescribeProcedureTemplates request structure.
+ * DescribeAIAnalysisTemplates request structure.
  * @class
  */
-class DescribeProcedureTemplatesRequest extends  AbstractModel {
+class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -14828,18 +14969,10 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * Name filter of task flow template. Array length limit: 100.
-         * @type {Array.<string> || null}
+         * Unique ID filter of video content analysis templates. Array length limit: 100.
+         * @type {Array.<number> || null}
          */
-        this.Names = null;
-
-        /**
-         * Filter of task flow template types. Valid values:
-<li>Preset: preset task flow template;</li>
-<li>Custom: custom task flow template.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.Definitions = null;
 
         /**
          * Pagination offset. Default value: 0.
@@ -14863,8 +14996,7 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
             return;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Names = 'Names' in params ? params.Names : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -18320,6 +18452,58 @@ class PornImageResult extends  AbstractModel {
 }
 
 /**
+ * Execution information of the adaptive bitrate streaming task.
+ * @class
+ */
+class ComplexAdaptiveDynamicStreamingTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task status. Valid values:
+<li>PROCESSING: processing;</li>
+<li>FINISH: completed.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Execution status and result of the complex adaptive bitrate streaming task. Each array element corresponds to an adaptive bitrate streaming template specified when initiating the task.
+         * @type {Array.<ComplexAdaptiveDynamicStreamingTaskResult> || null}
+         */
+        this.ComplexAdaptiveDynamicStreamingTaskResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.ComplexAdaptiveDynamicStreamingTaskResultSet) {
+            this.ComplexAdaptiveDynamicStreamingTaskResultSet = new Array();
+            for (let z in params.ComplexAdaptiveDynamicStreamingTaskResultSet) {
+                let obj = new ComplexAdaptiveDynamicStreamingTaskResult();
+                obj.deserialize(params.ComplexAdaptiveDynamicStreamingTaskResultSet[z]);
+                this.ComplexAdaptiveDynamicStreamingTaskResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyMediaInfo response structure.
  * @class
  */
@@ -18869,6 +19053,57 @@ class CreateJustInTimeTranscodeTemplateRequest extends  AbstractModel {
             this.WatermarkConfigure = obj;
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
+ * Input parameters for audio streams in the adaptive bitrate streaming task.
+ * @class
+ */
+class ComplexAdaptiveDynamicStreamingTaskAudioInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media ID of the input audio file. The first audio stream in the media will be fixed, while video streams and other audio streams (if any) will be ignored.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Audio stream name in the output, supporting up to 16 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The language of the audio stream in the output, supporting up to 16 characters. It must comply with the RFC5646 specification.
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * Whether to set as the default audio for adaptive bitrate streaming.
+<li>YES: Set as the default audio;</li>
+<li>NO: Not set as the default audio (default value).</li>
+         * @type {string || null}
+         */
+        this.Default = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Language = 'Language' in params ? params.Language : null;
+        this.Default = 'Default' in params ? params.Default : null;
 
     }
 }
@@ -21608,20 +21843,18 @@ class UserAgentFilter extends  AbstractModel {
 }
 
 /**
- * Control parameters for video screen black border, white border, black screen, and white screen detection.
+ * Input parameters for the adaptive bitrate streaming task.
  * @class
  */
-class BlackWhiteEdgeConfigureInfo extends  AbstractModel {
+class ComplexAdaptiveDynamicStreamingTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video screen black border, white border, black screen, white screen detection switch, optional values: 
-<li>ON: turn on; </li>
-<li>OFF: turn off. </li>
-         * @type {string || null}
+         * Adaptive bitrate streaming parameters.
+         * @type {ComplexAdaptiveDynamicStreamingTaskStreamPara || null}
          */
-        this.Switch = null;
+        this.StreamPara = null;
 
     }
 
@@ -21632,7 +21865,12 @@ class BlackWhiteEdgeConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.StreamPara) {
+            let obj = new ComplexAdaptiveDynamicStreamingTaskStreamPara();
+            obj.deserialize(params.StreamPara)
+            this.StreamPara = obj;
+        }
 
     }
 }
@@ -23781,6 +24019,61 @@ class AiSampleTagOperation extends  AbstractModel {
 }
 
 /**
+ * Output of the adaptive bitrate streaming task.
+ * @class
+ */
+class ComplexAdaptiveDynamicStreamingTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Adaptive bitrate streaming template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The adaptive bitrate streaming format. Valid values:
+<li>HLS;</li>
+<li>MPEG-DASH.</li>
+
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * DRM scheme type, value range:
+<li>Widevine;</li>
+<li>FairPlay.</li>
+The default value is an empty string, indicating that the video will not be DRM protected.
+         * @type {string || null}
+         */
+        this.DrmType = null;
+
+        /**
+         * Playback address of the output manifest.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Player configuration details
  * @class
  */
@@ -23918,6 +24211,79 @@ class PlayerConfig extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Scheme = 'Scheme' in params ? params.Scheme : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
+ * Execution information of a single adaptive bitrate stream in a complex adaptive bitrate streaming task.
+ * @class
+ */
+class ComplexAdaptiveDynamicStreamingTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status of a single adaptive bitrate stream. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Input of a single adaptive bitrate stream.
+         * @type {ComplexAdaptiveDynamicStreamingTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of a single adaptive bitrate stream.
+         * @type {ComplexAdaptiveDynamicStreamingTaskOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.Input) {
+            let obj = new ComplexAdaptiveDynamicStreamingTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new ComplexAdaptiveDynamicStreamingTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -34957,6 +35323,41 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateComplexAdaptiveDynamicStreamingTask response structure.
+ * @class
+ */
+class CreateComplexAdaptiveDynamicStreamingTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Input parameter type of adaptive bitrate streaming
  * @class
  */
@@ -35858,6 +36259,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li> `ReviewAudioVideo`: Moderation</li>
 <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
 <li>`QualityEnhance`: Enhance audio/video</li>
+<li>`ComplexAdaptiveDynamicStreaming`: Complex adaptive bitrate streaming processing task</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -36037,6 +36439,13 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.QualityEnhanceTask = null;
 
         /**
+         * Complex adaptive bitrate streaming processing task information. This field has a value only when TaskType is ComplexAdaptiveDynamicStreaming. 
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ComplexAdaptiveDynamicStreamingTask || null}
+         */
+        this.ComplexAdaptiveDynamicStreamingTask = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -36181,6 +36590,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new QualityEnhanceTask();
             obj.deserialize(params.QualityEnhanceTask)
             this.QualityEnhanceTask = obj;
+        }
+
+        if (params.ComplexAdaptiveDynamicStreamingTask) {
+            let obj = new ComplexAdaptiveDynamicStreamingTask();
+            obj.deserialize(params.ComplexAdaptiveDynamicStreamingTask)
+            this.ComplexAdaptiveDynamicStreamingTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -39423,6 +39838,34 @@ class Quic extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * Input parameters related to the adaptive bitrate streaming template.
+ * @class
+ */
+class ComplexAdaptiveDynamicStreamingTaskStreamPara extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Adaptive bitrate streaming template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -44720,6 +45163,36 @@ class EditMediaFileInfo extends  AbstractModel {
 }
 
 /**
+ * Control parameters for video screen black border, white border, black screen, and white screen detection.
+ * @class
+ */
+class BlackWhiteEdgeConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video screen black border, white border, black screen, white screen detection switch, optional values: 
+<li>ON: turn on; </li>
+<li>OFF: turn off. </li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Input parameter of image watermarking template
  * @class
  */
@@ -48625,7 +49098,6 @@ module.exports = {
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     RefreshUrlCacheRequest: RefreshUrlCacheRequest,
-    DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
@@ -48693,6 +49165,7 @@ module.exports = {
     StorageRegionInfo: StorageRegionInfo,
     MediaTransitionItem: MediaTransitionItem,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
+    ComplexAdaptiveDynamicStreamingTaskSubtitleInput: ComplexAdaptiveDynamicStreamingTaskSubtitleInput,
     TagConfigureInfo: TagConfigureInfo,
     SharpEnhanceInfo: SharpEnhanceInfo,
     ModifySuperPlayerConfigResponse: ModifySuperPlayerConfigResponse,
@@ -48729,7 +49202,7 @@ module.exports = {
     WatermarkTemplate: WatermarkTemplate,
     CoverBySnapshotTaskOutput: CoverBySnapshotTaskOutput,
     ModifyQualityInspectTemplateResponse: ModifyQualityInspectTemplateResponse,
-    MaxAge: MaxAge,
+    DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
     VideoConfigureInfoForUpdate: VideoConfigureInfoForUpdate,
     ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
     ForbidMediaDistributionRequest: ForbidMediaDistributionRequest,
@@ -48770,6 +49243,7 @@ module.exports = {
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
     ModifyHeadTailTemplateResponse: ModifyHeadTailTemplateResponse,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
+    MaxAge: MaxAge,
     BlurConfigureInfo: BlurConfigureInfo,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     WechatMiniProgramPublishTaskInput: WechatMiniProgramPublishTaskInput,
@@ -48800,6 +49274,7 @@ module.exports = {
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     VideoFrameInterpolationInfo: VideoFrameInterpolationInfo,
     EditMediaRequest: EditMediaRequest,
+    CreateComplexAdaptiveDynamicStreamingTaskRequest: CreateComplexAdaptiveDynamicStreamingTaskRequest,
     AiRecognitionTaskAsrTranslateResult: AiRecognitionTaskAsrTranslateResult,
     DescribeFileAttributesResponse: DescribeFileAttributesResponse,
     LicenseUsageDataItem: LicenseUsageDataItem,
@@ -48829,7 +49304,7 @@ module.exports = {
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
-    DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
+    DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     CreateHeadTailTemplateRequest: CreateHeadTailTemplateRequest,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
@@ -48892,6 +49367,7 @@ module.exports = {
     FileVerifyInfo: FileVerifyInfo,
     DeleteCDNDomainResponse: DeleteCDNDomainResponse,
     PornImageResult: PornImageResult,
+    ComplexAdaptiveDynamicStreamingTask: ComplexAdaptiveDynamicStreamingTask,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
@@ -48901,6 +49377,7 @@ module.exports = {
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     EnhanceMediaByTemplateResponse: EnhanceMediaByTemplateResponse,
     CreateJustInTimeTranscodeTemplateRequest: CreateJustInTimeTranscodeTemplateRequest,
+    ComplexAdaptiveDynamicStreamingTaskAudioInput: ComplexAdaptiveDynamicStreamingTaskAudioInput,
     ManageTaskRequest: ManageTaskRequest,
     RoundPlayListItemInfo: RoundPlayListItemInfo,
     ModifyEventConfigRequest: ModifyEventConfigRequest,
@@ -48952,7 +49429,7 @@ module.exports = {
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     UserAgentFilter: UserAgentFilter,
-    BlackWhiteEdgeConfigureInfo: BlackWhiteEdgeConfigureInfo,
+    ComplexAdaptiveDynamicStreamingTaskInput: ComplexAdaptiveDynamicStreamingTaskInput,
     SortBy: SortBy,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
@@ -48986,7 +49463,9 @@ module.exports = {
     RebuildMediaByTemplateRequest: RebuildMediaByTemplateRequest,
     ModifyVodDomainConfigRequest: ModifyVodDomainConfigRequest,
     AiSampleTagOperation: AiSampleTagOperation,
+    ComplexAdaptiveDynamicStreamingTaskOutput: ComplexAdaptiveDynamicStreamingTaskOutput,
     PlayerConfig: PlayerConfig,
+    ComplexAdaptiveDynamicStreamingTaskResult: ComplexAdaptiveDynamicStreamingTaskResult,
     ConfirmEventsRequest: ConfirmEventsRequest,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
@@ -49172,6 +49651,7 @@ module.exports = {
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
+    CreateComplexAdaptiveDynamicStreamingTaskResponse: CreateComplexAdaptiveDynamicStreamingTaskResponse,
     AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     InspectMediaQualityRequest: InspectMediaQualityRequest,
@@ -49238,6 +49718,7 @@ module.exports = {
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     Quic: Quic,
+    ComplexAdaptiveDynamicStreamingTaskStreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara,
     RebuildMediaByTemplateResponse: RebuildMediaByTemplateResponse,
     MediaAudioStreamItem: MediaAudioStreamItem,
     EnhanceMediaByTemplateRequest: EnhanceMediaByTemplateRequest,
@@ -49319,6 +49800,7 @@ module.exports = {
     ModifyClassResponse: ModifyClassResponse,
     BlackWhiteEdgeConfigureInfoForUpdate: BlackWhiteEdgeConfigureInfoForUpdate,
     EditMediaFileInfo: EditMediaFileInfo,
+    BlackWhiteEdgeConfigureInfo: BlackWhiteEdgeConfigureInfo,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     ProcessMediaByProcedureResponse: ProcessMediaByProcedureResponse,
     PullUploadResponse: PullUploadResponse,

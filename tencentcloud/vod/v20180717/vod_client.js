@@ -70,7 +70,6 @@ const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
 const RefreshUrlCacheRequest = models.RefreshUrlCacheRequest;
-const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
@@ -138,6 +137,7 @@ const ReviewAudioVideoRequest = models.ReviewAudioVideoRequest;
 const StorageRegionInfo = models.StorageRegionInfo;
 const MediaTransitionItem = models.MediaTransitionItem;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
+const ComplexAdaptiveDynamicStreamingTaskSubtitleInput = models.ComplexAdaptiveDynamicStreamingTaskSubtitleInput;
 const TagConfigureInfo = models.TagConfigureInfo;
 const SharpEnhanceInfo = models.SharpEnhanceInfo;
 const ModifySuperPlayerConfigResponse = models.ModifySuperPlayerConfigResponse;
@@ -174,7 +174,7 @@ const FileReviewInfo = models.FileReviewInfo;
 const WatermarkTemplate = models.WatermarkTemplate;
 const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
 const ModifyQualityInspectTemplateResponse = models.ModifyQualityInspectTemplateResponse;
-const MaxAge = models.MaxAge;
+const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
 const VideoConfigureInfoForUpdate = models.VideoConfigureInfoForUpdate;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
@@ -215,6 +215,7 @@ const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoF
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
 const ModifyHeadTailTemplateResponse = models.ModifyHeadTailTemplateResponse;
 const CreateWordSamplesRequest = models.CreateWordSamplesRequest;
+const MaxAge = models.MaxAge;
 const BlurConfigureInfo = models.BlurConfigureInfo;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
 const WechatMiniProgramPublishTaskInput = models.WechatMiniProgramPublishTaskInput;
@@ -245,6 +246,7 @@ const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const VideoFrameInterpolationInfo = models.VideoFrameInterpolationInfo;
 const EditMediaRequest = models.EditMediaRequest;
+const CreateComplexAdaptiveDynamicStreamingTaskRequest = models.CreateComplexAdaptiveDynamicStreamingTaskRequest;
 const AiRecognitionTaskAsrTranslateResult = models.AiRecognitionTaskAsrTranslateResult;
 const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
 const LicenseUsageDataItem = models.LicenseUsageDataItem;
@@ -274,7 +276,7 @@ const RebuildMediaTemplate = models.RebuildMediaTemplate;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
-const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
+const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const CreateHeadTailTemplateRequest = models.CreateHeadTailTemplateRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
@@ -337,6 +339,7 @@ const MediaSubtitleInput = models.MediaSubtitleInput;
 const FileVerifyInfo = models.FileVerifyInfo;
 const DeleteCDNDomainResponse = models.DeleteCDNDomainResponse;
 const PornImageResult = models.PornImageResult;
+const ComplexAdaptiveDynamicStreamingTask = models.ComplexAdaptiveDynamicStreamingTask;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const ModifyReviewTemplateRequest = models.ModifyReviewTemplateRequest;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
@@ -346,6 +349,7 @@ const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapsh
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const EnhanceMediaByTemplateResponse = models.EnhanceMediaByTemplateResponse;
 const CreateJustInTimeTranscodeTemplateRequest = models.CreateJustInTimeTranscodeTemplateRequest;
+const ComplexAdaptiveDynamicStreamingTaskAudioInput = models.ComplexAdaptiveDynamicStreamingTaskAudioInput;
 const ManageTaskRequest = models.ManageTaskRequest;
 const RoundPlayListItemInfo = models.RoundPlayListItemInfo;
 const ModifyEventConfigRequest = models.ModifyEventConfigRequest;
@@ -397,7 +401,7 @@ const ExtractTraceWatermarkTaskOutput = models.ExtractTraceWatermarkTaskOutput;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const UserAgentFilter = models.UserAgentFilter;
-const BlackWhiteEdgeConfigureInfo = models.BlackWhiteEdgeConfigureInfo;
+const ComplexAdaptiveDynamicStreamingTaskInput = models.ComplexAdaptiveDynamicStreamingTaskInput;
 const SortBy = models.SortBy;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
@@ -431,7 +435,9 @@ const AsrTranslateConfigureInfoForUpdate = models.AsrTranslateConfigureInfoForUp
 const RebuildMediaByTemplateRequest = models.RebuildMediaByTemplateRequest;
 const ModifyVodDomainConfigRequest = models.ModifyVodDomainConfigRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
+const ComplexAdaptiveDynamicStreamingTaskOutput = models.ComplexAdaptiveDynamicStreamingTaskOutput;
 const PlayerConfig = models.PlayerConfig;
+const ComplexAdaptiveDynamicStreamingTaskResult = models.ComplexAdaptiveDynamicStreamingTaskResult;
 const ConfirmEventsRequest = models.ConfirmEventsRequest;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const ModifySubAppIdStatusRequest = models.ModifySubAppIdStatusRequest;
@@ -617,6 +623,7 @@ const MediaInfo = models.MediaInfo;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
+const CreateComplexAdaptiveDynamicStreamingTaskResponse = models.CreateComplexAdaptiveDynamicStreamingTaskResponse;
 const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const InspectMediaQualityRequest = models.InspectMediaQualityRequest;
@@ -683,6 +690,7 @@ const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
 const Quic = models.Quic;
+const ComplexAdaptiveDynamicStreamingTaskStreamPara = models.ComplexAdaptiveDynamicStreamingTaskStreamPara;
 const RebuildMediaByTemplateResponse = models.RebuildMediaByTemplateResponse;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
 const EnhanceMediaByTemplateRequest = models.EnhanceMediaByTemplateRequest;
@@ -764,6 +772,7 @@ const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const ModifyClassResponse = models.ModifyClassResponse;
 const BlackWhiteEdgeConfigureInfoForUpdate = models.BlackWhiteEdgeConfigureInfoForUpdate;
 const EditMediaFileInfo = models.EditMediaFileInfo;
+const BlackWhiteEdgeConfigureInfo = models.BlackWhiteEdgeConfigureInfo;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const ProcessMediaByProcedureResponse = models.ProcessMediaByProcedureResponse;
 const PullUploadResponse = models.PullUploadResponse;
@@ -1982,6 +1991,27 @@ This API is used to create a player configuration. Up to 100 configurations can 
     ProcessMediaByUrl(req, cb) {
         let resp = new ProcessMediaByUrlResponse();
         this.request("ProcessMediaByUrl", req, resp, cb);
+    }
+
+    /**
+     * Initiate an adaptive bitrate streaming processing task, with the following features:
+1. Output HLS and MPEG-DASH adaptive streams based on the specified templates;
+2. DRM options for the adaptive bitrate streaming include no encryption, Widevine, or FairPlay.
+3. The output adaptive bitrate streaming can include multiple audio streams in different languages, with each language sourced from different media files.
+4. The output adaptive stream can also include multiple subtitle streams in different languages.
+
+**Notes:**
+1. When using opening/closing credits, the video stream in the opening credit must be synchronized with the audio stream; otherwise, it will result in audio and video desynchronization in the output content.
+2. If the output adaptive bitrate streaming needs to include audio from the main media, the FileId of the main media must be specified in the AudioSet parameter.
+3. Subtitles must be added to the main media beforehand, which can be done through the ModifyMediaInfo API interface or the Video Management page in the console.
+4. Support for TESHD transcoding and watermarking is currently not available.
+     * @param {CreateComplexAdaptiveDynamicStreamingTaskRequest} req
+     * @param {function(string, CreateComplexAdaptiveDynamicStreamingTaskResponse):void} cb
+     * @public
+     */
+    CreateComplexAdaptiveDynamicStreamingTask(req, cb) {
+        let resp = new CreateComplexAdaptiveDynamicStreamingTaskResponse();
+        this.request("CreateComplexAdaptiveDynamicStreamingTask", req, resp, cb);
     }
 
     /**

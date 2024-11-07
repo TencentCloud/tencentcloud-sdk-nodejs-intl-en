@@ -305,6 +305,7 @@ const ProhibitedAsrReviewTemplateInfo = models.ProhibitedAsrReviewTemplateInfo;
 const SegmentRecognitionItem = models.SegmentRecognitionItem;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const LiveStreamAiAnalysisResultInfo = models.LiveStreamAiAnalysisResultInfo;
+const SegmentSpecificInfo = models.SegmentSpecificInfo;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;

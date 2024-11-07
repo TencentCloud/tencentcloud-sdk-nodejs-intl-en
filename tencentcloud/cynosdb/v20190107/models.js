@@ -15710,7 +15710,7 @@ class TradePrice extends  AbstractModel {
         super();
 
         /**
-         * The non-discounted total price of monthly subscribed resources (unit: US cent)
+         * The non-discounted total price of monthly subscribed resources (unit: 0.000001 cent)
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -15723,21 +15723,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Discount = null;
 
         /**
-         * The discounted total price of monthly subscribed resources (unit: US cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
+         * The discounted total price of monthly subscribed resources (unit: 0.000001 cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalPriceDiscount = null;
 
         /**
-         * The non-discounted unit price of pay-as-you-go resources (unit: US cent)
+         * The non-discounted unit price of pay-as-you-go resources (unit: 0.000001 cent)
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * The discounted unit price of pay-as-you-go resources (unit: US cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
+         * The discounted unit price of pay-as-you-go resources (unit: 0.000001 cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */

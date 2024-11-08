@@ -18,29 +18,35 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeQuotaUsageResponse = models.DescribeQuotaUsageResponse;
 const ModifyPrivateZoneVpcRequest = models.ModifyPrivateZoneVpcRequest;
-const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
+const CreateEndPointAndEndPointServiceResponse = models.CreateEndPointAndEndPointServiceResponse;
 const DescribePrivateDNSAccountListResponse = models.DescribePrivateDNSAccountListResponse;
-const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordListRequest;
+const CreateForwardRuleRequest = models.CreateForwardRuleRequest;
 const PrivateDNSAccount = models.PrivateDNSAccount;
+const DescribeForwardRuleListRequest = models.DescribeForwardRuleListRequest;
+const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordListRequest;
 const DescribePrivateZoneRecordListResponse = models.DescribePrivateZoneRecordListResponse;
 const DescribePrivateZoneListResponse = models.DescribePrivateZoneListResponse;
 const AccountVpcInfoOutput = models.AccountVpcInfoOutput;
+const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
 const ModifyRecordsStatusResponse = models.ModifyRecordsStatusResponse;
 const DatePoint = models.DatePoint;
 const DescribeAccountVpcListResponse = models.DescribeAccountVpcListResponse;
 const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
 const PrivateZoneRecord = models.PrivateZoneRecord;
+const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
 const AuditLogInfo = models.AuditLogInfo;
 const DescribeRequestDataRequest = models.DescribeRequestDataRequest;
 const ModifyPrivateZoneRecordResponse = models.ModifyPrivateZoneRecordResponse;
 const DescribeAccountVpcListRequest = models.DescribeAccountVpcListRequest;
 const DescribeRequestDataResponse = models.DescribeRequestDataResponse;
+const DescribeEndPointListResponse = models.DescribeEndPointListResponse;
 const TagInfo = models.TagInfo;
 const TldQuota = models.TldQuota;
 const CreatePrivateZoneRequest = models.CreatePrivateZoneRequest;
-const VpcInfo = models.VpcInfo;
+const DescribeEndPointListRequest = models.DescribeEndPointListRequest;
 const AccountVpcInfo = models.AccountVpcInfo;
 const ModifyPrivateZoneResponse = models.ModifyPrivateZoneResponse;
+const ForwardRule = models.ForwardRule;
 const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
 const SubscribePrivateZoneServiceRequest = models.SubscribePrivateZoneServiceRequest;
 const ModifyPrivateZoneRequest = models.ModifyPrivateZoneRequest;
@@ -48,14 +54,18 @@ const CreatePrivateZoneResponse = models.CreatePrivateZoneResponse;
 const DescribeDashboardResponse = models.DescribeDashboardResponse;
 const CreatePrivateZoneRecordResponse = models.CreatePrivateZoneRecordResponse;
 const DescribePrivateZoneServiceResponse = models.DescribePrivateZoneServiceResponse;
+const DescribeForwardRuleListResponse = models.DescribeForwardRuleListResponse;
+const EndPointInfo = models.EndPointInfo;
 const CreatePrivateDNSAccountResponse = models.CreatePrivateDNSAccountResponse;
 const DescribeAuditLogRequest = models.DescribeAuditLogRequest;
 const DescribeDashboardRequest = models.DescribeDashboardRequest;
+const CreateEndPointResponse = models.CreateEndPointResponse;
 const AuditLog = models.AuditLog;
 const SubscribePrivateZoneServiceResponse = models.SubscribePrivateZoneServiceResponse;
 const AccountVpcInfoOut = models.AccountVpcInfoOut;
 const DeletePrivateZoneRecordRequest = models.DeletePrivateZoneRecordRequest;
 const Filter = models.Filter;
+const CreateEndPointRequest = models.CreateEndPointRequest;
 const ModifyRecordsStatusRequest = models.ModifyRecordsStatusRequest;
 const CreatePrivateDNSAccountRequest = models.CreatePrivateDNSAccountRequest;
 const MetricData = models.MetricData;
@@ -63,9 +73,11 @@ const DeletePrivateZoneRecordResponse = models.DeletePrivateZoneRecordResponse;
 const PrivateZone = models.PrivateZone;
 const CreatePrivateZoneRecordRequest = models.CreatePrivateZoneRecordRequest;
 const DescribeQuotaUsageRequest = models.DescribeQuotaUsageRequest;
+const CreateEndPointAndEndPointServiceRequest = models.CreateEndPointAndEndPointServiceRequest;
 const ModifyPrivateZoneRecordRequest = models.ModifyPrivateZoneRecordRequest;
+const VpcInfo = models.VpcInfo;
 const FlowUsage = models.FlowUsage;
-const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
+const CreateForwardRuleResponse = models.CreateForwardRuleResponse;
 const ModifyPrivateZoneVpcResponse = models.ModifyPrivateZoneVpcResponse;
 
 
@@ -91,28 +103,6 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a DNS record for a private domain.
-     * @param {ModifyPrivateZoneRecordRequest} req
-     * @param {function(string, ModifyPrivateZoneRecordResponse):void} cb
-     * @public
-     */
-    ModifyPrivateZoneRecord(req, cb) {
-        let resp = new ModifyPrivateZoneRecordResponse();
-        this.request("ModifyPrivateZoneRecord", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the VPC list of a Private DNS account.
-     * @param {DescribeAccountVpcListRequest} req
-     * @param {function(string, DescribeAccountVpcListResponse):void} cb
-     * @public
-     */
-    DescribeAccountVpcList(req, cb) {
-        let resp = new DescribeAccountVpcListResponse();
-        this.request("DescribeAccountVpcList", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the list of records for a private domain.
      * @param {DescribePrivateZoneRecordListRequest} req
      * @param {function(string, DescribePrivateZoneRecordListResponse):void} cb
@@ -121,17 +111,6 @@ class PrivatednsClient extends AbstractClient {
     DescribePrivateZoneRecordList(req, cb) {
         let resp = new DescribePrivateZoneRecordListResponse();
         this.request("DescribePrivateZoneRecordList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the Private DNS activation status.
-     * @param {DescribePrivateZoneServiceRequest} req
-     * @param {function(string, DescribePrivateZoneServiceResponse):void} cb
-     * @public
-     */
-    DescribePrivateZoneService(req, cb) {
-        let resp = new DescribePrivateZoneServiceResponse();
-        this.request("DescribePrivateZoneService", req, resp, cb);
     }
 
     /**
@@ -168,14 +147,14 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the DNS record status.
-     * @param {ModifyRecordsStatusRequest} req
-     * @param {function(string, ModifyRecordsStatusResponse):void} cb
+     * This API is used to obtain the endpoint list.
+     * @param {DescribeEndPointListRequest} req
+     * @param {function(string, DescribeEndPointListResponse):void} cb
      * @public
      */
-    ModifyRecordsStatus(req, cb) {
-        let resp = new ModifyRecordsStatusResponse();
-        this.request("ModifyRecordsStatus", req, resp, cb);
+    DescribeEndPointList(req, cb) {
+        let resp = new DescribeEndPointListResponse();
+        this.request("DescribeEndPointList", req, resp, cb);
     }
 
     /**
@@ -201,6 +180,17 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create an endpoint.
+     * @param {CreateEndPointRequest} req
+     * @param {function(string, CreateEndPointResponse):void} cb
+     * @public
+     */
+    CreateEndPoint(req, cb) {
+        let resp = new CreateEndPointResponse();
+        this.request("CreateEndPoint", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a private domain.
      * @param {ModifyPrivateZoneRequest} req
      * @param {function(string, ModifyPrivateZoneResponse):void} cb
@@ -209,6 +199,17 @@ class PrivatednsClient extends AbstractClient {
     ModifyPrivateZone(req, cb) {
         let resp = new ModifyPrivateZoneResponse();
         this.request("ModifyPrivateZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a DNS record for a private domain.
+     * @param {ModifyPrivateZoneRecordRequest} req
+     * @param {function(string, ModifyPrivateZoneRecordResponse):void} cb
+     * @public
+     */
+    ModifyPrivateZoneRecord(req, cb) {
+        let resp = new ModifyPrivateZoneRecordResponse();
+        this.request("ModifyPrivateZoneRecord", req, resp, cb);
     }
 
     /**
@@ -242,6 +243,72 @@ class PrivatednsClient extends AbstractClient {
     ModifyPrivateZoneVpc(req, cb) {
         let resp = new ModifyPrivateZoneVpcResponse();
         this.request("ModifyPrivateZoneVpc", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the VPC list of a Private DNS account.
+     * @param {DescribeAccountVpcListRequest} req
+     * @param {function(string, DescribeAccountVpcListResponse):void} cb
+     * @public
+     */
+    DescribeAccountVpcList(req, cb) {
+        let resp = new DescribeAccountVpcListResponse();
+        this.request("DescribeAccountVpcList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an endpoint and an endpoint service simultaneously.
+     * @param {CreateEndPointAndEndPointServiceRequest} req
+     * @param {function(string, CreateEndPointAndEndPointServiceResponse):void} cb
+     * @public
+     */
+    CreateEndPointAndEndPointService(req, cb) {
+        let resp = new CreateEndPointAndEndPointServiceResponse();
+        this.request("CreateEndPointAndEndPointService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the DNS record status.
+     * @param {ModifyRecordsStatusRequest} req
+     * @param {function(string, ModifyRecordsStatusResponse):void} cb
+     * @public
+     */
+    ModifyRecordsStatus(req, cb) {
+        let resp = new ModifyRecordsStatusResponse();
+        this.request("ModifyRecordsStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom forwarding rule.
+     * @param {CreateForwardRuleRequest} req
+     * @param {function(string, CreateForwardRuleResponse):void} cb
+     * @public
+     */
+    CreateForwardRule(req, cb) {
+        let resp = new CreateForwardRuleResponse();
+        this.request("CreateForwardRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the Private DNS activation status.
+     * @param {DescribePrivateZoneServiceRequest} req
+     * @param {function(string, DescribePrivateZoneServiceResponse):void} cb
+     * @public
+     */
+    DescribePrivateZoneService(req, cb) {
+        let resp = new DescribePrivateZoneServiceResponse();
+        this.request("DescribePrivateZoneService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the forwarding rule list.
+     * @param {DescribeForwardRuleListRequest} req
+     * @param {function(string, DescribeForwardRuleListResponse):void} cb
+     * @public
+     */
+    DescribeForwardRuleList(req, cb) {
+        let resp = new DescribeForwardRuleListResponse();
+        this.request("DescribeForwardRuleList", req, resp, cb);
     }
 
     /**

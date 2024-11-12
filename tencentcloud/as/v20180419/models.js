@@ -2793,10 +2793,19 @@ class RollingUpdateSettings extends  AbstractModel {
         this.BatchNumber = null;
 
         /**
-         * Pause policy between batches. Default value: Automatic. Valid values: <br><li>FIRST_BATCH_PAUSE: Pause after the first batch update completes.</li> <li>BATCH_INTERVAL_PAUSE: Pause between each batch update.</li> <li>AUTOMATIC: No pauses.
+         * Pause policy between batches. Default value: Automatic. Valid values:
+<li>FIRST_BATCH_PAUSE: Pause after the first batch of updates is completed.</li>
+<li>BATCH_INTERVAL_PAUSE: Pause between batches.</li>
+<li>AUTOMATIC: Do not pause.</li>
          * @type {string || null}
          */
         this.BatchPause = null;
+
+        /**
+         * The maximum additional quantity of instances. After this parameter is set, create a batch of additional pay-as-you-go instances according to the launch configuration before the rolling update starts. After the rolling update is completed, the additional instances will be terminated.This parameter is used to ensure a certain number of instances available during the rolling update. The maximum additional quantity of instances cannot exceed the number of refreshing instances in a single batch of the rolling update. The rollback process does not support this parameter currently.
+         * @type {number || null}
+         */
+        this.MaxSurge = null;
 
     }
 
@@ -2809,6 +2818,7 @@ class RollingUpdateSettings extends  AbstractModel {
         }
         this.BatchNumber = 'BatchNumber' in params ? params.BatchNumber : null;
         this.BatchPause = 'BatchPause' in params ? params.BatchPause : null;
+        this.MaxSurge = 'MaxSurge' in params ? params.MaxSurge : null;
 
     }
 }
@@ -7136,7 +7146,7 @@ class ResumeInstanceRefreshRequest extends  AbstractModel {
         this.RefreshActivityId = null;
 
         /**
-         * The recovery method for the current batch's failed instances. If there are no failed instances, this parameter becomes invalid. Default value: RETRY. Valid values: <br><li>RETRY: Retry refreshing failed instances in the current batch.</li> <li>CONTINUE: Skip failed instances in the current batch.
+         * Recovery mode of instances that have failed to be refreshed in the current batch. If there are no failed instances, this parameter is invalid. Default value: RETRY. Valid values: <li>RETRY: Retry instances that have failed to be refreshed in the current batch.</li> <li>CONTINUE: Skip instances that have failed to be refreshed in the current batch.</li>
          * @type {string || null}
          */
         this.ResumeMode = null;

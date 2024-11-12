@@ -365,6 +365,7 @@ const DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse = models.Delet
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
 const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
 const AttachCcnInstancesRequest = models.AttachCcnInstancesRequest;
+const ModifyBandwidthPackageBandwidthResponse = models.ModifyBandwidthPackageBandwidthResponse;
 const DescribeDirectConnectGatewayCcnRoutesRequest = models.DescribeDirectConnectGatewayCcnRoutesRequest;
 const CcnInstance = models.CcnInstance;
 const DescribeLocalGatewayResponse = models.DescribeLocalGatewayResponse;
@@ -474,6 +475,7 @@ const DeleteNatGatewayResponse = models.DeleteNatGatewayResponse;
 const AdjustPublicAddressRequest = models.AdjustPublicAddressRequest;
 const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
 const ModifyVpcEndPointAttributeRequest = models.ModifyVpcEndPointAttributeRequest;
+const ModifyBandwidthPackageBandwidthRequest = models.ModifyBandwidthPackageBandwidthRequest;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
 const DisassociateNetworkAclSubnetsRequest = models.DisassociateNetworkAclSubnetsRequest;
 const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
@@ -2565,6 +2567,17 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     DescribeVpcEndPointServiceWhiteList(req, cb) {
         let resp = new DescribeVpcEndPointServiceWhiteListResponse();
         this.request("DescribeVpcEndPointServiceWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to adjust the bandwidth of a [bandwidth package](https://www.tencentcloud.com/document/product/684/15245).
+     * @param {ModifyBandwidthPackageBandwidthRequest} req
+     * @param {function(string, ModifyBandwidthPackageBandwidthResponse):void} cb
+     * @public
+     */
+    ModifyBandwidthPackageBandwidth(req, cb) {
+        let resp = new ModifyBandwidthPackageBandwidthResponse();
+        this.request("ModifyBandwidthPackageBandwidth", req, resp, cb);
     }
 
     /**

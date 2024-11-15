@@ -27,7 +27,7 @@ const SlowPostConfig = models.SlowPostConfig;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
 const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
-const ModifyApplicationProxyResponse = models.ModifyApplicationProxyResponse;
+const PrepaidPlanParam = models.PrepaidPlanParam;
 const BindSharedCNAMEResponse = models.BindSharedCNAMEResponse;
 const ModifyAccelerationDomainResponse = models.ModifyAccelerationDomainResponse;
 const TopEntryValue = models.TopEntryValue;
@@ -59,16 +59,19 @@ const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest
 const DescribeAccelerationDomainsResponse = models.DescribeAccelerationDomainsResponse;
 const SwitchConfig = models.SwitchConfig;
 const IdentifyZoneResponse = models.IdentifyZoneResponse;
+const ModifyLoadBalancerResponse = models.ModifyLoadBalancerResponse;
 const ModifyL4ProxyResponse = models.ModifyL4ProxyResponse;
+const HealthChecker = models.HealthChecker;
 const CreateFunctionRuleRequest = models.CreateFunctionRuleRequest;
 const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const EnvInfo = models.EnvInfo;
+const ModifyLoadBalancerRequest = models.ModifyLoadBalancerRequest;
 const PlanInfo = models.PlanInfo;
 const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
 const CreateFunctionRequest = models.CreateFunctionRequest;
 const S3 = models.S3;
 const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
-const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
+const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const ForceRedirect = models.ForceRedirect;
 const CodeAction = models.CodeAction;
 const CachePrefresh = models.CachePrefresh;
@@ -89,6 +92,7 @@ const Sv = models.Sv;
 const Rule = models.Rule;
 const DownloadL4LogsRequest = models.DownloadL4LogsRequest;
 const ModifyZoneSettingRequest = models.ModifyZoneSettingRequest;
+const OriginGroupHealthStatus = models.OriginGroupHealthStatus;
 const BillingDataFilter = models.BillingDataFilter;
 const DeleteCustomErrorPageResponse = models.DeleteCustomErrorPageResponse;
 const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
@@ -126,6 +130,7 @@ const AlgDetectResult = models.AlgDetectResult;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
 const OfflineCache = models.OfflineCache;
 const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
+const LoadBalancer = models.LoadBalancer;
 const DeleteRulesRequest = models.DeleteRulesRequest;
 const ExceptUserRuleCondition = models.ExceptUserRuleCondition;
 const SecEntryValue = models.SecEntryValue;
@@ -146,6 +151,8 @@ const CreateApplicationProxyResponse = models.CreateApplicationProxyResponse;
 const BotUserRule = models.BotUserRule;
 const Task = models.Task;
 const DescribeL4ProxyRulesResponse = models.DescribeL4ProxyRulesResponse;
+const OriginHealthStatus = models.OriginHealthStatus;
+const CustomizedHeader = models.CustomizedHeader;
 const DescribeFunctionsRequest = models.DescribeFunctionsRequest;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
@@ -220,9 +227,12 @@ const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
 const UpgradePlanResponse = models.UpgradePlanResponse;
 const AclConfig = models.AclConfig;
+const JITVideoProcess = models.JITVideoProcess;
 const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
+const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
 const AclUserRule = models.AclUserRule;
+const DescribeLoadBalancerListRequest = models.DescribeLoadBalancerListRequest;
 const DescribeDDoSAttackEventRequest = models.DescribeDDoSAttackEventRequest;
 const FunctionRuleCondition = models.FunctionRuleCondition;
 const ModifyFunctionResponse = models.ModifyFunctionResponse;
@@ -245,9 +255,11 @@ const RenewPlanResponse = models.RenewPlanResponse;
 const CustomErrorPage = models.CustomErrorPage;
 const DescribeDeployHistoryRequest = models.DescribeDeployHistoryRequest;
 const BillingData = models.BillingData;
+const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
 const DeleteZoneResponse = models.DeleteZoneResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
 const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
+const OriginInfo = models.OriginInfo;
 const WafRule = models.WafRule;
 const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
 const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
@@ -255,9 +267,11 @@ const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const BindSharedCNAMEMap = models.BindSharedCNAMEMap;
 const DeleteRealtimeLogDeliveryTaskRequest = models.DeleteRealtimeLogDeliveryTaskRequest;
 const RulesSettingAction = models.RulesSettingAction;
+const MutualTLS = models.MutualTLS;
 const Ipv6 = models.Ipv6;
 const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
+const DescribeLoadBalancerListResponse = models.DescribeLoadBalancerListResponse;
 const AlgDetectJS = models.AlgDetectJS;
 const SubRuleItem = models.SubRuleItem;
 const DeleteSecurityIPGroupRequest = models.DeleteSecurityIPGroupRequest;
@@ -279,6 +293,7 @@ const ModifyFunctionRequest = models.ModifyFunctionRequest;
 const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
 const CreateZoneRequest = models.CreateZoneRequest;
 const AscriptionInfo = models.AscriptionInfo;
+const OriginGroupHealthStatusDetail = models.OriginGroupHealthStatusDetail;
 const FirstPartConfig = models.FirstPartConfig;
 const Waf = models.Waf;
 const ModifyZoneRequest = models.ModifyZoneRequest;
@@ -289,7 +304,7 @@ const CreatePlanResponse = models.CreatePlanResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const Hsts = models.Hsts;
-const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
+const OwnershipVerification = models.OwnershipVerification;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyL4ProxyStatusRequest = models.ModifyL4ProxyStatusRequest;
 const RateLimitTemplateDetail = models.RateLimitTemplateDetail;
@@ -303,7 +318,7 @@ const DescribeCustomErrorPagesRequest = models.DescribeCustomErrorPagesRequest;
 const DescribeTimingL4DataResponse = models.DescribeTimingL4DataResponse;
 const Action = models.Action;
 const ApplicationProxy = models.ApplicationProxy;
-const PrepaidPlanParam = models.PrepaidPlanParam;
+const ModifyApplicationProxyResponse = models.ModifyApplicationProxyResponse;
 const ModifySecurityIPGroupResponse = models.ModifySecurityIPGroupResponse;
 const ZoneSetting = models.ZoneSetting;
 const ModifyL4ProxyRequest = models.ModifyL4ProxyRequest;
@@ -338,8 +353,9 @@ const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
 const BotConfig = models.BotConfig;
 const DnsVerification = models.DnsVerification;
 const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
-const OriginInfo = models.OriginInfo;
+const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const Https = models.Https;
+const DescribeOriginGroupHealthStatusRequest = models.DescribeOriginGroupHealthStatusRequest;
 const L4ProxyRule = models.L4ProxyRule;
 const AdvancedFilter = models.AdvancedFilter;
 const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
@@ -374,14 +390,16 @@ const TemplateScope = models.TemplateScope;
 const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
 const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
 const DDoSBlockData = models.DDoSBlockData;
-const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
+const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const IPWhitelist = models.IPWhitelist;
+const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CreateCustomizeErrorPageRequest = models.CreateCustomizeErrorPageRequest;
 const DescribeSecurityIPGroupRequest = models.DescribeSecurityIPGroupRequest;
 const ModifyApplicationProxyStatusResponse = models.ModifyApplicationProxyStatusResponse;
 const Identification = models.Identification;
+const OriginGroupInLoadBalancer = models.OriginGroupInLoadBalancer;
 const TopEntry = models.TopEntry;
 const NsVerification = models.NsVerification;
 const AccelerateMainland = models.AccelerateMainland;
@@ -397,11 +415,12 @@ const ModifyAccelerationDomainStatusesRequest = models.ModifyAccelerationDomainS
 const CreateZoneResponse = models.CreateZoneResponse;
 const CreateL4ProxyResponse = models.CreateL4ProxyResponse;
 const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
-const ModifyOriginGroupRequest = models.ModifyOriginGroupRequest;
+const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
+const DescribeOriginGroupHealthStatusResponse = models.DescribeOriginGroupHealthStatusResponse;
 const SecurityTemplateBinding = models.SecurityTemplateBinding;
 const CacheTag = models.CacheTag;
 const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
-const OwnershipVerification = models.OwnershipVerification;
+const CreateOriginGroupResponse = models.CreateOriginGroupResponse;
 const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
 const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
 const AiRule = models.AiRule;
@@ -413,6 +432,7 @@ const DescribeSecurityIPGroupResponse = models.DescribeSecurityIPGroupResponse;
 const UpgradePlanRequest = models.UpgradePlanRequest;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const CheckRegionHealthStatus = models.CheckRegionHealthStatus;
 const DescribeFunctionRulesRequest = models.DescribeFunctionRulesRequest;
 const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
 const RateLimitIntelligence = models.RateLimitIntelligence;
@@ -449,6 +469,17 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     DestroyPlan(req, cb) {
         let resp = new DestroyPlanResponse();
         this.request("DestroyPlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {DescribeOriginGroupHealthStatusRequest} req
+     * @param {function(string, DescribeOriginGroupHealthStatusResponse):void} cb
+     * @public
+     */
+    DescribeOriginGroupHealthStatus(req, cb) {
+        let resp = new DescribeOriginGroupHealthStatusResponse();
+        this.request("DescribeOriginGroupHealthStatus", req, resp, cb);
     }
 
     /**
@@ -812,6 +843,17 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     }
 
     /**
+     * This API is used to query the LoadBalancer list. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {DescribeLoadBalancerListRequest} req
+     * @param {function(string, DescribeLoadBalancerListResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalancerList(req, cb) {
+        let resp = new DescribeLoadBalancerListResponse();
+        this.request("DescribeLoadBalancerList", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a security IP group.
      * @param {CreateSecurityIPGroupRequest} req
      * @param {function(string, CreateSecurityIPGroupResponse):void} cb
@@ -831,6 +873,17 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     DescribeIPRegion(req, cb) {
         let resp = new DescribeIPRegionResponse();
         this.request("DescribeIPRegion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify LoadBalancer configuration. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {ModifyLoadBalancerRequest} req
+     * @param {function(string, ModifyLoadBalancerResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancer(req, cb) {
+        let resp = new ModifyLoadBalancerResponse();
+        this.request("ModifyLoadBalancer", req, resp, cb);
     }
 
     /**
@@ -879,7 +932,7 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to query the time-series L7 cached data.
+     * This API is used to query the time series traffic data of the L7 cache analysis. It will be deprecated. Use the <a href="https://intl.cloud.tencent.com/document/product/1552/80648?from_cn_redirect=1">DescribeTimingL7AnalysisData</a> API instead.
      * @param {DescribeTimingL7CacheDataRequest} req
      * @param {function(string, DescribeTimingL7CacheDataResponse):void} cb
      * @public
@@ -956,7 +1009,7 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to query the cached L7 top-ranked data.
+     * This API is used to query the top N data of the L7 cache analysis. It will be deprecated. Use the <a href="https://intl.cloud.tencent.com/document/product/1552/80646?from_cn_redirect=1"> DescribeTopL7AnalysisData</a> API instead.
      * @param {DescribeTopL7CacheDataRequest} req
      * @param {function(string, DescribeTopL7CacheDataResponse):void} cb
      * @public
@@ -978,7 +1031,7 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to query the top-ranked L7 traffic data.
+     * This API is used to query the top N data of the L7 domain name by a specified dimension. Note that there is a delay of about 10 minutes for this API. It is recommended to pull data from 10 minutes before the current time.
      * @param {DescribeTopL7AnalysisDataRequest} req
      * @param {function(string, DescribeTopL7AnalysisDataResponse):void} cb
      * @public
@@ -1100,7 +1153,7 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to query the L7 data recorded over time.
+     * This API is used to query the time series data of the L7 domain name. Note that there is a delay of about 10 minutes for this API. It is recommended to pull data from 10 minutes before the current time.
      * @param {DescribeTimingL7AnalysisDataRequest} req
      * @param {function(string, DescribeTimingL7AnalysisDataResponse):void} cb
      * @public
@@ -1232,6 +1285,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     DescribeCustomErrorPages(req, cb) {
         let resp = new DescribeCustomErrorPagesResponse();
         this.request("DescribeCustomErrorPages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a LoadBalancer. If the LoadBalancer is referenced by other services (for example, Layer-4 proxy), the LoadBalancer cannot be deleted until the reference relationship is removed. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {DeleteLoadBalancerRequest} req
+     * @param {function(string, DeleteLoadBalancerResponse):void} cb
+     * @public
+     */
+    DeleteLoadBalancer(req, cb) {
+        let resp = new DeleteLoadBalancerResponse();
+        this.request("DeleteLoadBalancer", req, resp, cb);
     }
 
     /**
@@ -1448,6 +1512,17 @@ If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://in
     }
 
     /**
+     * This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {CreateLoadBalancerRequest} req
+     * @param {function(string, CreateLoadBalancerResponse):void} cb
+     * @public
+     */
+    CreateLoadBalancer(req, cb) {
+        let resp = new CreateLoadBalancerResponse();
+        this.request("CreateLoadBalancer", req, resp, cb);
+    }
+
+    /**
      * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4ProxyRules] (https://intl.cloud.tencent.com/document/product/1552/103410?from_cn_redirect=1).
      * @param {ModifyApplicationProxyRuleRequest} req
      * @param {function(string, ModifyApplicationProxyRuleResponse):void} cb
@@ -1549,7 +1624,7 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
-     * This API is used to modify the real-time log delivery task configuration. This API has the following restrictions:<li>Does not support modifying the destination type of the real-time log delivery task (TaskType);</li><li>Does not support modifying the data delivery type (LogType)</li><li>Does not support modifying the data delivery area (Area)</li><li>Does not support modifying the detailed destination configuration, such as log set and log topic, when the destination of the original real-time log delivery task is Tencent Cloud CLS.</li>
+     * This API is used to modify the real-time log delivery task configuration. This API has the following restrictions:<li>Does not support modifying the destination type of the real-time log delivery task (TaskType);</li><li>Does not support modifying the data delivery type (LogType);</li><li>Does not support modifying the data delivery area (Area);</li><li>Does not support modifying the detailed destination configuration, such as log set and log topic, when the destination of the original real-time log delivery task is Tencent Cloud CLS.</li>
      * @param {ModifyRealtimeLogDeliveryTaskRequest} req
      * @param {function(string, ModifyRealtimeLogDeliveryTaskResponse):void} cb
      * @public

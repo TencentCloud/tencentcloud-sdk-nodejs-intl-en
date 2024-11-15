@@ -321,7 +321,7 @@ class DeleteAPIDocRequest extends  AbstractModel {
         super();
 
         /**
-         * API document ID
+         * API document ID.
          * @type {string || null}
          */
         this.ApiDocId = null;
@@ -11692,7 +11692,7 @@ class AttachPluginRequest extends  AbstractModel {
         this.PluginId = null;
 
         /**
-         * ID of the service to be operated
+         * ID of the service to be operated.
          * @type {string || null}
          */
         this.ServiceId = null;
@@ -14010,7 +14010,7 @@ class DeleteAPIDocResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the operation succeeded
+         * Whether the operation succeeded.
          * @type {boolean || null}
          */
         this.Result = null;

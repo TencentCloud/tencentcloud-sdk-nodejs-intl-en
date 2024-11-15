@@ -33,7 +33,6 @@ class TmtClient extends AbstractClient {
     /**
      * This API is used to translate text in multiple language pairs, such as Chinese-English.<br />
 Note: We recommend that you simplify your development with the SDK integration mode. For how to use the SDK, see Section 5 "Developer Resources".
-
      * @param {TextTranslateRequest} req
      * @param {function(string, TextTranslateResponse):void} cb
      * @public

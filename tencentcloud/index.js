@@ -53,6 +53,7 @@ module.exports = {
     gme: require("./gme"),
     gpm: require("./gpm"),
     gse: require("./gse"),
+    gwlb: require("./gwlb"),
     iai: require("./iai"),
     ims: require("./ims"),
     intlpartnersmgt: require("./intlpartnersmgt"),

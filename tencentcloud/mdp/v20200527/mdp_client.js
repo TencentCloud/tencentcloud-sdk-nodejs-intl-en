@@ -16,50 +16,131 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
-const CreateStreamPackageHarvestJobRequest = models.CreateStreamPackageHarvestJobRequest;
-const DescribeStreamPackageHarvestJobRequest = models.DescribeStreamPackageHarvestJobRequest;
-const PointInfo = models.PointInfo;
-const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
+const SourcePackageConf = models.SourcePackageConf;
+const AdBreakInfo = models.AdBreakInfo;
+const ModifyStreamPackageLinearAssemblyProgramResponse = models.ModifyStreamPackageLinearAssemblyProgramResponse;
 const BindNewLVBDomainWithChannelResponse = models.BindNewLVBDomainWithChannelResponse;
-const DescribeStreamPackageHarvestJobResponse = models.DescribeStreamPackageHarvestJobResponse;
-const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
-const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
-const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
-const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
+const DeleteStreamPackageLinearAssemblyChannelsRequest = models.DeleteStreamPackageLinearAssemblyChannelsRequest;
+const StartStreamPackageLinearAssemblyChannelRequest = models.StartStreamPackageLinearAssemblyChannelRequest;
+const LocationAlert = models.LocationAlert;
+const Metadata = models.Metadata;
+const ClipRangeInfo = models.ClipRangeInfo;
 const AliasValueConf = models.AliasValueConf;
+const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
+const ChannelAlertResp = models.ChannelAlertResp;
+const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
+const InputInfo = models.InputInfo;
+const DescribeStreamPackageLinearAssemblyProgramsResponse = models.DescribeStreamPackageLinearAssemblyProgramsResponse;
+const PointInfo = models.PointInfo;
+const DescribeStreamPackageSourceAlertsRequest = models.DescribeStreamPackageSourceAlertsRequest;
+const CreateStreamPackageSourceResponse = models.CreateStreamPackageSourceResponse;
+const ProgramAlertInfos = models.ProgramAlertInfos;
+const DeleteStreamPackageSourceRequest = models.DeleteStreamPackageSourceRequest;
+const DescribeStreamPackageHarvestJobsResponse = models.DescribeStreamPackageHarvestJobsResponse;
+const DescribeStreamPackageSourceLocationAlertsRequest = models.DescribeStreamPackageSourceLocationAlertsRequest;
+const UnbindCdnDomainWithChannelResponse = models.UnbindCdnDomainWithChannelResponse;
+const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
+const ModifyStreamPackageSourceLocationResponse = models.ModifyStreamPackageSourceLocationResponse;
+const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
+const DescribeStreamPackageLinearAssemblyProgramsRequest = models.DescribeStreamPackageLinearAssemblyProgramsRequest;
+const TimeShiftInfo = models.TimeShiftInfo;
+const DescribeStreamPackageLinearAssemblyProgramSchedulesResponse = models.DescribeStreamPackageLinearAssemblyProgramSchedulesResponse;
+const DescribeStreamPackageHarvestJobRequest = models.DescribeStreamPackageHarvestJobRequest;
+const DescribeStreamPackageLinearAssemblyChannelsRequest = models.DescribeStreamPackageLinearAssemblyChannelsRequest;
+const SourceAlert = models.SourceAlert;
+const DeleteStreamPackageLinearAssemblyChannelsResponse = models.DeleteStreamPackageLinearAssemblyChannelsResponse;
+const SourceInfo = models.SourceInfo;
+const DescribeStreamPackageSourceLocationAlertsResponse = models.DescribeStreamPackageSourceLocationAlertsResponse;
+const CreateStreamPackageLinearAssemblyChannelRequest = models.CreateStreamPackageLinearAssemblyChannelRequest;
+const PlaybackInfoReq = models.PlaybackInfoReq;
+const DescribeStreamPackageHarvestJobResponse = models.DescribeStreamPackageHarvestJobResponse;
+const DescribeStreamPackageLinearAssemblyChannelRequest = models.DescribeStreamPackageLinearAssemblyChannelRequest;
+const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
+const CreateStreamPackageSourceLocationRequest = models.CreateStreamPackageSourceLocationRequest;
 const DescribeStreamPackageHarvestJobsRequest = models.DescribeStreamPackageHarvestJobsRequest;
 const DeleteStreamPackageHarvestJobResponse = models.DeleteStreamPackageHarvestJobResponse;
 const DeleteStreamPackageHarvestJobsRequest = models.DeleteStreamPackageHarvestJobsRequest;
-const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
-const EndpointAuthInfo = models.EndpointAuthInfo;
 const CreateStreamPackageChannelEndpointResponse = models.CreateStreamPackageChannelEndpointResponse;
-const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
-const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
+const NameServer = models.NameServer;
+const PlaybackInfo = models.PlaybackInfo;
 const ChannelInfo = models.ChannelInfo;
 const CacheInfo = models.CacheInfo;
-const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
-const InputInfo = models.InputInfo;
-const InputAuthInfo = models.InputAuthInfo;
+const DescribeStreamPackageSourceLocationRequest = models.DescribeStreamPackageSourceLocationRequest;
 const UnbindCdnDomainWithChannelRequest = models.UnbindCdnDomainWithChannelRequest;
-const SSAIConf = models.SSAIConf;
+const ModifyStreamPackageLinearAssemblyProgramRequest = models.ModifyStreamPackageLinearAssemblyProgramRequest;
 const HarvestJobResp = models.HarvestJobResp;
+const DescribeStreamPackageSourceLocationsRequest = models.DescribeStreamPackageSourceLocationsRequest;
+const DescribeStreamPackageSourceLocationResponse = models.DescribeStreamPackageSourceLocationResponse;
 const EndpointInfo = models.EndpointInfo;
-const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
-const DescribeStreamPackageHarvestJobsResponse = models.DescribeStreamPackageHarvestJobsResponse;
+const ModifyStreamPackageSourceResponse = models.ModifyStreamPackageSourceResponse;
+const DeleteStreamPackageLinearAssemblyChannelRequest = models.DeleteStreamPackageLinearAssemblyChannelRequest;
 const ModifyStreamPackageChannelRequest = models.ModifyStreamPackageChannelRequest;
-const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
-const CacheInfoInfo = models.CacheInfoInfo;
-const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
-const UnbindCdnDomainWithChannelResponse = models.UnbindCdnDomainWithChannelResponse;
-const DeleteStreamPackageHarvestJobRequest = models.DeleteStreamPackageHarvestJobRequest;
+const CreateStreamPackageLinearAssemblyProgramRequest = models.CreateStreamPackageLinearAssemblyProgramRequest;
+const SegmentDeliverInfo = models.SegmentDeliverInfo;
+const DeleteStreamPackageLinearAssemblyChannelResponse = models.DeleteStreamPackageLinearAssemblyChannelResponse;
 const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelRequest;
-const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
+const ModifyStreamPackageSourceRequest = models.ModifyStreamPackageSourceRequest;
+const EndpointAuthInfo = models.EndpointAuthInfo;
+const TimeSignalInfo = models.TimeSignalInfo;
+const ModifyStreamPackageLinearAssemblyChannelRequest = models.ModifyStreamPackageLinearAssemblyChannelRequest;
+const DeleteStreamPackageSourceLocationResponse = models.DeleteStreamPackageSourceLocationResponse;
+const CreateStreamPackageSourceRequest = models.CreateStreamPackageSourceRequest;
+const DescribeStreamPackageLinearAssemblyProgramRequest = models.DescribeStreamPackageLinearAssemblyProgramRequest;
+const DescribeStreamPackageLinearAssemblyChannelAlertsRequest = models.DescribeStreamPackageLinearAssemblyChannelAlertsRequest;
+const DescribeStreamPackageSourceLocationsResponse = models.DescribeStreamPackageSourceLocationsResponse;
+const StopStreamPackageLinearAssemblyChannelResponse = models.StopStreamPackageLinearAssemblyChannelResponse;
+const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
+const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
+const SlateInfo = models.SlateInfo;
+const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
+const DescribeStreamPackageLinearAssemblyChannelResponse = models.DescribeStreamPackageLinearAssemblyChannelResponse;
+const DescribeStreamPackageLinearAssemblyChannelAlertsResponse = models.DescribeStreamPackageLinearAssemblyChannelAlertsResponse;
+const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
+const DeleteStreamPackageLinearAssemblyProgramsResponse = models.DeleteStreamPackageLinearAssemblyProgramsResponse;
+const StartStreamPackageLinearAssemblyChannelResponse = models.StartStreamPackageLinearAssemblyChannelResponse;
+const ModifyStreamPackageLinearAssemblyChannelResponse = models.ModifyStreamPackageLinearAssemblyChannelResponse;
+const DeleteStreamPackageSourceResponse = models.DeleteStreamPackageSourceResponse;
+const DescribeStreamPackageSourceRequest = models.DescribeStreamPackageSourceRequest;
+const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
+const OutputInfo = models.OutputInfo;
+const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
+const ProgramAlertCounts = models.ProgramAlertCounts;
+const DeleteStreamPackageSourceLocationRequest = models.DeleteStreamPackageSourceLocationRequest;
+const DescribeStreamPackageLinearAssemblyProgramResponse = models.DescribeStreamPackageLinearAssemblyProgramResponse;
+const DescribeStreamPackageSourcesResponse = models.DescribeStreamPackageSourcesResponse;
 const BindNewLVBDomainWithChannelRequest = models.BindNewLVBDomainWithChannelRequest;
-const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
 const ModifyStreamPackageChannelResponse = models.ModifyStreamPackageChannelResponse;
+const CreateStreamPackageSourceLocationResponse = models.CreateStreamPackageSourceLocationResponse;
+const StopStreamPackageLinearAssemblyChannelRequest = models.StopStreamPackageLinearAssemblyChannelRequest;
+const DescribeStreamPackageLinearAssemblyProgramSchedulesRequest = models.DescribeStreamPackageLinearAssemblyProgramSchedulesRequest;
+const DeleteStreamPackageLinearAssemblyProgramsRequest = models.DeleteStreamPackageLinearAssemblyProgramsRequest;
+const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
+const CreateStreamPackageHarvestJobRequest = models.CreateStreamPackageHarvestJobRequest;
+const DescribeStreamPackageSourceAlertsResponse = models.DescribeStreamPackageSourceAlertsResponse;
+const DeleteStreamPackageLinearAssemblyProgramRequest = models.DeleteStreamPackageLinearAssemblyProgramRequest;
+const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
+const ProgramScheduleInfo = models.ProgramScheduleInfo;
+const InputAuthInfo = models.InputAuthInfo;
+const SpliceInsertInfo = models.SpliceInsertInfo;
+const CreateStreamPackageLinearAssemblyProgramResponse = models.CreateStreamPackageLinearAssemblyProgramResponse;
+const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
+const DescribeStreamPackageSourceResponse = models.DescribeStreamPackageSourceResponse;
+const DeleteStreamPackageLinearAssemblyProgramResponse = models.DeleteStreamPackageLinearAssemblyProgramResponse;
+const ModifyStreamPackageSourceLocationRequest = models.ModifyStreamPackageSourceLocationRequest;
+const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
 const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
+const SourceLocationInfo = models.SourceLocationInfo;
+const SSAIConf = models.SSAIConf;
+const LinearAssemblyProgramInfo = models.LinearAssemblyProgramInfo;
+const DescribeStreamPackageSourcesRequest = models.DescribeStreamPackageSourcesRequest;
+const CreateStreamPackageLinearAssemblyChannelResponse = models.CreateStreamPackageLinearAssemblyChannelResponse;
+const LinearAssemblyChannelInfo = models.LinearAssemblyChannelInfo;
+const OutputReq = models.OutputReq;
+const CacheInfoInfo = models.CacheInfoInfo;
+const DescribeStreamPackageLinearAssemblyChannelsResponse = models.DescribeStreamPackageLinearAssemblyChannelsResponse;
+const DeleteStreamPackageHarvestJobRequest = models.DeleteStreamPackageHarvestJobRequest;
 const ConfigAliasesInfo = models.ConfigAliasesInfo;
+const ManifestInfo = models.ManifestInfo;
 
 
 /**
@@ -73,25 +154,25 @@ class MdpClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the information of multiple StreamPackage channels.
-     * @param {DescribeStreamPackageChannelsRequest} req
-     * @param {function(string, DescribeStreamPackageChannelsResponse):void} cb
+     * Delete channel linear assemblyChannel.
+     * @param {DeleteStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, DeleteStreamPackageLinearAssemblyChannelResponse):void} cb
      * @public
      */
-    DescribeStreamPackageChannels(req, cb) {
-        let resp = new DescribeStreamPackageChannelsResponse();
-        this.request("DescribeStreamPackageChannels", req, resp, cb);
+    DeleteStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new DeleteStreamPackageLinearAssemblyChannelResponse();
+        this.request("DeleteStreamPackageLinearAssemblyChannel", req, resp, cb);
     }
 
     /**
-     * This API is used to modify an endpoint of a StreamPackage channel.
-     * @param {ModifyStreamPackageChannelEndpointRequest} req
-     * @param {function(string, ModifyStreamPackageChannelEndpointResponse):void} cb
+     * Query channel linear assembly program information.
+     * @param {DescribeStreamPackageLinearAssemblyProgramRequest} req
+     * @param {function(string, DescribeStreamPackageLinearAssemblyProgramResponse):void} cb
      * @public
      */
-    ModifyStreamPackageChannelEndpoint(req, cb) {
-        let resp = new ModifyStreamPackageChannelEndpointResponse();
-        this.request("ModifyStreamPackageChannelEndpoint", req, resp, cb);
+    DescribeStreamPackageLinearAssemblyProgram(req, cb) {
+        let resp = new DescribeStreamPackageLinearAssemblyProgramResponse();
+        this.request("DescribeStreamPackageLinearAssemblyProgram", req, resp, cb);
     }
 
     /**
@@ -106,17 +187,6 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a StreamPackage channel.
-     * @param {CreateStreamPackageChannelRequest} req
-     * @param {function(string, CreateStreamPackageChannelResponse):void} cb
-     * @public
-     */
-    CreateStreamPackageChannel(req, cb) {
-        let resp = new CreateStreamPackageChannelResponse();
-        this.request("CreateStreamPackageChannel", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete endpoints from a StreamPackage channel in batches.
      * @param {DeleteStreamPackageChannelEndpointsRequest} req
      * @param {function(string, DeleteStreamPackageChannelEndpointsResponse):void} cb
@@ -125,6 +195,17 @@ class MdpClient extends AbstractClient {
     DeleteStreamPackageChannelEndpoints(req, cb) {
         let resp = new DeleteStreamPackageChannelEndpointsResponse();
         this.request("DeleteStreamPackageChannelEndpoints", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the input authentication information of a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelInputAuthInfoRequest} req
+     * @param {function(string, ModifyStreamPackageChannelInputAuthInfoResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageChannelInputAuthInfo(req, cb) {
+        let resp = new ModifyStreamPackageChannelInputAuthInfoResponse();
+        this.request("ModifyStreamPackageChannelInputAuthInfo", req, resp, cb);
     }
 
     /**
@@ -139,36 +220,36 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind an LVB domain name to a channel.
-     * @param {BindNewLVBDomainWithChannelRequest} req
-     * @param {function(string, BindNewLVBDomainWithChannelResponse):void} cb
+     * Delete channel linear assembly Source.
+     * @param {DeleteStreamPackageSourceRequest} req
+     * @param {function(string, DeleteStreamPackageSourceResponse):void} cb
      * @public
      */
-    BindNewLVBDomainWithChannel(req, cb) {
-        let resp = new BindNewLVBDomainWithChannelResponse();
-        this.request("BindNewLVBDomainWithChannel", req, resp, cb);
+    DeleteStreamPackageSource(req, cb) {
+        let resp = new DeleteStreamPackageSourceResponse();
+        this.request("DeleteStreamPackageSource", req, resp, cb);
     }
 
     /**
-     * This API is used to create an endpoint on a StreamPackage channel.
-     * @param {CreateStreamPackageChannelEndpointRequest} req
-     * @param {function(string, CreateStreamPackageChannelEndpointResponse):void} cb
+     * Modify channel linear assembly SourceLocation configuration
+     * @param {ModifyStreamPackageSourceLocationRequest} req
+     * @param {function(string, ModifyStreamPackageSourceLocationResponse):void} cb
      * @public
      */
-    CreateStreamPackageChannelEndpoint(req, cb) {
-        let resp = new CreateStreamPackageChannelEndpointResponse();
-        this.request("CreateStreamPackageChannelEndpoint", req, resp, cb);
+    ModifyStreamPackageSourceLocation(req, cb) {
+        let resp = new ModifyStreamPackageSourceLocationResponse();
+        this.request("ModifyStreamPackageSourceLocation", req, resp, cb);
     }
 
     /**
-     * This API is used to delete StreamPackage channels in batches.
-     * @param {DeleteStreamPackageChannelsRequest} req
-     * @param {function(string, DeleteStreamPackageChannelsResponse):void} cb
+     * Query channel linear assembly Source information.
+     * @param {DescribeStreamPackageSourceRequest} req
+     * @param {function(string, DescribeStreamPackageSourceResponse):void} cb
      * @public
      */
-    DeleteStreamPackageChannels(req, cb) {
-        let resp = new DeleteStreamPackageChannelsResponse();
-        this.request("DeleteStreamPackageChannels", req, resp, cb);
+    DescribeStreamPackageSource(req, cb) {
+        let resp = new DescribeStreamPackageSourceResponse();
+        this.request("DescribeStreamPackageSource", req, resp, cb);
     }
 
     /**
@@ -183,14 +264,25 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a StreamPackage channel.
-     * @param {ModifyStreamPackageChannelRequest} req
-     * @param {function(string, ModifyStreamPackageChannelResponse):void} cb
+     * Modify channel linear assembly Program configuration.
+     * @param {ModifyStreamPackageLinearAssemblyProgramRequest} req
+     * @param {function(string, ModifyStreamPackageLinearAssemblyProgramResponse):void} cb
      * @public
      */
-    ModifyStreamPackageChannel(req, cb) {
-        let resp = new ModifyStreamPackageChannelResponse();
-        this.request("ModifyStreamPackageChannel", req, resp, cb);
+    ModifyStreamPackageLinearAssemblyProgram(req, cb) {
+        let resp = new ModifyStreamPackageLinearAssemblyProgramResponse();
+        this.request("ModifyStreamPackageLinearAssemblyProgram", req, resp, cb);
+    }
+
+    /**
+     * Modify channel linear assembly Source configuration.
+     * @param {ModifyStreamPackageSourceRequest} req
+     * @param {function(string, ModifyStreamPackageSourceResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageSource(req, cb) {
+        let resp = new ModifyStreamPackageSourceResponse();
+        this.request("ModifyStreamPackageSource", req, resp, cb);
     }
 
     /**
@@ -205,6 +297,237 @@ class MdpClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify an endpoint of a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelEndpointRequest} req
+     * @param {function(string, ModifyStreamPackageChannelEndpointResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageChannelEndpoint(req, cb) {
+        let resp = new ModifyStreamPackageChannelEndpointResponse();
+        this.request("ModifyStreamPackageChannelEndpoint", req, resp, cb);
+    }
+
+    /**
+     * Stop linear assembly channel.
+     * @param {StopStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, StopStreamPackageLinearAssemblyChannelResponse):void} cb
+     * @public
+     */
+    StopStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new StopStreamPackageLinearAssemblyChannelResponse();
+        this.request("StopStreamPackageLinearAssemblyChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind an LVB domain name to a channel.
+     * @param {BindNewLVBDomainWithChannelRequest} req
+     * @param {function(string, BindNewLVBDomainWithChannelResponse):void} cb
+     * @public
+     */
+    BindNewLVBDomainWithChannel(req, cb) {
+        let resp = new BindNewLVBDomainWithChannelResponse();
+        this.request("BindNewLVBDomainWithChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelRequest} req
+     * @param {function(string, ModifyStreamPackageChannelResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageChannel(req, cb) {
+        let resp = new ModifyStreamPackageChannelResponse();
+        this.request("ModifyStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Programl information list.
+     * @param {DescribeStreamPackageLinearAssemblyProgramsRequest} req
+     * @param {function(string, DescribeStreamPackageLinearAssemblyProgramsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageLinearAssemblyPrograms(req, cb) {
+        let resp = new DescribeStreamPackageLinearAssemblyProgramsResponse();
+        this.request("DescribeStreamPackageLinearAssemblyPrograms", req, resp, cb);
+    }
+
+    /**
+     * Delete Channel Linear Assembly Program.
+     * @param {DeleteStreamPackageLinearAssemblyProgramRequest} req
+     * @param {function(string, DeleteStreamPackageLinearAssemblyProgramResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageLinearAssemblyProgram(req, cb) {
+        let resp = new DeleteStreamPackageLinearAssemblyProgramResponse();
+        this.request("DeleteStreamPackageLinearAssemblyProgram", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Channel information.
+     * @param {DescribeStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, DescribeStreamPackageLinearAssemblyChannelResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new DescribeStreamPackageLinearAssemblyChannelResponse();
+        this.request("DescribeStreamPackageLinearAssemblyChannel", req, resp, cb);
+    }
+
+    /**
+     * Modify channel linear assembly Channel configuration.
+     * @param {ModifyStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, ModifyStreamPackageLinearAssemblyChannelResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new ModifyStreamPackageLinearAssemblyChannelResponse();
+        this.request("ModifyStreamPackageLinearAssemblyChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of multiple StreamPackage channels.
+     * @param {DescribeStreamPackageChannelsRequest} req
+     * @param {function(string, DescribeStreamPackageChannelsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageChannels(req, cb) {
+        let resp = new DescribeStreamPackageChannelsResponse();
+        this.request("DescribeStreamPackageChannels", req, resp, cb);
+    }
+
+    /**
+     * Create channel linear assembly Source.
+     * @param {CreateStreamPackageSourceRequest} req
+     * @param {function(string, CreateStreamPackageSourceResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageSource(req, cb) {
+        let resp = new CreateStreamPackageSourceResponse();
+        this.request("CreateStreamPackageSource", req, resp, cb);
+    }
+
+    /**
+     * Start Linear Assembly Channel.
+     * @param {StartStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, StartStreamPackageLinearAssemblyChannelResponse):void} cb
+     * @public
+     */
+    StartStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new StartStreamPackageLinearAssemblyChannelResponse();
+        this.request("StartStreamPackageLinearAssemblyChannel", req, resp, cb);
+    }
+
+    /**
+     * Query linear assembly channel alarm information.
+     * @param {DescribeStreamPackageLinearAssemblyChannelAlertsRequest} req
+     * @param {function(string, DescribeStreamPackageLinearAssemblyChannelAlertsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageLinearAssemblyChannelAlerts(req, cb) {
+        let resp = new DescribeStreamPackageLinearAssemblyChannelAlertsResponse();
+        this.request("DescribeStreamPackageLinearAssemblyChannelAlerts", req, resp, cb);
+    }
+
+    /**
+     * Create a linear assembly channel.
+     * @param {CreateStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, CreateStreamPackageLinearAssemblyChannelResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new CreateStreamPackageLinearAssemblyChannelResponse();
+        this.request("CreateStreamPackageLinearAssemblyChannel", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Source information list.
+     * @param {DescribeStreamPackageSourcesRequest} req
+     * @param {function(string, DescribeStreamPackageSourcesResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSources(req, cb) {
+        let resp = new DescribeStreamPackageSourcesResponse();
+        this.request("DescribeStreamPackageSources", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an endpoint on a StreamPackage channel.
+     * @param {CreateStreamPackageChannelEndpointRequest} req
+     * @param {function(string, CreateStreamPackageChannelEndpointResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageChannelEndpoint(req, cb) {
+        let resp = new CreateStreamPackageChannelEndpointResponse();
+        this.request("CreateStreamPackageChannelEndpoint", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Source alarm information.
+     * @param {DescribeStreamPackageSourceAlertsRequest} req
+     * @param {function(string, DescribeStreamPackageSourceAlertsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSourceAlerts(req, cb) {
+        let resp = new DescribeStreamPackageSourceAlertsResponse();
+        this.request("DescribeStreamPackageSourceAlerts", req, resp, cb);
+    }
+
+    /**
+     * Create Linear Assembly SourceLocation.
+     * @param {CreateStreamPackageSourceLocationRequest} req
+     * @param {function(string, CreateStreamPackageSourceLocationResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageSourceLocation(req, cb) {
+        let resp = new CreateStreamPackageSourceLocationResponse();
+        this.request("CreateStreamPackageSourceLocation", req, resp, cb);
+    }
+
+    /**
+     * Create a linear assembly program.
+     * @param {CreateStreamPackageLinearAssemblyProgramRequest} req
+     * @param {function(string, CreateStreamPackageLinearAssemblyProgramResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageLinearAssemblyProgram(req, cb) {
+        let resp = new CreateStreamPackageLinearAssemblyProgramResponse();
+        this.request("CreateStreamPackageLinearAssemblyProgram", req, resp, cb);
+    }
+
+    /**
+     * Batch deletion of channels linear assembly program.
+     * @param {DeleteStreamPackageLinearAssemblyProgramsRequest} req
+     * @param {function(string, DeleteStreamPackageLinearAssemblyProgramsResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageLinearAssemblyPrograms(req, cb) {
+        let resp = new DeleteStreamPackageLinearAssemblyProgramsResponse();
+        this.request("DeleteStreamPackageLinearAssemblyPrograms", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Programl assembly scheduling information list.
+     * @param {DescribeStreamPackageLinearAssemblyProgramSchedulesRequest} req
+     * @param {function(string, DescribeStreamPackageLinearAssemblyProgramSchedulesResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageLinearAssemblyProgramSchedules(req, cb) {
+        let resp = new DescribeStreamPackageLinearAssemblyProgramSchedulesResponse();
+        this.request("DescribeStreamPackageLinearAssemblyProgramSchedules", req, resp, cb);
+    }
+
+    /**
+     * Batch delete media packaging SourceLocation.
+     * @param {DeleteStreamPackageSourceLocationRequest} req
+     * @param {function(string, DeleteStreamPackageSourceLocationResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageSourceLocation(req, cb) {
+        let resp = new DeleteStreamPackageSourceLocationResponse();
+        this.request("DeleteStreamPackageSourceLocation", req, resp, cb);
+    }
+
+    /**
      * Query HarvestJob.
      * @param {DescribeStreamPackageHarvestJobRequest} req
      * @param {function(string, DescribeStreamPackageHarvestJobResponse):void} cb
@@ -213,17 +536,6 @@ class MdpClient extends AbstractClient {
     DescribeStreamPackageHarvestJob(req, cb) {
         let resp = new DescribeStreamPackageHarvestJobResponse();
         this.request("DescribeStreamPackageHarvestJob", req, resp, cb);
-    }
-
-    /**
-     * This API is used to unbind a CDN playback domain name from a channel.
-     * @param {UnbindCdnDomainWithChannelRequest} req
-     * @param {function(string, UnbindCdnDomainWithChannelResponse):void} cb
-     * @public
-     */
-    UnbindCdnDomainWithChannel(req, cb) {
-        let resp = new UnbindCdnDomainWithChannelResponse();
-        this.request("UnbindCdnDomainWithChannel", req, resp, cb);
     }
 
     /**
@@ -238,14 +550,91 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the input authentication information of a StreamPackage channel.
-     * @param {ModifyStreamPackageChannelInputAuthInfoRequest} req
-     * @param {function(string, ModifyStreamPackageChannelInputAuthInfoResponse):void} cb
+     * Query channel linear assembly SourceLocation information list.
+     * @param {DescribeStreamPackageSourceLocationsRequest} req
+     * @param {function(string, DescribeStreamPackageSourceLocationsResponse):void} cb
      * @public
      */
-    ModifyStreamPackageChannelInputAuthInfo(req, cb) {
-        let resp = new ModifyStreamPackageChannelInputAuthInfoResponse();
-        this.request("ModifyStreamPackageChannelInputAuthInfo", req, resp, cb);
+    DescribeStreamPackageSourceLocations(req, cb) {
+        let resp = new DescribeStreamPackageSourceLocationsResponse();
+        this.request("DescribeStreamPackageSourceLocations", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly sourceLocation information.
+     * @param {DescribeStreamPackageSourceLocationRequest} req
+     * @param {function(string, DescribeStreamPackageSourceLocationResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSourceLocation(req, cb) {
+        let resp = new DescribeStreamPackageSourceLocationResponse();
+        this.request("DescribeStreamPackageSourceLocation", req, resp, cb);
+    }
+
+    /**
+     * Delete channels in batches and linearly assemble channels.
+     * @param {DeleteStreamPackageLinearAssemblyChannelsRequest} req
+     * @param {function(string, DeleteStreamPackageLinearAssemblyChannelsResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageLinearAssemblyChannels(req, cb) {
+        let resp = new DeleteStreamPackageLinearAssemblyChannelsResponse();
+        this.request("DeleteStreamPackageLinearAssemblyChannels", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Channel information list.
+     * @param {DescribeStreamPackageLinearAssemblyChannelsRequest} req
+     * @param {function(string, DescribeStreamPackageLinearAssemblyChannelsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageLinearAssemblyChannels(req, cb) {
+        let resp = new DescribeStreamPackageLinearAssemblyChannelsResponse();
+        this.request("DescribeStreamPackageLinearAssemblyChannels", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a StreamPackage channel.
+     * @param {CreateStreamPackageChannelRequest} req
+     * @param {function(string, CreateStreamPackageChannelResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageChannel(req, cb) {
+        let resp = new CreateStreamPackageChannelResponse();
+        this.request("CreateStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
+     * Query channel linear assembly Location alarm information.
+     * @param {DescribeStreamPackageSourceLocationAlertsRequest} req
+     * @param {function(string, DescribeStreamPackageSourceLocationAlertsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSourceLocationAlerts(req, cb) {
+        let resp = new DescribeStreamPackageSourceLocationAlertsResponse();
+        this.request("DescribeStreamPackageSourceLocationAlerts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete StreamPackage channels in batches.
+     * @param {DeleteStreamPackageChannelsRequest} req
+     * @param {function(string, DeleteStreamPackageChannelsResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageChannels(req, cb) {
+        let resp = new DeleteStreamPackageChannelsResponse();
+        this.request("DeleteStreamPackageChannels", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a CDN playback domain name from a channel.
+     * @param {UnbindCdnDomainWithChannelRequest} req
+     * @param {function(string, UnbindCdnDomainWithChannelResponse):void} cb
+     * @public
+     */
+    UnbindCdnDomainWithChannel(req, cb) {
+        let resp = new UnbindCdnDomainWithChannelResponse();
+        this.request("UnbindCdnDomainWithChannel", req, resp, cb);
     }
 
 

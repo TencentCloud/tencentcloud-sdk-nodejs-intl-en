@@ -69,6 +69,7 @@ class SendVerifyCodeRequest extends  AbstractModel {
 
         /**
          * Country code.
+Parameter value is not allowed to be 7,380,86.
          * @type {string || null}
          */
         this.CountryCode = null;
@@ -2015,7 +2016,8 @@ class CreateAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Account type of a new customer. Valid values: `personal`, `company`.
+         * Account type of a new customer.
+Valid values: `personal`, `company`.
          * @type {string || null}
          */
         this.AccountType = null;
@@ -2028,7 +2030,7 @@ For example, account@qq.com.
         this.Mail = null;
 
         /**
-         * Account password
+         * Account password.
 Length limit: 8-20 characters
 A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not allowed.
          * @type {string || null}
@@ -2042,13 +2044,16 @@ A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not
         this.ConfirmPassword = null;
 
         /**
-         * Customer's mobile number. The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. Starting from October 25, 2024, the system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
+         * Customer's mobile number. 
+The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. 
+The system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
          * @type {string || null}
          */
         this.PhoneNum = null;
 
         /**
          * Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
+Parameter value is not allowed to be 7,380,86.
          * @type {string || null}
          */
         this.CountryCode = null;
@@ -2066,7 +2071,9 @@ A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not
         this.Extended = null;
 
         /**
-         * Verification code. Starting from October 25, 2024, a new parameter will be used to verify the validity of the mobile number you provide. When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
+         * Verification code. 
+It will be used to verify the validity of the mobile number you provide. 
+When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
          * @type {string || null}
          */
         this.VerifyCode = null;

@@ -21,7 +21,7 @@ const SendVerifyCodeRequest = models.SendVerifyCodeRequest;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
-const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
+const ForceQNResponse = models.ForceQNResponse;
 const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
 const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
@@ -45,11 +45,12 @@ const CustomerBillDetailData = models.CustomerBillDetailData;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
+const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
-const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
+const ForceQNRequest = models.ForceQNRequest;
 const TagInfo = models.TagInfo;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
@@ -72,6 +73,7 @@ const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const CountryCodeItem = models.CountryCodeItem;
 const BillDetailData = models.BillDetailData;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
@@ -345,6 +347,17 @@ class IntlpartnersmgtClient extends AbstractClient {
     QueryVoucherAmountByUin(req, cb) {
         let resp = new QueryVoucherAmountByUinResponse();
         this.request("QueryVoucherAmountByUin", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set and cancel forced service suspension.Reseller need to be allowlisted to use the API.
+     * @param {ForceQNRequest} req
+     * @param {function(string, ForceQNResponse):void} cb
+     * @public
+     */
+    ForceQN(req, cb) {
+        let resp = new ForceQNResponse();
+        this.request("ForceQN", req, resp, cb);
     }
 
     /**

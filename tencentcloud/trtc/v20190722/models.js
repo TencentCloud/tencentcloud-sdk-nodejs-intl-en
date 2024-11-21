@@ -2757,6 +2757,12 @@ Source URL. Example value: https://a.b/test.mp4
          */
         this.MaxDuration = null;
 
+        /**
+         * Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
     }
 
     /**
@@ -2790,6 +2796,7 @@ Source URL. Example value: https://a.b/test.mp4
         this.AutoPush = 'AutoPush' in params ? params.AutoPush : null;
         this.RepeatNum = 'RepeatNum' in params ? params.RepeatNum : null;
         this.MaxDuration = 'MaxDuration' in params ? params.MaxDuration : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
 
     }
 }
@@ -5823,6 +5830,12 @@ class UpdateStreamIngestRequest extends  AbstractModel {
          */
         this.StreamUrl = null;
 
+        /**
+         * Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
     }
 
     /**
@@ -5835,6 +5848,7 @@ class UpdateStreamIngestRequest extends  AbstractModel {
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.StreamUrl = 'StreamUrl' in params ? params.StreamUrl : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
 
     }
 }

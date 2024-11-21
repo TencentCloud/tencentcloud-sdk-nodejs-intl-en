@@ -85,7 +85,6 @@ const ModifyCdbProxyAddressVipAndVPortRequest = models.ModifyCdbProxyAddressVipA
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const UploadInfo = models.UploadInfo;
@@ -162,7 +161,7 @@ const DescribeLocalBinlogConfigRequest = models.DescribeLocalBinlogConfigRequest
 const TagsInfoOfInstance = models.TagsInfoOfInstance;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
-const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
+const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const StopRollbackRequest = models.StopRollbackRequest;
@@ -173,7 +172,6 @@ const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeDBInstanceLogToCLSRequest = models.DescribeDBInstanceLogToCLSRequest;
-const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
 const OpenDBInstanceEncryptionRequest = models.OpenDBInstanceEncryptionRequest;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
@@ -343,7 +341,7 @@ const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
-const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
 const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
 const OpenDBInstanceEncryptionResponse = models.OpenDBInstanceEncryptionResponse;
@@ -800,6 +798,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     DescribeTables(req, cb) {
         let resp = new DescribeTablesResponse();
         this.request("DescribeTables", req, resp, cb);
+    }
+
+    /**
+     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
+     * @param {DeleteTimeWindowRequest} req
+     * @param {function(string, DeleteTimeWindowResponse):void} cb
+     * @public
+     */
+    DeleteTimeWindow(req, cb) {
+        let resp = new DeleteTimeWindowResponse();
+        this.request("DeleteTimeWindow", req, resp, cb);
     }
 
     /**
@@ -1359,17 +1368,6 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
-     * @param {ModifyAccountMaxUserConnectionsRequest} req
-     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
-     * @public
-     */
-    ModifyAccountMaxUserConnections(req, cb) {
-        let resp = new ModifyAccountMaxUserConnectionsResponse();
-        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeAsyncRequestInfo) is used to query the async task execution result of a TencentDB instance.
      * @param {DescribeAsyncRequestInfoRequest} req
      * @param {function(string, DescribeAsyncRequestInfoResponse):void} cb
@@ -1447,18 +1445,16 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
+     * This API is used to query the purchase or renewal price of a pay-as-you-go or monthly subscribed TencentDB instance by passing in information such as instance type, purchase duration, number of instances to purchase, memory size, disk size, and AZ. For the price of instance renewal, you can pass in instance name to query.
 
-This API was disused. You can refer to the CreateDBInstance API, and initialize the instance when creating it.
-
-This API is used to initialize a TencentDB instance, including initial password, default character set, and instance port number. But it is disused and not recommended. You can now set the instance information by using the parameter `Password`, `ParamList`, and `Port` respectively in the `CreateDBInstance` and `CreateDBInstanceHour` APIs.
-     * @param {InitDBInstancesRequest} req
-     * @param {function(string, InitDBInstancesResponse):void} cb
+Note: To query prices in a specific region, you need to use the access point of the region. For more information on access points, see <a href="https://www.tencentcloud.com/document/product/236/15832">Service Address</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+     * @param {DescribeDBPriceRequest} req
+     * @param {function(string, DescribeDBPriceResponse):void} cb
      * @public
      */
-    InitDBInstances(req, cb) {
-        let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
+    DescribeDBPrice(req, cb) {
+        let resp = new DescribeDBPriceResponse();
+        this.request("DescribeDBPrice", req, resp, cb);
     }
 
     /**
@@ -1663,19 +1659,6 @@ Note: the HTTP response packet will be very large if it contain a single large s
     ModifyCdbProxyAddressVipAndVPort(req, cb) {
         let resp = new ModifyCdbProxyAddressVipAndVPortResponse();
         this.request("ModifyCdbProxyAddressVipAndVPort", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the purchase or renewal price of a pay-as-you-go or monthly subscribed TencentDB instance by passing in information such as instance type, purchase duration, number of instances to purchase, memory size, disk size, and AZ. For the price of instance renewal, you can pass in instance name to query.
-
-Note: To query prices in a specific region, you need to use the access point of the region. For more information on access points, see <a href="https://www.tencentcloud.com/document/product/236/15832">Service Address</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
-     * @param {DescribeDBPriceRequest} req
-     * @param {function(string, DescribeDBPriceResponse):void} cb
-     * @public
-     */
-    DescribeDBPrice(req, cb) {
-        let resp = new DescribeDBPriceResponse();
-        this.request("DescribeDBPrice", req, resp, cb);
     }
 
     /**
@@ -1901,14 +1884,14 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
-     * @param {DeleteTimeWindowRequest} req
-     * @param {function(string, DeleteTimeWindowResponse):void} cb
+     * This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+     * @param {ModifyAccountMaxUserConnectionsRequest} req
+     * @param {function(string, ModifyAccountMaxUserConnectionsResponse):void} cb
      * @public
      */
-    DeleteTimeWindow(req, cb) {
-        let resp = new DeleteTimeWindowResponse();
-        this.request("DeleteTimeWindow", req, resp, cb);
+    ModifyAccountMaxUserConnections(req, cb) {
+        let resp = new ModifyAccountMaxUserConnectionsResponse();
+        this.request("ModifyAccountMaxUserConnections", req, resp, cb);
     }
 
 

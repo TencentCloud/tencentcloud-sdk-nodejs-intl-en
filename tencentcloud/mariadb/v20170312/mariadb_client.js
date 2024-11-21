@@ -564,7 +564,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to obtain a temp u200drollback instance.
+     * This API is used to obtain a temp rollback instance.
      * @param {DescribeDBTmpInstancesRequest} req
      * @param {function(string, DescribeDBTmpInstancesResponse):void} cb
      * @public

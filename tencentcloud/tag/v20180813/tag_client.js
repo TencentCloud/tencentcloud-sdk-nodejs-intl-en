@@ -21,7 +21,7 @@ const TagWithDelete = models.TagWithDelete;
 const DetachResourcesTagRequest = models.DetachResourcesTagRequest;
 const GetTagValuesResponse = models.GetTagValuesResponse;
 const AttachResourcesTagResponse = models.AttachResourcesTagResponse;
-const GetTagKeysResponse = models.GetTagKeysResponse;
+const AddProjectResponse = models.AddProjectResponse;
 const GetResourcesRequest = models.GetResourcesRequest;
 const DeleteTagRequest = models.DeleteTagRequest;
 const DeleteResourceTagResponse = models.DeleteResourceTagResponse;
@@ -47,7 +47,7 @@ const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByR
 const GetTagsResponse = models.GetTagsResponse;
 const ModifyResourcesTagValueRequest = models.ModifyResourcesTagValueRequest;
 const TagResource = models.TagResource;
-const GetTagKeysRequest = models.GetTagKeysRequest;
+const AddProjectRequest = models.AddProjectRequest;
 const AddResourceTagResponse = models.AddResourceTagResponse;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const AddResourceTagRequest = models.AddResourceTagRequest;
@@ -64,6 +64,7 @@ const AttachResourcesTagRequest = models.AttachResourcesTagRequest;
 const CreateTagResponse = models.CreateTagResponse;
 const FailedResource = models.FailedResource;
 const ResourceTagMapping = models.ResourceTagMapping;
+const GetTagKeysRequest = models.GetTagKeysRequest;
 const DetachResourcesTagResponse = models.DetachResourcesTagResponse;
 const GetResourcesResponse = models.GetResourcesResponse;
 const DescribeResourceTagsByResourceIdsSeqResponse = models.DescribeResourceTagsByResourceIdsSeqResponse;
@@ -71,6 +72,7 @@ const DeleteTagResponse = models.DeleteTagResponse;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesSeqRequest = models.DescribeTagValuesSeqRequest;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
+const GetTagKeysResponse = models.GetTagKeysResponse;
 const TagResourcesResponse = models.TagResourcesResponse;
 const CreateTagsRequest = models.CreateTagsRequest;
 const CreateTagsResponse = models.CreateTagsResponse;
@@ -229,14 +231,14 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of tag keys.
-     * @param {GetTagKeysRequest} req
-     * @param {function(string, GetTagKeysResponse):void} cb
+     * Creates a project
+     * @param {AddProjectRequest} req
+     * @param {function(string, AddProjectResponse):void} cb
      * @public
      */
-    GetTagKeys(req, cb) {
-        let resp = new GetTagKeysResponse();
-        this.request("GetTagKeys", req, resp, cb);
+    AddProject(req, cb) {
+        let resp = new AddProjectResponse();
+        this.request("AddProject", req, resp, cb);
     }
 
     /**
@@ -414,6 +416,17 @@ class TagClient extends AbstractClient {
     ModifyResourceTags(req, cb) {
         let resp = new ModifyResourceTagsResponse();
         this.request("ModifyResourceTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of tag keys.
+     * @param {GetTagKeysRequest} req
+     * @param {function(string, GetTagKeysResponse):void} cb
+     * @public
+     */
+    GetTagKeys(req, cb) {
+        let resp = new GetTagKeysResponse();
+        this.request("GetTagKeys", req, resp, cb);
     }
 
 

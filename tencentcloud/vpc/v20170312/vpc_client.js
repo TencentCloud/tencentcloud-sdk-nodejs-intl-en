@@ -56,6 +56,7 @@ const DescribeLocalGatewayRequest = models.DescribeLocalGatewayRequest;
 const FlowLog = models.FlowLog;
 const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
 const IpField = models.IpField;
+const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
 const CreateVpcResponse = models.CreateVpcResponse;
@@ -223,6 +224,7 @@ const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
 const TrafficPackage = models.TrafficPackage;
 const WithdrawNotifyRoutesRequest = models.WithdrawNotifyRoutesRequest;
+const ResourceDashboard = models.ResourceDashboard;
 const DescribeSubnetResourceDashboardRequest = models.DescribeSubnetResourceDashboardRequest;
 const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
@@ -254,7 +256,7 @@ const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttribute
 const ResumeSnapshotInstanceRequest = models.ResumeSnapshotInstanceRequest;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const ModifyVpcEndPointServiceAttributeResponse = models.ModifyVpcEndPointServiceAttributeResponse;
-const ResourceDashboard = models.ResourceDashboard;
+const DescribeReserveIpAddressesResponse = models.DescribeReserveIpAddressesResponse;
 const DescribeSnapshotFilesResponse = models.DescribeSnapshotFilesResponse;
 const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
@@ -312,6 +314,7 @@ const DisassociateDirectConnectGatewayNatGatewayResponse = models.DisassociateDi
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const CreateNetworkAclQuintupleEntriesRequest = models.CreateNetworkAclQuintupleEntriesRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
+const DeleteReserveIpAddressesRequest = models.DeleteReserveIpAddressesRequest;
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const ModifyVpcEndPointServiceWhiteListRequest = models.ModifyVpcEndPointServiceWhiteListRequest;
@@ -350,8 +353,10 @@ const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInte
 const DeleteVpcEndPointResponse = models.DeleteVpcEndPointResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
+const CreateReserveIpAddressesRequest = models.CreateReserveIpAddressesRequest;
 const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
 const ModifyAssistantCidrRequest = models.ModifyAssistantCidrRequest;
+const CreateReserveIpAddressesResponse = models.CreateReserveIpAddressesResponse;
 const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayRequest = models.AssociateDirectConnectGatewayNatGatewayRequest;
@@ -415,6 +420,7 @@ const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
+const ModifyReserveIpAddressRequest = models.ModifyReserveIpAddressRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
@@ -459,7 +465,7 @@ const EnableGatewayFlowMonitorResponse = models.EnableGatewayFlowMonitorResponse
 const Resource = models.Resource;
 const CustomerGateway = models.CustomerGateway;
 const AllocateAddressesResponse = models.AllocateAddressesResponse;
-const DeleteTrafficPackagesResponse = models.DeleteTrafficPackagesResponse;
+const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const BandwidthPackage = models.BandwidthPackage;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest;
@@ -493,7 +499,7 @@ const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
 const CheckAssistantCidrResponse = models.CheckAssistantCidrResponse;
-const DeleteSnapshotPoliciesResponse = models.DeleteSnapshotPoliciesResponse;
+const DescribeVpcTaskResultResponse = models.DescribeVpcTaskResultResponse;
 const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
 const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
 const ModifyVpnGatewayCcnRoutesResponse = models.ModifyVpnGatewayCcnRoutesResponse;
@@ -504,7 +510,7 @@ const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroupsRequest;
 const CheckNetDetectStateResponse = models.CheckNetDetectStateResponse;
 const DisassociateVpcEndPointSecurityGroupsResponse = models.DisassociateVpcEndPointSecurityGroupsResponse;
-const DescribeVpcTaskResultResponse = models.DescribeVpcTaskResultResponse;
+const DeleteSnapshotPoliciesResponse = models.DeleteSnapshotPoliciesResponse;
 const AssociateNatGatewayAddressResponse = models.AssociateNatGatewayAddressResponse;
 const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
 const VpngwCcnRoutes = models.VpngwCcnRoutes;
@@ -523,6 +529,7 @@ const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
 const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
 const DescribeSnapshotAttachedInstancesResponse = models.DescribeSnapshotAttachedInstancesResponse;
 const RefreshDirectConnectGatewayRouteToNatGatewayResponse = models.RefreshDirectConnectGatewayRouteToNatGatewayResponse;
+const DeleteReserveIpAddressesResponse = models.DeleteReserveIpAddressesResponse;
 const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
 const SnapshotInstance = models.SnapshotInstance;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
@@ -541,7 +548,7 @@ const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddresse
 const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
 const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
-const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
+const DescribeReserveIpAddressesRequest = models.DescribeReserveIpAddressesRequest;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const BatchModifySnapshotPolicy = models.BatchModifySnapshotPolicy;
 const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
@@ -555,6 +562,7 @@ const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnect
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
+const ReserveIpAddressInfo = models.ReserveIpAddressInfo;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
 const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
@@ -606,11 +614,12 @@ const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const DisableCcnRoutesResponse = models.DisableCcnRoutesResponse;
 const DescribeCcnRegionBandwidthLimitsRequest = models.DescribeCcnRegionBandwidthLimitsRequest;
+const ModifyReserveIpAddressResponse = models.ModifyReserveIpAddressResponse;
 const CreateAssistantCidrResponse = models.CreateAssistantCidrResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
 const ConflictSource = models.ConflictSource;
-const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
+const DeleteTrafficPackagesResponse = models.DeleteTrafficPackagesResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const Quota = models.Quota;
@@ -911,6 +920,17 @@ Note: When this API is called, all routing policies in the current route table a
     }
 
     /**
+     * This API is used to modify a reserved private IP address.
+     * @param {ModifyReserveIpAddressRequest} req
+     * @param {function(string, ModifyReserveIpAddressResponse):void} cb
+     * @public
+     */
+    ModifyReserveIpAddress(req, cb) {
+        let resp = new ModifyReserveIpAddressResponse();
+        this.request("ModifyReserveIpAddress", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeNetworkInterfaceLimit) is used to query the ENI quota based on the ID of CVM instance or ENI. It returns the ENI quota to which the CVM instance can be bound and the IP address quota that can be allocated to the ENI.
      * @param {DescribeNetworkInterfaceLimitRequest} req
      * @param {function(string, DescribeNetworkInterfaceLimitResponse):void} cb
@@ -1033,6 +1053,18 @@ This API is completed asynchronously. If you need to query the execution result 
     DeleteSnapshotPolicies(req, cb) {
         let resp = new DeleteSnapshotPoliciesResponse();
         this.request("DeleteSnapshotPolicies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to convert a common public IP into an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short).
+* Tencent Cloud limits the number of times that a user can unbind EIPs and reassign public IPs in each region per day. For more information, see product introduction of [Elastic IP](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1). The preceding quota can be obtained through the API [DescribeAddressQuota](https://intl.cloud.tencent.com/document/product/215/16701).
+     * @param {TransformAddressRequest} req
+     * @param {function(string, TransformAddressResponse):void} cb
+     * @public
+     */
+    TransformAddress(req, cb) {
+        let resp = new TransformAddressResponse();
+        this.request("TransformAddress", req, resp, cb);
     }
 
     /**
@@ -1800,6 +1832,17 @@ The number of network instances that each CCN can be associated with is limited.
     }
 
     /**
+     * This API is used to query the bandwidth limits of a CCN instance. Monthly-subscribed CCNs only support Inter-region Bandwidth Limits, while the pay-as-you-go CCNs support both the Inter-region Bandwidth Limits and Region Outbound Bandwidth Limits. 
+     * @param {GetCcnRegionBandwidthLimitsRequest} req
+     * @param {function(string, GetCcnRegionBandwidthLimitsResponse):void} cb
+     * @public
+     */
+    GetCcnRegionBandwidthLimits(req, cb) {
+        let resp = new GetCcnRegionBandwidthLimitsResponse();
+        this.request("GetCcnRegionBandwidthLimits", req, resp, cb);
+    }
+
+    /**
      * This API is used to migrate the private IPs between ENIs. 
 * Note that primary IPs cannot be migrated. 
 * The source and destination ENI must be within the same subnet.  
@@ -2324,14 +2367,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to query the bandwidth limits of a CCN instance. Monthly-subscribed CCNs only support Inter-region Bandwidth Limits, while the pay-as-you-go CCNs support both the Inter-region Bandwidth Limits and Region Outbound Bandwidth Limits. 
-     * @param {GetCcnRegionBandwidthLimitsRequest} req
-     * @param {function(string, GetCcnRegionBandwidthLimitsResponse):void} cb
+     * This API is used to delete a reserved private IP address.
+     * @param {DeleteReserveIpAddressesRequest} req
+     * @param {function(string, DeleteReserveIpAddressesResponse):void} cb
      * @public
      */
-    GetCcnRegionBandwidthLimits(req, cb) {
-        let resp = new GetCcnRegionBandwidthLimitsResponse();
-        this.request("GetCcnRegionBandwidthLimits", req, resp, cb);
+    DeleteReserveIpAddresses(req, cb) {
+        let resp = new DeleteReserveIpAddressesResponse();
+        this.request("DeleteReserveIpAddresses", req, resp, cb);
     }
 
     /**
@@ -3163,15 +3206,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to convert a common public IP into an [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP for short).
-* Tencent Cloud limits the number of times that a user can unbind EIPs and reassign public IPs in each region per day. For more information, see product introduction of [Elastic IP](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1). The preceding quota can be obtained through the API [DescribeAddressQuota](https://intl.cloud.tencent.com/document/product/215/16701).
-     * @param {TransformAddressRequest} req
-     * @param {function(string, TransformAddressResponse):void} cb
+     * This API is used to create a reserved private IP address.
+     * @param {CreateReserveIpAddressesRequest} req
+     * @param {function(string, CreateReserveIpAddressesResponse):void} cb
      * @public
      */
-    TransformAddress(req, cb) {
-        let resp = new TransformAddressResponse();
-        this.request("TransformAddress", req, resp, cb);
+    CreateReserveIpAddresses(req, cb) {
+        let resp = new CreateReserveIpAddressesResponse();
+        this.request("CreateReserveIpAddresses", req, resp, cb);
     }
 
     /**
@@ -3413,6 +3455,17 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
+     * This API is used to query reserved private IP addresses.
+     * @param {DescribeReserveIpAddressesRequest} req
+     * @param {function(string, DescribeReserveIpAddressesResponse):void} cb
+     * @public
+     */
+    DescribeReserveIpAddresses(req, cb) {
+        let resp = new DescribeReserveIpAddressesResponse();
+        this.request("DescribeReserveIpAddresses", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a NAT gateway's SNAT forwarding rules.
      * @param {ModifyNatGatewaySourceIpTranslationNatRuleRequest} req
      * @param {function(string, ModifyNatGatewaySourceIpTranslationNatRuleResponse):void} cb
@@ -3641,20 +3694,20 @@ For parameters of `SecurityGroupPolicySet`,
     }
 
     /**
-     * This API is used to create u200da security group, and add security group policies.
+     * This API is used to create a security group, and add security group policies.
 * For the the upper limit of security groups per project in each region under each account, <a href="https://intl.cloud.tencent.com/document/product/213/12453?from_cn_redirect=1">see here</a>
-* u200dFor u200dnewly u200dcreated security groups, u200dthe inbound and outbound policies are set to `Deny All` by default. You need to call <a href="https://intl.cloud.tencent.com/document/product/215/15807?from_cn_redirect=1">CreateSecurityGroupPolicies</a>
+* For newly created security groups, the inbound and outbound policies are set to `Deny All` by default. You need to call <a href="https://intl.cloud.tencent.com/document/product/215/15807?from_cn_redirect=1">CreateSecurityGroupPolicies</a>
 to change it.
 
 Description:
 * `Version`: The version number of a security group policy. It automatically increments by 1 every time you update the security policy, so to prevent the expiration of the updated policies. If this field is left empty, any conflicts will be ignored.
 * `Protocol`: Values can be `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, and `ALL`.
-* `CidrBlock`: Enter a CIDR block in the correct format. In the classic network, even if the CIDR block specified in u200d`CidrBlock` contains the Tencent Cloud private IPs not used for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups.
+* `CidrBlock`: Enter a CIDR block in the correct format. In the classic network, even if the CIDR block specified in `CidrBlock` contains the Tencent Cloud private IPs not used for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups.
 * `Ipv6CidrBlock`: Enter an IPv6 CIDR block in the correct format. In the classic network, even if the CIDR block specified in `Ipv6CidrBlock` contains the Tencent Cloud private IPv6 addresses not used for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups.
 * `SecurityGroupId`: ID of the security group. It can be the ID of a security group to be modified, or the ID of another security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don't need to change it manually.
 * `Port`: Enter a single port number (such as `80`), or a port range (such as `8000-8010`). `Port` is only applicable when `Protocol` is `TCP` or `UDP`. If `Protocol` is not `TCP` or `UDP`, `Protocol` and `Port` cannot be both specified. 
 * `Action`: Values can be `ACCEPT` or `DROP`.
-* `CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are exclusive u200dto one another. “Protocol + Port” and `ServiceTemplate` are mutually exclusive.
+* `CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are exclusive to one another. "Protocol + Port" and `ServiceTemplate` are mutually exclusive.
 * Only policies in one direction can be created in each request. If you need to specify the `PolicyIndex` parameter, the indexes of policies must be consistent.
      * @param {CreateSecurityGroupWithPoliciesRequest} req
      * @param {function(string, CreateSecurityGroupWithPoliciesResponse):void} cb

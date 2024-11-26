@@ -169,7 +169,7 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of private domains.
+     * This API is used to obtain the private domain list.
      * @param {DescribePrivateZoneListRequest} req
      * @param {function(string, DescribePrivateZoneListResponse):void} cb
      * @public

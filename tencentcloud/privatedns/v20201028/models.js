@@ -477,13 +477,13 @@ class DescribePrivateZoneListResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of private domains
+         * Number of private domains.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of private domains
+         * Private domain list.
          * @type {Array.<PrivateZone> || null}
          */
         this.PrivateZoneSet = null;
@@ -1649,19 +1649,19 @@ class DescribePrivateZoneListRequest extends  AbstractModel {
         super();
 
         /**
-         * Pagination offset, starting from 0
+         * Pagination offset, starting from 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of entries per page. Maximum value: 100. Default value: 20
+         * Pagination limit. Maximum value: 100. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Filter parameter
+         * Filter parameters.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2657,7 +2657,7 @@ class DeletePrivateZoneRecordResponse extends  AbstractModel {
 }
 
 /**
- * Private domain information
+ * Private domain information.
  * @class
  */
 class PrivateZone extends  AbstractModel {
@@ -2665,19 +2665,19 @@ class PrivateZone extends  AbstractModel {
         super();
 
         /**
-         * Private domain ID: zone-xxxxxxxx
+         * Private domain ID, which is in zone-xxxxxxxx format.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Domain name owner UIN
+         * UIN of the domain name owner.
          * @type {number || null}
          */
         this.OwnerUin = null;
 
         /**
-         * Private domain
+         * Private domain name.
          * @type {string || null}
          */
         this.Domain = null;
@@ -2695,48 +2695,97 @@ class PrivateZone extends  AbstractModel {
         this.UpdatedOn = null;
 
         /**
-         * Number of results
+         * Number of records.
          * @type {number || null}
          */
         this.RecordCount = null;
 
         /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Remarks.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * List of bound VPCs
+         * List of bound VPCs.
          * @type {Array.<VpcInfo> || null}
          */
         this.VpcSet = null;
 
         /**
-         * Private domain status. Valid values: ENABLED (DNS enabled); SUSPEND (DNS paused); FROZEN (locked)
+         * Status of the VPC bound with the private domain. SUSPEND: The VPC is not associated; ENABLED: the VPC has been associated.
+, FAILED: the VPC fails to be associated.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Subdomain recursive DNS status. Valid values: ENABLED, DISABLED
+         * Recursive resolution status of the domain name. ENABLED: enabled; DISABLED: disabled.
          * @type {string || null}
          */
         this.DnsForwardStatus = null;
 
         /**
-         * Set of tag key-value pairs
+         * Tag key-value pair collection.
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * List of authorized accounts' VPCs associated with the private domain
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * List of bound VPCs of the associated account.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AccountVpcInfoOutput> || null}
          */
         this.AccountVpcSet = null;
+
+        /**
+         * Whether the TLD is a custom one.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsCustomTld = null;
+
+        /**
+         * CNAME acceleration status. ENABLED: enabled; DISABLED: disabled.
+         * @type {string || null}
+         */
+        this.CnameSpeedupStatus = null;
+
+        /**
+         * Forwarding rule name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ForwardRuleName = null;
+
+        /**
+         * Forwarding rule type. DOWN: from cloud to off-cloud; UP: from off-cloud to cloud. Currently, only DOWN is supported.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ForwardRuleType = null;
+
+        /**
+         * Forwarding address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ForwardAddress = null;
+
+        /**
+         * Endpoint name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndPointName = null;
+
+        /**
+         * Deleted VPC.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VpcInfo> || null}
+         */
+        this.DeletedVpcSet = null;
 
     }
 
@@ -2781,6 +2830,21 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 let obj = new AccountVpcInfoOutput();
                 obj.deserialize(params.AccountVpcSet[z]);
                 this.AccountVpcSet.push(obj);
+            }
+        }
+        this.IsCustomTld = 'IsCustomTld' in params ? params.IsCustomTld : null;
+        this.CnameSpeedupStatus = 'CnameSpeedupStatus' in params ? params.CnameSpeedupStatus : null;
+        this.ForwardRuleName = 'ForwardRuleName' in params ? params.ForwardRuleName : null;
+        this.ForwardRuleType = 'ForwardRuleType' in params ? params.ForwardRuleType : null;
+        this.ForwardAddress = 'ForwardAddress' in params ? params.ForwardAddress : null;
+        this.EndPointName = 'EndPointName' in params ? params.EndPointName : null;
+
+        if (params.DeletedVpcSet) {
+            this.DeletedVpcSet = new Array();
+            for (let z in params.DeletedVpcSet) {
+                let obj = new VpcInfo();
+                obj.deserialize(params.DeletedVpcSet[z]);
+                this.DeletedVpcSet.push(obj);
             }
         }
 

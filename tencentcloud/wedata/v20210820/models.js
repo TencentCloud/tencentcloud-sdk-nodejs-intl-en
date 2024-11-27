@@ -3520,19 +3520,19 @@ class CheckTaskNameExistRequest extends  AbstractModel {
         super();
 
         /**
-         * Project ID/Workspace ID
+         * Project ID/Workspace ID.
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * Task Type (consistent with scheduling parameters)
+         * Task Type (consistent with scheduling parameters).
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * Task Name
+         * Task Name.
          * @type {string || null}
          */
         this.TaskName = null;

@@ -569,6 +569,7 @@ const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse
 const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
 const EventContent = models.EventContent;
 const HighlightsConfigureInfoForUpdate = models.HighlightsConfigureInfoForUpdate;
+const IPFilterPolicy = models.IPFilterPolicy;
 const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate;
 const ExtractTraceWatermarkTaskInput = models.ExtractTraceWatermarkTaskInput;
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;

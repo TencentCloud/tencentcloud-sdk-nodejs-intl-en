@@ -141,7 +141,7 @@ class ModifyApplicationProjectRequest extends  AbstractModel {
         this.FPS = null;
 
         /**
-         * Waiting time for application pre-launch.
+         * Waiting time for pre-launch.
          * @type {string || null}
          */
         this.PreloadDuration = null;

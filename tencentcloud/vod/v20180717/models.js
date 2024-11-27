@@ -10865,6 +10865,12 @@ class CreateVodDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Region to enable acceleration. Valid values:
 <li>`Chinese Mainland`</li>
 <li>`Outside Chinese Mainland`</li>
@@ -10875,10 +10881,11 @@ If `AccelerateArea` is not specified, VOD will enable acceleration in or outside
         this.AccelerateArea = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
+         * Domain type. Valid values:
+<li>`VOD`: Domain name distributed using the VOD product;</li> <li>`EdgeOne`: Domain name distributed using the EdgeOne product.</li>default value: VOD. 
+         * @type {string || null}
          */
-        this.SubAppId = null;
+        this.Type = null;
 
     }
 
@@ -10890,8 +10897,9 @@ If `AccelerateArea` is not specified, VOD will enable acceleration in or outside
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
-        this.AccelerateArea = 'AccelerateArea' in params ? params.AccelerateArea : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.AccelerateArea = 'AccelerateArea' in params ? params.AccelerateArea : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -26181,6 +26189,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.QUICConfig = null;
 
+        /**
+         * 
+         * @type {IPFilterPolicy || null}
+         */
+        this.IPFilterPolicy = null;
+
+        /**
+         * Domain type. Valid values:
+<li>`VOD`: Domain name distributed using the VOD product;</li> <li>`EdgeOne`: Domain name distributed using the EdgeOne product.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -26226,6 +26247,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.QUICConfig)
             this.QUICConfig = obj;
         }
+
+        if (params.IPFilterPolicy) {
+            let obj = new IPFilterPolicy();
+            obj.deserialize(params.IPFilterPolicy)
+            this.IPFilterPolicy = obj;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -32162,6 +32190,48 @@ class HighlightsConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class IPFilterPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.IPList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.IPList = 'IPList' in params ? params.IPList : null;
 
     }
 }
@@ -49610,6 +49680,7 @@ module.exports = {
     HeadTailConfigureInfo: HeadTailConfigureInfo,
     EventContent: EventContent,
     HighlightsConfigureInfoForUpdate: HighlightsConfigureInfoForUpdate,
+    IPFilterPolicy: IPFilterPolicy,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     ExtractTraceWatermarkTaskInput: ExtractTraceWatermarkTaskInput,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,

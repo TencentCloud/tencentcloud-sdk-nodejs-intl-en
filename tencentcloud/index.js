@@ -13,6 +13,7 @@ module.exports = {
     cbs: require("./cbs"),
     ccc: require("./ccc"),
     cdb: require("./cdb"),
+    cdc: require("./cdc"),
     cdn: require("./cdn"),
     cdwdoris: require("./cdwdoris"),
     cfg: require("./cfg"),

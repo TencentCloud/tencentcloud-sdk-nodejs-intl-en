@@ -127,7 +127,6 @@ class CmqClient extends AbstractClient {
 
     /**
      * This API is used to create a queue.
-
      * @param {CreateQueueRequest} req
      * @param {function(string, CreateQueueResponse):void} cb
      * @public

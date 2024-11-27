@@ -17,7 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyUserLevelResponse = models.ModifyUserLevelResponse;
-const DescribeAntiInfoLeakRulesResponse = models.DescribeAntiInfoLeakRulesResponse;
+const SearchAttackLogResponse = models.SearchAttackLogResponse;
 const KVInt = models.KVInt;
 const DescribeCustomRulesRspRuleListItem = models.DescribeCustomRulesRspRuleListItem;
 const ModifyAntiInfoLeakRulesResponse = models.ModifyAntiInfoLeakRulesResponse;
@@ -29,17 +29,16 @@ const TLSCiphers = models.TLSCiphers;
 const AddAntiFakeUrlRequest = models.AddAntiFakeUrlRequest;
 const WebshellStatus = models.WebshellStatus;
 const AddCustomWhiteRuleResponse = models.AddCustomWhiteRuleResponse;
+const SearchAttackLogRequest = models.SearchAttackLogRequest;
 const ModifyHostFlowModeResponse = models.ModifyHostFlowModeResponse;
 const DomainPackageNew = models.DomainPackageNew;
 const SwitchElasticModeRequest = models.SwitchElasticModeRequest;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
-const ModifyApiAnalyzeStatusResponse = models.ModifyApiAnalyzeStatusResponse;
 const HostDel = models.HostDel;
 const DeleteCustomWhiteRuleResponse = models.DeleteCustomWhiteRuleResponse;
 const DescribeIpAccessControlResponse = models.DescribeIpAccessControlResponse;
 const DescribeAntiLeakageItem = models.DescribeAntiLeakageItem;
 const LoadBalancerPackageNew = models.LoadBalancerPackageNew;
-const DescribeAntiFakeUrlRequest = models.DescribeAntiFakeUrlRequest;
 const ModifyDomainIpv6StatusResponse = models.ModifyDomainIpv6StatusResponse;
 const CCRuleData = models.CCRuleData;
 const DescribeCustomRuleListRequest = models.DescribeCustomRuleListRequest;
@@ -48,6 +47,7 @@ const DescribeHostsResponse = models.DescribeHostsResponse;
 const DescribePeakPointsRequest = models.DescribePeakPointsRequest;
 const ModifyInstanceQpsLimitRequest = models.ModifyInstanceQpsLimitRequest;
 const DeleteHostRequest = models.DeleteHostRequest;
+const ModifyDomainPostActionResponse = models.ModifyDomainPostActionResponse;
 const DescribeCertificateVerifyResultResponse = models.DescribeCertificateVerifyResultResponse;
 const ModifyUserSignatureRuleResponse = models.ModifyUserSignatureRuleResponse;
 const DescribeAntiInfoLeakRulesStrategyItem = models.DescribeAntiInfoLeakRulesStrategyItem;
@@ -72,12 +72,12 @@ const MajorEventsPkg = models.MajorEventsPkg;
 const ModifyObjectRequest = models.ModifyObjectRequest;
 const ModifyHostFlowModeRequest = models.ModifyHostFlowModeRequest;
 const UpsertCCRuleResponse = models.UpsertCCRuleResponse;
-const SwitchElasticModeResponse = models.SwitchElasticModeResponse;
+const GetAttackHistogramRequest = models.GetAttackHistogramRequest;
 const UserDomainInfo = models.UserDomainInfo;
 const ModifyAntiInfoLeakRulesRequest = models.ModifyAntiInfoLeakRulesRequest;
 const ModifyProtectionStatusRequest = models.ModifyProtectionStatusRequest;
 const CCRuleLists = models.CCRuleLists;
-const DomainsPartInfo = models.DomainsPartInfo;
+const ModifyApiAnalyzeStatusResponse = models.ModifyApiAnalyzeStatusResponse;
 const DescribeCustomWhiteRuleRequest = models.DescribeCustomWhiteRuleRequest;
 const DeleteAntiFakeUrlResponse = models.DeleteAntiFakeUrlResponse;
 const WafRuleLimit = models.WafRuleLimit;
@@ -96,6 +96,7 @@ const DescribeVipInfoRequest = models.DescribeVipInfoRequest;
 const DeleteIpAccessControlV2Request = models.DeleteIpAccessControlV2Request;
 const CronJob = models.CronJob;
 const IpAccessControlData = models.IpAccessControlData;
+const GetAttackHistogramResponse = models.GetAttackHistogramResponse;
 const GetInstanceQpsLimitRequest = models.GetInstanceQpsLimitRequest;
 const FiltersItemNew = models.FiltersItemNew;
 const DeleteSpartaProtectionResponse = models.DeleteSpartaProtectionResponse;
@@ -107,10 +108,11 @@ const CreateHostResponse = models.CreateHostResponse;
 const PiechartItem = models.PiechartItem;
 const IpAccessControlItem = models.IpAccessControlItem;
 const DeleteHostResponse = models.DeleteHostResponse;
+const SwitchElasticModeResponse = models.SwitchElasticModeResponse;
 const FreshAntiFakeUrlResponse = models.FreshAntiFakeUrlResponse;
 const ModifyBotStatusRequest = models.ModifyBotStatusRequest;
 const DeleteSpartaProtectionRequest = models.DeleteSpartaProtectionRequest;
-const DescribeTopAttackDomainRequest = models.DescribeTopAttackDomainRequest;
+const DomainsPartInfo = models.DomainsPartInfo;
 const DescribeAntiFakeRulesResponse = models.DescribeAntiFakeRulesResponse;
 const AddAntiInfoLeakRulesRequest = models.AddAntiInfoLeakRulesRequest;
 const ModifyObjectResponse = models.ModifyObjectResponse;
@@ -132,12 +134,11 @@ const DescribePolicyStatusRequest = models.DescribePolicyStatusRequest;
 const DescribePortsResponse = models.DescribePortsResponse;
 const ModifyIpAccessControlRequest = models.ModifyIpAccessControlRequest;
 const ApiPkg = models.ApiPkg;
-const DescribeHostRequest = models.DescribeHostRequest;
+const AttackLogInfo = models.AttackLogInfo;
 const DescribeModuleStatusResponse = models.DescribeModuleStatusResponse;
-const ModifyWebshellStatusResponse = models.ModifyWebshellStatusResponse;
+const DescribeAttackOverviewResponse = models.DescribeAttackOverviewResponse;
 const DescribeCCRuleListResponse = models.DescribeCCRuleListResponse;
 const DescribeDomainCountInfoResponse = models.DescribeDomainCountInfoResponse;
-const DescribeAntiInfoLeakRulesRequest = models.DescribeAntiInfoLeakRulesRequest;
 const DescribePortsRequest = models.DescribePortsRequest;
 const ModifyHostModeRequest = models.ModifyHostModeRequest;
 const QPSPackageNew = models.QPSPackageNew;
@@ -168,11 +169,11 @@ const ModifyHostStatusResponse = models.ModifyHostStatusResponse;
 const BatchIpAccessControlData = models.BatchIpAccessControlData;
 const ModifyCustomRuleStatusRequest = models.ModifyCustomRuleStatusRequest;
 const DescribePeakPointsResponse = models.DescribePeakPointsResponse;
-const DescribeAntiInfoLeakRulesRuleItem = models.DescribeAntiInfoLeakRulesRuleItem;
+const GoodNews = models.GoodNews;
 const ModifySpartaProtectionModeRequest = models.ModifySpartaProtectionModeRequest;
-const DescribeUserLevelResponse = models.DescribeUserLevelResponse;
+const DescribeHostRequest = models.DescribeHostRequest;
 const ModifyCustomRuleRequest = models.ModifyCustomRuleRequest;
-const DescribeHostResponse = models.DescribeHostResponse;
+const DescribeAttackOverviewRequest = models.DescribeAttackOverviewRequest;
 const DescribeUserLevelRequest = models.DescribeUserLevelRequest;
 const BotQPS = models.BotQPS;
 const DescribeDomainDetailsClbResponse = models.DescribeDomainDetailsClbResponse;
@@ -206,7 +207,8 @@ const DeleteCustomRuleRequest = models.DeleteCustomRuleRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeCCRuleResponse = models.DescribeCCRuleResponse;
 const MiniExtendPkg = models.MiniExtendPkg;
-const DescribeAntiFakeUrlResponse = models.DescribeAntiFakeUrlResponse;
+const Strategy = models.Strategy;
+const DescribeTopAttackDomainRequest = models.DescribeTopAttackDomainRequest;
 const DescribeIpAccessControlRequest = models.DescribeIpAccessControlRequest;
 const DescribeFindDomainListRequest = models.DescribeFindDomainListRequest;
 const ModifyAntiFakeUrlStatusResponse = models.ModifyAntiFakeUrlStatusResponse;
@@ -221,16 +223,15 @@ const DescribeSpartaProtectionInfoRequest = models.DescribeSpartaProtectionInfoR
 const CacheUrlItems = models.CacheUrlItems;
 const ModifyInstanceQpsLimitResponse = models.ModifyInstanceQpsLimitResponse;
 const ReqUserRule = models.ReqUserRule;
-const Strategy = models.Strategy;
+const ModifyWebshellStatusResponse = models.ModifyWebshellStatusResponse;
 const ClbWafRegionItem = models.ClbWafRegionItem;
 const FindAllDomainDetail = models.FindAllDomainDetail;
 const DeleteAntiInfoLeakRuleRequest = models.DeleteAntiInfoLeakRuleRequest;
 const ModifyInstanceElasticModeResponse = models.ModifyInstanceElasticModeResponse;
+const DescribeUserLevelResponse = models.DescribeUserLevelResponse;
 const DescribeVipInfoResponse = models.DescribeVipInfoResponse;
-const GoodNews = models.GoodNews;
 const ModifyIpAccessControlResponse = models.ModifyIpAccessControlResponse;
 const DescribeCCRuleRequest = models.DescribeCCRuleRequest;
-const CacheUrlItem = models.CacheUrlItem;
 const ModifyModuleStatusRequest = models.ModifyModuleStatusRequest;
 const MiniPkg = models.MiniPkg;
 const DescribeRuleLimitRequest = models.DescribeRuleLimitRequest;
@@ -241,6 +242,7 @@ const ModifyDomainsCLSStatusRequest = models.ModifyDomainsCLSStatusRequest;
 const DescribeCustomWhiteRuleResponse = models.DescribeCustomWhiteRuleResponse;
 const ModifySpartaProtectionRequest = models.ModifySpartaProtectionRequest;
 const DescribeTlsVersionResponse = models.DescribeTlsVersionResponse;
+const ModifyDomainPostActionRequest = models.ModifyDomainPostActionRequest;
 const VipInfo = models.VipInfo;
 const DescribeTopAttackDomainResponse = models.DescribeTopAttackDomainResponse;
 const DescribeSessionResponse = models.DescribeSessionResponse;
@@ -260,9 +262,10 @@ const ModifyUserSignatureRuleRequest = models.ModifyUserSignatureRuleRequest;
 const ClbDomainsInfo = models.ClbDomainsInfo;
 const CreateDealsResponse = models.CreateDealsResponse;
 const DescribeHistogramRequest = models.DescribeHistogramRequest;
+const DescribeHostResponse = models.DescribeHostResponse;
 const DeleteCCRuleResponse = models.DeleteCCRuleResponse;
+const LogHistogramInfo = models.LogHistogramInfo;
 const DomainURI = models.DomainURI;
-const PageInfo = models.PageInfo;
 const ModifyHostRequest = models.ModifyHostRequest;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 const HybridPkg = models.HybridPkg;
@@ -320,6 +323,17 @@ class WafClient extends AbstractClient {
     }
 
     /**
+     * This API is used to generate a bar chart for the generation time of attack logs.
+     * @param {GetAttackHistogramRequest} req
+     * @param {function(string, GetAttackHistogramResponse):void} cb
+     * @public
+     */
+    GetAttackHistogram(req, cb) {
+        let resp = new GetAttackHistogramResponse();
+        this.request("GetAttackHistogram", req, resp, cb);
+    }
+
+    /**
      * Display total attack count by querying based on conditions
      * @param {GetAttackTotalCountRequest} req
      * @param {function(string, GetAttackTotalCountResponse):void} cb
@@ -342,29 +356,14 @@ class WafClient extends AbstractClient {
     }
 
     /**
-     * Add precision allowlist rules
-     * @param {AddCustomWhiteRuleRequest} req
-     * @param {function(string, AddCustomWhiteRuleResponse):void} cb
+     * This API is used to query the IP blocklist and allowlist for WAF batch protection.
+     * @param {DescribeBatchIpAccessControlRequest} req
+     * @param {function(string, DescribeBatchIpAccessControlResponse):void} cb
      * @public
      */
-    AddCustomWhiteRule(req, cb) {
-        let resp = new AddCustomWhiteRuleResponse();
-        this.request("AddCustomWhiteRule", req, resp, cb);
-    }
-
-    /**
-     * 老接口已经不再使用。
-
-The old API is no longer in use.
-
-Obtain the information leakage prevention rule list
-     * @param {DescribeAntiInfoLeakRulesRequest} req
-     * @param {function(string, DescribeAntiInfoLeakRulesResponse):void} cb
-     * @public
-     */
-    DescribeAntiInfoLeakRules(req, cb) {
-        let resp = new DescribeAntiInfoLeakRulesResponse();
-        this.request("DescribeAntiInfoLeakRules", req, resp, cb);
+    DescribeBatchIpAccessControl(req, cb) {
+        let resp = new DescribeBatchIpAccessControlResponse();
+        this.request("DescribeBatchIpAccessControl", req, resp, cb);
     }
 
     /**
@@ -445,14 +444,14 @@ Obtain the information leakage prevention rule list
     }
 
     /**
-     * Obtain the information leakage prevention rule list
-     * @param {DescribeAntiInfoLeakageRulesRequest} req
-     * @param {function(string, DescribeAntiInfoLeakageRulesResponse):void} cb
+     * This API is used to edit the configuration of domain names protected by SaaS WAF.
+     * @param {ModifySpartaProtectionRequest} req
+     * @param {function(string, ModifySpartaProtectionResponse):void} cb
      * @public
      */
-    DescribeAntiInfoLeakageRules(req, cb) {
-        let resp = new DescribeAntiInfoLeakageRulesResponse();
-        this.request("DescribeAntiInfoLeakageRules", req, resp, cb);
+    ModifySpartaProtection(req, cb) {
+        let resp = new ModifySpartaProtectionResponse();
+        this.request("ModifySpartaProtection", req, resp, cb);
     }
 
     /**
@@ -489,14 +488,14 @@ Obtain the information leakage prevention rule list
     }
 
     /**
-     * This API is used to edit the configuration of domain names protected by SaaS WAF.
-     * @param {ModifySpartaProtectionRequest} req
-     * @param {function(string, ModifySpartaProtectionResponse):void} cb
+     * Obtain the information leakage prevention rule list
+     * @param {DescribeAntiInfoLeakageRulesRequest} req
+     * @param {function(string, DescribeAntiInfoLeakageRulesResponse):void} cb
      * @public
      */
-    ModifySpartaProtection(req, cb) {
-        let resp = new ModifySpartaProtectionResponse();
-        this.request("ModifySpartaProtection", req, resp, cb);
+    DescribeAntiInfoLeakageRules(req, cb) {
+        let resp = new DescribeAntiInfoLeakageRulesResponse();
+        this.request("DescribeAntiInfoLeakageRules", req, resp, cb);
     }
 
     /**
@@ -732,6 +731,17 @@ Batch operation is supported.
     }
 
     /**
+     * This API is used to describe the attack overview.
+     * @param {DescribeAttackOverviewRequest} req
+     * @param {function(string, DescribeAttackOverviewResponse):void} cb
+     * @public
+     */
+    DescribeAttackOverview(req, cb) {
+        let resp = new DescribeAttackOverviewResponse();
+        this.request("DescribeAttackOverview", req, resp, cb);
+    }
+
+    /**
      * Obtain protection domain list in CLB-WAF
      * @param {DescribeHostsRequest} req
      * @param {function(string, DescribeHostsResponse):void} cb
@@ -919,21 +929,6 @@ Batch operation is supported.
     }
 
     /**
-     * 废弃接口
-
-This API has been deprecated.
-
-Obtain a tamper-proof URL
-     * @param {DescribeAntiFakeUrlRequest} req
-     * @param {function(string, DescribeAntiFakeUrlResponse):void} cb
-     * @public
-     */
-    DescribeAntiFakeUrl(req, cb) {
-        let resp = new DescribeAntiFakeUrlResponse();
-        this.request("DescribeAntiFakeUrl", req, resp, cb);
-    }
-
-    /**
      * View protected object list
      * @param {DescribeObjectsRequest} req
      * @param {function(string, DescribeObjectsResponse):void} cb
@@ -989,14 +984,14 @@ Obtain a tamper-proof URL
     }
 
     /**
-     * This API is used to query the IP blocklist and allowlist for WAF batch protection.
-     * @param {DescribeBatchIpAccessControlRequest} req
-     * @param {function(string, DescribeBatchIpAccessControlResponse):void} cb
+     * Add precision allowlist rules
+     * @param {AddCustomWhiteRuleRequest} req
+     * @param {function(string, AddCustomWhiteRuleResponse):void} cb
      * @public
      */
-    DescribeBatchIpAccessControl(req, cb) {
-        let resp = new DescribeBatchIpAccessControlResponse();
-        this.request("DescribeBatchIpAccessControl", req, resp, cb);
+    AddCustomWhiteRule(req, cb) {
+        let resp = new AddCustomWhiteRuleResponse();
+        this.request("AddCustomWhiteRule", req, resp, cb);
     }
 
     /**
@@ -1121,6 +1116,17 @@ Obtain a tamper-proof URL
     }
 
     /**
+     * The new version of the CLS API has parameter changes, with query changed to query_string to support Lucene syntax for API search queries.
+     * @param {SearchAttackLogRequest} req
+     * @param {function(string, SearchAttackLogResponse):void} cb
+     * @public
+     */
+    SearchAttackLog(req, cb) {
+        let resp = new SearchAttackLogResponse();
+        this.request("SearchAttackLog", req, resp, cb);
+    }
+
+    /**
      * Query detailed information of all user instances
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
@@ -1217,6 +1223,17 @@ Obtain a tamper-proof URL
     ModifyHostMode(req, cb) {
         let resp = new ModifyHostModeResponse();
         this.request("ModifyHostMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the domain shipping status.
+     * @param {ModifyDomainPostActionRequest} req
+     * @param {function(string, ModifyDomainPostActionResponse):void} cb
+     * @public
+     */
+    ModifyDomainPostAction(req, cb) {
+        let resp = new ModifyDomainPostActionResponse();
+        this.request("ModifyDomainPostAction", req, resp, cb);
     }
 
     /**

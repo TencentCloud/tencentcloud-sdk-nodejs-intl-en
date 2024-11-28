@@ -6272,11 +6272,23 @@ class AccelerationDomainCertificate extends  AbstractModel {
         this.Mode = null;
 
         /**
-         * List of certificates
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * List of server certificates. The relevant certificates are deployed on the entrance side of the EO.
+Note: This field may return null, which indicates a failure to obtain a valid value.
          * @type {Array.<CertificateInfo> || null}
          */
         this.List = null;
+
+        /**
+         * In the edge mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for EO node authentication of the client certificate.
+         * @type {MutualTLS || null}
+         */
+        this.ClientCertInfo = null;
+
+        /**
+         * The certificate carried during EO node origin-pull is used when the origin server enables the mutual authentication handshake to validate the client certificate, ensuring that the request originates from a trusted EO node.
+         * @type {UpstreamCertInfo || null}
+         */
+        this.UpstreamCertInfo = null;
 
     }
 
@@ -6296,6 +6308,18 @@ Note: This field may return·null, indicating that no valid values can be obtain
                 obj.deserialize(params.List[z]);
                 this.List.push(obj);
             }
+        }
+
+        if (params.ClientCertInfo) {
+            let obj = new MutualTLS();
+            obj.deserialize(params.ClientCertInfo)
+            this.ClientCertInfo = obj;
+        }
+
+        if (params.UpstreamCertInfo) {
+            let obj = new UpstreamCertInfo();
+            obj.deserialize(params.UpstreamCertInfo)
+            this.UpstreamCertInfo = obj;
         }
 
     }
@@ -8567,6 +8591,39 @@ Note: This field may return null, which indicates a failure to obtain a valid va
         this.SessionPersistTime = 'SessionPersistTime' in params ? params.SessionPersistTime : null;
         this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
         this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
+
+    }
+}
+
+/**
+ * The certificate carried during EO node origin-pull is used when the origin server enables the mutual authentication handshake to validate the client certificate, ensuring that the request originates from a trusted EO node.
+ * @class
+ */
+class UpstreamCertInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * In the origin-pull mutual authentication scenario, this field represents the certificate (including the public and private keys) carried during EO node origin-pull, which is deployed in the EO node for the origin server to authenticate the EO node. When used as an input parameter, it is left blank to indicate retaining the original configuration.
+         * @type {MutualTLS || null}
+         */
+        this.UpstreamMutualTLS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UpstreamMutualTLS) {
+            let obj = new MutualTLS();
+            obj.deserialize(params.UpstreamMutualTLS)
+            this.UpstreamMutualTLS = obj;
+        }
 
     }
 }
@@ -16061,17 +16118,17 @@ class OwnershipVerification extends  AbstractModel {
         super();
 
         /**
-         * u200cInformation required for authentication using DNS resolution. It's applicable to sites connected via CNAME. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
- 
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * CNAME, when there is no domain name access, the information required for DNS resolution verification is used. For details, refer to [Site/Domain Ownership Verification
+](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+Note: This field may return null, which indicates a failure to obtain a valid value.
          * @type {DnsVerification || null}
          */
         this.DnsVerification = null;
 
         /**
-         * u200cInformation required for verifying via a file. It's applicable to sites connected via CNAMEs. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
- 
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * CNAME, when there is no domain name access, the information required for file verification is used. For details, refer to [Site/Domain Ownership Verification
+](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+Note: This field may return null, which indicates a failure to obtain a valid value.
          * @type {FileVerification || null}
          */
         this.FileVerification = null;
@@ -18082,7 +18139,7 @@ Default value: `none`.
         this.ApplyType = null;
 
         /**
-         * In the Edge mTLS scenario, this field represents the client's CA certificate, which is deployed at the EO entry side for authenticating the client access to EO nodes. The original configuration applies if this field is not specified.
+         * In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
          * @type {MutualTLS || null}
          */
         this.ClientCertInfo = null;
@@ -22836,7 +22893,7 @@ class DescribeL4ProxyRulesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. The upper limit for Filters.Values is 20. All rule information under the current Layer 4 instance will be returned if left empty. The detailed filter criteria are as follows: <li>rule-tag: Filters rules under the Layer 4 proxy instance according to rule tag.</li>
+         * Filter criteria. The upper limit of Filters.Values is 20. If it is not filled in, all rule information under the current layer-4 instance will be returned. The detailed filter criteria are as follows: <li>rule-id: filter as per the rules under the layer-4 proxy instance by Rule ID. Rule ID is in the form: rule-31vv7qig0vjy;</li> <li>rule-tag: filter as per the rules under the layer-4 proxy instance by Rule Tag.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -23952,6 +24009,7 @@ module.exports = {
     L7OfflineLog: L7OfflineLog,
     ModifyRuleResponse: ModifyRuleResponse,
     ApplicationProxyRule: ApplicationProxyRule,
+    UpstreamCertInfo: UpstreamCertInfo,
     Zone: Zone,
     DescribeRulesSettingResponse: DescribeRulesSettingResponse,
     BindSecurityTemplateToEntityResponse: BindSecurityTemplateToEntityResponse,

@@ -165,6 +165,7 @@ const AclCondition = models.AclCondition;
 const L7OfflineLog = models.L7OfflineLog;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const ApplicationProxyRule = models.ApplicationProxyRule;
+const UpstreamCertInfo = models.UpstreamCertInfo;
 const Zone = models.Zone;
 const DescribeRulesSettingResponse = models.DescribeRulesSettingResponse;
 const BindSecurityTemplateToEntityResponse = models.BindSecurityTemplateToEntityResponse;

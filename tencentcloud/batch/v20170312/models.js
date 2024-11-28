@@ -3012,7 +3012,37 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><li>CLOUD_BSSD: Balanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+         * Data disk type. For restrictions on data disk types, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br/>
+<li>
+  LOCAL_BASIC: local disk.<br/>
+  <li>
+    LOCAL_SSD: local SSD.<br/>
+    <li>
+      LOCAL_NVME: local NVMe disk, which is closely related to InstanceType, and cannot be specified.<br/>
+      <li>
+        LOCAL_PRO: local HDD, which is closely related to InstanceType, and cannot be specified.<br/>
+        <li>
+          CLOUD_BASIC: basic cloud disk.<br/>
+          <li>
+            CLOUD_PREMIUM: premium cloud disk.<br/>
+            <li>
+              CLOUD_SSD: cloud SSD.<br />
+              <li>
+                CLOUD_HSSD: enhanced SSD.<br/>
+                <li>
+                  CLOUD_TSSD: tremendous SSD.<br/>
+                  <li>
+                    CLOUD_BSSD: balanced SSD.<br/><br/>Default value: LOCAL_BASIC.<br/><br/>This parameter is invalid for the `ResizeInstanceDisk` API.
+                  </li>
+                </li>
+              </li>
+            </li>
+          </li>
+        </li>
+      </li>
+    </li>
+  </li>
+</li>
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3025,11 +3055,13 @@ It is only used as a response parameter for APIs such as `DescribeInstances`, an
         this.DiskId = null;
 
         /**
-         * Whether to terminate the data disk when its CVM is terminated. Valid values:
-<li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
-<li>FALSE: retain the data disk when its CVM is terminated.<br>
-Default value: TRUE<br>
-Currently this parameter is only used in the `RunInstances` API.
+         * Whether a data disk is terminated when the associated CVM instance is terminated. Valid values:
+<li>TRUE: The data disk is terminated when the associated CVM instance is terminated. This only supports pay-as-you-go cloud disks that are billed by hour.</li>
+<li>
+  FALSE: The data disk is retained when the associated CVM instance is terminated.<br/>
+  Default value: TRUE.<br/>
+  This parameter is currently used only in the `RunInstances` API.
+</li>
 Note: This field may return null, indicating that no valid value is found.
          * @type {boolean || null}
          */
@@ -3043,12 +3075,14 @@ Note: This field may return null, indicating that no valid value is found.
         this.SnapshotId = null;
 
         /**
-         * Specifies whether the data disk is encrypted. Valid values: 
-<li>TRUE: encrypted
-<li>FALSE: not encrypted<br>
-Default value: FALSE<br>
-This parameter is only used with `RunInstances`.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Whether a data disk is encrypted. Valid values:
+<li>true: encrypted.</li>
+<li>
+  false: not encrypted.<br/>
+  Default value: false.<br/>
+  This parameter is currently used only in the `RunInstances` API.
+</li>
+Note: This field may return null, indicating that no valid value is found.
          * @type {boolean || null}
          */
         this.Encrypt = null;
@@ -3076,6 +3110,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.CdcId = null;
 
+        /**
+         * Burst performance.
+
+ <b>Note: This field is in beta test.</b>
+Note: This field may return null, indicating that no valid value is found.
+         * @type {boolean || null}
+         */
+        this.BurstPerformance = null;
+
     }
 
     /**
@@ -3094,6 +3137,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.BurstPerformance = 'BurstPerformance' in params ? params.BurstPerformance : null;
 
     }
 }
@@ -4176,7 +4220,7 @@ class CreateComputeEnvResponse extends  AbstractModel {
         this.EnvId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4322,12 +4366,6 @@ class Placement extends  AbstractModel {
         this.HostIds = null;
 
         /**
-         * IPs of the hosts to create CVMs
-         * @type {Array.<string> || null}
-         */
-        this.HostIps = null;
-
-        /**
          * The ID of the CDH to which the instance belongs, only used as an output parameter.
          * @type {string || null}
          */
@@ -4345,7 +4383,6 @@ class Placement extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
-        this.HostIps = 'HostIps' in params ? params.HostIps : null;
         this.HostId = 'HostId' in params ? params.HostId : null;
 
     }
@@ -6181,7 +6218,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * Whether it is used as a public gateway. A public gateway can only be used normally when an instance has a public IP address and is in a VPC. Valid values:<li>true: It is used as a public gateway.</li><li>false: It is not used as a public gateway.</li>Default value: false.
          * @type {boolean || null}
          */
         this.AsVpcGateway = null;
@@ -6357,7 +6394,7 @@ class InternetAccessible extends  AbstractModel {
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Whether to assign a public IP. Valid values: <br><li>TRUE: Assign a public IP <br><li>FALSE: Do not assign a public IP <br><br>If the public network bandwidth is greater than 0 Mbps, you can choose whether to assign a public IP; by default a public IP will be assigned. If the public network bandwidth is 0 Mbps, you will not be able to assign a public IP.
+         * Whether to allocate a public IP address. Valid values:<br><li>true: Allocate a public IP address.</li><li>false: Do not allocate a public IP address.</li><br>When the public network bandwidth is greater than 0 Mbps, you can choose whether to enable the public IP address. The public IP address is enabled by default. When the public network bandwidth is 0, allocating the public IP address is not supported. This parameter is only used as an input parameter in the RunInstances API.
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;

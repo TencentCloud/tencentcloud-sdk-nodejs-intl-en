@@ -103,6 +103,7 @@ module.exports = {
     tmt: require("./tmt"),
     trtc: require("./trtc"),
     tts: require("./tts"),
+    vclm: require("./vclm"),
     vm: require("./vm"),
     vod: require("./vod"),
     vpc: require("./vpc"),

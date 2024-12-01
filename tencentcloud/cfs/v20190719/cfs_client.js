@@ -73,6 +73,7 @@ const SnapshotOperateLog = models.SnapshotOperateLog;
 const DescribeBucketListResponse = models.DescribeBucketListResponse;
 const UpdateCfsFileSystemNameResponse = models.UpdateCfsFileSystemNameResponse;
 const DescribeCfsSnapshotOverviewResponse = models.DescribeCfsSnapshotOverviewResponse;
+const AutoScaleUpRule = models.AutoScaleUpRule;
 const DeleteCfsSnapshotRequest = models.DeleteCfsSnapshotRequest;
 const DescribeCfsFileSystemClientsRequest = models.DescribeCfsFileSystemClientsRequest;
 const AvailableProtoStatus = models.AvailableProtoStatus;

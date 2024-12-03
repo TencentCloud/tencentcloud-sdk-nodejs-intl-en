@@ -92,6 +92,7 @@ const StopStreamPackageLinearAssemblyChannelResponse = models.StopStreamPackageL
 const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
 const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
 const SlateInfo = models.SlateInfo;
+const DashManifestInfo = models.DashManifestInfo;
 const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
 const DescribeStreamPackageLinearAssemblyChannelResponse = models.DescribeStreamPackageLinearAssemblyChannelResponse;
 const DescribeStreamPackageLinearAssemblyChannelAlertsResponse = models.DescribeStreamPackageLinearAssemblyChannelAlertsResponse;

@@ -28,6 +28,7 @@ const ResetExtensionPasswordRequest = models.ResetExtensionPasswordRequest;
 const DisableCCCPhoneNumberResponse = models.DisableCCCPhoneNumberResponse;
 const DescribeProtectedTelCdrResponse = models.DescribeProtectedTelCdrResponse;
 const DescribeAutoCalloutTaskRequest = models.DescribeAutoCalloutTaskRequest;
+const CreateAICallRequest = models.CreateAICallRequest;
 const CreateAdminURLResponse = models.CreateAdminURLResponse;
 const PausePredictiveDialingCampaignRequest = models.PausePredictiveDialingCampaignRequest;
 const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
@@ -124,6 +125,7 @@ const CreateAgentCruiseDialingCampaignResponse = models.CreateAgentCruiseDialing
 const UploadIvrAudioFailedInfo = models.UploadIvrAudioFailedInfo;
 const DescribeCallInMetricsResponse = models.DescribeCallInMetricsResponse;
 const DescribeAgentCruiseDialingCampaignResponse = models.DescribeAgentCruiseDialingCampaignResponse;
+const CreateAICallResponse = models.CreateAICallResponse;
 const CreateIVRSessionResponse = models.CreateIVRSessionResponse;
 const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
 const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
@@ -205,14 +207,16 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to access the agent information list.
-     * @param {DescribeStaffInfoListRequest} req
-     * @param {function(string, DescribeStaffInfoListResponse):void} cb
+     * Used to make outbound calls by invoking AI models, limited to the use of proprietary phone numbers. Currently, the Advanced version seats are available for a **limited time** free trial.
+
+Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+     * @param {CreateAICallRequest} req
+     * @param {function(string, CreateAICallResponse):void} cb
      * @public
      */
-    DescribeStaffInfoList(req, cb) {
-        let resp = new DescribeStaffInfoListResponse();
-        this.request("DescribeStaffInfoList", req, resp, cb);
+    CreateAICall(req, cb) {
+        let resp = new CreateAICallResponse();
+        this.request("CreateAICall", req, resp, cb);
     }
 
     /**
@@ -532,6 +536,17 @@ class CccClient extends AbstractClient {
     ModifyStaffPassword(req, cb) {
         let resp = new ModifyStaffPasswordResponse();
         this.request("ModifyStaffPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to access the agent information list.
+     * @param {DescribeStaffInfoListRequest} req
+     * @param {function(string, DescribeStaffInfoListResponse):void} cb
+     * @public
+     */
+    DescribeStaffInfoList(req, cb) {
+        let resp = new DescribeStaffInfoListResponse();
+        this.request("DescribeStaffInfoList", req, resp, cb);
     }
 
     /**

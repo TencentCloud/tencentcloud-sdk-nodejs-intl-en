@@ -3691,6 +3691,55 @@ class SlateInfo extends  AbstractModel {
 }
 
 /**
+ * The manifest info used when Type is DASH.
+ * @class
+ */
+class DashManifestInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total duration of each manifest in seconds. [30, 3600], type: integer, default value 60.
+         * @type {number || null}
+         */
+        this.Windows = null;
+
+        /**
+         * The minimum cache time (in seconds) that the player keeps in the buffer. [2, 60], type: integer, default value 30.
+         * @type {number || null}
+         */
+        this.MinBufferTime = null;
+
+        /**
+         * The minimum time (in seconds) that the player should wait before requesting an update to the manifest. [2, 60], type: integer, default value 2.
+         * @type {number || null}
+         */
+        this.MinUpdatePeriod = null;
+
+        /**
+         * The time from the latest live broadcast time point when the player starts broadcasting is a rollback amount (in seconds). [2, 60], type: integer, default value 10.
+         * @type {number || null}
+         */
+        this.SuggestedPresentationDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Windows = 'Windows' in params ? params.Windows : null;
+        this.MinBufferTime = 'MinBufferTime' in params ? params.MinBufferTime : null;
+        this.MinUpdatePeriod = 'MinUpdatePeriod' in params ? params.MinUpdatePeriod : null;
+        this.SuggestedPresentationDelay = 'SuggestedPresentationDelay' in params ? params.SuggestedPresentationDelay : null;
+
+    }
+}
+
+/**
  * CreateStreamPackageChannel response structure.
  * @class
  */
@@ -4040,7 +4089,7 @@ class OutputInfo extends  AbstractModel {
         this.ManifestName = null;
 
         /**
-         * Advertisement configuration.
+         * The manifest info, used when Type is HLS.
          * @type {ManifestInfo || null}
          */
         this.ManifestConf = null;
@@ -4050,6 +4099,12 @@ class OutputInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.PlaybackURL = null;
+
+        /**
+         * The manifest info, used when Type is DASH.
+         * @type {DashManifestInfo || null}
+         */
+        this.DashManifestConf = null;
 
     }
 
@@ -4070,6 +4125,12 @@ class OutputInfo extends  AbstractModel {
             this.ManifestConf = obj;
         }
         this.PlaybackURL = 'PlaybackURL' in params ? params.PlaybackURL : null;
+
+        if (params.DashManifestConf) {
+            let obj = new DashManifestInfo();
+            obj.deserialize(params.DashManifestConf)
+            this.DashManifestConf = obj;
+        }
 
     }
 }
@@ -5833,10 +5894,16 @@ class OutputReq extends  AbstractModel {
         this.ManifestName = null;
 
         /**
-         * Advertisement configuration.
+         * The manifest info, used when Type is HLS.
          * @type {ManifestInfo || null}
          */
         this.ManifestConf = null;
+
+        /**
+         * The manifest info, used when Type is DASH.
+         * @type {DashManifestInfo || null}
+         */
+        this.DashManifestConf = null;
 
     }
 
@@ -5855,6 +5922,12 @@ class OutputReq extends  AbstractModel {
             let obj = new ManifestInfo();
             obj.deserialize(params.ManifestConf)
             this.ManifestConf = obj;
+        }
+
+        if (params.DashManifestConf) {
+            let obj = new DashManifestInfo();
+            obj.deserialize(params.DashManifestConf)
+            this.DashManifestConf = obj;
         }
 
     }
@@ -6152,6 +6225,7 @@ module.exports = {
     DescribeStreamPackageChannelsRequest: DescribeStreamPackageChannelsRequest,
     ModifyStreamPackageChannelInputAuthInfoResponse: ModifyStreamPackageChannelInputAuthInfoResponse,
     SlateInfo: SlateInfo,
+    DashManifestInfo: DashManifestInfo,
     CreateStreamPackageChannelResponse: CreateStreamPackageChannelResponse,
     DescribeStreamPackageLinearAssemblyChannelResponse: DescribeStreamPackageLinearAssemblyChannelResponse,
     DescribeStreamPackageLinearAssemblyChannelAlertsResponse: DescribeStreamPackageLinearAssemblyChannelAlertsResponse,

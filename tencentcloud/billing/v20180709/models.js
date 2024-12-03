@@ -4613,7 +4613,7 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.Month = null;
 
         /**
-         * The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+         * The period type. byUsedTime
          * @type {string || null}
          */
         this.PeriodType = null;
@@ -4626,26 +4626,21 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.NeedRecordNum = null;
 
         /**
-         * Action type to query. Valid values:
-Purchase
-Renewal
-Modify
-Refund
-Deduction
-Hourly settlement
+         * Hourly settlement
 Daily settlement
 Monthly settlement
-Offline project deduction
-Offline deduction
-adjust-CR
-adjust-DR
-One-off RI Fee
 Spot
-Hourly RI fee
 New monthly subscription
 Monthly subscription renewal
 Monthly subscription specification adjustment
 Monthly subscription refund
+Adjustment - deduction
+Adjustment - refund
+Hourly RI fee
+One-off RI Fee
+Hourly Savings Plan fee
+Offline project deduction
+Offline product deduction
          * @type {string || null}
          */
         this.ActionType = null;
@@ -4657,7 +4652,7 @@ Monthly subscription refund
         this.ResourceId = null;
 
         /**
-         * Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
+         * Billing mode: prePay/postPay
          * @type {string || null}
          */
         this.PayMode = null;
@@ -4818,19 +4813,21 @@ class BillDetailComponent extends  AbstractModel {
         this.VoucherPayAmount = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash account
+         * Cash credit: The amount paid from the user's cash account
+
          * @type {string || null}
          */
         this.CashPayAmount = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
+         * Free credit: The amount paid with the user's free credit
+
          * @type {string || null}
          */
         this.IncentivePayAmount = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+         * Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TransferPayAmount = null;
@@ -4902,6 +4899,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ComponentConfig = null;
 
+        /**
+         * The tax rate.
+         * @type {string || null}
+         */
+        this.TaxRate = null;
+
+        /**
+         * The tax amount.
+         * @type {string || null}
+         */
+        this.TaxAmount = null;
+
+        /**
+         * The currency used for the settlement of a component.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
     }
 
     /**
@@ -4949,6 +4964,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.ComponentConfig.push(obj);
             }
         }
+        this.TaxRate = 'TaxRate' in params ? params.TaxRate : null;
+        this.TaxAmount = 'TaxAmount' in params ? params.TaxAmount : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
 
     }
 }
@@ -6562,27 +6580,21 @@ ccli billing DescribeBillDetail --cli-unfold-argument --Offset 1 --Limit 100 --M
         this.ResourceId = null;
 
         /**
-         * Action type to query. Valid values:
-Purchase
-Renewal
-Modify
-Refund
-Deduction
-Hourly settlement
+         * Hourly settlement
 Daily settlement
 Monthly settlement
-Offline project deduction
-Offline deduction
-adjust-CR
-adjust-DR
-One-off RI Fee
 Spot
-Hourly RI fee
 New monthly subscription
 Monthly subscription renewal
 Monthly subscription specification adjustment
-Monthly subscription specification adjustment
 Monthly subscription refund
+Adjustment - deduction
+Adjustment - refund
+Hourly RI fee
+One-off RI Fee
+Hourly Savings Plan fee
+Offline project deduction
+Offline product deduction
          * @type {string || null}
          */
         this.ActionType = null;
@@ -7698,7 +7710,7 @@ class BillResourceSummary extends  AbstractModel {
         this.BusinessCodeName = null;
 
         /**
-         * Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM – Standard S1.
+         * Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM Computing C5t.
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -7806,7 +7818,7 @@ class BillResourceSummary extends  AbstractModel {
         this.ReduceType = null;
 
         /**
-         * Total amount after discount
+         * Total amount after discount (Including Tax):  = Total Amount After Discount (Excluding Tax) + TaxAmount
          * @type {string || null}
          */
         this.RealTotalCost = null;
@@ -7818,19 +7830,21 @@ class BillResourceSummary extends  AbstractModel {
         this.VoucherPayAmount = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash account
+         * Cash credit: The amount paid from the user's cash account
+
          * @type {string || null}
          */
         this.CashPayAmount = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
+         * Free credit: The amount paid with the user's free credit
+
          * @type {string || null}
          */
         this.IncentivePayAmount = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+         * Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TransferPayAmount = null;

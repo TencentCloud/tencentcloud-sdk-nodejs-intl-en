@@ -27,6 +27,7 @@ module.exports = {
     cls: require("./cls"),
     cmq: require("./cmq"),
     common: require("./common"),
+    config: require("./config"),
     controlcenter: require("./controlcenter"),
     csip: require("./csip"),
     cvm: require("./cvm"),

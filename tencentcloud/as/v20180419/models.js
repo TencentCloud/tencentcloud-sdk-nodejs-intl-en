@@ -221,6 +221,12 @@ This parameter will overwrite the original instance tag list. To add new tags, y
          */
         this.ImageFamily = null;
 
+        /**
+         * Cloud Dedicated Cluster (CDC) ID.
+         * @type {string || null}
+         */
+        this.DedicatedClusterId = null;
+
     }
 
     /**
@@ -315,6 +321,7 @@ This parameter will overwrite the original instance tag list. To add new tags, y
             }
         }
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
 
     }
 }
@@ -1070,6 +1077,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ImageFamily = null;
 
+        /**
+         * CDC ID.
+         * @type {string || null}
+         */
+        this.DedicatedClusterId = null;
+
     }
 
     /**
@@ -1188,6 +1201,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
 
     }
 }
@@ -1349,9 +1363,9 @@ class Advice extends  AbstractModel {
         this.Solution = null;
 
         /**
-         * Risk level of the scaling group configuration. Valid values: <br>
-<li>WARNING<br>
-<li>CRITICAL<br>
+         * Scaling suggestion warning level. Valid values:
+<li>WARNING: warning.</li>
+<li>CRITICAL: critical.</li>
          * @type {string || null}
          */
         this.Level = null;
@@ -2210,12 +2224,13 @@ class DescribeRefreshActivitiesRequest extends  AbstractModel {
         this.RefreshActivityIds = null;
 
         /**
-         * Filtering conditions.
-<li> auto-scaling-group-id - String - Required or not: No - (Filtering conditions) Filters by scaling group ID. </li>
-<li> refresh-activity-status-code - String - Required or not: No - (Filtering conditions) Filters by refresh activity status. (INIT: Initializing. | RUNNING: In progress. | SUCCESSFUL: Activity successful. | FAILED_PAUSE: Failed paused. | AUTO_PAUSE: Automatic pause. | MANUAL_PAUSE: Manual pause. | CANCELLED: Activity canceled. | FAILED: Activity failed.)</li>
-<li> refresh-activity-type - String - Required or not: No - (Filtering conditions) Filters by refresh activity type. (NORMAL: Normal refresh activity. | ROLLBACK: Rollback refresh activity.)</li>
-<li> refresh-activity-id - String - Required or not: No - (Filtering conditions) Filters by refresh activity ID. </li>
-<li> The maximum limit for Filters per request is 10, and the upper limit for Filter.Values is 5. Parameters do not support specifying both RefreshActivityIds and Filters simultaneously.
+         * Filter criteria
+
+<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
+<li> refresh-activity-status-code - String - Required: No - (Filter)Filter based on refresh activity status. (INIT: Initialization | RUNNING:Running | SUCCESSFUL: Successful Activity | FAILED_PAUSE: Failed & Paused | AUTO_PAUSE: Auto Paused | MANUAL_PAUSE: Manually Paused | CANCELLED: Activity Cancelled | FAILED: Activity Failed)</li>
+<li> refresh-activity-type - String - Required: No - (Filter) Filter by refresh activity types. (NORMAL: Regular Refresh Activity | ROLLBACK: Rollback Refresh Activity)</li>
+<li> refresh-activity-id - String - Required: No - (Filter) Filter by refresh activity ID.</li>
+<li>The upper limit of Filters per request is 10, and that of Filter.Values is 5. The RefreshActivityIds and Filters parameters cannot be specified at the same time.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2391,7 +2406,7 @@ class Tag extends  AbstractModel {
         this.Value = null;
 
         /**
-         * Type of the resource binded to the tag. Currently supported types include "auto-scaling-group"
+         * Resource type bound with tags. Valid values: auto-scaling-group and launch-configuration.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2550,9 +2565,9 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         this.ForwardLoadBalancers = null;
 
         /**
-         * CLB verification policy. Valid values: "ALL" and "DIFF". Default value: "ALL"
-<br><li> ALL. Verification is successful only when all CLBs are valid. Otherwise, verification fails.
-<br><li> DIFF. Only the changes in the CLB parameters are verified. If valid, the verification is successful. Otherwise, verification fails.
+         * CLB verification policy. Valid values: ALL and DIFF. Default value: ALL.
+<li>ALL: The CLB passes the verification only when all CLB parameters are valid. Otherwise, a verification error occurs.</li>
+<li>DIFF: The CLB passes the verification only when the CLB parameters with changes are valid. Otherwise, a verification error occurs.</li>
          * @type {string || null}
          */
         this.LoadBalancersCheckPolicy = null;
@@ -3029,6 +3044,12 @@ Note: This field is default to empty
          */
         this.ImageFamily = null;
 
+        /**
+         * CDC ID.
+         * @type {string || null}
+         */
+        this.DedicatedClusterId = null;
+
     }
 
     /**
@@ -3133,6 +3154,7 @@ Note: This field is default to empty
         }
         this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
 
     }
 }
@@ -3158,17 +3180,17 @@ class AutoScalingGroup extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * Current scaling group status. Valid values:<br>
-<li>NORMAL: Normal<br>
-<li>CVM_ABNORMAL: Abnormal launch configuration<br>
-<li>LB_ABNORMAL: Abnormal load balancer<br>
-<li>LB_LISTENER_ABNORMAL: Abnormal load balancer listener<br>
-<li>LB_LOCATION_ABNORMAL: Abnormal forwarding configuration of the load balancer listener<br>
-<li>VPC_ABNORMAL: VPC network error<br>
-<li>SUBNET_ABNORMAL: VPC subnet exception<br>
-<li>INSUFFICIENT_BALANCE: Insufficient account balance<br>
-<li>LB_BACKEND_REGION_NOT_MATCH: The CLB backend and the AS service are not in the same region.<br>
-<li>LB_BACKEND_VPC_NOT_MATCH: The CLB instance and the scaling group are not in the same VPC.
+         * Current status of the scaling group. Valid values:
+<li>NORMAL: The scaling group is normal.</li>
+<li>CVM_ABNORMAL: The launch configuration is abnormal.</li>
+<li>LB_ABNORMAL: The CLB is abnormal.</li>
+<li>LB_LISTENER_ABNORMAL: The CLB listener is abnormal.</li>
+<li>LB_LOCATION_ABNORMAL: The forwarding configuration of the CLB listener is abnormal.</li>
+<li>VPC_ABNORMAL: The VPC is abnormal.</li>
+<li>SUBNET_ABNORMAL: The VPC subnet is abnormal.</li>
+<li>INSUFFICIENT_BALANCE: The balance is insufficient.</li>
+<li>LB_BACKEND_REGION_NOT_MATCH: The region of the CLB instance backend does not match that of the AS service.</li>
+<li>LB_BACKEND_VPC_NOT_MATCH: The VPC of the CLB instance does not match that of the scaling group.</li>
          * @type {string || null}
          */
         this.AutoScalingGroupStatus = null;
@@ -3306,15 +3328,17 @@ class AutoScalingGroup extends  AbstractModel {
         this.Ipv6AddressCount = null;
 
         /**
-         * The policy applied when there are multiple availability zones/subnets
-<br><li> PRIORITY: when creating instances, choose the availability zone/subnet based on the order in the list from top to bottom. If the first instance is successfully created in the availability zone/subnet of the highest priority, all instances will be created in this availability zone/subnet.
-<br><li> EQUALITY: chooses the availability zone/subnet with the least instances for scale-out. This gives each availability zone/subnet an opportunity for scale-out and disperses the instances created during multiple scale-out operations across different availability zones/subnets.
+         * Multi-AZ/subnet policy.
+<li>PRIORITY: The instances are attempted to be created taking the order of the AZ/subnet list as the priority. If the highest-priority AZ/subnet can create instances successfully, instances can always be created in that AZ/subnet.</li>
+<li>EQUALITY: Select the AZ/subnet with the least number of instances for scale-out. In this way, each AZ/subnet has an opportunity for scale-out. Instances produced from multiple scale-out operations will be distributed to multiple AZs/subnets.</li>
          * @type {string || null}
          */
         this.MultiZoneSubnetPolicy = null;
 
         /**
-         * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+         * Scaling group instance health check type, whose valid values include:
+<li>CVM: Determine whether an instance is unhealthy based on its network status. An unhealthy network status is indicated by an event where instances become unreachable via PING. Detailed criteria of judgment can be found in [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1).</li>
+<li>CLB: Determine whether an instance is unhealthy based on the health check status of CLB. For principles behind CLB health checks, see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).</li>
          * @type {string || null}
          */
         this.HealthCheckType = null;
@@ -3326,9 +3350,9 @@ class AutoScalingGroup extends  AbstractModel {
         this.LoadBalancerHealthCheckGracePeriod = null;
 
         /**
-         * Specifies how to assign instances. Valid values: `LAUNCH_CONFIGURATION` and `SPOT_MIXED`.
-<br><li>`LAUNCH_CONFIGURATION`: the launch configuration mode.
-<br><li>`SPOT_MIXED`: a mixed instance mode. Currently, this mode is supported only when the launch configuration takes the pay-as-you-go billing mode. With this mode, the scaling group can provision a combination of pay-as-you-go instances and spot instances to meet the configured capacity. Note that the billing mode of the associated launch configuration cannot be modified when this mode is used.
+         * Instance assignment policy, whose valid values include LAUNCH_CONFIGURATION and SPOT_MIXED.
+<li>LAUNCH_CONFIGURATION: Represent the traditional mode of assigning instances according to the launch configuration.</li>
+<li>SPOT_MIXED: Represent the spot mixed mode. Currently, this mode is supported only when the launch configuration is set to the pay-as-you-go billing mode. In the mixed mode, the scaling group will scale out pay-as-you-go models or spot models based on the predefined settings. When the mixed mode is used, the billing type of the associated launch configuration cannot be modified.</li>
          * @type {string || null}
          */
         this.InstanceAllocationPolicy = null;
@@ -3341,9 +3365,9 @@ A valid value will be returned only when `InstanceAllocationPolicy` is set to `S
         this.SpotMixedAllocationPolicy = null;
 
         /**
-         * Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
-<br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-<br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
+         * Capacity rebalancing feature, which is applicable only to spot instances within the scaling group. Valid values:
+<li>TRUE: Enable this feature. When spot instances in the scaling group are about to be automatically recycled by the spot instance service, AS proactively initiates the termination process of the spot instances. If there is a configured scale-in hook, it will be triggered before termination. After the termination process starts, AS asynchronously initiates the scale-out to reach the expected number of instances.</li>
+<li>FALSE: Disable this feature. AS waits for the spot instance to be terminated before scaling out to reach the number of instances expected by the scaling group.</li>
          * @type {boolean || null}
          */
         this.CapacityRebalance = null;
@@ -4435,7 +4459,7 @@ class RefreshBatch extends  AbstractModel {
         this.RefreshBatchNum = null;
 
         /**
-         * Refresh batch status. Valid values: <br><li>WAITING: Pending refresh.</li> <li>INIT: Initializing.</li> <li>RUNNING: Refreshing.</li> <li>FAILED: Refresh failed.</li> <li>PARTIALLY_SUCCESSFUL: Partially successful in the batch.</li> <li>CANCELLED: Canceled.</li> <li>SUCCESSFUL: Refreshed.
+         * Refresh batch status. Valid values: <li>WAITING: pending refresh;</li> <li>INIT: initializing;</li> <li>RUNNING: refreshing;</li> <li>FAILED: refresh failed;</li> <li>PARTIALLY_SUCCESSFUL: partially successful in the batch;</li> <li>CANCELLED: cancelled;</li> <li>SUCCESSFUL: refresh successful.</li>
          * @type {string || null}
          */
         this.RefreshBatchStatus = null;
@@ -4735,9 +4759,9 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.SubnetIds = null;
 
         /**
-         * Termination policy. Currently, the maximum length is 1. Value range: OLDEST_INSTANCE, NEWEST_INSTANCE. Default value: OLDEST_INSTANCE.
-<br><li> OLDEST_INSTANCE: The oldest instance in the auto scaling group will be terminated first.
-<br><li> NEWEST_INSTANCE: The newest instance in the auto scaling group will be terminated first.
+         * Termination policy, whose maximum length is currently 1. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE. Default value: OLDEST_INSTANCE.
+<li>OLDEST_INSTANCE: Terminate the oldest instance in the scaling group first.</li>
+<li>NEWEST_INSTANCE: Terminate the newest instance in the scaling group first.</li>
          * @type {Array.<string> || null}
          */
         this.TerminationPolicies = null;
@@ -4749,21 +4773,21 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * Retry policy. Valid values: `IMMEDIATE_RETRY` (default), `INCREMENTAL_INTERVALS`, `NO_RETRY`. A partially successful scaling is judged as a failed one.
-<br><li>`IMMEDIATE_RETRY`: Retry immediately. Stop retrying after five consecutive failures.
-<br><li>`INCREMENTAL_INTERVALS`: Retry at incremental intervals. As the number of consecutive failures increases, the retry interval gradually increases, ranging from seconds to one day.
-<br><li>`NO_RETRY`: Do not retry. Actions are taken when the next call or alarm message comes.
+         * Retry policy. Valid values: IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY. Default value: IMMEDIATE_RETRY. A partially successful scaling activity is considered a failed activity.
+<li>IMMEDIATE_RETRY: Immediately retry or quickly retry in a short period. There will be no retry anymore after a certain number of consecutive failures (5).</li>
+<li>INCREMENTAL_INTERVALS: Retry at an incremental interval. As the number of continuous failures increase, the retry interval gradually increases. The interval for the first 10 retries is the same as the immediate retry mode, and that for the subsequent retries gradually increases to 10 minutes, 30 minutes, 60 minutes, or 1 day.</li>
+<li>NO_RETRY: There will be no retry until another user call or alarm information is received.</li>  
          * @type {string || null}
          */
         this.RetryPolicy = null;
 
         /**
-         * Availability zone verification policy. Value range: ALL, ANY. Default value: ANY.
-<br><li> ALL: The verification will succeed only if all availability zones (Zone) or subnets (SubnetId) are available; otherwise, an error will be reported.
-<br><li> ANY: The verification will success if any availability zone (Zone) or subnet (SubnetId) is available; otherwise, an error will be reported.
+         * AZ verification policy. Valid values: ALL and ANY. Default value: ANY.
+<li>ALL: Verification passes if all AZs or subnets are available; otherwise, a verification error will be reported.<li>
+<li>ANY: Verification passes if any AZ or subnet is available; otherwise, a verification error will be reported.</li>
 
-Common reasons why an availability zone or subnet is unavailable include stock-out of CVM instances or CBS cloud disks in the availability zone, insufficient quota in the availability zone, or insufficient IPs in the subnet.
-If an availability zone or subnet in Zones/SubnetIds does not exist, a verification error will be reported regardless of the value of ZonesCheckPolicy.
+Common reasons for unavailable AZs or subnets include the CVM InstanceType in the AZ being sold out, the CBS cloud disk in the AZ being sold out, insufficient quota in the AZ, and insufficient IP addresses in the subnet.
+If there is no AZ or subnet in Zones/SubnetIds, a verification error will be reported regardless of the values of ZonesCheckPolicy.
          * @type {string || null}
          */
         this.ZonesCheckPolicy = null;
@@ -4787,20 +4811,23 @@ If an availability zone or subnet in Zones/SubnetIds does not exist, a verificat
         this.Ipv6AddressCount = null;
 
         /**
-         * Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
-<br><li> PRIORITY: when creating instances, choose the availability zone/subnet based on the order in the list from top to bottom. If the first instance is successfully created in the availability zone/subnet of the highest priority, all instances will be created in this availability zone/subnet.
-<br><li>EQUALITY: instances created for scale-out are distributed to multiple availability zones/subnets, so as to keep the number of instances in different availability zone/subnet in balance.
+         * Multi-AZ/multi-subnet policy, whose valid values include PRIORITY and EQUALITY, with the default value being PRIORITY.
+<li>PRIORITY: The instances are attempted to be created taking the order of the AZ/subnet list as the priority. If instances can be successfully created in the highest-priority AZ/subnet, they will always be created in that AZ/subnet.</li>
+<li>EQUALITY: The instances added through scale-out will be distributed across multiple AZs/subnets to ensure a relatively balanced number of instances in each AZ/subnet after scaling out.</li>
 
-Notes: 
-<br><li> When the scaling group is based on the classic network, this policy applies to multiple availability zones. When the scaling group is based on a VPC, this policy applies to multiple subnets, and you do not need to consider availability zones. For example, if you have four subnets (A, B, C, and D) and A, B, and C are in availability zone 1 and D is in availability zone 2, you only need to decide the order of the four subnets, without worrying about the issue of availability zones.
-<br><li> This policy is applicable to multiple availability zones/subnets, but is not applicable to multiple models with launch configurations. Specify the models according to the model priority.
-<br><li> When creating instances based on the PRIORITY policy, apply the multi-model policy and then apply the multi-availability zones/subnet policy. For example, if you have models A and B and subnets 1, 2, and 3, creation will be attempted in the following order: A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 (not B1) is tried next.
+Points to consider regarding this policy:
+<li>When the scaling group is based on a classic network, this policy applies to the multi-AZ; when the scaling group is based on a VPC network, this policy applies to the multi-subnet, in this case, the AZs are no longer considered. For example, if there are four subnets labeled A, B, C, and D, where A, B, and C are in AZ 1 and D is in AZ 2, the subnets A, B, C, and D are considered for sorting without regard to AZs 1 and 2.</li>
+<li>This policy applies to the multi-AZ/multi-subnet and not to the InstanceTypes parameter of the launch configuration, which is selected according to the priority policy.</li>
+<li>When instances are created according to the PRIORITY policy, ensure the policy for multiple models first, followed by the policy for the multi-AZ/subnet. For example, with models A and B and subnets 1, 2, and 3, attempts will be made in the order of A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 will be attempted (instead of B1).</li>
          * @type {string || null}
          */
         this.MultiZoneSubnetPolicy = null;
 
         /**
-         * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+         * Health check type for scaling group instances. Valid values:
+<li>CVM: Determine whether an instance is unhealthy based on its network status. An unhealthy network status is indicated by an event where instances become unreachable via PING. For detailed criteria of judgment, see [Instance Health Check](https://www.tencentcloud.com/document/product/377/8553?lang=en&pg=).</li>
+<li>CLB: Determine whether an instance is unhealthy based on the health check status of CLB. For principles behind CLB health checks, see [Health Check Overview](https://www.tencentcloud.com/document/product/214/6097?from_search=1&lang=en&pg=).</li>
+If CLB is selected, the scaling group will check both the instance's network status and the CLB's health check status. If the instance's network status is unhealthy, the instance will be marked as UNHEALTHY. If the CLB's health check status is abnormal, the instance will be marked as CLB_UNHEALTHY. If both of them are abnormal, the instance will be marked as UNHEALTHY|CLB_UNHEALTHY. Default value: CLB.
          * @type {string || null}
          */
         this.HealthCheckType = null;
@@ -4812,9 +4839,9 @@ Notes:
         this.LoadBalancerHealthCheckGracePeriod = null;
 
         /**
-         * Specifies how to assign instances. Valid values: `LAUNCH_CONFIGURATION` and `SPOT_MIXED`; default value: `LAUNCH_CONFIGURATION`.
-<br><li>`LAUNCH_CONFIGURATION`: the launch configuration mode.
-<br><li>`SPOT_MIXED`: a mixed instance mode. Currently, this mode is supported only when the launch configuration takes the pay-as-you-go billing mode. With this mode, the scaling group can provision a combination of pay-as-you-go instances and spot instances to meet the configured capacity. Note that the billing mode of the associated launch configuration cannot be modified when this mode is used.
+         * Instance assignment policy. Valid values: LAUNCH_CONFIGURATION and SPOT_MIXED. Default value: LAUNCH_CONFIGURATION.
+<li>LAUNCH_CONFIGURATION: Represent the traditional mode of assigning instances according to the launch configuration.</li>
+<li>SPOT_MIXED: Represent the spot mixed mode. Currently, this mode is supported only when the launch configuration is set to the pay-as-you-go billing mode. In the mixed mode, the scaling group will scale out pay-as-you-go models or spot models based on the predefined settings. When the mixed mode is used, the billing type of the associated launch configuration cannot be modified.</li>
          * @type {string || null}
          */
         this.InstanceAllocationPolicy = null;
@@ -4827,11 +4854,11 @@ This parameter is valid only when `InstanceAllocationPolicy ` is set to `SPOT_MI
         this.SpotMixedAllocationPolicy = null;
 
         /**
-         * Indicates whether the capacity re-balancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
-<br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-<br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
+         * Capacity rebalancing feature, which is applicable only to spot instances within the scaling group. Valid values:
+<li>TRUE: Enable this feature. When spot instances in the scaling group are about to be automatically recycled by the spot instance service, AS proactively initiates the termination process of the spot instances. If there is a configured scale-in hook, it will be triggered before termination. After the termination process starts, AS asynchronously initiates the scale-out to reach the expected number of instances.</li>
+<li>FALSE: Disable this feature. AS waits for the spot instance to be terminated before scaling out to reach the number of instances expected by the scaling group.</li>
 
-Default value: `False`.
+Default value: FALSE.
          * @type {boolean || null}
          */
         this.CapacityRebalance = null;
@@ -5448,7 +5475,10 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Instance login password. <br><li>Linux: 8-16 characters. It should contain at least two sets of the following categories: [a-z], [A-Z], [0-9] and [()`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>Windows: 12-16 characters. It should contain at least three sets of the following categories: [a-z], [A-Z], [0-9] and [()`~!@#$%^&*-+={}[]:;',.?/]. <br><br>If this parameter is not specified, a random password is generated and sent to you via the Message Center.
+         * Instance login password. The password complexity requirements vary according to the operating system type. The details are as follows:
+<li>The login password for Linux instances should contain 8 to 16 characters, including at least two types of the following characters: letters, digits, and special characters (such as ()`~!@#$%^&*-+=|{}[]:;',.?/).</li>
+<li>The login password for Windows instances should contain 12 to 16 characters, including at least three types of the following characters: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+={}[]:;',.?/).</li>
+If this parameter is not specified, the system will generate a random password and notify the user via the message center.
          * @type {string || null}
          */
         this.Password = null;
@@ -5460,7 +5490,9 @@ class LoginSettings extends  AbstractModel {
         this.KeyIds = null;
 
         /**
-         * Whether to keep the original settings of an image. It cannot be specified together with `Password` or `KeyIds.N`. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>`TRUE`: Keep the login settings of the image <br><li>`FALSE` (Default): Do not keep the login settings of the image <br>
+         * Retain the original settings of the image. This parameter cannot be specified simultaneously with Password or KeyIds.N. It can only be set to TRUE when you create an instance by using a custom image, shared image, or externally imported image. Valid values:
+<li>TRUE: Retain the login settings of the image.</li>
+<li>FALSE: Do not retain the login settings of the image.</li> Default value: FALSE.
          * @type {boolean || null}
          */
         this.KeepImageLogin = null;
@@ -5996,7 +6028,10 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1) service. Value range: <br><li>TRUE: Cloud Security is enabled <br><li>FALSE: Cloud Security is disabled <br><br>Default value: TRUE.
+         * Whether to enable the [Cloud Workload Protection Platform](https://www.tencentcloud.com/document/product/296?lang=en&pg=) service. Valid values:
+<li>TRUE: enable.</li>
+<li>FALSE: disable.</li>
+Default value: TRUE.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -6454,7 +6489,9 @@ class ScheduledAction extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * Specifies how the scheduled action is executed. <br><li>`CRONTAB`: execute repeatedly <br><li>`ONCE`: execute only once
+         * Scheduled task execution type. Valid values:
+<li>CRONTAB: repeated execution.</li>
+<li>ONCE: single execution.</li>
          * @type {string || null}
          */
         this.ScheduledType = null;
@@ -6504,17 +6541,17 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
         this.LifecycleHookName = null;
 
         /**
-         * The time when the lifecycle hook is applied. Valid values:
-<li> `INSTANCE_LAUNCHING`: After the instance launch
-<li> `INSTANCE_TERMINATING`: Before the instance termination
+         * Scenario for entering the lifecycle hook. Valid values:
+<li>INSTANCE_LAUNCHING: after the instance is launched.</li>
+<li>INSTANCE_TERMINATING: before the instance is terminated.</li>
          * @type {string || null}
          */
         this.LifecycleTransition = null;
 
         /**
-         * Actions after the lifecycle hook times out. Valid values:
-<li> `CONTINUE`: Continue the scaling activity after the timeout
-<li> `ABANDON`: Terminate the scaling activity after the timeout
+         * Action to be taken by the scaling group in case of lifecycle hook timeout. Valid values:
+<li>CONTINUE: Continue the scaling activity after timeout.</li>
+<li>ABANDON: Terminate the scaling activity after timeout.</li>
          * @type {string || null}
          */
         this.DefaultResult = null;
@@ -6659,7 +6696,7 @@ class RefreshSettings extends  AbstractModel {
         this.RollingUpdateSettings = null;
 
         /**
-         * Backend service health check status for instances, defaults to FALSE. This setting takes effect only for scaling groups bound with application load balancers. When enabled, if an instance fails the check after being refreshed, its load balancer port weight remains 0 and is marked as a refresh failure. Valid values: <br><li>TRUE: Enable the check.</li> <li>FALSE: Do not enable the check.
+         * Whether to enable the backend service health check for the instance. Default value: FALSE. This parameter is valid only for the scaling group bound to an application-based CLB. After this feature is enabled, if the instance fails the check after refresh, the port weight of the CLB will be always 0, and it will be marked as a refresh failure. Valid values: <li>TRUE: enable;</li> <li>FALSE: disable.</li>
          * @type {boolean || null}
          */
         this.CheckInstanceTargetHealth = null;
@@ -7047,7 +7084,10 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.AdjustmentType = null;
 
         /**
-         * Specifies how to adjust the number of desired capacity when the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Values: <br><li>`AdjustmentType`=`CHANGE_IN_CAPACITY`: Number of instances to add (positive number) or remove (negative number). </li> <li>`AdjustmentType`=`EXACT_CAPACITY`: Set the desired capacity to the specified number. It must be ≥ 0. </li> <li>`AdjustmentType`=`PERCENT_CHANGE_IN_CAPACITY`: Percentage of instance number. Add instances (positive value) or remove instances (negative value) accordingly.
+         * Adjustment value for the expected number of instances after an alarm is triggered, which is applicable only to simple policies.
+<li>When AdjustmentType is set to CHANGE_IN_CAPACITY, a positive value of AdjustmentValue indicates an increase in the number of instances after the alarm is triggered, while a negative value indicates a decrease in the number of instances after the alarm is triggered.</li>
+<li>When AdjustmentType is set to EXACT_CAPACITY, the value of AdjustmentValue indicates the new desired number of instances after the alarm is triggered. It should be greater than or equal to 0.</li>
+<li>When AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, a positive value of AdjustmentValue indicates an increase in the number of instances by a percentage after the alarm is triggered, while a negative value indicates a decrease in the number of instances by a percentage after the alarm is triggered. Unit: %.</li>
          * @type {number || null}
          */
         this.AdjustmentValue = null;
@@ -7065,13 +7105,23 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.MetricAlarm = null;
 
         /**
-         * Preset monitoring item. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>ASG_AVG_CPU_UTILIZATION: Average CPU utilization</li><li>ASG_AVG_LAN_TRAFFIC_OUT: Average private bandwidth out</li><li>ASG_AVG_LAN_TRAFFIC_IN: Average private bandwidth in</li><li>ASG_AVG_WAN_TRAFFIC_OUT: Average public bandwidth out</li><li>ASG_AVG_WAN_TRAFFIC_IN: Average public bandwidth in</li>
+         * Predefined monitoring item, which is applicable only to target tracking policies. Valid values:
+<li>ASG_AVG_CPU_UTILIZATION: average CPU utilization.</li>
+<li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth.</li>
+<li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth.</li>
+<li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth.</li>
+<li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth.</li>
          * @type {string || null}
          */
         this.PredefinedMetricType = null;
 
         /**
-         * Target value. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value ranges: <br><li>`ASG_AVG_CPU_UTILIZATION` (in %): [1, 100)</li><li>`ASG_AVG_LAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_LAN_TRAFFIC_IN` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_IN` (in Mbps): >0</li>
+         * Target value, which is applicable only to target tracking policies.
+<li>ASG_AVG_CPU_UTILIZATION: value range: [1, 100); unit: %.</li>
+<li>ASG_AVG_LAN_TRAFFIC_OUT: value range: > 0; unit: Mbps.</li>
+<li>ASG_AVG_LAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>
+<li>ASG_AVG_WAN_TRAFFIC_OUT: value range: > 0; unit: Mbps.</li>
+<li>ASG_AVG_WAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>
          * @type {number || null}
          */
         this.TargetValue = null;
@@ -7083,7 +7133,9 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.EstimatedInstanceWarmup = null;
 
         /**
-         * Whether to disable scale-in. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>`true`: Do not scale in </li><li>`false` (default): Both scale-out and scale-in can be triggered.</li>
+         * Whether to disable scale-in, which is applicable only to target tracking policies. Default value: false. Valid values:
+<li>true: Target tracking policies trigger only scale-out.</li>
+<li>false: Target tracking policies trigger both scale-out and scale-in.</li>
          * @type {boolean || null}
          */
         this.DisableScaleIn = null;
@@ -7452,7 +7504,9 @@ class StartInstanceRefreshRequest extends  AbstractModel {
         this.RefreshSettings = null;
 
         /**
-         * Refresh mode, currently, only rolling updates are supported, with the default value being ROLLING_UPDATE_RESET.
+         * Refresh mode. Valid values:
+<li>ROLLING_UPDATE_RESET: Reinstall the system for rolling updates.</li>
+<li>ROLLING_UPDATE_REPLACE: Create an instance and replace the old instance with it for rolling updates. This mode does not support the rollback API currently.</li>
          * @type {string || null}
          */
         this.RefreshMode = null;
@@ -7804,13 +7858,23 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.RefreshSettings = null;
 
         /**
-         * Refresh activity type. Valid values: <br><li>NORMAL: Normal refresh activity.</li> <li>ROLLBACK: Rollback refresh activity.
+         * Refresh activity type. Valid values:
+<li>NORMAL: normal refresh activity.</li>
+<li>ROLLBACK: rollback refresh activity.</li>
          * @type {string || null}
          */
         this.ActivityType = null;
 
         /**
-         * Refresh activity status. Valid values: <br><li>INIT: Initializing.</li> <li>RUNNING: Running.</li> <li>SUCCESSFUL: Activity successful.</li> <li>FAILED_PAUSE: Paused due to a failed refresh batch.</li> <li>AUTO_PAUSE: Automatically paused according to pause policy.</li> <li>MANUAL_PAUSE: Manually paused.</li> <li>CANCELLED: Activity canceled.</li> <li>FAILED: Activity failed.
+         * Refresh activity status. Valid values:
+<li>INIT: initializing.</li>
+<li>RUNNING: running.</li>
+<li>SUCCESSFUL: successful.</li>
+<li>FAILED_PAUSE: paused due to the failure of a refresh batch.</li>
+<li>AUTO_PAUSE: automatically paused due to the pause policy.</li>
+<li>MANUAL_PAUSE: manually paused.</li>
+<li>CANCELLED: canceled.</li>
+<li>FAILED: failed.</li>
          * @type {string || null}
          */
         this.Status = null;
@@ -8311,10 +8375,10 @@ class AutoScalingAdvice extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * Scaling group warning level. Valid values:<br>
-<li>NORMAL: Normal<br>
-<li>WARNING: Warning<br>
-<li>CRITICAL: Serious warning<br>
+         * Scaling group warning level. Valid values:
+<li>NORMAL: normal.</li>
+<li>WARNING: warning.</li>
+<li>CRITICAL: critical.</li>
          * @type {string || null}
          */
         this.Level = null;
@@ -8750,23 +8814,29 @@ class Activity extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * Type of the scaling activity. Valid values:<br>
-<li>`SCALE_OUT`: Scale out. <li>`SCALE_IN`: Scale in. <li>`ATTACH_INSTANCES`: Add instances. <li>`REMOVE_INSTANCES`: Terminate instances. <li>`DETACH_INSTANCES`: Remove instances. <li>`TERMINATE_INSTANCES_UNEXPECTEDLY`: Terminate instances in the CVM console. <li>`REPLACE_UNHEALTHY_INSTANCE`: Replace an unhealthy instance.
-<li>`START_INSTANCES`: Starts up instances.
-<li>`STOP_INSTANCES`: Shut down instances.
-<li>`INVOKE_COMMAND`: Execute commands
+         * Scaling activity type. Valid values:
+<li>SCALE_OUT: Scale out an instance.</li>
+<li>SCALE_IN: Scale in an instance.</li>
+<li>ATTACH_INSTANCES: Add an instance.</li>
+<li>REMOVE_INSTANCES: Terminate an instance.</li>
+<li>DETACH_INSTANCES: Remove an instance.</li>
+<li>TERMINATE_INSTANCES_UNEXPECTEDLY: Terminate an instance in the CVM console.</li>
+<li>REPLACE_UNHEALTHY_INSTANCE: Replace an unhealthy instance.</li>
+<li>START_INSTANCES: Start an instance.</li>
+<li>STOP_INSTANCES: Stop an instance.</li>
+<li>INVOKE_COMMAND: Execute a command.</li>
          * @type {string || null}
          */
         this.ActivityType = null;
 
         /**
-         * Scaling activity status. Value range:<br>
-<li>INIT: initializing
-<li>RUNNING: running
-<li>SUCCESSFUL: succeeded
-<li>PARTIALLY_SUCCESSFUL: partially succeeded
-<li>FAILED: failed
-<li>CANCELLED: canceled
+         * Scaling activity status. Valid values:
+<li>INIT: initializing.</li>
+<li>RUNNING: running.</li>
+<li>SUCCESSFUL: successful.</li>
+<li>PARTIALLY_SUCCESSFUL: partially successful.</li>
+<li>FAILED: failed.</li>
+<li>CANCELLED: canceled.</li>
          * @type {string || null}
          */
         this.StatusCode = null;
@@ -8994,7 +9064,10 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1) service. Value range: <br><li>TRUE: Cloud Monitor is enabled <br><li>FALSE: Cloud Monitor is disabled <br><br>Default value: TRUE. |
+         * Whether to enable the [Tencent Cloud Observability Platform](https://www.tencentcloud.com/document/product/248?lang=en&pg=) service. Valid values:
+<li>TRUE: enable.</li>
+<li>FALSE: disable.</li>
+Default value: TRUE.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -9057,11 +9130,7 @@ class ActivtyRelatedInstance extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Status of the instance in the scaling activity. Value range:
-<li>INIT: initializing
-<li>RUNNING: running
-<li>SUCCESSFUL: succeeded
-<li>FAILED: failed
+         * Status of the instance in the scaling activity. Valid values: <br><li>INIT: initializing;</li> <li>RUNNING: instance in operation;</li> <li>SUCCESSFUL: activity successful;</li> <li>FAILED: activity failed.
          * @type {string || null}
          */
         this.InstanceStatus = null;
@@ -9153,7 +9222,7 @@ class InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * Network billing method. Value range: <br><li>BANDWIDTH_PREPAID: Prepaid by bandwidth <br><li>TRAFFIC_POSTPAID_BY_HOUR: Postpaid by traffic on a per hour basis <br><li>BANDWIDTH_POSTPAID_BY_HOUR: Postpaid by bandwidth on a per hour basis <br><li>BANDWIDTH_PACKAGE: BWP user <br>Default value: TRAFFIC_POSTPAID_BY_HOUR.
+         * Network billing type. Valid values: <li>BANDWIDTH_PREPAID: prepaid by bandwidth;</li> <li>TRAFFIC_POSTPAID_BY_HOUR: postpaid by traffic per hour;</li> <li>BANDWIDTH_POSTPAID_BY_HOUR: postpaid by bandwidth per hour;</li> <li>BANDWIDTH_PACKAGE: bandwidth package users.</li> Default value: TRAFFIC_POSTPAID_BY_HOUR.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -9167,7 +9236,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Whether to assign a public IP. Value range: <br><li>TRUE: Assign a public IP <br><li>FALSE: Do not assign a public IP <br><br>If the public network bandwidth is greater than 0 Mbps, you are free to choose whether to enable the public IP (which is enabled by default). If the public network bandwidth is 0 Mbps, no public IP will be allowed to be assigned.
+         * Whether to assign a public IP address. Valid values: <li>TRUE: Allocate a public IP address.</li> <li>FALSE: Do not allocate a public IP address.</li> When the public network bandwidth is greater than 0 Mbps, you can choose whether to enable this feature based on your needs. By default, this feature is enabled. When the public network bandwidth is 0, public IP address assignment is not allowed.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */

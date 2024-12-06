@@ -320,7 +320,7 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to archive keys. The archived keys can only be used for decryption but not encryption.
+     * This API is used to archive keys.The archived keys can only be used for decryption but not encryption.
      * @param {ArchiveKeyRequest} req
      * @param {function(string, ArchiveKeyResponse):void} cb
      * @public

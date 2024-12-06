@@ -69,7 +69,6 @@ const BaselineEffectHost = models.BaselineEffectHost;
 const DescribeRiskProcessEventsRequest = models.DescribeRiskProcessEventsRequest;
 const DescribeAssetTypesResponse = models.DescribeAssetTypesResponse;
 const DescribeScreenEmergentMsgRequest = models.DescribeScreenEmergentMsgRequest;
-const DescribeCloudProtectServiceOrderListResponse = models.DescribeCloudProtectServiceOrderListResponse;
 const ModifyAutoOpenProVersionConfigResponse = models.ModifyAutoOpenProVersionConfigResponse;
 const DescribeVulInfoCvssResponse = models.DescribeVulInfoCvssResponse;
 const DescribeBaselineStrategyDetailRequest = models.DescribeBaselineStrategyDetailRequest;
@@ -82,7 +81,7 @@ const DescribeMachineClearHistoryRequest = models.DescribeMachineClearHistoryReq
 const DescribeServersAndRiskAndFirstInfoResponse = models.DescribeServersAndRiskAndFirstInfoResponse;
 const ModifyMalwareWhiteListRequest = models.ModifyMalwareWhiteListRequest;
 const DescribeSecurityProtectionStatResponse = models.DescribeSecurityProtectionStatResponse;
-const DescribeAssetJarListRequest = models.DescribeAssetJarListRequest;
+const DescribeBaselineEffectHostListResponse = models.DescribeBaselineEffectHostListResponse;
 const DescribeJavaMemShellPluginInfoRequest = models.DescribeJavaMemShellPluginInfoRequest;
 const DescribeMachineFileTamperRulesRequest = models.DescribeMachineFileTamperRulesRequest;
 const ExportVulDefenceEventResponse = models.ExportVulDefenceEventResponse;
@@ -126,7 +125,6 @@ const ReverseShellRule = models.ReverseShellRule;
 const DescribeAESKeyResponse = models.DescribeAESKeyResponse;
 const DescribeBashRulesResponse = models.DescribeBashRulesResponse;
 const DescribeAvailableExpertServiceDetailResponse = models.DescribeAvailableExpertServiceDetailResponse;
-const DescribeCloudProtectServiceOrderListRequest = models.DescribeCloudProtectServiceOrderListRequest;
 const DescribeLogStorageConfigRequest = models.DescribeLogStorageConfigRequest;
 const ExportAssetWebLocationListResponse = models.ExportAssetWebLocationListResponse;
 const ScreenBroadcasts = models.ScreenBroadcasts;
@@ -143,7 +141,7 @@ const DescribeAttackLogsRequest = models.DescribeAttackLogsRequest;
 const ModifyMachineAutoClearConfigRequest = models.ModifyMachineAutoClearConfigRequest;
 const ModifyEventAttackStatusRequest = models.ModifyEventAttackStatusRequest;
 const DescribeVulLevelCountResponse = models.DescribeVulLevelCountResponse;
-const FileTamperRuleInfo = models.FileTamperRuleInfo;
+const BruteAttackRule = models.BruteAttackRule;
 const DescribeVersionStatisticsResponse = models.DescribeVersionStatisticsResponse;
 const DescribeAvailableExpertServiceDetailRequest = models.DescribeAvailableExpertServiceDetailRequest;
 const DescribeMachineFileTamperRulesResponse = models.DescribeMachineFileTamperRulesResponse;
@@ -171,7 +169,6 @@ const DescribeTagMachinesRequest = models.DescribeTagMachinesRequest;
 const DescribeScreenAttackHotspotRequest = models.DescribeScreenAttackHotspotRequest;
 const ScanVulAgainRequest = models.ScanVulAgainRequest;
 const DeleteSearchTemplateRequest = models.DeleteSearchTemplateRequest;
-const CreateCloudProtectServiceOrderRecordRequest = models.CreateCloudProtectServiceOrderRecordRequest;
 const ExportJavaMemShellPluginsResponse = models.ExportJavaMemShellPluginsResponse;
 const DescribeAssetTotalCountResponse = models.DescribeAssetTotalCountResponse;
 const ExportNonlocalLoginPlacesRequest = models.ExportNonlocalLoginPlacesRequest;
@@ -318,6 +315,7 @@ const MachineSimple = models.MachineSimple;
 const DescribeReverseShellEventsRequest = models.DescribeReverseShellEventsRequest;
 const DescribeCanNotSeparateMachineResponse = models.DescribeCanNotSeparateMachineResponse;
 const ExportAssetPortInfoListResponse = models.ExportAssetPortInfoListResponse;
+const FileTamperRuleInfo = models.FileTamperRuleInfo;
 const DescribeEventByTableResponse = models.DescribeEventByTableResponse;
 const ModifyLogStorageConfigRequest = models.ModifyLogStorageConfigRequest;
 const DescribeAttackVulTypeListRequest = models.DescribeAttackVulTypeListRequest;
@@ -424,7 +422,7 @@ const RecordInfo = models.RecordInfo;
 const DescribeAssetHostTotalCountResponse = models.DescribeAssetHostTotalCountResponse;
 const DescribeMachineSnapshotRequest = models.DescribeMachineSnapshotRequest;
 const StopAssetScanResponse = models.StopAssetScanResponse;
-const BruteAttackRule = models.BruteAttackRule;
+const DescribeAssetJarListRequest = models.DescribeAssetJarListRequest;
 const LoginWhiteLists = models.LoginWhiteLists;
 const TrustMalwaresRequest = models.TrustMalwaresRequest;
 const AssetKeyVal = models.AssetKeyVal;
@@ -575,7 +573,6 @@ const CreateNetAttackWhiteListResponse = models.CreateNetAttackWhiteListResponse
 const CreateLogExportResponse = models.CreateLogExportResponse;
 const EmergencyResponseInfo = models.EmergencyResponseInfo;
 const ExportVulDefenceListResponse = models.ExportVulDefenceListResponse;
-const CloudProtectService = models.CloudProtectService;
 const ModifyLogKafkaDeliverTypeResponse = models.ModifyLogKafkaDeliverTypeResponse;
 const DescribeBaselineScanScheduleRequest = models.DescribeBaselineScanScheduleRequest;
 const RetryCreateSnapshotRequest = models.RetryCreateSnapshotRequest;
@@ -604,7 +601,7 @@ const MonthInspectionReport = models.MonthInspectionReport;
 const SetBashEventsStatusRequest = models.SetBashEventsStatusRequest;
 const ReverseShell = models.ReverseShell;
 const AssetAppProcessInfo = models.AssetAppProcessInfo;
-const DescribeBaselineEffectHostListResponse = models.DescribeBaselineEffectHostListResponse;
+const NetAttackWhiteRule = models.NetAttackWhiteRule;
 const DescribeWebHookRuleResponse = models.DescribeWebHookRuleResponse;
 const DescribeBaselineStrategyListRequest = models.DescribeBaselineStrategyListRequest;
 const ExportJavaMemShellsRequest = models.ExportJavaMemShellsRequest;
@@ -771,7 +768,6 @@ const DescribeRiskDnsPolicyListResponse = models.DescribeRiskDnsPolicyListRespon
 const DescribeSecurityTrendsResponse = models.DescribeSecurityTrendsResponse;
 const BashEventsInfo = models.BashEventsInfo;
 const StopNoticeBanTipsResponse = models.StopNoticeBanTipsResponse;
-const NetAttackWhiteRule = models.NetAttackWhiteRule;
 const AssetSystemPackageInfo = models.AssetSystemPackageInfo;
 const DescribeEmergencyVulListRequest = models.DescribeEmergencyVulListRequest;
 const DescribeSecurityDynamicsResponse = models.DescribeSecurityDynamicsResponse;
@@ -915,7 +911,6 @@ const KeysLocalStorageResponse = models.KeysLocalStorageResponse;
 const DescribeAssetMachineListRequest = models.DescribeAssetMachineListRequest;
 const ABTestConfig = models.ABTestConfig;
 const ScreenBaselineInfo = models.ScreenBaselineInfo;
-const DescribeProductStatusRequest = models.DescribeProductStatusRequest;
 const Filter = models.Filter;
 const DescribeAssetMachineTagTopRequest = models.DescribeAssetMachineTagTopRequest;
 const DescribeAgentInstallationTokenRequest = models.DescribeAgentInstallationTokenRequest;
@@ -1079,7 +1074,7 @@ const DescribeBaselineStrategyDetailResponse = models.DescribeBaselineStrategyDe
 const DescribeBaselineListRequest = models.DescribeBaselineListRequest;
 const DescribePublicProxyInstallCommandRequest = models.DescribePublicProxyInstallCommandRequest;
 const ExportJavaMemShellsResponse = models.ExportJavaMemShellsResponse;
-const CreateCloudProtectServiceOrderRecordResponse = models.CreateCloudProtectServiceOrderRecordResponse;
+const DescribeProductStatusRequest = models.DescribeProductStatusRequest;
 const DescribeRiskProcessEventsResponse = models.DescribeRiskProcessEventsResponse;
 const DescribeScreenHostInvasionResponse = models.DescribeScreenHostInvasionResponse;
 const ExportBaselineFixListResponse = models.ExportBaselineFixListResponse;
@@ -1212,7 +1207,9 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the data of the component statistics list.
+     * 接口已无效
+
+This API is used to obtain the data of the component statistics list.
      * @param {DescribeComponentStatisticsRequest} req
      * @param {function(string, DescribeComponentStatisticsResponse):void} cb
      * @public
@@ -2664,7 +2661,9 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to display the list of network attack logs in pagination.
+     * DescribeAttackEvents 代替
+
+This API is used to display the list of network attack logs in pagination.
      * @param {DescribeAttackLogsRequest} req
      * @param {function(string, DescribeAttackLogsResponse):void} cb
      * @public
@@ -3280,7 +3279,9 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query attack backtracking events.
+     * 已废弃
+
+This API is used to query attack backtracking events.
      * @param {DescribeAttackSourceEventsRequest} req
      * @param {function(string, DescribeAttackSourceEventsResponse):void} cb
      * @public
@@ -4042,7 +4043,9 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * This API is used to obtain the index list.
+     * 接口已废弃
+
+This API is used to obtain the index list.
      * @param {DescribeIndexListRequest} req
      * @param {function(string, DescribeIndexListResponse):void} cb
      * @public
@@ -4141,7 +4144,9 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * This API is used to backtrack attacks.
+     * 已废弃
+
+This API is used to backtrack attacks.
      * @param {DescribeAttackSourceRequest} req
      * @param {function(string, DescribeAttackSourceResponse):void} cb
      * @public
@@ -4471,7 +4476,9 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * This API is used to obtain the summary of security protection statuses.
+     * 接口已无效
+
+This API is used to obtain the summary of security protection statuses.
      * @param {DescribeSecurityProtectionStatRequest} req
      * @param {function(string, DescribeSecurityProtectionStatResponse):void} cb
      * @public
@@ -5120,19 +5127,6 @@ This API is used to call the billing payment API for payment since prepaid order
     }
 
     /**
-     * 云护航计费产品已下线
-
-This API is used to confirm the receipt after using the cloud escort service.
-     * @param {CreateCloudProtectServiceOrderRecordRequest} req
-     * @param {function(string, CreateCloudProtectServiceOrderRecordResponse):void} cb
-     * @public
-     */
-    CreateCloudProtectServiceOrderRecord(req, cb) {
-        let resp = new CreateCloudProtectServiceOrderRecordResponse();
-        this.request("CreateCloudProtectServiceOrderRecord", req, resp, cb);
-    }
-
-    /**
      * This API is used to perform baseline checks.
      * @param {StartBaselineDetectRequest} req
      * @param {function(string, StartBaselineDetectResponse):void} cb
@@ -5240,19 +5234,6 @@ This API is used to confirm the receipt after using the cloud escort service.
     DescribeVulLabels(req, cb) {
         let resp = new DescribeVulLabelsResponse();
         this.request("DescribeVulLabels", req, resp, cb);
-    }
-
-    /**
-     * 云护航计费产品已下线
-
-This API is used to query the list of cloud escort service orders.
-     * @param {DescribeCloudProtectServiceOrderListRequest} req
-     * @param {function(string, DescribeCloudProtectServiceOrderListResponse):void} cb
-     * @public
-     */
-    DescribeCloudProtectServiceOrderList(req, cb) {
-        let resp = new DescribeCloudProtectServiceOrderListResponse();
-        this.request("DescribeCloudProtectServiceOrderList", req, resp, cb);
     }
 
     /**

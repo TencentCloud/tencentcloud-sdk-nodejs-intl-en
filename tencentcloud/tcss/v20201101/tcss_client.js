@@ -876,7 +876,9 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query and export the list of abnormal process events at runtime.
+     * 接口已废弃
+
+This API is used to query and export the list of abnormal process events at runtime.
      * @param {DescribeAbnormalProcessEventsExportRequest} req
      * @param {function(string, DescribeAbnormalProcessEventsExportResponse):void} cb
      * @public
@@ -997,7 +999,9 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query and export the list of abnormal process policies at runtime.
+     * 接口已废弃
+
+This API is used to query and export the list of abnormal process policies at runtime.
      * @param {DescribeAbnormalProcessRulesExportRequest} req
      * @param {function(string, DescribeAbnormalProcessRulesExportResponse):void} cb
      * @public
@@ -1482,7 +1486,9 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the list of container escape events.
+     * 接口已废弃
+
+This API is used to export the list of container escape events.
      * @param {DescribeEscapeEventsExportRequest} req
      * @param {function(string, DescribeEscapeEventsExportResponse):void} cb
      * @public
@@ -1515,7 +1521,9 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the list of images.
+     * 接口已废弃
+
+This API is used to export the list of images.
      * @param {DescribeAssetImageListExportRequest} req
      * @param {function(string, DescribeAssetImageListExportResponse):void} cb
      * @public
@@ -3552,7 +3560,9 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to remove the specified check item from the allowlist.
+     * 产品重构优化，这几个接口已经没有调用了
+
+This API is used to remove the specified check item from the allowlist.
      * @param {DeleteCompliancePolicyItemFromWhitelistRequest} req
      * @param {function(string, DeleteCompliancePolicyItemFromWhitelistResponse):void} cb
      * @public
@@ -4355,7 +4365,9 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the list of access control policies at runtime.
+     * 接口已废弃
+
+This API is used to export the list of access control policies at runtime.
      * @param {DescribeAccessControlRulesExportRequest} req
      * @param {function(string, DescribeAccessControlRulesExportResponse):void} cb
      * @public

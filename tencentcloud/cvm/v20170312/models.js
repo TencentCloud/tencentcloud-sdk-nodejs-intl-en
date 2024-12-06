@@ -1071,7 +1071,16 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For more information about the limits of system disk types, please see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD cloud disk<br><li>CLOUD_PREMIUM: Premium cloud storage<br><li>CLOUD_BSSD: Balanced SSD<br><br>The disk currently in stock will be used by default.
+         * System disk type. For the restrictions on the system disk type, refer to [Storage Overview] (https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Value range:<br>
+<li>LOCAL_BASIC: Local Disk</li>
+<li>LOCAL_SSD: Local SSD Disk</li>
+<li>CLOUD_BASIC: HDD Cloud Disk</li>
+<li>CLOUD_SSD: Cloud SSD</li>
+<li>CLOUD_PREMIUM: Premium Cloud Disk</li>
+<li>CLOUD_BSSD: Balanced SSD</li>
+<li>CLOUD_HSSD: Enhanced SSD</li>
+<li>CLOUD_TSSD: ulTra SSD</li><br>
+Default value: Current disk types with inventory available.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1095,6 +1104,15 @@ It is only used as a response parameter for APIs such as `DescribeInstances`, an
          */
         this.CdcId = null;
 
+        /**
+         * Disk name, with a length of not more than 128 characters.
+
+This parameter is in invite-only testing and is not yet open for use.
+Note: This field may return null, indicating that no valid value is found.
+         * @type {string || null}
+         */
+        this.DiskName = null;
+
     }
 
     /**
@@ -1108,6 +1126,7 @@ It is only used as a response parameter for APIs such as `DescribeInstances`, an
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
 
     }
 }
@@ -4463,37 +4482,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Data disk type. For restrictions on data disk types, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br/>
-<li>
-  LOCAL_BASIC: local disk.<br/>
-  <li>
-    LOCAL_SSD: local SSD.<br/>
-    <li>
-      LOCAL_NVME: local NVMe disk, which is closely related to InstanceType, and cannot be specified.<br/>
-      <li>
-        LOCAL_PRO: local HDD, which is closely related to InstanceType, and cannot be specified.<br/>
-        <li>
-          CLOUD_BASIC: basic cloud disk.<br/>
-          <li>
-            CLOUD_PREMIUM: premium cloud disk.<br/>
-            <li>
-              CLOUD_SSD: cloud SSD.<br />
-              <li>
-                CLOUD_HSSD: enhanced SSD.<br/>
-                <li>
-                  CLOUD_TSSD: tremendous SSD.<br/>
-                  <li>
-                    CLOUD_BSSD: balanced SSD.<br/><br/>Default value: LOCAL_BASIC.<br/><br/>This parameter is invalid for the `ResizeInstanceDisk` API.
-                  </li>
-                </li>
-              </li>
-            </li>
-          </li>
-        </li>
-      </li>
-    </li>
-  </li>
-</li>
+         * Data disk type. For the detailed restrictions on the data disk type, refer to [Storage Overview] (https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Value range: <br /><li>LOCAL_BASIC: Local Disk <br /><li>LOCAL_SSD: Local SSD Disk <br /><li>LOCAL_NVME: Local NVME Disk, which is strongly related with InstanceType and can not be specified <br /><li>LOCAL_PRO: Local HDD Disk, which is strongly related with InstanceType and can not be specified <br /><li>CLOUD_BASIC: HDD Cloud Disk <br /><li>CLOUD_PREMIUM: Premium Cloud Disk <br /><li>CLOUD_SSD: Cloud SSD <br /><li>CLOUD_HSSD: Enhanced SSD <br /><li>CLOUD_TSSD: ulTra SSD <br /><li>CLOUD_BSSD: Balanced SSD <br /><br />Default value: LOCAL_BASIC. <br /><br />This parameter is invalid for the `ResizeInstanceDisk` API.</li></li></li> </li> </li></li></li></li></li></li>
          * @type {string || null}
          */
         this.DiskType = null;
@@ -4506,12 +4495,12 @@ It is only used as a response parameter for APIs such as `DescribeInstances`, an
         this.DiskId = null;
 
         /**
-         * Whether a data disk is terminated when the associated CVM instance is terminated. Valid values:
-<li>TRUE: The data disk is terminated when the associated CVM instance is terminated. This only supports pay-as-you-go cloud disks that are billed by hour.</li>
+         * Whether the data disk is destroyed with the Cloud Virtual Machine (CVM). Value range:
+<li>true: Destroy the data disk when the CVM is destroyed. Only the pay-as-you-go cloud disk billed by hour is supported.</li>
 <li>
-  FALSE: The data disk is retained when the associated CVM instance is terminated.<br/>
-  Default value: TRUE.<br/>
-  This parameter is currently used only in the `RunInstances` API.
+  false: Retain the data disk when the CVM is destroyed.<br />
+  Default value: true.<br />
+  This parameter is currently only used for the `RunInstances` API.
 </li>
 Note: This field may return null, indicating that no valid value is found.
          * @type {boolean || null}
@@ -4570,6 +4559,14 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.BurstPerformance = null;
 
+        /**
+         * Disk name, with a length of not more than 128 characters.
+
+This parameter is in invite-only testing and is not yet open for use.
+         * @type {string || null}
+         */
+        this.DiskName = null;
+
     }
 
     /**
@@ -4589,6 +4586,7 @@ Note: This field may return null, indicating that no valid value is found.
         this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.BurstPerformance = 'BurstPerformance' in params ? params.BurstPerformance : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
 
     }
 }
@@ -10115,8 +10113,7 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Login password of the instance. <br><li>For Linux instances, the password must include 8-30 characters, and contain at least two of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>For Windows instances, the password must include 12-30 characters, and contain at least three of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><br>If it's not specified, the user needs to set the login password using the **Reset password** option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Instance login password. The password complexity limits vary with the operating system type as follows: <br><li>The Linux instance password must be 8 to 30 characters long and include at least two of the following: [a-z], [A-Z], [0-9], and special characters of [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>The Windows instance password must be 12 to 30 characters long and include at least three of the following: [a-z], [A-Z], [0-9], and special characters [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, you need to set it before login by using the console to "reset password" or by calling the ResetInstancesPassword API.
          * @type {string || null}
          */
         this.Password = null;
@@ -10655,7 +10652,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         super();
 
         /**
-         * VPC ID in the format of `vpc-xxx`. To obtain valid VPC IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/vpc?rid=1) or call the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API and look for the `unVpcId` fields in the response. If you specify `DEFAULT` for both `VpcId` and `SubnetId` when creating an instance, the default VPC will be used.
+         * VPC ID in the format of `vpc-xxx`. To obtain valid VPC IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/vpc?rid=1) or call the [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778) API and look for the `unVpcId` fields in the response. If you specify `DEFAULT` for both `VpcId` and `SubnetId` when creating an instance, the default VPC will be used.
          * @type {string || null}
          */
         this.VpcId = null;

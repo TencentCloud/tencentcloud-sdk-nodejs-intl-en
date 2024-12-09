@@ -4252,8 +4252,8 @@ Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
         this.VideoBase64 = null;
 
         /**
-         * The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
-`LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+         * The liveness detection type. Valid values: `ACTION`, and `SILENT`.
+`ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
 Example value: "SILENT"
          * @type {string || null}
          */

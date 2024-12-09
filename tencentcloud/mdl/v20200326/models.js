@@ -1360,6 +1360,12 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
          */
         this.GopSizeUnits = null;
 
+        /**
+         * Color space setting.
+         * @type {ColorSpaceSetting || null}
+         */
+        this.ColorSpaceSettings = null;
+
     }
 
     /**
@@ -1439,6 +1445,12 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         }
         this.GopSize = 'GopSize' in params ? params.GopSize : null;
         this.GopSizeUnits = 'GopSizeUnits' in params ? params.GopSizeUnits : null;
+
+        if (params.ColorSpaceSettings) {
+            let obj = new ColorSpaceSetting();
+            obj.deserialize(params.ColorSpaceSettings)
+            this.ColorSpaceSettings = obj;
+        }
 
     }
 }
@@ -2307,6 +2319,34 @@ class CreateStreamLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
+ * Color space setting.
+ * @class
+ */
+class ColorSpaceSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Color space, supports `PASSTHROUGH` (transparent transmission, only supports H265); optional.
+         * @type {string || null}
+         */
+        this.ColorSpace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ColorSpace = 'ColorSpace' in params ? params.ColorSpace : null;
+
+    }
+}
+
+/**
  * Push information.
  * @class
  */
@@ -2999,6 +3039,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.VideoEnhanceSettings = null;
 
+        /**
+         * Color space setting.
+         * @type {ColorSpaceSetting || null}
+         */
+        this.ColorSpaceSettings = null;
+
     }
 
     /**
@@ -3045,6 +3091,12 @@ Note: This field may return `null`, indicating that no valid value was found.
                 obj.deserialize(params.VideoEnhanceSettings[z]);
                 this.VideoEnhanceSettings.push(obj);
             }
+        }
+
+        if (params.ColorSpaceSettings) {
+            let obj = new ColorSpaceSetting();
+            obj.deserialize(params.ColorSpaceSettings)
+            this.ColorSpaceSettings = obj;
         }
 
     }
@@ -8364,6 +8416,7 @@ module.exports = {
     CreateTextSettings: CreateTextSettings,
     DashRemuxSettingsInfo: DashRemuxSettingsInfo,
     CreateStreamLiveWatermarkRequest: CreateStreamLiveWatermarkRequest,
+    ColorSpaceSetting: ColorSpaceSetting,
     StreamInfo: StreamInfo,
     SDMCSettingsInfo: SDMCSettingsInfo,
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,

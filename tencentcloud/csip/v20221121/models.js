@@ -5965,6 +5965,12 @@ class DescribeClusterPodAssetsRequest extends  AbstractModel {
         super();
 
         /**
+         * Member id
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
          * Filter conditions
          * @type {Filter || null}
          */
@@ -5979,6 +5985,7 @@ class DescribeClusterPodAssetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
         if (params.Filter) {
             let obj = new Filter();

@@ -58,6 +58,7 @@ const DeleteStreamLivePlanResponse = models.DeleteStreamLivePlanResponse;
 const CreateTextSettings = models.CreateTextSettings;
 const DashRemuxSettingsInfo = models.DashRemuxSettingsInfo;
 const CreateStreamLiveWatermarkRequest = models.CreateStreamLiveWatermarkRequest;
+const ColorSpaceSetting = models.ColorSpaceSetting;
 const StreamInfo = models.StreamInfo;
 const SDMCSettingsInfo = models.SDMCSettingsInfo;
 const DeleteStreamLiveInputSecurityGroupRequest = models.DeleteStreamLiveInputSecurityGroupRequest;

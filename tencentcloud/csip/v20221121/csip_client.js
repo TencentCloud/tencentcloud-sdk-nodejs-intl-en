@@ -244,7 +244,7 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to list cluster pods. 
+     * This API is used to list cluster pods.
      * @param {DescribeClusterPodAssetsRequest} req
      * @param {function(string, DescribeClusterPodAssetsResponse):void} cb
      * @public

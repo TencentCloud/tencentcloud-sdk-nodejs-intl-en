@@ -3022,6 +3022,12 @@ Supported image size: The downloaded image after Base64 encoding can be up to 7 
         this.ImageBase64 = null;
 
         /**
+         * Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+         * @type {string || null}
+         */
+        this.BackImageBase64 = null;
+
+        /**
          * The URL of an image. (This field is not available outside the Chinese mainland.)
 Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
 Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
@@ -3030,6 +3036,12 @@ For a non-Tencent Cloud URL, the download speed and stability may be low.
          * @type {string || null}
          */
         this.ImageUrl = null;
+
+        /**
+         * The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.BackImageUrl = null;
 
         /**
          * Whether to return an image. Default value: `false`.
@@ -3047,7 +3059,9 @@ For a non-Tencent Cloud URL, the download speed and stability may be low.
             return;
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.BackImageBase64 = 'BackImageBase64' in params ? params.BackImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.BackImageUrl = 'BackImageUrl' in params ? params.BackImageUrl : null;
         this.RetImage = 'RetImage' in params ? params.RetImage : null;
 
     }
@@ -9401,6 +9415,12 @@ MyKid   Kid card
         this.Birthday = null;
 
         /**
+         * Number on the back of Malaysia ID card 
+         * @type {string || null}
+         */
+        this.MyKadNumber = null;
+
+        /**
          * Card Warning Information
 
 -9101 Alarm for covered certificate,
@@ -9438,6 +9458,7 @@ MyKid   Kid card
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.MyKadNumber = 'MyKadNumber' in params ? params.MyKadNumber : null;
         this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 

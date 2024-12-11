@@ -362,6 +362,12 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
          */
         this.Text = null;
 
+        /**
+         * Word timestamp information.
+         * @type {Array.<WordResult> || null}
+         */
+        this.Wordlist = null;
+
     }
 
     /**
@@ -375,6 +381,15 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.Wordlist) {
+            this.Wordlist = new Array();
+            for (let z in params.Wordlist) {
+                let obj = new WordResult();
+                obj.deserialize(params.Wordlist[z]);
+                this.Wordlist.push(obj);
+            }
+        }
 
     }
 }
@@ -3983,6 +3998,12 @@ class AiRecognitionTaskInput extends  AbstractModel {
          */
         this.Definition = null;
 
+        /**
+         * User extension field, which does not need to be filled in for general scenarios.
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
+
     }
 
     /**
@@ -3993,6 +4014,7 @@ class AiRecognitionTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
 
     }
 }
@@ -5194,6 +5216,53 @@ Note: the image must be a relatively clear facial feature photo of one person wi
         this.Description = 'Description' in params ? params.Description : null;
         this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * Image task input parameters
+ * @class
+ */
+class ImageTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image encoding configuration.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ImageEncodeConfig || null}
+         */
+        this.EncodeConfig = null;
+
+        /**
+         * Image enhancement configuration.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ImageEnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EncodeConfig) {
+            let obj = new ImageEncodeConfig();
+            obj.deserialize(params.EncodeConfig)
+            this.EncodeConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new ImageEnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
+        }
 
     }
 }
@@ -8402,8 +8471,11 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.Container = null;
 
         /**
-         * The clip mode. Valid values: `normal` (default), `fast`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Editing mode. Optional values:
+normal (default): Precise editing
+fast: Fast editing, with faster processing speed but lower precision to some extent
+Note: fast only supports individual files, and the default output transcoding format of normal is h264.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -9817,12 +9889,21 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+         * Notification type:
 
-<font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
+"CMQ": Callback messages are written to the CMQ queue; 
+"URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://intl.cloud.tencent.com/document/product/862/39229?from_cn_redirect=1).
+
+<font color="red">Note: If left blank, it is CMQ by default. To use the other type, you need to fill in the corresponding type value.</font>
          * @type {string || null}
          */
         this.NotifyType = null;
+
+        /**
+         * HTTP callback URL, required if `NotifyType` is set to `URL`
+         * @type {string || null}
+         */
+        this.NotifyUrl = null;
 
         /**
          * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
@@ -9849,12 +9930,6 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * HTTP callback URL, required if `NotifyType` is set to `URL`
-         * @type {string || null}
-         */
-        this.NotifyUrl = null;
-
-        /**
          * Key used to generate a callback signature.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -9871,11 +9946,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
+        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
         this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
         this.NotifyKey = 'NotifyKey' in params ? params.NotifyKey : null;
 
     }
@@ -10134,6 +10209,45 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SegmentSpecificInfo = null;
 
+        /**
+         * Whether to enable scenario-based settings for the template 
+0: disable 
+1: enable 
+ 
+Default value: 0	
+	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ScenarioBased = null;
+
+        /**
+         * Video scenario. Optional values: 
+normal: General transcoding scenario: General transcoding and compression scenario.
+pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+Default value: normal
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SceneType = null;
+
+        /**
+         * Transcoding policy. Optional values: 
+ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+Default value: standard_compress 
+Note: If you need to watch videos on TV, it is recommended no to use the ultra_compress policy. The billing standard for the ultra_compress policy is TSC transcoding + audio and video enhancement - artifacts removal.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CompressType = null;
+
     }
 
     /**
@@ -10172,6 +10286,9 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.SegmentSpecificInfo)
             this.SegmentSpecificInfo = obj;
         }
+        this.ScenarioBased = 'ScenarioBased' in params ? params.ScenarioBased : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.CompressType = 'CompressType' in params ? params.CompressType : null;
 
     }
 }
@@ -11566,69 +11683,68 @@ class QualityControlItemConfig extends  AbstractModel {
         super();
 
         /**
-         * Quality inspection item name. Valid values:
-<li>LowEvaluation: no-reference scoring.</li>
-<li>Mosaic: mosaic detection.</li>
-<li>CrashScreen: screen glitch detection.</li>
-<li>VideoFreezedFrame: video freezing.</li>
-<li>Blur: blur detection.</li>
-<li>BlackWhiteEdge: black and white edges detection.</li>
-<li>SolidColorScreen: solid color screen detection.</li>
-<li>LowLighting: low light.</li>
-<li>HighLighting: overexposure.</li>
-<li>NoVoice: no voice detection.</li>
-<li>LowVoice: low voice detection.</li>
-<li>HighVoice: high voice detection.</li>
-<li>Jitter: jitter detection.</li>
-<li>Noise: noise detection.</li>
+         * Quality control item name. The quality control item values are as follows:
+<li>LowEvaluation: No reference score.</li>
+<li>Mosaic: Mosaic detection.</li>
+<li>CrashScreen: Screen crash detection.</li>
+<li>Blur: Blur detection.</li>
+<li>BlackWhiteEdge: Black and white edge detection.</li>
+<li>SolidColorScreen: Solid color screen detection.</li>
+<li>LowLighting: Low lighting.</li>
+<li>HighLighting: Overexposure.</li>
+<li>NoVoice: Silence detection.</li>
+<li>LowVoice: Low voice detection.</li>
+<li>HighVoice: High voice detection.</li>
+<li>Jitter: Jitter detection.</li>
+<li>Noise: Noise detection.</li>
 <li>QRCode: QR code detection.</li>
-<li>BarCode: barcode detection.</li>
-<li>AppletCode: mini program code detection.</li>
-<li>VideoResolutionChanged: video resolution change.</li>
-<li>AudioSampleRateChanged: audio sample rate change.</li>
-<li>AudioChannelsChanged: audio channel quantity change.</li>
-<li>ParameterSetsChanged: stream parameter set information change.</li>
-<li>DarOrSarInvalid: video aspect ratio exception.</li>
-<li>TimestampFallback: DTS timestamp rollback.</li>
-<li>DtsJitter: DTS jitter too high.</li>
-<li>PtsJitter: PTS jitter too high.</li>
-<li>AACDurationDeviation: improper AAC frame timestamp interval.</li>
-<li>AudioDroppingFrames: audio frame dropping.</li>
-<li>VideoDroppingFrames: video frame dropping.</li>
-<li>AVTimestampInterleave: improper audio-video interleaving.</li>
-<li>PtsLessThanDts: PTS less than DTS for media streams.</li>
-<li>ReceiveFpsJitter: significant jitter in the network receive frame rate.</li>
-<li>ReceiveFpsTooSmall: network receive video frame rate too low.</li>
-<li>FpsJitter: significant jitter in the stream frame rate calculated via PTS.</li>
-<li>StreamOpenFailed: stream open failure.</li>
-<li>StreamEnd: stream end.</li>
-<li>StreamParseFailed: stream parsing failure.</li>
-<li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>
+<li>BarCode: Barcode detection.</li>
+<li>AppletCode: Applet code detection.</li>
+<li>VideoResolutionChanged: The video resolution changed.</li>
+<li>AudioSampleRateChanged: The audio sampling rate changed.</li>
+<li>AudioChannelsChanged: The audio channel count changed.</li>
+<li>ParameterSetsChanged: The stream parameter set information changed.</li>
+<li>DarOrSarInvalid: Abnormal video aspect ratio.</li>
+<li>TimestampFallback: DTS timestamp fallback.</li>
+<li>DtsJitter: Excessive DTS jitter.</li>
+<li>PtsJitter: Excessive PTS jitter.</li>
+<li>AACDurationDeviation: Unreasonable AAC frame timestamp interval.</li>
+<li>AudioDroppingFrames: Audio frame loss.</li>
+<li>VideoDroppingFrames: Video frame loss.</li>
+<li>AVTimestampInterleave: Unreasonable audio and video interleaving.</li>
+<li>PtsLessThanDts: The PTS of media streams is less than DTS.</li>
+<li>ReceiveFpsJitter: Excessive jitter of the frame rate received by the network.</li>
+<li>ReceiveFpsTooSmall: Too low video frame rate received by the network.</li>
+<li>FpsJitter: Excessive stream frame rate jitter calculated through PTS.</li>
+<li>StreamOpenFailed: Stream opening failed.</li>
+<li>StreamEnd: The stream ended.</li>
+<li>StreamParseFailed: Stream parsing failed.</li>
+<li>VideoFirstFrameNotIdr: The first frame is not an IDR frame.</li>
 <li>StreamNALUError: NALU start code error.</li>
-<li>TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.</li>
-<li>AudioStreamLack: no audio stream.</li>
-<li>VideoStreamLack: no video stream.</li>
-<li>LackAudioRecover: missing audio stream recovery.</li>
-<li>LackVideoRecover: missing video stream recovery.</li>
-<li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>
-<li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>
-<li>VideoDecodeFailed: video decoding error.</li>
-<li>AudioDecodeFailed: audio decoding error.</li>
-<li>AudioOutOfPhase: opposite phase in dual-channel audio.</li>
-<li>VideoDuplicatedFrame: duplicate frames in video streams.</li>
-<li>AudioDuplicatedFrame: duplicate frames in audio streams.</li>
-<li>VideoRotation: video rotation.</li>
-<li>TsMultiPrograms: multiple programs in MPEG2-TS streams.</li>
-<li>Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.</li>
-<li>HLSBadM3u8Format: invalid M3U8 file.</li>
-<li>HLSInvalidMasterM3u8: invalid main M3U8 file.</li>
-<li>HLSInvalidMediaM3u8: invalid media M3U8 file.</li>
-<li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.</li>
-<li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.</li>
-<li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.</li>
-<li>HLSMediaSegmentsStreamNumChange: changed number of streams in segments.</li>
-<li>HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.</li>
-<li>HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.</li>
+<li>TsStreamNoAud: The H26x stream of MPEGTS lacks AUD NALU.</li>
+<li>AudioStreamLack: No audio stream.</li>
+<li>VideoStreamLack: No video stream.</li>
+<li>LackAudioRecover: Lack of audio stream recovery.</li>
+<li>LackVideoRecover: Lack of video stream recovery.</li>
+<li>VideoBitrateOutofRange: Out-of-range video stream bitrate (kbps).</li>
+<li>AudioBitrateOutofRange: Out-of-range audio stream bitrate (kbps).</li>
+<li>VideoDecodeFailed: Video decoding error.</li>
+<li>AudioDecodeFailed: Audio decoding error.</li>
+<li>AudioOutOfPhase: Opposite phase in Dual-channel audio.</li>
+<li>VideoDuplicatedFrame: Duplicate frames in the video stream.</li>
+<li>AudioDuplicatedFrame: Duplicate frames in the audio stream.</li>
+<li>VideoRotation: Video image rotation.</li>
+<li>TsMultiPrograms: The MPEG2-TS stream has multiple programs.</li>
+<li>Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements.</li>
+<li>HLSBadM3u8Format: Invalid m3u8 file.</li>
+<li>HLSInvalidMasterM3u8: Invalid main m3u8 file.</li>
+<li>HLSInvalidMediaM3u8: Invalid media m3u8 file.</li>
+<li>HLSMasterM3u8Recommended: The main m3u8 file lacks parameters recommended by the standard.</li>
+<li>HLSMediaM3u8Recommended: The media m3u8 file lacks parameters recommended by the standard.</li>
+<li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY exists in the media m3u8 file.</li>
+<li>HLSMediaSegmentsStreamNumChange: The number of streams in the segment has changed.</li>
+<li>HLSMediaSegmentsPTSJitterDeviation: PTS jitter between segments without EXT-X-DISCONTINUITY.</li>
+<li>HLSMediaSegmentsDTSJitterDeviation: DTS jitter between segments without EXT-X-DISCONTINUITY.</li>
 <li>TimecodeTrackExist: TMCD track in MP4.</li>
          * @type {string || null}
          */
@@ -11866,6 +11982,41 @@ Note 3: The trigger configured for an orchestration is for automatically startin
 }
 
 /**
+ * ProcessImage response structure.
+ * @class
+ */
+class ProcessImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Full text recognition result.
  * @class
  */
@@ -11953,6 +12104,13 @@ class AiAnalysisTaskSegmentOutput extends  AbstractModel {
          */
         this.SegmentSet = null;
 
+        /**
+         * Video abstract, used for offline scenarios.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Abstract = null;
+
     }
 
     /**
@@ -11971,6 +12129,7 @@ class AiAnalysisTaskSegmentOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.Abstract = 'Abstract' in params ? params.Abstract : null;
 
     }
 }
@@ -15502,6 +15661,70 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
 }
 
 /**
+ * ProcessImage request structure.
+ * @class
+ */
+class ProcessImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File input information for image processing.
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * Target storage for image processing output files. If left blank, it inherits the storage location in InputInfo.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Output file path for image processing. If left blank, it is the directory of the file in InputInfo. If it is a directory, such as `/image/201907/`, it means inheriting the original filename and outputting to this directory.
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * Image processing parameter.
+         * @type {ImageTaskInput || null}
+         */
+        this.ImageTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+
+        if (params.ImageTask) {
+            let obj = new ImageTaskInput();
+            obj.deserialize(params.ImageTask)
+            this.ImageTask = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteSampleSnapshotTemplate response structure.
  * @class
  */
@@ -16941,6 +17164,13 @@ class SegmentRecognitionItem extends  AbstractModel {
         this.SegmentUrl = null;
 
         /**
+         * Segment cover.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CovImgUrl = null;
+
+        /**
          * Segment title.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -16953,6 +17183,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.Summary = null;
+
+        /**
+         * Segmentation keywords.
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * The start time of a live streaming segment, in the ISO date format.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * The end time of a live streaming segment, in the ISO date format.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -16967,8 +17217,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.SegmentUrl = 'SegmentUrl' in params ? params.SegmentUrl : null;
+        this.CovImgUrl = 'CovImgUrl' in params ? params.CovImgUrl : null;
         this.Title = 'Title' in params ? params.Title : null;
         this.Summary = 'Summary' in params ? params.Summary : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -17226,6 +17480,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.EnhanceConfig = null;
 
+        /**
+         * Transcoding template alias.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
     }
 
     /**
@@ -17269,6 +17530,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.EnhanceConfig)
             this.EnhanceConfig = obj;
         }
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
 
     }
 }
@@ -17555,58 +17817,24 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * The information about the detected pornographic/sensitive segments.
+ * DescribeMediaMetaData response structure.
  * @class
  */
-class MediaContentReviewSegmentItem extends  AbstractModel {
+class DescribeMediaMetaDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of a suspected segment in seconds.
-         * @type {number || null}
+         * Media metadata.
+         * @type {MediaMetaData || null}
          */
-        this.StartTimeOffset = null;
+        this.MetaData = null;
 
         /**
-         * End time offset of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * Score of a suspected porn segment.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Tag of porn information detection result of a suspected segment.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Label = null;
-
-        /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * URL of a suspected image (which will not be permanently stored
- and will be deleted after `PicUrlExpireTime`).
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.RequestId = null;
 
     }
 
@@ -17617,13 +17845,13 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17668,6 +17896,43 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * Image encoding format parameters
+ * @class
+ */
+class ImageEncodeConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image format. Valid values: JPG, BMP, GIF, PNG, and WebP. The default is the original image format.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Relative image quality. Valid range: 1 - 100. The value is based on the original image quality, and the default is the original image quality.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Quality = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
 
     }
 }
@@ -20304,6 +20569,76 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
 }
 
 /**
+ * Image enhancement parameters
+ * @class
+ */
+class ImageEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Super-resolution configuration.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SuperResolutionConfig || null}
+         */
+        this.SuperResolution = null;
+
+        /**
+         * 
+         * @type {ColorEnhanceConfig || null}
+         */
+        this.ColorEnhance = null;
+
+        /**
+         * 
+         * @type {SharpEnhanceConfig || null}
+         */
+        this.SharpEnhance = null;
+
+        /**
+         * 
+         * @type {FaceEnhanceConfig || null}
+         */
+        this.FaceEnhance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SuperResolution) {
+            let obj = new SuperResolutionConfig();
+            obj.deserialize(params.SuperResolution)
+            this.SuperResolution = obj;
+        }
+
+        if (params.ColorEnhance) {
+            let obj = new ColorEnhanceConfig();
+            obj.deserialize(params.ColorEnhance)
+            this.ColorEnhance = obj;
+        }
+
+        if (params.SharpEnhance) {
+            let obj = new SharpEnhanceConfig();
+            obj.deserialize(params.SharpEnhance)
+            this.SharpEnhance = obj;
+        }
+
+        if (params.FaceEnhance) {
+            let obj = new FaceEnhanceConfig();
+            obj.deserialize(params.FaceEnhance)
+            this.FaceEnhance = obj;
+        }
+
+    }
+}
+
+/**
  * The watermark parameters to use in a media processing task.
  * @class
  */
@@ -21177,6 +21512,45 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SegmentSpecificInfo = null;
 
+        /**
+         * Whether to enable scenario-based settings for the template 
+0: disable 
+1: enable 
+ 
+Default value: 0	
+	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ScenarioBased = null;
+
+        /**
+         * Video scenario. Optional values: 
+normal: General transcoding scenario: General transcoding and compression scenario
+pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed.
+Default value: normal
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SceneType = null;
+
+        /**
+         * Transcoding policy. Optional values: 
+ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+Default value: standard_compress 
+Note: If you need to watch videos on TV, it is recommended no to use the ultra_compress policy. The billing standard for the ultra_compress policy is TSC transcoding + audio and video enhancement - artifacts removal.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CompressType = null;
+
     }
 
     /**
@@ -21216,6 +21590,9 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.SegmentSpecificInfo)
             this.SegmentSpecificInfo = obj;
         }
+        this.ScenarioBased = 'ScenarioBased' in params ? params.ScenarioBased : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.CompressType = 'CompressType' in params ? params.CompressType : null;
 
     }
 }
@@ -24526,6 +24903,48 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * Word information.
+ * @class
+ */
+class WordResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Word text.
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * Word start timestamp, in seconds.
+         * @type {number || null}
+         */
+        this.Start = null;
+
+        /**
+         * Word end timestamp, in seconds.
+         * @type {number || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
  * Control parameter of a porn information detection task.
  * @class
  */
@@ -24859,24 +25278,58 @@ If one or both parameters are empty or set to `0`:
 }
 
 /**
- * DescribeMediaMetaData response structure.
+ * The information about the detected pornographic/sensitive segments.
  * @class
  */
-class DescribeMediaMetaDataResponse extends  AbstractModel {
+class MediaContentReviewSegmentItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Media metadata.
-         * @type {MediaMetaData || null}
+         * Start time offset of a suspected segment in seconds.
+         * @type {number || null}
          */
-        this.MetaData = null;
+        this.StartTimeOffset = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * End time offset of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Score of a suspected porn segment.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Tag of porn information detection result of a suspected segment.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Label = null;
+
+        /**
+         * Suggestion for porn information detection of a suspected segment. Valid values:
+<li>pass.</li>
+<li>review.</li>
+<li>block.</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * URL of a suspected image (which will not be permanently stored
+ and will be deleted after `PicUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
 
     }
 
@@ -24887,13 +25340,13 @@ class DescribeMediaMetaDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.MetaData) {
-            let obj = new MediaMetaData();
-            obj.deserialize(params.MetaData)
-            this.MetaData = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -25329,6 +25782,30 @@ This parameter is left empty by default, which indicates to return all types of 
          */
         this.Name = null;
 
+        /**
+         * Video scenario. Optional values: 
+normal: General transcoding scenario: General transcoding and compression scenario. 
+pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+no_config: Not configured.
+         * @type {string || null}
+         */
+        this.SceneType = null;
+
+        /**
+         * Transcoding policy. Optional values: 
+ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+no_config: Not configured.
+         * @type {string || null}
+         */
+        this.CompressType = null;
+
     }
 
     /**
@@ -25346,6 +25823,8 @@ This parameter is left empty by default, which indicates to return all types of 
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.TranscodeType = 'TranscodeType' in params ? params.TranscodeType : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.CompressType = 'CompressType' in params ? params.CompressType : null;
 
     }
 }
@@ -29230,6 +29709,12 @@ class AiRecognitionTaskTransTextSegmentItem extends  AbstractModel {
          */
         this.Trans = null;
 
+        /**
+         * Word timestamp information.
+         * @type {Array.<WordResult> || null}
+         */
+        this.Wordlist = null;
+
     }
 
     /**
@@ -29244,6 +29729,15 @@ class AiRecognitionTaskTransTextSegmentItem extends  AbstractModel {
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.Trans = 'Trans' in params ? params.Trans : null;
+
+        if (params.Wordlist) {
+            this.Wordlist = new Array();
+            for (let z in params.Wordlist) {
+                let obj = new WordResult();
+                obj.deserialize(params.Wordlist[z]);
+                this.Wordlist.push(obj);
+            }
+        }
 
     }
 }
@@ -29498,6 +29992,7 @@ module.exports = {
     HdrConfig: HdrConfig,
     ScheduleTask: ScheduleTask,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
+    ImageTaskInput: ImageTaskInput,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     CosInputInfo: CosInputInfo,
     CreateScheduleResponse: CreateScheduleResponse,
@@ -29615,6 +30110,7 @@ module.exports = {
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     QualityControlItemConfig: QualityControlItemConfig,
     ProcessMediaRequest: ProcessMediaRequest,
+    ProcessImageResponse: ProcessImageResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     AiAnalysisTaskSegmentOutput: AiAnalysisTaskSegmentOutput,
     ComposeVideoItem: ComposeVideoItem,
@@ -29677,6 +30173,7 @@ module.exports = {
     AiAnalysisResult: AiAnalysisResult,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
+    ProcessImageRequest: ProcessImageRequest,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     AiAnalysisTaskDescriptionResult: AiAnalysisTaskDescriptionResult,
@@ -29714,8 +30211,9 @@ module.exports = {
     SubtitleTemplate: SubtitleTemplate,
     LiveStreamProcessTask: LiveStreamProcessTask,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
-    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    DescribeMediaMetaDataResponse: DescribeMediaMetaDataResponse,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
+    ImageEncodeConfig: ImageEncodeConfig,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
     AiAnalysisTaskDelLogoOutput: AiAnalysisTaskDelLogoOutput,
@@ -29760,6 +30258,7 @@ module.exports = {
     MediaProcessTaskResult: MediaProcessTaskResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
     LiveStreamTransTextRecognitionResult: LiveStreamTransTextRecognitionResult,
+    ImageEnhanceConfig: ImageEnhanceConfig,
     WatermarkInput: WatermarkInput,
     EnableWorkflowResponse: EnableWorkflowResponse,
     Activity: Activity,
@@ -29826,12 +30325,13 @@ module.exports = {
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
     AddOnSubtitle: AddOnSubtitle,
     AwsSQS: AwsSQS,
+    WordResult: WordResult,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     QualityControlData: QualityControlData,
     DrmInfo: DrmInfo,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     ComposeImageItem: ComposeImageItem,
-    DescribeMediaMetaDataResponse: DescribeMediaMetaDataResponse,
+    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     AiContentReviewResult: AiContentReviewResult,
     LiveActivityResult: LiveActivityResult,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,

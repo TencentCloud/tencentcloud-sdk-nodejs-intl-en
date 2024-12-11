@@ -97,6 +97,7 @@ const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const HdrConfig = models.HdrConfig;
 const ScheduleTask = models.ScheduleTask;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
+const ImageTaskInput = models.ImageTaskInput;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const CosInputInfo = models.CosInputInfo;
 const CreateScheduleResponse = models.CreateScheduleResponse;
@@ -214,6 +215,7 @@ const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const QualityControlItemConfig = models.QualityControlItemConfig;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const ProcessImageResponse = models.ProcessImageResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const AiAnalysisTaskSegmentOutput = models.AiAnalysisTaskSegmentOutput;
 const ComposeVideoItem = models.ComposeVideoItem;
@@ -276,6 +278,7 @@ const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const AiAnalysisResult = models.AiAnalysisResult;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
+const ProcessImageRequest = models.ProcessImageRequest;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const AiAnalysisTaskDescriptionResult = models.AiAnalysisTaskDescriptionResult;
@@ -313,8 +316,9 @@ const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const SubtitleTemplate = models.SubtitleTemplate;
 const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
-const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
+const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
+const ImageEncodeConfig = models.ImageEncodeConfig;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
 const AiAnalysisTaskDelLogoOutput = models.AiAnalysisTaskDelLogoOutput;
@@ -359,6 +363,7 @@ const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSeg
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
 const LiveStreamTransTextRecognitionResult = models.LiveStreamTransTextRecognitionResult;
+const ImageEnhanceConfig = models.ImageEnhanceConfig;
 const WatermarkInput = models.WatermarkInput;
 const EnableWorkflowResponse = models.EnableWorkflowResponse;
 const Activity = models.Activity;
@@ -425,12 +430,13 @@ const ComposeSubtitleItem = models.ComposeSubtitleItem;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const AddOnSubtitle = models.AddOnSubtitle;
 const AwsSQS = models.AwsSQS;
+const WordResult = models.WordResult;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const QualityControlData = models.QualityControlData;
 const DrmInfo = models.DrmInfo;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
 const ComposeImageItem = models.ComposeImageItem;
-const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
+const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const AiContentReviewResult = models.AiContentReviewResult;
 const LiveActivityResult = models.LiveActivityResult;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
@@ -1016,6 +1022,19 @@ Instead of initiating a video processing task, this API is used to help generate
     DescribeAnimatedGraphicsTemplates(req, cb) {
         let resp = new DescribeAnimatedGraphicsTemplatesResponse();
         this.request("DescribeAnimatedGraphicsTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate image processing. Its features include:
+1. Format conversion;
+2. Image enhancement;
+     * @param {ProcessImageRequest} req
+     * @param {function(string, ProcessImageResponse):void} cb
+     * @public
+     */
+    ProcessImage(req, cb) {
+        let resp = new ProcessImageResponse();
+        this.request("ProcessImage", req, resp, cb);
     }
 
     /**

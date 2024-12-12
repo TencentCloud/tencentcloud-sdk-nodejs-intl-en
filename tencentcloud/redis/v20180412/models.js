@@ -7454,7 +7454,7 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
          * Retention duration of the original private IPv4 address.
 - Unit: day.
 - Valid values: 0, 1, 2, 3, 7, and 15.
-
+**Note**: If the retention duration is not set or set to 0, the original network address will be released immediately.
          * @type {number || null}
          */
         this.Recycle = null;

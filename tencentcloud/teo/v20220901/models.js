@@ -410,6 +410,84 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * Origin group record
+ * @class
+ */
+class OriginRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The origin record value, which can be an IPv4/IPv6 address or a domain name.
+         * @type {string || null}
+         */
+        this.Record = null;
+
+        /**
+         * The origin type. Values:
+<li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
+<li>`COS`: COS bucket address</li>
+<li>`AWS_S3`: AWS S3 bucket address
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The origin record ID.
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * Weight of an origin. Range: 0-100. If it is not specified, a random weight is assigned. If `0` is passed in, there is no traffic scheduled to this origin.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Whether to enable private authentication. It is valid when `OriginType=COS/AWS_S3`. Values:
+<li>`true`: Yes.</li>
+<li>`false`: No.</li>Default: `false`.
+
+         * @type {boolean || null}
+         */
+        this.Private = null;
+
+        /**
+         * Private authentication parameters. This field is valid when `Private=true`.
+         * @type {Array.<PrivateParameter> || null}
+         */
+        this.PrivateParameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Record = 'Record' in params ? params.Record : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.Private = 'Private' in params ? params.Private : null;
+
+        if (params.PrivateParameters) {
+            this.PrivateParameters = new Array();
+            for (let z in params.PrivateParameters) {
+                let obj = new PrivateParameter();
+                obj.deserialize(params.PrivateParameters[z]);
+                this.PrivateParameters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeConfigGroupVersionDetail response structure.
  * @class
  */
@@ -2346,29 +2424,29 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The metrics queried. Valid values:
-<li> l7Flow_outFlux_country: statistics of the L7 EdgeOne response traffic by country/region;</li>
-<li> l7Flow_outFlux_province: statistics of the L7 EdgeOne response traffic by province within the Chinese mainland;</li>
-<li> l7Flow_outFlux_statusCode: statistics of the L7 EdgeOne response traffic by status code;</li>
-<li> l7Flow_outFlux_domain: statistics of the L7 EdgeOne response traffic by domain name;</li>
-<li> l7Flow_outFlux_url: statistics of the L7 EdgeOne response traffic by URL path;</li>
-<li> l7Flow_outFlux_resourceType: statistics of the L7 EdgeOne response traffic by resource type;</li>
-<li> l7Flow_outFlux_sip: statistics of the L7 EdgeOne response traffic by client IP;</li>
-<li> l7Flow_outFlux_referers: statistics of the L7 EdgeOne response traffic by Referer;</li>
-<li> l7Flow_outFlux_ua_device: statistics of the L7 EdgeOne response traffic by device type;</li>
-<li> l7Flow_outFlux_ua_browser: statistics of the L7 EdgeOne response traffic by browser type;</li>
-<li> l7Flow_outFlux_us_os: statistics of the L7 EdgeOne response traffic by operating system type;</li>
-<li> l7Flow_request_country: statistics of the L7 access request count by country/region;</li>
-<li> l7Flow_request_province: statistics of the L7 access request count by province within the Chinese mainland;</li>
-<li> l7Flow_request_statusCode: statistics of the L7 access request count by status code;</li>
-<li> l7Flow_request_domain: statistics of the L7 access request count by domain name;</li>
-<li> l7Flow_request_url: statistics of the L7 access request count by URL path;</li>
-<li> l7Flow_request_resourceType: statistics of the L7 access request count by resource type;</li>
-<li> l7Flow_request_sip: statistics of the L7 access request count by client IP;</li>
-<li> l7Flow_request_referer: statistics of the L7 access request count by Referer;</li>
-<li> l7Flow_request_ua_device: statistics of the L7 access request count by device type;</li>
-<li> l7Flow_request_ua_browser: statistics of the L7 access request count by browser type;</li>
-<li> l7Flow_request_us_os: statistics of the L7 access request count by operating system type.</li>
+         * Queried metric. Valid values:
+<li> l7Flow_outFlux_country: L7 EdgeOne response traffic metric counted by the country/region dimension;</li>
+<li> l7Flow_outFlux_province: L7 EdgeOne response traffic metric counted by the dimension of provinces in Chinese mainland;</li>
+<li> l7Flow_outFlux_statusCode: L7 EdgeOne response traffic metric counted by the status code dimension;</li>
+<li> l7Flow_outFlux_domain: L7 EdgeOne response traffic metric counted by the domain name dimension;</li>
+<li> l7Flow_outFlux_url: L7 EdgeOne response traffic metric counted by the URL path dimension;</li>
+<li> l7Flow_outFlux_resourceType: L7 EdgeOne response traffic metric counted by the resource type dimension;</li>
+<li> l7Flow_outFlux_sip: L7 EdgeOne response traffic metric counted by the client IP dimension;</li>
+<li> l7Flow_outFlux_referers: L7 EdgeOne response traffic metric counted by the referer dimension;</li>
+<li> l7Flow_outFlux_ua_device: L7 EdgeOne response traffic metric counted by the device type dimension;</li>
+<li> l7Flow_outFlux_ua_browser: L7 EdgeOne response traffic metric counted by the browser type dimension;</li>
+<li> l7Flow_outFlux_ua_os: L7 EdgeOne response traffic metric counted by the operating system type dimension;</li>
+<li> l7Flow_request_country: L7 access request count metric counted by the country/region dimension;</li>
+<li> l7Flow_request_province: L7 access request count metric counted by the dimension of provinces in the Chinese mainland;</li>
+<li> l7Flow_request_statusCode: L7 access request count metric counted by the status code dimension;</li>
+<li> l7Flow_request_domain: L7 access request count metric counted by the domain name dimension;</li>
+<li> l7Flow_request_url: L7 access request count metrics counted by the URL path dimension;</li>
+<li> l7Flow_request_resourceType: L7 access request count metric counted by the resource type dimension;</li>
+<li> l7Flow_request_sip: L7 access request count metric counted by the client IP dimension;</li>
+<li> l7Flow_request_referer: L7 access request count metric counted by the referer dimension;</li>
+<li> l7Flow_request_ua_device: L7 access request count metric counted by the device type dimension;</li>
+<li> l7Flow_request_ua_browser: L7 access request count metric counted by the browser type dimension;</li>
+<li> l7Flow_request_ua_os: L7 access request count metric counted by the operating system type dimension.</li>
 
          * @type {string || null}
          */
@@ -6564,20 +6642,31 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Offline cache feature status switch.
+ * CreateL4ProxyRules request structure.
  * @class
  */
-class OfflineCache extends  AbstractModel {
+class CreateL4ProxyRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether offline cache is enabled. Valid values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
+         * Zone ID.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.ZoneId = null;
+
+        /**
+         * Layer 4 proxy instance ID.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * List of forwarding rules. A single request supports up to 200 forwarding rules.
+Note: When L4ProxyRule is used here, Protocol, PortRange, OriginType, OriginValue, and OriginPortRange are required fields; ClientIPPassThroughMode, SessionPersist, SessionPersistTime, and RuleTag are optional fields; do not fill in RuleId and Status.
+         * @type {Array.<L4ProxyRule> || null}
+         */
+        this.L4ProxyRules = null;
 
     }
 
@@ -6588,7 +6677,17 @@ class OfflineCache extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+
+        if (params.L4ProxyRules) {
+            this.L4ProxyRules = new Array();
+            for (let z in params.L4ProxyRules) {
+                let obj = new L4ProxyRule();
+                obj.deserialize(params.L4ProxyRules[z]);
+                this.L4ProxyRules.push(obj);
+            }
+        }
 
     }
 }
@@ -9388,55 +9487,48 @@ class DescribeZonesRequest extends  AbstractModel {
 }
 
 /**
- * Origin group record
+ * DescribeZoneConfigImportResult response structure.
  * @class
  */
-class OriginRecord extends  AbstractModel {
+class DescribeZoneConfigImportResultResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The origin record value, which can be an IPv4/IPv6 address or a domain name.
+         * The status of this import task. Valid values: <li>success: It indicates the configuration was successfully imported;</li> <li>failure: It indicates the configuration import failed;</li> <li>doing: It indicates the configuration is being imported.</li>
          * @type {string || null}
          */
-        this.Record = null;
+        this.Status = null;
 
         /**
-         * The origin type. Values:
-<li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
-<li>`COS`: COS bucket address</li>
-<li>`AWS_S3`: AWS S3 bucket address
+         * The status message of this import task. If the configuration item import fails, you can view the failure cause through this field.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Message = null;
 
         /**
-         * The origin record ID.
+         * The configuration content of this import task.
          * @type {string || null}
          */
-        this.RecordId = null;
+        this.Content = null;
 
         /**
-         * Weight of an origin. Range: 0-100. If it is not specified, a random weight is assigned. If `0` is passed in, there is no traffic scheduled to this origin.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * The start time of this import task.
+         * @type {string || null}
          */
-        this.Weight = null;
+        this.ImportTime = null;
 
         /**
-         * Whether to enable private authentication. It is valid when `OriginType=COS/AWS_S3`. Values:
-<li>`true`: Yes.</li>
-<li>`false`: No.</li>Default: `false`.
-
-         * @type {boolean || null}
+         * The end time of this import task.
+         * @type {string || null}
          */
-        this.Private = null;
+        this.FinishTime = null;
 
         /**
-         * Private authentication parameters. This field is valid when `Private=true`.
-         * @type {Array.<PrivateParameter> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.PrivateParameters = null;
+        this.RequestId = null;
 
     }
 
@@ -9447,20 +9539,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.Record = 'Record' in params ? params.Record : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.Private = 'Private' in params ? params.Private : null;
-
-        if (params.PrivateParameters) {
-            this.PrivateParameters = new Array();
-            for (let z in params.PrivateParameters) {
-                let obj = new PrivateParameter();
-                obj.deserialize(params.PrivateParameters[z]);
-                this.PrivateParameters.push(obj);
-            }
-        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ImportTime = 'ImportTime' in params ? params.ImportTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10815,25 +10899,25 @@ class RuleCondition extends  AbstractModel {
         this.Operator = null;
 
         /**
-         * Match type. Valid values: <li> filename: File name; </li> <li> extension: File extension; </li> <li> host: Host name; </li> <li> full_url: The complete URL path under the current site, which must include the HTTP protocol, host, and path; </li> <li> url: Request for the URL path under the current site; </li><li> client_country: Client country/region;</li> <li> query_string: The query string of the URL requested under the current site; </li> <li> request_header: HTTP request header; </li><li> client_ip: Client IP address; </li><li> request_protocol: Request Protocol; </li><li> request_method: HTTP Request Methods. </li>
+         * Matching type. Valid values: <li>filename: Filename;</li><li>extension: File suffix;</li><li>host: Host;</li><li>full_url: A complete URL path under the current site, including the HTTP protocol, the host, and the path;</li><li>url: The request for a URL path under the current site;</li><li>client_country: Client country/region;</li><li>query_string: The query string for a requested URL under the current site;</li><li>request_header: HTTP request header;</li><li>client_ip: Client IP;</li><li>request_protocol: Request protocol;</li><li>request_method: HTTP request method.</li>
          * @type {string || null}
          */
         this.Target = null;
 
         /**
-         * The parameter values for match types. It is allowed to pass an empty array only when the match type is query_string or request_header and the operator value is Exist or Does Not Exist. The corresponding match types include:
-<li> File extension: Extensions like jpg, txt, etc.;</li>
-<li> File name: For example, foo in foo.jpg;</li>
-<li> All: All requests for domain names under the site; </li>
-<li> HOST: The host under the current site, for example, www.maxx55.com;</li>
-<li> URL Path: Request for the URL path under the current site, for example, /example;</li>
-<li> URL Full: The complete URL request under the current site, which must include the HTTP protocol, host, and path, for example, https://www.maxx55.cn/example;</li>
-<li> Client country/region: Country/region codes compliant with the ISO3166 standard;</li>
-<li> Query string: The parameter values in the query string of the URL requested under the current site, for example, cn and 1 in lang=cn&version=1; </li>
-<li> HTTP request header: The value of the HTTP request header field, for example, zh-CN,zh;q=0.9 in Accept-Language:zh-CN,zh;q=0.9; </li>
-<li> Client IP: The client IP address carried by the current request, supporting IPv4, IPv6, and an IP range; </li>
-<li> Request Protocol: The protocol of the current request, with possible values: HTTP, HTTPS; </li>
-<li> HTTP Request Methods: The method of the current request, with possible values: GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT, OPTIONS, PATCH, COPY, LOCK, MKCOL, MOVE, PROPFIND, PROPPATCH, UNLOCK. </li>
+         * Parameter values for corresponding matching types. It is allowed to pass an empty array only when the matching type is query_string or request_header and the operator value is exist or not exist. Corresponding match types include:
+<li>extension: File suffix such as jpg or txt;</li>
+<li> filename: For example, foo in foo.jpg;</li>
+<li> all (any request under the site): all;</li>
+<li> host: The host under the current site. For example, www.maxx55.com;</li>
+<li> URL path: The request for a URL path under the current site. For example, /example;</li>
+<li> URL full: The request for a complete URL under the current site, including the HTTP protocol, the host, and the path. For example: https://www.maxx55.cn/example;</li>
+<li> client_country: Country/region identifier compliant with the ISO3166 standard;</li>
+<li> query_string: The parameter value in the query string of the requested URL under the current site. For example, cn and 1 in lang=cn&version=1;</li>
+<li> request_header: The value of the HTTP request header field. For example, zh-CN,zh;q=0.9 in Accept-Language:zh-CN,zh;q=0.9;</li>
+<li> client_ip: The client request IP carried in the current request, which supports IPv4/IPv6 and an IP range;</li>
+<li> request_protocol: The protocol of the current request. Valid values: HTTP and HTTPS;</li>
+<li> request_method: The method of the current request. Valid values: GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT, OPTIONS, PATCH, COPY, LOCK, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. </li>
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -12257,31 +12341,20 @@ class JITVideoProcess extends  AbstractModel {
 }
 
 /**
- * CreateL4ProxyRules request structure.
+ * Offline cache feature status switch.
  * @class
  */
-class CreateL4ProxyRulesRequest extends  AbstractModel {
+class OfflineCache extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Zone ID.
+         * Whether offline cache is enabled. Valid values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
          * @type {string || null}
          */
-        this.ZoneId = null;
-
-        /**
-         * Layer 4 proxy instance ID.
-         * @type {string || null}
-         */
-        this.ProxyId = null;
-
-        /**
-         * List of forwarding rules. A single request supports up to 200 forwarding rules.
-Note: When L4ProxyRule is used here, Protocol, PortRange, OriginType, OriginValue, and OriginPortRange are required fields; ClientIPPassThroughMode, SessionPersist, SessionPersistTime, and RuleTag are optional fields; do not fill in RuleId and Status.
-         * @type {Array.<L4ProxyRule> || null}
-         */
-        this.L4ProxyRules = null;
+        this.Switch = null;
 
     }
 
@@ -12292,15 +12365,52 @@ Note: When L4ProxyRule is used here, Protocol, PortRange, OriginType, OriginValu
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
-        if (params.L4ProxyRules) {
-            this.L4ProxyRules = new Array();
-            for (let z in params.L4ProxyRules) {
-                let obj = new L4ProxyRule();
-                obj.deserialize(params.L4ProxyRules[z]);
-                this.L4ProxyRules.push(obj);
+    }
+}
+
+/**
+ * Bot intelligence rules
+ * @class
+ */
+class IntelligenceRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Items in a bot intelligence rule
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<IntelligenceRuleItem> || null}
+         */
+        this.IntelligenceRuleItems = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.IntelligenceRuleItems) {
+            this.IntelligenceRuleItems = new Array();
+            for (let z in params.IntelligenceRuleItems) {
+                let obj = new IntelligenceRuleItem();
+                obj.deserialize(params.IntelligenceRuleItems[z]);
+                this.IntelligenceRuleItems.push(obj);
             }
         }
 
@@ -13011,6 +13121,41 @@ class CheckCnameStatusResponse extends  AbstractModel {
                 this.CnameStatus.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImportZoneConfig response structure.
+ * @class
+ */
+class ImportZoneConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * It indicates the task ID of this import configuration. You can obtain the result of this import task through the site configuration import result query API (DescribeZoneConfigImportResult). Note: The import task ID is only retained for 7 days.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -17730,6 +17875,41 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * DescribeZoneConfigImportResult request structure.
+ * @class
+ */
+class DescribeZoneConfigImportResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * It indicates the configuration import task ID for which the result needs to be queried. The import task ID is only retained for 7 days.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * ModifyApplicationProxyRuleStatus request structure.
  * @class
  */
@@ -19493,6 +19673,42 @@ class DescribeOriginGroupHealthStatusRequest extends  AbstractModel {
 }
 
 /**
+ * ExportZoneConfig request structure.
+ * @class
+ */
+class ExportZoneConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * It indicates exporting the type list of configuration . If it is left blank, all types of configurations will be exported. Currently supported valid values:<li>L7AccelerationConfig: It indicates exporting the Layer-7 acceleration configuration, corresponding to the console's "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li>
+Note: The types that will be supported for export in the future will increase with iterations. When exporting all types, pay attention to the export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
+         * @type {Array.<string> || null}
+         */
+        this.Types = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Types = 'Types' in params ? params.Types : null;
+
+    }
+}
+
+/**
  * Details of Layer 4 proxy forwarding rules.
  * @class
  */
@@ -20397,6 +20613,41 @@ class AliasDomain extends  AbstractModel {
         this.ForbidMode = 'ForbidMode' in params ? params.ForbidMode : null;
         this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
         this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
+
+    }
+}
+
+/**
+ * ImportZoneConfig request structure.
+ * @class
+ */
+class ImportZoneConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The configuration content to be imported, which should be in the JSON format and be encoded in the UTF-8 mode. The configuration content can be obtained through the site configuration export API (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine" by passing in the corresponding fields. Refer to the example below for details.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -22194,28 +22445,24 @@ class IntelligenceRuleItem extends  AbstractModel {
 }
 
 /**
- * Bot intelligence rules
+ * ExportZoneConfig response structure.
  * @class
  */
-class IntelligenceRule extends  AbstractModel {
+class ExportZoneConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch. Values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The specific content of the exported configuration, returned in the JSON format and encoded in the UTF-8 mode. Refer to the example below for the configuration content.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Content = null;
 
         /**
-         * Items in a bot intelligence rule
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<IntelligenceRuleItem> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.IntelligenceRuleItems = null;
+        this.RequestId = null;
 
     }
 
@@ -22226,16 +22473,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.IntelligenceRuleItems) {
-            this.IntelligenceRuleItems = new Array();
-            for (let z in params.IntelligenceRuleItems) {
-                let obj = new IntelligenceRuleItem();
-                obj.deserialize(params.IntelligenceRuleItems[z]);
-                this.IntelligenceRuleItems.push(obj);
-            }
-        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23870,6 +24109,7 @@ module.exports = {
     DescribeOriginGroupResponse: DescribeOriginGroupResponse,
     DescribeSecurityIPGroupInfoResponse: DescribeSecurityIPGroupInfoResponse,
     SlowPostConfig: SlowPostConfig,
+    OriginRecord: OriginRecord,
     DescribeConfigGroupVersionDetailResponse: DescribeConfigGroupVersionDetailResponse,
     OriginDetail: OriginDetail,
     RealtimeLogDeliveryTask: RealtimeLogDeliveryTask,
@@ -23974,7 +24214,7 @@ module.exports = {
     L4ProxyRemoteAuth: L4ProxyRemoteAuth,
     AlgDetectResult: AlgDetectResult,
     DefaultServerCertInfo: DefaultServerCertInfo,
-    OfflineCache: OfflineCache,
+    CreateL4ProxyRulesRequest: CreateL4ProxyRulesRequest,
     DescribeDDoSAttackTopDataResponse: DescribeDDoSAttackTopDataResponse,
     LoadBalancer: LoadBalancer,
     DeleteRulesRequest: DeleteRulesRequest,
@@ -24023,7 +24263,7 @@ module.exports = {
     CnameStatus: CnameStatus,
     ServerCertInfo: ServerCertInfo,
     DescribeZonesRequest: DescribeZonesRequest,
-    OriginRecord: OriginRecord,
+    DescribeZoneConfigImportResultResponse: DescribeZoneConfigImportResultResponse,
     Tag: Tag,
     ModifyFunctionRulePriorityRequest: ModifyFunctionRulePriorityRequest,
     DeleteSharedCNAMERequest: DeleteSharedCNAMERequest,
@@ -24075,7 +24315,8 @@ module.exports = {
     UpgradePlanResponse: UpgradePlanResponse,
     AclConfig: AclConfig,
     JITVideoProcess: JITVideoProcess,
-    CreateL4ProxyRulesRequest: CreateL4ProxyRulesRequest,
+    OfflineCache: OfflineCache,
+    IntelligenceRule: IntelligenceRule,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
     CreateConfigGroupVersionRequest: CreateConfigGroupVersionRequest,
     AclUserRule: AclUserRule,
@@ -24089,6 +24330,7 @@ module.exports = {
     CreatePlanForZoneResponse: CreatePlanForZoneResponse,
     ModifyL4ProxyRulesStatusResponse: ModifyL4ProxyRulesStatusResponse,
     CheckCnameStatusResponse: CheckCnameStatusResponse,
+    ImportZoneConfigResponse: ImportZoneConfigResponse,
     CustomEndpoint: CustomEndpoint,
     VerifyOwnershipRequest: VerifyOwnershipRequest,
     DeleteL4ProxyRequest: DeleteL4ProxyRequest,
@@ -24173,6 +24415,7 @@ module.exports = {
     DropPageConfig: DropPageConfig,
     DescribeSecurityIPGroupInfoRequest: DescribeSecurityIPGroupInfoRequest,
     PartialModule: PartialModule,
+    DescribeZoneConfigImportResultRequest: DescribeZoneConfigImportResultRequest,
     ModifyApplicationProxyRuleStatusRequest: ModifyApplicationProxyRuleStatusRequest,
     AccelerateType: AccelerateType,
     DeliveryCondition: DeliveryCondition,
@@ -24203,6 +24446,7 @@ module.exports = {
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
     Https: Https,
     DescribeOriginGroupHealthStatusRequest: DescribeOriginGroupHealthStatusRequest,
+    ExportZoneConfigRequest: ExportZoneConfigRequest,
     L4ProxyRule: L4ProxyRule,
     AdvancedFilter: AdvancedFilter,
     DescribeDDoSAttackDataResponse: DescribeDDoSAttackDataResponse,
@@ -24219,6 +24463,7 @@ module.exports = {
     AlgDetectSession: AlgDetectSession,
     OriginProtectionInfo: OriginProtectionInfo,
     AliasDomain: AliasDomain,
+    ImportZoneConfigRequest: ImportZoneConfigRequest,
     IpTableRule: IpTableRule,
     ModifyFunctionRuleRequest: ModifyFunctionRuleRequest,
     IncreasePlanQuotaRequest: IncreasePlanQuotaRequest,
@@ -24253,7 +24498,7 @@ module.exports = {
     StandardDebug: StandardDebug,
     BindSecurityTemplateToEntityRequest: BindSecurityTemplateToEntityRequest,
     IntelligenceRuleItem: IntelligenceRuleItem,
-    IntelligenceRule: IntelligenceRule,
+    ExportZoneConfigResponse: ExportZoneConfigResponse,
     PostMaxSize: PostMaxSize,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     Filter: Filter,

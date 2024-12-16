@@ -24,6 +24,7 @@ const DeleteL4ProxyRulesRequest = models.DeleteL4ProxyRulesRequest;
 const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoResponse;
 const SlowPostConfig = models.SlowPostConfig;
+const OriginRecord = models.OriginRecord;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
 const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
@@ -128,7 +129,7 @@ const DescribeSecurityTemplateBindingsRequest = models.DescribeSecurityTemplateB
 const L4ProxyRemoteAuth = models.L4ProxyRemoteAuth;
 const AlgDetectResult = models.AlgDetectResult;
 const DefaultServerCertInfo = models.DefaultServerCertInfo;
-const OfflineCache = models.OfflineCache;
+const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
 const DescribeDDoSAttackTopDataResponse = models.DescribeDDoSAttackTopDataResponse;
 const LoadBalancer = models.LoadBalancer;
 const DeleteRulesRequest = models.DeleteRulesRequest;
@@ -177,7 +178,7 @@ const DropPageDetail = models.DropPageDetail;
 const CnameStatus = models.CnameStatus;
 const ServerCertInfo = models.ServerCertInfo;
 const DescribeZonesRequest = models.DescribeZonesRequest;
-const OriginRecord = models.OriginRecord;
+const DescribeZoneConfigImportResultResponse = models.DescribeZoneConfigImportResultResponse;
 const Tag = models.Tag;
 const ModifyFunctionRulePriorityRequest = models.ModifyFunctionRulePriorityRequest;
 const DeleteSharedCNAMERequest = models.DeleteSharedCNAMERequest;
@@ -229,7 +230,8 @@ const CacheConfig = models.CacheConfig;
 const UpgradePlanResponse = models.UpgradePlanResponse;
 const AclConfig = models.AclConfig;
 const JITVideoProcess = models.JITVideoProcess;
-const CreateL4ProxyRulesRequest = models.CreateL4ProxyRulesRequest;
+const OfflineCache = models.OfflineCache;
+const IntelligenceRule = models.IntelligenceRule;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const CreateConfigGroupVersionRequest = models.CreateConfigGroupVersionRequest;
 const AclUserRule = models.AclUserRule;
@@ -243,6 +245,7 @@ const TimingTypeValue = models.TimingTypeValue;
 const CreatePlanForZoneResponse = models.CreatePlanForZoneResponse;
 const ModifyL4ProxyRulesStatusResponse = models.ModifyL4ProxyRulesStatusResponse;
 const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
+const ImportZoneConfigResponse = models.ImportZoneConfigResponse;
 const CustomEndpoint = models.CustomEndpoint;
 const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
 const DeleteL4ProxyRequest = models.DeleteL4ProxyRequest;
@@ -327,6 +330,7 @@ const RuleAndConditions = models.RuleAndConditions;
 const DropPageConfig = models.DropPageConfig;
 const DescribeSecurityIPGroupInfoRequest = models.DescribeSecurityIPGroupInfoRequest;
 const PartialModule = models.PartialModule;
+const DescribeZoneConfigImportResultRequest = models.DescribeZoneConfigImportResultRequest;
 const ModifyApplicationProxyRuleStatusRequest = models.ModifyApplicationProxyRuleStatusRequest;
 const AccelerateType = models.AccelerateType;
 const DeliveryCondition = models.DeliveryCondition;
@@ -357,6 +361,7 @@ const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const Https = models.Https;
 const DescribeOriginGroupHealthStatusRequest = models.DescribeOriginGroupHealthStatusRequest;
+const ExportZoneConfigRequest = models.ExportZoneConfigRequest;
 const L4ProxyRule = models.L4ProxyRule;
 const AdvancedFilter = models.AdvancedFilter;
 const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
@@ -373,6 +378,7 @@ const ModifyZoneResponse = models.ModifyZoneResponse;
 const AlgDetectSession = models.AlgDetectSession;
 const OriginProtectionInfo = models.OriginProtectionInfo;
 const AliasDomain = models.AliasDomain;
+const ImportZoneConfigRequest = models.ImportZoneConfigRequest;
 const IpTableRule = models.IpTableRule;
 const ModifyFunctionRuleRequest = models.ModifyFunctionRuleRequest;
 const IncreasePlanQuotaRequest = models.IncreasePlanQuotaRequest;
@@ -407,7 +413,7 @@ const AccelerateMainland = models.AccelerateMainland;
 const StandardDebug = models.StandardDebug;
 const BindSecurityTemplateToEntityRequest = models.BindSecurityTemplateToEntityRequest;
 const IntelligenceRuleItem = models.IntelligenceRuleItem;
-const IntelligenceRule = models.IntelligenceRule;
+const ExportZoneConfigResponse = models.ExportZoneConfigResponse;
 const PostMaxSize = models.PostMaxSize;
 const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const Filter = models.Filter;
@@ -481,6 +487,17 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     DescribeOriginGroupHealthStatus(req, cb) {
         let resp = new DescribeOriginGroupHealthStatusResponse();
         this.request("DescribeOriginGroupHealthStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export site configuration . The exported configuration is used for import via the API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+     * @param {ExportZoneConfigRequest} req
+     * @param {function(string, ExportZoneConfigResponse):void} cb
+     * @public
+     */
+    ExportZoneConfig(req, cb) {
+        let resp = new ExportZoneConfigResponse();
+        this.request("ExportZoneConfig", req, resp, cb);
     }
 
     /**
@@ -1681,6 +1698,17 @@ To use an external certificate, upload the certificate to [SSL Certificates Cons
     }
 
     /**
+     * This API is used to query the results of site configuration import via API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+     * @param {DescribeZoneConfigImportResultRequest} req
+     * @param {function(string, DescribeZoneConfigImportResultResponse):void} cb
+     * @public
+     */
+    DescribeZoneConfigImportResult(req, cb) {
+        let resp = new DescribeZoneConfigImportResultResponse();
+        this.request("DescribeZoneConfigImportResult", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a specified security IP group. Note that the security IP group cannot be deleted if it is referenced in a rule.
      * @param {DeleteSecurityIPGroupRequest} req
      * @param {function(string, DeleteSecurityIPGroupResponse):void} cb
@@ -1758,6 +1786,17 @@ This API is used to query the configuration information of an IP group, includin
     DescribeSecurityIPGroup(req, cb) {
         let resp = new DescribeSecurityIPGroupResponse();
         this.request("DescribeSecurityIPGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID (TaskId). Users need to use the site configuration import result query API (DescribeZoneConfigImportResult) to obtain the results of this import task. This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+     * @param {ImportZoneConfigRequest} req
+     * @param {function(string, ImportZoneConfigResponse):void} cb
+     * @public
+     */
+    ImportZoneConfig(req, cb) {
+        let resp = new ImportZoneConfigResponse();
+        this.request("ImportZoneConfig", req, resp, cb);
     }
 
     /**

@@ -36,6 +36,7 @@ const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
@@ -67,6 +68,7 @@ const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
+const QueryPolicyProductListByCodeResponse = models.QueryPolicyProductListByCodeResponse;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
@@ -84,6 +86,7 @@ const SummaryDetails = models.SummaryDetails;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const PolicyProductList = models.PolicyProductList;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
@@ -380,6 +383,17 @@ class IntlpartnersmgtClient extends AbstractClient {
     QueryAccountVerificationStatus(req, cb) {
         let resp = new QueryAccountVerificationStatusResponse();
         this.request("QueryAccountVerificationStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
+     * @param {QueryPolicyProductListByCodeRequest} req
+     * @param {function(string, QueryPolicyProductListByCodeResponse):void} cb
+     * @public
+     */
+    QueryPolicyProductListByCode(req, cb) {
+        let resp = new QueryPolicyProductListByCodeResponse();
+        this.request("QueryPolicyProductListByCode", req, resp, cb);
     }
 
     /**

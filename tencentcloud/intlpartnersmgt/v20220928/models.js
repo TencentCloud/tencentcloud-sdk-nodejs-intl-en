@@ -2097,7 +2097,7 @@ Valid values: `personal`, `company`.
 
         /**
          * Registered email address, which should be valid and correct.
-For example, account@qq.com.
+such as "account@qq.com"
          * @type {string || null}
          */
         this.Mail = null;
@@ -2117,22 +2117,22 @@ A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not
         this.ConfirmPassword = null;
 
         /**
-         * Customer's mobile number. 
-The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. 
+         * Customer's mobile number.
+The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed.
 The system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
          * @type {string || null}
          */
         this.PhoneNum = null;
 
         /**
-         * Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
+         * Customer's country/region code, which can be obtained via the  [GetCountryCodes API](https://www.tencentcloud.com/document/product/1085/51416), such as "852".
 Parameter value is not allowed to be 7,380,86.
          * @type {string || null}
          */
         this.CountryCode = null;
 
         /**
-         * Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
+         * Customer's ISO2 standard country/region code, which can be obtained via the [GetCountryCodes API](https://www.tencentcloud.com/document/product/1085/51416). It should correspond to the `CountryCode` field, such as `HK`.
          * @type {string || null}
          */
         this.Area = null;
@@ -2144,9 +2144,8 @@ Parameter value is not allowed to be 7,380,86.
         this.Extended = null;
 
         /**
-         * Verification code. 
-It will be used to verify the validity of the mobile number you provide. 
-When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
+         * VerifyCode. This field is required. 
+Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
          * @type {string || null}
          */
         this.VerifyCode = null;

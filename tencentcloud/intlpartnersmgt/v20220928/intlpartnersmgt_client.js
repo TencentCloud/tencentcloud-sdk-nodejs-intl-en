@@ -24,12 +24,14 @@ const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const ForceQNResponse = models.ForceQNResponse;
 const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
+const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
+const TagInfo = models.TagInfo;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
 const BusinessInfo = models.BusinessInfo;
-const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
+const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
@@ -38,7 +40,7 @@ const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryRe
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
-const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
+const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
 const CreateAccountResponse = models.CreateAccountResponse;
 const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
@@ -50,9 +52,9 @@ const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
-const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
+const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const ForceQNRequest = models.ForceQNRequest;
-const TagInfo = models.TagInfo;
+const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
 const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
@@ -78,14 +80,14 @@ const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
-const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
+const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
 const SummaryDetails = models.SummaryDetails;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
-const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const CreateAndSendClientInvitationMailRequest = models.CreateAndSendClientInvitationMailRequest;
 const PolicyProductList = models.PolicyProductList;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
@@ -248,6 +250,22 @@ class IntlpartnersmgtClient extends AbstractClient {
     DescribeBillSummaryByPayMode(req, cb) {
         let resp = new DescribeBillSummaryByPayModeResponse();
         this.request("DescribeBillSummaryByPayMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply for the allowlist. If needed, please contact your business representative.Directions:
+1.This API is used to create an invitation link, which you can send to a specified email address.
+2.Customer need to click the invitation link in the email, fill in and submit the required information.
+3.You can review the customer's application in customer management  after submission.
+
+Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+     * @param {CreateAndSendClientInvitationMailRequest} req
+     * @param {function(string, CreateAndSendClientInvitationMailResponse):void} cb
+     * @public
+     */
+    CreateAndSendClientInvitationMail(req, cb) {
+        let resp = new CreateAndSendClientInvitationMailResponse();
+        this.request("CreateAndSendClientInvitationMail", req, resp, cb);
     }
 
     /**

@@ -4093,7 +4093,7 @@ class InviteOrganizationMemberRequest extends  AbstractModel {
         this.PolicyType = null;
 
         /**
-         * List of member financial permission IDs. Valid values: 1: View bills. 2: View balance. 3: Transfer funds. 4: Consolidate bills. 5: Issue invoice. 6: Inherit discounts. 7: Pay on behalf. 1 and 2 are required by default.
+         * Member Finanace Authorization. Valid values: 1: View Bills. 2: View Balance.  4: Consolidate Bills. 5: Invoice. 6: Inherit Offer. 7: Pay On Behalf. 8: Cost Explorer. 9: Budget Management.  1 and 2 are required.
          * @type {Array.<number> || null}
          */
         this.PermissionIds = null;
@@ -7403,7 +7403,7 @@ class CreateOrganizationMemberRequest extends  AbstractModel {
         this.PolicyType = null;
 
         /**
-         * List of member financial permission IDs. `7` indicates paying, which is the default value.
+         * Member Finanace Authorization. Valid values: 1: View Bills. 2: View Balance.  4: Consolidate Bills. 5: Invoice. 6: Inherit Offer. 7: Pay On Behalf. 8: Cost Explorer. 9: Budget Management.  1, 2 and 7 are required.
          * @type {Array.<number> || null}
          */
         this.PermissionIds = null;

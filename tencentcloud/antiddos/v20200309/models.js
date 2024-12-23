@@ -8305,7 +8305,7 @@ class AssociateDDoSEipAddressRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * EIP of the Anti-DDoS instance ID
+         * EIP of the Anti-DDoS instance ID.
          * @type {string || null}
          */
         this.Eip = null;

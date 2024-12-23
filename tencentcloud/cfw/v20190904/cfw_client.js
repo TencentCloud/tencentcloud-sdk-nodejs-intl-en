@@ -897,7 +897,6 @@ Modify events related with the IPs/domains in the blocked/allowed list
 
     /**
      * This API is used to get blocked IP data.
-
      * @param {DescribeBlockByIpTimesListRequest} req
      * @param {function(string, DescribeBlockByIpTimesListResponse):void} cb
      * @public

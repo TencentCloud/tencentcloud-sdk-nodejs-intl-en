@@ -26,6 +26,7 @@ const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const HeadPose = models.HeadPose;
+const DetectFaceSimilarityResponse = models.DetectFaceSimilarityResponse;
 const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetGroupListResponse = models.GetGroupListResponse;
 const GroupInfo = models.GroupInfo;
@@ -40,7 +41,7 @@ const GetGroupListRequest = models.GetGroupListRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
 const DetectFaceAttributesResponse = models.DetectFaceAttributesResponse;
-const GroupCandidate = models.GroupCandidate;
+const DetectFaceSimilarityRequest = models.DetectFaceSimilarityRequest;
 const SearchPersonsResponse = models.SearchPersonsResponse;
 const DetectLiveFaceAccurateRequest = models.DetectLiveFaceAccurateRequest;
 const CompareFaceResponse = models.CompareFaceResponse;
@@ -68,6 +69,7 @@ const FaceShape = models.FaceShape;
 const DetectFaceResponse = models.DetectFaceResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
 const GetPersonListNumRequest = models.GetPersonListNumRequest;
+const GroupCandidate = models.GroupCandidate;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
 const VerifyPersonResponse = models.VerifyPersonResponse;
@@ -349,6 +351,18 @@ This API recognizes each face image of a person as an independent one. By contra
     CreatePerson(req, cb) {
         let resp = new CreatePersonResponse();
         this.request("CreatePerson", req, resp, cb);
+    }
+
+    /**
+     * Compare the faces in the two pictures for similarity and return the face similarity score. If you need to determine "whether this person is someone", that is, to verify whether the person in a picture is someone with a known identity, such as a common face login scenario, it is recommended to use [VerifyFace] (https://www.tencentcloud.com/document/product/1059/36972) or [VerifyPerson] (https://www.tencentcloud.com/document/product/1059/36971) inferface. 
+Please use the V3 version for the signature method in the public parameters, that is, configure the SignatureMethod parameter to TC3-HMAC-SHA256
+     * @param {DetectFaceSimilarityRequest} req
+     * @param {function(string, DetectFaceSimilarityResponse):void} cb
+     * @public
+     */
+    DetectFaceSimilarity(req, cb) {
+        let resp = new DetectFaceSimilarityResponse();
+        this.request("DetectFaceSimilarity", req, resp, cb);
     }
 
     /**

@@ -3380,6 +3380,22 @@ Default value: false.
          */
         this.ImageSetRequired = null;
 
+        /**
+         * Whether to synchronize as an encrypted custom image.
+Default value is `false`.
+Synchronization to an encrypted custom image is only supported within the same region.
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * KMS key ID used when synchronizing to an encrypted custom image. 
+This parameter is valid only synchronizing to an encrypted image.
+If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
     }
 
     /**
@@ -3394,6 +3410,8 @@ Default value: false.
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.ImageName = 'ImageName' in params ? params.ImageName : null;
         this.ImageSetRequired = 'ImageSetRequired' in params ? params.ImageSetRequired : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
 
     }
 }

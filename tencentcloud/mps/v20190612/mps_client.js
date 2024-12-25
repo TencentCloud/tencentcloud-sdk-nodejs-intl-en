@@ -30,7 +30,9 @@ const SvgWatermarkInput = models.SvgWatermarkInput;
 const WorkflowInfo = models.WorkflowInfo;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
 const ProcessLiveStreamResponse = models.ProcessLiveStreamResponse;
+const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const MediaAiAnalysisHighlightItem = models.MediaAiAnalysisHighlightItem;
+const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphicsTemplatesRequest;
 const AiReviewTaskProhibitedAsrResult = models.AiReviewTaskProhibitedAsrResult;
 const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
@@ -132,6 +134,7 @@ const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplat
 const AudioDenoiseConfig = models.AudioDenoiseConfig;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
+const LiveRecordTemplate = models.LiveRecordTemplate;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
 const ScheduleRecognitionTaskResult = models.ScheduleRecognitionTaskResult;
 const ComposeTargetInfo = models.ComposeTargetInfo;
@@ -245,6 +248,7 @@ const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const TEHDConfig = models.TEHDConfig;
+const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const WorkflowTrigger = models.WorkflowTrigger;
 const LiveStreamAiRecognitionResultInfo = models.LiveStreamAiRecognitionResultInfo;
@@ -336,8 +340,10 @@ const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const ParseNotificationResponse = models.ParseNotificationResponse;
 const ComposeImageOperation = models.ComposeImageOperation;
+const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const ActivityResult = models.ActivityResult;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
+const HLSConfigureInfo = models.HLSConfigureInfo;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate;
@@ -360,6 +366,7 @@ const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
+const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
 const LiveStreamTransTextRecognitionResult = models.LiveStreamTransTextRecognitionResult;
@@ -376,7 +383,7 @@ const ScheduleReviewTaskResult = models.ScheduleReviewTaskResult;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const LiveStreamRecordResultInfo = models.LiveStreamRecordResultInfo;
 const ComposeStyles = models.ComposeStyles;
-const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
+const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
 const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
@@ -405,7 +412,7 @@ const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const AiRecognitionTaskTransTextResultOutput = models.AiRecognitionTaskTransTextResultOutput;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
-const TaskSimpleInfo = models.TaskSimpleInfo;
+const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const SnapshotByTimeOffsetTemplate = models.SnapshotByTimeOffsetTemplate;
@@ -436,6 +443,7 @@ const QualityControlData = models.QualityControlData;
 const DrmInfo = models.DrmInfo;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
 const ComposeImageItem = models.ComposeImageItem;
+const TaskSimpleInfo = models.TaskSimpleInfo;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const AiContentReviewResult = models.AiContentReviewResult;
 const LiveActivityResult = models.LiveActivityResult;
@@ -443,6 +451,7 @@ const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const TranslateConfigureInfo = models.TranslateConfigureInfo;
 const AiAnalysisTaskHeadTailInput = models.AiAnalysisTaskHeadTailInput;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
+const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const SchedulesInfo = models.SchedulesInfo;
 const DisableWorkflowRequest = models.DisableWorkflowRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
@@ -480,6 +489,7 @@ const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
 const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
 const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
+const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
@@ -525,14 +535,14 @@ class MpsClient extends AbstractClient {
     }
     
     /**
-     * This API is used to modify a media quality inspection template.
-     * @param {ModifyQualityControlTemplateRequest} req
-     * @param {function(string, ModifyQualityControlTemplateResponse):void} cb
+     * This API is used to create a custom image sprite generating template. Up to 16 templates can be created.
+     * @param {CreateImageSpriteTemplateRequest} req
+     * @param {function(string, CreateImageSpriteTemplateResponse):void} cb
      * @public
      */
-    ModifyQualityControlTemplate(req, cb) {
-        let resp = new ModifyQualityControlTemplateResponse();
-        this.request("ModifyQualityControlTemplate", req, resp, cb);
+    CreateImageSpriteTemplate(req, cb) {
+        let resp = new CreateImageSpriteTemplateResponse();
+        this.request("CreateImageSpriteTemplate", req, resp, cb);
     }
 
     /**
@@ -578,6 +588,17 @@ Instead of initiating a video processing task, this API is used to help generate
     CreateContentReviewTemplate(req, cb) {
         let resp = new CreateContentReviewTemplateResponse();
         this.request("CreateContentReviewTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a live recording template.
+     * @param {ModifyLiveRecordTemplateRequest} req
+     * @param {function(string, ModifyLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    ModifyLiveRecordTemplate(req, cb) {
+        let resp = new ModifyLiveRecordTemplateResponse();
+        this.request("ModifyLiveRecordTemplate", req, resp, cb);
     }
 
     /**
@@ -747,6 +768,17 @@ Instead of initiating a video processing task, this API is used to help generate
     DescribeAIAnalysisTemplates(req, cb) {
         let resp = new DescribeAIAnalysisTemplatesResponse();
         this.request("DescribeAIAnalysisTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a media quality inspection template.
+     * @param {ModifyQualityControlTemplateRequest} req
+     * @param {function(string, ModifyQualityControlTemplateResponse):void} cb
+     * @public
+     */
+    ModifyQualityControlTemplate(req, cb) {
+        let resp = new ModifyQualityControlTemplateResponse();
+        this.request("ModifyQualityControlTemplate", req, resp, cb);
     }
 
     /**
@@ -948,6 +980,17 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
+     * This API is used to delete a live recording template.
+     * @param {DeleteLiveRecordTemplateRequest} req
+     * @param {function(string, DeleteLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLiveRecordTemplate(req, cb) {
+        let resp = new DeleteLiveRecordTemplateResponse();
+        this.request("DeleteLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
      * @param {CreateWatermarkTemplateRequest} req
      * @param {function(string, CreateWatermarkTemplateResponse):void} cb
@@ -978,6 +1021,17 @@ Instead of initiating a video processing task, this API is used to help generate
     DeleteSampleSnapshotTemplate(req, cb) {
         let resp = new DeleteSampleSnapshotTemplateResponse();
         this.request("DeleteSampleSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a live recording template.
+     * @param {DescribeLiveRecordTemplatesRequest} req
+     * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLiveRecordTemplates(req, cb) {
+        let resp = new DescribeLiveRecordTemplatesResponse();
+        this.request("DescribeLiveRecordTemplates", req, resp, cb);
     }
 
     /**
@@ -1369,14 +1423,14 @@ HTTP callbacks are supported for live stream processing events. Notifications ca
     }
 
     /**
-     * This API is used to create a custom image sprite generating template. Up to 16 templates can be created.
-     * @param {CreateImageSpriteTemplateRequest} req
-     * @param {function(string, CreateImageSpriteTemplateResponse):void} cb
+     * This API is used to create a live recording template.
+     * @param {CreateLiveRecordTemplateRequest} req
+     * @param {function(string, CreateLiveRecordTemplateResponse):void} cb
      * @public
      */
-    CreateImageSpriteTemplate(req, cb) {
-        let resp = new CreateImageSpriteTemplateResponse();
-        this.request("CreateImageSpriteTemplate", req, resp, cb);
+    CreateLiveRecordTemplate(req, cb) {
+        let resp = new CreateLiveRecordTemplateResponse();
+        this.request("CreateLiveRecordTemplate", req, resp, cb);
     }
 
     /**

@@ -25284,6 +25284,12 @@ class VerifyDomainRecordRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * VerifyType:
 <li>dns: DNS Parse verification; </li>
 <li>fIle: Document verification.</li>
@@ -25303,6 +25309,7 @@ Default value: dns.
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
 
     }
@@ -34911,6 +34918,18 @@ class CreateDomainVerifyRecordRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Need to access the VOD acceleration domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
     }
 
     /**
@@ -34920,6 +34939,8 @@ class CreateDomainVerifyRecordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }

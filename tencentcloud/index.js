@@ -79,6 +79,7 @@ module.exports = {
     organization: require("./organization"),
     postgres: require("./postgres"),
     privatedns: require("./privatedns"),
+    rce: require("./rce"),
     redis: require("./redis"),
     rum: require("./rum"),
     scf: require("./scf"),

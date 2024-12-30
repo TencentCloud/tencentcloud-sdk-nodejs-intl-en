@@ -155,6 +155,7 @@ const DescribeL4ProxyRulesResponse = models.DescribeL4ProxyRulesResponse;
 const OriginHealthStatus = models.OriginHealthStatus;
 const CustomizedHeader = models.CustomizedHeader;
 const DescribeFunctionsRequest = models.DescribeFunctionsRequest;
+const ModifyDnsRecordsStatusRequest = models.ModifyDnsRecordsStatusRequest;
 const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
@@ -176,6 +177,7 @@ const DescribeConfigGroupVersionDetailRequest = models.DescribeConfigGroupVersio
 const ModifyPlanResponse = models.ModifyPlanResponse;
 const DropPageDetail = models.DropPageDetail;
 const CnameStatus = models.CnameStatus;
+const CreateDnsRecordResponse = models.CreateDnsRecordResponse;
 const ServerCertInfo = models.ServerCertInfo;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DescribeZoneConfigImportResultResponse = models.DescribeZoneConfigImportResultResponse;
@@ -188,6 +190,7 @@ const DestroyPlanRequest = models.DestroyPlanRequest;
 const CreatePlanRequest = models.CreatePlanRequest;
 const DescribeFunctionRuntimeEnvironmentRequest = models.DescribeFunctionRuntimeEnvironmentRequest;
 const IPGroup = models.IPGroup;
+const DescribeDnsRecordsRequest = models.DescribeDnsRecordsRequest;
 const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
 const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
@@ -225,6 +228,7 @@ const NormalAction = models.NormalAction;
 const TopDetailData = models.TopDetailData;
 const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
+const ModifyDnsRecordsRequest = models.ModifyDnsRecordsRequest;
 const IdentifyZoneRequest = models.IdentifyZoneRequest;
 const CacheConfig = models.CacheConfig;
 const UpgradePlanResponse = models.UpgradePlanResponse;
@@ -264,6 +268,7 @@ const DeleteZoneResponse = models.DeleteZoneResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
 const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const OriginInfo = models.OriginInfo;
+const CreateDnsRecordRequest = models.CreateDnsRecordRequest;
 const WafRule = models.WafRule;
 const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
 const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
@@ -300,8 +305,8 @@ const AscriptionInfo = models.AscriptionInfo;
 const OriginGroupHealthStatusDetail = models.OriginGroupHealthStatusDetail;
 const FirstPartConfig = models.FirstPartConfig;
 const Waf = models.Waf;
-const ModifyZoneRequest = models.ModifyZoneRequest;
-const DDosProtectionConfig = models.DDosProtectionConfig;
+const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
+const DescribeDnsRecordsResponse = models.DescribeDnsRecordsResponse;
 const DescribeDDoSAttackDataRequest = models.DescribeDDoSAttackDataRequest;
 const CreateL4ProxyRequest = models.CreateL4ProxyRequest;
 const CreatePlanResponse = models.CreatePlanResponse;
@@ -340,6 +345,7 @@ const DestroyPlanResponse = models.DestroyPlanResponse;
 const QueryCondition = models.QueryCondition;
 const RuleRewriteActionParams = models.RuleRewriteActionParams;
 const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
+const DeleteDnsRecordsRequest = models.DeleteDnsRecordsRequest;
 const ModifyHostsCertificateRequest = models.ModifyHostsCertificateRequest;
 const DeleteFunctionRulesResponse = models.DeleteFunctionRulesResponse;
 const DescribeTopL7AnalysisDataResponse = models.DescribeTopL7AnalysisDataResponse;
@@ -356,7 +362,7 @@ const CreateSharedCNAMERequest = models.CreateSharedCNAMERequest;
 const UpstreamHttp2 = models.UpstreamHttp2;
 const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
 const BotConfig = models.BotConfig;
-const DnsVerification = models.DnsVerification;
+const ModifyZoneResponse = models.ModifyZoneResponse;
 const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const Https = models.Https;
@@ -370,16 +376,18 @@ const ErrorPageReference = models.ErrorPageReference;
 const BotExtendAction = models.BotExtendAction;
 const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
-const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
+const ModifyZoneRequest = models.ModifyZoneRequest;
 const IncreasePlanQuotaResponse = models.IncreasePlanQuotaResponse;
 const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
-const ModifyZoneResponse = models.ModifyZoneResponse;
+const DnsVerification = models.DnsVerification;
 const AlgDetectSession = models.AlgDetectSession;
 const OriginProtectionInfo = models.OriginProtectionInfo;
+const ModifyDnsRecordsStatusResponse = models.ModifyDnsRecordsStatusResponse;
 const AliasDomain = models.AliasDomain;
 const ImportZoneConfigRequest = models.ImportZoneConfigRequest;
 const IpTableRule = models.IpTableRule;
+const DDosProtectionConfig = models.DDosProtectionConfig;
 const ModifyFunctionRuleRequest = models.ModifyFunctionRuleRequest;
 const IncreasePlanQuotaRequest = models.IncreasePlanQuotaRequest;
 const FunctionRule = models.FunctionRule;
@@ -398,6 +406,8 @@ const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
 const DeleteSharedCNAMEResponse = models.DeleteSharedCNAMEResponse;
 const DDoSBlockData = models.DDoSBlockData;
 const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
+const DnsRecord = models.DnsRecord;
+const ModifyDnsRecordsResponse = models.ModifyDnsRecordsResponse;
 const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const IPWhitelist = models.IPWhitelist;
@@ -438,6 +448,7 @@ const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
 const DescribeSecurityIPGroupResponse = models.DescribeSecurityIPGroupResponse;
 const UpgradePlanRequest = models.UpgradePlanRequest;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
+const DeleteDnsRecordsResponse = models.DeleteDnsRecordsResponse;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const CheckRegionHealthStatus = models.CheckRegionHealthStatus;
 const DescribeFunctionRulesRequest = models.DescribeFunctionRulesRequest;
@@ -479,14 +490,14 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     }
 
     /**
-     * This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
-     * @param {DescribeOriginGroupHealthStatusRequest} req
-     * @param {function(string, DescribeOriginGroupHealthStatusResponse):void} cb
+     * This API is used to create a DNS record.
+     * @param {CreateDnsRecordRequest} req
+     * @param {function(string, CreateDnsRecordResponse):void} cb
      * @public
      */
-    DescribeOriginGroupHealthStatus(req, cb) {
-        let resp = new DescribeOriginGroupHealthStatusResponse();
-        this.request("DescribeOriginGroupHealthStatus", req, resp, cb);
+    CreateDnsRecord(req, cb) {
+        let resp = new CreateDnsRecordResponse();
+        this.request("CreateDnsRecord", req, resp, cb);
     }
 
     /**
@@ -950,6 +961,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * You can use this interface to batch modify DNS records.
+     * @param {ModifyDnsRecordsRequest} req
+     * @param {function(string, ModifyDnsRecordsResponse):void} cb
+     * @public
+     */
+    ModifyDnsRecords(req, cb) {
+        let resp = new ModifyDnsRecordsResponse();
+        this.request("ModifyDnsRecords", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the time series traffic data of the L7 cache analysis. It will be deprecated. Use the <a href="https://intl.cloud.tencent.com/document/product/1552/80648?from_cn_redirect=1">DescribeTimingL7AnalysisData</a> API instead.
      * @param {DescribeTimingL7CacheDataRequest} req
      * @param {function(string, DescribeTimingL7CacheDataResponse):void} cb
@@ -1002,6 +1024,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     ModifyAliasDomainStatus(req, cb) {
         let resp = new ModifyAliasDomainStatusResponse();
         this.request("ModifyAliasDomainStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the configuration information of a security IP group, including the ID, name, and content of the security IP group.
+     * @param {DescribeSecurityIPGroupRequest} req
+     * @param {function(string, DescribeSecurityIPGroupResponse):void} cb
+     * @public
+     */
+    DescribeSecurityIPGroup(req, cb) {
+        let resp = new DescribeSecurityIPGroupResponse();
+        this.request("DescribeSecurityIPGroup", req, resp, cb);
     }
 
     /**
@@ -1060,6 +1093,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * This API is used to delete DNS records in batches.
+     * @param {DeleteDnsRecordsRequest} req
+     * @param {function(string, DeleteDnsRecordsResponse):void} cb
+     * @public
+     */
+    DeleteDnsRecords(req, cb) {
+        let resp = new DeleteDnsRecordsResponse();
+        this.request("DeleteDnsRecords", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the web and bot security configurations.
      * @param {ModifySecurityPolicyRequest} req
      * @param {function(string, ModifySecurityPolicyResponse):void} cb
@@ -1093,14 +1137,14 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
-     * This API is used to query DDoS attack events.
-     * @param {DescribeDDoSAttackEventRequest} req
-     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
+     * This API is used to query the health status of origin server groups under a LoadBalancer. The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * @param {DescribeOriginGroupHealthStatusRequest} req
+     * @param {function(string, DescribeOriginGroupHealthStatusResponse):void} cb
      * @public
      */
-    DescribeDDoSAttackEvent(req, cb) {
-        let resp = new DescribeDDoSAttackEventResponse();
-        this.request("DescribeDDoSAttackEvent", req, resp, cb);
+    DescribeOriginGroupHealthStatus(req, cb) {
+        let resp = new DescribeOriginGroupHealthStatusResponse();
+        this.request("DescribeOriginGroupHealthStatus", req, resp, cb);
     }
 
     /**
@@ -1234,6 +1278,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     CreateConfigGroupVersion(req, cb) {
         let resp = new CreateConfigGroupVersionResponse();
         this.request("CreateConfigGroupVersion", req, resp, cb);
+    }
+
+    /**
+     * You can use this interface to batch modify the status of DNS records, enabling and disabling records in bulk.
+     * @param {ModifyDnsRecordsStatusRequest} req
+     * @param {function(string, ModifyDnsRecordsStatusResponse):void} cb
+     * @public
+     */
+    ModifyDnsRecordsStatus(req, cb) {
+        let resp = new ModifyDnsRecordsStatusResponse();
+        this.request("ModifyDnsRecordsStatus", req, resp, cb);
     }
 
     /**
@@ -1436,6 +1491,17 @@ After the environment variables are set, they can be used in the function code. 
     HandleFunctionRuntimeEnvironment(req, cb) {
         let resp = new HandleFunctionRuntimeEnvironmentResponse();
         this.request("HandleFunctionRuntimeEnvironment", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query DDoS attack events.
+     * @param {DescribeDDoSAttackEventRequest} req
+     * @param {function(string, DescribeDDoSAttackEventResponse):void} cb
+     * @public
+     */
+    DescribeDDoSAttackEvent(req, cb) {
+        let resp = new DescribeDDoSAttackEventResponse();
+        this.request("DescribeDDoSAttackEvent", req, resp, cb);
     }
 
     /**
@@ -1778,14 +1844,14 @@ This API is used to query the configuration information of an IP group, includin
     }
 
     /**
-     * This API is used to query the configuration information of a security IP group, including the ID, name, and content of the security IP group.
-     * @param {DescribeSecurityIPGroupRequest} req
-     * @param {function(string, DescribeSecurityIPGroupResponse):void} cb
+     * This API is used to query DNS records. Paging, sorting and filtering are supported.
+     * @param {DescribeDnsRecordsRequest} req
+     * @param {function(string, DescribeDnsRecordsResponse):void} cb
      * @public
      */
-    DescribeSecurityIPGroup(req, cb) {
-        let resp = new DescribeSecurityIPGroupResponse();
-        this.request("DescribeSecurityIPGroup", req, resp, cb);
+    DescribeDnsRecords(req, cb) {
+        let resp = new DescribeDnsRecordsResponse();
+        this.request("DescribeDnsRecords", req, resp, cb);
     }
 
     /**

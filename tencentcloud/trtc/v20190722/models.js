@@ -5836,6 +5836,12 @@ class UpdateStreamIngestRequest extends  AbstractModel {
          */
         this.Volume = null;
 
+        /**
+         * Whether to pause, the default value of false indicates no pause. During the pause, the task is still in progress and is billed. If you want to terminate the task, please call the stop interface.
+         * @type {boolean || null}
+         */
+        this.IsPause = null;
+
     }
 
     /**
@@ -5849,6 +5855,7 @@ class UpdateStreamIngestRequest extends  AbstractModel {
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.StreamUrl = 'StreamUrl' in params ? params.StreamUrl : null;
         this.Volume = 'Volume' in params ? params.Volume : null;
+        this.IsPause = 'IsPause' in params ? params.IsPause : null;
 
     }
 }

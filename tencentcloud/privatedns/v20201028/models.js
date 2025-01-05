@@ -17,6 +17,56 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeExtendEndpointList request structure.
+ * @class
+ */
+class DescribeExtendEndpointListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pagination offset, starting from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination limit. Maximum value: 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter parameters. Valid values: EndpointName, EndpointId.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeQuotaUsage response structure.
  * @class
  */
@@ -166,6 +216,81 @@ class CreateEndPointAndEndPointServiceResponse extends  AbstractModel {
         this.EndPointServiceId = 'EndPointServiceId' in params ? params.EndPointServiceId : null;
         this.EndPointVipSet = 'EndPointVipSet' in params ? params.EndPointVipSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PrivateDNS outbound endpoint forwarding IP
+ * @class
+ */
+class ForwardIp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding target IP network access type.
+CLB: The forwarding IP is the internal CLB VIP.
+CCN: Forwarding IP through CCN routing.
+         * @type {string || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * Forwarding target IP address.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Specifies the forwarding IP port number.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Specifies the number of outbound endpoints.
+Minimum 1, maximum 6.
+         * @type {number || null}
+         */
+        this.IpNum = null;
+
+        /**
+         * Unique VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Unique subnet ID.
+Required when the access type is CCN.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * ccn id
+Required when the access type is CCN.
+         * @type {string || null}
+         */
+        this.AccessGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.IpNum = 'IpNum' in params ? params.IpNum : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AccessGatewayId = 'AccessGatewayId' in params ? params.AccessGatewayId : null;
 
     }
 }
@@ -362,36 +487,30 @@ class DescribeForwardRuleListRequest extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneRecordList request structure.
+ * DescribeEndPointList request structure.
  * @class
  */
-class DescribePrivateZoneRecordListRequest extends  AbstractModel {
+class DescribeEndPointListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Private domain ID: zone-xxxxxx
-         * @type {string || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Filter parameter
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Pagination offset, starting from 0
+         * Pagination offset, starting from 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of entries per page. Maximum value: 100. Default value: 20
+         * Pagination limit. Maximum value: 100. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * Filter parameters. Valid values: EndPointName, EndPointId, EndPointServiceId, and EndPointVip.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -402,7 +521,8 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -412,8 +532,6 @@ class DescribePrivateZoneRecordListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -561,6 +679,27 @@ class AccountVpcInfoOutput extends  AbstractModel {
 }
 
 /**
+ * DescribeEndPointRegion request structure.
+ * @class
+ */
+class DescribeEndPointRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeAuditLog response structure.
  * @class
  */
@@ -653,6 +792,53 @@ class ModifyRecordsStatusResponse extends  AbstractModel {
 }
 
 /**
+ * CreateExtendEndpoint request structure.
+ * @class
+ */
+class CreateExtendEndpointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Outbound endpoint name.
+         * @type {string || null}
+         */
+        this.EndpointName = null;
+
+        /**
+         * The region of the outbound endpoint must be consistent with the region of the forwarding target VIP.
+         * @type {string || null}
+         */
+        this.EndpointRegion = null;
+
+        /**
+         * Forwarding target.
+         * @type {ForwardIp || null}
+         */
+        this.ForwardIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndpointName = 'EndpointName' in params ? params.EndpointName : null;
+        this.EndpointRegion = 'EndpointRegion' in params ? params.EndpointRegion : null;
+
+        if (params.ForwardIp) {
+            let obj = new ForwardIp();
+            obj.deserialize(params.ForwardIp)
+            this.ForwardIp = obj;
+        }
+
+    }
+}
+
+/**
  * Time statistics
  * @class
  */
@@ -738,12 +924,24 @@ class DescribeAccountVpcListResponse extends  AbstractModel {
 }
 
 /**
- * DescribePrivateZoneService request structure.
+ * DescribeEndPointRegion response structure.
  * @class
  */
-class DescribePrivateZoneServiceRequest extends  AbstractModel {
+class DescribeEndPointRegionResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Region array.
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.RegionSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -754,6 +952,79 @@ class DescribePrivateZoneServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.RegionSet) {
+            this.RegionSet = new Array();
+            for (let z in params.RegionSet) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.RegionSet[z]);
+                this.RegionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteEndPoint response structure.
+ * @class
+ */
+class DeleteEndPointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Filter parameter
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Array of parameter values
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -917,6 +1188,34 @@ class DescribePrivateDNSAccountListRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteEndPoint request structure.
+ * @class
+ */
+class DeleteEndPointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Endpoint ID.
+         * @type {string || null}
+         */
+        this.EndPointId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
+
+    }
+}
+
+/**
  * Log details
  * @class
  */
@@ -954,6 +1253,107 @@ class AuditLogInfo extends  AbstractModel {
         this.Date = 'Date' in params ? params.Date : null;
         this.OperatorUin = 'OperatorUin' in params ? params.OperatorUin : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * Outbound endpoint.
+ * @class
+ */
+class OutboundEndpoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Outbound endpoint ID.
+         * @type {string || null}
+         */
+        this.EndpointId = null;
+
+        /**
+         * Outbound endpoint name.
+         * @type {string || null}
+         */
+        this.EndpointName = null;
+
+        /**
+         * The region of the outbound endpoint.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Tag
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Outbound endpoint information.
+Returned only when the forwarding architecture is V2R.
+         * @type {Array.<EndpointService> || null}
+         */
+        this.EndpointServiceSet = null;
+
+        /**
+         * Forwarding link architecture.
+V2V: privatelink
+V2R: jnsgw
+         * @type {string || null}
+         */
+        this.ForwardLinkArch = null;
+
+        /**
+         * Endpoint service ID.
+
+Returned only when the forwarding architecture is V2V.
+
+         * @type {string || null}
+         */
+        this.EndPointServiceId = null;
+
+        /**
+         * VIP list of the endpoint.
+
+Returned only when the forwarding architecture is V2V.
+         * @type {Array.<string> || null}
+         */
+        this.EndPointVipSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndpointId = 'EndpointId' in params ? params.EndpointId : null;
+        this.EndpointName = 'EndpointName' in params ? params.EndpointName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.EndpointServiceSet) {
+            this.EndpointServiceSet = new Array();
+            for (let z in params.EndpointServiceSet) {
+                let obj = new EndpointService();
+                obj.deserialize(params.EndpointServiceSet[z]);
+                this.EndpointServiceSet.push(obj);
+            }
+        }
+        this.ForwardLinkArch = 'ForwardLinkArch' in params ? params.ForwardLinkArch : null;
+        this.EndPointServiceId = 'EndPointServiceId' in params ? params.EndPointServiceId : null;
+        this.EndPointVipSet = 'EndPointVipSet' in params ? params.EndPointVipSet : null;
 
     }
 }
@@ -1094,6 +1494,48 @@ class DescribeAccountVpcListRequest extends  AbstractModel {
 }
 
 /**
+ * CreateExtendEndpoint response structure.
+ * @class
+ */
+class CreateExtendEndpointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Endpoint ID.
+         * @type {string || null}
+         */
+        this.EndpointId = null;
+
+        /**
+         * Endpoint name.
+         * @type {string || null}
+         */
+        this.EndpointName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndpointId = 'EndpointId' in params ? params.EndpointId : null;
+        this.EndpointName = 'EndpointName' in params ? params.EndpointName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRequestData response structure.
  * @class
  */
@@ -1195,6 +1637,68 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Region information
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region encoding
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Region name
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CnName = null;
+
+        /**
+         * English name of the region
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * Region ID
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Number of AZs
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AvailableZoneNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.CnName = 'CnName' in params ? params.CnName : null;
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.AvailableZoneNum = 'AvailableZoneNum' in params ? params.AvailableZoneNum : null;
+
+    }
+}
+
+/**
  * Tag
  * @class
  */
@@ -1274,6 +1778,41 @@ class TldQuota extends  AbstractModel {
         this.Used = 'Used' in params ? params.Used : null;
         this.Stock = 'Stock' in params ? params.Stock : null;
         this.Quota = 'Quota' in params ? params.Quota : null;
+
+    }
+}
+
+/**
+ * SubscribePrivateZoneService response structure.
+ * @class
+ */
+class SubscribePrivateZoneServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Private DNS service activation status
+         * @type {string || null}
+         */
+        this.ServiceStatus = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceStatus = 'ServiceStatus' in params ? params.ServiceStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1388,30 +1927,18 @@ class CreatePrivateZoneRequest extends  AbstractModel {
 }
 
 /**
- * DescribeEndPointList request structure.
+ * DeleteForwardRule request structure.
  * @class
  */
-class DescribeEndPointListRequest extends  AbstractModel {
+class DeleteForwardRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Pagination offset, starting from 0.
-         * @type {number || null}
+         * Array of forwarding rule IDs.
+         * @type {Array.<string> || null}
          */
-        this.Offset = null;
-
-        /**
-         * Pagination limit. Maximum value: 100. Default value: 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Filter parameters. Valid values: EndPointName, EndPointId, EndPointServiceId, and EndPointVip.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.RuleIdSet = null;
 
     }
 
@@ -1422,17 +1949,7 @@ class DescribeEndPointListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.RuleIdSet = 'RuleIdSet' in params ? params.RuleIdSet : null;
 
     }
 }
@@ -1518,6 +2035,111 @@ class ModifyPrivateZoneResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeForwardRule response structure.
+ * @class
+ */
+class DescribeForwardRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding rule details.
+         * @type {ForwardRule || null}
+         */
+        this.ForwardRule = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ForwardRule) {
+            let obj = new ForwardRule();
+            obj.deserialize(params.ForwardRule)
+            this.ForwardRule = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyPrivateZoneVpc response structure.
+ * @class
+ */
+class ModifyPrivateZoneVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Private domain ID, such as zone-xxxxxx
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * List of VPCs associated with domain
+         * @type {Array.<VpcInfo> || null}
+         */
+        this.VpcSet = null;
+
+        /**
+         * List of authorized accounts' VPCs associated with the private domain
+         * @type {Array.<AccountVpcInfoOutput> || null}
+         */
+        this.AccountVpcSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.VpcSet) {
+            this.VpcSet = new Array();
+            for (let z in params.VpcSet) {
+                let obj = new VpcInfo();
+                obj.deserialize(params.VpcSet[z]);
+                this.VpcSet.push(obj);
+            }
+        }
+
+        if (params.AccountVpcSet) {
+            this.AccountVpcSet = new Array();
+            for (let z in params.AccountVpcSet) {
+                let obj = new AccountVpcInfoOutput();
+                obj.deserialize(params.AccountVpcSet[z]);
+                this.AccountVpcSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Forwarding rule details.
  * @class
  */
@@ -1581,7 +2203,6 @@ class ForwardRule extends  AbstractModel {
 
         /**
          * List of VPCs bound to the private domain.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<VpcInfo> || null}
          */
         this.VpcSet = null;
@@ -1593,8 +2214,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ZoneId = null;
 
         /**
-         * Tag.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Tag
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
@@ -1686,6 +2306,48 @@ class DescribePrivateZoneListRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyForwardRule request structure.
+ * @class
+ */
+class ModifyForwardRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding rule ID.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Forwarding rule name.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Endpoint ID.
+         * @type {string || null}
+         */
+        this.EndPointId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
 
     }
 }
@@ -1798,6 +2460,79 @@ class CreatePrivateZoneResponse extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Endpoint information.
+ * @class
+ */
+class EndPointInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Endpoint ID.
+         * @type {string || null}
+         */
+        this.EndPointId = null;
+
+        /**
+         * Endpoint name.
+         * @type {string || null}
+         */
+        this.EndPointName = null;
+
+        /**
+         * Endpoint service ID.
+         * @type {string || null}
+         */
+        this.EndPointServiceId = null;
+
+        /**
+         * VIP list of the endpoint.
+         * @type {Array.<string> || null}
+         */
+        this.EndPointVipSet = null;
+
+        /**
+         * ap-guangzhou
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Tag key-value pair collection.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
+        this.EndPointName = 'EndPointName' in params ? params.EndPointName : null;
+        this.EndPointServiceId = 'EndPointServiceId' in params ? params.EndPointServiceId : null;
+        this.EndPointVipSet = 'EndPointVipSet' in params ? params.EndPointVipSet : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1987,50 +2722,30 @@ class DescribeForwardRuleListResponse extends  AbstractModel {
 }
 
 /**
- * Endpoint information.
+ * DescribeExtendEndpointList response structure.
  * @class
  */
-class EndPointInfo extends  AbstractModel {
+class DescribeExtendEndpointListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Endpoint ID.
+         * Total number of endpoints.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Endpoint list.
+         * @type {Array.<OutboundEndpoint> || null}
+         */
+        this.OutboundEndpointSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EndPointId = null;
-
-        /**
-         * Endpoint name.
-         * @type {string || null}
-         */
-        this.EndPointName = null;
-
-        /**
-         * Endpoint service ID.
-         * @type {string || null}
-         */
-        this.EndPointServiceId = null;
-
-        /**
-         * VIP list of the endpoint.
-         * @type {Array.<string> || null}
-         */
-        this.EndPointVipSet = null;
-
-        /**
-         * ap-guangzhou
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegionCode = null;
-
-        /**
-         * Tag key-value pair collection.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TagInfo> || null}
-         */
-        this.Tags = null;
+        this.RequestId = null;
 
     }
 
@@ -2041,20 +2756,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
-        this.EndPointName = 'EndPointName' in params ? params.EndPointName : null;
-        this.EndPointServiceId = 'EndPointServiceId' in params ? params.EndPointServiceId : null;
-        this.EndPointVipSet = 'EndPointVipSet' in params ? params.EndPointVipSet : null;
-        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new TagInfo();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
+        if (params.OutboundEndpointSet) {
+            this.OutboundEndpointSet = new Array();
+            for (let z in params.OutboundEndpointSet) {
+                let obj = new OutboundEndpoint();
+                obj.deserialize(params.OutboundEndpointSet[z]);
+                this.OutboundEndpointSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2173,6 +2885,34 @@ class DescribeDashboardRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyForwardRule response structure.
+ * @class
+ */
+class ModifyForwardRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateEndPoint response structure.
  * @class
  */
@@ -2286,24 +3026,12 @@ class AuditLog extends  AbstractModel {
 }
 
 /**
- * SubscribePrivateZoneService response structure.
+ * DescribePrivateZoneService request structure.
  * @class
  */
-class SubscribePrivateZoneServiceResponse extends  AbstractModel {
+class DescribePrivateZoneServiceRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Private DNS service activation status
-         * @type {string || null}
-         */
-        this.ServiceStatus = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -2314,8 +3042,6 @@ class SubscribePrivateZoneServiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceStatus = 'ServiceStatus' in params ? params.ServiceStatus : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2412,24 +3138,18 @@ class DeletePrivateZoneRecordRequest extends  AbstractModel {
 }
 
 /**
- * Filter parameter
+ * DescribeForwardRule request structure.
  * @class
  */
-class Filter extends  AbstractModel {
+class DescribeForwardRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Forwarding rule ID.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Array of parameter values
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
+        this.RuleId = null;
 
     }
 
@@ -2440,8 +3160,35 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * DeleteForwardRule response structure.
+ * @class
+ */
+class DeleteForwardRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3132,6 +3879,115 @@ class VpcInfo extends  AbstractModel {
 }
 
 /**
+ * PrivateDNS outbound endpoint forwarding IP
+ * @class
+ */
+class EndpointService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the forwarding target IP network access type.
+CLB: Specifies that the forwarding IP is the private CLB VIP.
+CCN: Specifies forwarding IP through CCN routing.
+         * @type {string || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * Specifies the forwarding target IP address.
+         * @type {string || null}
+         */
+        this.Pip = null;
+
+        /**
+         * Specifies the forwarding IP port number.
+         * @type {number || null}
+         */
+        this.Pport = null;
+
+        /**
+         * Specifies the unique VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Specifies the forwarding target IP proxy IP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Specifies the forwarding target IP proxy port.
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Specifies the forwarding target IP protocol.
+         * @type {string || null}
+         */
+        this.Proto = null;
+
+        /**
+         * Specifies the unique subnet ID.
+Required if the access type is CCN.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * ccn id
+Required if the access type is CCN.
+         * @type {string || null}
+         */
+        this.AccessGatewayId = null;
+
+        /**
+         * The SNAT CIDR block of the outbound endpoint.
+         * @type {string || null}
+         */
+        this.SnatVipCidr = null;
+
+        /**
+         * The SNAT IP list of the outbound endpoint.
+         * @type {string || null}
+         */
+        this.SnatVipSet = null;
+
+        /**
+         * The region of the outbound endpoint service.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.Pip = 'Pip' in params ? params.Pip : null;
+        this.Pport = 'Pport' in params ? params.Pport : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Proto = 'Proto' in params ? params.Proto : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AccessGatewayId = 'AccessGatewayId' in params ? params.AccessGatewayId : null;
+        this.SnatVipCidr = 'SnatVipCidr' in params ? params.SnatVipCidr : null;
+        this.SnatVipSet = 'SnatVipSet' in params ? params.SnatVipSet : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * Traffic package usage
  * @class
  */
@@ -3237,36 +4093,36 @@ class CreateForwardRuleResponse extends  AbstractModel {
 }
 
 /**
- * ModifyPrivateZoneVpc response structure.
+ * DescribePrivateZoneRecordList request structure.
  * @class
  */
-class ModifyPrivateZoneVpcResponse extends  AbstractModel {
+class DescribePrivateZoneRecordListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Private domain ID, such as zone-xxxxxx
+         * Private domain ID: zone-xxxxxx
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * List of VPCs associated with domain
-         * @type {Array.<VpcInfo> || null}
+         * Filter parameter
+         * @type {Array.<Filter> || null}
          */
-        this.VpcSet = null;
+        this.Filters = null;
 
         /**
-         * List of authorized accounts' VPCs associated with the private domain
-         * @type {Array.<AccountVpcInfoOutput> || null}
+         * Pagination offset, starting from 0
+         * @type {number || null}
          */
-        this.AccountVpcSet = null;
+        this.Offset = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
+         * Number of entries per page. Maximum value: 100. Default value: 20
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Limit = null;
 
     }
 
@@ -3279,78 +4135,87 @@ class ModifyPrivateZoneVpcResponse extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
-        if (params.VpcSet) {
-            this.VpcSet = new Array();
-            for (let z in params.VpcSet) {
-                let obj = new VpcInfo();
-                obj.deserialize(params.VpcSet[z]);
-                this.VpcSet.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-
-        if (params.AccountVpcSet) {
-            this.AccountVpcSet = new Array();
-            for (let z in params.AccountVpcSet) {
-                let obj = new AccountVpcInfoOutput();
-                obj.deserialize(params.AccountVpcSet[z]);
-                this.AccountVpcSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
 
 module.exports = {
+    DescribeExtendEndpointListRequest: DescribeExtendEndpointListRequest,
     DescribeQuotaUsageResponse: DescribeQuotaUsageResponse,
     ModifyPrivateZoneVpcRequest: ModifyPrivateZoneVpcRequest,
     CreateEndPointAndEndPointServiceResponse: CreateEndPointAndEndPointServiceResponse,
+    ForwardIp: ForwardIp,
     DescribePrivateDNSAccountListResponse: DescribePrivateDNSAccountListResponse,
     CreateForwardRuleRequest: CreateForwardRuleRequest,
     PrivateDNSAccount: PrivateDNSAccount,
     DescribeForwardRuleListRequest: DescribeForwardRuleListRequest,
-    DescribePrivateZoneRecordListRequest: DescribePrivateZoneRecordListRequest,
+    DescribeEndPointListRequest: DescribeEndPointListRequest,
     DescribePrivateZoneRecordListResponse: DescribePrivateZoneRecordListResponse,
     DescribePrivateZoneListResponse: DescribePrivateZoneListResponse,
     AccountVpcInfoOutput: AccountVpcInfoOutput,
+    DescribeEndPointRegionRequest: DescribeEndPointRegionRequest,
     DescribeAuditLogResponse: DescribeAuditLogResponse,
     ModifyRecordsStatusResponse: ModifyRecordsStatusResponse,
+    CreateExtendEndpointRequest: CreateExtendEndpointRequest,
     DatePoint: DatePoint,
     DescribeAccountVpcListResponse: DescribeAccountVpcListResponse,
-    DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
+    DescribeEndPointRegionResponse: DescribeEndPointRegionResponse,
+    DeleteEndPointResponse: DeleteEndPointResponse,
+    Filter: Filter,
     PrivateZoneRecord: PrivateZoneRecord,
     DescribePrivateDNSAccountListRequest: DescribePrivateDNSAccountListRequest,
+    DeleteEndPointRequest: DeleteEndPointRequest,
     AuditLogInfo: AuditLogInfo,
+    OutboundEndpoint: OutboundEndpoint,
     DescribeRequestDataRequest: DescribeRequestDataRequest,
     ModifyPrivateZoneRecordResponse: ModifyPrivateZoneRecordResponse,
     DescribeAccountVpcListRequest: DescribeAccountVpcListRequest,
+    CreateExtendEndpointResponse: CreateExtendEndpointResponse,
     DescribeRequestDataResponse: DescribeRequestDataResponse,
     DescribeEndPointListResponse: DescribeEndPointListResponse,
+    RegionInfo: RegionInfo,
     TagInfo: TagInfo,
     TldQuota: TldQuota,
+    SubscribePrivateZoneServiceResponse: SubscribePrivateZoneServiceResponse,
     CreatePrivateZoneRequest: CreatePrivateZoneRequest,
-    DescribeEndPointListRequest: DescribeEndPointListRequest,
+    DeleteForwardRuleRequest: DeleteForwardRuleRequest,
     AccountVpcInfo: AccountVpcInfo,
     ModifyPrivateZoneResponse: ModifyPrivateZoneResponse,
+    DescribeForwardRuleResponse: DescribeForwardRuleResponse,
+    ModifyPrivateZoneVpcResponse: ModifyPrivateZoneVpcResponse,
     ForwardRule: ForwardRule,
     DescribePrivateZoneListRequest: DescribePrivateZoneListRequest,
+    ModifyForwardRuleRequest: ModifyForwardRuleRequest,
     SubscribePrivateZoneServiceRequest: SubscribePrivateZoneServiceRequest,
     ModifyPrivateZoneRequest: ModifyPrivateZoneRequest,
     CreatePrivateZoneResponse: CreatePrivateZoneResponse,
+    EndPointInfo: EndPointInfo,
     DescribeDashboardResponse: DescribeDashboardResponse,
     CreatePrivateZoneRecordResponse: CreatePrivateZoneRecordResponse,
     DescribePrivateZoneServiceResponse: DescribePrivateZoneServiceResponse,
     DescribeForwardRuleListResponse: DescribeForwardRuleListResponse,
-    EndPointInfo: EndPointInfo,
+    DescribeExtendEndpointListResponse: DescribeExtendEndpointListResponse,
     CreatePrivateDNSAccountResponse: CreatePrivateDNSAccountResponse,
     DescribeAuditLogRequest: DescribeAuditLogRequest,
     DescribeDashboardRequest: DescribeDashboardRequest,
+    ModifyForwardRuleResponse: ModifyForwardRuleResponse,
     CreateEndPointResponse: CreateEndPointResponse,
     AuditLog: AuditLog,
-    SubscribePrivateZoneServiceResponse: SubscribePrivateZoneServiceResponse,
+    DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,
     AccountVpcInfoOut: AccountVpcInfoOut,
     DeletePrivateZoneRecordRequest: DeletePrivateZoneRecordRequest,
-    Filter: Filter,
+    DescribeForwardRuleRequest: DescribeForwardRuleRequest,
+    DeleteForwardRuleResponse: DeleteForwardRuleResponse,
     CreateEndPointRequest: CreateEndPointRequest,
     ModifyRecordsStatusRequest: ModifyRecordsStatusRequest,
     CreatePrivateDNSAccountRequest: CreatePrivateDNSAccountRequest,
@@ -3362,8 +4227,9 @@ module.exports = {
     CreateEndPointAndEndPointServiceRequest: CreateEndPointAndEndPointServiceRequest,
     ModifyPrivateZoneRecordRequest: ModifyPrivateZoneRecordRequest,
     VpcInfo: VpcInfo,
+    EndpointService: EndpointService,
     FlowUsage: FlowUsage,
     CreateForwardRuleResponse: CreateForwardRuleResponse,
-    ModifyPrivateZoneVpcResponse: ModifyPrivateZoneVpcResponse,
+    DescribePrivateZoneRecordListRequest: DescribePrivateZoneRecordListRequest,
 
 }

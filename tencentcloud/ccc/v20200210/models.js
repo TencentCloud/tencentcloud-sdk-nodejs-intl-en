@@ -807,6 +807,12 @@ Currently, the supported languages are as follows. The English name of the langu
         this.NotifyMessage = null;
 
         /**
+         * 
+         * @type {number || null}
+         */
+        this.NotifyMaxCount = null;
+
+        /**
          * <p>And VoiceType field needs to select one, here is to use your own custom TTS, VoiceType is some built-in sound qualities</p>
 <ul>
 <li>Tencent TTS<br>
@@ -918,6 +924,7 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
         this.EndFunctionDesc = 'EndFunctionDesc' in params ? params.EndFunctionDesc : null;
         this.NotifyDuration = 'NotifyDuration' in params ? params.NotifyDuration : null;
         this.NotifyMessage = 'NotifyMessage' in params ? params.NotifyMessage : null;
+        this.NotifyMaxCount = 'NotifyMaxCount' in params ? params.NotifyMaxCount : null;
         this.CustomTTSConfig = 'CustomTTSConfig' in params ? params.CustomTTSConfig : null;
 
     }

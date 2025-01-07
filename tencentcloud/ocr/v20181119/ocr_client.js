@@ -36,9 +36,10 @@ const SealInfo = models.SealInfo;
 const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
 const RecognizeKoreanDrivingLicenseOCRRequest = models.RecognizeKoreanDrivingLicenseOCRRequest;
 const OtherInvoiceItem = models.OtherInvoiceItem;
-const TextDetection = models.TextDetection;
+const SmartStructuralProRequest = models.SmartStructuralProRequest;
 const VatInvoiceItemInfo = models.VatInvoiceItemInfo;
 const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
+const TextDetection = models.TextDetection;
 const RecognizePhilippinesTinIDOCRResponse = models.RecognizePhilippinesTinIDOCRResponse;
 const DetectedWords = models.DetectedWords;
 const TableCellInfo = models.TableCellInfo;
@@ -111,6 +112,7 @@ const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResp
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
 const NonTaxItem = models.NonTaxItem;
 const TollInvoice = models.TollInvoice;
+const SmartStructuralProResponse = models.SmartStructuralProResponse;
 const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const RecognizeKoreanIDCardOCRRequest = models.RecognizeKoreanIDCardOCRRequest;
@@ -496,6 +498,19 @@ A maximum of 20 requests can be initiated per second for this API.
     RecognizePhilippinesDrivingLicenseOCR(req, cb) {
         let resp = new RecognizePhilippinesDrivingLicenseOCRResponse();
         this.request("RecognizePhilippinesDrivingLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
+
+A maximum of 10 requests can be initiated per second for this API.
+     * @param {SmartStructuralProRequest} req
+     * @param {function(string, SmartStructuralProResponse):void} cb
+     * @public
+     */
+    SmartStructuralPro(req, cb) {
+        let resp = new SmartStructuralProResponse();
+        this.request("SmartStructuralPro", req, resp, cb);
     }
 
     /**

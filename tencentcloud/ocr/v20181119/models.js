@@ -1310,56 +1310,69 @@ class OtherInvoiceItem extends  AbstractModel {
 }
 
 /**
- * OCR result.
+ * SmartStructuralPro request structure.
  * @class
  */
-class TextDetection extends  AbstractModel {
+class SmartStructuralProRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Recognized text line content.
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
-        this.DetectedText = null;
+        this.ImageUrl = null;
 
         /**
-         * Confidence. Value range: 0–100.
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF `. Default value: `1`.
          * @type {number || null}
          */
-        this.Confidence = null;
+        this.PdfPageNumber = null;
 
         /**
-         * Text line coordinates, which are represented as 4 vertex coordinates.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Coord> || null}
+         * The names of the fields you want to return for the structured information recognition.
+For example, if you want to return only the recognition result of the "Name" and "Gender" fields, set this parameter as follows:
+ItemNames=["Name","Gender"]
+         * @type {Array.<string> || null}
          */
-        this.Polygon = null;
+        this.ItemNames = null;
 
         /**
-         * Extended field.
-The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
+         * Whether to enable recognition of all fields.
+         * @type {boolean || null}
+         */
+        this.ReturnFullText = null;
+
+        /**
+         * Configuration ID support: General 
+-- General scenarios; InvoiceEng 
+-- Ocean bill of lading, international invoice template; 
+-- Ocean shipment order template; WayBillEng 
+-- CustomsDeclaration
+-- WeightNote
+-- MedicalMeter
          * @type {string || null}
          */
-        this.AdvancedInfo = null;
+        this.ConfigId = null;
 
         /**
-         * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
-         * @type {ItemCoord || null}
+         * Enable recognition of coordinate values in full-text fields
+         * @type {boolean || null}
          */
-        this.ItemPolygon = null;
-
-        /**
-         * Information about a character, including the character itself and its confidence. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
-         * @type {Array.<DetectedWords> || null}
-         */
-        this.Words = null;
-
-        /**
-         * Coordinates of a word’s four corners on the input image. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
-         * @type {Array.<DetectedWordCoordPoint> || null}
-         */
-        this.WordCoordPoint = null;
+        this.EnableCoord = null;
 
     }
 
@@ -1370,42 +1383,13 @@ The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains
         if (!params) {
             return;
         }
-        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.Polygon) {
-            this.Polygon = new Array();
-            for (let z in params.Polygon) {
-                let obj = new Coord();
-                obj.deserialize(params.Polygon[z]);
-                this.Polygon.push(obj);
-            }
-        }
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-
-        if (params.ItemPolygon) {
-            let obj = new ItemCoord();
-            obj.deserialize(params.ItemPolygon)
-            this.ItemPolygon = obj;
-        }
-
-        if (params.Words) {
-            this.Words = new Array();
-            for (let z in params.Words) {
-                let obj = new DetectedWords();
-                obj.deserialize(params.Words[z]);
-                this.Words.push(obj);
-            }
-        }
-
-        if (params.WordCoordPoint) {
-            this.WordCoordPoint = new Array();
-            for (let z in params.WordCoordPoint) {
-                let obj = new DetectedWordCoordPoint();
-                obj.deserialize(params.WordCoordPoint[z]);
-                this.WordCoordPoint.push(obj);
-            }
-        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
+        this.ItemNames = 'ItemNames' in params ? params.ItemNames : null;
+        this.ReturnFullText = 'ReturnFullText' in params ? params.ReturnFullText : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.EnableCoord = 'EnableCoord' in params ? params.EnableCoord : null;
 
     }
 }
@@ -1560,6 +1544,107 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.RetProfile = 'RetProfile' in params ? params.RetProfile : null;
+
+    }
+}
+
+/**
+ * OCR result.
+ * @class
+ */
+class TextDetection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recognized text line content.
+         * @type {string || null}
+         */
+        this.DetectedText = null;
+
+        /**
+         * Confidence. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Text line coordinates, which are represented as 4 vertex coordinates.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * Extended field.
+The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
+         * @type {ItemCoord || null}
+         */
+        this.ItemPolygon = null;
+
+        /**
+         * Information about a character, including the character itself and its confidence. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+         * @type {Array.<DetectedWords> || null}
+         */
+        this.Words = null;
+
+        /**
+         * Coordinates of a word’s four corners on the input image. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+         * @type {Array.<DetectedWordCoordPoint> || null}
+         */
+        this.WordCoordPoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.ItemPolygon) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.ItemPolygon)
+            this.ItemPolygon = obj;
+        }
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new DetectedWords();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+
+        if (params.WordCoordPoint) {
+            this.WordCoordPoint = new Array();
+            for (let z in params.WordCoordPoint) {
+                let obj = new DetectedWordCoordPoint();
+                obj.deserialize(params.WordCoordPoint[z]);
+                this.WordCoordPoint.push(obj);
+            }
+        }
 
     }
 }
@@ -9100,6 +9185,71 @@ class TollInvoice extends  AbstractModel {
 }
 
 /**
+ * SmartStructuralPro response structure.
+ * @class
+ */
+class SmartStructuralProResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The rotation angle (degrees) of the text on the image. 0: The text is horizontal. Positive value: The text is rotated clockwise. Negative value: The text is rotated counterclockwise.
+         * @type {number || null}
+         */
+        this.Angle = null;
+
+        /**
+         * The structural information (key-value).
+         * @type {Array.<GroupInfo> || null}
+         */
+        this.StructuralList = null;
+
+        /**
+         * The recognized text information.
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Angle = 'Angle' in params ? params.Angle : null;
+
+        if (params.StructuralList) {
+            this.StructuralList = new Array();
+            for (let z in params.StructuralList) {
+                let obj = new GroupInfo();
+                obj.deserialize(params.StructuralList[z]);
+                this.StructuralList.push(obj);
+            }
+        }
+
+        if (params.WordList) {
+            this.WordList = new Array();
+            for (let z in params.WordList) {
+                let obj = new WordItem();
+                obj.deserialize(params.WordList[z]);
+                this.WordList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TableOCR response structure.
  * @class
  */
@@ -9685,9 +9835,10 @@ module.exports = {
     RecognizePhilippinesVoteIDOCRRequest: RecognizePhilippinesVoteIDOCRRequest,
     RecognizeKoreanDrivingLicenseOCRRequest: RecognizeKoreanDrivingLicenseOCRRequest,
     OtherInvoiceItem: OtherInvoiceItem,
-    TextDetection: TextDetection,
+    SmartStructuralProRequest: SmartStructuralProRequest,
     VatInvoiceItemInfo: VatInvoiceItemInfo,
     MainlandPermitOCRRequest: MainlandPermitOCRRequest,
+    TextDetection: TextDetection,
     RecognizePhilippinesTinIDOCRResponse: RecognizePhilippinesTinIDOCRResponse,
     DetectedWords: DetectedWords,
     TableCellInfo: TableCellInfo,
@@ -9760,6 +9911,7 @@ module.exports = {
     MainlandPermitOCRResponse: MainlandPermitOCRResponse,
     NonTaxItem: NonTaxItem,
     TollInvoice: TollInvoice,
+    SmartStructuralProResponse: SmartStructuralProResponse,
     TableOCRResponse: TableOCRResponse,
     DetectedWordCoordPoint: DetectedWordCoordPoint,
     RecognizeKoreanIDCardOCRRequest: RecognizeKoreanIDCardOCRRequest,

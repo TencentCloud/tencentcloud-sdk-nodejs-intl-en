@@ -40,6 +40,7 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const UpgradeDedicatedDCDBInstanceResponse = models.UpgradeDedicatedDCDBInstanceResponse;
+const CreateOnlineDDLJobResponse = models.CreateOnlineDDLJobResponse;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
@@ -130,6 +131,7 @@ const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const KillSessionResponse = models.KillSessionResponse;
 const SlowLogData = models.SlowLogData;
+const CreateOnlineDDLJobRequest = models.CreateOnlineDDLJobRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ViewPrivileges = models.ViewPrivileges;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
@@ -423,14 +425,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to modify instance VIP.
-     * @param {ModifyInstanceVipRequest} req
-     * @param {function(string, ModifyInstanceVipResponse):void} cb
+     * This API is used to get the details of a TDSQL instance.
+     * @param {DescribeDCDBInstanceDetailRequest} req
+     * @param {function(string, DescribeDCDBInstanceDetailResponse):void} cb
      * @public
      */
-    ModifyInstanceVip(req, cb) {
-        let resp = new ModifyInstanceVipResponse();
-        this.request("ModifyInstanceVip", req, resp, cb);
+    DescribeDCDBInstanceDetail(req, cb) {
+        let resp = new DescribeDCDBInstanceDetailResponse();
+        this.request("DescribeDCDBInstanceDetail", req, resp, cb);
     }
 
     /**
@@ -755,6 +757,17 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to modify instance VIP.
+     * @param {ModifyInstanceVipRequest} req
+     * @param {function(string, ModifyInstanceVipResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVip(req, cb) {
+        let resp = new ModifyInstanceVipResponse();
+        this.request("ModifyInstanceVip", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the table information of a TencentDB instance.
      * @param {DescribeDatabaseTableRequest} req
      * @param {function(string, DescribeDatabaseTableResponse):void} cb
@@ -799,14 +812,14 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to get the details of a TDSQL instance.
-     * @param {DescribeDCDBInstanceDetailRequest} req
-     * @param {function(string, DescribeDCDBInstanceDetailResponse):void} cb
+     * This API is used to create an online DDL job.
+     * @param {CreateOnlineDDLJobRequest} req
+     * @param {function(string, CreateOnlineDDLJobResponse):void} cb
      * @public
      */
-    DescribeDCDBInstanceDetail(req, cb) {
-        let resp = new DescribeDCDBInstanceDetailResponse();
-        this.request("DescribeDCDBInstanceDetail", req, resp, cb);
+    CreateOnlineDDLJob(req, cb) {
+        let resp = new CreateOnlineDDLJobResponse();
+        this.request("CreateOnlineDDLJob", req, resp, cb);
     }
 
     /**

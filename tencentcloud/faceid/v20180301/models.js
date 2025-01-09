@@ -227,6 +227,100 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Nigeria driving license
+ * @class
+ */
+class NigeriaDrivingLicense extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Last name.
+Note: This field may return null, indicating that no valid values can be obtained.
+
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * First name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * License number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Issued country.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * Expiration date.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Issued date.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedDate = null;
+
+        /**
+         * Gender.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.IssuedDate = 'IssuedDate' in params ? params.IssuedDate : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+
+    }
+}
+
+/**
  * GetSdkVerificationResult response structure.
  * @class
  */
@@ -506,6 +600,82 @@ class CreateUploadUrlResponse extends  AbstractModel {
         this.ResourceUrl = 'ResourceUrl' in params ? params.ResourceUrl : null;
         this.ExpiredTimestamp = 'ExpiredTimestamp' in params ? params.ExpiredTimestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Malaysia ID card.
+ * @class
+ */
+class NormalMLIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Full Name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * License number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Gender
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FormattedAddress = null;
+
+        /**
+         * Lisence type
+MyKad ID card
+MyPR Permanent resident ID card
+MyTentera Military ID card
+MyKAS Temporary ID card
+POLIS Police ID card
+IKAD Labor ID card
+MyKid Juvenile ID card
+Example: MyKad
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Birthday (Currently, this filed only supports IKAD labor ID card and MyKad ID card)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.FormattedAddress = 'FormattedAddress' in params ? params.FormattedAddress : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
 
     }
 }
@@ -2151,36 +2321,54 @@ class GenerateReflectSequenceRequest extends  AbstractModel {
 }
 
 /**
- * DetectAIFakeFaces response structure.
+ * Bangladesh ID card
  * @class
  */
-class DetectAIFakeFacesResponse extends  AbstractModel {
+class BangladeshIDCard extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
+         * Last name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AttackRiskLevel = null;
+        this.LastName = null;
 
         /**
-         * A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
-         * @type {Array.<AttackRiskDetail> || null}
-         */
-        this.AttackRiskDetailList = null;
-
-        /**
-         * Additional Information
-         * @type {ExtraInfo || null}
-         */
-        this.ExtraInfo = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * First name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FirstName = null;
+
+        /**
+         * License number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Issued country.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
 
     }
 
@@ -2191,23 +2379,12 @@ class DetectAIFakeFacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AttackRiskLevel = 'AttackRiskLevel' in params ? params.AttackRiskLevel : null;
-
-        if (params.AttackRiskDetailList) {
-            this.AttackRiskDetailList = new Array();
-            for (let z in params.AttackRiskDetailList) {
-                let obj = new AttackRiskDetail();
-                obj.deserialize(params.AttackRiskDetailList[z]);
-                this.AttackRiskDetailList.push(obj);
-            }
-        }
-
-        if (params.ExtraInfo) {
-            let obj = new ExtraInfo();
-            obj.deserialize(params.ExtraInfo)
-            this.ExtraInfo = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
 
     }
 }
@@ -2775,30 +2952,54 @@ Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBB
 }
 
 /**
- * 
+ * Pakistan ID card
  * @class
  */
-class RetrievalLivenessExtraInfo extends  AbstractModel {
+class PakistanIDCard extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
+         * Last name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.HitGroup = null;
+        this.LastName = null;
 
         /**
-         * 
-         * @type {number || null}
-         */
-        this.SimilarityScore = null;
-
-        /**
-         * 
+         * First name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.HitTemplate = null;
+        this.FirstName = null;
+
+        /**
+         * License number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Issued country.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
 
     }
 
@@ -2809,9 +3010,12 @@ class RetrievalLivenessExtraInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HitGroup = 'HitGroup' in params ? params.HitGroup : null;
-        this.SimilarityScore = 'SimilarityScore' in params ? params.SimilarityScore : null;
-        this.HitTemplate = 'HitTemplate' in params ? params.HitTemplate : null;
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
 
     }
 }
@@ -2999,6 +3203,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.JapanIDCard = null;
 
+        /**
+         * Bangladesh ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {BangladeshIDCard || null}
+         */
+        this.BangladeshIDCard = null;
+
+        /**
+         * Nigeria ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {NigeriaIDCard || null}
+         */
+        this.NigeriaIDCard = null;
+
+        /**
+         * Nigeria driving license
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {NigeriaDrivingLicense || null}
+         */
+        this.NigeriaDrivingLicense = null;
+
+        /**
+         * Pakistan ID Card
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PakistanIDCard || null}
+         */
+        this.PakistanIDCard = null;
+
+        /**
+         * Pakistan driving license
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PakistanDrivingLicense || null}
+         */
+        this.PakistanDrivingLicense = null;
+
     }
 
     /**
@@ -3103,6 +3342,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new JapanIDCard();
             obj.deserialize(params.JapanIDCard)
             this.JapanIDCard = obj;
+        }
+
+        if (params.BangladeshIDCard) {
+            let obj = new BangladeshIDCard();
+            obj.deserialize(params.BangladeshIDCard)
+            this.BangladeshIDCard = obj;
+        }
+
+        if (params.NigeriaIDCard) {
+            let obj = new NigeriaIDCard();
+            obj.deserialize(params.NigeriaIDCard)
+            this.NigeriaIDCard = obj;
+        }
+
+        if (params.NigeriaDrivingLicense) {
+            let obj = new NigeriaDrivingLicense();
+            obj.deserialize(params.NigeriaDrivingLicense)
+            this.NigeriaDrivingLicense = obj;
+        }
+
+        if (params.PakistanIDCard) {
+            let obj = new PakistanIDCard();
+            obj.deserialize(params.PakistanIDCard)
+            this.PakistanIDCard = obj;
+        }
+
+        if (params.PakistanDrivingLicense) {
+            let obj = new PakistanDrivingLicense();
+            obj.deserialize(params.PakistanDrivingLicense)
+            this.PakistanDrivingLicense = obj;
         }
 
     }
@@ -3562,61 +3831,30 @@ class Address extends  AbstractModel {
 }
 
 /**
- * Malaysia ID card.
+ * 
  * @class
  */
-class NormalMLIDCard extends  AbstractModel {
+class RetrievalLivenessExtraInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full Name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
-        this.FullName = null;
+        this.HitGroup = null;
 
         /**
-         * License number
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.LicenseNumber = null;
+        this.SimilarityScore = null;
 
         /**
-         * Gender
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 
          * @type {string || null}
          */
-        this.Sex = null;
-
-        /**
-         * Address
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FormattedAddress = null;
-
-        /**
-         * Lisence type
-MyKad ID card
-MyPR Permanent resident ID card
-MyTentera Military ID card
-MyKAS Temporary ID card
-POLIS Police ID card
-IKAD Labor ID card
-MyKid Juvenile ID card
-Example: MyKad
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Birthday (Currently, this filed only supports IKAD labor ID card and MyKad ID card)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Birthday = null;
+        this.HitTemplate = null;
 
     }
 
@@ -3627,12 +3865,86 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.HitGroup = 'HitGroup' in params ? params.HitGroup : null;
+        this.SimilarityScore = 'SimilarityScore' in params ? params.SimilarityScore : null;
+        this.HitTemplate = 'HitTemplate' in params ? params.HitTemplate : null;
+
+    }
+}
+
+/**
+ * Nigeria ID card
+ * @class
+ */
+class NigeriaIDCard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Last name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * First name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * License number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Issued country.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+        /**
+         * Gender.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
         this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.FormattedAddress = 'FormattedAddress' in params ? params.FormattedAddress : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Age = 'Age' in params ? params.Age : null;
         this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
 
     }
 }
@@ -4044,6 +4356,83 @@ class ApplySdkVerificationTokenResponse extends  AbstractModel {
         }
         this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
+ * @class
+ */
+class HMTPermit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * English name
+         * @type {string || null}
+         */
+        this.EnglishName = null;
+
+        /**
+         * License number
+         * @type {string || null}
+         */
+        this.Number = null;
+
+        /**
+         * Gender
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Valid date
+         * @type {string || null}
+         */
+        this.ValidDate = null;
+
+        /**
+         * Issued authority
+         * @type {string || null}
+         */
+        this.IssueAuthority = null;
+
+        /**
+         * Issued address
+         * @type {string || null}
+         */
+        this.IssueAddress = null;
+
+        /**
+         * Birthday
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.EnglishName = 'EnglishName' in params ? params.EnglishName : null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
+        this.IssueAuthority = 'IssueAuthority' in params ? params.IssueAuthority : null;
+        this.IssueAddress = 'IssueAddress' in params ? params.IssueAddress : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
 
     }
 }
@@ -5075,60 +5464,36 @@ class LivenessCompareResponse extends  AbstractModel {
 }
 
 /**
- * Exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
+ * DetectAIFakeFaces response structure.
  * @class
  */
-class HMTPermit extends  AbstractModel {
+class DetectAIFakeFacesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name
+         * Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
          * @type {string || null}
          */
-        this.Name = null;
+        this.AttackRiskLevel = null;
 
         /**
-         * English name
-         * @type {string || null}
+         * A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
+         * @type {Array.<AttackRiskDetail> || null}
          */
-        this.EnglishName = null;
+        this.AttackRiskDetailList = null;
 
         /**
-         * License number
-         * @type {string || null}
+         * Additional Information
+         * @type {ExtraInfo || null}
          */
-        this.Number = null;
+        this.ExtraInfo = null;
 
         /**
-         * Gender
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Sex = null;
-
-        /**
-         * Valid date
-         * @type {string || null}
-         */
-        this.ValidDate = null;
-
-        /**
-         * Issued authority
-         * @type {string || null}
-         */
-        this.IssueAuthority = null;
-
-        /**
-         * Issued address
-         * @type {string || null}
-         */
-        this.IssueAddress = null;
-
-        /**
-         * Birthday
-         * @type {string || null}
-         */
-        this.Birthday = null;
+        this.RequestId = null;
 
     }
 
@@ -5139,14 +5504,23 @@ class HMTPermit extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.EnglishName = 'EnglishName' in params ? params.EnglishName : null;
-        this.Number = 'Number' in params ? params.Number : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.ValidDate = 'ValidDate' in params ? params.ValidDate : null;
-        this.IssueAuthority = 'IssueAuthority' in params ? params.IssueAuthority : null;
-        this.IssueAddress = 'IssueAddress' in params ? params.IssueAddress : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.AttackRiskLevel = 'AttackRiskLevel' in params ? params.AttackRiskLevel : null;
+
+        if (params.AttackRiskDetailList) {
+            this.AttackRiskDetailList = new Array();
+            for (let z in params.AttackRiskDetailList) {
+                let obj = new AttackRiskDetail();
+                obj.deserialize(params.AttackRiskDetailList[z]);
+                this.AttackRiskDetailList.push(obj);
+            }
+        }
+
+        if (params.ExtraInfo) {
+            let obj = new ExtraInfo();
+            obj.deserialize(params.ExtraInfo)
+            this.ExtraInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5306,6 +5680,9 @@ MYS: Malaysia
 SGP: Singapore
 JPN: Japan
 TWN:Taiwan
+BGD:Bangladesh 
+NGA:Nigeria
+PAK:Pakistan
 AUTO: Automatic Identification
          * @type {string || null}
          */
@@ -5725,6 +6102,75 @@ class GetLivenessResultRequest extends  AbstractModel {
 }
 
 /**
+ * Pakistan driving license
+ * @class
+ */
+class PakistanDrivingLicense extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Last name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastName = null;
+
+        /**
+         * First name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * License number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * Age.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Age = null;
+
+        /**
+         * Birthday.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Gender.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IssuedCountry = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastName = 'LastName' in params ? params.LastName : null;
+        this.FirstName = 'FirstName' in params ? params.FirstName : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssuedCountry = 'IssuedCountry' in params ? params.IssuedCountry : null;
+
+    }
+}
+
+/**
  * The description of a single comparison result.
  * @class
  */
@@ -5896,12 +6342,14 @@ module.exports = {
     GetLivenessResultResponse: GetLivenessResultResponse,
     GetFaceIdTokenIntlResponse: GetFaceIdTokenIntlResponse,
     InternationalIDPassport: InternationalIDPassport,
+    NigeriaDrivingLicense: NigeriaDrivingLicense,
     GetSdkVerificationResultResponse: GetSdkVerificationResultResponse,
     GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
     DetectAIFakeFacesRequest: DetectAIFakeFacesRequest,
     AttackRiskDetail: AttackRiskDetail,
     ExtraInfo: ExtraInfo,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
+    NormalMLIDCard: NormalMLIDCard,
     ApplyCardVerificationResponse: ApplyCardVerificationResponse,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
     GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
@@ -5922,7 +6370,7 @@ module.exports = {
     GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
-    DetectAIFakeFacesResponse: DetectAIFakeFacesResponse,
+    BangladeshIDCard: BangladeshIDCard,
     VideoLivenessCompareResponse: VideoLivenessCompareResponse,
     PhilippinesSSSID: PhilippinesSSSID,
     CardVerifyResult: CardVerifyResult,
@@ -5930,7 +6378,7 @@ module.exports = {
     VideoLivenessCompareRequest: VideoLivenessCompareRequest,
     ApplyWebVerificationTokenRequest: ApplyWebVerificationTokenRequest,
     ApplyWebVerificationBizTokenIntlResponse: ApplyWebVerificationBizTokenIntlResponse,
-    RetrievalLivenessExtraInfo: RetrievalLivenessExtraInfo,
+    PakistanIDCard: PakistanIDCard,
     ApplyLivenessTokenResponse: ApplyLivenessTokenResponse,
     GetCardVerificationResultRequest: GetCardVerificationResultRequest,
     CardInfo: CardInfo,
@@ -5939,11 +6387,13 @@ module.exports = {
     MainlandIDCard: MainlandIDCard,
     Encryption: Encryption,
     Address: Address,
-    NormalMLIDCard: NormalMLIDCard,
+    RetrievalLivenessExtraInfo: RetrievalLivenessExtraInfo,
+    NigeriaIDCard: NigeriaIDCard,
     NormalIndonesiaIDCard: NormalIndonesiaIDCard,
     CompareFaceLivenessResponse: CompareFaceLivenessResponse,
     IndonesiaIDCard: IndonesiaIDCard,
     ApplySdkVerificationTokenResponse: ApplySdkVerificationTokenResponse,
+    HMTPermit: HMTPermit,
     CreateUploadUrlRequest: CreateUploadUrlRequest,
     ApplyWebVerificationBizTokenIntlRequest: ApplyWebVerificationBizTokenIntlRequest,
     GetWebVerificationResultResponse: GetWebVerificationResultResponse,
@@ -5957,7 +6407,7 @@ module.exports = {
     GetWebVerificationResultIntlRequest: GetWebVerificationResultIntlRequest,
     GeneralCard: GeneralCard,
     LivenessCompareResponse: LivenessCompareResponse,
-    HMTPermit: HMTPermit,
+    DetectAIFakeFacesResponse: DetectAIFakeFacesResponse,
     PhilippinesUMID: PhilippinesUMID,
     PhilippinesTinID: PhilippinesTinID,
     ApplyCardVerificationRequest: ApplyCardVerificationRequest,
@@ -5966,6 +6416,7 @@ module.exports = {
     OCRResult: OCRResult,
     DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
     GetLivenessResultRequest: GetLivenessResultRequest,
+    PakistanDrivingLicense: PakistanDrivingLicense,
     CompareResult: CompareResult,
 
 }

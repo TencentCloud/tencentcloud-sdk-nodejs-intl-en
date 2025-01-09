@@ -19,12 +19,14 @@ const AbstractClient = require('../../common/abstract_client')
 const GetLivenessResultResponse = models.GetLivenessResultResponse;
 const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const InternationalIDPassport = models.InternationalIDPassport;
+const NigeriaDrivingLicense = models.NigeriaDrivingLicense;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const DetectAIFakeFacesRequest = models.DetectAIFakeFacesRequest;
 const AttackRiskDetail = models.AttackRiskDetail;
 const ExtraInfo = models.ExtraInfo;
 const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
+const NormalMLIDCard = models.NormalMLIDCard;
 const ApplyCardVerificationResponse = models.ApplyCardVerificationResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
@@ -45,7 +47,7 @@ const NormalCardInfo = models.NormalCardInfo;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
-const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
+const BangladeshIDCard = models.BangladeshIDCard;
 const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const PhilippinesSSSID = models.PhilippinesSSSID;
 const CardVerifyResult = models.CardVerifyResult;
@@ -53,7 +55,7 @@ const TaiWanIDCard = models.TaiWanIDCard;
 const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 const ApplyWebVerificationTokenRequest = models.ApplyWebVerificationTokenRequest;
 const ApplyWebVerificationBizTokenIntlResponse = models.ApplyWebVerificationBizTokenIntlResponse;
-const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
+const PakistanIDCard = models.PakistanIDCard;
 const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const GetCardVerificationResultRequest = models.GetCardVerificationResultRequest;
 const CardInfo = models.CardInfo;
@@ -62,11 +64,13 @@ const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const MainlandIDCard = models.MainlandIDCard;
 const Encryption = models.Encryption;
 const Address = models.Address;
-const NormalMLIDCard = models.NormalMLIDCard;
+const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
+const NigeriaIDCard = models.NigeriaIDCard;
 const NormalIndonesiaIDCard = models.NormalIndonesiaIDCard;
 const CompareFaceLivenessResponse = models.CompareFaceLivenessResponse;
 const IndonesiaIDCard = models.IndonesiaIDCard;
 const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenResponse;
+const HMTPermit = models.HMTPermit;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTokenIntlRequest;
 const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse;
@@ -80,7 +84,7 @@ const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const GetWebVerificationResultIntlRequest = models.GetWebVerificationResultIntlRequest;
 const GeneralCard = models.GeneralCard;
 const LivenessCompareResponse = models.LivenessCompareResponse;
-const HMTPermit = models.HMTPermit;
+const DetectAIFakeFacesResponse = models.DetectAIFakeFacesResponse;
 const PhilippinesUMID = models.PhilippinesUMID;
 const PhilippinesTinID = models.PhilippinesTinID;
 const ApplyCardVerificationRequest = models.ApplyCardVerificationRequest;
@@ -89,6 +93,7 @@ const MLIDCard = models.MLIDCard;
 const OCRResult = models.OCRResult;
 const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
+const PakistanDrivingLicense = models.PakistanDrivingLicense;
 const CompareResult = models.CompareResult;
 
 
@@ -173,7 +178,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
 
     /**
      * The types of national cards supported by the API and whether instructions on the back of the card are required are as follows:  
-<table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Taiwan</td> <td>ID Card</td> <td>Yes</td> </tr> </tbody> </table>
+<table> <thead> <tr> <td>Nationality</td> <td style="width:200px">CardType</td> <td style="width:200px">Back side required</td> </tr> </thead> <tbody> <tr> <td>Indonesia</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Indonesia</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Hongkong</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Thailand</td> <td>ID card</td> <td>No</td> </tr> <tr> <td>Thailand</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Malaysia</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Singapore</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Philippine</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Japan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Japan</td> <td>Driving License</td> <td>No</td> </tr> <tr> <td>Taiwan</td> <td>ID Card</td> <td>Yes</td> </tr>  <tr> <td>Bangladesh</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Nigeria</td> <td>Driving License</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>ID card</td> <td>Yes</td> </tr> <tr> <td>Pakistan</td> <td>Driving License</td> <td>Yes</td> </tr> </tbody> </table>
      * @param {ApplyCardVerificationRequest} req
      * @param {function(string, ApplyCardVerificationResponse):void} cb
      * @public

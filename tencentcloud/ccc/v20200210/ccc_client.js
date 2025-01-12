@@ -108,6 +108,7 @@ const Variable = models.Variable;
 const CallInNumberMetrics = models.CallInNumberMetrics;
 const CreateExtensionRequest = models.CreateExtensionRequest;
 const StaffSkillGroupList = models.StaffSkillGroupList;
+const AITransferItem = models.AITransferItem;
 const AbortAgentCruiseDialingCampaignRequest = models.AbortAgentCruiseDialingCampaignRequest;
 const DescribePredictiveDialingCampaignsElement = models.DescribePredictiveDialingCampaignsElement;
 const HangUpCallResponse = models.HangUpCallResponse;
@@ -209,7 +210,7 @@ class CccClient extends AbstractClient {
     /**
      * Used to make outbound calls by invoking AI models, limited to the use of proprietary phone numbers. Currently, the Advanced version seats are available for a **limited time** free trial.
 
-Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/66889).
      * @param {CreateAICallRequest} req
      * @param {function(string, CreateAICallResponse):void} cb
      * @public

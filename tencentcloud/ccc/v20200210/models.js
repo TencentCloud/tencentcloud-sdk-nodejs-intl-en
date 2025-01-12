@@ -795,6 +795,18 @@ Currently, the supported languages are as follows. The English name of the langu
         this.EndFunctionDesc = null;
 
         /**
+         * 
+         * @type {boolean || null}
+         */
+        this.TransferFunctionEnable = null;
+
+        /**
+         * 
+         * @type {Array.<AITransferItem> || null}
+         */
+        this.TransferItems = null;
+
+        /**
          * The duration after which the user hasn't spoken to trigger a notification, minimum 10 seconds, default 10 seconds
          * @type {number || null}
          */
@@ -896,6 +908,12 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
          */
         this.CustomTTSConfig = null;
 
+        /**
+         * 
+         * @type {Array.<Variable> || null}
+         */
+        this.PromptVariables = null;
+
     }
 
     /**
@@ -922,10 +940,29 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
         this.InterruptSpeechDuration = 'InterruptSpeechDuration' in params ? params.InterruptSpeechDuration : null;
         this.EndFunctionEnable = 'EndFunctionEnable' in params ? params.EndFunctionEnable : null;
         this.EndFunctionDesc = 'EndFunctionDesc' in params ? params.EndFunctionDesc : null;
+        this.TransferFunctionEnable = 'TransferFunctionEnable' in params ? params.TransferFunctionEnable : null;
+
+        if (params.TransferItems) {
+            this.TransferItems = new Array();
+            for (let z in params.TransferItems) {
+                let obj = new AITransferItem();
+                obj.deserialize(params.TransferItems[z]);
+                this.TransferItems.push(obj);
+            }
+        }
         this.NotifyDuration = 'NotifyDuration' in params ? params.NotifyDuration : null;
         this.NotifyMessage = 'NotifyMessage' in params ? params.NotifyMessage : null;
         this.NotifyMaxCount = 'NotifyMaxCount' in params ? params.NotifyMaxCount : null;
         this.CustomTTSConfig = 'CustomTTSConfig' in params ? params.CustomTTSConfig : null;
+
+        if (params.PromptVariables) {
+            this.PromptVariables = new Array();
+            for (let z in params.PromptVariables) {
+                let obj = new Variable();
+                obj.deserialize(params.PromptVariables[z]);
+                this.PromptVariables.push(obj);
+            }
+        }
 
     }
 }
@@ -5729,6 +5766,48 @@ class StaffSkillGroupList extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class AITransferItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TransferFunctionName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TransferFunctionDesc = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TransferSkillGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TransferFunctionName = 'TransferFunctionName' in params ? params.TransferFunctionName : null;
+        this.TransferFunctionDesc = 'TransferFunctionDesc' in params ? params.TransferFunctionDesc : null;
+        this.TransferSkillGroupId = 'TransferSkillGroupId' in params ? params.TransferSkillGroupId : null;
+
+    }
+}
+
+/**
  * AbortAgentCruiseDialingCampaign request structure.
  * @class
  */
@@ -7858,6 +7937,7 @@ module.exports = {
     CallInNumberMetrics: CallInNumberMetrics,
     CreateExtensionRequest: CreateExtensionRequest,
     StaffSkillGroupList: StaffSkillGroupList,
+    AITransferItem: AITransferItem,
     AbortAgentCruiseDialingCampaignRequest: AbortAgentCruiseDialingCampaignRequest,
     DescribePredictiveDialingCampaignsElement: DescribePredictiveDialingCampaignsElement,
     HangUpCallResponse: HangUpCallResponse,

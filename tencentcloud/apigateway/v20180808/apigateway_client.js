@@ -135,7 +135,7 @@ const DescribeUsagePlanSecretIdsResponse = models.DescribeUsagePlanSecretIdsResp
 const CreatePluginRequest = models.CreatePluginRequest;
 const MicroServiceReq = models.MicroServiceReq;
 const ModifySubDomainResponse = models.ModifySubDomainResponse;
-const DescribeServiceSubDomainMappingsResponse = models.DescribeServiceSubDomainMappingsResponse;
+const DescribeExclusiveInstanceRegionsResponse = models.DescribeExclusiveInstanceRegionsResponse;
 const BindSecretIdsRequest = models.BindSecretIdsRequest;
 const UnBindEnvironmentResponse = models.UnBindEnvironmentResponse;
 const ModifyUpstreamResultInfo = models.ModifyUpstreamResultInfo;
@@ -185,8 +185,9 @@ const BindSecretIdsResponse = models.BindSecretIdsResponse;
 const CreateApiRsp = models.CreateApiRsp;
 const UsagePlanBindEnvironment = models.UsagePlanBindEnvironment;
 const DeleteApiRequest = models.DeleteApiRequest;
-const DescribeServiceSubDomainMappingsRequest = models.DescribeServiceSubDomainMappingsRequest;
+const DescribeExclusiveInstanceRegionsRequest = models.DescribeExclusiveInstanceRegionsRequest;
 const DescribeApiAppResponse = models.DescribeApiAppResponse;
+const DescribeServiceSubDomainMappingsResponse = models.DescribeServiceSubDomainMappingsResponse;
 const OauthConfig = models.OauthConfig;
 const DescribeApiAppsStatusResponse = models.DescribeApiAppsStatusResponse;
 const ServiceSubDomainMappings = models.ServiceSubDomainMappings;
@@ -208,7 +209,7 @@ const ResetAPIDocPasswordRequest = models.ResetAPIDocPasswordRequest;
 const ApiUsagePlan = models.ApiUsagePlan;
 const IPStrategyApi = models.IPStrategyApi;
 const DescribeAPIDocsResponse = models.DescribeAPIDocsResponse;
-const DetachPluginResponse = models.DetachPluginResponse;
+const DescribeServiceSubDomainMappingsRequest = models.DescribeServiceSubDomainMappingsRequest;
 const DeletePluginResponse = models.DeletePluginResponse;
 const DescribeUpstreamBindApis = models.DescribeUpstreamBindApis;
 const ModifyServiceEnvironmentStrategyRequest = models.ModifyServiceEnvironmentStrategyRequest;
@@ -268,6 +269,7 @@ const DescribeApiKeysStatusResponse = models.DescribeApiKeysStatusResponse;
 const UsagePlanStatusInfo = models.UsagePlanStatusInfo;
 const DescribeLogSearchRequest = models.DescribeLogSearchRequest;
 const BuildAPIDocRequest = models.BuildAPIDocRequest;
+const DetachPluginResponse = models.DetachPluginResponse;
 const ApiKeysStatus = models.ApiKeysStatus;
 const APIDoc = models.APIDoc;
 const DescribeServiceUsagePlanResponse = models.DescribeServiceUsagePlanResponse;
@@ -446,15 +448,15 @@ In API Gateway, a usage plan can be bound to multiple key pairs. You can use thi
     }
 
     /**
-     * This API is used to query the path mappings of a custom domain name.
-In API Gateway, you can bind a custom domain name to a service and map its paths. You can customize different path mappings to up to 3 environments under the service. This API is used to query the list of path mappings of a custom domain name bound to a service.
-     * @param {DescribeServiceSubDomainMappingsRequest} req
-     * @param {function(string, DescribeServiceSubDomainMappingsResponse):void} cb
+     * This API is used to create a usage plan.
+To use API Gateway, you need to create a usage plan and bind it to a service environment.
+     * @param {CreateUsagePlanRequest} req
+     * @param {function(string, CreateUsagePlanResponse):void} cb
      * @public
      */
-    DescribeServiceSubDomainMappings(req, cb) {
-        let resp = new DescribeServiceSubDomainMappingsResponse();
-        this.request("DescribeServiceSubDomainMappings", req, resp, cb);
+    CreateUsagePlan(req, cb) {
+        let resp = new CreateUsagePlanResponse();
+        this.request("CreateUsagePlan", req, resp, cb);
     }
 
     /**
@@ -859,6 +861,18 @@ A service is generally published on several versions. This API can be used to qu
     }
 
     /**
+     * This API is used to query the path mappings of a custom domain name.
+In API Gateway, you can bind a custom domain name to a service and map its paths. You can customize different path mappings to up to 3 environments under the service. This API is used to query the list of path mappings of a custom domain name bound to a service.
+     * @param {DescribeServiceSubDomainMappingsRequest} req
+     * @param {function(string, DescribeServiceSubDomainMappingsResponse):void} cb
+     * @public
+     */
+    DescribeServiceSubDomainMappings(req, cb) {
+        let resp = new DescribeServiceSubDomainMappingsResponse();
+        this.request("DescribeServiceSubDomainMappings", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind a plugin to an API.
      * @param {AttachPluginRequest} req
      * @param {function(string, AttachPluginResponse):void} cb
@@ -1200,15 +1214,14 @@ To make authentication and throttling for a service take effect, you need to bin
     }
 
     /**
-     * This API is used to create a usage plan.
-To use API Gateway, you need to create a usage plan and bind it to a service environment.
-     * @param {CreateUsagePlanRequest} req
-     * @param {function(string, CreateUsagePlanResponse):void} cb
+     * Get the list of supported regions for dedicated instances
+     * @param {DescribeExclusiveInstanceRegionsRequest} req
+     * @param {function(string, DescribeExclusiveInstanceRegionsResponse):void} cb
      * @public
      */
-    CreateUsagePlan(req, cb) {
-        let resp = new CreateUsagePlanResponse();
-        this.request("CreateUsagePlan", req, resp, cb);
+    DescribeExclusiveInstanceRegions(req, cb) {
+        let resp = new DescribeExclusiveInstanceRegionsResponse();
+        this.request("DescribeExclusiveInstanceRegions", req, resp, cb);
     }
 
     /**

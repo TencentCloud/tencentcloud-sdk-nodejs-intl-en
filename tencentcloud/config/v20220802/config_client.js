@@ -17,25 +17,28 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ResourceListInfo = models.ResourceListInfo;
-const ListAggregateConfigRulesRequest = models.ListAggregateConfigRulesRequest;
-const ConfigRule = models.ConfigRule;
-const Tag = models.Tag;
-const ListConfigRulesResponse = models.ListConfigRulesResponse;
-const DescribeDiscoveredResourceResponse = models.DescribeDiscoveredResourceResponse;
-const ListAggregateConfigRulesResponse = models.ListAggregateConfigRulesResponse;
-const InputParameterForManage = models.InputParameterForManage;
-const ListConfigRulesRequest = models.ListConfigRulesRequest;
+const ListAggregateDiscoveredResourcesRequest = models.ListAggregateDiscoveredResourcesRequest;
 const SourceConditionForManage = models.SourceConditionForManage;
+const ListAggregateConfigRulesRequest = models.ListAggregateConfigRulesRequest;
+const DescribeDiscoveredResourceRequest = models.DescribeDiscoveredResourceRequest;
+const PutEvaluationsResponse = models.PutEvaluationsResponse;
+const Evaluation = models.Evaluation;
+const DescribeDiscoveredResourceResponse = models.DescribeDiscoveredResourceResponse;
+const InputParameterForManage = models.InputParameterForManage;
+const ListConfigRulesResponse = models.ListConfigRulesResponse;
+const ListDiscoveredResourcesResponse = models.ListDiscoveredResourcesResponse;
+const ListDiscoveredResourcesRequest = models.ListDiscoveredResourcesRequest;
+const Annotation = models.Annotation;
+const ConfigRule = models.ConfigRule;
 const TriggerType = models.TriggerType;
 const PutEvaluationsRequest = models.PutEvaluationsRequest;
 const Filter = models.Filter;
-const DescribeDiscoveredResourceRequest = models.DescribeDiscoveredResourceRequest;
-const ListDiscoveredResourcesResponse = models.ListDiscoveredResourcesResponse;
-const ListDiscoveredResourcesRequest = models.ListDiscoveredResourcesRequest;
+const ListAggregateConfigRulesResponse = models.ListAggregateConfigRulesResponse;
+const ListAggregateDiscoveredResourcesResponse = models.ListAggregateDiscoveredResourcesResponse;
+const ListConfigRulesRequest = models.ListConfigRulesRequest;
+const AggregateResourceInfo = models.AggregateResourceInfo;
+const Tag = models.Tag;
 const InputParameter = models.InputParameter;
-const PutEvaluationsResponse = models.PutEvaluationsResponse;
-const Evaluation = models.Evaluation;
-const Annotation = models.Annotation;
 
 
 /**
@@ -49,14 +52,14 @@ class ConfigClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get the rule list.
-     * @param {ListConfigRulesRequest} req
-     * @param {function(string, ListConfigRulesResponse):void} cb
+     * This API is used to get the account group rule list.
+     * @param {ListAggregateConfigRulesRequest} req
+     * @param {function(string, ListAggregateConfigRulesResponse):void} cb
      * @public
      */
-    ListConfigRules(req, cb) {
-        let resp = new ListConfigRulesResponse();
-        this.request("ListConfigRules", req, resp, cb);
+    ListAggregateConfigRules(req, cb) {
+        let resp = new ListAggregateConfigRulesResponse();
+        this.request("ListAggregateConfigRules", req, resp, cb);
     }
 
     /**
@@ -71,25 +74,14 @@ class ConfigClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the account group rule list.
-     * @param {ListAggregateConfigRulesRequest} req
-     * @param {function(string, ListAggregateConfigRulesResponse):void} cb
+     * This API is used to get the rule list.
+     * @param {ListConfigRulesRequest} req
+     * @param {function(string, ListConfigRulesResponse):void} cb
      * @public
      */
-    ListAggregateConfigRules(req, cb) {
-        let resp = new ListAggregateConfigRulesResponse();
-        this.request("ListAggregateConfigRules", req, resp, cb);
-    }
-
-    /**
-     * This API is used to report custom rule evaluation results.
-     * @param {PutEvaluationsRequest} req
-     * @param {function(string, PutEvaluationsResponse):void} cb
-     * @public
-     */
-    PutEvaluations(req, cb) {
-        let resp = new PutEvaluationsResponse();
-        this.request("PutEvaluations", req, resp, cb);
+    ListConfigRules(req, cb) {
+        let resp = new ListConfigRulesResponse();
+        this.request("ListConfigRules", req, resp, cb);
     }
 
     /**
@@ -101,6 +93,28 @@ class ConfigClient extends AbstractClient {
     DescribeDiscoveredResource(req, cb) {
         let resp = new DescribeDiscoveredResourceResponse();
         this.request("DescribeDiscoveredResource", req, resp, cb);
+    }
+
+    /**
+     * Account Group access the list of resources.
+     * @param {ListAggregateDiscoveredResourcesRequest} req
+     * @param {function(string, ListAggregateDiscoveredResourcesResponse):void} cb
+     * @public
+     */
+    ListAggregateDiscoveredResources(req, cb) {
+        let resp = new ListAggregateDiscoveredResourcesResponse();
+        this.request("ListAggregateDiscoveredResources", req, resp, cb);
+    }
+
+    /**
+     * This API is used to report custom rule evaluation results.
+     * @param {PutEvaluationsRequest} req
+     * @param {function(string, PutEvaluationsResponse):void} cb
+     * @public
+     */
+    PutEvaluations(req, cb) {
+        let resp = new PutEvaluationsResponse();
+        this.request("PutEvaluations", req, resp, cb);
     }
 
 

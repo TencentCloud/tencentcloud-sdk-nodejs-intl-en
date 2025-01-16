@@ -567,6 +567,41 @@ class DescribeCostSummaryByProductResponse extends  AbstractModel {
 }
 
 /**
+ * Product details
+ * @class
+ */
+class ProductInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product detail name identifier
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Product details
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DeleteAllocationTag response structure.
  * @class
  */
@@ -3295,6 +3330,288 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Total = 'Total' in params ? params.Total : null;
         this.Context = 'Context' in params ? params.Context : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Order data object
+ * @class
+ */
+class Deal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID.
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * The status of the order. 1: unpaid; 2: paid; 3: shipping; 4: shipped; 5: shipment failed; 6: refunded; 7: closed case; 8: order expired; 9: order invalidated; 10: product invalidated; 11: third-party payment refused; 12: payment in process
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Payer
+         * @type {string || null}
+         */
+        this.Payer = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Creator
+         * @type {string || null}
+         */
+        this.Creator = null;
+
+        /**
+         * Actual payment amount (pent)
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Voucher offset amount (pent)
+         * @type {number || null}
+         */
+        this.VoucherDecline = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Product category ID
+         * @type {number || null}
+         */
+        this.GoodsCategoryId = null;
+
+        /**
+         * Product details
+         * @type {Array.<ProductInfo> || null}
+         */
+        this.ProductInfo = null;
+
+        /**
+         * Duration
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Time unit
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Currency unit
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Discount rate
+         * @type {number || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Unit price (cents)
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * Original price (cents)
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * Product code
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * Subproduct code
+         * @type {string || null}
+         */
+        this.SubProductCode = null;
+
+        /**
+         * Large order number.
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
+        /**
+         * Refund formula
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Formula = null;
+
+        /**
+         * Refund involves order information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RefReturnDeals = null;
+
+        /**
+         * Billing mode: `prePay` (prepaid), `postPay` (pay-as-you-go), `riPay` (reserved instance)
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Transaction type
+
+`modifyNetworkMode`: Adjusting bandwidth mode
+`modifyNetworkSize`: Adjusting bandwidth size
+`refund`: Refund
+`downgrade`: Downgrade
+upgrade (upgrade)
+renew
+purchase
+preMoveOut annual and monthly subscription resources
+preMoveIn annual and monthly subscription resources
+preToPost prepaid to postpaid
+postMoveOut move out pay-as-you-go resources
+postMoveIn move in pay-as-you-go resources
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Product code Chinese name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Subproduct code Chinese name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubProductName = null;
+
+        /**
+         * The resource ID corresponding to the order. If the query parameter `Limit` exceeds 200, null will be returned.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Payer = 'Payer' in params ? params.Payer : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Creator = 'Creator' in params ? params.Creator : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.VoucherDecline = 'VoucherDecline' in params ? params.VoucherDecline : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.GoodsCategoryId = 'GoodsCategoryId' in params ? params.GoodsCategoryId : null;
+
+        if (params.ProductInfo) {
+            this.ProductInfo = new Array();
+            for (let z in params.ProductInfo) {
+                let obj = new ProductInfo();
+                obj.deserialize(params.ProductInfo[z]);
+                this.ProductInfo.push(obj);
+            }
+        }
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.Formula = 'Formula' in params ? params.Formula : null;
+        this.RefReturnDeals = 'RefReturnDeals' in params ? params.RefReturnDeals : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.SubProductName = 'SubProductName' in params ? params.SubProductName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
+ * DescribeDealsByCond response structure.
+ * @class
+ */
+class DescribeDealsByCondResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order list
+         * @type {Array.<Deal> || null}
+         */
+        this.Deals = null;
+
+        /**
+         * Total number of orders
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Deals) {
+            this.Deals = new Array();
+            for (let z in params.Deals) {
+                let obj = new Deal();
+                obj.deserialize(params.Deals[z]);
+                this.Deals.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7216,6 +7533,102 @@ class DescribeVoucherInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDealsByCond request structure.
+ * @class
+ */
+class DescribeDealsByCondRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time 
+Example :2016-01-01 00:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time 
+Example:2016-02-01 00:00:00. 
+It is recommended that the span does not exceed 3 months.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The number of records per page. The default is 20, and the maximum is 1,000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The page number the records start from, starting from 0. The default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Order status, default is 4 (successful order)
+Status of the order
+1: unpaid
+2: paid 
+3: shipment in progress
+4: shipped
+5`: Shipment Failed
+6`: Refunded
+7`: Ticket closed
+8`: Order expired
+9`: Order invalid
+10: product invalidated
+11: third-party payment refused
+12: payment in process
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Sub-order number
+Example: 202202021234567
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * Large order number.
+Example: 202202021234566
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
+        /**
+         * Resource ID
+Example:ins-a2bb34
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
  * DescribeDosageCosDetailByDate response structure.
  * @class
  */
@@ -8106,6 +8519,7 @@ module.exports = {
     AnalyseActionTypeDetail: AnalyseActionTypeDetail,
     DescribeCostExplorerSummaryRequest: DescribeCostExplorerSummaryRequest,
     DescribeCostSummaryByProductResponse: DescribeCostSummaryByProductResponse,
+    ProductInfo: ProductInfo,
     DeleteAllocationTagResponse: DeleteAllocationTagResponse,
     DescribeBillDetailForOrganizationResponse: DescribeBillDetailForOrganizationResponse,
     BillDetailComponentConfig: BillDetailComponentConfig,
@@ -8142,6 +8556,8 @@ module.exports = {
     DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
     BillDetail: BillDetail,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
+    Deal: Deal,
+    DescribeDealsByCondResponse: DescribeDealsByCondResponse,
     ConditionPayMode: ConditionPayMode,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
     DescribeBillAdjustInfoRequest: DescribeBillAdjustInfoRequest,
@@ -8193,6 +8609,7 @@ module.exports = {
     BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
     UsageRecords: UsageRecords,
     DescribeVoucherInfoRequest: DescribeVoucherInfoRequest,
+    DescribeDealsByCondRequest: DescribeDealsByCondRequest,
     DescribeDosageCosDetailByDateResponse: DescribeDosageCosDetailByDateResponse,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillSummaryForOrganizationResponse: DescribeBillSummaryForOrganizationResponse,

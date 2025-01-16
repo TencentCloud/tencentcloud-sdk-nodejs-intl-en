@@ -25,6 +25,7 @@ const ConditionBusiness = models.ConditionBusiness;
 const AnalyseActionTypeDetail = models.AnalyseActionTypeDetail;
 const DescribeCostExplorerSummaryRequest = models.DescribeCostExplorerSummaryRequest;
 const DescribeCostSummaryByProductResponse = models.DescribeCostSummaryByProductResponse;
+const ProductInfo = models.ProductInfo;
 const DeleteAllocationTagResponse = models.DeleteAllocationTagResponse;
 const DescribeBillDetailForOrganizationResponse = models.DescribeBillDetailForOrganizationResponse;
 const BillDetailComponentConfig = models.BillDetailComponentConfig;
@@ -61,6 +62,8 @@ const ApplicableProducts = models.ApplicableProducts;
 const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
 const BillDetail = models.BillDetail;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const Deal = models.Deal;
+const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
 const ConditionPayMode = models.ConditionPayMode;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
 const DescribeBillAdjustInfoRequest = models.DescribeBillAdjustInfoRequest;
@@ -112,6 +115,7 @@ const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const UsageRecords = models.UsageRecords;
 const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
+const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
@@ -400,6 +404,17 @@ Note: The API request may fail due to network instability or other exceptions. I
     DeleteAllocationTag(req, cb) {
         let resp = new DeleteAllocationTagResponse();
         this.request("DeleteAllocationTag", req, resp, cb);
+    }
+
+    /**
+     * Querying orders
+     * @param {DescribeDealsByCondRequest} req
+     * @param {function(string, DescribeDealsByCondResponse):void} cb
+     * @public
+     */
+    DescribeDealsByCond(req, cb) {
+        let resp = new DescribeDealsByCondResponse();
+        this.request("DescribeDealsByCond", req, resp, cb);
     }
 
     /**

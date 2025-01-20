@@ -38,6 +38,7 @@ const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const DescribeCustomerBillDownloadUrlResponse = models.DescribeCustomerBillDownloadUrlResponse;
 const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
@@ -49,6 +50,7 @@ const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
+const DescribeCustomerBillDownloadUrlRequest = models.DescribeCustomerBillDownloadUrlRequest;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
@@ -316,14 +318,27 @@ Note:This API is used to manually send the invitation link to the customer if th
     }
 
     /**
-     * This API is used to obtain the total amount of customer bills by product.
-     * @param {DescribeBillSummaryByProductRequest} req
-     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
+     * This API is used to get the URL for downloading the customer bill file by reseller. The download conditions are as follows:
+1. Detailed bills (billDetail and billDetailPack) can be downloaded starting from June 2022; resource bills (billResource and billResourcePack) can be downloaded starting from November 2023.
+2. Bill packages (billDetailPack and billResourcePack) can only be downloaded after billing.
+     * @param {DescribeCustomerBillDownloadUrlRequest} req
+     * @param {function(string, DescribeCustomerBillDownloadUrlResponse):void} cb
      * @public
      */
-    DescribeBillSummaryByProduct(req, cb) {
-        let resp = new DescribeBillSummaryByProductResponse();
-        this.request("DescribeBillSummaryByProduct", req, resp, cb);
+    DescribeCustomerBillDownloadUrl(req, cb) {
+        let resp = new DescribeCustomerBillDownloadUrlResponse();
+        this.request("DescribeCustomerBillDownloadUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used for a partner to the credits and basic information of cutomers.
+     * @param {QueryCustomersCreditRequest} req
+     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * @public
+     */
+    QueryCustomersCredit(req, cb) {
+        let resp = new QueryCustomersCreditResponse();
+        this.request("QueryCustomersCredit", req, resp, cb);
     }
 
     /**
@@ -427,14 +442,14 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
     }
 
     /**
-     * This API is used for a partner to the credits and basic information of cutomers.
-     * @param {QueryCustomersCreditRequest} req
-     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * This API is used to obtain the total amount of customer bills by product.
+     * @param {DescribeBillSummaryByProductRequest} req
+     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
      * @public
      */
-    QueryCustomersCredit(req, cb) {
-        let resp = new QueryCustomersCreditResponse();
-        this.request("QueryCustomersCredit", req, resp, cb);
+    DescribeBillSummaryByProduct(req, cb) {
+        let resp = new DescribeBillSummaryByProductResponse();
+        this.request("DescribeBillSummaryByProduct", req, resp, cb);
     }
 
 

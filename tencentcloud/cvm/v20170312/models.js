@@ -319,7 +319,7 @@ class DeleteDisasterRecoverGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 100 spread placement groups in each request.
+         * ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 10 spread placement groups in each request.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -3270,7 +3270,7 @@ class DescribeDisasterRecoverGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID list of spread placement groups. You can operate up to 100 spread placement groups in each request.
+         * ID list of spread placement groups. You can operate up to 10 spread placement groups in each request.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;

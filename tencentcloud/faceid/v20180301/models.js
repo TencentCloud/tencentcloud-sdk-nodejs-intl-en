@@ -3579,6 +3579,12 @@ The default value is blink. The different action types passed in this parameter 
          */
         this.ActionList = null;
 
+        /**
+         * Control liveness retry number.The value range is 1-99.
+         * @type {number || null}
+         */
+        this.LivenessRetryLimit = null;
+
     }
 
     /**
@@ -3600,6 +3606,7 @@ The default value is blink. The different action types passed in this parameter 
         this.Language = 'Language' in params ? params.Language : null;
         this.AutoDowngrade = 'AutoDowngrade' in params ? params.AutoDowngrade : null;
         this.ActionList = 'ActionList' in params ? params.ActionList : null;
+        this.LivenessRetryLimit = 'LivenessRetryLimit' in params ? params.LivenessRetryLimit : null;
 
     }
 }

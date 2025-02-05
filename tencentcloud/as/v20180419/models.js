@@ -227,6 +227,12 @@ This parameter will overwrite the original instance tag list. To add new tags, y
          */
         this.DedicatedClusterId = null;
 
+        /**
+         * Custom metadata.
+         * @type {Metadata || null}
+         */
+        this.Metadata = null;
+
     }
 
     /**
@@ -322,6 +328,12 @@ This parameter will overwrite the original instance tag list. To add new tags, y
         }
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
+
+        if (params.Metadata) {
+            let obj = new Metadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
 
     }
 }
@@ -1202,6 +1214,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
+
+    }
+}
+
+/**
+ * Custom Metadata
+ * @class
+ */
+class Metadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom metadata key-value pair list.
+         * @type {Array.<MetadataItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new MetadataItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
 
     }
 }
@@ -2887,7 +2935,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * Project ID of the launch configuration. The default project is used if it’s left blank.
+         * Project ID of the launch configuration. The default project is used if it is left blank.
 Note that this project ID is not the same as the project ID of the scaling group. 
          * @type {number || null}
          */
@@ -3050,6 +3098,12 @@ Note: This field is default to empty
          */
         this.DedicatedClusterId = null;
 
+        /**
+         * Custom metadata.
+         * @type {Metadata || null}
+         */
+        this.Metadata = null;
+
     }
 
     /**
@@ -3155,6 +3209,12 @@ Note: This field is default to empty
         this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
         this.ImageFamily = 'ImageFamily' in params ? params.ImageFamily : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
+
+        if (params.Metadata) {
+            let obj = new Metadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
 
     }
 }
@@ -5476,9 +5536,9 @@ class LoginSettings extends  AbstractModel {
 
         /**
          * Instance login password. The password complexity requirements vary according to the operating system type. The details are as follows:
-<li>The login password for Linux instances should contain 8 to 16 characters, including at least two types of the following characters: letters, digits, and special characters (such as ()`~!@#$%^&*-+=|{}[]:;',.?/).</li>
-<li>The login password for Windows instances should contain 12 to 16 characters, including at least three types of the following characters: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+={}[]:;',.?/).</li>
-If this parameter is not specified, the system will generate a random password and notify the user via the message center.
+- For a Linux system, the password should contain 8 to 30 characters consisting of at least two of the four character types: lowercase letters, uppercase letters, digits, and special characters.
+- For a Windows system, the password should contain 12 to 30 characters consisting of at least three of the four character types: lowercase letters, uppercase letters, digits, and special characters.
+- If this parameter is not specified, the system will generate a random password and notify the user via the message centerSupported special characters: ( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /
          * @type {string || null}
          */
         this.Password = null;
@@ -6858,6 +6918,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ReplaceMode = null;
 
+        /**
+         * Automatic instance tag update. The default value is false. If this feature is enabled, tags of running instances in a scaling group will be updated as well if the scaling group tags are updated. (This feature takes effect for tag creation and editing but not tag deletion.) The update does not take effect immediately due to certain latency.
+         * @type {boolean || null}
+         */
+        this.AutoUpdateInstanceTags = null;
+
     }
 
     /**
@@ -6871,6 +6937,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ScalingMode = 'ScalingMode' in params ? params.ScalingMode : null;
         this.ReplaceLoadBalancerUnhealthy = 'ReplaceLoadBalancerUnhealthy' in params ? params.ReplaceLoadBalancerUnhealthy : null;
         this.ReplaceMode = 'ReplaceMode' in params ? params.ReplaceMode : null;
+        this.AutoUpdateInstanceTags = 'AutoUpdateInstanceTags' in params ? params.AutoUpdateInstanceTags : null;
 
     }
 }
@@ -7078,7 +7145,7 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.ScalingPolicyType = null;
 
         /**
-         * The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
+         * The method to adjust the desired capacity after the alarm is triggered. It is only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
          * @type {string || null}
          */
         this.AdjustmentType = null;
@@ -7099,18 +7166,18 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.Cooldown = null;
 
         /**
-         * Alarm monitoring metric. It’s only available when `ScalingPolicyType` is `Simple`.
+         * Alarm monitoring metric. It is only available when `ScalingPolicyType` is `Simple`.
          * @type {MetricAlarm || null}
          */
         this.MetricAlarm = null;
 
         /**
-         * Predefined monitoring item, which is applicable only to target tracking policies. Valid values:
-<li>ASG_AVG_CPU_UTILIZATION: average CPU utilization.</li>
-<li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth.</li>
-<li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth.</li>
-<li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth.</li>
-<li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth.</li>
+         * Predefined monitoring item, applicable only to target tracking policies. Valid values:
+<li>ASG_AVG_CPU_UTILIZATION: average CPU utilization</li>
+<li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth</li>
+<li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth</li>
+<li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth</li>
+<li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth</li>
          * @type {string || null}
          */
         this.PredefinedMetricType = null;
@@ -7127,7 +7194,7 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.TargetValue = null;
 
         /**
-         * Instance warm-up period (in seconds). It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
+         * Instance warm-up period (in seconds). It is only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
          * @type {number || null}
          */
         this.EstimatedInstanceWarmup = null;
@@ -8243,7 +8310,7 @@ Setting it to `true` will clear the hostname settings, which means that CVM newl
 
         /**
          * Whether to clear the CVM instance name settings. This parameter is optional and the default value is `false`.
-Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the “as-{{AutoScalingGroupName}} format.
+Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the as-{{AutoScalingGroupName}} format.
          * @type {boolean || null}
          */
         this.ClearInstanceNameSettings = null;
@@ -8262,6 +8329,12 @@ If true is filled in, it indicates that the instance tag list should be cleared.
          */
         this.ClearInstanceTags = null;
 
+        /**
+         * Whether to clear metadata, optional, defaults to false. Setting it to true will clear metadata, the CVMs created based on this will not be associated with custom metadata.
+         * @type {boolean || null}
+         */
+        this.ClearMetadata = null;
+
     }
 
     /**
@@ -8277,6 +8350,7 @@ If true is filled in, it indicates that the instance tag list should be cleared.
         this.ClearInstanceNameSettings = 'ClearInstanceNameSettings' in params ? params.ClearInstanceNameSettings : null;
         this.ClearDisasterRecoverGroupIds = 'ClearDisasterRecoverGroupIds' in params ? params.ClearDisasterRecoverGroupIds : null;
         this.ClearInstanceTags = 'ClearInstanceTags' in params ? params.ClearInstanceTags : null;
+        this.ClearMetadata = 'ClearMetadata' in params ? params.ClearMetadata : null;
 
     }
 }
@@ -9056,7 +9130,7 @@ Default value: KEEP_CHARGING.
 }
 
 /**
- * This describes the information related to the Cloud Monitor service.
+ * Information related to Tencent Cloud Observability Platform (TCOP, formerly Cloud Monitor).
  * @class
  */
 class RunMonitorServiceEnabled extends  AbstractModel {
@@ -9064,9 +9138,9 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the [Tencent Cloud Observability Platform](https://www.tencentcloud.com/document/product/248?lang=en&pg=) service. Valid values:
-<li>TRUE: enable.</li>
-<li>FALSE: disable.</li>
+         * Whether [TCOP (formerly Cloud Monitor)](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1) is enabled. Valid values:
+<li>TRUE: enabled</li>
+<li>FALSE: disabled</li>
 Default value: TRUE.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
@@ -9083,6 +9157,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * A set of key-value pair information for custom Metadata
+ * @class
+ */
+class MetadataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom metadata key.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Custom metadata value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -9438,6 +9547,7 @@ module.exports = {
     ModifyScheduledActionRequest: ModifyScheduledActionRequest,
     DescribeAutoScalingGroupsRequest: DescribeAutoScalingGroupsRequest,
     LaunchConfiguration: LaunchConfiguration,
+    Metadata: Metadata,
     DescribeAccountLimitsResponse: DescribeAccountLimitsResponse,
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     RelatedInstance: RelatedInstance,
@@ -9581,6 +9691,7 @@ module.exports = {
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
     StopAutoScalingInstancesRequest: StopAutoScalingInstancesRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    MetadataItem: MetadataItem,
     CancelInstanceRefreshResponse: CancelInstanceRefreshResponse,
     ActivtyRelatedInstance: ActivtyRelatedInstance,
     CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,

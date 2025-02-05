@@ -9352,6 +9352,8 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
 
         /**
          * Whether it is an audio-only template. 0: video template. 1: audio-only template.
+
+Default value: 0
          * @type {number || null}
          */
         this.PureAudio = null;
@@ -10188,23 +10190,25 @@ Note: When resolution adaption is enabled, `Width` cannot be smaller than `Heigh
         this.ResolutionAdaptive = null;
 
         /**
-         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+         * Maximum value of the video stream width (or long edge) in px. Value range: 0 and [128, 4096].
+<li>If both Width and Height are 0, the resolution is the same as the source.</li>
+<li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
+<li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
+<li>If both Width and Height are not 0, the resolution is as specified by the user.</li>
 Default value: 0.
+Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+         * Maximum value of the video stream height (or short edge) in px. Value range: 0 and [128, 4,096].
+<li>If both Width and Height are 0, the resolution is the same as the source.</li>
+<li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
+<li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
+<li>If both Width and Height are not 0, the resolution is as specified by the user.</li>
 Default value: 0.
+Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
          * @type {number || null}
          */
         this.Height = null;
@@ -13788,17 +13792,21 @@ Note: When resolution adaption is enabled, `Width` cannot be smaller than `Heigh
         this.ResolutionAdaptive = null;
 
         /**
-         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+         * Maximum value of the video stream width (or long edge) in px. Value range: 0 and [128, 4096].
+<li>If both Width and Height are 0, the resolution is the same as the source.</li>
+<li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
+<li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
+<li>If both Width and Height are not 0, the resolution is as specified by the user.</li>
+Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
+         * Maximum value of the video stream height (or short edge) in px. Value range: 0 and [128, 4,096].
+Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Height = null;
@@ -15000,6 +15008,71 @@ class EnableScheduleResponse extends  AbstractModel {
 }
 
 /**
+ * Security group information.
+ * @class
+ */
+class SecurityGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Security group name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Allowlist list.
+         * @type {Array.<string> || null}
+         */
+        this.Whitelist = null;
+
+        /**
+         * List of bound input streams.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.OccupiedInputs = null;
+
+        /**
+         * Security group address.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * List of bound output streams.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.OccupiedOutputs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Whitelist = 'Whitelist' in params ? params.Whitelist : null;
+        this.OccupiedInputs = 'OccupiedInputs' in params ? params.OccupiedInputs : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.OccupiedOutputs = 'OccupiedOutputs' in params ? params.OccupiedOutputs : null;
+
+    }
+}
+
+/**
  * DeleteAdaptiveDynamicStreamingTemplate response structure.
  * @class
  */
@@ -15828,6 +15901,61 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Control parameter of a porn information detection in image task
+ * @class
+ */
+class PornImgReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of a porn information detection in image task. Valid values:
+<li>ON: Enables a porn information detection in image task;</li>
+<li>OFF: Disables a porn information detection in image task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Filter tag for porn information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
+<li>porn: Porn;</li>
+<li>vulgar: Vulgarity;</li>
+<li>intimacy: Intimacy;</li>
+<li>sexy: Sexiness.</li>
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -17868,6 +17996,46 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.FragmentTime = 'FragmentTime' in params ? params.FragmentTime : null;
         this.FragmentEndNum = 'FragmentEndNum' in params ? params.FragmentEndNum : null;
+
+    }
+}
+
+/**
+ * DescribeStreamLinkSecurityGroup response structure.
+ * @class
+ */
+class DescribeStreamLinkSecurityGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information on the input security group.
+         * @type {SecurityGroupInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new SecurityGroupInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -28245,42 +28413,18 @@ class CreateWatermarkTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of a porn information detection in image task
+ * DescribeStreamLinkSecurityGroup request structure.
  * @class
  */
-class PornImgReviewTemplateInfo extends  AbstractModel {
+class DescribeStreamLinkSecurityGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of a porn information detection in image task. Valid values:
-<li>ON: Enables a porn information detection in image task;</li>
-<li>OFF: Disables a porn information detection in image task.</li>
+         * Security group ID.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * Filter tag for porn information detection in image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>porn: Porn;</li>
-<li>vulgar: Vulgarity;</li>
-<li>intimacy: Intimacy;</li>
-<li>sexy: Sexiness.</li>
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-        /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.Id = null;
 
     }
 
@@ -28291,10 +28435,7 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -30655,6 +30796,7 @@ module.exports = {
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     LiveActivityResItem: LiveActivityResItem,
     EnableScheduleResponse: EnableScheduleResponse,
+    SecurityGroupInfo: SecurityGroupInfo,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
     LiveStreamTagRecognitionResult: LiveStreamTagRecognitionResult,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
@@ -30669,6 +30811,7 @@ module.exports = {
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     EditMediaTask: EditMediaTask,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
+    PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     AiAnalysisResult: AiAnalysisResult,
@@ -30705,6 +30848,7 @@ module.exports = {
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     LiveStreamAiAnalysisResultInfo: LiveStreamAiAnalysisResultInfo,
     SegmentSpecificInfo: SegmentSpecificInfo,
+    DescribeStreamLinkSecurityGroupResponse: DescribeStreamLinkSecurityGroupResponse,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     TranscodeTemplate: TranscodeTemplate,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
@@ -30878,7 +31022,7 @@ module.exports = {
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
-    PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
+    DescribeStreamLinkSecurityGroupRequest: DescribeStreamLinkSecurityGroupRequest,
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,

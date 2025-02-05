@@ -263,6 +263,7 @@ const ScheduleQualityControlTaskResult = models.ScheduleQualityControlTaskResult
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const LiveActivityResItem = models.LiveActivityResItem;
 const EnableScheduleResponse = models.EnableScheduleResponse;
+const SecurityGroupInfo = models.SecurityGroupInfo;
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
 const LiveStreamTagRecognitionResult = models.LiveStreamTagRecognitionResult;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
@@ -277,6 +278,7 @@ const AiSampleTagOperation = models.AiSampleTagOperation;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const EditMediaTask = models.EditMediaTask;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
+const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const AiAnalysisResult = models.AiAnalysisResult;
@@ -313,6 +315,7 @@ const SegmentRecognitionItem = models.SegmentRecognitionItem;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const LiveStreamAiAnalysisResultInfo = models.LiveStreamAiAnalysisResultInfo;
 const SegmentSpecificInfo = models.SegmentSpecificInfo;
+const DescribeStreamLinkSecurityGroupResponse = models.DescribeStreamLinkSecurityGroupResponse;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
@@ -486,7 +489,7 @@ const FaceConfigureInfo = models.FaceConfigureInfo;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
 const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
-const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
+const DescribeStreamLinkSecurityGroupRequest = models.DescribeStreamLinkSecurityGroupRequest;
 const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
 const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
@@ -543,6 +546,25 @@ class MpsClient extends AbstractClient {
     CreateImageSpriteTemplate(req, cb) {
         let resp = new CreateImageSpriteTemplateResponse();
         this.request("CreateImageSpriteTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate live stream processing tasks. Such tasks may include the following:
+
+* Intelligent content moderation (detection of pornographic content in images and audio, detection of sensitive information)
+* Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, real-time speech translation, object recognition, game event tracking)
+* Intelligent content analysis (real-time news splitting)
+* Quality control, including recognizing live stream format, checking audio/video content for flickering, blur, low light, overexposure, black bars, white bars, black screen, white screen, noise, pixelation, QR code, etc., and no-reference scoring.
+* Recording
+
+HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
+     * @param {ProcessLiveStreamRequest} req
+     * @param {function(string, ProcessLiveStreamResponse):void} cb
+     * @public
+     */
+    ProcessLiveStream(req, cb) {
+        let resp = new ProcessLiveStreamResponse();
+        this.request("ProcessLiveStream", req, resp, cb);
     }
 
     /**
@@ -804,14 +826,14 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to modify an adaptive bitrate streaming template.
-     * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
-     * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
+     * This API is used to query a security group.
+     * @param {DescribeStreamLinkSecurityGroupRequest} req
+     * @param {function(string, DescribeStreamLinkSecurityGroupResponse):void} cb
      * @public
      */
-    ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
-        let resp = new ModifyAdaptiveDynamicStreamingTemplateResponse();
-        this.request("ModifyAdaptiveDynamicStreamingTemplate", req, resp, cb);
+    DescribeStreamLinkSecurityGroup(req, cb) {
+        let resp = new DescribeStreamLinkSecurityGroupResponse();
+        this.request("DescribeStreamLinkSecurityGroup", req, resp, cb);
     }
 
     /**
@@ -1382,22 +1404,14 @@ Note: A scheme is disabled upon creation. You need to manually enable it.
     }
 
     /**
-     * This API is used to initiate live stream processing tasks. Such tasks may include the following:
-
-* Intelligent content moderation (detection of pornographic content in images and audio, detection of sensitive information)
-* Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, real-time speech translation, object recognition, game event tracking)
-* Intelligent content analysis (real-time news splitting)
-* Quality control, including recognizing live stream format, checking audio/video content for flickering, blur, low light, overexposure, black bars, white bars, black screen, white screen, noise, pixelation, QR code, etc., and no-reference scoring.
-* Recording
-
-HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
-     * @param {ProcessLiveStreamRequest} req
-     * @param {function(string, ProcessLiveStreamResponse):void} cb
+     * This API is used to modify an adaptive bitrate streaming template.
+     * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
+     * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
      * @public
      */
-    ProcessLiveStream(req, cb) {
-        let resp = new ProcessLiveStreamResponse();
-        this.request("ProcessLiveStream", req, resp, cb);
+    ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
+        let resp = new ModifyAdaptiveDynamicStreamingTemplateResponse();
+        this.request("ModifyAdaptiveDynamicStreamingTemplate", req, resp, cb);
     }
 
     /**

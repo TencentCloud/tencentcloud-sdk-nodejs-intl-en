@@ -95,6 +95,7 @@ module.exports = {
     tchd: require("./tchd"),
     tcmpp: require("./tcmpp"),
     tcr: require("./tcr"),
+    tcsas: require("./tcsas"),
     tcss: require("./tcss"),
     tdid: require("./tdid"),
     tdmq: require("./tdmq"),

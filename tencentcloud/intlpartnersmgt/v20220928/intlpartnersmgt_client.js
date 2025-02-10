@@ -16,7 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
+const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const SendVerifyCodeRequest = models.SendVerifyCodeRequest;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
@@ -27,26 +27,30 @@ const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
 const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
 const TagInfo = models.TagInfo;
+const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
 const BusinessInfo = models.BusinessInfo;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
-const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const ApproveClientApplyResponse = models.ApproveClientApplyResponse;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
+const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const DescribeCustomerBillDownloadUrlResponse = models.DescribeCustomerBillDownloadUrlResponse;
-const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
+const QueryPendingClientsV2Request = models.QueryPendingClientsV2Request;
+const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
 const CreateAccountResponse = models.CreateAccountResponse;
-const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
+const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const CustomerBillDetailData = models.CustomerBillDetailData;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
+const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
@@ -82,13 +86,14 @@ const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
-const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
+const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
 const SummaryDetails = models.SummaryDetails;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
+const QueryPendingClientsV2Response = models.QueryPendingClientsV2Response;
 const CreateAndSendClientInvitationMailRequest = models.CreateAndSendClientInvitationMailRequest;
 const PolicyProductList = models.PolicyProductList;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
@@ -134,6 +139,19 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
+     * Description: This API is used by resellers to query the list of sub-customers pending review. Note: This API is used to apply for the allowlist. If needed, please contact your business representative.
+
+Callable roles: Reseller, Distributer, Second-level reseller
+     * @param {QueryPendingClientsV2Request} req
+     * @param {function(string, QueryPendingClientsV2Response):void} cb
+     * @public
+     */
+    QueryPendingClientsV2(req, cb) {
+        let resp = new QueryPendingClientsV2Response();
+        this.request("QueryPendingClientsV2", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain country/region codes.
      * @param {GetCountryCodesRequest} req
      * @param {function(string, GetCountryCodesResponse):void} cb
@@ -164,6 +182,19 @@ class IntlpartnersmgtClient extends AbstractClient {
     QueryPartnerCredit(req, cb) {
         let resp = new QueryPartnerCreditResponse();
         this.request("QueryPartnerCredit", req, resp, cb);
+    }
+
+    /**
+     * Description: This API is used by resellers to review applications to become sub-customers. Note: This API is used to apply for the allowlist. If needed, please contact your business representative.
+
+Callable roles: Reseller, Distributer, Second-level reseller
+     * @param {ApproveClientApplyRequest} req
+     * @param {function(string, ApproveClientApplyResponse):void} cb
+     * @public
+     */
+    ApproveClientApply(req, cb) {
+        let resp = new ApproveClientApplyResponse();
+        this.request("ApproveClientApply", req, resp, cb);
     }
 
     /**

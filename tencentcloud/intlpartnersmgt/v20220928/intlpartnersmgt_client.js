@@ -16,90 +16,93 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
-const SendVerifyCodeRequest = models.SendVerifyCodeRequest;
-const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
-const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
-const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
-const ForceQNResponse = models.ForceQNResponse;
-const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
-const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
-const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
-const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
-const TagInfo = models.TagInfo;
-const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
-const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
-const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
-const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
-const BusinessInfo = models.BusinessInfo;
-const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
-const ApproveClientApplyResponse = models.ApproveClientApplyResponse;
-const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
-const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
-const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
-const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const SummaryDetails = models.SummaryDetails;
+const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
-const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
-const DescribeCustomerBillDownloadUrlResponse = models.DescribeCustomerBillDownloadUrlResponse;
-const QueryPendingClientsV2Request = models.QueryPendingClientsV2Request;
-const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
-const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
-const CreateAccountResponse = models.CreateAccountResponse;
-const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
-const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const CustomerBillDetailData = models.CustomerBillDetailData;
-const GetCountryCodesResponse = models.GetCountryCodesResponse;
-const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
-const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
-const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
-const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
+const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const DescribeCustomerBillDownloadUrlRequest = models.DescribeCustomerBillDownloadUrlRequest;
-const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const DescribeCustomerUinData = models.DescribeCustomerUinData;
-const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
-const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
-const ForceQNRequest = models.ForceQNRequest;
-const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
-const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
-const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
-const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
-const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
+const CountryCodeItem = models.CountryCodeItem;
+const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
+const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
+const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
-const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
-const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
-const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
-const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
+const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
 const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
-const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
-const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
-const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
-const QueryPolicyProductListByCodeResponse = models.QueryPolicyProductListByCodeResponse;
+const QueryCustomerBillingQuotaData = models.QueryCustomerBillingQuotaData;
+const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
-const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
-const GetCountryCodesRequest = models.GetCountryCodesRequest;
-const CountryCodeItem = models.CountryCodeItem;
-const BillDetailData = models.BillDetailData;
-const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
-const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
-const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
-const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
-const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
-const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
+const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
+const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
-const SummaryDetails = models.SummaryDetails;
-const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
-const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
-const QueryPendingClientsV2Response = models.QueryPendingClientsV2Response;
-const CreateAndSendClientInvitationMailRequest = models.CreateAndSendClientInvitationMailRequest;
+const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const PolicyProductList = models.PolicyProductList;
-const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
-const QueryCustomersCreditData = models.QueryCustomersCreditData;
+const QueryCustomerBillingQuotaResponse = models.QueryCustomerBillingQuotaResponse;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
-const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
+const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
+const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
+const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
+const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
+const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const GetCountryCodesResponse = models.GetCountryCodesResponse;
+const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
+const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
+const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const GetCountryCodesRequest = models.GetCountryCodesRequest;
+const ForceQNResponse = models.ForceQNResponse;
+const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
+const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
+const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
+const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
+const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
+const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
+const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
+const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
+const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
+const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
+const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
+const QueryPendingClientsV2Response = models.QueryPendingClientsV2Response;
+const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
+const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
+const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
+const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
+const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
+const QueryCustomersCreditData = models.QueryCustomersCreditData;
+const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
+const SendVerifyCodeRequest = models.SendVerifyCodeRequest;
+const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
+const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
+const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
+const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
+const BusinessInfo = models.BusinessInfo;
+const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
+const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const DescribeCustomerBillDownloadUrlResponse = models.DescribeCustomerBillDownloadUrlResponse;
+const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
+const CreateAccountResponse = models.CreateAccountResponse;
+const ApproveClientApplyResponse = models.ApproveClientApplyResponse;
+const QueryPendingClientsV2Request = models.QueryPendingClientsV2Request;
+const TagInfo = models.TagInfo;
+const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
+const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
+const ForceQNRequest = models.ForceQNRequest;
+const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
+const QueryPolicyProductListByCodeResponse = models.QueryPolicyProductListByCodeResponse;
+const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
+const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const BillDetailData = models.BillDetailData;
+const QueryCustomerBillingQuotaRequest = models.QueryCustomerBillingQuotaRequest;
+const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
+const CreateAndSendClientInvitationMailRequest = models.CreateAndSendClientInvitationMailRequest;
+const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 
 
 /**
@@ -481,6 +484,19 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
     DescribeBillSummaryByProduct(req, cb) {
         let resp = new DescribeBillSummaryByProductResponse();
         this.request("DescribeBillSummaryByProduct", req, resp, cb);
+    }
+
+    /**
+     * Description: This API is used for a sub-customer to real-time query its own total credit and remaining credit in USD.
+
+Callable roles: Sub-customer
+     * @param {QueryCustomerBillingQuotaRequest} req
+     * @param {function(string, QueryCustomerBillingQuotaResponse):void} cb
+     * @public
+     */
+    QueryCustomerBillingQuota(req, cb) {
+        let resp = new QueryCustomerBillingQuotaResponse();
+        this.request("QueryCustomerBillingQuota", req, resp, cb);
     }
 
 

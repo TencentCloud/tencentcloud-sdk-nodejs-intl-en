@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SourcePackageConf = models.SourcePackageConf;
+const CreateStreamPackageSSAIChannelRequest = models.CreateStreamPackageSSAIChannelRequest;
 const AdBreakInfo = models.AdBreakInfo;
 const ModifyStreamPackageLinearAssemblyProgramResponse = models.ModifyStreamPackageLinearAssemblyProgramResponse;
 const BindNewLVBDomainWithChannelResponse = models.BindNewLVBDomainWithChannelResponse;
@@ -26,6 +27,8 @@ const LocationAlert = models.LocationAlert;
 const Metadata = models.Metadata;
 const ClipRangeInfo = models.ClipRangeInfo;
 const AliasValueConf = models.AliasValueConf;
+const DescribeStreamPackageSSAIChannelRequest = models.DescribeStreamPackageSSAIChannelRequest;
+const ModifyStreamPackageSSAIChannelResponse = models.ModifyStreamPackageSSAIChannelResponse;
 const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
 const ChannelAlertResp = models.ChannelAlertResp;
 const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
@@ -33,6 +36,7 @@ const InputInfo = models.InputInfo;
 const DescribeStreamPackageLinearAssemblyProgramsResponse = models.DescribeStreamPackageLinearAssemblyProgramsResponse;
 const PointInfo = models.PointInfo;
 const DescribeStreamPackageSourceAlertsRequest = models.DescribeStreamPackageSourceAlertsRequest;
+const ModifyStreamPackageSSAIChannelRequest = models.ModifyStreamPackageSSAIChannelRequest;
 const CreateStreamPackageSourceResponse = models.CreateStreamPackageSourceResponse;
 const ProgramAlertInfos = models.ProgramAlertInfos;
 const DeleteStreamPackageSourceRequest = models.DeleteStreamPackageSourceRequest;
@@ -40,6 +44,7 @@ const DescribeStreamPackageHarvestJobsResponse = models.DescribeStreamPackageHar
 const DescribeStreamPackageSourceLocationAlertsRequest = models.DescribeStreamPackageSourceLocationAlertsRequest;
 const UnbindCdnDomainWithChannelResponse = models.UnbindCdnDomainWithChannelResponse;
 const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
+const SSAIChannelInfo = models.SSAIChannelInfo;
 const ModifyStreamPackageSourceLocationResponse = models.ModifyStreamPackageSourceLocationResponse;
 const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
 const DescribeStreamPackageLinearAssemblyProgramsRequest = models.DescribeStreamPackageLinearAssemblyProgramsRequest;
@@ -55,6 +60,7 @@ const CreateStreamPackageLinearAssemblyChannelRequest = models.CreateStreamPacka
 const PlaybackInfoReq = models.PlaybackInfoReq;
 const DescribeStreamPackageHarvestJobResponse = models.DescribeStreamPackageHarvestJobResponse;
 const DescribeStreamPackageLinearAssemblyChannelRequest = models.DescribeStreamPackageLinearAssemblyChannelRequest;
+const DeleteStreamPackageSSAIChannelRequest = models.DeleteStreamPackageSSAIChannelRequest;
 const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
 const CreateStreamPackageSourceLocationRequest = models.CreateStreamPackageSourceLocationRequest;
 const DescribeStreamPackageHarvestJobsRequest = models.DescribeStreamPackageHarvestJobsRequest;
@@ -80,6 +86,8 @@ const SegmentDeliverInfo = models.SegmentDeliverInfo;
 const DeleteStreamPackageLinearAssemblyChannelResponse = models.DeleteStreamPackageLinearAssemblyChannelResponse;
 const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelRequest;
 const ModifyStreamPackageSourceRequest = models.ModifyStreamPackageSourceRequest;
+const InputAuthInfo = models.InputAuthInfo;
+const DescribeStreamPackageSSAIChannelResponse = models.DescribeStreamPackageSSAIChannelResponse;
 const EndpointAuthInfo = models.EndpointAuthInfo;
 const TimeSignalInfo = models.TimeSignalInfo;
 const ModifyStreamPackageLinearAssemblyChannelRequest = models.ModifyStreamPackageLinearAssemblyChannelRequest;
@@ -97,7 +105,7 @@ const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResp
 const DescribeStreamPackageLinearAssemblyChannelResponse = models.DescribeStreamPackageLinearAssemblyChannelResponse;
 const DescribeStreamPackageLinearAssemblyChannelAlertsResponse = models.DescribeStreamPackageLinearAssemblyChannelAlertsResponse;
 const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
-const DeleteStreamPackageLinearAssemblyProgramsResponse = models.DeleteStreamPackageLinearAssemblyProgramsResponse;
+const DeleteStreamPackageSSAIChannelResponse = models.DeleteStreamPackageSSAIChannelResponse;
 const StartStreamPackageLinearAssemblyChannelResponse = models.StartStreamPackageLinearAssemblyChannelResponse;
 const ModifyStreamPackageLinearAssemblyChannelResponse = models.ModifyStreamPackageLinearAssemblyChannelResponse;
 const DeleteStreamPackageSourceResponse = models.DeleteStreamPackageSourceResponse;
@@ -105,6 +113,7 @@ const DescribeStreamPackageSourceRequest = models.DescribeStreamPackageSourceReq
 const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
 const OutputInfo = models.OutputInfo;
 const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
+const DescribeStreamPackageSSAIChannelsRequest = models.DescribeStreamPackageSSAIChannelsRequest;
 const ProgramAlertCounts = models.ProgramAlertCounts;
 const DeleteStreamPackageSourceLocationRequest = models.DeleteStreamPackageSourceLocationRequest;
 const DescribeStreamPackageLinearAssemblyProgramResponse = models.DescribeStreamPackageLinearAssemblyProgramResponse;
@@ -121,12 +130,13 @@ const DescribeStreamPackageSourceAlertsResponse = models.DescribeStreamPackageSo
 const DeleteStreamPackageLinearAssemblyProgramRequest = models.DeleteStreamPackageLinearAssemblyProgramRequest;
 const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
 const ProgramScheduleInfo = models.ProgramScheduleInfo;
-const InputAuthInfo = models.InputAuthInfo;
+const DeleteStreamPackageLinearAssemblyProgramsResponse = models.DeleteStreamPackageLinearAssemblyProgramsResponse;
 const SpliceInsertInfo = models.SpliceInsertInfo;
 const CreateStreamPackageLinearAssemblyProgramResponse = models.CreateStreamPackageLinearAssemblyProgramResponse;
 const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
 const DescribeStreamPackageSourceResponse = models.DescribeStreamPackageSourceResponse;
 const DeleteStreamPackageLinearAssemblyProgramResponse = models.DeleteStreamPackageLinearAssemblyProgramResponse;
+const CreateStreamPackageSSAIChannelResponse = models.CreateStreamPackageSSAIChannelResponse;
 const ModifyStreamPackageSourceLocationRequest = models.ModifyStreamPackageSourceLocationRequest;
 const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
 const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
@@ -136,6 +146,7 @@ const LinearAssemblyProgramInfo = models.LinearAssemblyProgramInfo;
 const DescribeStreamPackageSourcesRequest = models.DescribeStreamPackageSourcesRequest;
 const CreateStreamPackageLinearAssemblyChannelResponse = models.CreateStreamPackageLinearAssemblyChannelResponse;
 const LinearAssemblyChannelInfo = models.LinearAssemblyChannelInfo;
+const DescribeStreamPackageSSAIChannelsResponse = models.DescribeStreamPackageSSAIChannelsResponse;
 const OutputReq = models.OutputReq;
 const CacheInfoInfo = models.CacheInfoInfo;
 const DescribeStreamPackageLinearAssemblyChannelsResponse = models.DescribeStreamPackageLinearAssemblyChannelsResponse;
@@ -185,6 +196,17 @@ class MdpClient extends AbstractClient {
     DescribeStreamPackageChannel(req, cb) {
         let resp = new DescribeStreamPackageChannelResponse();
         this.request("DescribeStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
+     * CreateStreamPackageSSAIChannel
+     * @param {CreateStreamPackageSSAIChannelRequest} req
+     * @param {function(string, CreateStreamPackageSSAIChannelResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageSSAIChannel(req, cb) {
+        let resp = new CreateStreamPackageSSAIChannelResponse();
+        this.request("CreateStreamPackageSSAIChannel", req, resp, cb);
     }
 
     /**
@@ -331,14 +353,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a StreamPackage channel.
-     * @param {ModifyStreamPackageChannelRequest} req
-     * @param {function(string, ModifyStreamPackageChannelResponse):void} cb
+     * DescribeStreamPackageSSAIChannels
+     * @param {DescribeStreamPackageSSAIChannelsRequest} req
+     * @param {function(string, DescribeStreamPackageSSAIChannelsResponse):void} cb
      * @public
      */
-    ModifyStreamPackageChannel(req, cb) {
-        let resp = new ModifyStreamPackageChannelResponse();
-        this.request("ModifyStreamPackageChannel", req, resp, cb);
+    DescribeStreamPackageSSAIChannels(req, cb) {
+        let resp = new DescribeStreamPackageSSAIChannelsResponse();
+        this.request("DescribeStreamPackageSSAIChannels", req, resp, cb);
     }
 
     /**
@@ -375,14 +397,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * Modify channel linear assembly Channel configuration.
-     * @param {ModifyStreamPackageLinearAssemblyChannelRequest} req
-     * @param {function(string, ModifyStreamPackageLinearAssemblyChannelResponse):void} cb
+     * DeleteStreamPackageSSAIChannel
+     * @param {DeleteStreamPackageSSAIChannelRequest} req
+     * @param {function(string, DeleteStreamPackageSSAIChannelResponse):void} cb
      * @public
      */
-    ModifyStreamPackageLinearAssemblyChannel(req, cb) {
-        let resp = new ModifyStreamPackageLinearAssemblyChannelResponse();
-        this.request("ModifyStreamPackageLinearAssemblyChannel", req, resp, cb);
+    DeleteStreamPackageSSAIChannel(req, cb) {
+        let resp = new DeleteStreamPackageSSAIChannelResponse();
+        this.request("DeleteStreamPackageSSAIChannel", req, resp, cb);
     }
 
     /**
@@ -427,6 +449,28 @@ class MdpClient extends AbstractClient {
     DescribeStreamPackageLinearAssemblyChannelAlerts(req, cb) {
         let resp = new DescribeStreamPackageLinearAssemblyChannelAlertsResponse();
         this.request("DescribeStreamPackageLinearAssemblyChannelAlerts", req, resp, cb);
+    }
+
+    /**
+     * ModifyStreamPackageSSAIChannel
+     * @param {ModifyStreamPackageSSAIChannelRequest} req
+     * @param {function(string, ModifyStreamPackageSSAIChannelResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageSSAIChannel(req, cb) {
+        let resp = new ModifyStreamPackageSSAIChannelResponse();
+        this.request("ModifyStreamPackageSSAIChannel", req, resp, cb);
+    }
+
+    /**
+     * Modify channel linear assembly Channel configuration.
+     * @param {ModifyStreamPackageLinearAssemblyChannelRequest} req
+     * @param {function(string, ModifyStreamPackageLinearAssemblyChannelResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageLinearAssemblyChannel(req, cb) {
+        let resp = new ModifyStreamPackageLinearAssemblyChannelResponse();
+        this.request("ModifyStreamPackageLinearAssemblyChannel", req, resp, cb);
     }
 
     /**
@@ -636,6 +680,28 @@ class MdpClient extends AbstractClient {
     UnbindCdnDomainWithChannel(req, cb) {
         let resp = new UnbindCdnDomainWithChannelResponse();
         this.request("UnbindCdnDomainWithChannel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a StreamPackage channel.
+     * @param {ModifyStreamPackageChannelRequest} req
+     * @param {function(string, ModifyStreamPackageChannelResponse):void} cb
+     * @public
+     */
+    ModifyStreamPackageChannel(req, cb) {
+        let resp = new ModifyStreamPackageChannelResponse();
+        this.request("ModifyStreamPackageChannel", req, resp, cb);
+    }
+
+    /**
+     * DescribeStreamPackageSSAIChannel
+     * @param {DescribeStreamPackageSSAIChannelRequest} req
+     * @param {function(string, DescribeStreamPackageSSAIChannelResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSSAIChannel(req, cb) {
+        let resp = new DescribeStreamPackageSSAIChannelResponse();
+        this.request("DescribeStreamPackageSSAIChannel", req, resp, cb);
     }
 
 

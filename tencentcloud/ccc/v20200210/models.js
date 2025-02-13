@@ -25,13 +25,13 @@ class DescribeExtensionRequest extends  AbstractModel {
         super();
 
         /**
-         * TCCC instance application ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Extension
+         * Extension.
          * @type {string || null}
          */
         this.ExtensionId = null;
@@ -60,13 +60,13 @@ class StopAutoCalloutTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Call Center Instance ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * Task id.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -95,7 +95,7 @@ class CreateIVRSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -107,7 +107,7 @@ class CreateIVRSessionRequest extends  AbstractModel {
         this.Callee = null;
 
         /**
-         * Specified IVR Id. Currently, it supports inbound and automatic outbound types
+         * Specified ivr id. currently, it supports inbound and automatic outbound types.
          * @type {number || null}
          */
         this.IVRId = null;
@@ -119,13 +119,13 @@ class CreateIVRSessionRequest extends  AbstractModel {
         this.Callers = null;
 
         /**
-         * Custom variable
+         * Custom variable.
          * @type {Array.<Variable> || null}
          */
         this.Variables = null;
 
         /**
-         * User Data
+         * User data.
          * @type {string || null}
          */
         this.UUI = null;
@@ -166,13 +166,13 @@ class HangUpCallRequest extends  AbstractModel {
         super();
 
         /**
-         * TCCC instance application ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Session ID.
+         * Session id.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -201,19 +201,19 @@ class CreateSDKLoginTokenResponse extends  AbstractModel {
         super();
 
         /**
-         * SDK log-in Token.
+         * SDK log-in token.
          * @type {string || null}
          */
         this.Token = null;
 
         /**
-         * Expiry timestamp. Unix timestamp.
+         * Expiry timestamp. unix timestamp.
          * @type {number || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * The path in which the SDK is loaded will change with its release.
+         * The path in which the sdk is loaded will change with its release.
          * @type {string || null}
          */
         this.SdkURL = null;
@@ -250,7 +250,7 @@ class ModifyStaffRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -280,13 +280,13 @@ class ModifyStaffRequest extends  AbstractModel {
         this.Nick = null;
 
         /**
-         * Agent ID
+         * Agent id.
          * @type {string || null}
          */
         this.StaffNo = null;
 
         /**
-         * Bind skill group ID list.
+         * Bind skill group id list.
          * @type {Array.<number> || null}
          */
         this.SkillGroupIds = null;
@@ -298,10 +298,16 @@ class ModifyStaffRequest extends  AbstractModel {
         this.UseMobileCallOut = null;
 
         /**
-         * Cell phone answering pattern: 0 - Off | 1 - Only when Offline | 2 - Always.
+         * Cell phone answering pattern: 0 - off | 1 - only when offline | 2 - always.
          * @type {number || null}
          */
         this.UseMobileAccept = null;
+
+        /**
+         * Agent extension number (starting with 1 to 8, 4 - 6 digits).
+         * @type {string || null}
+         */
+        this.ExtensionNumber = null;
 
     }
 
@@ -321,6 +327,7 @@ class ModifyStaffRequest extends  AbstractModel {
         this.SkillGroupIds = 'SkillGroupIds' in params ? params.SkillGroupIds : null;
         this.UseMobileCallOut = 'UseMobileCallOut' in params ? params.UseMobileCallOut : null;
         this.UseMobileAccept = 'UseMobileAccept' in params ? params.UseMobileAccept : null;
+        this.ExtensionNumber = 'ExtensionNumber' in params ? params.ExtensionNumber : null;
 
     }
 }
@@ -334,13 +341,13 @@ class DescribeIvrAudioListResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number
+         * Total quantity.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * File Information
+         * File information.
          * @type {Array.<AudioFileInfo> || null}
          */
         this.FileInfo = null;
@@ -412,13 +419,13 @@ class ResetExtensionPasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * TCCC instance application ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Extension
+         * Extension.
          * @type {string || null}
          */
         this.ExtensionId = null;
@@ -540,13 +547,13 @@ class DescribeAutoCalloutTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * Task id.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -625,7 +632,7 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
         /**
          * Model interface protocol types, currently compatible with three protocol types:
 
-- OpenAI protocol (including GPT, Hunyuan, DeepSeek, etc.):"openai"
+- OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
 - Azure protocol:"azure"
 - Minimax protocol:"minimax"
          * @type {string || null}
@@ -636,7 +643,7 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
          * Model name, such as
 
 - OpenAI protocol
-"gpt-4o-mini","gpt-4o","hunyuan-standard", "hunyuan-turbo","deepseek-chat";
+"gpt-4o-mini","gpt-4o","deepseek-chat";
 
 - Azure protocol
 "gpt-4o-mini", "gpt-4o";
@@ -664,7 +671,6 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
 
 - OpenAI protocol
 GPT:"https://api.openai.com/v1/"
-Hunyuan:"https://api.hunyuan.cloud.tencent.com/v1"
 Deepseek:"https://api.deepseek.com/v1"
 
 - Azure protocol
@@ -717,7 +723,7 @@ HoaiMy
         this.VoiceType = null;
 
         /**
-         * List of calling numbers.
+         * Caller number list
          * @type {Array.<string> || null}
          */
         this.Callers = null;
@@ -734,6 +740,12 @@ HoaiMy
          * @type {number || null}
          */
         this.WelcomeType = null;
+
+        /**
+         * 0: interruptible by default, 1: high priority and not interruptible.
+         * @type {number || null}
+         */
+        this.WelcomeMessagePriority = null;
 
         /**
          * Maximum Waiting Duration (milliseconds), default is 60 seconds, if the user does not speak within this time, the call is automatically terminated
@@ -771,7 +783,7 @@ Currently, the supported languages are as follows. The English name of the langu
         this.Languages = null;
 
         /**
-         * Interrupt AI speech mode, default is 0, 0 indicates the server interrupts automatically, 1 indicates the server does not interrupt, interruption signal sent by the client side.
+         * Interrupt ai speaking mode. default is 0. 0 indicates automatic interruption and 1 indicates no interruption.
          * @type {number || null}
          */
         this.InterruptMode = null;
@@ -795,13 +807,13 @@ Currently, the supported languages are as follows. The English name of the langu
         this.EndFunctionDesc = null;
 
         /**
-         * 
+         * Whether the model supports (or enables) transfer_to_human function calling.
          * @type {boolean || null}
          */
         this.TransferFunctionEnable = null;
 
         /**
-         * 
+         * Takes effect when transferfunctionenable is true: transfer to human configuration.
          * @type {Array.<AITransferItem> || null}
          */
         this.TransferItems = null;
@@ -819,7 +831,7 @@ Currently, the supported languages are as follows. The English name of the langu
         this.NotifyMessage = null;
 
         /**
-         * 
+         * Maximum number of times to trigger ai prompt sound, unlimited by default.
          * @type {number || null}
          */
         this.NotifyMaxCount = null;
@@ -844,35 +856,6 @@ For configuration, please refer to <a href="https://intl.cloud.tencent.com/docum
 </code></pre>
 
   </div></div><ul>
-<li>Minimax TTS<br>
-For configuration, please refer to the <a href="https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. Note that Minimax TTS has frequency limits, and exceeding the limit may cause response delays, <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit related documentation link</a>.</li>
-</ul>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-        &quot;TTSType&quot;: &quot;minimax&quot;,  // String TTS type,
-        &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-        &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-        &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-        &quot;GroupId&quot;: &quot;181000000000000&quot;,
-        &quot;VoiceType&quot;:&quot;female-tianmei-yujie&quot;,
-        &quot;Speed&quot;: 1.2
-}
-</code></pre>
-</div></div><ul>
-<li>Volcano TTS</li>
-</ul>
-<p>For type of sound quality configuration, refer to the<a href="https://www.volcengine.com/docs/6561/162929" target="_blank">Volcano TTS documentation</a><br>
-TTS Sound Quality List - Voice Technology - Volcano Engine<br>
-Large Model TTS Sound Quality List - Voice Technology - Volcano Engine</p>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-    &quot;TTSType&quot;: &quot;volcengine&quot;,  // Required: String TTS type
-    &quot;AppId&quot; : &quot;xxxxxxxx&quot;,   // Required: String Volcano Engine assigned AppId
-    &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // Required: String type Volcano Engine access token
-    &quot;Speed&quot; : 1.0,            // Optional parameter: Playback speed, default is 1.0
-    &quot;Volume&quot;: 1.0,            // Optional parameter: Volume, default is 1.0
-    &quot;Cluster&quot; : &quot;volcano_tts&quot;, // Optional parameter: Business cluster, default is volcano_tts
-    &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot;   // Sound quality type, default is the sound quality of the large model TTS. If using normal TTS, fill in the corresponding sound quality type. Incorrect sound quality type will result in no sound.
-}
-</code></pre>
 
 </div></div><ul>
 <li>Azure TTS<br>
@@ -909,10 +892,22 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
         this.CustomTTSConfig = null;
 
         /**
-         * 
+         * Prompt word variable.
          * @type {Array.<Variable> || null}
          */
         this.PromptVariables = null;
+
+        /**
+         * Automatic speech recognition vad time ranges from 240 to 2000, with a default of 1000, measured in milliseconds. smaller values will make automatic speech recognition segment faster.
+         * @type {number || null}
+         */
+        this.VadSilenceTime = null;
+
+        /**
+         * Call content extraction configuration.
+         * @type {Array.<AICallExtractConfigElement> || null}
+         */
+        this.ExtractConfig = null;
 
     }
 
@@ -934,6 +929,7 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
         this.Callers = 'Callers' in params ? params.Callers : null;
         this.WelcomeMessage = 'WelcomeMessage' in params ? params.WelcomeMessage : null;
         this.WelcomeType = 'WelcomeType' in params ? params.WelcomeType : null;
+        this.WelcomeMessagePriority = 'WelcomeMessagePriority' in params ? params.WelcomeMessagePriority : null;
         this.MaxDuration = 'MaxDuration' in params ? params.MaxDuration : null;
         this.Languages = 'Languages' in params ? params.Languages : null;
         this.InterruptMode = 'InterruptMode' in params ? params.InterruptMode : null;
@@ -963,6 +959,16 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
                 this.PromptVariables.push(obj);
             }
         }
+        this.VadSilenceTime = 'VadSilenceTime' in params ? params.VadSilenceTime : null;
+
+        if (params.ExtractConfig) {
+            this.ExtractConfig = new Array();
+            for (let z in params.ExtractConfig) {
+                let obj = new AICallExtractConfigElement();
+                obj.deserialize(params.ExtractConfig[z]);
+                this.ExtractConfig.push(obj);
+            }
+        }
 
     }
 }
@@ -976,7 +982,7 @@ class CreateAdminURLResponse extends  AbstractModel {
         super();
 
         /**
-         * Log-in link.
+         * Log-In link.
          * @type {string || null}
          */
         this.URL = null;
@@ -1011,13 +1017,13 @@ class PausePredictiveDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * Task id.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -1046,7 +1052,7 @@ class CreateCallOutSessionResponse extends  AbstractModel {
         super();
 
         /**
-         * Newly created session ID.
+         * Newly created session id.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -1093,7 +1099,7 @@ class DisableCCCPhoneNumberRequest extends  AbstractModel {
         this.Disabled = null;
 
         /**
-         * TCCC instance application ID.
+         * TCCC instance application id.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -1151,19 +1157,19 @@ class CreatePredictiveDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task Name
+         * <Task name>.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Called list supporting E.164 or number formats without country code.
+         * Called list supporting e.164 or number formats without country code.
          * @type {Array.<string> || null}
          */
         this.Callees = null;
@@ -1205,19 +1211,19 @@ class CreatePredictiveDialingCampaignRequest extends  AbstractModel {
         this.RetryInterval = null;
 
         /**
-         * Task start time. Unix timestamp. The task will automatically start after this time.
+         * Task start time. unix timestamp. the task will automatically start after this time.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Task termination time. Unix timestamp. The task will automatically terminate after this time.
+         * Task termination time. unix timestamp. the task will automatically terminate after this time.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Specified IVR ID.
+         * Specified ivr id.
          * @type {number || null}
          */
         this.IVRId = null;
@@ -1227,6 +1233,24 @@ class CreatePredictiveDialingCampaignRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.RetryTimes = null;
+
+        /**
+         * Custom variable.
+         * @type {Array.<Variable> || null}
+         */
+        this.Variables = null;
+
+        /**
+         * UUI
+         * @type {string || null}
+         */
+        this.UUI = null;
+
+        /**
+         * Property of the called.
+         * @type {Array.<CalleeAttribute> || null}
+         */
+        this.CalleeAttributes = null;
 
     }
 
@@ -1250,6 +1274,25 @@ class CreatePredictiveDialingCampaignRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.IVRId = 'IVRId' in params ? params.IVRId : null;
         this.RetryTimes = 'RetryTimes' in params ? params.RetryTimes : null;
+
+        if (params.Variables) {
+            this.Variables = new Array();
+            for (let z in params.Variables) {
+                let obj = new Variable();
+                obj.deserialize(params.Variables[z]);
+                this.Variables.push(obj);
+            }
+        }
+        this.UUI = 'UUI' in params ? params.UUI : null;
+
+        if (params.CalleeAttributes) {
+            this.CalleeAttributes = new Array();
+            for (let z in params.CalleeAttributes) {
+                let obj = new CalleeAttribute();
+                obj.deserialize(params.CalleeAttributes[z]);
+                this.CalleeAttributes.push(obj);
+            }
+        }
 
     }
 }
@@ -1292,126 +1335,108 @@ class ServeParticipant extends  AbstractModel {
 
         /**
          * Agent email.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Mail = null;
 
         /**
-         * Agent Telephone
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Agent phone number.
          * @type {string || null}
          */
         this.Phone = null;
 
         /**
-         * Ring timestamp. Unix second-level timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Ringing timestamp, unix second-level timestamp.
          * @type {number || null}
          */
         this.RingTimestamp = null;
 
         /**
-         * Answer timestamp. Unix second-level timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Answer timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.AcceptTimestamp = null;
 
         /**
-         * End timestamp. Unix second-level timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * End timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.EndedTimestamp = null;
 
         /**
-         * Recording ID, which can be used to index the recording on the agent side
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Recording id can be indexed to the agent side recording.
          * @type {string || null}
          */
         this.RecordId = null;
 
         /**
-         * Participant type: "staffSeat", "outboundSeat", "staffPhoneSeat".
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Participant type: "staffseat", "outboundseat", "staffphoneseat".
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Transfer Source Agent Information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Transfer source agent information.
          * @type {string || null}
          */
         this.TransferFrom = null;
 
         /**
-         * Transfer source participant type is consistent with the Type value.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Transfer source participant type is consistent with the type value.
          * @type {string || null}
          */
         this.TransferFromType = null;
 
         /**
-         * Transfer Destination Agent Information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Transfer destination agent information.
          * @type {string || null}
          */
         this.TransferTo = null;
 
         /**
-         * Transfer destination participant type is consistent with Type values.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Transfer destination participant type, which is consistent with type values.
          * @type {string || null}
          */
         this.TransferToType = null;
 
         /**
-         * Skill group ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
 
         /**
          * Ending status.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EndStatusString = null;
 
         /**
-         * Recording URL.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Recording url.
          * @type {string || null}
          */
         this.RecordURL = null;
 
         /**
          * Participant sequence number, starting from 0.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Sequence = null;
 
         /**
-         * Start timestamp. Unix second-level timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Start timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.StartTimestamp = null;
 
         /**
-         * Skill Group name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Skill group name.
          * @type {string || null}
          */
         this.SkillGroupName = null;
 
         /**
-         * Address of the third party COS for transferring recording.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Address of the third-party cos for transferring recording.
          * @type {string || null}
          */
         this.CustomRecordURL = null;
@@ -1448,6 +1473,64 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AI call extraction result.
+ * @class
+ */
+class AICallExtractResultElement extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of extracted information.
+Text.
+Selector options.
+Boolean value.
+Number.
+         * @type {string || null}
+         */
+        this.InfoType = null;
+
+        /**
+         * Name of the extracted information.
+         * @type {string || null}
+         */
+        this.InfoName = null;
+
+        /**
+         * Specific description of the extracted information.
+         * @type {string || null}
+         */
+        this.InfoContent = null;
+
+        /**
+         * Specific result of the extracted information.
+         * @type {AICallExtractResultInfo || null}
+         */
+        this.Result = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InfoType = 'InfoType' in params ? params.InfoType : null;
+        this.InfoName = 'InfoName' in params ? params.InfoName : null;
+        this.InfoContent = 'InfoContent' in params ? params.InfoContent : null;
+
+        if (params.Result) {
+            let obj = new AICallExtractResultInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeTelCallInfo response structure.
  * @class
  */
@@ -1456,13 +1539,13 @@ class DescribeTelCallInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of minutes consumed by Outbound Package.
+         * Number of minutes consumed by outbound package.
          * @type {number || null}
          */
         this.TelCallOutCount = null;
 
         /**
-         * Number of minutes consumed by Inbound Package.
+         * Number of minutes consumed by inbound package.
          * @type {number || null}
          */
         this.TelCallInCount = null;
@@ -1474,25 +1557,25 @@ class DescribeTelCallInfoResponse extends  AbstractModel {
         this.SeatUsedCount = null;
 
         /**
-         * Number of minutes consumed by Audio package.
+         * Number of minutes consumed by audio package.
          * @type {number || null}
          */
         this.VoipCallInCount = null;
 
         /**
-         * Number of minutes consumed by Audio package.
+         * Number of minutes consumed by audio package.
          * @type {number || null}
          */
         this.VOIPCallInCount = null;
 
         /**
-         * Number of minutes consumed by Offline Speech-to-Text Package.
+         * Number of minutes consumed by offline speech-to-text package.
          * @type {number || null}
          */
         this.AsrOfflineCount = null;
 
         /**
-         * Number of minutes consumed by Real-time Speech-to-Text Package.
+         * Number of minutes consumed by real-time speech-to-text package.
          * @type {number || null}
          */
         this.AsrRealtimeCount = null;
@@ -1575,181 +1658,6 @@ class DescribeExtensionsResponse extends  AbstractModel {
 }
 
 /**
- * DeleteExtension request structure.
- * @class
- */
-class DeleteExtensionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * TCCC instance application ID.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Extension
-         * @type {string || null}
-         */
-        this.ExtensionId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
-
-    }
-}
-
-/**
- * DescribePredictiveDialingCampaign request structure.
- * @class
- */
-class DescribePredictiveDialingCampaignRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Task ID.
-         * @type {number || null}
-         */
-        this.CampaignId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.CampaignId = 'CampaignId' in params ? params.CampaignId : null;
-
-    }
-}
-
-/**
- * DescribePredictiveDialingCampaign response structure.
- * @class
- */
-class DescribePredictiveDialingCampaignResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID.
-         * @type {number || null}
-         */
-        this.CampaignId = null;
-
-        /**
-         * Task Name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Being called sequence: 0 for random 1 for in order.
-         * @type {number || null}
-         */
-        this.CallOrder = null;
-
-        /**
-         * ID of the used skill group of agents.
-         * @type {number || null}
-         */
-        this.SkillGroupId = null;
-
-        /**
-         * Specified IVR ID.
-         * @type {number || null}
-         */
-        this.IVRId = null;
-
-        /**
-         * Running priority of multiple tasks in the same application, from high to low 1 - 5.
-         * @type {number || null}
-         */
-        this.Priority = null;
-
-        /**
-         * Expected call drop rate, percentage, 5 - 50.
-         * @type {number || null}
-         */
-        this.ExpectedAbandonRate = null;
-
-        /**
-         * Number of call retries, 0 - 2.
-         * @type {number || null}
-         */
-        this.RetryTimes = null;
-
-        /**
-         * Call retry interval, in seconds, [60 - 86,400].
-         * @type {number || null}
-         */
-        this.RetryInterval = null;
-
-        /**
-         * Task start time. Unix timestamp. The task will automatically start after this time.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Task termination time. Unix timestamp. The task will automatically terminate after this time.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CampaignId = 'CampaignId' in params ? params.CampaignId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.CallOrder = 'CallOrder' in params ? params.CallOrder : null;
-        this.SkillGroupId = 'SkillGroupId' in params ? params.SkillGroupId : null;
-        this.IVRId = 'IVRId' in params ? params.IVRId : null;
-        this.Priority = 'Priority' in params ? params.Priority : null;
-        this.ExpectedAbandonRate = 'ExpectedAbandonRate' in params ? params.ExpectedAbandonRate : null;
-        this.RetryTimes = 'RetryTimes' in params ? params.RetryTimes : null;
-        this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Agent status-related information
  * @class
  */
@@ -1764,73 +1672,73 @@ class StaffStatusMetrics extends  AbstractModel {
         this.Email = null;
 
         /**
-         * Agent status free Available | busy Busy | rest On Break | notReady Not Ready | afterCallWork Post-call Adjustment | offline Offline
+         * Agent status free available | busy busy | rest on break | notready not ready | aftercallwork post-call adjustment | offline offline.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Supplementary Information on Agent Status
+         * Supplementary information on agent status.
          * @type {StaffStatusExtra || null}
          */
         this.StatusExtra = null;
 
         /**
-         * Total Online duration of the day.
+         * Total online duration of the day.
          * @type {number || null}
          */
         this.OnlineDuration = null;
 
         /**
-         * Total Available duration of the day.
+         * Total available duration of the day.
          * @type {number || null}
          */
         this.FreeDuration = null;
 
         /**
-         * Total Busy duration of the day.
+         * Total busy duration of the day.
          * @type {number || null}
          */
         this.BusyDuration = null;
 
         /**
-         * Total Not Ready status duration of the day.
+         * Total not ready status duration of the day.
          * @type {number || null}
          */
         this.NotReadyDuration = null;
 
         /**
-         * Total Break duration of the day.
+         * Total break duration of the day.
          * @type {number || null}
          */
         this.RestDuration = null;
 
         /**
-         * Total After Call Work duration of the day.
+         * Adjust the total duration of after-call work for the day.
          * @type {number || null}
          */
         this.AfterCallWorkDuration = null;
 
         /**
-         * Reason for Break.
+         * Reason for break.
          * @type {string || null}
          */
         this.Reason = null;
 
         /**
-         * Whether to reserve Break status.
+         * Whether to reserve break status.
          * @type {boolean || null}
          */
         this.ReserveRest = null;
 
         /**
-         * Whether to reserve Not Ready status.
+         * Whether to reserve not ready status.
          * @type {boolean || null}
          */
         this.ReserveNotReady = null;
 
         /**
-         * Cell phone answering pattern: 0 - Off | 1 - Only when Offline | 2 - Always.
+         * Cell phone answering pattern: 0 - off | 1 - only when offline | 2 - always.
          * @type {number || null}
          */
         this.UseMobileAccept = null;
@@ -1843,14 +1751,14 @@ class StaffStatusMetrics extends  AbstractModel {
 
         /**
          * Last online timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LastOnlineTimestamp = null;
 
         /**
          * Last status timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LastStatusTimestamp = null;
@@ -1890,72 +1798,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeTelCdr request structure.
+ * DeleteExtension request structure.
  * @class
  */
-class DescribeTelCdrRequest extends  AbstractModel {
+class DeleteExtensionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start timestamp, Unix Timestamp in Seconds. Supports up to the past 180 days.
-         * @type {number || null}
-         */
-        this.StartTimeStamp = null;
-
-        /**
-         * End timestamp, Unix Timestamp in Seconds. The range between the end time and start time is less than 90 days.
-         * @type {number || null}
-         */
-        this.EndTimeStamp = null;
-
-        /**
-         * Instance ID (deprecated).
-         * @type {number || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Maximum number of returned entries (deprecated).
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset (deprecated).
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Page size (required), up to 100.
-         * @type {number || null}
+         * Extension.
+         * @type {string || null}
          */
-        this.PageSize = null;
-
-        /**
-         * Page number (required), starting from 0.
-         * @type {number || null}
-         */
-        this.PageNumber = null;
-
-        /**
-         * Filter by Phone Number.
-         * @type {Array.<string> || null}
-         */
-        this.Phones = null;
-
-        /**
-         * Filter by SessionId.
-         * @type {Array.<string> || null}
-         */
-        this.SessionIds = null;
+        this.ExtensionId = null;
 
     }
 
@@ -1966,16 +1826,250 @@ class DescribeTelCdrRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeStamp = 'StartTimeStamp' in params ? params.StartTimeStamp : null;
-        this.EndTimeStamp = 'EndTimeStamp' in params ? params.EndTimeStamp : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.Phones = 'Phones' in params ? params.Phones : null;
-        this.SessionIds = 'SessionIds' in params ? params.SessionIds : null;
+        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
+
+    }
+}
+
+/**
+ * Outbound call task called information.
+ * @class
+ */
+class AutoCalloutTaskCalleeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Called number.
+         * @type {string || null}
+         */
+        this.Callee = null;
+
+        /**
+         * Call status 0 - initial, 1 - answered, 2 - unanswered, 3 - calling, 4 - pending retry.
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * List of session ids.
+         * @type {Array.<string> || null}
+         */
+        this.Sessions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Callee = 'Callee' in params ? params.Callee : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Sessions = 'Sessions' in params ? params.Sessions : null;
+
+    }
+}
+
+/**
+ * DescribePredictiveDialingCampaign response structure.
+ * @class
+ */
+class DescribePredictiveDialingCampaignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task id.
+         * @type {number || null}
+         */
+        this.CampaignId = null;
+
+        /**
+         * Task name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Being called sequence: 0 for random 1 for in order.
+         * @type {number || null}
+         */
+        this.CallOrder = null;
+
+        /**
+         * ID of the used skill group of agents.
+         * @type {number || null}
+         */
+        this.SkillGroupId = null;
+
+        /**
+         * Specified ivr id.
+         * @type {number || null}
+         */
+        this.IVRId = null;
+
+        /**
+         * Running priority of multiple tasks in the same application, from high to low 1 - 5.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Expected call drop rate, percentage, 5 - 50.
+         * @type {number || null}
+         */
+        this.ExpectedAbandonRate = null;
+
+        /**
+         * Number of call retries, 0 - 2.
+         * @type {number || null}
+         */
+        this.RetryTimes = null;
+
+        /**
+         * Call retry interval, in seconds, [60 - 86,400].
+         * @type {number || null}
+         */
+        this.RetryInterval = null;
+
+        /**
+         * Task start time. unix timestamp. the task will automatically start after this time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task termination time. unix timestamp. the task will automatically terminate after this time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CampaignId = 'CampaignId' in params ? params.CampaignId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CallOrder = 'CallOrder' in params ? params.CallOrder : null;
+        this.SkillGroupId = 'SkillGroupId' in params ? params.SkillGroupId : null;
+        this.IVRId = 'IVRId' in params ? params.IVRId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.ExpectedAbandonRate = 'ExpectedAbandonRate' in params ? params.ExpectedAbandonRate : null;
+        this.RetryTimes = 'RetryTimes' in params ? params.RetryTimes : null;
+        this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAIAgentCall response structure.
+ * @class
+ */
+class CreateAIAgentCallResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Newly created session id.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AI call extraction configuration item.
+ * @class
+ */
+class AICallExtractConfigElement extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration item type, including.
+Text.
+Selector option.
+Boolean value.
+Number.
+         * @type {string || null}
+         */
+        this.InfoType = null;
+
+        /**
+         * Configuration item name, duplicat.
+         * @type {string || null}
+         */
+        this.InfoName = null;
+
+        /**
+         * Specific content of the configuration item.
+         * @type {string || null}
+         */
+        this.InfoContent = null;
+
+        /**
+         * Example of extracted content from the configuration item.
+         * @type {Array.<string> || null}
+         */
+        this.Examples = null;
+
+        /**
+         * When infotype is selector, this field needs to be configured.
+         * @type {Array.<string> || null}
+         */
+        this.Choices = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InfoType = 'InfoType' in params ? params.InfoType : null;
+        this.InfoName = 'InfoName' in params ? params.InfoName : null;
+        this.InfoContent = 'InfoContent' in params ? params.InfoContent : null;
+        this.Examples = 'Examples' in params ? params.Examples : null;
+        this.Choices = 'Choices' in params ? params.Choices : null;
 
     }
 }
@@ -1995,7 +2089,7 @@ class DescribeAutoCalloutTasksResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Task list.
+         * <Task list>.
          * @type {Array.<AutoCalloutTaskInfo> || null}
          */
         this.Tasks = null;
@@ -2039,25 +2133,25 @@ class PackageBuyInfo extends  AbstractModel {
         super();
 
         /**
-         * Package ID.
+         * Package id.
          * @type {string || null}
          */
         this.PackageId = null;
 
         /**
-         * Package type, 0 - Outbound call package | 1 - 400 inbound call package.
+         * Package type, 0 - outbound call package | 1 - 400 inbound call package.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Total package.
+         * <TOTAL_PACKAGE>.
          * @type {number || null}
          */
         this.CapacitySize = null;
 
         /**
-         * Remaining package.
+         * Remaining package balance.
          * @type {number || null}
          */
         this.CapacityRemain = null;
@@ -2069,7 +2163,7 @@ class PackageBuyInfo extends  AbstractModel {
         this.BuyTime = null;
 
         /**
-         * End timestamp.
+         * Deadline timestamp.
          * @type {number || null}
          */
         this.EndTime = null;
@@ -2094,18 +2188,72 @@ class PackageBuyInfo extends  AbstractModel {
 }
 
 /**
- * ModifyExtension response structure.
+ * DescribeTelCdr request structure.
  * @class
  */
-class ModifyExtensionResponse extends  AbstractModel {
+class DescribeTelCdrRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
+         * Start timestamp, unix timestamp in seconds. supports up to the past 180 days.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.StartTimeStamp = null;
+
+        /**
+         * End timestamp, unix timestamp in seconds. the range between the end time and start time is less than 90 days.
+         * @type {number || null}
+         */
+        this.EndTimeStamp = null;
+
+        /**
+         * Instance id (deprecated).
+         * @type {number || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Maximum number of returned entries (deprecated).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset (deprecated).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Page size (required), up to 100.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <Page number (required), starting from 0.>.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Filter by phone number.
+         * @type {Array.<string> || null}
+         */
+        this.Phones = null;
+
+        /**
+         * Filter by sessionid.
+         * @type {Array.<string> || null}
+         */
+        this.SessionIds = null;
 
     }
 
@@ -2116,7 +2264,65 @@ class ModifyExtensionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTimeStamp = 'StartTimeStamp' in params ? params.StartTimeStamp : null;
+        this.EndTimeStamp = 'EndTimeStamp' in params ? params.EndTimeStamp : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.Phones = 'Phones' in params ? params.Phones : null;
+        this.SessionIds = 'SessionIds' in params ? params.SessionIds : null;
+
+    }
+}
+
+/**
+ * Specific information of AI call result.
+ * @class
+ */
+class AICallExtractResultInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The extracted type is text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The extracted type is option.
+         * @type {Array.<string> || null}
+         */
+        this.Chosen = null;
+
+        /**
+         * The extracted type is a boolean value.
+         * @type {boolean || null}
+         */
+        this.Boolean = null;
+
+        /**
+         * The extracted type is a number.
+         * @type {number || null}
+         */
+        this.Number = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Chosen = 'Chosen' in params ? params.Chosen : null;
+        this.Boolean = 'Boolean' in params ? params.Boolean : null;
+        this.Number = 'Number' in params ? params.Number : null;
 
     }
 }
@@ -2130,43 +2336,43 @@ class CreateAgentCruiseDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task Name
+         * Task name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Agent Account
+         * Agent account.
          * @type {string || null}
          */
         this.Agent = null;
 
         /**
-         * Single-round Concurrent Call Volume 1-20
+         * Single-Round concurrent call volume 1-20.
          * @type {number || null}
          */
         this.ConcurrencyNumber = null;
 
         /**
-         * Task start time. Unix timestamp. The task will automatically start after this time.
+         * Task start time. unix timestamp. the task will automatically start after this time.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Task termination time. Unix timestamp. The task will automatically terminate after this time.
+         * Task termination time. unix timestamp. the task will automatically terminate after this time.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Called list supporting E.164 or number formats without country code.
+         * Called list supporting e.164 or number formats without country code.
          * @type {Array.<string> || null}
          */
         this.Callees = null;
@@ -2184,7 +2390,7 @@ class CreateAgentCruiseDialingCampaignRequest extends  AbstractModel {
         this.CallOrder = null;
 
         /**
-         * Caller Custom Data, Maximum Length 1024
+         * Caller custom data, maximum length 1024.
          * @type {string || null}
          */
         this.UUI = null;
@@ -2213,6 +2419,55 @@ class CreateAgentCruiseDialingCampaignRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAICallExtractResult request structure.
+ * @class
+ */
+class DescribeAICallExtractResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Session id.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Search for the start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Search for the end time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * CreateStaff response structure.
  * @class
  */
@@ -2222,7 +2477,6 @@ class CreateStaffResponse extends  AbstractModel {
 
         /**
          * Error agent list and error information.
-Note: This field may return null, indicating that no valid value could be obtained.
          * @type {Array.<ErrStaffItem> || null}
          */
         this.ErrorStaffList = null;
@@ -2265,7 +2519,7 @@ class DescribePredictiveDialingCampaignsRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -2289,7 +2543,7 @@ class DescribePredictiveDialingCampaignsRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Query task list skill group ID.
+         * Query task list skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -2327,7 +2581,7 @@ class DescribeSkillGroupInfoListResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Skill Group Information List.
+         * Skill group information list.
          * @type {Array.<SkillGroupInfoItem> || null}
          */
         this.SkillGroupList = null;
@@ -2371,7 +2625,7 @@ class DescribeNumbersResponse extends  AbstractModel {
         super();
 
         /**
-         * Total quantity
+         * Total quantity.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2421,13 +2675,13 @@ class DeletePredictiveDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * <Task id>.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -2456,13 +2710,13 @@ class UploadIvrAudioRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Audio File List
+         * Audio file list.
          * @type {Array.<UploadAudioInfo> || null}
          */
         this.AudioList = null;
@@ -2549,7 +2803,7 @@ class UnbindNumberCallOutSkillGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -2561,7 +2815,7 @@ class UnbindNumberCallOutSkillGroupRequest extends  AbstractModel {
         this.Number = null;
 
         /**
-         * List of skill group IDs to be unbound.
+         * List of skill group ids to be unbound.
          * @type {Array.<number> || null}
          */
         this.SkillGroupIds = null;
@@ -2591,13 +2845,13 @@ class CreateAutoCalloutTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task starting timestamp. Unix second-level timestamp.
+         * Task starting timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.NotBefore = null;
@@ -2627,19 +2881,19 @@ class CreateAutoCalloutTaskRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Task description.
+         * <Task description>.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Task stop timestamp. Unix second-level timestamp.
+         * Task stop timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.NotAfter = null;
 
         /**
-         * Maximum attempts, 1-3 times
+         * Maximum attempts, 1-3 times.
          * @type {number || null}
          */
         this.Tries = null;
@@ -2740,7 +2994,7 @@ class CallInSkillGroupMetrics extends  AbstractModel {
         super();
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -2815,7 +3069,7 @@ class CreateCCCSkillGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required).
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -2827,14 +3081,14 @@ class CreateCCCSkillGroupRequest extends  AbstractModel {
         this.SkillGroupName = null;
 
         /**
-         * Skill group type 0-Cell phone, 1-Online, 3-Audio, 4-Video.
+         * Skill group type 0-cell phone, 1-online, 3-audio, 4-video.
          * @type {number || null}
          */
         this.SkillGroupType = null;
 
         /**
-         * The maximum number of people received by the skill group (the maximum number of people that one seat in this skill group can receive) is set to 1 by default. 1. If the skill group type is online, the maximum could be set to one and above.
-2. If the skill group type is phone, audio, or video, then the maximum must be 1
+         * The maximum number of people received by the skill group (the maximum number of people that one agent in this skill group can receive) is set to 1 by default. if the skill group type is online, the maximum can be set to one or more.
+2. if the skill group type is phone, audio, or video, then the reception limit must be 1.
          * @type {number || null}
          */
         this.MaxConcurrency = null;
@@ -2857,6 +3111,62 @@ class CreateCCCSkillGroupRequest extends  AbstractModel {
 }
 
 /**
+ * Speech-to-text information
+ * @class
+ */
+class AsrData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User side.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Message content.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Timestamp.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Sentence start time, unix millisecond timestamp.
+         * @type {number || null}
+         */
+        this.Start = null;
+
+        /**
+         * Sentence end time, unix millisecond timestamp.
+         * @type {number || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.User = 'User' in params ? params.User : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Start = 'Start' in params ? params.Start : null;
+        this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
  * DescribeAutoCalloutTask response structure.
  * @class
  */
@@ -2865,13 +3175,13 @@ class DescribeAutoCalloutTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Task Name
+         * Task name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Task Description.
+         * <Task description>.
          * @type {string || null}
          */
         this.Description = null;
@@ -2958,7 +3268,7 @@ class CreateCCCSkillGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -2993,13 +3303,13 @@ class DescribeTelSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Session ID.
+         * Session id.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -3020,6 +3330,63 @@ class DescribeTelSessionRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyOwnNumberApply request structure.
+ * @class
+ */
+class ModifyOwnNumberApplyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Circuit-Related parameters.
+         * @type {Array.<OwnNumberApplyDetailItem> || null}
+         */
+        this.DetailList = null;
+
+        /**
+         * Approval id.
+         * @type {number || null}
+         */
+        this.ApplyId = null;
+
+        /**
+         * Prefix for sending numbers.
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.DetailList) {
+            this.DetailList = new Array();
+            for (let z in params.DetailList) {
+                let obj = new OwnNumberApplyDetailItem();
+                obj.deserialize(params.DetailList[z]);
+                this.DetailList.push(obj);
+            }
+        }
+        this.ApplyId = 'ApplyId' in params ? params.ApplyId : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+
+    }
+}
+
+/**
  * DescribeSkillGroupInfoList request structure.
  * @class
  */
@@ -3028,7 +3395,7 @@ class DescribeSkillGroupInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -3040,19 +3407,19 @@ class DescribeSkillGroupInfoListRequest extends  AbstractModel {
         this.PageSize = null;
 
         /**
-         * Page number starting from 0.
+         * <Page number starting from 0.>.
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * Using skill group ID when querying a single skill group.
+         * Using skill group id when querying a single skill group.
          * @type {number || null}
          */
         this.SkillGroupId = null;
 
         /**
-         * Used when querying skill groups with a modified time greater or equal to ModifiedTime.
+         * Used when querying skill groups with a modified time greater or equal to modifiedtime.
          * @type {number || null}
          */
         this.ModifiedTime = null;
@@ -3083,30 +3450,24 @@ class DescribeSkillGroupInfoListRequest extends  AbstractModel {
 }
 
 /**
- * Outbound call task called information.
+ * DescribePredictiveDialingCampaign request structure.
  * @class
  */
-class AutoCalloutTaskCalleeInfo extends  AbstractModel {
+class DescribePredictiveDialingCampaignRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Called number.
-         * @type {string || null}
-         */
-        this.Callee = null;
-
-        /**
-         * Call status 0 - Initial, 1 - Answered, 2 - Unanswered, 3 - Calling, 4 - Pending Retry.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
-        this.State = null;
+        this.SdkAppId = null;
 
         /**
-         * List of session IDs.
-         * @type {Array.<string> || null}
+         * <Task id>.
+         * @type {number || null}
          */
-        this.Sessions = null;
+        this.CampaignId = null;
 
     }
 
@@ -3117,9 +3478,8 @@ class AutoCalloutTaskCalleeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Callee = 'Callee' in params ? params.Callee : null;
-        this.State = 'State' in params ? params.State : null;
-        this.Sessions = 'Sessions' in params ? params.Sessions : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.CampaignId = 'CampaignId' in params ? params.CampaignId : null;
 
     }
 }
@@ -3146,13 +3506,12 @@ class SeatUserInfo extends  AbstractModel {
 
         /**
          * Worker number.
-Note: This field may return null, indicating that no valid value could be obtained.
          * @type {string || null}
          */
         this.StaffNumber = null;
 
         /**
-         * Agent's Telephone Number (With 0086 Prefix)
+         * Agent'S telephone number (with 0086 prefix).
          * @type {string || null}
          */
         this.Phone = null;
@@ -3164,27 +3523,31 @@ Note: This field may return null, indicating that no valid value could be obtain
         this.Nick = null;
 
         /**
-         * User ID
+         * User id.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * List of skill groups associated with the seat
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of skill groups associated with the agent.
          * @type {Array.<string> || null}
          */
         this.SkillGroupNameList = null;
 
         /**
-         * 1: Admin.
-2: Quality inspector.
-3: Ordinary agent.
-else: Custom Role ID.
-Note: This field may return null, indicating that no valid value could be obtained.
+         * 1: admin.
+2: quality inspector.
+3: ordinary agent.
+Else: custom role id.
          * @type {number || null}
          */
         this.Role = null;
+
+        /**
+         * Agent extension number (starting with 1 to 8, 4 - 6 digits).
+         * @type {string || null}
+         */
+        this.ExtensionNumber = null;
 
     }
 
@@ -3203,6 +3566,7 @@ Note: This field may return null, indicating that no valid value could be obtain
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.SkillGroupNameList = 'SkillGroupNameList' in params ? params.SkillGroupNameList : null;
         this.Role = 'Role' in params ? params.Role : null;
+        this.ExtensionNumber = 'ExtensionNumber' in params ? params.ExtensionNumber : null;
 
     }
 }
@@ -3250,7 +3614,7 @@ class DescribePredictiveDialingSessionsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of session IDs for a call. You can access detailed call bills in batches through https://intl.cloud.tencent.com/document/product/679/47714.?from_cn_redirect=1
+         * List of session ids for a call. you can access detailed call bills in batches through https://intl.cloud.tencent.com/document/product/679/47714.?from_cn_redirect=1.
          * @type {Array.<string> || null}
          */
         this.SessionList = null;
@@ -3286,7 +3650,7 @@ class ErrStaffItem extends  AbstractModel {
         super();
 
         /**
-         * Agent Email Address
+         * Agent email address.
          * @type {string || null}
          */
         this.StaffEmail = null;
@@ -3356,13 +3720,13 @@ class PSTNSession extends  AbstractModel {
         super();
 
         /**
-         * Session ID.
+         * Session id.
          * @type {string || null}
          */
         this.SessionID = null;
 
         /**
-         * Temporary room ID for session.
+         * Temporary room id for session.
          * @type {string || null}
          */
         this.RoomID = null;
@@ -3380,19 +3744,19 @@ class PSTNSession extends  AbstractModel {
         this.Callee = null;
 
         /**
-         * Start time. Unix timestamp.
+         * Start time. unix timestamp.
          * @type {number || null}
          */
         this.StartTimestamp = null;
 
         /**
-         * Ring time. Unix timestamp.
+         * Ring time. unix timestamp.
          * @type {number || null}
          */
         this.RingTimestamp = null;
 
         /**
-         * Answer time. Unix timestamp.
+         * Answer time. unix timestamp.
          * @type {number || null}
          */
         this.AcceptTimestamp = null;
@@ -3404,29 +3768,29 @@ class PSTNSession extends  AbstractModel {
         this.StaffEmail = null;
 
         /**
-         * Agent ID
+         * Agent id.
          * @type {string || null}
          */
         this.StaffNumber = null;
 
         /**
-         * Session Status
-ringing Ringing
-seatJoining  waiting for the agent to answer
-inProgress  Ongoing
-finished - Completed.
+         * Session status.
+Ringing - in progress.
+SeatJoining - waiting for the agent to answer.
+InProgress: in progress.
+Finished - completed.
          * @type {string || null}
          */
         this.SessionStatus = null;
 
         /**
-         * Session call direction, 0 - Inbound | 1 - Outbound.
+         * Session call direction, 0 - inbound | 1 - outbound.
          * @type {number || null}
          */
         this.Direction = null;
 
         /**
-         * The number used for transferring to the external line (Outbound Caller).
+         * The number used for transferring to the external line (outbound caller).
          * @type {string || null}
          */
         this.OutBoundCaller = null;
@@ -3438,13 +3802,13 @@ finished - Completed.
         this.OutBoundCallee = null;
 
         /**
-         * Caller number protection ID. Effective when the number protection map feature is activated, and the Caller field is empty.
+         * Caller number protection id. effective when the number protection map feature is activated, and the caller field is empty.
          * @type {string || null}
          */
         this.ProtectedCaller = null;
 
         /**
-         * Called number protection ID. Effective when the number protection map feature is activated, and the Callee field is empty.
+         * Called number protection id. effective when the number protection map feature is activated, and the callee field is empty.
          * @type {string || null}
          */
         this.ProtectedCallee = null;
@@ -3486,25 +3850,25 @@ class UpdatePredictiveDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Generated task ID.
+         * Generated task id.
          * @type {number || null}
          */
         this.CampaignId = null;
 
         /**
-         * Task Name
+         * Task name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Called list supporting E.164 or number formats without country code.
+         * Called list supporting e.164 or number formats without country code.
          * @type {Array.<string> || null}
          */
         this.Callees = null;
@@ -3534,7 +3898,7 @@ class UpdatePredictiveDialingCampaignRequest extends  AbstractModel {
         this.Priority = null;
 
         /**
-         * Expected call drop rate, percentage, 5 - 50.
+         * Expected call drop rate, percentage, 5 - 50.	.	
          * @type {number || null}
          */
         this.ExpectedAbandonRate = null;
@@ -3546,19 +3910,19 @@ class UpdatePredictiveDialingCampaignRequest extends  AbstractModel {
         this.RetryInterval = null;
 
         /**
-         * Task start time. Unix timestamp. The task will automatically start after this time.
+         * Task start time. unix timestamp. the task will automatically start after this time.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Task termination time. Unix timestamp. The task will automatically terminate after this time.
+         * Task termination time. unix timestamp. the task will automatically terminate after this time.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Specified IVR ID.
+         * Specified ivr id.
          * @type {number || null}
          */
         this.IVRId = null;
@@ -3568,6 +3932,24 @@ class UpdatePredictiveDialingCampaignRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.RetryTimes = null;
+
+        /**
+         * Custom variable.
+         * @type {Array.<Variable> || null}
+         */
+        this.Variables = null;
+
+        /**
+         * 	UUI
+         * @type {string || null}
+         */
+        this.UUI = null;
+
+        /**
+         * Property of the called.
+         * @type {Array.<CalleeAttribute> || null}
+         */
+        this.CalleeAttributes = null;
 
     }
 
@@ -3593,6 +3975,25 @@ class UpdatePredictiveDialingCampaignRequest extends  AbstractModel {
         this.IVRId = 'IVRId' in params ? params.IVRId : null;
         this.RetryTimes = 'RetryTimes' in params ? params.RetryTimes : null;
 
+        if (params.Variables) {
+            this.Variables = new Array();
+            for (let z in params.Variables) {
+                let obj = new Variable();
+                obj.deserialize(params.Variables[z]);
+                this.Variables.push(obj);
+            }
+        }
+        this.UUI = 'UUI' in params ? params.UUI : null;
+
+        if (params.CalleeAttributes) {
+            this.CalleeAttributes = new Array();
+            for (let z in params.CalleeAttributes) {
+                let obj = new CalleeAttribute();
+                obj.deserialize(params.CalleeAttributes[z]);
+                this.CalleeAttributes.push(obj);
+            }
+        }
+
     }
 }
 
@@ -3605,13 +4006,13 @@ class DescribeStaffInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Page size, upper limit 9,999
+         * Page size, upper limit 9,999.
          * @type {number || null}
          */
         this.PageSize = null;
@@ -3629,13 +4030,13 @@ class DescribeStaffInfoListRequest extends  AbstractModel {
         this.StaffMail = null;
 
         /**
-         * Use when querying for agents with a modification time greater or equal to ModifiedTime.
+         * Use when querying for agents with a modification time greater or equal to modifiedtime.
          * @type {number || null}
          */
         this.ModifiedTime = null;
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -3668,13 +4069,13 @@ class AutoCalloutTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * Task Name
+         * Task name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Number of calls.
+         * Number of called parties.
          * @type {number || null}
          */
         this.CalleeCount = null;
@@ -3692,7 +4093,8 @@ class AutoCalloutTaskInfo extends  AbstractModel {
         this.NotBefore = null;
 
         /**
-         * End timestamp.
+         * End timestamp
+.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -3705,18 +4107,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IvrId = null;
 
         /**
-         * Task status:
-0 Initial: Task created, calling not started
-1 Running
-2  Completed: All calls in the task are completed
-3 Ending: The task is due, but some calls are still not finished
-4 Ended: Task terminated due to expiration
+         * Task status:.
+0 initial: task creation, call not started.
+1 running.
+2 completed: all calls in the task are completed.
+3 ending: the task has expired, but there are still some calls not ended.
+4 ended: task terminated due to expiration.
          * @type {number || null}
          */
         this.State = null;
 
         /**
-         * Task ID.
+         * <Task id>.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -3751,13 +4153,13 @@ class DescribeIvrAudioListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Page size, upper limit 50
+         * Page size, upper limit 50.
          * @type {number || null}
          */
         this.PageSize = null;
@@ -3769,19 +4171,19 @@ class DescribeIvrAudioListRequest extends  AbstractModel {
         this.PageNumber = null;
 
         /**
-         * File alias
+         * File alias.
          * @type {Array.<string> || null}
          */
         this.CustomFileName = null;
 
         /**
-         * Filename
+         * Filename.
          * @type {Array.<string> || null}
          */
         this.AudioFileName = null;
 
         /**
-         * File ID
+         * File id.
          * @type {Array.<number> || null}
          */
         this.FileId = null;
@@ -3814,7 +4216,7 @@ class SkillGroupInfoItem extends  AbstractModel {
         super();
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -3826,49 +4228,43 @@ class SkillGroupInfoItem extends  AbstractModel {
         this.SkillGroupName = null;
 
         /**
-         * (Deprecated) Type: IM, TEL, ALL (full media).
+         * (Deprecated) type: im, tel, all (full media).
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * Session allocation policy.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RoutePolicy = null;
 
         /**
-         * Should the conversation allocation prioritize the last service seat?
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether the session is allocated to the last serviced agent first.
          * @type {number || null}
          */
         this.UsingLastSeat = null;
 
         /**
          * Maximum concurrency number of single client service (default 1 for telephone type).
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxConcurrency = null;
 
         /**
          * Last modification time.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LastModifyTimestamp = null;
 
         /**
-         * Skill group type 0-phone, 1-online, 3-audio, 4-video.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Skill group type 0-cell phone, 1-online, 3-audio, 4-video.	.	
          * @type {number || null}
          */
         this.SkillGroupType = null;
 
         /**
-         * Extension number within the skill group
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Intra-Skill group line number.
          * @type {string || null}
          */
         this.Alias = null;
@@ -3896,24 +4292,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ResetExtensionPassword response structure.
+ * CreateAIAgentCall request structure.
  * @class
  */
-class ResetExtensionPasswordResponse extends  AbstractModel {
+class CreateAIAgentCallRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Reset password.
-         * @type {string || null}
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
          */
-        this.Password = null;
+        this.SdkAppId = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * AI agent id.
+         * @type {number || null}
+         */
+        this.AIAgentId = null;
+
+        /**
+         * Callee number.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Callee = null;
+
+        /**
+         * Caller number list
+         * @type {Array.<string> || null}
+         */
+        this.Callers = null;
+
+        /**
+         * Prompt variable.
+         * @type {Array.<Variable> || null}
+         */
+        this.PromptVariables = null;
 
     }
 
@@ -3924,8 +4338,19 @@ class ResetExtensionPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = 'Password' in params ? params.Password : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.AIAgentId = 'AIAgentId' in params ? params.AIAgentId : null;
+        this.Callee = 'Callee' in params ? params.Callee : null;
+        this.Callers = 'Callers' in params ? params.Callers : null;
+
+        if (params.PromptVariables) {
+            this.PromptVariables = new Array();
+            for (let z in params.PromptVariables) {
+                let obj = new Variable();
+                obj.deserialize(params.PromptVariables[z]);
+                this.PromptVariables.push(obj);
+            }
+        }
 
     }
 }
@@ -3939,13 +4364,13 @@ class UpdateCCCSkillGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required).
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupID = null;
@@ -3957,7 +4382,7 @@ class UpdateCCCSkillGroupRequest extends  AbstractModel {
         this.SkillGroupName = null;
 
         /**
-         * Modified maximum concurrency and the maximum synchronization is 2.
+         * Modified maximum concurrency, with the maximum synchronization being 2.
          * @type {number || null}
          */
         this.MaxConcurrency = null;
@@ -3995,7 +4420,7 @@ class ModifyStaffPasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -4007,7 +4432,7 @@ class ModifyStaffPasswordRequest extends  AbstractModel {
         this.Email = null;
 
         /**
-         * The set password 
+         * The set password.
          * @type {string || null}
          */
         this.Password = null;
@@ -4065,13 +4490,13 @@ class ModifyExtensionRequest extends  AbstractModel {
         super();
 
         /**
-         * TCCC instance application ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Extension
+         * Extension.
          * @type {string || null}
          */
         this.ExtensionId = null;
@@ -4121,7 +4546,7 @@ class CreatePredictiveDialingCampaignResponse extends  AbstractModel {
         super();
 
         /**
-         * Generated task ID.
+         * Generated task id.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -4184,13 +4609,13 @@ class PSTNSessionInfo extends  AbstractModel {
         super();
 
         /**
-         * Session ID.
+         * Session id.
          * @type {string || null}
          */
         this.SessionID = null;
 
         /**
-         * Temporary room ID for session.
+         * Temporary room id for session.
          * @type {string || null}
          */
         this.RoomID = null;
@@ -4208,13 +4633,13 @@ class PSTNSessionInfo extends  AbstractModel {
         this.Callee = null;
 
         /**
-         * Start time. Unix timestamp.
+         * Start time. unix timestamp.
          * @type {string || null}
          */
         this.StartTimestamp = null;
 
         /**
-         * Answer time. Unix timestamp.
+         * Answer time. unix timestamp.
          * @type {string || null}
          */
         this.AcceptTimestamp = null;
@@ -4226,37 +4651,37 @@ class PSTNSessionInfo extends  AbstractModel {
         this.StaffEmail = null;
 
         /**
-         * Agent ID
+         * Agent id.
          * @type {string || null}
          */
         this.StaffNumber = null;
 
         /**
-         * Agent Status inProgress Ongoing
+         * Agent status inprogress ongoing.
          * @type {string || null}
          */
         this.SessionStatus = null;
 
         /**
-         * Session call direction, 0 - Inbound | 1 - Outbound.
+         * Session call direction, 0 - inbound | 1 - outbound.
          * @type {number || null}
          */
         this.Direction = null;
 
         /**
-         * Ring time. Unix timestamp.
+         * Ring time. unix timestamp.
          * @type {number || null}
          */
         this.RingTimestamp = null;
 
         /**
-         * Caller number protection ID. Effective when the number protection map feature is activated, and the Caller field is empty.
+         * Caller number protection id. effective when the number protection map feature is activated, and the caller field is empty.
          * @type {string || null}
          */
         this.ProtectedCaller = null;
 
         /**
-         * Called number protection ID. Effective when the number protection map feature is activated, and the Callee field is empty.
+         * Called number protection id. effective when the number protection map feature is activated, and the callee field is empty.
          * @type {string || null}
          */
         this.ProtectedCallee = null;
@@ -4324,7 +4749,7 @@ class DescribeNumbersRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -4366,7 +4791,7 @@ class ExtensionInfo extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * Instance id.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -4378,7 +4803,7 @@ class ExtensionInfo extends  AbstractModel {
         this.FullExtensionId = null;
 
         /**
-         * Extension
+         * Extension.
          * @type {string || null}
          */
         this.ExtensionId = null;
@@ -4396,7 +4821,7 @@ class ExtensionInfo extends  AbstractModel {
         this.ExtensionName = null;
 
         /**
-         * Creation Time
+         * Creation time.
          * @type {number || null}
          */
         this.CreateTime = null;
@@ -4408,7 +4833,7 @@ class ExtensionInfo extends  AbstractModel {
         this.ModifyTime = null;
 
         /**
-         * Telephone status (0 Offline, 100 Free, 200 Busy).
+         * Telephone status (0 offline, 100 free, 200 busy).
          * @type {number || null}
          */
         this.Status = null;
@@ -4420,13 +4845,13 @@ class ExtensionInfo extends  AbstractModel {
         this.Register = null;
 
         /**
-         * Bind Agent Email
+         * Bind agent email.
          * @type {string || null}
          */
         this.Relation = null;
 
         /**
-         * Bind Agent Name
+         * Bind agent name.
          * @type {string || null}
          */
         this.RelationName = null;
@@ -4464,7 +4889,7 @@ class BindNumberCallOutSkillGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -4476,7 +4901,7 @@ class BindNumberCallOutSkillGroupRequest extends  AbstractModel {
         this.Number = null;
 
         /**
-         * Skill group ID list to be bound.
+         * Skill group id list to be bound.
          * @type {Array.<number> || null}
          */
         this.SkillGroupIds = null;
@@ -4534,18 +4959,40 @@ class IVRKeyPressedElement extends  AbstractModel {
         super();
 
         /**
-         * Key.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Hit keyword or press.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Tag associated with key.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Tag associated with the key.
          * @type {string || null}
          */
         this.Label = null;
+
+        /**
+         * UNIX millisecond timestamp.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Node tags.
+         * @type {string || null}
+         */
+        this.NodeLabel = null;
+
+        /**
+         * User'S original input.
+         * @type {string || null}
+         */
+        this.OriginalContent = null;
+
+        /**
+         * TTS prompt content.
+         * @type {string || null}
+         */
+        this.TTSPrompt = null;
 
     }
 
@@ -4558,6 +5005,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Label = 'Label' in params ? params.Label : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.NodeLabel = 'NodeLabel' in params ? params.NodeLabel : null;
+        this.OriginalContent = 'OriginalContent' in params ? params.OriginalContent : null;
+        this.TTSPrompt = 'TTSPrompt' in params ? params.TTSPrompt : null;
 
     }
 }
@@ -4599,13 +5050,13 @@ class DescribeAgentCruiseDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * Task id.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -4634,7 +5085,7 @@ class DescribePSTNActiveSessionListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -4676,7 +5127,7 @@ class CreateAutoCalloutTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID.
+         * Task id.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -4703,360 +5154,24 @@ class CreateAutoCalloutTaskResponse extends  AbstractModel {
 }
 
 /**
- * Phone call information.
+ * DescribeAICallExtractResult response structure.
  * @class
  */
-class TelCdrInfo extends  AbstractModel {
+class DescribeAICallExtractResultResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Caller number.
+         * Result list.
+         * @type {Array.<AICallExtractResultElement> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Caller = null;
-
-        /**
-         * Called number.
-         * @type {string || null}
-         */
-        this.Callee = null;
-
-        /**
-         * Call initiation timestamp, Unix timestamp.
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Call direction: 0 - Inbound, 1 - Outbound.
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * Call duration.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Recording Information.
-         * @type {string || null}
-         */
-        this.RecordURL = null;
-
-        /**
-         * Recording ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RecordId = null;
-
-        /**
-         * Agent Information
-         * @type {SeatUserInfo || null}
-         */
-        this.SeatUser = null;
-
-        /**
-         * EndStatus corresponds one-to-one with EndStatusString, specific enumerations are as follows:
-
-**Scenario	         EndStatus	EndStatusString	Status Description**
-
-Incoming & Outgoing Calls	1	        ok	                        Normal End
-
-Incoming & Outgoing Calls	0	        error	                System Error
-
-Incoming Call	             102	        ivrGiveUp	        User Gave Up During IVR
-
-Incoming Call	             103	        waitingGiveUp	       User Gave Up During Queue
-
-Incoming Call	             104	        ringingGiveUp	       User Gave Up During Ringing
-
-Incoming Call	             105	        noSeatOnline	       No Seat Online
-
-Incoming Call              106	       notWorkTime	       Non-Working Hours   
-
-Incoming Call	            107	       ivrEnd	               Ended Directly After IVR
-
-Incoming Call	            100	      blackList Incoming blocklist  
-
-Outgoing Call               2	              unconnected	Unconnected
-
-Outgoing Call             108	        restrictedCallee	Callee restricted due to high risk
-
-Outgoing Call             109	        tooManyRequest	    Frequency limit exceeded
-
-Outgoing Call             110	        restrictedArea	    Call to restricted area
-
-Outgoing Call             111	        restrictedTime	Call time restricted
-                         
-Outgoing Call             201            unknown	Unknown status
-
-Outgoing Call             202            notAnswer	Missed call
-
-Outgoing Call            203	    userReject	Reject/Hang Up
-
-Outgoing Call	          204	    powerOff	Shutting down
-
-Outgoing Call           205            numberNotExist	Disconnected Number
-
-Outgoing Call	         206	           busy	During the call
-
-Outgoing Call   	        207	           outOfCredit	Overdue Payment
-
-Outgoing Call	         208	           operatorError	 ISP Carrier Line Anomaly
-
-Outgoing Call         	209	           callerCancel	Caller Cancelled
-
-Outgoing Call	        210	           notInService	Out of Service Area
-
-Incoming & Outgoing Calls	211    clientError    Client Error
-
-         * @type {number || null}
-         */
-        this.EndStatus = null;
-
-        /**
-         * Skill group name.
-         * @type {string || null}
-         */
-        this.SkillGroup = null;
-
-        /**
-         * Caller's location.
-         * @type {string || null}
-         */
-        this.CallerLocation = null;
-
-        /**
-         * Time spent in IVR stage.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IVRDuration = null;
-
-        /**
-         * Ring timestamp. UNIX second-level timestamp
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RingTimestamp = null;
-
-        /**
-         * Answer timestamp. UNIX second-Level timestamp
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AcceptTimestamp = null;
-
-        /**
-         * End timestamp. UNIX second-level timestamp
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EndedTimestamp = null;
-
-        /**
-         * IVR key information, e.g. ["1","2","3"]
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.IVRKeyPressed = null;
-
-        /**
-         * Hanging Up Party seat Seat user Users system system
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HungUpSide = null;
-
-        /**
-         * List of Service Participants
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ServeParticipant> || null}
-         */
-        this.ServeParticipants = null;
-
-        /**
-         * Skill group ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.SkillGroupId = null;
-
-        /**
-         * EndStatus corresponds one-to-one with EndStatusString, specific enumerations are as follows:
-
-**Scenario	         EndStatus	EndStatusString	Status Description**
-
-Incoming & Outgoing Calls	1	        ok	                        Normal End
-
-Incoming & Outgoing Calls	0	        error	                System Error
-
-Incoming Call	             102	        ivrGiveUp	        User Gave Up During IVR
-
-Incoming Call	             103	        waitingGiveUp	       User Gave Up During Queue
-
-Incoming Call	             104	        ringingGiveUp	       User Gave Up During Ringing
-
-Incoming Call	             105	        noSeatOnline	       No Seat Online
-
-Incoming Call              106	       notWorkTime	       Non-Working Hours   
-
-Incoming Call	            107	       ivrEnd	               Ended Directly After IVR
-
-Incoming Call	            100	      blackList Incoming blocklist  
-
-Outgoing Call               2	              unconnected	Unconnected
-
-Outgoing Call             108	        restrictedCallee	Callee restricted due to high risk
-
-Outgoing Call             109	        tooManyRequest	    Frequency limit exceeded
-
-Outgoing Call             110	        restrictedArea	    Call to restricted area
-
-Outgoing Call             111	        restrictedTime	Call time restricted
-                         
-Outgoing Call             201            unknown	Unknown status
-
-Outgoing Call             202            notAnswer	Missed call
-
-Outgoing Call            203	    userReject	Reject/Hang Up
-
-Outgoing Call	          204	    powerOff	Shutting down
-
-Outgoing Call           205            numberNotExist	Disconnected Number
-
-Phone Call Out	         206	           busy	In Call
-
-Outgoing Call   	        207	           outOfCredit	Overdue Payment
-
-Outgoing Call	         208	           operatorError	 ISP Carrier Line Anomaly
-
-Outgoing Call         	209	           callerCancel	Caller Cancelled
-
-Outgoing Call	        210	           notInService	Out of Service Area
-
-Phone Call In & Out	211    clientError    Client Error
-
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EndStatusString = null;
-
-        /**
-         * Session start timestamp. UNIX second-level timestamp.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.StartTimestamp = null;
-
-        /**
-         * Queue entry time. Unix second-level timestamp.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.QueuedTimestamp = null;
-
-        /**
-         * Post-IVR key information (e.g. [{"Key":"1","Label":"Very Satisfied"}])
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {Array.<IVRKeyPressedElement> || null}
-         */
-        this.PostIVRKeyPressed = null;
-
-        /**
-         * Queue Skill Group ID.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.QueuedSkillGroupId = null;
-
-        /**
-         * Session ID.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * Caller number protection ID. (Effective when the number protection map feature is activated, and the Caller field is empty).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProtectedCaller = null;
-
-        /**
-         * Called number protection ID (Effective when the number protection map feature is activated, and the Callee field is empty).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProtectedCallee = null;
-
-        /**
-         * Customer custom data. (User-to-User Interface)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uui = null;
-
-        /**
-         * Customer custom data. (User-to-User Interface)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UUI = null;
-
-        /**
-         * IVR key information (e.g.?[{"Key":"1","Label":"highly satisfied"}])
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<IVRKeyPressedElement> || null}
-         */
-        this.IVRKeyPressedEx = null;
-
-        /**
-         * Access to the ASR text information address of the recording.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsrUrl = null;
-
-        /**
-         * Address of the third party COS for transferring recording.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CustomRecordURL = null;
-
-        /**
-         * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Queue skill group name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.QueuedSkillGroupName = null;
-
-        /**
-         * Audio message recording URL during call.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.VoicemailRecordURL = null;
-
-        /**
-         * Text Information address of ASR audio message during a call.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.VoicemailAsrURL = null;
+        this.RequestId = null;
 
     }
 
@@ -5067,71 +5182,51 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Caller = 'Caller' in params ? params.Caller : null;
-        this.Callee = 'Callee' in params ? params.Callee : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.RecordURL = 'RecordURL' in params ? params.RecordURL : null;
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
 
-        if (params.SeatUser) {
-            let obj = new SeatUserInfo();
-            obj.deserialize(params.SeatUser)
-            this.SeatUser = obj;
-        }
-        this.EndStatus = 'EndStatus' in params ? params.EndStatus : null;
-        this.SkillGroup = 'SkillGroup' in params ? params.SkillGroup : null;
-        this.CallerLocation = 'CallerLocation' in params ? params.CallerLocation : null;
-        this.IVRDuration = 'IVRDuration' in params ? params.IVRDuration : null;
-        this.RingTimestamp = 'RingTimestamp' in params ? params.RingTimestamp : null;
-        this.AcceptTimestamp = 'AcceptTimestamp' in params ? params.AcceptTimestamp : null;
-        this.EndedTimestamp = 'EndedTimestamp' in params ? params.EndedTimestamp : null;
-        this.IVRKeyPressed = 'IVRKeyPressed' in params ? params.IVRKeyPressed : null;
-        this.HungUpSide = 'HungUpSide' in params ? params.HungUpSide : null;
-
-        if (params.ServeParticipants) {
-            this.ServeParticipants = new Array();
-            for (let z in params.ServeParticipants) {
-                let obj = new ServeParticipant();
-                obj.deserialize(params.ServeParticipants[z]);
-                this.ServeParticipants.push(obj);
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new AICallExtractResultElement();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
             }
         }
-        this.SkillGroupId = 'SkillGroupId' in params ? params.SkillGroupId : null;
-        this.EndStatusString = 'EndStatusString' in params ? params.EndStatusString : null;
-        this.StartTimestamp = 'StartTimestamp' in params ? params.StartTimestamp : null;
-        this.QueuedTimestamp = 'QueuedTimestamp' in params ? params.QueuedTimestamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.PostIVRKeyPressed) {
-            this.PostIVRKeyPressed = new Array();
-            for (let z in params.PostIVRKeyPressed) {
-                let obj = new IVRKeyPressedElement();
-                obj.deserialize(params.PostIVRKeyPressed[z]);
-                this.PostIVRKeyPressed.push(obj);
-            }
-        }
-        this.QueuedSkillGroupId = 'QueuedSkillGroupId' in params ? params.QueuedSkillGroupId : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.ProtectedCaller = 'ProtectedCaller' in params ? params.ProtectedCaller : null;
-        this.ProtectedCallee = 'ProtectedCallee' in params ? params.ProtectedCallee : null;
-        this.Uui = 'Uui' in params ? params.Uui : null;
-        this.UUI = 'UUI' in params ? params.UUI : null;
+    }
+}
 
-        if (params.IVRKeyPressedEx) {
-            this.IVRKeyPressedEx = new Array();
-            for (let z in params.IVRKeyPressedEx) {
-                let obj = new IVRKeyPressedElement();
-                obj.deserialize(params.IVRKeyPressedEx[z]);
-                this.IVRKeyPressedEx.push(obj);
-            }
+/**
+ * Failed to upload audio file information
+ * @class
+ */
+class UploadIvrAudioFailedInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filename.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Reason for failure.
+         * @type {string || null}
+         */
+        this.FailedMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.AsrUrl = 'AsrUrl' in params ? params.AsrUrl : null;
-        this.CustomRecordURL = 'CustomRecordURL' in params ? params.CustomRecordURL : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.QueuedSkillGroupName = 'QueuedSkillGroupName' in params ? params.QueuedSkillGroupName : null;
-        this.VoicemailRecordURL = 'VoicemailRecordURL' in params ? params.VoicemailRecordURL : null;
-        this.VoicemailAsrURL = 'VoicemailAsrURL' in params ? params.VoicemailAsrURL : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FailedMsg = 'FailedMsg' in params ? params.FailedMsg : null;
 
     }
 }
@@ -5145,15 +5240,13 @@ class UploadIvrAudioResponse extends  AbstractModel {
         super();
 
         /**
-         * List of failed uploads
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of files that failed to be uploaded.
          * @type {Array.<UploadIvrAudioFailedInfo> || null}
          */
         this.FailedFileList = null;
 
         /**
-         * List of successful uploads
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of successfully uploaded files.
          * @type {Array.<AudioFileInfo> || null}
          */
         this.SuccessFileList = null;
@@ -5190,6 +5283,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.SuccessFileList[z]);
                 this.SuccessFileList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyExtension response structure.
+ * @class
+ */
+class ModifyExtensionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5247,13 +5368,13 @@ class DeleteStaffRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Customer service emails, supports up to 200 at a time.
+         * List of customer service emails to be deleted, supports up to 200 at a time.
          * @type {Array.<string> || null}
          */
         this.StaffList = null;
@@ -5282,7 +5403,7 @@ class CallInMetrics extends  AbstractModel {
         super();
 
         /**
-         * Number of IVR residency.
+         * Number of ivr residency.
          * @type {number || null}
          */
         this.IvrCount = null;
@@ -5300,7 +5421,7 @@ class CallInMetrics extends  AbstractModel {
         this.RingCount = null;
 
         /**
-         * Number in connection.
+         * Number of connections.
          * @type {number || null}
          */
         this.AcceptCount = null;
@@ -5380,7 +5501,7 @@ class DescribeCCCBuyInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID list, query all applications when not transmitted.
+         * Application id list, query all applications when not transmitted.
          * @type {Array.<number> || null}
          */
         this.SdkAppIds = null;
@@ -5400,66 +5521,42 @@ class DescribeCCCBuyInfoListRequest extends  AbstractModel {
 }
 
 /**
- * Agent Information with Skill Group Priority
+ * User-owned number approval detail data type
  * @class
  */
-class StaffInfo extends  AbstractModel {
+class OwnNumberApplyDetailItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Agent name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Agent email.
-         * @type {string || null}
-         */
-        this.Mail = null;
-
-        /**
-         * Agent's Telephone Number
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Phone = null;
-
-        /**
-         * Agent nickname.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Nick = null;
-
-        /**
-         * Agent ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StaffNumber = null;
-
-        /**
-         * User Role ID
+         * Number type: 0 - inbound | 1 - outbound | 2 - inbound and outbound.
          * @type {number || null}
          */
-        this.RoleId = null;
+        this.CallType = null;
 
         /**
-         * Affiliated Skill Group List.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SkillGroupItem> || null}
+         * Line number.
+         * @type {string || null}
          */
-        this.SkillGroupList = null;
+        this.PhoneNumber = null;
 
         /**
-         * Last modification time.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Maximum concurrent call number.
          * @type {number || null}
          */
-        this.LastModifyTimestamp = null;
+        this.MaxCallCount = null;
+
+        /**
+         * Maximum number of concurrencies per second.
+         * @type {number || null}
+         */
+        this.MaxCallPSec = null;
+
+        /**
+         * Outbound called number format, use {+e.164} or {e.164}. 
+         * @type {string || null}
+         */
+        this.OutboundCalleeFormat = null;
 
     }
 
@@ -5470,22 +5567,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Mail = 'Mail' in params ? params.Mail : null;
-        this.Phone = 'Phone' in params ? params.Phone : null;
-        this.Nick = 'Nick' in params ? params.Nick : null;
-        this.StaffNumber = 'StaffNumber' in params ? params.StaffNumber : null;
-        this.RoleId = 'RoleId' in params ? params.RoleId : null;
-
-        if (params.SkillGroupList) {
-            this.SkillGroupList = new Array();
-            for (let z in params.SkillGroupList) {
-                let obj = new SkillGroupItem();
-                obj.deserialize(params.SkillGroupList[z]);
-                this.SkillGroupList.push(obj);
-            }
-        }
-        this.LastModifyTimestamp = 'LastModifyTimestamp' in params ? params.LastModifyTimestamp : null;
+        this.CallType = 'CallType' in params ? params.CallType : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.MaxCallCount = 'MaxCallCount' in params ? params.MaxCallCount : null;
+        this.MaxCallPSec = 'MaxCallPSec' in params ? params.MaxCallPSec : null;
+        this.OutboundCalleeFormat = 'OutboundCalleeFormat' in params ? params.OutboundCalleeFormat : null;
 
     }
 }
@@ -5500,14 +5586,12 @@ class DescribePredictiveDialingCampaignsResponse extends  AbstractModel {
 
         /**
          * Total data volume.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Data
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Data.
          * @type {Array.<DescribePredictiveDialingCampaignsElement> || null}
          */
         this.CampaignList = null;
@@ -5551,19 +5635,19 @@ class DescribeTelCallInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Start timestamp, Unix timestamp (query dimension supports only daily. For example, to query May 1st, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp. To query May 1st and May 2nd, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)
+         * Start timestamp, unix timestamp (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
          * @type {number || null}
          */
         this.StartTimeStamp = null;
 
         /**
-         * End timestamp, Unix timestamp, the query time range is up to 90 days (query dimension supports only daily. For example, to query May 1st, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp. To query May 1st and May 2nd, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)
+         * End timestamp, unix timestamp, the query time range is up to 90 days (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
          * @type {number || null}
          */
         this.EndTimeStamp = null;
 
         /**
-         * Application ID list, when having multiple IDs, the returned value is the sum of all the IDs.
+         * Application id list, when having multiple ids, the returned value is the sum of all the ids.
          * @type {Array.<number> || null}
          */
         this.SdkAppIdList = null;
@@ -5634,7 +5718,7 @@ class CallInNumberMetrics extends  AbstractModel {
         this.Number = null;
 
         /**
-         * Line-related metrics.
+         * Line-Related metrics.
          * @type {CallInMetrics || null}
          */
         this.Metrics = null;
@@ -5683,13 +5767,13 @@ class CreateExtensionRequest extends  AbstractModel {
         super();
 
         /**
-         * TCCC instance application ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Extension
+         * Extension.
          * @type {string || null}
          */
         this.ExtensionId = null;
@@ -5739,7 +5823,7 @@ class StaffSkillGroupList extends  AbstractModel {
         super();
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -5766,7 +5850,42 @@ class StaffSkillGroupList extends  AbstractModel {
 }
 
 /**
- * 
+ * ResetExtensionPassword response structure.
+ * @class
+ */
+class ResetExtensionPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reset password.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AI to human configuration item.
  * @class
  */
 class AITransferItem extends  AbstractModel {
@@ -5774,19 +5893,19 @@ class AITransferItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Name of the function calling for transfer to human.
          * @type {string || null}
          */
         this.TransferFunctionName = null;
 
         /**
-         * 
+         * Takes effect when transferfunctionenable is true; the description of transfer_to_human function calling defaults to "transfer to human when the user has to transfer to human (like says transfer to human) or you are instructed to do so.".
          * @type {string || null}
          */
         this.TransferFunctionDesc = null;
 
         /**
-         * 
+         * Skill group id for transferring to human agent.
          * @type {number || null}
          */
         this.TransferSkillGroupId = null;
@@ -5808,6 +5927,98 @@ class AITransferItem extends  AbstractModel {
 }
 
 /**
+ * Agent Information with Skill Group Priority
+ * @class
+ */
+class StaffInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Agent name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Agent email.
+         * @type {string || null}
+         */
+        this.Mail = null;
+
+        /**
+         * Agent phone number.
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * Agent nickname.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * Agent id.
+         * @type {string || null}
+         */
+        this.StaffNumber = null;
+
+        /**
+         * User role id.
+         * @type {number || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * Affiliated skill group list.
+         * @type {Array.<SkillGroupItem> || null}
+         */
+        this.SkillGroupList = null;
+
+        /**
+         * Last modification time.
+         * @type {number || null}
+         */
+        this.LastModifyTimestamp = null;
+
+        /**
+         * Agent extension number (starting with 1 to 8, 4 - 6 digits).
+         * @type {string || null}
+         */
+        this.ExtensionNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.StaffNumber = 'StaffNumber' in params ? params.StaffNumber : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+
+        if (params.SkillGroupList) {
+            this.SkillGroupList = new Array();
+            for (let z in params.SkillGroupList) {
+                let obj = new SkillGroupItem();
+                obj.deserialize(params.SkillGroupList[z]);
+                this.SkillGroupList.push(obj);
+            }
+        }
+        this.LastModifyTimestamp = 'LastModifyTimestamp' in params ? params.LastModifyTimestamp : null;
+        this.ExtensionNumber = 'ExtensionNumber' in params ? params.ExtensionNumber : null;
+
+    }
+}
+
+/**
  * AbortAgentCruiseDialingCampaign request structure.
  * @class
  */
@@ -5816,13 +6027,13 @@ class AbortAgentCruiseDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * <Task id>.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -5843,6 +6054,41 @@ class AbortAgentCruiseDialingCampaignRequest extends  AbstractModel {
 }
 
 /**
+ * CreateOwnNumberApply response structure.
+ * @class
+ */
+class CreateOwnNumberApplyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Approval id.
+         * @type {number || null}
+         */
+        this.ApplyId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplyId = 'ApplyId' in params ? params.ApplyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Query the predictive outbound call task list elements.
  * @class
  */
@@ -5851,57 +6097,49 @@ class DescribePredictiveDialingCampaignsElement extends  AbstractModel {
         super();
 
         /**
-         * Task ID
-Note: This field may return null if no valid value is obtained.
+         * <Task id>.
          * @type {number || null}
          */
         this.CampaignId = null;
 
         /**
-         * Task Name
-Note: This field might return null if no valid values can be obtained.
+         * Task name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Task status 0 - Ready to start, 1 - In progress, 2 - Paused, 3 - Terminated, 4 - Completed.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Task status 0 - ready to start, 1 - in progress, 2 - paused, 3 - terminated, 4 - completed.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Task status reasons 0 - Normal, 1 - Manually ended, 2 - Ended due to overtime.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Task status reasons 0 - normal, 1 - manually ended, 2 - ended due to overtime.
          * @type {number || null}
          */
         this.StatusReason = null;
 
         /**
          * Number of called numbers.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CalleeCount = null;
 
         /**
          * Number of completed calls.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FinishedCalleeCount = null;
 
         /**
          * Running priority of multiple tasks in the same application, from high to low 1 - 5.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Priority = null;
 
         /**
          * ID of the used skill group of agents.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -5992,13 +6230,13 @@ class AbortPredictiveDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * Task id.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -6019,6 +6257,427 @@ class AbortPredictiveDialingCampaignRequest extends  AbstractModel {
 }
 
 /**
+ * Phone call information
+ * @class
+ */
+class TelCdrInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Caller number.
+         * @type {string || null}
+         */
+        this.Caller = null;
+
+        /**
+         * Called number.
+         * @type {string || null}
+         */
+        this.Callee = null;
+
+        /**
+         * Call initiation timestamp, unix timestamp.
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * Call direction: 0 - inbound, 1 - outbound.
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+        /**
+         * Call duration.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Recording information.
+         * @type {string || null}
+         */
+        this.RecordURL = null;
+
+        /**
+         * Recording id.
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * Agent information.
+         * @type {SeatUserInfo || null}
+         */
+        this.SeatUser = null;
+
+        /**
+         * EndStatus corresponds one-to-one with endstatusstring, with specific enumerations as follows:.
+
+**Scenario	EndStatus	EndStatusString	Status description**.
+
+Inbound call & call	1	ok	end properly.
+
+Inbound call & call | 0 | error | system error.
+
+Inbound call | 102 | ivrgiveup | user gives up during ivr.
+
+Inbound call | 103 | waitinggiveup | user gives up during session queue.
+
+Inbound call | 104 | ringinggiveup | user gives up during session ringing.
+
+Inbound call | 105 | noseatonline | no agent online.
+
+Inbound call              106	       non - working hour      non - working hour.   
+
+Inbound call              107	       ivrend                   end directly after ivr.
+
+Inbound call              100	       blocklist call - in      call - in blocklist. 
+
+Outgoing call            2                 unconnected            unconnected.
+
+Outgoing call            108           restricted callee      callee restricted due to high - risk.
+
+Outgoing call         109        toomanyrequest        overfrequency.
+
+Outgoing call         110        restrictedarea        outbound blind area.
+
+Outgoing call         111        restrictedtime        outbound time restriction.
+                         
+Outgoing call         201        unknown               unknown status.
+
+Outgoing call         202        notanswer             unanswered.
+
+Outgoing call - 203 - userreject: reject call.
+
+Outgoing call - 204 - poweroff: power off.
+
+Outgoing call - 205 - numbernotexist: nonexistent number.
+
+Outgoing call - 206 - busy: call in progress.
+
+Outgoing call - 207 - outofcredit: arrears.
+
+Outgoing call - 208 - operatorerror - ISP line exception.
+
+Outgoing call - 209 - callercancel - caller cancellation.
+
+Outgoing call - 210 - notinservice - not in service area.
+
+Inbound and outgoing call - 211 - clienterror - client error.
+Outgoing call - 212 - carrierblocked - ISP blocking.
+         * @type {number || null}
+         */
+        this.EndStatus = null;
+
+        /**
+         * Skill group name.
+         * @type {string || null}
+         */
+        this.SkillGroup = null;
+
+        /**
+         * Caller'S location.
+         * @type {string || null}
+         */
+        this.CallerLocation = null;
+
+        /**
+         * Time spent in ivr stage.
+         * @type {number || null}
+         */
+        this.IVRDuration = null;
+
+        /**
+         * Ring timestamp. unix second-level timestamp.
+         * @type {number || null}
+         */
+        this.RingTimestamp = null;
+
+        /**
+         * Answer timestamp. unix second-level timestamp.
+         * @type {number || null}
+         */
+        this.AcceptTimestamp = null;
+
+        /**
+         * End timestamp. unix second-level timestamp.
+         * @type {number || null}
+         */
+        this.EndedTimestamp = null;
+
+        /**
+         * IVR key information, e.g. ["1","2","3"].
+         * @type {Array.<string> || null}
+         */
+        this.IVRKeyPressed = null;
+
+        /**
+         * Hang-Up side, seat, user, system.
+         * @type {string || null}
+         */
+        this.HungUpSide = null;
+
+        /**
+         * Service participant list.
+         * @type {Array.<ServeParticipant> || null}
+         */
+        this.ServeParticipants = null;
+
+        /**
+         * Skill group id.
+         * @type {number || null}
+         */
+        this.SkillGroupId = null;
+
+        /**
+         * EndStatus corresponds one-to-one with endstatusstring, with specific enumerations as follows:.
+
+**Scenario	EndStatus	EndStatusString	Status description**.
+
+Inbound call & call	1	ok	end properly.
+
+Inbound call & call | 0 | error | system error.
+
+Inbound call | 102 | ivrgiveup | user gives up during ivr.
+
+Inbound call | 103 | waitinggiveup | user gives up during session queue.
+
+Inbound call | 104 | ringinggiveup | user gives up during session ringing.
+
+Inbound call | 105 | noseatonline | no agent online.
+
+Inbound call              106	       non - working hour      non - working hour.   
+
+Inbound call              107	       ivrend                   end directly after ivr.
+
+Inbound call              100	       blocklist call - in      call - in blocklist. 
+
+Outgoing call            2                 unconnected            unconnected.
+
+Outgoing call            108           restricted callee      callee restricted due to high - risk.
+
+Outgoing call         109        toomanyrequest        overfrequency.
+
+Outgoing call         110        restrictedarea        outbound blind area.
+
+Outgoing call         111        restrictedtime        outbound time restriction.
+                         
+Outgoing call         201        unknown               unknown status.
+
+Outgoing call         202        notanswer             unanswered.
+
+Outgoing call - 203 - userreject: reject call.
+
+Outgoing call - 204 - poweroff: power off.
+
+Outgoing call - 205 - numbernotexist: nonexistent number.
+
+Outgoing call - 206 - busy: call in progress.
+
+Outgoing call - 207 - outofcredit: arrears.
+
+Outgoing call - 208 - operatorerror - ISP line exception.
+
+Outgoing call - 209 - callercancel - caller cancellation.
+
+Outgoing call - 210 - notinservice - not in service area.
+
+Inbound and outgoing call - 211 - clienterror - client error.
+Outgoing call - 212 - carrierblocked - ISP blocking.
+         * @type {string || null}
+         */
+        this.EndStatusString = null;
+
+        /**
+         * Session start timestamp. unix second-level timestamp.
+         * @type {number || null}
+         */
+        this.StartTimestamp = null;
+
+        /**
+         * Queue entry time. unix second-level timestamp.
+         * @type {number || null}
+         */
+        this.QueuedTimestamp = null;
+
+        /**
+         * Post-IVR key information (e.g. [{"key":"1","label":"very satisfied"}]).
+         * @type {Array.<IVRKeyPressedElement> || null}
+         */
+        this.PostIVRKeyPressed = null;
+
+        /**
+         * Queue skill group id.
+         * @type {number || null}
+         */
+        this.QueuedSkillGroupId = null;
+
+        /**
+         * Session id.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Caller number protection id. effective when the number protection map feature is activated, and the caller field is empty.
+         * @type {string || null}
+         */
+        this.ProtectedCaller = null;
+
+        /**
+         * Called number protection id. effective when the number protection map feature is activated, and the callee field is empty.
+         * @type {string || null}
+         */
+        this.ProtectedCallee = null;
+
+        /**
+         * Customer custom data. (user - to - user interface).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uui = null;
+
+        /**
+         * Customer custom data. (user - to - user interface).
+         * @type {string || null}
+         */
+        this.UUI = null;
+
+        /**
+         * IVR key information (e.g. [{"key":"1","label":"very satisfied"}]).
+         * @type {Array.<IVRKeyPressedElement> || null}
+         */
+        this.IVRKeyPressedEx = null;
+
+        /**
+         * Access to the asr text information address of the recording.
+         * @type {string || null}
+         */
+        this.AsrUrl = null;
+
+        /**
+         * ASRUrl status: complete.
+Completed;.
+Processing.
+Generating.
+NotExists.
+No record (offline asr generation is not enabled or no package is available).
+         * @type {string || null}
+         */
+        this.AsrStatus = null;
+
+        /**
+         * Address of the third-party cos for transferring recording.
+         * @type {string || null}
+         */
+        this.CustomRecordURL = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Queue skill group name.
+         * @type {string || null}
+         */
+        this.QueuedSkillGroupName = null;
+
+        /**
+         * Audio message recording url during call.
+         * @type {Array.<string> || null}
+         */
+        this.VoicemailRecordURL = null;
+
+        /**
+         * Text information address of asr audio message during a call.
+         * @type {Array.<string> || null}
+         */
+        this.VoicemailAsrURL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Caller = 'Caller' in params ? params.Caller : null;
+        this.Callee = 'Callee' in params ? params.Callee : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.RecordURL = 'RecordURL' in params ? params.RecordURL : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+
+        if (params.SeatUser) {
+            let obj = new SeatUserInfo();
+            obj.deserialize(params.SeatUser)
+            this.SeatUser = obj;
+        }
+        this.EndStatus = 'EndStatus' in params ? params.EndStatus : null;
+        this.SkillGroup = 'SkillGroup' in params ? params.SkillGroup : null;
+        this.CallerLocation = 'CallerLocation' in params ? params.CallerLocation : null;
+        this.IVRDuration = 'IVRDuration' in params ? params.IVRDuration : null;
+        this.RingTimestamp = 'RingTimestamp' in params ? params.RingTimestamp : null;
+        this.AcceptTimestamp = 'AcceptTimestamp' in params ? params.AcceptTimestamp : null;
+        this.EndedTimestamp = 'EndedTimestamp' in params ? params.EndedTimestamp : null;
+        this.IVRKeyPressed = 'IVRKeyPressed' in params ? params.IVRKeyPressed : null;
+        this.HungUpSide = 'HungUpSide' in params ? params.HungUpSide : null;
+
+        if (params.ServeParticipants) {
+            this.ServeParticipants = new Array();
+            for (let z in params.ServeParticipants) {
+                let obj = new ServeParticipant();
+                obj.deserialize(params.ServeParticipants[z]);
+                this.ServeParticipants.push(obj);
+            }
+        }
+        this.SkillGroupId = 'SkillGroupId' in params ? params.SkillGroupId : null;
+        this.EndStatusString = 'EndStatusString' in params ? params.EndStatusString : null;
+        this.StartTimestamp = 'StartTimestamp' in params ? params.StartTimestamp : null;
+        this.QueuedTimestamp = 'QueuedTimestamp' in params ? params.QueuedTimestamp : null;
+
+        if (params.PostIVRKeyPressed) {
+            this.PostIVRKeyPressed = new Array();
+            for (let z in params.PostIVRKeyPressed) {
+                let obj = new IVRKeyPressedElement();
+                obj.deserialize(params.PostIVRKeyPressed[z]);
+                this.PostIVRKeyPressed.push(obj);
+            }
+        }
+        this.QueuedSkillGroupId = 'QueuedSkillGroupId' in params ? params.QueuedSkillGroupId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ProtectedCaller = 'ProtectedCaller' in params ? params.ProtectedCaller : null;
+        this.ProtectedCallee = 'ProtectedCallee' in params ? params.ProtectedCallee : null;
+        this.Uui = 'Uui' in params ? params.Uui : null;
+        this.UUI = 'UUI' in params ? params.UUI : null;
+
+        if (params.IVRKeyPressedEx) {
+            this.IVRKeyPressedEx = new Array();
+            for (let z in params.IVRKeyPressedEx) {
+                let obj = new IVRKeyPressedElement();
+                obj.deserialize(params.IVRKeyPressedEx[z]);
+                this.IVRKeyPressedEx.push(obj);
+            }
+        }
+        this.AsrUrl = 'AsrUrl' in params ? params.AsrUrl : null;
+        this.AsrStatus = 'AsrStatus' in params ? params.AsrStatus : null;
+        this.CustomRecordURL = 'CustomRecordURL' in params ? params.CustomRecordURL : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.QueuedSkillGroupName = 'QueuedSkillGroupName' in params ? params.QueuedSkillGroupName : null;
+        this.VoicemailRecordURL = 'VoicemailRecordURL' in params ? params.VoicemailRecordURL : null;
+        this.VoicemailAsrURL = 'VoicemailAsrURL' in params ? params.VoicemailAsrURL : null;
+
+    }
+}
+
+/**
  * Skill group information.
  * @class
  */
@@ -6027,7 +6686,7 @@ class SkillGroupItem extends  AbstractModel {
         super();
 
         /**
-         * Skill group ID.
+         * Skill group id.
          * @type {number || null}
          */
         this.SkillGroupId = null;
@@ -6039,13 +6698,13 @@ class SkillGroupItem extends  AbstractModel {
         this.SkillGroupName = null;
 
         /**
-         * Priority
+         * Priority.
          * @type {number || null}
          */
         this.Priority = null;
 
         /**
-         * Type: IM, TEL, ALL (full media).
+         * Type: im, tel, all (full media).
          * @type {string || null}
          */
         this.Type = null;
@@ -6076,19 +6735,19 @@ class PhoneNumBuyInfo extends  AbstractModel {
         super();
 
         /**
-         * Telephone Number
+         * Telephone number.
          * @type {string || null}
          */
         this.PhoneNum = null;
 
         /**
-         * Number type, 0 - Landline | 1 - Virtual Business Number | 2 - ISP Number | 3 - 400 Number.
+         * Number type, 0 - landline | 1 - virtual business number | 2 - ISP number | 3 - 400 number.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Call type of the number, 1 - Inbound | 2 - Outbound | 3 - Inbound and outbound.
+         * Call type of the number, 1 - inbound | 2 - outbound | 3 - inbound and outbound.
          * @type {number || null}
          */
         this.CallType = null;
@@ -6100,13 +6759,13 @@ class PhoneNumBuyInfo extends  AbstractModel {
         this.BuyTime = null;
 
         /**
-         * End timestamp.
+         * Deadline timestamp.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Number status, 1-Normal | 2-Suspended due to non-payment | 4-Admin suspended | 5-Suspended due to violation.
+         * Number status, 1-normal | 2-suspended due to non-payment | 4-admin suspended | 5-suspended due to violation.
          * @type {number || null}
          */
         this.State = null;
@@ -6232,13 +6891,13 @@ class ResumePredictiveDialingCampaignRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Task ID.
+         * <Task id>.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -6267,13 +6926,13 @@ class UploadAudioInfo extends  AbstractModel {
         super();
 
         /**
-         * File Alias (can be duplicated)
+         * File alias (can be duplicated).
          * @type {string || null}
          */
         this.CustomFileName = null;
 
         /**
-         * Audio File Link (supports mp3 and wav formats, file size not exceeding 5MB)
+         * Audio file link (supports mp3 and wav formats, file size not exceeding 5mb).
          * @type {string || null}
          */
         this.AudioUrl = null;
@@ -6330,7 +6989,7 @@ class BindStaffSkillGroupListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -6342,7 +7001,7 @@ class BindStaffSkillGroupListRequest extends  AbstractModel {
         this.StaffEmail = null;
 
         /**
-         * Bound skill group list
+         * Bound skill group list.
          * @type {Array.<number> || null}
          */
         this.SkillGroupList = null;
@@ -6387,7 +7046,7 @@ class CreateAgentCruiseDialingCampaignResponse extends  AbstractModel {
         super();
 
         /**
-         * Generated task ID.
+         * Generated task id.
          * @type {number || null}
          */
         this.CampaignId = null;
@@ -6414,26 +7073,18 @@ class CreateAgentCruiseDialingCampaignResponse extends  AbstractModel {
 }
 
 /**
- * Failed to upload audio file information
+ * ModifyOwnNumberApply response structure.
  * @class
  */
-class UploadIvrAudioFailedInfo extends  AbstractModel {
+class ModifyOwnNumberApplyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filename
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FileName = null;
-
-        /**
-         * Reason for failure
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FailedMsg = null;
+        this.RequestId = null;
 
     }
 
@@ -6444,8 +7095,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FailedMsg = 'FailedMsg' in params ? params.FailedMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6472,14 +7122,12 @@ class DescribeCallInMetricsResponse extends  AbstractModel {
 
         /**
          * Circuit dimension metrics.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CallInNumberMetrics> || null}
          */
         this.NumberMetrics = null;
 
         /**
-         * Skill group dimension metrics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Skill group dimension metrics.
          * @type {Array.<CallInSkillGroupMetrics> || null}
          */
         this.SkillGroupMetrics = null;
@@ -6538,31 +7186,31 @@ class DescribeAgentCruiseDialingCampaignResponse extends  AbstractModel {
         super();
 
         /**
-         * Task Name
+         * Task name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Agent Account
+         * Agent account.
          * @type {string || null}
          */
         this.Agent = null;
 
         /**
-         * Single-round Concurrent Call Volume 1-20
+         * Single-Round concurrent call volume 1-20.
          * @type {number || null}
          */
         this.ConcurrencyNumber = null;
 
         /**
-         * Task start time. Unix timestamp. The task will automatically start after this time.
+         * Task start time. unix timestamp. the task will automatically start after this time.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * Task termination time. Unix timestamp. The task will automatically terminate after this time.
+         * Task termination time. unix timestamp. the task will automatically terminate after this time.
          * @type {number || null}
          */
         this.EndTime = null;
@@ -6574,25 +7222,25 @@ class DescribeAgentCruiseDialingCampaignResponse extends  AbstractModel {
         this.CallOrder = null;
 
         /**
-         * Caller Custom Data, Maximum Length 1024
+         * Caller custom data, maximum length 1024.
          * @type {string || null}
          */
         this.UUI = null;
 
         /**
-         * Task status 0 Not started 1 Running 2 Completed 3 Terminated
+         * Task status 0 not started 1 running 2 completed 3 terminated.
          * @type {number || null}
          */
         this.State = null;
 
         /**
-         * Total number of called parties
+         * Total number of called parties.
          * @type {number || null}
          */
         this.TotalCalleeCount = null;
 
         /**
-         * Number of called parties
+         * Number of calls made and received.
          * @type {number || null}
          */
         this.CalledCalleeCount = null;
@@ -6671,7 +7319,7 @@ class CreateIVRSessionResponse extends  AbstractModel {
         super();
 
         /**
-         * Newly created session ID.
+         * Newly created session id.
          * @type {string || null}
          */
         this.SessionId = null;
@@ -6706,7 +7354,7 @@ class UnbindStaffSkillGroupListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -6813,25 +7461,25 @@ class DescribeStaffStatusMetricsRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Filter agent list. By default, do not pass all returned agent information.
+         * Filter agent list. by default, do not pass all returned agent information.
          * @type {Array.<string> || null}
          */
         this.StaffList = null;
 
         /**
-         * Filter skill group ID list.
+         * Filter skill group id list.
          * @type {Array.<number> || null}
          */
         this.GroupIdList = null;
 
         /**
-         * Filter agent status list Agent status free Available | busy Busy | rest On Break | notReady Not Ready | afterCallWork Post-call Adjustment | offline Offline
+         * Filter agent status list agent status free available | busy busy | rest on break | notready not ready | aftercallwork post-call adjustment | offline offline . 
          * @type {Array.<string> || null}
          */
         this.StatusList = null;
@@ -6862,8 +7510,7 @@ class DeleteStaffResponse extends  AbstractModel {
         super();
 
         /**
-         * List of customer service staff that can't be deleted when being online.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of customer service staff that cannot be deleted when they are online.
          * @type {Array.<string> || null}
          */
         this.OnlineStaffList = null;
@@ -6904,13 +7551,13 @@ class CalleeAttribute extends  AbstractModel {
         this.Callee = null;
 
         /**
-         * Associate data.
+         * Accompanying data.
          * @type {string || null}
          */
         this.UUI = null;
 
         /**
-         * Parameter
+         * Parameter.
          * @type {Array.<Variable> || null}
          */
         this.Variables = null;
@@ -6948,13 +7595,13 @@ class StaffStatusExtra extends  AbstractModel {
         super();
 
         /**
-         * IM - Text | TEL - Cell phone | ALL - Full media.
+         * IM - text | tel - cell phone | all - full media.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * IN - Inbound | OUT - Outbound.
+         * IN - inbound | out - outbound.
          * @type {string || null}
          */
         this.Direct = null;
@@ -6983,7 +7630,7 @@ class CreateStaffRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -6995,7 +7642,7 @@ class CreateStaffRequest extends  AbstractModel {
         this.Staffs = null;
 
         /**
-         * Whether to send a password mail or not (the default is true)
+         * Whether to send a password mail or not (the default is true).
          * @type {boolean || null}
          */
         this.SendPassword = null;
@@ -7033,25 +7680,25 @@ class SdkAppIdBuyInfo extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Application id.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Application Name
+         * Application name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Agent Purchase Count (still within the validity period)
+         * Agent purchase count (still within the validity period).
          * @type {number || null}
          */
         this.StaffBuyNum = null;
 
         /**
-         * Agent Purchase List (still within the validity period)
+         * Agent purchase list (still within the validity period).
          * @type {Array.<StaffBuyInfo> || null}
          */
         this.StaffBuyList = null;
@@ -7064,7 +7711,6 @@ class SdkAppIdBuyInfo extends  AbstractModel {
 
         /**
          * Number of office telephones purchased (still within the validity period).
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SipBuyNum = null;
@@ -7163,19 +7809,19 @@ class DescribeAutoCalloutTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Page size
+         * <Page size>.
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Page number
+         * Page number.
          * @type {number || null}
          */
         this.PageNumber = null;
@@ -7245,7 +7891,7 @@ class CreateAdminURLRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -7280,7 +7926,7 @@ class DescribeStaffStatusMetricsResponse extends  AbstractModel {
         super();
 
         /**
-         * Real-time information on agent status.
+         * Real-Time information on agent status.
          * @type {Array.<StaffStatusMetrics> || null}
          */
         this.Metrics = null;
@@ -7323,29 +7969,25 @@ class AudioFileInfo extends  AbstractModel {
         super();
 
         /**
-         * File ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File id.
          * @type {number || null}
          */
         this.FileId = null;
 
         /**
-         * File alias
-Note: This field may return null, indicating that no valid values can be obtained.
+         * File alias.
          * @type {string || null}
          */
         this.CustomFileName = null;
 
         /**
-         * Filename
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Filename.
          * @type {string || null}
          */
         this.AudioFileName = null;
 
         /**
-         * Review status, 0-Not reviewed, 1-Approved, 2-Rejected
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Review status: 0 - unreviewed, 1 - approved, 2 - rejected.
          * @type {number || null}
          */
         this.Status = null;
@@ -7376,13 +8018,13 @@ class CreateCallOutSessionRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID
+         * Application id.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Customer Service User ID usually refers to the customer service email.
+         * Customer service user id usually refers to the customer service email.
          * @type {string || null}
          */
         this.UserId = null;
@@ -7394,13 +8036,13 @@ class CreateCallOutSessionRequest extends  AbstractModel {
         this.Callee = null;
 
         /**
-         * Caller number (obsolete one and use Callers) must be preceded by 0086.
+         * Caller number (obsolete one and use callers) must be preceded by 0086.
          * @type {string || null}
          */
         this.Caller = null;
 
         /**
-         * Designated caller number list. If the prior number fails, it will automatically switch to the next number that must be preceded by 0086.
+         * Designated caller number list. if the prior number fails, it will automatically switch to the next number that must be preceded by 0086.
          * @type {Array.<string> || null}
          */
         this.Callers = null;
@@ -7473,6 +8115,49 @@ class BindStaffSkillGroupListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTelRecordAsr response structure.
+ * @class
+ */
+class DescribeTelRecordAsrResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recording to text information.
+         * @type {Array.<AsrData> || null}
+         */
+        this.AsrDataList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrDataList) {
+            this.AsrDataList = new Array();
+            for (let z in params.AsrDataList) {
+                let obj = new AsrData();
+                obj.deserialize(params.AsrDataList[z]);
+                this.AsrDataList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeExtensions request structure.
  * @class
  */
@@ -7481,25 +8166,25 @@ class DescribeExtensionsRequest extends  AbstractModel {
         super();
 
         /**
-         * TCCC instance application ID.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Page number (starting from 0)
+         * Page number (starting from 0).
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * Filtering extension number list
+         * Filtering extension number list.
          * @type {Array.<string> || null}
          */
         this.ExtensionIds = null;
 
         /**
-         * Page size
+         * Page size.
          * @type {number || null}
          */
         this.PageSize = null;
@@ -7544,19 +8229,19 @@ class DescribeProtectedTelCdrRequest extends  AbstractModel {
         super();
 
         /**
-         * Start timestamp. Unix second-level timestamp.
+         * Start timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.StartTimeStamp = null;
 
         /**
-         * End timestamp. Unix second-level timestamp.
+         * End timestamp. unix second-level timestamp.
          * @type {number || null}
          */
         this.EndTimeStamp = null;
 
         /**
-         * For the Application ID, go to https://console.cloud.tencent.com/ccc.
+         * For the application id, you can check https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -7600,19 +8285,19 @@ class DescribePredictiveDialingSessionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Generated task ID.
+         * Generated task id.
          * @type {number || null}
          */
         this.CampaignId = null;
 
         /**
-         * Page size, maximum of 1000
+         * Page size, maximum of 1000.
          * @type {number || null}
          */
         this.PageSize = null;
@@ -7649,7 +8334,7 @@ class CreateSDKLoginTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -7661,7 +8346,7 @@ class CreateSDKLoginTokenRequest extends  AbstractModel {
         this.SeatUserId = null;
 
         /**
-         * Whether the generated token is for one-time verification?
+         * Whether the generated token is for one-time verification?.
          * @type {boolean || null}
          */
         this.OnlyOnce = null;
@@ -7691,7 +8376,7 @@ class StaffBuyInfo extends  AbstractModel {
         super();
 
         /**
-         * Number of agents purchased
+         * Number of agents purchased.
          * @type {number || null}
          */
         this.Num = null;
@@ -7703,14 +8388,13 @@ class StaffBuyInfo extends  AbstractModel {
         this.BuyTime = null;
 
         /**
-         * End timestamp.
+         * Deadline timestamp.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Number of office telephones purchased.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Quantity of office telephones purchased.
          * @type {number || null}
          */
         this.SipNum = null;
@@ -7733,6 +8417,63 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateOwnNumberApply request structure.
+ * @class
+ */
+class CreateOwnNumberApplyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * SIP connection id.
+         * @type {number || null}
+         */
+        this.SipTrunkId = null;
+
+        /**
+         * Circuit-Related parameters.
+         * @type {Array.<OwnNumberApplyDetailItem> || null}
+         */
+        this.DetailList = null;
+
+        /**
+         * Prefix for sending numbers.
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.SipTrunkId = 'SipTrunkId' in params ? params.SipTrunkId : null;
+
+        if (params.DetailList) {
+            this.DetailList = new Array();
+            for (let z in params.DetailList) {
+                let obj = new OwnNumberApplyDetailItem();
+                obj.deserialize(params.DetailList[z]);
+                this.DetailList.push(obj);
+            }
+        }
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+
+    }
+}
+
+/**
  * DescribeCallInMetrics request structure.
  * @class
  */
@@ -7741,19 +8482,19 @@ class DescribeCallInMetricsRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Whether to return skill group dimension information or not (the default is "Yes").
+         * Whether to return skill group dimension information or not (the default is "yes").
          * @type {boolean || null}
          */
         this.EnabledSkillGroup = null;
 
         /**
-         * Whether to return line dimension information or not (the default is "No").
+         * Whether to return line dimension information or not (the default is "no").
          * @type {boolean || null}
          */
         this.EnabledNumber = null;
@@ -7790,13 +8531,13 @@ class DescribeExtensionResponse extends  AbstractModel {
         super();
 
         /**
-         * Extension
+         * Extension.
          * @type {string || null}
          */
         this.ExtensionId = null;
 
         /**
-         * Domain name
+         * Domain name.
          * @type {string || null}
          */
         this.ExtensionDomain = null;
@@ -7844,6 +8585,41 @@ class DescribeExtensionResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeTelRecordAsr request structure.
+ * @class
+ */
+class DescribeTelRecordAsrRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Session id.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+    }
+}
+
 module.exports = {
     DescribeExtensionRequest: DescribeExtensionRequest,
     StopAutoCalloutTaskRequest: StopAutoCalloutTaskRequest,
@@ -7866,17 +8642,21 @@ module.exports = {
     CreatePredictiveDialingCampaignRequest: CreatePredictiveDialingCampaignRequest,
     AbortAgentCruiseDialingCampaignResponse: AbortAgentCruiseDialingCampaignResponse,
     ServeParticipant: ServeParticipant,
+    AICallExtractResultElement: AICallExtractResultElement,
     DescribeTelCallInfoResponse: DescribeTelCallInfoResponse,
     DescribeExtensionsResponse: DescribeExtensionsResponse,
-    DeleteExtensionRequest: DeleteExtensionRequest,
-    DescribePredictiveDialingCampaignRequest: DescribePredictiveDialingCampaignRequest,
-    DescribePredictiveDialingCampaignResponse: DescribePredictiveDialingCampaignResponse,
     StaffStatusMetrics: StaffStatusMetrics,
-    DescribeTelCdrRequest: DescribeTelCdrRequest,
+    DeleteExtensionRequest: DeleteExtensionRequest,
+    AutoCalloutTaskCalleeInfo: AutoCalloutTaskCalleeInfo,
+    DescribePredictiveDialingCampaignResponse: DescribePredictiveDialingCampaignResponse,
+    CreateAIAgentCallResponse: CreateAIAgentCallResponse,
+    AICallExtractConfigElement: AICallExtractConfigElement,
     DescribeAutoCalloutTasksResponse: DescribeAutoCalloutTasksResponse,
     PackageBuyInfo: PackageBuyInfo,
-    ModifyExtensionResponse: ModifyExtensionResponse,
+    DescribeTelCdrRequest: DescribeTelCdrRequest,
+    AICallExtractResultInfo: AICallExtractResultInfo,
     CreateAgentCruiseDialingCampaignRequest: CreateAgentCruiseDialingCampaignRequest,
+    DescribeAICallExtractResultRequest: DescribeAICallExtractResultRequest,
     CreateStaffResponse: CreateStaffResponse,
     DescribePredictiveDialingCampaignsRequest: DescribePredictiveDialingCampaignsRequest,
     DescribeSkillGroupInfoListResponse: DescribeSkillGroupInfoListResponse,
@@ -7890,11 +8670,13 @@ module.exports = {
     CallInSkillGroupMetrics: CallInSkillGroupMetrics,
     CreateExtensionResponse: CreateExtensionResponse,
     CreateCCCSkillGroupRequest: CreateCCCSkillGroupRequest,
+    AsrData: AsrData,
     DescribeAutoCalloutTaskResponse: DescribeAutoCalloutTaskResponse,
     CreateCCCSkillGroupResponse: CreateCCCSkillGroupResponse,
     DescribeTelSessionRequest: DescribeTelSessionRequest,
+    ModifyOwnNumberApplyRequest: ModifyOwnNumberApplyRequest,
     DescribeSkillGroupInfoListRequest: DescribeSkillGroupInfoListRequest,
-    AutoCalloutTaskCalleeInfo: AutoCalloutTaskCalleeInfo,
+    DescribePredictiveDialingCampaignRequest: DescribePredictiveDialingCampaignRequest,
     SeatUserInfo: SeatUserInfo,
     UpdateCCCSkillGroupResponse: UpdateCCCSkillGroupResponse,
     DescribePredictiveDialingSessionsResponse: DescribePredictiveDialingSessionsResponse,
@@ -7906,7 +8688,7 @@ module.exports = {
     AutoCalloutTaskInfo: AutoCalloutTaskInfo,
     DescribeIvrAudioListRequest: DescribeIvrAudioListRequest,
     SkillGroupInfoItem: SkillGroupInfoItem,
-    ResetExtensionPasswordResponse: ResetExtensionPasswordResponse,
+    CreateAIAgentCallRequest: CreateAIAgentCallRequest,
     UpdateCCCSkillGroupRequest: UpdateCCCSkillGroupRequest,
     ModifyStaffPasswordRequest: ModifyStaffPasswordRequest,
     ModifyStaffResponse: ModifyStaffResponse,
@@ -7924,25 +8706,31 @@ module.exports = {
     DescribeAgentCruiseDialingCampaignRequest: DescribeAgentCruiseDialingCampaignRequest,
     DescribePSTNActiveSessionListRequest: DescribePSTNActiveSessionListRequest,
     CreateAutoCalloutTaskResponse: CreateAutoCalloutTaskResponse,
-    TelCdrInfo: TelCdrInfo,
+    DescribeAICallExtractResultResponse: DescribeAICallExtractResultResponse,
+    UploadIvrAudioFailedInfo: UploadIvrAudioFailedInfo,
     UploadIvrAudioResponse: UploadIvrAudioResponse,
+    ModifyExtensionResponse: ModifyExtensionResponse,
     NumberInfo: NumberInfo,
     DeleteStaffRequest: DeleteStaffRequest,
     CallInMetrics: CallInMetrics,
     DescribeCCCBuyInfoListRequest: DescribeCCCBuyInfoListRequest,
-    StaffInfo: StaffInfo,
+    OwnNumberApplyDetailItem: OwnNumberApplyDetailItem,
     DescribePredictiveDialingCampaignsResponse: DescribePredictiveDialingCampaignsResponse,
     DescribeTelCallInfoRequest: DescribeTelCallInfoRequest,
     Variable: Variable,
     CallInNumberMetrics: CallInNumberMetrics,
     CreateExtensionRequest: CreateExtensionRequest,
     StaffSkillGroupList: StaffSkillGroupList,
+    ResetExtensionPasswordResponse: ResetExtensionPasswordResponse,
     AITransferItem: AITransferItem,
+    StaffInfo: StaffInfo,
     AbortAgentCruiseDialingCampaignRequest: AbortAgentCruiseDialingCampaignRequest,
+    CreateOwnNumberApplyResponse: CreateOwnNumberApplyResponse,
     DescribePredictiveDialingCampaignsElement: DescribePredictiveDialingCampaignsElement,
     HangUpCallResponse: HangUpCallResponse,
     StopAutoCalloutTaskResponse: StopAutoCalloutTaskResponse,
     AbortPredictiveDialingCampaignRequest: AbortPredictiveDialingCampaignRequest,
+    TelCdrInfo: TelCdrInfo,
     SkillGroupItem: SkillGroupItem,
     PhoneNumBuyInfo: PhoneNumBuyInfo,
     DescribeCCCBuyInfoListResponse: DescribeCCCBuyInfoListResponse,
@@ -7952,7 +8740,7 @@ module.exports = {
     DeleteExtensionResponse: DeleteExtensionResponse,
     BindStaffSkillGroupListRequest: BindStaffSkillGroupListRequest,
     CreateAgentCruiseDialingCampaignResponse: CreateAgentCruiseDialingCampaignResponse,
-    UploadIvrAudioFailedInfo: UploadIvrAudioFailedInfo,
+    ModifyOwnNumberApplyResponse: ModifyOwnNumberApplyResponse,
     DescribeCallInMetricsResponse: DescribeCallInMetricsResponse,
     DescribeAgentCruiseDialingCampaignResponse: DescribeAgentCruiseDialingCampaignResponse,
     CreateAICallResponse: CreateAICallResponse,
@@ -7973,12 +8761,15 @@ module.exports = {
     AudioFileInfo: AudioFileInfo,
     CreateCallOutSessionRequest: CreateCallOutSessionRequest,
     BindStaffSkillGroupListResponse: BindStaffSkillGroupListResponse,
+    DescribeTelRecordAsrResponse: DescribeTelRecordAsrResponse,
     DescribeExtensionsRequest: DescribeExtensionsRequest,
     DescribeProtectedTelCdrRequest: DescribeProtectedTelCdrRequest,
     DescribePredictiveDialingSessionsRequest: DescribePredictiveDialingSessionsRequest,
     CreateSDKLoginTokenRequest: CreateSDKLoginTokenRequest,
     StaffBuyInfo: StaffBuyInfo,
+    CreateOwnNumberApplyRequest: CreateOwnNumberApplyRequest,
     DescribeCallInMetricsRequest: DescribeCallInMetricsRequest,
     DescribeExtensionResponse: DescribeExtensionResponse,
+    DescribeTelRecordAsrRequest: DescribeTelRecordAsrRequest,
 
 }

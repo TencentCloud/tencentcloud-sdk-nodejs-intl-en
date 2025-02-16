@@ -591,25 +591,49 @@ class DescribeRoundPlaysRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * The playlist IDs. Array length limit: 100.
+         * Filter criteria: playlist identifier, array length limit: 100.
          * @type {Array.<string> || null}
          */
         this.RoundPlayIds = null;
 
         /**
-         * 
+         * Filter criteria: playlist status, optional values: <li>enabled: startup status;</li> <li>disabled: stopped status.</li>.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Filter criteria: playlist creation time.
+         * @type {TimeRange || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Filter criteria: playlist update time.
+         * @type {TimeRange || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Scrolling identifier which is used for pulling in batches. if a single request cannot pull all the data entries, the API will return `scrolltoken`, and if the next request carries it, the next pull will start from the next entry.
+         * @type {string || null}
+         */
+        this.ScrollToken = null;
+
+        /**
+         * Pagination offset, default value: 0. this field is obsolete. please use the `scrolltoken` parameter for batch queries.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The number of records to return. Default value: 10. Maximum value: 100.
+         * Number of returned entries. default value: 10. maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -625,6 +649,20 @@ class DescribeRoundPlaysRequest extends  AbstractModel {
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.RoundPlayIds = 'RoundPlayIds' in params ? params.RoundPlayIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.CreateTime) {
+            let obj = new TimeRange();
+            obj.deserialize(params.CreateTime)
+            this.CreateTime = obj;
+        }
+
+        if (params.UpdateTime) {
+            let obj = new TimeRange();
+            obj.deserialize(params.UpdateTime)
+            this.UpdateTime = obj;
+        }
+        this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -3654,6 +3692,143 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The details of a video transcoding task. This parameter is only valid for tasks initiated by the v2017 video transcoding API.
+ * @class
+ */
+class TranscodeTask2017 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Transcoding task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Error code
+<li>0: success;</li>
+<li>Other values: failure.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * ID of transcoded file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Name of transcoded file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Video duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Cover address.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CoverUrl = null;
+
+        /**
+         * Playback information generated after video transcoding.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TranscodePlayInfo2017> || null}
+         */
+        this.PlayInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+
+        if (params.PlayInfoSet) {
+            this.PlayInfoSet = new Array();
+            for (let z in params.PlayInfoSet) {
+                let obj = new TranscodePlayInfo2017();
+                obj.deserialize(params.PlayInfoSet[z]);
+                this.PlayInfoSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeCurrentPlaylist response structure.
+ * @class
+ */
+class DescribeCurrentPlaylistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current playlist information.
+         * @type {Array.<RoundPlayFilePlayInfo> || null}
+         */
+        this.CurrentPlaylist = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CurrentPlaylist) {
+            this.CurrentPlaylist = new Array();
+            for (let z in params.CurrentPlaylist) {
+                let obj = new RoundPlayFilePlayInfo();
+                obj.deserialize(params.CurrentPlaylist[z]);
+                this.CurrentPlaylist.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySuperPlayerConfig request structure.
  * @class
  */
@@ -3984,7 +4159,7 @@ class RoundPlayInfo extends  AbstractModel {
         this.RoundPlayId = null;
 
         /**
-         * The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * The playback start time, in [ISO 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
          * @type {string || null}
          */
         this.StartTime = null;
@@ -4031,6 +4206,24 @@ Default value: Loop.
          */
         this.Url = null;
 
+        /**
+         * Creation time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playback of the playlist will stop after expiration. "9999-12-31t23:59:59+08:00" means never expire.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
     }
 
     /**
@@ -4056,6 +4249,9 @@ Default value: Loop.
         this.Status = 'Status' in params ? params.Status : null;
         this.PlayBackMode = 'PlayBackMode' in params ? params.PlayBackMode : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -10943,13 +11139,13 @@ class DeleteRoundPlayRequest extends  AbstractModel {
         super();
 
         /**
-         * The playlist ID, which is unique.
+         * The unique identifier of the playlist.
          * @type {string || null}
          */
         this.RoundPlayId = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -14274,26 +14470,26 @@ class ModifyRoundPlayRequest extends  AbstractModel {
         super();
 
         /**
-         * The playlist ID, which is unique.
+         * The unique identifier of the playlist.
          * @type {string || null}
          */
         this.RoundPlayId = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, for customers who enable vod, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * The files on the list.
-<li>Array length limit: 100.</li>
+         * The program list.
+<Li>Array length limit: 100.</li>.
          * @type {Array.<RoundPlayListItemInfo> || null}
          */
         this.RoundPlaylist = null;
@@ -14311,20 +14507,24 @@ class ModifyRoundPlayRequest extends  AbstractModel {
         this.Desc = null;
 
         /**
-         * Playback status, optional values: 
-<li>Disabled: End playback, and the carousel task cannot be started again after the end. </li>
-
+         * Playback status, optional values:<li>disabled: stop playback.</li><li>enabled: start playback after the duration has elapsed.</li>.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Play mode, optional values:
-<li>Loop: Play the playlist in a loop;</li>
-<li>Linear: Play once, stop playing after the playlist is played. </li>
+         * Play mode, optional values:.
+<Li>Loop: loop the playlist;</li>.
+<Li>Linear: single play, stop playback after the playlist finishes.</li>.
          * @type {string || null}
          */
         this.PlayBackMode = null;
+
+        /**
+         * Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playback will stop after expiration. "9999-12-31t23:59:59+08:00" means no expiration.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
 
     }
 
@@ -14351,6 +14551,7 @@ class ModifyRoundPlayRequest extends  AbstractModel {
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.PlayBackMode = 'PlayBackMode' in params ? params.PlayBackMode : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -18236,13 +18437,13 @@ class CreateRoundPlayResponse extends  AbstractModel {
         super();
 
         /**
-         * The playlist ID, which is unique.
+         * The unique identifier of the playlist.
          * @type {string || null}
          */
         this.RoundPlayId = null;
 
         /**
-         * The playlist URL.
+         * The playlist playback url.
          * @type {string || null}
          */
         this.Url = null;
@@ -19160,7 +19361,7 @@ class ManageTaskRequest extends  AbstractModel {
 }
 
 /**
- * Carousel media file information
+ * Carousel program information
  * @class
  */
 class RoundPlayListItemInfo extends  AbstractModel {
@@ -19183,7 +19384,13 @@ The file must be in HLS format.
         this.AudioVideoType = null;
 
         /**
-         * The transcoding template used to generate the transcoding output played. This parameter is required if `AudioVideoType` is `Transcode`.
+         * ID of the program to be played, assigned by the system.
+         * @type {string || null}
+         */
+        this.ItemId = null;
+
+        /**
+         * The transcoding template to be played is specified. this parameter is required if `audiovideotype` is `transcode`.
          * @type {number || null}
          */
         this.Definition = null;
@@ -19199,6 +19406,7 @@ The file must be in HLS format.
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
@@ -29795,20 +30003,20 @@ class CreateRoundPlayRequest extends  AbstractModel {
         super();
 
         /**
-         * The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+         * The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * The files on the list.
-<li>Array length limit: 100.</li>
+         * The program list.
+<Li>Array length limit: 100.</li>.
          * @type {Array.<RoundPlayListItemInfo> || null}
          */
         this.RoundPlaylist = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -29820,19 +30028,31 @@ class CreateRoundPlayRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * The playlist description (not longer than 256 characters).
+         * The playlist description, length limit: 256 characters.
          * @type {string || null}
          */
         this.Desc = null;
 
         /**
-         * Play mode, optional values:
-<li>Loop: Play the playlist in a loop;</li>
-<li>Linear: Play once, stop playing after the playlist is played. </li>
-Default value: Loop.
+         * Play mode, optional values:.
+<Li>Loop: loop the playlist;</li>.
+<Li>Linear: single play, stop playback after the single play finishes.</li>.
+Default value: loop.
          * @type {string || null}
          */
         this.PlayBackMode = null;
+
+        /**
+         * Playlist unique identifier id, with a length limit of 64 characters, only allowing uppercase and lowercase english letters (a-za-z), digits (0-9) and hyphens (-). if there is a playlist with the same roundplayid, return the error invalidparametervalue.roundplayalreadyexists. the default value is empty, which means it is system-assigned.
+         * @type {string || null}
+         */
+        this.RoundPlayId = null;
+
+        /**
+         * Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playlist will stop playing after expiration. "9999-12-31t23:59:59+08:00" means it does not expire. default value: 9999-12-31t23:59:59+08:00.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
 
     }
 
@@ -29857,6 +30077,8 @@ Default value: Loop.
         this.Name = 'Name' in params ? params.Name : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
         this.PlayBackMode = 'PlayBackMode' in params ? params.PlayBackMode : null;
+        this.RoundPlayId = 'RoundPlayId' in params ? params.RoundPlayId : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -31690,6 +31912,49 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * HandleCurrentPlaylist response structure.
+ * @class
+ */
+class HandleCurrentPlaylistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of successfully operated programs.
+         * @type {Array.<RoundPlayListItemInfo> || null}
+         */
+        this.RoundPlaylist = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RoundPlaylist) {
+            this.RoundPlaylist = new Array();
+            for (let z in params.RoundPlaylist) {
+                let obj = new RoundPlayListItemInfo();
+                obj.deserialize(params.RoundPlaylist[z]);
+                this.RoundPlaylist.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -42133,6 +42398,48 @@ class ReviewTemplate extends  AbstractModel {
 }
 
 /**
+ * DescribeCurrentPlaylist request structure.
+ * @class
+ */
+class DescribeCurrentPlaylistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id.</b>.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The unique identifier of the playlist.
+         * @type {string || null}
+         */
+        this.RoundPlayId = null;
+
+        /**
+         * The length of the returned playlist. maximum is 10, default value is 5.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RoundPlayId = 'RoundPlayId' in params ? params.RoundPlayId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Parameters for custom ASR-based recognition
  * @class
  */
@@ -42641,16 +42948,22 @@ class DescribeRoundPlaysResponse extends  AbstractModel {
         super();
 
         /**
-         * The total number of records that meet the conditions.
+         * The total number of carousel broadcast playlists that meet the filter criteria. deprecated. for batch inquiries, please use the scrolltoken parameter.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * The information of the playlists.
+         * The details of the playlist.
          * @type {Array.<RoundPlayInfo> || null}
          */
         this.RoundPlaySet = null;
+
+        /**
+         * Scrolling identifier. if a request does not return all the data entries, this field indicates the id of the next entry. if this field is empty, there is no more data.
+         * @type {string || null}
+         */
+        this.ScrollToken = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -42677,6 +42990,7 @@ class DescribeRoundPlaysResponse extends  AbstractModel {
                 this.RoundPlaySet.push(obj);
             }
         }
+        this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -47184,6 +47498,70 @@ class DescribeHeadTailTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * HandleCurrentPlaylist request structure.
+ * @class
+ */
+class HandleCurrentPlaylistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574) id.</b>.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The unique identifier of the playlist.
+         * @type {string || null}
+         */
+        this.RoundPlayId = null;
+
+        /**
+         * Operation type, available options:<li>insert: insert program into the current playlist.</li> <li>inserttemporary: temporarily insert program into the current playlist. can only be inserted after the currently playing program. temporarily inserted programs are only effective during this carousel process.</li><li>delete: delete program from the playlist. cannot delete currently playing programs.</li>.
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * Playlist program id. required when operation is insert, indicating the program list will be inserted after this program. the insertion position must be after the currently playing program.
+         * @type {string || null}
+         */
+        this.ItemId = null;
+
+        /**
+         * Program list. required when operation is insert, inserttemporary, delete, indicating the list of programs to be operated on. the list length can be up to a maximum of 10.
+         * @type {Array.<RoundPlayListItemInfo> || null}
+         */
+        this.RoundPlaylist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RoundPlayId = 'RoundPlayId' in params ? params.RoundPlayId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+
+        if (params.RoundPlaylist) {
+            this.RoundPlaylist = new Array();
+            for (let z in params.RoundPlaylist) {
+                let obj = new RoundPlayListItemInfo();
+                obj.deserialize(params.RoundPlaylist[z]);
+                this.RoundPlaylist.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Parameters for recognition of terrorism content
  * @class
  */
@@ -48008,69 +48386,44 @@ class StorageStatData extends  AbstractModel {
 }
 
 /**
- * The details of a video transcoding task. This parameter is only valid for tasks initiated by the v2017 video transcoding API.
+ * Playlist Program Playback Information
  * @class
  */
-class TranscodeTask2017 extends  AbstractModel {
+class RoundPlayFilePlayInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Transcoding task ID.
+         * Playlist program id, assigned by the system.
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.ItemId = null;
 
         /**
-         * Error code
-<li>0: success;</li>
-<li>Other values: failure.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * ID of transcoded file.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The media file id.
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * Name of transcoded file.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
          * @type {string || null}
          */
-        this.FileName = null;
+        this.StartPlayTime = null;
 
         /**
-         * Video duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Playback duration, in seconds.
+Note: this field may return null, indicating that no valid value was found.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Cover address.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Playback progress, in seconds.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {number || null}
          */
-        this.CoverUrl = null;
-
-        /**
-         * Playback information generated after video transcoding.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TranscodePlayInfo2017> || null}
-         */
-        this.PlayInfoSet = null;
+        this.Progress = null;
 
     }
 
@@ -48081,22 +48434,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.StartPlayTime = 'StartPlayTime' in params ? params.StartPlayTime : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
-        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
-
-        if (params.PlayInfoSet) {
-            this.PlayInfoSet = new Array();
-            for (let z in params.PlayInfoSet) {
-                let obj = new TranscodePlayInfo2017();
-                obj.deserialize(params.PlayInfoSet[z]);
-                this.PlayInfoSet.push(obj);
-            }
-        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -49209,6 +49551,8 @@ module.exports = {
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     VerifyDomainRecordResponse: VerifyDomainRecordResponse,
     AudioTransform: AudioTransform,
+    TranscodeTask2017: TranscodeTask2017,
+    DescribeCurrentPlaylistResponse: DescribeCurrentPlaylistResponse,
     ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
     ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
     ContentReviewOcrResult: ContentReviewOcrResult,
@@ -49696,6 +50040,7 @@ module.exports = {
     AccelerateAreaInfo: AccelerateAreaInfo,
     MediaSourceData: MediaSourceData,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
+    HandleCurrentPlaylistResponse: HandleCurrentPlaylistResponse,
     PushUrlCacheRequest: PushUrlCacheRequest,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     HeadTailConfigureInfo: HeadTailConfigureInfo,
@@ -49857,6 +50202,7 @@ module.exports = {
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     QualityEnhanceTaskOutput: QualityEnhanceTaskOutput,
     ReviewTemplate: ReviewTemplate,
+    DescribeCurrentPlaylistRequest: DescribeCurrentPlaylistRequest,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     DescribeCDNDomainsResponse: DescribeCDNDomainsResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
@@ -49938,6 +50284,7 @@ module.exports = {
     ReviewImageRequest: ReviewImageRequest,
     RebuildVideoInfo: RebuildVideoInfo,
     DescribeHeadTailTemplatesResponse: DescribeHeadTailTemplatesResponse,
+    HandleCurrentPlaylistRequest: HandleCurrentPlaylistRequest,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
@@ -49954,7 +50301,7 @@ module.exports = {
     MediaTrack: MediaTrack,
     FastEditMediaFileInfo: FastEditMediaFileInfo,
     StorageStatData: StorageStatData,
-    TranscodeTask2017: TranscodeTask2017,
+    RoundPlayFilePlayInfo: RoundPlayFilePlayInfo,
     DescribeFileAttributesRequest: DescribeFileAttributesRequest,
     ResponseHeader: ResponseHeader,
     QualityInspectResultItem: QualityInspectResultItem,

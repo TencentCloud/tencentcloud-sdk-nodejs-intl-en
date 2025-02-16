@@ -77,6 +77,8 @@ const NoiseConfigureInfo = models.NoiseConfigureInfo;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const VerifyDomainRecordResponse = models.VerifyDomainRecordResponse;
 const AudioTransform = models.AudioTransform;
+const TranscodeTask2017 = models.TranscodeTask2017;
+const DescribeCurrentPlaylistResponse = models.DescribeCurrentPlaylistResponse;
 const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
 const ContentReviewOcrResult = models.ContentReviewOcrResult;
@@ -564,6 +566,7 @@ const CreateStorageRegionResponse = models.CreateStorageRegionResponse;
 const AccelerateAreaInfo = models.AccelerateAreaInfo;
 const MediaSourceData = models.MediaSourceData;
 const ProhibitedAsrReviewTemplateInfo = models.ProhibitedAsrReviewTemplateInfo;
+const HandleCurrentPlaylistResponse = models.HandleCurrentPlaylistResponse;
 const PushUrlCacheRequest = models.PushUrlCacheRequest;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
@@ -725,6 +728,7 @@ const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const QualityEnhanceTaskOutput = models.QualityEnhanceTaskOutput;
 const ReviewTemplate = models.ReviewTemplate;
+const DescribeCurrentPlaylistRequest = models.DescribeCurrentPlaylistRequest;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const DescribeCDNDomainsResponse = models.DescribeCDNDomainsResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
@@ -806,6 +810,7 @@ const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const ReviewImageRequest = models.ReviewImageRequest;
 const RebuildVideoInfo = models.RebuildVideoInfo;
 const DescribeHeadTailTemplatesResponse = models.DescribeHeadTailTemplatesResponse;
+const HandleCurrentPlaylistRequest = models.HandleCurrentPlaylistRequest;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
@@ -822,7 +827,7 @@ const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
 const MediaTrack = models.MediaTrack;
 const FastEditMediaFileInfo = models.FastEditMediaFileInfo;
 const StorageStatData = models.StorageStatData;
-const TranscodeTask2017 = models.TranscodeTask2017;
+const RoundPlayFilePlayInfo = models.RoundPlayFilePlayInfo;
 const DescribeFileAttributesRequest = models.DescribeFileAttributesRequest;
 const ResponseHeader = models.ResponseHeader;
 const QualityInspectResultItem = models.QualityInspectResultItem;
@@ -1749,6 +1754,17 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
+     * Operate the current play list . Supported operations include:<li> Insert: Insert a playing program into the current playlist.</li><li> Delete: Remove a playing program from the playlist.</li>
+     * @param {HandleCurrentPlaylistRequest} req
+     * @param {function(string, HandleCurrentPlaylistResponse):void} cb
+     * @public
+     */
+    HandleCurrentPlaylist(req, cb) {
+        let resp = new HandleCurrentPlaylistResponse();
+        this.request("HandleCurrentPlaylist", req, resp, cb);
+    }
+
+    /**
      * This interface returns the image review usage information used every day within the query time range.
    1. You can query the image review statistics for the last 365 days.
    2. The query time span does not exceed 90 days.
@@ -1807,15 +1823,14 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This API is used to modify a playlist.
-The modification will only take effect for new playback requests. For ongoing playback, the old playlist will be playable for seven days after the modification.
-     * @param {ModifyRoundPlayRequest} req
-     * @param {function(string, ModifyRoundPlayResponse):void} cb
+     * Query current playlist of the round play.
+     * @param {DescribeCurrentPlaylistRequest} req
+     * @param {function(string, DescribeCurrentPlaylistResponse):void} cb
      * @public
      */
-    ModifyRoundPlay(req, cb) {
-        let resp = new ModifyRoundPlayResponse();
-        this.request("ModifyRoundPlay", req, resp, cb);
+    DescribeCurrentPlaylist(req, cb) {
+        let resp = new DescribeCurrentPlaylistResponse();
+        this.request("DescribeCurrentPlaylist", req, resp, cb);
     }
 
     /**
@@ -2323,6 +2338,18 @@ This API is used to modify a player configuration.
     ModifySubAppIdInfo(req, cb) {
         let resp = new ModifySubAppIdInfoResponse();
         this.request("ModifySubAppIdInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a playlist.
+The modification will only take effect for new playback requests. For ongoing playback, the old playlist will be playable for seven days after the modification.
+     * @param {ModifyRoundPlayRequest} req
+     * @param {function(string, ModifyRoundPlayResponse):void} cb
+     * @public
+     */
+    ModifyRoundPlay(req, cb) {
+        let resp = new ModifyRoundPlayResponse();
+        this.request("ModifyRoundPlay", req, resp, cb);
     }
 
     /**

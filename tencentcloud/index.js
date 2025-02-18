@@ -105,6 +105,7 @@ module.exports = {
     tke: require("./tke"),
     tms: require("./tms"),
     tmt: require("./tmt"),
+    trro: require("./trro"),
     trtc: require("./trtc"),
     tts: require("./tts"),
     vclm: require("./vclm"),

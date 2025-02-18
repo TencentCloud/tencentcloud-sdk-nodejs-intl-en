@@ -31,6 +31,7 @@ const CreateCcnResponse = models.CreateCcnResponse;
 const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
 const CreateAssistantCidrRequest = models.CreateAssistantCidrRequest;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
+const ReleaseIp6AddressesBandwidthResponse = models.ReleaseIp6AddressesBandwidthResponse;
 const DescribeVpcIpv6AddressesRequest = models.DescribeVpcIpv6AddressesRequest;
 const SourceIpTranslationNatRule = models.SourceIpTranslationNatRule;
 const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
@@ -41,6 +42,7 @@ const ModifyCcnRegionBandwidthLimitsTypeResponse = models.ModifyCcnRegionBandwid
 const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
 const ModifyNetworkAclQuintupleEntriesRequest = models.ModifyNetworkAclQuintupleEntriesRequest;
 const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
+const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DescribeIpGeolocationInfosRequest = models.DescribeIpGeolocationInfosRequest;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const CreateSnapshotPoliciesResponse = models.CreateSnapshotPoliciesResponse;
@@ -103,6 +105,7 @@ const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesRespon
 const ReplaceSecurityGroupPoliciesResponse = models.ReplaceSecurityGroupPoliciesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
 const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
+const DescribeIPv6AddressesResponse = models.DescribeIPv6AddressesResponse;
 const AttachSnapshotInstancesRequest = models.AttachSnapshotInstancesRequest;
 const CreateVpcEndPointServiceWhiteListResponse = models.CreateVpcEndPointServiceWhiteListResponse;
 const DescribeIpGeolocationDatabaseUrlResponse = models.DescribeIpGeolocationDatabaseUrlResponse;
@@ -119,6 +122,7 @@ const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResp
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const ModifyAddressInternetChargeTypeResponse = models.ModifyAddressInternetChargeTypeResponse;
 const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
+const ModifyIPv6AddressesBandwidthRequest = models.ModifyIPv6AddressesBandwidthRequest;
 const DeleteVpcEndPointServiceResponse = models.DeleteVpcEndPointServiceResponse;
 const ModifyNetworkAclQuintupleEntriesResponse = models.ModifyNetworkAclQuintupleEntriesResponse;
 const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
@@ -137,6 +141,7 @@ const DescribeVpcEndPointServiceResponse = models.DescribeVpcEndPointServiceResp
 const ModifyNetworkAclEntriesResponse = models.ModifyNetworkAclEntriesResponse;
 const ModifyVpcEndPointAttributeResponse = models.ModifyVpcEndPointAttributeResponse;
 const DescribeFlowLogRequest = models.DescribeFlowLogRequest;
+const DescribeIp6AddressesRequest = models.DescribeIp6AddressesRequest;
 const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
 const ModifyAddressesRenewFlagRequest = models.ModifyAddressesRenewFlagRequest;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
@@ -149,6 +154,7 @@ const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResources
 const DisassociateNetworkAclSubnetsResponse = models.DisassociateNetworkAclSubnetsResponse;
 const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsRequest;
 const ModifyAddressInternetChargeTypeRequest = models.ModifyAddressInternetChargeTypeRequest;
+const ModifyIp6AddressesBandwidthRequest = models.ModifyIp6AddressesBandwidthRequest;
 const CreateLocalGatewayRequest = models.CreateLocalGatewayRequest;
 const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
 const CreateVpnGatewayRoutesRequest = models.CreateVpnGatewayRoutesRequest;
@@ -172,6 +178,7 @@ const ModifyNetDetectRequest = models.ModifyNetDetectRequest;
 const DescribeSgSnapshotFileContentResponse = models.DescribeSgSnapshotFileContentResponse;
 const DescribeNetDetectStatesResponse = models.DescribeNetDetectStatesResponse;
 const DescribeVpcResourceDashboardResponse = models.DescribeVpcResourceDashboardResponse;
+const AllocateIp6AddressesBandwidthResponse = models.AllocateIp6AddressesBandwidthResponse;
 const DescribeNetDetectStatesRequest = models.DescribeNetDetectStatesRequest;
 const DescribeFlowLogResponse = models.DescribeFlowLogResponse;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
@@ -191,7 +198,7 @@ const DescribeCcnsRequest = models.DescribeCcnsRequest;
 const ModifyNatGatewayAttributeResponse = models.ModifyNatGatewayAttributeResponse;
 const DescribeNetDetectsRequest = models.DescribeNetDetectsRequest;
 const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
-const DescribeNatGatewayDirectConnectGatewayRouteRequest = models.DescribeNatGatewayDirectConnectGatewayRouteRequest;
+const AssociateIPv6AddressRequest = models.AssociateIPv6AddressRequest;
 const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const EnableSnapshotPoliciesResponse = models.EnableSnapshotPoliciesResponse;
@@ -207,9 +214,9 @@ const DescribeVpcResourceDashboardRequest = models.DescribeVpcResourceDashboardR
 const VpcTaskResultDetailInfo = models.VpcTaskResultDetailInfo;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const AssociateNetworkAclSubnetsRequest = models.AssociateNetworkAclSubnetsRequest;
-const AdjustPublicAddressResponse = models.AdjustPublicAddressResponse;
+const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
-const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const AssociateIPv6AddressResponse = models.AssociateIPv6AddressResponse;
 const DescribeSnapshotPoliciesRequest = models.DescribeSnapshotPoliciesRequest;
 const DeleteTrafficPackagesRequest = models.DeleteTrafficPackagesRequest;
 const NotifyRoutesRequest = models.NotifyRoutesRequest;
@@ -231,16 +238,18 @@ const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResp
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const NetworkAclEntrySet = models.NetworkAclEntrySet;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
+const ReleaseIPv6AddressesResponse = models.ReleaseIPv6AddressesResponse;
 const DescribeBandwidthPackageResourcesRequest = models.DescribeBandwidthPackageResourcesRequest;
 const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
 const Tag = models.Tag;
-const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
+const CreateFlowLogResponse = models.CreateFlowLogResponse;
 const DefaultVpcSubnet = models.DefaultVpcSubnet;
 const CreateSubnetsResponse = models.CreateSubnetsResponse;
 const DescribeGatewayFlowMonitorDetailRequest = models.DescribeGatewayFlowMonitorDetailRequest;
 const FilterObject = models.FilterObject;
 const ModifyBandwidthPackageAttributeResponse = models.ModifyBandwidthPackageAttributeResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
+const DisassociateIPv6AddressRequest = models.DisassociateIPv6AddressRequest;
 const ResetRoutesResponse = models.ResetRoutesResponse;
 const DeleteNetworkAclRequest = models.DeleteNetworkAclRequest;
 const NatGatewayDestinationIpPortTranslationNatRule = models.NatGatewayDestinationIpPortTranslationNatRule;
@@ -259,7 +268,7 @@ const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyReque
 const ModifyVpcEndPointServiceAttributeResponse = models.ModifyVpcEndPointServiceAttributeResponse;
 const DescribeReserveIpAddressesResponse = models.DescribeReserveIpAddressesResponse;
 const DescribeSnapshotFilesResponse = models.DescribeSnapshotFilesResponse;
-const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
+const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const CreateVpnGatewayRoutesResponse = models.CreateVpnGatewayRoutesResponse;
@@ -269,11 +278,13 @@ const CreateNatGatewayDestinationIpPortTranslationNatRuleResponse = models.Creat
 const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
 const DescribeNetworkInterfaceLimitRequest = models.DescribeNetworkInterfaceLimitRequest;
 const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
+const DescribeIp6AddressesResponse = models.DescribeIp6AddressesResponse;
 const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
 const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
 const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
 const NetDetectIpState = models.NetDetectIpState;
 const InternetPrice = models.InternetPrice;
+const ModifyIp6AddressesBandwidthResponse = models.ModifyIp6AddressesBandwidthResponse;
 const CreateSubnetsRequest = models.CreateSubnetsRequest;
 const DescribeVpcEndPointServiceRequest = models.DescribeVpcEndPointServiceRequest;
 const DisableSnapshotPoliciesResponse = models.DisableSnapshotPoliciesResponse;
@@ -299,7 +310,7 @@ const NetworkAclEntry = models.NetworkAclEntry;
 const DescribeAssistantCidrRequest = models.DescribeAssistantCidrRequest;
 const RenewVpnGatewayResponse = models.RenewVpnGatewayResponse;
 const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
-const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
+const DescribeIPv6AddressesRequest = models.DescribeIPv6AddressesRequest;
 const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
 const EndPoint = models.EndPoint;
 const DirectConnectGateway = models.DirectConnectGateway;
@@ -310,6 +321,7 @@ const DisableFlowLogsResponse = models.DisableFlowLogsResponse;
 const DescribeBandwidthPackageResourcesResponse = models.DescribeBandwidthPackageResourcesResponse;
 const DescribeCrossBorderComplianceResponse = models.DescribeCrossBorderComplianceResponse;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
+const AllocateIPv6AddressesRequest = models.AllocateIPv6AddressesRequest;
 const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
 const EndPointService = models.EndPointService;
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
@@ -321,7 +333,7 @@ const DeleteReserveIpAddressesRequest = models.DeleteReserveIpAddressesRequest;
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const ModifyVpcEndPointServiceWhiteListRequest = models.ModifyVpcEndPointServiceWhiteListRequest;
-const CreateFlowLogResponse = models.CreateFlowLogResponse;
+const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const DescribeSnapshotAttachedInstancesRequest = models.DescribeSnapshotAttachedInstancesRequest;
 const CreateNatGatewaySourceIpTranslationNatRuleResponse = models.CreateNatGatewaySourceIpTranslationNatRuleResponse;
 const DeleteNatGatewaySourceIpTranslationNatRuleResponse = models.DeleteNatGatewaySourceIpTranslationNatRuleResponse;
@@ -401,6 +413,7 @@ const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayIntern
 const AddressChargePrepaid = models.AddressChargePrepaid;
 const DescribeVpnGatewayRoutesResponse = models.DescribeVpnGatewayRoutesResponse;
 const DescribeNetworkAclsResponse = models.DescribeNetworkAclsResponse;
+const DescribeNatGatewayDirectConnectGatewayRouteRequest = models.DescribeNatGatewayDirectConnectGatewayRouteRequest;
 const DeleteFlowLogResponse = models.DeleteFlowLogResponse;
 const AttachCcnInstancesResponse = models.AttachCcnInstancesResponse;
 const CreateDefaultVpcResponse = models.CreateDefaultVpcResponse;
@@ -413,6 +426,7 @@ const DescribeUsedIpAddressRequest = models.DescribeUsedIpAddressRequest;
 const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
 const DescribeVpcInstancesResponse = models.DescribeVpcInstancesResponse;
 const AccountAttribute = models.AccountAttribute;
+const AllocateIPv6AddressesResponse = models.AllocateIPv6AddressesResponse;
 const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
 const ModifyNatGatewaySourceIpTranslationNatRuleResponse = models.ModifyNatGatewaySourceIpTranslationNatRuleResponse;
 const CreateNatGatewayDestinationIpPortTranslationNatRuleRequest = models.CreateNatGatewayDestinationIpPortTranslationNatRuleRequest;
@@ -426,8 +440,11 @@ const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
+const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const ModifyReserveIpAddressRequest = models.ModifyReserveIpAddressRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
+const ReleaseIPv6AddressesRequest = models.ReleaseIPv6AddressesRequest;
+const DisassociateIPv6AddressResponse = models.DisassociateIPv6AddressResponse;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateDirectConnectGatewayCcnRoutesRequest = models.CreateDirectConnectGatewayCcnRoutesRequest;
@@ -468,6 +485,7 @@ const InquiryPriceModifyAddressesBandwidthResponse = models.InquiryPriceModifyAd
 const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
 const Address = models.Address;
 const VpnGateway = models.VpnGateway;
+const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const EnableVpcEndPointConnectRequest = models.EnableVpcEndPointConnectRequest;
 const EnableGatewayFlowMonitorResponse = models.EnableGatewayFlowMonitorResponse;
 const Resource = models.Resource;
@@ -480,6 +498,7 @@ const ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest = models.Modify
 const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
 const ModifyVpnGatewayRoutesResponse = models.ModifyVpnGatewayRoutesResponse;
 const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
+const ModifyIPv6AddressesBandwidthResponse = models.ModifyIPv6AddressesBandwidthResponse;
 const DescribeSecurityGroupReferencesResponse = models.DescribeSecurityGroupReferencesResponse;
 const DisableGatewayFlowMonitorRequest = models.DisableGatewayFlowMonitorRequest;
 const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
@@ -499,7 +518,7 @@ const InquiryPriceAllocateAddressesRequest = models.InquiryPriceAllocateAddresse
 const CCN = models.CCN;
 const NetworkAclQuintupleEntry = models.NetworkAclQuintupleEntry;
 const InquirePriceCreateDirectConnectGatewayResponse = models.InquirePriceCreateDirectConnectGatewayResponse;
-const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
+const AdjustPublicAddressResponse = models.AdjustPublicAddressResponse;
 const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
 const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
 const DeleteSnapshotPoliciesRequest = models.DeleteSnapshotPoliciesRequest;
@@ -570,6 +589,7 @@ const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnect
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
+const ModifyIPv6AddressesAttributesRequest = models.ModifyIPv6AddressesAttributesRequest;
 const ReserveIpAddressInfo = models.ReserveIpAddressInfo;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
@@ -578,6 +598,7 @@ const NatDirectConnectGatewayRoute = models.NatDirectConnectGatewayRoute;
 const NetworkAclQuintupleEntries = models.NetworkAclQuintupleEntries;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
+const AllocateIp6AddressesBandwidthRequest = models.AllocateIp6AddressesBandwidthRequest;
 const SecurityGroup = models.SecurityGroup;
 const DisableGatewayFlowMonitorResponse = models.DisableGatewayFlowMonitorResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
@@ -596,7 +617,6 @@ const ModifyNetworkInterfaceAttributeRequest = models.ModifyNetworkInterfaceAttr
 const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
 const ModifyAddressTemplateGroupAttributeResponse = models.ModifyAddressTemplateGroupAttributeResponse;
 const DetachClassicLinkVpcResponse = models.DetachClassicLinkVpcResponse;
-const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const UnassignPrivateIpAddressesRequest = models.UnassignPrivateIpAddressesRequest;
 const DeleteVpnGatewayRoutesRequest = models.DeleteVpnGatewayRoutesRequest;
 const Filter = models.Filter;
@@ -618,6 +638,7 @@ const DeleteVpnGatewayRoutesResponse = models.DeleteVpnGatewayRoutesResponse;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const ModifyCcnAttributeResponse = models.ModifyCcnAttributeResponse;
 const DescribeClassicLinkInstancesRequest = models.DescribeClassicLinkInstancesRequest;
+const ReleaseIp6AddressesBandwidthRequest = models.ReleaseIp6AddressesBandwidthRequest;
 const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const DisableCcnRoutesResponse = models.DisableCcnRoutesResponse;
@@ -632,6 +653,7 @@ const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const Quota = models.Quota;
 const WithdrawNotifyRoutesResponse = models.WithdrawNotifyRoutesResponse;
+const ModifyIPv6AddressesAttributesResponse = models.ModifyIPv6AddressesAttributesResponse;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
 const DeleteNetworkAclResponse = models.DeleteNetworkAclResponse;
 const DeleteNetworkAclQuintupleEntriesResponse = models.DeleteNetworkAclQuintupleEntriesResponse;
@@ -869,14 +891,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the attributes of a flow log.
-     * @param {ModifyFlowLogAttributeRequest} req
-     * @param {function(string, ModifyFlowLogAttributeResponse):void} cb
+     * This API is used to disassociate a network ACL from subnets in a VPC instance.
+     * @param {DisassociateNetworkAclSubnetsRequest} req
+     * @param {function(string, DisassociateNetworkAclSubnetsResponse):void} cb
      * @public
      */
-    ModifyFlowLogAttribute(req, cb) {
-        let resp = new ModifyFlowLogAttributeResponse();
-        this.request("ModifyFlowLogAttribute", req, resp, cb);
+    DisassociateNetworkAclSubnets(req, cb) {
+        let resp = new DisassociateNetworkAclSubnetsResponse();
+        this.request("DisassociateNetworkAclSubnets", req, resp, cb);
     }
 
     /**
@@ -927,14 +949,16 @@ Note: When this API is called, all routing policies in the current route table a
     }
 
     /**
-     * This API is used to modify a reserved private IP address.
-     * @param {ModifyReserveIpAddressRequest} req
-     * @param {function(string, ModifyReserveIpAddressResponse):void} cb
+     * This API is used to modify the name of an EIPv6 instance.
+
+- You can modify the name of both EIPv6 and traditional EIPv6 instances.
+     * @param {ModifyIPv6AddressesAttributesRequest} req
+     * @param {function(string, ModifyIPv6AddressesAttributesResponse):void} cb
      * @public
      */
-    ModifyReserveIpAddress(req, cb) {
-        let resp = new ModifyReserveIpAddressResponse();
-        this.request("ModifyReserveIpAddress", req, resp, cb);
+    ModifyIPv6AddressesAttributes(req, cb) {
+        let resp = new ModifyIPv6AddressesAttributesResponse();
+        this.request("ModifyIPv6AddressesAttributes", req, resp, cb);
     }
 
     /**
@@ -1075,14 +1099,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to determine whether to accept the request of connecting with an endpoint.
-     * @param {EnableVpcEndPointConnectRequest} req
-     * @param {function(string, EnableVpcEndPointConnectResponse):void} cb
+     * This API is used to bind an EIPv6 instance to the private IPv6 address configured on the CVM or ENI.
+
+- Binding an EIPv6 to the CVM essentially indicates binding the EIPv6 to the private IPv6 address configured on the ENI of the CVM.
+- Before binding an EIPv6 to the private IPv6 of a specified ENI, ensure that the private IPv6 address is unbound before the binding operation is performed.
+     * @param {AssociateIPv6AddressRequest} req
+     * @param {function(string, AssociateIPv6AddressResponse):void} cb
      * @public
      */
-    EnableVpcEndPointConnect(req, cb) {
-        let resp = new EnableVpcEndPointConnectResponse();
-        this.request("EnableVpcEndPointConnect", req, resp, cb);
+    AssociateIPv6Address(req, cb) {
+        let resp = new AssociateIPv6AddressResponse();
+        this.request("AssociateIPv6Address", req, resp, cb);
     }
 
     /**
@@ -1117,6 +1144,17 @@ This API is completed asynchronously. If you need to query the execution result 
     DescribeAddresses(req, cb) {
         let resp = new DescribeAddressesResponse();
         this.request("DescribeAddresses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the bandwidth cap of an EIPv6 instance.
+     * @param {ModifyIPv6AddressesBandwidthRequest} req
+     * @param {function(string, ModifyIPv6AddressesBandwidthResponse):void} cb
+     * @public
+     */
+    ModifyIPv6AddressesBandwidth(req, cb) {
+        let resp = new ModifyIPv6AddressesBandwidthResponse();
+        this.request("ModifyIPv6AddressesBandwidth", req, resp, cb);
     }
 
     /**
@@ -1164,6 +1202,17 @@ Only one policy in a single direction can be replaced in each request, and the P
     ModifyNetworkAclEntries(req, cb) {
         let resp = new ModifyNetworkAclEntriesResponse();
         this.request("ModifyNetworkAclEntries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to determine whether to accept the request of connecting with an endpoint.
+     * @param {EnableVpcEndPointConnectRequest} req
+     * @param {function(string, EnableVpcEndPointConnectResponse):void} cb
+     * @public
+     */
+    EnableVpcEndPointConnect(req, cb) {
+        let resp = new EnableVpcEndPointConnectResponse();
+        this.request("EnableVpcEndPointConnect", req, resp, cb);
     }
 
     /**
@@ -1524,6 +1573,31 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
+     * This API is used to allocate IPv6 public network bandwidth for classic elastic public IPv6 addresses.
+
+- Classic elastic public IPv6 addresses only have the private network communication capability by default. They can have the IPv6 public network communication capability and be displayed in the list of Classic Elastic Public IPv6 only after IPv6 public network bandwidth is allocated in the console or by calling this API. 
+- You can allocate public network bandwidth for one or multiple Classic elastic public IPv6 addresses each time.
+     * @param {AllocateIp6AddressesBandwidthRequest} req
+     * @param {function(string, AllocateIp6AddressesBandwidthResponse):void} cb
+     * @public
+     */
+    AllocateIp6AddressesBandwidth(req, cb) {
+        let resp = new AllocateIp6AddressesBandwidthResponse();
+        this.request("AllocateIp6AddressesBandwidth", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a flow log.
+     * @param {ModifyFlowLogAttributeRequest} req
+     * @param {function(string, ModifyFlowLogAttributeResponse):void} cb
+     * @public
+     */
+    ModifyFlowLogAttribute(req, cb) {
+        let resp = new ModifyFlowLogAttributeResponse();
+        this.request("ModifyFlowLogAttribute", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyAddressTemplateAttribute) is used to modify an IP address template.
      * @param {ModifyAddressTemplateAttributeRequest} req
      * @param {function(string, ModifyAddressTemplateAttributeResponse):void} cb
@@ -1739,6 +1813,17 @@ This API is used to query only the information of `IPv6` addresses that are alre
     }
 
     /**
+     * This API is used to query the detailed information on one or multiple classic elastic public IPv6 instances.
+     * @param {DescribeIp6AddressesRequest} req
+     * @param {function(string, DescribeIp6AddressesResponse):void} cb
+     * @public
+     */
+    DescribeIp6Addresses(req, cb) {
+        let resp = new DescribeIp6AddressesResponse();
+        this.request("DescribeIp6Addresses", req, resp, cb);
+    }
+
+    /**
      * This API (RenewVpnGateway) is used to renew prepaid (monthly subscription) VPN gateways. Currently, only IPSEC gateways are supported.
      * @param {RenewVpnGatewayRequest} req
      * @param {function(string, RenewVpnGatewayResponse):void} cb
@@ -1758,6 +1843,17 @@ This API is used to query only the information of `IPv6` addresses that are alre
     SetVpnGatewaysRenewFlag(req, cb) {
         let resp = new SetVpnGatewaysRenewFlagResponse();
         this.request("SetVpnGatewaysRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a reserved private IP address.
+     * @param {ModifyReserveIpAddressRequest} req
+     * @param {function(string, ModifyReserveIpAddressResponse):void} cb
+     * @public
+     */
+    ModifyReserveIpAddress(req, cb) {
+        let resp = new ModifyReserveIpAddressResponse();
+        this.request("ModifyReserveIpAddress", req, resp, cb);
     }
 
     /**
@@ -2653,6 +2749,20 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     }
 
     /**
+     * This API is used to release the IPv6 public network bandwidth of classic elastic public IPv6 instances.
+
+- Classic elastic public IPv6 addresses still have the IPv6 private network communication capability after the public network bandwidth is released.
+- To allocate IPV6 public network bandwidth, call the AllocateIp6AddressesBandwidth API.
+     * @param {ReleaseIp6AddressesBandwidthRequest} req
+     * @param {function(string, ReleaseIp6AddressesBandwidthResponse):void} cb
+     * @public
+     */
+    ReleaseIp6AddressesBandwidth(req, cb) {
+        let resp = new ReleaseIp6AddressesBandwidthResponse();
+        this.request("ReleaseIp6AddressesBandwidth", req, resp, cb);
+    }
+
+    /**
      * This API is used to adjust the bandwidth of a [bandwidth package](https://www.tencentcloud.com/document/product/684/15245).
      * @param {ModifyBandwidthPackageBandwidthRequest} req
      * @param {function(string, ModifyBandwidthPackageBandwidthResponse):void} cb
@@ -3101,6 +3211,20 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to unbind an EIPv6 instance.
+
+- You can unbind EIPv6 instances bound to Cloud Virtual Machine (CVM) or Elastic Network Interface (ENI).
+- Only EIPv6 instances in BIND or BIND_ENI status can be unbound.
+     * @param {DisassociateIPv6AddressRequest} req
+     * @param {function(string, DisassociateIPv6AddressResponse):void} cb
+     * @public
+     */
+    DisassociateIPv6Address(req, cb) {
+        let resp = new DisassociateIPv6AddressResponse();
+        this.request("DisassociateIPv6Address", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeAddressQuota) is used to query the quota information of your [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP) in the current region. For more information, see [EIP product introduction](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1).
      * @param {DescribeAddressQuotaRequest} req
      * @param {function(string, DescribeAddressQuotaResponse):void} cb
@@ -3315,14 +3439,18 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to disassociate a network ACL from subnets in a VPC instance.
-     * @param {DisassociateNetworkAclSubnetsRequest} req
-     * @param {function(string, DisassociateNetworkAclSubnetsResponse):void} cb
+     * This API is used to apply for one or more Elastic IPv6 (EIPv6) instances.
+
+- EIPv6 is a fixed public IPv6 address that can be independently applied for and held in a Tencent Cloud region, providing a consistent product experience with Elastic IPv4.
+- You can quickly bind an EIPv6 instance to the private IPv6 address of a cloud resource, so as to quickly enable IPv6 public bandwidth for the cloud resource.
+- You can also bind an EIPv6 instance to other cloud resources as needed, so as to shield instance failures.
+     * @param {AllocateIPv6AddressesRequest} req
+     * @param {function(string, AllocateIPv6AddressesResponse):void} cb
      * @public
      */
-    DisassociateNetworkAclSubnets(req, cb) {
-        let resp = new DisassociateNetworkAclSubnetsResponse();
-        this.request("DisassociateNetworkAclSubnets", req, resp, cb);
+    AllocateIPv6Addresses(req, cb) {
+        let resp = new AllocateIPv6AddressesResponse();
+        this.request("AllocateIPv6Addresses", req, resp, cb);
     }
 
     /**
@@ -3506,6 +3634,20 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
+     * This API is used to release one or more EIPv6 instances.
+
+- You can release the obtained EIPv6 instances. To use them again, please reapply.
+- Only EIPv6 instances in UNBIND status can be released.
+     * @param {ReleaseIPv6AddressesRequest} req
+     * @param {function(string, ReleaseIPv6AddressesResponse):void} cb
+     * @public
+     */
+    ReleaseIPv6Addresses(req, cb) {
+        let resp = new ReleaseIPv6AddressesResponse();
+        this.request("ReleaseIPv6Addresses", req, resp, cb);
+    }
+
+    /**
      * This API is used to migrate ENIs.
 This API is completed asynchronously. If you need to query the execution result of an async task, please use the `RequestId` returned by this API to poll the `DescribeVpcTaskResult` API.
      * @param {MigrateNetworkInterfaceRequest} req
@@ -3582,6 +3724,20 @@ This API is completed asynchronously. If you need to query the execution result 
     DescribeIpGeolocationDatabaseUrl(req, cb) {
         let resp = new DescribeIpGeolocationDatabaseUrlResponse();
         this.request("DescribeIpGeolocationDatabaseUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to adjust the bandwidth limit of a classic elastic public IPv6 instance.
+
+- You can adjust the bandwidth limit of only classic elastic public IPv6 instances.
+- To adjust the bandwidth limit of an elastic public IPv6 instance, call the ModifyIPv6AddressesBandwidth API.
+     * @param {ModifyIp6AddressesBandwidthRequest} req
+     * @param {function(string, ModifyIp6AddressesBandwidthResponse):void} cb
+     * @public
+     */
+    ModifyIp6AddressesBandwidth(req, cb) {
+        let resp = new ModifyIp6AddressesBandwidthResponse();
+        this.request("ModifyIp6AddressesBandwidth", req, resp, cb);
     }
 
     /**
@@ -3732,6 +3888,20 @@ For parameters of `SecurityGroupPolicySet`,
     DescribeVpcEndPoint(req, cb) {
         let resp = new DescribeVpcEndPointResponse();
         this.request("DescribeVpcEndPoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query detailed information of one or more EIPv6 instances.
+
+- You can query EIPv6 and traditional EIPv6 instance information in a specified region.
+- The system returns a certain number (as specified by the Limit, the default value is 20) of EIPv6 instances of the current user if the parameter is empty.
+     * @param {DescribeIPv6AddressesRequest} req
+     * @param {function(string, DescribeIPv6AddressesResponse):void} cb
+     * @public
+     */
+    DescribeIPv6Addresses(req, cb) {
+        let resp = new DescribeIPv6AddressesResponse();
+        this.request("DescribeIPv6Addresses", req, resp, cb);
     }
 
     /**

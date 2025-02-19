@@ -2440,6 +2440,41 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * Statistical line graph general structure
+ * @class
+ */
+class IpStatic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Value
+         * @type {number || null}
+         */
+        this.Num = null;
+
+        /**
+         * Time shown on the x-axis of the line graph
+         * @type {string || null}
+         */
+        this.StatTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Num = 'Num' in params ? params.Num : null;
+        this.StatTime = 'StatTime' in params ? params.StatTime : null;
+
+    }
+}
+
+/**
  * DescribeEnterpriseSecurityGroupRule request structure.
  * @class
  */
@@ -2554,6 +2589,210 @@ true: enable; false: disable
 }
 
 /**
+ * 
+ * @class
+ */
+class VpcRuleItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SourceContent = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DestContent = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DestType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EdgeId = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.DetectedTimes = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EdgeName = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InternalUuid = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Deleted = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FwGroupId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FwGroupName = null;
+
+        /**
+         * 
+         * @type {Array.<BetaInfoByACL> || null}
+         */
+        this.BetaList = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ParamTemplateName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TargetName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SourceName = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.IpVersion = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Invalid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.DestContent = 'DestContent' in params ? params.DestContent : null;
+        this.DestType = 'DestType' in params ? params.DestType : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.DetectedTimes = 'DetectedTimes' in params ? params.DetectedTimes : null;
+        this.EdgeName = 'EdgeName' in params ? params.EdgeName : null;
+        this.InternalUuid = 'InternalUuid' in params ? params.InternalUuid : null;
+        this.Deleted = 'Deleted' in params ? params.Deleted : null;
+        this.FwGroupId = 'FwGroupId' in params ? params.FwGroupId : null;
+        this.FwGroupName = 'FwGroupName' in params ? params.FwGroupName : null;
+
+        if (params.BetaList) {
+            this.BetaList = new Array();
+            for (let z in params.BetaList) {
+                let obj = new BetaInfoByACL();
+                obj.deserialize(params.BetaList[z]);
+                this.BetaList.push(obj);
+            }
+        }
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.ParamTemplateName = 'ParamTemplateName' in params ? params.ParamTemplateName : null;
+        this.TargetName = 'TargetName' in params ? params.TargetName : null;
+        this.SourceName = 'SourceName' in params ? params.SourceName : null;
+        this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
+        this.Invalid = 'Invalid' in params ? params.Invalid : null;
+
+    }
+}
+
+/**
  * ModifyNatFwReSelect response structure.
  * @class
  */
@@ -2577,6 +2816,91 @@ class ModifyNatFwReSelectResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVpcAcRule request structure.
+ * @class
+ */
+class DescribeVpcAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Index to be queried, used in specific scenarios, can be left blank
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Filter combinations
+         * @type {Array.<CommonFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Search start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Search end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Order Type:desc,asc
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Order By FileName
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Index = 'Index' in params ? params.Index : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new CommonFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -4978,24 +5302,30 @@ class ModifySecurityGroupSequenceRulesResponse extends  AbstractModel {
 }
 
 /**
- * Statistical line graph general structure
+ * DescribeResourceGroupNew request structure.
  * @class
  */
-class IpStatic extends  AbstractModel {
+class DescribeResourceGroupNewRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Value
-         * @type {number || null}
-         */
-        this.Num = null;
-
-        /**
-         * Time shown on the x-axis of the line graph
+         * Query type. Network–VPC; business recognition–resource; resource tag–tag
          * @type {string || null}
          */
-        this.StatTime = null;
+        this.QueryType = null;
+
+        /**
+         * Asset group ID, 0: all asset group IDs
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * all: all, including subgroups; own: my asset groups only
+         * @type {string || null}
+         */
+        this.ShowType = null;
 
     }
 
@@ -5006,8 +5336,9 @@ class IpStatic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Num = 'Num' in params ? params.Num : null;
-        this.StatTime = 'StatTime' in params ? params.StatTime : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ShowType = 'ShowType' in params ? params.ShowType : null;
 
     }
 }
@@ -5456,30 +5787,30 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * DescribeResourceGroupNew request structure.
+ * DescribeVpcAcRule response structure.
  * @class
  */
-class DescribeResourceGroupNewRequest extends  AbstractModel {
+class DescribeVpcAcRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Query type. Network–VPC; business recognition–resource; resource tag–tag
-         * @type {string || null}
+         * Total Data
+         * @type {number || null}
          */
-        this.QueryType = null;
+        this.Total = null;
 
         /**
-         * Asset group ID, 0: all asset group IDs
-         * @type {string || null}
+         * Data list
+         * @type {Array.<VpcRuleItem> || null}
          */
-        this.GroupId = null;
+        this.Data = null;
 
         /**
-         * all: all, including subgroups; own: my asset groups only
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ShowType = null;
+        this.RequestId = null;
 
     }
 
@@ -5490,9 +5821,17 @@ class DescribeResourceGroupNewRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.ShowType = 'ShowType' in params ? params.ShowType : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new VpcRuleItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9066,8 +9405,11 @@ module.exports = {
     ModifySecurityGroupItemRuleStatusResponse: ModifySecurityGroupItemRuleStatusResponse,
     DescribeEnterpriseSecurityGroupRuleResponse: DescribeEnterpriseSecurityGroupRuleResponse,
     VpcDnsInfo: VpcDnsInfo,
+    IpStatic: IpStatic,
     DescribeEnterpriseSecurityGroupRuleRequest: DescribeEnterpriseSecurityGroupRuleRequest,
+    VpcRuleItem: VpcRuleItem,
     ModifyNatFwReSelectResponse: ModifyNatFwReSelectResponse,
+    DescribeVpcAcRuleRequest: DescribeVpcAcRuleRequest,
     DeleteSecurityGroupRuleRequest: DeleteSecurityGroupRuleRequest,
     SetNatFwEipRequest: SetNatFwEipRequest,
     SetNatFwEipResponse: SetNatFwEipResponse,
@@ -9113,7 +9455,7 @@ module.exports = {
     ModifyRunSyncAssetResponse: ModifyRunSyncAssetResponse,
     ModifyEnterpriseSecurityGroupRuleResponse: ModifyEnterpriseSecurityGroupRuleResponse,
     ModifySecurityGroupSequenceRulesResponse: ModifySecurityGroupSequenceRulesResponse,
-    IpStatic: IpStatic,
+    DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
     AddEnterpriseSecurityGroupRulesResponse: AddEnterpriseSecurityGroupRulesResponse,
     UnHandleEventDetail: UnHandleEventDetail,
     RemoveEnterpriseSecurityGroupRuleRequest: RemoveEnterpriseSecurityGroupRuleRequest,
@@ -9124,7 +9466,7 @@ module.exports = {
     ModifySequenceRulesResponse: ModifySequenceRulesResponse,
     DescribeResourceGroupNewResponse: DescribeResourceGroupNewResponse,
     DescribeNatFwInstanceWithRegionResponse: DescribeNatFwInstanceWithRegionResponse,
-    DescribeResourceGroupNewRequest: DescribeResourceGroupNewRequest,
+    DescribeVpcAcRuleResponse: DescribeVpcAcRuleResponse,
     ModifyBlockTopRequest: ModifyBlockTopRequest,
     DeleteAcRuleResponse: DeleteAcRuleResponse,
     IocListData: IocListData,

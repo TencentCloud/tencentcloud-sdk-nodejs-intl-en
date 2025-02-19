@@ -728,6 +728,62 @@ class PermitOCRResponse extends  AbstractModel {
 }
 
 /**
+ * RecognizeBrazilDriverLicenseOCR request structure.
+ * @class
+ */
+class RecognizeBrazilDriverLicenseOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64 value of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The Base64 value of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+         * @type {string || null}
+         */
+        this.BackImageBase64 = null;
+
+        /**
+         * The URL address of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * The URL address of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+         * @type {string || null}
+         */
+        this.BackImageUrl = null;
+
+        /**
+         * Picture switch. The default is false, and the base64 encoding of the avatar photo is not returned. When set to true, the base64 encoding of the portrait photo is returned.
+         * @type {boolean || null}
+         */
+        this.CropPortrait = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.BackImageBase64 = 'BackImageBase64' in params ? params.BackImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.BackImageUrl = 'BackImageUrl' in params ? params.BackImageUrl : null;
+        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
+
+    }
+}
+
+/**
  * Coordinates
  * @class
  */
@@ -5430,6 +5486,55 @@ class MotorVehicleSaleInvoice extends  AbstractModel {
 }
 
 /**
+ * RecognizeKoreanIDCardOCR request structure.
+ * @class
+ */
+class RecognizeKoreanIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Whether to return the identity photo.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+
+    }
+}
+
+/**
  * TableOCR request structure.
  * @class
  */
@@ -9357,37 +9462,114 @@ class DetectedWordCoordPoint extends  AbstractModel {
 }
 
 /**
- * RecognizeKoreanIDCardOCR request structure.
+ * RecognizeBrazilDriverLicenseOCR response structure.
  * @class
  */
-class RecognizeKoreanIDCardOCRRequest extends  AbstractModel {
+class RecognizeBrazilDriverLicenseOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded value of the image.
-Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
-Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * Name
          * @type {string || null}
          */
-        this.ImageBase64 = null;
+        this.NOME = null;
 
         /**
-         * The URL of the image.
-Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
-We recommend that you store the image in Tencent Cloud for higher download speed and stability.
-The download speed and stability of non-Tencent Cloud URLs may be low.
+         * Driving license type
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.CatHab = null;
 
         /**
-         * Whether to return the identity photo.
-         * @type {boolean || null}
+         * CNH number
+         * @type {string || null}
          */
-        this.ReturnHeadImage = null;
+        this.CNHNumber = null;
+
+        /**
+         * Valid date
+         * @type {string || null}
+         */
+        this.VALIDADE = null;
+
+        /**
+         * Qualification
+         * @type {string || null}
+         */
+        this.QUALIFICATION = null;
+
+        /**
+         * ID number
+         * @type {string || null}
+         */
+        this.IDENTIDADE = null;
+
+        /**
+         * CPF
+         * @type {string || null}
+         */
+        this.CPF = null;
+
+        /**
+         * Birthday
+         * @type {string || null}
+         */
+        this.NASCIMENTO = null;
+
+        /**
+         * Membership
+         * @type {string || null}
+         */
+        this.MEMBERSHIP = null;
+
+        /**
+         * Registration number
+         * @type {string || null}
+         */
+        this.REGISTRO = null;
+
+        /**
+         * Remark
+         * @type {string || null}
+         */
+        this.OBSERVATIONS = null;
+
+        /**
+         * Issue date
+         * @type {string || null}
+         */
+        this.IssueDate = null;
+
+        /**
+         * Issue location
+         * @type {string || null}
+         */
+        this.LOCAL = null;
+
+        /**
+         * Number in the back of the card
+         * @type {string || null}
+         */
+        this.BackNumber = null;
+
+        /**
+         * Field confidence
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * PortraitImage base64
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9398,9 +9580,23 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+        this.NOME = 'NOME' in params ? params.NOME : null;
+        this.CatHab = 'CatHab' in params ? params.CatHab : null;
+        this.CNHNumber = 'CNHNumber' in params ? params.CNHNumber : null;
+        this.VALIDADE = 'VALIDADE' in params ? params.VALIDADE : null;
+        this.QUALIFICATION = 'QUALIFICATION' in params ? params.QUALIFICATION : null;
+        this.IDENTIDADE = 'IDENTIDADE' in params ? params.IDENTIDADE : null;
+        this.CPF = 'CPF' in params ? params.CPF : null;
+        this.NASCIMENTO = 'NASCIMENTO' in params ? params.NASCIMENTO : null;
+        this.MEMBERSHIP = 'MEMBERSHIP' in params ? params.MEMBERSHIP : null;
+        this.REGISTRO = 'REGISTRO' in params ? params.REGISTRO : null;
+        this.OBSERVATIONS = 'OBSERVATIONS' in params ? params.OBSERVATIONS : null;
+        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
+        this.LOCAL = 'LOCAL' in params ? params.LOCAL : null;
+        this.BackNumber = 'BackNumber' in params ? params.BackNumber : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10032,6 +10228,7 @@ module.exports = {
     OtherInvoiceList: OtherInvoiceList,
     RecognizeMacaoIDCardOCRResponse: RecognizeMacaoIDCardOCRResponse,
     PermitOCRResponse: PermitOCRResponse,
+    RecognizeBrazilDriverLicenseOCRRequest: RecognizeBrazilDriverLicenseOCRRequest,
     Rect: Rect,
     LicensePlateInfo: LicensePlateInfo,
     VatRollItem: VatRollItem,
@@ -10079,6 +10276,7 @@ module.exports = {
     TrainTicket: TrainTicket,
     RecognizeThaiIDCardOCRRequest: RecognizeThaiIDCardOCRRequest,
     MotorVehicleSaleInvoice: MotorVehicleSaleInvoice,
+    RecognizeKoreanIDCardOCRRequest: RecognizeKoreanIDCardOCRRequest,
     TableOCRRequest: TableOCRRequest,
     PassportRecognizeInfos: PassportRecognizeInfos,
     RecognizeSingaporeIDCardOCRRequest: RecognizeSingaporeIDCardOCRRequest,
@@ -10121,7 +10319,7 @@ module.exports = {
     SmartStructuralProResponse: SmartStructuralProResponse,
     TableOCRResponse: TableOCRResponse,
     DetectedWordCoordPoint: DetectedWordCoordPoint,
-    RecognizeKoreanIDCardOCRRequest: RecognizeKoreanIDCardOCRRequest,
+    RecognizeBrazilDriverLicenseOCRResponse: RecognizeBrazilDriverLicenseOCRResponse,
     RecognizeIndonesiaIDCardOCRRequest: RecognizeIndonesiaIDCardOCRRequest,
     VinOCRRequest: VinOCRRequest,
     MLIDCardOCRResponse: MLIDCardOCRResponse,

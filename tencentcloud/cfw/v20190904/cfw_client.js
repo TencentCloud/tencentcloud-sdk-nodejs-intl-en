@@ -60,8 +60,11 @@ const CreateNatFwInstanceRequest = models.CreateNatFwInstanceRequest;
 const ModifySecurityGroupItemRuleStatusResponse = models.ModifySecurityGroupItemRuleStatusResponse;
 const DescribeEnterpriseSecurityGroupRuleResponse = models.DescribeEnterpriseSecurityGroupRuleResponse;
 const VpcDnsInfo = models.VpcDnsInfo;
+const IpStatic = models.IpStatic;
 const DescribeEnterpriseSecurityGroupRuleRequest = models.DescribeEnterpriseSecurityGroupRuleRequest;
+const VpcRuleItem = models.VpcRuleItem;
 const ModifyNatFwReSelectResponse = models.ModifyNatFwReSelectResponse;
+const DescribeVpcAcRuleRequest = models.DescribeVpcAcRuleRequest;
 const DeleteSecurityGroupRuleRequest = models.DeleteSecurityGroupRuleRequest;
 const SetNatFwEipRequest = models.SetNatFwEipRequest;
 const SetNatFwEipResponse = models.SetNatFwEipResponse;
@@ -107,7 +110,7 @@ const NatFwFilter = models.NatFwFilter;
 const ModifyRunSyncAssetResponse = models.ModifyRunSyncAssetResponse;
 const ModifyEnterpriseSecurityGroupRuleResponse = models.ModifyEnterpriseSecurityGroupRuleResponse;
 const ModifySecurityGroupSequenceRulesResponse = models.ModifySecurityGroupSequenceRulesResponse;
-const IpStatic = models.IpStatic;
+const DescribeResourceGroupNewRequest = models.DescribeResourceGroupNewRequest;
 const AddEnterpriseSecurityGroupRulesResponse = models.AddEnterpriseSecurityGroupRulesResponse;
 const UnHandleEventDetail = models.UnHandleEventDetail;
 const RemoveEnterpriseSecurityGroupRuleRequest = models.RemoveEnterpriseSecurityGroupRuleRequest;
@@ -118,7 +121,7 @@ const ModifyEnterpriseSecurityGroupRuleRequest = models.ModifyEnterpriseSecurity
 const ModifySequenceRulesResponse = models.ModifySequenceRulesResponse;
 const DescribeResourceGroupNewResponse = models.DescribeResourceGroupNewResponse;
 const DescribeNatFwInstanceWithRegionResponse = models.DescribeNatFwInstanceWithRegionResponse;
-const DescribeResourceGroupNewRequest = models.DescribeResourceGroupNewRequest;
+const DescribeVpcAcRuleResponse = models.DescribeVpcAcRuleResponse;
 const ModifyBlockTopRequest = models.ModifyBlockTopRequest;
 const DeleteAcRuleResponse = models.DeleteAcRuleResponse;
 const IocListData = models.IocListData;
@@ -694,6 +697,17 @@ Modify events related with the IPs/domains in the blocked/allowed list
     SetNatFwEip(req, cb) {
         let resp = new SetNatFwEipResponse();
         this.request("SetNatFwEip", req, resp, cb);
+    }
+
+    /**
+     * Query Inter-VPC rules
+     * @param {DescribeVpcAcRuleRequest} req
+     * @param {function(string, DescribeVpcAcRuleResponse):void} cb
+     * @public
+     */
+    DescribeVpcAcRule(req, cb) {
+        let resp = new DescribeVpcAcRuleResponse();
+        this.request("DescribeVpcAcRule", req, resp, cb);
     }
 
     /**

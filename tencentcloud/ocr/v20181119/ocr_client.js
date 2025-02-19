@@ -26,6 +26,7 @@ const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
 const OtherInvoiceList = models.OtherInvoiceList;
 const RecognizeMacaoIDCardOCRResponse = models.RecognizeMacaoIDCardOCRResponse;
 const PermitOCRResponse = models.PermitOCRResponse;
+const RecognizeBrazilDriverLicenseOCRRequest = models.RecognizeBrazilDriverLicenseOCRRequest;
 const Rect = models.Rect;
 const LicensePlateInfo = models.LicensePlateInfo;
 const VatRollItem = models.VatRollItem;
@@ -73,6 +74,7 @@ const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRRe
 const TrainTicket = models.TrainTicket;
 const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const MotorVehicleSaleInvoice = models.MotorVehicleSaleInvoice;
+const RecognizeKoreanIDCardOCRRequest = models.RecognizeKoreanIDCardOCRRequest;
 const TableOCRRequest = models.TableOCRRequest;
 const PassportRecognizeInfos = models.PassportRecognizeInfos;
 const RecognizeSingaporeIDCardOCRRequest = models.RecognizeSingaporeIDCardOCRRequest;
@@ -115,7 +117,7 @@ const TollInvoice = models.TollInvoice;
 const SmartStructuralProResponse = models.SmartStructuralProResponse;
 const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
-const RecognizeKoreanIDCardOCRRequest = models.RecognizeKoreanIDCardOCRRequest;
+const RecognizeBrazilDriverLicenseOCRResponse = models.RecognizeBrazilDriverLicenseOCRResponse;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
 const VinOCRRequest = models.VinOCRRequest;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
@@ -206,6 +208,17 @@ A maximum of 20 requests can be initiated per second for this API.
     IDCardOCR(req, cb) {
         let resp = new IDCardOCRResponse();
         this.request("IDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This interface supports identification of the front and back of Brazilian driver's license. The identification fields include name, driver's license category, number, validity period, etc.
+     * @param {RecognizeBrazilDriverLicenseOCRRequest} req
+     * @param {function(string, RecognizeBrazilDriverLicenseOCRResponse):void} cb
+     * @public
+     */
+    RecognizeBrazilDriverLicenseOCR(req, cb) {
+        let resp = new RecognizeBrazilDriverLicenseOCRResponse();
+        this.request("RecognizeBrazilDriverLicenseOCR", req, resp, cb);
     }
 
     /**

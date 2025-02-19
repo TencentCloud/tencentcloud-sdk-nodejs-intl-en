@@ -1435,6 +1435,18 @@ class MediaAiAnalysisDescriptionItem extends  AbstractModel {
         this.Confidence = null;
 
         /**
+         * Intelligent description title.
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Intelligent description keywords.
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
          * Segmentation result.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AiParagraphInfo> || null}
@@ -1452,6 +1464,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Description = 'Description' in params ? params.Description : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
 
         if (params.Paragraphs) {
             this.Paragraphs = new Array();
@@ -5560,6 +5574,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Summary = null;
 
         /**
+         * Segment title.
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Segment keywords.
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
          * Segmentation start time point, in seconds.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
@@ -5583,6 +5609,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Summary = 'Summary' in params ? params.Summary : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 

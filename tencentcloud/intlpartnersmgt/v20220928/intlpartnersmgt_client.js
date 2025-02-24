@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const SummaryDetails = models.SummaryDetails;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
+const TradeTwoNode = models.TradeTwoNode;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
 const CustomerBillDetailData = models.CustomerBillDetailData;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
@@ -35,6 +36,7 @@ const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditReque
 const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const QueryCustomerBillingQuotaData = models.QueryCustomerBillingQuotaData;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
+const GetTradeConfigListRequest = models.GetTradeConfigListRequest;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
@@ -60,6 +62,7 @@ const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
+const TradeOneNode = models.TradeOneNode;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
@@ -84,6 +87,7 @@ const BusinessInfo = models.BusinessInfo;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
+const GetTradeConfigListResponse = models.GetTradeConfigListResponse;
 const DescribeCustomerBillDownloadUrlResponse = models.DescribeCustomerBillDownloadUrlResponse;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
@@ -340,8 +344,10 @@ Note:This API is used to manually send the invitation link to the customer if th
     /**
      * This API is used to create Tencent Cloud customer accounts for distributor/second-level resellers.After the account is created, it will be automatically bound to the partner account.Note:
 1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.
-2.  Customers need to add personal information when logging in for the first time.
-3.  This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+2. Customers need to add personal information when logging in for the first time.
+3. This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+
+Callable roles: distributor, second-level reseller, reseller
      * @param {CreateAccountRequest} req
      * @param {function(string, CreateAccountResponse):void} cb
      * @public
@@ -473,6 +479,17 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
     QueryCreditAllocationHistory(req, cb) {
         let resp = new QueryCreditAllocationHistoryResponse();
         this.request("QueryCreditAllocationHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query industry information, including layer-1 industry and layer-2 industry.
+     * @param {GetTradeConfigListRequest} req
+     * @param {function(string, GetTradeConfigListResponse):void} cb
+     * @public
+     */
+    GetTradeConfigList(req, cb) {
+        let resp = new GetTradeConfigListResponse();
+        this.request("GetTradeConfigList", req, resp, cb);
     }
 
     /**

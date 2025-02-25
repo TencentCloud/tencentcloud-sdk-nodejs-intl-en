@@ -4,6 +4,7 @@ module.exports = {
     ams: require("./ams"),
     antiddos: require("./antiddos"),
     apigateway: require("./apigateway"),
+    apm: require("./apm"),
     as: require("./as"),
     asr: require("./asr"),
     batch: require("./batch"),

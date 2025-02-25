@@ -951,13 +951,15 @@ Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/
         this.VerifyCode = null;
 
         /**
-         * Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181).
+         * Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181),
+such as "kghy_01".
          * @type {string || null}
          */
         this.TradeOne = null;
 
         /**
-         * Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181).
+         * Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181),
+such as "kghy_0101"
          * @type {string || null}
          */
         this.TradeTwo = null;

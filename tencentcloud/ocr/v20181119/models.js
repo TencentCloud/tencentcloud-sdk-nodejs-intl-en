@@ -10060,6 +10060,12 @@ class RecognizeThaiPinkCardResponse extends  AbstractModel {
         this.EnName = null;
 
         /**
+         * Surname in Thai
+         * @type {string || null}
+         */
+        this.ThaiSurName = null;
+
+        /**
          * Date of birth in Thai
          * @type {string || null}
          */
@@ -10151,6 +10157,7 @@ class RecognizeThaiPinkCardResponse extends  AbstractModel {
         this.IDNumber = 'IDNumber' in params ? params.IDNumber : null;
         this.ThaiName = 'ThaiName' in params ? params.ThaiName : null;
         this.EnName = 'EnName' in params ? params.EnName : null;
+        this.ThaiSurName = 'ThaiSurName' in params ? params.ThaiSurName : null;
         this.ThaiDOB = 'ThaiDOB' in params ? params.ThaiDOB : null;
         this.EnDOB = 'EnDOB' in params ? params.EnDOB : null;
         this.PhotoNumber = 'PhotoNumber' in params ? params.PhotoNumber : null;

@@ -28,12 +28,10 @@ const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const CountryCodeItem = models.CountryCodeItem;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
-const QueryCreditQuotaResponse = models.QueryCreditQuotaResponse;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
-const QueryCreditQuotaRequest = models.QueryCreditQuotaRequest;
 const QueryCustomerBillingQuotaData = models.QueryCustomerBillingQuotaData;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const GetTradeConfigListRequest = models.GetTradeConfigListRequest;
@@ -136,6 +134,8 @@ class IntlpartnersmgtClient extends AbstractClient {
 2. The customer's service will be suspended when its available credit is set to 0, so caution should be exercised with this operation.
 3. To prevent the customer from making new purchases without affecting their use of previously purchased products, the partner can set their available credit to 0 after obtaining the non-stop feature privilege from the channel manager.
 4. The set credit is an increment of the current available credit and cannot exceed the remaining allocable credit. Setting the credit to a negative value indicates that it will be repossessed. The available credit can be set to 0 at the minimum.
+
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {AllocateCustomerCreditRequest} req
      * @param {function(string, AllocateCustomerCreditResponse):void} cb
      * @public
@@ -171,6 +171,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
 
     /**
      * This API is used to modify customer remarks.
+
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {ModifyClientRemarkRequest} req
      * @param {function(string, ModifyClientRemarkResponse):void} cb
      * @public
@@ -182,6 +184,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
 
     /**
      * This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {QueryPartnerCreditRequest} req
      * @param {function(string, QueryPartnerCreditResponse):void} cb
      * @public
@@ -205,18 +209,9 @@ Callable roles: Reseller, Distributer, Second-level reseller
     }
 
     /**
-     * This API is used to query customer credits.
-     * @param {QueryCreditQuotaRequest} req
-     * @param {function(string, QueryCreditQuotaResponse):void} cb
-     * @public
-     */
-    QueryCreditQuota(req, cb) {
-        let resp = new QueryCreditQuotaResponse();
-        this.request("QueryCreditQuota", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the customer information.
+
+Callable roles: Distributor, Reseller
      * @param {DescribeCustomerInfoRequest} req
      * @param {function(string, DescribeCustomerInfoResponse):void} cb
      * @public
@@ -228,6 +223,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
 
     /**
      * This API is used to send a verification code for account registration.
+
+Callable roles: Distributor, Second-level reseller, Reseller,End-customer
      * @param {SendVerifyCodeRequest} req
      * @param {function(string, SendVerifyCodeResponse):void} cb
      * @public
@@ -238,7 +235,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
     }
 
     /**
-     * This API is used to query the voucher list based on the customer UIN.
+     * This API is used by primary/secondary resellers to query the voucher list based on the customer UIN.
+Callable roles: Reseller, Distributor, Second-level reseller
      * @param {QueryVoucherListByUinRequest} req
      * @param {function(string, QueryVoucherListByUinResponse):void} cb
      * @public
@@ -250,6 +248,7 @@ Callable roles: Reseller, Distributer, Second-level reseller
 
     /**
      * This API is used to allocate credit pools to second-level resellers by distributors.
+Callable roles: Distributor
      * @param {AllocateCreditPoolRequest} req
      * @param {function(string, AllocateCreditPoolResponse):void} cb
      * @public
@@ -260,7 +259,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
     }
 
     /**
-     * This API is used to query bill details by customers.
+     * Description: End-customer queries its own bill details.
+Callable role: End-customer.
      * @param {DescribeBillDetailRequest} req
      * @param {function(string, DescribeBillDetailResponse):void} cb
      * @public
@@ -271,7 +271,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
     }
 
     /**
-     * External API for the L1 billing of the customer billing center
+     * Description: External API for L1 billing of Sub-customer billing center.
+Callable role: End-customer.
      * @param {DescribeBillSummaryRequest} req
      * @param {function(string, DescribeBillSummaryResponse):void} cb
      * @public
@@ -283,6 +284,7 @@ Callable roles: Reseller, Distributer, Second-level reseller
 
     /**
      * This API is used to obtain the total amount of customer bills by payment mode.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {DescribeBillSummaryByPayModeRequest} req
      * @param {function(string, DescribeBillSummaryByPayModeResponse):void} cb
      * @public
@@ -299,6 +301,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
 3.You can review the customer's application in customer management  after submission.
 
 Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {CreateAndSendClientInvitationMailRequest} req
      * @param {function(string, CreateAndSendClientInvitationMailResponse):void} cb
      * @public
@@ -309,7 +313,8 @@ Note:This API is used to manually send the invitation link to the customer if th
     }
 
     /**
-     * This API is used to download billing files and return billing file URLs by customers.
+     * Description: This API is used to download billing files and return billing file URLs for sub-customers.
+Callable role: Enb-customer.
      * @param {DescribeBillDownloadUrlRequest} req
      * @param {function(string, DescribeBillDownloadUrlResponse):void} cb
      * @public
@@ -321,6 +326,7 @@ Note:This API is used to manually send the invitation link to the customer if th
 
     /**
      * This API is used to query the credit of users in the list.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {QueryCreditByUinListRequest} req
      * @param {function(string, QueryCreditByUinListResponse):void} cb
      * @public
@@ -332,6 +338,7 @@ Note:This API is used to manually send the invitation link to the customer if th
 
     /**
      * This API is used to query the credits of direct customers.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {QueryDirectCustomersCreditRequest} req
      * @param {function(string, QueryDirectCustomersCreditResponse):void} cb
      * @public
@@ -347,7 +354,7 @@ Note:This API is used to manually send the invitation link to the customer if th
 2. Customers need to add personal information when logging in for the first time.
 3. This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
 
-Callable roles: distributor, second-level reseller, reseller
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {CreateAccountRequest} req
      * @param {function(string, CreateAccountResponse):void} cb
      * @public
@@ -372,6 +379,8 @@ Callable roles: distributor, second-level reseller, reseller
 
     /**
      * This API is used for a partner to the credits and basic information of cutomers.
+
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {QueryCustomersCreditRequest} req
      * @param {function(string, QueryCustomersCreditResponse):void} cb
      * @public
@@ -382,7 +391,8 @@ Callable roles: distributor, second-level reseller, reseller
     }
 
     /**
-     * This API is used to obtain the total amount of customer bills by region.
+     * Description: Obtain the summarized value of sub - account bills by region through API.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {DescribeBillSummaryByRegionRequest} req
      * @param {function(string, DescribeBillSummaryByRegionResponse):void} cb
      * @public
@@ -394,6 +404,7 @@ Callable roles: distributor, second-level reseller, reseller
 
     /**
      * This API is used to query the customer bill details by resellers.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {DescribeCustomerBillDetailRequest} req
      * @param {function(string, DescribeCustomerBillDetailResponse):void} cb
      * @public
@@ -405,6 +416,7 @@ Callable roles: distributor, second-level reseller, reseller
 
     /**
      * This API is used to query the total amount of customer bills.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {DescribeCustomerBillSummaryRequest} req
      * @param {function(string, DescribeCustomerBillSummaryResponse):void} cb
      * @public
@@ -415,7 +427,8 @@ Callable roles: distributor, second-level reseller, reseller
     }
 
     /**
-     * This API is used to query the voucher quota based on the customer UIN.
+     * This API is used by primary/secondary resellers to query the voucher quota based on the customer UIN.
+Callable roles: Reseller, Distributor, Second-level reseller
      * @param {QueryVoucherAmountByUinRequest} req
      * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
      * @public
@@ -426,8 +439,9 @@ Callable roles: distributor, second-level reseller, reseller
     }
 
     /**
-     * This API is used to set and cancel forced service suspension.
-Note:Reseller need to be allowlisted to use the API, please contact your business representative to apply for allowlist.
+     * Forced Service Suspension settings and cancellation can be used only after the reseller is whitelisted.
+
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {ForceQNRequest} req
      * @param {function(string, ForceQNResponse):void} cb
      * @public
@@ -438,7 +452,8 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
     }
 
     /**
-     * This API is used to query the voucher quota pool.
+     * This API is used by primary/secondary resellers to query the voucher quota pool.
+Callable roles: Distributor, First-level reseller, Second-level reseller
      * @param {QueryVoucherPoolRequest} req
      * @param {function(string, QueryVoucherPoolResponse):void} cb
      * @public
@@ -450,6 +465,7 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
 
     /**
      * This API is used to query the account verification status.
+Callable roles: Distributor, Reseller
      * @param {QueryAccountVerificationStatusRequest} req
      * @param {function(string, QueryAccountVerificationStatusResponse):void} cb
      * @public
@@ -460,7 +476,8 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
     }
 
     /**
-     * This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
+     * This API is used to query the product list information within the specified policy range. To call this API, contact your business manager to apply for adding it to the allowlist.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {QueryPolicyProductListByCodeRequest} req
      * @param {function(string, QueryPolicyProductListByCodeResponse):void} cb
      * @public
@@ -472,6 +489,7 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
 
     /**
      * This API is used to query all the credit allocation records of a single customer.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {QueryCreditAllocationHistoryRequest} req
      * @param {function(string, QueryCreditAllocationHistoryResponse):void} cb
      * @public
@@ -483,6 +501,8 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
 
     /**
      * This API is used to query industry information, including layer-1 industry and layer-2 industry.
+
+Callable roles: Distributor, Second-level reseller, Reseller,End-customer
      * @param {GetTradeConfigListRequest} req
      * @param {function(string, GetTradeConfigListResponse):void} cb
      * @public
@@ -493,7 +513,8 @@ Note:Reseller need to be allowlisted to use the API, please contact your busines
     }
 
     /**
-     * This API is used to obtain the total amount of customer bills by product.
+     * Description: Obtain the summarized value of sub - account bills by product dimension.
+Callable roles: Distributor, Second-level reseller, Reseller
      * @param {DescribeBillSummaryByProductRequest} req
      * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
      * @public

@@ -706,7 +706,11 @@ class SetUserBlockedRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+         * Controls the activation state of audio and video.
+0: Enable audio and video,
+1: Disable audio and video,
+2: Disable audio only,
+3: Disable video only.
          * @type {number || null}
          */
         this.IsMute = null;
@@ -5012,7 +5016,11 @@ class SetUserBlockedByStrRoomIdRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+         * Controls the activation state of audio and video.
+0: Enable audio and video,
+1: Disable audio and video,
+2: Disable audio only,
+3: Disable video only.
          * @type {number || null}
          */
         this.IsMute = null;

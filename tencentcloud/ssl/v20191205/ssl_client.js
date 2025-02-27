@@ -33,6 +33,7 @@ const TkeNameSpaceDetail = models.TkeNameSpaceDetail;
 const CreateCertificateBindResourceSyncTaskResponse = models.CreateCertificateBindResourceSyncTaskResponse;
 const TCBHostInstance = models.TCBHostInstance;
 const ClbListener = models.ClbListener;
+const COSInstanceList = models.COSInstanceList;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
 const BatchDeleteCSRRequest = models.BatchDeleteCSRRequest;
@@ -51,6 +52,7 @@ const UpdateRecordDetail = models.UpdateRecordDetail;
 const BindResourceResult = models.BindResourceResult;
 const ApplyCertificateResponse = models.ApplyCertificateResponse;
 const CreateCertificateBindResourceSyncTaskRequest = models.CreateCertificateBindResourceSyncTaskRequest;
+const CosInstanceDetail = models.CosInstanceDetail;
 const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
 const DescribeHostUpdateRecordDetailRequest = models.DescribeHostUpdateRecordDetailRequest;
 const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
@@ -69,6 +71,7 @@ const ModifyCSRResponse = models.ModifyCSRResponse;
 const CdnInstanceList = models.CdnInstanceList;
 const UpdateCertificateRecordRetryRequest = models.UpdateCertificateRecordRetryRequest;
 const DdosInstanceDetail = models.DdosInstanceDetail;
+const CertBasicInfo = models.CertBasicInfo;
 const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
 const CommitCertificateInformationResponse = models.CommitCertificateInformationResponse;
@@ -121,6 +124,7 @@ const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const CreateCertificateResponse = models.CreateCertificateResponse;
 const UpdateRecordInfo = models.UpdateRecordInfo;
+const HostingConfig = models.HostingConfig;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const DescribeCertificateBindResourceTaskResultResponse = models.DescribeCertificateBindResourceTaskResultResponse;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
@@ -195,7 +199,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to submit certificate information.
+     * Submit documentation for paid certificates; This API does not maintain new features, and you can use the new API to submit documentation. [CertificateInfoSubmit](https://intl.cloud.tencent.com/document/product/400/116033?from_cn_redirect=1).
      * @param {SubmitCertificateInformationRequest} req
      * @param {function(string, SubmitCertificateInformationResponse):void} cb
      * @public
@@ -217,7 +221,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of EDGEONE instances to which a certificate can be deployed.
+     * This API is used to query the list of EdgeOne instances to which a certificate can be deployed.
      * @param {DescribeHostTeoInstanceListRequest} req
      * @param {function(string, DescribeHostTeoInstanceListResponse):void} cb
      * @public
@@ -261,7 +265,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update old certificate resources with one click and is an asynchronous interface. After this API is called, the returned DeployRecordId being 0 indicates that the task is in progress, and the returned DeployRecordId being greater than 0 indicates that the task is successfully created. If the creation fails, an exception is returned.
+     * This API is used to one-click update old certificate resources. This API is asynchronous. After calling it, if DeployRecordId is 0, it means the task is in progress. Repeat the request to this API. When the returned DeployRecordId is greater than 0, it means the task creation is successful. If it is not created successfully, an exception will be thrown.
      * @param {UpdateCertificateInstanceRequest} req
      * @param {function(string, UpdateCertificateInstanceResponse):void} cb
      * @public
@@ -415,7 +419,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * Query certificate cloud resource update record details list
+     * This API is used to query the update record details of certificate cloud resources.
      * @param {DescribeHostUpdateRecordDetailRequest} req
      * @param {function(string, DescribeHostUpdateRecordDetailResponse):void} cb
      * @public
@@ -426,7 +430,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to submit a certificate order.
+     * Submit payment certificate orders; This API does not maintain new features, and you can use the new API to submit orders. [CertificateOrderSubmit](https://intl.cloud.tencent.com/document/product/400/116032?from_cn_redirect=1).
      * @param {CommitCertificateInformationRequest} req
      * @param {function(string, CommitCertificateInformationResponse):void} cb
      * @public
@@ -481,7 +485,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+     * This API is used to query the task result of CreateCertificateBindResourceSyncTask, returning the asynchronous task result of the certificate associated with cloud resources, supporting the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos.
      * @param {DescribeCertificateBindResourceTaskDetailRequest} req
      * @param {function(string, DescribeCertificateBindResourceTaskDetailResponse):void} cb
      * @public

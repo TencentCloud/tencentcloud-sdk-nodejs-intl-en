@@ -129,6 +129,7 @@ const ExitRescueModeRequest = models.ExitRescueModeRequest;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const ExportImagesRequest = models.ExportImagesRequest;
 const ActionTimer = models.ActionTimer;
+const CreateLaunchTemplateRequest = models.CreateLaunchTemplateRequest;
 const DescribeReservedInstancesConfigInfosRequest = models.DescribeReservedInstancesConfigInfosRequest;
 const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
 const DescribeLaunchTemplatesRequest = models.DescribeLaunchTemplatesRequest;
@@ -140,6 +141,7 @@ const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
 const ConfigureChcAssistVpcRequest = models.ConfigureChcAssistVpcRequest;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
+const CreateLaunchTemplateResponse = models.CreateLaunchTemplateResponse;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
@@ -705,6 +707,21 @@ If you currently use a password to log in, you will no longer be able to do so a
     ResizeInstanceDisks(req, cb) {
         let resp = new ResizeInstanceDisksResponse();
         this.request("ResizeInstanceDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an instance launch template.
+
+An instance launch template contains the configuration information required to create an instance, including instance type, data/system disk type and size, and security group, etc.
+
+When a template is created, it defaults to Version 1. You can use `CreateLaunchTemplateVersion` to create new versions of this template, with the version number increasing. When you run `RunInstances` to create instances, you can specify the instance launch template version. If it’s not specified, the default template version is used.
+     * @param {CreateLaunchTemplateRequest} req
+     * @param {function(string, CreateLaunchTemplateResponse):void} cb
+     * @public
+     */
+    CreateLaunchTemplate(req, cb) {
+        let resp = new CreateLaunchTemplateResponse();
+        this.request("CreateLaunchTemplate", req, resp, cb);
     }
 
     /**

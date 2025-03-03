@@ -6733,6 +6733,18 @@ false (default value): send a normal request and create instance(s) if all the r
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.DisableApiTermination = null;
+
+        /**
+         * Instance launch template tag description list. By specifying the TemplateTag parameter, you can bind tags to the instance launch template.
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.LaunchTemplateTagSpecification = null;
+
     }
 
     /**
@@ -6828,6 +6840,16 @@ false (default value): send a normal request and create instance(s) if all the r
             let obj = new InstanceChargePrepaid();
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
+        }
+        this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+
+        if (params.LaunchTemplateTagSpecification) {
+            this.LaunchTemplateTagSpecification = new Array();
+            for (let z in params.LaunchTemplateTagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.LaunchTemplateTagSpecification[z]);
+                this.LaunchTemplateTagSpecification.push(obj);
+            }
         }
 
     }

@@ -3293,6 +3293,15 @@ class DescribeDisasterRecoverGroupsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * <li> `tag-key` - String - Optional - Filter by the tag key.</li>
+<li>`tag-value` - String - Optional - Filter by the tag value.</li>
+<li> `tag:tag-key` - String - Optional - Filter by the tag key-value pair. Replace `tag-key` with the actual tag keys.</li>
+Each request can have up to 10 `Filters` and 5 `Filters.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -3306,6 +3315,15 @@ class DescribeDisasterRecoverGroupsRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4315,6 +4333,18 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
          */
         this.ClientToken = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Affinity = null;
+
+        /**
+         * List of tag description. By specifying this parameter, the tag can be bound to the placement group.
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -4327,6 +4357,16 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.Affinity = 'Affinity' in params ? params.Affinity : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
+            }
+        }
 
     }
 }
@@ -10074,6 +10114,12 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.CreateTime = null;
 
+        /**
+         * List of tags associated with the placement group.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -10090,6 +10136,15 @@ Note: This field may return null, indicating that no valid value is found.
         this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

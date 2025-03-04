@@ -1348,55 +1348,55 @@ class PolicyProductList extends  AbstractModel {
         super();
 
         /**
-         * Dealer policy code.
+         *  Policy code.
          * @type {string || null}
          */
         this.PolicyCode = null;
 
         /**
-         * Product level 1 code. If the return value is *, any item at this level is included in the policy product range.
+         * The code of the ProductName field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
-         * Product level 1 name. If the return value is *, any item at this level is included in the policy product range.
+         * The ProductName field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * Product level 2 code. If the return value is *, any item at this level is included in the policy product range.
+         * The code of the SubProduct field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.SubProductCode = null;
 
         /**
-         * Product level 2 name. If the return value is *, any item at this level is included in the policy product range.
+         * The SubProduct field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.SubProductName = null;
 
         /**
-         * Product level 3 code. If the return value is *, any item at this level is included in the policy product range.
+         * The code of the ComponentType field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.ComponentTypeCode = null;
 
         /**
-         * Product level 3 name. If the return value is *, any item at this level is included in the policy product range.
+         * The ComponentType field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.ComponentTypeName = null;
 
         /**
-         * Product level 4 code. If the return value is *, any item at this level is included in the policy product range.
+         * The code of the Component field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.ComponentCode = null;
 
         /**
-         * Product fourth-level name. If the return value is *, any item under this level is included in the policy product scope.
+         * The Component field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
          * @type {string || null}
          */
         this.ComponentName = null;
@@ -3818,31 +3818,31 @@ class QueryPolicyProductListByCodeRequest extends  AbstractModel {
         super();
 
         /**
-         * Dealer policy code.
+         * Policy code.
          * @type {string || null}
          */
         this.PolicyCode = null;
 
         /**
-         * Product level 1 code.
+         * The code of the ProductName field in the  bill data.
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
-         * Product level 1 name.
+         * The ProductName field value in the billing data.
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * Product level 2 code.
+         * The code of the SubProductName field in the  bill data.
          * @type {string || null}
          */
         this.SubProductCode = null;
 
         /**
-         * Product level 2 name.
+         * The SubProductName field value in the billing data.
          * @type {string || null}
          */
         this.SubProductName = null;
@@ -4007,7 +4007,7 @@ class QueryPolicyProductListByCodeResponse extends  AbstractModel {
         super();
 
         /**
-         * Dealer policy product list.
+         * policy product list.
          * @type {Array.<PolicyProductList> || null}
          */
         this.ProductList = null;

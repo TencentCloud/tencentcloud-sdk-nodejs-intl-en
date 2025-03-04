@@ -18,6 +18,7 @@ module.exports = {
     cdc: require("./cdc"),
     cdn: require("./cdn"),
     cdwdoris: require("./cdwdoris"),
+    cdwpg: require("./cdwpg"),
     cfg: require("./cfg"),
     cfs: require("./cfs"),
     cfw: require("./cfw"),

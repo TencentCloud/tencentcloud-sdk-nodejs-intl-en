@@ -75,6 +75,7 @@ const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstance
 const RunInstancesResponse = models.RunInstancesResponse;
 const ReservedInstancePrice = models.ReservedInstancePrice;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
+const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
@@ -172,6 +173,7 @@ const RemoveChcDeployVpcRequest = models.RemoveChcDeployVpcRequest;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyChcAttributeRequest = models.ModifyChcAttributeRequest;
+const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
@@ -678,6 +680,20 @@ If you currently use a password to log in, you will no longer be able to do so a
     ResetInstancesPassword(req, cb) {
         let resp = new ResetInstancesPasswordResponse();
         this.request("ResetInstancesPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the renewal flag of monthly subscription instances.
+
+* After an instance is marked as auto-renewal, it will be automatically renewed for one month each time it expires.
+* Batch operations are supported. The maximum number of instances for each request is 100.* You can query the result of the instance operation by calling the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
+     * @param {ModifyInstancesRenewFlagRequest} req
+     * @param {function(string, ModifyInstancesRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyInstancesRenewFlag(req, cb) {
+        let resp = new ModifyInstancesRenewFlagResponse();
+        this.request("ModifyInstancesRenewFlag", req, resp, cb);
     }
 
     /**

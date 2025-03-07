@@ -16,18 +16,21 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DRMInfo = models.DRMInfo;
 const SourcePackageConf = models.SourcePackageConf;
 const CreateStreamPackageSSAIChannelRequest = models.CreateStreamPackageSSAIChannelRequest;
 const AdBreakInfo = models.AdBreakInfo;
 const ModifyStreamPackageLinearAssemblyProgramResponse = models.ModifyStreamPackageLinearAssemblyProgramResponse;
 const BindNewLVBDomainWithChannelResponse = models.BindNewLVBDomainWithChannelResponse;
 const DeleteStreamPackageLinearAssemblyChannelsRequest = models.DeleteStreamPackageLinearAssemblyChannelsRequest;
+const CdnDomainInfo = models.CdnDomainInfo;
 const StartStreamPackageLinearAssemblyChannelRequest = models.StartStreamPackageLinearAssemblyChannelRequest;
 const LocationAlert = models.LocationAlert;
 const Metadata = models.Metadata;
 const ClipRangeInfo = models.ClipRangeInfo;
 const AliasValueConf = models.AliasValueConf;
 const DescribeStreamPackageSSAIChannelRequest = models.DescribeStreamPackageSSAIChannelRequest;
+const DescribeLinearAssemblyCDNDomainWithChannelResponse = models.DescribeLinearAssemblyCDNDomainWithChannelResponse;
 const ModifyStreamPackageSSAIChannelResponse = models.ModifyStreamPackageSSAIChannelResponse;
 const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
 const ChannelAlertResp = models.ChannelAlertResp;
@@ -46,14 +49,16 @@ const UnbindCdnDomainWithChannelResponse = models.UnbindCdnDomainWithChannelResp
 const ModifyStreamPackageChannelEndpointRequest = models.ModifyStreamPackageChannelEndpointRequest;
 const SSAIChannelInfo = models.SSAIChannelInfo;
 const ModifyStreamPackageSourceLocationResponse = models.ModifyStreamPackageSourceLocationResponse;
+const BindLinearAssemblyCDNDomainWithChannelResponse = models.BindLinearAssemblyCDNDomainWithChannelResponse;
 const DescribeStreamPackageChannelResponse = models.DescribeStreamPackageChannelResponse;
 const DescribeStreamPackageLinearAssemblyProgramsRequest = models.DescribeStreamPackageLinearAssemblyProgramsRequest;
+const DomainRecordInfo = models.DomainRecordInfo;
 const TimeShiftInfo = models.TimeShiftInfo;
 const DescribeStreamPackageLinearAssemblyProgramSchedulesResponse = models.DescribeStreamPackageLinearAssemblyProgramSchedulesResponse;
 const DescribeStreamPackageHarvestJobRequest = models.DescribeStreamPackageHarvestJobRequest;
 const DescribeStreamPackageLinearAssemblyChannelsRequest = models.DescribeStreamPackageLinearAssemblyChannelsRequest;
 const SourceAlert = models.SourceAlert;
-const DeleteStreamPackageLinearAssemblyChannelsResponse = models.DeleteStreamPackageLinearAssemblyChannelsResponse;
+const DescribeStreamPackageSourcesResponse = models.DescribeStreamPackageSourcesResponse;
 const SourceInfo = models.SourceInfo;
 const DescribeStreamPackageSourceLocationAlertsResponse = models.DescribeStreamPackageSourceLocationAlertsResponse;
 const CreateStreamPackageLinearAssemblyChannelRequest = models.CreateStreamPackageLinearAssemblyChannelRequest;
@@ -67,7 +72,7 @@ const DescribeStreamPackageHarvestJobsRequest = models.DescribeStreamPackageHarv
 const DeleteStreamPackageHarvestJobResponse = models.DeleteStreamPackageHarvestJobResponse;
 const DeleteStreamPackageHarvestJobsRequest = models.DeleteStreamPackageHarvestJobsRequest;
 const CreateStreamPackageChannelEndpointResponse = models.CreateStreamPackageChannelEndpointResponse;
-const NameServer = models.NameServer;
+const DescribeLinearAssemblyCDNDomainWithChannelsRequest = models.DescribeLinearAssemblyCDNDomainWithChannelsRequest;
 const PlaybackInfo = models.PlaybackInfo;
 const ChannelInfo = models.ChannelInfo;
 const CacheInfo = models.CacheInfo;
@@ -88,22 +93,25 @@ const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelReque
 const ModifyStreamPackageSourceRequest = models.ModifyStreamPackageSourceRequest;
 const InputAuthInfo = models.InputAuthInfo;
 const DescribeStreamPackageSSAIChannelResponse = models.DescribeStreamPackageSSAIChannelResponse;
-const EndpointAuthInfo = models.EndpointAuthInfo;
+const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
 const TimeSignalInfo = models.TimeSignalInfo;
 const ModifyStreamPackageLinearAssemblyChannelRequest = models.ModifyStreamPackageLinearAssemblyChannelRequest;
 const DeleteStreamPackageSourceLocationResponse = models.DeleteStreamPackageSourceLocationResponse;
 const CreateStreamPackageSourceRequest = models.CreateStreamPackageSourceRequest;
 const DescribeStreamPackageLinearAssemblyProgramRequest = models.DescribeStreamPackageLinearAssemblyProgramRequest;
 const DescribeStreamPackageLinearAssemblyChannelAlertsRequest = models.DescribeStreamPackageLinearAssemblyChannelAlertsRequest;
+const UnbindLinearAssemblyCDNDomainWithChannelRequest = models.UnbindLinearAssemblyCDNDomainWithChannelRequest;
 const DescribeStreamPackageSourceLocationsResponse = models.DescribeStreamPackageSourceLocationsResponse;
 const StopStreamPackageLinearAssemblyChannelResponse = models.StopStreamPackageLinearAssemblyChannelResponse;
 const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
 const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
 const SlateInfo = models.SlateInfo;
+const UnbindLinearAssemblyCDNDomainWithChannelResponse = models.UnbindLinearAssemblyCDNDomainWithChannelResponse;
 const DashManifestInfo = models.DashManifestInfo;
 const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
 const DescribeStreamPackageLinearAssemblyChannelResponse = models.DescribeStreamPackageLinearAssemblyChannelResponse;
 const DescribeStreamPackageLinearAssemblyChannelAlertsResponse = models.DescribeStreamPackageLinearAssemblyChannelAlertsResponse;
+const BindLinearAssemblyCDNDomainWithChannelRequest = models.BindLinearAssemblyCDNDomainWithChannelRequest;
 const DeleteStreamPackageChannelEndpointsRequest = models.DeleteStreamPackageChannelEndpointsRequest;
 const DeleteStreamPackageSSAIChannelResponse = models.DeleteStreamPackageSSAIChannelResponse;
 const StartStreamPackageLinearAssemblyChannelResponse = models.StartStreamPackageLinearAssemblyChannelResponse;
@@ -117,8 +125,9 @@ const DescribeStreamPackageSSAIChannelsRequest = models.DescribeStreamPackageSSA
 const ProgramAlertCounts = models.ProgramAlertCounts;
 const DeleteStreamPackageSourceLocationRequest = models.DeleteStreamPackageSourceLocationRequest;
 const DescribeStreamPackageLinearAssemblyProgramResponse = models.DescribeStreamPackageLinearAssemblyProgramResponse;
-const DescribeStreamPackageSourcesResponse = models.DescribeStreamPackageSourcesResponse;
+const DeleteStreamPackageLinearAssemblyChannelsResponse = models.DeleteStreamPackageLinearAssemblyChannelsResponse;
 const BindNewLVBDomainWithChannelRequest = models.BindNewLVBDomainWithChannelRequest;
+const DescribeLinearAssemblyCDNDomainWithChannelRequest = models.DescribeLinearAssemblyCDNDomainWithChannelRequest;
 const ModifyStreamPackageChannelResponse = models.ModifyStreamPackageChannelResponse;
 const CreateStreamPackageSourceLocationResponse = models.CreateStreamPackageSourceLocationResponse;
 const StopStreamPackageLinearAssemblyChannelRequest = models.StopStreamPackageLinearAssemblyChannelRequest;
@@ -139,7 +148,7 @@ const DeleteStreamPackageLinearAssemblyProgramResponse = models.DeleteStreamPack
 const CreateStreamPackageSSAIChannelResponse = models.CreateStreamPackageSSAIChannelResponse;
 const ModifyStreamPackageSourceLocationRequest = models.ModifyStreamPackageSourceLocationRequest;
 const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
-const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
+const EndpointAuthInfo = models.EndpointAuthInfo;
 const SourceLocationInfo = models.SourceLocationInfo;
 const SSAIConf = models.SSAIConf;
 const LinearAssemblyProgramInfo = models.LinearAssemblyProgramInfo;
@@ -151,8 +160,10 @@ const OutputReq = models.OutputReq;
 const CacheInfoInfo = models.CacheInfoInfo;
 const DescribeStreamPackageLinearAssemblyChannelsResponse = models.DescribeStreamPackageLinearAssemblyChannelsResponse;
 const DeleteStreamPackageHarvestJobRequest = models.DeleteStreamPackageHarvestJobRequest;
+const NameServer = models.NameServer;
 const ConfigAliasesInfo = models.ConfigAliasesInfo;
 const ManifestInfo = models.ManifestInfo;
+const DescribeLinearAssemblyCDNDomainWithChannelsResponse = models.DescribeLinearAssemblyCDNDomainWithChannelsResponse;
 
 
 /**
@@ -188,14 +199,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of a StreamPackage channel.
-     * @param {DescribeStreamPackageChannelRequest} req
-     * @param {function(string, DescribeStreamPackageChannelResponse):void} cb
+     * Query the CDN domain names associated with all LinearAssembly channels.
+     * @param {DescribeLinearAssemblyCDNDomainWithChannelsRequest} req
+     * @param {function(string, DescribeLinearAssemblyCDNDomainWithChannelsResponse):void} cb
      * @public
      */
-    DescribeStreamPackageChannel(req, cb) {
-        let resp = new DescribeStreamPackageChannelResponse();
-        this.request("DescribeStreamPackageChannel", req, resp, cb);
+    DescribeLinearAssemblyCDNDomainWithChannels(req, cb) {
+        let resp = new DescribeLinearAssemblyCDNDomainWithChannelsResponse();
+        this.request("DescribeLinearAssemblyCDNDomainWithChannels", req, resp, cb);
     }
 
     /**
@@ -265,6 +276,17 @@ class MdpClient extends AbstractClient {
     }
 
     /**
+     * Unbind LinearAssembly channel with CDN domain name.
+     * @param {UnbindLinearAssemblyCDNDomainWithChannelRequest} req
+     * @param {function(string, UnbindLinearAssemblyCDNDomainWithChannelResponse):void} cb
+     * @public
+     */
+    UnbindLinearAssemblyCDNDomainWithChannel(req, cb) {
+        let resp = new UnbindLinearAssemblyCDNDomainWithChannelResponse();
+        this.request("UnbindLinearAssemblyCDNDomainWithChannel", req, resp, cb);
+    }
+
+    /**
      * Query channel linear assembly Source information.
      * @param {DescribeStreamPackageSourceRequest} req
      * @param {function(string, DescribeStreamPackageSourceResponse):void} cb
@@ -320,6 +342,17 @@ class MdpClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the information of multiple StreamPackage channels.
+     * @param {DescribeStreamPackageChannelsRequest} req
+     * @param {function(string, DescribeStreamPackageChannelsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageChannels(req, cb) {
+        let resp = new DescribeStreamPackageChannelsResponse();
+        this.request("DescribeStreamPackageChannels", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify an endpoint of a StreamPackage channel.
      * @param {ModifyStreamPackageChannelEndpointRequest} req
      * @param {function(string, ModifyStreamPackageChannelEndpointResponse):void} cb
@@ -353,14 +386,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * DescribeStreamPackageSSAIChannels
-     * @param {DescribeStreamPackageSSAIChannelsRequest} req
-     * @param {function(string, DescribeStreamPackageSSAIChannelsResponse):void} cb
+     * Batch query HarvestJob.
+     * @param {DescribeStreamPackageHarvestJobsRequest} req
+     * @param {function(string, DescribeStreamPackageHarvestJobsResponse):void} cb
      * @public
      */
-    DescribeStreamPackageSSAIChannels(req, cb) {
-        let resp = new DescribeStreamPackageSSAIChannelsResponse();
-        this.request("DescribeStreamPackageSSAIChannels", req, resp, cb);
+    DescribeStreamPackageHarvestJobs(req, cb) {
+        let resp = new DescribeStreamPackageHarvestJobsResponse();
+        this.request("DescribeStreamPackageHarvestJobs", req, resp, cb);
     }
 
     /**
@@ -408,14 +441,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of multiple StreamPackage channels.
-     * @param {DescribeStreamPackageChannelsRequest} req
-     * @param {function(string, DescribeStreamPackageChannelsResponse):void} cb
+     * Query the CDN domain name associated with the LinearAssembly channel.
+     * @param {DescribeLinearAssemblyCDNDomainWithChannelRequest} req
+     * @param {function(string, DescribeLinearAssemblyCDNDomainWithChannelResponse):void} cb
      * @public
      */
-    DescribeStreamPackageChannels(req, cb) {
-        let resp = new DescribeStreamPackageChannelsResponse();
-        this.request("DescribeStreamPackageChannels", req, resp, cb);
+    DescribeLinearAssemblyCDNDomainWithChannel(req, cb) {
+        let resp = new DescribeLinearAssemblyCDNDomainWithChannelResponse();
+        this.request("DescribeLinearAssemblyCDNDomainWithChannel", req, resp, cb);
     }
 
     /**
@@ -449,6 +482,28 @@ class MdpClient extends AbstractClient {
     DescribeStreamPackageLinearAssemblyChannelAlerts(req, cb) {
         let resp = new DescribeStreamPackageLinearAssemblyChannelAlertsResponse();
         this.request("DescribeStreamPackageLinearAssemblyChannelAlerts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a CDN playback domain name from a channel.
+     * @param {UnbindCdnDomainWithChannelRequest} req
+     * @param {function(string, UnbindCdnDomainWithChannelResponse):void} cb
+     * @public
+     */
+    UnbindCdnDomainWithChannel(req, cb) {
+        let resp = new UnbindCdnDomainWithChannelResponse();
+        this.request("UnbindCdnDomainWithChannel", req, resp, cb);
+    }
+
+    /**
+     * DescribeStreamPackageSSAIChannels
+     * @param {DescribeStreamPackageSSAIChannelsRequest} req
+     * @param {function(string, DescribeStreamPackageSSAIChannelsResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSSAIChannels(req, cb) {
+        let resp = new DescribeStreamPackageSSAIChannelsResponse();
+        this.request("DescribeStreamPackageSSAIChannels", req, resp, cb);
     }
 
     /**
@@ -584,14 +639,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * Batch query HarvestJob.
-     * @param {DescribeStreamPackageHarvestJobsRequest} req
-     * @param {function(string, DescribeStreamPackageHarvestJobsResponse):void} cb
+     * This API is used to query the information of a StreamPackage channel.
+     * @param {DescribeStreamPackageChannelRequest} req
+     * @param {function(string, DescribeStreamPackageChannelResponse):void} cb
      * @public
      */
-    DescribeStreamPackageHarvestJobs(req, cb) {
-        let resp = new DescribeStreamPackageHarvestJobsResponse();
-        this.request("DescribeStreamPackageHarvestJobs", req, resp, cb);
+    DescribeStreamPackageChannel(req, cb) {
+        let resp = new DescribeStreamPackageChannelResponse();
+        this.request("DescribeStreamPackageChannel", req, resp, cb);
     }
 
     /**
@@ -672,14 +727,14 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * This API is used to unbind a CDN playback domain name from a channel.
-     * @param {UnbindCdnDomainWithChannelRequest} req
-     * @param {function(string, UnbindCdnDomainWithChannelResponse):void} cb
+     * Linear Assembly channel is bound to CDN playback domain name.
+     * @param {BindLinearAssemblyCDNDomainWithChannelRequest} req
+     * @param {function(string, BindLinearAssemblyCDNDomainWithChannelResponse):void} cb
      * @public
      */
-    UnbindCdnDomainWithChannel(req, cb) {
-        let resp = new UnbindCdnDomainWithChannelResponse();
-        this.request("UnbindCdnDomainWithChannel", req, resp, cb);
+    BindLinearAssemblyCDNDomainWithChannel(req, cb) {
+        let resp = new BindLinearAssemblyCDNDomainWithChannelResponse();
+        this.request("BindLinearAssemblyCDNDomainWithChannel", req, resp, cb);
     }
 
     /**

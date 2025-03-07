@@ -24,7 +24,7 @@ const SetExternalSAMLIdentityProviderRequest = models.SetExternalSAMLIdentityPro
 const ListGroupMembersRequest = models.ListGroupMembersRequest;
 const RoleConfigurationProvisionings = models.RoleConfigurationProvisionings;
 const DescribeShareUnitResourcesResponse = models.DescribeShareUnitResourcesResponse;
-const GetProvisioningTaskStatusResponse = models.GetProvisioningTaskStatusResponse;
+const DescribeOrganizationMemberEmailBindResponse = models.DescribeOrganizationMemberEmailBindResponse;
 const UpdateOrganizationIdentityRequest = models.UpdateOrganizationIdentityRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
 const RoleProvisioningsTask = models.RoleProvisioningsTask;
@@ -71,6 +71,7 @@ const GetGroupRequest = models.GetGroupRequest;
 const OrganizationServiceAssign = models.OrganizationServiceAssign;
 const DeleteOrganizationResponse = models.DeleteOrganizationResponse;
 const DismantleRoleConfigurationRequest = models.DismantleRoleConfigurationRequest;
+const UpdateCustomPolicyForRoleConfigurationResponse = models.UpdateCustomPolicyForRoleConfigurationResponse;
 const DescribeShareUnitMembersResponse = models.DescribeShareUnitMembersResponse;
 const MemberMainInfo = models.MemberMainInfo;
 const CreateRoleAssignmentRequest = models.CreateRoleAssignmentRequest;
@@ -81,10 +82,11 @@ const RejectJoinShareUnitInvitationResponse = models.RejectJoinShareUnitInvitati
 const ListRoleAssignmentsResponse = models.ListRoleAssignmentsResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
-const DescribeShareAreasResponse = models.DescribeShareAreasResponse;
+const AddPermissionPolicyToRoleConfigurationRequest = models.AddPermissionPolicyToRoleConfigurationRequest;
 const OrgPermission = models.OrgPermission;
 const BindOrganizationMemberAuthAccountRequest = models.BindOrganizationMemberAuthAccountRequest;
 const DescribeShareUnitsResponse = models.DescribeShareUnitsResponse;
+const UpdateOrganizationMemberEmailBindResponse = models.UpdateOrganizationMemberEmailBindResponse;
 const GetZoneSAMLServiceProviderInfoResponse = models.GetZoneSAMLServiceProviderInfoResponse;
 const DeleteOrganizationMembersResponse = models.DeleteOrganizationMembersResponse;
 const ManagerShareUnit = models.ManagerShareUnit;
@@ -110,6 +112,7 @@ const DeleteOrganizationNodesRequest = models.DeleteOrganizationNodesRequest;
 const DeleteUserResponse = models.DeleteUserResponse;
 const IdentityPolicy = models.IdentityPolicy;
 const UpdateCustomPolicyForRoleConfigurationRequest = models.UpdateCustomPolicyForRoleConfigurationRequest;
+const AddOrganizationMemberEmailRequest = models.AddOrganizationMemberEmailRequest;
 const ListOrganizationIdentityResponse = models.ListOrganizationIdentityResponse;
 const ShareArea = models.ShareArea;
 const DescribeOrganizationMembersResponse = models.DescribeOrganizationMembersResponse;
@@ -124,6 +127,7 @@ const ListTasksResponse = models.ListTasksResponse;
 const AddOrganizationNodeRequest = models.AddOrganizationNodeRequest;
 const AddShareUnitMembersRequest = models.AddShareUnitMembersRequest;
 const AddShareUnitRequest = models.AddShareUnitRequest;
+const SendOrgMemberAccountBindEmailResponse = models.SendOrgMemberAccountBindEmailResponse;
 const OrgNode = models.OrgNode;
 const OpenIdentityCenterRequest = models.OpenIdentityCenterRequest;
 const DescribeOrganizationMemberAuthAccountsRequest = models.DescribeOrganizationMemberAuthAccountsRequest;
@@ -141,17 +145,18 @@ const DescribeIdentityCenterRequest = models.DescribeIdentityCenterRequest;
 const UpdateShareUnitResponse = models.UpdateShareUnitResponse;
 const UserInfo = models.UserInfo;
 const DeleteOrganizationMemberAuthIdentityResponse = models.DeleteOrganizationMemberAuthIdentityResponse;
+const UpdateOrganizationMemberEmailBindRequest = models.UpdateOrganizationMemberEmailBindRequest;
 const TaskInfo = models.TaskInfo;
 const DeleteOrganizationMemberAuthIdentityRequest = models.DeleteOrganizationMemberAuthIdentityRequest;
 const UpdateUserRequest = models.UpdateUserRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
 const UpdateRoleConfigurationRequest = models.UpdateRoleConfigurationRequest;
 const ListOrgServiceAssignMemberResponse = models.ListOrgServiceAssignMemberResponse;
-const UpdateCustomPolicyForRoleConfigurationResponse = models.UpdateCustomPolicyForRoleConfigurationResponse;
+const SendOrgMemberAccountBindEmailRequest = models.SendOrgMemberAccountBindEmailRequest;
 const DeleteRoleAssignmentResponse = models.DeleteRoleAssignmentResponse;
 const GetTaskStatusRequest = models.GetTaskStatusRequest;
 const CreateOrgServiceAssignResponse = models.CreateOrgServiceAssignResponse;
-const AddPermissionPolicyToRoleConfigurationRequest = models.AddPermissionPolicyToRoleConfigurationRequest;
+const AddOrganizationMemberEmailResponse = models.AddOrganizationMemberEmailResponse;
 const AddShareUnitMembersResponse = models.AddShareUnitMembersResponse;
 const CreateOrganizationMemberPolicyRequest = models.CreateOrganizationMemberPolicyRequest;
 const SAMLIdPCertificate = models.SAMLIdPCertificate;
@@ -166,6 +171,7 @@ const OrganizationServiceAssignMember = models.OrganizationServiceAssignMember;
 const AddShareUnitResponse = models.AddShareUnitResponse;
 const DescribeShareUnitResourcesRequest = models.DescribeShareUnitResourcesRequest;
 const GetGroupResponse = models.GetGroupResponse;
+const GetProvisioningTaskStatusResponse = models.GetProvisioningTaskStatusResponse;
 const OrgMemberPolicy = models.OrgMemberPolicy;
 const CreateOrganizationMemberPolicyResponse = models.CreateOrganizationMemberPolicyResponse;
 const UpdateSCIMSynchronizationStatusRequest = models.UpdateSCIMSynchronizationStatusRequest;
@@ -190,6 +196,7 @@ const DeleteShareUnitMembersResponse = models.DeleteShareUnitMembersResponse;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListExternalSAMLIdPCertificatesRequest = models.ListExternalSAMLIdPCertificatesRequest;
 const DeleteOrganizationIdentityResponse = models.DeleteOrganizationIdentityResponse;
+const DescribeOrganizationMemberEmailBindRequest = models.DescribeOrganizationMemberEmailBindRequest;
 const RemovePermissionPolicyFromRoleConfigurationResponse = models.RemovePermissionPolicyFromRoleConfigurationResponse;
 const ListRoleConfigurationsResponse = models.ListRoleConfigurationsResponse;
 const UpdateUserSyncProvisioningResponse = models.UpdateUserSyncProvisioningResponse;
@@ -202,6 +209,7 @@ const GetZoneSAMLServiceProviderInfoRequest = models.GetZoneSAMLServiceProviderI
 const AddExternalSAMLIdPCertificateRequest = models.AddExternalSAMLIdPCertificateRequest;
 const GetProvisioningTaskStatusRequest = models.GetProvisioningTaskStatusRequest;
 const ListJoinedGroupsForUserResponse = models.ListJoinedGroupsForUserResponse;
+const SAMLServiceProvider = models.SAMLServiceProvider;
 const UpdateUserStatusResponse = models.UpdateUserStatusResponse;
 const UpdateGroupRequest = models.UpdateGroupRequest;
 const ListExternalSAMLIdPCertificatesResponse = models.ListExternalSAMLIdPCertificatesResponse;
@@ -227,7 +235,7 @@ const DescribeOrganizationNodesRequest = models.DescribeOrganizationNodesRequest
 const InviteOrganizationMemberResponse = models.InviteOrganizationMemberResponse;
 const AddExternalSAMLIdPCertificateResponse = models.AddExternalSAMLIdPCertificateResponse;
 const UpdateOrganizationIdentityResponse = models.UpdateOrganizationIdentityResponse;
-const SAMLServiceProvider = models.SAMLServiceProvider;
+const DescribeShareAreasResponse = models.DescribeShareAreasResponse;
 const DeleteShareUnitResourcesResponse = models.DeleteShareUnitResourcesResponse;
 const ListUserSyncProvisioningsResponse = models.ListUserSyncProvisioningsResponse;
 const DeleteUserSyncProvisioningRequest = models.DeleteUserSyncProvisioningRequest;
@@ -302,6 +310,17 @@ class OrganizationClient extends AbstractClient {
     AddOrganizationNode(req, cb) {
         let resp = new AddOrganizationNodeResponse();
         this.request("AddOrganizationNode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the mailbox of a bound member.
+     * @param {UpdateOrganizationMemberEmailBindRequest} req
+     * @param {function(string, UpdateOrganizationMemberEmailBindResponse):void} cb
+     * @public
+     */
+    UpdateOrganizationMemberEmailBind(req, cb) {
+        let resp = new UpdateOrganizationMemberEmailBindResponse();
+        this.request("UpdateOrganizationMemberEmailBind", req, resp, cb);
     }
 
     /**
@@ -401,6 +420,17 @@ class OrganizationClient extends AbstractClient {
     CreateOrganizationMember(req, cb) {
         let resp = new CreateOrganizationMemberResponse();
         this.request("CreateOrganizationMember", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query detailed information about member mailbox binding.
+     * @param {DescribeOrganizationMemberEmailBindRequest} req
+     * @param {function(string, DescribeOrganizationMemberEmailBindResponse):void} cb
+     * @public
+     */
+    DescribeOrganizationMemberEmailBind(req, cb) {
+        let resp = new DescribeOrganizationMemberEmailBindResponse();
+        this.request("DescribeOrganizationMemberEmailBind", req, resp, cb);
     }
 
     /**
@@ -767,6 +797,17 @@ class OrganizationClient extends AbstractClient {
     }
 
     /**
+     * This API is used to resend an email for activating the member's bound mailbox.
+     * @param {SendOrgMemberAccountBindEmailRequest} req
+     * @param {function(string, SendOrgMemberAccountBindEmailResponse):void} cb
+     * @public
+     */
+    SendOrgMemberAccountBindEmail(req, cb) {
+        let resp = new SendOrgMemberAccountBindEmailResponse();
+        this.request("SendOrgMemberAccountBindEmail", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain a list of shared units.
      * @param {DescribeShareUnitsRequest} req
      * @param {function(string, DescribeShareUnitsResponse):void} cb
@@ -896,6 +937,17 @@ class OrganizationClient extends AbstractClient {
     ListOrgServiceAssignMember(req, cb) {
         let resp = new ListOrgServiceAssignMemberResponse();
         this.request("ListOrgServiceAssignMember", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add an organization member's mailbox.
+     * @param {AddOrganizationMemberEmailRequest} req
+     * @param {function(string, AddOrganizationMemberEmailResponse):void} cb
+     * @public
+     */
+    AddOrganizationMemberEmail(req, cb) {
+        let resp = new AddOrganizationMemberEmailResponse();
+        this.request("AddOrganizationMemberEmail", req, resp, cb);
     }
 
     /**

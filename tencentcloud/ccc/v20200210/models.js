@@ -657,7 +657,7 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
         /**
          * Model API key, for authentication information, please refer to the respective model's official website
 
-- OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [Hunyuan](https://intl.cloud.tencent.com/document/product/1729/111008?from_cn_redirect=1), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
+- OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
 
 - Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
 
@@ -729,7 +729,7 @@ HoaiMy
         this.Callers = null;
 
         /**
-         * Used to set the AI Agent Greeting.
+         * Used to set the AI Agent Welcome Message.
          * @type {string || null}
          */
         this.WelcomeMessage = null;

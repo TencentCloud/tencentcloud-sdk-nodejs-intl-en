@@ -17,6 +17,98 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DRM configure info.
+ * @class
+ */
+class DRMInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Encryption method, optional values: `CBCS`, `CENC`.
+         * @type {string || null}
+         */
+        this.EncryptionMethod = null;
+
+        /**
+         * DRM system providers, when the encryption method is CBCS, the optional values are `PlayReady`, `Widevine`, `FairPlay`; when the encryption method is CENC, the oprional values are `PlayReady`, `Widevine`.
+         * @type {Array.<string> || null}
+         */
+        this.DRMSystems = null;
+
+        /**
+         * The resource ID sent to the key server. It can contain 1 to 128 characters, including numbers, letters, underscores (_), and hyphens (-).
+         * @type {string || null}
+         */
+        this.ResourceID = null;
+
+        /**
+         * Key server address; must start with https://.
+         * @type {string || null}
+         */
+        this.KeyServerUrl = null;
+
+        /**
+         * Video encryption presets, options: 
+`Preset Video 1` - Encrypts all video tracks with one key
+`Preset Video 2` - Encrypts SD and HD video tracks with 2 different keys
+`Preset Video 3` - Encrypts SD, HD and UHD video tracks with 3 different keys
+`Preset Video 4` - Encrypts SD, HD, UHD1 and UHD2 video tracks with 4 different keys
+`Preset Video 5` - Encrypts SD, HD1, HD2, UHD1 and UHD2 video tracks with 5 different keys
+`Preset Video 6` - Encrypts SD, HD1, HD2, UHD video tracks with 4 different keys
+`Preset Video 7` - Encrypts SD + HD1, HD2, UHD video tracks with 3 different keys
+`Preset Video 8` - Encrypts SD + HD1, HD2, UHD1, UHD2 video tracks with 4 different keys
+`Shared` - Encrypts all video and audio tracks with one key
+`Unencrypted` - Does not encrypt any track
+         * @type {string || null}
+         */
+        this.VideoEncryptionPreset = null;
+
+        /**
+         * Audio encryption presets, options:
+`Preset Audio 1` - Encrypts all audio tracks with one key
+`Preset Audio 2` - Encrypts STEREO and MULTICHANNEL audio tracks with 2 different keys
+`Preset Audio 3` - Encrypts STEREO, MULTICHANNEL 3-6 and MULTICHANNEL 7 audio tracks with 3 different keys
+`Shared` - Encrypts all video and audio tracks with one key
+`Unencrypted` - Does not encrypt any track
+         * @type {string || null}
+         */
+        this.AudioEncryptionPreset = null;
+
+        /**
+         * Optional, used together with the key to encrypt the content; a 128-bit, 32-character, hexadecimal-encoded string.
+         * @type {string || null}
+         */
+        this.ConstantInitializationVector = null;
+
+        /**
+         * Optional, specifies the rotation interval in seconds; empty, or an integer between 300-2592000.
+         * @type {number || null}
+         */
+        this.KeyRotationInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EncryptionMethod = 'EncryptionMethod' in params ? params.EncryptionMethod : null;
+        this.DRMSystems = 'DRMSystems' in params ? params.DRMSystems : null;
+        this.ResourceID = 'ResourceID' in params ? params.ResourceID : null;
+        this.KeyServerUrl = 'KeyServerUrl' in params ? params.KeyServerUrl : null;
+        this.VideoEncryptionPreset = 'VideoEncryptionPreset' in params ? params.VideoEncryptionPreset : null;
+        this.AudioEncryptionPreset = 'AudioEncryptionPreset' in params ? params.AudioEncryptionPreset : null;
+        this.ConstantInitializationVector = 'ConstantInitializationVector' in params ? params.ConstantInitializationVector : null;
+        this.KeyRotationInterval = 'KeyRotationInterval' in params ? params.KeyRotationInterval : null;
+
+    }
+}
+
+/**
  * Source file information.
  * @class
  */
@@ -292,6 +384,49 @@ class DeleteStreamPackageLinearAssemblyChannelsRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class CdnDomainInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 
+         * @type {Array.<DomainRecordInfo> || null}
+         */
+        this.Records = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new DomainRecordInfo();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * StartStreamPackageLinearAssemblyChannel request structure.
  * @class
  */
@@ -511,6 +646,46 @@ class DescribeStreamPackageSSAIChannelRequest extends  AbstractModel {
             return;
         }
         this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * DescribeLinearAssemblyCDNDomainWithChannel response structure.
+ * @class
+ */
+class DescribeLinearAssemblyCDNDomainWithChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The CDN domain name information associated with the channel.
+         * @type {CdnDomainInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new CdnDomainInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1399,6 +1574,34 @@ class ModifyStreamPackageSourceLocationResponse extends  AbstractModel {
 }
 
 /**
+ * BindLinearAssemblyCDNDomainWithChannel response structure.
+ * @class
+ */
+class BindLinearAssemblyCDNDomainWithChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStreamPackageChannel response structure.
  * @class
  */
@@ -1476,6 +1679,55 @@ class DescribeStreamPackageLinearAssemblyProgramsRequest extends  AbstractModel 
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class DomainRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CdnDomain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CdnDomain = 'CdnDomain' in params ? params.CdnDomain : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1706,12 +1958,42 @@ class SourceAlert extends  AbstractModel {
 }
 
 /**
- * DeleteStreamPackageLinearAssemblyChannels response structure.
+ * DescribeStreamPackageSources response structure.
  * @class
  */
-class DeleteStreamPackageLinearAssemblyChannelsResponse extends  AbstractModel {
+class DescribeStreamPackageSourcesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Source list.
+         * @type {Array.<SourceInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * Number of pages.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Size per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * The total amount.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * total pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1728,6 +2010,19 @@ class DeleteStreamPackageLinearAssemblyChannelsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new SourceInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2336,24 +2631,12 @@ class CreateStreamPackageChannelEndpointResponse extends  AbstractModel {
 }
 
 /**
- * Custom server information.
+ * DescribeLinearAssemblyCDNDomainWithChannels request structure.
  * @class
  */
-class NameServer extends  AbstractModel {
+class DescribeLinearAssemblyCDNDomainWithChannelsRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * address.
-         * @type {string || null}
-         */
-        this.Url = null;
 
     }
 
@@ -2364,8 +2647,6 @@ class NameServer extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -2909,7 +3190,7 @@ class EndpointInfo extends  AbstractModel {
         this.AuthInfo = null;
 
         /**
-         * Endpoint protocol.
+         * Endpoint protocol, supports `HLS`, `CMAF`, `CMAF-HLS`.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -2957,6 +3238,18 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
          */
         this.CustomUrlParam = null;
 
+        /**
+         * DRM switch. If it is turned on, only CMAF will take effect.
+         * @type {boolean || null}
+         */
+        this.DRMEnabled = null;
+
+        /**
+         * DRM configuration information.
+         * @type {DRMInfo || null}
+         */
+        this.DRMInfo = null;
+
     }
 
     /**
@@ -2987,6 +3280,13 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
         }
         this.CustomUrlParamIndex = 'CustomUrlParamIndex' in params ? params.CustomUrlParamIndex : null;
         this.CustomUrlParam = 'CustomUrlParam' in params ? params.CustomUrlParam : null;
+        this.DRMEnabled = 'DRMEnabled' in params ? params.DRMEnabled : null;
+
+        if (params.DRMInfo) {
+            let obj = new DRMInfo();
+            obj.deserialize(params.DRMInfo)
+            this.DRMInfo = obj;
+        }
 
     }
 }
@@ -3439,33 +3739,18 @@ class DescribeStreamPackageSSAIChannelResponse extends  AbstractModel {
 }
 
 /**
- * The authentication information of channel endpoints.
+ * DeleteStreamPackageHarvestJobs response structure.
  * @class
  */
-class EndpointAuthInfo extends  AbstractModel {
+class DeleteStreamPackageHarvestJobsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The security group allowlist in CIDR format.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.WhiteIpList = null;
-
-        /**
-         * The security group blocklist in CIDR format.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.BlackIpList = null;
-
-        /**
-         * The authentication key. Its value is same as `X-TENCENT-PACKAGE` set in the HTTP request header.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AuthKey = null;
+        this.RequestId = null;
 
     }
 
@@ -3476,9 +3761,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
-        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
-        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3812,6 +4095,41 @@ class DescribeStreamPackageLinearAssemblyChannelAlertsRequest extends  AbstractM
 }
 
 /**
+ * UnbindLinearAssemblyCDNDomainWithChannel request structure.
+ * @class
+ */
+class UnbindLinearAssemblyCDNDomainWithChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel Id.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Cdn playback domain.
+         * @type {string || null}
+         */
+        this.CdnDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.CdnDomain = 'CdnDomain' in params ? params.CdnDomain : null;
+
+    }
+}
+
+/**
  * DescribeStreamPackageSourceLocations response structure.
  * @class
  */
@@ -4021,6 +4339,34 @@ class SlateInfo extends  AbstractModel {
 }
 
 /**
+ * UnbindLinearAssemblyCDNDomainWithChannel response structure.
+ * @class
+ */
+class UnbindLinearAssemblyCDNDomainWithChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The manifest info used when Type is DASH.
  * @class
  */
@@ -4185,6 +4531,41 @@ class DescribeStreamPackageLinearAssemblyChannelAlertsResponse extends  Abstract
             this.Infos = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BindLinearAssemblyCDNDomainWithChannel request structure.
+ * @class
+ */
+class BindLinearAssemblyCDNDomainWithChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel Id.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Cdn playback domain.
+         * @type {string || null}
+         */
+        this.CdnDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.CdnDomain = 'CdnDomain' in params ? params.CdnDomain : null;
 
     }
 }
@@ -4700,42 +5081,12 @@ class DescribeStreamPackageLinearAssemblyProgramResponse extends  AbstractModel 
 }
 
 /**
- * DescribeStreamPackageSources response structure.
+ * DeleteStreamPackageLinearAssemblyChannels response structure.
  * @class
  */
-class DescribeStreamPackageSourcesResponse extends  AbstractModel {
+class DeleteStreamPackageLinearAssemblyChannelsResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Source list.
-         * @type {Array.<SourceInfo> || null}
-         */
-        this.Infos = null;
-
-        /**
-         * Number of pages.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Size per page.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * The total amount.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * total pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4752,19 +5103,6 @@ class DescribeStreamPackageSourcesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new SourceInfo();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
-            }
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4801,6 +5139,34 @@ class BindNewLVBDomainWithChannelRequest extends  AbstractModel {
         }
         this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
         this.LVBDomain = 'LVBDomain' in params ? params.LVBDomain : null;
+
+    }
+}
+
+/**
+ * DescribeLinearAssemblyCDNDomainWithChannel request structure.
+ * @class
+ */
+class DescribeLinearAssemblyCDNDomainWithChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel Id.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
 
     }
 }
@@ -5688,18 +6054,33 @@ class CreateStreamPackageHarvestJobResponse extends  AbstractModel {
 }
 
 /**
- * DeleteStreamPackageHarvestJobs response structure.
+ * The authentication information of channel endpoints.
  * @class
  */
-class DeleteStreamPackageHarvestJobsResponse extends  AbstractModel {
+class EndpointAuthInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The security group allowlist in CIDR format.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.WhiteIpList = null;
+
+        /**
+         * The security group blocklist in CIDR format.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BlackIpList = null;
+
+        /**
+         * The authentication key. Its value is same as `X-TENCENT-PACKAGE` set in the HTTP request header.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AuthKey = null;
 
     }
 
@@ -5710,7 +6091,9 @@ class DeleteStreamPackageHarvestJobsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
 
     }
 }
@@ -6545,6 +6928,41 @@ class DeleteStreamPackageHarvestJobRequest extends  AbstractModel {
 }
 
 /**
+ * Custom server information.
+ * @class
+ */
+class NameServer extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * address.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Parameter configuration.
  * @class
  */
@@ -6622,19 +7040,62 @@ class ManifestInfo extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeLinearAssemblyCDNDomainWithChannels response structure.
+ * @class
+ */
+class DescribeLinearAssemblyCDNDomainWithChannelsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The CDN domain name information associated with the channel.
+         * @type {CdnDomainInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new CdnDomainInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
+    DRMInfo: DRMInfo,
     SourcePackageConf: SourcePackageConf,
     CreateStreamPackageSSAIChannelRequest: CreateStreamPackageSSAIChannelRequest,
     AdBreakInfo: AdBreakInfo,
     ModifyStreamPackageLinearAssemblyProgramResponse: ModifyStreamPackageLinearAssemblyProgramResponse,
     BindNewLVBDomainWithChannelResponse: BindNewLVBDomainWithChannelResponse,
     DeleteStreamPackageLinearAssemblyChannelsRequest: DeleteStreamPackageLinearAssemblyChannelsRequest,
+    CdnDomainInfo: CdnDomainInfo,
     StartStreamPackageLinearAssemblyChannelRequest: StartStreamPackageLinearAssemblyChannelRequest,
     LocationAlert: LocationAlert,
     Metadata: Metadata,
     ClipRangeInfo: ClipRangeInfo,
     AliasValueConf: AliasValueConf,
     DescribeStreamPackageSSAIChannelRequest: DescribeStreamPackageSSAIChannelRequest,
+    DescribeLinearAssemblyCDNDomainWithChannelResponse: DescribeLinearAssemblyCDNDomainWithChannelResponse,
     ModifyStreamPackageSSAIChannelResponse: ModifyStreamPackageSSAIChannelResponse,
     ModifyStreamPackageChannelInputAuthInfoRequest: ModifyStreamPackageChannelInputAuthInfoRequest,
     ChannelAlertResp: ChannelAlertResp,
@@ -6653,14 +7114,16 @@ module.exports = {
     ModifyStreamPackageChannelEndpointRequest: ModifyStreamPackageChannelEndpointRequest,
     SSAIChannelInfo: SSAIChannelInfo,
     ModifyStreamPackageSourceLocationResponse: ModifyStreamPackageSourceLocationResponse,
+    BindLinearAssemblyCDNDomainWithChannelResponse: BindLinearAssemblyCDNDomainWithChannelResponse,
     DescribeStreamPackageChannelResponse: DescribeStreamPackageChannelResponse,
     DescribeStreamPackageLinearAssemblyProgramsRequest: DescribeStreamPackageLinearAssemblyProgramsRequest,
+    DomainRecordInfo: DomainRecordInfo,
     TimeShiftInfo: TimeShiftInfo,
     DescribeStreamPackageLinearAssemblyProgramSchedulesResponse: DescribeStreamPackageLinearAssemblyProgramSchedulesResponse,
     DescribeStreamPackageHarvestJobRequest: DescribeStreamPackageHarvestJobRequest,
     DescribeStreamPackageLinearAssemblyChannelsRequest: DescribeStreamPackageLinearAssemblyChannelsRequest,
     SourceAlert: SourceAlert,
-    DeleteStreamPackageLinearAssemblyChannelsResponse: DeleteStreamPackageLinearAssemblyChannelsResponse,
+    DescribeStreamPackageSourcesResponse: DescribeStreamPackageSourcesResponse,
     SourceInfo: SourceInfo,
     DescribeStreamPackageSourceLocationAlertsResponse: DescribeStreamPackageSourceLocationAlertsResponse,
     CreateStreamPackageLinearAssemblyChannelRequest: CreateStreamPackageLinearAssemblyChannelRequest,
@@ -6674,7 +7137,7 @@ module.exports = {
     DeleteStreamPackageHarvestJobResponse: DeleteStreamPackageHarvestJobResponse,
     DeleteStreamPackageHarvestJobsRequest: DeleteStreamPackageHarvestJobsRequest,
     CreateStreamPackageChannelEndpointResponse: CreateStreamPackageChannelEndpointResponse,
-    NameServer: NameServer,
+    DescribeLinearAssemblyCDNDomainWithChannelsRequest: DescribeLinearAssemblyCDNDomainWithChannelsRequest,
     PlaybackInfo: PlaybackInfo,
     ChannelInfo: ChannelInfo,
     CacheInfo: CacheInfo,
@@ -6695,22 +7158,25 @@ module.exports = {
     ModifyStreamPackageSourceRequest: ModifyStreamPackageSourceRequest,
     InputAuthInfo: InputAuthInfo,
     DescribeStreamPackageSSAIChannelResponse: DescribeStreamPackageSSAIChannelResponse,
-    EndpointAuthInfo: EndpointAuthInfo,
+    DeleteStreamPackageHarvestJobsResponse: DeleteStreamPackageHarvestJobsResponse,
     TimeSignalInfo: TimeSignalInfo,
     ModifyStreamPackageLinearAssemblyChannelRequest: ModifyStreamPackageLinearAssemblyChannelRequest,
     DeleteStreamPackageSourceLocationResponse: DeleteStreamPackageSourceLocationResponse,
     CreateStreamPackageSourceRequest: CreateStreamPackageSourceRequest,
     DescribeStreamPackageLinearAssemblyProgramRequest: DescribeStreamPackageLinearAssemblyProgramRequest,
     DescribeStreamPackageLinearAssemblyChannelAlertsRequest: DescribeStreamPackageLinearAssemblyChannelAlertsRequest,
+    UnbindLinearAssemblyCDNDomainWithChannelRequest: UnbindLinearAssemblyCDNDomainWithChannelRequest,
     DescribeStreamPackageSourceLocationsResponse: DescribeStreamPackageSourceLocationsResponse,
     StopStreamPackageLinearAssemblyChannelResponse: StopStreamPackageLinearAssemblyChannelResponse,
     DescribeStreamPackageChannelsRequest: DescribeStreamPackageChannelsRequest,
     ModifyStreamPackageChannelInputAuthInfoResponse: ModifyStreamPackageChannelInputAuthInfoResponse,
     SlateInfo: SlateInfo,
+    UnbindLinearAssemblyCDNDomainWithChannelResponse: UnbindLinearAssemblyCDNDomainWithChannelResponse,
     DashManifestInfo: DashManifestInfo,
     CreateStreamPackageChannelResponse: CreateStreamPackageChannelResponse,
     DescribeStreamPackageLinearAssemblyChannelResponse: DescribeStreamPackageLinearAssemblyChannelResponse,
     DescribeStreamPackageLinearAssemblyChannelAlertsResponse: DescribeStreamPackageLinearAssemblyChannelAlertsResponse,
+    BindLinearAssemblyCDNDomainWithChannelRequest: BindLinearAssemblyCDNDomainWithChannelRequest,
     DeleteStreamPackageChannelEndpointsRequest: DeleteStreamPackageChannelEndpointsRequest,
     DeleteStreamPackageSSAIChannelResponse: DeleteStreamPackageSSAIChannelResponse,
     StartStreamPackageLinearAssemblyChannelResponse: StartStreamPackageLinearAssemblyChannelResponse,
@@ -6724,8 +7190,9 @@ module.exports = {
     ProgramAlertCounts: ProgramAlertCounts,
     DeleteStreamPackageSourceLocationRequest: DeleteStreamPackageSourceLocationRequest,
     DescribeStreamPackageLinearAssemblyProgramResponse: DescribeStreamPackageLinearAssemblyProgramResponse,
-    DescribeStreamPackageSourcesResponse: DescribeStreamPackageSourcesResponse,
+    DeleteStreamPackageLinearAssemblyChannelsResponse: DeleteStreamPackageLinearAssemblyChannelsResponse,
     BindNewLVBDomainWithChannelRequest: BindNewLVBDomainWithChannelRequest,
+    DescribeLinearAssemblyCDNDomainWithChannelRequest: DescribeLinearAssemblyCDNDomainWithChannelRequest,
     ModifyStreamPackageChannelResponse: ModifyStreamPackageChannelResponse,
     CreateStreamPackageSourceLocationResponse: CreateStreamPackageSourceLocationResponse,
     StopStreamPackageLinearAssemblyChannelRequest: StopStreamPackageLinearAssemblyChannelRequest,
@@ -6746,7 +7213,7 @@ module.exports = {
     CreateStreamPackageSSAIChannelResponse: CreateStreamPackageSSAIChannelResponse,
     ModifyStreamPackageSourceLocationRequest: ModifyStreamPackageSourceLocationRequest,
     CreateStreamPackageHarvestJobResponse: CreateStreamPackageHarvestJobResponse,
-    DeleteStreamPackageHarvestJobsResponse: DeleteStreamPackageHarvestJobsResponse,
+    EndpointAuthInfo: EndpointAuthInfo,
     SourceLocationInfo: SourceLocationInfo,
     SSAIConf: SSAIConf,
     LinearAssemblyProgramInfo: LinearAssemblyProgramInfo,
@@ -6758,7 +7225,9 @@ module.exports = {
     CacheInfoInfo: CacheInfoInfo,
     DescribeStreamPackageLinearAssemblyChannelsResponse: DescribeStreamPackageLinearAssemblyChannelsResponse,
     DeleteStreamPackageHarvestJobRequest: DeleteStreamPackageHarvestJobRequest,
+    NameServer: NameServer,
     ConfigAliasesInfo: ConfigAliasesInfo,
     ManifestInfo: ManifestInfo,
+    DescribeLinearAssemblyCDNDomainWithChannelsResponse: DescribeLinearAssemblyCDNDomainWithChannelsResponse,
 
 }

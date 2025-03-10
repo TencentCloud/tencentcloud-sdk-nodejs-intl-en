@@ -16,12 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const SentimentAnalysis = models.SentimentAnalysis;
 const RiskDetails = models.RiskDetails;
 const TextModerationRequest = models.TextModerationRequest;
 const DetailResults = models.DetailResults;
 const Tag = models.Tag;
 const User = models.User;
 const Device = models.Device;
+const SentimentDetail = models.SentimentDetail;
 const TextModerationResponse = models.TextModerationResponse;
 
 
@@ -52,8 +54,7 @@ class TmsClient extends AbstractClient {
 ### Use limits
 - The submitted texts can not be longer than 10,000 unicode characters.
 - English letters, digits and Chinese characters are supported for moderation.
-- The API request frequency limit: **1,000 times/second**. 
-
+- The API request frequency limit: **1,000 times/second**.
      * @param {TextModerationRequest} req
      * @param {function(string, TextModerationResponse):void} cb
      * @public

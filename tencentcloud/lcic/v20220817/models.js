@@ -2476,6 +2476,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Preview = null;
 
+        /**
+         * Document resolution.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * Minimum resolution of a transcoded document, consistent with the parameters provided when the document is created.Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MinScaleResolution = null;
+
     }
 
     /**
@@ -2504,6 +2516,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Height = 'Height' in params ? params.Height : null;
         this.Cover = 'Cover' in params ? params.Cover : null;
         this.Preview = 'Preview' in params ? params.Preview : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.MinScaleResolution = 'MinScaleResolution' in params ? params.MinScaleResolution : null;
 
     }
 }

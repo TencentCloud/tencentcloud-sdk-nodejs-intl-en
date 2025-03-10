@@ -118,7 +118,7 @@ class GetFaceIdTokenIntlResponse extends  AbstractModel {
 }
 
 /**
- * ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+ * ID cards of Hong Kong (China), Macao (China) and Taiwan (China), and international passport.
  * @class
  */
 class InternationalIDPassport extends  AbstractModel {
@@ -1005,7 +1005,7 @@ class ApplyWebVerificationTokenResponse extends  AbstractModel {
 }
 
 /**
- * Hong Kong ID card.
+ * Hong Kong (China) ID card.
  * @class
  */
 class NormalHKIDCard extends  AbstractModel {
@@ -1450,7 +1450,7 @@ class FileInfo extends  AbstractModel {
 }
 
 /**
- * Hong Kong ID card.
+ * Hong Kong (China) ID card.
  * @class
  */
 class HKIDCard extends  AbstractModel {
@@ -1458,7 +1458,9 @@ class HKIDCard extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Chinese name
+Note: This field may return null, indicating that no valid values can be obtained.
+Example:  SAN, Nan
          * @type {string || null}
          */
         this.CnName = null;
@@ -1823,7 +1825,7 @@ class NormalCardInfo extends  AbstractModel {
         super();
 
         /**
-         * Hong Kong ID Card
+         * Hong Kong (China) ID Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {NormalHKIDCard || null}
          */
@@ -1879,7 +1881,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PhilippinesUMID = null;
 
         /**
-         * ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
+         * ID Cards of Hong Kong (China), Macao (China) and Taiwan (China), and International Passport
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {InternationalIDPassport || null}
          */
@@ -1914,14 +1916,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SingaporeIDCard = null;
 
         /**
-         * Macao ID Card
+         * Macao (China) ID Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MacaoIDCard || null}
          */
         this.MacaoIDCard = null;
 
         /**
-         * Mainland ID Card
+         * Mainland (China) ID Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MainlandIDCard || null}
          */
@@ -1935,14 +1937,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.JapanIDCard = null;
 
         /**
-         * Taiwan ID Card
+         * Taiwan (China) ID Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaiWanIDCard || null}
          */
         this.TaiWanIDCard = null;
 
         /**
-         * exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan.
+         * exit/entry permit (card) for traveling to and from Hong Kong (China), Macao (China), or Taiwan (China).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {HMTPermit || null}
          */
@@ -2617,7 +2619,7 @@ When the value of `IdCardType` is `IndonesiaIDCard`:
 - BerlakuHingga (string): Expiry date.
 - IssuedDate (string): Issue date.
 
-(5) A passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
+(5) A passport issued in Hong Kong (China) /Macao (China) /Taiwan (China) or other countries/regions
 When the value of `IdCardType` is `MLIDPassport`:
 - FullName (string): Full name.
 - Surname (string): Surname.
@@ -2725,7 +2727,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Taiwan ID card.
+ * Taiwan (China) ID card.
  * @class
  */
 class TaiWanIDCard extends  AbstractModel {
@@ -3092,7 +3094,7 @@ class CardInfo extends  AbstractModel {
         super();
 
         /**
-         * Hong Kong ID Card
+         * Hong Kong ID (China) Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {HKIDCard || null}
          */
@@ -3148,7 +3150,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PhilippinesUMID = null;
 
         /**
-         * ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
+         * ID Cards of Hong Kong (China), Macao (China) and Taiwan (China), and International Passport
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {InternationalIDPassport || null}
          */
@@ -3183,14 +3185,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SingaporeIDCard = null;
 
         /**
-         * Macao ID Card
+         * Macao (China) ID Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MacaoIDCard || null}
          */
         this.MacaoIDCard = null;
 
         /**
-         * TaiWan ID Card
+         * TaiWan (China) ID Card
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaiWanIDCard || null}
          */
@@ -3505,7 +3507,7 @@ Example value: 3
 6.PhilippinesTinID: Philippines TinID card
 7.PhilippinesSSSID: Philippines SSSID card
 8.PhilippinesUMID: Philippines UMID card
-9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+9.InternationalIDPassport: ID cards of Hong Kong (China), Macao (China) and Taiwan (China), and international passport.
 10.IndonesiaDrivingLicense:Indonesia driving license
 11.ThailandIDCard: Thailand ID card
 12.ThailandDrivingLicense: Thailand driving license
@@ -3515,8 +3517,8 @@ Example value: 3
 16.JapanIDCard: Japan ID card
 17.JapanDrivingLicense: Japan driving license
 18.PhilippinesIDCard: Philippines ID card
-19.MainlandIDCard: Mainland ID card
-20.MacaoIDCard: Macao ID card
+19.MainlandIDCard: Mainland (China) ID card
+20.MacaoIDCard: Macao (China) ID card
 Example: HKIDCard
          * @type {string || null}
          */
@@ -3612,7 +3614,7 @@ The default value is blink. The different action types passed in this parameter 
 }
 
 /**
- * Mainland ID Card OCR
+ * Mainland (China) ID Card OCR
  * @class
  */
 class MainlandIDCard extends  AbstractModel {
@@ -4370,7 +4372,7 @@ class ApplySdkVerificationTokenResponse extends  AbstractModel {
 }
 
 /**
- * Exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
+ * Exit/entry permit (card) for traveling to and from Hong Kong (China), Macao (China), or Taiwan (China)
  * @class
  */
 class HMTPermit extends  AbstractModel {
@@ -4686,7 +4688,7 @@ SILENT is silent mode.
 }
 
 /**
- * Macao ID Card
+ * Macao (China) IDCard
  * @class
  */
 class MacaoIDCard extends  AbstractModel {

@@ -97,6 +97,158 @@ class UnBindSubDomainResponse extends  AbstractModel {
 }
 
 /**
+ * Upstream details
+ * @class
+ */
+class UpstreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique upstream ID
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+        /**
+         * Upstream name
+         * @type {string || null}
+         */
+        this.UpstreamName = null;
+
+        /**
+         * Upstream description
+         * @type {string || null}
+         */
+        this.UpstreamDescription = null;
+
+        /**
+         * Backend protocol. Valid values: `HTTP`, `HTTPS`
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * Load balancing algorithm. Valid value: `ROUND_ROBIN`
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Unique VPC ID
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Number of retry attempts
+         * @type {number || null}
+         */
+        this.Retries = null;
+
+        /**
+         * Backend nodes
+         * @type {Array.<UpstreamNode> || null}
+         */
+        this.Nodes = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Label
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Health check configuration
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {UpstreamHealthChecker || null}
+         */
+        this.HealthChecker = null;
+
+        /**
+         * Upstream type. Valid values: `IP_PORT`, `K8S`
+         * @type {string || null}
+         */
+        this.UpstreamType = null;
+
+        /**
+         * Configuration of TKE service
+Note: This field may return `NULL`, indicating that no valid value was found.
+         * @type {Array.<K8sService> || null}
+         */
+        this.K8sServices = null;
+
+        /**
+         * The Host header that the gateway forwards to the upstream
+Note: This field may return `NULL`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UpstreamHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
+        this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
+        this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Retries = 'Retries' in params ? params.Retries : null;
+
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new UpstreamNode();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
+        }
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.HealthChecker) {
+            let obj = new UpstreamHealthChecker();
+            obj.deserialize(params.HealthChecker)
+            this.HealthChecker = obj;
+        }
+        this.UpstreamType = 'UpstreamType' in params ? params.UpstreamType : null;
+
+        if (params.K8sServices) {
+            this.K8sServices = new Array();
+            for (let z in params.K8sServices) {
+                let obj = new K8sService();
+                obj.deserialize(params.K8sServices[z]);
+                this.K8sServices.push(obj);
+            }
+        }
+        this.UpstreamHost = 'UpstreamHost' in params ? params.UpstreamHost : null;
+
+    }
+}
+
+/**
  * UpdateApiKey request structure.
  * @class
  */
@@ -5055,17 +5207,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyUsagePlan response structure.
+ * DescribeUpstreamBindApis response structure.
  * @class
  */
-class ModifyUsagePlanResponse extends  AbstractModel {
+class DescribeUpstreamBindApisResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Usage plan details.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {UsagePlanInfo || null}
+         * Query results
+         * @type {DescribeUpstreamBindApis || null}
          */
         this.Result = null;
 
@@ -5086,7 +5237,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
 
         if (params.Result) {
-            let obj = new UsagePlanInfo();
+            let obj = new DescribeUpstreamBindApis();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -5384,100 +5535,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Upstream details
+ * Environment throttling
  * @class
  */
-class UpstreamInfo extends  AbstractModel {
+class EnvironmentStrategy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique upstream ID
+         * Environment name
          * @type {string || null}
          */
-        this.UpstreamId = null;
+        this.EnvironmentName = null;
 
         /**
-         * Upstream name
-         * @type {string || null}
-         */
-        this.UpstreamName = null;
-
-        /**
-         * Upstream description
-         * @type {string || null}
-         */
-        this.UpstreamDescription = null;
-
-        /**
-         * Backend protocol. Valid values: `HTTP`, `HTTPS`
-         * @type {string || null}
-         */
-        this.Scheme = null;
-
-        /**
-         * Load balancing algorithm. Valid value: `ROUND_ROBIN`
-         * @type {string || null}
-         */
-        this.Algorithm = null;
-
-        /**
-         * Unique VPC ID
-         * @type {string || null}
-         */
-        this.UniqVpcId = null;
-
-        /**
-         * Number of retry attempts
+         * Throttling value
          * @type {number || null}
          */
-        this.Retries = null;
-
-        /**
-         * Backend nodes
-         * @type {Array.<UpstreamNode> || null}
-         */
-        this.Nodes = null;
-
-        /**
-         * Creation time.
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * Label
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Health check configuration
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {UpstreamHealthChecker || null}
-         */
-        this.HealthChecker = null;
-
-        /**
-         * Upstream type. Valid values: `IP_PORT`, `K8S`
-         * @type {string || null}
-         */
-        this.UpstreamType = null;
-
-        /**
-         * Configuration of TKE service
-Note: This field may return `NULL`, indicating that no valid value was found.
-         * @type {Array.<K8sService> || null}
-         */
-        this.K8sServices = null;
-
-        /**
-         * The Host header that the gateway forwards to the upstream
-Note: This field may return `NULL`, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.UpstreamHost = null;
+        this.Quota = null;
 
     }
 
@@ -5488,49 +5563,8 @@ Note: This field may return `NULL`, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
-        this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
-        this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
-        this.Scheme = 'Scheme' in params ? params.Scheme : null;
-        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.Retries = 'Retries' in params ? params.Retries : null;
-
-        if (params.Nodes) {
-            this.Nodes = new Array();
-            for (let z in params.Nodes) {
-                let obj = new UpstreamNode();
-                obj.deserialize(params.Nodes[z]);
-                this.Nodes.push(obj);
-            }
-        }
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-        if (params.HealthChecker) {
-            let obj = new UpstreamHealthChecker();
-            obj.deserialize(params.HealthChecker)
-            this.HealthChecker = obj;
-        }
-        this.UpstreamType = 'UpstreamType' in params ? params.UpstreamType : null;
-
-        if (params.K8sServices) {
-            this.K8sServices = new Array();
-            for (let z in params.K8sServices) {
-                let obj = new K8sService();
-                obj.deserialize(params.K8sServices[z]);
-                this.K8sServices.push(obj);
-            }
-        }
-        this.UpstreamHost = 'UpstreamHost' in params ? params.UpstreamHost : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.Quota = 'Quota' in params ? params.Quota : null;
 
     }
 }
@@ -8710,18 +8744,12 @@ class DescribeServiceEnvironmentStrategyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUpstreamBindApis response structure.
+ * DescribeInstancesNetworkConfig response structure.
  * @class
  */
-class DescribeUpstreamBindApisResponse extends  AbstractModel {
+class DescribeInstancesNetworkConfigResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Query results
-         * @type {DescribeUpstreamBindApis || null}
-         */
-        this.Result = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8737,12 +8765,6 @@ class DescribeUpstreamBindApisResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.Result) {
-            let obj = new DescribeUpstreamBindApis();
-            obj.deserialize(params.Result)
-            this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -13304,24 +13326,26 @@ class DescribeApiForApiAppResponse extends  AbstractModel {
 }
 
 /**
- * Environment throttling
+ * DescribeInstancesNetworkConfig request structure.
  * @class
  */
-class EnvironmentStrategy extends  AbstractModel {
+class DescribeInstancesNetworkConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment name
-         * @type {string || null}
-         */
-        this.EnvironmentName = null;
+         * Number of returns, with a default value of 20 and a maximum value of 100.
 
-        /**
-         * Throttling value
          * @type {number || null}
          */
-        this.Quota = null;
+        this.Limit = null;
+
+        /**
+         * Offset, which is 0 by default.
+
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -13332,8 +13356,8 @@ class EnvironmentStrategy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
-        this.Quota = 'Quota' in params ? params.Quota : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -14604,6 +14628,47 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyUsagePlan response structure.
+ * @class
+ */
+class ModifyUsagePlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Usage plan details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {UsagePlanInfo || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new UsagePlanInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Basic information of API document
  * @class
  */
@@ -15487,6 +15552,7 @@ class CreateApiKeyRequest extends  AbstractModel {
 module.exports = {
     IPStrategyApiStatus: IPStrategyApiStatus,
     UnBindSubDomainResponse: UnBindSubDomainResponse,
+    UpstreamInfo: UpstreamInfo,
     UpdateApiKeyRequest: UpdateApiKeyRequest,
     Service: Service,
     DeleteAPIDocRequest: DeleteAPIDocRequest,
@@ -15571,7 +15637,7 @@ module.exports = {
     DescribeUpstreamInfo: DescribeUpstreamInfo,
     ModifyApiEnvironmentStrategyRequest: ModifyApiEnvironmentStrategyRequest,
     ServiceReleaseHistory: ServiceReleaseHistory,
-    ModifyUsagePlanResponse: ModifyUsagePlanResponse,
+    DescribeUpstreamBindApisResponse: DescribeUpstreamBindApisResponse,
     IPStrategiesStatus: IPStrategiesStatus,
     CreateUsagePlanResponse: CreateUsagePlanResponse,
     ReqParameter: ReqParameter,
@@ -15579,7 +15645,7 @@ module.exports = {
     Base64EncodedTriggerRule: Base64EncodedTriggerRule,
     RequestConfig: RequestConfig,
     DeleteApiKeyResponse: DeleteApiKeyResponse,
-    UpstreamInfo: UpstreamInfo,
+    EnvironmentStrategy: EnvironmentStrategy,
     UsagePlan: UsagePlan,
     DescribeServiceReleaseVersionRequest: DescribeServiceReleaseVersionRequest,
     DescribeUsagePlanSecretIdsRequest: DescribeUsagePlanSecretIdsRequest,
@@ -15627,7 +15693,7 @@ module.exports = {
     ApiIdStatus: ApiIdStatus,
     CreateApiRequest: CreateApiRequest,
     DescribeServiceEnvironmentStrategyRequest: DescribeServiceEnvironmentStrategyRequest,
-    DescribeUpstreamBindApisResponse: DescribeUpstreamBindApisResponse,
+    DescribeInstancesNetworkConfigResponse: DescribeInstancesNetworkConfigResponse,
     ReleaseServiceRequest: ReleaseServiceRequest,
     DeleteServiceResponse: DeleteServiceResponse,
     DescribeServiceEnvironmentReleaseHistoryResponse: DescribeServiceEnvironmentReleaseHistoryResponse,
@@ -15719,7 +15785,7 @@ module.exports = {
     ModifyUpstreamResponse: ModifyUpstreamResponse,
     DescribeIPStrategyRequest: DescribeIPStrategyRequest,
     DescribeApiForApiAppResponse: DescribeApiForApiAppResponse,
-    EnvironmentStrategy: EnvironmentStrategy,
+    DescribeInstancesNetworkConfigRequest: DescribeInstancesNetworkConfigRequest,
     DescribeUsagePlanEnvironmentsRequest: DescribeUsagePlanEnvironmentsRequest,
     ImportOpenApiRequest: ImportOpenApiRequest,
     DescribeServiceReleaseVersionResponse: DescribeServiceReleaseVersionResponse,
@@ -15740,6 +15806,7 @@ module.exports = {
     BuildAPIDocRequest: BuildAPIDocRequest,
     DetachPluginResponse: DetachPluginResponse,
     ApiKeysStatus: ApiKeysStatus,
+    ModifyUsagePlanResponse: ModifyUsagePlanResponse,
     APIDoc: APIDoc,
     DescribeServiceUsagePlanResponse: DescribeServiceUsagePlanResponse,
     CreateApiAppResponse: CreateApiAppResponse,

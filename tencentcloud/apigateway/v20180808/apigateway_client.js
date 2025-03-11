@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const IPStrategyApiStatus = models.IPStrategyApiStatus;
 const UnBindSubDomainResponse = models.UnBindSubDomainResponse;
+const UpstreamInfo = models.UpstreamInfo;
 const UpdateApiKeyRequest = models.UpdateApiKeyRequest;
 const Service = models.Service;
 const DeleteAPIDocRequest = models.DeleteAPIDocRequest;
@@ -102,7 +103,7 @@ const UnBindEnvironmentRequest = models.UnBindEnvironmentRequest;
 const DescribeUpstreamInfo = models.DescribeUpstreamInfo;
 const ModifyApiEnvironmentStrategyRequest = models.ModifyApiEnvironmentStrategyRequest;
 const ServiceReleaseHistory = models.ServiceReleaseHistory;
-const ModifyUsagePlanResponse = models.ModifyUsagePlanResponse;
+const DescribeUpstreamBindApisResponse = models.DescribeUpstreamBindApisResponse;
 const IPStrategiesStatus = models.IPStrategiesStatus;
 const CreateUsagePlanResponse = models.CreateUsagePlanResponse;
 const ReqParameter = models.ReqParameter;
@@ -110,7 +111,7 @@ const DeletePluginRequest = models.DeletePluginRequest;
 const Base64EncodedTriggerRule = models.Base64EncodedTriggerRule;
 const RequestConfig = models.RequestConfig;
 const DeleteApiKeyResponse = models.DeleteApiKeyResponse;
-const UpstreamInfo = models.UpstreamInfo;
+const EnvironmentStrategy = models.EnvironmentStrategy;
 const UsagePlan = models.UsagePlan;
 const DescribeServiceReleaseVersionRequest = models.DescribeServiceReleaseVersionRequest;
 const DescribeUsagePlanSecretIdsRequest = models.DescribeUsagePlanSecretIdsRequest;
@@ -158,7 +159,7 @@ const DescribeAllPluginApisRequest = models.DescribeAllPluginApisRequest;
 const ApiIdStatus = models.ApiIdStatus;
 const CreateApiRequest = models.CreateApiRequest;
 const DescribeServiceEnvironmentStrategyRequest = models.DescribeServiceEnvironmentStrategyRequest;
-const DescribeUpstreamBindApisResponse = models.DescribeUpstreamBindApisResponse;
+const DescribeInstancesNetworkConfigResponse = models.DescribeInstancesNetworkConfigResponse;
 const ReleaseServiceRequest = models.ReleaseServiceRequest;
 const DeleteServiceResponse = models.DeleteServiceResponse;
 const DescribeServiceEnvironmentReleaseHistoryResponse = models.DescribeServiceEnvironmentReleaseHistoryResponse;
@@ -250,7 +251,7 @@ const BindEnvironmentRequest = models.BindEnvironmentRequest;
 const ModifyUpstreamResponse = models.ModifyUpstreamResponse;
 const DescribeIPStrategyRequest = models.DescribeIPStrategyRequest;
 const DescribeApiForApiAppResponse = models.DescribeApiForApiAppResponse;
-const EnvironmentStrategy = models.EnvironmentStrategy;
+const DescribeInstancesNetworkConfigRequest = models.DescribeInstancesNetworkConfigRequest;
 const DescribeUsagePlanEnvironmentsRequest = models.DescribeUsagePlanEnvironmentsRequest;
 const ImportOpenApiRequest = models.ImportOpenApiRequest;
 const DescribeServiceReleaseVersionResponse = models.DescribeServiceReleaseVersionResponse;
@@ -271,6 +272,7 @@ const DescribeLogSearchRequest = models.DescribeLogSearchRequest;
 const BuildAPIDocRequest = models.BuildAPIDocRequest;
 const DetachPluginResponse = models.DetachPluginResponse;
 const ApiKeysStatus = models.ApiKeysStatus;
+const ModifyUsagePlanResponse = models.ModifyUsagePlanResponse;
 const APIDoc = models.APIDoc;
 const DescribeServiceUsagePlanResponse = models.DescribeServiceUsagePlanResponse;
 const CreateApiAppResponse = models.CreateApiAppResponse;
@@ -948,6 +950,17 @@ To make authentication and throttling for a service take effect, you need to bin
     DescribeApiUsagePlan(req, cb) {
         let resp = new DescribeApiUsagePlanResponse();
         this.request("DescribeApiUsagePlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the network configuration list of a dedicated instance.
+     * @param {DescribeInstancesNetworkConfigRequest} req
+     * @param {function(string, DescribeInstancesNetworkConfigResponse):void} cb
+     * @public
+     */
+    DescribeInstancesNetworkConfig(req, cb) {
+        let resp = new DescribeInstancesNetworkConfigResponse();
+        this.request("DescribeInstancesNetworkConfig", req, resp, cb);
     }
 
     /**

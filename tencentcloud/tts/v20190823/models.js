@@ -222,6 +222,24 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
          */
         this.SegmentRate = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EmotionCategory = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.EmotionIntensity = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FastVoiceType = null;
+
     }
 
     /**
@@ -243,6 +261,9 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
         this.Codec = 'Codec' in params ? params.Codec : null;
         this.EnableSubtitle = 'EnableSubtitle' in params ? params.EnableSubtitle : null;
         this.SegmentRate = 'SegmentRate' in params ? params.SegmentRate : null;
+        this.EmotionCategory = 'EmotionCategory' in params ? params.EmotionCategory : null;
+        this.EmotionIntensity = 'EmotionIntensity' in params ? params.EmotionIntensity : null;
+        this.FastVoiceType = 'FastVoiceType' in params ? params.FastVoiceType : null;
 
     }
 }

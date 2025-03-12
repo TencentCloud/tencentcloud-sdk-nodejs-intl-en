@@ -17943,6 +17943,12 @@ Whether the Anycast EIP can be bound to CLB instances.
         this.DedicatedClusterId = null;
 
         /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsDedicatedAddressPool = null;
+
+        /**
          * Network egress. It defaults to `center_egress1`.
          * @type {string || null}
          */
@@ -17995,6 +18001,7 @@ Whether the Anycast EIP can be bound to CLB instances.
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.AddressName = 'AddressName' in params ? params.AddressName : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
+        this.IsDedicatedAddressPool = 'IsDedicatedAddressPool' in params ? params.IsDedicatedAddressPool : null;
         this.Egress = 'Egress' in params ? params.Egress : null;
         this.AntiDDoSPackageId = 'AntiDDoSPackageId' in params ? params.AntiDDoSPackageId : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;

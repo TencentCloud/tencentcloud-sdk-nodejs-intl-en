@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ChargePrepaid = models.ChargePrepaid;
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
@@ -107,6 +108,7 @@ const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecover
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
 const DescribeReservedInstancesConfigInfosResponse = models.DescribeReservedInstancesConfigInfosResponse;
+const DescribeReservedInstancesResponse = models.DescribeReservedInstancesResponse;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const InquirePricePurchaseReservedInstancesOfferingRequest = models.InquirePricePurchaseReservedInstancesOfferingRequest;
 const DataDisk = models.DataDisk;
@@ -160,7 +162,7 @@ const ModifyChcAttributeResponse = models.ModifyChcAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
-const ChargePrepaid = models.ChargePrepaid;
+const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -178,6 +180,7 @@ const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const SharePermission = models.SharePermission;
+const ReservedInstances = models.ReservedInstances;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
@@ -741,7 +744,18 @@ When a template is created, it defaults to Version 1. You can use `CreateLaunchT
     }
 
     /**
-     * This API is used to describe reserved instance (RI) offerings. Currently, RIs are only offered to beta users.
+     * This API is used to list the reserved instances purchased by the user.
+     * @param {DescribeReservedInstancesRequest} req
+     * @param {function(string, DescribeReservedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReservedInstances(req, cb) {
+        let resp = new DescribeReservedInstancesResponse();
+        this.request("DescribeReservedInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to describe reserved instance (RI) offerings.
      * @param {DescribeReservedInstancesConfigInfosRequest} req
      * @param {function(string, DescribeReservedInstancesConfigInfosResponse):void} cb
      * @public

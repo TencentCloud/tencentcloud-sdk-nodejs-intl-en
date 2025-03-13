@@ -109,8 +109,9 @@ When the public outbound network bandwidth is 0 Mbps, assigning a public IP is n
 
         /**
          * Instance billing mode. Valid values:
-<br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-<br><li>SPOTPAID: spot instance
+<li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
+<li>SPOTPAID: spot instance</li>
+<li> CDCPAID: dedicated cluster</li>
          * @type {string || null}
          */
         this.InstanceChargeType = null;

@@ -3008,7 +3008,7 @@ class BillDetail extends  AbstractModel {
         this.BusinessCodeName = null;
 
         /**
-         * Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM – Standard S1.
+         * Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM Standard S1.
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -3209,6 +3209,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ReserveDetail = null;
 
+        /**
+         * the discount object for the current consumption item, such as official website discount, user discount, and event discount.
+         * @type {string || null}
+         */
+        this.DiscountObject = null;
+
+        /**
+         * the discount type for the current consumption item, such as discount and contract price.
+
+         * @type {string || null}
+         */
+        this.DiscountType = null;
+
+        /**
+         * supplementary description of the discount type, such as 0.2.
+         * @type {string || null}
+         */
+        this.DiscountContent = null;
+
     }
 
     /**
@@ -3273,6 +3292,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RegionType = 'RegionType' in params ? params.RegionType : null;
         this.RegionTypeName = 'RegionTypeName' in params ? params.RegionTypeName : null;
         this.ReserveDetail = 'ReserveDetail' in params ? params.ReserveDetail : null;
+        this.DiscountObject = 'DiscountObject' in params ? params.DiscountObject : null;
+        this.DiscountType = 'DiscountType' in params ? params.DiscountType : null;
+        this.DiscountContent = 'DiscountContent' in params ? params.DiscountContent : null;
 
     }
 }
@@ -6830,7 +6852,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Quantity, maximum is 100
+         * Quantity, maximum is 300
          * @type {number || null}
          */
         this.Limit = null;

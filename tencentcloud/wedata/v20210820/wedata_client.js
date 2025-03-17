@@ -22,7 +22,7 @@ const AlarmInfo = models.AlarmInfo;
 const DescribeBatchOperateTaskPage = models.DescribeBatchOperateTaskPage;
 const DescribeIntegrationStatisticsResponse = models.DescribeIntegrationStatisticsResponse;
 const UnlockIntegrationTaskResponse = models.UnlockIntegrationTaskResponse;
-const SubmitTaskTestRunResponse = models.SubmitTaskTestRunResponse;
+const DescribeReportTaskListRequest = models.DescribeReportTaskListRequest;
 const DescribeStreamTaskLogListRequest = models.DescribeStreamTaskLogListRequest;
 const DescribeIntegrationNodeResponse = models.DescribeIntegrationNodeResponse;
 const LogContentInfo = models.LogContentInfo;
@@ -55,6 +55,7 @@ const DataSourceInfoPage = models.DataSourceInfoPage;
 const OpsTaskInfoPage = models.OpsTaskInfoPage;
 const DescribeRuleGroupExecResultsByPageRequest = models.DescribeRuleGroupExecResultsByPageRequest;
 const EventCaseAuditLogOptDto = models.EventCaseAuditLogOptDto;
+const DescribeTableLineageRequest = models.DescribeTableLineageRequest;
 const KillOpsMakePlanInstancesRequest = models.KillOpsMakePlanInstancesRequest;
 const DescribeEventCasesRequest = models.DescribeEventCasesRequest;
 const BatchResumeIntegrationTasksResponse = models.BatchResumeIntegrationTasksResponse;
@@ -156,7 +157,7 @@ const IntegrationNodeInfo = models.IntegrationNodeInfo;
 const DescribeRuleGroupResponse = models.DescribeRuleGroupResponse;
 const DeleteDataSourcesResponse = models.DeleteDataSourcesResponse;
 const DescribeBatchOperateTaskDTO = models.DescribeBatchOperateTaskDTO;
-const ModifyTaskLinksRequest = models.ModifyTaskLinksRequest;
+const DescribeReportTaskListResponse = models.DescribeReportTaskListResponse;
 const DescribeOpsMakePlansResponse = models.DescribeOpsMakePlansResponse;
 const EventCaseConsumeLogOptDtoCollection = models.EventCaseConsumeLogOptDtoCollection;
 const DeleteFileRequest = models.DeleteFileRequest;
@@ -209,6 +210,7 @@ const DescribeIntegrationStatisticsTaskStatusRequest = models.DescribeIntegratio
 const GetFileInfoResponse = models.GetFileInfoResponse;
 const BaseUser = models.BaseUser;
 const InstanceCondition = models.InstanceCondition;
+const ReportTaskDetail = models.ReportTaskDetail;
 const FreezeOpsTasksResponse = models.FreezeOpsTasksResponse;
 const IntegrationNodeMapping = models.IntegrationNodeMapping;
 const ColumnAggregationLineage = models.ColumnAggregationLineage;
@@ -222,6 +224,7 @@ const DeleteResourceResponse = models.DeleteResourceResponse;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeInstanceLogFileResponse = models.DescribeInstanceLogFileResponse;
 const PairDto = models.PairDto;
+const ModifyTaskLinksRequest = models.ModifyTaskLinksRequest;
 const DeleteTaskDsResponse = models.DeleteTaskDsResponse;
 const DescribeAllByFolderNewResponse = models.DescribeAllByFolderNewResponse;
 const DescribeDsParentFolderTreeRequest = models.DescribeDsParentFolderTreeRequest;
@@ -261,6 +264,7 @@ const DimensionScore = models.DimensionScore;
 const SubscribeWebHook = models.SubscribeWebHook;
 const DescribeTableLineageInfoRequest = models.DescribeTableLineageInfoRequest;
 const CreateTaskFolderRequest = models.CreateTaskFolderRequest;
+const EngineTaskInfo = models.EngineTaskInfo;
 const IntegrationNodeDetail = models.IntegrationNodeDetail;
 const DescribeEventResponse = models.DescribeEventResponse;
 const DescribeOpsMakePlanInstancesRequest = models.DescribeOpsMakePlanInstancesRequest;
@@ -303,7 +307,7 @@ const OperationOpsDto = models.OperationOpsDto;
 const DeleteTaskAlarmRegularResponse = models.DeleteTaskAlarmRegularResponse;
 const DeleteWorkflowByIdRequest = models.DeleteWorkflowByIdRequest;
 const ProjectBaseInfoOpsRequest = models.ProjectBaseInfoOpsRequest;
-const DescribeTableLineageRequest = models.DescribeTableLineageRequest;
+const DeleteRuleResponse = models.DeleteRuleResponse;
 const MakePlanTaskOpsDtoCollection = models.MakePlanTaskOpsDtoCollection;
 const SimpleColumnInfo = models.SimpleColumnInfo;
 const CreateWorkflowDsRequest = models.CreateWorkflowDsRequest;
@@ -327,12 +331,12 @@ const DescribeQualityScoreResponse = models.DescribeQualityScoreResponse;
 const DescribeRulesByPageResponse = models.DescribeRulesByPageResponse;
 const DescribeDsParentFolderTreeResponse = models.DescribeDsParentFolderTreeResponse;
 const TopTableStatItem = models.TopTableStatItem;
-const DeleteRuleResponse = models.DeleteRuleResponse;
 const DescribeEventConsumeTasksRequest = models.DescribeEventConsumeTasksRequest;
 const DescribeDataSourceInfoListResponse = models.DescribeDataSourceInfoListResponse;
 const InstanceStatisticInfo = models.InstanceStatisticInfo;
 const CommitRuleGroupTaskRequest = models.CommitRuleGroupTaskRequest;
 const CheckIntegrationNodeNameExistsRequest = models.CheckIntegrationNodeNameExistsRequest;
+const DescribeReportTaskDetailRequest = models.DescribeReportTaskDetailRequest;
 const GetOfflineInstanceListResponse = models.GetOfflineInstanceListResponse;
 const DescribeOpsMakePlansRequest = models.DescribeOpsMakePlansRequest;
 const CreateOpsMakePlanRequest = models.CreateOpsMakePlanRequest;
@@ -366,6 +370,7 @@ const DescribeIntegrationStatisticsTaskStatusTrendRequest = models.DescribeInteg
 const DescribeTableMetaRequest = models.DescribeTableMetaRequest;
 const DescribeWorkflowInfoByIdResponse = models.DescribeWorkflowInfoByIdResponse;
 const OpsTaskCanvasInfoList = models.OpsTaskCanvasInfoList;
+const SubmitTaskTestRunResponse = models.SubmitTaskTestRunResponse;
 const ModifyDimensionWeightResponse = models.ModifyDimensionWeightResponse;
 const ModifyTaskAlarmRegularResponse = models.ModifyTaskAlarmRegularResponse;
 const InstanceSearchCondition = models.InstanceSearchCondition;
@@ -427,6 +432,7 @@ const CreateMakeDatetimeInfo = models.CreateMakeDatetimeInfo;
 const InstanceApiOpsRequest = models.InstanceApiOpsRequest;
 const SubmitSqlTaskRequest = models.SubmitSqlTaskRequest;
 const DescribeTaskLockStatusResponse = models.DescribeTaskLockStatusResponse;
+const ReportTaskListInfo = models.ReportTaskListInfo;
 const RemoveWorkflowDsRequest = models.RemoveWorkflowDsRequest;
 const BatchKillIntegrationTaskInstancesRequest = models.BatchKillIntegrationTaskInstancesRequest;
 const DeleteTaskDsRequest = models.DeleteTaskDsRequest;
@@ -557,6 +563,7 @@ const BatchOperationOpsDto = models.BatchOperationOpsDto;
 const DescribeEventCasesResponse = models.DescribeEventCasesResponse;
 const DescribeTableSchemaInfoResponse = models.DescribeTableSchemaInfoResponse;
 const DiagnoseProResponse = models.DiagnoseProResponse;
+const DescribeReportTaskDetailResponse = models.DescribeReportTaskDetailResponse;
 const UpdateWorkflowOwnerResponse = models.UpdateWorkflowOwnerResponse;
 const SetTaskAlarmNewRequest = models.SetTaskAlarmNewRequest;
 const DescribeInstanceListResponse = models.DescribeInstanceListResponse;
@@ -640,6 +647,7 @@ const DescribeIntegrationStatisticsTaskStatusResponse = models.DescribeIntegrati
 const DescribeOpsMakePlanInstancesResponse = models.DescribeOpsMakePlanInstancesResponse;
 const DescribeDatabaseInfoListRequest = models.DescribeDatabaseInfoListRequest;
 const DescribeIntegrationTaskResponse = models.DescribeIntegrationTaskResponse;
+const TaskInfoVo = models.TaskInfoVo;
 const DescribeQualityScoreTrendResponse = models.DescribeQualityScoreTrendResponse;
 const RuleDimStat = models.RuleDimStat;
 const CreateHiveTableByDDLRequest = models.CreateHiveTableByDDLRequest;
@@ -1198,14 +1206,14 @@ Register Event Listener
     }
 
     /**
-     * Preemptive locking of integration tasks
-     * @param {RobAndLockIntegrationTaskRequest} req
-     * @param {function(string, RobAndLockIntegrationTaskResponse):void} cb
+     * This API is used to query task details for reports.
+     * @param {DescribeReportTaskDetailRequest} req
+     * @param {function(string, DescribeReportTaskDetailResponse):void} cb
      * @public
      */
-    RobAndLockIntegrationTask(req, cb) {
-        let resp = new RobAndLockIntegrationTaskResponse();
-        this.request("RobAndLockIntegrationTask", req, resp, cb);
+    DescribeReportTaskDetail(req, cb) {
+        let resp = new DescribeReportTaskDetailResponse();
+        this.request("DescribeReportTaskDetail", req, resp, cb);
     }
 
     /**
@@ -1437,6 +1445,17 @@ Register Event Listener
     DescribeRuleGroupTable(req, cb) {
         let resp = new DescribeRuleGroupTableResponse();
         this.request("DescribeRuleGroupTable", req, resp, cb);
+    }
+
+    /**
+     * Preemptive locking of integration tasks
+     * @param {RobAndLockIntegrationTaskRequest} req
+     * @param {function(string, RobAndLockIntegrationTaskResponse):void} cb
+     * @public
+     */
+    RobAndLockIntegrationTask(req, cb) {
+        let resp = new RobAndLockIntegrationTaskResponse();
+        this.request("RobAndLockIntegrationTask", req, resp, cb);
     }
 
     /**
@@ -2476,6 +2495,17 @@ Modify Task Script
     LockIntegrationTask(req, cb) {
         let resp = new LockIntegrationTaskResponse();
         this.request("LockIntegrationTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the task submission list.
+     * @param {DescribeReportTaskListRequest} req
+     * @param {function(string, DescribeReportTaskListResponse):void} cb
+     * @public
+     */
+    DescribeReportTaskList(req, cb) {
+        let resp = new DescribeReportTaskListResponse();
+        this.request("DescribeReportTaskList", req, resp, cb);
     }
 
     /**

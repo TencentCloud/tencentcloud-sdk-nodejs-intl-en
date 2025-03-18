@@ -1,4 +1,5 @@
 const { EventEmitter } = require('events')
+const { createInterface } = require('readline')
 
 /**
  * @interface EventSourceMessage
@@ -18,6 +19,10 @@ class SSEResponseModel {
    */
   constructor(stream) {
     this.stream = stream
+    this.readline = createInterface({
+      input: stream,
+      crlfDelay: Infinity
+    })
     this.eventSource = new SSEEventEmitter()
     this.init()
   }
@@ -26,17 +31,23 @@ class SSEResponseModel {
    * @inner
    */
   init() {
-    const { stream, eventSource } = this
-    stream.on("data", (chunk) => {
-      if (chunk !== null) {
-        const messages = chunk.toString().split("\n\n")
-        for (let i = 0; i < messages.length; i++) {
-          if (messages[i].length > 0) {
-            eventSource.emit("message", this.parseSSEMessage(messages[i]))
-          }
-        }
+    const { stream, readline, eventSource } = this
+
+    let lines = []
+    readline.on("line", (line) => {
+      if (line) {
+        lines.push(line)
+        return
+      }
+
+      eventSource.emit("message", this.parseSSEMessage(lines.splice(0)));
+    })
+    readline.on("close", () => {
+      if (lines.length > 0) {
+        eventSource.emit("message", this.parseSSEMessage(lines.splice(0)));
       }
     })
+
     stream.on("close", () => {
       eventSource.emit("close")
     })
@@ -47,9 +58,9 @@ class SSEResponseModel {
 
   /**
    * @inner
-   * @param {string} chunk
+   * @param {string[]} lines
    */
-  parseSSEMessage(chunk) {
+  parseSSEMessage(lines) {
     /**
      * @type {EventSourceMessage}
      */
@@ -60,7 +71,6 @@ class SSEResponseModel {
       retry: undefined,
     }
 
-    const lines = chunk.split("\n")
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
       // line is of format "<field>:<value>" or "<field>: <value>"
@@ -138,15 +148,18 @@ class SSEResponseModel {
    * @returns {AsyncIterableIterator<EventSourceMessage>}
    */
   async *[Symbol.asyncIterator]() {
-    for await (const chunk of this.stream) {
-      if (chunk !== null) {
-        const messages = chunk.toString().split("\n\n")
-        for (let i = 0; i < messages.length; i++) {
-          if (messages[i].length > 0) {
-            yield this.parseSSEMessage(messages[i])
-          }
-        }
+    let lines = []
+    for await (const line of this.readline) {
+      if (line) {
+        lines.push(line)
+        continue
       }
+
+      yield this.parseSSEMessage(lines.splice(0))
+    }
+
+    if (lines.length > 0) {
+      yield this.parseSSEMessage(lines.splice(0))
     }
   }
 }

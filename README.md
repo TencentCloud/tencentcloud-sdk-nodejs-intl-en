@@ -63,3 +63,6 @@ If there is a proxy in your environment, you need to set the system environment 
 
 # Legacy SDK
 We recommend using the new version of the SDK for NODE.js. If you have to use a legacy SDK, please go to the [GitHub repository](https://github.com/CFETeam/qcloudapi-sdk) to download it.
+
+# Compliance Notice
+Please prioritize using the ​default domain names configured in the SDK for each product. If using other domains, note that ​overseas domains may pose ​data compliance risks.

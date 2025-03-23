@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const InvoiceItem = models.InvoiceItem;
 const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
+const RecognizeBrazilIDCardOCRRequest = models.RecognizeBrazilIDCardOCRRequest;
 const RecognizePhilippinesDrivingLicenseOCRRequest = models.RecognizePhilippinesDrivingLicenseOCRRequest;
 const WordItem = models.WordItem;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
@@ -81,6 +82,7 @@ const RecognizeSingaporeIDCardOCRRequest = models.RecognizeSingaporeIDCardOCRReq
 const TaxiTicket = models.TaxiTicket;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
+const RecognizeBrazilIDCardOCRResponse = models.RecognizeBrazilIDCardOCRResponse;
 const VatElectronicInfo = models.VatElectronicInfo;
 const IDCardOCRRequest = models.IDCardOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
@@ -456,6 +458,17 @@ The API request rate is limited to 20 requests/sec by default.
     RecognizePhilippinesVoteIDOCR(req, cb) {
         let resp = new RecognizePhilippinesVoteIDOCRResponse();
         this.request("RecognizePhilippinesVoteIDOCR", req, resp, cb);
+    }
+
+    /**
+     * This interface supports identification of the front and back of Brazilian ID license. The identification fields include name, driver's license category, number, validity period, etc.
+     * @param {RecognizeBrazilIDCardOCRRequest} req
+     * @param {function(string, RecognizeBrazilIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeBrazilIDCardOCR(req, cb) {
+        let resp = new RecognizeBrazilIDCardOCRResponse();
+        this.request("RecognizeBrazilIDCardOCR", req, resp, cb);
     }
 
     /**

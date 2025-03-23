@@ -1708,6 +1708,56 @@ class QUICParameters extends  AbstractModel {
 }
 
 /**
+ * Managed rule group meta information.
+ * @class
+ */
+class ManagedRuleGroupMeta extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ManagedRuleGroup detailed information, output parameter only.
+         * @type {string || null}
+         */
+        this.GroupDetail = null;
+
+        /**
+         * ManagedRuleGroup name, output parameter only.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * All sub-rules information under current ManagedRuleGroup, output parameter only.
+         * @type {Array.<ManagedRuleDetail> || null}
+         */
+        this.RuleDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupDetail = 'GroupDetail' in params ? params.GroupDetail : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+        if (params.RuleDetails) {
+            this.RuleDetails = new Array();
+            for (let z in params.RuleDetails) {
+                let obj = new ManagedRuleDetail();
+                obj.deserialize(params.RuleDetails[z]);
+                this.RuleDetails.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Rate limiting rules
  * @class
  */
@@ -5110,6 +5160,71 @@ class StatusCodeCacheParam extends  AbstractModel {
 }
 
 /**
+ * Action for security operation.
+ * @class
+ */
+class SecurityAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specific action name for security operation. Values:
+<li>`Deny`: block</li> <li>`Monitor`: monitor</li> <li>`ReturnCustomPage`: block with customized page</li> <li>`Redirect`: Redirect to URL</li> <li>`BlockIP`: IP block</li> <li>`JSChallenge`: javaScript challenge</li> <li>`ManagedChallenge`: managed challenge</li> <li>`Disabled`: disabled</li> <li>`Allow`: allow</li>.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Additional parameter when Name is BlockIP.
+         * @type {BlockIPActionParameters || null}
+         */
+        this.BlockIPActionParameters = null;
+
+        /**
+         * Additional parameter when Name is ReturnCustomPage.
+         * @type {ReturnCustomPageActionParameters || null}
+         */
+        this.ReturnCustomPageActionParameters = null;
+
+        /**
+         * Additional parameter when Name is Redirect.
+         * @type {RedirectActionParameters || null}
+         */
+        this.RedirectActionParameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.BlockIPActionParameters) {
+            let obj = new BlockIPActionParameters();
+            obj.deserialize(params.BlockIPActionParameters)
+            this.BlockIPActionParameters = obj;
+        }
+
+        if (params.ReturnCustomPageActionParameters) {
+            let obj = new ReturnCustomPageActionParameters();
+            obj.deserialize(params.ReturnCustomPageActionParameters)
+            this.ReturnCustomPageActionParameters = obj;
+        }
+
+        if (params.RedirectActionParameters) {
+            let obj = new RedirectActionParameters();
+            obj.deserialize(params.RedirectActionParameters)
+            this.RedirectActionParameters = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyZoneSetting request structure.
  * @class
  */
@@ -5404,6 +5519,72 @@ It is disabled if this parameter is not specified.
             obj.deserialize(params.JITVideoProcess)
             this.JITVideoProcess = obj;
         }
+
+    }
+}
+
+/**
+ * Length limit detection rule details configuration.
+ * @class
+ */
+class DetectLengthLimitRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule Id, output parameter only.
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Rule name, output parameter only.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Rule description, output parameter only.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Rule configuration conditions, output parameter only.
+         * @type {Array.<DetectLengthLimitCondition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * Handling method. Values:.
+<li>`skip`: when request body data exceeds the detection depth set by `body_depth` in `Conditions` output parameters, skip all request body content detection.</li>.
+<li>`scan`: detect at the detection depth set by `body_depth` in the `Conditions` output parameters only. Truncate the excess part of the request body content directly, the excess part of the request body will not go through security detection.</li> Output paramter only.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new DetectLengthLimitCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+        this.Action = 'Action' in params ? params.Action : null;
 
     }
 }
@@ -5964,7 +6145,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Security configuration
+ * Web security configuration.
  * @class
  */
 class SecurityConfig extends  AbstractModel {
@@ -6037,6 +6218,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.SlowPostConfig = null;
 
+        /**
+         * Detect the length limit configuration, output parameter only.
+Note: This field may return null, which indicates a failure to obtain a valid value.
+         * @type {DetectLengthLimitConfig || null}
+         */
+        this.DetectLengthLimitConfig = null;
+
     }
 
     /**
@@ -6105,6 +6293,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             let obj = new SlowPostConfig();
             obj.deserialize(params.SlowPostConfig)
             this.SlowPostConfig = obj;
+        }
+
+        if (params.DetectLengthLimitConfig) {
+            let obj = new DetectLengthLimitConfig();
+            obj.deserialize(params.DetectLengthLimitConfig)
+            this.DetectLengthLimitConfig = obj;
         }
 
     }
@@ -8286,6 +8480,62 @@ class DescribePrefetchTasksResponse extends  AbstractModel {
 }
 
 /**
+ * Managed rule detail.
+ * @class
+ */
+class ManagedRuleDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Managed rule Id.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Protection level of managed rules. Values: <li>`low`: low risk, this rule has a relatively low risk and is applicable to very strict access scenarios, this level of rule may generate considerable false alarms.</li> <li>`medium`: medium risk, this means the risk of this rule is normal and is suitable for protection scenarios with stricter requirements.</li> <li>`high`: high risk, this indicates that the risk of this rule is relatively high and will not generate false alarms in most scenarios.</li> <li>`extreme`: ultra-high risk. this represents that the risk of this rule is extremely high and will not generate false alarms basically.</li>.
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * Rule description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Rule tag. Some types of rules do not have tags.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Rule version.
+         * @type {string || null}
+         */
+        this.RuleVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.RuleVersion = 'RuleVersion' in params ? params.RuleVersion : null;
+
+    }
+}
+
+/**
  * DescribeZoneSetting request structure.
  * @class
  */
@@ -8385,31 +8635,37 @@ class ModifySecurityPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * Zone ID.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Security configuration.
+         * Security policy configuration. <li>When the `CustomRule` in the `SecurityPolicy` parameter is set, the `AclConfg` and `IpTableConfg` in the `SecurityConfig` parameter will be ignored;</li> <li>when the `ManagedRule` in the `SecurityPolicy` parameter is set, the `WafConfig` in the `SecurityConfig` parameter will be ignored.</li> <li>For custom rules and managed rule policy configuration, using `SecurityPolicy` parameter to configure settings is recommended.</li>
          * @type {SecurityConfig || null}
          */
         this.SecurityConfig = null;
 
         /**
-         * Subdomain/application name.
+         * Security policy configuration. The parameter is recommended to use for custom policies and managed rule configurations of web protection, it supports configuring security policies with expression grammar.	
+         * @type {SecurityPolicy || null}
+         */
+        this.SecurityPolicy = null;
 
-Note: When both this parameter and the TemplateId parameter are specified, this parameter will not take effect. Do not specify this parameter and the TemplateId parameter at the same time.
+        /**
+         * `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
          * @type {string || null}
          */
         this.Entity = null;
 
         /**
-         * Specifies the policy template ID, or the site's global policy.
-- To configure a policy template, specify the policy template ID.
-- To configure the site's global policy, use the @ZoneLevel@Domain parameter value.
+         * Specify the domain name. When the `Entity` parameter value is set to `Host`, use the domain-level policy specified by this parameter to query the domain configuration. For example, use `www.example.com` to configure the domain-level policy for that domain name.
+         * @type {string || null}
+         */
+        this.Host = null;
 
-Note: When this parameter is used, the Entity parameter will not take effect. Do not use this parameter and the Entity parameter at the same time.
+        /**
+         * Specify the policy template ID. Use this parameter to specify the ID of the policy Template to query the Template configuration when the `Entity` parameter value is set to `Template`.
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -8430,7 +8686,14 @@ Note: When this parameter is used, the Entity parameter will not take effect. Do
             obj.deserialize(params.SecurityConfig)
             this.SecurityConfig = obj;
         }
+
+        if (params.SecurityPolicy) {
+            let obj = new SecurityPolicy();
+            obj.deserialize(params.SecurityPolicy)
+            this.SecurityPolicy = obj;
+        }
         this.Entity = 'Entity' in params ? params.Entity : null;
+        this.Host = 'Host' in params ? params.Host : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
@@ -9313,54 +9576,54 @@ class ModifyDnsRecordsStatusRequest extends  AbstractModel {
 }
 
 /**
- * ModifyHostsCertificate request structure.
+ * ModifyZone request structure.
  * @class
  */
-class ModifyHostsCertificateRequest extends  AbstractModel {
+class ModifyZoneRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the site.
+         * The site ID.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Domain names that you need to modify the certificate configuration
-         * @type {Array.<string> || null}
-         */
-        this.Hosts = null;
-
-        /**
-         * Certificate configuration mode. Values:
-<li>`disable`: (Default) Do not configure the certificate</li>
-<li>`eofreecert`: Use a free certificate provided by EdgeOne</li>
-<li>`sslcert`: Configure an SSL certificate.</li>
+         * Site access method. Valid values:
+<li>full: NS access.</li>
+<li>partial: CNAME access. If the site is currently accessed with no domain name, it can be switched only to CNAME access.</li>
+<li>dnsPodAccess: DNSPod hosted access. To use this access mode, your domain name should have been hosted on DNSPod.</li>If this parameter is not input, the original configuration is maintained.
          * @type {string || null}
          */
-        this.Mode = null;
+        this.Type = null;
 
         /**
-         * SSL certificate configuration. This parameter is effective only when the mode is sslcert. You only need to provide the CertId of the corresponding certificate. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
-         * @type {Array.<ServerCertInfo> || null}
+         * The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
+         * @type {VanityNameServers || null}
          */
-        this.ServerCertInfo = null;
+        this.VanityNameServers = null;
 
         /**
-         * Whether the certificate is managed by EdgeOne. Values:
-<li>`none`: Not managed by EdgeOne</li>
-<li>`apply`: Managed by EdgeOne</li>
-Default value: `none`.
+         * The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
          * @type {string || null}
          */
-        this.ApplyType = null;
+        this.AliasZoneName = null;
 
         /**
-         * In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
-         * @type {MutualTLS || null}
+         * The region where the site requests access. Values:
+<li> `global`: Global coverage</li>
+<li> `mainland`: Chinese mainland</li>
+<li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
+         * @type {string || null}
          */
-        this.ClientCertInfo = null;
+        this.Area = null;
+
+        /**
+         * Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
 
     }
 
@@ -9372,24 +9635,91 @@ Default value: `none`.
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Hosts = 'Hosts' in params ? params.Hosts : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.ServerCertInfo) {
-            this.ServerCertInfo = new Array();
-            for (let z in params.ServerCertInfo) {
-                let obj = new ServerCertInfo();
-                obj.deserialize(params.ServerCertInfo[z]);
-                this.ServerCertInfo.push(obj);
-            }
+        if (params.VanityNameServers) {
+            let obj = new VanityNameServers();
+            obj.deserialize(params.VanityNameServers)
+            this.VanityNameServers = obj;
         }
-        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
-        if (params.ClientCertInfo) {
-            let obj = new MutualTLS();
-            obj.deserialize(params.ClientCertInfo)
-            this.ClientCertInfo = obj;
+    }
+}
+
+/**
+ * Custom rule configuration.
+ * @class
+ */
+class CustomRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The custom rule name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The specifics of the custom rule, must comply with the expression grammar, please refer to product documentation for details.
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * Action for custom rules. The Name parameter of SecurityAction supports: <li>`Deny`: block;</li> <li>`Monitor`: observe;</li> <li>`ReturnCustomPage`: block with customized page;</li> <li>`Redirect`: Redirect to URL;</li> <li>`BlockIP`: IP blocking;</li> <li>`JSChallenge`: JavaScript challenge;</li> <li>`ManagedChallenge`: managed challenge;</li> <li>`Allow`: Allow.</li>.
+         * @type {SecurityAction || null}
+         */
+        this.Action = null;
+
+        /**
+         * The custom rule status. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+         * @type {string || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Custom rule ID. <br>Different rule configuration operations are supported by rule ID : <br> - Add a new rule: ID is empty or the ID parameter is not specified; <br> - Modify an existing rule: specify the rule ID that needs to be updated/modified; <br> - Delete an existing rule: existing rules not included in the Rules parameter will be deleted.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Type of custom rule. Values: <li>`BasicAccessRule`: basic access control;</li> <li>`PreciseMatchRule`: exact custom rule, default;</li> <li>`ManagedAccessRule`: expert customized rule, output parameter only.</li>The default value is PreciseMatchRule.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Customize the priority of custom rule. Range: 0-100, the default value is 0, this parameter only supports PreciseMatchRule.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Condition = 'Condition' in params ? params.Condition : null;
+
+        if (params.Action) {
+            let obj = new SecurityAction();
+            obj.deserialize(params.Action)
+            this.Action = obj;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
 
     }
 }
@@ -9586,6 +9916,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.ExceptUserRules.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Additional parameter for SecurityAction `Redirect`.
+ * @class
+ */
+class RedirectActionParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Redirect URL.
+         * @type {string || null}
+         */
+        this.URL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.URL = 'URL' in params ? params.URL : null;
 
     }
 }
@@ -11009,6 +11367,42 @@ class DeleteSharedCNAMERequest extends  AbstractModel {
 }
 
 /**
+ * Custom rules configuration.
+ * @class
+ */
+class CustomRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The custom rule. <br>when modifying the Web protection configuration using ModifySecurityPolicy: <br> - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations. <br> - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
+         * @type {Array.<CustomRule> || null}
+         */
+        this.Rules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new CustomRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyRealtimeLogDeliveryTask request structure.
  * @class
  */
@@ -11234,6 +11628,34 @@ class DestroyPlanRequest extends  AbstractModel {
 }
 
 /**
+ * Additional parameter for SecurityAction `BlockIP`.
+ * @class
+ */
+class BlockIPActionParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Penalty duration for `BlockIP`. Units: <li>`s`: second, value range 1-120;</li> <li>`m`: minute, value range 1-120;</li> <li>`h`: hour, value range 1-48.</li>.
+         * @type {string || null}
+         */
+        this.Duration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+
+    }
+}
+
+/**
  * CreatePlan request structure.
  * @class
  */
@@ -11279,6 +11701,42 @@ If this field is not specified, the default plan duration is 1 month, with auto-
             let obj = new PrepaidPlanParam();
             obj.deserialize(params.PrepaidPlanParam)
             this.PrepaidPlanParam = obj;
+        }
+
+    }
+}
+
+/**
+ * Length limit detection configuration.
+ * @class
+ */
+class DetectLengthLimitConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of rules that detect length limits.
+         * @type {Array.<DetectLengthLimitRule> || null}
+         */
+        this.DetectLengthLimitRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetectLengthLimitRules) {
+            this.DetectLengthLimitRules = new Array();
+            for (let z in params.DetectLengthLimitRules) {
+                let obj = new DetectLengthLimitRule();
+                obj.deserialize(params.DetectLengthLimitRules[z]);
+                this.DetectLengthLimitRules.push(obj);
+            }
         }
 
     }
@@ -11544,6 +12002,43 @@ class DescribeDefaultCertificatesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * Browser Cache TTL configuration parameters
+ * @class
+ */
+class MaxAgeParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether to follow the origin server cache-control configuration, with the following values:.
+<Li>`On`: follow the origin server and ignore the field cachetime;</li>.
+<Li>`Off`: do not follow the origin server and apply the field cachetime.</li>.
+         * @type {string || null}
+         */
+        this.FollowOrigin = null;
+
+        /**
+         * Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: when followorigin is off, it means not following the origin server and using cachetime to set the cache time; otherwise, this field will not take effect.
+         * @type {number || null}
+         */
+        this.CacheTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FollowOrigin = 'FollowOrigin' in params ? params.FollowOrigin : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
 
     }
 }
@@ -12571,26 +13066,36 @@ Note: This field may return null, which indicates a failure to obtain a valid va
 }
 
 /**
- * Browser Cache TTL configuration parameters
+ * DescribeSecurityPolicy request structure.
  * @class
  */
-class MaxAgeParameters extends  AbstractModel {
+class DescribeSecurityPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies whether to follow the origin server cache-control configuration, with the following values:.
-<Li>`On`: follow the origin server and ignore the field cachetime;</li>.
-<Li>`Off`: do not follow the origin server and apply the field cachetime.</li>.
+         * Zone ID.
          * @type {string || null}
          */
-        this.FollowOrigin = null;
+        this.ZoneId = null;
 
         /**
-         * Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: when followorigin is off, it means not following the origin server and using cachetime to set the cache time; otherwise, this field will not take effect.
-         * @type {number || null}
+         * `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
+         * @type {string || null}
          */
-        this.CacheTime = null;
+        this.Entity = null;
+
+        /**
+         * Specify the policy Template ID. Use this parameter to specify the ID of the policy Template to query the Template configuration when the `Entity` parameter value is set to `Template`.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Specify the domain name. When the `Entity` parameter value is set to `Host`, use the domain-level policy specified by this parameter to query the domain configuration. For example, use `www.example.com` to configure the domain-level policy for that domain name.
+         * @type {string || null}
+         */
+        this.Host = null;
 
     }
 
@@ -12601,8 +13106,10 @@ class MaxAgeParameters extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FollowOrigin = 'FollowOrigin' in params ? params.FollowOrigin : null;
-        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Entity = 'Entity' in params ? params.Entity : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -13383,6 +13890,50 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.IpTableRules.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyApplicationProxyStatus request structure.
+ * @class
+ */
+class ModifyApplicationProxyStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The proxy ID.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * The proxy status. Values:
+<li>`offline`: The proxy is disabled.</li>
+<li>`online`: The proxy is enabled.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -15694,6 +16245,88 @@ class DescribeL4ProxyResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyHostsCertificate request structure.
+ * @class
+ */
+class ModifyHostsCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Domain names that you need to modify the certificate configuration
+         * @type {Array.<string> || null}
+         */
+        this.Hosts = null;
+
+        /**
+         * Certificate configuration mode. Values:
+<li>`disable`: (Default) Do not configure the certificate</li>
+<li>`eofreecert`: Use a free certificate provided by EdgeOne</li>
+<li>`sslcert`: Configure an SSL certificate.</li>
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * SSL certificate configuration. This parameter is effective only when the mode is sslcert. You only need to provide the CertId of the corresponding certificate. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
+         * @type {Array.<ServerCertInfo> || null}
+         */
+        this.ServerCertInfo = null;
+
+        /**
+         * Whether the certificate is managed by EdgeOne. Values:
+<li>`none`: Not managed by EdgeOne</li>
+<li>`apply`: Managed by EdgeOne</li>
+Default value: `none`.
+         * @type {string || null}
+         */
+        this.ApplyType = null;
+
+        /**
+         * In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
+         * @type {MutualTLS || null}
+         */
+        this.ClientCertInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.ServerCertInfo) {
+            this.ServerCertInfo = new Array();
+            for (let z in params.ServerCertInfo) {
+                let obj = new ServerCertInfo();
+                obj.deserialize(params.ServerCertInfo[z]);
+                this.ServerCertInfo.push(obj);
+            }
+        }
+        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
+
+        if (params.ClientCertInfo) {
+            let obj = new MutualTLS();
+            obj.deserialize(params.ClientCertInfo)
+            this.ClientCertInfo = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyOriginGroup response structure.
  * @class
  */
@@ -16124,6 +16757,41 @@ class ModifyL7AccSettingResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Additional parameter for SecurityAction `ReturnCustomPage`.
+ * @class
+ */
+class ReturnCustomPageActionParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response custom status code.
+         * @type {string || null}
+         */
+        this.ResponseCode = null;
+
+        /**
+         * Response custom page ID.
+         * @type {string || null}
+         */
+        this.ErrorPageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResponseCode = 'ResponseCode' in params ? params.ResponseCode : null;
+        this.ErrorPageId = 'ErrorPageId' in params ? params.ErrorPageId : null;
 
     }
 }
@@ -17423,6 +18091,46 @@ class DeleteApplicationProxyRuleRequest extends  AbstractModel {
 }
 
 /**
+ * Action for specific RuleId.
+ * @class
+ */
+class ManagedRuleAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specific items under ManagedRuleGroup, used to rewrite the configuration of this individual rule item, refer to product documentation for details.	
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Action for the managed rule item specified by RuleId, the SecurityAction Name parameter supports: <li>`Deny`: block and respond with an block page;</li> <li>`Monitor`: observe, do not process the request and record the security event in logs;</li> <li>`Disabled`: disabled, do not scan the request and skip this rule.</li>.
+         * @type {SecurityAction || null}
+         */
+        this.Action = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.Action) {
+            let obj = new SecurityAction();
+            obj.deserialize(params.Action)
+            this.Action = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyL7AccRule response structure.
  * @class
  */
@@ -18038,32 +18746,42 @@ class ModifyFunctionRequest extends  AbstractModel {
 }
 
 /**
- * ModifyApplicationProxyStatus request structure.
+ * Managed rule group configuration.
  * @class
  */
-class ModifyApplicationProxyStatusRequest extends  AbstractModel {
+class ManagedRuleGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
+         * Name of the managed rule group, if the configuration for the rule group is not specified, it will be processed by default, refer to product documentation for the specific value of GroupId.
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.GroupId = null;
 
         /**
-         * The proxy ID.
+         * Protection level of the managed rule group. Values: <li>`loose`: lenient, only contain ultra-high risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`normal`: normal, contain ultra-high risk and high-risk rules, at this point,Action parameter needs configured instead of RuleActions parameter;</li> <li>`strict`: strict, contains ultra-high risk, high-risk and medium-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`extreme`: super strict, contains ultra-high risk, high-risk, medium-risk and low-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`custom`: custom, refined strategy, configure the RuleActions parameter for each individual rule, at this point, the Action field is invalid, use RuleActions to configure the refined strategy for each individual rule.</li>.
          * @type {string || null}
          */
-        this.ProxyId = null;
+        this.SensitivityLevel = null;
 
         /**
-         * The proxy status. Values:
-<li>`offline`: The proxy is disabled.</li>
-<li>`online`: The proxy is enabled.</li>
-         * @type {string || null}
+         * Action for ManagedRuleGroup. the Name parameter value of SecurityAction supports: <li>`Deny`: block and respond with a block page;</li> <li>`Monitor`: observe, do not process requests and record security events in logs;</li> <li>`Disabled`: not enabled, do not scan requests and skip this rule.</li>.
+         * @type {SecurityAction || null}
          */
-        this.Status = null;
+        this.Action = null;
+
+        /**
+         * Specific configuration of rule items under the managed rule group, valid only when SensitivityLevel is custom.
+         * @type {Array.<ManagedRuleAction> || null}
+         */
+        this.RuleActions = null;
+
+        /**
+         * ManagedRuleGroup detailed information, output parameter only.
+         * @type {ManagedRuleGroupMeta || null}
+         */
+        this.MetaData = null;
 
     }
 
@@ -18074,9 +18792,29 @@ class ModifyApplicationProxyStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.SensitivityLevel = 'SensitivityLevel' in params ? params.SensitivityLevel : null;
+
+        if (params.Action) {
+            let obj = new SecurityAction();
+            obj.deserialize(params.Action)
+            this.Action = obj;
+        }
+
+        if (params.RuleActions) {
+            this.RuleActions = new Array();
+            for (let z in params.RuleActions) {
+                let obj = new ManagedRuleAction();
+                obj.deserialize(params.RuleActions[z]);
+                this.RuleActions.push(obj);
+            }
+        }
+
+        if (params.MetaData) {
+            let obj = new ManagedRuleGroupMeta();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
 
     }
 }
@@ -18171,6 +18909,53 @@ class CreateZoneRequest extends  AbstractModel {
         }
         this.AllowDuplicates = 'AllowDuplicates' in params ? params.AllowDuplicates : null;
         this.JumpStart = 'JumpStart' in params ? params.JumpStart : null;
+
+    }
+}
+
+/**
+ * Web security policy.
+ * @class
+ */
+class SecurityPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom rules. If the parameter is null or not filled, the configuration last set will be used by default.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {CustomRules || null}
+         */
+        this.CustomRules = null;
+
+        /**
+         * Managed. If the parameter is null or not filled, the configuration last set will be used by default.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ManagedRules || null}
+         */
+        this.ManagedRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CustomRules) {
+            let obj = new CustomRules();
+            obj.deserialize(params.CustomRules)
+            this.CustomRules = obj;
+        }
+
+        if (params.ManagedRules) {
+            let obj = new ManagedRules();
+            obj.deserialize(params.ManagedRules)
+            this.ManagedRules = obj;
+        }
 
     }
 }
@@ -23190,54 +23975,24 @@ class ModifyApplicationProxyRuleStatusResponse extends  AbstractModel {
 }
 
 /**
- * ModifyZone request structure.
+ * Managed rule automatic update option.
  * @class
  */
-class ModifyZoneRequest extends  AbstractModel {
+class ManagedRuleAutoUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
+         * Enable automatic update to the latest version or not. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.AutoUpdateToLatestVersion = null;
 
         /**
-         * Site access method. Valid values:
-<li>full: NS access.</li>
-<li>partial: CNAME access. If the site is currently accessed with no domain name, it can be switched only to CNAME access.</li>
-<li>dnsPodAccess: DNSPod hosted access. To use this access mode, your domain name should have been hosted on DNSPod.</li>If this parameter is not input, the original configuration is maintained.
+         * Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
-         * @type {VanityNameServers || null}
-         */
-        this.VanityNameServers = null;
-
-        /**
-         * The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
-         * @type {string || null}
-         */
-        this.AliasZoneName = null;
-
-        /**
-         * The region where the site requests access. Values:
-<li> `global`: Global coverage</li>
-<li> `mainland`: Chinese mainland</li>
-<li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
-         * @type {string || null}
-         */
-        this.ZoneName = null;
+        this.RulesetVersion = null;
 
     }
 
@@ -23248,17 +24003,8 @@ class ModifyZoneRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.VanityNameServers) {
-            let obj = new VanityNameServers();
-            obj.deserialize(params.VanityNameServers)
-            this.VanityNameServers = obj;
-        }
-        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.AutoUpdateToLatestVersion = 'AutoUpdateToLatestVersion' in params ? params.AutoUpdateToLatestVersion : null;
+        this.RulesetVersion = 'RulesetVersion' in params ? params.RulesetVersion : null;
 
     }
 }
@@ -23528,6 +24274,34 @@ class AlgDetectSession extends  AbstractModel {
                 this.SessionBehaviors.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyZoneStatus response structure.
+ * @class
+ */
+class ModifyZoneStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -24444,32 +25218,29 @@ class DescribeRulesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeContentQuota response structure.
+ * Length limit detection condition configuration.
  * @class
  */
-class DescribeContentQuotaResponse extends  AbstractModel {
+class DetectLengthLimitCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Purging quotas.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Quota> || null}
-         */
-        this.PurgeQuota = null;
-
-        /**
-         * Pre-warming quotas.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Quota> || null}
-         */
-        this.PrefetchQuota = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Parameter name of the matched condition. Values:.
+<li>`body_depth`: detection depth of the request body packet part.</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * Parameter value of the matched condition, used in pairs with the `Name` parameter.
+When the `Name` value is body_depth, `Values` only support passing in a single value. Values:
+<li>`8KB`;</li>
+<li>`64KB`;</li>
+<li>`128KB`.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
 
     }
 
@@ -24480,25 +25251,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.PurgeQuota) {
-            this.PurgeQuota = new Array();
-            for (let z in params.PurgeQuota) {
-                let obj = new Quota();
-                obj.deserialize(params.PurgeQuota[z]);
-                this.PurgeQuota.push(obj);
-            }
-        }
-
-        if (params.PrefetchQuota) {
-            this.PrefetchQuota = new Array();
-            for (let z in params.PrefetchQuota) {
-                let obj = new Quota();
-                obj.deserialize(params.PrefetchQuota[z]);
-                this.PrefetchQuota.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -27521,6 +28275,75 @@ class CacheConfigCustomTime extends  AbstractModel {
 }
 
 /**
+ * Managed rules configuration.
+ * @class
+ */
+class ManagedRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The managed rule status. Values: <li>`on`: enabled, all managed rules take effect as configured;</li> <li>`off`: disabled, all managed rules do not take effect.</li>.
+         * @type {string || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Evaluation mode is enabled or not, it is valid only when the `Enabled` parameter is set to `on`. Values: <li>`on`: enabled, all managed rules take effect in `observe` mode.</li> <li>off: disabled, all managed rules take effect according to the specified configuration.</li>.
+         * @type {string || null}
+         */
+        this.DetectionOnly = null;
+
+        /**
+         * Managed rule semantic analysis is enabled or not, it is valid only when the `Enabled` parameter is `on`. Values: <li>`on`: enabled, perform semantic analysis  before processing requests;</li> <li>`off`: disabled, process requests directly without semantic analysis.</li> <br/>The default value is `off`.
+         * @type {string || null}
+         */
+        this.SemanticAnalysis = null;
+
+        /**
+         * Managed rule automatic update option.
+         * @type {ManagedRuleAutoUpdate || null}
+         */
+        this.AutoUpdate = null;
+
+        /**
+         * Configuration of the managed rule group. If this structure is passed as an empty array or the GroupId is not included in the array, it will be processed based by default.
+         * @type {Array.<ManagedRuleGroup> || null}
+         */
+        this.ManagedRuleGroups = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.DetectionOnly = 'DetectionOnly' in params ? params.DetectionOnly : null;
+        this.SemanticAnalysis = 'SemanticAnalysis' in params ? params.SemanticAnalysis : null;
+
+        if (params.AutoUpdate) {
+            let obj = new ManagedRuleAutoUpdate();
+            obj.deserialize(params.AutoUpdate)
+            this.AutoUpdate = obj;
+        }
+
+        if (params.ManagedRuleGroups) {
+            this.ManagedRuleGroups = new Array();
+            for (let z in params.ManagedRuleGroups) {
+                let obj = new ManagedRuleGroup();
+                obj.deserialize(params.ManagedRuleGroups[z]);
+                this.ManagedRuleGroups.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Bindings of a security policy template
  * @class
  */
@@ -27671,6 +28494,47 @@ class CreateOriginGroupResponse extends  AbstractModel {
             return;
         }
         this.OriginGroupId = 'OriginGroupId' in params ? params.OriginGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityPolicy response structure.
+ * @class
+ */
+class DescribeSecurityPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security policy configuration.
+Note: This field may return null, which indicates a failure to obtain a valid value.
+         * @type {SecurityPolicy || null}
+         */
+        this.SecurityPolicy = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityPolicy) {
+            let obj = new SecurityPolicy();
+            obj.deserialize(params.SecurityPolicy)
+            this.SecurityPolicy = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -28075,12 +28939,26 @@ class CheckCnameStatusRequest extends  AbstractModel {
 }
 
 /**
- * ModifyZoneStatus response structure.
+ * DescribeContentQuota response structure.
  * @class
  */
-class ModifyZoneStatusResponse extends  AbstractModel {
+class DescribeContentQuotaResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Purging quotas.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Quota> || null}
+         */
+        this.PurgeQuota = null;
+
+        /**
+         * Pre-warming quotas.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Quota> || null}
+         */
+        this.PrefetchQuota = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -28096,6 +28974,24 @@ class ModifyZoneStatusResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.PurgeQuota) {
+            this.PurgeQuota = new Array();
+            for (let z in params.PurgeQuota) {
+                let obj = new Quota();
+                obj.deserialize(params.PurgeQuota[z]);
+                this.PurgeQuota.push(obj);
+            }
+        }
+
+        if (params.PrefetchQuota) {
+            this.PrefetchQuota = new Array();
+            for (let z in params.PrefetchQuota) {
+                let obj = new Quota();
+                obj.deserialize(params.PrefetchQuota[z]);
+                this.PrefetchQuota.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -28907,6 +29803,7 @@ module.exports = {
     DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
     DescribeAliasDomainsRequest: DescribeAliasDomainsRequest,
     QUICParameters: QUICParameters,
+    ManagedRuleGroupMeta: ManagedRuleGroupMeta,
     RateLimitConfig: RateLimitConfig,
     CreateRealtimeLogDeliveryTaskRequest: CreateRealtimeLogDeliveryTaskRequest,
     ModifyAccelerationDomainStatusesResponse: ModifyAccelerationDomainStatusesResponse,
@@ -28966,7 +29863,9 @@ module.exports = {
     Rule: Rule,
     DownloadL4LogsRequest: DownloadL4LogsRequest,
     StatusCodeCacheParam: StatusCodeCacheParam,
+    SecurityAction: SecurityAction,
     ModifyZoneSettingRequest: ModifyZoneSettingRequest,
+    DetectLengthLimitRule: DetectLengthLimitRule,
     OriginGroupHealthStatus: OriginGroupHealthStatus,
     ModifyDnsRecordsResponse: ModifyDnsRecordsResponse,
     BillingDataFilter: BillingDataFilter,
@@ -29025,6 +29924,7 @@ module.exports = {
     SetContentIdentifierParameters: SetContentIdentifierParameters,
     RenewPlanRequest: RenewPlanRequest,
     DescribePrefetchTasksResponse: DescribePrefetchTasksResponse,
+    ManagedRuleDetail: ManagedRuleDetail,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
     ModifyL4ProxyStatusResponse: ModifyL4ProxyStatusResponse,
     FileVerification: FileVerification,
@@ -29040,12 +29940,14 @@ module.exports = {
     CustomizedHeader: CustomizedHeader,
     DescribeFunctionsRequest: DescribeFunctionsRequest,
     ModifyDnsRecordsStatusRequest: ModifyDnsRecordsStatusRequest,
-    ModifyHostsCertificateRequest: ModifyHostsCertificateRequest,
+    ModifyZoneRequest: ModifyZoneRequest,
+    CustomRule: CustomRule,
     BotExtendAction: BotExtendAction,
     CreatePurgeTaskResponse: CreatePurgeTaskResponse,
     DeleteApplicationProxyRuleResponse: DeleteApplicationProxyRuleResponse,
     DeleteAccelerationDomainsResponse: DeleteAccelerationDomainsResponse,
     ExceptConfig: ExceptConfig,
+    RedirectActionParameters: RedirectActionParameters,
     DeleteOriginGroupRequest: DeleteOriginGroupRequest,
     AclCondition: AclCondition,
     L7OfflineLog: L7OfflineLog,
@@ -29070,15 +29972,19 @@ module.exports = {
     Tag: Tag,
     BindSharedCNAMEResponse: BindSharedCNAMEResponse,
     DeleteSharedCNAMERequest: DeleteSharedCNAMERequest,
+    CustomRules: CustomRules,
     ModifyRealtimeLogDeliveryTaskRequest: ModifyRealtimeLogDeliveryTaskRequest,
     DescribeHostsSettingRequest: DescribeHostsSettingRequest,
     DestroyPlanRequest: DestroyPlanRequest,
+    BlockIPActionParameters: BlockIPActionParameters,
     CreatePlanRequest: CreatePlanRequest,
+    DetectLengthLimitConfig: DetectLengthLimitConfig,
     DescribeFunctionRuntimeEnvironmentRequest: DescribeFunctionRuntimeEnvironmentRequest,
     IPGroup: IPGroup,
     DescribeDnsRecordsRequest: DescribeDnsRecordsRequest,
     CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
+    MaxAgeParameters: MaxAgeParameters,
     ModifyApplicationProxyRuleResponse: ModifyApplicationProxyRuleResponse,
     FailReason: FailReason,
     ModifyRequestHeaderParameters: ModifyRequestHeaderParameters,
@@ -29096,7 +30002,7 @@ module.exports = {
     DeleteRealtimeLogDeliveryTaskResponse: DeleteRealtimeLogDeliveryTaskResponse,
     RuleCondition: RuleCondition,
     DescribeOverviewL7DataResponse: DescribeOverviewL7DataResponse,
-    MaxAgeParameters: MaxAgeParameters,
+    DescribeSecurityPolicyRequest: DescribeSecurityPolicyRequest,
     DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     CacheParameters: CacheParameters,
     TimingDataItem: TimingDataItem,
@@ -29111,6 +30017,7 @@ module.exports = {
     DownloadL4LogsResponse: DownloadL4LogsResponse,
     BindSharedCNAMERequest: BindSharedCNAMERequest,
     IpTableConfig: IpTableConfig,
+    ModifyApplicationProxyStatusRequest: ModifyApplicationProxyStatusRequest,
     DeleteOriginGroupResponse: DeleteOriginGroupResponse,
     ModifyOriginParameters: ModifyOriginParameters,
     DescribeL4ProxyRequest: DescribeL4ProxyRequest,
@@ -29156,6 +30063,7 @@ module.exports = {
     ModifyZoneStatusRequest: ModifyZoneStatusRequest,
     UpstreamURLRewriteParameters: UpstreamURLRewriteParameters,
     DescribeL4ProxyResponse: DescribeL4ProxyResponse,
+    ModifyHostsCertificateRequest: ModifyHostsCertificateRequest,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
     DeleteAccelerationDomainsRequest: DeleteAccelerationDomainsRequest,
     RenewPlanResponse: RenewPlanResponse,
@@ -29166,6 +30074,7 @@ module.exports = {
     DeleteZoneResponse: DeleteZoneResponse,
     CreateRuleResponse: CreateRuleResponse,
     ModifyL7AccSettingResponse: ModifyL7AccSettingResponse,
+    ReturnCustomPageActionParameters: ReturnCustomPageActionParameters,
     BindZoneToPlanResponse: BindZoneToPlanResponse,
     UpstreamHTTP2Parameters: UpstreamHTTP2Parameters,
     DescribeL7AccSettingResponse: DescribeL7AccSettingResponse,
@@ -29192,6 +30101,7 @@ module.exports = {
     CreateAliasDomainResponse: CreateAliasDomainResponse,
     ClientIpCountry: ClientIpCountry,
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
+    ManagedRuleAction: ManagedRuleAction,
     ModifyL7AccRuleResponse: ModifyL7AccRuleResponse,
     FileAscriptionInfo: FileAscriptionInfo,
     CreateRealtimeLogDeliveryTaskResponse: CreateRealtimeLogDeliveryTaskResponse,
@@ -29205,8 +30115,9 @@ module.exports = {
     DescribeTimingL7AnalysisDataRequest: DescribeTimingL7AnalysisDataRequest,
     NoCache: NoCache,
     ModifyFunctionRequest: ModifyFunctionRequest,
-    ModifyApplicationProxyStatusRequest: ModifyApplicationProxyStatusRequest,
+    ManagedRuleGroup: ManagedRuleGroup,
     CreateZoneRequest: CreateZoneRequest,
+    SecurityPolicy: SecurityPolicy,
     AscriptionInfo: AscriptionInfo,
     OriginGroupHealthStatusDetail: OriginGroupHealthStatusDetail,
     FirstPartConfig: FirstPartConfig,
@@ -29294,13 +30205,14 @@ module.exports = {
     DescribeIdentificationsResponse: DescribeIdentificationsResponse,
     DeleteL4ProxyResponse: DeleteL4ProxyResponse,
     ModifyApplicationProxyRuleStatusResponse: ModifyApplicationProxyRuleStatusResponse,
-    ModifyZoneRequest: ModifyZoneRequest,
+    ManagedRuleAutoUpdate: ManagedRuleAutoUpdate,
     ClientIPCountryParameters: ClientIPCountryParameters,
     IncreasePlanQuotaResponse: IncreasePlanQuotaResponse,
     DescribeIPRegionResponse: DescribeIPRegionResponse,
     DescribeAvailablePlansRequest: DescribeAvailablePlansRequest,
     DnsVerification: DnsVerification,
     AlgDetectSession: AlgDetectSession,
+    ModifyZoneStatusResponse: ModifyZoneStatusResponse,
     DeleteContentIdentifierRequest: DeleteContentIdentifierRequest,
     CreateContentIdentifierRequest: CreateContentIdentifierRequest,
     OriginProtectionInfo: OriginProtectionInfo,
@@ -29317,7 +30229,7 @@ module.exports = {
     Quic: Quic,
     CreateCLSIndexRequest: CreateCLSIndexRequest,
     DescribeRulesRequest: DescribeRulesRequest,
-    DescribeContentQuotaResponse: DescribeContentQuotaResponse,
+    DetectLengthLimitCondition: DetectLengthLimitCondition,
     ModifyZoneSettingResponse: ModifyZoneSettingResponse,
     DownloadL7LogsResponse: DownloadL7LogsResponse,
     AccelerationDomain: AccelerationDomain,
@@ -29372,10 +30284,12 @@ module.exports = {
     DescribeOriginGroupHealthStatusResponse: DescribeOriginGroupHealthStatusResponse,
     DescribeContentIdentifiersResponse: DescribeContentIdentifiersResponse,
     CacheConfigCustomTime: CacheConfigCustomTime,
+    ManagedRules: ManagedRules,
     SecurityTemplateBinding: SecurityTemplateBinding,
     CacheTag: CacheTag,
     DescribeDefaultCertificatesResponse: DescribeDefaultCertificatesResponse,
     CreateOriginGroupResponse: CreateOriginGroupResponse,
+    DescribeSecurityPolicyResponse: DescribeSecurityPolicyResponse,
     CreateContentIdentifierResponse: CreateContentIdentifierResponse,
     HostHeaderParameters: HostHeaderParameters,
     DescribeConfigGroupVersionsRequest: DescribeConfigGroupVersionsRequest,
@@ -29384,7 +30298,7 @@ module.exports = {
     Function: Function,
     Quota: Quota,
     CheckCnameStatusRequest: CheckCnameStatusRequest,
-    ModifyZoneStatusResponse: ModifyZoneStatusResponse,
+    DescribeContentQuotaResponse: DescribeContentQuotaResponse,
     DescribeSecurityIPGroupResponse: DescribeSecurityIPGroupResponse,
     UpgradePlanRequest: UpgradePlanRequest,
     CreatePurgeTaskRequest: CreatePurgeTaskRequest,

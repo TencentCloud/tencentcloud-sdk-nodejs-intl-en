@@ -191,6 +191,62 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 }
 
 /**
+ * RecognizeBrazilIDCardOCR request structure.
+ * @class
+ */
+class RecognizeBrazilIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64 value of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. Image download time does not exceed 3 seconds.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL address of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. URLs of images stored in Tencent Cloud can guarantee higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The speed and stability of URLs not stored in Tencent Cloud may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. An ImageUrl and ImageBase64 must be provided. If both are provided, only ImageUrl will be used.
+         * @type {string || null}
+         */
+        this.BackImageBase64 = null;
+
+        /**
+         * The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download time does not exceed 3 seconds. The URL of the image stored in Tencent Cloud can ensure higher download speed and stability. It is recommended to store the image in Tencent Cloud. The speed and stability of the URL stored outside Tencent Cloud may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.BackImageUrl = null;
+
+        /**
+         * Whether to return portrait photos.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.BackImageBase64 = 'BackImageBase64' in params ? params.BackImageBase64 : null;
+        this.BackImageUrl = 'BackImageUrl' in params ? params.BackImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+
+    }
+}
+
+/**
  * RecognizePhilippinesDrivingLicenseOCR request structure.
  * @class
  */
@@ -6025,6 +6081,132 @@ Valid values:
 }
 
 /**
+ * RecognizeBrazilIDCardOCR response structure.
+ * @class
+ */
+class RecognizeBrazilIDCardOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Nome = null;
+
+        /**
+         * Family information
+         * @type {string || null}
+         */
+        this.MemberShip = null;
+
+        /**
+         * Birthday
+         * @type {string || null}
+         */
+        this.DataNascimento = null;
+
+        /**
+         * Issuing agency
+         * @type {string || null}
+         */
+        this.IssuingAgency = null;
+
+        /**
+         * blood type
+         * @type {string || null}
+         */
+        this.Fatorrh = null;
+
+        /**
+         * Birth place
+         * @type {string || null}
+         */
+        this.NaturalIDade = null;
+
+        /**
+         * Additional information 
+         * @type {string || null}
+         */
+        this.Observations = null;
+
+        /**
+         * CPF
+         * @type {string || null}
+         */
+        this.CPF = null;
+
+        /**
+         * DNI
+         * @type {string || null}
+         */
+        this.DNI = null;
+
+        /**
+         * universal registration
+         * @type {string || null}
+         */
+        this.RegistroGeral = null;
+
+        /**
+         * Issue date
+         * @type {string || null}
+         */
+        this.DispatchDate = null;
+
+        /**
+         * address
+         * @type {string || null}
+         */
+        this.Registro = null;
+
+        /**
+         * Portrait image
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * Original identity information
+         * @type {string || null}
+         */
+        this.DocOrigem = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Nome = 'Nome' in params ? params.Nome : null;
+        this.MemberShip = 'MemberShip' in params ? params.MemberShip : null;
+        this.DataNascimento = 'DataNascimento' in params ? params.DataNascimento : null;
+        this.IssuingAgency = 'IssuingAgency' in params ? params.IssuingAgency : null;
+        this.Fatorrh = 'Fatorrh' in params ? params.Fatorrh : null;
+        this.NaturalIDade = 'NaturalIDade' in params ? params.NaturalIDade : null;
+        this.Observations = 'Observations' in params ? params.Observations : null;
+        this.CPF = 'CPF' in params ? params.CPF : null;
+        this.DNI = 'DNI' in params ? params.DNI : null;
+        this.RegistroGeral = 'RegistroGeral' in params ? params.RegistroGeral : null;
+        this.DispatchDate = 'DispatchDate' in params ? params.DispatchDate : null;
+        this.Registro = 'Registro' in params ? params.Registro : null;
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
+        this.DocOrigem = 'DocOrigem' in params ? params.DocOrigem : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Return values for an electronic invoice
  * @class
  */
@@ -10241,6 +10423,7 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 module.exports = {
     InvoiceItem: InvoiceItem,
     HKIDCardOCRRequest: HKIDCardOCRRequest,
+    RecognizeBrazilIDCardOCRRequest: RecognizeBrazilIDCardOCRRequest,
     RecognizePhilippinesDrivingLicenseOCRRequest: RecognizePhilippinesDrivingLicenseOCRRequest,
     WordItem: WordItem,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
@@ -10304,6 +10487,7 @@ module.exports = {
     TaxiTicket: TaxiTicket,
     LicensePlateOCRRequest: LicensePlateOCRRequest,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
+    RecognizeBrazilIDCardOCRResponse: RecognizeBrazilIDCardOCRResponse,
     VatElectronicInfo: VatElectronicInfo,
     IDCardOCRRequest: IDCardOCRRequest,
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,

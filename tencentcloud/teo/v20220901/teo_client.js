@@ -53,6 +53,7 @@ const CreateRealtimeLogDeliveryTaskRequest = models.CreateRealtimeLogDeliveryTas
 const ModifyAccelerationDomainStatusesResponse = models.ModifyAccelerationDomainStatusesResponse;
 const DeployRecord = models.DeployRecord;
 const RuleExtraParameter = models.RuleExtraParameter;
+const ModifyL7AccRulePriorityRequest = models.ModifyL7AccRulePriorityRequest;
 const WebSocket = models.WebSocket;
 const ModifyAccelerationDomainRequest = models.ModifyAccelerationDomainRequest;
 const ModifyContentIdentifierResponse = models.ModifyContentIdentifierResponse;
@@ -231,6 +232,7 @@ const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesReq
 const MaxAgeParameters = models.MaxAgeParameters;
 const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
 const FailReason = models.FailReason;
+const ModifyL7AccRulePriorityResponse = models.ModifyL7AccRulePriorityResponse;
 const ModifyRequestHeaderParameters = models.ModifyRequestHeaderParameters;
 const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
 const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
@@ -1134,6 +1136,17 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     DescribeConfigGroupVersions(req, cb) {
         let resp = new DescribeConfigGroupVersionsResponse();
         this.request("DescribeConfigGroupVersions", req, resp, cb);
+    }
+
+    /**
+     * This interface is used to modify the priority of the rule list in the [Rule Engine](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1). This interface requires the complete rule ID list under the site ID to be passed in. The rule ID list can be obtained through the [Query Seven-Layer Acceleration Rules](https://intl.cloud.tencent.com/document/product/1552/115820?from_cn_redirect=1) interface. The final priority order will be adjusted to the order of the rule ID list, and will be executed from front to back.
+     * @param {ModifyL7AccRulePriorityRequest} req
+     * @param {function(string, ModifyL7AccRulePriorityResponse):void} cb
+     * @public
+     */
+    ModifyL7AccRulePriority(req, cb) {
+        let resp = new ModifyL7AccRulePriorityResponse();
+        this.request("ModifyL7AccRulePriority", req, resp, cb);
     }
 
     /**

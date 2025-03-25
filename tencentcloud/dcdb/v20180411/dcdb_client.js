@@ -186,7 +186,7 @@ const DeleteAccountResponse = models.DeleteAccountResponse;
 class DcdbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dcdb.tencentcloudapi.com", "2018-04-11", credential, region, profile);
+        super("dcdb.intl.tencentcloudapi.com", "2018-04-11", credential, region, profile);
     }
     
     /**

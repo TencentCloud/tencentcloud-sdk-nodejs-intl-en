@@ -48,7 +48,7 @@ const InputParameter = models.InputParameter;
 class ConfigClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("config.tencentcloudapi.com", "2022-08-02", credential, region, profile);
+        super("config.intl.tencentcloudapi.com", "2022-08-02", credential, region, profile);
     }
     
     /**

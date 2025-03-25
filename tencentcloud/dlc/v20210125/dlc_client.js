@@ -311,7 +311,7 @@ const DescribeResultDownloadRequest = models.DescribeResultDownloadRequest;
 class DlcClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dlc.tencentcloudapi.com", "2021-01-25", credential, region, profile);
+        super("dlc.intl.tencentcloudapi.com", "2021-01-25", credential, region, profile);
     }
     
     /**

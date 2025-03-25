@@ -99,7 +99,7 @@ const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
 class DbbrainClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dbbrain.tencentcloudapi.com", "2019-10-16", credential, region, profile);
+        super("dbbrain.intl.tencentcloudapi.com", "2019-10-16", credential, region, profile);
     }
     
     /**

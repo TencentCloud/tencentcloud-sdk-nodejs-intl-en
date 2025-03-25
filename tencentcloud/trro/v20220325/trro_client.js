@@ -69,7 +69,7 @@ const CreateProjectRequest = models.CreateProjectRequest;
 class TrroClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("trro.tencentcloudapi.com", "2022-03-25", credential, region, profile);
+        super("trro.intl.tencentcloudapi.com", "2022-03-25", credential, region, profile);
     }
     
     /**

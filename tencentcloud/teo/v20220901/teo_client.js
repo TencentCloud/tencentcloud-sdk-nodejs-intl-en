@@ -569,7 +569,7 @@ const VanityNameServersIps = models.VanityNameServersIps;
 class TeoClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("teo.tencentcloudapi.com", "2022-09-01", credential, region, profile);
+        super("teo.intl.tencentcloudapi.com", "2022-09-01", credential, region, profile);
     }
     
     /**

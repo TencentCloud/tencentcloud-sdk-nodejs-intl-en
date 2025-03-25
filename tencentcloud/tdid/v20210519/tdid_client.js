@@ -141,7 +141,7 @@ const GetDeployListRequest = models.GetDeployListRequest;
 class TdidClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tdid.tencentcloudapi.com", "2021-05-19", credential, region, profile);
+        super("tdid.intl.tencentcloudapi.com", "2021-05-19", credential, region, profile);
     }
     
     /**

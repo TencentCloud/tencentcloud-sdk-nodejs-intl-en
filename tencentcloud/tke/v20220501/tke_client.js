@@ -87,7 +87,7 @@ const DataDisk = models.DataDisk;
 class TkeClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tke.tencentcloudapi.com", "2022-05-01", credential, region, profile);
+        super("tke.intl.tencentcloudapi.com", "2022-05-01", credential, region, profile);
     }
     
     /**

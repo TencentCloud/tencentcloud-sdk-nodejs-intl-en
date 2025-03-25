@@ -160,7 +160,7 @@ const DescribeRecordSearchRequest = models.DescribeRecordSearchRequest;
 class TiwClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tiw.tencentcloudapi.com", "2019-09-19", credential, region, profile);
+        super("tiw.intl.tencentcloudapi.com", "2019-09-19", credential, region, profile);
     }
     
     /**

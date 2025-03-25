@@ -321,7 +321,7 @@ const DescribeTeamMemberListPageResp = models.DescribeTeamMemberListPageResp;
 class TcmppClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tcmpp.tencentcloudapi.com", "2024-08-01", credential, region, profile);
+        super("tcmpp.intl.tencentcloudapi.com", "2024-08-01", credential, region, profile);
     }
     
     /**

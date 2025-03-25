@@ -684,7 +684,7 @@ const DescribeNetDetectsResponse = models.DescribeNetDetectsResponse;
 class VpcClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("vpc.tencentcloudapi.com", "2017-03-12", credential, region, profile);
+        super("vpc.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
     /**

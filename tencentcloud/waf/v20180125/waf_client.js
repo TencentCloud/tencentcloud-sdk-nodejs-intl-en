@@ -286,7 +286,7 @@ const ClbObject = models.ClbObject;
 class WafClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("waf.tencentcloudapi.com", "2018-01-25", credential, region, profile);
+        super("waf.intl.tencentcloudapi.com", "2018-01-25", credential, region, profile);
     }
     
     /**

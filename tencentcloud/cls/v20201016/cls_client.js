@@ -274,7 +274,7 @@ const CreateScheduledSqlRequest = models.CreateScheduledSqlRequest;
 class ClsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cls.tencentcloudapi.com", "2020-10-16", credential, region, profile);
+        super("cls.intl.tencentcloudapi.com", "2020-10-16", credential, region, profile);
     }
     
     /**

@@ -40,7 +40,7 @@ const User = models.User;
 class ImsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ims.tencentcloudapi.com", "2020-12-29", credential, region, profile);
+        super("ims.intl.tencentcloudapi.com", "2020-12-29", credential, region, profile);
     }
     
     /**

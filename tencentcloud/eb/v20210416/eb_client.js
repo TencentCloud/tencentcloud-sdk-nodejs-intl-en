@@ -104,7 +104,7 @@ const APIGWParams = models.APIGWParams;
 class EbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("eb.tencentcloudapi.com", "2021-04-16", credential, region, profile);
+        super("eb.intl.tencentcloudapi.com", "2021-04-16", credential, region, profile);
     }
     
     /**

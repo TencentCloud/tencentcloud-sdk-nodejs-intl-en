@@ -73,7 +73,7 @@ const DeleteGatewayLoadBalancerResponse = models.DeleteGatewayLoadBalancerRespon
 class GwlbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("gwlb.tencentcloudapi.com", "2024-09-06", credential, region, profile);
+        super("gwlb.intl.tencentcloudapi.com", "2024-09-06", credential, region, profile);
     }
     
     /**

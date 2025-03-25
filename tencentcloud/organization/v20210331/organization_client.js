@@ -276,7 +276,7 @@ const DeleteSCIMCredentialResponse = models.DeleteSCIMCredentialResponse;
 class OrganizationClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("organization.tencentcloudapi.com", "2021-03-31", credential, region, profile);
+        super("organization.intl.tencentcloudapi.com", "2021-03-31", credential, region, profile);
     }
     
     /**

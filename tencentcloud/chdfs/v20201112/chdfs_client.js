@@ -92,7 +92,7 @@ const DescribeMountPointResponse = models.DescribeMountPointResponse;
 class ChdfsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("chdfs.tencentcloudapi.com", "2020-11-12", credential, region, profile);
+        super("chdfs.intl.tencentcloudapi.com", "2020-11-12", credential, region, profile);
     }
     
     /**

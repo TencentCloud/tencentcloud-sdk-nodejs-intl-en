@@ -70,7 +70,7 @@ const ListLogMessageByConditionResponse = models.ListLogMessageByConditionRespon
 class CiamClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ciam.tencentcloudapi.com", "2022-03-31", credential, region, profile);
+        super("ciam.intl.tencentcloudapi.com", "2022-03-31", credential, region, profile);
     }
     
     /**

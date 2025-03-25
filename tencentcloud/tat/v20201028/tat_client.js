@@ -76,7 +76,7 @@ const CreateCommandRequest = models.CreateCommandRequest;
 class TatClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tat.tencentcloudapi.com", "2020-10-28", credential, region, profile);
+        super("tat.intl.tencentcloudapi.com", "2020-10-28", credential, region, profile);
     }
     
     /**

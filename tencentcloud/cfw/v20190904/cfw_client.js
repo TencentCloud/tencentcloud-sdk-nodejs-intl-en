@@ -193,7 +193,7 @@ const DescribeGuideScanInfoResponse = models.DescribeGuideScanInfoResponse;
 class CfwClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cfw.tencentcloudapi.com", "2019-09-04", credential, region, profile);
+        super("cfw.intl.tencentcloudapi.com", "2019-09-04", credential, region, profile);
     }
     
     /**

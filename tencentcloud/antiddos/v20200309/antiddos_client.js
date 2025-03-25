@@ -234,7 +234,7 @@ const DescribeCCTrendRequest = models.DescribeCCTrendRequest;
 class AntiddosClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("antiddos.tencentcloudapi.com", "2020-03-09", credential, region, profile);
+        super("antiddos.intl.tencentcloudapi.com", "2020-03-09", credential, region, profile);
     }
     
     /**

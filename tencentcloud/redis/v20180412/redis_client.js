@@ -291,7 +291,7 @@ const InstanceSlowlogDetail = models.InstanceSlowlogDetail;
 class RedisClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("redis.tencentcloudapi.com", "2018-04-12", credential, region, profile);
+        super("redis.intl.tencentcloudapi.com", "2018-04-12", credential, region, profile);
     }
     
     /**

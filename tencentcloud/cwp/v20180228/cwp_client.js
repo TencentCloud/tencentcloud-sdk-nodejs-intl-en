@@ -1192,7 +1192,7 @@ const ExportAssetUserListResponse = models.ExportAssetUserListResponse;
 class CwpClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cwp.tencentcloudapi.com", "2018-02-28", credential, region, profile);
+        super("cwp.intl.tencentcloudapi.com", "2018-02-28", credential, region, profile);
     }
     
     /**

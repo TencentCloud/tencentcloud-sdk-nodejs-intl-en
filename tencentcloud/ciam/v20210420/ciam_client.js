@@ -29,7 +29,7 @@ const UserGroup = models.UserGroup;
 class CiamClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ciam.tencentcloudapi.com", "2021-04-20", credential, region, profile);
+        super("ciam.intl.tencentcloudapi.com", "2021-04-20", credential, region, profile);
     }
     
     /**

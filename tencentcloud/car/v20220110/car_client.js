@@ -103,7 +103,7 @@ const DescribeApplicationProjectsRequest = models.DescribeApplicationProjectsReq
 class CarClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("car.tencentcloudapi.com", "2022-01-10", credential, region, profile);
+        super("car.intl.tencentcloudapi.com", "2022-01-10", credential, region, profile);
     }
     
     /**

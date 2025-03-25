@@ -138,7 +138,7 @@ const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 class KmsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("kms.tencentcloudapi.com", "2019-01-18", credential, region, profile);
+        super("kms.intl.tencentcloudapi.com", "2019-01-18", credential, region, profile);
     }
     
     /**

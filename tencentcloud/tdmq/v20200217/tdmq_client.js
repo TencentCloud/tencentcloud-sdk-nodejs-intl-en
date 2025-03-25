@@ -262,7 +262,7 @@ const DescribeRabbitMQVirtualHostRequest = models.DescribeRabbitMQVirtualHostReq
 class TdmqClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tdmq.tencentcloudapi.com", "2020-02-17", credential, region, profile);
+        super("tdmq.intl.tencentcloudapi.com", "2020-02-17", credential, region, profile);
     }
     
     /**

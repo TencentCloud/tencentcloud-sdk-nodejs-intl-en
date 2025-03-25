@@ -34,7 +34,7 @@ const SentenceWords = models.SentenceWords;
 class AsrClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("asr.tencentcloudapi.com", "2019-06-14", credential, region, profile);
+        super("asr.intl.tencentcloudapi.com", "2019-06-14", credential, region, profile);
     }
     
     /**

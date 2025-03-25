@@ -49,7 +49,7 @@ const AudioSegments = models.AudioSegments;
 class AmsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ams.tencentcloudapi.com", "2020-12-29", credential, region, profile);
+        super("ams.intl.tencentcloudapi.com", "2020-12-29", credential, region, profile);
     }
     
     /**

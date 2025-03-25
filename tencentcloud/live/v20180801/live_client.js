@@ -318,7 +318,7 @@ const DeleteLiveRecordRuleResponse = models.DeleteLiveRecordRuleResponse;
 class LiveClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("live.tencentcloudapi.com", "2018-08-01", credential, region, profile);
+        super("live.intl.tencentcloudapi.com", "2018-08-01", credential, region, profile);
     }
     
     /**

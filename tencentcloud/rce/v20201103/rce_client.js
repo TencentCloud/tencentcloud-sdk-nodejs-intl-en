@@ -31,7 +31,7 @@ const DescribeRiskAssessmentResponse = models.DescribeRiskAssessmentResponse;
 class RceClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("rce.tencentcloudapi.com", "2020-11-03", credential, region, profile);
+        super("rce.intl.tencentcloudapi.com", "2020-11-03", credential, region, profile);
     }
     
     /**

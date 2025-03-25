@@ -244,7 +244,7 @@ const CreateDomainErrorPageInfoRequest = models.CreateDomainErrorPageInfoRequest
 class GaapClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("gaap.tencentcloudapi.com", "2018-05-29", credential, region, profile);
+        super("gaap.intl.tencentcloudapi.com", "2018-05-29", credential, region, profile);
     }
     
     /**

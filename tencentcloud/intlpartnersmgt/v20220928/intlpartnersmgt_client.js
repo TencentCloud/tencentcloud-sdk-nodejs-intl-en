@@ -114,7 +114,7 @@ const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 class IntlpartnersmgtClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("intlpartnersmgt.tencentcloudapi.com", "2022-09-28", credential, region, profile);
+        super("intlpartnersmgt.intl.tencentcloudapi.com", "2022-09-28", credential, region, profile);
     }
     
     /**

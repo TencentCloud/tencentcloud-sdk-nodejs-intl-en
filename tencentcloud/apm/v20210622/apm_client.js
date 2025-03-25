@@ -70,7 +70,7 @@ const TerminateApmInstanceResponse = models.TerminateApmInstanceResponse;
 class ApmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("apm.tencentcloudapi.com", "2021-06-22", credential, region, profile);
+        super("apm.intl.tencentcloudapi.com", "2021-06-22", credential, region, profile);
     }
     
     /**

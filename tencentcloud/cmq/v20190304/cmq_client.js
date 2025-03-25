@@ -67,7 +67,7 @@ const ModifyQueueAttributeRequest = models.ModifyQueueAttributeRequest;
 class CmqClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cmq.tencentcloudapi.com", "2019-03-04", credential, region, profile);
+        super("cmq.intl.tencentcloudapi.com", "2019-03-04", credential, region, profile);
     }
     
     /**

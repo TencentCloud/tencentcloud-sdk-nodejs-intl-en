@@ -60,7 +60,7 @@ const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResp
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
-const RemoveChcAssistVpcResponse = models.RemoveChcAssistVpcResponse;
+const Attribute = models.Attribute;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
@@ -74,6 +74,7 @@ const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPai
 const DescribeLaunchTemplateVersionsRequest = models.DescribeLaunchTemplateVersionsRequest;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
+const InstanceAttribute = models.InstanceAttribute;
 const ReservedInstancePrice = models.ReservedInstancePrice;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
@@ -99,7 +100,7 @@ const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
-const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
+const DescribeInstancesAttributesResponse = models.DescribeInstancesAttributesResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const Image = models.Image;
@@ -150,6 +151,7 @@ const InstanceStatus = models.InstanceStatus;
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
 const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
+const DescribeInstancesAttributesRequest = models.DescribeInstancesAttributesRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
@@ -160,6 +162,7 @@ const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const EnterRescueModeResponse = models.EnterRescueModeResponse;
 const ModifyChcAttributeResponse = models.ModifyChcAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
+const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
 const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
@@ -225,6 +228,7 @@ const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const ReservedInstancesOffering = models.ReservedInstancesOffering;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const RemoveChcAssistVpcResponse = models.RemoveChcAssistVpcResponse;
 const Snapshot = models.Snapshot;
 const ModifyInstancesProjectResponse = models.ModifyInstancesProjectResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
@@ -239,7 +243,7 @@ const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesT
 class CvmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cvm.tencentcloudapi.com", "2017-03-12", credential, region, profile);
+        super("cvm.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
     /**
@@ -325,6 +329,17 @@ class CvmClient extends AbstractClient {
     ModifyLaunchTemplateDefaultVersion(req, cb) {
         let resp = new ModifyLaunchTemplateDefaultVersionResponse();
         this.request("ModifyLaunchTemplateDefaultVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the attributes of specified instances. Currently, it supports querying the custom data UserData of instances.
+     * @param {DescribeInstancesAttributesRequest} req
+     * @param {function(string, DescribeInstancesAttributesResponse):void} cb
+     * @public
+     */
+    DescribeInstancesAttributes(req, cb) {
+        let resp = new DescribeInstancesAttributesResponse();
+        this.request("DescribeInstancesAttributes", req, resp, cb);
     }
 
     /**

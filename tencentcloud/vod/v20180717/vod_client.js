@@ -857,7 +857,7 @@ const AiRecognitionResult = models.AiRecognitionResult;
 class VodClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("vod.tencentcloudapi.com", "2018-07-17", credential, region, profile);
+        super("vod.intl.tencentcloudapi.com", "2018-07-17", credential, region, profile);
     }
     
     /**

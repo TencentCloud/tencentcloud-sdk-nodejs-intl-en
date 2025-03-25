@@ -175,7 +175,7 @@ const DescribeTelRecordAsrRequest = models.DescribeTelRecordAsrRequest;
 class CccClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ccc.tencentcloudapi.com", "2020-02-10", credential, region, profile);
+        super("ccc.intl.tencentcloudapi.com", "2020-02-10", credential, region, profile);
     }
     
     /**

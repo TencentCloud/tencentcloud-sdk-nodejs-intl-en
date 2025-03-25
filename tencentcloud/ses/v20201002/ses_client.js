@@ -90,7 +90,7 @@ const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
 class SesClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ses.tencentcloudapi.com", "2020-10-02", credential, region, profile);
+        super("ses.intl.tencentcloudapi.com", "2020-10-02", credential, region, profile);
     }
     
     /**

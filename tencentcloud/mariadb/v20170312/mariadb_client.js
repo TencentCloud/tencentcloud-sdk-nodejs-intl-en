@@ -158,7 +158,7 @@ const DeleteAccountResponse = models.DeleteAccountResponse;
 class MariadbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("mariadb.tencentcloudapi.com", "2017-03-12", credential, region, profile);
+        super("mariadb.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
     /**

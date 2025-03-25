@@ -243,7 +243,7 @@ const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
 class SqlserverClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("sqlserver.tencentcloudapi.com", "2018-03-28", credential, region, profile);
+        super("sqlserver.intl.tencentcloudapi.com", "2018-03-28", credential, region, profile);
     }
     
     /**

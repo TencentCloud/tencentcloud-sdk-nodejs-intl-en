@@ -30,7 +30,7 @@ const ResultConfig = models.ResultConfig;
 class AiartClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("aiart.tencentcloudapi.com", "2022-12-29", credential, region, profile);
+        super("aiart.intl.tencentcloudapi.com", "2022-12-29", credential, region, profile);
     }
     
     /**

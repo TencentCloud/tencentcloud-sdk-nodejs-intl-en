@@ -534,7 +534,7 @@ const AiRecognitionResult = models.AiRecognitionResult;
 class MpsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("mps.tencentcloudapi.com", "2019-06-12", credential, region, profile);
+        super("mps.intl.tencentcloudapi.com", "2019-06-12", credential, region, profile);
     }
     
     /**

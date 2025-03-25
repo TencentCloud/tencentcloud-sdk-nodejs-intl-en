@@ -28,7 +28,7 @@ const SendMessageRequest = models.SendMessageRequest;
 class DataintegrationClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dataintegration.tencentcloudapi.com", "2022-06-13", credential, region, profile);
+        super("dataintegration.intl.tencentcloudapi.com", "2022-06-13", credential, region, profile);
     }
     
     /**

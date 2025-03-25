@@ -162,7 +162,7 @@ const RemoveUserResponse = models.RemoveUserResponse;
 class TrtcClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("trtc.tencentcloudapi.com", "2019-07-22", credential, region, profile);
+        super("trtc.intl.tencentcloudapi.com", "2019-07-22", credential, region, profile);
     }
     
     /**

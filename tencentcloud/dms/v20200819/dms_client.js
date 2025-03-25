@@ -29,7 +29,7 @@ const SendEmailResponse = models.SendEmailResponse;
 class DmsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dms.tencentcloudapi.com", "2020-08-19", credential, region, profile);
+        super("dms.intl.tencentcloudapi.com", "2020-08-19", credential, region, profile);
     }
     
     /**

@@ -68,7 +68,7 @@ const OrgNode = models.OrgNode;
 class OrganizationClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("organization.tencentcloudapi.com", "2018-12-25", credential, region, profile);
+        super("organization.intl.tencentcloudapi.com", "2018-12-25", credential, region, profile);
     }
     
     /**

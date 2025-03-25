@@ -318,7 +318,7 @@ const DescribeBotManagedRulesRequest = models.DescribeBotManagedRulesRequest;
 class TeoClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("teo.tencentcloudapi.com", "2022-01-06", credential, region, profile);
+        super("teo.intl.tencentcloudapi.com", "2022-01-06", credential, region, profile);
     }
     
     /**

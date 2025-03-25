@@ -274,7 +274,7 @@ const ScdnAclRule = models.ScdnAclRule;
 class CdnClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cdn.tencentcloudapi.com", "2018-06-06", credential, region, profile);
+        super("cdn.intl.tencentcloudapi.com", "2018-06-06", credential, region, profile);
     }
     
     /**

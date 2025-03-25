@@ -55,7 +55,7 @@ const DescribeInstanceInfoResponse = models.DescribeInstanceInfoResponse;
 class CdwpgClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cdwpg.tencentcloudapi.com", "2020-12-30", credential, region, profile);
+        super("cdwpg.intl.tencentcloudapi.com", "2020-12-30", credential, region, profile);
     }
     
     /**

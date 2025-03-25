@@ -33,7 +33,7 @@ const DescribeStrategiesRequest = models.DescribeStrategiesRequest;
 class AdvisorClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("advisor.tencentcloudapi.com", "2020-07-21", credential, region, profile);
+        super("advisor.intl.tencentcloudapi.com", "2020-07-21", credential, region, profile);
     }
     
     /**

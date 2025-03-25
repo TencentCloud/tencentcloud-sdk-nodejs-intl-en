@@ -88,7 +88,7 @@ const ObjectTypeConfig = models.ObjectTypeConfig;
 class CfgClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cfg.tencentcloudapi.com", "2021-08-20", credential, region, profile);
+        super("cfg.intl.tencentcloudapi.com", "2021-08-20", credential, region, profile);
     }
     
     /**

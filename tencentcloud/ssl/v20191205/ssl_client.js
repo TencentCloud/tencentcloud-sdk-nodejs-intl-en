@@ -151,7 +151,7 @@ const VODInstanceList = models.VODInstanceList;
 class SslClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ssl.tencentcloudapi.com", "2019-12-05", credential, region, profile);
+        super("ssl.intl.tencentcloudapi.com", "2019-12-05", credential, region, profile);
     }
     
     /**

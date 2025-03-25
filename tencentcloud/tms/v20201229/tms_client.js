@@ -34,7 +34,7 @@ const TextModerationResponse = models.TextModerationResponse;
 class TmsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tms.tencentcloudapi.com", "2020-12-29", credential, region, profile);
+        super("tms.intl.tencentcloudapi.com", "2020-12-29", credential, region, profile);
     }
     
     /**

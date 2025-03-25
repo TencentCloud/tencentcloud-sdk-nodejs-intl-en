@@ -102,7 +102,7 @@ const ShardInfo = models.ShardInfo;
 class MongodbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("mongodb.tencentcloudapi.com", "2019-07-25", credential, region, profile);
+        super("mongodb.intl.tencentcloudapi.com", "2019-07-25", credential, region, profile);
     }
     
     /**

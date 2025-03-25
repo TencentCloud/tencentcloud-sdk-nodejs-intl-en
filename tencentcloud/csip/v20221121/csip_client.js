@@ -130,7 +130,7 @@ const DescribeTaskLogURLRequest = models.DescribeTaskLogURLRequest;
 class CsipClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("csip.tencentcloudapi.com", "2022-11-21", credential, region, profile);
+        super("csip.intl.tencentcloudapi.com", "2022-11-21", credential, region, profile);
     }
     
     /**

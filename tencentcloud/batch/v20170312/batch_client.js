@@ -137,7 +137,7 @@ const EnvVar = models.EnvVar;
 class BatchClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("batch.tencentcloudapi.com", "2017-03-12", credential, region, profile);
+        super("batch.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
     /**

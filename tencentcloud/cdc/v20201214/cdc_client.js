@@ -86,7 +86,7 @@ const DeleteDedicatedClustersResponse = models.DeleteDedicatedClustersResponse;
 class CdcClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cdc.tencentcloudapi.com", "2020-12-14", credential, region, profile);
+        super("cdc.intl.tencentcloudapi.com", "2020-12-14", credential, region, profile);
     }
     
     /**

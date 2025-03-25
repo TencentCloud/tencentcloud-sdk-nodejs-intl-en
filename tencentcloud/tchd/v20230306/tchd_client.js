@@ -29,7 +29,7 @@ const ProductEventList = models.ProductEventList;
 class TchdClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tchd.tencentcloudapi.com", "2023-03-06", credential, region, profile);
+        super("tchd.intl.tencentcloudapi.com", "2023-03-06", credential, region, profile);
     }
     
     /**

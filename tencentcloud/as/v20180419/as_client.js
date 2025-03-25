@@ -189,7 +189,7 @@ const ExecuteScalingPolicyRequest = models.ExecuteScalingPolicyRequest;
 class AsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("as.tencentcloudapi.com", "2018-04-19", credential, region, profile);
+        super("as.intl.tencentcloudapi.com", "2018-04-19", credential, region, profile);
     }
     
     /**

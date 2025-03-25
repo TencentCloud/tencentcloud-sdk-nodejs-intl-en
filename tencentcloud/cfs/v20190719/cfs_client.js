@@ -124,7 +124,7 @@ const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
 class CfsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cfs.tencentcloudapi.com", "2019-07-19", credential, region, profile);
+        super("cfs.intl.tencentcloudapi.com", "2019-07-19", credential, region, profile);
     }
     
     /**

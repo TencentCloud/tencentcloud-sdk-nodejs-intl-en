@@ -200,7 +200,7 @@ const DeleteBruteAttacksResponse = models.DeleteBruteAttacksResponse;
 class YunjingClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("yunjing.tencentcloudapi.com", "2018-02-28", credential, region, profile);
+        super("yunjing.intl.tencentcloudapi.com", "2018-02-28", credential, region, profile);
     }
     
     /**

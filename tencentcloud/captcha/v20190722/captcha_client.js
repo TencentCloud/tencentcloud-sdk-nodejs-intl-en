@@ -27,7 +27,7 @@ const DescribeCaptchaResultRequest = models.DescribeCaptchaResultRequest;
 class CaptchaClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("captcha.tencentcloudapi.com", "2019-07-22", credential, region, profile);
+        super("captcha.intl.tencentcloudapi.com", "2019-07-22", credential, region, profile);
     }
     
     /**

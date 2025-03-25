@@ -706,7 +706,7 @@ const EventCaseConsumeLogOptDto = models.EventCaseConsumeLogOptDto;
 class WedataClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("wedata.tencentcloudapi.com", "2021-08-20", credential, region, profile);
+        super("wedata.intl.tencentcloudapi.com", "2021-08-20", credential, region, profile);
     }
     
     /**

@@ -129,7 +129,7 @@ const AddAccountToAccountGroupRequest = models.AddAccountToAccountGroupRequest;
 class EiamClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("eiam.tencentcloudapi.com", "2021-04-20", credential, region, profile);
+        super("eiam.intl.tencentcloudapi.com", "2021-04-20", credential, region, profile);
     }
     
     /**

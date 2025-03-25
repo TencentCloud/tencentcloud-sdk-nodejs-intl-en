@@ -212,7 +212,7 @@ const ManageReplicationResponse = models.ManageReplicationResponse;
 class TcrClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tcr.tencentcloudapi.com", "2019-09-24", credential, region, profile);
+        super("tcr.intl.tencentcloudapi.com", "2019-09-24", credential, region, profile);
     }
     
     /**

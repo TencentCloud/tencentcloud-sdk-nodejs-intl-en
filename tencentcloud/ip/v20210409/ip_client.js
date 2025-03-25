@@ -40,7 +40,7 @@ const CountryCodeItem = models.CountryCodeItem;
 class IpClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ip.tencentcloudapi.com", "2021-04-09", credential, region, profile);
+        super("ip.intl.tencentcloudapi.com", "2021-04-09", credential, region, profile);
     }
     
     /**

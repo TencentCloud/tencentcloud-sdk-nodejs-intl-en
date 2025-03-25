@@ -372,7 +372,7 @@ const AddressInfo = models.AddressInfo;
 class EcmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ecm.tencentcloudapi.com", "2019-07-19", credential, region, profile);
+        super("ecm.intl.tencentcloudapi.com", "2019-07-19", credential, region, profile);
     }
     
     /**

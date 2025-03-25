@@ -54,7 +54,7 @@ const ImageResult = models.ImageResult;
 class VmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("vm.tencentcloudapi.com", "2020-12-29", credential, region, profile);
+        super("vm.intl.tencentcloudapi.com", "2020-12-29", credential, region, profile);
     }
     
     /**

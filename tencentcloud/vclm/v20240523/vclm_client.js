@@ -31,7 +31,7 @@ const DescribeImageAnimateJobRequest = models.DescribeImageAnimateJobRequest;
 class VclmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("vclm.tencentcloudapi.com", "2024-05-23", credential, region, profile);
+        super("vclm.intl.tencentcloudapi.com", "2024-05-23", credential, region, profile);
     }
     
     /**

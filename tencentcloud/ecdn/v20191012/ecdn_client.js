@@ -84,7 +84,7 @@ const DescribeDomainsRequest = models.DescribeDomainsRequest;
 class EcdnClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ecdn.tencentcloudapi.com", "2019-10-12", credential, region, profile);
+        super("ecdn.intl.tencentcloudapi.com", "2019-10-12", credential, region, profile);
     }
     
     /**

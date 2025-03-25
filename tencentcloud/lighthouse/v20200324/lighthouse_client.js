@@ -226,7 +226,7 @@ const DescribeInstanceLoginKeyPairAttributeResponse = models.DescribeInstanceLog
 class LighthouseClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("lighthouse.tencentcloudapi.com", "2020-03-24", credential, region, profile);
+        super("lighthouse.intl.tencentcloudapi.com", "2020-03-24", credential, region, profile);
     }
     
     /**

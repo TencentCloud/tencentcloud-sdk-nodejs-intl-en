@@ -106,7 +106,7 @@ const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordLis
 class PrivatednsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("privatedns.tencentcloudapi.com", "2020-10-28", credential, region, profile);
+        super("privatedns.intl.tencentcloudapi.com", "2020-10-28", credential, region, profile);
     }
     
     /**

@@ -156,7 +156,7 @@ const DescribeDataSetUrlStatisticsResponse = models.DescribeDataSetUrlStatistics
 class RumClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("rum.tencentcloudapi.com", "2021-06-22", credential, region, profile);
+        super("rum.intl.tencentcloudapi.com", "2021-06-22", credential, region, profile);
     }
     
     /**

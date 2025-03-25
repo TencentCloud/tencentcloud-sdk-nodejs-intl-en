@@ -142,7 +142,7 @@ const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
 class ScfClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("scf.tencentcloudapi.com", "2018-04-16", credential, region, profile);
+        super("scf.intl.tencentcloudapi.com", "2018-04-16", credential, region, profile);
     }
     
     /**

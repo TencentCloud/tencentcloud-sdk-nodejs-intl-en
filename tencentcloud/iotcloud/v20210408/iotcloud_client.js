@@ -74,7 +74,7 @@ const UpdateProductDynamicRegisterResponse = models.UpdateProductDynamicRegister
 class IotcloudClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("iotcloud.tencentcloudapi.com", "2021-04-08", credential, region, profile);
+        super("iotcloud.intl.tencentcloudapi.com", "2021-04-08", credential, region, profile);
     }
     
     /**

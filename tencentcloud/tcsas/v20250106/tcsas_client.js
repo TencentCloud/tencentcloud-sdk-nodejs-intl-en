@@ -192,7 +192,7 @@ const DescribeTeamMemberListPageResp = models.DescribeTeamMemberListPageResp;
 class TcsasClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tcsas.tencentcloudapi.com", "2025-01-06", credential, region, profile);
+        super("tcsas.intl.tencentcloudapi.com", "2025-01-06", credential, region, profile);
     }
     
     /**

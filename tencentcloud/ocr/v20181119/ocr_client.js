@@ -137,7 +137,7 @@ const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRReq
 class OcrClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ocr.tencentcloudapi.com", "2018-11-19", credential, region, profile);
+        super("ocr.intl.tencentcloudapi.com", "2018-11-19", credential, region, profile);
     }
     
     /**

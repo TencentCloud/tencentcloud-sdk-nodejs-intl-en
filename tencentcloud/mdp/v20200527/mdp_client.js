@@ -173,7 +173,7 @@ const DescribeLinearAssemblyCDNDomainWithChannelsResponse = models.DescribeLinea
 class MdpClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("mdp.tencentcloudapi.com", "2020-05-27", credential, region, profile);
+        super("mdp.intl.tencentcloudapi.com", "2020-05-27", credential, region, profile);
     }
     
     /**

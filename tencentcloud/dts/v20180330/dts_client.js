@@ -80,7 +80,7 @@ const StartMigrateJobRequest = models.StartMigrateJobRequest;
 class DtsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dts.tencentcloudapi.com", "2018-03-30", credential, region, profile);
+        super("dts.intl.tencentcloudapi.com", "2018-03-30", credential, region, profile);
     }
     
     /**

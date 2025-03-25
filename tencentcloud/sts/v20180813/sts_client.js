@@ -37,7 +37,7 @@ const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
 class StsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("sts.tencentcloudapi.com", "2018-08-13", credential, region, profile);
+        super("sts.intl.tencentcloudapi.com", "2018-08-13", credential, region, profile);
     }
     
     /**

@@ -168,7 +168,7 @@ const TableGroupInfo = models.TableGroupInfo;
 class TcaplusdbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tcaplusdb.tencentcloudapi.com", "2019-08-23", credential, region, profile);
+        super("tcaplusdb.intl.tencentcloudapi.com", "2019-08-23", credential, region, profile);
     }
     
     /**

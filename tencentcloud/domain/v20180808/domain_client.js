@@ -86,7 +86,7 @@ const IntlPhoneEmailLists = models.IntlPhoneEmailLists;
 class DomainClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("domain.tencentcloudapi.com", "2018-08-08", credential, region, profile);
+        super("domain.intl.tencentcloudapi.com", "2018-08-08", credential, region, profile);
     }
     
     /**

@@ -122,7 +122,7 @@ const ApplySnapshotRequest = models.ApplySnapshotRequest;
 class CbsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cbs.tencentcloudapi.com", "2017-03-12", credential, region, profile);
+        super("cbs.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
     /**

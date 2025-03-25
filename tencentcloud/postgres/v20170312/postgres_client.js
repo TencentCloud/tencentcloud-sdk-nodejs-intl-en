@@ -249,7 +249,7 @@ const ModifyDBInstanceChargeTypeResponse = models.ModifyDBInstanceChargeTypeResp
 class PostgresClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("postgres.tencentcloudapi.com", "2017-03-12", credential, region, profile);
+        super("postgres.intl.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
     /**

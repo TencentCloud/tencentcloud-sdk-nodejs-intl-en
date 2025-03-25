@@ -434,7 +434,7 @@ const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 class MonitorClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("monitor.tencentcloudapi.com", "2018-07-24", credential, region, profile);
+        super("monitor.intl.tencentcloudapi.com", "2018-07-24", credential, region, profile);
     }
     
     /**

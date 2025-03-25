@@ -27,7 +27,7 @@ const TextTranslateRequest = models.TextTranslateRequest;
 class TmtClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tmt.tencentcloudapi.com", "2018-03-21", credential, region, profile);
+        super("tmt.intl.tencentcloudapi.com", "2018-03-21", credential, region, profile);
     }
     
     /**

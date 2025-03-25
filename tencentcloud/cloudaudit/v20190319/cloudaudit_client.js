@@ -70,7 +70,7 @@ const AuditSummary = models.AuditSummary;
 class CloudauditClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cloudaudit.tencentcloudapi.com", "2019-03-19", credential, region, profile);
+        super("cloudaudit.intl.tencentcloudapi.com", "2019-03-19", credential, region, profile);
     }
     
     /**

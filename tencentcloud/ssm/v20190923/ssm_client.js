@@ -78,7 +78,7 @@ const ListSecretVersionIdsResponse = models.ListSecretVersionIdsResponse;
 class SsmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ssm.tencentcloudapi.com", "2019-09-23", credential, region, profile);
+        super("ssm.intl.tencentcloudapi.com", "2019-09-23", credential, region, profile);
     }
     
     /**

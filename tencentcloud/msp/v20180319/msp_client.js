@@ -45,7 +45,7 @@ const RegisterMigrationTaskRequest = models.RegisterMigrationTaskRequest;
 class MspClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("msp.tencentcloudapi.com", "2018-03-19", credential, region, profile);
+        super("msp.intl.tencentcloudapi.com", "2018-03-19", credential, region, profile);
     }
     
     /**

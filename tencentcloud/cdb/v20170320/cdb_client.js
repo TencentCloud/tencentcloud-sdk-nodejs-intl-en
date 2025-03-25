@@ -382,7 +382,7 @@ const UpgradeCDBProxyVersionRequest = models.UpgradeCDBProxyVersionRequest;
 class CdbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cdb.tencentcloudapi.com", "2017-03-20", credential, region, profile);
+        super("cdb.intl.tencentcloudapi.com", "2017-03-20", credential, region, profile);
     }
     
     /**

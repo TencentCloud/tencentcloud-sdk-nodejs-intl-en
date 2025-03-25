@@ -239,7 +239,7 @@ const ConsistencyOption = models.ConsistencyOption;
 class DtsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dts.tencentcloudapi.com", "2021-12-06", credential, region, profile);
+        super("dts.intl.tencentcloudapi.com", "2021-12-06", credential, region, profile);
     }
     
     /**

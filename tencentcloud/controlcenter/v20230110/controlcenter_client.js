@@ -28,7 +28,7 @@ const BatchApplyAccountBaselinesRequest = models.BatchApplyAccountBaselinesReque
 class ControlcenterClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("controlcenter.tencentcloudapi.com", "2023-01-10", credential, region, profile);
+        super("controlcenter.intl.tencentcloudapi.com", "2023-01-10", credential, region, profile);
     }
     
     /**

@@ -40,7 +40,7 @@ const FuseFaceResponse = models.FuseFaceResponse;
 class FacefusionClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("facefusion.tencentcloudapi.com", "2022-09-27", credential, region, profile);
+        super("facefusion.intl.tencentcloudapi.com", "2022-09-27", credential, region, profile);
     }
     
     /**

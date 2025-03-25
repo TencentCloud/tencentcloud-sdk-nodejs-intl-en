@@ -74,7 +74,7 @@ const PullSmsReplyStatusResponse = models.PullSmsReplyStatusResponse;
 class SmsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("sms.tencentcloudapi.com", "2021-01-11", credential, region, profile);
+        super("sms.intl.tencentcloudapi.com", "2021-01-11", credential, region, profile);
     }
     
     /**

@@ -91,7 +91,7 @@ const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
 class OmicsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("omics.tencentcloudapi.com", "2022-11-28", credential, region, profile);
+        super("omics.intl.tencentcloudapi.com", "2022-11-28", credential, region, profile);
     }
     
     /**

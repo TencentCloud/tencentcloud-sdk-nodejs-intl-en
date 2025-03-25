@@ -259,7 +259,7 @@ const LoadBalancer = models.LoadBalancer;
 class ClbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("clb.tencentcloudapi.com", "2018-03-17", credential, region, profile);
+        super("clb.intl.tencentcloudapi.com", "2018-03-17", credential, region, profile);
     }
     
     /**

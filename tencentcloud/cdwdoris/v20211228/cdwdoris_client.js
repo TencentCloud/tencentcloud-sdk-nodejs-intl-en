@@ -239,7 +239,7 @@ const ScaleUpInstanceResponse = models.ScaleUpInstanceResponse;
 class CdwdorisClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cdwdoris.tencentcloudapi.com", "2021-12-28", credential, region, profile);
+        super("cdwdoris.intl.tencentcloudapi.com", "2021-12-28", credential, region, profile);
     }
     
     /**

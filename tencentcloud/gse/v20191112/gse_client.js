@@ -95,7 +95,7 @@ const InstanceAccess = models.InstanceAccess;
 class GseClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("gse.tencentcloudapi.com", "2019-11-12", credential, region, profile);
+        super("gse.intl.tencentcloudapi.com", "2019-11-12", credential, region, profile);
     }
     
     /**

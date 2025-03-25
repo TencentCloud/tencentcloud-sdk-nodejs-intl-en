@@ -269,7 +269,7 @@ const DescribeCCTrendRequest = models.DescribeCCTrendRequest;
 class DayuClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dayu.tencentcloudapi.com", "2018-07-09", credential, region, profile);
+        super("dayu.intl.tencentcloudapi.com", "2018-07-09", credential, region, profile);
     }
     
     /**

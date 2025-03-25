@@ -148,7 +148,7 @@ const DescribeProxySessionKillTasksResponse = models.DescribeProxySessionKillTas
 class DbbrainClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dbbrain.tencentcloudapi.com", "2021-05-27", credential, region, profile);
+        super("dbbrain.intl.tencentcloudapi.com", "2021-05-27", credential, region, profile);
     }
     
     /**

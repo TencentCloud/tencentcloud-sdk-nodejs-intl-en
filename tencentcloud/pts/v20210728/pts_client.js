@@ -174,7 +174,7 @@ const UpdateFileScenarioRelationResponse = models.UpdateFileScenarioRelationResp
 class PtsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("pts.tencentcloudapi.com", "2021-07-28", credential, region, profile);
+        super("pts.intl.tencentcloudapi.com", "2021-07-28", credential, region, profile);
     }
     
     /**

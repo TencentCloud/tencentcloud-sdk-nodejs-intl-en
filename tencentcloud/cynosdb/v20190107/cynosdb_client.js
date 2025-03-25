@@ -323,7 +323,7 @@ const ModifyAuditRuleTemplatesResponse = models.ModifyAuditRuleTemplatesResponse
 class CynosdbClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("cynosdb.tencentcloudapi.com", "2019-01-07", credential, region, profile);
+        super("cynosdb.intl.tencentcloudapi.com", "2019-01-07", credential, region, profile);
     }
     
     /**

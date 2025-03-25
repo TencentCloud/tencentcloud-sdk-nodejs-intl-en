@@ -178,7 +178,7 @@ const DeleteStreamLiveChannelRequest = models.DeleteStreamLiveChannelRequest;
 class MdlClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("mdl.tencentcloudapi.com", "2020-03-26", credential, region, profile);
+        super("mdl.intl.tencentcloudapi.com", "2020-03-26", credential, region, profile);
     }
     
     /**

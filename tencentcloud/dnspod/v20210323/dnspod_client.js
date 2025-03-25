@@ -125,7 +125,7 @@ const DescribeDomainShareInfoRequest = models.DescribeDomainShareInfoRequest;
 class DnspodClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dnspod.tencentcloudapi.com", "2021-03-23", credential, region, profile);
+        super("dnspod.intl.tencentcloudapi.com", "2021-03-23", credential, region, profile);
     }
     
     /**

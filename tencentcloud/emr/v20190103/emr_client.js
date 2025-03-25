@@ -143,7 +143,7 @@ const InstanceChargePrepaid = models.InstanceChargePrepaid;
 class EmrClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("emr.tencentcloudapi.com", "2019-01-03", credential, region, profile);
+        super("emr.intl.tencentcloudapi.com", "2019-01-03", credential, region, profile);
     }
     
     /**

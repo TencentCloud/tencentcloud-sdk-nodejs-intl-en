@@ -380,7 +380,7 @@ const DescribeBackupStorageLocationsRequest = models.DescribeBackupStorageLocati
 class TkeClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tke.tencentcloudapi.com", "2018-05-25", credential, region, profile);
+        super("tke.intl.tencentcloudapi.com", "2018-05-25", credential, region, profile);
     }
     
     /**

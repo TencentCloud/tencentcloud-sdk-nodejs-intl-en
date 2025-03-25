@@ -98,7 +98,7 @@ const OptionalWebServiceInfo = models.OptionalWebServiceInfo;
 class EsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("es.tencentcloudapi.com", "2018-04-16", credential, region, profile);
+        super("es.intl.tencentcloudapi.com", "2018-04-16", credential, region, profile);
     }
     
     /**

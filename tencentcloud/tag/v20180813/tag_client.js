@@ -95,7 +95,7 @@ const ResourceTag = models.ResourceTag;
 class TagClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tag.tencentcloudapi.com", "2018-08-13", credential, region, profile);
+        super("tag.intl.tencentcloudapi.com", "2018-08-13", credential, region, profile);
     }
     
     /**

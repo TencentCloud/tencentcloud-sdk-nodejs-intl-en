@@ -67,7 +67,7 @@ const ModifyRecordInfoResponse = models.ModifyRecordInfoResponse;
 class GmeClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("gme.tencentcloudapi.com", "2018-07-11", credential, region, profile);
+        super("gme.intl.tencentcloudapi.com", "2018-07-11", credential, region, profile);
     }
     
     /**

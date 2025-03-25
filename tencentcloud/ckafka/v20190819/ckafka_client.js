@@ -216,7 +216,7 @@ const Price = models.Price;
 class CkafkaClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("ckafka.tencentcloudapi.com", "2019-08-19", credential, region, profile);
+        super("ckafka.intl.tencentcloudapi.com", "2019-08-19", credential, region, profile);
     }
     
     /**

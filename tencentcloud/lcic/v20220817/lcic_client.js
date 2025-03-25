@@ -152,7 +152,7 @@ const TextMarkConfig = models.TextMarkConfig;
 class LcicClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("lcic.tencentcloudapi.com", "2022-08-17", credential, region, profile);
+        super("lcic.intl.tencentcloudapi.com", "2022-08-17", credential, region, profile);
     }
     
     /**

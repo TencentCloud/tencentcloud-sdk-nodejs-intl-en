@@ -164,7 +164,7 @@ const Pair = models.Pair;
 class TemClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tem.tencentcloudapi.com", "2021-07-01", credential, region, profile);
+        super("tem.intl.tencentcloudapi.com", "2021-07-01", credential, region, profile);
     }
     
     /**

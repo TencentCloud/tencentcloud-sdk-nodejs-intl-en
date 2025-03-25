@@ -301,7 +301,7 @@ const CreateApiKeyRequest = models.CreateApiKeyRequest;
 class ApigatewayClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("apigateway.tencentcloudapi.com", "2018-08-08", credential, region, profile);
+        super("apigateway.intl.tencentcloudapi.com", "2018-08-08", credential, region, profile);
     }
     
     /**

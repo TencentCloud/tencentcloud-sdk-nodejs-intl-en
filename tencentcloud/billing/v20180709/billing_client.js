@@ -135,7 +135,7 @@ const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionRe
 class BillingClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("billing.tencentcloudapi.com", "2018-07-09", credential, region, profile);
+        super("billing.intl.tencentcloudapi.com", "2018-07-09", credential, region, profile);
     }
     
     /**

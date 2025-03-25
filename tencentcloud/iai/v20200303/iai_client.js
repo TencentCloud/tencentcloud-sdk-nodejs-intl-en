@@ -109,7 +109,7 @@ const CreateGroupResponse = models.CreateGroupResponse;
 class IaiClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("iai.tencentcloudapi.com", "2020-03-03", credential, region, profile);
+        super("iai.intl.tencentcloudapi.com", "2020-03-03", credential, region, profile);
     }
     
     /**

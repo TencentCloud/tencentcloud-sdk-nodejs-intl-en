@@ -104,7 +104,7 @@ const CompareResult = models.CompareResult;
 class FaceidClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("faceid.tencentcloudapi.com", "2018-03-01", credential, region, profile);
+        super("faceid.intl.tencentcloudapi.com", "2018-03-01", credential, region, profile);
     }
     
     /**

@@ -839,7 +839,7 @@ const DescribeSearchTemplatesRequest = models.DescribeSearchTemplatesRequest;
 class TcssClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tcss.tencentcloudapi.com", "2020-11-01", credential, region, profile);
+        super("tcss.intl.tencentcloudapi.com", "2020-11-01", credential, region, profile);
     }
     
     /**

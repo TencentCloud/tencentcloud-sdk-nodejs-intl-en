@@ -125,7 +125,7 @@ const StreamLinkRegionInfo = models.StreamLinkRegionInfo;
 class MdcClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("mdc.tencentcloudapi.com", "2020-08-28", credential, region, profile);
+        super("mdc.intl.tencentcloudapi.com", "2020-08-28", credential, region, profile);
     }
     
     /**

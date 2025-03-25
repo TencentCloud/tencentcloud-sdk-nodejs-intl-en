@@ -75,7 +75,7 @@ const ModifyRuleResponse = models.ModifyRuleResponse;
 class GpmClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("gpm.tencentcloudapi.com", "2020-08-20", credential, region, profile);
+        super("gpm.intl.tencentcloudapi.com", "2020-08-20", credential, region, profile);
     }
     
     /**

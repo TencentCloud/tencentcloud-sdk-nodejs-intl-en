@@ -28,7 +28,7 @@ const TextToVoiceRequest = models.TextToVoiceRequest;
 class TtsClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tts.tencentcloudapi.com", "2019-08-23", credential, region, profile);
+        super("tts.intl.tencentcloudapi.com", "2019-08-23", credential, region, profile);
     }
     
     /**

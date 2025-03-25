@@ -73,7 +73,7 @@ const DisableInternetAddressRequest = models.DisableInternetAddressRequest;
 class DcClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("dc.tencentcloudapi.com", "2018-04-10", credential, region, profile);
+        super("dc.intl.tencentcloudapi.com", "2018-04-10", credential, region, profile);
     }
     
     /**

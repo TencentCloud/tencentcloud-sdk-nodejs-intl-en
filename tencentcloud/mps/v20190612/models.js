@@ -4134,7 +4134,7 @@ class AiRecognitionTaskInput extends  AbstractModel {
 
 The figure below outlines the relationships among tracks, elements, and the timeline.
 
-![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/EditMedia-Compose-Track-Item.png)
+![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/EditMedia-Compose-Track-Item-en.png)
  * @class
  */
 class ComposeMediaConfig extends  AbstractModel {
@@ -8952,7 +8952,7 @@ Note: If this parameter is not empty, the task is a video compositing task. Othe
         this.TaskNotifyConfig = null;
 
         /**
-         * Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+         * Task priority. The higher the value, the higher the priority. Value range: -10 - 10. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
         this.TasksPriority = null;

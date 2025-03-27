@@ -4,7 +4,7 @@ Tencent Cloud SDK for Node.js helps Node.js developers debug and use TencentClou
 # Dependent Environment
 1. NODEJS 7.10.1 or higher
 2. Activate your product in the Tencent Cloud Console
-3. Get the `SecretID`, `SecretKey`, and endpoint. The general format of endpoint is `\*.tencentcloudapi.com`. For example, the endpoint of CVM is `cvm.tencentcloudapi.com`. For more information, please see the documentation of the specified product.
+3. Get the `SecretID`, `SecretKey`, and endpoint. The general format of endpoint is `\*.intl.tencentcloudapi.com`. For example, the endpoint of CVM is `cvm.intl.tencentcloudapi.com`. For more information, please see the documentation of the specified product.
 
 # Installation
 Before installing Tencent Cloud SDK for Node.js and using TencentCloud API, apply for security credentials in the Tencent Cloud Console. Security credential consists of `SecretID` and `SecretKey`. `SecretID` is for identifying the API requester. `SecretKey` is a key used for signature string encryption and authentication by the server. Please keep your `SecretKey` private and do not disclose it to others.
@@ -63,3 +63,6 @@ If there is a proxy in your environment, you need to set the system environment 
 
 # Legacy SDK
 We recommend using the new version of the SDK for NODE.js. If you have to use a legacy SDK, please go to the [GitHub repository](https://github.com/CFETeam/qcloudapi-sdk) to download it.
+
+# Compliance Notice
+Please prioritize using the ​default domain names configured in the SDK for each product. If using other domains, note that ​overseas domains may pose ​data compliance risks.

@@ -1639,6 +1639,51 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
+ * Information on a single hotword.
+ * @class
+ */
+class AsrHotwordsSetItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Hotword ID.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Hotword text.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Hotword weight. The value can be 11 or 100 or be in the range of 1 to 10.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * OCR-detected prohibited information in text
  * @class
  */
@@ -1715,6 +1760,50 @@ class DeleteScheduleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Translation result.
+ * @class
+ */
+class SmartSubtitleTaskTransTextResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of segments for translation.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<SmartSubtitleTaskTransTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * Subtitle file path.
+         * @type {string || null}
+         */
+        this.SubtitlePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new SmartSubtitleTaskTransTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
 
     }
 }
@@ -2138,6 +2227,89 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
 }
 
 /**
+ * Translation result.
+ * @class
+ */
+class SmartSubtitleTaskTransTextResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Translation task input information.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Translation task output information.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskTransTextResultOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Task progress.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SmartSubtitleTaskResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new SmartSubtitleTaskTransTextResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
  * Audio/Video enhancement configuration.
  * @class
  */
@@ -2419,6 +2591,138 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * DescribeAsrHotwords request structure.
+ * @class
+ */
+class DescribeAsrHotwordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the hotword lexicon to be queried.
+**Note: Either HotwordsId or Name should be specified. If both are specified, HotwordsId has a higher priority than Name.**
+         * @type {string || null}
+         */
+        this.HotwordsId = null;
+
+        /**
+         * Hotword lexicon name.
+**Note: Either HotwordsId or Name should be specified. If both are specified, HotwordsId has a higher priority than Name.**
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Paging offset. Default value: 0.
+
+
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Hotword sorting field. Valid values:
+
+ - Default: Sort by the hotword upload sequence.
+ - Weight: Sort by the weight.
+ - Lexical: Sort by the first letter of hotwords.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Hotword sorting order. 0: ascending (default); 1: descending.
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+
+    }
+}
+
+/**
+ * Audio track information.
+ * @class
+ */
+class AudioTrackChannelInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable audio mix. valid values:.
+0: indicates not enabling audio mix.
+1: Indicates enabling audio mix.
+Default value: 0
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ChannelsRemix = null;
+
+        /**
+         * Audio track input type. valid values:.
+trask: indicates usage of the audio track id.
+Task_channel: indicates usage of the audio track id and sound channel id.
+Default: trask.
+If the original aduio track is multichannel, recommend using trask_channel.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SelectType = null;
+
+        /**
+         * Audio track information.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<TrackInfo> || null}
+         */
+        this.InputTrackInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelsRemix = 'ChannelsRemix' in params ? params.ChannelsRemix : null;
+        this.SelectType = 'SelectType' in params ? params.SelectType : null;
+
+        if (params.InputTrackInfo) {
+            this.InputTrackInfo = new Array();
+            for (let z in params.InputTrackInfo) {
+                let obj = new TrackInfo();
+                obj.deserialize(params.InputTrackInfo[z]);
+                this.InputTrackInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -2683,29 +2987,42 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * ManageTask request structure.
+ * AI-based sample management - keyword output information.
  * @class
  */
-class ManageTaskRequest extends  AbstractModel {
+class AiSampleWord extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Operation type. Valid values:
-<ul>
-<li>Abort: task termination. Description:
-<ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` or `PROCESSING` can be terminated.</li>
-<li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` can be terminated.</li></ul>
-</li></ul>
+         * Keyword.
          * @type {string || null}
          */
-        this.OperationType = null;
+        this.Keyword = null;
 
         /**
-         * Video processing task ID.
+         * Keyword tag.
+         * @type {Array.<string> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Keyword use case.
+         * @type {Array.<string> || null}
+         */
+        this.UsageSet = null;
+
+        /**
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.CreateTime = null;
+
+        /**
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -2716,8 +3033,11 @@ class ManageTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OperationType = 'OperationType' in params ? params.OperationType : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -4125,6 +4445,79 @@ class AiRecognitionTaskInput extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
+
+    }
+}
+
+/**
+ * Result type of intelligent frame-specific tagging
+ * @class
+ */
+class AiAnalysisTaskFrameTagResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of intelligent frame-specific tagging task.
+         * @type {AiAnalysisTaskFrameTagInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of intelligent frame-specific tagging task.
+         * @type {AiAnalysisTaskFrameTagOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskFrameTagInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskFrameTagOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -5559,6 +5952,34 @@ class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
 }
 
 /**
+ * ModifyLiveRecordTemplate response structure.
+ * @class
+ */
+class ModifyLiveRecordTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Segment information.
  * @class
  */
@@ -5873,6 +6294,64 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
                 this.ClassificationSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeSmartSubtitleTemplates request structure.
+ * @class
+ */
+class DescribeSmartSubtitleTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Condition for filtering smart subtitle templates by unique identifier. The array can contain up to 10 unique identifiers.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Condition for filtering templates by type. If this field is not specified, all templates are returned. Valid values:
+* Preset: system preset template
+* Custom: user-defined template
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Condition for filtering smart subtitle templates by ID. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -6224,6 +6703,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.VideoStreamSet = null;
 
+        /**
+         * Enhancement items used for video transcoding. Descriptions of enhancement items:
+<li>hdr: HDR configuration</li>
+<li>wd_fps: configuration of frame interpolation for higher frame rate</li>
+<li>video_super_resolution: 	super-resolution configuration</li>
+<li>repair: comprehensive enhancement configuration</li>
+<li>denoise: video denoising configuration</li>
+<Li>color_enhance: color enhancement configuration</li>
+<Li>scratch: scratch removal configuration</li>
+<li>artifact: artifact (glitch) removal configuration</li>
+<li>sharp: detail enhancement configuration</li>
+<Li>low_light: low-light enhancement configuration</li>
+<Li>face_enhance: face enhancement configuration</li>
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CallBackExtInfo = null;
+
     }
 
     /**
@@ -6266,6 +6763,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.VideoStreamSet.push(obj);
             }
         }
+        this.CallBackExtInfo = 'CallBackExtInfo' in params ? params.CallBackExtInfo : null;
 
     }
 }
@@ -6584,6 +7082,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.QualityControlTask = null;
 
+        /**
+         * Smart subtitle task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitlesTaskInput || null}
+         */
+        this.SmartSubtitlesTask = null;
+
     }
 
     /**
@@ -6652,6 +7157,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new AiQualityControlTaskInput();
             obj.deserialize(params.QualityControlTask)
             this.QualityControlTask = obj;
+        }
+
+        if (params.SmartSubtitlesTask) {
+            let obj = new SmartSubtitlesTaskInput();
+            obj.deserialize(params.SmartSubtitlesTask)
+            this.SmartSubtitlesTask = obj;
         }
 
     }
@@ -8510,48 +9021,18 @@ class ModifyAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of intelligent frame-specific tagging
+ * DeleteSmartSubtitleTemplate request structure.
  * @class
  */
-class AiAnalysisTaskFrameTagResult extends  AbstractModel {
+class DeleteSmartSubtitleTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
-         * @type {string || null}
-         */
-        this.ErrCodeExt = null;
-
-        /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Unique identifier of the smart subtitle template.
          * @type {number || null}
          */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Input of intelligent frame-specific tagging task.
-         * @type {AiAnalysisTaskFrameTagInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output of intelligent frame-specific tagging task.
-         * @type {AiAnalysisTaskFrameTagOutput || null}
-         */
-        this.Output = null;
+        this.Definition = null;
 
     }
 
@@ -8562,22 +9043,7 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiAnalysisTaskFrameTagInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiAnalysisTaskFrameTagOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -9020,6 +9486,34 @@ Note: If this parameter is not empty, the task is a video compositing task. Othe
 }
 
 /**
+ * DeleteAsrHotwords request structure.
+ * @class
+ */
+class DeleteAsrHotwordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the hotword lexicon to be deleted.
+         * @type {string || null}
+         */
+        this.HotwordsId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+
+    }
+}
+
+/**
  * The AWS S3 storage information of a source file.
  * @class
  */
@@ -9145,6 +9639,85 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeAsrHotwordsList request structure.
+ * @class
+ */
+class DescribeAsrHotwordsListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter for querying by hotword lexicon ID.
+         * @type {string || null}
+         */
+        this.HotwordsId = null;
+
+        /**
+         * Parameter for querying by hotword lexicon name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. All hotword lexicons are returned by default.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Hotword lexicon sorting order.
+
+0: ascending (default)
+1: descending
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * Sorts hotword lexicons by a specific field. By default, hotword lexicons are sorted by creation time. If an invalid field is used for sorting, the default sorting field applies.
+
+ - CreateTime: sort by creation time
+ - UpdateTime: sort by update time
+ - Name: sort by hotword lexicon name
+ - WordCount: sort by the number of hotwords
+ - HotwordsId: sort by hotword lexicon ID
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 0: temporary hotword; 1 file-based hotword.
+         * @type {Array.<number> || null}
+         */
+        this.Types = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Types = 'Types' in params ? params.Types : null;
 
     }
 }
@@ -9466,6 +10039,53 @@ Default value: 0px, which means that `Height` will be proportionally scaled acco
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+
+    }
+}
+
+/**
+ * Audio track info.
+ * @class
+ */
+class TrackInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audio track and sound channel serial number, description:
+When the SelectType value is trask, this value is of the integer type, for example: 1.
+When the SelectType value is trask_channel, this value is of the decimal type, for example: 1.0.
+Default value: `1.0`.
+The integer part represents the audio track serial number, and the decimal part represents the sound channel. The audio track serial number is the stream index of the audio track, and input of 0 and positive integers is supported. The decimal part supports up to 2 decimal places, and only 0 - 63 is supported. However, when the Codec is aac/eac3/ac3, only 0 - 15 is supported for the decimal part. For example: for an audio track with a stream index of 1, 1.0 represents the first sound channel of this audio track, and 1.1 represents the second sound channel of this audio track.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TrackNum = null;
+
+        /**
+         * Sound channel volume. specifies the volume of the sound channel.
+When the value of AudioChannel is 1, the value length is 1.
+When the value of AudioChannel is 2, the value length is 2.
+When the value of AudioChannel is 6, the length of this value is greater than 2.
+The array value of this parameter has a valid value range of [-60, 6]. among them, -60 indicates mute, 0 indicates keeping the original volume, and 6 means doubling the original volume. the default value is -60.
+Supports 3 decimal places.
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ChannelVolume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TrackNum = 'TrackNum' in params ? params.TrackNum : null;
+        this.ChannelVolume = 'ChannelVolume' in params ? params.ChannelVolume : null;
 
     }
 }
@@ -11842,6 +12462,41 @@ class AiAnalysisTaskTagOutput extends  AbstractModel {
 }
 
 /**
+ * CreateAsrHotwords response structure.
+ * @class
+ */
+class CreateAsrHotwordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Hotword lexicon ID.
+         * @type {string || null}
+         */
+        this.HotwordsId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The output of an intelligent highlight generation task.
  * @class
  */
@@ -12130,6 +12785,27 @@ Note 3: The trigger configured for an orchestration is for automatically startin
          */
         this.TaskType = null;
 
+        /**
+         * Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Smart subtitle task.
+         * @type {SmartSubtitlesTaskInput || null}
+         */
+        this.SmartSubtitlesTask = null;
+
+        /**
+         * Whether to skip metadata acquisition. Valid values:
+0: do not skip
+1: skip
+Default value: 0		
+         * @type {number || null}
+         */
+        this.SkipMateData = null;
+
     }
 
     /**
@@ -12193,6 +12869,14 @@ Note 3: The trigger configured for an orchestration is for automatically startin
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+        if (params.SmartSubtitlesTask) {
+            let obj = new SmartSubtitlesTaskInput();
+            obj.deserialize(params.SmartSubtitlesTask)
+            this.SmartSubtitlesTask = obj;
+        }
+        this.SkipMateData = 'SkipMateData' in params ? params.SkipMateData : null;
 
     }
 }
@@ -12667,42 +13351,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * AI-based sample management - keyword output information.
+ * ManageTask request structure.
  * @class
  */
-class AiSampleWord extends  AbstractModel {
+class ManageTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Keyword.
+         * Operation type. Valid values:
+<ul>
+<li>Abort: task termination. Description:
+<ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` or `PROCESSING` can be terminated.</li>
+<li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` can be terminated.</li></ul>
+</li></ul>
          * @type {string || null}
          */
-        this.Keyword = null;
+        this.OperationType = null;
 
         /**
-         * Keyword tag.
-         * @type {Array.<string> || null}
-         */
-        this.TagSet = null;
-
-        /**
-         * Keyword use case.
-         * @type {Array.<string> || null}
-         */
-        this.UsageSet = null;
-
-        /**
-         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * Video processing task ID.
          * @type {string || null}
          */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.TaskId = null;
 
     }
 
@@ -12713,11 +13384,8 @@ class AiSampleWord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
-        this.TagSet = 'TagSet' in params ? params.TagSet : null;
-        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -12784,6 +13452,132 @@ class AiAnalysisTaskSegmentResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * Custom smart subtitle parameter.
+ * @class
+ */
+class RawSmartSubtitleParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart subtitle language type.
+0: source language1: target language
+2: source language + target language
+The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * @type {number || null}
+         */
+        this.SubtitleType = null;
+
+        /**
+         * Source language of the video with smart subtitles.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+zh-PY: Chinese-English-Cantonese
+zh-medical: Medical Chinese
+yue: Cantonese
+vi: Vietnamese
+ms: Malay
+id: Indonesian
+fli: Filipino
+th: Thai
+pt: Portuguese
+tr: Turkish
+ar: Arabic
+es: Spanish
+hi: Hindi
+fr: French
+de: German
+zh-dialect: Chinese dialect
+         * @type {string || null}
+         */
+        this.VideoSrcLanguage = null;
+
+        /**
+         * Smart subtitle file format.
+vtt: WebVTT format
+If this field is left blank, no subtitle file will be generated.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+        /**
+         * Subtitle translation switch.
+ON: enable translation
+OFF: disable translation
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TranslateSwitch = null;
+
+        /**
+         * Target language for subtitle translation.
+This field takes effect when TranslateSwitch is set to ON.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+fr: French
+es: Spanish
+it: Italian
+de: German
+tr: Turkish
+ru: Russian
+pt: Portuguese
+vi: Vietnamese
+id: Indonesian
+ms: Malay
+th: Thai
+ar: Arabic
+hi: Hindi
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TranslateDstLanguage = null;
+
+        /**
+         * ASR hotword lexicon parameter.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AsrHotWordsConfigure || null}
+         */
+        this.AsrHotWordsConfigure = null;
+
+        /**
+         * Custom parameter.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubtitleType = 'SubtitleType' in params ? params.SubtitleType : null;
+        this.VideoSrcLanguage = 'VideoSrcLanguage' in params ? params.VideoSrcLanguage : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.TranslateSwitch = 'TranslateSwitch' in params ? params.TranslateSwitch : null;
+        this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
+
+        if (params.AsrHotWordsConfigure) {
+            let obj = new AsrHotWordsConfigure();
+            obj.deserialize(params.AsrHotWordsConfigure)
+            this.AsrHotWordsConfigure = obj;
+        }
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -13648,6 +14442,100 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * Result of the smart subtitle scheduling task.
+ * @class
+ */
+class ScheduleSmartSubtitleTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Recognition task input.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitlesTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Recognition task output.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<SmartSubtitlesResult> || null}
+         */
+        this.Output = null;
+
+        /**
+         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SmartSubtitlesTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            this.Output = new Array();
+            for (let z in params.Output) {
+                let obj = new SmartSubtitlesResult();
+                obj.deserialize(params.Output[z]);
+                this.Output.push(obj);
+            }
+        }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
  * DeleteImageSpriteTemplate response structure.
  * @class
  */
@@ -14423,32 +15311,18 @@ and will be deleted after `PicUrlExpireTime`).
 }
 
 /**
- * The parameters for detecting sensitive information based on OCR.
+ * ModifyAsrHotwords response structure.
  * @class
  */
-class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+class ModifyAsrHotwordsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to detect sensitive information based on OCR. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.RequestId = null;
 
     }
 
@@ -14459,9 +15333,7 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15934,6 +16806,65 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
 }
 
 /**
+ * ModifyAsrHotwords request structure.
+ * @class
+ */
+class ModifyAsrHotwordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Hotword lexicon ID.
+         * @type {string || null}
+         */
+        this.HotwordsId = null;
+
+        /**
+         * Hotword lexicon name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Hotword lexicon text.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Base64-encoded content of the hotword file. This field is required if Type is set to 1.
+
+
+
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * Name of the uploaded hotword file.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+
+    }
+}
+
+/**
  * Control parameter of a porn information detection in image task
  * @class
  */
@@ -16082,6 +17013,70 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeAsrHotwordsList response structure.
+ * @class
+ */
+class DescribeAsrHotwordsListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of hotword lexicons.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. All hotword lexicons are returned by default.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Hotword lexicon list.
+         * @type {Array.<AsrHotwordsSet> || null}
+         */
+        this.AsrHotwordsSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.AsrHotwordsSet) {
+            this.AsrHotwordsSet = new Array();
+            for (let z in params.AsrHotwordsSet) {
+                let obj = new AsrHotwordsSet();
+                obj.deserialize(params.AsrHotwordsSet[z]);
+                this.AsrHotwordsSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16243,6 +17238,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new AiAnalysisTaskHorizontalToVerticalResult();
             obj.deserialize(params.HorizontalToVerticalTask)
             this.HorizontalToVerticalTask = obj;
+        }
+
+    }
+}
+
+/**
+ * Smart subtitle translation input.
+ * @class
+ */
+class SmartSubtitleTaskResultInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart subtitle template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Custom smart subtitle parameter. It takes effect when Definition is set to 0.
+This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {RawSmartSubtitleParameter || null}
+         */
+        this.RawParameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.RawParameter) {
+            let obj = new RawSmartSubtitleParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
         }
 
     }
@@ -16532,6 +17569,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteSmartSubtitleTemplate response structure.
+ * @class
+ */
+class DeleteSmartSubtitleTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17348,6 +18413,50 @@ class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * The parameters for detecting sensitive information based on OCR.
+ * @class
+ */
+class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to detect sensitive information based on OCR. Valid values:
+<li>ON</li>
+<li>OFF</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * AI video intelligent analysis input parameter types
  * @class
  */
@@ -17362,9 +18471,13 @@ class AiAnalysisTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * An extended parameter, whose value is a stringfied JSON.
-Note: This parameter is for customers with special requirements. It needs to be customized offline.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Additional parameter. Its value is a serialized JSON string.
+Note: This parameter is used to meet customization requirements. References:
+Smart erase: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
+Video splitting: https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1
+Intelligent highlights: https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1
+Horizontal-to-vertical video transformation: https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ExtendedParameter = null;
@@ -17561,6 +18674,100 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
 }
 
 /**
+ * DeleteAsrHotwords response structure.
+ * @class
+ */
+class DeleteAsrHotwordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Segment undergone full speech recognition.
+ * @class
+ */
+class SmartSubtitleTaskAsrFullTextSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Confidence of a recognized segment. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Start time offset of a recognized segment, in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a recognized segment, in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Recognized text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Word timestamp information.
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<WordResult> || null}
+         */
+        this.Wordlist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Text = 'Text' in params ? params.Text : null;
+
+        if (params.Wordlist) {
+            this.Wordlist = new Array();
+            for (let z in params.Wordlist) {
+                let obj = new WordResult();
+                obj.deserialize(params.Wordlist[z]);
+                this.Wordlist.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * The information of a checked segment in quality control.
  * @class
  */
@@ -17714,24 +18921,44 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
 }
 
 /**
- * CreateSampleSnapshotTemplate response structure.
+ * CreateAsrHotwords request structure.
  * @class
  */
-class CreateSampleSnapshotTemplateResponse extends  AbstractModel {
+class CreateAsrHotwordsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
+         * 0: temporary hotword; 1 file-based hotword.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.Type = null;
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Hotword lexicon name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * Hotword lexicon text. This field is required if Type is set to 0.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Base64-encoded content of the hotword file. This field is required if Type is set to 1.
+
+
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * Name of the uploaded file.
+         * @type {string || null}
+         */
+        this.FileName = null;
 
     }
 
@@ -17742,8 +18969,11 @@ class CreateSampleSnapshotTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -17893,6 +19123,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.EndTime = null;
 
+        /**
+         * Specifies the character ID.
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
     }
 
     /**
@@ -17912,6 +19148,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
     }
 }
@@ -18265,6 +19502,60 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Control parameter of a full speech recognition task.
+ * @class
+ */
+class TranslateConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of a full speech recognition task. Valid values:
+<li>ON: Enables an intelligent full speech recognition task;</li>
+<li>OFF: Disables an intelligent full speech recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SourceLanguage = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DestinationLanguage = null;
+
+        /**
+         * Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Valid value:
+<li>vtt: Generate a WebVTT subtitle file.</li>
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SourceLanguage = 'SourceLanguage' in params ? params.SourceLanguage : null;
+        this.DestinationLanguage = 'DestinationLanguage' in params ? params.DestinationLanguage : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+
+    }
+}
+
+/**
  * Control parameter of a porn information detection in text task
  * @class
  */
@@ -18581,6 +19872,50 @@ class DescribeMediaMetaDataResponse extends  AbstractModel {
             this.MetaData = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Full speech recognition result.
+ * @class
+ */
+class SmartSubtitleTaskAsrFullTextResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of segments for full speech recognition.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<SmartSubtitleTaskAsrFullTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * Subtitle file path.
+         * @type {string || null}
+         */
+        this.SubtitlePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new SmartSubtitleTaskAsrFullTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
 
     }
 }
@@ -19344,6 +20679,14 @@ class AdaptiveStreamTemplate extends  AbstractModel {
          */
         this.RemoveVideo = null;
 
+        /**
+         * List of audio parameter information.
+The parameter array has a maximum length of 64.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<AudioTemplateInfo> || null}
+         */
+        this.AudioList = null;
+
     }
 
     /**
@@ -19367,6 +20710,15 @@ class AdaptiveStreamTemplate extends  AbstractModel {
         }
         this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
         this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+
+        if (params.AudioList) {
+            this.AudioList = new Array();
+            for (let z in params.AudioList) {
+                let obj = new AudioTemplateInfo();
+                obj.deserialize(params.AudioList[z]);
+                this.AudioList.push(obj);
+            }
+        }
 
     }
 }
@@ -19533,6 +20885,188 @@ Note: this field may return `null`, indicating that no valid value was found.
             obj.deserialize(params.HeadTailParameter)
             this.HeadTailParameter = obj;
         }
+
+    }
+}
+
+/**
+ * Smart subtitle template details.
+ * @class
+ */
+class SmartSubtitleTemplateItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the smart subtitle template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Smart subtitle template name.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Smart subtitle template description.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Template type. Valid values:
+* Preset: system preset template
+* Custom: user-defined template
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * ASR hotword lexicon parameter.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AsrHotWordsConfigure || null}
+         */
+        this.AsrHotWordsConfigure = null;
+
+        /**
+         * Name of the hotword lexicon associated with the template.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AsrHotWordsLibraryName = null;
+
+        /**
+         * Source language of the video with smart subtitles.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+zh-PY: Chinese-English-Cantonese
+zh-medical: Medical Chinese
+yue: Cantonese
+vi: Vietnamese
+ms: Malay
+id: Indonesian
+fli: Filipino
+th: Thai
+pt: Portuguese
+tr: Turkish
+ar: Arabic
+es: Spanish
+hi: Hindi
+fr: French
+de: German
+zh-dialect: Chinese dialect
+         * @type {string || null}
+         */
+        this.VideoSrcLanguage = null;
+
+        /**
+         * Smart subtitle file format.
+vtt: WebVTT format
+If this field is left blank, no subtitle file will be generated.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+        /**
+         * Smart subtitle language type.
+0: source language1: target language
+2: source language + target language
+The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * @type {number || null}
+         */
+        this.SubtitleType = null;
+
+        /**
+         * Subtitle translation switch.
+ON: enable translation
+OFF: disable translation
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TranslateSwitch = null;
+
+        /**
+         * Target language for subtitle translation.
+This field takes effect when TranslateSwitch is set to ON.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+fr: French
+es: Spanish
+it: Italian
+de: German
+tr: Turkish
+ru: Russian
+pt: Portuguese
+vi: Vietnamese
+id: Indonesian
+ms: Malay
+th: Thai
+ar: Arabic
+hi: Hindi
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TranslateDstLanguage = null;
+
+        /**
+         * Template creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modification time of the template in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Alias of the preset smart subtitle template.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.AsrHotWordsConfigure) {
+            let obj = new AsrHotWordsConfigure();
+            obj.deserialize(params.AsrHotWordsConfigure)
+            this.AsrHotWordsConfigure = obj;
+        }
+        this.AsrHotWordsLibraryName = 'AsrHotWordsLibraryName' in params ? params.AsrHotWordsLibraryName : null;
+        this.VideoSrcLanguage = 'VideoSrcLanguage' in params ? params.VideoSrcLanguage : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.SubtitleType = 'SubtitleType' in params ? params.SubtitleType : null;
+        this.TranslateSwitch = 'TranslateSwitch' in params ? params.TranslateSwitch : null;
+        this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
 
     }
 }
@@ -19794,6 +21328,41 @@ u200c<li>`Horizental`: Flip horizontally. </li>
 }
 
 /**
+ * CreateSampleSnapshotTemplate response structure.
+ * @class
+ */
+class CreateSampleSnapshotTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of a sampled screencapturing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateLiveRecordTemplate response structure.
  * @class
  */
@@ -19838,17 +21407,18 @@ class ActivityResult extends  AbstractModel {
 
         /**
          * Atomic task type.
-<li>Transcode: transcoding.</li>
-<li>SampleSnapshot: sampled screenshot taking.</li>
-<li>AnimatedGraphics: animated image generating.</li>
-<li>SnapshotByTimeOffset: time point screenshot taking.</li>
-<li>ImageSprites: sprite image generating.</li>
-<li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
-<li>AiContentReview: content moderation.</li>
-<li>AIRecognition: intelligent identification.</li>
-<li>AIAnalysis: intelligent analysis.</li>
-
+<Li>Transcode: transcoding</li>
+<Li>SampleSnapshot: sampled screenshot</li>
+<Li>AnimatedGraphics: conversion to GIF</li>
+<Li>SnapshotByTimeOffset: time point screenshot</li>
+<Li>ImageSprites: image sprite</li>
+<Li>AdaptiveDynamicStreaming: adaptive bitrate stream</li>
+<Li>AiContentReview: content review</li>
+<Li>AIRecognition: intelligent recognition</li>
+<Li>AIAnalysis: intelligent analysis</li>
 <li>AiQualityControl: media quality inspection.</li>
+
+<Li>SmartSubtitles: smart subtitle</li>
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -19875,6 +21445,141 @@ class ActivityResult extends  AbstractModel {
             obj.deserialize(params.ActivityResItem)
             this.ActivityResItem = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeAsrHotwords response structure.
+ * @class
+ */
+class DescribeAsrHotwordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the hotword lexicon to be queried.
+         * @type {string || null}
+         */
+        this.HotwordsId = null;
+
+        /**
+         * Current status of the hotword lexicon corresponding to the ID. The value 0 indicates that no template is bound to this hotword lexicon when the query is performed and that the hotword lexicon can be deleted.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Hotword lexicon name.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The value is 0 for a temporary hotword lexicon, and the string provided during creation is returned.
+The value is 1 for a file-based hotword lexicon, and the content of the file uploaded during creation is returned.
+
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of the uploaded hotword file.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * List of hotwords returned for the query.
+         * @type {Array.<AsrHotwordsSetItem> || null}
+         */
+        this.HotWords = null;
+
+        /**
+         * Hotword text, which depends on the value of Type.
+If the value of Type is 0, the hotword string is returned.
+If the value of Type is 1, the base64-encoded content of the hotword file is returned.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Number of words contained in the hotword lexicon.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.WordCount = null;
+
+        /**
+         * Paging offset. Default value: 0.
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+
+        if (params.HotWords) {
+            this.HotWords = new Array();
+            for (let z in params.HotWords) {
+                let obj = new AsrHotwordsSetItem();
+                obj.deserialize(params.HotWords[z]);
+                this.HotWords.push(obj);
+            }
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.WordCount = 'WordCount' in params ? params.WordCount : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20063,6 +21768,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * ModifySmartSubtitleTemplate response structure.
+ * @class
+ */
+class ModifySmartSubtitleTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20449,6 +22182,14 @@ Default value: 2.
          */
         this.AudioChannel = null;
 
+        /**
+         * Merge audio track information.
+This field only takes effec in adaptive bitrate transcoding.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AudioTrackChannelInfo || null}
+         */
+        this.TrackChannelInfo = null;
+
     }
 
     /**
@@ -20462,6 +22203,12 @@ Default value: 2.
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
+
+        if (params.TrackChannelInfo) {
+            let obj = new AudioTrackChannelInfo();
+            obj.deserialize(params.TrackChannelInfo)
+            this.TrackChannelInfo = obj;
+        }
 
     }
 }
@@ -21633,22 +23380,23 @@ class Activity extends  AbstractModel {
 
         /**
          * Atomic task type.
-<li>input: start node.</li>
-<li>output: termination node.</li>
-<li>action-trans: transcoding.</li>
-<li>action-samplesnapshot: sampled screenshot taking.</li>
-<li>action-AIAnalysis: analysis.</li>
-<li>action-AIRecognition: recognition.</li>
-<li>action-aiReview: auditing.</li>
-<li>action-animated-graphics: animated image generating.</li>
-<li>action-image-sprite: sprite image generating.</li>
-<li>action-snapshotByTimeOffset: time point screenshot taking.</li>
-<li>action-adaptive-substream: adaptive bitrate streaming.</li>
-<li>action-AIQualityControl: media quality inspection.</li>
+<li>input: start node</li>
+<li>output: end node</li>
+<li>action-trans: transcoding</li>
+<li>action-samplesnapshot: sampled screenshot</li>
+<li>action-AIAnalysis: analysis</li>
+<li>action-AIRecognition: recognition</li>
+<li>action-aiReview: review</li>
+<li>action-animated-graphics: conversion to GIF</li>
+<li>action-image-sprite: image sprite</li>
+<li>action-snapshotByTimeOffset: time point screenshot</li>
+<li>action-adaptive-substream: adaptive bitrate stream</li>
+<li>action-AIQualityControl: media quality inspection</li>
+<li>action-SmartSubtitles: smart subtitle</li>
 
 
 
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -22192,19 +23940,19 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Control parameter for porn information
+         * Control parameter for a pornography detection task.
          * @type {PornConfigureInfo || null}
          */
         this.PornConfigure = null;
 
         /**
-         * Control parameter for terrorism information
+         * Control parameter for a violence detection task.
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Control parameter for politically sensitive information
+         * Control parameter for a sensitive content detection task.
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -23786,6 +25534,65 @@ class AiRecognitionTaskTransTextResultOutput extends  AbstractModel {
 }
 
 /**
+ * Smart subtitle task result.
+ * @class
+ */
+class SmartSubtitlesResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task type. Valid values:
+<Li>AsrFullTextRecognition: full speech recognition</li>
+<Li>TransTextRecognition: speech translation</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Full speech recognition result. When Type is
+ set to AsrFullTextRecognition, this parameter takes effect.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskAsrFullTextResult || null}
+         */
+        this.AsrFullTextTask = null;
+
+        /**
+         * Translation result. When Type is
+
+ set to TransTextRecognition, this parameter takes effect.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskTransTextResult || null}
+         */
+        this.TransTextTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.AsrFullTextTask) {
+            let obj = new SmartSubtitleTaskAsrFullTextResult();
+            obj.deserialize(params.AsrFullTextTask)
+            this.AsrFullTextTask = obj;
+        }
+
+        if (params.TransTextTask) {
+            let obj = new SmartSubtitleTaskTransTextResult();
+            obj.deserialize(params.TransTextTask)
+            this.TransTextTask = obj;
+        }
+
+    }
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate request structure.
  * @class
  */
@@ -23866,6 +25673,43 @@ Default value: black.
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+
+    }
+}
+
+/**
+ * Smart subtitle hotword parameter.
+ * @class
+ */
+class AsrHotWordsConfigure extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Hotword switch.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Hotword lexicon ID.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.LibraryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
 
     }
 }
@@ -25491,6 +27335,137 @@ class WordResult extends  AbstractModel {
 }
 
 /**
+ * CreateSmartSubtitleTemplate request structure.
+ * @class
+ */
+class CreateSmartSubtitleTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart subtitle template name.
+Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Source language of the video with smart subtitles.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+zh-PY: Chinese-English-Cantonese
+zh-medical: Medical Chinese
+yue: Cantonese
+vi: Vietnamese
+ms: Malay
+id: Indonesian
+fli: Filipino
+th: Thai
+pt: Portuguese
+tr: Turkish
+ar: Arabic
+es: Spanish
+hi: Hindi
+fr: French
+de: German
+zh-dialect: Chinese dialect
+         * @type {string || null}
+         */
+        this.VideoSrcLanguage = null;
+
+        /**
+         * Smart subtitle language type.
+0: source language1: target language
+2: source language + target language
+The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * @type {number || null}
+         */
+        this.SubtitleType = null;
+
+        /**
+         * Smart subtitle template description.
+Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Smart subtitle file format.
+vtt: WebVTT format
+If this field is left blank, no subtitle file will be generated.
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+        /**
+         * ASR hotword lexicon parameter.
+         * @type {AsrHotWordsConfigure || null}
+         */
+        this.AsrHotWordsConfigure = null;
+
+        /**
+         * Subtitle translation switch.
+ON: enable translation
+OFF: disable translation
+         * @type {string || null}
+         */
+        this.TranslateSwitch = null;
+
+        /**
+         * Target language for subtitle translation.
+This field takes effect when TranslateSwitch is set to ON.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+fr: French
+es: Spanish
+it: Italian
+de: German
+tr: Turkish
+ru: Russian
+pt: Portuguese
+vi: Vietnamese
+id: Indonesian
+ms: Malay
+th: Thai
+ar: Arabic
+hi: Hindi
+         * @type {string || null}
+         */
+        this.TranslateDstLanguage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VideoSrcLanguage = 'VideoSrcLanguage' in params ? params.VideoSrcLanguage : null;
+        this.SubtitleType = 'SubtitleType' in params ? params.SubtitleType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+
+        if (params.AsrHotWordsConfigure) {
+            let obj = new AsrHotWordsConfigure();
+            obj.deserialize(params.AsrHotWordsConfigure)
+            this.AsrHotWordsConfigure = obj;
+        }
+        this.TranslateSwitch = 'TranslateSwitch' in params ? params.TranslateSwitch : null;
+        this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
+
+    }
+}
+
+/**
  * Control parameter of a porn information detection task.
  * @class
  */
@@ -25633,9 +27608,12 @@ class DrmInfo extends  AbstractModel {
         super();
 
         /**
-         * The encryption type.
-<li>`simpleaes`: AES-128 encryption.</li>
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Encryption type.
+<li>simpleaes: AES-128 encryption</li>
+<li> widevine</li>
+<li>fairplay: not supported for DASH streams</li>
+<li> playready</li>
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -25646,6 +27624,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
          * @type {SimpleAesDrm || null}
          */
         this.SimpleAesDrm = null;
+
+        /**
+         * Information about FairPlay, WideVine, and PlayReady encryption.
+         * @type {SpekeDrm || null}
+         */
+        this.SpekeDrm = null;
 
     }
 
@@ -25662,6 +27646,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
             let obj = new SimpleAesDrm();
             obj.deserialize(params.SimpleAesDrm)
             this.SimpleAesDrm = obj;
+        }
+
+        if (params.SpekeDrm) {
+            let obj = new SpekeDrm();
+            obj.deserialize(params.SpekeDrm)
+            this.SpekeDrm = obj;
         }
 
     }
@@ -26246,41 +28236,71 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Control parameter of a full speech recognition task.
+ * Returned result set of hotword lexicon query.
  * @class
  */
-class TranslateConfigureInfo extends  AbstractModel {
+class AsrHotwordsSet extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of a full speech recognition task. Valid values:
-<li>ON: Enables an intelligent full speech recognition task;</li>
-<li>OFF: Disables an intelligent full speech recognition task.</li>
+         * Hotword lexicon ID.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.HotwordsId = null;
 
         /**
-         * 
-         * @type {string || null}
+         * Current hotword lexicon status. The value indicates the number of smart subtitle templates bound to this hotword lexicon.
+If the Status value is 0, it indicates that the hotword lexicon is not referenced by any smart subtitle template and that it can be deleted.
+If the Status value is not 0, it indicates that the hotword lexicon cannot be deleted.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
          */
-        this.SourceLanguage = null;
+        this.Status = null;
 
         /**
-         * 
+         * Hotword lexicon name.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.DestinationLanguage = null;
+        this.Name = null;
 
         /**
-         * Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Valid value:
-<li>vtt: Generate a WebVTT subtitle file.</li>
+         * Number of hotwords in the hotword lexicon.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.WordCount = null;
 
-Note: This field may return null, indicating that no valid values can be obtained.
+        /**
+         * Name of the uploaded hotword file.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.SubtitleFormat = null;
+        this.FileName = null;
+
+        /**
+         * Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, 2006-01-02T15:04:05Z.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, 2006-01-02T15:04:05Z.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 0: temporary hotword lexicon
+1: file-based hotword lexicon
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Type = null;
 
     }
 
@@ -26291,10 +28311,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.SourceLanguage = 'SourceLanguage' in params ? params.SourceLanguage : null;
-        this.DestinationLanguage = 'DestinationLanguage' in params ? params.DestinationLanguage : null;
-        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.HotwordsId = 'HotwordsId' in params ? params.HotwordsId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.WordCount = 'WordCount' in params ? params.WordCount : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -26441,12 +28465,24 @@ no_config: Not configured.
 }
 
 /**
- * ModifyLiveRecordTemplate response structure.
+ * DescribeSmartSubtitleTemplates response structure.
  * @class
  */
-class ModifyLiveRecordTemplateResponse extends  AbstractModel {
+class DescribeSmartSubtitleTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Total number of records that meet filter conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of smart subtitle template details.
+         * @type {Array.<SmartSubtitleTemplateItem> || null}
+         */
+        this.SmartSubtitleTemplateSet = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -26462,6 +28498,16 @@ class ModifyLiveRecordTemplateResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SmartSubtitleTemplateSet) {
+            this.SmartSubtitleTemplateSet = new Array();
+            for (let z in params.SmartSubtitleTemplateSet) {
+                let obj = new SmartSubtitleTemplateItem();
+                obj.deserialize(params.SmartSubtitleTemplateSet[z]);
+                this.SmartSubtitleTemplateSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -27980,6 +30026,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AiQualityControlTaskResult = null;
 
+        /**
+         * Execution result of the smart subtitle task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<SmartSubtitlesResult> || null}
+         */
+        this.SmartSubtitlesTaskResult = null;
+
     }
 
     /**
@@ -28047,6 +30100,98 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.AiQualityControlTaskResult)
             this.AiQualityControlTaskResult = obj;
         }
+
+        if (params.SmartSubtitlesTaskResult) {
+            this.SmartSubtitlesTaskResult = new Array();
+            for (let z in params.SmartSubtitlesTaskResult) {
+                let obj = new SmartSubtitlesResult();
+                obj.deserialize(params.SmartSubtitlesTaskResult[z]);
+                this.SmartSubtitlesTaskResult.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Full speech recognition result.
+ * @class
+ */
+class SmartSubtitleTaskAsrFullTextResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input information on the full speech recognition task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information on the full speech recognition task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskAsrFullTextResultOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Task progress.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SmartSubtitleTaskResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new SmartSubtitleTaskAsrFullTextResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -28237,6 +30382,79 @@ If not set, the service will automatically adopt a suitable bitrate based on aud
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+
+    }
+}
+
+/**
+ * Translated segment.
+ * @class
+ */
+class SmartSubtitleTaskTransTextSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Confidence of a recognized segment. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Start time offset of a recognized segment, in seconds.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of a recognized segment, in seconds.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Recognized text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Translated text.
+         * @type {string || null}
+         */
+        this.Trans = null;
+
+        /**
+         * Word timestamp information.
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<WordResult> || null}
+         */
+        this.Wordlist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
+
+        if (params.Wordlist) {
+            this.Wordlist = new Array();
+            for (let z in params.Wordlist) {
+                let obj = new WordResult();
+                obj.deserialize(params.Wordlist[z]);
+                this.Wordlist.push(obj);
+            }
+        }
 
     }
 }
@@ -28606,6 +30824,144 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * ModifySmartSubtitleTemplate request structure.
+ * @class
+ */
+class ModifySmartSubtitleTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the smart subtitle template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Subtitle translation switch.
+ON: enable translation
+OFF: disable translation
+         * @type {string || null}
+         */
+        this.TranslateSwitch = null;
+
+        /**
+         * Smart subtitle template name.
+Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Smart subtitle template description.
+Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Source language of the video with smart subtitles.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+zh-PY: Chinese-English-Cantonese
+zh-medical: Medical Chinese
+yue: Cantonese
+vi: Vietnamese
+ms: Malay
+id: Indonesian
+fli: Filipino
+th: Thai
+pt: Portuguese
+tr: Turkish
+ar: Arabic
+es: Spanish
+hi: Hindi
+fr: French
+de: German
+zh-dialect: Chinese dialect
+         * @type {string || null}
+         */
+        this.VideoSrcLanguage = null;
+
+        /**
+         * Smart subtitle file format.
+vtt: WebVTT format
+If this field is left blank, no subtitle file will be generated.
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+        /**
+         * Smart subtitle language type.
+0: source language1: target language
+2: source language + target language
+The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+         * @type {number || null}
+         */
+        this.SubtitleType = null;
+
+        /**
+         * ASR hotword lexicon parameter.
+         * @type {AsrHotWordsConfigure || null}
+         */
+        this.AsrHotWordsConfigure = null;
+
+        /**
+         * Target language for subtitle translation.
+This field takes effect when TranslateSwitch is set to ON.
+Supported languages:
+zh: Simplified Chinese
+en: English
+ja: Japanese
+ko: Korean
+fr: French
+es: Spanish
+it: Italian
+de: German
+tr: Turkish
+ru: Russian
+pt: Portuguese
+vi: Vietnamese
+id: Indonesian
+ms: Malay
+th: Thai
+ar: Arabic
+hi: Hindi
+         * @type {string || null}
+         */
+        this.TranslateDstLanguage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.TranslateSwitch = 'TranslateSwitch' in params ? params.TranslateSwitch : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.VideoSrcLanguage = 'VideoSrcLanguage' in params ? params.VideoSrcLanguage : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.SubtitleType = 'SubtitleType' in params ? params.SubtitleType : null;
+
+        if (params.AsrHotWordsConfigure) {
+            let obj = new AsrHotWordsConfigure();
+            obj.deserialize(params.AsrHotWordsConfigure)
+            this.AsrHotWordsConfigure = obj;
+        }
+        this.TranslateDstLanguage = 'TranslateDstLanguage' in params ? params.TranslateDstLanguage : null;
+
+    }
+}
+
+/**
  * DescribeTranscodeTemplates response structure.
  * @class
  */
@@ -28881,6 +31237,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.QualityControlTask = null;
 
+        /**
+         * Smart subtitle task output.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ScheduleSmartSubtitleTaskResult || null}
+         */
+        this.SmartSubtitlesTask = null;
+
     }
 
     /**
@@ -28950,6 +31313,77 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.QualityControlTask)
             this.QualityControlTask = obj;
         }
+
+        if (params.SmartSubtitlesTask) {
+            let obj = new ScheduleSmartSubtitleTaskResult();
+            obj.deserialize(params.SmartSubtitlesTask)
+            this.SmartSubtitlesTask = obj;
+        }
+
+    }
+}
+
+/**
+ * FairPlay, WideVine, PlayReady, and other DRM encryption technologies.
+ * @class
+ */
+class SpekeDrm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource ID.
+It supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Access address of the DRM vendor.
+
+Note: Different DRM vendors have different limits on the number of substreams. For example, PallyCon limits the number of substreams to no more than 5, and DRMtoday supports encryption of up to 9 substreams.
+         * @type {string || null}
+         */
+        this.KeyServerUrl = null;
+
+        /**
+         * Initialization vector (32-byte string) for encryption.
+         * @type {string || null}
+         */
+        this.Vector = null;
+
+        /**
+         * Encryption method. cbcs: default method of FairPlay; cenc: default method of PlayReady and Widevine.
+
+cbcs: supported by PlayReady, Widevine, and FairPlay
+cenc: supported by PlayReady and Widevine
+         * @type {string || null}
+         */
+        this.EncryptionMethod = null;
+
+        /**
+         * Substream encryption rule. Default value: preset0.
+preset 0: use the same key to encrypt all substreams
+preset1: use different keys for each substream
+
+         * @type {string || null}
+         */
+        this.EncryptionPreset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.KeyServerUrl = 'KeyServerUrl' in params ? params.KeyServerUrl : null;
+        this.Vector = 'Vector' in params ? params.Vector : null;
+        this.EncryptionMethod = 'EncryptionMethod' in params ? params.EncryptionMethod : null;
+        this.EncryptionPreset = 'EncryptionPreset' in params ? params.EncryptionPreset : null;
 
     }
 }
@@ -29279,6 +31713,54 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * Smart subtitle input struct.
+ * @class
+ */
+class SmartSubtitlesTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart subtitle template ID.	
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * User extension field, which does not need to be filled in for general scenarios.
+         * @type {string || null}
+         */
+        this.UserExtPara = null;
+
+        /**
+         * Custom smart subtitle parameter. It takes effect when Definition is set to 0. This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {RawSmartSubtitleParameter || null}
+         */
+        this.RawParameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.UserExtPara = 'UserExtPara' in params ? params.UserExtPara : null;
+
+        if (params.RawParameter) {
+            let obj = new RawSmartSubtitleParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
+        }
 
     }
 }
@@ -29898,6 +32380,41 @@ class ComposeAudioOperation extends  AbstractModel {
 }
 
 /**
+ * CreateSmartSubtitleTemplate response structure.
+ * @class
+ */
+class CreateSmartSubtitleTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique identifier of the smart subtitle template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -30095,6 +32612,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SegmentTags = null;
 
+        /**
+         * The live streaming segment corresponds to the live start time point, in the ISO date format.	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * The live streaming segment corresponds to the live streaming end time, in the ISO date format.	
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -30108,6 +32639,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.SegmentTags = 'SegmentTags' in params ? params.SegmentTags : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -30601,8 +33134,10 @@ module.exports = {
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
+    AsrHotwordsSetItem: AsrHotwordsSetItem,
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
     DeleteScheduleResponse: DeleteScheduleResponse,
+    SmartSubtitleTaskTransTextResultOutput: SmartSubtitleTaskTransTextResultOutput,
     ManageTaskResponse: ManageTaskResponse,
     DeleteWorkflowRequest: DeleteWorkflowRequest,
     AwsS3FileUploadTrigger: AwsS3FileUploadTrigger,
@@ -30611,14 +33146,17 @@ module.exports = {
     NumberFormat: NumberFormat,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
+    SmartSubtitleTaskTransTextResult: SmartSubtitleTaskTransTextResult,
     EnhanceConfig: EnhanceConfig,
     MediaInputInfo: MediaInputInfo,
     CreateWorkflowRequest: CreateWorkflowRequest,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
+    DescribeAsrHotwordsRequest: DescribeAsrHotwordsRequest,
+    AudioTrackChannelInfo: AudioTrackChannelInfo,
     DiagnoseResult: DiagnoseResult,
     RawWatermarkParameter: RawWatermarkParameter,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
-    ManageTaskRequest: ManageTaskRequest,
+    AiSampleWord: AiSampleWord,
     PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
@@ -30640,6 +33178,7 @@ module.exports = {
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
+    AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     ComposeMediaConfig: ComposeMediaConfig,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     CoverConfigureInfo: CoverConfigureInfo,
@@ -30666,6 +33205,7 @@ module.exports = {
     CreateScheduleResponse: CreateScheduleResponse,
     TagConfigureInfo: TagConfigureInfo,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
+    ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     AiParagraphInfo: AiParagraphInfo,
     AudioSeparateConfig: AudioSeparateConfig,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
@@ -30673,6 +33213,7 @@ module.exports = {
     AudioBeautifyConfig: AudioBeautifyConfig,
     EnableWorkflowRequest: EnableWorkflowRequest,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
+    DescribeSmartSubtitleTemplatesRequest: DescribeSmartSubtitleTemplatesRequest,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     EditMediaTaskInput: EditMediaTaskInput,
     ComposeTransitionOperation: ComposeTransitionOperation,
@@ -30721,7 +33262,7 @@ module.exports = {
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     DisableScheduleResponse: DisableScheduleResponse,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
-    AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
+    DeleteSmartSubtitleTemplateRequest: DeleteSmartSubtitleTemplateRequest,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     EditMediaOutputConfig: EditMediaOutputConfig,
@@ -30731,14 +33272,17 @@ module.exports = {
     ComposeTransitionItem: ComposeTransitionItem,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     EditMediaRequest: EditMediaRequest,
+    DeleteAsrHotwordsRequest: DeleteAsrHotwordsRequest,
     S3InputInfo: S3InputInfo,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
+    DescribeAsrHotwordsListRequest: DescribeAsrHotwordsListRequest,
     AiAnalysisTaskDescriptionOutput: AiAnalysisTaskDescriptionOutput,
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     UrlInputInfo: UrlInputInfo,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     ImageWatermarkInput: ImageWatermarkInput,
+    TrackInfo: TrackInfo,
     LiveRecordResult: LiveRecordResult,
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     LiveRecordFile: LiveRecordFile,
@@ -30776,6 +33320,7 @@ module.exports = {
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     AiAnalysisTaskDelLogoInput: AiAnalysisTaskDelLogoInput,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
+    CreateAsrHotwordsResponse: CreateAsrHotwordsResponse,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     QualityControlItemConfig: QualityControlItemConfig,
     ProcessMediaRequest: ProcessMediaRequest,
@@ -30787,8 +33332,9 @@ module.exports = {
     AiRecognitionTaskTransTextResultInput: AiRecognitionTaskTransTextResultInput,
     DescribeSchedulesResponse: DescribeSchedulesResponse,
     ImageQualityEnhanceConfig: ImageQualityEnhanceConfig,
-    AiSampleWord: AiSampleWord,
+    ManageTaskRequest: ManageTaskRequest,
     AiAnalysisTaskSegmentResult: AiAnalysisTaskSegmentResult,
+    RawSmartSubtitleParameter: RawSmartSubtitleParameter,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     LiveStreamOcrWordsRecognitionResult: LiveStreamOcrWordsRecognitionResult,
@@ -30806,6 +33352,7 @@ module.exports = {
     SimpleAesDrm: SimpleAesDrm,
     DescribeWorkflowsResponse: DescribeWorkflowsResponse,
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
+    ScheduleSmartSubtitleTaskResult: ScheduleSmartSubtitleTaskResult,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
     DescribeContentReviewTemplatesResponse: DescribeContentReviewTemplatesResponse,
     TEHDConfig: TEHDConfig,
@@ -30814,7 +33361,7 @@ module.exports = {
     WorkflowTrigger: WorkflowTrigger,
     LiveStreamAiRecognitionResultInfo: LiveStreamAiRecognitionResultInfo,
     LiveStreamAiReviewImagePoliticalResult: LiveStreamAiReviewImagePoliticalResult,
-    TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
+    ModifyAsrHotwordsResponse: ModifyAsrHotwordsResponse,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
@@ -30839,16 +33386,20 @@ module.exports = {
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     EditMediaTask: EditMediaTask,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
+    ModifyAsrHotwordsRequest: ModifyAsrHotwordsRequest,
     PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
+    DescribeAsrHotwordsListResponse: DescribeAsrHotwordsListResponse,
     AiAnalysisResult: AiAnalysisResult,
+    SmartSubtitleTaskResultInput: SmartSubtitleTaskResultInput,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
     ProcessImageRequest: ProcessImageRequest,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     AiAnalysisTaskDescriptionResult: AiAnalysisTaskDescriptionResult,
+    DeleteSmartSubtitleTemplateResponse: DeleteSmartSubtitleTemplateResponse,
     ResetWorkflowRequest: ResetWorkflowRequest,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
@@ -30863,13 +33414,16 @@ module.exports = {
     DeleteScheduleRequest: DeleteScheduleRequest,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
+    TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
     AiAnalysisTaskInput: AiAnalysisTaskInput,
     ImageSpriteTemplate: ImageSpriteTemplate,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
+    DeleteAsrHotwordsResponse: DeleteAsrHotwordsResponse,
+    SmartSubtitleTaskAsrFullTextSegmentItem: SmartSubtitleTaskAsrFullTextSegmentItem,
     QualityControlItem: QualityControlItem,
     LiveStreamAsrFullTextRecognitionResult: LiveStreamAsrFullTextRecognitionResult,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
-    CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
+    CreateAsrHotwordsRequest: CreateAsrHotwordsRequest,
     AiAnalysisTaskHighlightInput: AiAnalysisTaskHighlightInput,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     SegmentRecognitionItem: SegmentRecognitionItem,
@@ -30879,12 +33433,14 @@ module.exports = {
     DescribeStreamLinkSecurityGroupResponse: DescribeStreamLinkSecurityGroupResponse,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     TranscodeTemplate: TranscodeTemplate,
+    TranslateConfigureInfo: TranslateConfigureInfo,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     SubtitleTemplate: SubtitleTemplate,
     LiveStreamProcessTask: LiveStreamProcessTask,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
     DescribeMediaMetaDataResponse: DescribeMediaMetaDataResponse,
+    SmartSubtitleTaskAsrFullTextResultOutput: SmartSubtitleTaskAsrFullTextResultOutput,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
     ImageEncodeConfig: ImageEncodeConfig,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
@@ -30901,15 +33457,19 @@ module.exports = {
     UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
+    SmartSubtitleTemplateItem: SmartSubtitleTemplateItem,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     ParseNotificationResponse: ParseNotificationResponse,
     ComposeImageOperation: ComposeImageOperation,
+    CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
     ActivityResult: ActivityResult,
+    DescribeAsrHotwordsResponse: DescribeAsrHotwordsResponse,
     ResetWorkflowResponse: ResetWorkflowResponse,
     HLSConfigureInfo: HLSConfigureInfo,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
+    ModifySmartSubtitleTemplateResponse: ModifySmartSubtitleTemplateResponse,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     S3OutputStorage: S3OutputStorage,
     CosFileUploadTrigger: CosFileUploadTrigger,
@@ -30974,7 +33534,9 @@ module.exports = {
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
     AiRecognitionTaskTransTextResultOutput: AiRecognitionTaskTransTextResultOutput,
+    SmartSubtitlesResult: SmartSubtitlesResult,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
+    AsrHotWordsConfigure: AsrHotWordsConfigure,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
@@ -31002,6 +33564,7 @@ module.exports = {
     AddOnSubtitle: AddOnSubtitle,
     AwsSQS: AwsSQS,
     WordResult: WordResult,
+    CreateSmartSubtitleTemplateRequest: CreateSmartSubtitleTemplateRequest,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     QualityControlData: QualityControlData,
     DrmInfo: DrmInfo,
@@ -31012,10 +33575,10 @@ module.exports = {
     AiContentReviewResult: AiContentReviewResult,
     LiveActivityResult: LiveActivityResult,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
-    TranslateConfigureInfo: TranslateConfigureInfo,
+    AsrHotwordsSet: AsrHotwordsSet,
     AiAnalysisTaskHeadTailInput: AiAnalysisTaskHeadTailInput,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
-    ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
+    DescribeSmartSubtitleTemplatesResponse: DescribeSmartSubtitleTemplatesResponse,
     SchedulesInfo: SchedulesInfo,
     DisableWorkflowRequest: DisableWorkflowRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
@@ -31043,9 +33606,11 @@ module.exports = {
     AiAnalysisTaskHeadTailResult: AiAnalysisTaskHeadTailResult,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     WorkflowTask: WorkflowTask,
+    SmartSubtitleTaskAsrFullTextResult: SmartSubtitleTaskAsrFullTextResult,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     EditMediaFileInfo: EditMediaFileInfo,
     ComposeAudioStream: ComposeAudioStream,
+    SmartSubtitleTaskTransTextSegmentItem: SmartSubtitleTaskTransTextSegmentItem,
     FaceConfigureInfo: FaceConfigureInfo,
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
@@ -31054,17 +33619,20 @@ module.exports = {
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
+    ModifySmartSubtitleTemplateRequest: ModifySmartSubtitleTemplateRequest,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     ActivityResItem: ActivityResItem,
+    SpekeDrm: SpekeDrm,
     AiAnalysisTaskDelLogoResult: AiAnalysisTaskDelLogoResult,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     QualityControlTemplate: QualityControlTemplate,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
+    SmartSubtitlesTaskInput: SmartSubtitlesTaskInput,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     SampleSnapshotTemplate: SampleSnapshotTemplate,
     MediaImageSpriteItem: MediaImageSpriteItem,
@@ -31073,6 +33641,7 @@ module.exports = {
     AiAnalysisTaskDescriptionInput: AiAnalysisTaskDescriptionInput,
     LiveScheduleLiveRecordTaskResult: LiveScheduleLiveRecordTaskResult,
     ComposeAudioOperation: ComposeAudioOperation,
+    CreateSmartSubtitleTemplateResponse: CreateSmartSubtitleTemplateResponse,
     LiveStreamAiAnalysisResultItem: LiveStreamAiAnalysisResultItem,
     AiRecognitionTaskTransTextResult: AiRecognitionTaskTransTextResult,
     EditMediaTaskOutput: EditMediaTaskOutput,

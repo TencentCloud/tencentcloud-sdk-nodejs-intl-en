@@ -44,15 +44,17 @@ const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const PolicyProductList = models.PolicyProductList;
 const QueryCustomerBillingQuotaResponse = models.QueryCustomerBillingQuotaResponse;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
+const QueryInvitationInfoResponse = models.QueryInvitationInfoResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const QueryInvitationInfoData = models.QueryInvitationInfoData;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
-const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const ForceQNResponse = models.ForceQNResponse;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
@@ -62,7 +64,8 @@ const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const TradeOneNode = models.TradeOneNode;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
-const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
+const QueryInvitationInfoRequest = models.QueryInvitationInfoRequest;
+const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
@@ -362,6 +365,18 @@ Callable roles: Distributor, Second-level reseller, Reseller
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
         this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * Query usage information of invitation link. Once created, the data will only be retained for 60 days, and the system will automatically delete the invitation link after 60 days.
+Invokable role types: Distributor, Second-level reseller, Reseller.
+     * @param {QueryInvitationInfoRequest} req
+     * @param {function(string, QueryInvitationInfoResponse):void} cb
+     * @public
+     */
+    QueryInvitationInfo(req, cb) {
+        let resp = new QueryInvitationInfoResponse();
+        this.request("QueryInvitationInfo", req, resp, cb);
     }
 
     /**

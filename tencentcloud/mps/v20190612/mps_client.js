@@ -40,8 +40,10 @@ const MediaAiAnalysisDescriptionItem = models.MediaAiAnalysisDescriptionItem;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
 const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
+const AsrHotwordsSetItem = models.AsrHotwordsSetItem;
 const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
 const DeleteScheduleResponse = models.DeleteScheduleResponse;
+const SmartSubtitleTaskTransTextResultOutput = models.SmartSubtitleTaskTransTextResultOutput;
 const ManageTaskResponse = models.ManageTaskResponse;
 const DeleteWorkflowRequest = models.DeleteWorkflowRequest;
 const AwsS3FileUploadTrigger = models.AwsS3FileUploadTrigger;
@@ -50,14 +52,17 @@ const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const NumberFormat = models.NumberFormat;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
+const SmartSubtitleTaskTransTextResult = models.SmartSubtitleTaskTransTextResult;
 const EnhanceConfig = models.EnhanceConfig;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateWorkflowRequest = models.CreateWorkflowRequest;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
+const DescribeAsrHotwordsRequest = models.DescribeAsrHotwordsRequest;
+const AudioTrackChannelInfo = models.AudioTrackChannelInfo;
 const DiagnoseResult = models.DiagnoseResult;
 const RawWatermarkParameter = models.RawWatermarkParameter;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
-const ManageTaskRequest = models.ManageTaskRequest;
+const AiSampleWord = models.AiSampleWord;
 const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
@@ -79,6 +84,7 @@ const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
+const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const ComposeMediaConfig = models.ComposeMediaConfig;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
@@ -105,6 +111,7 @@ const CosInputInfo = models.CosInputInfo;
 const CreateScheduleResponse = models.CreateScheduleResponse;
 const TagConfigureInfo = models.TagConfigureInfo;
 const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
+const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const AiParagraphInfo = models.AiParagraphInfo;
 const AudioSeparateConfig = models.AudioSeparateConfig;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
@@ -112,6 +119,7 @@ const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const AudioBeautifyConfig = models.AudioBeautifyConfig;
 const EnableWorkflowRequest = models.EnableWorkflowRequest;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const DescribeSmartSubtitleTemplatesRequest = models.DescribeSmartSubtitleTemplatesRequest;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
 const EditMediaTaskInput = models.EditMediaTaskInput;
 const ComposeTransitionOperation = models.ComposeTransitionOperation;
@@ -160,7 +168,7 @@ const ComposeVideoStream = models.ComposeVideoStream;
 const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTemplateInfoForUpdate;
 const DisableScheduleResponse = models.DisableScheduleResponse;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
-const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
+const DeleteSmartSubtitleTemplateRequest = models.DeleteSmartSubtitleTemplateRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const EditMediaOutputConfig = models.EditMediaOutputConfig;
@@ -170,14 +178,17 @@ const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const ComposeTransitionItem = models.ComposeTransitionItem;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const EditMediaRequest = models.EditMediaRequest;
+const DeleteAsrHotwordsRequest = models.DeleteAsrHotwordsRequest;
 const S3InputInfo = models.S3InputInfo;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
+const DescribeAsrHotwordsListRequest = models.DescribeAsrHotwordsListRequest;
 const AiAnalysisTaskDescriptionOutput = models.AiAnalysisTaskDescriptionOutput;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const UrlInputInfo = models.UrlInputInfo;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
+const TrackInfo = models.TrackInfo;
 const LiveRecordResult = models.LiveRecordResult;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
 const LiveRecordFile = models.LiveRecordFile;
@@ -215,6 +226,7 @@ const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const AiAnalysisTaskDelLogoInput = models.AiAnalysisTaskDelLogoInput;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
+const CreateAsrHotwordsResponse = models.CreateAsrHotwordsResponse;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const QualityControlItemConfig = models.QualityControlItemConfig;
 const ProcessMediaRequest = models.ProcessMediaRequest;
@@ -226,8 +238,9 @@ const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapsh
 const AiRecognitionTaskTransTextResultInput = models.AiRecognitionTaskTransTextResultInput;
 const DescribeSchedulesResponse = models.DescribeSchedulesResponse;
 const ImageQualityEnhanceConfig = models.ImageQualityEnhanceConfig;
-const AiSampleWord = models.AiSampleWord;
+const ManageTaskRequest = models.ManageTaskRequest;
 const AiAnalysisTaskSegmentResult = models.AiAnalysisTaskSegmentResult;
+const RawSmartSubtitleParameter = models.RawSmartSubtitleParameter;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const LiveStreamOcrWordsRecognitionResult = models.LiveStreamOcrWordsRecognitionResult;
@@ -245,6 +258,7 @@ const AiSamplePerson = models.AiSamplePerson;
 const SimpleAesDrm = models.SimpleAesDrm;
 const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
+const ScheduleSmartSubtitleTaskResult = models.ScheduleSmartSubtitleTaskResult;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const TEHDConfig = models.TEHDConfig;
@@ -253,7 +267,7 @@ const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const WorkflowTrigger = models.WorkflowTrigger;
 const LiveStreamAiRecognitionResultInfo = models.LiveStreamAiRecognitionResultInfo;
 const LiveStreamAiReviewImagePoliticalResult = models.LiveStreamAiReviewImagePoliticalResult;
-const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
+const ModifyAsrHotwordsResponse = models.ModifyAsrHotwordsResponse;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
@@ -278,16 +292,20 @@ const AiSampleTagOperation = models.AiSampleTagOperation;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const EditMediaTask = models.EditMediaTask;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
+const ModifyAsrHotwordsRequest = models.ModifyAsrHotwordsRequest;
 const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
+const DescribeAsrHotwordsListResponse = models.DescribeAsrHotwordsListResponse;
 const AiAnalysisResult = models.AiAnalysisResult;
+const SmartSubtitleTaskResultInput = models.SmartSubtitleTaskResultInput;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
 const ProcessImageRequest = models.ProcessImageRequest;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const AiAnalysisTaskDescriptionResult = models.AiAnalysisTaskDescriptionResult;
+const DeleteSmartSubtitleTemplateResponse = models.DeleteSmartSubtitleTemplateResponse;
 const ResetWorkflowRequest = models.ResetWorkflowRequest;
 const AiRecognitionTaskObjectResultInput = models.AiRecognitionTaskObjectResultInput;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
@@ -302,13 +320,16 @@ const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
 const DeleteScheduleRequest = models.DeleteScheduleRequest;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
+const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
+const DeleteAsrHotwordsResponse = models.DeleteAsrHotwordsResponse;
+const SmartSubtitleTaskAsrFullTextSegmentItem = models.SmartSubtitleTaskAsrFullTextSegmentItem;
 const QualityControlItem = models.QualityControlItem;
 const LiveStreamAsrFullTextRecognitionResult = models.LiveStreamAsrFullTextRecognitionResult;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
-const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
+const CreateAsrHotwordsRequest = models.CreateAsrHotwordsRequest;
 const AiAnalysisTaskHighlightInput = models.AiAnalysisTaskHighlightInput;
 const ProhibitedAsrReviewTemplateInfo = models.ProhibitedAsrReviewTemplateInfo;
 const SegmentRecognitionItem = models.SegmentRecognitionItem;
@@ -318,12 +339,14 @@ const SegmentSpecificInfo = models.SegmentSpecificInfo;
 const DescribeStreamLinkSecurityGroupResponse = models.DescribeStreamLinkSecurityGroupResponse;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
+const TranslateConfigureInfo = models.TranslateConfigureInfo;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const SubtitleTemplate = models.SubtitleTemplate;
 const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
 const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
+const SmartSubtitleTaskAsrFullTextResultOutput = models.SmartSubtitleTaskAsrFullTextResultOutput;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const ImageEncodeConfig = models.ImageEncodeConfig;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
@@ -340,15 +363,19 @@ const PoliticalImgReviewTemplateInfoForUpdate = models.PoliticalImgReviewTemplat
 const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
+const SmartSubtitleTemplateItem = models.SmartSubtitleTemplateItem;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const ParseNotificationResponse = models.ParseNotificationResponse;
 const ComposeImageOperation = models.ComposeImageOperation;
+const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const ActivityResult = models.ActivityResult;
+const DescribeAsrHotwordsResponse = models.DescribeAsrHotwordsResponse;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
 const HLSConfigureInfo = models.HLSConfigureInfo;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
+const ModifySmartSubtitleTemplateResponse = models.ModifySmartSubtitleTemplateResponse;
 const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate;
 const S3OutputStorage = models.S3OutputStorage;
 const CosFileUploadTrigger = models.CosFileUploadTrigger;
@@ -413,7 +440,9 @@ const VolumeBalanceConfig = models.VolumeBalanceConfig;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const AiRecognitionTaskTransTextResultOutput = models.AiRecognitionTaskTransTextResultOutput;
+const SmartSubtitlesResult = models.SmartSubtitlesResult;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
+const AsrHotWordsConfigure = models.AsrHotWordsConfigure;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
@@ -441,6 +470,7 @@ const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const AddOnSubtitle = models.AddOnSubtitle;
 const AwsSQS = models.AwsSQS;
 const WordResult = models.WordResult;
+const CreateSmartSubtitleTemplateRequest = models.CreateSmartSubtitleTemplateRequest;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const QualityControlData = models.QualityControlData;
 const DrmInfo = models.DrmInfo;
@@ -451,10 +481,10 @@ const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const AiContentReviewResult = models.AiContentReviewResult;
 const LiveActivityResult = models.LiveActivityResult;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
-const TranslateConfigureInfo = models.TranslateConfigureInfo;
+const AsrHotwordsSet = models.AsrHotwordsSet;
 const AiAnalysisTaskHeadTailInput = models.AiAnalysisTaskHeadTailInput;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
-const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
+const DescribeSmartSubtitleTemplatesResponse = models.DescribeSmartSubtitleTemplatesResponse;
 const SchedulesInfo = models.SchedulesInfo;
 const DisableWorkflowRequest = models.DisableWorkflowRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
@@ -482,9 +512,11 @@ const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const AiAnalysisTaskHeadTailResult = models.AiAnalysisTaskHeadTailResult;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const WorkflowTask = models.WorkflowTask;
+const SmartSubtitleTaskAsrFullTextResult = models.SmartSubtitleTaskAsrFullTextResult;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const EditMediaFileInfo = models.EditMediaFileInfo;
 const ComposeAudioStream = models.ComposeAudioStream;
+const SmartSubtitleTaskTransTextSegmentItem = models.SmartSubtitleTaskTransTextSegmentItem;
 const FaceConfigureInfo = models.FaceConfigureInfo;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
@@ -493,17 +525,20 @@ const DescribeStreamLinkSecurityGroupRequest = models.DescribeStreamLinkSecurity
 const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
 const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
+const ModifySmartSubtitleTemplateRequest = models.ModifySmartSubtitleTemplateRequest;
 const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const ActivityResItem = models.ActivityResItem;
+const SpekeDrm = models.SpekeDrm;
 const AiAnalysisTaskDelLogoResult = models.AiAnalysisTaskDelLogoResult;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const QualityControlTemplate = models.QualityControlTemplate;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
+const SmartSubtitlesTaskInput = models.SmartSubtitlesTaskInput;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
 const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
@@ -512,6 +547,7 @@ const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
 const AiAnalysisTaskDescriptionInput = models.AiAnalysisTaskDescriptionInput;
 const LiveScheduleLiveRecordTaskResult = models.LiveScheduleLiveRecordTaskResult;
 const ComposeAudioOperation = models.ComposeAudioOperation;
+const CreateSmartSubtitleTemplateResponse = models.CreateSmartSubtitleTemplateResponse;
 const LiveStreamAiAnalysisResultItem = models.LiveStreamAiAnalysisResultItem;
 const AiRecognitionTaskTransTextResult = models.AiRecognitionTaskTransTextResult;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
@@ -538,78 +574,47 @@ class MpsClient extends AbstractClient {
     }
     
     /**
-     * This API is used to create a custom image sprite generating template. Up to 16 templates can be created.
-     * @param {CreateImageSpriteTemplateRequest} req
-     * @param {function(string, CreateImageSpriteTemplateResponse):void} cb
+     * This API is used to query a smart subtitle hotword lexicon.
+     * @param {DescribeAsrHotwordsRequest} req
+     * @param {function(string, DescribeAsrHotwordsResponse):void} cb
      * @public
      */
-    CreateImageSpriteTemplate(req, cb) {
-        let resp = new CreateImageSpriteTemplateResponse();
-        this.request("CreateImageSpriteTemplate", req, resp, cb);
+    DescribeAsrHotwords(req, cb) {
+        let resp = new DescribeAsrHotwordsResponse();
+        this.request("DescribeAsrHotwords", req, resp, cb);
     }
 
     /**
-     * This API is used to initiate live stream processing tasks. Such tasks may include the following:
-
-* Intelligent content moderation (detection of pornographic content in images and audio, detection of sensitive information)
-* Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, real-time speech translation, object recognition, game event tracking)
-* Intelligent content analysis (real-time news splitting)
-* Quality control, including recognizing live stream format, checking audio/video content for flickering, blur, low light, overexposure, black bars, white bars, black screen, white screen, noise, pixelation, QR code, etc., and no-reference scoring.
-* Recording
-
-HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
-     * @param {ProcessLiveStreamRequest} req
-     * @param {function(string, ProcessLiveStreamResponse):void} cb
+     * This API is used to delete a custom animated image generating template.
+     * @param {DeleteAnimatedGraphicsTemplateRequest} req
+     * @param {function(string, DeleteAnimatedGraphicsTemplateResponse):void} cb
      * @public
      */
-    ProcessLiveStream(req, cb) {
-        let resp = new ProcessLiveStreamResponse();
-        this.request("ProcessLiveStream", req, resp, cb);
+    DeleteAnimatedGraphicsTemplate(req, cb) {
+        let resp = new DeleteAnimatedGraphicsTemplateResponse();
+        this.request("DeleteAnimatedGraphicsTemplate", req, resp, cb);
     }
 
     /**
-     * This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
-     * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
-     * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
+     * This API is used to create a custom animated image generating template. Up to 16 templates can be created.
+     * @param {CreateAnimatedGraphicsTemplateRequest} req
+     * @param {function(string, CreateAnimatedGraphicsTemplateResponse):void} cb
      * @public
      */
-    CreateSnapshotByTimeOffsetTemplate(req, cb) {
-        let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
-        this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
+    CreateAnimatedGraphicsTemplate(req, cb) {
+        let resp = new CreateAnimatedGraphicsTemplateResponse();
+        this.request("CreateAnimatedGraphicsTemplate", req, resp, cb);
     }
 
     /**
-     * This API is used to parse the content of an MPS event notification from the `msgBody` field in the message received from CMQ.
-Instead of initiating a video processing task, this API is used to help generate SDKs for various programming languages. You can parse the event notification based on the analytic function of the SDKs.
-     * @param {ParseNotificationRequest} req
-     * @param {function(string, ParseNotificationResponse):void} cb
+     * This API is used to delete a custom watermarking template.
+     * @param {DeleteWatermarkTemplateRequest} req
+     * @param {function(string, DeleteWatermarkTemplateResponse):void} cb
      * @public
      */
-    ParseNotification(req, cb) {
-        let resp = new ParseNotificationResponse();
-        this.request("ParseNotification", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom content moderation template.
-     * @param {ModifyContentReviewTemplateRequest} req
-     * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
-     * @public
-     */
-    ModifyContentReviewTemplate(req, cb) {
-        let resp = new ModifyContentReviewTemplateResponse();
-        this.request("ModifyContentReviewTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a custom content moderation template. Up to 50 templates can be created in total.
-     * @param {CreateContentReviewTemplateRequest} req
-     * @param {function(string, CreateContentReviewTemplateResponse):void} cb
-     * @public
-     */
-    CreateContentReviewTemplate(req, cb) {
-        let resp = new CreateContentReviewTemplateResponse();
-        this.request("CreateContentReviewTemplate", req, resp, cb);
+    DeleteWatermarkTemplate(req, cb) {
+        let resp = new DeleteWatermarkTemplateResponse();
+        this.request("DeleteWatermarkTemplate", req, resp, cb);
     }
 
     /**
@@ -621,17 +626,6 @@ Instead of initiating a video processing task, this API is used to help generate
     ModifyLiveRecordTemplate(req, cb) {
         let resp = new ModifyLiveRecordTemplateResponse();
         this.request("ModifyLiveRecordTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a custom sampled screencapturing template. Up to 16 templates can be created.
-     * @param {CreateSampleSnapshotTemplateRequest} req
-     * @param {function(string, CreateSampleSnapshotTemplateResponse):void} cb
-     * @public
-     */
-    CreateSampleSnapshotTemplate(req, cb) {
-        let resp = new CreateSampleSnapshotTemplateResponse();
-        this.request("CreateSampleSnapshotTemplate", req, resp, cb);
     }
 
     /**
@@ -658,127 +652,14 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to delete a custom content analysis template.
-
-Note: templates with an ID below 10000 are preset and cannot be deleted.
-     * @param {DeleteAIAnalysisTemplateRequest} req
-     * @param {function(string, DeleteAIAnalysisTemplateResponse):void} cb
+     * This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
+     * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
+     * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
      * @public
      */
-    DeleteAIAnalysisTemplate(req, cb) {
-        let resp = new DeleteAIAnalysisTemplateResponse();
-        this.request("DeleteAIAnalysisTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to parse the content of an MPS live stream processing event notification from the `msgBody` field in the message received from CMQ.
-Instead of initiating a video processing task, this API is used to help generate SDKs for various programming languages. You can parse the event notification based on the analytic function of the SDKs.
-     * @param {ParseLiveStreamProcessNotificationRequest} req
-     * @param {function(string, ParseLiveStreamProcessNotificationResponse):void} cb
-     * @public
-     */
-    ParseLiveStreamProcessNotification(req, cb) {
-        let resp = new ParseLiveStreamProcessNotificationResponse();
-        this.request("ParseLiveStreamProcessNotification", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of workflow details by workflow ID.
-     * @param {DescribeWorkflowsRequest} req
-     * @param {function(string, DescribeWorkflowsResponse):void} cb
-     * @public
-     */
-    DescribeWorkflows(req, cb) {
-        let resp = new DescribeWorkflowsResponse();
-        this.request("DescribeWorkflows", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of time point screencapturing templates and supports paged queries by filters.
-     * @param {DescribeSnapshotByTimeOffsetTemplatesRequest} req
-     * @param {function(string, DescribeSnapshotByTimeOffsetTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeSnapshotByTimeOffsetTemplates(req, cb) {
-        let resp = new DescribeSnapshotByTimeOffsetTemplatesResponse();
-        this.request("DescribeSnapshotByTimeOffsetTemplates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a scheme.
-     * @param {ModifyScheduleRequest} req
-     * @param {function(string, ModifyScheduleResponse):void} cb
-     * @public
-     */
-    ModifySchedule(req, cb) {
-        let resp = new ModifyScheduleResponse();
-        this.request("ModifySchedule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
-1. Video transcoding (standard transcoding, TSC transcoding, and audio/video enhancement);
-2. Animated image generating;
-3. Screenshot taking at specified time points;
-4. Sampled screenshot taking;
-5. Sprite screenshot taking;
-6. Transcoding to adaptive bitrate streaming;
-7. Intelligent auditing (porn detection and sensitive information detection);
-8. Intelligent analysis (tagging, classification, thumbnail generating, frame-by-frame tagging, video splitting, highlights generating, opening and closing segments recognition, and game timestamping);
-9. Intelligent identification (face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition);
-
-10. Media quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
-     * @param {ProcessMediaRequest} req
-     * @param {function(string, ProcessMediaResponse):void} cb
-     * @public
-     */
-    ProcessMedia(req, cb) {
-        let resp = new ProcessMediaResponse();
-        this.request("ProcessMedia", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the metadata of media, such as video image width/height, codec, length, and frame rate.
-     * @param {DescribeMediaMetaDataRequest} req
-     * @param {function(string, DescribeMediaMetaDataResponse):void} cb
-     * @public
-     */
-    DescribeMediaMetaData(req, cb) {
-        let resp = new DescribeMediaMetaDataResponse();
-        this.request("DescribeMediaMetaData", req, resp, cb);
-    }
-
-    /**
-     * This API is used to reset an existing workflow that is disabled.
-     * @param {ResetWorkflowRequest} req
-     * @param {function(string, ResetWorkflowResponse):void} cb
-     * @public
-     */
-    ResetWorkflow(req, cb) {
-        let resp = new ResetWorkflowResponse();
-        this.request("ResetWorkflow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom transcoding template.
-     * @param {ModifyTranscodeTemplateRequest} req
-     * @param {function(string, ModifyTranscodeTemplateResponse):void} cb
-     * @public
-     */
-    ModifyTranscodeTemplate(req, cb) {
-        let resp = new ModifyTranscodeTemplateResponse();
-        this.request("ModifyTranscodeTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a custom animated image generating template.
-     * @param {DeleteAnimatedGraphicsTemplateRequest} req
-     * @param {function(string, DeleteAnimatedGraphicsTemplateResponse):void} cb
-     * @public
-     */
-    DeleteAnimatedGraphicsTemplate(req, cb) {
-        let resp = new DeleteAnimatedGraphicsTemplateResponse();
-        this.request("DeleteAnimatedGraphicsTemplate", req, resp, cb);
+    CreateSnapshotByTimeOffsetTemplate(req, cb) {
+        let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
+        this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
     }
 
     /**
@@ -793,80 +674,14 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to modify a media quality inspection template.
-     * @param {ModifyQualityControlTemplateRequest} req
-     * @param {function(string, ModifyQualityControlTemplateResponse):void} cb
+     * This API is used to delete a user-defined smart subtitle template.
+     * @param {DeleteSmartSubtitleTemplateRequest} req
+     * @param {function(string, DeleteSmartSubtitleTemplateResponse):void} cb
      * @public
      */
-    ModifyQualityControlTemplate(req, cb) {
-        let resp = new ModifyQualityControlTemplateResponse();
-        this.request("ModifyQualityControlTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the details of execution status and result of a task submitted in the last 3 days by task ID.
-     * @param {DescribeTaskDetailRequest} req
-     * @param {function(string, DescribeTaskDetailResponse):void} cb
-     * @public
-     */
-    DescribeTaskDetail(req, cb) {
-        let resp = new DescribeTaskDetailResponse();
-        this.request("DescribeTaskDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a scheme.
-     * @param {DeleteScheduleRequest} req
-     * @param {function(string, DeleteScheduleResponse):void} cb
-     * @public
-     */
-    DeleteSchedule(req, cb) {
-        let resp = new DeleteScheduleResponse();
-        this.request("DeleteSchedule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query a security group.
-     * @param {DescribeStreamLinkSecurityGroupRequest} req
-     * @param {function(string, DescribeStreamLinkSecurityGroupResponse):void} cb
-     * @public
-     */
-    DescribeStreamLinkSecurityGroup(req, cb) {
-        let resp = new DescribeStreamLinkSecurityGroupResponse();
-        this.request("DescribeStreamLinkSecurityGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom sampled screencapturing template.
-     * @param {ModifySampleSnapshotTemplateRequest} req
-     * @param {function(string, ModifySampleSnapshotTemplateResponse):void} cb
-     * @public
-     */
-    ModifySampleSnapshotTemplate(req, cb) {
-        let resp = new ModifySampleSnapshotTemplateResponse();
-        this.request("ModifySampleSnapshotTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a custom watermarking template.
-     * @param {DeleteWatermarkTemplateRequest} req
-     * @param {function(string, DeleteWatermarkTemplateResponse):void} cb
-     * @public
-     */
-    DeleteWatermarkTemplate(req, cb) {
-        let resp = new DeleteWatermarkTemplateResponse();
-        this.request("DeleteWatermarkTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete image samples by image ID.
-     * @param {DeletePersonSampleRequest} req
-     * @param {function(string, DeletePersonSampleResponse):void} cb
-     * @public
-     */
-    DeletePersonSample(req, cb) {
-        let resp = new DeletePersonSampleResponse();
-        this.request("DeletePersonSample", req, resp, cb);
+    DeleteSmartSubtitleTemplate(req, cb) {
+        let resp = new DeleteSmartSubtitleTemplateResponse();
+        this.request("DeleteSmartSubtitleTemplate", req, resp, cb);
     }
 
     /**
@@ -881,25 +696,14 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to delete a custom time point screencapturing template.
-     * @param {DeleteSnapshotByTimeOffsetTemplateRequest} req
-     * @param {function(string, DeleteSnapshotByTimeOffsetTemplateResponse):void} cb
+     * This API is used to query the details of execution status and result of a task submitted in the last 3 days by task ID.
+     * @param {DescribeTaskDetailRequest} req
+     * @param {function(string, DescribeTaskDetailResponse):void} cb
      * @public
      */
-    DeleteSnapshotByTimeOffsetTemplate(req, cb) {
-        let resp = new DeleteSnapshotByTimeOffsetTemplateResponse();
-        this.request("DeleteSnapshotByTimeOffsetTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom animated image generating template.
-     * @param {ModifyAnimatedGraphicsTemplateRequest} req
-     * @param {function(string, ModifyAnimatedGraphicsTemplateResponse):void} cb
-     * @public
-     */
-    ModifyAnimatedGraphicsTemplate(req, cb) {
-        let resp = new ModifyAnimatedGraphicsTemplateResponse();
-        this.request("ModifyAnimatedGraphicsTemplate", req, resp, cb);
+    DescribeTaskDetail(req, cb) {
+        let resp = new DescribeTaskDetailResponse();
+        this.request("DescribeTaskDetail", req, resp, cb);
     }
 
     /**
@@ -914,47 +718,39 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to enable a scheme.
-     * @param {EnableScheduleRequest} req
-     * @param {function(string, EnableScheduleResponse):void} cb
+     * This API is used to initiate a processing task for video URLs or media files in COS. Features include:
+1. Video transcoding (standard transcoding, TSC transcoding, and audio/video enhancement).
+2. Video-to-GIF conversion.
+3. Time point screenshot of videos.
+4. Sampled screenshot of videos.
+5. Image sprite of videos.
+6. Adaptive bitrate stream conversion for videos.
+7. Intelligent content moderation (pornography detection and sensitive information detection).
+8. Intelligent content analysis (tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking).
+9. Intelligent content recognition (human face, full text, text keyword, full speech, speech keyword, speech translation, and object).
+10. Media quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
+
+11. Smart subtitle (full speech, speech hotword, and speech translation).
+     * @param {ProcessMediaRequest} req
+     * @param {function(string, ProcessMediaResponse):void} cb
      * @public
      */
-    EnableSchedule(req, cb) {
-        let resp = new EnableScheduleResponse();
-        this.request("EnableSchedule", req, resp, cb);
+    ProcessMedia(req, cb) {
+        let resp = new ProcessMediaResponse();
+        this.request("ProcessMedia", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a media quality inspection template.
-     * @param {DeleteQualityControlTemplateRequest} req
-     * @param {function(string, DeleteQualityControlTemplateResponse):void} cb
-     * @public
-     */
-    DeleteQualityControlTemplate(req, cb) {
-        let resp = new DeleteQualityControlTemplateResponse();
-        this.request("DeleteQualityControlTemplate", req, resp, cb);
-    }
+     * This API is used to modify a custom content analysis template.
 
-    /**
-     * This API is used to delete keyword samples in batches.
-     * @param {DeleteWordSamplesRequest} req
-     * @param {function(string, DeleteWordSamplesResponse):void} cb
+Note: templates with an ID below 10000 are preset and cannot be modified.
+     * @param {ModifyAIAnalysisTemplateRequest} req
+     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
      * @public
      */
-    DeleteWordSamples(req, cb) {
-        let resp = new DeleteWordSamplesResponse();
-        this.request("DeleteWordSamples", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a workflow. An enabled workflow must be disabled before it can be deleted.
-     * @param {DeleteWorkflowRequest} req
-     * @param {function(string, DeleteWorkflowResponse):void} cb
-     * @public
-     */
-    DeleteWorkflow(req, cb) {
-        let resp = new DeleteWorkflowResponse();
-        this.request("DeleteWorkflow", req, resp, cb);
+    ModifyAIAnalysisTemplate(req, cb) {
+        let resp = new ModifyAIAnalysisTemplateResponse();
+        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
     }
 
     /**
@@ -980,14 +776,14 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to create a media quality inspection template. Up to 50 templates can be created.
-     * @param {CreateQualityControlTemplateRequest} req
-     * @param {function(string, CreateQualityControlTemplateResponse):void} cb
+     * This API is used to disable a workflow.
+     * @param {DisableWorkflowRequest} req
+     * @param {function(string, DisableWorkflowResponse):void} cb
      * @public
      */
-    CreateQualityControlTemplate(req, cb) {
-        let resp = new CreateQualityControlTemplateResponse();
-        this.request("CreateQualityControlTemplate", req, resp, cb);
+    DisableWorkflow(req, cb) {
+        let resp = new DisableWorkflowResponse();
+        this.request("DisableWorkflow", req, resp, cb);
     }
 
     /**
@@ -1002,50 +798,6 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to delete a live recording template.
-     * @param {DeleteLiveRecordTemplateRequest} req
-     * @param {function(string, DeleteLiveRecordTemplateResponse):void} cb
-     * @public
-     */
-    DeleteLiveRecordTemplate(req, cb) {
-        let resp = new DeleteLiveRecordTemplateResponse();
-        this.request("DeleteLiveRecordTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
-     * @param {CreateWatermarkTemplateRequest} req
-     * @param {function(string, CreateWatermarkTemplateResponse):void} cb
-     * @public
-     */
-    CreateWatermarkTemplate(req, cb) {
-        let resp = new CreateWatermarkTemplateResponse();
-        this.request("CreateWatermarkTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information of image samples. It supports paginated queries by image ID, name, and tag.
-     * @param {DescribePersonSamplesRequest} req
-     * @param {function(string, DescribePersonSamplesResponse):void} cb
-     * @public
-     */
-    DescribePersonSamples(req, cb) {
-        let resp = new DescribePersonSamplesResponse();
-        this.request("DescribePersonSamples", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a custom sampled screencapturing template.
-     * @param {DeleteSampleSnapshotTemplateRequest} req
-     * @param {function(string, DeleteSampleSnapshotTemplateResponse):void} cb
-     * @public
-     */
-    DeleteSampleSnapshotTemplate(req, cb) {
-        let resp = new DeleteSampleSnapshotTemplateResponse();
-        this.request("DeleteSampleSnapshotTemplate", req, resp, cb);
-    }
-
-    /**
      * This API is used to get a live recording template.
      * @param {DescribeLiveRecordTemplatesRequest} req
      * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
@@ -1057,47 +809,216 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to delete a custom content recognition template.
-     * @param {DeleteAIRecognitionTemplateRequest} req
-     * @param {function(string, DeleteAIRecognitionTemplateResponse):void} cb
+     * This API is used to delete a smart subtitle hotword lexicon.
+     * @param {DeleteAsrHotwordsRequest} req
+     * @param {function(string, DeleteAsrHotwordsResponse):void} cb
      * @public
      */
-    DeleteAIRecognitionTemplate(req, cb) {
-        let resp = new DeleteAIRecognitionTemplateResponse();
-        this.request("DeleteAIRecognitionTemplate", req, resp, cb);
+    DeleteAsrHotwords(req, cb) {
+        let resp = new DeleteAsrHotwordsResponse();
+        this.request("DeleteAsrHotwords", req, resp, cb);
     }
 
     /**
-     * This API is used to modify image samples by image ID. You can use it to modify the name and description of an image sample and add/delete/reset facial features or tags. There must be at least one image left after the deletion of facial features; otherwise, please reset instead of delete the facial features.
-     * @param {ModifyPersonSampleRequest} req
-     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * This API is used to enable a workflow.
+     * @param {EnableWorkflowRequest} req
+     * @param {function(string, EnableWorkflowResponse):void} cb
      * @public
      */
-    ModifyPersonSample(req, cb) {
-        let resp = new ModifyPersonSampleResponse();
-        this.request("ModifyPersonSample", req, resp, cb);
+    EnableWorkflow(req, cb) {
+        let resp = new EnableWorkflowResponse();
+        this.request("EnableWorkflow", req, resp, cb);
     }
 
     /**
-     * This API is used to create a custom animated image generating template. Up to 16 templates can be created.
-     * @param {CreateAnimatedGraphicsTemplateRequest} req
-     * @param {function(string, CreateAnimatedGraphicsTemplateResponse):void} cb
+     * This API is used to obtain the hotword lexicon list.
+     * @param {DescribeAsrHotwordsListRequest} req
+     * @param {function(string, DescribeAsrHotwordsListResponse):void} cb
      * @public
      */
-    CreateAnimatedGraphicsTemplate(req, cb) {
-        let resp = new CreateAnimatedGraphicsTemplateResponse();
-        this.request("CreateAnimatedGraphicsTemplate", req, resp, cb);
+    DescribeAsrHotwordsList(req, cb) {
+        let resp = new DescribeAsrHotwordsListResponse();
+        this.request("DescribeAsrHotwordsList", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of animated image generating templates and supports paged queries by filters.
-     * @param {DescribeAnimatedGraphicsTemplatesRequest} req
-     * @param {function(string, DescribeAnimatedGraphicsTemplatesResponse):void} cb
+     * * This API is used to query tasks.
+* If the data is large, one API call may not be able to obtain all the tasks in the query. You can use the `ScrollToken` parameter to query tasks with multiple calls.
+* Only tasks in the last seven days (168 hours) can be queried.
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
      * @public
      */
-    DescribeAnimatedGraphicsTemplates(req, cb) {
-        let resp = new DescribeAnimatedGraphicsTemplatesResponse();
-        this.request("DescribeAnimatedGraphicsTemplates", req, resp, cb);
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom transcoding template. Up to 1,000 templates can be created.
+     * @param {CreateTranscodeTemplateRequest} req
+     * @param {function(string, CreateTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    CreateTranscodeTemplate(req, cb) {
+        let resp = new CreateTranscodeTemplateResponse();
+        this.request("CreateTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
+     * @param {ExecuteFunctionRequest} req
+     * @param {function(string, ExecuteFunctionResponse):void} cb
+     * @public
+     */
+    ExecuteFunction(req, cb) {
+        let resp = new ExecuteFunctionResponse();
+        this.request("ExecuteFunction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom animated image generating template.
+     * @param {ModifyAnimatedGraphicsTemplateRequest} req
+     * @param {function(string, ModifyAnimatedGraphicsTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAnimatedGraphicsTemplate(req, cb) {
+        let resp = new ModifyAnimatedGraphicsTemplateResponse();
+        this.request("ModifyAnimatedGraphicsTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom content moderation template. Up to 50 templates can be created in total.
+     * @param {CreateContentReviewTemplateRequest} req
+     * @param {function(string, CreateContentReviewTemplateResponse):void} cb
+     * @public
+     */
+    CreateContentReviewTemplate(req, cb) {
+        let resp = new CreateContentReviewTemplateResponse();
+        this.request("CreateContentReviewTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom sampled screencapturing template. Up to 16 templates can be created.
+     * @param {CreateSampleSnapshotTemplateRequest} req
+     * @param {function(string, CreateSampleSnapshotTemplateResponse):void} cb
+     * @public
+     */
+    CreateSampleSnapshotTemplate(req, cb) {
+        let resp = new CreateSampleSnapshotTemplateResponse();
+        this.request("CreateSampleSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a custom content analysis template.
+
+Note: templates with an ID below 10000 are preset and cannot be deleted.
+     * @param {DeleteAIAnalysisTemplateRequest} req
+     * @param {function(string, DeleteAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    DeleteAIAnalysisTemplate(req, cb) {
+        let resp = new DeleteAIAnalysisTemplateResponse();
+        this.request("DeleteAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a scheme.
+     * @param {ModifyScheduleRequest} req
+     * @param {function(string, ModifyScheduleResponse):void} cb
+     * @public
+     */
+    ModifySchedule(req, cb) {
+        let resp = new ModifyScheduleResponse();
+        this.request("ModifySchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the metadata of media, such as video image width/height, codec, length, and frame rate.
+     * @param {DescribeMediaMetaDataRequest} req
+     * @param {function(string, DescribeMediaMetaDataResponse):void} cb
+     * @public
+     */
+    DescribeMediaMetaData(req, cb) {
+        let resp = new DescribeMediaMetaDataResponse();
+        this.request("DescribeMediaMetaData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom sampled screencapturing template.
+     * @param {ModifySampleSnapshotTemplateRequest} req
+     * @param {function(string, ModifySampleSnapshotTemplateResponse):void} cb
+     * @public
+     */
+    ModifySampleSnapshotTemplate(req, cb) {
+        let resp = new ModifySampleSnapshotTemplateResponse();
+        this.request("ModifySampleSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reset an existing workflow that is disabled.
+     * @param {ResetWorkflowRequest} req
+     * @param {function(string, ResetWorkflowResponse):void} cb
+     * @public
+     */
+    ResetWorkflow(req, cb) {
+        let resp = new ResetWorkflowResponse();
+        this.request("ResetWorkflow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a media quality inspection template.
+     * @param {DeleteQualityControlTemplateRequest} req
+     * @param {function(string, DeleteQualityControlTemplateResponse):void} cb
+     * @public
+     */
+    DeleteQualityControlTemplate(req, cb) {
+        let resp = new DeleteQualityControlTemplateResponse();
+        this.request("DeleteQualityControlTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a workflow. An enabled workflow must be disabled before it can be deleted.
+     * @param {DeleteWorkflowRequest} req
+     * @param {function(string, DeleteWorkflowResponse):void} cb
+     * @public
+     */
+    DeleteWorkflow(req, cb) {
+        let resp = new DeleteWorkflowResponse();
+        this.request("DeleteWorkflow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a media quality inspection template. Up to 50 templates can be created.
+     * @param {CreateQualityControlTemplateRequest} req
+     * @param {function(string, CreateQualityControlTemplateResponse):void} cb
+     * @public
+     */
+    CreateQualityControlTemplate(req, cb) {
+        let resp = new CreateQualityControlTemplateResponse();
+        this.request("CreateQualityControlTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom image sprite generating template.
+     * @param {ModifyImageSpriteTemplateRequest} req
+     * @param {function(string, ModifyImageSpriteTemplateResponse):void} cb
+     * @public
+     */
+    ModifyImageSpriteTemplate(req, cb) {
+        let resp = new ModifyImageSpriteTemplateResponse();
+        this.request("ModifyImageSpriteTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+     * @param {DescribeTranscodeTemplatesRequest} req
+     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeTranscodeTemplates(req, cb) {
+        let resp = new DescribeTranscodeTemplatesResponse();
+        this.request("DescribeTranscodeTemplates", req, resp, cb);
     }
 
     /**
@@ -1114,14 +1035,224 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to enable a workflow.
-     * @param {EnableWorkflowRequest} req
-     * @param {function(string, EnableWorkflowResponse):void} cb
+     * This API is used to create a custom smart subtitle template.
+     * @param {CreateSmartSubtitleTemplateRequest} req
+     * @param {function(string, CreateSmartSubtitleTemplateResponse):void} cb
      * @public
      */
-    EnableWorkflow(req, cb) {
-        let resp = new EnableWorkflowResponse();
-        this.request("EnableWorkflow", req, resp, cb);
+    CreateSmartSubtitleTemplate(req, cb) {
+        let resp = new CreateSmartSubtitleTemplateResponse();
+        this.request("CreateSmartSubtitleTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a scheme.
+     * @param {DescribeSchedulesRequest} req
+     * @param {function(string, DescribeSchedulesResponse):void} cb
+     * @public
+     */
+    DescribeSchedules(req, cb) {
+        let resp = new DescribeSchedulesResponse();
+        this.request("DescribeSchedules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify image samples by image ID. You can use it to modify the name and description of an image sample and add/delete/reset facial features or tags. There must be at least one image left after the deletion of facial features; otherwise, please reset instead of delete the facial features.
+     * @param {ModifyPersonSampleRequest} req
+     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * @public
+     */
+    ModifyPersonSample(req, cb) {
+        let resp = new ModifyPersonSampleResponse();
+        this.request("ModifyPersonSample", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a live recording template.
+     * @param {CreateLiveRecordTemplateRequest} req
+     * @param {function(string, CreateLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    CreateLiveRecordTemplate(req, cb) {
+        let resp = new CreateLiveRecordTemplateResponse();
+        this.request("CreateLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a custom content moderation template.
+     * @param {DeleteContentReviewTemplateRequest} req
+     * @param {function(string, DeleteContentReviewTemplateResponse):void} cb
+     * @public
+     */
+    DeleteContentReviewTemplate(req, cb) {
+        let resp = new DeleteContentReviewTemplateResponse();
+        this.request("DeleteContentReviewTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom content analysis template. Up to 50 templates can be created.
+     * @param {CreateAIAnalysisTemplateRequest} req
+     * @param {function(string, CreateAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    CreateAIAnalysisTemplate(req, cb) {
+        let resp = new CreateAIAnalysisTemplateResponse();
+        this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a media quality inspection template.
+     * @param {ModifyQualityControlTemplateRequest} req
+     * @param {function(string, ModifyQualityControlTemplateResponse):void} cb
+     * @public
+     */
+    ModifyQualityControlTemplate(req, cb) {
+        let resp = new ModifyQualityControlTemplateResponse();
+        this.request("ModifyQualityControlTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of smart subtitle templates based on template unique identifier. The returned result includes all matching user-defined smart subtitle templates and system preset smart subtitle templates.
+     * @param {DescribeSmartSubtitleTemplatesRequest} req
+     * @param {function(string, DescribeSmartSubtitleTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSmartSubtitleTemplates(req, cb) {
+        let resp = new DescribeSmartSubtitleTemplatesResponse();
+        this.request("DescribeSmartSubtitleTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of time point screencapturing templates and supports paged queries by filters.
+     * @param {DescribeSnapshotByTimeOffsetTemplatesRequest} req
+     * @param {function(string, DescribeSnapshotByTimeOffsetTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotByTimeOffsetTemplates(req, cb) {
+        let resp = new DescribeSnapshotByTimeOffsetTemplatesResponse();
+        this.request("DescribeSnapshotByTimeOffsetTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom transcoding template.
+     * @param {ModifyTranscodeTemplateRequest} req
+     * @param {function(string, ModifyTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    ModifyTranscodeTemplate(req, cb) {
+        let resp = new ModifyTranscodeTemplateResponse();
+        this.request("ModifyTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query content moderation templates by template ID. Both custom and preset templates that match the template IDs passed in will be returned.
+     * @param {DescribeContentReviewTemplatesRequest} req
+     * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeContentReviewTemplates(req, cb) {
+        let resp = new DescribeContentReviewTemplatesResponse();
+        this.request("DescribeContentReviewTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a smart subtitle hotword lexicon.
+     * @param {ModifyAsrHotwordsRequest} req
+     * @param {function(string, ModifyAsrHotwordsResponse):void} cb
+     * @public
+     */
+    ModifyAsrHotwords(req, cb) {
+        let resp = new ModifyAsrHotwordsResponse();
+        this.request("ModifyAsrHotwords", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of workflow details by workflow ID.
+     * @param {DescribeWorkflowsRequest} req
+     * @param {function(string, DescribeWorkflowsResponse):void} cb
+     * @public
+     */
+    DescribeWorkflows(req, cb) {
+        let resp = new DescribeWorkflowsResponse();
+        this.request("DescribeWorkflows", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom watermarking template. The watermark type cannot be modified.
+     * @param {ModifyWatermarkTemplateRequest} req
+     * @param {function(string, ModifyWatermarkTemplateResponse):void} cb
+     * @public
+     */
+    ModifyWatermarkTemplate(req, cb) {
+        let resp = new ModifyWatermarkTemplateResponse();
+        this.request("ModifyWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete keyword samples in batches.
+     * @param {DeleteWordSamplesRequest} req
+     * @param {function(string, DeleteWordSamplesResponse):void} cb
+     * @public
+     */
+    DeleteWordSamples(req, cb) {
+        let resp = new DeleteWordSamplesResponse();
+        this.request("DeleteWordSamples", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom image sprite generating template. Up to 16 templates can be created.
+     * @param {CreateImageSpriteTemplateRequest} req
+     * @param {function(string, CreateImageSpriteTemplateResponse):void} cb
+     * @public
+     */
+    CreateImageSpriteTemplate(req, cb) {
+        let resp = new CreateImageSpriteTemplateResponse();
+        this.request("CreateImageSpriteTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of image samples. It supports paginated queries by image ID, name, and tag.
+     * @param {DescribePersonSamplesRequest} req
+     * @param {function(string, DescribePersonSamplesResponse):void} cb
+     * @public
+     */
+    DescribePersonSamples(req, cb) {
+        let resp = new DescribePersonSamplesResponse();
+        this.request("DescribePersonSamples", req, resp, cb);
+    }
+
+    /**
+     * This API is used to parse the content of an MPS event notification from the `msgBody` field in the message received from CMQ.
+Instead of initiating a video processing task, this API is used to help generate SDKs for various programming languages. You can parse the event notification based on the analytic function of the SDKs.
+     * @param {ParseNotificationRequest} req
+     * @param {function(string, ParseNotificationResponse):void} cb
+     * @public
+     */
+    ParseNotification(req, cb) {
+        let resp = new ParseNotificationResponse();
+        this.request("ParseNotification", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a custom content recognition template.
+     * @param {DeleteAIRecognitionTemplateRequest} req
+     * @param {function(string, DeleteAIRecognitionTemplateResponse):void} cb
+     * @public
+     */
+    DeleteAIRecognitionTemplate(req, cb) {
+        let resp = new DeleteAIRecognitionTemplateResponse();
+        this.request("DeleteAIRecognitionTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of animated image generating templates and supports paged queries by filters.
+     * @param {DescribeAnimatedGraphicsTemplatesRequest} req
+     * @param {function(string, DescribeAnimatedGraphicsTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeAnimatedGraphicsTemplates(req, cb) {
+        let resp = new DescribeAnimatedGraphicsTemplatesResponse();
+        this.request("DescribeAnimatedGraphicsTemplates", req, resp, cb);
     }
 
     /**
@@ -1133,43 +1264,6 @@ Instead of initiating a video processing task, this API is used to help generate
     ManageTask(req, cb) {
         let resp = new ManageTaskResponse();
         this.request("ManageTask", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom content analysis template.
-
-Note: templates with an ID below 10000 are preset and cannot be modified.
-     * @param {ModifyAIAnalysisTemplateRequest} req
-     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
-     * @public
-     */
-    ModifyAIAnalysisTemplate(req, cb) {
-        let resp = new ModifyAIAnalysisTemplateResponse();
-        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
-     * @param {ExecuteFunctionRequest} req
-     * @param {function(string, ExecuteFunctionResponse):void} cb
-     * @public
-     */
-    ExecuteFunction(req, cb) {
-        let resp = new ExecuteFunctionResponse();
-        this.request("ExecuteFunction", req, resp, cb);
-    }
-
-    /**
-     * * This API is used to query tasks.
-* If the data is large, one API call may not be able to obtain all the tasks in the query. You can use the `ScrollToken` parameter to query tasks with multiple calls.
-* Only tasks in the last seven days (168 hours) can be queried.
-     * @param {DescribeTasksRequest} req
-     * @param {function(string, DescribeTasksResponse):void} cb
-     * @public
-     */
-    DescribeTasks(req, cb) {
-        let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
     }
 
     /**
@@ -1195,72 +1289,6 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to query a scheme.
-     * @param {DescribeSchedulesRequest} req
-     * @param {function(string, DescribeSchedulesResponse):void} cb
-     * @public
-     */
-    DescribeSchedules(req, cb) {
-        let resp = new DescribeSchedulesResponse();
-        this.request("DescribeSchedules", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create image samples for video processing operations such as content recognition and inappropriate information detection with the help of technologies such as facial feature positioning.
-     * @param {CreatePersonSampleRequest} req
-     * @param {function(string, CreatePersonSampleResponse):void} cb
-     * @public
-     */
-    CreatePersonSample(req, cb) {
-        let resp = new CreatePersonSampleResponse();
-        this.request("CreatePersonSample", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable a scheme.
-     * @param {DisableScheduleRequest} req
-     * @param {function(string, DisableScheduleResponse):void} cb
-     * @public
-     */
-    DisableSchedule(req, cb) {
-        let resp = new DisableScheduleResponse();
-        this.request("DisableSchedule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query custom media quality inspection templates, supporting paged queries by conditions.
-     * @param {DescribeQualityControlTemplatesRequest} req
-     * @param {function(string, DescribeQualityControlTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeQualityControlTemplates(req, cb) {
-        let resp = new DescribeQualityControlTemplatesResponse();
-        this.request("DescribeQualityControlTemplates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom watermarking template. The watermark type cannot be modified.
-     * @param {ModifyWatermarkTemplateRequest} req
-     * @param {function(string, ModifyWatermarkTemplateResponse):void} cb
-     * @public
-     */
-    ModifyWatermarkTemplate(req, cb) {
-        let resp = new ModifyWatermarkTemplateResponse();
-        this.request("ModifyWatermarkTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a custom transcoding template. Up to 1,000 templates can be created.
-     * @param {CreateTranscodeTemplateRequest} req
-     * @param {function(string, CreateTranscodeTemplateResponse):void} cb
-     * @public
-     */
-    CreateTranscodeTemplate(req, cb) {
-        let resp = new CreateTranscodeTemplateResponse();
-        this.request("CreateTranscodeTemplate", req, resp, cb);
-    }
-
-    /**
      * This API is used to create a workflow for media files uploaded to a specified COS bucket. A workflow may include the following tasks:
 1. Video transcoding (with watermark)
 2. Animated image generating
@@ -1280,17 +1308,6 @@ Note: A workflow is disabled upon creation. You need to manually enable it.
     CreateWorkflow(req, cb) {
         let resp = new CreateWorkflowResponse();
         this.request("CreateWorkflow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable a workflow.
-     * @param {DisableWorkflowRequest} req
-     * @param {function(string, DisableWorkflowResponse):void} cb
-     * @public
-     */
-    DisableWorkflow(req, cb) {
-        let resp = new DisableWorkflowResponse();
-        this.request("DisableWorkflow", req, resp, cb);
     }
 
     /**
@@ -1327,28 +1344,6 @@ Note: A scheme is disabled upon creation. You need to manually enable it.
     }
 
     /**
-     * This API is used to create a custom content recognition template. Up to 50 templates can be created.
-     * @param {CreateAIRecognitionTemplateRequest} req
-     * @param {function(string, CreateAIRecognitionTemplateResponse):void} cb
-     * @public
-     */
-    CreateAIRecognitionTemplate(req, cb) {
-        let resp = new CreateAIRecognitionTemplateResponse();
-        this.request("CreateAIRecognitionTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom image sprite generating template.
-     * @param {ModifyImageSpriteTemplateRequest} req
-     * @param {function(string, ModifyImageSpriteTemplateResponse):void} cb
-     * @public
-     */
-    ModifyImageSpriteTemplate(req, cb) {
-        let resp = new ModifyImageSpriteTemplateResponse();
-        this.request("ModifyImageSpriteTemplate", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify the use case and tag of a keyword. The keyword itself cannot be modified, but you can delete it and create another one if needed.
      * @param {ModifyWordSampleRequest} req
      * @param {function(string, ModifyWordSampleResponse):void} cb
@@ -1357,17 +1352,6 @@ Note: A scheme is disabled upon creation. You need to manually enable it.
     ModifyWordSample(req, cb) {
         let resp = new ModifyWordSampleResponse();
         this.request("ModifyWordSample", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a custom content recognition template.
-     * @param {ModifyAIRecognitionTemplateRequest} req
-     * @param {function(string, ModifyAIRecognitionTemplateResponse):void} cb
-     * @public
-     */
-    ModifyAIRecognitionTemplate(req, cb) {
-        let resp = new ModifyAIRecognitionTemplateResponse();
-        this.request("ModifyAIRecognitionTemplate", req, resp, cb);
     }
 
     /**
@@ -1382,36 +1366,25 @@ Note: A scheme is disabled upon creation. You need to manually enable it.
     }
 
     /**
-     * This API is used to delete a custom content moderation template.
-     * @param {DeleteContentReviewTemplateRequest} req
-     * @param {function(string, DeleteContentReviewTemplateResponse):void} cb
+     * This API is used to query custom watermarking templates and supports paged queries by filters.
+     * @param {DescribeWatermarkTemplatesRequest} req
+     * @param {function(string, DescribeWatermarkTemplatesResponse):void} cb
      * @public
      */
-    DeleteContentReviewTemplate(req, cb) {
-        let resp = new DeleteContentReviewTemplateResponse();
-        this.request("DeleteContentReviewTemplate", req, resp, cb);
+    DescribeWatermarkTemplates(req, cb) {
+        let resp = new DescribeWatermarkTemplatesResponse();
+        this.request("DescribeWatermarkTemplates", req, resp, cb);
     }
 
     /**
-     * This API is used to create a custom content analysis template. Up to 50 templates can be created.
-     * @param {CreateAIAnalysisTemplateRequest} req
-     * @param {function(string, CreateAIAnalysisTemplateResponse):void} cb
+     * This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
+     * @param {CreateWatermarkTemplateRequest} req
+     * @param {function(string, CreateWatermarkTemplateResponse):void} cb
      * @public
      */
-    CreateAIAnalysisTemplate(req, cb) {
-        let resp = new CreateAIAnalysisTemplateResponse();
-        this.request("CreateAIAnalysisTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify an adaptive bitrate streaming template.
-     * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
-     * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
-     * @public
-     */
-    ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
-        let resp = new ModifyAdaptiveDynamicStreamingTemplateResponse();
-        this.request("ModifyAdaptiveDynamicStreamingTemplate", req, resp, cb);
+    CreateWatermarkTemplate(req, cb) {
+        let resp = new CreateWatermarkTemplateResponse();
+        this.request("CreateWatermarkTemplate", req, resp, cb);
     }
 
     /**
@@ -1426,25 +1399,210 @@ Note: A scheme is disabled upon creation. You need to manually enable it.
     }
 
     /**
-     * This API is used to query custom watermarking templates and supports paged queries by filters.
-     * @param {DescribeWatermarkTemplatesRequest} req
-     * @param {function(string, DescribeWatermarkTemplatesResponse):void} cb
+     * This API is used to delete a scheme.
+     * @param {DeleteScheduleRequest} req
+     * @param {function(string, DeleteScheduleResponse):void} cb
      * @public
      */
-    DescribeWatermarkTemplates(req, cb) {
-        let resp = new DescribeWatermarkTemplatesResponse();
-        this.request("DescribeWatermarkTemplates", req, resp, cb);
+    DeleteSchedule(req, cb) {
+        let resp = new DeleteScheduleResponse();
+        this.request("DeleteSchedule", req, resp, cb);
     }
 
     /**
-     * This API is used to create a live recording template.
-     * @param {CreateLiveRecordTemplateRequest} req
-     * @param {function(string, CreateLiveRecordTemplateResponse):void} cb
+     * This API is used to query a security group.
+     * @param {DescribeStreamLinkSecurityGroupRequest} req
+     * @param {function(string, DescribeStreamLinkSecurityGroupResponse):void} cb
      * @public
      */
-    CreateLiveRecordTemplate(req, cb) {
-        let resp = new CreateLiveRecordTemplateResponse();
-        this.request("CreateLiveRecordTemplate", req, resp, cb);
+    DescribeStreamLinkSecurityGroup(req, cb) {
+        let resp = new DescribeStreamLinkSecurityGroupResponse();
+        this.request("DescribeStreamLinkSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a user-defined smart subtitle template.
+     * @param {ModifySmartSubtitleTemplateRequest} req
+     * @param {function(string, ModifySmartSubtitleTemplateResponse):void} cb
+     * @public
+     */
+    ModifySmartSubtitleTemplate(req, cb) {
+        let resp = new ModifySmartSubtitleTemplateResponse();
+        this.request("ModifySmartSubtitleTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete image samples by image ID.
+     * @param {DeletePersonSampleRequest} req
+     * @param {function(string, DeletePersonSampleResponse):void} cb
+     * @public
+     */
+    DeletePersonSample(req, cb) {
+        let resp = new DeletePersonSampleResponse();
+        this.request("DeletePersonSample", req, resp, cb);
+    }
+
+    /**
+     * This API is used to parse the content of an MPS live stream processing event notification from the `msgBody` field in the message received from CMQ.
+Instead of initiating a video processing task, this API is used to help generate SDKs for various programming languages. You can parse the event notification based on the analytic function of the SDKs.
+     * @param {ParseLiveStreamProcessNotificationRequest} req
+     * @param {function(string, ParseLiveStreamProcessNotificationResponse):void} cb
+     * @public
+     */
+    ParseLiveStreamProcessNotification(req, cb) {
+        let resp = new ParseLiveStreamProcessNotificationResponse();
+        this.request("ParseLiveStreamProcessNotification", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable a scheme.
+     * @param {EnableScheduleRequest} req
+     * @param {function(string, EnableScheduleResponse):void} cb
+     * @public
+     */
+    EnableSchedule(req, cb) {
+        let resp = new EnableScheduleResponse();
+        this.request("EnableSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a custom time point screencapturing template.
+     * @param {DeleteSnapshotByTimeOffsetTemplateRequest} req
+     * @param {function(string, DeleteSnapshotByTimeOffsetTemplateResponse):void} cb
+     * @public
+     */
+    DeleteSnapshotByTimeOffsetTemplate(req, cb) {
+        let resp = new DeleteSnapshotByTimeOffsetTemplateResponse();
+        this.request("DeleteSnapshotByTimeOffsetTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate live stream processing tasks. Such tasks may include the following:
+
+* Intelligent content moderation (detection of pornographic content in images and audio, detection of sensitive information)
+* Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, real-time speech translation, object recognition, game event tracking)
+* Intelligent content analysis (real-time news splitting)
+* Quality control, including recognizing live stream format, checking audio/video content for flickering, blur, low light, overexposure, black bars, white bars, black screen, white screen, noise, pixelation, QR code, etc., and no-reference scoring.
+* Recording
+
+HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
+     * @param {ProcessLiveStreamRequest} req
+     * @param {function(string, ProcessLiveStreamResponse):void} cb
+     * @public
+     */
+    ProcessLiveStream(req, cb) {
+        let resp = new ProcessLiveStreamResponse();
+        this.request("ProcessLiveStream", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a live recording template.
+     * @param {DeleteLiveRecordTemplateRequest} req
+     * @param {function(string, DeleteLiveRecordTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLiveRecordTemplate(req, cb) {
+        let resp = new DeleteLiveRecordTemplateResponse();
+        this.request("DeleteLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a custom sampled screencapturing template.
+     * @param {DeleteSampleSnapshotTemplateRequest} req
+     * @param {function(string, DeleteSampleSnapshotTemplateResponse):void} cb
+     * @public
+     */
+    DeleteSampleSnapshotTemplate(req, cb) {
+        let resp = new DeleteSampleSnapshotTemplateResponse();
+        this.request("DeleteSampleSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a smart subtitle hotword lexicon.
+     * @param {CreateAsrHotwordsRequest} req
+     * @param {function(string, CreateAsrHotwordsResponse):void} cb
+     * @public
+     */
+    CreateAsrHotwords(req, cb) {
+        let resp = new CreateAsrHotwordsResponse();
+        this.request("CreateAsrHotwords", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create image samples for video processing operations such as content recognition and inappropriate information detection with the help of technologies such as facial feature positioning.
+     * @param {CreatePersonSampleRequest} req
+     * @param {function(string, CreatePersonSampleResponse):void} cb
+     * @public
+     */
+    CreatePersonSample(req, cb) {
+        let resp = new CreatePersonSampleResponse();
+        this.request("CreatePersonSample", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query custom media quality inspection templates, supporting paged queries by conditions.
+     * @param {DescribeQualityControlTemplatesRequest} req
+     * @param {function(string, DescribeQualityControlTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeQualityControlTemplates(req, cb) {
+        let resp = new DescribeQualityControlTemplatesResponse();
+        this.request("DescribeQualityControlTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable a scheme.
+     * @param {DisableScheduleRequest} req
+     * @param {function(string, DisableScheduleResponse):void} cb
+     * @public
+     */
+    DisableSchedule(req, cb) {
+        let resp = new DisableScheduleResponse();
+        this.request("DisableSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom content moderation template.
+     * @param {ModifyContentReviewTemplateRequest} req
+     * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
+     * @public
+     */
+    ModifyContentReviewTemplate(req, cb) {
+        let resp = new ModifyContentReviewTemplateResponse();
+        this.request("ModifyContentReviewTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a custom content recognition template. Up to 50 templates can be created.
+     * @param {CreateAIRecognitionTemplateRequest} req
+     * @param {function(string, CreateAIRecognitionTemplateResponse):void} cb
+     * @public
+     */
+    CreateAIRecognitionTemplate(req, cb) {
+        let resp = new CreateAIRecognitionTemplateResponse();
+        this.request("CreateAIRecognitionTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom content recognition template.
+     * @param {ModifyAIRecognitionTemplateRequest} req
+     * @param {function(string, ModifyAIRecognitionTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAIRecognitionTemplate(req, cb) {
+        let resp = new ModifyAIRecognitionTemplateResponse();
+        this.request("ModifyAIRecognitionTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an adaptive bitrate streaming template.
+     * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
+     * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAdaptiveDynamicStreamingTemplate(req, cb) {
+        let resp = new ModifyAdaptiveDynamicStreamingTemplateResponse();
+        this.request("ModifyAdaptiveDynamicStreamingTemplate", req, resp, cb);
     }
 
     /**
@@ -1456,28 +1614,6 @@ Note: A scheme is disabled upon creation. You need to manually enable it.
     DeleteImageSpriteTemplate(req, cb) {
         let resp = new DeleteImageSpriteTemplateResponse();
         this.request("DeleteImageSpriteTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
-     * @param {DescribeTranscodeTemplatesRequest} req
-     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeTranscodeTemplates(req, cb) {
-        let resp = new DescribeTranscodeTemplatesResponse();
-        this.request("DescribeTranscodeTemplates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query content moderation templates by template ID. Both custom and preset templates that match the template IDs passed in will be returned.
-     * @param {DescribeContentReviewTemplatesRequest} req
-     * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeContentReviewTemplates(req, cb) {
-        let resp = new DescribeContentReviewTemplatesResponse();
-        this.request("DescribeContentReviewTemplates", req, resp, cb);
     }
 
 

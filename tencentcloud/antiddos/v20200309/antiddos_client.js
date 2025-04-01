@@ -18,7 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDefaultAlarmThresholdRequest = models.CreateDefaultAlarmThresholdRequest;
 const DescribeListBGPIPInstancesResponse = models.DescribeListBGPIPInstancesResponse;
-const DescribeBlackWhiteIpListResponse = models.DescribeBlackWhiteIpListResponse;
+const ModifyNewDomainRulesRequest = models.ModifyNewDomainRulesRequest;
 const DeleteCCLevelPolicyRequest = models.DeleteCCLevelPolicyRequest;
 const ProxyTypeInfo = models.ProxyTypeInfo;
 const CreateBoundIPRequest = models.CreateBoundIPRequest;
@@ -32,7 +32,6 @@ const ModifyDDoSGeoIPBlockConfigRequest = models.ModifyDDoSGeoIPBlockConfigReque
 const DescribeL7RulesBySSLCertIdResponse = models.DescribeL7RulesBySSLCertIdResponse;
 const DescribeListDDoSSpeedLimitConfigRequest = models.DescribeListDDoSSpeedLimitConfigRequest;
 const InstanceRelation = models.InstanceRelation;
-const ModifyNewDomainRulesRequest = models.ModifyNewDomainRulesRequest;
 const RegionInfo = models.RegionInfo;
 const DescribeListProtocolBlockConfigResponse = models.DescribeListProtocolBlockConfigResponse;
 const DescribeListBGPInstancesRequest = models.DescribeListBGPInstancesRequest;
@@ -51,7 +50,6 @@ const CreateCcBlackWhiteIpListResponse = models.CreateCcBlackWhiteIpListResponse
 const DescribeDefaultAlarmThresholdResponse = models.DescribeDefaultAlarmThresholdResponse;
 const CreateNewL7RulesResponse = models.CreateNewL7RulesResponse;
 const CreateDDoSAIRequest = models.CreateDDoSAIRequest;
-const DescribeListProtectThresholdConfigRequest = models.DescribeListProtectThresholdConfigRequest;
 const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
 const CcBlackWhiteIpPolicy = models.CcBlackWhiteIpPolicy;
 const L7RuleHealth = models.L7RuleHealth;
@@ -100,7 +98,6 @@ const AssociateDDoSEipAddressResponse = models.AssociateDDoSEipAddressResponse;
 const DDoSSpeedLimitConfigRelation = models.DDoSSpeedLimitConfigRelation;
 const DeleteCCLevelPolicyResponse = models.DeleteCCLevelPolicyResponse;
 const ModifyPacketFilterConfigRequest = models.ModifyPacketFilterConfigRequest;
-const DescribeBlackWhiteIpListRequest = models.DescribeBlackWhiteIpListRequest;
 const CreateCcGeoIPBlockConfigRequest = models.CreateCcGeoIPBlockConfigRequest;
 const DescribeBizHttpStatusResponse = models.DescribeBizHttpStatusResponse;
 const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResponse;
@@ -128,7 +125,6 @@ const DescribeListDDoSSpeedLimitConfigResponse = models.DescribeListDDoSSpeedLim
 const CreateDDoSGeoIPBlockConfigResponse = models.CreateDDoSGeoIPBlockConfigResponse;
 const CCPrecisionPolicy = models.CCPrecisionPolicy;
 const DescribeOverviewDDoSEventListRequest = models.DescribeOverviewDDoSEventListRequest;
-const ListenerCcThreholdConfig = models.ListenerCcThreholdConfig;
 const EipAddressRelation = models.EipAddressRelation;
 const DescribeBasicDeviceStatusRequest = models.DescribeBasicDeviceStatusRequest;
 const PackInfo = models.PackInfo;
@@ -142,8 +138,6 @@ const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
 const CreateCCPrecisionPolicyRequest = models.CreateCCPrecisionPolicyRequest;
 const DDoSSpeedLimitConfig = models.DDoSSpeedLimitConfig;
 const AnycastOutPackRelation = models.AnycastOutPackRelation;
-const ProtectThresholdRelation = models.ProtectThresholdRelation;
-const DescribeListProtectThresholdConfigResponse = models.DescribeListProtectThresholdConfigResponse;
 const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
 const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
@@ -503,17 +497,6 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify layer-7 forwarding rules.
-     * @param {ModifyNewDomainRulesRequest} req
-     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
-     * @public
-     */
-    ModifyNewDomainRules(req, cb) {
-        let resp = new ModifyNewDomainRulesResponse();
-        this.request("ModifyNewDomainRules", req, resp, cb);
-    }
-
-    /**
      * This API is used to bind an IP to an Anti-DDoS Pro instance Both single IP instances and multi-IP instances are available. Note that you should wait until the current binding or unbinding completes before using this async API for new operations.
      * @param {CreateBoundIPRequest} req
      * @param {function(string, CreateBoundIPResponse):void} cb
@@ -577,19 +560,6 @@ class AntiddosClient extends AbstractClient {
     CreateWaterPrintConfig(req, cb) {
         let resp = new CreateWaterPrintConfigResponse();
         this.request("CreateWaterPrintConfig", req, resp, cb);
-    }
-
-    /**
-     * 接口变更
-
-This API is used to get an Anti-DDoS IP blocklist/allowlist.
-     * @param {DescribeBlackWhiteIpListRequest} req
-     * @param {function(string, DescribeBlackWhiteIpListResponse):void} cb
-     * @public
-     */
-    DescribeBlackWhiteIpList(req, cb) {
-        let resp = new DescribeBlackWhiteIpListResponse();
-        this.request("DescribeBlackWhiteIpList", req, resp, cb);
     }
 
     /**
@@ -725,16 +695,14 @@ This API is used to get an Anti-DDoS IP blocklist/allowlist.
     }
 
     /**
-     * 接口变更
-
-This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
-     * @param {DescribeListProtectThresholdConfigRequest} req
-     * @param {function(string, DescribeListProtectThresholdConfigResponse):void} cb
+     * This API is used to modify layer-7 forwarding rules.
+     * @param {ModifyNewDomainRulesRequest} req
+     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
      * @public
      */
-    DescribeListProtectThresholdConfig(req, cb) {
-        let resp = new DescribeListProtectThresholdConfigResponse();
-        this.request("DescribeListProtectThresholdConfig", req, resp, cb);
+    ModifyNewDomainRules(req, cb) {
+        let resp = new ModifyNewDomainRulesResponse();
+        this.request("ModifyNewDomainRules", req, resp, cb);
     }
 
     /**

@@ -305,6 +305,7 @@ const DescribeIpGeolocationDatabaseUrlRequest = models.DescribeIpGeolocationData
 const DescribeVpcEndPointResponse = models.DescribeVpcEndPointResponse;
 const DescribeNetworkAclQuintupleEntriesRequest = models.DescribeNetworkAclQuintupleEntriesRequest;
 const DescribeSnapshotPoliciesResponse = models.DescribeSnapshotPoliciesResponse;
+const EnableRoutesResponse = models.EnableRoutesResponse;
 const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
 const NetworkAclEntry = models.NetworkAclEntry;
 const DescribeAssistantCidrRequest = models.DescribeAssistantCidrRequest;
@@ -442,6 +443,7 @@ const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
 const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const ModifyReserveIpAddressRequest = models.ModifyReserveIpAddressRequest;
+const DisableRoutesRequest = models.DisableRoutesRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const ReleaseIPv6AddressesRequest = models.ReleaseIPv6AddressesRequest;
 const DisassociateIPv6AddressResponse = models.DisassociateIPv6AddressResponse;
@@ -452,6 +454,7 @@ const CreateDirectConnectGatewayCcnRoutesResponse = models.CreateDirectConnectGa
 const CreateRouteTableRequest = models.CreateRouteTableRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
+const DisableRoutesResponse = models.DisableRoutesResponse;
 const ModifySnapshotPoliciesRequest = models.ModifySnapshotPoliciesRequest;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const DeleteAssistantCidrRequest = models.DeleteAssistantCidrRequest;
@@ -648,6 +651,7 @@ const CreateAssistantCidrResponse = models.CreateAssistantCidrResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
 const ConflictSource = models.ConflictSource;
+const EnableRoutesRequest = models.EnableRoutesRequest;
 const DeleteTrafficPackagesResponse = models.DeleteTrafficPackagesResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
@@ -1377,6 +1381,17 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
+     * This API is used to refresh the route between a NAT gateway and  Direct Connect and update the associated route table.
+     * @param {RefreshDirectConnectGatewayRouteToNatGatewayRequest} req
+     * @param {function(string, RefreshDirectConnectGatewayRouteToNatGatewayResponse):void} cb
+     * @public
+     */
+    RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        let resp = new RefreshDirectConnectGatewayRouteToNatGatewayResponse();
+        this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an ENI and bind it to a CVM.
 * You can specify private IP addresses and a primary IP when creating an ENI. The specified private IP must be idle and in the same subnet as the ENI.
 * When creating an ENI, you can specify the number of private IPs that you want to apply for. The system will randomly generate private IP addresses.
@@ -2048,6 +2063,32 @@ This API is completed asynchronously. If you need to query the async job executi
     }
 
     /**
+     * This API is used to reset the `Egress` and `Ingress` rules (SecurityGroupPolicy) of a security group.
+
+<ul>
+<li>This API does not support custom indexes <code>PolicyIndex</code>. </li>
+<li>For <code>SecurityGroupPolicySet</code> parameter,<ul> <ul>
+	<li>If <code>SecurityGroupPolicySet.Version</code> is set to `0`, all policies will be cleared, and <code>Egress</code> and <code>Ingress</code> will be ignored. </li>
+	<li>If <code>SecurityGroupPolicySet.Version</code> is not set to `0`, add <code>Egress</code> and <code>Ingress</code> policies: <ul>
+		<li><code>Protocol</code>: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPV6</code>, <code>GRE</code>, or <code>ALL</code>. </li>
+		<li><code>CidrBlock</code>: a CIDR block in the correct format. In the classic network, even if the CIDR block specified in <code>CidrBlock</code> contains the Tencent Cloud private IPs that are not using for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups. </li>
+		<li><code>Ipv6CidrBlock</code>: an IPv6 CIDR block in the correct format. In the classic network, even if the CIDR block specified in <code>Ipv6CidrBlock</code> contains the Tencent Cloud private IPv6 addresses that are not using for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups. </li>
+		<li><code>SecurityGroupId</code>: ID of the security group. It can be the ID of a security group to be modified, or the ID of another security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don't need to change it manually. </li>
+		<li><code>Port</code>: a single port number such as 80, or a port range in the format of '8000-8010'.  You may use this field only if the <code>Protocol</code> field takes the value <code>TCP</code> or <code>UDP</code>. </li>
+		<li><code>Action</code>: only allows <code>ACCEPT</code> or <code>DROP</code>. </li>
+		<li><code>CidrBlock</code>, <code>Ipv6CidrBlock</code>, <code>SecurityGroupId</code>, and <code>AddressTemplate</code> are mutually exclusive. <code>Protocol</code> + <code>Port</code> and <code>ServiceTemplate</code> are mutually exclusive.</li> </li>
+</ul></li></ul></li>
+</ul>
+     * @param {ModifySecurityGroupPoliciesRequest} req
+     * @param {function(string, ModifySecurityGroupPoliciesResponse):void} cb
+     * @public
+     */
+    ModifySecurityGroupPolicies(req, cb) {
+        let resp = new ModifySecurityGroupPoliciesResponse();
+        this.request("ModifySecurityGroupPolicies", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeNetDetectStates) is used to query the list of network detection verification results.
      * @param {DescribeNetDetectStatesRequest} req
      * @param {function(string, DescribeNetDetectStatesResponse):void} cb
@@ -2301,29 +2342,14 @@ When a NAT gateway is deleted, all routes containing this gateway are deleted au
     }
 
     /**
-     * This API is used to reset the `Egress` and `Ingress` rules (SecurityGroupPolicy) of a security group.
-
-<ul>
-<li>This API does not support custom indexes <code>PolicyIndex</code>. </li>
-<li>For <code>SecurityGroupPolicySet</code> parameter,<ul> <ul>
-	<li>If <code>SecurityGroupPolicySet.Version</code> is set to `0`, all policies will be cleared, and <code>Egress</code> and <code>Ingress</code> will be ignored. </li>
-	<li>If <code>SecurityGroupPolicySet.Version</code> is not set to `0`, add <code>Egress</code> and <code>Ingress</code> policies: <ul>
-		<li><code>Protocol</code>: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPV6</code>, <code>GRE</code>, or <code>ALL</code>. </li>
-		<li><code>CidrBlock</code>: a CIDR block in the correct format. In the classic network, even if the CIDR block specified in <code>CidrBlock</code> contains the Tencent Cloud private IPs that are not using for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups. </li>
-		<li><code>Ipv6CidrBlock</code>: an IPv6 CIDR block in the correct format. In the classic network, even if the CIDR block specified in <code>Ipv6CidrBlock</code> contains the Tencent Cloud private IPv6 addresses that are not using for CVMs under your Tencent Cloud account, it does not mean this policy allows you to access those resources. The network isolation policies between tenants take priority over the private network policies in security groups. </li>
-		<li><code>SecurityGroupId</code>: ID of the security group. It can be the ID of a security group to be modified, or the ID of another security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don't need to change it manually. </li>
-		<li><code>Port</code>: a single port number such as 80, or a port range in the format of '8000-8010'.  You may use this field only if the <code>Protocol</code> field takes the value <code>TCP</code> or <code>UDP</code>. </li>
-		<li><code>Action</code>: only allows <code>ACCEPT</code> or <code>DROP</code>. </li>
-		<li><code>CidrBlock</code>, <code>Ipv6CidrBlock</code>, <code>SecurityGroupId</code>, and <code>AddressTemplate</code> are mutually exclusive. <code>Protocol</code> + <code>Port</code> and <code>ServiceTemplate</code> are mutually exclusive.</li> </li>
-</ul></li></ul></li>
-</ul>
-     * @param {ModifySecurityGroupPoliciesRequest} req
-     * @param {function(string, ModifySecurityGroupPoliciesResponse):void} cb
+     * This API is used to disable enabled subnet routes.
+     * @param {DisableRoutesRequest} req
+     * @param {function(string, DisableRoutesResponse):void} cb
      * @public
      */
-    ModifySecurityGroupPolicies(req, cb) {
-        let resp = new ModifySecurityGroupPoliciesResponse();
-        this.request("ModifySecurityGroupPolicies", req, resp, cb);
+    DisableRoutes(req, cb) {
+        let resp = new DisableRoutesResponse();
+        this.request("DisableRoutes", req, resp, cb);
     }
 
     /**
@@ -3381,14 +3407,15 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to refresh the route between a NAT gateway and  Direct Connect and update the associated route table.
-     * @param {RefreshDirectConnectGatewayRouteToNatGatewayRequest} req
-     * @param {function(string, RefreshDirectConnectGatewayRouteToNatGatewayResponse):void} cb
+     * This API is used to enable disabled subnet routes.<br />
+The API is used to verify whether the enabled route conflicts with existing routes. If they conflict, the new route cannot be enabled and will result in a failure. When a route conflict occurs, you need to first disable the conflicting route before you can enable the new one.
+     * @param {EnableRoutesRequest} req
+     * @param {function(string, EnableRoutesResponse):void} cb
      * @public
      */
-    RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
-        let resp = new RefreshDirectConnectGatewayRouteToNatGatewayResponse();
-        this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, resp, cb);
+    EnableRoutes(req, cb) {
+        let resp = new EnableRoutesResponse();
+        this.request("EnableRoutes", req, resp, cb);
     }
 
     /**

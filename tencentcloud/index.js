@@ -60,6 +60,7 @@ module.exports = {
     gse: require("./gse"),
     gwlb: require("./gwlb"),
     iai: require("./iai"),
+    iap: require("./iap"),
     ims: require("./ims"),
     intlpartnersmgt: require("./intlpartnersmgt"),
     iotcloud: require("./iotcloud"),

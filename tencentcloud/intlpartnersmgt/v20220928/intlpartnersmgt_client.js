@@ -20,6 +20,7 @@ const SummaryDetails = models.SummaryDetails;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const TradeTwoNode = models.TradeTwoNode;
+const QueryT1IndirectCustomersDetailRequest = models.QueryT1IndirectCustomersDetailRequest;
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
 const CustomerBillDetailData = models.CustomerBillDetailData;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
@@ -52,8 +53,9 @@ const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const QueryInvitationInfoData = models.QueryInvitationInfoData;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
-const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
+const QueryT1IndirectCustomersDetailResponse = models.QueryT1IndirectCustomersDetailResponse;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
+const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const ForceQNResponse = models.ForceQNResponse;
@@ -66,6 +68,7 @@ const TradeOneNode = models.TradeOneNode;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const QueryInvitationInfoRequest = models.QueryInvitationInfoRequest;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const QueryT1IndirectCustomersDetailResponseData = models.QueryT1IndirectCustomersDetailResponseData;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
@@ -259,6 +262,18 @@ Callable roles: Distributor
     AllocateCreditPool(req, cb) {
         let resp = new AllocateCreditPoolResponse();
         this.request("AllocateCreditPool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the indirect sub-customers of a first-level distributor.
+Invokable role type: first-level reseller.
+     * @param {QueryT1IndirectCustomersDetailRequest} req
+     * @param {function(string, QueryT1IndirectCustomersDetailResponse):void} cb
+     * @public
+     */
+    QueryT1IndirectCustomersDetail(req, cb) {
+        let resp = new QueryT1IndirectCustomersDetailResponse();
+        this.request("QueryT1IndirectCustomersDetail", req, resp, cb);
     }
 
     /**

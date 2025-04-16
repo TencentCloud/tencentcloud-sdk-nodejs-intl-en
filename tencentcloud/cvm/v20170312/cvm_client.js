@@ -633,7 +633,6 @@ If you currently use a password to log in, you will no longer be able to do so a
 
 * Use this API to return instances that are no longer required.
 * Pay-as-you-go instances can be returned directly through this API.
-* When this API is called for the first time, the instance will be moved to the recycle bin. When this API is called for the second time, the instance will be terminated and cannot be recovered.
 * Batch operations are supported. The allowed maximum number of instances in each request is 100.
      * @param {TerminateInstancesRequest} req
      * @param {function(string, TerminateInstancesResponse):void} cb

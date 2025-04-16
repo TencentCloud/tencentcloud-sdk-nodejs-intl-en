@@ -6289,6 +6289,18 @@ class SSAIConf extends  AbstractModel {
          */
         this.AdCDNPrefix = null;
 
+        /**
+         * Pre-roll ad decision service address.
+         * @type {string || null}
+         */
+        this.PreRollAdsUrl = null;
+
+        /**
+         * The maximum allowed duration of pre-roll ads, (0, 3600].
+         * @type {number || null}
+         */
+        this.PreRollMaxAllowedDuration = null;
+
     }
 
     /**
@@ -6317,6 +6329,8 @@ class SSAIConf extends  AbstractModel {
         this.DeliveryRestrictions = 'DeliveryRestrictions' in params ? params.DeliveryRestrictions : null;
         this.SourceCDNPrefix = 'SourceCDNPrefix' in params ? params.SourceCDNPrefix : null;
         this.AdCDNPrefix = 'AdCDNPrefix' in params ? params.AdCDNPrefix : null;
+        this.PreRollAdsUrl = 'PreRollAdsUrl' in params ? params.PreRollAdsUrl : null;
+        this.PreRollMaxAllowedDuration = 'PreRollMaxAllowedDuration' in params ? params.PreRollMaxAllowedDuration : null;
 
     }
 }

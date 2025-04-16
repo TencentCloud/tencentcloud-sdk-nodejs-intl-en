@@ -1168,13 +1168,13 @@ class AVTemplate extends  AbstractModel {
         this.Vcodec = null;
 
         /**
-         * Video width. Value range: (0, 3000]. The value must be an integer multiple of 4. If this parameter is left empty, the original video width will be used.
+         * Video width. Value range: (0, 4096]. The value must be an integer multiple of 2. If this parameter is left empty, the original video width will be used.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video height. Value range: (0, 3000]. The value must be an integer multiple of 4. If this parameter is left empty, the original video height will be used.
+         * Video height. Value range: (0, 4096]. The value must be an integer multiple of 2. If this parameter is left empty, the original video height will be used.
          * @type {number || null}
          */
         this.Height = null;
@@ -2937,13 +2937,13 @@ class VideoTemplateInfo extends  AbstractModel {
         this.VideoBitrate = null;
 
         /**
-         * Video width. Value range: (0,3000]. The value can only be a multiple of 4. If this parameter is left empty, the original value will be used.
+         * Video width. Value range: (0,4096]. The value can only be a multiple of 2. If this parameter is left empty, the original value will be used.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Video height. Value range: (0,3000]. The value can only be a multiple of 4. If this parameter is left empty, the original value will be used.
+         * Video height. Value range: (0,4096]. The value can only be a multiple of 2. If this parameter is left empty, the original value will be used.
          * @type {number || null}
          */
         this.Height = null;
@@ -3823,6 +3823,12 @@ Currently, fMP4 segments do not support DRM or time shifting.
          */
         this.EndListTag = null;
 
+        /**
+         * Optional: `ENHANCED_SCTE35`, `DATERANGE`; default value: `ENHANCED_SCTE35`.
+         * @type {string || null}
+         */
+        this.AdMarkupType = null;
+
     }
 
     /**
@@ -3845,6 +3851,7 @@ Currently, fMP4 segments do not support DRM or time shifting.
         this.StreamOrder = 'StreamOrder' in params ? params.StreamOrder : null;
         this.VideoResolution = 'VideoResolution' in params ? params.VideoResolution : null;
         this.EndListTag = 'EndListTag' in params ? params.EndListTag : null;
+        this.AdMarkupType = 'AdMarkupType' in params ? params.AdMarkupType : null;
 
     }
 }
@@ -4968,291 +4975,6 @@ Note: this field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Highlight results information.
- * @class
- */
-class HighlightResInfoResp extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * MPS task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Highlights video link.
-         * @type {string || null}
-         */
-        this.SegmentUrl = null;
-
-        /**
-         * Collection cover link.
-         * @type {string || null}
-         */
-        this.CovImgUrl = null;
-
-        /**
-         * Generation time, UTC format.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Starting pts.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End pts.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Duration in seconds.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.SegmentUrl = 'SegmentUrl' in params ? params.SegmentUrl : null;
-        this.CovImgUrl = 'CovImgUrl' in params ? params.CovImgUrl : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-
-    }
-}
-
-/**
- * ModifyStreamLiveChannel request structure.
- * @class
- */
-class ModifyStreamLiveChannelRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Channel ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Inputs to attach. You can attach 1 to 5 inputs.
-         * @type {Array.<AttachedInput> || null}
-         */
-        this.AttachedInputs = null;
-
-        /**
-         * Configuration information of the channel's output groups. Quantity: [1, 10]
-         * @type {Array.<StreamLiveOutputGroupsInfo> || null}
-         */
-        this.OutputGroups = null;
-
-        /**
-         * Audio transcoding templates. Quantity: [1, 20]
-         * @type {Array.<AudioTemplateInfo> || null}
-         */
-        this.AudioTemplates = null;
-
-        /**
-         * Video transcoding templates. Quantity: [1, 10]
-         * @type {Array.<VideoTemplateInfo> || null}
-         */
-        this.VideoTemplates = null;
-
-        /**
-         * Audio/Video transcoding templates. Quantity: [1, 10]
-         * @type {Array.<AVTemplate> || null}
-         */
-        this.AVTemplates = null;
-
-        /**
-         * Subtitle template configuration, only AVTemplates are valid.
-         * @type {Array.<SubtitleConf> || null}
-         */
-        this.CaptionTemplates = null;
-
-        /**
-         * Event settings
-         * @type {PlanSettings || null}
-         */
-        this.PlanSettings = null;
-
-        /**
-         * The callback settings.
-         * @type {EventNotifySetting || null}
-         */
-        this.EventNotifySettings = null;
-
-        /**
-         * Complement the last video frame settings.
-         * @type {InputLossBehaviorInfo || null}
-         */
-        this.InputLossBehavior = null;
-
-        /**
-         * Pipeline configuration.
-         * @type {PipelineInputSettingsInfo || null}
-         */
-        this.PipelineInputSettings = null;
-
-        /**
-         * Recognition configuration for input content.
-         * @type {InputAnalysisInfo || null}
-         */
-        this.InputAnalysisSettings = null;
-
-        /**
-         * Console tag list.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Frame capture templates.
-         * @type {Array.<FrameCaptureTemplate> || null}
-         */
-        this.FrameCaptureTemplates = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.AttachedInputs) {
-            this.AttachedInputs = new Array();
-            for (let z in params.AttachedInputs) {
-                let obj = new AttachedInput();
-                obj.deserialize(params.AttachedInputs[z]);
-                this.AttachedInputs.push(obj);
-            }
-        }
-
-        if (params.OutputGroups) {
-            this.OutputGroups = new Array();
-            for (let z in params.OutputGroups) {
-                let obj = new StreamLiveOutputGroupsInfo();
-                obj.deserialize(params.OutputGroups[z]);
-                this.OutputGroups.push(obj);
-            }
-        }
-
-        if (params.AudioTemplates) {
-            this.AudioTemplates = new Array();
-            for (let z in params.AudioTemplates) {
-                let obj = new AudioTemplateInfo();
-                obj.deserialize(params.AudioTemplates[z]);
-                this.AudioTemplates.push(obj);
-            }
-        }
-
-        if (params.VideoTemplates) {
-            this.VideoTemplates = new Array();
-            for (let z in params.VideoTemplates) {
-                let obj = new VideoTemplateInfo();
-                obj.deserialize(params.VideoTemplates[z]);
-                this.VideoTemplates.push(obj);
-            }
-        }
-
-        if (params.AVTemplates) {
-            this.AVTemplates = new Array();
-            for (let z in params.AVTemplates) {
-                let obj = new AVTemplate();
-                obj.deserialize(params.AVTemplates[z]);
-                this.AVTemplates.push(obj);
-            }
-        }
-
-        if (params.CaptionTemplates) {
-            this.CaptionTemplates = new Array();
-            for (let z in params.CaptionTemplates) {
-                let obj = new SubtitleConf();
-                obj.deserialize(params.CaptionTemplates[z]);
-                this.CaptionTemplates.push(obj);
-            }
-        }
-
-        if (params.PlanSettings) {
-            let obj = new PlanSettings();
-            obj.deserialize(params.PlanSettings)
-            this.PlanSettings = obj;
-        }
-
-        if (params.EventNotifySettings) {
-            let obj = new EventNotifySetting();
-            obj.deserialize(params.EventNotifySettings)
-            this.EventNotifySettings = obj;
-        }
-
-        if (params.InputLossBehavior) {
-            let obj = new InputLossBehaviorInfo();
-            obj.deserialize(params.InputLossBehavior)
-            this.InputLossBehavior = obj;
-        }
-
-        if (params.PipelineInputSettings) {
-            let obj = new PipelineInputSettingsInfo();
-            obj.deserialize(params.PipelineInputSettings)
-            this.PipelineInputSettings = obj;
-        }
-
-        if (params.InputAnalysisSettings) {
-            let obj = new InputAnalysisInfo();
-            obj.deserialize(params.InputAnalysisSettings)
-            this.InputAnalysisSettings = obj;
-        }
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-        if (params.FrameCaptureTemplates) {
-            this.FrameCaptureTemplates = new Array();
-            for (let z in params.FrameCaptureTemplates) {
-                let obj = new FrameCaptureTemplate();
-                obj.deserialize(params.FrameCaptureTemplates[z]);
-                this.FrameCaptureTemplates.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * ModifyStreamLiveInput response structure.
  * @class
  */
@@ -6181,84 +5903,6 @@ class DescribeStreamLiveChannelInputStatisticsResponse extends  AbstractModel {
                 this.Infos.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeMediaLiveHighlightResult response structure.
- * @class
- */
-class DescribeMediaLiveHighlightResultResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Highlight results information.
-         * @type {Array.<HighlightResInfoResp> || null}
-         */
-        this.Info = null;
-
-        /**
-         * Collection id.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Media live broadcast channel id.
-         * @type {string || null}
-         */
-        this.ChannelId = null;
-
-        /**
-         * Number of pages.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Paging Size.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * The total number of eligible entries in the background.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            this.Info = new Array();
-            for (let z in params.Info) {
-                let obj = new HighlightResInfoResp();
-                obj.deserialize(params.Info[z]);
-                this.Info.push(obj);
-            }
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7614,42 +7258,102 @@ class ModifyStreamLiveWatermarkResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMediaLiveHighlightResult request structure.
+ * ModifyStreamLiveChannel request structure.
  * @class
  */
-class DescribeMediaLiveHighlightResultRequest extends  AbstractModel {
+class ModifyStreamLiveChannelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Media live broadcast channel ID.
+         * Channel ID
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * Query start time, unix timestamp, query data within the last 6 hours by default, and the maximum query range supports the last 7 days.
-         * @type {number || null}
+         * Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+         * @type {string || null}
          */
-        this.StartTime = null;
+        this.Name = null;
 
         /**
-         * Query end time, Unix timestamp, query data within the last 6 hours by default, and the maximum query range supports the last 7 days.
-         * @type {number || null}
+         * Inputs to attach. You can attach 1 to 5 inputs.
+         * @type {Array.<AttachedInput> || null}
          */
-        this.EndTime = null;
+        this.AttachedInputs = null;
 
         /**
-         * Paging query page number.
-         * @type {number || null}
+         * Configuration information of the channel's output groups. Quantity: [1, 10]
+         * @type {Array.<StreamLiveOutputGroupsInfo> || null}
          */
-        this.PageNum = null;
+        this.OutputGroups = null;
 
         /**
-         * Paging query the size of each page.
-         * @type {number || null}
+         * Audio transcoding templates. Quantity: [1, 20]
+         * @type {Array.<AudioTemplateInfo> || null}
          */
-        this.PageSize = null;
+        this.AudioTemplates = null;
+
+        /**
+         * Video transcoding templates. Quantity: [1, 10]
+         * @type {Array.<VideoTemplateInfo> || null}
+         */
+        this.VideoTemplates = null;
+
+        /**
+         * Audio/Video transcoding templates. Quantity: [1, 10]
+         * @type {Array.<AVTemplate> || null}
+         */
+        this.AVTemplates = null;
+
+        /**
+         * Subtitle template configuration, only AVTemplates are valid.
+         * @type {Array.<SubtitleConf> || null}
+         */
+        this.CaptionTemplates = null;
+
+        /**
+         * Event settings
+         * @type {PlanSettings || null}
+         */
+        this.PlanSettings = null;
+
+        /**
+         * The callback settings.
+         * @type {EventNotifySetting || null}
+         */
+        this.EventNotifySettings = null;
+
+        /**
+         * Complement the last video frame settings.
+         * @type {InputLossBehaviorInfo || null}
+         */
+        this.InputLossBehavior = null;
+
+        /**
+         * Pipeline configuration.
+         * @type {PipelineInputSettingsInfo || null}
+         */
+        this.PipelineInputSettings = null;
+
+        /**
+         * Recognition configuration for input content.
+         * @type {InputAnalysisInfo || null}
+         */
+        this.InputAnalysisSettings = null;
+
+        /**
+         * Console tag list.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Frame capture templates.
+         * @type {Array.<FrameCaptureTemplate> || null}
+         */
+        this.FrameCaptureTemplates = null;
 
     }
 
@@ -7661,10 +7365,109 @@ class DescribeMediaLiveHighlightResultRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.AttachedInputs) {
+            this.AttachedInputs = new Array();
+            for (let z in params.AttachedInputs) {
+                let obj = new AttachedInput();
+                obj.deserialize(params.AttachedInputs[z]);
+                this.AttachedInputs.push(obj);
+            }
+        }
+
+        if (params.OutputGroups) {
+            this.OutputGroups = new Array();
+            for (let z in params.OutputGroups) {
+                let obj = new StreamLiveOutputGroupsInfo();
+                obj.deserialize(params.OutputGroups[z]);
+                this.OutputGroups.push(obj);
+            }
+        }
+
+        if (params.AudioTemplates) {
+            this.AudioTemplates = new Array();
+            for (let z in params.AudioTemplates) {
+                let obj = new AudioTemplateInfo();
+                obj.deserialize(params.AudioTemplates[z]);
+                this.AudioTemplates.push(obj);
+            }
+        }
+
+        if (params.VideoTemplates) {
+            this.VideoTemplates = new Array();
+            for (let z in params.VideoTemplates) {
+                let obj = new VideoTemplateInfo();
+                obj.deserialize(params.VideoTemplates[z]);
+                this.VideoTemplates.push(obj);
+            }
+        }
+
+        if (params.AVTemplates) {
+            this.AVTemplates = new Array();
+            for (let z in params.AVTemplates) {
+                let obj = new AVTemplate();
+                obj.deserialize(params.AVTemplates[z]);
+                this.AVTemplates.push(obj);
+            }
+        }
+
+        if (params.CaptionTemplates) {
+            this.CaptionTemplates = new Array();
+            for (let z in params.CaptionTemplates) {
+                let obj = new SubtitleConf();
+                obj.deserialize(params.CaptionTemplates[z]);
+                this.CaptionTemplates.push(obj);
+            }
+        }
+
+        if (params.PlanSettings) {
+            let obj = new PlanSettings();
+            obj.deserialize(params.PlanSettings)
+            this.PlanSettings = obj;
+        }
+
+        if (params.EventNotifySettings) {
+            let obj = new EventNotifySetting();
+            obj.deserialize(params.EventNotifySettings)
+            this.EventNotifySettings = obj;
+        }
+
+        if (params.InputLossBehavior) {
+            let obj = new InputLossBehaviorInfo();
+            obj.deserialize(params.InputLossBehavior)
+            this.InputLossBehavior = obj;
+        }
+
+        if (params.PipelineInputSettings) {
+            let obj = new PipelineInputSettingsInfo();
+            obj.deserialize(params.PipelineInputSettings)
+            this.PipelineInputSettings = obj;
+        }
+
+        if (params.InputAnalysisSettings) {
+            let obj = new InputAnalysisInfo();
+            obj.deserialize(params.InputAnalysisSettings)
+            this.InputAnalysisSettings = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.FrameCaptureTemplates) {
+            this.FrameCaptureTemplates = new Array();
+            for (let z in params.FrameCaptureTemplates) {
+                let obj = new FrameCaptureTemplate();
+                obj.deserialize(params.FrameCaptureTemplates[z]);
+                this.FrameCaptureTemplates.push(obj);
+            }
+        }
 
     }
 }
@@ -8462,8 +8265,6 @@ module.exports = {
     DescribeStreamLiveTranscodeDetailResponse: DescribeStreamLiveTranscodeDetailResponse,
     CreateStreamLiveWatermarkResponse: CreateStreamLiveWatermarkResponse,
     DescribeStreamLiveInputsResponse: DescribeStreamLiveInputsResponse,
-    HighlightResInfoResp: HighlightResInfoResp,
-    ModifyStreamLiveChannelRequest: ModifyStreamLiveChannelRequest,
     ModifyStreamLiveInputResponse: ModifyStreamLiveInputResponse,
     DescribeStreamLiveChannelAlertsResponse: DescribeStreamLiveChannelAlertsResponse,
     PlanResp: PlanResp,
@@ -8483,7 +8284,6 @@ module.exports = {
     VideoCodecDetail: VideoCodecDetail,
     CreateStreamLiveChannelResponse: CreateStreamLiveChannelResponse,
     DescribeStreamLiveChannelInputStatisticsResponse: DescribeStreamLiveChannelInputStatisticsResponse,
-    DescribeMediaLiveHighlightResultResponse: DescribeMediaLiveHighlightResultResponse,
     StopStreamLiveChannelResponse: StopStreamLiveChannelResponse,
     PushEventSetting: PushEventSetting,
     InputTrack: InputTrack,
@@ -8516,7 +8316,7 @@ module.exports = {
     DescribeStreamLiveInputsRequest: DescribeStreamLiveInputsRequest,
     Scte35SettingsInfo: Scte35SettingsInfo,
     ModifyStreamLiveWatermarkResponse: ModifyStreamLiveWatermarkResponse,
-    DescribeMediaLiveHighlightResultRequest: DescribeMediaLiveHighlightResultRequest,
+    ModifyStreamLiveChannelRequest: ModifyStreamLiveChannelRequest,
     DescribeTextSettings: DescribeTextSettings,
     DescribeStreamLiveInputSecurityGroupsRequest: DescribeStreamLiveInputSecurityGroupsRequest,
     DeleteStreamLiveWatermarkResponse: DeleteStreamLiveWatermarkResponse,

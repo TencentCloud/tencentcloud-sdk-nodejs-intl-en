@@ -104,8 +104,6 @@ const DescribeStreamLiveRegionsResponse = models.DescribeStreamLiveRegionsRespon
 const DescribeStreamLiveTranscodeDetailResponse = models.DescribeStreamLiveTranscodeDetailResponse;
 const CreateStreamLiveWatermarkResponse = models.CreateStreamLiveWatermarkResponse;
 const DescribeStreamLiveInputsResponse = models.DescribeStreamLiveInputsResponse;
-const HighlightResInfoResp = models.HighlightResInfoResp;
-const ModifyStreamLiveChannelRequest = models.ModifyStreamLiveChannelRequest;
 const ModifyStreamLiveInputResponse = models.ModifyStreamLiveInputResponse;
 const DescribeStreamLiveChannelAlertsResponse = models.DescribeStreamLiveChannelAlertsResponse;
 const PlanResp = models.PlanResp;
@@ -125,7 +123,6 @@ const DescribeStreamLiveInputSecurityGroupRequest = models.DescribeStreamLiveInp
 const VideoCodecDetail = models.VideoCodecDetail;
 const CreateStreamLiveChannelResponse = models.CreateStreamLiveChannelResponse;
 const DescribeStreamLiveChannelInputStatisticsResponse = models.DescribeStreamLiveChannelInputStatisticsResponse;
-const DescribeMediaLiveHighlightResultResponse = models.DescribeMediaLiveHighlightResultResponse;
 const StopStreamLiveChannelResponse = models.StopStreamLiveChannelResponse;
 const PushEventSetting = models.PushEventSetting;
 const InputTrack = models.InputTrack;
@@ -158,7 +155,7 @@ const LogMessageInfo = models.LogMessageInfo;
 const DescribeStreamLiveInputsRequest = models.DescribeStreamLiveInputsRequest;
 const Scte35SettingsInfo = models.Scte35SettingsInfo;
 const ModifyStreamLiveWatermarkResponse = models.ModifyStreamLiveWatermarkResponse;
-const DescribeMediaLiveHighlightResultRequest = models.DescribeMediaLiveHighlightResultRequest;
+const ModifyStreamLiveChannelRequest = models.ModifyStreamLiveChannelRequest;
 const DescribeTextSettings = models.DescribeTextSettings;
 const DescribeStreamLiveInputSecurityGroupsRequest = models.DescribeStreamLiveInputSecurityGroupsRequest;
 const DeleteStreamLiveWatermarkResponse = models.DeleteStreamLiveWatermarkResponse;
@@ -391,14 +388,14 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a watermark.
-     * @param {DeleteStreamLiveWatermarkRequest} req
-     * @param {function(string, DeleteStreamLiveWatermarkResponse):void} cb
+     * This API is used to query a watermark.
+     * @param {DescribeStreamLiveWatermarkRequest} req
+     * @param {function(string, DescribeStreamLiveWatermarkResponse):void} cb
      * @public
      */
-    DeleteStreamLiveWatermark(req, cb) {
-        let resp = new DeleteStreamLiveWatermarkResponse();
-        this.request("DeleteStreamLiveWatermark", req, resp, cb);
+    DescribeStreamLiveWatermark(req, cb) {
+        let resp = new DescribeStreamLiveWatermarkResponse();
+        this.request("DescribeStreamLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -435,14 +432,14 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * Query the highlight result information corresponding to the media live broadcast channel.
-     * @param {DescribeMediaLiveHighlightResultRequest} req
-     * @param {function(string, DescribeMediaLiveHighlightResultResponse):void} cb
+     * This API is used to delete a watermark.
+     * @param {DeleteStreamLiveWatermarkRequest} req
+     * @param {function(string, DeleteStreamLiveWatermarkResponse):void} cb
      * @public
      */
-    DescribeMediaLiveHighlightResult(req, cb) {
-        let resp = new DescribeMediaLiveHighlightResultResponse();
-        this.request("DescribeMediaLiveHighlightResult", req, resp, cb);
+    DeleteStreamLiveWatermark(req, cb) {
+        let resp = new DeleteStreamLiveWatermarkResponse();
+        this.request("DeleteStreamLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -498,17 +495,6 @@ class MdlClient extends AbstractClient {
     StopStreamLiveChannel(req, cb) {
         let resp = new StopStreamLiveChannelResponse();
         this.request("StopStreamLiveChannel", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query a watermark.
-     * @param {DescribeStreamLiveWatermarkRequest} req
-     * @param {function(string, DescribeStreamLiveWatermarkResponse):void} cb
-     * @public
-     */
-    DescribeStreamLiveWatermark(req, cb) {
-        let resp = new DescribeStreamLiveWatermarkResponse();
-        this.request("DescribeStreamLiveWatermark", req, resp, cb);
     }
 
     /**

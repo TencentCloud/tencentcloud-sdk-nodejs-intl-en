@@ -49,6 +49,7 @@ const WorkFlowExecuteDto = models.WorkFlowExecuteDto;
 const RecordsSpeed = models.RecordsSpeed;
 const ColumnLineageInfo = models.ColumnLineageInfo;
 const SubmitTaskRequest = models.SubmitTaskRequest;
+const ListInstancesResponse = models.ListInstancesResponse;
 const DescribeTableMetasRequest = models.DescribeTableMetasRequest;
 const RuleExecResultDetail = models.RuleExecResultDetail;
 const DataSourceInfoPage = models.DataSourceInfoPage;
@@ -75,6 +76,7 @@ const DescribeInstanceByCycleResponse = models.DescribeInstanceByCycleResponse;
 const DescribeIntegrationStatisticsRecordsTrendRequest = models.DescribeIntegrationStatisticsRecordsTrendRequest;
 const DescribeDataCheckStatRequest = models.DescribeDataCheckStatRequest;
 const TablePropertyScore = models.TablePropertyScore;
+const SubscribeWebHook = models.SubscribeWebHook;
 const GetOfflineInstanceListRequest = models.GetOfflineInstanceListRequest;
 const TaskTypeMap = models.TaskTypeMap;
 const InstanceLifeDetailDto = models.InstanceLifeDetailDto;
@@ -101,7 +103,7 @@ const RuleGroupExecStrategy = models.RuleGroupExecStrategy;
 const ModifyWorkflowScheduleRequest = models.ModifyWorkflowScheduleRequest;
 const CreateDsFolderRequest = models.CreateDsFolderRequest;
 const RegisterEventRequest = models.RegisterEventRequest;
-const Property = models.Property;
+const InstanceDetailVO = models.InstanceDetailVO;
 const MakePlanOpsDtoCollection = models.MakePlanOpsDtoCollection;
 const DescribeTableMetasResponse = models.DescribeTableMetasResponse;
 const UploadContentResponse = models.UploadContentResponse;
@@ -134,6 +136,7 @@ const DescribeSchedulerTaskTypeCntResponse = models.DescribeSchedulerTaskTypeCnt
 const DeleteCustomFunctionResponse = models.DeleteCustomFunctionResponse;
 const DimensionScoreInfo = models.DimensionScoreInfo;
 const DescribeTaskScriptResponse = models.DescribeTaskScriptResponse;
+const InstancePageVO = models.InstancePageVO;
 const CollectionInstanceOpsDto = models.CollectionInstanceOpsDto;
 const DrInstanceOpsDtoPage = models.DrInstanceOpsDtoPage;
 const TableLineageInfo = models.TableLineageInfo;
@@ -150,6 +153,7 @@ const ResumeIntegrationTaskResponse = models.ResumeIntegrationTaskResponse;
 const WorkflowExtOpsDto = models.WorkflowExtOpsDto;
 const LineageParamRecord = models.LineageParamRecord;
 const BatchResult = models.BatchResult;
+const InstanceLogVO = models.InstanceLogVO;
 const StartTaskInfo = models.StartTaskInfo;
 const DescribeIntegrationStatisticsInstanceTrendResponse = models.DescribeIntegrationStatisticsInstanceTrendResponse;
 const DescribeInstanceLogListRequest = models.DescribeInstanceLogListRequest;
@@ -256,12 +260,13 @@ const InstanceLifeCycleOpsDto = models.InstanceLifeCycleOpsDto;
 const AlarmReceiverInfo = models.AlarmReceiverInfo;
 const GeneralTaskParam = models.GeneralTaskParam;
 const DescribeTableBasicInfoResponse = models.DescribeTableBasicInfoResponse;
+const Property = models.Property;
 const ModifyRuleTemplateRequest = models.ModifyRuleTemplateRequest;
 const DescribeRuleExecStatResponse = models.DescribeRuleExecStatResponse;
 const TaskByCycle = models.TaskByCycle;
 const DagInstancesResponse = models.DagInstancesResponse;
 const DimensionScore = models.DimensionScore;
-const SubscribeWebHook = models.SubscribeWebHook;
+const GetInstanceLogResponse = models.GetInstanceLogResponse;
 const DescribeTableLineageInfoRequest = models.DescribeTableLineageInfoRequest;
 const CreateTaskFolderRequest = models.CreateTaskFolderRequest;
 const EngineTaskInfo = models.EngineTaskInfo;
@@ -292,10 +297,12 @@ const DescribeOpsMakePlanTasksRequest = models.DescribeOpsMakePlanTasksRequest;
 const TaskVersionInstance = models.TaskVersionInstance;
 const TableInfo = models.TableInfo;
 const DescribeProjectRequest = models.DescribeProjectRequest;
+const GetTaskInstanceResponse = models.GetTaskInstanceResponse;
 const CreateIntegrationTaskResponse = models.CreateIntegrationTaskResponse;
 const DescribeIntegrationTasksResponse = models.DescribeIntegrationTasksResponse;
 const DeleteProjectUsersResponse = models.DeleteProjectUsersResponse;
 const DescribeAlarmReceiverRequest = models.DescribeAlarmReceiverRequest;
+const InstanceVO = models.InstanceVO;
 const SchedulerTaskInstanceInfo = models.SchedulerTaskInstanceInfo;
 const DescribeSchedulerTaskCntByStatusResponse = models.DescribeSchedulerTaskCntByStatusResponse;
 const TaskExtInfo = models.TaskExtInfo;
@@ -324,6 +331,7 @@ const DescribeDatasourceResponse = models.DescribeDatasourceResponse;
 const DescribeStatisticInstanceStatusTrendOpsRequest = models.DescribeStatisticInstanceStatusTrendOpsRequest;
 const RuleExecConfig = models.RuleExecConfig;
 const SuspendIntegrationTaskResponse = models.SuspendIntegrationTaskResponse;
+const ListInstancesRequest = models.ListInstancesRequest;
 const DescribeSchedulerRunTimeInstanceCntByStatusResponse = models.DescribeSchedulerRunTimeInstanceCntByStatusResponse;
 const CreateTaskFolderResponse = models.CreateTaskFolderResponse;
 const RunForceSucScheduleInstancesRequest = models.RunForceSucScheduleInstancesRequest;
@@ -336,6 +344,7 @@ const DescribeDataSourceInfoListResponse = models.DescribeDataSourceInfoListResp
 const InstanceStatisticInfo = models.InstanceStatisticInfo;
 const CommitRuleGroupTaskRequest = models.CommitRuleGroupTaskRequest;
 const CheckIntegrationNodeNameExistsRequest = models.CheckIntegrationNodeNameExistsRequest;
+const InstanceLifeCycleVO = models.InstanceLifeCycleVO;
 const DescribeReportTaskDetailRequest = models.DescribeReportTaskDetailRequest;
 const GetOfflineInstanceListResponse = models.GetOfflineInstanceListResponse;
 const DescribeOpsMakePlansRequest = models.DescribeOpsMakePlansRequest;
@@ -409,6 +418,7 @@ const DescribeTopTableStatResponse = models.DescribeTopTableStatResponse;
 const ProdSchedulerTask = models.ProdSchedulerTask;
 const WorkflowSchedulerOpsDto = models.WorkflowSchedulerOpsDto;
 const SourceFieldInfo = models.SourceFieldInfo;
+const GetTaskInstanceRequest = models.GetTaskInstanceRequest;
 const DeleteDsFolderRequest = models.DeleteDsFolderRequest;
 const SaveCustomFunctionResponse = models.SaveCustomFunctionResponse;
 const ModifyDsFolderRequest = models.ModifyDsFolderRequest;
@@ -525,6 +535,7 @@ const BatchRunOpsTaskRequest = models.BatchRunOpsTaskRequest;
 const FieldConfig = models.FieldConfig;
 const DescribeRealTimeTaskMetricOverviewRequest = models.DescribeRealTimeTaskMetricOverviewRequest;
 const DescribeDatabaseMetasResponse = models.DescribeDatabaseMetasResponse;
+const OfflineTaskAddParam = models.OfflineTaskAddParam;
 const FreezeTasksByWorkflowIdsResponse = models.FreezeTasksByWorkflowIdsResponse;
 const SubmitWorkflowRequest = models.SubmitWorkflowRequest;
 const DescribeResourceManagePathTreesResponse = models.DescribeResourceManagePathTreesResponse;
@@ -667,7 +678,7 @@ const DryRunDIOfflineTaskResponse = models.DryRunDIOfflineTaskResponse;
 const FolderOpsDto = models.FolderOpsDto;
 const DescribeTaskLockStatusRequest = models.DescribeTaskLockStatusRequest;
 const DescribeRuleExecStatRequest = models.DescribeRuleExecStatRequest;
-const OfflineTaskAddParam = models.OfflineTaskAddParam;
+const GetInstanceLogRequest = models.GetInstanceLogRequest;
 const RuleConfig = models.RuleConfig;
 const LogContent = models.LogContent;
 const RealTimeTaskSpeed = models.RealTimeTaskSpeed;
@@ -1162,6 +1173,18 @@ Register Event Listener
     }
 
     /**
+     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+Set Task Alerts, Create/Update Alert Information (Latest)
+     * @param {SetTaskAlarmNewRequest} req
+     * @param {function(string, SetTaskAlarmNewResponse):void} cb
+     * @public
+     */
+    SetTaskAlarmNew(req, cb) {
+        let resp = new SetTaskAlarmNewResponse();
+        this.request("SetTaskAlarmNew", req, resp, cb);
+    }
+
+    /**
      * Viewing consumption tasks of event instances
      * @param {DescribeEventConsumeTasksRequest} req
      * @param {function(string, DescribeEventConsumeTasksResponse):void} cb
@@ -1503,15 +1526,14 @@ Register Event Listener
     }
 
     /**
-     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Update Task
-     * @param {ModifyTaskInfoRequest} req
-     * @param {function(string, ModifyTaskInfoResponse):void} cb
+     * This API is used to obtain instance lists.
+     * @param {GetInstanceLogRequest} req
+     * @param {function(string, GetInstanceLogResponse):void} cb
      * @public
      */
-    ModifyTaskInfo(req, cb) {
-        let resp = new ModifyTaskInfoResponse();
-        this.request("ModifyTaskInfo", req, resp, cb);
+    GetInstanceLog(req, cb) {
+        let resp = new GetInstanceLogResponse();
+        this.request("GetInstanceLog", req, resp, cb);
     }
 
     /**
@@ -1897,6 +1919,17 @@ Update Task
     CreateOpsMakePlan(req, cb) {
         let resp = new CreateOpsMakePlanResponse();
         this.request("CreateOpsMakePlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain instance lists.
+     * @param {GetTaskInstanceRequest} req
+     * @param {function(string, GetTaskInstanceResponse):void} cb
+     * @public
+     */
+    GetTaskInstance(req, cb) {
+        let resp = new GetTaskInstanceResponse();
+        this.request("GetTaskInstance", req, resp, cb);
     }
 
     /**
@@ -2862,6 +2895,17 @@ Trigger events
     }
 
     /**
+     * This API is used to obtain instance lists.
+     * @param {ListInstancesRequest} req
+     * @param {function(string, ListInstancesResponse):void} cb
+     * @public
+     */
+    ListInstances(req, cb) {
+        let resp = new ListInstancesResponse();
+        this.request("ListInstances", req, resp, cb);
+    }
+
+    /**
      * Submit Rule Group to Run Task Interface
      * @param {CommitRuleGroupTaskRequest} req
      * @param {function(string, CommitRuleGroupTaskResponse):void} cb
@@ -2964,14 +3008,14 @@ Registration Event
 
     /**
      * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Set Task Alerts, Create/Update Alert Information (Latest)
-     * @param {SetTaskAlarmNewRequest} req
-     * @param {function(string, SetTaskAlarmNewResponse):void} cb
+Update Task
+     * @param {ModifyTaskInfoRequest} req
+     * @param {function(string, ModifyTaskInfoResponse):void} cb
      * @public
      */
-    SetTaskAlarmNew(req, cb) {
-        let resp = new SetTaskAlarmNewResponse();
-        this.request("SetTaskAlarmNew", req, resp, cb);
+    ModifyTaskInfo(req, cb) {
+        let resp = new ModifyTaskInfoResponse();
+        this.request("ModifyTaskInfo", req, resp, cb);
     }
 
     /**

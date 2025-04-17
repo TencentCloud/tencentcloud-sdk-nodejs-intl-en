@@ -45,10 +45,9 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.CaptchaMsg = null;
 
         /**
-         * This parameter returns the result of imperceptible verification. This parameter is not available for Tencent Cloud International yet.
+         * This parameter returns the result of imperceptible verification. 
 `0`: The request is trusted.
 `100`: The request is malicious.
-Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.EvilLevel = null;
@@ -74,7 +73,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SubmitCaptchaTime = null;
 
         /**
-         * Device Risk Category
+         * Device Risk Category.
          * @type {string || null}
          */
         this.DeviceRiskCategory = null;

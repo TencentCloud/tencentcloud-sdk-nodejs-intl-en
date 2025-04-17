@@ -24,6 +24,7 @@ const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
 const CreateBusinessIntelligenceFileRequest = models.CreateBusinessIntelligenceFileRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const ModifyDReadableRequest = models.ModifyDReadableRequest;
@@ -118,6 +119,7 @@ const DescribeInstanceByOrdersResponse = models.DescribeInstanceByOrdersResponse
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
 const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
 const AccountPrivilege = models.AccountPrivilege;
 const CreateReadOnlyDBInstancesResponse = models.CreateReadOnlyDBInstancesResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
@@ -984,6 +986,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     ModifyDReadable(req, cb) {
         let resp = new ModifyDReadableResponse();
         this.request("ModifyDReadable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the maintenance time window of an instance based on its instance ID.
+     * @param {DescribeMaintenanceSpanRequest} req
+     * @param {function(string, DescribeMaintenanceSpanResponse):void} cb
+     * @public
+     */
+    DescribeMaintenanceSpan(req, cb) {
+        let resp = new DescribeMaintenanceSpanResponse();
+        this.request("DescribeMaintenanceSpan", req, resp, cb);
     }
 
     /**

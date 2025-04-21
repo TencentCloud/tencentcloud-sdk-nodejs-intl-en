@@ -83,6 +83,7 @@ const TaxiTicket = models.TaxiTicket;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 const RecognizeBrazilIDCardOCRResponse = models.RecognizeBrazilIDCardOCRResponse;
+const RecognizeBrazilRNEOCRRequest = models.RecognizeBrazilRNEOCRRequest;
 const VatElectronicInfo = models.VatElectronicInfo;
 const IDCardOCRRequest = models.IDCardOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
@@ -94,6 +95,7 @@ const AirTransport = models.AirTransport;
 const RecognizeTableAccurateOCRRequest = models.RecognizeTableAccurateOCRRequest;
 const Coord = models.Coord;
 const SealOCRResponse = models.SealOCRResponse;
+const RecognizeBrazilRNEOCRResponse = models.RecognizeBrazilRNEOCRResponse;
 const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
 const TableInfo = models.TableInfo;
 const VinOCRResponse = models.VinOCRResponse;
@@ -300,6 +302,17 @@ This interface supports regional scope: countries with machine-readable passport
     MLIDPassportOCR(req, cb) {
         let resp = new MLIDPassportOCRResponse();
         this.request("MLIDPassportOCR", req, resp, cb);
+    }
+
+    /**
+     * Brazil RNE document recognition Default interface request frequency limit: 5 times/second
+     * @param {RecognizeBrazilRNEOCRRequest} req
+     * @param {function(string, RecognizeBrazilRNEOCRResponse):void} cb
+     * @public
+     */
+    RecognizeBrazilRNEOCR(req, cb) {
+        let resp = new RecognizeBrazilRNEOCRResponse();
+        this.request("RecognizeBrazilRNEOCR", req, resp, cb);
     }
 
     /**

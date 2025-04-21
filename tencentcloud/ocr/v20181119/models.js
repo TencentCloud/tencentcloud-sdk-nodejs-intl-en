@@ -6207,6 +6207,62 @@ class RecognizeBrazilIDCardOCRResponse extends  AbstractModel {
 }
 
 /**
+ * RecognizeBrazilRNEOCR request structure.
+ * @class
+ */
+class RecognizeBrazilRNEOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64 value of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image downloading time should not exceed 3 seconds.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL address of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. URLs of images stored in Tencent Cloud can guarantee higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The speed and stability of URLs not stored in Tencent Cloud may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. An ImageUrl and ImageBase64 must be provided. If both are provided, only ImageUrl will be used.
+         * @type {string || null}
+         */
+        this.BackImageBase64 = null;
+
+        /**
+         * The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download time does not exceed 3 seconds. The URL of the image stored in Tencent Cloud can ensure higher download speed and stability. It is recommended to store the image in Tencent Cloud. The speed and stability of the URL stored outside Tencent Cloud may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.BackImageUrl = null;
+
+        /**
+         * Whether to return portrait photos.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.BackImageBase64 = 'BackImageBase64' in params ? params.BackImageBase64 : null;
+        this.BackImageUrl = 'BackImageUrl' in params ? params.BackImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+
+    }
+}
+
+/**
  * Return values for an electronic invoice
  * @class
  */
@@ -7530,6 +7586,139 @@ class SealOCRResponse extends  AbstractModel {
             }
         }
         this.SealShape = 'SealShape' in params ? params.SealShape : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RecognizeBrazilRNEOCR response structure.
+ * @class
+ */
+class RecognizeBrazilRNEOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RNE
+         * @type {string || null}
+         */
+        this.RNE = null;
+
+        /**
+         * Classification
+         * @type {string || null}
+         */
+        this.CLASSIFICATION = null;
+
+        /**
+         * Valid date
+         * @type {string || null}
+         */
+        this.VALIDADE = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.NOME = null;
+
+        /**
+         * Family information
+         * @type {string || null}
+         */
+        this.Membership = null;
+
+        /**
+         * Nationality
+         * @type {string || null}
+         */
+        this.NACIONALIDADE = null;
+
+        /**
+         * Place of Birth
+         * @type {string || null}
+         */
+        this.NATURALIDADE = null;
+
+        /**
+         * Issuing agency
+         * @type {string || null}
+         */
+        this.IssuingAgency = null;
+
+        /**
+         * Birthday
+         * @type {string || null}
+         */
+        this.DateOfBirth = null;
+
+        /**
+         * Gender
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Date of entry
+         * @type {string || null}
+         */
+        this.EntryDate = null;
+
+        /**
+         * VIA
+         * @type {string || null}
+         */
+        this.VIA = null;
+
+        /**
+         * Dispatch date
+         * @type {string || null}
+         */
+        this.DispatchDate = null;
+
+        /**
+         * MRZ
+         * @type {string || null}
+         */
+        this.MRZ = null;
+
+        /**
+         * PortraitImage base64
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RNE = 'RNE' in params ? params.RNE : null;
+        this.CLASSIFICATION = 'CLASSIFICATION' in params ? params.CLASSIFICATION : null;
+        this.VALIDADE = 'VALIDADE' in params ? params.VALIDADE : null;
+        this.NOME = 'NOME' in params ? params.NOME : null;
+        this.Membership = 'Membership' in params ? params.Membership : null;
+        this.NACIONALIDADE = 'NACIONALIDADE' in params ? params.NACIONALIDADE : null;
+        this.NATURALIDADE = 'NATURALIDADE' in params ? params.NATURALIDADE : null;
+        this.IssuingAgency = 'IssuingAgency' in params ? params.IssuingAgency : null;
+        this.DateOfBirth = 'DateOfBirth' in params ? params.DateOfBirth : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.EntryDate = 'EntryDate' in params ? params.EntryDate : null;
+        this.VIA = 'VIA' in params ? params.VIA : null;
+        this.DispatchDate = 'DispatchDate' in params ? params.DispatchDate : null;
+        this.MRZ = 'MRZ' in params ? params.MRZ : null;
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10488,6 +10677,7 @@ module.exports = {
     LicensePlateOCRRequest: LicensePlateOCRRequest,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
     RecognizeBrazilIDCardOCRResponse: RecognizeBrazilIDCardOCRResponse,
+    RecognizeBrazilRNEOCRRequest: RecognizeBrazilRNEOCRRequest,
     VatElectronicInfo: VatElectronicInfo,
     IDCardOCRRequest: IDCardOCRRequest,
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
@@ -10499,6 +10689,7 @@ module.exports = {
     RecognizeTableAccurateOCRRequest: RecognizeTableAccurateOCRRequest,
     Coord: Coord,
     SealOCRResponse: SealOCRResponse,
+    RecognizeBrazilRNEOCRResponse: RecognizeBrazilRNEOCRResponse,
     RecognizeIndonesiaIDCardOCRResponse: RecognizeIndonesiaIDCardOCRResponse,
     TableInfo: TableInfo,
     VinOCRResponse: VinOCRResponse,

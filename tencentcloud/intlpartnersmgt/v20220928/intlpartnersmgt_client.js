@@ -215,9 +215,8 @@ Callable roles: Reseller, Distributer, Second-level reseller
     }
 
     /**
-     * This API is used to query the customer information.
-
-Callable roles: Distributor, Reseller
+     * This API is used to query sub-customer information.
+Invocation roles: reseller, first-level distributor.
      * @param {DescribeCustomerInfoRequest} req
      * @param {function(string, DescribeCustomerInfoResponse):void} cb
      * @public

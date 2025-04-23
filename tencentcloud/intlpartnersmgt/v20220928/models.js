@@ -4776,8 +4776,7 @@ class DescribeCustomerInfoData extends  AbstractModel {
         this.BindTime = null;
 
         /**
-         * Account status
-.
+         * Account status.
 0: normal.
 1: forcibly mandatory (this function is not supported yet).
 2: mandatory arrears. 
@@ -4786,15 +4785,50 @@ class DescribeCustomerInfoData extends  AbstractModel {
         this.AccountStatus = null;
 
         /**
-         * Identity verification status.
--1: files not uploaded.
-0: not submitted for review.
-1: under review.
-2: review error.
-3: approved.
+         * Specifies the identity verification status.
+-999: account information not found.
+-1: file not uploaded.
+0: pending review.
+Under review.
+Error in review: 2.
+3: pass review.
          * @type {string || null}
          */
         this.AuthStatus = null;
+
+        /**
+         * Real-Name type.
+-1: default value. no such information. 
+0: personal type. 
+1: enterprise type.
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * Specifies the registration time of the cid.
+         * @type {string || null}
+         */
+        this.CidRegisterTime = null;
+
+        /**
+         * Specifies the registration time of the uin.
+         * @type {string || null}
+         */
+        this.UinRegisterTime = null;
+
+        /**
+         * Time when real-name authentication passed.
+         * @type {string || null}
+         */
+        this.AuthPassTime = null;
+
+        /**
+         * Whether there is consumption.
+0: no consumption; 1: consumption.
+         * @type {number || null}
+         */
+        this.HasExpense = null;
 
     }
 
@@ -4813,6 +4847,11 @@ class DescribeCustomerInfoData extends  AbstractModel {
         this.BindTime = 'BindTime' in params ? params.BindTime : null;
         this.AccountStatus = 'AccountStatus' in params ? params.AccountStatus : null;
         this.AuthStatus = 'AuthStatus' in params ? params.AuthStatus : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.CidRegisterTime = 'CidRegisterTime' in params ? params.CidRegisterTime : null;
+        this.UinRegisterTime = 'UinRegisterTime' in params ? params.UinRegisterTime : null;
+        this.AuthPassTime = 'AuthPassTime' in params ? params.AuthPassTime : null;
+        this.HasExpense = 'HasExpense' in params ? params.HasExpense : null;
 
     }
 }

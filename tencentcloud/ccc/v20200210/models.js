@@ -594,6 +594,44 @@ class CreateAICallRequest extends  AbstractModel {
         this.Callee = null;
 
         /**
+         * Model interface protocol types, currently compatible with three protocol types:
+
+- OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
+- Azure protocol:"azure"
+- Minimax protocol:"minimax"
+         * @type {string || null}
+         */
+        this.LLMType = null;
+
+        /**
+         * Model API key, for authentication information, please refer to the respective model's official website
+
+- OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
+
+- Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
+
+- Minimax:[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
+         * @type {string || null}
+         */
+        this.APIKey = null;
+
+        /**
+         * Model interface address
+
+- OpenAI protocol
+GPT:"https://api.openai.com/v1/"
+Deepseek:"https://api.deepseek.com/v1"
+
+- Azure protocol
+ "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
+
+- Minimax protocol
+"https://api.minimax.chat/v1"
+         * @type {string || null}
+         */
+        this.APIUrl = null;
+
+        /**
          * ## Identity
 You are Kate from the appointment department at Retell Health calling Cindy over the phone to prepare for the annual checkup coming up. You are a pleasant and friendly receptionist caring deeply for the user. You don't provide medical advice but would use the medical knowledge to understand user responses.
 
@@ -630,16 +668,6 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
         this.SystemPrompt = null;
 
         /**
-         * Model interface protocol types, currently compatible with three protocol types:
-
-- OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
-- Azure protocol:"azure"
-- Minimax protocol:"minimax"
-         * @type {string || null}
-         */
-        this.LLMType = null;
-
-        /**
          * Model name, such as
 
 - OpenAI protocol
@@ -653,34 +681,6 @@ If at any time the user showed anger or wanted a human agent, call transfer_call
          * @type {string || null}
          */
         this.Model = null;
-
-        /**
-         * Model API key, for authentication information, please refer to the respective model's official website
-
-- OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
-
-- Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
-
-- Minimax:[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
-         * @type {string || null}
-         */
-        this.APIKey = null;
-
-        /**
-         * Model interface address
-
-- OpenAI protocol
-GPT:"https://api.openai.com/v1/"
-Deepseek:"https://api.deepseek.com/v1"
-
-- Azure protocol
- "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
-
-- Minimax protocol
-"https://api.minimax.chat/v1"
-         * @type {string || null}
-         */
-        this.APIUrl = null;
 
         /**
          * The following voice parameter values are available by default. If you wish to customize the voice type, please leave VoiceType blank and configure it in the CustomTTSConfig parameter.
@@ -920,11 +920,11 @@ Please refer to the specific protocol standards in the <a href="https://doc.weix
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.Callee = 'Callee' in params ? params.Callee : null;
-        this.SystemPrompt = 'SystemPrompt' in params ? params.SystemPrompt : null;
         this.LLMType = 'LLMType' in params ? params.LLMType : null;
-        this.Model = 'Model' in params ? params.Model : null;
         this.APIKey = 'APIKey' in params ? params.APIKey : null;
         this.APIUrl = 'APIUrl' in params ? params.APIUrl : null;
+        this.SystemPrompt = 'SystemPrompt' in params ? params.SystemPrompt : null;
+        this.Model = 'Model' in params ? params.Model : null;
         this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
         this.Callers = 'Callers' in params ? params.Callers : null;
         this.WelcomeMessage = 'WelcomeMessage' in params ? params.WelcomeMessage : null;

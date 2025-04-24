@@ -13087,17 +13087,21 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
 
         /**
          * The network type of the bandwidth package. Default value: `BGP`. Valid values:
-`BGP` 
+`BGP`
 `HIGH_QUALITY_BGP`
          * @type {string || null}
          */
         this.NetworkType = null;
 
         /**
-         * The billing mode of the bandwidth package. Default value: `TOP5_POSTPAID_BY_MONTH`. Valid values:
-<li>`TOP5_POSTPAID_BY_MONTH`: monthly top 5 </li>
-<li>`PERCENT95_POSTPAID_BY_MONTH`: monthly 95th percentile</li>
-<li>`FIXED_PREPAID_BY_MONTH`: monthly subscription</li>
+         * The billing mode of the bandwidth package. Default value: `ENHANCED95_POSTPAID_BY_MONTH`. Valid values:
+<li>`ENHANCED95_POSTPAID_BY_MONTH`: Pay-as-you-go - Enhanced 95th percentile</li>
+<li>`PRIMARY_TRAFFIC_POSTPAID_BY_HOUR`: Postpaid - Main Traffic Billing</li>
+<li>`BANDWIDTH_POSTPAID_BY_DAY`: General BGP, Pay-as-you-go - Bandwidth-based</li>
+<li>`PEAK_BANDWIDTH_POSTPAID_BY_DAY`: Static single-line, Pay-as-you-go - Daily billed</li>
+<li>`TOP5_POSTPAID_BY_MONTH`: Pay-as-you-go - Monthly top 5th, If you need to use this Bglling mode, please submit a ticket.</li>
+
+
          * @type {string || null}
          */
         this.ChargeType = null;
@@ -13109,7 +13113,7 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         this.BandwidthPackageName = null;
 
         /**
-         * The number of bandwidth packages to create. Valid range: 1-20. It can only be “1” for bill-by-CVM accounts.
+         * The number of bandwidth packages to create. Valid range: 1-20. It can only be "1" for bill-by-CVM accounts.
          * @type {number || null}
          */
         this.BandwidthPackageCount = null;
@@ -13138,6 +13142,14 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
          */
         this.TimeSpan = null;
 
+        /**
+         *     Network egress. It defaults to `center_egress1`. Valid values:
+center_egress1,center_egress2,center_egress3
+
+         * @type {string || null}
+         */
+        this.Egress = null;
+
     }
 
     /**
@@ -13163,6 +13175,7 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         }
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.Egress = 'Egress' in params ? params.Egress : null;
 
     }
 }

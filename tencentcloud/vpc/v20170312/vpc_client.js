@@ -100,6 +100,7 @@ const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesR
 const AttachSnapshotInstancesResponse = models.AttachSnapshotInstancesResponse;
 const DescribeNatGatewaySourceIpTranslationNatRulesRequest = models.DescribeNatGatewaySourceIpTranslationNatRulesRequest;
 const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
+const InstanceJumbo = models.InstanceJumbo;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
 const ReplaceSecurityGroupPoliciesResponse = models.ReplaceSecurityGroupPoliciesResponse;
@@ -108,6 +109,7 @@ const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPo
 const DescribeIPv6AddressesResponse = models.DescribeIPv6AddressesResponse;
 const AttachSnapshotInstancesRequest = models.AttachSnapshotInstancesRequest;
 const CreateVpcEndPointServiceWhiteListResponse = models.CreateVpcEndPointServiceWhiteListResponse;
+const DescribeInstanceJumboResponse = models.DescribeInstanceJumboResponse;
 const DescribeIpGeolocationDatabaseUrlResponse = models.DescribeIpGeolocationDatabaseUrlResponse;
 const DescribeNatGatewaySourceIpTranslationNatRulesResponse = models.DescribeNatGatewaySourceIpTranslationNatRulesResponse;
 const DescribeVpcsRequest = models.DescribeVpcsRequest;
@@ -282,6 +284,7 @@ const DescribeIp6AddressesResponse = models.DescribeIp6AddressesResponse;
 const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
 const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
 const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
+const DescribeInstanceJumboRequest = models.DescribeInstanceJumboRequest;
 const NetDetectIpState = models.NetDetectIpState;
 const InternetPrice = models.InternetPrice;
 const ModifyIp6AddressesBandwidthResponse = models.ModifyIp6AddressesBandwidthResponse;
@@ -1460,14 +1463,17 @@ Policies to modify must be in the same direction. `PolicyIndex` must be specifie
     }
 
     /**
-     * This API is used to get a pair of VPN tunnel health check addresses. 
-     * @param {GenerateVpnConnectionDefaultHealthCheckIpRequest} req
-     * @param {function(string, GenerateVpnConnectionDefaultHealthCheckIpResponse):void} cb
+     * This API is used to check whether Cloud Virtual Machines support jumbo frames.
+Usage limits.
+This API is used to perform operations that require CAM policy authorization and read access to the corresponding instance. The API accesses CVM instances, so it verifies whether there are CAM permissions for the instance. For example: CAM action allows vpc:DescribeInstanceJumbo; resource allows qcs::cvm:ap-guangzhou:uin/2126195383:instance/*.
+This API is used to check the jumbo frame status before and after instance migration. The status returned by this API may be inconsistent before and after migration. You need to check whether the host machines of the instance before and after migration both support jumbo frames. One possible reason is that the instance has been migrated to a host machine that does not support jumbo frames.
+     * @param {DescribeInstanceJumboRequest} req
+     * @param {function(string, DescribeInstanceJumboResponse):void} cb
      * @public
      */
-    GenerateVpnConnectionDefaultHealthCheckIp(req, cb) {
-        let resp = new GenerateVpnConnectionDefaultHealthCheckIpResponse();
-        this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, resp, cb);
+    DescribeInstanceJumbo(req, cb) {
+        let resp = new DescribeInstanceJumboResponse();
+        this.request("DescribeInstanceJumbo", req, resp, cb);
     }
 
     /**
@@ -2454,6 +2460,17 @@ If the IP is occupied, the resource type and ID associated with the are is retur
     DescribeBandwidthPackageQuota(req, cb) {
         let resp = new DescribeBandwidthPackageQuotaResponse();
         this.request("DescribeBandwidthPackageQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get a pair of VPN tunnel health check addresses. 
+     * @param {GenerateVpnConnectionDefaultHealthCheckIpRequest} req
+     * @param {function(string, GenerateVpnConnectionDefaultHealthCheckIpResponse):void} cb
+     * @public
+     */
+    GenerateVpnConnectionDefaultHealthCheckIp(req, cb) {
+        let resp = new GenerateVpnConnectionDefaultHealthCheckIpResponse();
+        this.request("GenerateVpnConnectionDefaultHealthCheckIp", req, resp, cb);
     }
 
     /**

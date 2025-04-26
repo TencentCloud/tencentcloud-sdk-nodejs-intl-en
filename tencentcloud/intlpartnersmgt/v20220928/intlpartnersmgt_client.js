@@ -65,6 +65,7 @@ const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResp
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const TradeOneNode = models.TradeOneNode;
+const DescribeRebateDownloadUrlResponse = models.DescribeRebateDownloadUrlResponse;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const QueryInvitationInfoRequest = models.QueryInvitationInfoRequest;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
@@ -110,6 +111,7 @@ const BillDetailData = models.BillDetailData;
 const QueryCustomerBillingQuotaRequest = models.QueryCustomerBillingQuotaRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
 const CreateAndSendClientInvitationMailRequest = models.CreateAndSendClientInvitationMailRequest;
+const DescribeRebateDownloadUrlRequest = models.DescribeRebateDownloadUrlRequest;
 const SendVerifyCodeResponse = models.SendVerifyCodeResponse;
 
 
@@ -199,6 +201,18 @@ Callable roles: Distributor, Second-level reseller, Reseller
     QueryPartnerCredit(req, cb) {
         let resp = new QueryPartnerCreditResponse();
         this.request("QueryPartnerCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to download the commission bill file by resellers/agents. The file URL is returned.
+Resellers/Agents can call this API.
+     * @param {DescribeRebateDownloadUrlRequest} req
+     * @param {function(string, DescribeRebateDownloadUrlResponse):void} cb
+     * @public
+     */
+    DescribeRebateDownloadUrl(req, cb) {
+        let resp = new DescribeRebateDownloadUrlResponse();
+        this.request("DescribeRebateDownloadUrl", req, resp, cb);
     }
 
     /**

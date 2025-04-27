@@ -14233,7 +14233,7 @@ class DescribeAdaptiveDynamicStreamingTemplatesResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of eligible entries.
+         * The total number of records matching the filter criteria.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -14412,33 +14412,33 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
          * @type {number || null}
          */
         this.SubAppId = null;
 
         /**
-         * Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
+         * Unique id filter of transcoding to adaptive bitrate streaming templates. array length limit: 100.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
 
         /**
-         * Paged offset. Default value: 0.
+         * Pagination offset. default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * Number of returned entries. default value: 10. maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Template type filter. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
+         * Template type filter. valid values:.
+<Li>Preset: system preset template;</li>.
+<Li>Custom: user-defined template.</li>.
          * @type {string || null}
          */
         this.Type = null;
@@ -36304,7 +36304,7 @@ class EnhanceMediaQualityOutputConfig extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * The expiration time of the output file, the file will be deleted after this time, the default is never to expire, the format is in accordance with the ISO 8601 standard, see [ISO date format description](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I)。
+         * The expiration time of the output file, the file will be deleted after this time, the default is never to expire, the format is in accordance with the ISO 8601 standard, see [ISO date format description](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -44210,16 +44210,16 @@ class RestoreMediaRequest extends  AbstractModel {
         this.FileIds = null;
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
          * @type {number || null}
          */
         this.RestoreDay = null;
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
@@ -44243,8 +44243,8 @@ If the current storage class is DEEP ARCHIVE, the valid values for this paramete
             return;
         }
         this.FileIds = 'FileIds' in params ? params.FileIds : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.RestoreDay = 'RestoreDay' in params ? params.RestoreDay : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.RestoreTier = 'RestoreTier' in params ? params.RestoreTier : null;
 
     }
@@ -44742,6 +44742,12 @@ class CreateSubAppIdRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -44753,6 +44759,7 @@ class CreateSubAppIdRequest extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }

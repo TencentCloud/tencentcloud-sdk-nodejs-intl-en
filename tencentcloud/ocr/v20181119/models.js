@@ -2758,90 +2758,37 @@ class OtherInvoice extends  AbstractModel {
 }
 
 /**
- * RecognizePhilippinesDrivingLicenseOCR response structure.
+ * RecognizePhilippinesUMIDOCR request structure.
  * @class
  */
-class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
+class RecognizePhilippinesUMIDOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded identity photo.
-         * @type {TextDetectionResult || null}
-         */
-        this.HeadPortrait = null;
-
-        /**
-         * The full name.
-         * @type {TextDetectionResult || null}
-         */
-        this.Name = null;
-
-        /**
-         * The last name.
-         * @type {TextDetectionResult || null}
-         */
-        this.LastName = null;
-
-        /**
-         * The first name.
-         * @type {TextDetectionResult || null}
-         */
-        this.FirstName = null;
-
-        /**
-         * The middle name.
-         * @type {TextDetectionResult || null}
-         */
-        this.MiddleName = null;
-
-        /**
-         * The nationality.
-         * @type {TextDetectionResult || null}
-         */
-        this.Nationality = null;
-
-        /**
-         * The gender.
-         * @type {TextDetectionResult || null}
-         */
-        this.Sex = null;
-
-        /**
-         * The address.
-         * @type {TextDetectionResult || null}
-         */
-        this.Address = null;
-
-        /**
-         * The license No.
-         * @type {TextDetectionResult || null}
-         */
-        this.LicenseNo = null;
-
-        /**
-         * The expiration date.
-         * @type {TextDetectionResult || null}
-         */
-        this.ExpiresDate = null;
-
-        /**
-         * The agency code.
-         * @type {TextDetectionResult || null}
-         */
-        this.AgencyCode = null;
-
-        /**
-         * The date of birth.
-         * @type {TextDetectionResult || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageBase64 = null;
+
+        /**
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Whether to return the identity photo.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
 
     }
 
@@ -2852,79 +2799,9 @@ class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.HeadPortrait) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.HeadPortrait)
-            this.HeadPortrait = obj;
-        }
-
-        if (params.Name) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Name)
-            this.Name = obj;
-        }
-
-        if (params.LastName) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.LastName)
-            this.LastName = obj;
-        }
-
-        if (params.FirstName) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.FirstName)
-            this.FirstName = obj;
-        }
-
-        if (params.MiddleName) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.MiddleName)
-            this.MiddleName = obj;
-        }
-
-        if (params.Nationality) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Nationality)
-            this.Nationality = obj;
-        }
-
-        if (params.Sex) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Sex)
-            this.Sex = obj;
-        }
-
-        if (params.Address) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Address)
-            this.Address = obj;
-        }
-
-        if (params.LicenseNo) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.LicenseNo)
-            this.LicenseNo = obj;
-        }
-
-        if (params.ExpiresDate) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.ExpiresDate)
-            this.ExpiresDate = obj;
-        }
-
-        if (params.AgencyCode) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.AgencyCode)
-            this.AgencyCode = obj;
-        }
-
-        if (params.Birthday) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Birthday)
-            this.Birthday = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
 
     }
 }
@@ -5941,6 +5818,146 @@ class TaxiTicket extends  AbstractModel {
 }
 
 /**
+ * RecognizeBrazilRNMOCR response structure.
+ * @class
+ */
+class RecognizeBrazilRNMOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Last name
+         * @type {string || null}
+         */
+        this.SOBRENOME = null;
+
+        /**
+         * First name
+         * @type {string || null}
+         */
+        this.NOME = null;
+
+        /**
+         * Date of Birth
+         * @type {string || null}
+         */
+        this.DATADENASCIMENTO = null;
+
+        /**
+         * Gender
+         * @type {string || null}
+         */
+        this.SEXO = null;
+
+        /**
+         * Parents name
+         * @type {string || null}
+         */
+        this.MEMBERSHIP = null;
+
+        /**
+         * Nationality
+         * @type {string || null}
+         */
+        this.NACIONALIDADE = null;
+
+        /**
+         * Expiry Date
+         * @type {string || null}
+         */
+        this.VALIDADE = null;
+
+        /**
+         * RNM
+         * @type {string || null}
+         */
+        this.RNM = null;
+
+        /**
+         * CPF
+         * @type {string || null}
+         */
+        this.CPF = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CLASSIFICATION = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PRAZODERESIDENCIA = null;
+
+        /**
+         * Issue Date
+         * @type {string || null}
+         */
+        this.ISSUANCE = null;
+
+        /**
+         * Legal basis
+         * @type {string || null}
+         */
+        this.AMPAROLEGAL = null;
+
+        /**
+         * Machine readable zone code
+         * @type {string || null}
+         */
+        this.MRZ = null;
+
+        /**
+         * PortraitImage
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * PortraitImage(Back)
+         * @type {string || null}
+         */
+        this.PortraitImageBack = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SOBRENOME = 'SOBRENOME' in params ? params.SOBRENOME : null;
+        this.NOME = 'NOME' in params ? params.NOME : null;
+        this.DATADENASCIMENTO = 'DATADENASCIMENTO' in params ? params.DATADENASCIMENTO : null;
+        this.SEXO = 'SEXO' in params ? params.SEXO : null;
+        this.MEMBERSHIP = 'MEMBERSHIP' in params ? params.MEMBERSHIP : null;
+        this.NACIONALIDADE = 'NACIONALIDADE' in params ? params.NACIONALIDADE : null;
+        this.VALIDADE = 'VALIDADE' in params ? params.VALIDADE : null;
+        this.RNM = 'RNM' in params ? params.RNM : null;
+        this.CPF = 'CPF' in params ? params.CPF : null;
+        this.CLASSIFICATION = 'CLASSIFICATION' in params ? params.CLASSIFICATION : null;
+        this.PRAZODERESIDENCIA = 'PRAZODERESIDENCIA' in params ? params.PRAZODERESIDENCIA : null;
+        this.ISSUANCE = 'ISSUANCE' in params ? params.ISSUANCE : null;
+        this.AMPAROLEGAL = 'AMPAROLEGAL' in params ? params.AMPAROLEGAL : null;
+        this.MRZ = 'MRZ' in params ? params.MRZ : null;
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
+        this.PortraitImageBack = 'PortraitImageBack' in params ? params.PortraitImageBack : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * LicensePlateOCR request structure.
  * @class
  */
@@ -6076,6 +6093,62 @@ Valid values:
         this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
         this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
         this.IsWords = 'IsWords' in params ? params.IsWords : null;
+
+    }
+}
+
+/**
+ * RecognizeBrazilRNMOCR request structure.
+ * @class
+ */
+class RecognizeBrazilRNMOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64 value of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image downloading time should not exceed 3 seconds.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * URL address of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. URLs of images stored in Tencent Cloud can guarantee higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The speed and stability of URLs not stored in Tencent Cloud may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. An ImageUrl and ImageBase64 must be provided. If both are provided, only ImageUrl will be used.
+         * @type {string || null}
+         */
+        this.BackImageBase64 = null;
+
+        /**
+         * The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download time does not exceed 3 seconds. The URL of the image stored in Tencent Cloud can ensure higher download speed and stability. It is recommended to store the image in Tencent Cloud. The speed and stability of the URL stored outside Tencent Cloud may be affected to a certain extent.
+         * @type {string || null}
+         */
+        this.BackImageUrl = null;
+
+        /**
+         * Whether to return portrait photos.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.BackImageBase64 = 'BackImageBase64' in params ? params.BackImageBase64 : null;
+        this.BackImageUrl = 'BackImageUrl' in params ? params.BackImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
 
     }
 }
@@ -10561,37 +10634,90 @@ class RecognizeThaiPinkCardResponse extends  AbstractModel {
 }
 
 /**
- * RecognizePhilippinesUMIDOCR request structure.
+ * RecognizePhilippinesDrivingLicenseOCR response structure.
  * @class
  */
-class RecognizePhilippinesUMIDOCRRequest extends  AbstractModel {
+class RecognizePhilippinesDrivingLicenseOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded value of the image.
-Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
-Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
-         * @type {string || null}
+         * The Base64-encoded identity photo.
+         * @type {TextDetectionResult || null}
          */
-        this.ImageBase64 = null;
+        this.HeadPortrait = null;
 
         /**
-         * The URL of the image.
-Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
-We recommend that you store the image in Tencent Cloud for higher download speed and stability.
-The download speed and stability of non-Tencent Cloud URLs may be low.
-         * @type {string || null}
+         * The full name.
+         * @type {TextDetectionResult || null}
          */
-        this.ImageUrl = null;
+        this.Name = null;
 
         /**
-         * Whether to return the identity photo.
-         * @type {boolean || null}
+         * The last name.
+         * @type {TextDetectionResult || null}
          */
-        this.ReturnHeadImage = null;
+        this.LastName = null;
+
+        /**
+         * The first name.
+         * @type {TextDetectionResult || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * The middle name.
+         * @type {TextDetectionResult || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * The nationality.
+         * @type {TextDetectionResult || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * The gender.
+         * @type {TextDetectionResult || null}
+         */
+        this.Sex = null;
+
+        /**
+         * The address.
+         * @type {TextDetectionResult || null}
+         */
+        this.Address = null;
+
+        /**
+         * The license No.
+         * @type {TextDetectionResult || null}
+         */
+        this.LicenseNo = null;
+
+        /**
+         * The expiration date.
+         * @type {TextDetectionResult || null}
+         */
+        this.ExpiresDate = null;
+
+        /**
+         * The agency code.
+         * @type {TextDetectionResult || null}
+         */
+        this.AgencyCode = null;
+
+        /**
+         * The date of birth.
+         * @type {TextDetectionResult || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -10602,9 +10728,79 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+
+        if (params.HeadPortrait) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.HeadPortrait)
+            this.HeadPortrait = obj;
+        }
+
+        if (params.Name) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Name)
+            this.Name = obj;
+        }
+
+        if (params.LastName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.LastName)
+            this.LastName = obj;
+        }
+
+        if (params.FirstName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.FirstName)
+            this.FirstName = obj;
+        }
+
+        if (params.MiddleName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.MiddleName)
+            this.MiddleName = obj;
+        }
+
+        if (params.Nationality) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Nationality)
+            this.Nationality = obj;
+        }
+
+        if (params.Sex) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Sex)
+            this.Sex = obj;
+        }
+
+        if (params.Address) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Address)
+            this.Address = obj;
+        }
+
+        if (params.LicenseNo) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.LicenseNo)
+            this.LicenseNo = obj;
+        }
+
+        if (params.ExpiresDate) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.ExpiresDate)
+            this.ExpiresDate = obj;
+        }
+
+        if (params.AgencyCode) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.AgencyCode)
+            this.AgencyCode = obj;
+        }
+
+        if (params.Birthday) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Birthday)
+            this.Birthday = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10649,7 +10845,7 @@ module.exports = {
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
     PermitOCRRequest: PermitOCRRequest,
     OtherInvoice: OtherInvoice,
-    RecognizePhilippinesDrivingLicenseOCRResponse: RecognizePhilippinesDrivingLicenseOCRResponse,
+    RecognizePhilippinesUMIDOCRRequest: RecognizePhilippinesUMIDOCRRequest,
     BankCardOCRRequest: BankCardOCRRequest,
     RecognizePhilippinesSssIDOCRRequest: RecognizePhilippinesSssIDOCRRequest,
     Key: Key,
@@ -10674,8 +10870,10 @@ module.exports = {
     PassportRecognizeInfos: PassportRecognizeInfos,
     RecognizeSingaporeIDCardOCRRequest: RecognizeSingaporeIDCardOCRRequest,
     TaxiTicket: TaxiTicket,
+    RecognizeBrazilRNMOCRResponse: RecognizeBrazilRNMOCRResponse,
     LicensePlateOCRRequest: LicensePlateOCRRequest,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
+    RecognizeBrazilRNMOCRRequest: RecognizeBrazilRNMOCRRequest,
     RecognizeBrazilIDCardOCRResponse: RecognizeBrazilIDCardOCRResponse,
     RecognizeBrazilRNEOCRRequest: RecognizeBrazilRNEOCRRequest,
     VatElectronicInfo: VatElectronicInfo,
@@ -10723,6 +10921,6 @@ module.exports = {
     RecognizeThaiPinkCardRequest: RecognizeThaiPinkCardRequest,
     BankCardOCRResponse: BankCardOCRResponse,
     RecognizeThaiPinkCardResponse: RecognizeThaiPinkCardResponse,
-    RecognizePhilippinesUMIDOCRRequest: RecognizePhilippinesUMIDOCRRequest,
+    RecognizePhilippinesDrivingLicenseOCRResponse: RecognizePhilippinesDrivingLicenseOCRResponse,
 
 }

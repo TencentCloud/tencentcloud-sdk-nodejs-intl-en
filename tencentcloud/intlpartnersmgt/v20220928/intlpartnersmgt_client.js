@@ -24,6 +24,7 @@ const QueryT1IndirectCustomersDetailRequest = models.QueryT1IndirectCustomersDet
 const CreateAndSendClientInvitationMailResponse = models.CreateAndSendClientInvitationMailResponse;
 const CustomerBillDetailData = models.CustomerBillDetailData;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const QuerySubAgentsDetailV2Response = models.QuerySubAgentsDetailV2Response;
 const DescribeCustomerBillDownloadUrlRequest = models.DescribeCustomerBillDownloadUrlRequest;
 const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const CountryCodeItem = models.CountryCodeItem;
@@ -52,6 +53,7 @@ const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const QueryInvitationInfoData = models.QueryInvitationInfoData;
+const QuerySubAgentsDetailV2Request = models.QuerySubAgentsDetailV2Request;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryT1IndirectCustomersDetailResponse = models.QueryT1IndirectCustomersDetailResponse;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
@@ -66,6 +68,7 @@ const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const TradeOneNode = models.TradeOneNode;
 const DescribeRebateDownloadUrlResponse = models.DescribeRebateDownloadUrlResponse;
+const QuerySubAgentsDetailV2ResponseData = models.QuerySubAgentsDetailV2ResponseData;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const QueryInvitationInfoRequest = models.QueryInvitationInfoRequest;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
@@ -226,6 +229,18 @@ Callable roles: Reseller, Distributer, Second-level reseller
     ApproveClientApply(req, cb) {
         let resp = new ApproveClientApplyResponse();
         this.request("ApproveClientApply", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query information of second-level resellers.
+Invocation Role:Distributor.
+     * @param {QuerySubAgentsDetailV2Request} req
+     * @param {function(string, QuerySubAgentsDetailV2Response):void} cb
+     * @public
+     */
+    QuerySubAgentsDetailV2(req, cb) {
+        let resp = new QuerySubAgentsDetailV2Response();
+        this.request("QuerySubAgentsDetailV2", req, resp, cb);
     }
 
     /**

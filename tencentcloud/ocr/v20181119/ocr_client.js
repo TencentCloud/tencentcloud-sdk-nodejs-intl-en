@@ -55,7 +55,7 @@ const RecognizeGeneralInvoiceRequest = models.RecognizeGeneralInvoiceRequest;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const PermitOCRRequest = models.PermitOCRRequest;
 const OtherInvoice = models.OtherInvoice;
-const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
+const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const BankCardOCRRequest = models.BankCardOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
 const Key = models.Key;
@@ -80,8 +80,10 @@ const TableOCRRequest = models.TableOCRRequest;
 const PassportRecognizeInfos = models.PassportRecognizeInfos;
 const RecognizeSingaporeIDCardOCRRequest = models.RecognizeSingaporeIDCardOCRRequest;
 const TaxiTicket = models.TaxiTicket;
+const RecognizeBrazilRNMOCRResponse = models.RecognizeBrazilRNMOCRResponse;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
+const RecognizeBrazilRNMOCRRequest = models.RecognizeBrazilRNMOCRRequest;
 const RecognizeBrazilIDCardOCRResponse = models.RecognizeBrazilIDCardOCRResponse;
 const RecognizeBrazilRNEOCRRequest = models.RecognizeBrazilRNEOCRRequest;
 const VatElectronicInfo = models.VatElectronicInfo;
@@ -129,7 +131,7 @@ const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRR
 const RecognizeThaiPinkCardRequest = models.RecognizeThaiPinkCardRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const RecognizeThaiPinkCardResponse = models.RecognizeThaiPinkCardResponse;
-const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
+const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
 
 
 /**
@@ -154,6 +156,17 @@ A maximum of 5 requests can be initiated per second for this API.
     RecognizeThaiPinkCard(req, cb) {
         let resp = new RecognizeThaiPinkCardResponse();
         this.request("RecognizeThaiPinkCard", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize a Philippine SSSID/UMID card.
+     * @param {RecognizePhilippinesSssIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesSssIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesSssIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesSssIDOCRResponse();
+        this.request("RecognizePhilippinesSssIDOCR", req, resp, cb);
     }
 
     /**
@@ -424,17 +437,6 @@ A maximum of 10 requests can be initiated per second for this API.
     }
 
     /**
-     * This API is used to recognize a South Korean ID card.
-     * @param {RecognizeKoreanIDCardOCRRequest} req
-     * @param {function(string, RecognizeKoreanIDCardOCRResponse):void} cb
-     * @public
-     */
-    RecognizeKoreanIDCardOCR(req, cb) {
-        let resp = new RecognizeKoreanIDCardOCRResponse();
-        this.request("RecognizeKoreanIDCardOCR", req, resp, cb);
-    }
-
-    /**
      * This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
 As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
      * @param {RecognizeMainlandIDCardOCRRequest} req
@@ -495,6 +497,17 @@ The API request rate is limited to 20 requests/sec by default.
     }
 
     /**
+     * This interface supports identification of the front and back of Brazilian RNM license. The default interface request frequency limit is 5 times per second.
+     * @param {RecognizeBrazilRNMOCRRequest} req
+     * @param {function(string, RecognizeBrazilRNMOCRResponse):void} cb
+     * @public
+     */
+    RecognizeBrazilRNMOCR(req, cb) {
+        let resp = new RecognizeBrazilRNMOCRResponse();
+        this.request("RecognizeBrazilRNMOCR", req, resp, cb);
+    }
+
+    /**
      * This interface supports the identification of all fields on the front side of ID card for Singapore residents.The identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
 As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
      * @param {RecognizeSingaporeIDCardOCRRequest} req
@@ -533,14 +546,14 @@ A maximum of 20 requests can be initiated per second for this API.
     }
 
     /**
-     * This API is used to recognize a Philippine SSSID/UMID card.
-     * @param {RecognizePhilippinesSssIDOCRRequest} req
-     * @param {function(string, RecognizePhilippinesSssIDOCRResponse):void} cb
+     * This API is used to recognize a South Korean ID card.
+     * @param {RecognizeKoreanIDCardOCRRequest} req
+     * @param {function(string, RecognizeKoreanIDCardOCRResponse):void} cb
      * @public
      */
-    RecognizePhilippinesSssIDOCR(req, cb) {
-        let resp = new RecognizePhilippinesSssIDOCRResponse();
-        this.request("RecognizePhilippinesSssIDOCR", req, resp, cb);
+    RecognizeKoreanIDCardOCR(req, cb) {
+        let resp = new RecognizeKoreanIDCardOCRResponse();
+        this.request("RecognizeKoreanIDCardOCR", req, resp, cb);
     }
 
     /**

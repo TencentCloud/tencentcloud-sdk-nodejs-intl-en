@@ -4233,11 +4233,11 @@ class InstanceLifeDetailDto extends  AbstractModel {
 
         /**
          * Indicates the status of an instance.
--Indicates waiting for event.
+-[0] Indicates waiting for event.
 -[12] indicates waiting for upstream.
 -[6, 7, 9, 10, 18] indicates awaiting execution.
--1, 19, 22 indicate running.
--21: skip running.
+-[1, 19, 22]  indicate running.
+-[21] skip running.
 -[3] indicates retry on failure.
 -[8, 4, 5, 13] indicates a failure.
 -[2] indicates a success.
@@ -4256,14 +4256,14 @@ Note: This field may return null, indicating that no valid value can be obtained
         /**
          * Instance lifecycle phase status.
 
--WAIT_UPSTREAM indicates waiting for event/upstream status.
--WAIT_RUN indicates a waiting for running status.
--RUNNING indicates a running state.
--COMPLETE indicates the final state - completed.
--FAILED indicates the final state - retry on failure.
--EXPIRED indicates the final state - failure.
--SKIP_RUNNING indicates the final state - a branch skipped by the upstream branch node.
--HISTORY indicates compatibility with historical instances.
+-WAIT_UPSTREAM indicates waiting for an event or upstream status.
+-WAIT_RUN indicates waiting for running status.
+-RUNNING indicates the running state.
+-COMPLETE indicates terminal state - completed.
+-FAILED indicates terminal state - retry after failure.
+-EXPIRED indicates terminal state - failure.
+-SKIP_RUNNING indicates terminal state - a branch skipped by the upstream branch node.
+-HISTORY indicates compatibility with historical instances before march 30, 2024. no need to pay attention to this enumeration type for instances afterward.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6619,14 +6619,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExecutorGroupName = null;
 
         /**
-         * Standard data time.
+         * Instance data time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CurRunDate = null;
 
         /**
-         * Next standard data time.
+         * Next instance data time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6654,7 +6654,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TotalRunNum = null;
 
         /**
-         * Lifecycle no.
+         * Instance lifetime number, which identifies one-time execution of the instance.
+
+For example: the number of the first run of a periodic instance is 0. after the user reruns the instance later, the number of the second execution is 1.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -6663,9 +6665,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Instance type.
 
--0 indicates the supplementary entry type.
--1 indicates a periodic instance.
--2 indicates a non-periodic instance.
+-0 indicates Replenished Instance.
+-1 indicates Periodic Instance.
+-2 indicates Non-Periodic Instance.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -6674,11 +6676,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Indicates the status of an instance.
 
--Indicates waiting for event.
+-[0] Indicates waiting for event.
 -[12] indicates waiting for upstream.
 -[6, 7, 9, 10, 18] indicates awaiting execution.
--1, 19, 22 indicate running.
--21: skip running.
+-[1, 19, 22] indicate running.
+-[21]: skip running.
 -[3] indicates retry on failure.
 -[8, 4, 5, 13] indicates a failure.
 -[2] indicates a success.
@@ -6719,11 +6721,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * Instance running trigger type.
 
 -RERUN indicates rerunning.
--ADDITION indicates supplementary recording.
+-ADDITION indicates data replenishment.
 -PERIODIC indicates a period.
 -APERIODIC indicates non-periodic.
 -RERUN_SKIP_RUN indicates re-run - empty run.
--ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+-ADDITION_SKIP_RUN indicates a data replenishment run - empty run.
 -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
 -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
 -MANUAL_TRIGGER indicates manual triggering.
@@ -10121,11 +10123,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * **Instance status**.
 
--Indicates waiting for event.
+-[0] Indicates waiting for event.
 -[12] indicates waiting for upstream.
 -[6, 7, 9, 10, 18] indicates awaiting execution.
--1, 19, 22 indicate running.
--21: skip running.
+-[1, 19, 22] indicate running.
+-[21] skip running.
 -[3] indicates retry on failure.
 -[8, 4, 5, 13] indicates a failure.
 -[2] indicates a success.
@@ -10137,12 +10139,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Instance running trigger type.
 
--RERUN indicates rerunning.
+-RERUN indicates data replenishment.
 -ADDITION indicates supplementary recording.
 -PERIODIC indicates a period.
 -APERIODIC indicates non-periodic.
 -RERUN_SKIP_RUN means empty run for re-run.
--ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+-ADDITION_SKIP_RUN indicates data replenishment - empty run.
 -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
 -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
 -MANUAL_TRIGGER indicates manual triggering.
@@ -10211,7 +10213,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LineCount = null;
 
         /**
-         * Execute platform log pagination query parameters, transparently input for each request. the value is an empty string when querying the first page.
+         * Used when performing a paging query for logs. it has no specific business meaning.
+
+Specifies that the value is null for the first query. 
+Specifies that you can use the field value of ExtInfo in the returned information from the previous query for the second and subsequent queries.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -20459,7 +20464,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TaskCycleType = null;
 
         /**
-         * Standard data time.
+         * Instance data time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -20501,7 +20506,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Indicates the status of an instance.
 
--Indicates waiting for event.
+-[0]Indicates waiting for event.
 -[12] indicates waiting for upstream.
 -[6, 7, 9, 10, 18] indicates awaiting execution.
 -[1, 19, 22]: running.
@@ -22534,15 +22539,15 @@ class ListInstancesRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Instance plan scheduling time.
-Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+         * Filter criteria for instance planned scheduling time.
+Specifies the start time for filtering. the time format is yyyy-MM-dd HH:MM:ss.
          * @type {string || null}
          */
         this.ScheduleTimeFrom = null;
 
         /**
-         * Instance plan scheduling time.
-Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+         * Filter criteria for instance planned scheduling time.
+Filter expiration time. the time format is yyyy-MM-dd HH:MM:ss.
          * @type {string || null}
          */
         this.ScheduleTimeTo = null;
@@ -22562,12 +22567,12 @@ Use in conjunction with pageNumber and should not exceed 200. default value: 10.
         this.PageSize = null;
 
         /**
-         * Field used to sort query results.
+         * Sorting field for query results.
 
--SCHEDULE_DATE indicates the planned scheduling time.
--START_TIME indicates the start execution time of an instance.
--END_TIME indicates the execution end time of the instance.
--COST_TIME indicates the execution duration of an instance.
+-SCHEDULE_DATE indicates sorting based on the planned scheduling time.
+-START_TIME indicates sorting by the instance's start execution time.
+-END_TIME indicates sorting based on the instance execution end time.
+-COST_TIME indicates sorting based on instance execution duration.
          * @type {string || null}
          */
         this.SortColumn = null;
@@ -22584,9 +22589,9 @@ Use in conjunction with pageNumber and should not exceed 200. default value: 10.
         /**
          * Instance type.
 
--0 indicates the supplementary entry type.
--1 indicates a periodic instance.
--2 indicates a non-periodic instance.
+-0 indicates Replenished Instance.
+-1 indicates Periodic Instance.
+-2 indicates Non-Periodic instance.
          * @type {number || null}
          */
         this.InstanceType = null;
@@ -22595,10 +22600,10 @@ Use in conjunction with pageNumber and should not exceed 200. default value: 10.
          * Instance execution status.
 Support filtering multiple items with an "or" relationship between conditions.
 
--Indicates waiting for event.
+-[0] Indicates waiting for event.
 -[12] indicates waiting for upstream.
 -[6, 7, 9, 10, 18] indicates awaiting execution.
--1, 19, 22 indicate running.
+-[1, 19, 22] indicate running.
 -[21] indicates skipping running.
 -[3] indicates retry on failure.
 -[8, 4, 5, 13] indicates a failure.
@@ -22671,15 +22676,15 @@ The DescribeNormalIntegrationExecutorGroups API can be used to obtain the list o
         this.ExecutorGroupIdList = null;
 
         /**
-         * **Start time**.
-Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+         * Instance execution start time filter criteria.
+Specifies the start time for filtering. the time format is yyyy-MM-dd HH:MM:ss.
          * @type {string || null}
          */
         this.StartTimeFrom = null;
 
         /**
-         * **Start time**.
-Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+         * Instance execution start time filter criteria.
+Filter expiration time. the time format is yyyy-MM-dd HH:MM:ss.
          * @type {string || null}
          */
         this.StartTimeTo = null;
@@ -23446,11 +23451,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Instance status.
 
--Indicates waiting for event.
+-[0] Indicates waiting for event.
 -[12] indicates waiting for upstream.
 -[6, 7, 9, 10, 18] indicates awaiting execution.
--1, 19, 22 indicate running.
--21: skip running.
+-[1, 19, 22] indicate running.
+-[21] skip running.
 -[3] indicates retry on failure.
 -[8, 4, 5, 13] indicates a failure.
 -[2] indicates a success.
@@ -23460,7 +23465,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceState = null;
 
         /**
-         * Lifecycle no.
+         * Instance lifetime number, which identifies one-time execution of the instance.
+
+For example: the number of the first run of a periodic instance is 0. when the user reruns the instance later, the number of the second execution is 1.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -23470,11 +23477,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * Instance running trigger type.
 
 -RERUN indicates rerunning.
--ADDITION indicates supplementary recording.
+-ADDITION indicates data replenishment.
 -PERIODIC indicates a period.
 -APERIODIC indicates non-periodic.
 -RERUN_SKIP_RUN means empty run for re-run.
--ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+-ADDITION_SKIP_RUN indicates data replenishment - empty run.
 -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
 -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
 -MANUAL_TRIGGER indicates manual triggering.
@@ -23508,6 +23515,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Dispatch execution ID.
+The unified execution platform dispatches execution to the new version executor with a unique ID to identify a specific execution, while the existing old executors do not have this ID when dispatching execution.
+If it is unknown whether the executor version supports this ID, contact tencent cloud's operations team.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -45516,7 +45525,9 @@ class GetInstanceLogRequest extends  AbstractModel {
         this.InstanceKey = null;
 
         /**
-         * Lifecycle no.
+         * Instance lifetime number, which identifies one-time execution of the instance.
+
+For example: the number of the first run of a periodic instance is 0. when the user reruns the instance later, the number of the second execution is 1.
          * @type {number || null}
          */
         this.LifeRoundNum = null;
@@ -45577,6 +45588,15 @@ The default value is 10000.
          */
         this.EndLineCount = null;
 
+        /**
+         * Used when performing a paging query for logs. it has no specific business meaning.
+
+Specifies that the value is null for the first query. 
+Use the ExtInfo field value in the returned information from the previous query for the second and subsequent queries.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
     }
 
     /**
@@ -45596,6 +45616,7 @@ The default value is 10000.
         this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
         this.StartLineNum = 'StartLineNum' in params ? params.StartLineNum : null;
         this.EndLineCount = 'EndLineCount' in params ? params.EndLineCount : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }

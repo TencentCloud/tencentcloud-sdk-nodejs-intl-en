@@ -293,8 +293,8 @@ Callable roles: Distributor
     }
 
     /**
-     * This API is used to query the indirect sub-customers of a first-level distributor.
-Invokable role type: first-level reseller.
+     * This API is used to query the indirect sub-customers of a distributor.
+Invokable role type: Distributor
      * @param {QueryT1IndirectCustomersDetailRequest} req
      * @param {function(string, QueryT1IndirectCustomersDetailResponse):void} cb
      * @public

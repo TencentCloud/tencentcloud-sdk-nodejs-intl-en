@@ -2086,7 +2086,7 @@ class QueryT1IndirectCustomersDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * The number of indirect sub-customers of a first-level distributor.
+         * The number of indirect sub-customers of a distributor.
          * @type {number || null}
          */
         this.Total = null;

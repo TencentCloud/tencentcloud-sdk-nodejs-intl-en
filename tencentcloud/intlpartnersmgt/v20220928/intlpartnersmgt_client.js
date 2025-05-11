@@ -30,6 +30,7 @@ const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const CountryCodeItem = models.CountryCodeItem;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
+const QueryPendingSubAgentsV2Request = models.QueryPendingSubAgentsV2Request;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
@@ -46,6 +47,8 @@ const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
 const PolicyProductList = models.PolicyProductList;
 const QueryCustomerBillingQuotaResponse = models.QueryCustomerBillingQuotaResponse;
 const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
+const QueryPendingSubAgentsV2ResponseData = models.QueryPendingSubAgentsV2ResponseData;
+const ApproveSubAgentApplyResponse = models.ApproveSubAgentApplyResponse;
 const QueryInvitationInfoResponse = models.QueryInvitationInfoResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
@@ -55,9 +58,9 @@ const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeR
 const QueryInvitationInfoData = models.QueryInvitationInfoData;
 const QuerySubAgentsDetailV2Request = models.QuerySubAgentsDetailV2Request;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
-const QueryT1IndirectCustomersDetailResponse = models.QueryT1IndirectCustomersDetailResponse;
-const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const AllocateCreditPoolRequest = models.AllocateCreditPoolRequest;
+const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
+const QueryT1IndirectCustomersDetailResponse = models.QueryT1IndirectCustomersDetailResponse;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const ForceQNResponse = models.ForceQNResponse;
@@ -83,6 +86,7 @@ const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
 const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
+const ApproveSubAgentApplyRequest = models.ApproveSubAgentApplyRequest;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
@@ -110,6 +114,7 @@ const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
 const QueryPolicyProductListByCodeResponse = models.QueryPolicyProductListByCodeResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const QueryPendingSubAgentsV2Response = models.QueryPendingSubAgentsV2Response;
 const BillDetailData = models.BillDetailData;
 const QueryCustomerBillingQuotaRequest = models.QueryCustomerBillingQuotaRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
@@ -216,6 +221,18 @@ Resellers/Agents can call this API.
     DescribeRebateDownloadUrl(req, cb) {
         let resp = new DescribeRebateDownloadUrlResponse();
         this.request("DescribeRebateDownloadUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query information of second-level resellers in application.
+Invocation Role: Distributor.
+     * @param {QueryPendingSubAgentsV2Request} req
+     * @param {function(string, QueryPendingSubAgentsV2Response):void} cb
+     * @public
+     */
+    QueryPendingSubAgentsV2(req, cb) {
+        let resp = new QueryPendingSubAgentsV2Response();
+        this.request("QueryPendingSubAgentsV2", req, resp, cb);
     }
 
     /**
@@ -341,14 +358,13 @@ Callable roles: Distributor, Second-level reseller, Reseller
     }
 
     /**
-     * This API is used to apply for the allowlist. If needed, please contact your business representative.Directions:
-1.This API is used to create an invitation link, which you can send to a specified email address.
-2.Customer need to click the invitation link in the email, fill in and submit the required information.
-3.You can review the customer's application in customer management  after submission.
+     * This API is used to perform operations. Application for allowlist is required before usage. If needed, contact your business representative to request allowlisting. The specific usage process is as follows;.
+This API is used to create an invitation link. You can send the invitation link to your designated email address.
+2. Customers need to click the invitation link in the mailbox, fill in and submit relevant information.
+3. After customer submission, you can view the application of this sub-customer on the customer management page and review it.
 
-Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
-
-Callable roles: Distributor, Second-level reseller, Reseller
+This API is used to handle cases where if the designated mailbox does not receive the invitation link, you can send the invitation link returned by the API to the customer manually.
+Invocation roles: resellers, distributors, second-level reseller.
      * @param {CreateAndSendClientInvitationMailRequest} req
      * @param {function(string, CreateAndSendClientInvitationMailResponse):void} cb
      * @public
@@ -543,6 +559,18 @@ Callable roles: Distributor, Second-level reseller, Reseller
     QueryPolicyProductListByCode(req, cb) {
         let resp = new QueryPolicyProductListByCodeResponse();
         this.request("QueryPolicyProductListByCode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to approve applications for second-level resellers.
+Invocation Role: Distributor.
+     * @param {ApproveSubAgentApplyRequest} req
+     * @param {function(string, ApproveSubAgentApplyResponse):void} cb
+     * @public
+     */
+    ApproveSubAgentApply(req, cb) {
+        let resp = new ApproveSubAgentApplyResponse();
+        this.request("ApproveSubAgentApply", req, resp, cb);
     }
 
     /**

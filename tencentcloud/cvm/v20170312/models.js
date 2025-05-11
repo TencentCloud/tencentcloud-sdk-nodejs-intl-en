@@ -527,6 +527,42 @@ class InquiryPriceResetInstancesInternetMaxBandwidthResponse extends  AbstractMo
 }
 
 /**
+ * Custom metadata.
+ * @class
+ */
+class Metadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A list of custom metadata key-value pairs.
+         * @type {Array.<MetadataItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new MetadataItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyKeyPairAttribute request structure.
  * @class
  */
@@ -1106,44 +1142,41 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For the restrictions on the system disk type, refer to [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Value values:<br>
-<li>LOCAL_BASIC: Local Disk</li>
-<li>LOCAL_SSD: Local SSD</li>
-<li>CLOUD_BASIC: Basic Cloud Disk</li>
-<li>CLOUD_SSD: Cloud SSD</li>
-<li>CLOUD_PREMIUM: Premium Disk</li>
-<li>CLOUD_BSSD: Balanced SSD</li>
-<li>CLOUD_HSSD: Enhanced SSD</li>
-<li>CLOUD_TSSD: Tremendous SSD</li><br>
+         * Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). value range:<br>.
+<Li>LOCAL_BASIC: specifies a local hard disk.</li>.
+<Li>LOCAL_SSD: specifies a local ssd.</li>.
+<Li>CLOUD_BASIC: ordinary cloud disk.</li>.
+<Li>CLOUD_SSD: ssd cloud disk</li>.
+<Li>CLOUD_PREMIUM: high-performance cloud block storage.</li>.
+<Li>CLOUD_BSSD: universal type ssd cloud disk</li>.
+<Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
+<li>CLOUD_TSSD: ultra-fast SSD cbs</li.
 Default value: Current disk types with inventory available.
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter.
-It is only used as a response parameter for APIs such as `DescribeInstances`, and cannot be used as a request parameter for APIs such as `RunInstances`.
+         * Specifies the system disk ID.
+This parameter currently only serves as a response parameter for query apis such as `DescribeInstances`, and cannot be used as an input parameter for write apis such as `RunInstances`.
          * @type {string || null}
          */
         this.DiskId = null;
 
         /**
-         * System disk size; unit: GB; default value: 50 GB.
+         * System disk size; unit: GiB; default value: 50 GiB.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * ID of the dedicated cluster to which the instance belongs.
+         * Specifies the exclusive cluster ID it belongs to.
          * @type {string || null}
          */
         this.CdcId = null;
 
         /**
-         * Disk name, with a length of not more than 128 characters.
-
-This parameter is in invite-only testing and is not yet open for use.
-Note: This field may return null, indicating that no valid value is found.
+         * Disk name, which specifies a length not exceeding 128 characters.
          * @type {string || null}
          */
         this.DiskName = null;
@@ -2435,15 +2468,13 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * Resource type. Valid values: `instance` (CVM), `host` (CDH), `image` (for image), and `keypair` (for key).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Tag-Bound resource type. "instance" for cloud virtual machine, "host" for cdh, "image" for mirror, and "keypair" for key.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * Tag pairs
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Tag pair list
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -3770,15 +3801,13 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Spot-related options
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Relevant options for spot instances.
          * @type {SpotMarketOptions || null}
          */
         this.SpotOptions = null;
 
         /**
-         * Market type. Valid value: `spot`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Market option type. The value can only be spot currently.
          * @type {string || null}
          */
         this.MarketType = null;
@@ -4709,7 +4738,7 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+         * Data disk size, unit: GiB. the minimum adjustment step size is 10 GiB. the value ranges of different data disk types vary. for specific limitations, see the storage overview (https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). the default value is 0, which means no data disk purchase. for more restrictions, see the product document.
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -4721,65 +4750,47 @@ class DataDisk extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * Data disk ID. Note that it's not available for `LOCAL_BASIC` and `LOCAL_SSD` disks.
-It is only used as a response parameter for APIs such as `DescribeInstances`, and cannot be used as a request parameter for APIs such as `RunInstances`.
+         * Specifies the data disk ID.
+This parameter currently only serves as a response parameter for query apis such as `DescribeInstances`, and cannot be used as an input parameter for write apis such as `RunInstances`.
          * @type {string || null}
          */
         this.DiskId = null;
 
         /**
-         * Whether the data disk is terminated with the Cloud Virtual Machine (CVM). Valid values:
-
-<li>true: Terminate the data disk when the CVM is terminated. Only the pay-as-you-go cloud disk billed by hour is supported.</li>
-<li>
-  false: Retain the data disk when the CVM is terminated.<br />
-  Default value: true.<br />
-  This parameter is currently only used for the `RunInstances` API.
-</li>
-Note: This field may return null, indicating that no valid value is found.
+         * Whether the data disk is terminated with the instance. value range: <li>true: when the instance is terminated, the data disk is also terminated. only hourly postpaid cloud disks are supported. <li>false: when the instance is terminated, the data disk is retained. <br>default value: true <br>currently, this parameter is only used for the API `RunInstances`.
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
 
         /**
-         * Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
-Note: This field may return null, indicating that no valid value is found.
+         * Data disk snapshot ID. the size of the selected data disk snapshot must be less than the data disk size.
          * @type {string || null}
          */
         this.SnapshotId = null;
 
         /**
-         * Whether a data disk is encrypted. Valid values:
-<li>true: encrypted.</li>
-<li>
-  false: not encrypted.<br/>
-  Default value: false.<br/>
-  This parameter is currently used only in the `RunInstances` API.
-</li>
-Note: This field may return null, indicating that no valid value is found.
+         * Specifies whether the data disk is encrypted. value range: <li>true: encrypted</li> <li>false: unencrypted</li><br/> default value: false<br/> this parameter is currently only used for the `RunInstances` api.
          * @type {boolean || null}
          */
         this.Encrypt = null;
 
         /**
-         * ID of the custom CMK in the format of UUID or "kms-abcd1234". This parameter is used to encrypt cloud disks.
+         * Custom CMK's corresponding ID, with a value of UUID or something similar to kms - abcd1234. used for encrypting cloud disks.
 
-Currently, this parameter is only used in the `RunInstances` API.
-Note: this field may return null, indicating that no valid values can be obtained.
+This parameter is currently only used for the `RunInstances` api.
          * @type {string || null}
          */
         this.KmsKeyId = null;
 
         /**
-         * Cloud disk performance, in MB/s
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the cloud disk performance (unit: MiB/s). using this parameter allows you to purchase additional performance for the cloud disk.
+Currently only supports ultra-fast CLOUD disk (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD).
          * @type {number || null}
          */
         this.ThroughputPerformance = null;
 
         /**
-         * ID of the dedicated cluster to which the instance belongs.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the exclusive cluster ID it belongs to.
          * @type {string || null}
          */
         this.CdcId = null;
@@ -4787,16 +4798,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         /**
          * Burst performance.
 
- <b>Note: This field is in beta test.</b>
-Note: This field may return null, indicating that no valid value is found.
+<B>Note: this feature is in beta test.</b>.
          * @type {boolean || null}
          */
         this.BurstPerformance = null;
 
         /**
-         * Disk name, with a length of not more than 128 characters.
-
-This parameter is in invite-only testing and is not yet open for use.
+         * Disk name, with a length not exceeding 128 characters.
          * @type {string || null}
          */
         this.DiskName = null;
@@ -5464,22 +5472,19 @@ class Externals extends  AbstractModel {
         super();
 
         /**
-         * Release address
-Note: This field may return null, indicating that no valid value is found.
+         * Release Address
          * @type {boolean || null}
          */
         this.ReleaseAddress = null;
 
         /**
-         * Not supported network. Value: <br><li>BASIC: classic network<br><li>VPC1.0: VPC1.0
-Note: This field may return null, indicating that no valid value was found.
+         * Unsupported network type. valid values: <br><li>BASIC: BASIC network</li><li>VPC1.0: private network VPC1.0</li>.
          * @type {Array.<string> || null}
          */
         this.UnsupportNetworks = null;
 
         /**
-         * Attributes of local HDD storage
-Note: This field may return null, indicating that no valid value is found.
+         * Specifies the HDD local storage attributes.
          * @type {StorageBlock || null}
          */
         this.StorageBlockAttr = null;
@@ -6066,7 +6071,7 @@ class CreateLaunchTemplateVersionRequest extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images (for Chinese mainland only)</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). For marketplace images, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+         * Assign an effective [mirror](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format like `img-xxx`. there are four image types: <br/><li>PUBLIC image</li><li>custom image</li><li>shared image</li><li>cloud image market</li><br/>you can obtain available mirror ids in the following ways: <br/><li>the mirror ids of `PUBLIC image`, `custom image` and `shared image` can be queried by logging in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_image); the mirror ID of `cloud image market` can be queried through the [cloud market](https://market.cloud.tencent.com/list).</li><li>call the api [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), input InstanceType to obtain the list of images supported by the current model, and take the `ImageId` field from the return information.</li>.
          * @type {string || null}
          */
         this.ImageId = null;
@@ -6102,13 +6107,13 @@ class CreateLaunchTemplateVersionRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * Instance name.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string `server_{R:3}`. If you purchase only one instance, the instance will be named `server_3`; if you purchase two, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances without specifying a pattern string, the instance names will be suffixed with `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase two instances with the name `server_`, the instance names will be `server_1` and `server_2`.</li><li>This parameter can contain up to 60 characters (including pattern strings).</li>
+         * Instance display name. <li>if the instance display name is not specified, it will display by default as 'unnamed'.</li> <li>when purchasing multiple instances, if the pattern string `{R:x}` is specified, it indicates generating numbers `[x, x+n-1]`, where `n` represents the number of purchased instances. for example, `server_{R:3}` will result in instance display names as `server_3` when purchasing 1 instance; when purchasing 2 instances, the instance display names will be `server_3` and `server_4` respectively. it supports specifying multiple pattern strings `{R:x}`.</li> <li>when purchasing multiple instances, if no pattern string is specified, a suffix `1, 2...n` will be added to the instance display name, where `n` represents the number of purchased instances. for example, for `server_`, when purchasing 2 instances, the instance display names will be `server_1` and `server_2` respectively.</li> <li>it supports up to 128 characters (including pattern strings).</li>.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * Instance login settings. you can use this parameter to set the instance's login method to key or keep the original login settings of the image.
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
@@ -6120,7 +6125,7 @@ class CreateLaunchTemplateVersionRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * Enhanced service. You can use this parameter to specify whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
+         * Enhanced service. this parameter can be used to specify whether to enable services such as cloud security and cloud monitoring. if this parameter is not specified, cloud monitor and cloud security services are enabled for public images by default; for custom images and marketplace images, cloud monitor and cloud security services are not enabled by default, and the services retained in the image will be used.
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
@@ -6206,6 +6211,23 @@ If the dry run succeeds, the RequestId will be returned.
          * @type {boolean || null}
          */
         this.DisableApiTermination = null;
+
+        /**
+         * Custom metadata. specifies that custom metadata key-value pairs can be added when creating a CVM.
+Note: this field is in beta test.
+         * @type {Metadata || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * Specifies that only the Update and Replace parameters are allowed. this parameter is valid only when custom Metadata is used in the template and Metadata is also transmitted in RunInstances. defaults to Replace.
+
+-Update: if template t contains this parameter with a value of Update and metadata=[k1:v1, k2:v2], then RunInstances (with metadata=[k2:v3]) + t creates a cvm using metadata=[k1:v1, k2:v3]. 
+-Replace: if the template t contains this parameter with a value of Replace and metadata=[k1:v1, k2:v2], then when creating a cvm using RunInstances (with metadata=[k2:v3]) + t, the created cvm will use metadata=[k2:v3]. 
+Note: this field is in beta test.
+         * @type {string || null}
+         */
+        this.TemplateDataModifyAction = null;
 
     }
 
@@ -6305,6 +6327,13 @@ If the dry run succeeds, the RequestId will be returned.
             this.InstanceChargePrepaid = obj;
         }
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+
+        if (params.Metadata) {
+            let obj = new Metadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
+        this.TemplateDataModifyAction = 'TemplateDataModifyAction' in params ? params.TemplateDataModifyAction : null;
 
     }
 }
@@ -6712,45 +6741,37 @@ class ActionTimer extends  AbstractModel {
         super();
 
         /**
-         * Timer action. Valid value: `TerminateInstances`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Timer action currently only supports terminating one value: TerminateInstances.
          * @type {string || null}
          */
         this.TimerAction = null;
 
         /**
-         * Action time, which follows the ISO8601 standard and uses UTC time. It must be 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Execution time, in standard ISO8601 representation and using UTC time. format: YYYY-MM-DDThh:MM:ssZ. for example, 2018-05-29T11:26:40Z. the execution time must be later than the current time by 5 minutes.
          * @type {string || null}
          */
         this.ActionTime = null;
 
         /**
-         * Extended data
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Extension data. only used as output usage.
          * @type {Externals || null}
          */
         this.Externals = null;
 
         /**
-         * Timer ID.
+         * Timer ID. only used as output usage.
          * @type {string || null}
          */
         this.ActionTimerId = null;
 
         /**
-         * Timer status. Valid values:
-
-UNDO: Not triggered.
-DOING: Triggering.
-DONE: Triggered already.
-
+         * Timer status, for output usage only. value ranges from: <li>UNDO: unexecuted</li> <li>DOING: executing</li> <li>DONE: execution completed.</li>.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Instance ID corresponding to a timer.
+         * Instance ID corresponding to a timer. used only for output.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6788,177 +6809,195 @@ class CreateLaunchTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance launch template name. It can include 2-128 characters.
+         * Name of an instance launch template. It contains 2 to 128 English or Chinese characters.
          * @type {string || null}
          */
         this.LaunchTemplateName = null;
 
         /**
-         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH (for dedicated CVMs)
+         * Location of the instance. You can specify attributes such as availability zone, project, and host (specified when creating a instance on the CDH) to which the instance belongs through this parameter.
          * @type {Placement || null}
          */
         this.Placement = null;
 
         /**
-         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images (for Chinese mainland only)</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). For marketplace images, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+         * Specify an effective [mirror](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. there are four image types: <li>PUBLIC image</li> <li>custom image</li> <li>shared image</li> <li>service market image</li>  you can obtain available mirror ids in the following ways: <li>the mirror ids of `PUBLIC image`, `custom image` and `shared image` can be queried by logging in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_image); the mirror ids of `service market image` can be queried through the [cloud market](https://market.cloud.tencent.com/list).</li> <li>call the api [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), input InstanceType to obtain the list of images supported by the current model, and take the `ImageId` field from the return information.</li>.
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * Description of instance launch template versions. This parameter can contain 2-256 characters.
+         * Version description of an instance launch template. It contains 2 to 256 English or Chinese characters.
          * @type {string || null}
          */
         this.LaunchTemplateVersionDescription = null;
 
         /**
-         * The instance model. Different resource specifications are specified for different instance models.
-<br><li>To view specific values for `PREPAID` or `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, the system will specify the default model according to the dynamic resource sales in the current region. <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, you need to specify this parameter as `CDH_1C1G`.
+         * Instance model. Different instance models specify different resource specifications.
+
+<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, the specific values can be obtained BY calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) api to get the latest specification table or referring to the [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1) description. if this parameter is not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><li>for instances created with the payment mode CDHPAID, this parameter has the prefix "CDH_" and is generated based on the CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
+         * Instance system disk configuration information. If this parameter is not specified, it will be assigned based on the system default values.
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
 
         /**
-         * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC, CLOUD_PREMIUM, or CLOUD_SSD data disks.
+         * Instance data disk configuration information. if not specified, no data disks are purchased by default. support specifying 21 data disks at the time of purchase, among which a maximum of 1 LOCAL_BASIC data disk or LOCAL_SSD data disk can be included, and a maximum of 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks or CLOUD_SSD data disks can be included.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
+         * VPC-related information configuration. You can specify information such as VPC ID and subnet ID through this parameter. If this parameter is not specified, use the basic network by default. If a VPC IP is specified in this parameter, it indicates the primary network interface card IP of each instance. In addition, the number of the InstanceCount parameter should be consistent with the number of the VPC IP and should not exceed 20.
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
 
         /**
-         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
+         * Public bandwidth-related settings. If this parameter is not specified, the public bandwidth is 0 Mbps by default.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * Number of instances to be purchased. Value range for monthly-subscribed instances: [1, 300]. Value range for pay-as-you-go instances: [1, 100]. Default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on quota, see CVM instance [Purchase Limits](https://intl.cloud.tencent.com/document/product/213/2664).
+         * Number of instances to purchase. value range for monthly subscription instances: [1, 300]. value range for pay-as-you-go instances: [1, 100]. default value: 1. the number of instances to purchase must not exceed the remaining user quota. for specific quota limitations, see [CVM instance purchase limitations](https://intl.cloud.tencent.com/document/product/213/2664?from_cn_redirect=1).
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`. </li><li>This parameter can contain up to 60 characters, including the pattern string.
+         * Instance display name. <li>if the instance display name is not specified, it will display by default as 'unnamed'.</li> <li>when purchasing multiple instances, if the pattern string `{R:x}` is specified, it indicates generating numbers `[x, x+n-1]`, where `n` represents the number of purchased instances. for example, `server_{R:3}` will result in instance display names as `server_3` when purchasing 1 instance; when purchasing 2 instances, the instance display names will be `server_3` and `server_4` respectively. it supports specifying multiple pattern strings `{R:x}`.</li> <li>when purchasing multiple instances, if no pattern string is specified, a suffix `1, 2...n` will be added to the instance display name, where `n` represents the number of purchased instances. for example, for `server_`, when purchasing 2 instances, the instance display names will be `server_1` and `server_2` respectively.</li> <li>it supports up to 128 characters (including pattern strings).</li>.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * Instance login settings. this parameter allows you to set the instance login method to key or maintain the original login settings of the image.
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
 
         /**
-         * Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
+         * Security group to which an instance belongs. this parameter can be obtained by calling the sgId field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). if not specified, the default security group is bound.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Enhanced service. You can use this parameter to specify whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
+         * Enhanced services. You can specify whether to enable services such as Cloud Security and Cloud Monitor through this parameter. If this parameter is not specified, Cloud Monitor and Cloud Security are enabled for public images by default, but not enabled for custom images and marketplace images by default. Instead, they use services retained in the images.
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+         * A string used to ensure the idempotence of the request. This string is generated by the customer and should be unique across different requests, with a maximum length of 64 ASCII characters. If this parameter is not specified, the idempotence of the request cannot be guaranteed.
          * @type {string || null}
          */
         this.ClientToken = null;
 
         /**
-         * Host name of the CVM. <br><li>Dots (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name. <br><li>For Windows instances, the host name must be 2-15 characters long and can contain uppercase and lowercase letters, numbers, and hyphens (-). It cannot contain dots (.) or contain only numbers. <br><li>For other instances, such as Linux instances, the host name must be 2-60 characters long. It supports multiple dots (.) and allows uppercase and lowercase letters, numbers, and hyphens (-) between any two dots (.).
+         * Specifies the HostName of the cloud virtual machine.<br><li>the dot (.) and hyphen (-) cannot be used at the beginning or end of the HostName, and cannot be used consecutively.</li><li>for Windows instances: the character length is 2 to 15. it consists of letters (case insensitive), digits, and hyphens (-). dots (.) are not supported, and it cannot be all digits.</li><li>for other types (such as Linux) instances: the character length is 2 to 60. multiple dots are allowed. each segment between dots can include letters (case insensitive), digits, and hyphens (-).</li>.
          * @type {string || null}
          */
         this.HostName = null;
 
         /**
-         * Scheduled tasks. You can use this parameter to specify scheduled tasks for the instance. Only scheduled termination is supported.
+         * Scheduled task. You can specify a scheduled task for the instance through this parameter. Currently, only scheduled termination is supported.
          * @type {ActionTimer || null}
          */
         this.ActionTimer = null;
 
         /**
-         * Placement group ID. You can only specify one.
+         * Placement group ID. Only one can be specified.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
+         * List of tag descriptions. You can bind tags to corresponding resource instances at the same time by specifying this parameter. Currently, only binding tags to the CVM is supported.
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
 
         /**
-         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
+         * Market-Related options of the instance, such as relevant parameters of the bidding instance. this parameter is required if the payment mode of the specified instance is spot payment.
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
 
         /**
-         * User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
+         * User data provided for an instance must be encoded in base64. valid values for maximum data size are up to 16 KB. for details on obtaining this parameter, see running commands at startup for Windows (https://intl.cloud.tencent.com/document/product/213/17526?from_cn_redirect=1) and Linux (https://intl.cloud.tencent.com/document/product/213/17525?from_cn_redirect=1).
          * @type {string || null}
          */
         this.UserData = null;
 
         /**
-         * Whether the request is a dry run only.
-true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
-If the dry run fails, the corresponding error code will be returned.
-If the dry run succeeds, the RequestId will be returned.
-false (default value): send a normal request and create instance(s) if all the requirements are met.
+         * Whether it is a pre-check for this request only.
+true: sends a check request without creating an instance. check items include whether required parameters are filled in, request format, service limits, and cvm inventory.
+If the check fails, return the corresponding error code.
+If the check passed, return RequestId.
+false (default): sends a normal request. after passing the check, creates an instance directly.
          * @type {boolean || null}
          */
         this.DryRun = null;
 
         /**
-         * CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/13887?from_cn_redirect=1) API.
+         * CAM role name. it can be obtained through the roleName in the return value from the API DescribeRoleList.
          * @type {string || null}
          */
         this.CamRoleName = null;
 
         /**
-         * HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
+         * High-performance computing cluster ID. If the created instance is a high-performance computing instance, the cluster where the instance is placed should be specified. Otherwise, it cannot be specified.
          * @type {string || null}
          */
         this.HpcClusterId = null;
 
         /**
-         * Instance [Billing Mode](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). Valid values: <br><li>`PREPAID`: prepaid, i.e., billed for monthly-subscribed instances <br><li>`POSTPAID_BY_HOUR`: pay-as-you-go on an hourly basis <br><li>`CDHPAID`: billed for CDH instances, not the CVMs running on the CDHs. <br><li>`SPOTPAID`: billed for spot instances. <br>Default value: POSTPAID_BY_HOUR.
+         * Instance [billing mode](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1).<br><li>PREPAID: prepaid, that is, monthly subscription.</li><li>POSTPAID_BY_HOUR: pay-as-you-go by hour.</li><li>CDHPAID: CDH instance (created based on CDH; the resources of the host are free of charge).</li><li>SPOTPAID: spot payment.</li>Default value: POSTPAID_BY_HOUR.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+         * Prepaid mode, that is, annual and monthly subscription related parameter settings. Through this parameter, you can specify the purchase duration of annual and monthly subscription instances, whether to set auto-renewal, etc. If the specified instance's billing mode is the prepaid mode, this parameter must be passed.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
-         * Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
+         * Instance destruction protection flag: indicates whether an instance is allowed to be deleted through an api. value ranges from: - **TRUE**: indicates that instance protection is enabled, deletion through apis is not allowed. - **FALSE**: indicates that instance protection is disabled, deletion through apis is allowed.  default value: FALSE.
          * @type {boolean || null}
          */
         this.DisableApiTermination = null;
 
         /**
-         * Instance launch template tag description list. By specifying the TemplateTag parameter, you can bind tags to the instance launch template.
+         * Description list of tags. by specifying this parameter, tags can be bound to the instance launch template.
          * @type {Array.<TagSpecification> || null}
          */
         this.LaunchTemplateTagSpecification = null;
+
+        /**
+         * Custom metadata. specifies that custom metadata key-value pairs can be added when creating a CVM.
+Note: this field is in beta test.
+         * @type {Metadata || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * Specifies that only the Update and Replace parameters are allowed. this parameter is valid only when custom Metadata is used in the template and Metadata is also transmitted in RunInstances. defaults to Replace.
+
+-Update: if template t contains this parameter with a value of Update and metadata=[k1:v1, k2:v2], then RunInstances (with metadata=[k2:v3]) + t creates a cvm using metadata=[k1:v1, k2:v3]. 
+-Replace: if the template t contains this parameter with a value of Replace and metadata=[k1:v1, k2:v2], then when creating a cvm using RunInstances (with metadata=[k2:v3]) + t, the created cvm will use metadata=[k2:v3]. 
+Note: this field is in beta test.
+         * @type {string || null}
+         */
+        this.TemplateDataModifyAction = null;
 
     }
 
@@ -7066,6 +7105,13 @@ false (default value): send a normal request and create instance(s) if all the r
                 this.LaunchTemplateTagSpecification.push(obj);
             }
         }
+
+        if (params.Metadata) {
+            let obj = new Metadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
+        this.TemplateDataModifyAction = 'TemplateDataModifyAction' in params ? params.TemplateDataModifyAction : null;
 
     }
 }
@@ -7523,13 +7569,13 @@ class SpotMarketOptions extends  AbstractModel {
         super();
 
         /**
-         * Bidding price
+         * Bid price.
          * @type {string || null}
          */
         this.MaxPrice = null;
 
         /**
-         * Bidding request type. Currently only "one-time" is supported.
+         * Bid request type. valid values: one-time. currently, only the one-time type is supported.
          * @type {string || null}
          */
         this.SpotInstanceType = null;
@@ -7645,7 +7691,7 @@ class CreateLaunchTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * The ID of successfully created instance launch template. This parameter will be returned when the instance launch template is created through the `CreateLaunchTemplate` API.
+         * Specifies the ID of the successfully created instance launch template when this parameter is returned by creating an instance launch template through this interface.
          * @type {string || null}
          */
         this.LaunchTemplateId = null;
@@ -10984,8 +11030,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.KeyIds = null;
 
         /**
-         * Maintains the original settings of the image. This parameter cannot be specified simultaneously with Password or KeyIds.N. It can be set to true only when an instance is created with a custom image, shared image, or externally imported image. Valid values: <li>true: indicates that the login settings of the image are maintained</li><li>false: indicates that the login settings of the image are not maintained</li>Default value: false.
-Note: This field may return null, indicating that no valid value is found.
+         * Retain the original settings of the image. this parameter cannot be specified simultaneously with Password or KeyIds.N. it can be set to true only when an instance is created with a custom image, shared image, or externally imported image. value ranges from true to false: <li>true: indicates that the login settings of the image are retained</li><li>false: indicates that the login settings of the image are not retained</li>. default value: false.
          * @type {string || null}
          */
         this.KeepImageLogin = null;
@@ -11454,7 +11499,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+         * Whether to enable the cloud monitor service. value ranges from: <li>true: indicates enabling the cloud monitor service</li> <li>false: indicates disabling the cloud monitor service</li> default value: true.
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -11502,6 +11547,42 @@ class ResetInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * Custom metadata key and value.
+ * @class
+ */
+class MetadataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom metadata key. it must comply with the regular expression ^[a-zA-Z0-9_-]+$. the length is less than or equal to 128 bytes (case-sensitive).
+
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Specifies a custom metadata value. it supports any data . The size is &le; 256 KB. it is case-sensitive.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Describes information on VPC, including subnets, IP addresses, etc.
  * @class
  */
@@ -11516,7 +11597,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * VPC subnet ID in the format `subnet-xxx`. To obtain valid subnet IDs, you can log in to the [console](https://console.cloud.tencent.com/vpc/subnet?rid=1) or call [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) and look for the `unSubnetId` fields in the response. If you specify `DEFAULT` for both `SubnetId` and `VpcId` when creating an instance, the default VPC will be used.
+         * vpc subnet ID, in the form of `subnet-xxx`. valid vpc subnet ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/subnet?rid=1); or they can be obtained from the `SubnetId` field in the API response by calling the DescribeSubnets API (https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1). if SubnetId and VpcId are both input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -11764,22 +11845,19 @@ class StorageBlock extends  AbstractModel {
         super();
 
         /**
-         * Local HDD storage type. Value: LOCAL_PRO.
-Note: This field may return null, indicating that no valid value is found.
+         * HDD LOCAL storage type specifies the value: LOCAL_PRO.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Minimum capacity of local HDD storage
-Note: This field may return null, indicating that no valid value is found.
+         * Specifies the minimum HDD local storage capacity. measurement unit: GiB.
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * Maximum capacity of local HDD storage
-Note: This field may return null, indicating that no valid value is found.
+         * Specifies the maximum capacity of HDD local storage. measurement unit: GiB.
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -11827,7 +11905,7 @@ class InternetAccessible extends  AbstractModel {
         this.PublicIpAssigned = null;
 
         /**
-         * Bandwidth package ID. To obatin the IDs, you can call [`DescribeBandwidthPackages`](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) and look for the `BandwidthPackageId` fields in the response.
+         * Bandwidth package ID. it can be obtained through the `BandwidthPackageId` in the return value from the DescribeBandwidthPackages api. this parameter is used as an input parameter only in the RunInstances api.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -12079,15 +12157,13 @@ class InstanceChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * Subscription period (in month). Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48’, `60`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Subscription period in months. value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Auto-renewal flag. Valid values:<br><li>NOTIFY_AND_AUTO_RENEW: Notify of expiration and automatically renew.</li><br><li>NOTIFY_AND_MANUAL_RENEW: Notify of expiration and manually renew.</li><br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify of expiration and do not automatically renew.</li><br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is set to NOTIFY_AND_AUTO_RENEW, an instance will be automatically renewed monthly after expiration, provided that the account balance is sufficient.
-Note: This field may return null, indicating that no valid value is found.
+         * AUTO-Renewal flag. value ranges:<br><li>NOTIFY_AND_AUTO_RENEW: NOTIFY of expiration AND automatically RENEW.</li><br><li>NOTIFY_AND_MANUAL_RENEW: NOTIFY of expiration but do not automatically RENEW.</li><br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: do not NOTIFY of expiration AND do not automatically RENEW.</li><br><br>default value: NOTIFY_AND_MANUAL_RENEW. if this parameter is set to NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed monthly after expiration, provided that the account balance is sufficient.
          * @type {string || null}
          */
         this.RenewFlag = null;
@@ -12202,6 +12278,7 @@ module.exports = {
     ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
     DescribeZonesRequest: DescribeZonesRequest,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
+    Metadata: Metadata,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     ResetInstancesTypeRequest: ResetInstancesTypeRequest,
@@ -12390,6 +12467,7 @@ module.exports = {
     RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
+    MetadataItem: MetadataItem,
     VirtualPrivateCloud: VirtualPrivateCloud,
     ModifyDisasterRecoverGroupAttributeResponse: ModifyDisasterRecoverGroupAttributeResponse,
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,

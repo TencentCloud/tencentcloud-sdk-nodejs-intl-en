@@ -16,17 +16,21 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const ProxySpec = models.ProxySpec;
+const RemoveClusterSlaveZoneRequest = models.RemoveClusterSlaveZoneRequest;
+const ModifyResourcePackagesDeductionPriorityRequest = models.ModifyResourcePackagesDeductionPriorityRequest;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ModifyProxyRwSplitRequest = models.ModifyProxyRwSplitRequest;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const DescribeResourcePackageListResponse = models.DescribeResourcePackageListResponse;
 const InquirePriceRenewRequest = models.InquirePriceRenewRequest;
+const PackagePriority = models.PackagePriority;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const InstanceAuditRule = models.InstanceAuditRule;
 const ProxyInstanceWeight = models.ProxyInstanceWeight;
 const CreateResourcePackageRequest = models.CreateResourcePackageRequest;
-const DescribeClusterDetailDatabasesRequest = models.DescribeClusterDetailDatabasesRequest;
+const CloseProxyEndPointResponse = models.CloseProxyEndPointResponse;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
@@ -36,6 +40,7 @@ const BillingResourceInfo = models.BillingResourceInfo;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const ModifyClusterPasswordComplexityResponse = models.ModifyClusterPasswordComplexityResponse;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
+const SlowQueriesItem = models.SlowQueriesItem;
 const SwitchClusterZoneResponse = models.SwitchClusterZoneResponse;
 const ProxyConnectionPoolInfo = models.ProxyConnectionPoolInfo;
 const DescribeResourcePackageDetailResponse = models.DescribeResourcePackageDetailResponse;
@@ -44,8 +49,11 @@ const QueryFilter = models.QueryFilter;
 const DescribeBinlogDownloadUrlRequest = models.DescribeBinlogDownloadUrlRequest;
 const CreateAccountsResponse = models.CreateAccountsResponse;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
+const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
+const CloseProxyEndPointRequest = models.CloseProxyEndPointRequest;
 const ModifyClusterDatabaseResponse = models.ModifyClusterDatabaseResponse;
 const UpgradeClusterVersionResponse = models.UpgradeClusterVersionResponse;
+const ModifyResourcePackageClustersRequest = models.ModifyResourcePackageClustersRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CloseWanResponse = models.CloseWanResponse;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
@@ -56,7 +64,9 @@ const ClusterInstanceDetail = models.ClusterInstanceDetail;
 const AddClusterSlaveZoneResponse = models.AddClusterSlaveZoneResponse;
 const DescribeProxySpecsResponse = models.DescribeProxySpecsResponse;
 const OldAddrInfo = models.OldAddrInfo;
-const SlowQueriesItem = models.SlowQueriesItem;
+const DescribeClusterDatabaseTablesRequest = models.DescribeClusterDatabaseTablesRequest;
+const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
+const ModifyResourcePackagesDeductionPriorityResponse = models.ModifyResourcePackagesDeductionPriorityResponse;
 const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
 const CloseWanRequest = models.CloseWanRequest;
 const BindClusterResourcePackagesRequest = models.BindClusterResourcePackagesRequest;
@@ -64,20 +74,24 @@ const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const CopyClusterPasswordComplexityResponse = models.CopyClusterPasswordComplexityResponse;
-const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
+const DescribeClusterTransparentEncryptInfoRequest = models.DescribeClusterTransparentEncryptInfoRequest;
 const SwitchClusterVpcRequest = models.SwitchClusterVpcRequest;
+const ModifyServerlessStrategyRequest = models.ModifyServerlessStrategyRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
+const DescribeSlaveZonesResponse = models.DescribeSlaveZonesResponse;
 const DescribeProxiesResponse = models.DescribeProxiesResponse;
-const ModifyResourcePackageClustersRequest = models.ModifyResourcePackageClustersRequest;
+const DescribeInstancesWithinSameClusterRequest = models.DescribeInstancesWithinSameClusterRequest;
 const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const DbInfo = models.DbInfo;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const ParamDetail = models.ParamDetail;
 const DescribeResourcePackageSaleSpecRequest = models.DescribeResourcePackageSaleSpecRequest;
 const ExportInstanceErrorLogsRequest = models.ExportInstanceErrorLogsRequest;
+const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
 const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const RuleFilters = models.RuleFilters;
+const ProxyVersionInfo = models.ProxyVersionInfo;
 const OfflineClusterRequest = models.OfflineClusterRequest;
 const DescribeClusterDetailDatabasesResponse = models.DescribeClusterDetailDatabasesResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
@@ -90,15 +104,16 @@ const RemoveClusterSlaveZoneResponse = models.RemoveClusterSlaveZoneResponse;
 const CynosdbErrorLogItem = models.CynosdbErrorLogItem;
 const UpgradeClusterVersionRequest = models.UpgradeClusterVersionRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const ModifyVipVportRequest = models.ModifyVipVportRequest;
+const ExportResourcePackageDeductDetailsResponse = models.ExportResourcePackageDeductDetailsResponse;
 const DatabasePrivileges = models.DatabasePrivileges;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const ParamItem = models.ParamItem;
 const DescribeSupportProxyVersionRequest = models.DescribeSupportProxyVersionRequest;
 const DescribeProxySpecsRequest = models.DescribeProxySpecsRequest;
 const CloseClusterPasswordComplexityRequest = models.CloseClusterPasswordComplexityRequest;
+const ServerlessSpec = models.ServerlessSpec;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const OpenReadOnlyInstanceExclusiveAccessResponse = models.OpenReadOnlyInstanceExclusiveAccessResponse;
+const DescribeIsolatedInstancesRequest = models.DescribeIsolatedInstancesRequest;
 const ProxyGroupRwInfo = models.ProxyGroupRwInfo;
 const DescribeClusterInstanceGrpsRequest = models.DescribeClusterInstanceGrpsRequest;
 const DescribeResourcesByDealNameResponse = models.DescribeResourcesByDealNameResponse;
@@ -109,15 +124,17 @@ const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResp
 const Package = models.Package;
 const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
 const InstanceParamItem = models.InstanceParamItem;
+const SlaveZoneStockInfo = models.SlaveZoneStockInfo;
 const ReloadBalanceProxyNodeRequest = models.ReloadBalanceProxyNodeRequest;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ProxyZone = models.ProxyZone;
 const Ability = models.Ability;
-const InstanceInitInfo = models.InstanceInitInfo;
+const DescribeServerlessInstanceSpecsRequest = models.DescribeServerlessInstanceSpecsRequest;
 const PackageDetail = models.PackageDetail;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const InquirePriceModifyRequest = models.InquirePriceModifyRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
-const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
+const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const SwitchClusterVpcResponse = models.SwitchClusterVpcResponse;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const SearchClusterTablesRequest = models.SearchClusterTablesRequest;
@@ -135,6 +152,7 @@ const NewAccount = models.NewAccount;
 const BackupFileInfo = models.BackupFileInfo;
 const TablePrivileges = models.TablePrivileges;
 const UpgradeProxyRequest = models.UpgradeProxyRequest;
+const DescribeClusterDetailDatabasesRequest = models.DescribeClusterDetailDatabasesRequest;
 const DescribeBinlogDownloadUrlResponse = models.DescribeBinlogDownloadUrlResponse;
 const BindInstanceInfo = models.BindInstanceInfo;
 const DescribeAuditRuleWithInstanceIdsResponse = models.DescribeAuditRuleWithInstanceIdsResponse;
@@ -143,15 +161,20 @@ const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const CloseProxyRequest = models.CloseProxyRequest;
 const ModifyProxyDescResponse = models.ModifyProxyDescResponse;
 const CreateResourcePackageResponse = models.CreateResourcePackageResponse;
+const CloseSSLRequest = models.CloseSSLRequest;
+const ModifyBinlogConfigRequest = models.ModifyBinlogConfigRequest;
 const CynosdbInstance = models.CynosdbInstance;
 const SearchClusterDatabasesRequest = models.SearchClusterDatabasesRequest;
 const DescribeClusterPasswordComplexityResponse = models.DescribeClusterPasswordComplexityResponse;
 const DescribeAuditRuleWithInstanceIdsRequest = models.DescribeAuditRuleWithInstanceIdsRequest;
 const ExportInstanceErrorLogsResponse = models.ExportInstanceErrorLogsResponse;
+const OfflineClusterResponse = models.OfflineClusterResponse;
 const ModifyClusterSlaveZoneResponse = models.ModifyClusterSlaveZoneResponse;
+const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
 const ParamItemDetail = models.ParamItemDetail;
-const RemoveClusterSlaveZoneRequest = models.RemoveClusterSlaveZoneRequest;
+const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const BinlogItem = models.BinlogItem;
+const ResumeServerlessRequest = models.ResumeServerlessRequest;
 const ModifyProxyDescRequest = models.ModifyProxyDescRequest;
 const ModifyParamItem = models.ModifyParamItem;
 const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
@@ -159,6 +182,7 @@ const CreateClustersRequest = models.CreateClustersRequest;
 const UserHostPrivilege = models.UserHostPrivilege;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
+const ModifyClusterSlaveZoneRequest = models.ModifyClusterSlaveZoneRequest;
 const RefundResourcePackageRequest = models.RefundResourcePackageRequest;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const ModifyBinlogSaveDaysRequest = models.ModifyBinlogSaveDaysRequest;
@@ -174,6 +198,7 @@ const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const ParamInfo = models.ParamInfo;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
+const ServerlessZoneStockInfo = models.ServerlessZoneStockInfo;
 const SecurityGroup = models.SecurityGroup;
 const BindClusterResourcePackagesResponse = models.BindClusterResourcePackagesResponse;
 const QueryParamFilter = models.QueryParamFilter;
@@ -181,14 +206,15 @@ const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest
 const SearchClusterDatabasesResponse = models.SearchClusterDatabasesResponse;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
 const ModifyClusterPasswordComplexityRequest = models.ModifyClusterPasswordComplexityRequest;
+const ModifyVipVportRequest = models.ModifyVipVportRequest;
 const OpenWanRequest = models.OpenWanRequest;
 const UnbindClusterResourcePackagesRequest = models.UnbindClusterResourcePackagesRequest;
 const CreateProxyRequest = models.CreateProxyRequest;
 const OpenClusterPasswordComplexityResponse = models.OpenClusterPasswordComplexityResponse;
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
 const DescribeResourcePackageSaleSpecResponse = models.DescribeResourcePackageSaleSpecResponse;
-const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const PolicyRule = models.PolicyRule;
 const NetAddr = models.NetAddr;
 const ResourcePackage = models.ResourcePackage;
 const RestartInstanceResponse = models.RestartInstanceResponse;
@@ -201,7 +227,7 @@ const CreateBackupResponse = models.CreateBackupResponse;
 const CreateProxyEndPointRequest = models.CreateProxyEndPointRequest;
 const SlaveZoneAttrItem = models.SlaveZoneAttrItem;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
-const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
+const DescribeInstancesWithinSameClusterResponse = models.DescribeInstancesWithinSameClusterResponse;
 const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
 const ModifyAccountHostResponse = models.ModifyAccountHostResponse;
@@ -210,12 +236,14 @@ const OpenReadOnlyInstanceExclusiveAccessRequest = models.OpenReadOnlyInstanceEx
 const CloseClusterPasswordComplexityResponse = models.CloseClusterPasswordComplexityResponse;
 const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
 const DescribeBackupDownloadUrlResponse = models.DescribeBackupDownloadUrlResponse;
-const ResumeServerlessRequest = models.ResumeServerlessRequest;
+const DescribeSlaveZonesRequest = models.DescribeSlaveZonesRequest;
 const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
+const DescribeBinlogConfigRequest = models.DescribeBinlogConfigRequest;
 const OpenClusterPasswordComplexityRequest = models.OpenClusterPasswordComplexityRequest;
 const CreateAuditRuleTemplateRequest = models.CreateAuditRuleTemplateRequest;
 const UpgradeProxyResponse = models.UpgradeProxyResponse;
-const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
+const OpenReadOnlyInstanceExclusiveAccessResponse = models.OpenReadOnlyInstanceExclusiveAccessResponse;
+const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const ModifyProxyRwSplitResponse = models.ModifyProxyRwSplitResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
 const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
@@ -232,8 +260,9 @@ const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const ObjectTask = models.ObjectTask;
 const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const ProxyNodeInfo = models.ProxyNodeInfo;
-const OfflineClusterResponse = models.OfflineClusterResponse;
-const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
+const ModifyClusterDatabaseRequest = models.ModifyClusterDatabaseRequest;
+const ModifyServerlessStrategyResponse = models.ModifyServerlessStrategyResponse;
+const CloseSSLResponse = models.CloseSSLResponse;
 const DescribeParamTemplateDetailRequest = models.DescribeParamTemplateDetailRequest;
 const ModifyAccountHostRequest = models.ModifyAccountHostRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
@@ -242,47 +271,56 @@ const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesReque
 const InstanceSpec = models.InstanceSpec;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const RestartInstanceRequest = models.RestartInstanceRequest;
-const IsolateInstanceRequest = models.IsolateInstanceRequest;
+const DescribeClusterDatabaseTablesResponse = models.DescribeClusterDatabaseTablesResponse;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
-const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
+const DescribeBinlogConfigResponse = models.DescribeBinlogConfigResponse;
 const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesResponse;
+const SaleRegion = models.SaleRegion;
 const CloseProxyResponse = models.CloseProxyResponse;
-const PolicyRule = models.PolicyRule;
+const Module = models.Module;
 const DescribeProxyNodesRequest = models.DescribeProxyNodesRequest;
 const UnbindClusterResourcePackagesResponse = models.UnbindClusterResourcePackagesResponse;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const SwitchProxyVpcRequest = models.SwitchProxyVpcRequest;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
-const SaleRegion = models.SaleRegion;
+const OpenClusterTransparentEncryptResponse = models.OpenClusterTransparentEncryptResponse;
 const DescribeResourcePackageDetailRequest = models.DescribeResourcePackageDetailRequest;
 const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const DescribeClusterTransparentEncryptInfoResponse = models.DescribeClusterTransparentEncryptInfoResponse;
 const ActivateInstanceResponse = models.ActivateInstanceResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityRequest;
+const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const IsolateClusterRequest = models.IsolateClusterRequest;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const AddInstancesRequest = models.AddInstancesRequest;
-const ModifyClusterDatabaseRequest = models.ModifyClusterDatabaseRequest;
+const DescribeIsolatedInstancesResponse = models.DescribeIsolatedInstancesResponse;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
-const ModifyClusterSlaveZoneRequest = models.ModifyClusterSlaveZoneRequest;
+const DescribeServerlessStrategyResponse = models.DescribeServerlessStrategyResponse;
 const DescribeInstanceErrorLogsResponse = models.DescribeInstanceErrorLogsResponse;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const DescribeSupportProxyVersionResponse = models.DescribeSupportProxyVersionResponse;
+const LogicBackupConfigInfo = models.LogicBackupConfigInfo;
+const ModifyBinlogConfigResponse = models.ModifyBinlogConfigResponse;
 const RefundResourcePackageResponse = models.RefundResourcePackageResponse;
 const DeleteClusterDatabaseResponse = models.DeleteClusterDatabaseResponse;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const ExportResourcePackageDeductDetailsRequest = models.ExportResourcePackageDeductDetailsRequest;
 const DescribeInstanceErrorLogsRequest = models.DescribeInstanceErrorLogsRequest;
 const DeleteClusterDatabaseRequest = models.DeleteClusterDatabaseRequest;
 const ModifiableInfo = models.ModifiableInfo;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const InstanceAbility = models.InstanceAbility;
+const DescribeServerlessStrategyRequest = models.DescribeServerlessStrategyRequest;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
+const RuleTemplateInfo = models.RuleTemplateInfo;
 const AuditRuleFilters = models.AuditRuleFilters;
-const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
+const BinlogConfigInfo = models.BinlogConfigInfo;
+const OpenClusterTransparentEncryptRequest = models.OpenClusterTransparentEncryptRequest;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const ParamTemplateListInfo = models.ParamTemplateListInfo;
 const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
@@ -300,15 +338,16 @@ const CreateProxyResponse = models.CreateProxyResponse;
 const DescribeParamTemplateDetailResponse = models.DescribeParamTemplateDetailResponse;
 const ModifyBinlogSaveDaysResponse = models.ModifyBinlogSaveDaysResponse;
 const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
+const InstanceInitInfo = models.InstanceInitInfo;
 const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
-const Module = models.Module;
+const DescribeServerlessInstanceSpecsResponse = models.DescribeServerlessInstanceSpecsResponse;
 const ModifyVipVportResponse = models.ModifyVipVportResponse;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const ModifyResourcePackageClustersResponse = models.ModifyResourcePackageClustersResponse;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const InputAccount = models.InputAccount;
-const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const InquirePriceModifyResponse = models.InquirePriceModifyResponse;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const ZoneStockInfo = models.ZoneStockInfo;
 const InquirePriceRenewResponse = models.InquirePriceRenewResponse;
@@ -327,7 +366,7 @@ class CynosdbClient extends AbstractClient {
     }
     
     /**
-     * This API is used to resume a serverless cluster.
+     * This API is used to restore a serverless cluster.
      * @param {ResumeServerlessRequest} req
      * @param {function(string, ResumeServerlessResponse):void} cb
      * @public
@@ -338,7 +377,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the backup configuration information of the specified cluster, including the full backup time range and backup file retention period.
+     * This API is used to upgrade the database proxy version.
+     * @param {UpgradeProxyVersionRequest} req
+     * @param {function(string, UpgradeProxyVersionResponse):void} cb
+     * @public
+     */
+    UpgradeProxyVersion(req, cb) {
+        let resp = new UpgradeProxyVersionResponse();
+        this.request("UpgradeProxyVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and the backup file retention time.
      * @param {DescribeBackupConfigRequest} req
      * @param {function(string, DescribeBackupConfigResponse):void} cb
      * @public
@@ -349,7 +399,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a database proxy connection.
+     * This API is used to modify Binlog configuration.
+     * @param {ModifyBinlogConfigRequest} req
+     * @param {function(string, ModifyBinlogConfigResponse):void} cb
+     * @public
+     */
+    ModifyBinlogConfig(req, cb) {
+        let resp = new ModifyBinlogConfigResponse();
+        this.request("ModifyBinlogConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a database proxy connection point.
      * @param {CreateProxyEndPointRequest} req
      * @param {function(string, CreateProxyEndPointResponse):void} cb
      * @public
@@ -360,7 +421,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search the list of cluster databases.
+     * This API is used to search cluster database lists.
      * @param {SearchClusterDatabasesRequest} req
      * @param {function(string, SearchClusterDatabasesResponse):void} cb
      * @public
@@ -371,7 +432,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an audit rule template.
+     * This API is used to create audit rule templates.
      * @param {CreateAuditRuleTemplateRequest} req
      * @param {function(string, CreateAuditRuleTemplateResponse):void} cb
      * @public
@@ -382,7 +443,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the maintenance time configuration.
+     * This API is used to modify maintenance time configuration.
      * @param {ModifyMaintainPeriodConfigRequest} req
      * @param {function(string, ModifyMaintainPeriodConfigResponse):void} cb
      * @public
@@ -393,7 +454,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to replicate the password complexity for a cluster.
+     * This API is used to copy the password complexity of a replication cluster.
      * @param {CopyClusterPasswordComplexityRequest} req
      * @param {function(string, CopyClusterPasswordComplexityResponse):void} cb
      * @public
@@ -404,7 +465,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable the audit service for a TDSQL-C for MySQL instance.
+     * This API is used to close the database audit service for TDSQL-C MySQL instances.
      * @param {CloseAuditServiceRequest} req
      * @param {function(string, CloseAuditServiceResponse):void} cb
      * @public
@@ -415,7 +476,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the supported database proxy versions.
+     * This API is used to query supported database proxy versions.
      * @param {DescribeSupportProxyVersionRequest} req
      * @param {function(string, DescribeSupportProxyVersionResponse):void} cb
      * @public
@@ -426,18 +487,40 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the cluster VPC.
-     * @param {SwitchClusterVpcRequest} req
-     * @param {function(string, SwitchClusterVpcResponse):void} cb
+     * This API is used to search cluster data table lists.
+     * @param {SearchClusterTablesRequest} req
+     * @param {function(string, SearchClusterTablesResponse):void} cb
      * @public
      */
-    SwitchClusterVpc(req, cb) {
-        let resp = new SwitchClusterVpcResponse();
-        this.request("SwitchClusterVpc", req, resp, cb);
+    SearchClusterTables(req, cb) {
+        let resp = new SearchClusterTablesResponse();
+        this.request("SearchClusterTables", req, resp, cb);
     }
 
     /**
-     * This API is used to disable the database proxy.
+     * This API is used to query from availability zones.
+     * @param {DescribeSlaveZonesRequest} req
+     * @param {function(string, DescribeSlaveZonesResponse):void} cb
+     * @public
+     */
+    DescribeSlaveZones(req, cb) {
+        let resp = new DescribeSlaveZonesResponse();
+        this.request("DescribeSlaveZones", req, resp, cb);
+    }
+
+    /**
+     * This API is used to close the database proxy connection address.
+     * @param {CloseProxyEndPointRequest} req
+     * @param {function(string, CloseProxyEndPointResponse):void} cb
+     * @public
+     */
+    CloseProxyEndPoint(req, cb) {
+        let resp = new CloseProxyEndPointResponse();
+        this.request("CloseProxyEndPoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to close the database proxy service of a cluster.
      * @param {CloseProxyRequest} req
      * @param {function(string, CloseProxyResponse):void} cb
      * @public
@@ -448,18 +531,40 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the specifications of a database proxy.
-     * @param {DescribeProxySpecsRequest} req
-     * @param {function(string, DescribeProxySpecsResponse):void} cb
+     * This API is used to export the usage details of a resource package.
+     * @param {ExportResourcePackageDeductDetailsRequest} req
+     * @param {function(string, ExportResourcePackageDeductDetailsResponse):void} cb
      * @public
      */
-    DescribeProxySpecs(req, cb) {
-        let resp = new DescribeProxySpecsResponse();
-        this.request("DescribeProxySpecs", req, resp, cb);
+    ExportResourcePackageDeductDetails(req, cb) {
+        let resp = new ExportResourcePackageDeductDetailsResponse();
+        this.request("ExportResourcePackageDeductDetails", req, resp, cb);
     }
 
     /**
-     * This API is used to show the details of an instance.
+     * This API is used to query the price for modifying the specifications of a prepaid cluster.
+     * @param {InquirePriceModifyRequest} req
+     * @param {function(string, InquirePriceModifyResponse):void} cb
+     * @public
+     */
+    InquirePriceModify(req, cb) {
+        let resp = new InquirePriceModifyResponse();
+        this.request("InquirePriceModify", req, resp, cb);
+    }
+
+    /**
+     * This API is used to replace the vpc of the database proxy.
+     * @param {SwitchProxyVpcRequest} req
+     * @param {function(string, SwitchProxyVpcResponse):void} cb
+     * @public
+     */
+    SwitchProxyVpc(req, cb) {
+        let resp = new SwitchProxyVpcResponse();
+        this.request("SwitchProxyVpc", req, resp, cb);
+    }
+
+    /**
+     * This API is used to display cluster details.
      * @param {DescribeClusterDetailRequest} req
      * @param {function(string, DescribeClusterDetailResponse):void} cb
      * @public
@@ -470,7 +575,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query instance specifications.
+     * This interface (DescribeInstanceSpecs) is used to query the instance specifications available for purchase on the query purchase page.
      * @param {DescribeInstanceSpecsRequest} req
      * @param {function(string, DescribeInstanceSpecsResponse):void} cb
      * @public
@@ -481,7 +586,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download address of a binlog.
+     * This API is used to query the download address of Binlog.
      * @param {DescribeBinlogDownloadUrlRequest} req
      * @param {function(string, DescribeBinlogDownloadUrlResponse):void} cb
      * @public
@@ -492,7 +597,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of resources by billing order ID.
+     * This interface (DescribeResourcesByDealName) is used to query order-associated instances.
      * @param {DescribeResourcesByDealNameRequest} req
      * @param {function(string, DescribeResourcesByDealNameResponse):void} cb
      * @public
@@ -503,7 +608,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to remove the isolation of an instance to make it accessible again.
+     * This interface (ActivateInstance) restores access to isolated instances.
      * @param {ActivateInstanceRequest} req
      * @param {function(string, ActivateInstanceResponse):void} cb
      * @public
@@ -525,7 +630,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export the slow logs of an instance.
+     * This API is used to query cluster transparent encryption information.
+     * @param {DescribeClusterTransparentEncryptInfoRequest} req
+     * @param {function(string, DescribeClusterTransparentEncryptInfoResponse):void} cb
+     * @public
+     */
+    DescribeClusterTransparentEncryptInfo(req, cb) {
+        let resp = new DescribeClusterTransparentEncryptInfoResponse();
+        this.request("DescribeClusterTransparentEncryptInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export instance slow logs.
      * @param {ExportInstanceSlowQueriesRequest} req
      * @param {function(string, ExportInstanceSlowQueriesResponse):void} cb
      * @public
@@ -536,7 +652,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the existing permissions of an account.
+     * This API is used to query account privileges.
      * @param {DescribeAccountPrivilegesRequest} req
      * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
      * @public
@@ -547,7 +663,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable the password complexity for a cluster.
+     * This API is used to close cluster password complexity.
      * @param {CloseClusterPasswordComplexityRequest} req
      * @param {function(string, CloseClusterPasswordComplexityResponse):void} cb
      * @public
@@ -580,18 +696,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to deactivate a cluster.
-     * @param {OfflineClusterRequest} req
-     * @param {function(string, OfflineClusterResponse):void} cb
+     * This interface is used for querying the recycle bin instance list.
+     * @param {DescribeIsolatedInstancesRequest} req
+     * @param {function(string, DescribeIsolatedInstancesResponse):void} cb
      * @public
      */
-    OfflineCluster(req, cb) {
-        let resp = new OfflineClusterResponse();
-        this.request("OfflineCluster", req, resp, cb);
+    DescribeIsolatedInstances(req, cb) {
+        let resp = new DescribeIsolatedInstancesResponse();
+        this.request("DescribeIsolatedInstances", req, resp, cb);
     }
 
     /**
-     * This API is used to modify cluster name.
+     * This API is used to modify cluster names.
      * @param {ModifyClusterNameRequest} req
      * @param {function(string, ModifyClusterNameResponse):void} cb
      * @public
@@ -602,7 +718,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to configure the read/write separation of a database proxy.
+     * This API is used to configure read-write separation for database proxy.
      * @param {ModifyProxyRwSplitRequest} req
      * @param {function(string, ModifyProxyRwSplitResponse):void} cb
      * @public
@@ -613,7 +729,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the IP and port of an instance group.
+     * This API is used to modify the ip and port of an instance group.
      * @param {ModifyVipVportRequest} req
      * @param {function(string, ModifyVipVportResponse):void} cb
      * @public
@@ -624,7 +740,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete an audit rule template.
+     * This API is used to delete audit rule templates.
      * @param {DeleteAuditRuleTemplatesRequest} req
      * @param {function(string, DeleteAuditRuleTemplatesResponse):void} cb
      * @public
@@ -646,7 +762,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a parameter template.
+     * This API is used to create parameter templates.
      * @param {CreateParamTemplateRequest} req
      * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
@@ -657,7 +773,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the replica AZ.
+     * This API is used to modify the slave availability zone of a cluster.
      * @param {ModifyClusterSlaveZoneRequest} req
      * @param {function(string, ModifyClusterSlaveZoneResponse):void} cb
      * @public
@@ -668,7 +784,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind a resource pack to a cluster.
+     * This API is used to modify the binding relationship between resource packages and clusters.
      * @param {ModifyResourcePackageClustersRequest} req
      * @param {function(string, ModifyResourcePackageClustersResponse):void} cb
      * @public
@@ -679,7 +795,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify or enable the password complexity for a cluster.
+     * This API is used to modify or enable cluster password complexity.
      * @param {ModifyClusterPasswordComplexityRequest} req
      * @param {function(string, ModifyClusterPasswordComplexityResponse):void} cb
      * @public
@@ -690,7 +806,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create manual backup.
+     * This API is used to create a manual backup for a cluster.
      * @param {CreateBackupRequest} req
      * @param {function(string, CreateBackupResponse):void} cb
      * @public
@@ -701,7 +817,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to deactivate an instance.
+     * This interface (OfflineInstance) is used to terminate an instance.
      * @param {OfflineInstanceRequest} req
      * @param {function(string, OfflineInstanceResponse):void} cb
      * @public
@@ -712,7 +828,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate a cluster.
+     * This interface (IsolateCluster) is used to isolate a cluster.
      * @param {IsolateClusterRequest} req
      * @param {function(string, IsolateClusterResponse):void} cb
      * @public
@@ -723,7 +839,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an instance.
+     * This API is used to query the instance list under the same cluster.
+     * @param {DescribeInstancesWithinSameClusterRequest} req
+     * @param {function(string, DescribeInstancesWithinSameClusterResponse):void} cb
+     * @public
+     */
+    DescribeInstancesWithinSameCluster(req, cb) {
+        let resp = new DescribeInstancesWithinSameClusterResponse();
+        this.request("DescribeInstancesWithinSameCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reboot an instance.
      * @param {RestartInstanceRequest} req
      * @param {function(string, RestartInstanceResponse):void} cb
      * @public
@@ -734,7 +861,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade the configuration of a database proxy.
+     * This API is used to upgrade database proxy configuration.
      * @param {UpgradeProxyRequest} req
      * @param {function(string, UpgradeProxyResponse):void} cb
      * @public
@@ -745,7 +872,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to the list of clusters.
+     * This API is used to describe clusters.
      * @param {DescribeClustersRequest} req
      * @param {function(string, DescribeClustersResponse):void} cb
      * @public
@@ -756,7 +883,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable the public network.
+     * This interface (CloseWan) is used to disable public network.
      * @param {CloseWanRequest} req
      * @param {function(string, CloseWanResponse):void} cb
      * @public
@@ -767,7 +894,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the security group information of a project.
+     * This API is used to query project security group information.
      * @param {DescribeProjectSecurityGroupsRequest} req
      * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
      * @public
@@ -778,7 +905,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the database.
+     * This API is used to modify account authorization of a database.
      * @param {ModifyClusterDatabaseRequest} req
      * @param {function(string, ModifyClusterDatabaseResponse):void} cb
      * @public
@@ -786,6 +913,17 @@ class CynosdbClient extends AbstractClient {
     ModifyClusterDatabase(req, cb) {
         let resp = new ModifyClusterDatabaseResponse();
         this.request("ModifyClusterDatabase", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify audit rule templates.
+     * @param {ModifyAuditRuleTemplatesRequest} req
+     * @param {function(string, ModifyAuditRuleTemplatesResponse):void} cb
+     * @public
+     */
+    ModifyAuditRuleTemplates(req, cb) {
+        let resp = new ModifyAuditRuleTemplatesResponse();
+        this.request("ModifyAuditRuleTemplates", req, resp, cb);
     }
 
     /**
@@ -800,7 +938,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the parameter list of an instance.
+     * This API is used to modify the deduction priority of the bound resource package.
+     * @param {ModifyResourcePackagesDeductionPriorityRequest} req
+     * @param {function(string, ModifyResourcePackagesDeductionPriorityResponse):void} cb
+     * @public
+     */
+    ModifyResourcePackagesDeductionPriority(req, cb) {
+        let resp = new ModifyResourcePackagesDeductionPriorityResponse();
+        this.request("ModifyResourcePackagesDeductionPriority", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance parameter list.
      * @param {DescribeInstanceParamsRequest} req
      * @param {function(string, DescribeInstanceParamsResponse):void} cb
      * @public
@@ -822,7 +971,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the parameters of a cluster.
+     * This API is used to modify cluster parameters.
      * @param {ModifyClusterParamRequest} req
      * @param {function(string, ModifyClusterParamResponse):void} cb
      * @public
@@ -833,7 +982,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a cluster.
+     * This API is used to purchase new clusters.
      * @param {CreateClustersRequest} req
      * @param {function(string, CreateClustersResponse):void} cb
      * @public
@@ -844,7 +993,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an account.
+     * This API is used to create user accounts.
      * @param {CreateAccountsRequest} req
      * @param {function(string, CreateAccountsResponse):void} cb
      * @public
@@ -855,7 +1004,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to purchase a resource pack.
+     * This API is used to purchase new resource packets.
      * @param {CreateResourcePackageRequest} req
      * @param {function(string, CreateResourcePackageResponse):void} cb
      * @public
@@ -866,7 +1015,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a database.
+     * This interface is used to delete a database.
      * @param {DeleteClusterDatabaseRequest} req
      * @param {function(string, DeleteClusterDatabaseResponse):void} cb
      * @public
@@ -877,7 +1026,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to switch to the replica AZ.
+     * This API is used to switch the primary and secondary AZs of a cluster.
      * @param {SwitchClusterZoneRequest} req
      * @param {function(string, SwitchClusterZoneResponse):void} cb
      * @public
@@ -888,7 +1037,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add an instance in a cluster.
+     * This API is used to add instances to a cluster.
      * @param {AddInstancesRequest} req
      * @param {function(string, AddInstancesResponse):void} cb
      * @public
@@ -899,7 +1048,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete an account.
+     * This API is used to delete user accounts.
      * @param {DeleteAccountsRequest} req
      * @param {function(string, DeleteAccountsResponse):void} cb
      * @public
@@ -910,7 +1059,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable the access to read-only instance group.
+     * This API is used to enable read-only instance group access.
      * @param {OpenClusterReadOnlyInstanceGroupAccessRequest} req
      * @param {function(string, OpenClusterReadOnlyInstanceGroupAccessResponse):void} cb
      * @public
@@ -921,18 +1070,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search the list of cluster data tables.
-     * @param {SearchClusterTablesRequest} req
-     * @param {function(string, SearchClusterTablesResponse):void} cb
+     * Enable transparent data encryption for the cluster.
+     * @param {OpenClusterTransparentEncryptRequest} req
+     * @param {function(string, OpenClusterTransparentEncryptResponse):void} cb
      * @public
      */
-    SearchClusterTables(req, cb) {
-        let resp = new SearchClusterTablesResponse();
-        this.request("SearchClusterTables", req, resp, cb);
+    OpenClusterTransparentEncrypt(req, cb) {
+        let resp = new OpenClusterTransparentEncryptResponse();
+        this.request("OpenClusterTransparentEncrypt", req, resp, cb);
     }
 
     /**
-     * This API is used to query all parameter templates information of a user-specified product.
+     * This API is used to query all parameter template information under the user-specified product.
      * @param {DescribeParamTemplatesRequest} req
      * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
@@ -943,7 +1092,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete the manual backup for a cluster. It cannot be used to delete the automatic backup.
+     * This API is used to delete manual backups for a cluster. Automatic backups cannot be deleted.
      * @param {DeleteBackupRequest} req
      * @param {function(string, DeleteBackupResponse):void} cb
      * @public
@@ -954,7 +1103,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pause a serverless cluster.
+     * This API is used to query serverless policies.
+     * @param {DescribeServerlessStrategyRequest} req
+     * @param {function(string, DescribeServerlessStrategyResponse):void} cb
+     * @public
+     */
+    DescribeServerlessStrategy(req, cb) {
+        let resp = new DescribeServerlessStrategyResponse();
+        this.request("DescribeServerlessStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to suspend a serverless cluster.
      * @param {PauseServerlessRequest} req
      * @param {function(string, PauseServerlessResponse):void} cb
      * @public
@@ -965,7 +1125,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the account host.
+     * This API is used to modify account hosts.
      * @param {ModifyAccountHostRequest} req
      * @param {function(string, ModifyAccountHostResponse):void} cb
      * @public
@@ -976,7 +1136,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to reset the password of a TencentDB instance account.
+     * This API is used to modify the database account password.
      * @param {ResetAccountPasswordRequest} req
      * @param {function(string, ResetAccountPasswordResponse):void} cb
      * @public
@@ -998,7 +1158,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the valid rollback time range for the specified cluster.
+     * This API is used to query the rollback time range.
      * @param {DescribeRollbackTimeRangeRequest} req
      * @param {function(string, DescribeRollbackTimeRangeResponse):void} cb
      * @public
@@ -1031,7 +1191,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind a resource pack to a cluster.
+     * This API is used to bind resource packages to a cluster.
      * @param {BindClusterResourcePackagesRequest} req
      * @param {function(string, BindClusterResourcePackagesResponse):void} cb
      * @public
@@ -1042,7 +1202,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to unbind a TDSQL-C for MySQL resource pack.
+     * This API is used to query available specifications of Serverless instances.
+     * @param {DescribeServerlessInstanceSpecsRequest} req
+     * @param {function(string, DescribeServerlessInstanceSpecsResponse):void} cb
+     * @public
+     */
+    DescribeServerlessInstanceSpecs(req, cb) {
+        let resp = new DescribeServerlessInstanceSpecsResponse();
+        this.request("DescribeServerlessInstanceSpecs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind resource packages from clusters.
      * @param {UnbindClusterResourcePackagesRequest} req
      * @param {function(string, UnbindClusterResourcePackagesResponse):void} cb
      * @public
@@ -1053,7 +1224,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of database proxies.
+     * This API is used to query agent list.
      * @param {DescribeProxiesRequest} req
      * @param {function(string, DescribeProxiesResponse):void} cb
      * @public
@@ -1064,7 +1235,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable the public network.
+     * This interface (OpenWan) is used to enable external network.
      * @param {OpenWanRequest} req
      * @param {function(string, OpenWanResponse):void} cb
      * @public
@@ -1075,7 +1246,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the purchasable price of a cluster.
+     * This interface (InquirePriceCreate) is used for price inquiry of newly purchased clusters.
      * @param {InquirePriceCreateRequest} req
      * @param {function(string, InquirePriceCreateResponse):void} cb
      * @public
@@ -1086,7 +1257,29 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the specifications of a resource pack.
+     * This API is used to modify the serverless policy.
+     * @param {ModifyServerlessStrategyRequest} req
+     * @param {function(string, ModifyServerlessStrategyResponse):void} cb
+     * @public
+     */
+    ModifyServerlessStrategy(req, cb) {
+        let resp = new ModifyServerlessStrategyResponse();
+        this.request("ModifyServerlessStrategy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query binlog configurations.
+     * @param {DescribeBinlogConfigRequest} req
+     * @param {function(string, DescribeBinlogConfigResponse):void} cb
+     * @public
+     */
+    DescribeBinlogConfig(req, cb) {
+        let resp = new DescribeBinlogConfigResponse();
+        this.request("DescribeBinlogConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query resource package specifications.
      * @param {DescribeResourcePackageSaleSpecRequest} req
      * @param {function(string, DescribeResourcePackageSaleSpecResponse):void} cb
      * @public
@@ -1097,7 +1290,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the account permissions.
+     * This API is used to modify account database and table permissions.
      * @param {ModifyAccountPrivilegesRequest} req
      * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
      * @public
@@ -1108,7 +1301,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the audit rule templates of an instance.
+     * This API is used to obtain the audit rules of the instance.
      * @param {DescribeAuditRuleWithInstanceIdsRequest} req
      * @param {function(string, DescribeAuditRuleWithInstanceIdsResponse):void} cb
      * @public
@@ -1130,7 +1323,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add the replica AZ.
+     * This interface (AddClusterSlaveZone) is used to enable multi-az deployment for a cluster.
      * @param {AddClusterSlaveZoneRequest} req
      * @param {function(string, AddClusterSlaveZoneResponse):void} cb
      * @public
@@ -1152,7 +1345,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query database management accounts.
+     * This API is used to query the database account list.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
@@ -1163,7 +1356,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set auto-renewal for an instance.
+     * This API is used to set the auto-renewal feature of an instance.
      * @param {SetRenewFlagRequest} req
      * @param {function(string, SetRenewFlagResponse):void} cb
      * @public
@@ -1185,7 +1378,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to rebalance the load on the database proxy.
+     * This API is used to reload the database proxy of Cloud Load Balancer.
      * @param {ReloadBalanceProxyNodeRequest} req
      * @param {function(string, ReloadBalanceProxyNodeResponse):void} cb
      * @public
@@ -1196,29 +1389,29 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade the version of a database proxy.
-     * @param {UpgradeProxyVersionRequest} req
-     * @param {function(string, UpgradeProxyVersionResponse):void} cb
+     * This interface (OfflineCluster) is used to terminate clusters.
+     * @param {OfflineClusterRequest} req
+     * @param {function(string, OfflineClusterResponse):void} cb
      * @public
      */
-    UpgradeProxyVersion(req, cb) {
-        let resp = new UpgradeProxyVersionResponse();
-        this.request("UpgradeProxyVersion", req, resp, cb);
+    OfflineCluster(req, cb) {
+        let resp = new OfflineClusterResponse();
+        this.request("OfflineCluster", req, resp, cb);
     }
 
     /**
-     * This API is used to modify an audit rule template.
-     * @param {ModifyAuditRuleTemplatesRequest} req
-     * @param {function(string, ModifyAuditRuleTemplatesResponse):void} cb
+     * This API is used to access the table list.
+     * @param {DescribeClusterDatabaseTablesRequest} req
+     * @param {function(string, DescribeClusterDatabaseTablesResponse):void} cb
      * @public
      */
-    ModifyAuditRuleTemplates(req, cb) {
-        let resp = new ModifyAuditRuleTemplatesResponse();
-        this.request("ModifyAuditRuleTemplates", req, resp, cb);
+    DescribeClusterDatabaseTables(req, cb) {
+        let resp = new DescribeClusterDatabaseTablesResponse();
+        this.request("DescribeClusterDatabaseTables", req, resp, cb);
     }
 
     /**
-     * This API is used to query the list of backup files.
+     * This API is used to query the backup file list of a cluster.
      * @param {DescribeBackupListRequest} req
      * @param {function(string, DescribeBackupListResponse):void} cb
      * @public
@@ -1240,6 +1433,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to replace the cluster vpc.
+     * @param {SwitchClusterVpcRequest} req
+     * @param {function(string, SwitchClusterVpcResponse):void} cb
+     * @public
+     */
+    SwitchClusterVpc(req, cb) {
+        let resp = new SwitchClusterVpcResponse();
+        this.request("SwitchClusterVpc", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a database.
      * @param {CreateClusterDatabaseRequest} req
      * @param {function(string, CreateClusterDatabaseResponse):void} cb
@@ -1251,7 +1455,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable the audit service for a TDSQL-C for MySQL instance.
+     * This API is used to enable database audit service for an instance.
      * @param {OpenAuditServiceRequest} req
      * @param {function(string, OpenAuditServiceResponse):void} cb
      * @public
@@ -1262,7 +1466,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query audit rule templates.
+     * This API is used to query audit rule template information.
      * @param {DescribeAuditRuleTemplatesRequest} req
      * @param {function(string, DescribeAuditRuleTemplatesResponse):void} cb
      * @public
@@ -1273,7 +1477,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the usage details of a resource pack.
+     * This API is used to query resource package usage details.
      * @param {DescribeResourcePackageDetailRequest} req
      * @param {function(string, DescribeResourcePackageDetailResponse):void} cb
      * @public
@@ -1284,7 +1488,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the backup configuration of the specified cluster.
+     * This API is used to modify the backup configuration of a specified cluster.
      * @param {ModifyBackupConfigRequest} req
      * @param {function(string, ModifyBackupConfigResponse):void} cb
      * @public
@@ -1306,7 +1510,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade the kernel version of a TDSQL-C for MySQL cluster.
+     * This interface (UpgradeClusterVersion) is used to update the kernel minor version.
      * @param {UpgradeClusterVersionRequest} req
      * @param {function(string, UpgradeClusterVersionResponse):void} cb
      * @public
@@ -1317,7 +1521,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of the resource packs.
+     * This API is used to query resource package list.
      * @param {DescribeResourcePackageListRequest} req
      * @param {function(string, DescribeResourcePackageListResponse):void} cb
      * @public
@@ -1328,7 +1532,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the parameters of a cluster.
+     * This API is used to query cluster parameters.
      * @param {DescribeClusterParamsRequest} req
      * @param {function(string, DescribeClusterParamsResponse):void} cb
      * @public
@@ -1339,7 +1543,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to refund a resource pack.
+     * This API is used to refund a resource package.
      * @param {RefundResourcePackageRequest} req
      * @param {function(string, RefundResourcePackageResponse):void} cb
      * @public
@@ -1361,7 +1565,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the instance maintenance window.
+     * This interface (DescribeMaintainPeriod) is used to query the instance maintenance window.
      * @param {DescribeMaintainPeriodRequest} req
      * @param {function(string, DescribeMaintainPeriodResponse):void} cb
      * @public
@@ -1372,18 +1576,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the database proxy VPC.
-     * @param {SwitchProxyVpcRequest} req
-     * @param {function(string, SwitchProxyVpcResponse):void} cb
+     * This API is used to query database proxy specifications.
+     * @param {DescribeProxySpecsRequest} req
+     * @param {function(string, DescribeProxySpecsResponse):void} cb
      * @public
      */
-    SwitchProxyVpc(req, cb) {
-        let resp = new SwitchProxyVpcResponse();
-        this.request("SwitchProxyVpc", req, resp, cb);
+    DescribeProxySpecs(req, cb) {
+        let resp = new DescribeProxySpecsResponse();
+        this.request("DescribeProxySpecs", req, resp, cb);
     }
 
     /**
-     * This API is used to query the database list.
+     * This API is used to query database list.
      * @param {DescribeClusterDetailDatabasesRequest} req
      * @param {function(string, DescribeClusterDetailDatabasesResponse):void} cb
      * @public
@@ -1405,7 +1609,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the AZ information in a purchasable region.
+     * This API is used to query marketable regional availability zone information.
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
      * @public
@@ -1416,7 +1620,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download address of a cluster backup file.
+     * This API is used to query the download link of cluster backup files.
      * @param {DescribeBackupDownloadUrlRequest} req
      * @param {function(string, DescribeBackupDownloadUrlResponse):void} cb
      * @public
@@ -1427,7 +1631,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a database proxy.
+     * This API is used to enable the database proxy of a cluster.
      * @param {CreateProxyRequest} req
      * @param {function(string, CreateProxyResponse):void} cb
      * @public
@@ -1438,7 +1642,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the security groups bound to an instance.
+     * This API is used to modify the security group bound to the instance.
      * @param {ModifyDBInstanceSecurityGroupsRequest} req
      * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
      * @public
@@ -1449,7 +1653,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of error logs for an instance.
+     * This API is used to query the list of instance error logs.
      * @param {DescribeInstanceErrorLogsRequest} req
      * @param {function(string, DescribeInstanceErrorLogsResponse):void} cb
      * @public
@@ -1471,7 +1675,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable the dedicated access group for a read-only instance.
+     * This interface (OpenReadOnlyInstanceExclusiveAccess) is used to enable the dedicated access access group for a read-only instance.
      * @param {OpenReadOnlyInstanceExclusiveAccessRequest} req
      * @param {function(string, OpenReadOnlyInstanceExclusiveAccessResponse):void} cb
      * @public
@@ -1482,7 +1686,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of password complexity for a cluster.
+     * This API is used to view the cluster password complexity details.
      * @param {DescribeClusterPasswordComplexityRequest} req
      * @param {function(string, DescribeClusterPasswordComplexityResponse):void} cb
      * @public
@@ -1504,7 +1708,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade an instance.
+     * This interface (UpgradeInstance) is used to upgrade instances.
      * @param {UpgradeInstanceRequest} req
      * @param {function(string, UpgradeInstanceResponse):void} cb
      * @public
@@ -1515,7 +1719,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of binlogs in a cluster.
+     * This interface (DescribeBinlogs) queries the cluster binlog list.
      * @param {DescribeBinlogsRequest} req
      * @param {function(string, DescribeBinlogsResponse):void} cb
      * @public
@@ -1526,18 +1730,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query whether rollback is possible based on the specified time and cluster.
-     * @param {DescribeRollbackTimeValidityRequest} req
-     * @param {function(string, DescribeRollbackTimeValidityResponse):void} cb
-     * @public
-     */
-    DescribeRollbackTimeValidity(req, cb) {
-        let resp = new DescribeRollbackTimeValidityResponse();
-        this.request("DescribeRollbackTimeValidity", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the security group information of an instance.
+     * This API is used to query instance security group information.
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
      * @public
@@ -1548,7 +1741,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable the password complexity for a cluster.
+     * This API is used to enable the custom password complexity feature.
      * @param {OpenClusterPasswordComplexityRequest} req
      * @param {function(string, OpenClusterPasswordComplexityResponse):void} cb
      * @public
@@ -1559,7 +1752,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the name of a resource pack.
+     * This API is used to modify resource package name.
      * @param {ModifyResourcePackageNameRequest} req
      * @param {function(string, ModifyResourcePackageNameResponse):void} cb
      * @public
@@ -1570,7 +1763,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete the replica AZ.
+     * This API is used to disable multi-AZ deployment for a cluster.
      * @param {RemoveClusterSlaveZoneRequest} req
      * @param {function(string, RemoveClusterSlaveZoneResponse):void} cb
      * @public
@@ -1581,7 +1774,18 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of a parameter template.
+     * This API is used to disable SSL encryption.
+     * @param {CloseSSLRequest} req
+     * @param {function(string, CloseSSLResponse):void} cb
+     * @public
+     */
+    CloseSSL(req, cb) {
+        let resp = new CloseSSLResponse();
+        this.request("CloseSSL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query user parameter template details.
      * @param {DescribeParamTemplateDetailRequest} req
      * @param {function(string, DescribeParamTemplateDetailResponse):void} cb
      * @public

@@ -20,6 +20,7 @@ const DescribeEventConsumeTasksResponse = models.DescribeEventConsumeTasksRespon
 const CreateRuleTemplateResponse = models.CreateRuleTemplateResponse;
 const AlarmInfo = models.AlarmInfo;
 const DescribeBatchOperateTaskPage = models.DescribeBatchOperateTaskPage;
+const UpdateWorkflowInfoResponse = models.UpdateWorkflowInfoResponse;
 const DescribeIntegrationStatisticsResponse = models.DescribeIntegrationStatisticsResponse;
 const UnlockIntegrationTaskResponse = models.UnlockIntegrationTaskResponse;
 const DescribeReportTaskListRequest = models.DescribeReportTaskListRequest;
@@ -36,6 +37,7 @@ const CreateDataSourceRequest = models.CreateDataSourceRequest;
 const IntegrationNodeSchemaMapping = models.IntegrationNodeSchemaMapping;
 const DescribeTrendStatResponse = models.DescribeTrendStatResponse;
 const DescribeRealTimeTaskSpeedRequest = models.DescribeRealTimeTaskSpeedRequest;
+const BatchTaskOperateNew = models.BatchTaskOperateNew;
 const DescribeRuleDimStatRequest = models.DescribeRuleDimStatRequest;
 const DescribeRuleTemplatesResponse = models.DescribeRuleTemplatesResponse;
 const CreateIntegrationNodeResponse = models.CreateIntegrationNodeResponse;
@@ -62,10 +64,11 @@ const AddProjectUserRoleResponse = models.AddProjectUserRoleResponse;
 const ModifyDimensionWeightResponse = models.ModifyDimensionWeightResponse;
 const BatchResumeIntegrationTasksResponse = models.BatchResumeIntegrationTasksResponse;
 const DescribeFieldBasicInfoResponse = models.DescribeFieldBasicInfoResponse;
-const ColumnItem = models.ColumnItem;
+const DescribeStatisticInstanceStatusTrendOpsResponse = models.DescribeStatisticInstanceStatusTrendOpsResponse;
 const RuleGroupExecResult = models.RuleGroupExecResult;
 const AlarmEventInfo = models.AlarmEventInfo;
 const BytesSpeed = models.BytesSpeed;
+const RegisterDsEventRequest = models.RegisterDsEventRequest;
 const CheckTaskNameExistRequest = models.CheckTaskNameExistRequest;
 const ThresholdValue = models.ThresholdValue;
 const DescribeFunctionKindsRequest = models.DescribeFunctionKindsRequest;
@@ -205,6 +208,7 @@ const CreateOfflineTaskResponse = models.CreateOfflineTaskResponse;
 const DescribeColumnLineageRequest = models.DescribeColumnLineageRequest;
 const CreateTaskAlarmRegularRequest = models.CreateTaskAlarmRegularRequest;
 const ModifyRuleRequest = models.ModifyRuleRequest;
+const RunTasksByMultiWorkflowResponse = models.RunTasksByMultiWorkflowResponse;
 const BatchReturn = models.BatchReturn;
 const FindAllFolderResponse = models.FindAllFolderResponse;
 const ResourcePathTree = models.ResourcePathTree;
@@ -231,6 +235,7 @@ const DescribeTaskByCycleResponse = models.DescribeTaskByCycleResponse;
 const DescribeExecStrategyResponse = models.DescribeExecStrategyResponse;
 const DescribeSuccessorOpsTaskInfosResponse = models.DescribeSuccessorOpsTaskInfosResponse;
 const DeleteResourceResponse = models.DeleteResourceResponse;
+const RuleGroupSubscribe = models.RuleGroupSubscribe;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeInstanceLogFileResponse = models.DescribeInstanceLogFileResponse;
 const PairDto = models.PairDto;
@@ -288,13 +293,16 @@ const SearchConditionNew = models.SearchConditionNew;
 const BatchStopOpsTasksRequest = models.BatchStopOpsTasksRequest;
 const DescribeFunctionTypesResponse = models.DescribeFunctionTypesResponse;
 const ModifyRuleTemplateResponse = models.ModifyRuleTemplateResponse;
+const RenewWorkflowSchedulerInfoDsResponse = models.RenewWorkflowSchedulerInfoDsResponse;
 const BatchUpdateIntegrationTasksResponse = models.BatchUpdateIntegrationTasksResponse;
 const TaskLogResponse = models.TaskLogResponse;
 const QuietPeriod = models.QuietPeriod;
 const AdhocDetail = models.AdhocDetail;
 const DescribeInstanceLastLogRequest = models.DescribeInstanceLastLogRequest;
 const DescribeEventRequest = models.DescribeEventRequest;
+const TaskScriptContent = models.TaskScriptContent;
 const TableQualityDetailPage = models.TableQualityDetailPage;
+const BatchCreateTaskVersionAsyncRequest = models.BatchCreateTaskVersionAsyncRequest;
 const TaskTypeOpsDto = models.TaskTypeOpsDto;
 const BatchModifyOpsOwnersResponse = models.BatchModifyOpsOwnersResponse;
 const CreateTaskAlarmRegularResponse = models.CreateTaskAlarmRegularResponse;
@@ -322,27 +330,32 @@ const DeleteWorkflowByIdRequest = models.DeleteWorkflowByIdRequest;
 const ProjectBaseInfoOpsRequest = models.ProjectBaseInfoOpsRequest;
 const DescribeEventCasesRequest = models.DescribeEventCasesRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const UpdateWorkflowInfoRequest = models.UpdateWorkflowInfoRequest;
 const MakePlanTaskOpsDtoCollection = models.MakePlanTaskOpsDtoCollection;
 const SimpleColumnInfo = models.SimpleColumnInfo;
 const CreateWorkflowDsRequest = models.CreateWorkflowDsRequest;
 const CreateTaskResponse = models.CreateTaskResponse;
 const TableQualityDetail = models.TableQualityDetail;
 const BatchStopIntegrationTasksResponse = models.BatchStopIntegrationTasksResponse;
+const EventListenerTaskInfo = models.EventListenerTaskInfo;
 const DescribeApproveTypeListRequest = models.DescribeApproveTypeListRequest;
 const DeleteIntegrationNodeResponse = models.DeleteIntegrationNodeResponse;
 const DescribeDataSourceInfoListRequest = models.DescribeDataSourceInfoListRequest;
+const BatchResultDs = models.BatchResultDs;
 const DescribeIntegrationNodeRequest = models.DescribeIntegrationNodeRequest;
 const SetTaskAlarmNewResponse = models.SetTaskAlarmNewResponse;
 const GetOfflineDIInstanceListResponse = models.GetOfflineDIInstanceListResponse;
 const DescribeDatasourceResponse = models.DescribeDatasourceResponse;
-const DescribeStatisticInstanceStatusTrendOpsRequest = models.DescribeStatisticInstanceStatusTrendOpsRequest;
+const BatchOperationOpsDto = models.BatchOperationOpsDto;
 const RuleExecConfig = models.RuleExecConfig;
 const SuspendIntegrationTaskResponse = models.SuspendIntegrationTaskResponse;
 const ListInstancesRequest = models.ListInstancesRequest;
+const RenewWorkflowOwnerDsRequest = models.RenewWorkflowOwnerDsRequest;
 const DescribeSchedulerRunTimeInstanceCntByStatusResponse = models.DescribeSchedulerRunTimeInstanceCntByStatusResponse;
 const CreateTaskFolderResponse = models.CreateTaskFolderResponse;
 const RunForceSucScheduleInstancesRequest = models.RunForceSucScheduleInstancesRequest;
 const DescribeQualityScoreResponse = models.DescribeQualityScoreResponse;
+const CreateTaskNewRequest = models.CreateTaskNewRequest;
 const DescribeRulesByPageResponse = models.DescribeRulesByPageResponse;
 const DescribeDsParentFolderTreeResponse = models.DescribeDsParentFolderTreeResponse;
 const TopTableStatItem = models.TopTableStatItem;
@@ -376,7 +389,7 @@ const CreateOpsMakePlanResponse = models.CreateOpsMakePlanResponse;
 const DescribeStreamTaskLogListResponse = models.DescribeStreamTaskLogListResponse;
 const DlcDataGovernPolicy = models.DlcDataGovernPolicy;
 const DescribeRuleGroupExecResultsByPageResponse = models.DescribeRuleGroupExecResultsByPageResponse;
-const DescribeInstanceByCycleRequest = models.DescribeInstanceByCycleRequest;
+const DescribeRuleGroupsByPageResponse = models.DescribeRuleGroupsByPageResponse;
 const GetIntegrationNodeColumnSchemaRequest = models.GetIntegrationNodeColumnSchemaRequest;
 const DeleteWorkflowByIdResponse = models.DeleteWorkflowByIdResponse;
 const RulePage = models.RulePage;
@@ -486,7 +499,7 @@ const LinkOpsDto = models.LinkOpsDto;
 const DlcMergeManifestsInfo = models.DlcMergeManifestsInfo;
 const DescribeWorkflowListByProjectIdRequest = models.DescribeWorkflowListByProjectIdRequest;
 const AlarmIndicatorInfo = models.AlarmIndicatorInfo;
-const DescribeStatisticInstanceStatusTrendOpsResponse = models.DescribeStatisticInstanceStatusTrendOpsResponse;
+const ColumnItem = models.ColumnItem;
 const TableMeta = models.TableMeta;
 const RegisterEventResponse = models.RegisterEventResponse;
 const CountOpsInstanceStateResponse = models.CountOpsInstanceStateResponse;
@@ -515,7 +528,7 @@ const TaskOpsDto = models.TaskOpsDto;
 const DescribeOfflineTaskTokenRequest = models.DescribeOfflineTaskTokenRequest;
 const DescribeRuleExecDetailRequest = models.DescribeRuleExecDetailRequest;
 const DeleteResourceRequest = models.DeleteResourceRequest;
-const RuleGroupSubscribe = models.RuleGroupSubscribe;
+const RenewWorkflowOwnerDsResponse = models.RenewWorkflowOwnerDsResponse;
 const RegisterEventListenerRequest = models.RegisterEventListenerRequest;
 const BatchRunOpsTaskResponse = models.BatchRunOpsTaskResponse;
 const CheckIntegrationNodeNameExistsResponse = models.CheckIntegrationNodeNameExistsResponse;
@@ -525,9 +538,10 @@ const DeleteTaskAlarmRegularRequest = models.DeleteTaskAlarmRegularRequest;
 const CompareRule = models.CompareRule;
 const CompareRuleItem = models.CompareRuleItem;
 const DescribeInstanceLogFileRequest = models.DescribeInstanceLogFileRequest;
+const EventListenerDTO = models.EventListenerDTO;
 const DeleteOfflineTaskResponse = models.DeleteOfflineTaskResponse;
 const IntegrationInstanceLog = models.IntegrationInstanceLog;
-const TaskScriptContent = models.TaskScriptContent;
+const EventDsDto = models.EventDsDto;
 const IntegrationStatisticsTrendResult = models.IntegrationStatisticsTrendResult;
 const DescribeDrInstancePageRequest = models.DescribeDrInstancePageRequest;
 const RuntimeInstanceCntTop = models.RuntimeInstanceCntTop;
@@ -570,6 +584,7 @@ const CommitRuleGroupTaskResponse = models.CommitRuleGroupTaskResponse;
 const Project = models.Project;
 const DescribeRealTimeTaskMetricOverviewResponse = models.DescribeRealTimeTaskMetricOverviewResponse;
 const DescribeOfflineTaskTokenResponse = models.DescribeOfflineTaskTokenResponse;
+const CreateTaskNewResponse = models.CreateTaskNewResponse;
 const DescribeTableInfoListResponse = models.DescribeTableInfoListResponse;
 const RemoveWorkflowDsResponse = models.RemoveWorkflowDsResponse;
 const GetOfflineDIInstanceListRequest = models.GetOfflineDIInstanceListRequest;
@@ -579,7 +594,7 @@ const CreateCustomFunctionRequest = models.CreateCustomFunctionRequest;
 const DescribeTableBasicInfoRequest = models.DescribeTableBasicInfoRequest;
 const DescribeDatasourceRequest = models.DescribeDatasourceRequest;
 const RuleExecStat = models.RuleExecStat;
-const BatchOperationOpsDto = models.BatchOperationOpsDto;
+const DescribeStatisticInstanceStatusTrendOpsRequest = models.DescribeStatisticInstanceStatusTrendOpsRequest;
 const DescribeEventCasesResponse = models.DescribeEventCasesResponse;
 const DescribeTableSchemaInfoResponse = models.DescribeTableSchemaInfoResponse;
 const DiagnoseProResponse = models.DiagnoseProResponse;
@@ -602,6 +617,7 @@ const DescribeIntegrationVersionNodesInfoResponse = models.DescribeIntegrationVe
 const DescribeRulesRequest = models.DescribeRulesRequest;
 const DescribeRuleResponse = models.DescribeRuleResponse;
 const DescribeTaskScriptRequest = models.DescribeTaskScriptRequest;
+const ModifyTaskLinksDsResponse = models.ModifyTaskLinksDsResponse;
 const SchemaDetail = models.SchemaDetail;
 const DescribeRuleRequest = models.DescribeRuleRequest;
 const BatchOpsDTO = models.BatchOpsDTO;
@@ -633,7 +649,8 @@ const DlcRemoveOrphanFilesInfo = models.DlcRemoveOrphanFilesInfo;
 const LockIntegrationTaskRequest = models.LockIntegrationTaskRequest;
 const BatchStopIntegrationTasksRequest = models.BatchStopIntegrationTasksRequest;
 const DescribeRuleTemplatesByPageRequest = models.DescribeRuleTemplatesByPageRequest;
-const RunTasksByMultiWorkflowResponse = models.RunTasksByMultiWorkflowResponse;
+const RegisterDsEventResponse = models.RegisterDsEventResponse;
+const RenewWorkflowSchedulerInfoDsRequest = models.RenewWorkflowSchedulerInfoDsRequest;
 const DescribeInstanceLastLogResponse = models.DescribeInstanceLastLogResponse;
 const TableHeat = models.TableHeat;
 const DescribeExecStrategyRequest = models.DescribeExecStrategyRequest;
@@ -661,10 +678,12 @@ const Filter = models.Filter;
 const Pair = models.Pair;
 const DeleteIntegrationTaskResponse = models.DeleteIntegrationTaskResponse;
 const TableBaseInfo = models.TableBaseInfo;
-const DescribeRuleGroupsByPageResponse = models.DescribeRuleGroupsByPageResponse;
+const BatchCreateTaskVersionAsyncResponse = models.BatchCreateTaskVersionAsyncResponse;
+const DescribeInstanceByCycleRequest = models.DescribeInstanceByCycleRequest;
 const TableBasicInfo = models.TableBasicInfo;
 const DescribeThirdTaskRunLogRequest = models.DescribeThirdTaskRunLogRequest;
 const DescribeIntegrationStatisticsTaskStatusResponse = models.DescribeIntegrationStatisticsTaskStatusResponse;
+const ModifyTaskLinksDsRequest = models.ModifyTaskLinksDsRequest;
 const DescribeOpsMakePlanInstancesResponse = models.DescribeOpsMakePlanInstancesResponse;
 const DescribeDatabaseInfoListRequest = models.DescribeDatabaseInfoListRequest;
 const DescribeIntegrationTaskResponse = models.DescribeIntegrationTaskResponse;
@@ -683,6 +702,7 @@ const DescribeIntegrationStatisticsInstanceTrendRequest = models.DescribeIntegra
 const DescribeDsFolderTreeResponse = models.DescribeDsFolderTreeResponse;
 const PathNodeDsVO = models.PathNodeDsVO;
 const DescribeWorkflowCanvasInfoRequest = models.DescribeWorkflowCanvasInfoRequest;
+const ParamInfoDs = models.ParamInfoDs;
 const DagInstancesRequest = models.DagInstancesRequest;
 const DryRunDIOfflineTaskResponse = models.DryRunDIOfflineTaskResponse;
 const FolderOpsDto = models.FolderOpsDto;
@@ -731,7 +751,7 @@ class WedataClient extends AbstractClient {
     }
     
     /**
-     * Creating task
+     * This API is used to create a task. This API is deprecated. Use the CreateTaskNew API.
      * @param {CreateTaskRequest} req
      * @param {function(string, CreateTaskResponse):void} cb
      * @public
@@ -907,15 +927,14 @@ class WedataClient extends AbstractClient {
     }
 
     /**
-     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Register Event Listener
-     * @param {RegisterEventListenerRequest} req
-     * @param {function(string, RegisterEventListenerResponse):void} cb
+     * DataInLong Dashboard Task Status Statistical Trend
+     * @param {DescribeIntegrationStatisticsTaskStatusTrendRequest} req
+     * @param {function(string, DescribeIntegrationStatisticsTaskStatusTrendResponse):void} cb
      * @public
      */
-    RegisterEventListener(req, cb) {
-        let resp = new RegisterEventListenerResponse();
-        this.request("RegisterEventListener", req, resp, cb);
+    DescribeIntegrationStatisticsTaskStatusTrend(req, cb) {
+        let resp = new DescribeIntegrationStatisticsTaskStatusTrendResponse();
+        this.request("DescribeIntegrationStatisticsTaskStatusTrend", req, resp, cb);
     }
 
     /**
@@ -1206,6 +1225,17 @@ Set Task Alerts, Create/Update Alert Information (Latest)
     }
 
     /**
+     * This API is used to update task scheduling information under a workflow.
+     * @param {RenewWorkflowSchedulerInfoDsRequest} req
+     * @param {function(string, RenewWorkflowSchedulerInfoDsResponse):void} cb
+     * @public
+     */
+    RenewWorkflowSchedulerInfoDs(req, cb) {
+        let resp = new RenewWorkflowSchedulerInfoDsResponse();
+        this.request("RenewWorkflowSchedulerInfoDs", req, resp, cb);
+    }
+
+    /**
      * Getting long connection Token for offline tasks
      * @param {DescribeOfflineTaskTokenRequest} req
      * @param {function(string, DescribeOfflineTaskTokenResponse):void} cb
@@ -1338,6 +1368,18 @@ Set Task Alerts, Create/Update Alert Information (Latest)
     }
 
     /**
+     * This API is developed in ds.
+This API is used to update a workflow, including its basic information and workflow parameters.
+     * @param {UpdateWorkflowInfoRequest} req
+     * @param {function(string, UpdateWorkflowInfoResponse):void} cb
+     * @public
+     */
+    UpdateWorkflowInfo(req, cb) {
+        let resp = new UpdateWorkflowInfoResponse();
+        this.request("UpdateWorkflowInfo", req, resp, cb);
+    }
+
+    /**
      * Data Quality Overview Page Table Ranking Interface
      * @param {DescribeTopTableStatRequest} req
      * @param {function(string, DescribeTopTableStatResponse):void} cb
@@ -1368,6 +1410,17 @@ Set Task Alerts, Create/Update Alert Information (Latest)
     RunForceSucScheduleInstances(req, cb) {
         let resp = new RunForceSucScheduleInstancesResponse();
         this.request("RunForceSucScheduleInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to aggregate task creation.
+     * @param {CreateTaskNewRequest} req
+     * @param {function(string, CreateTaskNewResponse):void} cb
+     * @public
+     */
+    CreateTaskNew(req, cb) {
+        let resp = new CreateTaskNewResponse();
+        this.request("CreateTaskNew", req, resp, cb);
     }
 
     /**
@@ -1734,7 +1787,7 @@ Set Task Alerts, Create/Update Alert Information (Latest)
     }
 
     /**
-     * Update Workflow Scheduling
+     * This API is used to update workflow scheduling. This API is deprecated. Use the RenewWorkflowSchedulerInfoDs API instead.
      * @param {ModifyWorkflowScheduleRequest} req
      * @param {function(string, ModifyWorkflowScheduleResponse):void} cb
      * @public
@@ -2178,6 +2231,18 @@ Modify Task Script
     }
 
     /**
+     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+Register Event Listener
+     * @param {RegisterEventListenerRequest} req
+     * @param {function(string, RegisterEventListenerResponse):void} cb
+     * @public
+     */
+    RegisterEventListener(req, cb) {
+        let resp = new RegisterEventListenerResponse();
+        this.request("RegisterEventListener", req, resp, cb);
+    }
+
+    /**
      * Batch operation page to retrieve task list
      * @param {DescribeBatchOperateTaskRequest} req
      * @param {function(string, DescribeBatchOperateTaskResponse):void} cb
@@ -2310,7 +2375,7 @@ Modify Task Script
     }
 
     /**
-     * Update Workflow Information
+     * This API is used to update workflow information. (deprecated). Use API UpdateWorkflowInfo.
      * @param {ModifyWorkflowInfoRequest} req
      * @param {function(string, ModifyWorkflowInfoResponse):void} cb
      * @public
@@ -2409,14 +2474,14 @@ Modify Task Script
     }
 
     /**
-     * DataInLong Dashboard Task Status Statistical Trend
-     * @param {DescribeIntegrationStatisticsTaskStatusTrendRequest} req
-     * @param {function(string, DescribeIntegrationStatisticsTaskStatusTrendResponse):void} cb
+     * This API is used to asynchronously create task versions in batches.
+     * @param {BatchCreateTaskVersionAsyncRequest} req
+     * @param {function(string, BatchCreateTaskVersionAsyncResponse):void} cb
      * @public
      */
-    DescribeIntegrationStatisticsTaskStatusTrend(req, cb) {
-        let resp = new DescribeIntegrationStatisticsTaskStatusTrendResponse();
-        this.request("DescribeIntegrationStatisticsTaskStatusTrend", req, resp, cb);
+    BatchCreateTaskVersionAsync(req, cb) {
+        let resp = new BatchCreateTaskVersionAsyncResponse();
+        this.request("BatchCreateTaskVersionAsync", req, resp, cb);
     }
 
     /**
@@ -2450,6 +2515,17 @@ Modify Task Script
     DescribeTableLineage(req, cb) {
         let resp = new DescribeTableLineageResponse();
         this.request("DescribeTableLineage", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add parent task dependency.
+     * @param {ModifyTaskLinksDsRequest} req
+     * @param {function(string, ModifyTaskLinksDsResponse):void} cb
+     * @public
+     */
+    ModifyTaskLinksDs(req, cb) {
+        let resp = new ModifyTaskLinksDsResponse();
+        this.request("ModifyTaskLinksDs", req, resp, cb);
     }
 
     /**
@@ -2519,14 +2595,14 @@ Modify Task Script
     }
 
     /**
-     * Preemptive locking of integration tasks
-     * @param {RobAndLockIntegrationTaskRequest} req
-     * @param {function(string, RobAndLockIntegrationTaskResponse):void} cb
+     * This API is used to register an event.
+     * @param {RegisterDsEventRequest} req
+     * @param {function(string, RegisterDsEventResponse):void} cb
      * @public
      */
-    RobAndLockIntegrationTask(req, cb) {
-        let resp = new RobAndLockIntegrationTaskResponse();
-        this.request("RobAndLockIntegrationTask", req, resp, cb);
+    RegisterDsEvent(req, cb) {
+        let resp = new RegisterDsEventResponse();
+        this.request("RegisterDsEvent", req, resp, cb);
     }
 
     /**
@@ -2563,7 +2639,7 @@ Modify Task Script
     }
 
     /**
-     * Submit Workflow
+     * Submit a workflow. This API is deprecated. Use the BatchCreateTaskVersionAsync API.
      * @param {SubmitWorkflowRequest} req
      * @param {function(string, SubmitWorkflowResponse):void} cb
      * @public
@@ -2695,8 +2771,8 @@ Modify Task Script
     }
 
     /**
-     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Trigger events
+     * <p style="color:red;">[Note: This version is only available to some allowlisted customers in the Guangzhou region]</p>.
+This API is used to trigger event. This API is deprecated. Use API TriggerDsEvent.
      * @param {TriggerEventRequest} req
      * @param {function(string, TriggerEventResponse):void} cb
      * @public
@@ -2792,6 +2868,17 @@ Trigger events
     DescribeIntegrationVersionNodesInfo(req, cb) {
         let resp = new DescribeIntegrationVersionNodesInfoResponse();
         this.request("DescribeIntegrationVersionNodesInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch update the task owner under a workflow.
+     * @param {RenewWorkflowOwnerDsRequest} req
+     * @param {function(string, RenewWorkflowOwnerDsResponse):void} cb
+     * @public
+     */
+    RenewWorkflowOwnerDs(req, cb) {
+        let resp = new RenewWorkflowOwnerDsResponse();
+        this.request("RenewWorkflowOwnerDs", req, resp, cb);
     }
 
     /**
@@ -2949,8 +3036,8 @@ Trigger events
     }
 
     /**
-     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Add Parent Task Dependency
+     * <p style="color:red;">[Note: This version is only available to some whitelist customers in the Guangzhou zone]</p>.
+Add parent task dependency. This API is deprecated. Use API ModifyTaskLinksDs.
      * @param {ModifyTaskLinksRequest} req
      * @param {function(string, ModifyTaskLinksResponse):void} cb
      * @public
@@ -2961,8 +3048,8 @@ Add Parent Task Dependency
     }
 
     /**
-     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Registration Event
+     * <p style="color:red;">[Note: This version is only available for partial allowlisted customers in the Guangzhou region]</p>.
+This API is used to register events. This API is deprecated. Use API RegisterDsEvent.
      * @param {RegisterEventRequest} req
      * @param {function(string, RegisterEventResponse):void} cb
      * @public
@@ -3040,8 +3127,8 @@ Update Task
     }
 
     /**
-     * <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
-Submit a Task
+     * <p style="color:red;">[Note: This version is only available for partial whitelist customers in the Guangzhou zone]</p>.
+This API is used to submit tasks. This API is deprecated. Use the CreateTaskVersionDs API.
      * @param {SubmitTaskRequest} req
      * @param {function(string, SubmitTaskResponse):void} cb
      * @public
@@ -3118,7 +3205,7 @@ Submit a Task
     }
 
     /**
-     * Modifying Workflow Person in Charge
+     * This API is used to modify the workflow owner. Deprecated. Use the RenewWorkflowOwnerDs API.
      * @param {UpdateWorkflowOwnerRequest} req
      * @param {function(string, UpdateWorkflowOwnerResponse):void} cb
      * @public
@@ -3137,6 +3224,17 @@ Submit a Task
     ModifyIntegrationNode(req, cb) {
         let resp = new ModifyIntegrationNodeResponse();
         this.request("ModifyIntegrationNode", req, resp, cb);
+    }
+
+    /**
+     * Preemptive locking of integration tasks
+     * @param {RobAndLockIntegrationTaskRequest} req
+     * @param {function(string, RobAndLockIntegrationTaskResponse):void} cb
+     * @public
+     */
+    RobAndLockIntegrationTask(req, cb) {
+        let resp = new RobAndLockIntegrationTaskResponse();
+        this.request("RobAndLockIntegrationTask", req, resp, cb);
     }
 
     /**

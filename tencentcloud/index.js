@@ -95,6 +95,7 @@ module.exports = {
     sts: require("./sts"),
     tag: require("./tag"),
     tat: require("./tat"),
+    tbaas: require("./tbaas"),
     tcaplusdb: require("./tcaplusdb"),
     tchd: require("./tchd"),
     tcmpp: require("./tcmpp"),

@@ -171,8 +171,7 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
         this.KeyInfos = null;
 
         /**
-         * Total white-box keys.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of white-box keys.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -514,8 +513,7 @@ class WhiteboxKeyInfo extends  AbstractModel {
         this.ResourceId = null;
 
         /**
-         * Whether there is a device fingerprint bound to the current key
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies whether there is a device fingerprint bound to the current key.
          * @type {boolean || null}
          */
         this.DeviceFingerprintBind = null;
@@ -925,8 +923,7 @@ class ListKeyDetailResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of returned attribute information.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the returned attribute information list.
          * @type {Array.<KeyMetadata> || null}
          */
         this.KeyMetadatas = null;
@@ -1493,13 +1490,13 @@ class CreateWhiteBoxKeyResponse extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * Tag operation return code. 0: success; 1: internal error; 2: business processing error
+         * Return code of Tag operation. `0`: success; `1`: internal error; `2`: business processing error.
          * @type {number || null}
          */
         this.TagCode = null;
 
         /**
-         * Tag operation return message
+         * Response information of Tag operation.
          * @type {string || null}
          */
         this.TagMsg = null;
@@ -1692,8 +1689,7 @@ class DescribeKeysResponse extends  AbstractModel {
         super();
 
         /**
-         * List of returned attribute information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The attribute information list returned.
          * @type {Array.<KeyMetadata> || null}
          */
         this.KeyMetadatas = null;
@@ -1813,7 +1809,7 @@ class ListKeysResponse extends  AbstractModel {
         super();
 
         /**
-         * CMK list array
+         * CMK list array.
          * @type {Array.<Key> || null}
          */
         this.Keys = null;
@@ -2123,8 +2119,7 @@ class GetRegionsResponse extends  AbstractModel {
         super();
 
         /**
-         * The list of supported regions
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Available region list.
          * @type {Array.<string> || null}
          */
         this.Regions = null;
@@ -2146,6 +2141,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Regions = 'Regions' in params ? params.Regions : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Exclusive edition cluster.
+ * @class
+ */
+class ExclusiveHSM extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dedicated cluster Id.
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
+        /**
+         * Dedicated cluster name.
+         * @type {string || null}
+         */
+        this.HsmClusterName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
+        this.HsmClusterName = 'HsmClusterName' in params ? params.HsmClusterName : null;
 
     }
 }
@@ -2410,7 +2440,7 @@ class CreateKeyResponse extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * CMK description
+         * Specifies the description of the CMK.
          * @type {string || null}
          */
         this.Description = null;
@@ -2428,20 +2458,19 @@ class CreateKeyResponse extends  AbstractModel {
         this.KeyUsage = null;
 
         /**
-         * Tag operation return code. 0: success; 1: internal error; 2: business processing error
+         * Return code of Tag operation. `0`: success; `1`: cls internal error; `2`: business processing error.
          * @type {number || null}
          */
         this.TagCode = null;
 
         /**
-         * Tag operation return information
+         * Response information of Tag operation.
          * @type {string || null}
          */
         this.TagMsg = null;
 
         /**
-         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * HSM cluster ID (valid only for exclusive or managed version KMS service instances).
          * @type {string || null}
          */
         this.HsmClusterId = null;
@@ -2672,7 +2701,7 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.ServiceEnabled = null;
 
         /**
-         * Service unavailability type. 0: not purchased; 1: normal; 2: suspended due to arrears; 3: resource released
+         * Service unavailability type: 0-not purchased, 1-normal, 2-service suspended due to overdue payments, 3-resource release.
          * @type {number || null}
          */
         this.InvalidType = null;
@@ -2684,46 +2713,58 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.UserLevel = null;
 
         /**
-         * Expiration time of the KMS Ultimate edition. It’s represented in a Unix Epoch timestamp.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the expiry time (Epoch Unix Timestamp) of the flagship edition.
          * @type {number || null}
          */
         this.ProExpireTime = null;
 
         /**
-         * Whether to automatically renew Ultimate Edition. 0: no, 1: yes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies whether the flagship edition is automatically renewed: 0 - no automatic renewal, 1 - automatic renewal.
          * @type {number || null}
          */
         this.ProRenewFlag = null;
 
         /**
-         * Unique ID of the Ultimate Edition purchase record. If the Ultimate Edition is not activated, the returned value will be null.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unique identifier for the purchase record of the flagship edition. if the flagship edition is enabled, the return value is null.
          * @type {string || null}
          */
         this.ProResourceId = null;
 
         /**
-         * Whether to activate Managed KMS
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable the KMS-managed version.
          * @type {boolean || null}
          */
         this.ExclusiveVSMEnabled = null;
 
         /**
-         * Whether to activate Exclusive KMS
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable the exclusive edition of KMS.
          * @type {boolean || null}
          */
         this.ExclusiveHSMEnabled = null;
 
         /**
-         * KMS subscription information.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the KMS subscription information.
          * @type {string || null}
          */
         this.SubscriptionInfo = null;
+
+        /**
+         * Returns the amount of KMS user secret keys used.
+         * @type {number || null}
+         */
+        this.CmkUserCount = null;
+
+        /**
+         * Returns the specification quantity of KMS user secret keys.
+         * @type {number || null}
+         */
+        this.CmkLimit = null;
+
+        /**
+         * Return dedicated cluster group.
+         * @type {Array.<ExclusiveHSM> || null}
+         */
+        this.ExclusiveHSMList = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2749,6 +2790,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExclusiveVSMEnabled = 'ExclusiveVSMEnabled' in params ? params.ExclusiveVSMEnabled : null;
         this.ExclusiveHSMEnabled = 'ExclusiveHSMEnabled' in params ? params.ExclusiveHSMEnabled : null;
         this.SubscriptionInfo = 'SubscriptionInfo' in params ? params.SubscriptionInfo : null;
+        this.CmkUserCount = 'CmkUserCount' in params ? params.CmkUserCount : null;
+        this.CmkLimit = 'CmkLimit' in params ? params.CmkLimit : null;
+
+        if (params.ExclusiveHSMList) {
+            this.ExclusiveHSMList = new Array();
+            for (let z in params.ExclusiveHSMList) {
+                let obj = new ExclusiveHSM();
+                obj.deserialize(params.ExclusiveHSMList[z]);
+                this.ExclusiveHSMList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2769,8 +2821,7 @@ class DeviceFingerprint extends  AbstractModel {
         this.Identity = null;
 
         /**
-         * Description, such as IP and device name. Length limit: 1,024 bytes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Description information, such as IP and device name, with a maximum of 1024 bytes.
          * @type {string || null}
          */
         this.Description = null;
@@ -2882,7 +2933,7 @@ class AsymmetricSm2DecryptRequest extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * Base64-encoded ciphertext encrypted with `PublicKey`, whose length cannot exceed 256 bytes.
+         * Specifies that the ciphertext encrypted with PublicKey is Base64 encoded. the original ciphertext format needs to be C1C3C2_ASN1. the length of the original ciphertext cannot exceed 256 bytes.
          * @type {string || null}
          */
         this.Ciphertext = null;
@@ -3082,21 +3133,19 @@ class KeyMetadata extends  AbstractModel {
         this.NextRotateTime = null;
 
         /**
-         * Scheduled deletion time
+         * The time when scheduled deletion occurs.
          * @type {number || null}
          */
         this.DeletionDate = null;
 
         /**
-         * CMK key material type. TENCENT_KMS: created by KMS; EXTERNAL: imported by user.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CMK key material type. the type created by KMS is TENCENT_KMS. the user-imported type is EXTERNAL.
          * @type {string || null}
          */
         this.Origin = null;
 
         /**
-         * It's valid when `Origin` is `EXTERNAL`, indicating the expiration date of key material. 0 means valid forever.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Valid when Origin is EXTERNAL. indicates the validity date of the key material. 0 means no expiration.
          * @type {number || null}
          */
         this.ValidTo = null;
@@ -3108,11 +3157,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ResourceId = null;
 
         /**
-         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * HSM cluster ID (valid only for exclusive or managed version KMS service instances).
          * @type {string || null}
          */
         this.HsmClusterId = null;
+
+        /**
+         * Key rotation period (days).
+         * @type {number || null}
+         */
+        this.RotateDays = null;
+
+        /**
+         * Last disorderly rotation time (Unix timestamp).
+         * @type {number || null}
+         */
+        this.LastRotateTime = null;
 
     }
 
@@ -3139,6 +3199,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
+        this.RotateDays = 'RotateDays' in params ? params.RotateDays : null;
+        this.LastRotateTime = 'LastRotateTime' in params ? params.LastRotateTime : null;
 
     }
 }
@@ -3508,7 +3570,7 @@ class UnbindCloudResourceRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service’s features.
+         * Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service's features.
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -4062,7 +4124,7 @@ class BindCloudResourceRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service’s features.
+         * Resource/instance ID, which is stored as a string and defined by the caller based on the Tencent Cloud service's features.
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -4416,8 +4478,7 @@ class DescribeKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Key attribute information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the attribute information of the key.
          * @type {KeyMetadata || null}
          */
         this.KeyMetadata = null;
@@ -4559,6 +4620,7 @@ module.exports = {
     DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
     AlgorithmInfo: AlgorithmInfo,
     GetRegionsResponse: GetRegionsResponse,
+    ExclusiveHSM: ExclusiveHSM,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     CreateWhiteBoxKeyRequest: CreateWhiteBoxKeyRequest,
     OverwriteWhiteBoxDeviceFingerprintsResponse: OverwriteWhiteBoxDeviceFingerprintsResponse,

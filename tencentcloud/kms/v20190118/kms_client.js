@@ -70,6 +70,7 @@ const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
 const AlgorithmInfo = models.AlgorithmInfo;
 const GetRegionsResponse = models.GetRegionsResponse;
+const ExclusiveHSM = models.ExclusiveHSM;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
 const OverwriteWhiteBoxDeviceFingerprintsResponse = models.OverwriteWhiteBoxDeviceFingerprintsResponse;

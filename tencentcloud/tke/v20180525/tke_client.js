@@ -81,6 +81,7 @@ const DescribeTKEEdgeClusterStatusRequest = models.DescribeTKEEdgeClusterStatusR
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
 const DescribeEdgeClusterInstancesResponse = models.DescribeEdgeClusterInstancesResponse;
 const UpdateEdgeClusterVersionRequest = models.UpdateEdgeClusterVersionRequest;
+const GetTkeAppChartListResponse = models.GetTkeAppChartListResponse;
 const DescribeExternalNodeSupportConfigRequest = models.DescribeExternalNodeSupportConfigRequest;
 const DeleteTKEEdgeClusterResponse = models.DeleteTKEEdgeClusterResponse;
 const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
@@ -243,6 +244,7 @@ const DescribeClusterLevelAttributeResponse = models.DescribeClusterLevelAttribu
 const PrometheusGrafanaInfo = models.PrometheusGrafanaInfo;
 const Switch = models.Switch;
 const ImageInstance = models.ImageInstance;
+const GetTkeAppChartListRequest = models.GetTkeAppChartListRequest;
 const ResourceUsageDetail = models.ResourceUsageDetail;
 const DescribeClusterVirtualNodePoolsResponse = models.DescribeClusterVirtualNodePoolsResponse;
 const CheckEdgeClusterCIDRResponse = models.CheckEdgeClusterCIDRResponse;
@@ -343,6 +345,7 @@ const DeletePrometheusAlertRuleRequest = models.DeletePrometheusAlertRuleRequest
 const ClusterProperty = models.ClusterProperty;
 const EdgeClusterExtraArgs = models.EdgeClusterExtraArgs;
 const DescribeEnableVpcCniProgressResponse = models.DescribeEnableVpcCniProgressResponse;
+const AppChart = models.AppChart;
 const DeleteEdgeCVMInstancesRequest = models.DeleteEdgeCVMInstancesRequest;
 const ModifyClusterNodePoolRequest = models.ModifyClusterNodePoolRequest;
 const GetClusterLevelPriceRequest = models.GetClusterLevelPriceRequest;
@@ -1745,6 +1748,17 @@ class TkeClient extends AbstractClient {
     DeleteClusterInstances(req, cb) {
         let resp = new DeleteClusterInstancesResponse();
         this.request("DeleteClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the App List supported by TKE.
+     * @param {GetTkeAppChartListRequest} req
+     * @param {function(string, GetTkeAppChartListResponse):void} cb
+     * @public
+     */
+    GetTkeAppChartList(req, cb) {
+        let resp = new GetTkeAppChartListResponse();
+        this.request("GetTkeAppChartList", req, resp, cb);
     }
 
     /**

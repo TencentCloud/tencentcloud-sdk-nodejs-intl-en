@@ -44,6 +44,7 @@ const ModifyNetworkAclQuintupleEntriesRequest = models.ModifyNetworkAclQuintuple
 const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DescribeIpGeolocationInfosRequest = models.DescribeIpGeolocationInfosRequest;
+const AddTemplateMemberResponse = models.AddTemplateMemberResponse;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const CreateSnapshotPoliciesResponse = models.CreateSnapshotPoliciesResponse;
 const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
@@ -66,10 +67,12 @@ const AssistantCidr = models.AssistantCidr;
 const ModifyNetworkAclEntriesRequest = models.ModifyNetworkAclEntriesRequest;
 const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
 const AddressTemplate = models.AddressTemplate;
+const ModifyTemplateMemberResponse = models.ModifyTemplateMemberResponse;
 const VpnGatewayQuota = models.VpnGatewayQuota;
 const DescribeBandwidthPackageBillUsageRequest = models.DescribeBandwidthPackageBillUsageRequest;
 const UnassignIpv6AddressesResponse = models.UnassignIpv6AddressesResponse;
 const DescribeFlowLogsRequest = models.DescribeFlowLogsRequest;
+const DeleteTemplateMemberRequest = models.DeleteTemplateMemberRequest;
 const CloneSecurityGroupRequest = models.CloneSecurityGroupRequest;
 const AssociateNatGatewayAddressRequest = models.AssociateNatGatewayAddressRequest;
 const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
@@ -193,6 +196,7 @@ const InstanceStatistic = models.InstanceStatistic;
 const InternetPriceDetail = models.InternetPriceDetail;
 const CreateVpnConnectionRequest = models.CreateVpnConnectionRequest;
 const CcnRoute = models.CcnRoute;
+const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
 const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const VpnConnection = models.VpnConnection;
@@ -264,7 +268,7 @@ const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResp
 const NetDetect = models.NetDetect;
 const VpnGatewayRouteModify = models.VpnGatewayRouteModify;
 const DisableSnapshotPoliciesRequest = models.DisableSnapshotPoliciesRequest;
-const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
+const MemberInfo = models.MemberInfo;
 const ResumeSnapshotInstanceRequest = models.ResumeSnapshotInstanceRequest;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const ModifyVpcEndPointServiceAttributeResponse = models.ModifyVpcEndPointServiceAttributeResponse;
@@ -304,6 +308,7 @@ const ModifyGatewayFlowQosRequest = models.ModifyGatewayFlowQosRequest;
 const DescribeNetworkInterfaceLimitResponse = models.DescribeNetworkInterfaceLimitResponse;
 const AssignIpv6CidrBlockResponse = models.AssignIpv6CidrBlockResponse;
 const CreateCcnRequest = models.CreateCcnRequest;
+const DeleteTemplateMemberResponse = models.DeleteTemplateMemberResponse;
 const DescribeIpGeolocationDatabaseUrlRequest = models.DescribeIpGeolocationDatabaseUrlRequest;
 const DescribeVpcEndPointResponse = models.DescribeVpcEndPointResponse;
 const DescribeNetworkAclQuintupleEntriesRequest = models.DescribeNetworkAclQuintupleEntriesRequest;
@@ -405,6 +410,7 @@ const AssignIpv6SubnetCidrBlockResponse = models.AssignIpv6SubnetCidrBlockRespon
 const CreateVpcEndPointResponse = models.CreateVpcEndPointResponse;
 const DeleteAssistantCidrResponse = models.DeleteAssistantCidrResponse;
 const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwidthLimitsResponse;
+const ModifyTemplateMemberRequest = models.ModifyTemplateMemberRequest;
 const EnableSnapshotPoliciesRequest = models.EnableSnapshotPoliciesRequest;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const GatewayQos = models.GatewayQos;
@@ -676,6 +682,7 @@ const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
 const DeleteVpcResponse = models.DeleteVpcResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const AddTemplateMemberRequest = models.AddTemplateMemberRequest;
 const DescribeVpcEndPointServiceWhiteListResponse = models.DescribeVpcEndPointServiceWhiteListResponse;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const DescribeUsedIpAddressResponse = models.DescribeUsedIpAddressResponse;
@@ -1641,6 +1648,17 @@ This API is used to check the jumbo frame status before and after instance migra
     }
 
     /**
+     * This API is used to delete a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+     * @param {DeleteTemplateMemberRequest} req
+     * @param {function(string, DeleteTemplateMemberResponse):void} cb
+     * @public
+     */
+    DeleteTemplateMember(req, cb) {
+        let resp = new DeleteTemplateMemberResponse();
+        this.request("DeleteTemplateMember", req, resp, cb);
+    }
+
+    /**
      * This API (DeleteServiceTemplateGroup) is used to delete a protocol port template group.
      * @param {DeleteServiceTemplateGroupRequest} req
      * @param {function(string, DeleteServiceTemplateGroupResponse):void} cb
@@ -1660,6 +1678,17 @@ This API is used to check the jumbo frame status before and after instance migra
     DescribeGatewayFlowQos(req, cb) {
         let resp = new DescribeGatewayFlowQosResponse();
         this.request("DescribeGatewayFlowQos", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+     * @param {ModifyTemplateMemberRequest} req
+     * @param {function(string, ModifyTemplateMemberResponse):void} cb
+     * @public
+     */
+    ModifyTemplateMember(req, cb) {
+        let resp = new ModifyTemplateMemberResponse();
+        this.request("ModifyTemplateMember", req, resp, cb);
     }
 
     /**
@@ -2026,6 +2055,17 @@ This API is completed asynchronously. If you need to query the async job executi
     DeleteDirectConnectGateway(req, cb) {
         let resp = new DeleteDirectConnectGatewayResponse();
         this.request("DeleteDirectConnectGateway", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instances associated with a snapshot policy.
+     * @param {DescribeSnapshotAttachedInstancesRequest} req
+     * @param {function(string, DescribeSnapshotAttachedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotAttachedInstances(req, cb) {
+        let resp = new DescribeSnapshotAttachedInstancesResponse();
+        this.request("DescribeSnapshotAttachedInstances", req, resp, cb);
     }
 
     /**
@@ -3118,14 +3158,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to query instances associated with a snapshot policy.
-     * @param {DescribeSnapshotAttachedInstancesRequest} req
-     * @param {function(string, DescribeSnapshotAttachedInstancesResponse):void} cb
+     * This API is used to add a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+     * @param {AddTemplateMemberRequest} req
+     * @param {function(string, AddTemplateMemberResponse):void} cb
      * @public
      */
-    DescribeSnapshotAttachedInstances(req, cb) {
-        let resp = new DescribeSnapshotAttachedInstancesResponse();
-        this.request("DescribeSnapshotAttachedInstances", req, resp, cb);
+    AddTemplateMember(req, cb) {
+        let resp = new AddTemplateMemberResponse();
+        this.request("AddTemplateMember", req, resp, cb);
     }
 
     /**

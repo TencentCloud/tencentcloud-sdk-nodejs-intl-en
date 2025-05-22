@@ -464,7 +464,7 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.VpcId = null;
 
         /**
-         * A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet. This parameter is required for creating a CLB instance.
+         * A subnet ID should be specified when you purchase a private network CLB instance under a VPC. The VIP of the private network CLB instance is in this subnet. This parameter is required when you create a private network CLB instance but not supported when you create a public network IPv4 CLB instance.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -488,19 +488,20 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.Number = null;
 
         /**
-         * ID of the primary availability zone configured for cross-availability zone disaster recovery, such as 100001 or ap-guangzhou-1. It applies only to public network CLB.Note: The primary availability zone is the one that carries traffic. The replica availability zone does not carry traffic by default and is only used when the primary availability zone is unavailable. Currently, primary and replica availability zones are supported only for the IPv4 CLB instances in the regions of Guangzhou, Shanghai, Nanjing, Beijing, Chengdu, Shenzhen Finance Zone, Hong Kong (China), Seoul, Frankfurt, and Singapore. You can query the list of primary availability zones in a region through the [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1) API.
+         * Applicable only to public network IPv4 CLB instances. This parameter specifies the primary AZ ID for cross-AZ disaster recovery. For example, 100001 or ap-guangzhou-1.
+Note: The primary AZ sustains traffic. The secondary AZ does not sustain traffic by default and is used only when the primary AZ is unavailable. Currently, primary and secondary AZs are supported only for IPv4 CLB instances in Guangzhou, Shanghai, Nanjing, Beijing, Chengdu, Shenzhen Finance, Hong Kong (China), Seoul, Frankfurt, and Singapore regions. You can call the [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1) API to query the list of primary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {string || null}
          */
         this.MasterZoneId = null;
 
         /**
-         * Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+         * Applicable only to public network IPv4 CLB instances. This parameter specifies the AZ ID for creating a CLB instance. For example, ap-guangzhou-1.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Maximum outbound bandwidth under the network billing mode. It applies only to LCU-supported instances of the private network type and all instances of the public network type.
+         * Network billing mode by the maximum outbound bandwidth. It applies only to private network LCU-supported instances and all public network instances. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
@@ -573,8 +574,8 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
         this.ClusterTag = null;
 
         /**
-         * Specifies the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It is applicable only to public network CLB.
-Note: The traffic only goes to the secondary AZ when the primary AZ is unavailable. You can query the list of primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+         * Applicable only to public network IPv4 CLB instances. This parameter specifies the secondary AZ ID for cross-AZ disaster recovery. For example, 100001 or ap-guangzhou-1.
+Note: The secondary AZ sustains traffic when the primary AZ encounters faults. You can call the [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1) API to query the list of primary/secondary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {string || null}
          */
         this.SlaveZoneId = null;
@@ -604,10 +605,22 @@ Note: The traffic only goes to the secondary AZ when the primary AZ is unavailab
         this.Egress = null;
 
         /**
-         * Prepaid billing attributes of a CLB instance
+         * Prepayment-related attributes of a CLB instance. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {LBChargePrepaid || null}
          */
         this.LBChargePrepaid = null;
+
+        /**
+         * Billing type of a CLB instance. Valid values: POSTPAID_BY_HOUR and PREPAID. Default value: POSTPAID_BY_HOUR. The feature of purchasing monthly subscription instances via an API is under grayscale release. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * @type {string || null}
+         */
+        this.LBChargeType = null;
+
+        /**
+         * Topic ID of logs of traffic access over layer-7 protocols.
+         * @type {string || null}
+         */
+        this.AccessLogTopicId = null;
 
     }
 
@@ -677,6 +690,8 @@ Note: The traffic only goes to the secondary AZ when the primary AZ is unavailab
             obj.deserialize(params.LBChargePrepaid)
             this.LBChargePrepaid = obj;
         }
+        this.LBChargeType = 'LBChargeType' in params ? params.LBChargeType : null;
+        this.AccessLogTopicId = 'AccessLogTopicId' in params ? params.AccessLogTopicId : null;
 
     }
 }
@@ -6276,15 +6291,13 @@ class LBChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * Renewal type. AUTO_RENEW: automatic renewal; MANUAL_RENEW: manual renewal
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reserved field.
          * @type {string || null}
          */
         this.RenewFlag = null;
 
         /**
-         * Cycle, indicating the number of months (reserved field)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reserved field.
          * @type {number || null}
          */
         this.Period = null;
@@ -7827,8 +7840,7 @@ class ClusterItem extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Cluster name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster name.
          * @type {string || null}
          */
         this.ClusterName = null;
@@ -11463,14 +11475,16 @@ class InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;
-BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
+         * TRAFFIC_POSTPAID_BY_HOUR: Postpaid by traffic on an hourly basis. BANDWIDTH_POSTPAID_BY_HOUR: Postpaid by bandwidth on an hourly basis. International site users do not support this billing mode. BANDWIDTH_PACKAGE: Charged by bandwidth package. BANDWIDTH_PREPAID: Bandwidth prepaid.
          * @type {string || null}
          */
         this.InternetChargeType = null;
 
         /**
-         * Maximum outbound bandwidth, in Mbps. This applies only to shared, LCU-supported, and exclusive CLB instances of the public network type, as well as the LCU-supported CLB instances of the private network type.- For shared and exclusive CLB instances of the public network type, the maximum outbound bandwidth ranges from 1 Mbps to 2048 Mbps.- For LCU-supported CLB instances of the public network type and the private network type, the maximum outbound bandwidth ranges from 1 Mbps to 61440 Mbps.(If this parameter is not specified when CreateLoadBalancer is called to create a CLB instance, it defaults to 10 Mbps. This upper limit can be adjusted.)Note: This field may return null, indicating that no valid values can be obtained.
+         * Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+- The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1 Mbps to 2,048 Mbps.
+- The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1 Mbps to 61,440 Mbps.
+(If this parameter is not specified when CreateLoadBalancer is called to create a CLB instance, the default value of 10 Mbps is used. This value can be modified.)
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;

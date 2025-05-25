@@ -931,6 +931,12 @@ Default value: 0.
          */
         this.EnhanceConfig = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StdExtInfo = null;
+
     }
 
     /**
@@ -969,6 +975,7 @@ Default value: 0.
             obj.deserialize(params.EnhanceConfig)
             this.EnhanceConfig = obj;
         }
+        this.StdExtInfo = 'StdExtInfo' in params ? params.StdExtInfo : null;
 
     }
 }
@@ -5750,6 +5757,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.EnhanceConfig = null;
 
+        /**
+         * Image erasing configuration.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ImageEraseConfig || null}
+         */
+        this.EraseConfig = null;
+
     }
 
     /**
@@ -5770,6 +5784,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ImageEnhanceConfig();
             obj.deserialize(params.EnhanceConfig)
             this.EnhanceConfig = obj;
+        }
+
+        if (params.EraseConfig) {
+            let obj = new ImageEraseConfig();
+            obj.deserialize(params.EraseConfig)
+            this.EraseConfig = obj;
         }
 
     }
@@ -6309,7 +6329,7 @@ class DescribeSmartSubtitleTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Condition for filtering smart subtitle templates by unique identifier. The array can contain up to 10 unique identifiers.
+         * Unique identifiers of smart subtitle templates for filtering. The array can contain up to 100 unique identifiers.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -7641,6 +7661,12 @@ class LiveRecordTemplate extends  AbstractModel {
         this.HLSConfigure = null;
 
         /**
+         * MP4 configuration parameter.
+         * @type {MP4ConfigureInfo || null}
+         */
+        this.MP4Configure = null;
+
+        /**
          * Recording template name.
          * @type {string || null}
          */
@@ -7688,6 +7714,12 @@ class LiveRecordTemplate extends  AbstractModel {
             let obj = new HLSConfigureInfo();
             obj.deserialize(params.HLSConfigure)
             this.HLSConfigure = obj;
+        }
+
+        if (params.MP4Configure) {
+            let obj = new MP4ConfigureInfo();
+            obj.deserialize(params.MP4Configure)
+            this.MP4Configure = obj;
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
@@ -11674,6 +11706,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * MP4 configuration parameter.
+ * @class
+ */
+class MP4ConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recording duration, in seconds. The interval can range from 10 minutes to 720 minutes. It is 60 minutes (3,600 seconds) by default.
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
  * DeleteQualityControlTemplate request structure.
  * @class
  */
@@ -13155,6 +13215,62 @@ If one or both parameters are empty or set to `0`:
                 this.AudioOperations.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * OCR-based full live stream recognition
+ * @class
+ */
+class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Speech text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Start PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * End PTS time of recognized segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Confidence of recognized segment. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -16214,6 +16330,40 @@ Default value: 10%.
 }
 
 /**
+ * Image erasing parameter.
+ * @class
+ */
+class ImageEraseConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Icon erasing configuration.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ImageEraseLogoConfig || null}
+         */
+        this.ImageEraseLogo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImageEraseLogo) {
+            let obj = new ImageEraseLogoConfig();
+            obj.deserialize(params.ImageEraseLogo)
+            this.ImageEraseLogo = obj;
+        }
+
+    }
+}
+
+/**
  * AI-based intelligent analysis template details
  * @class
  */
@@ -16819,7 +16969,11 @@ class ModifyAsrHotwordsRequest extends  AbstractModel {
         super();
 
         /**
-         * Hotword lexicon ID.
+         * Hotword lexicon ID. 
+ 
+Either Name or Content should be specified if the hotword lexicon is a text-based hotword lexicon.
+One of Name, FileContent, and FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
+
          * @type {string || null}
          */
         this.HotwordsId = null;
@@ -18478,10 +18632,10 @@ class AiAnalysisTaskInput extends  AbstractModel {
         /**
          * Additional parameter. Its value is a serialized JSON string.
 Note: This parameter is used to meet customization requirements. References:
-Smart erase: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
-Video splitting: https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1
-Intelligent highlights: https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1
-Horizontal-to-vertical video transformation: https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1
+[Smart Erase Tutorial]: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
+[Video Splitting (Long Videos to Short Videos) Tutorial](https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1)
+[Intelligent Highlights Tutorial](https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1)
+[Horizontal-to-Vertical Video Transformation Tutorial](https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1)
 Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
@@ -19978,7 +20132,7 @@ class ImageEncodeConfig extends  AbstractModel {
         super();
 
         /**
-         * Image format. Valid values: JPG, BMP, GIF, PNG, and WebP. The default is the original image format.
+         * Image format. Valid values: JPEG, PNG, BMP, and WebP. If it is not specified, the original image format is used. Animations are not supported.
 Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
@@ -22176,9 +22330,9 @@ Cannot be set to 0.
         this.Bitrate = null;
 
         /**
-         * The sampling rate of the audio stream. the supported sampling rate options vary for different encoding standards. for details, see audio sampling rate support scope document https://intl.cloud.tencent.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53.
+         * Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. For details, see [Audio/Video Transcoding Template](https://intl.cloud.tencent.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 Unit: Hz.
-Please ensure that the sampling rate of the source audio stream is within the value range of the above options. otherwise, transcoding failure may occur.
+Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
          * @type {number || null}
          */
         this.SampleRate = null;
@@ -23549,7 +23703,7 @@ class ComposeMediaTrack extends  AbstractModel {
         super();
 
         /**
-         * The track type. Valid values:<ul><li>`Video`: Video track. A video track can consist of the following elements:</li><ul><li>Video</li><li>Image</li><li>Transition</li><li>Empty</li></ul><li>`Audio`: Audio track. An audio track can consist of the following elements:</li><ul><li>Audio</li><li>Transition</li><li>Empty</li></ul><li>`Title`: Text track. A text track can consist of the following elements: </li><ul><li>Subtitle</li></ul>
+         * Track type. Valid values: <ul><li>Video: video track. It can consist of the following elements:</li><ul><li>Video elements</li><li>Image elements</li><li>Transition elements</li><li>Empty elements</li></ul><li>Audio: audio track. It can consist of the following elements:</li><ul><li>Audio elements</li><li>Transition elements</li><li>Empty elements</li></ul><li>Title: text track. It can consist of the following elements:</li><ul><li>Subtitle elements</li></ul></ul>
          * @type {string || null}
          */
         this.Type = null;
@@ -23628,42 +23782,31 @@ class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * OCR-based full live stream recognition
+ * Icon erasing configuration.
  * @class
  */
-class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
+class ImageEraseLogoConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Speech text.
+         * Capability configuration enabling status. Valid values:
+<li>ON: enabled</li>
+<li>OFF: disabled</li>
+Default value: ON.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.Text = null;
+        this.Switch = null;
 
         /**
-         * Start PTS time of recognized segment in seconds.
-         * @type {number || null}
-         */
-        this.StartPtsTime = null;
+         * Multiple box selection areas to be erased. Note: The value array of this parameter can contain up to 2 values.
+Note: This field may return null, indicating that no valid value can be obtained.
 
-        /**
-         * End PTS time of recognized segment in seconds.
-         * @type {number || null}
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<ImageAreaBoxInfo> || null}
          */
-        this.EndPtsTime = null;
-
-        /**
-         * Confidence of recognized segment. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Zone coordinates of recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
-         * @type {Array.<number> || null}
-         */
-        this.AreaCoordSet = null;
+        this.ImageAreaBoxes = null;
 
     }
 
@@ -23674,11 +23817,16 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
-        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
-        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.ImageAreaBoxes) {
+            this.ImageAreaBoxes = new Array();
+            for (let z in params.ImageAreaBoxes) {
+                let obj = new ImageAreaBoxInfo();
+                obj.deserialize(params.ImageAreaBoxes[z]);
+                this.ImageAreaBoxes.push(obj);
+            }
+        }
 
     }
 }
@@ -23894,10 +24042,16 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * HLS configuration parameters.
+         * HLS configuration parameter. Either this parameter or MP4Configure should be specified.
          * @type {HLSConfigureInfo || null}
          */
         this.HLSConfigure = null;
+
+        /**
+         * MP4 configuration parameter. Either this parameter or HLSConfigure should be specified.
+         * @type {MP4ConfigureInfo || null}
+         */
+        this.MP4Configure = null;
 
         /**
          * Recording template name. Length limit: 64 characters.
@@ -23925,6 +24079,12 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
             let obj = new HLSConfigureInfo();
             obj.deserialize(params.HLSConfigure)
             this.HLSConfigure = obj;
+        }
+
+        if (params.MP4Configure) {
+            let obj = new MP4ConfigureInfo();
+            obj.deserialize(params.MP4Configure)
+            this.MP4Configure = obj;
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
@@ -25728,6 +25888,54 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Information on the box selection area in an image.
+ * @class
+ */
+class ImageAreaBoxInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the box selection area in the image. Valid values:
+<li>logo: icon</li>
+<li>text: text</li>
+Default value: logo.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Coordinates (pixel-level) of the box selection area in the image. Format: [x1, y1, x2, y2], which indicates the coordinates of the top left corner and the bottom right corner.
+For example, [101, 85, 111, 95].
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * 
+         * @type {Array.<number> || null}
+         */
+        this.BoundingBox = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.BoundingBox = 'BoundingBox' in params ? params.BoundingBox : null;
+
+    }
+}
+
+/**
  * Result of AI-based live stream audit
  * @class
  */
@@ -27331,6 +27539,12 @@ class WordResult extends  AbstractModel {
          */
         this.End = null;
 
+        /**
+         * Text after translation.
+         * @type {string || null}
+         */
+        this.Trans = null;
+
     }
 
     /**
@@ -27343,6 +27557,7 @@ class WordResult extends  AbstractModel {
         this.Word = 'Word' in params ? params.Word : null;
         this.Start = 'Start' in params ? params.Start : null;
         this.End = 'End' in params ? params.End : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
 
     }
 }
@@ -27558,11 +27773,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NoVideo = null;
 
         /**
-         * The no-reference video quality score. Value range: 0-100.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * No-reference quality score of the video (100 points in total).
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.QualityEvaluationScore = null;
+
+        /**
+         * No-reference quality score of the video (MOS).
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.QualityEvaluationMeanOpinionScore = null;
 
         /**
          * Exception items detected in content quality inspection.
@@ -27590,6 +27812,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NoAudio = 'NoAudio' in params ? params.NoAudio : null;
         this.NoVideo = 'NoVideo' in params ? params.NoVideo : null;
         this.QualityEvaluationScore = 'QualityEvaluationScore' in params ? params.QualityEvaluationScore : null;
+        this.QualityEvaluationMeanOpinionScore = 'QualityEvaluationMeanOpinionScore' in params ? params.QualityEvaluationMeanOpinionScore : null;
 
         if (params.QualityControlResultSet) {
             this.QualityControlResultSet = new Array();
@@ -30797,10 +31020,16 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * HLS configuration parameters.
+         * HLS configuration parameter. Either this parameter or MP4Configure should be specified.
          * @type {HLSConfigureInfo || null}
          */
         this.HLSConfigure = null;
+
+        /**
+         * MP4 configuration parameter. Either this parameter or HLSConfigure should be specified.
+         * @type {MP4ConfigureInfo || null}
+         */
+        this.MP4Configure = null;
 
         /**
          * Recording template name. Length limit: 64 characters.
@@ -30829,6 +31058,12 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
             let obj = new HLSConfigureInfo();
             obj.deserialize(params.HLSConfigure)
             this.HLSConfigure = obj;
+        }
+
+        if (params.MP4Configure) {
+            let obj = new MP4ConfigureInfo();
+            obj.deserialize(params.MP4Configure)
+            this.MP4Configure = obj;
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
@@ -33319,6 +33554,7 @@ module.exports = {
     TaskOutputStorage: TaskOutputStorage,
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
+    MP4ConfigureInfo: MP4ConfigureInfo,
     DeleteQualityControlTemplateRequest: DeleteQualityControlTemplateRequest,
     ColorEnhanceConfig: ColorEnhanceConfig,
     ComposeAudioItem: ComposeAudioItem,
@@ -33341,6 +33577,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     AiAnalysisTaskSegmentOutput: AiAnalysisTaskSegmentOutput,
     ComposeVideoItem: ComposeVideoItem,
+    LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     AiRecognitionTaskTransTextResultInput: AiRecognitionTaskTransTextResultInput,
     DescribeSchedulesResponse: DescribeSchedulesResponse,
@@ -33389,6 +33626,7 @@ module.exports = {
     LiveStreamTagRecognitionResult: LiveStreamTagRecognitionResult,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     MosaicInput: MosaicInput,
+    ImageEraseConfig: ImageEraseConfig,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
     AiRecognitionTaskObjectResultItem: AiRecognitionTaskObjectResultItem,
     HeadTailParameter: HeadTailParameter,
@@ -33515,7 +33753,7 @@ module.exports = {
     AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
     ComposeMediaTrack: ComposeMediaTrack,
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
-    LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
+    ImageEraseLogoConfig: ImageEraseLogoConfig,
     ScheduleReviewTaskResult: ScheduleReviewTaskResult,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     LiveStreamRecordResultInfo: LiveStreamRecordResultInfo,
@@ -33550,6 +33788,7 @@ module.exports = {
     SmartSubtitlesResult: SmartSubtitlesResult,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     AsrHotWordsConfigure: AsrHotWordsConfigure,
+    ImageAreaBoxInfo: ImageAreaBoxInfo,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,

@@ -33,13 +33,14 @@ const DescribeCostSummaryByResourceResponse = models.DescribeCostSummaryByResour
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const AdjustInfoDetail = models.AdjustInfoDetail;
 const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
+const BusinessSummaryInfo = models.BusinessSummaryInfo;
 const DescribeBillSummaryRequest = models.DescribeBillSummaryRequest;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const DistributionBillDetail = models.DistributionBillDetail;
 const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
 const DescribeBillAdjustInfoResponse = models.DescribeBillAdjustInfoResponse;
 const BillDistributionResourceSummary = models.BillDistributionResourceSummary;
-const BusinessSummaryInfo = models.BusinessSummaryInfo;
+const DescribeAllocationUnitDetailResponse = models.DescribeAllocationUnitDetailResponse;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
 const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
@@ -80,6 +81,7 @@ const AnalyseTimeDetail = models.AnalyseTimeDetail;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataItem;
 const AnalyseRegionDetail = models.AnalyseRegionDetail;
+const DescribeAllocationUnitDetailRequest = models.DescribeAllocationUnitDetailRequest;
 const DescribeBillSummaryForOrganizationRequest = models.DescribeBillSummaryForOrganizationRequest;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const DescribeBillDetailForOrganizationRequest = models.DescribeBillDetailForOrganizationRequest;
@@ -305,6 +307,17 @@ Note: The API request may fail due to network instability or other exceptions. I
     DescribeAccountBalance(req, cb) {
         let resp = new DescribeAccountBalanceResponse();
         this.request("DescribeAccountBalance", req, resp, cb);
+    }
+
+    /**
+     * Query the details of a cost allocation unit.
+     * @param {DescribeAllocationUnitDetailRequest} req
+     * @param {function(string, DescribeAllocationUnitDetailResponse):void} cb
+     * @public
+     */
+    DescribeAllocationUnitDetail(req, cb) {
+        let resp = new DescribeAllocationUnitDetailResponse();
+        this.request("DescribeAllocationUnitDetail", req, resp, cb);
     }
 
     /**

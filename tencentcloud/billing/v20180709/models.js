@@ -1027,6 +1027,84 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Detailed summary of products
+ * @class
+ */
+class BusinessSummaryInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product code
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * Original cost in USD. This parameter became valid when Bill 3.0 took effect in May 2021. Before that, `-` was returned for this parameter. If a customer has applied for a contract price different from the prices listed on the official website, `-` will also be returned for this parameter. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * Total amount after discount
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Cash credit: The amount paid from the user’s cash account
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Free credit: The amount paid with the user’s free credit
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Voucher payment: The voucher deduction amount
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
+
+    }
+}
+
+/**
  * DescribeBillSummary request structure.
  * @class
  */
@@ -1764,61 +1842,72 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Detailed summary of products
+ * DescribeAllocationUnitDetail response structure.
  * @class
  */
-class BusinessSummaryInfo extends  AbstractModel {
+class DescribeAllocationUnitDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Product code
-         * @type {string || null}
+         * ID of a cost allocation unit.
+         * @type {number || null}
          */
-        this.BusinessCode = null;
+        this.Id = null;
 
         /**
-         * Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
+         * Associated UIN of the cost allocation unit.
          * @type {string || null}
          */
-        this.BusinessCodeName = null;
+        this.Uin = null;
 
         /**
-         * Original cost in USD. This parameter became valid when Bill 3.0 took effect in May 2021. Before that, `-` was returned for this parameter. If a customer has applied for a contract price different from the prices listed on the official website, `-` will also be returned for this parameter. 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the name of a cost allocation unit.
          * @type {string || null}
          */
-        this.TotalCost = null;
+        this.Name = null;
 
         /**
-         * Total amount after discount
-         * @type {string || null}
+         * Cost allocation unit parent node ID.
+         * @type {number || null}
          */
-        this.RealTotalCost = null;
+        this.ParentId = null;
 
         /**
-         * Cash credit: The amount paid from the user’s cash account
+         * Source organization name.
          * @type {string || null}
          */
-        this.CashPayAmount = null;
+        this.SourceName = null;
 
         /**
-         * Free credit: The amount paid with the user’s free credit
+         * Source organization ID.
          * @type {string || null}
          */
-        this.IncentivePayAmount = null;
+        this.SourceId = null;
 
         /**
-         * Voucher payment: The voucher deduction amount
+         * Specifies remark description.
          * @type {string || null}
          */
-        this.VoucherPayAmount = null;
+        this.Remark = null;
 
         /**
-         * Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+         * Cost allocation unit identifier.
          * @type {string || null}
          */
-        this.TransferPayAmount = null;
+        this.TreeNodeUniqKey = null;
+
+        /**
+         * If a cost allocation unit is set with an collection rule, return the collection rule ID. if no collection rule is set, do not return.
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1829,14 +1918,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
-        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+        this.SourceName = 'SourceName' in params ? params.SourceName : null;
+        this.SourceId = 'SourceId' in params ? params.SourceId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.TreeNodeUniqKey = 'TreeNodeUniqKey' in params ? params.TreeNodeUniqKey : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4597,6 +4688,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
+
+    }
+}
+
+/**
+ * DescribeAllocationUnitDetail request structure.
+ * @class
+ */
+class DescribeAllocationUnitDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the queried cost allocation unit.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Month, the current month by default if not provided.
+         * @type {string || null}
+         */
+        this.Month = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Month = 'Month' in params ? params.Month : null;
 
     }
 }
@@ -8549,13 +8675,14 @@ module.exports = {
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     AdjustInfoDetail: AdjustInfoDetail,
     ConsumptionRegionSummaryDataItem: ConsumptionRegionSummaryDataItem,
+    BusinessSummaryInfo: BusinessSummaryInfo,
     DescribeBillSummaryRequest: DescribeBillSummaryRequest,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     DistributionBillDetail: DistributionBillDetail,
     DescribeDosageCosDetailByDateRequest: DescribeDosageCosDetailByDateRequest,
     DescribeBillAdjustInfoResponse: DescribeBillAdjustInfoResponse,
     BillDistributionResourceSummary: BillDistributionResourceSummary,
-    BusinessSummaryInfo: BusinessSummaryInfo,
+    DescribeAllocationUnitDetailResponse: DescribeAllocationUnitDetailResponse,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     DescribeVoucherUsageDetailsResponse: DescribeVoucherUsageDetailsResponse,
     ConsumptionSummaryTotal: ConsumptionSummaryTotal,
@@ -8596,6 +8723,7 @@ module.exports = {
     RegionSummaryOverviewItem: RegionSummaryOverviewItem,
     ConsumptionProjectSummaryDataItem: ConsumptionProjectSummaryDataItem,
     AnalyseRegionDetail: AnalyseRegionDetail,
+    DescribeAllocationUnitDetailRequest: DescribeAllocationUnitDetailRequest,
     DescribeBillSummaryForOrganizationRequest: DescribeBillSummaryForOrganizationRequest,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
     DescribeBillDetailForOrganizationRequest: DescribeBillDetailForOrganizationRequest,

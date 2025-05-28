@@ -7991,7 +7991,7 @@ class SegmentationDescriptorInfo extends  AbstractModel {
 
 /**
  * The input settings.
-The format of an RTMP_PUSH address is ${InputAddress}/${AppName}/${StreamName}.
+The format of an RTMP_PUSH/RTMPS_PUSH address is ${InputAddress}/${AppName}/${StreamName}.
 The format of an SRT_PUSH address is ${InputAddress}?streamid=${StreamName},h=${InputDomain}.
  * @class
  */
@@ -8000,14 +8000,14 @@ class InputSettingInfo extends  AbstractModel {
         super();
 
         /**
-         * Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+         * Application name, which is valid if `Type` is `RTMP_PUSH` or `RTMPS_PUSH`, and can contain 1-32 letters and digits
 Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * Stream name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+         * Stream name, which is valid if `Type` is `RTMP_PUSH` or `RTMPS_PUSH`, and can contain 1-32 letters and digits
 Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
@@ -8035,8 +8035,8 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.SourceType = null;
 
         /**
-         * Delayed time (ms) for playback, which is valid if `Type` is `RTMP_PUSH`
-Value range: 0 (default) or 10000-600000
+         * Delayed time (ms) for playback, which is valid if `Type` is `RTMP_PUSH` or `RTMPS_PUSH`.
+Value range: 0 (default) or 10000-600000.
 The value must be a multiple of 1,000.
 Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}

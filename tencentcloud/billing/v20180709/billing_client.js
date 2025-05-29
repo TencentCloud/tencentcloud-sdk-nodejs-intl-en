@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CreateAllocationUnitRequest = models.CreateAllocationUnitRequest;
 const DeleteAllocationTagRequest = models.DeleteAllocationTagRequest;
 const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
 const DescribeCostExplorerSummaryResponse = models.DescribeCostExplorerSummaryResponse;
@@ -48,6 +49,7 @@ const DescribeCostDetailResponse = models.DescribeCostDetailResponse;
 const VoucherInfos = models.VoucherInfos;
 const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
 const AnalyseProjectDetail = models.AnalyseProjectDetail;
+const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
@@ -106,6 +108,7 @@ const CostDetail = models.CostDetail;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const CreateAllocationTagResponse = models.CreateAllocationTagResponse;
+const ModifyAllocationUnitRequest = models.ModifyAllocationUnitRequest;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
 const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
@@ -118,15 +121,18 @@ const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const UsageRecords = models.UsageRecords;
 const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
+const CreateAllocationUnitResponse = models.CreateAllocationUnitResponse;
 const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
-const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
+const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
 const DescribeBillSummaryForOrganizationResponse = models.DescribeBillSummaryForOrganizationResponse;
+const DeleteAllocationUnitResponse = models.DeleteAllocationUnitResponse;
 const ConditionProject = models.ConditionProject;
 const DescribeTagListResponse = models.DescribeTagListResponse;
 const CosDetailSets = models.CosDetailSets;
+const ModifyAllocationUnitResponse = models.ModifyAllocationUnitResponse;
 const AnalyseConditionDetail = models.AnalyseConditionDetail;
 const BillResourceSummary = models.BillResourceSummary;
-const AnalyseHeaderTimeDetail = models.AnalyseHeaderTimeDetail;
+const DeleteAllocationUnitRequest = models.DeleteAllocationUnitRequest;
 const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
 
 
@@ -171,6 +177,28 @@ class BillingClient extends AbstractClient {
     DescribeBillResourceSummary(req, cb) {
         let resp = new DescribeBillResourceSummaryResponse();
         this.request("DescribeBillResourceSummary", req, resp, cb);
+    }
+
+    /**
+     * Delete a cost allocation unit.
+     * @param {DeleteAllocationUnitRequest} req
+     * @param {function(string, DeleteAllocationUnitResponse):void} cb
+     * @public
+     */
+    DeleteAllocationUnit(req, cb) {
+        let resp = new DeleteAllocationUnitResponse();
+        this.request("DeleteAllocationUnit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create allocation units.
+     * @param {CreateAllocationUnitRequest} req
+     * @param {function(string, CreateAllocationUnitResponse):void} cb
+     * @public
+     */
+    CreateAllocationUnit(req, cb) {
+        let resp = new CreateAllocationUnitResponse();
+        this.request("CreateAllocationUnit", req, resp, cb);
     }
 
     /**
@@ -395,6 +423,17 @@ Note: The API request may fail due to network instability or other exceptions. I
     DescribeTagList(req, cb) {
         let resp = new DescribeTagListResponse();
         this.request("DescribeTagList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify cost allocation unit information.
+     * @param {ModifyAllocationUnitRequest} req
+     * @param {function(string, ModifyAllocationUnitResponse):void} cb
+     * @public
+     */
+    ModifyAllocationUnit(req, cb) {
+        let resp = new ModifyAllocationUnitResponse();
+        this.request("ModifyAllocationUnit", req, resp, cb);
     }
 
     /**

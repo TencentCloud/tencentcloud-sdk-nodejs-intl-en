@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const BatchSendEmailRequest = models.BatchSendEmailRequest;
 const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
+const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
 const ListSendTasksResponse = models.ListSendTasksResponse;
 const CreateReceiverResponse = models.CreateReceiverResponse;
 const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
@@ -27,14 +28,17 @@ const UpdateEmailSmtpPassWordResponse = models.UpdateEmailSmtpPassWordResponse;
 const ListReceiversRequest = models.ListReceiversRequest;
 const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
 const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
-const Attachment = models.Attachment;
+const CreateAddressUnsubscribeConfigResponse = models.CreateAddressUnsubscribeConfigResponse;
 const Template = models.Template;
 const ListSendTasksRequest = models.ListSendTasksRequest;
+const ListAddressUnsubscribeConfigResponse = models.ListAddressUnsubscribeConfigResponse;
+const Simple = models.Simple;
 const GetSendEmailStatusResponse = models.GetSendEmailStatusResponse;
 const SendEmailRequest = models.SendEmailRequest;
 const EmailSender = models.EmailSender;
 const BatchSendEmailResponse = models.BatchSendEmailResponse;
 const DeleteEmailIdentityRequest = models.DeleteEmailIdentityRequest;
+const ListAddressUnsubscribeConfigRequest = models.ListAddressUnsubscribeConfigRequest;
 const UpdateEmailIdentityRequest = models.UpdateEmailIdentityRequest;
 const GetEmailIdentityRequest = models.GetEmailIdentityRequest;
 const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
@@ -44,33 +48,38 @@ const SendTaskData = models.SendTaskData;
 const TemplatesMetadata = models.TemplatesMetadata;
 const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
 const Volume = models.Volume;
+const AddressUnsubscribeConfigData = models.AddressUnsubscribeConfigData;
 const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
-const UpdateEmailSmtpPassWordRequest = models.UpdateEmailSmtpPassWordRequest;
+const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
+const CreateReceiverDetailResponse = models.CreateReceiverDetailResponse;
 const ReceiverData = models.ReceiverData;
 const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
 const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
 const DeleteBlackListResponse = models.DeleteBlackListResponse;
-const UpdateEmailTemplateRequest = models.UpdateEmailTemplateRequest;
+const UpdateAddressUnsubscribeConfigResponse = models.UpdateAddressUnsubscribeConfigResponse;
+const DeleteAddressUnsubscribeConfigRequest = models.DeleteAddressUnsubscribeConfigRequest;
 const SendEmailStatus = models.SendEmailStatus;
 const ListEmailTemplatesRequest = models.ListEmailTemplatesRequest;
 const CreateReceiverRequest = models.CreateReceiverRequest;
-const CreateReceiverDetailResponse = models.CreateReceiverDetailResponse;
+const CreateAddressUnsubscribeConfigRequest = models.CreateAddressUnsubscribeConfigRequest;
 const ListEmailTemplatesResponse = models.ListEmailTemplatesResponse;
 const SendEmailResponse = models.SendEmailResponse;
 const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
 const GetSendEmailStatusRequest = models.GetSendEmailStatusRequest;
-const Simple = models.Simple;
+const DeleteAddressUnsubscribeConfigResponse = models.DeleteAddressUnsubscribeConfigResponse;
 const DeleteReceiverRequest = models.DeleteReceiverRequest;
 const ListEmailIdentitiesResponse = models.ListEmailIdentitiesResponse;
 const DeleteReceiverResponse = models.DeleteReceiverResponse;
 const TemplateContent = models.TemplateContent;
 const GetStatisticsReportResponse = models.GetStatisticsReportResponse;
+const UpdateEmailSmtpPassWordRequest = models.UpdateEmailSmtpPassWordRequest;
 const DeleteEmailAddressRequest = models.DeleteEmailAddressRequest;
 const EmailIdentity = models.EmailIdentity;
 const BlackEmailAddress = models.BlackEmailAddress;
-const CycleEmailParam = models.CycleEmailParam;
 const DeleteEmailAddressResponse = models.DeleteEmailAddressResponse;
+const CycleEmailParam = models.CycleEmailParam;
 const CreateEmailIdentityResponse = models.CreateEmailIdentityResponse;
+const UpdateAddressUnsubscribeConfigRequest = models.UpdateAddressUnsubscribeConfigRequest;
 const CreateEmailAddressRequest = models.CreateEmailAddressRequest;
 const CreateReceiverDetailRequest = models.CreateReceiverDetailRequest;
 const CreateEmailTemplateResponse = models.CreateEmailTemplateResponse;
@@ -80,7 +89,7 @@ const UpdateEmailTemplateResponse = models.UpdateEmailTemplateResponse;
 const TimedEmailParam = models.TimedEmailParam;
 const DNSAttributes = models.DNSAttributes;
 const GetEmailTemplateResponse = models.GetEmailTemplateResponse;
-const ListEmailIdentitiesRequest = models.ListEmailIdentitiesRequest;
+const Attachment = models.Attachment;
 
 
 /**
@@ -139,17 +148,6 @@ Default API request rate limit: 1 request/sec.
     }
 
     /**
-     * This API is used to get the configuration details of a sender domain.
-     * @param {GetEmailIdentityRequest} req
-     * @param {function(string, GetEmailIdentityResponse):void} cb
-     * @public
-     */
-    GetEmailIdentity(req, cb) {
-        let resp = new GetEmailIdentityResponse();
-        this.request("GetEmailIdentity", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the details of a template.
      * @param {GetEmailTemplateRequest} req
      * @param {function(string, GetEmailTemplateResponse):void} cb
@@ -161,6 +159,17 @@ Default API request rate limit: 1 request/sec.
     }
 
     /**
+     * This API is used to get the configuration details of a sender domain.
+     * @param {GetEmailIdentityRequest} req
+     * @param {function(string, GetEmailIdentityResponse):void} cb
+     * @public
+     */
+    GetEmailIdentity(req, cb) {
+        let resp = new GetEmailIdentityResponse();
+        this.request("GetEmailIdentity", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
      * @param {GetStatisticsReportRequest} req
      * @param {function(string, GetStatisticsReportResponse):void} cb
@@ -169,6 +178,28 @@ Default API request rate limit: 1 request/sec.
     GetStatisticsReport(req, cb) {
         let resp = new GetStatisticsReportResponse();
         this.request("GetStatisticsReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an address-level unsubscribe configuration.
+     * @param {CreateAddressUnsubscribeConfigRequest} req
+     * @param {function(string, CreateAddressUnsubscribeConfigResponse):void} cb
+     * @public
+     */
+    CreateAddressUnsubscribeConfig(req, cb) {
+        let resp = new CreateAddressUnsubscribeConfigResponse();
+        this.request("CreateAddressUnsubscribeConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the address and unsubscribe configuration list.
+     * @param {ListAddressUnsubscribeConfigRequest} req
+     * @param {function(string, ListAddressUnsubscribeConfigResponse):void} cb
+     * @public
+     */
+    ListAddressUnsubscribeConfig(req, cb) {
+        let resp = new ListAddressUnsubscribeConfigResponse();
+        this.request("ListAddressUnsubscribeConfig", req, resp, cb);
     }
 
     /**
@@ -261,6 +292,17 @@ Note: Only an approved template can be used to send emails.
     }
 
     /**
+     * This API is used to update address-level unsubscribe configurations.
+     * @param {UpdateAddressUnsubscribeConfigRequest} req
+     * @param {function(string, UpdateAddressUnsubscribeConfigResponse):void} cb
+     * @public
+     */
+    UpdateAddressUnsubscribeConfig(req, cb) {
+        let resp = new UpdateAddressUnsubscribeConfigResponse();
+        this.request("UpdateAddressUnsubscribeConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an email template.
      * @param {DeleteEmailTemplateRequest} req
      * @param {function(string, DeleteEmailTemplateResponse):void} cb
@@ -269,6 +311,17 @@ Note: Only an approved template can be used to send emails.
     DeleteEmailTemplate(req, cb) {
         let resp = new DeleteEmailTemplateResponse();
         this.request("DeleteEmailTemplate", req, resp, cb);
+    }
+
+    /**
+     * Remove address-level unsubscribe configuration.
+     * @param {DeleteAddressUnsubscribeConfigRequest} req
+     * @param {function(string, DeleteAddressUnsubscribeConfigResponse):void} cb
+     * @public
+     */
+    DeleteAddressUnsubscribeConfig(req, cb) {
+        let resp = new DeleteAddressUnsubscribeConfigResponse();
+        this.request("DeleteAddressUnsubscribeConfig", req, resp, cb);
     }
 
     /**

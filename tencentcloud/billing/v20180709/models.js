@@ -17,6 +17,48 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * CreateAllocationUnit request structure.
+ * @class
+ */
+class CreateAllocationUnitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * New cost allocation unit parent node ID.
+         * @type {number || null}
+         */
+        this.ParentId = null;
+
+        /**
+         * Specifies the name of a newly-added cost allocation unit.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Month, which is the current month by default if not provided.
+         * @type {string || null}
+         */
+        this.Month = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Month = 'Month' in params ? params.Month : null;
+
+    }
+}
+
+/**
  * DeleteAllocationTag request structure.
  * @class
  */
@@ -2337,6 +2379,97 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+
+    }
+}
+
+/**
+ * Detailed summary of purchases by project
+ * @class
+ */
+class ProjectSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Project name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Cost ratio, to two decimal points
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * Total amount after discount
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Cash credit: The amount paid from the user’s cash account
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Free credit: The amount paid with the user’s free credit
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Voucher payment: The voucher deduction amount
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Commission credit: The amount paid with the user’s commission credit.
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
+        /**
+         * Billing month, e.g. `2019-08`
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -6598,6 +6731,69 @@ class CreateAllocationTagResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAllocationUnit request structure.
+ * @class
+ */
+class ModifyAllocationUnitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the modified cost allocation unit.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Modified cost allocation unit name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Modified cost allocation unit source organization name.
+         * @type {string || null}
+         */
+        this.SourceName = null;
+
+        /**
+         * Modified allocation unit source organization ID.
+         * @type {string || null}
+         */
+        this.SourceId = null;
+
+        /**
+         * Cost allocation unit remark description.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Month, the current month by default if not provided.
+         * @type {string || null}
+         */
+        this.Month = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SourceName = 'SourceName' in params ? params.SourceName : null;
+        this.SourceId = 'SourceId' in params ? params.SourceId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Month = 'Month' in params ? params.Month : null;
+
+    }
+}
+
+/**
  * DescribeBillDownloadUrl response structure.
  * @class
  */
@@ -7777,6 +7973,48 @@ Example:ins-a2bb34
 }
 
 /**
+ * CreateAllocationUnit response structure.
+ * @class
+ */
+class CreateAllocationUnitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the ID of a newly-added cost allocation unit.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Unique identifier of a cost allocation unit
+         * @type {string || null}
+         */
+        this.TreeNodeUniqKey = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TreeNodeUniqKey = 'TreeNodeUniqKey' in params ? params.TreeNodeUniqKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDosageCosDetailByDate response structure.
  * @class
  */
@@ -7820,72 +8058,18 @@ class DescribeDosageCosDetailByDateResponse extends  AbstractModel {
 }
 
 /**
- * Detailed summary of purchases by project
+ * Cost analysis header data
  * @class
  */
-class ProjectSummaryOverviewItem extends  AbstractModel {
+class AnalyseHeaderTimeDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Project ID
+         * DateNote: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.ProjectId = null;
-
-        /**
-         * Project name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
-         * @type {string || null}
-         */
-        this.ProjectName = null;
-
-        /**
-         * Cost ratio, to two decimal points
-         * @type {string || null}
-         */
-        this.RealTotalCostRatio = null;
-
-        /**
-         * Total amount after discount
-         * @type {string || null}
-         */
-        this.RealTotalCost = null;
-
-        /**
-         * Cash credit: The amount paid from the user’s cash account
-         * @type {string || null}
-         */
-        this.CashPayAmount = null;
-
-        /**
-         * Free credit: The amount paid with the user’s free credit
-         * @type {string || null}
-         */
-        this.IncentivePayAmount = null;
-
-        /**
-         * Voucher payment: The voucher deduction amount
-         * @type {string || null}
-         */
-        this.VoucherPayAmount = null;
-
-        /**
-         * Commission credit: The amount paid with the user’s commission credit.
-         * @type {string || null}
-         */
-        this.TransferPayAmount = null;
-
-        /**
-         * Billing month, e.g. `2019-08`
-         * @type {string || null}
-         */
-        this.BillMonth = null;
-
-        /**
-         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-         * @type {string || null}
-         */
-        this.TotalCost = null;
+        this.Name = null;
 
     }
 
@@ -7896,16 +8080,7 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
-        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -7954,6 +8129,34 @@ class DescribeBillSummaryForOrganizationResponse extends  AbstractModel {
                 obj.deserialize(params.SummaryDetail[z]);
                 this.SummaryDetail.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAllocationUnit response structure.
+ * @class
+ */
+class DeleteAllocationUnitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -8111,6 +8314,34 @@ class CosDetailSets extends  AbstractModel {
         this.BillingItemCodeName = 'BillingItemCodeName' in params ? params.BillingItemCodeName : null;
         this.DosageValue = 'DosageValue' in params ? params.DosageValue : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
+
+    }
+}
+
+/**
+ * ModifyAllocationUnit response structure.
+ * @class
+ */
+class ModifyAllocationUnitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8561,18 +8792,24 @@ class BillResourceSummary extends  AbstractModel {
 }
 
 /**
- * Cost analysis header data
+ * DeleteAllocationUnit request structure.
  * @class
  */
-class AnalyseHeaderTimeDetail extends  AbstractModel {
+class DeleteAllocationUnitRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * DateNote: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the deleted cost allocation unit ID.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Month, which is the current month by default if not provided.
          * @type {string || null}
          */
-        this.Name = null;
+        this.Month = null;
 
     }
 
@@ -8583,7 +8820,8 @@ class AnalyseHeaderTimeDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Month = 'Month' in params ? params.Month : null;
 
     }
 }
@@ -8658,6 +8896,7 @@ class DescribeCostSummaryByRegionResponse extends  AbstractModel {
 }
 
 module.exports = {
+    CreateAllocationUnitRequest: CreateAllocationUnitRequest,
     DeleteAllocationTagRequest: DeleteAllocationTagRequest,
     DescribeCostSummaryByProductRequest: DescribeCostSummaryByProductRequest,
     DescribeCostExplorerSummaryResponse: DescribeCostExplorerSummaryResponse,
@@ -8690,6 +8929,7 @@ module.exports = {
     VoucherInfos: VoucherInfos,
     DescribeCostSummaryByProjectResponse: DescribeCostSummaryByProjectResponse,
     AnalyseProjectDetail: AnalyseProjectDetail,
+    ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
     DescribeBillSummaryByTagRequest: DescribeBillSummaryByTagRequest,
@@ -8748,6 +8988,7 @@ module.exports = {
     DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     CreateAllocationTagResponse: CreateAllocationTagResponse,
+    ModifyAllocationUnitRequest: ModifyAllocationUnitRequest,
     DescribeBillDownloadUrlResponse: DescribeBillDownloadUrlResponse,
     ConsumptionResourceSummaryDataItem: ConsumptionResourceSummaryDataItem,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
@@ -8760,15 +9001,18 @@ module.exports = {
     UsageRecords: UsageRecords,
     DescribeVoucherInfoRequest: DescribeVoucherInfoRequest,
     DescribeDealsByCondRequest: DescribeDealsByCondRequest,
+    CreateAllocationUnitResponse: CreateAllocationUnitResponse,
     DescribeDosageCosDetailByDateResponse: DescribeDosageCosDetailByDateResponse,
-    ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
+    AnalyseHeaderTimeDetail: AnalyseHeaderTimeDetail,
     DescribeBillSummaryForOrganizationResponse: DescribeBillSummaryForOrganizationResponse,
+    DeleteAllocationUnitResponse: DeleteAllocationUnitResponse,
     ConditionProject: ConditionProject,
     DescribeTagListResponse: DescribeTagListResponse,
     CosDetailSets: CosDetailSets,
+    ModifyAllocationUnitResponse: ModifyAllocationUnitResponse,
     AnalyseConditionDetail: AnalyseConditionDetail,
     BillResourceSummary: BillResourceSummary,
-    AnalyseHeaderTimeDetail: AnalyseHeaderTimeDetail,
+    DeleteAllocationUnitRequest: DeleteAllocationUnitRequest,
     DescribeCostSummaryByRegionResponse: DescribeCostSummaryByRegionResponse,
 
 }

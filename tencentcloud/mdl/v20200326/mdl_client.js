@@ -36,6 +36,7 @@ const InputStreamInfo = models.InputStreamInfo;
 const FrameCaptureTemplate = models.FrameCaptureTemplate;
 const PipelineInputSettingsInfo = models.PipelineInputSettingsInfo;
 const DescribeStreamLiveChannelOutputStatisticsRequest = models.DescribeStreamLiveChannelOutputStatisticsRequest;
+const GetAbWatermarkPlayUrlResponse = models.GetAbWatermarkPlayUrlResponse;
 const ChannelPipelineAlerts = models.ChannelPipelineAlerts;
 const InputInfo = models.InputInfo;
 const InputAnalysisInfo = models.InputAnalysisInfo;
@@ -112,6 +113,7 @@ const DescribeStreamLivePlansResponse = models.DescribeStreamLivePlansResponse;
 const DescribeStreamLiveChannelLogsRequest = models.DescribeStreamLiveChannelLogsRequest;
 const CreateStreamLiveInputSecurityGroupRequest = models.CreateStreamLiveInputSecurityGroupRequest;
 const DescribeStreamLiveChannelOutputStatisticsResponse = models.DescribeStreamLiveChannelOutputStatisticsResponse;
+const GetAbWatermarkPlayUrlRequest = models.GetAbWatermarkPlayUrlRequest;
 const DescribeWatermarkInfo = models.DescribeWatermarkInfo;
 const EventSettingsDestinationReq = models.EventSettingsDestinationReq;
 const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
@@ -506,6 +508,17 @@ class MdlClient extends AbstractClient {
     DescribeStreamLiveWatermarks(req, cb) {
         let resp = new DescribeStreamLiveWatermarksResponse();
         this.request("DescribeStreamLiveWatermarks", req, resp, cb);
+    }
+
+    /**
+     * Get AB watermark play url.
+     * @param {GetAbWatermarkPlayUrlRequest} req
+     * @param {function(string, GetAbWatermarkPlayUrlResponse):void} cb
+     * @public
+     */
+    GetAbWatermarkPlayUrl(req, cb) {
+        let resp = new GetAbWatermarkPlayUrlResponse();
+        this.request("GetAbWatermarkPlayUrl", req, resp, cb);
     }
 
     /**

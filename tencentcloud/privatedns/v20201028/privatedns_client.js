@@ -61,18 +61,21 @@ const DescribeForwardRuleResponse = models.DescribeForwardRuleResponse;
 const ModifyPrivateZoneVpcResponse = models.ModifyPrivateZoneVpcResponse;
 const ForwardRule = models.ForwardRule;
 const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
-const ModifyForwardRuleRequest = models.ModifyForwardRuleRequest;
+const DescribeRecordRequest = models.DescribeRecordRequest;
+const DescribeRecordResponse = models.DescribeRecordResponse;
 const SubscribePrivateZoneServiceRequest = models.SubscribePrivateZoneServiceRequest;
 const ModifyPrivateZoneRequest = models.ModifyPrivateZoneRequest;
 const CreatePrivateZoneResponse = models.CreatePrivateZoneResponse;
 const EndPointInfo = models.EndPointInfo;
 const DescribeDashboardResponse = models.DescribeDashboardResponse;
 const CreatePrivateZoneRecordResponse = models.CreatePrivateZoneRecordResponse;
+const RecordInfo = models.RecordInfo;
 const DescribePrivateZoneServiceResponse = models.DescribePrivateZoneServiceResponse;
 const DescribeForwardRuleListResponse = models.DescribeForwardRuleListResponse;
 const DescribeExtendEndpointListResponse = models.DescribeExtendEndpointListResponse;
 const CreatePrivateDNSAccountResponse = models.CreatePrivateDNSAccountResponse;
 const DescribeAuditLogRequest = models.DescribeAuditLogRequest;
+const ModifyForwardRuleRequest = models.ModifyForwardRuleRequest;
 const DescribeDashboardRequest = models.DescribeDashboardRequest;
 const ModifyForwardRuleResponse = models.ModifyForwardRuleResponse;
 const CreateEndPointResponse = models.CreateEndPointResponse;
@@ -316,6 +319,17 @@ class PrivatednsClient extends AbstractClient {
     DescribeAccountVpcList(req, cb) {
         let resp = new DescribeAccountVpcListResponse();
         this.request("DescribeAccountVpcList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the private domain records.
+     * @param {DescribeRecordRequest} req
+     * @param {function(string, DescribeRecordResponse):void} cb
+     * @public
+     */
+    DescribeRecord(req, cb) {
+        let resp = new DescribeRecordResponse();
+        this.request("DescribeRecord", req, resp, cb);
     }
 
     /**

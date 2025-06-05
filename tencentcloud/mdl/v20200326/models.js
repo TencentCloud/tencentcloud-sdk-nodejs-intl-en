@@ -5339,7 +5339,7 @@ class GetAbWatermarkPlayUrlRequest extends  AbstractModel {
         super();
 
         /**
-         * Client UUID, 32-bit unsigned integer.
+         * Client UUID, 32-bit unsigned integer, [0, 4294967295].
          * @type {number || null}
          */
         this.Uuid = null;

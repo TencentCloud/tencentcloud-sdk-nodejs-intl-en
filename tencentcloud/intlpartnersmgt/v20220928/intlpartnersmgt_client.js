@@ -478,7 +478,7 @@ Callable roles: Distributor, Second-level reseller, Reseller
 
     /**
      * This API is used to query the customer bill details by resellers.
-Callable roles: Distributor, Second-level reseller, Reseller
+Callable roles: Distributor, Second-level reseller, Reseller.
      * @param {DescribeCustomerBillDetailRequest} req
      * @param {function(string, DescribeCustomerBillDetailResponse):void} cb
      * @public

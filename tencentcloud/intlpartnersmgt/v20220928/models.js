@@ -3597,7 +3597,7 @@ class DescribeCustomerBillDetailRequest extends  AbstractModel {
         this.CustomerUin = null;
 
         /**
-         * Inquiry month, in the format of YYYY-MM, such as 2023-01
+         * Inquiry month, in the format of YYYY-MM, such as 2023-01.
          * @type {string || null}
          */
         this.Month = null;

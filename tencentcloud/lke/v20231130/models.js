@@ -113,36 +113,512 @@ class GetWsTokenResponse extends  AbstractModel {
 }
 
 /**
- * ListApp request structure.
+ * ListUsageCallDetail request structure.
  * @class
  */
-class ListAppRequest extends  AbstractModel {
+class ListUsageCallDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application type; knowledge_qa - knowledge Q&A management; summary - knowledge summary; classifys - knowledge label extraction.
+         * Model identifier.
          * @type {string || null}
          */
-        this.AppType = null;
+        this.ModelName = null;
 
         /**
-         * Number of items per page, integer.
-         * @type {number || null}
+         * Start time.
+         * @type {string || null}
          */
-        this.PageSize = null;
+        this.StartTime = null;
 
         /**
-         * Page number, integer.
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Page number.
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * Keywords: application / modifier.
+         * Number of items per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Uin list.
+         * @type {Array.<string> || null}
+         */
+        this.UinAccount = null;
+
+        /**
+         * Application ID list.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizIds = null;
+
+        /**
+         * Call type list.
          * @type {string || null}
          */
-        this.Keyword = null;
+        this.CallType = null;
+
+        /**
+         * Filter sub-scenario.
+         * @type {Array.<string> || null}
+         */
+        this.SubScenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.UinAccount = 'UinAccount' in params ? params.UinAccount : null;
+        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
+        this.CallType = 'CallType' in params ? params.CallType : null;
+        this.SubScenes = 'SubScenes' in params ? params.SubScenes : null;
+
+    }
+}
+
+/**
+ * CheckAttributeLabelExist request structure.
+ * @class
+ */
+class CheckAttributeLabelExistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Attribute name.
+         * @type {string || null}
+         */
+        this.LabelName = null;
+
+        /**
+         * Attribute ID.
+         * @type {string || null}
+         */
+        this.AttributeBizId = null;
+
+        /**
+         * Log in to the user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Log in to the user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * Scroll loading, the last attribute label ID.
+         * @type {string || null}
+         */
+        this.LastLabelBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.LabelName = 'LabelName' in params ? params.LabelName : null;
+        this.AttributeBizId = 'AttributeBizId' in params ? params.AttributeBizId : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LastLabelBizId = 'LastLabelBizId' in params ? params.LastLabelBizId : null;
+
+    }
+}
+
+/**
+ * Export knowledge label filter.
+ * @class
+ */
+class AttributeFilters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Retrieve, attribute or label name.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * DescribeQA response structure.
+ * @class
+ */
+class DescribeQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Q&A business ID.
+
+         * @type {string || null}
+         */
+        this.QaBizId = null;
+
+        /**
+         * Question.
+
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Answer.
+
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * Custom parameter.
+         * @type {string || null}
+         */
+        this.CustomParam = null;
+
+        /**
+         * Source:
+1 - Q&A pairs generated from documents.
+2 - Q&A pairs imported in batches.
+3 - Q&A pairs input manually one by one.
+
+
+         * @type {number || null}
+         */
+        this.Source = null;
+
+        /**
+         * Source description.
+
+         * @type {string || null}
+         */
+        this.SourceDesc = null;
+
+        /**
+         * Update time.
+
+
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Status<br>1 - pending verification; 2 - not released; 3 - releasing; 4 - released; 5 - release failed; 6 - not approved; 7 - under review; 8 - review failed, 9 - review failed, pending manual review after appeal; 11 - review failed, manual review not passed after appeal; 12 - expired; 13 - excessive invalid; 14 - excessive invalid recovered; 19 - learning; 20 - learning failed.
+
+
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status description.
+
+
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Category ID.
+
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * Whether verification is allowed.
+
+         * @type {boolean || null}
+         */
+        this.IsAllowAccept = null;
+
+        /**
+         * Whether deletion is allowed.
+
+         * @type {boolean || null}
+         */
+        this.IsAllowDelete = null;
+
+        /**
+         * Whether editing is allowed.
+
+         * @type {boolean || null}
+         */
+        this.IsAllowEdit = null;
+
+        /**
+         * Document ID.
+
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Document name.
+
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Document type.
+
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Segment ID.
+
+         * @type {string || null}
+         */
+        this.SegmentBizId = null;
+
+        /**
+         * Segment content.
+         * @type {string || null}
+         */
+        this.PageContent = null;
+
+        /**
+         * Segment highlight content.
+         * @type {Array.<Highlight> || null}
+         */
+        this.Highlights = null;
+
+        /**
+         * Segment content.
+
+         * @type {string || null}
+         */
+        this.OrgData = null;
+
+        /**
+         * Applicable scope of label.
+         * @type {number || null}
+         */
+        this.AttrRange = null;
+
+        /**
+         * Label.
+         * @type {Array.<AttrLabel> || null}
+         */
+        this.AttrLabels = null;
+
+        /**
+         * Effective start time, unix timestamp.
+         * @type {string || null}
+         */
+        this.ExpireStart = null;
+
+        /**
+         * Effective end time, unix timestamp. 0 indicates permanent validity.
+         * @type {string || null}
+         */
+        this.ExpireEnd = null;
+
+        /**
+         * Similar question list information.
+         * @type {Array.<SimilarQuestion> || null}
+         */
+        this.SimilarQuestions = null;
+
+        /**
+         * Review status of Q&A text: 1 - review failed.
+         * @type {number || null}
+         */
+        this.QaAuditStatus = null;
+
+        /**
+         * Review status of image in Q&A: 1-review failed.
+         * @type {number || null}
+         */
+        this.PicAuditStatus = null;
+
+        /**
+         * Review status of video in Q&A: 1 - review failed.
+         * @type {number || null}
+         */
+        this.VideoAuditStatus = null;
+
+        /**
+         * Question description.
+         * @type {string || null}
+         */
+        this.QuestionDesc = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QaBizId = 'QaBizId' in params ? params.QaBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.CustomParam = 'CustomParam' in params ? params.CustomParam : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.SourceDesc = 'SourceDesc' in params ? params.SourceDesc : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.IsAllowAccept = 'IsAllowAccept' in params ? params.IsAllowAccept : null;
+        this.IsAllowDelete = 'IsAllowDelete' in params ? params.IsAllowDelete : null;
+        this.IsAllowEdit = 'IsAllowEdit' in params ? params.IsAllowEdit : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.SegmentBizId = 'SegmentBizId' in params ? params.SegmentBizId : null;
+        this.PageContent = 'PageContent' in params ? params.PageContent : null;
+
+        if (params.Highlights) {
+            this.Highlights = new Array();
+            for (let z in params.Highlights) {
+                let obj = new Highlight();
+                obj.deserialize(params.Highlights[z]);
+                this.Highlights.push(obj);
+            }
+        }
+        this.OrgData = 'OrgData' in params ? params.OrgData : null;
+        this.AttrRange = 'AttrRange' in params ? params.AttrRange : null;
+
+        if (params.AttrLabels) {
+            this.AttrLabels = new Array();
+            for (let z in params.AttrLabels) {
+                let obj = new AttrLabel();
+                obj.deserialize(params.AttrLabels[z]);
+                this.AttrLabels.push(obj);
+            }
+        }
+        this.ExpireStart = 'ExpireStart' in params ? params.ExpireStart : null;
+        this.ExpireEnd = 'ExpireEnd' in params ? params.ExpireEnd : null;
+
+        if (params.SimilarQuestions) {
+            this.SimilarQuestions = new Array();
+            for (let z in params.SimilarQuestions) {
+                let obj = new SimilarQuestion();
+                obj.deserialize(params.SimilarQuestions[z]);
+                this.SimilarQuestions.push(obj);
+            }
+        }
+        this.QaAuditStatus = 'QaAuditStatus' in params ? params.QaAuditStatus : null;
+        this.PicAuditStatus = 'PicAuditStatus' in params ? params.PicAuditStatus : null;
+        this.VideoAuditStatus = 'VideoAuditStatus' in params ? params.VideoAuditStatus : null;
+        this.QuestionDesc = 'QuestionDesc' in params ? params.QuestionDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ExtraInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.EChartsInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EChartsInfo = 'EChartsInfo' in params ? params.EChartsInfo : null;
+
+    }
+}
+
+/**
+ * GetAppKnowledgeCount request structure.
+ * @class
+ */
+class GetAppKnowledgeCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type: doc - document; qa - Q&A pair.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginUin = null;
 
         /**
          * Login to user's sub-account (required in integrator mode).	
@@ -159,46 +635,10 @@ class ListAppRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppType = 'AppType' in params ? params.AppType : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
         this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
-
-    }
-}
-
-/**
- * Obtain ws token label.
- * @class
- */
-class GetWsTokenReq_Label extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Label name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Label value.
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -275,6 +715,34 @@ class ListSelectDocResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeReleaseInfo request structure.
+ * @class
+ */
+class DescribeReleaseInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+
+    }
+}
+
+/**
  * DeleteDoc request structure.
  * @class
  */
@@ -305,6 +773,69 @@ class DeleteDocRequest extends  AbstractModel {
         }
         this.DocBizIds = 'DocBizIds' in params ? params.DocBizIds : null;
         this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+
+    }
+}
+
+/**
+ * GetAnswerTypeDataCount request structure.
+ * @class
+ */
+class GetAnswerTypeDataCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start date.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End date.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Message source (1. shared from user end; 2. chat API; 3. chat test, 4. application evaluation).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
 
     }
 }
@@ -379,35 +910,24 @@ class RunNodeInfo extends  AbstractModel {
 }
 
 /**
- * ModifyRejectedQuestion request structure.
+ * 
  * @class
  */
-class ModifyRejectedQuestionRequest extends  AbstractModel {
+class AgentDebugInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID.
+         * 
          * @type {string || null}
          */
-        this.BotBizId = null;
+        this.Input = null;
 
         /**
-         * Rejected question.
-
-
+         * 
          * @type {string || null}
          */
-        this.Question = null;
-
-        /**
-         * Unique id of the data source for the rejected question source.
-
-
-
-         * @type {string || null}
-         */
-        this.RejectedBizId = null;
+        this.Output = null;
 
     }
 
@@ -418,9 +938,8 @@ class ModifyRejectedQuestionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
-        this.Question = 'Question' in params ? params.Question : null;
-        this.RejectedBizId = 'RejectedBizId' in params ? params.RejectedBizId : null;
+        this.Input = 'Input' in params ? params.Input : null;
+        this.Output = 'Output' in params ? params.Output : null;
 
     }
 }
@@ -741,24 +1260,38 @@ class MsgRecord extends  AbstractModel {
 }
 
 /**
- * ListUnsatisfiedReply response structure.
+ * CreateDocCate response structure.
  * @class
  */
-class ListUnsatisfiedReplyResponse extends  AbstractModel {
+class CreateDocCateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number.
-         * @type {string || null}
+         * Whether it is possible to add.
+
+         * @type {boolean || null}
          */
-        this.Total = null;
+        this.CanAdd = null;
 
         /**
-         * List of dissatisfied responses.
-         * @type {Array.<UnsatisfiedReply> || null}
+         * Whether it is editable.
+         * @type {boolean || null}
          */
-        this.List = null;
+        this.CanEdit = null;
+
+        /**
+         * Whether it can be deleted.
+
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * Category business ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -775,16 +1308,73 @@ class ListUnsatisfiedReplyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new UnsatisfiedReply();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
+    }
+}
+
+/**
+ * DeleteDocCate response structure.
+ * @class
+ */
+class DeleteDocCateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExportAttributeLabel response structure.
+ * @class
+ */
+class ExportAttributeLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Export task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -882,137 +1472,36 @@ class ExportQAListResponse extends  AbstractModel {
 }
 
 /**
- * Unsatisfied response.
+ * GetAppSecret response structure.
  * @class
  */
-class UnsatisfiedReply extends  AbstractModel {
+class GetAppSecretResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unsatisfied response ID.
+         * Application key.
          * @type {string || null}
          */
-        this.ReplyBizId = null;
+        this.AppKey = null;
 
         /**
-         * Message record ID.
+         * Creation time.
          * @type {string || null}
          */
-        this.RecordBizId = null;
+        this.CreateTime = null;
 
         /**
-         * User question.
-         * @type {string || null}
+         * Whether to release.
+         * @type {boolean || null}
          */
-        this.Question = null;
+        this.IsRelease = null;
 
         /**
-         * Application response.
-         * @type {string || null}
+         * Whether there is permission to view.
+         * @type {boolean || null}
          */
-        this.Answer = null;
-
-        /**
-         * Error type.
-         * @type {Array.<string> || null}
-         */
-        this.Reasons = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReplyBizId = 'ReplyBizId' in params ? params.ReplyBizId : null;
-        this.RecordBizId = 'RecordBizId' in params ? params.RecordBizId : null;
-        this.Question = 'Question' in params ? params.Question : null;
-        this.Answer = 'Answer' in params ? params.Answer : null;
-        this.Reasons = 'Reasons' in params ? params.Reasons : null;
-
-    }
-}
-
-/**
- * VerifyQA request structure.
- * @class
- */
-class VerifyQARequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Q&A list.
-         * @type {Array.<QAList> || null}
-         */
-        this.List = null;
-
-        /**
-         * Application ID.
-         * @type {string || null}
-         */
-        this.BotBizId = null;
-
-        /**
-         * Login to user's root account (required in integrator mode).
-         * @type {string || null}
-         */
-        this.LoginUin = null;
-
-        /**
-         * Login to user's sub-account (required in integrator mode).
-         * @type {string || null}
-         */
-        this.LoginSubAccountUin = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new QAList();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
-        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
-        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
-
-    }
-}
-
-/**
- * GetMsgRecord response structure.
- * @class
- */
-class GetMsgRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Session record.
-         * @type {Array.<MsgRecord> || null}
-         */
-        this.Records = null;
-
-        /**
-         * The time when session cleared associated context, in milliseconds.
-         * @type {string || null}
-         */
-        this.SessionDisassociatedTimestamp = null;
+        this.HasPermission = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1029,17 +1518,284 @@ class GetMsgRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Records) {
-            this.Records = new Array();
-            for (let z in params.Records) {
-                let obj = new MsgRecord();
-                obj.deserialize(params.Records[z]);
-                this.Records.push(obj);
-            }
-        }
-        this.SessionDisassociatedTimestamp = 'SessionDisassociatedTimestamp' in params ? params.SessionDisassociatedTimestamp : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsRelease = 'IsRelease' in params ? params.IsRelease : null;
+        this.HasPermission = 'HasPermission' in params ? params.HasPermission : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListRejectedQuestion request structure.
+ * @class
+ */
+class ListRejectedQuestionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Page number.
+
+
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page.
+
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query content.
+
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * CreateQACate response structure.
+ * @class
+ */
+class CreateQACateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether it is possible to add.
+
+         * @type {boolean || null}
+         */
+        this.CanAdd = null;
+
+        /**
+         * Whether it is editable.
+         * @type {boolean || null}
+         */
+        this.CanEdit = null;
+
+        /**
+         * Whether it can be deleted.
+
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * Category business ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDocAttrRange response structure.
+ * @class
+ */
+class ModifyDocAttrRangeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAnswerTypeDataCount response structure.
+ * @class
+ */
+class GetAnswerTypeDataCountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of messages.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Total number of direct responses by the large model.
+         * @type {number || null}
+         */
+        this.ModelReplyCount = null;
+
+        /**
+         * Total number of knowledge-based responses.
+         * @type {number || null}
+         */
+        this.KnowledgeCount = null;
+
+        /**
+         * Total number of task flow responses.
+         * @type {number || null}
+         */
+        this.TaskFlowCount = null;
+
+        /**
+         * Total number of search engine responses.
+         * @type {number || null}
+         */
+        this.SearchEngineCount = null;
+
+        /**
+         * Total number of image understanding responses.
+         * @type {number || null}
+         */
+        this.ImageUnderstandingCount = null;
+
+        /**
+         * Total number of responses to rejected questions.
+         * @type {number || null}
+         */
+        this.RejectCount = null;
+
+        /**
+         * Total number of sensitive responses.
+         * @type {number || null}
+         */
+        this.SensitiveCount = null;
+
+        /**
+         * Total number of responses for concurrency exceeded.
+         * @type {number || null}
+         */
+        this.ConcurrentLimitCount = null;
+
+        /**
+         * Total number of unknown question responses.
+         * @type {number || null}
+         */
+        this.UnknownIssuesCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.ModelReplyCount = 'ModelReplyCount' in params ? params.ModelReplyCount : null;
+        this.KnowledgeCount = 'KnowledgeCount' in params ? params.KnowledgeCount : null;
+        this.TaskFlowCount = 'TaskFlowCount' in params ? params.TaskFlowCount : null;
+        this.SearchEngineCount = 'SearchEngineCount' in params ? params.SearchEngineCount : null;
+        this.ImageUnderstandingCount = 'ImageUnderstandingCount' in params ? params.ImageUnderstandingCount : null;
+        this.RejectCount = 'RejectCount' in params ? params.RejectCount : null;
+        this.SensitiveCount = 'SensitiveCount' in params ? params.SensitiveCount : null;
+        this.ConcurrentLimitCount = 'ConcurrentLimitCount' in params ? params.ConcurrentLimitCount : null;
+        this.UnknownIssuesCount = 'UnknownIssuesCount' in params ? params.UnknownIssuesCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeQA request structure.
+ * @class
+ */
+class DescribeQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Q&A business ID.
+
+         * @type {string || null}
+         */
+        this.QaBizId = null;
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QaBizId = 'QaBizId' in params ? params.QaBizId : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
 
     }
 }
@@ -1181,6 +1937,130 @@ class DescribeUnsatisfiedReplyContextRequest extends  AbstractModel {
 }
 
 /**
+ * Execution process information log.
+ * @class
+ */
+class Procedure extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * English name of execution process.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Chinese name for display.
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Status: processing, success, failed.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Number of consumed tokens.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Debugging information.
+         * @type {ProcedureDebugging || null}
+         */
+        this.Debugging = null;
+
+        /**
+         * Billing resource status, 1: available; 2: unavailable.
+         * @type {number || null}
+         */
+        this.ResourceStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+        if (params.Debugging) {
+            let obj = new ProcedureDebugging();
+            obj.deserialize(params.Debugging)
+            this.Debugging = obj;
+        }
+        this.ResourceStatus = 'ResourceStatus' in params ? params.ResourceStatus : null;
+
+    }
+}
+
+/**
+ * ListApp request structure.
+ * @class
+ */
+class ListAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application type; knowledge_qa - knowledge Q&A management; summary - knowledge summary; classifys - knowledge label extraction.
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * Number of items per page, integer.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Page number, integer.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Keywords: application / modifier.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+
+    }
+}
+
+/**
  * Label details.
  * @class
  */
@@ -1302,18 +2182,24 @@ class ModifyQAAttrRangeRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Obtain ws token label.
  * @class
  */
-class ExtraInfo extends  AbstractModel {
+class GetWsTokenReq_Label extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
+         * Label name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Label value.
          * @type {Array.<string> || null}
          */
-        this.EChartsInfo = null;
+        this.Values = null;
 
     }
 
@@ -1324,7 +2210,8 @@ class ExtraInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EChartsInfo = 'EChartsInfo' in params ? params.EChartsInfo : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -1353,6 +2240,76 @@ class ModifyDocResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Release document details.
+ * @class
+ */
+class ReleaseDoc extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File name.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * File type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Status.
+         * @type {number || null}
+         */
+        this.Action = null;
+
+        /**
+         * Status description.
+         * @type {string || null}
+         */
+        this.ActionDesc = null;
+
+        /**
+         * Reason for failure.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Document business ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ActionDesc = 'ActionDesc' in params ? params.ActionDesc : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
 
     }
 }
@@ -1477,6 +2434,111 @@ class CreateCorpResponse extends  AbstractModel {
 }
 
 /**
+ * ListQA request structure.
+ * @class
+ */
+class ListQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Page size.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query a question.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Verification status (1: not verified 2: adopted 3: not adopted).
+         * @type {Array.<number> || null}
+         */
+        this.AcceptStatus = null;
+
+        /**
+         * Release status (2: pending release; 3: releasing; 4: released; 7: under review; 8: review failed; 9: under manual appeal; 11: manual appeal failed; 12: expired; 13: excessive invalid; 14: excessive invalid recovered).
+         * @type {Array.<number> || null}
+         */
+        this.ReleaseStatus = null;
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Source (1: generated from document; 2: import in batches; 3: manually added).
+         * @type {number || null}
+         */
+        this.Source = null;
+
+        /**
+         * Query an answer.
+         * @type {string || null}
+         */
+        this.QueryAnswer = null;
+
+        /**
+         * Category ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * Q&A business ID list.
+         * @type {Array.<string> || null}
+         */
+        this.QaBizIds = null;
+
+        /**
+         * Query type: filename; attribute label.
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.AcceptStatus = 'AcceptStatus' in params ? params.AcceptStatus : null;
+        this.ReleaseStatus = 'ReleaseStatus' in params ? params.ReleaseStatus : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.QueryAnswer = 'QueryAnswer' in params ? params.QueryAnswer : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.QaBizIds = 'QaBizIds' in params ? params.QaBizIds : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+
+    }
+}
+
+/**
  * DescribeKnowledgeUsage response structure.
  * @class
  */
@@ -1521,6 +2583,126 @@ class DescribeKnowledgeUsageResponse extends  AbstractModel {
         this.ExceedCharSize = 'ExceedCharSize' in params ? params.ExceedCharSize : null;
         this.UsedCharSize = 'UsedCharSize' in params ? params.UsedCharSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Reference source details.
+ * @class
+ */
+class ReferDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reference ID.
+         * @type {string || null}
+         */
+        this.ReferBizId = null;
+
+        /**
+         * Document type (1: Q&A; 2: document paragraph).
+         * @type {number || null}
+         */
+        this.DocType = null;
+
+        /**
+         * Document name.
+         * @type {string || null}
+         */
+        this.DocName = null;
+
+        /**
+         * Fragment content.
+         * @type {string || null}
+         */
+        this.PageContent = null;
+
+        /**
+         * Question.
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Answer.
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * Confidence.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Mark.
+         * @type {number || null}
+         */
+        this.Mark = null;
+
+        /**
+         * Fragment highlight content.
+         * @type {Array.<Highlight> || null}
+         */
+        this.Highlights = null;
+
+        /**
+         * Original content.
+         * @type {string || null}
+         */
+        this.OrgData = null;
+
+        /**
+         * Page number information.
+         * @type {Array.<number> || null}
+         */
+        this.PageInfos = null;
+
+        /**
+         * Sheet information.
+         * @type {Array.<string> || null}
+         */
+        this.SheetInfos = null;
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReferBizId = 'ReferBizId' in params ? params.ReferBizId : null;
+        this.DocType = 'DocType' in params ? params.DocType : null;
+        this.DocName = 'DocName' in params ? params.DocName : null;
+        this.PageContent = 'PageContent' in params ? params.PageContent : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Mark = 'Mark' in params ? params.Mark : null;
+
+        if (params.Highlights) {
+            this.Highlights = new Array();
+            for (let z in params.Highlights) {
+                let obj = new Highlight();
+                obj.deserialize(params.Highlights[z]);
+                this.Highlights.push(obj);
+            }
+        }
+        this.OrgData = 'OrgData' in params ? params.OrgData : null;
+        this.PageInfos = 'PageInfos' in params ? params.PageInfos : null;
+        this.SheetInfos = 'SheetInfos' in params ? params.SheetInfos : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
 
     }
 }
@@ -1631,66 +2813,60 @@ class DeleteQARequest extends  AbstractModel {
 }
 
 /**
- * DescribeCallStatsGraph request structure.
+ * GetLikeDataCount response structure.
  * @class
  */
-class DescribeCallStatsGraphRequest extends  AbstractModel {
+class GetLikeDataCountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * uin
-         * @type {Array.<string> || null}
+         * Number of messages that can be evaluated.
+         * @type {number || null}
          */
-        this.UinAccount = null;
+        this.Total = null;
 
         /**
-         * Log in to user's root account (required in integrator mode).
+         * Number of comments.
+         * @type {number || null}
+         */
+        this.AppraisalTotal = null;
+
+        /**
+         * Participation rate.
+         * @type {number || null}
+         */
+        this.ParticipationRate = null;
+
+        /**
+         * Number of likes.
+         * @type {number || null}
+         */
+        this.LikeTotal = null;
+
+        /**
+         * Like rate.
+         * @type {number || null}
+         */
+        this.LikeRate = null;
+
+        /**
+         * Number of dislikes.
+         * @type {number || null}
+         */
+        this.DislikeTotal = null;
+
+        /**
+         * Dislike rate.
+         * @type {number || null}
+         */
+        this.DislikeRate = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LoginUin = null;
-
-        /**
-         * Log in to user's root sub-account (required in integrator mode).
-         * @type {string || null}
-         */
-        this.LoginSubAccountUin = null;
-
-        /**
-         * Sub-business type.
-         * @type {string || null}
-         */
-        this.SubBizType = null;
-
-        /**
-         * Model identifier.
-         * @type {string || null}
-         */
-        this.ModelName = null;
-
-        /**
-         * Start timestamp, in seconds.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End timestamp, in seconds.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Application ID list.
-         * @type {Array.<string> || null}
-         */
-        this.AppBizIds = null;
-
-        /**
-         * Filter sub-scenarios (used in document parsing scenarios).
-         * @type {Array.<string> || null}
-         */
-        this.SubScenes = null;
+        this.RequestId = null;
 
     }
 
@@ -1701,74 +2877,43 @@ class DescribeCallStatsGraphRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UinAccount = 'UinAccount' in params ? params.UinAccount : null;
-        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
-        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
-        this.SubBizType = 'SubBizType' in params ? params.SubBizType : null;
-        this.ModelName = 'ModelName' in params ? params.ModelName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
-        this.SubScenes = 'SubScenes' in params ? params.SubScenes : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.AppraisalTotal = 'AppraisalTotal' in params ? params.AppraisalTotal : null;
+        this.ParticipationRate = 'ParticipationRate' in params ? params.ParticipationRate : null;
+        this.LikeTotal = 'LikeTotal' in params ? params.LikeTotal : null;
+        this.LikeRate = 'LikeRate' in params ? params.LikeRate : null;
+        this.DislikeTotal = 'DislikeTotal' in params ? params.DislikeTotal : null;
+        this.DislikeRate = 'DislikeRate' in params ? params.DislikeRate : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Information of application-associated plug-in.
+ * ListRelease request structure.
  * @class
  */
-class KnowledgeQaPlugin extends  AbstractModel {
+class ListReleaseRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Plugin ID.
+         * Robot ID.
          * @type {string || null}
          */
-        this.PluginId = null;
+        this.BotBizId = null;
 
         /**
-         * Plugin name.
-         * @type {string || null}
+         * Page number.
+         * @type {number || null}
          */
-        this.PluginName = null;
+        this.PageNumber = null;
 
         /**
-         * Plugin icon.
-         * @type {string || null}
+         * Number of items per page.
+         * @type {number || null}
          */
-        this.PluginIcon = null;
-
-        /**
-         * Tool ID.
-         * @type {string || null}
-         */
-        this.ToolId = null;
-
-        /**
-         * Tool name.
-         * @type {string || null}
-         */
-        this.ToolName = null;
-
-        /**
-         * Tool description.
-         * @type {string || null}
-         */
-        this.ToolDesc = null;
-
-        /**
-         * Tool input parameter.
-         * @type {Array.<PluginToolReqParam> || null}
-         */
-        this.Inputs = null;
-
-        /**
-         * Whether the plugin is bound to the knowledge library.
-         * @type {boolean || null}
-         */
-        this.IsBindingKnowledge = null;
+        this.PageSize = null;
 
     }
 
@@ -1779,22 +2924,94 @@ class KnowledgeQaPlugin extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PluginId = 'PluginId' in params ? params.PluginId : null;
-        this.PluginName = 'PluginName' in params ? params.PluginName : null;
-        this.PluginIcon = 'PluginIcon' in params ? params.PluginIcon : null;
-        this.ToolId = 'ToolId' in params ? params.ToolId : null;
-        this.ToolName = 'ToolName' in params ? params.ToolName : null;
-        this.ToolDesc = 'ToolDesc' in params ? params.ToolDesc : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
-        if (params.Inputs) {
-            this.Inputs = new Array();
-            for (let z in params.Inputs) {
-                let obj = new PluginToolReqParam();
-                obj.deserialize(params.Inputs[z]);
-                this.Inputs.push(obj);
-            }
+    }
+}
+
+/**
+ * Detailed information of a knowledge library capacity pie chart.
+ * @class
+ */
+class KnowledgeCapacityPieGraphDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current application name.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Number of characters used by the current application.
+         * @type {string || null}
+         */
+        this.UsedCharSize = null;
+
+        /**
+         * Proportion of the current application in total usage.
+         * @type {number || null}
+         */
+        this.Proportion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.IsBindingKnowledge = 'IsBindingKnowledge' in params ? params.IsBindingKnowledge : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.UsedCharSize = 'UsedCharSize' in params ? params.UsedCharSize : null;
+        this.Proportion = 'Proportion' in params ? params.Proportion : null;
+
+    }
+}
+
+/**
+ * CreateDocCate request structure.
+ * @class
+ */
+class CreateDocCateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Parent business ID.
+         * @type {string || null}
+         */
+        this.ParentBizId = null;
+
+        /**
+         * Category name.
+
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.ParentBizId = 'ParentBizId' in params ? params.ParentBizId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -1979,6 +3196,56 @@ class ModifyAppResponse extends  AbstractModel {
         }
         this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListDoc response structure.
+ * @class
+ */
+class ListDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Quantity of documents.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of documents.
+         * @type {Array.<ListDocItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ListDocItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2170,6 +3437,247 @@ class TaskFlowInfo extends  AbstractModel {
 }
 
 /**
+ * GetDocPreview request structure.
+ * @class
+ */
+class GetDocPreviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Document BizID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Storage type: offline - offline file; realtime - real-time file. If empty, it defaults to offline.
+         * @type {string || null}
+         */
+        this.TypeKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.TypeKey = 'TypeKey' in params ? params.TypeKey : null;
+
+    }
+}
+
+/**
+ * ListDocCate response structure.
+ * @class
+ */
+class ListDocCateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List.
+         * @type {Array.<CateInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new CateInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListRejectedQuestionPreview response structure.
+ * @class
+ */
+class ListRejectedQuestionPreviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Quantity of documents.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of documents.
+         * @type {Array.<ReleaseRejectedQuestion> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ReleaseRejectedQuestion();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCorp request structure.
+ * @class
+ */
+class DescribeCorpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * ListAppCategory response structure.
+ * @class
+ */
+class ListAppCategoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application type list.
+         * @type {Array.<ListAppCategoryRspOption> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ListAppCategoryRspOption();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateApp response structure.
+ * @class
+ */
+class CreateAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Whether the account application list permissions are customized. A user interaction prompt.
+         * @type {boolean || null}
+         */
+        this.IsCustomList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.IsCustomList = 'IsCustomList' in params ? params.IsCustomList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAttributeLabel request structure.
  * @class
  */
@@ -2250,6 +3758,119 @@ similar: similar words
 }
 
 /**
+ * CreateQA request structure.
+ * @class
+ */
+class CreateQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Question.
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Answer.
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * Applicable scope of labels: 1. all; 2. by conditions.
+         * @type {number || null}
+         */
+        this.AttrRange = null;
+
+        /**
+         * Custom parameter.
+         * @type {string || null}
+         */
+        this.CustomParam = null;
+
+        /**
+         * Label reference.
+         * @type {Array.<AttrLabelRefer> || null}
+         */
+        this.AttrLabels = null;
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Category ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * Effective start time, unix timestamp.
+         * @type {string || null}
+         */
+        this.ExpireStart = null;
+
+        /**
+         * Effective end time, unix timestamp. 0 indicates permanent validity.
+         * @type {string || null}
+         */
+        this.ExpireEnd = null;
+
+        /**
+         * Similar question content.
+         * @type {Array.<string> || null}
+         */
+        this.SimilarQuestions = null;
+
+        /**
+         * Question description.
+         * @type {string || null}
+         */
+        this.QuestionDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.AttrRange = 'AttrRange' in params ? params.AttrRange : null;
+        this.CustomParam = 'CustomParam' in params ? params.CustomParam : null;
+
+        if (params.AttrLabels) {
+            this.AttrLabels = new Array();
+            for (let z in params.AttrLabels) {
+                let obj = new AttrLabelRefer();
+                obj.deserialize(params.AttrLabels[z]);
+                this.AttrLabels.push(obj);
+            }
+        }
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.ExpireStart = 'ExpireStart' in params ? params.ExpireStart : null;
+        this.ExpireEnd = 'ExpireEnd' in params ? params.ExpireEnd : null;
+        this.SimilarQuestions = 'SimilarQuestions' in params ? params.SimilarQuestions : null;
+        this.QuestionDesc = 'QuestionDesc' in params ? params.QuestionDesc : null;
+
+    }
+}
+
+/**
  * Retrieve knowledge.
  * @class
  */
@@ -2280,6 +3901,71 @@ class KnowledgeSummary extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * Task process debugging information.
+ * @class
+ */
+class TaskFlowSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow name.
+         * @type {string || null}
+         */
+        this.IntentName = null;
+
+        /**
+         * Entity list.
+         * @type {Array.<ValueInfo> || null}
+         */
+        this.UpdatedSlotValues = null;
+
+        /**
+         * Node list.
+         * @type {Array.<RunNodeInfo> || null}
+         */
+        this.RunNodes = null;
+
+        /**
+         * Intent determination.
+         * @type {Array.<string> || null}
+         */
+        this.Purposes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IntentName = 'IntentName' in params ? params.IntentName : null;
+
+        if (params.UpdatedSlotValues) {
+            this.UpdatedSlotValues = new Array();
+            for (let z in params.UpdatedSlotValues) {
+                let obj = new ValueInfo();
+                obj.deserialize(params.UpdatedSlotValues[z]);
+                this.UpdatedSlotValues.push(obj);
+            }
+        }
+
+        if (params.RunNodes) {
+            this.RunNodes = new Array();
+            for (let z in params.RunNodes) {
+                let obj = new RunNodeInfo();
+                obj.deserialize(params.RunNodes[z]);
+                this.RunNodes.push(obj);
+            }
+        }
+        this.Purposes = 'Purposes' in params ? params.Purposes : null;
 
     }
 }
@@ -2369,6 +4055,238 @@ class RetryDocParseRequest extends  AbstractModel {
 }
 
 /**
+ * Q&A details data.
+ * @class
+ */
+class ListQaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Q&A ID.
+         * @type {string || null}
+         */
+        this.QaBizId = null;
+
+        /**
+         * Question.
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Answer.
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * Source.
+         * @type {number || null}
+         */
+        this.Source = null;
+
+        /**
+         * Source description.
+         * @type {string || null}
+         */
+        this.SourceDesc = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Status.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status description.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether editing is allowed.
+         * @type {boolean || null}
+         */
+        this.IsAllowEdit = null;
+
+        /**
+         * Whether deletion is allowed.
+         * @type {boolean || null}
+         */
+        this.IsAllowDelete = null;
+
+        /**
+         * Whether verification is allowed.
+         * @type {boolean || null}
+         */
+        this.IsAllowAccept = null;
+
+        /**
+         * Document name.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Document type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Number of Q&A characters.
+         * @type {string || null}
+         */
+        this.QaCharSize = null;
+
+        /**
+         * Effective start time, unix timestamp.
+         * @type {string || null}
+         */
+        this.ExpireStart = null;
+
+        /**
+         * Effective end time, unix timestamp. 0 indicates permanent validity.
+         * @type {string || null}
+         */
+        this.ExpireEnd = null;
+
+        /**
+         * Applicable range of attribute label, 1: all, 2: by conditions.
+         * @type {number || null}
+         */
+        this.AttrRange = null;
+
+        /**
+         * Attribute label.
+         * @type {Array.<AttrLabel> || null}
+         */
+        this.AttrLabels = null;
+
+        /**
+         * Count of similar questions.
+         * @type {number || null}
+         */
+        this.SimilarQuestionNum = null;
+
+        /**
+         * Return similar questions associated with the Q&A and perform linked search. Only one similar question will be displayed.
+         * @type {string || null}
+         */
+        this.SimilarQuestionTips = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QaBizId = 'QaBizId' in params ? params.QaBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.SourceDesc = 'SourceDesc' in params ? params.SourceDesc : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsAllowEdit = 'IsAllowEdit' in params ? params.IsAllowEdit : null;
+        this.IsAllowDelete = 'IsAllowDelete' in params ? params.IsAllowDelete : null;
+        this.IsAllowAccept = 'IsAllowAccept' in params ? params.IsAllowAccept : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.QaCharSize = 'QaCharSize' in params ? params.QaCharSize : null;
+        this.ExpireStart = 'ExpireStart' in params ? params.ExpireStart : null;
+        this.ExpireEnd = 'ExpireEnd' in params ? params.ExpireEnd : null;
+        this.AttrRange = 'AttrRange' in params ? params.AttrRange : null;
+
+        if (params.AttrLabels) {
+            this.AttrLabels = new Array();
+            for (let z in params.AttrLabels) {
+                let obj = new AttrLabel();
+                obj.deserialize(params.AttrLabels[z]);
+                this.AttrLabels.push(obj);
+            }
+        }
+        this.SimilarQuestionNum = 'SimilarQuestionNum' in params ? params.SimilarQuestionNum : null;
+        this.SimilarQuestionTips = 'SimilarQuestionTips' in params ? params.SimilarQuestionTips : null;
+
+    }
+}
+
+/**
+ * DeleteAttributeLabel request structure.
+ * @class
+ */
+class DeleteAttributeLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Label ID.
+         * @type {Array.<string> || null}
+         */
+        this.AttributeBizIds = null;
+
+        /**
+         * Log in to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Log in to user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.AttributeBizIds = 'AttributeBizIds' in params ? params.AttributeBizIds : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+
+    }
+}
+
+/**
  * DescribeRobotBizIDByAppKey response structure.
  * @class
  */
@@ -2399,6 +4317,62 @@ class DescribeRobotBizIDByAppKeyResponse extends  AbstractModel {
         }
         this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenameDoc response structure.
+ * @class
+ */
+class RenameDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListDocCate request structure.
+ * @class
+ */
+class ListDocCateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
 
     }
 }
@@ -2872,6 +4846,53 @@ class KnowledgeQaOutput extends  AbstractModel {
 }
 
 /**
+ * ModifyRejectedQuestion request structure.
+ * @class
+ */
+class ModifyRejectedQuestionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Rejected question.
+
+
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Unique id of the data source for the rejected question source.
+
+
+
+         * @type {string || null}
+         */
+        this.RejectedBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.RejectedBizId = 'RejectedBizId' in params ? params.RejectedBizId : null;
+
+    }
+}
+
+/**
  * Data of custom variable and label relationship.
  * @class
  */
@@ -3007,24 +5028,30 @@ class AgentThought extends  AbstractModel {
 }
 
 /**
- * ListQACate response structure.
+ * GroupDoc request structure.
  * @class
  */
-class ListQACateResponse extends  AbstractModel {
+class GroupDocRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List.
-         * @type {Array.<QACate> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Application ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BotBizId = null;
+
+        /**
+         * List of business IDs of operation objects.
+         * @type {Array.<string> || null}
+         */
+        this.BizIds = null;
+
+        /**
+         * Group ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
 
     }
 
@@ -3035,16 +5062,65 @@ class ListQACateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.BizIds = 'BizIds' in params ? params.BizIds : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
 
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new QACate();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
+    }
+}
+
+/**
+ * CheckAttributeLabelRefer request structure.
+ * @class
+ */
+class CheckAttributeLabelReferRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Log in to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Log in to user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * Attribute label.
+         * @type {string || null}
+         */
+        this.LabelBizId = null;
+
+        /**
+         * Attribute ID.
+         * @type {Array.<string> || null}
+         */
+        this.AttributeBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LabelBizId = 'LabelBizId' in params ? params.LabelBizId : null;
+        this.AttributeBizId = 'AttributeBizId' in params ? params.AttributeBizId : null;
 
     }
 }
@@ -3412,10 +5488,60 @@ class Option extends  AbstractModel {
 }
 
 /**
- * StopDocParse request structure.
+ * ListUnsatisfiedReply response structure.
  * @class
  */
-class StopDocParseRequest extends  AbstractModel {
+class ListUnsatisfiedReplyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of dissatisfied responses.
+         * @type {Array.<UnsatisfiedReply> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new UnsatisfiedReply();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAppSecret request structure.
+ * @class
+ */
+class GetAppSecretRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3423,13 +5549,7 @@ class StopDocParseRequest extends  AbstractModel {
          * Application ID.
          * @type {string || null}
          */
-        this.BotBizId = null;
-
-        /**
-         * Document ID.
-         * @type {string || null}
-         */
-        this.DocBizId = null;
+        this.AppBizId = null;
 
     }
 
@@ -3440,73 +5560,36 @@ class StopDocParseRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
-        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
 
     }
 }
 
 /**
- * ListUsageCallDetail request structure.
+ * Model parameter value range.
  * @class
  */
-class ListUsageCallDetailRequest extends  AbstractModel {
+class ModelParameter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Model identifier.
-         * @type {string || null}
-         */
-        this.ModelName = null;
-
-        /**
-         * Start time.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Page number.
+         * Default value.
          * @type {number || null}
          */
-        this.PageNumber = null;
+        this.Default = null;
 
         /**
-         * Number of items per page.
+         * Minimum value.
          * @type {number || null}
          */
-        this.PageSize = null;
+        this.Min = null;
 
         /**
-         * Uin list.
-         * @type {Array.<string> || null}
+         * Maximum value.
+         * @type {number || null}
          */
-        this.UinAccount = null;
-
-        /**
-         * Application ID list.
-         * @type {Array.<string> || null}
-         */
-        this.AppBizIds = null;
-
-        /**
-         * Call type list.
-         * @type {string || null}
-         */
-        this.CallType = null;
-
-        /**
-         * Filter sub-scenario.
-         * @type {Array.<string> || null}
-         */
-        this.SubScenes = null;
+        this.Max = null;
 
     }
 
@@ -3517,15 +5600,9 @@ class ListUsageCallDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModelName = 'ModelName' in params ? params.ModelName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.UinAccount = 'UinAccount' in params ? params.UinAccount : null;
-        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
-        this.CallType = 'CallType' in params ? params.CallType : null;
-        this.SubScenes = 'SubScenes' in params ? params.SubScenes : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.Max = 'Max' in params ? params.Max : null;
 
     }
 }
@@ -3554,6 +5631,168 @@ class DeleteQACateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SaveDoc response structure.
+ * @class
+ */
+class SaveDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Import error message.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * Error link.
+         * @type {string || null}
+         */
+        this.ErrorLink = null;
+
+        /**
+         * Error link text.
+         * @type {string || null}
+         */
+        this.ErrorLinkText = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.ErrorLink = 'ErrorLink' in params ? params.ErrorLink : null;
+        this.ErrorLinkText = 'ErrorLinkText' in params ? params.ErrorLinkText : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListReleaseDocPreview response structure.
+ * @class
+ */
+class ListReleaseDocPreviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Document quantity.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * Document list.
+         * @type {Array.<ReleaseDoc> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ReleaseDoc();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenameDoc request structure.
+ * @class
+ */
+class RenameDocRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Login to user's root account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * New document name, which needs to include the suffix.
+         * @type {string || null}
+         */
+        this.NewName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
 
     }
 }
@@ -3707,36 +5946,60 @@ class GetTaskStatusResponse extends  AbstractModel {
 }
 
 /**
- * Task process debugging information.
+ * DescribeConcurrencyUsageGraph request structure.
  * @class
  */
-class TaskFlowSummary extends  AbstractModel {
+class DescribeConcurrencyUsageGraphRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task flow name.
+         * Model identifier.
          * @type {string || null}
          */
-        this.IntentName = null;
+        this.ModelName = null;
 
         /**
-         * Entity list.
-         * @type {Array.<ValueInfo> || null}
+         * Start timestamp, in seconds.
+         * @type {string || null}
          */
-        this.UpdatedSlotValues = null;
+        this.StartTime = null;
 
         /**
-         * Node list.
-         * @type {Array.<RunNodeInfo> || null}
+         * End timestamp, in seconds.
+         * @type {string || null}
          */
-        this.RunNodes = null;
+        this.EndTime = null;
 
         /**
-         * Intent determination.
+         * uin
          * @type {Array.<string> || null}
          */
-        this.Purposes = null;
+        this.UinAccount = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * Sub-business type.
+         * @type {string || null}
+         */
+        this.SubBizType = null;
+
+        /**
+         * Application ID list.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizIds = null;
 
     }
 
@@ -3747,26 +6010,14 @@ class TaskFlowSummary extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IntentName = 'IntentName' in params ? params.IntentName : null;
-
-        if (params.UpdatedSlotValues) {
-            this.UpdatedSlotValues = new Array();
-            for (let z in params.UpdatedSlotValues) {
-                let obj = new ValueInfo();
-                obj.deserialize(params.UpdatedSlotValues[z]);
-                this.UpdatedSlotValues.push(obj);
-            }
-        }
-
-        if (params.RunNodes) {
-            this.RunNodes = new Array();
-            for (let z in params.RunNodes) {
-                let obj = new RunNodeInfo();
-                obj.deserialize(params.RunNodes[z]);
-                this.RunNodes.push(obj);
-            }
-        }
-        this.Purposes = 'Purposes' in params ? params.Purposes : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.UinAccount = 'UinAccount' in params ? params.UinAccount : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.SubBizType = 'SubBizType' in params ? params.SubBizType : null;
+        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
 
     }
 }
@@ -3998,6 +6249,48 @@ class RetryDocAuditRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class VoiceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.VoiceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimbreKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VoiceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
+        this.TimbreKey = 'TimbreKey' in params ? params.TimbreKey : null;
+        this.VoiceName = 'VoiceName' in params ? params.VoiceName : null;
+
+    }
+}
+
+/**
  * SaveDoc request structure.
  * @class
  */
@@ -4147,60 +6440,18 @@ When the value is 1, the weburl field cannot be empty; otherwise, it will not ta
 }
 
 /**
- * DescribeConcurrencyUsageGraph request structure.
+ * Document parsing failure record.
  * @class
  */
-class DescribeConcurrencyUsageGraphRequest extends  AbstractModel {
+class ReconstructDocumentFailedPage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Model identifier.
-         * @type {string || null}
+         * Failure page number.
+         * @type {number || null}
          */
-        this.ModelName = null;
-
-        /**
-         * Start timestamp, in seconds.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End timestamp, in seconds.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * uin
-         * @type {Array.<string> || null}
-         */
-        this.UinAccount = null;
-
-        /**
-         * Login to user's root account (required in integrator mode).
-         * @type {string || null}
-         */
-        this.LoginUin = null;
-
-        /**
-         * Login to user's sub-account (required in integrator mode).
-         * @type {string || null}
-         */
-        this.LoginSubAccountUin = null;
-
-        /**
-         * Sub-business type.
-         * @type {string || null}
-         */
-        this.SubBizType = null;
-
-        /**
-         * Application ID list.
-         * @type {Array.<string> || null}
-         */
-        this.AppBizIds = null;
+        this.PageNumber = null;
 
     }
 
@@ -4211,14 +6462,156 @@ class DescribeConcurrencyUsageGraphRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModelName = 'ModelName' in params ? params.ModelName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.UinAccount = 'UinAccount' in params ? params.UinAccount : null;
-        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
-        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
-        this.SubBizType = 'SubBizType' in params ? params.SubBizType : null;
-        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+
+    }
+}
+
+/**
+ * ListAppKnowledgeDetail response structure.
+ * @class
+ */
+class ListAppKnowledgeDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of lists.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Details of knowledge base capacity usage by application.
+         * @type {Array.<KnowledgeDetail> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new KnowledgeDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyQACate response structure.
+ * @class
+ */
+class ModifyQACateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAttributeLabel response structure.
+ * @class
+ */
+class DescribeAttributeLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Attribute ID.
+         * @type {string || null}
+         */
+        this.AttributeBizId = null;
+
+        /**
+         * Attribute identifier.
+         * @type {string || null}
+         */
+        this.AttrKey = null;
+
+        /**
+         * Attribute name.
+         * @type {string || null}
+         */
+        this.AttrName = null;
+
+        /**
+         * Quantity of labels.
+         * @type {string || null}
+         */
+        this.LabelNumber = null;
+
+        /**
+         * Label name.
+         * @type {Array.<AttributeLabel> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AttributeBizId = 'AttributeBizId' in params ? params.AttributeBizId : null;
+        this.AttrKey = 'AttrKey' in params ? params.AttrKey : null;
+        this.AttrName = 'AttrName' in params ? params.AttrName : null;
+        this.LabelNumber = 'LabelNumber' in params ? params.LabelNumber : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new AttributeLabel();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4287,6 +6680,49 @@ class KnowledgeQaSingleWorkflow extends  AbstractModel {
 }
 
 /**
+ * ListQACate response structure.
+ * @class
+ */
+class ListQACateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List.
+         * @type {Array.<QACate> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new QACate();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RetryDocParse response structure.
  * @class
  */
@@ -4315,24 +6751,18 @@ class RetryDocParseResponse extends  AbstractModel {
 }
 
 /**
- * String KV information.
+ * CreateRejectedQuestion response structure.
  * @class
  */
-class StrValue extends  AbstractModel {
+class CreateRejectedQuestionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Name.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Value.
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.RequestId = null;
 
     }
 
@@ -4343,8 +6773,57 @@ class StrValue extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListReleaseQAPreview response structure.
+ * @class
+ */
+class ListReleaseQAPreviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Document quantity.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * The list of documents.
+         * @type {Array.<ReleaseQA> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ReleaseQA();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4411,6 +6890,34 @@ class ExportUnsatisfiedReplyRequest extends  AbstractModel {
 }
 
 /**
+ * GroupQA response structure.
+ * @class
+ */
+class GroupQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Search engine reference source index.
  * @class
  */
@@ -4441,6 +6948,46 @@ class QuoteInfo extends  AbstractModel {
         }
         this.Position = 'Position' in params ? params.Position : null;
         this.Index = 'Index' in params ? params.Index : null;
+
+    }
+}
+
+/**
+ * CreateApp request structure.
+ * @class
+ */
+class CreateAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application type; knowledge_qa - knowledge qa management.
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * Basic application configuration.
+         * @type {BaseConfig || null}
+         */
+        this.BaseConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppType = 'AppType' in params ? params.AppType : null;
+
+        if (params.BaseConfig) {
+            let obj = new BaseConfig();
+            obj.deserialize(params.BaseConfig)
+            this.BaseConfig = obj;
+        }
 
     }
 }
@@ -4538,30 +7085,84 @@ class DescribeReleaseRequest extends  AbstractModel {
 }
 
 /**
- * Similar question information.
+ * Release Q&A.
  * @class
  */
-class SimilarQuestion extends  AbstractModel {
+class ReleaseQA extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Similar question ID.
-         * @type {string || null}
-         */
-        this.SimBizId = null;
-
-        /**
-         * Similar question content.
+         * Question.
          * @type {string || null}
          */
         this.Question = null;
 
         /**
-         * Similar question review status, 1: audit failure.
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Status.
          * @type {number || null}
          */
-        this.AuditStatus = null;
+        this.Action = null;
+
+        /**
+         * Status description.
+         * @type {string || null}
+         */
+        this.ActionDesc = null;
+
+        /**
+         * Source, 1: documentation generation; 2: batch import; 3: manual addition.
+         * @type {number || null}
+         */
+        this.Source = null;
+
+        /**
+         * Source description.
+         * @type {string || null}
+         */
+        this.SourceDesc = null;
+
+        /**
+         * Filename.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Document type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Reason for failure
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Release status.
+         * @type {number || null}
+         */
+        this.ReleaseStatus = null;
+
+        /**
+         * Q&A ID.
+         * @type {string || null}
+         */
+        this.QaBizId = null;
+
+        /**
+         * Document business ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
 
     }
 
@@ -4572,9 +7173,39 @@ class SimilarQuestion extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SimBizId = 'SimBizId' in params ? params.SimBizId : null;
         this.Question = 'Question' in params ? params.Question : null;
-        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ActionDesc = 'ActionDesc' in params ? params.ActionDesc : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.SourceDesc = 'SourceDesc' in params ? params.SourceDesc : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.ReleaseStatus = 'ReleaseStatus' in params ? params.ReleaseStatus : null;
+        this.QaBizId = 'QaBizId' in params ? params.QaBizId : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+
+    }
+}
+
+/**
+ * ListAppCategory request structure.
+ * @class
+ */
+class ListAppCategoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -4769,18 +7400,24 @@ class CallDetail extends  AbstractModel {
 }
 
 /**
- * ModifyRejectedQuestion response structure.
+ * 
  * @class
  */
-class ModifyRejectedQuestionResponse extends  AbstractModel {
+class DocFilterFlag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Flag = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Value = null;
 
     }
 
@@ -4791,7 +7428,85 @@ class ModifyRejectedQuestionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * ListReleaseDocPreview request structure.
+ * @class
+ */
+class ListReleaseDocPreviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query content.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Release ticket ID.
+         * @type {string || null}
+         */
+        this.ReleaseBizId = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Status (1: newly-added; 2: modified; 3: deleted).
+         * @type {Array.<number> || null}
+         */
+        this.Actions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Actions = 'Actions' in params ? params.Actions : null;
 
     }
 }
@@ -4905,6 +7620,153 @@ class TokenStat extends  AbstractModel {
             }
         }
         this.TraceId = 'TraceId' in params ? params.TraceId : null;
+
+    }
+}
+
+/**
+ * Document fragment.
+ * @class
+ */
+class DocSegment extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Fragment ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Business ID.
+         * @type {string || null}
+         */
+        this.BusinessId = null;
+
+        /**
+         * File type (markdown, word, txt).
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Document segment type (segment, table).
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
+        /**
+         * Title.
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Paragraph content.
+         * @type {string || null}
+         */
+        this.PageContent = null;
+
+        /**
+         * Original paragraph.
+         * @type {string || null}
+         */
+        this.OrgData = null;
+
+        /**
+         * Article ID.
+         * @type {string || null}
+         */
+        this.DocId = null;
+
+        /**
+         * Document business ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * Document URL.
+         * @type {string || null}
+         */
+        this.DocUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.PageContent = 'PageContent' in params ? params.PageContent : null;
+        this.OrgData = 'OrgData' in params ? params.OrgData : null;
+        this.DocId = 'DocId' in params ? params.DocId : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.DocUrl = 'DocUrl' in params ? params.DocUrl : null;
+
+    }
+}
+
+/**
+ * Unsatisfied response.
+ * @class
+ */
+class UnsatisfiedReply extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unsatisfied response ID.
+         * @type {string || null}
+         */
+        this.ReplyBizId = null;
+
+        /**
+         * Message record ID.
+         * @type {string || null}
+         */
+        this.RecordBizId = null;
+
+        /**
+         * User question.
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Application response.
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * Error type.
+         * @type {Array.<string> || null}
+         */
+        this.Reasons = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplyBizId = 'ReplyBizId' in params ? params.ReplyBizId : null;
+        this.RecordBizId = 'RecordBizId' in params ? params.RecordBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.Reasons = 'Reasons' in params ? params.Reasons : null;
 
     }
 }
@@ -5052,18 +7914,38 @@ class DigitalHumanConfig extends  AbstractModel {
 }
 
 /**
- * ExportUnsatisfiedReply response structure.
+ * CreateRejectedQuestion request structure.
  * @class
  */
-class ExportUnsatisfiedReplyResponse extends  AbstractModel {
+class CreateRejectedQuestionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Application ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BotBizId = null;
+
+        /**
+         * Rejected question
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Unique ID of the data source for the rejected question - "2" will be returned when the rejected question is not satisfied - The rejected question comes from manual addition.
+         * @type {number || null}
+         */
+        this.BusinessSource = null;
+
+        /**
+         * Unique ID of the data source for the rejected question.
+
+
+         * @type {string || null}
+         */
+        this.BusinessId = null;
 
     }
 
@@ -5074,7 +7956,10 @@ class ExportUnsatisfiedReplyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.BusinessSource = 'BusinessSource' in params ? params.BusinessSource : null;
+        this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
 
     }
 }
@@ -5185,42 +8070,18 @@ class AttrLabelDetail extends  AbstractModel {
 }
 
 /**
- * DescribeAttributeLabel response structure.
+ * DescribeRefer response structure.
  * @class
  */
-class DescribeAttributeLabelResponse extends  AbstractModel {
+class DescribeReferResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Attribute ID.
-         * @type {string || null}
+         * Reference list.
+         * @type {Array.<ReferDetail> || null}
          */
-        this.AttributeBizId = null;
-
-        /**
-         * Attribute identifier.
-         * @type {string || null}
-         */
-        this.AttrKey = null;
-
-        /**
-         * Attribute name.
-         * @type {string || null}
-         */
-        this.AttrName = null;
-
-        /**
-         * Quantity of labels.
-         * @type {string || null}
-         */
-        this.LabelNumber = null;
-
-        /**
-         * Label name.
-         * @type {Array.<AttributeLabel> || null}
-         */
-        this.Labels = null;
+        this.List = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5237,17 +8098,13 @@ class DescribeAttributeLabelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AttributeBizId = 'AttributeBizId' in params ? params.AttributeBizId : null;
-        this.AttrKey = 'AttrKey' in params ? params.AttrKey : null;
-        this.AttrName = 'AttrName' in params ? params.AttrName : null;
-        this.LabelNumber = 'LabelNumber' in params ? params.LabelNumber : null;
 
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new AttributeLabel();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ReferDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -5256,18 +8113,54 @@ class DescribeAttributeLabelResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDocAttrRange response structure.
+ * Obtain response of unsatisfied reply context.
  * @class
  */
-class ModifyDocAttrRangeResponse extends  AbstractModel {
+class Context extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Message record ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RecordBizId = null;
+
+        /**
+         * Whether it is a user.
+         * @type {boolean || null}
+         */
+        this.IsVisitor = null;
+
+        /**
+         * Nickname.
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * Avatar.
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+        /**
+         * Message content.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Document information.
+         * @type {Array.<MsgFileInfo> || null}
+         */
+        this.FileInfos = null;
+
+        /**
+         * Response method, 15: clarification confirmation response.
+         * @type {number || null}
+         */
+        this.ReplyMethod = null;
 
     }
 
@@ -5278,7 +8171,113 @@ class ModifyDocAttrRangeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RecordBizId = 'RecordBizId' in params ? params.RecordBizId : null;
+        this.IsVisitor = 'IsVisitor' in params ? params.IsVisitor : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new MsgFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
+            }
+        }
+        this.ReplyMethod = 'ReplyMethod' in params ? params.ReplyMethod : null;
+
+    }
+}
+
+/**
+ * ListDoc request structure.
+ * @class
+ */
+class ListDocRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Quantity per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query content.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Document status : 1: not generated; 2: generating; 3: generation successful; 4: generation failed; 5: deleting; 6: deleted successfully; 7: under review; 8: review failed; 9: review successful; 10: pending release; 11: releasing; 12: released; 13: learning; 14: learning failed; 15: updating; 16: update failed; 17: parsing; 18: parsing failed; 19: import failed; 20: expired; 21: excessive invalid; 22: excessive invalid recovered.
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+        /**
+         * Query type: filename - document; attribute - label.
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+        /**
+         * Category ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * File type classification and filtering.
+         * @type {Array.<string> || null}
+         */
+        this.FileTypes = null;
+
+        /**
+         * Document list filter flag
+         * @type {Array.<DocFilterFlag> || null}
+         */
+        this.FilterFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.FileTypes = 'FileTypes' in params ? params.FileTypes : null;
+
+        if (params.FilterFlag) {
+            this.FilterFlag = new Array();
+            for (let z in params.FilterFlag) {
+                let obj = new DocFilterFlag();
+                obj.deserialize(params.FilterFlag[z]);
+                this.FilterFlag.push(obj);
+            }
+        }
 
     }
 }
@@ -5402,30 +8401,30 @@ class QAQuery extends  AbstractModel {
 }
 
 /**
- * Detailed information of a knowledge library capacity pie chart.
+ * GroupQA request structure.
  * @class
  */
-class KnowledgeCapacityPieGraphDetail extends  AbstractModel {
+class GroupQARequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Current application name.
+         * Application ID
          * @type {string || null}
          */
-        this.AppName = null;
+        this.BotBizId = null;
 
         /**
-         * Number of characters used by the current application.
+         * List of QaBizIDs.
+         * @type {Array.<string> || null}
+         */
+        this.QaBizIds = null;
+
+        /**
+         * Group ID.
          * @type {string || null}
          */
-        this.UsedCharSize = null;
-
-        /**
-         * Proportion of the current application in total usage.
-         * @type {number || null}
-         */
-        this.Proportion = null;
+        this.CateBizId = null;
 
     }
 
@@ -5436,20 +8435,116 @@ class KnowledgeCapacityPieGraphDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.UsedCharSize = 'UsedCharSize' in params ? params.UsedCharSize : null;
-        this.Proportion = 'Proportion' in params ? params.Proportion : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.QaBizIds = 'QaBizIds' in params ? params.QaBizIds : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
 
     }
 }
 
 /**
- * ModifyQACate response structure.
+ * DescribeCallStatsGraph request structure.
  * @class
  */
-class ModifyQACateResponse extends  AbstractModel {
+class DescribeCallStatsGraphRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * uin
+         * @type {Array.<string> || null}
+         */
+        this.UinAccount = null;
+
+        /**
+         * Log in to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Log in to user's root sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * Sub-business type.
+         * @type {string || null}
+         */
+        this.SubBizType = null;
+
+        /**
+         * Model identifier.
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * Start timestamp, in seconds.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End timestamp, in seconds.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID list.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizIds = null;
+
+        /**
+         * Filter sub-scenarios (used in document parsing scenarios).
+         * @type {Array.<string> || null}
+         */
+        this.SubScenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UinAccount = 'UinAccount' in params ? params.UinAccount : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.SubBizType = 'SubBizType' in params ? params.SubBizType : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
+        this.SubScenes = 'SubScenes' in params ? params.SubScenes : null;
+
+    }
+}
+
+/**
+ * GetMsgRecord response structure.
+ * @class
+ */
+class GetMsgRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session record.
+         * @type {Array.<MsgRecord> || null}
+         */
+        this.Records = null;
+
+        /**
+         * The time when session cleared associated context, in milliseconds.
+         * @type {string || null}
+         */
+        this.SessionDisassociatedTimestamp = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5466,7 +8561,87 @@ class ModifyQACateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new MsgRecord();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
+            }
+        }
+        this.SessionDisassociatedTimestamp = 'SessionDisassociatedTimestamp' in params ? params.SessionDisassociatedTimestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApp request structure.
+ * @class
+ */
+class DescribeAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Application type; knowledge_qa - knowledge Q&A management; summary - knowledge summary; classifys - knowledge label extraction.
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * Whether it is the configuration after release.
+         * @type {boolean || null}
+         */
+        this.IsRelease = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.IsRelease = 'IsRelease' in params ? params.IsRelease : null;
+
+    }
+}
+
+/**
+ * GetReconstructDocumentResult request structure.
+ * @class
+ */
+class GetReconstructDocumentResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the task. It is the TaskId returned by [CreateReconstructDocumentFlow](https://cloud.tencent.com/document/product/1759/107506).
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -5488,6 +8663,84 @@ class DescribeKnowledgeUsageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ListQA response structure.
+ * @class
+ */
+class ListQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Q&A quantity.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * Quantity of pending verification Q&As.
+         * @type {string || null}
+         */
+        this.WaitVerifyTotal = null;
+
+        /**
+         * Quantity of not adopted Q&As.
+         * @type {string || null}
+         */
+        this.NotAcceptedTotal = null;
+
+        /**
+         * Quantity of adopted Q&As.
+         * @type {string || null}
+         */
+        this.AcceptedTotal = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Q&As details.
+         * @type {Array.<ListQaItem> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.WaitVerifyTotal = 'WaitVerifyTotal' in params ? params.WaitVerifyTotal : null;
+        this.NotAcceptedTotal = 'NotAcceptedTotal' in params ? params.NotAcceptedTotal : null;
+        this.AcceptedTotal = 'AcceptedTotal' in params ? params.AcceptedTotal : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ListQaItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5642,6 +8895,331 @@ class DescribeConcurrencyUsageGraphResponse extends  AbstractModel {
         this.AvailableY = 'AvailableY' in params ? params.AvailableY : null;
         this.SuccessCallY = 'SuccessCallY' in params ? params.SuccessCallY : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Description of document list details.
+ * @class
+ */
+class ListDocItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+        /**
+         * File name.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * The new document name after renaming. This name remains until the document is published after the renaming submission.
+         * @type {string || null}
+         */
+        this.NewName = null;
+
+        /**
+         * File type.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * COS path.
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Document status.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Document status description.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Reason.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Whether to refer to an answer.
+         * @type {boolean || null}
+         */
+        this.IsRefer = null;
+
+        /**
+         * Quantity of Q&A pairs.
+         * @type {number || null}
+         */
+        this.QaNum = null;
+
+        /**
+         * Whether it has been deleted.
+         * @type {boolean || null}
+         */
+        this.IsDeleted = null;
+
+        /**
+         * Document source.
+         * @type {number || null}
+         */
+        this.Source = null;
+
+        /**
+         * Document source description.
+         * @type {string || null}
+         */
+        this.SourceDesc = null;
+
+        /**
+         * Whether regeneration is allowed.
+         * @type {boolean || null}
+         */
+        this.IsAllowRestart = null;
+
+        /**
+         * Whether the Q&A has been deleted.
+         * @type {boolean || null}
+         */
+        this.IsDeletedQa = null;
+
+        /**
+         * Whether the Q&A is being generated.
+         * @type {boolean || null}
+         */
+        this.IsCreatingQa = null;
+
+        /**
+         * Whether deletion is allowed.
+         * @type {boolean || null}
+         */
+        this.IsAllowDelete = null;
+
+        /**
+         * Whether to allow operation reference switch.
+         * @type {boolean || null}
+         */
+        this.IsAllowRefer = null;
+
+        /**
+         * Whether Q&A has been generated.
+         * @type {boolean || null}
+         */
+        this.IsCreatedQa = null;
+
+        /**
+         * Document character count.
+         * @type {string || null}
+         */
+        this.DocCharSize = null;
+
+        /**
+         * Applicable range of attribute label.
+         * @type {number || null}
+         */
+        this.AttrRange = null;
+
+        /**
+         * Attribute label.
+         * @type {Array.<AttrLabel> || null}
+         */
+        this.AttrLabels = null;
+
+        /**
+         * Whether editing is allowed.
+         * @type {boolean || null}
+         */
+        this.IsAllowEdit = null;
+
+        /**
+         * External reference URL type, 0: system URL; 1: custom URL.
+When the value is 1, the WebUrl field cannot be empty; otherwise, it will not take effect.
+         * @type {number || null}
+         */
+        this.ReferUrlType = null;
+
+        /**
+         * Web page URL (or custom URL) .
+         * @type {string || null}
+         */
+        this.WebUrl = null;
+
+        /**
+         * Effective start time, unix timestamp.
+         * @type {string || null}
+         */
+        this.ExpireStart = null;
+
+        /**
+         * Effective end time, unix timestamp. 0 indicates permanent validity.
+         * @type {string || null}
+         */
+        this.ExpireEnd = null;
+
+        /**
+         * Whether retries are allowed, 0: no, 1: yes.
+         * @type {boolean || null}
+         */
+        this.IsAllowRetry = null;
+
+        /**
+         * 0: document comparison processing; 1: Q&A generation from document.
+         * @type {Array.<number> || null}
+         */
+        this.Processing = null;
+
+        /**
+         * Time when the document was created and stored into the database.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * ID of the document's category.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * User-defined ID of the document.
+         * @type {string || null}
+         */
+        this.CustomerKnowledgeId = null;
+
+        /**
+         * Attribute label of the document. 0: Do not perform external user permission verification.
+         * @type {Array.<number> || null}
+         */
+        this.AttributeFlags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.IsRefer = 'IsRefer' in params ? params.IsRefer : null;
+        this.QaNum = 'QaNum' in params ? params.QaNum : null;
+        this.IsDeleted = 'IsDeleted' in params ? params.IsDeleted : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.SourceDesc = 'SourceDesc' in params ? params.SourceDesc : null;
+        this.IsAllowRestart = 'IsAllowRestart' in params ? params.IsAllowRestart : null;
+        this.IsDeletedQa = 'IsDeletedQa' in params ? params.IsDeletedQa : null;
+        this.IsCreatingQa = 'IsCreatingQa' in params ? params.IsCreatingQa : null;
+        this.IsAllowDelete = 'IsAllowDelete' in params ? params.IsAllowDelete : null;
+        this.IsAllowRefer = 'IsAllowRefer' in params ? params.IsAllowRefer : null;
+        this.IsCreatedQa = 'IsCreatedQa' in params ? params.IsCreatedQa : null;
+        this.DocCharSize = 'DocCharSize' in params ? params.DocCharSize : null;
+        this.AttrRange = 'AttrRange' in params ? params.AttrRange : null;
+
+        if (params.AttrLabels) {
+            this.AttrLabels = new Array();
+            for (let z in params.AttrLabels) {
+                let obj = new AttrLabel();
+                obj.deserialize(params.AttrLabels[z]);
+                this.AttrLabels.push(obj);
+            }
+        }
+        this.IsAllowEdit = 'IsAllowEdit' in params ? params.IsAllowEdit : null;
+        this.ReferUrlType = 'ReferUrlType' in params ? params.ReferUrlType : null;
+        this.WebUrl = 'WebUrl' in params ? params.WebUrl : null;
+        this.ExpireStart = 'ExpireStart' in params ? params.ExpireStart : null;
+        this.ExpireEnd = 'ExpireEnd' in params ? params.ExpireEnd : null;
+        this.IsAllowRetry = 'IsAllowRetry' in params ? params.IsAllowRetry : null;
+        this.Processing = 'Processing' in params ? params.Processing : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.CustomerKnowledgeId = 'CustomerKnowledgeId' in params ? params.CustomerKnowledgeId : null;
+        this.AttributeFlags = 'AttributeFlags' in params ? params.AttributeFlags : null;
+
+    }
+}
+
+/**
+ * VerifyQA request structure.
+ * @class
+ */
+class VerifyQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Q&A list.
+         * @type {Array.<QAList> || null}
+         */
+        this.List = null;
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new QAList();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
 
     }
 }
@@ -5869,6 +9447,56 @@ class DescribeKnowledgeUsagePieGraphResponse extends  AbstractModel {
             this.List = new Array();
             for (let z in params.List) {
                 let obj = new KnowledgeCapacityPieGraphDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListRejectedQuestion response structure.
+ * @class
+ */
+class ListRejectedQuestionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of rejected questions.
+         * @type {Array.<RejectedQuestion> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new RejectedQuestion();
                 obj.deserialize(params.List[z]);
                 this.List.push(obj);
             }
@@ -6242,6 +9870,63 @@ class RetryDocAuditResponse extends  AbstractModel {
 }
 
 /**
+ * GetReconstructDocumentResult response structure.
+ * @class
+ */
+class GetReconstructDocumentResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status: success - execution completed; processing - executing; failed - execution failed; waitexecute - waiting to execute.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The result file of this document parsing task, stored in the download url of Tencent Cloud cos. The valid period of the download url is 10 minutes.
+         * @type {string || null}
+         */
+        this.DocumentRecognizeResultUrl = null;
+
+        /**
+         * Page number information where document parsing failed this time.
+         * @type {Array.<ReconstructDocumentFailedPage> || null}
+         */
+        this.FailedPages = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DocumentRecognizeResultUrl = 'DocumentRecognizeResultUrl' in params ? params.DocumentRecognizeResultUrl : null;
+
+        if (params.FailedPages) {
+            this.FailedPages = new Array();
+            for (let z in params.FailedPages) {
+                let obj = new ReconstructDocumentFailedPage();
+                obj.deserialize(params.FailedPages[z]);
+                this.FailedPages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDocCate request structure.
  * @class
  */
@@ -6313,6 +9998,69 @@ class RetryReleaseResponse extends  AbstractModel {
 }
 
 /**
+ * GetLikeDataCount request structure.
+ * @class
+ */
+class GetLikeDataCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start date.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End date.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Application ID.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Message source (1. shared from user end, 2. chat api).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+
+    }
+}
+
+/**
  * DeleteRejectedQuestion response structure.
  * @class
  */
@@ -6341,30 +10089,36 @@ class DeleteRejectedQuestionResponse extends  AbstractModel {
 }
 
 /**
- * ListAttributeLabel response structure.
+ * Temporary key structure.
  * @class
  */
-class ListAttributeLabelResponse extends  AbstractModel {
+class Credentials extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number.
+         * Token.
          * @type {string || null}
          */
-        this.Total = null;
+        this.Token = null;
 
         /**
-         * List.
-         * @type {Array.<AttrLabelDetail> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Temporary license key ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TmpSecretId = null;
+
+        /**
+         * Temporary license key.
+         * @type {string || null}
+         */
+        this.TmpSecretKey = null;
+
+        /**
+         * Temporary license appid.
+         * @type {number || null}
+         */
+        this.AppId = null;
 
     }
 
@@ -6375,17 +10129,10 @@ class ListAttributeLabelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttrLabelDetail();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.TmpSecretId = 'TmpSecretId' in params ? params.TmpSecretId : null;
+        this.TmpSecretKey = 'TmpSecretKey' in params ? params.TmpSecretKey : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
 
     }
 }
@@ -6442,6 +10189,77 @@ class MsgFileInfo extends  AbstractModel {
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.FileType = 'FileType' in params ? params.FileType : null;
         this.DocId = 'DocId' in params ? params.DocId : null;
+
+    }
+}
+
+/**
+ * CreateAttributeLabel request structure.
+ * @class
+ */
+class CreateAttributeLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Label name.
+         * @type {string || null}
+         */
+        this.AttrName = null;
+
+        /**
+         * Label value.
+         * @type {Array.<AttributeLabel> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Label identification (not effective, no need to fill in) . Abolished.
+         * @type {string || null}
+         */
+        this.AttrKey = null;
+
+        /**
+         * Log in to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Log in to user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.AttrName = 'AttrName' in params ? params.AttrName : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new AttributeLabel();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.AttrKey = 'AttrKey' in params ? params.AttrKey : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
 
     }
 }
@@ -6611,6 +10429,84 @@ class AppInfo extends  AbstractModel {
         this.ModelAliasName = 'ModelAliasName' in params ? params.ModelAliasName : null;
         this.Pattern = 'Pattern' in params ? params.Pattern : null;
         this.ThoughtModelAliasName = 'ThoughtModelAliasName' in params ? params.ThoughtModelAliasName : null;
+
+    }
+}
+
+/**
+ * Category information.
+ * @class
+ */
+class CateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Category ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * Category name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Quantity of records (such as documents, synonyms, etc.) under the category.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Whether it is possible to add.
+         * @type {boolean || null}
+         */
+        this.CanAdd = null;
+
+        /**
+         * Whether it can be edited.
+         * @type {boolean || null}
+         */
+        this.CanEdit = null;
+
+        /**
+         * Whether it can be deleted.
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * Subcategory.
+         * @type {Array.<CateInfo> || null}
+         */
+        this.Children = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+
+        if (params.Children) {
+            this.Children = new Array();
+            for (let z in params.Children) {
+                let obj = new CateInfo();
+                obj.deserialize(params.Children[z]);
+                this.Children.push(obj);
+            }
+        }
 
     }
 }
@@ -7159,6 +11055,83 @@ class AICallConfig extends  AbstractModel {
 }
 
 /**
+ * ListRejectedQuestionPreview request structure.
+ * @class
+ */
+class ListRejectedQuestionPreviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query content.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Release ticket ID.
+         * @type {string || null}
+         */
+        this.ReleaseBizId = null;
+
+        /**
+         * Status (1: newly-added; 2: updated; 3:  deleted).
+         * @type {Array.<number> || null}
+         */
+        this.Actions = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
+        this.Actions = 'Actions' in params ? params.Actions : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * ListReleaseConfigPreview response structure.
  * @class
  */
@@ -7209,6 +11182,173 @@ class ListReleaseConfigPreviewResponse extends  AbstractModel {
 }
 
 /**
+ * Model information.
+ * @class
+ */
+class ModelInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model name.
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * Model description.
+         * @type {string || null}
+         */
+        this.ModelDesc = null;
+
+        /**
+         * Model name.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+        /**
+         * Resource status, 1: available; 2: exhausted.
+         * @type {number || null}
+         */
+        this.ResourceStatus = null;
+
+        /**
+         * Character limit of prompt content.
+         * @type {string || null}
+         */
+        this.PromptWordsLimit = null;
+
+        /**
+         * By controlling the diversity of content generation through core sampling, a higher Top P value will lead to more diverse content generation.
+         * @type {ModelParameter || null}
+         */
+        this.TopP = null;
+
+        /**
+         * Temperature control randomness.
+         * @type {ModelParameter || null}
+         */
+        this.Temperature = null;
+
+        /**
+         * Maximum quantity of tokens that can be generated.
+         * @type {ModelParameter || null}
+         */
+        this.MaxTokens = null;
+
+        /**
+         * Model source, Hunyuan: Tencent Hunyuan; Industry: Tencent Cloud industry large model; Experience: new model experience.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Model icon.
+         * @type {string || null}
+         */
+        this.Icon = null;
+
+        /**
+         * Whether it is free.
+         * @type {boolean || null}
+         */
+        this.IsFree = null;
+
+        /**
+         * Maximum characters input in the model dialog box.
+         * @type {number || null}
+         */
+        this.InputLenLimit = null;
+
+        /**
+         * Workflow support levels:
+0 - Not supported by the model;
+1 - Supported by the model;
+2 - Poorly supported by the model.
+         * @type {number || null}
+         */
+        this.SupportWorkflowStatus = null;
+
+        /**
+         * Model categories:
+Generate: Generative model
+Thought: Thinking model
+         * @type {string || null}
+         */
+        this.ModelCategory = null;
+
+        /**
+         * Whether it is the default model.
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Maximum characters of role prompt words.
+         * @type {number || null}
+         */
+        this.RoleLenLimit = null;
+
+        /**
+         * Whether it is an exclusive concurrency model.
+         * @type {boolean || null}
+         */
+        this.IsExclusive = null;
+
+        /**
+         * The model supports intelligent call effects.
+         * @type {number || null}
+         */
+        this.SupportAiCallStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ModelDesc = 'ModelDesc' in params ? params.ModelDesc : null;
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
+        this.ResourceStatus = 'ResourceStatus' in params ? params.ResourceStatus : null;
+        this.PromptWordsLimit = 'PromptWordsLimit' in params ? params.PromptWordsLimit : null;
+
+        if (params.TopP) {
+            let obj = new ModelParameter();
+            obj.deserialize(params.TopP)
+            this.TopP = obj;
+        }
+
+        if (params.Temperature) {
+            let obj = new ModelParameter();
+            obj.deserialize(params.Temperature)
+            this.Temperature = obj;
+        }
+
+        if (params.MaxTokens) {
+            let obj = new ModelParameter();
+            obj.deserialize(params.MaxTokens)
+            this.MaxTokens = obj;
+        }
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Icon = 'Icon' in params ? params.Icon : null;
+        this.IsFree = 'IsFree' in params ? params.IsFree : null;
+        this.InputLenLimit = 'InputLenLimit' in params ? params.InputLenLimit : null;
+        this.SupportWorkflowStatus = 'SupportWorkflowStatus' in params ? params.SupportWorkflowStatus : null;
+        this.ModelCategory = 'ModelCategory' in params ? params.ModelCategory : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.RoleLenLimit = 'RoleLenLimit' in params ? params.RoleLenLimit : null;
+        this.IsExclusive = 'IsExclusive' in params ? params.IsExclusive : null;
+        this.SupportAiCallStatus = 'SupportAiCallStatus' in params ? params.SupportAiCallStatus : null;
+
+    }
+}
+
+/**
  * DeleteRejectedQuestion request structure.
  * @class
  */
@@ -7242,6 +11382,48 @@ class DeleteRejectedQuestionRequest extends  AbstractModel {
         }
         this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
         this.RejectedBizIds = 'RejectedBizIds' in params ? params.RejectedBizIds : null;
+
+    }
+}
+
+/**
+ * Fragment highlight content.
+ * @class
+ */
+class Highlight extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Highlight starting position.
+         * @type {string || null}
+         */
+        this.StartPos = null;
+
+        /**
+         * Highlight end position.
+         * @type {string || null}
+         */
+        this.EndPos = null;
+
+        /**
+         * Highlight subtext.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartPos = 'StartPos' in params ? params.StartPos : null;
+        this.EndPos = 'EndPos' in params ? params.EndPos : null;
+        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -7357,48 +11539,57 @@ class ExportQAListRequest extends  AbstractModel {
 }
 
 /**
- * Execution process information log.
+ * GetDocPreview response structure.
  * @class
  */
-class Procedure extends  AbstractModel {
+class GetDocPreviewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * English name of execution process.
+         * Filename. The release end always uses this name.
          * @type {string || null}
          */
-        this.Name = null;
+        this.FileName = null;
 
         /**
-         * Chinese name for display.
+         * File type.
          * @type {string || null}
          */
-        this.Title = null;
+        this.FileType = null;
 
         /**
-         * Status: processing, success, failed.
+         * COS path.
+
          * @type {string || null}
          */
-        this.Status = null;
+        this.CosUrl = null;
 
         /**
-         * Number of consumed tokens.
-         * @type {number || null}
+         * COS temporary url.
+
+         * @type {string || null}
          */
-        this.Count = null;
+        this.Url = null;
 
         /**
-         * Debugging information.
-         * @type {ProcedureDebugging || null}
+         * COS bucket.
+
+         * @type {string || null}
          */
-        this.Debugging = null;
+        this.Bucket = null;
 
         /**
-         * Billing resource status, 1: available; 2: unavailable.
-         * @type {number || null}
+         * It is the new name in the case of document renaming. It shall be used preferentially on the evaluation end.
+         * @type {string || null}
          */
-        this.ResourceStatus = null;
+        this.NewName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -7409,17 +11600,13 @@ class Procedure extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Title = 'Title' in params ? params.Title : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Count = 'Count' in params ? params.Count : null;
-
-        if (params.Debugging) {
-            let obj = new ProcedureDebugging();
-            obj.deserialize(params.Debugging)
-            this.Debugging = obj;
-        }
-        this.ResourceStatus = 'ResourceStatus' in params ? params.ResourceStatus : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7575,6 +11762,83 @@ class ModifyAppRequest extends  AbstractModel {
 }
 
 /**
+ * Application usage details of knowledge library capacity.
+ * @class
+ */
+class KnowledgeDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application name.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Number of used characters.
+         * @type {string || null}
+         */
+        this.UsedCharSize = null;
+
+        /**
+         * Usage proportion.
+         * @type {number || null}
+         */
+        this.Proportion = null;
+
+        /**
+         * Exceeding character count.
+         * @type {string || null}
+         */
+        this.ExceedCharSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.UsedCharSize = 'UsedCharSize' in params ? params.UsedCharSize : null;
+        this.Proportion = 'Proportion' in params ? params.Proportion : null;
+        this.ExceedCharSize = 'ExceedCharSize' in params ? params.ExceedCharSize : null;
+
+    }
+}
+
+/**
+ * DeleteAttributeLabel response structure.
+ * @class
+ */
+class DeleteAttributeLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RetryRelease request structure.
  * @class
  */
@@ -7605,6 +11869,91 @@ class RetryReleaseRequest extends  AbstractModel {
         }
         this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
         this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
+
+    }
+}
+
+/**
+ * Information of application-associated plug-in.
+ * @class
+ */
+class KnowledgeQaPlugin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plugin ID.
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * Plugin name.
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * Plugin icon.
+         * @type {string || null}
+         */
+        this.PluginIcon = null;
+
+        /**
+         * Tool ID.
+         * @type {string || null}
+         */
+        this.ToolId = null;
+
+        /**
+         * Tool name.
+         * @type {string || null}
+         */
+        this.ToolName = null;
+
+        /**
+         * Tool description.
+         * @type {string || null}
+         */
+        this.ToolDesc = null;
+
+        /**
+         * Tool input parameter.
+         * @type {Array.<PluginToolReqParam> || null}
+         */
+        this.Inputs = null;
+
+        /**
+         * Whether the plugin is bound to the knowledge library.
+         * @type {boolean || null}
+         */
+        this.IsBindingKnowledge = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginIcon = 'PluginIcon' in params ? params.PluginIcon : null;
+        this.ToolId = 'ToolId' in params ? params.ToolId : null;
+        this.ToolName = 'ToolName' in params ? params.ToolName : null;
+        this.ToolDesc = 'ToolDesc' in params ? params.ToolDesc : null;
+
+        if (params.Inputs) {
+            this.Inputs = new Array();
+            for (let z in params.Inputs) {
+                let obj = new PluginToolReqParam();
+                obj.deserialize(params.Inputs[z]);
+                this.Inputs.push(obj);
+            }
+        }
+        this.IsBindingKnowledge = 'IsBindingKnowledge' in params ? params.IsBindingKnowledge : null;
 
     }
 }
@@ -7775,30 +12124,54 @@ How to Obtain It:</br>
 }
 
 /**
- * 
+ * Obtain Q&A category group.
  * @class
  */
-class VoiceConfig extends  AbstractModel {
+class QACate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
+         * Q&A category business ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+        /**
+         * Category name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Quantity of Q&As under the category.
          * @type {number || null}
          */
-        this.VoiceType = null;
+        this.Total = null;
 
         /**
-         * 
-         * @type {string || null}
+         * Whether it is possible to add.
+         * @type {boolean || null}
          */
-        this.TimbreKey = null;
+        this.CanAdd = null;
 
         /**
-         * 
-         * @type {string || null}
+         * Whether it can be edited.
+         * @type {boolean || null}
          */
-        this.VoiceName = null;
+        this.CanEdit = null;
+
+        /**
+         * Whether it can be deleted.
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * Subcategory.
+         * @type {Array.<QACate> || null}
+         */
+        this.Children = null;
 
     }
 
@@ -7809,9 +12182,21 @@ class VoiceConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
-        this.TimbreKey = 'TimbreKey' in params ? params.TimbreKey : null;
-        this.VoiceName = 'VoiceName' in params ? params.VoiceName : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+
+        if (params.Children) {
+            this.Children = new Array();
+            for (let z in params.Children) {
+                let obj = new QACate();
+                obj.deserialize(params.Children[z]);
+                this.Children.push(obj);
+            }
+        }
 
     }
 }
@@ -8191,6 +12576,41 @@ class ListAttributeLabelRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteDocCate request structure.
+ * @class
+ */
+class DeleteDocCateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Category business ID.
+         * @type {string || null}
+         */
+        this.CateBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
+
+    }
+}
+
+/**
  * Reference source in agent.
  * @class
  */
@@ -8352,6 +12772,91 @@ class BaseConfig extends  AbstractModel {
 }
 
 /**
+ * DescribeSegments response structure.
+ * @class
+ */
+class DescribeSegmentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Fragment list.
+         * @type {Array.<DocSegment> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new DocSegment();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Similar question information.
+ * @class
+ */
+class SimilarQuestion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Similar question ID.
+         * @type {string || null}
+         */
+        this.SimBizId = null;
+
+        /**
+         * Similar question content.
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Similar question review status, 1: audit failure.
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SimBizId = 'SimBizId' in params ? params.SimBizId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+
+    }
+}
+
+/**
  * Label extraction configuration.
  * @class
  */
@@ -8451,6 +12956,34 @@ class DescribeConcurrencyUsageRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
+
+    }
+}
+
+/**
+ * GroupDoc response structure.
+ * @class
+ */
+class GroupDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8576,6 +13109,67 @@ class ListUsageCallDetailResponse extends  AbstractModel {
 }
 
 /**
+ * ExportAttributeLabel request structure.
+ * @class
+ */
+class ExportAttributeLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * Attribute ID.
+         * @type {Array.<string> || null}
+         */
+        this.AttributeBizIds = null;
+
+        /**
+         * Export according to the filtered data.
+         * @type {AttributeFilters || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.AttributeBizIds = 'AttributeBizIds' in params ? params.AttributeBizIds : null;
+
+        if (params.Filters) {
+            let obj = new AttributeFilters();
+            obj.deserialize(params.Filters)
+            this.Filters = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeTokenUsage request structure.
  * @class
  */
@@ -8660,40 +13254,24 @@ class DescribeTokenUsageRequest extends  AbstractModel {
 }
 
 /**
- * ListRejectedQuestion request structure.
+ * GetAppKnowledgeCount response structure.
  * @class
  */
-class ListRejectedQuestionRequest extends  AbstractModel {
+class GetAppKnowledgeCountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID.
+         * Total number.
          * @type {string || null}
          */
-        this.BotBizId = null;
+        this.Total = null;
 
         /**
-         * Page number.
-
-
-         * @type {number || null}
-         */
-        this.PageNumber = null;
-
-        /**
-         * Number of items per page.
-
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Query content.
-
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Query = null;
+        this.RequestId = null;
 
     }
 
@@ -8704,10 +13282,120 @@ class ListRejectedQuestionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAttributeLabel response structure.
+ * @class
+ */
+class CreateAttributeLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Label ID.
+         * @type {string || null}
+         */
+        this.AttrBizId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AttrBizId = 'AttrBizId' in params ? params.AttrBizId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListAppKnowledgeDetail request structure.
+ * @class
+ */
+class ListAppKnowledgeDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Page size.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Application ID list.
+         * @type {Array.<string> || null}
+         */
+        this.AppBizIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.Query = 'Query' in params ? params.Query : null;
+        this.AppBizIds = 'AppBizIds' in params ? params.AppBizIds : null;
+
+    }
+}
+
+/**
+ * CreateQA response structure.
+ * @class
+ */
+class CreateQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Q&A ID.
+         * @type {string || null}
+         */
+        this.QaBizId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QaBizId = 'QaBizId' in params ? params.QaBizId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8741,24 +13429,66 @@ class ListQACateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * ListReleaseQAPreview request structure.
  * @class
  */
-class AgentDebugInfo extends  AbstractModel {
+class ListReleaseQAPreviewRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 
+         * Application ID.
          * @type {string || null}
          */
-        this.Input = null;
+        this.BotBizId = null;
 
         /**
-         * 
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query content.
          * @type {string || null}
          */
-        this.Output = null;
+        this.Query = null;
+
+        /**
+         * Release ticket ID.
+         * @type {string || null}
+         */
+        this.ReleaseBizId = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Status (1: newly-added; 2: modified; 3: deleted).
+         * @type {Array.<number> || null}
+         */
+        this.Actions = null;
+
+        /**
+         * Release status (4: release successful; 5: release failed).
+         * @type {Array.<number> || null}
+         */
+        this.ReleaseStatus = null;
 
     }
 
@@ -8769,8 +13499,201 @@ class AgentDebugInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Input = 'Input' in params ? params.Input : null;
-        this.Output = 'Output' in params ? params.Output : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Actions = 'Actions' in params ? params.Actions : null;
+        this.ReleaseStatus = 'ReleaseStatus' in params ? params.ReleaseStatus : null;
+
+    }
+}
+
+/**
+ * DescribeReleaseInfo response structure.
+ * @class
+ */
+class DescribeReleaseInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The last release time.
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+        /**
+         * Release status: 1: pending release; 2: releasing; 3: release successful; 4: release failed; 5: under review; 6: review successful; 7: review failed; 8: release successful, callback processing; 9: release paused; 10: appeal under review; 11: appeal approved; 12: appeal rejected.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether it has been edited. When it is true, it means it can be released.
+         * @type {boolean || null}
+         */
+        this.IsUpdated = null;
+
+        /**
+         * Reason for failure.
+
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsUpdated = 'IsUpdated' in params ? params.IsUpdated : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApp response structure.
+ * @class
+ */
+class DescribeAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.AppBizId = null;
+
+        /**
+         * Application type; knowledge_qa - knowledge Q&A management; summary - knowledge summary; classifys - knowledge label extraction.
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * Application type description.
+         * @type {string || null}
+         */
+        this.AppTypeDesc = null;
+
+        /**
+         * Application type description.
+         * @type {BaseConfig || null}
+         */
+        this.BaseConfig = null;
+
+        /**
+         * Application configuration.
+         * @type {AppConfig || null}
+         */
+        this.AppConfig = null;
+
+        /**
+         * Whether the avatar is under appeal.
+         * @type {boolean || null}
+         */
+        this.AvatarInAppeal = null;
+
+        /**
+         * Whether the role description is under appeal.
+         * @type {boolean || null}
+         */
+        this.RoleInAppeal = null;
+
+        /**
+         * Whether the name is under appeal.
+         * @type {boolean || null}
+         */
+        this.NameInAppeal = null;
+
+        /**
+         * Whether the welcome words are under appeal.
+         * @type {boolean || null}
+         */
+        this.GreetingInAppeal = null;
+
+        /**
+         * Whether the response message for unknown questions is under appeal.
+         * @type {boolean || null}
+         */
+        this.BareAnswerInAppeal = null;
+
+        /**
+         * App key of the application.
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * Application status. 1: offline; 2: running; 3: disabled.
+         * @type {number || null}
+         */
+        this.AppStatus = null;
+
+        /**
+         * Status description.
+         * @type {string || null}
+         */
+        this.AppStatusDesc = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.AppTypeDesc = 'AppTypeDesc' in params ? params.AppTypeDesc : null;
+
+        if (params.BaseConfig) {
+            let obj = new BaseConfig();
+            obj.deserialize(params.BaseConfig)
+            this.BaseConfig = obj;
+        }
+
+        if (params.AppConfig) {
+            let obj = new AppConfig();
+            obj.deserialize(params.AppConfig)
+            this.AppConfig = obj;
+        }
+        this.AvatarInAppeal = 'AvatarInAppeal' in params ? params.AvatarInAppeal : null;
+        this.RoleInAppeal = 'RoleInAppeal' in params ? params.RoleInAppeal : null;
+        this.NameInAppeal = 'NameInAppeal' in params ? params.NameInAppeal : null;
+        this.GreetingInAppeal = 'GreetingInAppeal' in params ? params.GreetingInAppeal : null;
+        this.BareAnswerInAppeal = 'BareAnswerInAppeal' in params ? params.BareAnswerInAppeal : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.AppStatus = 'AppStatus' in params ? params.AppStatus : null;
+        this.AppStatusDesc = 'AppStatusDesc' in params ? params.AppStatusDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8806,6 +13729,34 @@ class DeleteAppRequest extends  AbstractModel {
         }
         this.AppBizId = 'AppBizId' in params ? params.AppBizId : null;
         this.AppType = 'AppType' in params ? params.AppType : null;
+
+    }
+}
+
+/**
+ * ModifyRejectedQuestion response structure.
+ * @class
+ */
+class ModifyRejectedQuestionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8917,30 +13868,30 @@ class TaskParams extends  AbstractModel {
 }
 
 /**
- * ListRejectedQuestion response structure.
+ * Application type details.
  * @class
  */
-class ListRejectedQuestionResponse extends  AbstractModel {
+class ListAppCategoryRspOption extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number.
+         * Type name.
          * @type {string || null}
          */
-        this.Total = null;
+        this.Text = null;
 
         /**
-         * List of rejected questions.
-         * @type {Array.<RejectedQuestion> || null}
-         */
-        this.List = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Type value.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Value = null;
+
+        /**
+         * Type log.
+         * @type {string || null}
+         */
+        this.Logo = null;
 
     }
 
@@ -8951,17 +13902,59 @@ class ListRejectedQuestionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Logo = 'Logo' in params ? params.Logo : null;
 
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new RejectedQuestion();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeStorageCredential request structure.
+ * @class
+ */
+class DescribeStorageCredentialRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID. The parameter still needs to be filled in. Different combinations of parameters will result in different permissions. For details, see https://cloud.tencent.com/document/product/1759/116238.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * File type, normal file name type suffixes, such as xlsx, pdf, docx, png, etc.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * This parameter is used to select a scenario when uploading a file or an image. When uploading an image in a chat, "Ispublic" is "true." When uploading a file (including files in the document library, images, etc. and files in a chat), "Ispublic" is "false."
+
+         * @type {boolean || null}
+         */
+        this.IsPublic = null;
+
+        /**
+         * Storage type: offline - offline file; realtime - real-time file. If empty, it defaults to offline.
+         * @type {string || null}
+         */
+        this.TypeKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.TypeKey = 'TypeKey' in params ? params.TypeKey : null;
 
     }
 }
@@ -9023,6 +14016,85 @@ class QAList extends  AbstractModel {
 }
 
 /**
+ * DescribeCorp response structure.
+ * @class
+ */
+class DescribeCorpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Corporate ID.
+
+         * @type {string || null}
+         */
+        this.CorpBizId = null;
+
+        /**
+         * Application quota.
+         * @type {number || null}
+         */
+        this.RobotQuota = null;
+
+        /**
+         * Full name of the corporate.
+
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+        /**
+         * Whether to try out.
+         * @type {boolean || null}
+         */
+        this.IsTrial = null;
+
+        /**
+         * Whether the trial has expired.
+         * @type {boolean || null}
+         */
+        this.IsTrialExpired = null;
+
+        /**
+         * Quantity of available applications.
+         * @type {number || null}
+         */
+        this.AvailableAppQuota = null;
+
+        /**
+         * Whether custom model configuration is supported.
+         * @type {boolean || null}
+         */
+        this.IsSupportCustomModel = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CorpBizId = 'CorpBizId' in params ? params.CorpBizId : null;
+        this.RobotQuota = 'RobotQuota' in params ? params.RobotQuota : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+        this.IsTrial = 'IsTrial' in params ? params.IsTrial : null;
+        this.IsTrialExpired = 'IsTrialExpired' in params ? params.IsTrialExpired : null;
+        this.AvailableAppQuota = 'AvailableAppQuota' in params ? params.AvailableAppQuota : null;
+        this.IsSupportCustomModel = 'IsSupportCustomModel' in params ? params.IsSupportCustomModel : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDocCate response structure.
  * @class
  */
@@ -9051,36 +14123,24 @@ class ModifyDocCateResponse extends  AbstractModel {
 }
 
 /**
- * SaveDoc response structure.
+ * ListRelease response structure.
  * @class
  */
-class SaveDocResponse extends  AbstractModel {
+class ListReleaseResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Document ID.
+         * Number of release lists.
          * @type {string || null}
          */
-        this.DocBizId = null;
+        this.Total = null;
 
         /**
-         * Import error message.
-         * @type {string || null}
+         * Release list.
+         * @type {Array.<ListReleaseItem> || null}
          */
-        this.ErrorMsg = null;
-
-        /**
-         * Error link.
-         * @type {string || null}
-         */
-        this.ErrorLink = null;
-
-        /**
-         * Error link text.
-         * @type {string || null}
-         */
-        this.ErrorLinkText = null;
+        this.List = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9097,11 +14157,194 @@ class SaveDocResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.ErrorLink = 'ErrorLink' in params ? params.ErrorLink : null;
-        this.ErrorLinkText = 'ErrorLinkText' in params ? params.ErrorLinkText : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ListReleaseItem();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListModel response structure.
+ * @class
+ */
+class ListModelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model list.
+         * @type {Array.<ModelInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new ModelInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListAttributeLabel response structure.
+ * @class
+ */
+class ListAttributeLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {string || null}
+         */
+        this.Total = null;
+
+        /**
+         * List.
+         * @type {Array.<AttrLabelDetail> || null}
+         */
+        this.List = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttrLabelDetail();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Details of release list.
+ * @class
+ */
+class ListReleaseItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version ID.
+         * @type {string || null}
+         */
+        this.ReleaseBizId = null;
+
+        /**
+         * Releaser.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Release description.
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Release status.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Release status description.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Reason for failure.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Number of successful releases.
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * Number of failed releases.
+         * @type {number || null}
+         */
+        this.FailCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReleaseBizId = 'ReleaseBizId' in params ? params.ReleaseBizId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.FailCount = 'FailCount' in params ? params.FailCount : null;
 
     }
 }
@@ -9276,54 +14519,78 @@ class GetMsgRecordRequest extends  AbstractModel {
 }
 
 /**
- * Obtain response of unsatisfied reply context.
+ * DescribeStorageCredential response structure.
  * @class
  */
-class Context extends  AbstractModel {
+class DescribeStorageCredentialResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Message record ID.
-         * @type {string || null}
+         * Key information.
+         * @type {Credentials || null}
          */
-        this.RecordBizId = null;
+        this.Credentials = null;
 
         /**
-         * Whether it is a user.
-         * @type {boolean || null}
-         */
-        this.IsVisitor = null;
-
-        /**
-         * Nickname.
-         * @type {string || null}
-         */
-        this.NickName = null;
-
-        /**
-         * Avatar.
-         * @type {string || null}
-         */
-        this.Avatar = null;
-
-        /**
-         * Message content.
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * Document information.
-         * @type {Array.<MsgFileInfo> || null}
-         */
-        this.FileInfos = null;
-
-        /**
-         * Response method, 15: clarification confirmation response.
+         * Expiration time.
          * @type {number || null}
          */
-        this.ReplyMethod = null;
+        this.ExpiredTime = null;
+
+        /**
+         * Start time.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Cloud object storage bucket.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * COS availability zone.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Cloud file storage directory.
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * Storage type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Primary account.
+         * @type {string || null}
+         */
+        this.CorpUin = null;
+
+        /**
+         * Image storage directory.
+         * @type {string || null}
+         */
+        this.ImagePath = null;
+
+        /**
+         * Upload storage path to a specific file.
+         * @type {string || null}
+         */
+        this.UploadPath = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9334,21 +14601,92 @@ class Context extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RecordBizId = 'RecordBizId' in params ? params.RecordBizId : null;
-        this.IsVisitor = 'IsVisitor' in params ? params.IsVisitor : null;
-        this.NickName = 'NickName' in params ? params.NickName : null;
-        this.Avatar = 'Avatar' in params ? params.Avatar : null;
-        this.Content = 'Content' in params ? params.Content : null;
 
-        if (params.FileInfos) {
-            this.FileInfos = new Array();
-            for (let z in params.FileInfos) {
-                let obj = new MsgFileInfo();
-                obj.deserialize(params.FileInfos[z]);
-                this.FileInfos.push(obj);
-            }
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
         }
-        this.ReplyMethod = 'ReplyMethod' in params ? params.ReplyMethod : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CorpUin = 'CorpUin' in params ? params.CorpUin : null;
+        this.ImagePath = 'ImagePath' in params ? params.ImagePath : null;
+        this.UploadPath = 'UploadPath' in params ? params.UploadPath : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckAttributeLabelExist response structure.
+ * @class
+ */
+class CheckAttributeLabelExistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether it exists.
+         * @type {boolean || null}
+         */
+        this.IsExist = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsExist = 'IsExist' in params ? params.IsExist : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * String KV information.
+ * @class
+ */
+class StrValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -9391,6 +14729,41 @@ class GetTaskStatusRequest extends  AbstractModel {
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+
+    }
+}
+
+/**
+ * CheckAttributeLabelRefer response structure.
+ * @class
+ */
+class CheckAttributeLabelReferResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to reference.
+         * @type {boolean || null}
+         */
+        this.IsRefer = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsRefer = 'IsRefer' in params ? params.IsRefer : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9532,6 +14905,105 @@ class PluginToolReqParam extends  AbstractModel {
 }
 
 /**
+ * Release rejected questions.
+ * @class
+ */
+class ReleaseRejectedQuestion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Question.
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Status.
+         * @type {number || null}
+         */
+        this.Action = null;
+
+        /**
+         * Status description.
+         * @type {string || null}
+         */
+        this.ActionDesc = null;
+
+        /**
+         * Reason for failure.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Question = 'Question' in params ? params.Question : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ActionDesc = 'ActionDesc' in params ? params.ActionDesc : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * CreateQACate request structure.
+ * @class
+ */
+class CreateQACateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Parent business id. pass the string "0" when creating a top-level category.
+         * @type {string || null}
+         */
+        this.ParentBizId = null;
+
+        /**
+         * Category name.
+
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.ParentBizId = 'ParentBizId' in params ? params.ParentBizId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * DescribeRobotBizIDByAppKey request structure.
  * @class
  */
@@ -9560,54 +15032,18 @@ class DescribeRobotBizIDByAppKeyRequest extends  AbstractModel {
 }
 
 /**
- * Obtain Q&A category group.
+ * ExportUnsatisfiedReply response structure.
  * @class
  */
-class QACate extends  AbstractModel {
+class ExportUnsatisfiedReplyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Q&A category business ID.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CateBizId = null;
-
-        /**
-         * Category name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Quantity of Q&As under the category.
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Whether it is possible to add.
-         * @type {boolean || null}
-         */
-        this.CanAdd = null;
-
-        /**
-         * Whether it can be edited.
-         * @type {boolean || null}
-         */
-        this.CanEdit = null;
-
-        /**
-         * Whether it can be deleted.
-         * @type {boolean || null}
-         */
-        this.CanDelete = null;
-
-        /**
-         * Subcategory.
-         * @type {Array.<QACate> || null}
-         */
-        this.Children = null;
+        this.RequestId = null;
 
     }
 
@@ -9618,21 +15054,7 @@ class QACate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CateBizId = 'CateBizId' in params ? params.CateBizId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Total = 'Total' in params ? params.Total : null;
-        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
-        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
-        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
-
-        if (params.Children) {
-            this.Children = new Array();
-            for (let z in params.Children) {
-                let obj = new QACate();
-                obj.deserialize(params.Children[z]);
-                this.Children.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9806,6 +15228,41 @@ class ReleaseConfigs extends  AbstractModel {
 }
 
 /**
+ * DescribeSegments request structure.
+ * @class
+ */
+class DescribeSegmentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Document fragment ID.
+         * @type {Array.<string> || null}
+         */
+        this.SegBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.SegBizId = 'SegBizId' in params ? params.SegBizId : null;
+
+    }
+}
+
+/**
  * DescribeSearchStatsGraph request structure.
  * @class
  */
@@ -9962,6 +15419,55 @@ class Filters extends  AbstractModel {
 }
 
 /**
+ * DescribeRefer request structure.
+ * @class
+ */
+class DescribeReferRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Quota ID
+         * @type {Array.<string> || null}
+         */
+        this.ReferBizIds = null;
+
+        /**
+         * Log in to the user's root account (required in the integrator mode).
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login user sub-account (required in integrator mode).
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.ReferBizIds = 'ReferBizIds' in params ? params.ReferBizIds : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+
+    }
+}
+
+/**
  * IgnoreUnsatisfiedReply response structure.
  * @class
  */
@@ -9985,6 +15491,41 @@ class IgnoreUnsatisfiedReplyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopDocParse request structure.
+ * @class
+ */
+class StopDocParseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {string || null}
+         */
+        this.BotBizId = null;
+
+        /**
+         * Document ID.
+         * @type {string || null}
+         */
+        this.DocBizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotBizId = 'BotBizId' in params ? params.BotBizId : null;
+        this.DocBizId = 'DocBizId' in params ? params.DocBizId : null;
 
     }
 }
@@ -10020,6 +15561,64 @@ class KnowledgeWorkflow extends  AbstractModel {
         }
         this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
         this.UsePdl = 'UsePdl' in params ? params.UsePdl : null;
+
+    }
+}
+
+/**
+ * ListModel request structure.
+ * @class
+ */
+class ListModelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application type; knowledge_qa - knowledge Q&A management; summary - knowledge summary; classifys - knowledge label extraction.
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * Application mode standard: standard; agent; single_workflow.
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * Model category: 
+Generate: Generative model
+Thought: Thinking model
+         * @type {string || null}
+         */
+        this.ModelCategory = null;
+
+        /**
+         * Login to user's root account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * Login to user's sub-account (required in integrator mode).	
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.ModelCategory = 'ModelCategory' in params ? params.ModelCategory : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
 
     }
 }
@@ -10070,179 +15669,271 @@ class ListSelectDocRequest extends  AbstractModel {
 module.exports = {
     ModifyQAAttrRangeResponse: ModifyQAAttrRangeResponse,
     GetWsTokenResponse: GetWsTokenResponse,
-    ListAppRequest: ListAppRequest,
-    GetWsTokenReq_Label: GetWsTokenReq_Label,
+    ListUsageCallDetailRequest: ListUsageCallDetailRequest,
+    CheckAttributeLabelExistRequest: CheckAttributeLabelExistRequest,
+    AttributeFilters: AttributeFilters,
+    DescribeQAResponse: DescribeQAResponse,
+    ExtraInfo: ExtraInfo,
+    GetAppKnowledgeCountRequest: GetAppKnowledgeCountRequest,
     StopDocParseResponse: StopDocParseResponse,
     ListSelectDocResponse: ListSelectDocResponse,
+    DescribeReleaseInfoRequest: DescribeReleaseInfoRequest,
     DeleteDocRequest: DeleteDocRequest,
+    GetAnswerTypeDataCountRequest: GetAnswerTypeDataCountRequest,
     RunNodeInfo: RunNodeInfo,
-    ModifyRejectedQuestionRequest: ModifyRejectedQuestionRequest,
+    AgentDebugInfo: AgentDebugInfo,
     UploadAttributeLabelResponse: UploadAttributeLabelResponse,
     MsgRecord: MsgRecord,
-    ListUnsatisfiedReplyResponse: ListUnsatisfiedReplyResponse,
+    CreateDocCateResponse: CreateDocCateResponse,
+    DeleteDocCateResponse: DeleteDocCateResponse,
+    ExportAttributeLabelResponse: ExportAttributeLabelResponse,
     WorkflowInfo: WorkflowInfo,
     ExportQAListResponse: ExportQAListResponse,
-    UnsatisfiedReply: UnsatisfiedReply,
-    VerifyQARequest: VerifyQARequest,
-    GetMsgRecordResponse: GetMsgRecordResponse,
+    GetAppSecretResponse: GetAppSecretResponse,
+    ListRejectedQuestionRequest: ListRejectedQuestionRequest,
+    CreateQACateResponse: CreateQACateResponse,
+    ModifyDocAttrRangeResponse: ModifyDocAttrRangeResponse,
+    GetAnswerTypeDataCountResponse: GetAnswerTypeDataCountResponse,
+    DescribeQARequest: DescribeQARequest,
     AttrLabelRefer: AttrLabelRefer,
     CreateReconstructDocumentFlowConfig: CreateReconstructDocumentFlowConfig,
     DescribeUnsatisfiedReplyContextRequest: DescribeUnsatisfiedReplyContextRequest,
+    Procedure: Procedure,
+    ListAppRequest: ListAppRequest,
     AttrLabel: AttrLabel,
     ModifyQAAttrRangeRequest: ModifyQAAttrRangeRequest,
-    ExtraInfo: ExtraInfo,
+    GetWsTokenReq_Label: GetWsTokenReq_Label,
     ModifyDocResponse: ModifyDocResponse,
+    ReleaseDoc: ReleaseDoc,
     KnowledgeQaSearch: KnowledgeQaSearch,
     CreateCorpResponse: CreateCorpResponse,
+    ListQARequest: ListQARequest,
     DescribeKnowledgeUsageResponse: DescribeKnowledgeUsageResponse,
+    ReferDetail: ReferDetail,
     ListUnsatisfiedReplyRequest: ListUnsatisfiedReplyRequest,
     DeleteQARequest: DeleteQARequest,
-    DescribeCallStatsGraphRequest: DescribeCallStatsGraphRequest,
-    KnowledgeQaPlugin: KnowledgeQaPlugin,
+    GetLikeDataCountResponse: GetLikeDataCountResponse,
+    ListReleaseRequest: ListReleaseRequest,
+    KnowledgeCapacityPieGraphDetail: KnowledgeCapacityPieGraphDetail,
+    CreateDocCateRequest: CreateDocCateRequest,
     InvokeAPI: InvokeAPI,
     SummaryOutput: SummaryOutput,
     ModifyAppResponse: ModifyAppResponse,
+    ListDocResponse: ListDocResponse,
     ModifyQARequest: ModifyQARequest,
     TaskFlowInfo: TaskFlowInfo,
+    GetDocPreviewRequest: GetDocPreviewRequest,
+    ListDocCateResponse: ListDocCateResponse,
+    ListRejectedQuestionPreviewResponse: ListRejectedQuestionPreviewResponse,
+    DescribeCorpRequest: DescribeCorpRequest,
+    ListAppCategoryResponse: ListAppCategoryResponse,
+    CreateAppResponse: CreateAppResponse,
     DescribeAttributeLabelRequest: DescribeAttributeLabelRequest,
+    CreateQARequest: CreateQARequest,
     KnowledgeSummary: KnowledgeSummary,
+    TaskFlowSummary: TaskFlowSummary,
     CreateCorpRequest: CreateCorpRequest,
     RetryDocParseRequest: RetryDocParseRequest,
+    ListQaItem: ListQaItem,
+    DeleteAttributeLabelRequest: DeleteAttributeLabelRequest,
     DescribeRobotBizIDByAppKeyResponse: DescribeRobotBizIDByAppKeyResponse,
+    RenameDocResponse: RenameDocResponse,
+    ListDocCateRequest: ListDocCateRequest,
     DescribeDocResponse: DescribeDocResponse,
     CreateReleaseRequest: CreateReleaseRequest,
     Label: Label,
     AgentProcedure: AgentProcedure,
     KnowledgeQaOutput: KnowledgeQaOutput,
+    ModifyRejectedQuestionRequest: ModifyRejectedQuestionRequest,
     ApiVarAttrInfo: ApiVarAttrInfo,
     AgentThought: AgentThought,
-    ListQACateResponse: ListQACateResponse,
+    GroupDocRequest: GroupDocRequest,
+    CheckAttributeLabelReferRequest: CheckAttributeLabelReferRequest,
     ModifyQACateRequest: ModifyQACateRequest,
     SearchStrategy: SearchStrategy,
     ModifyAttributeLabelRequest: ModifyAttributeLabelRequest,
     ProcedureDebugging: ProcedureDebugging,
     AttributeLabel: AttributeLabel,
     Option: Option,
-    StopDocParseRequest: StopDocParseRequest,
-    ListUsageCallDetailRequest: ListUsageCallDetailRequest,
+    ListUnsatisfiedReplyResponse: ListUnsatisfiedReplyResponse,
+    GetAppSecretRequest: GetAppSecretRequest,
+    ModelParameter: ModelParameter,
     DeleteQACateResponse: DeleteQACateResponse,
+    SaveDocResponse: SaveDocResponse,
+    ListReleaseDocPreviewResponse: ListReleaseDocPreviewResponse,
+    RenameDocRequest: RenameDocRequest,
     SummaryConfig: SummaryConfig,
     GenerateQAResponse: GenerateQAResponse,
     GetTaskStatusResponse: GetTaskStatusResponse,
-    TaskFlowSummary: TaskFlowSummary,
+    DescribeConcurrencyUsageGraphRequest: DescribeConcurrencyUsageGraphRequest,
     DescribeDocRequest: DescribeDocRequest,
     AgentProcedureDebugging: AgentProcedureDebugging,
     DescribeTokenUsageGraphRequest: DescribeTokenUsageGraphRequest,
     RetryDocAuditRequest: RetryDocAuditRequest,
+    VoiceConfig: VoiceConfig,
     SaveDocRequest: SaveDocRequest,
-    DescribeConcurrencyUsageGraphRequest: DescribeConcurrencyUsageGraphRequest,
+    ReconstructDocumentFailedPage: ReconstructDocumentFailedPage,
+    ListAppKnowledgeDetailResponse: ListAppKnowledgeDetailResponse,
+    ModifyQACateResponse: ModifyQACateResponse,
+    DescribeAttributeLabelResponse: DescribeAttributeLabelResponse,
     KnowledgeQaSingleWorkflow: KnowledgeQaSingleWorkflow,
+    ListQACateResponse: ListQACateResponse,
     RetryDocParseResponse: RetryDocParseResponse,
-    StrValue: StrValue,
+    CreateRejectedQuestionResponse: CreateRejectedQuestionResponse,
+    ListReleaseQAPreviewResponse: ListReleaseQAPreviewResponse,
     ExportUnsatisfiedReplyRequest: ExportUnsatisfiedReplyRequest,
+    GroupQAResponse: GroupQAResponse,
     QuoteInfo: QuoteInfo,
+    CreateAppRequest: CreateAppRequest,
     AppConfig: AppConfig,
     DescribeReleaseRequest: DescribeReleaseRequest,
-    SimilarQuestion: SimilarQuestion,
+    ReleaseQA: ReleaseQA,
+    ListAppCategoryRequest: ListAppCategoryRequest,
     ListReleaseConfigPreviewRequest: ListReleaseConfigPreviewRequest,
     CallDetail: CallDetail,
-    ModifyRejectedQuestionResponse: ModifyRejectedQuestionResponse,
+    DocFilterFlag: DocFilterFlag,
+    ListReleaseDocPreviewRequest: ListReleaseDocPreviewRequest,
     TokenStat: TokenStat,
+    DocSegment: DocSegment,
+    UnsatisfiedReply: UnsatisfiedReply,
     DescribeUnsatisfiedReplyContextResponse: DescribeUnsatisfiedReplyContextResponse,
     ModifyDocAttrRangeRequest: ModifyDocAttrRangeRequest,
     DigitalHumanConfig: DigitalHumanConfig,
-    ExportUnsatisfiedReplyResponse: ExportUnsatisfiedReplyResponse,
+    CreateRejectedQuestionRequest: CreateRejectedQuestionRequest,
     DescribeKnowledgeUsagePieGraphRequest: DescribeKnowledgeUsagePieGraphRequest,
     AttrLabelDetail: AttrLabelDetail,
-    DescribeAttributeLabelResponse: DescribeAttributeLabelResponse,
-    ModifyDocAttrRangeResponse: ModifyDocAttrRangeResponse,
+    DescribeReferResponse: DescribeReferResponse,
+    Context: Context,
+    ListDocRequest: ListDocRequest,
     QAQuery: QAQuery,
-    KnowledgeCapacityPieGraphDetail: KnowledgeCapacityPieGraphDetail,
-    ModifyQACateResponse: ModifyQACateResponse,
+    GroupQARequest: GroupQARequest,
+    DescribeCallStatsGraphRequest: DescribeCallStatsGraphRequest,
+    GetMsgRecordResponse: GetMsgRecordResponse,
+    DescribeAppRequest: DescribeAppRequest,
+    GetReconstructDocumentResultRequest: GetReconstructDocumentResultRequest,
     DescribeKnowledgeUsageRequest: DescribeKnowledgeUsageRequest,
+    ListQAResponse: ListQAResponse,
     IgnoreUnsatisfiedReplyRequest: IgnoreUnsatisfiedReplyRequest,
     DescribeReleaseResponse: DescribeReleaseResponse,
     DescribeConcurrencyUsageGraphResponse: DescribeConcurrencyUsageGraphResponse,
+    ListDocItem: ListDocItem,
+    VerifyQARequest: VerifyQARequest,
     RateMsgRecordRequest: RateMsgRecordRequest,
     AppModel: AppModel,
     Stat: Stat,
     DescribeKnowledgeUsagePieGraphResponse: DescribeKnowledgeUsagePieGraphResponse,
+    ListRejectedQuestionResponse: ListRejectedQuestionResponse,
     ClassifyLabel: ClassifyLabel,
     DescribeTokenUsageGraphResponse: DescribeTokenUsageGraphResponse,
     SimilarQuestionModify: SimilarQuestionModify,
     WorkflowRunNodeInfo: WorkflowRunNodeInfo,
     StatisticInfo: StatisticInfo,
     RetryDocAuditResponse: RetryDocAuditResponse,
+    GetReconstructDocumentResultResponse: GetReconstructDocumentResultResponse,
     ModifyDocCateRequest: ModifyDocCateRequest,
     RetryReleaseResponse: RetryReleaseResponse,
+    GetLikeDataCountRequest: GetLikeDataCountRequest,
     DeleteRejectedQuestionResponse: DeleteRejectedQuestionResponse,
-    ListAttributeLabelResponse: ListAttributeLabelResponse,
+    Credentials: Credentials,
     MsgFileInfo: MsgFileInfo,
+    CreateAttributeLabelRequest: CreateAttributeLabelRequest,
     ListAppResponse: ListAppResponse,
     AppInfo: AppInfo,
+    CateInfo: CateInfo,
     CreateReconstructDocumentFlowRequest: CreateReconstructDocumentFlowRequest,
     ValueInfo: ValueInfo,
     KnowledgeQaConfig: KnowledgeQaConfig,
     RejectedQuestion: RejectedQuestion,
     MsgRecordReference: MsgRecordReference,
     AICallConfig: AICallConfig,
+    ListRejectedQuestionPreviewRequest: ListRejectedQuestionPreviewRequest,
     ListReleaseConfigPreviewResponse: ListReleaseConfigPreviewResponse,
+    ModelInfo: ModelInfo,
     DeleteRejectedQuestionRequest: DeleteRejectedQuestionRequest,
+    Highlight: Highlight,
     FileInfo: FileInfo,
     ExportQAListRequest: ExportQAListRequest,
-    Procedure: Procedure,
+    GetDocPreviewResponse: GetDocPreviewResponse,
     DescribeConcurrencyUsageResponse: DescribeConcurrencyUsageResponse,
     CreateReleaseResponse: CreateReleaseResponse,
     ModifyAppRequest: ModifyAppRequest,
+    KnowledgeDetail: KnowledgeDetail,
+    DeleteAttributeLabelResponse: DeleteAttributeLabelResponse,
     RetryReleaseRequest: RetryReleaseRequest,
+    KnowledgeQaPlugin: KnowledgeQaPlugin,
     IntentAchievement: IntentAchievement,
     DeleteQACateRequest: DeleteQACateRequest,
     GenerateQARequest: GenerateQARequest,
     GetWsTokenRequest: GetWsTokenRequest,
-    VoiceConfig: VoiceConfig,
+    QACate: QACate,
     ModifyAttributeLabelResponse: ModifyAttributeLabelResponse,
     ModifyDocRequest: ModifyDocRequest,
     DescribeTokenUsageResponse: DescribeTokenUsageResponse,
     DeleteAppResponse: DeleteAppResponse,
     SearchRange: SearchRange,
     ListAttributeLabelRequest: ListAttributeLabelRequest,
+    DeleteDocCateRequest: DeleteDocCateRequest,
     AgentReference: AgentReference,
     DeleteDocResponse: DeleteDocResponse,
     BaseConfig: BaseConfig,
+    DescribeSegmentsResponse: DescribeSegmentsResponse,
+    SimilarQuestion: SimilarQuestion,
     ClassifyConfig: ClassifyConfig,
     DescribeConcurrencyUsageRequest: DescribeConcurrencyUsageRequest,
+    GroupDocResponse: GroupDocResponse,
     UploadAttributeLabelRequest: UploadAttributeLabelRequest,
     ListUsageCallDetailResponse: ListUsageCallDetailResponse,
+    ExportAttributeLabelRequest: ExportAttributeLabelRequest,
     DescribeTokenUsageRequest: DescribeTokenUsageRequest,
-    ListRejectedQuestionRequest: ListRejectedQuestionRequest,
+    GetAppKnowledgeCountResponse: GetAppKnowledgeCountResponse,
+    CreateAttributeLabelResponse: CreateAttributeLabelResponse,
+    ListAppKnowledgeDetailRequest: ListAppKnowledgeDetailRequest,
+    CreateQAResponse: CreateQAResponse,
     ListQACateRequest: ListQACateRequest,
-    AgentDebugInfo: AgentDebugInfo,
+    ListReleaseQAPreviewRequest: ListReleaseQAPreviewRequest,
+    DescribeReleaseInfoResponse: DescribeReleaseInfoResponse,
+    DescribeAppResponse: DescribeAppResponse,
     DeleteAppRequest: DeleteAppRequest,
+    ModifyRejectedQuestionResponse: ModifyRejectedQuestionResponse,
     WorkFlowSummary: WorkFlowSummary,
     TaskParams: TaskParams,
-    ListRejectedQuestionResponse: ListRejectedQuestionResponse,
+    ListAppCategoryRspOption: ListAppCategoryRspOption,
+    DescribeStorageCredentialRequest: DescribeStorageCredentialRequest,
     QAList: QAList,
+    DescribeCorpResponse: DescribeCorpResponse,
     ModifyDocCateResponse: ModifyDocCateResponse,
-    SaveDocResponse: SaveDocResponse,
+    ListReleaseResponse: ListReleaseResponse,
+    ListModelResponse: ListModelResponse,
+    ListAttributeLabelResponse: ListAttributeLabelResponse,
+    ListReleaseItem: ListReleaseItem,
     ModifyQAResponse: ModifyQAResponse,
     DeleteQAResponse: DeleteQAResponse,
     DescribeCallStatsGraphResponse: DescribeCallStatsGraphResponse,
     GetMsgRecordRequest: GetMsgRecordRequest,
-    Context: Context,
+    DescribeStorageCredentialResponse: DescribeStorageCredentialResponse,
+    CheckAttributeLabelExistResponse: CheckAttributeLabelExistResponse,
+    StrValue: StrValue,
     GetTaskStatusRequest: GetTaskStatusRequest,
+    CheckAttributeLabelReferResponse: CheckAttributeLabelReferResponse,
     RateMsgRecordResponse: RateMsgRecordResponse,
     PluginToolReqParam: PluginToolReqParam,
+    ReleaseRejectedQuestion: ReleaseRejectedQuestion,
+    CreateQACateRequest: CreateQACateRequest,
     DescribeRobotBizIDByAppKeyRequest: DescribeRobotBizIDByAppKeyRequest,
-    QACate: QACate,
+    ExportUnsatisfiedReplyResponse: ExportUnsatisfiedReplyResponse,
     CreateReconstructDocumentFlowResponse: CreateReconstructDocumentFlowResponse,
     HistorySummary: HistorySummary,
     VerifyQAResponse: VerifyQAResponse,
     ReleaseConfigs: ReleaseConfigs,
+    DescribeSegmentsRequest: DescribeSegmentsRequest,
     DescribeSearchStatsGraphRequest: DescribeSearchStatsGraphRequest,
     DescribeSearchStatsGraphResponse: DescribeSearchStatsGraphResponse,
     Filters: Filters,
+    DescribeReferRequest: DescribeReferRequest,
     IgnoreUnsatisfiedReplyResponse: IgnoreUnsatisfiedReplyResponse,
+    StopDocParseRequest: StopDocParseRequest,
     KnowledgeWorkflow: KnowledgeWorkflow,
+    ListModelRequest: ListModelRequest,
     ListSelectDocRequest: ListSelectDocRequest,
 
 }

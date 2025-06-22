@@ -9611,7 +9611,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.BackupName = null;
 
         /**
-         * 
+         * Backup storage policy. 0: Follow the custom backup retention policy; 1: Follow the instance lifecycle until the instance is eliminated. Default value: 0.
          * @type {number || null}
          */
         this.StorageStrategy = null;

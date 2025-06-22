@@ -641,6 +641,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PrivateParameters = null;
 
         /**
+         * current configured origin HOST header.
+         * @type {string || null}
+         */
+        this.HostHeader = null;
+
+        /**
          * MO sub-application ID
          * @type {number || null}
          */
@@ -657,6 +663,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.VodeoBucketId = null;
+
+        /**
+         * VOD origin-pull range. this parameter returns a value when OriginType = VOD. valid values: <li>all: all files in the VOD application corresponding to the current origin server. the default value is all;</li> <li>bucket: files in a specified bucket under the VOD application corresponding to the current origin server. specify the bucket by the VodBucketId parameter.</li>.
+</li>
+         * @type {string || null}
+         */
+        this.VodOriginScope = null;
+
+        /**
+         * VOD bucket ID. this parameter is required when OriginType = VOD and VodOriginScope = bucket. data source: storage ID of the bucket under the VOD professional application.
+         * @type {string || null}
+         */
+        this.VodBucketId = null;
 
     }
 
@@ -682,9 +701,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.PrivateParameters.push(obj);
             }
         }
+        this.HostHeader = 'HostHeader' in params ? params.HostHeader : null;
         this.VodeoSubAppId = 'VodeoSubAppId' in params ? params.VodeoSubAppId : null;
         this.VodeoDistributionRange = 'VodeoDistributionRange' in params ? params.VodeoDistributionRange : null;
         this.VodeoBucketId = 'VodeoBucketId' in params ? params.VodeoBucketId : null;
+        this.VodOriginScope = 'VodOriginScope' in params ? params.VodOriginScope : null;
+        this.VodBucketId = 'VodBucketId' in params ? params.VodBucketId : null;
 
     }
 }
@@ -17015,6 +17037,16 @@ If it is not specified, the default value is off.
         this.PrivateParameters = null;
 
         /**
+         * Custom origin HOST header, this parameter only takes effect when OriginType=IP_DOMAIN. 
+
+- If OriginType=COS or AWS_S3, the origin HOST header will be consistent with the origin domain name. 
+- If OriginType=ORIGIN_GROUP, the origin HOST header follows the configuration within the origin group;if not configured, it defaults to the acceleration domain name. 
+- If OriginType=VOD or SPACE, there is no need to configure this header, and it will take effect according to the corresponding origin domain name.
+         * @type {string || null}
+         */
+        this.HostHeader = null;
+
+        /**
          * VODEO sub-application ID. This parameter is required when OriginType is VODEO.
          * @type {number || null}
          */
@@ -17033,6 +17065,19 @@ If it is not specified, the default value is off.
          * @type {string || null}
          */
         this.VodeoBucketId = null;
+
+        /**
+         * VOD origin-pull scope. this parameter is valid only when OriginType = VOD. valid values: <li>all: all files in the VOD application corresponding to the current origin server. the default value is all;</li> <li>bucket: files in a specified bucket under the VOD application corresponding to the current origin server. specify the bucket by the parameter VodBucketId.</li>.
+</li>
+         * @type {string || null}
+         */
+        this.VodOriginScope = null;
+
+        /**
+         * VOD bucket ID. this parameter is required when OriginType = VOD and VodOriginScope = bucket. data source: storage ID of the bucket under the VOD professional edition application.
+         * @type {string || null}
+         */
+        this.VodBucketId = null;
 
     }
 
@@ -17056,9 +17101,12 @@ If it is not specified, the default value is off.
                 this.PrivateParameters.push(obj);
             }
         }
+        this.HostHeader = 'HostHeader' in params ? params.HostHeader : null;
         this.VodeoSubAppId = 'VodeoSubAppId' in params ? params.VodeoSubAppId : null;
         this.VodeoDistributionRange = 'VodeoDistributionRange' in params ? params.VodeoDistributionRange : null;
         this.VodeoBucketId = 'VodeoBucketId' in params ? params.VodeoBucketId : null;
+        this.VodOriginScope = 'VodOriginScope' in params ? params.VodOriginScope : null;
+        this.VodBucketId = 'VodBucketId' in params ? params.VodBucketId : null;
 
     }
 }

@@ -27,7 +27,9 @@ const Certificates = models.Certificates;
 const CertificateExtra = models.CertificateExtra;
 const TeoInstanceList = models.TeoInstanceList;
 const RootCertificates = models.RootCertificates;
+const DescribeHostUploadUpdateRecordDetailResponse = models.DescribeHostUploadUpdateRecordDetailResponse;
 const CdnInstanceDetail = models.CdnInstanceDetail;
+const DeployRecordItem = models.DeployRecordItem;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const TkeNameSpaceDetail = models.TkeNameSpaceDetail;
 const CreateCertificateBindResourceSyncTaskResponse = models.CreateCertificateBindResourceSyncTaskResponse;
@@ -37,16 +39,19 @@ const COSInstanceList = models.COSInstanceList;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
 const BatchDeleteCSRRequest = models.BatchDeleteCSRRequest;
-const ProjectInfo = models.ProjectInfo;
+const ClbListenerRule = models.ClbListenerRule;
 const TCBEnvironments = models.TCBEnvironments;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
 const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
 const DdosInstanceList = models.DdosInstanceList;
+const ModifyCertificatesExpiringNotificationSwitchResponse = models.ModifyCertificatesExpiringNotificationSwitchResponse;
+const UploadUpdateCertificateInstanceRequest = models.UploadUpdateCertificateInstanceRequest;
 const DescribeCSRSetResponse = models.DescribeCSRSetResponse;
 const UpdateRecordDetails = models.UpdateRecordDetails;
 const DescribeCSRRequest = models.DescribeCSRRequest;
 const ModifyCertificateResubmitRequest = models.ModifyCertificateResubmitRequest;
 const SupportDownloadType = models.SupportDownloadType;
+const UploadUpdateCertificateRecordRollbackRequest = models.UploadUpdateCertificateRecordRollbackRequest;
 const DescribeCertificateBindResourceTaskResultRequest = models.DescribeCertificateBindResourceTaskResultRequest;
 const UpdateRecordDetail = models.UpdateRecordDetail;
 const BindResourceResult = models.BindResourceResult;
@@ -94,21 +99,27 @@ const UpdateCertificateInstanceRequest = models.UpdateCertificateInstanceRequest
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
 const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const TkeSecretDetail = models.TkeSecretDetail;
+const UploadUpdateCertificateInstanceResponse = models.UploadUpdateCertificateInstanceResponse;
 const Tags = models.Tags;
 const DeleteCertificateResponse = models.DeleteCertificateResponse;
 const CreateCSRRequest = models.CreateCSRRequest;
-const TCBInstanceList = models.TCBInstanceList;
+const DeployRecord = models.DeployRecord;
+const UploadUpdateCertificateRecordRetryResponse = models.UploadUpdateCertificateRecordRetryResponse;
 const DescribeCertificateRequest = models.DescribeCertificateRequest;
 const TSEInstanceDetail = models.TSEInstanceDetail;
 const WafInstanceList = models.WafInstanceList;
+const ModifyCertificatesExpiringNotificationSwitchRequest = models.ModifyCertificatesExpiringNotificationSwitchRequest;
 const Filter = models.Filter;
 const DescribeHostUpdateRecordDetailResponse = models.DescribeHostUpdateRecordDetailResponse;
+const UploadUpdateCertificateRecordRetryRequest = models.UploadUpdateCertificateRecordRetryRequest;
 const DescribeHostUpdateRecordRequest = models.DescribeHostUpdateRecordRequest;
+const DeployRecordList = models.DeployRecordList;
 const CertTaskId = models.CertTaskId;
 const TCBAccessService = models.TCBAccessService;
 const DescribeCSRSetRequest = models.DescribeCSRSetRequest;
 const SubmittedData = models.SubmittedData;
 const UpdateSyncProgressRegion = models.UpdateSyncProgressRegion;
+const TCBInstanceList = models.TCBInstanceList;
 const TkeInstanceList = models.TkeInstanceList;
 const ApiGatewayInstanceDetail = models.ApiGatewayInstanceDetail;
 const LiveInstanceList = models.LiveInstanceList;
@@ -116,19 +127,22 @@ const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
 const DescribeHostTeoInstanceListResponse = models.DescribeHostTeoInstanceListResponse;
+const UploadUpdateRecordInfo = models.UploadUpdateRecordInfo;
 const CancelAuditCertificateRequest = models.CancelAuditCertificateRequest;
 const ModifyCertificateResubmitResponse = models.ModifyCertificateResubmitResponse;
 const UpdateCertificateInstanceResponse = models.UpdateCertificateInstanceResponse;
 const UploadCertificateRequest = models.UploadCertificateRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
+const DescribeHostUploadUpdateRecordRequest = models.DescribeHostUploadUpdateRecordRequest;
 const CreateCertificateResponse = models.CreateCertificateResponse;
 const UpdateRecordInfo = models.UpdateRecordInfo;
 const HostingConfig = models.HostingConfig;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const DescribeCertificateBindResourceTaskResultResponse = models.DescribeCertificateBindResourceTaskResultResponse;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
-const ClbListenerRule = models.ClbListenerRule;
+const UploadUpdateCertificateRecordRollbackResponse = models.UploadUpdateCertificateRecordRollbackResponse;
+const ProjectInfo = models.ProjectInfo;
 const DescribeHostTeoInstanceListRequest = models.DescribeHostTeoInstanceListRequest;
 const BindResourceRegionResult = models.BindResourceRegionResult;
 const TkeInstanceDetail = models.TkeInstanceDetail;
@@ -138,8 +152,10 @@ const DescribeCSRResponse = models.DescribeCSRResponse;
 const ClbInstanceList = models.ClbInstanceList;
 const UpdateCertificateRecordRetryResponse = models.UpdateCertificateRecordRetryResponse;
 const TCBHostService = models.TCBHostService;
+const DescribeHostUploadUpdateRecordDetailRequest = models.DescribeHostUploadUpdateRecordDetailRequest;
 const TkeIngressDetail = models.TkeIngressDetail;
 const CancelAuditCertificateResponse = models.CancelAuditCertificateResponse;
+const DescribeHostUploadUpdateRecordResponse = models.DescribeHostUploadUpdateRecordResponse;
 const TSEInstanceList = models.TSEInstanceList;
 const VODInstanceList = models.VODInstanceList;
 
@@ -174,6 +190,39 @@ class SslClient extends AbstractClient {
     UpdateCertificateRecordRollback(req, cb) {
         let resp = new UpdateCertificateRecordRollbackResponse();
         this.request("UpdateCertificateRecordRollback", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the record list of cloud resource updates for certificates (certificate ID unchanged).
+     * @param {DescribeHostUploadUpdateRecordRequest} req
+     * @param {function(string, DescribeHostUploadUpdateRecordResponse):void} cb
+     * @public
+     */
+    DescribeHostUploadUpdateRecord(req, cb) {
+        let resp = new DescribeHostUploadUpdateRecordResponse();
+        this.request("DescribeHostUploadUpdateRecord", req, resp, cb);
+    }
+
+    /**
+     * Cloud Resource Update (Certificate ID Unchanged) Deployment Retry Record.
+     * @param {UploadUpdateCertificateRecordRetryRequest} req
+     * @param {function(string, UploadUpdateCertificateRecordRetryResponse):void} cb
+     * @public
+     */
+    UploadUpdateCertificateRecordRetry(req, cb) {
+        let resp = new UploadUpdateCertificateRecordRetryResponse();
+        this.request("UploadUpdateCertificateRecordRetry", req, resp, cb);
+    }
+
+    /**
+     * This API is used to roll back the full task when cloud resource update succeeds with unchanged certificate ID.
+     * @param {UploadUpdateCertificateRecordRollbackRequest} req
+     * @param {function(string, UploadUpdateCertificateRecordRollbackResponse):void} cb
+     * @public
+     */
+    UploadUpdateCertificateRecordRollback(req, cb) {
+        let resp = new UploadUpdateCertificateRecordRollbackResponse();
+        this.request("UploadUpdateCertificateRecordRollback", req, resp, cb);
     }
 
     /**
@@ -265,6 +314,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * This API is used to update certificate content (certificate ID unchanged) and update associated Tencent Cloud resources. This is an asynchronous API. After calling, a DeployRecordId of 0 indicates that the task is in progress. Repeatedly request this API, and when DeployRecordId is greater than 0, it means the task has been successfully created. If the task is not successfully created, an exception will be thrown.
+     * @param {UploadUpdateCertificateInstanceRequest} req
+     * @param {function(string, UploadUpdateCertificateInstanceResponse):void} cb
+     * @public
+     */
+    UploadUpdateCertificateInstance(req, cb) {
+        let resp = new UploadUpdateCertificateInstanceResponse();
+        this.request("UploadUpdateCertificateInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to one-click update old certificate resources. This API is asynchronous. After calling it, if DeployRecordId is 0, it means the task is in progress. Repeat the request to this API. When the returned DeployRecordId is greater than 0, it means the task creation is successful. If it is not created successfully, an exception will be thrown.
      * @param {UpdateCertificateInstanceRequest} req
      * @param {function(string, UpdateCertificateInstanceResponse):void} cb
@@ -320,6 +380,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * Modify to ignore certificate expiration notifications. Enable or disable certificate expiration notifications.
+     * @param {ModifyCertificatesExpiringNotificationSwitchRequest} req
+     * @param {function(string, ModifyCertificatesExpiringNotificationSwitchResponse):void} cb
+     * @public
+     */
+    ModifyCertificatesExpiringNotificationSwitch(req, cb) {
+        let resp = new ModifyCertificatesExpiringNotificationSwitchResponse();
+        this.request("ModifyCertificatesExpiringNotificationSwitch", req, resp, cb);
+    }
+
+    /**
      * This API is used to reissue a certificate. Note that if you have applied for a free certificate, only an RSA-2048 certificate will be reissued, and the certificate can be reissued only once.
      * @param {ReplaceCertificateRequest} req
      * @param {function(string, ReplaceCertificateResponse):void} cb
@@ -350,6 +421,17 @@ class SslClient extends AbstractClient {
     CancelAuditCertificate(req, cb) {
         let resp = new CancelAuditCertificateResponse();
         this.request("CancelAuditCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the deployment record details of certificate update records (certificate ID unchanged).
+     * @param {DescribeHostUploadUpdateRecordDetailRequest} req
+     * @param {function(string, DescribeHostUploadUpdateRecordDetailResponse):void} cb
+     * @public
+     */
+    DescribeHostUploadUpdateRecordDetail(req, cb) {
+        let resp = new DescribeHostUploadUpdateRecordDetailResponse();
+        this.request("DescribeHostUploadUpdateRecordDetail", req, resp, cb);
     }
 
     /**

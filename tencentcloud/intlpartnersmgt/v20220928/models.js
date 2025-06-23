@@ -3591,7 +3591,7 @@ class DescribeCustomerBillDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Sub-account UIN
+         * Sub-account UIN.
          * @type {number || null}
          */
         this.CustomerUin = null;
@@ -4982,7 +4982,6 @@ Standard ri reserved instance.
 
         /**
          * Project name.
-.
 
          * @type {string || null}
          */
@@ -5107,7 +5106,7 @@ Original cost = component list price * component usage * usage duration.
         this.OriginalCost = null;
 
         /**
-         * Discount (default is 1).
+         * Discount (default is 1) - abandoned.
          * @type {string || null}
          */
         this.DiscountRate = null;
@@ -5141,6 +5140,12 @@ Original cost = component list price * component usage * usage duration.
          * @type {string || null}
          */
         this.Id = null;
+
+        /**
+         * customer discount rate. The discount rate applied to the reseller's customer, which set by reseller, default value equal to 1.
+         * @type {string || null}
+         */
+        this.CustomerDiscountRate = null;
 
     }
 
@@ -5182,6 +5187,7 @@ Original cost = component list price * component usage * usage duration.
         this.VoucherDeduction = 'VoucherDeduction' in params ? params.VoucherDeduction : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.CustomerDiscountRate = 'CustomerDiscountRate' in params ? params.CustomerDiscountRate : null;
 
     }
 }

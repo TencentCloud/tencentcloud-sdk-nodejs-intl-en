@@ -9024,7 +9024,7 @@ class TradeDealDetail extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Actual total price of the order in 0.01 CNY
+         * Order actual total price (in cents)
          * @type {number || null}
          */
         this.Price = null;

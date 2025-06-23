@@ -552,14 +552,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * An extended field for transcoding.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StdExtInfo = null;
 
         /**
          * The subtitle file to add.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
@@ -2041,7 +2041,7 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         super();
 
         /**
-         * Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Specification of a time point screenshot template. 
          * @type {number || null}
          */
         this.Definition = null;
@@ -2367,7 +2367,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The audio enhancement configuration.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AudioEnhanceConfig || null}
          */
         this.AudioEnhance = null;
@@ -5579,7 +5579,7 @@ class AiReviewPornTaskInput extends  AbstractModel {
 
         /**
          * The ID of a porn detection template.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Definition = null;
@@ -6144,7 +6144,7 @@ Default value: `ON`.
 <li>`normal`: Separate voice and background audio.</li>
 <li>`music`: Separate vocals and instrumentals.</li>
 Default value: `normal`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -6154,7 +6154,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
 <li>`vocal`: Voice.</li>
 <li>`background`: Output background audio if the scenario is `normal`, and output instrumentals if the scenario is `music`.</li>
 Default value: `vocal`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Track = null;
@@ -6298,7 +6298,7 @@ Default value: `ON`.
 <li>`declick`: Noise removal.</li>
 <li>`deesser`: De-essing.</li>
 Default: `declick`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Types = null;
@@ -7893,25 +7893,25 @@ class MediaProcessTaskInput extends  AbstractModel {
         this.TranscodeTaskSet = null;
 
         /**
-         * List of animated image generating tasks.
+         * List of animated image screenshot tasks.
          * @type {Array.<AnimatedGraphicTaskInput> || null}
          */
         this.AnimatedGraphicTaskSet = null;
 
         /**
-         * List of time point screencapturing tasks.
+         * List of time point screenshot tasks.
          * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
          */
         this.SnapshotByTimeOffsetTaskSet = null;
 
         /**
-         * List of sampled screencapturing tasks.
+         * List of sampled screenshot tasks.
          * @type {Array.<SampleSnapshotTaskInput> || null}
          */
         this.SampleSnapshotTaskSet = null;
 
         /**
-         * List of image sprite generating tasks.
+         * List of image sprite screenshot tasks.
          * @type {Array.<ImageSpriteTaskInput> || null}
          */
         this.ImageSpriteTaskSet = null;
@@ -9124,7 +9124,7 @@ class EditMediaOutputConfig extends  AbstractModel {
 
         /**
          * The container. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Container = null;
@@ -10124,14 +10124,14 @@ class LiveRecordResult extends  AbstractModel {
 
         /**
          * The storage of the recording file.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
          * The recording segments.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<LiveRecordFile> || null}
          */
         this.FileList = null;
@@ -10212,35 +10212,35 @@ class LiveRecordFile extends  AbstractModel {
 
         /**
          * The URL of the recording file.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
          * The size of the recording file.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Size = null;
 
         /**
          * The duration of the recording file.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
          * The recording start time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
          * The recording end time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -10944,9 +10944,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FpsDenominator = null;
 
         /**
-         * 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:.
-<Li>Side_by_side: the original video content is arranged in a left-right layout.</li>.
-<li>top_bottom: vertical layout arrangement of original video content.</li>.
+         * 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:
+<Li>side_by_side: the original video content is arranged in a left-right layout.</li>
+<li>top_bottom: vertical layout arrangement of original video content.</li>
 Submit the amount and cost based on the segmented resolution size.
 Default value: side_by_side.
 Note: This field may return null, indicating that no valid value can be obtained.
@@ -11570,7 +11570,7 @@ class TaskOutputStorage extends  AbstractModel {
         /**
          * The storage type for a media processing output file. Valid values:
 <li>`COS`: Tencent Cloud COS</li>
-<li>`>AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
+<li>`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -11962,7 +11962,7 @@ class LiveScheduleTask extends  AbstractModel {
 
         /**
          * The ID of a live scheme subtask.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -11971,35 +11971,35 @@ Note: This field may return·null, indicating that no valid values can be obtain
          * The task status. Valid values:
 <li>`PROCESSING`</li>
 <li>`FINISH` </li>
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * If the value returned is not `0`, there was a source error. If `0` is returned, refer to the error codes of the corresponding task type.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
          * The URL of the live stream.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
          * The task output.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<LiveActivityResult> || null}
          */
         this.LiveActivityResultSet = null;
@@ -12711,7 +12711,7 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
 
         /**
          * The storage location of the highlight segments.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
@@ -13411,7 +13411,7 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
 }
 
 /**
- * Result type of a time point screencapturing task
+ * Result type of a time point screenshot task
  * @class
  */
 class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
@@ -13443,17 +13443,29 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for a time point screencapturing task.
+         * Input for a time point screenshot task.
          * @type {SnapshotByTimeOffsetTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of a time point screencapturing task.
+         * Output of a time point screenshot task.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaSnapshotByTimeOffsetItem || null}
          */
         this.Output = null;
+
+        /**
+         * The time when the task started executing, in ISO date format.
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * The time when the task finished, in ISO date format.
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -13480,6 +13492,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -14136,7 +14150,7 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Input parameter type of a time point screencapturing task
+ * Input parameter type of a time point screenshot task
  * @class
  */
 class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
@@ -14144,7 +14158,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a time point screencapturing template.
+         * ID of a time point screenshot template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -14654,21 +14668,21 @@ class SimpleAesDrm extends  AbstractModel {
 
         /**
          * The URI of decryption key.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Uri = null;
 
         /**
          * The encryption key (a 32-byte string).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
          * The initialization vector for encryption (a 32-byte string).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Vector = null;
@@ -15009,7 +15023,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
 
 Note: 
 AV1 encoding containers currently only support mp4, webm, and mkv.
-H.266 encoding containers currently only support mp4, hls, ts, and move. 
+H.266 encoding containers currently only support mp4, hls, ts, and mov. 
 VP8 and VP9 encoding containers currently only support webm and mkv.
 MPEG2 and DNxHD encoding containers currently only support mxf.
 MV-HEVC encoding containers only support mp4, hls, and mov. Also, the hls format only supports mp4 segmentation format.
@@ -15149,9 +15163,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FpsDenominator = null;
 
         /**
-         * 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:.
-<Li>Side_by_side: the original video content is arranged in a left-right layout.</li>.
-<Li>Top_bottom: layout arrangement of the original video content from top to bottom.</li>.
+         * 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:
+<Li>side_by_side: the original video content is arranged in a left-right layout.</li>
+<Li>top_bottom: layout arrangement of the original video content from top to bottom.</li>
 The usage and charges will be reported based on the segmented resolution dimensions.
 Default value: side_by_side.
 Note: This field may return null, indicating that no valid value can be obtained.
@@ -15578,19 +15592,19 @@ class ActivityPara extends  AbstractModel {
         this.AnimatedGraphicTask = null;
 
         /**
-         * A time point screencapturing task.
+         * A time point screenshot task.
          * @type {SnapshotByTimeOffsetTaskInput || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * A sampled screencapturing task.
+         * A sampled screenshot task.
          * @type {SampleSnapshotTaskInput || null}
          */
         this.SampleSnapshotTask = null;
 
         /**
-         * An image sprite generation task.
+         * An image sprite screenshot task.
          * @type {ImageSpriteTaskInput || null}
          */
         this.ImageSpriteTask = null;
@@ -16244,7 +16258,7 @@ class LiveActivityResItem extends  AbstractModel {
 
         /**
          * The output of a live recording task.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LiveScheduleLiveRecordTaskResult || null}
          */
         this.LiveRecordTask = null;
@@ -16626,14 +16640,14 @@ class LiveRecordTaskInput extends  AbstractModel {
 
         /**
          * The storage of the recording file. If this parameter is left empty, the `OutputStorage` value of the parent folder will be inherited.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
          * The output path of the recording file.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
@@ -16826,14 +16840,14 @@ class HeadTailParameter extends  AbstractModel {
 
         /**
          * The opening segments.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaInputInfo> || null}
          */
         this.HeadSet = null;
 
         /**
          * The closing segments.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<MediaInputInfo> || null}
          */
         this.TailSet = null;
@@ -20228,14 +20242,14 @@ class SubtitleTemplate extends  AbstractModel {
 
         /**
          * The URL of the subtitles to add to the video.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
          * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StreamIndex = null;
@@ -20247,21 +20261,21 @@ Note: This field may return·null, indicating that no valid values can be obtain
 <li>`simkai.ttf`: Kaiti.</li>
 <li>`arial.ttf`: Arial.</li>
 The default is `hei.ttf`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontType = null;
 
         /**
          * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontSize = null;
 
         /**
          * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FontColor = null;
@@ -20271,7 +20285,7 @@ Note: This field may return·null, indicating that no valid values can be obtain
 <li>`0`: Fully transparent.</li>
 <li>`1`: Fully opaque.</li>
 Default value: 1.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FontAlpha = null;
@@ -22366,7 +22380,7 @@ class CreateAIAnalysisTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of a sampled screencapturing task
+ * Result type of a sampled screenshot task
  * @class
  */
 class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
@@ -22399,17 +22413,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input for a sampled screencapturing task.
+         * Input for a sampled screenshot task.
          * @type {SampleSnapshotTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of a sampled screencapturing task.
+         * Output of a sampled screenshot task.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaSampleSnapshotItem || null}
          */
         this.Output = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -22436,6 +22462,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -22689,14 +22717,14 @@ class TEHDConfigForUpdate extends  AbstractModel {
 <li>`TEHD-100`: TSC-100 (video TSC). </li>
 <li>`TEHD-200`: TSC-200 (audio TSC). </li>
 If this parameter is left blank, no modification will be made.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * The maximum video bitrate. If this parameter is not specified, no modifications will be made.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxVideoBitrate = null;
@@ -23667,7 +23695,7 @@ class MediaSampleSnapshotItem extends  AbstractModel {
         super();
 
         /**
-         * Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Sampled screenshot specification ID. For more information, please see [Sampled Screenshot Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
          * @type {number || null}
          */
         this.Definition = null;
@@ -23849,10 +23877,10 @@ class MediaProcessTaskResult extends  AbstractModel {
          * Task type. Valid values:
 <li>Transcode: Transcoding</li>
 <li>AnimatedGraphics: Animated image generating</li>
-<li>SnapshotByTimeOffset: Time point screencapturing</li>
-<li>SampleSnapshot: Sampled screencapturing</li>
-<li>ImageSprites: Image sprite generating</li>
-<li>CoverBySnapshot: Screencapturing for cover image</li>
+<li>SnapshotByTimeOffset: Time point screenshot</li>
+<li>SampleSnapshot: Sampled screenshot</li>
+<li>ImageSprites: Image sprite screenshot</li>
+<li>CoverBySnapshot: Screenshot for cover image</li>
 <li>AdaptiveDynamicStreaming: Adaptive bitrate streaming</li>
          * @type {string || null}
          */
@@ -23873,21 +23901,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AnimatedGraphicTask = null;
 
         /**
-         * Query result of a time point screencapturing task, which is valid when task type is `SnapshotByTimeOffset`.
+         * Query result of a time point screenshot task, which is valid when task type is `SnapshotByTimeOffset`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaProcessTaskSnapshotByTimeOffsetResult || null}
          */
         this.SnapshotByTimeOffsetTask = null;
 
         /**
-         * Query result of a sampled screencapturing task, which is valid when task type is `SampleSnapshot`.
+         * Query result of a sampled screenshot task, which is valid when task type is `SampleSnapshot`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaProcessTaskSampleSnapshotResult || null}
          */
         this.SampleSnapshotTask = null;
 
         /**
-         * Query result of an image sprite generating task, which is valid when task type is `ImageSprite`.
+         * Query result of an image sprite screenshot task, which is valid when task type is `ImageSprite`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaProcessTaskImageSpriteResult || null}
          */
@@ -25263,7 +25291,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The key used to generate the callback signature.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NotifyKey = null;
@@ -25911,49 +25939,49 @@ class LiveScheduleLiveRecordTaskResult extends  AbstractModel {
 
         /**
          * The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://www.tencentcloud.com/document/product/1041/40249).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
          * The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * The error message.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
          * The input of a live recording task.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LiveRecordTaskInput || null}
          */
         this.Input = null;
 
         /**
          * The output of a live recording task.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LiveRecordResult || null}
          */
         this.Output = null;
 
         /**
          * The time when the task was started, in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
          * The time when the task was completed, in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -26290,7 +26318,7 @@ Default value: `ON`.
 <li>`loudNorm`: Loudness normalization.</li>
 <li>`gainControl`: Volume leveling.</li>
 Default value: `loudNorm`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -27010,7 +27038,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Details of a time point screencapturing template.
+ * Details of a time point screenshot template.
  * @class
  */
 class SnapshotByTimeOffsetTemplate extends  AbstractModel {
@@ -27018,7 +27046,7 @@ class SnapshotByTimeOffsetTemplate extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a time point screencapturing template.
+         * Unique ID of a time point screenshot template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -27032,7 +27060,7 @@ class SnapshotByTimeOffsetTemplate extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Name of a time point screencapturing template.
+         * Name of a time point screenshot template.
          * @type {string || null}
          */
         this.Name = null;
@@ -28258,28 +28286,28 @@ class AwsSQS extends  AbstractModel {
 
         /**
          * The region of the SQS queue.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SQSRegion = null;
 
         /**
          * The name of the SQS queue.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SQSQueueName = null;
 
         /**
          * The key ID required to read from/write to the SQS queue.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.S3SecretId = null;
 
         /**
          * The key required to read from/write to the SQS queue.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.S3SecretKey = null;
@@ -28644,7 +28672,7 @@ Note: This field may return null, indicating that no valid value can be obtained
 
         /**
          * The AES-128 encryption details.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {SimpleAesDrm || null}
          */
         this.SimpleAesDrm = null;
@@ -29175,7 +29203,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The task output.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LiveActivityResItem || null}
          */
         this.LiveActivityResItem = null;
@@ -29563,7 +29591,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * The scheme type. Valid values:
  <li>`Preset`</li>
 <li>`Custom` </li>
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -31375,7 +31403,7 @@ class EditMediaFileInfo extends  AbstractModel {
          * The ID of the material associated with an element. This parameter is required for video compositing tasks.
 
 Note: The ID can be up to 32 characters long and can contain letters, digits, and special characters -_
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Id = null;
@@ -32542,7 +32570,7 @@ class AiAnalysisTaskDelLogoResult extends  AbstractModel {
 }
 
 /**
- * Input parameter type of a sampled screencapturing task.
+ * Input parameter type of a sampled screenshot task.
  * @class
  */
 class SampleSnapshotTaskInput extends  AbstractModel {
@@ -32550,7 +32578,7 @@ class SampleSnapshotTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Sampled screencapturing template ID.
+         * Sampled screenshot template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -32924,7 +32952,7 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Details of a sampled screencapturing template
+ * Details of a sampled screenshot template
  * @class
  */
 class SampleSnapshotTemplate extends  AbstractModel {
@@ -32932,7 +32960,7 @@ class SampleSnapshotTemplate extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
+         * Unique ID of a sampled screenshot template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -32946,7 +32974,7 @@ class SampleSnapshotTemplate extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Name of a sampled screencapturing template.
+         * Name of a sampled screenshot template.
          * @type {string || null}
          */
         this.Name = null;
@@ -32995,7 +33023,7 @@ Default value: open.
         this.Format = null;
 
         /**
-         * Sampled screencapturing type.
+         * Sampled screenshot type.
          * @type {string || null}
          */
         this.SampleType = null;
@@ -33140,28 +33168,28 @@ class AudioEnhanceConfig extends  AbstractModel {
 
         /**
          * The audio noise reduction configuration.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AudioDenoiseConfig || null}
          */
         this.Denoise = null;
 
         /**
          * The audio separation configuration.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AudioSeparateConfig || null}
          */
         this.Separate = null;
 
         /**
          * The volume equalization configuration.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {VolumeBalanceConfig || null}
          */
         this.VolumeBalance = null;
 
         /**
          * The audio improvement configuration.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AudioBeautifyConfig || null}
          */
         this.Beautify = null;

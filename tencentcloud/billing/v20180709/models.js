@@ -4367,8 +4367,6 @@ class Deal extends  AbstractModel {
 
         /**
          * Product code
-
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -4386,15 +4384,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BigDealId = null;
 
         /**
-         * Refund formula
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Refund formula.
          * @type {string || null}
          */
         this.Formula = null;
 
         /**
-         * Refund involves order information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Refund involves order information.
          * @type {string || null}
          */
         this.RefReturnDeals = null;
@@ -4408,33 +4404,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
         /**
          * Transaction type
 
-`modifyNetworkMode`: Adjusting bandwidth mode
-`modifyNetworkSize`: Adjusting bandwidth size
-`refund`: Refund
-`downgrade`: Downgrade
-upgrade (upgrade)
-renew
-purchase
-preMoveOut annual and monthly subscription resources
-preMoveIn annual and monthly subscription resources
-preToPost prepaid to postpaid
-postMoveOut move out pay-as-you-go resources
-postMoveIn move in pay-as-you-go resources
-Note: This field may return null, indicating that no valid values can be obtained.
+Modify network mode adjust bandwidth mode.
+Adjust bandwidth size.
+`Refund`: refund.
+downgrade.
+upgrade configuration.
+renew.
+purchase.
+preMoveOut monthly subscription resource migration out.
+preMoveIn specifies the monthly subscription resources to migrate.
+preToPost specifies the prepaid to postpaid conversion.
+postMoveOut specifies the pay-as-you-go resources to be migrated out.
+postMoveIn specifies the pay-as-you-go resources for inbound migration.
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * Product code Chinese name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Product code chinese name.
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * Subproduct code Chinese name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Sub-Product code chinese name.
          * @type {string || null}
          */
         this.SubProductName = null;

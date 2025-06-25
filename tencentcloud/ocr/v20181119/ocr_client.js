@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const InvoiceItem = models.InvoiceItem;
+const RecognizeMexicoVTIDResponse = models.RecognizeMexicoVTIDResponse;
 const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
 const RecognizeBrazilIDCardOCRRequest = models.RecognizeBrazilIDCardOCRRequest;
 const RecognizePhilippinesDrivingLicenseOCRRequest = models.RecognizePhilippinesDrivingLicenseOCRRequest;
@@ -119,6 +120,7 @@ const SmartStructuralOCRV2Response = models.SmartStructuralOCRV2Response;
 const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResponse;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
 const NonTaxItem = models.NonTaxItem;
+const RecognizeMexicoVTIDRequest = models.RecognizeMexicoVTIDRequest;
 const TollInvoice = models.TollInvoice;
 const SmartStructuralProResponse = models.SmartStructuralProResponse;
 const TableOCRResponse = models.TableOCRResponse;
@@ -421,6 +423,17 @@ A maximum of 20 requests can be initiated per second for this API.
     HmtResidentPermitOCR(req, cb) {
         let resp = new HmtResidentPermitOCRResponse();
         this.request("HmtResidentPermitOCR", req, resp, cb);
+    }
+
+    /**
+     * This interface supports identification of the front and back of Mexican Voter ID Card. The default interface request frequency limit is 5 times per second.
+     * @param {RecognizeMexicoVTIDRequest} req
+     * @param {function(string, RecognizeMexicoVTIDResponse):void} cb
+     * @public
+     */
+    RecognizeMexicoVTID(req, cb) {
+        let resp = new RecognizeMexicoVTIDResponse();
+        this.request("RecognizeMexicoVTID", req, resp, cb);
     }
 
     /**

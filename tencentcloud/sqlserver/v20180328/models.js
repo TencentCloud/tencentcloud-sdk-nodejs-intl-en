@@ -25,19 +25,19 @@ class CreateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API
+         * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Instance memory size in GB
+         * Instance memory size in GB.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance storage capacity in GB
+         * Instance storage capacity in GB.
          * @type {number || null}
          */
         this.Storage = null;
@@ -49,43 +49,43 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.InstanceChargeType = null;
 
         /**
-         * Project ID
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Number of instances purchased this time. Default value: 1. Maximum value: 10
+         * Number of instances purchased this time. Default value: 1. Maximum value: 10.
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * VPC subnet ID in the format of subnet-bdoe83fa. `SubnetId` and `VpcId` should be set or ignored simultaneously
+         * VPC subnet ID in the format of subnet-bdoe83fa. `SubnetId` and `VpcId` should be set or ignored simultaneously.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * VPC ID in the format of vpc-dsp338hz. `SubnetId` and `VpcId` should be set or ignored simultaneously
+         * VPC ID in the format of vpc-dsp338hz. `SubnetId` and `VpcId` should be set or ignored simultaneously.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48
+         * Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Whether to automatically use voucher. 0: no, 1: yes. Default value: no
+         * Whether to automatically use voucher. 0: no, 1: yes. Default value: no.
          * @type {number || null}
          */
         this.AutoVoucher = null;
 
         /**
-         * Array of voucher IDs (currently, only one voucher can be used per order)
+         * Array of voucher IDs (currently, only one voucher can be used per order).
          * @type {Array.<string> || null}
          */
         this.VoucherIds = null;
@@ -139,7 +139,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.MultiZones = null;
 
         /**
-         * Tags associated with the instances to be created
+         * Tags associated with the instances to be created.
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
@@ -155,6 +155,18 @@ class CreateDBInstancesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.TimeZone = null;
+
+        /**
+         * Whether it is a multi-node architecture instance. Default value: `false`.If MultiNodes = true, the value of the MultiZones parameter must be true.
+         * @type {boolean || null}
+         */
+        this.MultiNodes = null;
+
+        /**
+         * The zone in which the standby node is available. Default is empty. When MultiNodes = true, the availability zones of the primary and standby nodes cannot all be the same. The minimum number of availability zones for the standby nodes is 2, and the maximum is 5.
+         * @type {Array.<string> || null}
+         */
+        this.DrZones = null;
 
     }
 
@@ -195,6 +207,8 @@ class CreateDBInstancesRequest extends  AbstractModel {
         }
         this.Collation = 'Collation' in params ? params.Collation : null;
         this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.MultiNodes = 'MultiNodes' in params ? params.MultiNodes : null;
+        this.DrZones = 'DrZones' in params ? params.DrZones : null;
 
     }
 }
@@ -11950,13 +11964,13 @@ class CreateDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Order name
+         * Order name.
          * @type {string || null}
          */
         this.DealName = null;
 
         /**
-         * Order name array
+         * Order name array.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;

@@ -353,6 +353,53 @@ class TaskCenterWeakPwdRiskInputParam extends  AbstractModel {
 }
 
 /**
+ * DescribeOrganizationUserInfo request structure.
+ * @class
+ */
+class DescribeOrganizationUserInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Member ID of the group account
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter content
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+        /**
+         * No support for multi-cloud
+         * @type {boolean || null}
+         */
+        this.NotSupportCloud = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
+        this.NotSupportCloud = 'NotSupportCloud' in params ? params.NotSupportCloud : null;
+
+    }
+}
+
+/**
  * ModifyRiskCenterRiskStatus request structure.
  * @class
  */
@@ -1813,6 +1860,195 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
+ * 
+ * @class
+ */
+class OrganizationUserInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AssetCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RiskCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AttackCount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.JoinType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CFWProtect = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WAFProtect = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CWPProtect = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CSIPProtect = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.QuotaConsumer = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SyncFrequency = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsExpired = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.PermissionList = null;
+
+        /**
+         * 1
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TcMemberType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SubUserCount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.JoinTypeInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.AssetCount = 'AssetCount' in params ? params.AssetCount : null;
+        this.RiskCount = 'RiskCount' in params ? params.RiskCount : null;
+        this.AttackCount = 'AttackCount' in params ? params.AttackCount : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.JoinType = 'JoinType' in params ? params.JoinType : null;
+        this.CFWProtect = 'CFWProtect' in params ? params.CFWProtect : null;
+        this.WAFProtect = 'WAFProtect' in params ? params.WAFProtect : null;
+        this.CWPProtect = 'CWPProtect' in params ? params.CWPProtect : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.CSIPProtect = 'CSIPProtect' in params ? params.CSIPProtect : null;
+        this.QuotaConsumer = 'QuotaConsumer' in params ? params.QuotaConsumer : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+        this.SyncFrequency = 'SyncFrequency' in params ? params.SyncFrequency : null;
+        this.IsExpired = 'IsExpired' in params ? params.IsExpired : null;
+        this.PermissionList = 'PermissionList' in params ? params.PermissionList : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.TcMemberType = 'TcMemberType' in params ? params.TcMemberType : null;
+        this.SubUserCount = 'SubUserCount' in params ? params.SubUserCount : null;
+        this.JoinTypeInfo = 'JoinTypeInfo' in params ? params.JoinTypeInfo : null;
+
+    }
+}
+
+/**
  * Asset tags
  * @class
  */
@@ -1845,55 +2081,6 @@ Note: This field may return·null, indicating that no valid values can be obtain
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
-
-    }
-}
-
-/**
- * Risk data
- * @class
- */
-class RiskCenterStatusKey extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Risk ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * User AppId
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-        /**
-         * Public IP/domain name
-         * @type {string || null}
-         */
-        this.PublicIPDomain = null;
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.PublicIPDomain = 'PublicIPDomain' in params ? params.PublicIPDomain : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2070,6 +2257,162 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * Details of a content risk
+ * @class
+ */
+class WebsiteRisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Affected assets
+         * @type {string || null}
+         */
+        this.AffectAsset = null;
+
+        /**
+         * Risk level
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Last detected
+         * @type {string || null}
+         */
+        this.RecentTime = null;
+
+        /**
+         * First detected
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Unique ID of the asset
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Frontend index
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * User `appid`
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User name.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User `uin`
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * URL of the risk
+         * @type {string || null}
+         */
+        this.URL = null;
+
+        /**
+         * URL of the risk file
+         * @type {string || null}
+         */
+        this.URLPath = null;
+
+        /**
+         * Instance type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Check type.
+         * @type {string || null}
+         */
+        this.DetectEngine = null;
+
+        /**
+         * Result description.
+         * @type {string || null}
+         */
+        this.ResultDescribe = null;
+
+        /**
+         * Source URL
+         * @type {string || null}
+         */
+        this.SourceURL = null;
+
+        /**
+         * Source file URL
+         * @type {string || null}
+         */
+        this.SourceURLPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.URL = 'URL' in params ? params.URL : null;
+        this.URLPath = 'URLPath' in params ? params.URLPath : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DetectEngine = 'DetectEngine' in params ? params.DetectEngine : null;
+        this.ResultDescribe = 'ResultDescribe' in params ? params.ResultDescribe : null;
+        this.SourceURL = 'SourceURL' in params ? params.SourceURL : null;
+        this.SourceURLPath = 'SourceURLPath' in params ? params.SourceURLPath : null;
+
+    }
+}
+
+/**
  * DeleteDomainAndIp request structure.
  * @class
  */
@@ -2185,6 +2528,34 @@ class DescribeScanTaskListRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeOrganizationInfo request structure.
+ * @class
+ */
+class DescribeOrganizationInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Member ID of the group account
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
     }
 }
@@ -2491,6 +2862,304 @@ class AddNewBindRoleUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeOrganizationUserInfo response structure.
+ * @class
+ */
+class DescribeOrganizationUserInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Group User List
+         * @type {Array.<OrganizationUserInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Join method enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.JoinTypeLst = null;
+
+        /**
+         * Cloud vendor enumeration
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.CloudTypeLst = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new OrganizationUserInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.JoinTypeLst) {
+            this.JoinTypeLst = new Array();
+            for (let z in params.JoinTypeLst) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.JoinTypeLst[z]);
+                this.JoinTypeLst.push(obj);
+            }
+        }
+
+        if (params.CloudTypeLst) {
+            this.CloudTypeLst = new Array();
+            for (let z in params.CloudTypeLst) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.CloudTypeLst[z]);
+                this.CloudTypeLst.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class OrganizationInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.JoinType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AdminName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AdminUin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MemberCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SubAccountCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AbnormalSubUserCount = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.GroupPermission = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.MemberPermission = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.GroupPayMode = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MemberPayMode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CFWProtect = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WAFProtect = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CWPProtect = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Departments = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MemberCreateTime = null;
+
+        /**
+         * Advanced/Enterprise/Ultimate 
+         * @type {string || null}
+         */
+        this.CSIPProtect = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.QuotaConsumer = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.EnableAdminCount = null;
+
+        /**
+         * 
+         * @type {Array.<CloudCountDesc> || null}
+         */
+        this.CloudCountDesc = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AdminCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.JoinType = 'JoinType' in params ? params.JoinType : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.AdminName = 'AdminName' in params ? params.AdminName : null;
+        this.AdminUin = 'AdminUin' in params ? params.AdminUin : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.MemberCount = 'MemberCount' in params ? params.MemberCount : null;
+        this.SubAccountCount = 'SubAccountCount' in params ? params.SubAccountCount : null;
+        this.AbnormalSubUserCount = 'AbnormalSubUserCount' in params ? params.AbnormalSubUserCount : null;
+        this.GroupPermission = 'GroupPermission' in params ? params.GroupPermission : null;
+        this.MemberPermission = 'MemberPermission' in params ? params.MemberPermission : null;
+        this.GroupPayMode = 'GroupPayMode' in params ? params.GroupPayMode : null;
+        this.MemberPayMode = 'MemberPayMode' in params ? params.MemberPayMode : null;
+        this.CFWProtect = 'CFWProtect' in params ? params.CFWProtect : null;
+        this.WAFProtect = 'WAFProtect' in params ? params.WAFProtect : null;
+        this.CWPProtect = 'CWPProtect' in params ? params.CWPProtect : null;
+        this.Departments = 'Departments' in params ? params.Departments : null;
+        this.MemberCreateTime = 'MemberCreateTime' in params ? params.MemberCreateTime : null;
+        this.CSIPProtect = 'CSIPProtect' in params ? params.CSIPProtect : null;
+        this.QuotaConsumer = 'QuotaConsumer' in params ? params.QuotaConsumer : null;
+        this.EnableAdminCount = 'EnableAdminCount' in params ? params.EnableAdminCount : null;
+
+        if (params.CloudCountDesc) {
+            this.CloudCountDesc = new Array();
+            for (let z in params.CloudCountDesc) {
+                let obj = new CloudCountDesc();
+                obj.deserialize(params.CloudCountDesc[z]);
+                this.CloudCountDesc.push(obj);
+            }
+        }
+        this.AdminCount = 'AdminCount' in params ? params.AdminCount : null;
 
     }
 }
@@ -3267,172 +3936,30 @@ class StopRiskCenterTaskResponse extends  AbstractModel {
 }
 
 /**
- * Service risk
+ * DescribeOrganizationInfo response structure.
  * @class
  */
-class ServerRisk extends  AbstractModel {
+class DescribeOrganizationInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Service tag
-         * @type {string || null}
-         */
-        this.ServiceTag = null;
-
-        /**
-         * Port
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Total number of items
          * @type {number || null}
          */
-        this.Port = null;
+        this.TotalCount = null;
 
         /**
-         * Affected assets
+         * Group User List
+         * @type {Array.<OrganizationInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AffectAsset = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Asset type
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * Risk level
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * Network protocol
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Components
-         * @type {string || null}
-         */
-        this.Component = null;
-
-        /**
-         * Service
-         * @type {string || null}
-         */
-        this.Service = null;
-
-        /**
-         * Last detected 
-         * @type {string || null}
-         */
-        this.RecentTime = null;
-
-        /**
-         * First detected
-         * @type {string || null}
-         */
-        this.FirstTime = null;
-
-        /**
-         * Risk Details
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RiskDetails = null;
-
-        /**
-         * Handling suggestion
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Unique ID of the asset
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * User `appid`
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-        /**
-         * User name.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Nick = null;
-
-        /**
-         * User `uin`
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * Service snapshot
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ServiceSnapshot = null;
-
-        /**
-         * Service access URL.
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Data entry key
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Index = null;
-
-        /**
-         * List of risks
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<ServerRiskSuggestion> || null}
-         */
-        this.RiskList = null;
-
-        /**
-         * List of fix suggestions 
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<ServerRiskSuggestion> || null}
-         */
-        this.SuggestionList = null;
-
-        /**
-         * HTTP response code
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StatusCode = null;
+        this.RequestId = null;
 
     }
 
@@ -3443,47 +3970,50 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.ServiceTag = 'ServiceTag' in params ? params.ServiceTag : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Component = 'Component' in params ? params.Component : null;
-        this.Service = 'Service' in params ? params.Service : null;
-        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
-        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
-        this.RiskDetails = 'RiskDetails' in params ? params.RiskDetails : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.Nick = 'Nick' in params ? params.Nick : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.ServiceSnapshot = 'ServiceSnapshot' in params ? params.ServiceSnapshot : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Index = 'Index' in params ? params.Index : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.RiskList) {
-            this.RiskList = new Array();
-            for (let z in params.RiskList) {
-                let obj = new ServerRiskSuggestion();
-                obj.deserialize(params.RiskList[z]);
-                this.RiskList.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new OrganizationInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.SuggestionList) {
-            this.SuggestionList = new Array();
-            for (let z in params.SuggestionList) {
-                let obj = new ServerRiskSuggestion();
-                obj.deserialize(params.SuggestionList[z]);
-                this.SuggestionList.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeVpcAssets request structure.
+ * @class
+ */
+class DescribeVpcAssetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter parameters
+         * @type {Filter || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
 
     }
 }
@@ -3900,18 +4430,36 @@ class FilterDataObject extends  AbstractModel {
 }
 
 /**
- * DescribeVpcAssets request structure.
+ * Risk data
  * @class
  */
-class DescribeVpcAssetsRequest extends  AbstractModel {
+class RiskCenterStatusKey extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter parameters
-         * @type {Filter || null}
+         * Risk ID
+         * @type {string || null}
          */
-        this.Filter = null;
+        this.Id = null;
+
+        /**
+         * User AppId
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Public IP/domain name
+         * @type {string || null}
+         */
+        this.PublicIPDomain = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
     }
 
@@ -3922,12 +4470,10 @@ class DescribeVpcAssetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filter) {
-            let obj = new Filter();
-            obj.deserialize(params.Filter)
-            this.Filter = obj;
-        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.PublicIPDomain = 'PublicIPDomain' in params ? params.PublicIPDomain : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4316,6 +4862,195 @@ Note: This field may return·null, indicating that no valid values can be obtain
                 this.Tag.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class SubUserInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AppID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerAppID = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerNickName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OwnerMemberID = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ServiceCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InterfaceCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AssetCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.LogCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ConfigRiskCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ActionRiskCount = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsAccessCloudAudit = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsAccessCheck = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsAccessUeba = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.OwnerAppID = 'OwnerAppID' in params ? params.OwnerAppID : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.OwnerNickName = 'OwnerNickName' in params ? params.OwnerNickName : null;
+        this.OwnerMemberID = 'OwnerMemberID' in params ? params.OwnerMemberID : null;
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+        this.ServiceCount = 'ServiceCount' in params ? params.ServiceCount : null;
+        this.InterfaceCount = 'InterfaceCount' in params ? params.InterfaceCount : null;
+        this.AssetCount = 'AssetCount' in params ? params.AssetCount : null;
+        this.LogCount = 'LogCount' in params ? params.LogCount : null;
+        this.ConfigRiskCount = 'ConfigRiskCount' in params ? params.ConfigRiskCount : null;
+        this.ActionRiskCount = 'ActionRiskCount' in params ? params.ActionRiskCount : null;
+        this.IsAccessCloudAudit = 'IsAccessCloudAudit' in params ? params.IsAccessCloudAudit : null;
+        this.IsAccessCheck = 'IsAccessCheck' in params ? params.IsAccessCheck : null;
+        this.IsAccessUeba = 'IsAccessUeba' in params ? params.IsAccessUeba : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CloudCountDesc extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CloudType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CloudCount = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CloudDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CloudType = 'CloudType' in params ? params.CloudType : null;
+        this.CloudCount = 'CloudCount' in params ? params.CloudCount : null;
+        this.CloudDesc = 'CloudDesc' in params ? params.CloudDesc : null;
 
     }
 }
@@ -4743,128 +5478,60 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * Details of a content risk
+ * DescribeDbAssets response structure.
  * @class
  */
-class WebsiteRisk extends  AbstractModel {
+class DescribeDbAssetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Affected assets
-         * @type {string || null}
-         */
-        this.AffectAsset = null;
-
-        /**
-         * Risk level
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * Last detected
-         * @type {string || null}
-         */
-        this.RecentTime = null;
-
-        /**
-         * First detected
-         * @type {string || null}
-         */
-        this.FirstTime = null;
-
-        /**
-         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
+         * Total number of results
+Note: This field may return·null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Status = null;
+        this.Total = null;
 
         /**
-         * Unique ID of the asset
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Frontend index
-         * @type {string || null}
-         */
-        this.Index = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * User `appid`
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-        /**
-         * User name.
+         * Total of assets
 Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {Array.<DBAssetVO> || null}
          */
-        this.Nick = null;
+        this.Data = null;
 
         /**
-         * User `uin`
+         * List of regions
 Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * @type {Array.<FilterDataObject> || null}
          */
-        this.Uin = null;
+        this.RegionList = null;
 
         /**
-         * URL of the risk
-         * @type {string || null}
+         * List of asset types
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
          */
-        this.URL = null;
+        this.AssetTypeList = null;
 
         /**
-         * URL of the risk file
-         * @type {string || null}
+         * List of VPCs
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
          */
-        this.URLPath = null;
+        this.VpcList = null;
 
         /**
-         * Instance type
-         * @type {string || null}
+         * List of users (AppId)
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<FilterDataObject> || null}
          */
-        this.InstanceType = null;
+        this.AppIdList = null;
 
         /**
-         * Check type.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DetectEngine = null;
-
-        /**
-         * Result description.
-         * @type {string || null}
-         */
-        this.ResultDescribe = null;
-
-        /**
-         * Source URL
-         * @type {string || null}
-         */
-        this.SourceURL = null;
-
-        /**
-         * Source file URL
-         * @type {string || null}
-         */
-        this.SourceURLPath = null;
+        this.RequestId = null;
 
     }
 
@@ -4875,25 +5542,53 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
-        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Index = 'Index' in params ? params.Index : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.Nick = 'Nick' in params ? params.Nick : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.URL = 'URL' in params ? params.URL : null;
-        this.URLPath = 'URLPath' in params ? params.URLPath : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.DetectEngine = 'DetectEngine' in params ? params.DetectEngine : null;
-        this.ResultDescribe = 'ResultDescribe' in params ? params.ResultDescribe : null;
-        this.SourceURL = 'SourceURL' in params ? params.SourceURL : null;
-        this.SourceURLPath = 'SourceURLPath' in params ? params.SourceURLPath : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DBAssetVO();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.RegionList) {
+            this.RegionList = new Array();
+            for (let z in params.RegionList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.RegionList[z]);
+                this.RegionList.push(obj);
+            }
+        }
+
+        if (params.AssetTypeList) {
+            this.AssetTypeList = new Array();
+            for (let z in params.AssetTypeList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AssetTypeList[z]);
+                this.AssetTypeList.push(obj);
+            }
+        }
+
+        if (params.VpcList) {
+            this.VpcList = new Array();
+            for (let z in params.VpcList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.VpcList[z]);
+                this.VpcList.push(obj);
+            }
+        }
+
+        if (params.AppIdList) {
+            this.AppIdList = new Array();
+            for (let z in params.AppIdList) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.AppIdList[z]);
+                this.AppIdList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7156,6 +7851,228 @@ class DeleteDomainAndIpResponse extends  AbstractModel {
 }
 
 /**
+ * Service risk
+ * @class
+ */
+class ServerRisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service tag
+         * @type {string || null}
+         */
+        this.ServiceTag = null;
+
+        /**
+         * Port
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Affected assets
+         * @type {string || null}
+         */
+        this.AffectAsset = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Asset type
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Risk level
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * Network protocol
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Components
+         * @type {string || null}
+         */
+        this.Component = null;
+
+        /**
+         * Service
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * Last detected 
+         * @type {string || null}
+         */
+        this.RecentTime = null;
+
+        /**
+         * First detected
+         * @type {string || null}
+         */
+        this.FirstTime = null;
+
+        /**
+         * Risk Details
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RiskDetails = null;
+
+        /**
+         * Handling suggestion
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * Status of the risk. `0`: Not handled, `1`: Handled; `2`: Ignored
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Unique ID of the asset
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * User `appid`
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * User name.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+        /**
+         * User `uin`
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Service snapshot
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceSnapshot = null;
+
+        /**
+         * Service access URL.
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Data entry key
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * List of risks
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<ServerRiskSuggestion> || null}
+         */
+        this.RiskList = null;
+
+        /**
+         * List of fix suggestions 
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {Array.<ServerRiskSuggestion> || null}
+         */
+        this.SuggestionList = null;
+
+        /**
+         * HTTP response code
+Note: This field may return·null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StatusCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceTag = 'ServiceTag' in params ? params.ServiceTag : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.AffectAsset = 'AffectAsset' in params ? params.AffectAsset : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Component = 'Component' in params ? params.Component : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.RecentTime = 'RecentTime' in params ? params.RecentTime : null;
+        this.FirstTime = 'FirstTime' in params ? params.FirstTime : null;
+        this.RiskDetails = 'RiskDetails' in params ? params.RiskDetails : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.ServiceSnapshot = 'ServiceSnapshot' in params ? params.ServiceSnapshot : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Index = 'Index' in params ? params.Index : null;
+
+        if (params.RiskList) {
+            this.RiskList = new Array();
+            for (let z in params.RiskList) {
+                let obj = new ServerRiskSuggestion();
+                obj.deserialize(params.RiskList[z]);
+                this.RiskList.push(obj);
+            }
+        }
+
+        if (params.SuggestionList) {
+            this.SuggestionList = new Array();
+            for (let z in params.SuggestionList) {
+                let obj = new ServerRiskSuggestion();
+                obj.deserialize(params.SuggestionList[z]);
+                this.SuggestionList.push(obj);
+            }
+        }
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+
+    }
+}
+
+/**
  * List of task IDs in the report
  * @class
  */
@@ -8720,60 +9637,18 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * DescribeDbAssets response structure.
+ * DescribeTaskLogList request structure.
  * @class
  */
-class DescribeDbAssetsResponse extends  AbstractModel {
+class DescribeTaskLogListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of results
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Filter conditions
+         * @type {Filter || null}
          */
-        this.Total = null;
-
-        /**
-         * Total of assets
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<DBAssetVO> || null}
-         */
-        this.Data = null;
-
-        /**
-         * List of regions
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.RegionList = null;
-
-        /**
-         * List of asset types
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.AssetTypeList = null;
-
-        /**
-         * List of VPCs
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.VpcList = null;
-
-        /**
-         * List of users (AppId)
-Note: This field may return·null, indicating that no valid values can be obtained.
-         * @type {Array.<FilterDataObject> || null}
-         */
-        this.AppIdList = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Filter = null;
 
     }
 
@@ -8784,53 +9659,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DBAssetVO();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+        if (params.Filter) {
+            let obj = new Filter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
         }
-
-        if (params.RegionList) {
-            this.RegionList = new Array();
-            for (let z in params.RegionList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.RegionList[z]);
-                this.RegionList.push(obj);
-            }
-        }
-
-        if (params.AssetTypeList) {
-            this.AssetTypeList = new Array();
-            for (let z in params.AssetTypeList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.AssetTypeList[z]);
-                this.AssetTypeList.push(obj);
-            }
-        }
-
-        if (params.VpcList) {
-            this.VpcList = new Array();
-            for (let z in params.VpcList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.VpcList[z]);
-                this.VpcList.push(obj);
-            }
-        }
-
-        if (params.AppIdList) {
-            this.AppIdList = new Array();
-            for (let z in params.AppIdList) {
-                let obj = new FilterDataObject();
-                obj.deserialize(params.AppIdList[z]);
-                this.AppIdList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9321,15 +10155,101 @@ class ModifyRiskCenterRiskStatusResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTaskLogList request structure.
+ * DescribeSubUserInfo response structure.
  * @class
  */
-class DescribeTaskLogListRequest extends  AbstractModel {
+class DescribeSubUserInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter conditions
+         * total
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Sub-user list
+         * @type {Array.<SubUserInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Manufacturer Enumeration List
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.CloudTypeLst = null;
+
+        /**
+         * Enumeration of appid of the main account
+         * @type {Array.<FilterDataObject> || null}
+         */
+        this.OwnerAppIDLst = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SubUserInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+        if (params.CloudTypeLst) {
+            this.CloudTypeLst = new Array();
+            for (let z in params.CloudTypeLst) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.CloudTypeLst[z]);
+                this.CloudTypeLst.push(obj);
+            }
+        }
+
+        if (params.OwnerAppIDLst) {
+            this.OwnerAppIDLst = new Array();
+            for (let z in params.OwnerAppIDLst) {
+                let obj = new FilterDataObject();
+                obj.deserialize(params.OwnerAppIDLst[z]);
+                this.OwnerAppIDLst.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSubUserInfo request structure.
+ * @class
+ */
+class DescribeSubUserInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Member ID of the group account
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * Filter content
          * @type {Filter || null}
          */
         this.Filter = null;
@@ -9343,6 +10263,7 @@ class DescribeTaskLogListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
 
         if (params.Filter) {
             let obj = new Filter();
@@ -9542,6 +10463,7 @@ module.exports = {
     DescribeRiskCenterAssetViewWeakPasswordRiskListResponse: DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
     DescribeVULRiskAdvanceCFGListResponse: DescribeVULRiskAdvanceCFGListResponse,
     TaskCenterWeakPwdRiskInputParam: TaskCenterWeakPwdRiskInputParam,
+    DescribeOrganizationUserInfoRequest: DescribeOrganizationUserInfoRequest,
     ModifyRiskCenterRiskStatusRequest: ModifyRiskCenterRiskStatusRequest,
     ReportItemKey: ReportItemKey,
     CVMAssetVO: CVMAssetVO,
@@ -9553,20 +10475,24 @@ module.exports = {
     VULRiskAdvanceCFGList: VULRiskAdvanceCFGList,
     StopRiskCenterTaskRequest: StopRiskCenterTaskRequest,
     DataSearchBug: DataSearchBug,
+    OrganizationUserInfo: OrganizationUserInfo,
     AssetTag: AssetTag,
-    RiskCenterStatusKey: RiskCenterStatusKey,
     DescribeVULRiskAdvanceCFGListRequest: DescribeVULRiskAdvanceCFGListRequest,
     DescribeRiskCenterAssetViewCFGRiskListRequest: DescribeRiskCenterAssetViewCFGRiskListRequest,
     DescribeDomainAssetsRequest: DescribeDomainAssetsRequest,
     Tag: Tag,
+    WebsiteRisk: WebsiteRisk,
     DeleteDomainAndIpRequest: DeleteDomainAndIpRequest,
     DescribeScanTaskListRequest: DescribeScanTaskListRequest,
+    DescribeOrganizationInfoRequest: DescribeOrganizationInfoRequest,
     TaskIdListKey: TaskIdListKey,
     DescribeRiskCenterWebsiteRiskListResponse: DescribeRiskCenterWebsiteRiskListResponse,
     DescribeScanReportListResponse: DescribeScanReportListResponse,
     DescribeSearchBugInfoRequest: DescribeSearchBugInfoRequest,
     TaskLogURL: TaskLogURL,
     AddNewBindRoleUserRequest: AddNewBindRoleUserRequest,
+    DescribeOrganizationUserInfoResponse: DescribeOrganizationUserInfoResponse,
+    OrganizationInfo: OrganizationInfo,
     DescribeListenerListResponse: DescribeListenerListResponse,
     DBAssetVO: DBAssetVO,
     AssetInfoDetail: AssetInfoDetail,
@@ -9575,20 +10501,23 @@ module.exports = {
     DescribeSubnetAssetsResponse: DescribeSubnetAssetsResponse,
     DescribeRiskCenterAssetViewPortRiskListRequest: DescribeRiskCenterAssetViewPortRiskListRequest,
     StopRiskCenterTaskResponse: StopRiskCenterTaskResponse,
-    ServerRisk: ServerRisk,
+    DescribeOrganizationInfoResponse: DescribeOrganizationInfoResponse,
+    DescribeVpcAssetsRequest: DescribeVpcAssetsRequest,
     TaskAssetObject: TaskAssetObject,
     IpAssetListVO: IpAssetListVO,
     FilterDataObject: FilterDataObject,
-    DescribeVpcAssetsRequest: DescribeVpcAssetsRequest,
+    RiskCenterStatusKey: RiskCenterStatusKey,
     DescribeRiskCenterAssetViewWeakPasswordRiskListRequest: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
     PublicIpDomainListKey: PublicIpDomainListKey,
     DescribeCVMAssetsResponse: DescribeCVMAssetsResponse,
     DbAssetInfo: DbAssetInfo,
+    SubUserInfo: SubUserInfo,
+    CloudCountDesc: CloudCountDesc,
     DescribePublicIpAssetsRequest: DescribePublicIpAssetsRequest,
     AssetClusterPod: AssetClusterPod,
     DescribeCVMAssetInfoRequest: DescribeCVMAssetInfoRequest,
     AssetViewWeakPassRisk: AssetViewWeakPassRisk,
-    WebsiteRisk: WebsiteRisk,
+    DescribeDbAssetsResponse: DescribeDbAssetsResponse,
     CreateRiskCenterScanTaskRequest: CreateRiskCenterScanTaskRequest,
     DescribeRiskCenterAssetViewCFGRiskListResponse: DescribeRiskCenterAssetViewCFGRiskListResponse,
     DescribeRiskCenterVULViewVULRiskListResponse: DescribeRiskCenterVULViewVULRiskListResponse,
@@ -9615,6 +10544,7 @@ module.exports = {
     DescribeRiskCenterPortViewPortRiskListRequest: DescribeRiskCenterPortViewPortRiskListRequest,
     DescribeRiskCenterPortViewPortRiskListResponse: DescribeRiskCenterPortViewPortRiskListResponse,
     DeleteDomainAndIpResponse: DeleteDomainAndIpResponse,
+    ServerRisk: ServerRisk,
     ReportTaskIdList: ReportTaskIdList,
     AddNewBindRoleUserResponse: AddNewBindRoleUserResponse,
     WhereFilter: WhereFilter,
@@ -9630,7 +10560,7 @@ module.exports = {
     DescribeTaskLogListResponse: DescribeTaskLogListResponse,
     BugInfoDetail: BugInfoDetail,
     DescribeDomainAssetsResponse: DescribeDomainAssetsResponse,
-    DescribeDbAssetsResponse: DescribeDbAssetsResponse,
+    DescribeTaskLogListRequest: DescribeTaskLogListRequest,
     DescribeRiskCenterAssetViewVULRiskListResponse: DescribeRiskCenterAssetViewVULRiskListResponse,
     DescribeCVMAssetsRequest: DescribeCVMAssetsRequest,
     DescribeRiskCenterServerRiskListRequest: DescribeRiskCenterServerRiskListRequest,
@@ -9639,7 +10569,8 @@ module.exports = {
     DescribeListenerListRequest: DescribeListenerListRequest,
     DeleteRiskScanTaskResponse: DeleteRiskScanTaskResponse,
     ModifyRiskCenterRiskStatusResponse: ModifyRiskCenterRiskStatusResponse,
-    DescribeTaskLogListRequest: DescribeTaskLogListRequest,
+    DescribeSubUserInfoResponse: DescribeSubUserInfoResponse,
+    DescribeSubUserInfoRequest: DescribeSubUserInfoRequest,
     DescribeRiskCenterAssetViewPortRiskListResponse: DescribeRiskCenterAssetViewPortRiskListResponse,
     DescribeTaskLogURLRequest: DescribeTaskLogURLRequest,
 

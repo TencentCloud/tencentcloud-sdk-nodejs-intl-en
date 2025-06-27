@@ -603,7 +603,7 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to create high-availability instances (local disk)
+     * This API is used to create high-availability instances (local disk).
      * @param {CreateDBInstancesRequest} req
      * @param {function(string, CreateDBInstancesResponse):void} cb
      * @public

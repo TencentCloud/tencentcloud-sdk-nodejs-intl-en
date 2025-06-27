@@ -21,6 +21,7 @@ const DeleteRiskScanTaskRequest = models.DeleteRiskScanTaskRequest;
 const DescribeRiskCenterAssetViewWeakPasswordRiskListResponse = models.DescribeRiskCenterAssetViewWeakPasswordRiskListResponse;
 const DescribeVULRiskAdvanceCFGListResponse = models.DescribeVULRiskAdvanceCFGListResponse;
 const TaskCenterWeakPwdRiskInputParam = models.TaskCenterWeakPwdRiskInputParam;
+const DescribeOrganizationUserInfoRequest = models.DescribeOrganizationUserInfoRequest;
 const ModifyRiskCenterRiskStatusRequest = models.ModifyRiskCenterRiskStatusRequest;
 const ReportItemKey = models.ReportItemKey;
 const CVMAssetVO = models.CVMAssetVO;
@@ -32,20 +33,24 @@ const Vpc = models.Vpc;
 const VULRiskAdvanceCFGList = models.VULRiskAdvanceCFGList;
 const StopRiskCenterTaskRequest = models.StopRiskCenterTaskRequest;
 const DataSearchBug = models.DataSearchBug;
+const OrganizationUserInfo = models.OrganizationUserInfo;
 const AssetTag = models.AssetTag;
-const RiskCenterStatusKey = models.RiskCenterStatusKey;
 const DescribeVULRiskAdvanceCFGListRequest = models.DescribeVULRiskAdvanceCFGListRequest;
 const DescribeRiskCenterAssetViewCFGRiskListRequest = models.DescribeRiskCenterAssetViewCFGRiskListRequest;
 const DescribeDomainAssetsRequest = models.DescribeDomainAssetsRequest;
 const Tag = models.Tag;
+const WebsiteRisk = models.WebsiteRisk;
 const DeleteDomainAndIpRequest = models.DeleteDomainAndIpRequest;
 const DescribeScanTaskListRequest = models.DescribeScanTaskListRequest;
+const DescribeOrganizationInfoRequest = models.DescribeOrganizationInfoRequest;
 const TaskIdListKey = models.TaskIdListKey;
 const DescribeRiskCenterWebsiteRiskListResponse = models.DescribeRiskCenterWebsiteRiskListResponse;
 const DescribeScanReportListResponse = models.DescribeScanReportListResponse;
 const DescribeSearchBugInfoRequest = models.DescribeSearchBugInfoRequest;
 const TaskLogURL = models.TaskLogURL;
 const AddNewBindRoleUserRequest = models.AddNewBindRoleUserRequest;
+const DescribeOrganizationUserInfoResponse = models.DescribeOrganizationUserInfoResponse;
+const OrganizationInfo = models.OrganizationInfo;
 const DescribeListenerListResponse = models.DescribeListenerListResponse;
 const DBAssetVO = models.DBAssetVO;
 const AssetInfoDetail = models.AssetInfoDetail;
@@ -54,20 +59,23 @@ const CreateRiskCenterScanTaskResponse = models.CreateRiskCenterScanTaskResponse
 const DescribeSubnetAssetsResponse = models.DescribeSubnetAssetsResponse;
 const DescribeRiskCenterAssetViewPortRiskListRequest = models.DescribeRiskCenterAssetViewPortRiskListRequest;
 const StopRiskCenterTaskResponse = models.StopRiskCenterTaskResponse;
-const ServerRisk = models.ServerRisk;
+const DescribeOrganizationInfoResponse = models.DescribeOrganizationInfoResponse;
+const DescribeVpcAssetsRequest = models.DescribeVpcAssetsRequest;
 const TaskAssetObject = models.TaskAssetObject;
 const IpAssetListVO = models.IpAssetListVO;
 const FilterDataObject = models.FilterDataObject;
-const DescribeVpcAssetsRequest = models.DescribeVpcAssetsRequest;
+const RiskCenterStatusKey = models.RiskCenterStatusKey;
 const DescribeRiskCenterAssetViewWeakPasswordRiskListRequest = models.DescribeRiskCenterAssetViewWeakPasswordRiskListRequest;
 const PublicIpDomainListKey = models.PublicIpDomainListKey;
 const DescribeCVMAssetsResponse = models.DescribeCVMAssetsResponse;
 const DbAssetInfo = models.DbAssetInfo;
+const SubUserInfo = models.SubUserInfo;
+const CloudCountDesc = models.CloudCountDesc;
 const DescribePublicIpAssetsRequest = models.DescribePublicIpAssetsRequest;
 const AssetClusterPod = models.AssetClusterPod;
 const DescribeCVMAssetInfoRequest = models.DescribeCVMAssetInfoRequest;
 const AssetViewWeakPassRisk = models.AssetViewWeakPassRisk;
-const WebsiteRisk = models.WebsiteRisk;
+const DescribeDbAssetsResponse = models.DescribeDbAssetsResponse;
 const CreateRiskCenterScanTaskRequest = models.CreateRiskCenterScanTaskRequest;
 const DescribeRiskCenterAssetViewCFGRiskListResponse = models.DescribeRiskCenterAssetViewCFGRiskListResponse;
 const DescribeRiskCenterVULViewVULRiskListResponse = models.DescribeRiskCenterVULViewVULRiskListResponse;
@@ -94,6 +102,7 @@ const AssetViewPortRisk = models.AssetViewPortRisk;
 const DescribeRiskCenterPortViewPortRiskListRequest = models.DescribeRiskCenterPortViewPortRiskListRequest;
 const DescribeRiskCenterPortViewPortRiskListResponse = models.DescribeRiskCenterPortViewPortRiskListResponse;
 const DeleteDomainAndIpResponse = models.DeleteDomainAndIpResponse;
+const ServerRisk = models.ServerRisk;
 const ReportTaskIdList = models.ReportTaskIdList;
 const AddNewBindRoleUserResponse = models.AddNewBindRoleUserResponse;
 const WhereFilter = models.WhereFilter;
@@ -109,7 +118,7 @@ const DescribeSearchBugInfoResponse = models.DescribeSearchBugInfoResponse;
 const DescribeTaskLogListResponse = models.DescribeTaskLogListResponse;
 const BugInfoDetail = models.BugInfoDetail;
 const DescribeDomainAssetsResponse = models.DescribeDomainAssetsResponse;
-const DescribeDbAssetsResponse = models.DescribeDbAssetsResponse;
+const DescribeTaskLogListRequest = models.DescribeTaskLogListRequest;
 const DescribeRiskCenterAssetViewVULRiskListResponse = models.DescribeRiskCenterAssetViewVULRiskListResponse;
 const DescribeCVMAssetsRequest = models.DescribeCVMAssetsRequest;
 const DescribeRiskCenterServerRiskListRequest = models.DescribeRiskCenterServerRiskListRequest;
@@ -118,7 +127,8 @@ const DescribeRiskCenterServerRiskListResponse = models.DescribeRiskCenterServer
 const DescribeListenerListRequest = models.DescribeListenerListRequest;
 const DeleteRiskScanTaskResponse = models.DeleteRiskScanTaskResponse;
 const ModifyRiskCenterRiskStatusResponse = models.ModifyRiskCenterRiskStatusResponse;
-const DescribeTaskLogListRequest = models.DescribeTaskLogListRequest;
+const DescribeSubUserInfoResponse = models.DescribeSubUserInfoResponse;
+const DescribeSubUserInfoRequest = models.DescribeSubUserInfoRequest;
 const DescribeRiskCenterAssetViewPortRiskListResponse = models.DescribeRiskCenterAssetViewPortRiskListResponse;
 const DescribeTaskLogURLRequest = models.DescribeTaskLogURLRequest;
 
@@ -133,6 +143,17 @@ class CsipClient extends AbstractClient {
         super("csip.intl.tencentcloudapi.com", "2022-11-21", credential, region, profile);
     }
     
+    /**
+     * This API is used to get the list of scan task reports.
+     * @param {DescribeTaskLogListRequest} req
+     * @param {function(string, DescribeTaskLogListResponse):void} cb
+     * @public
+     */
+    DescribeTaskLogList(req, cb) {
+        let resp = new DescribeTaskLogListResponse();
+        this.request("DescribeTaskLogList", req, resp, cb);
+    }
+
     /**
      * This API is used to delete assets.
      * @param {DeleteDomainAndIpRequest} req
@@ -310,6 +331,17 @@ class CsipClient extends AbstractClient {
     }
 
     /**
+     * Check group account details
+     * @param {DescribeOrganizationInfoRequest} req
+     * @param {function(string, DescribeOrganizationInfoResponse):void} cb
+     * @public
+     */
+    DescribeOrganizationInfo(req, cb) {
+        let resp = new DescribeOrganizationInfoResponse();
+        this.request("DescribeOrganizationInfo", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the temp download link of a report. 
      * @param {DescribeTaskLogURLRequest} req
      * @param {function(string, DescribeTaskLogURLResponse):void} cb
@@ -343,14 +375,14 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of scan task reports.
-     * @param {DescribeTaskLogListRequest} req
-     * @param {function(string, DescribeTaskLogListResponse):void} cb
+     * Query the group's sub-account list
+     * @param {DescribeSubUserInfoRequest} req
+     * @param {function(string, DescribeSubUserInfoResponse):void} cb
      * @public
      */
-    DescribeTaskLogList(req, cb) {
-        let resp = new DescribeTaskLogListResponse();
-        this.request("DescribeTaskLogList", req, resp, cb);
+    DescribeSubUserInfo(req, cb) {
+        let resp = new DescribeSubUserInfoResponse();
+        this.request("DescribeSubUserInfo", req, resp, cb);
     }
 
     /**
@@ -439,6 +471,17 @@ class CsipClient extends AbstractClient {
     ModifyRiskCenterRiskStatus(req, cb) {
         let resp = new ModifyRiskCenterRiskStatusResponse();
         this.request("ModifyRiskCenterRiskStatus", req, resp, cb);
+    }
+
+    /**
+     * Query group account user list
+     * @param {DescribeOrganizationUserInfoRequest} req
+     * @param {function(string, DescribeOrganizationUserInfoResponse):void} cb
+     * @public
+     */
+    DescribeOrganizationUserInfo(req, cb) {
+        let resp = new DescribeOrganizationUserInfoResponse();
+        this.request("DescribeOrganizationUserInfo", req, resp, cb);
     }
 
     /**

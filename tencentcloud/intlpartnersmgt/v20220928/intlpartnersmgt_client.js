@@ -85,6 +85,7 @@ const AllocateCreditPoolResponse = models.AllocateCreditPoolResponse;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
+const DescribeCustomerBillDetailByDayResponse = models.DescribeCustomerBillDetailByDayResponse;
 const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
 const ApproveSubAgentApplyRequest = models.ApproveSubAgentApplyRequest;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
@@ -115,6 +116,7 @@ const QueryPolicyProductListByCodeResponse = models.QueryPolicyProductListByCode
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const QueryPendingSubAgentsV2Response = models.QueryPendingSubAgentsV2Response;
+const DescribeCustomerBillDetailByDayRequest = models.DescribeCustomerBillDetailByDayRequest;
 const BillDetailData = models.BillDetailData;
 const QueryCustomerBillingQuotaRequest = models.QueryCustomerBillingQuotaRequest;
 const DescribeCustomerInfoData = models.DescribeCustomerInfoData;
@@ -510,6 +512,18 @@ Callable roles: Reseller, Distributor, Second-level reseller
     QueryVoucherAmountByUin(req, cb) {
         let resp = new QueryVoucherAmountByUinResponse();
         this.request("QueryVoucherAmountByUin", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the daily bill expenditure of cu by resellers.
+Invocation Role: first-level reseller, second-level reseller, reseller.
+     * @param {DescribeCustomerBillDetailByDayRequest} req
+     * @param {function(string, DescribeCustomerBillDetailByDayResponse):void} cb
+     * @public
+     */
+    DescribeCustomerBillDetailByDay(req, cb) {
+        let resp = new DescribeCustomerBillDetailByDayResponse();
+        this.request("DescribeCustomerBillDetailByDay", req, resp, cb);
     }
 
     /**

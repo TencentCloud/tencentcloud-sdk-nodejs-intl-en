@@ -133,6 +133,7 @@ const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfo
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const StopLiveRecordRequest = models.StopLiveRecordRequest;
+const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
 const StreamEventInfo = models.StreamEventInfo;
 const DeleteRecordTaskResponse = models.DeleteRecordTaskResponse;
@@ -167,6 +168,7 @@ const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
 const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
+const TimeShiftStreamInfo = models.TimeShiftStreamInfo;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DeleteLivePullStreamTaskResponse = models.DeleteLivePullStreamTaskResponse;
 const AuthenticateDomainOwnerRequest = models.AuthenticateDomainOwnerRequest;
@@ -205,7 +207,7 @@ const BandwidthInfo = models.BandwidthInfo;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
-const TranscodeDetailInfo = models.TranscodeDetailInfo;
+const StartLivePadStreamRequest = models.StartLivePadStreamRequest;
 const DescribeRecordTaskResponse = models.DescribeRecordTaskResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
 const DeleteLiveTranscodeTemplateRequest = models.DeleteLiveTranscodeTemplateRequest;
@@ -223,7 +225,7 @@ const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
 const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCodeDetailInfoListResponse;
-const TimeShiftStreamInfo = models.TimeShiftStreamInfo;
+const StartLivePadStreamResponse = models.StartLivePadStreamResponse;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const GroupProIspDataInfo = models.GroupProIspDataInfo;
 const RecordParam = models.RecordParam;
@@ -1681,6 +1683,17 @@ Referer information is included in HTTP requests. After you enable referer confi
     DescribeLiveStreamPushInfoList(req, cb) {
         let resp = new DescribeLiveStreamPushInfoListResponse();
         this.request("DescribeLiveStreamPushInfoList", req, resp, cb);
+    }
+
+    /**
+     * Call this API to switch the live broadcast to standby footage.
+     * @param {StartLivePadStreamRequest} req
+     * @param {function(string, StartLivePadStreamResponse):void} cb
+     * @public
+     */
+    StartLivePadStream(req, cb) {
+        let resp = new StartLivePadStreamResponse();
+        this.request("StartLivePadStream", req, resp, cb);
     }
 
     /**

@@ -2706,7 +2706,7 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * The end time.
+         * The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2742,7 +2742,7 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.MetricName = null;
 
         /**
-         * ZoneId set. This parameter is required.
+         * Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -15296,13 +15296,13 @@ class DescribeDDoSAttackEventRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time. Time range: 30 days.
+         * The start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time. Time range: 30 days.
+         * The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -15314,7 +15314,7 @@ class DescribeDDoSAttackEventRequest extends  AbstractModel {
         this.PolicyIds = null;
 
         /**
-         * ZoneId set. This parameter is required.
+         * Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -18681,7 +18681,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * The end time.
+         * The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -18702,7 +18702,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * Zone ID set. This parameter is required.
+         * Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -18712,7 +18712,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
 <li>min: 1 minute;</li>
 <li>5min: 5 minutes;</li>
 <li>hour: 1 hour;</li>
-<li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+<li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 1 hour, no more than 2 days, no more than 7 days, and over 7 days.
          * @type {string || null}
          */
         this.Interval = null;
@@ -19416,13 +19416,13 @@ class DescribeDDoSAttackDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Start time of the query period.
+         * The start time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of the query period.
+         * The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -19438,7 +19438,7 @@ class DescribeDDoSAttackDataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * ZoneId set. This parameter is required.
+         * Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -19450,11 +19450,11 @@ class DescribeDDoSAttackDataRequest extends  AbstractModel {
         this.PolicyIds = null;
 
         /**
-         * The query granularity. Values:
-<li>`min`: 1 minute;</li>
-<li>`5min`: 5 minutes;</li>
-<li>`hour`: 1 hour;</li>
-<li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < Period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+         * Query period granularity. Valid values:
+<li>min: 1 minute;</li>
+<li>5min: 5 minutes;</li>
+<li>hour: 1 hour;</li>
+<li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
          * @type {string || null}
          */
         this.Interval = null;
@@ -25127,7 +25127,7 @@ class DescribeDDoSAttackTopDataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * The end time.
+         * The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -25145,7 +25145,7 @@ class DescribeDDoSAttackTopDataRequest extends  AbstractModel {
         this.MetricName = null;
 
         /**
-         * Site ID set. This parameter is required.
+         * Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -25189,7 +25189,7 @@ class DescribeDDoSAttackTopDataRequest extends  AbstractModel {
         /**
          * Data storage region. Values:
 <li>`overseas`: Global (outside the Chinese mainland);</li>
-<li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+<li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user's location.
          * @type {string || null}
          */
         this.Area = null;
@@ -29712,23 +29712,25 @@ class DescribeTimingL4DataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * The end time.
+         * The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Query indicator. Values: 
-<li>l4Flow_connections: Number of access connections;</li>
-<li>l4Flow_flux: Total access traffic;</li>
-<li>l4Flow_inFlux: Ingress access traffic;</li>
-<li>l4Flow_outFlux: Egress access traffic. </li>
+         * Metric list. Valid values:
+<Li>l4Flow_connections: number of concurrent connections;</li>
+<Li>l4Flow_flux: total traffic;</li>
+<Li>l4Flow_inFlux: inbound traffic;</li>
+<Li>l4Flow_outFlux: outbound traffic.</li>
+<Li>l4Flow_inBandwidth: inbound peak bandwidth.</li>
+<Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
 
         /**
-         * ZoneId set. This parameter is required.
+         * Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -29744,24 +29746,22 @@ class DescribeTimingL4DataRequest extends  AbstractModel {
 <li>`min`: 1 minute;</li>
 <li>`5min`: 5 minutes;</li>
 <li>`hour`: 1 hour;</li>
-<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
-         * Filter criteria. The detailed Key values of filter criteria are as follows:
-<li>ruleId: Filter by forwarding rule ID.</li>
-<li>proxyId: Filter by L4 proxy instance ID.</li>
+         * Filter criteria. The detailed key values of filter criteria are as follows:
+<li>ruleId: filter by forwarding rule ID.</li>
+<li>proxyId: filter by L4 proxy instance ID.</li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
 
         /**
-         * Geolocation scope. Values:
-<li>`overseas`: Regions outside the Chinese mainland</li>
-<li>`mainland`: Chinese mainland</li>
-<li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+         * Data ownership region. This parameter is deprecated. Please filter data by client region in Filters.country.
          * @type {string || null}
          */
         this.Area = null;

@@ -244,6 +244,79 @@ class InputLossBehaviorInfo extends  AbstractModel {
 }
 
 /**
+ * Push information.
+ * @class
+ */
+class StreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Client IP.
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * Video information of pushed streams.
+         * @type {Array.<StreamVideoInfo> || null}
+         */
+        this.Video = null;
+
+        /**
+         * Audio information of pushed streams.
+         * @type {Array.<StreamAudioInfo> || null}
+         */
+        this.Audio = null;
+
+        /**
+         * SCTE-35 information of pushed streams.
+         * @type {Array.<StreamScte35Info> || null}
+         */
+        this.Scte35 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new StreamVideoInfo();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
+        }
+
+        if (params.Audio) {
+            this.Audio = new Array();
+            for (let z in params.Audio) {
+                let obj = new StreamAudioInfo();
+                obj.deserialize(params.Audio[z]);
+                this.Audio.push(obj);
+            }
+        }
+
+        if (params.Scte35) {
+            this.Scte35 = new Array();
+            for (let z in params.Scte35) {
+                let obj = new StreamScte35Info();
+                obj.deserialize(params.Scte35[z]);
+                this.Scte35.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Video information of pushed streams.
  * @class
  */
@@ -2382,36 +2455,18 @@ class ColorSpaceSetting extends  AbstractModel {
 }
 
 /**
- * Push information.
+ * Static graphic overlay configuration.
  * @class
  */
-class StreamInfo extends  AbstractModel {
+class StaticImageSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Client IP.
-         * @type {string || null}
+         * Whether to enable global static image overlay, 0: Disable, 1: Enable; Default value: 0.
+         * @type {number || null}
          */
-        this.ClientIp = null;
-
-        /**
-         * Video information of pushed streams.
-         * @type {Array.<StreamVideoInfo> || null}
-         */
-        this.Video = null;
-
-        /**
-         * Audio information of pushed streams.
-         * @type {Array.<StreamAudioInfo> || null}
-         */
-        this.Audio = null;
-
-        /**
-         * SCTE-35 information of pushed streams.
-         * @type {Array.<StreamScte35Info> || null}
-         */
-        this.Scte35 = null;
+        this.GlobalImageOverlayEnabled = null;
 
     }
 
@@ -2422,34 +2477,7 @@ class StreamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
-
-        if (params.Video) {
-            this.Video = new Array();
-            for (let z in params.Video) {
-                let obj = new StreamVideoInfo();
-                obj.deserialize(params.Video[z]);
-                this.Video.push(obj);
-            }
-        }
-
-        if (params.Audio) {
-            this.Audio = new Array();
-            for (let z in params.Audio) {
-                let obj = new StreamAudioInfo();
-                obj.deserialize(params.Audio[z]);
-                this.Audio.push(obj);
-            }
-        }
-
-        if (params.Scte35) {
-            this.Scte35 = new Array();
-            for (let z in params.Scte35) {
-                let obj = new StreamScte35Info();
-                obj.deserialize(params.Scte35[z]);
-                this.Scte35.push(obj);
-            }
-        }
+        this.GlobalImageOverlayEnabled = 'GlobalImageOverlayEnabled' in params ? params.GlobalImageOverlayEnabled : null;
 
     }
 }
@@ -3668,6 +3696,97 @@ class DeleteStreamLivePlanRequest extends  AbstractModel {
 }
 
 /**
+ * Static image activate setting.
+ * @class
+ */
+class StaticImageActivateSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The address of the image to be inserted, starting with http or https and ending with .png .PNG .bmp .BMP .tga .TGA.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * The layer of the superimposed image, 0-7; the default value is 0, and a higher layer means it is on the top.
+         * @type {number || null}
+         */
+        this.Layer = null;
+
+        /**
+         * Opacity, range 0-100; the default value is 100, which means completely opaque.
+         * @type {number || null}
+         */
+        this.Opacity = null;
+
+        /**
+         * The distance from the left edge in pixels; the default value is 0 and the maximum value is 4096.
+         * @type {number || null}
+         */
+        this.ImageX = null;
+
+        /**
+         * The distance from the top edge in pixels; the default value is 0 and the maximum value is 2160.
+         * @type {number || null}
+         */
+        this.ImageY = null;
+
+        /**
+         * The width of the image superimposed on the video frame, in pixels. The default value is empty (not set), which means using the original image size. The minimum value is 1 and the maximum value is 4096.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The height of the image superimposed on the video frame, in pixels. The default value is empty (not set), which means the original image size is used. The minimum value is 1 and the maximum value is 2160.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Overlay duration, in milliseconds, range 0-86400000; default value 0, 0 means continuous.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Fade-in duration, in milliseconds, range 0-5000; default value 0, 0 means no fade-in effect.
+         * @type {number || null}
+         */
+        this.FadeIn = null;
+
+        /**
+         * Fade-out duration, in milliseconds, range 0-5000; default value 0, 0 means no fade-out effect.
+         * @type {number || null}
+         */
+        this.FadeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Layer = 'Layer' in params ? params.Layer : null;
+        this.Opacity = 'Opacity' in params ? params.Opacity : null;
+        this.ImageX = 'ImageX' in params ? params.ImageX : null;
+        this.ImageY = 'ImageY' in params ? params.ImageY : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.FadeIn = 'FadeIn' in params ? params.FadeIn : null;
+        this.FadeOut = 'FadeOut' in params ? params.FadeOut : null;
+
+    }
+}
+
+/**
  * DescribeStreamLiveChannels request structure.
  * @class
  */
@@ -3953,6 +4072,18 @@ class EventSettingsResp extends  AbstractModel {
          */
         this.TimedMetadataSetting = null;
 
+        /**
+         * Static image activate setting.
+         * @type {StaticImageActivateSetting || null}
+         */
+        this.StaticImageActivateSetting = null;
+
+        /**
+         * Static image deactivate setting.
+         * @type {StaticImageDeactivateSetting || null}
+         */
+        this.StaticImageDeactivateSetting = null;
+
     }
 
     /**
@@ -3991,6 +4122,18 @@ class EventSettingsResp extends  AbstractModel {
             let obj = new TimedMetadataInfo();
             obj.deserialize(params.TimedMetadataSetting)
             this.TimedMetadataSetting = obj;
+        }
+
+        if (params.StaticImageActivateSetting) {
+            let obj = new StaticImageActivateSetting();
+            obj.deserialize(params.StaticImageActivateSetting)
+            this.StaticImageActivateSetting = obj;
+        }
+
+        if (params.StaticImageDeactivateSetting) {
+            let obj = new StaticImageDeactivateSetting();
+            obj.deserialize(params.StaticImageDeactivateSetting)
+            this.StaticImageDeactivateSetting = obj;
         }
 
     }
@@ -4420,6 +4563,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
          */
         this.FrameCaptureTemplates = null;
 
+        /**
+         * General settings.
+         * @type {GeneralSetting || null}
+         */
+        this.GeneralSettings = null;
+
     }
 
     /**
@@ -4531,6 +4680,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
                 obj.deserialize(params.FrameCaptureTemplates[z]);
                 this.FrameCaptureTemplates.push(obj);
             }
+        }
+
+        if (params.GeneralSettings) {
+            let obj = new GeneralSetting();
+            obj.deserialize(params.GeneralSettings)
+            this.GeneralSettings = obj;
         }
 
     }
@@ -5288,6 +5443,39 @@ class CreateStreamLiveInputSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
+ * General setting.
+ * @class
+ */
+class GeneralSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Static graphic overlay configuration.
+         * @type {StaticImageSettings || null}
+         */
+        this.StaticImageSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.StaticImageSettings) {
+            let obj = new StaticImageSettings();
+            obj.deserialize(params.StaticImageSettings)
+            this.StaticImageSettings = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeStreamLiveChannelOutputStatistics response structure.
  * @class
  */
@@ -5588,6 +5776,18 @@ class EventSettingsReq extends  AbstractModel {
          */
         this.TimedMetadataSetting = null;
 
+        /**
+         * Static image activate setting.
+         * @type {StaticImageActivateSetting || null}
+         */
+        this.StaticImageActivateSetting = null;
+
+        /**
+         * Static image deactivate setting.
+         * @type {StaticImageDeactivateSetting || null}
+         */
+        this.StaticImageDeactivateSetting = null;
+
     }
 
     /**
@@ -5626,6 +5826,18 @@ class EventSettingsReq extends  AbstractModel {
             let obj = new TimedMetadataInfo();
             obj.deserialize(params.TimedMetadataSetting)
             this.TimedMetadataSetting = obj;
+        }
+
+        if (params.StaticImageActivateSetting) {
+            let obj = new StaticImageActivateSetting();
+            obj.deserialize(params.StaticImageActivateSetting)
+            this.StaticImageActivateSetting = obj;
+        }
+
+        if (params.StaticImageDeactivateSetting) {
+            let obj = new StaticImageDeactivateSetting();
+            obj.deserialize(params.StaticImageDeactivateSetting)
+            this.StaticImageDeactivateSetting = obj;
         }
 
     }
@@ -5812,6 +6024,41 @@ Note: this field may return `null`, indicating that no valid value was found.
             this.TimedMetadataSettings = obj;
         }
         this.FrameCaptureTemplateNames = 'FrameCaptureTemplateNames' in params ? params.FrameCaptureTemplateNames : null;
+
+    }
+}
+
+/**
+ * Static image deactivate setting.
+ * @class
+ */
+class StaticImageDeactivateSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The overlay level to be canceled, range 0-7, default value 0.
+         * @type {number || null}
+         */
+        this.Layer = null;
+
+        /**
+         * Fade-out duration, in milliseconds, range 0-5000; default value 0, 0 means no fade-out effect.
+         * @type {number || null}
+         */
+        this.FadeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Layer = 'Layer' in params ? params.Layer : null;
+        this.FadeOut = 'FadeOut' in params ? params.FadeOut : null;
 
     }
 }
@@ -7432,6 +7679,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
          */
         this.FrameCaptureTemplates = null;
 
+        /**
+         * General settings.
+         * @type {GeneralSetting || null}
+         */
+        this.GeneralSettings = null;
+
     }
 
     /**
@@ -7544,6 +7797,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
                 obj.deserialize(params.FrameCaptureTemplates[z]);
                 this.FrameCaptureTemplates.push(obj);
             }
+        }
+
+        if (params.GeneralSettings) {
+            let obj = new GeneralSetting();
+            obj.deserialize(params.GeneralSettings)
+            this.GeneralSettings = obj;
         }
 
     }
@@ -7796,7 +8055,7 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.AVTemplates = null;
 
         /**
-         * 
+         * Caption templates.
          * @type {Array.<SubtitleConf> || null}
          */
         this.CaptionTemplates = null;
@@ -7844,6 +8103,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<FrameCaptureTemplate> || null}
          */
         this.FrameCaptureTemplates = null;
+
+        /**
+         * General settings.
+         * @type {GeneralSetting || null}
+         */
+        this.GeneralSettings = null;
 
     }
 
@@ -7958,6 +8223,12 @@ Note: This field may return `null`, indicating that no valid value was found.
                 obj.deserialize(params.FrameCaptureTemplates[z]);
                 this.FrameCaptureTemplates.push(obj);
             }
+        }
+
+        if (params.GeneralSettings) {
+            let obj = new GeneralSetting();
+            obj.deserialize(params.GeneralSettings)
+            this.GeneralSettings = obj;
         }
 
     }
@@ -8259,6 +8530,7 @@ module.exports = {
     AudioTrackInfo: AudioTrackInfo,
     CreateStreamLiveInputSecurityGroupResponse: CreateStreamLiveInputSecurityGroupResponse,
     InputLossBehaviorInfo: InputLossBehaviorInfo,
+    StreamInfo: StreamInfo,
     StreamVideoInfo: StreamVideoInfo,
     CreateStreamLivePlanRequest: CreateStreamLivePlanRequest,
     DescribeStreamLiveWatermarksResponse: DescribeStreamLiveWatermarksResponse,
@@ -8298,7 +8570,7 @@ module.exports = {
     DashRemuxSettingsInfo: DashRemuxSettingsInfo,
     CreateStreamLiveWatermarkRequest: CreateStreamLiveWatermarkRequest,
     ColorSpaceSetting: ColorSpaceSetting,
-    StreamInfo: StreamInfo,
+    StaticImageSettings: StaticImageSettings,
     SDMCSettingsInfo: SDMCSettingsInfo,
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,
     AttachedInput: AttachedInput,
@@ -8319,6 +8591,7 @@ module.exports = {
     PipelineLogInfo: PipelineLogInfo,
     HighlightInfo: HighlightInfo,
     DeleteStreamLivePlanRequest: DeleteStreamLivePlanRequest,
+    StaticImageActivateSetting: StaticImageActivateSetting,
     DescribeStreamLiveChannelsRequest: DescribeStreamLiveChannelsRequest,
     FailOverSettings: FailOverSettings,
     ChannelInputStatistics: ChannelInputStatistics,
@@ -8350,6 +8623,7 @@ module.exports = {
     DescribeStreamLivePlansResponse: DescribeStreamLivePlansResponse,
     DescribeStreamLiveChannelLogsRequest: DescribeStreamLiveChannelLogsRequest,
     CreateStreamLiveInputSecurityGroupRequest: CreateStreamLiveInputSecurityGroupRequest,
+    GeneralSetting: GeneralSetting,
     DescribeStreamLiveChannelOutputStatisticsResponse: DescribeStreamLiveChannelOutputStatisticsResponse,
     GetAbWatermarkPlayUrlRequest: GetAbWatermarkPlayUrlRequest,
     DescribeWatermarkInfo: DescribeWatermarkInfo,
@@ -8359,6 +8633,7 @@ module.exports = {
     DrmKey: DrmKey,
     EventSettingsDestinationResp: EventSettingsDestinationResp,
     OutputInfo: OutputInfo,
+    StaticImageDeactivateSetting: StaticImageDeactivateSetting,
     DescribeStreamLiveInputSecurityGroupRequest: DescribeStreamLiveInputSecurityGroupRequest,
     VideoCodecDetail: VideoCodecDetail,
     CreateStreamLiveChannelResponse: CreateStreamLiveChannelResponse,

@@ -6071,6 +6071,105 @@ class StopLiveRecordRequest extends  AbstractModel {
 }
 
 /**
+ * Transcoding details.
+ * @class
+ */
+class TranscodeDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Transcoding duration in minutes.
+Note: given the possible interruptions during push, duration here is the sum of actual duration of transcoding instead of the interval between the start time and end time.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Codec with modules,
+Example:
+liveprocessor_H264: LVB transcoding - H264,
+liveprocessor_H265: LVB transcoding - H265,
+topspeed_H264: top speed codec - H264,
+topspeed_H265: top speed codec - H265.
+         * @type {string || null}
+         */
+        this.ModuleCodec = null;
+
+        /**
+         * Bitrate.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Push domain name.
+         * @type {string || null}
+         */
+        this.PushDomain = null;
+
+        /**
+         * Resolution.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * The region. Valid values:
+`Mainland`: Inside the Chinese mainland.
+`Overseas`: Outside the Chinese mainland.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+
+    }
+}
+
+/**
  * DeleteLiveWatermarkRule request structure.
  * @class
  */
@@ -7966,6 +8065,93 @@ Data of all IPs will be returned if this parameter is left empty.
         this.IspNames = 'IspNames' in params ? params.IspNames : null;
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
         this.IpType = 'IpType' in params ? params.IpType : null;
+
+    }
+}
+
+/**
+ * The information of a time shifted stream.
+ * @class
+ */
+class TimeShiftStreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The group the push domain belongs to.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DomainGroup = null;
+
+        /**
+         * The push domain.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The push path.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The stream start time, which is a Unix timestamp.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The stream end time (for streams that ended before the time of query), which is a Unix timestamp.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The transcoding template ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TransCodeId = null;
+
+        /**
+         * The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * The storage duration (seconds) of the recording.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainGroup = 'DomainGroup' in params ? params.DomainGroup : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TransCodeId = 'TransCodeId' in params ? params.TransCodeId : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
 
     }
 }
@@ -9959,80 +10145,36 @@ Note: Beijing time (UTC+8) is used.
 }
 
 /**
- * Transcoding details.
+ * StartLivePadStream request structure.
  * @class
  */
-class TranscodeDetailInfo extends  AbstractModel {
+class StartLivePadStreamRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Stream name.
+         * Ensure the streaming path uses the same AppName as the push/play URLs (default: 'live').
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Your RTMP push domain.
+         * @type {string || null}
+         */
+        this.PushDomainName = null;
+
+        /**
+         * Your stream name.
          * @type {string || null}
          */
         this.StreamName = null;
 
         /**
-         * Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
+         * Operator notes.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Transcoding duration in minutes.
-Note: given the possible interruptions during push, duration here is the sum of actual duration of transcoding instead of the interval between the start time and end time.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Codec with modules,
-Example:
-liveprocessor_H264: LVB transcoding - H264,
-liveprocessor_H265: LVB transcoding - H265,
-topspeed_H264: top speed codec - H264,
-topspeed_H265: top speed codec - H265.
-         * @type {string || null}
-         */
-        this.ModuleCodec = null;
-
-        /**
-         * Bitrate.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Push domain name.
-         * @type {string || null}
-         */
-        this.PushDomain = null;
-
-        /**
-         * Resolution.
-         * @type {string || null}
-         */
-        this.Resolution = null;
-
-        /**
-         * The region. Valid values:
-`Mainland`: Inside the Chinese mainland.
-`Overseas`: Outside the Chinese mainland.
-         * @type {string || null}
-         */
-        this.MainlandOrOversea = null;
+        this.Operator = null;
 
     }
 
@@ -10043,16 +10185,10 @@ topspeed_H265: top speed codec - H265.
         if (!params) {
             return;
         }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.PushDomainName = 'PushDomainName' in params ? params.PushDomainName : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
-        this.Resolution = 'Resolution' in params ? params.Resolution : null;
-        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -10858,69 +10994,18 @@ class DescribePlayErrorCodeDetailInfoListResponse extends  AbstractModel {
 }
 
 /**
- * The information of a time shifted stream.
+ * StartLivePadStream response structure.
  * @class
  */
-class TimeShiftStreamInfo extends  AbstractModel {
+class StartLivePadStreamResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The group the push domain belongs to.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DomainGroup = null;
-
-        /**
-         * The push domain.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * The push path.
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * The stream name.
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * The stream start time, which is a Unix timestamp.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * The stream end time (for streams that ended before the time of query), which is a Unix timestamp.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The transcoding template ID.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TransCodeId = null;
-
-        /**
-         * The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
-         * @type {number || null}
-         */
-        this.StreamType = null;
-
-        /**
-         * The storage duration (seconds) of the recording.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Duration = null;
+        this.RequestId = null;
 
     }
 
@@ -10931,15 +11016,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.DomainGroup = 'DomainGroup' in params ? params.DomainGroup : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.TransCodeId = 'TransCodeId' in params ? params.TransCodeId : null;
-        this.StreamType = 'StreamType' in params ? params.StreamType : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15855,6 +15932,7 @@ module.exports = {
     DropLiveStreamResponse: DropLiveStreamResponse,
     DescribeLiveStreamStateResponse: DescribeLiveStreamStateResponse,
     StopLiveRecordRequest: StopLiveRecordRequest,
+    TranscodeDetailInfo: TranscodeDetailInfo,
     DeleteLiveWatermarkRuleRequest: DeleteLiveWatermarkRuleRequest,
     StreamEventInfo: StreamEventInfo,
     DeleteRecordTaskResponse: DeleteRecordTaskResponse,
@@ -15889,6 +15967,7 @@ module.exports = {
     DescribeHttpStatusInfoListRequest: DescribeHttpStatusInfoListRequest,
     ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
     DescribeProvinceIspPlayInfoListRequest: DescribeProvinceIspPlayInfoListRequest,
+    TimeShiftStreamInfo: TimeShiftStreamInfo,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DeleteLivePullStreamTaskResponse: DeleteLivePullStreamTaskResponse,
     AuthenticateDomainOwnerRequest: AuthenticateDomainOwnerRequest,
@@ -15927,7 +16006,7 @@ module.exports = {
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
     CertInfo: CertInfo,
-    TranscodeDetailInfo: TranscodeDetailInfo,
+    StartLivePadStreamRequest: StartLivePadStreamRequest,
     DescribeRecordTaskResponse: DescribeRecordTaskResponse,
     DescribeLiveDelayInfoListResponse: DescribeLiveDelayInfoListResponse,
     DeleteLiveTranscodeTemplateRequest: DeleteLiveTranscodeTemplateRequest,
@@ -15945,7 +16024,7 @@ module.exports = {
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
     DescribePlayErrorCodeDetailInfoListResponse: DescribePlayErrorCodeDetailInfoListResponse,
-    TimeShiftStreamInfo: TimeShiftStreamInfo,
+    StartLivePadStreamResponse: StartLivePadStreamResponse,
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
     GroupProIspDataInfo: GroupProIspDataInfo,
     RecordParam: RecordParam,

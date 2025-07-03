@@ -34,7 +34,9 @@ const PausePredictiveDialingCampaignRequest = models.PausePredictiveDialingCampa
 const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
 const DisableCCCPhoneNumberRequest = models.DisableCCCPhoneNumberRequest;
 const ModifyStaffPasswordResponse = models.ModifyStaffPasswordResponse;
+const TransferToManualRequest = models.TransferToManualRequest;
 const CreatePredictiveDialingCampaignRequest = models.CreatePredictiveDialingCampaignRequest;
+const RestoreMemberOnlineResponse = models.RestoreMemberOnlineResponse;
 const AbortAgentCruiseDialingCampaignResponse = models.AbortAgentCruiseDialingCampaignResponse;
 const ServeParticipant = models.ServeParticipant;
 const AICallExtractResultElement = models.AICallExtractResultElement;
@@ -45,10 +47,10 @@ const DeleteExtensionRequest = models.DeleteExtensionRequest;
 const AutoCalloutTaskCalleeInfo = models.AutoCalloutTaskCalleeInfo;
 const DescribePredictiveDialingCampaignResponse = models.DescribePredictiveDialingCampaignResponse;
 const CreateAIAgentCallResponse = models.CreateAIAgentCallResponse;
-const AICallExtractConfigElement = models.AICallExtractConfigElement;
+const DescribeAILatencyResponse = models.DescribeAILatencyResponse;
 const DescribeAutoCalloutTasksResponse = models.DescribeAutoCalloutTasksResponse;
 const PackageBuyInfo = models.PackageBuyInfo;
-const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
+const AICallExtractConfigElement = models.AICallExtractConfigElement;
 const AICallExtractResultInfo = models.AICallExtractResultInfo;
 const CreateAgentCruiseDialingCampaignRequest = models.CreateAgentCruiseDialingCampaignRequest;
 const DescribeAICallExtractResultRequest = models.DescribeAICallExtractResultRequest;
@@ -59,22 +61,24 @@ const DescribeNumbersResponse = models.DescribeNumbersResponse;
 const DeletePredictiveDialingCampaignRequest = models.DeletePredictiveDialingCampaignRequest;
 const UploadIvrAudioRequest = models.UploadIvrAudioRequest;
 const DescribeStaffInfoListResponse = models.DescribeStaffInfoListResponse;
+const AILatencyStatisticsInfo = models.AILatencyStatisticsInfo;
 const UnbindNumberCallOutSkillGroupRequest = models.UnbindNumberCallOutSkillGroupRequest;
 const CreateAutoCalloutTaskRequest = models.CreateAutoCalloutTaskRequest;
 const ResumePredictiveDialingCampaignResponse = models.ResumePredictiveDialingCampaignResponse;
 const CallInSkillGroupMetrics = models.CallInSkillGroupMetrics;
 const CreateExtensionResponse = models.CreateExtensionResponse;
 const CreateCCCSkillGroupRequest = models.CreateCCCSkillGroupRequest;
-const AsrData = models.AsrData;
-const DescribeAutoCalloutTaskResponse = models.DescribeAutoCalloutTaskResponse;
+const DescribePredictiveDialingSessionsResponse = models.DescribePredictiveDialingSessionsResponse;
+const DeleteCCCSkillGroupRequest = models.DeleteCCCSkillGroupRequest;
 const CreateCCCSkillGroupResponse = models.CreateCCCSkillGroupResponse;
 const DescribeTelSessionRequest = models.DescribeTelSessionRequest;
 const ModifyOwnNumberApplyRequest = models.ModifyOwnNumberApplyRequest;
 const DescribeSkillGroupInfoListRequest = models.DescribeSkillGroupInfoListRequest;
+const DescribeAILatencyRequest = models.DescribeAILatencyRequest;
 const DescribePredictiveDialingCampaignRequest = models.DescribePredictiveDialingCampaignRequest;
 const SeatUserInfo = models.SeatUserInfo;
 const UpdateCCCSkillGroupResponse = models.UpdateCCCSkillGroupResponse;
-const DescribePredictiveDialingSessionsResponse = models.DescribePredictiveDialingSessionsResponse;
+const AsrData = models.AsrData;
 const ErrStaffItem = models.ErrStaffItem;
 const PausePredictiveDialingCampaignResponse = models.PausePredictiveDialingCampaignResponse;
 const PSTNSession = models.PSTNSession;
@@ -82,10 +86,13 @@ const UpdatePredictiveDialingCampaignRequest = models.UpdatePredictiveDialingCam
 const DescribeStaffInfoListRequest = models.DescribeStaffInfoListRequest;
 const AutoCalloutTaskInfo = models.AutoCalloutTaskInfo;
 const DescribeIvrAudioListRequest = models.DescribeIvrAudioListRequest;
+const ForceMemberOfflineRequest = models.ForceMemberOfflineRequest;
 const SkillGroupInfoItem = models.SkillGroupInfoItem;
 const CreateAIAgentCallRequest = models.CreateAIAgentCallRequest;
 const UpdateCCCSkillGroupRequest = models.UpdateCCCSkillGroupRequest;
+const RestoreMemberOnlineRequest = models.RestoreMemberOnlineRequest;
 const ModifyStaffPasswordRequest = models.ModifyStaffPasswordRequest;
+const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
 const ModifyStaffResponse = models.ModifyStaffResponse;
 const ModifyExtensionRequest = models.ModifyExtensionRequest;
 const CreatePredictiveDialingCampaignResponse = models.CreatePredictiveDialingCampaignResponse;
@@ -102,6 +109,7 @@ const DescribeAgentCruiseDialingCampaignRequest = models.DescribeAgentCruiseDial
 const DescribePSTNActiveSessionListRequest = models.DescribePSTNActiveSessionListRequest;
 const CreateAutoCalloutTaskResponse = models.CreateAutoCalloutTaskResponse;
 const DescribeAICallExtractResultResponse = models.DescribeAICallExtractResultResponse;
+const DeleteCCCSkillGroupResponse = models.DeleteCCCSkillGroupResponse;
 const UploadIvrAudioFailedInfo = models.UploadIvrAudioFailedInfo;
 const UploadIvrAudioResponse = models.UploadIvrAudioResponse;
 const ModifyExtensionResponse = models.ModifyExtensionResponse;
@@ -117,12 +125,16 @@ const CallInNumberMetrics = models.CallInNumberMetrics;
 const CreateExtensionRequest = models.CreateExtensionRequest;
 const StaffSkillGroupList = models.StaffSkillGroupList;
 const ResetExtensionPasswordResponse = models.ResetExtensionPasswordResponse;
+const TimeRange = models.TimeRange;
+const AILatencyDetail = models.AILatencyDetail;
 const AITransferItem = models.AITransferItem;
 const StaffInfo = models.StaffInfo;
 const AbortAgentCruiseDialingCampaignRequest = models.AbortAgentCruiseDialingCampaignRequest;
+const ForceMemberOfflineResponse = models.ForceMemberOfflineResponse;
 const CreateOwnNumberApplyResponse = models.CreateOwnNumberApplyResponse;
 const DescribePredictiveDialingCampaignsElement = models.DescribePredictiveDialingCampaignsElement;
 const HangUpCallResponse = models.HangUpCallResponse;
+const TransferToManualResponse = models.TransferToManualResponse;
 const StopAutoCalloutTaskResponse = models.StopAutoCalloutTaskResponse;
 const AbortPredictiveDialingCampaignRequest = models.AbortPredictiveDialingCampaignRequest;
 const TelCdrInfo = models.TelCdrInfo;
@@ -149,9 +161,11 @@ const StaffStatusExtra = models.StaffStatusExtra;
 const CreateStaffRequest = models.CreateStaffRequest;
 const SdkAppIdBuyInfo = models.SdkAppIdBuyInfo;
 const DescribePSTNActiveSessionListResponse = models.DescribePSTNActiveSessionListResponse;
+const AILatencyStatistics = models.AILatencyStatistics;
 const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
 const CreateAdminURLRequest = models.CreateAdminURLRequest;
+const DescribeAutoCalloutTaskResponse = models.DescribeAutoCalloutTaskResponse;
 const DescribeStaffStatusMetricsResponse = models.DescribeStaffStatusMetricsResponse;
 const AudioFileInfo = models.AudioFileInfo;
 const CreateCallOutSessionRequest = models.CreateCallOutSessionRequest;
@@ -201,6 +215,17 @@ class CccClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain AI latency information.
+     * @param {DescribeAILatencyRequest} req
+     * @param {function(string, DescribeAILatencyResponse):void} cb
+     * @public
+     */
+    DescribeAILatency(req, cb) {
+        let resp = new DescribeAILatencyResponse();
+        this.request("DescribeAILatency", req, resp, cb);
+    }
+
+    /**
      * Batch Query Automatic Outbound Call Tasks
      * @param {DescribeAutoCalloutTasksRequest} req
      * @param {function(string, DescribeAutoCalloutTasksResponse):void} cb
@@ -247,14 +272,14 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
-     * Pull conversation recording for text information
-     * @param {DescribeTelRecordAsrRequest} req
-     * @param {function(string, DescribeTelRecordAsrResponse):void} cb
+     * This API is used to delete a skill group.
+     * @param {DeleteCCCSkillGroupRequest} req
+     * @param {function(string, DeleteCCCSkillGroupResponse):void} cb
      * @public
      */
-    DescribeTelRecordAsr(req, cb) {
-        let resp = new DescribeTelRecordAsrResponse();
-        this.request("DescribeTelRecordAsr", req, resp, cb);
+    DeleteCCCSkillGroup(req, cb) {
+        let resp = new DeleteCCCSkillGroupResponse();
+        this.request("DeleteCCCSkillGroup", req, resp, cb);
     }
 
     /**
@@ -423,7 +448,11 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
-     * This API is used to create outbound sessions. Currently, only dual call is supported. That is, firstly, please use the platform number to call the agent's cell phone. After the agent answers, then please make outbound calls to the user. Due to ISP frequency restrictions, the agent's phone number must first be added to the allowlist to avoid frequency control which may lead to the failure of the outbound call.
+     * This API is used to create an outbound call session. Currently, only dual calls are supported. That is, first use the platform number to call the agent mobile phone. After the agent answers, then make an outbound call to the user. Moreover, due to ISP frequency restrictions, the agent phone number must be added to the allowlist first to avoid frequency control leading to the failure of the outbound call. Therefore, before calling this API, the following operations have been completed.
+1. The agent specified by UserId has already bound the mobile number. https://intl.cloud.tencent.com/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
+2. The agent's bound mobile number has applied for and passed the outbound call allowlist.
+This API is used to make calls. Currently, the agent side can only call the user's mobile phone, so the IsForceMobile field must be true.
+4. Do not fill in the mobile number bound to the current UserId for the callee, otherwise it can lead to call failure due to a busy line.
      * @param {CreateCallOutSessionRequest} req
      * @param {function(string, CreateCallOutSessionResponse):void} cb
      * @public
@@ -475,6 +504,17 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     DescribeTelCdr(req, cb) {
         let resp = new DescribeTelCdrResponse();
         this.request("DescribeTelCdr", req, resp, cb);
+    }
+
+    /**
+     * This API is used to transfer a session to an agent in specific scenarios.
+     * @param {TransferToManualRequest} req
+     * @param {function(string, TransferToManualResponse):void} cb
+     * @public
+     */
+    TransferToManual(req, cb) {
+        let resp = new TransferToManualResponse();
+        this.request("TransferToManual", req, resp, cb);
     }
 
     /**
@@ -687,6 +727,28 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
+     * This API is used to force customer service to go offline.
+     * @param {ForceMemberOfflineRequest} req
+     * @param {function(string, ForceMemberOfflineResponse):void} cb
+     * @public
+     */
+    ForceMemberOffline(req, cb) {
+        let resp = new ForceMemberOfflineResponse();
+        this.request("ForceMemberOffline", req, resp, cb);
+    }
+
+    /**
+     * Pull conversation recording for text information
+     * @param {DescribeTelRecordAsrRequest} req
+     * @param {function(string, DescribeTelRecordAsrResponse):void} cb
+     * @public
+     */
+    DescribeTelRecordAsr(req, cb) {
+        let resp = new DescribeTelRecordAsrResponse();
+        this.request("DescribeTelRecordAsr", req, resp, cb);
+    }
+
+    /**
      * This API is used to hang up the phone.
      * @param {HangUpCallRequest} req
      * @param {function(string, HangUpCallResponse):void} cb
@@ -777,7 +839,7 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     /**
      * This API is used to initiate outbound calls using an AI model, limited to owned phone numbers only. Currently, a limited-time free trial of Advanced Agents is available.
 
-Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/70681).
      * @param {CreateAIAgentCallRequest} req
      * @param {function(string, CreateAIAgentCallResponse):void} cb
      * @public
@@ -796,6 +858,17 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     DeletePredictiveDialingCampaign(req, cb) {
         let resp = new DeletePredictiveDialingCampaignResponse();
         this.request("DeletePredictiveDialingCampaign", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore customer service to go live.
+     * @param {RestoreMemberOnlineRequest} req
+     * @param {function(string, RestoreMemberOnlineResponse):void} cb
+     * @public
+     */
+    RestoreMemberOnline(req, cb) {
+        let resp = new RestoreMemberOnlineResponse();
+        this.request("RestoreMemberOnline", req, resp, cb);
     }
 
     /**

@@ -515,7 +515,7 @@ Callable roles: Reseller, Distributor, Second-level reseller
     }
 
     /**
-     * This API is used to query the daily bill expenditure of cu by resellers.
+     * This API is used to query the daily bill expenditure of customer by resellers.
 Invocation Role: first-level reseller, second-level reseller, reseller.
      * @param {DescribeCustomerBillDetailByDayRequest} req
      * @param {function(string, DescribeCustomerBillDetailByDayResponse):void} cb

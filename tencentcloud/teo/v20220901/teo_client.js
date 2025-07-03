@@ -25,6 +25,7 @@ const DescribeOriginGroupResponse = models.DescribeOriginGroupResponse;
 const DescribeSecurityIPGroupInfoResponse = models.DescribeSecurityIPGroupInfoResponse;
 const SlowPostConfig = models.SlowPostConfig;
 const OriginRecord = models.OriginRecord;
+const OriginACLEntity = models.OriginACLEntity;
 const CompressionParameters = models.CompressionParameters;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
@@ -51,7 +52,7 @@ const ManagedRuleGroupMeta = models.ManagedRuleGroupMeta;
 const RateLimitConfig = models.RateLimitConfig;
 const CreateRealtimeLogDeliveryTaskRequest = models.CreateRealtimeLogDeliveryTaskRequest;
 const ModifyAccelerationDomainStatusesResponse = models.ModifyAccelerationDomainStatusesResponse;
-const DeployRecord = models.DeployRecord;
+const DescribeOriginACLRequest = models.DescribeOriginACLRequest;
 const RuleExtraParameter = models.RuleExtraParameter;
 const ModifyL7AccRulePriorityRequest = models.ModifyL7AccRulePriorityRequest;
 const WebSocket = models.WebSocket;
@@ -73,6 +74,7 @@ const ModifyL4ProxyResponse = models.ModifyL4ProxyResponse;
 const HealthChecker = models.HealthChecker;
 const CreateFunctionRuleRequest = models.CreateFunctionRuleRequest;
 const RuleBranch = models.RuleBranch;
+const ConfirmOriginACLUpdateResponse = models.ConfirmOriginACLUpdateResponse;
 const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const EnvInfo = models.EnvInfo;
 const ModifyLoadBalancerRequest = models.ModifyLoadBalancerRequest;
@@ -83,11 +85,13 @@ const CreateFunctionRequest = models.CreateFunctionRequest;
 const PostMaxSizeParameters = models.PostMaxSizeParameters;
 const S3 = models.S3;
 const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
+const DisableOriginACLRequest = models.DisableOriginACLRequest;
 const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const ForceRedirect = models.ForceRedirect;
 const CodeAction = models.CodeAction;
 const CreateL7AccRulesResponse = models.CreateL7AccRulesResponse;
 const CachePrefresh = models.CachePrefresh;
+const OriginACLInfo = models.OriginACLInfo;
 const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisDataResponse;
 const ImageOptimize = models.ImageOptimize;
 const CreateL7AccRulesRequest = models.CreateL7AccRulesRequest;
@@ -124,8 +128,9 @@ const CacheKeyHeader = models.CacheKeyHeader;
 const DeleteZoneRequest = models.DeleteZoneRequest;
 const RangeOriginPullParameters = models.RangeOriginPullParameters;
 const BotManagedRule = models.BotManagedRule;
+const CurrentOriginACL = models.CurrentOriginACL;
 const SecurityConfig = models.SecurityConfig;
-const L4OfflineLog = models.L4OfflineLog;
+const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
 const ModifyPlanRequest = models.ModifyPlanRequest;
 const HostName = models.HostName;
 const DDoS = models.DDoS;
@@ -133,11 +138,12 @@ const ModifyL4ProxyRulesRequest = models.ModifyL4ProxyRulesRequest;
 const DescribeRulesSettingRequest = models.DescribeRulesSettingRequest;
 const EntityStatus = models.EntityStatus;
 const SmartRoutingParameters = models.SmartRoutingParameters;
-const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
+const DisableOriginACLResponse = models.DisableOriginACLResponse;
+const DescribeOriginACLResponse = models.DescribeOriginACLResponse;
 const CreateFunctionRuleResponse = models.CreateFunctionRuleResponse;
 const HTTPUpstreamTimeoutParameters = models.HTTPUpstreamTimeoutParameters;
 const PrivateParameter = models.PrivateParameter;
-const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
+const L4OfflineLog = models.L4OfflineLog;
 const CreateOriginGroupRequest = models.CreateOriginGroupRequest;
 const TopDataRecord = models.TopDataRecord;
 const CreateSecurityIPGroupResponse = models.CreateSecurityIPGroupResponse;
@@ -170,6 +176,7 @@ const SetContentIdentifierParameters = models.SetContentIdentifierParameters;
 const RenewPlanRequest = models.RenewPlanRequest;
 const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const ManagedRuleDetail = models.ManagedRuleDetail;
+const NextOriginACL = models.NextOriginACL;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
 const ModifyL4ProxyStatusResponse = models.ModifyL4ProxyStatusResponse;
 const FileVerification = models.FileVerification;
@@ -235,6 +242,7 @@ const FailReason = models.FailReason;
 const ModifyL7AccRulePriorityResponse = models.ModifyL7AccRulePriorityResponse;
 const ModifyRequestHeaderParameters = models.ModifyRequestHeaderParameters;
 const CreateConfigGroupVersionResponse = models.CreateConfigGroupVersionResponse;
+const ConfirmOriginACLUpdateRequest = models.ConfirmOriginACLUpdateRequest;
 const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const WebSocketParameters = models.WebSocketParameters;
 const RuleItem = models.RuleItem;
@@ -253,6 +261,7 @@ const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const CacheParameters = models.CacheParameters;
 const TimingDataItem = models.TimingDataItem;
 const RateLimitUserRule = models.RateLimitUserRule;
+const DeployRecord = models.DeployRecord;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const CreateL4ProxyRulesResponse = models.CreateL4ProxyRulesResponse;
 const ModifyCustomErrorPageRequest = models.ModifyCustomErrorPageRequest;
@@ -301,6 +310,7 @@ const ModifyL4ProxyRulesStatusResponse = models.ModifyL4ProxyRulesStatusResponse
 const CheckCnameStatusResponse = models.CheckCnameStatusResponse;
 const ImportZoneConfigResponse = models.ImportZoneConfigResponse;
 const CustomEndpoint = models.CustomEndpoint;
+const ModifyOriginACLResponse = models.ModifyOriginACLResponse;
 const VerifyOwnershipRequest = models.VerifyOwnershipRequest;
 const ResponseSpeedLimitParameters = models.ResponseSpeedLimitParameters;
 const DeleteL4ProxyRequest = models.DeleteL4ProxyRequest;
@@ -324,6 +334,7 @@ const ReturnCustomPageActionParameters = models.ReturnCustomPageActionParameters
 const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const UpstreamHTTP2Parameters = models.UpstreamHTTP2Parameters;
 const DescribeL7AccSettingResponse = models.DescribeL7AccSettingResponse;
+const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
 const OriginInfo = models.OriginInfo;
 const CreateDnsRecordRequest = models.CreateDnsRecordRequest;
 const WafRule = models.WafRule;
@@ -366,6 +377,7 @@ const CreateZoneRequest = models.CreateZoneRequest;
 const SecurityPolicy = models.SecurityPolicy;
 const AscriptionInfo = models.AscriptionInfo;
 const OriginGroupHealthStatusDetail = models.OriginGroupHealthStatusDetail;
+const ModifyOriginACLRequest = models.ModifyOriginACLRequest;
 const FirstPartConfig = models.FirstPartConfig;
 const Waf = models.Waf;
 const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
@@ -433,8 +445,10 @@ const L4Proxy = models.L4Proxy;
 const SkipCondition = models.SkipCondition;
 const CreateSharedCNAMERequest = models.CreateSharedCNAMERequest;
 const UpstreamHttp2 = models.UpstreamHttp2;
+const EnableOriginACLResponse = models.EnableOriginACLResponse;
 const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
 const BotConfig = models.BotConfig;
+const EnableOriginACLRequest = models.EnableOriginACLRequest;
 const ModifyZoneResponse = models.ModifyZoneResponse;
 const DescribeTopL7CacheDataRequest = models.DescribeTopL7CacheDataRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
@@ -553,6 +567,7 @@ const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const HTTPResponseParameters = models.HTTPResponseParameters;
 const DescribeFunctionRulesRequest = models.DescribeFunctionRulesRequest;
 const DeployConfigGroupVersionResponse = models.DeployConfigGroupVersionResponse;
+const Addresses = models.Addresses;
 const RateLimitIntelligence = models.RateLimitIntelligence;
 const DescribeDeployHistoryResponse = models.DescribeDeployHistoryResponse;
 const QueryString = models.QueryString;
@@ -859,15 +874,14 @@ For sites connected via the NS, you can query whether the NS is successfully swi
     }
 
     /**
-     * When the number of sites bound to your plan, the number of rules under "Web Protection - Custom Rules - Precision Matching Policy", or the number of rules under "Web Protection - Rate Limiting - Precision Rate Limiting Module" reaches the plan's quota, you can use this interface to purchase additional quotas.
-> This interface only supports the Enterprise Edition Plan.
-     * @param {IncreasePlanQuotaRequest} req
-     * @param {function(string, IncreasePlanQuotaResponse):void} cb
+     * This API is used to query the binding relationship between L7 acceleration domains/L4 proxy instances and origin ACLs under a site, as well as IP range details. If you want to periodically obtain the latest version of origin IP ranges through an automation script, you can poll this API at a low-frequency (recommended every three days). If the NextOriginACL field has a return value, synchronize the latest origin IP ranges to the origin server firewall configuration.
+     * @param {DescribeOriginACLRequest} req
+     * @param {function(string, DescribeOriginACLResponse):void} cb
      * @public
      */
-    IncreasePlanQuota(req, cb) {
-        let resp = new IncreasePlanQuotaResponse();
-        this.request("IncreasePlanQuota", req, resp, cb);
+    DescribeOriginACL(req, cb) {
+        let resp = new DescribeOriginACLResponse();
+        this.request("DescribeOriginACL", req, resp, cb);
     }
 
     /**
@@ -980,6 +994,17 @@ For sites connected via the CNAME, if you have not verified the ownership of the
     BindSecurityTemplateToEntity(req, cb) {
         let resp = new BindSecurityTemplateToEntityResponse();
         this.request("BindSecurityTemplateToEntity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable specific origin ACLs for L7 acceleration domain names or L4 proxy instances. A single submission supports up to 200 L7 acceleration domain names or 100 L4 proxy instances. Hybrid submissions of L7 acceleration domain names and L4 proxy instances are supported, with a maximum total number of instances of 200. If changes are needed for exceeding 200 instances, submit them in batches via this API.
+     * @param {ModifyOriginACLRequest} req
+     * @param {function(string, ModifyOriginACLResponse):void} cb
+     * @public
+     */
+    ModifyOriginACL(req, cb) {
+        let resp = new ModifyOriginACLResponse();
+        this.request("ModifyOriginACL", req, resp, cb);
     }
 
     /**
@@ -1359,6 +1384,18 @@ An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combinat
     }
 
     /**
+     * When the number of sites bound to your plan, the number of rules under "Web Protection - Custom Rules - Precision Matching Policy", or the number of rules under "Web Protection - Rate Limiting - Precision Rate Limiting Module" reaches the plan's quota, you can use this interface to purchase additional quotas.
+> This interface only supports the Enterprise Edition Plan.
+     * @param {IncreasePlanQuotaRequest} req
+     * @param {function(string, IncreasePlanQuotaResponse):void} cb
+     * @public
+     */
+    IncreasePlanQuota(req, cb) {
+        let resp = new IncreasePlanQuotaResponse();
+        this.request("IncreasePlanQuota", req, resp, cb);
+    }
+
+    /**
      * This API is on an earlier version. If you want to call it, please switch to the latest version. For details, see [ModifyL4ProxyStatus] (https://intl.cloud.tencent.com/document/product/1552/103408?from_cn_redirect=1).
      * @param {ModifyApplicationProxyStatusRequest} req
      * @param {function(string, ModifyApplicationProxyStatusResponse):void} cb
@@ -1536,6 +1573,17 @@ If there are already EdgeOne plans under the current account, it is recommended 
     DeleteLoadBalancer(req, cb) {
         let resp = new DeleteLoadBalancerResponse();
         this.request("DeleteLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable 'Origin Protection' of a site. Once disabled, resources related to it will no longer use only the origin ACLs provided by "origin protection" to request your origin, and stops sending update notifications on the origin ACLs.
+     * @param {DisableOriginACLRequest} req
+     * @param {function(string, DisableOriginACLResponse):void} cb
+     * @public
+     */
+    DisableOriginACL(req, cb) {
+        let resp = new DisableOriginACLResponse();
+        this.request("DisableOriginACL", req, resp, cb);
     }
 
     /**
@@ -1774,6 +1822,17 @@ If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://in
     }
 
     /**
+     * This API is used to confirm that the latest origin ACLs have been updated to the origin server firewall when the origin ACLs change. After confirming the update to the latest version, related change notifications will stop pushing.
+     * @param {ConfirmOriginACLUpdateRequest} req
+     * @param {function(string, ConfirmOriginACLUpdateResponse):void} cb
+     * @public
+     */
+    ConfirmOriginACLUpdate(req, cb) {
+        let resp = new ConfirmOriginACLUpdateResponse();
+        this.request("ConfirmOriginACLUpdate", req, resp, cb);
+    }
+
+    /**
      * This API is on an earlier version. If you want to call it, please switch to the latest version [CreateL4Proxy] (https://intl.cloud.tencent.com/document/product/1552/103417?from_cn_redirect=1).
      * @param {CreateApplicationProxyRequest} req
      * @param {function(string, CreateApplicationProxyResponse):void} cb
@@ -1793,6 +1852,23 @@ If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://in
     DescribeOriginGroup(req, cb) {
         let resp = new DescribeOriginGroupResponse();
         this.request("DescribeOriginGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable 'Origin Protection' for Layer 4 or Layer 7 instances. The number of enabled instances has an upper limit: 200 for Layer 7 domains and 100 for Layer 4 proxy instances. The total number of instances cannot exceed 200, otherwise an error reminder will be triggered. You can first enable the maximum allowed number and use the ModifyOriginACL API to set the excess quantity.
+
+This API is used to enable 'Origin Protection' for the site for the first time. Once enabled, EdgeOne will use specific origin IP ranges for L7 acceleration domains and L4 proxy instances. The maximum number of L7 acceleration domain that can be submitted in a single request is 200, and the maximum number of L4 proxy instance is 100. Mixed submissions of L7 acceleration domains and L4 proxy instances are supported, with a total maximum of 200 instances. If you need to enable more than 200 instances, you can first enable the maximum number by specifying the instances, and then enable the remaining instances through the API ModifyOriginACL. Any subsequent addition of  L7 acceleration domains or L4 proxy instances should be configured through the API ModifyOriginACL.
+
+Note:
+- Calling this API is considered as agreeing to [Origin Protection Enablement Conditions of Use](https://www.tencentcloud.com/document/product/1145/70561?!longPreview).
+- The origin IP ranges may change periodically. EdgeOne will notify you of changes to the origin IP ranges 14 days, 7 days, 3 days, and 1 day in advance through one or more methods such as internal messages, SMS, and email. To ensure you receive notifications about changes to the origin IP ranges, please make sure that you have selected the relevant product service notifications for the Edge Security Acceleration Platform (EO) in [Tencent Cloud Message Center](https://console.tencentcloud.com/message/subscription) and have configured the correct message recipients. For configuration details, please refer to Message [Subscription Management](https://www.tencentcloud.com/document/product/1233/60778).
+     * @param {EnableOriginACLRequest} req
+     * @param {function(string, EnableOriginACLResponse):void} cb
+     * @public
+     */
+    EnableOriginACL(req, cb) {
+        let resp = new EnableOriginACLResponse();
+        this.request("EnableOriginACL", req, resp, cb);
     }
 
     /**

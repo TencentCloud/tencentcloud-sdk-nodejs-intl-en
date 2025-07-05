@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ * Copyright (c) 2018 Tencent. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1142,15 +1142,15 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). value range:<br>.
-<Li>LOCAL_BASIC: specifies a local hard disk.</li>.
-<Li>LOCAL_SSD: specifies a local ssd.</li>.
-<Li>CLOUD_BASIC: ordinary cloud disk.</li>.
-<Li>CLOUD_SSD: ssd cloud disk</li>.
-<Li>CLOUD_PREMIUM: high-performance cloud block storage.</li>.
-<Li>CLOUD_BSSD: universal type ssd cloud disk</li>.
-<Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
-<li>CLOUD_TSSD: ultra-fast SSD cbs</li.
+         * Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). value range:<br>
+<li>LOCAL_BASIC: Local SATA disk</li>
+<li>LOCAL_SSD: Local NVMe SSD</li>
+<li>CLOUD_BASIC: Cloud SATA disk</li>
+<li>CLOUD_SSD: Cloud SSD</li>
+<li>CLOUD_PREMIUM: Premium SSD</li>
+<li>CLOUD_BSSD: Balanced SSD</li>
+<li>CLOUD_HSSD: Enhanced SSD</li>
+<li>CLOUD_TSSD: Tremendous SSD</li>
 Default value: Current disk types with inventory available.
          * @type {string || null}
          */
@@ -5930,6 +5930,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.LatestOperationErrorMsg = null;
 
+        /**
+         * Public IPv6 address of the instance.
+Note: this field may return null, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.PublicIPv6Addresses = null;
+
     }
 
     /**
@@ -6026,6 +6033,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.DefaultLoginUser = 'DefaultLoginUser' in params ? params.DefaultLoginUser : null;
         this.DefaultLoginPort = 'DefaultLoginPort' in params ? params.DefaultLoginPort : null;
         this.LatestOperationErrorMsg = 'LatestOperationErrorMsg' in params ? params.LatestOperationErrorMsg : null;
+        this.PublicIPv6Addresses = 'PublicIPv6Addresses' in params ? params.PublicIPv6Addresses : null;
 
     }
 }
@@ -8132,7 +8140,7 @@ class RunInstancesRequest extends  AbstractModel {
 
         /**
          * The instance model. 
-<br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
+<br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -8241,6 +8249,12 @@ class RunInstancesRequest extends  AbstractModel {
         this.UserData = null;
 
         /**
+         * 
+         * @type {Metadata || null}
+         */
+        this.Metadata = null;
+
+        /**
          * Whether the request is a dry run only.
 `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
 If the dry run fails, the corresponding error code will be returned.
@@ -8291,6 +8305,12 @@ If the dry run succeeds, the RequestId will be returned.
          * @type {boolean || null}
          */
         this.DisableApiTermination = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.EnableJumboFrame = null;
 
     }
 
@@ -8383,6 +8403,12 @@ If the dry run succeeds, the RequestId will be returned.
             this.InstanceMarketOptions = obj;
         }
         this.UserData = 'UserData' in params ? params.UserData : null;
+
+        if (params.Metadata) {
+            let obj = new Metadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
         if (params.CpuTopology) {
@@ -8401,6 +8427,7 @@ If the dry run succeeds, the RequestId will be returned.
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
         this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+        this.EnableJumboFrame = 'EnableJumboFrame' in params ? params.EnableJumboFrame : null;
 
     }
 }
@@ -9914,6 +9941,15 @@ class TerminateInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
+         * Release an Elastic IP. Under EIP 2.0, only the first EIP on the primary network interface can be released, and currently supported release types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6.
+Default value:  `false`.
+
+This feature is currently in gradually released phase. To access it, please contact us.
+         * @type {boolean || null}
+         */
+        this.ReleaseAddress = null;
+
+        /**
          * Whether to release a monthly subscription data disk mounted on an instance. true: Release the data disk along with termination of the instance. false: Only terminate the instance.
 Default value: `false`.
          * @type {boolean || null}
@@ -9930,6 +9966,7 @@ Default value: `false`.
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ReleaseAddress = 'ReleaseAddress' in params ? params.ReleaseAddress : null;
         this.ReleasePrepaidDataDisks = 'ReleasePrepaidDataDisks' in params ? params.ReleasePrepaidDataDisks : null;
 
     }
@@ -11616,6 +11653,7 @@ class VirtualPrivateCloud extends  AbstractModel {
 
         /**
          * Number of IPv6 addresses randomly generated for the ENI.
+If IPv6AddressType is specified under InternetAccessible, this parameter must not be set to 0.
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -11910,6 +11948,57 @@ class InternetAccessible extends  AbstractModel {
          */
         this.BandwidthPackageId = null;
 
+        /**
+         * The EIP line type. 
+ <li>BGP Default: BGP</li>
+
+For a user who has activated the static single-line IP allowlist, possible values are:
+
+ <li>CMCC: China Mobile</li>
+ <li>CTCC: China Telecom</li>
+ <li>CUCC: China Unicom</li>
+
+Note: Only certain regions support static single-line IP addresses.
+         * @type {string || null}
+         */
+        this.InternetServiceProvider = null;
+
+        /**
+         * AddressType. Default value: `WanIP`.
+
+For beta users of dedicated IP, the value can be:
+<li>HighQualityEIP: Dedicated IP</li>
+Note that dedicated IPs are only available in partial regions.
+
+For beta users of Anti-DDoS IP, the value can be:
+<li>AntiDDoSEIP: Anti-DDoS EIP</li>
+Note that Anti-DDoS IPs are only available in partial regions.
+
+This feature is currently in gradually released phase. To access it, please contact us.
+         * @type {string || null}
+         */
+        this.IPv4AddressType = null;
+
+        /**
+         * Indicates the type of EIPv6. Valid values:
+
+<li>EIPv6: common IPv6</li>
+<li>HighQualityEIPv6: dedicated IPv6</li>
+Note: Contact the product team to enable the dedicated IPv6 allowlist. The dedicated IPv6 is only supported in some regions. 
+
+Default: `EIPv6`
+
+This feature is currently in gradually released phase. To access it, please contact us.
+         * @type {string || null}
+         */
+        this.IPv6AddressType = null;
+
+        /**
+         * Anti-DDoS service package ID. This is required when you want to request an Anti-DDoS IP.
+         * @type {string || null}
+         */
+        this.AntiDDoSPackageId = null;
+
     }
 
     /**
@@ -11923,6 +12012,10 @@ class InternetAccessible extends  AbstractModel {
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
+        this.IPv4AddressType = 'IPv4AddressType' in params ? params.IPv4AddressType : null;
+        this.IPv6AddressType = 'IPv6AddressType' in params ? params.IPv6AddressType : null;
+        this.AntiDDoSPackageId = 'AntiDDoSPackageId' in params ? params.AntiDDoSPackageId : null;
 
     }
 }

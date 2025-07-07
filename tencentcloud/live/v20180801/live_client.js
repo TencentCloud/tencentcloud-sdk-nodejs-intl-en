@@ -158,6 +158,7 @@ const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplate
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
 const CreateLiveTimeShiftTemplateRequest = models.CreateLiveTimeShiftTemplateRequest;
 const DescribeLiveDomainRefererResponse = models.DescribeLiveDomainRefererResponse;
+const StopLivePadStreamRequest = models.StopLivePadStreamRequest;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
@@ -228,6 +229,7 @@ const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCode
 const StartLivePadStreamResponse = models.StartLivePadStreamResponse;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const GroupProIspDataInfo = models.GroupProIspDataInfo;
+const StopLivePadStreamResponse = models.StopLivePadStreamResponse;
 const RecordParam = models.RecordParam;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const HttpStatusInfo = models.HttpStatusInfo;
@@ -1361,6 +1363,17 @@ Note:
     CreateLiveTimeShiftRule(req, cb) {
         let resp = new CreateLiveTimeShiftRuleResponse();
         this.request("CreateLiveTimeShiftRule", req, resp, cb);
+    }
+
+    /**
+     * Call this API to end the transition to standby footage.
+     * @param {StopLivePadStreamRequest} req
+     * @param {function(string, StopLivePadStreamResponse):void} cb
+     * @public
+     */
+    StopLivePadStream(req, cb) {
+        let resp = new StopLivePadStreamResponse();
+        this.request("StopLivePadStream", req, resp, cb);
     }
 
     /**

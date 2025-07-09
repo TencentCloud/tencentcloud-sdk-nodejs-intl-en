@@ -27,13 +27,15 @@ const ScaleOutClusterRequest = models.ScaleOutClusterRequest;
 const DiskSpecInfo = models.DiskSpecInfo;
 const HiveQuery = models.HiveQuery;
 const KeyValue = models.KeyValue;
-const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const UserManagerFilter = models.UserManagerFilter;
 const DynamicPodSpec = models.DynamicPodSpec;
+const ModifySLInstanceBasicRequest = models.ModifySLInstanceBasicRequest;
+const SLInstanceInfo = models.SLInstanceInfo;
 const ModifyUserManagerPwdRequest = models.ModifyUserManagerPwdRequest;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
-const SubnetInfo = models.SubnetInfo;
+const CreateSLInstanceRequest = models.CreateSLInstanceRequest;
 const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 const ZoneDetailPriceResult = models.ZoneDetailPriceResult;
 const PodNewSpec = models.PodNewSpec;
@@ -46,8 +48,10 @@ const ClusterIDToFlowID = models.ClusterIDToFlowID;
 const EmrListInstance = models.EmrListInstance;
 const AddUsersForUserManagerResponse = models.AddUsersForUserManagerResponse;
 const EmrProductConfigOutter = models.EmrProductConfigOutter;
+const VPCSettings = models.VPCSettings;
 const CustomServiceDefine = models.CustomServiceDefine;
 const TerminateTasksResponse = models.TerminateTasksResponse;
+const PrePaySetting = models.PrePaySetting;
 const PartDetailPriceItem = models.PartDetailPriceItem;
 const DependService = models.DependService;
 const PodSpec = models.PodSpec;
@@ -57,6 +61,7 @@ const StartStopServiceOrMonitorRequest = models.StartStopServiceOrMonitorRequest
 const TerminateInstanceRequest = models.TerminateInstanceRequest;
 const AutoScaleRecord = models.AutoScaleRecord;
 const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
+const ZoneSetting = models.ZoneSetting;
 const Placement = models.Placement;
 const PodParameter = models.PodParameter;
 const AllNodeResourceSpec = models.AllNodeResourceSpec;
@@ -69,6 +74,7 @@ const PodNewParameter = models.PodNewParameter;
 const SearchItem = models.SearchItem;
 const ModifyResourcesTagsResponse = models.ModifyResourcesTagsResponse;
 const ScaleOutServiceConfGroupsInfo = models.ScaleOutServiceConfGroupsInfo;
+const CreateSLInstanceResponse = models.CreateSLInstanceResponse;
 const MultiZoneSetting = models.MultiZoneSetting;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
@@ -76,7 +82,7 @@ const NewResourceSpec = models.NewResourceSpec;
 const PersistentVolumeContext = models.PersistentVolumeContext;
 const ScaleOutNodeConfig = models.ScaleOutNodeConfig;
 const ModifyResourceTags = models.ModifyResourceTags;
-const ModifyResourcesTagsRequest = models.ModifyResourcesTagsRequest;
+const PriceDetail = models.PriceDetail;
 const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
 const DescribeHiveQueriesResponse = models.DescribeHiveQueriesResponse;
 const NodeRenewPriceDetail = models.NodeRenewPriceDetail;
@@ -84,31 +90,38 @@ const RenewPriceDetail = models.RenewPriceDetail;
 const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
 const LoginSettings = models.LoginSettings;
 const PriceResource = models.PriceResource;
+const ModifySLInstanceRequest = models.ModifySLInstanceRequest;
 const DescribeHiveQueriesRequest = models.DescribeHiveQueriesRequest;
 const CreateClusterResponse = models.CreateClusterResponse;
 const DescribeAutoScaleRecordsResponse = models.DescribeAutoScaleRecordsResponse;
+const DescribeSLInstanceListRequest = models.DescribeSLInstanceListRequest;
 const CreateClusterRequest = models.CreateClusterRequest;
+const SubnetInfo = models.SubnetInfo;
 const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
 const ComponentBasicRestartInfo = models.ComponentBasicRestartInfo;
 const CreateInstanceRequest = models.CreateInstanceRequest;
+const DescribeSLInstanceListResponse = models.DescribeSLInstanceListResponse;
 const UpdateInstanceSettings = models.UpdateInstanceSettings;
+const DescribeSLInstanceResponse = models.DescribeSLInstanceResponse;
 const ScriptBootstrapActionConfig = models.ScriptBootstrapActionConfig;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const TerminateSLInstanceResponse = models.TerminateSLInstanceResponse;
 const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
 const TerminateClusterNodesRequest = models.TerminateClusterNodesRequest;
 const DescribeInstancesListRequest = models.DescribeInstancesListRequest;
 const OutterResource = models.OutterResource;
 const OpScope = models.OpScope;
 const DescribeInstancesListResponse = models.DescribeInstancesListResponse;
-const VPCSettings = models.VPCSettings;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const Period = models.Period;
+const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
 const DescribeUsersForUserManagerResponse = models.DescribeUsersForUserManagerResponse;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
 const CdbInfo = models.CdbInfo;
-const PriceDetail = models.PriceDetail;
+const ModifyResourcesTagsRequest = models.ModifyResourcesTagsRequest;
 const MultiDiskMC = models.MultiDiskMC;
 const AddUsersForUserManagerRequest = models.AddUsersForUserManagerRequest;
 const ZoneResourceConfiguration = models.ZoneResourceConfiguration;
+const DescribeSLInstanceRequest = models.DescribeSLInstanceRequest;
 const CustomMetaInfo = models.CustomMetaInfo;
 const ApplicationStatics = models.ApplicationStatics;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
@@ -120,11 +133,14 @@ const ExternalService = models.ExternalService;
 const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const ClusterExternalServiceInfo = models.ClusterExternalServiceInfo;
 const SoftDependInfo = models.SoftDependInfo;
+const TerminateSLInstanceRequest = models.TerminateSLInstanceRequest;
 const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
+const ModifySLInstanceResponse = models.ModifySLInstanceResponse;
 const Resource = models.Resource;
 const DescribeEmrApplicationStaticsResponse = models.DescribeEmrApplicationStaticsResponse;
 const CustomMetaDBInfo = models.CustomMetaDBInfo;
 const UserManagerUserBriefInfo = models.UserManagerUserBriefInfo;
+const ModifySLInstanceBasicResponse = models.ModifySLInstanceBasicResponse;
 const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
 const ModifyResourceSchedulerResponse = models.ModifyResourceSchedulerResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
@@ -237,6 +253,17 @@ class EmrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the Serverless HBase instance name.
+     * @param {ModifySLInstanceBasicRequest} req
+     * @param {function(string, ModifySLInstanceBasicResponse):void} cb
+     * @public
+     */
+    ModifySLInstanceBasic(req, cb) {
+        let resp = new ModifySLInstanceBasicResponse();
+        this.request("ModifySLInstanceBasic", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the information of instances in a cluster.
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
@@ -271,6 +298,17 @@ This API is used to export users in batches. For a Kerberos cluster, set `NeedKe
     }
 
     /**
+     * This API is used to terminate a Serverless HBase instance.
+     * @param {TerminateSLInstanceRequest} req
+     * @param {function(string, TerminateSLInstanceResponse):void} cb
+     * @public
+     */
+    TerminateSLInstance(req, cb) {
+        let resp = new TerminateSLInstanceResponse();
+        this.request("TerminateSLInstance", req, resp, cb);
+    }
+
+    /**
      * This API is available for clusters with OpenLDAP components configured.
 This API is used to add user lists (user management).
      * @param {AddUsersForUserManagerRequest} req
@@ -283,14 +321,36 @@ This API is used to add user lists (user management).
     }
 
     /**
-     * This API is used to scale out a cluster.
-     * @param {ScaleOutClusterRequest} req
-     * @param {function(string, ScaleOutClusterResponse):void} cb
+     * This API is used to create a Serverless HBase instance.- If the API call is successful, a Serverless HBase instance will be created. If the instance creation request is successful, the InstanceId of the created instance and the RequestID of the request will be returned.- This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling DescribeInstancesList to view the StatusDesc status of the current instance.
+     * @param {CreateSLInstanceRequest} req
+     * @param {function(string, CreateSLInstanceResponse):void} cb
      * @public
      */
-    ScaleOutCluster(req, cb) {
-        let resp = new ScaleOutClusterResponse();
-        this.request("ScaleOutCluster", req, resp, cb);
+    CreateSLInstance(req, cb) {
+        let resp = new CreateSLInstanceResponse();
+        this.request("CreateSLInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the detailed information of the Serverless HBase instance list.
+     * @param {DescribeSLInstanceListRequest} req
+     * @param {function(string, DescribeSLInstanceListResponse):void} cb
+     * @public
+     */
+    DescribeSLInstanceList(req, cb) {
+        let resp = new DescribeSLInstanceListResponse();
+        this.request("DescribeSLInstanceList", req, resp, cb);
+    }
+
+    /**
+     *  This API is used to query the Yarn application statistics.
+     * @param {DescribeEmrApplicationStaticsRequest} req
+     * @param {function(string, DescribeEmrApplicationStaticsResponse):void} cb
+     * @public
+     */
+    DescribeEmrApplicationStatics(req, cb) {
+        let resp = new DescribeEmrApplicationStaticsResponse();
+        this.request("DescribeEmrApplicationStatics", req, resp, cb);
     }
 
     /**
@@ -302,6 +362,28 @@ This API is used to add user lists (user management).
     ModifyResourceScheduler(req, cb) {
         let resp = new ModifyResourceSchedulerResponse();
         this.request("ModifyResourceScheduler", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the basic information of Serverless HBase instances.
+     * @param {DescribeSLInstanceRequest} req
+     * @param {function(string, DescribeSLInstanceResponse):void} cb
+     * @public
+     */
+    DescribeSLInstance(req, cb) {
+        let resp = new DescribeSLInstanceResponse();
+        this.request("DescribeSLInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to resize a Serverless HBase instance.- If the API call is successful, a Serverless HBase instance will be created. If the instance creation request is successful, the RequestID of the request will be returned.- This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling DescribeInstancesList to view the StatusDesc status of the current instance.
+     * @param {ModifySLInstanceRequest} req
+     * @param {function(string, ModifySLInstanceResponse):void} cb
+     * @public
+     */
+    ModifySLInstance(req, cb) {
+        let resp = new ModifySLInstanceResponse();
+        this.request("ModifySLInstance", req, resp, cb);
     }
 
     /**
@@ -415,14 +497,14 @@ This API is used to add user lists (user management).
     }
 
     /**
-     *  This API is used to query the Yarn application statistics.
-     * @param {DescribeEmrApplicationStaticsRequest} req
-     * @param {function(string, DescribeEmrApplicationStaticsResponse):void} cb
+     * This API is used to scale out a cluster.
+     * @param {ScaleOutClusterRequest} req
+     * @param {function(string, ScaleOutClusterResponse):void} cb
      * @public
      */
-    DescribeEmrApplicationStatics(req, cb) {
-        let resp = new DescribeEmrApplicationStaticsResponse();
-        this.request("DescribeEmrApplicationStatics", req, resp, cb);
+    ScaleOutCluster(req, cb) {
+        let resp = new ScaleOutClusterResponse();
+        this.request("ScaleOutCluster", req, resp, cb);
     }
 
 

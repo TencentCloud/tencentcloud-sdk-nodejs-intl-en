@@ -37,7 +37,7 @@ const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInsta
 const BackupInfo = models.BackupInfo;
 const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
 const SecurityGroup = models.SecurityGroup;
-const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
+const DescribeDBInstanceNamespaceResponse = models.DescribeDBInstanceNamespaceResponse;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const SpecificationInfo = models.SpecificationInfo;
 const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
@@ -59,14 +59,16 @@ const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstance
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const RemoveNodeList = models.RemoveNodeList;
 const AssignProjectResponse = models.AssignProjectResponse;
 const BackupDownloadTask = models.BackupDownloadTask;
+const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
 const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
-const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
+const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
@@ -76,6 +78,7 @@ const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
 const InstanceEnumParam = models.InstanceEnumParam;
 const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
+const AddNodeList = models.AddNodeList;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
@@ -87,6 +90,7 @@ const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const SlowLogPattern = models.SlowLogPattern;
 const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const DescribeDBInstanceNamespaceRequest = models.DescribeDBInstanceNamespaceRequest;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
@@ -106,7 +110,7 @@ class MongodbClient extends AbstractClient {
     }
     
     /**
-     * This API is used to get details of purchase, renewal, and specification adjustment orders of a MongoDB instance.
+     * This API is used to get order details of purchase, renewal, and specification adjustment of a MongoDB instance.
      * @param {DescribeDBInstanceDealRequest} req
      * @param {function(string, DescribeDBInstanceDealResponse):void} cb
      * @public
@@ -117,18 +121,18 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to deactivate isolated TencentDB instances immediately. The instances must be in isolated status.
-     * @param {OfflineIsolatedDBInstanceRequest} req
-     * @param {function(string, OfflineIsolatedDBInstanceResponse):void} cb
+     * This API is used to query the table information on a database.
+     * @param {DescribeDBInstanceNamespaceRequest} req
+     * @param {function(string, DescribeDBInstanceNamespaceResponse):void} cb
      * @public
      */
-    OfflineIsolatedDBInstance(req, cb) {
-        let resp = new OfflineIsolatedDBInstanceResponse();
-        this.request("OfflineIsolatedDBInstance", req, resp, cb);
+    DescribeDBInstanceNamespace(req, cb) {
+        let resp = new DescribeDBInstanceNamespaceResponse();
+        this.request("DescribeDBInstanceNamespace", req, resp, cb);
     }
 
     /**
-     * This API is used to query the client connection information of an instance, including the IP and number of connections. Currently, only instances of MongoDB 3.2 are supported.
+     * This API is used to query the client connection information on an instance, including the IP address for connection and the number of connections.
      * @param {DescribeClientConnectionsRequest} req
      * @param {function(string, DescribeClientConnectionsResponse):void} cb
      * @public
@@ -150,7 +154,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the security groups associated with an instance.
+     * This API is used to query security groups bound to an instance.
      * @param {DescribeSecurityGroupRequest} req
      * @param {function(string, DescribeSecurityGroupResponse):void} cb
      * @public
@@ -205,7 +209,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query async task status.
+     * This API is used to query the asynchronous task status.
      * @param {DescribeAsyncRequestInfoRequest} req
      * @param {function(string, DescribeAsyncRequestInfoResponse):void} cb
      * @public
@@ -216,7 +220,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the network settings of a TencentDB instance, such as switching its network type from classic network to VPC or between VPCs.
+     * This API is used to modify the network information on a TencentDB for MongoDB instance. It supports switching from a basic network to a VPC network or from one VPC network to another VPC network.
      * @param {ModifyDBInstanceNetworkAddressRequest} req
      * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
      * @public
@@ -249,7 +253,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, and instance status.
+     * This API is used to query the list of TencentDB for MongoDB instances. It supports filtering primary instances, disaster recovery instances, and read-only instances by project ID, instance ID, instance status, and other conditions.
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
      * @public
@@ -257,6 +261,17 @@ class MongodbClient extends AbstractClient {
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
         this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to deactivate isolated TencentDB instances immediately. The instances must be in isolated status.
+     * @param {OfflineIsolatedDBInstanceRequest} req
+     * @param {function(string, OfflineIsolatedDBInstanceResponse):void} cb
+     * @public
+     */
+    OfflineIsolatedDBInstance(req, cb) {
+        let resp = new OfflineIsolatedDBInstanceResponse();
+        this.request("OfflineIsolatedDBInstance", req, resp, cb);
     }
 
     /**
@@ -293,7 +308,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to adjust the specification configuration of a TencentDB for MongoDB. The purchasable specifications supported by the API can be obtained through the DescribeSpecInfo API.
+     * This API is used to adjust the configuration of a TencentDB for MongoDB instance. Saleable specifications supported for this API can be obtained from the DescribeSpecInfo API for querying saleable TencentDB for MongoDB specifications.
      * @param {ModifyDBInstanceSpecRequest} req
      * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
      * @public
@@ -304,7 +319,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the modifiable parameter list of an instance.
+     * This API is used to query the list of parameters that can be modified for the current instance.
      * @param {DescribeInstanceParamsRequest} req
      * @param {function(string, DescribeInstanceParamsResponse):void} cb
      * @public
@@ -348,8 +363,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to specify the project to which a TencentDB instance belongs.
-
+     * This API is used to specify the project of a TencentDB for MongoDB instance.
      * @param {AssignProjectRequest} req
      * @param {function(string, AssignProjectResponse):void} cb
      * @public
@@ -382,7 +396,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create instance backups.
+     * This API is used to back up an instance.
      * @param {CreateBackupDBInstanceRequest} req
      * @param {function(string, CreateBackupDBInstanceResponse):void} cb
      * @public
@@ -404,7 +418,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the security groups associated with an instance.
+     * This API is used to modify security groups bound to an instance.
      * @param {ModifyDBInstanceSecurityGroupRequest} req
      * @param {function(string, ModifyDBInstanceSecurityGroupResponse):void} cb
      * @public

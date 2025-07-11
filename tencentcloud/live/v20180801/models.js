@@ -2131,99 +2131,36 @@ class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * LVB domain name information
+ * CreateLivePadRule request structure.
  * @class
  */
-class DomainInfo extends  AbstractModel {
+class CreateLivePadRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * LVB domain name.
+         * Domain name for streaming.
          * @type {string || null}
          */
-        this.Name = null;
+        this.DomainName = null;
 
         /**
-         * Domain name type:
-0: push.
-1: playback.
+         * The template ID.
          * @type {number || null}
          */
-        this.Type = null;
+        this.TemplateId = null;
 
         /**
-         * Domain name status:
-0: deactivated.
-1: activated.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * The time when the domain was added.
-Note: Beijing time (UTC+8) is used.
+         * The streaming path is consistent with the AppName in the streaming and playback address. The default value is live.
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.AppName = null;
 
         /**
-         * Whether there is a CNAME record pointing to a fixed rule domain name:
-0: no.
-1: yes.
-         * @type {number || null}
-         */
-        this.BCName = null;
-
-        /**
-         * Domain name corresponding to CNAME record.
+         * Stream name. Note: If this parameter is set to a non-empty string, the rule will only work on this push stream.
          * @type {string || null}
          */
-        this.TargetDomain = null;
-
-        /**
-         * Playback region. This parameter is valid only if `Type` is 1.
-1: in Mainland China.
-2: global.
-3: outside Mainland China.
-         * @type {number || null}
-         */
-        this.PlayType = null;
-
-        /**
-         * Whether it is LCB:
-0: LVB.
-1: LCB.
-         * @type {number || null}
-         */
-        this.IsDelayLive = null;
-
-        /**
-         * Information of currently used CNAME record.
-         * @type {string || null}
-         */
-        this.CurrentCName = null;
-
-        /**
-         * Disused parameter, which can be ignored.
-         * @type {number || null}
-         */
-        this.RentTag = null;
-
-        /**
-         * A disused parameter.
-Note: Beijing time (UTC+8) is used.
-         * @type {string || null}
-         */
-        this.RentExpireTime = null;
-
-        /**
-         * 0: LVB.
-1: LVB on Mini Program.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsMiniProgramLive = null;
+        this.StreamName = null;
 
     }
 
@@ -2234,18 +2171,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.BCName = 'BCName' in params ? params.BCName : null;
-        this.TargetDomain = 'TargetDomain' in params ? params.TargetDomain : null;
-        this.PlayType = 'PlayType' in params ? params.PlayType : null;
-        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
-        this.CurrentCName = 'CurrentCName' in params ? params.CurrentCName : null;
-        this.RentTag = 'RentTag' in params ? params.RentTag : null;
-        this.RentExpireTime = 'RentExpireTime' in params ? params.RentExpireTime : null;
-        this.IsMiniProgramLive = 'IsMiniProgramLive' in params ? params.IsMiniProgramLive : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -3219,47 +3148,24 @@ class CreateLiveWatermarkRuleResponse extends  AbstractModel {
 }
 
 /**
- * ForbidLiveStream request structure.
+ * DescribeLiveWatermarkRules response structure.
  * @class
  */
-class ForbidLiveStreamRequest extends  AbstractModel {
+class DescribeLiveWatermarkRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-         * @type {string || null}
+         * Watermarking rule list.
+         * @type {Array.<RuleInfo> || null}
          */
-        this.AppName = null;
+        this.Rules = null;
 
         /**
-         * Your push domain name.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DomainName = null;
-
-        /**
-         * Stream name.
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * The time (in UTC format) to resume the stream, such as 2018-11-29T19:00:00Z.
-Notes:
-1. The default stream disabling period is seven days. A stream can be disabled for up to 90 days.
-2. Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-         * @type {string || null}
-         */
-        this.ResumeTime = null;
-
-        /**
-         * Reason for forbidding.
-Note: Be sure to enter the reason for forbidding to avoid any faulty operations.
-Length limit: 2,048 bytes.
-         * @type {string || null}
-         */
-        this.Reason = null;
+        this.RequestId = null;
 
     }
 
@@ -3270,11 +3176,16 @@ Length limit: 2,048 bytes.
         if (!params) {
             return;
         }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
-        this.Reason = 'Reason' in params ? params.Reason : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new RuleInfo();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4219,6 +4130,67 @@ class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * ForbidLiveStream request structure.
+ * @class
+ */
+class ForbidLiveStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Your push domain name.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The time (in UTC format) to resume the stream, such as 2018-11-29T19:00:00Z.
+Notes:
+1. The default stream disabling period is seven days. A stream can be disabled for up to 90 days.
+2. Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.ResumeTime = null;
+
+        /**
+         * Reason for forbidding.
+Note: Be sure to enter the reason for forbidding to avoid any faulty operations.
+Length limit: 2,048 bytes.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
 
     }
 }
@@ -5571,21 +5543,21 @@ Note: Beijing time (UTC+8) is used.
 }
 
 /**
- * DescribeLiveWatermarkRules response structure.
+ * CreateLivePadTemplate response structure.
  * @class
  */
-class DescribeLiveWatermarkRulesResponse extends  AbstractModel {
+class CreateLivePadTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermarking rule list.
-         * @type {Array.<RuleInfo> || null}
+         * Template Id.
+         * @type {number || null}
          */
-        this.Rules = null;
+        this.TemplateId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5599,15 +5571,7 @@ class DescribeLiveWatermarkRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new RuleInfo();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7724,6 +7688,66 @@ In UTC format, such as 2019-01-07T15:00:00Z.
 }
 
 /**
+ * DescribeStreamPushInfoList request structure.
+ * @class
+ */
+class DescribeStreamPushInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The start time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
+1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
+1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The push domain.
+         * @type {string || null}
+         */
+        this.PushDomain = null;
+
+        /**
+         * The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+
+    }
+}
+
+/**
  * DescribeLiveCerts request structure.
  * @class
  */
@@ -8371,46 +8395,18 @@ class DescribeLiveForbidStreamListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeStreamPushInfoList request structure.
+ * CreateLivePadRule response structure.
  * @class
  */
-class DescribeStreamPushInfoListRequest extends  AbstractModel {
+class CreateLivePadRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The stream name.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StreamName = null;
-
-        /**
-         * The start time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
-1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
-2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * The end time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
-1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
-2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The push domain.
-         * @type {string || null}
-         */
-        this.PushDomain = null;
-
-        /**
-         * The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
-         * @type {string || null}
-         */
-        this.AppName = null;
+        this.RequestId = null;
 
     }
 
@@ -8421,11 +8417,7 @@ class DescribeStreamPushInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12436,6 +12428,69 @@ If you do not pass this parameter or pass in an empty string, the existing confi
 }
 
 /**
+ * CreateLivePadTemplate request structure.
+ * @class
+ */
+class CreateLivePadTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template name. Maximum length: 255 bytes. Only Chinese, English, numbers, _, and - are supported.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Gasket content.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Description information. Maximum length: 1024 bytes. Only Chinese, English, numbers, _, and - are supported.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The waiting time for disconnection. Value range: 0-30000. Unit: ms.
+         * @type {number || null}
+         */
+        this.WaitDuration = null;
+
+        /**
+         * Maximum shim duration. Value range: 0 - positive infinity. Unit: ms.
+         * @type {number || null}
+         */
+        this.MaxDuration = null;
+
+        /**
+         * Shim content type: 1: image, 2: video. Default value: 1.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.WaitDuration = 'WaitDuration' in params ? params.WaitDuration : null;
+        this.MaxDuration = 'MaxDuration' in params ? params.MaxDuration : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * EnableLiveDomain request structure.
  * @class
  */
@@ -13858,6 +13913,126 @@ class ModifyLiveDomainRefererRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.AllowEmpty = 'AllowEmpty' in params ? params.AllowEmpty : null;
         this.Rules = 'Rules' in params ? params.Rules : null;
+
+    }
+}
+
+/**
+ * LVB domain name information
+ * @class
+ */
+class DomainInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * LVB domain name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Domain name type:
+0: push.
+1: playback.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Domain name status:
+0: deactivated.
+1: activated.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The time when the domain was added.
+Note: Beijing time (UTC+8) is used.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether there is a CNAME record pointing to a fixed rule domain name:
+0: no.
+1: yes.
+         * @type {number || null}
+         */
+        this.BCName = null;
+
+        /**
+         * Domain name corresponding to CNAME record.
+         * @type {string || null}
+         */
+        this.TargetDomain = null;
+
+        /**
+         * Playback region. This parameter is valid only if `Type` is 1.
+1: in Mainland China.
+2: global.
+3: outside Mainland China.
+         * @type {number || null}
+         */
+        this.PlayType = null;
+
+        /**
+         * Whether it is LCB:
+0: LVB.
+1: LCB.
+         * @type {number || null}
+         */
+        this.IsDelayLive = null;
+
+        /**
+         * Information of currently used CNAME record.
+         * @type {string || null}
+         */
+        this.CurrentCName = null;
+
+        /**
+         * Disused parameter, which can be ignored.
+         * @type {number || null}
+         */
+        this.RentTag = null;
+
+        /**
+         * A disused parameter.
+Note: Beijing time (UTC+8) is used.
+         * @type {string || null}
+         */
+        this.RentExpireTime = null;
+
+        /**
+         * 0: LVB.
+1: LVB on Mini Program.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsMiniProgramLive = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BCName = 'BCName' in params ? params.BCName : null;
+        this.TargetDomain = 'TargetDomain' in params ? params.TargetDomain : null;
+        this.PlayType = 'PlayType' in params ? params.PlayType : null;
+        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+        this.CurrentCName = 'CurrentCName' in params ? params.CurrentCName : null;
+        this.RentTag = 'RentTag' in params ? params.RentTag : null;
+        this.RentExpireTime = 'RentExpireTime' in params ? params.RentExpireTime : null;
+        this.IsMiniProgramLive = 'IsMiniProgramLive' in params ? params.IsMiniProgramLive : null;
 
     }
 }
@@ -15934,7 +16109,7 @@ module.exports = {
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
     DescribeLivePlayAuthKeyResponse: DescribeLivePlayAuthKeyResponse,
     DescribeLiveCallbackTemplatesRequest: DescribeLiveCallbackTemplatesRequest,
-    DomainInfo: DomainInfo,
+    CreateLivePadRuleRequest: CreateLivePadRuleRequest,
     DescribeLiveTranscodeRulesRequest: DescribeLiveTranscodeRulesRequest,
     DeleteLiveSnapshotRuleRequest: DeleteLiveSnapshotRuleRequest,
     DescribePlayErrorCodeDetailInfoListRequest: DescribePlayErrorCodeDetailInfoListRequest,
@@ -15955,7 +16130,7 @@ module.exports = {
     DescribeLiveRecordTemplateRequest: DescribeLiveRecordTemplateRequest,
     MonitorStreamPlayInfo: MonitorStreamPlayInfo,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
-    ForbidLiveStreamRequest: ForbidLiveStreamRequest,
+    DescribeLiveWatermarkRulesResponse: DescribeLiveWatermarkRulesResponse,
     DescribeTimeShiftStreamListRequest: DescribeTimeShiftStreamListRequest,
     DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
@@ -15973,6 +16148,7 @@ module.exports = {
     DescribeLiveTimeShiftTemplatesRequest: DescribeLiveTimeShiftTemplatesRequest,
     DeleteLiveRecordResponse: DeleteLiveRecordResponse,
     DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
+    ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     DescribeLiveDomainsResponse: DescribeLiveDomainsResponse,
     TimeValue: TimeValue,
     ModifyLiveTimeShiftTemplateRequest: ModifyLiveTimeShiftTemplateRequest,
@@ -15998,7 +16174,7 @@ module.exports = {
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
     WatermarkInfo: WatermarkInfo,
-    DescribeLiveWatermarkRulesResponse: DescribeLiveWatermarkRulesResponse,
+    CreateLivePadTemplateResponse: CreateLivePadTemplateResponse,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
     PlayDataInfoByStream: PlayDataInfoByStream,
     DescribeLiveCertRequest: DescribeLiveCertRequest,
@@ -16037,6 +16213,7 @@ module.exports = {
     StopLivePadStreamRequest: StopLivePadStreamRequest,
     AddLiveDomainRequest: AddLiveDomainRequest,
     StreamName: StreamName,
+    DescribeStreamPushInfoListRequest: DescribeStreamPushInfoListRequest,
     DescribeLiveCertsRequest: DescribeLiveCertsRequest,
     DeleteLiveTimeShiftTemplateRequest: DeleteLiveTimeShiftTemplateRequest,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
@@ -16050,7 +16227,7 @@ module.exports = {
     DeleteLivePullStreamTaskResponse: DeleteLivePullStreamTaskResponse,
     AuthenticateDomainOwnerRequest: AuthenticateDomainOwnerRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
-    DescribeStreamPushInfoListRequest: DescribeStreamPushInfoListRequest,
+    CreateLivePadRuleResponse: CreateLivePadRuleResponse,
     DeleteLiveTimeShiftTemplateResponse: DeleteLiveTimeShiftTemplateResponse,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
@@ -16127,6 +16304,7 @@ module.exports = {
     PlayAuthKeyInfo: PlayAuthKeyInfo,
     BatchDomainOperateErrors: BatchDomainOperateErrors,
     ModifyLiveTranscodeTemplateRequest: ModifyLiveTranscodeTemplateRequest,
+    CreateLivePadTemplateRequest: CreateLivePadTemplateRequest,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
     DescribeAllStreamPlayInfoListResponse: DescribeAllStreamPlayInfoListResponse,
     DescribeLiveTranscodeTotalInfoResponse: DescribeLiveTranscodeTotalInfoResponse,
@@ -16152,6 +16330,7 @@ module.exports = {
     LiveDomainCertBindings: LiveDomainCertBindings,
     CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
     ModifyLiveDomainRefererRequest: ModifyLiveDomainRefererRequest,
+    DomainInfo: DomainInfo,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,
     DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
     PlayStatInfo: PlayStatInfo,

@@ -58,7 +58,7 @@ const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResp
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
 const DescribeLivePlayAuthKeyResponse = models.DescribeLivePlayAuthKeyResponse;
 const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
-const DomainInfo = models.DomainInfo;
+const CreateLivePadRuleRequest = models.CreateLivePadRuleRequest;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
@@ -79,7 +79,7 @@ const DescribeLiveDomainCertResponse = models.DescribeLiveDomainCertResponse;
 const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
 const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
-const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
+const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
 const DescribeTimeShiftStreamListRequest = models.DescribeTimeShiftStreamListRequest;
 const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
@@ -97,6 +97,7 @@ const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSum
 const DescribeLiveTimeShiftTemplatesRequest = models.DescribeLiveTimeShiftTemplatesRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
 const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
+const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const TimeValue = models.TimeValue;
 const ModifyLiveTimeShiftTemplateRequest = models.ModifyLiveTimeShiftTemplateRequest;
@@ -122,7 +123,7 @@ const RecordTask = models.RecordTask;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const WatermarkInfo = models.WatermarkInfo;
-const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
+const CreateLivePadTemplateResponse = models.CreateLivePadTemplateResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
@@ -161,6 +162,7 @@ const DescribeLiveDomainRefererResponse = models.DescribeLiveDomainRefererRespon
 const StopLivePadStreamRequest = models.StopLivePadStreamRequest;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
+const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const DeleteLiveTimeShiftTemplateRequest = models.DeleteLiveTimeShiftTemplateRequest;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
@@ -174,7 +176,7 @@ const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DeleteLivePullStreamTaskResponse = models.DeleteLivePullStreamTaskResponse;
 const AuthenticateDomainOwnerRequest = models.AuthenticateDomainOwnerRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
-const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
+const CreateLivePadRuleResponse = models.CreateLivePadRuleResponse;
 const DeleteLiveTimeShiftTemplateResponse = models.DeleteLiveTimeShiftTemplateResponse;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
@@ -251,6 +253,7 @@ const DeleteLiveCallbackRuleRequest = models.DeleteLiveCallbackRuleRequest;
 const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const BatchDomainOperateErrors = models.BatchDomainOperateErrors;
 const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateRequest;
+const CreateLivePadTemplateRequest = models.CreateLivePadTemplateRequest;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
 const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
 const DescribeLiveTranscodeTotalInfoResponse = models.DescribeLiveTranscodeTotalInfoResponse;
@@ -276,6 +279,7 @@ const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateR
 const LiveDomainCertBindings = models.LiveDomainCertBindings;
 const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
 const ModifyLiveDomainRefererRequest = models.ModifyLiveDomainRefererRequest;
+const DomainInfo = models.DomainInfo;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
 const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
 const PlayStatInfo = models.PlayStatInfo;
@@ -536,6 +540,17 @@ Note: data can be queried one hour after it is generated. For example, data betw
     DeleteLiveTranscodeTemplate(req, cb) {
         let resp = new DeleteLiveTranscodeTemplateResponse();
         this.request("DeleteLiveTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * create a live pad template
+     * @param {CreateLivePadTemplateRequest} req
+     * @param {function(string, CreateLivePadTemplateResponse):void} cb
+     * @public
+     */
+    CreateLivePadTemplate(req, cb) {
+        let resp = new CreateLivePadTemplateResponse();
+        this.request("CreateLivePadTemplate", req, resp, cb);
     }
 
     /**
@@ -1114,6 +1129,17 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
     DescribeLiveSnapshotTemplates(req, cb) {
         let resp = new DescribeLiveSnapshotTemplatesResponse();
         this.request("DescribeLiveSnapshotTemplates", req, resp, cb);
+    }
+
+    /**
+     * create a live pad rule.
+     * @param {CreateLivePadRuleRequest} req
+     * @param {function(string, CreateLivePadRuleResponse):void} cb
+     * @public
+     */
+    CreateLivePadRule(req, cb) {
+        let resp = new CreateLivePadRuleResponse();
+        this.request("CreateLivePadRule", req, resp, cb);
     }
 
     /**

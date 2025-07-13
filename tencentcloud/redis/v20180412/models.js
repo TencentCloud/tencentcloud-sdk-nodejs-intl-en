@@ -3121,6 +3121,12 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
          */
         this.AutoBackupType = null;
 
+        /**
+         * Specifies the retention days of full backup files. unit: day.
+         * @type {number || null}
+         */
+        this.BackupStorageDays = null;
+
     }
 
     /**
@@ -3134,6 +3140,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
         this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
         this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
+        this.BackupStorageDays = 'BackupStorageDays' in params ? params.BackupStorageDays : null;
 
     }
 }

@@ -221,6 +221,119 @@ class ServerPushText extends  AbstractModel {
 }
 
 /**
+ * Relay Recording Parameters
+ * @class
+ */
+class McuRecordParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Relay Recording Mode
+0/blank: Not currently supported, behavior undefined.
+1: Disable recording.
+2: Start recording (uses console's auto-recording template parameters. Reference: [Link to Documentation]).
+3: Start recording (uses API-specified parameters).
+Example: 2
+         * @type {number || null}
+         */
+        this.UniRecord = null;
+
+        /**
+         * Recording Task Key
+Identifies a recording task. This parameter allows merging multiple relay tasks into one recording file. If unspecified, only records the current relay task.
+[Format: Up to 128 bytes; only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-).]
+Example: test_record_key_a
+         * @type {string || null}
+         */
+        this.RecordKey = null;
+
+        /**
+         * [Valid only when UniRecord=3]
+Recording Resume Wait Time
+Corresponds to template parameter "Resume Wait Duration." Unit: seconds.
+Range: 5-86400 (24 hours). Default: 30. Recording stops if idle longer than this value.
+Example: 30
+         * @type {number || null}
+         */
+        this.RecordWaitTime = null;
+
+        /**
+         * [Valid only when UniRecord=3]
+Recording Output Formats
+Corresponds to template parameter "File Format." Supported values: hls, mp4, aac. Default: mp4.
+Note: mp4 and aac formats are mutually exclusive.
+Example (MP4 only): ["mp4"]
+Example (MP4 + HLS): ["mp4","hls"]
+         * @type {Array.<string> || null}
+         */
+        this.RecordFormat = null;
+
+        /**
+         * [Valid only when UniRecord=3]
+Single File Duration
+Corresponds to template parameter "Max File Duration." Unit: minutes.
+Range: 1-1440 (24 hours). Default: 1440. Applies only to mp4/aac. Actual duration is capped at 2GB file size.
+Example: 1440
+         * @type {number || null}
+         */
+        this.MaxMediaFileDuration = null;
+
+        /**
+         * [Valid only when UniRecord=3]
+Recording Media Type
+Corresponds to template parameter "Recording Format."
+0: Audio+Video, 1: Audio only, 2: Video only. Output is the intersection of this setting and relay content.
+Example: 0
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * Recording Filename Prefix
+Filename prefix (<=64 bytes). Applies only to VOD storage.
+*Format: Letters (a-z, A-Z), numbers (0-9), underscores (_), hyphens (-).*
+Example: mcu_record_prefix
+         * @type {string || null}
+         */
+        this.UserDefineRecordPrefix = null;
+
+        /**
+         * [Valid only when UniRecord=3]
+Recording Storage Parameters
+Corresponds to console parameter "Storage Location." Supports Tencent VOD or COS (exclusively).
+Example: {"McuCloudVod":{"McuTencentVod":{"ExpireTime":86400}}}
+         * @type {McuStorageParams || null}
+         */
+        this.McuStorageParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UniRecord = 'UniRecord' in params ? params.UniRecord : null;
+        this.RecordKey = 'RecordKey' in params ? params.RecordKey : null;
+        this.RecordWaitTime = 'RecordWaitTime' in params ? params.RecordWaitTime : null;
+        this.RecordFormat = 'RecordFormat' in params ? params.RecordFormat : null;
+        this.MaxMediaFileDuration = 'MaxMediaFileDuration' in params ? params.MaxMediaFileDuration : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.UserDefineRecordPrefix = 'UserDefineRecordPrefix' in params ? params.UserDefineRecordPrefix : null;
+
+        if (params.McuStorageParams) {
+            let obj = new McuStorageParams();
+            obj.deserialize(params.McuStorageParams)
+            this.McuStorageParams = obj;
+        }
+
+    }
+}
+
+/**
  * The custom layout parameters.
  * @class
  */
@@ -1473,6 +1586,94 @@ class DescribeTRTCMarketScaleDataResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Mcu Relay Recording and Tencent VOD Parameters
+ * @class
+ */
+class McuTencentVod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Post-Upload Task Processing
+Automatically initiates task flows after media uploads complete. Value = Task flow template name.
+VOD supports creating and naming task flow templates.
+Example: template_name
+         * @type {string || null}
+         */
+        this.Procedure = null;
+
+        /**
+         * Media File Expiration Time
+Absolute expiration time from current timestamp.
+86400 = 1 day retention
+0 = permanent storage (default)
+Example: 86400
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Upload Region Specification
+For users requiring specific upload regions.
+Example: ap-shanghai
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * Category ID
+Manages media classification. Obtain via category creation API.
+Default: 0 (Other category)
+Example: 0
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * VOD SubAppId
+Required when accessing sub-application resources. Leave empty otherwise.
+Example: 0
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Task Flow Context
+Passed through in task completion callbacks.
+Example: user_custom
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * Upload Context
+Passed through in upload completion callbacks.
+Example: user_custom
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
     }
 }
@@ -3484,6 +3685,54 @@ class WaterMark extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class McuStorageParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Third-Party Cloud Storage Account Information
+(Note: Storing files in Object Storage COS will incur recording file delivery fees. For details, see [Cloud Recording Billing]. Storing in VOD does not incur this fee.)
+Example:{"Vendor":0,"Region":"ap-shanghai","Bucket":"*","AccessKey":"*","SecretKey":"***","FileNamePrefix":["mcu_record"]}
+         * @type {CloudStorage || null}
+         */
+        this.CloudStorage = null;
+
+        /**
+         * Tencent Cloud VOD Account Information
+Example:{"McuTencentVod":{"ExpireTime":86400}}
+         * @type {McuCloudVod || null}
+         */
+        this.McuCloudVod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CloudStorage) {
+            let obj = new CloudStorage();
+            obj.deserialize(params.CloudStorage)
+            this.CloudStorage = obj;
+        }
+
+        if (params.McuCloudVod) {
+            let obj = new McuCloudVod();
+            obj.deserialize(params.McuCloudVod)
+            this.McuCloudVod = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeScaleInfo response structure.
  * @class
  */
@@ -4749,6 +4998,13 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
          */
         this.FeedBackRoomParams = null;
 
+        /**
+         * Relay Recording Parameters.
+Example value:{"UniRecord":1,"RecordKey": "test_recore_key_a"}
+         * @type {McuRecordParams || null}
+         */
+        this.RecordParams = null;
+
     }
 
     /**
@@ -4809,6 +5065,12 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
                 obj.deserialize(params.FeedBackRoomParams[z]);
                 this.FeedBackRoomParams.push(obj);
             }
+        }
+
+        if (params.RecordParams) {
+            let obj = new McuRecordParams();
+            obj.deserialize(params.RecordParams)
+            this.RecordParams = obj;
         }
 
     }
@@ -6709,6 +6971,40 @@ class WaterMarkTimestamp extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class McuCloudVod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tencent VOD Parameters
+Example :{"ExpireTime":86400}
+         * @type {McuTencentVod || null}
+         */
+        this.McuTencentVod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.McuTencentVod) {
+            let obj = new McuTencentVod();
+            obj.deserialize(params.McuTencentVod)
+            this.McuTencentVod = obj;
+        }
+
+    }
+}
+
+/**
  * The information of a single stream relayed.
  * @class
  */
@@ -7107,6 +7403,7 @@ module.exports = {
     DescribeRecordingUsageResponse: DescribeRecordingUsageResponse,
     AudioEncodeParams: AudioEncodeParams,
     ServerPushText: ServerPushText,
+    McuRecordParams: McuRecordParams,
     MixLayout: MixLayout,
     McuVideoParams: McuVideoParams,
     DescribeTRTCRealTimeScaleDataRequest: DescribeTRTCRealTimeScaleDataRequest,
@@ -7131,6 +7428,7 @@ module.exports = {
     VideoEncode: VideoEncode,
     DescribeCallDetailInfoRequest: DescribeCallDetailInfoRequest,
     DescribeTRTCMarketScaleDataResponse: DescribeTRTCMarketScaleDataResponse,
+    McuTencentVod: McuTencentVod,
     DescribeUserInfoRequest: DescribeUserInfoRequest,
     DescribeRelayUsageRequest: DescribeRelayUsageRequest,
     CloudStorage: CloudStorage,
@@ -7171,6 +7469,7 @@ module.exports = {
     DescribeRecordingUsageRequest: DescribeRecordingUsageRequest,
     StorageFile: StorageFile,
     WaterMark: WaterMark,
+    McuStorageParams: McuStorageParams,
     DescribeScaleInfoResponse: DescribeScaleInfoResponse,
     MixLayoutParams: MixLayoutParams,
     DescribeMixTranscodingUsageResponse: DescribeMixTranscodingUsageResponse,
@@ -7232,6 +7531,7 @@ module.exports = {
     AudioParams: AudioParams,
     StopAITranscriptionResponse: StopAITranscriptionResponse,
     WaterMarkTimestamp: WaterMarkTimestamp,
+    McuCloudVod: McuCloudVod,
     SingleSubscribeParams: SingleSubscribeParams,
     DescribeAITranscriptionResponse: DescribeAITranscriptionResponse,
     McuWaterMarkParams: McuWaterMarkParams,

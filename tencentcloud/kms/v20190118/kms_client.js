@@ -25,15 +25,20 @@ const CreateKeyRequest = models.CreateKeyRequest;
 const DisableWhiteBoxKeyResponse = models.DisableWhiteBoxKeyResponse;
 const DisableKeyResponse = models.DisableKeyResponse;
 const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatusRequest;
-const VerifyByAsymmetricKeyRequest = models.VerifyByAsymmetricKeyRequest;
+const UpdateDataKeyDescriptionRequest = models.UpdateDataKeyDescriptionRequest;
+const DescribeDataKeyResponse = models.DescribeDataKeyResponse;
+const DisableDataKeyResponse = models.DisableDataKeyResponse;
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
+const DescribeDataKeysRequest = models.DescribeDataKeysRequest;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
 const DisableKeysResponse = models.DisableKeysResponse;
+const EnableDataKeyResponse = models.EnableDataKeyResponse;
 const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
 const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
 const DescribeWhiteBoxServiceStatusResponse = models.DescribeWhiteBoxServiceStatusResponse;
-const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
+const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
+const ScheduleDataKeyDeletionResponse = models.ScheduleDataKeyDeletionResponse;
 const EnableKeyRequest = models.EnableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
@@ -44,35 +49,52 @@ const UpdateAliasResponse = models.UpdateAliasResponse;
 const ScheduleKeyDeletionResponse = models.ScheduleKeyDeletionResponse;
 const PostQuantumCryptoVerifyRequest = models.PostQuantumCryptoVerifyRequest;
 const GenerateRandomResponse = models.GenerateRandomResponse;
+const UpdateDataKeyNameRequest = models.UpdateDataKeyNameRequest;
+const ScheduleDataKeyDeletionRequest = models.ScheduleDataKeyDeletionRequest;
 const DescribeKeysRequest = models.DescribeKeysRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
 const ArchiveKeyResponse = models.ArchiveKeyResponse;
 const VerifyByAsymmetricKeyResponse = models.VerifyByAsymmetricKeyResponse;
+const DescribeDataKeysResponse = models.DescribeDataKeysResponse;
 const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptResponse = models.DecryptResponse;
+const ListDataKeyDetailResponse = models.ListDataKeyDetailResponse;
 const CreateWhiteBoxKeyResponse = models.CreateWhiteBoxKeyResponse;
-const Key = models.Key;
+const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
 const DeleteImportedKeyMaterialResponse = models.DeleteImportedKeyMaterialResponse;
 const EnableKeysRequest = models.EnableKeysRequest;
 const EnableWhiteBoxKeysRequest = models.EnableWhiteBoxKeysRequest;
 const EncryptByWhiteBoxResponse = models.EncryptByWhiteBoxResponse;
+const UpdateDataKeyNameResponse = models.UpdateDataKeyNameResponse;
 const DescribeKeysResponse = models.DescribeKeysResponse;
 const EnableWhiteBoxKeyResponse = models.EnableWhiteBoxKeyResponse;
+const ListDataKeysResponse = models.ListDataKeysResponse;
 const ReEncryptRequest = models.ReEncryptRequest;
 const ListKeysResponse = models.ListKeysResponse;
+const TagFilter = models.TagFilter;
+const DescribeDataKeyRequest = models.DescribeDataKeyRequest;
 const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
 const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
+const DataKeyMetadata = models.DataKeyMetadata;
+const VerifyByAsymmetricKeyRequest = models.VerifyByAsymmetricKeyRequest;
 const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
+const ImportDataKeyRequest = models.ImportDataKeyRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
 const AlgorithmInfo = models.AlgorithmInfo;
 const GetRegionsResponse = models.GetRegionsResponse;
+const UpdateDataKeyDescriptionResponse = models.UpdateDataKeyDescriptionResponse;
 const ExclusiveHSM = models.ExclusiveHSM;
+const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
+const EnableDataKeysResponse = models.EnableDataKeysResponse;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
+const EnableDataKeysRequest = models.EnableDataKeysRequest;
 const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
+const GetDataKeyPlaintextResponse = models.GetDataKeyPlaintextResponse;
+const DisableDataKeyRequest = models.DisableDataKeyRequest;
 const OverwriteWhiteBoxDeviceFingerprintsResponse = models.OverwriteWhiteBoxDeviceFingerprintsResponse;
 const DisableWhiteBoxKeysResponse = models.DisableWhiteBoxKeysResponse;
 const ArchiveKeyRequest = models.ArchiveKeyRequest;
@@ -80,24 +102,31 @@ const GetParametersForImportRequest = models.GetParametersForImportRequest;
 const CreateKeyResponse = models.CreateKeyResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
 const EncryptResponse = models.EncryptResponse;
-const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
+const GetDataKeyPlaintextRequest = models.GetDataKeyPlaintextRequest;
+const GetDataKeyCiphertextBlobRequest = models.GetDataKeyCiphertextBlobRequest;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
 const EnableKeyResponse = models.EnableKeyResponse;
+const ImportDataKeyResponse = models.ImportDataKeyResponse;
 const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const DeviceFingerprint = models.DeviceFingerprint;
 const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
 const EncryptRequest = models.EncryptRequest;
 const AsymmetricSm2DecryptRequest = models.AsymmetricSm2DecryptRequest;
+const ListDataKeysRequest = models.ListDataKeysRequest;
 const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
+const ListDataKeyDetailRequest = models.ListDataKeyDetailRequest;
+const CancelDataKeyDeletionResponse = models.CancelDataKeyDeletionResponse;
 const ListKeysRequest = models.ListKeysRequest;
 const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
+const DataKey = models.DataKey;
 const KeyMetadata = models.KeyMetadata;
 const CancelKeyArchiveResponse = models.CancelKeyArchiveResponse;
+const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const DecryptRequest = models.DecryptRequest;
 const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
 const PostQuantumCryptoSignRequest = models.PostQuantumCryptoSignRequest;
 const PostQuantumCryptoDecryptRequest = models.PostQuantumCryptoDecryptRequest;
-const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
+const DestinationSyncConfig = models.DestinationSyncConfig;
 const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
 const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
@@ -112,19 +141,23 @@ const GetRegionsRequest = models.GetRegionsRequest;
 const PostQuantumCryptoEncryptResponse = models.PostQuantumCryptoEncryptResponse;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
 const GenerateRandomRequest = models.GenerateRandomRequest;
+const Key = models.Key;
+const DisableDataKeysResponse = models.DisableDataKeysResponse;
 const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
+const CancelDataKeyDeletionRequest = models.CancelDataKeyDeletionRequest;
 const PostQuantumCryptoEncryptRequest = models.PostQuantumCryptoEncryptRequest;
 const DisableKeyRequest = models.DisableKeyRequest;
 const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
-const GetPublicKeyResponse = models.GetPublicKeyResponse;
+const EnableDataKeyRequest = models.EnableDataKeyRequest;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
-const TagFilter = models.TagFilter;
+const GetDataKeyCiphertextBlobResponse = models.GetDataKeyCiphertextBlobResponse;
 const PostQuantumCryptoSignResponse = models.PostQuantumCryptoSignResponse;
 const SignByAsymmetricKeyResponse = models.SignByAsymmetricKeyResponse;
 const PostQuantumCryptoVerifyResponse = models.PostQuantumCryptoVerifyResponse;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const PostQuantumCryptoDecryptResponse = models.PostQuantumCryptoDecryptResponse;
+const DisableDataKeysRequest = models.DisableDataKeysRequest;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
@@ -142,6 +175,17 @@ class KmsClient extends AbstractClient {
         super("kms.intl.tencentcloudapi.com", "2019-01-18", credential, region, profile);
     }
     
+    /**
+     * This API is used to query the list of data keys.
+     * @param {ListDataKeysRequest} req
+     * @param {function(string, ListDataKeysResponse):void} cb
+     * @public
+     */
+    ListDataKeys(req, cb) {
+        let resp = new ListDataKeysResponse();
+        this.request("ListDataKeys", req, resp, cb);
+    }
+
     /**
      * This API is used to verify a signature using PQC.
      * @param {PostQuantumCryptoVerifyRequest} req
@@ -210,6 +254,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
+     * This API is used to retrieve data key details.
+     * @param {DescribeDataKeyRequest} req
+     * @param {function(string, DescribeDataKeyResponse):void} cb
+     * @public
+     */
+    DescribeDataKey(req, cb) {
+        let resp = new DescribeDataKeyResponse();
+        this.request("DescribeDataKey", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the public key of an asymmetric KMS key (which must be enabled). With the public key, you can encrypt messages and verify signatures.
      * @param {GetPublicKeyRequest} req
      * @param {function(string, GetPublicKeyResponse):void} cb
@@ -254,6 +309,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
+     * This API is used to retrieve the key plaintext.
+     * @param {GetDataKeyPlaintextRequest} req
+     * @param {function(string, GetDataKeyPlaintextResponse):void} cb
+     * @public
+     */
+    GetDataKeyPlaintext(req, cb) {
+        let resp = new GetDataKeyPlaintextResponse();
+        this.request("GetDataKeyPlaintext", req, resp, cb);
+    }
+
+    /**
      * This API is used to decrypt data with the specified private key that is encrypted with SM2 asymmetric cryptographic algorithm. The ciphertext must be encrypted with the corresponding public key. The asymmetric key must be in `Enabled` state for decryption. The length of the ciphertext passed in cannot exceed 256 bytes.
      * @param {AsymmetricSm2DecryptRequest} req
      * @param {function(string, AsymmetricSm2DecryptResponse):void} cb
@@ -265,15 +331,14 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     }
 
     /**
-     * This API is used to generate a signature with an asymmetric key.
-Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `ASYMMETRIC_SIGN_VERIFY_SM2` and `ASYMMETRIC_SIGN_VERIFY_ECC`), the key can be used for signing.
-     * @param {SignByAsymmetricKeyRequest} req
-     * @param {function(string, SignByAsymmetricKeyResponse):void} cb
+     * This API is used to encrypt using PQC. It supports up to 4 KB of data. It is applicable for encryption of database passwords, RSA keys, or other sensitive information. You can also apply `DataKey` generated by API `GenerateDataKey` to encrypt or decrypt your local data.
+     * @param {PostQuantumCryptoEncryptRequest} req
+     * @param {function(string, PostQuantumCryptoEncryptResponse):void} cb
      * @public
      */
-    SignByAsymmetricKey(req, cb) {
-        let resp = new SignByAsymmetricKeyResponse();
-        this.request("SignByAsymmetricKey", req, resp, cb);
+    PostQuantumCryptoEncrypt(req, cb) {
+        let resp = new PostQuantumCryptoEncryptResponse();
+        this.request("PostQuantumCryptoEncrypt", req, resp, cb);
     }
 
     /**
@@ -299,6 +364,17 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
+     * Schedule deletion for a data key.
+     * @param {ScheduleDataKeyDeletionRequest} req
+     * @param {function(string, ScheduleDataKeyDeletionResponse):void} cb
+     * @public
+     */
+    ScheduleDataKeyDeletion(req, cb) {
+        let resp = new ScheduleDataKeyDeletionResponse();
+        this.request("ScheduleDataKeyDeletion", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the white-box key list.
      * @param {DescribeWhiteBoxKeyDetailsRequest} req
      * @param {function(string, DescribeWhiteBoxKeyDetailsResponse):void} cb
@@ -321,6 +397,17 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
+     * This API is used to overwrite the device fingerprint information of a specified key.
+     * @param {OverwriteWhiteBoxDeviceFingerprintsRequest} req
+     * @param {function(string, OverwriteWhiteBoxDeviceFingerprintsResponse):void} cb
+     * @public
+     */
+    OverwriteWhiteBoxDeviceFingerprints(req, cb) {
+        let resp = new OverwriteWhiteBoxDeviceFingerprintsResponse();
+        this.request("OverwriteWhiteBoxDeviceFingerprints", req, resp, cb);
+    }
+
+    /**
      * This API is used to archive keys.The archived keys can only be used for decryption but not encryption.
      * @param {ArchiveKeyRequest} req
      * @param {function(string, ArchiveKeyResponse):void} cb
@@ -332,14 +419,59 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to unarchive keys. If a key is unarchived, its status will be `Enabled`.
-     * @param {CancelKeyArchiveRequest} req
-     * @param {function(string, CancelKeyArchiveResponse):void} cb
+     * This API is used to modify the description of a data key.
+     * @param {UpdateDataKeyDescriptionRequest} req
+     * @param {function(string, UpdateDataKeyDescriptionResponse):void} cb
      * @public
      */
-    CancelKeyArchive(req, cb) {
-        let resp = new CancelKeyArchiveResponse();
-        this.request("CancelKeyArchive", req, resp, cb);
+    UpdateDataKeyDescription(req, cb) {
+        let resp = new UpdateDataKeyDescriptionResponse();
+        this.request("UpdateDataKeyDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the data key name.
+     * @param {UpdateDataKeyNameRequest} req
+     * @param {function(string, UpdateDataKeyNameResponse):void} cb
+     * @public
+     */
+    UpdateDataKeyName(req, cb) {
+        let resp = new UpdateDataKeyNameResponse();
+        this.request("UpdateDataKeyName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to generate a signature with an asymmetric key.
+Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `ASYMMETRIC_SIGN_VERIFY_SM2` and `ASYMMETRIC_SIGN_VERIFY_ECC`), the key can be used for signing.
+     * @param {SignByAsymmetricKeyRequest} req
+     * @param {function(string, SignByAsymmetricKeyResponse):void} cb
+     * @public
+     */
+    SignByAsymmetricKey(req, cb) {
+        let resp = new SignByAsymmetricKeyResponse();
+        this.request("SignByAsymmetricKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch prohibit the use of CMK.
+     * @param {DisableKeysRequest} req
+     * @param {function(string, DisableKeysResponse):void} cb
+     * @public
+     */
+    DisableKeys(req, cb) {
+        let resp = new DisableKeysResponse();
+        this.request("DisableKeys", req, resp, cb);
+    }
+
+    /**
+     * This API is used to cancel scheduled deletion for a data key.
+     * @param {CancelDataKeyDeletionRequest} req
+     * @param {function(string, CancelDataKeyDeletionResponse):void} cb
+     * @public
+     */
+    CancelDataKeyDeletion(req, cb) {
+        let resp = new CancelDataKeyDeletionResponse();
+        this.request("CancelDataKeyDeletion", req, resp, cb);
     }
 
     /**
@@ -409,6 +541,17 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
+     * This API is used to download the encrypted data key.
+     * @param {GetDataKeyCiphertextBlobRequest} req
+     * @param {function(string, GetDataKeyCiphertextBlobResponse):void} cb
+     * @public
+     */
+    GetDataKeyCiphertextBlob(req, cb) {
+        let resp = new GetDataKeyCiphertextBlobResponse();
+        this.request("GetDataKeyCiphertextBlob", req, resp, cb);
+    }
+
+    /**
      * This API is used to decrypt ciphertext using post-quantum cryptography (PQC) algorithm, and return the plaintext.
      * @param {PostQuantumCryptoDecryptRequest} req
      * @param {function(string, PostQuantumCryptoDecryptResponse):void} cb
@@ -420,14 +563,36 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to overwrite the device fingerprint information of a specified key.
-     * @param {OverwriteWhiteBoxDeviceFingerprintsRequest} req
-     * @param {function(string, OverwriteWhiteBoxDeviceFingerprintsResponse):void} cb
+     * This API is used to verify a signature with an asymmetric key.
+     * @param {VerifyByAsymmetricKeyRequest} req
+     * @param {function(string, VerifyByAsymmetricKeyResponse):void} cb
      * @public
      */
-    OverwriteWhiteBoxDeviceFingerprints(req, cb) {
-        let resp = new OverwriteWhiteBoxDeviceFingerprintsResponse();
-        this.request("OverwriteWhiteBoxDeviceFingerprints", req, resp, cb);
+    VerifyByAsymmetricKey(req, cb) {
+        let resp = new VerifyByAsymmetricKeyResponse();
+        this.request("VerifyByAsymmetricKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch enable data keys.
+     * @param {EnableDataKeysRequest} req
+     * @param {function(string, EnableDataKeysResponse):void} cb
+     * @public
+     */
+    EnableDataKeys(req, cb) {
+        let resp = new EnableDataKeysResponse();
+        this.request("EnableDataKeys", req, resp, cb);
+    }
+
+    /**
+     * Data key import API, managed by KMS.
+     * @param {ImportDataKeyRequest} req
+     * @param {function(string, ImportDataKeyResponse):void} cb
+     * @public
+     */
+    ImportDataKey(req, cb) {
+        let resp = new ImportDataKeyResponse();
+        this.request("ImportDataKey", req, resp, cb);
     }
 
     /**
@@ -486,14 +651,25 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * Get the master key list details according to the specified Offset and Limit.
-     * @param {ListKeyDetailRequest} req
-     * @param {function(string, ListKeyDetailResponse):void} cb
+     * This API is used to disable the data key.
+     * @param {DisableDataKeyRequest} req
+     * @param {function(string, DisableDataKeyResponse):void} cb
      * @public
      */
-    ListKeyDetail(req, cb) {
-        let resp = new ListKeyDetailResponse();
-        this.request("ListKeyDetail", req, resp, cb);
+    DisableDataKey(req, cb) {
+        let resp = new DisableDataKeyResponse();
+        this.request("DisableDataKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return the key attribute information list.
+     * @param {DescribeDataKeysRequest} req
+     * @param {function(string, DescribeDataKeysResponse):void} cb
+     * @public
+     */
+    DescribeDataKeys(req, cb) {
+        let resp = new DescribeDataKeysResponse();
+        this.request("DescribeDataKeys", req, resp, cb);
     }
 
     /**
@@ -505,6 +681,17 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     DisableKeyRotation(req, cb) {
         let resp = new DisableKeyRotationResponse();
         this.request("DisableKeyRotation", req, resp, cb);
+    }
+
+    /**
+     * Get the master key list details according to the specified Offset and Limit.
+     * @param {ListKeyDetailRequest} req
+     * @param {function(string, ListKeyDetailResponse):void} cb
+     * @public
+     */
+    ListKeyDetail(req, cb) {
+        let resp = new ListKeyDetailResponse();
+        this.request("ListKeyDetail", req, resp, cb);
     }
 
     /**
@@ -596,14 +783,14 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to encrypt using PQC. It supports up to 4 KB of data. It is applicable for encryption of database passwords, RSA keys, or other sensitive information. You can also apply `DataKey` generated by API `GenerateDataKey` to encrypt or decrypt your local data.
-     * @param {PostQuantumCryptoEncryptRequest} req
-     * @param {function(string, PostQuantumCryptoEncryptResponse):void} cb
+     * This API is used to enable the data key.
+     * @param {EnableDataKeyRequest} req
+     * @param {function(string, EnableDataKeyResponse):void} cb
      * @public
      */
-    PostQuantumCryptoEncrypt(req, cb) {
-        let resp = new PostQuantumCryptoEncryptResponse();
-        this.request("PostQuantumCryptoEncrypt", req, resp, cb);
+    EnableDataKey(req, cb) {
+        let resp = new EnableDataKeyResponse();
+        this.request("EnableDataKey", req, resp, cb);
     }
 
     /**
@@ -673,14 +860,14 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to batch prohibit the use of CMK.
-     * @param {DisableKeysRequest} req
-     * @param {function(string, DisableKeysResponse):void} cb
+     * This API is used to unarchive keys. If a key is unarchived, its status will be `Enabled`.
+     * @param {CancelKeyArchiveRequest} req
+     * @param {function(string, CancelKeyArchiveResponse):void} cb
      * @public
      */
-    DisableKeys(req, cb) {
-        let resp = new DisableKeysResponse();
-        this.request("DisableKeys", req, resp, cb);
+    CancelKeyArchive(req, cb) {
+        let resp = new CancelKeyArchiveResponse();
+        this.request("CancelKeyArchive", req, resp, cb);
     }
 
     /**
@@ -717,14 +904,25 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to verify a signature with an asymmetric key.
-     * @param {VerifyByAsymmetricKeyRequest} req
-     * @param {function(string, VerifyByAsymmetricKeyResponse):void} cb
+     * This API is used to retrieve data key list details based on specified Offset and Limit.
+     * @param {ListDataKeyDetailRequest} req
+     * @param {function(string, ListDataKeyDetailResponse):void} cb
      * @public
      */
-    VerifyByAsymmetricKey(req, cb) {
-        let resp = new VerifyByAsymmetricKeyResponse();
-        this.request("VerifyByAsymmetricKey", req, resp, cb);
+    ListDataKeyDetail(req, cb) {
+        let resp = new ListDataKeyDetailResponse();
+        this.request("ListDataKeyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch disable data keys.
+     * @param {DisableDataKeysRequest} req
+     * @param {function(string, DisableDataKeysResponse):void} cb
+     * @public
+     */
+    DisableDataKeys(req, cb) {
+        let resp = new DisableDataKeysResponse();
+        this.request("DisableDataKeys", req, resp, cb);
     }
 
 

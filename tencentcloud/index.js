@@ -86,6 +86,7 @@ module.exports = {
     pts: require("./pts"),
     rce: require("./rce"),
     redis: require("./redis"),
+    region: require("./region"),
     rum: require("./rum"),
     scf: require("./scf"),
     ses: require("./ses"),

@@ -53,7 +53,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Launch configuration ID
+         * Launch configuration ID. obtain the launch configuration ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/config) or calling the api DescribeLaunchConfigurations (https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
@@ -65,8 +65,8 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * List of instance types. Each type specifies different resource specifications. This list contains up to 10 instance types.
-The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. Specifying the `InstanceTypes` field will invalidate the original `InstanceType`.
+         * Types of cvm instances. different instance models specify different resource specifications. supports up to 10 instance models.
+The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. specifying the `InstanceTypes` field will invalidate the original `InstanceType`. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
@@ -179,14 +179,14 @@ This field requires passing in the `InstanceName` field. Other fields that are n
         this.EnhancedService = null;
 
         /**
-         * CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
+         * Role name of the CAM role. can be obtained from roleName in the return value from the DescribeRoleList API (https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CamRoleName = null;
 
         /**
-         * HPC ID<br>
-Note: This field is default to empty
+         * High-Performance computing cluster ID. you can obtain this parameter by calling the [DescribeHpcClusters](https://intl.cloud.tencent.com/document/product/213/83220?from_cn_redirect=1) api.
+Note: this field is empty by default.
          * @type {string || null}
          */
         this.HpcClusterId = null;
@@ -198,7 +198,7 @@ Note: This field is default to empty
         this.IPv6InternetAccessible = null;
 
         /**
-         * Placement group ID. Only one is allowed.
+         * Placement group id. only one can be specified. obtain through the API [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/product/213/17810?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -217,7 +217,7 @@ This parameter will overwrite the original instance tag list. To add new tags, y
         this.InstanceTags = null;
 
         /**
-         * Image family name.
+         * Image family name. this parameter can be obtained by calling the [DescribeImages](https://intl.cloud.tencent.com/document/product/213/15715?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ImageFamily = null;
@@ -348,7 +348,7 @@ class DisableAutoScalingGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -426,7 +426,9 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -438,43 +440,45 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * Default cooldown period in seconds. Default value: 300
+         * Default cooldown period in seconds. value ranges from 0 to 3600. default value: 300.
          * @type {number || null}
          */
         this.DefaultCooldown = null;
 
         /**
-         * Desired number of instances. The number should be no larger than the maximum and no smaller than minimum number of instances
+         * Expected number of instances, value ranges from 0 to 2000. to meet maximum value greater than or equal to expected value, expected value greater than or equal to minimum value.
          * @type {number || null}
          */
         this.DesiredCapacity = null;
 
         /**
-         * Launch configuration ID
+         * Launch configuration ID. obtain available launch configuration ids in the following ways:.
+<li>Queries the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config).</li>.
+<li>Specifies the launch configuration ID obtained by calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.</li>.
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
 
         /**
-         * Maximum number of instances. Value range: 0-2,000.
+         * Maximum number of instances, value range from 0 to 2000. to meet maximum value greater than or equal to expected value, expected value greater than or equal to minimum value.
          * @type {number || null}
          */
         this.MaxSize = null;
 
         /**
-         * Minimum number of instances. Value range: 0-2,000.
+         * Minimum number of instances. value range [0,2000]. to meet maximum value equal to or greater than expected value, expected value equal to or greater than minimum value.
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * Project ID
+         * Project ID. obtain this parameter by calling [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1), `ProjectId` field in the return value. default value is 0, indicates usage of the default project.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * List of subnet IDs
+         * subnet ID list. you can obtain a valid vpc subnet ID by logging in to the [console](https://console.cloud.tencent.com/vpc/subnet). you can also call the API [DescribeSubnets](https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1) and retrieve the valid vpc subnet ID from the SubnetId field in the API response.
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
@@ -488,7 +492,7 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.TerminationPolicies = null;
 
         /**
-         * VPC ID. This field is left empty for basic networks. You need to specify SubnetIds when modifying the network of the auto scaling group to a VPC with a specified VPC ID. Specify Zones when modifying the network to a basic network.
+         * vpc ID. when modifying the vpc, you need to change the SubnetIds parameter to the subnet of this vpc. effective VpcId can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc) or obtained from the VpcId field in the api response by calling the DescribeVpc api (https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1).
          * @type {string || null}
          */
         this.VpcId = null;
@@ -526,7 +530,7 @@ If there is no AZ or subnet in Zones/SubnetIds, a verification error will be rep
         this.ServiceSettings = null;
 
         /**
-         * The number of IPv6 addresses that an instance has. Valid values: 0 and 1.
+         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -694,7 +698,13 @@ class AutoScalingNotification extends  AbstractModel {
         this.NotificationUserGroupIds = null;
 
         /**
-         * List of notification events.
+         * Notification event list. valid values are as follows:.
+<Li>SCALE_OUT_SUCCESSFUL: scale-out succeeded</li>.
+<Li>SCALE_OUT_FAILED: scale-out failed</li>.
+<Li>SCALE_IN_SUCCESSFUL: scale-in succeeded</li>.
+<Li>SCALE_IN_FAILED: scale-in failed</li>.
+<Li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL: unhealthy instance replacement succeeded</li>.
+<Li>REPLACE_UNHEALTHY_INSTANCE_FAILED: unhealthy instance replacement failed</li>.
          * @type {Array.<string> || null}
          */
         this.NotificationTypes = null;
@@ -706,19 +716,24 @@ class AutoScalingNotification extends  AbstractModel {
         this.AutoScalingNotificationId = null;
 
         /**
-         * Notification receiver type.
+         * Notification receiver type. valid values:.
+USER_GROUP: specifies the user group.
+TDMQ_CMQ_TOPIC: tdmq for cmq topic.
+TDMQ_CMQ_QUEUE: specifies the tdmq cmq queue.
+`CMQ_QUEUE`: cmq queue. [cmq API offline](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1). unable to select.
+CMQ_TOPIC: cmq topic. [cmq API offline](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1), unable to select.
          * @type {string || null}
          */
         this.TargetType = null;
 
         /**
-         * CMQ queue name.
+         * TDMQ CMQ queue name.
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * CMQ topic name.
+         * TDMQ CMQ topic name.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -752,7 +767,7 @@ class ModifyScheduledActionRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the scheduled task to be edited
+         * Scheduled task ID that needs modification. obtain the scheduled task ID by calling the api [DescribeScheduledActions](https://intl.cloud.tencent.com/document/api/377/20450?from_cn_redirect=1) and retrieving the ScheduledActionId from the returned information.
          * @type {string || null}
          */
         this.ScheduledActionId = null;
@@ -794,7 +809,7 @@ class ModifyScheduledActionRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Repeating mode of the scheduled task, which is in standard cron format. <br>This parameter and `EndTime` need to be specified at the same time.
+         * The repeating mode of the scheduled task. follows the standard Cron format. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
          * @type {string || null}
          */
         this.Recurrence = null;
@@ -835,15 +850,17 @@ class DescribeAutoScalingGroupsRequest extends  AbstractModel {
         this.AutoScalingGroupIds = null;
 
         /**
-         * Filters.
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-<li> auto-scaling-group-name - String - Required: No - (Filter) Filter by auto scaling group name.</li>
-<li> vague-auto-scaling-group-name - String - Required: No - (Filter) Fuzzy search by auto scaling group name.</li>
-<li> launch-configuration-id - String - Required: No - (Filter) Filter by launch configuration ID.</li>
-<li> tag-key - String - Required: No - (Filter) Filter by tag key.</li>
-<li> tag-value - String - Required: No - (Filter) Filter by tag value.</li>
-<li> tag:tag-key - String - Required: No - (Filter) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key. For more information, see example 2.</li>
-The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `AutoScalingGroupIds` and `Filters` at the same time.
+         * Filter criteria
+
+<li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id.</li>.
+Specifies the scaling group ID obtained by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.
+<li> auto-scaling-group-name - String - required: no - (filter) filter by auto scaling group name.</li>.
+<li> vague-auto-scaling-group-name - String - required: no - (filter) filter by scaling group name fuzzy search.</li>.
+<li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration id. you can obtain the launch configuration id by logging in to the console (https://console.cloud.tencent.com/autoscaling/config) or calling the api DescribeLaunchConfigurations (https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
+<li> `tag-key` - String - optional - filter by the tag key. you can call the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) to obtain the tag key from the returned information.</li>.
+<li>tag-value - String - required: no - (filter condition) filter by tag value. you can obtain the tag value by calling the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) and retrieving the TagValue from the returned information.</li>.
+<li>tag:tag-key - String - required: no - (filter condition) filter by tag key-value pair. replace tag-key with a specific tag key. see example 2 for reference. call the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) to obtain the TagKey from the returned information.</li>.
+The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `AutoScalingGroupIds` and `Filters` parameters cannot be specified simultaneously.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -961,7 +978,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UserData = null;
 
         /**
-         * Creation time of the launch configuration.
+         * Specifies the startup configuration creation time. uses UTC standard time.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -985,7 +1002,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LaunchConfigurationStatus = null;
 
         /**
-         * Instance billing type, with the CVM default value processed as POSTPAID_BY_HOUR. <li>POSTPAID_BY_HOUR: Hourly postpaid billing.</li> <li>SPOTPAID: Spot billing.</li>
+         * Instance billing type. valid values:.
+<Li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>.
+<Li>SPOTPAID: spot payment</li>.
+<Li>PREPAID: prepaid, i.e., monthly subscription</li>.
+<Li>CDCPAID: dedicated cluster payment</li>.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -1010,8 +1031,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceTags = null;
 
         /**
-         * Tag list.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Tag list. this parameter specifies tags only used for binding the launch configuration and will not be passed to CVM instances scaled out based on it.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -1023,13 +1043,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VersionNumber = null;
 
         /**
-         * Update time
+         * Last update time is in standard UTC time.
          * @type {string || null}
          */
         this.UpdatedTime = null;
 
         /**
-         * CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
+         * Role name of the CAM role. can be obtained from roleName in the return value from the DescribeRoleList API (https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CamRoleName = null;
@@ -1085,7 +1105,6 @@ Note: This field is default to empty
 
         /**
          * Image family name.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ImageFamily = null;
@@ -1437,6 +1456,45 @@ class Advice extends  AbstractModel {
 }
 
 /**
+ * EnterStandby request structure.
+ * @class
+ */
+class EnterStandbyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * List of running instances. non-running instances are not supported. you can obtain available instance ids in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * CreateLifecycleHook response structure.
  * @class
  */
@@ -1558,7 +1616,9 @@ class CreateScheduledActionRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -1600,7 +1660,7 @@ class CreateScheduledActionRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Repeating mode of the scheduled task, which is in standard cron format. <br><br>This parameter and `EndTime` need to be specified at the same time.
+         * The repeating mode of a scheduled task follows the standard Cron format. the [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) in a scheduled task consist of 5 fields separated by spaces, with the structure: minute, hour, date, month, week. this parameter must be simultaneously specified with `EndTime`.
          * @type {string || null}
          */
         this.Recurrence = null;
@@ -1635,13 +1695,17 @@ class ExitStandbyRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID.
+         * Auto scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of CVM instances in standby status.
+         * List of CVM instances in standby status. you can obtain available instance ID in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1670,12 +1734,15 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For restrictions on the system disk type, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
-<li>LOCAL_BASIC: Local Disk.</li>
-<li>LOCAL_SSD: Local SSD.</li>
-<li>CLOUD_BASIC: Basic Cloud Disk.</li>
-<li>CLOUD_PREMIUM: Premium Disk.</li>
-<li>CLOUD_SSD: Cloud SSD.</li>
+         * System disk type. for restrictions on the system disk type, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). valid values:.
+<Li>LOCAL_BASIC: local hard disk.</li>.
+<Li>LOCAL_SSD: local ssd.</li>.
+<Li>CLOUD_BASIC: general cloud disk.</li>.
+<Li>CLOUD_PREMIUM: high-performance cloud block storage</li>.
+<Li>CLOUD_SSD: cloud ssd</li>.
+<Li>CLOUD_BSSD: universal ssd cloud disk</li>.
+<Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
+<Li>CLOUD_TSSD: ultra ssd.</li>.
 <li>Default value: CLOUD_PREMIUM.</li>
          * @type {string || null}
          */
@@ -1787,12 +1854,13 @@ class DescribeScalingPoliciesRequest extends  AbstractModel {
         this.AutoScalingPolicyIds = null;
 
         /**
-         * Filters.
-<li> `auto-scaling-policy-id` - String - Optional - Filter by the alarm policy ID.</li>
-<li> `auto-scaling-group-id` - String - Optional - Filter by the scaling group ID.</li>
-<li> `scaling-policy-name` - String - Optional - Filter by the alarm policy name.</li>
-<li> `scaling-policy-type` - String - Optional - Filter by the alarm policy type. Valid values: `SIMPLE`, `TARGET_TRACKING`.</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. You cannot specify `AutoScalingPolicyIds` and `Filters` at the same time.
+         * Filter criteria
+
+<li> auto-scaling-policy-id - String - required: no - (filter) filter by alert policy id.</li>.
+<li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+<li>scaling-policy-name - String - required: no - (filter condition) filters by Alarm policy name.</li>.
+<li>scaling-policy-type - String - required: no - (filter criteria) filters by Alarm policy type. valid values: SIMPLE, TARGET_TRACKING, representing SIMPLE policy and TARGET TRACKING policy respectively.</li>.
+The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `AutoScalingPolicyIds` and `Filters` parameters cannot be specified simultaneously.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2052,18 +2120,30 @@ class ExecuteScalingPolicyResponse extends  AbstractModel {
 }
 
 /**
- * DeleteAutoScalingGroup request structure.
+ * Application CLB IDs
  * @class
  */
-class DeleteAutoScalingGroupRequest extends  AbstractModel {
+class ForwardLoadBalancerIdentification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Auto scaling group ID
+         * ID of the CLB
          * @type {string || null}
          */
-        this.AutoScalingGroupId = null;
+        this.LoadBalancerId = null;
+
+        /**
+         * Application CLB listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * ID of a forwarding rule. This parameter is required for layer-7 listeners.
+         * @type {string || null}
+         */
+        this.LocationId = null;
 
     }
 
@@ -2074,7 +2154,9 @@ class DeleteAutoScalingGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
     }
 }
@@ -2151,25 +2233,28 @@ class CompleteLifecycleActionRequest extends  AbstractModel {
         super();
 
         /**
-         * Lifecycle hook ID
+         * Lifecycle hook ID. you can get the lifecycle hook ID by calling the api [DescribeLifecycleHooks](https://intl.cloud.tencent.com/document/api/377/34452?from_cn_redirect=1) and retrieving the `LifecycleHookId` from the returned information.
          * @type {string || null}
          */
         this.LifecycleHookId = null;
 
         /**
-         * Result of the lifecycle action. Value range: "CONTINUE", "ABANDON"
+         * Describes the result of the lifecycle action. valid values are as follows:.
+<Li>CONTINUE: default value, means continue execution of capacity expansion or reduction</li>.
+<li>ABANDON: for scale-out hooks, CVM instances with hook timeout or failed LifecycleCommand execution will be released directly or moved; for scale-in hooks, scale-in activities will continue.</li>.
          * @type {string || null}
          */
         this.LifecycleActionResult = null;
 
         /**
-         * Instance ID. Either "InstanceId" or "LifecycleActionToken" must be specified
+         * One of the parameters `InstanceId` or `LifecycleActionToken` is required. you can get the instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index) or making an api call to [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Either "InstanceId" or "LifecycleActionToken" must be specified
+         * Lifecycle action token. specifies that one of `InstanceId` or `LifecycleActionToken` must be filled.
+The method for accessing the parameter is as follows: when the hook of the `NotificationTarget` parameter is triggered, deliver a message containing the token to the message queue specified in the `NotificationTarget` parameter. the message queue consumer can obtain the token from the message.
          * @type {string || null}
          */
         this.LifecycleActionToken = null;
@@ -2278,10 +2363,10 @@ class DescribeRefreshActivitiesRequest extends  AbstractModel {
         /**
          * Filter criteria
 
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-<li> refresh-activity-status-code - String - Required: No - (Filter)Filter based on refresh activity status. (INIT: Initialization | RUNNING:Running | SUCCESSFUL: Successful Activity | FAILED_PAUSE: Failed & Paused | AUTO_PAUSE: Auto Paused | MANUAL_PAUSE: Manually Paused | CANCELLED: Activity Cancelled | FAILED: Activity Failed)</li>
-<li> refresh-activity-type - String - Required: No - (Filter) Filter by refresh activity types. (NORMAL: Regular Refresh Activity | ROLLBACK: Rollback Refresh Activity)</li>
-<li> refresh-activity-id - String - Required: No - (Filter) Filter by refresh activity ID.</li>
+<li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+<li> refresh-activity-status-code - String - required: no - (filter criteria) filters by refresh activity status. (INIT: initializing | RUNNING: RUNNING | SUCCESSFUL: activity SUCCESSFUL | FAILED_PAUSE: PAUSE on failure | AUTO_PAUSE: AUTO PAUSE | MANUAL_PAUSE: manually PAUSE | CANCELLED: activity CANCELLED | FAILED: activity FAILED)</li>.
+<li> refresh-activity-type - String - required: no - (filter) filter by refresh activity types. (NORMAL: regular refresh activity | ROLLBACK: ROLLBACK refresh activity)</li>.
+<li> refresh-activity-id - String - required: no - (filter) filter by refresh activity id.</li>.
 <li>The upper limit of Filters per request is 10, and that of Filter.Values is 5. The RefreshActivityIds and Filters parameters cannot be specified at the same time.</li>
          * @type {Array.<Filter> || null}
          */
@@ -2383,13 +2468,17 @@ class RemoveInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of CVM instance IDs
+         * CVM instance ID list. you can obtain available instance ID in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2458,8 +2547,7 @@ class Tag extends  AbstractModel {
         this.Value = null;
 
         /**
-         * Resource type bound with tags. Valid values: auto-scaling-group and launch-configuration.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the resource type bound to the tag. type currently supported: "auto-scaling-group", "launch-configuration". valid values: scaling group resources and launch configuration resources respectively.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -2489,19 +2577,19 @@ class DetachLoadBalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of classic CLB IDs. Up to 20 IDs are allowed. `LoadBalancerIds` and `ForwardLoadBalancerIdentifications` cannot be specified at the same time.
+         * Specifies a list of classic load balancer ids with a maximum length of 20. either LoadBalancerIds or ForwardLoadBalancerIdentifications can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * List of application CLB IDs. Up to 100 IDs are allowed. `LoadBalancerIds` and `ForwardLoadBalancerIdentifications` cannot be specified at the same time.
+         * Specifies the list of cloud load balancer identification information with a maximum length of 100. either LoadBalancerIds or ForwardLoadBalancerIdentifications can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<ForwardLoadBalancerIdentification> || null}
          */
         this.ForwardLoadBalancerIdentifications = null;
@@ -2539,16 +2627,20 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * IDs of the CVM instances to query. Up to 100 IDs can be queried at one time. `InstanceIds` and `Filters` can not be both specified.
+         * IDs of the CVM instances to query. the instance ID list has a length limit of 100. `InstanceIds` and `Filters` cannot be specified simultaneously.
+You can get available instance ids in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Filter.
-<li> instance-id - String - Required: No - (Filter) Filter by instance ID.</li>
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `InstanceIds` and `Filters` at the same time.
+         * Filter criteria
+
+<li> instance-id - String - required: no - (filter condition) filter by instance id. get the instance id by logging in to the [console](https://console.cloud.tencent.com/cvm/index) or making an api call to [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1), and retrieve the `InstanceId` from the returned information.</li>.
+<li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or making an api call to [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. parameters do not support specifying both `InstanceIds` and `Filters`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2599,19 +2691,19 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. you can obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of classic CLB IDs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
+         * List of classic clb ids. currently, the maximum length is 20. you cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time. it can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * List of application CLBs. Up to 100 CLBs are allowed. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+         * Specifies the list of load balancers with a current maximum length of 100. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -2721,7 +2813,7 @@ class DeleteLaunchConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the launch configuration to be deleted.
+         * Specifies the launch configuration ID that needs to be deleted. you can obtain the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
@@ -2749,13 +2841,17 @@ class SetInstancesProtectionRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID.
+         * Auto scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Instance ID.
+         * Instance ID. you can obtain available instance ID in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2874,6 +2970,15 @@ class RollingUpdateSettings extends  AbstractModel {
          */
         this.MaxSurge = null;
 
+        /**
+         * Failure handling strategy. default value: AUTO_PAUSE. valid values:.
+<Li>AUTO_PAUSE: suspended after refresh fails</li>.
+<li>AUTO_ROLLBACK: roll back after a refresh fails. each batch rolls back one instance during ROLLBACK, and the CheckInstanceTargetHealth parameter value matches the original refresh activity. no need to roll back if the shrinkage process introduced by the MaxSurge parameter fails. a cancel action will replace the ROLLBACK.</li>.
+<Li>AUTO_CANCEL: cancel after refresh fails</li>.
+         * @type {string || null}
+         */
+        this.FailProcess = null;
+
     }
 
     /**
@@ -2886,6 +2991,7 @@ class RollingUpdateSettings extends  AbstractModel {
         this.BatchNumber = 'BatchNumber' in params ? params.BatchNumber : null;
         this.BatchPause = 'BatchPause' in params ? params.BatchPause : null;
         this.MaxSurge = 'MaxSurge' in params ? params.MaxSurge : null;
+        this.FailProcess = 'FailProcess' in params ? params.FailProcess : null;
 
     }
 }
@@ -2939,8 +3045,8 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * Project ID of the launch configuration. The default project is used if it is left blank.
-Note that this project ID is not the same as the project ID of the scaling group. 
+         * Project ID of the launch configuration. default value is 0, indicating usage of the default project. obtain this parameter by calling the projectId field in the return value of [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1).
+Note: the instance's project ID within the scaling group takes the project ID of the scaling group, which is irrelevant here.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -3010,24 +3116,24 @@ Note that this project ID is not the same as the project ID of the scaling group
         this.InstanceMarketOptions = null;
 
         /**
-         * List of instance models. Different instance models specify different resource specifications. Up to 10 instance models can be supported.
-`InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
+         * Instance model list. different instance models specify different resource specifications. supports up to 10 instance models.
+The `InstanceType` and `InstanceTypes` parameters are mutually exclusive. one and only one must be filled in. specific values can be obtained by calling the api [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to obtain the latest specification table or refer to [instance specifications](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
 
         /**
-         * CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
+         * CAM role name. you can obtain it from the roleName in the return value from the API [DescribeRoleList](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CamRoleName = null;
 
         /**
-         * InstanceType verification policy, whose valid values include ALL and ANY, with the default value being ANY.
-<li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
-<li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
+         * Instance type validation policy. valid values include ALL and ANY. default value: ANY. this parameter is valid only when the InstanceTypes parameter contains multiple instance types.
+<li>ALL: verification passes if ALL instancetypes are available; otherwise, a verification error will be reported.</li>.
+<li>ANY: verification passes if ANY InstanceType is available; otherwise, a verification error will be reported.</li>.
 
-Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+Common reasons for unavailable instancetypes include the instancetype being sold out and the corresponding cloud disk being sold out.
 If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
          * @type {string || null}
          */
@@ -3073,8 +3179,8 @@ If this field is configured in a launch configuration, the `InstanceName` of a C
         this.DiskTypePolicy = null;
 
         /**
-         * HPC ID<br>
-Note: This field is default to empty
+         * High-Performance computing cluster ID. you can obtain this parameter by calling the [DescribeHpcClusters](https://intl.cloud.tencent.com/document/product/213/83220?from_cn_redirect=1) api.
+Note: this field is empty by default.
          * @type {string || null}
          */
         this.HpcClusterId = null;
@@ -3092,13 +3198,13 @@ Note: This field is default to empty
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * Image family name. Either image ID or image family name should be filled in, and only one of which can be filled.
+         * Image family name. one and only one must be filled in between image Id and image family name. this parameter can be obtained by calling the [DescribeImages](https://intl.cloud.tencent.com/document/product/213/15715?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ImageFamily = null;
 
         /**
-         * CDC ID.
+         * Local exclusive cluster ID. this parameter can be obtained through the [DescribeDedicatedClusters](https://intl.cloud.tencent.com/document/product/1346/73758?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.DedicatedClusterId = null;
@@ -3345,13 +3451,15 @@ class AutoScalingGroup extends  AbstractModel {
         this.SubnetIdSet = null;
 
         /**
-         * Termination policy
+         * Destruction policy. valid values are as follows:.
+<Li>OLDEST_INSTANCE: terminate the oldest instance in the scaling group first, default value.</li>.
+<Li>NEWEST_INSTANCE: terminate the newest instance in the scaling group first.</li>.
          * @type {Array.<string> || null}
          */
         this.TerminationPolicySet = null;
 
         /**
-         * VPC ID
+         * VPC ID.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -3363,7 +3471,10 @@ class AutoScalingGroup extends  AbstractModel {
         this.ZoneSet = null;
 
         /**
-         * Retry policy
+         * Retry policy. a partially successful scaling operation is considered a failed activity. valid values are as follows:.
+<Li>IMMEDIATE_RETRY: default value, means retry immediately, attempting retries in rapid succession over a short period. cease further retries after a certain number of consecutive failures (5).</li>.
+<Li>INCREMENTAL_INTERVALS: specifies incremental interval retry. with the number of consecutive failures, the retry interval gradually increases. the first 10 retries are quick retry, and the follow-up retry interval gradually expands to 10 minutes, 30 minutes, 60 minutes, and one day.</li>.
+<Li>NO_RETRY: there will be no retry until another user call or Alarm information is received.</li>.
          * @type {string || null}
          */
         this.RetryPolicy = null;
@@ -3387,7 +3498,7 @@ class AutoScalingGroup extends  AbstractModel {
         this.ServiceSettings = null;
 
         /**
-         * The number of IPv6 addresses that an instance has.
+         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports ip and enable IPv6 CIDR in the subnet. for usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -3409,7 +3520,8 @@ class AutoScalingGroup extends  AbstractModel {
         this.HealthCheckType = null;
 
         /**
-         * Grace period of the CLB health check
+         * Grace period of the CLB health check. the scaled-out instances IN `IN_SERVICE` will not be marked as `CLB_UNHEALTHY` within the specified time range.
+Default value: 0. value range: [0, 7200]. measurement unit: seconds.
          * @type {number || null}
          */
         this.LoadBalancerHealthCheckGracePeriod = null;
@@ -3439,7 +3551,6 @@ A valid value will be returned only when `InstanceAllocationPolicy` is set to `S
 
         /**
          * Instance name sequencing settings.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {InstanceNameIndexSettings || null}
          */
         this.InstanceNameIndexSettings = null;
@@ -3663,13 +3774,15 @@ class CancelInstanceRefreshRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID.
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Refresh activity ID.
+         * Refresh activity ID. you can obtain the instance refresh activity ID by calling the api [DescribeRefreshActivities](https://intl.cloud.tencent.com/document/api/377/99175?from_cn_redirect=1) and retrieving the RefreshActivityId from the returned information.
          * @type {string || null}
          */
         this.RefreshActivityId = null;
@@ -3771,7 +3884,7 @@ class ScalingPolicy extends  AbstractModel {
         this.AdjustmentValue = null;
 
         /**
-         * Cooldown period. This parameter is only applicable to a simple policy.
+         * Cooldown duration in seconds, applies only to simple policies. value range [0,3600]. default cooldown: 300 seconds.
          * @type {number || null}
          */
         this.Cooldown = null;
@@ -3872,7 +3985,7 @@ class DescribeAutoScalingGroupLastActivitiesRequest extends  AbstractModel {
         super();
 
         /**
-         * ID list of auto scaling groups.
+         * Auto scaling group ID list. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving AutoScalingGroupId from the returned information.
          * @type {Array.<string> || null}
          */
         this.AutoScalingGroupIds = null;
@@ -3996,7 +4109,7 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID.
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -4014,18 +4127,18 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
         this.NotificationTypes = null;
 
         /**
-         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
+         * Notification GROUP ID, which is the USER GROUP ID collection. USER GROUP ID can be accessed through [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1). this parameter is valid only when TargetType is USER_GROUP.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
 
         /**
-         * Notification receiver type. Valid values:
-<br><li>USER_GROUP:User group
-<br><li>CMQ_QUEUE:CMQ queue
-<br><li>CMQ_TOPIC:CMQ topic
-<br><li>TDMQ_CMQ_TOPIC:TDMQ CMQ topic
-<br><li>TDMQ_CMQ_QUEUE:TDMQ CMQ queue
+         * Notification receiver type. values as follows:.
+<Li>USER_GROUP: user group</li>.
+<Li>TDMQ_CMQ_TOPIC: tdmq cmq topic</li>.
+<Li>TDMQ_CMQ_QUEUE: tdmq cmq queue</li>.
+<li>CMQ_QUEUE: CMQ QUEUE. [CMQ is offline](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1). currently, only TDMQ CMQ is recommended.</li>.
+<li>CMQ_TOPIC: specifies the CMQ TOPIC. [CMQ is offline](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1). currently, TDMQ CMQ is recommended for use.</li>.
 
 Default value: `USER_GROUP`.
          * @type {string || null}
@@ -4033,13 +4146,13 @@ Default value: `USER_GROUP`.
         this.TargetType = null;
 
         /**
-         * CMQ queue name. This parameter is required when `TargetType` is `CMQ_QUEUE` or `TDMQ_CMQ_QUEUE`.
+         * TDMQ CMQ QUEUE name. this field is required if TargetType value is `TDMQ_CMQ_QUEUE`.
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * CMQ topic name. This parameter is required when `TargetType` is `CMQ_TOPIC` or `TDMQ_CMQ_TOPIC`.
+         * TDMQ CMQ TOPIC name. this field is required when `TargetType` is `TDMQ_CMQ_TOPIC`.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -4122,7 +4235,7 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the notification to be modified.
+         * Specifies the notification ID that needs modification. get the notification ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeNotificationConfigurations](https://intl.cloud.tencent.com/document/api/377/33183?from_cn_redirect=1) and getting `AutoScalingNotificationId` from the returned information.
          * @type {string || null}
          */
         this.AutoScalingNotificationId = null;
@@ -4140,19 +4253,19 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
         this.NotificationTypes = null;
 
         /**
-         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
+         * Notification GROUP ID, which is the USER GROUP ID collection. USER GROUP ID can be accessed through [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1). this parameter is valid only when `TargetType` is `USER_GROUP`.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
 
         /**
-         * CMQ or TDMQ CMQ queue name.
+         * The TDMQ CMQ QUEUE name. [the original CMQ is offline](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1). currently, only TDMQ CMQ is recommended for use. this parameter is valid only when `TargetType` is `TDMQ_CMQ_QUEUE`.
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * CMQ or TDMQ CMQ toipc name.
+         * The TDMQ CMQ TOPIC name. [original CMQ is offline](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1). currently, only TDMQ CMQ is recommended for use. this parameter is valid only when `TargetType` is `TDMQ_CMQ_TOPIC`.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -4184,7 +4297,7 @@ class DeleteLifecycleHookRequest extends  AbstractModel {
         super();
 
         /**
-         * Lifecycle hook ID
+         * Lifecycle hook ID. calling the api [DescribeLifecycleHooks](https://intl.cloud.tencent.com/document/api/377/34452?from_cn_redirect=1) and retrieving the LifecycleHookId from the returned information obtains the lifecycle hook ID.
          * @type {string || null}
          */
         this.LifecycleHookId = null;
@@ -4276,7 +4389,6 @@ class ExitStandbyResponse extends  AbstractModel {
 
         /**
          * Scaling activity ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ActivityId = null;
@@ -4374,13 +4486,13 @@ class ModifyScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Alarm policy ID.
+         * Specifies the alert policy ID. obtain the alert policy ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeScalingPolicies (https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1), and retrieve the AutoScalingPolicyId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingPolicyId = null;
 
         /**
-         * Alarm policy name.
+         * The Alarm policy name must be unique in your account. the name length cannot exceed 60 characters. the name only supports chinese, english, digits, underscores, hyphens, and decimal separators.
          * @type {string || null}
          */
         this.ScalingPolicyName = null;
@@ -4576,6 +4688,41 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * EnterStandby response structure.
+ * @class
+ */
+class EnterStandbyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling activity ID.
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeLifecycleHook response structure.
  * @class
  */
@@ -4675,18 +4822,16 @@ class LifecycleCommand extends  AbstractModel {
         super();
 
         /**
-         * Remote command ID. It’s required to execute a command.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Remote command ID. this item is required if you select to execute command.
          * @type {string || null}
          */
         this.CommandId = null;
 
         /**
-         * Custom parameter. The field type is JSON encoded string. For example, {"varA": "222"}.
-`key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
-If this parameter is not specified, the `DefaultParameters` of `Command` is used.
-Up to 20 customer parameters allowed. The parameter name can contain up to 64 characters, including [a-z], [A-Z], [0-9] and [-_].
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Custom parameter. field type is json encoded string, for example: {"varA": "222"}.
+key specifies the custom parameter name, and value specifies the default. both are string type.
+If the parameter value is not provided, the DefaultParameters of Command will be used to replace it.
+Custom parameters support a maximum of 20 entries. the custom parameter name must meet the following standard: number of characters has a cap of 64, value range [a-zA-Z0-9-_].
          * @type {string || null}
          */
         this.Parameters = null;
@@ -4764,61 +4909,61 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * Launch configuration ID
+         * Launch configuration ID. you can obtain the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or making an api call to [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
 
         /**
-         * Maximum number of instances. Value range: 0-2,000.
+         * Maximum instance count. value range [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize.
          * @type {number || null}
          */
         this.MaxSize = null;
 
         /**
-         * Minimum number of instances. Value range: 0-2,000.
+         * Minimum number of instances. value range: [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize at the same time.
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * VPC ID; if on a basic network, enter an empty string
+         * vpc ID. a valid vpc ID can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc). you can also call the api DescribeVpc (https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) and obtain it from the VpcId field in the api response.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Default cooldown period in seconds. Default value: 300
+         * Default cooldown period in seconds. default value: 300. value range: [0,3600].
          * @type {number || null}
          */
         this.DefaultCooldown = null;
 
         /**
-         * Desired number of instances. The number should be no larger than the maximum and no smaller than minimum number of instances
+         * The expected number of instances, in the range of [0,2000], default value equals current MinSize, and must meet MaxSize >= DesiredCapacity >= MinSize.
          * @type {number || null}
          */
         this.DesiredCapacity = null;
 
         /**
-         * List of classic CLB IDs. Currently, the maximum length is 20. You cannot specify LoadBalancerIds and ForwardLoadBalancers at the same time.
+         * A list of classic load balancer ids with a current maximum length of 20. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * Project ID of an instance in a scaling group. The default project is used if it’s left blank.
+         * Project ID of the instance within the scaling group. default value is 0, indicates usage of the default project. obtain this parameter by calling [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1), `projectId` field in the return value.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * List of application CLBs. Up to 100 CLBs are allowed. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+         * Specifies the list of load balancers with a current maximum length of 100. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
 
         /**
-         * List of subnet IDs. A subnet must be specified in the VPC scenario. If multiple subnets are entered, their priority will be determined by the order in which they are entered, and they will be tried one by one until instances can be successfully created.
+         * The subnet ID list must specify a subnet in VPC scenarios. multiple subnets are attempted sequentially based on the fill-in order as priority until successful instance creation. effective VPC subnet ids can be queried by logging in to the console (https://console.cloud.tencent.com/VPC/subnet) or obtained from the SubnetId field in the API response by calling the DescribeSubnets API (https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
@@ -4858,7 +5003,7 @@ If there is no AZ or subnet in Zones/SubnetIds, a verification error will be rep
         this.ZonesCheckPolicy = null;
 
         /**
-         * List of tag descriptions. In this parameter, you can specify the tags to be bound with a scaling group as well as corresponding resource instances. Each scaling group can have up to 30 tags.
+         * List of Tag descriptions. by specifying this parameter, you can bind tags to a scaling group and corresponding resource instances. each scaling group supports up to 30 tags. you can call the [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) API to retrieve existing Tag key-value pairs based on the response.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -4870,7 +5015,7 @@ If there is no AZ or subnet in Zones/SubnetIds, a verification error will be rep
         this.ServiceSettings = null;
 
         /**
-         * The number of IPv6 addresses that an instance has. Valid values: 0 and 1. Default value: 0.
+         * The number of IPv6 addresses that an instance has. valid values: 0 and 1. default value: 0, which means the instance does not allocate an IPv6 address. use a private network that supports IPv6 and enable IPv6 CIDR in the subnet. for other usage restrictions, see [IPv6 usage limits](https://intl.cloud.tencent.com/document/product/1142/38369?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Ipv6AddressCount = null;
@@ -5385,27 +5530,28 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * Data disk type. For restrictions on the data disk type, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
-<li>LOCAL_BASIC: Local Disk.</li>
-<li>LOCAL_SSD: Local SSD.</li>
-<li>CLOUD_BASIC: Basic Cloud Disk.</li>
-<li>CLOUD_PREMIUM: Premium Disk.</li>
-<li>CLOUD_SSD: Cloud SSD.</li>
-<li>CLOUD_HSSD: Enhanced SSD.</li>
-<li>CLOUD_TSSD: Tremendous SSD.</li>
+         * Data disk type. for restrictions on data disk types, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). valid values:.
+<Li>LOCAL_BASIC: local hard disk.</li>.
+<Li>LOCAL_SSD: local ssd.</li>.
+<Li>CLOUD_BASIC: general cloud disk.</li>.
+<Li>CLOUD_PREMIUM: high-performance cloud block storage</li>.
+<Li>CLOUD_SSD: cloud ssd</li>.
+<Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
+<Li>CLOUD_TSSD: ultra ssd.</li>.
+<Li>CLOUD_BSSD: universal ssd cloud disk</li>.
 The default value is consistent with the system disk type (SystemDisk.DiskType).
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Data disk size, in GB. The minimum adjustment step size is 10 GB. The value range varies according to the data disk type. For specific restrictions, see [CVM instance configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). Default value: 0, which means that no data disk is purchased. For more restrictions, see the product documentation.
+         * Data disk size, in GB. the value range varies according to the data disk type. for specific restrictions, see [CVM instance configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). default value: 0, which means no data disk is purchased. for more restrictions, see the [product documentation](https://intl.cloud.tencent.com/document/product/362/5145?from_cn_redirect=1).
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Data disk snapshot ID, such as `snap-l8psqwnt`.
+         * The data disk snapshot ID can be obtained through the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) api.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -5438,9 +5584,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ThroughputPerformance = null;
 
         /**
-         * Burst performance: Whether to enable burst performance. The default value is false.
-
-Note: This feature is in beta test and requires a ticket to be submitted for usage.
+         * Burst performance. specifies whether to enable burst performance. default value is false. this parameter only supports ultra-fast CLOUD disk (CLOUD_TSSD) and enhanced SSD CLOUD disk (CLOUD_HSSD) with capacity > 460GB.
+Note: this feature is in beta test and requires a ticket to be submitted for usage.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -5510,7 +5655,7 @@ class DeleteScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the alarm policy to be deleted.
+         * The Alarm policy ID to be deleted. you can obtain the Alarm policy ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeScalingPolicies](https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1) and retrieving the AutoScalingPolicyId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingPolicyId = null;
@@ -5547,7 +5692,7 @@ class LoginSettings extends  AbstractModel {
         this.Password = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+         * List of key ids. after associating a key, you can access the instance through the corresponding private key. KeyId can be obtained by calling the api [DescribeKeyPairs](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1). key and password cannot be specified simultaneously. the Windows operating system does not support specifying a key. currently, only one key can be specified during purchase.
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
@@ -5620,13 +5765,17 @@ class DetachInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Auto scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of CVM instance IDs
+         * List of CVM instance ids. you can obtain available instance ids in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -5679,32 +5828,35 @@ class Instance extends  AbstractModel {
         this.LaunchConfigurationName = null;
 
         /**
-         * Lifecycle status. Valid values:<br>
-<li>`IN_SERVICE`: The instance is running.
-<li>`CREATING`: The instance is being created.
-<li>`CREATION_FAILED`: The instance fails to be created.
-<li>`TERMINATING`: The instance is being terminated.
-<li>`TERMINATION_FAILED`: The instance fails to be terminated.
-<li>`ATTACHING`: The instance is being bound.
-<li>`ATTACH_FAILED`: The instance fails to be bound.
-<li>`DETACHING`: The instance is being unbound.
-<li>`DETACH_FAILED`: The instance fails to be unbound.
-<li>`ATTACHING_LB`: The LB is being bound.
-<li>DETACHING_LB: The LB is being unbound.
-<li>`MODIFYING_LB`: The LB is being modified.
-<li>`STARTING`: The instance is being started up.
-<li>`START_FAILED`: The instance fails to be started up.
-<li>`STOPPING`: The instance is being shut down.
-<li>`STOP_FAILED`: The instance fails to be shut down.
-<li>`STOPPED`: The instance is shut down.
-<li>`IN_LAUNCHING_HOOK`: The lifecycle hook is being scaled out.
-<li>`IN_TERMINATING_HOOK`: The lifecycle hook is being scaled in.
+         * Lifecycle status. valid values are as follows:.
+<Li>IN_SERVICE: running</li>.
+<Li>CREATING: specifies the instance is being created.</li>.
+<Li>CREATION_FAILED: creation failed.</li>.
+<Li>`TERMINATING`: the instance is being terminated.</li>.
+<Li>`TERMINATION_FAILED`: the instance fails to be terminated.</li>.
+<Li>ATTACHING: binding</li>.
+<Li>`ATTACH_FAILED`: the instance fails to be bound.</li>.
+<Li>DETACHING: specifies the unbinding is in progress.</li>.
+<Li>`DETACH_FAILED`: the instance fails to be unbound.</li>.
+<Li>`ATTACHING_LB`: binding to lb</li>.
+<Li>DETACHING_LB: the lb is being unbound.</li>.
+<Li>`MODIFYING_LB`: the lb is being modified.</li>.
+<Li>`STARTING`: the instance is being started up.</li>.
+<Li>`START_FAILED`: the instance fails to be started up.</li>.
+<Li>`STOPPING`: the instance is being shut down.</li>.
+<Li>`STOP_FAILED`: the instance fails to be shut down.</li>.
+<Li>`STOPPED`: the instance is shut down.</li>.
+<Li>`IN_LAUNCHING_HOOK`: the lifecycle hook is being scaled out.</li>.
+<Li>`IN_TERMINATING_HOOK`: the lifecycle hook is being scaled in.</li>.
          * @type {string || null}
          */
         this.LifeCycleState = null;
 
         /**
-         * Health status. Value range: HEALTHY, UNHEALTHY
+         * Health status. valid values are as follows:.
+<Li>HEALTHY: the instance is in Healthy status.</li>.
+<Li>UNHEALTHY: instance ping unreachable</li>.
+<Li>CLB_UNHEALTHY: the instance port listened by clb is unhealthy</li>.
          * @type {string || null}
          */
         this.HealthStatus = null;
@@ -5728,7 +5880,7 @@ class Instance extends  AbstractModel {
         this.CreationType = null;
 
         /**
-         * Instance addition time
+         * Instance join time is displayed in a format that conforms to the ISO8601 standard and uses UTC time.
          * @type {string || null}
          */
         this.AddTime = null;
@@ -5752,18 +5904,17 @@ class Instance extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * Warming up status. Valid values:
-<li>`WAITING_ENTER_WARMUP`: The instance is waiting to be warmed up.
-<li>`NO_NEED_WARMUP`: Warming up is not required.
-<li>`IN_WARMUP`: The instance is being warmed up.
-<li>`AFTER_WARMUP`: Warming up is completed.
+         * Preheat status. valid values are as follows:.
+<Li>WAITING_ENTER_WARMUP: specifies the instance is waiting to enter preheating.</li>.
+<Li>`NO_NEED_WARMUP`: warming up is not required.</li>.
+<Li>IN_WARMUP: preheating.</li>.
+<Li>AFTER_WARMUP: indicates the preheating is completed.</li>.
          * @type {string || null}
          */
         this.WarmupStatus = null;
 
         /**
-         * Placement group ID. Only one is allowed.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Placement group ID. Only one can be specified.
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -6031,16 +6182,16 @@ class DescribeScheduledActionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries by one or more scheduled task IDs in the format of asst-am691zxo. The maximum number of instances per request is 100. This parameter does not support specifying both ScheduledActionIds` and `Filters` at the same time.
+         * Query by one or more scheduled task ids. you can obtain the scheduled task ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group). the maximum number of instances per request is 100. parameters ScheduledActionIds and Filters must not be specified simultaneously.
          * @type {Array.<string> || null}
          */
         this.ScheduledActionIds = null;
 
         /**
-         * Filter.
-<li> scheduled-action-id - String - Required: No - (Filter) Filter by scheduled task ID.</li>
-<li> scheduled-action-name - String - Required: No - (Filter) Filter by scheduled task name.</li>
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
+         * Filter criteria. obtain the scheduled task ID, scheduled task name, and scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group).
+<li> scheduled-action-id - String - required: no - (filter) filter by scheduled task id.</li>.
+<li> scheduled-action-name - String - required: no - (filter criteria) filters by scheduled task name.</li>.
+<li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id.</li>.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6128,22 +6279,20 @@ class RefreshBatchRelatedInstance extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Refresh instance status. If an instance is removed or destroyed during the refresh process, its status will be updated to NOT_FOUND. Valid values: <br><li>WAITING: pending refresh.</li> <li>INIT: Initializing.</li> <li>RUNNING: Refreshing in progress.</li> <li>FAILED: Refresh failed.</li> <li>CANCELLED: Canceled.</li> <li>SUCCESSFUL: Refreshed.</li> <li>NOT_FOUND: Instance not found.
+         * Refresh instance status. if the instance is removed or terminated during refresh, the status will be updated to NOT_FOUND. valid values: <li>WAITING: pending refresh;</li> <li>INIT: initializing;</li> <li>RUNNING: refreshing;</li> <li>FAILED: refresh FAILED;</li> <li>CANCELLED: CANCELLED;</li> <li>SUCCESSFUL: refresh SUCCESSFUL;</li> <li>NOT_FOUND: instance does NOT exist.</li>.
          * @type {string || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * The most recent scaling activity ID during instance refresh can be queried via the DescribeAutoScalingActivities API.
+         * The most recent scaling activity ID during instance refresh can be queried via the DescribeAutoScalingActivities api.
 Please note that scaling activities differ from instance refresh activities; a single instance refresh activity may involve multiple scaling activities.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.LastActivityId = null;
 
         /**
-         * Instance refresh status information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Describes the instance refresh status.
          * @type {string || null}
          */
         this.InstanceStatusMessage = null;
@@ -6174,7 +6323,7 @@ class DeleteScheduledActionRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the scheduled task to be deleted.
+         * Scheduled task ID to be deleted. obtain the scheduled task ID by calling the api [DescribeScheduledActions](https://intl.cloud.tencent.com/document/api/377/20450?from_cn_redirect=1) and retrieving the ScheduledActionId from the returned information.
          * @type {string || null}
          */
         this.ScheduledActionId = null;
@@ -6208,12 +6357,10 @@ class DescribeAutoScalingActivitiesRequest extends  AbstractModel {
         this.ActivityIds = null;
 
         /**
-         * Filter.
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-<li> activity-status-code - String - Required: No - (Filter) Filter by scaling activity status . (INIT: initializing | RUNNING: running | SUCCESSFUL: succeeded | PARTIALLY_SUCCESSFUL: partially succeeded | FAILED: failed | CANCELLED: canceled)</li>
-<li> activity-type - String - Required: No - (Filter) Filter by scaling activity type. (SCALE_OUT: scale-out | SCALE_IN: scale-in | ATTACH_INSTANCES: adding an instance | REMOVE_INSTANCES: terminating an instance | DETACH_INSTANCES: removing an instance | TERMINATE_INSTANCES_UNEXPECTEDLY: terminating an instance in the CVM console | REPLACE_UNHEALTHY_INSTANCE: replacing an unhealthy instance | UPDATE_LOAD_BALANCERS: updating a load balancer)</li>
-<li> activity-id - String - Required: No - (Filter) Filter by scaling activity ID.</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `ActivityIds` and `Filters` at the same time.
+         * Filter criteria. the filter field value ranges from...to.
+<ul>
+<li><strong>auto-scaling-group-id</strong><ul><li>Filter by [<strong>scaling group id</strong>]. you can log IN to the [console](https://console.cloud.tencent.com/autoscaling/group) or call the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) to obtain the scaling group id from the returned information.</li><li>type: String</li><li>required: no</li><li>example value: asg-kiju7yt5</li></ul></li>  <li><strong>activity-status-code</strong><ul><li>filter by [<strong>scaling activity status</strong>]</li><li>type: String</li><li>required: no</li><li>options: </li><ul><li>INIT: initializing</li><li>RUNNING: RUNNING</li><li>SUCCESSFUL: SUCCESSFUL activity</li><li>PARTIALLY_SUCCESSFUL: PARTIALLY SUCCESSFUL activity</li><li>FAILED: activity FAILED</li><li>CANCELLED: activity CANCELLED</li></ul></ul></li>  <li><strong>activity-type</strong><ul><li>filter by [<strong>scaling activity type</strong>]</li><li>type: String</li><li>required: no</li><li>options: </li><ul><li>SCALE_OUT: SCALE-OUT activity</li><li>SCALE_IN: SCALE-IN activity</li><li>ATTACH_INSTANCES: adding INSTANCES</li><li>REMOVE_INSTANCES: terminating INSTANCES</li><li>DETACH_INSTANCES: REMOVE INSTANCE</li><li>TERMINATE_INSTANCES_UNEXPECTEDLY: TERMINATE INSTANCE IN CVM console</li><li>REPLACE_UNHEALTHY_INSTANCE: REPLACE UNHEALTHY INSTANCES</li><li>START_INSTANCES: START INSTANCES</li><li>STOP_INSTANCES: shut down INSTANCE</li><li>INVOKE_COMMAND: execute COMMAND</li></ul></ul></li>  <li><strong>activity-id</strong><ul><li>filter by [<strong>scaling activity id</strong>]. you can log IN to the [console](https://console.cloud.tencent.com/autoscaling/group) to obtain the scaling activity id.</li><li>type: String</li><li>required: no</li><li>example value: asa-hy6tr4ed</li></ul></li></ul>.
+The maximum number of `Filters` per request is 10. the upper limit for `Filter.Values` is 5. parameters must not specify both `ActivityIds` and `Filters` simultaneously.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6278,25 +6425,25 @@ class ModifyDesiredCapacityRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Desired capacity
+         * Expected number of instances, value ranges from 0 to 2000, to meet MaxSize >= DesiredCapacity >= MinSize.
          * @type {number || null}
          */
         this.DesiredCapacity = null;
 
         /**
-         * Minimum number of instances. Value range: 0-2000.
+         * Minimum number of instances. value range: [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize at the same time.
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * Maximum number of instances. Value range: 0-2000.
+         * Maximum instance count. value range [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize.
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -6397,7 +6544,9 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -6409,13 +6558,17 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.LifecycleHookName = null;
 
         /**
-         * Scenario for the lifecycle hook. Valid values: "INSTANCE_LAUNCHING" and "INSTANCE_TERMINATING"
+         * Scenario for performing the lifecycle hook. valid values:.
+<Li>`INSTANCE_LAUNCHING`: the lifecycle hook is being scaled out.</li>.
+<Li>`INSTANCE_TERMINATING`: scaling in lifecycle hook</li>.
          * @type {string || null}
          */
         this.LifecycleTransition = null;
 
         /**
-         * Defined actions when lifecycle hook times out. Valid values: "CONTINUE" and "ABANDON". Default value: "CONTINUE"
+         * Action to be taken by the scaling group in case of lifecycle hook timeout or LifecycleCommand execution failure. valid values:.
+<Li>CONTINUE: default value, means continue execution of capacity expansion or reduction</li>.
+<li>ABANDON: for scale-out hooks, CVM instances with hook timeout or failed LifecycleCommand execution will be released directly or removed. for scale-in hooks, scale-in activities will continue.</li>.
          * @type {string || null}
          */
         this.DefaultResult = null;
@@ -6427,7 +6580,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: ""). Up to 1024 characters are allowed.
+         * Additional information of a notification that auto scaling sends to targets. this parameter is set when you configure a notification (default value: ""), with a maximum length of 1024 characters. NotificationMetadata and LifecycleCommand are mutually exclusive, and either can be specified.
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -6439,13 +6592,14 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.NotificationTarget = null;
 
         /**
-         * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
+         * Specifies the scenario type for performing the lifecycle hook. valid values: NORMAL and EXTENSION. default value: NORMAL.
+`EXTENSION`: the lifecycle hook will be triggered when calling [AttachInstances](https://intl.cloud.tencent.com/document/api/377/20441?from_cn_redirect=1), [DetachInstances](https://intl.cloud.tencent.com/document/api/377/20436?from_cn_redirect=1), [removeinstances](https://intl.cloud.tencent.com/document/api/377/20431?from_cn_redirect=1), [StopAutoScalingInstances](https://intl.cloud.tencent.com/document/api/377/40286?from_cn_redirect=1), [StartAutoScalingInstances](https://intl.cloud.tencent.com/document/api/377/40287?from_cn_redirect=1), or [StartInstanceRefresh](https://intl.cloud.tencent.com/document/api/377/99172?from_cn_redirect=1). `NORMAL`: the lifecycle hook is not triggered by these apis.
          * @type {string || null}
          */
         this.LifecycleTransitionType = null;
 
         /**
-         * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+         * Specifies the remote command execution object. NotificationTarget and NotificationMetadata are mutually exclusive with this parameter. either cannot be specified simultaneously.
          * @type {LifecycleCommand || null}
          */
         this.LifecycleCommand = null;
@@ -6515,7 +6669,7 @@ class ScheduledAction extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Repeating mode of the scheduled task.
+         * Specifies the repeating mode of the scheduled task. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hour, date, month, week.
          * @type {string || null}
          */
         this.Recurrence = null;
@@ -6545,7 +6699,7 @@ class ScheduledAction extends  AbstractModel {
         this.MinSize = null;
 
         /**
-         * Creation time of the scheduled task. The value is in `UTC time` in the format of `YYYY-MM-DDThh:mm:ssZ` according to the `ISO8601` standard.
+         * The creation time of the scheduled task. value is in standard `UTC` time, formatted as `YYYY-MM-DDThh:MM:ssZ` according to the `ISO8601` standard.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -6591,29 +6745,29 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
         super();
 
         /**
-         * Lifecycle hook ID.
+         * Lifecycle hook ID. you can get the lifecycle hook ID by calling the api [DescribeLifecycleHooks](https://intl.cloud.tencent.com/document/api/377/34452?from_cn_redirect=1) and retrieving the LifecycleHookId from the returned information.
          * @type {string || null}
          */
         this.LifecycleHookId = null;
 
         /**
-         * Lifecycle hook name.
+         * Lifecycle hook name. Name only supports chinese, english, digits, underscore (_), hyphen (-), decimal point (.), maximum length cannot exceed 128.
          * @type {string || null}
          */
         this.LifecycleHookName = null;
 
         /**
-         * Scenario for entering the lifecycle hook. Valid values:
-<li>INSTANCE_LAUNCHING: after the instance is launched.</li>
-<li>INSTANCE_TERMINATING: before the instance is terminated.</li>
+         * Scenario for entering the lifecycle hook. valid values:.
+`INSTANCE_LAUNCHING`: the lifecycle hook is being scaled out.
+`INSTANCE_TERMINATING`: the lifecycle hook is being scaled in.
          * @type {string || null}
          */
         this.LifecycleTransition = null;
 
         /**
-         * Action to be taken by the scaling group in case of lifecycle hook timeout. Valid values:
-<li>CONTINUE: Continue the scaling activity after timeout.</li>
-<li>ABANDON: Terminate the scaling activity after timeout.</li>
+         * Action to be taken by the scaling group in case of lifecycle hook timeout or LifecycleCommand execution failure. valid values:.
+Default value means CONTINUE to execute capacity expansion or reduction.
+* ABANDON: for scale-out hooks, cvms that time out or fail to execute LifecycleCommand are released directly or removed. for scale-in hooks, scale-in activities continue.
          * @type {string || null}
          */
         this.DefaultResult = null;
@@ -6625,7 +6779,7 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * Additional information sent by AS to the notification target.
+         * Specifies the additional information sent by auto scaling to the notification target. NotificationMetadata and LifecycleCommand are mutually exclusive. the two cannot be specified simultaneously.
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -6637,13 +6791,13 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
         this.LifecycleTransitionType = null;
 
         /**
-         * Information of the notification target.
+         * Notify the target information. NotificationTarget and LifecycleCommand are mutually exclusive. the two cannot be specified simultaneously.
          * @type {NotificationTarget || null}
          */
         this.NotificationTarget = null;
 
         /**
-         * Remote command execution object.
+         * Remote command execution object. `NotificationMetadata`, `NotificationTarget`, and `LifecycleCommand` cannot be specified at the same time.
          * @type {LifecycleCommand || null}
          */
         this.LifecycleCommand = null;
@@ -6752,7 +6906,7 @@ class RefreshSettings extends  AbstractModel {
         super();
 
         /**
-         * Rolling update settings parameters. RefreshMode is the rolling update. This parameter must be filled in.Note: This field may return null, indicating that no valid value can be obtained.
+         * Rolling update settings parameters. RefreshMode is rolling update. this parameter must be filled in.
          * @type {RollingUpdateSettings || null}
          */
         this.RollingUpdateSettings = null;
@@ -6911,20 +7065,27 @@ Default value: CLASSIC_SCALING
         this.ReplaceLoadBalancerUnhealthy = null;
 
         /**
-         * Replace mode of unhealthy replacement service. Valid values:
-RECREATE: Rebuild an instance to replace the original unhealthy instance.
-RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration.
+         * Replacement mode of the unhealthy replacement service. valid values:.
+RECREATE: rebuild an instance to replace the unhealthy instance.
+RESET: performs a system reinstallation on unhealthy instances while keeping the data disk, private IP address, instance id, and other information unchanged. the instance login settings, hostname, enhanced services, and UserData remain consistent with the current launch configuration.
 Default value: RECREATE.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ReplaceMode = null;
 
         /**
-         * Automatic instance tag update. The default value is false. If this feature is enabled, tags of running instances in a scaling group will be updated as well if the scaling group tags are updated. (This feature takes effect for tag creation and editing but not tag deletion.) The update does not take effect immediately due to certain latency.
+         * Automatic instance Tag update. the default value is False. if this feature is enabled, tags of running instances in a scaling group will be updated as well if the scaling group tags are updated. (this feature takes effect for Tag creation and editing but not Tag deletion.) the update does not take effect immediately due to certain latency.
          * @type {boolean || null}
          */
         this.AutoUpdateInstanceTags = null;
+
+        /**
+         * Expected number of instances sync minimum and maximum value. default value is False. this parameter only takes effect in scenarios where the expected number is not passed in to modify scaling group api.
+<Li>True: when modifying the maximum or minimum value, if a conflict exists with the current expected value, synchronously adjust the expected value. for example, if the input minimum value is 2 while the current expected value is 1, the expected value will be synchronously adjusted to 2.</li>.
+<Li>False: if a conflict exists between the current expected value when modifying the maximum or minimum value, an error message indicates it is not allowed to be modified.</li>.
+         * @type {boolean || null}
+         */
+        this.DesiredCapacitySyncWithMaxMinSize = null;
 
     }
 
@@ -6940,6 +7101,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReplaceLoadBalancerUnhealthy = 'ReplaceLoadBalancerUnhealthy' in params ? params.ReplaceLoadBalancerUnhealthy : null;
         this.ReplaceMode = 'ReplaceMode' in params ? params.ReplaceMode : null;
         this.AutoUpdateInstanceTags = 'AutoUpdateInstanceTags' in params ? params.AutoUpdateInstanceTags : null;
+        this.DesiredCapacitySyncWithMaxMinSize = 'DesiredCapacitySyncWithMaxMinSize' in params ? params.DesiredCapacitySyncWithMaxMinSize : null;
 
     }
 }
@@ -6988,13 +7150,13 @@ class TargetAttribute extends  AbstractModel {
         super();
 
         /**
-         * Port
+         * Port. value range: [1,65535]. as an input parameter, this parameter is required.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Weight
+         * Weight. value range: [0,100]. this parameter is required as an input parameter.
          * @type {number || null}
          */
         this.Weight = null;
@@ -7129,33 +7291,38 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID.
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Alarm trigger policy name.
+         * The Alarm policy name must be unique in your account. the name length cannot exceed 60 characters. the name only supports chinese, english, digits, underscores, hyphens, and decimal points.
          * @type {string || null}
          */
         this.ScalingPolicyName = null;
 
         /**
-         * Scaling policy type. Valid values: <br><li>`SIMPLE` (default): A simple policy</li><li>`TARGET_TRACKING`: A target tracking policy</li>.
+         * Alarm trigger policy type. default: SIMPLE. valid values:.
+<Li>`SIMPLE`: a simple policy.</li>.
+<Li>`TARGET_TRACKING`: a target tracking policy.</li>.
          * @type {string || null}
          */
         this.ScalingPolicyType = null;
 
         /**
-         * The method to adjust the desired capacity after the alarm is triggered. It is only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
+         * After an Alarm is triggered, specifies the method for modifying the expected number of instances. required in the scenario of simple policies. valid values:.
+<Li>CHANGE_IN_CAPACITY: increase or decrease the expected number of instances</li>.
+<Li>EXACT_CAPACITY: adjust to the expected number of instances</li>.
+<Li>PERCENT_CHANGE_IN_CAPACITY: adjust expected instance number by percent</li>.
          * @type {string || null}
          */
         this.AdjustmentType = null;
 
         /**
-         * Adjustment value for the expected number of instances after an alarm is triggered, which is applicable only to simple policies.
-<li>When AdjustmentType is set to CHANGE_IN_CAPACITY, a positive value of AdjustmentValue indicates an increase in the number of instances after the alarm is triggered, while a negative value indicates a decrease in the number of instances after the alarm is triggered.</li>
-<li>When AdjustmentType is set to EXACT_CAPACITY, the value of AdjustmentValue indicates the new desired number of instances after the alarm is triggered. It should be greater than or equal to 0.</li>
+         * Adjustment value for the expected number of instances after an Alarm is triggered, which is applicable only to simple policies and required in simple policy scenarios.
+<li>When AdjustmentType is CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase IN instances after Alarm trigger, while a negative value indicates a decrease IN instances after Alarm trigger.</li>. 
+<li>When AdjustmentType is set to EXACT_CAPACITY, the value of AdjustmentValue indicates the new desired number of instances after the Alarm is triggered. it must be at least 0.</li>. 
 <li>When AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, a positive value of AdjustmentValue indicates an increase in the number of instances by a percentage after the alarm is triggered, while a negative value indicates a decrease in the number of instances by a percentage after the alarm is triggered. Unit: %.</li>
          * @type {number || null}
          */
@@ -7168,28 +7335,28 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.Cooldown = null;
 
         /**
-         * Alarm monitoring metric. It is only available when `ScalingPolicyType` is `Simple`.
+         * Alarm monitoring metric, apply only to simple policies, required in the scenario of simple policy.
          * @type {MetricAlarm || null}
          */
         this.MetricAlarm = null;
 
         /**
-         * Predefined monitoring item, applicable only to target tracking policies. Valid values:
-<li>ASG_AVG_CPU_UTILIZATION: average CPU utilization</li>
-<li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth</li>
-<li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth</li>
-<li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth</li>
+         * Predefined monitoring item, applicable only to target tracking policies. required in the scenario. value range:.
+<Li>ASG_AVG_CPU_UTILIZATION: average cpu utilization</li>.
+<Li>ASG_AVG_LAN_TRAFFIC_OUT: specifies the average outbound private network bandwidth.</li>.
+<Li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth</li>.
+<Li>ASG_AVG_WAN_TRAFFIC_OUT: specifies the average outbound public network bandwidth.</li>.
 <li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth</li>
          * @type {string || null}
          */
         this.PredefinedMetricType = null;
 
         /**
-         * Target value, which is applicable only to target tracking policies.
-<li>ASG_AVG_CPU_UTILIZATION: value range: [1, 100); unit: %.</li>
-<li>ASG_AVG_LAN_TRAFFIC_OUT: value range: > 0; unit: Mbps.</li>
-<li>ASG_AVG_LAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>
-<li>ASG_AVG_WAN_TRAFFIC_OUT: value range: > 0; unit: Mbps.</li>
+         * Target value, applicable only to the target tracking policy, required in the scenario.
+<Li>ASG_AVG_CPU_UTILIZATION: value range: [1, 100); unit: %.</li>.
+<li>ASG_AVG_LAN_TRAFFIC_OUT: value range: > 0; unit: Mbps.</li>.
+<li>ASG_AVG_LAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>.
+<li>ASG_AVG_WAN_TRAFFIC_OUT: value range: > 0; unit: Mbps.</li>.
 <li>ASG_AVG_WAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>
          * @type {number || null}
          */
@@ -7255,13 +7422,15 @@ class ResumeInstanceRefreshRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID.
+         * Scaling group ID. obtain in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Refresh activity ID.
+         * Refresh activity ID. you can get the instance refresh activity ID by calling the api [DescribeRefreshActivities](https://intl.cloud.tencent.com/document/api/377/99175?from_cn_redirect=1) and retrieving the RefreshActivityId from the returned information.
          * @type {string || null}
          */
         this.RefreshActivityId = null;
@@ -7297,7 +7466,7 @@ class DescribeAutoScalingAdvicesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of scaling groups to be queried. Upper limit: 100.
+         * The scaling group list to be queried, with an upper limit of 100. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
          * @type {Array.<string> || null}
          */
         this.AutoScalingGroupIds = null;
@@ -7325,7 +7494,7 @@ class DeleteNotificationConfigurationRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the notification to be deleted.
+         * The notification ID to be deleted. this is currently a required parameter. you can obtain the notification ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeNotificationConfigurations](https://intl.cloud.tencent.com/document/api/377/33183?from_cn_redirect=1) and retrieving the AutoScalingNotificationId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingNotificationId = null;
@@ -7418,11 +7587,11 @@ class NotificationTarget extends  AbstractModel {
         super();
 
         /**
-         * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE` and `TDMQ_CMQ_TOPIC`.
-<li> CMQ_QUEUE: Tencent Cloud message queue - queue model.</li>
-<li> CMQ_TOPIC: Tencent Cloud message queue - topic model.</li>
-<li> TDMQ_CMQ_QUEUE: Tencent Cloud TDMQ message queue - queue model.</li>
-<li> TDMQ_CMQ_TOPIC: Tencent Cloud TDMQ message queue - topic model.</li>
+         * Target type. valid values include `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
+<li>CMQ_QUEUE, specifies tencent cloud message QUEUE - queueing model. the corresponding product is offline. it is recommended to switch to TDMQ_CMQ_QUEUE (https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1).</li>.
+<li>CMQ_TOPIC, specifies tencent cloud message queue - TOPIC model. the corresponding product is offline. it is recommended to switch to TDMQ_CMQ_TOPIC (https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1).</li>.
+<li> TDMQ_CMQ_QUEUE. specifies the tencent cloud TDMQ message QUEUE - queueing model.</li>.
+<Li>TDMQ_CMQ_TOPIC. specifies tencent cloud tdmq message queue - topic model.</li>.
          * @type {string || null}
          */
         this.TargetType = null;
@@ -7464,13 +7633,13 @@ class ModifyLoadBalancerTargetAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of application CLBs to modify. Up to 100 CLBs allowed.
+         * Specifies the list of load balancers whose target rule attributes need modification, with a list length limit of 100. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -7507,7 +7676,9 @@ class RollbackInstanceRefreshRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID.
+         * Scaling group ID. you can obtain available scaling group ids in the following ways. 
+<li>Query the scaling group ID by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/group">console</a>.</li>.
+<li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -7519,7 +7690,7 @@ class RollbackInstanceRefreshRequest extends  AbstractModel {
         this.RefreshSettings = null;
 
         /**
-         * Original refresh activity ID.
+         * The original refresh activity ID. you can obtain the original refresh activity ID by calling the api [DescribeRefreshActivities](https://intl.cloud.tencent.com/document/api/377/99175?from_cn_redirect=1) and retrieving the OriginRefreshActivityId from the returned information.
          * @type {string || null}
          */
         this.OriginRefreshActivityId = null;
@@ -7573,8 +7744,8 @@ class StartInstanceRefreshRequest extends  AbstractModel {
         this.RefreshSettings = null;
 
         /**
-         * Refresh mode. Valid values:
-<li>ROLLING_UPDATE_RESET: Reinstall the system for rolling updates.</li>
+         * Refresh mode. default value: ROLLING_UPDATE_RESET. valid values:.
+<Li>ROLLING_UPDATE_RESET: reinstall the system for rolling updates.</li>.
 <li>ROLLING_UPDATE_REPLACE: Create an instance and replace the old instance with it for rolling updates. This mode does not support the rollback API currently.</li>
          * @type {string || null}
          */
@@ -7757,7 +7928,7 @@ class EnableAutoScalingGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. you can obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or making an api call to [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
@@ -7785,13 +7956,15 @@ class StopInstanceRefreshRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID.
+         * Scaling group ID. you can obtain available scaling group ids in the following ways.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Get the scaling group ID by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Refresh activity ID.
+         * Refresh activity ID. you can call the api [DescribeRefreshActivities](https://intl.cloud.tencent.com/document/api/377/99175?from_cn_redirect=1) and obtain the instance refresh activity ID from the returned information.
          * @type {string || null}
          */
         this.RefreshActivityId = null;
@@ -7902,8 +8075,7 @@ class RefreshActivity extends  AbstractModel {
         this.RefreshActivityId = null;
 
         /**
-         * Original refresh activity ID, which exists only in the rollback refresh activity.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Original refresh activity ID. exists only in rollback refresh activity.
          * @type {string || null}
          */
         this.OriginRefreshActivityId = null;
@@ -7915,7 +8087,9 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.RefreshBatchSet = null;
 
         /**
-         * Refresh mode.
+         * Refresh mode. valid values as follows:.
+<Li>ROLLING_UPDATE_RESET: reinstall the system for rolling updates.</li>.
+<li>ROLLING_UPDATE_REPLACE: Create an instance and replace the old instance with it for rolling updates. This mode does not support the rollback API currently.</li>
          * @type {string || null}
          */
         this.RefreshMode = null;
@@ -7949,29 +8123,27 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.Status = null;
 
         /**
-         * Current refresh batch number. For example, a value of 2 indicates that the current activity is refreshing the second batch of instances.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Current refresh batch number. for example, 2 indicates the second batch of instances is being refreshed by the current activity.
          * @type {number || null}
          */
         this.CurrentRefreshBatchNum = null;
 
         /**
-         * Refresh activity start time.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * The activity start time is refreshed in standard `UTC` time, in the format `YYYY-MM-DDTHH:MM:ssZ`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Refresh activity end time.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Refresh activity end time, in standard UTC time, in the format YYYY-MM-DDTHH:MM:ssZ.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Refresh activity creation time.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Refresh activity creation time, in standard UTC time, in the format YYYY-MM-DDTHH:MM:ssZ.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -8023,16 +8195,17 @@ class DescribeNotificationConfigurationsRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries by one or more notification IDs in the format of asn-2sestqbr. The maximum number of instances per request is 100. This parameter does not support specifying both `AutoScalingNotificationIds` and `Filters` at the same time.
+         * Query by one or more notification ids. the list length limit is 100. you can obtain the notification ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group). parameters AutoScalingNotificationIds and Filters must not be specified simultaneously.
          * @type {Array.<string> || null}
          */
         this.AutoScalingNotificationIds = null;
 
         /**
-         * Filter.
-<li> auto-scaling-notification-id - String - Required: No - (Filter) Filter by notification ID.</li>
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `AutoScalingNotificationIds` and `Filters` at the same time.
+         * Filter criteria
+
+<li> auto-scaling-notification-id - String - required: no - (filter) filter by notification id.</li>.
+<li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `AutoScalingNotificationIds` and `Filters` parameters cannot be specified simultaneously.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8083,13 +8256,15 @@ class ScaleInInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * Number of instances to be reduced
+         * Number of resource instances to scale in. this parameter has a static value range of [1,2000] and must not be larger than the difference between the desired number and the minimum value. for example, if the scaling group desired number is 100 and the minimum value is 20, the permissible range is [1,80].
          * @type {number || null}
          */
         this.ScaleInNumber = null;
@@ -8136,19 +8311,23 @@ class LifecycleHook extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * Default result of the lifecycle hook
+         * Action to be taken by the scaling group in case of lifecycle hook timeout or LifecycleCommand execution failure. valid values:.
+-CONTINUE execution by default means capacity expansion or reduction.
+-For scale-out hooks, cvms with hook timeout or failed LifecycleCommand execution will be released directly or removed; for scale-in hooks, scale-in activities will continue.
          * @type {string || null}
          */
         this.DefaultResult = null;
 
         /**
-         * Wait timeout period of the lifecycle hook
+         * Specifies the timeout waiting time of the lifecycle hook in seconds. value range: 30 to 7200.
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
 
         /**
-         * Applicable scenario of the lifecycle hook
+         * Scenario for entering the lifecycle hook. valid values:.
+-`INSTANCE_LAUNCHING`: the lifecycle hook is being scaled out.
+-INSTANCE_TERMINATING: scale-in lifecycle hook.
          * @type {string || null}
          */
         this.LifecycleTransition = null;
@@ -8160,7 +8339,7 @@ class LifecycleHook extends  AbstractModel {
         this.NotificationMetadata = null;
 
         /**
-         * Creation time
+         * Creation time. uses UTC for timing.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -8172,14 +8351,14 @@ class LifecycleHook extends  AbstractModel {
         this.NotificationTarget = null;
 
         /**
-         * Applicable scenario of the lifecycle hook
+         * Specifies the scenario type for performing the lifecycle hook. valid values: NORMAL and EXTENSION. default value: NORMAL.
+Description: when set to `EXTENSION`, the lifecycle hook will be triggered during `AttachInstances`, `DetachInstances`, or `RemoveInstances` API calls. if set to `NORMAL`, the lifecycle hook will not be triggered by these apis.
          * @type {string || null}
          */
         this.LifecycleTransitionType = null;
 
         /**
          * Remote command execution object.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LifecycleCommand || null}
          */
         this.LifecycleCommand = null;
@@ -8227,25 +8406,25 @@ class ForwardLoadBalancer extends  AbstractModel {
         super();
 
         /**
-         * Load balancer ID
+         * ID of the load balancer. this parameter is required as an input parameter. you can obtain it through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Application load balancer listener ID
+         * CLB listener ID. as an input parameter, this parameter is required. you can obtain it through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * List of target rule attributes
+         * Target rule attribute list. as an input parameter, this parameter is required.
          * @type {Array.<TargetAttribute> || null}
          */
         this.TargetAttributes = null;
 
         /**
-         * ID of a forwarding rule. This parameter is required for layer-7 listeners.
+         * The forwarding rule ID. note: this parameter is required for layer-7 (http/https) listeners. it can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.LocationId = null;
@@ -8291,7 +8470,9 @@ class ClearLaunchConfigurationAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Launch configuration ID
+         * Launch configuration ID. obtain in the following ways:.
+<li>Queries the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config).</li>.
+<li>Get the launch configuration ID by calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
          * @type {string || null}
          */
         this.LaunchConfigurationId = null;
@@ -8395,30 +8576,18 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * Application CLB IDs
+ * DeleteAutoScalingGroup request structure.
  * @class
  */
-class ForwardLoadBalancerIdentification extends  AbstractModel {
+class DeleteAutoScalingGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the CLB
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * Application CLB listener ID
-         * @type {string || null}
-         */
-        this.ListenerId = null;
-
-        /**
-         * ID of a forwarding rule. This parameter is required for layer-7 listeners.
-         * @type {string || null}
-         */
-        this.LocationId = null;
+        this.AutoScalingGroupId = null;
 
     }
 
@@ -8429,9 +8598,7 @@ class ForwardLoadBalancerIdentification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
 
     }
 }
@@ -8498,13 +8665,17 @@ class StartAutoScalingInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * The scaling group ID.
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * The list of the CVM instances you want to start up.
+         * Specifies the instance ID list of CVM to enable. you can obtain available instance ID in the following ways.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -8533,13 +8704,17 @@ class AttachInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto scaling group ID
+         * Scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of CVM instance IDs
+         * CVM instance ID list. you can obtain available instance ID in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -8596,19 +8771,19 @@ class AttachLoadBalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * Scaling group ID
+         * Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * List of classic CLB IDs. Up to 20 classic CLBs can be bound to a security group. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+         * Specifies a list of classic clb ids. each scaling group can bind a maximum of 20 classic clbs. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * List of application CLBs. Up to 100 application CLBs can be bound to a scaling group. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+         * Specifies the list of load balancers. each scaling group can bind a maximum of 100 application clbs. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -8706,25 +8881,29 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         super();
 
         /**
-         * Lifecycle hook ID
+         * Lifecycle hook ID. you can call the api [DescribeLifecycleHooks](https://intl.cloud.tencent.com/document/api/377/34452?from_cn_redirect=1) and retrieve the LifecycleHookId from the returned information to obtain the lifecycle hook ID.
          * @type {string || null}
          */
         this.LifecycleHookId = null;
 
         /**
-         * Lifecycle hook name
+         * Lifecycle hook name, which can contain chinese characters, letters, numbers, underscores (_), hyphens (-), and periods (.) with a maximum length of 128 characters.
          * @type {string || null}
          */
         this.LifecycleHookName = null;
 
         /**
-         * Scenario for the lifecycle hook. Value range: "INSTANCE_LAUNCHING", "INSTANCE_TERMINATING"
+         * Scenario for performing the lifecycle hook. valid values:.
+`INSTANCE_LAUNCHING`: the lifecycle hook is being scaled out.
+`INSTANCE_TERMINATING`: the lifecycle hook is being scaled in.
          * @type {string || null}
          */
         this.LifecycleTransition = null;
 
         /**
-         * Defines the action to be taken by the auto scaling group upon lifecycle hook timeout. Value range: "CONTINUE", "ABANDON". Default value: "CONTINUE"
+         * Action to be taken by the scaling group in case of lifecycle hook timeout or LifecycleCommand execution failure. valid values are as follows:.
+Default value, means CONTINUE to execute capacity expansion or reduction.
+* ABANDON: for scale-out hooks, cvms that time out or fail to execute LifecycleCommand will be released directly or removed. for scale-in hooks, scale-in activities will continue.
          * @type {string || null}
          */
         this.DefaultResult = null;
@@ -8736,7 +8915,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: "").
+         * Additional information sent by auto scaling to notification targets, used when configuring a notification (default value: ""). NotificationMetadata and LifecycleCommand are mutually exclusive parameters and cannot be specified simultaneously.
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -8754,7 +8933,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.LifecycleTransitionType = null;
 
         /**
-         * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+         * Remote command execution object. `NotificationMetadata`, `NotificationTarget`, and `LifecycleCommand` are mutually exclusive and cannot be specified simultaneously.
          * @type {LifecycleCommand || null}
          */
         this.LifecycleCommand = null;
@@ -8870,7 +9049,7 @@ class DescribeScalingPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * Information on eligible scaling activities.
+ * Information of auto scaling activity.
  * @class
  */
 class Activity extends  AbstractModel {
@@ -8891,16 +9070,16 @@ class Activity extends  AbstractModel {
 
         /**
          * Scaling activity type. Valid values:
-<li>SCALE_OUT: Scale out an instance.</li>
-<li>SCALE_IN: Scale in an instance.</li>
-<li>ATTACH_INSTANCES: Add an instance.</li>
-<li>REMOVE_INSTANCES: Terminate an instance.</li>
-<li>DETACH_INSTANCES: Remove an instance.</li>
-<li>TERMINATE_INSTANCES_UNEXPECTEDLY: Terminate an instance in the CVM console.</li>
-<li>REPLACE_UNHEALTHY_INSTANCE: Replace an unhealthy instance.</li>
-<li>START_INSTANCES: Start an instance.</li>
-<li>STOP_INSTANCES: Stop an instance.</li>
-<li>INVOKE_COMMAND: Execute a command.</li>
+<li>SCALE_OUT: Scale out instance(s).</li>
+<li>SCALE_IN: Scale in instance(s).</li>
+<li>ATTACH_INSTANCES: Add instance(s).</li>
+<li>REMOVE_INSTANCES: Terminate instance(s).</li>
+<li>DETACH_INSTANCES: Remove instance(s).</li>
+<li>TERMINATE_INSTANCES_UNEXPECTEDLY: Instance(s) unexpectedly terminated in the CVM console.</li>
+<li>REPLACE_UNHEALTHY_INSTANCE: Replace unhealthy instance(s).</li>
+<li>START_INSTANCES: Start instance(s).</li>
+<li>STOP_INSTANCES: Stop instance(s).</li>
+<li>INVOKE_COMMAND: Execute a command in instance(s).</li>
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -8936,19 +9115,19 @@ class Activity extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Start time of the scaling activity.
+         * Start time of the auto scaling activity in UTC standard time.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of the scaling activity.
+         * End time of the scaling activity in UTC standard time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Creation time of the scaling activity.
+         * Create time of the scaling activity in UTC standard time.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -8972,7 +9151,7 @@ class Activity extends  AbstractModel {
         this.LifecycleActionResultSet = null;
 
         /**
-         * Detailed description of scaling activity status
+         * Detailed description of the scaling activity status
          * @type {Array.<DetailedStatusMessage> || null}
          */
         this.DetailedStatusMessageSet = null;
@@ -8984,7 +9163,7 @@ class Activity extends  AbstractModel {
         this.InvocationResultSet = null;
 
         /**
-         * Information set of the instances related to the scaling activity.
+         * Related instance information set of the scaling activity.
          * @type {Array.<RelatedInstance> || null}
          */
         this.RelatedInstanceSet = null;
@@ -9095,13 +9274,17 @@ class StopAutoScalingInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * The scaling group ID.
+         * Auto scaling group ID. obtain available scaling group ids in the following ways:.
+<li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+<li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
          * @type {string || null}
          */
         this.AutoScalingGroupId = null;
 
         /**
-         * The list of the CVM instances you want to shut down.
+         * List of CVM instance ids to be closed. you can obtain available instance ids in the following ways:.
+<li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
+<li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -9275,25 +9458,25 @@ class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * The instance ID.
+         * Instance ID. you can get the instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index) or making an api call to [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * The minimum number of instances. Value range: 0-2000.
+         * Minimum number of instances. value range: [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize at the same time.
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * The maximum number of instances. Value range: 0-2000.
+         * Maximum instance count. value range [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize.
          * @type {number || null}
          */
         this.MaxSize = null;
 
         /**
-         * The desired capacity. Its value must be greater than the minimum and smaller than the maximum.
+         * Expected number of instances, value ranges from 0 to 2000, default value equals current MinSize, to meet MaxSize >= DesiredCapacity >= MinSize.
          * @type {number || null}
          */
         this.DesiredCapacity = null;
@@ -9359,6 +9542,47 @@ Note: this field may return null, indicating that no valid value was found.
          */
         this.BandwidthPackageId = null;
 
+        /**
+         * Describes the line type. For details, refer to [EIP Product Overview](https://intl.cloud.tencent.com/document/product/1199/41646?from_cn_redirect=1). default value: `BGP`.
+
+<Li>BGP: general bgp line.</li>
+For a user who has enabled the static single-line IP allowlist, valid values include:
+ <li>CMCC: China Mobile</li> <li>CTCC: China Telecom</li> <li>CUCC: China Unicom</li>
+Note: Only certain regions support static single-line IP addresses.
+
+
+         * @type {string || null}
+         */
+        this.InternetServiceProvider = null;
+
+        /**
+         * Type of public IP address.
+
+<li> WanIP: Ordinary public IP address. </li> <li> HighQualityEIP: High Quality EIP is supported only in Singapore and Hong Kong. </li> <li> AntiDDoSEIP: Anti-DDoS IP is supported only in specific regions. For details, see [EIP Product Overview](https://cloud.tencent.com/document/product/1199/41646). </li> Specify the type of public IPv4 address to assign a public IPv4 address to the resource. Premium IP and Anti-DDoS IP features are gradually released in select regions. For usage, [submit a ticket for consultation](https://console.cloud.tencent.com/workorder/category).
+         * @type {string || null}
+         */
+        this.IPv4AddressType = null;
+
+        /**
+         * Anti-DDoS service package ID. This is required when you want to request an Anti-DDoS IP.
+         * @type {string || null}
+         */
+        this.AntiDDoSPackageId = null;
+
+        /**
+         * Whether to delete the bound EIP when the instance is destroyed.
+
+Range of values:
+
+<li>TRUE: retain the EIP</li> <li>FALSE: not retain the EIP</li>
+
+Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. 
+WanIP is unaffected by this field and will always be deleted with the instance. 
+Changing this field configuration will take effect immediately for resources already bound to a scaling group.
+         * @type {boolean || null}
+         */
+        this.IsKeepEIP = null;
+
     }
 
     /**
@@ -9372,6 +9596,10 @@ Note: this field may return null, indicating that no valid value was found.
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
+        this.IPv4AddressType = 'IPv4AddressType' in params ? params.IPv4AddressType : null;
+        this.AntiDDoSPackageId = 'AntiDDoSPackageId' in params ? params.AntiDDoSPackageId : null;
+        this.IsKeepEIP = 'IsKeepEIP' in params ? params.IsKeepEIP : null;
 
     }
 }
@@ -9504,7 +9732,7 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Auto-scaling policy ID. This parameter is not available to a target tracking policy.
+         * Alarm scaling policy ID. target tracking policy is unsupported. the alert policy type can be obtained via the `ScalingPolicyType` parameter in the api response of [DescribeScalingPolicies](https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1).
          * @type {string || null}
          */
         this.AutoScalingPolicyId = null;
@@ -9553,6 +9781,7 @@ module.exports = {
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     RelatedInstance: RelatedInstance,
     Advice: Advice,
+    EnterStandbyRequest: EnterStandbyRequest,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
     ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
@@ -9567,7 +9796,7 @@ module.exports = {
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
     AttachLoadBalancersResponse: AttachLoadBalancersResponse,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,
-    DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
+    ForwardLoadBalancerIdentification: ForwardLoadBalancerIdentification,
     SetInstancesProtectionResponse: SetInstancesProtectionResponse,
     StartAutoScalingInstancesResponse: StartAutoScalingInstancesResponse,
     CompleteLifecycleActionRequest: CompleteLifecycleActionRequest,
@@ -9612,6 +9841,7 @@ module.exports = {
     ModifyScalingPolicyRequest: ModifyScalingPolicyRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     RefreshBatch: RefreshBatch,
+    EnterStandbyResponse: EnterStandbyResponse,
     UpgradeLifecycleHookResponse: UpgradeLifecycleHookResponse,
     InstanceTag: InstanceTag,
     ModifyLifecycleHookResponse: ModifyLifecycleHookResponse,
@@ -9678,7 +9908,7 @@ module.exports = {
     ForwardLoadBalancer: ForwardLoadBalancer,
     ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,
     InstanceNameIndexSettings: InstanceNameIndexSettings,
-    ForwardLoadBalancerIdentification: ForwardLoadBalancerIdentification,
+    DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     AutoScalingAdvice: AutoScalingAdvice,
     StartAutoScalingInstancesRequest: StartAutoScalingInstancesRequest,
     AttachInstancesRequest: AttachInstancesRequest,

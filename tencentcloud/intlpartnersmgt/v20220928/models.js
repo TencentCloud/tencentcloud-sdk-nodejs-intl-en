@@ -2982,7 +2982,7 @@ class QueryCustomersCreditRequest extends  AbstractModel {
         super();
 
         /**
-         * Search condition type. You can only search by customer ID, name, remarks, or email.
+         * Search condition type. You can only search by ClientUin, Name, Remark, or Email.
          * @type {string || null}
          */
         this.FilterType = null;

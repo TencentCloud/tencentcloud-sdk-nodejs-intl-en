@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const InvoiceItem = models.InvoiceItem;
 const RecognizeMexicoVTIDResponse = models.RecognizeMexicoVTIDResponse;
 const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
+const ExtractDocMultiRequest = models.ExtractDocMultiRequest;
 const RecognizeBrazilIDCardOCRRequest = models.RecognizeBrazilIDCardOCRRequest;
 const RecognizePhilippinesDrivingLicenseOCRRequest = models.RecognizePhilippinesDrivingLicenseOCRRequest;
 const WordItem = models.WordItem;
@@ -33,6 +34,7 @@ const Rect = models.Rect;
 const LicensePlateInfo = models.LicensePlateInfo;
 const VatRollItem = models.VatRollItem;
 const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
+const WordPolygon = models.WordPolygon;
 const FlightItem = models.FlightItem;
 const Value = models.Value;
 const SealInfo = models.SealInfo;
@@ -54,7 +56,7 @@ const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
 const BusInvoice = models.BusInvoice;
 const RecognizeGeneralInvoiceRequest = models.RecognizeGeneralInvoiceRequest;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
-const PermitOCRRequest = models.PermitOCRRequest;
+const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const OtherInvoice = models.OtherInvoice;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const BankCardOCRRequest = models.BankCardOCRRequest;
@@ -66,9 +68,10 @@ const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
 const GroupInfo = models.GroupInfo;
 const QuotaInvoice = models.QuotaInvoice;
-const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
+const PermitOCRRequest = models.PermitOCRRequest;
 const SingleInvoiceItem = models.SingleInvoiceItem;
 const VatInvoiceInfo = models.VatInvoiceInfo;
+const ExtractDocMultiResponse = models.ExtractDocMultiResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
 const MachinePrintedInvoice = models.MachinePrintedInvoice;
 const RecognizeKoreanIDCardOCRResponse = models.RecognizeKoreanIDCardOCRResponse;
@@ -104,6 +107,7 @@ const TableInfo = models.TableInfo;
 const VinOCRResponse = models.VinOCRResponse;
 const RecognizeKoreanDrivingLicenseOCRResponse = models.RecognizeKoreanDrivingLicenseOCRResponse;
 const VatElectronicItemInfo = models.VatElectronicItemInfo;
+const ConfigAdvanced = models.ConfigAdvanced;
 const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
 const ItemCoord = models.ItemCoord;
 const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
@@ -763,6 +767,21 @@ The invoice/ticket subtype (SubType), subtype description (TypeDescription), and
     RecognizeGeneralInvoice(req, cb) {
         let resp = new RecognizeGeneralInvoiceResponse();
         this.request("RecognizeGeneralInvoice", req, resp, cb);
+    }
+
+    /**
+     * This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
+
+This API is used to set the alias SmartStructuralPro.
+
+The default API request rate limit is 5 requests per second.
+     * @param {ExtractDocMultiRequest} req
+     * @param {function(string, ExtractDocMultiResponse):void} cb
+     * @public
+     */
+    ExtractDocMulti(req, cb) {
+        let resp = new ExtractDocMultiResponse();
+        this.request("ExtractDocMulti", req, resp, cb);
     }
 
 

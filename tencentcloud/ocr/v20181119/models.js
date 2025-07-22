@@ -317,6 +317,129 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 }
 
 /**
+ * ExtractDocMulti request structure.
+ * @class
+ */
+class ExtractDocMultiRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Url address of the image. supported image formats: PNG, JPG, JPEG, WORD, EXCEL. GIF format is not currently supported. supported image size: no more than 10M after Base64 encoding. image download time should not exceed 3 seconds. supported image pixels: between 20-10000px. images stored in tencent cloud's Url ensure higher download speed and stability. it is recommended to store images in tencent cloud. the speed and stability of non-tencent cloud storage urls may be impacted.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * The Base64 value of the image. supported image formats: PNG, JPG, JPEG, WORD, EXCEL. GIF format is not currently supported. supported image size: no more than 10M after encoding the downloaded image with Base64. image download time: no more than 3 seconds. supported image pixels: between 20-10000px. either ImageUrl or ImageBase64 must be provided. if both are provided, only use ImageUrl.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * Specifies the page number of the PDF to be recognized. only single page recognition is supported. valid when uploading a PDF file with the IsPdf parameter set to true. default value is the first 3 pages.
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
+
+        /**
+         * Specifies the field names to be returned by the customized structuring feature. for example, if the customer wants to add the recognition result of two fields, name and gender, manually input ItemNames=["name","gender"].
+         * @type {Array.<string> || null}
+         */
+        this.ItemNames = null;
+
+        /**
+         * true: only custom field.
+False: default value field + custom field.
+Default true.
+         * @type {boolean || null}
+         */
+        this.ItemNamesShowMode = null;
+
+        /**
+         * Whether the full-text field recognition is enabled.
+         * @type {boolean || null}
+         */
+        this.ReturnFullText = null;
+
+        /**
+         * Configuration ID support: 
+-- General
+-- InvoiceEng
+-- WayBillEng
+-- CustomsDeclaration
+-- WeightNote
+-- MedicalMeter
+-- BillOfLading
+-- EntrustmentBook
+-- Statement
+-- BookingConfirmation
+-- AirWayBill
+-- Table
+-- SteelLabel
+-- CarInsurance
+-- MultiRealEstateCertificate
+-- MultiRealEstateMaterial
+-- HongKongUtilityBill
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * Whether the full-text field coordinate value recognition is enabled.
+         * @type {boolean || null}
+         */
+        this.EnableCoord = null;
+
+        /**
+         * Whether parent-child key recognition is enabled. the option is selected by default.
+         * @type {boolean || null}
+         */
+        this.OutputParentKey = null;
+
+        /**
+         * Single attribute configuration of a template.
+         * @type {ConfigAdvanced || null}
+         */
+        this.ConfigAdvanced = null;
+
+        /**
+         * When cn, the added key is chinese.  
+When set to en, the added key is english.
+         * @type {string || null}
+         */
+        this.OutputLanguage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
+        this.ItemNames = 'ItemNames' in params ? params.ItemNames : null;
+        this.ItemNamesShowMode = 'ItemNamesShowMode' in params ? params.ItemNamesShowMode : null;
+        this.ReturnFullText = 'ReturnFullText' in params ? params.ReturnFullText : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.EnableCoord = 'EnableCoord' in params ? params.EnableCoord : null;
+        this.OutputParentKey = 'OutputParentKey' in params ? params.OutputParentKey : null;
+
+        if (params.ConfigAdvanced) {
+            let obj = new ConfigAdvanced();
+            obj.deserialize(params.ConfigAdvanced)
+            this.ConfigAdvanced = obj;
+        }
+        this.OutputLanguage = 'OutputLanguage' in params ? params.OutputLanguage : null;
+
+    }
+}
+
+/**
  * RecognizeBrazilIDCardOCR request structure.
  * @class
  */
@@ -441,6 +564,18 @@ class WordItem extends  AbstractModel {
          */
         this.Coord = null;
 
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * Specifies the four-point coordinate of the word.
+         * @type {Array.<WordPolygon> || null}
+         */
+        this.WordCoord = null;
+
     }
 
     /**
@@ -456,6 +591,16 @@ class WordItem extends  AbstractModel {
             let obj = new Polygon();
             obj.deserialize(params.Coord)
             this.Coord = obj;
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.WordCoord) {
+            this.WordCoord = new Array();
+            for (let z in params.WordCoord) {
+                let obj = new WordPolygon();
+                obj.deserialize(params.WordCoord[z]);
+                this.WordCoord.push(obj);
+            }
         }
 
     }
@@ -1226,6 +1371,46 @@ class HmtResidentPermitOCRResponse extends  AbstractModel {
         this.VisaNum = 'VisaNum' in params ? params.VisaNum : null;
         this.PassNo = 'PassNo' in params ? params.PassNo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Word coordinates info.
+ * @class
+ */
+class WordPolygon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The text content.
+         * @type {string || null}
+         */
+        this.DetectedText = null;
+
+        /**
+         * The coordinates of the four vertices.
+         * @type {Polygon || null}
+         */
+        this.Coord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
+
+        if (params.Coord) {
+            let obj = new Polygon();
+            obj.deserialize(params.Coord)
+            this.Coord = obj;
+        }
 
     }
 }
@@ -2791,37 +2976,128 @@ class GeneralBasicOCRResponse extends  AbstractModel {
 }
 
 /**
- * PermitOCR request structure.
+ * RecognizeThaiIDCardOCR response structure.
  * @class
  */
-class PermitOCRRequest extends  AbstractModel {
+class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded value of the image.
-Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
-Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * ID card number
          * @type {string || null}
          */
-        this.ImageBase64 = null;
+        this.ID = null;
 
         /**
-         * The URL of the image.
-Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
-We recommend that you store the image in Tencent Cloud for higher download speed and stability.
-The download speed and stability of non-Tencent Cloud URLs may be low.
+         * Name in Thai
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.ThaiName = null;
 
         /**
-         * Whether to return the profile photo, default is false.
-         * @type {boolean || null}
+         * Name in English
+         * @type {string || null}
          */
-        this.CropPortrait = null;
+        this.EnFirstName = null;
+
+        /**
+         * Name in English
+         * @type {string || null}
+         */
+        this.EnLastName = null;
+
+        /**
+         * Date of issue in Thai
+         * @type {string || null}
+         */
+        this.IssueDate = null;
+
+        /**
+         * Expiration date in Thai
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * Date of issue in English
+         * @type {string || null}
+         */
+        this.EnIssueDate = null;
+
+        /**
+         * Expiration date in English
+         * @type {string || null}
+         */
+        this.EnExpirationDate = null;
+
+        /**
+         * Date of birth in Thai
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * Date of birth in English
+         * @type {string || null}
+         */
+        this.EnBirthday = null;
+
+        /**
+         * Religion
+         * @type {string || null}
+         */
+        this.Religion = null;
+
+        /**
+         * Serial number
+         * @type {string || null}
+         */
+        this.SerialNumber = null;
+
+        /**
+         * Address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * LaserID in the back of the card.
+         * @type {string || null}
+         */
+        this.LaserID = null;
+
+        /**
+         * Identity photo
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * Card Warning Information
+
+-9101 Alarm for covered certificate,
+-9102 Alarm for photocopied certificate,
+-9103 Alarm for photographed certificate,
+-9107 Alarm for reflective certificate,
+-9108 Alarm for blurry image,
+-9109 This capability is not enabled.
+         * @type {Array.<number> || null}
+         */
+        this.WarnCardInfos = null;
+
+        /**
+         * Field confidence:
+ { "ID": { "Confidence": 0.9999 }, "ThaiName": { "Confidence": 0.9996 } }
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2832,9 +3108,24 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ThaiName = 'ThaiName' in params ? params.ThaiName : null;
+        this.EnFirstName = 'EnFirstName' in params ? params.EnFirstName : null;
+        this.EnLastName = 'EnLastName' in params ? params.EnLastName : null;
+        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.EnIssueDate = 'EnIssueDate' in params ? params.EnIssueDate : null;
+        this.EnExpirationDate = 'EnExpirationDate' in params ? params.EnExpirationDate : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.EnBirthday = 'EnBirthday' in params ? params.EnBirthday : null;
+        this.Religion = 'Religion' in params ? params.Religion : null;
+        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.LaserID = 'LaserID' in params ? params.LaserID : null;
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
+        this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3636,128 +3927,37 @@ class QuotaInvoice extends  AbstractModel {
 }
 
 /**
- * RecognizeThaiIDCardOCR response structure.
+ * PermitOCR request structure.
  * @class
  */
-class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
+class PermitOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID card number
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
          * @type {string || null}
          */
-        this.ID = null;
+        this.ImageBase64 = null;
 
         /**
-         * Name in Thai
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
          * @type {string || null}
          */
-        this.ThaiName = null;
+        this.ImageUrl = null;
 
         /**
-         * Name in English
-         * @type {string || null}
+         * Whether to return the profile photo, default is false.
+         * @type {boolean || null}
          */
-        this.EnFirstName = null;
-
-        /**
-         * Name in English
-         * @type {string || null}
-         */
-        this.EnLastName = null;
-
-        /**
-         * Date of issue in Thai
-         * @type {string || null}
-         */
-        this.IssueDate = null;
-
-        /**
-         * Expiration date in Thai
-         * @type {string || null}
-         */
-        this.ExpirationDate = null;
-
-        /**
-         * Date of issue in English
-         * @type {string || null}
-         */
-        this.EnIssueDate = null;
-
-        /**
-         * Expiration date in English
-         * @type {string || null}
-         */
-        this.EnExpirationDate = null;
-
-        /**
-         * Date of birth in Thai
-         * @type {string || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * Date of birth in English
-         * @type {string || null}
-         */
-        this.EnBirthday = null;
-
-        /**
-         * Religion
-         * @type {string || null}
-         */
-        this.Religion = null;
-
-        /**
-         * Serial number
-         * @type {string || null}
-         */
-        this.SerialNumber = null;
-
-        /**
-         * Address
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * LaserID in the back of the card.
-         * @type {string || null}
-         */
-        this.LaserID = null;
-
-        /**
-         * Identity photo
-         * @type {string || null}
-         */
-        this.PortraitImage = null;
-
-        /**
-         * Card Warning Information
-
--9101 Alarm for covered certificate,
--9102 Alarm for photocopied certificate,
--9103 Alarm for photographed certificate,
--9107 Alarm for reflective certificate,
--9108 Alarm for blurry image,
--9109 This capability is not enabled.
-         * @type {Array.<number> || null}
-         */
-        this.WarnCardInfos = null;
-
-        /**
-         * Field confidence:
- { "ID": { "Confidence": 0.9999 }, "ThaiName": { "Confidence": 0.9996 } }
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.CropPortrait = null;
 
     }
 
@@ -3768,24 +3968,9 @@ class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ID = 'ID' in params ? params.ID : null;
-        this.ThaiName = 'ThaiName' in params ? params.ThaiName : null;
-        this.EnFirstName = 'EnFirstName' in params ? params.EnFirstName : null;
-        this.EnLastName = 'EnLastName' in params ? params.EnLastName : null;
-        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
-        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
-        this.EnIssueDate = 'EnIssueDate' in params ? params.EnIssueDate : null;
-        this.EnExpirationDate = 'EnExpirationDate' in params ? params.EnExpirationDate : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.EnBirthday = 'EnBirthday' in params ? params.EnBirthday : null;
-        this.Religion = 'Religion' in params ? params.Religion : null;
-        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.LaserID = 'LaserID' in params ? params.LaserID : null;
-        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
-        this.WarnCardInfos = 'WarnCardInfos' in params ? params.WarnCardInfos : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.CropPortrait = 'CropPortrait' in params ? params.CropPortrait : null;
 
     }
 }
@@ -4440,6 +4625,78 @@ class VatInvoiceInfo extends  AbstractModel {
         this.ElectronicFullMark = 'ElectronicFullMark' in params ? params.ElectronicFullMark : null;
         this.ElectronicFullNumber = 'ElectronicFullNumber' in params ? params.ElectronicFullNumber : null;
         this.FormName = 'FormName' in params ? params.FormName : null;
+
+    }
+}
+
+/**
+ * ExtractDocMulti response structure.
+ * @class
+ */
+class ExtractDocMultiResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image rotation angle (angle system). the text's horizontal direction is 0. clockwise is positive; counterclockwise is negative.
+         * @type {number || null}
+         */
+        this.Angle = null;
+
+        /**
+         * Configures the structured text info.
+         * @type {Array.<GroupInfo> || null}
+         */
+        this.StructuralList = null;
+
+        /**
+         * Restore text information.
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordList = null;
+
+        /**
+         * Number of sample identification fields.
+         * @type {number || null}
+         */
+        this.TokenNum = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Angle = 'Angle' in params ? params.Angle : null;
+
+        if (params.StructuralList) {
+            this.StructuralList = new Array();
+            for (let z in params.StructuralList) {
+                let obj = new GroupInfo();
+                obj.deserialize(params.StructuralList[z]);
+                this.StructuralList.push(obj);
+            }
+        }
+
+        if (params.WordList) {
+            this.WordList = new Array();
+            for (let z in params.WordList) {
+                let obj = new WordItem();
+                obj.deserialize(params.WordList[z]);
+                this.WordList.push(obj);
+            }
+        }
+        this.TokenNum = 'TokenNum' in params ? params.TokenNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8457,6 +8714,34 @@ class VatElectronicItemInfo extends  AbstractModel {
 }
 
 /**
+ * Supports single attribute configuration for templates.
+ * @class
+ */
+class ConfigAdvanced extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Single attribute configuration of a template.
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = 'Scene' in params ? params.Scene : null;
+
+    }
+}
+
+/**
  * RecognizePhilippinesVoteIDOCR response structure.
  * @class
  */
@@ -10998,6 +11283,7 @@ module.exports = {
     InvoiceItem: InvoiceItem,
     RecognizeMexicoVTIDResponse: RecognizeMexicoVTIDResponse,
     HKIDCardOCRRequest: HKIDCardOCRRequest,
+    ExtractDocMultiRequest: ExtractDocMultiRequest,
     RecognizeBrazilIDCardOCRRequest: RecognizeBrazilIDCardOCRRequest,
     RecognizePhilippinesDrivingLicenseOCRRequest: RecognizePhilippinesDrivingLicenseOCRRequest,
     WordItem: WordItem,
@@ -11012,6 +11298,7 @@ module.exports = {
     LicensePlateInfo: LicensePlateInfo,
     VatRollItem: VatRollItem,
     HmtResidentPermitOCRResponse: HmtResidentPermitOCRResponse,
+    WordPolygon: WordPolygon,
     FlightItem: FlightItem,
     Value: Value,
     SealInfo: SealInfo,
@@ -11033,7 +11320,7 @@ module.exports = {
     BusInvoice: BusInvoice,
     RecognizeGeneralInvoiceRequest: RecognizeGeneralInvoiceRequest,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
-    PermitOCRRequest: PermitOCRRequest,
+    RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
     OtherInvoice: OtherInvoice,
     RecognizePhilippinesUMIDOCRRequest: RecognizePhilippinesUMIDOCRRequest,
     BankCardOCRRequest: BankCardOCRRequest,
@@ -11045,9 +11332,10 @@ module.exports = {
     HKIDCardOCRResponse: HKIDCardOCRResponse,
     GroupInfo: GroupInfo,
     QuotaInvoice: QuotaInvoice,
-    RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
+    PermitOCRRequest: PermitOCRRequest,
     SingleInvoiceItem: SingleInvoiceItem,
     VatInvoiceInfo: VatInvoiceInfo,
+    ExtractDocMultiResponse: ExtractDocMultiResponse,
     RecognizePhilippinesSssIDOCRResponse: RecognizePhilippinesSssIDOCRResponse,
     MachinePrintedInvoice: MachinePrintedInvoice,
     RecognizeKoreanIDCardOCRResponse: RecognizeKoreanIDCardOCRResponse,
@@ -11083,6 +11371,7 @@ module.exports = {
     VinOCRResponse: VinOCRResponse,
     RecognizeKoreanDrivingLicenseOCRResponse: RecognizeKoreanDrivingLicenseOCRResponse,
     VatElectronicItemInfo: VatElectronicItemInfo,
+    ConfigAdvanced: ConfigAdvanced,
     RecognizePhilippinesVoteIDOCRResponse: RecognizePhilippinesVoteIDOCRResponse,
     ItemCoord: ItemCoord,
     RecognizeMainlandIDCardOCRRequest: RecognizeMainlandIDCardOCRRequest,

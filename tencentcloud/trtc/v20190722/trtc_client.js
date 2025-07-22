@@ -46,16 +46,19 @@ const VideoEncode = models.VideoEncode;
 const DescribeCallDetailInfoRequest = models.DescribeCallDetailInfoRequest;
 const DescribeTRTCMarketScaleDataResponse = models.DescribeTRTCMarketScaleDataResponse;
 const McuTencentVod = models.McuTencentVod;
+const DescribeWebRecordResponse = models.DescribeWebRecordResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const CloudStorage = models.CloudStorage;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
 const CreateCloudRecordingResponse = models.CreateCloudRecordingResponse;
+const DescribeWebRecordRequest = models.DescribeWebRecordRequest;
 const DescribeTRTCRealTimeScaleDataResponse = models.DescribeTRTCRealTimeScaleDataResponse;
 const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
 const StorageParams = models.StorageParams;
 const CloudVod = models.CloudVod;
+const EmulateMobileParams = models.EmulateMobileParams;
 const DescribeCallDetailInfoResponse = models.DescribeCallDetailInfoResponse;
 const DescribeTRTCRealTimeQualityDataResponse = models.DescribeTRTCRealTimeQualityDataResponse;
 const McuCustomCrop = models.McuCustomCrop;
@@ -78,6 +81,7 @@ const DescribeAIConversationResponse = models.DescribeAIConversationResponse;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const UpdateStreamIngestResponse = models.UpdateStreamIngestResponse;
+const WebRecordVideoParams = models.WebRecordVideoParams;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
@@ -101,6 +105,7 @@ const McuPassThrough = models.McuPassThrough;
 const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
 const TRTCDataResult = models.TRTCDataResult;
 const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
+const StartWebRecordResponse = models.StartWebRecordResponse;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const RecognizeConfig = models.RecognizeConfig;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
@@ -114,6 +119,7 @@ const RowValues = models.RowValues;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartStreamIngestResponse = models.StartStreamIngestResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
+const VideoParams = models.VideoParams;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
 const UserInformation = models.UserInformation;
@@ -124,18 +130,20 @@ const DescribeUnusualEventResponse = models.DescribeUnusualEventResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const StartAITranscriptionRequest = models.StartAITranscriptionRequest;
+const DismissRoomResponse = models.DismissRoomResponse;
 const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const MixUserInfo = models.MixUserInfo;
-const DismissRoomResponse = models.DismissRoomResponse;
+const EventMessage = models.EventMessage;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
+const StartWebRecordRequest = models.StartWebRecordRequest;
 const MaxVideoUser = models.MaxVideoUser;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
+const StopWebRecordResponse = models.StopWebRecordResponse;
 const STTConfig = models.STTConfig;
-const VideoParams = models.VideoParams;
+const StopWebRecordRequest = models.StopWebRecordRequest;
 const McuSeiParams = models.McuSeiParams;
 const StopAIConversationRequest = models.StopAIConversationRequest;
-const EventMessage = models.EventMessage;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
 const TranscriptionParams = models.TranscriptionParams;
@@ -219,6 +227,17 @@ class TrtcClient extends AbstractClient {
     StopAIConversation(req, cb) {
         let resp = new StopAIConversationResponse();
         this.request("StopAIConversation", req, resp, cb);
+    }
+
+    /**
+     * Queries the status of a web-page recording task
+     * @param {DescribeWebRecordRequest} req
+     * @param {function(string, DescribeWebRecordResponse):void} cb
+     * @public
+     */
+    DescribeWebRecord(req, cb) {
+        let resp = new DescribeWebRecordResponse();
+        this.request("DescribeWebRecord", req, resp, cb);
     }
 
     /**
@@ -448,6 +467,17 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
+     * This interface can be used to initiate a web-page recording task. In the interface parameters, specify the recording URL, recording resolution, recording result storage and other parameters. If there are parameter or API logic problems, the result will be returned immediately. If there are page problems, such as the page cannot be accessed, the result will be returned in the callback. Please pay attention.
+     * @param {StartWebRecordRequest} req
+     * @param {function(string, StartWebRecordResponse):void} cb
+     * @public
+     */
+    StartWebRecord(req, cb) {
+        let resp = new StartWebRecordResponse();
+        this.request("StartWebRecord", req, resp, cb);
+    }
+
+    /**
      * Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
 - Pull the stream of the entire room.
 - Pull the stream of a specific user.
@@ -478,6 +508,17 @@ Note:
     DescribeTRTCMarketScaleData(req, cb) {
         let resp = new DescribeTRTCMarketScaleDataResponse();
         this.request("DescribeTRTCMarketScaleData", req, resp, cb);
+    }
+
+    /**
+     * Stop an web-page recording task
+     * @param {StopWebRecordRequest} req
+     * @param {function(string, StopWebRecordResponse):void} cb
+     * @public
+     */
+    StopWebRecord(req, cb) {
+        let resp = new StopWebRecordResponse();
+        this.request("StopWebRecord", req, resp, cb);
     }
 
     /**

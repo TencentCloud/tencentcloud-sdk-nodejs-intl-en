@@ -537,29 +537,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TEHDConfig = null;
 
         /**
-         * The subtitle settings.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Subtitle stream configuration parameter.
          * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
 
         /**
-         * The information of the external audio track to add.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the external audio track parameter.
          * @type {Array.<MediaInputInfo> || null}
          */
         this.AddonAudioStream = null;
 
         /**
-         * An extended field for transcoding.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Extension field for transcoding.
          * @type {string || null}
          */
         this.StdExtInfo = null;
 
         /**
-         * The subtitle file to add.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Subtitle file to be inserted.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
@@ -1494,6 +1490,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Paragraphs = null;
 
+        /**
+         * Address of the mind map of a summary task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.MindMapUrl = null;
+
     }
 
     /**
@@ -1516,6 +1519,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Paragraphs.push(obj);
             }
         }
+        this.MindMapUrl = 'MindMapUrl' in params ? params.MindMapUrl : null;
 
     }
 }
@@ -2900,8 +2904,12 @@ class RawWatermarkParameter extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Origin position, which currently can only be:
-<li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.</li>
+         * Origin position. valid values:.
+<Li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>.
+<Li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>.
+<Li>BottomLeft: indicates that the coordinate origin is at the bottom-left corner of the video image and the watermark origin is at the bottom-left corner of the image or text.</li>.
+<li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
+
 Default value: TopLeft.
          * @type {string || null}
          */
@@ -4409,16 +4417,13 @@ Note: when this field return null, means no valid values can be obtained.
         this.SessionContext = null;
 
         /**
-         * - Expiration time, event notification signature expiration UNIX timestamp. - By default, notifications sent by MPS expire after 10 minutes. If the expiration time specified has elapsed, a notification will be considered invalid. This can prevent replay attacks. - The format of Timestamp is a decimal UNIX timestamp, which is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT).
-Note: This field may return null, indicating that no valid value can be obtained.
+         * - expiration time, event notification signature expiration in UNIX Timestamp format. - notifications from media processing default to an expiration time of 10 minutes. if the time specified by the Timestamp value in a message notification has expired, the notification can be deemed invalid, furthermore preventing network replay attacks. - the Timestamp format is decimal UNIX Timestamp, seconds elapsed since midnight (UTC/GMT) on january 1, 1970.
          * @type {number || null}
          */
         this.Timestamp = null;
 
         /**
          * Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
-
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Sign = null;
@@ -7049,10 +7054,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Origin position. Valid values:
-<li>topLeft: The origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text;</li>
-<li>topRight: The origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text;</li>
-<li>bottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
-<li>bottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
+<li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
+<li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
+<li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
+<li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
@@ -7196,8 +7201,7 @@ class DescribeWordSamplesResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of eligible entries.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of qualified records.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7726,11 +7730,22 @@ class ScheduleRecognitionTaskResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * The output of the content recognition task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Output of the identification task.
          * @type {Array.<AiRecognitionResult> || null}
          */
         this.Output = null;
+
+        /**
+         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -7760,6 +7775,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Output.push(obj);
             }
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -9596,11 +9613,22 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Output of an image sprite generating task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the output of an image sprite task for a video.
          * @type {MediaImageSpriteItem || null}
          */
         this.Output = null;
+
+        /**
+         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -9627,6 +9655,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -10665,7 +10695,6 @@ Default value: 0.
 
         /**
          * Additional parameter, which is a serialized JSON string.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.StdExtInfo = null;
@@ -12203,7 +12232,7 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
         this.Path = null;
 
         /**
-         * ID of an animated image generating template. For more information, please see [Animated Image Generating Parameter Template](https://intl.cloud.tencent.com/document/product/266/33481?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+         * Specifies the rotating image template ID. see [rotating image template](https://intl.cloud.tencent.com/document/product/862/77168?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF.5B.5D(ID.3Amove)).
          * @type {number || null}
          */
         this.Definition = null;
@@ -13449,20 +13478,19 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Output of a time point screenshot task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the output of a screenshot task at specified time points for a video.
          * @type {MediaSnapshotByTimeOffsetItem || null}
          */
         this.Output = null;
 
         /**
-         * The time when the task started executing, in ISO date format.
+         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * The time when the task finished, in ISO date format.
+         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -14113,8 +14141,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Output = null;
 
         /**
-         * Transcoding progress. Value range: 0-100
-Note: This field may return `null`, indicating that no valid value was found.
+         * Transcoding progress, with a value range of [0-100].
          * @type {number || null}
          */
         this.Progress = null;
@@ -14824,29 +14851,25 @@ class ScheduleSmartSubtitleTaskResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Recognition task input.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Input of the recognition task.
          * @type {SmartSubtitlesTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Recognition task output.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Output of the identification task.
          * @type {Array.<SmartSubtitlesResult> || null}
          */
         this.Output = null;
 
         /**
          * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
          * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -17120,6 +17143,13 @@ class CreateQualityControlTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * Recording file format. Valid values:
+<li>PNG: PNG image.</li>
+         * @type {string || null}
+         */
+        this.RecordFormat = null;
+
     }
 
     /**
@@ -17140,6 +17170,7 @@ class CreateQualityControlTemplateRequest extends  AbstractModel {
             }
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RecordFormat = 'RecordFormat' in params ? params.RecordFormat : null;
 
     }
 }
@@ -19409,6 +19440,30 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
          */
         this.Confidence = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.SteadyState = null;
+
+        /**
+         * User ID in the result of recognition via WebSocket and TRTC.Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
     }
 
     /**
@@ -19422,6 +19477,10 @@ class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
         this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
         this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SteadyState = 'SteadyState' in params ? params.SteadyState : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -19636,28 +19695,25 @@ class SegmentRecognitionItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * 
+         * Specifies the split segment URL.
          * @type {string || null}
          */
         this.SegmentUrl = null;
 
         /**
-         * Segment cover.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies the segment cover.
          * @type {string || null}
          */
         this.CovImgUrl = null;
 
         /**
          * Segment title.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Title = null;
 
         /**
-         * Segment summary.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the segment summary.
          * @type {string || null}
          */
         this.Summary = null;
@@ -19669,15 +19725,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Keywords = null;
 
         /**
-         * The start time of a live streaming segment, in the ISO date format.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies the start time of a live streaming segment in the ISO date format.
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * The end time of a live streaming segment, in the ISO date format.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies the end time of a live streaming segment in the ISO date format.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -20248,34 +20302,52 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Path = null;
 
         /**
-         * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the subtitle track for embedding subtitles into the video. the Streamindex parameter takes value starting from 0, where 0 indicates usage of the first subtitle track in the source video. if Path is specified, use Path preferentially. either Path or Streamindex should be specified.
+
+-Note: StreamIndex must match the subtitle track index in the source file. for example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. otherwise, task processing failed.
+
+
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.StreamIndex = null;
 
         /**
-         * The font. Valid values:
-<li>`hei.ttf`: Heiti.</li>
-<li>`song.ttf`: Songti.</li>
-<li>`simkai.ttf`: Kaiti.</li>
-<li>`arial.ttf`: Arial.</li>
-The default is `hei.ttf`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Font type. valid values:.
+<li>hei.ttf: simhei.</li>.
+<li>song.ttf: simsun.</li>.
+<Li>Kai.Ttf (recommend) or simkai.ttf: kaiti.</li>.
+<li>msyh.ttf: microsoft yahei</li>.
+<li>msyhbd.ttf: microsoft yahei in bold.</li>.
+<li>hkjgt.ttf: dynafont king gothic</li>.
+<li>dhttx.ttf: dianheitexiti.</li>.
+<li>xqgdzt.ttf: xiqueguzidianti</li>.
+<li>qpcyt.ttf: smart splice super round body.</li>.
+<li>arial.ttf: english only.</li>.
+<li>dinalternate.ttf:DIN Alternate Bold</li>
+<li>helveticalt.ttf:Helvetica</li>
+<li>helveticains.ttf:Helvetica Inserat</li>
+<li>trajanpro.ttf:TrajanPro-Bold</li>
+<li>korean.ttf: specifies the korean language.</li>.
+<li>japanese.ttf: specifies the japanese language.</li>.
+<li>thai.ttf: specifies the thai language.</li>.
+Default: hei.ttf (heiti). note: kaiti is recommended for use with kai.ttf.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FontType = null;
 
         /**
-         * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Font size. Format: Npx, where N is a numerical value. If it is not specified, the font size of the subtitle file applies.
+It is 5% of the source video height by default.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FontSize = null;
 
         /**
-         * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FontColor = null;
@@ -20289,6 +20361,71 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.FontAlpha = null;
+
+        /**
+         * Subtitle position on the Y-axis. If this parameter is specified, the built-in coordinates in the subtitle file will be ignored. The pixel and percentage formats are supported.
+
+ - Pixel: Npx. Value range of N: [0,4096].
+ - Percentage: N%. Value range of N: [0,100]. For example, 10% indicates that the subtitle position on the Y-axis is 10% of the video height.
+
+By default, the position is 4% of the source video height.
+Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the subtitle reference position is at the bottom of the central axis of the subtitles, as shown in the figure below.
+![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Subtitle background position on the Y-axis. Pixel and percentage formats are supported.
+
+ - Pixel: Npx. Value range of N: [0,4096].
+ - Percentage: N%. Value range of N: [0,100]. For example, 10% indicates that the subtitle background position on the Y-axis is 10% of the video height.
+
+If this parameter is not specified, the subtitle background is disabled.
+Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference position of the subtitle background is at the bottom of the central axis of the source video, as shown in the figure below.
+![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BoardY = null;
+
+        /**
+         * Board width. Unit: pixels. Value range: [0,4096].
+It is 90% of the source video width by default.
+
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BoardWidth = null;
+
+        /**
+         * Board height. Unit: pixels. Value range: [0,4096].
+It is 15% of the source video height by default.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BoardHeight = null;
+
+        /**
+         * Board color. Format: 0xRRGGBB.
+Default value: 0x000000 (black).
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BoardColor = null;
+
+        /**
+         * Subtitle background transparency. Value range: [0, 1].
+<li>0: completely transparent.</li>
+<li>1: completely opaque.</li>
+Default value: 0.8.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BoardAlpha = null;
 
     }
 
@@ -20305,6 +20442,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.FontSize = 'FontSize' in params ? params.FontSize : null;
         this.FontColor = 'FontColor' in params ? params.FontColor : null;
         this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.BoardY = 'BoardY' in params ? params.BoardY : null;
+        this.BoardWidth = 'BoardWidth' in params ? params.BoardWidth : null;
+        this.BoardHeight = 'BoardHeight' in params ? params.BoardHeight : null;
+        this.BoardColor = 'BoardColor' in params ? params.BoardColor : null;
+        this.BoardAlpha = 'BoardAlpha' in params ? params.BoardAlpha : null;
 
     }
 }
@@ -20693,14 +20836,12 @@ class AiAnalysisTaskDelLogoOutput extends  AbstractModel {
 
         /**
          * Path of a subtitle file extracted from a video.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginSubtitlePath = null;
 
         /**
          * Path of a subtitle translation file extracted from a video.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranslateSubtitlePath = null;
@@ -21420,8 +21561,8 @@ class TranscodeTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Custom video transcoding parameter, which is valid if `Definition` is 0.
-This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+         * Custom video transcoding parameter. valid when Definition is set to 0.
+This parameter is used in high customization scenarios. it is recommended that you preferentially use Definition to specify transcoding parameters.
          * @type {RawTranscodeParameter || null}
          */
         this.RawParameter = null;
@@ -21436,8 +21577,7 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.OverrideParameter = null;
 
         /**
-         * List of up to 10 image or text watermarks.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
@@ -22146,32 +22286,28 @@ class DescribeAsrHotwordsResponse extends  AbstractModel {
         this.HotwordsId = null;
 
         /**
-         * Current status of the hotword lexicon corresponding to the ID. The value 0 indicates that no template is bound to this hotword lexicon when the query is performed and that the hotword lexicon can be deleted.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Current hotword lexicon id status. a value of 0 indicates that no template is bound to this hotword lexicon at the query moment and it can be deleted.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Hotword lexicon name.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Name of the hot lexicon.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The value is 0 for a temporary hotword lexicon, and the string provided during creation is returned.
-The value is 1 for a file-based hotword lexicon, and the content of the file uploaded during creation is returned.
+         * Specifies the value is 0 for a temporary hotword lexicon and returns the string provided during creation.
+Specifies the value is 1 for a file-based hotword lexicon, and returns the content of the file uploaded during creation.
 
 
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
          * Name of the uploaded hotword file.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FileName = null;
@@ -22186,42 +22322,36 @@ Note: This field may return null, indicating that no valid value can be obtained
          * Hotword text, which depends on the value of Type.
 If the value of Type is 0, the hotword string is returned.
 If the value of Type is 1, the base64-encoded content of the hotword file is returned.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Content = null;
 
         /**
          * Number of words contained in the hotword lexicon.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.WordCount = null;
 
         /**
          * Paging offset. Default value: 0.
-
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
          * Number of returned entries. Default value: 10. Maximum value: 100.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".Note: This field may return null, indicating that no valid value can be obtained.
+         * Hot word lexicon createtime in ISOUTC format "2006-01-02T15:04:05Z".
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Hot lexicon last modified in ISOUTC format "2006-01-02T15:04:05Z".
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -22419,20 +22549,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Input = null;
 
         /**
-         * Output of a sampled screenshot task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the output of a sampling screenshot task for a video.
          * @type {MediaSampleSnapshotItem || null}
          */
         this.Output = null;
 
         /**
-         * 
+         * Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * 
+         * Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -23140,8 +23269,7 @@ class DescribeBatchTaskDetailResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * Video processing task information. This field has a value only when TaskType is BatchTask.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Video processing task information. this field has a value only when TaskType is BatchTask.
          * @type {BatchSubTaskResult || null}
          */
         this.BatchTaskResult = null;
@@ -24044,6 +24172,31 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
          */
         this.Trans = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.SteadyState = null;
+
+        /**
+         * User ID in the result of real-time translation via WebSocket and TRTC.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
     }
 
     /**
@@ -24058,6 +24211,10 @@ class LiveStreamTransTextRecognitionResult extends  AbstractModel {
         this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Trans = 'Trans' in params ? params.Trans : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SteadyState = 'SteadyState' in params ? params.SteadyState : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -24294,30 +24451,28 @@ class Activity extends  AbstractModel {
 
         /**
          * Atomic task type.
-<li>input: start node</li>
-<li>output: end node</li>
-<li>action-trans: transcoding</li>
-<li>action-samplesnapshot: sampled screenshot</li>
-<li>action-AIAnalysis: analysis</li>
-<li>action-AIRecognition: recognition</li>
-<li>action-aiReview: review</li>
-<li>action-animated-graphics: conversion to GIF</li>
-<li>action-image-sprite: image sprite</li>
-<li>action-snapshotByTimeOffset: time point screenshot</li>
-<li>action-adaptive-substream: adaptive bitrate stream</li>
-<li>action-AIQualityControl: media quality inspection</li>
-<li>action-SmartSubtitles: smart subtitle</li>
+<li>input: starting node.</li>.
+<li>`output`: termination node</li>.
+<li>action-trans: transcoding.</li>.
+<li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
+<li>action-AIAnalysis: analysis.</li>.
+<li>action-AIRecognition: specifies recognition.</li>.
+<li>action-aiReview: specifies the review action.</li>.
+<li>action-animated-graphics: specifies the animated image.</li>.
+<li>action-image-sprite: specifies the sprite sheet.</li>.
+<li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
+<li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
+<li>action-AIQualityControl: media quality inspection.</li>.
+<li>action-SmartSubtitles: specifies smart subtitling.</li>.
 
 
 
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ActivityType = null;
 
         /**
-         * The indexes of the subsequent actions.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Rear node index array.
          * @type {Array.<number> || null}
          */
         this.ReardriveIndex = null;
@@ -25056,19 +25211,23 @@ Note: This field may return null, indicating that no valid value can be obtained
 
         /**
          * Drm information.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {DrmInfo || null}
          */
         this.DrmInfo = null;
 
         /**
          * Adaptive transcoding template type.
-Common: audio-video.
+Common: audio/video type.
 PureAudio: audio-only.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DefinitionType = null;
+
+        /**
+         * Subtitle setting.
+         * @type {string || null}
+         */
+        this.SubtitleTemplate = null;
 
     }
 
@@ -25114,6 +25273,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.DrmInfo = obj;
         }
         this.DefinitionType = 'DefinitionType' in params ? params.DefinitionType : null;
+        this.SubtitleTemplate = 'SubtitleTemplate' in params ? params.SubtitleTemplate : null;
 
     }
 }
@@ -25150,6 +25310,13 @@ class ModifyQualityControlTemplateRequest extends  AbstractModel {
          */
         this.QualityControlItemSet = null;
 
+        /**
+         * Recording file format. Valid values:
+<li>PNG: PNG image.</li>
+         * @type {string || null}
+         */
+        this.RecordFormat = null;
+
     }
 
     /**
@@ -25171,6 +25338,7 @@ class ModifyQualityControlTemplateRequest extends  AbstractModel {
                 this.QualityControlItemSet.push(obj);
             }
         }
+        this.RecordFormat = 'RecordFormat' in params ? params.RecordFormat : null;
 
     }
 }
@@ -25234,13 +25402,13 @@ class TaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * The notification type. Valid values:
-<li>`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
-<li>`TDMQ-CMQ`: Message queue</li>
-<li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
-<li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
-<li>`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.</li>
-<font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
+         * Notification type. available values:.
+<li>CMQ: offline. switch to TDMQ-CMQ.</li>.
+<Li>TDMQ-CMQ: message queue</li>.
+<li>URL: when a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. the callback protocol is HTTP+json. the content of the packet body is the same as the output parameters of the parseeventnotification api.</li>.
+<Li>SCF: not recommended. additional configuration is required in the console.</li>.
+<Li>AWS-SQS: aws queue, suitable for aws tasks only and requires the same region.</li>.
+<font color="red">note: if left blank, it is TDMQ-CMQ by default. to use another type, you need to fill in the corresponding type value. if using TDMQ-CMQ message queue, an excessively large task response may cause queue failure.</font>.
          * @type {string || null}
          */
         this.NotifyType = null;
@@ -25290,8 +25458,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AwsSQS = null;
 
         /**
-         * The key used to generate the callback signature.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * key used to generate a callback signature.
          * @type {string || null}
          */
         this.NotifyKey = null;
@@ -27766,7 +27933,13 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
+         * Live stream URL. (It should be a live streaming file address. RTMP, HLS, FLV, and TRTC addresses are supported.)
+A TRTC address is as follows:
+ trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
+`<roomid>` is the TRTC room ID, which is a number.
+`<sdkappid>` is the SDK app ID of TRTC.
+`<userid>` is the user ID for accessing a room, which can be used to distinguish robots.
+<`usersig>` is the TRTC user signature.
          * @type {string || null}
          */
         this.Url = null;
@@ -28126,7 +28299,7 @@ class ComposeSubtitleItem extends  AbstractModel {
         this.StyleId = null;
 
         /**
-         * The subtitle text.
+         * Subtitle text. note: long text may exceed the frame. recommend using \n for line breaks.
          * @type {string || null}
          */
         this.Text = null;
@@ -28661,11 +28834,25 @@ class DrmInfo extends  AbstractModel {
 
         /**
          * Encryption type.
-<li>simpleaes: AES-128 encryption</li>
-<li> widevine</li>
-<li>fairplay: not supported for DASH streams</li>
-<li> playready</li>
-Note: This field may return null, indicating that no valid value can be obtained.
+
+- simpleaes
+Can only be used for HLS. format support ts and mp4.
+Only can be used in slice mode. cannot be used in singlefile mode.
+
+- fairplay:
+Can only be used for HLS. valid values: mp4.
+Available for use in slice mode or singlefile mode.
+
+- widevine:
+Can be used for HLS and DASH. format can only be mp4.
+Output HLS: available for use in slice mode or singlefile mode.
+Output DASH: can only be in singlefile mode.
+
+- playready:
+Can be used for HLS and DASH. format can only be mp4.
+Output HLS: available for use in slice mode or singlefile mode.
+Output DASH: can only be singlefile mode.
+
          * @type {string || null}
          */
         this.Type = null;
@@ -30107,8 +30294,7 @@ class ModifyPersonSampleResponse extends  AbstractModel {
         this.Person = null;
 
         /**
-         * Information of images that failed the verification by facial feature positioning.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Indicates the information of facial features with processing failure.
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -33266,70 +33452,61 @@ class AiRecognitionTaskFaceResultItem extends  AbstractModel {
         this.SegmentSet = null;
 
         /**
-         * The person’s gender.
-<li>Male</li>
-<li>Female</li>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Gender of the person.
+<Li>Male: man.</li>.
+<Li>Female: specifies the woman.</li>.
          * @type {string || null}
          */
         this.Gender = null;
 
         /**
-         * The person’s birth date.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Date of birth.
          * @type {string || null}
          */
         this.Birthday = null;
 
         /**
-         * The person’s job or job title.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Occupation or position of a person.
          * @type {string || null}
          */
         this.Profession = null;
 
         /**
-         * The college the person graduated from.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies the graduation institution of the person.
          * @type {string || null}
          */
         this.SchoolOfGraduation = null;
 
         /**
-         * The person’s profile.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Description of the person.
          * @type {string || null}
          */
         this.Abstract = null;
 
         /**
-         * The person’s place of birth.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies the birthplace or place of origin.
          * @type {string || null}
          */
         this.PlaceOfBirth = null;
 
         /**
-         * Whether the person is a politician or artist.
-<li>Politician</li>
-<li>Artist</li>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Person type.
+<Li>Politician: specifies the official.</li>.
+<Li>Artist: specifies the artist.</li>.
          * @type {string || null}
          */
         this.PersonType = null;
 
         /**
-         * Sensitivity
-<li>Normal</li>
-<li>Sensitive</li>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Sensitivity labeling.
+<Li>Normal: specifies the scaling group is normal.</li>.
+<Li>Sensitive: specifies sensitivity.</li>.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * The screenshot URL.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies the screenshot link.
          * @type {string || null}
          */
         this.Url = null;

@@ -72,6 +72,12 @@ class ImageModerationRequest extends  AbstractModel {
          */
         this.Device = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -99,6 +105,7 @@ class ImageModerationRequest extends  AbstractModel {
             obj.deserialize(params.Device)
             this.Device = obj;
         }
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }

@@ -25224,8 +25224,9 @@ PureAudio: audio-only.
         this.DefinitionType = null;
 
         /**
-         * Subtitle setting.
-         * @type {string || null}
+         * Specifies the subtitle parameter.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SubtitleTemplate || null}
          */
         this.SubtitleTemplate = null;
 
@@ -25273,7 +25274,12 @@ PureAudio: audio-only.
             this.DrmInfo = obj;
         }
         this.DefinitionType = 'DefinitionType' in params ? params.DefinitionType : null;
-        this.SubtitleTemplate = 'SubtitleTemplate' in params ? params.SubtitleTemplate : null;
+
+        if (params.SubtitleTemplate) {
+            let obj = new SubtitleTemplate();
+            obj.deserialize(params.SubtitleTemplate)
+            this.SubtitleTemplate = obj;
+        }
 
     }
 }

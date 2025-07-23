@@ -151,6 +151,7 @@ const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexit
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
 const NetAddr = models.NetAddr;
 const OpenWanRequest = models.OpenWanRequest;
+const ReplayInstanceAuditLogRequest = models.ReplayInstanceAuditLogRequest;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
@@ -307,6 +308,7 @@ const ProxyGroup = models.ProxyGroup;
 const AddClusterSlaveZoneRequest = models.AddClusterSlaveZoneRequest;
 const CloseClusterPasswordComplexityRequest = models.CloseClusterPasswordComplexityRequest;
 const DescribeIsolatedInstancesRequest = models.DescribeIsolatedInstancesRequest;
+const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResponse;
 const LogicBackupConfigInfo = models.LogicBackupConfigInfo;
@@ -413,6 +415,17 @@ class CynosdbClient extends AbstractClient {
     DescribeBackupConfig(req, cb) {
         let resp = new DescribeBackupConfigResponse();
         this.request("DescribeBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to replay instance audit logs.
+     * @param {ReplayInstanceAuditLogRequest} req
+     * @param {function(string, ReplayInstanceAuditLogResponse):void} cb
+     * @public
+     */
+    ReplayInstanceAuditLog(req, cb) {
+        let resp = new ReplayInstanceAuditLogResponse();
+        this.request("ReplayInstanceAuditLog", req, resp, cb);
     }
 
     /**

@@ -77,6 +77,7 @@ const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeR
 const DeleteGatherRuleResponse = models.DeleteGatherRuleResponse;
 const ApplicableProducts = models.ApplicableProducts;
 const ConditionPayMode = models.ConditionPayMode;
+const PayDealsResponse = models.PayDealsResponse;
 const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
 const BillDetailAssociatedOrder = models.BillDetailAssociatedOrder;
 const BillDetail = models.BillDetail;
@@ -88,6 +89,7 @@ const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProject
 const DescribeBillAdjustInfoRequest = models.DescribeBillAdjustInfoRequest;
 const DeleteAllocationRuleResponse = models.DeleteAllocationRuleResponse;
 const TagDataInfo = models.TagDataInfo;
+const PayDealsRequest = models.PayDealsRequest;
 const SummaryTotal = models.SummaryTotal;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 const CostComponentSet = models.CostComponentSet;
@@ -372,6 +374,17 @@ Note:
     DescribeDosageCosDetailByDate(req, cb) {
         let resp = new DescribeDosageCosDetailByDateResponse();
         this.request("DescribeDosageCosDetailByDate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pay for an order.
+     * @param {PayDealsRequest} req
+     * @param {function(string, PayDealsResponse):void} cb
+     * @public
+     */
+    PayDeals(req, cb) {
+        let resp = new PayDealsResponse();
+        this.request("PayDeals", req, resp, cb);
     }
 
     /**

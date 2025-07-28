@@ -390,8 +390,7 @@ The face quality information is mainly used to evaluate the quality of the input
 
 4. Face fusion: this is to ensure the quality of the uploaded face images to improve the fusion effect.
 
->     
-- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+>- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
      * @param {DetectFaceRequest} req
      * @param {function(string, DetectFaceResponse):void} cb
      * @public

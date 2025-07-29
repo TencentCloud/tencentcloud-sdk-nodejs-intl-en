@@ -1443,6 +1443,18 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
          */
         this.CustomUrlParam = null;
 
+        /**
+         * Enable DRM. This is only effective for CMAF protocol.
+         * @type {boolean || null}
+         */
+        this.DRMEnabled = null;
+
+        /**
+         * DRM configuration information
+         * @type {DRMInfo || null}
+         */
+        this.DRMInfo = null;
+
     }
 
     /**
@@ -1473,6 +1485,13 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
         }
         this.CustomUrlParamIndex = 'CustomUrlParamIndex' in params ? params.CustomUrlParamIndex : null;
         this.CustomUrlParam = 'CustomUrlParam' in params ? params.CustomUrlParam : null;
+        this.DRMEnabled = 'DRMEnabled' in params ? params.DRMEnabled : null;
+
+        if (params.DRMInfo) {
+            let obj = new DRMInfo();
+            obj.deserialize(params.DRMInfo)
+            this.DRMInfo = obj;
+        }
 
     }
 }
@@ -4896,6 +4915,18 @@ class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
          */
         this.TimeShiftDuration = null;
 
+        /**
+         * Enable DRM. This is only effective for CMAF protocol.
+         * @type {boolean || null}
+         */
+        this.DRMEnabled = null;
+
+        /**
+         * DRM configuration information.
+         * @type {DRMInfo || null}
+         */
+        this.DRMInfo = null;
+
     }
 
     /**
@@ -4917,6 +4948,13 @@ class CreateStreamPackageChannelEndpointRequest extends  AbstractModel {
         this.Manifest = 'Manifest' in params ? params.Manifest : null;
         this.TimeShiftEnable = 'TimeShiftEnable' in params ? params.TimeShiftEnable : null;
         this.TimeShiftDuration = 'TimeShiftDuration' in params ? params.TimeShiftDuration : null;
+        this.DRMEnabled = 'DRMEnabled' in params ? params.DRMEnabled : null;
+
+        if (params.DRMInfo) {
+            let obj = new DRMInfo();
+            obj.deserialize(params.DRMInfo)
+            this.DRMInfo = obj;
+        }
 
     }
 }

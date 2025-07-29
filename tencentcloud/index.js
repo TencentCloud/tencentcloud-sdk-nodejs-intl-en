@@ -33,6 +33,7 @@ module.exports = {
     config: require("./config"),
     controlcenter: require("./controlcenter"),
     csip: require("./csip"),
+    ctsdb: require("./ctsdb"),
     cvm: require("./cvm"),
     cwp: require("./cwp"),
     cynosdb: require("./cynosdb"),

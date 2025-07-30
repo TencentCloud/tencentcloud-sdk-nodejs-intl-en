@@ -117,6 +117,7 @@ const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplat
 const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const RuleCache = models.RuleCache;
+const ProcessMediaByMPS = models.ProcessMediaByMPS;
 const EditMediaTaskInput = models.EditMediaTaskInput;
 const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
 const DeleteImageProcessingTemplateRequest = models.DeleteImageProcessingTemplateRequest;
@@ -133,6 +134,7 @@ const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTempla
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
+const MPSOutputFile = models.MPSOutputFile;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const RemoveWatermarkTask = models.RemoveWatermarkTask;
 const ReviewAudioVideoRequest = models.ReviewAudioVideoRequest;
@@ -230,6 +232,7 @@ const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
 const JitterConfigureInfo = models.JitterConfigureInfo;
 const MediaSubtitleItem = models.MediaSubtitleItem;
+const ReviewAudioVideoTaskOutput = models.ReviewAudioVideoTaskOutput;
 const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTemplateInfoForUpdate;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const AiRecognitionTaskAsrTranslateSegmentItem = models.AiRecognitionTaskAsrTranslateSegmentItem;
@@ -327,7 +330,7 @@ const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOf
 const DeleteHeadTailTemplateRequest = models.DeleteHeadTailTemplateRequest;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
-const ReviewAudioVideoTaskOutput = models.ReviewAudioVideoTaskOutput;
+const ProcessMediaByMPSResponse = models.ProcessMediaByMPSResponse;
 const Cache = models.Cache;
 const RemoveWaterMarkTaskOutput = models.RemoveWaterMarkTaskOutput;
 const ModifyMediaStorageClassRequest = models.ModifyMediaStorageClassRequest;
@@ -345,6 +348,7 @@ const ComplexAdaptiveDynamicStreamingTask = models.ComplexAdaptiveDynamicStreami
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const ModifyReviewTemplateRequest = models.ModifyReviewTemplateRequest;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
+const MPSSubTaskResult = models.MPSSubTaskResult;
 const MediaTrackItem = models.MediaTrackItem;
 const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
@@ -392,6 +396,7 @@ const ImageReviewUsageDataItem = models.ImageReviewUsageDataItem;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const ExtractCopyRightWatermarkRequest = models.ExtractCopyRightWatermarkRequest;
 const IpFilter = models.IpFilter;
+const MPSTaskOutput = models.MPSTaskOutput;
 const DescribeEnhanceMediaTemplatesRequest = models.DescribeEnhanceMediaTemplatesRequest;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const FastEditMediaRequest = models.FastEditMediaRequest;
@@ -499,6 +504,7 @@ const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const ImageProcessingTemplate = models.ImageProcessingTemplate;
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
+const ProcessMediaByMPSRequest = models.ProcessMediaByMPSRequest;
 const ScratchRepairInfo = models.ScratchRepairInfo;
 const FileDeleteResultItem = models.FileDeleteResultItem;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
@@ -1960,6 +1966,23 @@ This API is used to create a player configuration. Up to 100 configurations can 
     CreateSuperPlayerConfig(req, cb) {
         let resp = new CreateSuperPlayerConfigResponse();
         this.request("CreateSuperPlayerConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to utilize the media processing capability of Media Processing Service (MPS) to initiate media processing for videos on VOD. When the task is initiated, relevant MPS parameters must be filled in the MPSProcessMediaParams parameter in JSON format. For detailed task parameter configuration, please refer to the [ProcessMedia API](https://www.tencentcloud.com/document/product/1041/33640). 
+Currently supported MPS features:
+1. [Smart Erase](https://www.tencentcloud.com/document/product/1041/58269): This function blurs, de-blurs, or removes traces of logos, subtitles, faces, and license plates in the video, facilitating content dissemination and sharing. The new media generated by this task will be stored in a new FileId within the sub-application of VOD. 
+> Media processing tasks initiated in this way: 
+> 1. Task status and results are still queried on the on-demand platform. Use [DescribeTaskDetail](https://www.tencentcloud.com/document/product/266/34129) or [DescribeTasks](https://www.tencentcloud.com/document/product/266/37559) to query the task. 
+> 2. Usage and billing for related functions will be provided on the MPS platform. Therefore, you must activate MPS service before using this feature. 
+> 3. This feature is currently in internal testing. If you would like to test it, please contact us for support.
+     * @param {ProcessMediaByMPSRequest} req
+     * @param {function(string, ProcessMediaByMPSResponse):void} cb
+     * @public
+     */
+    ProcessMediaByMPS(req, cb) {
+        let resp = new ProcessMediaByMPSResponse();
+        this.request("ProcessMediaByMPS", req, resp, cb);
     }
 
     /**

@@ -6244,6 +6244,70 @@ class RuleCache extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ProcessMediaByMPS extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 
+         * @type {Array.<MPSSubTaskResult> || null}
+         */
+        this.SubTaskSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.SubTaskSet) {
+            this.SubTaskSet = new Array();
+            for (let z in params.SubTaskSet) {
+                let obj = new MPSSubTaskResult();
+                obj.deserialize(params.SubTaskSet[z]);
+                this.SubTaskSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Input of video editing task.
  * @class
  */
@@ -6983,6 +7047,62 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class MPSOutputFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -12360,6 +12480,100 @@ class MediaSubtitleItem extends  AbstractModel {
         this.Format = 'Format' in params ? params.Format : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Source = 'Source' in params ? params.Source : null;
+
+    }
+}
+
+/**
+ * The output of a moderation task.
+ * @class
+ */
+class ReviewAudioVideoTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The handling suggestion. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The most likely label for the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+<li>Porn</li>
+<li>Terrorism</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * The most likely format of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+<li>Image</li>
+<li>OCR</li>
+<li>ASR</li>
+<li>Voice</li>
+         * @type {string || null}
+         */
+        this.Form = null;
+
+        /**
+         * A list of the suspicious segments detected.
+<font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
+         * @type {Array.<ReviewAudioVideoSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
+
+        /**
+         * The thumbnail moderation result.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewImageResult || null}
+         */
+        this.CoverReviewResult = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Form = 'Form' in params ? params.Form : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new ReviewAudioVideoSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+        if (params.CoverReviewResult) {
+            let obj = new ReviewImageResult();
+            obj.deserialize(params.CoverReviewResult)
+            this.CoverReviewResult = obj;
+        }
 
     }
 }
@@ -17907,65 +18121,24 @@ class SearchMediaResponse extends  AbstractModel {
 }
 
 /**
- * The output of a moderation task.
+ * ProcessMediaByMPS response structure.
  * @class
  */
-class ReviewAudioVideoTaskOutput extends  AbstractModel {
+class ProcessMediaByMPSResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The handling suggestion. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Task ID.
          * @type {string || null}
          */
-        this.Suggestion = null;
+        this.TaskId = null;
 
         /**
-         * The most likely label for the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
-<li>Porn</li>
-<li>Terrorism</li>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Label = null;
-
-        /**
-         * The most likely format of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
-<li>Image</li>
-<li>OCR</li>
-<li>ASR</li>
-<li>Voice</li>
-         * @type {string || null}
-         */
-        this.Form = null;
-
-        /**
-         * A list of the suspicious segments detected.
-<font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
-         * @type {Array.<ReviewAudioVideoSegmentItem> || null}
-         */
-        this.SegmentSet = null;
-
-        /**
-         * The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
-         * @type {string || null}
-         */
-        this.SegmentSetFileUrl = null;
-
-        /**
-         * The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
-         * @type {string || null}
-         */
-        this.SegmentSetFileUrlExpireTime = null;
-
-        /**
-         * The thumbnail moderation result.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ReviewImageResult || null}
-         */
-        this.CoverReviewResult = null;
+        this.RequestId = null;
 
     }
 
@@ -17976,26 +18149,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Form = 'Form' in params ? params.Form : null;
-
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new ReviewAudioVideoSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
-        }
-        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
-        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
-
-        if (params.CoverReviewResult) {
-            let obj = new ReviewImageResult();
-            obj.deserialize(params.CoverReviewResult)
-            this.CoverReviewResult = obj;
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18910,6 +19065,74 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class MPSSubTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Input = null;
+
+        /**
+         * 
+         * @type {MPSTaskOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Input = 'Input' in params ? params.Input : null;
+
+        if (params.Output) {
+            let obj = new MPSTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -21474,6 +21697,42 @@ class IpFilter extends  AbstractModel {
                 let obj = new IpFilterPathRule();
                 obj.deserialize(params.FilterRules[z]);
                 this.FilterRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class MPSTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<MPSOutputFile> || null}
+         */
+        this.OutputFiles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OutputFiles) {
+            this.OutputFiles = new Array();
+            for (let z in params.OutputFiles) {
+                let obj = new MPSOutputFile();
+                obj.deserialize(params.OutputFiles[z]);
+                this.OutputFiles.push(obj);
             }
         }
 
@@ -27807,6 +28066,53 @@ class SegmentConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ProcessMediaByMPS request structure.
+ * @class
+ */
+class ProcessMediaByMPSRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * This parameter is used for passing through to media processing service (MPS) so that video processing tasks can be triggered from VOD.
+For detailed information on video processing parameters, please refer to [MPS Initiate Media Processing](https://www.tencentcloud.com/document/product/1041/33640). 
+Instructions: 
+1. Currently, only the AiAnalysisTask parameter in the MPS "ProcessMedia" API needs to be configured. Other parameters are not required. If other parameters are included, the system will automatically ignore them. 
+2. Currently, this is the only method used to initiate Smart Erase tasks. If parameters related to other task types are configured, the system will automatically ignore them.
+
+         * @type {string || null}
+         */
+        this.MPSProcessMediaParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.MPSProcessMediaParams = 'MPSProcessMediaParams' in params ? params.MPSProcessMediaParams : null;
 
     }
 }
@@ -36628,7 +36934,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li> `ReviewAudioVideo`: Moderation</li>
 <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
 <li>`QualityEnhance`: Enhance audio/video</li>
-<li>`ComplexAdaptiveDynamicStreaming`: Complex adaptive bitrate streaming processing task</li>
+<li>`ComplexAdaptiveDynamicStreaming`: Complex adaptive bitrate streaming processing task</li><li>`ProcessMediaByMPS`: Process media by MPS.</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -36815,6 +37121,12 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ComplexAdaptiveDynamicStreamingTask = null;
 
         /**
+         * Media processing by MPS task information. This field contains a value only when TaskType is ProcessMediaByMPS.
+         * @type {ProcessMediaByMPS || null}
+         */
+        this.ProcessMediaByMPSTask = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -36965,6 +37277,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ComplexAdaptiveDynamicStreamingTask();
             obj.deserialize(params.ComplexAdaptiveDynamicStreamingTask)
             this.ComplexAdaptiveDynamicStreamingTask = obj;
+        }
+
+        if (params.ProcessMediaByMPSTask) {
+            let obj = new ProcessMediaByMPS();
+            obj.deserialize(params.ProcessMediaByMPSTask)
+            this.ProcessMediaByMPSTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -49598,6 +49916,7 @@ module.exports = {
     FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     RuleCache: RuleCache,
+    ProcessMediaByMPS: ProcessMediaByMPS,
     EditMediaTaskInput: EditMediaTaskInput,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     DeleteImageProcessingTemplateRequest: DeleteImageProcessingTemplateRequest,
@@ -49614,6 +49933,7 @@ module.exports = {
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
+    MPSOutputFile: MPSOutputFile,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     RemoveWatermarkTask: RemoveWatermarkTask,
     ReviewAudioVideoRequest: ReviewAudioVideoRequest,
@@ -49711,6 +50031,7 @@ module.exports = {
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
     JitterConfigureInfo: JitterConfigureInfo,
     MediaSubtitleItem: MediaSubtitleItem,
+    ReviewAudioVideoTaskOutput: ReviewAudioVideoTaskOutput,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     AiRecognitionTaskAsrTranslateSegmentItem: AiRecognitionTaskAsrTranslateSegmentItem,
@@ -49808,7 +50129,7 @@ module.exports = {
     DeleteHeadTailTemplateRequest: DeleteHeadTailTemplateRequest,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
-    ReviewAudioVideoTaskOutput: ReviewAudioVideoTaskOutput,
+    ProcessMediaByMPSResponse: ProcessMediaByMPSResponse,
     Cache: Cache,
     RemoveWaterMarkTaskOutput: RemoveWaterMarkTaskOutput,
     ModifyMediaStorageClassRequest: ModifyMediaStorageClassRequest,
@@ -49826,6 +50147,7 @@ module.exports = {
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
+    MPSSubTaskResult: MPSSubTaskResult,
     MediaTrackItem: MediaTrackItem,
     RestoreMediaResponse: RestoreMediaResponse,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
@@ -49873,6 +50195,7 @@ module.exports = {
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
     ExtractCopyRightWatermarkRequest: ExtractCopyRightWatermarkRequest,
     IpFilter: IpFilter,
+    MPSTaskOutput: MPSTaskOutput,
     DescribeEnhanceMediaTemplatesRequest: DescribeEnhanceMediaTemplatesRequest,
     TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
     FastEditMediaRequest: FastEditMediaRequest,
@@ -49980,6 +50303,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     ImageProcessingTemplate: ImageProcessingTemplate,
     SegmentConfigureInfo: SegmentConfigureInfo,
+    ProcessMediaByMPSRequest: ProcessMediaByMPSRequest,
     ScratchRepairInfo: ScratchRepairInfo,
     FileDeleteResultItem: FileDeleteResultItem,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,

@@ -86,6 +86,7 @@ const EndpointInfo = models.EndpointInfo;
 const ModifyStreamPackageSourceResponse = models.ModifyStreamPackageSourceResponse;
 const DeleteStreamPackageLinearAssemblyChannelRequest = models.DeleteStreamPackageLinearAssemblyChannelRequest;
 const ModifyStreamPackageChannelRequest = models.ModifyStreamPackageChannelRequest;
+const DescribeStreamPackageSSAIUsageResponse = models.DescribeStreamPackageSSAIUsageResponse;
 const CreateStreamPackageLinearAssemblyProgramRequest = models.CreateStreamPackageLinearAssemblyProgramRequest;
 const SegmentDeliverInfo = models.SegmentDeliverInfo;
 const DeleteStreamPackageLinearAssemblyChannelResponse = models.DeleteStreamPackageLinearAssemblyChannelResponse;
@@ -104,6 +105,7 @@ const UnbindLinearAssemblyCDNDomainWithChannelRequest = models.UnbindLinearAssem
 const DescribeStreamPackageSourceLocationsResponse = models.DescribeStreamPackageSourceLocationsResponse;
 const StopStreamPackageLinearAssemblyChannelResponse = models.StopStreamPackageLinearAssemblyChannelResponse;
 const DescribeStreamPackageChannelsRequest = models.DescribeStreamPackageChannelsRequest;
+const SSAIUsageInfo = models.SSAIUsageInfo;
 const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
 const SlateInfo = models.SlateInfo;
 const UnbindLinearAssemblyCDNDomainWithChannelResponse = models.UnbindLinearAssemblyCDNDomainWithChannelResponse;
@@ -135,6 +137,7 @@ const DescribeStreamPackageLinearAssemblyProgramSchedulesRequest = models.Descri
 const DeleteStreamPackageLinearAssemblyProgramsRequest = models.DeleteStreamPackageLinearAssemblyProgramsRequest;
 const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
 const CreateStreamPackageHarvestJobRequest = models.CreateStreamPackageHarvestJobRequest;
+const DescribeStreamPackageSSAIUsageRequest = models.DescribeStreamPackageSSAIUsageRequest;
 const DescribeStreamPackageSourceAlertsResponse = models.DescribeStreamPackageSourceAlertsResponse;
 const DeleteStreamPackageLinearAssemblyProgramRequest = models.DeleteStreamPackageLinearAssemblyProgramRequest;
 const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
@@ -155,6 +158,7 @@ const LinearAssemblyProgramInfo = models.LinearAssemblyProgramInfo;
 const DescribeStreamPackageSourcesRequest = models.DescribeStreamPackageSourcesRequest;
 const CreateStreamPackageLinearAssemblyChannelResponse = models.CreateStreamPackageLinearAssemblyChannelResponse;
 const LinearAssemblyChannelInfo = models.LinearAssemblyChannelInfo;
+const UsageDetail = models.UsageDetail;
 const DescribeStreamPackageSSAIChannelsResponse = models.DescribeStreamPackageSSAIChannelsResponse;
 const OutputReq = models.OutputReq;
 const CacheInfoInfo = models.CacheInfoInfo;
@@ -361,6 +365,17 @@ class MdpClient extends AbstractClient {
     ModifyStreamPackageChannelEndpoint(req, cb) {
         let resp = new ModifyStreamPackageChannelEndpointResponse();
         this.request("ModifyStreamPackageChannelEndpoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query SSAI ad replacement usage.
+     * @param {DescribeStreamPackageSSAIUsageRequest} req
+     * @param {function(string, DescribeStreamPackageSSAIUsageResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSSAIUsage(req, cb) {
+        let resp = new DescribeStreamPackageSSAIUsageResponse();
+        this.request("DescribeStreamPackageSSAIUsage", req, resp, cb);
     }
 
     /**

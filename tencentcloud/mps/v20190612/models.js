@@ -25230,6 +25230,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SubtitleTemplate = null;
 
+        /**
+         * Extension field for transcoding.
+         * @type {string || null}
+         */
+        this.StdExtInfo = null;
+
     }
 
     /**
@@ -25280,6 +25286,7 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.SubtitleTemplate)
             this.SubtitleTemplate = obj;
         }
+        this.StdExtInfo = 'StdExtInfo' in params ? params.StdExtInfo : null;
 
     }
 }

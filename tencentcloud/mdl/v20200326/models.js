@@ -4201,7 +4201,7 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
         this.AudioBitrate = null;
 
         /**
-         * Audio language code, whose length is always 3 characters.
+         * Audio language code, which length is between 2 and 20.
          * @type {string || null}
          */
         this.LanguageCode = null;
@@ -4223,6 +4223,12 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
          * @type {AudioCodecDetail || null}
          */
         this.AudioCodecDetails = null;
+
+        /**
+         * Audio language description, which maximum length is 100.
+         * @type {string || null}
+         */
+        this.LanguageDescription = null;
 
     }
 
@@ -4251,6 +4257,7 @@ Valid values: 6000, 7000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000,
             obj.deserialize(params.AudioCodecDetails)
             this.AudioCodecDetails = obj;
         }
+        this.LanguageDescription = 'LanguageDescription' in params ? params.LanguageDescription : null;
 
     }
 }

@@ -6444,13 +6444,13 @@ class DescribeZonesRequest extends  AbstractModel {
         super();
 
         /**
-         * Whether the virtual zone is included.–
+         * Whether the virtual zone is included.
          * @type {boolean || null}
          */
         this.IncludeVirtualZones = null;
 
         /**
-         * Whether to display all AZs in a region and the user’s permissions in each AZ.
+         * Whether to display all AZs in a region and the user's permissions in each AZ.
          * @type {boolean || null}
          */
         this.ShowPermission = null;
@@ -14237,6 +14237,12 @@ class ModifyClusterSlaveZoneRequest extends  AbstractModel {
          */
         this.BinlogSyncWay = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SemiSyncTimeout = null;
+
     }
 
     /**
@@ -14250,6 +14256,7 @@ class ModifyClusterSlaveZoneRequest extends  AbstractModel {
         this.OldSlaveZone = 'OldSlaveZone' in params ? params.OldSlaveZone : null;
         this.NewSlaveZone = 'NewSlaveZone' in params ? params.NewSlaveZone : null;
         this.BinlogSyncWay = 'BinlogSyncWay' in params ? params.BinlogSyncWay : null;
+        this.SemiSyncTimeout = 'SemiSyncTimeout' in params ? params.SemiSyncTimeout : null;
 
     }
 }

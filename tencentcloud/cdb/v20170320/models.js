@@ -2305,6 +2305,18 @@ class CreateCdbProxyAddressRequest extends  AbstractModel {
          */
         this.ConnectionPoolType = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.AutoLoadBalance = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AccessMode = null;
+
     }
 
     /**
@@ -2340,6 +2352,8 @@ class CreateCdbProxyAddressRequest extends  AbstractModel {
         this.VPort = 'VPort' in params ? params.VPort : null;
         this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
         this.ConnectionPoolType = 'ConnectionPoolType' in params ? params.ConnectionPoolType : null;
+        this.AutoLoadBalance = 'AutoLoadBalance' in params ? params.AutoLoadBalance : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
 
     }
 }
@@ -13355,6 +13369,18 @@ class AdjustCdbProxyAddressRequest extends  AbstractModel {
          */
         this.ProxyAllocation = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.AutoLoadBalance = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AccessMode = null;
+
     }
 
     /**
@@ -13384,6 +13410,8 @@ class AdjustCdbProxyAddressRequest extends  AbstractModel {
                 this.ProxyAllocation.push(obj);
             }
         }
+        this.AutoLoadBalance = 'AutoLoadBalance' in params ? params.AutoLoadBalance : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
 
     }
 }
@@ -17941,7 +17969,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+         * AZ information in the format of "ap-guangzhou-3". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
          * @type {string || null}
          */
         this.Zone = null;
@@ -18012,6 +18040,12 @@ class DescribeDBPriceRequest extends  AbstractModel {
          */
         this.Ladder = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
     }
 
     /**
@@ -18034,6 +18068,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Ladder = 'Ladder' in params ? params.Ladder : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
 
     }
 }

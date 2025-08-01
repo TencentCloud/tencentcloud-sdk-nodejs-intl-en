@@ -17,7 +17,9 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SummaryDetails = models.SummaryDetails;
+const DescribeCustomerVoucherListResponse = models.DescribeCustomerVoucherListResponse;
 const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
+const DescribeCustomerOwnVoucherListRequest = models.DescribeCustomerOwnVoucherListRequest;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const TradeTwoNode = models.TradeTwoNode;
 const QueryT1IndirectCustomersDetailRequest = models.QueryT1IndirectCustomersDetailRequest;
@@ -29,7 +31,7 @@ const DescribeCustomerBillDownloadUrlRequest = models.DescribeCustomerBillDownlo
 const DescribeCustomerUinData = models.DescribeCustomerUinData;
 const CountryCodeItem = models.CountryCodeItem;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
-const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
+const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const QueryPendingSubAgentsV2Request = models.QueryPendingSubAgentsV2Request;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
@@ -53,6 +55,7 @@ const QueryInvitationInfoResponse = models.QueryInvitationInfoResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryAccountVerificationStatusResponse = models.QueryAccountVerificationStatusResponse;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
+const DescribeCustomerOwnVoucherListResponse = models.DescribeCustomerOwnVoucherListResponse;
 const DescribeBillDownloadUrlRequest = models.DescribeBillDownloadUrlRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const QueryInvitationInfoData = models.QueryInvitationInfoData;
@@ -64,18 +67,21 @@ const QueryT1IndirectCustomersDetailResponse = models.QueryT1IndirectCustomersDe
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
 const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const ForceQNResponse = models.ForceQNResponse;
-const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryPendingCustomersItem = models.QueryPendingCustomersItem;
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const DescribeBillDownloadUrlResponse = models.DescribeBillDownloadUrlResponse;
+const DescribeCustomerVoucherListRequest = models.DescribeCustomerVoucherListRequest;
 const DescribeCustomerUinRequest = models.DescribeCustomerUinRequest;
 const TradeOneNode = models.TradeOneNode;
 const DescribeRebateDownloadUrlResponse = models.DescribeRebateDownloadUrlResponse;
 const QuerySubAgentsDetailV2ResponseData = models.QuerySubAgentsDetailV2ResponseData;
 const DescribeBillSummaryResponse = models.DescribeBillSummaryResponse;
 const QueryInvitationInfoRequest = models.QueryInvitationInfoRequest;
+const DescribeCustomerVoucherItem = models.DescribeCustomerVoucherItem;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
+const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
 const QueryT1IndirectCustomersDetailResponseData = models.QueryT1IndirectCustomersDetailResponseData;
+const DescribeCustomerOwnVoucherItem = models.DescribeCustomerOwnVoucherItem;
 const DescribeCustomerInfoResponse = models.DescribeCustomerInfoResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const QueryAccountVerificationStatusRequest = models.QueryAccountVerificationStatusRequest;
@@ -88,7 +94,7 @@ const DescribeCustomerUinResponse = models.DescribeCustomerUinResponse;
 const DescribeCustomerBillDetailByDayResponse = models.DescribeCustomerBillDetailByDayResponse;
 const ApproveClientApplyRequest = models.ApproveClientApplyRequest;
 const ApproveSubAgentApplyRequest = models.ApproveSubAgentApplyRequest;
-const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
+const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
 const SendVerifyCodeRequest = models.SendVerifyCodeRequest;
@@ -108,7 +114,7 @@ const CreateAccountResponse = models.CreateAccountResponse;
 const ApproveClientApplyResponse = models.ApproveClientApplyResponse;
 const QueryPendingClientsV2Request = models.QueryPendingClientsV2Request;
 const TagInfo = models.TagInfo;
-const QueryPolicyProductListByCodeRequest = models.QueryPolicyProductListByCodeRequest;
+const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const ForceQNRequest = models.ForceQNRequest;
 const DescribeCustomerInfoRequest = models.DescribeCustomerInfoRequest;
@@ -348,6 +354,18 @@ Callable role: End-customer.
     }
 
     /**
+     * This API is used to query the customer voucher list by Reseller, Second-level Reseller or Distributor.
+Callable roles: Reseller, Second-level Reseller or Distributor.
+     * @param {DescribeCustomerVoucherListRequest} req
+     * @param {function(string, DescribeCustomerVoucherListResponse):void} cb
+     * @public
+     */
+    DescribeCustomerVoucherList(req, cb) {
+        let resp = new DescribeCustomerVoucherListResponse();
+        this.request("DescribeCustomerVoucherList", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain the total amount of customer bills by payment mode.
 Callable roles: Distributor, Second-level reseller, Reseller
      * @param {DescribeBillSummaryByPayModeRequest} req
@@ -438,6 +456,18 @@ Invokable role types: Distributor, Second-level reseller, Reseller.
     QueryInvitationInfo(req, cb) {
         let resp = new QueryInvitationInfoResponse();
         this.request("QueryInvitationInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the voucher list by Customer. 
+Callable roles: Customer.
+     * @param {DescribeCustomerOwnVoucherListRequest} req
+     * @param {function(string, DescribeCustomerOwnVoucherListResponse):void} cb
+     * @public
+     */
+    DescribeCustomerOwnVoucherList(req, cb) {
+        let resp = new DescribeCustomerOwnVoucherListResponse();
+        this.request("DescribeCustomerOwnVoucherList", req, resp, cb);
     }
 
     /**

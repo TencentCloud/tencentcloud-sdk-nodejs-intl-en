@@ -8,6 +8,7 @@ module.exports = {
     as: require("./as"),
     asr: require("./asr"),
     batch: require("./batch"),
+    bi: require("./bi"),
     billing: require("./billing"),
     cam: require("./cam"),
     captcha: require("./captcha"),

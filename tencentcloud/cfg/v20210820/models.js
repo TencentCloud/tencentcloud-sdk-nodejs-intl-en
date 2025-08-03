@@ -3012,6 +3012,18 @@ class DescribeTaskListRequest extends  AbstractModel {
          */
         this.TaskStatusList = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ArchId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ArchName = null;
+
     }
 
     /**
@@ -3051,6 +3063,8 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
         this.TaskStatusList = 'TaskStatusList' in params ? params.TaskStatusList : null;
+        this.ArchId = 'ArchId' in params ? params.ArchId : null;
+        this.ArchName = 'ArchName' in params ? params.ArchName : null;
 
     }
 }

@@ -97,6 +97,7 @@ const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplat
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
 const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
+const TimeSpotCheck = models.TimeSpotCheck;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
@@ -163,6 +164,7 @@ const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplat
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
 const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
 const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
+const Rules = models.Rules;
 const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const ComposeVideoStream = models.ComposeVideoStream;
@@ -216,6 +218,7 @@ const TaskOutputStorage = models.TaskOutputStorage;
 const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const MP4ConfigureInfo = models.MP4ConfigureInfo;
+const SubtitlePosition = models.SubtitlePosition;
 const DeleteQualityControlTemplateRequest = models.DeleteQualityControlTemplateRequest;
 const ColorEnhanceConfig = models.ColorEnhanceConfig;
 const ComposeAudioItem = models.ComposeAudioItem;
@@ -261,6 +264,7 @@ const ModifyQualityControlTemplateResponse = models.ModifyQualityControlTemplate
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const LiveStreamAsrWordsRecognitionResult = models.LiveStreamAsrWordsRecognitionResult;
 const AiSamplePerson = models.AiSamplePerson;
+const SmartSubtitleTaskAsrFullTextResult = models.SmartSubtitleTaskAsrFullTextResult;
 const BatchSmartSubtitlesResult = models.BatchSmartSubtitlesResult;
 const SimpleAesDrm = models.SimpleAesDrm;
 const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
@@ -298,6 +302,7 @@ const RawImageWatermarkInput = models.RawImageWatermarkInput;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const CreateQualityControlTemplateRequest = models.CreateQualityControlTemplateRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
+const ScheduleExecRuleTaskResult = models.ScheduleExecRuleTaskResult;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const EditMediaTask = models.EditMediaTask;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
@@ -323,6 +328,7 @@ const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSeg
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
+const ExecRuleTaskData = models.ExecRuleTaskData;
 const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
@@ -351,6 +357,7 @@ const TranscodeTemplate = models.TranscodeTemplate;
 const TranslateConfigureInfo = models.TranslateConfigureInfo;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
+const QualityControlStrategy = models.QualityControlStrategy;
 const SubtitleTemplate = models.SubtitleTemplate;
 const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
@@ -425,6 +432,7 @@ const ImageEraseLogoConfig = models.ImageEraseLogoConfig;
 const ScheduleReviewTaskResult = models.ScheduleReviewTaskResult;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const LiveStreamRecordResultInfo = models.LiveStreamRecordResultInfo;
+const RuleConditionItem = models.RuleConditionItem;
 const ComposeStyles = models.ComposeStyles;
 const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
@@ -527,7 +535,7 @@ const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const AiAnalysisTaskHeadTailResult = models.AiAnalysisTaskHeadTailResult;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const WorkflowTask = models.WorkflowTask;
-const SmartSubtitleTaskAsrFullTextResult = models.SmartSubtitleTaskAsrFullTextResult;
+const ExecRulesTask = models.ExecRulesTask;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const EditMediaFileInfo = models.EditMediaFileInfo;
 const ComposeAudioStream = models.ComposeAudioStream;
@@ -764,12 +772,11 @@ Instead of initiating a video processing task, this API is used to help generate
 4. Sampled screenshot of videos.
 5. Image sprite of videos.
 6. Adaptive bitrate stream conversion for videos.
-7. Intelligent content moderation (pornography detection and sensitive information detection).
-8. Intelligent content analysis (tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking).
-9. Intelligent content recognition (human face, full text, text keyword, full speech, speech keyword, speech translation, and object).
-10. Media quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
-
-11. Smart subtitle (full speech, speech hotword, and speech translation).
+7. Intelligent content moderation (such as pornography detection and sensitive information detection).
+8. Intelligent content analysis (such as tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking).
+9. Intelligent content recognition (such as human face, full text, text keyword, full speech, speech keyword, speech translation, and object).
+10. Media quality inspection, such as media format diagnosis, audio/visual content moderation (such as jitter, blur, low lighting, overexposure, black edge, white edge, black screen, white screen, screen glitch, noise, mosaic, and QR code), and no-reference quality scoring.
+11. Smart subtitle (such as full speech, speech hotword, and speech translation).
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public

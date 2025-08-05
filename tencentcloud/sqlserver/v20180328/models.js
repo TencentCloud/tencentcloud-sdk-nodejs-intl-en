@@ -3747,13 +3747,13 @@ class DescribeZonesResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of AZs returned
+         * Number of AZs returned.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Array of AZs
+         * Array of AZs.
          * @type {Array.<ZoneInfo> || null}
          */
         this.ZoneSet = null;
@@ -3925,7 +3925,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.VersionSet = null;
 
         /**
-         * Instance availability zone, such as ap-guangzhou-2
+         * Instance availability zone, such as ap-guangzhou-3
          * @type {string || null}
          */
         this.Zone = null;
@@ -3949,13 +3949,13 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.UidSet = null;
 
         /**
-         * Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+         * Instance type. HA: high-availability instance; RO: read-only instance; SI: basic edition instance; BI: business intelligence service instance; cvmHA: dual-server high-availability instance with cloud disk; cvmRO: read-only instance with cloud disk; MultiHA: multi-node instance; cvmMultiHA: multi-node instance with cloud disk.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * Pagination query method. offset - pagination query by offset; pageNumber - pagination query by number of pages. The default value is pageNumber.
          * @type {string || null}
          */
         this.PaginationType = null;
@@ -7410,7 +7410,7 @@ class DBInstance extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * High-availability instance type. Valid values: 1 (dual-server high-availability), 2 (standalone), 3 (multi-AZ), 4 (multi-AZ cluster), 5 (cluster), 9 (private consumption)
+         * Instance disaster recovery type. 1: dual-server high availability; 2: single-node; 3: cross-AZ; 4: cross-AZ cluster; 5: cluster; 6: multi-node cluster; 7: multi-node cross-AZ cluster.
          * @type {number || null}
          */
         this.Model = null;
@@ -7482,25 +7482,25 @@ class DBInstance extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance isolation operation.
          * @type {string || null}
          */
         this.IsolateOperator = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Publishing/Subscription flag. SUB: subscription instance; PUB: publishing instance. If this parameter is left blank, the instance is an ordinary instance that does not involve publishing or subscription.
          * @type {string || null}
          */
         this.SubFlag = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Read-only flag. RO: read-only instance; MASTER: primary instance bound to a read-only instance. If this parameter is left blank, the instance is not a read-only instance and is not in any read-only group.
          * @type {string || null}
          */
         this.ROFlag = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Disaster recovery type. MIRROR: image; ALWAYSON: Always On; SINGLE: single instance.
          * @type {string || null}
          */
         this.HAFlag = null;
@@ -7512,13 +7512,13 @@ class DBInstance extends  AbstractModel {
         this.ResourceTags = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Backup mode. master_pkg: backup on the primary node (default value); master_no_pkg: no backup on the primary node; slave_pkg: backup on secondary nodes (valid for Always On clusters); slave_no_pkg: no backup on secondary nodes (valid for Always On clusters). This parameter is invalid for read-only instances.
          * @type {string || null}
          */
         this.BackupModel = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance backup information.
          * @type {string || null}
          */
         this.InstanceNote = null;
@@ -7542,7 +7542,8 @@ class DBInstance extends  AbstractModel {
         this.BackupSaveDays = null;
 
         /**
-         * Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+         * Instance type. HA: high-availability instance; RO: read-only instance; SI: basic edition instance; BI: business intelligence service instance; cvmHA: high-availability instance with cloud disk; cvmRO: read-only instance with cloud disk; MultiHA: multi-node instance; cvmMultiHA: multi-node instance with cloud disk.
+
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -7596,22 +7597,28 @@ class DBInstance extends  AbstractModel {
         this.IsDrZone = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Secondary AZ information on the two-node instance.
          * @type {SlaveZones || null}
          */
         this.SlaveZones = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Architecture flag. SINGLE: single-node; DOUBLE: two-node.
          * @type {string || null}
          */
         this.Architecture = null;
 
         /**
-         * Note: This field may return null, indicating that no valid values can be obtained.
+         * Type flag. EXCLUSIVE: exclusive; SHARED: shared.
          * @type {string || null}
          */
         this.Style = null;
+
+        /**
+         * 
+         * @type {Array.<SlaveZones> || null}
+         */
+        this.MultiSlaveZones = null;
 
     }
 
@@ -7689,6 +7696,15 @@ class DBInstance extends  AbstractModel {
         }
         this.Architecture = 'Architecture' in params ? params.Architecture : null;
         this.Style = 'Style' in params ? params.Style : null;
+
+        if (params.MultiSlaveZones) {
+            this.MultiSlaveZones = new Array();
+            for (let z in params.MultiSlaveZones) {
+                let obj = new SlaveZones();
+                obj.deserialize(params.MultiSlaveZones[z]);
+                this.MultiSlaveZones.push(obj);
+            }
+        }
 
     }
 }

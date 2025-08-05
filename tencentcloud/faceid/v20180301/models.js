@@ -2108,10 +2108,16 @@ class GetFaceIdResultIntlResponse extends  AbstractModel {
         this.BestFrame = null;
 
         /**
-         * The video file (Base64) for verification.
+         * The video file (Base64) for verification.Used for verification, contains specific color reflection effects.
          * @type {string || null}
          */
         this.Video = null;
+
+        /**
+         * Records the specific action performed by the user, used for AI Face Shield analysis.
+         * @type {string || null}
+         */
+        this.ActionVideo = null;
 
         /**
          * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (selfie verification) mode.
@@ -2146,6 +2152,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Description = 'Description' in params ? params.Description : null;
         this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
         this.Video = 'Video' in params ? params.Video : null;
+        this.ActionVideo = 'ActionVideo' in params ? params.ActionVideo : null;
         this.Similarity = 'Similarity' in params ? params.Similarity : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -6210,10 +6217,16 @@ class CompareResult extends  AbstractModel {
         this.LiveData = null;
 
         /**
-         * The download URL of the video used for verification, which is valid for 10 minutes.
+         * The download URL of the video used for verification, which contains specific color reflection effects, is valid for 10 minutes.
          * @type {FileInfo || null}
          */
         this.LiveVideo = null;
+
+        /**
+         * Records the specific action performed by the user, used for AI Face Shield analysis.
+         * @type {FileInfo || null}
+         */
+        this.ActionVideo = null;
 
         /**
          * The liveness detection result code.
@@ -6312,6 +6325,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new FileInfo();
             obj.deserialize(params.LiveVideo)
             this.LiveVideo = obj;
+        }
+
+        if (params.ActionVideo) {
+            let obj = new FileInfo();
+            obj.deserialize(params.ActionVideo)
+            this.ActionVideo = obj;
         }
         this.LiveErrorCode = 'LiveErrorCode' in params ? params.LiveErrorCode : null;
         this.LiveErrorMsg = 'LiveErrorMsg' in params ? params.LiveErrorMsg : null;

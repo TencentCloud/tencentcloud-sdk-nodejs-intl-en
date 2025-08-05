@@ -5365,6 +5365,59 @@ class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Detection policy for media quality inspection.
+ * @class
+ */
+class TimeSpotCheck extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Duration of each loop detection in the spot check policy, in seconds. Valid values:
+
+ - Minimum value: 10.
+ - Maximum value: 86400.
+
+         * @type {number || null}
+         */
+        this.CheckDuration = null;
+
+        /**
+         * Detection interval of the spot check policy, which indicates how long to wait before conducting the next detection after one detection is completed.
+         * @type {number || null}
+         */
+        this.CheckInterval = null;
+
+        /**
+         * Duration for which the opening clip is skipped.
+         * @type {number || null}
+         */
+        this.SkipDuration = null;
+
+        /**
+         * Number of loops. When this field is empty or set to 0, the default behavior is to loop until the video ends.
+         * @type {number || null}
+         */
+        this.CirclesNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckDuration = 'CheckDuration' in params ? params.CheckDuration : null;
+        this.CheckInterval = 'CheckInterval' in params ? params.CheckInterval : null;
+        this.SkipDuration = 'SkipDuration' in params ? params.SkipDuration : null;
+        this.CirclesNumber = 'CirclesNumber' in params ? params.CirclesNumber : null;
+
+    }
+}
+
+/**
  * Text watermarking template
  * @class
  */
@@ -8734,6 +8787,69 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Task judgment conditions.
+ * @class
+ */
+class Rules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Judgment condition ID.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Judgment condition configuration.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<RuleConditionItem> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * Logical operator for the list of conditions. Valid values:
+
+ - &&: logical AND
+ - ||: logical OR
+         * @type {string || null}
+         */
+        this.Linker = null;
+
+        /**
+         * Indexes of the nodes to execute if the judgment conditions are met.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.RearDriveIndexs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new RuleConditionItem();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+        this.Linker = 'Linker' in params ? params.Linker : null;
+        this.RearDriveIndexs = 'RearDriveIndexs' in params ? params.RearDriveIndexs : null;
+
+    }
+}
+
+/**
  * Text keyword recognition result.
  * @class
  */
@@ -9613,7 +9729,8 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Specifies the output of an image sprite task for a video.
+         * Output of the image sprite task for videos.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {MediaImageSpriteItem || null}
          */
         this.Output = null;
@@ -11823,6 +11940,34 @@ class MP4ConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * Subtitle position information.
+ * @class
+ */
+class SubtitlePosition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Y-coordinate value when the subtitle is centered.
+         * @type {number || null}
+         */
+        this.CenterY = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CenterY = 'CenterY' in params ? params.CenterY : null;
+
+    }
+}
+
+/**
  * DeleteQualityControlTemplate request structure.
  * @class
  */
@@ -11990,38 +12135,33 @@ class LiveScheduleTask extends  AbstractModel {
         super();
 
         /**
-         * The ID of a live scheme subtask.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Live orchestration task ID.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * The task status. Valid values:
-<li>`PROCESSING`</li>
-<li>`FINISH` </li>
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task stream status. Valid values:
+<li>PROCESSING: processing</li>
+<li>FINISH: completed</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * If the value returned is not `0`, there was a source error. If `0` is returned, refer to the error codes of the corresponding task type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * An error code other than 0 is returned in case of a source exception. Use the error code of the specific task when a value of 0 is returned.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The corresponding exception message is returned in case of a source exception. If no source exception occurs, use the message of each specific task.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * The URL of the live stream.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Live stream URL.
          * @type {string || null}
          */
         this.Url = null;
@@ -13478,7 +13618,8 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * Specifies the output of a screenshot task at specified time points for a video.
+         * Output of the time point screenshot task for videos.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {MediaSnapshotByTimeOffsetItem || null}
          */
         this.Output = null;
@@ -14636,6 +14777,89 @@ class AiSamplePerson extends  AbstractModel {
 }
 
 /**
+ * Full speech recognition result.
+ * @class
+ */
+class SmartSubtitleTaskAsrFullTextResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input information on the full speech recognition task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information on the full speech recognition task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartSubtitleTaskAsrFullTextResultOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Task progress.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SmartSubtitleTaskResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new SmartSubtitleTaskAsrFullTextResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
  * Smart subtitle task result.
  * @class
  */
@@ -15664,6 +15888,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.QualityControlTask = null;
 
         /**
+         * Conditional judgment of the task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ExecRulesTask || null}
+         */
+        this.ExecRulesTask = null;
+
+        /**
          * Smart subtitle task.
 Note: This field may return null, indicating that no valid value can be obtained.
          * @type {SmartSubtitlesTaskInput || null}
@@ -15738,6 +15969,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new AiQualityControlTaskInput();
             obj.deserialize(params.QualityControlTask)
             this.QualityControlTask = obj;
+        }
+
+        if (params.ExecRulesTask) {
+            let obj = new ExecRulesTask();
+            obj.deserialize(params.ExecRulesTask)
+            this.ExecRulesTask = obj;
         }
 
         if (params.SmartSubtitlesTask) {
@@ -16009,11 +16246,22 @@ class ScheduleAnalysisTaskResult extends  AbstractModel {
         this.Input = null;
 
         /**
-         * The output of the content analysis task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Analysis task output.
          * @type {Array.<AiAnalysisResult> || null}
          */
         this.Output = null;
+
+        /**
+         * Task execution start time in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task execution completion time in [ISO date and time format](https://www.tencentcloud.comom/document/product/862/37710?from_cn_redirect=1#52).
+         * @type {string || null}
+         */
+        this.FinishTime = null;
 
     }
 
@@ -16043,6 +16291,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Output.push(obj);
             }
         }
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -17150,6 +17400,12 @@ class CreateQualityControlTemplateRequest extends  AbstractModel {
          */
         this.RecordFormat = null;
 
+        /**
+         * Spot check policy for media quality inspection.
+         * @type {QualityControlStrategy || null}
+         */
+        this.Strategy = null;
+
     }
 
     /**
@@ -17171,6 +17427,12 @@ class CreateQualityControlTemplateRequest extends  AbstractModel {
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.RecordFormat = 'RecordFormat' in params ? params.RecordFormat : null;
+
+        if (params.Strategy) {
+            let obj = new QualityControlStrategy();
+            obj.deserialize(params.Strategy)
+            this.Strategy = obj;
+        }
 
     }
 }
@@ -17206,6 +17468,73 @@ class AiSampleTagOperation extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * Result type of the media quality inspection task.
+ * @class
+ */
+class ScheduleExecRuleTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, which can be PROCESSING, SUCCESS, or FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates success, while other values indicate failure. For specific values, see the list of MPS error codes at https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81.
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of the conditional judgment task.
+         * @type {ExecRulesTask || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of the conditional judgment task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ExecRuleTaskData || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new ExecRulesTask();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new ExecRuleTaskData();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -18721,6 +19050,34 @@ class CreateSnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Conditional judgment output.
+ * @class
+ */
+class ExecRuleTaskData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Indexes of nodes that needs to be executed based on the conditional judgment for quality inspection.
+         * @type {Array.<number> || null}
+         */
+        this.RearDriveIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RearDriveIndex = 'RearDriveIndex' in params ? params.RearDriveIndex : null;
+
+    }
+}
+
+/**
  * ModifyContentReviewTemplate request structure.
  * @class
  */
@@ -19938,6 +20295,12 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
          */
         this.Confidence = null;
 
+        /**
+         * Varies based on different types.
+         * @type {string || null}
+         */
+        this.SpecialInfo = null;
+
     }
 
     /**
@@ -19949,6 +20312,7 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
         }
         this.Tag = 'Tag' in params ? params.Tag : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.SpecialInfo = 'SpecialInfo' in params ? params.SpecialInfo : null;
 
     }
 }
@@ -20281,6 +20645,47 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             let obj = new AiReviewPoliticalAsrTaskOutput();
             obj.deserialize(params.Output)
             this.Output = obj;
+        }
+
+    }
+}
+
+/**
+ * Detection policy for media quality inspection.
+ * @class
+ */
+class QualityControlStrategy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy type. Valid values:
+- TimeSpotCheck
+         * @type {string || null}
+         */
+        this.StrategyType = null;
+
+        /**
+         * Spot check policy based on time.
+         * @type {TimeSpotCheck || null}
+         */
+        this.TimeSpotCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyType = 'StrategyType' in params ? params.StrategyType : null;
+
+        if (params.TimeSpotCheck) {
+            let obj = new TimeSpotCheck();
+            obj.deserialize(params.TimeSpotCheck)
+            this.TimeSpotCheck = obj;
         }
 
     }
@@ -20846,6 +21251,13 @@ class AiAnalysisTaskDelLogoOutput extends  AbstractModel {
          */
         this.TranslateSubtitlePath = null;
 
+        /**
+         * Position of the erased subtitle. Note: This field is only valid for subtitle extraction when the option to return subtitle positions is enabled.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SubtitlePosition || null}
+         */
+        this.SubtitlePos = null;
+
     }
 
     /**
@@ -20864,6 +21276,12 @@ class AiAnalysisTaskDelLogoOutput extends  AbstractModel {
         }
         this.OriginSubtitlePath = 'OriginSubtitlePath' in params ? params.OriginSubtitlePath : null;
         this.TranslateSubtitlePath = 'TranslateSubtitlePath' in params ? params.TranslateSubtitlePath : null;
+
+        if (params.SubtitlePos) {
+            let obj = new SubtitlePosition();
+            obj.deserialize(params.SubtitlePos)
+            this.SubtitlePos = obj;
+        }
 
     }
 }
@@ -21318,8 +21736,7 @@ class DescribeQualityControlTemplatesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Media quality inspection template details list.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * List of media quality inspection templates.
          * @type {Array.<QualityControlTemplate> || null}
          */
         this.QualityControlTemplateSet = null;
@@ -22549,7 +22966,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Input = null;
 
         /**
-         * Specifies the output of a sampling screenshot task for a video.
+         * Output of the sampled screenshot task for videos.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {MediaSampleSnapshotItem || null}
          */
         this.Output = null;
@@ -24450,20 +24868,21 @@ class Activity extends  AbstractModel {
         super();
 
         /**
-         * Atomic task type.
-<li>input: starting node.</li>.
-<li>`output`: termination node</li>.
-<li>action-trans: transcoding.</li>.
-<li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
-<li>action-AIAnalysis: analysis.</li>.
-<li>action-AIRecognition: specifies recognition.</li>.
-<li>action-aiReview: specifies the review action.</li>.
-<li>action-animated-graphics: specifies the animated image.</li>.
-<li>action-image-sprite: specifies the sprite sheet.</li>.
-<li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
-<li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
-<li>action-AIQualityControl: media quality inspection.</li>.
-<li>action-SmartSubtitles: specifies smart subtitling.</li>.
+         * Atomic task type:
+<li>input: start node</li>
+<li>output: end node</li>
+<li>action-trans: transcoding</li>
+<li>action-samplesnapshot: sampled screenshot</li>
+<li>action-AIAnalysis: analysis</li>
+<li>action-AIRecognition: recognition</li>
+<li>action-aiReview: review</li>
+<li>action-animated-graphics: conversion to GIF</li>
+<li>action-image-sprite: image sprite</li>
+<li>action-snapshotByTimeOffset: time point screenshot</li>
+<li>action-adaptive-substream: adaptive bitrate stream</li>
+<li>action-AIQualityControl: media quality inspection</li>
+<li>action-SmartSubtitles: smart subtitle</li>
+<li>action-exec-rules: judgment rule</li>
 
 
 
@@ -24887,6 +25306,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Rule condition configuration.
+ * @class
+ */
+class RuleConditionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key of the quality inspection item condition.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value corresponding to the condition.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * The style information of a video editing/compositing task.
  * @class
  */
@@ -25231,7 +25685,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.SubtitleTemplate = null;
 
         /**
-         * Extension field for transcoding.
+         * Transcoding parameter extension field.
          * @type {string || null}
          */
         this.StdExtInfo = null;
@@ -25330,6 +25784,12 @@ class ModifyQualityControlTemplateRequest extends  AbstractModel {
          */
         this.RecordFormat = null;
 
+        /**
+         * Spot check policy for media quality inspection.
+         * @type {QualityControlStrategy || null}
+         */
+        this.Strategy = null;
+
     }
 
     /**
@@ -25352,6 +25812,12 @@ class ModifyQualityControlTemplateRequest extends  AbstractModel {
             }
         }
         this.RecordFormat = 'RecordFormat' in params ? params.RecordFormat : null;
+
+        if (params.Strategy) {
+            let obj = new QualityControlStrategy();
+            obj.deserialize(params.Strategy)
+            this.Strategy = obj;
+        }
 
     }
 }
@@ -26709,8 +27175,8 @@ class SmartSubtitlesResult extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-<Li>AsrFullTextRecognition: full speech recognition</li>
-<Li>TransTextRecognition: speech translation</li>
+<li>AsrFullTextRecognition: full speech recognition</li>
+<li>TransTextRecognition: speech translation</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -27433,6 +27899,18 @@ class DescribeTasksRequest extends  AbstractModel {
          */
         this.ScrollToken = null;
 
+        /**
+         * Query task start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query task end time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -27445,6 +27923,8 @@ class DescribeTasksRequest extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -28761,43 +29241,37 @@ class QualityControlData extends  AbstractModel {
         super();
 
         /**
-         * Whether there is an audio track. `true` indicates that there isn't.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * When this field is set to true, it indicates that the video has no audio track.
          * @type {boolean || null}
          */
         this.NoAudio = null;
 
         /**
-         * Whether there is a video track. `true` indicates that there isn't.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * When this field is set to true, it indicates that the video has no video track.
          * @type {boolean || null}
          */
         this.NoVideo = null;
 
         /**
          * No-reference quality score of the video (100 points in total).
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.QualityEvaluationScore = null;
 
         /**
          * No-reference quality score of the video (MOS).
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.QualityEvaluationMeanOpinionScore = null;
 
         /**
-         * Exception items detected in content quality inspection.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Exception items identified in content quality inspection.
          * @type {Array.<QualityControlResult> || null}
          */
         this.QualityControlResultSet = null;
 
         /**
-         * Exception items detected in format diagnosis.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Exception items identified in format diagnosis.
          * @type {Array.<ContainerDiagnoseResultItem> || null}
          */
         this.ContainerDiagnoseResultSet = null;
@@ -29394,9 +29868,8 @@ class LiveActivityResult extends  AbstractModel {
 
         /**
          * Atomic task type.
-<li>LiveRecord: live recording.</li>
-<li>AiQualityControl: media quality inspection.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>LiveRecord: live recording</li>
+<li>AiQualityControl: media quality inspection</li>
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -31416,57 +31889,19 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * Full speech recognition result.
+ * Task judgment conditions.
  * @class
  */
-class SmartSubtitleTaskAsrFullTextResult extends  AbstractModel {
+class ExecRulesTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status, including PROCESSING, SUCCESS, and FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
-         * @type {string || null}
-         */
-        this.ErrCodeExt = null;
-
-        /**
-         * Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Input information on the full speech recognition task.
+         * Conditional judgment information.
 Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {SmartSubtitleTaskResultInput || null}
+         * @type {Array.<Rules> || null}
          */
-        this.Input = null;
-
-        /**
-         * Output information on the full speech recognition task.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {SmartSubtitleTaskAsrFullTextResultOutput || null}
-         */
-        this.Output = null;
-
-        /**
-         * Task progress.
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.Progress = null;
+        this.Rules = null;
 
     }
 
@@ -31477,23 +31912,15 @@ Note: This field may return null, indicating that no valid value can be obtained
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
 
-        if (params.Input) {
-            let obj = new SmartSubtitleTaskResultInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new Rules();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
         }
-
-        if (params.Output) {
-            let obj = new SmartSubtitleTaskAsrFullTextResultOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -32552,6 +32979,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.QualityControlTask = null;
 
         /**
+         * Conditional judgment task output.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {ScheduleExecRuleTaskResult || null}
+         */
+        this.ExecRuleTask = null;
+
+        /**
          * Smart subtitle task output.
 Note: This field may return null, indicating that no valid value can be obtained.
          * @type {ScheduleSmartSubtitleTaskResult || null}
@@ -32626,6 +33060,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ScheduleQualityControlTaskResult();
             obj.deserialize(params.QualityControlTask)
             this.QualityControlTask = obj;
+        }
+
+        if (params.ExecRuleTask) {
+            let obj = new ScheduleExecRuleTaskResult();
+            obj.deserialize(params.ExecRuleTask)
+            this.ExecRuleTask = obj;
         }
 
         if (params.SmartSubtitlesTask) {
@@ -32950,6 +33390,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * Spot check policy for media quality inspection.
+         * @type {QualityControlStrategy || null}
+         */
+        this.Strategy = null;
+
     }
 
     /**
@@ -32974,6 +33420,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Strategy) {
+            let obj = new QualityControlStrategy();
+            obj.deserialize(params.Strategy)
+            this.Strategy = obj;
+        }
 
     }
 }
@@ -33094,6 +33546,30 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.RawParameter = null;
 
+        /**
+         * Bucket that stores the output file. If it is left unspecified, the storage location in InputInfo will be inherited.
+**Note**: This parameter is required when InputInfo.Type is set to URL.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Output path of the generated subtitle file, which can be a relative or absolute path.
+To define the output path, end the path with .{format}. For variable names, see the description of file name variables at https://www.tencentcloud.comom/document/product/862/37039.?from_cn_redirect=1
+
+Relative path example:
+ - File name_{variable name}.{format}.
+ - File name.{format}.
+
+Absolute path example:
+ -/Custom path/File name_{variable name}.{format}.
+
+If this field is left unspecified, the default value is the relative path in the following format: {inputName}_smartsubtitle_{definition}.{format}.
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
     }
 
     /**
@@ -33111,6 +33587,13 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.RawParameter)
             this.RawParameter = obj;
         }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
 
     }
 }
@@ -33888,15 +34371,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SegmentTags = null;
 
         /**
-         * The live streaming segment corresponds to the live start time point, in the ISO date format.	
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Start time of the live streaming segment in ISO date and time format.	
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * The live streaming segment corresponds to the live streaming end time, in the ISO date format.	
-Note: This field may return null, indicating that no valid value can be obtained.
+         * End time of the live streaming segment in ISO date and time format.	
          * @type {string || null}
          */
         this.EndTime = null;
@@ -34466,6 +34947,7 @@ module.exports = {
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
+    TimeSpotCheck: TimeSpotCheck,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
@@ -34532,6 +35014,7 @@ module.exports = {
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     AiReviewTaskTerrorismOcrResult: AiReviewTaskTerrorismOcrResult,
+    Rules: Rules,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     ComposeVideoStream: ComposeVideoStream,
@@ -34585,6 +35068,7 @@ module.exports = {
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     MP4ConfigureInfo: MP4ConfigureInfo,
+    SubtitlePosition: SubtitlePosition,
     DeleteQualityControlTemplateRequest: DeleteQualityControlTemplateRequest,
     ColorEnhanceConfig: ColorEnhanceConfig,
     ComposeAudioItem: ComposeAudioItem,
@@ -34630,6 +35114,7 @@ module.exports = {
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
     LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
     AiSamplePerson: AiSamplePerson,
+    SmartSubtitleTaskAsrFullTextResult: SmartSubtitleTaskAsrFullTextResult,
     BatchSmartSubtitlesResult: BatchSmartSubtitlesResult,
     SimpleAesDrm: SimpleAesDrm,
     DescribeWorkflowsResponse: DescribeWorkflowsResponse,
@@ -34667,6 +35152,7 @@ module.exports = {
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     CreateQualityControlTemplateRequest: CreateQualityControlTemplateRequest,
     AiSampleTagOperation: AiSampleTagOperation,
+    ScheduleExecRuleTaskResult: ScheduleExecRuleTaskResult,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     EditMediaTask: EditMediaTask,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
@@ -34692,6 +35178,7 @@ module.exports = {
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
+    ExecRuleTaskData: ExecRuleTaskData,
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
@@ -34720,6 +35207,7 @@ module.exports = {
     TranslateConfigureInfo: TranslateConfigureInfo,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
+    QualityControlStrategy: QualityControlStrategy,
     SubtitleTemplate: SubtitleTemplate,
     LiveStreamProcessTask: LiveStreamProcessTask,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
@@ -34794,6 +35282,7 @@ module.exports = {
     ScheduleReviewTaskResult: ScheduleReviewTaskResult,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     LiveStreamRecordResultInfo: LiveStreamRecordResultInfo,
+    RuleConditionItem: RuleConditionItem,
     ComposeStyles: ComposeStyles,
     CreateLiveRecordTemplateRequest: CreateLiveRecordTemplateRequest,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
@@ -34896,7 +35385,7 @@ module.exports = {
     AiAnalysisTaskHeadTailResult: AiAnalysisTaskHeadTailResult,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     WorkflowTask: WorkflowTask,
-    SmartSubtitleTaskAsrFullTextResult: SmartSubtitleTaskAsrFullTextResult,
+    ExecRulesTask: ExecRulesTask,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     EditMediaFileInfo: EditMediaFileInfo,
     ComposeAudioStream: ComposeAudioStream,

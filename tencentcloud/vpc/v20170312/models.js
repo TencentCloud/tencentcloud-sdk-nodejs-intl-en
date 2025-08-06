@@ -8553,7 +8553,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.ChargeUnit = null;
 
         /**
-         * Original price. Unit: CNY. Returned only for prepaid price inquiry.
+         * Original price. Unit: USD. Returned only for prepaid price inquiry.
          * @type {number || null}
          */
         this.OriginalPrice = null;

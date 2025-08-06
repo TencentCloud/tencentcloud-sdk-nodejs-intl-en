@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ModifyCloudSliceTaskResponse = models.ModifyCloudSliceTaskResponse;
 const AgentConfig = models.AgentConfig;
 const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
 const AudioEncodeParams = models.AudioEncodeParams;
@@ -35,6 +36,7 @@ const WaterMarkChar = models.WaterMarkChar;
 const DescribeTrtcRoomUsageResponse = models.DescribeTrtcRoomUsageResponse;
 const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
 const AbnormalEvent = models.AbnormalEvent;
+const DescribeScaleInfoResponse = models.DescribeScaleInfoResponse;
 const ScaleInfomation = models.ScaleInfomation;
 const AgentParams = models.AgentParams;
 const ControlAIConversationResponse = models.ControlAIConversationResponse;
@@ -49,6 +51,7 @@ const McuTencentVod = models.McuTencentVod;
 const DescribeWebRecordResponse = models.DescribeWebRecordResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
+const DismissRoomResponse = models.DismissRoomResponse;
 const CloudStorage = models.CloudStorage;
 const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const TimeValue = models.TimeValue;
@@ -58,11 +61,13 @@ const DescribeTRTCRealTimeScaleDataResponse = models.DescribeTRTCRealTimeScaleDa
 const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
 const StorageParams = models.StorageParams;
 const CloudVod = models.CloudVod;
+const CloudSliceStorage = models.CloudSliceStorage;
 const EmulateMobileParams = models.EmulateMobileParams;
 const DescribeCallDetailInfoResponse = models.DescribeCallDetailInfoResponse;
 const DescribeTRTCRealTimeQualityDataResponse = models.DescribeTRTCRealTimeQualityDataResponse;
 const McuCustomCrop = models.McuCustomCrop;
 const DescribeMixTranscodingUsageRequest = models.DescribeMixTranscodingUsageRequest;
+const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
 const DescribeStreamIngestResponse = models.DescribeStreamIngestResponse;
 const MixTranscodeParams = models.MixTranscodeParams;
 const StopStreamIngestRequest = models.StopStreamIngestRequest;
@@ -75,6 +80,7 @@ const EventList = models.EventList;
 const DescribeTrtcUsageRequest = models.DescribeTrtcUsageRequest;
 const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
 const DismissRoomRequest = models.DismissRoomRequest;
+const StartWebRecordRequest = models.StartWebRecordRequest;
 const StartStreamIngestRequest = models.StartStreamIngestRequest;
 const DescribeAITranscriptionRequest = models.DescribeAITranscriptionRequest;
 const DescribeAIConversationResponse = models.DescribeAIConversationResponse;
@@ -85,14 +91,17 @@ const WebRecordVideoParams = models.WebRecordVideoParams;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
+const DeleteCloudSliceTaskResponse = models.DeleteCloudSliceTaskResponse;
 const DescribeRelayUsageResponse = models.DescribeRelayUsageResponse;
 const McuLayout = models.McuLayout;
+const SliceParams = models.SliceParams;
 const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
 const StorageFile = models.StorageFile;
 const WaterMark = models.WaterMark;
 const McuStorageParams = models.McuStorageParams;
-const DescribeScaleInfoResponse = models.DescribeScaleInfoResponse;
+const DeleteCloudSliceTaskRequest = models.DeleteCloudSliceTaskRequest;
 const MixLayoutParams = models.MixLayoutParams;
+const ModifyCloudSliceTaskRequest = models.ModifyCloudSliceTaskRequest;
 const DescribeMixTranscodingUsageResponse = models.DescribeMixTranscodingUsageResponse;
 const McuFeedBackRoomParams = models.McuFeedBackRoomParams;
 const AudioEncode = models.AudioEncode;
@@ -104,7 +113,7 @@ const TencentVod = models.TencentVod;
 const McuPassThrough = models.McuPassThrough;
 const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
 const TRTCDataResult = models.TRTCDataResult;
-const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
+const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const StartWebRecordResponse = models.StartWebRecordResponse;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const RecognizeConfig = models.RecognizeConfig;
@@ -118,6 +127,7 @@ const DescribeAIConversationRequest = models.DescribeAIConversationRequest;
 const RowValues = models.RowValues;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartStreamIngestResponse = models.StartStreamIngestResponse;
+const CreateCloudSliceTaskResponse = models.CreateCloudSliceTaskResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
 const VideoParams = models.VideoParams;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
@@ -128,15 +138,15 @@ const ControlAIConversationRequest = models.ControlAIConversationRequest;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeUnusualEventResponse = models.DescribeUnusualEventResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
-const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
+const CreateCloudSliceTaskRequest = models.CreateCloudSliceTaskRequest;
 const StartAITranscriptionRequest = models.StartAITranscriptionRequest;
-const DismissRoomResponse = models.DismissRoomResponse;
+const DescribeCloudSliceTaskRequest = models.DescribeCloudSliceTaskRequest;
 const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const MixUserInfo = models.MixUserInfo;
 const EventMessage = models.EventMessage;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
-const StartWebRecordRequest = models.StartWebRecordRequest;
+const SliceStorageParams = models.SliceStorageParams;
 const MaxVideoUser = models.MaxVideoUser;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
 const StopWebRecordResponse = models.StopWebRecordResponse;
@@ -144,6 +154,7 @@ const STTConfig = models.STTConfig;
 const StopWebRecordRequest = models.StopWebRecordRequest;
 const McuSeiParams = models.McuSeiParams;
 const StopAIConversationRequest = models.StopAIConversationRequest;
+const UpdateAIConversationRequest = models.UpdateAIConversationRequest;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
 const TranscriptionParams = models.TranscriptionParams;
@@ -161,7 +172,7 @@ const SingleSubscribeParams = models.SingleSubscribeParams;
 const DescribeAITranscriptionResponse = models.DescribeAITranscriptionResponse;
 const McuWaterMarkParams = models.McuWaterMarkParams;
 const AbnormalExperience = models.AbnormalExperience;
-const UpdateAIConversationRequest = models.UpdateAIConversationRequest;
+const DescribeCloudSliceTaskResponse = models.DescribeCloudSliceTaskResponse;
 const RoomState = models.RoomState;
 const StartAITranscriptionResponse = models.StartAITranscriptionResponse;
 const RemoveUserResponse = models.RemoveUserResponse;
@@ -522,6 +533,17 @@ Note:
     }
 
     /**
+     * This API is used to query the status of the slicing task after it is started, which is valid only when the task is in progress. An error will be returned if the task is exited.
+     * @param {DescribeCloudSliceTaskRequest} req
+     * @param {function(string, DescribeCloudSliceTaskResponse):void} cb
+     * @public
+     */
+    DescribeCloudSliceTask(req, cb) {
+        let resp = new DescribeCloudSliceTaskResponse();
+        this.request("DescribeCloudSliceTask", req, resp, cb);
+    }
+
+    /**
      * API description:
 This API is used to start an on-cloud recording task. It records the audio and video streams in a room and saves them to the specified cloud storage. You can use this API to record the streams in a room separately, or you can mix the streams first and then record the mixed stream.
 
@@ -582,6 +604,17 @@ Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`)
     DescribeUserInfo(req, cb) {
         let resp = new DescribeUserInfoResponse();
         this.request("DescribeUserInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the slicing task after it is started. It can be used to update the allowlist or blocklist for the specified subscription stream.
+     * @param {ModifyCloudSliceTaskRequest} req
+     * @param {function(string, ModifyCloudSliceTaskResponse):void} cb
+     * @public
+     */
+    ModifyCloudSliceTask(req, cb) {
+        let resp = new ModifyCloudSliceTaskResponse();
+        this.request("ModifyCloudSliceTask", req, resp, cb);
     }
 
     /**
@@ -664,6 +697,17 @@ Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`)
     }
 
     /**
+     * This API is used to stop the slicing task after it is started. Successfully stopping the slicing does not mean that all files are fully transmitted; if the transmission is not completed, the backend will continue to upload files. After the upload is successful, a notification is sent to the customer, prompting that all files have been transmitted, through the event callback.
+     * @param {DeleteCloudSliceTaskRequest} req
+     * @param {function(string, DeleteCloudSliceTaskResponse):void} cb
+     * @public
+     */
+    DeleteCloudSliceTask(req, cb) {
+        let resp = new DeleteCloudSliceTaskResponse();
+        this.request("DeleteCloudSliceTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
      * @param {DismissRoomByStrRoomIdRequest} req
      * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
@@ -711,6 +755,21 @@ If a recording file is being uploaded to VOD, the response parameter `StorageFil
     DescribeTRTCRealTimeQualityData(req, cb) {
         let resp = new DescribeTRTCRealTimeQualityDataResponse();
         this.request("DescribeTRTCRealTimeQualityData", req, resp, cb);
+    }
+
+    /**
+     * API description:
+This API is used to enable the cloud slicing feature, completing audio and video slicing tasks in the room, and uploading them to the specified cloud storage.
+This API is used to achieve the following goals:
+* This API is used to specify the slicing parameter (SliceParams) to define the blocklist or allowlist of the anchors that require slicing.
+* This API is used to specify the storage parameter (SliceStorageParams) to specify the cloud storage you want to upload to. Currently, Tencent Cloud Object Storage (COS) and third-party AWS are supported.
+     * @param {CreateCloudSliceTaskRequest} req
+     * @param {function(string, CreateCloudSliceTaskResponse):void} cb
+     * @public
+     */
+    CreateCloudSliceTask(req, cb) {
+        let resp = new CreateCloudSliceTaskResponse();
+        this.request("CreateCloudSliceTask", req, resp, cb);
     }
 
     /**

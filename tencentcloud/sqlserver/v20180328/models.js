@@ -1371,13 +1371,13 @@ class DescribeDBInstanceInterResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of records returned
+         * Number of records returned.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Details of instance in the interworking group
+         * Details of instance in the interworking group.
          * @type {Array.<InterInstance> || null}
          */
         this.InterInstanceSet = null;
@@ -1484,13 +1484,13 @@ class DescribeProductConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * AZ ID in the format of ap-guangzhou-1
+         * AZ ID in the format of ap-guangzhou-1.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * Type of purchased instance. Valid values: HA - local disk high availability (including dual-machine high availability, AlwaysOn Cluster), RO - local disk read-only replica, SI - cloud disk edition single node, BI - business intelligence service, cvmHA - cloud disk edition high availability, cvmRO - cloud disk edition read-only replica
+         * Type of purchased instance. Valid values: HA - local disk high availability (including dual-machine high availability, AlwaysOn Cluster), RO - local disk read-only replica, SI - cloud disk edition single node, BI - business intelligence service, cvmHA - cloud disk edition high availability, cvmRO - cloud disk edition read-only replica.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -4017,19 +4017,19 @@ class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
         this.ReadOnlyGroupType = null;
 
         /**
-         * Instance memory size in GB
+         * Instance memory size in GB.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Instance disk size in GB
+         * Instance disk size in GB.
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
-         * Number of instance cores
+         * Number of instance cores.
          * @type {number || null}
          */
         this.Cpu = null;
@@ -4119,28 +4119,34 @@ class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
         this.AutoVoucher = null;
 
         /**
-         * Array of voucher IDs (currently, only one voucher can be used per order)
+         * Array of voucher IDs (currently, only one voucher can be used per order).
          * @type {Array.<string> || null}
          */
         this.VoucherIds = null;
 
         /**
-         * Tags associated with the instances to be created
+         * Tags associated with the instances to be created.
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
 
         /**
-         * Collation of system character sets. Default value:  Chinese_PRC_CI_AS
+         * Collation of system character sets. Default value:  Chinese_PRC_CI_AS.
          * @type {string || null}
          */
         this.Collation = null;
 
         /**
-         * System time zone. Default value:  `China Standard Time`
+         * System time zone. Default value:  `China Standard Time`.
          * @type {string || null}
          */
         this.TimeZone = null;
+
+        /**
+         * Disk encryption identification, 0 - no encryption, 1 - encryption.
+         * @type {number || null}
+         */
+        this.DiskEncryptFlag = null;
 
     }
 
@@ -4183,6 +4189,7 @@ class CreateCloudReadOnlyDBInstancesRequest extends  AbstractModel {
         }
         this.Collation = 'Collation' in params ? params.Collation : null;
         this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.DiskEncryptFlag = 'DiskEncryptFlag' in params ? params.DiskEncryptFlag : null;
 
     }
 }
@@ -4941,133 +4948,133 @@ class CreateReadOnlyDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance ID in the format of  `mssql-3l3fgqn7`.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 
+         * Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 
+         * Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
          * @type {number || null}
          */
         this.ReadOnlyGroupType = null;
 
         /**
-         * 
+         * Instance memory size in GB.
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Instance disk size in GB.
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
-         * 
+         * Valid values: `0` (not upgrade the primary instance by default), `1` (upgrade the primary instance to complete the RO deployment).  You need to pass in `1` for this parameter and upgrade the primary instance to cluster edition.
          * @type {number || null}
          */
         this.ReadOnlyGroupForcedUpgrade = null;
 
         /**
-         * 
+         * Existing read-only group ID, which is required when `ReadOnlyGroupType` is `3`.
          * @type {string || null}
          */
         this.ReadOnlyGroupId = null;
 
         /**
-         * 
+         * New read-only group ID, which is required when `ReadOnlyGroupType` is `2`.
          * @type {string || null}
          */
         this.ReadOnlyGroupName = null;
 
         /**
-         * 
+         * Whether delayed read-only instance removal is enabled in a new read-only group, which is required when `ReadOnlyGroupType` is `2`. Valid values: `1` (enabled), `0` (disabled).  The read-only replica will be automatically removed when the delay between it and the primary instance exceeds the threshold.
          * @type {number || null}
          */
         this.ReadOnlyGroupIsOfflineDelay = null;
 
         /**
-         * 
+         * The delay threshold for a new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
          * @type {number || null}
          */
         this.ReadOnlyGroupMaxDelayTime = null;
 
         /**
-         * 
+         * Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
          * @type {number || null}
          */
         this.ReadOnlyGroupMinInGroup = null;
 
         /**
-         * 
+         * Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * 
+         * Number of read-only instances to be purchased this time. Default value: `2`.
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 
+         * VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 
+         * VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 
+         * The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * 
+         * Security group list, which contains security group IDs in the format of `sg-xxx`.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupList = null;
 
         /**
-         * 
+         * Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
          * @type {number || null}
          */
         this.AutoVoucher = null;
 
         /**
-         * 
+         * Array of voucher IDs (currently, only one voucher can be used per order).
          * @type {Array.<string> || null}
          */
         this.VoucherIds = null;
 
         /**
-         * 
+         * Tags associated with the instances to be created.
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
 
         /**
-         * 
+         * Collation of system character sets. Default value:  Chinese_PRC_CI_AS.
          * @type {string || null}
          */
         this.Collation = null;
 
         /**
-         * 
+         * System time zone. Default value:  `China Standard Time`.
          * @type {string || null}
          */
         this.TimeZone = null;
@@ -5793,7 +5800,7 @@ class CreateReadOnlyDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Order name in array.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -6876,7 +6883,7 @@ class CreateCloudReadOnlyDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Order name in array
+         * Order name in array.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
@@ -7718,13 +7725,13 @@ class DescribeProductConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Specification information array
+         * Specification information array.
          * @type {Array.<SpecInfo> || null}
          */
         this.SpecInfoList = null;
 
         /**
-         * Number of date entries returned
+         * Number of date entries returned.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8031,7 +8038,7 @@ class DescribeDBInstanceInterRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter by instance ID
+         * Filter by instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8043,13 +8050,13 @@ class DescribeDBInstanceInterRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * The list of instance version numbers
+         * The list of instance version numbers.
          * @type {Array.<string> || null}
          */
         this.VersionSet = null;
 
         /**
-         * Instance AZ ID in the format of ap-guangzhou-2
+         * Instance AZ ID in the format of ap-guangzhou-3.
          * @type {string || null}
          */
         this.Zone = null;

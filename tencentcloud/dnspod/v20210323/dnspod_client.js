@@ -97,6 +97,7 @@ const DescribeDomainPurviewResponse = models.DescribeDomainPurviewResponse;
 const ModifyRecordStatusResponse = models.ModifyRecordStatusResponse;
 const CreateRecordGroupRequest = models.CreateRecordGroupRequest;
 const DescribeRecordGroupListResponse = models.DescribeRecordGroupListResponse;
+const CreatePackageOrderResponse = models.CreatePackageOrderResponse;
 const CreateDomainGroupRequest = models.CreateDomainGroupRequest;
 const LineInfo = models.LineInfo;
 const DeleteDomainResponse = models.DeleteDomainResponse;
@@ -105,6 +106,7 @@ const CreateDomainAliasRequest = models.CreateDomainAliasRequest;
 const DeleteShareDomainRequest = models.DeleteShareDomainRequest;
 const DescribeRecordGroupListRequest = models.DescribeRecordGroupListRequest;
 const PurviewInfo = models.PurviewInfo;
+const CreatePackageOrderRequest = models.CreatePackageOrderRequest;
 const ModifyRecordRemarkRequest = models.ModifyRecordRemarkRequest;
 const ModifyRecordRemarkResponse = models.ModifyRecordRemarkResponse;
 const DescribeDomainListRequest = models.DescribeDomainListRequest;
@@ -239,14 +241,14 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the information of a record.
-     * @param {DescribeRecordRequest} req
-     * @param {function(string, DescribeRecordResponse):void} cb
+     * This API is used to query the list of DNS record groups.
+     * @param {DescribeRecordGroupListRequest} req
+     * @param {function(string, DescribeRecordGroupListResponse):void} cb
      * @public
      */
-    DescribeRecord(req, cb) {
-        let resp = new DescribeRecordResponse();
-        this.request("DescribeRecord", req, resp, cb);
+    DescribeRecordGroupList(req, cb) {
+        let resp = new DescribeRecordGroupListResponse();
+        this.request("DescribeRecordGroupList", req, resp, cb);
     }
 
     /**
@@ -316,14 +318,14 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a domain.
-     * @param {CreateDomainRequest} req
-     * @param {function(string, CreateDomainResponse):void} cb
+     * This API is used to bulk add records.
+     * @param {CreateRecordBatchRequest} req
+     * @param {function(string, CreateRecordBatchResponse):void} cb
      * @public
      */
-    CreateDomain(req, cb) {
-        let resp = new CreateDomainResponse();
-        this.request("CreateDomain", req, resp, cb);
+    CreateRecordBatch(req, cb) {
+        let resp = new CreateRecordBatchResponse();
+        this.request("CreateRecordBatch", req, resp, cb);
     }
 
     /**
@@ -349,14 +351,14 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of DNS record groups.
-     * @param {DescribeRecordGroupListRequest} req
-     * @param {function(string, DescribeRecordGroupListResponse):void} cb
+     * This API is used to get the information of a record.
+     * @param {DescribeRecordRequest} req
+     * @param {function(string, DescribeRecordResponse):void} cb
      * @public
      */
-    DescribeRecordGroupList(req, cb) {
-        let resp = new DescribeRecordGroupListResponse();
-        this.request("DescribeRecordGroupList", req, resp, cb);
+    DescribeRecord(req, cb) {
+        let resp = new DescribeRecordResponse();
+        this.request("DescribeRecord", req, resp, cb);
     }
 
     /**
@@ -459,14 +461,25 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bulk add records.
-     * @param {CreateRecordBatchRequest} req
-     * @param {function(string, CreateRecordBatchResponse):void} cb
+     * This API is used to add a domain.
+     * @param {CreateDomainRequest} req
+     * @param {function(string, CreateDomainResponse):void} cb
      * @public
      */
-    CreateRecordBatch(req, cb) {
-        let resp = new CreateRecordBatchResponse();
-        this.request("CreateRecordBatch", req, resp, cb);
+    CreateDomain(req, cb) {
+        let resp = new CreateDomainResponse();
+        this.request("CreateDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable a paid plan on the international website.
+     * @param {CreatePackageOrderRequest} req
+     * @param {function(string, CreatePackageOrderResponse):void} cb
+     * @public
+     */
+    CreatePackageOrder(req, cb) {
+        let resp = new CreatePackageOrderResponse();
+        this.request("CreatePackageOrder", req, resp, cb);
     }
 
     /**

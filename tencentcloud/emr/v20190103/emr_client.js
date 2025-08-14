@@ -75,6 +75,7 @@ const SearchItem = models.SearchItem;
 const ModifyResourcesTagsResponse = models.ModifyResourcesTagsResponse;
 const ScaleOutServiceConfGroupsInfo = models.ScaleOutServiceConfGroupsInfo;
 const CreateSLInstanceResponse = models.CreateSLInstanceResponse;
+const SLInstance = models.SLInstance;
 const MultiZoneSetting = models.MultiZoneSetting;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;

@@ -17,8 +17,10 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyCloudSliceTaskResponse = models.ModifyCloudSliceTaskResponse;
+const DescribeCloudModerationResponse = models.DescribeCloudModerationResponse;
 const AgentConfig = models.AgentConfig;
 const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
+const SubscribeModerationUserIds = models.SubscribeModerationUserIds;
 const AudioEncodeParams = models.AudioEncodeParams;
 const ServerPushText = models.ServerPushText;
 const McuRecordParams = models.McuRecordParams;
@@ -31,6 +33,7 @@ const DescribeTRTCMarketScaleDataRequest = models.DescribeTRTCMarketScaleDataReq
 const McuLayoutVolume = models.McuLayoutVolume;
 const SetUserBlockedRequest = models.SetUserBlockedRequest;
 const DescribeUserEventRequest = models.DescribeUserEventRequest;
+const DeleteCloudModerationRequest = models.DeleteCloudModerationRequest;
 const SetUserBlockedResponse = models.SetUserBlockedResponse;
 const WaterMarkChar = models.WaterMarkChar;
 const DescribeTrtcRoomUsageResponse = models.DescribeTrtcRoomUsageResponse;
@@ -46,10 +49,12 @@ const UpdateAIConversationResponse = models.UpdateAIConversationResponse;
 const DescribeUserEventResponse = models.DescribeUserEventResponse;
 const VideoEncode = models.VideoEncode;
 const DescribeCallDetailInfoRequest = models.DescribeCallDetailInfoRequest;
+const CreateCloudModerationResponse = models.CreateCloudModerationResponse;
 const DescribeTRTCMarketScaleDataResponse = models.DescribeTRTCMarketScaleDataResponse;
 const McuTencentVod = models.McuTencentVod;
 const DescribeWebRecordResponse = models.DescribeWebRecordResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
+const DeleteCloudModerationResponse = models.DeleteCloudModerationResponse;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const DismissRoomResponse = models.DismissRoomResponse;
 const CloudStorage = models.CloudStorage;
@@ -87,7 +92,7 @@ const DescribeAIConversationResponse = models.DescribeAIConversationResponse;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const UpdateStreamIngestResponse = models.UpdateStreamIngestResponse;
-const WebRecordVideoParams = models.WebRecordVideoParams;
+const CloudModerationStorage = models.CloudModerationStorage;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const TrtcUsage = models.TrtcUsage;
@@ -95,6 +100,7 @@ const DeleteCloudSliceTaskResponse = models.DeleteCloudSliceTaskResponse;
 const DescribeRelayUsageResponse = models.DescribeRelayUsageResponse;
 const McuLayout = models.McuLayout;
 const SliceParams = models.SliceParams;
+const ModerationSupplierParam = models.ModerationSupplierParam;
 const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
 const StorageFile = models.StorageFile;
 const WaterMark = models.WaterMark;
@@ -111,15 +117,17 @@ const DescribeUnusualEventRequest = models.DescribeUnusualEventRequest;
 const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
 const TencentVod = models.TencentVod;
 const McuPassThrough = models.McuPassThrough;
+const StartWebRecordResponse = models.StartWebRecordResponse;
 const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
 const TRTCDataResult = models.TRTCDataResult;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
-const StartWebRecordResponse = models.StartWebRecordResponse;
+const ModifyCloudModerationRequest = models.ModifyCloudModerationRequest;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const RecognizeConfig = models.RecognizeConfig;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
+const StartAITranscriptionRequest = models.StartAITranscriptionRequest;
 const QualityData = models.QualityData;
-const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
+const ModerationStorageParams = models.ModerationStorageParams;
 const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
 const StopAIConversationResponse = models.StopAIConversationResponse;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
@@ -129,19 +137,24 @@ const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const StartStreamIngestResponse = models.StartStreamIngestResponse;
 const CreateCloudSliceTaskResponse = models.CreateCloudSliceTaskResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
+const ModifyCloudModerationResponse = models.ModifyCloudModerationResponse;
 const VideoParams = models.VideoParams;
+const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
+const CreateCloudModerationRequest = models.CreateCloudModerationRequest;
+const WebRecordVideoParams = models.WebRecordVideoParams;
 const UserInformation = models.UserInformation;
 const DescribeScaleInfoRequest = models.DescribeScaleInfoRequest;
 const ControlAIConversationRequest = models.ControlAIConversationRequest;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const DescribeUnusualEventResponse = models.DescribeUnusualEventResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
+const SingleSubscribeParams = models.SingleSubscribeParams;
 const CreateCloudSliceTaskRequest = models.CreateCloudSliceTaskRequest;
-const StartAITranscriptionRequest = models.StartAITranscriptionRequest;
+const ModerationParams = models.ModerationParams;
 const DescribeCloudSliceTaskRequest = models.DescribeCloudSliceTaskRequest;
-const StopStreamIngestResponse = models.StopStreamIngestResponse;
+const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const MixUserInfo = models.MixUserInfo;
 const EventMessage = models.EventMessage;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
@@ -168,7 +181,7 @@ const AudioParams = models.AudioParams;
 const StopAITranscriptionResponse = models.StopAITranscriptionResponse;
 const WaterMarkTimestamp = models.WaterMarkTimestamp;
 const McuCloudVod = models.McuCloudVod;
-const SingleSubscribeParams = models.SingleSubscribeParams;
+const DescribeCloudModerationRequest = models.DescribeCloudModerationRequest;
 const DescribeAITranscriptionResponse = models.DescribeAITranscriptionResponse;
 const McuWaterMarkParams = models.McuWaterMarkParams;
 const AbnormalExperience = models.AbnormalExperience;
@@ -189,17 +202,19 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
-     * This API (the old `DescribeRoomInformation`) is used to query the rooms of an application (`SDKAppID`) in the last 14 days. Up to 100 records can be returned per call (10 are returned by default).
-**Note**:
-1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
-2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/54481
-     * @param {DescribeRoomInfoRequest} req
-     * @param {function(string, DescribeRoomInfoResponse):void} cb
+     * API description:
+This API is used to enable the cloud moderation feature to complete audio and video slicing, video frame extraction, and audio stream recording in the room, and submit them to the specified moderation supplier for completing the moderation.
+
+This API is used to achieve the following goals:
+* This API is used to specify the moderation parameters (ModerationParams) to specify the detailed parameters required for moderation.
+* This API is used to specify the storage parameter (SliceStorageParams) to specify the cloud storage you want to upload the file complying with the moderation policy to. Currently, Tencent Cloud Object Storage (COS) and third-party AWS are supported.
+     * @param {CreateCloudModerationRequest} req
+     * @param {function(string, CreateCloudModerationResponse):void} cb
      * @public
      */
-    DescribeRoomInfo(req, cb) {
-        let resp = new DescribeRoomInfoResponse();
-        this.request("DescribeRoomInfo", req, resp, cb);
+    CreateCloudModeration(req, cb) {
+        let resp = new CreateCloudModerationResponse();
+        this.request("CreateCloudModeration", req, resp, cb);
     }
 
     /**
@@ -230,14 +245,17 @@ class TrtcClient extends AbstractClient {
     }
 
     /**
-     * Stop AI conversation task
-     * @param {StopAIConversationRequest} req
-     * @param {function(string, StopAIConversationResponse):void} cb
+     * This API (the old `DescribeRoomInformation`) is used to query the rooms of an application (`SDKAppID`) in the last 14 days. Up to 100 records can be returned per call (10 are returned by default).
+**Note**:
+1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/54481
+     * @param {DescribeRoomInfoRequest} req
+     * @param {function(string, DescribeRoomInfoResponse):void} cb
      * @public
      */
-    StopAIConversation(req, cb) {
-        let resp = new StopAIConversationResponse();
-        this.request("StopAIConversation", req, resp, cb);
+    DescribeRoomInfo(req, cb) {
+        let resp = new DescribeRoomInfoResponse();
+        this.request("DescribeRoomInfo", req, resp, cb);
     }
 
     /**
@@ -350,6 +368,17 @@ Usage Precautions:
     DescribeStreamIngest(req, cb) {
         let resp = new DescribeStreamIngestResponse();
         this.request("DescribeStreamIngest", req, resp, cb);
+    }
+
+    /**
+     * Stop an web-page recording task
+     * @param {StopWebRecordRequest} req
+     * @param {function(string, StopWebRecordResponse):void} cb
+     * @public
+     */
+    StopWebRecord(req, cb) {
+        let resp = new StopWebRecordResponse();
+        this.request("StopWebRecord", req, resp, cb);
     }
 
     /**
@@ -522,14 +551,14 @@ Note:
     }
 
     /**
-     * Stop an web-page recording task
-     * @param {StopWebRecordRequest} req
-     * @param {function(string, StopWebRecordResponse):void} cb
+     * This API is used to update the subscription blocklist and allowlist after the cloud moderation task is successfully started.
+     * @param {ModifyCloudModerationRequest} req
+     * @param {function(string, ModifyCloudModerationResponse):void} cb
      * @public
      */
-    StopWebRecord(req, cb) {
-        let resp = new StopWebRecordResponse();
-        this.request("StopWebRecord", req, resp, cb);
+    ModifyCloudModeration(req, cb) {
+        let resp = new ModifyCloudModerationResponse();
+        this.request("ModifyCloudModeration", req, resp, cb);
     }
 
     /**
@@ -566,6 +595,17 @@ Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`)
     }
 
     /**
+     * This API is used to stop submission for moderation after the cloud moderation task is successfully started.
+     * @param {DeleteCloudModerationRequest} req
+     * @param {function(string, DeleteCloudModerationResponse):void} cb
+     * @public
+     */
+    DeleteCloudModeration(req, cb) {
+        let resp = new DeleteCloudModerationResponse();
+        this.request("DeleteCloudModeration", req, resp, cb);
+    }
+
+    /**
      * This API (the old `DescribeHistoryScale`) is used to query the daily number of rooms and users of an application (`SDKAppID`) in the last 14 days. Data for the current day cannot be queried.
      * @param {DescribeScaleInfoRequest} req
      * @param {function(string, DescribeScaleInfoResponse):void} cb
@@ -574,6 +614,17 @@ Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`)
     DescribeScaleInfo(req, cb) {
         let resp = new DescribeScaleInfoResponse();
         this.request("DescribeScaleInfo", req, resp, cb);
+    }
+
+    /**
+     * Stop AI conversation task
+     * @param {StopAIConversationRequest} req
+     * @param {function(string, StopAIConversationResponse):void} cb
+     * @public
+     */
+    StopAIConversation(req, cb) {
+        let resp = new StopAIConversationResponse();
+        this.request("StopAIConversation", req, resp, cb);
     }
 
     /**
@@ -781,6 +832,17 @@ This API is used to achieve the following goals:
     DeleteCloudRecording(req, cb) {
         let resp = new DeleteCloudRecordingResponse();
         this.request("DeleteCloudRecording", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the status of the moderation task and information about the subscription blocklist and allowlist after the task is started, which is valid only when the task is in progress. An error will be returned if the task is exited.
+     * @param {DescribeCloudModerationRequest} req
+     * @param {function(string, DescribeCloudModerationResponse):void} cb
+     * @public
+     */
+    DescribeCloudModeration(req, cb) {
+        let resp = new DescribeCloudModerationResponse();
+        this.request("DescribeCloudModeration", req, resp, cb);
     }
 
     /**

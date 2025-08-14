@@ -718,6 +718,12 @@ For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tence
         this.KMSRegion = null;
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.KMSClusterId = null;
+
+        /**
          * Database engine, which supports:
 <li>`postgresql`: TencentDB for PostgreSQL</li>
 <li>`mssql_compatible`: MSSQL compatible - TencentDB for PostgreSQL</li>
@@ -809,6 +815,7 @@ Default value: 0
         this.NeedSupportTDE = 'NeedSupportTDE' in params ? params.NeedSupportTDE : null;
         this.KMSKeyId = 'KMSKeyId' in params ? params.KMSKeyId : null;
         this.KMSRegion = 'KMSRegion' in params ? params.KMSRegion : null;
+        this.KMSClusterId = 'KMSClusterId' in params ? params.KMSClusterId : null;
         this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
         this.DBEngineConfig = 'DBEngineConfig' in params ? params.DBEngineConfig : null;
         this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
@@ -3839,7 +3846,7 @@ db-public-address: filter by instance public network address (in string format)
         this.Filters = null;
 
         /**
-         * The maximum number of results returned per page. Value range: 1-100. Default: `10`
+         * The maximum number of results returned per page. Value range: 1-100. Default: `10`.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3851,7 +3858,7 @@ db-public-address: filter by instance public network address (in string format)
         this.Offset = null;
 
         /**
-         * Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
+         * Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime.
          * @type {string || null}
          */
         this.OrderBy = null;
@@ -8087,7 +8094,7 @@ class DBInstance extends  AbstractModel {
 
         /**
          * The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DBMajorVersion = null;
@@ -8100,7 +8107,7 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 
         /**
          * PostgreSQL kernel version number (like v12.7_r1.8), which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DBKernelVersion = null;
@@ -8202,42 +8209,42 @@ Default value: 0
 
         /**
          * The information of tags associated with instances
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.TagList = null;
 
         /**
          * Primary instance information, which is returned only when the instance is read-only.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MasterDBInstanceId = null;
 
         /**
          * Number of read-only instances
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReadOnlyInstanceNum = null;
 
         /**
          * The status of a read-only instance in a read-only group
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusInReadonlyGroup = null;
 
         /**
          * Offline time
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OfflineTime = null;
 
         /**
          * Instance node information
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DBNode> || null}
          */
         this.DBNodeSet = null;
@@ -9210,10 +9217,16 @@ Default value: `0`.
         this.Name = null;
 
         /**
-         * (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+         * (Disused) You don't need to specify a version, as the kernel version is as the same as that of the instance.
          * @type {string || null}
          */
         this.DBVersion = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DedicatedClusterId = null;
 
     }
 
@@ -9249,6 +9262,7 @@ Default value: `0`.
         this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
 
     }
 }

@@ -1610,6 +1610,12 @@ class CreateSLInstanceRequest extends  AbstractModel {
          */
         this.ClientToken = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DeploymentMode = null;
+
     }
 
     /**
@@ -1649,6 +1655,7 @@ class CreateSLInstanceRequest extends  AbstractModel {
             this.PrePaySetting = obj;
         }
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.DeploymentMode = 'DeploymentMode' in params ? params.DeploymentMode : null;
 
     }
 }
@@ -4555,6 +4562,169 @@ class CreateSLInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * Serverless Instance
+ * @class
+ */
+class SLInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EMR Instance Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * EMR Numeric Instance Id
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance Name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Region id
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Zone Name
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Pay Mode
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Disk Type
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Disk Size
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Node Type
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Node Number
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Expire Time
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Isolate Time
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * Create Time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Auto Renew Flag
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * EMR Numeric Instance Status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Zone Setting
+         * @type {Array.<ZoneSetting> || null}
+         */
+        this.ZoneSettings = null;
+
+        /**
+         * Bound Tags
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Deploy Role
+         * @type {string || null}
+         */
+        this.DeployRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.ZoneSettings) {
+            this.ZoneSettings = new Array();
+            for (let z in params.ZoneSettings) {
+                let obj = new ZoneSetting();
+                obj.deserialize(params.ZoneSettings[z]);
+                this.ZoneSettings.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.DeployRole = 'DeployRole' in params ? params.DeployRole : null;
+
+    }
+}
+
+/**
  * Parameter information of each AZ
  * @class
  */
@@ -6736,6 +6906,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NodeNum = null;
 
         /**
+         * 
+         * @type {Array.<SLInstance> || null}
+         */
+        this.SLInstance = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6783,6 +6959,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Status = 'Status' in params ? params.Status : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+
+        if (params.SLInstance) {
+            this.SLInstance = new Array();
+            for (let z in params.SLInstance) {
+                let obj = new SLInstance();
+                obj.deserialize(params.SLInstance[z]);
+                this.SLInstance.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10283,6 +10468,7 @@ module.exports = {
     ModifyResourcesTagsResponse: ModifyResourcesTagsResponse,
     ScaleOutServiceConfGroupsInfo: ScaleOutServiceConfGroupsInfo,
     CreateSLInstanceResponse: CreateSLInstanceResponse,
+    SLInstance: SLInstance,
     MultiZoneSetting: MultiZoneSetting,
     TerminateInstanceResponse: TerminateInstanceResponse,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,

@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
+const RemoveReplicationGroupRequest = models.RemoveReplicationGroupRequest;
 const UpgradeSmallVersionRequest = models.UpgradeSmallVersionRequest;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
 const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
@@ -42,7 +43,7 @@ const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstancePasswordResponse = models.ModifyInstancePasswordResponse;
-const KillMasterGroupResponse = models.KillMasterGroupResponse;
+const DescribeSecondLevelBackupInfoResponse = models.DescribeSecondLevelBackupInfoResponse;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
@@ -74,6 +75,7 @@ const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecords
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
+const KillMasterGroupResponse = models.KillMasterGroupResponse;
 const RedisNode = models.RedisNode;
 const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
 const ParameterDetail = models.ParameterDetail;
@@ -131,6 +133,7 @@ const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest;
 const SwitchAccessNewInstanceRequest = models.SwitchAccessNewInstanceRequest;
+const RemoveReplicationGroupResponse = models.RemoveReplicationGroupResponse;
 const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const SwitchAccessNewInstanceResponse = models.SwitchAccessNewInstanceResponse;
 const CloneInstancesResponse = models.CloneInstancesResponse;
@@ -145,6 +148,7 @@ const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsR
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeMasterInstanceResponse = models.ChangeMasterInstanceResponse;
 const ModifyInstanceEventRequest = models.ModifyInstanceEventRequest;
+const SecondLevelBackupMissingTimestamps = models.SecondLevelBackupMissingTimestamps;
 const DescribeBackupDetailResponse = models.DescribeBackupDetailResponse;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
@@ -180,7 +184,7 @@ const ProductConf = models.ProductConf;
 const ModifyConnectionConfigRequest = models.ModifyConnectionConfigRequest;
 const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const InstanceNode = models.InstanceNode;
-const TendisNodes = models.TendisNodes;
+const ModifyInstanceBackupModeResponse = models.ModifyInstanceBackupModeResponse;
 const SwitchProxyResponse = models.SwitchProxyResponse;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
@@ -245,11 +249,13 @@ const DescribeSSLStatusResponse = models.DescribeSSLStatusResponse;
 const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeRedisClustersResponse = models.DescribeRedisClustersResponse;
+const ModifyInstanceBackupModeRequest = models.ModifyInstanceBackupModeRequest;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const ModifyInstanceReadOnlyRequest = models.ModifyInstanceReadOnlyRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
+const TendisNodes = models.TendisNodes;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const SwitchProxyRequest = models.SwitchProxyRequest;
 const DescribeInstanceSpecBandwidthRequest = models.DescribeInstanceSpecBandwidthRequest;
@@ -262,6 +268,7 @@ const InstanceEnumParam = models.InstanceEnumParam;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
 const RemoveReplicationInstanceResponse = models.RemoveReplicationInstanceResponse;
+const DescribeSecondLevelBackupInfoRequest = models.DescribeSecondLevelBackupInfoRequest;
 const SecurityGroupDetail = models.SecurityGroupDetail;
 const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceResponse;
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
@@ -383,7 +390,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query an instance access command.
+     * This API is used to query instance access commands.
      * @param {DescribeInstanceMonitorTopNCmdRequest} req
      * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
      * @public
@@ -424,6 +431,17 @@ class RedisClient extends AbstractClient {
     DescribeTaskInfo(req, cb) {
         let resp = new DescribeTaskInfoResponse();
         this.request("DescribeTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the instance backup mode.
+     * @param {ModifyInstanceBackupModeRequest} req
+     * @param {function(string, ModifyInstanceBackupModeResponse):void} cb
+     * @public
+     */
+    ModifyInstanceBackupMode(req, cb) {
+        let resp = new ModifyInstanceBackupModeResponse();
+        this.request("ModifyInstanceBackupMode", req, resp, cb);
     }
 
     /**
@@ -482,7 +500,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the supported regions for global replication.
+     * This API is used to query the information on regions supported for global replication.
      * @param {DescribeGlobalReplicationAreaRequest} req
      * @param {function(string, DescribeGlobalReplicationAreaResponse):void} cb
      * @public
@@ -526,14 +544,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete instance sub-accounts.
-     * @param {DeleteInstanceAccountRequest} req
-     * @param {function(string, DeleteInstanceAccountResponse):void} cb
+     * This API is used to query the second-level backup information on an instance.
+     * @param {DescribeSecondLevelBackupInfoRequest} req
+     * @param {function(string, DescribeSecondLevelBackupInfoResponse):void} cb
      * @public
      */
-    DeleteInstanceAccount(req, cb) {
-        let resp = new DeleteInstanceAccountResponse();
-        this.request("DeleteInstanceAccount", req, resp, cb);
+    DescribeSecondLevelBackupInfo(req, cb) {
+        let resp = new DescribeSecondLevelBackupInfoResponse();
+        this.request("DescribeSecondLevelBackupInfo", req, resp, cb);
     }
 
     /**
@@ -889,6 +907,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete instance sub-accounts.
+     * @param {DeleteInstanceAccountRequest} req
+     * @param {function(string, DeleteInstanceAccountResponse):void} cb
+     * @public
+     */
+    DeleteInstanceAccount(req, cb) {
+        let resp = new DeleteInstanceAccountResponse();
+        this.request("DeleteInstanceAccount", req, resp, cb);
+    }
+
+    /**
      * This API is used to simulate the fault of a Proxy node.
      * @param {SwitchProxyRequest} req
      * @param {function(string, SwitchProxyResponse):void} cb
@@ -911,7 +940,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of parameter modifications.
+     * This API is used to query the parameter modification record list.
      * @param {DescribeInstanceParamRecordsRequest} req
      * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
      * @public
@@ -966,7 +995,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of parameter templates.
+     * This API is used to query the parameter template list.
      * @param {DescribeParamTemplatesRequest} req
      * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
@@ -1043,7 +1072,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the access source information of an instance.
+     * This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://intl.cloud.tencent.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
      * @param {DescribeInstanceMonitorSIPRequest} req
      * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
      * @public
@@ -1274,7 +1303,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restore a Redis instance.
+     * This API is used to restore an instance.
      * @param {RestoreInstanceRequest} req
      * @param {function(string, RestoreInstanceResponse):void} cb
      * @public
@@ -1293,6 +1322,17 @@ class RedisClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a replication group.
+     * @param {RemoveReplicationGroupRequest} req
+     * @param {function(string, RemoveReplicationGroupResponse):void} cb
+     * @public
+     */
+    RemoveReplicationGroup(req, cb) {
+        let resp = new RemoveReplicationGroupResponse();
+        this.request("RemoveReplicationGroup", req, resp, cb);
     }
 
     /**

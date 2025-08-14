@@ -68,6 +68,34 @@ class UpgradeProxyVersionRequest extends  AbstractModel {
 }
 
 /**
+ * RemoveReplicationGroup request structure.
+ * @class
+ */
+class RemoveReplicationGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Replication group ID.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * UpgradeSmallVersion request structure.
  * @class
  */
@@ -299,21 +327,18 @@ class RedisBackupSet extends  AbstractModel {
 
         /**
          * Internal field, which can be ignored.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BackupSize = null;
 
         /**
          * Internal field, which can be ignored.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.FullBackup = null;
 
         /**
          * Internal field, which can be ignored.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.InstanceType = null;
@@ -694,7 +719,8 @@ class CreateInstancesRequest extends  AbstractModel {
 
         /**
          * Instance type.
-<ul><li>2: Redis 2.8 Memory Edition (standard architecture);</li> <li>3: CKV 3.2 Memory Edition (standard architecture);</li> <li>4: CKV 3.2 Memory Edition (cluster architecture);</li> <li>6: Redis 4.0 Memory Edition (standard architecture);</li> <li>7: Redis 4.0 Memory Edition (cluster architecture);</li> <li>8: Redis 5.0 Memory Edition (standard architecture);</li> <li>9: Redis 5.0 Memory Edition (cluster architecture);</li> <li>15: Redis 6.2 Memory Edition (standard architecture);</li> <li>16: Redis 6.2 Memory Edition (cluster architecture);</li> <li>17: Redis 7.0 Memory Edition (standard architecture);</li> <li>18: Redis 7.0 Memory Edition (cluster architecture). </li>Note: The CKV version is currently used by existing users and is temporarily retained.</ul>
+
+<ul><li>2: Redis 2.8 memory edition (standard architecture).</li><li>3: CKV 3.2 memory edition (standard architecture).</li><li>4: CKV 3.2 memory edition (cluster architecture).</li><li>6: Redis 4.0 memory edition (standard architecture).</li><li>7: Redis 4.0 memory edition (cluster architecture).</li><li>8: Redis 5.0 memory edition (standard architecture).</li><li>9: Redis 5.0 memory edition (cluster architecture).</li><li>15: Redis 6.2 memory edition (standard architecture).</li><li>16: Redis 6.2 memory edition (cluster architecture).</li><li>17: Redis 7.0 memory edition (standard architecture).</li><li>18: Redis 7.0 memory edition (cluster architecture).</li><li>200: Memcached 1.6 memory edition (cluster architecture).</li>Note: CKV editions are currently used by some users and are temporarily retained.</ul>
          * @type {number || null}
          */
         this.TypeId = null;
@@ -734,10 +760,10 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Password for accessing instances.
-- When the input parameter **NoAuth** is set to **true**, password-free access is set for instances and Password does not need to be configured. Otherwise, Password is required.
-- When the instance type parameter **TypeId** is set to Redis 2.8 Memory Edition (standard architecture) or Redis 4.0, 5.0, or 6.0 Memory Edition (standard architecture or cluster architecture), the password cannot start with a forward slash (/) and should contain 8 to 64 characters, including at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
-- When the instance type parameter **TypeId** is set to CKV 3.2 Memory Edition (standard architecture or cluster architecture), the password should contain 8 to 30 characters, including only letters and digits.
+         * Instance access password.
+ - If the input parameter **NoAuth** is set to **true**, indicating that instance access requires no password, Password does not need to be specified. Otherwise, Password is required.
+ - If the instance type (**TypeId**) is Redis 2.8 memory edition standard architecture or Redis 4.0/5.0/6.2/7.0 memory edition standard architecture or cluster architecture, the password complexity requirements are as follows: It should contain 8 to 64 characters but cannot start with a forward slash (/). It should contain at least two types of the following characters: lowercase letters, uppercase letters, digits, and special characters: ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+ - When the instance type parameter **TypeId** is set to CKV 3.2 memory edition (standard architecture or cluster architecture), the password should contain 8 to 30 characters, including only letters and digits.
          * @type {string || null}
          */
         this.Password = null;
@@ -858,10 +884,10 @@ Node information of an instance. Currently, information about the node type (mas
         this.DryRun = null;
 
         /**
-         * The product edition of the instance
-- `local`: Local Disk Edition.
-- `cloud`: Cloud Disk Edition.
-- `cdc`: Dedicated Cluster Edition. Default value: `local`.
+         * Specifies the instance deployment mode.
+ - local: traditional architecture. It is the default value.
+ - cdc: dedicated cluster.
+ - cloud: cloud native. Currently, this mode is unavailable.
          * @type {string || null}
          */
         this.ProductVersion = null;
@@ -1412,18 +1438,37 @@ class ModifyInstancePasswordResponse extends  AbstractModel {
 }
 
 /**
- * KillMasterGroup response structure.
+ * DescribeSecondLevelBackupInfo response structure.
  * @class
  */
-class KillMasterGroupResponse extends  AbstractModel {
+class DescribeSecondLevelBackupInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID
+         * Backup record ID.
+         * @type {string || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * Backup timestamp.
          * @type {number || null}
          */
-        this.TaskId = null;
+        this.BackupTimestamp = null;
+
+        /**
+         * Timestamp range within which backup is missing.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<SecondLevelBackupMissingTimestamps> || null}
+         */
+        this.MissingTimestamps = null;
+
+        /**
+         * Timestamp when second-level backup is enabled for the instance.
+         * @type {number || null}
+         */
+        this.StartTimestamp = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1440,7 +1485,18 @@ class KillMasterGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.BackupTimestamp = 'BackupTimestamp' in params ? params.BackupTimestamp : null;
+
+        if (params.MissingTimestamps) {
+            this.MissingTimestamps = new Array();
+            for (let z in params.MissingTimestamps) {
+                let obj = new SecondLevelBackupMissingTimestamps();
+                obj.deserialize(params.MissingTimestamps[z]);
+                this.MissingTimestamps.push(obj);
+            }
+        }
+        this.StartTimestamp = 'StartTimestamp' in params ? params.StartTimestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1502,7 +1558,7 @@ class DescribeSlowLogResponse extends  AbstractModel {
         this.InstanceSlowlogDetail = null;
 
         /**
-         * Details of slow queries.
+         * Slow query details. Note: If the value of TotalCount is greater than 10,000, indicating that the number of slow logs exceeds 10,000, log details cannot be returned. Instead, the returned data is empty. It is recommended to reduce the interval between BeginTime and EndTime and perform multiple queries.
          * @type {Array.<InstanceSlowlogDetail> || null}
          */
         this.InstanceSlowLogDetail = null;
@@ -1998,15 +2054,13 @@ class TaskInfoDetail extends  AbstractModel {
         super();
 
         /**
-         * Task ID 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Task ID.
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * Task start time 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Task start time.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -2014,104 +2068,104 @@ Note:  This field may return null, indicating that no valid values can be obtain
         /**
          * Task type.
 
-- FLOW_CREATE: "001" - Create an instance.
-- FLOW_RESIZE: "002" - Change the configuration.
-- FLOW_CLOSE: "003" - Close an instance.
-- FLOW_CLEAN: "004" - Clear an instance.
-- FLOW_STARTUP: "005" - Enable an instance.
-- FLOW_DELETE: "006" - Delete an instance.
-- FLOW_SETPWD: "007" - Reset the password.
-- FLOW_EXPORTBACKUP: "009" - Export the backup file.
-- FLOW_RESTOREBACKUP: "010" - Restore the backup.
-- FLOW_BACKUPINSTANCE: "012" - Back up an instance.
-- FLOW_MIGRATEINSTANCE: "013" - Migrate an instance.
-- FLOW_DELBACKUP: "014" - Delete the backup.
-- FLOW_EXCHANGEINSTANCE: "016" - Switch an instance.
-- FLOW_AUTOBACKUP: "017" - Automatically backup an instance.
-- FLOW_MIGRATECHECK: "022" - Verify migration parameters.
-- FLOW_MIGRATETASK: "023" - Migrating data is in progress.
-- FLOW_CLEANDB: "025" - Clear a database.
-- FLOW_CLONEBACKUP: "026" - Clone the backup.
-- FLOW_CHANGEVIP: "027" - Change the VIP.
-- FLOW_EXPORSHR: "028" - Perform scaling.
-- FLOW_ADDNODES: "029" - Add or remove a node.
-- FLOW_CHANGENET: "031" - Change the network type.
-- FLOW_MODIFYINSTACEREADONLY: "033" - Modify the read-only policy.
-- FLOW_MODIFYINSTANCEPARAMS: "034" - Modify instance parameters.
-- FLOW_MODIFYINSTANCEPASSWORDFREE: "035" - Set password-free access.
-- FLOW_SWITCHINSTANCEVIP: "036" - Switch the instance VIP.
-- FLOW_MODIFYINSTANCEACCOUNT: "037" - Modify the instance account.
-- FLOW_MODIFYINSTANCEBANDWIDTH: "038" - Modify the instance bandwidth.
-- FLOW_ENABLEINSTANCE_REPLICATE: "039" - Enable read-only replica.
-- FLOW_DISABLEINSTANCE_REPLICATE: "040" - Disable read-only replica.
-- FLOW_UpgradeArch: "041" - Upgrade the instance architecture from primary-secondary to cluster.
-- FLOW_DowngradeArch: "042" - Downgrade the instance architecture from cluster to primary-secondary.
-- FLOW_UpgradeVersion: "043" - Upgrade the version.
-- FLOW_MODIFYCONNECTIONCONFIG: "044" - Modify the number of bandwidth connections.
-- FLOW_CLEARNETWORK: "045" - Change the network.
-- FLOW_REMOVE_BACKUP_FILE: "046" - Delete the backup.
-- FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047" - Upgrade an instance to support multiple AZs.
-- FLOW_SHUTDOWN_MASTER: "048" - Simulate a fault.
-- FLOW_CHANGE_REPLICA_TO_MASTER: "049" - Manually promote the replica node to the primary node.
-- FLOW_CODE_ADD_REPLICATION_INSTANCE: "050" - Add a replication group.
-- FLOW_OPEN_WAN: "052" - Enable the public network.
-- FLOW_CLOSE_WAN: "053" - Disable the public network. - FLOW_UPDATE_WAN: "054" - Update the public network.
-- FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055" - Unbind the replication group.
-- FLOW_CODE_CHANGE_MASTER_INSTANCE: "056" - Switch to the primary instance in the replication group.
-- FLOW_CODE_CHANGE_INSTANCE_ROLE: "057" - Change the roles of instances in the replication group.
-- FLOW_MIGRATE_NODE: "058" - Migrate a node.
-- FLOW_SWITCH_NODE: "059" - Switch a node.
-- FLOW_UPGRADE_SMALL_VERSION: "060" - Upgrade the Redis version.
-- FLOW_UPGRADE_PROXY_VERSION: "061" - Upgrade the Proxy version.
-- FLOW_MODIFY_INSTANCE_NETWORK: "062" - Modify the instance network.
-- FLOW_MIGRATE_PROXY_NODE: "063" - Migrate the Proxy node.
-- FLOW_MIGRATION_INSTANCE_ZONE: "066" - Migrate the instance AZ in progress.
-- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067" - Upgrading the instance version is in progress.
-- FLOW_MODIFY_PROXY_NUM: "069" - Add or remove a Proxy node.
-- FLOW_MODIFYBACKUPMOD: "070" - Change the instance backup mode.
-Note: This field may return null, indicating that no valid value can be obtained.
+- FLOW_CREATE: "001", indicating instance creation.
+- FLOW_RESIZE: "002", indicating configuration modification.
+- FLOW_CLOSE: "003", indicating instance disabling.
+- FLOW_CLEAN: "004", indicating instance cleanup.
+- FLOW_STARTUP: "005", indicating instance enabling.
+- FLOW_DELETE: "006", indicating instance deletion.
+- FLOW_SETPWD: "007", indicating password reset.
+- FLOW_EXPORTBACKUP: "009", indicating backup file export.
+- FLOW_RESTOREBACKUP: "010", indicating backup restoration.
+- FLOW_BACKUPINSTANCE: "012", indicating instance backup.
+- FLOW_MIGRATEINSTANCE: "013", indicating instance migration.
+- FLOW_DELBACKUP: "014", indicating backup deletion.
+- FLOW_EXCHANGEINSTANCE: "016", indicating instance switch.
+- FLOW_AUTOBACKUP: "017", indicating automatic instance backup.
+- FLOW_MIGRATECHECK: "022", indicating migration parameter verification.
+- FLOW_MIGRATETASK: "023", indicating that data migration is in progress.
+- FLOW_CLEANDB: "025", indicating database cleanup.
+- FLOW_CLONEBACKUP: "026": indicating backup cloning.
+- FLOW_CHANGEVIP: "027", indicating VIP address modification.
+- FLOW_EXPORSHR: "028", indicating scaling.
+- FLOW_ADDNODES: "029", indicating node addition (removal).
+- FLOW_CHANGENET: "031", indicating network type modification.
+- FLOW_MODIFYINSTACEREADONLY: "033": indicating read-only policy modification.
+- FLOW_MODIFYINSTANCEPARAMS: "034", indicating instance parameter modification.
+- FLOW_MODIFYINSTANCEPASSWORDFREE: "035", indicating password-free access settings.
+- FLOW_SWITCHINSTANCEVIP: "036", indicating instance VIP address switch.
+- FLOW_MODIFYINSTANCEACCOUNT: "037", indicating instance account modification.
+- FLOW_MODIFYINSTANCEBANDWIDTH: "038", indicating instance bandwidth modification.
+- FLOW_ENABLEINSTANCE_REPLICATE: "039", indicating enabling of read-only replica.
+- FLOW_DISABLEINSTANCE_REPLICATE: "040", indicating disabling of read-only replica.
+- FLOW_UpgradeArch: "041", indicating instance architecture upgrade from the standard architecture to the cluster architecture.
+- FLOW_DowngradeArch: "042", indicating instance architecture downgrade from the cluster architecture to the standard architecture.
+- FLOW_UpgradeVersion: "043", indicating version upgrade.
+- FLOW_MODIFYCONNECTIONCONFIG: "044", indicating adjustment of the bandwidth and the number of connections.
+- FLOW_CLEARNETWORK: "045", indicating network change.
+- FLOW_REMOVE_BACKUP_FILE: "046", indicating backup deletion.
+- FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047", indicating instance upgrade to multi-AZ deployment.
+- FLOW_SHUTDOWN_MASTER: "048", indicating fault simulation.
+- FLOW_CHANGE_REPLICA_TO_MASTER: "049", indicating manual promotion to the primary node.
+- FLOW_CODE_ADD_REPLICATION_INSTANCE: "050", indicating replication group addition.
+- FLOW_OPEN_WAN: "052", indicating enabling of public network access.
+- FLOW_CLOSE_WAN: "053", indicating disabling of public network access.
+- FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055", indicating replication group unbinding.
+- FLOW_CODE_CHANGE_MASTER_INSTANCE: "056", indicating switching a replication group instance to the primary instance.
+- FLOW_CODE_CHANGE_INSTANCE_ROLE: "057", indicating modification of the replication group instance role.
+- FLOW_MIGRATE_NODE: "058", indicating node migration.
+- FLOW_SWITCH_NODE: "059", indicating node switch.
+- FLOW_UPGRADE_SMALL_VERSION: "060", indicating Redis version upgrade.
+- FLOW_UPGRADE_PROXY_VERSION: "061", indicating proxy version upgrade.
+- FLOW_MODIFY_INSTANCE_NETWORK: "062", indicating instance network modification.
+- FLOW_MIGRATE_PROXY_NODE: "063", indicating proxy node migration.
+- FLOW_MIGRATION_INSTANCE_ZONE: "066", indicating that instance migration to another AZ is in progress.
+- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067", indicating that instance version upgrade is in progress.
+- FLOW_MODIFY_PROXY_NUM: "069", indicating proxy node addition (removal).
+- FLOW_MODIFYBACKUPMOD: "070", indicating instance backup mode modification.
          * @type {string || null}
          */
         this.TaskType = null;
 
         /**
-         * Instance name 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Instance ID 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Project ID 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Task progress 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Task progress.
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Task end time 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Task execution end time.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed) 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Task execution status.
+
+
+
+0: initializing the task.
+1: executing.
+2. completed.
+4: failed.
          * @type {number || null}
          */
         this.Result = null;
@@ -2198,56 +2252,51 @@ class Account extends  AbstractModel {
 
         /**
          * Instance ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * Account name.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.AccountName = null;
 
         /**
          * Account description.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Read/write permission policy.
+         * Read/Write permission policy.
 - r: read-only.
-- w: write-only.
+
+ - w: write-only.
 - rw: read/write.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Privilege = null;
 
         /**
          * Read-only routing policy.
-- master: primary node.
-- replication: secondary node.
-Note: This field may return null, indicating that no valid value can be obtained.
+ - master: primary node.
+ - replication: replica node.
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
 
         /**
          * Sub-account status.
-- 1: changing.
-- 2: valid.
-- 4: deleted.
-Note: This field may return null, indicating that no valid value can be obtained.
+ - 1: account under modification.
+ - 2: valid account.
+ - 4: account deleted.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Creation time.Note: This field may return null, indicating that no valid values can be obtained.
+         * Creation time
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -2781,84 +2830,86 @@ class RedisInstanceEvent extends  AbstractModel {
 
         /**
          * Event ID.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * Instance ID.Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name.Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Event type. Currently, the type can only be related to instance migration, resource movement, and IDC deletion. This parameter can be only set to **InstanceMigration**.Note: This field may return null, indicating that no valid values can be obtained.
+         * Event type. Currently, the type can only be related to instance migration, resource movement, and IDC deletion. This parameter can be set only to **InstanceMigration**.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Event levels are divided into Critical, High, Medium, and Low events according to the severity and urgency.- Critical
-- High
-- Middle
-- Low
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Event level. The levels are divided into critical, important, medium, and general based on severity and urgency.
+ - Critical: critical.
+ - High: important.
+ - Middle: medium.
+ - Low.
          * @type {string || null}
          */
         this.Grade = null;
 
         /**
-         * Scheduled event execution date.Note: This field may return null, indicating that no valid values can be obtained.
+         * Scheduled event execution date.
          * @type {string || null}
          */
         this.ExecutionDate = null;
 
         /**
-         * Scheduled start time of event execution.Note: This field may return null, indicating that no valid values can be obtained.
+         * Start date of scheduled event execution.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Scheduled end time of event execution.Note: This field may return null, indicating that no valid values can be obtained.
+         * End date of scheduled event execution.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * The latest execution date of the operations event. Event execution must be completed before this date. Otherwise, the business may be affected.Note: This field may return null, indicating that no valid values can be obtained.
+         * Latest execution date of the Ops event. The event should be completed before this date. Otherwise, the business may be affected.
          * @type {string || null}
          */
         this.LatestExecutionDate = null;
 
         /**
-         * Current event status.- Waiting: The event is waiting for execution on the execution date or during the operations period.- Running: The event is being executed during the operations period.- Finished: Execution of the event operations is completed.- Canceled: Execution of the event is canceled.Note: This field may return null, indicating that no valid values can be obtained.
+         * Current event status.
+ - Waiting: event not reached the execution date or not within the maintenance window.
+ - Running: event within the maintenance window and under maintenance execution.
+ - Finished: event with maintenance completed.
+- Canceled: Execution of the event is canceled.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * Completion time of the event execution task.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskEndTime = null;
 
         /**
-         * Impact of the event.Note: This field may return null, indicating that no valid values can be obtained.
+         * Event impact information.
          * @type {string || null}
          */
         this.EffectInfo = null;
 
         /**
-         * Initial scheduled execution date of the event.Note: This field may return null, indicating that no valid values can be obtained.
+         * Initial scheduled event execution date.
          * @type {string || null}
          */
         this.InitialExecutionDate = null;
@@ -3251,6 +3302,41 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
 }
 
 /**
+ * KillMasterGroup response structure.
+ * @class
+ */
+class KillMasterGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Running information of Redis nodes
  * @class
  */
@@ -3391,22 +3477,19 @@ class ParameterDetail extends  AbstractModel {
         this.NeedReboot = null;
 
         /**
-         * Maximum value of the parameter
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Maximum parameter value allowed.
          * @type {string || null}
          */
         this.Max = null;
 
         /**
-         * Minimum value of the parameter
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Minimum parameter value allowed.
          * @type {string || null}
          */
         this.Min = null;
 
         /**
-         * Enumerated values of the parameter. It is null if the parameter is non-enumerated
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Optional enumeration values of a parameter. For non-enumeration parameters, it is empty.
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
@@ -3797,8 +3880,7 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task ID.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -3931,57 +4013,49 @@ class DescribeInstanceDTSInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * DTS task ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * DTS task ID.
          * @type {string || null}
          */
         this.JobId = null;
 
         /**
-         * DTS task name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * DTS task name.
          * @type {string || null}
          */
         this.JobName = null;
 
         /**
-         * Task status. Valid values: 1 (Creating), 3 (Checking), 4 (CheckPass), 5 (CheckNotPass), 7 (Running), 8 (ReadyComplete), 9 (Success), 10 (Failed), 11 (Stopping), 12 (Completing)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task status. 1: creating (Creating); 3: checking (Checking); 4: check successful (CheckPass); 5: check failed (CheckNotPass); 7: task running (Running); 8: preparation completed (ReadyComplete); 9: task successful (Success); 10: task failed (Failed); 11: stopping (Stopping); 12: completing (Completing).
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Status description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status description.
          * @type {string || null}
          */
         this.StatusDesc = null;
 
         /**
-         * Sync latency in bytes
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Synchronization delay. Unit: bytes.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Disconnection time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Disconnection time.
          * @type {string || null}
          */
         this.CutDownTime = null;
 
         /**
-         * Source instance information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Source instance information.
          * @type {DescribeInstanceDTSInstanceInfo || null}
          */
         this.SrcInfo = null;
 
         /**
-         * Target instance information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Destination instance information.
          * @type {DescribeInstanceDTSInstanceInfo || null}
          */
         this.DstInfo = null;
@@ -4295,15 +4369,13 @@ class ProxyNodes extends  AbstractModel {
         super();
 
         /**
-         * Node ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Node ID.
          * @type {string || null}
          */
         this.NodeId = null;
 
         /**
-         * AZ ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * AZ ID.
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -4712,7 +4784,7 @@ class DescribeTendisSlowLogResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Slow query details
+         * Slow query details. Note: If the value of TotalCount is greater than 10,000, indicating that the number of slow logs exceeds 10,000, log details cannot be returned. Instead, the returned data is empty. It is recommended to reduce the interval between BeginTime and EndTime and perform multiple queries.
          * @type {Array.<TendisSlowLogDetail> || null}
          */
         this.TendisSlowLogDetail = null;
@@ -4756,7 +4828,7 @@ class DescribeProductInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Sale information of a region.
+         * Selling information on the region. The selling information on all regions is returned even if a region is specified.
          * @type {Array.<RegionConf> || null}
          */
         this.RegionSet = null;
@@ -4965,8 +5037,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Filenames = null;
 
         /**
-         * List of backup file information.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Backup file information list.
          * @type {Array.<BackupDownloadInfo> || null}
          */
         this.BackupInfos = null;
@@ -5068,25 +5139,25 @@ class ModifyInstanceLogDeliveryRequest extends  AbstractModel {
         this.Enabled = null;
 
         /**
-         * ID of the shipped logset, which can be obtained through the sub-parameter **LogsetId** of the response parameter **SlowLog** of the API [DescribeInstanceLogDelivery](https://intl.cloud.tencent.com/document/product/239/110878?from_cn_redirect=1).
+         * ID of the shipped logset. It can be obtained through the API [DescribeLogsets](https://intl.cloud.tencent.com/document/api/614/58624?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LogsetId = null;
 
         /**
-         * ID of the shipped log topic, which can be obtained through the sub-parameter **TopicId** of the response parameter **SlowLog** of the API [DescribeInstanceLogDelivery](https://intl.cloud.tencent.com/document/product/239/110878?from_cn_redirect=1).
+         * ID of the shipped log topic. It can be obtained through the API [DescribeTopics](https://intl.cloud.tencent.com/document/api/614/56454?from_cn_redirect=1).
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Logset name. If **LogsetId** is not specified, this parameter needs to be configured and the system will automatically create a logset with the specified name.
+         * Logset name. It is required when **LogsetId** is left blank. The system will create a logset with the value of LogsetName and ship logs.
          * @type {string || null}
          */
         this.LogsetName = null;
 
         /**
-         * Log topic name. This parameter is required when TopicId is empty, and the system will automatically create a log topic.
+         * Log topic name. It is required when **TopicId** is left blank. The system will create a log topic with the value of TopicName and ship logs.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -5162,11 +5233,31 @@ class InquiryPriceCreateInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Price. Unit: USD (accurate down to the cent)
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Price.
          * @type {number || null}
          */
         this.Price = null;
+
+        /**
+         * High precision price. 
+         * @type {number || null}
+         */
+        this.HighPrecisionPrice = null;
+
+        /**
+         * Currency.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Price unit.
+
+ - pent: cent.
+ - microPent: microcent.
+         * @type {string || null}
+         */
+        this.AmountUnit = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5184,6 +5275,9 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Price = 'Price' in params ? params.Price : null;
+        this.HighPrecisionPrice = 'HighPrecisionPrice' in params ? params.HighPrecisionPrice : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.AmountUnit = 'AmountUnit' in params ? params.AmountUnit : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5824,8 +5918,7 @@ class InstanceIntegerParam extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Parameter unit
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Parameter unit.
          * @type {string || null}
          */
         this.Unit = null;
@@ -6082,6 +6175,34 @@ Sample value: crs-asdasdas.
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * RemoveReplicationGroup response structure.
+ * @class
+ */
+class RemoveReplicationGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6598,7 +6719,7 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
+         * Project ID. This field has been deprecated. Please ignore it.
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
@@ -6608,61 +6729,62 @@ class DescribeTaskListRequest extends  AbstractModel {
 
 
 
-- FLOW_CREATE: "001" - Create an instance.
-- FLOW_RESIZE: "002" - Change the configuration.
-- FLOW_CLOSE: "003" - Close an instance.
-- FLOW_CLEAN: "004" - Clear an instance.
-- FLOW_STARTUP: "005" - Enable an instance.
-- FLOW_DELETE: "006" - Delete an instance.
-- FLOW_SETPWD: "007" - Reset the password.
-- FLOW_EXPORTBACKUP: "009" - Export the backup file.
-- FLOW_RESTOREBACKUP: "010" - Restore the backup.
-- FLOW_BACKUPINSTANCE: "012" - Back up an instance.
-- FLOW_MIGRATEINSTANCE: "013" - Migrate an instance.
-- FLOW_DELBACKUP: "014" - Delete the backup.
-- FLOW_EXCHANGEINSTANCE: "016" - Switch an instance.
-- FLOW_AUTOBACKUP: "017" - Automatically backup an instance.
-- FLOW_MIGRATECHECK: "022" - Verify migration parameters.
-- FLOW_MIGRATETASK: "023" - Migrate data in progress.
-- FLOW_CLEANDB: "025" - Clear a database.
-- FLOW_CLONEBACKUP: "026" - Clone the backup.
-- FLOW_CHANGEVIP: "027" - Change the VIP.
-- FLOW_EXPORSHR: "028" - Perform scaling.
-- FLOW_ADDNODES: "029" - Add or remove a node.
-- FLOW_CHANGENET: "031" - Change the network type.
-- FLOW_MODIFYINSTACEREADONLY: "033" - Modify the read-only policy.
-- FLOW_MODIFYINSTANCEPARAMS: "034" - Modify instance parameters.
-- FLOW_MODIFYINSTANCEPASSWORDFREE: "035" - Set password-free access.
-- FLOW_SWITCHINSTANCEVIP: "036" - Switch the instance VIP.
-- FLOW_MODIFYINSTANCEACCOUNT: "037" - Modify the instance account.
-- FLOW_MODIFYINSTANCEBANDWIDTH: "038" - Modify the instance bandwidth.
-- FLOW_ENABLEINSTANCE_REPLICATE: "039" - Enable read-only replica.
-- FLOW_DISABLEINSTANCE_REPLICATE: "040" - Disable read-only replica.
-- FLOW_UpgradeArch: "041" - Upgrade the instance architecture from primary-secondary to cluster.
-- FLOW_DowngradeArch: "042" - Downgrade the instance architecture from cluster to primary-secondary.
-- FLOW_UpgradeVersion: "043" - Upgrade the version.
-- FLOW_MODIFYCONNECTIONCONFIG: "044" - Modify the number of bandwidth connections.
-- FLOW_CLEARNETWORK: "045" - Change the network.
-- FLOW_REMOVE_BACKUP_FILE: "046" - Delete the backup.
-- FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047" - Upgrade an instance to support multiple AZs.
-- FLOW_SHUTDOWN_MASTER: "048" - Simulate a fault.
-- FLOW_CHANGE_REPLICA_TO_MASTER: "049" - Manually promote the replica node to the primary node.
-- FLOW_CODE_ADD_REPLICATION_INSTANCE: "050" - Add a replication group.
-- FLOW_OPEN_WAN: "052" - Enable the public network.
-- FLOW_CLOSE_WAN: "053" - Disable the public network. - FLOW_UPDATE_WAN: "054" - Update the public network.
-- FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055" - Unbind the replication group.
-- FLOW_CODE_CHANGE_MASTER_INSTANCE: "056" - Switch to the primary instance in the replication group.
-- FLOW_CODE_CHANGE_INSTANCE_ROLE: "057" - Change the roles of instances in the replication group.
-- FLOW_MIGRATE_NODE: "058" - Migrate a node.
-- FLOW_SWITCH_NODE: "059" - Switch a node.
-- FLOW_UPGRADE_SMALL_VERSION: "060" - Upgrade the Redis version.
-- FLOW_UPGRADE_PROXY_VERSION: "061" - Upgrade the Proxy version.
-- FLOW_MODIFY_INSTANCE_NETWORK: "062" - Modify the instance network.
-- FLOW_MIGRATE_PROXY_NODE: "063" - Migrate the Proxy node.
-- FLOW_MIGRATION_INSTANCE_ZONE: "066" - Migrate the instance AZ in progress.
-- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067" - Upgrade the instance version in progress.
-- FLOW_MODIFY_PROXY_NUM: "069" - Add or remove a Proxy node.
-- FLOW_MODIFYBACKUPMOD: "070" - Change the instance backup mode.
+- FLOW_CREATE: "001", indicating instance creation.
+- FLOW_RESIZE: "002", indicating configuration modification.
+- FLOW_CLOSE: "003", indicating instance disabling.
+- FLOW_CLEAN: "004", indicating instance cleanup.
+- FLOW_STARTUP: "005", indicating instance enabling.
+- FLOW_DELETE: "006", indicating instance deletion.
+- FLOW_SETPWD: "007", indicating password reset.
+- FLOW_EXPORTBACKUP: "009", indicating backup file export.
+- FLOW_RESTOREBACKUP: "010", indicating backup restoration.
+- FLOW_BACKUPINSTANCE: "012", indicating instance backup.
+- FLOW_MIGRATEINSTANCE: "013", indicating instance migration.
+- FLOW_DELBACKUP: "014", indicating backup deletion.
+- FLOW_EXCHANGEINSTANCE: "016", indicating instance switch.
+- FLOW_AUTOBACKUP: "017", indicating automatic instance backup.
+- FLOW_MIGRATECHECK: "022", indicating migration parameter verification.
+- FLOW_MIGRATETASK: "023", indicating that data migration is in progress.
+- FLOW_CLEANDB: "025", indicating database cleanup.
+- FLOW_CLONEBACKUP: "026": indicating backup cloning.
+- FLOW_CHANGEVIP: "027", indicating VIP address modification.
+- FLOW_EXPORSHR: "028", indicating scaling.
+- FLOW_ADDNODES: "029", indicating node addition (removal).
+- FLOW_CHANGENET: "031", indicating network type modification.
+- FLOW_MODIFYINSTACEREADONLY: "033": indicating read-only policy modification.
+- FLOW_MODIFYINSTANCEPARAMS: "034", indicating instance parameter modification.
+- FLOW_MODIFYINSTANCEPASSWORDFREE: "035", indicating password-free access settings.
+- FLOW_SWITCHINSTANCEVIP: "036", indicating instance VIP address switch.
+- FLOW_MODIFYINSTANCEACCOUNT: "037", indicating instance account modification.
+- FLOW_MODIFYINSTANCEBANDWIDTH: "038", indicating instance bandwidth modification.
+- FLOW_ENABLEINSTANCE_REPLICATE: "039", indicating enabling of read-only replica.
+- FLOW_DISABLEINSTANCE_REPLICATE: "040", indicating disabling of read-only replica.
+- FLOW_UpgradeArch: "041", indicating instance architecture upgrade from the standard architecture to the cluster architecture.
+- FLOW_DowngradeArch: "042", indicating instance architecture downgrade from the cluster architecture to the standard architecture.
+- FLOW_UpgradeVersion: "043", indicating version upgrade.
+- FLOW_MODIFYCONNECTIONCONFIG: "044", indicating adjustment of the bandwidth and the number of connections.
+- FLOW_CLEARNETWORK: "045", indicating network change.
+- FLOW_REMOVE_BACKUP_FILE: "046", indicating backup deletion.
+- FLOW_UPGRADE_SUPPORT_MULTI_AZ: "047", indicating instance upgrade to multi-AZ deployment.
+- FLOW_SHUTDOWN_MASTER: "048", indicating fault simulation.
+- FLOW_CHANGE_REPLICA_TO_MASTER: "049", indicating manual promotion to the primary node.
+- FLOW_CODE_ADD_REPLICATION_INSTANCE: "050", indicating replication group addition.
+- FLOW_OPEN_WAN: "052", indicating enabling of public network access.
+- FLOW_CLOSE_WAN: "053", indicating disabling of public network access.
+ - FLOW_UPDATE_WAN: "054", indicating update of the public network access configuration.
+- FLOW_CODE_DELETE_REPLICATION_INSTANCE: "055", indicating replication group unbinding.
+- FLOW_CODE_CHANGE_MASTER_INSTANCE: "056", indicating switching a replication group instance to the primary instance.
+- FLOW_CODE_CHANGE_INSTANCE_ROLE: "057", indicating modification of the replication group instance role.
+- FLOW_MIGRATE_NODE: "058", indicating node migration.
+- FLOW_SWITCH_NODE: "059", indicating node switch.
+- FLOW_UPGRADE_SMALL_VERSION: "060", indicating Redis version upgrade.
+- FLOW_UPGRADE_PROXY_VERSION: "061", indicating proxy version upgrade.
+- FLOW_MODIFY_INSTANCE_NETWORK: "062", indicating instance network modification.
+- FLOW_MIGRATE_PROXY_NODE: "063", indicating proxy node migration.
+- FLOW_MIGRATION_INSTANCE_ZONE: "066", indicating that instance migration to another AZ is in progress.
+- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY: "067", indicating that instance version upgrade is in progress.
+- FLOW_MODIFY_PROXY_NUM: "069", indicating proxy node addition (removal).
+- FLOW_MODIFYBACKUPMOD: "070", indicating instance backup mode modification.
          * @type {Array.<string> || null}
          */
         this.TaskTypes = null;
@@ -6822,6 +6944,41 @@ class ModifyInstanceEventRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ExecutionDate = 'ExecutionDate' in params ? params.ExecutionDate : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Timestamp range within which second-level backup is missing
+ * @class
+ */
+class SecondLevelBackupMissingTimestamps extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start timestamp.
+         * @type {number || null}
+         */
+        this.StartTimeStamp = null;
+
+        /**
+         * End timestamp.
+         * @type {number || null}
+         */
+        this.EndTimeStamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeStamp = 'StartTimeStamp' in params ? params.StartTimeStamp : null;
+        this.EndTimeStamp = 'EndTimeStamp' in params ? params.EndTimeStamp : null;
 
     }
 }
@@ -7380,7 +7537,7 @@ class DescribeInstanceMonitorTopNCmdRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7657,9 +7814,11 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Security group ID list. Replace it with a new one, which is an array of one or more security group IDs.
-- To configure a security group for an instance for the first time, bind the security group through the API [AssociateSecurityGroups](https://intl.cloud.tencent.com/document/product/239/41260?from_cn_redirect=1) first.
+         * Replaces with the new security group ID list, which is an array of one or more security group IDs.
+- To configure a security group for an instance for the first time, call the API [AssociateSecurityGroups](https://www.tencentcloud.comom/document/product/239/41260?from_cn_redirect=1) to bind a security group first.
 - To replace the security group, obtain the security group ID on the [security group](https://console.tencentcloud.com/vpc/security-group) page of the console.
+
+**Note:** This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -8263,15 +8422,13 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `ERROR`, `OK`. This field has been disused.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * ERROR: incorrect; OK: correct (discarded).
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task ID.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -8615,10 +8772,9 @@ class ProductConf extends  AbstractModel {
         this.EnableRepicaReadOnly = null;
 
         /**
-         * Whether the Read-Only Replica is supported.
-- true: Supported.
-- false: Not supported.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether read-only replica is supported.
+ - true: read-only replica supported.
+ - false: not supported.
          * @type {boolean || null}
          */
         this.EnableReplicaReadOnly = null;
@@ -8773,54 +8929,18 @@ class InstanceNode extends  AbstractModel {
 }
 
 /**
- * Tendis node information
+ * ModifyInstanceBackupMode response structure.
  * @class
  */
-class TendisNodes extends  AbstractModel {
+class ModifyInstanceBackupModeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID
-         * @type {string || null}
-         */
-        this.NodeId = null;
-
-        /**
-         * Node role
-         * @type {string || null}
-         */
-        this.NodeRole = null;
-
-        /**
-         * AZ ID.	
+         * Task ID.
          * @type {number || null}
          */
-        this.ZoneId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-
-    }
-}
-
-/**
- * SwitchProxy response structure.
- * @class
- */
-class SwitchProxyResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.TaskId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8837,6 +8957,42 @@ class SwitchProxyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchProxy response structure.
+ * @class
+ */
+class SwitchProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8887,56 +9043,48 @@ class DescribeInstanceDTSInstanceInfo extends  AbstractModel {
 
         /**
          * Region ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.RegionId = null;
 
         /**
          * Instance ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Warehouse ID.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Repository ID.
          * @type {number || null}
          */
         this.SetId = null;
 
         /**
          * AZ ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
          * Instance type.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
          * Instance name.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
          * Instance access address.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
          * Status.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Status = null;
@@ -9139,30 +9287,25 @@ class LogDeliveryInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether log shipping is enabled. true: enabled; false: disabled.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Enabling status of log shipping. true: enabled; false: disabled.
          * @type {boolean || null}
          */
         this.Enabled = null;
 
         /**
-         * Logset ID.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Log set ID.
          * @type {string || null}
          */
         this.LogsetId = null;
 
         /**
          * Log topic ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
          * Logset region
-
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.LogRegion = null;
@@ -9459,21 +9602,20 @@ class Groups extends  AbstractModel {
 
         /**
          * Region ID.
-- 1: Guangzhou.
-- 4: Shanghai.
-- 5: Hong Kong (China).
-- 7: Shanghai Finance.
-- 8: Beijing.
-- 9: Singapore.
-- 11: Shenzhen Finance.
-- 15: Western United States (Silicon Valley).
-- 16: Chengdu.
-- 17: Germany.
-- 18: South Korea.
-- 19: Chongqing.
-- 21: India.
-- 22: Eastern United States (Virginia).
-- 23: Thailand.
+ - 1: Guangzhou.
+ - 4: Shanghai.
+ - 5: Hong Kong (China).
+ - 7: Shanghai Finance.
+ - 8: Beijing.
+ - 9: Singapore.
+ - 11: Shenzhen Finance.
+ - 15: Western US (Silicon Valley).
+ - 16: Chengdu.
+ - 17: Germany.
+ - 18: South Korea.
+ - 19: Chongqing.
+ - 22: Eastern US (Virginia).
+ - 23: Thailand.
 - 25: Japan.
          * @type {number || null}
          */
@@ -9486,8 +9628,7 @@ class Groups extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Replication group name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Replication group name.
          * @type {string || null}
          */
         this.GroupName = null;
@@ -9510,15 +9651,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceCount = null;
 
         /**
-         * Instance information in replication groups
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance information on the replication group.
          * @type {Array.<Instances> || null}
          */
         this.Instances = null;
 
         /**
-         * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Remark information.
          * @type {string || null}
          */
         this.Remark = null;
@@ -9685,18 +9824,20 @@ class DescribeInstancesRequest extends  AbstractModel {
 
         /**
          * Instance type.
-- 2: Redis 2.8 Memory Edition (standard architecture).
-- 3: CKV 3.2 Memory Edition (standard architecture).
-- 4: CKV 3.2 Memory Edition (cluster architecture).
-- 5: Redis 2.8 Memory Edition (stand-alone).
-- 6: Redis 4.0 Memory Edition (standard architecture).
-- 7: Redis 4.0 Memory Edition (cluster architecture).
-- 8: Redis 5.0 Memory Edition (standard architecture).
-- 9: Redis 5.0 Memory Edition (cluster architecture).
-- 15: Redis 6.2 Memory Edition (standard architecture).
-- 16: Redis 6.2 Memory Edition (cluster architecture).
-- 17: Redis 7.0 Memory Edition (standard architecture).
-- 18: Redis 7.0 Memory Edition (cluster architecture).
+
+- 2: Redis 2.8 memory edition (standard architecture).
+- 3: CKV 3.2 memory edition (standard architecture).
+- 4: CKV 3.2 memory edition (cluster architecture).
+- 5: Redis 2.8 memory edition (standalone).
+- 6: Redis 4.0 memory edition (standard architecture).
+- 7: Redis 4.0 memory edition (cluster architecture).
+- 8: Redis 5.0 memory edition (standard architecture).
+- 9: Redis 5.0 memory edition (cluster architecture).
+- 15: Redis 6.2 memory edition (standard architecture).
+- 16: Redis 6.2 memory edition (cluster architecture).
+- 17: Redis 7.0 memory edition (standard architecture).
+- 18: Redis 7.0 memory edition (cluster architecture).
+- 200: Memcached 1.6 memory edition (cluster architecture).
          * @type {number || null}
          */
         this.Type = null;
@@ -9857,10 +9998,10 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
         this.OldPassword = null;
 
         /**
-         * New instance password, which has the following requirements:
-- It must contain 8-30 characters, preferably 12 or more.
-- It cannot start with a slash (/)
-- It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
+         * New instance password. The password complexity requirements are as follows:
+ - It should contain 8 to 64 characters. 12 or more characters are recommended.
+ - It cannot start with a forward slash (/).
+ - It should contain at least two of the following types: lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
          * @type {string || null}
          */
         this.Password = null;
@@ -10625,15 +10766,12 @@ class AvailableRegion extends  AbstractModel {
 
         /**
          * Region
-
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * AZ information.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * AZ information
          * @type {Array.<string> || null}
          */
         this.AvailableZones = null;
@@ -10687,7 +10825,7 @@ class InstanceSet extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Region ID. <ul><li>1: Guangzhou;</li> <li>4: Shanghai;</li> <li>5: Hong Kong (China);</li> <li>7: Shanghai Finance;</li> <li>8: Beijing;</li> <li>9: Singapore;</li> <li>11: Shenzhen Finance;</li> <li>15: Western United States (Silicon Valley);</li> <li>16: Chengdu;</li> <li>17: Frankfurt;</li> <li>18: Seoul;</li> <li>19: Chongqing;</li> <li>21: Mumbai;</li> <li>22: Eastern United States (Virginia);</li> <li>23: Bangkok;</li> <li>25: Tokyo.</li></ul>
+         * Region ID.<ul><li>1: Guangzhou.</li><li>4: Shanghai.</li><li>5: Hong Kong (China).</li><li>7: Shanghai Finance.</li><li>8: Beijing.</li><li>9: Singapore.</li><li>11: Shenzhen Finance.</li><li>15: Western US (Silicon Valley).</li><li>16: Chengdu.</li><li>17: Frankfurt.</li><li>18: Seoul.</li><li>19: Chongqing.</li><li>22: Eastern US (Virginia).</li><li>23: Bangkok.</li><li>25: Tokyo.</li></ul>
          * @type {number || null}
          */
         this.RegionId = null;
@@ -10748,18 +10886,20 @@ class InstanceSet extends  AbstractModel {
 
         /**
          * Instance type.
-- 2: Redis 2.8 Memory Edition (standard architecture).
-- 3: CKV 3.2 Memory Edition (standard architecture).
-- 4: CKV 3.2 Memory Edition (cluster architecture).
-- 5: Redis 2.8 Memory Edition (stand-alone).
-- 6: Redis 4.0 Memory Edition (standard architecture).
-- 7: Redis 4.0 Memory Edition (cluster architecture).
-- 8: Redis 5.0 Memory Edition (standard architecture).
-- 9: Redis 5.0 Memory Edition (cluster architecture).
-- 15: Redis 6.2 Memory Edition (standard architecture).
-- 16: Redis 6.2 Memory Edition (cluster architecture).
-- 17: Redis 7.0 Memory Edition (standard architecture).
-- 18: Redis 7.0 Memory Edition (cluster architecture).
+
+- 2: Redis 2.8 memory edition (standard architecture).
+- 3: CKV 3.2 memory edition (standard architecture).
+- 4: CKV 3.2 memory edition (cluster architecture).
+- 5: Redis 2.8 memory edition (standalone).
+- 6: Redis 4.0 memory edition (standard architecture).
+- 7: Redis 4.0 memory edition (cluster architecture).
+- 8: Redis 5.0 memory edition (standard architecture).
+- 9: Redis 5.0 memory edition (cluster architecture).
+- 15: Redis 6.2 memory edition (standard architecture).
+- 16: Redis 6.2 memory edition (cluster architecture).
+- 17: Redis 7.0 memory edition (standard architecture).
+- 18: Redis 7.0 memory edition (cluster architecture).
+- 200: Memcached 1.6 memory edition (cluster architecture).
          * @type {number || null}
          */
         this.Type = null;
@@ -10819,7 +10959,9 @@ class InstanceSet extends  AbstractModel {
         this.OfflineTime = null;
 
         /**
-         * Sub-status returned for an instance in process.
+         * Sub-status returned for the instance in the process.
+ - 0: disk read-write status.
+ - 1: disk read-only status because the upper limit is exceeded.
          * @type {number || null}
          */
         this.SubStatus = null;
@@ -10873,191 +11015,165 @@ class InstanceSet extends  AbstractModel {
         this.SlaveReadWeight = null;
 
         /**
-         * Tag information associated with an instance.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Information on tags associated with the instance.
          * @type {Array.<InstanceTagInfo> || null}
          */
         this.InstanceTags = null;
 
         /**
          * Project name
-
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ProjectName = null;
 
         /**
-         * Whether an instance is a password-free instance. <ul><li>true: yes;</li> <li>false: no.</li></ul>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether the instance is password-free.<ul><li>true: password-free instance.</li><li>false: password required by the instance.</li></ul>
          * @type {boolean || null}
          */
         this.NoAuth = null;
 
         /**
          * Number of client connections.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ClientLimit = null;
 
         /**
-         * DTS status (internal parameter, which can be ignored).
-Note: This field may return null, indicating that no valid value can be obtained.
+         * DTS status. (Internal parameter, which can be ignored.)
          * @type {number || null}
          */
         this.DtsStatus = null;
 
         /**
-         * Upper limit of the shard bandwidth. Unit: MB.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Shard bandwidth limit. Unit: MB.
          * @type {number || null}
          */
         this.NetLimit = null;
 
         /**
-         * Password-free instance flag (internal parameter, which can be ignored).
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Password-free instance flag. (Internal parameter, which can be ignored.)
          * @type {number || null}
          */
         this.PasswordFree = null;
 
         /**
-         * Internal parameter, which can be ignored. This parameter is not properly named. It is recommended to use the IPv6 parameter to replace it.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * This parameter encounters a naming issue. It is recommended to use the parameter IPv6 instead. It is an internal parameter and can be ignored.
          * @type {string || null}
          */
         this.Vip6 = null;
 
         /**
          * Internal parameter, which can be ignored.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IPv6 = null;
 
         /**
-         * Instance read-only flag (internal parameter, which can be ignored).
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Instance read-only flag. (Internal parameter, which can be ignored.)
          * @type {number || null}
          */
         this.ReadOnly = null;
 
         /**
          * Internal parameter, which can be ignored.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RemainBandwidthDuration = null;
 
         /**
-         * For Redis instances, ignore this parameter.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * For TencentDB for Redis® instances, ignore this parameter.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Monitoring version. <ul><li>1m: 1-minute granularity monitoring. This monitoring granularity has been deprecated. For details, see [1-Minute Granularity Will Be Disused](https://www.tencentcloud.com/document/product/239/50440).</li> <li>5s: 5-second granularity monitoring.</li></ul>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Monitoring version.<ul><li>1m: monitoring with the 1-minute granularity. Currently, this monitoring granularity is unavailable. For details, see [1-Minute Granularity Will Be Disused](https://intl.cloud.tencent.com/document/product/239/80653?from_cn_redirect=1).</li><li>5s: monitoring with the 5-second granularity.</li></ul>
          * @type {string || null}
          */
         this.MonitorVersion = null;
 
         /**
          * Minimum value that can be set for the maximum number of client connections.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ClientLimitMin = null;
 
         /**
          * Maximum value that can be set for the maximum number of client connections.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ClientLimitMax = null;
 
         /**
-         * Detailed node information of an instance.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Node details of the instance.
+
+It is returned only for multi-AZ instances.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
 
         /**
-         * Region information of an instance, for example, ap-guangzhou.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Region information on the instance. For example, ap-guangzhou.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
          * Public network address.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.WanAddress = null;
 
         /**
-         * Polaris service address, which is for internal use.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Polaris service address for internal use.
          * @type {string || null}
          */
         this.PolarisServer = null;
 
         /**
-         * CDC Redis cluster ID.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * CDC cluster ID of TencentDB for Redis®.
          * @type {string || null}
          */
         this.RedisClusterId = null;
 
         /**
          * CDC cluster ID.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.DedicatedClusterId = null;
 
         /**
-         * Product edition. <ul><li>local: local disk;</li> <li>cloud: cloud disk;</li> <li>cdc: CDC cluster.</li></ul>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Product edition.<ul><li>local: local disk.</li><li>cloud: cloud disk edition.</li><li>cdc: CDC cluster edition.</li></ul>
          * @type {string || null}
          */
         this.ProductVersion = null;
 
         /**
-         * Current Proxy version of an instance.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Current proxy version of the instance.
          * @type {string || null}
          */
         this.CurrentProxyVersion = null;
 
         /**
-         * Current Cache minor version of an instance. If the instance joins a global replication group, the kernel version of the global replication group will be displayed.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Current cache minor version of the instance. If the instance is added to a global replication group, the global replication kernel version is displayed.
          * @type {string || null}
          */
         this.CurrentRedisVersion = null;
 
         /**
-         * Upgradable Proxy version of an instance.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Upgradable proxy version for the instance.
          * @type {string || null}
          */
         this.UpgradeProxyVersion = null;
 
         /**
-         * Upgradable Cache minor version of an instance.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Upgradable cache minor version for the instance.
          * @type {string || null}
          */
         this.UpgradeRedisVersion = null;
 
         /**
-         * Backup mode. SecondLevelBackup: second-level backup; NormalLevelBackup: normal backup.
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Backup mode. - SecondLevelBackup: second-level backup. - NormalLevelBackup: ordinary backup.
          * @type {string || null}
          */
         this.BackupMode = null;
@@ -11554,15 +11670,17 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
 
         /**
          * Instance type.
-- 2: Redis 2.8 Memory Edition (standard architecture).
-- 6: Redis 4.0 Memory Edition (standard architecture).
-- 7: Redis 4.0 Memory Edition (cluster architecture).
-- 8: Redis 5.0 Memory Edition (standard architecture).
-- 9: Redis 5.0 Memory Edition (cluster architecture).
-- 15: Redis 6.2 Memory Edition (standard architecture).
-- 16: Redis 6.2 Memory Edition (cluster architecture).
-- 17: Redis 7.0 Memory Edition (standard architecture).
-- 18: Redis 7.0 Memory Edition (cluster architecture).
+
+- 2: Redis 2.8 memory edition (standard architecture).
+- 6: Redis 4.0 memory edition (standard architecture).
+- 7: Redis 4.0 memory edition (cluster architecture).
+- 8: Redis 5.0 memory edition (standard architecture).
+- 9: Redis 5.0 memory edition (cluster architecture).
+- 15: Redis 6.2 memory edition (standard architecture).
+- 16: Redis 6.2 memory edition (cluster architecture).
+- 17: Redis 7.0 memory edition (standard architecture).
+- 18: Redis 7.0 memory edition (cluster architecture).
+- 200: Memcached 1.6 memory edition (cluster architecture).
          * @type {number || null}
          */
         this.TypeId = null;
@@ -12517,6 +12635,43 @@ class DescribeRedisClustersResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceBackupMode request structure.
+ * @class
+ */
+class ModifyInstanceBackupModeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which can contain 12 to 36 characters.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup mode:
+ - SecondLevelBackup: second-level backup.
+ - NormalLevelBackup: ordinary backup.
+         * @type {string || null}
+         */
+        this.BackupMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMode = 'BackupMode' in params ? params.BackupMode : null;
+
+    }
+}
+
+/**
  * DescribeProxySlowLog response structure.
  * @class
  */
@@ -12531,7 +12686,7 @@ class DescribeProxySlowLogResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Slow query details
+         * Slow query details. Note: If the value of TotalCount is greater than 10,000, indicating that the number of slow logs exceeds 10,000, log details cannot be returned. Instead, the returned data is empty. It is recommended to reduce the interval between BeginTime and EndTime and perform multiple queries.
          * @type {Array.<InstanceProxySlowlogDetail> || null}
          */
         this.InstanceProxySlowLogDetail = null;
@@ -12612,15 +12767,13 @@ class DescribeInstanceAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * Account details 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Account details.
          * @type {Array.<Account> || null}
          */
         this.Accounts = null;
 
         /**
-         * Number of accounts 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Number of accounts.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -12714,6 +12867,48 @@ class DescribeBackupDownloadRestrictionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * Tendis node information
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * AZ ID.	
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -12828,6 +13023,12 @@ class SwitchProxyRequest extends  AbstractModel {
          */
         this.ProxyID = null;
 
+        /**
+         * Instance proxy ID list. Call the API [DescribeInstanceNodeInfo](https://www.tencentcloud.comom/document/product/239/48603?from_cn_redirect=1) to obtain IDs from **NodeId** in the **Proxy** response parameter.
+         * @type {Array.<string> || null}
+         */
+        this.ProxyIDList = null;
+
     }
 
     /**
@@ -12839,6 +13040,7 @@ class SwitchProxyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.ProxyID = 'ProxyID' in params ? params.ProxyID : null;
+        this.ProxyIDList = 'ProxyIDList' in params ? params.ProxyIDList : null;
 
     }
 }
@@ -13270,6 +13472,41 @@ class RemoveReplicationInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSecondLevelBackupInfo request structure.
+ * @class
+ */
+class DescribeSecondLevelBackupInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the instance ID. For example, crs-xjhsdj****. Log in to the TencentDB for Redis® console and copy the instance ID from the instance list.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Second-level backup timestamp. The corresponding time should be within the last 7 days.
+         * @type {number || null}
+         */
+        this.BackupTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupTimestamp = 'BackupTimestamp' in params ? params.BackupTimestamp : null;
+
+    }
+}
+
+/**
  * Security group details
  * @class
  */
@@ -13364,11 +13601,31 @@ class InquiryPriceUpgradeInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Price. Unit: USD
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Price.
          * @type {number || null}
          */
         this.Price = null;
+
+        /**
+         * High precision price.
+         * @type {number || null}
+         */
+        this.HighPrecisionPrice = null;
+
+        /**
+         * Currency.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Price unit.
+
+ - pent: cent.
+ - microPent: microcent.
+         * @type {string || null}
+         */
+        this.AmountUnit = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13386,6 +13643,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Price = 'Price' in params ? params.Price : null;
+        this.HighPrecisionPrice = 'HighPrecisionPrice' in params ? params.HighPrecisionPrice : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.AmountUnit = 'AmountUnit' in params ? params.AmountUnit : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13845,7 +14105,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * The ID of instance to be modified.
+         * ID of the instance whose configuration is to be modified. Log in to the [TencentDB for Redis® console](https://console.cloud.tencent.com/Redis/instance/list) and copy the instance ID from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -13874,6 +14134,14 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.NodeSet = null;
 
+        /**
+         * Switch time.
+ - 1: Perform the operation within the maintenance window: Specification upgrade is executed within the set maintenance window. Use the API [DescribeMaintenanceWindow](https://intl.cloud.tencent.com/document/product/239/46336?from_cn_redirect=1) to query the time period of the set maintenance window. Replica addition/removal, shard addition/removal, and memory capacity expansion/shrinkage are supported within the maintenance window. Specification upgrade within the maintenance window is being gradually tested and published by region. It is already supported in some regions. For urgent integration in regions that do not support it, [submit a ticket](https://console.cloud.tencent.com/workorder/category) to apply for an allowlist.
+ -2: Perform the operation immediately: The operation will be performed immediately, without the need to wait for the maintenance window. Operations will be performed immediately by default for the system.
+         * @type {number || null}
+         */
+        this.SwitchOption = null;
+
     }
 
     /**
@@ -13896,6 +14164,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
                 this.NodeSet.push(obj);
             }
         }
+        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
 
     }
 }
@@ -13915,8 +14184,7 @@ class DescribeInstanceNodeInfoResponse extends  AbstractModel {
         this.ProxyCount = null;
 
         /**
-         * Proxy node information 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * Proxy node information.
          * @type {Array.<ProxyNodes> || null}
          */
         this.Proxy = null;
@@ -13928,8 +14196,7 @@ Note:  This field may return null, indicating that no valid values can be obtain
         this.RedisCount = null;
 
         /**
-         * Redis node information 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * TencentDB for Redis® node information.
          * @type {Array.<RedisNodes> || null}
          */
         this.Redis = null;
@@ -13941,8 +14208,7 @@ Note:  This field may return null, indicating that no valid values can be obtain
         this.TendisCount = null;
 
         /**
-         * This parameter has been disused. 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * This parameter is no longer used. Please ignore it.
          * @type {Array.<TendisNodes> || null}
          */
         this.Tendis = null;
@@ -14097,8 +14363,7 @@ class Instances extends  AbstractModel {
         this.RedisShardSize = null;
 
         /**
-         * Instance disk size
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance disk size.
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -14122,15 +14387,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Vip = null;
 
         /**
-         * Due to the naming irregularity of this parameter, it is recommended to use the parameter IPv6 instead. Internal parameters, which can be ignored by users.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * This parameter encounters a naming issue. It is recommended to use the parameter IPv6 instead. It is an internal parameter and can be ignored.
          * @type {string || null}
          */
         this.Vip6 = null;
 
         /**
-         * Internal parameters, which can be ignored by users.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Internal parameter, which can be ignored.
          * @type {string || null}
          */
         this.IPv6 = null;
@@ -14427,6 +14690,7 @@ class InstanceSlowlogDetail extends  AbstractModel {
 
 module.exports = {
     UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
+    RemoveReplicationGroupRequest: RemoveReplicationGroupRequest,
     UpgradeSmallVersionRequest: UpgradeSmallVersionRequest,
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
     EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
@@ -14452,7 +14716,7 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstancePasswordResponse: ModifyInstancePasswordResponse,
-    KillMasterGroupResponse: KillMasterGroupResponse,
+    DescribeSecondLevelBackupInfoResponse: DescribeSecondLevelBackupInfoResponse,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
@@ -14484,6 +14748,7 @@ module.exports = {
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     InstanceMultiParam: InstanceMultiParam,
     DescribeInstanceDealDetailRequest: DescribeInstanceDealDetailRequest,
+    KillMasterGroupResponse: KillMasterGroupResponse,
     RedisNode: RedisNode,
     DescribeProjectSecurityGroupRequest: DescribeProjectSecurityGroupRequest,
     ParameterDetail: ParameterDetail,
@@ -14541,6 +14806,7 @@ module.exports = {
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
     DeleteReplicationInstanceRequest: DeleteReplicationInstanceRequest,
     SwitchAccessNewInstanceRequest: SwitchAccessNewInstanceRequest,
+    RemoveReplicationGroupResponse: RemoveReplicationGroupResponse,
     KillMasterGroupRequest: KillMasterGroupRequest,
     SwitchAccessNewInstanceResponse: SwitchAccessNewInstanceResponse,
     CloneInstancesResponse: CloneInstancesResponse,
@@ -14555,6 +14821,7 @@ module.exports = {
     DescribeTaskListRequest: DescribeTaskListRequest,
     ChangeMasterInstanceResponse: ChangeMasterInstanceResponse,
     ModifyInstanceEventRequest: ModifyInstanceEventRequest,
+    SecondLevelBackupMissingTimestamps: SecondLevelBackupMissingTimestamps,
     DescribeBackupDetailResponse: DescribeBackupDetailResponse,
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
@@ -14590,7 +14857,7 @@ module.exports = {
     ModifyConnectionConfigRequest: ModifyConnectionConfigRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
     InstanceNode: InstanceNode,
-    TendisNodes: TendisNodes,
+    ModifyInstanceBackupModeResponse: ModifyInstanceBackupModeResponse,
     SwitchProxyResponse: SwitchProxyResponse,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
@@ -14655,11 +14922,13 @@ module.exports = {
     DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeRedisClustersResponse: DescribeRedisClustersResponse,
+    ModifyInstanceBackupModeRequest: ModifyInstanceBackupModeRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,
     ModifyInstanceReadOnlyRequest: ModifyInstanceReadOnlyRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
+    TendisNodes: TendisNodes,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     SwitchProxyRequest: SwitchProxyRequest,
     DescribeInstanceSpecBandwidthRequest: DescribeInstanceSpecBandwidthRequest,
@@ -14672,6 +14941,7 @@ module.exports = {
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
     RemoveReplicationInstanceResponse: RemoveReplicationInstanceResponse,
+    DescribeSecondLevelBackupInfoRequest: DescribeSecondLevelBackupInfoRequest,
     SecurityGroupDetail: SecurityGroupDetail,
     InquiryPriceUpgradeInstanceResponse: InquiryPriceUpgradeInstanceResponse,
     DeleteInstanceAccountResponse: DeleteInstanceAccountResponse,

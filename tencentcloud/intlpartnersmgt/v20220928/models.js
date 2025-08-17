@@ -1176,12 +1176,6 @@ Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/
         this.VerifyCode = null;
 
         /**
-         * Extension field, which is left empty by default.
-         * @type {string || null}
-         */
-        this.Extended = null;
-
-        /**
          * Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181),
 such as "kghy_01".
          * @type {string || null}
@@ -1194,6 +1188,12 @@ such as "kghy_0101"
          * @type {string || null}
          */
         this.TradeTwo = null;
+
+        /**
+         * Extension field, which is left empty by default.
+         * @type {string || null}
+         */
+        this.Extended = null;
 
     }
 
@@ -1212,9 +1212,9 @@ such as "kghy_0101"
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.VerifyCode = 'VerifyCode' in params ? params.VerifyCode : null;
-        this.Extended = 'Extended' in params ? params.Extended : null;
         this.TradeOne = 'TradeOne' in params ? params.TradeOne : null;
         this.TradeTwo = 'TradeTwo' in params ? params.TradeTwo : null;
+        this.Extended = 'Extended' in params ? params.Extended : null;
 
     }
 }

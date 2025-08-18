@@ -4364,6 +4364,30 @@ class ChcDeployExtraConfig extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MiniOsType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BootType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BootFile = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.NextServerAddress = null;
+
     }
 
     /**
@@ -4373,6 +4397,10 @@ class ChcDeployExtraConfig extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MiniOsType = 'MiniOsType' in params ? params.MiniOsType : null;
+        this.BootType = 'BootType' in params ? params.BootType : null;
+        this.BootFile = 'BootFile' in params ? params.BootFile : null;
+        this.NextServerAddress = 'NextServerAddress' in params ? params.NextServerAddress : null;
 
     }
 }
@@ -6985,6 +7013,12 @@ false (default): sends a normal request. after passing the check, creates an ins
         this.DisableApiTermination = null;
 
         /**
+         * 
+         * @type {boolean || null}
+         */
+        this.EnableJumboFrame = null;
+
+        /**
          * Description list of tags. by specifying this parameter, tags can be bound to the instance launch template.
          * @type {Array.<TagSpecification> || null}
          */
@@ -7104,6 +7138,7 @@ Note: this field is in beta test.
             this.InstanceChargePrepaid = obj;
         }
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+        this.EnableJumboFrame = 'EnableJumboFrame' in params ? params.EnableJumboFrame : null;
 
         if (params.LaunchTemplateTagSpecification) {
             this.LaunchTemplateTagSpecification = new Array();
@@ -9034,143 +9069,124 @@ class ItemPrice extends  AbstractModel {
         super();
 
         /**
-         * The original unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Original price of subsequent total costs, postpaid billing mode usage, unit: usd. <li>if other time interval items are returned, such as UnitPriceSecondStep, this item represents the time interval (0, 96) hr. if no other time interval items are returned, this item represents the full period (0, ∞) hr.
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * Billing unit for pay-as-you-go mode. Valid values: <br><li>HOUR: billed on an hourly basis. It's used for hourly postpaid instances (`POSTPAID_BY_HOUR`). <br><li>GB: bill by traffic in GB. It's used for postpaid products that are billed by the hourly traffic (`TRAFFIC_POSTPAID_BY_HOUR`).
-Note: this field may return null, indicating that no valid value is obtained.
+         * Billing unit for pay-as-you-go mode. valid values: <br><li>HOUR: billed on an hourly basis. it's used for hourly POSTPAID instances (`POSTPAID_BY_HOUR`). <br><li>GB: bill BY TRAFFIC in GB. it's used for POSTPAID products that are billed BY the hourly TRAFFIC (`TRAFFIC_POSTPAID_BY_HOUR`).
          * @type {string || null}
          */
         this.ChargeUnit = null;
 
         /**
-         * The original price of a pay-in-advance instance, in USD.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Original price of total prepaid costs. measurement unit: usd.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discount price of a prepaid instance, in USD.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Discount price of total prepaid costs. unit: usd.
          * @type {number || null}
          */
         this.DiscountPrice = null;
 
         /**
-         * Percentage of the original price. For example, if you enter "20.0", the discounted price will be 20% of the original price.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Discount, such as 20.0 representing 80% off.
          * @type {number || null}
          */
         this.Discount = null;
 
         /**
-         * The discounted unit price for pay-as-you-go mode in USD. <br><li>When a billing tier is returned, it indicates the price fo the returned billing tier. For example, if `UnitPriceSecondStep` is returned, it refers to the unit price for the usage between 0 to 96 hours. Otherwise, it refers to that the unit price for unlimited usage.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Discounted price of subsequent total cost, postpaid billing mode usage, unit: usd <li>if other time interval items are returned, such as UnitPriceDiscountSecondStep, this item represents the time interval (0, 96) hr; if no other time interval items are returned, this item represents the full period (0, ∞) hr.
          * @type {number || null}
          */
         this.UnitPriceDiscount = null;
 
         /**
-         * Original unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Original price of subsequent total costs for usage time range (96, 360) hr in postpaid billing mode. unit: usd.
          * @type {number || null}
          */
         this.UnitPriceSecondStep = null;
 
         /**
-         * Discounted unit price for the usage between 96 to 360 hours in USD. It's applicable to pay-as-you-go mode.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Discounted price of subsequent total cost for usage time interval (96, 360) hr in postpaid billing mode. unit: usd.
          * @type {number || null}
          */
         this.UnitPriceDiscountSecondStep = null;
 
         /**
-         * Original unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
          * @type {number || null}
          */
         this.UnitPriceThirdStep = null;
 
         /**
-         * Discounted unit price for the usage after 360 hours in USD. It's applicable to pay-as-you-go mode.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
          * @type {number || null}
          */
         this.UnitPriceDiscountThirdStep = null;
 
         /**
-         * Original 3-year payment, in USD. This parameter is only available to upfront payment mode.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Specifies the original price of total 3-year prepaid costs in prepaid billing mode. measurement unit: usd.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.OriginalPriceThreeYear = null;
 
         /**
-         * Discounted 3-year upfront payment, in USD. This parameter is only available to upfront payment mode.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Specifies the discount price for an advance payment of the total fee for three years, prepaid mode usage, measurement unit: usd.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.DiscountPriceThreeYear = null;
 
         /**
-         * Discount for 3-year upfront payment. For example, 20.0 indicates 80% off.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Specifies the discount for a 3-year advance payment, for example 20.0 represents 80% off.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.DiscountThreeYear = null;
 
         /**
-         * Original 5-year payment, in USD. This parameter is only available to upfront payment mode.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Specifies the original price of the 5-year total cost with advance payment, using prepaid billing mode. measurement unit: usd.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.OriginalPriceFiveYear = null;
 
         /**
-         * Discounted 5-year upfront payment, in USD. This parameter is only available to upfront payment mode.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Prepaid 5-year total cost discount price, prepaid billing mode usage. unit: usd.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.DiscountPriceFiveYear = null;
 
         /**
-         * Discount for 5-year upfront payment. For example, 20.0 indicates 80% off.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Specifies the discount for 5-year advance payment, such as 20.0 for 80% off.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.DiscountFiveYear = null;
 
         /**
-         * Original 1-year payment, in USD. This parameter is only available to upfront payment mode.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Original price of one-year advance payment total cost. prepaid mode usage. unit: usd.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.OriginalPriceOneYear = null;
 
         /**
-         * Discounted 1-year payment, in USD. This parameter is only available to upfront payment mode.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Discount price for total advance payment for one year. specifies prepaid mode usage. measurement unit: usd.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.DiscountPriceOneYear = null;
 
         /**
-         * Discount for 1-year upfront payment. For example, 20.0 indicates 80% off.
-Note: this field may return `null`, indicating that no valid value was found.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Specifies the discount for a one-year advance payment, such as 20.0 for 80% off.
+Note: This field may return null, indicating that no valid value is found.
          * @type {number || null}
          */
         this.DiscountOneYear = null;
@@ -9703,7 +9719,7 @@ class DescribeHostsRequest extends  AbstractModel {
 
         /**
          * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+<p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-6`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 <li><strong>project-id</strong></li>
 <p style="padding-left: 30px;">Filter by the project ID. You can query the list of created projects by calling `DescribeProject` or logging in to the [CVM console](https://console.cloud.tencent.com/cvm/index). You can also call `AddProject` to create projects. The project ID is like 1002189. </p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>host-id</strong></li>
@@ -10297,7 +10313,7 @@ class DescribeChcHostsRequest extends  AbstractModel {
 
         /**
          * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+<p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-6`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 <li><strong>instance-name</strong></li>
 <p style="padding-left: 30px;">Filter by the <strong>instance name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>instance-state</strong></li>

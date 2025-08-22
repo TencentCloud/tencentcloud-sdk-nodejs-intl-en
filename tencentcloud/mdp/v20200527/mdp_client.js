@@ -17,8 +17,10 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DRMInfo = models.DRMInfo;
+const DescribeStreamPackageVodRemuxTaskRequest = models.DescribeStreamPackageVodRemuxTaskRequest;
 const SourcePackageConf = models.SourcePackageConf;
 const CreateStreamPackageSSAIChannelRequest = models.CreateStreamPackageSSAIChannelRequest;
+const StartStreamPackageVodRemuxTaskResponse = models.StartStreamPackageVodRemuxTaskResponse;
 const AdBreakInfo = models.AdBreakInfo;
 const ModifyStreamPackageLinearAssemblyProgramResponse = models.ModifyStreamPackageLinearAssemblyProgramResponse;
 const BindNewLVBDomainWithChannelResponse = models.BindNewLVBDomainWithChannelResponse;
@@ -26,6 +28,7 @@ const DeleteStreamPackageLinearAssemblyChannelsRequest = models.DeleteStreamPack
 const CdnDomainInfo = models.CdnDomainInfo;
 const StartStreamPackageLinearAssemblyChannelRequest = models.StartStreamPackageLinearAssemblyChannelRequest;
 const LocationAlert = models.LocationAlert;
+const DescribeStreamPackageLinearAssemblyChannelsRequest = models.DescribeStreamPackageLinearAssemblyChannelsRequest;
 const Metadata = models.Metadata;
 const ClipRangeInfo = models.ClipRangeInfo;
 const AliasValueConf = models.AliasValueConf;
@@ -33,6 +36,8 @@ const DescribeStreamPackageSSAIChannelRequest = models.DescribeStreamPackageSSAI
 const DescribeLinearAssemblyCDNDomainWithChannelResponse = models.DescribeLinearAssemblyCDNDomainWithChannelResponse;
 const ModifyStreamPackageSSAIChannelResponse = models.ModifyStreamPackageSSAIChannelResponse;
 const ModifyStreamPackageChannelInputAuthInfoRequest = models.ModifyStreamPackageChannelInputAuthInfoRequest;
+const DescribeStreamPackageVodRemuxTaskResponse = models.DescribeStreamPackageVodRemuxTaskResponse;
+const VodRemuxTaskInfo = models.VodRemuxTaskInfo;
 const ChannelAlertResp = models.ChannelAlertResp;
 const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
 const InputInfo = models.InputInfo;
@@ -56,7 +61,7 @@ const DomainRecordInfo = models.DomainRecordInfo;
 const TimeShiftInfo = models.TimeShiftInfo;
 const DescribeStreamPackageLinearAssemblyProgramSchedulesResponse = models.DescribeStreamPackageLinearAssemblyProgramSchedulesResponse;
 const DescribeStreamPackageHarvestJobRequest = models.DescribeStreamPackageHarvestJobRequest;
-const DescribeStreamPackageLinearAssemblyChannelsRequest = models.DescribeStreamPackageLinearAssemblyChannelsRequest;
+const DeleteStreamPackageVodRemuxTasksRequest = models.DeleteStreamPackageVodRemuxTasksRequest;
 const SourceAlert = models.SourceAlert;
 const DescribeStreamPackageSourcesResponse = models.DescribeStreamPackageSourcesResponse;
 const SourceInfo = models.SourceInfo;
@@ -65,12 +70,15 @@ const CreateStreamPackageLinearAssemblyChannelRequest = models.CreateStreamPacka
 const PlaybackInfoReq = models.PlaybackInfoReq;
 const DescribeStreamPackageHarvestJobResponse = models.DescribeStreamPackageHarvestJobResponse;
 const DescribeStreamPackageLinearAssemblyChannelRequest = models.DescribeStreamPackageLinearAssemblyChannelRequest;
+const DeleteStreamPackageVodRemuxTasksResponse = models.DeleteStreamPackageVodRemuxTasksResponse;
 const DeleteStreamPackageSSAIChannelRequest = models.DeleteStreamPackageSSAIChannelRequest;
 const ModifyStreamPackageChannelEndpointResponse = models.ModifyStreamPackageChannelEndpointResponse;
 const CreateStreamPackageSourceLocationRequest = models.CreateStreamPackageSourceLocationRequest;
+const CreateStreamPackageVodRemuxTaskRequest = models.CreateStreamPackageVodRemuxTaskRequest;
 const DescribeStreamPackageHarvestJobsRequest = models.DescribeStreamPackageHarvestJobsRequest;
 const DeleteStreamPackageHarvestJobResponse = models.DeleteStreamPackageHarvestJobResponse;
 const DeleteStreamPackageHarvestJobsRequest = models.DeleteStreamPackageHarvestJobsRequest;
+const DeleteStreamPackageVodRemuxTaskRequest = models.DeleteStreamPackageVodRemuxTaskRequest;
 const CreateStreamPackageChannelEndpointResponse = models.CreateStreamPackageChannelEndpointResponse;
 const DescribeLinearAssemblyCDNDomainWithChannelsRequest = models.DescribeLinearAssemblyCDNDomainWithChannelsRequest;
 const PlaybackInfo = models.PlaybackInfo;
@@ -80,12 +88,14 @@ const DescribeStreamPackageSourceLocationRequest = models.DescribeStreamPackageS
 const UnbindCdnDomainWithChannelRequest = models.UnbindCdnDomainWithChannelRequest;
 const ModifyStreamPackageLinearAssemblyProgramRequest = models.ModifyStreamPackageLinearAssemblyProgramRequest;
 const HarvestJobResp = models.HarvestJobResp;
+const DescribeStreamPackageVodRemuxTasksRequest = models.DescribeStreamPackageVodRemuxTasksRequest;
 const DescribeStreamPackageSourceLocationsRequest = models.DescribeStreamPackageSourceLocationsRequest;
 const DescribeStreamPackageSourceLocationResponse = models.DescribeStreamPackageSourceLocationResponse;
 const EndpointInfo = models.EndpointInfo;
 const ModifyStreamPackageSourceResponse = models.ModifyStreamPackageSourceResponse;
 const DeleteStreamPackageLinearAssemblyChannelRequest = models.DeleteStreamPackageLinearAssemblyChannelRequest;
 const ModifyStreamPackageChannelRequest = models.ModifyStreamPackageChannelRequest;
+const DescribeStreamPackageVodRemuxTasksResponse = models.DescribeStreamPackageVodRemuxTasksResponse;
 const DescribeStreamPackageSSAIUsageResponse = models.DescribeStreamPackageSSAIUsageResponse;
 const CreateStreamPackageLinearAssemblyProgramRequest = models.CreateStreamPackageLinearAssemblyProgramRequest;
 const SegmentDeliverInfo = models.SegmentDeliverInfo;
@@ -94,6 +104,7 @@ const CreateStreamPackageChannelRequest = models.CreateStreamPackageChannelReque
 const ModifyStreamPackageSourceRequest = models.ModifyStreamPackageSourceRequest;
 const InputAuthInfo = models.InputAuthInfo;
 const DescribeStreamPackageSSAIChannelResponse = models.DescribeStreamPackageSSAIChannelResponse;
+const DeleteStreamPackageVodRemuxTaskResponse = models.DeleteStreamPackageVodRemuxTaskResponse;
 const DeleteStreamPackageHarvestJobsResponse = models.DeleteStreamPackageHarvestJobsResponse;
 const TimeSignalInfo = models.TimeSignalInfo;
 const ModifyStreamPackageLinearAssemblyChannelRequest = models.ModifyStreamPackageLinearAssemblyChannelRequest;
@@ -109,6 +120,7 @@ const SSAIUsageInfo = models.SSAIUsageInfo;
 const ModifyStreamPackageChannelInputAuthInfoResponse = models.ModifyStreamPackageChannelInputAuthInfoResponse;
 const SlateInfo = models.SlateInfo;
 const UnbindLinearAssemblyCDNDomainWithChannelResponse = models.UnbindLinearAssemblyCDNDomainWithChannelResponse;
+const CreateStreamPackageVodRemuxTaskResponse = models.CreateStreamPackageVodRemuxTaskResponse;
 const DashManifestInfo = models.DashManifestInfo;
 const CreateStreamPackageChannelResponse = models.CreateStreamPackageChannelResponse;
 const DescribeStreamPackageLinearAssemblyChannelResponse = models.DescribeStreamPackageLinearAssemblyChannelResponse;
@@ -119,8 +131,10 @@ const DeleteStreamPackageSSAIChannelResponse = models.DeleteStreamPackageSSAICha
 const StartStreamPackageLinearAssemblyChannelResponse = models.StartStreamPackageLinearAssemblyChannelResponse;
 const ModifyStreamPackageLinearAssemblyChannelResponse = models.ModifyStreamPackageLinearAssemblyChannelResponse;
 const DeleteStreamPackageSourceResponse = models.DeleteStreamPackageSourceResponse;
-const DescribeStreamPackageSourceRequest = models.DescribeStreamPackageSourceRequest;
+const StartStreamPackageVodRemuxTaskRequest = models.StartStreamPackageVodRemuxTaskRequest;
+const CosInputInfo = models.CosInputInfo;
 const DescribeStreamPackageChannelRequest = models.DescribeStreamPackageChannelRequest;
+const InputFileInfo = models.InputFileInfo;
 const OutputInfo = models.OutputInfo;
 const CreateStreamPackageChannelEndpointRequest = models.CreateStreamPackageChannelEndpointRequest;
 const DescribeStreamPackageSSAIChannelsRequest = models.DescribeStreamPackageSSAIChannelsRequest;
@@ -158,7 +172,9 @@ const LinearAssemblyProgramInfo = models.LinearAssemblyProgramInfo;
 const DescribeStreamPackageSourcesRequest = models.DescribeStreamPackageSourcesRequest;
 const CreateStreamPackageLinearAssemblyChannelResponse = models.CreateStreamPackageLinearAssemblyChannelResponse;
 const LinearAssemblyChannelInfo = models.LinearAssemblyChannelInfo;
+const OutputStorage = models.OutputStorage;
 const UsageDetail = models.UsageDetail;
+const DescribeStreamPackageSourceRequest = models.DescribeStreamPackageSourceRequest;
 const DescribeStreamPackageSSAIChannelsResponse = models.DescribeStreamPackageSSAIChannelsResponse;
 const OutputReq = models.OutputReq;
 const CacheInfoInfo = models.CacheInfoInfo;
@@ -166,6 +182,7 @@ const DescribeStreamPackageLinearAssemblyChannelsResponse = models.DescribeStrea
 const DeleteStreamPackageHarvestJobRequest = models.DeleteStreamPackageHarvestJobRequest;
 const NameServer = models.NameServer;
 const ConfigAliasesInfo = models.ConfigAliasesInfo;
+const CosOutputStorage = models.CosOutputStorage;
 const ManifestInfo = models.ManifestInfo;
 const DescribeLinearAssemblyCDNDomainWithChannelsResponse = models.DescribeLinearAssemblyCDNDomainWithChannelsResponse;
 
@@ -200,6 +217,17 @@ class MdpClient extends AbstractClient {
     DescribeStreamPackageLinearAssemblyProgram(req, cb) {
         let resp = new DescribeStreamPackageLinearAssemblyProgramResponse();
         this.request("DescribeStreamPackageLinearAssemblyProgram", req, resp, cb);
+    }
+
+    /**
+     * Delete Vod remux task.
+     * @param {DeleteStreamPackageVodRemuxTaskRequest} req
+     * @param {function(string, DeleteStreamPackageVodRemuxTaskResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageVodRemuxTask(req, cb) {
+        let resp = new DeleteStreamPackageVodRemuxTaskResponse();
+        this.request("DeleteStreamPackageVodRemuxTask", req, resp, cb);
     }
 
     /**
@@ -288,6 +316,17 @@ class MdpClient extends AbstractClient {
     UnbindLinearAssemblyCDNDomainWithChannel(req, cb) {
         let resp = new UnbindLinearAssemblyCDNDomainWithChannelResponse();
         this.request("UnbindLinearAssemblyCDNDomainWithChannel", req, resp, cb);
+    }
+
+    /**
+     * Start VOD remux task.
+     * @param {StartStreamPackageVodRemuxTaskRequest} req
+     * @param {function(string, StartStreamPackageVodRemuxTaskResponse):void} cb
+     * @public
+     */
+    StartStreamPackageVodRemuxTask(req, cb) {
+        let resp = new StartStreamPackageVodRemuxTaskResponse();
+        this.request("StartStreamPackageVodRemuxTask", req, resp, cb);
     }
 
     /**
@@ -464,6 +503,17 @@ class MdpClient extends AbstractClient {
     DescribeLinearAssemblyCDNDomainWithChannel(req, cb) {
         let resp = new DescribeLinearAssemblyCDNDomainWithChannelResponse();
         this.request("DescribeLinearAssemblyCDNDomainWithChannel", req, resp, cb);
+    }
+
+    /**
+     * Query VOD remux tasks informations.
+     * @param {DescribeStreamPackageVodRemuxTasksRequest} req
+     * @param {function(string, DescribeStreamPackageVodRemuxTasksResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageVodRemuxTasks(req, cb) {
+        let resp = new DescribeStreamPackageVodRemuxTasksResponse();
+        this.request("DescribeStreamPackageVodRemuxTasks", req, resp, cb);
     }
 
     /**
@@ -665,6 +715,17 @@ class MdpClient extends AbstractClient {
     }
 
     /**
+     * DescribeStreamPackageSSAIChannel
+     * @param {DescribeStreamPackageSSAIChannelRequest} req
+     * @param {function(string, DescribeStreamPackageSSAIChannelResponse):void} cb
+     * @public
+     */
+    DescribeStreamPackageSSAIChannel(req, cb) {
+        let resp = new DescribeStreamPackageSSAIChannelResponse();
+        this.request("DescribeStreamPackageSSAIChannel", req, resp, cb);
+    }
+
+    /**
      * Query channel linear assembly SourceLocation information list.
      * @param {DescribeStreamPackageSourceLocationsRequest} req
      * @param {function(string, DescribeStreamPackageSourceLocationsResponse):void} cb
@@ -706,6 +767,17 @@ class MdpClient extends AbstractClient {
     DescribeStreamPackageLinearAssemblyChannels(req, cb) {
         let resp = new DescribeStreamPackageLinearAssemblyChannelsResponse();
         this.request("DescribeStreamPackageLinearAssemblyChannels", req, resp, cb);
+    }
+
+    /**
+     * Delete VOD remux tasks in batches.
+     * @param {DeleteStreamPackageVodRemuxTasksRequest} req
+     * @param {function(string, DeleteStreamPackageVodRemuxTasksResponse):void} cb
+     * @public
+     */
+    DeleteStreamPackageVodRemuxTasks(req, cb) {
+        let resp = new DeleteStreamPackageVodRemuxTasksResponse();
+        this.request("DeleteStreamPackageVodRemuxTasks", req, resp, cb);
     }
 
     /**
@@ -764,14 +836,25 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * DescribeStreamPackageSSAIChannel
-     * @param {DescribeStreamPackageSSAIChannelRequest} req
-     * @param {function(string, DescribeStreamPackageSSAIChannelResponse):void} cb
+     * Query VOD remux task information.
+     * @param {DescribeStreamPackageVodRemuxTaskRequest} req
+     * @param {function(string, DescribeStreamPackageVodRemuxTaskResponse):void} cb
      * @public
      */
-    DescribeStreamPackageSSAIChannel(req, cb) {
-        let resp = new DescribeStreamPackageSSAIChannelResponse();
-        this.request("DescribeStreamPackageSSAIChannel", req, resp, cb);
+    DescribeStreamPackageVodRemuxTask(req, cb) {
+        let resp = new DescribeStreamPackageVodRemuxTaskResponse();
+        this.request("DescribeStreamPackageVodRemuxTask", req, resp, cb);
+    }
+
+    /**
+     * Create VodRemuxTask
+     * @param {CreateStreamPackageVodRemuxTaskRequest} req
+     * @param {function(string, CreateStreamPackageVodRemuxTaskResponse):void} cb
+     * @public
+     */
+    CreateStreamPackageVodRemuxTask(req, cb) {
+        let resp = new CreateStreamPackageVodRemuxTaskResponse();
+        this.request("CreateStreamPackageVodRemuxTask", req, resp, cb);
     }
 
 

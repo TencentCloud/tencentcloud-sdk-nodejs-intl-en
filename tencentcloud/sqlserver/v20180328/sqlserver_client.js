@@ -22,6 +22,7 @@ const DealInfo = models.DealInfo;
 const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
+const DrZoneInfo = models.DrZoneInfo;
 const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
@@ -39,9 +40,9 @@ const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const SlaveZones = models.SlaveZones;
 const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
 const StartInstanceXEventResponse = models.StartInstanceXEventResponse;
-const MigrateDetail = models.MigrateDetail;
+const DescribeCollationTimeZoneResponse = models.DescribeCollationTimeZoneResponse;
 const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
-const RunMigrationRequest = models.RunMigrationRequest;
+const DescribeSpecSellStatusResponse = models.DescribeSpecSellStatusResponse;
 const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
 const CreateBusinessIntelligenceFileResponse = models.CreateBusinessIntelligenceFileResponse;
 const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
@@ -76,6 +77,8 @@ const ModifyInstanceEncryptAttributesRequest = models.ModifyInstanceEncryptAttri
 const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
 const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const ZoneStatus = models.ZoneStatus;
+const SpecSellStatus = models.SpecSellStatus;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
@@ -83,6 +86,7 @@ const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstanc
 const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const DBCreateInfo = models.DBCreateInfo;
+const RunMigrationRequest = models.RunMigrationRequest;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -91,7 +95,7 @@ const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
 const ModifyInstanceEncryptAttributesResponse = models.ModifyInstanceEncryptAttributesResponse;
 const MigrationStep = models.MigrationStep;
-const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
+const DescribeCollationTimeZoneRequest = models.DescribeCollationTimeZoneRequest;
 const Events = models.Events;
 const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
 const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
@@ -130,6 +134,7 @@ const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
 const EventConfig = models.EventConfig;
 const InstanceDBDetail = models.InstanceDBDetail;
+const DescribeSpecSellStatusRequest = models.DescribeSpecSellStatusRequest;
 const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
@@ -166,6 +171,7 @@ const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const CosUploadBackupFile = models.CosUploadBackupFile;
 const ModifyDBNameRequest = models.ModifyDBNameRequest;
 const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
+const MigrateDetail = models.MigrateDetail;
 const DescribeDBInstancesAttributeResponse = models.DescribeDBInstancesAttributeResponse;
 const Backup = models.Backup;
 const DescribeRestoreTimeRangeResponse = models.DescribeRestoreTimeRangeResponse;
@@ -202,6 +208,7 @@ const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
 const CrossBackupAddr = models.CrossBackupAddr;
 const Parameter = models.Parameter;
+const Price = models.Price;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
@@ -232,6 +239,7 @@ const SlowlogInfo = models.SlowlogInfo;
 const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
 const MigrateTarget = models.MigrateTarget;
+const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const ModifyBackupMigrationRequest = models.ModifyBackupMigrationRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
@@ -425,6 +433,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the status information on specifications, including the sales status and reference price. (The actual price is subject to the result returned by price querying APIs.)
+     * @param {DescribeSpecSellStatusRequest} req
+     * @param {function(string, DescribeSpecSellStatusResponse):void} cb
+     * @public
+     */
+    DescribeSpecSellStatus(req, cb) {
+        let resp = new DescribeSpecSellStatusResponse();
+        this.request("DescribeSpecSellStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to restart a database instance.
      * @param {RestartDBInstanceRequest} req
      * @param {function(string, RestartDBInstanceResponse):void} cb
@@ -458,16 +477,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance parameters.
-<b>Note</b>: if <b>the instance needs to be restarted</b> for the modified parameter to take effect, <b>it will be restarted</b> immediately or during the maintenance time according to the `WaitSwitch` parameter.
-Before you modify a parameter, you can use the `DescribeInstanceParams` API to query whether the instance needs to be restarted.
-     * @param {ModifyInstanceParamRequest} req
-     * @param {function(string, ModifyInstanceParamResponse):void} cb
+     * This API is used to query the character set and time zone supported by the instance.
+     * @param {DescribeCollationTimeZoneRequest} req
+     * @param {function(string, DescribeCollationTimeZoneResponse):void} cb
      * @public
      */
-    ModifyInstanceParam(req, cb) {
-        let resp = new ModifyInstanceParamResponse();
-        this.request("ModifyInstanceParam", req, resp, cb);
+    DescribeCollationTimeZone(req, cb) {
+        let resp = new DescribeCollationTimeZoneResponse();
+        this.request("DescribeCollationTimeZone", req, resp, cb);
     }
 
     /**
@@ -512,6 +529,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DeleteAccount(req, cb) {
         let resp = new DeleteAccountResponse();
         this.request("DeleteAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start an incremental backup import task.
+     * @param {StartIncrementalMigrationRequest} req
+     * @param {function(string, StartIncrementalMigrationResponse):void} cb
+     * @public
+     */
+    StartIncrementalMigration(req, cb) {
+        let resp = new StartIncrementalMigrationResponse();
+        this.request("StartIncrementalMigration", req, resp, cb);
     }
 
     /**
@@ -768,18 +796,20 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to start an incremental backup import task.
-     * @param {StartIncrementalMigrationRequest} req
-     * @param {function(string, StartIncrementalMigrationResponse):void} cb
+     * This API is used to modify instance parameters.
+<b>Note</b>: if <b>the instance needs to be restarted</b> for the modified parameter to take effect, <b>it will be restarted</b> immediately or during the maintenance time according to the `WaitSwitch` parameter.
+Before you modify a parameter, you can use the `DescribeInstanceParams` API to query whether the instance needs to be restarted.
+     * @param {ModifyInstanceParamRequest} req
+     * @param {function(string, ModifyInstanceParamResponse):void} cb
      * @public
      */
-    StartIncrementalMigration(req, cb) {
-        let resp = new StartIncrementalMigrationResponse();
-        this.request("StartIncrementalMigration", req, resp, cb);
+    ModifyInstanceParam(req, cb) {
+        let resp = new ModifyInstanceParamResponse();
+        this.request("ModifyInstanceParam", req, resp, cb);
     }
 
     /**
-     * This API is used to query the upgrade prices of a monthly subscribed instance
+     * This API is used to query the upgrade prices of a monthly subscribed instance.
 .
      * @param {InquiryPriceUpgradeDBInstanceRequest} req
      * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb

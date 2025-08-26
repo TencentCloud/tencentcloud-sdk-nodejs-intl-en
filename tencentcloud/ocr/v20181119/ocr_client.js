@@ -27,6 +27,7 @@ const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const ItemInfo = models.ItemInfo;
 const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
 const OtherInvoiceList = models.OtherInvoiceList;
+const RecognizeBrazilCommonOCRResponse = models.RecognizeBrazilCommonOCRResponse;
 const RecognizeMacaoIDCardOCRResponse = models.RecognizeMacaoIDCardOCRResponse;
 const PermitOCRResponse = models.PermitOCRResponse;
 const RecognizeBrazilDriverLicenseOCRRequest = models.RecognizeBrazilDriverLicenseOCRRequest;
@@ -40,16 +41,20 @@ const Value = models.Value;
 const SealInfo = models.SealInfo;
 const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
 const RecognizeKoreanDrivingLicenseOCRRequest = models.RecognizeKoreanDrivingLicenseOCRRequest;
+const BrazilRNMInfo = models.BrazilRNMInfo;
 const OtherInvoiceItem = models.OtherInvoiceItem;
 const SmartStructuralProRequest = models.SmartStructuralProRequest;
+const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
 const VatInvoiceItemInfo = models.VatInvoiceItemInfo;
 const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
+const RecognizeBrazilCommonOCRRequest = models.RecognizeBrazilCommonOCRRequest;
 const TextDetection = models.TextDetection;
 const RecognizePhilippinesTinIDOCRResponse = models.RecognizePhilippinesTinIDOCRResponse;
 const DetectedWords = models.DetectedWords;
 const TableCellInfo = models.TableCellInfo;
 const ShippingInvoice = models.ShippingInvoice;
-const LineInfo = models.LineInfo;
+const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
+const BrazilDriverLicenseInfo = models.BrazilDriverLicenseInfo;
 const GeneralMachineItem = models.GeneralMachineItem;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
@@ -64,7 +69,7 @@ const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRR
 const Key = models.Key;
 const IDCardOCRResponse = models.IDCardOCRResponse;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
-const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
+const BrazilIDCardInfo = models.BrazilIDCardInfo;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
 const GroupInfo = models.GroupInfo;
 const QuotaInvoice = models.QuotaInvoice;
@@ -108,7 +113,7 @@ const VinOCRResponse = models.VinOCRResponse;
 const RecognizeKoreanDrivingLicenseOCRResponse = models.RecognizeKoreanDrivingLicenseOCRResponse;
 const VatElectronicItemInfo = models.VatElectronicItemInfo;
 const ConfigAdvanced = models.ConfigAdvanced;
-const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
+const LineInfo = models.LineInfo;
 const ItemCoord = models.ItemCoord;
 const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
 const VatInvoiceRoll = models.VatInvoiceRoll;
@@ -130,8 +135,10 @@ const SmartStructuralProResponse = models.SmartStructuralProResponse;
 const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const RecognizeBrazilDriverLicenseOCRResponse = models.RecognizeBrazilDriverLicenseOCRResponse;
+const BrazilCardInfo = models.BrazilCardInfo;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
 const VinOCRRequest = models.VinOCRRequest;
+const BrazilRNEInfo = models.BrazilRNEInfo;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRRequest;
 const RecognizeThaiPinkCardRequest = models.RecognizeThaiPinkCardRequest;
@@ -404,6 +411,19 @@ This API is not fully available for the time being. For more information, please
     }
 
     /**
+     * This API is used to identify Brazil RNE documents.
+
+This API is used to set the default request rate limit to 5 requests/second.
+     * @param {RecognizeBrazilCommonOCRRequest} req
+     * @param {function(string, RecognizeBrazilCommonOCRResponse):void} cb
+     * @public
+     */
+    RecognizeBrazilCommonOCR(req, cb) {
+        let resp = new RecognizeBrazilCommonOCRResponse();
+        this.request("RecognizeBrazilCommonOCR", req, resp, cb);
+    }
+
+    /**
      * This API is used to detect and recognize Chinese and English forms in images. It can return the text content of each cell and save the recognition result as Excel.
 
 This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
@@ -454,15 +474,18 @@ A maximum of 10 requests can be initiated per second for this API.
     }
 
     /**
-     * This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
-As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
-     * @param {RecognizeMainlandIDCardOCRRequest} req
-     * @param {function(string, RecognizeMainlandIDCardOCRResponse):void} cb
+     * This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
+
+This API is used to set the alias SmartStructuralPro.
+
+The default API request rate limit is 5 requests per second.
+     * @param {ExtractDocMultiRequest} req
+     * @param {function(string, ExtractDocMultiResponse):void} cb
      * @public
      */
-    RecognizeMainlandIDCardOCR(req, cb) {
-        let resp = new RecognizeMainlandIDCardOCRResponse();
-        this.request("RecognizeMainlandIDCardOCR", req, resp, cb);
+    ExtractDocMulti(req, cb) {
+        let resp = new ExtractDocMultiResponse();
+        this.request("ExtractDocMulti", req, resp, cb);
     }
 
     /**
@@ -770,18 +793,15 @@ The invoice/ticket subtype (SubType), subtype description (TypeDescription), and
     }
 
     /**
-     * This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
-
-This API is used to set the alias SmartStructuralPro.
-
-The default API request rate limit is 5 requests per second.
-     * @param {ExtractDocMultiRequest} req
-     * @param {function(string, ExtractDocMultiResponse):void} cb
+     * This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+     * @param {RecognizeMainlandIDCardOCRRequest} req
+     * @param {function(string, RecognizeMainlandIDCardOCRResponse):void} cb
      * @public
      */
-    ExtractDocMulti(req, cb) {
-        let resp = new ExtractDocMultiResponse();
-        this.request("ExtractDocMulti", req, resp, cb);
+    RecognizeMainlandIDCardOCR(req, cb) {
+        let resp = new RecognizeMainlandIDCardOCRResponse();
+        this.request("RecognizeMainlandIDCardOCR", req, resp, cb);
     }
 
 

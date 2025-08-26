@@ -1133,6 +1133,20 @@ class MediaAiAnalysisHighlightItem extends  AbstractModel {
          */
         this.SegmentSet = null;
 
+        /**
+         * Intelligent highlight address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HighlightUrl = null;
+
+        /**
+         * Intelligent highlight cover address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CovImgUrl = null;
+
     }
 
     /**
@@ -1155,6 +1169,8 @@ class MediaAiAnalysisHighlightItem extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.HighlightUrl = 'HighlightUrl' in params ? params.HighlightUrl : null;
+        this.CovImgUrl = 'CovImgUrl' in params ? params.CovImgUrl : null;
 
     }
 }
@@ -5373,7 +5389,7 @@ class TimeSpotCheck extends  AbstractModel {
         super();
 
         /**
-         * Duration of each loop detection in the spot check policy, in seconds. Valid values:
+         * Duration of each loop detection, in seconds. Value range:
 
  - Minimum value: 10.
  - Maximum value: 86400.
@@ -5383,19 +5399,27 @@ class TimeSpotCheck extends  AbstractModel {
         this.CheckDuration = null;
 
         /**
-         * Detection interval of the spot check policy, which indicates how long to wait before conducting the next detection after one detection is completed.
+         * Detection interval, in seconds. It indicates the duration after a detection is completed and before the next detection is conducted. Value range:
+ - Minimum value: 10.
+ - Maximum value: 3600.
          * @type {number || null}
          */
         this.CheckInterval = null;
 
         /**
-         * Duration for which the opening clip is skipped.
+         * Skipped opening duration, in seconds. Value range:
+ - Minimum value: 1.
+ - Maximum value: 1800.
          * @type {number || null}
          */
         this.SkipDuration = null;
 
         /**
-         * Number of loops. When this field is empty or set to 0, the default behavior is to loop until the video ends.
+         * Number of loops. Value range:
+ - Minimum value: 0.
+ - Maximum value: 1000.
+
+If the value is 0 or not specified, it indicates that loops are executed until the video ends.
          * @type {number || null}
          */
         this.CirclesNumber = null;
@@ -7655,6 +7679,12 @@ class LiveRecordTemplate extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection.
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
     }
 
     /**
@@ -7682,6 +7712,7 @@ class LiveRecordTemplate extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
 
     }
 }
@@ -10823,6 +10854,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.EnhanceConfig = null;
 
+        /**
+         * Subtitle parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SubtitleTemplate || null}
+         */
+        this.SubtitleTemplate = null;
+
     }
 
     /**
@@ -10861,6 +10899,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             this.EnhanceConfig = obj;
         }
 
+        if (params.SubtitleTemplate) {
+            let obj = new SubtitleTemplate();
+            obj.deserialize(params.SubtitleTemplate)
+            this.SubtitleTemplate = obj;
+        }
+
     }
 }
 
@@ -10873,12 +10917,11 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * Notification type:
+         * Notification Type:
+TDMQ-CMQ: TDMQ for CMQ.
+"URL": When a URL is specified, HTTP callbacks are pushed to the address specified by NotifyUrl. The callback protocol is HTTP+JSON. The content of the packet body is the same as the output parameters of [ParseLiveStreamProcessNotification](https://www.tencentcloud.comom/document/product/862/39229?from_cn_redirect=1).
 
-"CMQ": Callback messages are written to the CMQ queue; 
-"URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://intl.cloud.tencent.com/document/product/862/39229?from_cn_redirect=1).
-
-<font color="red">Note: If left blank, it is CMQ by default. To use the other type, you need to fill in the corresponding type value.</font>
+<font color="red">Note: If it is left blank, TDMQ-CMQ is used by default. To use other types, fill in the corresponding type value.</font>
          * @type {string || null}
          */
         this.NotifyType = null;
@@ -10890,25 +10933,25 @@ class LiveStreamTaskNotifyConfig extends  AbstractModel {
         this.NotifyUrl = null;
 
         /**
-         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+         * Queue and Topic models are provided.
          * @type {string || null}
          */
         this.CmqModel = null;
 
         /**
-         * CMQ region, such as `sh` and `bj`.
+         * Region when NotifyType is set to TDMQ-CMQ. For example, sh or bj.
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
+         * This field is valid when the model is Queue. It indicates the name of the TDMQ for CMQ queue for receiving event notifications.
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+         * This field is valid when the model is Topic. It indicates the name of the TDMQ for CMQ topic for receiving event notifications.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -20718,6 +20761,13 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.StreamIndex = null;
 
         /**
+         * Input information on the subtitle file to be embedded into the video. Currently, only subtitle files stored in COS are supported.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaInputInfo || null}
+         */
+        this.SubtitleFileInput = null;
+
+        /**
          * Font type. valid values:.
 <li>hei.ttf: simhei.</li>.
 <li>song.ttf: simsun.</li>.
@@ -20832,6 +20882,62 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.BoardAlpha = null;
 
+        /**
+         * Stroke width.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OutlineWidth = null;
+
+        /**
+         * Stroke color. The value should be a 6-digit hexadecimal RGB value.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutlineColor = null;
+
+        /**
+         * Stroke transparency. The value should be a positive floating-point number in the range of (0, 1].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OutlineAlpha = null;
+
+        /**
+         * Shadow width. The value should be a floating-point number in the range of [0, 1000].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ShadowWidth = null;
+
+        /**
+         * Shadow color. The value should be a 6-digit hexadecimal RGB value.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ShadowColor = null;
+
+        /**
+         * Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ShadowAlpha = null;
+
+        /**
+         * Line spacing. The value should be a positive integer in the range of [0, 1000].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LineSpacing = null;
+
+        /**
+         * Alignment mode. Valid values: top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. bottom: bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alignment = null;
+
     }
 
     /**
@@ -20843,6 +20949,12 @@ Note: This field may return null, indicating that no valid value can be obtained
         }
         this.Path = 'Path' in params ? params.Path : null;
         this.StreamIndex = 'StreamIndex' in params ? params.StreamIndex : null;
+
+        if (params.SubtitleFileInput) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.SubtitleFileInput)
+            this.SubtitleFileInput = obj;
+        }
         this.FontType = 'FontType' in params ? params.FontType : null;
         this.FontSize = 'FontSize' in params ? params.FontSize : null;
         this.FontColor = 'FontColor' in params ? params.FontColor : null;
@@ -20853,6 +20965,14 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.BoardHeight = 'BoardHeight' in params ? params.BoardHeight : null;
         this.BoardColor = 'BoardColor' in params ? params.BoardColor : null;
         this.BoardAlpha = 'BoardAlpha' in params ? params.BoardAlpha : null;
+        this.OutlineWidth = 'OutlineWidth' in params ? params.OutlineWidth : null;
+        this.OutlineColor = 'OutlineColor' in params ? params.OutlineColor : null;
+        this.OutlineAlpha = 'OutlineAlpha' in params ? params.OutlineAlpha : null;
+        this.ShadowWidth = 'ShadowWidth' in params ? params.ShadowWidth : null;
+        this.ShadowColor = 'ShadowColor' in params ? params.ShadowColor : null;
+        this.ShadowAlpha = 'ShadowAlpha' in params ? params.ShadowAlpha : null;
+        this.LineSpacing = 'LineSpacing' in params ? params.LineSpacing : null;
+        this.Alignment = 'Alignment' in params ? params.Alignment : null;
 
     }
 }
@@ -25421,6 +25541,12 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection. If it is left blank, the default value video is used.
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
     }
 
     /**
@@ -25444,6 +25570,7 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
 
     }
 }
@@ -32536,6 +32663,12 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection.
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
     }
 
     /**
@@ -32560,6 +32693,7 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
 
     }
 }
@@ -34181,7 +34315,9 @@ class LiveStreamAiAnalysisResultItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Result type. Valid values:
+<li>SegmentRecognition: video splitting.</li>
+<li>Highlight: highlight.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -34191,6 +34327,13 @@ class LiveStreamAiAnalysisResultItem extends  AbstractModel {
          * @type {Array.<SegmentRecognitionItem> || null}
          */
         this.SegmentResultSet = null;
+
+        /**
+         * Highlight result. This field is valid when Type is set to Highlight.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaAiAnalysisHighlightItem> || null}
+         */
+        this.HighlightResultSet = null;
 
     }
 
@@ -34209,6 +34352,15 @@ class LiveStreamAiAnalysisResultItem extends  AbstractModel {
                 let obj = new SegmentRecognitionItem();
                 obj.deserialize(params.SegmentResultSet[z]);
                 this.SegmentResultSet.push(obj);
+            }
+        }
+
+        if (params.HighlightResultSet) {
+            this.HighlightResultSet = new Array();
+            for (let z in params.HighlightResultSet) {
+                let obj = new MediaAiAnalysisHighlightItem();
+                obj.deserialize(params.HighlightResultSet[z]);
+                this.HighlightResultSet.push(obj);
             }
         }
 
@@ -34382,6 +34534,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.EndTime = null;
 
+        /**
+         * Highlight title.
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * Highlight overview.
+         * @type {string || null}
+         */
+        this.Summary = null;
+
     }
 
     /**
@@ -34397,6 +34561,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SegmentTags = 'SegmentTags' in params ? params.SegmentTags : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Summary = 'Summary' in params ? params.Summary : null;
 
     }
 }

@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const ChargePrepaid = models.ChargePrepaid;
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
+const RenewInstancesRequest = models.RenewInstancesRequest;
 const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
 const ModifyInstancesProjectRequest = models.ModifyInstancesProjectRequest;
 const ConfigureChcDeployVpcResponse = models.ConfigureChcDeployVpcResponse;
@@ -149,7 +150,7 @@ const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const CreateLaunchTemplateResponse = models.CreateLaunchTemplateResponse;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
-const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
+const InquiryPriceRenewInstancesResponse = models.InquiryPriceRenewInstancesResponse;
 const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
 const DescribeInstancesAttributesRequest = models.DescribeInstancesAttributesRequest;
@@ -188,6 +189,7 @@ const ReservedInstances = models.ReservedInstances;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
+const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
 const ConfigureChcAssistVpcResponse = models.ConfigureChcAssistVpcResponse;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeChcHostsRequest = models.DescribeChcHostsRequest;
@@ -196,6 +198,7 @@ const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstances
 const CreateLaunchTemplateVersionResponse = models.CreateLaunchTemplateVersionResponse;
 const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
+const InquiryPriceRenewInstancesRequest = models.InquiryPriceRenewInstancesRequest;
 const GPUInfo = models.GPUInfo;
 const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const RegionInfo = models.RegionInfo;
@@ -215,6 +218,7 @@ const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const SyncImage = models.SyncImage;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
+const RenewInstancesResponse = models.RenewInstancesResponse;
 const DescribeLaunchTemplateVersionsResponse = models.DescribeLaunchTemplateVersionsResponse;
 const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
@@ -716,6 +720,21 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
+     * This API is used to synchronize custom images to other regions.
+
+* This API only supports synchronizing one image per call.
+* This API supports multiple synchronization regions.
+* A single account can have a maximum of 500 custom images in each region.
+     * @param {SyncImagesRequest} req
+     * @param {function(string, SyncImagesResponse):void} cb
+     * @public
+     */
+    SyncImages(req, cb) {
+        let resp = new SyncImagesResponse();
+        this.request("SyncImages", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the price for adjusting the instance model.
 
 * Currently, you can only use this API to query the prices of instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#block_device) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
@@ -978,18 +997,16 @@ This API is used to create an instance launch template. After the initial creati
     }
 
     /**
-     * This API is used to synchronize custom images to other regions.
+     * This API is used to inquire about the price for renewing a monthly subscription instance.
 
-* This API only supports synchronizing one image per call.
-* This API supports multiple synchronization regions.
-* A single account can have a maximum of 500 custom images in each region.
-     * @param {SyncImagesRequest} req
-     * @param {function(string, SyncImagesResponse):void} cb
+This API is used to query the renewal price of monthly subscription instances.
+     * @param {InquiryPriceRenewInstancesRequest} req
+     * @param {function(string, InquiryPriceRenewInstancesResponse):void} cb
      * @public
      */
-    SyncImages(req, cb) {
-        let resp = new SyncImagesResponse();
-        this.request("SyncImages", req, resp, cb);
+    InquiryPriceRenewInstances(req, cb) {
+        let resp = new InquiryPriceRenewInstancesResponse();
+        this.request("InquiryPriceRenewInstances", req, resp, cb);
     }
 
     /**
@@ -1085,6 +1102,32 @@ This API is used to create an instance launch template. After the initial creati
     }
 
     /**
+     * This API is used to renew annual and monthly subscription instances.
+
+This API is used to operate on monthly subscription instances only.
+This API is used to ensure your account balance is sufficient for renewal. You can check the balance via the DescribeAccountBalance API (https://www.tencentcloud.comom/document/product/555/20253?from_cn_redirect=1).
+* You can query the result of the instance operation by calling the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
+     * @param {RenewInstancesRequest} req
+     * @param {function(string, RenewInstancesResponse):void} cb
+     * @public
+     */
+    RenewInstances(req, cb) {
+        let resp = new RenewInstancesResponse();
+        this.request("RenewInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information on [spread placement groups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1).
+     * @param {DescribeDisasterRecoverGroupsRequest} req
+     * @param {function(string, DescribeDisasterRecoverGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDisasterRecoverGroups(req, cb) {
+        let resp = new DescribeDisasterRecoverGroupsResponse();
+        this.request("DescribeDisasterRecoverGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to start instances.
 
 * You can only perform this operation on instances whose status is `STOPPED`.
@@ -1097,17 +1140,6 @@ This API is used to create an instance launch template. After the initial creati
     StartInstances(req, cb) {
         let resp = new StartInstancesResponse();
         this.request("StartInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information on [spread placement groups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1).
-     * @param {DescribeDisasterRecoverGroupsRequest} req
-     * @param {function(string, DescribeDisasterRecoverGroupsResponse):void} cb
-     * @public
-     */
-    DescribeDisasterRecoverGroups(req, cb) {
-        let resp = new DescribeDisasterRecoverGroupsResponse();
-        this.request("DescribeDisasterRecoverGroups", req, resp, cb);
     }
 
     /**

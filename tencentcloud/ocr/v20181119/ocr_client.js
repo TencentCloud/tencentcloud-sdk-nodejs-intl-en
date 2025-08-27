@@ -411,7 +411,7 @@ This API is not fully available for the time being. For more information, please
     }
 
     /**
-     * This API is used to identify Brazil RNE documents.
+     * This API is used to identify Brazil common documents.
 
 This API is used to set the default request rate limit to 5 requests/second.
      * @param {RecognizeBrazilCommonOCRRequest} req

@@ -16,252 +16,352 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
-const CloneDBResponse = models.CloneDBResponse;
+const DescribeCrossBackupStatisticalResponse = models.DescribeCrossBackupStatisticalResponse;
 const DealInfo = models.DealInfo;
-const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const RestoreInstanceRequest = models.RestoreInstanceRequest;
-const DrZoneInfo = models.DrZoneInfo;
-const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
-const CreateBusinessIntelligenceFileRequest = models.CreateBusinessIntelligenceFileRequest;
-const CreateMigrationResponse = models.CreateMigrationResponse;
-const ModifyDReadableRequest = models.ModifyDReadableRequest;
+const CrossRegionStatus = models.CrossRegionStatus;
+const DescribeBackupStatisticalResponse = models.DescribeBackupStatisticalResponse;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
-const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
-const CreateCloudDBInstancesResponse = models.CreateCloudDBInstancesResponse;
-const DeleteBusinessIntelligenceFileRequest = models.DeleteBusinessIntelligenceFileRequest;
+const DescribeInstanceTasksResponse = models.DescribeInstanceTasksResponse;
 const CreateBusinessDBInstancesResponse = models.CreateBusinessDBInstancesResponse;
-const ModifyDBInstanceNoteRequest = models.ModifyDBInstanceNoteRequest;
-const RegionInfo = models.RegionInfo;
-const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
-const SlaveZones = models.SlaveZones;
-const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
-const StartInstanceXEventResponse = models.StartInstanceXEventResponse;
+const DatabaseTupleStatus = models.DatabaseTupleStatus;
+const DescribeDatabasesNormalRequest = models.DescribeDatabasesNormalRequest;
+const ModifyDatabasePrivilegeRequest = models.ModifyDatabasePrivilegeRequest;
 const DescribeCollationTimeZoneResponse = models.DescribeCollationTimeZoneResponse;
-const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
-const DescribeSpecSellStatusResponse = models.DescribeSpecSellStatusResponse;
-const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
 const CreateBusinessIntelligenceFileResponse = models.CreateBusinessIntelligenceFileResponse;
-const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
-const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
-const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
-const CreateAccountRequest = models.CreateAccountRequest;
 const ParamRecord = models.ParamRecord;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
-const DeleteIncrementalMigrationRequest = models.DeleteIncrementalMigrationRequest;
-const DBRemark = models.DBRemark;
-const CloseInterCommunicationRequest = models.CloseInterCommunicationRequest;
 const MigrateDB = models.MigrateDB;
-const CutXEventsResponse = models.CutXEventsResponse;
-const DescribeBackupsRequest = models.DescribeBackupsRequest;
+const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
-const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
-const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeIncrementalMigrationRequest = models.DescribeIncrementalMigrationRequest;
-const DescribeInstanceTradeParameterResponse = models.DescribeInstanceTradeParameterResponse;
-const DeleteBusinessIntelligenceFileResponse = models.DeleteBusinessIntelligenceFileResponse;
-const ParameterDetail = models.ParameterDetail;
-const DescribeInstanceByOrdersRequest = models.DescribeInstanceByOrdersRequest;
-const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
-const ZoneInfo = models.ZoneInfo;
-const DescribeXEventsRequest = models.DescribeXEventsRequest;
+const DescribeSpecSellStatusResponse = models.DescribeSpecSellStatusResponse;
+const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const InstanceTask = models.InstanceTask;
-const CrossRegionStatus = models.CrossRegionStatus;
-const Migration = models.Migration;
-const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
-const MigrationDetail = models.MigrationDetail;
+const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const SSLConfig = models.SSLConfig;
-const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
-const ModifyInstanceEncryptAttributesRequest = models.ModifyInstanceEncryptAttributesRequest;
-const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
-const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
-const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const ZoneStatus = models.ZoneStatus;
-const SpecSellStatus = models.SpecSellStatus;
-const MigrateTask = models.MigrateTask;
-const SpecInfo = models.SpecInfo;
-const DescribeOrdersResponse = models.DescribeOrdersResponse;
-const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
-const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
-const DBCreateInfo = models.DBCreateInfo;
-const ModifyDBInstanceNoteResponse = models.ModifyDBInstanceNoteResponse;
-const RunMigrationRequest = models.RunMigrationRequest;
-const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
 const DescribeInstanceTasksRequest = models.DescribeInstanceTasksRequest;
-const DescribeZonesResponse = models.DescribeZonesResponse;
-const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
-const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
-const ModifyInstanceEncryptAttributesResponse = models.ModifyInstanceEncryptAttributesResponse;
-const MigrationStep = models.MigrationStep;
-const DescribeCollationTimeZoneRequest = models.DescribeCollationTimeZoneRequest;
-const Events = models.Events;
-const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
-const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
-const DescribeZonesRequest = models.DescribeZonesRequest;
-const DeleteDBRequest = models.DeleteDBRequest;
-const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
-const DescribeCrossRegionZoneResponse = models.DescribeCrossRegionZoneResponse;
-const CompleteExpansionResponse = models.CompleteExpansionResponse;
-const MigrateSource = models.MigrateSource;
-const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
-const DescribeInstanceTasksResponse = models.DescribeInstanceTasksResponse;
-const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
-const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
-const TDEConfigAttribute = models.TDEConfigAttribute;
+const SpecInfo = models.SpecInfo;
+const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
 const CreateReadOnlyDBInstancesRequest = models.CreateReadOnlyDBInstancesRequest;
-const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const CreateBackupMigrationRequest = models.CreateBackupMigrationRequest;
-const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
-const DescribeXEventsResponse = models.DescribeXEventsResponse;
-const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
-const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
-const DealInstance = models.DealInstance;
-const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
-const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const SwitchCloudInstanceHARequest = models.SwitchCloudInstanceHARequest;
+const DescribeInstanceByOrdersResponse = models.DescribeInstanceByOrdersResponse;
+const CreateReadOnlyDBInstancesResponse = models.CreateReadOnlyDBInstancesResponse;
+const CreatePublishSubscribeResponse = models.CreatePublishSubscribeResponse;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
+const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
+const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const AccountPassword = models.AccountPassword;
+const DeleteAccountRequest = models.DeleteAccountRequest;
+const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
+const StartIncrementalMigrationResponse = models.StartIncrementalMigrationResponse;
+const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const ModifyDatabaseMdfResponse = models.ModifyDatabaseMdfResponse;
+const MigrateTarget = models.MigrateTarget;
+const DBTDEEncrypt = models.DBTDEEncrypt;
+const CreateMigrationRequest = models.CreateMigrationRequest;
+const InterInstance = models.InterInstance;
+const ModifyDBNameResponse = models.ModifyDBNameResponse;
+const CosUploadBackupFile = models.CosUploadBackupFile;
+const ModifyDBNameRequest = models.ModifyDBNameRequest;
+const DescribeUpgradeInstanceCheckResponse = models.DescribeUpgradeInstanceCheckResponse;
+const DescribeRestoreTimeRangeResponse = models.DescribeRestoreTimeRangeResponse;
+const ModifyDatabasePrivilegeResponse = models.ModifyDatabasePrivilegeResponse;
+const CreateIncrementalMigrationResponse = models.CreateIncrementalMigrationResponse;
+const DescribeZonesResponse = models.DescribeZonesResponse;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const ModifyDBInstanceSSLResponse = models.ModifyDBInstanceSSLResponse;
+const DBPrivilege = models.DBPrivilege;
+const DescribeReadOnlyGroupDetailsResponse = models.DescribeReadOnlyGroupDetailsResponse;
+const ResourceTag = models.ResourceTag;
+const DeleteBackupMigrationResponse = models.DeleteBackupMigrationResponse;
+const DescribePublishSubscribeRequest = models.DescribePublishSubscribeRequest;
+const BackupFile = models.BackupFile;
+const DescribeRegularBackupPlanResponse = models.DescribeRegularBackupPlanResponse;
+const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
+const ModifyMigrationRequest = models.ModifyMigrationRequest;
+const CrossBackupAddr = models.CrossBackupAddr;
+const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
+const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
+const DBDetail = models.DBDetail;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
+const CreateDBRequest = models.CreateDBRequest;
+const RollbackInstanceRequest = models.RollbackInstanceRequest;
+const DrReadableInfo = models.DrReadableInfo;
+const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
+const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
+const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
+const DeleteAccountResponse = models.DeleteAccountResponse;
+const TDEConfigAttribute = models.TDEConfigAttribute;
+const SummaryDetailRes = models.SummaryDetailRes;
+const ModifyDReadableRequest = models.ModifyDReadableRequest;
+const DeleteBusinessIntelligenceFileRequest = models.DeleteBusinessIntelligenceFileRequest;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
+const SlaveZones = models.SlaveZones;
+const StartInstanceXEventResponse = models.StartInstanceXEventResponse;
+const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
+const ModifyPublishSubscribeNameResponse = models.ModifyPublishSubscribeNameResponse;
+const DeleteIncrementalMigrationRequest = models.DeleteIncrementalMigrationRequest;
+const CutXEventsResponse = models.CutXEventsResponse;
+const DescribeBackupsRequest = models.DescribeBackupsRequest;
+const RestoreInstanceRequest = models.RestoreInstanceRequest;
+const ModifyDatabaseShrinkMDFRequest = models.ModifyDatabaseShrinkMDFRequest;
+const DescribeInstanceTradeParameterResponse = models.DescribeInstanceTradeParameterResponse;
+const RunMigrationRequest = models.RunMigrationRequest;
+const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const DescribeInstanceByOrdersRequest = models.DescribeInstanceByOrdersRequest;
+const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
+const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
+const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
+const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
+const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
+const ModifyMaintenanceSpanRequest = models.ModifyMaintenanceSpanRequest;
+const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
+const DescribeOrdersResponse = models.DescribeOrdersResponse;
+const ModifyCloseWanIpRequest = models.ModifyCloseWanIpRequest;
+const InterInstanceFlow = models.InterInstanceFlow;
+const ModifyDBInstanceNoteResponse = models.ModifyDBInstanceNoteResponse;
+const Parameter = models.Parameter;
+const DescribeDBsResponse = models.DescribeDBsResponse;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
+const DescribeZonesRequest = models.DescribeZonesRequest;
+const DescribeCrossRegionZoneResponse = models.DescribeCrossRegionZoneResponse;
+const MigrateSource = models.MigrateSource;
+const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
+const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
+const ReadOnlyGroup = models.ReadOnlyGroup;
+const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const CompleteExpansionRequest = models.CompleteExpansionRequest;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
-const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
-const DescribeRegionsRequest = models.DescribeRegionsRequest;
-const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
-const AccountPrivilege = models.AccountPrivilege;
-const CreateReadOnlyDBInstancesResponse = models.CreateReadOnlyDBInstancesResponse;
-const DeleteMigrationRequest = models.DeleteMigrationRequest;
-const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
-const CutXEventsRequest = models.CutXEventsRequest;
+const DescribeBackupsResponse = models.DescribeBackupsResponse;
+const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
+const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
+const DescribeAccountPrivilegeByDBResponse = models.DescribeAccountPrivilegeByDBResponse;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
-const StartBackupMigrationResponse = models.StartBackupMigrationResponse;
 const CheckItem = models.CheckItem;
-const CreateDBRequest = models.CreateDBRequest;
 const EventConfig = models.EventConfig;
-const InstanceDBDetail = models.InstanceDBDetail;
-const DescribeSpecSellStatusRequest = models.DescribeSpecSellStatusRequest;
-const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
-const MigrateDetail = models.MigrateDetail;
-const DescribeBusinessIntelligenceFileRequest = models.DescribeBusinessIntelligenceFileRequest;
-const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const AccountPassword = models.AccountPassword;
-const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
-const DeleteMigrationResponse = models.DeleteMigrationResponse;
-const DescribeBackupMigrationRequest = models.DescribeBackupMigrationRequest;
-const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse;
+const SpecSellStatus = models.SpecSellStatus;
 const ModifyDatabaseCDCRequest = models.ModifyDatabaseCDCRequest;
-const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
-const StartIncrementalMigrationResponse = models.StartIncrementalMigrationResponse;
-const DescribeRestoreTimeRangeRequest = models.DescribeRestoreTimeRangeRequest;
-const InterInstanceFlow = models.InterInstanceFlow;
-const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
-const CreateCloudReadOnlyDBInstancesResponse = models.CreateCloudReadOnlyDBInstancesResponse;
-const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
-const DbNormalDetail = models.DbNormalDetail;
-const AccountDetail = models.AccountDetail;
-const ModifyDatabaseMdfResponse = models.ModifyDatabaseMdfResponse;
+const DescribeRestoreTaskRequest = models.DescribeRestoreTaskRequest;
 const DescribeInstanceTradeParameterRequest = models.DescribeInstanceTradeParameterRequest;
-const CreateBackupResponse = models.CreateBackupResponse;
-const DBInstance = models.DBInstance;
-const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
-const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
-const DBTDEEncrypt = models.DBTDEEncrypt;
-const DescribeUploadBackupInfoResponse = models.DescribeUploadBackupInfoResponse;
-const CreateMigrationRequest = models.CreateMigrationRequest;
-const DescribeDBInstanceInterRequest = models.DescribeDBInstanceInterRequest;
-const InterInstance = models.InterInstance;
-const CreateBasicDBInstancesRequest = models.CreateBasicDBInstancesRequest;
-const ModifyDBNameResponse = models.ModifyDBNameResponse;
-const CosUploadBackupFile = models.CosUploadBackupFile;
-const DescribeInstanceByOrdersResponse = models.DescribeInstanceByOrdersResponse;
-const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
-const DescribeUpgradeInstanceCheckResponse = models.DescribeUpgradeInstanceCheckResponse;
-const DescribeDBInstancesAttributeResponse = models.DescribeDBInstancesAttributeResponse;
-const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
-const Backup = models.Backup;
-const DescribeRestoreTimeRangeResponse = models.DescribeRestoreTimeRangeResponse;
-const DescribeBackupCommandRequest = models.DescribeBackupCommandRequest;
-const AccountRemark = models.AccountRemark;
 const ModifyDatabaseCDCResponse = models.ModifyDatabaseCDCResponse;
+const DBInstance = models.DBInstance;
+const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
+const CreateBasicDBInstancesRequest = models.CreateBasicDBInstancesRequest;
+const DescribeDBInstancesAttributeResponse = models.DescribeDBInstancesAttributeResponse;
+const Backup = models.Backup;
+const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
-const CreateIncrementalMigrationResponse = models.CreateIncrementalMigrationResponse;
-const RunMigrationResponse = models.RunMigrationResponse;
-const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
-const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
-const AccountCreateInfo = models.AccountCreateInfo;
-const StartInstanceXEventRequest = models.StartInstanceXEventRequest;
-const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
-const DBPrivilege = models.DBPrivilege;
-const FileAction = models.FileAction;
+const BalanceReadOnlyGroupResponse = models.BalanceReadOnlyGroupResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
-const DescribeBackupsResponse = models.DescribeBackupsResponse;
-const ResourceTag = models.ResourceTag;
 const CreateBackupMigrationResponse = models.CreateBackupMigrationResponse;
-const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
-const DeleteAccountRequest = models.DeleteAccountRequest;
-const DeleteBackupMigrationResponse = models.DeleteBackupMigrationResponse;
-const CreateBackupRequest = models.CreateBackupRequest;
-const DescribeDBsNormalRequest = models.DescribeDBsNormalRequest;
-const BackupFile = models.BackupFile;
+const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
-const ModifyIncrementalMigrationResponse = models.ModifyIncrementalMigrationResponse;
-const OldVip = models.OldVip;
-const MigrationAction = models.MigrationAction;
-const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
-const CloneDBRequest = models.CloneDBRequest;
-const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
-const ModifyMigrationRequest = models.ModifyMigrationRequest;
-const CrossBackupAddr = models.CrossBackupAddr;
-const Parameter = models.Parameter;
+const DeletePublishSubscribeResponse = models.DeletePublishSubscribeResponse;
 const Price = models.Price;
 const CreateAccountResponse = models.CreateAccountResponse;
-const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
-const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
-const DeleteDBResponse = models.DeleteDBResponse;
-const CreateDBResponse = models.CreateDBResponse;
+const RenewPostpaidDBInstanceResponse = models.RenewPostpaidDBInstanceResponse;
 const CloseInterCommunicationResponse = models.CloseInterCommunicationResponse;
-const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
-const CreateBusinessDBInstancesRequest = models.CreateBusinessDBInstancesRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeSlowlogsResponse = models.DescribeSlowlogsResponse;
 const DescribeUpgradeInstanceCheckRequest = models.DescribeUpgradeInstanceCheckRequest;
-const DBDetail = models.DBDetail;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
-const ModifyDBNameRequest = models.ModifyDBNameRequest;
-const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const DescribeAccountPrivilegeByDBRequest = models.DescribeAccountPrivilegeByDBRequest;
+const ModifyReadOnlyGroupDetailsRequest = models.ModifyReadOnlyGroupDetailsRequest;
 const SlowLog = models.SlowLog;
-const DBRenameRes = models.DBRenameRes;
-const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DescribeUploadBackupInfoRequest = models.DescribeUploadBackupInfoRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const RollbackInstanceRequest = models.RollbackInstanceRequest;
+const DeleteDBInstanceResponse = models.DeleteDBInstanceResponse;
 const DescribeDBInstancesAttributeRequest = models.DescribeDBInstancesAttributeRequest;
-const DrReadableInfo = models.DrReadableInfo;
-const RestoreInstanceResponse = models.RestoreInstanceResponse;
-const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
-const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
-const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
-const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const CreateCloudDBInstancesRequest = models.CreateCloudDBInstancesRequest;
-const SlowlogInfo = models.SlowlogInfo;
-const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
-const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
-const ModifyDReadableResponse = models.ModifyDReadableResponse;
-const MigrateTarget = models.MigrateTarget;
-const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
-const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
+const ModifyInstanceEncryptAttributesRequest = models.ModifyInstanceEncryptAttributesRequest;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const DescribeHASwitchLogResponse = models.DescribeHASwitchLogResponse;
 const ModifyBackupMigrationRequest = models.ModifyBackupMigrationRequest;
-const DeleteAccountResponse = models.DeleteAccountResponse;
-const DescribeDBCharsetsResponse = models.DescribeDBCharsetsResponse;
+const CloneDBResponse = models.CloneDBResponse;
+const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
+const DataBasePrivilegeModifyInfo = models.DataBasePrivilegeModifyInfo;
+const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
+const DatabaseTuple = models.DatabaseTuple;
+const CreateCloudDBInstancesResponse = models.CreateCloudDBInstancesResponse;
+const DeletePublishSubscribeRequest = models.DeletePublishSubscribeRequest;
+const StartBackupMigrationResponse = models.StartBackupMigrationResponse;
+const ModifyOpenWanIpResponse = models.ModifyOpenWanIpResponse;
+const RunMigrationResponse = models.RunMigrationResponse;
+const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
+const CreateAccountRequest = models.CreateAccountRequest;
+const DescribeReadOnlyGroupByReadOnlyInstanceResponse = models.DescribeReadOnlyGroupByReadOnlyInstanceResponse;
+const ParameterDetail = models.ParameterDetail;
+const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
+const ZoneInfo = models.ZoneInfo;
+const DescribeDBRestoreTimeRequest = models.DescribeDBRestoreTimeRequest;
+const MigrateTask = models.MigrateTask;
+const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const RemoveBackupsRequest = models.RemoveBackupsRequest;
+const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
+const ModifyInstanceEncryptAttributesResponse = models.ModifyInstanceEncryptAttributesResponse;
+const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
+const DeleteDBRequest = models.DeleteDBRequest;
+const CompleteExpansionResponse = models.CompleteExpansionResponse;
+const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
+const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
+const DescribeXEventsResponse = models.DescribeXEventsResponse;
+const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
+const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
+const CutXEventsRequest = models.CutXEventsRequest;
+const SwitchCloudInstanceHAResponse = models.SwitchCloudInstanceHAResponse;
+const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
+const ModifyPublishSubscribeRequest = models.ModifyPublishSubscribeRequest;
+const DescribeCrossRegionsResponse = models.DescribeCrossRegionsResponse;
+const ReadOnlyInstanceWeightPair = models.ReadOnlyInstanceWeightPair;
+const DescribeBusinessIntelligenceFileRequest = models.DescribeBusinessIntelligenceFileRequest;
+const Events = models.Events;
+const RecycleReadOnlyGroupRequest = models.RecycleReadOnlyGroupRequest;
+const AccountDetail = models.AccountDetail;
+const DescribeDBInstanceInterRequest = models.DescribeDBInstanceInterRequest;
+const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
+const SwitchLog = models.SwitchLog;
+const AccountRemark = models.AccountRemark;
+const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
+const AccountCreateInfo = models.AccountCreateInfo;
+const StartInstanceXEventRequest = models.StartInstanceXEventRequest;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DescribeDBRestoreTimeResponse = models.DescribeDBRestoreTimeResponse;
+const DescribeSpecSellStatusRequest = models.DescribeSpecSellStatusRequest;
+const DeleteMigrationResponse = models.DeleteMigrationResponse;
+const DescribeReadOnlyGroupListRequest = models.DescribeReadOnlyGroupListRequest;
+const CreateBackupRequest = models.CreateBackupRequest;
+const DescribeDBsNormalRequest = models.DescribeDBsNormalRequest;
+const ModifyDBInstanceSSLRequest = models.ModifyDBInstanceSSLRequest;
+const ModifyPublishSubscribeNameRequest = models.ModifyPublishSubscribeNameRequest;
+const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
+const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
+const ModifyReadOnlyGroupDetailsResponse = models.ModifyReadOnlyGroupDetailsResponse;
+const DescribeBackupStatisticalRequest = models.DescribeBackupStatisticalRequest;
+const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const MigrationStep = models.MigrationStep;
+const RenewPostpaidDBInstanceRequest = models.RenewPostpaidDBInstanceRequest;
+const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
+const DescribeReadOnlyGroupDetailsRequest = models.DescribeReadOnlyGroupDetailsRequest;
+const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
+const ModifyCrossBackupStrategyRequest = models.ModifyCrossBackupStrategyRequest;
+const DescribeReadOnlyGroupAutoWeightResponse = models.DescribeReadOnlyGroupAutoWeightResponse;
+const DrZoneInfo = models.DrZoneInfo;
+const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
+const CreatePublishSubscribeRequest = models.CreatePublishSubscribeRequest;
+const CreateBusinessIntelligenceFileRequest = models.CreateBusinessIntelligenceFileRequest;
+const CreateMigrationResponse = models.CreateMigrationResponse;
+const DescribeCollationTimeZoneRequest = models.DescribeCollationTimeZoneRequest;
+const ModifyDBInstanceNoteRequest = models.ModifyDBInstanceNoteRequest;
+const DeleteDBResponse = models.DeleteDBResponse;
+const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
+const FileAction = models.FileAction;
+const DescribeRegularBackupPlanRequest = models.DescribeRegularBackupPlanRequest;
+const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
+const DescribeDatabasesNormalResponse = models.DescribeDatabasesNormalResponse;
+const DBRenameRes = models.DBRenameRes;
+const DBRemark = models.DBRemark;
+const CloseInterCommunicationRequest = models.CloseInterCommunicationRequest;
+const DescribeReadOnlyGroupListResponse = models.DescribeReadOnlyGroupListResponse;
+const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const DescribeBackupSummaryResponse = models.DescribeBackupSummaryResponse;
+const DescribeDBPrivilegeByAccountResponse = models.DescribeDBPrivilegeByAccountResponse;
+const DeleteBusinessIntelligenceFileResponse = models.DeleteBusinessIntelligenceFileResponse;
+const DescribeBackupMonitorResponse = models.DescribeBackupMonitorResponse;
+const DescribeXEventsRequest = models.DescribeXEventsRequest;
+const Migration = models.Migration;
+const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
+const ZoneStatus = models.ZoneStatus;
+const PublishSubscribe = models.PublishSubscribe;
+const DescribeRestoreTaskResponse = models.DescribeRestoreTaskResponse;
+const DescribeCrossRegionsRequest = models.DescribeCrossRegionsRequest;
+const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
+const DescribeDatabaseNamesRequest = models.DescribeDatabaseNamesRequest;
+const DBCreateInfo = models.DBCreateInfo;
+const ModifyDatabaseShrinkMDFResponse = models.ModifyDatabaseShrinkMDFResponse;
+const DescribeDatabaseNamesResponse = models.DescribeDatabaseNamesResponse;
+const RecycleReadOnlyGroupResponse = models.RecycleReadOnlyGroupResponse;
+const DescribeDBPrivilegeByAccountRequest = models.DescribeDBPrivilegeByAccountRequest;
+const DescribeHASwitchLogRequest = models.DescribeHASwitchLogRequest;
+const SlowlogInfo = models.SlowlogInfo;
+const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const MigrationDetail = models.MigrationDetail;
+const ModifyDataBaseTuple = models.ModifyDataBaseTuple;
+const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
+const DealInstance = models.DealInstance;
+const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse;
+const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
+const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
+const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const AccountPrivilege = models.AccountPrivilege;
+const ModifyCrossBackupStrategyResponse = models.ModifyCrossBackupStrategyResponse;
+const DescribeCrossBackupStatisticalRequest = models.DescribeCrossBackupStatisticalRequest;
+const DeleteMigrationRequest = models.DeleteMigrationRequest;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeBackupMonitorRequest = models.DescribeBackupMonitorRequest;
+const RemoveBackupsResponse = models.RemoveBackupsResponse;
+const ModifyCloseWanIpResponse = models.ModifyCloseWanIpResponse;
+const SecurityGroup = models.SecurityGroup;
+const ReadOnlyInstance = models.ReadOnlyInstance;
+const MigrateDetail = models.MigrateDetail;
+const DescribeBackupMigrationRequest = models.DescribeBackupMigrationRequest;
+const InstanceDBDetail = models.InstanceDBDetail;
+const BalanceReadOnlyGroupRequest = models.BalanceReadOnlyGroupRequest;
+const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const DescribeRestoreTimeRangeRequest = models.DescribeRestoreTimeRangeRequest;
+const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
+const CreateCloudReadOnlyDBInstancesResponse = models.CreateCloudReadOnlyDBInstancesResponse;
+const DbNormalDetail = models.DbNormalDetail;
+const CreateBackupResponse = models.CreateBackupResponse;
+const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
+const RestoreTask = models.RestoreTask;
+const DescribeUploadBackupInfoResponse = models.DescribeUploadBackupInfoResponse;
+const OldVip = models.OldVip;
+const DescribeBackupCommandRequest = models.DescribeBackupCommandRequest;
+const CrossSummaryDetailRes = models.CrossSummaryDetailRes;
+const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
+const DescribeBackupSummaryRequest = models.DescribeBackupSummaryRequest;
+const DescribeReadOnlyGroupAutoWeightRequest = models.DescribeReadOnlyGroupAutoWeightRequest;
+const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
+const DescribeReadOnlyGroupByReadOnlyInstanceRequest = models.DescribeReadOnlyGroupByReadOnlyInstanceRequest;
+const DescribeBackupByFlowIdRequest = models.DescribeBackupByFlowIdRequest;
+const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
+const ModifyIncrementalMigrationResponse = models.ModifyIncrementalMigrationResponse;
+const MigrationAction = models.MigrationAction;
+const CloneDBRequest = models.CloneDBRequest;
+const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
+const DeleteDBInstanceRequest = models.DeleteDBInstanceRequest;
+const RegionInfo = models.RegionInfo;
+const CreateDBResponse = models.CreateDBResponse;
+const CreateBusinessDBInstancesRequest = models.CreateBusinessDBInstancesRequest;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
+const ModifyDReadableResponse = models.ModifyDReadableResponse;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const DescribePublishSubscribeResponse = models.DescribePublishSubscribeResponse;
+const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
+const ModifyOpenWanIpRequest = models.ModifyOpenWanIpRequest;
+const ModifyPublishSubscribeResponse = models.ModifyPublishSubscribeResponse;
 
 
 /**
@@ -275,14 +375,36 @@ class SqlserverClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the list of eligible migration tasks based on the entered criteria.
-     * @param {DescribeMigrationsRequest} req
-     * @param {function(string, DescribeMigrationsResponse):void} cb
+     * This API is used to modify instance account permissions.
+     * @param {ModifyAccountPrivilegeRequest} req
+     * @param {function(string, ModifyAccountPrivilegeResponse):void} cb
      * @public
      */
-    DescribeMigrations(req, cb) {
-        let resp = new DescribeMigrationsResponse();
-        this.request("DescribeMigrations", req, resp, cb);
+    ModifyAccountPrivilege(req, cb) {
+        let resp = new ModifyAccountPrivilegeResponse();
+        this.request("ModifyAccountPrivilege", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reclaim resources of read-only groups immediately. The resources, such as VIP, occupied by the read-only group will be released immediately and cannot be recovered.
+     * @param {RecycleReadOnlyGroupRequest} req
+     * @param {function(string, RecycleReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    RecycleReadOnlyGroup(req, cb) {
+        let resp = new RecycleReadOnlyGroupResponse();
+        this.request("RecycleReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the name of a backup task.
+     * @param {ModifyBackupNameRequest} req
+     * @param {function(string, ModifyBackupNameResponse):void} cb
+     * @public
+     */
+    ModifyBackupName(req, cb) {
+        let resp = new ModifyBackupNameResponse();
+        this.request("ModifyBackupName", req, resp, cb);
     }
 
     /**
@@ -316,6 +438,17 @@ class SqlserverClient extends AbstractClient {
     ModifyAccountRemark(req, cb) {
         let resp = new ModifyAccountRemarkResponse();
         this.request("ModifyAccountRemark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the publish/subscribe relationship of the instance.
+     * @param {ModifyPublishSubscribeRequest} req
+     * @param {function(string, ModifyPublishSubscribeResponse):void} cb
+     * @public
+     */
+    ModifyPublishSubscribe(req, cb) {
+        let resp = new ModifyPublishSubscribeResponse();
+        this.request("ModifyPublishSubscribe", req, resp, cb);
     }
 
     /**
@@ -385,14 +518,36 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of an unarchived backup.
-     * @param {DescribeBackupFilesRequest} req
-     * @param {function(string, DescribeBackupFilesResponse):void} cb
+     * This API is used to disable the public network for the instance.
+     * @param {ModifyCloseWanIpRequest} req
+     * @param {function(string, ModifyCloseWanIpResponse):void} cb
      * @public
      */
-    DescribeBackupFiles(req, cb) {
-        let resp = new DescribeBackupFilesResponse();
-        this.request("DescribeBackupFiles", req, resp, cb);
+    ModifyCloseWanIp(req, cb) {
+        let resp = new ModifyCloseWanIpResponse();
+        this.request("ModifyCloseWanIp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify security groups bound to an instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the maintenance window of the instance.
+     * @param {ModifyMaintenanceSpanRequest} req
+     * @param {function(string, ModifyMaintenanceSpanResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceSpan(req, cb) {
+        let resp = new ModifyMaintenanceSpanResponse();
+        this.request("ModifyMaintenanceSpan", req, resp, cb);
     }
 
     /**
@@ -404,6 +559,61 @@ class SqlserverClient extends AbstractClient {
     DescribeMaintenanceSpan(req, cb) {
         let resp = new DescribeMaintenanceSpanResponse();
         this.request("DescribeMaintenanceSpan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query read-only group details.
+     * @param {DescribeReadOnlyGroupDetailsRequest} req
+     * @param {function(string, DescribeReadOnlyGroupDetailsResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupDetails(req, cb) {
+        let resp = new DescribeReadOnlyGroupDetailsResponse();
+        this.request("DescribeReadOnlyGroupDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a publish/subscribe relationship between two databases. A subscriber cannot act as a publisher, and a publisher can have multiple subscriber instances.
+     * @param {CreatePublishSubscribeRequest} req
+     * @param {function(string, CreatePublishSubscribeResponse):void} cb
+     * @public
+     */
+    CreatePublishSubscribe(req, cb) {
+        let resp = new CreatePublishSubscribeResponse();
+        this.request("CreatePublishSubscribe", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an unarchived backup.
+     * @param {DescribeBackupFilesRequest} req
+     * @param {function(string, DescribeBackupFilesResponse):void} cb
+     * @public
+     */
+    DescribeBackupFiles(req, cb) {
+        let resp = new DescribeBackupFilesResponse();
+        this.request("DescribeBackupFiles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the scheduled backup retention plans of instances.
+     * @param {DescribeRegularBackupPlanRequest} req
+     * @param {function(string, DescribeRegularBackupPlanResponse):void} cb
+     * @public
+     */
+    DescribeRegularBackupPlan(req, cb) {
+        let resp = new DescribeRegularBackupPlanResponse();
+        this.request("DescribeRegularBackupPlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the publish/subscribe relationship list.
+     * @param {DescribePublishSubscribeRequest} req
+     * @param {function(string, DescribePublishSubscribeResponse):void} cb
+     * @public
+     */
+    DescribePublishSubscribe(req, cb) {
+        let resp = new DescribePublishSubscribeResponse();
+        this.request("DescribePublishSubscribe", req, resp, cb);
     }
 
     /**
@@ -429,6 +639,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the read-only group list.
+     * @param {DescribeReadOnlyGroupListRequest} req
+     * @param {function(string, DescribeReadOnlyGroupListResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupList(req, cb) {
+        let resp = new DescribeReadOnlyGroupListResponse();
+        this.request("DescribeReadOnlyGroupList", req, resp, cb);
+    }
+
+    /**
      * This API is used to query migration task details.
      * @param {DescribeMigrationDetailRequest} req
      * @param {function(string, DescribeMigrationDetailResponse):void} cb
@@ -440,14 +661,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the commands of creating backups canonically.
-     * @param {DescribeBackupCommandRequest} req
-     * @param {function(string, DescribeBackupCommandResponse):void} cb
+     * This API is used to query currently purchasable AZs.
+     * @param {DescribeZonesRequest} req
+     * @param {function(string, DescribeZonesResponse):void} cb
      * @public
      */
-    DescribeBackupCommand(req, cb) {
-        let resp = new DescribeBackupCommandResponse();
-        this.request("DescribeBackupCommand", req, resp, cb);
+    DescribeZones(req, cb) {
+        let resp = new DescribeZonesResponse();
+        this.request("DescribeZones", req, resp, cb);
     }
 
     /**
@@ -473,14 +694,47 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable TDE of an instance.
-     * @param {ModifyInstanceEncryptAttributesRequest} req
-     * @param {function(string, ModifyInstanceEncryptAttributesResponse):void} cb
+     * This API is used to pre-check the impact of the instance configuration adjustment before the adjustment.
+     * @param {DescribeUpgradeInstanceCheckRequest} req
+     * @param {function(string, DescribeUpgradeInstanceCheckResponse):void} cb
      * @public
      */
-    ModifyInstanceEncryptAttributes(req, cb) {
-        let resp = new ModifyInstanceEncryptAttributesResponse();
-        this.request("ModifyInstanceEncryptAttributes", req, resp, cb);
+    DescribeUpgradeInstanceCheck(req, cb) {
+        let resp = new DescribeUpgradeInstanceCheckResponse();
+        this.request("DescribeUpgradeInstanceCheck", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind security groups from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the instance remarks.
+     * @param {ModifyDBInstanceNoteRequest} req
+     * @param {function(string, ModifyDBInstanceNoteResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceNote(req, cb) {
+        let resp = new ModifyDBInstanceNoteResponse();
+        this.request("ModifyDBInstanceNote", req, resp, cb);
+    }
+
+    /**
+     * This API is used to release SQL server instances (eliminated immediately) in the recycle bin. The released instances will be physically terminated after being retained for a period of time. Their publish-subscribe relationships will be automatically disassociated, and their RO replicas will be automatically released.
+     * @param {DeleteDBInstanceRequest} req
+     * @param {function(string, DeleteDBInstanceResponse):void} cb
+     * @public
+     */
+    DeleteDBInstance(req, cb) {
+        let resp = new DeleteDBInstanceResponse();
+        this.request("DeleteDBInstance", req, resp, cb);
     }
 
     /**
@@ -550,6 +804,28 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the publish/subscribe names.
+     * @param {ModifyPublishSubscribeNameRequest} req
+     * @param {function(string, ModifyPublishSubscribeNameResponse):void} cb
+     * @public
+     */
+    ModifyPublishSubscribeName(req, cb) {
+        let resp = new ModifyPublishSubscribeNameResponse();
+        this.request("ModifyPublishSubscribeName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recover the pay-as-you-go instance that is manually isolated through the API TerminateDBInstance from the recycle bin.
+     * @param {RenewPostpaidDBInstanceRequest} req
+     * @param {function(string, RenewPostpaidDBInstanceResponse):void} cb
+     * @public
+     */
+    RenewPostpaidDBInstance(req, cb) {
+        let resp = new RenewPostpaidDBInstanceResponse();
+        this.request("RenewPostpaidDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to query an incremental backup import task.
      * @param {DescribeIncrementalMigrationRequest} req
      * @param {function(string, DescribeIncrementalMigrationResponse):void} cb
@@ -572,6 +848,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query databases that can be rolled back.
+     * @param {DescribeDBRestoreTimeRequest} req
+     * @param {function(string, DescribeDBRestoreTimeResponse):void} cb
+     * @public
+     */
+    DescribeDBRestoreTime(req, cb) {
+        let resp = new DescribeDBRestoreTimeResponse();
+        this.request("DescribeDBRestoreTime", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an incremental backup import task.
      * @param {DescribeBackupMigrationRequest} req
      * @param {function(string, DescribeBackupMigrationResponse):void} cb
@@ -580,6 +867,17 @@ class SqlserverClient extends AbstractClient {
     DescribeBackupMigration(req, cb) {
         let resp = new DescribeBackupMigrationResponse();
         this.request("DescribeBackupMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to balance the routing weight of each read-only instance according to the predefined weights. The DescribeReadOnlyGroupAutoWeight API is used to query the predefined weights.
+     * @param {BalanceReadOnlyGroupRequest} req
+     * @param {function(string, BalanceReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    BalanceReadOnlyGroup(req, cb) {
+        let resp = new BalanceReadOnlyGroupResponse();
+        this.request("BalanceReadOnlyGroup", req, resp, cb);
     }
 
     /**
@@ -605,14 +903,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the instance remarks.
-     * @param {ModifyDBInstanceNoteRequest} req
-     * @param {function(string, ModifyDBInstanceNoteResponse):void} cb
+     * This API is used to query security group details of a project.
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
      * @public
      */
-    ModifyDBInstanceNote(req, cb) {
-        let resp = new ModifyDBInstanceNoteResponse();
-        this.request("ModifyDBInstanceNote", req, resp, cb);
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -638,6 +936,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the list of rollback tasks.
+     * @param {DescribeRestoreTaskRequest} req
+     * @param {function(string, DescribeRestoreTaskResponse):void} cb
+     * @public
+     */
+    DescribeRestoreTask(req, cb) {
+        let resp = new DescribeRestoreTaskResponse();
+        this.request("DescribeRestoreTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the parameter list of an instance.
      * @param {DescribeInstanceParamsRequest} req
      * @param {function(string, DescribeInstanceParamsResponse):void} cb
@@ -649,6 +958,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify instance database permissions.
+     * @param {ModifyDatabasePrivilegeRequest} req
+     * @param {function(string, ModifyDatabasePrivilegeResponse):void} cb
+     * @public
+     */
+    ModifyDatabasePrivilege(req, cb) {
+        let resp = new ModifyDatabasePrivilegeResponse();
+        this.request("ModifyDatabasePrivilege", req, resp, cb);
+    }
+
+    /**
      * This API is used to complete the instance upgrade and switch immediately without waiting for the maintenance window when the instance status is "upgrade pending switch" after scale-out is initiated. This API needs to be called during off-peak hours of the instance. Some databases cannot be accessed before the switch is completed.
      * @param {CompleteExpansionRequest} req
      * @param {function(string, CompleteExpansionResponse):void} cb
@@ -657,6 +977,17 @@ class SqlserverClient extends AbstractClient {
     CompleteExpansion(req, cb) {
         let resp = new CompleteExpansionResponse();
         this.request("CompleteExpansion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the real-time statistics list of backups.
+     * @param {DescribeBackupStatisticalRequest} req
+     * @param {function(string, DescribeBackupStatisticalResponse):void} cb
+     * @public
+     */
+    DescribeBackupStatistical(req, cb) {
+        let resp = new DescribeBackupStatisticalResponse();
+        this.request("DescribeBackupStatistical", req, resp, cb);
     }
 
     /**
@@ -726,6 +1057,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to perform the manual primary-secondary switch.
+     * @param {DescribeHASwitchLogRequest} req
+     * @param {function(string, DescribeHASwitchLogResponse):void} cb
+     * @public
+     */
+    DescribeHASwitchLog(req, cb) {
+        let resp = new DescribeHASwitchLogResponse();
+        this.request("DescribeHASwitchLog", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the database character sets supported by an instance.
      * @param {DescribeDBCharsetsRequest} req
      * @param {function(string, DescribeDBCharsetsResponse):void} cb
@@ -737,14 +1079,25 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pre-check the impact of the instance configuration adjustment before the adjustment.
-     * @param {DescribeUpgradeInstanceCheckRequest} req
-     * @param {function(string, DescribeUpgradeInstanceCheckResponse):void} cb
+     * This API is used to delete the publish/subscribe relationship between two databases.
+     * @param {DeletePublishSubscribeRequest} req
+     * @param {function(string, DeletePublishSubscribeResponse):void} cb
      * @public
      */
-    DescribeUpgradeInstanceCheck(req, cb) {
-        let resp = new DescribeUpgradeInstanceCheckResponse();
-        this.request("DescribeUpgradeInstanceCheck", req, resp, cb);
+    DeletePublishSubscribe(req, cb) {
+        let resp = new DeletePublishSubscribeResponse();
+        this.request("DeletePublishSubscribe", req, resp, cb);
+    }
+
+    /**
+     * This API is used to shrink the database mdf (Shrink mdf).
+     * @param {ModifyDatabaseShrinkMDFRequest} req
+     * @param {function(string, ModifyDatabaseShrinkMDFResponse):void} cb
+     * @public
+     */
+    ModifyDatabaseShrinkMDF(req, cb) {
+        let resp = new ModifyDatabaseShrinkMDFResponse();
+        this.request("ModifyDatabaseShrinkMDF", req, resp, cb);
     }
 
     /**
@@ -791,6 +1144,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DescribeSlowlogs(req, cb) {
         let resp = new DescribeSlowlogsResponse();
         this.request("DescribeSlowlogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable cross-region backup policies.
+     * @param {ModifyCrossBackupStrategyRequest} req
+     * @param {function(string, ModifyCrossBackupStrategyResponse):void} cb
+     * @public
+     */
+    ModifyCrossBackupStrategy(req, cb) {
+        let resp = new ModifyCrossBackupStrategyResponse();
+        this.request("ModifyCrossBackupStrategy", req, resp, cb);
     }
 
     /**
@@ -904,6 +1268,28 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to start a backup import task.
+     * @param {StartBackupMigrationRequest} req
+     * @param {function(string, StartBackupMigrationResponse):void} cb
+     * @public
+     */
+    StartBackupMigration(req, cb) {
+        let resp = new StartBackupMigrationResponse();
+        this.request("StartBackupMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind security groups to instances in batches.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * This API is used to enable instance interconnection, which can interconnect business intelligence services.
      * @param {OpenInterCommunicationRequest} req
      * @param {function(string, OpenInterCommunicationResponse):void} cb
@@ -959,6 +1345,28 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to enable TDE of an instance.
+     * @param {ModifyInstanceEncryptAttributesRequest} req
+     * @param {function(string, ModifyInstanceEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyInstanceEncryptAttributes(req, cb) {
+        let resp = new ModifyInstanceEncryptAttributesResponse();
+        this.request("ModifyInstanceEncryptAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the database name associated with the account.
+     * @param {DescribeDatabaseNamesRequest} req
+     * @param {function(string, DescribeDatabaseNamesResponse):void} cb
+     * @public
+     */
+    DescribeDatabaseNames(req, cb) {
+        let resp = new DescribeDatabaseNamesResponse();
+        this.request("DescribeDatabaseNames", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the instance ID by the order number.
      * @param {DescribeInstanceByOrdersRequest} req
      * @param {function(string, DescribeInstanceByOrdersResponse):void} cb
@@ -1003,6 +1411,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to query the target region for cross-region backups.
+     * @param {DescribeCrossRegionsRequest} req
+     * @param {function(string, DescribeCrossRegionsResponse):void} cb
+     * @public
+     */
+    DescribeCrossRegions(req, cb) {
+        let resp = new DescribeCrossRegionsResponse();
+        this.request("DescribeCrossRegions", req, resp, cb);
+    }
+
+    /**
      * This API is used to enable or disable the read-only feature of the replica server.
      * @param {ModifyDReadableRequest} req
      * @param {function(string, ModifyDReadableResponse):void} cb
@@ -1011,6 +1430,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     ModifyDReadable(req, cb) {
         let resp = new ModifyDReadableResponse();
         this.request("ModifyDReadable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete backup files created by users manually. The backup policy to be deleted can be instance backup or multi-database backup.
+     * @param {RemoveBackupsRequest} req
+     * @param {function(string, RemoveBackupsResponse):void} cb
+     * @public
+     */
+    RemoveBackups(req, cb) {
+        let resp = new RemoveBackupsResponse();
+        this.request("RemoveBackups", req, resp, cb);
     }
 
     /**
@@ -1047,6 +1477,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to manually switch between primary and secondary.
+     * @param {SwitchCloudInstanceHARequest} req
+     * @param {function(string, SwitchCloudInstanceHAResponse):void} cb
+     * @public
+     */
+    SwitchCloudInstanceHA(req, cb) {
+        let resp = new SwitchCloudInstanceHAResponse();
+        this.request("SwitchCloudInstanceHA", req, resp, cb);
+    }
+
+    /**
      * This API is used to create read-only instances (cloud disk).
      * @param {CreateCloudReadOnlyDBInstancesRequest} req
      * @param {function(string, CreateCloudReadOnlyDBInstancesResponse):void} cb
@@ -1066,6 +1507,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     CloseInterCommunication(req, cb) {
         let resp = new CloseInterCommunicationResponse();
         this.request("CloseInterCommunication", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the backup overview information of databases.
+     * @param {DescribeBackupSummaryRequest} req
+     * @param {function(string, DescribeBackupSummaryResponse):void} cb
+     * @public
+     */
+    DescribeBackupSummary(req, cb) {
+        let resp = new DescribeBackupSummaryResponse();
+        this.request("DescribeBackupSummary", req, resp, cb);
     }
 
     /**
@@ -1102,6 +1554,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to query backup space usage details.
+     * @param {DescribeBackupMonitorRequest} req
+     * @param {function(string, DescribeBackupMonitorResponse):void} cb
+     * @public
+     */
+    DescribeBackupMonitor(req, cb) {
+        let resp = new DescribeBackupMonitorResponse();
+        this.request("DescribeBackupMonitor", req, resp, cb);
+    }
+
+    /**
      * This API is used to clone and rename databases of an instance. The clones are still in the instance from which they are cloned.
      * @param {CloneDBRequest} req
      * @param {function(string, CloneDBResponse):void} cb
@@ -1135,6 +1598,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to query the real-time statistics list of cross-region backups.
+     * @param {DescribeCrossBackupStatisticalRequest} req
+     * @param {function(string, DescribeCrossBackupStatisticalResponse):void} cb
+     * @public
+     */
+    DescribeCrossBackupStatistical(req, cb) {
+        let resp = new DescribeCrossBackupStatisticalResponse();
+        this.request("DescribeCrossBackupStatistical", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an instance account.
      * @param {DeleteAccountRequest} req
      * @param {function(string, DeleteAccountResponse):void} cb
@@ -1143,6 +1617,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DeleteAccount(req, cb) {
         let resp = new DeleteAccountResponse();
         this.request("DeleteAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable/disable/update SSL encryption.
+     * @param {ModifyDBInstanceSSLRequest} req
+     * @param {function(string, ModifyDBInstanceSSLResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSSL(req, cb) {
+        let resp = new ModifyDBInstanceSSLResponse();
+        this.request("ModifyDBInstanceSSL", req, resp, cb);
     }
 
     /**
@@ -1168,14 +1653,36 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to modify instance account permissions.
-     * @param {ModifyAccountPrivilegeRequest} req
-     * @param {function(string, ModifyAccountPrivilegeResponse):void} cb
+     * This API is used to enable the public network for the instance.
+     * @param {ModifyOpenWanIpRequest} req
+     * @param {function(string, ModifyOpenWanIpResponse):void} cb
      * @public
      */
-    ModifyAccountPrivilege(req, cb) {
-        let resp = new ModifyAccountPrivilegeResponse();
-        this.request("ModifyAccountPrivilege", req, resp, cb);
+    ModifyOpenWanIp(req, cb) {
+        let resp = new ModifyOpenWanIpResponse();
+        this.request("ModifyOpenWanIp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of eligible migration tasks based on the entered criteria.
+     * @param {DescribeMigrationsRequest} req
+     * @param {function(string, DescribeMigrationsResponse):void} cb
+     * @public
+     */
+    DescribeMigrations(req, cb) {
+        let resp = new DescribeMigrationsResponse();
+        this.request("DescribeMigrations", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query database configuration information. This API does not contain accounts associated with databases.
+     * @param {DescribeDatabasesNormalRequest} req
+     * @param {function(string, DescribeDatabasesNormalResponse):void} cb
+     * @public
+     */
+    DescribeDatabasesNormal(req, cb) {
+        let resp = new DescribeDatabasesNormalResponse();
+        this.request("DescribeDatabasesNormal", req, resp, cb);
     }
 
     /**
@@ -1201,14 +1708,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query currently purchasable AZs.
-     * @param {DescribeZonesRequest} req
-     * @param {function(string, DescribeZonesResponse):void} cb
+     * This API is used to query the commands of creating backups canonically.
+     * @param {DescribeBackupCommandRequest} req
+     * @param {function(string, DescribeBackupCommandResponse):void} cb
      * @public
      */
-    DescribeZones(req, cb) {
-        let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, cb);
+    DescribeBackupCommand(req, cb) {
+        let resp = new DescribeBackupCommandResponse();
+        this.request("DescribeBackupCommand", req, resp, cb);
     }
 
     /**
@@ -1221,6 +1728,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
         this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the automatic weight assignment result of the read-only group. The BalanceReadOnlyGroup API is used to perform routing weight assignment according to the automatic weight assignment result.
+     * @param {DescribeReadOnlyGroupAutoWeightRequest} req
+     * @param {function(string, DescribeReadOnlyGroupAutoWeightResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupAutoWeight(req, cb) {
+        let resp = new DescribeReadOnlyGroupAutoWeightResponse();
+        this.request("DescribeReadOnlyGroupAutoWeight", req, resp, cb);
     }
 
     /**
@@ -1246,14 +1764,36 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to start a backup import task.
-     * @param {StartBackupMigrationRequest} req
-     * @param {function(string, StartBackupMigrationResponse):void} cb
+     * This API is used to query information on the databases and permissions associated with the account.
+     * @param {DescribeDBPrivilegeByAccountRequest} req
+     * @param {function(string, DescribeDBPrivilegeByAccountResponse):void} cb
      * @public
      */
-    StartBackupMigration(req, cb) {
-        let resp = new StartBackupMigrationResponse();
-        this.request("StartBackupMigration", req, resp, cb);
+    DescribeDBPrivilegeByAccount(req, cb) {
+        let resp = new DescribeDBPrivilegeByAccountResponse();
+        this.request("DescribeDBPrivilegeByAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query information on the account and permissions associated with the database.
+     * @param {DescribeAccountPrivilegeByDBRequest} req
+     * @param {function(string, DescribeAccountPrivilegeByDBResponse):void} cb
+     * @public
+     */
+    DescribeAccountPrivilegeByDB(req, cb) {
+        let resp = new DescribeAccountPrivilegeByDBResponse();
+        this.request("DescribeAccountPrivilegeByDB", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the created backup details through the backup creation process ID. The process ID can be obtained through the CreateBackup API.
+     * @param {DescribeBackupByFlowIdRequest} req
+     * @param {function(string, DescribeBackupByFlowIdResponse):void} cb
+     * @public
+     */
+    DescribeBackupByFlowId(req, cb) {
+        let resp = new DescribeBackupByFlowIdResponse();
+        this.request("DescribeBackupByFlowId", req, resp, cb);
     }
 
     /**
@@ -1265,6 +1805,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DescribeRollbackTime(req, cb) {
         let resp = new DescribeRollbackTimeResponse();
         this.request("DescribeRollbackTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group details of instances.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -1298,6 +1849,28 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
         this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify read-only group details.
+     * @param {ModifyReadOnlyGroupDetailsRequest} req
+     * @param {function(string, ModifyReadOnlyGroupDetailsResponse):void} cb
+     * @public
+     */
+    ModifyReadOnlyGroupDetails(req, cb) {
+        let resp = new ModifyReadOnlyGroupDetailsResponse();
+        this.request("ModifyReadOnlyGroupDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the read-only group where the read-only instance is located by its ID.
+     * @param {DescribeReadOnlyGroupByReadOnlyInstanceRequest} req
+     * @param {function(string, DescribeReadOnlyGroupByReadOnlyInstanceResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupByReadOnlyInstance(req, cb) {
+        let resp = new DescribeReadOnlyGroupByReadOnlyInstanceResponse();
+        this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, resp, cb);
     }
 
 

@@ -40,7 +40,7 @@ const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const InstanceTask = models.InstanceTask;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const SSLConfig = models.SSLConfig;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
 const DescribeInstanceTasksRequest = models.DescribeInstanceTasksRequest;
@@ -109,6 +109,7 @@ const DeleteBusinessIntelligenceFileRequest = models.DeleteBusinessIntelligenceF
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const SlaveZones = models.SlaveZones;
+const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
 const StartInstanceXEventResponse = models.StartInstanceXEventResponse;
 const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
 const ModifyPublishSubscribeNameResponse = models.ModifyPublishSubscribeNameResponse;
@@ -210,14 +211,17 @@ const DescribeReadOnlyGroupByReadOnlyInstanceResponse = models.DescribeReadOnlyG
 const ParameterDetail = models.ParameterDetail;
 const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
 const ZoneInfo = models.ZoneInfo;
+const CompleteMigrationResponse = models.CompleteMigrationResponse;
 const DescribeDBRestoreTimeRequest = models.DescribeDBRestoreTimeRequest;
 const MigrateTask = models.MigrateTask;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const CompleteMigrationRequest = models.CompleteMigrationRequest;
 const RemoveBackupsRequest = models.RemoveBackupsRequest;
 const CreateCloudReadOnlyDBInstancesRequest = models.CreateCloudReadOnlyDBInstancesRequest;
 const ModifyInstanceEncryptAttributesResponse = models.ModifyInstanceEncryptAttributesResponse;
 const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
 const DeleteDBRequest = models.DeleteDBRequest;
+const DescribeMigrationDatabasesResponse = models.DescribeMigrationDatabasesResponse;
 const CompleteExpansionResponse = models.CompleteExpansionResponse;
 const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
@@ -250,7 +254,7 @@ const CreateBackupRequest = models.CreateBackupRequest;
 const DescribeDBsNormalRequest = models.DescribeDBsNormalRequest;
 const ModifyDBInstanceSSLRequest = models.ModifyDBInstanceSSLRequest;
 const ModifyPublishSubscribeNameRequest = models.ModifyPublishSubscribeNameRequest;
-const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
+const MigrationAction = models.MigrationAction;
 const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
 const ModifyReadOnlyGroupDetailsResponse = models.ModifyReadOnlyGroupDetailsResponse;
 const DescribeBackupStatisticalRequest = models.DescribeBackupStatisticalRequest;
@@ -310,7 +314,7 @@ const ModifyDataBaseTuple = models.ModifyDataBaseTuple;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
 const DealInstance = models.DealInstance;
 const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse;
-const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const AccountPrivilege = models.AccountPrivilege;
@@ -347,7 +351,7 @@ const DescribeReadOnlyGroupByReadOnlyInstanceRequest = models.DescribeReadOnlyGr
 const DescribeBackupByFlowIdRequest = models.DescribeBackupByFlowIdRequest;
 const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
 const ModifyIncrementalMigrationResponse = models.ModifyIncrementalMigrationResponse;
-const MigrationAction = models.MigrationAction;
+const DescribeMigrationDatabasesRequest = models.DescribeMigrationDatabasesRequest;
 const CloneDBRequest = models.CloneDBRequest;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
 const DeleteDBInstanceRequest = models.DeleteDBInstanceRequest;
@@ -903,6 +907,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to complete a migration task.
+     * @param {CompleteMigrationRequest} req
+     * @param {function(string, CompleteMigrationResponse):void} cb
+     * @public
+     */
+    CompleteMigration(req, cb) {
+        let resp = new CompleteMigrationResponse();
+        this.request("CompleteMigration", req, resp, cb);
+    }
+
+    /**
      * This API is used to query security group details of a project.
      * @param {DescribeProjectSecurityGroupsRequest} req
      * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
@@ -1441,6 +1456,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     RemoveBackups(req, cb) {
         let resp = new RemoveBackupsResponse();
         this.request("RemoveBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of databases to be migrated.
+     * @param {DescribeMigrationDatabasesRequest} req
+     * @param {function(string, DescribeMigrationDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeMigrationDatabases(req, cb) {
+        let resp = new DescribeMigrationDatabasesResponse();
+        this.request("DescribeMigrationDatabases", req, resp, cb);
     }
 
     /**

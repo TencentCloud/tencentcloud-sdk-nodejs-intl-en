@@ -381,6 +381,10 @@ Default true.
 -- MultiRealEstateCertificate
 -- MultiRealEstateMaterial
 -- HongKongUtilityBill
+-- OverseasCheques
+-- RegistrationCertificate
+-- GridPhoto
+-- SignaturePage
          * @type {string || null}
          */
         this.ConfigId = null;

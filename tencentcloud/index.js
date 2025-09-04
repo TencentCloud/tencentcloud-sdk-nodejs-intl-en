@@ -72,6 +72,7 @@ module.exports = {
     lighthouse: require("./lighthouse"),
     live: require("./live"),
     lke: require("./lke"),
+    lkeap: require("./lkeap"),
     mariadb: require("./mariadb"),
     mdc: require("./mdc"),
     mdl: require("./mdl"),

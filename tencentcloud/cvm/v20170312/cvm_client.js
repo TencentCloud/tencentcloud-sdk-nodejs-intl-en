@@ -43,7 +43,7 @@ const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeHostsResponse = models.DescribeHostsResponse;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
-const ResetInstanceRequest = models.ResetInstanceRequest;
+const ModifyInstancesDisasterRecoverGroupRequest = models.ModifyInstancesDisasterRecoverGroupRequest;
 const ExitRescueModeResponse = models.ExitRescueModeResponse;
 const DescribeChcHostsResponse = models.DescribeChcHostsResponse;
 const AllocateHostsRequest = models.AllocateHostsRequest;
@@ -187,6 +187,7 @@ const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const SharePermission = models.SharePermission;
 const ReservedInstances = models.ReservedInstances;
 const DeleteImagesResponse = models.DeleteImagesResponse;
+const ResetInstanceRequest = models.ResetInstanceRequest;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
@@ -224,6 +225,7 @@ const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const MetadataItem = models.MetadataItem;
+const ModifyInstancesDisasterRecoverGroupResponse = models.ModifyInstancesDisasterRecoverGroupResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
@@ -953,17 +955,15 @@ This API is used to create an instance launch template. After the initial creati
     }
 
     /**
-     * This API is used to change the public bandwidth cap of an instance.
-
-* The allowed bandwidth cap varies for different models. For details, see [Purchasing Network Bandwidth](https://intl.cloud.tencent.com/document/product/213/509?from_cn_redirect=1).
-* For bandwidth billed by the `TRAFFIC_POSTPAID_BY_HOUR` method, changing the bandwidth cap through this API takes effect in real time. Users can increase or reduce bandwidth within applicable limits.
-     * @param {ResetInstancesInternetMaxBandwidthRequest} req
-     * @param {function(string, ResetInstancesInternetMaxBandwidthResponse):void} cb
+     * This API is used to adjust the placement group of an instance.
+* Currently only basic networks or Virtual Private Cloud (VPC) instances are supported.
+     * @param {ModifyInstancesDisasterRecoverGroupRequest} req
+     * @param {function(string, ModifyInstancesDisasterRecoverGroupResponse):void} cb
      * @public
      */
-    ResetInstancesInternetMaxBandwidth(req, cb) {
-        let resp = new ResetInstancesInternetMaxBandwidthResponse();
-        this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
+    ModifyInstancesDisasterRecoverGroup(req, cb) {
+        let resp = new ModifyInstancesDisasterRecoverGroupResponse();
+        this.request("ModifyInstancesDisasterRecoverGroup", req, resp, cb);
     }
 
     /**
@@ -1140,6 +1140,20 @@ This API is used to ensure your account balance is sufficient for renewal. You c
     StartInstances(req, cb) {
         let resp = new StartInstancesResponse();
         this.request("StartInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the public bandwidth cap of an instance.
+
+* The allowed bandwidth cap varies for different models. For details, see [Purchasing Network Bandwidth](https://intl.cloud.tencent.com/document/product/213/509?from_cn_redirect=1).
+* For bandwidth billed by the `TRAFFIC_POSTPAID_BY_HOUR` method, changing the bandwidth cap through this API takes effect in real time. Users can increase or reduce bandwidth within applicable limits.
+     * @param {ResetInstancesInternetMaxBandwidthRequest} req
+     * @param {function(string, ResetInstancesInternetMaxBandwidthResponse):void} cb
+     * @public
+     */
+    ResetInstancesInternetMaxBandwidth(req, cb) {
+        let resp = new ResetInstancesInternetMaxBandwidthResponse();
+        this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
     }
 
     /**

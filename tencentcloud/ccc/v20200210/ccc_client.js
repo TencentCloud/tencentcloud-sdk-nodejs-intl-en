@@ -17,34 +17,39 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeExtensionRequest = models.DescribeExtensionRequest;
+const CreateCCCSkillGroupResponse = models.CreateCCCSkillGroupResponse;
 const StopAutoCalloutTaskRequest = models.StopAutoCalloutTaskRequest;
 const CreateIVRSessionRequest = models.CreateIVRSessionRequest;
-const HangUpCallRequest = models.HangUpCallRequest;
+const EventStaffElement = models.EventStaffElement;
 const CreateSDKLoginTokenResponse = models.CreateSDKLoginTokenResponse;
 const ModifyStaffRequest = models.ModifyStaffRequest;
 const DescribeIvrAudioListResponse = models.DescribeIvrAudioListResponse;
-const BindNumberCallOutSkillGroupResponse = models.BindNumberCallOutSkillGroupResponse;
+const DescribePredictiveDialingCampaignsElement = models.DescribePredictiveDialingCampaignsElement;
+const ServerPushText = models.ServerPushText;
 const ResetExtensionPasswordRequest = models.ResetExtensionPasswordRequest;
 const DisableCCCPhoneNumberResponse = models.DisableCCCPhoneNumberResponse;
 const DescribeProtectedTelCdrResponse = models.DescribeProtectedTelCdrResponse;
 const DescribeAutoCalloutTaskRequest = models.DescribeAutoCalloutTaskRequest;
+const CreateUserSigResponse = models.CreateUserSigResponse;
 const CreateAICallRequest = models.CreateAICallRequest;
 const CreateAdminURLResponse = models.CreateAdminURLResponse;
 const PausePredictiveDialingCampaignRequest = models.PausePredictiveDialingCampaignRequest;
 const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
 const DisableCCCPhoneNumberRequest = models.DisableCCCPhoneNumberRequest;
 const ModifyStaffPasswordResponse = models.ModifyStaffPasswordResponse;
+const ControlAIConversationResponse = models.ControlAIConversationResponse;
 const TransferToManualRequest = models.TransferToManualRequest;
 const CreatePredictiveDialingCampaignRequest = models.CreatePredictiveDialingCampaignRequest;
 const RestoreMemberOnlineResponse = models.RestoreMemberOnlineResponse;
 const AbortAgentCruiseDialingCampaignResponse = models.AbortAgentCruiseDialingCampaignResponse;
+const DescribeSessionDetailResponse = models.DescribeSessionDetailResponse;
 const ServeParticipant = models.ServeParticipant;
 const AICallExtractResultElement = models.AICallExtractResultElement;
 const DescribeTelCallInfoResponse = models.DescribeTelCallInfoResponse;
 const DescribeExtensionsResponse = models.DescribeExtensionsResponse;
 const StaffStatusMetrics = models.StaffStatusMetrics;
 const DeleteExtensionRequest = models.DeleteExtensionRequest;
-const AutoCalloutTaskCalleeInfo = models.AutoCalloutTaskCalleeInfo;
+const DescribePredictiveDialingCampaignRequest = models.DescribePredictiveDialingCampaignRequest;
 const DescribePredictiveDialingCampaignResponse = models.DescribePredictiveDialingCampaignResponse;
 const CreateAIAgentCallResponse = models.CreateAIAgentCallResponse;
 const DescribeAILatencyResponse = models.DescribeAILatencyResponse;
@@ -58,6 +63,7 @@ const CreateStaffResponse = models.CreateStaffResponse;
 const DescribePredictiveDialingCampaignsRequest = models.DescribePredictiveDialingCampaignsRequest;
 const DescribeSkillGroupInfoListResponse = models.DescribeSkillGroupInfoListResponse;
 const DescribeNumbersResponse = models.DescribeNumbersResponse;
+const ZHToneWordsInfo = models.ZHToneWordsInfo;
 const DeletePredictiveDialingCampaignRequest = models.DeletePredictiveDialingCampaignRequest;
 const UploadIvrAudioRequest = models.UploadIvrAudioRequest;
 const DescribeStaffInfoListResponse = models.DescribeStaffInfoListResponse;
@@ -67,30 +73,37 @@ const CreateAutoCalloutTaskRequest = models.CreateAutoCalloutTaskRequest;
 const ResumePredictiveDialingCampaignResponse = models.ResumePredictiveDialingCampaignResponse;
 const CallInSkillGroupMetrics = models.CallInSkillGroupMetrics;
 const CreateExtensionResponse = models.CreateExtensionResponse;
+const CreateUserSigRequest = models.CreateUserSigRequest;
 const CreateCCCSkillGroupRequest = models.CreateCCCSkillGroupRequest;
 const DescribePredictiveDialingSessionsResponse = models.DescribePredictiveDialingSessionsResponse;
 const DeleteCCCSkillGroupRequest = models.DeleteCCCSkillGroupRequest;
-const CreateCCCSkillGroupResponse = models.CreateCCCSkillGroupResponse;
+const BindNumberCallInInterfaceRequest = models.BindNumberCallInInterfaceRequest;
 const DescribeTelSessionRequest = models.DescribeTelSessionRequest;
 const ModifyOwnNumberApplyRequest = models.ModifyOwnNumberApplyRequest;
+const SessionEvent = models.SessionEvent;
 const DescribeSkillGroupInfoListRequest = models.DescribeSkillGroupInfoListRequest;
 const DescribeAILatencyRequest = models.DescribeAILatencyRequest;
-const DescribePredictiveDialingCampaignRequest = models.DescribePredictiveDialingCampaignRequest;
+const Interface = models.Interface;
+const AutoCalloutTaskCalleeInfo = models.AutoCalloutTaskCalleeInfo;
 const SeatUserInfo = models.SeatUserInfo;
 const UpdateCCCSkillGroupResponse = models.UpdateCCCSkillGroupResponse;
 const AsrData = models.AsrData;
+const UploadIvrAudioResponse = models.UploadIvrAudioResponse;
 const ErrStaffItem = models.ErrStaffItem;
 const PausePredictiveDialingCampaignResponse = models.PausePredictiveDialingCampaignResponse;
+const ResumePredictiveDialingCampaignRequest = models.ResumePredictiveDialingCampaignRequest;
 const PSTNSession = models.PSTNSession;
 const UpdatePredictiveDialingCampaignRequest = models.UpdatePredictiveDialingCampaignRequest;
 const DescribeStaffInfoListRequest = models.DescribeStaffInfoListRequest;
 const AutoCalloutTaskInfo = models.AutoCalloutTaskInfo;
 const DescribeIvrAudioListRequest = models.DescribeIvrAudioListRequest;
+const BindNumberCallInInterfaceResponse = models.BindNumberCallInInterfaceResponse;
 const ForceMemberOfflineRequest = models.ForceMemberOfflineRequest;
 const SkillGroupInfoItem = models.SkillGroupInfoItem;
 const CreateAIAgentCallRequest = models.CreateAIAgentCallRequest;
 const UpdateCCCSkillGroupRequest = models.UpdateCCCSkillGroupRequest;
 const RestoreMemberOnlineRequest = models.RestoreMemberOnlineRequest;
+const TimeRange = models.TimeRange;
 const ModifyStaffPasswordRequest = models.ModifyStaffPasswordRequest;
 const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
 const ModifyStaffResponse = models.ModifyStaffResponse;
@@ -111,7 +124,7 @@ const CreateAutoCalloutTaskResponse = models.CreateAutoCalloutTaskResponse;
 const DescribeAICallExtractResultResponse = models.DescribeAICallExtractResultResponse;
 const DeleteCCCSkillGroupResponse = models.DeleteCCCSkillGroupResponse;
 const UploadIvrAudioFailedInfo = models.UploadIvrAudioFailedInfo;
-const UploadIvrAudioResponse = models.UploadIvrAudioResponse;
+const DescribeSessionDetailRequest = models.DescribeSessionDetailRequest;
 const ModifyExtensionResponse = models.ModifyExtensionResponse;
 const NumberInfo = models.NumberInfo;
 const DeleteStaffRequest = models.DeleteStaffRequest;
@@ -125,43 +138,51 @@ const CallInNumberMetrics = models.CallInNumberMetrics;
 const CreateExtensionRequest = models.CreateExtensionRequest;
 const StaffSkillGroupList = models.StaffSkillGroupList;
 const ResetExtensionPasswordResponse = models.ResetExtensionPasswordResponse;
-const TimeRange = models.TimeRange;
+const ForwardingTarget = models.ForwardingTarget;
+const ForwardingConfig = models.ForwardingConfig;
 const AILatencyDetail = models.AILatencyDetail;
 const AITransferItem = models.AITransferItem;
 const StaffInfo = models.StaffInfo;
 const AbortAgentCruiseDialingCampaignRequest = models.AbortAgentCruiseDialingCampaignRequest;
 const ForceMemberOfflineResponse = models.ForceMemberOfflineResponse;
 const CreateOwnNumberApplyResponse = models.CreateOwnNumberApplyResponse;
-const DescribePredictiveDialingCampaignsElement = models.DescribePredictiveDialingCampaignsElement;
+const BindNumberCallOutSkillGroupResponse = models.BindNumberCallOutSkillGroupResponse;
 const HangUpCallResponse = models.HangUpCallResponse;
 const TransferToManualResponse = models.TransferToManualResponse;
 const StopAutoCalloutTaskResponse = models.StopAutoCalloutTaskResponse;
 const AbortPredictiveDialingCampaignRequest = models.AbortPredictiveDialingCampaignRequest;
+const ToneWordInfo = models.ToneWordInfo;
 const TelCdrInfo = models.TelCdrInfo;
 const SkillGroupItem = models.SkillGroupItem;
 const PhoneNumBuyInfo = models.PhoneNumBuyInfo;
 const DescribeCCCBuyInfoListResponse = models.DescribeCCCBuyInfoListResponse;
 const UnbindStaffSkillGroupListResponse = models.UnbindStaffSkillGroupListResponse;
-const ResumePredictiveDialingCampaignRequest = models.ResumePredictiveDialingCampaignRequest;
+const ControlAIConversationRequest = models.ControlAIConversationRequest;
 const UploadAudioInfo = models.UploadAudioInfo;
+const DescribeStaffStatusHistoryResponse = models.DescribeStaffStatusHistoryResponse;
 const DeleteExtensionResponse = models.DeleteExtensionResponse;
 const BindStaffSkillGroupListRequest = models.BindStaffSkillGroupListRequest;
 const CreateAgentCruiseDialingCampaignResponse = models.CreateAgentCruiseDialingCampaignResponse;
 const ModifyOwnNumberApplyResponse = models.ModifyOwnNumberApplyResponse;
+const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
 const DescribeCallInMetricsResponse = models.DescribeCallInMetricsResponse;
 const DescribeAgentCruiseDialingCampaignResponse = models.DescribeAgentCruiseDialingCampaignResponse;
 const CreateAICallResponse = models.CreateAICallResponse;
 const CreateIVRSessionResponse = models.CreateIVRSessionResponse;
-const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
+const HangUpCallRequest = models.HangUpCallRequest;
+const ClientInfo = models.ClientInfo;
 const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
 const DescribeStaffStatusMetricsRequest = models.DescribeStaffStatusMetricsRequest;
 const DeleteStaffResponse = models.DeleteStaffResponse;
 const CalleeAttribute = models.CalleeAttribute;
 const StaffStatusExtra = models.StaffStatusExtra;
+const DescribeStaffStatusHistoryRequest = models.DescribeStaffStatusHistoryRequest;
 const CreateStaffRequest = models.CreateStaffRequest;
 const SdkAppIdBuyInfo = models.SdkAppIdBuyInfo;
 const DescribePSTNActiveSessionListResponse = models.DescribePSTNActiveSessionListResponse;
+const EventStaffDetail = models.EventStaffDetail;
 const AILatencyStatistics = models.AILatencyStatistics;
+const StaffStatus = models.StaffStatus;
 const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
 const CreateAdminURLRequest = models.CreateAdminURLRequest;
@@ -193,14 +214,25 @@ class CccClient extends AbstractClient {
     }
     
     /**
-     * This API is used to unbind the number from the outbound call skill group.
-     * @param {UnbindNumberCallOutSkillGroupRequest} req
-     * @param {function(string, UnbindNumberCallOutSkillGroupResponse):void} cb
+     * This API is used to transfer a session to an agent in specific scenarios.
+     * @param {TransferToManualRequest} req
+     * @param {function(string, TransferToManualResponse):void} cb
      * @public
      */
-    UnbindNumberCallOutSkillGroup(req, cb) {
-        let resp = new UnbindNumberCallOutSkillGroupResponse();
-        this.request("UnbindNumberCallOutSkillGroup", req, resp, cb);
+    TransferToManual(req, cb) {
+        let resp = new TransferToManualResponse();
+        this.request("TransferToManual", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the customer service account.
+     * @param {ModifyStaffRequest} req
+     * @param {function(string, ModifyStaffResponse):void} cb
+     * @public
+     */
+    ModifyStaff(req, cb) {
+        let resp = new ModifyStaffResponse();
+        this.request("ModifyStaff", req, resp, cb);
     }
 
     /**
@@ -283,25 +315,25 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
-     * This API is used to stop the automatic outbound call task.
-     * @param {StopAutoCalloutTaskRequest} req
-     * @param {function(string, StopAutoCalloutTaskResponse):void} cb
+     * Modify customer's own number approval form
+     * @param {ModifyOwnNumberApplyRequest} req
+     * @param {function(string, ModifyOwnNumberApplyResponse):void} cb
      * @public
      */
-    StopAutoCalloutTask(req, cb) {
-        let resp = new StopAutoCalloutTaskResponse();
-        this.request("StopAutoCalloutTask", req, resp, cb);
+    ModifyOwnNumberApply(req, cb) {
+        let resp = new ModifyOwnNumberApplyResponse();
+        this.request("ModifyOwnNumberApply", req, resp, cb);
     }
 
     /**
-     * This API is used to disable numbers.
-     * @param {DisableCCCPhoneNumberRequest} req
-     * @param {function(string, DisableCCCPhoneNumberResponse):void} cb
+     * This API is used to query the predictive outbound call task.
+     * @param {DescribePredictiveDialingCampaignRequest} req
+     * @param {function(string, DescribePredictiveDialingCampaignResponse):void} cb
      * @public
      */
-    DisableCCCPhoneNumber(req, cb) {
-        let resp = new DisableCCCPhoneNumberResponse();
-        this.request("DisableCCCPhoneNumber", req, resp, cb);
+    DescribePredictiveDialingCampaign(req, cb) {
+        let resp = new DescribePredictiveDialingCampaignResponse();
+        this.request("DescribePredictiveDialingCampaign", req, resp, cb);
     }
 
     /**
@@ -313,6 +345,17 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     DescribePSTNActiveSessionList(req, cb) {
         let resp = new DescribePSTNActiveSessionListResponse();
         this.request("DescribePSTNActiveSessionList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop the automatic outbound call task.
+     * @param {StopAutoCalloutTaskRequest} req
+     * @param {function(string, StopAutoCalloutTaskResponse):void} cb
+     * @public
+     */
+    StopAutoCalloutTask(req, cb) {
+        let resp = new StopAutoCalloutTaskResponse();
+        this.request("StopAutoCalloutTask", req, resp, cb);
     }
 
     /**
@@ -349,6 +392,17 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
+     * This API is used to query agent status history.
+     * @param {DescribeStaffStatusHistoryRequest} req
+     * @param {function(string, DescribeStaffStatusHistoryResponse):void} cb
+     * @public
+     */
+    DescribeStaffStatusHistory(req, cb) {
+        let resp = new DescribeStaffStatusHistoryResponse();
+        this.request("DescribeStaffStatusHistory", req, resp, cb);
+    }
+
+    /**
      * Query IVR Audio File List Information
      * @param {DescribeIvrAudioListRequest} req
      * @param {function(string, DescribeIvrAudioListResponse):void} cb
@@ -371,14 +425,14 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
-     * This API is used to modify the customer service account.
-     * @param {ModifyStaffRequest} req
-     * @param {function(string, ModifyStaffResponse):void} cb
+     * This API is used to disable numbers.
+     * @param {DisableCCCPhoneNumberRequest} req
+     * @param {function(string, DisableCCCPhoneNumberResponse):void} cb
      * @public
      */
-    ModifyStaff(req, cb) {
-        let resp = new ModifyStaffResponse();
-        this.request("ModifyStaff", req, resp, cb);
+    DisableCCCPhoneNumber(req, cb) {
+        let resp = new DisableCCCPhoneNumberResponse();
+        this.request("DisableCCCPhoneNumber", req, resp, cb);
     }
 
     /**
@@ -496,6 +550,17 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
+     * This API is used to provide server-side robot control feature.
+     * @param {ControlAIConversationRequest} req
+     * @param {function(string, ControlAIConversationResponse):void} cb
+     * @public
+     */
+    ControlAIConversation(req, cb) {
+        let resp = new ControlAIConversationResponse();
+        this.request("ControlAIConversation", req, resp, cb);
+    }
+
+    /**
      * This API is used to access phone service records and recordings.
      * @param {DescribeTelCdrRequest} req
      * @param {function(string, DescribeTelCdrResponse):void} cb
@@ -504,17 +569,6 @@ This API is used to make calls. Currently, the agent side can only call the user
     DescribeTelCdr(req, cb) {
         let resp = new DescribeTelCdrResponse();
         this.request("DescribeTelCdr", req, resp, cb);
-    }
-
-    /**
-     * This API is used to transfer a session to an agent in specific scenarios.
-     * @param {TransferToManualRequest} req
-     * @param {function(string, TransferToManualResponse):void} cb
-     * @public
-     */
-    TransferToManual(req, cb) {
-        let resp = new TransferToManualResponse();
-        this.request("TransferToManual", req, resp, cb);
     }
 
     /**
@@ -529,14 +583,25 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * Modify customer's own number approval form
-     * @param {ModifyOwnNumberApplyRequest} req
-     * @param {function(string, ModifyOwnNumberApplyResponse):void} cb
+     * This API is used to unbind the number from the outbound call skill group.
+     * @param {UnbindNumberCallOutSkillGroupRequest} req
+     * @param {function(string, UnbindNumberCallOutSkillGroupResponse):void} cb
      * @public
      */
-    ModifyOwnNumberApply(req, cb) {
-        let resp = new ModifyOwnNumberApplyResponse();
-        this.request("ModifyOwnNumberApply", req, resp, cb);
+    UnbindNumberCallOutSkillGroup(req, cb) {
+        let resp = new UnbindNumberCallOutSkillGroupResponse();
+        this.request("UnbindNumberCallOutSkillGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query call detail.
+     * @param {DescribeSessionDetailRequest} req
+     * @param {function(string, DescribeSessionDetailResponse):void} cb
+     * @public
+     */
+    DescribeSessionDetail(req, cb) {
+        let resp = new DescribeSessionDetailResponse();
+        this.request("DescribeSessionDetail", req, resp, cb);
     }
 
     /**
@@ -650,14 +715,14 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to query the predictive outbound call task.
-     * @param {DescribePredictiveDialingCampaignRequest} req
-     * @param {function(string, DescribePredictiveDialingCampaignResponse):void} cb
+     * This API is used to bind a number to a callback API for incoming calls.
+     * @param {BindNumberCallInInterfaceRequest} req
+     * @param {function(string, BindNumberCallInInterfaceResponse):void} cb
      * @public
      */
-    DescribePredictiveDialingCampaign(req, cb) {
-        let resp = new DescribePredictiveDialingCampaignResponse();
-        this.request("DescribePredictiveDialingCampaign", req, resp, cb);
+    BindNumberCallInInterface(req, cb) {
+        let resp = new BindNumberCallInInterfaceResponse();
+        this.request("BindNumberCallInInterface", req, resp, cb);
     }
 
     /**
@@ -727,14 +792,14 @@ This API is used to make calls. Currently, the agent side can only call the user
     }
 
     /**
-     * This API is used to force customer service to go offline.
-     * @param {ForceMemberOfflineRequest} req
-     * @param {function(string, ForceMemberOfflineResponse):void} cb
+     * This API is used to create a user data signature.
+     * @param {CreateUserSigRequest} req
+     * @param {function(string, CreateUserSigResponse):void} cb
      * @public
      */
-    ForceMemberOffline(req, cb) {
-        let resp = new ForceMemberOfflineResponse();
-        this.request("ForceMemberOffline", req, resp, cb);
+    CreateUserSig(req, cb) {
+        let resp = new CreateUserSigResponse();
+        this.request("CreateUserSig", req, resp, cb);
     }
 
     /**
@@ -790,6 +855,17 @@ This API is used to make calls. Currently, the agent side can only call the user
     DescribeProtectedTelCdr(req, cb) {
         let resp = new DescribeProtectedTelCdrResponse();
         this.request("DescribeProtectedTelCdr", req, resp, cb);
+    }
+
+    /**
+     * This API is used to force customer service to go offline.
+     * @param {ForceMemberOfflineRequest} req
+     * @param {function(string, ForceMemberOfflineResponse):void} cb
+     * @public
+     */
+    ForceMemberOffline(req, cb) {
+        let resp = new ForceMemberOfflineResponse();
+        this.request("ForceMemberOffline", req, resp, cb);
     }
 
     /**

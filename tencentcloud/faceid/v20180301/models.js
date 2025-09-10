@@ -3618,6 +3618,18 @@ The default value is blink. The different action types passed in this parameter 
          */
         this.LivenessRetryLimit = null;
 
+        /**
+         * Specifies the liveness detection timeout period in seconds. value range: (0,600].
+         * @type {number || null}
+         */
+        this.LivenessTimeout = null;
+
+        /**
+         * Selects OCR alarms requiring attention. When an OCR Alarm occurs, the identity verification process will be interrupted. Default value is empty, indicating all alarms are monitored. This feature requires the parameter DisableCheckOcrWarnings=false. If the Alarm is disabled, this parameter will not be effective.
+         * @type {string || null}
+         */
+        this.SelectedWarningCodes = null;
+
     }
 
     /**
@@ -3640,6 +3652,8 @@ The default value is blink. The different action types passed in this parameter 
         this.AutoDowngrade = 'AutoDowngrade' in params ? params.AutoDowngrade : null;
         this.ActionList = 'ActionList' in params ? params.ActionList : null;
         this.LivenessRetryLimit = 'LivenessRetryLimit' in params ? params.LivenessRetryLimit : null;
+        this.LivenessTimeout = 'LivenessTimeout' in params ? params.LivenessTimeout : null;
+        this.SelectedWarningCodes = 'SelectedWarningCodes' in params ? params.SelectedWarningCodes : null;
 
     }
 }

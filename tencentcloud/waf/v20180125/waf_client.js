@@ -16,14 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CreateOwaspWhiteRuleRequest = models.CreateOwaspWhiteRuleRequest;
+const PiechartItem = models.PiechartItem;
+const DeleteOwaspWhiteRuleRequest = models.DeleteOwaspWhiteRuleRequest;
 const ModifyUserLevelResponse = models.ModifyUserLevelResponse;
 const SearchAttackLogResponse = models.SearchAttackLogResponse;
 const KVInt = models.KVInt;
+const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeCustomRulesRspRuleListItem = models.DescribeCustomRulesRspRuleListItem;
 const ModifyAntiInfoLeakRulesResponse = models.ModifyAntiInfoLeakRulesResponse;
 const ModifyWebshellStatusRequest = models.ModifyWebshellStatusRequest;
 const DescribeCertificateVerifyResultRequest = models.DescribeCertificateVerifyResultRequest;
 const DescribeUserClbWafRegionsResponse = models.DescribeUserClbWafRegionsResponse;
+const ModifyInstanceRenewFlagResponse = models.ModifyInstanceRenewFlagResponse;
 const CreateIpAccessControlRequest = models.CreateIpAccessControlRequest;
 const TLSCiphers = models.TLSCiphers;
 const AddAntiFakeUrlRequest = models.AddAntiFakeUrlRequest;
@@ -31,7 +36,7 @@ const WebshellStatus = models.WebshellStatus;
 const AddCustomWhiteRuleResponse = models.AddCustomWhiteRuleResponse;
 const SearchAttackLogRequest = models.SearchAttackLogRequest;
 const ModifyHostFlowModeResponse = models.ModifyHostFlowModeResponse;
-const DomainPackageNew = models.DomainPackageNew;
+const DescribeOwaspWhiteRulesResponse = models.DescribeOwaspWhiteRulesResponse;
 const SwitchElasticModeRequest = models.SwitchElasticModeRequest;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
 const HostDel = models.HostDel;
@@ -39,6 +44,7 @@ const DeleteCustomWhiteRuleResponse = models.DeleteCustomWhiteRuleResponse;
 const DescribeIpAccessControlResponse = models.DescribeIpAccessControlResponse;
 const DescribeAntiLeakageItem = models.DescribeAntiLeakageItem;
 const LoadBalancerPackageNew = models.LoadBalancerPackageNew;
+const DescribeOwaspWhiteRulesRequest = models.DescribeOwaspWhiteRulesRequest;
 const ModifyDomainIpv6StatusResponse = models.ModifyDomainIpv6StatusResponse;
 const CCRuleData = models.CCRuleData;
 const DescribeCustomRuleListRequest = models.DescribeCustomRuleListRequest;
@@ -51,7 +57,7 @@ const ModifyDomainPostActionResponse = models.ModifyDomainPostActionResponse;
 const DescribeCertificateVerifyResultResponse = models.DescribeCertificateVerifyResultResponse;
 const ModifyUserSignatureRuleResponse = models.ModifyUserSignatureRuleResponse;
 const DescribeAntiInfoLeakRulesStrategyItem = models.DescribeAntiInfoLeakRulesStrategyItem;
-const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
+const ModifyApiAnalyzeStatusRequest = models.ModifyApiAnalyzeStatusRequest;
 const TLSVersion = models.TLSVersion;
 const UpsertSessionResponse = models.UpsertSessionResponse;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
@@ -63,6 +69,7 @@ const ModifyHostResponse = models.ModifyHostResponse;
 const DescribeCiphersDetailRequest = models.DescribeCiphersDetailRequest;
 const AddCustomRuleResponse = models.AddCustomRuleResponse;
 const CCRuleItems = models.CCRuleItems;
+const ModifySpartaProtectionModeResponse = models.ModifySpartaProtectionModeResponse;
 const ModifyDomainIpv6StatusRequest = models.ModifyDomainIpv6StatusRequest;
 const CreateIpAccessControlResponse = models.CreateIpAccessControlResponse;
 const RefreshAccessCheckResultResponse = models.RefreshAccessCheckResultResponse;
@@ -71,7 +78,7 @@ const SessionItem = models.SessionItem;
 const MajorEventsPkg = models.MajorEventsPkg;
 const ModifyObjectRequest = models.ModifyObjectRequest;
 const ModifyHostFlowModeRequest = models.ModifyHostFlowModeRequest;
-const UpsertCCRuleResponse = models.UpsertCCRuleResponse;
+const OwaspRule = models.OwaspRule;
 const GetAttackHistogramRequest = models.GetAttackHistogramRequest;
 const UserDomainInfo = models.UserDomainInfo;
 const ModifyAntiInfoLeakRulesRequest = models.ModifyAntiInfoLeakRulesRequest;
@@ -80,13 +87,15 @@ const CCRuleLists = models.CCRuleLists;
 const ModifyApiAnalyzeStatusResponse = models.ModifyApiAnalyzeStatusResponse;
 const DescribeCustomWhiteRuleRequest = models.DescribeCustomWhiteRuleRequest;
 const DeleteAntiFakeUrlResponse = models.DeleteAntiFakeUrlResponse;
-const WafRuleLimit = models.WafRuleLimit;
+const SearchItem = models.SearchItem;
+const UpsertCCRuleResponse = models.UpsertCCRuleResponse;
 const DescribeAttackTypeRequest = models.DescribeAttackTypeRequest;
 const ModifyAntiFakeUrlStatusRequest = models.ModifyAntiFakeUrlStatusRequest;
 const DeleteCustomWhiteRuleRequest = models.DeleteCustomWhiteRuleRequest;
 const ModifyHostModeResponse = models.ModifyHostModeResponse;
-const ModifyInstanceRenewFlagResponse = models.ModifyInstanceRenewFlagResponse;
+const DescribeOwaspRulesRequest = models.DescribeOwaspRulesRequest;
 const DescribeCCRuleListRequest = models.DescribeCCRuleListRequest;
+const ModifyOwaspRuleTypeStatusResponse = models.ModifyOwaspRuleTypeStatusResponse;
 const ModifyProtectionStatusResponse = models.ModifyProtectionStatusResponse;
 const ResponseCode = models.ResponseCode;
 const DescribeCustomRuleListResponse = models.DescribeCustomRuleListResponse;
@@ -105,7 +114,8 @@ const ModifyUserLevelRequest = models.ModifyUserLevelRequest;
 const QpsData = models.QpsData;
 const DescribeAntiInfoLeakageRulesRequest = models.DescribeAntiInfoLeakageRulesRequest;
 const CreateHostResponse = models.CreateHostResponse;
-const PiechartItem = models.PiechartItem;
+const DeleteOwaspWhiteRuleResponse = models.DeleteOwaspWhiteRuleResponse;
+const UpsertCCRuleRequest = models.UpsertCCRuleRequest;
 const IpAccessControlItem = models.IpAccessControlItem;
 const DeleteHostResponse = models.DeleteHostResponse;
 const SwitchElasticModeResponse = models.SwitchElasticModeResponse;
@@ -123,7 +133,7 @@ const FreshAntiFakeUrlRequest = models.FreshAntiFakeUrlRequest;
 const DescribeFindDomainListResponse = models.DescribeFindDomainListResponse;
 const SpartaProtectionPort = models.SpartaProtectionPort;
 const AddSpartaProtectionRequest = models.AddSpartaProtectionRequest;
-const PeakPointsItem = models.PeakPointsItem;
+const ModifyOwaspWhiteRuleRequest = models.ModifyOwaspWhiteRuleRequest;
 const GetInstanceQpsLimitResponse = models.GetInstanceQpsLimitResponse;
 const CreateDealsRequest = models.CreateDealsRequest;
 const JobDateTime = models.JobDateTime;
@@ -137,12 +147,14 @@ const ApiPkg = models.ApiPkg;
 const AttackLogInfo = models.AttackLogInfo;
 const DescribeModuleStatusResponse = models.DescribeModuleStatusResponse;
 const DescribeAttackOverviewResponse = models.DescribeAttackOverviewResponse;
+const ModifyOwaspRuleTypeStatusRequest = models.ModifyOwaspRuleTypeStatusRequest;
 const DescribeCCRuleListResponse = models.DescribeCCRuleListResponse;
 const DescribeDomainCountInfoResponse = models.DescribeDomainCountInfoResponse;
+const PeakPointsItem = models.PeakPointsItem;
 const DescribePortsRequest = models.DescribePortsRequest;
 const ModifyHostModeRequest = models.ModifyHostModeRequest;
 const QPSPackageNew = models.QPSPackageNew;
-const ModifyAntiFakeUrlRequest = models.ModifyAntiFakeUrlRequest;
+const DescribeOwaspRuleTypesResponse = models.DescribeOwaspRuleTypesResponse;
 const DescribeDomainDetailsClbRequest = models.DescribeDomainDetailsClbRequest;
 const ModifyAntiInfoLeakRuleStatusRequest = models.ModifyAntiInfoLeakRuleStatusRequest;
 const DescribeDomainVerifyResultRequest = models.DescribeDomainVerifyResultRequest;
@@ -152,9 +164,10 @@ const DescribeTlsVersionRequest = models.DescribeTlsVersionRequest;
 const DescribeCiphersDetailResponse = models.DescribeCiphersDetailResponse;
 const DealData = models.DealData;
 const DeleteIpAccessControlV2Response = models.DeleteIpAccessControlV2Response;
-const ModifySpartaProtectionModeResponse = models.ModifySpartaProtectionModeResponse;
+const ModifyOwaspWhiteRuleResponse = models.ModifyOwaspWhiteRuleResponse;
 const ModifyBotStatusResponse = models.ModifyBotStatusResponse;
 const DescribeDomainDetailsSaasRequest = models.DescribeDomainDetailsSaasRequest;
+const DescribeOwaspRulesResponse = models.DescribeOwaspRulesResponse;
 const ModifyCustomRuleStatusResponse = models.ModifyCustomRuleStatusResponse;
 const StrategyForAntiInfoLeak = models.StrategyForAntiInfoLeak;
 const AddSpartaProtectionResponse = models.AddSpartaProtectionResponse;
@@ -163,12 +176,14 @@ const DomainRuleId = models.DomainRuleId;
 const DescribeModuleStatusRequest = models.DescribeModuleStatusRequest;
 const PortItem = models.PortItem;
 const CreateDealsGoodsDetail = models.CreateDealsGoodsDetail;
-const SearchItem = models.SearchItem;
+const DescribeOwaspRuleTypesRequest = models.DescribeOwaspRuleTypesRequest;
+const ModifyAntiFakeUrlRequest = models.ModifyAntiFakeUrlRequest;
 const ModifyCustomWhiteRuleStatusResponse = models.ModifyCustomWhiteRuleStatusResponse;
 const ModifyHostStatusResponse = models.ModifyHostStatusResponse;
 const BatchIpAccessControlData = models.BatchIpAccessControlData;
 const ModifyCustomRuleStatusRequest = models.ModifyCustomRuleStatusRequest;
 const DescribePeakPointsResponse = models.DescribePeakPointsResponse;
+const OwaspRuleType = models.OwaspRuleType;
 const GoodNews = models.GoodNews;
 const ModifySpartaProtectionModeRequest = models.ModifySpartaProtectionModeRequest;
 const DescribeHostRequest = models.DescribeHostRequest;
@@ -176,6 +191,7 @@ const ModifyCustomRuleRequest = models.ModifyCustomRuleRequest;
 const DescribeAttackOverviewRequest = models.DescribeAttackOverviewRequest;
 const DescribeUserLevelRequest = models.DescribeUserLevelRequest;
 const BotQPS = models.BotQPS;
+const ModifyOwaspRuleTypeActionResponse = models.ModifyOwaspRuleTypeActionResponse;
 const DescribeDomainDetailsClbResponse = models.DescribeDomainDetailsClbResponse;
 const HostStatus = models.HostStatus;
 const GoodsDetailNew = models.GoodsDetailNew;
@@ -191,12 +207,14 @@ const GetAttackTotalCountResponse = models.GetAttackTotalCountResponse;
 const DescribeObjectsResponse = models.DescribeObjectsResponse;
 const BatchIpAccessControlItem = models.BatchIpAccessControlItem;
 const InstanceInfo = models.InstanceInfo;
+const ModifyOwaspRuleTypeLevelRequest = models.ModifyOwaspRuleTypeLevelRequest;
+const OwaspWhiteRule = models.OwaspWhiteRule;
 const IpAccessControlParam = models.IpAccessControlParam;
 const ModifyInstanceRenewFlagRequest = models.ModifyInstanceRenewFlagRequest;
 const DescribeBatchIpAccessControlResponse = models.DescribeBatchIpAccessControlResponse;
 const DescribeDomainDetailsSaasResponse = models.DescribeDomainDetailsSaasResponse;
 const DescribeDomainVerifyResultResponse = models.DescribeDomainVerifyResultResponse;
-const ModifyApiAnalyzeStatusRequest = models.ModifyApiAnalyzeStatusRequest;
+const DomainPackageNew = models.DomainPackageNew;
 const AddCustomRuleRequest = models.AddCustomRuleRequest;
 const ModifyAntiInfoLeakRuleStatusResponse = models.ModifyAntiInfoLeakRuleStatusResponse;
 const FraudPkg = models.FraudPkg;
@@ -215,7 +233,7 @@ const ModifyAntiFakeUrlStatusResponse = models.ModifyAntiFakeUrlStatusResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyInstanceElasticModeRequest = models.ModifyInstanceElasticModeRequest;
 const DescribeHostLimitResponse = models.DescribeHostLimitResponse;
-const UpsertCCRuleRequest = models.UpsertCCRuleRequest;
+const ModifyOwaspRuleTypeActionRequest = models.ModifyOwaspRuleTypeActionRequest;
 const DescribeWebshellStatusResponse = models.DescribeWebshellStatusResponse;
 const ModifyCustomWhiteRuleStatusRequest = models.ModifyCustomWhiteRuleStatusRequest;
 const DeleteAntiFakeUrlRequest = models.DeleteAntiFakeUrlRequest;
@@ -228,6 +246,7 @@ const ClbWafRegionItem = models.ClbWafRegionItem;
 const FindAllDomainDetail = models.FindAllDomainDetail;
 const DeleteAntiInfoLeakRuleRequest = models.DeleteAntiInfoLeakRuleRequest;
 const ModifyInstanceElasticModeResponse = models.ModifyInstanceElasticModeResponse;
+const WafRuleLimit = models.WafRuleLimit;
 const DescribeUserLevelResponse = models.DescribeUserLevelResponse;
 const DescribeVipInfoResponse = models.DescribeVipInfoResponse;
 const ModifyIpAccessControlResponse = models.ModifyIpAccessControlResponse;
@@ -236,14 +255,17 @@ const ModifyModuleStatusRequest = models.ModifyModuleStatusRequest;
 const MiniPkg = models.MiniPkg;
 const DescribeRuleLimitRequest = models.DescribeRuleLimitRequest;
 const TargetEntity = models.TargetEntity;
+const DeleteOwaspRuleStatusResponse = models.DeleteOwaspRuleStatusResponse;
 const CCRuleItem = models.CCRuleItem;
 const DescribeDomainCountInfoRequest = models.DescribeDomainCountInfoRequest;
 const ModifyDomainsCLSStatusRequest = models.ModifyDomainsCLSStatusRequest;
 const DescribeCustomWhiteRuleResponse = models.DescribeCustomWhiteRuleResponse;
+const ModifyOwaspRuleStatusRequest = models.ModifyOwaspRuleStatusRequest;
 const ModifySpartaProtectionRequest = models.ModifySpartaProtectionRequest;
 const DescribeTlsVersionResponse = models.DescribeTlsVersionResponse;
 const ModifyDomainPostActionRequest = models.ModifyDomainPostActionRequest;
 const VipInfo = models.VipInfo;
+const DeleteOwaspRuleStatusRequest = models.DeleteOwaspRuleStatusRequest;
 const DescribeTopAttackDomainResponse = models.DescribeTopAttackDomainResponse;
 const DescribeSessionResponse = models.DescribeSessionResponse;
 const AddAntiInfoLeakRulesResponse = models.AddAntiInfoLeakRulesResponse;
@@ -252,12 +274,14 @@ const AddCustomWhiteRuleRequest = models.AddCustomWhiteRuleRequest;
 const PortInfo = models.PortInfo;
 const DescribeWebshellStatusRequest = models.DescribeWebshellStatusRequest;
 const ImportIpAccessControlRequest = models.ImportIpAccessControlRequest;
+const ModifyOwaspRuleStatusResponse = models.ModifyOwaspRuleStatusResponse;
 const DeleteAntiInfoLeakRuleResponse = models.DeleteAntiInfoLeakRuleResponse;
 const DeleteSessionResponse = models.DeleteSessionResponse;
 const UpsertSessionRequest = models.UpsertSessionRequest;
 const DescribeRuleLimitResponse = models.DescribeRuleLimitResponse;
 const DescribeHostLimitRequest = models.DescribeHostLimitRequest;
 const DeleteCustomRuleResponse = models.DeleteCustomRuleResponse;
+const ModifyOwaspRuleTypeLevelResponse = models.ModifyOwaspRuleTypeLevelResponse;
 const ModifyUserSignatureRuleRequest = models.ModifyUserSignatureRuleRequest;
 const ClbDomainsInfo = models.ClbDomainsInfo;
 const CreateDealsResponse = models.CreateDealsResponse;
@@ -265,6 +289,7 @@ const DescribeHistogramRequest = models.DescribeHistogramRequest;
 const DescribeHostResponse = models.DescribeHostResponse;
 const DeleteCCRuleResponse = models.DeleteCCRuleResponse;
 const LogHistogramInfo = models.LogHistogramInfo;
+const CreateOwaspWhiteRuleResponse = models.CreateOwaspWhiteRuleResponse;
 const DomainURI = models.DomainURI;
 const ModifyHostRequest = models.ModifyHostRequest;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
@@ -356,14 +381,25 @@ class WafClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the IP blocklist and allowlist for WAF batch protection.
-     * @param {DescribeBatchIpAccessControlRequest} req
-     * @param {function(string, DescribeBatchIpAccessControlResponse):void} cb
+     * Add precision allowlist rules
+     * @param {AddCustomWhiteRuleRequest} req
+     * @param {function(string, AddCustomWhiteRuleResponse):void} cb
      * @public
      */
-    DescribeBatchIpAccessControl(req, cb) {
-        let resp = new DescribeBatchIpAccessControlResponse();
-        this.request("DescribeBatchIpAccessControl", req, resp, cb);
+    AddCustomWhiteRule(req, cb) {
+        let resp = new AddCustomWhiteRuleResponse();
+        this.request("AddCustomWhiteRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a user rule engine allowlist.
+     * @param {DeleteOwaspWhiteRuleRequest} req
+     * @param {function(string, DeleteOwaspWhiteRuleResponse):void} cb
+     * @public
+     */
+    DeleteOwaspWhiteRule(req, cb) {
+        let resp = new DeleteOwaspWhiteRuleResponse();
+        this.request("DeleteOwaspWhiteRule", req, resp, cb);
     }
 
     /**
@@ -419,6 +455,17 @@ class WafClient extends AbstractClient {
     AddCustomRule(req, cb) {
         let resp = new AddCustomRuleResponse();
         this.request("AddCustomRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unlock the Door God rule status.
+     * @param {DeleteOwaspRuleStatusRequest} req
+     * @param {function(string, DeleteOwaspRuleStatusResponse):void} cb
+     * @public
+     */
+    DeleteOwaspRuleStatus(req, cb) {
+        let resp = new DeleteOwaspRuleStatusResponse();
+        this.request("DeleteOwaspRuleStatus", req, resp, cb);
     }
 
     /**
@@ -499,6 +546,17 @@ class WafClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the rule types of the rule engine.
+     * @param {DescribeOwaspRuleTypesRequest} req
+     * @param {function(string, DescribeOwaspRuleTypesResponse):void} cb
+     * @public
+     */
+    DescribeOwaspRuleTypes(req, cb) {
+        let resp = new DescribeOwaspRuleTypesResponse();
+        this.request("DescribeOwaspRuleTypes", req, resp, cb);
+    }
+
+    /**
      * Query various conditions of cluster analysis
      * @param {DescribeHistogramRequest} req
      * @param {function(string, DescribeHistogramResponse):void} cb
@@ -529,6 +587,28 @@ class WafClient extends AbstractClient {
     DeleteAntiInfoLeakRule(req, cb) {
         let resp = new DeleteAntiInfoLeakRuleResponse();
         this.request("DeleteAntiInfoLeakRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a rule engine allowlist.
+     * @param {CreateOwaspWhiteRuleRequest} req
+     * @param {function(string, CreateOwaspWhiteRuleResponse):void} cb
+     * @public
+     */
+    CreateOwaspWhiteRule(req, cb) {
+        let resp = new CreateOwaspWhiteRuleResponse();
+        this.request("CreateOwaspWhiteRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to refresh the rule switch.
+     * @param {ModifyOwaspRuleStatusRequest} req
+     * @param {function(string, ModifyOwaspRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyOwaspRuleStatus(req, cb) {
+        let resp = new ModifyOwaspRuleStatusResponse();
+        this.request("ModifyOwaspRuleStatus", req, resp, cb);
     }
 
     /**
@@ -709,14 +789,25 @@ Batch operation is supported.
     }
 
     /**
-     * Set WAF protection status
-     * @param {ModifySpartaProtectionModeRequest} req
-     * @param {function(string, ModifySpartaProtectionModeResponse):void} cb
+     * This API is used to update the protection mode of the rule type.
+     * @param {ModifyOwaspRuleTypeActionRequest} req
+     * @param {function(string, ModifyOwaspRuleTypeActionResponse):void} cb
      * @public
      */
-    ModifySpartaProtectionMode(req, cb) {
-        let resp = new ModifySpartaProtectionModeResponse();
-        this.request("ModifySpartaProtectionMode", req, resp, cb);
+    ModifyOwaspRuleTypeAction(req, cb) {
+        let resp = new ModifyOwaspRuleTypeActionResponse();
+        this.request("ModifyOwaspRuleTypeAction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the protection level of a rule type.
+     * @param {ModifyOwaspRuleTypeLevelRequest} req
+     * @param {function(string, ModifyOwaspRuleTypeLevelResponse):void} cb
+     * @public
+     */
+    ModifyOwaspRuleTypeLevel(req, cb) {
+        let resp = new ModifyOwaspRuleTypeLevelResponse();
+        this.request("ModifyOwaspRuleTypeLevel", req, resp, cb);
     }
 
     /**
@@ -739,6 +830,17 @@ Batch operation is supported.
     DescribeAttackOverview(req, cb) {
         let resp = new DescribeAttackOverviewResponse();
         this.request("DescribeAttackOverview", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit the allowlist for the rule engine.
+     * @param {ModifyOwaspWhiteRuleRequest} req
+     * @param {function(string, ModifyOwaspWhiteRuleResponse):void} cb
+     * @public
+     */
+    ModifyOwaspWhiteRule(req, cb) {
+        let resp = new ModifyOwaspWhiteRuleResponse();
+        this.request("ModifyOwaspWhiteRule", req, resp, cb);
     }
 
     /**
@@ -838,6 +940,17 @@ Batch operation is supported.
     DescribeCiphersDetail(req, cb) {
         let resp = new DescribeCiphersDetailResponse();
         this.request("DescribeCiphersDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve the allowlist for the rule engine.
+     * @param {DescribeOwaspWhiteRulesRequest} req
+     * @param {function(string, DescribeOwaspWhiteRulesResponse):void} cb
+     * @public
+     */
+    DescribeOwaspWhiteRules(req, cb) {
+        let resp = new DescribeOwaspWhiteRulesResponse();
+        this.request("DescribeOwaspWhiteRules", req, resp, cb);
     }
 
     /**
@@ -984,14 +1097,25 @@ Batch operation is supported.
     }
 
     /**
-     * Add precision allowlist rules
-     * @param {AddCustomWhiteRuleRequest} req
-     * @param {function(string, AddCustomWhiteRuleResponse):void} cb
+     * This API is used to query the IP blocklist and allowlist for WAF batch protection.
+     * @param {DescribeBatchIpAccessControlRequest} req
+     * @param {function(string, DescribeBatchIpAccessControlResponse):void} cb
      * @public
      */
-    AddCustomWhiteRule(req, cb) {
-        let resp = new AddCustomWhiteRuleResponse();
-        this.request("AddCustomWhiteRule", req, resp, cb);
+    DescribeBatchIpAccessControl(req, cb) {
+        let resp = new DescribeBatchIpAccessControlResponse();
+        this.request("DescribeBatchIpAccessControl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the rule list of the rule engine.
+     * @param {DescribeOwaspRulesRequest} req
+     * @param {function(string, DescribeOwaspRulesResponse):void} cb
+     * @public
+     */
+    DescribeOwaspRules(req, cb) {
+        let resp = new DescribeOwaspRulesResponse();
+        this.request("DescribeOwaspRules", req, resp, cb);
     }
 
     /**
@@ -1094,6 +1218,17 @@ Batch operation is supported.
     }
 
     /**
+     * Set WAF protection status
+     * @param {ModifySpartaProtectionModeRequest} req
+     * @param {function(string, ModifySpartaProtectionModeResponse):void} cb
+     * @public
+     */
+    ModifySpartaProtectionMode(req, cb) {
+        let resp = new ModifySpartaProtectionModeResponse();
+        this.request("ModifySpartaProtectionMode", req, resp, cb);
+    }
+
+    /**
      * Information leakage prevention toggle rule switch
      * @param {ModifyAntiInfoLeakRuleStatusRequest} req
      * @param {function(string, ModifyAntiInfoLeakRuleStatusResponse):void} cb
@@ -1135,6 +1270,17 @@ Batch operation is supported.
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the rule type switch.
+     * @param {ModifyOwaspRuleTypeStatusRequest} req
+     * @param {function(string, ModifyOwaspRuleTypeStatusResponse):void} cb
+     * @public
+     */
+    ModifyOwaspRuleTypeStatus(req, cb) {
+        let resp = new ModifyOwaspRuleTypeStatusResponse();
+        this.request("ModifyOwaspRuleTypeStatus", req, resp, cb);
     }
 
     /**

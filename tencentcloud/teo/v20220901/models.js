@@ -19784,6 +19784,12 @@ Default value: `none`.
          */
         this.ClientCertInfo = null;
 
+        /**
+         * Configures the certificate presented by the EO node during origin-pull for mutual TLS authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+         * @type {UpstreamCertInfo || null}
+         */
+        this.UpstreamCertInfo = null;
+
     }
 
     /**
@@ -19811,6 +19817,12 @@ Default value: `none`.
             let obj = new MutualTLS();
             obj.deserialize(params.ClientCertInfo)
             this.ClientCertInfo = obj;
+        }
+
+        if (params.UpstreamCertInfo) {
+            let obj = new UpstreamCertInfo();
+            obj.deserialize(params.UpstreamCertInfo)
+            this.UpstreamCertInfo = obj;
         }
 
     }
@@ -21399,7 +21411,7 @@ class ForceRedirectHTTPSParameters extends  AbstractModel {
 }
 
 /**
- * 
+ * HTTPS Mutual authentication.
  * @class
  */
 class MutualTLS extends  AbstractModel {
@@ -21407,7 +21419,7 @@ class MutualTLS extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Mutual authentication configuration switch, the values are:<li>on: enable; </li> <li>off: disable. </li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -24383,7 +24395,7 @@ class RateLimitingRule extends  AbstractModel {
 }
 
 /**
- * HTTPS server certificate configuration
+ * HTTPS server certificate configuration.
  * @class
  */
 class CertificateInfo extends  AbstractModel {

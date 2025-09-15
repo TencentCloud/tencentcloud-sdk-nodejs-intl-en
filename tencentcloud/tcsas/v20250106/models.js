@@ -3417,7 +3417,7 @@ class CreateMNPApprovalResponse extends  AbstractModel {
 
         /**
          * Response data
-         * @type {BooleanInfo || null}
+         * @type {CreateMNPApprovalResp || null}
          */
         this.Data = null;
 
@@ -3438,7 +3438,7 @@ class CreateMNPApprovalResponse extends  AbstractModel {
         }
 
         if (params.Data) {
-            let obj = new BooleanInfo();
+            let obj = new CreateMNPApprovalResp();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -6712,31 +6712,33 @@ class DescribeMNPVersionResp extends  AbstractModel {
 
         /**
          * Mini program ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
          * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 1: Pending; 20: Running; 30: Failed; 60: Succeeded 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 1: Pending; 20: Running; 30: Failed; 60: Succeeded
          * @type {number || null}
          */
         this.TaskStatus = null;
 
         /**
          * Task status message
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TaskMsg = null;
+
+        /**
+         * Mini program version ID (returned when compilation succeeds)
+         * @type {number || null}
+         */
+        this.MNPVersionId = null;
 
     }
 
@@ -6751,6 +6753,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
         this.TaskMsg = 'TaskMsg' in params ? params.TaskMsg : null;
+        this.MNPVersionId = 'MNPVersionId' in params ? params.MNPVersionId : null;
 
     }
 }
@@ -7512,6 +7515,41 @@ class DeleteApplicationSensitiveAPIRequest extends  AbstractModel {
         }
         this.APIId = 'APIId' in params ? params.APIId : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+
+    }
+}
+
+/**
+ * Response for platform review of mini program version submission.
+ * @class
+ */
+class CreateMNPApprovalResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bool type response object
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * Approval No.
+         * @type {string || null}
+         */
+        this.ApprovalNo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.ApprovalNo = 'ApprovalNo' in params ? params.ApprovalNo : null;
 
     }
 }
@@ -8626,6 +8664,7 @@ module.exports = {
     ConfigureMNPPreviewRequest: ConfigureMNPPreviewRequest,
     DescribeMNPReleasedVersionHistoryResponse: DescribeMNPReleasedVersionHistoryResponse,
     DeleteApplicationSensitiveAPIRequest: DeleteApplicationSensitiveAPIRequest,
+    CreateMNPApprovalResp: CreateMNPApprovalResp,
     DescribeApplicationSensitiveAPIListData: DescribeApplicationSensitiveAPIListData,
     DescribeApplicationSensitiveAPIListResp: DescribeApplicationSensitiveAPIListResp,
     DescribeTeamDetailResp: DescribeTeamDetailResp,

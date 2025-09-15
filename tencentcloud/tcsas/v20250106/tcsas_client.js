@@ -163,6 +163,7 @@ const DescribeTempSecret4UploadFile2CosResponse = models.DescribeTempSecret4Uplo
 const ConfigureMNPPreviewRequest = models.ConfigureMNPPreviewRequest;
 const DescribeMNPReleasedVersionHistoryResponse = models.DescribeMNPReleasedVersionHistoryResponse;
 const DeleteApplicationSensitiveAPIRequest = models.DeleteApplicationSensitiveAPIRequest;
+const CreateMNPApprovalResp = models.CreateMNPApprovalResp;
 const DescribeApplicationSensitiveAPIListData = models.DescribeApplicationSensitiveAPIListData;
 const DescribeApplicationSensitiveAPIListResp = models.DescribeApplicationSensitiveAPIListResp;
 const DescribeTeamDetailResp = models.DescribeTeamDetailResp;

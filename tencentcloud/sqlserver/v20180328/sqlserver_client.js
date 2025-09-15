@@ -89,6 +89,7 @@ const DescribeRegularBackupPlanResponse = models.DescribeRegularBackupPlanRespon
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
 const CrossBackupAddr = models.CrossBackupAddr;
+const QueryMigrationCheckProcessRequest = models.QueryMigrationCheckProcessRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const DBDetail = models.DBDetail;
@@ -144,6 +145,7 @@ const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
 const ReadOnlyGroup = models.ReadOnlyGroup;
 const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
+const StepDetail = models.StepDetail;
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const CompleteExpansionRequest = models.CompleteExpansionRequest;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
@@ -168,7 +170,7 @@ const CreateBasicDBInstancesRequest = models.CreateBasicDBInstancesRequest;
 const DescribeDBInstancesAttributeResponse = models.DescribeDBInstancesAttributeResponse;
 const Backup = models.Backup;
 const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const QueryMigrationCheckProcessResponse = models.QueryMigrationCheckProcessResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const BalanceReadOnlyGroupResponse = models.BalanceReadOnlyGroupResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
@@ -325,6 +327,7 @@ const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGro
 const DescribeBackupMonitorRequest = models.DescribeBackupMonitorRequest;
 const RemoveBackupsResponse = models.RemoveBackupsResponse;
 const ModifyCloseWanIpResponse = models.ModifyCloseWanIpResponse;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const SecurityGroup = models.SecurityGroup;
 const ReadOnlyInstance = models.ReadOnlyInstance;
 const MigrateDetail = models.MigrateDetail;
@@ -431,6 +434,17 @@ class SqlserverClient extends AbstractClient {
     StartIncrementalMigration(req, cb) {
         let resp = new StartIncrementalMigrationResponse();
         this.request("StartIncrementalMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the progress of the migration verification task, inquiry of migration check task progress, applicable to the migration method where the migration source type is TencentDB for SQL Server.
+     * @param {QueryMigrationCheckProcessRequest} req
+     * @param {function(string, QueryMigrationCheckProcessResponse):void} cb
+     * @public
+     */
+    QueryMigrationCheckProcess(req, cb) {
+        let resp = new QueryMigrationCheckProcessResponse();
+        this.request("QueryMigrationCheckProcess", req, resp, cb);
     }
 
     /**

@@ -111,6 +111,7 @@ module.exports = {
     tdmq: require("./tdmq"),
     tem: require("./tem"),
     teo: require("./teo"),
+    tione: require("./tione"),
     tiw: require("./tiw"),
     tke: require("./tke"),
     tms: require("./tms"),

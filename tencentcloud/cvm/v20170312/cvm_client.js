@@ -28,7 +28,7 @@ const HostResource = models.HostResource;
 const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsRequest;
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
-const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
+const ModifyInstancesChargeTypeResponse = models.ModifyInstancesChargeTypeResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const Metadata = models.Metadata;
@@ -58,7 +58,7 @@ const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
 const ModifyLaunchTemplateDefaultVersionResponse = models.ModifyLaunchTemplateDefaultVersionResponse;
 const LaunchTemplateVersionInfo = models.LaunchTemplateVersionInfo;
-const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
+const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
@@ -69,6 +69,7 @@ const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeRe
 const CpuTopology = models.CpuTopology;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
+const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const EnterRescueModeRequest = models.EnterRescueModeRequest;
 const TagSpecification = models.TagSpecification;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
@@ -78,8 +79,9 @@ const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstance
 const RunInstancesResponse = models.RunInstancesResponse;
 const InstanceAttribute = models.InstanceAttribute;
 const ReservedInstancePrice = models.ReservedInstancePrice;
+const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
-const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
+const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
@@ -93,6 +95,7 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
+const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
@@ -124,6 +127,7 @@ const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsRe
 const HostItem = models.HostItem;
 const Externals = models.Externals;
 const ConvertOperatingSystemsResponse = models.ConvertOperatingSystemsResponse;
+const InquiryPriceModifyInstancesChargeTypeRequest = models.InquiryPriceModifyInstancesChargeTypeRequest;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const CreateLaunchTemplateVersionRequest = models.CreateLaunchTemplateVersionRequest;
@@ -351,14 +355,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the price of creating instances. You can only use this API for instances whose configuration is within the purchase limit. For more information, see [RunInstances](https://intl.cloud.tencent.com/document/api/213/15730?from_cn_redirect=1).
-     * @param {InquiryPriceRunInstancesRequest} req
-     * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
+     * This API is used to inquire about the price for switching billing modes of instance.
+
+
+This API is used to indicate that instances with no charge when shut down, instances of the model families Batch Computing BC1 and Batch Computing BS1, instances of scheduled termination, and spot instances do not support this operation.
+     * @param {InquiryPriceModifyInstancesChargeTypeRequest} req
+     * @param {function(string, InquiryPriceModifyInstancesChargeTypeResponse):void} cb
      * @public
      */
-    InquiryPriceRunInstances(req, cb) {
-        let resp = new InquiryPriceRunInstancesResponse();
-        this.request("InquiryPriceRunInstances", req, resp, cb);
+    InquiryPriceModifyInstancesChargeType(req, cb) {
+        let resp = new InquiryPriceModifyInstancesChargeTypeResponse();
+        this.request("InquiryPriceModifyInstancesChargeType", req, resp, cb);
     }
 
     /**
@@ -381,6 +388,23 @@ class CvmClient extends AbstractClient {
     AssociateSecurityGroups(req, cb) {
         let resp = new AssociateSecurityGroupsResponse();
         this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify attributes of a key pair.
+
+* Modify the name and description information of the key pair specified by the key pair ID.
+* The key pair name should not be the same as the name of an existing key pair.
+* The key pair ID is the unique identifier of a key pair and cannot be modified.
+
+* Either the key pair name or description information should be specified, and both can also be specified simultaneously.
+     * @param {ModifyKeyPairAttributeRequest} req
+     * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
+     * @public
+     */
+    ModifyKeyPairAttribute(req, cb) {
+        let resp = new ModifyKeyPairAttributeResponse();
+        this.request("ModifyKeyPairAttribute", req, resp, cb);
     }
 
     /**
@@ -1010,20 +1034,14 @@ This API is used to query the renewal price of monthly subscription instances.
     }
 
     /**
-     * This API is used to modify attributes of a key pair.
-
-* Modify the name and description information of the key pair specified by the key pair ID.
-* The key pair name should not be the same as the name of an existing key pair.
-* The key pair ID is the unique identifier of a key pair and cannot be modified.
-
-* Either the key pair name or description information should be specified, and both can also be specified simultaneously.
-     * @param {ModifyKeyPairAttributeRequest} req
-     * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
+     * This API is used to query the price of creating instances. You can only use this API for instances whose configuration is within the purchase limit. For more information, see [RunInstances](https://intl.cloud.tencent.com/document/api/213/15730?from_cn_redirect=1).
+     * @param {InquiryPriceRunInstancesRequest} req
+     * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
      * @public
      */
-    ModifyKeyPairAttribute(req, cb) {
-        let resp = new ModifyKeyPairAttributeResponse();
-        this.request("ModifyKeyPairAttribute", req, resp, cb);
+    InquiryPriceRunInstances(req, cb) {
+        let resp = new InquiryPriceRunInstancesResponse();
+        this.request("InquiryPriceRunInstances", req, resp, cb);
     }
 
     /**
@@ -1086,19 +1104,17 @@ This API is used to query the renewal price of monthly subscription instances.
     }
 
     /**
-     * This API is used to change the project to which an instance is assigned.
+     * This API is used to switch the billing mode of an instance.
 
-* Project is a virtual concept. You can create multiple projects under one account, manage different resources in each project, and assign different instances to different projects. You may use the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API to query instances and use the project ID to filter the results.
-* You cannot modify the project of an instance that is bound to a load balancer. You need to unbind the load balancer from the instance by using the [DeregisterInstancesFromLoadBalancer](https://intl.cloud.tencent.com/document/api/214/1258?from_cn_redirect=1) API before using this API.
-* Batch operations are supported. Up to 100 instances per request is allowed.
-* You can use the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) to query the operation result. If the `LatestOperationState` in the response is `SUCCESS`, the operation is successful.
-     * @param {ModifyInstancesProjectRequest} req
-     * @param {function(string, ModifyInstancesProjectResponse):void} cb
+This API is used to perform operations that do not support instances with no charge when shut down, instances of the model families Batch Compute BC1 and Batch Compute BS1, or instances of scheduled termination.
+* You can query the result of the instance operation by calling the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
+     * @param {ModifyInstancesChargeTypeRequest} req
+     * @param {function(string, ModifyInstancesChargeTypeResponse):void} cb
      * @public
      */
-    ModifyInstancesProject(req, cb) {
-        let resp = new ModifyInstancesProjectResponse();
-        this.request("ModifyInstancesProject", req, resp, cb);
+    ModifyInstancesChargeType(req, cb) {
+        let resp = new ModifyInstancesChargeTypeResponse();
+        this.request("ModifyInstancesChargeType", req, resp, cb);
     }
 
     /**
@@ -1264,6 +1280,22 @@ This API is used to ensure your account balance is sufficient for renewal. You c
     PurchaseReservedInstancesOffering(req, cb) {
         let resp = new PurchaseReservedInstancesOfferingResponse();
         this.request("PurchaseReservedInstancesOffering", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the project to which an instance is assigned.
+
+* Project is a virtual concept. You can create multiple projects under one account, manage different resources in each project, and assign different instances to different projects. You may use the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API to query instances and use the project ID to filter the results.
+* You cannot modify the project of an instance that is bound to a load balancer. You need to unbind the load balancer from the instance by using the [DeregisterInstancesFromLoadBalancer](https://intl.cloud.tencent.com/document/api/214/1258?from_cn_redirect=1) API before using this API.
+* Batch operations are supported. Up to 100 instances per request is allowed.
+* You can use the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) to query the operation result. If the `LatestOperationState` in the response is `SUCCESS`, the operation is successful.
+     * @param {ModifyInstancesProjectRequest} req
+     * @param {function(string, ModifyInstancesProjectResponse):void} cb
+     * @public
+     */
+    ModifyInstancesProject(req, cb) {
+        let resp = new ModifyInstancesProjectResponse();
+        this.request("ModifyInstancesProject", req, resp, cb);
     }
 
     /**

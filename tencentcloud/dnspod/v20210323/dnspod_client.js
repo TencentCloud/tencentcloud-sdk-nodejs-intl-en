@@ -67,7 +67,7 @@ const DeleteRecordGroupResponse = models.DeleteRecordGroupResponse;
 const RecordInfo = models.RecordInfo;
 const CreateRecordBatchDetail = models.CreateRecordBatchDetail;
 const DescribeSubdomainAnalyticsResponse = models.DescribeSubdomainAnalyticsResponse;
-const ModifyRecordResponse = models.ModifyRecordResponse;
+const DescribeRecordLineCategoryListRequest = models.DescribeRecordLineCategoryListRequest;
 const ModifyRecordToGroupResponse = models.ModifyRecordToGroupResponse;
 const ModifyDomainUnlockResponse = models.ModifyDomainUnlockResponse;
 const DescribeDomainLogListRequest = models.DescribeDomainLogListRequest;
@@ -75,6 +75,7 @@ const DescribeDomainListResponse = models.DescribeDomainListResponse;
 const ModifyRecordBatchRequest = models.ModifyRecordBatchRequest;
 const DeleteRecordResponse = models.DeleteRecordResponse;
 const CreateRecordBatchRecord = models.CreateRecordBatchRecord;
+const DescribeRecordLineCategoryListResponse = models.DescribeRecordLineCategoryListResponse;
 const CreateDomainResponse = models.CreateDomainResponse;
 const DomainCountInfo = models.DomainCountInfo;
 const ModifyRecordBatchResponse = models.ModifyRecordBatchResponse;
@@ -88,6 +89,7 @@ const SubdomainAnalyticsInfo = models.SubdomainAnalyticsInfo;
 const ModifyRecordBatchDetail = models.ModifyRecordBatchDetail;
 const DeleteDomainBatchDetail = models.DeleteDomainBatchDetail;
 const CreateDomainRequest = models.CreateDomainRequest;
+const ModifyRecordResponse = models.ModifyRecordResponse;
 const DescribeDomainShareInfoResponse = models.DescribeDomainShareInfoResponse;
 const ModifyDomainRemarkRequest = models.ModifyDomainRemarkRequest;
 const CreateDomainAliasResponse = models.CreateDomainAliasResponse;
@@ -115,8 +117,11 @@ const DescribeDomainPurviewRequest = models.DescribeDomainPurviewRequest;
 const CreateDomainBatchDetail = models.CreateDomainBatchDetail;
 const ModifyDomainUnlockRequest = models.ModifyDomainUnlockRequest;
 const ModifyDomainLockResponse = models.ModifyDomainLockResponse;
+const DeletePackageOrderResponse = models.DeletePackageOrderResponse;
+const LineItem = models.LineItem;
 const LockInfo = models.LockInfo;
 const CreateRecordGroupResponse = models.CreateRecordGroupResponse;
+const DeletePackageOrderRequest = models.DeletePackageOrderRequest;
 const DescribeDomainShareInfoRequest = models.DescribeDomainShareInfoRequest;
 
 
@@ -296,6 +301,17 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
+     * This API is used to set the remarks of a domain.
+     * @param {ModifyDomainRemarkRequest} req
+     * @param {function(string, ModifyDomainRemarkResponse):void} cb
+     * @public
+     */
+    ModifyDomainRemark(req, cb) {
+        let resp = new ModifyDomainRemarkResponse();
+        this.request("ModifyDomainRemark", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a record group.
      * @param {ModifyRecordGroupRequest} req
      * @param {function(string, ModifyRecordGroupResponse):void} cb
@@ -315,6 +331,17 @@ class DnspodClient extends AbstractClient {
     DescribeDomain(req, cb) {
         let resp = new DescribeDomainResponse();
         this.request("DescribeDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable the paid plan on the international website.
+     * @param {DeletePackageOrderRequest} req
+     * @param {function(string, DeletePackageOrderResponse):void} cb
+     * @public
+     */
+    DeletePackageOrder(req, cb) {
+        let resp = new DeletePackageOrderResponse();
+        this.request("DeletePackageOrder", req, resp, cb);
     }
 
     /**
@@ -406,14 +433,14 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set the remarks of a domain.
-     * @param {ModifyDomainRemarkRequest} req
-     * @param {function(string, ModifyDomainRemarkResponse):void} cb
+     * This API is used to return a line list by category.
+     * @param {DescribeRecordLineCategoryListRequest} req
+     * @param {function(string, DescribeRecordLineCategoryListResponse):void} cb
      * @public
      */
-    ModifyDomainRemark(req, cb) {
-        let resp = new ModifyDomainRemarkResponse();
-        this.request("ModifyDomainRemark", req, resp, cb);
+    DescribeRecordLineCategoryList(req, cb) {
+        let resp = new DescribeRecordLineCategoryListResponse();
+        this.request("DescribeRecordLineCategoryList", req, resp, cb);
     }
 
     /**

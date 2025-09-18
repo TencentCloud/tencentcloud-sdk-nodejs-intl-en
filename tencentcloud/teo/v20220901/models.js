@@ -5140,11 +5140,11 @@ Note: If `Type` is `CUSTOM_NUM` or `CUSTOM_STRING`, this parameter will be an em
 
         /**
          * The parameter value type.
-<Li>`CHOICE`: the parameter value can only be selected from `choicesvalue`.</li>.
-<Li>TOGGLE: the parameter value is of switch type and can be selected from `choicesvalue`.</li>.
-<Li>OBJECT: the parameter value is of object type, and `choiceproperties` are the properties associated with this object type.</li>.
-<Li>`CUSTOM_NUM`: (integer) custom value.</li>.
-<Li> custom_string: parameter value is user-customized, string type.</li> note: when the parameter type is object, please refer to [example 2: creating a parameter of object type](https://intl.cloud.tencent.com/document/product/1552/80622?from_cn_redirect=1#.e7.a4.ba.e4.be.8b2-.e4.bf.ae.e6.94.b9.e6.ba.90.e7.ab.99.e4.b8.baip.e5.9f.9f.e5.90.8d).
+<Li>`CHOICE`: the parameter value can only be selected from `choicesvalue`.</li>
+<Li>TOGGLE: the parameter value is of switch type and can be selected from `choicesvalue`.</li>
+<Li>OBJECT: the parameter value is of object type, and `choiceproperties` are the properties associated with this object type.</li>
+<Li>`CUSTOM_NUM`: (integer) custom value.</li>
+<Li> custom_string: parameter value is user-customized, string type.</li> 
          * @type {string || null}
          */
         this.Type = null;
@@ -23318,13 +23318,13 @@ class JustInTimeTranscodeTemplate extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
-         * Template creation time. uses [ISO date format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * Template creation time. uses [ISO date format](https://www.tencentcloud.com/zh/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Template last modified time. uses [ISO date format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#I).
+         * Template last modified time. uses [ISO date format](https://www.tencentcloud.com/zh/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
          * @type {string || null}
          */
         this.UpdateTime = null;

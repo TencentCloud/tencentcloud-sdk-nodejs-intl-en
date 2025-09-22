@@ -47,7 +47,6 @@ const SmartSubtitleTaskTransTextResultOutput = models.SmartSubtitleTaskTransText
 const ManageTaskResponse = models.ManageTaskResponse;
 const DeleteWorkflowRequest = models.DeleteWorkflowRequest;
 const AwsS3FileUploadTrigger = models.AwsS3FileUploadTrigger;
-const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const NumberFormat = models.NumberFormat;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
@@ -60,6 +59,7 @@ const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
 const DescribeAsrHotwordsRequest = models.DescribeAsrHotwordsRequest;
 const AudioTrackChannelInfo = models.AudioTrackChannelInfo;
 const DiagnoseResult = models.DiagnoseResult;
+const SmartEraseTaskInput = models.SmartEraseTaskInput;
 const RawWatermarkParameter = models.RawWatermarkParameter;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const AiSampleWord = models.AiSampleWord;
@@ -75,7 +75,6 @@ const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const ModifyScheduleRequest = models.ModifyScheduleRequest;
 const MediaMetaData = models.MediaMetaData;
-const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
@@ -84,6 +83,7 @@ const SuperResolutionConfig = models.SuperResolutionConfig;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
+const SmartEraseTaskResult = models.SmartEraseTaskResult;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const ComposeMediaConfig = models.ComposeMediaConfig;
@@ -149,7 +149,7 @@ const ScheduleRecognitionTaskResult = models.ScheduleRecognitionTaskResult;
 const ImageProcessTaskOutput = models.ImageProcessTaskOutput;
 const ComposeTargetInfo = models.ComposeTargetInfo;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
-const DisableScheduleRequest = models.DisableScheduleRequest;
+const ExtractBlindWatermarkTask = models.ExtractBlindWatermarkTask;
 const AiAnalysisTaskHorizontalToVerticalResult = models.AiAnalysisTaskHorizontalToVerticalResult;
 const CosOutputStorage = models.CosOutputStorage;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
@@ -160,6 +160,7 @@ const CreateScheduleRequest = models.CreateScheduleRequest;
 const ParseNotificationRequest = models.ParseNotificationRequest;
 const ImageEraseConfig = models.ImageEraseConfig;
 const CreateWordSamplesRequest = models.CreateWordSamplesRequest;
+const SmartEraseWatermarkConfig = models.SmartEraseWatermarkConfig;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
 const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
@@ -210,6 +211,7 @@ const RawTranscodeParameter = models.RawTranscodeParameter;
 const LiveStreamTaskNotifyConfig = models.LiveStreamTaskNotifyConfig;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const ComposeSubtitleStyle = models.ComposeSubtitleStyle;
+const SmartErasePrivacyConfig = models.SmartErasePrivacyConfig;
 const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
 const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const BatchProcessMediaRequest = models.BatchProcessMediaRequest;
@@ -225,6 +227,7 @@ const ComposeAudioItem = models.ComposeAudioItem;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
 const LiveScheduleTask = models.LiveScheduleTask;
 const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
+const AiAnalysisTaskDubbingOutput = models.AiAnalysisTaskDubbingOutput;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const DescribeQualityControlTemplatesRequest = models.DescribeQualityControlTemplatesRequest;
@@ -243,6 +246,7 @@ const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextRe
 const AiAnalysisTaskSegmentOutput = models.AiAnalysisTaskSegmentOutput;
 const ComposeVideoItem = models.ComposeVideoItem;
 const LiveStreamOcrFullTextRecognitionResult = models.LiveStreamOcrFullTextRecognitionResult;
+const VODOutputStorage = models.VODOutputStorage;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const AiRecognitionTaskTransTextResultInput = models.AiRecognitionTaskTransTextResultInput;
 const DescribeSchedulesResponse = models.DescribeSchedulesResponse;
@@ -259,6 +263,7 @@ const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
+const VODInputInfo = models.VODInputInfo;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const ModifyQualityControlTemplateResponse = models.ModifyQualityControlTemplateResponse;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
@@ -272,6 +277,7 @@ const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const ScheduleSmartSubtitleTaskResult = models.ScheduleSmartSubtitleTaskResult;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
+const EraseArea = models.EraseArea;
 const TEHDConfig = models.TEHDConfig;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
@@ -286,7 +292,7 @@ const ScheduleAnalysisTaskResult = models.ScheduleAnalysisTaskResult;
 const ComposeMediaItem = models.ComposeMediaItem;
 const ScheduleQualityControlTaskResult = models.ScheduleQualityControlTaskResult;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
-const LiveActivityResItem = models.LiveActivityResItem;
+const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const EnableScheduleResponse = models.EnableScheduleResponse;
 const SecurityGroupInfo = models.SecurityGroupInfo;
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
@@ -302,6 +308,7 @@ const RawImageWatermarkInput = models.RawImageWatermarkInput;
 const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const CreateQualityControlTemplateRequest = models.CreateQualityControlTemplateRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
+const RawSmartEraseParameter = models.RawSmartEraseParameter;
 const ScheduleExecRuleTaskResult = models.ScheduleExecRuleTaskResult;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const EditMediaTask = models.EditMediaTask;
@@ -313,6 +320,7 @@ const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const DescribeAsrHotwordsListResponse = models.DescribeAsrHotwordsListResponse;
 const AiAnalysisResult = models.AiAnalysisResult;
 const SmartSubtitleTaskResultInput = models.SmartSubtitleTaskResultInput;
+const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
 const ProcessImageRequest = models.ProcessImageRequest;
@@ -330,7 +338,8 @@ const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
 const ExecRuleTaskData = models.ExecRuleTaskData;
 const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
-const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
+const LiveStreamAiRecognitionResultItem = models.LiveStreamAiRecognitionResultItem;
+const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
 const DeleteScheduleRequest = models.DeleteScheduleRequest;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
@@ -364,6 +373,7 @@ const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
 const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
 const SmartSubtitleTaskAsrFullTextResultOutput = models.SmartSubtitleTaskAsrFullTextResultOutput;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
+const ExtractBlindWatermarkTaskConfig = models.ExtractBlindWatermarkTaskConfig;
 const ImageEncodeConfig = models.ImageEncodeConfig;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
@@ -406,6 +416,7 @@ const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const ArtifactRepairConfig = models.ArtifactRepairConfig;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeBatchTaskDetailResponse = models.DescribeBatchTaskDetailResponse;
+const AiAnalysisTaskDubbingInput = models.AiAnalysisTaskDubbingInput;
 const ComposeCanvas = models.ComposeCanvas;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const CreateWorkflowResponse = models.CreateWorkflowResponse;
@@ -447,7 +458,7 @@ const AiAnalysisTaskFrameTagInput = models.AiAnalysisTaskFrameTagInput;
 const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegmentItem;
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
-const LiveStreamAiRecognitionResultItem = models.LiveStreamAiRecognitionResultItem;
+const AiAnalysisTaskDubbingResult = models.AiAnalysisTaskDubbingResult;
 const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
 const LiveScheduleLiveRecordTaskResult = models.LiveScheduleLiveRecordTaskResult;
 const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
@@ -466,6 +477,7 @@ const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOff
 const AsrHotWordsConfigure = models.AsrHotWordsConfigure;
 const ImageAreaBoxInfo = models.ImageAreaBoxInfo;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
+const SmartEraseSubtitleConfig = models.SmartEraseSubtitleConfig;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
@@ -528,6 +540,7 @@ const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqment
 const ImageDenoiseConfig = models.ImageDenoiseConfig;
 const VideoDenoiseConfig = models.VideoDenoiseConfig;
 const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
+const DisableScheduleRequest = models.DisableScheduleRequest;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const ParseLiveStreamProcessNotificationRequest = models.ParseLiveStreamProcessNotificationRequest;
@@ -555,6 +568,8 @@ const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOff
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const ActivityResItem = models.ActivityResItem;
+const LiveActivityResItem = models.LiveActivityResItem;
+const EraseTimeArea = models.EraseTimeArea;
 const SpekeDrm = models.SpekeDrm;
 const AiAnalysisTaskDelLogoResult = models.AiAnalysisTaskDelLogoResult;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
@@ -765,18 +780,20 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to initiate a processing task for video URLs or media files in COS. Features include:
-1. Video transcoding (standard transcoding, TSC transcoding, and audio/video enhancement).
-2. Video-to-GIF conversion.
-3. Time point screenshot of videos.
-4. Sampled screenshot of videos.
-5. Image sprite of videos.
-6. Adaptive bitrate stream conversion for videos.
-7. Intelligent content moderation (such as pornography detection and sensitive information detection).
-8. Intelligent content analysis (such as tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking).
-9. Intelligent content recognition (such as human face, full text, text keyword, full speech, speech keyword, speech translation, and object).
-10. Media quality inspection, such as media format diagnosis, audio/visual content moderation (such as jitter, blur, low lighting, overexposure, black edge, white edge, black screen, white screen, screen glitch, noise, mosaic, and QR code), and no-reference quality scoring.
-11. Smart subtitle (such as full speech, speech hotword, and speech translation).
+     * This API is used to initiate a processing task for URL video links or media files in COS. Features include:.
+This API is used to perform video transcoding, including standard transcoding, TSC transcoding, and audio/video enhancement.
+This API is used to generate animated images.
+This API is used to take screenshots at specified time points.
+This API is used to take sampled screenshots from videos.
+This API is used to take sprite screenshots of videos.
+This API is used to transcode to adaptive bitrate streaming.
+This API is used to perform intelligent content moderation, such as pornography detection and sensitive information detection.
+This API is used to perform intelligent content analysis such as tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking.
+This API is used to perform intelligent content recognition such as human face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition.
+This API is used to perform media quality inspection, such as media format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, screen glitch, noise, mosaic, QR code, and other issues), and no-reference scoring.
+11. Smart subtitle (such as ASR, hotword, and speech translation).
+
+This API is used to perform intelligent erasure (watermark removal, subtitle removal, privacy protection).
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public
@@ -1392,18 +1409,23 @@ Note: A workflow is disabled upon creation. You need to manually enable it.
     }
 
     /**
-     * This API is used to create a scheme for media files uploaded to a specified COS bucket. A scheme may include the following tasks:
-1. Video transcoding (with watermark)
-2. Animated screenshot generating
-3. Time point screencapturing
-4. Sampled screencapturing
-5. Image sprite generating
-6. Adaptive bitrate streaming
-7. Intelligent content moderation (detection of pornographic and sensitive content)
-8. Intelligent content analysis (labeling, categorization, thumbnail generation, labeling by frame)
-9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
+     * This API is used to set processing rules for uploaded media files under the specified Bucket directory in COS, including:.
+This API is used to transcode videos with watermarks.
+This API is used to generate animated images.
+This API is used to take screenshots at specified time points.
+This API is used to take sampled screenshots from videos.
+This API is used to take sprite screenshots of videos.
+This API is used to transcode to adaptive bitrate streaming.
+This API is used to perform intelligent content moderation, including porn detection and sensitive information detection.
+This API is used to perform intelligent content analysis (tag, category, cover, frame tagging).
+This API is used to perform intelligent content identification (human face, full text, text keyword, full speech, speech keyword).
+10. Media quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
 
-Note: A scheme is disabled upon creation. You need to manually enable it.
+11. Smart subtitle (full speech, speech hotword, and speech translation).
+
+This API is used to perform intelligent erasure (watermark removal, subtitle removal, privacy protection).
+
+This API is used to create an orchestration, which is in disable status by default and requires manual enablement.
      * @param {CreateScheduleRequest} req
      * @param {function(string, CreateScheduleResponse):void} cb
      * @public

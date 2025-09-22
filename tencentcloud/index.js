@@ -20,6 +20,7 @@ module.exports = {
     cdn: require("./cdn"),
     cdwdoris: require("./cdwdoris"),
     cdwpg: require("./cdwpg"),
+    cdz: require("./cdz"),
     cfg: require("./cfg"),
     cfs: require("./cfs"),
     cfw: require("./cfw"),

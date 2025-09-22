@@ -1846,6 +1846,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SubtitlePath = null;
 
+        /**
+         * Subtitle file storage location.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
     }
 
     /**
@@ -1865,6 +1871,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             }
         }
         this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
 
     }
 }
@@ -1999,54 +2011,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new AwsSQS();
             obj.deserialize(params.AwsSQS)
             this.AwsSQS = obj;
-        }
-
-    }
-}
-
-/**
- * Result information of intelligent cover generating
- * @class
- */
-class AiAnalysisTaskCoverOutput extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of intelligently generated covers.
-         * @type {Array.<MediaAiAnalysisCoverItem> || null}
-         */
-        this.CoverSet = null;
-
-        /**
-         * Storage location of intelligently generated cover.
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CoverSet) {
-            this.CoverSet = new Array();
-            for (let z in params.CoverSet) {
-                let obj = new MediaAiAnalysisCoverItem();
-                obj.deserialize(params.CoverSet[z]);
-                this.CoverSet.push(obj);
-            }
-        }
-
-        if (params.OutputStorage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.OutputStorage)
-            this.OutputStorage = obj;
         }
 
     }
@@ -2426,10 +2390,11 @@ class MediaInputInfo extends  AbstractModel {
         super();
 
         /**
-         * The input type. Valid values:
-<li>`COS`: A COS bucket address.</li>
-<li> `URL`: A URL.</li>
-<li> `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.</li>
+         * Type of input source object. valid values:.
+<Li>COS: specifies the cos origin.</li>
+<Li>URL: the url source.</li>
+<Li>AWS-S3: aws source. currently only supports transcoding tasks.</li>
+<Li>VOD: video-on-demand pro edition (VOD Pro). </li>
          * @type {string || null}
          */
         this.Type = null;
@@ -2453,6 +2418,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          * @type {S3InputInfo || null}
          */
         this.S3InputInfo = null;
+
+        /**
+         * The information of the VOD Pro object processed. This parameter is required if `Type` is `VOD`.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {VODInputInfo || null}
+         */
+        this.VODInputInfo = null;
 
     }
 
@@ -2481,6 +2453,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new S3InputInfo();
             obj.deserialize(params.S3InputInfo)
             this.S3InputInfo = obj;
+        }
+
+        if (params.VODInputInfo) {
+            let obj = new VODInputInfo();
+            obj.deserialize(params.VODInputInfo)
+            this.VODInputInfo = obj;
         }
 
     }
@@ -2900,6 +2878,76 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Description = 'Description' in params ? params.Description : null;
         this.DateTime = 'DateTime' in params ? params.DateTime : null;
         this.SeverityLevel = 'SeverityLevel' in params ? params.SeverityLevel : null;
+
+    }
+}
+
+/**
+ * Smart erasure task.
+ * @class
+ */
+class SmartEraseTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Smart erasure template id.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Intelligent erasure custom parameter. valid when Definition is 0. this parameter is used for highly custom scenarios. we recommend you prioritize using Definition to specify intelligent erasure parameters.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {RawSmartEraseParameter || null}
+         */
+        this.RawParameter = null;
+
+        /**
+         * Specifies the target storage for files. if left blank, it inherits the upper-level OutputStorage value.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * Output path of the file, which can be a relative or absolute path.
+Specifies the output path must end with `.{format}`. variable names, please refer to [filename variable explanation](https://www.tencentcloud.com/document/product/1041/33495?has_map=1).
+**Relative path example**:
+<Li>Filename_{Variable name}.{format}</li>
+<li>Filename.{format}</li>
+
+**Absolute path example**:
+<Li>/Custom path/filename_{variable name}.{format}</li>
+
+**Note**: currently does not support the `BatchProcessMedia` api.
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.RawParameter) {
+            let obj = new RawSmartEraseParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
 
     }
 }
@@ -3992,74 +4040,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribePersonSamples request structure.
- * @class
- */
-class DescribePersonSamplesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Type of images to pull. Valid values:
-<li>UserDefine: custom image library</li>
-<li>Default: default image library</li>
-
-Default value: UserDefine. Samples in the custom image library will be pulled.
-Note: you can pull the default image library only using the image name or a combination of the image name and ID, and only one face image is returned.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Image ID. Array length limit: 100
-         * @type {Array.<string> || null}
-         */
-        this.PersonIds = null;
-
-        /**
-         * Image name. Array length limit: 20
-         * @type {Array.<string> || null}
-         */
-        this.Names = null;
-
-        /**
-         * Image tag. Array length limit: 20
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Paging offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 100. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.PersonIds = 'PersonIds' in params ? params.PersonIds : null;
-        this.Names = 'Names' in params ? params.Names : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
  * Control parameter of intelligent categorization task
  * @class
  */
@@ -4502,6 +4482,95 @@ Note: when this field return null, means no valid values can be obtained.
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.Sign = 'Sign' in params ? params.Sign : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Smart erasure task result.
+ * @class
+ */
+class SmartEraseTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.comom/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input of the smart erasure task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartEraseTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of the smart erasure task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AiAnalysisTaskDelLogoOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * Task progress.		
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Task execution start time in ISO datetime format.
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * Task execution completion time in ISO datetime format.
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SmartEraseTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskDelLogoOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
     }
 }
@@ -8091,18 +8160,69 @@ class MediaProcessTaskInput extends  AbstractModel {
 }
 
 /**
- * DisableSchedule request structure.
+ * Extract video digital watermark task information.
  * @class
  */
-class DisableScheduleRequest extends  AbstractModel {
+class ExtractBlindWatermarkTask extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The scheme ID.
+         * Media processing task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task flow status. valid values:.
+<Li>WAITING: waiting.</li>.
+<Li>PROCESSING: processing.</li>.
+<li>FINISH: completed</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. `0` indicates success. other values indicate failure.
          * @type {number || null}
          */
-        this.ScheduleId = null;
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Target file information for media processing.
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * Specifies the digital watermark type. valid values: <li>blind-basic: basic version copyright digital watermark;</li> <li>blind-ab: ab copyright digital watermark.</li>.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Indicates whether a watermark is detected. if this parameter is true, the Result field will return the watermark extraction Result. if this parameter is false, the Result field will not return.
+         * @type {boolean || null}
+         */
+        this.IsDetected = null;
+
+        /**
+         * Fetched watermark content. this field will not be returned when no detection.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * Extracts the digital watermark configuration.
+         * @type {ExtractBlindWatermarkTaskConfig || null}
+         */
+        this.ExtractBlindWatermarkConfig = null;
 
     }
 
@@ -8113,7 +8233,25 @@ class DisableScheduleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.IsDetected = 'IsDetected' in params ? params.IsDetected : null;
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.ExtractBlindWatermarkConfig) {
+            let obj = new ExtractBlindWatermarkTaskConfig();
+            obj.deserialize(params.ExtractBlindWatermarkConfig)
+            this.ExtractBlindWatermarkConfig = obj;
+        }
 
     }
 }
@@ -8594,6 +8732,86 @@ class CreateWordSamplesRequest extends  AbstractModel {
                 let obj = new AiSampleWordInfo();
                 obj.deserialize(params.Words[z]);
                 this.Words.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * smart erasure template watermark configuration.
+ * @class
+ */
+class SmartEraseWatermarkConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the watermark removal method.
+**Auto-Removal:** automatically identifies watermarks in the video using model a and generates a new video after removal. suitable for dynamic watermarks.
+When using automated removal, if you do not specify AutoAreas, the full-screen video will be erased automatically. if AutoAreas is specified, it will change to erase the designated areas.
+**Specified area erasure:** for static watermarks with fixed locations, we recommend you directly specify the erasure area.
+When you choose specified area erasure, import at least one specified region.
+
+-Automated removal.
+-Specifies the custom specified area erasure.
+         * @type {string || null}
+         */
+        this.WatermarkEraseMethod = null;
+
+        /**
+         * Specifies the watermark removal model.
+Basic version: average effect, cost-effective, suitable for videos with clean backgrounds or animations.
+Advanced edition: better effectiveness, suitable for mini-drama and reality style video.
+**Supported values**:
+- basic
+- advanced
+         * @type {string || null}
+         */
+        this.WatermarkModel = null;
+
+        /**
+         * Specifies automatic removal of a custom region.
+Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
+Note that this parameter will not take effect when the removal method is custom.
+         * @type {Array.<EraseArea> || null}
+         */
+        this.AutoAreas = null;
+
+        /**
+         * Specifies erasure of a custom region.
+Detects and directly performs removal within a specified time range for the selected region.
+         * @type {Array.<EraseTimeArea> || null}
+         */
+        this.CustomAreas = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkEraseMethod = 'WatermarkEraseMethod' in params ? params.WatermarkEraseMethod : null;
+        this.WatermarkModel = 'WatermarkModel' in params ? params.WatermarkModel : null;
+
+        if (params.AutoAreas) {
+            this.AutoAreas = new Array();
+            for (let z in params.AutoAreas) {
+                let obj = new EraseArea();
+                obj.deserialize(params.AutoAreas[z]);
+                this.AutoAreas.push(obj);
+            }
+        }
+
+        if (params.CustomAreas) {
+            this.CustomAreas = new Array();
+            for (let z in params.CustomAreas) {
+                let obj = new EraseTimeArea();
+                obj.deserialize(params.CustomAreas[z]);
+                this.CustomAreas.push(obj);
             }
         }
 
@@ -11459,6 +11677,45 @@ The default value is an empty string, which means the subtitles will not have a 
 }
 
 /**
+ * Intelligent erasure template privacy protection configuration.
+ * @class
+ */
+class SmartErasePrivacyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the privacy protection removal method.
+-Blur: specifies the blur detection.
+-Specifies the mosaic.
+         * @type {string || null}
+         */
+        this.PrivacyModel = null;
+
+        /**
+         * Privacy protection objective. no need to import an array when in use on API Explorer. just add the corresponding item and fill in the value.
+-Human face.
+-License plate.
+         * @type {Array.<string> || null}
+         */
+        this.PrivacyTargets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PrivacyModel = 'PrivacyModel' in params ? params.PrivacyModel : null;
+        this.PrivacyTargets = 'PrivacyTargets' in params ? params.PrivacyTargets : null;
+
+    }
+}
+
+/**
  * Control parameter of a porn information detection in text task.
  * @class
  */
@@ -11757,9 +12014,10 @@ class TaskOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * The storage type for a media processing output file. Valid values:
-<li>`COS`: Tencent Cloud COS</li>
-<li>`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
+         * Specifies the type of storage location for the media processing service output object. valid values:.
+<Li>COS: cos storage.</li>.
+<Li>AWS-S3: aws storage, suitable for aws tasks only and requires the same region.</li>.
+<Li>VOD: video-on-demand (vod) pro edition</li>.
          * @type {string || null}
          */
         this.Type = null;
@@ -11777,6 +12035,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          * @type {S3OutputStorage || null}
          */
         this.S3OutputStorage = null;
+
+        /**
+         * The VOD Pro application and bucket to save the output file. This parameter is required if `Type` is `VOD`.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {VODOutputStorage || null}
+         */
+        this.VODOutputStorage = null;
 
     }
 
@@ -11799,6 +12064,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new S3OutputStorage();
             obj.deserialize(params.S3OutputStorage)
             this.S3OutputStorage = obj;
+        }
+
+        if (params.VODOutputStorage) {
+            let obj = new VODOutputStorage();
+            obj.deserialize(params.VODOutputStorage)
+            this.VODOutputStorage = obj;
         }
 
     }
@@ -12274,6 +12545,54 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
                 obj.deserialize(params.SegmentSet[z]);
                 this.SegmentSet.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * Intelligent translation result information.
+ * @class
+ */
+class AiAnalysisTaskDubbingOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the video path for translation.
+         * @type {string || null}
+         */
+        this.VideoPath = null;
+
+        /**
+         * Specifies the file path of the tag.
+
+         * @type {string || null}
+         */
+        this.SpeakerPath = null;
+
+        /**
+         * Specifies the storage location of the transcoded video.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoPath = 'VideoPath' in params ? params.VideoPath : null;
+        this.SpeakerPath = 'SpeakerPath' in params ? params.SpeakerPath : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
         }
 
     }
@@ -12965,68 +13284,70 @@ class QualityControlItemConfig extends  AbstractModel {
         super();
 
         /**
-         * Quality control item name. The quality control item values are as follows:
-<li>LowEvaluation: No reference score.</li>
-<li>Mosaic: Mosaic detection.</li>
-<li>CrashScreen: Screen crash detection.</li>
-<li>Blur: Blur detection.</li>
-<li>BlackWhiteEdge: Black and white edge detection.</li>
-<li>SolidColorScreen: Solid color screen detection.</li>
-<li>LowLighting: Low lighting.</li>
-<li>HighLighting: Overexposure.</li>
-<li>NoVoice: Silence detection.</li>
-<li>LowVoice: Low voice detection.</li>
-<li>HighVoice: High voice detection.</li>
-<li>Jitter: Jitter detection.</li>
-<li>Noise: Noise detection.</li>
-<li>QRCode: QR code detection.</li>
-<li>BarCode: Barcode detection.</li>
-<li>AppletCode: Applet code detection.</li>
-<li>VideoResolutionChanged: The video resolution changed.</li>
-<li>AudioSampleRateChanged: The audio sampling rate changed.</li>
-<li>AudioChannelsChanged: The audio channel count changed.</li>
-<li>ParameterSetsChanged: The stream parameter set information changed.</li>
-<li>DarOrSarInvalid: Abnormal video aspect ratio.</li>
-<li>TimestampFallback: DTS timestamp fallback.</li>
-<li>DtsJitter: Excessive DTS jitter.</li>
-<li>PtsJitter: Excessive PTS jitter.</li>
-<li>AACDurationDeviation: Unreasonable AAC frame timestamp interval.</li>
-<li>AudioDroppingFrames: Audio frame loss.</li>
-<li>VideoDroppingFrames: Video frame loss.</li>
-<li>AVTimestampInterleave: Unreasonable audio and video interleaving.</li>
-<li>PtsLessThanDts: The PTS of media streams is less than DTS.</li>
-<li>ReceiveFpsJitter: Excessive jitter of the frame rate received by the network.</li>
-<li>ReceiveFpsTooSmall: Too low video frame rate received by the network.</li>
-<li>FpsJitter: Excessive stream frame rate jitter calculated through PTS.</li>
-<li>StreamOpenFailed: Stream opening failed.</li>
-<li>StreamEnd: The stream ended.</li>
-<li>StreamParseFailed: Stream parsing failed.</li>
-<li>VideoFirstFrameNotIdr: The first frame is not an IDR frame.</li>
-<li>StreamNALUError: NALU start code error.</li>
-<li>TsStreamNoAud: The H26x stream of MPEGTS lacks AUD NALU.</li>
-<li>AudioStreamLack: No audio stream.</li>
-<li>VideoStreamLack: No video stream.</li>
-<li>LackAudioRecover: Lack of audio stream recovery.</li>
-<li>LackVideoRecover: Lack of video stream recovery.</li>
-<li>VideoBitrateOutofRange: Out-of-range video stream bitrate (kbps).</li>
-<li>AudioBitrateOutofRange: Out-of-range audio stream bitrate (kbps).</li>
-<li>VideoDecodeFailed: Video decoding error.</li>
-<li>AudioDecodeFailed: Audio decoding error.</li>
-<li>AudioOutOfPhase: Opposite phase in Dual-channel audio.</li>
-<li>VideoDuplicatedFrame: Duplicate frames in the video stream.</li>
-<li>AudioDuplicatedFrame: Duplicate frames in the audio stream.</li>
-<li>VideoRotation: Video image rotation.</li>
-<li>TsMultiPrograms: The MPEG2-TS stream has multiple programs.</li>
-<li>Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements.</li>
-<li>HLSBadM3u8Format: Invalid m3u8 file.</li>
-<li>HLSInvalidMasterM3u8: Invalid main m3u8 file.</li>
-<li>HLSInvalidMediaM3u8: Invalid media m3u8 file.</li>
-<li>HLSMasterM3u8Recommended: The main m3u8 file lacks parameters recommended by the standard.</li>
-<li>HLSMediaM3u8Recommended: The media m3u8 file lacks parameters recommended by the standard.</li>
-<li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY exists in the media m3u8 file.</li>
-<li>HLSMediaSegmentsStreamNumChange: The number of streams in the segment has changed.</li>
-<li>HLSMediaSegmentsPTSJitterDeviation: PTS jitter between segments without EXT-X-DISCONTINUITY.</li>
-<li>HLSMediaSegmentsDTSJitterDeviation: DTS jitter between segments without EXT-X-DISCONTINUITY.</li>
+         * Quality inspection item name. valid values:.
+<li>LowEvaluation: specifies the no-reference MOS score of the video.</li>.
+<li>AudioEvaluation: specifies the no-reference MOS score of the audio.</li>.
+<Li>Mosaic: mosaic detection.</li>.
+<Li>CrashScreen: specifies screen glitch detection.</li>.
+<Li>Blur: specifies blur detection.</li>.
+<Li>Jitter: jitter detection.</li>.
+<Li>Noise: noise detection.</li>.
+<Li>QRCode: qr code detection.</li>.
+<Li>BarCode: specifies barcode detection.</li>.
+<Li>AppletCode: specifies mini program code detection.</li>.
+<Li>BlackWhiteEdge: specifies black and white edge detection.</li>.
+<Li>SolidColorScreen: specifies solid color screen detection.</li>.
+<Li>LowLighting: specifies low light.</li>.
+<Li>HighLighting: overexposure.</li>.
+<Li>NoVoice: specifies silence detection.</li>.
+<Li>LowVoice: specifies bass detection.</li>.
+<Li>HighVoice: explosion noise detection.</li>.
+<Li>AudioNoise: specifies audio noise detection.</li>.
+<Li>VideoResolutionChanged: specifies the video resolution change.</li>.
+<Li>AudioSampleRateChanged: specifies the audio sample rate change.</li>.
+<Li>AudioChannelsChanged: indicates the audio channel quantity change.</li>.
+<Li>ParameterSetsChanged: indicates the stream parameter set information has changed.</li>.
+<Li>DarOrSarInvalid: indicates an abnormal video aspect ratio.</li>.
+<li>TimestampFallback: specifies DTS timestamp rollback.</li>.
+<li>DtsJitter: specifies excessive DTS jitter.</li>.
+<li>PtsJitter: indicates excessive PTS jitter.</li>.
+<Li>AACDurationDeviation: specifies an improper aac frame timestamp interval.</li>.
+<Li>AudioDroppingFrames: indicates audio frame dropping.</li>.
+<Li>VideoDroppingFrames: specifies video frame dropping.</li>.
+<Li>AVTimestampInterleave: improper audio-video interleaving.</li>.
+<Li>PtsLessThanDts: specifies that the pts of the media stream is less than the dts.</li>.
+<Li>ReceiveFpsJitter: specifies excessive jitter in the network received frame rate.</li>.
+<Li>ReceiveFpsTooSmall: indicates the network received video frame rate is too low.</li>.
+<li>FpsJitter: specifies excessive jitter in the stream frame rate calculated via PTS.</li>.
+<Li>StreamOpenFailed: indicates the stream open failure.</li>.
+<Li>StreamEnd: specifies the stream end.</li>.
+<Li>StreamParseFailed: specifies the stream parsing failure.</li>.
+<li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>.
+<Li>StreamNALUError: indicates an nalu start code error.</li>.
+<li>TsStreamNoAud: specifies whether the mpegts H26x stream misses AUD NALU.</li>.
+<Li>AudioStreamLack: no audio stream.</li>.
+<Li>VideoStreamLack: no video stream.</li>.
+<Li>LackAudioRecover: specifies missing audio stream recovery.</li>.
+<Li>LackVideoRecover: missing video stream recovery.</li>.
+<Li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>.
+<Li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>.
+<Li>VideoDecodeFailed: indicates a video decoding error.</li>.
+<Li>AudioDecodeFailed: audio decoding error.</li>.
+<Li>AudioOutOfPhase: specifies opposite phase in dual-channel audio.</li>.
+<Li>VideoDuplicatedFrame: indicates duplicate frames in video streams.</li>.
+<Li>AudioDuplicatedFrame: indicates duplicate frames in audio streams.</li>.
+<Li>VideoRotation: specifies video rotation.</li>.
+<li>TsMultiPrograms: specifies multiple programs in MPEG2-TS streams.</li>.
+<li>Mp4InvalidCodecFourcc: specifies the codec fourcc in Mp4 does not meet Apple HLS requirements.</li>.
+<Li>HLSBadM3u8Format: invalid m3u8 file.</li>.
+<Li>HLSInvalidMasterM3u8: invalid main m3u8 file.</li>.
+<Li>HLSInvalidMediaM3u8: invalid media m3u8 file.</li>.
+<Li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main m3u8.</li>.
+<Li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media m3u8.</li>.
+<li>HLSMediaM3u8DiscontinuityExist: indicates the existence of EXT-X-DISCONTINUITY in media m3u8.</li>.
+<Li>HLSMediaSegmentsStreamNumChange: indicates the number of streams in segments changes.</li>.
+<li>HLSMediaSegmentsPTSJitterDeviation: indicates PTS jumps between segments without EXT-X-DISCONTINUITY.</li>.
+<li>HLSMediaSegmentsDTSJitterDeviation: indicates DTS jumps between segments without EXT-X-DISCONTINUITY.</li>.
 <li>TimecodeTrackExist: TMCD track in MP4.</li>
          * @type {string || null}
          */
@@ -13165,6 +13486,18 @@ Note 3: The trigger configured for an orchestration is for automatically startin
         this.AiQualityControlTask = null;
 
         /**
+         * Smart subtitle task.
+         * @type {SmartSubtitlesTaskInput || null}
+         */
+        this.SmartSubtitlesTask = null;
+
+        /**
+         * Smart erase task parameter.
+         * @type {SmartEraseTaskInput || null}
+         */
+        this.SmartEraseTask = null;
+
+        /**
          * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
          * @type {TaskNotifyConfig || null}
          */
@@ -13201,12 +13534,6 @@ Note 3: The trigger configured for an orchestration is for automatically startin
          * @type {string || null}
          */
         this.ResourceId = null;
-
-        /**
-         * Smart subtitle task.
-         * @type {SmartSubtitlesTaskInput || null}
-         */
-        this.SmartSubtitlesTask = null;
 
         /**
          * Whether to skip metadata acquisition. Valid values:
@@ -13271,6 +13598,18 @@ Default value: 0
             this.AiQualityControlTask = obj;
         }
 
+        if (params.SmartSubtitlesTask) {
+            let obj = new SmartSubtitlesTaskInput();
+            obj.deserialize(params.SmartSubtitlesTask)
+            this.SmartSubtitlesTask = obj;
+        }
+
+        if (params.SmartEraseTask) {
+            let obj = new SmartEraseTaskInput();
+            obj.deserialize(params.SmartEraseTask)
+            this.SmartEraseTask = obj;
+        }
+
         if (params.TaskNotifyConfig) {
             let obj = new TaskNotifyConfig();
             obj.deserialize(params.TaskNotifyConfig)
@@ -13281,12 +13620,6 @@ Default value: 0
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-
-        if (params.SmartSubtitlesTask) {
-            let obj = new SmartSubtitlesTaskInput();
-            obj.deserialize(params.SmartSubtitlesTask)
-            this.SmartSubtitlesTask = obj;
-        }
         this.SkipMateData = 'SkipMateData' in params ? params.SkipMateData : null;
 
     }
@@ -13618,6 +13951,48 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
         this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
+ * VOD Pro output object information for MPS.
+ * @class
+ */
+class VODOutputStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the destination Bucket ID for the generated output file of MPS.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Specifies the region of the target Bucket for the output.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * VOD Pro application Id.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -13956,37 +14331,39 @@ The value can only be 0 when TranslateSwitch is set to OFF. The value can only b
         this.SubtitleType = null;
 
         /**
-         * Source language of the video with smart subtitles.
-Supported languages:
-zh: Simplified Chinese
-en: English
-ja: Japanese
-ko: Korean
-zh-PY: Chinese-English-Cantonese
-zh-medical: Medical Chinese
-yue: Cantonese
-vi: Vietnamese
-ms: Malay
-id: Indonesian
-fil: Filipino
-th: Thai
-pt: Portuguese
-tr: Turkish
-ar: Arabic
-es: Spanish
+         * Video source language for intelligent caption.
+Valid values: 
+zh: Simplified Chinese.
+en: Eenglish.
+Ja: Japanese.
+Ko: Korean.
+zh-PY: Simplified Chinese, English and Cantonese.
+zh-medical: Medical Chinese.
+yue: Cantonese.
+Vi: Vietnamese.
+ms: Malay.
+id: Indonesian.
+fil: Filipino.
+th: Thai.
+pt: Portuguese.
+tr: Turkish.
+ar: Arabic.
+es: Spanish.
 hi: Hindi
-fr: French
-de: German
+Fr: French.
+de: German.
 zh-dialect: Chinese dialect
+zh_en: Simplified Chinese and English
+prime_zh: Simplified Chinese, Chinese Dialect and English.
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle file format.
-vtt: WebVTT format
+         * Intelligent subtitle file format.
+vtt: WebVTT format.
+srt: SRT format.
 If this field is left blank, no subtitle file will be generated.
-Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.SubtitleFormat = null;
@@ -14558,6 +14935,55 @@ class DeleteContentReviewTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VOD Pro object information for MPS.
+ * @class
+ */
+class VODInputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the Bucket ID where the input file resides.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Specifies the region where the input file's Bucket resides.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Path of the input file.
+         * @type {string || null}
+         */
+        this.Object = null;
+
+        /**
+         * VOD Pro application Id.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Object = 'Object' in params ? params.Object : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -15254,6 +15680,76 @@ class DescribeContentReviewTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * Smart erasure. coordinate configuration of the removal area.
+The region is defined by the coordinates of the upper left corner and the bottom-right corner.
+The coordinate origin is the top-left corner of the frame and the coordinate points can be specified using pixel values or percentage units.
+**For the Automatic Erasing Area:**
+When the unit is %, the coordinate range is [0,1].
+When unit is px, X value range is [0, video image width]. Y value range is [0, video image height].
+**For the Specified area erasing:**
+Specifies the coordinate range as [0,1) when the unit is %.
+When unit: px, X value range [0, video image width], Y value range [0, video image height].
+ * @class
+ */
+class EraseArea extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * X-Axis coordinate of the upper left corner.
+When Unit is set to 1 (percentage Unit), 0.05 indicates the horizontal distance from the upper left corner of the region to the top-left corner of the entire frame is 5% of the frame width.
+         * @type {number || null}
+         */
+        this.LeftTopX = null;
+
+        /**
+         * Y-Axis coordinate of the upper left corner.
+When Unit is set to 1 (using percentage Unit), 0.1 indicates the vertical distance from the top-left corner of the area to the top-left corner of the entire frame is 10% of the screen height.
+         * @type {number || null}
+         */
+        this.LeftTopY = null;
+
+        /**
+         * X-Axis coordinate of the bottom-right corner.
+When Unit is set to 1 (percentage Unit), 0.75 indicates the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.
+         * @type {number || null}
+         */
+        this.RightBottomX = null;
+
+        /**
+         * Y-Axis coordinate of the bottom-right corner.
+When Unit is set to 1 (using percentage Unit), 0.9 indicates the vertical distance from the bottom-right corner of the area to the top-left corner of the entire frame is 90% of the screen height.
+         * @type {number || null}
+         */
+        this.RightBottomY = null;
+
+        /**
+         * Specifies the coordinate unit.
+-Percentage.
+-2 pixel values.
+         * @type {number || null}
+         */
+        this.Unit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LeftTopX = 'LeftTopX' in params ? params.LeftTopX : null;
+        this.LeftTopY = 'LeftTopY' in params ? params.LeftTopY : null;
+        this.RightBottomX = 'RightBottomX' in params ? params.RightBottomX : null;
+        this.RightBottomY = 'RightBottomY' in params ? params.RightBottomY : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+    }
+}
+
+/**
  * TESHD parameter configuration.
  * @class
  */
@@ -15944,6 +16440,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SmartSubtitlesTask = null;
 
+        /**
+         * Smart erasure task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartEraseTaskInput || null}
+         */
+        this.SmartEraseTask = null;
+
     }
 
     /**
@@ -16024,6 +16527,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new SmartSubtitlesTaskInput();
             obj.deserialize(params.SmartSubtitlesTask)
             this.SmartSubtitlesTask = obj;
+        }
+
+        if (params.SmartEraseTask) {
+            let obj = new SmartEraseTaskInput();
+            obj.deserialize(params.SmartEraseTask)
+            this.SmartEraseTask = obj;
         }
 
     }
@@ -16565,26 +17074,53 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * The output of a live scheme subtask.
+ * DescribePersonSamples request structure.
  * @class
  */
-class LiveActivityResItem extends  AbstractModel {
+class DescribePersonSamplesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The output of a live recording task.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {LiveScheduleLiveRecordTaskResult || null}
+         * Type of images to pull. Valid values:
+<li>UserDefine: custom image library</li>
+<li>Default: default image library</li>
+
+Default value: UserDefine. Samples in the custom image library will be pulled.
+Note: you can pull the default image library only using the image name or a combination of the image name and ID, and only one face image is returned.
+         * @type {string || null}
          */
-        this.LiveRecordTask = null;
+        this.Type = null;
 
         /**
-         * Media quality inspection task output.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ScheduleQualityControlTaskResult || null}
+         * Image ID. Array length limit: 100
+         * @type {Array.<string> || null}
          */
-        this.LiveQualityControlTask = null;
+        this.PersonIds = null;
+
+        /**
+         * Image name. Array length limit: 20
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Image tag. Array length limit: 20
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Paging offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 100. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -16595,18 +17131,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.LiveRecordTask) {
-            let obj = new LiveScheduleLiveRecordTaskResult();
-            obj.deserialize(params.LiveRecordTask)
-            this.LiveRecordTask = obj;
-        }
-
-        if (params.LiveQualityControlTask) {
-            let obj = new ScheduleQualityControlTaskResult();
-            obj.deserialize(params.LiveQualityControlTask)
-            this.LiveQualityControlTask = obj;
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PersonIds = 'PersonIds' in params ? params.PersonIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -17516,6 +18046,79 @@ class AiSampleTagOperation extends  AbstractModel {
 }
 
 /**
+ * Smart erasure custom parameter.
+ * @class
+ */
+class RawSmartEraseParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the removal type.
+-subtitle removal.
+-Remove watermark.
+-privacy protection.
+         * @type {string || null}
+         */
+        this.EraseType = null;
+
+        /**
+         * Subtitle erasure configuration.
+When EraseType is subtitle, this field is required.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartEraseSubtitleConfig || null}
+         */
+        this.EraseSubtitleConfig = null;
+
+        /**
+         * Specifies the watermark removal configuration.
+When EraseType is watermark, this field is required.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartEraseWatermarkConfig || null}
+         */
+        this.EraseWatermarkConfig = null;
+
+        /**
+         * Privacy protection configuration.
+When EraseType is privacy, this field is required.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartErasePrivacyConfig || null}
+         */
+        this.ErasePrivacyConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EraseType = 'EraseType' in params ? params.EraseType : null;
+
+        if (params.EraseSubtitleConfig) {
+            let obj = new SmartEraseSubtitleConfig();
+            obj.deserialize(params.EraseSubtitleConfig)
+            this.EraseSubtitleConfig = obj;
+        }
+
+        if (params.EraseWatermarkConfig) {
+            let obj = new SmartEraseWatermarkConfig();
+            obj.deserialize(params.EraseWatermarkConfig)
+            this.EraseWatermarkConfig = obj;
+        }
+
+        if (params.ErasePrivacyConfig) {
+            let obj = new SmartErasePrivacyConfig();
+            obj.deserialize(params.ErasePrivacyConfig)
+            this.ErasePrivacyConfig = obj;
+        }
+
+    }
+}
+
+/**
  * Result type of the media quality inspection task.
  * @class
  */
@@ -18052,15 +18655,16 @@ class AiAnalysisResult extends  AbstractModel {
         super();
 
         /**
-         * Task type. Valid values:
-<li>Classification: intelligent classification.</li>
-<li>Cover: intelligent thumbnail generating.</li>
-<li>Tag: intelligent tagging.</li>
-<li>FrameTag: intelligent frame-by-frame tagging.</li>
-<li>Highlight: intelligent highlights generating.</li>
-
-<li>DeLogo: intelligent removal.</li>
+         * Task type. valid values:.
+<Li>Classification: intelligent classification.</li>.
+<Li>Cover: specifies the intelligent cover.</li>.
+<Li>Tag: intelligent tag.</li>.
+<Li>FrameTag: specifies intelligent frame-by-frame tagging.</li>.
+<Li>Highlight: intelligent highlights</li>.
+<Li>DeLogo: intelligent removal.</li>.
 <li>Description: large model summarization.</li>
+
+<Li>Dubbing: intelligent dubbing.</li>.
          * @type {string || null}
          */
         this.Type = null;
@@ -18130,6 +18734,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {AiAnalysisTaskHorizontalToVerticalResult || null}
          */
         this.HorizontalToVerticalTask = null;
+
+        /**
+         * The query result of a Dubbing task for video content analysis, which is valid when the task type is Dubbing.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AiAnalysisTaskDubbingResult || null}
+         */
+        this.DubbingTask = null;
 
     }
 
@@ -18202,6 +18813,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.HorizontalToVerticalTask = obj;
         }
 
+        if (params.DubbingTask) {
+            let obj = new AiAnalysisTaskDubbingResult();
+            obj.deserialize(params.DubbingTask)
+            this.DubbingTask = obj;
+        }
+
     }
 }
 
@@ -18243,6 +18860,64 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.RawParameter)
             this.RawParameter = obj;
         }
+
+    }
+}
+
+/**
+ * Input parameter of an image watermarking template
+ * @class
+ */
+class ImageWatermarkInputForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+         * @type {string || null}
+         */
+        this.ImageContent = null;
+
+        /**
+         * Watermark width. % and px formats are supported:
+<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
+<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * Height of a watermark, supporting two formats: % and px.
+<li>If a string ends with %, it indicates that the `Height` of a watermark is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
+<li>If a string ends with px, the `Height` of a watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+
+
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * Repeat type of an animated watermark. Valid values:
+<li>once: no longer appears after watermark playback ends.</li>
+<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
+<li>repeat (default): repeats the playback until the video ends.</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -19226,45 +19901,80 @@ Note: this parameter is not supported yet.
 }
 
 /**
- * Input parameter of an image watermarking template
+ * AI-based live stream recognition result
  * @class
  */
-class ImageWatermarkInputForUpdate extends  AbstractModel {
+class LiveStreamAiRecognitionResultItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
+         * Result type. Valid values:
+<li>FaceRecognition: face recognition.</li>
+<li>AsrWordsRecognition: speech keyword recognition.</li>
+<li>OcrWordsRecognition: text keyword recognition.</li>
+<li>AsrFullTextRecognition: full speech recognition.</li>
+<li>OcrFullTextRecognition: full text recognition.</li>
+<li>TransTextRecognition: speech translation.</li>
+
+<li>ObjectRecognition: object recognition.</li>
+<li>TagRecognition: highlights marking.</li>
          * @type {string || null}
          */
-        this.ImageContent = null;
+        this.Type = null;
 
         /**
-         * Watermark width. % and px formats are supported:
-<li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
-<li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
-         * @type {string || null}
+         * Face recognition result, which is valid when `Type` is
+`FaceRecognition`.
+         * @type {Array.<LiveStreamFaceRecognitionResult> || null}
          */
-        this.Width = null;
+        this.FaceRecognitionResultSet = null;
 
         /**
-         * Height of a watermark, supporting two formats: % and px.
-<li>If a string ends with %, it indicates that the `Height` of a watermark is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
-<li>If a string ends with px, the `Height` of a watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
-
-
-         * @type {string || null}
+         * Speech keyword recognition result, which is valid when `Type` is
+`AsrWordsRecognition`.
+         * @type {Array.<LiveStreamAsrWordsRecognitionResult> || null}
          */
-        this.Height = null;
+        this.AsrWordsRecognitionResultSet = null;
 
         /**
-         * Repeat type of an animated watermark. Valid values:
-<li>once: no longer appears after watermark playback ends.</li>
-<li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
-<li>repeat (default): repeats the playback until the video ends.</li>
-         * @type {string || null}
+         * Text keyword recognition result, which is valid when `Type` is
+`OcrWordsRecognition`.
+         * @type {Array.<LiveStreamOcrWordsRecognitionResult> || null}
          */
-        this.RepeatType = null;
+        this.OcrWordsRecognitionResultSet = null;
+
+        /**
+         * Full speech recognition result, which is valid when `Type` is
+`AsrFullTextRecognition`.
+         * @type {Array.<LiveStreamAsrFullTextRecognitionResult> || null}
+         */
+        this.AsrFullTextRecognitionResultSet = null;
+
+        /**
+         * Full text recognition result, which is valid when `Type` is
+`OcrFullTextRecognition`.
+         * @type {Array.<LiveStreamOcrFullTextRecognitionResult> || null}
+         */
+        this.OcrFullTextRecognitionResultSet = null;
+
+        /**
+         * The translation result. This parameter is valid only if `Type` is `TransTextRecognition`.
+         * @type {Array.<LiveStreamTransTextRecognitionResult> || null}
+         */
+        this.TransTextRecognitionResultSet = null;
+
+        /**
+         * Object recognition result, which is valid when Type is ObjectRecognition.
+         * @type {Array.<LiveStreamObjectRecognitionResult> || null}
+         */
+        this.ObjectRecognitionResultSet = null;
+
+        /**
+         * 
+         * @type {Array.<LiveStreamTagRecognitionResult> || null}
+         */
+        this.TagRecognitionResultSet = null;
 
     }
 
@@ -19275,10 +19985,127 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.FaceRecognitionResultSet) {
+            this.FaceRecognitionResultSet = new Array();
+            for (let z in params.FaceRecognitionResultSet) {
+                let obj = new LiveStreamFaceRecognitionResult();
+                obj.deserialize(params.FaceRecognitionResultSet[z]);
+                this.FaceRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.AsrWordsRecognitionResultSet) {
+            this.AsrWordsRecognitionResultSet = new Array();
+            for (let z in params.AsrWordsRecognitionResultSet) {
+                let obj = new LiveStreamAsrWordsRecognitionResult();
+                obj.deserialize(params.AsrWordsRecognitionResultSet[z]);
+                this.AsrWordsRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.OcrWordsRecognitionResultSet) {
+            this.OcrWordsRecognitionResultSet = new Array();
+            for (let z in params.OcrWordsRecognitionResultSet) {
+                let obj = new LiveStreamOcrWordsRecognitionResult();
+                obj.deserialize(params.OcrWordsRecognitionResultSet[z]);
+                this.OcrWordsRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.AsrFullTextRecognitionResultSet) {
+            this.AsrFullTextRecognitionResultSet = new Array();
+            for (let z in params.AsrFullTextRecognitionResultSet) {
+                let obj = new LiveStreamAsrFullTextRecognitionResult();
+                obj.deserialize(params.AsrFullTextRecognitionResultSet[z]);
+                this.AsrFullTextRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.OcrFullTextRecognitionResultSet) {
+            this.OcrFullTextRecognitionResultSet = new Array();
+            for (let z in params.OcrFullTextRecognitionResultSet) {
+                let obj = new LiveStreamOcrFullTextRecognitionResult();
+                obj.deserialize(params.OcrFullTextRecognitionResultSet[z]);
+                this.OcrFullTextRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.TransTextRecognitionResultSet) {
+            this.TransTextRecognitionResultSet = new Array();
+            for (let z in params.TransTextRecognitionResultSet) {
+                let obj = new LiveStreamTransTextRecognitionResult();
+                obj.deserialize(params.TransTextRecognitionResultSet[z]);
+                this.TransTextRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.ObjectRecognitionResultSet) {
+            this.ObjectRecognitionResultSet = new Array();
+            for (let z in params.ObjectRecognitionResultSet) {
+                let obj = new LiveStreamObjectRecognitionResult();
+                obj.deserialize(params.ObjectRecognitionResultSet[z]);
+                this.ObjectRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.TagRecognitionResultSet) {
+            this.TagRecognitionResultSet = new Array();
+            for (let z in params.TagRecognitionResultSet) {
+                let obj = new LiveStreamTagRecognitionResult();
+                obj.deserialize(params.TagRecognitionResultSet[z]);
+                this.TagRecognitionResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Result information of intelligent cover generating
+ * @class
+ */
+class AiAnalysisTaskCoverOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of intelligently generated covers.
+         * @type {Array.<MediaAiAnalysisCoverItem> || null}
+         */
+        this.CoverSet = null;
+
+        /**
+         * Storage location of intelligently generated cover.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CoverSet) {
+            this.CoverSet = new Array();
+            for (let z in params.CoverSet) {
+                let obj = new MediaAiAnalysisCoverItem();
+                obj.deserialize(params.CoverSet[z]);
+                this.CoverSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
 
     }
 }
@@ -21124,6 +21951,12 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SubtitlePath = null;
 
+        /**
+         * Subtitle file storage location.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
     }
 
     /**
@@ -21143,6 +21976,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             }
         }
         this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
 
     }
 }
@@ -21187,6 +22026,36 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * Extracts the digital watermark task configuration for video transcoding.
+ * @class
+ */
+class ExtractBlindWatermarkTaskConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid when the watermark type is blind-abseq. specifies the segment duration of the input video. unit: ms.
+Segment duration is 5 seconds by default if left empty.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.SegmentDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
 
     }
 }
@@ -21378,6 +22247,20 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SubtitlePos = null;
 
+        /**
+         * Specifies the file url of the video after voice cloning.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VoiceClonedVideo = null;
+
+        /**
+         * Specifies the file address of the voice type clone annotation.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VoiceClonedMarkFile = null;
+
     }
 
     /**
@@ -21402,6 +22285,8 @@ Note: This field may return null, indicating that no valid value can be obtained
             obj.deserialize(params.SubtitlePos)
             this.SubtitlePos = obj;
         }
+        this.VoiceClonedVideo = 'VoiceClonedVideo' in params ? params.VoiceClonedVideo : null;
+        this.VoiceClonedMarkFile = 'VoiceClonedMarkFile' in params ? params.VoiceClonedMarkFile : null;
 
     }
 }
@@ -22766,18 +23651,20 @@ class ActivityResult extends  AbstractModel {
 
         /**
          * Atomic task type.
-<Li>Transcode: transcoding</li>
-<Li>SampleSnapshot: sampled screenshot</li>
-<Li>AnimatedGraphics: conversion to GIF</li>
-<Li>SnapshotByTimeOffset: time point screenshot</li>
-<Li>ImageSprites: image sprite</li>
-<Li>AdaptiveDynamicStreaming: adaptive bitrate stream</li>
-<Li>AiContentReview: content review</li>
-<Li>AIRecognition: intelligent recognition</li>
-<Li>AIAnalysis: intelligent analysis</li>
-<li>AiQualityControl: media quality inspection.</li>
+<Li>Transcode: transcoding.</li>.
+<Li>SampleSnapshot: specifies sampled screenshot taking.</li>.
+<Li>AnimatedGraphics: specifies the animated image.</li>.
+<Li>SnapshotByTimeOffset: specifies time point screenshot taking.</li>.
+<Li>ImageSprites: specifies the sprite sheet.</li>.
+<Li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>.
+<Li>AiContentReview: specifies content moderation.</li>.
+<Li>AIRecognition: intelligent identification.</li>.
+<Li>AIAnalysis: specifies ai analysis.</li>.
+<li>AiQualityControl: media quality inspection</li>
 
 <Li>SmartSubtitles: smart subtitle</li>
+
+<Li>SmartErase: smart erasure.</li>.
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -23886,6 +24773,34 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
+ * Intelligent translation task input type.
+ * @class
+ */
+class AiAnalysisTaskDubbingInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video translation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * The canvas information of a video editing/compositing task.
  * @class
  */
@@ -24988,21 +25903,22 @@ class Activity extends  AbstractModel {
         super();
 
         /**
-         * Atomic task type:
-<li>input: start node</li>
-<li>output: end node</li>
-<li>action-trans: transcoding</li>
-<li>action-samplesnapshot: sampled screenshot</li>
-<li>action-AIAnalysis: analysis</li>
-<li>action-AIRecognition: recognition</li>
-<li>action-aiReview: review</li>
-<li>action-animated-graphics: conversion to GIF</li>
-<li>action-image-sprite: image sprite</li>
-<li>action-snapshotByTimeOffset: time point screenshot</li>
-<li>action-adaptive-substream: adaptive bitrate stream</li>
-<li>action-AIQualityControl: media quality inspection</li>
-<li>action-SmartSubtitles: smart subtitle</li>
-<li>action-exec-rules: judgment rule</li>
+         * Atomic task type.
+<li>input: starting node.</li>.
+<li>output: termination node.</li>.
+<li>action-trans: specifies transcoding.</li>.
+<li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
+<li>action-AIAnalysis: analysis.</li>.
+<li>action-AIRecognition: recognition.</li>.
+<li>action-aiReview: specifies the review action.</li>.
+<li>action-animated-graphics: specifies the animated image.</li>.
+<li>action-image-sprite: specifies the sprite sheet.</li>.
+<li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
+<li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
+<li>action-AIQualityControl: media quality inspection.</li>.
+<li>action-SmartSubtitles: smart subtitling.</li>.
+<li>action-exec-rules: judgment rule.</li>.
+<li>action-SmartErase: smart erasure.</li>.
 
 
 
@@ -25784,14 +26700,15 @@ If not filled in, it is a relative path by default: {inputName}_adaptiveDynamicS
         this.SegmentObjectName = null;
 
         /**
-         * Subtitle file to be inserted.
+         * External subtitle feature specifies the subtitle file to be inserted.
 Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<AddOnSubtitle> || null}
          */
         this.AddOnSubtitles = null;
 
         /**
-         * Drm information.
+         * Specifies the Drm information.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {DrmInfo || null}
          */
         this.DrmInfo = null;
@@ -25805,7 +26722,7 @@ PureAudio: audio-only.
         this.DefinitionType = null;
 
         /**
-         * Specifies the subtitle parameter.
+         * Hard subtitle (suppression subtitle) feature, specify subtitles source, font size, position and other subtitle parameters.
 Note: This field may return null, indicating that no valid value can be obtained.
          * @type {SubtitleTemplate || null}
          */
@@ -26397,6 +27314,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LiveStreamProcessTask = null;
 
         /**
+         * Extracts digital watermark task information. this field has a value only when TaskType is ExtractBlindWatermark.
+         * @type {ExtractBlindWatermarkTask || null}
+         */
+        this.ExtractBlindWatermarkTask = null;
+
+        /**
          * Event notification information of a task.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TaskNotifyConfig || null}
@@ -26436,7 +27359,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The information of a live scheme. This parameter is valid only if `TaskType` is `LiveScheduleTask`.
-Note: This field may return·null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {LiveScheduleTask || null}
          */
         this.LiveScheduleTask = null;
@@ -26480,6 +27403,12 @@ Note: This field may return·null, indicating that no valid values can be obtain
             this.LiveStreamProcessTask = obj;
         }
 
+        if (params.ExtractBlindWatermarkTask) {
+            let obj = new ExtractBlindWatermarkTask();
+            obj.deserialize(params.ExtractBlindWatermarkTask)
+            this.ExtractBlindWatermarkTask = obj;
+        }
+
         if (params.TaskNotifyConfig) {
             let obj = new TaskNotifyConfig();
             obj.deserialize(params.TaskNotifyConfig)
@@ -26507,80 +27436,43 @@ Note: This field may return·null, indicating that no valid values can be obtain
 }
 
 /**
- * AI-based live stream recognition result
+ * Intelligent translation result type.
  * @class
  */
-class LiveStreamAiRecognitionResultItem extends  AbstractModel {
+class AiAnalysisTaskDubbingResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Result type. Valid values:
-<li>FaceRecognition: face recognition.</li>
-<li>AsrWordsRecognition: speech keyword recognition.</li>
-<li>OcrWordsRecognition: text keyword recognition.</li>
-<li>AsrFullTextRecognition: full speech recognition.</li>
-<li>OcrFullTextRecognition: full text recognition.</li>
-<li>TransTextRecognition: speech translation.</li>
-
-<li>ObjectRecognition: object recognition.</li>
-<li>TagRecognition: highlights marking.</li>
+         * Task status, including PROCESSING, SUCCESS, and FAIL.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Status = null;
 
         /**
-         * Face recognition result, which is valid when `Type` is
-`FaceRecognition`.
-         * @type {Array.<LiveStreamFaceRecognitionResult> || null}
+         * Error code. `0`: Task successful. Other values: Task failed.
+         * @type {number || null}
          */
-        this.FaceRecognitionResultSet = null;
+        this.ErrCode = null;
 
         /**
-         * Speech keyword recognition result, which is valid when `Type` is
-`AsrWordsRecognition`.
-         * @type {Array.<LiveStreamAsrWordsRecognitionResult> || null}
+         * Error message.
+         * @type {string || null}
          */
-        this.AsrWordsRecognitionResultSet = null;
+        this.Message = null;
 
         /**
-         * Text keyword recognition result, which is valid when `Type` is
-`OcrWordsRecognition`.
-         * @type {Array.<LiveStreamOcrWordsRecognitionResult> || null}
+         * Describes the task input for intelligent translation.
+         * @type {AiAnalysisTaskDubbingInput || null}
          */
-        this.OcrWordsRecognitionResultSet = null;
+        this.Input = null;
 
         /**
-         * Full speech recognition result, which is valid when `Type` is
-`AsrFullTextRecognition`.
-         * @type {Array.<LiveStreamAsrFullTextRecognitionResult> || null}
+         * Describes the task output of intelligent translation.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AiAnalysisTaskDubbingOutput || null}
          */
-        this.AsrFullTextRecognitionResultSet = null;
-
-        /**
-         * Full text recognition result, which is valid when `Type` is
-`OcrFullTextRecognition`.
-         * @type {Array.<LiveStreamOcrFullTextRecognitionResult> || null}
-         */
-        this.OcrFullTextRecognitionResultSet = null;
-
-        /**
-         * The translation result. This parameter is valid only if `Type` is `TransTextRecognition`.
-         * @type {Array.<LiveStreamTransTextRecognitionResult> || null}
-         */
-        this.TransTextRecognitionResultSet = null;
-
-        /**
-         * Object recognition result, which is valid when Type is ObjectRecognition.
-         * @type {Array.<LiveStreamObjectRecognitionResult> || null}
-         */
-        this.ObjectRecognitionResultSet = null;
-
-        /**
-         * 
-         * @type {Array.<LiveStreamTagRecognitionResult> || null}
-         */
-        this.TagRecognitionResultSet = null;
+        this.Output = null;
 
     }
 
@@ -26591,78 +27483,20 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
-        if (params.FaceRecognitionResultSet) {
-            this.FaceRecognitionResultSet = new Array();
-            for (let z in params.FaceRecognitionResultSet) {
-                let obj = new LiveStreamFaceRecognitionResult();
-                obj.deserialize(params.FaceRecognitionResultSet[z]);
-                this.FaceRecognitionResultSet.push(obj);
-            }
+        if (params.Input) {
+            let obj = new AiAnalysisTaskDubbingInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
         }
 
-        if (params.AsrWordsRecognitionResultSet) {
-            this.AsrWordsRecognitionResultSet = new Array();
-            for (let z in params.AsrWordsRecognitionResultSet) {
-                let obj = new LiveStreamAsrWordsRecognitionResult();
-                obj.deserialize(params.AsrWordsRecognitionResultSet[z]);
-                this.AsrWordsRecognitionResultSet.push(obj);
-            }
-        }
-
-        if (params.OcrWordsRecognitionResultSet) {
-            this.OcrWordsRecognitionResultSet = new Array();
-            for (let z in params.OcrWordsRecognitionResultSet) {
-                let obj = new LiveStreamOcrWordsRecognitionResult();
-                obj.deserialize(params.OcrWordsRecognitionResultSet[z]);
-                this.OcrWordsRecognitionResultSet.push(obj);
-            }
-        }
-
-        if (params.AsrFullTextRecognitionResultSet) {
-            this.AsrFullTextRecognitionResultSet = new Array();
-            for (let z in params.AsrFullTextRecognitionResultSet) {
-                let obj = new LiveStreamAsrFullTextRecognitionResult();
-                obj.deserialize(params.AsrFullTextRecognitionResultSet[z]);
-                this.AsrFullTextRecognitionResultSet.push(obj);
-            }
-        }
-
-        if (params.OcrFullTextRecognitionResultSet) {
-            this.OcrFullTextRecognitionResultSet = new Array();
-            for (let z in params.OcrFullTextRecognitionResultSet) {
-                let obj = new LiveStreamOcrFullTextRecognitionResult();
-                obj.deserialize(params.OcrFullTextRecognitionResultSet[z]);
-                this.OcrFullTextRecognitionResultSet.push(obj);
-            }
-        }
-
-        if (params.TransTextRecognitionResultSet) {
-            this.TransTextRecognitionResultSet = new Array();
-            for (let z in params.TransTextRecognitionResultSet) {
-                let obj = new LiveStreamTransTextRecognitionResult();
-                obj.deserialize(params.TransTextRecognitionResultSet[z]);
-                this.TransTextRecognitionResultSet.push(obj);
-            }
-        }
-
-        if (params.ObjectRecognitionResultSet) {
-            this.ObjectRecognitionResultSet = new Array();
-            for (let z in params.ObjectRecognitionResultSet) {
-                let obj = new LiveStreamObjectRecognitionResult();
-                obj.deserialize(params.ObjectRecognitionResultSet[z]);
-                this.ObjectRecognitionResultSet.push(obj);
-            }
-        }
-
-        if (params.TagRecognitionResultSet) {
-            this.TagRecognitionResultSet = new Array();
-            for (let z in params.TagRecognitionResultSet) {
-                let obj = new LiveStreamTagRecognitionResult();
-                obj.deserialize(params.TagRecognitionResultSet[z]);
-                this.TagRecognitionResultSet.push(obj);
-            }
+        if (params.Output) {
+            let obj = new AiAnalysisTaskDubbingOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
         }
 
     }
@@ -27610,6 +28444,152 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
                 let obj = new LiveStreamAiReviewVoicePornResult();
                 obj.deserialize(params.VoicePornResultSet[z]);
                 this.VoicePornResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Intelligent erasure template subtitle configuration.
+ * @class
+ */
+class SmartEraseSubtitleConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the subtitle erasure method.
+**Automatic erasing:** automatically identifies subtitle text content in videos through AI models and performs seamless erasure to generate new videos. frame interference and unique subtitle styles may cause certain missed or incorrect erasures, which can be handled through specified area erasure.
+When using automatic erasure, if AutoAreas is not specified, the default region (lower middle of the frame) will be erased automatically. if AutoAreas is specified, it will change to erase the designated area.
+**Specified area erasing:** if your subtitle position is fixed, directly specify the erasure area to decrease the chance of removal omission to the maximum extent.
+When your choice is specified area erasure, please import at least one designated region in CustomAreas.
+-Automated removal.
+- specifies the custom specified area erasure.
+
+         * @type {string || null}
+         */
+        this.SubtitleEraseMethod = null;
+
+        /**
+         * Subtitle erasure model.
+**Standard version (recommend):** if your subtitle style is standard, normally recommend choose this version for better effectiveness with seamless detail.
+**Regional version:** if your subtitles have special styles such as italics, shadows, or motion effects, we recommend choosing the regional version for larger removal area, though the detail effect is not as good as the standard version.
+-Specifies the standard model.
+-area. specifies the regional model.
+         * @type {string || null}
+         */
+        this.SubtitleModel = null;
+
+        /**
+         * Whether OCR subtitle extraction is enabled. default value: OFF.
+Supports enabling OCR subtitle extraction only when SubtitleEraseMethod is set to auto. when enabled, it identifies the longest and most stable text area within the region as the subtitle area, then performs text extraction and removal.
+-ON: enable.
+-OFF. specifies the disabled state.
+         * @type {string || null}
+         */
+        this.OcrSwitch = null;
+
+        /**
+         * Subtitle language, for OCR guidance, default value zh_en. this parameter is valid only when OcrSwitch is ON.
+-Chinese and english.
+-multi other.
+Other supported languages:.
+Chinese, english, japanese, korean, spanish, french, german, portuguese, vietnamese, malay, russian, italian, dutch, swedish, finnish, danish, norwegian, hungarian, thai, hindi, arabic, indian-bengali, indian-gujarati, indian-kannada, indian-malayalam, indian-tamil, indian-telugu, slovenian, polish, catalan, bosnian, czech, estonian, croatian, punjabi, marathi, azerbaijani, indonesian, luxembourgish, lithuanian, latvian, maltese, slovak, turkish, kazakh, greek, irish, belarusian, khmer, tagalog, pashto, persian, tajik.
+
+
+         * @type {string || null}
+         */
+        this.SubtitleLang = null;
+
+        /**
+         * Specifies the subtitle file format. default value: vtt. this parameter is valid only when OcrSwitch is set to ON.
+-srt format.
+-vtt: WebVTT format.
+         * @type {string || null}
+         */
+        this.SubtitleFormat = null;
+
+        /**
+         * Specifies whether to enable subtitle translation. default value: OFF. this parameter is valid only when OcrSwitch is set to ON.
+-ON: enable.
+-OFF. specifies the disabled state.
+         * @type {string || null}
+         */
+        this.TransSwitch = null;
+
+        /**
+         * Subtitle target language. default value: en. this parameter is valid only when TransSwitch is set to ON.
+Supported languages:.
+Simplified chinese.
+Specifies the language. valid values: en (english).
+Ja: japanese.
+Ko: korean.
+Fr: french.
+es: spanish.
+It: italian.
+de: german.
+tr: turkish.
+Ru: russian.
+pt: portuguese.
+Vi: vietnamese.
+id: indonesian.
+ms: malay.
+Th: thai.
+Ar: arabic.
+hi: Hindi
+         * @type {string || null}
+         */
+        this.TransDstLang = null;
+
+        /**
+         * Specifies automatic removal of a custom region.
+Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
+Note that this parameter will not take effect when the removal method is custom. for template modification, input [] to clean up the region. the template region information remains unchanged if not imported.
+         * @type {Array.<EraseArea> || null}
+         */
+        this.AutoAreas = null;
+
+        /**
+         * Specifies erasure of a custom region.
+Detects and directly performs removal within a specified time range for the selected region.
+Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
+         * @type {Array.<EraseTimeArea> || null}
+         */
+        this.CustomAreas = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubtitleEraseMethod = 'SubtitleEraseMethod' in params ? params.SubtitleEraseMethod : null;
+        this.SubtitleModel = 'SubtitleModel' in params ? params.SubtitleModel : null;
+        this.OcrSwitch = 'OcrSwitch' in params ? params.OcrSwitch : null;
+        this.SubtitleLang = 'SubtitleLang' in params ? params.SubtitleLang : null;
+        this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+        this.TransSwitch = 'TransSwitch' in params ? params.TransSwitch : null;
+        this.TransDstLang = 'TransDstLang' in params ? params.TransDstLang : null;
+
+        if (params.AutoAreas) {
+            this.AutoAreas = new Array();
+            for (let z in params.AutoAreas) {
+                let obj = new EraseArea();
+                obj.deserialize(params.AutoAreas[z]);
+                this.AutoAreas.push(obj);
+            }
+        }
+
+        if (params.CustomAreas) {
+            this.CustomAreas = new Array();
+            for (let z in params.CustomAreas) {
+                let obj = new EraseTimeArea();
+                obj.deserialize(params.CustomAreas[z]);
+                this.CustomAreas.push(obj);
             }
         }
 
@@ -29187,37 +30167,40 @@ Length limit: 64 characters.
         this.Name = null;
 
         /**
-         * Source language of the video with smart subtitles.
-Supported languages:
-zh: Simplified Chinese
-en: English
-ja: Japanese
-ko: Korean
-zh-PY: Chinese-English-Cantonese
-zh-medical: Medical Chinese
-yue: Cantonese
-vi: Vietnamese
-ms: Malay
-id: Indonesian
-fil: Filipino
-th: Thai
-pt: Portuguese
-tr: Turkish
-ar: Arabic
-es: Spanish
+         * Video source language for intelligent caption.
+Valid values: 
+zh: Simplified Chinese.
+en: Eenglish.
+Ja: Japanese.
+Ko: Korean.
+zh-PY: Simplified Chinese, English and Cantonese.
+zh-medical: Medical Chinese.
+yue: Cantonese.
+Vi: Vietnamese.
+ms: Malay.
+id: Indonesian.
+fil: Filipino.
+th: Thai.
+pt: Portuguese.
+tr: Turkish.
+ar: Arabic.
+es: Spanish.
 hi: Hindi
-fr: French
-de: German
+Fr: French.
+de: German.
 zh-dialect: Chinese dialect
+zh_en: Simplified Chinese and English
+prime_zh: Simplified Chinese, Chinese Dialect and English.
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
          * Smart subtitle language type.
-0: source language1: target language
+0: source language
+1: target language
 2: source language + target language
-The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
          * @type {number || null}
          */
         this.SubtitleType = null;
@@ -29230,8 +30213,9 @@ Length limit: 256 characters.
         this.Comment = null;
 
         /**
-         * Smart subtitle file format.
-vtt: WebVTT format
+         * Intelligent subtitle file format.
+vtt: WebVTT format.
+srt: SRT format.
 If this field is left blank, no subtitle file will be generated.
          * @type {string || null}
          */
@@ -31458,6 +32442,34 @@ class AiRecognitionTaskObjectResult extends  AbstractModel {
 }
 
 /**
+ * DisableSchedule request structure.
+ * @class
+ */
+class DisableScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+
+    }
+}
+
+/**
  * DescribeAIAnalysisTemplates response structure.
  * @class
  */
@@ -31935,6 +32947,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SmartSubtitlesTaskResult = null;
 
+        /**
+         * Execution result of the smart erasure task.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartEraseTaskResult || null}
+         */
+        this.SmartEraseTaskResult = null;
+
     }
 
     /**
@@ -32010,6 +33029,12 @@ Note: This field may return null, indicating that no valid value can be obtained
                 obj.deserialize(params.SmartSubtitlesTaskResult[z]);
                 this.SmartSubtitlesTaskResult.push(obj);
             }
+        }
+
+        if (params.SmartEraseTaskResult) {
+            let obj = new SmartEraseTaskResult();
+            obj.deserialize(params.SmartEraseTaskResult)
+            this.SmartEraseTaskResult = obj;
         }
 
     }
@@ -32735,35 +33760,39 @@ Length limit: 256 characters.
         this.Comment = null;
 
         /**
-         * Source language of the video with smart subtitles.
-Supported languages:
-zh: Simplified Chinese
-en: English
-ja: Japanese
-ko: Korean
-zh-PY: Chinese-English-Cantonese
-zh-medical: Medical Chinese
-yue: Cantonese
-vi: Vietnamese
-ms: Malay
-id: Indonesian
-fil: Filipino
-th: Thai
-pt: Portuguese
-tr: Turkish
-ar: Arabic
-es: Spanish
+         * Video source language for intelligent caption.
+Valid values: 
+zh: Simplified Chinese.
+en: Eenglish.
+Ja: Japanese.
+Ko: Korean.
+zh-PY: Simplified Chinese, English and Cantonese.
+zh-medical: Medical Chinese.
+yue: Cantonese.
+Vi: Vietnamese.
+ms: Malay.
+id: Indonesian.
+fil: Filipino.
+th: Thai.
+pt: Portuguese.
+tr: Turkish.
+ar: Arabic.
+es: Spanish.
 hi: Hindi
-fr: French
-de: German
+Fr: French.
+de: German.
 zh-dialect: Chinese dialect
+zh_en: Simplified Chinese and English
+prime_zh: Simplified Chinese, Chinese Dialect and English.
+
          * @type {string || null}
          */
         this.VideoSrcLanguage = null;
 
         /**
-         * Smart subtitle file format.
-vtt: WebVTT format
+         * Intelligent subtitle file format.
+vtt: WebVTT format.
+srt: SRT format.
 If this field is left blank, no subtitle file will be generated.
          * @type {string || null}
          */
@@ -32771,9 +33800,10 @@ If this field is left blank, no subtitle file will be generated.
 
         /**
          * Smart subtitle language type.
-0: source language1: target language
+0: source language
+1: target language
 2: source language + target language
-The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
          * @type {number || null}
          */
         this.SubtitleType = null;
@@ -33126,6 +34156,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SmartSubtitlesTask = null;
 
+        /**
+         * Smart erase task output.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {SmartEraseTaskResult || null}
+         */
+        this.SmartEraseTask = null;
+
     }
 
     /**
@@ -33206,6 +34243,111 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new ScheduleSmartSubtitleTaskResult();
             obj.deserialize(params.SmartSubtitlesTask)
             this.SmartSubtitlesTask = obj;
+        }
+
+        if (params.SmartEraseTask) {
+            let obj = new SmartEraseTaskResult();
+            obj.deserialize(params.SmartEraseTask)
+            this.SmartEraseTask = obj;
+        }
+
+    }
+}
+
+/**
+ * The output of a live scheme subtask.
+ * @class
+ */
+class LiveActivityResItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The output of a live recording task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LiveScheduleLiveRecordTaskResult || null}
+         */
+        this.LiveRecordTask = null;
+
+        /**
+         * Media quality inspection task output.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleQualityControlTaskResult || null}
+         */
+        this.LiveQualityControlTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LiveRecordTask) {
+            let obj = new LiveScheduleLiveRecordTaskResult();
+            obj.deserialize(params.LiveRecordTask)
+            this.LiveRecordTask = obj;
+        }
+
+        if (params.LiveQualityControlTask) {
+            let obj = new ScheduleQualityControlTaskResult();
+            obj.deserialize(params.LiveQualityControlTask)
+            this.LiveQualityControlTask = obj;
+        }
+
+    }
+}
+
+/**
+ * Smart Erase, specifies the region configuration.
+Erase the designated region directly within a specified period.
+When both BeginMs and EndMs are set to 0, directly perform removal of the designated region in the entire video.
+ * @class
+ */
+class EraseTimeArea extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time, in ms.
+         * @type {number || null}
+         */
+        this.BeginMs = null;
+
+        /**
+         * End time, unit: ms.
+         * @type {number || null}
+         */
+        this.EndMs = null;
+
+        /**
+         * Erases the domain list within the period.
+         * @type {Array.<EraseArea> || null}
+         */
+        this.Areas = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginMs = 'BeginMs' in params ? params.BeginMs : null;
+        this.EndMs = 'EndMs' in params ? params.EndMs : null;
+
+        if (params.Areas) {
+            this.Areas = new Array();
+            for (let z in params.Areas) {
+                let obj = new EraseArea();
+                obj.deserialize(params.Areas[z]);
+                this.Areas.push(obj);
+            }
         }
 
     }
@@ -35063,7 +36205,6 @@ module.exports = {
     ManageTaskResponse: ManageTaskResponse,
     DeleteWorkflowRequest: DeleteWorkflowRequest,
     AwsS3FileUploadTrigger: AwsS3FileUploadTrigger,
-    AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     NumberFormat: NumberFormat,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -35076,6 +36217,7 @@ module.exports = {
     DescribeAsrHotwordsRequest: DescribeAsrHotwordsRequest,
     AudioTrackChannelInfo: AudioTrackChannelInfo,
     DiagnoseResult: DiagnoseResult,
+    SmartEraseTaskInput: SmartEraseTaskInput,
     RawWatermarkParameter: RawWatermarkParameter,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     AiSampleWord: AiSampleWord,
@@ -35091,7 +36233,6 @@ module.exports = {
     ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
     ModifyScheduleRequest: ModifyScheduleRequest,
     MediaMetaData: MediaMetaData,
-    DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
@@ -35100,6 +36241,7 @@ module.exports = {
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
+    SmartEraseTaskResult: SmartEraseTaskResult,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     ComposeMediaConfig: ComposeMediaConfig,
@@ -35165,7 +36307,7 @@ module.exports = {
     ImageProcessTaskOutput: ImageProcessTaskOutput,
     ComposeTargetInfo: ComposeTargetInfo,
     MediaProcessTaskInput: MediaProcessTaskInput,
-    DisableScheduleRequest: DisableScheduleRequest,
+    ExtractBlindWatermarkTask: ExtractBlindWatermarkTask,
     AiAnalysisTaskHorizontalToVerticalResult: AiAnalysisTaskHorizontalToVerticalResult,
     CosOutputStorage: CosOutputStorage,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
@@ -35176,6 +36318,7 @@ module.exports = {
     ParseNotificationRequest: ParseNotificationRequest,
     ImageEraseConfig: ImageEraseConfig,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
+    SmartEraseWatermarkConfig: SmartEraseWatermarkConfig,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
@@ -35226,6 +36369,7 @@ module.exports = {
     LiveStreamTaskNotifyConfig: LiveStreamTaskNotifyConfig,
     VideoTemplateInfo: VideoTemplateInfo,
     ComposeSubtitleStyle: ComposeSubtitleStyle,
+    SmartErasePrivacyConfig: SmartErasePrivacyConfig,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
     BatchProcessMediaRequest: BatchProcessMediaRequest,
@@ -35241,6 +36385,7 @@ module.exports = {
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
     LiveScheduleTask: LiveScheduleTask,
     AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
+    AiAnalysisTaskDubbingOutput: AiAnalysisTaskDubbingOutput,
     ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
     DescribeQualityControlTemplatesRequest: DescribeQualityControlTemplatesRequest,
@@ -35259,6 +36404,7 @@ module.exports = {
     AiAnalysisTaskSegmentOutput: AiAnalysisTaskSegmentOutput,
     ComposeVideoItem: ComposeVideoItem,
     LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
+    VODOutputStorage: VODOutputStorage,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     AiRecognitionTaskTransTextResultInput: AiRecognitionTaskTransTextResultInput,
     DescribeSchedulesResponse: DescribeSchedulesResponse,
@@ -35275,6 +36421,7 @@ module.exports = {
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
+    VODInputInfo: VODInputInfo,
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifyQualityControlTemplateResponse: ModifyQualityControlTemplateResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
@@ -35288,6 +36435,7 @@ module.exports = {
     ScheduleSmartSubtitleTaskResult: ScheduleSmartSubtitleTaskResult,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
     DescribeContentReviewTemplatesResponse: DescribeContentReviewTemplatesResponse,
+    EraseArea: EraseArea,
     TEHDConfig: TEHDConfig,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
@@ -35302,7 +36450,7 @@ module.exports = {
     ComposeMediaItem: ComposeMediaItem,
     ScheduleQualityControlTaskResult: ScheduleQualityControlTaskResult,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
-    LiveActivityResItem: LiveActivityResItem,
+    DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     EnableScheduleResponse: EnableScheduleResponse,
     SecurityGroupInfo: SecurityGroupInfo,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
@@ -35318,6 +36466,7 @@ module.exports = {
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     CreateQualityControlTemplateRequest: CreateQualityControlTemplateRequest,
     AiSampleTagOperation: AiSampleTagOperation,
+    RawSmartEraseParameter: RawSmartEraseParameter,
     ScheduleExecRuleTaskResult: ScheduleExecRuleTaskResult,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     EditMediaTask: EditMediaTask,
@@ -35329,6 +36478,7 @@ module.exports = {
     DescribeAsrHotwordsListResponse: DescribeAsrHotwordsListResponse,
     AiAnalysisResult: AiAnalysisResult,
     SmartSubtitleTaskResultInput: SmartSubtitleTaskResultInput,
+    ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
     ProcessImageRequest: ProcessImageRequest,
@@ -35346,7 +36496,8 @@ module.exports = {
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
     ExecRuleTaskData: ExecRuleTaskData,
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
-    ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
+    LiveStreamAiRecognitionResultItem: LiveStreamAiRecognitionResultItem,
+    AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     DeleteScheduleRequest: DeleteScheduleRequest,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
@@ -35380,6 +36531,7 @@ module.exports = {
     DescribeMediaMetaDataResponse: DescribeMediaMetaDataResponse,
     SmartSubtitleTaskAsrFullTextResultOutput: SmartSubtitleTaskAsrFullTextResultOutput,
     TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
+    ExtractBlindWatermarkTaskConfig: ExtractBlindWatermarkTaskConfig,
     ImageEncodeConfig: ImageEncodeConfig,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
@@ -35422,6 +36574,7 @@ module.exports = {
     ArtifactRepairConfig: ArtifactRepairConfig,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeBatchTaskDetailResponse: DescribeBatchTaskDetailResponse,
+    AiAnalysisTaskDubbingInput: AiAnalysisTaskDubbingInput,
     ComposeCanvas: ComposeCanvas,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     CreateWorkflowResponse: CreateWorkflowResponse,
@@ -35463,7 +36616,7 @@ module.exports = {
     MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
-    LiveStreamAiRecognitionResultItem: LiveStreamAiRecognitionResultItem,
+    AiAnalysisTaskDubbingResult: AiAnalysisTaskDubbingResult,
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
     LiveScheduleLiveRecordTaskResult: LiveScheduleLiveRecordTaskResult,
     AiSampleFailFaceInfo: AiSampleFailFaceInfo,
@@ -35482,6 +36635,7 @@ module.exports = {
     AsrHotWordsConfigure: AsrHotWordsConfigure,
     ImageAreaBoxInfo: ImageAreaBoxInfo,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
+    SmartEraseSubtitleConfig: SmartEraseSubtitleConfig,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
@@ -35544,6 +36698,7 @@ module.exports = {
     ImageDenoiseConfig: ImageDenoiseConfig,
     VideoDenoiseConfig: VideoDenoiseConfig,
     AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
+    DisableScheduleRequest: DisableScheduleRequest,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     ParseLiveStreamProcessNotificationRequest: ParseLiveStreamProcessNotificationRequest,
@@ -35571,6 +36726,8 @@ module.exports = {
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     ActivityResItem: ActivityResItem,
+    LiveActivityResItem: LiveActivityResItem,
+    EraseTimeArea: EraseTimeArea,
     SpekeDrm: SpekeDrm,
     AiAnalysisTaskDelLogoResult: AiAnalysisTaskDelLogoResult,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,

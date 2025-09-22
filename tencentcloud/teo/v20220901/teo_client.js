@@ -1509,7 +1509,7 @@ For sites connected via the NS, you can query whether the NS is successfully swi
 
     /**
      * This API is used to create an alias domain name.
-The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, please [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+The feature is only supported by the enterprise plan and is currently in closed beta testing. If you need to use it, please [contact us](https://www.tencentcloud.com/contact-us).
      * @param {CreateAliasDomainRequest} req
      * @param {function(string, CreateAliasDomainResponse):void} cb
      * @public
@@ -1521,7 +1521,7 @@ The feature is only supported by the enterprise plan and is currently in closed 
 
     /**
      * This API is used to modify the status of an alias domain name.
-The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service?from=connect-us).
+The feature is only supported in the enterprise plan and is currently in closed beta testing. If you need to use it, [Contact Us](https://www.tencentcloud.com/contact-us).
      * @param {ModifyAliasDomainStatusRequest} req
      * @param {function(string, ModifyAliasDomainStatusResponse):void} cb
      * @public
@@ -2353,7 +2353,7 @@ Create and bind policy Query instance Reset instance access password.
     }
 
     /**
-     * This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+     * This API is used to create a LoadBalancer. For details, see [Quickly Create Load Balancers](https://intl.cloud.tencent.com/document/product/1552/104223?from_cn_redirect=1). The load balancing feature is in beta test. If you need to use it, [contact us](https://www.tencentcloud.com/contact-us).
      * @param {CreateLoadBalancerRequest} req
      * @param {function(string, CreateLoadBalancerResponse):void} cb
      * @public

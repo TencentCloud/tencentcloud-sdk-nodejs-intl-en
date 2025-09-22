@@ -200,7 +200,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * This API is used to apply for a BizToken before calling the web-based verification service each time. This token is required for initiating a verification process and getting the result after the verification is completed.
+     * This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
      * @param {ApplyWebVerificationBizTokenIntlRequest} req
      * @param {function(string, ApplyWebVerificationBizTokenIntlResponse):void} cb
      * @public
@@ -211,7 +211,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for two hours (2*3,600s) after generation and can be called multiple times.
+     * This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for 72 hours (72*3600s) after generation and can be called multiple times.
      * @param {GetFaceIdResultIntlRequest} req
      * @param {function(string, GetFaceIdResultIntlResponse):void} cb
      * @public

@@ -2956,8 +2956,7 @@ Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBB
         this.VerificationUrl = null;
 
         /**
-         * The token for the web-based verification, which is generated using the ApplyWebVerificationBizTokenIntl API.
-Example: 81EEF678-28EE-4759-A82E-6CBBBE6BC442
+         * A token that identifies a Web verification process, with a validity time of 10 minutes. after the process is complete, the token can be used to obtain the verification result.
          * @type {string || null}
          */
         this.BizToken = null;

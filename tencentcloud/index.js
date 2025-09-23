@@ -88,6 +88,7 @@ module.exports = {
     postgres: require("./postgres"),
     privatedns: require("./privatedns"),
     pts: require("./pts"),
+    quota: require("./quota"),
     rce: require("./rce"),
     redis: require("./redis"),
     region: require("./region"),

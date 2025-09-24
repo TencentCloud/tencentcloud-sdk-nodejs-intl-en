@@ -19050,6 +19050,21 @@ class ProcessImageRequest extends  AbstractModel {
         this.OutputDir = null;
 
         /**
+         * Output path, which can be a relative or an absolute path.
+The path must end with `.{format}`. For details, please refer to the [Filename Variable](https://www.tencentcloud.comom/document/product/862/37039?from_cn_redirect=1).
+**Relative path example:**
+<Li>`Filename_{Variablename}.{format}`.</li>
+<Li>`Filename.{format}`.</li>
+
+**Absolute path example:**
+<Li>`/Path/Filename_{Variablename}.{format}`.</li>
+
+If not filled in, default relative path: `{inputName}.{format}`.
+         * @type {string || null}
+         */
+        this.OutputPath = null;
+
+        /**
          * Image processing parameter.
          * @type {ImageTaskInput || null}
          */
@@ -19077,6 +19092,7 @@ class ProcessImageRequest extends  AbstractModel {
             this.OutputStorage = obj;
         }
         this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+        this.OutputPath = 'OutputPath' in params ? params.OutputPath : null;
 
         if (params.ImageTask) {
             let obj = new ImageTaskInput();

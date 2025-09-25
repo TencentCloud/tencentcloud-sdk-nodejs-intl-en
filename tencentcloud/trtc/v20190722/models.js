@@ -1854,6 +1854,68 @@ class DescribeTRTCMarketScaleDataResponse extends  AbstractModel {
 }
 
 /**
+ * Translation config
+ * @class
+ */
+class TranslationConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target language, target language list (ISO 639-1).
+         * @type {Array.<string> || null}
+         */
+        this.TargetLanguages = null;
+
+        /**
+         * 1: Only text translation, 2: Voice simultaneous interpretation.
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Voice simultaneous interpretation configuration: When enabling simultaneous interpretation, this parameter needs to be passed.
+         * @type {TTSConfig || null}
+         */
+        this.TTSConfig = null;
+
+        /**
+         * Translation terminology.
+         * @type {Array.<Terminology> || null}
+         */
+        this.Terminology = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetLanguages = 'TargetLanguages' in params ? params.TargetLanguages : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.TTSConfig) {
+            let obj = new TTSConfig();
+            obj.deserialize(params.TTSConfig)
+            this.TTSConfig = obj;
+        }
+
+        if (params.Terminology) {
+            this.Terminology = new Array();
+            for (let z in params.Terminology) {
+                let obj = new Terminology();
+                obj.deserialize(params.Terminology[z]);
+                this.Terminology.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Mcu Relay Recording and Tencent VOD Parameters
  * @class
  */
@@ -5836,6 +5898,12 @@ class StartAITranscriptionRequest extends  AbstractModel {
          */
         this.RecognizeConfig = null;
 
+        /**
+         * Translation config.
+         * @type {TranslationConfig || null}
+         */
+        this.TranslationConfig = null;
+
     }
 
     /**
@@ -5860,6 +5928,12 @@ class StartAITranscriptionRequest extends  AbstractModel {
             let obj = new RecognizeConfig();
             obj.deserialize(params.RecognizeConfig)
             this.RecognizeConfig = obj;
+        }
+
+        if (params.TranslationConfig) {
+            let obj = new TranslationConfig();
+            obj.deserialize(params.TranslationConfig)
+            this.TranslationConfig = obj;
         }
 
     }
@@ -6436,6 +6510,41 @@ class ModifyCloudModerationResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Translation terminology
+ * @class
+ */
+class Terminology extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source terminology
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Target terminology
+         * @type {string || null}
+         */
+        this.Target = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
 
     }
 }
@@ -8369,6 +8478,34 @@ class DescribeStreamIngestRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class TTSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+
+    }
+}
+
+/**
  * The audio parameters for relaying.
  * @class
  */
@@ -9023,6 +9160,7 @@ module.exports = {
     DescribeCallDetailInfoRequest: DescribeCallDetailInfoRequest,
     CreateCloudModerationResponse: CreateCloudModerationResponse,
     DescribeTRTCMarketScaleDataResponse: DescribeTRTCMarketScaleDataResponse,
+    TranslationConfig: TranslationConfig,
     McuTencentVod: McuTencentVod,
     DescribeWebRecordResponse: DescribeWebRecordResponse,
     DescribeUserInfoRequest: DescribeUserInfoRequest,
@@ -9110,6 +9248,7 @@ module.exports = {
     CreateCloudSliceTaskResponse: CreateCloudSliceTaskResponse,
     DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
     ModifyCloudModerationResponse: ModifyCloudModerationResponse,
+    Terminology: Terminology,
     VideoParams: VideoParams,
     StopStreamIngestResponse: StopStreamIngestResponse,
     SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
@@ -9147,6 +9286,7 @@ module.exports = {
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     RecordParams: RecordParams,
     DescribeStreamIngestRequest: DescribeStreamIngestRequest,
+    TTSConfig: TTSConfig,
     McuAudioParams: McuAudioParams,
     McuPublishCdnParam: McuPublishCdnParam,
     AudioParams: AudioParams,

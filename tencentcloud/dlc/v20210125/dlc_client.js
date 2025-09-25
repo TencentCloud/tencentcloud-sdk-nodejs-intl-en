@@ -132,6 +132,7 @@ const ExternalDataConfiguration = models.ExternalDataConfiguration;
 const CheckDataEngineImageCanBeRollbackRequest = models.CheckDataEngineImageCanBeRollbackRequest;
 const CreateDataEngineRequest = models.CreateDataEngineRequest;
 const ModifySparkAppBatchRequest = models.ModifySparkAppBatchRequest;
+const DescribeSparkAppTasksRequest = models.DescribeSparkAppTasksRequest;
 const DescribeDataEnginePythonSparkImagesRequest = models.DescribeDataEnginePythonSparkImagesRequest;
 const SmartOptimizerPolicy = models.SmartOptimizerPolicy;
 const CreateTaskRequest = models.CreateTaskRequest;
@@ -148,6 +149,7 @@ const DescribeSparkSessionBatchSqlLogRequest = models.DescribeSparkSessionBatchS
 const Property = models.Property;
 const TasksOverview = models.TasksOverview;
 const DescribeUpdatableDataEnginesRequest = models.DescribeUpdatableDataEnginesRequest;
+const Execution = models.Execution;
 const DescribeSparkAppJobResponse = models.DescribeSparkAppJobResponse;
 const SmartOptimizerLifecyclePolicy = models.SmartOptimizerLifecyclePolicy;
 const DeleteUsersFromWorkGroupResponse = models.DeleteUsersFromWorkGroupResponse;
@@ -191,7 +193,7 @@ const WorkGroups = models.WorkGroups;
 const ResourceInfo = models.ResourceInfo;
 const CreateDLCTableRequest = models.CreateDLCTableRequest;
 const DMSSourceDatabaseInfo = models.DMSSourceDatabaseInfo;
-const Execution = models.Execution;
+const DescribeSubUserAccessPolicyRequest = models.DescribeSubUserAccessPolicyRequest;
 const UpgradeDataEngineImageRequest = models.UpgradeDataEngineImageRequest;
 const SmartPolicy = models.SmartPolicy;
 const SmartOptimizerIndexPolicy = models.SmartOptimizerIndexPolicy;
@@ -282,8 +284,8 @@ const UpdateDataEngineConfigRequest = models.UpdateDataEngineConfigRequest;
 const CreateWorkGroupRequest = models.CreateWorkGroupRequest;
 const CreateInternalTableResponse = models.CreateInternalTableResponse;
 const DataEngineInfo = models.DataEngineInfo;
-const DescribeSparkAppTasksRequest = models.DescribeSparkAppTasksRequest;
-const DescribeSubUserAccessPolicyRequest = models.DescribeSubUserAccessPolicyRequest;
+const DescribeSessionImageVersionResponse = models.DescribeSessionImageVersionResponse;
+const DescribeSessionImageVersionRequest = models.DescribeSessionImageVersionRequest;
 const AlterDMSDatabaseRequest = models.AlterDMSDatabaseRequest;
 const CheckDataEngineImageCanBeUpgradeRequest = models.CheckDataEngineImageCanBeUpgradeRequest;
 const SQLTask = models.SQLTask;
@@ -299,6 +301,7 @@ const DeleteCHDFSBindingProductResponse = models.DeleteCHDFSBindingProductRespon
 const DescribeDataEnginePythonSparkImagesResponse = models.DescribeDataEnginePythonSparkImagesResponse;
 const ModifyUserRequest = models.ModifyUserRequest;
 const DMSColumn = models.DMSColumn;
+const EngineSessionImage = models.EngineSessionImage;
 const UpdateRowFilterRequest = models.UpdateRowFilterRequest;
 const TColumn = models.TColumn;
 const DescribeResultDownloadRequest = models.DescribeResultDownloadRequest;
@@ -763,6 +766,17 @@ class DlcClient extends AbstractClient {
     RollbackDataEngineImage(req, cb) {
         let resp = new RollbackDataEngineImageResponse();
         this.request("RollbackDataEngineImage", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve all built-in images of all minor versions under a specified major version.
+     * @param {DescribeSessionImageVersionRequest} req
+     * @param {function(string, DescribeSessionImageVersionResponse):void} cb
+     * @public
+     */
+    DescribeSessionImageVersion(req, cb) {
+        let resp = new DescribeSessionImageVersionResponse();
+        this.request("DescribeSessionImageVersion", req, resp, cb);
     }
 
     /**

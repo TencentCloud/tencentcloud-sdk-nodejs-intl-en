@@ -16,8 +16,17 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateAlarmRequest = models.CreateAlarmRequest;
+const EnableAlarmResponse = models.EnableAlarmResponse;
 const CreateAlarmResponse = models.CreateAlarmResponse;
+const CreateAlarmRequest = models.CreateAlarmRequest;
+const Alarm = models.Alarm;
+const EnableAlarmRequest = models.EnableAlarmRequest;
+const DeleteAlarmResponse = models.DeleteAlarmResponse;
+const DeleteAlarmRequest = models.DeleteAlarmRequest;
+const DescribeAlarmsResponse = models.DescribeAlarmsResponse;
+const UpdateAlarmRequest = models.UpdateAlarmRequest;
+const UpdateAlarmResponse = models.UpdateAlarmResponse;
+const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
 
 
 /**
@@ -39,6 +48,50 @@ class QuotaClient extends AbstractClient {
     CreateAlarm(req, cb) {
         let resp = new CreateAlarmResponse();
         this.request("CreateAlarm", req, resp, cb);
+    }
+
+    /**
+     * Modifies alarm rules
+     * @param {UpdateAlarmRequest} req
+     * @param {function(string, UpdateAlarmResponse):void} cb
+     * @public
+     */
+    UpdateAlarm(req, cb) {
+        let resp = new UpdateAlarmResponse();
+        this.request("UpdateAlarm", req, resp, cb);
+    }
+
+    /**
+     * Deletes alarm rules
+     * @param {DeleteAlarmRequest} req
+     * @param {function(string, DeleteAlarmResponse):void} cb
+     * @public
+     */
+    DeleteAlarm(req, cb) {
+        let resp = new DeleteAlarmResponse();
+        this.request("DeleteAlarm", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the alarm rule list.
+     * @param {DescribeAlarmsRequest} req
+     * @param {function(string, DescribeAlarmsResponse):void} cb
+     * @public
+     */
+    DescribeAlarms(req, cb) {
+        let resp = new DescribeAlarmsResponse();
+        this.request("DescribeAlarms", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable alarm rules.
+     * @param {EnableAlarmRequest} req
+     * @param {function(string, EnableAlarmResponse):void} cb
+     * @public
+     */
+    EnableAlarm(req, cb) {
+        let resp = new EnableAlarmResponse();
+        this.request("EnableAlarm", req, resp, cb);
     }
 
 

@@ -52,6 +52,7 @@ const NumberFormat = models.NumberFormat;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const SmartSubtitleTaskTransTextResult = models.SmartSubtitleTaskTransTextResult;
+const CreateSmartEraseTemplateRequest = models.CreateSmartEraseTemplateRequest;
 const EnhanceConfig = models.EnhanceConfig;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateWorkflowRequest = models.CreateWorkflowRequest;
@@ -68,6 +69,7 @@ const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
+const ModifySmartEraseTemplateResponse = models.ModifySmartEraseTemplateResponse;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const VideoEnhanceConfig = models.VideoEnhanceConfig;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
@@ -161,6 +163,7 @@ const ParseNotificationRequest = models.ParseNotificationRequest;
 const ImageEraseConfig = models.ImageEraseConfig;
 const CreateWordSamplesRequest = models.CreateWordSamplesRequest;
 const SmartEraseWatermarkConfig = models.SmartEraseWatermarkConfig;
+const DescribeSmartEraseTemplatesRequest = models.DescribeSmartEraseTemplatesRequest;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
 const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
@@ -271,6 +274,7 @@ const LiveStreamAsrWordsRecognitionResult = models.LiveStreamAsrWordsRecognition
 const AiSamplePerson = models.AiSamplePerson;
 const SmartSubtitleTaskAsrFullTextResult = models.SmartSubtitleTaskAsrFullTextResult;
 const BatchSmartSubtitlesResult = models.BatchSmartSubtitlesResult;
+const ModifySmartEraseTemplateRequest = models.ModifySmartEraseTemplateRequest;
 const SimpleAesDrm = models.SimpleAesDrm;
 const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
@@ -287,6 +291,7 @@ const ActivityPara = models.ActivityPara;
 const ModifyAsrHotwordsResponse = models.ModifyAsrHotwordsResponse;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
+const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const ScheduleAnalysisTaskResult = models.ScheduleAnalysisTaskResult;
 const ComposeMediaItem = models.ComposeMediaItem;
@@ -332,7 +337,7 @@ const ResetWorkflowRequest = models.ResetWorkflowRequest;
 const AiRecognitionTaskObjectResultInput = models.AiRecognitionTaskObjectResultInput;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
 const LiveStreamAiReviewVoicePornResult = models.LiveStreamAiReviewVoicePornResult;
-const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
+const DeleteSmartEraseTemplateRequest = models.DeleteSmartEraseTemplateRequest;
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
@@ -403,6 +408,7 @@ const DescribeAsrHotwordsResponse = models.DescribeAsrHotwordsResponse;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
 const HLSConfigureInfo = models.HLSConfigureInfo;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
+const CreateSmartEraseTemplateResponse = models.CreateSmartEraseTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const ModifySmartSubtitleTemplateResponse = models.ModifySmartSubtitleTemplateResponse;
 const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate;
@@ -423,6 +429,7 @@ const CreateWorkflowResponse = models.CreateWorkflowResponse;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
+const ExecRulesTask = models.ExecRulesTask;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
@@ -496,7 +503,7 @@ const MediaAudioStreamItem = models.MediaAudioStreamItem;
 const LiveStreamAiReviewImageTerrorismResult = models.LiveStreamAiReviewImageTerrorismResult;
 const ProcessLiveStreamRequest = models.ProcessLiveStreamRequest;
 const AiAnalysisTaskHorizontalToVerticalOutput = models.AiAnalysisTaskHorizontalToVerticalOutput;
-const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
+const DescribeSmartEraseTemplatesResponse = models.DescribeSmartEraseTemplatesResponse;
 const AiReviewProhibitedOcrTaskInput = models.AiReviewProhibitedOcrTaskInput;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const ComposeSubtitleItem = models.ComposeSubtitleItem;
@@ -548,7 +555,7 @@ const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const AiAnalysisTaskHeadTailResult = models.AiAnalysisTaskHeadTailResult;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const WorkflowTask = models.WorkflowTask;
-const ExecRulesTask = models.ExecRulesTask;
+const DeleteSmartEraseTemplateResponse = models.DeleteSmartEraseTemplateResponse;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const EditMediaFileInfo = models.EditMediaFileInfo;
 const ComposeAudioStream = models.ComposeAudioStream;
@@ -591,7 +598,9 @@ const LiveStreamAiAnalysisResultItem = models.LiveStreamAiAnalysisResultItem;
 const AiRecognitionTaskTransTextResult = models.AiRecognitionTaskTransTextResult;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
+const SmartEraseTemplateItem = models.SmartEraseTemplateItem;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
+const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
 const LowLightEnhanceConfig = models.LowLightEnhanceConfig;
 const DescribeMediaMetaDataRequest = models.DescribeMediaMetaDataRequest;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
@@ -1122,6 +1131,28 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
+     * This API is used to obtain the list of smart erasing template details based on the unique identifier of the template. The returned result includes all matching user-defined smart erasing templates and system preset smart erasing templates.
+     * @param {DescribeSmartEraseTemplatesRequest} req
+     * @param {function(string, DescribeSmartEraseTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSmartEraseTemplates(req, cb) {
+        let resp = new DescribeSmartEraseTemplatesResponse();
+        this.request("DescribeSmartEraseTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a user-defined smart erasing template.
+     * @param {ModifySmartEraseTemplateRequest} req
+     * @param {function(string, ModifySmartEraseTemplateResponse):void} cb
+     * @public
+     */
+    ModifySmartEraseTemplate(req, cb) {
+        let resp = new ModifySmartEraseTemplateResponse();
+        this.request("ModifySmartEraseTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a custom smart subtitle template.
      * @param {CreateSmartSubtitleTemplateRequest} req
      * @param {function(string, CreateSmartSubtitleTemplateResponse):void} cb
@@ -1642,6 +1673,17 @@ HTTP callbacks are supported for live stream processing events. Notifications ca
     }
 
     /**
+     * This API is used to create a custom smart erasing template.
+     * @param {CreateSmartEraseTemplateRequest} req
+     * @param {function(string, CreateSmartEraseTemplateResponse):void} cb
+     * @public
+     */
+    CreateSmartEraseTemplate(req, cb) {
+        let resp = new CreateSmartEraseTemplateResponse();
+        this.request("CreateSmartEraseTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a custom content moderation template.
      * @param {ModifyContentReviewTemplateRequest} req
      * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
@@ -1672,6 +1714,17 @@ HTTP callbacks are supported for live stream processing events. Notifications ca
     ModifyAIRecognitionTemplate(req, cb) {
         let resp = new ModifyAIRecognitionTemplateResponse();
         this.request("ModifyAIRecognitionTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a user-defined smart erasing template.
+     * @param {DeleteSmartEraseTemplateRequest} req
+     * @param {function(string, DeleteSmartEraseTemplateResponse):void} cb
+     * @public
+     */
+    DeleteSmartEraseTemplate(req, cb) {
+        let resp = new DeleteSmartEraseTemplateResponse();
+        this.request("DeleteSmartEraseTemplate", req, resp, cb);
     }
 
     /**

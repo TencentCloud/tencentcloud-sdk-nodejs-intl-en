@@ -139,6 +139,7 @@ const ChannelOutputsStatistics = models.ChannelOutputsStatistics;
 const AdditionalRateSetting = models.AdditionalRateSetting;
 const PlanSettings = models.PlanSettings;
 const DescribeStreamLiveInputSecurityGroupsResponse = models.DescribeStreamLiveInputSecurityGroupsResponse;
+const AbWatermarkSettingsReq = models.AbWatermarkSettingsReq;
 const EventNotifySetting = models.EventNotifySetting;
 const DeleteStreamLiveInputResponse = models.DeleteStreamLiveInputResponse;
 const StartStreamLiveChannelRequest = models.StartStreamLiveChannelRequest;

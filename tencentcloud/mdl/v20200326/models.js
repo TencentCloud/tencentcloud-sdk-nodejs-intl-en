@@ -2399,6 +2399,12 @@ class CreateStreamLiveWatermarkRequest extends  AbstractModel {
          */
         this.TextSettings = null;
 
+        /**
+         * AB watermark configuration
+         * @type {AbWatermarkSettingsReq || null}
+         */
+        this.AbWatermarkSettings = null;
+
     }
 
     /**
@@ -2421,6 +2427,12 @@ class CreateStreamLiveWatermarkRequest extends  AbstractModel {
             let obj = new CreateTextSettings();
             obj.deserialize(params.TextSettings)
             this.TextSettings = obj;
+        }
+
+        if (params.AbWatermarkSettings) {
+            let obj = new AbWatermarkSettingsReq();
+            obj.deserialize(params.AbWatermarkSettings)
+            this.AbWatermarkSettings = obj;
         }
 
     }
@@ -3249,6 +3261,12 @@ class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
          */
         this.TextSettings = null;
 
+        /**
+         * 
+         * @type {AbWatermarkSettingsReq || null}
+         */
+        this.AbWatermarkSettings = null;
+
     }
 
     /**
@@ -3271,6 +3289,12 @@ class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
             let obj = new CreateTextSettings();
             obj.deserialize(params.TextSettings)
             this.TextSettings = obj;
+        }
+
+        if (params.AbWatermarkSettings) {
+            let obj = new AbWatermarkSettingsReq();
+            obj.deserialize(params.AbWatermarkSettings)
+            this.AbWatermarkSettings = obj;
         }
 
     }
@@ -5208,7 +5232,7 @@ class DescribeStreamLiveChannelAlertsResponse extends  AbstractModel {
         super();
 
         /**
-         * Alarm information of the channel’s two pipelines
+         * Alarm information of the channel's two pipelines
          * @type {ChannelAlertInfos || null}
          */
         this.Infos = null;
@@ -6722,6 +6746,34 @@ class DescribeStreamLiveInputSecurityGroupsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AbWatermarkSettingsReq extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -8655,6 +8707,7 @@ module.exports = {
     AdditionalRateSetting: AdditionalRateSetting,
     PlanSettings: PlanSettings,
     DescribeStreamLiveInputSecurityGroupsResponse: DescribeStreamLiveInputSecurityGroupsResponse,
+    AbWatermarkSettingsReq: AbWatermarkSettingsReq,
     EventNotifySetting: EventNotifySetting,
     DeleteStreamLiveInputResponse: DeleteStreamLiveInputResponse,
     StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,

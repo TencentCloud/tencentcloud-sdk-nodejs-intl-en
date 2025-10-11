@@ -4093,7 +4093,7 @@ class CreateStreamPackageChannelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Channel protocol. Valid values: HLS, DASH, CMAF.
+         * Channel protocol. Valid values: HLS/DASH.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -4158,6 +4158,12 @@ Optional values: Live, VOD (on demand)
          */
         this.PackageConfs = null;
 
+        /**
+         * ADS can return more precise advertisements based on Source Tag information.
+         * @type {Array.<SourceTag> || null}
+         */
+        this.SourceTags = null;
+
     }
 
     /**
@@ -4177,6 +4183,15 @@ Optional values: Live, VOD (on demand)
                 let obj = new SourcePackageConf();
                 obj.deserialize(params.PackageConfs[z]);
                 this.PackageConfs.push(obj);
+            }
+        }
+
+        if (params.SourceTags) {
+            this.SourceTags = new Array();
+            for (let z in params.SourceTags) {
+                let obj = new SourceTag();
+                obj.deserialize(params.SourceTags[z]);
+                this.SourceTags.push(obj);
             }
         }
 
@@ -4549,6 +4564,12 @@ class CreateStreamPackageSourceRequest extends  AbstractModel {
          */
         this.PackageConfs = null;
 
+        /**
+         * The sourcetag allows ADS to deliver more precise ads based on the Source Tag information
+         * @type {Array.<SourceTag> || null}
+         */
+        this.SourceTags = null;
+
     }
 
     /**
@@ -4568,6 +4589,15 @@ class CreateStreamPackageSourceRequest extends  AbstractModel {
                 let obj = new SourcePackageConf();
                 obj.deserialize(params.PackageConfs[z]);
                 this.PackageConfs.push(obj);
+            }
+        }
+
+        if (params.SourceTags) {
+            this.SourceTags = new Array();
+            for (let z in params.SourceTags) {
+                let obj = new SourceTag();
+                obj.deserialize(params.SourceTags[z]);
+                this.SourceTags.push(obj);
             }
         }
 
@@ -6496,6 +6526,44 @@ class ProgramScheduleInfo extends  AbstractModel {
 }
 
 /**
+ * type SourceTag struct {
+	Key   string `json:"Key"`
+	Value string `json:"Value"`
+}
+ * @class
+ */
+class SourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DeleteStreamPackageLinearAssemblyPrograms response structure.
  * @class
  */
@@ -8339,6 +8407,7 @@ module.exports = {
     DeleteStreamPackageLinearAssemblyProgramRequest: DeleteStreamPackageLinearAssemblyProgramRequest,
     DeleteStreamPackageChannelsResponse: DeleteStreamPackageChannelsResponse,
     ProgramScheduleInfo: ProgramScheduleInfo,
+    SourceTag: SourceTag,
     DeleteStreamPackageLinearAssemblyProgramsResponse: DeleteStreamPackageLinearAssemblyProgramsResponse,
     SpliceInsertInfo: SpliceInsertInfo,
     CreateStreamPackageLinearAssemblyProgramResponse: CreateStreamPackageLinearAssemblyProgramResponse,

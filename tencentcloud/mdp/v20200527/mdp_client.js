@@ -156,6 +156,7 @@ const DescribeStreamPackageSourceAlertsResponse = models.DescribeStreamPackageSo
 const DeleteStreamPackageLinearAssemblyProgramRequest = models.DeleteStreamPackageLinearAssemblyProgramRequest;
 const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
 const ProgramScheduleInfo = models.ProgramScheduleInfo;
+const SourceTag = models.SourceTag;
 const DeleteStreamPackageLinearAssemblyProgramsResponse = models.DeleteStreamPackageLinearAssemblyProgramsResponse;
 const SpliceInsertInfo = models.SpliceInsertInfo;
 const CreateStreamPackageLinearAssemblyProgramResponse = models.CreateStreamPackageLinearAssemblyProgramResponse;

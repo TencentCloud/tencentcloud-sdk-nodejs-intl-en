@@ -70,6 +70,7 @@ const UserRole = models.UserRole;
 const DataEngineBasicInfo = models.DataEngineBasicInfo;
 const DetachWorkGroupPolicyResponse = models.DetachWorkGroupPolicyResponse;
 const DescribeSparkSessionBatchSqlLogResponse = models.DescribeSparkSessionBatchSqlLogResponse;
+const DescribeDLCTableListResponse = models.DescribeDLCTableListResponse;
 const GenerateCreateMangedTableSqlRequest = models.GenerateCreateMangedTableSqlRequest;
 const DescribeUserTypeRequest = models.DescribeUserTypeRequest;
 const SwitchDataEngineResponse = models.SwitchDataEngineResponse;
@@ -125,6 +126,8 @@ const DescribeSparkAppJobsRequest = models.DescribeSparkAppJobsRequest;
 const PermissionResponseInfo = models.PermissionResponseInfo;
 const DescribeJobsResponse = models.DescribeJobsResponse;
 const DescribeDataEngineRequest = models.DescribeDataEngineRequest;
+const DataMaskStrategyInfo = models.DataMaskStrategyInfo;
+const GroupInfo = models.GroupInfo;
 const RollbackDataEngineImageResponse = models.RollbackDataEngineImageResponse;
 const QueryResultRequest = models.QueryResultRequest;
 const LakeFsInfo = models.LakeFsInfo;
@@ -155,6 +158,7 @@ const SmartOptimizerLifecyclePolicy = models.SmartOptimizerLifecyclePolicy;
 const DeleteUsersFromWorkGroupResponse = models.DeleteUsersFromWorkGroupResponse;
 const AddUsersToWorkGroupRequest = models.AddUsersToWorkGroupRequest;
 const DescribeStoreLocationRequest = models.DescribeStoreLocationRequest;
+const CreateDataMaskStrategyRequest = models.CreateDataMaskStrategyRequest;
 const DescribeDLCCatalogAccessResponse = models.DescribeDLCCatalogAccessResponse;
 const AddUsersToWorkGroupResponse = models.AddUsersToWorkGroupResponse;
 const CreateResultDownloadResponse = models.CreateResultDownloadResponse;
@@ -173,7 +177,7 @@ const DescribeSubUserAccessPolicyResponse = models.DescribeSubUserAccessPolicyRe
 const TaskResponseInfo = models.TaskResponseInfo;
 const RevokeDLCCatalogAccessRequest = models.RevokeDLCCatalogAccessRequest;
 const UpgradeDataEngineImageResponse = models.UpgradeDataEngineImageResponse;
-const DescribeDLCTableListResponse = models.DescribeDLCTableListResponse;
+const AttachDataMaskPolicyRequest = models.AttachDataMaskPolicyRequest;
 const DMSSds = models.DMSSds;
 const OpendThirdAccessUserInfo = models.OpendThirdAccessUserInfo;
 const WorkGroupInfo = models.WorkGroupInfo;
@@ -183,6 +187,7 @@ const CheckPermission = models.CheckPermission;
 const DropDMSDatabaseRequest = models.DropDMSDatabaseRequest;
 const DescribeDataEngineImageVersionsRequest = models.DescribeDataEngineImageVersionsRequest;
 const BindWorkGroupsToUserResponse = models.BindWorkGroupsToUserResponse;
+const CreateDataMaskStrategyResponse = models.CreateDataMaskStrategyResponse;
 const DescribeStoreLocationResponse = models.DescribeStoreLocationResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const DropDLCTableResponse = models.DropDLCTableResponse;
@@ -270,6 +275,7 @@ const RenewDataEngineResponse = models.RenewDataEngineResponse;
 const UpdateRowFilterResponse = models.UpdateRowFilterResponse;
 const UserInfo = models.UserInfo;
 const CreateTasksResponse = models.CreateTasksResponse;
+const DataMaskStrategyPolicy = models.DataMaskStrategyPolicy;
 const GrantDLCCatalogAccessResponse = models.GrantDLCCatalogAccessResponse;
 const CreateSparkAppRequest = models.CreateSparkAppRequest;
 const DataEngineScaleInfo = models.DataEngineScaleInfo;
@@ -285,6 +291,7 @@ const CreateWorkGroupRequest = models.CreateWorkGroupRequest;
 const CreateInternalTableResponse = models.CreateInternalTableResponse;
 const DataEngineInfo = models.DataEngineInfo;
 const DescribeSessionImageVersionResponse = models.DescribeSessionImageVersionResponse;
+const AttachDataMaskPolicyResponse = models.AttachDataMaskPolicyResponse;
 const DescribeSessionImageVersionRequest = models.DescribeSessionImageVersionRequest;
 const AlterDMSDatabaseRequest = models.AlterDMSDatabaseRequest;
 const CheckDataEngineImageCanBeUpgradeRequest = models.CheckDataEngineImageCanBeUpgradeRequest;
@@ -890,14 +897,14 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change data governance event thresholds.
-     * @param {ModifyGovernEventRuleRequest} req
-     * @param {function(string, ModifyGovernEventRuleResponse):void} cb
+     * This API is used to copy a table.
+     * @param {CopyDLCTableRequest} req
+     * @param {function(string, CopyDLCTableResponse):void} cb
      * @public
      */
-    ModifyGovernEventRule(req, cb) {
-        let resp = new ModifyGovernEventRuleResponse();
-        this.request("ModifyGovernEventRule", req, resp, cb);
+    CopyDLCTable(req, cb) {
+        let resp = new CopyDLCTableResponse();
+        this.request("CopyDLCTable", req, resp, cb);
     }
 
     /**
@@ -1231,14 +1238,14 @@ class DlcClient extends AbstractClient {
     }
 
     /**
-     * This API is used to copy a table.
-     * @param {CopyDLCTableRequest} req
-     * @param {function(string, CopyDLCTableResponse):void} cb
+     * This API is used to change data governance event thresholds.
+     * @param {ModifyGovernEventRuleRequest} req
+     * @param {function(string, ModifyGovernEventRuleResponse):void} cb
      * @public
      */
-    CopyDLCTable(req, cb) {
-        let resp = new CopyDLCTableResponse();
-        this.request("CopyDLCTable", req, resp, cb);
+    ModifyGovernEventRule(req, cb) {
+        let resp = new ModifyGovernEventRuleResponse();
+        this.request("ModifyGovernEventRule", req, resp, cb);
     }
 
     /**
@@ -1316,6 +1323,17 @@ class DlcClient extends AbstractClient {
     RestartDataEngine(req, cb) {
         let resp = new RestartDataEngineResponse();
         this.request("RestartDataEngine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind a DMask policy.
+     * @param {AttachDataMaskPolicyRequest} req
+     * @param {function(string, AttachDataMaskPolicyResponse):void} cb
+     * @public
+     */
+    AttachDataMaskPolicy(req, cb) {
+        let resp = new AttachDataMaskPolicyResponse();
+        this.request("AttachDataMaskPolicy", req, resp, cb);
     }
 
     /**
@@ -1404,6 +1422,17 @@ class DlcClient extends AbstractClient {
     DropDMSTable(req, cb) {
         let resp = new DropDMSTableResponse();
         this.request("DropDMSTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a DMask policy.
+     * @param {CreateDataMaskStrategyRequest} req
+     * @param {function(string, CreateDataMaskStrategyResponse):void} cb
+     * @public
+     */
+    CreateDataMaskStrategy(req, cb) {
+        let resp = new CreateDataMaskStrategyResponse();
+        this.request("CreateDataMaskStrategy", req, resp, cb);
     }
 
     /**

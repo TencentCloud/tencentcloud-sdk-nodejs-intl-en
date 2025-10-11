@@ -78,6 +78,7 @@ module.exports = {
     mdc: require("./mdc"),
     mdl: require("./mdl"),
     mdp: require("./mdp"),
+    message: require("./message"),
     mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     mps: require("./mps"),

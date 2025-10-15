@@ -28,6 +28,7 @@ const DeleteUserRequest = models.DeleteUserRequest;
 const DescribeUserDataEngineConfigResponse = models.DescribeUserDataEngineConfigResponse;
 const Asset = models.Asset;
 const DataEngineScaleInfoDetail = models.DataEngineScaleInfoDetail;
+const DescribeDataMaskStrategiesResponse = models.DescribeDataMaskStrategiesResponse;
 const SparkSessionBatchLogOperate = models.SparkSessionBatchLogOperate;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
 const DeleteDataEngineResponse = models.DeleteDataEngineResponse;
@@ -86,12 +87,14 @@ const GenerateCreateMangedTableSqlResponse = models.GenerateCreateMangedTableSql
 const WorkGroupMessage = models.WorkGroupMessage;
 const UpdateDataEngineConfigResponse = models.UpdateDataEngineConfigResponse;
 const UserIdSetOfWorkGroupId = models.UserIdSetOfWorkGroupId;
+const DataMaskStrategy = models.DataMaskStrategy;
 const DescribeAdvancedStoreLocationResponse = models.DescribeAdvancedStoreLocationResponse;
 const DescribeTablesNameResponse = models.DescribeTablesNameResponse;
 const DescribeAdvancedStoreLocationRequest = models.DescribeAdvancedStoreLocationRequest;
 const UpdateDataEngineRequest = models.UpdateDataEngineRequest;
 const DescribeSparkAppJobRequest = models.DescribeSparkAppJobRequest;
 const DescribeDLCTableListRequest = models.DescribeDLCTableListRequest;
+const DeleteDataMaskStrategyResponse = models.DeleteDataMaskStrategyResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const CreateSparkAppTaskRequest = models.CreateSparkAppTaskRequest;
 const ModifySparkAppBatchResponse = models.ModifySparkAppBatchResponse;
@@ -144,7 +147,7 @@ const ModifySparkAppResponse = models.ModifySparkAppResponse;
 const FavorInfo = models.FavorInfo;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const ModifyUserTypeRequest = models.ModifyUserTypeRequest;
-const ModifyDataEngineDescriptionResponse = models.ModifyDataEngineDescriptionResponse;
+const DeleteDataMaskStrategyRequest = models.DeleteDataMaskStrategyRequest;
 const RollbackDataEngineImageRequest = models.RollbackDataEngineImageRequest;
 const DescribeWorkGroupsResponse = models.DescribeWorkGroupsResponse;
 const DescribeUsersRequest = models.DescribeUsersRequest;
@@ -153,7 +156,7 @@ const Property = models.Property;
 const TasksOverview = models.TasksOverview;
 const DescribeUpdatableDataEnginesRequest = models.DescribeUpdatableDataEnginesRequest;
 const Execution = models.Execution;
-const DescribeSparkAppJobResponse = models.DescribeSparkAppJobResponse;
+const DescribeDataMaskStrategiesRequest = models.DescribeDataMaskStrategiesRequest;
 const SmartOptimizerLifecyclePolicy = models.SmartOptimizerLifecyclePolicy;
 const DeleteUsersFromWorkGroupResponse = models.DeleteUsersFromWorkGroupResponse;
 const AddUsersToWorkGroupRequest = models.AddUsersToWorkGroupRequest;
@@ -170,6 +173,7 @@ const GrantDLCCatalogAccessRequest = models.GrantDLCCatalogAccessRequest;
 const DataEngineConfigPair = models.DataEngineConfigPair;
 const SessionResourceTemplate = models.SessionResourceTemplate;
 const DropDMSTableRequest = models.DropDMSTableRequest;
+const UpdateDataMaskStrategyRequest = models.UpdateDataMaskStrategyRequest;
 const StatisticInfo = models.StatisticInfo;
 const AttachWorkGroupPolicyResponse = models.AttachWorkGroupPolicyResponse;
 const ModifyAdvancedStoreLocationResponse = models.ModifyAdvancedStoreLocationResponse;
@@ -189,6 +193,7 @@ const DescribeDataEngineImageVersionsRequest = models.DescribeDataEngineImageVer
 const BindWorkGroupsToUserResponse = models.BindWorkGroupsToUserResponse;
 const CreateDataMaskStrategyResponse = models.CreateDataMaskStrategyResponse;
 const DescribeStoreLocationResponse = models.DescribeStoreLocationResponse;
+const ModifyDataEngineDescriptionResponse = models.ModifyDataEngineDescriptionResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const DropDLCTableResponse = models.DropDLCTableResponse;
 const DescribeUserRolesRequest = models.DescribeUserRolesRequest;
@@ -236,6 +241,7 @@ const CreateResultDownloadRequest = models.CreateResultDownloadRequest;
 const DescribeLakeFsInfoResponse = models.DescribeLakeFsInfoResponse;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const CancelSparkSessionBatchSQLResponse = models.CancelSparkSessionBatchSQLResponse;
+const DescribeSparkAppJobResponse = models.DescribeSparkAppJobResponse;
 const DMSPartition = models.DMSPartition;
 const WorkGroupDetailInfo = models.WorkGroupDetailInfo;
 const DescribeThirdPartyAccessUserRequest = models.DescribeThirdPartyAccessUserRequest;
@@ -308,6 +314,7 @@ const DeleteCHDFSBindingProductResponse = models.DeleteCHDFSBindingProductRespon
 const DescribeDataEnginePythonSparkImagesResponse = models.DescribeDataEnginePythonSparkImagesResponse;
 const ModifyUserRequest = models.ModifyUserRequest;
 const DMSColumn = models.DMSColumn;
+const UpdateDataMaskStrategyResponse = models.UpdateDataMaskStrategyResponse;
 const EngineSessionImage = models.EngineSessionImage;
 const UpdateRowFilterRequest = models.UpdateRowFilterRequest;
 const TColumn = models.TColumn;
@@ -402,6 +409,17 @@ class DlcClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the DMask list.
+     * @param {DescribeDataMaskStrategiesRequest} req
+     * @param {function(string, DescribeDataMaskStrategiesResponse):void} cb
+     * @public
+     */
+    DescribeDataMaskStrategies(req, cb) {
+        let resp = new DescribeDataMaskStrategiesResponse();
+        this.request("DescribeDataMaskStrategies", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete working groups.
      * @param {DeleteWorkGroupRequest} req
      * @param {function(string, DeleteWorkGroupResponse):void} cb
@@ -454,6 +472,17 @@ class DlcClient extends AbstractClient {
     DescribeSparkSessionBatchSqlLog(req, cb) {
         let resp = new DescribeSparkSessionBatchSqlLogResponse();
         this.request("DescribeSparkSessionBatchSqlLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a data masking policy.
+     * @param {DeleteDataMaskStrategyRequest} req
+     * @param {function(string, DeleteDataMaskStrategyResponse):void} cb
+     * @public
+     */
+    DeleteDataMaskStrategy(req, cb) {
+        let resp = new DeleteDataMaskStrategyResponse();
+        this.request("DeleteDataMaskStrategy", req, resp, cb);
     }
 
     /**
@@ -1169,6 +1198,17 @@ class DlcClient extends AbstractClient {
     DescribeEngineUsageInfo(req, cb) {
         let resp = new DescribeEngineUsageInfoResponse();
         this.request("DescribeEngineUsageInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the DMask policy.
+     * @param {UpdateDataMaskStrategyRequest} req
+     * @param {function(string, UpdateDataMaskStrategyResponse):void} cb
+     * @public
+     */
+    UpdateDataMaskStrategy(req, cb) {
+        let resp = new UpdateDataMaskStrategyResponse();
+        this.request("UpdateDataMaskStrategy", req, resp, cb);
     }
 
     /**

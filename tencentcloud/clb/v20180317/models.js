@@ -6473,10 +6473,21 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of IDs of the CLB instances to be deleted. Array length limit: 20.
+         * CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
+
+        /**
+         * Whether to forcibly delete the CLB instance. True indicates forced deletion; False indicates non-forced deletion, and blocking verification is required.
+The default value is False.
+The deletion operation is blocked by default in the following cases. If you confirm forced deletion, the value of the forced verification parameter ForceDelete should be set to True.
+1. The instance with 20 or more RS bound to the backend is deleted.
+2. The instance with RS bound to the backend and the maximum peak inbound/outbound bandwidth exceeding 10 Mbps within 5 minutes is deleted.
+3. Thirty or more instances are deleted within 5 minutes in a single region.
+         * @type {boolean || null}
+         */
+        this.ForceDelete = null;
 
     }
 
@@ -6488,6 +6499,7 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
             return;
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.ForceDelete = 'ForceDelete' in params ? params.ForceDelete : null;
 
     }
 }

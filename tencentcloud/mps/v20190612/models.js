@@ -5779,23 +5779,25 @@ class QualityControlResult extends  AbstractModel {
         super();
 
         /**
-         * The issue type. Valid values:
-`Jitter`
-`Blur`
-`LowLighting`
-`HighLighting` (overexposure)
-`CrashScreen` (video corruption)
-`BlackWhiteEdge`
-`SolidColorScreen` (blank screen)
-`Noise`
-`Mosaic` (pixelation)
-`QRCode`
-`AppletCode` (Weixin Mini Program code)
-`BarCode`
-`LowVoice`
-`HighVoice`
-`NoVoice`
-`LowEvaluation` (low no-reference video quality score)
+         * Exception type. valid values:.
+Jitter: jitter.
+Blur: specifies the blur effect.
+LowLighting: specifies low light.
+HighLighting: overexposure.
+CrashScreen: specifies screen glitch.
+BlackWhiteEdge: specifies the black and white edges.
+SolidColorScreen: specifies the solid color screen.
+Noise: specifies the noise.
+Mosaic: mosaic.
+QRCode: specifies the qr code.
+AppletCode: specifies the mini program code.
+BarCode: specifies the barcode.
+LowVoice: specifies the bass.
+HighVoice: specifies high voice detection.
+NoVoice: specifies mute.
+LowEvaluation: specifies the video no-reference score (MOS) is below the threshold.
+AudioEvaluation: specifies the audio no-reference scoring (MOS) is below the threshold.
+AudioNoise: specifies the audio noise.
          * @type {string || null}
          */
         this.Type = null;
@@ -8880,16 +8882,17 @@ Advanced edition: better effectiveness, suitable for mini-drama and reality styl
         this.WatermarkModel = null;
 
         /**
-         * Specifies automatic removal of a custom region.
-Specifies the use of an AI model to automatically detect and erase existing targets in the specified region.
-Note that this parameter will not take effect when the removal method is custom.
+         * Automatically erase the custom region.
+Automatically detects and erases the targeted removal in the specified region using the AI model.
+Note that this parameter will not take effect when the removal method is custom. to modify the template, input [] for the clean-up region. if not provided, the template region information remains unchanged.
          * @type {Array.<EraseArea> || null}
          */
         this.AutoAreas = null;
 
         /**
-         * Specifies erasure of a custom region.
-Detects and directly performs removal within a specified time range for the selected region.
+         * Specifies the removal of a custom region.
+Specifies to directly perform removal without detection and recognition within a selected time range for the specified region.
+Note: when modifying the template, pass [] to clear the region. the template region information remains unchanged if not passed.
          * @type {Array.<EraseTimeArea> || null}
          */
         this.CustomAreas = null;
@@ -14374,6 +14377,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Video deduplication result information.
+ * @class
+ */
+class AiAnalysisTaskVideoRemakeOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the file path for intelligent video deduplication.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Specifies the storage location for intelligent video deduplication.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+    }
+}
+
+/**
  * ManageTask request structure.
  * @class
  */
@@ -15279,6 +15322,34 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * Video deduplication task input type.
+ * @class
+ */
+class AiAnalysisTaskVideoRemakeInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Intelligent deduplication template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * AI-based ASR-based live streaming keyword recognition result
  * @class
  */
@@ -15649,15 +15720,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Uri = null;
 
         /**
-         * The encryption key (a 32-byte string).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Encryption key (32-byte hexadecimal string).
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * The initialization vector for encryption (a 32-byte string).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Initialization vector for encryption (32-byte hexadecimal string).
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Vector = null;
@@ -18972,13 +19043,14 @@ class AiAnalysisResult extends  AbstractModel {
          * Task type. valid values:.
 <Li>Classification: intelligent classification.</li>.
 <Li>Cover: specifies the intelligent cover.</li>.
-<Li>Tag: intelligent tag.</li>.
-<Li>FrameTag: specifies intelligent frame-by-frame tagging.</li>.
+<Li>Tag: intelligent tagging.</li>.
+<Li>FrameTag: intelligent frame-by-frame tagging.</li>.
 <Li>Highlight: intelligent highlights</li>.
 <Li>DeLogo: intelligent removal.</li>.
 <li>Description: large model summarization.</li>
 
 <Li>Dubbing: intelligent dubbing.</li>.
+<Li>VideoRemake: specifies video deduplication.</li>.
          * @type {string || null}
          */
         this.Type = null;
@@ -19056,6 +19128,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.DubbingTask = null;
 
+        /**
+         * The query result of a video content deduplication task, which is valid when the task type is VideoRemake.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AiAnalysisTaskVideoRemakeResult || null}
+         */
+        this.VideoRemakeTask = null;
+
     }
 
     /**
@@ -19131,6 +19210,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new AiAnalysisTaskDubbingResult();
             obj.deserialize(params.DubbingTask)
             this.DubbingTask = obj;
+        }
+
+        if (params.VideoRemakeTask) {
+            let obj = new AiAnalysisTaskVideoRemakeResult();
+            obj.deserialize(params.VideoRemakeTask)
+            this.VideoRemakeTask = obj;
         }
 
     }
@@ -23782,6 +23867,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Sign = null;
 
         /**
+         * Batch processing task information. this field has a value only when EventType is BatchTask.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {BatchSubTaskResult || null}
+         */
+        this.BatchTaskEvent = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -23819,6 +23911,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.Sign = 'Sign' in params ? params.Sign : null;
+
+        if (params.BatchTaskEvent) {
+            let obj = new BatchSubTaskResult();
+            obj.deserialize(params.BatchTaskEvent)
+            this.BatchTaskEvent = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -24838,6 +24936,73 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+
+    }
+}
+
+/**
+ * Video deduplication result data structure.
+ * @class
+ */
+class AiAnalysisTaskVideoRemakeResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the task status. valid values: `PROCESSING`, `SUCCESS`, and `FAIL`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success. other values: failure.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Deduplication task input.
+         * @type {AiAnalysisTaskVideoRemakeInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Task output.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {AiAnalysisTaskVideoRemakeOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskVideoRemakeInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskVideoRemakeOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -26829,7 +26994,13 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * Recording type. Valid values: video: audio and video recording; audio: audio recording; auto: automatic detection. If it is left blank, the default value video is used.
+         * Recording type. Valid values: 
+
+- video: audio and video recording; 
+- audio: audio recording; 
+- auto: automatic detection;
+
+If it is left blank, "video" will be used as the default value.
          * @type {string || null}
          */
         this.RecordType = null;
@@ -29360,10 +29531,19 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
+         * Filters task status. available values:.
+-WAITING.
+-PROCESSING (processing).
+-FINISH (completed).
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * Indicates whether there is a subtask failure when the task is complete.
+         * @type {boolean || null}
+         */
+        this.SubTaskHasFailed = null;
 
         /**
          * Number of returned entries. Default value: 10. Maximum value: 100.
@@ -29399,6 +29579,7 @@ class DescribeTasksRequest extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.SubTaskHasFailed = 'SubTaskHasFailed' in params ? params.SubTaskHasFailed : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
@@ -30334,6 +30515,20 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SubtitleName = null;
 
+        /**
+         * Output format of the subtitle. valid values: "WebVTT", "TTML".
+Default value: "WebVTT".
+         * @type {string || null}
+         */
+        this.OutputFormat = null;
+
+        /**
+         * Default subtitle track. specifies the current subtitle as the default track when true. a maximum of 1 default subtitle track can be specified.
+Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.DefaultTrack = null;
+
     }
 
     /**
@@ -30351,6 +30546,8 @@ Note: This field may return null, indicating that no valid value can be obtained
             this.Subtitle = obj;
         }
         this.SubtitleName = 'SubtitleName' in params ? params.SubtitleName : null;
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+        this.DefaultTrack = 'DefaultTrack' in params ? params.DefaultTrack : null;
 
     }
 }
@@ -34674,7 +34871,7 @@ Note: different DRM manufacturers have different limitations on the number of su
         this.KeyServerUrl = null;
 
         /**
-         * Encryption initialization vector (32-byte string). the field content is user-customized.
+         * Initialization vector for encryption (32-byte hexadecimal string). the field content is user-customized.
          * @type {string || null}
          */
         this.Vector = null;
@@ -36945,6 +37142,7 @@ module.exports = {
     AiRecognitionTaskTransTextResultInput: AiRecognitionTaskTransTextResultInput,
     DescribeSchedulesResponse: DescribeSchedulesResponse,
     ImageQualityEnhanceConfig: ImageQualityEnhanceConfig,
+    AiAnalysisTaskVideoRemakeOutput: AiAnalysisTaskVideoRemakeOutput,
     ManageTaskRequest: ManageTaskRequest,
     AiAnalysisTaskSegmentResult: AiAnalysisTaskSegmentResult,
     RawSmartSubtitleParameter: RawSmartSubtitleParameter,
@@ -36961,6 +37159,7 @@ module.exports = {
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifyQualityControlTemplateResponse: ModifyQualityControlTemplateResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
+    AiAnalysisTaskVideoRemakeInput: AiAnalysisTaskVideoRemakeInput,
     LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
     AiSamplePerson: AiSamplePerson,
     SmartSubtitleTaskAsrFullTextResult: SmartSubtitleTaskAsrFullTextResult,
@@ -37110,6 +37309,7 @@ module.exports = {
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AudioTemplateInfo: AudioTemplateInfo,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
+    AiAnalysisTaskVideoRemakeResult: AiAnalysisTaskVideoRemakeResult,
     ArtifactRepairConfig: ArtifactRepairConfig,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeBatchTaskDetailResponse: DescribeBatchTaskDetailResponse,

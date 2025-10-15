@@ -2820,6 +2820,41 @@ Specifies that the database kernel version is larger than 3.1.12.
 }
 
 /**
+ * DescribeIntegrateTask request structure.
+ * @class
+ */
+class DescribeIntegrateTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Large order id. must choose between large order id and sub-order id.
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
+        /**
+         * Order list
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+
+    }
+}
+
+/**
  * Database proxy group details
  * @class
  */
@@ -3570,6 +3605,283 @@ class DescribeProxyNodesResponse extends  AbstractModel {
 }
 
 /**
+ * CreateIntegrateCluster request structure.
+ * @class
+ */
+class CreateIntegrateClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Availability zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Specifies the ID of the VPC network it belongs to.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Database version. valid values:. 
+<li>Specifies the available values for MYSQL: 5.7, 8.0.</li>.
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Cluster name, length less than 64 characters. each character value ranges from uppercase/lowercase letters, digits, special symbols ('-','_','.').
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Account password (8-64 characters, a combination of uppercase and lowercase letters, digits and symbols ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/ with any three types).
+         * @type {string || null}
+         */
+        this.AdminPassword = null;
+
+        /**
+         * Port, default 3306, in the range of [0, 65535).
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Billing mode. 0: pay-as-you-go; 1: monthly subscription. default is pay-as-you-go.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Number of clusters to purchase. value range: [1,3]. default is 1.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Maximum storage limit of a regular instance, in GB.
+When DbType is MYSQL and the storage billing mode is prepaid, this parameter should not exceed the maximum storage specification corresponding to cpu and memory.
+         * @type {number || null}
+         */
+        this.StorageLimit = null;
+
+        /**
+         * Specifies the annual and monthly subscription duration.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Specifies the measurement unit for annual and monthly subscription duration. valid values: 's', 'd', 'm', 'y'.
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Whether annual/monthly subscription is auto-renewed. default value is 0.
+0 identifies the default renewal method, 1 means auto-renew, 2 indicates no auto-renewal.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Whether to automatically select a voucher. 1: yes; 0: no. default value: 0.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Specifies the tag array information that needs to be bound during cluster creation.
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Specifies the cluster storage billing mode. 0: pay-as-you-go; 1: monthly subscription. default is pay-as-you-go.
+When DbType is MYSQL and the cluster billing mode for computing is postpaid (including DbMode as SERVERLESS), the storage billing mode can only be pay-as-you-go.
+Rollback and clone do not support monthly subscription storage.
+         * @type {number || null}
+         */
+        this.StoragePayMode = null;
+
+        /**
+         * Security group id array.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Specifies the Alarm policy Id array.
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyIds = null;
+
+        /**
+         * Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names. valid values: 1 (case-insensitive), 0 (case-sensitive).
+         * @type {Array.<ParamItem> || null}
+         */
+        this.ClusterParams = null;
+
+        /**
+         * Transaction mode. valid values: 0 (place order and pay), 1 (place order).
+         * @type {number || null}
+         */
+        this.DealMode = null;
+
+        /**
+         * Parameter template ID. can be obtained through querying parameter template information DescribeParamTemplates.
+         * @type {number || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * Multi-AZ address.
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * Initializes configuration information, mainly used to purchase clusters with different specification instances.
+         * @type {Array.<IntegrateInstanceInfo> || null}
+         */
+        this.InstanceInitInfos = null;
+
+        /**
+         * Global database unique identifier.
+         * @type {string || null}
+         */
+        this.GdnId = null;
+
+        /**
+         * Database proxy configuration.
+         * @type {ProxyConfigInfo || null}
+         */
+        this.ProxyConfig = null;
+
+        /**
+         * Specifies whether to automatically archive.
+         * @type {string || null}
+         */
+        this.AutoArchive = null;
+
+        /**
+         * Processing time after pausing.
+         * @type {number || null}
+         */
+        this.AutoArchiveDelayHours = null;
+
+        /**
+         * Encryption method (consists of encryption algorithm and key pair version).
+         * @type {string || null}
+         */
+        this.EncryptMethod = null;
+
+        /**
+         * Describes the cluster configuration information.
+         * @type {IntegrateCreateClusterConfig || null}
+         */
+        this.IntegrateCreateClusterConfig = null;
+
+        /**
+         * Storage architecture type. valid values: 1.0/2.0. default value: 1.0.
+         * @type {string || null}
+         */
+        this.StorageVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.AlarmPolicyIds = 'AlarmPolicyIds' in params ? params.AlarmPolicyIds : null;
+
+        if (params.ClusterParams) {
+            this.ClusterParams = new Array();
+            for (let z in params.ClusterParams) {
+                let obj = new ParamItem();
+                obj.deserialize(params.ClusterParams[z]);
+                this.ClusterParams.push(obj);
+            }
+        }
+        this.DealMode = 'DealMode' in params ? params.DealMode : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+
+        if (params.InstanceInitInfos) {
+            this.InstanceInitInfos = new Array();
+            for (let z in params.InstanceInitInfos) {
+                let obj = new IntegrateInstanceInfo();
+                obj.deserialize(params.InstanceInitInfos[z]);
+                this.InstanceInitInfos.push(obj);
+            }
+        }
+        this.GdnId = 'GdnId' in params ? params.GdnId : null;
+
+        if (params.ProxyConfig) {
+            let obj = new ProxyConfigInfo();
+            obj.deserialize(params.ProxyConfig)
+            this.ProxyConfig = obj;
+        }
+        this.AutoArchive = 'AutoArchive' in params ? params.AutoArchive : null;
+        this.AutoArchiveDelayHours = 'AutoArchiveDelayHours' in params ? params.AutoArchiveDelayHours : null;
+        this.EncryptMethod = 'EncryptMethod' in params ? params.EncryptMethod : null;
+
+        if (params.IntegrateCreateClusterConfig) {
+            let obj = new IntegrateCreateClusterConfig();
+            obj.deserialize(params.IntegrateCreateClusterConfig)
+            this.IntegrateCreateClusterConfig = obj;
+        }
+        this.StorageVersion = 'StorageVersion' in params ? params.StorageVersion : null;
+
+    }
+}
+
+/**
  * Node in the database proxy group
  * @class
  */
@@ -4073,6 +4385,55 @@ class DescribeClusterReadOnlyRequest extends  AbstractModel {
             return;
         }
         this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+
+    }
+}
+
+/**
+ * DescribeIntegrateTask response structure.
+ * @class
+ */
+class DescribeIntegrateTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current step.
+         * @type {string || null}
+         */
+        this.CurrentStep = null;
+
+        /**
+         * Current progress.
+         * @type {string || null}
+         */
+        this.CurrentProgress = null;
+
+        /**
+         * Indicates the task status.
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentStep = 'CurrentStep' in params ? params.CurrentStep : null;
+        this.CurrentProgress = 'CurrentProgress' in params ? params.CurrentProgress : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4696,6 +5057,84 @@ class ModifyAccountHostResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * proxy address configuration of the integrated cluster.
+ * @class
+ */
+class ProxyEndPointConfigInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the ID of the VPC network it belongs to.
+         * @type {string || null}
+         */
+        this.UniqueVpcId = null;
+
+        /**
+         * Subnet ID.
+         * @type {string || null}
+         */
+        this.UniqueSubnetId = null;
+
+        /**
+         * Security group id array.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Weight mode: system-system allocation, custom-custom.
+         * @type {string || null}
+         */
+        this.WeightMode = null;
+
+        /**
+         * Specifies whether to automatically add a read-only instance. valid values: yes, no.
+         * @type {string || null}
+         */
+        this.AutoAddRo = null;
+
+        /**
+         * Read-Write attribute. valid values: READWRITE, READONLY.
+         * @type {string || null}
+         */
+        this.RwType = null;
+
+        /**
+         * Weight information.
+         * @type {Array.<InstanceNameWeight> || null}
+         */
+        this.InstanceNameWeights = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UniqueVpcId = 'UniqueVpcId' in params ? params.UniqueVpcId : null;
+        this.UniqueSubnetId = 'UniqueSubnetId' in params ? params.UniqueSubnetId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+        this.AutoAddRo = 'AutoAddRo' in params ? params.AutoAddRo : null;
+        this.RwType = 'RwType' in params ? params.RwType : null;
+
+        if (params.InstanceNameWeights) {
+            this.InstanceNameWeights = new Array();
+            for (let z in params.InstanceNameWeights) {
+                let obj = new InstanceNameWeight();
+                obj.deserialize(params.InstanceNameWeights[z]);
+                this.InstanceNameWeights.push(obj);
+            }
+        }
 
     }
 }
@@ -10847,6 +11286,41 @@ class CloseWanRequest extends  AbstractModel {
 }
 
 /**
+ * Instance weight.
+ * @class
+ */
+class InstanceNameWeight extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name. specifies the name defined by InstanceInitInfo.InstanceName in cluster creation.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Weight
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * UpgradeProxyVersion request structure.
  * @class
  */
@@ -12244,6 +12718,71 @@ class ModifyProxyDescResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateIntegrateCluster response structure.
+ * @class
+ */
+class CreateIntegrateClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Frozen transaction ID.
+         * @type {string || null}
+         */
+        this.TranId = null;
+
+        /**
+         * Order ID
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * Resource ID list (this field is no longer maintained. please use the dealNames field and the query API DescribeResourcesByDealName to obtain resource ids).
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * Cluster ID list (this field is no longer maintained. please use the dealNames field to get cluster ids via the DescribeResourcesByDealName api.).
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * Large order number.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TranId = 'TranId' in params ? params.TranId : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15828,6 +16367,70 @@ class OpenClusterPasswordComplexityRequest extends  AbstractModel {
 }
 
 /**
+ * Access proxy configuration.
+ * @class
+ */
+class ProxyConfigInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of database proxy group nodes. this parameter is no longer recommended. recommend using ProxyZones.
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Specifies the memory.
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Database node information (this parameter is used in combination with ProxyCount, either one must be manually input).
+         * @type {Array.<ProxyZone> || null}
+         */
+        this.ProxyZones = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.ProxyZones) {
+            this.ProxyZones = new Array();
+            for (let z in params.ProxyZones) {
+                let obj = new ProxyZone();
+                obj.deserialize(params.ProxyZones[z]);
+                this.ProxyZones.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Resource package deduction priority.
  * @class
  */
@@ -16401,6 +17004,63 @@ class LogicBackupConfigInfo extends  AbstractModel {
 }
 
 /**
+ * Integrated cluster configuration.
+ * @class
+ */
+class IntegrateCreateClusterConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Retention days of binlog. value range: 7-1830.
+         * @type {number || null}
+         */
+        this.BinlogSaveDays = null;
+
+        /**
+         * Specifies the backup retention days. value range: 7-1830.
+         * @type {number || null}
+         */
+        this.BackupSaveDays = null;
+
+        /**
+         * Specifies the semi-sync timeout period. value range: [1000,4294967295].
+         * @type {number || null}
+         */
+        this.SemiSyncTimeout = null;
+
+        /**
+         * proxy connection address configuration message.
+         * @type {Array.<ProxyEndPointConfigInfo> || null}
+         */
+        this.ProxyEndPointConfigs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BinlogSaveDays = 'BinlogSaveDays' in params ? params.BinlogSaveDays : null;
+        this.BackupSaveDays = 'BackupSaveDays' in params ? params.BackupSaveDays : null;
+        this.SemiSyncTimeout = 'SemiSyncTimeout' in params ? params.SemiSyncTimeout : null;
+
+        if (params.ProxyEndPointConfigs) {
+            this.ProxyEndPointConfigs = new Array();
+            for (let z in params.ProxyEndPointConfigs) {
+                let obj = new ProxyEndPointConfigInfo();
+                obj.deserialize(params.ProxyEndPointConfigs[z]);
+                this.ProxyEndPointConfigs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteBackup response structure.
  * @class
  */
@@ -16858,6 +17518,62 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.FileNames = 'FileNames' in params ? params.FileNames : null;
         this.BackupNames = 'BackupNames' in params ? params.BackupNames : null;
         this.SnapshotIdList = 'SnapshotIdList' in params ? params.SnapshotIdList : null;
+
+    }
+}
+
+/**
+ * Initializes the configuration information of an instance.
+ * @class
+ */
+class IntegrateInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the cpu of the instance.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Specifies the instance memory.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance type (rw/ro).
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Number of instances. value range: [1,15].
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * Instance machine type. valid values: universal type (common), exclusive type.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -19743,6 +20459,7 @@ module.exports = {
     AddInstancesResponse: AddInstancesResponse,
     BackupLimitClusterRestriction: BackupLimitClusterRestriction,
     SlowQueriesItem: SlowQueriesItem,
+    DescribeIntegrateTaskRequest: DescribeIntegrateTaskRequest,
     ProxyGroupInfo: ProxyGroupInfo,
     CreateProxyEndPointRequest: CreateProxyEndPointRequest,
     ModifyBackupDownloadUserRestrictionResponse: ModifyBackupDownloadUserRestrictionResponse,
@@ -19754,6 +20471,7 @@ module.exports = {
     DescribeClusterReadOnlyResponse: DescribeClusterReadOnlyResponse,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
     DescribeProxyNodesResponse: DescribeProxyNodesResponse,
+    CreateIntegrateClusterRequest: CreateIntegrateClusterRequest,
     ProxyNodeInfo: ProxyNodeInfo,
     DescribeZonesResponse: DescribeZonesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
@@ -19763,6 +20481,7 @@ module.exports = {
     DescribeProxyNodesRequest: DescribeProxyNodesRequest,
     InquirePriceCreateResponse: InquirePriceCreateResponse,
     DescribeClusterReadOnlyRequest: DescribeClusterReadOnlyRequest,
+    DescribeIntegrateTaskResponse: DescribeIntegrateTaskResponse,
     Account: Account,
     CreateClusterDatabaseResponse: CreateClusterDatabaseResponse,
     CloseProxyResponse: CloseProxyResponse,
@@ -19777,6 +20496,7 @@ module.exports = {
     AuditRuleFilters: AuditRuleFilters,
     DescribeClusterParamsRequest: DescribeClusterParamsRequest,
     ModifyAccountHostResponse: ModifyAccountHostResponse,
+    ProxyEndPointConfigInfo: ProxyEndPointConfigInfo,
     DescribeServerlessInstanceSpecsResponse: DescribeServerlessInstanceSpecsResponse,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     InquirePriceModifyResponse: InquirePriceModifyResponse,
@@ -19892,6 +20612,7 @@ module.exports = {
     DescribeBinlogSaveDaysResponse: DescribeBinlogSaveDaysResponse,
     ModifyResourcePackagesDeductionPriorityResponse: ModifyResourcePackagesDeductionPriorityResponse,
     CloseWanRequest: CloseWanRequest,
+    InstanceNameWeight: InstanceNameWeight,
     UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
     ModifyResourcePackageClustersRequest: ModifyResourcePackageClustersRequest,
     ObjectTask: ObjectTask,
@@ -19922,6 +20643,7 @@ module.exports = {
     DescribeAuditRuleWithInstanceIdsResponse: DescribeAuditRuleWithInstanceIdsResponse,
     SearchClusterDatabasesRequest: SearchClusterDatabasesRequest,
     ModifyProxyDescResponse: ModifyProxyDescResponse,
+    CreateIntegrateClusterResponse: CreateIntegrateClusterResponse,
     ModifyClusterSlaveZoneResponse: ModifyClusterSlaveZoneResponse,
     BinlogItem: BinlogItem,
     ModifyProxyDescRequest: ModifyProxyDescRequest,
@@ -19983,6 +20705,7 @@ module.exports = {
     ClusterInstanceDetail: ClusterInstanceDetail,
     OldAddrInfo: OldAddrInfo,
     OpenClusterPasswordComplexityRequest: OpenClusterPasswordComplexityRequest,
+    ProxyConfigInfo: ProxyConfigInfo,
     PackagePriority: PackagePriority,
     DescribeInstancesWithinSameClusterRequest: DescribeInstancesWithinSameClusterRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
@@ -19996,6 +20719,7 @@ module.exports = {
     IsolateInstanceRequest: IsolateInstanceRequest,
     DescribeAuditRuleTemplatesResponse: DescribeAuditRuleTemplatesResponse,
     LogicBackupConfigInfo: LogicBackupConfigInfo,
+    IntegrateCreateClusterConfig: IntegrateCreateClusterConfig,
     DeleteBackupResponse: DeleteBackupResponse,
     ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     ParamDetail: ParamDetail,
@@ -20004,6 +20728,7 @@ module.exports = {
     OpenAuditServiceRequest: OpenAuditServiceRequest,
     ModifyResourcePackageNameResponse: ModifyResourcePackageNameResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
+    IntegrateInstanceInfo: IntegrateInstanceInfo,
     ExportInstanceErrorLogsResponse: ExportInstanceErrorLogsResponse,
     ParamItemDetail: ParamItemDetail,
     SlaveZoneStockInfo: SlaveZoneStockInfo,

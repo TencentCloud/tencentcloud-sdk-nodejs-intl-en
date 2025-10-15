@@ -1053,6 +1053,36 @@ UTC time, such as `2020-01-01T12:00:00Z`
 }
 
 /**
+ * Timed recording settings
+ * @class
+ */
+class TimedRecordSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to automatically delete finished recording events. Valid values: `CLOSE`, `OPEN`. If this parameter is left empty, `CLOSE` will be used.
+If it is set to `OPEN`, a recording event will be deleted 7 days after it is finished.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AutoClear = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoClear = 'AutoClear' in params ? params.AutoClear : null;
+
+    }
+}
+
+/**
  * GetAbWatermarkPlayUrl response structure.
  * @class
  */
@@ -4108,6 +4138,12 @@ class EventSettingsResp extends  AbstractModel {
          */
         this.StaticImageDeactivateSetting = null;
 
+        /**
+         * Dynamic graphic overlay activate configuration.
+         * @type {MotionGraphicsActivateSetting || null}
+         */
+        this.MotionGraphicsActivateSetting = null;
+
     }
 
     /**
@@ -4158,6 +4194,12 @@ class EventSettingsResp extends  AbstractModel {
             let obj = new StaticImageDeactivateSetting();
             obj.deserialize(params.StaticImageDeactivateSetting)
             this.StaticImageDeactivateSetting = obj;
+        }
+
+        if (params.MotionGraphicsActivateSetting) {
+            let obj = new MotionGraphicsActivateSetting();
+            obj.deserialize(params.MotionGraphicsActivateSetting)
+            this.MotionGraphicsActivateSetting = obj;
         }
 
     }
@@ -4723,20 +4765,18 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
- * Timed recording settings
+ * 
  * @class
  */
-class TimedRecordSettings extends  AbstractModel {
+class MotionGraphicsSetting extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to automatically delete finished recording events. Valid values: `CLOSE`, `OPEN`. If this parameter is left empty, `CLOSE` will be used.
-If it is set to `OPEN`, a recording event will be deleted 7 days after it is finished.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
+         * Whether to enable dynamic graphic overlay, '0' not enabled, '1' enabled; Default 0.
+         * @type {number || null}
          */
-        this.AutoClear = null;
+        this.MotionGraphicsOverlayEnabled = null;
 
     }
 
@@ -4747,7 +4787,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.AutoClear = 'AutoClear' in params ? params.AutoClear : null;
+        this.MotionGraphicsOverlayEnabled = 'MotionGraphicsOverlayEnabled' in params ? params.MotionGraphicsOverlayEnabled : null;
 
     }
 }
@@ -5264,6 +5304,34 @@ class DescribeStreamLiveChannelAlertsResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class ThumbnailSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Generate thumbnail ,0: Disabled ,1: Enabled , Default: 0
+         * @type {number || null}
+         */
+        this.ThumbnailEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ThumbnailEnabled = 'ThumbnailEnabled' in params ? params.ThumbnailEnabled : null;
+
+    }
+}
+
+/**
  * Event configuration information
  * @class
  */
@@ -5487,6 +5555,18 @@ class GeneralSetting extends  AbstractModel {
          */
         this.StaticImageSettings = null;
 
+        /**
+         * Dynamic graphic overlay configuration.
+         * @type {MotionGraphicsSetting || null}
+         */
+        this.MotionGraphicsSettings = null;
+
+        /**
+         * Thumbnail Configuration.
+         * @type {ThumbnailSettings || null}
+         */
+        this.ThumbnailSettings = null;
+
     }
 
     /**
@@ -5501,6 +5581,18 @@ class GeneralSetting extends  AbstractModel {
             let obj = new StaticImageSettings();
             obj.deserialize(params.StaticImageSettings)
             this.StaticImageSettings = obj;
+        }
+
+        if (params.MotionGraphicsSettings) {
+            let obj = new MotionGraphicsSetting();
+            obj.deserialize(params.MotionGraphicsSettings)
+            this.MotionGraphicsSettings = obj;
+        }
+
+        if (params.ThumbnailSettings) {
+            let obj = new ThumbnailSettings();
+            obj.deserialize(params.ThumbnailSettings)
+            this.ThumbnailSettings = obj;
         }
 
     }
@@ -5819,6 +5911,12 @@ class EventSettingsReq extends  AbstractModel {
          */
         this.StaticImageDeactivateSetting = null;
 
+        /**
+         * Dynamic graphic overlay activate configuration
+         * @type {MotionGraphicsActivateSetting || null}
+         */
+        this.MotionGraphicsActivateSetting = null;
+
     }
 
     /**
@@ -5869,6 +5967,12 @@ class EventSettingsReq extends  AbstractModel {
             let obj = new StaticImageDeactivateSetting();
             obj.deserialize(params.StaticImageDeactivateSetting)
             this.StaticImageDeactivateSetting = obj;
+        }
+
+        if (params.MotionGraphicsActivateSetting) {
+            let obj = new MotionGraphicsActivateSetting();
+            obj.deserialize(params.MotionGraphicsActivateSetting)
+            this.MotionGraphicsActivateSetting = obj;
         }
 
     }
@@ -6751,6 +6855,34 @@ class DescribeStreamLiveInputSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * StartStreamLiveChannel request structure.
+ * @class
+ */
+class StartStreamLiveChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * 
  * @class
  */
@@ -6840,18 +6972,24 @@ class DeleteStreamLiveInputResponse extends  AbstractModel {
 }
 
 /**
- * StartStreamLiveChannel request structure.
+ * 
  * @class
  */
-class StartStreamLiveChannelRequest extends  AbstractModel {
+class MotionGraphicsActivateSetting extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID
+         * Duration in ms, valid when MOTION_Graphics_ACTIVATE, required; An integer in the range of 0-86400000, where 0 represents the duration until the end of the live stream.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The address of HTML5 needs to comply with the format specification of http/https.
          * @type {string || null}
          */
-        this.Id = null;
+        this.Url = null;
 
     }
 
@@ -6862,7 +7000,8 @@ class StartStreamLiveChannelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -8605,6 +8744,7 @@ module.exports = {
     FrameCaptureTemplate: FrameCaptureTemplate,
     PipelineInputSettingsInfo: PipelineInputSettingsInfo,
     DescribeStreamLiveChannelOutputStatisticsRequest: DescribeStreamLiveChannelOutputStatisticsRequest,
+    TimedRecordSettings: TimedRecordSettings,
     GetAbWatermarkPlayUrlResponse: GetAbWatermarkPlayUrlResponse,
     ChannelPipelineAlerts: ChannelPipelineAlerts,
     InputInfo: InputInfo,
@@ -8665,7 +8805,7 @@ module.exports = {
     PlanReq: PlanReq,
     DeleteStreamLiveWatermarkRequest: DeleteStreamLiveWatermarkRequest,
     CreateStreamLiveChannelRequest: CreateStreamLiveChannelRequest,
-    TimedRecordSettings: TimedRecordSettings,
+    MotionGraphicsSetting: MotionGraphicsSetting,
     CosSettings: CosSettings,
     StreamLiveRegionInfo: StreamLiveRegionInfo,
     DescribeStreamLiveChannelRequest: DescribeStreamLiveChannelRequest,
@@ -8677,6 +8817,7 @@ module.exports = {
     DescribeStreamLiveInputsResponse: DescribeStreamLiveInputsResponse,
     ModifyStreamLiveInputResponse: ModifyStreamLiveInputResponse,
     DescribeStreamLiveChannelAlertsResponse: DescribeStreamLiveChannelAlertsResponse,
+    ThumbnailSettings: ThumbnailSettings,
     PlanResp: PlanResp,
     AudioNormalizationSettings: AudioNormalizationSettings,
     DescribeStreamLivePlansResponse: DescribeStreamLivePlansResponse,
@@ -8707,10 +8848,11 @@ module.exports = {
     AdditionalRateSetting: AdditionalRateSetting,
     PlanSettings: PlanSettings,
     DescribeStreamLiveInputSecurityGroupsResponse: DescribeStreamLiveInputSecurityGroupsResponse,
+    StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,
     AbWatermarkSettingsReq: AbWatermarkSettingsReq,
     EventNotifySetting: EventNotifySetting,
     DeleteStreamLiveInputResponse: DeleteStreamLiveInputResponse,
-    StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,
+    MotionGraphicsActivateSetting: MotionGraphicsActivateSetting,
     TimingSettingsResp: TimingSettingsResp,
     DescribeStreamLiveWatermarkResponse: DescribeStreamLiveWatermarkResponse,
     StreamScte35Info: StreamScte35Info,

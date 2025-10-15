@@ -59,6 +59,7 @@ const ProxySpec = models.ProxySpec;
 const AddInstancesResponse = models.AddInstancesResponse;
 const BackupLimitClusterRestriction = models.BackupLimitClusterRestriction;
 const SlowQueriesItem = models.SlowQueriesItem;
+const DescribeIntegrateTaskRequest = models.DescribeIntegrateTaskRequest;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const CreateProxyEndPointRequest = models.CreateProxyEndPointRequest;
 const ModifyBackupDownloadUserRestrictionResponse = models.ModifyBackupDownloadUserRestrictionResponse;
@@ -70,6 +71,7 @@ const UpgradeProxyResponse = models.UpgradeProxyResponse;
 const DescribeClusterReadOnlyResponse = models.DescribeClusterReadOnlyResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
 const DescribeProxyNodesResponse = models.DescribeProxyNodesResponse;
+const CreateIntegrateClusterRequest = models.CreateIntegrateClusterRequest;
 const ProxyNodeInfo = models.ProxyNodeInfo;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
@@ -79,6 +81,7 @@ const ProxyGroupRwInfo = models.ProxyGroupRwInfo;
 const DescribeProxyNodesRequest = models.DescribeProxyNodesRequest;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const DescribeClusterReadOnlyRequest = models.DescribeClusterReadOnlyRequest;
+const DescribeIntegrateTaskResponse = models.DescribeIntegrateTaskResponse;
 const Account = models.Account;
 const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
 const CloseProxyResponse = models.CloseProxyResponse;
@@ -93,6 +96,7 @@ const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const AuditRuleFilters = models.AuditRuleFilters;
 const DescribeClusterParamsRequest = models.DescribeClusterParamsRequest;
 const ModifyAccountHostResponse = models.ModifyAccountHostResponse;
+const ProxyEndPointConfigInfo = models.ProxyEndPointConfigInfo;
 const DescribeServerlessInstanceSpecsResponse = models.DescribeServerlessInstanceSpecsResponse;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const InquirePriceModifyResponse = models.InquirePriceModifyResponse;
@@ -208,6 +212,7 @@ const SalePackageSpec = models.SalePackageSpec;
 const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const ModifyResourcePackagesDeductionPriorityResponse = models.ModifyResourcePackagesDeductionPriorityResponse;
 const CloseWanRequest = models.CloseWanRequest;
+const InstanceNameWeight = models.InstanceNameWeight;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const ModifyResourcePackageClustersRequest = models.ModifyResourcePackageClustersRequest;
 const ObjectTask = models.ObjectTask;
@@ -238,6 +243,7 @@ const BindInstanceInfo = models.BindInstanceInfo;
 const DescribeAuditRuleWithInstanceIdsResponse = models.DescribeAuditRuleWithInstanceIdsResponse;
 const SearchClusterDatabasesRequest = models.SearchClusterDatabasesRequest;
 const ModifyProxyDescResponse = models.ModifyProxyDescResponse;
+const CreateIntegrateClusterResponse = models.CreateIntegrateClusterResponse;
 const ModifyClusterSlaveZoneResponse = models.ModifyClusterSlaveZoneResponse;
 const BinlogItem = models.BinlogItem;
 const ModifyProxyDescRequest = models.ModifyProxyDescRequest;
@@ -299,6 +305,7 @@ const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const ClusterInstanceDetail = models.ClusterInstanceDetail;
 const OldAddrInfo = models.OldAddrInfo;
 const OpenClusterPasswordComplexityRequest = models.OpenClusterPasswordComplexityRequest;
+const ProxyConfigInfo = models.ProxyConfigInfo;
 const PackagePriority = models.PackagePriority;
 const DescribeInstancesWithinSameClusterRequest = models.DescribeInstancesWithinSameClusterRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
@@ -312,6 +319,7 @@ const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResponse;
 const LogicBackupConfigInfo = models.LogicBackupConfigInfo;
+const IntegrateCreateClusterConfig = models.IntegrateCreateClusterConfig;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const ParamDetail = models.ParamDetail;
@@ -320,6 +328,7 @@ const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const ModifyResourcePackageNameResponse = models.ModifyResourcePackageNameResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
+const IntegrateInstanceInfo = models.IntegrateInstanceInfo;
 const ExportInstanceErrorLogsResponse = models.ExportInstanceErrorLogsResponse;
 const ParamItemDetail = models.ParamItemDetail;
 const SlaveZoneStockInfo = models.SlaveZoneStockInfo;
@@ -385,14 +394,14 @@ class CynosdbClient extends AbstractClient {
     }
     
     /**
-     * This API is used to restore a serverless cluster.
-     * @param {ResumeServerlessRequest} req
-     * @param {function(string, ResumeServerlessResponse):void} cb
+     * This API is used to create a newly purchased cluster.
+     * @param {CreateIntegrateClusterRequest} req
+     * @param {function(string, CreateIntegrateClusterResponse):void} cb
      * @public
      */
-    ResumeServerless(req, cb) {
-        let resp = new ResumeServerlessResponse();
-        this.request("ResumeServerless", req, resp, cb);
+    CreateIntegrateCluster(req, cb) {
+        let resp = new CreateIntegrateClusterResponse();
+        this.request("CreateIntegrateCluster", req, resp, cb);
     }
 
     /**
@@ -437,6 +446,17 @@ class CynosdbClient extends AbstractClient {
     ModifyBinlogConfig(req, cb) {
         let resp = new ModifyBinlogConfigResponse();
         this.request("ModifyBinlogConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore a serverless cluster.
+     * @param {ResumeServerlessRequest} req
+     * @param {function(string, ResumeServerlessResponse):void} cb
+     * @public
+     */
+    ResumeServerless(req, cb) {
+        let resp = new ResumeServerlessResponse();
+        this.request("ResumeServerless", req, resp, cb);
     }
 
     /**
@@ -1438,6 +1458,17 @@ class CynosdbClient extends AbstractClient {
     InquirePriceRenew(req, cb) {
         let resp = new InquirePriceRenewResponse();
         this.request("InquirePriceRenew", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query cluster tasks.
+     * @param {DescribeIntegrateTaskRequest} req
+     * @param {function(string, DescribeIntegrateTaskResponse):void} cb
+     * @public
+     */
+    DescribeIntegrateTask(req, cb) {
+        let resp = new DescribeIntegrateTaskResponse();
+        this.request("DescribeIntegrateTask", req, resp, cb);
     }
 
     /**

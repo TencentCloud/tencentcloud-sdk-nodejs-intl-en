@@ -109,6 +109,7 @@ const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
 const ModifyStaffResponse = models.ModifyStaffResponse;
 const ModifyExtensionRequest = models.ModifyExtensionRequest;
 const CreatePredictiveDialingCampaignResponse = models.CreatePredictiveDialingCampaignResponse;
+const DescribeAIAnalysisResultResponse = models.DescribeAIAnalysisResultResponse;
 const UpdatePredictiveDialingCampaignResponse = models.UpdatePredictiveDialingCampaignResponse;
 const PSTNSessionInfo = models.PSTNSessionInfo;
 const AbortPredictiveDialingCampaignResponse = models.AbortPredictiveDialingCampaignResponse;
@@ -155,6 +156,7 @@ const ToneWordInfo = models.ToneWordInfo;
 const TelCdrInfo = models.TelCdrInfo;
 const SkillGroupItem = models.SkillGroupItem;
 const PhoneNumBuyInfo = models.PhoneNumBuyInfo;
+const DescribeAIAnalysisResultRequest = models.DescribeAIAnalysisResultRequest;
 const DescribeCCCBuyInfoListResponse = models.DescribeCCCBuyInfoListResponse;
 const UnbindStaffSkillGroupListResponse = models.UnbindStaffSkillGroupListResponse;
 const ControlAIConversationRequest = models.ControlAIConversationRequest;
@@ -183,6 +185,7 @@ const DescribePSTNActiveSessionListResponse = models.DescribePSTNActiveSessionLi
 const EventStaffDetail = models.EventStaffDetail;
 const AILatencyStatistics = models.AILatencyStatistics;
 const StaffStatus = models.StaffStatus;
+const AIAnalysisResult = models.AIAnalysisResult;
 const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
 const CreateAdminURLRequest = models.CreateAdminURLRequest;
@@ -225,14 +228,14 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the customer service account.
-     * @param {ModifyStaffRequest} req
-     * @param {function(string, ModifyStaffResponse):void} cb
+     * This API is used to obtain AI Conversation Analytics results.
+     * @param {DescribeAIAnalysisResultRequest} req
+     * @param {function(string, DescribeAIAnalysisResultResponse):void} cb
      * @public
      */
-    ModifyStaff(req, cb) {
-        let resp = new ModifyStaffResponse();
-        this.request("ModifyStaff", req, resp, cb);
+    DescribeAIAnalysisResult(req, cb) {
+        let resp = new DescribeAIAnalysisResultResponse();
+        this.request("DescribeAIAnalysisResult", req, resp, cb);
     }
 
     /**
@@ -367,6 +370,17 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     DeleteExtension(req, cb) {
         let resp = new DeleteExtensionResponse();
         this.request("DeleteExtension", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the customer service account.
+     * @param {ModifyStaffRequest} req
+     * @param {function(string, ModifyStaffResponse):void} cb
+     * @public
+     */
+    ModifyStaff(req, cb) {
+        let resp = new ModifyStaffResponse();
+        this.request("ModifyStaff", req, resp, cb);
     }
 
     /**

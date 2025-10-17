@@ -6473,7 +6473,7 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
+         * CLB instance ID array to be deleted, which can be obtained by calling the [DescribeLoadBalancers](https://www.tencentcloud.com/document/product/214/30685?from_cn_redirect=1) API. The array can include up to 20 elements.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;

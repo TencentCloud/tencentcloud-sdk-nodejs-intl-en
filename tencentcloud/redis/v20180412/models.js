@@ -31,13 +31,13 @@ class UpgradeProxyVersionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Current Proxy version.
+         * Current proxy version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the current proxy version for the instance.
          * @type {string || null}
          */
         this.CurrentProxyVersion = null;
 
         /**
-         * Upgradable Redis version.
+         * Upgradable Redis version. Call the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API to obtain the upgradable Redis version for the instance.
          * @type {string || null}
          */
         this.UpgradeProxyVersion = null;
@@ -76,7 +76,7 @@ class RemoveReplicationGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Replication group ID.
+         * Replication group ID. Log in to the [Redis console and go to the global replication](https://console.cloud.tencent.com/redis/replication) page to obtain the ID.
          * @type {string || null}
          */
         this.GroupId = null;
@@ -205,8 +205,7 @@ class EnableReplicaReadonlyRequest extends  AbstractModel {
         /**
          * Read-only routing policy.
 - master: read-only routing to the primary node.
-- replication: read-only routing to the secondary node.
-- Default policy: writing to the primary node and reading from the secondary node.
+- replication: read-only routing to the secondary node. The default value is replication.
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
@@ -550,13 +549,13 @@ class RestoreInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstances` API.
+         * ID of the instance to be operated, which can be obtained through the response parameter InstanceId of the [DescribeInstances](https://www.tencentcloud.comom/document/product/239/20018?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be obtained through the `backupId` field in the return value of the `GetRedisBackupList` API.
+         * Backup ID, which can be obtained through the response parameter RedisBackupSet of the [DescribeInstanceBackups](https://www.tencentcloud.comom/document/product/239/20011?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BackupId = null;
@@ -626,7 +625,9 @@ class ApplyParamsTemplateRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * ID of the applied parameter template, which can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://intl.cloud.tencent.com/document/product/239/58748?from_cn_redirect=1).
+         * ID of the applied parameter template.
+- The parameter template ID can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://www.tencentcloud.comom/document/product/239/58748?from_cn_redirect=1).
+- The operation can only be successfully performed when the parameter template version matches the architecture version of the target instance. A version mismatch will trigger an execution error.
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -904,6 +905,12 @@ Node information of an instance. Currently, information about the node type (mas
          */
         this.AlarmPolicyList = null;
 
+        /**
+         * Whether to encrypt the password.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
+
     }
 
     /**
@@ -955,6 +962,7 @@ Node information of an instance. Currently, information about the node type (mas
         this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
         this.RedisClusterId = 'RedisClusterId' in params ? params.RedisClusterId : null;
         this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -1459,7 +1467,7 @@ class DescribeSecondLevelBackupInfoResponse extends  AbstractModel {
 
         /**
          * Timestamp range within which backup is missing.
-Note: This field may return null, indicating that no valid value can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<SecondLevelBackupMissingTimestamps> || null}
          */
         this.MissingTimestamps = null;
@@ -2359,6 +2367,18 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
          */
         this.ExecuteTime = null;
 
+        /**
+         * Duration of receiving client requests (ms).
+         * @type {number || null}
+         */
+        this.RecvClientEnd = null;
+
+        /**
+         * Duration of sending client requests (ms).
+         * @type {number || null}
+         */
+        this.SendClientEnd = null;
+
     }
 
     /**
@@ -2373,6 +2393,8 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
         this.Command = 'Command' in params ? params.Command : null;
         this.CommandLine = 'CommandLine' in params ? params.CommandLine : null;
         this.ExecuteTime = 'ExecuteTime' in params ? params.ExecuteTime : null;
+        this.RecvClientEnd = 'RecvClientEnd' in params ? params.RecvClientEnd : null;
+        this.SendClientEnd = 'SendClientEnd' in params ? params.SendClientEnd : null;
 
     }
 }
@@ -2485,6 +2507,12 @@ class ClearInstanceRequest extends  AbstractModel {
          */
         this.Password = null;
 
+        /**
+         * Whether to encrypt the password.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
+
     }
 
     /**
@@ -2496,6 +2524,7 @@ class ClearInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -4125,13 +4154,17 @@ class DescribeInstanceEventsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Number of events displayed per page. Default value: 10. Maximum value: 100.
+         * Outputs the number of events displayed per page.
+- Default value: 10.
+- Value range: [1, 100].
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * Configures the page number for querying events. You can query events on a certain page by specifying PageNo and PageSize. Default value: 1.
+         * Configures the output page number for querying events. You can query events on a certain page by specifying PageNo (page number) and PageSize (number of output results per page).
+- Default value: 1.
+- Value range: positive integers greater than 0.
          * @type {number || null}
          */
         this.PageNo = null;
@@ -4705,7 +4738,7 @@ class CreateParamTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Parameter template name.
+         * Parameter template name, which can contain [2, 64] characters.
          * @type {string || null}
          */
         this.Name = null;
@@ -4718,7 +4751,6 @@ class CreateParamTemplateRequest extends  AbstractModel {
 
         /**
          * Product type.
-- 2: Redis 2.8 Memory Edition (standard architecture).
 - 6: Redis 4.0 Memory Edition (standard architecture).
 - 7: Redis 4.0 Memory Edition (cluster architecture).
 - 8: Redis 5.0 Memory Edition (standard architecture).
@@ -4877,47 +4909,55 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Sub-account name. If you want to change it to the root account, fill in root.
+         * Specifies the account that needs modification.
+- root: refers to the automatically generated account when a TencentDB for Redis® instance is created. Users cannot modify read-write permissions for the account, but can only modify its request routing policies.
+- Custom account: an account manually created by users after successful instance creation. Users can modify read-write permissions and request routing policies for the account at any time.
          * @type {string || null}
          */
         this.AccountName = null;
 
         /**
-         * Sub-account password.
+         * Specifies the access password for the account to be modified.
          * @type {string || null}
          */
         this.AccountPassword = null;
 
         /**
-         * Sub-account description information
+         * Account description information.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Account read/write routing policy.
-- master: primary node.
-- replication: secondary node.
+         * Specifies the read-write request routing policies for the account to be modified.
+- master: read-write request routing to the primary node.
+- replication: read-write request routing to the secondary node.
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
 
         /**
-         * Sub-account read/write policy.
+         * Specifies the read-write permissions for the account to be modified.
 - r: read-only.
 - w: write-only.
-- rw: read/write.
+- rw: read-write.
          * @type {string || null}
          */
         this.Privilege = null;
 
         /**
-         * Whether to switch the root account to a password-free account. This applies only to the root account. Sub-accounts do not support password-free access.
-- true: Switch the root account to a password-free account.
-- false: Do not switch it.
+         * Specifies whether to set the default account (root) to a password-free account. Custom accounts do not support password-free access.
+- true: set the default account (root) to a password-free account.
+- false: not set the default account (root) to a password-free account.
          * @type {boolean || null}
          */
         this.NoAuth = null;
+
+        /**
+         * Specifies whether to encrypt the password for the account to be modified.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
 
     }
 
@@ -4935,6 +4975,7 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
         this.Privilege = 'Privilege' in params ? params.Privilege : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -4961,6 +5002,7 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
 
         /**
          * End time of the maintenance window, for example, 19:00.
+**Note:** Maintenance window duration. Valid values: 30 minutes, 1 hour, 1.5 hours, 2 hours, and 3 hours.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -5536,18 +5578,29 @@ class ResetPasswordRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Reset password. This parameter can be left blank when a password-free instance is used. It is required in other cases.
+         * Reset password. This parameter can be left unspecified when a password-free instance is used.
+- It should contain 8 to 32 characters. 12 or more characters are recommended.
+- It cannot start with a forward slash (/).
+- It should contain at least two of the following types: lowercase letters, uppercase letters, digits, and special characters (such as ()~!@#$%^&*-+=_|{}[]:;<>,.?/).
          * @type {string || null}
          */
         this.Password = null;
 
         /**
          * Whether to switch to a password-free instance.
-- false: Switch to a non-password-free instance.
-- true: Switch to a password-free instance. Default value: false.
+- false: switch to an instance that requires a password. The default value is false.
+- true: switch to a password-free instance.
          * @type {boolean || null}
          */
         this.NoAuth = null;
+
+        /**
+         * Whether to encrypt the password.
+- false: non-encrypted password. The default value is false.
+- true: encrypted password.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
 
     }
 
@@ -5561,6 +5614,7 @@ class ResetPasswordRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -5574,7 +5628,7 @@ class ModifyInstanceAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID
+         * Task ID.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -5955,14 +6009,15 @@ class UpgradeVersionToMultiAvailabilityZonesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
-ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
+         * Specifies whether the nearby access feature is supported after an upgrade to multi-AZ.
+- true: support the nearby access feature. The upgrade process requires simultaneous upgrades of the proxy version and Redis kernel minor version, which involves data migration and may take several hours.
+- false: no need to support the nearby access feature. Upgrade to multi-AZ only involves metadata migration management, with no impact on the service. The upgrade process is usually completed within 3 minutes, and the default value is false.
          * @type {boolean || null}
          */
         this.UpgradeProxyAndRedisServer = null;
@@ -6500,7 +6555,7 @@ class DescribeInstanceAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Number of entries per page
+         * Pagination size. The default value is 20, the minimum value is 1, and the maximum value is 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -6653,19 +6708,19 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Maximum number of results returned per page
+         * Pagination size. The default value is 100, and the maximum value is 200.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`.
+         * Offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -6701,7 +6756,7 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * Instance name. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -6713,7 +6768,7 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+         * Pagination offset, which is an integer multiple of Limit. Offset = Limit x (Page number – 1). The default value is 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -6900,7 +6955,7 @@ class ModifyInstanceEventRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Event ID. Obtain the ID of the event to be modified using DescribeInstanceEvents.
+         * Event ID. Call the [DescribeInstanceEvents](https://www.tencentcloud.comom/document/product/239/104779?from_cn_redirect=1) API to obtain the ID of the event to be modified.
          * @type {number || null}
          */
         this.EventId = null;
@@ -7253,7 +7308,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
+         * Security group ID. Call the [DescribeInstanceSecurityGroup](https://www.tencentcloud.comom/document/product/239/34447?from_cn_redirect=1) API to obtain the security group ID for the instance.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdList = null;
@@ -7346,6 +7401,12 @@ Only instances with second-level backup enabled are supported.
          */
         this.CloneTime = null;
 
+        /**
+         * Whether to encrypt the password.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
+
     }
 
     /**
@@ -7391,6 +7452,7 @@ Only instances with second-level backup enabled are supported.
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
         this.CloneTime = 'CloneTime' in params ? params.CloneTime : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -7439,7 +7501,7 @@ class DescribeReplicationGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of instances returned per page. Default value: `20`.
+         * Size of the output instance list per page. The value is a positive integer greater than 0, and the default value is 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -7658,7 +7720,7 @@ class DescribeInstanceSecurityGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID list, with the array length ranging from 0 to 100, for example, ["crs-f2ho5rsz\n"].
+         * Instance ID list. The array length limit is [0, 100]. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the instance ID from the instance list.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -7910,7 +7972,9 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
+         * Specifies whether to filter out secondary node information.
+- true: filter out secondary nodes.
+- false: filtering not required. The default value is false.
          * @type {boolean || null}
          */
         this.FilterSlave = null;
@@ -8091,7 +8155,9 @@ class InquiryPriceUpgradeInstanceRequest extends  AbstractModel {
         this.MemSize = null;
 
         /**
-         * Number of shards. This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Single-node Edition.
+         * Number of shards.
+- The instance adopts the standard architecture. The default value of RedisShardNum is 1.
+- This parameter is not required for Redis 2.8 Primary-Secondary Edition, CKV Primary-Secondary Edition, and Redis 2.8 Stand-Alone Edition.
          * @type {number || null}
          */
         this.RedisShardNum = null;
@@ -8336,18 +8402,24 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.ReadonlyPolicy = null;
 
         /**
-         * The read/write permission of the account supports the selection of read-only and read/write permissions.
-- r: read-only
-- rw: Read/Write permission.
+         * Read-write permissions of the account. It supports the selection of read-only and read-write permissions.
+- r: read-only.
+- rw: read-write.
          * @type {string || null}
          */
         this.Privilege = null;
 
         /**
-         * Sub-account description information, with a length of [0, 64] bytes, supports Chinese characters.
+         * Description information about account remarks, with a length of [0, 64] bytes.
          * @type {string || null}
          */
         this.Remark = null;
+
+        /**
+         * Whether to encrypt the password.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
 
     }
 
@@ -8364,6 +8436,7 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
         this.Privilege = 'Privilege' in params ? params.Privilege : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -8465,9 +8538,10 @@ class ModifyInstanceRequest extends  AbstractModel {
 
         /**
          * Instance modification operation. Valid values:
-- rename: Rename the instance.
-- modifyProject: Modify the project to which the instance belongs.
-- modifyAutoRenew: Modify the instance renewal flag.
+- rename: rename an instance.
+- modifyProject: modify the project to which the instance belongs.
+- modifyAutoRenew: modify the instance renewal flag.
+- modifyDeleteProtectionSwitch: modify the instance deletion protection switch status.
          * @type {string || null}
          */
         this.Operation = null;
@@ -8479,7 +8553,7 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * New name of the instance.
+         * New name of the instance. Only Chinese characters, letters, digits, underscores (_), and delimiters (-) are supported. The length can be up to 60 characters.
          * @type {Array.<string> || null}
          */
         this.InstanceNames = null;
@@ -8499,6 +8573,12 @@ class ModifyInstanceRequest extends  AbstractModel {
          * @type {Array.<number> || null}
          */
         this.AutoRenews = null;
+
+        /**
+         * Deletion protection switch. - 0: disabled by default; - 1: enabled.
+         * @type {Array.<number> || null}
+         */
+        this.DeleteProtectionSwitches = null;
 
         /**
          * This parameter is currently being deprecated and can still be used by existing users. It is recommended that new users use InstanceIds.
@@ -8532,6 +8612,7 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.AutoRenews = 'AutoRenews' in params ? params.AutoRenews : null;
+        this.DeleteProtectionSwitches = 'DeleteProtectionSwitches' in params ? params.DeleteProtectionSwitches : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
@@ -8821,7 +8902,8 @@ class ModifyConnectionConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Additional bandwidth in MB, which should be greater than 0.
+         * Additional bandwidth, in MB, which should be greater than 0.
+**Note**: The Bandwidth and ClientLimit parameters cannot be empty simultaneously. You should select at least one of them for configuration.
          * @type {number || null}
          */
         this.Bandwidth = null;
@@ -8830,6 +8912,7 @@ class ModifyConnectionConfigRequest extends  AbstractModel {
          * Total number of connections per shard.
 - When read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.
 - When read-only replicas are enabled, the lower limit is 10,000, and the upper limit is calculated as follows: 10,000 x (Number of read-only replicas + 3).
+**Note**: The Bandwidth and ClientLimit parameters cannot be empty simultaneously. You should select at least one of them for configuration.
          * @type {number || null}
          */
         this.ClientLimit = null;
@@ -9482,7 +9565,7 @@ class CleanUpInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+         * Instance ID. Log in to the [Redis console recycle bin](https://console.cloud.tencent.com/redis/recycle), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -10006,6 +10089,12 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
          */
         this.Password = null;
 
+        /**
+         * Whether to encrypt the password.
+         * @type {boolean || null}
+         */
+        this.EncryptPassword = null;
+
     }
 
     /**
@@ -10018,6 +10107,7 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.OldPassword = 'OldPassword' in params ? params.OldPassword : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
 
     }
 }
@@ -10050,19 +10140,19 @@ class DescribeSlowLogRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The average execution time threshold of slow query  in microseconds
+         * Average execution time threshold for slow queries, in milliseconds. The value is a positive integer greater than 0
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Number of slow query logs displayed per page. Default value: 20. Maximum value: 100.
+         * Number of slow query results displayed per page. The default value is 20, the minimum value is 1, and the maximum value is 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+         * Offset of the number of slow queries. The value is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -10176,7 +10266,7 @@ class DeleteParamTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Parameter template ID.
+         * Parameter template ID. Log in to the [Redis console and go to the parameter template page](https://console.cloud.tencent.com/redis/templates) to obtain the template ID.
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -10275,7 +10365,7 @@ class DestroyPostpaidInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the pay-as-you-go instance ID from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -10347,16 +10437,16 @@ class DescribeInstanceSupportFeatureRequest extends  AbstractModel {
         super();
 
         /**
-         * Specify the instance ID.
- For example: crs-xjhsdj****. Please log in to the [Redis Console] (https://console.cloud.tencent.com/redis#/) and copy the instance ID from the instance list.
-Sample value: crs-asdasdas.
+         * Specifies the instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Feature names.
-- Read-local-node-only: Proximity access feature.- multi-account: Multiple accounts feature.
+         * The features that support queries are as follows.
+- read-local-node-only: nearby access.
+- multi-account: multi-account management.
+- auto-failback: fault recovery scenario, such as whether automatic failback is enabled for the primary node.
          * @type {string || null}
          */
         this.FeatureName = null;
@@ -10812,7 +10902,7 @@ class InstanceSet extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * App ID of a user, which is an application ID that uniquely corresponds to the account ID. Some Tencent Cloud products use this app ID.
+         * App ID of a user, which is an application ID that uniquely corresponds to the account ID. Certain Tencent Cloud products use this app ID.
 
          * @type {number || null}
          */
@@ -11010,6 +11100,8 @@ class InstanceSet extends  AbstractModel {
 
         /**
          * Read weight of a secondary node.
+- 0: disable read-only replicas.
+- 100: enable read-only replicas.
          * @type {number || null}
          */
         this.SlaveReadWeight = null;
@@ -11178,6 +11270,12 @@ It is returned only for multi-AZ instances.
          */
         this.BackupMode = null;
 
+        /**
+         * Deletion protection switch. 0: disabled; 1: enabled.
+         * @type {number || null}
+         */
+        this.DeleteProtectionSwitch = null;
+
     }
 
     /**
@@ -11271,6 +11369,7 @@ It is returned only for multi-AZ instances.
         this.UpgradeProxyVersion = 'UpgradeProxyVersion' in params ? params.UpgradeProxyVersion : null;
         this.UpgradeRedisVersion = 'UpgradeRedisVersion' in params ? params.UpgradeRedisVersion : null;
         this.BackupMode = 'BackupMode' in params ? params.BackupMode : null;
+        this.DeleteProtectionSwitch = 'DeleteProtectionSwitch' in params ? params.DeleteProtectionSwitch : null;
 
     }
 }
@@ -11388,6 +11487,12 @@ class CreateReplicationGroupResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
+         * Replication group ID of the string type.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -11403,6 +11508,7 @@ class CreateReplicationGroupResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11713,19 +11819,22 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.BillingMode = null;
 
         /**
-         * ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * ID of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+**Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * Number of instance shards. For the standard architecture of 2.8, the number of shards does not need to be configured. For the standard architecture of other versions, the number of shards should be set to 1. For the cluster architecture, the number of shards to be purchased needs to be specified.
+         * Number of instance shards.
+- The number of shards is required to be set to 1 for the standard architecture.
+- The number of shards can be set to 1, 3, 5, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, or 128 for the cluster architecture.
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of instance replicas. For the standard architecture of 2.8, the number of replicas does not need to be configured.
+         * Number of instance replicas. Valid values: 1, 2, 3, 4, and 5.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
@@ -11739,7 +11848,8 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.ReplicasReadonly = null;
 
         /**
-         * Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * Name of the AZ to which the instance belongs. See [Regions and AZs](https://www.tencentcloud.comom/document/product/239/4106?from_cn_redirect=1).
+**Note**: Specify at least one parameter from **ZoneId** and **ZoneName**.
          * @type {string || null}
          */
         this.ZoneName = null;
@@ -11956,7 +12066,7 @@ class DescribeSSLStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -12215,7 +12325,7 @@ class DescribeInstanceLogDeliveryRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -12249,7 +12359,10 @@ class AddReplicationInstanceRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+         * Instance ID.
+- There are region and AZ limitations for adding a replication group instance. For detailed information, see [Use Limits](https://www.tencentcloud.comom/document/product/239/71934?from_cn_redirect=1).
+- Currently, only Redis 4.0 and 5.0 cluster architecture instances support being added to the replication groups.
+- Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance that needs to be added to the replication group in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -12484,19 +12597,19 @@ class DescribeTendisSlowLogRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Slow query threshold in ms
+         * Slow query threshold, in milliseconds. The value is a positive integer greater than 0.
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Page size. Default value 20. Maximum value 100.
+         * Page size. The default value is 20, the minimum value is 1, and the maximum value is 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number - 1).
+         * Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -12548,19 +12661,19 @@ class DescribeProxySlowLogRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Slow query threshold  in milliseconds
+         * Slow query threshold, in milliseconds. The value is a positive integer greater than 0.
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Number of tasks output on each page. Default value: 20. Maximum value: 100.
+         * Size of the output task list per page. The default value is 20, the minimum value is 1, and the maximum value is 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number - 1).
+         * Pagination offset, which is an integer multiple of Limit. Calculation formula: Offset = Limit x (Page number – 1). The default value is 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -12643,15 +12756,15 @@ class ModifyInstanceBackupModeRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID, which can contain 12 to 36 characters.
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * Backup mode:
- - SecondLevelBackup: second-level backup.
- - NormalLevelBackup: ordinary backup.
+- SecondLevelBackup: second-level backup.
+- NormalLevelBackup: ordinary backup.
          * @type {string || null}
          */
         this.BackupMode = null;
@@ -13187,7 +13300,7 @@ class StartupInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID. Log in to the [Redis console](https://console.tencentcloud.com/redis/instance) and copy it in the instance list.
+         * Instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance to be deisolated from the recycle bin.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -13334,7 +13447,7 @@ class CreateInstanceAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID
+         * Task ID.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -13480,13 +13593,15 @@ class DescribeSecondLevelBackupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Specifies the instance ID. For example, crs-xjhsdj****. Log in to the TencentDB for Redis® console and copy the instance ID from the instance list.
+         * Specifies the instance ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy it from the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Second-level backup timestamp. The corresponding time should be within the last 7 days.
+         * Second-level backup timestamp.
+- Setting range: support any second-level time point within 7 days.
+- Timestamp format: UNIX timestamp.
          * @type {number || null}
          */
         this.BackupTimestamp = null;

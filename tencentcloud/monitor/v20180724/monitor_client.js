@@ -63,11 +63,12 @@ const DescribePrometheusInstanceInitStatusResponse = models.DescribePrometheusIn
 const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
 const DescribeAlarmNoticeCallbacksResponse = models.DescribeAlarmNoticeCallbacksResponse;
 const DescribePrometheusInstanceUsageRequest = models.DescribePrometheusInstanceUsageRequest;
-const DeletePrometheusScrapeJobsRequest = models.DeletePrometheusScrapeJobsRequest;
+const DeleteSSOAccountRequest = models.DeleteSSOAccountRequest;
 const CreatePrometheusRecordRuleYamlRequest = models.CreatePrometheusRecordRuleYamlRequest;
 const Instance = models.Instance;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
 const PrometheusClusterAgentPodConfig = models.PrometheusClusterAgentPodConfig;
+const DeletePrometheusAlertGroupsRequest = models.DeletePrometheusAlertGroupsRequest;
 const GrafanaInstanceInfo = models.GrafanaInstanceInfo;
 const DeletePrometheusConfigResponse = models.DeletePrometheusConfigResponse;
 const CreatePrometheusRecordRuleYamlResponse = models.CreatePrometheusRecordRuleYamlResponse;
@@ -82,6 +83,7 @@ const DescribeDNSConfigRequest = models.DescribeDNSConfigRequest;
 const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
 const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
 const DescribePrometheusRecordRulesRequest = models.DescribePrometheusRecordRulesRequest;
+const ModifyAlarmPolicyStatusResponse = models.ModifyAlarmPolicyStatusResponse;
 const DescribeExporterIntegrationsResponse = models.DescribeExporterIntegrationsResponse;
 const UpdateAlertRuleResponse = models.UpdateAlertRuleResponse;
 const InstanceGroup = models.InstanceGroup;
@@ -89,11 +91,11 @@ const EnableGrafanaSSORequest = models.EnableGrafanaSSORequest;
 const DescribePrometheusScrapeJobsResponse = models.DescribePrometheusScrapeJobsResponse;
 const EnableGrafanaInternetRequest = models.EnableGrafanaInternetRequest;
 const GrafanaAccountRole = models.GrafanaAccountRole;
-const DestroyPrometheusInstanceRequest = models.DestroyPrometheusInstanceRequest;
+const DeleteRecordingRulesResponse = models.DeleteRecordingRulesResponse;
 const PolicyGroupReceiverInfo = models.PolicyGroupReceiverInfo;
 const Metric = models.Metric;
 const MidQueryCondition = models.MidQueryCondition;
-const DeleteSSOAccountRequest = models.DeleteSSOAccountRequest;
+const DescribeGrafanaInstancesRequest = models.DescribeGrafanaInstancesRequest;
 const DescribePrometheusAgentInstancesResponse = models.DescribePrometheusAgentInstancesResponse;
 const URLNotice = models.URLNotice;
 const DeletePrometheusTempResponse = models.DeletePrometheusTempResponse;
@@ -101,8 +103,7 @@ const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
 const RecordingRuleSet = models.RecordingRuleSet;
 const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
-const ModifyAlarmPolicyStatusResponse = models.ModifyAlarmPolicyStatusResponse;
-const DescribeGrafanaInstancesRequest = models.DescribeGrafanaInstancesRequest;
+const DescribePrometheusAlertGroupsResponse = models.DescribePrometheusAlertGroupsResponse;
 const DescribePrometheusTempSyncRequest = models.DescribePrometheusTempSyncRequest;
 const DescribePrometheusGlobalConfigResponse = models.DescribePrometheusGlobalConfigResponse;
 const CreateRecordingRuleResponse = models.CreateRecordingRuleResponse;
@@ -135,11 +136,13 @@ const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetr
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const CreateServiceDiscoveryResponse = models.CreateServiceDiscoveryResponse;
 const DescribeClusterAgentCreatingProgressRequest = models.DescribeClusterAgentCreatingProgressRequest;
+const UpdatePrometheusAlertGroupRequest = models.UpdatePrometheusAlertGroupRequest;
 const EnableSSOCamCheckResponse = models.EnableSSOCamCheckResponse;
 const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
 const CreatePrometheusScrapeJobResponse = models.CreatePrometheusScrapeJobResponse;
 const CreateAlarmPolicyRequest = models.CreateAlarmPolicyRequest;
 const PrometheusZoneItem = models.PrometheusZoneItem;
+const PrometheusAlertCustomReceiver = models.PrometheusAlertCustomReceiver;
 const ModifyPrometheusAlertPolicyRequest = models.ModifyPrometheusAlertPolicyRequest;
 const ModifyPrometheusInstanceAttributesResponse = models.ModifyPrometheusInstanceAttributesResponse;
 const PrometheusTemplateSyncTarget = models.PrometheusTemplateSyncTarget;
@@ -153,6 +156,7 @@ const ModifyPrometheusGlobalNotificationRequest = models.ModifyPrometheusGlobalN
 const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const DescribePrometheusRecordRulesResponse = models.DescribePrometheusRecordRulesResponse;
 const DescribePrometheusGlobalNotificationResponse = models.DescribePrometheusGlobalNotificationResponse;
+const PrometheusAlertGroupRuleSet = models.PrometheusAlertGroupRuleSet;
 const DescribeMonitorTypesRequest = models.DescribeMonitorTypesRequest;
 const DimensionsDesc = models.DimensionsDesc;
 const DeletePrometheusAlertPolicyRequest = models.DeletePrometheusAlertPolicyRequest;
@@ -174,8 +178,10 @@ const DescribePrometheusClusterAgentsResponse = models.DescribePrometheusCluster
 const UpdatePrometheusScrapeJobRequest = models.UpdatePrometheusScrapeJobRequest;
 const PrometheusAgentInfo = models.PrometheusAgentInfo;
 const CreatePrometheusClusterAgentResponse = models.CreatePrometheusClusterAgentResponse;
+const PrometheusAlertAllowTimeRange = models.PrometheusAlertAllowTimeRange;
 const CreateGrafanaIntegrationResponse = models.CreateGrafanaIntegrationResponse;
 const BindPrometheusManagedGrafanaRequest = models.BindPrometheusManagedGrafanaRequest;
+const UpdatePrometheusAlertGroupStateRequest = models.UpdatePrometheusAlertGroupStateRequest;
 const PrometheusAlertManagerConfig = models.PrometheusAlertManagerConfig;
 const CreateGrafanaInstanceRequest = models.CreateGrafanaInstanceRequest;
 const DescribePrometheusInstanceUsageResponse = models.DescribePrometheusInstanceUsageResponse;
@@ -201,6 +207,7 @@ const CreatePrometheusConfigResponse = models.CreatePrometheusConfigResponse;
 const UpdateDNSConfigRequest = models.UpdateDNSConfigRequest;
 const DeletePrometheusClusterAgentResponse = models.DeletePrometheusClusterAgentResponse;
 const DescribeDNSConfigResponse = models.DescribeDNSConfigResponse;
+const DestroyPrometheusInstanceRequest = models.DestroyPrometheusInstanceRequest;
 const DeleteRecordingRulesRequest = models.DeleteRecordingRulesRequest;
 const MonitorTypeNamespace = models.MonitorTypeNamespace;
 const UninstallGrafanaPluginsRequest = models.UninstallGrafanaPluginsRequest;
@@ -255,6 +262,7 @@ const CreatePrometheusConfigRequest = models.CreatePrometheusConfigRequest;
 const DescribeSSOAccountResponse = models.DescribeSSOAccountResponse;
 const CreateAlarmPolicyResponse = models.CreateAlarmPolicyResponse;
 const DeleteGrafanaNotificationChannelRequest = models.DeleteGrafanaNotificationChannelRequest;
+const CreatePrometheusAlertGroupRequest = models.CreatePrometheusAlertGroupRequest;
 const AlarmNotice = models.AlarmNotice;
 const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
 const CreatePrometheusClusterAgentRequest = models.CreatePrometheusClusterAgentRequest;
@@ -300,6 +308,7 @@ const DescribePrometheusClusterAgentsRequest = models.DescribePrometheusClusterA
 const UnbindPrometheusManagedGrafanaRequest = models.UnbindPrometheusManagedGrafanaRequest;
 const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
 const DescribeConditionsTemplateListResponse = models.DescribeConditionsTemplateListResponse;
+const DeletePrometheusAlertGroupsResponse = models.DeletePrometheusAlertGroupsResponse;
 const CreatePrometheusTempRequest = models.CreatePrometheusTempRequest;
 const ModifyAlarmPolicyInfoResponse = models.ModifyAlarmPolicyInfoResponse;
 const MetricConfig = models.MetricConfig;
@@ -339,7 +348,6 @@ const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
 const CreatePrometheusGlobalNotificationRequest = models.CreatePrometheusGlobalNotificationRequest;
 const ModifyPrometheusTempResponse = models.ModifyPrometheusTempResponse;
 const DescribeRecordingRulesResponse = models.DescribeRecordingRulesResponse;
-const DeleteRecordingRulesResponse = models.DeleteRecordingRulesResponse;
 const UpdateGrafanaWhiteListRequest = models.UpdateGrafanaWhiteListRequest;
 const UpdatePrometheusAgentStatusRequest = models.UpdatePrometheusAgentStatusRequest;
 const DescribeGrafanaInstancesResponse = models.DescribeGrafanaInstancesResponse;
@@ -359,6 +367,7 @@ const ModifyAlarmPolicyTasksResponse = models.ModifyAlarmPolicyTasksResponse;
 const MonitorTypeInfo = models.MonitorTypeInfo;
 const DimensionNew = models.DimensionNew;
 const DeleteAlertRulesResponse = models.DeleteAlertRulesResponse;
+const DeletePrometheusScrapeJobsRequest = models.DeletePrometheusScrapeJobsRequest;
 const ModifyAlarmPolicyStatusRequest = models.ModifyAlarmPolicyStatusRequest;
 const ConditionsTemp = models.ConditionsTemp;
 const Operator = models.Operator;
@@ -380,15 +389,18 @@ const DeletePrometheusTempSyncRequest = models.DeletePrometheusTempSyncRequest;
 const DescribePrometheusGlobalConfigRequest = models.DescribePrometheusGlobalConfigRequest;
 const PrometheusInstanceTenantUsage = models.PrometheusInstanceTenantUsage;
 const DescribePrometheusZonesRequest = models.DescribePrometheusZonesRequest;
+const DescribePrometheusAlertGroupsRequest = models.DescribePrometheusAlertGroupsRequest;
 const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
 const ModifyPolicyGroupRequest = models.ModifyPolicyGroupRequest;
 const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
 const DeletePrometheusConfigRequest = models.DeletePrometheusConfigRequest;
 const PrometheusAlertPolicyItem = models.PrometheusAlertPolicyItem;
 const ModifyPrometheusAgentExternalLabelsRequest = models.ModifyPrometheusAgentExternalLabelsRequest;
+const PrometheusScrapeJob = models.PrometheusScrapeJob;
 const AlarmHierarchicalNotice = models.AlarmHierarchicalNotice;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
 const DescribePrometheusTempRequest = models.DescribePrometheusTempRequest;
+const UpdatePrometheusAlertGroupStateResponse = models.UpdatePrometheusAlertGroupStateResponse;
 const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
 const CreateAlarmNoticeResponse = models.CreateAlarmNoticeResponse;
 const Condition = models.Condition;
@@ -396,11 +408,11 @@ const DeleteGrafanaInstanceResponse = models.DeleteGrafanaInstanceResponse;
 const PrometheusAgentOverview = models.PrometheusAgentOverview;
 const Filter = models.Filter;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const UpdateSSOAccountRequest = models.UpdateSSOAccountRequest;
+const UpdatePrometheusAlertGroupResponse = models.UpdatePrometheusAlertGroupResponse;
 const CreateSSOAccountResponse = models.CreateSSOAccountResponse;
 const UpdatePrometheusScrapeJobResponse = models.UpdatePrometheusScrapeJobResponse;
 const DescribeAlarmPoliciesRequest = models.DescribeAlarmPoliciesRequest;
-const PrometheusScrapeJob = models.PrometheusScrapeJob;
+const UpdateSSOAccountRequest = models.UpdateSSOAccountRequest;
 const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
 const IntegrationConfiguration = models.IntegrationConfiguration;
 const DescribePrometheusAgentsResponse = models.DescribePrometheusAgentsResponse;
@@ -412,10 +424,12 @@ const DeletePrometheusScrapeJobsResponse = models.DeletePrometheusScrapeJobsResp
 const DescribeAlarmPolicyRequest = models.DescribeAlarmPolicyRequest;
 const UninstallGrafanaDashboardRequest = models.UninstallGrafanaDashboardRequest;
 const UpdateGrafanaIntegrationRequest = models.UpdateGrafanaIntegrationRequest;
+const CreatePrometheusAlertGroupResponse = models.CreatePrometheusAlertGroupResponse;
 const DeletePrometheusRecordRuleYamlRequest = models.DeletePrometheusRecordRuleYamlRequest;
 const DescribeAlarmNoticeCallbacksRequest = models.DescribeAlarmNoticeCallbacksRequest;
 const DescribeStatisticDataRequest = models.DescribeStatisticDataRequest;
 const GrafanaNotificationChannel = models.GrafanaNotificationChannel;
+const PrometheusAlertGroupSet = models.PrometheusAlertGroupSet;
 const SetDefaultAlarmPolicyRequest = models.SetDefaultAlarmPolicyRequest;
 const CLSNotice = models.CLSNotice;
 const LogAlarmReq = models.LogAlarmReq;
@@ -508,6 +522,17 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     }
 
     /**
+     * This API is used to query alarm groups under a given prometheus.
+     * @param {DescribePrometheusAlertGroupsRequest} req
+     * @param {function(string, DescribePrometheusAlertGroupsResponse):void} cb
+     * @public
+     */
+    DescribePrometheusAlertGroups(req, cb) {
+        let resp = new DescribePrometheusAlertGroupsResponse();
+        this.request("DescribePrometheusAlertGroups", req, resp, cb);
+    }
+
+    /**
      *  This API is used to query the usage of a pay-as-you-go Tencent Managed Service for Prometheus (TMP) instance.
      * @param {DescribePrometheusInstanceUsageRequest} req
      * @param {function(string, DescribePrometheusInstanceUsageResponse):void} cb
@@ -538,6 +563,17 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     BindingPolicyObject(req, cb) {
         let resp = new BindingPolicyObjectResponse();
         this.request("BindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete Prometheus alert rule groups.
+     * @param {DeletePrometheusAlertGroupsRequest} req
+     * @param {function(string, DeletePrometheusAlertGroupsResponse):void} cb
+     * @public
+     */
+    DeletePrometheusAlertGroups(req, cb) {
+        let resp = new DeletePrometheusAlertGroupsResponse();
+        this.request("DeletePrometheusAlertGroups", req, resp, cb);
     }
 
     /**
@@ -1060,14 +1096,14 @@ Note: **If you use a sub-account, you can only query the alarm records of author
     }
 
     /**
-     * This API is used to create a notification template.
-     * @param {CreateAlarmNoticeRequest} req
-     * @param {function(string, CreateAlarmNoticeResponse):void} cb
+     * This API is used to create a global alert notification channel.
+     * @param {CreatePrometheusGlobalNotificationRequest} req
+     * @param {function(string, CreatePrometheusGlobalNotificationResponse):void} cb
      * @public
      */
-    CreateAlarmNotice(req, cb) {
-        let resp = new CreateAlarmNoticeResponse();
-        this.request("CreateAlarmNotice", req, resp, cb);
+    CreatePrometheusGlobalNotification(req, cb) {
+        let resp = new CreatePrometheusGlobalNotificationResponse();
+        this.request("CreatePrometheusGlobalNotification", req, resp, cb);
     }
 
     /**
@@ -1079,6 +1115,17 @@ Note: **If you use a sub-account, you can only query the alarm records of author
     DeleteSSOAccount(req, cb) {
         let resp = new DeleteSSOAccountResponse();
         this.request("DeleteSSOAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch update the status of alarm groups and set all rules grouped in them to the target status.
+     * @param {UpdatePrometheusAlertGroupStateRequest} req
+     * @param {function(string, UpdatePrometheusAlertGroupStateResponse):void} cb
+     * @public
+     */
+    UpdatePrometheusAlertGroupState(req, cb) {
+        let resp = new UpdatePrometheusAlertGroupStateResponse();
+        this.request("UpdatePrometheusAlertGroupState", req, resp, cb);
     }
 
     /**
@@ -1292,14 +1339,14 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to create a global alert notification channel.
-     * @param {CreatePrometheusGlobalNotificationRequest} req
-     * @param {function(string, CreatePrometheusGlobalNotificationResponse):void} cb
+     * This API is used to create a notification template.
+     * @param {CreateAlarmNoticeRequest} req
+     * @param {function(string, CreateAlarmNoticeResponse):void} cb
      * @public
      */
-    CreatePrometheusGlobalNotification(req, cb) {
-        let resp = new CreatePrometheusGlobalNotificationResponse();
-        this.request("CreatePrometheusGlobalNotification", req, resp, cb);
+    CreateAlarmNotice(req, cb) {
+        let resp = new CreateAlarmNoticeResponse();
+        this.request("CreateAlarmNotice", req, resp, cb);
     }
 
     /**
@@ -1413,6 +1460,20 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
+     * This API is used to create a Prometheus alert rule groups.
+
+This API is used to group alert rules, which can include multiple alert rules. Alert messages within the group are sent via the alert group's notification template.
+This API is used to enable individually creating enabled/disabled alert rules under an alert group.
+     * @param {CreatePrometheusAlertGroupRequest} req
+     * @param {function(string, CreatePrometheusAlertGroupResponse):void} cb
+     * @public
+     */
+    CreatePrometheusAlertGroup(req, cb) {
+        let resp = new CreatePrometheusAlertGroupResponse();
+        this.request("CreatePrometheusAlertGroup", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the global alert notification channel.
      * @param {ModifyPrometheusGlobalNotificationRequest} req
      * @param {function(string, ModifyPrometheusGlobalNotificationResponse):void} cb
@@ -1491,6 +1552,17 @@ Alarm policies in the same type under the project will be set as non-default.
     UpdateGrafanaConfig(req, cb) {
         let resp = new UpdateGrafanaConfigResponse();
         this.request("UpdateGrafanaConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update Prometheus alert rule groups.
+     * @param {UpdatePrometheusAlertGroupRequest} req
+     * @param {function(string, UpdatePrometheusAlertGroupResponse):void} cb
+     * @public
+     */
+    UpdatePrometheusAlertGroup(req, cb) {
+        let resp = new UpdatePrometheusAlertGroupResponse();
+        this.request("UpdatePrometheusAlertGroup", req, resp, cb);
     }
 
     /**

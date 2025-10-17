@@ -357,7 +357,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of an instance sub-account.
+     * This API is used to view instance account information.
      * @param {DescribeInstanceAccountRequest} req
      * @param {function(string, DescribeInstanceAccountResponse):void} cb
      * @public
@@ -434,7 +434,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the instance backup mode.
+     * This API is used to modify the backup mode of an instance.
      * @param {ModifyInstanceBackupModeRequest} req
      * @param {function(string, ModifyInstanceBackupModeResponse):void} cb
      * @public
@@ -456,7 +456,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the instance sub-account.
+     * This API is used to modify an instance account.
      * @param {ModifyInstanceAccountRequest} req
      * @param {function(string, ModifyInstanceAccountResponse):void} cb
      * @public
@@ -544,7 +544,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the second-level backup information on an instance.
+     * This API is used to query second-level backup information for the instance.
      * @param {DescribeSecondLevelBackupInfoRequest} req
      * @param {function(string, DescribeSecondLevelBackupInfoResponse):void} cb
      * @public

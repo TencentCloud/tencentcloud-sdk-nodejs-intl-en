@@ -1,6 +1,6 @@
 {
   "name": "tencentcloud-sdk-nodejs-intl-en",
-  "version": "3.0.1268",
+  "version": "3.0.1269",
   "description": "腾讯云 API NODEJS SDK",
   "main": "index.js",
   "scripts": {

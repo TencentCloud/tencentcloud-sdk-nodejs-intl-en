@@ -16,87 +16,94 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
-const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
-const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
-const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
-const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
-const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
-const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
-const ReplicaSetInfo = models.ReplicaSetInfo;
-const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
-const AssignProjectRequest = models.AssignProjectRequest;
-const SecurityGroupBound = models.SecurityGroupBound;
-const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
-const ClientConnection = models.ClientConnection;
-const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
-const BackupInfo = models.BackupInfo;
-const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
-const SecurityGroup = models.SecurityGroup;
 const DescribeDBInstanceNamespaceResponse = models.DescribeDBInstanceNamespaceResponse;
-const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
-const SpecificationInfo = models.SpecificationInfo;
-const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
-const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
-const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
-const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
-const SpecItem = models.SpecItem;
-const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
-const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
-const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
-const TagInfo = models.TagInfo;
-const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
-const InstanceIntegerParam = models.InstanceIntegerParam;
-const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
-const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
-const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
-const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
-const RemoveNodeList = models.RemoveNodeList;
-const AssignProjectResponse = models.AssignProjectResponse;
-const BackupDownloadTask = models.BackupDownloadTask;
-const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
-const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
-const InstanceMultiParam = models.InstanceMultiParam;
-const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
-const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
-const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
-const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
-const InstanceTextParam = models.InstanceTextParam;
-const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
-const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
-const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
-const ModifyNetworkAddress = models.ModifyNetworkAddress;
+const SetDBInstanceDeletionProtectionRequest = models.SetDBInstanceDeletionProtectionRequest;
 const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
-const RenameInstanceRequest = models.RenameInstanceRequest;
-const InstanceEnumParam = models.InstanceEnumParam;
+const SlowLogPattern = models.SlowLogPattern;
+const AssignProjectResponse = models.AssignProjectResponse;
+const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
+const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
 const AddNodeList = models.AddNodeList;
-const RenameInstanceResponse = models.RenameInstanceResponse;
-const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
-const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
-const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
-const InstanceDetail = models.InstanceDetail;
-const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
-const SlowLogPattern = models.SlowLogPattern;
 const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeDBInstanceNamespaceRequest = models.DescribeDBInstanceNamespaceRequest;
-const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
-const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
-const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const SpecItem = models.SpecItem;
+const DescribeDetailedSlowLogsRequest = models.DescribeDetailedSlowLogsRequest;
+const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
+const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
+const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
+const BackupInfo = models.BackupInfo;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
+const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
+const InstanceIntegerParam = models.InstanceIntegerParam;
+const ModifyNetworkAddress = models.ModifyNetworkAddress;
+const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
+const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const InstanceTextParam = models.InstanceTextParam;
+const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
+const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
+const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
+const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
+const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
+const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
+const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
+const RemoveNodeList = models.RemoveNodeList;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
-const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
+const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
+const SecurityGroup = models.SecurityGroup;
+const ReplicaSetInfo = models.ReplicaSetInfo;
+const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
+const ClientConnection = models.ClientConnection;
+const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
+const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
+const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
+const SecurityGroupBound = models.SecurityGroupBound;
+const BackupDownloadTask = models.BackupDownloadTask;
+const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
+const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
+const SetDBInstanceDeletionProtectionResponse = models.SetDBInstanceDeletionProtectionResponse;
+const DescribeDetailedSlowLogsResponse = models.DescribeDetailedSlowLogsResponse;
 const ShardInfo = models.ShardInfo;
+const TerminateDBInstancesResponse = models.TerminateDBInstancesResponse;
+const RenameInstanceRequest = models.RenameInstanceRequest;
+const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
+const InstanceEnumParam = models.InstanceEnumParam;
+const RenameInstanceResponse = models.RenameInstanceResponse;
+const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const AssignProjectRequest = models.AssignProjectRequest;
+const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
+const SlowLogItem = models.SlowLogItem;
+const SpecificationInfo = models.SpecificationInfo;
+const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
+const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
+const TagInfo = models.TagInfo;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
+const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
+const InstanceDetail = models.InstanceDetail;
+const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
 
 
 /**
@@ -109,6 +116,17 @@ class MongodbClient extends AbstractClient {
         super("mongodb.intl.tencentcloudapi.com", "2019-07-25", credential, region, profile);
     }
     
+    /**
+     * This API is used to terminate monthly subscription billing instances.
+     * @param {TerminateDBInstancesRequest} req
+     * @param {function(string, TerminateDBInstancesResponse):void} cb
+     * @public
+     */
+    TerminateDBInstances(req, cb) {
+        let resp = new TerminateDBInstancesResponse();
+        this.request("TerminateDBInstances", req, resp, cb);
+    }
+
     /**
      * This API is used to get order details of purchase, renewal, and specification adjustment of a MongoDB instance.
      * @param {DescribeDBInstanceDealRequest} req
@@ -143,7 +161,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance password.
+     * This API is used to reset the instance access password.
      * @param {ResetDBInstancePasswordRequest} req
      * @param {function(string, ResetDBInstancePasswordResponse):void} cb
      * @public
@@ -187,14 +205,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. An isolated instance is retained in the recycle bin and data can no longer be written to it. After it is isolated for a certain period of time, it will be completely deleted. For the retention period in the recycle bin, please see the terms of service for pay-as-you-go billing. Isolated pay-as-you-go instances cannot be recovered, so please proceed with caution.
-     * @param {IsolateDBInstanceRequest} req
-     * @param {function(string, IsolateDBInstanceResponse):void} cb
+     * This API is used to query slow log details of the instance.
+     * @param {DescribeDetailedSlowLogsRequest} req
+     * @param {function(string, DescribeDetailedSlowLogsResponse):void} cb
      * @public
      */
-    IsolateDBInstance(req, cb) {
-        let resp = new IsolateDBInstanceResponse();
-        this.request("IsolateDBInstance", req, resp, cb);
+    DescribeDetailedSlowLogs(req, cb) {
+        let resp = new DescribeDetailedSlowLogsResponse();
+        this.request("DescribeDetailedSlowLogs", req, resp, cb);
     }
 
     /**
@@ -239,6 +257,17 @@ class MongodbClient extends AbstractClient {
     CreateDBInstanceHour(req, cb) {
         let resp = new CreateDBInstanceHourResponse();
         this.request("CreateDBInstanceHour", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate a pay-as-you-go TencentDB for MongoDB instance. After isolation, the instance is retained in the recycle bin, and data cannot be written into it. After a certain period of isolation, the instance is deleted permanently. For the retention time in the recycle bin, see the pay-as-you-go service terms. The deleted pay-as-you-go instance cannot be recovered. Proceed with caution.
+     * @param {IsolateDBInstanceRequest} req
+     * @param {function(string, IsolateDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDBInstance(req, cb) {
+        let resp = new IsolateDBInstanceResponse();
+        this.request("IsolateDBInstance", req, resp, cb);
     }
 
     /**
@@ -297,7 +326,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a monthly subscription TencentDB for MongoDB instance. The purchasable specifications supported by this API can be obtained through the `DescribeSpecInfo` API.
+     * This API is used to create a yearly/monthly subscription TencentDB for MongoDB instance. The [DescribeSpecInfo](https://www.tencentcloud.comom/document/product/240/35767?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
      * @param {CreateDBInstanceRequest} req
      * @param {function(string, CreateDBInstanceResponse):void} cb
      * @public
@@ -308,7 +337,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to adjust the configuration of a TencentDB for MongoDB instance. Saleable specifications supported for this API can be obtained from the DescribeSpecInfo API for querying saleable TencentDB for MongoDB specifications.
+     * This API is used to adjust the TencentDB for MongoDB instance configuration. The [DescribeSpecInfo](https://www.tencentcloud.comom/document/product/240/38567?from_cn_redirect=1) API can be called to query and obtain the supported sales specifications.
      * @param {ModifyDBInstanceSpecRequest} req
      * @param {function(string, ModifyDBInstanceSpecResponse):void} cb
      * @public
@@ -330,7 +359,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the purchasable instance specifications.
+     * This API is used to query the sales specification of an instance.
      * @param {DescribeSpecInfoRequest} req
      * @param {function(string, DescribeSpecInfoResponse):void} cb
      * @public
@@ -341,7 +370,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query backup download task information.
+     * This API is used to query information about the backup download task.
      * @param {DescribeBackupDownloadTaskRequest} req
      * @param {function(string, DescribeBackupDownloadTaskResponse):void} cb
      * @public
@@ -360,6 +389,17 @@ class MongodbClient extends AbstractClient {
     InquirePriceCreateDBInstances(req, cb) {
         let resp = new InquirePriceCreateDBInstancesResponse();
         this.request("InquirePriceCreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set instance termination protection.
+     * @param {SetDBInstanceDeletionProtectionRequest} req
+     * @param {function(string, SetDBInstanceDeletionProtectionResponse):void} cb
+     * @public
+     */
+    SetDBInstanceDeletionProtection(req, cb) {
+        let resp = new SetDBInstanceDeletionProtectionResponse();
+        this.request("SetDBInstanceDeletionProtection", req, resp, cb);
     }
 
     /**

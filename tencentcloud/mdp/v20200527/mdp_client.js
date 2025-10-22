@@ -42,6 +42,7 @@ const ChannelAlertResp = models.ChannelAlertResp;
 const DeleteStreamPackageChannelsRequest = models.DeleteStreamPackageChannelsRequest;
 const InputInfo = models.InputInfo;
 const DescribeStreamPackageLinearAssemblyProgramsResponse = models.DescribeStreamPackageLinearAssemblyProgramsResponse;
+const UnbindSSAICDNDomainWithChannelRequest = models.UnbindSSAICDNDomainWithChannelRequest;
 const PointInfo = models.PointInfo;
 const DescribeStreamPackageSourceAlertsRequest = models.DescribeStreamPackageSourceAlertsRequest;
 const ModifyStreamPackageSSAIChannelRequest = models.ModifyStreamPackageSSAIChannelRequest;
@@ -152,6 +153,7 @@ const DeleteStreamPackageLinearAssemblyProgramsRequest = models.DeleteStreamPack
 const DeleteStreamPackageChannelEndpointsResponse = models.DeleteStreamPackageChannelEndpointsResponse;
 const CreateStreamPackageHarvestJobRequest = models.CreateStreamPackageHarvestJobRequest;
 const DescribeStreamPackageSSAIUsageRequest = models.DescribeStreamPackageSSAIUsageRequest;
+const BindSSAICDNDomainWithChannelRequest = models.BindSSAICDNDomainWithChannelRequest;
 const DescribeStreamPackageSourceAlertsResponse = models.DescribeStreamPackageSourceAlertsResponse;
 const DeleteStreamPackageLinearAssemblyProgramRequest = models.DeleteStreamPackageLinearAssemblyProgramRequest;
 const DeleteStreamPackageChannelsResponse = models.DeleteStreamPackageChannelsResponse;
@@ -162,8 +164,10 @@ const SpliceInsertInfo = models.SpliceInsertInfo;
 const CreateStreamPackageLinearAssemblyProgramResponse = models.CreateStreamPackageLinearAssemblyProgramResponse;
 const DescribeStreamPackageChannelsResponse = models.DescribeStreamPackageChannelsResponse;
 const DescribeStreamPackageSourceResponse = models.DescribeStreamPackageSourceResponse;
+const UnbindSSAICDNDomainWithChannelResponse = models.UnbindSSAICDNDomainWithChannelResponse;
 const DeleteStreamPackageLinearAssemblyProgramResponse = models.DeleteStreamPackageLinearAssemblyProgramResponse;
 const CreateStreamPackageSSAIChannelResponse = models.CreateStreamPackageSSAIChannelResponse;
+const BindSSAICDNDomainWithChannelResponse = models.BindSSAICDNDomainWithChannelResponse;
 const ModifyStreamPackageSourceLocationRequest = models.ModifyStreamPackageSourceLocationRequest;
 const CreateStreamPackageHarvestJobResponse = models.CreateStreamPackageHarvestJobResponse;
 const EndpointAuthInfo = models.EndpointAuthInfo;
@@ -383,6 +387,17 @@ class MdpClient extends AbstractClient {
     CreateStreamPackageHarvestJob(req, cb) {
         let resp = new CreateStreamPackageHarvestJobResponse();
         this.request("CreateStreamPackageHarvestJob", req, resp, cb);
+    }
+
+    /**
+     * BindSSAICDNDomainWithChannel
+     * @param {BindSSAICDNDomainWithChannelRequest} req
+     * @param {function(string, BindSSAICDNDomainWithChannelResponse):void} cb
+     * @public
+     */
+    BindSSAICDNDomainWithChannel(req, cb) {
+        let resp = new BindSSAICDNDomainWithChannelResponse();
+        this.request("BindSSAICDNDomainWithChannel", req, resp, cb);
     }
 
     /**
@@ -691,6 +706,17 @@ class MdpClient extends AbstractClient {
     DeleteStreamPackageSourceLocation(req, cb) {
         let resp = new DeleteStreamPackageSourceLocationResponse();
         this.request("DeleteStreamPackageSourceLocation", req, resp, cb);
+    }
+
+    /**
+     * UnbindSSAICDNDomainWithChannel
+     * @param {UnbindSSAICDNDomainWithChannelRequest} req
+     * @param {function(string, UnbindSSAICDNDomainWithChannelResponse):void} cb
+     * @public
+     */
+    UnbindSSAICDNDomainWithChannel(req, cb) {
+        let resp = new UnbindSSAICDNDomainWithChannelResponse();
+        this.request("UnbindSSAICDNDomainWithChannel", req, resp, cb);
     }
 
     /**

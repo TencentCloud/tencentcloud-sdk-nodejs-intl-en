@@ -1228,6 +1228,89 @@ class DescribeDBInstanceNamespaceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceNodeProperty request structure.
+ * @class
+ */
+class DescribeDBInstanceNodePropertyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), and copy the instance ID from the instance list.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Node ID. Log in to the [TencentDB for MongoDB console](https://console.cloud.tencent.com/mongodb), go to Node Management, and copy the node ID.
+         * @type {Array.<string> || null}
+         */
+        this.NodeIds = null;
+
+        /**
+         * Node role. Valid values:
+- PRIMARY: primary node.
+- SECONDARY: secondary node.
+- READONLY: read-only node.
+- ARBITER: arbitration node.
+         * @type {Array.<string> || null}
+         */
+        this.Roles = null;
+
+        /**
+         * Whether the node is a hidden node. Default value: false.
+         * @type {boolean || null}
+         */
+        this.OnlyHidden = null;
+
+        /**
+         * Priority of the node for electing it as the new primary node. Value range: [0, 100]. A larger value indicates a higher priority.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Node voting right.- 1: The node has the right to vote.
+- 0: The node does not have the right to vote.
+         * @type {number || null}
+         */
+        this.Votes = null;
+
+        /**
+         * Node tag.
+         * @type {Array.<NodeTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeIds = 'NodeIds' in params ? params.NodeIds : null;
+        this.Roles = 'Roles' in params ? params.Roles : null;
+        this.OnlyHidden = 'OnlyHidden' in params ? params.OnlyHidden : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Votes = 'Votes' in params ? params.Votes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new NodeTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * TencentDB for MongoDB instance sales specification.
  * @class
  */
@@ -2859,6 +2942,41 @@ class RemoveNodeList extends  AbstractModel {
 }
 
 /**
+ * Node tag.
+ * @class
+ */
+class NodeTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node tag key.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Node tag value.
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * InquirePriceCreateDBInstances response structure.
  * @class
  */
@@ -3133,6 +3251,42 @@ class ClientConnection extends  AbstractModel {
 }
 
 /**
+ * Replica set information.
+ * @class
+ */
+class ReplicateSetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node attributes.
+         * @type {Array.<NodeProperty> || null}
+         */
+        this.Nodes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new NodeProperty();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDBInstanceDeal request structure.
  * @class
  */
@@ -3357,6 +3511,64 @@ class SecurityGroupBound extends  AbstractModel {
         this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
         this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceNodeProperty response structure.
+ * @class
+ */
+class DescribeDBInstanceNodePropertyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Mongos node attributes.
+         * @type {Array.<NodeProperty> || null}
+         */
+        this.Mongos = null;
+
+        /**
+         * Replica set node information.
+         * @type {Array.<ReplicateSetInfo> || null}
+         */
+        this.ReplicateSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Mongos) {
+            this.Mongos = new Array();
+            for (let z in params.Mongos) {
+                let obj = new NodeProperty();
+                obj.deserialize(params.Mongos[z]);
+                this.Mongos.push(obj);
+            }
+        }
+
+        if (params.ReplicateSets) {
+            this.ReplicateSets = new Array();
+            for (let z in params.ReplicateSets) {
+                let obj = new ReplicateSetInfo();
+                obj.deserialize(params.ReplicateSets[z]);
+                this.ReplicateSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3974,6 +4186,136 @@ class CreateBackupDBInstanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
         this.BackupRemark = 'BackupRemark' in params ? params.BackupRemark : null;
+
+    }
+}
+
+/**
+ * Node attributes.
+ * @class
+ */
+class NodeProperty extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node AZ.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Node name.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node access address.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Public network access address (IP address or domain name) of the node. The example value is an IP address.
+         * @type {string || null}
+         */
+        this.WanServiceAddress = null;
+
+        /**
+         * Node role.
+- PRIMARY: primary node.
+- SECONDARY: secondary node.
+- READONLY: read-only node.
+- ARBITER: arbitration node.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * Whether the node is a hidden node.
+- true: a hidden node.
+- false: not a hidden node.
+         * @type {boolean || null}
+         */
+        this.Hidden = null;
+
+        /**
+         * Node status.
+- NORMAL: running normally.
+- STARTUP: starting.
+- STARTUP2: starting and processing the intermediate data.
+- RECOVERING: recovering and not available.
+- DOWN: offline.
+- UNKNOWN: unknown status.
+- ROLLBACK: rolling back.
+- REMOVED: removed.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Delay time of primary-secondary synchronization, in seconds.
+         * @type {number || null}
+         */
+        this.SlaveDelay = null;
+
+        /**
+         * Node priority. Value range: [0, 100]. A larger value indicates a higher priority.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Node voting right.
+- 1: The node has the right to vote.
+- 0: The node does not have the right to vote.
+         * @type {number || null}
+         */
+        this.Votes = null;
+
+        /**
+         * Node tag.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<NodeTag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Replica set ID.
+         * @type {string || null}
+         */
+        this.ReplicateSetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.WanServiceAddress = 'WanServiceAddress' in params ? params.WanServiceAddress : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Hidden = 'Hidden' in params ? params.Hidden : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SlaveDelay = 'SlaveDelay' in params ? params.SlaveDelay : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Votes = 'Votes' in params ? params.Votes : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new NodeTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
 
     }
 }
@@ -5552,6 +5894,7 @@ module.exports = {
     ModifyDBInstanceNetworkAddressRequest: ModifyDBInstanceNetworkAddressRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     DescribeDBInstanceNamespaceRequest: DescribeDBInstanceNamespaceRequest,
+    DescribeDBInstanceNodePropertyRequest: DescribeDBInstanceNodePropertyRequest,
     SpecItem: SpecItem,
     DescribeDetailedSlowLogsRequest: DescribeDetailedSlowLogsRequest,
     ModifyDBInstanceNetworkAddressResponse: ModifyDBInstanceNetworkAddressResponse,
@@ -5576,17 +5919,20 @@ module.exports = {
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     ModifyDBInstanceSecurityGroupResponse: ModifyDBInstanceSecurityGroupResponse,
     RemoveNodeList: RemoveNodeList,
+    NodeTag: NodeTag,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     DescribeSecurityGroupResponse: DescribeSecurityGroupResponse,
     SecurityGroup: SecurityGroup,
     ReplicaSetInfo: ReplicaSetInfo,
     ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
     ClientConnection: ClientConnection,
+    ReplicateSetInfo: ReplicateSetInfo,
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     CreateBackupDownloadTaskRequest: CreateBackupDownloadTaskRequest,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
     SecurityGroupBound: SecurityGroupBound,
+    DescribeDBInstanceNodePropertyResponse: DescribeDBInstanceNodePropertyResponse,
     BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
@@ -5599,6 +5945,7 @@ module.exports = {
     InstanceEnumParam: InstanceEnumParam,
     RenameInstanceResponse: RenameInstanceResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
+    NodeProperty: NodeProperty,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,

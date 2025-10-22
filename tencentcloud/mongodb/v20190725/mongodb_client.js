@@ -38,6 +38,7 @@ const DBInstanceInfo = models.DBInstanceInfo;
 const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeDBInstanceNamespaceRequest = models.DescribeDBInstanceNamespaceRequest;
+const DescribeDBInstanceNodePropertyRequest = models.DescribeDBInstanceNodePropertyRequest;
 const SpecItem = models.SpecItem;
 const DescribeDetailedSlowLogsRequest = models.DescribeDetailedSlowLogsRequest;
 const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
@@ -62,17 +63,20 @@ const TerminateDBInstancesRequest = models.TerminateDBInstancesRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
 const RemoveNodeList = models.RemoveNodeList;
+const NodeTag = models.NodeTag;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const SecurityGroup = models.SecurityGroup;
 const ReplicaSetInfo = models.ReplicaSetInfo;
 const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const ClientConnection = models.ClientConnection;
+const ReplicateSetInfo = models.ReplicateSetInfo;
 const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
 const SecurityGroupBound = models.SecurityGroupBound;
+const DescribeDBInstanceNodePropertyResponse = models.DescribeDBInstanceNodePropertyResponse;
 const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
@@ -85,6 +89,7 @@ const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
+const NodeProperty = models.NodeProperty;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
@@ -125,6 +130,17 @@ class MongodbClient extends AbstractClient {
     TerminateDBInstances(req, cb) {
         let resp = new TerminateDBInstancesResponse();
         this.request("TerminateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query node attributes, such as the AZ, node name, address, role, status, delay between primary and secondary nodes, priority, voting right, and tags.
+     * @param {DescribeDBInstanceNodePropertyRequest} req
+     * @param {function(string, DescribeDBInstanceNodePropertyResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceNodeProperty(req, cb) {
+        let resp = new DescribeDBInstanceNodePropertyResponse();
+        this.request("DescribeDBInstanceNodeProperty", req, resp, cb);
     }
 
     /**

@@ -390,7 +390,7 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * BindSSAICDNDomainWithChannel
+     * This API is used to bind a CDN playback domain to a channel.
      * @param {BindSSAICDNDomainWithChannelRequest} req
      * @param {function(string, BindSSAICDNDomainWithChannelResponse):void} cb
      * @public
@@ -709,7 +709,7 @@ class MdpClient extends AbstractClient {
     }
 
     /**
-     * UnbindSSAICDNDomainWithChannel
+     * This API is used to cancel the correlation between a channel and a CDN playback domain.
      * @param {UnbindSSAICDNDomainWithChannelRequest} req
      * @param {function(string, UnbindSSAICDNDomainWithChannelResponse):void} cb
      * @public

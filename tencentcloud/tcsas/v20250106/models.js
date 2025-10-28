@@ -2023,42 +2023,36 @@ class DescribeTeamListInfoResp extends  AbstractModel {
 
         /**
          * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Admin ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Administrator user ID
          * @type {string || null}
          */
         this.AdminUserId = null;
 
         /**
-         * Admin account
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Administrator account
          * @type {string || null}
          */
         this.AdminUserAccount = null;
 
         /**
-         * Admin username
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Administrator username
          * @type {string || null}
          */
         this.AdminUserName = null;
 
         /**
          * Number of team members
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MemberCount = null;
@@ -2071,7 +2065,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Team permission type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.TeamRoleTypeList = null;
@@ -2081,6 +2074,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.RelatedTeamId = null;
+
+        /**
+         * Team expiration time. 0 means never expire.
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Team status. valid values: 1: normal; 2: disabled; 3: expired.
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2100,6 +2105,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RegisterLink = 'RegisterLink' in params ? params.RegisterLink : null;
         this.TeamRoleTypeList = 'TeamRoleTypeList' in params ? params.TeamRoleTypeList : null;
         this.RelatedTeamId = 'RelatedTeamId' in params ? params.RelatedTeamId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -6626,15 +6633,13 @@ class DescribeTeamPageResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total count
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeTeamListInfoResp> || null}
          */
         this.DataList = null;
@@ -6999,7 +7004,7 @@ class DescribeTeamListRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of results per page
+         * Page size
          * @type {number || null}
          */
         this.Limit = null;
@@ -7011,7 +7016,7 @@ class DescribeTeamListRequest extends  AbstractModel {
         this.PlatformId = null;
 
         /**
-         * Name of the team to be queried
+         * Team name to be queried
          * @type {string || null}
          */
         this.Keyword = null;
@@ -7743,49 +7748,42 @@ class DescribeTeamDetailResp extends  AbstractModel {
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Team role type 1-Mini program team 2-Application team
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Team role type 1-mini program team 2-application team
          * @type {number || null}
          */
         this.TeamRoleType = null;
 
         /**
-         * Admin account
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Administrator account
          * @type {string || null}
          */
         this.AdminUserAccount = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * Number of team members
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MemberCount = null;
 
         /**
          * Number of bound mini program teams
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.BindMiniTeamCount = null;
@@ -7803,10 +7801,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RegisterLink = null;
 
         /**
-         * Application name. It’s required when querying details of a mini program team.
+         * Application name. It Is required when querying details of a mini program team.
          * @type {string || null}
          */
         this.ApplicationName = null;
+
+        /**
+         * Team expiration time. 0 means never expire.
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Team status. valid values: 1: normal; 2: disabled; 3: expired.
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -7827,6 +7837,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BindTeamName = 'BindTeamName' in params ? params.BindTeamName : null;
         this.RegisterLink = 'RegisterLink' in params ? params.RegisterLink : null;
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }

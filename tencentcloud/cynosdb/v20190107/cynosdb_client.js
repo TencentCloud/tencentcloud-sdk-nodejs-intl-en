@@ -31,6 +31,7 @@ const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const DescribeSlaveZonesResponse = models.DescribeSlaveZonesResponse;
 const DescribeProxiesResponse = models.DescribeProxiesResponse;
 const DescribeClusterDetailDatabasesRequest = models.DescribeClusterDetailDatabasesRequest;
+const InquirePriceMultiSpecRequest = models.InquirePriceMultiSpecRequest;
 const CreateClustersResponse = models.CreateClustersResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
@@ -82,7 +83,6 @@ const DescribeProxyNodesRequest = models.DescribeProxyNodesRequest;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const DescribeClusterReadOnlyRequest = models.DescribeClusterReadOnlyRequest;
 const DescribeIntegrateTaskResponse = models.DescribeIntegrateTaskResponse;
-const Account = models.Account;
 const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
 const CloseProxyResponse = models.CloseProxyResponse;
 const DescribeResourcePackageSaleSpecRequest = models.DescribeResourcePackageSaleSpecRequest;
@@ -91,6 +91,7 @@ const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsRe
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const ModifyClusterDatabaseRequest = models.ModifyClusterDatabaseRequest;
 const DescribeServerlessStrategyResponse = models.DescribeServerlessStrategyResponse;
+const InquirePriceMultiSpecResponse = models.InquirePriceMultiSpecResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const AuditRuleFilters = models.AuditRuleFilters;
@@ -100,6 +101,7 @@ const ProxyEndPointConfigInfo = models.ProxyEndPointConfigInfo;
 const DescribeServerlessInstanceSpecsResponse = models.DescribeServerlessInstanceSpecsResponse;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const InquirePriceModifyResponse = models.InquirePriceModifyResponse;
+const SlaveZoneStockInfo = models.SlaveZoneStockInfo;
 const ModifyProxyRwSplitRequest = models.ModifyProxyRwSplitRequest;
 const DescribeResourcePackageListResponse = models.DescribeResourcePackageListResponse;
 const RuleFilters = models.RuleFilters;
@@ -115,6 +117,7 @@ const BindClusterResourcePackagesRequest = models.BindClusterResourcePackagesReq
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const CopyClusterPasswordComplexityResponse = models.CopyClusterPasswordComplexityResponse;
 const DescribeClusterTransparentEncryptInfoRequest = models.DescribeClusterTransparentEncryptInfoRequest;
+const GoodsSpec = models.GoodsSpec;
 const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const ServerlessSpec = models.ServerlessSpec;
 const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
@@ -209,11 +212,12 @@ const CreateAccountsResponse = models.CreateAccountsResponse;
 const CloseWanResponse = models.CloseWanResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const SalePackageSpec = models.SalePackageSpec;
-const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
+const Account = models.Account;
 const ModifyResourcePackagesDeductionPriorityResponse = models.ModifyResourcePackagesDeductionPriorityResponse;
 const CloseWanRequest = models.CloseWanRequest;
 const InstanceNameWeight = models.InstanceNameWeight;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
+const GoodsPrice = models.GoodsPrice;
 const ModifyResourcePackageClustersRequest = models.ModifyResourcePackageClustersRequest;
 const ObjectTask = models.ObjectTask;
 const DescribeFlowResponse = models.DescribeFlowResponse;
@@ -331,7 +335,7 @@ const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const IntegrateInstanceInfo = models.IntegrateInstanceInfo;
 const ExportInstanceErrorLogsResponse = models.ExportInstanceErrorLogsResponse;
 const ParamItemDetail = models.ParamItemDetail;
-const SlaveZoneStockInfo = models.SlaveZoneStockInfo;
+const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const IsolateClusterResponse = models.IsolateClusterResponse;
 const ModifyVipVportResponse = models.ModifyVipVportResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
@@ -930,6 +934,17 @@ class CynosdbClient extends AbstractClient {
     UpgradeProxy(req, cb) {
         let resp = new UpgradeProxyResponse();
         this.request("UpgradeProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to inquire prices in batch.
+     * @param {InquirePriceMultiSpecRequest} req
+     * @param {function(string, InquirePriceMultiSpecResponse):void} cb
+     * @public
+     */
+    InquirePriceMultiSpec(req, cb) {
+        let resp = new InquirePriceMultiSpecResponse();
+        this.request("InquirePriceMultiSpec", req, resp, cb);
     }
 
     /**

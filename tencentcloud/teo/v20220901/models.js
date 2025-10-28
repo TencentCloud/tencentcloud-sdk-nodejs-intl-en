@@ -3216,37 +3216,37 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Queried metric. Valid values:
-<li> l7Flow_outFlux_country: L7 EdgeOne response traffic aggregated by the country/region dimension;</li>
-<li> l7Flow_outFlux_province: L7 EdgeOne response traffic aggregated by the dimension of provinces in chinese mainland;</li>
-<li> l7Flow_outFlux_statusCode: L7 EdgeOne response traffic aggregated by the status code dimension;</li>
-<li> l7Flow_outFlux_domain: L7 EdgeOne response traffic aggregated by the domain name dimension;</li>
-<li>l7Flow_outFlux_url: L7 EdgeOne response traffic aggregated by url path dimension.</li>
-<li> l7Flow_outFlux_resourceType: L7 EdgeOne response traffic aggregated by the resource type dimension;</li>
-<li> l7Flow_outFlux_sip: L7 EdgeOne response traffic aggregated by the client IP dimension;</li>
-<li>l7Flow_outFlux_referers: L7 EdgeOne response traffic aggregated by referer dimension.</li>
-<li> l7Flow_outFlux_ua_device: L7 EdgeOne response traffic aggregated by the device type dimension;</li>
-<li> l7Flow_outFlux_ua_browser: L7 EdgeOne response traffic aggregated by the browser type dimension;</li>
-<li> l7Flow_outFlux_ua_os: L7 EdgeOne response traffic aggregated by the operating system type dimension;</li>
-<li> l7Flow_outFlux_ua: L7 EdgeOne response traffic aggregated by the User-Agent dimension;</li>
-<li> l7Flow_request_country: L7 request count aggregated by the country/region dimension;</li>
-<li> l7Flow_request_province: L7 request count aggregated by the dimension of provinces in the chinese mainland;</li>
-<li> l7Flow_request_statusCode: L7 request count aggregated by the status code dimension;</li>
-<li> l7Flow_request_domain: L7 request count aggregated by the domain name dimension;</li>
-<li>l7Flow_request_url: L7 request count aggregated by url Path dimension.</li>
-<li> l7Flow_request_resourceType: L7 request count aggregated by resource type dimension;</li>
-<li> l7Flow_request_sip: L7 request count aggregated by the client IP dimension;</li>
-<li>l7Flow_request_referer: L7 request count aggregated by referer dimension.</li>
-<li> l7Flow_request_ua_device: L7 request count aggregated by the device type dimension;</li>
-<li> l7Flow_request_ua_browser: L7 request count aggregated by the browser type dimension;</li>
-<li> l7Flow_request_ua_os: L7 request count aggregated by the operating system type dimension.</li>
-<li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
+         * Queried metric. valid values:.
+<li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>.
+<li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>.
+<li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>.
+<li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>.
+<li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>.
+<li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>.
+<li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>.
+<li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>.
+<li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>.
+<li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>.
+<li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>.
+<li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>.
+<li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>.
+<li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>.
+<li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>.
+<li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>.
+<li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>.
+<li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>.
+<li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>.
+<li>l7Flow_request_referer: specifies l7 access request count metrics by referer dimension.</li>.
+<li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>.
+<li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>.
+<li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>.
+<li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>.
          * @type {string || null}
          */
         this.MetricName = null;
 
         /**
-         * Site ID list. This parameter is required. A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+         * Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).  A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -3258,19 +3258,20 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filtering conditions used when querying data. Refer to the [Filtering Conditions for Analytics](https://www.tencentcloud.com/document/product/1145/56985) document for the available filters applicable to L7 client traffic, bandwidth and requests.  
+         * Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
 
         /**
-         * Query time granularity. This parameter is deprecated.
+         * Query time granularity. this parameter is invalid. to be deprecated.
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
-         * Data region. This parameter is deprecated. Please filter data by client region in `Filters.country`.
+         * Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
          * @type {string || null}
          */
         this.Area = null;
@@ -6060,7 +6061,7 @@ class DownloadL4LogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * ZoneId set. This parameter is required.
+         * ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -9538,7 +9539,7 @@ class MaxAge extends  AbstractModel {
         this.FollowOrigin = null;
 
         /**
-         * Specifies the maximum amount of time (in seconds). The maximum value is 365 days.
+         * Specifies the maximum amount of time (in seconds). Value range: 0 to 315360000.
 Note: The value `0` means not to cache.
          * @type {number || null}
          */
@@ -10805,7 +10806,7 @@ class Task extends  AbstractModel {
         this.FailType = null;
 
         /**
-         * Failure description for refresh and preheating.
+         * Description of the reason for cache purge or warm cache failure.
          * @type {string || null}
          */
         this.FailMessage = null;
@@ -14553,7 +14554,7 @@ class DownloadL7LogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * ZoneId set. This parameter is required.
+         * ZoneId set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980).
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -17267,7 +17268,7 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * Site ID. This parameter is required.
+         * Site ID. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -17301,8 +17302,8 @@ class DescribePurgeTasksRequest extends  AbstractModel {
 <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li>
 <li>target: Filter by target resource information in the format like http://www.qq.com/1.txt or tag1. Multiple values are not supported yet. Fuzzy queries are supported.</li>
 <li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li>
-<li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>?? processing: processing<br>?? success: successful<br>?? failed: failed<br>?? timeout: timed out</li>
-<li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>?? purge_url: URL<br>?? purge_prefix: prefix<br>?? purge_all: all cached content<br>?? purge_host: Hostname<br>?? purge_cache_tag: CacheTag</li>
+<li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>canceled: Canceled</li>
+<li>type: Filter by cache clearance type. Multiple values and fuzzy queries are not supported yet. Options: <br>purge_url: URL<br>purge_prefix: prefix<br>purge_all: all cached content<br>purge_host: Hostname<br>purge_cache_tag: CacheTag</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -18160,7 +18161,7 @@ class DescribeDDoSAttackEventRequest extends  AbstractModel {
         this.PolicyIds = null;
 
         /**
-         * Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+         * Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -22562,7 +22563,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * Site ID list. This parameter is required. A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+         * Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -22578,14 +22579,14 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.Interval = null;
 
         /**
-         * Filtering conditions used when querying data. Refer to the [Filtering Conditions for Analytics](https://www.tencentcloud.com/document/product/1145/56985) document for the available filters applicable to L7 client traffic, bandwidth and requests.  
-To restrict results by zone or content identifier, input the corresponding values via the `ZoneIds.N` parameter.
+         * Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
 
         /**
-         * Data region. This parameter is deprecated. Please filter data by client region in `Filters.country`.
+         * Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
          * @type {string || null}
          */
         this.Area = null;
@@ -28445,9 +28446,9 @@ class Https extends  AbstractModel {
         /**
          * Tls version settings, valid values:.
 <Li>`TLSv1`: tlsv1 version;</li>.
-<li>`TLSV1.1`: TLSV1.1 version;</li>.
-<li>TLSV1.2: specifies the TLSV1.2 version.</li>.
-<Li>TLSv1.3: specifies the tlsv1.3 version. consecutive versions must be enabled when modifying.</li>.
+<li>`TLSv1.1`: TLSv1.1 version;</li>.
+<li>TLSv1.2: specifies the TLSv1.2 version.</li>.
+<Li>TLSv1.3: specifies the TLSv1.3 version. consecutive versions must be enabled when modifying.</li>.
          * @type {Array.<string> || null}
          */
         this.TlsVersion = null;
@@ -30330,7 +30331,7 @@ class DescribeDDoSAttackTopDataRequest extends  AbstractModel {
         this.MetricName = null;
 
         /**
-         * Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+         * Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -30463,7 +30464,7 @@ class DescribeDDoSAttackDataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+         * Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -32227,7 +32228,7 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * Site ID. This parameter is required.
+         * Site ID.The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980)
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -32257,7 +32258,7 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>??processing: processing<br>??success: successful<br>??failed: failed<br>??timeout: timed out<br>??invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.</li>
+         * Filter criteria. The maximum number of Filters.Values is 20. The detailed filter criteria are as follows: <li>job-id: Filter by task ID in the format like 1379afjk91u32h. Multiple values and fuzzy queries are not supported.</li><li>target: Filter by target resource information in the format like http://www.qq.com/1.txt. Multiple values and fuzzy queries are not supported.</li><li>domains: Filter by domain name in the format like www.qq.com. Fuzzy queries are not supported.</li><li>statuses: Filter by task status. Fuzzy queries are not supported. Options:<br>processing: processing<br>success: successful<br>failed: failed<br>timeout: timed out<br>invalid: invalid, that is, the response status code of the origin server is not 2xx. Please check the origin server service.<br>canceled: Canceled
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -36111,7 +36112,7 @@ class DescribeTimingL4DataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * Site ID set. this parameter is required. a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
+         * Site ID set. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query data for all sites under the tencent cloud root account. to query account-level data, you must have resource permissions for all sites in this api.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;

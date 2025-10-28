@@ -1208,13 +1208,13 @@ class UnbindSSAICDNDomainWithChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Channel Id
+         * Channel Id.
          * @type {string || null}
          */
         this.ChannelId = null;
 
         /**
-         * The domain name for CDN playback.
+         * Specifies the playback domain of CDN.
          * @type {string || null}
          */
         this.CdnDomain = null;
@@ -6370,13 +6370,13 @@ class BindSSAICDNDomainWithChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Channel Id
+         * Channel Id.
          * @type {string || null}
          */
         this.ChannelId = null;
 
         /**
-         * The domain name for CDN playback.
+         * Specifies the playback domain of CDN.
          * @type {string || null}
          */
         this.CdnDomain = null;

@@ -2630,8 +2630,7 @@ class AssistantCidr extends  AbstractModel {
         this.AssistantType = null;
 
         /**
-         * Subnets divided by the secondary CIDR.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Subnet Split by Auxiliary CIDR
          * @type {Array.<Subnet> || null}
          */
         this.SubnetSet = null;
@@ -10116,11 +10115,22 @@ class Vpc extends  AbstractModel {
         this.TagSet = null;
 
         /**
-         * The secondary CIDR block.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Auxiliary CIDR
          * @type {Array.<AssistantCidr> || null}
          */
         this.AssistantCidrSet = null;
+
+        /**
+         * Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+         * @type {boolean || null}
+         */
+        this.EnableRouteVpcPublish = null;
+
+        /**
+         * Returns the multi-operator IPv6 Cidr Block.
+         * @type {Array.<ISPIPv6CidrBlock> || null}
+         */
+        this.Ipv6CidrBlockSet = null;
 
     }
 
@@ -10158,6 +10168,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new AssistantCidr();
                 obj.deserialize(params.AssistantCidrSet[z]);
                 this.AssistantCidrSet.push(obj);
+            }
+        }
+        this.EnableRouteVpcPublish = 'EnableRouteVpcPublish' in params ? params.EnableRouteVpcPublish : null;
+
+        if (params.Ipv6CidrBlockSet) {
+            this.Ipv6CidrBlockSet = new Array();
+            for (let z in params.Ipv6CidrBlockSet) {
+                let obj = new ISPIPv6CidrBlock();
+                obj.deserialize(params.Ipv6CidrBlockSet[z]);
+                this.Ipv6CidrBlockSet.push(obj);
             }
         }
 
@@ -20023,15 +20043,13 @@ class Subnet extends  AbstractModel {
         this.TagSet = null;
 
         /**
-         * CDC instance ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * CDC instance ID.
          * @type {string || null}
          */
         this.CdcId = null;
 
         /**
-         * Whether it is a CDC subnet. Valid values: 0: no; 1: yes
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether the subnet is associated with CDC. valid values: 0 (no), 1 (yes).
          * @type {number || null}
          */
         this.IsCdcSubnet = null;
@@ -22548,6 +22566,48 @@ class ModifyReserveIpAddressRequest extends  AbstractModel {
         this.ReserveIpId = 'ReserveIpId' in params ? params.ReserveIpId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * Returns multi-operator IPv6 Cidr Block.
+ * @class
+ */
+class ISPIPv6CidrBlock extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPv6 CIdr Block
+         * @type {string || null}
+         */
+        this.IPv6CidrBlock = null;
+
+        /**
+         * Network operator type. valid values: 'BGP' (default), 'CMCC' (china mobile), 'CTCC' (china telecom), 'CUCC' (china unicom).
+         * @type {string || null}
+         */
+        this.ISPType = null;
+
+        /**
+         * Specifies the type of IPv6 Cidr: `GUA` (global unicast address), `ULA` (unique local address).
+         * @type {string || null}
+         */
+        this.AddressType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IPv6CidrBlock = 'IPv6CidrBlock' in params ? params.IPv6CidrBlock : null;
+        this.ISPType = 'ISPType' in params ? params.ISPType : null;
+        this.AddressType = 'AddressType' in params ? params.AddressType : null;
 
     }
 }
@@ -25161,7 +25221,7 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * Security group can be named freely, but cannot exceed 60 characters.
+         * VPC instance ID, in the format of vpc-f49l6u0z.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -25191,6 +25251,12 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
+         * Vpc association with CCN route publish policy. true enables cidr route publishing. false enables subnet route publishing. the default is subnet route publishing when creating a vpc. to use cidr route publishing, submit a ticket to add to allowlist.
+         * @type {boolean || null}
+         */
+        this.EnableRouteVpcPublish = null;
+
+        /**
          * Whether to publish the CDC subnet to CCN. `true`: Publish; `false`: Do not publish
          * @type {boolean || null}
          */
@@ -25210,6 +25276,7 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
         this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.EnableRouteVpcPublish = 'EnableRouteVpcPublish' in params ? params.EnableRouteVpcPublish : null;
         this.EnableCdcPublish = 'EnableCdcPublish' in params ? params.EnableCdcPublish : null;
 
     }
@@ -32653,6 +32720,12 @@ class CreateVpcRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+         * @type {boolean || null}
+         */
+        this.EnableRouteVpcPublish = null;
+
     }
 
     /**
@@ -32676,6 +32749,7 @@ class CreateVpcRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.EnableRouteVpcPublish = 'EnableRouteVpcPublish' in params ? params.EnableRouteVpcPublish : null;
 
     }
 }
@@ -33844,6 +33918,7 @@ module.exports = {
     DescribeSecurityGroupReferencesRequest: DescribeSecurityGroupReferencesRequest,
     DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     ModifyReserveIpAddressRequest: ModifyReserveIpAddressRequest,
+    ISPIPv6CidrBlock: ISPIPv6CidrBlock,
     DisableRoutesRequest: DisableRoutesRequest,
     DisassociateDirectConnectGatewayNatGatewayRequest: DisassociateDirectConnectGatewayNatGatewayRequest,
     ReleaseIPv6AddressesRequest: ReleaseIPv6AddressesRequest,

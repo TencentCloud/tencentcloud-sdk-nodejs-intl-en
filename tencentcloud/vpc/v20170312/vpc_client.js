@@ -474,6 +474,7 @@ const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
 const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const ModifyReserveIpAddressRequest = models.ModifyReserveIpAddressRequest;
+const ISPIPv6CidrBlock = models.ISPIPv6CidrBlock;
 const DisableRoutesRequest = models.DisableRoutesRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const ReleaseIPv6AddressesRequest = models.ReleaseIPv6AddressesRequest;

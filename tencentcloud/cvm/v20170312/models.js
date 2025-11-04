@@ -2542,7 +2542,7 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * Tag-Bound resource type. "instance" for cloud virtual machine, "host" for cdh, "image" for mirror, and "keypair" for key.
+         * Specifies the resource type for Tag binding. valid values: "instance" (cloud virtual machine), "host" (cdh), "image" (mirror), "keypair" (key), "ps" (placement group), "hpc" (hyper computing cluster).
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -3135,8 +3135,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * The instance name, which can not exceed 60 characters
-<dx-alert infotype="explain" title="">Either `InstanceName` or `SecurityGroups` must be specified, but they can not be both specified.</dx-alert>
+         * Modified instance name. can be named as required but should not exceed 128 characters.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -3148,7 +3147,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.UserData = null;
 
         /**
-         * IDs of security groups associated with the specified instance. You can associate with a security group by adding its ID, or cancel the association with a security group by removing its ID. <dx-alert infotype="explain" title="">Either `InstanceName` or `SecurityGroups` must be specified, but they cannot be both set.</dx-alert>
+         * Specifies the security group Id list of the specified instance after modification. the instance will reassociate with the security groups in the specified list, and the associated security group will be unbound.
          * @type {Array.<string> || null}
          */
         this.SecurityGroups = null;
@@ -3172,9 +3171,9 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.DisableApiTermination = null;
 
         /**
-         * The role type, which is used in conjunction with `CamRoleName`. The value is obtained in `RoleType` field, returning by `CAM DescribeRoleList` and `GetRole` APIs. Valid value: `user`, `system` and `service_linked`.
-For example, when `LinkedRoleIn` is contained in `CamRoleName` (such as `TKE_QCSLinkedRoleInPrometheusService`), the returned `RoleType` of `DescribeRoleList` and `GetRoleis` is `service_linked`, and the `CamRoleType` `service_linked`.
-When the value obtained in `RoleType` is `user` (default) or `system`, `CamRoleType` can be left empty.
+         * Role type, used in conjunction with CamRoleName. this value can be obtained from the RoleType field in the API response of CAM [DescribeRoleList](https://www.tencentcloud.comom/document/product/598/36223?from_cn_redirect=1) or [GetRole](https://www.tencentcloud.comom/document/product/598/36221?from_cn_redirect=1). currently, only user, system, and service_linked types are accepted.
+For example, when CamRoleName contains "LinkedRoleIn" (such as TKE_QCSLinkedRoleInPrometheusService), DescribeRoleList and GetRole return RoleType as service_linked, this parameter must also transmit service_linked.
+The parameter default value is user. this parameter can be omitted if CameRoleName is not of the service_linked kind.
          * @type {string || null}
          */
         this.CamRoleType = null;
@@ -4111,7 +4110,8 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
-         * The instance model. Different resource specifications are specified for different models. For specific values, call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to retrieve the latest specification list or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If the parameter is not specified, `S1.SMALL1` will be used by default.
+         * Instance model. Different instance models specify different resource specifications.
+<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, specifies the specific values obtained BY calling the [DescribeInstanceTypeConfigs](https://www.tencentcloud.comom/document/api/213/15749?from_cn_redirect=1) api for the latest specification table or referring to [instance specifications](https://www.tencentcloud.comom/document/product/213/11518?from_cn_redirect=1). if not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><br><li>for instances created with the payment mode CDHPAID, indicates this parameter uses the prefix "CDH_" and is generated based on CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -4147,7 +4147,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * Instance name.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string `server_{R:3}`. If you purchase only one instance, the instance will be named `server_3`; if you purchase two, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances without specifying a pattern string, the instance names will be suffixed with `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase two instances with the name `server_`, the instance names will be `server_1` and `server_2`.</li><li>This parameter can contain up to 60 characters (including pattern strings).</li>
+         * Instance display name. <li>if no instance display name is specified, it will display 'unnamed' by default.</li> <li>when purchasing multiple instances, if the pattern string `{R:x}` is specified, it means generating numbers `[x, x+n-1]`, where `n` represents the number of purchased instances. for example, `server_{R:3}`: when purchasing 1 instance, the instance display name is `server_3`; when purchasing 2 instances, the instance display names are `server_3` and `server_4` respectively. supports specifying multiple pattern strings `{R:x}`.</li> <li>when purchasing multiple instances without specifying a pattern string, suffixes `1, 2...n` will be added to the instance display name, where `n` represents the number of purchased instances. for example, `server_`: when purchasing 2 instances, the instance display names are `server_1` and `server_2` respectively.</li> <li>supports up to 128 characters (including pattern strings).</li>.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -4159,7 +4159,8 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will not be associated with any security group by default.
+         * Security group to which an instance belongs. obtain this parameter by calling the `SecurityGroupId` field in the return value of [DescribeSecurityGroups](https://www.tencentcloud.comom/document/api/215/15808?from_cn_redirect=1). if not specified, bind the default security group under the designated project. if the default security group does not exist, automatically create it.
+
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -4193,6 +4194,14 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
+
+        /**
+         * Custom metadata, supports creating key-value pairs of custom metadata when creating a CVM.
+
+**Note: this field is in beta test.**.
+         * @type {Metadata || null}
+         */
+        this.Metadata = null;
 
         /**
          * HPC cluster ID.
@@ -4294,6 +4303,12 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
             let obj = new InstanceMarketOptionsRequest();
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
+        }
+
+        if (params.Metadata) {
+            let obj = new Metadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
         }
         this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
 
@@ -4902,7 +4917,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Specifies the data disk type. for restrictions on data disk types, refer to [storage overview](https://www.tencentcloud.comom/document/product/213/4952?from_cn_redirect=1). valid values: <br /><li>LOCAL_BASIC: LOCAL disk</li> <li>LOCAL_SSD: LOCAL SSD</li><li>LOCAL_NVME: LOCAL NVME disk, which is closely related to InstanceType and cannot be specified</li><li>LOCAL_PRO: LOCAL HDD, which is closely related to InstanceType and cannot be specified</li><li>cloud_BASIC: BASIC cloud disk</li><li>cloud_PREMIUM: high-performance cloud block storage</li><li>cloud_SSD: SSD cloud disk</li><li>cloud_HSSD: enhanced SSD cloud disk</li> <li>cloud_TSSD: ultra-fast SSD cbs</li><li>cloud_BSSD: universal SSD cloud disk</li><br />default: LOCAL_BASIC.<br/><br />this parameter is invalid for the `ResizeInstanceDisk` api.
+         * Specifies the data disk type. for restrictions on data disk types, refer to [storage overview](https://www.tencentcloud.com/document/product/213/4952?from_cn_redirect=1). valid values: <br /><li>LOCAL_BASIC: LOCAL disk</li> <li>LOCAL_SSD: LOCAL SSD</li><li>LOCAL_NVME: LOCAL NVME disk, which is closely related to InstanceType and cannot be specified</li><li>LOCAL_PRO: LOCAL HDD, which is closely related to InstanceType and cannot be specified</li><li>cloud_BASIC: BASIC cloud disk</li><li>cloud_PREMIUM: high-performance cloud block storage</li><li>cloud_SSD: SSD cloud disk</li><li>cloud_HSSD: enhanced SSD cloud disk</li> <li>cloud_TSSD: ultra-fast SSD cbs</li><li>cloud_BSSD: universal SSD cloud disk</li><br />default: LOCAL_BASIC.<br/><br />this parameter is invalid for the `ResizeInstanceDisk` api.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -8372,7 +8387,16 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * Instance name.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string `server_{R:3}`. If you purchase only one instance, the instance will be named `server_3`; if you purchase two, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances without specifying a pattern string, the instance names will be suffixed with `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase two instances with the name `server_`, the instance names will be `server_1` and `server_2`.</li><li>This parameter can contain up to 60 characters (including pattern strings).</li>
+         * Specifies the minimum number of instances to create. value range: positive integer not greater than InstanceCount.
+Specifies the minimum purchasable quantity, guarantees to create at least MinCount instances, and creates InstanceCount instances as much as possible.
+Insufficient inventory to meet the minimum purchasable quantity will trigger an error info indicating insufficient stock.
+Only applicable to accounts, regions, and billing modes (annual/monthly subscription, pay-as-you-go, spot instance, exclusive sales) with partial support.
+         * @type {number || null}
+         */
+        this.MinCount = null;
+
+        /**
+         * Instance display name. <li>if no instance display name is specified, it will display 'unnamed' by default.</li> <li>when purchasing multiple instances, if the pattern string `{R:x}` is specified, it means generating numbers `[x, x+n-1]`, where `n` represents the number of purchased instances. for example, `server_{R:3}`: when purchasing 1 instance, the instance display name is `server_3`; when purchasing 2 instances, the instance display names are `server_3` and `server_4` respectively. supports specifying multiple pattern strings `{R:x}`.</li> <li>when purchasing multiple instances without specifying a pattern string, suffixes `1, 2...n` will be added to the instance display name, where `n` represents the number of purchased instances. for example, `server_`: when purchasing 2 instances, the instance display names are `server_1` and `server_2` respectively.</li> <li>supports up to 128 characters (including pattern strings).</li>.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -8384,7 +8408,8 @@ class RunInstancesRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
+         * Security group to which an instance belongs. obtain this parameter by calling the `SecurityGroupId` field in the return value of [DescribeSecurityGroups](https://www.tencentcloud.comom/document/api/215/15808?from_cn_redirect=1). if not specified, bind the default security group under the designated project. if the default security group does not exist, automatically create it.
+
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -8438,7 +8463,8 @@ class RunInstancesRequest extends  AbstractModel {
         this.UserData = null;
 
         /**
-         * 
+         * Custom metadata. specifies the support for creating custom metadata key-value pairs when creating a CVM.
+**Note: this field is in beta test.**.
          * @type {Metadata || null}
          */
         this.Metadata = null;
@@ -8496,7 +8522,7 @@ If the dry run succeeds, the RequestId will be returned.
         this.DisableApiTermination = null;
 
         /**
-         * 
+         * Whether the instance enables jumbo frames. valid values:<br><li/> true: means the instance enables jumbo frames. only models supporting jumbo frames can be set to true.<br><li/> false: means the instance disables jumbo frames. only models supporting jumbo frames can be set to false.<br> instance specifications supporting jumbo frames: [instance specifications](https://www.tencentcloud.comom/document/product/213/11518?from_cn_redirect=1).
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
@@ -8553,6 +8579,7 @@ If the dry run succeeds, the RequestId will be returned.
             this.InternetAccessible = obj;
         }
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.MinCount = 'MinCount' in params ? params.MinCount : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
         if (params.LoginSettings) {

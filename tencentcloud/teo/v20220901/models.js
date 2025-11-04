@@ -4468,7 +4468,7 @@ class PostMaxSizeParameters extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Maximum size of the file uploaded for streaming via a post request, in bytes. value range: 1 * 2<sup>20</sup> bytes to 500 * 2<sup>20</sup> bytes.
+         * Maximum size of the file uploaded for streaming via a post request. Takes effect only when Switch is on. Range: 1 MB - 800 MB (bytes).
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -31242,6 +31242,12 @@ Note: this field may return null, which indicates a failure to obtain a valid va
         this.ForceRedirectHTTPSParameters = null;
 
         /**
+         * 
+         * @type {OriginPullProtocolParameters || null}
+         */
+        this.OriginPullProtocolParameters = null;
+
+        /**
          * Intelligent compression configuration. this parameter is required when name is set to compression.
 Note: this field may return null, which indicates a failure to obtain a valid value.
          * @type {CompressionParameters || null}
@@ -31479,6 +31485,12 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             let obj = new ForceRedirectHTTPSParameters();
             obj.deserialize(params.ForceRedirectHTTPSParameters)
             this.ForceRedirectHTTPSParameters = obj;
+        }
+
+        if (params.OriginPullProtocolParameters) {
+            let obj = new OriginPullProtocolParameters();
+            obj.deserialize(params.OriginPullProtocolParameters)
+            this.OriginPullProtocolParameters = obj;
         }
 
         if (params.CompressionParameters) {
@@ -33660,7 +33672,7 @@ class PostMaxSize extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Maximum limit. value range between 1MB and 500MB. byte.
+         * Maximum limit.Takes effect only when Switch is on. Range:1 MB - 800 MB (bytes).
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -34338,6 +34350,34 @@ class CreateSecurityAPIResourceResponse extends  AbstractModel {
         }
         this.APIResourceIds = 'APIResourceIds' in params ? params.APIResourceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class OriginPullProtocolParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
@@ -36906,6 +36946,7 @@ module.exports = {
     SecurityTemplateBinding: SecurityTemplateBinding,
     DescribeMultiPathGatewaySecretKeyResponse: DescribeMultiPathGatewaySecretKeyResponse,
     CreateSecurityAPIResourceResponse: CreateSecurityAPIResourceResponse,
+    OriginPullProtocolParameters: OriginPullProtocolParameters,
     CacheTag: CacheTag,
     CreateSecurityClientAttesterResponse: CreateSecurityClientAttesterResponse,
     ModifyMultiPathGatewayLineResponse: ModifyMultiPathGatewayLineResponse,

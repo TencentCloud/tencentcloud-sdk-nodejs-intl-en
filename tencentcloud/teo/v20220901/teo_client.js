@@ -658,6 +658,7 @@ const ManagedRules = models.ManagedRules;
 const SecurityTemplateBinding = models.SecurityTemplateBinding;
 const DescribeMultiPathGatewaySecretKeyResponse = models.DescribeMultiPathGatewaySecretKeyResponse;
 const CreateSecurityAPIResourceResponse = models.CreateSecurityAPIResourceResponse;
+const OriginPullProtocolParameters = models.OriginPullProtocolParameters;
 const CacheTag = models.CacheTag;
 const CreateSecurityClientAttesterResponse = models.CreateSecurityClientAttesterResponse;
 const ModifyMultiPathGatewayLineResponse = models.ModifyMultiPathGatewayLineResponse;

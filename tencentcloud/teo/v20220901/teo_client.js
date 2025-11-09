@@ -36,6 +36,7 @@ const OriginACLEntity = models.OriginACLEntity;
 const CompressionParameters = models.CompressionParameters;
 const DescribeConfigGroupVersionDetailResponse = models.DescribeConfigGroupVersionDetailResponse;
 const OriginDetail = models.OriginDetail;
+const MultiPathGatewayOriginACLInfo = models.MultiPathGatewayOriginACLInfo;
 const HeaderAction = models.HeaderAction;
 const RealtimeLogDeliveryTask = models.RealtimeLogDeliveryTask;
 const PrepaidPlanParam = models.PrepaidPlanParam;
@@ -314,6 +315,7 @@ const RateLimitUserRule = models.RateLimitUserRule;
 const DeployRecord = models.DeployRecord;
 const CreatePlanForZoneRequest = models.CreatePlanForZoneRequest;
 const DeviceProfile = models.DeviceProfile;
+const ConfirmMultiPathGatewayOriginACLResponse = models.ConfirmMultiPathGatewayOriginACLResponse;
 const CreateJustInTimeTranscodeTemplateRequest = models.CreateJustInTimeTranscodeTemplateRequest;
 const ModifyCustomErrorPageRequest = models.ModifyCustomErrorPageRequest;
 const ModifyFunctionRuleResponse = models.ModifyFunctionRuleResponse;
@@ -321,6 +323,7 @@ const DescribeL7AccRulesRequest = models.DescribeL7AccRulesRequest;
 const DescribeFunctionRulesResponse = models.DescribeFunctionRulesResponse;
 const CacheKey = models.CacheKey;
 const DownloadL4LogsResponse = models.DownloadL4LogsResponse;
+const DescribeMultiPathGatewayOriginACLResponse = models.DescribeMultiPathGatewayOriginACLResponse;
 const BindSharedCNAMERequest = models.BindSharedCNAMERequest;
 const IpTableConfig = models.IpTableConfig;
 const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
@@ -478,6 +481,7 @@ const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResp
 const RateLimitingRule = models.RateLimitingRule;
 const CertificateInfo = models.CertificateInfo;
 const CreateApplicationProxyRequest = models.CreateApplicationProxyRequest;
+const MultiPathGatewayNextOriginACL = models.MultiPathGatewayNextOriginACL;
 const CC = models.CC;
 const HandleFunctionRuntimeEnvironmentRequest = models.HandleFunctionRuntimeEnvironmentRequest;
 const ModifyL4ProxyRulesStatusRequest = models.ModifyL4ProxyRulesStatusRequest;
@@ -558,6 +562,7 @@ const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
 const TemplateConfig = models.TemplateConfig;
 const ErrorPageReference = models.ErrorPageReference;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
+const ConfirmMultiPathGatewayOriginACLRequest = models.ConfirmMultiPathGatewayOriginACLRequest;
 const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
 const ManagedRuleAutoUpdate = models.ManagedRuleAutoUpdate;
@@ -565,6 +570,7 @@ const ClientIPCountryParameters = models.ClientIPCountryParameters;
 const IncreasePlanQuotaResponse = models.IncreasePlanQuotaResponse;
 const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
 const DescribeAvailablePlansRequest = models.DescribeAvailablePlansRequest;
+const ModifyMultiPathGatewayStatusResponse = models.ModifyMultiPathGatewayStatusResponse;
 const DnsVerification = models.DnsVerification;
 const AlgDetectSession = models.AlgDetectSession;
 const ModifyZoneStatusResponse = models.ModifyZoneStatusResponse;
@@ -595,7 +601,7 @@ const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
 const AccelerationDomain = models.AccelerationDomain;
 const ContentIdentifier = models.ContentIdentifier;
 const CreateCustomizeErrorPageResponse = models.CreateCustomizeErrorPageResponse;
-const RuleEngineAction = models.RuleEngineAction;
+const DescribeMultiPathGatewayOriginACLRequest = models.DescribeMultiPathGatewayOriginACLRequest;
 const StatusCodeCacheParameters = models.StatusCodeCacheParameters;
 const RewriteAction = models.RewriteAction;
 const TemplateScope = models.TemplateScope;
@@ -629,6 +635,7 @@ const DescribeMultiPathGatewayLineResponse = models.DescribeMultiPathGatewayLine
 const OriginGroupInLoadBalancer = models.OriginGroupInLoadBalancer;
 const HTTPResponseParameters = models.HTTPResponseParameters;
 const UpstreamRequestParameters = models.UpstreamRequestParameters;
+const ModifyMultiPathGatewayStatusRequest = models.ModifyMultiPathGatewayStatusRequest;
 const DeleteSecurityClientAttesterResponse = models.DeleteSecurityClientAttesterResponse;
 const TCRCEOption = models.TCRCEOption;
 const NsVerification = models.NsVerification;
@@ -668,6 +675,7 @@ const DescribeSecurityPolicyResponse = models.DescribeSecurityPolicyResponse;
 const CreateContentIdentifierResponse = models.CreateContentIdentifierResponse;
 const HostHeaderParameters = models.HostHeaderParameters;
 const DescribeConfigGroupVersionsRequest = models.DescribeConfigGroupVersionsRequest;
+const MultiPathGatewayCurrentOriginACL = models.MultiPathGatewayCurrentOriginACL;
 const DescribeL4ProxyRulesRequest = models.DescribeL4ProxyRulesRequest;
 const AiRule = models.AiRule;
 const Function = models.Function;
@@ -698,6 +706,7 @@ const DescribeAccelerationDomainsRequest = models.DescribeAccelerationDomainsReq
 const CreateDnsRecordResponse = models.CreateDnsRecordResponse;
 const DescribeTimingL4DataRequest = models.DescribeTimingL4DataRequest;
 const DescribeTimingL4DataResponse = models.DescribeTimingL4DataResponse;
+const RuleEngineAction = models.RuleEngineAction;
 const VanityNameServersIps = models.VanityNameServersIps;
 
 
@@ -905,6 +914,17 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     DeleteFunctionRules(req, cb) {
         let resp = new DeleteFunctionRulesResponse();
         this.request("DeleteFunctionRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the status of a multi-channel security gateway.
+     * @param {ModifyMultiPathGatewayStatusRequest} req
+     * @param {function(string, ModifyMultiPathGatewayStatusResponse):void} cb
+     * @public
+     */
+    ModifyMultiPathGatewayStatus(req, cb) {
+        let resp = new ModifyMultiPathGatewayStatusResponse();
+        this.request("ModifyMultiPathGatewayStatus", req, resp, cb);
     }
 
     /**
@@ -1838,6 +1858,17 @@ This API is used to return post-protection traffic request data by default. User
     }
 
     /**
+     * This API is used to confirm the latest origin IP range is updated to the origin server firewall when the multi-channel security acceleration gateway's origin IP range changes.
+     * @param {ConfirmMultiPathGatewayOriginACLRequest} req
+     * @param {function(string, ConfirmMultiPathGatewayOriginACLResponse):void} cb
+     * @public
+     */
+    ConfirmMultiPathGatewayOriginACL(req, cb) {
+        let resp = new ConfirmMultiPathGatewayOriginACLResponse();
+        this.request("ConfirmMultiPathGatewayOriginACL", req, resp, cb);
+    }
+
+    /**
      * This API is used to query JavaScript injection rules.
      * @param {DescribeSecurityJSInjectionRuleRequest} req
      * @param {function(string, DescribeSecurityJSInjectionRuleResponse):void} cb
@@ -2362,6 +2393,17 @@ Create and bind policy Query instance Reset instance access password.
     CreateLoadBalancer(req, cb) {
         let resp = new CreateLoadBalancerResponse();
         this.request("CreateLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the binding relationship between a multi-channel security acceleration gateway instance and the origin server IP range, as well as the IP range details. If the MultiPathGatewayNextOriginACL field has a return value, the latest origin server IP range must be synchronized to the origin server firewall configuration.
+     * @param {DescribeMultiPathGatewayOriginACLRequest} req
+     * @param {function(string, DescribeMultiPathGatewayOriginACLResponse):void} cb
+     * @public
+     */
+    DescribeMultiPathGatewayOriginACL(req, cb) {
+        let resp = new DescribeMultiPathGatewayOriginACLResponse();
+        this.request("DescribeMultiPathGatewayOriginACL", req, resp, cb);
     }
 
     /**

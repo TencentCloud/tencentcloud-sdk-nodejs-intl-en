@@ -17,7 +17,9 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpgradeProxyVersionResponse = models.UpgradeProxyVersionResponse;
+const DescribeInstanceCLSLogDeliveryResponse = models.DescribeInstanceCLSLogDeliveryResponse;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
+const BizTaskModifyInstanceParam = models.BizTaskModifyInstanceParam;
 const ModifyClusterReadOnlyResponse = models.ModifyClusterReadOnlyResponse;
 const DescribeResourcePackageDetailResponse = models.DescribeResourcePackageDetailResponse;
 const SearchClusterTablesRequest = models.SearchClusterTablesRequest;
@@ -28,15 +30,19 @@ const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
 const RefundResourcePackageResponse = models.RefundResourcePackageResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
+const DescribeAuditInstanceListResponse = models.DescribeAuditInstanceListResponse;
 const DescribeSlaveZonesResponse = models.DescribeSlaveZonesResponse;
 const DescribeProxiesResponse = models.DescribeProxiesResponse;
 const DescribeClusterDetailDatabasesRequest = models.DescribeClusterDetailDatabasesRequest;
 const InquirePriceMultiSpecRequest = models.InquirePriceMultiSpecRequest;
+const RollbackRoGroupInfo = models.RollbackRoGroupInfo;
 const CreateClustersResponse = models.CreateClustersResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
+const ModifyInstanceUpgradeLimitDaysResponse = models.ModifyInstanceUpgradeLimitDaysResponse;
 const DatabaseTables = models.DatabaseTables;
 const UserHostPrivilege = models.UserHostPrivilege;
+const StopCLSDeliveryRequest = models.StopCLSDeliveryRequest;
 const ExportResourcePackageDeductDetailsResponse = models.ExportResourcePackageDeductDetailsResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const OpenReadOnlyInstanceExclusiveAccessResponse = models.OpenReadOnlyInstanceExclusiveAccessResponse;
@@ -54,6 +60,8 @@ const CloseSSLRequest = models.CloseSSLRequest;
 const CynosdbInstance = models.CynosdbInstance;
 const DescribeClusterPasswordComplexityResponse = models.DescribeClusterPasswordComplexityResponse;
 const DescribeAuditRuleWithInstanceIdsRequest = models.DescribeAuditRuleWithInstanceIdsRequest;
+const DescribeClusterDatabasesResponse = models.DescribeClusterDatabasesResponse;
+const ModifyInstanceData = models.ModifyInstanceData;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const ModifyBinlogSaveDaysRequest = models.ModifyBinlogSaveDaysRequest;
 const ProxySpec = models.ProxySpec;
@@ -68,6 +76,8 @@ const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const DescribeParamTemplateDetailRequest = models.DescribeParamTemplateDetailRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const ExportResourcePackageDeductDetailsRequest = models.ExportResourcePackageDeductDetailsRequest;
+const StartCLSDeliveryResponse = models.StartCLSDeliveryResponse;
+const ParamItemInfo = models.ParamItemInfo;
 const UpgradeProxyResponse = models.UpgradeProxyResponse;
 const DescribeClusterReadOnlyResponse = models.DescribeClusterReadOnlyResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
@@ -75,42 +85,51 @@ const DescribeProxyNodesResponse = models.DescribeProxyNodesResponse;
 const CreateIntegrateClusterRequest = models.CreateIntegrateClusterRequest;
 const ProxyNodeInfo = models.ProxyNodeInfo;
 const DescribeZonesResponse = models.DescribeZonesResponse;
+const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
+const DescribeChangedParamsAfterUpgradeResponse = models.DescribeChangedParamsAfterUpgradeResponse;
 const ModifyServerlessStrategyResponse = models.ModifyServerlessStrategyResponse;
 const ProxyGroupRwInfo = models.ProxyGroupRwInfo;
 const DescribeProxyNodesRequest = models.DescribeProxyNodesRequest;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const DescribeClusterReadOnlyRequest = models.DescribeClusterReadOnlyRequest;
 const DescribeIntegrateTaskResponse = models.DescribeIntegrateTaskResponse;
-const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
+const CreateClustersRequest = models.CreateClustersRequest;
 const CloseProxyResponse = models.CloseProxyResponse;
 const DescribeResourcePackageSaleSpecRequest = models.DescribeResourcePackageSaleSpecRequest;
 const UnbindClusterResourcePackagesResponse = models.UnbindClusterResourcePackagesResponse;
+const RollBackClusterResponse = models.RollBackClusterResponse;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const ModifyClusterDatabaseRequest = models.ModifyClusterDatabaseRequest;
 const DescribeServerlessStrategyResponse = models.DescribeServerlessStrategyResponse;
+const InstanceCLSDeliveryInfo = models.InstanceCLSDeliveryInfo;
 const InquirePriceMultiSpecResponse = models.InquirePriceMultiSpecResponse;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const AuditRuleFilters = models.AuditRuleFilters;
 const DescribeClusterParamsRequest = models.DescribeClusterParamsRequest;
 const ModifyAccountHostResponse = models.ModifyAccountHostResponse;
+const DeleteCLSDeliveryRequest = models.DeleteCLSDeliveryRequest;
 const ProxyEndPointConfigInfo = models.ProxyEndPointConfigInfo;
+const CreateCLSDeliveryResponse = models.CreateCLSDeliveryResponse;
 const DescribeServerlessInstanceSpecsResponse = models.DescribeServerlessInstanceSpecsResponse;
+const ManualBackupData = models.ManualBackupData;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const InquirePriceModifyResponse = models.InquirePriceModifyResponse;
 const SlaveZoneStockInfo = models.SlaveZoneStockInfo;
 const ModifyProxyRwSplitRequest = models.ModifyProxyRwSplitRequest;
 const DescribeResourcePackageListResponse = models.DescribeResourcePackageListResponse;
-const RuleFilters = models.RuleFilters;
+const ObjectTask = models.ObjectTask;
 const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
+const CreateClustersData = models.CreateClustersData;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const ModifyParamItem = models.ModifyParamItem;
 const ParamTemplateListInfo = models.ParamTemplateListInfo;
 const CloseProxyEndPointRequest = models.CloseProxyEndPointRequest;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const AuditInstanceInfo = models.AuditInstanceInfo;
 const AddClusterSlaveZoneResponse = models.AddClusterSlaveZoneResponse;
 const DescribeProxySpecsResponse = models.DescribeProxySpecsResponse;
 const BindClusterResourcePackagesRequest = models.BindClusterResourcePackagesRequest;
@@ -124,6 +143,7 @@ const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestri
 const DescribeClusterDetailDatabasesResponse = models.DescribeClusterDetailDatabasesResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const UpgradeClusterVersionRequest = models.UpgradeClusterVersionRequest;
+const ModifyDbVersionData = models.ModifyDbVersionData;
 const DatabasePrivileges = models.DatabasePrivileges;
 const DescribeSupportProxyVersionRequest = models.DescribeSupportProxyVersionRequest;
 const DescribeProxySpecsRequest = models.DescribeProxySpecsRequest;
@@ -132,9 +152,10 @@ const InstanceNetInfo = models.InstanceNetInfo;
 const ModifyClusterDatabaseResponse = models.ModifyClusterDatabaseResponse;
 const InstanceParamItem = models.InstanceParamItem;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const RollbackData = models.RollbackData;
 const UnbindClusterResourcePackagesRequest = models.UnbindClusterResourcePackagesRequest;
 const ModifyBackupDownloadUserRestrictionRequest = models.ModifyBackupDownloadUserRestrictionRequest;
-const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const SwitchClusterVpcResponse = models.SwitchClusterVpcResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const Tag = models.Tag;
@@ -145,7 +166,7 @@ const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const CreateResourcePackageResponse = models.CreateResourcePackageResponse;
 const ModifyBinlogConfigRequest = models.ModifyBinlogConfigRequest;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
-const CreateClustersRequest = models.CreateClustersRequest;
+const CreateClusterDatabaseResponse = models.CreateClusterDatabaseResponse;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
@@ -154,7 +175,9 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const ServerlessZoneStockInfo = models.ServerlessZoneStockInfo;
 const DbInfo = models.DbInfo;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
+const InstanceAuditStatus = models.InstanceAuditStatus;
 const CopyClusterPasswordComplexityRequest = models.CopyClusterPasswordComplexityRequest;
+const StopCLSDeliveryResponse = models.StopCLSDeliveryResponse;
 const CreateProxyEndPointResponse = models.CreateProxyEndPointResponse;
 const NetAddr = models.NetAddr;
 const OpenWanRequest = models.OpenWanRequest;
@@ -163,13 +186,18 @@ const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
+const CrossRegionBackupItem = models.CrossRegionBackupItem;
 const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
 const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const ResumeServerlessResponse = models.ResumeServerlessResponse;
 const DescribeBackupDownloadUserRestrictionResponse = models.DescribeBackupDownloadUserRestrictionResponse;
 const SaleZone = models.SaleZone;
 const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
+const StartCLSDeliveryRequest = models.StartCLSDeliveryRequest;
 const SlaveZoneAttrItem = models.SlaveZoneAttrItem;
+const DeliverSummary = models.DeliverSummary;
+const DescribeChangedParamsAfterUpgradeRequest = models.DescribeChangedParamsAfterUpgradeRequest;
+const CLSInfo = models.CLSInfo;
 const SwitchProxyVpcRequest = models.SwitchProxyVpcRequest;
 const RestartInstanceResponse = models.RestartInstanceResponse;
 const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
@@ -177,9 +205,9 @@ const DescribeClusterTransparentEncryptInfoResponse = models.DescribeClusterTran
 const ActivateInstanceResponse = models.ActivateInstanceResponse;
 const IsolateClusterRequest = models.IsolateClusterRequest;
 const AddInstancesRequest = models.AddInstancesRequest;
-const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
+const RollbackTable = models.RollbackTable;
 const DescribeInstanceErrorLogsRequest = models.DescribeInstanceErrorLogsRequest;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const Package = models.Package;
@@ -191,9 +219,14 @@ const RollbackTimeRange = models.RollbackTimeRange;
 const CreateClusterDatabaseRequest = models.CreateClusterDatabaseRequest;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
 const CreateProxyResponse = models.CreateProxyResponse;
+const BizTaskModifyParamsData = models.BizTaskModifyParamsData;
+const RollBackClusterRequest = models.RollBackClusterRequest;
 const Module = models.Module;
 const OpenClusterTransparentEncryptResponse = models.OpenClusterTransparentEncryptResponse;
-const ProxyVersionInfo = models.ProxyVersionInfo;
+const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const DescribeClusterDatabasesRequest = models.DescribeClusterDatabasesRequest;
+const RemoveClusterSlaveZoneRequest = models.RemoveClusterSlaveZoneRequest;
+const BizTaskInfo = models.BizTaskInfo;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const InquirePriceRenewRequest = models.InquirePriceRenewRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
@@ -201,6 +234,7 @@ const ProxyInstanceWeight = models.ProxyInstanceWeight;
 const CreateResourcePackageRequest = models.CreateResourcePackageRequest;
 const CloseProxyEndPointResponse = models.CloseProxyEndPointResponse;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
+const ExchangeInstanceInfo = models.ExchangeInstanceInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
@@ -219,7 +253,7 @@ const InstanceNameWeight = models.InstanceNameWeight;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const GoodsPrice = models.GoodsPrice;
 const ModifyResourcePackageClustersRequest = models.ModifyResourcePackageClustersRequest;
-const ObjectTask = models.ObjectTask;
+const RuleFilters = models.RuleFilters;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const ExportInstanceErrorLogsRequest = models.ExportInstanceErrorLogsRequest;
 const ActivateInstanceRequest = models.ActivateInstanceRequest;
@@ -240,15 +274,18 @@ const InstanceInitInfo = models.InstanceInitInfo;
 const InquirePriceModifyRequest = models.InquirePriceModifyRequest;
 const ModifyResourcePackagesDeductionPriorityRequest = models.ModifyResourcePackagesDeductionPriorityRequest;
 const RemoveClusterSlaveZoneResponse = models.RemoveClusterSlaveZoneResponse;
+const RenewClustersRequest = models.RenewClustersRequest;
 const OpenClusterReadOnlyInstanceGroupAccessResponse = models.OpenClusterReadOnlyInstanceGroupAccessResponse;
 const QueryParamFilter = models.QueryParamFilter;
 const NewAccount = models.NewAccount;
+const ModifyParamsData = models.ModifyParamsData;
 const BindInstanceInfo = models.BindInstanceInfo;
 const DescribeAuditRuleWithInstanceIdsResponse = models.DescribeAuditRuleWithInstanceIdsResponse;
 const SearchClusterDatabasesRequest = models.SearchClusterDatabasesRequest;
 const ModifyProxyDescResponse = models.ModifyProxyDescResponse;
 const CreateIntegrateClusterResponse = models.CreateIntegrateClusterResponse;
 const ModifyClusterSlaveZoneResponse = models.ModifyClusterSlaveZoneResponse;
+const RollbackToNewClusterRequest = models.RollbackToNewClusterRequest;
 const BinlogItem = models.BinlogItem;
 const ModifyProxyDescRequest = models.ModifyProxyDescRequest;
 const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
@@ -259,6 +296,7 @@ const ProxyZone = models.ProxyZone;
 const CreateProxyRequest = models.CreateProxyRequest;
 const DescribeResourcePackageSaleSpecResponse = models.DescribeResourcePackageSaleSpecResponse;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
+const DescribeAuditInstanceListRequest = models.DescribeAuditInstanceListRequest;
 const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CloseClusterPasswordComplexityResponse = models.CloseClusterPasswordComplexityResponse;
@@ -276,7 +314,7 @@ const DescribeFlowRequest = models.DescribeFlowRequest;
 const DescribeClusterDatabaseTablesResponse = models.DescribeClusterDatabaseTablesResponse;
 const OpenReadOnlyInstanceExclusiveAccessRequest = models.OpenReadOnlyInstanceExclusiveAccessRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
-const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
+const CreateCLSDeliveryRequest = models.CreateCLSDeliveryRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
 const DescribeResourcePackageDetailRequest = models.DescribeResourcePackageDetailRequest;
@@ -291,8 +329,7 @@ const CynosdbClusterDetail = models.CynosdbClusterDetail;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const PackageDetail = models.PackageDetail;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
-const BinlogConfigInfo = models.BinlogConfigInfo;
-const ClusterReadOnlyValue = models.ClusterReadOnlyValue;
+const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const ParamItem = models.ParamItem;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
@@ -300,23 +337,31 @@ const ModifyResourcePackageClustersResponse = models.ModifyResourcePackageCluste
 const InputAccount = models.InputAccount;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const InstanceAuditRule = models.InstanceAuditRule;
+const ExchangeRoGroupInfo = models.ExchangeRoGroupInfo;
 const RefundResourcePackageRequest = models.RefundResourcePackageRequest;
 const DescribeBinlogDownloadUrlRequest = models.DescribeBinlogDownloadUrlRequest;
 const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
+const RollbackInstanceInfo = models.RollbackInstanceInfo;
 const UpgradeClusterVersionResponse = models.UpgradeClusterVersionResponse;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const ClusterInstanceDetail = models.ClusterInstanceDetail;
+const ClusterSlaveData = models.ClusterSlaveData;
 const OldAddrInfo = models.OldAddrInfo;
+const DescribeTasksResponse = models.DescribeTasksResponse;
 const OpenClusterPasswordComplexityRequest = models.OpenClusterPasswordComplexityRequest;
 const ProxyConfigInfo = models.ProxyConfigInfo;
 const PackagePriority = models.PackagePriority;
 const DescribeInstancesWithinSameClusterRequest = models.DescribeInstancesWithinSameClusterRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
+const ClusterReadOnlyValue = models.ClusterReadOnlyValue;
 const DescribeServerlessInstanceSpecsRequest = models.DescribeServerlessInstanceSpecsRequest;
 const ProxyGroup = models.ProxyGroup;
 const AddClusterSlaveZoneRequest = models.AddClusterSlaveZoneRequest;
+const RollbackDatabase = models.RollbackDatabase;
+const DescribeTasksRequest = models.DescribeTasksRequest;
+const ModifyInstanceUpgradeLimitDaysRequest = models.ModifyInstanceUpgradeLimitDaysRequest;
 const CloseClusterPasswordComplexityRequest = models.CloseClusterPasswordComplexityRequest;
 const DescribeIsolatedInstancesRequest = models.DescribeIsolatedInstancesRequest;
 const ReplayInstanceAuditLogResponse = models.ReplayInstanceAuditLogResponse;
@@ -333,28 +378,36 @@ const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const ModifyResourcePackageNameResponse = models.ModifyResourcePackageNameResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const IntegrateInstanceInfo = models.IntegrateInstanceInfo;
+const SwitchClusterLogBin = models.SwitchClusterLogBin;
 const ExportInstanceErrorLogsResponse = models.ExportInstanceErrorLogsResponse;
 const ParamItemDetail = models.ParamItemDetail;
-const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
+const BinlogConfigInfo = models.BinlogConfigInfo;
 const IsolateClusterResponse = models.IsolateClusterResponse;
+const RenewClustersResponse = models.RenewClustersResponse;
+const RollbackTableInfo = models.RollbackTableInfo;
+const RollbackProcessInfo = models.RollbackProcessInfo;
 const ModifyVipVportResponse = models.ModifyVipVportResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
 const ModifyClusterPasswordComplexityResponse = models.ModifyClusterPasswordComplexityResponse;
+const AuditInstanceFilters = models.AuditInstanceFilters;
 const ParamInfo = models.ParamInfo;
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const SecurityGroup = models.SecurityGroup;
 const ModifyClusterPasswordComplexityRequest = models.ModifyClusterPasswordComplexityRequest;
 const BackupLimitRestriction = models.BackupLimitRestriction;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const TaskProgressInfo = models.TaskProgressInfo;
 const TemplateParamInfo = models.TemplateParamInfo;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DescribeInstancesWithinSameClusterResponse = models.DescribeInstancesWithinSameClusterResponse;
+const RollbackToNewClusterResponse = models.RollbackToNewClusterResponse;
 const ResourcePackage = models.ResourcePackage;
 const DescribeSlaveZonesRequest = models.DescribeSlaveZonesRequest;
 const BillingResourceInfo = models.BillingResourceInfo;
 const ModifyProxyRwSplitResponse = models.ModifyProxyRwSplitResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DescribeInstanceCLSLogDeliveryRequest = models.DescribeInstanceCLSLogDeliveryRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const CreateAuditRuleTemplateResponse = models.CreateAuditRuleTemplateResponse;
 const DescribeResourcePackageListRequest = models.DescribeResourcePackageListRequest;
@@ -367,15 +420,16 @@ const ModifyServerlessStrategyRequest = models.ModifyServerlessStrategyRequest;
 const DescribeBinlogConfigResponse = models.DescribeBinlogConfigResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const SaleRegion = models.SaleRegion;
-const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const ProxyVersionInfo = models.ProxyVersionInfo;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const DescribeIsolatedInstancesResponse = models.DescribeIsolatedInstancesResponse;
 const ModifyBinlogConfigResponse = models.ModifyBinlogConfigResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const ModifiableInfo = models.ModifiableInfo;
+const TaskMaintainInfo = models.TaskMaintainInfo;
 const DescribeServerlessStrategyRequest = models.DescribeServerlessStrategyRequest;
 const TablePrivileges = models.TablePrivileges;
-const RemoveClusterSlaveZoneRequest = models.RemoveClusterSlaveZoneRequest;
+const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ErrorLogItemExport = models.ErrorLogItemExport;
 const DescribeParamTemplateDetailResponse = models.DescribeParamTemplateDetailResponse;
@@ -383,6 +437,7 @@ const ModifyBinlogSaveDaysResponse = models.ModifyBinlogSaveDaysResponse;
 const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
 const PolicyRule = models.PolicyRule;
 const ZoneStockInfo = models.ZoneStockInfo;
+const DeleteCLSDeliveryResponse = models.DeleteCLSDeliveryResponse;
 const InquirePriceRenewResponse = models.InquirePriceRenewResponse;
 const ModifyAuditRuleTemplatesResponse = models.ModifyAuditRuleTemplatesResponse;
 
@@ -497,6 +552,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to roll back to a new cluster.
+     * @param {RollbackToNewClusterRequest} req
+     * @param {function(string, RollbackToNewClusterResponse):void} cb
+     * @public
+     */
+    RollbackToNewCluster(req, cb) {
+        let resp = new RollbackToNewClusterResponse();
+        this.request("RollbackToNewCluster", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify maintenance time configuration.
      * @param {ModifyMaintainPeriodConfigRequest} req
      * @param {function(string, ModifyMaintainPeriodConfigResponse):void} cb
@@ -516,6 +582,17 @@ class CynosdbClient extends AbstractClient {
     CopyClusterPasswordComplexity(req, cb) {
         let resp = new CopyClusterPasswordComplexityResponse();
         this.request("CopyClusterPasswordComplexity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security group bound to the instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -629,6 +706,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query task lists.
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
+     * @public
+     */
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
      * This interface (DescribeInstanceSpecs) is used to query the instance specifications available for purchase on the query purchase page.
      * @param {DescribeInstanceSpecsRequest} req
      * @param {function(string, DescribeInstanceSpecsResponse):void} cb
@@ -706,14 +794,25 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the security group bound to the instance.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * This API is used to delete log delivery.
+     * @param {DeleteCLSDeliveryRequest} req
+     * @param {function(string, DeleteCLSDeliveryResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    DeleteCLSDelivery(req, cb) {
+        let resp = new DeleteCLSDeliveryResponse();
+        this.request("DeleteCLSDelivery", req, resp, cb);
+    }
+
+    /**
+     * this interface is used for querying parameter comparison after specification adjustment.
+     * @param {DescribeChangedParamsAfterUpgradeRequest} req
+     * @param {function(string, DescribeChangedParamsAfterUpgradeResponse):void} cb
+     * @public
+     */
+    DescribeChangedParamsAfterUpgrade(req, cb) {
+        let resp = new DescribeChangedParamsAfterUpgradeResponse();
+        this.request("DescribeChangedParamsAfterUpgrade", req, resp, cb);
     }
 
     /**
@@ -736,6 +835,17 @@ class CynosdbClient extends AbstractClient {
     CloseClusterPasswordComplexity(req, cb) {
         let resp = new CloseClusterPasswordComplexityResponse();
         this.request("CloseClusterPasswordComplexity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform cluster rollback.
+     * @param {RollBackClusterRequest} req
+     * @param {function(string, RollBackClusterResponse):void} cb
+     * @public
+     */
+    RollBackCluster(req, cb) {
+        let resp = new RollBackClusterResponse();
+        this.request("RollBackCluster", req, resp, cb);
     }
 
     /**
@@ -769,6 +879,17 @@ class CynosdbClient extends AbstractClient {
     DescribeIsolatedInstances(req, cb) {
         let resp = new DescribeIsolatedInstancesResponse();
         this.request("DescribeIsolatedInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of instance error logs.
+     * @param {DescribeInstanceErrorLogsRequest} req
+     * @param {function(string, DescribeInstanceErrorLogsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceErrorLogs(req, cb) {
+        let resp = new DescribeInstanceErrorLogsResponse();
+        this.request("DescribeInstanceErrorLogs", req, resp, cb);
     }
 
     /**
@@ -1058,6 +1179,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain cluster database list.
+     * @param {DescribeClusterDatabasesRequest} req
+     * @param {function(string, DescribeClusterDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeClusterDatabases(req, cb) {
+        let resp = new DescribeClusterDatabasesResponse();
+        this.request("DescribeClusterDatabases", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify cluster parameters.
      * @param {ModifyClusterParamRequest} req
      * @param {function(string, ModifyClusterParamResponse):void} cb
@@ -1143,6 +1275,17 @@ class CynosdbClient extends AbstractClient {
     AddInstances(req, cb) {
         let resp = new AddInstancesResponse();
         this.request("AddInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the time limit for upgrading the kernel minor version of an instance.
+     * @param {ModifyInstanceUpgradeLimitDaysRequest} req
+     * @param {function(string, ModifyInstanceUpgradeLimitDaysResponse):void} cb
+     * @public
+     */
+    ModifyInstanceUpgradeLimitDays(req, cb) {
+        let resp = new ModifyInstanceUpgradeLimitDaysResponse();
+        this.request("ModifyInstanceUpgradeLimitDays", req, resp, cb);
     }
 
     /**
@@ -1256,6 +1399,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain the instance list of database audit.
+     * @param {DescribeAuditInstanceListRequest} req
+     * @param {function(string, DescribeAuditInstanceListResponse):void} cb
+     * @public
+     */
+    DescribeAuditInstanceList(req, cb) {
+        let resp = new DescribeAuditInstanceListResponse();
+        this.request("DescribeAuditInstanceList", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the rollback time range.
      * @param {DescribeRollbackTimeRangeRequest} req
      * @param {function(string, DescribeRollbackTimeRangeResponse):void} cb
@@ -1286,6 +1440,17 @@ class CynosdbClient extends AbstractClient {
     ModifyInstanceParam(req, cb) {
         let resp = new ModifyInstanceParamResponse();
         this.request("ModifyInstanceParam", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance log delivery information.
+     * @param {DescribeInstanceCLSLogDeliveryRequest} req
+     * @param {function(string, DescribeInstanceCLSLogDeliveryResponse):void} cb
+     * @public
+     */
+    DescribeInstanceCLSLogDelivery(req, cb) {
+        let resp = new DescribeInstanceCLSLogDeliveryResponse();
+        this.request("DescribeInstanceCLSLogDelivery", req, resp, cb);
     }
 
     /**
@@ -1487,6 +1652,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This interface (StartCLSDelivery) is used to enable log delivery functionality.
+     * @param {StartCLSDeliveryRequest} req
+     * @param {function(string, StartCLSDeliveryResponse):void} cb
+     * @public
+     */
+    StartCLSDelivery(req, cb) {
+        let resp = new StartCLSDeliveryResponse();
+        this.request("StartCLSDelivery", req, resp, cb);
+    }
+
+    /**
      * This API is used to reload the database proxy of Cloud Load Balancer.
      * @param {ReloadBalanceProxyNodeRequest} req
      * @param {function(string, ReloadBalanceProxyNodeResponse):void} cb
@@ -1531,6 +1707,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to stop the log delivery feature.
+     * @param {StopCLSDeliveryRequest} req
+     * @param {function(string, StopCLSDeliveryResponse):void} cb
+     * @public
+     */
+    StopCLSDelivery(req, cb) {
+        let resp = new StopCLSDeliveryResponse();
+        this.request("StopCLSDelivery", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the backup file list of a cluster.
      * @param {DescribeBackupListRequest} req
      * @param {function(string, DescribeBackupListResponse):void} cb
@@ -1553,14 +1740,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to replace the cluster vpc.
-     * @param {SwitchClusterVpcRequest} req
-     * @param {function(string, SwitchClusterVpcResponse):void} cb
+     * This API is used to renew the cluster.
+     * @param {RenewClustersRequest} req
+     * @param {function(string, RenewClustersResponse):void} cb
      * @public
      */
-    SwitchClusterVpc(req, cb) {
-        let resp = new SwitchClusterVpcResponse();
-        this.request("SwitchClusterVpc", req, resp, cb);
+    RenewClusters(req, cb) {
+        let resp = new RenewClustersResponse();
+        this.request("RenewClusters", req, resp, cb);
     }
 
     /**
@@ -1773,6 +1960,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to replace the cluster vpc.
+     * @param {SwitchClusterVpcRequest} req
+     * @param {function(string, SwitchClusterVpcResponse):void} cb
+     * @public
+     */
+    SwitchClusterVpc(req, cb) {
+        let resp = new SwitchClusterVpcResponse();
+        this.request("SwitchClusterVpc", req, resp, cb);
+    }
+
+    /**
      * This API is used to enable the database proxy of a cluster.
      * @param {CreateProxyRequest} req
      * @param {function(string, CreateProxyResponse):void} cb
@@ -1795,14 +1993,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of instance error logs.
-     * @param {DescribeInstanceErrorLogsRequest} req
-     * @param {function(string, DescribeInstanceErrorLogsResponse):void} cb
+     * This API is used to create log delivery.
+     * @param {CreateCLSDeliveryRequest} req
+     * @param {function(string, CreateCLSDeliveryResponse):void} cb
      * @public
      */
-    DescribeInstanceErrorLogs(req, cb) {
-        let resp = new DescribeInstanceErrorLogsResponse();
-        this.request("DescribeInstanceErrorLogs", req, resp, cb);
+    CreateCLSDelivery(req, cb) {
+        let resp = new CreateCLSDeliveryResponse();
+        this.request("CreateCLSDelivery", req, resp, cb);
     }
 
     /**

@@ -18,13 +18,13 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TopicDetail = models.TopicDetail;
 const DeleteAclRequest = models.DeleteAclRequest;
-const CreateInstancePostResponse = models.CreateInstancePostResponse;
 const GroupInfoMember = models.GroupInfoMember;
-const RouteDTO = models.RouteDTO;
+const AclRuleInfo = models.AclRuleInfo;
 const BatchCreateAclRequest = models.BatchCreateAclRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
 const PartitionOffset = models.PartitionOffset;
 const DescribeACLRequest = models.DescribeACLRequest;
+const InstanceDeleteResponse = models.InstanceDeleteResponse;
 const BatchModifyTopicResultDTO = models.BatchModifyTopicResultDTO;
 const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
 const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
@@ -34,7 +34,9 @@ const ModifyAclRuleRequest = models.ModifyAclRuleRequest;
 const DescribeAclRuleResponse = models.DescribeAclRuleResponse;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
 const InquiryDetailPrice = models.InquiryDetailPrice;
+const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
 const InquireCkafkaPriceResp = models.InquireCkafkaPriceResp;
+const CreateRouteRequest = models.CreateRouteRequest;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
@@ -42,31 +44,36 @@ const BatchModifyTopicAttributesResponse = models.BatchModifyTopicAttributesResp
 const CreateInstancePreResp = models.CreateInstancePreResp;
 const GroupInfoTopics = models.GroupInfoTopics;
 const FetchMessageListByOffsetRequest = models.FetchMessageListByOffsetRequest;
-const Region = models.Region;
+const DescribeSecurityGroupRoutesResponse = models.DescribeSecurityGroupRoutesResponse;
 const ModifyInstancePreRequest = models.ModifyInstancePreRequest;
 const CreateAclRuleRequest = models.CreateAclRuleRequest;
+const RouteFilter = models.RouteFilter;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const CreateInstancePreData = models.CreateInstancePreData;
 const AclRule = models.AclRule;
 const DescribeAclRuleRequest = models.DescribeAclRuleRequest;
 const DescribeACLResponse = models.DescribeACLResponse;
 const DynamicDiskConfig = models.DynamicDiskConfig;
+const JgwOperateResponse = models.JgwOperateResponse;
 const InquireCkafkaPriceRequest = models.InquireCkafkaPriceRequest;
 const ZoneInfo = models.ZoneInfo;
 const DescribeTopicSubscribeGroupResponse = models.DescribeTopicSubscribeGroupResponse;
 const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
 const SaleInfo = models.SaleInfo;
 const Topic = models.Topic;
+const DescribeTypeInstancesResponse = models.DescribeTypeInstancesResponse;
 const Tag = models.Tag;
 const ModifyAclRuleResponse = models.ModifyAclRuleResponse;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
+const SecurityGroupRoute = models.SecurityGroupRoute;
 const GroupResponse = models.GroupResponse;
+const FetchMessageListByTimestampRequest = models.FetchMessageListByTimestampRequest;
 const CreateDatahubTopicRequest = models.CreateDatahubTopicRequest;
 const InstanceChargeParam = models.InstanceChargeParam;
 const CreateInstancePostResp = models.CreateInstancePostResp;
 const DescribeDatahubTopicResponse = models.DescribeDatahubTopicResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
-const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
+const DescribeCvmInfoRequest = models.DescribeCvmInfoRequest;
 const CreateConsumerResponse = models.CreateConsumerResponse;
 const CreatePostPaidInstanceRequest = models.CreatePostPaidInstanceRequest;
 const RouteResponse = models.RouteResponse;
@@ -77,8 +84,10 @@ const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const CreatePartitionResponse = models.CreatePartitionResponse;
+const TopicAttributesResponse = models.TopicAttributesResponse;
 const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const ClusterInfo = models.ClusterInfo;
+const DeleteInstancePostRequest = models.DeleteInstancePostRequest;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DescribeTopicProduceConnectionRequest = models.DescribeTopicProduceConnectionRequest;
 const CreateAclRequest = models.CreateAclRequest;
@@ -106,7 +115,7 @@ const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const UserResponse = models.UserResponse;
-const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
+const DescribeCvmInfoResponse = models.DescribeCvmInfoResponse;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
 const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
 const DescribeDatahubTopicsRequest = models.DescribeDatahubTopicsRequest;
@@ -139,38 +148,42 @@ const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
 const CreateAclRuleResponse = models.CreateAclRuleResponse;
 const CreateInstancePostData = models.CreateInstancePostData;
-const DeleteTopicResponse = models.DeleteTopicResponse;
+const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const GroupOffsetPartition = models.GroupOffsetPartition;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
-const CreateInstancePostRequest = models.CreateInstancePostRequest;
 const DescribeDatahubTopicsResponse = models.DescribeDatahubTopicsResponse;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
+const DescribeSecurityGroupRoutesRequest = models.DescribeSecurityGroupRoutesRequest;
 const ModifyInstancePreResponse = models.ModifyInstancePreResponse;
 const CreateUserRequest = models.CreateUserRequest;
 const InstanceDetailResponse = models.InstanceDetailResponse;
 const DeleteRouteRequest = models.DeleteRouteRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const CreateInstancePreResponse = models.CreateInstancePreResponse;
+const CvmAndIpInfo = models.CvmAndIpInfo;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
+const Region = models.Region;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const CreateDatahubTopicResponse = models.CreateDatahubTopicResponse;
 const CreatePostPaidInstanceResponse = models.CreatePostPaidInstanceResponse;
+const RouteDTO = models.RouteDTO;
 const InquiryDiskParam = models.InquiryDiskParam;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const SendMessageResponse = models.SendMessageResponse;
 const InquiryBasePrice = models.InquiryBasePrice;
 const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
-const TopicAttributesResponse = models.TopicAttributesResponse;
+const ListCvmAndIpInfoRsp = models.ListCvmAndIpInfoRsp;
+const CreateRouteResponse = models.CreateRouteResponse;
 const InstanceResponse = models.InstanceResponse;
 const DatahubTopicDTO = models.DatahubTopicDTO;
-const JgwOperateResponse = models.JgwOperateResponse;
+const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
 const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
@@ -179,6 +192,7 @@ const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
 const ModifyDatahubTopicResponse = models.ModifyDatahubTopicResponse;
 const BatchContent = models.BatchContent;
+const DescribeTypeInstancesRequest = models.DescribeTypeInstancesRequest;
 const InquiryPrice = models.InquiryPrice;
 const TopicResult = models.TopicResult;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
@@ -189,15 +203,18 @@ const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const BatchModifyTopicAttributesRequest = models.BatchModifyTopicAttributesRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
-const AclRuleInfo = models.AclRuleInfo;
+const FetchMessageListByTimestampResponse = models.FetchMessageListByTimestampResponse;
+const DeleteInstancePostResponse = models.DeleteInstancePostResponse;
 const Acl = models.Acl;
 const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const ModifyDatahubTopicRequest = models.ModifyDatahubTopicRequest;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
+const CreateInstancePreRequest = models.CreateInstancePreRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
-const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
+const DeleteTopicResponse = models.DeleteTopicResponse;
 const DescribeDatahubTopicResp = models.DescribeDatahubTopicResp;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
 const DescribeDatahubTopicsResp = models.DescribeDatahubTopicsResp;
 const DescribeTopicSyncReplicaRequest = models.DescribeTopicSyncReplicaRequest;
@@ -206,7 +223,9 @@ const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
 const AclRuleResp = models.AclRuleResp;
+const SecurityGroupRouteResp = models.SecurityGroupRouteResp;
 const Price = models.Price;
+const InstanceRoute = models.InstanceRoute;
 
 
 /**
@@ -264,14 +283,25 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a pay-as-you-go instance.  It will be deprecated in future versions. We recommend that you use the `CreatePostPaidInstance` API instead.  You can call this API via SDK or the TencentCloud API console to create a pay-as-you-go CKafka instance,  which is an alternate option for making a purchase in the console.
-     * @param {CreateInstancePostRequest} req
-     * @param {function(string, CreateInstancePostResponse):void} cb
+     * This API is used to search for a list of TDMQ CKafka instances of the specified type under a user account.
+     * @param {DescribeTypeInstancesRequest} req
+     * @param {function(string, DescribeTypeInstancesResponse):void} cb
      * @public
      */
-    CreateInstancePost(req, cb) {
-        let resp = new CreateInstancePostResponse();
-        this.request("CreateInstancePost", req, resp, cb);
+    DescribeTypeInstances(req, cb) {
+        let resp = new DescribeTypeInstancesResponse();
+        this.request("DescribeTypeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the DataHub topic list.
+     * @param {DescribeDatahubTopicsRequest} req
+     * @param {function(string, DescribeDatahubTopicsResponse):void} cb
+     * @public
+     */
+    DescribeDatahubTopics(req, cb) {
+        let resp = new DescribeDatahubTopicsResponse();
+        this.request("DescribeDatahubTopics", req, resp, cb);
     }
 
     /**
@@ -297,14 +327,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the configurations of a prepaid instance, such as disk capacity and bandwidth.
-     * @param {ModifyInstancePreRequest} req
-     * @param {function(string, ModifyInstancePreResponse):void} cb
+     * This API is used to retrieve the security group route information list.
+     * @param {DescribeSecurityGroupRoutesRequest} req
+     * @param {function(string, DescribeSecurityGroupRoutesResponse):void} cb
      * @public
      */
-    ModifyInstancePre(req, cb) {
-        let resp = new ModifyInstancePreResponse();
-        this.request("ModifyInstancePre", req, resp, cb);
+    DescribeSecurityGroupRoutes(req, cb) {
+        let resp = new DescribeSecurityGroupRoutesResponse();
+        this.request("DescribeSecurityGroupRoutes", req, resp, cb);
     }
 
     /**
@@ -341,7 +371,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the DataHub topic attributes.
+     * This API is used to modify DIP topic attributes.
      * @param {ModifyDatahubTopicRequest} req
      * @param {function(string, ModifyDatahubTopicResponse):void} cb
      * @public
@@ -385,7 +415,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of CKafka instances under a user account.
+     * This API is used to search for a list of TDMQ CKafka instances under a user account.
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
@@ -393,6 +423,17 @@ class CkafkaClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get instance information corresponding to backend CVM, including cvmId and ip. It is for Pro Edition, while Standard Edition returns empty data.
+     * @param {DescribeCvmInfoRequest} req
+     * @param {function(string, DescribeCvmInfoResponse):void} cb
+     * @public
+     */
+    DescribeCvmInfo(req, cb) {
+        let resp = new DescribeCvmInfoResponse();
+        this.request("DescribeCvmInfo", req, resp, cb);
     }
 
     /**
@@ -407,14 +448,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set instance attributes.
-     * @param {ModifyInstanceAttributesRequest} req
-     * @param {function(string, ModifyInstanceAttributesResponse):void} cb
+     * This API is used to add instance routes.
+     * @param {CreateRouteRequest} req
+     * @param {function(string, CreateRouteResponse):void} cb
      * @public
      */
-    ModifyInstanceAttributes(req, cb) {
-        let resp = new ModifyInstanceAttributesResponse();
-        this.request("ModifyInstanceAttributes", req, resp, cb);
+    CreateRoute(req, cb) {
+        let resp = new CreateRouteResponse();
+        this.request("CreateRoute", req, resp, cb);
     }
 
     /**
@@ -440,7 +481,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a DataHub topic.
+     * This API is used to create a DIP topic.
      * @param {CreateDatahubTopicRequest} req
      * @param {function(string, CreateDatahubTopicResponse):void} cb
      * @public
@@ -448,6 +489,17 @@ class CkafkaClient extends AbstractClient {
     CreateDatahubTopic(req, cb) {
         let resp = new CreateDatahubTopicResponse();
         this.request("CreateDatahubTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete post-payment instances. It directly performs instance termination by calling API deletion without associating connectors and tasks in pre-check.
+     * @param {DeleteInstancePostRequest} req
+     * @param {function(string, DeleteInstancePostResponse):void} cb
+     * @public
+     */
+    DeleteInstancePost(req, cb) {
+        let resp = new DeleteInstancePostResponse();
+        this.request("DeleteInstancePost", req, resp, cb);
     }
 
     /**
@@ -462,17 +514,6 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the DataHub topic list.
-     * @param {DescribeDatahubTopicsRequest} req
-     * @param {function(string, DescribeDatahubTopicsResponse):void} cb
-     * @public
-     */
-    DescribeDatahubTopics(req, cb) {
-        let resp = new DescribeDatahubTopicsResponse();
-        this.request("DescribeDatahubTopics", req, resp, cb);
-    }
-
-    /**
      * This API is used to get topic list details (only for call in the console).
      * @param {DescribeTopicDetailRequest} req
      * @param {function(string, DescribeTopicDetailResponse):void} cb
@@ -481,6 +522,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicDetail(req, cb) {
         let resp = new DescribeTopicDetailResponse();
         this.request("DescribeTopicDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create prepaid annual and monthly instances. It only supports creating Pro Edition instances.
+     * @param {CreateInstancePreRequest} req
+     * @param {function(string, CreateInstancePreResponse):void} cb
+     * @public
+     */
+    CreateInstancePre(req, cb) {
+        let resp = new CreateInstancePreResponse();
+        this.request("CreateInstancePre", req, resp, cb);
     }
 
     /**
@@ -506,14 +558,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the password.
-     * @param {ModifyPasswordRequest} req
-     * @param {function(string, ModifyPasswordResponse):void} cb
+     * This API is used to set instance attributes.
+     * @param {ModifyInstanceAttributesRequest} req
+     * @param {function(string, ModifyInstanceAttributesResponse):void} cb
      * @public
      */
-    ModifyPassword(req, cb) {
-        let resp = new ModifyPasswordResponse();
-        this.request("ModifyPassword", req, resp, cb);
+    ModifyInstanceAttributes(req, cb) {
+        let resp = new ModifyInstanceAttributesResponse();
+        this.request("ModifyInstanceAttributes", req, resp, cb);
     }
 
     /**
@@ -539,7 +591,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify an ACL policy, and currently only supports specifying whether to apply the preset rule to new topics.
+     * This API is used to modify ACL policy, currently only support whether to apply preset rules to newly-added topics.
      * @param {ModifyAclRuleRequest} req
      * @param {function(string, ModifyAclRuleResponse):void} cb
      * @public
@@ -605,8 +657,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get topic attributes.
-
+     * This API is used to retrieve topic attributes.
      * @param {DescribeTopicAttributesRequest} req
      * @param {function(string, DescribeTopicAttributesResponse):void} cb
      * @public
@@ -617,7 +668,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a monthly subscribed (prepaid) instance.
+     * This API is used to delete prepaid instances. It performs isolation and deletion actions on the instance. After successful execution, the instance will be directly deleted and terminated. By calling API deletion, it directly performs instance termination without associating connectors and tasks in pre-check.
      * @param {DeleteInstancePreRequest} req
      * @param {function(string, DeleteInstancePreResponse):void} cb
      * @public
@@ -628,7 +679,7 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get instance attributes. 
+     * This API is used to obtain instance attributes.
      * @param {DescribeInstanceAttributesRequest} req
      * @param {function(string, DescribeInstanceAttributesResponse):void} cb
      * @public
@@ -705,6 +756,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query a message list by timestamp.
+     * @param {FetchMessageListByTimestampRequest} req
+     * @param {function(string, FetchMessageListByTimestampResponse):void} cb
+     * @public
+     */
+    FetchMessageListByTimestamp(req, cb) {
+        let resp = new FetchMessageListByTimestampResponse();
+        this.request("FetchMessageListByTimestamp", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the connection information of the topic producer.
      * @param {DescribeTopicProduceConnectionRequest} req
      * @param {function(string, DescribeTopicProduceConnectionResponse):void} cb
@@ -739,7 +801,7 @@ This API is used to get the list of topics in a CKafka instance of a user.
     }
 
     /**
-     * This API is used to get the DataHub topic attributes.
+     * This API is used to retrieve DIP topic attributes.
      * @param {DescribeDatahubTopicRequest} req
      * @param {function(string, DescribeDatahubTopicResponse):void} cb
      * @public
@@ -783,6 +845,17 @@ This API is used to get the list of topics in a CKafka instance of a user.
     }
 
     /**
+     * This API is used to change the configuration of prepaid instances, adjust disks, modify bandwidth, and manage partitions.
+     * @param {ModifyInstancePreRequest} req
+     * @param {function(string, ModifyInstancePreResponse):void} cb
+     * @public
+     */
+    ModifyInstancePre(req, cb) {
+        let resp = new ModifyInstancePreResponse();
+        this.request("ModifyInstancePre", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a CKafka topic.
      * @param {DeleteTopicRequest} req
      * @param {function(string, DeleteTopicResponse):void} cb
@@ -791,6 +864,17 @@ This API is used to get the list of topics in a CKafka instance of a user.
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
         this.request("DeleteTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the password.
+     * @param {ModifyPasswordRequest} req
+     * @param {function(string, ModifyPasswordResponse):void} cb
+     * @public
+     */
+    ModifyPassword(req, cb) {
+        let resp = new ModifyPasswordResponse();
+        this.request("ModifyPassword", req, resp, cb);
     }
 
     /**

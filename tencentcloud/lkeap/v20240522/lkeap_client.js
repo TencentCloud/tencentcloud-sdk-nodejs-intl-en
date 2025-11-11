@@ -17,24 +17,27 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateSplitDocumentFlowRequest = models.CreateSplitDocumentFlowRequest;
-const QueryRewriteRequest = models.QueryRewriteRequest;
-const SplitDocumentFailedPage = models.SplitDocumentFailedPage;
+const ReconstructDocumentSSEResponse = models.ReconstructDocumentSSEResponse;
+const GetReconstructDocumentResultRequest = models.GetReconstructDocumentResultRequest;
 const Usage = models.Usage;
-const RunRerankRequest = models.RunRerankRequest;
-const CreateReconstructDocumentFlowRequest = models.CreateReconstructDocumentFlowRequest;
+const CreateSplitDocumentFlowResponse = models.CreateSplitDocumentFlowResponse;
+const ReconstructDocumentSSEConfig = models.ReconstructDocumentSSEConfig;
 const DocumentUsage = models.DocumentUsage;
-const RunRerankResponse = models.RunRerankResponse;
-const CreateReconstructDocumentFlowResponse = models.CreateReconstructDocumentFlowResponse;
 const GetReconstructDocumentResultResponse = models.GetReconstructDocumentResultResponse;
 const CreateReconstructDocumentFlowConfig = models.CreateReconstructDocumentFlowConfig;
-const CreateSplitDocumentFlowConfig = models.CreateSplitDocumentFlowConfig;
-const GetReconstructDocumentResultRequest = models.GetReconstructDocumentResultRequest;
-const GetSplitDocumentResultRequest = models.GetSplitDocumentResultRequest;
-const QueryRewriteResponse = models.QueryRewriteResponse;
-const ReconstructDocumentFailedPage = models.ReconstructDocumentFailedPage;
-const Message = models.Message;
+const RunRerankRequest = models.RunRerankRequest;
+const ReconstructDocumentSSERequest = models.ReconstructDocumentSSERequest;
+const CreateReconstructDocumentFlowRequest = models.CreateReconstructDocumentFlowRequest;
 const GetSplitDocumentResultResponse = models.GetSplitDocumentResultResponse;
-const CreateSplitDocumentFlowResponse = models.CreateSplitDocumentFlowResponse;
+const ReconstructDocumentFailedPage = models.ReconstructDocumentFailedPage;
+const SplitDocumentFailedPage = models.SplitDocumentFailedPage;
+const QueryRewriteRequest = models.QueryRewriteRequest;
+const CreateSplitDocumentFlowConfig = models.CreateSplitDocumentFlowConfig;
+const RunRerankResponse = models.RunRerankResponse;
+const CreateReconstructDocumentFlowResponse = models.CreateReconstructDocumentFlowResponse;
+const GetSplitDocumentResultRequest = models.GetSplitDocumentResultRequest;
+const Message = models.Message;
+const QueryRewriteResponse = models.QueryRewriteResponse;
 
 
 /**
@@ -81,6 +84,17 @@ There is a call limit for single-account for this API. If you need to increase t
     QueryRewrite(req, cb) {
         let resp = new QueryRewriteResponse();
         this.request("QueryRewrite", req, resp, cb);
+    }
+
+    /**
+     * This API is used for quasi-real-time document parsing, using HTTP SSE protocol for communication.
+     * @param {ReconstructDocumentSSERequest} req
+     * @param {function(string, ReconstructDocumentSSEResponse):void} cb
+     * @public
+     */
+    ReconstructDocumentSSE(req, cb) {
+        let resp = new ReconstructDocumentSSEResponse();
+        this.request("ReconstructDocumentSSE", req, resp, cb);
     }
 
     /**

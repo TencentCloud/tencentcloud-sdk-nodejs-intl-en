@@ -31,7 +31,7 @@ class TopicDetail extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Topic ID
+         * Topic Id.
          * @type {string || null}
          */
         this.TopicId = null;
@@ -43,14 +43,13 @@ class TopicDetail extends  AbstractModel {
         this.PartitionNum = null;
 
         /**
-         * Number of replicas
+         * Number of topic replicas. valid values: 1, 3.
          * @type {number || null}
          */
         this.ReplicaNum = null;
 
         /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Remarks.
          * @type {string || null}
          */
         this.Note = null;
@@ -74,8 +73,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IpWhiteListCount = null;
 
         /**
-         * COS bucket for data backup: address of the destination COS bucket
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Data backup cos bucket. specifies the bucket address for archiving to cos.
          * @type {string || null}
          */
         this.ForwardCosBucket = null;
@@ -93,22 +91,19 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ForwardInterval = null;
 
         /**
-         * Advanced configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Advanced configuration.
          * @type {Config || null}
          */
         this.Config = null;
 
         /**
-         * Message retention time configuration (for recording the latest retention time)
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Message retention period configuration (used for dynamic configuration change records).
          * @type {TopicRetentionTimeConfigRsp || null}
          */
         this.RetentionTimeConfig = null;
 
         /**
-         * `0`: normal, `1`: deleted, `2`: deleting
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * 0: normal. 1: deleted. 2: deleting.
          * @type {number || null}
          */
         this.Status = null;
@@ -175,7 +170,7 @@ class DeleteAclRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID information
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -199,7 +194,7 @@ class DeleteAclRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
-         * Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
+         * Permission type (2:DENY, 3:ALLOW). currently ckafka supports ALLOW (equivalent to allowlist), others used when compatible with open-source kafka acl.
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -211,7 +206,7 @@ class DeleteAclRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * User list. The default value is `*`, which means that any user can access. The current user can only be one included in the user list
+         * List of users, defaults to User:*, means any User is accessible in the entire region. the current User can only be the User in the list of users.
          * @type {string || null}
          */
         this.Principal = null;
@@ -232,46 +227,6 @@ class DeleteAclRequest extends  AbstractModel {
         this.PermissionType = 'PermissionType' in params ? params.PermissionType : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.Principal = 'Principal' in params ? params.Principal : null;
-
-    }
-}
-
-/**
- * CreateInstancePost response structure.
- * @class
- */
-class CreateInstancePostResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned result
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -331,18 +286,36 @@ class GroupInfoMember extends  AbstractModel {
 }
 
 /**
- * RouteDTO
+ * Four pieces of information of ACL rules: source IP address, destination IP address, source port, and destination port
  * @class
  */
-class RouteDTO extends  AbstractModel {
+class AclRuleInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RouteId11 Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * ACL operation types. Enumerated values: `All` (all operations), `Read` (read), `Write` (write).
+         * @type {string || null}
          */
-        this.RouteId = null;
+        this.Operation = null;
+
+        /**
+         * Permission type. Deny: Deny. Allow: permission.
+         * @type {string || null}
+         */
+        this.PermissionType = null;
+
+        /**
+         * Indicates any host is accessible in the entire region.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * The User. User:* means any User is accessible in the entire region. the current User can only be the User in the list of users. the input format requires the [User:] prefix. for example, for User A, input User:A.
+         * @type {string || null}
+         */
+        this.Principal = null;
 
     }
 
@@ -353,7 +326,10 @@ class RouteDTO extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.PermissionType = 'PermissionType' in params ? params.PermissionType : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Principal = 'Principal' in params ? params.Principal : null;
 
     }
 }
@@ -367,7 +343,7 @@ class BatchCreateAclRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -379,13 +355,13 @@ class BatchCreateAclRequest extends  AbstractModel {
         this.ResourceType = null;
 
         /**
-         * Resource list array.
+         * Resource list array, obtainable through the DescribeTopic API (https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.ResourceNames = null;
 
         /**
-         * ACL rule list.
+         * Specifies the set ACL rule list, which can be obtained through the DescribeAclRule API (https://www.tencentcloud.comom/document/product/597/89217?from_cn_redirect=1).
          * @type {Array.<AclRuleInfo> || null}
          */
         this.RuleList = null;
@@ -424,13 +400,13 @@ class DeleteUserRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Username
+         * Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Name = null;
@@ -459,15 +435,13 @@ class PartitionOffset extends  AbstractModel {
         super();
 
         /**
-         * Partition, such as "0" or "1"
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Partition
          * @type {string || null}
          */
         this.Partition = null;
 
         /**
-         * Offset, such as 100
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the offset.
          * @type {number || null}
          */
         this.Offset = null;
@@ -496,7 +470,7 @@ class DescribeACLRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -520,7 +494,7 @@ class DescribeACLRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Quantity limit
+         * Number limit. default value is 50. maximum value is 50.
          * @type {number || null}
          */
         this.Limit = null;
@@ -551,6 +525,34 @@ class DescribeACLRequest extends  AbstractModel {
 }
 
 /**
+ * Deletion of instances returns a task.
+ * @class
+ */
+class InstanceDeleteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the task Id returned after deleting an instance.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  * Results of the batch modified topic attributes
  * @class
  */
@@ -559,28 +561,25 @@ class BatchModifyTopicResultDTO extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Topic name
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Status code.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Operation return code.
          * @type {string || null}
          */
         this.ReturnCode = null;
 
         /**
-         * Message status.
+         * Returned information.
          * @type {string || null}
          */
         this.Message = null;
@@ -611,13 +610,13 @@ class DescribeTopicAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -646,7 +645,7 @@ class DescribeInstanceAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -723,8 +722,7 @@ class Assignment extends  AbstractModel {
         this.Version = null;
 
         /**
-         * Topic information list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * topic information list.
          * @type {Array.<GroupInfoTopics> || null}
          */
         this.Topics = null;
@@ -761,19 +759,19 @@ class ModifyAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * ACL policy name
+         * ACL rule name.
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
-         * Whether to be applied to new topics
+         * Specifies whether to apply to newly-added topics when importing predefined rule modifications.
          * @type {number || null}
          */
         this.IsApplied = null;
@@ -809,7 +807,7 @@ class DescribeAclRuleResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -849,7 +847,7 @@ class DescribeConsumerGroupResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -911,8 +909,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TopicPrice = null;
 
         /**
-         * Instance package price
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance package price.
          * @type {InquiryBasePrice || null}
          */
         this.InstanceTypePrice = null;
@@ -961,6 +958,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * FetchMessageListByOffset response structure.
+ * @class
+ */
+class FetchMessageListByOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result. Note: The returned list does not display the message content (key and value). To query the message content, call the `FetchMessageByOffset` API.
+         * @type {Array.<ConsumerRecord> || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ConsumerRecord();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Values returned by the `InquireCkafkaPrice` API
  * @class
  */
@@ -969,8 +1009,7 @@ class InquireCkafkaPriceResp extends  AbstractModel {
         super();
 
         /**
-         * Instance price
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the instance price.
          * @type {InquiryPrice || null}
          */
         this.InstancePrice = null;
@@ -1003,6 +1042,104 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.PublicNetworkBandwidthPrice)
             this.PublicNetworkBandwidthPrice = obj;
         }
+
+    }
+}
+
+/**
+ * CreateRoute request structure.
+ * @class
+ */
+class CreateRouteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Specifies the ckafka cluster instance id. obtain through the API <a href="https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1">DescribeInstances</a>.</p>.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <P>Specifies the network type of the route (3: vpc routing; 7: internal support route; 1: public network route).</p>.
+         * @type {number || null}
+         */
+        this.VipType = null;
+
+        /**
+         * <p>vpc network Id. required when vipType is 3.</p>.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * <p>Specifies the vpc subnet id. required when vipType is 3.</p>.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * <p>Access type: 0-plaintext; 1-sasl_plaintext; 3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512. defaults to 0. when vipType=3, supports 0,1,3,4,5. when vipType=7, supports 0,1,3. when vipType=1, supports 1,3.</p>.
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * <P>Specifies whether access management is required. this field has been deprecated.</p>.
+         * @type {number || null}
+         */
+        this.AuthFlag = null;
+
+        /**
+         * <p>Specifies the caller appId.</p>.
+         * @type {number || null}
+         */
+        this.CallerAppid = null;
+
+        /**
+         * <P>Public network bandwidth. required for public network route. must be a multiple of 3. no default value.</p>.
+         * @type {number || null}
+         */
+        this.PublicNetwork = null;
+
+        /**
+         * <p>vip address.</p>.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * <P>Specifies the remark information.</p>.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * <P>Specifies the ordered list of security group associations.</p>.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VipType = 'VipType' in params ? params.VipType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.AuthFlag = 'AuthFlag' in params ? params.AuthFlag : null;
+        this.CallerAppid = 'CallerAppid' in params ? params.CallerAppid : null;
+        this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -1057,7 +1194,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1097,7 +1234,7 @@ class FetchMessageByOffsetResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1137,7 +1274,7 @@ class BatchModifyTopicAttributesResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1186,8 +1323,7 @@ class CreateInstancePreResp extends  AbstractModel {
         this.ReturnMessage = null;
 
         /**
-         * Data returned by the operation.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the Data returned by the operation.
          * @type {CreateInstancePreData || null}
          */
         this.Data = null;
@@ -1235,8 +1371,7 @@ class GroupInfoTopics extends  AbstractModel {
         this.Topic = null;
 
         /**
-         * Information of assigned partition
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Allocates partition info.
          * @type {Array.<number> || null}
          */
         this.Partitions = null;
@@ -1265,7 +1400,7 @@ class FetchMessageListByOffsetRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1313,65 +1448,24 @@ class FetchMessageListByOffsetRequest extends  AbstractModel {
 }
 
 /**
- * Region entity object
+ * DescribeSecurityGroupRoutes response structure.
  * @class
  */
-class Region extends  AbstractModel {
+class DescribeSecurityGroupRoutesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region ID
-         * @type {number || null}
+         * Returns the security group routing information result object.
+         * @type {SecurityGroupRouteResp || null}
          */
-        this.RegionId = null;
+        this.Result = null;
 
         /**
-         * Region name
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.RegionName = null;
-
-        /**
-         * Area name
-         * @type {string || null}
-         */
-        this.AreaName = null;
-
-        /**
-         * Region code
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegionCode = null;
-
-        /**
-         * Region code (v3)
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegionCodeV3 = null;
-
-        /**
-         * NONE: no special models are supported by default.\nCVM: the CVM type is supported.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Support = null;
-
-        /**
-         * Whether IPv6 is supported. `0` indicates no, and `1` indicates yes.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Ipv6 = null;
-
-        /**
-         * Whether cross-AZ clusters are supported.`0` indicates no, and `1` indicates yes.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MultiZone = null;
+        this.RequestId = null;
 
     }
 
@@ -1382,14 +1476,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
         if (!params) {
             return;
         }
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.AreaName = 'AreaName' in params ? params.AreaName : null;
-        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
-        this.RegionCodeV3 = 'RegionCodeV3' in params ? params.RegionCodeV3 : null;
-        this.Support = 'Support' in params ? params.Support : null;
-        this.Ipv6 = 'Ipv6' in params ? params.Ipv6 : null;
-        this.MultiZone = 'MultiZone' in params ? params.MultiZone : null;
+
+        if (params.Result) {
+            let obj = new SecurityGroupRouteResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1403,25 +1496,30 @@ class ModifyInstancePreRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name.
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Estimated disk capacity, which can be increased by increment.
+         * Specifies the disk capacity in GB. value range: 100 to 500000 with a step length of 100.
+Specification limits can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Estimated bandwidth, which can be increased by increment.
+         * Peak bandwidth in MB/s.
+Specifies the specification limits and corresponding step length through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * Estimated partition count, which can be increased by increment.
+         * Partition upper bound. maximum value of 40000. step length of 100.
+Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
          * @type {number || null}
          */
         this.Partition = null;
@@ -1452,7 +1550,7 @@ class CreateAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1464,7 +1562,7 @@ class CreateAclRuleRequest extends  AbstractModel {
         this.ResourceType = null;
 
         /**
-         * Matching type. Valid values: `PREFIXED`(match by prefix), `PRESET` (match by preset policy).
+         * ACL rule-based matching type. currently supports prefix match and PRESET policy. valid values: PREFIXED/PRESET.
          * @type {string || null}
          */
         this.PatternType = null;
@@ -1482,13 +1580,13 @@ class CreateAclRuleRequest extends  AbstractModel {
         this.RuleList = null;
 
         /**
-         * Prefix value for prefix match
+         * Indicates the prefix for prefix match. this parameter is required when PatternType value is PREFIXED.
          * @type {string || null}
          */
         this.Pattern = null;
 
         /**
-         * A parameter used to specify whether the preset ACL rule is applied to new topics
+         * Specifies whether to apply the preset ACL rule to newly-added topics. defaults to 0, which means no. a value of 1 means yes.
          * @type {number || null}
          */
         this.IsApplied = null;
@@ -1529,6 +1627,48 @@ class CreateAclRuleRequest extends  AbstractModel {
 }
 
 /**
+ * Routing list filter.
+ * @class
+ */
+class RouteFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filters by name. currently supports security-group-id. filters by security group association.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filter value. when the filter name is security-group-id, only supports transmission of one value.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * Filter relationship. supports IN and NOT_IN. default is IN.
+         * @type {string || null}
+         */
+        this.Relation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.Relation = 'Relation' in params ? params.Relation : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail response structure.
  * @class
  */
@@ -1543,7 +1683,7 @@ class DescribeInstancesDetailResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1577,27 +1717,25 @@ class CreateInstancePreData extends  AbstractModel {
         super();
 
         /**
-         * The value returned by `CreateInstancePre` is 0, which is fixed and cannot be used as the query condition of `CheckTaskStatus`. It is only used to ensure the consistency with the backend data structure.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * CreateInstancePre returns fixed as 0. it cannot be used as a query condition for CheckTaskStatus. this is merely to ensure alignment with the backend data structure.
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * Order number list.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Order ID list
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
+         * The ckafka cluster instance Id. by default, returns the Id of the first purchased instance when purchasing multiple instances.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+         * Order and purchase mapping list corresponding to the instance.
          * @type {Array.<DealInstanceDTO> || null}
          */
         this.DealNameInstanceIdMapping = null;
@@ -1637,91 +1775,78 @@ class AclRule extends  AbstractModel {
 
         /**
          * ACL rule name.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
-         * Instance ID.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Matching type. Currently, only prefix match is supported. Enumerated value list: PREFIXED
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * ACL rule-based matching type. currently only supports prefix match. valid values: PREFIXED.
          * @type {string || null}
          */
         this.PatternType = null;
 
         /**
-         * Prefix value for prefix match.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Indicates the prefix value for prefix match.
          * @type {string || null}
          */
         this.Pattern = null;
 
         /**
-         * ACL resource type. Only “Topic” is supported. Enumerated value list: Topic.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Acl resource type, currently only support Topic. valid values: Topic.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * ACL information contained in the rule.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the ACL information contained in the rule.
          * @type {string || null}
          */
         this.AclList = null;
 
         /**
-         * Creation time of the rule.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the time when the rule was created.
          * @type {string || null}
          */
         this.CreateTimeStamp = null;
 
         /**
-         * A parameter used to specify whether the preset ACL rule is applied to new topics.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies whether to apply the preset ACL rule to newly-added topics.
          * @type {number || null}
          */
         this.IsApplied = null;
 
         /**
          * Rule update time.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTimeStamp = null;
 
         /**
-         * Remarks of the rule.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the remark of the rule.
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * One of the corresponding topic names that is displayed.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * One of the displayed corresponding TopicName.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * The number of topics that apply this ACL rule.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Number of topics to which the ACL rule is applied.
          * @type {number || null}
          */
         this.TopicCount = null;
 
         /**
-         * Name of rule type.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the pattern type.
          * @type {string || null}
          */
         this.PatternTypeTitle = null;
@@ -1761,7 +1886,7 @@ class DescribeAclRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1773,13 +1898,13 @@ class DescribeAclRuleRequest extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * ACL rule matching type
+         * ACL rule-based matching type (PREFIXED: prefix match, PRESET: PRESET policy).
          * @type {string || null}
          */
         this.PatternType = null;
 
         /**
-         * Whether to read simplified ACL rules
+         * Specifies whether to read the simplified ACL rule. default value is false, which means not to read the simplified ACL rule.
          * @type {boolean || null}
          */
         this.IsSimplified = null;
@@ -1816,7 +1941,7 @@ class DescribeACLResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1895,6 +2020,54 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Returned result value of operation
+ * @class
+ */
+class JgwOperateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned code. 0: normal, other values: error
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * Success message
+         * @type {string || null}
+         */
+        this.ReturnMessage = null;
+
+        /**
+         * Data returned by an operation, which may contain `flowId`, etc.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {OperateResponseData || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new OperateResponseData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+
+    }
+}
+
+/**
  * InquireCkafkaPrice request structure.
  * @class
  */
@@ -1903,7 +2076,7 @@ class InquireCkafkaPriceRequest extends  AbstractModel {
         super();
 
         /**
-         * `standard`: Standard Edition; `profession`: Pro Edition
+         * Chinese site standard version fill in standards2 international site standard version fill in standard pro edition fill in profession advanced edition fill in premium.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -1921,13 +2094,14 @@ class InquireCkafkaPriceRequest extends  AbstractModel {
         this.InstanceNum = null;
 
         /**
-         * Private network bandwidth in MB/sec, which is required when you purchase an instance.
+         * Specifies the internal network bandwidth size of the instance, in MB/s (required when purchased; bandwidth information is required for pro edition/advanced edition inquiries).
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * Disk type and size, which is required when you purchase an instance.
+         * Specifies the purchase type and size of the hard disk of the instance. required when purchased. disk information is required for pro edition or advanced edition inquiries.
+
          * @type {InquiryDiskParam || null}
          */
         this.InquiryDiskParam = null;
@@ -1945,7 +2119,10 @@ class InquireCkafkaPriceRequest extends  AbstractModel {
         this.Topic = null;
 
         /**
-         * The number of instance partitions to be purchased, which is required when you purchase an instance.
+         * Number of partitions for instance purchase, unit: unit (required when purchased; bandwidth information required for pro edition/advanced edition inquiry).
+Partition upper limit. maximum value of 40000. step length of 100.
+Specifies the specifications and limits that can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+
          * @type {number || null}
          */
         this.Partition = null;
@@ -1969,7 +2146,7 @@ class InquireCkafkaPriceRequest extends  AbstractModel {
         this.BillType = null;
 
         /**
-         * Billing mode for public network bandwidth, which is required when you purchase public network bandwidth. Currently, public network bandwidth is only supported for Pro Edition.
+         * Public network bandwidth billing mode. currently only the pro edition supports public network bandwidth. required when purchasing public network bandwidth. value must be a multiple of 3.
          * @type {InquiryPublicNetworkParam || null}
          */
         this.PublicNetworkParam = null;
@@ -2030,7 +2207,7 @@ class ZoneInfo extends  AbstractModel {
         super();
 
         /**
-         * Zone ID
+         * Availability zone
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -2042,25 +2219,25 @@ class ZoneInfo extends  AbstractModel {
         this.IsInternalApp = null;
 
         /**
-         * Application ID
+         * Application identifier
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Flag
+         * Indicates whether the AZ is sold out. true indicates sold out. false indicates not sold out.
          * @type {boolean || null}
          */
         this.Flag = null;
 
         /**
-         * Zone name
+         * Availability zone name.
          * @type {string || null}
          */
         this.ZoneName = null;
 
         /**
-         * Zone status
+         * Availability zone status. enumerates example: 3: enable, 4: disable. availability zone status is subject to SoldOut.
          * @type {number || null}
          */
         this.ZoneStatus = null;
@@ -2072,17 +2249,22 @@ class ZoneInfo extends  AbstractModel {
         this.Exflag = null;
 
         /**
-         * JSON object. The key is the model. The value `true` means “sold out”, and `false` means “not sold out”.
+         * Specifies whether the item is sold-out. valid values: true (sold-out), false (not sold out).
          * @type {string || null}
          */
         this.SoldOut = null;
 
         /**
-         * Information on whether Standard Edition has been sold out.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the sell-out information of the standard version.
          * @type {Array.<SaleInfo> || null}
          */
         this.SalesInfo = null;
+
+        /**
+         * Additional flag.
+         * @type {string || null}
+         */
+        this.ExtraFlag = null;
 
     }
 
@@ -2110,6 +2292,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.SalesInfo.push(obj);
             }
         }
+        this.ExtraFlag = 'ExtraFlag' in params ? params.ExtraFlag : null;
 
     }
 }
@@ -2129,7 +2312,7 @@ class DescribeTopicSubscribeGroupResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2163,7 +2346,7 @@ class DescribeCkafkaZoneRequest extends  AbstractModel {
         super();
 
         /**
-         * Cloud Dedicated Cluster (CDC) business parameter.
+         * cdc cluster Id.
          * @type {string || null}
          */
         this.CdcId = null;
@@ -2183,7 +2366,7 @@ class DescribeCkafkaZoneRequest extends  AbstractModel {
 }
 
 /**
- * Sales information of Standard Edition
+ * Sales information of versions.
  * @class
  */
 class SaleInfo extends  AbstractModel {
@@ -2191,29 +2374,25 @@ class SaleInfo extends  AbstractModel {
         super();
 
         /**
-         * Manually set flag.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The manually configured flag. valid values: true (sold-out), false (available).
          * @type {boolean || null}
          */
         this.Flag = null;
 
         /**
-         * CKafka version (v1.1.1/2.4.2/0.10.2）
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the ckafka version number (1.1.1/2.4.2/0.10.2).
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * Whether it is Pro Edition or Standard Edition.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Pro edition, standard version flag.
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * Whether it has been sold out. `true`: sold out.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies whether the item is sold-out. valid values: true (sold-out).
          * @type {boolean || null}
          */
         this.SoldOut = null;
@@ -2279,6 +2458,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeTypeInstances response structure.
+ * @class
+ */
+class DescribeTypeInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result.
+         * @type {InstanceResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InstanceResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Tag object in instance details
  * @class
  */
@@ -2328,7 +2547,7 @@ class ModifyAclRuleResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2363,7 +2582,7 @@ class BatchModifyGroupOffsetsResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2389,6 +2608,67 @@ class BatchModifyGroupOffsetsResponse extends  AbstractModel {
 }
 
 /**
+ * Security group routing information.
+ * @class
+ */
+class SecurityGroupRoute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the routing information.
+         * @type {InstanceRoute || null}
+         */
+        this.InstanceRoute = null;
+
+        /**
+         * Specifies the security group list to associate.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * CKafka cluster instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Specifies the route vpcId.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Route vip.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceRoute) {
+            let obj = new InstanceRoute();
+            obj.deserialize(params.InstanceRoute)
+            this.InstanceRoute = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+
+    }
+}
+
+/**
  * `DescribeGroup` response
  * @class
  */
@@ -2397,22 +2677,19 @@ class GroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Count
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Counting.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * GroupList
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeGroup> || null}
          */
         this.GroupList = null;
 
         /**
-         * Consumer group quota
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the consumer group quota.
          * @type {number || null}
          */
         this.GroupCountQuota = null;
@@ -2442,6 +2719,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * FetchMessageListByTimestamp request structure.
+ * @class
+ */
+class FetchMessageListByTimestampRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ckafka cluster instance Id.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Partition ID
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Query start time, a timestamp.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Maximum number of query results. default: 20. value range: 1-20.
+         * @type {number || null}
+         */
+        this.SinglePartitionRecordNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
+
+    }
+}
+
+/**
  * CreateDatahubTopic request structure.
  * @class
  */
@@ -2450,7 +2783,7 @@ class CreateDatahubTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * Name, a string of no more than 128 characters, must start with "AppId-" and can contain letters, digits, and hyphens (-).
          * @type {string || null}
          */
         this.Name = null;
@@ -2561,7 +2894,7 @@ class CreateInstancePostResp extends  AbstractModel {
         this.ReturnMessage = null;
 
         /**
-         * Returned data.  Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the Data returned.
          * @type {CreateInstancePostData || null}
          */
         this.Data = null;
@@ -2602,7 +2935,7 @@ class DescribeDatahubTopicResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2642,7 +2975,7 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2668,24 +3001,18 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageListByOffset response structure.
+ * DescribeCvmInfo request structure.
  * @class
  */
-class FetchMessageListByOffsetResponse extends  AbstractModel {
+class DescribeCvmInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned result. Note: The returned list does not display the message content (key and value). To query the message content, call the `FetchMessageByOffset` API.
-         * @type {Array.<ConsumerRecord> || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -2696,16 +3023,7 @@ class FetchMessageListByOffsetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new ConsumerRecord();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2719,13 +3037,13 @@ class CreateConsumerResponse extends  AbstractModel {
         super();
 
         /**
-         * Description of the created consumer group.
+         * Create consumer group returned results.
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2759,25 +3077,25 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name, which is a string of up to 64 letters, digits, and hyphens (-). It must start with a letter.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
+         * VPC Id, obtain through the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * ID of the subnet  where the default access point of the created instance resides.
+         * Subnet Id. can be obtained through the [DescribeSubnets](https://www.tencentcloud.comom/document/product/215/15784?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+         * Specifies the cluster instance name of ckafka, an arbitrary character with length not exceeding 128.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
          * @type {number || null}
          */
         this.InstanceType = null;
@@ -2795,49 +3113,49 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+         * Instance version. currently supports "2.4.1", "2.4.2", "2.8.1", "3.2.3". default value "2.4.1". "2.4.1" and "2.4.2" belong to the same version. any one can be passed.
          * @type {string || null}
          */
         this.KafkaVersion = null;
 
         /**
-         * Instance type. `standard` (Standard Edition),  `profession`  (Pro Edition)
+         * Instance type. "standard": standard version. "profession": pro edition. (standard version is only supported on the international site. currently, the chinese site supports pro edition.).
          * @type {string || null}
          */
         this.SpecificationsType = null;
 
         /**
-         * Instance disk type.  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+         * Specifies the disk type for a pro edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
+         * Specifies the peak bandwidth of the instance private network, with a default value of 40 MB/s. for standard version, input the peak bandwidth corresponding to the current instance specifications. note that if the instance created is a pro edition instance, parameter configuration such as peak bandwidth and number of partitions should meet the billing specification of the professional edition. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
          * @type {number || null}
          */
         this.BandWidth = null;
 
         /**
-         * Instance disk size, which must meet the requirement of the instance’s specification.
+         * Instance disk size. default value is 500. step length is set to 100. should meet the billing specification of the current instance. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+         * Specifies the maximum number of partitions for the instance, which should meet the billing specification of the current instance. default value is 800 with a step length of 100. the billing specification can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
          * @type {number || null}
          */
         this.Partition = null;
 
         /**
-         * The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+         * Maximum number of topics for the instance should meet the billing specification of the current instance. default value is 800, step length is set to 100.
          * @type {number || null}
          */
         this.TopicNum = null;
 
         /**
-         * AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
+         * Specifies the availability zone of the instance. when creating a multi-az instance, this parameter is the availability zone id of the subnet where the default access point is created. ZoneId and ZoneIds cannot be empty at the same time. obtain through the API [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -2849,7 +3167,7 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.MultiZoneFlag = null;
 
         /**
-         * This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+         * Specifies the multi-az id list when the instance is a multi-az instance. note that the multi-az corresponding to parameter ZoneId must be included in this parameter array. ZoneId and ZoneIds cannot be empty at the same time. you can obtain this information through the [DescribeCkafkaZone](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1) api.
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
@@ -2866,6 +3184,18 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
          */
         this.PublicNetworkMonthly = null;
 
+        /**
+         * Tag.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Elastic bandwidth switch. valid values: 0 (disable, default), 1 (enable).
+         * @type {number || null}
+         */
+        this.ElasticBandwidthSwitch = null;
+
     }
 
     /**
@@ -2875,9 +3205,9 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
@@ -2894,6 +3224,16 @@ class CreatePostPaidInstanceRequest extends  AbstractModel {
         this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
         this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
 
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ElasticBandwidthSwitch = 'ElasticBandwidthSwitch' in params ? params.ElasticBandwidthSwitch : null;
+
     }
 }
 
@@ -2906,8 +3246,7 @@ class RouteResponse extends  AbstractModel {
         super();
 
         /**
-         * Route information list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Route Information List
          * @type {Array.<Route> || null}
          */
         this.Routers = null;
@@ -2943,13 +3282,13 @@ class DescribeGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * List of returned results
+         * Returned result.
          * @type {GroupResponse || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2989,13 +3328,13 @@ class ModifyInstanceAttributesConfig extends  AbstractModel {
         this.AutoCreateTopicEnable = null;
 
         /**
-         * Optional. If `auto.create.topic.enable` is set to `true` and this value is not set, 3 will be used by default
+         * Default number of partitions for a newly created topic. if AutoCreateTopicEnable is set to true and no value is set, defaults to 3.
          * @type {number || null}
          */
         this.DefaultNumPartitions = null;
 
         /**
-         * If `auto.create.topic.enable` is set to `true` but this value is not set, 2 will be used by default
+         * Default number of replicas for a newly created topic. if AutoCreateTopicEnable is set to true and not specified, defaults to 2.
          * @type {number || null}
          */
         this.DefaultReplicationFactor = null;
@@ -3031,7 +3370,7 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3065,14 +3404,13 @@ class OperateResponseData extends  AbstractModel {
         super();
 
         /**
-         * FlowId11
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Flow ID.
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * RouteIdDto Note: This field may return null, indicating that no valid values can be obtained.
+         * RouteIdDto
          * @type {RouteDTO || null}
          */
         this.RouteDTO = null;
@@ -3106,13 +3444,13 @@ class CreateUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
+         * Returned result.
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3146,7 +3484,7 @@ class DescribeRouteRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3187,7 +3525,7 @@ class CreatePartitionResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3213,6 +3551,137 @@ class CreatePartitionResponse extends  AbstractModel {
 }
 
 /**
+ * Returned topic attributes result entity
+ * @class
+ */
+class TopicAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Specifies the unix second-level timestamp of the creation time.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Describes the topic remark.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Number of partitions
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * IP allowlist switch. 1: enabled, 0: disabled
+         * @type {number || null}
+         */
+        this.EnableWhiteList = null;
+
+        /**
+         * IP allowlist list
+         * @type {Array.<string> || null}
+         */
+        this.IpWhiteList = null;
+
+        /**
+         * Topic configuration array
+         * @type {Config || null}
+         */
+        this.Config = null;
+
+        /**
+         * Partition details
+         * @type {Array.<TopicPartitionDO> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * ACL preset policy switch. valid values: 1 (on); 0 (off).
+         * @type {number || null}
+         */
+        this.EnableAclRule = null;
+
+        /**
+         * Preset policy list.
+         * @type {Array.<AclRule> || null}
+         */
+        this.AclRuleList = null;
+
+        /**
+         * topic throttling policy.
+         * @type {InstanceQuotaConfigResp || null}
+         */
+        this.QuotaConfig = null;
+
+        /**
+         * Number of replicas
+         * @type {number || null}
+         */
+        this.ReplicaNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.EnableWhiteList = 'EnableWhiteList' in params ? params.EnableWhiteList : null;
+        this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
+
+        if (params.Config) {
+            let obj = new Config();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new TopicPartitionDO();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+        this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
+
+        if (params.AclRuleList) {
+            this.AclRuleList = new Array();
+            for (let z in params.AclRuleList) {
+                let obj = new AclRule();
+                obj.deserialize(params.AclRuleList[z]);
+                this.AclRuleList.push(obj);
+            }
+        }
+
+        if (params.QuotaConfig) {
+            let obj = new InstanceQuotaConfigResp();
+            obj.deserialize(params.QuotaConfig)
+            this.QuotaConfig = obj;
+        }
+        this.ReplicaNum = 'ReplicaNum' in params ? params.ReplicaNum : null;
+
+    }
+}
+
+/**
  * `DescribeTopicSubscribeGroup` output parameters
  * @class
  */
@@ -3233,15 +3702,13 @@ class TopicSubscribeGroup extends  AbstractModel {
         this.StatusCountInfo = null;
 
         /**
-         * Consumer group information
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Consumer group information.
          * @type {Array.<GroupInfoResponse> || null}
          */
         this.GroupsInfo = null;
 
         /**
-         * Whether a request is asynchronous. If there are fewer consumer groups in the instances, the result will be returned directly, and status code is 1. When there are many consumer groups in the instances, cache will be updated asynchronously. When status code is 0, grouping information will not be returned until cache update is completed and status code becomes 1.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Indicates whether the request is asynchronous. instances with fewer groups will return results directly with Status as 1. when there are more groups, the cache will be updated asynchronously. no group information will be returned when Status is 0 until the update is complete and results are returned with Status as 1.
          * @type {number || null}
          */
         this.Status = null;
@@ -3292,43 +3759,37 @@ class ClusterInfo extends  AbstractModel {
         this.ClusterName = null;
 
         /**
-         * The cluster’s maximum disk capacity in GB
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Maximum disk of the cluster (unit: GB).
          * @type {number || null}
          */
         this.MaxDiskSize = null;
 
         /**
-         * The cluster’s maximum bandwidth in MB/s
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Maximum bandwidth of the cluster. unit: MB/s.
          * @type {number || null}
          */
         this.MaxBandWidth = null;
 
         /**
-         * The cluster’s available disk capacity in GB
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Current availability of cluster disk (unit: GB).
          * @type {number || null}
          */
         this.AvailableDiskSize = null;
 
         /**
-         * The cluster’s available bandwidth in MB/s
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Available bandwidth of the cluster. unit: MB/s.
          * @type {number || null}
          */
         this.AvailableBandWidth = null;
 
         /**
-         * The AZ where the cluster resides
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Indicates the AZ to which the cluster belongs.
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * The AZ where the cluster nodes reside. If the cluster is a multi-AZ cluster, this field means multiple AZs where the cluster nodes reside.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * The AZ where the cluster nodes are located. If the cluster is a cross-AZ cluster, it includes multiple AZs where the cluster nodes are located.
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
@@ -3355,6 +3816,34 @@ Note: `null` may be returned for this field, indicating that no valid values can
 }
 
 /**
+ * DeleteInstancePost request structure.
+ * @class
+ */
+class DeleteInstancePostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DeleteUser response structure.
  * @class
  */
@@ -3369,7 +3858,7 @@ class DeleteUserResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3403,13 +3892,13 @@ class DescribeTopicProduceConnectionRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -3438,7 +3927,7 @@ class CreateAclRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID information
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3456,7 +3945,7 @@ class CreateAclRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
-         * Permission type (`2`: DENY, `3`: ALLOW). CKafka currently supports `ALLOW`, which is equivalent to allowlist. `DENY` will be supported for ACLs compatible with open-source Kafka.
+         * Permission type (2:DENY, 3:ALLOW). currently ckafka supports ALLOW (equivalent to allowlist), others used when compatible with open-source kafka acl.
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -3468,7 +3957,7 @@ class CreateAclRequest extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
+         * Defaults to *, indicating any host is accessible in the entire region. supports filling in ips or ranges, and uses ";" for separation.
          * @type {string || null}
          */
         this.Host = null;
@@ -3521,7 +4010,7 @@ class DescribeTopicSyncReplicaResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3596,7 +4085,7 @@ class DeleteRouteResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3665,14 +4154,13 @@ class DescribeTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Returned result.
          * @type {TopicResult || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3712,50 +4200,43 @@ class ConsumerGroupResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Topic list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Topic list.
          * @type {Array.<ConsumerGroupTopic> || null}
          */
         this.TopicList = null;
 
         /**
-         * Consumer group list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the consumption group List.
          * @type {Array.<ConsumerGroup> || null}
          */
         this.GroupList = null;
 
         /**
-         * Total number of partitions
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Total number of partitions.
          * @type {number || null}
          */
         this.TotalPartition = null;
 
         /**
-         * List of monitored partitions
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Monitored partition list.
          * @type {Array.<Partition> || null}
          */
         this.PartitionListForMonitor = null;
 
         /**
-         * Total number of topics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Total number of topics.
          * @type {number || null}
          */
         this.TotalTopic = null;
 
         /**
-         * List of monitored topics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Monitored topic list.
          * @type {Array.<ConsumerGroupTopic> || null}
          */
         this.TopicListForMonitor = null;
 
         /**
-         * List of monitored groups
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Monitored group list.
          * @type {Array.<Group> || null}
          */
         this.GroupListForMonitor = null;
@@ -3836,7 +4317,7 @@ class CreateTopicIpWhiteListResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3876,8 +4357,7 @@ class GroupOffsetTopic extends  AbstractModel {
         this.Topic = null;
 
         /**
-         * Array of partitions in the topic, where each element is a JSON object
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The topic partition array, where each element is a json object.
          * @type {Array.<GroupOffsetPartition> || null}
          */
         this.Partitions = null;
@@ -3920,7 +4400,7 @@ class ModifyGroupOffsetsResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3968,8 +4448,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Time = null;
 
         /**
-         * Whether it is a supported version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies whether supported versions are required or not.
          * @type {boolean || null}
          */
         this.IsUnSupportVersion = null;
@@ -4033,7 +4512,7 @@ class CreateAclResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4067,13 +4546,13 @@ class CreateTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance Id. you can obtain it by calling the DescribeInstances api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * Can only contain letters, digits, underscores, "-", or ".".
          * @type {string || null}
          */
         this.TopicName = null;
@@ -4109,37 +4588,37 @@ class CreateTopicRequest extends  AbstractModel {
         this.CleanUpPolicy = null;
 
         /**
-         * Topic remarks string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+         * Topic remark is a string of no more than 64 characters. the first character can be a letter or digit, and the remaining part can contain letters, digits, and hyphens (-).
          * @type {string || null}
          */
         this.Note = null;
 
         /**
-         * Default value: 1
+         * Minimum number of synchronous replicas, defaults to 1.
          * @type {number || null}
          */
         this.MinInsyncReplicas = null;
 
         /**
-         * Whether to allow an unsynced replica to be elected as leader. false: no, true: yes. Default value: false
+         * Whether to allow unsynchronized replicas to be elected as leader. valid values: 0 (not allowed), 1 (allowed). default: not allowed.
          * @type {number || null}
          */
         this.UncleanLeaderElectionEnable = null;
 
         /**
-         * Message retention period in milliseconds, which is optional. Min value: 60,000 ms.
+         * Optional parameter. specifies the message retention period in milliseconds. current min value is 60000. default value is 7200000 ms (2 hours). maximum value is 7776000000 ms (90 days).
          * @type {number || null}
          */
         this.RetentionMs = null;
 
         /**
-         * Segment rolling duration in ms. The current minimum value is 3,600,000 ms
+         * Duration of Segment shard scrolling in milliseconds. minimum value is 86400000 ms (1 day).
          * @type {number || null}
          */
         this.SegmentMs = null;
 
         /**
-         * Max message size in bytes. Value range: 1,024 bytes (1 KB) to 8,388,608 bytes (8 MB).
+         * Maximum topic messages in Bytes. value range: 1024 (1 KB) to 12582912 (12 MB).
          * @type {number || null}
          */
         this.MaxMessageBytes = null;
@@ -4157,7 +4636,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.AclRuleName = null;
 
         /**
-         * Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
+         * Optional. retain file size. defaults to -1, unit Byte. current min value is 1073741824.
          * @type {number || null}
          */
         this.RetentionBytes = null;
@@ -4221,7 +4700,7 @@ class DeleteAclResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4308,7 +4787,7 @@ class DescribeTopicSubscribeGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4363,7 +4842,7 @@ class DeleteInstancePreResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4403,8 +4882,7 @@ class DatahubTopicResp extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * TopicId
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Topic Id.
          * @type {string || null}
          */
         this.TopicId = null;
@@ -4433,13 +4911,13 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Topic = null;
@@ -4451,7 +4929,7 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
         this.Partition = null;
 
         /**
-         * Offset information, which is required.
+         * Specifies the position information.
          * @type {number || null}
          */
         this.Offset = null;
@@ -4488,7 +4966,7 @@ class InquiryPublicNetworkParam extends  AbstractModel {
         this.PublicNetworkChargeType = null;
 
         /**
-         * Public network bandwidth in MB
+         * Public network bandwidth, in MB. value must be 0 or a multiple of 3.
          * @type {number || null}
          */
         this.PublicNetworkMonthly = null;
@@ -4541,29 +5019,25 @@ class TopicInSyncReplicaInfo extends  AbstractModel {
         this.InSyncReplica = null;
 
         /**
-         * Starting offset
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Start Offset.
          * @type {number || null}
          */
         this.BeginOffset = null;
 
         /**
-         * Ending offset
-Note: this field may return null, indicating that no valid values can be obtained.
+         * End Offset.
          * @type {number || null}
          */
         this.EndOffset = null;
 
         /**
-         * Number of messages
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Message count.
          * @type {number || null}
          */
         this.MessageCount = null;
 
         /**
-         * Unsynced replica set
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unsynced replica.
          * @type {string || null}
          */
         this.OutOfSyncReplica = null;
@@ -4689,8 +5163,7 @@ class UserResponse extends  AbstractModel {
         super();
 
         /**
-         * List of eligible users
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the eligible users list.
          * @type {Array.<User> || null}
          */
         this.Users = null;
@@ -4725,24 +5198,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeGroupInfo request structure.
+ * DescribeCvmInfo response structure.
  * @class
  */
-class DescribeGroupInfoRequest extends  AbstractModel {
+class DescribeCvmInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * (Filter) filter by instance ID.
-         * @type {string || null}
+         * Returned result.
+         * @type {ListCvmAndIpInfoRsp || null}
          */
-        this.InstanceId = null;
+        this.Result = null;
 
         /**
-         * Kafka consumer group (`Consumer-group`), which is an array in the format of `GroupList.0=xxx&GroupList.1=yyy`.
-         * @type {Array.<string> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.GroupList = null;
+        this.RequestId = null;
 
     }
 
@@ -4753,8 +5226,13 @@ class DescribeGroupInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.GroupList = 'GroupList' in params ? params.GroupList : null;
+
+        if (params.Result) {
+            let obj = new ListCvmAndIpInfoRsp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4768,14 +5246,13 @@ class DescribeGroupInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Returned result.
          * @type {Array.<GroupInfoResponse> || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4812,13 +5289,13 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result set
+         * Returned result.
          * @type {JgwOperateResponse || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4852,7 +5329,7 @@ class DescribeDatahubTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * Keyword for query
+         * Search term.
          * @type {string || null}
          */
         this.SearchWord = null;
@@ -4869,6 +5346,24 @@ class DescribeDatahubTopicsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Specifies whether to query the topic list from the connection.
+         * @type {boolean || null}
+         */
+        this.QueryFromConnectResource = null;
+
+        /**
+         * Connection ID.
+         * @type {string || null}
+         */
+        this.ConnectResourceId = null;
+
+        /**
+         * topic resource expression.
+         * @type {string || null}
+         */
+        this.TopicRegularExpression = null;
+
     }
 
     /**
@@ -4881,6 +5376,9 @@ class DescribeDatahubTopicsRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.QueryFromConnectResource = 'QueryFromConnectResource' in params ? params.QueryFromConnectResource : null;
+        this.ConnectResourceId = 'ConnectResourceId' in params ? params.ConnectResourceId : null;
+        this.TopicRegularExpression = 'TopicRegularExpression' in params ? params.TopicRegularExpression : null;
 
     }
 }
@@ -4894,7 +5392,7 @@ class DeleteRouteTriggerTimeResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4922,13 +5420,13 @@ class DescribeUserResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result list
+         * Returned result.
          * @type {UserResponse || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4968,8 +5466,7 @@ class AppIdResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of eligible `AppId`
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the App Id list that meets the requirements.
          * @type {Array.<number> || null}
          */
         this.AppIdList = null;
@@ -4998,7 +5495,7 @@ class DescribeTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5054,13 +5551,13 @@ class DealInstanceDTO extends  AbstractModel {
         super();
 
         /**
-         * Order list.  Note: This field may return null, indicating that no valid values can be obtained.
+         * Order transaction.
          * @type {string || null}
          */
         this.DealName = null;
 
         /**
-         * ID list of the purchased CKafka instances corresponding to the order list.  Note: This field may return null, indicating that no valid values can be obtained.
+         * Order transaction corresponds to the list of purchased CKafka instance ids.
          * @type {Array.<string> || null}
          */
         this.InstanceIdList = null;
@@ -5089,19 +5586,19 @@ class CreatePartitionRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Number of topic partitions
+         * Topic partition count. the input parameter is the number of partitions after modification rather than adding partitions. therefore, the input parameter must exceed the current topic partition count.
          * @type {number || null}
          */
         this.PartitionNum = null;
@@ -5131,7 +5628,7 @@ class Group extends  AbstractModel {
         super();
 
         /**
-         * Group name
+         * Consumer group name.
          * @type {string || null}
          */
         this.GroupName = null;
@@ -5194,7 +5691,7 @@ Stable: each consumer in the consumer group has joined and is in stable state
         this.Members = null;
 
         /**
-         * Kafka consumer group
+         * Consumer group name.
          * @type {string || null}
          */
         this.Group = null;
@@ -5241,7 +5738,7 @@ class DescribeAppInfoResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5281,8 +5778,7 @@ class AclResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * ACL list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * ACL list.
          * @type {Array.<Acl> || null}
          */
         this.AclList = null;
@@ -5349,53 +5845,70 @@ class ZoneResponse extends  AbstractModel {
         this.MessagePrice = null;
 
         /**
-         * Cluster information dedicated to a user
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the user-exclusive cluster info.
          * @type {Array.<ClusterInfo> || null}
          */
         this.ClusterInfo = null;
 
         /**
-         * Purchase of Standard Edition configurations
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Purchase the standard version configuration.
          * @type {string || null}
          */
         this.Standard = null;
 
         /**
-         * Purchase of Standard S2 Edition configurations
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Purchase the standard version S2 configuration.
          * @type {string || null}
          */
         this.StandardS2 = null;
 
         /**
-         * Purchase of Pro Edition configurations
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the configuration for purchasing the professional edition.
          * @type {string || null}
          */
         this.Profession = null;
 
         /**
-         * Purchase of Physical Dedicated Edition configurations
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Purchase physical dedicated edition configuration.
          * @type {string || null}
          */
         this.Physical = null;
 
         /**
-         * Public network bandwidth.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in. abandoned, meaningless.
          * @type {string || null}
          */
         this.PublicNetwork = null;
 
         /**
-         * Public network bandwidth configuration.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Configures the public network bandwidth.
          * @type {string || null}
          */
         this.PublicNetworkLimit = null;
+
+        /**
+         * Request ID.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+        /**
+         * Pagination Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Mandatory. input tag.
+         * @type {boolean || null}
+         */
+        this.ForceCheckTag = null;
 
     }
 
@@ -5444,6 +5957,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Physical = 'Physical' in params ? params.Physical : null;
         this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
         this.PublicNetworkLimit = 'PublicNetworkLimit' in params ? params.PublicNetworkLimit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ForceCheckTag = 'ForceCheckTag' in params ? params.ForceCheckTag : null;
 
     }
 }
@@ -5457,26 +5974,25 @@ class Instance extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * Specifies the Name of the ckafka cluster instance.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Instance status. 0: creating, 1: running, 2: deleting, 5: isolated, -1: creation failed
+         * Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Whether it is an open-source instance. true: yes, false: no
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies whether the instance is open-source. valid values: true (open-source), false (not open-source).
          * @type {boolean || null}
          */
         this.IfCommunity = null;
@@ -5513,7 +6029,7 @@ class DescribeInstanceAttributesResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5553,7 +6069,7 @@ class ModifyPasswordResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5587,8 +6103,7 @@ class TopicDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * List of returned topic details
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of returned topic details.
          * @type {Array.<TopicDetail> || null}
          */
         this.TopicList = null;
@@ -5631,7 +6146,7 @@ class DeleteInstancePreRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5659,7 +6174,7 @@ class DescribeDatahubTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Name
+         * Elastic topic name.
          * @type {string || null}
          */
         this.Name = null;
@@ -5687,8 +6202,7 @@ class Config extends  AbstractModel {
         super();
 
         /**
-         * Message retention period
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Message retention period in milliseconds.
          * @type {number || null}
          */
         this.Retention = null;
@@ -5709,8 +6223,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CleanUpPolicy = null;
 
         /**
-         * Segment rolling duration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Duration of Segment shard scrolling in milliseconds.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SegmentMs = null;
@@ -5723,25 +6237,32 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UncleanLeaderElectionEnable = null;
 
         /**
-         * Number of bytes for segment rolling
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Segment specifies the number of bytes for sharding scroll. unit: bytes.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SegmentBytes = null;
 
         /**
-         * Maximum number of message bytes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Maximum message byte size. unit: bytes.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxMessageBytes = null;
 
         /**
-         * Message retention file size.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the message retention file size in Bytes.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RetentionBytes = null;
+
+        /**
+         * The time type for message saving. CreateTime means the time when the producer created this message. LogAppendTime means the time when the broker received the message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogMsgTimestampType = null;
 
     }
 
@@ -5760,6 +6281,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SegmentBytes = 'SegmentBytes' in params ? params.SegmentBytes : null;
         this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
         this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
+        this.LogMsgTimestampType = 'LogMsgTimestampType' in params ? params.LogMsgTimestampType : null;
 
     }
 }
@@ -5773,13 +6295,13 @@ class ModifyPasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance Id. you can obtain it by calling the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Username
+         * Specifies the username, which can be obtained through the [DescribeUser](https://www.tencentcloud.comom/document/product/597/40855?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Name = null;
@@ -5822,19 +6344,19 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Maximum retention period in minutes for instance log, which can be up to 30 days. 0 indicates not to enable the log retention period policy
+         * Maximum retention time of instance logs, in minutes, with a value range of 1min to 90 days.
          * @type {number || null}
          */
         this.MsgRetentionTime = null;
 
         /**
-         * Instance name string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`)
+         * Specifies the Name of the ckafka cluster instance.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -5852,13 +6374,13 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         this.DynamicRetentionConfig = null;
 
         /**
-         * Modification of the rebalancing time after upgrade
+         * Specifies the execution time of a scheduled task for edition upgrade or configuration upgrade in Unix timestamp, accurate to the second.
          * @type {number || null}
          */
         this.RebalanceTime = null;
 
         /**
-         * Public network bandwidth
+         * Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
          * @type {number || null}
          */
         this.PublicNetwork = null;
@@ -5870,10 +6392,22 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         this.DynamicDiskConfig = null;
 
         /**
-         * The size of a single message in bytes at the instance level.
+         * Single message size at the instance level (unit: byte). value range: 1024 (excluding) to 12582912 (excluding).
          * @type {number || null}
          */
         this.MaxMessageByte = null;
+
+        /**
+         * Whether to allow unsynchronized replicas to be elected as leader. valid values: 1 (enable), 0 (disable).
+         * @type {number || null}
+         */
+        this.UncleanLeaderElectionEnable = null;
+
+        /**
+         * Instance deletion protection switch. 1: enabled; 0: disabled.
+         * @type {number || null}
+         */
+        this.DeleteProtectionEnable = null;
 
     }
 
@@ -5908,6 +6442,8 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
             this.DynamicDiskConfig = obj;
         }
         this.MaxMessageByte = 'MaxMessageByte' in params ? params.MaxMessageByte : null;
+        this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
+        this.DeleteProtectionEnable = 'DeleteProtectionEnable' in params ? params.DeleteProtectionEnable : null;
 
     }
 }
@@ -5921,14 +6457,13 @@ class DescribeRegionResponse extends  AbstractModel {
         super();
 
         /**
-         * List of the returned results of enumerated regions
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Returns the region enumeration result list.
          * @type {Array.<Region> || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5965,31 +6500,31 @@ class DescribeConsumerGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * CKafka instance ID.
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Name of the group to be queried, which is optional.
+         * Specifies the group name you want to query.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * Name of the corresponding topic in the group to be queried, which is optional. If this parameter is specified but `group` is not specified, this parameter will be ignored.
+         * Specifies the corresponding topic name in the group to be queried by the user. if this parameter is specified while the group is unspecified, ignore this parameter.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Number of results to be returned in this request
+         * Returns the limit quantity of the consumption group. supports a maximum of 50.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset position
+         * Specifies the starting offset amount of the consumer group list.
          * @type {number || null}
          */
         this.Offset = null;
@@ -6105,7 +6640,7 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6229,7 +6764,7 @@ class CreateAclRuleResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6258,26 +6793,25 @@ class CreateInstancePostData extends  AbstractModel {
         super();
 
         /**
-         * This parameter has a fixed value of 0 returned by `CreateInstancePre`. It is only used for backend data alignment  and cannot be used as the query condition for `CheckTaskStatus`. 
-Note:  This field may return null, indicating that no valid values can be obtained.
+         * CreateInstancePre returns fixed as 0. it cannot be used as a query condition for CheckTaskStatus. this is merely to ensure alignment with the backend data structure.
          * @type {number || null}
          */
         this.FlowId = null;
 
         /**
-         * List of order IDs Note: This field may return null, indicating that no valid values can be obtained.
+         * Order ID list
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
+         * The ckafka cluster instance Id. by default, returns the Id of the first purchased instance when purchasing multiple instances.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+         * Order and purchase mapping list corresponding to the instance.
          * @type {Array.<DealInstanceDTO> || null}
          */
         this.DealNameInstanceIdMapping = null;
@@ -6308,24 +6842,48 @@ Note:  This field may return null, indicating that no valid values can be obtain
 }
 
 /**
- * DeleteTopic response structure.
+ * DescribeGroupOffsets request structure.
  * @class
  */
-class DeleteTopicResponse extends  AbstractModel {
+class DescribeGroupOffsetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned result set
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Kafka consumer group
+         * @type {string || null}
+         */
+        this.Group = null;
+
+        /**
+         * Array of the names of topics subscribed to by a group. If there is no such array, this parameter means the information of all topics in the specified group
+         * @type {Array.<string> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * Fuzzy match by `topicName`
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Offset position of this query. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of results to be returned in this request. Default value: 50. Maximum value: 50
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -6336,13 +6894,12 @@ class DeleteTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Group = 'Group' in params ? params.Group : null;
+        this.Topics = 'Topics' in params ? params.Topics : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -6356,7 +6913,13 @@ class DeleteRouteTriggerTimeRequest extends  AbstractModel {
         super();
 
         /**
-         * Modification time.
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Modifies the scheduled time for deleting routes.
          * @type {string || null}
          */
         this.DelayTime = null;
@@ -6370,6 +6933,7 @@ class DeleteRouteTriggerTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
 
     }
@@ -6396,8 +6960,7 @@ class GroupOffsetPartition extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Metadata can be passed in for other purposes when the consumer submits messages. Currently, this parameter is usually an empty string
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Supports consumers to submit messages with imported metadata for other purposes, currently an empty string.
          * @type {string || null}
          */
         this.Metadata = null;
@@ -6448,19 +7011,19 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * (Filter) filter by instance ID
+         * (Query condition) filter by the ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * (Filter) filter by instance name. Fuzzy search is supported
+         * Search term. example: (query condition) filter by instance name. fuzzy query is supported.
          * @type {string || null}
          */
         this.SearchWord = null;
 
         /**
-         * (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
+         * Instance status (query condition). valid values: 0: creating, 1: running, 2: deleting, 5: isolated, 7: upgrading. default return: all.
          * @type {Array.<number> || null}
          */
         this.Status = null;
@@ -6484,7 +7047,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * VPC ID.
+         * (Query condition) VPC Id.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -6518,13 +7081,13 @@ class InstanceAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * Specifies the Name of the ckafka cluster instance.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -6548,7 +7111,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.Vport = null;
 
         /**
-         * Instance status. 0: creating, 1: running, 2: deleting
+         * Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
          * @type {number || null}
          */
         this.Status = null;
@@ -6639,108 +7202,166 @@ class InstanceAttributesResponse extends  AbstractModel {
 
         /**
          * Tag array
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
          * Expiration time
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Cross-AZ
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Availability Zone List
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
 
         /**
-         * Kafka version information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the ckafka cluster instance version.
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * Maximum number of groups
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Maximum number of groups.
          * @type {number || null}
          */
         this.MaxGroupNum = null;
 
         /**
-         * Offering type. `0`: Standard Edition; `1`: Professional Edition
-Note: this field may return `null`, indicating that no valid value was found.
+         * Sale type. valid values: 0 (standard version), 1 (pro edition).
          * @type {number || null}
          */
         this.Cvm = null;
 
         /**
-         * Type.
-Note: this field may return `null`, indicating that no valid value was found.
+         * Instance type. valid values:. 
+Specifies the pro edition.    
+Standard version.
+premium. specifies the advanced edition.
+Specifies the serverless version.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Features supported by the instance. `FEATURE_SUBNET_ACL` indicates that the ACL policy supports setting subnets. 
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Indicates the characteristics supported by the instance. FEATURE_SUBNET_ACL means the policy support for configuring subnets.
          * @type {Array.<string> || null}
          */
         this.Features = null;
 
         /**
-         * Dynamic message retention policy
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Dynamic message retention policy.
          * @type {DynamicRetentionTime || null}
          */
         this.RetentionTimeConfig = null;
 
         /**
-         * Maximum number of connections
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Maximum number of connections.
          * @type {number || null}
          */
         this.MaxConnection = null;
 
         /**
          * Public network bandwidth
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PublicNetwork = null;
 
         /**
-         * Time
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the deprecated field with no actual meaning.
          * @type {string || null}
          */
         this.DeleteRouteTimestamp = null;
 
         /**
-         * Number of remaining creatable partitions
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Number of remaining creatable partitions.
          * @type {number || null}
          */
         this.RemainingPartitions = null;
 
         /**
-         * Number of remaining creatable topics
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Number of remaining creatable topics.
          * @type {number || null}
          */
         this.RemainingTopics = null;
 
         /**
-         * Dynamic disk expansion policy.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Scaling policy for dynamic disk.
          * @type {DynamicDiskConfig || null}
          */
         this.DynamicDiskConfig = null;
+
+        /**
+         * Specifies the instance billing type. POSTPAID_BY_HOUR: hourly billing; PREPAID: annual/monthly package.
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Whether to enable the elastic bandwidth allowlist.   
+Indicates the allowlist feature with elastic bandwidth enabled.
+0: elastic bandwidth allowlist feature is disabled.
+         * @type {number || null}
+         */
+        this.ElasticBandwidthSwitch = null;
+
+        /**
+         * Indicates the elastic bandwidth activation status.
+1: indicates elastic bandwidth is disabled.
+Enable elastic bandwidth.
+Enable elastic bandwidth successfully.
+33: disabling elastic bandwidth.
+Indicates that the elastic bandwidth is successfully disabled.
+Enable elastic bandwidth failed.
+Bandwidth failure.
+         * @type {number || null}
+         */
+        this.ElasticBandwidthOpenStatus = null;
+
+        /**
+         * Cluster type.  
+CLOUD_IDC idc cluster.
+CLOUD_CVM_SHARE shared cluster.
+CLOUD_CVM_YUNTI yunti cvm cluster.
+CLOUD_CVM. specifies the cvm cluster.
+CLOUD_CDC cdc cluster.
+CLOUD_EKS_TSE eks cluster.
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Number of free partitions.
+         * @type {number || null}
+         */
+        this.FreePartitionNumber = null;
+
+        /**
+         * Specifies the elastic bandwidth upper limit.
+         * @type {number || null}
+         */
+        this.ElasticFloatBandwidth = null;
+
+        /**
+         * ssl custom certificate id. only returned for instance clusters with custom certificates.
+         * @type {string || null}
+         */
+        this.CustomCertId = null;
+
+        /**
+         * Default unclean.leader.election.enable configuration for cluster topic: 1 enable 0 disable.
+         * @type {number || null}
+         */
+        this.UncleanLeaderElectionEnable = null;
+
+        /**
+         * Instance deletion protection switch. 1: enabled; 0: disabled.
+         * @type {number || null}
+         */
+        this.DeleteProtectionEnable = null;
 
     }
 
@@ -6817,153 +7438,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.DynamicDiskConfig)
             this.DynamicDiskConfig = obj;
         }
-
-    }
-}
-
-/**
- * CreateInstancePost request structure.
- * @class
- */
-class CreateInstancePostRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
-         * @type {number || null}
-         */
-        this.BandWidth = null;
-
-        /**
-         * ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * ID of the subnet  where the default access point of the created instance resides. 
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
-         * @type {number || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
-         * @type {number || null}
-         */
-        this.MsgRetentionTime = null;
-
-        /**
-         * Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
-         * @type {number || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
-         * @type {string || null}
-         */
-        this.KafkaVersion = null;
-
-        /**
-         * Instance type. Valid values: `standard` (Standard Edition),  `profession`  (Pro Edition)
-         * @type {string || null}
-         */
-        this.SpecificationsType = null;
-
-        /**
-         * Instance disk type. Valid values:  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * Instance disk size, which must meet the requirement of the instance’s specification.
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
-         * @type {number || null}
-         */
-        this.TopicNum = null;
-
-        /**
-         * AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Whether the current instance is a multi-AZ instance
-         * @type {boolean || null}
-         */
-        this.MultiZoneFlag = null;
-
-        /**
-         * This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
-         * @type {Array.<number> || null}
-         */
-        this.ZoneIds = null;
-
-        /**
-         * The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
-         * @type {number || null}
-         */
-        this.InstanceNum = null;
-
-        /**
-         * Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`. The value must be an integer multiple of 3.
-         * @type {number || null}
-         */
-        this.PublicNetworkMonthly = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.KafkaVersion = 'KafkaVersion' in params ? params.KafkaVersion : null;
-        this.SpecificationsType = 'SpecificationsType' in params ? params.SpecificationsType : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.MultiZoneFlag = 'MultiZoneFlag' in params ? params.MultiZoneFlag : null;
-        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
-        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
-        this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.ElasticBandwidthSwitch = 'ElasticBandwidthSwitch' in params ? params.ElasticBandwidthSwitch : null;
+        this.ElasticBandwidthOpenStatus = 'ElasticBandwidthOpenStatus' in params ? params.ElasticBandwidthOpenStatus : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.FreePartitionNumber = 'FreePartitionNumber' in params ? params.FreePartitionNumber : null;
+        this.ElasticFloatBandwidth = 'ElasticFloatBandwidth' in params ? params.ElasticFloatBandwidth : null;
+        this.CustomCertId = 'CustomCertId' in params ? params.CustomCertId : null;
+        this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
+        this.DeleteProtectionEnable = 'DeleteProtectionEnable' in params ? params.DeleteProtectionEnable : null;
 
     }
 }
@@ -6977,14 +7460,13 @@ class DescribeDatahubTopicsResponse extends  AbstractModel {
         super();
 
         /**
-         * Topic list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Topic list.
          * @type {DescribeDatahubTopicsResp || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7018,7 +7500,7 @@ class DescribeGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7041,6 +7523,12 @@ class DescribeGroupRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Only supported for GroupState filter criteria. valid values: Empty, Stable. note: this parameter can only be accessed in versions 2.8/3.2.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -7055,16 +7543,24 @@ class DescribeGroupRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * Query filter
->Key-value pair filters for conditional filtering queries, such as filter ID, name, and status
-> * If there are multiple `Filter`, the relationship among them is logical `AND`.
-> * If there are multiple `Values` in the same `Filter`, the relationship among them is logical `OR`.
+ * Query filter.
+Describes the key-value pair filter, which is used for conditional filtering queries. for example, filter by ID, name, and status.
+If there are multiple filters, the logical relationship between them is AND.
+If the same Filter contains multiple Values, the relationship between Values under the same Filter is logical OR.
 >
-
  * @class
  */
 class Filter extends  AbstractModel {
@@ -7113,8 +7609,7 @@ class GroupOffsetResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Array of partitions in the topic, where each element is a JSON object
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The topic partition array, where each element is a json object.
          * @type {Array.<GroupOffsetTopic> || null}
          */
         this.TopicList = null;
@@ -7151,13 +7646,13 @@ class BatchCreateAclResponse extends  AbstractModel {
         super();
 
         /**
-         * Status code.
+         * Status code: 0 - modification succeeded, otherwise modification failed.
          * @type {number || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7178,6 +7673,75 @@ class BatchCreateAclResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroupRoutes request structure.
+ * @class
+ */
+class DescribeSecurityGroupRoutesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the routing information.
+         * @type {InstanceRoute || null}
+         */
+        this.InstanceRoute = null;
+
+        /**
+         * Filter.
+         * @type {Array.<RouteFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Specifies the pagination Offset. default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination Limit. default: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Keyword. specifies fuzzy search by instance id, instance name, or vip.
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceRoute) {
+            let obj = new InstanceRoute();
+            obj.deserialize(params.InstanceRoute)
+            this.InstanceRoute = obj;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RouteFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+
+    }
+}
+
+/**
  * ModifyInstancePre response structure.
  * @class
  */
@@ -7192,7 +7756,7 @@ class ModifyInstancePreResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7226,7 +7790,7 @@ class CreateUserRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7311,13 +7875,13 @@ class DeleteRouteRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique instance ID.
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Route ID.
+         * Route id, obtain through the API [DescribeRoute](https://www.tencentcloud.comom/document/product/597/45484?from_cn_redirect=1).
          * @type {number || null}
          */
         this.RouteId = null;
@@ -7329,7 +7893,7 @@ class DeleteRouteRequest extends  AbstractModel {
         this.CallerAppid = null;
 
         /**
-         * The time when a route was deleted.
+         * Sets the scheduled deletion time for routes. only public network routes support scheduled deletion. available for any time within the next 24 hours.
          * @type {string || null}
          */
         this.DeleteRouteTime = null;
@@ -7366,7 +7930,7 @@ class DeleteTopicIpWhiteListResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7392,18 +7956,24 @@ class DeleteTopicIpWhiteListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTaskStatus request structure.
+ * CreateInstancePre response structure.
  * @class
  */
-class DescribeTaskStatusRequest extends  AbstractModel {
+class CreateInstancePreResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique task ID
-         * @type {number || null}
+         * Returned result.
+         * @type {CreateInstancePreResp || null}
          */
-        this.FlowId = null;
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -7414,7 +7984,55 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+        if (params.Result) {
+            let obj = new CreateInstancePreResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CVM and IP information.
+ * @class
+ */
+class CvmAndIpInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ckafka cluster instance Id.
+         * @type {string || null}
+         */
+        this.CkafkaInstanceId = null;
+
+        /**
+         * CVM instance ID (ins-test) or POD IP (10.0.0.30).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * IP address.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CkafkaInstanceId = 'CkafkaInstanceId' in params ? params.CkafkaInstanceId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
 
     }
 }
@@ -7527,6 +8145,83 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
 }
 
 /**
+ * Region entity object
+ * @class
+ */
+class Region extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Area name
+         * @type {string || null}
+         */
+        this.AreaName = null;
+
+        /**
+         * Region code.
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * Region code (V3 version).
+         * @type {string || null}
+         */
+        this.RegionCodeV3 = null;
+
+        /**
+         * Specifies the default value does not support any special type instance type.
+         * @type {string || null}
+         */
+        this.Support = null;
+
+        /**
+         * Whether ipv6 is supported. 0: indicates no support. 1: indicates support.
+         * @type {number || null}
+         */
+        this.Ipv6 = null;
+
+        /**
+         * Whether cross-az is supported. valid values: 0 (unsupported), 1 (supported).
+         * @type {number || null}
+         */
+        this.MultiZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.AreaName = 'AreaName' in params ? params.AreaName : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.RegionCodeV3 = 'RegionCodeV3' in params ? params.RegionCodeV3 : null;
+        this.Support = 'Support' in params ? params.Support : null;
+        this.Ipv6 = 'Ipv6' in params ? params.Ipv6 : null;
+        this.MultiZone = 'MultiZone' in params ? params.MultiZone : null;
+
+    }
+}
+
+/**
  * CreateConsumer request structure.
  * @class
  */
@@ -7535,25 +8230,25 @@ class CreateConsumerRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Group name.
+         * Consumer group name.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * Topic name. You must specify the name of an existing topic for either `TopicName` or `TopicNameList`.
+         * Topic name. one of TopicName or TopicNameList must display a specified existing topic name.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Topic name array.
+         * Topic name list.
          * @type {Array.<string> || null}
          */
         this.TopicNameList = null;
@@ -7584,13 +8279,13 @@ class InquireCkafkaPriceResponse extends  AbstractModel {
         super();
 
         /**
-         * Output parameters
+         * Returned result.
          * @type {InquireCkafkaPriceResp || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7630,7 +8325,7 @@ class CreateDatahubTopicResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7670,7 +8365,7 @@ class CreatePostPaidInstanceResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7691,6 +8386,34 @@ class CreatePostPaidInstanceResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RouteDTO
+ * @class
+ */
+class RouteDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Route ID
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
 
     }
 }
@@ -7788,7 +8511,7 @@ class SendMessageResponse extends  AbstractModel {
         this.MessageId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7817,36 +8540,31 @@ class InquiryBasePrice extends  AbstractModel {
         super();
 
         /**
-         * Original unit price
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Original price unit.
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * Discounted unit price
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Discount unit price.
          * @type {number || null}
          */
         this.UnitPriceDiscount = null;
 
         /**
-         * Original price in total
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total original price.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discounted price in total
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total discount price.
          * @type {number || null}
          */
         this.DiscountPrice = null;
 
         /**
-         * Discount (%)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Discount (unit: %).
          * @type {number || null}
          */
         this.Discount = null;
@@ -7887,8 +8605,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TimeUnit = null;
 
         /**
-         * Purchase quantity
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Purchase quantity.
          * @type {number || null}
          */
         this.Value = null;
@@ -7932,7 +8649,7 @@ class DescribeCkafkaZoneResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7972,7 +8689,7 @@ class BatchModifyGroupOffsetsRequest extends  AbstractModel {
         this.GroupName = null;
 
         /**
-         * Instance name.
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8015,89 +8732,24 @@ class BatchModifyGroupOffsetsRequest extends  AbstractModel {
 }
 
 /**
- * Returned topic attributes result entity
+ * CVM and IP information list.
  * @class
  */
-class TopicAttributesResponse extends  AbstractModel {
+class ListCvmAndIpInfoRsp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic ID
-         * @type {string || null}
+         * cvm and IP list.
+         * @type {Array.<CvmAndIpInfo> || null}
          */
-        this.TopicId = null;
+        this.CvmList = null;
 
         /**
-         * Creation time
+         * Specifies the instance data volume.
          * @type {number || null}
          */
-        this.CreateTime = null;
-
-        /**
-         * Topic remarks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Note = null;
-
-        /**
-         * Number of partitions
-         * @type {number || null}
-         */
-        this.PartitionNum = null;
-
-        /**
-         * IP allowlist switch. 1: enabled, 0: disabled
-         * @type {number || null}
-         */
-        this.EnableWhiteList = null;
-
-        /**
-         * IP allowlist list
-         * @type {Array.<string> || null}
-         */
-        this.IpWhiteList = null;
-
-        /**
-         * Topic configuration array
-         * @type {Config || null}
-         */
-        this.Config = null;
-
-        /**
-         * Partition details
-         * @type {Array.<TopicPartitionDO> || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Switch of the preset ACL rule. `1`: enable, `0`: disable.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EnableAclRule = null;
-
-        /**
-         * Preset ACL rule list.
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {Array.<AclRule> || null}
-         */
-        this.AclRuleList = null;
-
-        /**
-         * Traffic throttling policy in topic dimension.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {InstanceQuotaConfigResp || null}
-         */
-        this.QuotaConfig = null;
-
-        /**
-         * Number of replicas
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ReplicaNum = null;
+        this.TotalCount = null;
 
     }
 
@@ -8108,44 +8760,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Note = 'Note' in params ? params.Note : null;
-        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
-        this.EnableWhiteList = 'EnableWhiteList' in params ? params.EnableWhiteList : null;
-        this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
 
-        if (params.Config) {
-            let obj = new Config();
-            obj.deserialize(params.Config)
-            this.Config = obj;
-        }
-
-        if (params.Partitions) {
-            this.Partitions = new Array();
-            for (let z in params.Partitions) {
-                let obj = new TopicPartitionDO();
-                obj.deserialize(params.Partitions[z]);
-                this.Partitions.push(obj);
+        if (params.CvmList) {
+            this.CvmList = new Array();
+            for (let z in params.CvmList) {
+                let obj = new CvmAndIpInfo();
+                obj.deserialize(params.CvmList[z]);
+                this.CvmList.push(obj);
             }
         }
-        this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.AclRuleList) {
-            this.AclRuleList = new Array();
-            for (let z in params.AclRuleList) {
-                let obj = new AclRule();
-                obj.deserialize(params.AclRuleList[z]);
-                this.AclRuleList.push(obj);
-            }
+    }
+}
+
+/**
+ * CreateRoute response structure.
+ * @class
+ */
+class CreateRouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <P>Returned result.</p>.
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
-        if (params.QuotaConfig) {
-            let obj = new InstanceQuotaConfigResp();
-            obj.deserialize(params.QuotaConfig)
-            this.QuotaConfig = obj;
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
-        this.ReplicaNum = 'ReplicaNum' in params ? params.ReplicaNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8159,15 +8823,13 @@ class InstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * List of eligible instances
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the list of instances meeting the conditions.
          * @type {Array.<Instance> || null}
          */
         this.InstanceList = null;
 
         /**
-         * Total number of eligible results
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Total results that meet the conditions.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8228,7 +8890,7 @@ class DatahubTopicDTO extends  AbstractModel {
         this.PartitionNum = null;
 
         /**
-         * Expiration time
+         * Expiration time in milliseconds.
          * @type {number || null}
          */
         this.RetentionMs = null;
@@ -8266,31 +8928,24 @@ class DatahubTopicDTO extends  AbstractModel {
 }
 
 /**
- * Returned result value of operation
+ * DescribeGroupInfo request structure.
  * @class
  */
-class JgwOperateResponse extends  AbstractModel {
+class DescribeGroupInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned code. 0: normal, other values: error
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
-        this.ReturnCode = null;
+        this.InstanceId = null;
 
         /**
-         * Success message
-         * @type {string || null}
+         * Kafka group list. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
+         * @type {Array.<string> || null}
          */
-        this.ReturnMessage = null;
-
-        /**
-         * Data returned by an operation, which may contain `flowId`, etc.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {OperateResponseData || null}
-         */
-        this.Data = null;
+        this.GroupList = null;
 
     }
 
@@ -8301,14 +8956,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
-
-        if (params.Data) {
-            let obj = new OperateResponseData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupList = 'GroupList' in params ? params.GroupList : null;
 
     }
 }
@@ -8322,7 +8971,7 @@ class DescribeGroup extends  AbstractModel {
         super();
 
         /**
-         * groupId
+         * Consumer group name.
          * @type {string || null}
          */
         this.Group = null;
@@ -8357,13 +9006,13 @@ class TopicPartitionDO extends  AbstractModel {
         super();
 
         /**
-         * Partition ID
+         * Partition ID. specifies the Partition ID.
          * @type {number || null}
          */
         this.Partition = null;
 
         /**
-         * Leader running status
+         * Leader running status. 0 means running normally.
          * @type {number || null}
          */
         this.LeaderStatus = null;
@@ -8440,7 +9089,7 @@ class TaskStatusResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Output information Note: This field may return null, indicating that no valid values can be obtained.
+         * Output information.
          * @type {string || null}
          */
         this.Output = null;
@@ -8469,7 +9118,7 @@ class BatchModifyTopicInfo extends  AbstractModel {
         super();
 
         /**
-         * Topic name.
+         * Topic name
          * @type {string || null}
          */
         this.TopicName = null;
@@ -8517,13 +9166,13 @@ class BatchModifyTopicInfo extends  AbstractModel {
         this.RetentionMs = null;
 
         /**
-         * Message retention size in topic dimension. Value range: 1 MB - 1024 GB.
+         * Specifies the message retention size in the topic dimension in bytes. value range: 1 GB to 1024 GB.
          * @type {number || null}
          */
         this.RetentionBytes = null;
 
         /**
-         * Segment rolling duration in milliseconds. Value range: 1-90 days.
+         * Duration of Segment shard scrolling in milliseconds. value range: 1 day to 90 days.
          * @type {number || null}
          */
         this.SegmentMs = null;
@@ -8533,6 +9182,12 @@ class BatchModifyTopicInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.MaxMessageBytes = null;
+
+        /**
+         * Specifies the time type for message storage: CreateTime/LogAppendTime.
+         * @type {string || null}
+         */
+        this.LogMsgTimestampType = null;
 
     }
 
@@ -8554,6 +9209,7 @@ class BatchModifyTopicInfo extends  AbstractModel {
         this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
         this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
         this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
+        this.LogMsgTimestampType = 'LogMsgTimestampType' in params ? params.LogMsgTimestampType : null;
 
     }
 }
@@ -8573,7 +9229,7 @@ class DescribeRouteResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -8613,7 +9269,7 @@ class ModifyDatahubTopicResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -8674,6 +9330,69 @@ class BatchContent extends  AbstractModel {
 }
 
 /**
+ * DescribeTypeInstances request structure.
+ * @class
+ */
+class DescribeTypeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * (Filter condition) filter by instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * (Filter condition) filter by instance name. fuzzy query is supported.
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Instance status (filter condition). valid values: 0: creating, 1: running, 2: deleting. default return: all.
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+        /**
+         * Offset. default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. default: 10. maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Matches the Tag key.
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+
+    }
+}
+
+/**
  * Response parameters for instance price query
  * @class
  */
@@ -8682,50 +9401,43 @@ class InquiryPrice extends  AbstractModel {
         super();
 
         /**
-         * Original unit price
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Original price unit.
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * Discounted unit price
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Discount unit price.
          * @type {number || null}
          */
         this.UnitPriceDiscount = null;
 
         /**
-         * Original price in total
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total original price.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discounted price in total
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total discount price.
          * @type {number || null}
          */
         this.DiscountPrice = null;
 
         /**
-         * Discount (%)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Discount (unit: %).
          * @type {number || null}
          */
         this.Discount = null;
 
         /**
-         * Number of purchased items
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of products
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Currency for payment
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the payment currency.
          * @type {string || null}
          */
         this.Currency = null;
@@ -8738,15 +9450,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DiskType = null;
 
         /**
-         * Validity period
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Purchase duration.
          * @type {number || null}
          */
         this.TimeSpan = null;
 
         /**
-         * Unit of the validity period (`m`: Month; `h`: Hour)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the purchase duration unit ("m" for monthly, "h" for hourly).
          * @type {string || null}
          */
         this.TimeUnit = null;
@@ -8804,15 +9514,13 @@ class TopicResult extends  AbstractModel {
         super();
 
         /**
-         * List of returned topic information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of returned topic information.
          * @type {Array.<Topic> || null}
          */
         this.TopicList = null;
 
         /**
-         * Number of eligible topics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Number of eligible topics.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8849,7 +9557,7 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8867,7 +9575,7 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20. This value must be greater than 0
+         * Number of returned results. default: 20. value must be above 0.
          * @type {number || null}
          */
         this.Limit = null;
@@ -8877,6 +9585,24 @@ class DescribeTopicDetailRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.AclRuleName = null;
+
+        /**
+         * Sorts based on specific attributes (currently supports PartitionNum/CreateTime). default value: CreateTime.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 0 - sequential, 1 - reverse order. default value: 0.
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * Currently supports ReplicaNum (number of replicas) filter criteria.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -8892,6 +9618,17 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -8905,13 +9642,13 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result object
+         * Returned result.
          * @type {GroupOffsetResponse || null}
          */
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -9020,8 +9757,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Value = null;
 
         /**
-         * Message timestamp
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Message timestamp.
          * @type {number || null}
          */
         this.Timestamp = null;
@@ -9062,25 +9798,25 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         super();
 
         /**
-         * Kafka instance ID
+         * ckafka cluster instance Id. obtain through the API [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Kafka consumer group
+         * Consumer group name. obtain through the API [DescribeConsumerGroup](https://www.tencentcloud.comom/document/product/597/40841?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Group = null;
 
         /**
-         * Offset resetting policy. Meanings of the input parameters: 0: equivalent to the `shift-by` parameter, which indicates to shift the offset forward or backward by the value of the `shift`. 1: equivalent to `by-duration`, `to-datetime`, `to-earliest`, or `to-latest`, which indicates to move the offset to the specified timestamp. 2: equivalent to `to-offset`, which indicates to move the offset to the specified offset position
+         * Reset offset strategy. parameter meaning: 0. align with the shift-by parameter, move the offset forward or backward by shift entries. 1. alignment reference (by-duration, to-datetime, to-earliest, to-latest), move the offset to the specified timestamp position. 2. alignment reference (to-offset), move the offset to the specified offset position.
          * @type {number || null}
          */
         this.Strategy = null;
 
         /**
-         * Indicates the topics to be reset. If this parameter is left empty, all topics will be reset
+         * Specifies the topic name list that needs to reset.
          * @type {Array.<string> || null}
          */
         this.Topics = null;
@@ -9092,7 +9828,7 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         this.Shift = null;
 
         /**
-         * Unit: ms. When `strategy` is 1, this field is required, where -2 indicates to reset the offset to the initial position, -1 indicates to reset to the latest position (equivalent to emptying), and other values represent the specified time, i.e., the offset of the topic at the specified time will be obtained and then reset. Note that if there is no message at the specified time, the last offset will be obtained
+         * In milliseconds. when strategy is 1, must include this field. among them, -2 means reset offset to the start position, -1 means reset to the latest position (equivalent to clearing), other values represent the specified time. obtain the offset at the specified time in the topic and reset. notably, if no message exists at the specified time, get the last offset.
          * @type {number || null}
          */
         this.ShiftTimestamp = null;
@@ -9139,13 +9875,13 @@ class BatchModifyTopicAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic attribute list
+         * Specifies the topic attribute list (a maximum of 10 per batch), which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {Array.<BatchModifyTopicInfo> || null}
          */
         this.Topic = null;
@@ -9182,19 +9918,19 @@ class CreateTopicIpWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * IP allowlist list
+         * Allowlist list. maximum value is 512. upper limit for incoming ips is 512.
          * @type {Array.<string> || null}
          */
         this.IpWhiteList = null;
@@ -9240,7 +9976,7 @@ class Route extends  AbstractModel {
         this.RouteId = null;
 
         /**
-         * VIP network type (1: Public network TGW; 2: Classic network; 3: VPC; 4: Supporting network (IDC environment); 5: SSL public network access; 6: BM VPC; 7: Supporting network (CVM environment)).
+         * Specifies the network type of the route (3: vpc routing; 7: internal support route; 1: public network route).
          * @type {number || null}
          */
         this.VipType = null;
@@ -9266,11 +10002,44 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DomainPort = null;
 
         /**
-         * Timestamp
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Timestamp.
          * @type {string || null}
          */
         this.DeleteTimestamp = null;
+
+        /**
+         * Specifies the subnet Id.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Subnet = null;
+
+        /**
+         * Virtual IP list (1:1 broker node).
+         * @type {Array.<VipEntity> || null}
+         */
+        this.BrokerVipList = null;
+
+        /**
+         * VPC Id. specifies the Id of the vpc.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Route status. 1: creating, 2: creation succeeded, 3: creation failed, 4: deleting, 6: deletion failed.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -9296,41 +10065,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
         this.DeleteTimestamp = 'DeleteTimestamp' in params ? params.DeleteTimestamp : null;
+        this.Subnet = 'Subnet' in params ? params.Subnet : null;
+
+        if (params.BrokerVipList) {
+            this.BrokerVipList = new Array();
+            for (let z in params.BrokerVipList) {
+                let obj = new VipEntity();
+                obj.deserialize(params.BrokerVipList[z]);
+                this.BrokerVipList.push(obj);
+            }
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
 
 /**
- * Four pieces of information of ACL rules: source IP address, destination IP address, source port, and destination port
+ * FetchMessageListByTimestamp response structure.
  * @class
  */
-class AclRuleInfo extends  AbstractModel {
+class FetchMessageListByTimestampResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ACL operation types. Enumerated values: `All` (all operations), `Read` (read), `Write` (write).
-         * @type {string || null}
+         * Returned results. note that the list does not return specific message content (key, value). if necessary, please use the FetchMessageByOffset API to query specific message content.
+         * @type {Array.<ConsumerRecord> || null}
          */
-        this.Operation = null;
+        this.Result = null;
 
         /**
-         * Permission types: `Deny`, `Allow`.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PermissionType = null;
-
-        /**
-         * The default value is `*`, which means that any host can access the topic. CKafka currently does not support specifying a host value of * or an IP range.
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * The list of users allowed to access the topic. Default value: `User:*`, which means all users. The current user must be in the user list. Add the prefix `User:` before the user name (`User:A`, for example).
-         * @type {string || null}
-         */
-        this.Principal = null;
+        this.RequestId = null;
 
     }
 
@@ -9341,10 +10111,56 @@ class AclRuleInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.PermissionType = 'PermissionType' in params ? params.PermissionType : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.Principal = 'Principal' in params ? params.Principal : null;
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ConsumerRecord();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteInstancePost response structure.
+ * @class
+ */
+class DeleteInstancePostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result.
+         * @type {InstanceDeleteResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InstanceDeleteResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9370,15 +10186,13 @@ class Acl extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * User list. The default value is `User:*`, which means that any user can access. The current user can only be one included in the user list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of users, defaults to User:*, means any User is accessible in the entire region. the current User can only be the User in the list of users.
          * @type {string || null}
          */
         this.Principal = null;
 
         /**
-         * The default value is `*`, which means that any host can access. Currently, CKafka does not support the host as `*`, but the future product based on the open-source Kafka will directly support this
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Defaults to *, indicating any host is accessible in the entire region. currently, ckafka does not support * as the host, however, the following open-source kafka productization will directly support it.
          * @type {string || null}
          */
         this.Host = null;
@@ -9423,22 +10237,19 @@ class TopicRetentionTimeConfigRsp extends  AbstractModel {
         super();
 
         /**
-         * Expected value, i.e., the topic message retention time (min) configured
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Expected value, the message retention period (in minutes) set by user configuration.
          * @type {number || null}
          */
         this.Expect = null;
 
         /**
-         * Current value (min), i.e., the retention time currently in effect, which may be dynamically adjusted
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Current value, which is the current effective value (may contain dynamic adjustment in minutes).
          * @type {number || null}
          */
         this.Current = null;
 
         /**
-         * Last modified time
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Last modified time.
          * @type {number || null}
          */
         this.ModTimeStamp = null;
@@ -9468,7 +10279,7 @@ class ModifyDatahubTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Name
+         * Elastic topic name.
          * @type {string || null}
          */
         this.Name = null;
@@ -9525,13 +10336,13 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name.
+         * Topic name
          * @type {string || null}
          */
         this.TopicName = null;
@@ -9567,16 +10378,16 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.RetentionMs = null;
 
         /**
-         * Segment rolling duration in ms. The current minimum value is 86,400,000 ms.
-         * @type {number || null}
-         */
-        this.SegmentMs = null;
-
-        /**
          * Max message size in bytes. Max value: 8,388,608 bytes (8 MB).
          * @type {number || null}
          */
         this.MaxMessageBytes = null;
+
+        /**
+         * Duration of Segment shard scrolling in milliseconds. current min value is 86400000 ms.
+         * @type {number || null}
+         */
+        this.SegmentMs = null;
 
         /**
          * Message deletion policy. Valid values: delete, compact
@@ -9597,7 +10408,7 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.EnableAclRule = null;
 
         /**
-         * Name of the preset ACL rule.
+         * ACL rule name.
          * @type {string || null}
          */
         this.AclRuleName = null;
@@ -9615,19 +10426,19 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Production throttling in MB/sec.
+         * Production traffic throttling in MB/s. set to -1 to disable throttling.
          * @type {number || null}
          */
         this.QuotaProducerByteRate = null;
 
         /**
-         * Consumption throttling in MB/sec.
+         * Consumption traffic throttling in MB/s. set to -1 for unlimited consumption.
          * @type {number || null}
          */
         this.QuotaConsumerByteRate = null;
 
         /**
-         * The number of topic replicas.
+         * Number of topic replicas. valid values: 1, 3.
          * @type {number || null}
          */
         this.ReplicaNum = null;
@@ -9648,8 +10459,8 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.MinInsyncReplicas = 'MinInsyncReplicas' in params ? params.MinInsyncReplicas : null;
         this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
         this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
-        this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
         this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
+        this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
         this.CleanUpPolicy = 'CleanUpPolicy' in params ? params.CleanUpPolicy : null;
         this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
         this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
@@ -9686,7 +10497,7 @@ class CreateTopicResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -9712,6 +10523,189 @@ class CreateTopicResponse extends  AbstractModel {
 }
 
 /**
+ * CreateInstancePre request structure.
+ * @class
+ */
+class CreateInstancePreRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the ckafka cluster instance Name, an arbitrary string with length no more than 128 characters.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Availability zone. when purchasing a multi-availability zone instance, this parameter specifies the primary az. [view availability zones](https://www.tencentcloud.comom/document/product/597/55246?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Prepaid purchase duration, such as "1m", exactly one month. value ranges from 1m to 36m.
+         * @type {string || null}
+         */
+        this.Period = null;
+
+        /**
+         * Specifies the standard edition instance specification for the international site. currently only the international site standard edition uses the current field to distinguish specifications, while the domestic site standard edition distinguishes specifications by peak bandwidth. fill in 1 for all instances except the international site standard edition. for international site standard edition instances: [entry-level (general)] fill 1; [standard type (standard)] fill 2; [advanced] fill 3; [capacity type (capacity)] fill 4; [advanced type 1 (specialized-1)] fill 5; [advanced type 2 (specialized-2)] fill 6; [advanced type 3 (specialized-3)] fill 7; [advanced type 4 (specialized-4)] fill 8.
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * VPC Id.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Optional. maximum retention time of instance logs, in minutes. default value: 1440 (1 day). value range: 1 minute to 90 days.
+         * @type {number || null}
+         */
+        this.MsgRetentionTime = null;
+
+        /**
+         * Specifies the cluster Id when creating an instance.
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Auto-Renewal tag for prepaid services. valid values: 0 (default state, not set by the user, initial status), 1 (auto-renew), 2 (explicitly no auto-renew, set by the user).
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Specifies the CKafka version number. valid values: 2.4.1, 2.4.2, 2.8.1, 3.2.3. default value 2.4.1. 2.4.1 and 2.4.2 belong to the same version. any can be passed.
+         * @type {string || null}
+         */
+        this.KafkaVersion = null;
+
+        /**
+         * Specifies the instance type. valid values: standard (default), profession, premium.
+         * @type {string || null}
+         */
+        this.SpecificationsType = null;
+
+        /**
+         * Disk size. if it does not match the console specification ratio, the creation cannot succeed. default value is 500. step length is set to 100. can be accessed through the following link: https://www.tencentcloud.comom/document/product/597/122562.?from_cn_redirect=1
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Instance bandwidth. default value: 40 MB/s. minimum value: 20 MB/s. maximum value for advanced edition: 360 MB/s. maximum value for pro edition: 100000 MB/s. standard version fixed bandwidth specifications: 40 MB/s, 100 MB/s, 150 MB/s. view billing specifications through the following link: https://www.tencentcloud.comom/document/product/597/11745.?from_cn_redirect=1
+         * @type {number || null}
+         */
+        this.BandWidth = null;
+
+        /**
+         * Partition size. if it does not match the console specification ratio, creation will fail. default value is 800, step length is 100. billing specifications can be viewed through the following link: https://www.tencentcloud.comom/document/product/597/122563.?from_cn_redirect=1
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Tag.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Specifies the disk type for a pro/advanced edition instance. you do not need to fill it in for a standard edition instance. valid values: "CLOUD_SSD" for SSD CLOUD disk; "CLOUD_BASIC" for high-performance CLOUD block storage. default value: "CLOUD_BASIC".
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Specifies whether to create a cross-az instance. when the current parameter is true, zoneIds is required.
+         * @type {boolean || null}
+         */
+        this.MultiZoneFlag = null;
+
+        /**
+         * Availability zone list. required item when purchasing a multi-availability zone instance.
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Public network bandwidth size, in Mbps. the default is no free 3 Mbps bandwidth. for example, for a total of 3 Mbps public network bandwidth, pass 0 here; for a total of 6 Mbps public network bandwidth, pass 3 here. default value is 0. ensure the input parameter is a multiple of 3.
+         * @type {number || null}
+         */
+        this.PublicNetworkMonthly = null;
+
+        /**
+         * Number of instances to purchase. optional. default value is 1. when you input this parameter, it enables the creation of multiple instances with case-sensitive suffixes added to instanceName.
+         * @type {number || null}
+         */
+        this.InstanceNum = null;
+
+        /**
+         * Whether to automatically select a voucher. valid values: 1 (yes), 0 (no). default is 0.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Elastic bandwidth switch. specifies whether to enable elastic bandwidth. valid values: 0 (not enabled, default), 1 (enabled).
+         * @type {number || null}
+         */
+        this.ElasticBandwidthSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.KafkaVersion = 'KafkaVersion' in params ? params.KafkaVersion : null;
+        this.SpecificationsType = 'SpecificationsType' in params ? params.SpecificationsType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.MultiZoneFlag = 'MultiZoneFlag' in params ? params.MultiZoneFlag : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.ElasticBandwidthSwitch = 'ElasticBandwidthSwitch' in params ? params.ElasticBandwidthSwitch : null;
+
+    }
+}
+
+/**
  * DeleteTopicIpWhiteList request structure.
  * @class
  */
@@ -9720,13 +10714,13 @@ class DeleteTopicIpWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id, which can be obtained through the [DescribeInstances](https://www.tencentcloud.comom/document/product/597/40835?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Topic name
+         * Specifies the topic name, which can be obtained through the [DescribeTopic](https://www.tencentcloud.comom/document/product/597/40847?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.TopicName = null;
@@ -9754,48 +10748,24 @@ class DeleteTopicIpWhiteListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGroupOffsets request structure.
+ * DeleteTopic response structure.
  * @class
  */
-class DescribeGroupOffsetsRequest extends  AbstractModel {
+class DeleteTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * (Filter) filter by instance ID
+         * Returned result set
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Kafka consumer group
-         * @type {string || null}
-         */
-        this.Group = null;
-
-        /**
-         * Array of the names of topics subscribed to by a group. If there is no such array, this parameter means the information of all topics in the specified group
-         * @type {Array.<string> || null}
-         */
-        this.Topics = null;
-
-        /**
-         * Fuzzy match by `topicName`
-         * @type {string || null}
-         */
-        this.SearchWord = null;
-
-        /**
-         * Offset position of this query. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of results to be returned in this request. Default value: 50. Maximum value: 50
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -9806,12 +10776,13 @@ class DescribeGroupOffsetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Group = 'Group' in params ? params.Group : null;
-        this.Topics = 'Topics' in params ? params.Topics : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9849,14 +10820,13 @@ class DescribeDatahubTopicResp extends  AbstractModel {
         this.PartitionNum = null;
 
         /**
-         * Expiration time
+         * Expiration time in milliseconds.
          * @type {number || null}
          */
         this.RetentionMs = null;
 
         /**
-         * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Remarks.
          * @type {string || null}
          */
         this.Note = null;
@@ -9880,8 +10850,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Status = null;
 
         /**
-         * Service routing address
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the service routing address.
          * @type {string || null}
          */
         this.Address = null;
@@ -9910,6 +10879,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeTaskStatus request structure.
+ * @class
+ */
+class DescribeTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  * DescribeUser request structure.
  * @class
  */
@@ -9918,7 +10915,7 @@ class DescribeUserRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9930,13 +10927,13 @@ class DescribeUserRequest extends  AbstractModel {
         this.SearchWord = null;
 
         /**
-         * Offset
+         * Offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned in this request
+         * The number of returns.
          * @type {number || null}
          */
         this.Limit = null;
@@ -9973,8 +10970,7 @@ class DescribeDatahubTopicsResp extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Topic list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Topic list.
          * @type {Array.<DatahubTopicDTO> || null}
          */
         this.TopicList = null;
@@ -10029,7 +11025,7 @@ class DescribeTopicSyncReplicaRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * Number of returned results. default value: 20. must be greater than 0.
          * @type {number || null}
          */
         this.Limit = null;
@@ -10067,13 +11063,13 @@ class InstanceDetail extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ckafka cluster instance Id.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * CKafka cluster instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -10097,7 +11093,7 @@ class InstanceDetail extends  AbstractModel {
         this.VipList = null;
 
         /**
-         * Instance status. 0: creating, 1: running, 2: deleting, 5: isolated, -1: creation failed
+         * Instance status. 0: creating, 1: running, 2: deleting, 3: deleted, 5: isolated, 7: upgrading, -1: creation failed.
          * @type {number || null}
          */
         this.Status = null;
@@ -10109,7 +11105,7 @@ class InstanceDetail extends  AbstractModel {
         this.Bandwidth = null;
 
         /**
-         * Instance storage capacity in GB
+         * Specifies the ckafka cluster instance disk size in gb.
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -10181,92 +11177,79 @@ class InstanceDetail extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Kafka version information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * kafka version information.
          * @type {string || null}
          */
         this.Version = null;
 
         /**
-         * Cross-AZ
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cross-Availability zone.
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
 
         /**
-         * CKafka sale type
-Note: this field may return null, indicating that no valid values can be obtained.
+         * ckafka sales type.
          * @type {number || null}
          */
         this.Cvm = null;
 
         /**
-         * CKafka instance type
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the cluster instance type of ckafka.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * Disk type
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Specifies the ckafka cluster instance disk type.
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * Maximum number of topics for the current instance
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Maximum number of topics for current specifications.
          * @type {number || null}
          */
         this.MaxTopicNumber = null;
 
         /**
-         * Maximum number of partitions for the current instance
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Maximum number of partitions for current specifications.
          * @type {number || null}
          */
         this.MaxPartitionNumber = null;
 
         /**
-         * Time of scheduled upgrade
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * Scheduled configuration upgrade time.
          * @type {string || null}
          */
         this.RebalanceTime = null;
 
         /**
-         * Number of partitions in the current instance.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the number of partitions in the current instance.
          * @type {number || null}
          */
         this.PartitionNumber = null;
 
         /**
-         * Public network bandwidth type.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the public network bandwidth type of the ckafka cluster instance.
          * @type {string || null}
          */
         this.PublicNetworkChargeType = null;
 
         /**
-         * Public network bandwidth.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Public network bandwidth. minimum 3 Mbps. maximum 999 Mbps. only the pro edition supports filling in.
          * @type {number || null}
          */
         this.PublicNetwork = null;
 
         /**
-         * Instance type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the underlying cluster type of the ckafka cluster instance.
          * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
          * Instance feature list.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Features = null;
@@ -10384,7 +11367,7 @@ class DescribeTopicDetailResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -10424,22 +11407,19 @@ class SubscribedInfo extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Subscribed partition
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the subscription partition.
          * @type {Array.<number> || null}
          */
         this.Partition = null;
 
         /**
-         * Partition offset information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the partition offset information.
          * @type {Array.<PartitionOffset> || null}
          */
         this.PartitionOffset = null;
 
         /**
-         * ID of the subscribed topic. 
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Subscribed topic ID.
          * @type {string || null}
          */
         this.TopicId = null;
@@ -10484,8 +11464,7 @@ class AclRuleResp extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * ACL rule list
-Note: This field may return null, indicating that no valid values can be obtained.
+         * AclRule list.
          * @type {Array.<AclRule> || null}
          */
         this.AclRuleList = null;
@@ -10507,6 +11486,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new AclRule();
                 obj.deserialize(params.AclRuleList[z]);
                 this.AclRuleList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Security group routing information returned results.
+ * @class
+ */
+class SecurityGroupRouteResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of eligible security group routes.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Eligible security group route information list.
+         * @type {Array.<SecurityGroupRoute> || null}
+         */
+        this.SecurityGroupRoutes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SecurityGroupRoutes) {
+            this.SecurityGroupRoutes = new Array();
+            for (let z in params.SecurityGroupRoutes) {
+                let obj = new SecurityGroupRoute();
+                obj.deserialize(params.SecurityGroupRoutes[z]);
+                this.SecurityGroupRoutes.push(obj);
             }
         }
 
@@ -10548,16 +11570,51 @@ class Price extends  AbstractModel {
     }
 }
 
+/**
+ * Instance route.
+ * @class
+ */
+class InstanceRoute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ckafka cluster instance Id.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Route ID
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+
+    }
+}
+
 module.exports = {
     TopicDetail: TopicDetail,
     DeleteAclRequest: DeleteAclRequest,
-    CreateInstancePostResponse: CreateInstancePostResponse,
     GroupInfoMember: GroupInfoMember,
-    RouteDTO: RouteDTO,
+    AclRuleInfo: AclRuleInfo,
     BatchCreateAclRequest: BatchCreateAclRequest,
     DeleteUserRequest: DeleteUserRequest,
     PartitionOffset: PartitionOffset,
     DescribeACLRequest: DescribeACLRequest,
+    InstanceDeleteResponse: InstanceDeleteResponse,
     BatchModifyTopicResultDTO: BatchModifyTopicResultDTO,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
     DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
@@ -10567,7 +11624,9 @@ module.exports = {
     DescribeAclRuleResponse: DescribeAclRuleResponse,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
     InquiryDetailPrice: InquiryDetailPrice,
+    FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     InquireCkafkaPriceResp: InquireCkafkaPriceResp,
+    CreateRouteRequest: CreateRouteRequest,
     DeleteTopicRequest: DeleteTopicRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
@@ -10575,31 +11634,36 @@ module.exports = {
     CreateInstancePreResp: CreateInstancePreResp,
     GroupInfoTopics: GroupInfoTopics,
     FetchMessageListByOffsetRequest: FetchMessageListByOffsetRequest,
-    Region: Region,
+    DescribeSecurityGroupRoutesResponse: DescribeSecurityGroupRoutesResponse,
     ModifyInstancePreRequest: ModifyInstancePreRequest,
     CreateAclRuleRequest: CreateAclRuleRequest,
+    RouteFilter: RouteFilter,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     CreateInstancePreData: CreateInstancePreData,
     AclRule: AclRule,
     DescribeAclRuleRequest: DescribeAclRuleRequest,
     DescribeACLResponse: DescribeACLResponse,
     DynamicDiskConfig: DynamicDiskConfig,
+    JgwOperateResponse: JgwOperateResponse,
     InquireCkafkaPriceRequest: InquireCkafkaPriceRequest,
     ZoneInfo: ZoneInfo,
     DescribeTopicSubscribeGroupResponse: DescribeTopicSubscribeGroupResponse,
     DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
     SaleInfo: SaleInfo,
     Topic: Topic,
+    DescribeTypeInstancesResponse: DescribeTypeInstancesResponse,
     Tag: Tag,
     ModifyAclRuleResponse: ModifyAclRuleResponse,
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
+    SecurityGroupRoute: SecurityGroupRoute,
     GroupResponse: GroupResponse,
+    FetchMessageListByTimestampRequest: FetchMessageListByTimestampRequest,
     CreateDatahubTopicRequest: CreateDatahubTopicRequest,
     InstanceChargeParam: InstanceChargeParam,
     CreateInstancePostResp: CreateInstancePostResp,
     DescribeDatahubTopicResponse: DescribeDatahubTopicResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
-    FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
+    DescribeCvmInfoRequest: DescribeCvmInfoRequest,
     CreateConsumerResponse: CreateConsumerResponse,
     CreatePostPaidInstanceRequest: CreatePostPaidInstanceRequest,
     RouteResponse: RouteResponse,
@@ -10610,8 +11674,10 @@ module.exports = {
     CreateUserResponse: CreateUserResponse,
     DescribeRouteRequest: DescribeRouteRequest,
     CreatePartitionResponse: CreatePartitionResponse,
+    TopicAttributesResponse: TopicAttributesResponse,
     TopicSubscribeGroup: TopicSubscribeGroup,
     ClusterInfo: ClusterInfo,
+    DeleteInstancePostRequest: DeleteInstancePostRequest,
     DeleteUserResponse: DeleteUserResponse,
     DescribeTopicProduceConnectionRequest: DescribeTopicProduceConnectionRequest,
     CreateAclRequest: CreateAclRequest,
@@ -10639,7 +11705,7 @@ module.exports = {
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
-    DescribeGroupInfoRequest: DescribeGroupInfoRequest,
+    DescribeCvmInfoResponse: DescribeCvmInfoResponse,
     DescribeGroupInfoResponse: DescribeGroupInfoResponse,
     ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
     DescribeDatahubTopicsRequest: DescribeDatahubTopicsRequest,
@@ -10672,38 +11738,42 @@ module.exports = {
     User: User,
     CreateAclRuleResponse: CreateAclRuleResponse,
     CreateInstancePostData: CreateInstancePostData,
-    DeleteTopicResponse: DeleteTopicResponse,
+    DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
     GroupOffsetPartition: GroupOffsetPartition,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
-    CreateInstancePostRequest: CreateInstancePostRequest,
     DescribeDatahubTopicsResponse: DescribeDatahubTopicsResponse,
     DescribeGroupRequest: DescribeGroupRequest,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
     BatchCreateAclResponse: BatchCreateAclResponse,
+    DescribeSecurityGroupRoutesRequest: DescribeSecurityGroupRoutesRequest,
     ModifyInstancePreResponse: ModifyInstancePreResponse,
     CreateUserRequest: CreateUserRequest,
     InstanceDetailResponse: InstanceDetailResponse,
     DeleteRouteRequest: DeleteRouteRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
-    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    CreateInstancePreResponse: CreateInstancePreResponse,
+    CvmAndIpInfo: CvmAndIpInfo,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
+    Region: Region,
     CreateConsumerRequest: CreateConsumerRequest,
     InquireCkafkaPriceResponse: InquireCkafkaPriceResponse,
     CreateDatahubTopicResponse: CreateDatahubTopicResponse,
     CreatePostPaidInstanceResponse: CreatePostPaidInstanceResponse,
+    RouteDTO: RouteDTO,
     InquiryDiskParam: InquiryDiskParam,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     SendMessageResponse: SendMessageResponse,
     InquiryBasePrice: InquiryBasePrice,
     DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     BatchModifyGroupOffsetsRequest: BatchModifyGroupOffsetsRequest,
-    TopicAttributesResponse: TopicAttributesResponse,
+    ListCvmAndIpInfoRsp: ListCvmAndIpInfoRsp,
+    CreateRouteResponse: CreateRouteResponse,
     InstanceResponse: InstanceResponse,
     DatahubTopicDTO: DatahubTopicDTO,
-    JgwOperateResponse: JgwOperateResponse,
+    DescribeGroupInfoRequest: DescribeGroupInfoRequest,
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
@@ -10712,6 +11782,7 @@ module.exports = {
     DescribeRouteResponse: DescribeRouteResponse,
     ModifyDatahubTopicResponse: ModifyDatahubTopicResponse,
     BatchContent: BatchContent,
+    DescribeTypeInstancesRequest: DescribeTypeInstancesRequest,
     InquiryPrice: InquiryPrice,
     TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
@@ -10722,15 +11793,18 @@ module.exports = {
     BatchModifyTopicAttributesRequest: BatchModifyTopicAttributesRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
-    AclRuleInfo: AclRuleInfo,
+    FetchMessageListByTimestampResponse: FetchMessageListByTimestampResponse,
+    DeleteInstancePostResponse: DeleteInstancePostResponse,
     Acl: Acl,
     TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     ModifyDatahubTopicRequest: ModifyDatahubTopicRequest,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,
+    CreateInstancePreRequest: CreateInstancePreRequest,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
-    DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
+    DeleteTopicResponse: DeleteTopicResponse,
     DescribeDatahubTopicResp: DescribeDatahubTopicResp,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     DescribeUserRequest: DescribeUserRequest,
     DescribeDatahubTopicsResp: DescribeDatahubTopicsResp,
     DescribeTopicSyncReplicaRequest: DescribeTopicSyncReplicaRequest,
@@ -10739,6 +11813,8 @@ module.exports = {
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
     SubscribedInfo: SubscribedInfo,
     AclRuleResp: AclRuleResp,
+    SecurityGroupRouteResp: SecurityGroupRouteResp,
     Price: Price,
+    InstanceRoute: InstanceRoute,
 
 }

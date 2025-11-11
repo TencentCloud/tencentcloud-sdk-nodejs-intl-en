@@ -23,18 +23,22 @@ const CreateIVRSessionRequest = models.CreateIVRSessionRequest;
 const EventStaffElement = models.EventStaffElement;
 const CreateSDKLoginTokenResponse = models.CreateSDKLoginTokenResponse;
 const ModifyStaffRequest = models.ModifyStaffRequest;
+const DescribeAIAgentInfoListResponse = models.DescribeAIAgentInfoListResponse;
 const DescribeIvrAudioListResponse = models.DescribeIvrAudioListResponse;
 const DescribePredictiveDialingCampaignsElement = models.DescribePredictiveDialingCampaignsElement;
+const SetStaffStatusResponse = models.SetStaffStatusResponse;
 const ServerPushText = models.ServerPushText;
 const ResetExtensionPasswordRequest = models.ResetExtensionPasswordRequest;
 const DisableCCCPhoneNumberResponse = models.DisableCCCPhoneNumberResponse;
 const DescribeProtectedTelCdrResponse = models.DescribeProtectedTelCdrResponse;
 const DescribeAutoCalloutTaskRequest = models.DescribeAutoCalloutTaskRequest;
+const CalleeAttribute = models.CalleeAttribute;
 const CreateUserSigResponse = models.CreateUserSigResponse;
 const CreateAICallRequest = models.CreateAICallRequest;
 const CreateAdminURLResponse = models.CreateAdminURLResponse;
 const PausePredictiveDialingCampaignRequest = models.PausePredictiveDialingCampaignRequest;
 const CreateCallOutSessionResponse = models.CreateCallOutSessionResponse;
+const AIAgentInfo = models.AIAgentInfo;
 const DisableCCCPhoneNumberRequest = models.DisableCCCPhoneNumberRequest;
 const ModifyStaffPasswordResponse = models.ModifyStaffPasswordResponse;
 const ControlAIConversationResponse = models.ControlAIConversationResponse;
@@ -138,6 +142,7 @@ const Variable = models.Variable;
 const CallInNumberMetrics = models.CallInNumberMetrics;
 const CreateExtensionRequest = models.CreateExtensionRequest;
 const StaffSkillGroupList = models.StaffSkillGroupList;
+const SetStaffStatusRequest = models.SetStaffStatusRequest;
 const ResetExtensionPasswordResponse = models.ResetExtensionPasswordResponse;
 const ForwardingTarget = models.ForwardingTarget;
 const ForwardingConfig = models.ForwardingConfig;
@@ -167,16 +172,18 @@ const BindStaffSkillGroupListRequest = models.BindStaffSkillGroupListRequest;
 const CreateAgentCruiseDialingCampaignResponse = models.CreateAgentCruiseDialingCampaignResponse;
 const ModifyOwnNumberApplyResponse = models.ModifyOwnNumberApplyResponse;
 const UnbindStaffSkillGroupListRequest = models.UnbindStaffSkillGroupListRequest;
+const SetStaffStatusItem = models.SetStaffStatusItem;
 const DescribeCallInMetricsResponse = models.DescribeCallInMetricsResponse;
 const DescribeAgentCruiseDialingCampaignResponse = models.DescribeAgentCruiseDialingCampaignResponse;
 const CreateAICallResponse = models.CreateAICallResponse;
 const CreateIVRSessionResponse = models.CreateIVRSessionResponse;
+const InvokeLLM = models.InvokeLLM;
 const HangUpCallRequest = models.HangUpCallRequest;
 const ClientInfo = models.ClientInfo;
 const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
 const DescribeStaffStatusMetricsRequest = models.DescribeStaffStatusMetricsRequest;
 const DeleteStaffResponse = models.DeleteStaffResponse;
-const CalleeAttribute = models.CalleeAttribute;
+const DescribeAIAgentInfoListRequest = models.DescribeAIAgentInfoListRequest;
 const StaffStatusExtra = models.StaffStatusExtra;
 const DescribeStaffStatusHistoryRequest = models.DescribeStaffStatusHistoryRequest;
 const CreateStaffRequest = models.CreateStaffRequest;
@@ -188,6 +195,7 @@ const StaffStatus = models.StaffStatus;
 const AIAnalysisResult = models.AIAnalysisResult;
 const DescribeAutoCalloutTasksRequest = models.DescribeAutoCalloutTasksRequest;
 const DescribeTelSessionResponse = models.DescribeTelSessionResponse;
+const SetStaffStatusRspItem = models.SetStaffStatusRspItem;
 const CreateAdminURLRequest = models.CreateAdminURLRequest;
 const DescribeAutoCalloutTaskResponse = models.DescribeAutoCalloutTaskResponse;
 const DescribeStaffStatusMetricsResponse = models.DescribeStaffStatusMetricsResponse;
@@ -472,6 +480,17 @@ Before initiating a call, please ensure your AI model is compatible with OpenAI,
     }
 
     /**
+     * This API is used to set staff status.
+     * @param {SetStaffStatusRequest} req
+     * @param {function(string, SetStaffStatusResponse):void} cb
+     * @public
+     */
+    SetStaffStatus(req, cb) {
+        let resp = new SetStaffStatusResponse();
+        this.request("SetStaffStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to access telephone consumption statistics by instance.
      * @param {DescribeTelCallInfoRequest} req
      * @param {function(string, DescribeTelCallInfoResponse):void} cb
@@ -649,6 +668,17 @@ This API is used to make calls. Currently, the agent side can only call the user
     CreateAgentCruiseDialingCampaign(req, cb) {
         let resp = new CreateAgentCruiseDialingCampaignResponse();
         this.request("CreateAgentCruiseDialingCampaign", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of Intelligent Agents.
+     * @param {DescribeAIAgentInfoListRequest} req
+     * @param {function(string, DescribeAIAgentInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAIAgentInfoList(req, cb) {
+        let resp = new DescribeAIAgentInfoListResponse();
+        this.request("DescribeAIAgentInfoList", req, resp, cb);
     }
 
     /**

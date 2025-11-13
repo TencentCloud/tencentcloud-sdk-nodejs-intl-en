@@ -1190,7 +1190,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). value range:<br>
+         * Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://www.tencentcloud.com/document/product/362/31636). value range:<br>
 <li>LOCAL_BASIC: Local SATA disk</li>
 <li>LOCAL_SSD: Local NVMe SSD</li>
 <li>CLOUD_BASIC: Cloud SATA disk</li>
@@ -1206,7 +1206,7 @@ Default value: Current disk types with inventory available.
 
         /**
          * System disk ID.
-Currently, this parameter is only used for response parameters in query apis such as [DescribeInstances](https://www.tencentcloud.comom/document/product/213/15728?from_cn_redirect=1) and is not applicable to request parameters in write apis such as [RunInstances](https://www.tencentcloud.comom/document/product/213/15730?from_cn_redirect=1).
+Currently, this parameter is only used for response parameters in query apis such as [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258) and is not applicable to request parameters in write apis such as [RunInstances](https://www.tencentcloud.com/document/api/213/33237).
          * @type {string || null}
          */
         this.DiskId = null;
@@ -1389,13 +1389,13 @@ class AllocateHostsRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
+         * Not supported. Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
          * @type {ChargePrepaid || null}
          */
         this.HostChargePrepaid = null;
 
         /**
-         * Instance billing model, only monthly or yearly subscription supported. Default value: `PREPAID'.
+         * Instance [billing type](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). <br><li>`POSTPAID_BY_HOUR`: Hourly-based pay-as-you-go <br>
          * @type {string || null}
          */
         this.HostChargeType = null;
@@ -2516,6 +2516,12 @@ class EnterRescueModeRequest extends  AbstractModel {
          */
         this.ForceStop = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StopType = null;
+
     }
 
     /**
@@ -2529,6 +2535,7 @@ class EnterRescueModeRequest extends  AbstractModel {
         this.Password = 'Password' in params ? params.Password : null;
         this.Username = 'Username' in params ? params.Username : null;
         this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+        this.StopType = 'StopType' in params ? params.StopType : null;
 
     }
 }
@@ -3462,13 +3469,13 @@ class Placement extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Instance'S project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1). default value 0 means default project.
+         * Instance'S project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProject](https://www.tencentcloud.com/document/product/651/54679). default value 0 means default project.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Specifies the dedicated host ID list for instance ownership, only used for input parameters. if you purchase a dedicated host and specify this parameter, instances you purchase will be randomly deployed on these dedicated hosts. obtain this parameter by calling the `HostId` field in the return value of [DescribeHosts](https://www.tencentcloud.comom/document/api/213/16474?from_cn_redirect=1).
+         * Specifies the dedicated host ID list for instance ownership, only used for input parameters. if you purchase a dedicated host and specify this parameter, instances you purchase will be randomly deployed on these dedicated hosts. obtain this parameter by calling the `HostId` field in the return value of [DescribeHosts](https://www.tencentcloud.com/document/product/213/33279?lang=en).
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -6036,7 +6043,7 @@ Note: this field is null in postpaid mode.
         this.LoginSettings = null;
 
         /**
-         * Instance status. for specific status types, see the instance status table (https://www.tencentcloud.comom/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
+         * Instance status. for specific status types, see the  [instance status table](https://www.tencentcloud.com/document/product/213/15753#instancestatus)
          * @type {string || null}
          */
         this.InstanceState = null;
@@ -7465,6 +7472,12 @@ class InquiryPriceResetInstanceRequest extends  AbstractModel {
          */
         this.EnhancedService = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.UserData = null;
+
     }
 
     /**
@@ -7494,6 +7507,7 @@ class InquiryPriceResetInstanceRequest extends  AbstractModel {
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
         }
+        this.UserData = 'UserData' in params ? params.UserData : null;
 
     }
 }
@@ -8408,8 +8422,7 @@ Only applicable to accounts, regions, and billing modes (annual/monthly subscrip
         this.LoginSettings = null;
 
         /**
-         * Security group to which an instance belongs. obtain this parameter by calling the `SecurityGroupId` field in the return value of [DescribeSecurityGroups](https://www.tencentcloud.comom/document/api/215/15808?from_cn_redirect=1). if not specified, bind the default security group under the designated project. if the default security group does not exist, automatically create it.
-
+         * Security group to which an instance belongs. obtain this parameter by calling the `SecurityGroupId` field in the return value of [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808?from_search=1). if not specified, bind the default security group under the designated project. if the default security group does not exist, automatically create it.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -8522,7 +8535,7 @@ If the dry run succeeds, the RequestId will be returned.
         this.DisableApiTermination = null;
 
         /**
-         * Whether the instance enables jumbo frames. valid values:<br><li/> true: means the instance enables jumbo frames. only models supporting jumbo frames can be set to true.<br><li/> false: means the instance disables jumbo frames. only models supporting jumbo frames can be set to false.<br> instance specifications supporting jumbo frames: [instance specifications](https://www.tencentcloud.comom/document/product/213/11518?from_cn_redirect=1).
+         * Whether the instance enables jumbo frames. valid values:<br><li/> true: means the instance enables jumbo frames. only models supporting jumbo frames can be set to true.<br><li/> false: means the instance disables jumbo frames. only models supporting jumbo frames can be set to false.<br> instance specifications supporting jumbo frames: [instance specifications](https://www.tencentcloud.com/document/product/213/11518?lang=en&pg=).
          * @type {boolean || null}
          */
         this.EnableJumboFrame = null;
@@ -12103,13 +12116,13 @@ class VirtualPrivateCloud extends  AbstractModel {
         super();
 
         /**
-         * vpc ID, such as `vpc-xxx`. valid vpc ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc?rid=1) or by calling the API [DescribeVpcs](https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1) and obtaining the `VpcId` field from the API response. if both VpcId and SubnetId are input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
+         * vpc ID, such as `vpc-xxx`. valid vpc ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc?rid=1) or by calling the API [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778?lang=en) and obtaining the `VpcId` field from the API response. if both VpcId and SubnetId are input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * vpc subnet ID, in the form of `subnet-xxx`. valid vpc subnet ids can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/subnet?rid=1); or they can be obtained from the `SubnetId` field in the API response by calling the DescribeSubnets API (https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1). if SubnetId and VpcId are both input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
+         * vpc subnet ID, in the form of `subnet-xxx`. valid vpc subnet ids can be queried by logging in to the [console](https://console.tencentcloud.com/vpc/subnet); or they can be obtained from the `SubnetId` field in the API response by calling the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784) API . if SubnetId and VpcId are both input as `DEFAULT` when creating an instance, the DEFAULT vpc network will be forcibly used.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -12188,27 +12201,26 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
+         * Instance ID to be operated. can be obtained from the `InstanceId` in the return value from the DescribeInstances api (https://www.tencentcloud.comom/document/api/213/15728?from_cn_redirect=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Configuration information of a data disk to be expanded. Only inelastic data disks (with `Portable` being `false` in the return values of [DescribeDisks](https://intl.cloud.tencent.com/document/api/362/16315?from_cn_redirect=1)) can be expanded. The unit of data disk capacity is GB. The minimum expansion step is 10 GB. For more information about data disk types, refer to [Disk Product Introduction](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). The available data disk type is restricted by the instance type `InstanceType`. Additionally, the maximum allowable capacity for expansion varies by data disk type.
+         * Specifies the configuration information of the data disk to be expanded, only supporting specifying the target capacity of the disk to be expanded. only non-elastic data disks (with `Portable` being `false` in the return values of [DescribeDisks](https://www.tencentcloud.comom/document/api/362/16315?from_cn_redirect=1)) can be expanded. the unit of data disk capacity is GiB. the minimum expansion step is 10 GiB. for data disk type selection, refer to [disk product introduction](https://www.tencentcloud.comom/document/product/362/2353?from_cn_redirect=1). the available data disk type is restricted by the instance type `InstanceType`. additionally, the maximum allowable capacity for expansion varies by data disk type.
 <dx-alert infotype="explain" title="">You should specify either DataDisks or SystemDisk, but you cannot specify both at the same time.</dx-alert>
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * Whether to forcibly shut down a running instance. It is recommended to manually shut down a running instance first and then reset the user password. Valid values:<br><li>true: Forcibly shut down an instance after a normal shutdown fails.</li><br><li>false: Do not forcibly shut down an instance after a normal shutdown fails.</li><br><br>Default value: false.<br><br>Forced shutdown is equivalent to turning off a physical computer's power switch. Forced shutdown may cause data loss or file system corruption and should only be used when a server cannot be shut down normally.
+         * Specifies whether to forcibly shut down a running instance. it is recommended to manually shut down a running instance first and then expand the instance disk. valid values:<br><li>true: forcibly shut down an instance after a normal shutdown fails.</li><br><li>false: do not forcibly shut down an instance after a normal shutdown fails.</li><br><br>default value: false.<br><br>forced shutdown is equivalent to turning off a physical computer's power switch. forced shutdown may cause data loss or file system corruption and should only be used when a server cannot be shut down normally.
          * @type {boolean || null}
          */
         this.ForceStop = null;
 
         /**
-         * Configuration information of a system disk to be expanded. Only cloud disks can be expanded.
-
+         * System disk configuration information to be expanded. only supports specifying the purpose capacity of the disk to be expanded. only supports cloud disk expansion.
 <dx-alert infotype="explain" title="">You should specify either DataDisks or SystemDisk, but you cannot specify both at the same time.</dx-alert>
          * @type {SystemDisk || null}
          */
@@ -12427,7 +12439,7 @@ class InternetAccessible extends  AbstractModel {
         this.BandwidthPackageId = null;
 
         /**
-         * Line type. for details on various types of lines and supported regions, refer to [EIP IP address types](https://www.tencentcloud.comom/document/product/1199/41646?from_cn_redirect=1). default value: BGP.
+         * Line type. for details on various types of lines and supported regions, refer to [EIP IP address types](https://cloud.tencent.com/document/product/1199/41646). default value: BGP.
 <Li>BGP: specifies the general bgp line.</li>.
 For a user with static single-line IP allowlist enabled, valid values include:.
 <Li>CMCC: china mobile.</li>.

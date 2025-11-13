@@ -1221,7 +1221,6 @@ This API is used to ensure your account balance is sufficient for renewal. You c
 
     /**
      * This API is used to create CDH instances with specified configuration.
-* When HostChargeType is PREPAID, the HostChargePrepaid parameter must be specified.
      * @param {AllocateHostsRequest} req
      * @param {function(string, AllocateHostsResponse):void} cb
      * @public

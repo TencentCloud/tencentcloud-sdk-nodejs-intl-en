@@ -3216,7 +3216,7 @@ class TimingSettingsReq extends  AbstractModel {
         super();
 
         /**
-         * Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`. This parameter is required if `EventType` is `INPUT_SWITCH`.
+         * Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`,`FIXED_PTS `. This parameter is required if `EventType` is `INPUT_SWITCH`.
          * @type {string || null}
          */
         this.StartType = null;
@@ -3242,6 +3242,12 @@ It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`)
          */
         this.EndTime = null;
 
+        /**
+         * Effective only when StartType is FIXED_PTS, with a range of 1-8589934592
+         * @type {number || null}
+         */
+        this.PTS = null;
+
     }
 
     /**
@@ -3255,6 +3261,7 @@ It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`)
         this.Time = 'Time' in params ? params.Time : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PTS = 'PTS' in params ? params.PTS : null;
 
     }
 }
@@ -4085,6 +4092,12 @@ class EventSettingsResp extends  AbstractModel {
         this.InputAttachment = null;
 
         /**
+         * When the type is FIXED_PTS, it is mandatory and defaults to 0
+         * @type {number || null}
+         */
+        this.PipelineId = null;
+
+        /**
          * Name of the output group attached. This parameter is not empty if `EventType` is `TIMED_RECORD`.
          * @type {string || null}
          */
@@ -4155,6 +4168,7 @@ class EventSettingsResp extends  AbstractModel {
         }
         this.EventType = 'EventType' in params ? params.EventType : null;
         this.InputAttachment = 'InputAttachment' in params ? params.InputAttachment : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
         this.OutputGroupName = 'OutputGroupName' in params ? params.OutputGroupName : null;
         this.ManifestName = 'ManifestName' in params ? params.ManifestName : null;
 
@@ -5858,6 +5872,12 @@ class EventSettingsReq extends  AbstractModel {
         this.InputAttachment = null;
 
         /**
+         * When the type is FIXED_PTS, it is mandatory and defaults to 0
+         * @type {number || null}
+         */
+        this.PipelineId = null;
+
+        /**
          * Name of the output group to attach. This parameter is required if `EventType` is `TIMED_RECORD`.
          * @type {string || null}
          */
@@ -5928,6 +5948,7 @@ class EventSettingsReq extends  AbstractModel {
         }
         this.EventType = 'EventType' in params ? params.EventType : null;
         this.InputAttachment = 'InputAttachment' in params ? params.InputAttachment : null;
+        this.PipelineId = 'PipelineId' in params ? params.PipelineId : null;
         this.OutputGroupName = 'OutputGroupName' in params ? params.OutputGroupName : null;
         this.ManifestName = 'ManifestName' in params ? params.ManifestName : null;
 
@@ -7041,6 +7062,12 @@ It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:0
          */
         this.EndTime = null;
 
+        /**
+         * Effective only when StartType is FIXED_PTS, with a range of 1-8589934592
+         * @type {number || null}
+         */
+        this.PTS = null;
+
     }
 
     /**
@@ -7054,6 +7081,7 @@ It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:0
         this.Time = 'Time' in params ? params.Time : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PTS = 'PTS' in params ? params.PTS : null;
 
     }
 }

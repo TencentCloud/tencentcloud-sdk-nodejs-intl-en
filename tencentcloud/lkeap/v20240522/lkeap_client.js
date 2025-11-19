@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateSplitDocumentFlowRequest = models.CreateSplitDocumentFlowRequest;
 const ReconstructDocumentSSEResponse = models.ReconstructDocumentSSEResponse;
+const GetEmbeddingRequest = models.GetEmbeddingRequest;
 const GetReconstructDocumentResultRequest = models.GetReconstructDocumentResultRequest;
 const Usage = models.Usage;
 const CreateSplitDocumentFlowResponse = models.CreateSplitDocumentFlowResponse;
@@ -31,11 +32,13 @@ const CreateReconstructDocumentFlowRequest = models.CreateReconstructDocumentFlo
 const GetSplitDocumentResultResponse = models.GetSplitDocumentResultResponse;
 const ReconstructDocumentFailedPage = models.ReconstructDocumentFailedPage;
 const SplitDocumentFailedPage = models.SplitDocumentFailedPage;
+const GetEmbeddingResponse = models.GetEmbeddingResponse;
 const QueryRewriteRequest = models.QueryRewriteRequest;
 const CreateSplitDocumentFlowConfig = models.CreateSplitDocumentFlowConfig;
 const RunRerankResponse = models.RunRerankResponse;
 const CreateReconstructDocumentFlowResponse = models.CreateReconstructDocumentFlowResponse;
 const GetSplitDocumentResultRequest = models.GetSplitDocumentResultRequest;
+const EmbeddingObject = models.EmbeddingObject;
 const Message = models.Message;
 const QueryRewriteResponse = models.QueryRewriteResponse;
 
@@ -128,6 +131,17 @@ There is a call limit for single-account for this API. If you need to increase t
     CreateSplitDocumentFlow(req, cb) {
         let resp = new CreateSplitDocumentFlowResponse();
         this.request("CreateSplitDocumentFlow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to call the text representation model to convert text into a vector represented by numbers, which can be used in scenarios such as text retrieval, information recommendation, and knowledge mining. There is a single-account call limit control for this API. If you need to increase the concurrency limit, please contact us (https://cloud.tencent.com/act/event/Online_service).
+     * @param {GetEmbeddingRequest} req
+     * @param {function(string, GetEmbeddingResponse):void} cb
+     * @public
+     */
+    GetEmbedding(req, cb) {
+        let resp = new GetEmbeddingResponse();
+        this.request("GetEmbedding", req, resp, cb);
     }
 
 

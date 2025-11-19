@@ -38,6 +38,7 @@ const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const WordPolygon = models.WordPolygon;
 const FlightItem = models.FlightItem;
 const Value = models.Value;
+const RecognizeDetectCardCoordsResponse = models.RecognizeDetectCardCoordsResponse;
 const SealInfo = models.SealInfo;
 const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
 const RecognizeKoreanDrivingLicenseOCRRequest = models.RecognizeKoreanDrivingLicenseOCRRequest;
@@ -45,6 +46,7 @@ const BrazilRNMInfo = models.BrazilRNMInfo;
 const OtherInvoiceItem = models.OtherInvoiceItem;
 const SmartStructuralProRequest = models.SmartStructuralProRequest;
 const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
+const RecognizeDetectCardCoordsRequest = models.RecognizeDetectCardCoordsRequest;
 const VatInvoiceItemInfo = models.VatInvoiceItemInfo;
 const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
 const RecognizeBrazilCommonOCRRequest = models.RecognizeBrazilCommonOCRRequest;
@@ -63,7 +65,7 @@ const RecognizeGeneralInvoiceRequest = models.RecognizeGeneralInvoiceRequest;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const OtherInvoice = models.OtherInvoice;
-const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
+const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
 const BankCardOCRRequest = models.BankCardOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
 const Key = models.Key;
@@ -137,6 +139,7 @@ const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const RecognizeBrazilDriverLicenseOCRResponse = models.RecognizeBrazilDriverLicenseOCRResponse;
 const BrazilCardInfo = models.BrazilCardInfo;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
+const CoordsItem = models.CoordsItem;
 const VinOCRRequest = models.VinOCRRequest;
 const BrazilRNEInfo = models.BrazilRNEInfo;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
@@ -144,7 +147,7 @@ const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRR
 const RecognizeThaiPinkCardRequest = models.RecognizeThaiPinkCardRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const RecognizeThaiPinkCardResponse = models.RecognizeThaiPinkCardResponse;
-const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
+const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 
 
 /**
@@ -305,6 +308,17 @@ A maximum of 2 requests can be initiated per second for this API.
     RecognizeTableAccurateOCR(req, cb) {
         let resp = new RecognizeTableAccurateOCRResponse();
         this.request("RecognizeTableAccurateOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize the coordinates of four corners of cards.
+     * @param {RecognizeDetectCardCoordsRequest} req
+     * @param {function(string, RecognizeDetectCardCoordsResponse):void} cb
+     * @public
+     */
+    RecognizeDetectCardCoords(req, cb) {
+        let resp = new RecognizeDetectCardCoordsResponse();
+        this.request("RecognizeDetectCardCoords", req, resp, cb);
     }
 
     /**

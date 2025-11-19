@@ -16,50 +16,83 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const SpanLog = models.SpanLog;
+const DescribeApmAssociationResponse = models.DescribeApmAssociationResponse;
 const ModifyApmInstanceRequest = models.ModifyApmInstanceRequest;
 const ApmInstanceDetail = models.ApmInstanceDetail;
 const CreateApmInstanceRequest = models.CreateApmInstanceRequest;
 const ModifyGeneralApmApplicationConfigRequest = models.ModifyGeneralApmApplicationConfigRequest;
-const DescribeServiceOverviewResponse = models.DescribeServiceOverviewResponse;
+const DescribeApmServiceMetricRequest = models.DescribeApmServiceMetricRequest;
+const CreateApmPrometheusRuleRequest = models.CreateApmPrometheusRuleRequest;
 const QueryMetricItem = models.QueryMetricItem;
-const TerminateApmInstanceRequest = models.TerminateApmInstanceRequest;
+const ModifyApmPrometheusRuleRequest = models.ModifyApmPrometheusRuleRequest;
+const ModifyGeneralApmApplicationConfigResponse = models.ModifyGeneralApmApplicationConfigResponse;
 const DescribeApmInstancesResponse = models.DescribeApmInstancesResponse;
+const AgentOperationConfigView = models.AgentOperationConfigView;
 const Instrument = models.Instrument;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
+const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
+const DescribeApmPrometheusRuleResponse = models.DescribeApmPrometheusRuleResponse;
+const ServiceDetail = models.ServiceDetail;
 const Span = models.Span;
 const ApmAgentInfo = models.ApmAgentInfo;
-const DescribeGeneralSpanListResponse = models.DescribeGeneralSpanListResponse;
+const TerminateApmInstanceRequest = models.TerminateApmInstanceRequest;
+const ApmApplicationConfigView = models.ApmApplicationConfigView;
 const ApmMetricRecord = models.ApmMetricRecord;
 const DescribeServiceOverviewRequest = models.DescribeServiceOverviewRequest;
+const DescribeApmSampleConfigResponse = models.DescribeApmSampleConfigResponse;
 const DescribeApmAgentResponse = models.DescribeApmAgentResponse;
-const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
+const CreateApmSampleConfigRequest = models.CreateApmSampleConfigRequest;
+const DescribeApmSampleConfigRequest = models.DescribeApmSampleConfigRequest;
+const ModifyApmInstanceResponse = models.ModifyApmInstanceResponse;
+const SpanLog = models.SpanLog;
+const ApmServiceMetric = models.ApmServiceMetric;
+const ModifyApmSampleConfigResponse = models.ModifyApmSampleConfigResponse;
+const ApmAppConfig = models.ApmAppConfig;
+const CreateApmSampleConfigResponse = models.CreateApmSampleConfigResponse;
+const DescribeApmApplicationConfigRequest = models.DescribeApmApplicationConfigRequest;
+const Filter = models.Filter;
 const ApmField = models.ApmField;
 const Line = models.Line;
-const ApmApplicationConfigView = models.ApmApplicationConfigView;
-const ApmTag = models.ApmTag;
-const APMKVItem = models.APMKVItem;
+const DescribeGeneralSpanListResponse = models.DescribeGeneralSpanListResponse;
+const CreateProfileTaskResponse = models.CreateProfileTaskResponse;
+const DescribeGeneralSpanListRequest = models.DescribeGeneralSpanListRequest;
+const ModifyApmPrometheusRuleResponse = models.ModifyApmPrometheusRuleResponse;
+const ApmAssociation = models.ApmAssociation;
 const OrderBy = models.OrderBy;
+const DescribeServiceOverviewResponse = models.DescribeServiceOverviewResponse;
+const DescribeApmServiceMetricResponse = models.DescribeApmServiceMetricResponse;
+const ModifyApmAssociationResponse = models.ModifyApmAssociationResponse;
 const DescribeMetricRecordsResponse = models.DescribeMetricRecordsResponse;
 const DescribeGeneralOTSpanListResponse = models.DescribeGeneralOTSpanListResponse;
-const DescribeGeneralSpanListRequest = models.DescribeGeneralSpanListRequest;
-const Filter = models.Filter;
+const ApmTag = models.ApmTag;
+const ModifyApmApplicationConfigResponse = models.ModifyApmApplicationConfigResponse;
+const DescribeApmApplicationConfigResponse = models.DescribeApmApplicationConfigResponse;
+const DescribeApmAssociationRequest = models.DescribeApmAssociationRequest;
+const ModifyApmApplicationConfigRequest = models.ModifyApmApplicationConfigRequest;
 const APMKV = models.APMKV;
 const DescribeGeneralOTSpanListRequest = models.DescribeGeneralOTSpanListRequest;
 const DescribeApmAgentRequest = models.DescribeApmAgentRequest;
 const DescribeMetricRecordsRequest = models.DescribeMetricRecordsRequest;
 const DescribeGeneralApmApplicationConfigResponse = models.DescribeGeneralApmApplicationConfigResponse;
 const DescribeGeneralMetricDataRequest = models.DescribeGeneralMetricDataRequest;
+const DescribeApmPrometheusRuleRequest = models.DescribeApmPrometheusRuleRequest;
 const CreateApmInstanceResponse = models.CreateApmInstanceResponse;
 const SpanReference = models.SpanReference;
+const CreateProfileTaskRequest = models.CreateProfileTaskRequest;
 const SpanProcess = models.SpanProcess;
+const DeleteApmSampleConfigResponse = models.DeleteApmSampleConfigResponse;
+const ModifyApmAssociationRequest = models.ModifyApmAssociationRequest;
+const ApmPrometheusRules = models.ApmPrometheusRules;
+const ModifyApmSampleConfigRequest = models.ModifyApmSampleConfigRequest;
 const DescribeGeneralApmApplicationConfigRequest = models.DescribeGeneralApmApplicationConfigRequest;
-const ModifyApmInstanceResponse = models.ModifyApmInstanceResponse;
+const ApmSampleConfig = models.ApmSampleConfig;
 const GeneralFilter = models.GeneralFilter;
 const DescribeApmInstancesRequest = models.DescribeApmInstancesRequest;
 const SpanTag = models.SpanTag;
 const DescribeGeneralMetricDataResponse = models.DescribeGeneralMetricDataResponse;
-const ModifyGeneralApmApplicationConfigResponse = models.ModifyGeneralApmApplicationConfigResponse;
+const DeleteApmSampleConfigRequest = models.DeleteApmSampleConfigRequest;
+const APMKVItem = models.APMKVItem;
+const CreateApmPrometheusRuleResponse = models.CreateApmPrometheusRuleResponse;
 const TerminateApmInstanceResponse = models.TerminateApmInstanceResponse;
 
 
@@ -74,25 +107,14 @@ class ApmClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the application configuration information.
-     * @param {DescribeGeneralApmApplicationConfigRequest} req
-     * @param {function(string, DescribeGeneralApmApplicationConfigResponse):void} cb
+     * This API is used to modify the APM business system.
+     * @param {ModifyApmInstanceRequest} req
+     * @param {function(string, ModifyApmInstanceResponse):void} cb
      * @public
      */
-    DescribeGeneralApmApplicationConfig(req, cb) {
-        let resp = new DescribeGeneralApmApplicationConfigResponse();
-        this.request("DescribeGeneralApmApplicationConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query dimensional data by dimension name and filter condition.
-     * @param {DescribeTagValuesRequest} req
-     * @param {function(string, DescribeTagValuesResponse):void} cb
-     * @public
-     */
-    DescribeTagValues(req, cb) {
-        let resp = new DescribeTagValuesResponse();
-        this.request("DescribeTagValues", req, resp, cb);
+    ModifyApmInstance(req, cb) {
+        let resp = new ModifyApmInstanceResponse();
+        this.request("ModifyApmInstance", req, resp, cb);
     }
 
     /**
@@ -107,28 +129,6 @@ class ApmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the list of APM business systems.
-     * @param {DescribeApmInstancesRequest} req
-     * @param {function(string, DescribeApmInstancesResponse):void} cb
-     * @public
-     */
-    DescribeApmInstances(req, cb) {
-        let resp = new DescribeApmInstancesResponse();
-        this.request("DescribeApmInstances", req, resp, cb);
-    }
-
-    /**
-     * Obtaining APM Access Point.
-     * @param {DescribeApmAgentRequest} req
-     * @param {function(string, DescribeApmAgentResponse):void} cb
-     * @public
-     */
-    DescribeApmAgent(req, cb) {
-        let resp = new DescribeApmAgentResponse();
-        this.request("DescribeApmAgent", req, resp, cb);
-    }
-
-    /**
      * General Query OpenTelemetry Call Chain List.
      * @param {DescribeGeneralOTSpanListRequest} req
      * @param {function(string, DescribeGeneralOTSpanListResponse):void} cb
@@ -140,25 +140,58 @@ class ApmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the APM business system.
-     * @param {ModifyApmInstanceRequest} req
-     * @param {function(string, ModifyApmInstanceResponse):void} cb
+     * This API is used to create a business purchase in the APM business system.
+     * @param {CreateApmInstanceRequest} req
+     * @param {function(string, CreateApmInstanceResponse):void} cb
      * @public
      */
-    ModifyApmInstance(req, cb) {
-        let resp = new ModifyApmInstanceResponse();
-        this.request("ModifyApmInstance", req, resp, cb);
+    CreateApmInstance(req, cb) {
+        let resp = new CreateApmInstanceResponse();
+        this.request("CreateApmInstance", req, resp, cb);
     }
 
     /**
-     * OpenAPI available for external use. Customers can flexibly specify the fields to be modified, and then add the list of services to be modified.
-     * @param {ModifyGeneralApmApplicationConfigRequest} req
-     * @param {function(string, ModifyGeneralApmApplicationConfigResponse):void} cb
+     * This API is used to query the application configuration information.
+     * @param {DescribeGeneralApmApplicationConfigRequest} req
+     * @param {function(string, DescribeGeneralApmApplicationConfigResponse):void} cb
      * @public
      */
-    ModifyGeneralApmApplicationConfig(req, cb) {
-        let resp = new ModifyGeneralApmApplicationConfigResponse();
-        this.request("ModifyGeneralApmApplicationConfig", req, resp, cb);
+    DescribeGeneralApmApplicationConfig(req, cb) {
+        let resp = new DescribeGeneralApmApplicationConfigResponse();
+        this.request("DescribeGeneralApmApplicationConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the relationship between the apm Business System and other products, including deletion.
+     * @param {ModifyApmAssociationRequest} req
+     * @param {function(string, ModifyApmAssociationResponse):void} cb
+     * @public
+     */
+    ModifyApmAssociation(req, cb) {
+        let resp = new ModifyApmAssociationResponse();
+        this.request("ModifyApmAssociation", req, resp, cb);
+    }
+
+    /**
+     * Modify sampling configurations
+     * @param {ModifyApmSampleConfigRequest} req
+     * @param {function(string, ModifyApmSampleConfigResponse):void} cb
+     * @public
+     */
+    ModifyApmSampleConfig(req, cb) {
+        let resp = new ModifyApmSampleConfigResponse();
+        this.request("ModifyApmSampleConfig", req, resp, cb);
+    }
+
+    /**
+     * Obtaining APM Access Point.
+     * @param {DescribeApmAgentRequest} req
+     * @param {function(string, DescribeApmAgentResponse):void} cb
+     * @public
+     */
+    DescribeApmAgent(req, cb) {
+        let resp = new DescribeApmAgentResponse();
+        this.request("DescribeApmAgent", req, resp, cb);
     }
 
     /**
@@ -174,14 +207,14 @@ The API call frequency is limited to 20 requests per second and 1200 requests pe
     }
 
     /**
-     * This API is used to query metric list. To query metrics, it is recommended to use the DescribeGeneralMetricData API.
-     * @param {DescribeMetricRecordsRequest} req
-     * @param {function(string, DescribeMetricRecordsResponse):void} cb
+     * This API is used to create metric match rules between apm Business System and Prometheus Instance.
+     * @param {CreateApmPrometheusRuleRequest} req
+     * @param {function(string, CreateApmPrometheusRuleResponse):void} cb
      * @public
      */
-    DescribeMetricRecords(req, cb) {
-        let resp = new DescribeMetricRecordsResponse();
-        this.request("DescribeMetricRecords", req, resp, cb);
+    CreateApmPrometheusRule(req, cb) {
+        let resp = new CreateApmPrometheusRuleResponse();
+        this.request("CreateApmPrometheusRule", req, resp, cb);
     }
 
     /**
@@ -196,14 +229,157 @@ The API call frequency is limited to 20 requests per second and 1200 requests pe
     }
 
     /**
-     * This API is used to create a business purchase in the APM business system.
-     * @param {CreateApmInstanceRequest} req
-     * @param {function(string, CreateApmInstanceResponse):void} cb
+     * This API is used to query the relationship between apm Business System and other product.
+     * @param {DescribeApmAssociationRequest} req
+     * @param {function(string, DescribeApmAssociationResponse):void} cb
      * @public
      */
-    CreateApmInstance(req, cb) {
-        let resp = new CreateApmInstanceResponse();
-        this.request("CreateApmInstance", req, resp, cb);
+    DescribeApmAssociation(req, cb) {
+        let resp = new DescribeApmAssociationResponse();
+        this.request("DescribeApmAssociation", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of APM application metrics.
+     * @param {DescribeApmServiceMetricRequest} req
+     * @param {function(string, DescribeApmServiceMetricResponse):void} cb
+     * @public
+     */
+    DescribeApmServiceMetric(req, cb) {
+        let resp = new DescribeApmServiceMetricResponse();
+        this.request("DescribeApmServiceMetric", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify metric match rules between apm Business System and Prometheus Instance.
+     * @param {ModifyApmPrometheusRuleRequest} req
+     * @param {function(string, ModifyApmPrometheusRuleResponse):void} cb
+     * @public
+     */
+    ModifyApmPrometheusRule(req, cb) {
+        let resp = new ModifyApmPrometheusRuleResponse();
+        this.request("ModifyApmPrometheusRule", req, resp, cb);
+    }
+
+    /**
+     * Create sampling configurations
+     * @param {CreateApmSampleConfigRequest} req
+     * @param {function(string, CreateApmSampleConfigResponse):void} cb
+     * @public
+     */
+    CreateApmSampleConfig(req, cb) {
+        let resp = new CreateApmSampleConfigResponse();
+        this.request("CreateApmSampleConfig", req, resp, cb);
+    }
+
+    /**
+     * Query sampling configuration
+     * @param {DescribeApmSampleConfigRequest} req
+     * @param {function(string, DescribeApmSampleConfigResponse):void} cb
+     * @public
+     */
+    DescribeApmSampleConfig(req, cb) {
+        let resp = new DescribeApmSampleConfigResponse();
+        this.request("DescribeApmSampleConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query dimensional data by dimension name and filter condition.
+     * @param {DescribeTagValuesRequest} req
+     * @param {function(string, DescribeTagValuesResponse):void} cb
+     * @public
+     */
+    DescribeTagValues(req, cb) {
+        let resp = new DescribeTagValuesResponse();
+        this.request("DescribeTagValues", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the match rule for metrics between apm Business System and Prometheus Instance.
+     * @param {DescribeApmPrometheusRuleRequest} req
+     * @param {function(string, DescribeApmPrometheusRuleResponse):void} cb
+     * @public
+     */
+    DescribeApmPrometheusRule(req, cb) {
+        let resp = new DescribeApmPrometheusRuleResponse();
+        this.request("DescribeApmPrometheusRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of APM business systems.
+     * @param {DescribeApmInstancesRequest} req
+     * @param {function(string, DescribeApmInstancesResponse):void} cb
+     * @public
+     */
+    DescribeApmInstances(req, cb) {
+        let resp = new DescribeApmInstancesResponse();
+        this.request("DescribeApmInstances", req, resp, cb);
+    }
+
+    /**
+     * Delete sampling configurations
+     * @param {DeleteApmSampleConfigRequest} req
+     * @param {function(string, DeleteApmSampleConfigResponse):void} cb
+     * @public
+     */
+    DeleteApmSampleConfig(req, cb) {
+        let resp = new DeleteApmSampleConfigResponse();
+        this.request("DeleteApmSampleConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an event task.
+     * @param {CreateProfileTaskRequest} req
+     * @param {function(string, CreateProfileTaskResponse):void} cb
+     * @public
+     */
+    CreateProfileTask(req, cb) {
+        let resp = new CreateProfileTaskResponse();
+        this.request("CreateProfileTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query application configuration.
+     * @param {DescribeApmApplicationConfigRequest} req
+     * @param {function(string, DescribeApmApplicationConfigResponse):void} cb
+     * @public
+     */
+    DescribeApmApplicationConfig(req, cb) {
+        let resp = new DescribeApmApplicationConfigResponse();
+        this.request("DescribeApmApplicationConfig", req, resp, cb);
+    }
+
+    /**
+     * OpenAPI available for external use. Customers can flexibly specify the fields to be modified, and then add the list of services to be modified.
+     * @param {ModifyGeneralApmApplicationConfigRequest} req
+     * @param {function(string, ModifyGeneralApmApplicationConfigResponse):void} cb
+     * @public
+     */
+    ModifyGeneralApmApplicationConfig(req, cb) {
+        let resp = new ModifyGeneralApmApplicationConfigResponse();
+        this.request("ModifyGeneralApmApplicationConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query metric list. To query metrics, it is recommended to use the DescribeGeneralMetricData API.
+     * @param {DescribeMetricRecordsRequest} req
+     * @param {function(string, DescribeMetricRecordsResponse):void} cb
+     * @public
+     */
+    DescribeMetricRecords(req, cb) {
+        let resp = new DescribeMetricRecordsResponse();
+        this.request("DescribeMetricRecords", req, resp, cb);
+    }
+
+    /**
+     * Modify application configurations
+     * @param {ModifyApmApplicationConfigRequest} req
+     * @param {function(string, ModifyApmApplicationConfigResponse):void} cb
+     * @public
+     */
+    ModifyApmApplicationConfig(req, cb) {
+        let resp = new ModifyApmApplicationConfigResponse();
+        this.request("ModifyApmApplicationConfig", req, resp, cb);
     }
 
     /**

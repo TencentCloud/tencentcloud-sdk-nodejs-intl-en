@@ -1567,7 +1567,7 @@ class PurchaseReservedInstancesOfferingRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+         * Reserved instance name.<br><li>The RI name defaults to "unnamed" if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
          * @type {string || null}
          */
         this.ReservedInstanceName = null;
@@ -4905,7 +4905,7 @@ class InquirePricePurchaseReservedInstancesOfferingRequest extends  AbstractMode
         this.ClientToken = null;
 
         /**
-         * Reserved instance name.<br><li>The RI name defaults to “unnamed” if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
+         * Reserved instance name.<br><li>The RI name defaults to "unnamed" if this parameter is left empty.</li><li>You can enter any name within 60 characters (including the pattern string).</li>
          * @type {string || null}
          */
         this.ReservedInstanceName = null;
@@ -11390,7 +11390,7 @@ class DescribeImagesRequest extends  AbstractModel {
 <li><strong>tag-value</strong></li>
 <p style="padding-left: 30px;">Filter by the <strong>tag value</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>tag:tag-key</strong></li>
-<p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace “tag-key” with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace "tag-key" with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -11408,7 +11408,7 @@ class DescribeImagesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Instance type, e.g. `S1.SMALL1`
+         * Instance type, e.g. `SA5.MEDIUM2`
          * @type {string || null}
          */
         this.InstanceType = null;

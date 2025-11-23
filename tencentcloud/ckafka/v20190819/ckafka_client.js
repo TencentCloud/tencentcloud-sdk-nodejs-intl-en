@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeCkafkaVersionResponse = models.DescribeCkafkaVersionResponse;
 const TopicDetail = models.TopicDetail;
 const DeleteAclRequest = models.DeleteAclRequest;
 const GroupInfoMember = models.GroupInfoMember;
@@ -43,8 +44,10 @@ const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
 const BatchModifyTopicAttributesResponse = models.BatchModifyTopicAttributesResponse;
 const CreateInstancePreResp = models.CreateInstancePreResp;
 const GroupInfoTopics = models.GroupInfoTopics;
+const InstanceScalingDownRequest = models.InstanceScalingDownRequest;
 const FetchMessageListByOffsetRequest = models.FetchMessageListByOffsetRequest;
 const DescribeSecurityGroupRoutesResponse = models.DescribeSecurityGroupRoutesResponse;
+const UpgradeBrokerVersionRequest = models.UpgradeBrokerVersionRequest;
 const ModifyInstancePreRequest = models.ModifyInstancePreRequest;
 const CreateAclRuleRequest = models.CreateAclRuleRequest;
 const RouteFilter = models.RouteFilter;
@@ -52,6 +55,7 @@ const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const CreateInstancePreData = models.CreateInstancePreData;
 const AclRule = models.AclRule;
 const DescribeAclRuleRequest = models.DescribeAclRuleRequest;
+const InstanceRoute = models.InstanceRoute;
 const DescribeACLResponse = models.DescribeACLResponse;
 const DynamicDiskConfig = models.DynamicDiskConfig;
 const JgwOperateResponse = models.JgwOperateResponse;
@@ -72,12 +76,13 @@ const CreateDatahubTopicRequest = models.CreateDatahubTopicRequest;
 const InstanceChargeParam = models.InstanceChargeParam;
 const CreateInstancePostResp = models.CreateInstancePostResp;
 const DescribeDatahubTopicResponse = models.DescribeDatahubTopicResponse;
-const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
+const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
 const DescribeCvmInfoRequest = models.DescribeCvmInfoRequest;
 const CreateConsumerResponse = models.CreateConsumerResponse;
 const CreatePostPaidInstanceRequest = models.CreatePostPaidInstanceRequest;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
+const DeleteAclRuleRequest = models.DeleteAclRuleRequest;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const OperateResponseData = models.OperateResponseData;
@@ -87,12 +92,13 @@ const CreatePartitionResponse = models.CreatePartitionResponse;
 const TopicAttributesResponse = models.TopicAttributesResponse;
 const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const ClusterInfo = models.ClusterInfo;
+const DeleteGroupRequest = models.DeleteGroupRequest;
 const DeleteInstancePostRequest = models.DeleteInstancePostRequest;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DescribeTopicProduceConnectionRequest = models.DescribeTopicProduceConnectionRequest;
 const CreateAclRequest = models.CreateAclRequest;
 const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
-const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
+const TopicResult = models.TopicResult;
 const DeleteRouteResponse = models.DeleteRouteResponse;
 const Partitions = models.Partitions;
 const DescribeTopicResponse = models.DescribeTopicResponse;
@@ -114,22 +120,23 @@ const InquiryPublicNetworkParam = models.InquiryPublicNetworkParam;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
+const DeleteAclRuleResponse = models.DeleteAclRuleResponse;
 const UserResponse = models.UserResponse;
 const DescribeCvmInfoResponse = models.DescribeCvmInfoResponse;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
 const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
-const DescribeDatahubTopicsRequest = models.DescribeDatahubTopicsRequest;
+const BatchContent = models.BatchContent;
 const DeleteRouteTriggerTimeResponse = models.DeleteRouteTriggerTimeResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
-const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
 const DealInstanceDTO = models.DealInstanceDTO;
 const CreatePartitionRequest = models.CreatePartitionRequest;
 const Group = models.Group;
 const GroupInfoResponse = models.GroupInfoResponse;
-const DescribeAppInfoResponse = models.DescribeAppInfoResponse;
+const GroupOffsetResponse = models.GroupOffsetResponse;
 const AclResponse = models.AclResponse;
 const ZoneResponse = models.ZoneResponse;
+const ModifyRoutineMaintenanceTaskRequest = models.ModifyRoutineMaintenanceTaskRequest;
 const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
@@ -140,13 +147,15 @@ const Config = models.Config;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
 const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
 const DescribeRegionResponse = models.DescribeRegionResponse;
-const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
+const CreateTopicResponse = models.CreateTopicResponse;
 const VipEntity = models.VipEntity;
 const DescribeTopicProduceConnectionResponse = models.DescribeTopicProduceConnectionResponse;
 const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
 const CreateAclRuleResponse = models.CreateAclRuleResponse;
+const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
+const UpgradeBrokerVersionResponse = models.UpgradeBrokerVersionResponse;
 const CreateInstancePostData = models.CreateInstancePostData;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
@@ -156,7 +165,6 @@ const InstanceAttributesResponse = models.InstanceAttributesResponse;
 const DescribeDatahubTopicsResponse = models.DescribeDatahubTopicsResponse;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
-const GroupOffsetResponse = models.GroupOffsetResponse;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
 const DescribeSecurityGroupRoutesRequest = models.DescribeSecurityGroupRoutesRequest;
 const ModifyInstancePreResponse = models.ModifyInstancePreResponse;
@@ -168,6 +176,7 @@ const CreateInstancePreResponse = models.CreateInstancePreResponse;
 const CvmAndIpInfo = models.CvmAndIpInfo;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const Region = models.Region;
+const InstanceScalingDownResponse = models.InstanceScalingDownResponse;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const CreateDatahubTopicResponse = models.CreateDatahubTopicResponse;
@@ -175,6 +184,7 @@ const CreatePostPaidInstanceResponse = models.CreatePostPaidInstanceResponse;
 const RouteDTO = models.RouteDTO;
 const InquiryDiskParam = models.InquiryDiskParam;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
+const ScalingDownResp = models.ScalingDownResp;
 const SendMessageResponse = models.SendMessageResponse;
 const InquiryBasePrice = models.InquiryBasePrice;
 const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
@@ -191,16 +201,17 @@ const TaskStatusResponse = models.TaskStatusResponse;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
 const ModifyDatahubTopicResponse = models.ModifyDatahubTopicResponse;
-const BatchContent = models.BatchContent;
+const DescribeDatahubTopicsRequest = models.DescribeDatahubTopicsRequest;
 const DescribeTypeInstancesRequest = models.DescribeTypeInstancesRequest;
 const InquiryPrice = models.InquiryPrice;
-const TopicResult = models.TopicResult;
+const ModifyRoutineMaintenanceTaskResponse = models.ModifyRoutineMaintenanceTaskResponse;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
 const SendMessageRequest = models.SendMessageRequest;
 const ConsumerRecord = models.ConsumerRecord;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const BatchModifyTopicAttributesRequest = models.BatchModifyTopicAttributesRequest;
+const DeleteGroupResponse = models.DeleteGroupResponse;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
 const FetchMessageListByTimestampResponse = models.FetchMessageListByTimestampResponse;
@@ -209,7 +220,6 @@ const Acl = models.Acl;
 const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const ModifyDatahubTopicRequest = models.ModifyDatahubTopicRequest;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
-const CreateTopicResponse = models.CreateTopicResponse;
 const CreateInstancePreRequest = models.CreateInstancePreRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DeleteTopicResponse = models.DeleteTopicResponse;
@@ -225,7 +235,7 @@ const SubscribedInfo = models.SubscribedInfo;
 const AclRuleResp = models.AclRuleResp;
 const SecurityGroupRouteResp = models.SecurityGroupRouteResp;
 const Price = models.Price;
-const InstanceRoute = models.InstanceRoute;
+const DescribeCkafkaVersionRequest = models.DescribeCkafkaVersionRequest;
 
 
 /**
@@ -393,14 +403,25 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enumerate consumer groups (simplified).
-     * @param {DescribeGroupRequest} req
-     * @param {function(string, DescribeGroupResponse):void} cb
+     * This API is used to query instance version information.
+     * @param {DescribeCkafkaVersionRequest} req
+     * @param {function(string, DescribeCkafkaVersionResponse):void} cb
      * @public
      */
-    DescribeGroup(req, cb) {
-        let resp = new DescribeGroupResponse();
-        this.request("DescribeGroup", req, resp, cb);
+    DescribeCkafkaVersion(req, cb) {
+        let resp = new DescribeCkafkaVersionResponse();
+        this.request("DescribeCkafkaVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the message list based on an offset.
+     * @param {FetchMessageListByOffsetRequest} req
+     * @param {function(string, FetchMessageListByOffsetResponse):void} cb
+     * @public
+     */
+    FetchMessageListByOffset(req, cb) {
+        let resp = new FetchMessageListByOffsetResponse();
+        this.request("FetchMessageListByOffset", req, resp, cb);
     }
 
     /**
@@ -412,6 +433,17 @@ class CkafkaClient extends AbstractClient {
     ModifyGroupOffsets(req, cb) {
         let resp = new ModifyGroupOffsetsResponse();
         this.request("ModifyGroupOffsets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade the broker version.
+     * @param {UpgradeBrokerVersionRequest} req
+     * @param {function(string, UpgradeBrokerVersionResponse):void} cb
+     * @public
+     */
+    UpgradeBrokerVersion(req, cb) {
+        let resp = new UpgradeBrokerVersionResponse();
+        this.request("UpgradeBrokerVersion", req, resp, cb);
     }
 
     /**
@@ -437,17 +469,6 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the details of a synced topic replica.
-     * @param {DescribeTopicSyncReplicaRequest} req
-     * @param {function(string, DescribeTopicSyncReplicaResponse):void} cb
-     * @public
-     */
-    DescribeTopicSyncReplica(req, cb) {
-        let resp = new DescribeTopicSyncReplicaResponse();
-        this.request("DescribeTopicSyncReplica", req, resp, cb);
-    }
-
-    /**
      * This API is used to add instance routes.
      * @param {CreateRouteRequest} req
      * @param {function(string, CreateRouteResponse):void} cb
@@ -456,6 +477,17 @@ class CkafkaClient extends AbstractClient {
     CreateRoute(req, cb) {
         let resp = new CreateRouteResponse();
         this.request("CreateRoute", req, resp, cb);
+    }
+
+    /**
+     * Delete consumer groups.
+     * @param {DeleteGroupRequest} req
+     * @param {function(string, DeleteGroupResponse):void} cb
+     * @public
+     */
+    DeleteGroup(req, cb) {
+        let resp = new DeleteGroupResponse();
+        this.request("DeleteGroup", req, resp, cb);
     }
 
     /**
@@ -470,14 +502,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the message list based on an offset.
-     * @param {FetchMessageListByOffsetRequest} req
-     * @param {function(string, FetchMessageListByOffsetResponse):void} cb
+     * This API is used to enumerate consumer groups (simplified).
+     * @param {DescribeGroupRequest} req
+     * @param {function(string, DescribeGroupResponse):void} cb
      * @public
      */
-    FetchMessageListByOffset(req, cb) {
-        let resp = new FetchMessageListByOffsetResponse();
-        this.request("FetchMessageListByOffset", req, resp, cb);
+    DescribeGroup(req, cb) {
+        let resp = new DescribeGroupResponse();
+        this.request("DescribeGroup", req, resp, cb);
     }
 
     /**
@@ -591,6 +623,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to set automated ops attributes.
+     * @param {ModifyRoutineMaintenanceTaskRequest} req
+     * @param {function(string, ModifyRoutineMaintenanceTaskResponse):void} cb
+     * @public
+     */
+    ModifyRoutineMaintenanceTask(req, cb) {
+        let resp = new ModifyRoutineMaintenanceTaskResponse();
+        this.request("ModifyRoutineMaintenanceTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify ACL policy, currently only support whether to apply preset rules to newly-added topics.
      * @param {ModifyAclRuleRequest} req
      * @param {function(string, ModifyAclRuleResponse):void} cb
@@ -646,14 +689,25 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the user list.
-     * @param {DescribeAppInfoRequest} req
-     * @param {function(string, DescribeAppInfoResponse):void} cb
+     * This API is used to get the details of a synced topic replica.
+     * @param {DescribeTopicSyncReplicaRequest} req
+     * @param {function(string, DescribeTopicSyncReplicaResponse):void} cb
      * @public
      */
-    DescribeAppInfo(req, cb) {
-        let resp = new DescribeAppInfoResponse();
-        this.request("DescribeAppInfo", req, resp, cb);
+    DescribeTopicSyncReplica(req, cb) {
+        let resp = new DescribeTopicSyncReplicaResponse();
+        this.request("DescribeTopicSyncReplica", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform downsizing on a pay-as-you-go instance.
+     * @param {InstanceScalingDownRequest} req
+     * @param {function(string, InstanceScalingDownResponse):void} cb
+     * @public
+     */
+    InstanceScalingDown(req, cb) {
+        let resp = new InstanceScalingDownResponse();
+        this.request("InstanceScalingDown", req, resp, cb);
     }
 
     /**
@@ -709,6 +763,17 @@ class CkafkaClient extends AbstractClient {
     BatchCreateAcl(req, cb) {
         let resp = new BatchCreateAclResponse();
         this.request("BatchCreateAcl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an ACL rule.
+     * @param {DeleteAclRuleRequest} req
+     * @param {function(string, DeleteAclRuleResponse):void} cb
+     * @public
+     */
+    DeleteAclRule(req, cb) {
+        let resp = new DeleteAclRuleResponse();
+        this.request("DeleteAclRule", req, resp, cb);
     }
 
     /**

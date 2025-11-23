@@ -29,10 +29,11 @@ const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
 const OtherInvoiceList = models.OtherInvoiceList;
 const RecognizeBrazilCommonOCRResponse = models.RecognizeBrazilCommonOCRResponse;
 const RecognizeMacaoIDCardOCRResponse = models.RecognizeMacaoIDCardOCRResponse;
+const GetCardVerificationExternalResultResponse = models.GetCardVerificationExternalResultResponse;
 const PermitOCRResponse = models.PermitOCRResponse;
 const RecognizeBrazilDriverLicenseOCRRequest = models.RecognizeBrazilDriverLicenseOCRRequest;
 const Rect = models.Rect;
-const LicensePlateInfo = models.LicensePlateInfo;
+const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
 const VatRollItem = models.VatRollItem;
 const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const WordPolygon = models.WordPolygon;
@@ -48,6 +49,7 @@ const SmartStructuralProRequest = models.SmartStructuralProRequest;
 const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
 const RecognizeDetectCardCoordsRequest = models.RecognizeDetectCardCoordsRequest;
 const VatInvoiceItemInfo = models.VatInvoiceItemInfo;
+const GeneralCard = models.GeneralCard;
 const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
 const RecognizeBrazilCommonOCRRequest = models.RecognizeBrazilCommonOCRRequest;
 const TextDetection = models.TextDetection;
@@ -84,7 +86,7 @@ const MachinePrintedInvoice = models.MachinePrintedInvoice;
 const RecognizeKoreanIDCardOCRResponse = models.RecognizeKoreanIDCardOCRResponse;
 const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRResponse;
 const TrainTicket = models.TrainTicket;
-const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
+const ApplyCardVerificationExternalRequest = models.ApplyCardVerificationExternalRequest;
 const MotorVehicleSaleInvoice = models.MotorVehicleSaleInvoice;
 const RecognizeKoreanIDCardOCRRequest = models.RecognizeKoreanIDCardOCRRequest;
 const TableOCRRequest = models.TableOCRRequest;
@@ -92,6 +94,7 @@ const PassportRecognizeInfos = models.PassportRecognizeInfos;
 const RecognizeSingaporeIDCardOCRRequest = models.RecognizeSingaporeIDCardOCRRequest;
 const TaxiTicket = models.TaxiTicket;
 const RecognizeBrazilRNMOCRResponse = models.RecognizeBrazilRNMOCRResponse;
+const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 const RecognizeBrazilRNMOCRRequest = models.RecognizeBrazilRNMOCRRequest;
@@ -105,6 +108,7 @@ const RecognizeMacaoIDCardOCRRequest = models.RecognizeMacaoIDCardOCRRequest;
 const NonTaxIncomeBill = models.NonTaxIncomeBill;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const AirTransport = models.AirTransport;
+const GetCardVerificationExternalResultRequest = models.GetCardVerificationExternalResultRequest;
 const RecognizeTableAccurateOCRRequest = models.RecognizeTableAccurateOCRRequest;
 const Coord = models.Coord;
 const SealOCRResponse = models.SealOCRResponse;
@@ -117,8 +121,9 @@ const VatElectronicItemInfo = models.VatElectronicItemInfo;
 const ConfigAdvanced = models.ConfigAdvanced;
 const LineInfo = models.LineInfo;
 const ItemCoord = models.ItemCoord;
-const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
+const LicensePlateInfo = models.LicensePlateInfo;
 const VatInvoiceRoll = models.VatInvoiceRoll;
+const ApplyCardVerificationExternalResponse = models.ApplyCardVerificationExternalResponse;
 const Polygon = models.Polygon;
 const TextDetectionResult = models.TextDetectionResult;
 const RecognizeGeneralInvoiceResponse = models.RecognizeGeneralInvoiceResponse;
@@ -148,6 +153,7 @@ const RecognizeThaiPinkCardRequest = models.RecognizeThaiPinkCardRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const RecognizeThaiPinkCardResponse = models.RecognizeThaiPinkCardResponse;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
+const AddressInfo = models.AddressInfo;
 
 
 /**
@@ -356,6 +362,371 @@ This interface supports regional scope: countries with machine-readable passport
     }
 
     /**
+     * This API is used for general recognition of overseas cards.
+
+The following list details the countries or regions, document types supported by the overseas document recognition API and whether the back side of the document is required:
+
+<table>
+<thead>
+<tr>
+<td style="width:200px">Nationality</td>
+<td style="width:200px">CardType</td>
+<td style="width:200px">Whether the Back Side is Required</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Argentina</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Argentina</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Argentina</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Australia</td>
+<td>Residence Permit</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Bangladesh</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Bangladesh</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Bangladesh</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Cambodia</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Cambodia</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Cambodia</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>Driver's License</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>Passport</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Canada</td>
+<td>Residence Permit</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Chile</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Chile</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Chile</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>Residence Permit</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Mexico</td>
+<td>Driver's License</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Mexico</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Mexico</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Myanmar</td>
+<td>Driver's License</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Myanmar</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Myanmar</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>National ID Card</td>
+<td>No</td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>New Zealand</td>
+<td>Residence Permit</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Nigeria</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Nigeria</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Nigeria</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Nigeria</td>
+<td>Residence Permit</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Pakistan</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Pakistan</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Pakistan</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Russia</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Russia</td>
+<td>National ID Card</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Russia</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>Passport</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>Residence Permit</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Indonesia</td>
+<td>National ID Card</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Indonesia</td>
+<td>Driver's License</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Hong Kong, China</td>
+<td>Identity Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Thailand</td>
+<td>National ID Card</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Thailand</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Malaysia</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Malaysia</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Philippines</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Philippines</td>
+<td>Driver's License</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Japan</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Japan</td>
+<td>Driver's License</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Macau, China</td>
+<td>Identity Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Taiwan, China</td>
+<td>Identity Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Bangladesh</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Nigeria</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Nigeria</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Pakistan</td>
+<td>National ID Card</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Pakistan</td>
+<td>Driver's License</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+     * @param {ApplyCardVerificationExternalRequest} req
+     * @param {function(string, ApplyCardVerificationExternalResponse):void} cb
+     * @public
+     */
+    ApplyCardVerificationExternal(req, cb) {
+        let resp = new ApplyCardVerificationExternalResponse();
+        this.request("ApplyCardVerificationExternal", req, resp, cb);
+    }
+
+    /**
      * This API is used to recognize key fields on the photo side of a Hong Kong (China) identity card, including name in Chinese, name in English, telecode for name, date of birth, gender, document symbol, date of the first issue, date of the last receipt, identity card number, and permanent residency attribute. 
 
 This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
@@ -409,6 +780,17 @@ A maximum of 10 requests can be initiated per second for this API.
     RecognizeThaiIDCardOCR(req, cb) {
         let resp = new RecognizeThaiIDCardOCRResponse();
         this.request("RecognizeThaiIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain document recognition results.
+     * @param {GetCardVerificationExternalResultRequest} req
+     * @param {function(string, GetCardVerificationExternalResultResponse):void} cb
+     * @public
+     */
+    GetCardVerificationExternalResult(req, cb) {
+        let resp = new GetCardVerificationExternalResultResponse();
+        this.request("GetCardVerificationExternalResult", req, resp, cb);
     }
 
     /**

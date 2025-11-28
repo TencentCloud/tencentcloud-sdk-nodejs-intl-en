@@ -17,244 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeRoles response structure.
- * @class
- */
-class DescribeRolesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of records.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Array of roles.
-         * @type {Array.<Role> || null}
-         */
-        this.RoleSets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.RoleSets) {
-            this.RoleSets = new Array();
-            for (let z in params.RoleSets) {
-                let obj = new Role();
-                obj.deserialize(params.RoleSets[z]);
-                this.RoleSets.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeBindClusters response structure.
- * @class
- */
-class DescribeBindClustersResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The number of dedicated clusters
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of dedicated clusters
-         * @type {Array.<BindCluster> || null}
-         */
-        this.ClusterSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ClusterSet) {
-            this.ClusterSet = new Array();
-            for (let z in params.ClusterSet) {
-                let obj = new BindCluster();
-                obj.deserialize(params.ClusterSet[z]);
-                this.ClusterSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQVirtualHost response structure.
- * @class
- */
-class DescribeRabbitMQVirtualHostResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned number of vhosts
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of vhost details
-         * @type {Array.<RabbitMQVirtualHostInfo> || null}
-         */
-        this.VirtualHostList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VirtualHostList) {
-            this.VirtualHostList = new Array();
-            for (let z in params.VirtualHostList) {
-                let obj = new RabbitMQVirtualHostInfo();
-                obj.deserialize(params.VirtualHostList[z]);
-                this.VirtualHostList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * cmq DeadLetterPolicy
- * @class
- */
-class CmqDeadLetterPolicy extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Dead letter queue.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DeadLetterQueue = null;
-
-        /**
-         * Dead letter queue policy.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Policy = null;
-
-        /**
-         * Maximum period in seconds before an unconsumed message expires, which is required if `Policy` is 1. Value range: 300–43200. This value should be smaller than `MsgRetentionSeconds` (maximum message retention period)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxTimeToLive = null;
-
-        /**
-         * Maximum number of receipts.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxReceiveCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DeadLetterQueue = 'DeadLetterQueue' in params ? params.DeadLetterQueue : null;
-        this.Policy = 'Policy' in params ? params.Policy : null;
-        this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
-        this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
-
-    }
-}
-
-/**
- * DeleteRabbitMQUser request structure.
- * @class
- */
-class DeleteRabbitMQUserRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Username, which is used for login.
-         * @type {string || null}
-         */
-        this.User = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.User = 'User' in params ? params.User : null;
-
-    }
-}
-
-/**
  * RocketMQ namespace information
  * @class
  */
@@ -263,13 +25,13 @@ class RocketMQNamespace extends  AbstractModel {
         super();
 
         /**
-         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores.
+         * Namespace name, which can contain 3 - 64 letters, digits, hyphens, and underscores.
          * @type {string || null}
          */
         this.NamespaceId = null;
 
         /**
-         * Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds–15 days. This parameter is disused.
+         * Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds - 15 days. This parameter is disused.
          * @type {number || null}
          */
         this.Ttl = null;
@@ -303,7 +65,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Internal access point address
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InternalEndpoint = null;
@@ -329,261 +91,15 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 }
 
 /**
- * DescribeSubscriptions request structure.
+ * CreateRabbitMQBinding response structure.
  * @class
  */
-class DescribeSubscriptionsRequest extends  AbstractModel {
+class CreateRabbitMQBindingResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Offset, which defaults to 0 if left empty.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy match by subscriber name.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * Data filter.
-         * @type {Array.<FilterSubscription> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new FilterSubscription();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQGroups request structure.
- * @class
- */
-class DescribeRocketMQGroupsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace.
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The max number of returned results.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Topic name, which can be used to query all subscription groups under the topic
-         * @type {string || null}
-         */
-        this.FilterTopic = null;
-
-        /**
-         * Consumer group query by consumer group name. Fuzzy query is supported
-         * @type {string || null}
-         */
-        this.FilterGroup = null;
-
-        /**
-         * Sort by specified field. Valid values: `tps`, `accumulative`.
-         * @type {string || null}
-         */
-        this.SortedBy = null;
-
-        /**
-         * Sort in ascending or descending order. Valid values: `asc`, `desc`.
-         * @type {string || null}
-         */
-        this.SortOrder = null;
-
-        /**
-         * Subscription group name. After it is specified, the information of only this subscription group will be returned.
-         * @type {string || null}
-         */
-        this.FilterOneGroup = null;
-
-        /**
-         * Group type
-         * @type {Array.<string> || null}
-         */
-        this.Types = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.FilterTopic = 'FilterTopic' in params ? params.FilterTopic : null;
-        this.FilterGroup = 'FilterGroup' in params ? params.FilterGroup : null;
-        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
-        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
-        this.FilterOneGroup = 'FilterOneGroup' in params ? params.FilterOneGroup : null;
-        this.Types = 'Types' in params ? params.Types : null;
-
-    }
-}
-
-/**
- * CreateRocketMQGroup request structure.
- * @class
- */
-class CreateRocketMQGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Group name (8–64 characters)
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * Namespace. Currently, only one namespace is supported
-         * @type {Array.<string> || null}
-         */
-        this.Namespaces = null;
-
-        /**
-         * Whether to enable consumption
-         * @type {boolean || null}
-         */
-        this.ReadEnable = null;
-
-        /**
-         * Whether to enable broadcast consumption
-         * @type {boolean || null}
-         */
-        this.BroadcastEnable = null;
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Remarks (up to 128 characters)
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Group type (`TCP`, `HTTP`)
-         * @type {string || null}
-         */
-        this.GroupType = null;
-
-        /**
-         * The maximum number of retries for a group
-         * @type {number || null}
-         */
-        this.RetryMaxTimes = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.Namespaces = 'Namespaces' in params ? params.Namespaces : null;
-        this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
-        this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.GroupType = 'GroupType' in params ? params.GroupType : null;
-        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
-
-    }
-}
-
-/**
- * ModifyRabbitMQVirtualHost request structure.
- * @class
- */
-class ModifyRabbitMQVirtualHostRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -595,16 +111,16 @@ class ModifyRabbitMQVirtualHostRequest extends  AbstractModel {
         this.VirtualHost = null;
 
         /**
-         * Description
-         * @type {string || null}
+         * Routing relationship ID.
+         * @type {number || null}
          */
-        this.Description = null;
+        this.BindingId = null;
 
         /**
-         * Message trace flag. Valid values: `true` (Enabled), `false` (Disabled).
-         * @type {boolean || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.TraceFlag = null;
+        this.RequestId = null;
 
     }
 
@@ -617,55 +133,47 @@ class ModifyRabbitMQVirtualHostRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.TraceFlag = 'TraceFlag' in params ? params.TraceFlag : null;
+        this.BindingId = 'BindingId' in params ? params.BindingId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * ModifyEnvironmentAttributes request structure.
+ * ModifyRocketMQInstanceSpec request structure.
  * @class
  */
-class ModifyEnvironmentAttributesRequest extends  AbstractModel {
+class ModifyRocketMQInstanceSpecRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Namespace name.
+         * ID of the exclusive instance
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.InstanceId = null;
 
         /**
-         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
+         * Instance specification.
+Valid values: `rocket-vip-basic-1` (Basic),
+`rocket-vip-basic-2` (Standard),
+`rocket-vip-basic-3` (Advanced I),
+`rocket-vip-basic-4` (Advanced II).
+         * @type {string || null}
+         */
+        this.Specification = null;
+
+        /**
+         * Node count
          * @type {number || null}
          */
-        this.MsgTTL = null;
+        this.NodeCount = null;
 
         /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
+         * Storage space in GB
+         * @type {number || null}
          */
-        this.Remark = null;
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Message retention policy
-         * @type {RetentionPolicy || null}
-         */
-        this.RetentionPolicy = null;
-
-        /**
-         * Whether to enable "Auto-Create Subscription"
-         * @type {boolean || null}
-         */
-        this.AutoSubscriptionCreation = null;
+        this.StorageSize = null;
 
     }
 
@@ -676,17 +184,10 @@ class ModifyEnvironmentAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.RetentionPolicy) {
-            let obj = new RetentionPolicy();
-            obj.deserialize(params.RetentionPolicy)
-            this.RetentionPolicy = obj;
-        }
-        this.AutoSubscriptionCreation = 'AutoSubscriptionCreation' in params ? params.AutoSubscriptionCreation : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Specification = 'Specification' in params ? params.Specification : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
 
     }
 }
@@ -706,7 +207,7 @@ class DeleteClusterResponse extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -727,78 +228,6 @@ class DeleteClusterResponse extends  AbstractModel {
 }
 
 /**
- * SendBatchMessages response structure.
- * @class
- */
-class SendBatchMessagesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique message ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MessageId = null;
-
-        /**
-         * Error message. If an empty string is returned, no error occurred.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ErrorMsg = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MessageId = 'MessageId' in params ? params.MessageId : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyCmqSubscriptionAttribute response structure.
- * @class
- */
-class ModifyCmqSubscriptionAttributeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateCmqTopic request structure.
  * @class
  */
@@ -807,7 +236,7 @@ class CreateCmqTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Topic name, which must be unique under the same account in a single region. The name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
          * @type {string || null}
          */
         this.TopicName = null;
@@ -870,406 +299,6 @@ class CreateCmqTopicRequest extends  AbstractModel {
 }
 
 /**
- * TDMQ for Pulsar pro cluster specification information
- * @class
- */
-class PulsarProClusterSpecInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster specification name
-         * @type {string || null}
-         */
-        this.SpecName = null;
-
-        /**
-         * Peak TPS
-         * @type {number || null}
-         */
-        this.MaxTps = null;
-
-        /**
-         * Peak bandwidth in Mbps
-         * @type {number || null}
-         */
-        this.MaxBandWidth = null;
-
-        /**
-         * Maximum number of namespaces
-         * @type {number || null}
-         */
-        this.MaxNamespaces = null;
-
-        /**
-         * Maximum number of topic partitions
-         * @type {number || null}
-         */
-        this.MaxTopics = null;
-
-        /**
-         * Elastic TPS beyond the specification
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ScalableTps = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SpecName = 'SpecName' in params ? params.SpecName : null;
-        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
-        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
-        this.MaxNamespaces = 'MaxNamespaces' in params ? params.MaxNamespaces : null;
-        this.MaxTopics = 'MaxTopics' in params ? params.MaxTopics : null;
-        this.ScalableTps = 'ScalableTps' in params ? params.ScalableTps : null;
-
-    }
-}
-
-/**
- * TDMQ for RocketMQ topic distribution
- * @class
- */
-class RocketMQTopicDistribution extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic type
-         * @type {string || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * Number of topics
-         * @type {number || null}
-         */
-        this.Count = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.Count = 'Count' in params ? params.Count : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQNamespaces response structure.
- * @class
- */
-class DescribeRocketMQNamespacesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of namespaces
-         * @type {Array.<RocketMQNamespace> || null}
-         */
-        this.Namespaces = null;
-
-        /**
-         * The total number of returned results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Namespaces) {
-            this.Namespaces = new Array();
-            for (let z in params.Namespaces) {
-                let obj = new RocketMQNamespace();
-                obj.deserialize(params.Namespaces[z]);
-                this.Namespaces.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQInstanceSpec request structure.
- * @class
- */
-class ModifyRocketMQInstanceSpecRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the exclusive instance
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance specification.
-Valid values: `rocket-vip-basic-1` (Basic),
-`rocket-vip-basic-2` (Standard),
-`rocket-vip-basic-3` (Advanced I),
-`rocket-vip-basic-4` (Advanced II).
-         * @type {string || null}
-         */
-        this.Specification = null;
-
-        /**
-         * Node count
-         * @type {number || null}
-         */
-        this.NodeCount = null;
-
-        /**
-         * Storage space in GB
-         * @type {number || null}
-         */
-        this.StorageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Specification = 'Specification' in params ? params.Specification : null;
-        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
-        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
-
-    }
-}
-
-/**
- * Information of dedicated clusters
- * @class
- */
-class BindCluster extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of a physical cluster.
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-
-    }
-}
-
-/**
- * Sort by field
- * @class
- */
-class Sort extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Sorting field.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Ascending order: `ASC`; descending order: `DESC`.
-         * @type {string || null}
-         */
-        this.Order = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Order = 'Order' in params ? params.Order : null;
-
-    }
-}
-
-/**
- * ModifyCluster response structure.
- * @class
- */
-class ModifyClusterResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendRocketMQMessage request structure.
- * @class
- */
-class SendRocketMQMessageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace ID
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Message content
-         * @type {string || null}
-         */
-        this.MsgBody = null;
-
-        /**
-         * Message key
-         * @type {string || null}
-         */
-        this.MsgKey = null;
-
-        /**
-         * Message tag
-         * @type {string || null}
-         */
-        this.MsgTag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgBody = 'MsgBody' in params ? params.MsgBody : null;
-        this.MsgKey = 'MsgKey' in params ? params.MsgKey : null;
-        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
-
-    }
-}
-
-/**
- * TDMQ for RabbitMQ exclusive vhost
- * @class
- */
-class RabbitMQPrivateVirtualHost extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Vhost name
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VirtualHostName = null;
-
-        /**
-         * Vhost description
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VirtualHostName = 'VirtualHostName' in params ? params.VirtualHostName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
  * Information of TDMQ for RocketMQ exclusive instances
  * @class
  */
@@ -1290,8 +319,7 @@ class RocketMQVipInstance extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Instance version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance version.
          * @type {string || null}
          */
         this.InstanceVersion = null;
@@ -1352,7 +380,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
@@ -1364,25 +391,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SpecName = null;
 
         /**
-         * The maximum message retention period in hours
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Maximum configurable message retention time, in hours
          * @type {number || null}
          */
         this.MaxRetention = null;
 
         /**
-         * The minimum message retention period in hours
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Minimum configurable message retention time, in hours
          * @type {number || null}
          */
         this.MinRetention = null;
 
         /**
-         * Instance message retention period in hours
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Instance message retention time, in hours
          * @type {number || null}
          */
         this.Retention = null;
+
+        /**
+         * Whether to enable ACL authentication.
+         * @type {boolean || null}
+         */
+        this.AclEnabled = null;
+
+        /**
+         * Destruction time.
+         * @type {number || null}
+         */
+        this.DestroyTime = null;
 
     }
 
@@ -1410,143 +446,8 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.MaxRetention = 'MaxRetention' in params ? params.MaxRetention : null;
         this.MinRetention = 'MinRetention' in params ? params.MinRetention : null;
         this.Retention = 'Retention' in params ? params.Retention : null;
-
-    }
-}
-
-/**
- * TDMQ for RabbitMQ exclusive instance information
- * @class
- */
-class RabbitMQVipInstance extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Instance version
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceVersion = null;
-
-        /**
-         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Number of nodes
-         * @type {number || null}
-         */
-        this.NodeCount = null;
-
-        /**
-         * Instance specification name
-         * @type {string || null}
-         */
-        this.ConfigDisplay = null;
-
-        /**
-         * Peak TPS
-         * @type {number || null}
-         */
-        this.MaxTps = null;
-
-        /**
-         * Peak bandwidth in Mbps
-         * @type {number || null}
-         */
-        this.MaxBandWidth = null;
-
-        /**
-         * Storage capacity in GB
-         * @type {number || null}
-         */
-        this.MaxStorage = null;
-
-        /**
-         * Instance expiration time in milliseconds
-         * @type {number || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * Payment mode. `0`: Postpaid; `1`: Prepaid.
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Remarks
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Instance specification ID
-         * @type {string || null}
-         */
-        this.SpecName = null;
-
-        /**
-         * Cluster exception
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExceptionInformation = null;
-
-        /**
-         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
-This parameter is used to display the instance status additionally and distinguish from the `Status` parameter.
-         * @type {number || null}
-         */
-        this.ClusterStatus = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
-        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
-        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
-        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
-        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.SpecName = 'SpecName' in params ? params.SpecName : null;
-        this.ExceptionInformation = 'ExceptionInformation' in params ? params.ExceptionInformation : null;
-        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.AclEnabled = 'AclEnabled' in params ? params.AclEnabled : null;
+        this.DestroyTime = 'DestroyTime' in params ? params.DestroyTime : null;
 
     }
 }
@@ -1567,13 +468,12 @@ class DescribeCmqQueuesResponse extends  AbstractModel {
 
         /**
          * Queue list.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CmqQueue> || null}
          */
         this.QueueList = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1603,132 +503,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CreateRabbitMQVipInstance request structure.
- * @class
- */
-class CreateRabbitMQVipInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * AZ
-         * @type {Array.<number> || null}
-         */
-        this.ZoneIds = null;
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * VPC subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Cluster name
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * Node specification (`rabbit-vip-basic-1`: Basic; `rabbit-vip-basic-2`: Standard; `rabbit-vip-basic-3`: Advanced I; `rabbit-vip-basic-4`: Advanced II). If this parameter is left empty, the default value is `rabbit-vip-basic-1`.
-         * @type {string || null}
-         */
-        this.NodeSpec = null;
-
-        /**
-         * Number of nodes, which is at least three for multi-AZ deployment. If this parameter is left empty, the value will be set to 1 for single-AZ deployment and 3 for multi-AZ deployment by default.
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Storage capacity of a single node, which is 200 GB by default.
-         * @type {number || null}
-         */
-        this.StorageSize = null;
-
-        /**
-         * Whether to enable mirrored queue. Default value: `false`.
-         * @type {boolean || null}
-         */
-        this.EnableCreateDefaultHaMirrorQueue = null;
-
-        /**
-         * Whether to enable auto-renewal. Default value: `true`.
-         * @type {boolean || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * Validity period, which is one month by default.
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.NodeSpec = 'NodeSpec' in params ? params.NodeSpec : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
-        this.EnableCreateDefaultHaMirrorQueue = 'EnableCreateDefaultHaMirrorQueue' in params ? params.EnableCreateDefaultHaMirrorQueue : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-
-    }
-}
-
-/**
- * CreateRabbitMQVirtualHost response structure.
- * @class
- */
-class CreateRabbitMQVirtualHostResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Vhost name
-         * @type {string || null}
-         */
-        this.VirtualHost = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeRabbitMQNodeList request structure.
  * @class
  */
@@ -1737,19 +511,19 @@ class DescribeRabbitMQNodeListRequest extends  AbstractModel {
         super();
 
         /**
-         * TDMQ for RabbitMQ cluster ID
+         * Instance ID, such as amqp-xxxxxxxx. specifies the effective InstanceId that can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Offset
+         * Offset, default value 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * The maximum entries per page
+         * Page limit. default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -1761,18 +535,18 @@ class DescribeRabbitMQNodeListRequest extends  AbstractModel {
         this.NodeName = null;
 
         /**
-         * Name and value of a filter.
-Currently, only the `nodeStatus` filter is supported.
-Valid values: `running`, `down`.
-It is an array type and can contain multiple filters.
+         * Filter parameter name and value. currently only support filtering based on node status.
+"Name": "nodeStatus"
+"Value": running or down
 
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Sorting by a specified element.
-Valid values: `cpuUsage`, `diskUsage`.
+         * Sorts by the specified element. only 2 are present.
+CPU usage: specifies the CPU utilization of the node.
+diskUsage: specifies the node disk utilization.
          * @type {string || null}
          */
         this.SortElement = null;
@@ -1813,255 +587,15 @@ Valid values: `ascend`, `descend`.
 }
 
 /**
- * PublishCmqMsg request structure.
+ * DeleteCmqQueue response structure.
  * @class
  */
-class PublishCmqMsgRequest extends  AbstractModel {
+class DeleteCmqQueueResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Message content. The total message size is up to 1,024 KB.
-         * @type {string || null}
-         */
-        this.MsgContent = null;
-
-        /**
-         * Message tag. You can pass in multiple tags or a single route. Each tag or route can contain up to 64 characters.
-         * @type {Array.<string> || null}
-         */
-        this.MsgTag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
-        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
-
-    }
-}
-
-/**
- * Instance configurations of a TDMQ for RocketMQ exclusive cluster
- * @class
- */
-class RocketMQInstanceConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Maximum TPS per namespace
-         * @type {number || null}
-         */
-        this.MaxTpsPerNamespace = null;
-
-        /**
-         * Maximum number of namespaces
-         * @type {number || null}
-         */
-        this.MaxNamespaceNum = null;
-
-        /**
-         * Number of used namespaces
-         * @type {number || null}
-         */
-        this.UsedNamespaceNum = null;
-
-        /**
-         * Maximum number of topics
-         * @type {number || null}
-         */
-        this.MaxTopicNum = null;
-
-        /**
-         * Number of used topics
-         * @type {number || null}
-         */
-        this.UsedTopicNum = null;
-
-        /**
-         * Maximum number of groups
-         * @type {number || null}
-         */
-        this.MaxGroupNum = null;
-
-        /**
-         * Number of used groups
-         * @type {number || null}
-         */
-        this.UsedGroupNum = null;
-
-        /**
-         * Cluster type
-         * @type {string || null}
-         */
-        this.ConfigDisplay = null;
-
-        /**
-         * Number of nodes in the cluster
-         * @type {number || null}
-         */
-        this.NodeCount = null;
-
-        /**
-         * Node distribution
-         * @type {Array.<InstanceNodeDistribution> || null}
-         */
-        this.NodeDistribution = null;
-
-        /**
-         * Topic distribution
-         * @type {Array.<RocketMQTopicDistribution> || null}
-         */
-        this.TopicDistribution = null;
-
-        /**
-         * 
-         * @type {number || null}
-         */
-        this.MaxQueuesPerTopic = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
-        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
-        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
-        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
-        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
-        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
-        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
-        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
-        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
-
-        if (params.NodeDistribution) {
-            this.NodeDistribution = new Array();
-            for (let z in params.NodeDistribution) {
-                let obj = new InstanceNodeDistribution();
-                obj.deserialize(params.NodeDistribution[z]);
-                this.NodeDistribution.push(obj);
-            }
-        }
-
-        if (params.TopicDistribution) {
-            this.TopicDistribution = new Array();
-            for (let z in params.TopicDistribution) {
-                let obj = new RocketMQTopicDistribution();
-                obj.deserialize(params.TopicDistribution[z]);
-                this.TopicDistribution.push(obj);
-            }
-        }
-        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
-
-    }
-}
-
-/**
- * CreateCmqSubscribe request structure.
- * @class
- */
-class CreateCmqSubscribeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * `Endpoint` for notification receipt, which is distinguished by `Protocol`. For `http`, `Endpoint` must begin with `http://` and `host` can be a domain name or IP. For `Queue`, enter `QueueName`. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for `Endpoint`, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.
-         * @type {string || null}
-         */
-        this.Endpoint = null;
-
-        /**
-         * CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values: 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
-         * @type {string || null}
-         */
-        this.NotifyStrategy = null;
-
-        /**
-         * Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not configured, no matter whether `MsgTag` is configured, the subscription will receive all messages published to the topic; 2. If the array of `FilterTag` values has a value, only when at least one of the values in the array also exists in the array of `MsgTag` values (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the array of `FilterTag` values has a value, but `MsgTag` is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-         * @type {Array.<string> || null}
-         */
-        this.FilterTag = null;
-
-        /**
-         * The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
-         * @type {Array.<string> || null}
-         */
-        this.BindingKey = null;
-
-        /**
-         * Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `http`, both options are acceptable, and the default value is `JSON`.
-         * @type {string || null}
-         */
-        this.NotifyContentFormat = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
-        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
-        this.FilterTag = 'FilterTag' in params ? params.FilterTag : null;
-        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
-        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
-
-    }
-}
-
-/**
- * RewindCmqQueue response structure.
- * @class
- */
-class RewindCmqQueueResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2081,18 +615,48 @@ class RewindCmqQueueResponse extends  AbstractModel {
 }
 
 /**
- * DeleteCluster request structure.
+ * DescribeRocketMQEnvironmentRoles request structure.
  * @class
  */
-class DeleteClusterRequest extends  AbstractModel {
+class DescribeRocketMQEnvironmentRolesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the cluster to be deleted.
+         * Required. Specifies the ID of the RocketMQ cluster.
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Starting index. Default is 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returns, default to 10 if not specified, maximum value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Filters RoleName by role name for precise query. Type: string. Required: no.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -2104,127 +668,19 @@ class DeleteClusterRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
-    }
-}
-
-/**
- * Subscription response parameter in CMQ
- * @class
- */
-class CmqSubscription extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * Subscription ID, which will be used during monitoring data pull.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubscriptionId = null;
-
-        /**
-         * Subscription owner `APPID`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicOwner = null;
-
-        /**
-         * Number of messages to be delivered in the subscription.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgCount = null;
-
-        /**
-         * Time when the subscription attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LastModifyTime = null;
-
-        /**
-         * Subscription creation time. A Unix timestamp accurate down to the millisecond will be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Filtering policy for subscribing to and receiving messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.BindingKey = null;
-
-        /**
-         * Endpoint that receives notifications, which varies by `protocol`: for HTTP, the endpoint must start with `http://`, and the `host` can be a domain or IP; for `queue`, `queueName` should be entered.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Endpoint = null;
-
-        /**
-         * Filtering policy selected when a subscription is created:
-If `filterType` is 1, `filterTag` will be used for filtering.
-If `filterType` is 2, `bindingKey` will be used for filtering.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.FilterTags = null;
-
-        /**
-         * Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * CMQ push server retry policy in case an error occurs while pushing a message to the endpoint. Valid values:
-(1) BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message.
-(2) EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NotifyStrategy = null;
-
-        /**
-         * Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `protocol` is `queue`, this value must be `SIMPLIFIED`. If `protocol` is `HTTP`, both values are acceptable, and the default value is `JSON`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NotifyContentFormat = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-        this.SubscriptionId = 'SubscriptionId' in params ? params.SubscriptionId : null;
-        this.TopicOwner = 'TopicOwner' in params ? params.TopicOwner : null;
-        this.MsgCount = 'MsgCount' in params ? params.MsgCount : null;
-        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
-        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
-        this.FilterTags = 'FilterTags' in params ? params.FilterTags : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
-        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
 
     }
 }
@@ -2374,6 +830,32 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RetryMaxTimes = null;
 
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Namespace
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Number of subscribed topics.
+         * @type {number || null}
+         */
+        this.SubscribeTopicNum = null;
+
+        /**
+         * List of bound tags
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -2398,6 +880,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BroadcastEnabled = 'BroadcastEnabled' in params ? params.BroadcastEnabled : null;
         this.GroupType = 'GroupType' in params ? params.GroupType : null;
         this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.SubscribeTopicNum = 'SubscribeTopicNum' in params ? params.SubscribeTopicNum : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -2411,19 +905,19 @@ class ModifyRabbitMQUserRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster instance ID
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Username, which is used for login.
+         * Username, such as admin. effective User names can be found by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking a cluster in the cluster list, entering cluster details, and locating the list of users under the User and permission management tab, thereby finding the username.
          * @type {string || null}
          */
         this.User = null;
 
         /**
-         * Password, which is used for login.
+         * Password, used when logging in. requirement: cannot be empty, 8-64 characters, must contain at least two items from lowercase letters, uppercase letters, digits, and special characters [`()~!@#$%^&*_=|{}[]:;',.?/].
          * @type {string || null}
          */
         this.Password = null;
@@ -2435,7 +929,8 @@ class ModifyRabbitMQUserRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * User tag, which defines a user's permission scope for accessing RabbitMQ Management. If this parameter is not passed in, it won't be modified.
+         * User tag, used to determine the access permission of the user for RabbitMQ Management.
+management: ordinary console user. monitoring: administrative console user. other value: non-console user.
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -2473,126 +968,6 @@ class ModifyRabbitMQUserRequest extends  AbstractModel {
 }
 
 /**
- * RocketMQ cluster configuration
- * @class
- */
-class RocketMQClusterConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Maximum TPS per namespace
-         * @type {number || null}
-         */
-        this.MaxTpsPerNamespace = null;
-
-        /**
-         * Maximum number of namespaces
-         * @type {number || null}
-         */
-        this.MaxNamespaceNum = null;
-
-        /**
-         * Number of used namespaces
-         * @type {number || null}
-         */
-        this.UsedNamespaceNum = null;
-
-        /**
-         * Maximum number of topics
-         * @type {number || null}
-         */
-        this.MaxTopicNum = null;
-
-        /**
-         * Number of used topics
-         * @type {number || null}
-         */
-        this.UsedTopicNum = null;
-
-        /**
-         * Maximum number of groups
-         * @type {number || null}
-         */
-        this.MaxGroupNum = null;
-
-        /**
-         * Number of used groups
-         * @type {number || null}
-         */
-        this.UsedGroupNum = null;
-
-        /**
-         * Maximum message retention period in milliseconds
-         * @type {number || null}
-         */
-        this.MaxRetentionTime = null;
-
-        /**
-         * Maximum message delay in milliseconds
-         * @type {number || null}
-         */
-        this.MaxLatencyTime = null;
-
-        /**
-         * The maximum number of queues in a single topic
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxQueuesPerTopic = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
-        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
-        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
-        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
-        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
-        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
-        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
-        this.MaxRetentionTime = 'MaxRetentionTime' in params ? params.MaxRetentionTime : null;
-        this.MaxLatencyTime = 'MaxLatencyTime' in params ? params.MaxLatencyTime : null;
-        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
-
-    }
-}
-
-/**
- * DeleteCmqTopic response structure.
- * @class
- */
-class DeleteCmqTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateSubscription request structure.
  * @class
  */
@@ -2625,16 +1000,16 @@ class CreateSubscriptionRequest extends  AbstractModel {
         this.IsIdempotent = null;
 
         /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
          * Pulsar cluster ID
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
 
         /**
          * Whether to automatically create a dead letter topic and a retry letter topic. true: yes (default value); false: no.
@@ -2661,8 +1036,8 @@ class CreateSubscriptionRequest extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
         this.IsIdempotent = 'IsIdempotent' in params ? params.IsIdempotent : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
         this.AutoCreatePolicyTopic = 'AutoCreatePolicyTopic' in params ? params.AutoCreatePolicyTopic : null;
         this.PostFixPattern = 'PostFixPattern' in params ? params.PostFixPattern : null;
 
@@ -2670,139 +1045,162 @@ class CreateSubscriptionRequest extends  AbstractModel {
 }
 
 /**
- * CreateRocketMQNamespace request structure.
+ * RabbitMQ managed instance information.
  * @class
  */
-class CreateRocketMQNamespaceRequest extends  AbstractModel {
+class RabbitMQVipInstance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * This parameter is disused.
-         * @type {number || null}
-         */
-        this.Ttl = null;
-
-        /**
-         * This parameter is disused.
-         * @type {number || null}
-         */
-        this.RetentionTime = null;
-
-        /**
-         * Remarks (up to 128 characters)
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.Ttl = 'Ttl' in params ? params.Ttl : null;
-        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-
-    }
-}
-
-/**
- * TDMQ for RabbitMQ vhost details
- * @class
- */
-class RabbitMQVirtualHostInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Vhost name
+         * Instance name
          * @type {string || null}
          */
-        this.VirtualHost = null;
+        this.InstanceName = null;
 
         /**
-         * Vhost description
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Instance version.
          * @type {string || null}
          */
-        this.Description = null;
+        this.InstanceVersion = null;
 
         /**
-         * Vhost tag
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Creation time
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Modification time
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * Statistics of vhost overview
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {RabbitMQVirtualHostStatistics || null}
-         */
-        this.VirtualHostStatistics = null;
-
-        /**
-         * 
-         * @type {string || null}
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
+         * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Number of nodes
          * @type {number || null}
          */
-        this.MessageHeapCount = null;
+        this.NodeCount = null;
 
         /**
-         * 
-         * @type {number || null}
+         * Instance specification name
+         * @type {string || null}
          */
-        this.MessageRateIn = null;
+        this.ConfigDisplay = null;
 
         /**
-         * 
+         * Peak TPS
          * @type {number || null}
          */
-        this.MessageRateOut = null;
+        this.MaxTps = null;
+
+        /**
+         * Peak bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * Storage capacity in GB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Specifies the instance expiration time in milliseconds as a unix timestamp. the value is 0 for pay-as-you-go resources.
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 1 indicates prepaid mode, 0 indicates postpaid.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Node specification of the cluster. specifies the corresponding flag.
+2C8G:rabbit-vip-profession-2c8g
+4C16G:rabbit-vip-profession-4c16g
+8C32G:rabbit-vip-profession-8c32g
+16C32G:rabbit-vip-basic-4
+16C64G:rabbit-vip-profession-16c64g
+2C4G:rabbit-vip-basic-5
+4C8G:rabbit-vip-basic-1
+8C16G (sold out): rabbit-vip-basic-2.
+Specifies the default value as 4C8G: rabbit-vip-basic-1.
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * Cluster exception information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExceptionInformation = null;
+
+        /**
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
+This parameter is used to display the instance status additionally and distinguish from the `Status` parameter.
+         * @type {number || null}
+         */
+        this.ClusterStatus = null;
+
+        /**
+         * Public network access point.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicAccessEndpoint = null;
+
+        /**
+         * VPC access point list.
+         * @type {Array.<VpcEndpointInfo> || null}
+         */
+        this.Vpcs = null;
+
+        /**
+         * Creation time in milliseconds. unix timestamp.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Instance type. valid values: 0 (managed), 1 (Serverless).
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Isolation time, in milliseconds. unix timestamp.
+         * @type {number || null}
+         */
+        this.IsolatedTime = null;
+
+        /**
+         * Whether deletion protection is enabled.
+         * @type {boolean || null}
+         */
+        this.EnableDeletionProtection = null;
+
+        /**
+         * Tag list
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -2814,407 +1212,35 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-
-        if (params.VirtualHostStatistics) {
-            let obj = new RabbitMQVirtualHostStatistics();
-            obj.deserialize(params.VirtualHostStatistics)
-            this.VirtualHostStatistics = obj;
-        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
         this.Status = 'Status' in params ? params.Status : null;
-        this.MessageHeapCount = 'MessageHeapCount' in params ? params.MessageHeapCount : null;
-        this.MessageRateIn = 'MessageRateIn' in params ? params.MessageRateIn : null;
-        this.MessageRateOut = 'MessageRateOut' in params ? params.MessageRateOut : null;
-
-    }
-}
-
-/**
- * Information of instance node distribution
- * @class
- */
-class InstanceNodeDistribution extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * AZ
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * AZ ID
-         * @type {string || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Number of nodes
-         * @type {number || null}
-         */
-        this.NodeCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.ExceptionInformation = 'ExceptionInformation' in params ? params.ExceptionInformation : null;
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.PublicAccessEndpoint = 'PublicAccessEndpoint' in params ? params.PublicAccessEndpoint : null;
 
-    }
-}
-
-/**
- * DescribeCmqTopicDetail response structure.
- * @class
- */
-class DescribeCmqTopicDetailResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic details
-         * @type {CmqTopic || null}
-         */
-        this.TopicDescribe = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicDescribe) {
-            let obj = new CmqTopic();
-            obj.deserialize(params.TopicDescribe)
-            this.TopicDescribe = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRabbitMQVirtualHost response structure.
- * @class
- */
-class ModifyRabbitMQVirtualHostResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Batch queue attribute information of CMQ
- * @class
- */
-class CmqQueue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Message queue ID.
-         * @type {string || null}
-         */
-        this.QueueId = null;
-
-        /**
-         * Message queue name.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * Limit of the number of messages produced per second. The value for consumed messages is 1.1 times this value.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * Bandwidth limit.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Bps = null;
-
-        /**
-         * Maximum retention period for inflight messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxDelaySeconds = null;
-
-        /**
-         * Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
-         * @type {number || null}
-         */
-        this.MaxMsgHeapNum = null;
-
-        /**
-         * Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PollingWaitSeconds = null;
-
-        /**
-         * Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgRetentionSeconds = null;
-
-        /**
-         * Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VisibilityTimeout = null;
-
-        /**
-         * Maximum message length. Value range: 1024–1048576 bytes (i.e., 1–1024 KB). Default value: 65536.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxMsgSize = null;
-
-        /**
-         * Maximum time range during which a message can be rewound in the queue, which ranges from 0 to 43,200 seconds. 0 indicates that message rewind is disabled.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RewindSeconds = null;
-
-        /**
-         * Queue creation time. A Unix timestamp accurate down to the millisecond will be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Time when the queue attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LastModifyTime = null;
-
-        /**
-         * Total number of messages in `Active` status (i.e., unconsumed) in the queue, which is an approximate value.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ActiveMsgNum = null;
-
-        /**
-         * Total number of messages in `Inactive` status (i.e., being consumed) in the queue, which is an approximate value.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.InactiveMsgNum = null;
-
-        /**
-         * Number of delayed messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DelayMsgNum = null;
-
-        /**
-         * Number of retained messages which have been deleted by the `DelMsg` API but are still within their rewind time range.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RewindMsgNum = null;
-
-        /**
-         * Minimum unconsumed time of message in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MinMsgTime = null;
-
-        /**
-         * Transaction message queue. true: transaction message type; false: other message types.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Transaction = null;
-
-        /**
-         * Dead letter queue.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CmqDeadLetterSource> || null}
-         */
-        this.DeadLetterSource = null;
-
-        /**
-         * Dead letter queue policy.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {CmqDeadLetterPolicy || null}
-         */
-        this.DeadLetterPolicy = null;
-
-        /**
-         * Transaction message policy.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {CmqTransactionPolicy || null}
-         */
-        this.TransactionPolicy = null;
-
-        /**
-         * Creator `Uin`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CreateUin = null;
-
-        /**
-         * Associated tag.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Message trace. true: enabled; false: not enabled
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Trace = null;
-
-        /**
-         * Tenant ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TenantId = null;
-
-        /**
-         * Namespace name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * The maximum number of unacknowledged messages.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxUnackedMsgNum = null;
-
-        /**
-         * Maximum size of heaped messages in bytes.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxMsgBacklogSize = null;
-
-        /**
-         * Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RetentionSizeInMB = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueId = 'QueueId' in params ? params.QueueId : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.Bps = 'Bps' in params ? params.Bps : null;
-        this.MaxDelaySeconds = 'MaxDelaySeconds' in params ? params.MaxDelaySeconds : null;
-        this.MaxMsgHeapNum = 'MaxMsgHeapNum' in params ? params.MaxMsgHeapNum : null;
-        this.PollingWaitSeconds = 'PollingWaitSeconds' in params ? params.PollingWaitSeconds : null;
-        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
-        this.VisibilityTimeout = 'VisibilityTimeout' in params ? params.VisibilityTimeout : null;
-        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
-        this.RewindSeconds = 'RewindSeconds' in params ? params.RewindSeconds : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
-        this.ActiveMsgNum = 'ActiveMsgNum' in params ? params.ActiveMsgNum : null;
-        this.InactiveMsgNum = 'InactiveMsgNum' in params ? params.InactiveMsgNum : null;
-        this.DelayMsgNum = 'DelayMsgNum' in params ? params.DelayMsgNum : null;
-        this.RewindMsgNum = 'RewindMsgNum' in params ? params.RewindMsgNum : null;
-        this.MinMsgTime = 'MinMsgTime' in params ? params.MinMsgTime : null;
-        this.Transaction = 'Transaction' in params ? params.Transaction : null;
-
-        if (params.DeadLetterSource) {
-            this.DeadLetterSource = new Array();
-            for (let z in params.DeadLetterSource) {
-                let obj = new CmqDeadLetterSource();
-                obj.deserialize(params.DeadLetterSource[z]);
-                this.DeadLetterSource.push(obj);
+        if (params.Vpcs) {
+            this.Vpcs = new Array();
+            for (let z in params.Vpcs) {
+                let obj = new VpcEndpointInfo();
+                obj.deserialize(params.Vpcs[z]);
+                this.Vpcs.push(obj);
             }
         }
-
-        if (params.DeadLetterPolicy) {
-            let obj = new CmqDeadLetterPolicy();
-            obj.deserialize(params.DeadLetterPolicy)
-            this.DeadLetterPolicy = obj;
-        }
-
-        if (params.TransactionPolicy) {
-            let obj = new CmqTransactionPolicy();
-            obj.deserialize(params.TransactionPolicy)
-            this.TransactionPolicy = obj;
-        }
-        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.EnableDeletionProtection = 'EnableDeletionProtection' in params ? params.EnableDeletionProtection : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -3224,55 +1250,186 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 this.Tags.push(obj);
             }
         }
-        this.Trace = 'Trace' in params ? params.Trace : null;
-        this.TenantId = 'TenantId' in params ? params.TenantId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
-        this.MaxMsgBacklogSize = 'MaxMsgBacklogSize' in params ? params.MaxMsgBacklogSize : null;
-        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
 
     }
 }
 
 /**
- * CreateEnvironment response structure.
+ * RabbitMQ cluster basic information.
  * @class
  */
-class CreateEnvironmentResponse extends  AbstractModel {
+class RabbitMQClusterInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment (namespace) name.
+         * Cluster ID
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.ClusterId = null;
 
         /**
-         * TTL for unconsumed messages in seconds.
+         * 
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Creation time in milliseconds. unix timestamp.
          * @type {number || null}
          */
-        this.MsgTTL = null;
+        this.CreateTime = null;
 
         /**
-         * Remarks (up to 128 characters).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster description information
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Namespace ID
-         * @type {string || null}
+         * 
+         * @type {Array.<VpcEndpointInfo> || null}
          */
-        this.NamespaceId = null;
+        this.Vpcs = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * AZ information
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.VirtualHostNumber = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.QueueNumber = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MessagePublishRate = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MessageStackNumber = null;
+
+        /**
+         * Specifies the instance expiration time in milliseconds as a unix timestamp. the value is 0 for pay-as-you-go resources.
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ChannelNumber = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ConnectionNumber = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ConsumerNumber = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExchangeNumber = null;
+
+        /**
+         * Cluster exception information.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ExceptionInformation = null;
+
+        /**
+         * Instance status. 0: creating; 1: normal; 2: isolating; 3: terminated; 4: abnormal; 5: delivery failed.
+         * @type {number || null}
+         */
+        this.ClusterStatus = null;
+
+        /**
+         * Auto-renewal flag. 0 indicates the default status (If the default status is not configured, manual renewal is enabled), 1 indicates auto-renewal, and 2 indicates explicitly no auto-renewal (configured by the user).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Whether the image queue policy is enabled. 1: enabled; 0: disabled.
+         * @type {number || null}
+         */
+        this.MirrorQueuePolicyFlag = null;
+
+        /**
+         * Number of messages consumed per second. Unit: messages/second.
+         * @type {number || null}
+         */
+        this.MessageConsumeRate = null;
+
+        /**
+         * Cluster version information.
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * Billing mode. 0: postpaid; 1: prepaid.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Instance type. 0: Exclusive Edition; 1: Serverless Edition.
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Specifies the isolation time started. unix timestamp.
+         * @type {number || null}
+         */
+        this.IsolatedTime = null;
+
+        /**
+         * Whether it is a container instance. default true.
+         * @type {boolean || null}
+         */
+        this.Container = null;
+
+        /**
+         * Tag list
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether deletion protection is enabled.
+         * @type {boolean || null}
+         */
+        this.EnableDeletionProtection = null;
 
     }
 
@@ -3283,11 +1440,50 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Vpcs) {
+            this.Vpcs = new Array();
+            for (let z in params.Vpcs) {
+                let obj = new VpcEndpointInfo();
+                obj.deserialize(params.Vpcs[z]);
+                this.Vpcs.push(obj);
+            }
+        }
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.VirtualHostNumber = 'VirtualHostNumber' in params ? params.VirtualHostNumber : null;
+        this.QueueNumber = 'QueueNumber' in params ? params.QueueNumber : null;
+        this.MessagePublishRate = 'MessagePublishRate' in params ? params.MessagePublishRate : null;
+        this.MessageStackNumber = 'MessageStackNumber' in params ? params.MessageStackNumber : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ChannelNumber = 'ChannelNumber' in params ? params.ChannelNumber : null;
+        this.ConnectionNumber = 'ConnectionNumber' in params ? params.ConnectionNumber : null;
+        this.ConsumerNumber = 'ConsumerNumber' in params ? params.ConsumerNumber : null;
+        this.ExchangeNumber = 'ExchangeNumber' in params ? params.ExchangeNumber : null;
+        this.ExceptionInformation = 'ExceptionInformation' in params ? params.ExceptionInformation : null;
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.MirrorQueuePolicyFlag = 'MirrorQueuePolicyFlag' in params ? params.MirrorQueuePolicyFlag : null;
+        this.MessageConsumeRate = 'MessageConsumeRate' in params ? params.MessageConsumeRate : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.Container = 'Container' in params ? params.Container : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.EnableDeletionProtection = 'EnableDeletionProtection' in params ? params.EnableDeletionProtection : null;
 
     }
 }
@@ -3349,21 +1545,27 @@ class RabbitMQVirtualHostStatistics extends  AbstractModel {
 }
 
 /**
- * CreateSubscription response structure.
+ * DescribeRabbitMQQueues response structure.
  * @class
  */
-class CreateSubscriptionResponse extends  AbstractModel {
+class DescribeRabbitMQQueuesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Creation result.
-         * @type {boolean || null}
+         * Queue list information.
+         * @type {Array.<RabbitMQQueueListInfo> || null}
          */
-        this.Result = null;
+        this.QueueInfoList = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Number of queues
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3377,371 +1579,42 @@ class CreateSubscriptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * SendMsg response structure.
- * @class
- */
-class SendMsgResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyCmqTopicAttribute response structure.
- * @class
- */
-class ModifyCmqTopicAttributeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCmqSubscriptionDetail request structure.
- * @class
- */
-class DescribeCmqSubscriptionDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy search by `SubscriptionName`
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-    }
-}
-
-/**
- * Topic instance
- * @class
- */
-class Topic extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Average size of the messages published in the last interval in bytes.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * The number of consumers.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerCount = null;
-
-        /**
-         * The total number of recorded messages.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastConfirmedEntry = null;
-
-        /**
-         * Time when the last ledger was created.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastLedgerCreatedTimestamp = null;
-
-        /**
-         * The number of messages published by local and replicated publishers per second.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateIn = null;
-
-        /**
-         * The total number of messages delivered by local and replicated consumers per second.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * The size (in bytes) of messages published by local and replicated publishers per second.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputIn = null;
-
-        /**
-         * The size (in bytes) of messages delivered by local and replicated consumers per second.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * The total number of recorded messages.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * Partition count ≤ 0: there are no subpartitions in the topic.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * The number of producers.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerCount = null;
-
-        /**
-         * The size of all stored messages in bytes.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TotalSize = null;
-
-        /**
-         * Subpartitions in a partitioned topic.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<PartitionsTopic> || null}
-         */
-        this.SubTopicSets = null;
-
-        /**
-         * Topic type description:
-0: General message;
-1: Globally sequential message;
-2: Partitionally sequential message;
-3: Retry letter topic;
-4: Dead letter topic;
-5: Transaction message.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * Environment (namespace) name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Remarks (up to 128 characters).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Creation time.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * The maximum number of producers.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerLimit = null;
-
-        /**
-         * The maximum number of consumers.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerLimit = null;
-
-        /**
-         * `0`: Non-persistent and non-partitioned
-`1`: Non-persistent and partitioned
-`2`: Persistent and non-partitioned
-`3`: Persistent and partitioned
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PulsarTopicType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
-        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
-        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
-        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
-
-        if (params.SubTopicSets) {
-            this.SubTopicSets = new Array();
-            for (let z in params.SubTopicSets) {
-                let obj = new PartitionsTopic();
-                obj.deserialize(params.SubTopicSets[z]);
-                this.SubTopicSets.push(obj);
+        if (params.QueueInfoList) {
+            this.QueueInfoList = new Array();
+            for (let z in params.QueueInfoList) {
+                let obj = new RabbitMQQueueListInfo();
+                obj.deserialize(params.QueueInfoList[z]);
+                this.QueueInfoList.push(obj);
             }
         }
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ProducerLimit = 'ProducerLimit' in params ? params.ProducerLimit : null;
-        this.ConsumerLimit = 'ConsumerLimit' in params ? params.ConsumerLimit : null;
-        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeEnvironments request structure.
+ * Type of the tag key/value
  * @class
  */
-class DescribeEnvironmentsRequest extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Fuzzy search by namespace name.
+         * Tag key value
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.TagKey = null;
 
         /**
-         * Offset, which defaults to 0 if left empty.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pulsar cluster ID
+         * Tag's value
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.ClusterId = null;
-
-        /**
-         * * EnvironmentId
-Filter by namespace for exact query.
-Type: String
-Required: No
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.TagValue = null;
 
     }
 
@@ -3752,19 +1625,8 @@ Required: No
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -3819,69 +1681,6 @@ class DescribeRocketMQNamespacesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRocketMQTopics request structure.
- * @class
- */
-class DescribeRocketMQTopicsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offset for query.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Query limit.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace.
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Filter by topic type. Valid values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`.
-         * @type {Array.<string> || null}
-         */
-        this.FilterType = null;
-
-        /**
-         * Search by topic name. Fuzzy query is supported.
-         * @type {string || null}
-         */
-        this.FilterName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.FilterType = 'FilterType' in params ? params.FilterType : null;
-        this.FilterName = 'FilterName' in params ? params.FilterName : null;
-
-    }
-}
-
-/**
  * ModifyRocketMQCluster response structure.
  * @class
  */
@@ -3890,7 +1689,7 @@ class ModifyRocketMQClusterResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3910,21 +1709,21 @@ class ModifyRocketMQClusterResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCmqQueueDetail response structure.
+ * DescribeRocketMQTopicStats response structure.
  * @class
  */
-class DescribeCmqQueueDetailResponse extends  AbstractModel {
+class DescribeRocketMQTopicStatsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of queue details.
-         * @type {CmqQueue || null}
+         * Production details list.
+         * @type {Array.<TopicStats> || null}
          */
-        this.QueueDescribe = null;
+        this.TopicStatsList = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3939,10 +1738,13 @@ class DescribeCmqQueueDetailResponse extends  AbstractModel {
             return;
         }
 
-        if (params.QueueDescribe) {
-            let obj = new CmqQueue();
-            obj.deserialize(params.QueueDescribe)
-            this.QueueDescribe = obj;
+        if (params.TopicStatsList) {
+            this.TopicStatsList = new Array();
+            for (let z in params.TopicStatsList) {
+                let obj = new TopicStats();
+                obj.deserialize(params.TopicStatsList[z]);
+                this.TopicStatsList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3970,16 +1772,16 @@ class CreateEnvironmentRequest extends  AbstractModel {
         this.MsgTTL = null;
 
         /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
          * Pulsar cluster ID
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
 
         /**
          * Message retention policy
@@ -4004,8 +1806,8 @@ class CreateEnvironmentRequest extends  AbstractModel {
         }
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
         this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
         if (params.RetentionPolicy) {
             let obj = new RetentionPolicy();
@@ -4018,21 +1820,21 @@ class CreateEnvironmentRequest extends  AbstractModel {
 }
 
 /**
- * DeleteTopics response structure.
+ * CreateCmqSubscribe response structure.
  * @class
  */
-class DeleteTopicsResponse extends  AbstractModel {
+class CreateCmqSubscribeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of deleted topics.
-         * @type {Array.<TopicRecord> || null}
+         * Subscription ID
+         * @type {string || null}
          */
-        this.TopicSets = null;
+        this.SubscriptionId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4046,73 +1848,7 @@ class DeleteTopicsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new TopicRecord();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyEnvironmentAttributes response structure.
- * @class
- */
-class ModifyEnvironmentAttributesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * TTL for unconsumed messages in seconds.
-         * @type {number || null}
-         */
-        this.MsgTTL = null;
-
-        /**
-         * Remarks (up to 128 characters).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Namespace ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.SubscriptionId = 'SubscriptionId' in params ? params.SubscriptionId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4183,6 +1919,3086 @@ class DescribeClustersRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyEnvironmentAttributes request structure.
+ * @class
+ */
+class ModifyEnvironmentAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Message retention policy
+         * @type {RetentionPolicy || null}
+         */
+        this.RetentionPolicy = null;
+
+        /**
+         * Whether to enable "Auto-Create Subscription"
+         * @type {boolean || null}
+         */
+        this.AutoSubscriptionCreation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.RetentionPolicy) {
+            let obj = new RetentionPolicy();
+            obj.deserialize(params.RetentionPolicy)
+            this.RetentionPolicy = obj;
+        }
+        this.AutoSubscriptionCreation = 'AutoSubscriptionCreation' in params ? params.AutoSubscriptionCreation : null;
+
+    }
+}
+
+/**
+ * Monitoring data points
+ * @class
+ */
+class RocketMQDataPoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Monitoring value array, which corresponds one-to-one with Timestamps
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Timestamps = null;
+
+        /**
+         * Monitoring data point position. For example, a day is divided into 1,440 points per minute, with each point having a serial number between 0 and 1439. If a certain serial number is not in the array, it indicates a missing data point.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamps = 'Timestamps' in params ? params.Timestamps : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DescribeSubscriptions response structure.
+ * @class
+ */
+class DescribeSubscriptionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of subscriber sets.
+         * @type {Array.<Subscription> || null}
+         */
+        this.SubscriptionSets = null;
+
+        /**
+         * The total number of returned results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubscriptionSets) {
+            this.SubscriptionSets = new Array();
+            for (let z in params.SubscriptionSets) {
+                let obj = new Subscription();
+                obj.deserialize(params.SubscriptionSets[z]);
+                this.SubscriptionSets.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQCluster request structure.
+ * @class
+ */
+class ModifyRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RocketMQ cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 3–64 letters, digits, hyphens, and underscores
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Remarks (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Whether to enable the HTTP access over the public network
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+
+    }
+}
+
+/**
+ * SendBatchMessages response structure.
+ * @class
+ */
+class SendBatchMessagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique message ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * Error message. If an empty string is returned, no error occurred.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstanceDetail response structure.
+ * @class
+ */
+class DescribeRocketMQVipInstanceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster information
+         * @type {RocketMQClusterInfo || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * Cluster configuration
+         * @type {RocketMQInstanceConfig || null}
+         */
+        this.InstanceConfig = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterInfo) {
+            let obj = new RocketMQClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
+        }
+
+        if (params.InstanceConfig) {
+            let obj = new RocketMQInstanceConfig();
+            obj.deserialize(params.InstanceConfig)
+            this.InstanceConfig = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVirtualHost response structure.
+ * @class
+ */
+class DescribeRabbitMQVirtualHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned number of vhosts
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of vhost details
+         * @type {Array.<RabbitMQVirtualHostInfo> || null}
+         */
+        this.VirtualHostList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VirtualHostList) {
+            this.VirtualHostList = new Array();
+            for (let z in params.VirtualHostList) {
+                let obj = new RabbitMQVirtualHostInfo();
+                obj.deserialize(params.VirtualHostList[z]);
+                this.VirtualHostList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RabbitMQ permission details
+ * @class
+ */
+class RabbitMQPermission extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username, such as admin. effective User names can be found by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking a cluster in the cluster list, entering cluster details, and locating the list of users under the User and permission management tab, thereby finding the username.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * VirtualHost name, such as testvhost. valid VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Type of permissions related to declare operations. This regular expression controls resource creation and deletion permissions of users in this vhost.
+         * @type {string || null}
+         */
+        this.ConfigRegexp = null;
+
+        /**
+         * Type of permissions related to message write operations. This regular expression controls resource creation and deletion permissions of users in this vhost.
+         * @type {string || null}
+         */
+        this.WriteRegexp = null;
+
+        /**
+         * Type of permissions related to message read operations. This regular expression controls resource creation and deletion permissions of users in this vhost.
+         * @type {string || null}
+         */
+        this.ReadRegexp = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Creation timestamp.
+         * @type {number || null}
+         */
+        this.CreateTs = null;
+
+        /**
+         * Modification timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.ConfigRegexp = 'ConfigRegexp' in params ? params.ConfigRegexp : null;
+        this.WriteRegexp = 'WriteRegexp' in params ? params.WriteRegexp : null;
+        this.ReadRegexp = 'ReadRegexp' in params ? params.ReadRegexp : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQCluster request structure.
+ * @class
+ */
+class CreateRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster name, which can contain 3–64 letters, digits, hyphens, and underscores
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Cluster description (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Tag list
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeClusterDetail request structure.
+ * @class
+ */
+class DescribeClusterDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQRoles response structure.
+ * @class
+ */
+class DeleteRocketMQRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Successfully deleted role name array.
+         * @type {Array.<string> || null}
+         */
+        this.RoleNames = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQTopic response structure.
+ * @class
+ */
+class DeleteRocketMQTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Producer information
+ * @class
+ */
+class Publisher extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Producer ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProducerId = null;
+
+        /**
+         * Producer name.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Producer address.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Client version.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClientVersion = null;
+
+        /**
+         * Message production rate (message/sec).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgRateIn = null;
+
+        /**
+         * Message production throughput rate (byte/sec).
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * Average message size in bytes.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AverageMsgSize = null;
+
+        /**
+         * Connection time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConnectedSince = null;
+
+        /**
+         * Serial number of the topic partition connected to the producer.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProducerId = 'ProducerId' in params ? params.ProducerId : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
+        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+
+    }
+}
+
+/**
+ * ModifyRole request structure.
+ * @class
+ */
+class ModifyRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Cluster ID (required)
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Batch binds namespace information.
+         * @type {Array.<EnvironmentRoleSet> || null}
+         */
+        this.EnvironmentRoleSets = null;
+
+        /**
+         * Unbinds all namespaces. set to true.
+         * @type {boolean || null}
+         */
+        this.UnbindAllEnvironment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.EnvironmentRoleSets) {
+            this.EnvironmentRoleSets = new Array();
+            for (let z in params.EnvironmentRoleSets) {
+                let obj = new EnvironmentRoleSet();
+                obj.deserialize(params.EnvironmentRoleSets[z]);
+                this.EnvironmentRoleSets.push(obj);
+            }
+        }
+        this.UnbindAllEnvironment = 'UnbindAllEnvironment' in params ? params.UnbindAllEnvironment : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQMsg request structure.
+ * @class
+ */
+class DescribeRocketMQMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name. Pass in the group ID when querying a dead letter queue.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * ID of a TDMQ for Pulsar message
+         * @type {string || null}
+         */
+        this.PulsarMsgId = null;
+
+        /**
+         * The value of this parameter is `true` when you query a dead letter queue. It only applies to TDMQ for RocketMQ.
+         * @type {boolean || null}
+         */
+        this.QueryDlqMsg = null;
+
+        /**
+         * The value is true when querying dead letters, and only valid for RocketMQ.
+         * @type {boolean || null}
+         */
+        this.QueryDeadLetterMessage = null;
+
+        /**
+         * Pagination offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filters consumption details based on the consumer group name.
+         * @type {string || null}
+         */
+        this.FilterTrackGroup = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.PulsarMsgId = 'PulsarMsgId' in params ? params.PulsarMsgId : null;
+        this.QueryDlqMsg = 'QueryDlqMsg' in params ? params.QueryDlqMsg : null;
+        this.QueryDeadLetterMessage = 'QueryDeadLetterMessage' in params ? params.QueryDeadLetterMessage : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FilterTrackGroup = 'FilterTrackGroup' in params ? params.FilterTrackGroup : null;
+
+    }
+}
+
+/**
+ * SendMessages response structure.
+ * @class
+ */
+class SendMessagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The messageID of the message is globally unique and is used to identify the message's metadata information.
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * Returned error message. If returned as "", it means there is no error.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTopic request structure.
+ * @class
+ */
+class CreateTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name, which can contain up to 64 letters, digits, hyphens, and underscores.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * The input parameter is 1, which means creating a non-partitioned topic with no partition. if the input parameter is greater than 1, it indicates the number of partitions for a partitioned topic, and the maximum cannot exceed 32.
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * This input parameter will be disused soon. You can use `PulsarTopicType` instead.
+0: General message;
+1: Globally sequential message;
+2: Partitionally sequential message;
+3: Retry letter topic;
+4: Dead letter topic.
+         * @type {number || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * Pulsar topic type.
+`0`: Non-persistent and non-partitioned
+`1`: Non-persistent and partitioned
+`2`: Persistent and non-partitioned
+`3`: Persistent and partitioned
+         * @type {number || null}
+         */
+        this.PulsarTopicType = null;
+
+        /**
+         * Retention period for unconsumed messages in seconds. value ranges from 60 seconds to 15 days.
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Default if not passed is native policy. DefaultPolicy means when the subscription reaches the maximum unacknowledged messages of 5000, the server will stop pushing messages to all consumers under the current subscription. DynamicPolicy means dynamically adjust the maximum unacknowledged messages of the subscription, with the specific quota being the maximum between 5000 and the number of consumers multiplied by 20. the default maximum unacknowledged message count per consumer is 20. exceeding this limit only affects that consumer and does not affect other consumers.
+         * @type {string || null}
+         */
+        this.UnackPolicy = null;
+
+        /**
+         * Whether exception consumer isolation is enabled.
+         * @type {boolean || null}
+         */
+        this.IsolateConsumerEnable = null;
+
+        /**
+         * Specifies the consumer Ack timeout period in seconds. value range: 60-(3600*24).
+         * @type {number || null}
+         */
+        this.AckTimeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.UnackPolicy = 'UnackPolicy' in params ? params.UnackPolicy : null;
+        this.IsolateConsumerEnable = 'IsolateConsumerEnable' in params ? params.IsolateConsumerEnable : null;
+        this.AckTimeOut = 'AckTimeOut' in params ? params.AckTimeOut : null;
+
+    }
+}
+
+/**
+ * DescribeCmqTopics response structure.
+ * @class
+ */
+class DescribeCmqTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic list.
+         * @type {Array.<CmqTopic> || null}
+         */
+        this.TopicList = null;
+
+        /**
+         * The total number of topics.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new CmqTopic();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQMsgTrace request structure.
+ * @class
+ */
+class DescribeRocketMQMsgTraceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic. When the system queries RocketMQ dead letters, the value is groupId.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Consumer Group and Subscription
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * The value is true when querying dead letters.
+         * @type {boolean || null}
+         */
+        this.QueryDLQMsg = null;
+
+        /**
+         * The value is true when querying dead letters.
+         * @type {string || null}
+         */
+        this.QueryDeadLetterMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.QueryDLQMsg = 'QueryDLQMsg' in params ? params.QueryDLQMsg : null;
+        this.QueryDeadLetterMessage = 'QueryDeadLetterMessage' in params ? params.QueryDeadLetterMessage : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQGroup request structure.
+ * @class
+ */
+class ModifyRocketMQGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Consumer group name
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Remarks (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Whether to enable consumption
+         * @type {boolean || null}
+         */
+        this.ReadEnable = null;
+
+        /**
+         * Whether to enable broadcast consumption
+         * @type {boolean || null}
+         */
+        this.BroadcastEnable = null;
+
+        /**
+         * The maximum number of retries
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
+        this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
+
+    }
+}
+
+/**
+ * DescribeCmqTopicDetail request structure.
+ * @class
+ */
+class DescribeCmqTopicDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Exact match by `TopicName`.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * UnbindCmqDeadLetter response structure.
+ * @class
+ */
+class UnbindCmqDeadLetterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQEnvironmentRole request structure.
+ * @class
+ */
+class ModifyRocketMQEnvironmentRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Authorization item, which can contain a non-empty character array of up to 2 items including produce and consume.
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * Required field, cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Permission configuration for topic and group dimensions.
+         * @type {Array.<DetailedRolePerm> || null}
+         */
+        this.DetailedPerms = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.DetailedPerms) {
+            this.DetailedPerms = new Array();
+            for (let z in params.DetailedPerms) {
+                let obj = new DetailedRolePerm();
+                obj.deserialize(params.DetailedPerms[z]);
+                this.DetailedPerms.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyRocketMQNamespace response structure.
+ * @class
+ */
+class ModifyRocketMQNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Array of instance dimension combinations
+ * @class
+ */
+class DimensionInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dimension Combination of Instance
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DimensionOpt> || null}
+         */
+        this.Dimensions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new DimensionOpt();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteEnvironments request structure.
+ * @class
+ */
+class DeleteEnvironmentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of environments (namespaces). Up to 20 environments can be deleted at a time.
+         * @type {Array.<string> || null}
+         */
+        this.EnvironmentIds = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentIds = 'EnvironmentIds' in params ? params.EnvironmentIds : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQClusters request structure.
+ * @class
+ */
+class DescribeRocketMQClustersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The max number of returned results.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Search by cluster ID.
+         * @type {string || null}
+         */
+        this.IdKeyword = null;
+
+        /**
+         * Search by cluster name.
+         * @type {string || null}
+         */
+        this.NameKeyword = null;
+
+        /**
+         * Filter by cluster ID.
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIdList = null;
+
+        /**
+         * For filtering by tag, this parameter must be set to `true`.
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * Filter. Currently, you can filter only by tag.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IdKeyword = 'IdKeyword' in params ? params.IdKeyword : null;
+        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
+        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * SendRocketMQMessage request structure.
+ * @class
+ */
+class SendRocketMQMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Message content
+         * @type {string || null}
+         */
+        this.MsgBody = null;
+
+        /**
+         * Message key
+         * @type {string || null}
+         */
+        this.MsgKey = null;
+
+        /**
+         * Message tag
+         * @type {string || null}
+         */
+        this.MsgTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgBody = 'MsgBody' in params ? params.MsgBody : null;
+        this.MsgKey = 'MsgKey' in params ? params.MsgKey : null;
+        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+
+    }
+}
+
+/**
+ * CreateCluster response structure.
+ * @class
+ */
+class CreateClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQNamespace request structure.
+ * @class
+ */
+class DeleteRocketMQNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace name
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQPermission request structure.
+ * @class
+ */
+class DeleteRabbitMQPermissionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username, such as admin. effective User names can be found by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking a cluster in the cluster list, entering cluster details, and locating the list of users under the User and permission management tab, thereby finding the username.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * VirtualHost name, such as testvhost. valid VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+
+    }
+}
+
+/**
+ * CreateTopic response structure.
+ * @class
+ */
+class CreateTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Valid value: 0 or 1. Non-partitioned topic: No partitions. A value greater than 1: The partition count of a partitioned topic. `0` is returned for existing non-partitioned topics, and `1` is returned for incremental non-partitioned topics.
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * Remarks, within 128 characters.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 0: standard message.
+Global sequential message.
+2: local ordered messages.
+Specifies the retry queue.
+4: dead letter queue.
+         * @type {number || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReceiveMessage response structure.
+ * @class
+ */
+class ReceiveMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique primary key used to identify the message
+         * @type {string || null}
+         */
+        this.MessageID = null;
+
+        /**
+         * Content of the received message
+         * @type {string || null}
+         */
+        this.MessagePayload = null;
+
+        /**
+         * Provided to the `Ack` API and used to acknowledge messages in the topic
+         * @type {string || null}
+         */
+        this.AckTopic = null;
+
+        /**
+         * Returned error message. If it is null, it means there is no error.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * Returned subscriber names, used for creating Ack consumers
+         * @type {string || null}
+         */
+        this.SubName = null;
+
+        /**
+         * BatchReceivePolicy specifies the messageids of multiple messages returned at one time, using '###' to distinguish different messageids.
+         * @type {string || null}
+         */
+        this.MessageIDList = null;
+
+        /**
+         * BatchReceivePolicy specifies the message content of multiple messages returned at one time, using '###' to distinguish different message content.
+         * @type {string || null}
+         */
+        this.MessagesPayload = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageID = 'MessageID' in params ? params.MessageID : null;
+        this.MessagePayload = 'MessagePayload' in params ? params.MessagePayload : null;
+        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.SubName = 'SubName' in params ? params.SubName : null;
+        this.MessageIDList = 'MessageIDList' in params ? params.MessageIDList : null;
+        this.MessagesPayload = 'MessagesPayload' in params ? params.MessagesPayload : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQVipInstance request structure.
+ * @class
+ */
+class CreateRocketMQVipInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Cluster specification. Supported specifications: 1. 	General: rocket-vip-basic-0; 2. Basic: rocket-vip-basic-1; 3. Standard: rocket-vip-basic-2; 4. Advanced I: rocket-vip-basic-3; 5. Advanced II: rocket-vip-basic-4.
+         * @type {string || null}
+         */
+        this.Spec = null;
+
+        /**
+         * Number of nodes. Value range: 2–20.
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Single-node storage space, in GB. The minimum space is 200 GB.
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * The zone ID list for node deployment. For example, the ID of Guangzhou Zone 1 is 100001. For details, see the official website of the cloud platform.
+         * @type {Array.<string> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Describes the VPC information.
+         * @type {VpcInfo || null}
+         */
+        this.VpcInfo = null;
+
+        /**
+         * Purchase duration, in months.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Whether it is used for cloud migration. The default value is false.
+         * @type {boolean || null}
+         */
+        this.SupportsMigrateToCloud = null;
+
+        /**
+         * Specifies whether public network access is enabled.
+         * @type {boolean || null}
+         */
+        this.EnablePublic = null;
+
+        /**
+         * Public network bandwidth, a required field when the public network is enabled.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Public network allowlist.
+         * @type {Array.<PublicAccessRule> || null}
+         */
+        this.IpRules = null;
+
+        /**
+         * Tag.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Spec = 'Spec' in params ? params.Spec : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+
+        if (params.VpcInfo) {
+            let obj = new VpcInfo();
+            obj.deserialize(params.VpcInfo)
+            this.VpcInfo = obj;
+        }
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.SupportsMigrateToCloud = 'SupportsMigrateToCloud' in params ? params.SupportsMigrateToCloud : null;
+        this.EnablePublic = 'EnablePublic' in params ? params.EnablePublic : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+        if (params.IpRules) {
+            this.IpRules = new Array();
+            for (let z in params.IpRules) {
+                let obj = new PublicAccessRule();
+                obj.deserialize(params.IpRules[z]);
+                this.IpRules.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * TDMQ for Pulsar network access point information
+ * @class
+ */
+class PulsarNetworkAccessPointInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID. This field is left empty for supporting network and public network access points.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID. This field is left empty for supporting network and public network access points.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Access address
+         * @type {string || null}
+         */
+        this.Endpoint = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Access point type: 
+`0`: Supporting network access point 
+`1`: VPC access point 
+`2`: Public network access point
+         * @type {number || null}
+         */
+        this.RouteType = null;
+
+        /**
+         * 0: local region access. since cross-region disaster recovery is not configured, this type of access point cannot perform cross-region switchover or switch back from remote access.
+Local region access. due to the configuration of cross-region disaster recovery, switchover can be performed at any time in a different location. this state is used for the primary cluster access point.
+Cross-Region access, completed offsite switchover, this state is used for the access point of the source cluster. the access point in this state is non-deletable.
+3: cross-region access can be switched back from remote access at any time. this state is for the access point of the target cluster. the access point in this state is non-deletable.
+Cross-Region access. the target cluster has completed offsite switchback and is in the state of waiting for deletion.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OperationType = null;
+
+        /**
+         * Access point type.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessPointsType = null;
+
+        /**
+         * Bandwidth. currently only public network has this value.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Class.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SecurityPolicy> || null}
+         */
+        this.SecurityPolicy = null;
+
+        /**
+         * Indicates whether it is a standard access point. valid values: true (standard), false (not standard).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.StandardAccessPoint = null;
+
+        /**
+         * AZ information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Specifies whether TLS encryption is enabled.
+         * @type {boolean || null}
+         */
+        this.Tls = null;
+
+        /**
+         * Access point custom domain name.
+         * @type {string || null}
+         */
+        this.CustomUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.AccessPointsType = 'AccessPointsType' in params ? params.AccessPointsType : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+        if (params.SecurityPolicy) {
+            this.SecurityPolicy = new Array();
+            for (let z in params.SecurityPolicy) {
+                let obj = new SecurityPolicy();
+                obj.deserialize(params.SecurityPolicy[z]);
+                this.SecurityPolicy.push(obj);
+            }
+        }
+        this.StandardAccessPoint = 'StandardAccessPoint' in params ? params.StandardAccessPoint : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Tls = 'Tls' in params ? params.Tls : null;
+        this.CustomUrl = 'CustomUrl' in params ? params.CustomUrl : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVipInstance request structure.
+ * @class
+ */
+class DescribeRabbitMQVipInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQExchanges request structure.
+ * @class
+ */
+class DescribeRabbitMQExchangesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Specifies the pagination offset. default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination limit. default is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Search keyword, supports fuzzy matching.  
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Filters the exchange type. each element in the array is a selected filter type. only direct, fanout, topic, and header are supported.
+         * @type {Array.<string> || null}
+         */
+        this.ExchangeTypeFilters = null;
+
+        /**
+         * Filter exchange creation source, "system": "system created", "user": "user created".
+         * @type {Array.<string> || null}
+         */
+        this.ExchangeCreatorFilters = null;
+
+        /**
+         * Exchange name, used for exact matching.
+         * @type {string || null}
+         */
+        this.ExchangeName = null;
+
+        /**
+         * Sorting field:
+MessageRateInOut - Total production and consumption rate.
+MessageRateIn - Production rate.
+MessageRateOut - Consumption rate: Specifies the message consumption rate.
+         * @type {string || null}
+         */
+        this.SortElement = null;
+
+        /**
+         * Sorting order. Valid values: ascend and descend.
+Specifies the ascending order.
+Desc - descending.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.ExchangeTypeFilters = 'ExchangeTypeFilters' in params ? params.ExchangeTypeFilters : null;
+        this.ExchangeCreatorFilters = 'ExchangeCreatorFilters' in params ? params.ExchangeCreatorFilters : null;
+        this.ExchangeName = 'ExchangeName' in params ? params.ExchangeName : null;
+        this.SortElement = 'SortElement' in params ? params.SortElement : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+    }
+}
+
+/**
+ * DeleteTopics request structure.
+ * @class
+ */
+class DeleteTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic set. Up to 20 topics can be deleted at a time.
+         * @type {Array.<TopicRecord> || null}
+         */
+        this.TopicSets = null;
+
+        /**
+         * Pulsar cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Whether to forcibly delete a topic. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicSets) {
+            this.TopicSets = new Array();
+            for (let z in params.TopicSets) {
+                let obj = new TopicRecord();
+                obj.deserialize(params.TopicSets[z]);
+                this.TopicSets.push(obj);
+            }
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Force = 'Force' in params ? params.Force : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQEnvironmentRoles response structure.
+ * @class
+ */
+class DeleteRocketMQEnvironmentRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteCmqSubscribe request structure.
+ * @class
+ */
+class DeleteCmqSubscribeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which must be unique under the same account in a single region. the name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Subscription name, uniquely identifies under the same topic of the same account in a single region. subscription name is a string of no more than 64 characters, beginning with a letter, the remaining part can contain letters, digits, and hyphens (-).
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+    }
+}
+
+/**
+ * RocketMQ cluster configuration
+ * @class
+ */
+class RocketMQClusterConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Upper limit of TPS per single namespace.
+         * @type {number || null}
+         */
+        this.MaxTpsPerNamespace = null;
+
+        /**
+         * Maximum number of namespaces
+         * @type {number || null}
+         */
+        this.MaxNamespaceNum = null;
+
+        /**
+         * Number of used namespaces
+         * @type {number || null}
+         */
+        this.UsedNamespaceNum = null;
+
+        /**
+         * Maximum number of topics
+         * @type {number || null}
+         */
+        this.MaxTopicNum = null;
+
+        /**
+         * Number of used topics
+         * @type {number || null}
+         */
+        this.UsedTopicNum = null;
+
+        /**
+         * Maximum number of groups
+         * @type {number || null}
+         */
+        this.MaxGroupNum = null;
+
+        /**
+         * Number of used groups
+         * @type {number || null}
+         */
+        this.UsedGroupNum = null;
+
+        /**
+         * Maximum message retention period in milliseconds
+         * @type {number || null}
+         */
+        this.MaxRetentionTime = null;
+
+        /**
+         * Maximum message delay in milliseconds
+         * @type {number || null}
+         */
+        this.MaxLatencyTime = null;
+
+        /**
+         * The maximum number of queues in a single topic
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxQueuesPerTopic = null;
+
+        /**
+         * Topic distribution.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RocketMQTopicDistribution> || null}
+         */
+        this.TopicDistribution = null;
+
+        /**
+         * Maximum number of roles.
+         * @type {number || null}
+         */
+        this.MaxRoleNum = null;
+
+        /**
+         * TPS quota.
+         * @type {number || null}
+         */
+        this.MaxTpsLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
+        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
+        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
+        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
+        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
+        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
+        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
+        this.MaxRetentionTime = 'MaxRetentionTime' in params ? params.MaxRetentionTime : null;
+        this.MaxLatencyTime = 'MaxLatencyTime' in params ? params.MaxLatencyTime : null;
+        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
+
+        if (params.TopicDistribution) {
+            this.TopicDistribution = new Array();
+            for (let z in params.TopicDistribution) {
+                let obj = new RocketMQTopicDistribution();
+                obj.deserialize(params.TopicDistribution[z]);
+                this.TopicDistribution.push(obj);
+            }
+        }
+        this.MaxRoleNum = 'MaxRoleNum' in params ? params.MaxRoleNum : null;
+        this.MaxTpsLimit = 'MaxTpsLimit' in params ? params.MaxTpsLimit : null;
+
+    }
+}
+
+/**
+ * SendMsg response structure.
+ * @class
+ */
+class SendMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMsg request structure.
+ * @class
+ */
+class DescribeMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQPermission response structure.
+ * @class
+ */
+class DeleteRabbitMQPermissionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQBinding response structure.
+ * @class
+ */
+class DeleteRabbitMQBindingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Vhost parameter.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Routing relationship ID.
+         * @type {number || null}
+         */
+        this.BindingId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.BindingId = 'BindingId' in params ? params.BindingId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePulsarProInstances request structure.
+ * @class
+ */
+class DescribePulsarProInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query condition filter
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The maximum number of queried items, which defaults to `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Start offset for query
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class VpcEndpointInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VpcEndpoint = null;
+
+        /**
+         * Access point status. valid values: OFF, ON, CREATING, DELETING.
+         * @type {string || null}
+         */
+        this.VpcDataStreamEndpointStatus = null;
+
+        /**
+         * Encrypted TLS data stream access point.
+         * @type {string || null}
+         */
+        this.VpcTlsEndpoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcEndpoint = 'VpcEndpoint' in params ? params.VpcEndpoint : null;
+        this.VpcDataStreamEndpointStatus = 'VpcDataStreamEndpointStatus' in params ? params.VpcDataStreamEndpointStatus : null;
+        this.VpcTlsEndpoint = 'VpcTlsEndpoint' in params ? params.VpcTlsEndpoint : null;
+
+    }
+}
+
+/**
+ * ClearCmqQueue response structure.
+ * @class
+ */
+class ClearCmqQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTopicMsgs request structure.
+ * @class
+ */
+class DescribeTopicMsgsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Starting index. Default is 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returns, default to 10 if not specified, maximum value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteCmqQueue request structure.
+ * @class
+ */
+class DeleteCmqQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue name, unique under the same account in a single region. queue name is a string of no more than 64 characters, beginning with a letter, the remainder can contain letters, digits, and hyphens (-).
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQUser response structure.
+ * @class
+ */
+class DeleteRabbitMQUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetRocketMQPublicAccessPoint response structure.
+ * @class
+ */
+class SetRocketMQPublicAccessPointResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopicMsgs request structure.
+ * @class
+ */
+class DescribeRocketMQTopicMsgsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name, which is groupId when the system queries dead letters.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Message key
+         * @type {string || null}
+         */
+        this.MsgKey = null;
+
+        /**
+         * Query Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Query Quotas
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Mark a pagination transaction.
+         * @type {string || null}
+         */
+        this.TaskRequestId = null;
+
+        /**
+         * This value is true when the system queries dead letters, and is only valid for RocketMQ.
+         * @type {boolean || null}
+         */
+        this.QueryDlqMsg = null;
+
+        /**
+         * Query the last N messages. The value of N cannot exceed 1024. By default, -1 indicates other query conditions.
+         * @type {number || null}
+         */
+        this.NumOfLatestMsg = null;
+
+        /**
+         * Tag expression.
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * This value is true when the system queries dead letters, and is only valid for RocketMQ.
+         * @type {boolean || null}
+         */
+        this.QueryDeadLetterMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.MsgKey = 'MsgKey' in params ? params.MsgKey : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TaskRequestId = 'TaskRequestId' in params ? params.TaskRequestId : null;
+        this.QueryDlqMsg = 'QueryDlqMsg' in params ? params.QueryDlqMsg : null;
+        this.NumOfLatestMsg = 'NumOfLatestMsg' in params ? params.NumOfLatestMsg : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.QueryDeadLetterMessage = 'QueryDeadLetterMessage' in params ? params.QueryDeadLetterMessage : null;
+
+    }
+}
+
+/**
+ * ModifyEnvironmentRole request structure.
+ * @class
+ */
+class ModifyEnvironmentRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Permissions, which is a non-empty string array of `produce` and `consume` at the most.
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * Cluster ID (required)
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQRoles response structure.
+ * @class
+ */
+class DescribeRocketMQRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record count.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Role array.
+         * @type {Array.<Role> || null}
+         */
+        this.RoleSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RoleSets) {
+            this.RoleSets = new Array();
+            for (let z in params.RoleSets) {
+                let obj = new Role();
+                obj.deserialize(params.RoleSets[z]);
+                this.RoleSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Subscription
  * @class
  */
@@ -4225,53 +5041,662 @@ class SubscriptionTopic extends  AbstractModel {
 }
 
 /**
- * RocketMQ topic information
+ * ModifyRocketMQRole request structure.
  * @class
  */
-class RocketMQTopic extends  AbstractModel {
+class ModifyRocketMQRoleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic name.
+         * Role name. Does not support Chinese characters and special characters other than hyphens (-) and underscores (_), and must be greater than 0 and less than or equal to 32 in length.
          * @type {string || null}
          */
-        this.Name = null;
+        this.RoleName = null;
 
         /**
-         * Topic type. Enumerated values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`, `Retry`, and `DeadLetter`.
+         * Required field, cluster ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.ClusterId = null;
 
         /**
-         * The number of subscription groups
-         * @type {number || null}
-         */
-        this.GroupNum = null;
-
-        /**
-         * Description.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Remark description. Length must be greater than or equal to 0 and less than or equal to 128.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * The number of read/write partitions.
-         * @type {number || null}
+         * Permission type. Permissions are granted by cluster by default. Cluster: cluster level; TopicAndGroup: topic/consumer group level.
+         * @type {string || null}
          */
-        this.PartitionNum = null;
+        this.PermType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PermType = 'PermType' in params ? params.PermType : null;
+
+    }
+}
+
+/**
+ * DescribeMqMsgTrace request structure.
+ * @class
+ */
+class DescribeMqMsgTraceRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * Creation time in milliseconds.
+         * pulsar,rocketmq,rabbitmq,cmq
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Cluster id. cmq is empty.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace. cmq is empty.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic. empty for cmq. group id when querying rocketmq dead letters.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * cmq is required. fill in the blank for other protocols.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Consumer Group and Subscription
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * The value is true when querying dead letters, and only valid for RocketMQ.
+         * @type {boolean || null}
+         */
+        this.QueryDlqMsg = null;
+
+        /**
+         * Message production time.
+         * @type {string || null}
+         */
+        this.ProduceTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.QueryDlqMsg = 'QueryDlqMsg' in params ? params.QueryDlqMsg : null;
+        this.ProduceTime = 'ProduceTime' in params ? params.ProduceTime : null;
+
+    }
+}
+
+/**
+ * SendBatchMessages request structure.
+ * @class
+ */
+class SendBatchMessagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Content of the message to be sent
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * String-Type token, which is optional and will be automatically obtained by the system.
+         * @type {string || null}
+         */
+        this.StringToken = null;
+
+        /**
+         * Producer name, which must be globally unique. If it is not configured, the system will automatically generate one.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Message sending timeout period in seconds. Default value: 30s
          * @type {number || null}
+         */
+        this.SendTimeout = null;
+
+        /**
+         * Maximum number of produced messages which can be cached in the memory. Default value: 1000
+         * @type {number || null}
+         */
+        this.MaxPendingMessages = null;
+
+        /**
+         * Maximum number of messages in each batch. Default value: 1000 messages/batch
+         * @type {number || null}
+         */
+        this.BatchingMaxMessages = null;
+
+        /**
+         * Maximum wait time for each batch, after which the batch will be sent no matter whether the specified number or size of messages in the batch is reached. Default value: 10 ms
+         * @type {number || null}
+         */
+        this.BatchingMaxPublishDelay = null;
+
+        /**
+         * Maximum allowed size of messages in each batch. Default value: 128 KB
+         * @type {number || null}
+         */
+        this.BatchingMaxBytes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.StringToken = 'StringToken' in params ? params.StringToken : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
+        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
+        this.BatchingMaxMessages = 'BatchingMaxMessages' in params ? params.BatchingMaxMessages : null;
+        this.BatchingMaxPublishDelay = 'BatchingMaxPublishDelay' in params ? params.BatchingMaxPublishDelay : null;
+        this.BatchingMaxBytes = 'BatchingMaxBytes' in params ? params.BatchingMaxBytes : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQNodeList response structure.
+ * @class
+ */
+class DescribeRabbitMQNodeListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the cluster node quantity.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Listing Cluster Nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RabbitMQPrivateNode> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new RabbitMQPrivateNode();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Producer client details.
+ * @class
+ */
+class ProducerInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Client ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Client IP.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * Specifies the client language.
+JAVA((byte) 0),
+    CPP((byte) 1),
+    DOTNET((byte) 2),
+    PYTHON((byte) 3),
+    DELPHI((byte) 4),
+    ERLANG((byte) 5),
+    RUBY((byte) 6),
+    OTHER((byte) 7),
+    HTTP((byte) 8),
+    GO((byte) 9),
+    PHP((byte) 10),
+    OMS((byte) 11);
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Language = null;
+
+        /**
+         * Client version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Last production time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LastUpdateTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.Language = 'Language' in params ? params.Language : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.LastUpdateTimestamp = 'LastUpdateTimestamp' in params ? params.LastUpdateTimestamp : null;
+
+    }
+}
+
+/**
+ * Message production information
+ * @class
+ */
+class ProducerLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Producer name.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Message production time.
+         * @type {string || null}
+         */
+        this.ProduceTime = null;
+
+        /**
+         * Producer client.
+         * @type {string || null}
+         */
+        this.ProducerAddr = null;
+
+        /**
+         * Production time cost (in seconds).
+         * @type {number || null}
+         */
+        this.ProduceUseTime = null;
+
+        /**
+         * Status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.ProduceTime = 'ProduceTime' in params ? params.ProduceTime : null;
+        this.ProducerAddr = 'ProducerAddr' in params ? params.ProducerAddr : null;
+        this.ProduceUseTime = 'ProduceUseTime' in params ? params.ProduceUseTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribePublisherSummary request structure.
+ * @class
+ */
+class DescribePublisherSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+
+    }
+}
+
+/**
+ * TDMQ for Pulsar pro cluster information
+ * @class
+ */
+class PulsarProClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Creation time in milliseconds.
+         * Cluster status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated).
          * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Cluster version
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Node distribution
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<InstanceNodeDistribution> || null}
+         */
+        this.NodeDistribution = null;
+
+        /**
+         * Max storage capacity in MB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Whether the route can be modified
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.CanEditRoute = null;
+
+        /**
+         * Specifies different billing specifications for pro edition and small-scale professional edition: PULSAR.P1 fixed storage and PULSAR.P2 elastic storage.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BillingLabelVersion = null;
+
+        /**
+         * Instance expiration timestamp, accurate to the millisecond level.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Whether to enable automatic topic creation.
+true indicates enabled. false indicates disabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoCreateTopicStatus = null;
+
+        /**
+         * Specifies the default number of partitions for automatic topic creation. valid values: 0 if not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultPartitionNumber = null;
+
+        /**
+         * User-Defined tenant alias. if there is no, reuse the professional cluster ID.
+
+         * @type {string || null}
+         */
+        this.Tenant = null;
+
+        /**
+         * Deletion protection switch flag.
+         * @type {number || null}
+         */
+        this.DeleteProtection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Version = 'Version' in params ? params.Version : null;
+
+        if (params.NodeDistribution) {
+            this.NodeDistribution = new Array();
+            for (let z in params.NodeDistribution) {
+                let obj = new InstanceNodeDistribution();
+                obj.deserialize(params.NodeDistribution[z]);
+                this.NodeDistribution.push(obj);
+            }
+        }
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.CanEditRoute = 'CanEditRoute' in params ? params.CanEditRoute : null;
+        this.BillingLabelVersion = 'BillingLabelVersion' in params ? params.BillingLabelVersion : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoCreateTopicStatus = 'AutoCreateTopicStatus' in params ? params.AutoCreateTopicStatus : null;
+        this.DefaultPartitionNumber = 'DefaultPartitionNumber' in params ? params.DefaultPartitionNumber : null;
+        this.Tenant = 'Tenant' in params ? params.Tenant : null;
+        this.DeleteProtection = 'DeleteProtection' in params ? params.DeleteProtection : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQGroup response structure.
+ * @class
+ */
+class ModifyRocketMQGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Set of environment roles
+ * @class
+ */
+class EnvironmentRole extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace).
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Permissions, which is a non-empty string array of `produce` and `consume` at the most.
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * Role description.
+         * @type {string || null}
+         */
+        this.RoleDescribe = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
          */
         this.UpdateTime = null;
 
@@ -4284,13 +5709,1399 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.RoleDescribe = 'RoleDescribe' in params ? params.RoleDescribe : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQVipInstance response structure.
+ * @class
+ */
+class DeleteRabbitMQVipInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID.
+         * @type {string || null}
+         */
+        this.TranId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TranId = 'TranId' in params ? params.TranId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Permission configuration in the topic/group dimension.
+ * @class
+ */
+class DetailedRolePerm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resources corresponding to permissions.
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Whether to enable production permission
+         * @type {boolean || null}
+         */
+        this.PermWrite = null;
+
+        /**
+         * Whether to enable consumption permission
+         * @type {boolean || null}
+         */
+        this.PermRead = null;
+
+        /**
+         * Authorized resource type (Topic: topic; Group: consumer group).
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Resource remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.PermWrite = 'PermWrite' in params ? params.PermWrite : null;
+        this.PermRead = 'PermRead' in params ? params.PermRead : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RabbitMQClusterAccessInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PublicAccessEndpoint = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WebConsoleEndpoint = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WebConsoleUsername = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WebConsolePassword = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.PublicAccessEndpointStatus = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.PublicControlConsoleSwitchStatus = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.VpcControlConsoleSwitchStatus = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VpcWebConsoleEndpoint = null;
+
+        /**
+         * Status of the public network access point in the console. Valid values: OFF, ON, CREATING, and DELETING.
+         * @type {string || null}
+         */
+        this.PublicWebConsoleSwitchStatus = null;
+
+        /**
+         * Vpc console switch state. example value.
+OFF/ON/CREATING/DELETING
+         * @type {string || null}
+         */
+        this.VpcWebConsoleSwitchStatus = null;
+
+        /**
+         * Status of the public network access point in the console. Valid values: OFF, ON, CREATING, and DELETING.
+         * @type {string || null}
+         */
+        this.PublicDataStreamStatus = null;
+
+        /**
+         * Prometheus information.
+         * @type {PrometheusEndpointInfo || null}
+         */
+        this.PrometheusEndpointInfo = null;
+
+        /**
+         * Public domain name access point.
+         * @type {string || null}
+         */
+        this.WebConsoleDomainEndpoint = null;
+
+        /**
+         * VPC information used by the control plane.
+         * @type {VpcEndpointInfo || null}
+         */
+        this.ControlPlaneEndpointInfo = null;
+
+        /**
+         * Encrypted TLS data stream public network access point.
+         * @type {string || null}
+         */
+        this.PublicTlsAccessEndpoint = null;
+
+        /**
+         * Specifies whether to reuse the public IP address.
+         * @type {boolean || null}
+         */
+        this.PublicIpReused = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublicAccessEndpoint = 'PublicAccessEndpoint' in params ? params.PublicAccessEndpoint : null;
+        this.WebConsoleEndpoint = 'WebConsoleEndpoint' in params ? params.WebConsoleEndpoint : null;
+        this.WebConsoleUsername = 'WebConsoleUsername' in params ? params.WebConsoleUsername : null;
+        this.WebConsolePassword = 'WebConsolePassword' in params ? params.WebConsolePassword : null;
+        this.PublicAccessEndpointStatus = 'PublicAccessEndpointStatus' in params ? params.PublicAccessEndpointStatus : null;
+        this.PublicControlConsoleSwitchStatus = 'PublicControlConsoleSwitchStatus' in params ? params.PublicControlConsoleSwitchStatus : null;
+        this.VpcControlConsoleSwitchStatus = 'VpcControlConsoleSwitchStatus' in params ? params.VpcControlConsoleSwitchStatus : null;
+        this.VpcWebConsoleEndpoint = 'VpcWebConsoleEndpoint' in params ? params.VpcWebConsoleEndpoint : null;
+        this.PublicWebConsoleSwitchStatus = 'PublicWebConsoleSwitchStatus' in params ? params.PublicWebConsoleSwitchStatus : null;
+        this.VpcWebConsoleSwitchStatus = 'VpcWebConsoleSwitchStatus' in params ? params.VpcWebConsoleSwitchStatus : null;
+        this.PublicDataStreamStatus = 'PublicDataStreamStatus' in params ? params.PublicDataStreamStatus : null;
+
+        if (params.PrometheusEndpointInfo) {
+            let obj = new PrometheusEndpointInfo();
+            obj.deserialize(params.PrometheusEndpointInfo)
+            this.PrometheusEndpointInfo = obj;
+        }
+        this.WebConsoleDomainEndpoint = 'WebConsoleDomainEndpoint' in params ? params.WebConsoleDomainEndpoint : null;
+
+        if (params.ControlPlaneEndpointInfo) {
+            let obj = new VpcEndpointInfo();
+            obj.deserialize(params.ControlPlaneEndpointInfo)
+            this.ControlPlaneEndpointInfo = obj;
+        }
+        this.PublicTlsAccessEndpoint = 'PublicTlsAccessEndpoint' in params ? params.PublicTlsAccessEndpoint : null;
+        this.PublicIpReused = 'PublicIpReused' in params ? params.PublicIpReused : null;
+
+    }
+}
+
+/**
+ * DescribeBindClusters response structure.
+ * @class
+ */
+class DescribeBindClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of dedicated clusters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of dedicated clusters
+         * @type {Array.<BindCluster> || null}
+         */
+        this.ClusterSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterSet) {
+            this.ClusterSet = new Array();
+            for (let z in params.ClusterSet) {
+                let obj = new BindCluster();
+                obj.deserialize(params.ClusterSet[z]);
+                this.ClusterSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExportRocketMQMessageDetail response structure.
+ * @class
+ */
+class ExportRocketMQMessageDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Message Generation Timestamp
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BornTimestamp = null;
+
+        /**
+         * Message Storage Timestamp
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StoreTimestamp = null;
+
+        /**
+         * Message Production Client Address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BornHost = null;
+
+        /**
+         * Message Tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgTag = null;
+
+        /**
+         * Message key
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgKey = null;
+
+        /**
+         * Message Attributes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Properties = null;
+
+        /**
+         * Message Retry Count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReConsumeTimes = null;
+
+        /**
+         * Base64 Encoded String
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgBody = null;
+
+        /**
+         * CRC32 Code of Message Content
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgBodyCRC = null;
+
+        /**
+         * Specifies the message body size (unit K).
+Does not return messages when above 2048.
+         * @type {number || null}
+         */
+        this.MsgBodySize = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.BornTimestamp = 'BornTimestamp' in params ? params.BornTimestamp : null;
+        this.StoreTimestamp = 'StoreTimestamp' in params ? params.StoreTimestamp : null;
+        this.BornHost = 'BornHost' in params ? params.BornHost : null;
+        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+        this.MsgKey = 'MsgKey' in params ? params.MsgKey : null;
+        this.Properties = 'Properties' in params ? params.Properties : null;
+        this.ReConsumeTimes = 'ReConsumeTimes' in params ? params.ReConsumeTimes : null;
+        this.MsgBody = 'MsgBody' in params ? params.MsgBody : null;
+        this.MsgBodyCRC = 'MsgBodyCRC' in params ? params.MsgBodyCRC : null;
+        this.MsgBodySize = 'MsgBodySize' in params ? params.MsgBodySize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRabbitMQVirtualHost request structure.
+ * @class
+ */
+class ModifyRabbitMQVirtualHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. specifies the effective InstanceId that can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Describes the Virtual Host.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Message trace flag. Valid values: `true` (Enabled), `false` (Disabled).
+         * @type {boolean || null}
+         */
+        this.TraceFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.TraceFlag = 'TraceFlag' in params ? params.TraceFlag : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQNamespaces response structure.
+ * @class
+ */
+class DescribeRocketMQNamespacesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of namespaces
+         * @type {Array.<RocketMQNamespace> || null}
+         */
+        this.Namespaces = null;
+
+        /**
+         * The total number of returned results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Namespaces) {
+            this.Namespaces = new Array();
+            for (let z in params.Namespaces) {
+                let obj = new RocketMQNamespace();
+                obj.deserialize(params.Namespaces[z]);
+                this.Namespaces.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRabbitMQVipInstance request structure.
+ * @class
+ */
+class CreateRabbitMQVipInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * vpc ID, such as vpc-xxx. valid VpcId can be obtained by logging in to the virtual private cloud console (https://console.cloud.tencent.com/vpc/vpc?rid=1) or via api call to DescribeVpcEx (https://www.tencentcloud.comom/document/api/215/1372?from_cn_redirect=1), retrieving the unVpcId field from the api response. if both VpcId and SubnetId are set to DEFAULT when creating an instance, the DEFAULT vpc network will be forcibly used.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The subnet ID of the vpc, such as subnet-xxx. valid subnet ids can be queried by logging in to the subnet console (https://console.cloud.tencent.com/vpc/subnet?rid=1) or by calling the api [DescribeSubnets](https://www.tencentcloud.comom/document/api/215/15784?from_cn_redirect=1) and obtaining the unSubnetId field from the api response. if both SubnetId and VpcId are set to DEFAULT when creating an instance, the DEFAULT vpc network will be forcibly used.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Node specification of the cluster. need to enter the corresponding specification flag.
+2C8G:rabbit-vip-profession-2c8g
+4C16G:rabbit-vip-profession-4c16g
+8C32G:rabbit-vip-profession-8c32g
+16C32G:rabbit-vip-basic-4
+16C64G:rabbit-vip-profession-16c64g
+2C4G:rabbit-vip-basic-5
+4C8G:rabbit-vip-basic-1
+8C16G (sold out): rabbit-vip-basic-2.
+Specifies the default value as 4C8G: rabbit-vip-basic-1.
+         * @type {string || null}
+         */
+        this.NodeSpec = null;
+
+        /**
+         * Number of nodes, which is at least three for multi-AZ deployment. If this parameter is left empty, the value will be set to 1 for single-AZ deployment and 3 for multi-AZ deployment by default.
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Storage capacity of a single node, which is 200 GB by default.
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * Whether the default image queue is enabled. true means enabled, false means not enabled. defaults to false if not specified.
+         * @type {boolean || null}
+         */
+        this.EnableCreateDefaultHaMirrorQueue = null;
+
+        /**
+         * Only applies to prepaid clusters (when PayMode parameter is 1). specifies whether the cluster is automatically renewed. true means auto-renewal is enabled. the default is true if not specified.
+         * @type {boolean || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Validity period, which is one month by default.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Payment mode. 0: postpaid, (pay-as-you-go); 1: prepaid (monthly subscription). Monthly subscription is used by default.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Specifies the cluster edition. defaults to 3.8.30. valid values: 3.8.30, 3.11.8, 3.13.7.
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * Whether the request is from the international website. Default value: false.
+         * @type {boolean || null}
+         */
+        this.IsIntl = null;
+
+        /**
+         * Resource tag list.
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Specifies the public bandwidth size in Mbps.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Whether to enable public network access. If this parameter is not specified, the value is false by default.
+         * @type {boolean || null}
+         */
+        this.EnablePublicAccess = null;
+
+        /**
+         * Whether to enable cluster deletion protection. if this parameter is not specified, the value is false by default.
+         * @type {boolean || null}
+         */
+        this.EnableDeletionProtection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.NodeSpec = 'NodeSpec' in params ? params.NodeSpec : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.EnableCreateDefaultHaMirrorQueue = 'EnableCreateDefaultHaMirrorQueue' in params ? params.EnableCreateDefaultHaMirrorQueue : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.IsIntl = 'IsIntl' in params ? params.IsIntl : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.EnablePublicAccess = 'EnablePublicAccess' in params ? params.EnablePublicAccess : null;
+        this.EnableDeletionProtection = 'EnableDeletionProtection' in params ? params.EnableDeletionProtection : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQPermission response structure.
+ * @class
+ */
+class DescribeRabbitMQPermissionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the number of permissions returned.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Permission details list.
+         * @type {Array.<RabbitMQPermission> || null}
+         */
+        this.RabbitMQPermissionList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RabbitMQPermissionList) {
+            this.RabbitMQPermissionList = new Array();
+            for (let z in params.RabbitMQPermissionList) {
+                let obj = new RabbitMQPermission();
+                obj.deserialize(params.RabbitMQPermissionList[z]);
+                this.RabbitMQPermissionList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteCluster request structure.
+ * @class
+ */
+class DeleteClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cluster to be deleted.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * Subscription response parameter in CMQ
+ * @class
+ */
+class CmqSubscription extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subscription name, which must be unique under the same account and same topic in a single region. the name is a string of no more than 64 characters, beginning with a letter, and the remaining part may contain letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * Subscription ID. The subscription ID is used when monitoring data is pulled.
+         * @type {string || null}
+         */
+        this.SubscriptionId = null;
+
+        /**
+         * Subscription owner `APPID`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicOwner = null;
+
+        /**
+         * The number of messages waiting for shipping for this subscription.
+         * @type {number || null}
+         */
+        this.MsgCount = null;
+
+        /**
+         * The last time the subscription attribute was modified. Returns a Unix timestamp, accurate to milliseconds.
+         * @type {number || null}
+         */
+        this.LastModifyTime = null;
+
+        /**
+         * The time when the subscription was created. Returns a Unix timestamp, accurate to milliseconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Filtering policy for subscribing to and receiving messages.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BindingKey = null;
+
+        /**
+         * The endpoint that receives notifications is differentiated by protocol: For HTTP, the endpoint must start with http://, and the host can be a domain name or IP; for queue, fill in queueName.
+         * @type {string || null}
+         */
+        this.Endpoint = null;
+
+        /**
+         * Describes the filtering policy selected by users when creating subscriptions.
+filterType = 1 indicates Tag filtering when users use filterTag.
+filterType = 2 indicates user use bindingKey for filtering.
+         * @type {Array.<string> || null}
+         */
+        this.FilterTags = null;
+
+        /**
+         * The subscription protocol, currently supports two protocols: HTTP and queue. When the HTTP protocol is used, users need to set up their own web server to accept messages. When the queue protocol is used, messages will automatically be pushed to CMQ queues, and users can pull messages concurrently.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Specifies the CMQ push server retry policy when an error occurs while pushing messages to an endpoint. valid values:.
+BACKOFF_RETRY, backoff retry. retry at regular intervals, discard the message after a certain number of retries, and continue to push the next message.
+(2) EXPONENTIAL_DECAY_RETRY, EXPONENTIAL DECAY RETRY. the interval between retries increases exponentially, for example starting at 1s, followed by 2s, 4s, 8s... since the Topic message period is one day, RETRY for at most one day then discard the message. default value is EXPONENTIAL_DECAY_RETRY.
+         * @type {string || null}
+         */
+        this.NotifyStrategy = null;
+
+        /**
+         * The format of the push content. Values: (1) JSON; (2) SIMPLIFIED, i.e., raw format. If protocol is queue, the value must be SIMPLIFIED. If protocol is HTTP, both values are acceptable, with the default being JSON.
+         * @type {string || null}
+         */
+        this.NotifyContentFormat = null;
+
+        /**
+         * Topic Name of the Subscription
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.SubscriptionId = 'SubscriptionId' in params ? params.SubscriptionId : null;
+        this.TopicOwner = 'TopicOwner' in params ? params.TopicOwner : null;
+        this.MsgCount = 'MsgCount' in params ? params.MsgCount : null;
+        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
+        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
+        this.FilterTags = 'FilterTags' in params ? params.FilterTags : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
+        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * VPC information (consists of UniqVpcId and UniqSubnetId).
+ * @class
+ */
+class VpcInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC information
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet information.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * DeleteCmqTopic response structure.
+ * @class
+ */
+class DeleteCmqTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQNamespace request structure.
+ * @class
+ */
+class CreateRocketMQNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * This parameter is disused.
+         * @type {number || null}
+         */
+        this.Ttl = null;
+
+        /**
+         * This parameter is disused.
+         * @type {number || null}
+         */
+        this.RetentionTime = null;
+
+        /**
+         * Remarks (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Ttl = 'Ttl' in params ? params.Ttl : null;
+        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * RocketMQ Consumer Group Subscription Information
+ * @class
+ */
+class RocketMQSubscription extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Topic type.
+Normal.
+GlobalOrder specifies the global sequential order.
+Partitionally sequential.
+Transactional message.
+DelayScheduled specifies the delayed message.
+Retry.
+DeadLetter. specifies the dead letter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Number of partitions
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * Filter mode, which can be TAG or SQL.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpressionType = null;
+
+        /**
+         * Filter expression.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubString = null;
+
+        /**
+         * Subscription status:.
+Consistent subscription relationship.
+Inconsistent subscription relationship.
+2. unknown.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Number of heaped consumer groups.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConsumerLag = null;
+
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Specifies the consumer group name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConsumerGroup = null;
+
+        /**
+         * Online status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsOnline = null;
+
+        /**
+         * Consumption type.
+Broadcast consumption.
+Specifies the cluster consumption.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConsumeType = null;
+
+        /**
+         * Subscription consistency.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Consistency = null;
+
+        /**
+         * Last consumption progress update time, in seconds
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * Maximum number of retries.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRetryTimes = null;
+
+        /**
+         * Protocol type.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClientProtocol = null;
+
+        /**
+         * Client subscription details.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ClientSubscriptionInfo> || null}
+         */
+        this.ClientSubscriptionInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.ExpressionType = 'ExpressionType' in params ? params.ExpressionType : null;
+        this.SubString = 'SubString' in params ? params.SubString : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ConsumerLag = 'ConsumerLag' in params ? params.ConsumerLag : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ConsumerGroup = 'ConsumerGroup' in params ? params.ConsumerGroup : null;
+        this.IsOnline = 'IsOnline' in params ? params.IsOnline : null;
+        this.ConsumeType = 'ConsumeType' in params ? params.ConsumeType : null;
+        this.Consistency = 'Consistency' in params ? params.Consistency : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.MaxRetryTimes = 'MaxRetryTimes' in params ? params.MaxRetryTimes : null;
+        this.ClientProtocol = 'ClientProtocol' in params ? params.ClientProtocol : null;
+
+        if (params.ClientSubscriptionInfos) {
+            this.ClientSubscriptionInfos = new Array();
+            for (let z in params.ClientSubscriptionInfos) {
+                let obj = new ClientSubscriptionInfo();
+                obj.deserialize(params.ClientSubscriptionInfos[z]);
+                this.ClientSubscriptionInfos.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ExchangeQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxExchange = null;
+
+        /**
+         * Number of created exchanges.
+         * @type {number || null}
+         */
+        this.UsedExchange = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxExchange = 'MaxExchange' in params ? params.MaxExchange : null;
+        this.UsedExchange = 'UsedExchange' in params ? params.UsedExchange : null;
+
+    }
+}
+
+/**
+ * ModifyRabbitMQVirtualHost response structure.
+ * @class
+ */
+class ModifyRabbitMQVirtualHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RabbitMQ queue list consumer info
+ * @class
+ */
+class RabbitMQQueueListConsumerDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Consumer count.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConsumersNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConsumersNumber = 'ConsumersNumber' in params ? params.ConsumersNumber : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQRole response structure.
+ * @class
+ */
+class CreateRocketMQRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Role token.
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * Specifies the remark description.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSubscription response structure.
+ * @class
+ */
+class CreateSubscriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation result.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCmqSubscriptionDetail request structure.
+ * @class
+ */
+class DescribeCmqSubscriptionDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which must be unique under the same account in a single region. The name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Fuzzy search by `SubscriptionName`
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * Queue name. Endpoint of bound subscription
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Query type. valid values: (1) topic; (2) queue.
+Default value is topic. if queryType is topic, query subscriptions under the topic. if queryType is queue, query subscriptions bound to the queue.
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
 
     }
 }
@@ -4316,14 +7127,14 @@ class DescribeRocketMQClusterResponse extends  AbstractModel {
         this.ClusterConfig = null;
 
         /**
-         * Recent cluster usage
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster recent usage, about to be deprecated. Use TCOP to obtain related data.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RocketMQClusterRecentStats || null}
          */
         this.ClusterStats = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4361,6 +7172,4568 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Service Provider Information
+ * @class
+ */
+class ServerLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage time.
+         * @type {string || null}
+         */
+        this.SaveTime = null;
+
+        /**
+         * Status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SaveTime = 'SaveTime' in params ? params.SaveTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeMsgTrace response structure.
+ * @class
+ */
+class DescribeMsgTraceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Produce information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ProducerLog || null}
+         */
+        this.ProducerLog = null;
+
+        /**
+         * Service provider information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ServerLog || null}
+         */
+        this.ServerLog = null;
+
+        /**
+         * Consumption information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ConsumerLogs || null}
+         */
+        this.ConsumerLogs = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProducerLog) {
+            let obj = new ProducerLog();
+            obj.deserialize(params.ProducerLog)
+            this.ProducerLog = obj;
+        }
+
+        if (params.ServerLog) {
+            let obj = new ServerLog();
+            obj.deserialize(params.ServerLog)
+            this.ServerLog = obj;
+        }
+
+        if (params.ConsumerLogs) {
+            let obj = new ConsumerLogs();
+            obj.deserialize(params.ConsumerLogs)
+            this.ConsumerLogs = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCluster request structure.
+ * @class
+ */
+class ModifyClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the Pulsar cluster to be updated.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Updated cluster name.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Description information. length limit is 128 bytes.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Enables public network access, which can only be `true`.
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQVipInstance response structure.
+ * @class
+ */
+class CreateRocketMQVipInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AcknowledgeMessage request structure.
+ * @class
+ */
+class AcknowledgeMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID used to identify the message, which can be obtained from the returned value of `receiveMessage`.
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * Topic name, which can be obtained from the returned value of `receiveMessage` and is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+         * @type {string || null}
+         */
+        this.AckTopic = null;
+
+        /**
+         * Subscriber name, which can be obtained from the returned value of `receiveMessage`. Make sure that it is the same as the subscriber name identified in `receiveMessage`; otherwise, the received message cannot be correctly acknowledged.
+         * @type {string || null}
+         */
+        this.SubName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
+        this.SubName = 'SubName' in params ? params.SubName : null;
+
+    }
+}
+
+/**
+ * RabbitMQ queue list member information.
+ * @class
+ */
+class RabbitMQQueueListInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue name
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Remarks
+
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Consumer information.
+         * @type {RabbitMQQueueListConsumerDetailInfo || null}
+         */
+        this.ConsumerDetail = null;
+
+        /**
+         * Queue type. Valid values: "classic" and "quorum".
+         * @type {string || null}
+         */
+        this.QueueType = null;
+
+        /**
+         * Number of retained messages
+
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageHeapCount = null;
+
+        /**
+         * Message production rate per second.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageRateIn = null;
+
+        /**
+         * Message consumption rate per second.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageRateOut = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Whether the queue is durable. true: durable; false: non-durable.
+         * @type {boolean || null}
+         */
+        this.Durable = null;
+
+        /**
+         * Whether automatic deletion is set for the queue. true: automatic deletion set; false: automatic deletion not set.
+         * @type {boolean || null}
+         */
+        this.AutoDelete = null;
+
+        /**
+         * Instance ID of the queue.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Vhost name of the queue.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Primary node name of the queue.
+         * @type {string || null}
+         */
+        this.Node = null;
+
+        /**
+         * Indicates the name of the effective policy.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Extended parameters of the key-value object type.
+         * @type {string || null}
+         */
+        this.Arguments = null;
+
+        /**
+         * Whether the queue is exclusive.
+         * @type {boolean || null}
+         */
+        this.Exclusive = null;
+
+        /**
+         * Creation time timestamp.
+         * @type {number || null}
+         */
+        this.CreateTs = null;
+
+        /**
+         * Modification time timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.ConsumerDetail) {
+            let obj = new RabbitMQQueueListConsumerDetailInfo();
+            obj.deserialize(params.ConsumerDetail)
+            this.ConsumerDetail = obj;
+        }
+        this.QueueType = 'QueueType' in params ? params.QueueType : null;
+        this.MessageHeapCount = 'MessageHeapCount' in params ? params.MessageHeapCount : null;
+        this.MessageRateIn = 'MessageRateIn' in params ? params.MessageRateIn : null;
+        this.MessageRateOut = 'MessageRateOut' in params ? params.MessageRateOut : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Durable = 'Durable' in params ? params.Durable : null;
+        this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Node = 'Node' in params ? params.Node : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Arguments = 'Arguments' in params ? params.Arguments : null;
+        this.Exclusive = 'Exclusive' in params ? params.Exclusive : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
+
+    }
+}
+
+/**
+ * DescribeMsg response structure.
+ * @class
+ */
+class DescribeMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message attributes.
+         * @type {string || null}
+         */
+        this.Properties = null;
+
+        /**
+         * Message body.
+         * @type {string || null}
+         */
+        this.Body = null;
+
+        /**
+         * Batch ID.
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * Production time.
+         * @type {string || null}
+         */
+        this.ProduceTime = null;
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Producer name.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Message key
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Message metadata information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Properties = 'Properties' in params ? params.Properties : null;
+        this.Body = 'Body' in params ? params.Body : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.ProduceTime = 'ProduceTime' in params ? params.ProduceTime : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Metadata = 'Metadata' in params ? params.Metadata : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateProCluster response structure.
+ * @class
+ */
+class CreateProClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the sub-order number.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQInstance request structure.
+ * @class
+ */
+class ModifyRocketMQInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dedicated Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Instance Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Instance message retention time, in hours
+         * @type {number || null}
+         */
+        this.MessageRetention = null;
+
+        /**
+         * Whether to enable deletion protection
+         * @type {boolean || null}
+         */
+        this.EnableDeletionProtection = null;
+
+        /**
+         * Controls the TPS ratio for producing and consuming messages. Value range: 0–1. Default value: 0.5.
+         * @type {number || null}
+         */
+        this.SendReceiveRatio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MessageRetention = 'MessageRetention' in params ? params.MessageRetention : null;
+        this.EnableDeletionProtection = 'EnableDeletionProtection' in params ? params.EnableDeletionProtection : null;
+        this.SendReceiveRatio = 'SendReceiveRatio' in params ? params.SendReceiveRatio : null;
+
+    }
+}
+
+/**
+ * DescribeEnvironments request structure.
+ * @class
+ */
+class DescribeEnvironmentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Fuzzy search by namespace name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Offset, which defaults to 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * * EnvironmentId
+Filter by namespace for exact query.
+Type: String
+Required: No
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateProCluster request structure.
+ * @class
+ */
+class CreateProClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies multi-az deployment with three azs, for example [200002,200003,200004].
+
+Single-AZ deployment selects an availability zone. example: [200002].
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Cluster specification code.
+Refers to professional cluster specifications (https://www.tencentcloud.comom/document/product/1179/83705?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Specifies the storage specification.
+Refers to professional cluster specifications (https://www.tencentcloud.comom/document/product/1179/83705?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * `1`: true. enables automatic monthly renewal.
+
+false. disables automatic monthly renewal.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Purchase duration. value range: 1–50.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Specifies the cluster name, which does not support chinese characters and special characters other than hyphens and underscores, with a length of no more than 64 characters.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Whether to automatically select voucher. valid values: 1 (yes), 0 (no). default is 0.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Specifies the vpc network tag.
+         * @type {VpcInfo || null}
+         */
+        this.Vpc = null;
+
+        /**
+         * Tag list of the cluster (abandoned).
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+
+        if (params.Vpc) {
+            let obj = new VpcInfo();
+            obj.deserialize(params.Vpc)
+            this.Vpc = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVipInstances response structure.
+ * @class
+ */
+class DescribeRabbitMQVipInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of unpaginated items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information list
+         * @type {Array.<RabbitMQVipInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RabbitMQVipInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRoles request structure.
+ * @class
+ */
+class DeleteRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of role names.
+         * @type {Array.<string> || null}
+         */
+        this.RoleNames = null;
+
+        /**
+         * Cluster ID (required)
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ClearCmqQueue request structure.
+ * @class
+ */
+class ClearCmqQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue name, unique under the same account in a single region. queue name is a string of no more than 64 characters, beginning with a letter, the rest may contain letters, digits, and hyphens (-).
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQEnvironmentRole request structure.
+ * @class
+ */
+class CreateRocketMQEnvironmentRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Authorization item, which can contain a non-empty character array of up to 2 items including produce and consume.
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * Required field, cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Permission configuration for topic and group dimensions.
+         * @type {Array.<DetailedRolePerm> || null}
+         */
+        this.DetailedPerms = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.DetailedPerms) {
+            this.DetailedPerms = new Array();
+            for (let z in params.DetailedPerms) {
+                let obj = new DetailedRolePerm();
+                obj.deserialize(params.DetailedPerms[z]);
+                this.DetailedPerms.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * SetRocketMQPublicAccessPoint request structure.
+ * @class
+ */
+class SetRocketMQPublicAccessPointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID. Currently, the system only supports dedicated clusters.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Enable or Disable Access
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Bandwidth size, in Mbps. It must be specified when you enable or adjust the public network access.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Payment mode, which must be specified when you enabled the public network access. 0 means hourly billing, and 1 means annual and monthly subscription. Currently, only hourly billing is supported.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Public network access security rule list, which must be provided when Enabled is true.
+         * @type {Array.<PublicAccessRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Whether public network is billed by traffic.
+         * @type {boolean || null}
+         */
+        this.BillingFlow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new PublicAccessRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.BillingFlow = 'BillingFlow' in params ? params.BillingFlow : null;
+
+    }
+}
+
+/**
+ * DeleteEnvironments response structure.
+ * @class
+ */
+class DeleteEnvironmentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of environments (namespaces) successfully deleted.
+         * @type {Array.<string> || null}
+         */
+        this.EnvironmentIds = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentIds = 'EnvironmentIds' in params ? params.EnvironmentIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQBindings response structure.
+ * @class
+ */
+class DescribeRabbitMQBindingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Route relationship list
+         * @type {Array.<RabbitMQBindingListInfo> || null}
+         */
+        this.BindingInfoList = null;
+
+        /**
+         * Number of routing relationships.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BindingInfoList) {
+            this.BindingInfoList = new Array();
+            for (let z in params.BindingInfoList) {
+                let obj = new RabbitMQBindingListInfo();
+                obj.deserialize(params.BindingInfoList[z]);
+                this.BindingInfoList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Filter subscriptions
+ * @class
+ */
+class FilterSubscription extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to only display subscriptions that include real consumers.
+         * @type {boolean || null}
+         */
+        this.ConsumerHasCount = null;
+
+        /**
+         * Whether to only display subscriptions with heaped messages.
+         * @type {boolean || null}
+         */
+        this.ConsumerHasBacklog = null;
+
+        /**
+         * Whether to only display subscriptions with messages discarded after expiration.
+         * @type {boolean || null}
+         */
+        this.ConsumerHasExpired = null;
+
+        /**
+         * Filter by subscription name for exact query.
+         * @type {Array.<string> || null}
+         */
+        this.SubscriptionNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConsumerHasCount = 'ConsumerHasCount' in params ? params.ConsumerHasCount : null;
+        this.ConsumerHasBacklog = 'ConsumerHasBacklog' in params ? params.ConsumerHasBacklog : null;
+        this.ConsumerHasExpired = 'ConsumerHasExpired' in params ? params.ConsumerHasExpired : null;
+        this.SubscriptionNames = 'SubscriptionNames' in params ? params.SubscriptionNames : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopic response structure.
+ * @class
+ */
+class DescribeRocketMQTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic details.
+         * @type {RocketMQTopic || null}
+         */
+        this.Topic = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Topic) {
+            let obj = new RocketMQTopic();
+            obj.deserialize(params.Topic)
+            this.Topic = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Topic status.
+ * @class
+ */
+class TopicStats extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Broker node.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BrokerName = null;
+
+        /**
+         * Queue number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QueueId = null;
+
+        /**
+         * Minimum offset.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinOffset = null;
+
+        /**
+         * Specifies the maximum offset.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxOffset = null;
+
+        /**
+         * Message count.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageCount = null;
+
+        /**
+         * Last message write time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LastUpdateTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BrokerName = 'BrokerName' in params ? params.BrokerName : null;
+        this.QueueId = 'QueueId' in params ? params.QueueId : null;
+        this.MinOffset = 'MinOffset' in params ? params.MinOffset : null;
+        this.MaxOffset = 'MaxOffset' in params ? params.MaxOffset : null;
+        this.MessageCount = 'MessageCount' in params ? params.MessageCount : null;
+        this.LastUpdateTimestamp = 'LastUpdateTimestamp' in params ? params.LastUpdateTimestamp : null;
+
+    }
+}
+
+/**
+ * DescribeClusters response structure.
+ * @class
+ */
+class DescribeClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of clusters.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Cluster information list
+         * @type {Array.<Cluster> || null}
+         */
+        this.ClusterSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ClusterSet) {
+            this.ClusterSet = new Array();
+            for (let z in params.ClusterSet) {
+                let obj = new Cluster();
+                obj.deserialize(params.ClusterSet[z]);
+                this.ClusterSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClearCmqSubscriptionFilterTags request structure.
+ * @class
+ */
+class ClearCmqSubscriptionFilterTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which must be unique under the same account in a single region. The name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Subscription name, which must be unique under the same account and same topic in a single region. the name is a string of no more than 64 characters, beginning with a letter, and the remaining part may contain letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQGroup response structure.
+ * @class
+ */
+class CreateRocketMQGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQNamespace request structure.
+ * @class
+ */
+class ModifyRocketMQNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * This parameter is disused.
+         * @type {number || null}
+         */
+        this.Ttl = null;
+
+        /**
+         * This parameter is disused.
+         * @type {number || null}
+         */
+        this.RetentionTime = null;
+
+        /**
+         * Remarks (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Whether to enable the public network access
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Ttl = 'Ttl' in params ? params.Ttl : null;
+        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQTopic response structure.
+ * @class
+ */
+class ModifyRocketMQTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQProducers request structure.
+ * @class
+ */
+class DescribeRocketMQProducersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Pagination Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Query filter criteria list. supports the following filter parameters:.
+
+-ClientId: specifies the producer client ID.
+-ClientIp: specifies the producer client IP.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteRocketMQGroup response structure.
+ * @class
+ */
+class DeleteRocketMQGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TDMQ for Pulsar pro instance information
+ * @class
+ */
+class PulsarProInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance version
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed), `6` (Adjusting configuration), `7` (Configuration adjustment failed).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance specification name
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * Peak TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * Storage capacity in GB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Instance expiration time in milliseconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Payment mode. Valid values: `0` (Pay-as-you-go), `1` (Monthly subscription).
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Instance specification ID
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * Elastic TPS beyond the specification
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScalableTps = null;
+
+        /**
+         * VPC ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Peak bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * Tag list of the cluster
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Cluster Creation Time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Specifies the different billing specifications for pro edition and small-scale professional edition: PULSAR.P1 fixed storage and PULSAR.P2 elastic storage.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BillingLabelVersion = null;
+
+        /**
+         * Custom tenant.
+         * @type {string || null}
+         */
+        this.Tenant = null;
+
+        /**
+         * Certificate list of the cluster.
+         * @type {Array.<CertificateInfo> || null}
+         */
+        this.CertificateList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.ScalableTps = 'ScalableTps' in params ? params.ScalableTps : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BillingLabelVersion = 'BillingLabelVersion' in params ? params.BillingLabelVersion : null;
+        this.Tenant = 'Tenant' in params ? params.Tenant : null;
+
+        if (params.CertificateList) {
+            this.CertificateList = new Array();
+            for (let z in params.CertificateList) {
+                let obj = new CertificateInfo();
+                obj.deserialize(params.CertificateList[z]);
+                this.CertificateList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeRocketMQCluster request structure.
+ * @class
+ */
+class DescribeRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * Relationship between the namespaces that are bound in batches and role permissions
+ * @class
+ */
+class EnvironmentRoleSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The IDs of the bound namespaces cannot be delicate and the namespaces must contain resources
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Permissions to be bound to a namespace. Enumerated values: `consume`, `produce`, and `consume, produce`. This parameter cannot be left empty.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+
+    }
+}
+
+/**
+ * DescribeEnvironments response structure.
+ * @class
+ */
+class DescribeEnvironmentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of namespaces.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Array of namespace sets.
+         * @type {Array.<Environment> || null}
+         */
+        this.EnvironmentSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EnvironmentSet) {
+            this.EnvironmentSet = new Array();
+            for (let z in params.EnvironmentSet) {
+                let obj = new Environment();
+                obj.deserialize(params.EnvironmentSet[z]);
+                this.EnvironmentSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQInstanceSpec response structure.
+ * @class
+ */
+class ModifyRocketMQInstanceSpecResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance configurations of a TDMQ for RocketMQ exclusive cluster
+ * @class
+ */
+class RocketMQInstanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum TPS per namespace
+         * @type {number || null}
+         */
+        this.MaxTpsPerNamespace = null;
+
+        /**
+         * Maximum number of namespaces
+         * @type {number || null}
+         */
+        this.MaxNamespaceNum = null;
+
+        /**
+         * Number of used namespaces
+         * @type {number || null}
+         */
+        this.UsedNamespaceNum = null;
+
+        /**
+         * Maximum number of topics
+         * @type {number || null}
+         */
+        this.MaxTopicNum = null;
+
+        /**
+         * Number of used topics
+         * @type {number || null}
+         */
+        this.UsedTopicNum = null;
+
+        /**
+         * Maximum number of groups
+         * @type {number || null}
+         */
+        this.MaxGroupNum = null;
+
+        /**
+         * Number of used groups
+         * @type {number || null}
+         */
+        this.UsedGroupNum = null;
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * Number of nodes in the cluster
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Node distribution
+         * @type {Array.<InstanceNodeDistribution> || null}
+         */
+        this.NodeDistribution = null;
+
+        /**
+         * Topic distribution
+         * @type {Array.<RocketMQTopicDistribution> || null}
+         */
+        this.TopicDistribution = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxQueuesPerTopic = null;
+
+        /**
+         * Maximum configurable message retention time, in hours	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRetention = null;
+
+        /**
+         * Minimum configurable message retention time, in hours
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinRetention = null;
+
+        /**
+         * Instance message retention time, in hours
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Retention = null;
+
+        /**
+         * Minimum quota for the number of topics, which is the free quota. The default number is the minimum quota per node in the cluster specification multiplied by the number of nodes.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicNumLowerLimit = null;
+
+        /**
+         * Maximum quota for the number of topics. The default number is the maximum quota per node in the cluster specification multiplied by the number of nodes.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicNumUpperLimit = null;
+
+        /**
+         * Controls the TPS ratio for producing and consuming messages. Value range: 0–1. Default value: 0.5.
+         * @type {number || null}
+         */
+        this.SendReceiveRatio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
+        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
+        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
+        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
+        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
+        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
+        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+
+        if (params.NodeDistribution) {
+            this.NodeDistribution = new Array();
+            for (let z in params.NodeDistribution) {
+                let obj = new InstanceNodeDistribution();
+                obj.deserialize(params.NodeDistribution[z]);
+                this.NodeDistribution.push(obj);
+            }
+        }
+
+        if (params.TopicDistribution) {
+            this.TopicDistribution = new Array();
+            for (let z in params.TopicDistribution) {
+                let obj = new RocketMQTopicDistribution();
+                obj.deserialize(params.TopicDistribution[z]);
+                this.TopicDistribution.push(obj);
+            }
+        }
+        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
+        this.MaxRetention = 'MaxRetention' in params ? params.MaxRetention : null;
+        this.MinRetention = 'MinRetention' in params ? params.MinRetention : null;
+        this.Retention = 'Retention' in params ? params.Retention : null;
+        this.TopicNumLowerLimit = 'TopicNumLowerLimit' in params ? params.TopicNumLowerLimit : null;
+        this.TopicNumUpperLimit = 'TopicNumUpperLimit' in params ? params.TopicNumUpperLimit : null;
+        this.SendReceiveRatio = 'SendReceiveRatio' in params ? params.SendReceiveRatio : null;
+
+    }
+}
+
+/**
+ * DescribeCmqTopics request structure.
+ * @class
+ */
+class DescribeCmqTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Fuzzy search by `TopicName`
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Filter by CMQ topic name.
+         * @type {Array.<string> || null}
+         */
+        this.TopicNameList = null;
+
+        /**
+         * For filtering by tag, this parameter must be set to `true`.
+         * @type {boolean || null}
+         */
+        this.IsTagFilter = null;
+
+        /**
+         * Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicNameList = 'TopicNameList' in params ? params.TopicNameList : null;
+        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Consumption log
+ * @class
+ */
+class ConsumerLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Consumption group.
+         * @type {string || null}
+         */
+        this.ConsumerGroup = null;
+
+        /**
+         * Consumer name.
+         * @type {string || null}
+         */
+        this.ConsumerName = null;
+
+        /**
+         * Consumption time.
+         * @type {string || null}
+         */
+        this.ConsumeTime = null;
+
+        /**
+         * Consumer client address.
+         * @type {string || null}
+         */
+        this.ConsumerAddr = null;
+
+        /**
+         * Consumption time (milliseconds).
+         * @type {number || null}
+         */
+        this.ConsumeUseTime = null;
+
+        /**
+         * Consumption status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ConsumerGroup = 'ConsumerGroup' in params ? params.ConsumerGroup : null;
+        this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
+        this.ConsumeTime = 'ConsumeTime' in params ? params.ConsumeTime : null;
+        this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
+        this.ConsumeUseTime = 'ConsumeUseTime' in params ? params.ConsumeUseTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopUsages response structure.
+ * @class
+ */
+class DescribeRocketMQTopUsagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metric Value List
+         * @type {Array.<number> || null}
+         */
+        this.Values = null;
+
+        /**
+         * Dimension combinations corresponding to metric value. this API has the following dimensions:.
+tenant,namespace,group,topic
+         * @type {Array.<DimensionInstance> || null}
+         */
+        this.Dimensions = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Values = 'Values' in params ? params.Values : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new DimensionInstance();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateEnvironmentRole response structure.
+ * @class
+ */
+class CreateEnvironmentRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class PrometheusEndpointInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PrometheusEndpointStatus = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.VpcPrometheusEndpoint = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.NodePrometheusAddress = null;
+
+        /**
+         * 
+         * @type {VpcEndpointInfo || null}
+         */
+        this.VpcEndpointInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PrometheusEndpointStatus = 'PrometheusEndpointStatus' in params ? params.PrometheusEndpointStatus : null;
+        this.VpcPrometheusEndpoint = 'VpcPrometheusEndpoint' in params ? params.VpcPrometheusEndpoint : null;
+        this.NodePrometheusAddress = 'NodePrometheusAddress' in params ? params.NodePrometheusAddress : null;
+
+        if (params.VpcEndpointInfo) {
+            let obj = new VpcEndpointInfo();
+            obj.deserialize(params.VpcEndpointInfo)
+            this.VpcEndpointInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Set of cluster information
+ * @class
+ */
+class Cluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Number of access points
+         * @type {number || null}
+         */
+        this.EndPointNum = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether the cluster is healthy. 1: healthy; 0: exceptional
+         * @type {number || null}
+         */
+        this.Healthy = null;
+
+        /**
+         * Cluster health information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HealthyInfo = null;
+
+        /**
+         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Maximum number of namespaces
+         * @type {number || null}
+         */
+        this.MaxNamespaceNum = null;
+
+        /**
+         * Maximum number of topics
+         * @type {number || null}
+         */
+        this.MaxTopicNum = null;
+
+        /**
+         * Maximum QPS
+         * @type {number || null}
+         */
+        this.MaxQps = null;
+
+        /**
+         * Maximum message retention period in seconds
+         * @type {number || null}
+         */
+        this.MessageRetentionTime = null;
+
+        /**
+         * Maximum storage capacity
+         * @type {number || null}
+         */
+        this.MaxStorageCapacity = null;
+
+        /**
+         * Cluster version
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Public network access point
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicEndPoint = null;
+
+        /**
+         * VPC access point
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcEndPoint = null;
+
+        /**
+         * Number of namespaces
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NamespaceNum = null;
+
+        /**
+         * Limit of used storage in MB
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UsedStorageBudget = null;
+
+        /**
+         * Maximum message production rate in messages
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxPublishRateInMessages = null;
+
+        /**
+         * Maximum message push rate in messages
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxDispatchRateInMessages = null;
+
+        /**
+         * Maximum message production rate in bytes
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxPublishRateInBytes = null;
+
+        /**
+         * Maximum message push rate in bytes
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxDispatchRateInBytes = null;
+
+        /**
+         * Number of created topics
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * Maximum message delay in seconds
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxMessageDelayInSeconds = null;
+
+        /**
+         * Whether to enable public network access. If this parameter is left empty, the feature will be enabled by default
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.PublicAccessEnabled = null;
+
+        /**
+         * Tag
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Billing mode:
+`0`: Pay-as-you-go
+`1`: Monthly subscription
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Project ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Project name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Specifies whether the pro edition instance can be upgraded.
+         * @type {boolean || null}
+         */
+        this.UpgradeProInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.EndPointNum = 'EndPointNum' in params ? params.EndPointNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Healthy = 'Healthy' in params ? params.Healthy : null;
+        this.HealthyInfo = 'HealthyInfo' in params ? params.HealthyInfo : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
+        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
+        this.MaxQps = 'MaxQps' in params ? params.MaxQps : null;
+        this.MessageRetentionTime = 'MessageRetentionTime' in params ? params.MessageRetentionTime : null;
+        this.MaxStorageCapacity = 'MaxStorageCapacity' in params ? params.MaxStorageCapacity : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
+        this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
+        this.NamespaceNum = 'NamespaceNum' in params ? params.NamespaceNum : null;
+        this.UsedStorageBudget = 'UsedStorageBudget' in params ? params.UsedStorageBudget : null;
+        this.MaxPublishRateInMessages = 'MaxPublishRateInMessages' in params ? params.MaxPublishRateInMessages : null;
+        this.MaxDispatchRateInMessages = 'MaxDispatchRateInMessages' in params ? params.MaxDispatchRateInMessages : null;
+        this.MaxPublishRateInBytes = 'MaxPublishRateInBytes' in params ? params.MaxPublishRateInBytes : null;
+        this.MaxDispatchRateInBytes = 'MaxDispatchRateInBytes' in params ? params.MaxDispatchRateInBytes : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.MaxMessageDelayInSeconds = 'MaxMessageDelayInSeconds' in params ? params.MaxMessageDelayInSeconds : null;
+        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.UpgradeProInstance = 'UpgradeProInstance' in params ? params.UpgradeProInstance : null;
+
+    }
+}
+
+/**
+ * RocketMQ Message Log
+ * @class
+ */
+class RocketMQMsgLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Message tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgTag = null;
+
+        /**
+         * Message key.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgKey = null;
+
+        /**
+         * Specifies the client ip address.
+         * @type {string || null}
+         */
+        this.ProducerAddr = null;
+
+        /**
+         * Message Sending Time
+         * @type {string || null}
+         */
+        this.ProduceTime = null;
+
+        /**
+         * Pulsar Message ID
+         * @type {string || null}
+         */
+        this.PulsarMsgId = null;
+
+        /**
+         * Dead-letter resend count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DeadLetterResendTimes = null;
+
+        /**
+         * Dead Letter Resend Success Count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ResendSuccessCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+        this.MsgKey = 'MsgKey' in params ? params.MsgKey : null;
+        this.ProducerAddr = 'ProducerAddr' in params ? params.ProducerAddr : null;
+        this.ProduceTime = 'ProduceTime' in params ? params.ProduceTime : null;
+        this.PulsarMsgId = 'PulsarMsgId' in params ? params.PulsarMsgId : null;
+        this.DeadLetterResendTimes = 'DeadLetterResendTimes' in params ? params.DeadLetterResendTimes : null;
+        this.ResendSuccessCount = 'ResendSuccessCount' in params ? params.ResendSuccessCount : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQCluster response structure.
+ * @class
+ */
+class CreateRocketMQClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQNamespace response structure.
+ * @class
+ */
+class DeleteRocketMQNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQTopic request structure.
+ * @class
+ */
+class CreateRocketMQTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which can contain 3–64 letters, digits, hyphens, and underscores
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Topic namespace. Currently, you can create topics only in one single namespace.
+         * @type {Array.<string> || null}
+         */
+        this.Namespaces = null;
+
+        /**
+         * Topic type. Valid values: Normal, GlobalOrder, PartitionedOrder, Transaction, and DelayScheduled. Transaction is only supported in the Exclusive Edition.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Topic remarks (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Number of partitions, which doesn't take effect for globally sequential messages
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Namespaces = 'Namespaces' in params ? params.Namespaces : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstances response structure.
+ * @class
+ */
+class DescribeRocketMQVipInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of unpaginated items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information list
+         * @type {Array.<RocketMQVipInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RocketMQVipInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQCluster request structure.
+ * @class
+ */
+class DeleteRocketMQClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cluster to be deleted.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribePulsarProInstances response structure.
+ * @class
+ */
+class DescribePulsarProInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of unpaginated items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information list
+         * @type {Array.<PulsarProInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new PulsarProInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMsgTrace request structure.
+ * @class
+ */
+class DescribeMsgTraceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace).
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Message production time.
+         * @type {string || null}
+         */
+        this.ProduceTime = null;
+
+        /**
+         * Starting index. Default is 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returns, default to 10 if not specified, maximum value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Fuzzy matching of consumer group name.
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ProduceTime = 'ProduceTime' in params ? params.ProduceTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQBinding request structure.
+ * @class
+ */
+class DeleteRabbitMQBindingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Routing relationship ID.
+         * @type {number || null}
+         */
+        this.BindingId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.BindingId = 'BindingId' in params ? params.BindingId : null;
+
+    }
+}
+
+/**
+ * DescribeBindClusters request structure.
+ * @class
+ */
+class DescribeBindClustersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateRabbitMQVirtualHost request structure.
+ * @class
+ */
+class CreateRabbitMQVirtualHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Vhost name
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Message trace flag. Valid values: `true` (Enabled), `false` (Disabled, which is the default value).
+         * @type {boolean || null}
+         */
+        this.TraceFlag = null;
+
+        /**
+         * Whether to create an image queue policy. Default value: true.
+         * @type {boolean || null}
+         */
+        this.MirrorQueuePolicyFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.TraceFlag = 'TraceFlag' in params ? params.TraceFlag : null;
+        this.MirrorQueuePolicyFlag = 'MirrorQueuePolicyFlag' in params ? params.MirrorQueuePolicyFlag : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQQueueDetail request structure.
+ * @class
+ */
+class DescribeRabbitMQQueueDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Queue Name
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+
+    }
+}
+
+/**
+ * TDMQ for RocketMQ topic distribution
+ * @class
+ */
+class RocketMQTopicDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic type
+         * @type {string || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * Number of topics
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * CreateRole request structure.
+ * @class
+ */
+class CreateRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Cluster ID (required)
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeEnvironmentAttributes response structure.
+ * @class
+ */
+class DescribeEnvironmentAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days).
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Consumption rate limit in bytes/second. 0: unlimited.
+         * @type {number || null}
+         */
+        this.RateInByte = null;
+
+        /**
+         * Consumption rate limit in messages/second. 0: unlimited.
+         * @type {number || null}
+         */
+        this.RateInSize = null;
+
+        /**
+         * Retention policy for consumed messages in hours. 0: deleted immediately after consumption.
+         * @type {number || null}
+         */
+        this.RetentionHours = null;
+
+        /**
+         * Retention policy for consumed messages in GB. 0: deleted immediately after consumption.
+         * @type {number || null}
+         */
+        this.RetentionSize = null;
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Number of replicas.
+         * @type {number || null}
+         */
+        this.Replicas = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.RateInByte = 'RateInByte' in params ? params.RateInByte : null;
+        this.RateInSize = 'RateInSize' in params ? params.RateInSize : null;
+        this.RetentionHours = 'RetentionHours' in params ? params.RetentionHours : null;
+        this.RetentionSize = 'RetentionSize' in params ? params.RetentionSize : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Replicas = 'Replicas' in params ? params.Replicas : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQRoles request structure.
+ * @class
+ */
+class DescribeRocketMQRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Starting index. Default is 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returns, default to 10 if not specified, maximum value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Required field, cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Role name, fuzzy search
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Filters RoleName by role name for precise query. Type: string. Required: no.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateRocketMQNamespace response structure.
+ * @class
+ */
+class CreateRocketMQNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQEnvironmentRole response structure.
+ * @class
+ */
+class ModifyRocketMQEnvironmentRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCmqQueue response structure.
+ * @class
+ */
+class CreateCmqQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `queueId` of a successfully created queue
+         * @type {string || null}
+         */
+        this.QueueId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueId = 'QueueId' in params ? params.QueueId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQVipInstance request structure.
+ * @class
+ */
+class DeleteRabbitMQVipInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether the request is from the international website. Default value: false.
+         * @type {boolean || null}
+         */
+        this.IsIntl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IsIntl = 'IsIntl' in params ? params.IsIntl : null;
+
+    }
+}
+
+/**
+ * Filter parameter
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter parameter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Value
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQPublicAccessMonitorData request structure.
+ * @class
+ */
+class DescribeRocketMQPublicAccessMonitorDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Exclusive Edition cluster ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Metric name. Only single-metric pulling is supported. Currently supported metrics: ClientIntraffic and ClientOuttraffic.
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, current time by default.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Monitoring statistical period, such as 60 (in seconds). The default value is 300.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+    }
+}
+
+/**
+ * DescribeRoles response structure.
+ * @class
+ */
+class DescribeRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of records.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Array of roles.
+         * @type {Array.<Role> || null}
+         */
+        this.RoleSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RoleSets) {
+            this.RoleSets = new Array();
+            for (let z in params.RoleSets) {
+                let obj = new Role();
+                obj.deserialize(params.RoleSets[z]);
+                this.RoleSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQPermission request structure.
+ * @class
+ */
+class DescribeRabbitMQPermissionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username, such as admin. effective User names can be found by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking a cluster in the cluster list, entering cluster details, and locating the list of users under the User and permission management tab, thereby finding the username.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * VirtualHost name, such as testvhost. valid VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Specifies the page Offset. default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Page Limit. default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DeleteRabbitMQUser request structure.
+ * @class
+ */
+class DeleteRabbitMQUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username, such as admin. effective User names can be found by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking a cluster in the cluster list, entering cluster details, and locating the list of users under the User and permission management tab, thereby finding the username.
+         * @type {string || null}
+         */
+        this.User = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+
+    }
+}
+
+/**
+ * DescribeSubscriptions request structure.
+ * @class
+ */
+class DescribeSubscriptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Offset, which defaults to 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Fuzzy match by subscriber name.
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * Data filter.
+         * @type {Array.<FilterSubscription> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new FilterSubscription();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Information of instance node distribution
+ * @class
+ */
+class InstanceNodeDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * AZ ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Number of nodes
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * This flag is true if there is a scheduling task with no switchback AZs.
+         * @type {boolean || null}
+         */
+        this.NodePermWipeFlag = null;
+
+        /**
+         * Availability zone status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.NodePermWipeFlag = 'NodePermWipeFlag' in params ? params.NodePermWipeFlag : null;
+        this.ZoneStatus = 'ZoneStatus' in params ? params.ZoneStatus : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQGroup request structure.
+ * @class
+ */
+class CreateRocketMQGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Group name (8–64 characters)
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Namespace. Currently, only one namespace is supported
+         * @type {Array.<string> || null}
+         */
+        this.Namespaces = null;
+
+        /**
+         * Whether to enable consumption
+         * @type {boolean || null}
+         */
+        this.ReadEnable = null;
+
+        /**
+         * Whether to enable broadcast consumption
+         * @type {boolean || null}
+         */
+        this.BroadcastEnable = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Remarks (up to 128 characters)
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Group type (`TCP`, `HTTP`)
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * The maximum number of retries for a group
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Namespaces = 'Namespaces' in params ? params.Namespaces : null;
+        this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
+        this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
+
+    }
+}
+
+/**
+ * Role instance
+ * @class
+ */
+class Role extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Value of the role token.
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Authorization type (Cluster: cluster; TopicAndGroup: topic or consumer group).
+         * @type {string || null}
+         */
+        this.PermType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.PermType = 'PermType' in params ? params.PermType : null;
+
+    }
+}
+
+/**
+ * DescribeTopicMsgs response structure.
+ * @class
+ */
+class DescribeTopicMsgsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total record count.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Message log list.
+         * @type {Array.<MsgLog> || null}
+         */
+        this.TopicMsgLogSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TopicMsgLogSets) {
+            this.TopicMsgLogSets = new Array();
+            for (let z in params.TopicMsgLogSets) {
+                let obj = new MsgLog();
+                obj.deserialize(params.TopicMsgLogSets[z]);
+                this.TopicMsgLogSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCmqSubscriptionAttribute response structure.
+ * @class
+ */
+class ModifyCmqSubscriptionAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendCmqMsg request structure.
+ * @class
+ */
+class SendCmqMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue name
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Message content
+         * @type {string || null}
+         */
+        this.MsgContent = null;
+
+        /**
+         * Delay time. expressed in seconds, default value is 0, cannot exceed the max message unacknowledgement time in queue configuration.
+         * @type {number || null}
+         */
+        this.DelaySeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
+        this.DelaySeconds = 'DelaySeconds' in params ? params.DelaySeconds : null;
+
+    }
+}
+
+/**
+ * RabbitMQ instance user quota information.
+ * @class
+ */
+class RabbitMQUserQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum creation number of users.
+         * @type {number || null}
+         */
+        this.MaxUser = null;
+
+        /**
+         * Indicates the number of users in use.
+         * @type {number || null}
+         */
+        this.UsedUser = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxUser = 'MaxUser' in params ? params.MaxUser : null;
+        this.UsedUser = 'UsedUser' in params ? params.UsedUser : null;
+
+    }
+}
+
+/**
+ * CreateRabbitMQVirtualHost response structure.
+ * @class
+ */
+class CreateRabbitMQVirtualHostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vhost name
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RewindCmqQueue response structure.
+ * @class
+ */
+class RewindCmqQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Public Network Access Security Rules
+ * @class
+ */
+class PublicAccessRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP Subnet Information
+         * @type {string || null}
+         */
+        this.IpRule = null;
+
+        /**
+         * Allow or Deny
+         * @type {boolean || null}
+         */
+        this.Allow = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IpRule = 'IpRule' in params ? params.IpRule : null;
+        this.Allow = 'Allow' in params ? params.Allow : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RabbitMQClusterWhiteListInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deprecated.
+         * @type {string || null}
+         */
+        this.WhiteList = null;
+
+        /**
+         * Public network console allowlist.
+         * @type {string || null}
+         */
+        this.PublicControlConsoleWhiteList = null;
+
+        /**
+         * Public network data flow allowlist.
+         * @type {string || null}
+         */
+        this.PublicDataStreamWhiteList = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PublicControlConsoleWhiteListStatus = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PublicDataStreamWhiteListStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WhiteList = 'WhiteList' in params ? params.WhiteList : null;
+        this.PublicControlConsoleWhiteList = 'PublicControlConsoleWhiteList' in params ? params.PublicControlConsoleWhiteList : null;
+        this.PublicDataStreamWhiteList = 'PublicDataStreamWhiteList' in params ? params.PublicDataStreamWhiteList : null;
+        this.PublicControlConsoleWhiteListStatus = 'PublicControlConsoleWhiteListStatus' in params ? params.PublicControlConsoleWhiteListStatus : null;
+        this.PublicDataStreamWhiteListStatus = 'PublicDataStreamWhiteListStatus' in params ? params.PublicDataStreamWhiteListStatus : null;
+
+    }
+}
+
+/**
+ * DeleteProCluster request structure.
+ * @class
+ */
+class DeleteProClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeCmqTopicDetail response structure.
+ * @class
+ */
+class DescribeCmqTopicDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic details
+         * @type {CmqTopic || null}
+         */
+        this.TopicDescribe = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicDescribe) {
+            let obj = new CmqTopic();
+            obj.deserialize(params.TopicDescribe)
+            this.TopicDescribe = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopics request structure.
+ * @class
+ */
+class DescribeRocketMQTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset for query.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Query limit.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Filter by topic type. Valid values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`.
+         * @type {Array.<string> || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * Search by topic name. Fuzzy query is supported.
+         * @type {string || null}
+         */
+        this.FilterName = null;
+
+        /**
+         * Filters by subscription consumer group name.
+         * @type {string || null}
+         */
+        this.FilterGroup = null;
+
+        /**
+         * Tag filter
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.FilterName = 'FilterName' in params ? params.FilterName : null;
+        this.FilterGroup = 'FilterGroup' in params ? params.FilterGroup : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Client subscription details, which are used to help determine clients with inconsistent subscription relationships.
+ * @class
+ */
+class ClientSubscriptionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Client ID
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Client IP.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClientAddr = null;
+
+        /**
+         * Subscribed topic.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Subscription expression.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubString = null;
+
+        /**
+         * Subscription method.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpressionType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.ClientAddr = 'ClientAddr' in params ? params.ClientAddr : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.SubString = 'SubString' in params ? params.SubString : null;
+        this.ExpressionType = 'ExpressionType' in params ? params.ExpressionType : null;
+
+    }
+}
+
+/**
  * DescribeCmqSubscriptionDetail response structure.
  * @class
  */
@@ -4375,14 +11748,13 @@ class DescribeCmqSubscriptionDetailResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Set of subscription attributes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Subscription attribute collection
          * @type {Array.<CmqSubscription> || null}
          */
         this.SubscriptionSet = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4476,91 +11848,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * RewindCmqQueue request structure.
- * @class
- */
-class RewindCmqQueueRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * After this time is configured, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
-         * @type {number || null}
-         */
-        this.StartConsumeTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.StartConsumeTime = 'StartConsumeTime' in params ? params.StartConsumeTime : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQUser response structure.
- * @class
- */
-class DescribeRabbitMQUserResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned number of users
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The list of the created TDMQ for RabbitMQ users
-         * @type {Array.<RabbitMQUser> || null}
-         */
-        this.RabbitMQUserList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.RabbitMQUserList) {
-            this.RabbitMQUserList = new Array();
-            for (let z in params.RabbitMQUserList) {
-                let obj = new RabbitMQUser();
-                obj.deserialize(params.RabbitMQUserList[z]);
-                this.RabbitMQUserList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeRocketMQMsg response structure.
  * @class
  */
@@ -4599,21 +11886,27 @@ class DescribeRocketMQMsgResponse extends  AbstractModel {
         this.ProducerAddr = null;
 
         /**
-         * Consumption details of a consumer group
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Consumer group consumption list.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RocketMQMessageTrack> || null}
          */
         this.MessageTracks = null;
 
         /**
          * Topic name displayed on the details page
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ShowTopicName = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Total number of consumer group consumption lists.
+         * @type {number || null}
+         */
+        this.MessageTracksCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4642,56 +11935,8 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
             }
         }
         this.ShowTopicName = 'ShowTopicName' in params ? params.ShowTopicName : null;
+        this.MessageTracksCount = 'MessageTracksCount' in params ? params.MessageTracksCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyCluster request structure.
- * @class
- */
-class ModifyClusterRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the Pulsar cluster to be updated.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Updated cluster name.
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * Remarks.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Enables public network access, which can only be `true`.
-         * @type {boolean || null}
-         */
-        this.PublicAccessEnabled = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
 
     }
 }
@@ -4732,36 +11977,30 @@ class DescribeEnvironmentAttributesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyRocketMQCluster request structure.
+ * ModifyPublicNetworkSecurityPolicy response structure.
  * @class
  */
-class ModifyRocketMQClusterRequest extends  AbstractModel {
+class ModifyPublicNetworkSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RocketMQ cluster ID
+         * Valid values: SUCCESS or FAILURE.
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.ModifyResult = null;
 
         /**
-         * 3–64 letters, digits, hyphens, and underscores
+         * Cluster ID.
          * @type {string || null}
          */
-        this.ClusterName = null;
+        this.InstanceId = null;
 
         /**
-         * Remarks (up to 128 characters)
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Remark = null;
-
-        /**
-         * Whether to enable the HTTP access over the public network
-         * @type {boolean || null}
-         */
-        this.PublicAccessEnabled = null;
+        this.RequestId = null;
 
     }
 
@@ -4772,10 +12011,9 @@ class ModifyRocketMQClusterRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
+        this.ModifyResult = 'ModifyResult' in params ? params.ModifyResult : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4789,7 +12027,7 @@ class DeleteRabbitMQVirtualHostResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4803,170 +12041,6 @@ class DeleteRabbitMQVirtualHostResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * AcknowledgeMessage request structure.
- * @class
- */
-class AcknowledgeMessageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID used to identify the message, which can be obtained from the returned value of `receiveMessage`.
-         * @type {string || null}
-         */
-        this.MessageId = null;
-
-        /**
-         * Topic name, which can be obtained from the returned value of `receiveMessage` and is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
-         * @type {string || null}
-         */
-        this.AckTopic = null;
-
-        /**
-         * Subscriber name, which can be obtained from the returned value of `receiveMessage`. Make sure that it is the same as the subscriber name identified in `receiveMessage`; otherwise, the received message cannot be correctly acknowledged.
-         * @type {string || null}
-         */
-        this.SubName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MessageId = 'MessageId' in params ? params.MessageId : null;
-        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
-        this.SubName = 'SubName' in params ? params.SubName : null;
-
-    }
-}
-
-/**
- * ResetRocketMQConsumerOffSet response structure.
- * @class
- */
-class ResetRocketMQConsumerOffSetResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQVipInstanceDetail response structure.
- * @class
- */
-class DescribeRocketMQVipInstanceDetailResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster information
-         * @type {RocketMQClusterInfo || null}
-         */
-        this.ClusterInfo = null;
-
-        /**
-         * Cluster configuration
-         * @type {RocketMQInstanceConfig || null}
-         */
-        this.InstanceConfig = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ClusterInfo) {
-            let obj = new RocketMQClusterInfo();
-            obj.deserialize(params.ClusterInfo)
-            this.ClusterInfo = obj;
-        }
-
-        if (params.InstanceConfig) {
-            let obj = new RocketMQInstanceConfig();
-            obj.deserialize(params.InstanceConfig)
-            this.InstanceConfig = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * PublishCmqMsg response structure.
- * @class
- */
-class PublishCmqMsgResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `true` indicates that the sending is successful
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * Message ID
-         * @type {string || null}
-         */
-        this.MsgId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.MsgId = 'MsgId' in params ? params.MsgId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5056,24 +12130,78 @@ class DescribePublishersRequest extends  AbstractModel {
 }
 
 /**
- * CreateRocketMQCluster request structure.
+ * RabbitMQ routing relationship list member.
  * @class
  */
-class CreateRocketMQClusterRequest extends  AbstractModel {
+class RabbitMQBindingListInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster name, which can contain 3–64 letters, digits, hyphens, and underscores
-         * @type {string || null}
+         * Routing relationship ID.
+         * @type {number || null}
          */
-        this.Name = null;
+        this.BindingId = null;
 
         /**
-         * Cluster description (up to 128 characters)
+         * VhostName
          * @type {string || null}
          */
-        this.Remark = null;
+        this.VirtualHost = null;
+
+        /**
+         * Source exchange name.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Destination type. Valid values: queue and exchange.
+         * @type {string || null}
+         */
+        this.DestinationType = null;
+
+        /**
+         * Destination resource name.
+         * @type {string || null}
+         */
+        this.Destination = null;
+
+        /**
+         * Binds the key.
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
+        /**
+         * Source exchange type.
+         * @type {string || null}
+         */
+        this.SourceExchangeType = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Creation timestamp.
+         * @type {number || null}
+         */
+        this.CreateTs = null;
+
+        /**
+         * Modification timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
 
     }
 
@@ -5084,31 +12212,40 @@ class CreateRocketMQClusterRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.BindingId = 'BindingId' in params ? params.BindingId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.DestinationType = 'DestinationType' in params ? params.DestinationType : null;
+        this.Destination = 'Destination' in params ? params.Destination : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+        this.SourceExchangeType = 'SourceExchangeType' in params ? params.SourceExchangeType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
 
     }
 }
 
 /**
- * CreateRabbitMQUser response structure.
+ * ModifyPublicNetworkSecurityPolicy request structure.
  * @class
  */
-class CreateRabbitMQUserResponse extends  AbstractModel {
+class ModifyPublicNetworkSecurityPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Username, which is used for login.
+         * Cluster ID.
          * @type {string || null}
          */
-        this.User = null;
+        this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Policy List
+         * @type {Array.<SecurityPolicy> || null}
          */
-        this.RequestId = null;
+        this.PolicyList = null;
 
     }
 
@@ -5119,100 +12256,16 @@ class CreateRabbitMQUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.User = 'User' in params ? params.User : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-    }
-}
-
-/**
- * AcknowledgeMessage response structure.
- * @class
- */
-class AcknowledgeMessageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * If it is an empty string, no error occurred.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ErrorMsg = null;
-
-        /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.PolicyList) {
+            this.PolicyList = new Array();
+            for (let z in params.PolicyList) {
+                let obj = new SecurityPolicy();
+                obj.deserialize(params.PolicyList[z]);
+                this.PolicyList.push(obj);
+            }
         }
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteEnvironmentRoles response structure.
- * @class
- */
-class DeleteEnvironmentRolesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeClusterDetail request structure.
- * @class
- */
-class DescribeClusterDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -5238,7 +12291,7 @@ class ModifyRoleResponse extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5260,81 +12313,30 @@ class ModifyRoleResponse extends  AbstractModel {
 }
 
 /**
- * Type of the tag key/value
+ * DescribeRocketMQTopicStats request structure.
  * @class
  */
-class Tag extends  AbstractModel {
+class DescribeRocketMQTopicStatsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Value of the tag key
-         * @type {string || null}
-         */
-        this.TagKey = null;
-
-        /**
-         * Value of the tag value
-         * @type {string || null}
-         */
-        this.TagValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
-
-    }
-}
-
-/**
- * DeleteCmqQueue response structure.
- * @class
- */
-class DeleteCmqQueueResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQCluster request structure.
- * @class
- */
-class DescribeRocketMQClusterRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
+         * Instance ID.
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
 
     }
 
@@ -5346,34 +12348,8 @@ class DescribeRocketMQClusterRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * DeleteRocketMQTopic response structure.
- * @class
- */
-class DeleteRocketMQTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -5394,13 +12370,13 @@ class SendRocketMQMessageResponse extends  AbstractModel {
 
         /**
          * Message ID
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5422,36 +12398,63 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
 }
 
 /**
- * ModifyCmqTopicAttribute request structure.
+ * TDMQ for Pulsar pro cluster specification information
  * @class
  */
-class ModifyCmqTopicAttributeRequest extends  AbstractModel {
+class PulsarProClusterSpecInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Cluster specification name
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.SpecName = null;
 
         /**
-         * Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+         * Peak TPS
          * @type {number || null}
          */
-        this.MaxMsgSize = null;
+        this.MaxTps = null;
 
         /**
-         * Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
+         * Peak bandwidth in Mbps
          * @type {number || null}
          */
-        this.MsgRetentionSeconds = null;
+        this.MaxBandWidth = null;
 
         /**
-         * Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
-         * @type {boolean || null}
+         * Maximum number of namespaces
+         * @type {number || null}
          */
-        this.Trace = null;
+        this.MaxNamespaces = null;
+
+        /**
+         * Maximum number of topic partitions
+         * @type {number || null}
+         */
+        this.MaxTopics = null;
+
+        /**
+         * Elastic TPS beyond the specification
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScalableTps = null;
+
+        /**
+         * 32 or 128.
+Maximum number of partitions for topics in the current cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxPartitions = null;
+
+        /**
+         * Maximum delayed message count for the product. 0 indicates no limit.	
+         * @type {number || null}
+         */
+        this.MaxDelayedMessages = null;
 
     }
 
@@ -5462,95 +12465,14 @@ class ModifyCmqTopicAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
-        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
-        this.Trace = 'Trace' in params ? params.Trace : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQVipInstances response structure.
- * @class
- */
-class DescribeRabbitMQVipInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The total number of unpaginated items
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Instance information list
-         * @type {Array.<RabbitMQVipInstance> || null}
-         */
-        this.Instances = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new RabbitMQVipInstance();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteRoles request structure.
- * @class
- */
-class DeleteRolesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array of role names.
-         * @type {Array.<string> || null}
-         */
-        this.RoleNames = null;
-
-        /**
-         * Cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxNamespaces = 'MaxNamespaces' in params ? params.MaxNamespaces : null;
+        this.MaxTopics = 'MaxTopics' in params ? params.MaxTopics : null;
+        this.ScalableTps = 'ScalableTps' in params ? params.ScalableTps : null;
+        this.MaxPartitions = 'MaxPartitions' in params ? params.MaxPartitions : null;
+        this.MaxDelayedMessages = 'MaxDelayedMessages' in params ? params.MaxDelayedMessages : null;
 
     }
 }
@@ -5751,24 +12673,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CreateCmqSubscribe response structure.
+ * Metric Dimension Object
  * @class
  */
-class CreateCmqSubscribeResponse extends  AbstractModel {
+class DimensionOpt extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Subscription ID
+         * Queried dimension name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.SubscriptionId = null;
+        this.Name = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Queried Dimension Value
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Value = null;
 
     }
 
@@ -5779,151 +12703,8 @@ class CreateCmqSubscribeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubscriptionId = 'SubscriptionId' in params ? params.SubscriptionId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Producer information
- * @class
- */
-class Publisher extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Producer ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProducerId = null;
-
-        /**
-         * Producer name.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Producer address.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * Client version.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClientVersion = null;
-
-        /**
-         * Message production rate (message/sec).
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgRateIn = null;
-
-        /**
-         * Message production throughput rate (byte/sec).
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgThroughputIn = null;
-
-        /**
-         * Average message size in bytes.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * Connection time.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConnectedSince = null;
-
-        /**
-         * Serial number of the topic partition connected to the producer.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProducerId = 'ProducerId' in params ? params.ProducerId : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
-        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-
-    }
-}
-
-/**
- * DescribeSubscriptions response structure.
- * @class
- */
-class DescribeSubscriptionsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array of subscriber sets.
-         * @type {Array.<Subscription> || null}
-         */
-        this.SubscriptionSets = null;
-
-        /**
-         * The total number of returned results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.SubscriptionSets) {
-            this.SubscriptionSets = new Array();
-            for (let z in params.SubscriptionSets) {
-                let obj = new Subscription();
-                obj.deserialize(params.SubscriptionSets[z]);
-                this.SubscriptionSets.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -5943,7 +12724,13 @@ class RocketMQMessageTrack extends  AbstractModel {
         this.Group = null;
 
         /**
-         * Consumption status
+         * Consumption status.
+CONSUMED.
+CONSUMED BUT FILTERED.
+NOT_CONSUME: specifies unconsumed.
+ENTER_RETRY: specifies whether to enter the retry queue.
+ENTER_DLQ: specifies whether the message enters the dead letter queue.
+Consumption status UNKNOWN.
          * @type {string || null}
          */
         this.ConsumeStatus = null;
@@ -5956,7 +12743,7 @@ class RocketMQMessageTrack extends  AbstractModel {
 
         /**
          * Exception information
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExceptionDesc = null;
@@ -5974,155 +12761,6 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.ConsumeStatus = 'ConsumeStatus' in params ? params.ConsumeStatus : null;
         this.TrackType = 'TrackType' in params ? params.TrackType : null;
         this.ExceptionDesc = 'ExceptionDesc' in params ? params.ExceptionDesc : null;
-
-    }
-}
-
-/**
- * ModifyRole request structure.
- * @class
- */
-class ModifyRoleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQMsg request structure.
- * @class
- */
-class DescribeRocketMQMsgRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace ID
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name. Pass in the group ID when querying a dead letter queue.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Message ID
-         * @type {string || null}
-         */
-        this.MsgId = null;
-
-        /**
-         * ID of a TDMQ for Pulsar message
-         * @type {string || null}
-         */
-        this.PulsarMsgId = null;
-
-        /**
-         * The value of this parameter is `true` when you query a dead letter queue. It only applies to TDMQ for RocketMQ.
-         * @type {boolean || null}
-         */
-        this.QueryDlqMsg = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgId = 'MsgId' in params ? params.MsgId : null;
-        this.PulsarMsgId = 'PulsarMsgId' in params ? params.PulsarMsgId : null;
-        this.QueryDlqMsg = 'QueryDlqMsg' in params ? params.QueryDlqMsg : null;
-
-    }
-}
-
-/**
- * SendMessages response structure.
- * @class
- */
-class SendMessagesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * messageID, which must be globally unique and is the metadata information used to identify the message.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MessageId = null;
-
-        /**
-         * Returned error message. If an empty string is returned, no error occurred.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ErrorMsg = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MessageId = 'MessageId' in params ? params.MessageId : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6198,85 +12836,6 @@ class ReceiveMessageRequest extends  AbstractModel {
 }
 
 /**
- * CreateTopic request structure.
- * @class
- */
-class CreateTopicRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name, which can contain up to 64 letters, digits, hyphens, and underscores.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * The value “1” indicates a non-partitioned topic (a topic with no partitions) will be created. A value between 1 (exclusive) and 128 (inclusive) indicates the partition count of a partitioned topic.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * This input parameter will be disused soon. You can use `PulsarTopicType` instead.
-0: General message;
-1: Globally sequential message;
-2: Partitionally sequential message;
-3: Retry letter topic;
-4: Dead letter topic.
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Pulsar topic type.
-`0`: Non-persistent and non-partitioned
-`1`: Non-persistent and partitioned
-`2`: Persistent and non-partitioned
-`3`: Persistent and partitioned
-         * @type {number || null}
-         */
-        this.PulsarTopicType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
-
-    }
-}
-
-/**
  * DescribeTopics request structure.
  * @class
  */
@@ -6289,6 +12848,12 @@ class DescribeTopicsRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.EnvironmentId = null;
+
+        /**
+         * Pulsar cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
 
         /**
          * Fuzzy match by topic name.
@@ -6319,12 +12884,6 @@ class DescribeTopicsRequest extends  AbstractModel {
         this.TopicType = null;
 
         /**
-         * Pulsar cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
          * * TopicName
 Query by topic name for exact search.
 Type: String
@@ -6351,11 +12910,11 @@ Required: No
             return;
         }
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6366,41 +12925,6 @@ Required: No
             }
         }
         this.TopicCreator = 'TopicCreator' in params ? params.TopicCreator : null;
-
-    }
-}
-
-/**
- * DeleteEnvironments response structure.
- * @class
- */
-class DeleteEnvironmentsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array of environments (namespaces) successfully deleted.
-         * @type {Array.<string> || null}
-         */
-        this.EnvironmentIds = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentIds = 'EnvironmentIds' in params ? params.EnvironmentIds : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6426,7 +12950,7 @@ class DescribeEnvironmentRolesResponse extends  AbstractModel {
         this.EnvironmentRoleSets = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6456,626 +12980,73 @@ class DescribeEnvironmentRolesResponse extends  AbstractModel {
 }
 
 /**
- * ClearCmqQueue request structure.
+ * DescribeRocketMQPublicAccessPoint response structure.
  * @class
  */
-class ClearCmqQueueRequest extends  AbstractModel {
+class DescribeRocketMQPublicAccessPointResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQGroup request structure.
- * @class
- */
-class ModifyRocketMQGroupRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Consumer group name
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * Remarks (up to 128 characters)
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Whether to enable consumption
-         * @type {boolean || null}
-         */
-        this.ReadEnable = null;
-
-        /**
-         * Whether to enable broadcast consumption
-         * @type {boolean || null}
-         */
-        this.BroadcastEnable = null;
-
-        /**
-         * The maximum number of retries
-         * @type {number || null}
-         */
-        this.RetryMaxTimes = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
-        this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
-        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
-
-    }
-}
-
-/**
- * Filter subscriptions
- * @class
- */
-class FilterSubscription extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to only display subscriptions that include real consumers.
-         * @type {boolean || null}
-         */
-        this.ConsumerHasCount = null;
-
-        /**
-         * Whether to only display subscriptions with heaped messages.
-         * @type {boolean || null}
-         */
-        this.ConsumerHasBacklog = null;
-
-        /**
-         * Whether to only display subscriptions with messages discarded after expiration.
-         * @type {boolean || null}
-         */
-        this.ConsumerHasExpired = null;
-
-        /**
-         * Filter by subscription name for exact query.
-         * @type {Array.<string> || null}
-         */
-        this.SubscriptionNames = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConsumerHasCount = 'ConsumerHasCount' in params ? params.ConsumerHasCount : null;
-        this.ConsumerHasBacklog = 'ConsumerHasBacklog' in params ? params.ConsumerHasBacklog : null;
-        this.ConsumerHasExpired = 'ConsumerHasExpired' in params ? params.ConsumerHasExpired : null;
-        this.SubscriptionNames = 'SubscriptionNames' in params ? params.SubscriptionNames : null;
-
-    }
-}
-
-/**
- * DescribeCmqTopics response structure.
- * @class
- */
-class DescribeCmqTopicsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic list.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CmqTopic> || null}
-         */
-        this.TopicList = null;
-
-        /**
-         * The total number of topics.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new CmqTopic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCmqTopicDetail request structure.
- * @class
- */
-class DescribeCmqTopicDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Exact match by `TopicName`.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-
-    }
-}
-
-/**
- * Display field of the returned CMQ topic information
- * @class
- */
-class CmqTopic extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Topic name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Maximum lifecycle of message in topic. After the period specified by this parameter has elapsed since a message is sent to the topic, the message will be deleted no matter whether it has been successfully pushed to the user. This parameter is measured in seconds and defaulted to one day (86,400 seconds), which cannot be modified.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgRetentionSeconds = null;
-
-        /**
-         * Maximum message size, which ranges from 1,024 to 1,048,576 bytes (i.e., 1–1,024 KB). The default value is 65,536.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxMsgSize = null;
-
-        /**
-         * Number of messages published per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * Filtering policy selected when a subscription is created:
-If `filterType` is 1, `FilterTag` will be used for filtering.
-If `filterType` is 2, `BindingKey` will be used for filtering.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FilterType = null;
-
-        /**
-         * Topic creation time. A Unix timestamp accurate down to the millisecond will be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Time when the topic attribute is last modified. A Unix timestamp accurate down to the millisecond will be returned.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LastModifyTime = null;
-
-        /**
-         * Number of current messages in the topic (number of retained messages).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgCount = null;
-
-        /**
-         * Creator `Uin`. The `resource` field for CAM authentication is composed of this field.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CreateUin = null;
-
-        /**
-         * Associated tag.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Message trace. true: enabled; false: not enabled
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Trace = null;
-
-        /**
-         * Tenant ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TenantId = null;
-
-        /**
-         * Namespace name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Indicates the public network access point status.
+0. enabled.
+Closed.
+2: enabled.
+Disabling.
+Modifying.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Valid values: `0` (Pulsar), `1` (RocketMQ).
+         * Payment status.
+0 or unknown.
+Normal.
+Indicates arrears.
+         * @type {number || null}
+         */
+        this.PayStatus = null;
+
+        /**
+         * Endpoint address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessUrl = null;
+
+        /**
+         * Security Access Rule List
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PublicAccessRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Bandwidth
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.BrokerType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
-        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.FilterType = 'FilterType' in params ? params.FilterType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
-        this.MsgCount = 'MsgCount' in params ? params.MsgCount : null;
-        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.Trace = 'Trace' in params ? params.Trace : null;
-        this.TenantId = 'TenantId' in params ? params.TenantId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.BrokerType = 'BrokerType' in params ? params.BrokerType : null;
-
-    }
-}
-
-/**
- * UnbindCmqDeadLetter response structure.
- * @class
- */
-class UnbindCmqDeadLetterResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Bandwidth = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQNamespace response structure.
- * @class
- */
-class ModifyRocketMQNamespaceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendCmqMsg request structure.
- * @class
- */
-class SendCmqMsgRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Queue name
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * Message content
-         * @type {string || null}
-         */
-        this.MsgContent = null;
-
-        /**
-         * Delay time
+         * Payment mode
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.DelaySeconds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
-        this.DelaySeconds = 'DelaySeconds' in params ? params.DelaySeconds : null;
-
-    }
-}
-
-/**
- * DeleteEnvironments request structure.
- * @class
- */
-class DeleteEnvironmentsRequest extends  AbstractModel {
-    constructor(){
-        super();
+        this.PayMode = null;
 
         /**
-         * Array of environments (namespaces). Up to 20 environments can be deleted at a time.
-         * @type {Array.<string> || null}
-         */
-        this.EnvironmentIds = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentIds = 'EnvironmentIds' in params ? params.EnvironmentIds : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQClusters request structure.
- * @class
- */
-class DescribeRocketMQClustersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The max number of returned results.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Search by cluster ID.
-         * @type {string || null}
-         */
-        this.IdKeyword = null;
-
-        /**
-         * Search by cluster name.
-         * @type {string || null}
-         */
-        this.NameKeyword = null;
-
-        /**
-         * Filter by cluster ID.
-         * @type {Array.<string> || null}
-         */
-        this.ClusterIdList = null;
-
-        /**
-         * For filtering by tag, this parameter must be set to `true`.
+         * Whether public network is billed by traffic.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
-        this.IsTagFilter = null;
+        this.BillingFlow = null;
 
         /**
-         * Filter. Currently, you can filter only by tag.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.IdKeyword = 'IdKeyword' in params ? params.IdKeyword : null;
-        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
-        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
-        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeBindVpcs request structure.
- * @class
- */
-class DescribeBindVpcsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pulsar cluster ID
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.RequestId = null;
 
     }
 
@@ -7086,35 +13057,382 @@ class DescribeBindVpcsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PayStatus = 'PayStatus' in params ? params.PayStatus : null;
+        this.AccessUrl = 'AccessUrl' in params ? params.AccessUrl : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new PublicAccessRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.BillingFlow = 'BillingFlow' in params ? params.BillingFlow : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeClusters response structure.
+ * DescribeRabbitMQExchanges response structure.
  * @class
  */
-class DescribeClustersResponse extends  AbstractModel {
+class DescribeRabbitMQExchangesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of clusters.
+         * Policy list information.
+         * @type {Array.<RabbitMQExchangeListInfo> || null}
+         */
+        this.ExchangeInfoList = null;
+
+        /**
+         * Total number of policy results.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Cluster information list
-         * @type {Array.<Cluster> || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.ClusterSet = null;
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ExchangeInfoList) {
+            this.ExchangeInfoList = new Array();
+            for (let z in params.ExchangeInfoList) {
+                let obj = new RabbitMQExchangeListInfo();
+                obj.deserialize(params.ExchangeInfoList[z]);
+                this.ExchangeInfoList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQQueueDetail response structure.
+ * @class
+ */
+class DescribeRabbitMQQueueDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Vhost parameter.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Queue name.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Queue type. Valid values: classic and quorum.
+         * @type {string || null}
+         */
+        this.QueueType = null;
+
+        /**
+         * The number of online consumers.
+
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Consumers = null;
+
+        /**
+         * Durable queue flag.
+         * @type {boolean || null}
+         */
+        this.Durable = null;
+
+        /**
+         * Automatic cleanup.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoDelete = null;
+
+        /**
+         * Remarks
+
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Messagettl parameter, specific to classic type.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageTTL = null;
+
+        /**
+         * Autoexpire parameter.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoExpire = null;
+
+        /**
+         * The maxlength parameter specifies the maximum length.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxLength = null;
+
+        /**
+         * The maxlengthbytes parameter specifies the maximum length in bytes.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxLengthBytes = null;
+
+        /**
+         * The deliverylimit parameter is used for quorum type.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DeliveryLimit = null;
+
+        /**
+         * The overflowbehaviour parameter specifies the behavior when overflow occurs. Valid values: drop-head, reject-publish, reject-publish-dlx.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OverflowBehaviour = null;
+
+        /**
+         * The deadletterexchange parameter specifies the dead letter exchange.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeadLetterExchange = null;
+
+        /**
+         * The deadletterroutingkey parameter specifies the routing key for dead letters. Valid values: [value1, value2, value3].
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeadLetterRoutingKey = null;
+
+        /**
+         * The singleactiveconsumer parameter indicates whether only one consumer can be active at a time. Valid values: [true, false].
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SingleActiveConsumer = null;
+
+        /**
+         * The maximumpriority parameter, for classic type only, specifies the maximum priority level. Value range: 1-30.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaximumPriority = null;
+
+        /**
+         * The lazymode parameter, for classic type only, indicates whether lazy mode is enabled. Valid values: [true, false].
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.LazyMode = null;
+
+        /**
+         * The masterlocator parameter, for classic type only, specifies the master locator strategy. Valid values: [strategy1, strategy2, strategy3].
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MasterLocator = null;
+
+        /**
+         * The maxinmemorylength parameter, specific to quorum type.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxInMemoryLength = null;
+
+        /**
+         * The maxinmemorybytes parameter, specific to quorum type.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxInMemoryBytes = null;
+
+        /**
+         * Creation timestamp. Unit: seconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Node
+
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Node = null;
+
+        /**
+         * Quorum queue dead letter consistency policy.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeadLetterStrategy = null;
+
+        /**
+         * Leader election policy for quorum queue.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QueueLeaderLocator = null;
+
+        /**
+         * Initial replica group size of arbitration queue.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QuorumInitialGroupSize = null;
+
+        /**
+         * Whether the queue is an exclusive queue.
+         * @type {boolean || null}
+         */
+        this.Exclusive = null;
+
+        /**
+         * Effective policy name.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Extended parameters of the key-value type.
+         * @type {string || null}
+         */
+        this.Arguments = null;
+
+        /**
+         * Creation timestamp.
+         * @type {number || null}
+         */
+        this.CreateTs = null;
+
+        /**
+         * Modification timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.QueueType = 'QueueType' in params ? params.QueueType : null;
+        this.Consumers = 'Consumers' in params ? params.Consumers : null;
+        this.Durable = 'Durable' in params ? params.Durable : null;
+        this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MessageTTL = 'MessageTTL' in params ? params.MessageTTL : null;
+        this.AutoExpire = 'AutoExpire' in params ? params.AutoExpire : null;
+        this.MaxLength = 'MaxLength' in params ? params.MaxLength : null;
+        this.MaxLengthBytes = 'MaxLengthBytes' in params ? params.MaxLengthBytes : null;
+        this.DeliveryLimit = 'DeliveryLimit' in params ? params.DeliveryLimit : null;
+        this.OverflowBehaviour = 'OverflowBehaviour' in params ? params.OverflowBehaviour : null;
+        this.DeadLetterExchange = 'DeadLetterExchange' in params ? params.DeadLetterExchange : null;
+        this.DeadLetterRoutingKey = 'DeadLetterRoutingKey' in params ? params.DeadLetterRoutingKey : null;
+        this.SingleActiveConsumer = 'SingleActiveConsumer' in params ? params.SingleActiveConsumer : null;
+        this.MaximumPriority = 'MaximumPriority' in params ? params.MaximumPriority : null;
+        this.LazyMode = 'LazyMode' in params ? params.LazyMode : null;
+        this.MasterLocator = 'MasterLocator' in params ? params.MasterLocator : null;
+        this.MaxInMemoryLength = 'MaxInMemoryLength' in params ? params.MaxInMemoryLength : null;
+        this.MaxInMemoryBytes = 'MaxInMemoryBytes' in params ? params.MaxInMemoryBytes : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Node = 'Node' in params ? params.Node : null;
+        this.DeadLetterStrategy = 'DeadLetterStrategy' in params ? params.DeadLetterStrategy : null;
+        this.QueueLeaderLocator = 'QueueLeaderLocator' in params ? params.QueueLeaderLocator : null;
+        this.QuorumInitialGroupSize = 'QuorumInitialGroupSize' in params ? params.QuorumInitialGroupSize : null;
+        this.Exclusive = 'Exclusive' in params ? params.Exclusive : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Arguments = 'Arguments' in params ? params.Arguments : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopicMsgs response structure.
+ * @class
+ */
+class DescribeRocketMQTopicMsgsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Message List
+         * @type {Array.<RocketMQMsgLog> || null}
+         */
+        this.TopicMsgLogSets = null;
+
+        /**
+         * Mark a pagination transaction.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskRequestId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7130,114 +13448,49 @@ class DescribeClustersResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.ClusterSet) {
-            this.ClusterSet = new Array();
-            for (let z in params.ClusterSet) {
-                let obj = new Cluster();
-                obj.deserialize(params.ClusterSet[z]);
-                this.ClusterSet.push(obj);
+        if (params.TopicMsgLogSets) {
+            this.TopicMsgLogSets = new Array();
+            for (let z in params.TopicMsgLogSets) {
+                let obj = new RocketMQMsgLog();
+                obj.deserialize(params.TopicMsgLogSets[z]);
+                this.TopicMsgLogSets.push(obj);
             }
         }
+        this.TaskRequestId = 'TaskRequestId' in params ? params.TaskRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * ClearCmqSubscriptionFilterTags request structure.
+ * Security policy.
  * @class
  */
-class ClearCmqSubscriptionFilterTagsRequest extends  AbstractModel {
+class SecurityPolicy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * ip or subnet.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.Route = null;
 
         /**
-         * Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
+         * Specifies whether the policy allows (true) or denies (false) access, corresponding to the allowlist or blocklist.
 
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-    }
-}
-
-/**
- * Topic's key information
- * @class
- */
-class TopicRecord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-
-    }
-}
-
-/**
- * SendCmqMsg response structure.
- * @class
- */
-class SendCmqMsgResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `true` indicates that the sending is successful
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
-        this.Result = null;
+        this.Policy = null;
 
         /**
-         * Message ID
+         * Remarks.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.MsgId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Remark = null;
 
     }
 
@@ -7248,46 +13501,18 @@ class SendCmqMsgResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.MsgId = 'MsgId' in params ? params.MsgId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Route = 'Route' in params ? params.Route : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
 
 /**
- * CreateRocketMQGroup response structure.
+ * DescribeRocketMQTopUsages request structure.
  * @class
  */
-class CreateRocketMQGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQNamespace request structure.
- * @class
- */
-class ModifyRocketMQNamespaceRequest extends  AbstractModel {
+class DescribeRocketMQTopUsagesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -7298,101 +13523,23 @@ class ModifyRocketMQNamespaceRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+         * Metric name. support the following:.
+consumeLag. specifies the consumer group backlog count.
+deadLetterCount. specifies the dead letter count.
+Topic production rate.
+Topic consumption rate. specifies the Topic consumption rate.
+topicStorageSize. specifies the Topic storage space.
+Topic API call count.
          * @type {string || null}
          */
-        this.NamespaceId = null;
+        this.MetricName = null;
 
         /**
-         * This parameter is disused.
-         * @type {number || null}
-         */
-        this.Ttl = null;
-
-        /**
-         * This parameter is disused.
-         * @type {number || null}
-         */
-        this.RetentionTime = null;
-
-        /**
-         * Remarks (up to 128 characters)
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Whether to enable the public network access
-         * @type {boolean || null}
-         */
-        this.PublicAccessEnabled = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.Ttl = 'Ttl' in params ? params.Ttl : null;
-        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
-
-    }
-}
-
-/**
- * DescribeEnvironmentRoles request structure.
- * @class
- */
-class DescribeEnvironmentRolesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment/namespace name (required).
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Offset, which defaults to 0 if left empty.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
+         * Sort quantity. The maximum value is 20.
          * @type {number || null}
          */
         this.Limit = null;
 
-        /**
-         * Pulsar cluster ID (required).
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Role name.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * * RoleName
-Filter by role name for exact query.
-Type: String
-Required: No
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
     }
 
     /**
@@ -7402,20 +13549,9 @@ Required: No
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -7435,7 +13571,7 @@ class DeleteRolesResponse extends  AbstractModel {
         this.RoleNames = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7456,27 +13592,18 @@ class DeleteRolesResponse extends  AbstractModel {
 }
 
 /**
- * Relationship between the namespaces that are bound in batches and role permissions
+ * RetryRocketMQDlqMessage response structure.
  * @class
  */
-class EnvironmentRoleSet extends  AbstractModel {
+class RetryRocketMQDlqMessageResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The IDs of the bound namespaces cannot be delicate and the namespaces must contain resources
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
-
-        /**
-         * Permissions to be bound to a namespace. Enumerated values: `consume`, `produce`, and `consume, produce`. This parameter cannot be left empty.
-
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
+        this.RequestId = null;
 
     }
 
@@ -7487,43 +13614,66 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Recent RocketMQ usage
+ * DescribeRabbitMQBindings request structure.
  * @class
  */
-class RocketMQClusterRecentStats extends  AbstractModel {
+class DescribeRabbitMQBindingsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of topics
-         * @type {number || null}
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
          */
-        this.TopicNum = null;
+        this.InstanceId = null;
 
         /**
-         * Number of produced messages
-         * @type {number || null}
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
          */
-        this.ProducedMsgNum = null;
+        this.VirtualHost = null;
 
         /**
-         * Number of consumed messages
+         * Specifies the page offset. default is 0.
          * @type {number || null}
          */
-        this.ConsumedMsgNum = null;
+        this.Offset = null;
 
         /**
-         * Number of retained messages
+         * Page limit. default value: 20.
          * @type {number || null}
          */
-        this.AccumulativeMsgNum = null;
+        this.Limit = null;
+
+        /**
+         * Search keyword. Performs fuzzy search based on source exchange name, target resource name, or binding key.
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Precise search filter based on source exchange.
+         * @type {string || null}
+         */
+        this.SourceExchange = null;
+
+        /**
+         * Filters by the target queue name. cannot be set with DestinationExchange filtering.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Precise search filter based on target exchange. Cannot be set simultaneously with queuename filter.
+         * @type {string || null}
+         */
+        this.DestinationExchange = null;
 
     }
 
@@ -7534,10 +13684,14 @@ class RocketMQClusterRecentStats extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
-        this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
-        this.ConsumedMsgNum = 'ConsumedMsgNum' in params ? params.ConsumedMsgNum : null;
-        this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.SourceExchange = 'SourceExchange' in params ? params.SourceExchange : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.DestinationExchange = 'DestinationExchange' in params ? params.DestinationExchange : null;
 
     }
 }
@@ -7707,17 +13861,119 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Internal TCP access address
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InternalEndpoint = null;
 
         /**
          * Internal HTTP access address
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpInternalEndpoint = null;
+
+        /**
+         * Whether to enable ACL authentication. For Exclusive Edition instances, ACL authentication can be disabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AclEnabled = null;
+
+        /**
+         * Public network CLB instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicClbId = null;
+
+        /**
+         * vip
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Specifies the VPC it belongs to.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Whether migration is supported.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SupportMigration = null;
+
+        /**
+         * Instance status:
+0: Creating
+1: Normal
+2: Isolating
+3: Destroyed
+4: Abnormal
+5: Deliver failed
+6: Changing the configuration
+7: Configuration change failed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * Indicates the AZ to which the cluster belongs.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The AZ where the cluster nodes are located. If the cluster is a cross-AZ cluster, it includes multiple AZs where the cluster nodes are located.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Whether it is frozen.
+         * @type {boolean || null}
+         */
+        this.IsFrozen = null;
+
+        /**
+         * Whether to enable automatic topic creation.
+         * @type {boolean || null}
+         */
+        this.AutoCreateTopicEnabled = null;
+
+        /**
+         * Whether to enable the admin feature of the cluster.
+         * @type {boolean || null}
+         */
+        this.AdminFeatureEnabled = null;
+
+        /**
+         * Admin AK
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AdminAccessKey = null;
+
+        /**
+         * Admin SK
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AdminSecretKey = null;
+
+        /**
+         * Whether to enable deletion protection
+         * @type {boolean || null}
+         */
+        this.EnableDeletionProtection = null;
 
     }
 
@@ -7753,471 +14009,48 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         this.HttpVpcEndpoint = 'HttpVpcEndpoint' in params ? params.HttpVpcEndpoint : null;
         this.InternalEndpoint = 'InternalEndpoint' in params ? params.InternalEndpoint : null;
         this.HttpInternalEndpoint = 'HttpInternalEndpoint' in params ? params.HttpInternalEndpoint : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQUser request structure.
- * @class
- */
-class DescribeRabbitMQUserRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Username search by prefix or suffix
-         * @type {string || null}
-         */
-        this.SearchUser = null;
-
-        /**
-         * Pagination offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Pagination limit
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Username, which is queried by exact match.
-         * @type {string || null}
-         */
-        this.User = null;
-
-        /**
-         * User tag, which is used to filter users.
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SearchUser = 'SearchUser' in params ? params.SearchUser : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.User = 'User' in params ? params.User : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQTopics response structure.
- * @class
- */
-class DescribeRocketMQTopicsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The total number of query records.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of topic information
-         * @type {Array.<RocketMQTopic> || null}
-         */
-        this.Topics = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Topics) {
-            this.Topics = new Array();
-            for (let z in params.Topics) {
-                let obj = new RocketMQTopic();
-                obj.deserialize(params.Topics[z]);
-                this.Topics.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Namespace information
- * @class
- */
-class Environment extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Description.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Retention period for unconsumed messages in seconds. Maximum value: 1,296,000 seconds (15 days).
-         * @type {number || null}
-         */
-        this.MsgTTL = null;
-
-        /**
-         * Creation time.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Namespace ID.
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Namespace name.
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * The number of topics.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicNum = null;
-
-        /**
-         * Message retention policy.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {RetentionPolicy || null}
-         */
-        this.RetentionPolicy = null;
-
-        /**
-         * Whether to enable "Auto-Create Subscription"
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.AutoSubscriptionCreation = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
-
-        if (params.RetentionPolicy) {
-            let obj = new RetentionPolicy();
-            obj.deserialize(params.RetentionPolicy)
-            this.RetentionPolicy = obj;
-        }
-        this.AutoSubscriptionCreation = 'AutoSubscriptionCreation' in params ? params.AutoSubscriptionCreation : null;
-
-    }
-}
-
-/**
- * Details of the tenant’s RocketMQ cluster
- * @class
- */
-class RocketMQClusterDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Basic cluster information.
-         * @type {RocketMQClusterInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * Cluster configuration information.
-         * @type {RocketMQClusterConfig || null}
-         */
-        this.Config = null;
-
-        /**
-         * Cluster status. 0: Creating; 1: Normal; 2: Terminating; 3: Deleted; 4. Isolated; 5. Creation failed; 6: Deletion failed.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new RocketMQClusterInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-
-        if (params.Config) {
-            let obj = new RocketMQClusterConfig();
-            obj.deserialize(params.Config)
-            this.Config = obj;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-
-    }
-}
-
-/**
- * DeleteRocketMQGroup response structure.
- * @class
- */
-class DeleteRocketMQGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateCmqQueue response structure.
- * @class
- */
-class CreateCmqQueueResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `queueId` of a successfully created queue
-         * @type {string || null}
-         */
-        this.QueueId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueId = 'QueueId' in params ? params.QueueId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * TDMQ for Pulsar pro instance information
- * @class
- */
-class PulsarProInstance extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Instance version
-         * @type {string || null}
-         */
-        this.InstanceVersion = null;
-
-        /**
-         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed), `6` (Adjusting configuration), `7` (Configuration adjustment failed).
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Instance specification name
-         * @type {string || null}
-         */
-        this.ConfigDisplay = null;
-
-        /**
-         * Peak TPS
-         * @type {number || null}
-         */
-        this.MaxTps = null;
-
-        /**
-         * Storage capacity in GB
-         * @type {number || null}
-         */
-        this.MaxStorage = null;
-
-        /**
-         * Instance expiration time in milliseconds
-         * @type {number || null}
-         */
-        this.ExpireTime = null;
-
-        /**
-         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-        /**
-         * Payment mode. Valid values: `0` (Pay-as-you-go), `1` (Monthly subscription).
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Instance specification ID
-         * @type {string || null}
-         */
-        this.SpecName = null;
-
-        /**
-         * Elastic TPS beyond the specification
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ScalableTps = null;
-
-        /**
-         * VPC ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Peak bandwidth in Mbps
-         * @type {number || null}
-         */
-        this.MaxBandWidth = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
-        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
-        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.SpecName = 'SpecName' in params ? params.SpecName : null;
-        this.ScalableTps = 'ScalableTps' in params ? params.ScalableTps : null;
+        this.AclEnabled = 'AclEnabled' in params ? params.AclEnabled : null;
+        this.PublicClbId = 'PublicClbId' in params ? params.PublicClbId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.SupportMigration = 'SupportMigration' in params ? params.SupportMigration : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.IsFrozen = 'IsFrozen' in params ? params.IsFrozen : null;
+        this.AutoCreateTopicEnabled = 'AutoCreateTopicEnabled' in params ? params.AutoCreateTopicEnabled : null;
+        this.AdminFeatureEnabled = 'AdminFeatureEnabled' in params ? params.AdminFeatureEnabled : null;
+        this.AdminAccessKey = 'AdminAccessKey' in params ? params.AdminAccessKey : null;
+        this.AdminSecretKey = 'AdminSecretKey' in params ? params.AdminSecretKey : null;
+        this.EnableDeletionProtection = 'EnableDeletionProtection' in params ? params.EnableDeletionProtection : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQInstance response structure.
+ * @class
+ */
+class ModifyRocketMQInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8348,6 +14181,4998 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ResetMsgSubOffsetByTimestamp response structure.
+ * @class
+ */
+class ResetMsgSubOffsetByTimestampResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Result.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SendMessages request structure.
+ * @class
+ */
+class SendMessagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Content of the message to be sent
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * Token used for authentication, which is optional and will be automatically obtained by the system.
+         * @type {string || null}
+         */
+        this.StringToken = null;
+
+        /**
+         * Producer name, which is randomly generated and must be globally unique. If you set the producer name manually, the producer may fail to be created, causing message sending failure.
+This parameter is used only when a specific producer is allowed to produce messages. It won’t be used in most cases.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Message sending timeout period, which is 30s by default.
+         * @type {number || null}
+         */
+        this.SendTimeout = null;
+
+        /**
+         * Maximum number of produced messages which can be cached in the memory. Default value: 1000
+         * @type {number || null}
+         */
+        this.MaxPendingMessages = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.StringToken = 'StringToken' in params ? params.StringToken : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
+        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
+
+    }
+}
+
+/**
+ * CreateRocketMQRole request structure.
+ * @class
+ */
+class CreateRocketMQRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name. Does not support Chinese characters and special characters other than hyphens (-) and underscores (_), and must be greater than 0 and less than or equal to 32 in length.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Required field, cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Remark description. Length must be greater than or equal to 0 and less than or equal to 128.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Role authorization type (cluster: Cluster; topic or consumer group: TopicAndGroup).
+         * @type {string || null}
+         */
+        this.PermType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PermType = 'PermType' in params ? params.PermType : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQProducers response structure.
+ * @class
+ */
+class DescribeRocketMQProducersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Producer client list.
+         * @type {Array.<ProducerInfo> || null}
+         */
+        this.Producers = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Producers) {
+            this.Producers = new Array();
+            for (let z in params.Producers) {
+                let obj = new ProducerInfo();
+                obj.deserialize(params.Producers[z]);
+                this.Producers.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVipInstance response structure.
+ * @class
+ */
+class DescribeRabbitMQVipInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {RabbitMQClusterInfo || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * 
+         * @type {RabbitMQClusterSpecInfo || null}
+         */
+        this.ClusterSpecInfo = null;
+
+        /**
+         * Cluster network information.
+         * @type {RabbitMQClusterAccessInfo || null}
+         */
+        this.ClusterNetInfo = null;
+
+        /**
+         * Cluster allowlist.
+         * @type {RabbitMQClusterWhiteListInfo || null}
+         */
+        this.ClusterWhiteListInfo = null;
+
+        /**
+         * 
+         * @type {VirtualHostQuota || null}
+         */
+        this.VirtualHostQuota = null;
+
+        /**
+         * 
+         * @type {ExchangeQuota || null}
+         */
+        this.ExchangeQuota = null;
+
+        /**
+         * 
+         * @type {QueueQuota || null}
+         */
+        this.QueueQuota = null;
+
+        /**
+         * User quota information.
+         * @type {RabbitMQUserQuota || null}
+         */
+        this.UserQuota = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterInfo) {
+            let obj = new RabbitMQClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
+        }
+
+        if (params.ClusterSpecInfo) {
+            let obj = new RabbitMQClusterSpecInfo();
+            obj.deserialize(params.ClusterSpecInfo)
+            this.ClusterSpecInfo = obj;
+        }
+
+        if (params.ClusterNetInfo) {
+            let obj = new RabbitMQClusterAccessInfo();
+            obj.deserialize(params.ClusterNetInfo)
+            this.ClusterNetInfo = obj;
+        }
+
+        if (params.ClusterWhiteListInfo) {
+            let obj = new RabbitMQClusterWhiteListInfo();
+            obj.deserialize(params.ClusterWhiteListInfo)
+            this.ClusterWhiteListInfo = obj;
+        }
+
+        if (params.VirtualHostQuota) {
+            let obj = new VirtualHostQuota();
+            obj.deserialize(params.VirtualHostQuota)
+            this.VirtualHostQuota = obj;
+        }
+
+        if (params.ExchangeQuota) {
+            let obj = new ExchangeQuota();
+            obj.deserialize(params.ExchangeQuota)
+            this.ExchangeQuota = obj;
+        }
+
+        if (params.QueueQuota) {
+            let obj = new QueueQuota();
+            obj.deserialize(params.QueueQuota)
+            this.QueueQuota = obj;
+        }
+
+        if (params.UserQuota) {
+            let obj = new RabbitMQUserQuota();
+            obj.deserialize(params.UserQuota)
+            this.UserQuota = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCmqSubscriptionAttribute request structure.
+ * @class
+ */
+class ModifyCmqSubscriptionAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which must be unique under the same account in a single region. The name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Subscription name, which must be unique under the same account and same topic in a single region. the name is a string of no more than 64 characters, beginning with a letter, and the remaining part may contain letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * CMQ push server retry policy in case an error occurs while pushing a message to the endpoint. Valid values:
+(1) BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message.
+(2) EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
+         * @type {string || null}
+         */
+        this.NotifyStrategy = null;
+
+        /**
+         * Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `HTTP`, both values are acceptable, and the default value is `JSON`.
+         * @type {string || null}
+         */
+        this.NotifyContentFormat = null;
+
+        /**
+         * Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not configured, no matter whether `MsgTag` is configured, the subscription will receive all messages published to the topic; 2. If the array of `FilterTag` values has a value, only when at least one of the values in the array also exists in the array of `MsgTag` values (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the array of `FilterTag` values has a value, but `MsgTag` is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
+         * @type {Array.<string> || null}
+         */
+        this.FilterTags = null;
+
+        /**
+         * The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
+         * @type {Array.<string> || null}
+         */
+        this.BindingKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
+        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
+        this.FilterTags = 'FilterTags' in params ? params.FilterTags : null;
+        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
+
+    }
+}
+
+/**
+ * ModifyTopic response structure.
+ * @class
+ */
+class ModifyTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of partitions
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class VirtualHostQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxVirtualHost = null;
+
+        /**
+         * Number of created vhosts.
+         * @type {number || null}
+         */
+        this.UsedVirtualHost = null;
+
+        /**
+         * Specifies the maximum number of connections allowed per vhost.
+         * @type {number || null}
+         */
+        this.MaxConnectionPerVhost = null;
+
+        /**
+         * Specifies the maximum number of switches allowed in one vhost.
+         * @type {number || null}
+         */
+        this.MaxExchangePerVhost = null;
+
+        /**
+         * Specifies the maximum number of queue machines allowed in one vhost.
+         * @type {number || null}
+         */
+        this.MaxQueuePerVhost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxVirtualHost = 'MaxVirtualHost' in params ? params.MaxVirtualHost : null;
+        this.UsedVirtualHost = 'UsedVirtualHost' in params ? params.UsedVirtualHost : null;
+        this.MaxConnectionPerVhost = 'MaxConnectionPerVhost' in params ? params.MaxConnectionPerVhost : null;
+        this.MaxExchangePerVhost = 'MaxExchangePerVhost' in params ? params.MaxExchangePerVhost : null;
+        this.MaxQueuePerVhost = 'MaxQueuePerVhost' in params ? params.MaxQueuePerVhost : null;
+
+    }
+}
+
+/**
+ * Pulsar cluster TLS certificate information.
+ * @class
+ */
+class CertificateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the id in SSL certificate management.
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * Certificate expiration time.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Specifies the domain name bound to the certificate.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Certificate status: 0 indicates issued.
+Expiring soon.
+Not activated.
+3. indicates expired.
+Indicates the unavailability.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Certificate type: 0: root certificate, 1: server certificate.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * TencentCloud: SSL certificate. Default: TDMQ official Default certificate.
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * Certificate addition/update time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstanceDetail request structure.
+ * @class
+ */
+class DescribeRocketMQVipInstanceDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQCluster response structure.
+ * @class
+ */
+class DeleteRocketMQClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCmqTopic response structure.
+ * @class
+ */
+class CreateCmqTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cmq DeadLetterSource
+ * @class
+ */
+class CmqDeadLetterSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message queue ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QueueId = null;
+
+        /**
+         * Message queue name.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueId = 'QueueId' in params ? params.QueueId : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopic request structure.
+ * @class
+ */
+class DescribeRocketMQTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Consumer group name.
+         * @type {string || null}
+         */
+        this.ConsumerGroup = null;
+
+        /**
+         * Subscription list pagination parameter Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Subscription list pagination parameter Limit.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.ConsumerGroup = 'ConsumerGroup' in params ? params.ConsumerGroup : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ResetMsgSubOffsetByTimestamp request structure.
+ * @class
+ */
+class ResetMsgSubOffsetByTimestampRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Subscriber name.
+         * @type {string || null}
+         */
+        this.Subscription = null;
+
+        /**
+         * Timestamp, accurate down to the millisecond.
+         * @type {number || null}
+         */
+        this.ToTimestamp = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Subscription = 'Subscription' in params ? params.Subscription : null;
+        this.ToTimestamp = 'ToTimestamp' in params ? params.ToTimestamp : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeBindVpcs response structure.
+ * @class
+ */
+class DescribeBindVpcsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of records.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Set of VPCs.
+         * @type {Array.<VpcBindRecord> || null}
+         */
+        this.VpcSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VpcSets) {
+            this.VpcSets = new Array();
+            for (let z in params.VpcSets) {
+                let obj = new VpcBindRecord();
+                obj.deserialize(params.VpcSets[z]);
+                this.VpcSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRabbitMQPermission request structure.
+ * @class
+ */
+class ModifyRabbitMQPermissionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username, such as admin. valid User names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking a cluster in the cluster list, entering cluster details, and finding the list of users in the User and permission management tab, thereby locating the username.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Permission types, declare-related operations, specifies the regular expression for resource names that the user can operate on under the vhost.
+         * @type {string || null}
+         */
+        this.ConfigRegexp = null;
+
+        /**
+         * Permission types, message write-related operations, specifies the regular expression for resource names that the user can operate on under the vhost.
+         * @type {string || null}
+         */
+        this.WriteRegexp = null;
+
+        /**
+         * Permission types, message read-related operations, specifies the regular expression for resource names that the user can operate on under the vhost.
+         * @type {string || null}
+         */
+        this.ReadRegexp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.ConfigRegexp = 'ConfigRegexp' in params ? params.ConfigRegexp : null;
+        this.WriteRegexp = 'WriteRegexp' in params ? params.WriteRegexp : null;
+        this.ReadRegexp = 'ReadRegexp' in params ? params.ReadRegexp : null;
+
+    }
+}
+
+/**
+ * Consumption progress details
+ * @class
+ */
+class ConsumersSchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the current partition.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * The number of messages.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NumberOfEntries = null;
+
+        /**
+         * The number of heaped messages.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgBacklog = null;
+
+        /**
+         * The total number of messages delivered by the consumer per second.
+         * @type {string || null}
+         */
+        this.MsgRateOut = null;
+
+        /**
+         * The size (in bytes) of messages consumed by the consumer per second.
+         * @type {string || null}
+         */
+        this.MsgThroughputOut = null;
+
+        /**
+         * Percentage of messages discarded due to timeout.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgRateExpired = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
+        this.MsgBacklog = 'MsgBacklog' in params ? params.MsgBacklog : null;
+        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
+        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
+        this.MsgRateExpired = 'MsgRateExpired' in params ? params.MsgRateExpired : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQClusters response structure.
+ * @class
+ */
+class DescribeRocketMQClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RocketMQClusterDetail> || null}
+         */
+        this.ClusterList = null;
+
+        /**
+         * The total number of returned results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new RocketMQClusterDetail();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Message Trace Result
+ * @class
+ */
+class TraceResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Stage.
+         * @type {string || null}
+         */
+        this.Stage = null;
+
+        /**
+         * Content details
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Stage = 'Stage' in params ? params.Stage : null;
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQQueues request structure.
+ * @class
+ */
+class DescribeRabbitMQQueuesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Specifies the pagination Offset. default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination Limit. default is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Search keywords
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * Filter criteria for queue type. valid values: "all" (default): filter regular and quorum queues; "classic": filter classic (ordinary) queues; "quorum": filter quorum queues.
+         * @type {string || null}
+         */
+        this.QueueType = null;
+
+        /**
+         * Sorting field.
+ConsumerNumber - Indicates the number of online consumers.
+MessageHeapCount - Indicates the number of retained messages.
+MessageRateInOut - Indicates the total production and consumption rate.
+MessageRateIn - Production rate.
+MessageRateOut - Consumption rate: Specifies the message consumption rate.
+         * @type {string || null}
+         */
+        this.SortElement = null;
+
+        /**
+         * Sorting order. Valid values: ascend and descend.
+Specifies the ascending order.
+Desc - descending.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.QueueType = 'QueueType' in params ? params.QueueType : null;
+        this.SortElement = 'SortElement' in params ? params.SortElement : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+    }
+}
+
+/**
+ * SendMsg request structure.
+ * @class
+ */
+class SendMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name. If the topic is a partitioned topic, you need to specify the partition; otherwise, messages will be sent to partition 0 by default, such as `my_topic-partition-0`.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Message content, which cannot be empty and can contain up to 5,242,880 bytes.
+         * @type {string || null}
+         */
+        this.MsgContent = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQEnvironmentRoles response structure.
+ * @class
+ */
+class DescribeRocketMQEnvironmentRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record count.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Namespace role collection.
+         * @type {Array.<EnvironmentRole> || null}
+         */
+        this.EnvironmentRoleSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EnvironmentRoleSets) {
+            this.EnvironmentRoleSets = new Array();
+            for (let z in params.EnvironmentRoleSets) {
+                let obj = new EnvironmentRole();
+                obj.deserialize(params.EnvironmentRoleSets[z]);
+                this.EnvironmentRoleSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRole response structure.
+ * @class
+ */
+class CreateRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Role token
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * Remarks
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Namespaces that are bound in batches
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<EnvironmentRoleSet> || null}
+         */
+        this.EnvironmentRoleSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.EnvironmentRoleSets) {
+            this.EnvironmentRoleSets = new Array();
+            for (let z in params.EnvironmentRoleSets) {
+                let obj = new EnvironmentRoleSet();
+                obj.deserialize(params.EnvironmentRoleSets[z]);
+                this.EnvironmentRoleSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRabbitMQUser response structure.
+ * @class
+ */
+class ModifyRabbitMQUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Sort by field
+ * @class
+ */
+class Sort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sorting field.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Ascending order: `ASC`; descending order: `DESC`.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * Consumption information
+ * @class
+ */
+class ConsumerLogs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record count.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Consumption log.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ConsumerLog> || null}
+         */
+        this.ConsumerLogSets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ConsumerLogSets) {
+            this.ConsumerLogSets = new Array();
+            for (let z in params.ConsumerLogSets) {
+                let obj = new ConsumerLog();
+                obj.deserialize(params.ConsumerLogSets[z]);
+                this.ConsumerLogSets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeMqMsgTrace response structure.
+ * @class
+ */
+class DescribeMqMsgTraceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message content.
+         * @type {Array.<TraceResult> || null}
+         */
+        this.Result = null;
+
+        /**
+         * Topic Name Displayed on Message Trace Page
+         * @type {string || null}
+         */
+        this.ShowTopicName = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new TraceResult();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.ShowTopicName = 'ShowTopicName' in params ? params.ShowTopicName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRabbitMQUser request structure.
+ * @class
+ */
+class CreateRabbitMQUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username, which is used for login.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Password, used when logging in. requirement: cannot be empty, 8-64 characters, must contain at least two items from lowercase letters, uppercase letters, digits, and special characters [`()~!@#$%^&*_=|{}[]:;',.?/].
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * User tag, which defines a user's permission scope for accessing RabbitMQ Managementu.
+Valid values: `management` (Common console user), monitoring` (Console admin user), other values: Non-console user.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * The maximum number of connections for the user. If this parameter is left empty, there's no limit for the number.
+         * @type {number || null}
+         */
+        this.MaxConnections = null;
+
+        /**
+         * The maximum number of channels for the user. If this parameter is left empty, there's no limit for the number.
+         * @type {number || null}
+         */
+        this.MaxChannels = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.MaxConnections = 'MaxConnections' in params ? params.MaxConnections : null;
+        this.MaxChannels = 'MaxChannels' in params ? params.MaxChannels : null;
+
+    }
+}
+
+/**
+ * SendCmqMsg response structure.
+ * @class
+ */
+class SendCmqMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `true` indicates that the sending is successful
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Tag filter
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key name
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * Tag value list
+         * @type {Array.<string> || null}
+         */
+        this.TagValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValues = 'TagValues' in params ? params.TagValues : null;
+
+    }
+}
+
+/**
+ * ModifyCmqQueueAttribute request structure.
+ * @class
+ */
+class ModifyCmqQueueAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue name, which must be unique under the same account in the same region. A queue name is a string of up to 64 characters, starting with a letter, and the remaining part can include letters, digits, and hyphens (-).
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
+         * @type {number || null}
+         */
+        this.MaxMsgHeapNum = null;
+
+        /**
+         * Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
+         * @type {number || null}
+         */
+        this.PollingWaitSeconds = null;
+
+        /**
+         * Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
+         * @type {number || null}
+         */
+        this.VisibilityTimeout = null;
+
+        /**
+         * Max message size, which defaults to 1,024 KB for the queue of TDMQ for CMQ and cannot be modified.
+         * @type {number || null}
+         */
+        this.MaxMsgSize = null;
+
+        /**
+         * The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
+         * @type {number || null}
+         */
+        this.MsgRetentionSeconds = null;
+
+        /**
+         * Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+         * @type {number || null}
+         */
+        this.RewindSeconds = null;
+
+        /**
+         * First query time
+         * @type {number || null}
+         */
+        this.FirstQueryInterval = null;
+
+        /**
+         * Maximum number of queries
+         * @type {number || null}
+         */
+        this.MaxQueryCount = null;
+
+        /**
+         * Dead letter queue name
+         * @type {string || null}
+         */
+        this.DeadLetterQueueName = null;
+
+        /**
+         * Specifies the essential parameter when policy is 1. maximum unconsumed expiration time. value range: 300-43200 in seconds, must be less than the maximum message retention time MsgRetentionSeconds.
+         * @type {number || null}
+         */
+        this.MaxTimeToLive = null;
+
+        /**
+         * Maximum number of receipts
+         * @type {number || null}
+         */
+        this.MaxReceiveCount = null;
+
+        /**
+         * Dead letter queue policy
+         * @type {number || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
+         * @type {boolean || null}
+         */
+        this.Trace = null;
+
+        /**
+         * Whether to enable transaction. 1: yes; 0: no
+         * @type {number || null}
+         */
+        this.Transaction = null;
+
+        /**
+         * Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.MaxMsgHeapNum = 'MaxMsgHeapNum' in params ? params.MaxMsgHeapNum : null;
+        this.PollingWaitSeconds = 'PollingWaitSeconds' in params ? params.PollingWaitSeconds : null;
+        this.VisibilityTimeout = 'VisibilityTimeout' in params ? params.VisibilityTimeout : null;
+        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
+        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
+        this.RewindSeconds = 'RewindSeconds' in params ? params.RewindSeconds : null;
+        this.FirstQueryInterval = 'FirstQueryInterval' in params ? params.FirstQueryInterval : null;
+        this.MaxQueryCount = 'MaxQueryCount' in params ? params.MaxQueryCount : null;
+        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
+        this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
+        this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Trace = 'Trace' in params ? params.Trace : null;
+        this.Transaction = 'Transaction' in params ? params.Transaction : null;
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RabbitMQClusterSpecInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.PublicNetworkTps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.PublicNetworkTps = 'PublicNetworkTps' in params ? params.PublicNetworkTps : null;
+
+    }
+}
+
+/**
+ * DeleteCmqSubscribe response structure.
+ * @class
+ */
+class DeleteCmqSubscribeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQEnvironmentRoles request structure.
+ * @class
+ */
+class DeleteRocketMQEnvironmentRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Role name array.
+         * @type {Array.<string> || null}
+         */
+        this.RoleNames = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * VPC configuration information
+ * @class
+ */
+class VpcConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVipInstances request structure.
+ * @class
+ */
+class DescribeRabbitMQVipInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query condition filter
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Maximum number of items for query. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Starting position of the query. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeClusterDetail response structure.
+ * @class
+ */
+class DescribeClusterDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster details
+         * @type {Cluster || null}
+         */
+        this.ClusterSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClusterSet) {
+            let obj = new Cluster();
+            obj.deserialize(params.ClusterSet)
+            this.ClusterSet = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVirtualHost request structure.
+ * @class
+ */
+class DescribeRabbitMQVirtualHostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Vhost name. If this parameter is not specified, all will be queried by default.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Pagination offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Fuzzy query by vhost name
+         * @type {Filter || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Specifies the sorting field.
+MessageHeapCount - specifies the message backlog count.
+MessageRateInOut - total production and consumption rate.
+MessageRateIn - production rate.
+MessageRateOut - consumption rate.
+         * @type {string || null}
+         */
+        this.SortElement = null;
+
+        /**
+         * Sorting order. Valid values: ascend and descend.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            let obj = new Filter();
+            obj.deserialize(params.Filters)
+            this.Filters = obj;
+        }
+        this.SortElement = 'SortElement' in params ? params.SortElement : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQRoles request structure.
+ * @class
+ */
+class DeleteRocketMQRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name array.
+         * @type {Array.<string> || null}
+         */
+        this.RoleNames = null;
+
+        /**
+         * Required field, cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleNames = 'RoleNames' in params ? params.RoleNames : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * cmq DeadLetterPolicy
+ * @class
+ */
+class CmqDeadLetterPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dead letter queue.
+         * @type {string || null}
+         */
+        this.DeadLetterQueue = null;
+
+        /**
+         * Dead letter queue policy. 0: maximum number of receipt. 1: maximum unconsumed time.
+         * @type {number || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Maximum unconsumed expiration time. Required if policy is 1. Range: 300-43,200 seconds, must be less than the maximum message retention time MsgRetentionSeconds.
+         * @type {number || null}
+         */
+        this.MaxTimeToLive = null;
+
+        /**
+         * Maximum number of receipt. required when Policy is 0. value range: 1 to 1000.
+         * @type {number || null}
+         */
+        this.MaxReceiveCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeadLetterQueue = 'DeadLetterQueue' in params ? params.DeadLetterQueue : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
+        this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class QueueQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxQueue = null;
+
+        /**
+         * Number of created Queues.
+         * @type {number || null}
+         */
+        this.UsedQueue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxQueue = 'MaxQueue' in params ? params.MaxQueue : null;
+        this.UsedQueue = 'UsedQueue' in params ? params.UsedQueue : null;
+
+    }
+}
+
+/**
+ * ExportRocketMQMessageDetail request structure.
+ * @class
+ */
+class ExportRocketMQMessageDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Application namespace.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+If it is a dead letter message, isDlqMsg=true.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Whether to Includes Message Body
+         * @type {boolean || null}
+         */
+        this.IncludeMsgBody = null;
+
+        /**
+         * Whether It a Dead Letter Message
+         * @type {boolean || null}
+         */
+        this.DeadLetterMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.IncludeMsgBody = 'IncludeMsgBody' in params ? params.IncludeMsgBody : null;
+        this.DeadLetterMsg = 'DeadLetterMsg' in params ? params.DeadLetterMsg : null;
+
+    }
+}
+
+/**
+ * CreateRabbitMQUser response structure.
+ * @class
+ */
+class CreateRabbitMQUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Username, which is used for login.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.User = 'User' in params ? params.User : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRocketMQRole response structure.
+ * @class
+ */
+class ModifyRocketMQRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Specifies the remark description.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRabbitMQBinding request structure.
+ * @class
+ */
+class CreateRabbitMQBindingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Source exchange.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Target type. Valid values: queue, exchange.
+         * @type {string || null}
+         */
+        this.DestinationType = null;
+
+        /**
+         * Target
+         * @type {string || null}
+         */
+        this.Destination = null;
+
+        /**
+         * Routing key
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.DestinationType = 'DestinationType' in params ? params.DestinationType : null;
+        this.Destination = 'Destination' in params ? params.Destination : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
+
+    }
+}
+
+/**
+ * DescribePulsarProInstanceDetail request structure.
+ * @class
+ */
+class DescribePulsarProInstanceDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * Information of dedicated clusters
+ * @class
+ */
+class BindCluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of a physical cluster.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+
+    }
+}
+
+/**
+ * ModifyCluster response structure.
+ * @class
+ */
+class ModifyClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Recent RocketMQ usage
+ * @class
+ */
+class RocketMQClusterRecentStats extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of topics
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * Number of produced messages
+         * @type {number || null}
+         */
+        this.ProducedMsgNum = null;
+
+        /**
+         * Number of consumed messages
+         * @type {number || null}
+         */
+        this.ConsumedMsgNum = null;
+
+        /**
+         * Number of retained messages
+         * @type {number || null}
+         */
+        this.AccumulativeMsgNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+        this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
+        this.ConsumedMsgNum = 'ConsumedMsgNum' in params ? params.ConsumedMsgNum : null;
+        this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQPublicAccessPoint request structure.
+ * @class
+ */
+class DescribeRocketMQPublicAccessPointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID. Currently, the system only supports dedicated clusters.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * RabbitMQ node information.
+ * @class
+ */
+class RabbitMQPrivateNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node name
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node status. running indicates the node is active. down indicates an exception.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeStatus = null;
+
+        /**
+         * CPU utilization
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CPUUsage = null;
+
+        /**
+         * Memory usage in MB
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Disk utilization
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * The number of RabbitMQ Erlang processes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProcessNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeStatus = 'NodeStatus' in params ? params.NodeStatus : null;
+        this.CPUUsage = 'CPUUsage' in params ? params.CPUUsage : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.ProcessNumber = 'ProcessNumber' in params ? params.ProcessNumber : null;
+
+    }
+}
+
+/**
+ * RetryRocketMQDlqMessage request structure.
+ * @class
+ */
+class RetryRocketMQDlqMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Specifies the namespace name.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Group Name
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Dead Letter Message ID
+         * @type {Array.<string> || null}
+         */
+        this.MessageIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.MessageIds = 'MessageIds' in params ? params.MessageIds : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopicsByGroup request structure.
+ * @class
+ */
+class DescribeRocketMQTopicsByGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Specifies the namespace name.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Consumer group name.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit of Items
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQPublicAccessMonitorData response structure.
+ * @class
+ */
+class DescribeRocketMQPublicAccessMonitorDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metric name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * Monitoring statistical period, such as 60 (in seconds). The default value is 300.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Start time, for example, 2018-09-22T19:51:23+08:00.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, such as 2018-09-22T20:51:23+08:00. The default value is the current time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Data point array
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RocketMQDataPoint> || null}
+         */
+        this.DataPoints = null;
+
+        /**
+         * Returned information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.DataPoints) {
+            this.DataPoints = new Array();
+            for (let z in params.DataPoints) {
+                let obj = new RocketMQDataPoint();
+                obj.deserialize(params.DataPoints[z]);
+                this.DataPoints.push(obj);
+            }
+        }
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TDMQ for RabbitMQ vhost details
+ * @class
+ */
+class RabbitMQVirtualHostInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Vhost name
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Vhost description information.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Vhost tags.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Vhost overview statistics information.
+         * @type {RabbitMQVirtualHostStatistics || null}
+         */
+        this.VirtualHostStatistics = null;
+
+        /**
+         * Message trace enabling status. true: enabled; false: disabled.
+         * @type {boolean || null}
+         */
+        this.TraceFlag = null;
+
+        /**
+         * Vhost status, which corresponds to status in the native product console. Valid values: running, partial, stopped, and unknown.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Message backlog count.
+         * @type {number || null}
+         */
+        this.MessageHeapCount = null;
+
+        /**
+         * Message input rate.
+         * @type {number || null}
+         */
+        this.MessageRateIn = null;
+
+        /**
+         * Message output rate.
+         * @type {number || null}
+         */
+        this.MessageRateOut = null;
+
+        /**
+         * Whether an image queue policy exists. true: Exists; false: Does not exist.
+         * @type {boolean || null}
+         */
+        this.MirrorQueuePolicyFlag = null;
+
+        /**
+         * Creation timestamp.
+         * @type {number || null}
+         */
+        this.CreateTs = null;
+
+        /**
+         * Modification timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+        if (params.VirtualHostStatistics) {
+            let obj = new RabbitMQVirtualHostStatistics();
+            obj.deserialize(params.VirtualHostStatistics)
+            this.VirtualHostStatistics = obj;
+        }
+        this.TraceFlag = 'TraceFlag' in params ? params.TraceFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MessageHeapCount = 'MessageHeapCount' in params ? params.MessageHeapCount : null;
+        this.MessageRateIn = 'MessageRateIn' in params ? params.MessageRateIn : null;
+        this.MessageRateOut = 'MessageRateOut' in params ? params.MessageRateOut : null;
+        this.MirrorQueuePolicyFlag = 'MirrorQueuePolicyFlag' in params ? params.MirrorQueuePolicyFlag : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
+
+    }
+}
+
+/**
+ * Batch queue attribute information of CMQ
+ * @class
+ */
+class CmqQueue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message queue ID.
+         * @type {string || null}
+         */
+        this.QueueId = null;
+
+        /**
+         * Message queue name.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * Limit on the number of messages produced per second. The size of consumed messages is 1.1 times this value.
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * Bandwidth limit.
+         * @type {number || null}
+         */
+        this.Bps = null;
+
+        /**
+         * Specifies the maximum retention time for in-flight messages, which must be less than the message retention period.
+         * @type {number || null}
+         */
+        this.MaxDelaySeconds = null;
+
+        /**
+         * Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
+         * @type {number || null}
+         */
+        this.MaxMsgHeapNum = null;
+
+        /**
+         * Long polling waiting time for message receipt. Value range 0-30 seconds, default value 0.
+         * @type {number || null}
+         */
+        this.PollingWaitSeconds = null;
+
+        /**
+         * Message retention period. The value range is 60-1,296,000 seconds (1 min-15 days), with a default value of 345,600 seconds (4 days).
+         * @type {number || null}
+         */
+        this.MsgRetentionSeconds = null;
+
+        /**
+         * Message visibility timeout period. The value range is 1-43,200 seconds (within 12 hours), with a default value of 30.
+         * @type {number || null}
+         */
+        this.VisibilityTimeout = null;
+
+        /**
+         * Maximum message length. Range: 1,024-1,048,576 bytes (i.e., 1K-1,024K). Default value is 65,536.
+         * @type {number || null}
+         */
+        this.MaxMsgSize = null;
+
+        /**
+         * Maximum message backtracking time for backtracking queues, range 0-43,200 seconds. 0 means message backtracking is not enabled.
+         * @type {number || null}
+         */
+        this.RewindSeconds = null;
+
+        /**
+         * Creation time of queues. Returns a Unix timestamp, accurate to milliseconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The last time the queue attribute was modified. Returns a Unix timestamp, accurate to milliseconds.
+         * @type {number || null}
+         */
+        this.LastModifyTime = null;
+
+        /**
+         * Total number of active messages (not being consumed) in queue, an approximate value.
+         * @type {number || null}
+         */
+        this.ActiveMsgNum = null;
+
+        /**
+         * Total number of inactive messages (being consumed) in queue, an approximate value.
+         * @type {number || null}
+         */
+        this.InactiveMsgNum = null;
+
+        /**
+         * Number of delayed messages.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DelayMsgNum = null;
+
+        /**
+         * Number of retained messages which have been deleted by the `DelMsg` API but are still within their rewind time range.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RewindMsgNum = null;
+
+        /**
+         * Minimum unconsumed time of message in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MinMsgTime = null;
+
+        /**
+         * Transaction message queue. true: transaction message type; false: other message types.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Transaction = null;
+
+        /**
+         * Dead letter queue.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CmqDeadLetterSource> || null}
+         */
+        this.DeadLetterSource = null;
+
+        /**
+         * Dead letter queue policy.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {CmqDeadLetterPolicy || null}
+         */
+        this.DeadLetterPolicy = null;
+
+        /**
+         * Transaction message policy.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {CmqTransactionPolicy || null}
+         */
+        this.TransactionPolicy = null;
+
+        /**
+         * Creator `Uin`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * Associated tag.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Message trace. true: enabled; false: not enabled
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Trace = null;
+
+        /**
+         * Tenant ID
+         * @type {string || null}
+         */
+        this.TenantId = null;
+
+        /**
+         * Specifies the namespace name.
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Cluster status. 0: Creating, 1: Normal, 2: Deleting, 3: Deleted, 4: Isolating, 5: Creation failed, 6: Deletion failed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Maximum Number of Unacknowledged Messages
+         * @type {number || null}
+         */
+        this.MaxUnackedMsgNum = null;
+
+        /**
+         * Maximum Message Backlog Size (bytes)
+         * @type {number || null}
+         */
+        this.MaxMsgBacklogSize = null;
+
+        /**
+         * Queue retrospective storage space. Value range: 1024 MB to 10240 MB. 0 indicates disabled.
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueId = 'QueueId' in params ? params.QueueId : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Bps = 'Bps' in params ? params.Bps : null;
+        this.MaxDelaySeconds = 'MaxDelaySeconds' in params ? params.MaxDelaySeconds : null;
+        this.MaxMsgHeapNum = 'MaxMsgHeapNum' in params ? params.MaxMsgHeapNum : null;
+        this.PollingWaitSeconds = 'PollingWaitSeconds' in params ? params.PollingWaitSeconds : null;
+        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
+        this.VisibilityTimeout = 'VisibilityTimeout' in params ? params.VisibilityTimeout : null;
+        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
+        this.RewindSeconds = 'RewindSeconds' in params ? params.RewindSeconds : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
+        this.ActiveMsgNum = 'ActiveMsgNum' in params ? params.ActiveMsgNum : null;
+        this.InactiveMsgNum = 'InactiveMsgNum' in params ? params.InactiveMsgNum : null;
+        this.DelayMsgNum = 'DelayMsgNum' in params ? params.DelayMsgNum : null;
+        this.RewindMsgNum = 'RewindMsgNum' in params ? params.RewindMsgNum : null;
+        this.MinMsgTime = 'MinMsgTime' in params ? params.MinMsgTime : null;
+        this.Transaction = 'Transaction' in params ? params.Transaction : null;
+
+        if (params.DeadLetterSource) {
+            this.DeadLetterSource = new Array();
+            for (let z in params.DeadLetterSource) {
+                let obj = new CmqDeadLetterSource();
+                obj.deserialize(params.DeadLetterSource[z]);
+                this.DeadLetterSource.push(obj);
+            }
+        }
+
+        if (params.DeadLetterPolicy) {
+            let obj = new CmqDeadLetterPolicy();
+            obj.deserialize(params.DeadLetterPolicy)
+            this.DeadLetterPolicy = obj;
+        }
+
+        if (params.TransactionPolicy) {
+            let obj = new CmqTransactionPolicy();
+            obj.deserialize(params.TransactionPolicy)
+            this.TransactionPolicy = obj;
+        }
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Trace = 'Trace' in params ? params.Trace : null;
+        this.TenantId = 'TenantId' in params ? params.TenantId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
+        this.MaxMsgBacklogSize = 'MaxMsgBacklogSize' in params ? params.MaxMsgBacklogSize : null;
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
+
+    }
+}
+
+/**
+ * CreateEnvironment response structure.
+ * @class
+ */
+class CreateEnvironmentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * TTL for unconsumed messages in seconds.
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Remarks (up to 128 characters).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Namespace ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Topic instance
+ * @class
+ */
+class Topic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Average size of the messages published in the last interval in bytes.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AverageMsgSize = null;
+
+        /**
+         * The number of consumers.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConsumerCount = null;
+
+        /**
+         * The total number of recorded messages.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastConfirmedEntry = null;
+
+        /**
+         * Time when the last ledger was created.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastLedgerCreatedTimestamp = null;
+
+        /**
+         * The number of messages published by local and replicated publishers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgRateIn = null;
+
+        /**
+         * The total number of messages delivered by local and replicated consumers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgRateOut = null;
+
+        /**
+         * The size (in bytes) of messages published by local and replicated publishers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * The size (in bytes) of messages delivered by local and replicated consumers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MsgThroughputOut = null;
+
+        /**
+         * The total number of recorded messages.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NumberOfEntries = null;
+
+        /**
+         * Partition count ≤ 0: there are no subpartitions in the topic.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * The number of producers.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProducerCount = null;
+
+        /**
+         * The size of all stored messages in bytes.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * Subpartitions in a partitioned topic.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PartitionsTopic> || null}
+         */
+        this.SubTopicSets = null;
+
+        /**
+         * Topic type description:
+0: General message;
+1: Globally sequential message;
+2: Partitionally sequential message;
+3: Retry letter topic;
+4: Dead letter topic;
+5: Transaction message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * Environment (namespace) name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Remarks (up to 128 characters).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Creation time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The maximum number of producers.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProducerLimit = null;
+
+        /**
+         * The maximum number of consumers.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConsumerLimit = null;
+
+        /**
+         * `0`: Non-persistent and non-partitioned
+`1`: Non-persistent and partitioned
+`2`: Persistent and non-partitioned
+`3`: Persistent and partitioned
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PulsarTopicType = null;
+
+        /**
+         * Retention period for unconsumed messages in seconds.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Tenant alias customized by users. if there is no, reuse the professional cluster ID.
+
+         * @type {string || null}
+         */
+        this.Tenant = null;
+
+        /**
+         * Whether exception consumer isolation is enabled.
+         * @type {boolean || null}
+         */
+        this.IsolateConsumerEnable = null;
+
+        /**
+         * Specifies the consumer Ack timeout period in seconds.
+         * @type {number || null}
+         */
+        this.AckTimeOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
+        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
+        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
+        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
+        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+
+        if (params.SubTopicSets) {
+            this.SubTopicSets = new Array();
+            for (let z in params.SubTopicSets) {
+                let obj = new PartitionsTopic();
+                obj.deserialize(params.SubTopicSets[z]);
+                this.SubTopicSets.push(obj);
+            }
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ProducerLimit = 'ProducerLimit' in params ? params.ProducerLimit : null;
+        this.ConsumerLimit = 'ConsumerLimit' in params ? params.ConsumerLimit : null;
+        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Tenant = 'Tenant' in params ? params.Tenant : null;
+        this.IsolateConsumerEnable = 'IsolateConsumerEnable' in params ? params.IsolateConsumerEnable : null;
+        this.AckTimeOut = 'AckTimeOut' in params ? params.AckTimeOut : null;
+
+    }
+}
+
+/**
+ * ModifyRabbitMQPermission response structure.
+ * @class
+ */
+class ModifyRabbitMQPermissionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCmqQueueDetail response structure.
+ * @class
+ */
+class DescribeCmqQueueDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of queue details.
+         * @type {CmqQueue || null}
+         */
+        this.QueueDescribe = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.QueueDescribe) {
+            let obj = new CmqQueue();
+            obj.deserialize(params.QueueDescribe)
+            this.QueueDescribe = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCmqTopicAttribute response structure.
+ * @class
+ */
+class ModifyCmqTopicAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RocketMQ topic information
+ * @class
+ */
+class RocketMQTopic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Topic type. Enumerated values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`, `Retry`, and `DeadLetter`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The number of subscription groups
+         * @type {number || null}
+         */
+        this.GroupNum = null;
+
+        /**
+         * Description.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The number of read/write partitions.
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * Creation time in milliseconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Creation time in milliseconds.
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Namespace
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Last write time, in seconds.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * Number of Subscriptions
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SubscriptionCount = null;
+
+        /**
+         * Subscribe to the relationship list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RocketMQSubscription> || null}
+         */
+        this.SubscriptionData = null;
+
+        /**
+         * List of bound tags
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.SubscriptionCount = 'SubscriptionCount' in params ? params.SubscriptionCount : null;
+
+        if (params.SubscriptionData) {
+            this.SubscriptionData = new Array();
+            for (let z in params.SubscriptionData) {
+                let obj = new RocketMQSubscription();
+                obj.deserialize(params.SubscriptionData[z]);
+                this.SubscriptionData.push(obj);
+            }
+        }
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteRocketMQVipInstance response structure.
+ * @class
+ */
+class DeleteRocketMQVipInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQUser response structure.
+ * @class
+ */
+class DescribeRabbitMQUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned number of users
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The list of the created TDMQ for RabbitMQ users
+         * @type {Array.<RabbitMQUser> || null}
+         */
+        this.RabbitMQUserList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RabbitMQUserList) {
+            this.RabbitMQUserList = new Array();
+            for (let z in params.RabbitMQUserList) {
+                let obj = new RabbitMQUser();
+                obj.deserialize(params.RabbitMQUserList[z]);
+                this.RabbitMQUserList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTopics response structure.
+ * @class
+ */
+class DescribeTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of topic sets.
+         * @type {Array.<Topic> || null}
+         */
+        this.TopicSets = null;
+
+        /**
+         * The number of topics.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicSets) {
+            this.TopicSets = new Array();
+            for (let z in params.TopicSets) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicSets[z]);
+                this.TopicSets.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishCmqMsg response structure.
+ * @class
+ */
+class PublishCmqMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `true` indicates that the sending is successful
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AcknowledgeMessage response structure.
+ * @class
+ */
+class AcknowledgeMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * If "", it indicates that there is no error return. otherwise return specific error information.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteEnvironmentRoles response structure.
+ * @class
+ */
+class DeleteEnvironmentRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishCmqMsg request structure.
+ * @class
+ */
+class PublishCmqMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Message content. The total message size is up to 1,024 KB.
+         * @type {string || null}
+         */
+        this.MsgContent = null;
+
+        /**
+         * Message tag. You can pass in multiple tags or a single route. Each tag or route can contain up to 64 characters.
+         * @type {Array.<string> || null}
+         */
+        this.MsgTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
+        this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+
+    }
+}
+
+/**
+ * ModifyCmqTopicAttribute request structure.
+ * @class
+ */
+class ModifyCmqTopicAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which must be unique under the same account in a single region. the name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+         * @type {number || null}
+         */
+        this.MaxMsgSize = null;
+
+        /**
+         * Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
+         * @type {number || null}
+         */
+        this.MsgRetentionSeconds = null;
+
+        /**
+         * Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
+         * @type {boolean || null}
+         */
+        this.Trace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
+        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
+        this.Trace = 'Trace' in params ? params.Trace : null;
+
+    }
+}
+
+/**
+ * DeleteTopics response structure.
+ * @class
+ */
+class DeleteTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of deleted topics.
+         * @type {Array.<TopicRecord> || null}
+         */
+        this.TopicSets = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicSets) {
+            this.TopicSets = new Array();
+            for (let z in params.TopicSets) {
+                let obj = new TopicRecord();
+                obj.deserialize(params.TopicSets[z]);
+                this.TopicSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RewindCmqQueue request structure.
+ * @class
+ */
+class RewindCmqQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queue name, unique under the same account in a single region. queue name is a string of no more than 64 characters, beginning with a letter, the rest may contain letters, digits, and hyphens (-).
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+        /**
+         * After this time is configured, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
+         * @type {number || null}
+         */
+        this.StartConsumeTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.StartConsumeTime = 'StartConsumeTime' in params ? params.StartConsumeTime : null;
+
+    }
+}
+
+/**
+ * DeleteRocketMQVipInstance request structure.
+ * @class
+ */
+class DeleteRocketMQVipInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID of the instance.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * Message log
+ * @class
+ */
+class MsgLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message ID.
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * Producer name.
+         * @type {string || null}
+         */
+        this.ProducerName = null;
+
+        /**
+         * Production time.
+         * @type {string || null}
+         */
+        this.ProduceTime = null;
+
+        /**
+         * Producer client address.
+         * @type {string || null}
+         */
+        this.ProducerAddr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.ProduceTime = 'ProduceTime' in params ? params.ProduceTime : null;
+        this.ProducerAddr = 'ProducerAddr' in params ? params.ProducerAddr : null;
+
+    }
+}
+
+/**
+ * Display field of the returned CMQ topic information
+ * @class
+ */
+class CmqTopic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic ID.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Maximum lifetime of messages in a topic. After the time specified by this parameter has elapsed since sending to this topic, the message will be deleted whether or not it has been successfully pushed to the user. Measured in seconds and fixed at one day (86,400 seconds). This attribute cannot be modified.
+         * @type {number || null}
+         */
+        this.MsgRetentionSeconds = null;
+
+        /**
+         * Maximum message length. value range: 1024-1048576 bytes (1-1024 kb). default value: 1048576.
+         * @type {number || null}
+         */
+        this.MaxMsgSize = null;
+
+        /**
+         * Number of messages published per second.
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * Describes the filtering policy selected by users when creating subscriptions.
+FilterType = 1 means when users use Tag filtering with FilterTag.
+FilterType = 2 indicates user use BindingKey for filtering.
+         * @type {number || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * Topic creation time. Returns a Unix timestamp, accurate to milliseconds.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The last time the topic attribute was modified. Returns a Unix timestamp, accurate to milliseconds.
+         * @type {number || null}
+         */
+        this.LastModifyTime = null;
+
+        /**
+         * Number of messages in the current topic (message backlog).
+         * @type {number || null}
+         */
+        this.MsgCount = null;
+
+        /**
+         * Creator `Uin`. The `resource` field for CAM authentication is composed of this field.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * Associated tag.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Message trace. true: enabled; false: not enabled
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Trace = null;
+
+        /**
+         * Tenant ID
+         * @type {string || null}
+         */
+        this.TenantId = null;
+
+        /**
+         * Specifies the namespace name.
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * Cluster status. 0: Creating, 1: Normal, 2: Deleting, 3: Deleted, 4: Isolating, 5: Creation failed, 6: Deletion failed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 0: Pulsar, 1: RocketMQ
+         * @type {number || null}
+         */
+        this.BrokerType = null;
+
+        /**
+         * Number of Subscriptions
+         * @type {number || null}
+         */
+        this.SubscriptionCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
+        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
+        this.MsgCount = 'MsgCount' in params ? params.MsgCount : null;
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Trace = 'Trace' in params ? params.Trace : null;
+        this.TenantId = 'TenantId' in params ? params.TenantId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.BrokerType = 'BrokerType' in params ? params.BrokerType : null;
+        this.SubscriptionCount = 'SubscriptionCount' in params ? params.SubscriptionCount : null;
+
+    }
+}
+
+/**
+ * RabbitMQ exchange list member information
+ * @class
+ */
+class RabbitMQExchangeListInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Exchange name.
+         * @type {string || null}
+         */
+        this.ExchangeName = null;
+
+        /**
+         * Remarks
+
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Exchange type. Valid values: "fanout", "direct", "topic", "headers".
+         * @type {string || null}
+         */
+        this.ExchangeType = null;
+
+        /**
+         * Specifies the Host name of the Virtual switch.
+         * @type {string || null}
+         */
+        this.VirtualHost = null;
+
+        /**
+         * Exchange creator. "system": "created by the system"; "user": "created by a user".
+         * @type {string || null}
+         */
+        this.ExchangeCreator = null;
+
+        /**
+         * Exchange creation time.
+         * @type {string || null}
+         */
+        this.CreateTimeStamp = null;
+
+        /**
+         * Exchange modification time.
+         * @type {string || null}
+         */
+        this.ModTimeStamp = null;
+
+        /**
+         * Input message rate.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageRateIn = null;
+
+        /**
+         * Indicates the output message rate.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageRateOut = null;
+
+        /**
+         * Whether the exchange is a durable one. true: durable; false: non-durable.
+         * @type {boolean || null}
+         */
+        this.Durable = null;
+
+        /**
+         * Whether automatic deletion is set for the exchange. true: automatic deletion set; false: automatic deletion not set.
+         * @type {boolean || null}
+         */
+        this.AutoDelete = null;
+
+        /**
+         * Whether the exchange is an internal one. true: internal exchange.
+         * @type {boolean || null}
+         */
+        this.Internal = null;
+
+        /**
+         * Instance ID of the exchange.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Effective policy name.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Extended parameters of the key-value object type.
+         * @type {string || null}
+         */
+        this.Arguments = null;
+
+        /**
+         * Number of unscheduled delayed messages.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessagesDelayed = null;
+
+        /**
+         * Creation time timestamp.
+         * @type {number || null}
+         */
+        this.CreateTs = null;
+
+        /**
+         * Modification time timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExchangeName = 'ExchangeName' in params ? params.ExchangeName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ExchangeType = 'ExchangeType' in params ? params.ExchangeType : null;
+        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
+        this.ExchangeCreator = 'ExchangeCreator' in params ? params.ExchangeCreator : null;
+        this.CreateTimeStamp = 'CreateTimeStamp' in params ? params.CreateTimeStamp : null;
+        this.ModTimeStamp = 'ModTimeStamp' in params ? params.ModTimeStamp : null;
+        this.MessageRateIn = 'MessageRateIn' in params ? params.MessageRateIn : null;
+        this.MessageRateOut = 'MessageRateOut' in params ? params.MessageRateOut : null;
+        this.Durable = 'Durable' in params ? params.Durable : null;
+        this.AutoDelete = 'AutoDelete' in params ? params.AutoDelete : null;
+        this.Internal = 'Internal' in params ? params.Internal : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Arguments = 'Arguments' in params ? params.Arguments : null;
+        this.MessagesDelayed = 'MessagesDelayed' in params ? params.MessagesDelayed : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
+
+    }
+}
+
+/**
+ * DescribeBindVpcs request structure.
+ * @class
+ */
+class DescribeBindVpcsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Offset. If this parameter is left empty, 0 will be used by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * Topic's key information
+ * @class
+ */
+class TopicRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
+ * DescribeEnvironmentRoles request structure.
+ * @class
+ */
+class DescribeEnvironmentRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Environment (namespace) name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Offset, which defaults to 0 if left empty.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Role name.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * * RoleName
+Filter by role name for exact query.
+Type: String
+Required: No
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeRabbitMQUser request structure.
+ * @class
+ */
+class DescribeRabbitMQUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Username search by prefix or suffix
+         * @type {string || null}
+         */
+        this.SearchUser = null;
+
+        /**
+         * Specifies the page Offset. default is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Page Limit. default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Username, which is queried by exact match.
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * User tag, used to determine the access permission of the user for RabbitMQ Management.
+management: ordinary console user. monitoring: administrative console user. other value: non-console user.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SearchUser = 'SearchUser' in params ? params.SearchUser : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQTopics response structure.
+ * @class
+ */
+class DescribeRocketMQTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of query records.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of topic information
+         * @type {Array.<RocketMQTopic> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new RocketMQTopic();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Namespace information
+ * @class
+ */
+class Environment extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Retention period for unconsumed messages in seconds. Maximum value: 1,296,000 seconds (15 days).
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Namespace ID.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * The number of topics.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TopicNum = null;
+
+        /**
+         * Message retention policy.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RetentionPolicy || null}
+         */
+        this.RetentionPolicy = null;
+
+        /**
+         * Whether to enable "Auto-Create Subscription"
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoSubscriptionCreation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
+
+        if (params.RetentionPolicy) {
+            let obj = new RetentionPolicy();
+            obj.deserialize(params.RetentionPolicy)
+            this.RetentionPolicy = obj;
+        }
+        this.AutoSubscriptionCreation = 'AutoSubscriptionCreation' in params ? params.AutoSubscriptionCreation : null;
+
+    }
+}
+
+/**
+ * Details of the tenant’s RocketMQ cluster
+ * @class
+ */
+class RocketMQClusterDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Basic cluster information.
+         * @type {RocketMQClusterInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * Cluster configuration information.
+         * @type {RocketMQClusterConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * Cluster status. 0: Creating; 1: Normal; 2: Terminating; 3: Deleted; 4. Isolated; 5. Creation failed; 6: Deletion failed.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new RocketMQClusterInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+
+        if (params.Config) {
+            let obj = new RocketMQClusterConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeRocketMQGroups response structure.
  * @class
  */
@@ -8368,7 +19193,7 @@ class DescribeRocketMQGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -8398,228 +19223,6 @@ class DescribeRocketMQGroupsResponse extends  AbstractModel {
 }
 
 /**
- * ResetMsgSubOffsetByTimestamp response structure.
- * @class
- */
-class ResetMsgSubOffsetByTimestampResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Result.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateCluster response structure.
- * @class
- */
-class CreateClusterResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCmqDeadLetterSourceQueues request structure.
- * @class
- */
-class DescribeCmqDeadLetterSourceQueuesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Dead letter queue name
-         * @type {string || null}
-         */
-        this.DeadLetterQueueName = null;
-
-        /**
-         * Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter by `SourceQueueName`
-         * @type {string || null}
-         */
-        this.SourceQueueName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.SourceQueueName = 'SourceQueueName' in params ? params.SourceQueueName : null;
-
-    }
-}
-
-/**
- * DeleteRocketMQNamespace request structure.
- * @class
- */
-class DeleteRocketMQNamespaceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace name
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-
-    }
-}
-
-/**
- * DescribeRoles request structure.
- * @class
- */
-class DescribeRolesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Fuzzy query by role name
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * * RoleName
-Filter by role name for exact query.
-Type: String
-Required: no
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * CreateCluster request structure.
  * @class
  */
@@ -8628,7 +19231,7 @@ class CreateClusterRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster name, which can contain up to 16 letters, digits, hyphens, and underscores.
+         * Specifies the cluster name, which does not support chinese characters and special characters other than hyphens and underscores, with a length of no more than 64 characters.
          * @type {string || null}
          */
         this.ClusterName = null;
@@ -8684,30 +19287,24 @@ class CreateClusterRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRabbitMQVirtualHostList request structure.
+ * DeleteProCluster response structure.
  * @class
  */
-class DescribeRabbitMQVirtualHostListRequest extends  AbstractModel {
+class DeleteProClusterResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * A default parameter that won’t be used
+         * Order number of the terminated instance.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.DealName = null;
 
         /**
-         * Offset
-         * @type {number || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * The maximum number of entries per page
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -8718,9 +19315,8 @@ class DescribeRabbitMQVirtualHostListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8734,7 +19330,7 @@ class ModifyCmqQueueAttributeResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -8748,75 +19344,6 @@ class ModifyCmqQueueAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateTopic response structure.
- * @class
- */
-class CreateTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Valid value: 0 or 1. Non-partitioned topic: No partitions. A value greater than 1: The partition count of a partitioned topic. `0` is returned for existing non-partitioned topics, and `1` is returned for incremental non-partitioned topics.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Remarks (up to 128 characters).
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 0: General message;
-1: Globally sequential message;
-2: Partitionally sequential message;
-3: Retry letter topic;
-4: Dead letter topic.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8894,27 +19421,15 @@ class DescribeCmqQueuesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeEnvironments response structure.
+ * ResetRocketMQConsumerOffSet response structure.
  * @class
  */
-class DescribeEnvironmentsResponse extends  AbstractModel {
+class ResetRocketMQConsumerOffSetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of namespaces.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Array of namespace sets.
-         * @type {Array.<Environment> || null}
-         */
-        this.EnvironmentSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -8928,111 +19443,92 @@ class DescribeEnvironmentsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.EnvironmentSet) {
-            this.EnvironmentSet = new Array();
-            for (let z in params.EnvironmentSet) {
-                let obj = new Environment();
-                obj.deserialize(params.EnvironmentSet[z]);
-                this.EnvironmentSet.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * ModifyCmqSubscriptionAttribute request structure.
+ * TDMQ for RabbitMQ user entity details
  * @class
  */
-class ModifyCmqSubscriptionAttributeRequest extends  AbstractModel {
+class RabbitMQUser extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.InstanceId = null;
 
         /**
-         * Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Username, which is used for login.
          * @type {string || null}
          */
-        this.SubscriptionName = null;
+        this.User = null;
 
         /**
-         * CMQ push server retry policy in case an error occurs while pushing a message to the endpoint. Valid values:
-(1) BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message.
-(2) EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
+         * Password, which is used for login.
          * @type {string || null}
          */
-        this.NotifyStrategy = null;
+        this.Password = null;
 
         /**
-         * Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `HTTP`, both values are acceptable, and the default value is `JSON`.
+         * User description
          * @type {string || null}
          */
-        this.NotifyContentFormat = null;
+        this.Description = null;
 
         /**
-         * Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not configured, no matter whether `MsgTag` is configured, the subscription will receive all messages published to the topic; 2. If the array of `FilterTag` values has a value, only when at least one of the values in the array also exists in the array of `MsgTag` values (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the array of `FilterTag` values has a value, but `MsgTag` is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
+         * User tags, which determine the scope of permissions of this user to access RabbitMQ Management.
          * @type {Array.<string> || null}
          */
-        this.FilterTags = null;
+        this.Tags = null;
 
         /**
-         * The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
-         * @type {Array.<string> || null}
+         * User creation time
+         * @type {string || null}
          */
-        this.BindingKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
-        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
-        this.FilterTags = 'FilterTags' in params ? params.FilterTags : null;
-        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
-
-    }
-}
-
-/**
- * ModifyTopic response structure.
- * @class
- */
-class ModifyTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.CreateTime = null;
 
         /**
-         * Number of partitions
+         * Last user modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * User type. Valid values: `System` (Created by system), `User` (Created by user).
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Maximum number of available connections per user.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.Partitions = null;
+        this.MaxConnections = null;
 
         /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
+         * Maximum number of available channels per user.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.Remark = null;
+        this.MaxChannels = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Creation timestamp.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.CreateTs = null;
+
+        /**
+         * Modification timestamp.
+         * @type {number || null}
+         */
+        this.ModifyTs = null;
 
     }
 
@@ -9043,45 +19539,18 @@ class ModifyTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQInstanceSpec response structure.
- * @class
- */
-class ModifyRocketMQInstanceSpecResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Order ID
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OrderId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OrderId = 'OrderId' in params ? params.OrderId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MaxConnections = 'MaxConnections' in params ? params.MaxConnections : null;
+        this.MaxChannels = 'MaxChannels' in params ? params.MaxChannels : null;
+        this.CreateTs = 'CreateTs' in params ? params.CreateTs : null;
+        this.ModifyTs = 'ModifyTs' in params ? params.ModifyTs : null;
 
     }
 }
@@ -9095,7 +19564,10 @@ class DescribeRocketMQVipInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Query condition filter
+         * Query condition filter. supported query conditions are as follows:.
+Instance ids - specifies the instance ids.
+Instance name - specifies the instance name.
+Status - specifies the instance status.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -9137,34 +19609,6 @@ class DescribeRocketMQVipInstancesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRocketMQVipInstanceDetail request structure.
- * @class
- */
-class DescribeRocketMQVipInstanceDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
  * DeleteRabbitMQVirtualHost request structure.
  * @class
  */
@@ -9173,13 +19617,13 @@ class DeleteRabbitMQVirtualHostRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster instance ID
+         * Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Vhost name
+         * VirtualHost name, such as testvhost. effective VirtualHost names can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), clicking Vhost in the left sidebar, and finding the Vhost name in the Vhost list.
          * @type {string || null}
          */
         this.VirtualHost = null;
@@ -9200,134 +19644,6 @@ class DeleteRabbitMQVirtualHostRequest extends  AbstractModel {
 }
 
 /**
- * DeleteRocketMQCluster response structure.
- * @class
- */
-class DeleteRocketMQClusterResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateCmqTopic response structure.
- * @class
- */
-class CreateCmqTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Cmq DeadLetterSource
- * @class
- */
-class CmqDeadLetterSource extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Message queue ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.QueueId = null;
-
-        /**
-         * Message queue name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueId = 'QueueId' in params ? params.QueueId : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-
-    }
-}
-
-/**
- * ClearCmqSubscriptionFilterTags response structure.
- * @class
- */
-class ClearCmqSubscriptionFilterTagsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateRabbitMQVipInstance response structure.
  * @class
  */
@@ -9336,21 +19652,19 @@ class CreateRabbitMQVipInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Order ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Order ID.
          * @type {string || null}
          */
         this.TranId = null;
 
         /**
          * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -9372,142 +19686,44 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeCmqTopics request structure.
+ * ModifyEnvironmentAttributes response structure.
  * @class
  */
-class DescribeCmqTopicsRequest extends  AbstractModel {
+class ModifyEnvironmentAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy search by `TopicName`
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Filter by CMQ topic name.
-         * @type {Array.<string> || null}
-         */
-        this.TopicNameList = null;
-
-        /**
-         * For filtering by tag, this parameter must be set to `true`.
-         * @type {boolean || null}
-         */
-        this.IsTagFilter = null;
-
-        /**
-         * Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.TopicNameList = 'TopicNameList' in params ? params.TopicNameList : null;
-        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * Filter parameter
- * @class
- */
-class Filter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Filter parameter name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Value
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
-
-    }
-}
-
-/**
- * DeleteTopics request structure.
- * @class
- */
-class DeleteTopicsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic set. Up to 20 topics can be deleted at a time.
-         * @type {Array.<TopicRecord> || null}
-         */
-        this.TopicSets = null;
-
-        /**
-         * Pulsar cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Environment (namespace) name.
+         * Namespace name.
          * @type {string || null}
          */
         this.EnvironmentId = null;
 
         /**
-         * Whether to forcibly delete a topic. Default value: `false`.
-         * @type {boolean || null}
+         * TTL for unconsumed messages in seconds.
+         * @type {number || null}
          */
-        this.Force = null;
+        this.MsgTTL = null;
+
+        /**
+         * Remarks (up to 128 characters).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Namespace ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9518,18 +19734,11 @@ class DeleteTopicsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new TopicRecord();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Force = 'Force' in params ? params.Force : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9543,15 +19752,13 @@ class CmqTransactionPolicy extends  AbstractModel {
         super();
 
         /**
-         * First lookback time.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * First recheck time.
          * @type {number || null}
          */
         this.FirstQueryInterval = null;
 
         /**
-         * Maximum number of queries.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Maximum query times.
          * @type {number || null}
          */
         this.MaxQueryCount = null;
@@ -9592,10 +19799,16 @@ class ModifyTopicRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Number of partitions, which must be equal to or greater than the original number of partitions. To maintain the original number of partitions, enter the original number. Modifying the number of partitions will take effect only for non-globally sequential messages. There can be up to 128 partitions.
+         * Specifies the number of partitions, which must be greater than or equal to the original partition count. if you want to maintain the original number of partitions, please enter the original number. changing the number of partitions is only effective for non-global sequential messages and cannot exceed 32 partitions.
          * @type {number || null}
          */
         this.Partitions = null;
+
+        /**
+         * Pulsar cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
 
         /**
          * Remarks (up to 128 characters).
@@ -9604,10 +19817,29 @@ class ModifyTopicRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Pulsar cluster ID
+         * Unconsumed message expiration time. measurement unit: seconds. value range: 60 seconds to 15 days.
+
+         * @type {number || null}
+         */
+        this.MsgTTL = null;
+
+        /**
+         * Default if not passed is native policy. DefaultPolicy means when the subscription reaches the maximum unacknowledged messages of 5000, the server will stop pushing messages to all consumers under the current subscription. DynamicPolicy refers to dynamically adjusting the maximum unacknowledged messages under the subscription, with the specific quota being the maximum between 5000 and the number of consumers multiplied by 20. the default maximum unacknowledged message count per consumer is 20. exceeding this limit only affects that consumer and does not affect other consumers.
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.UnackPolicy = null;
+
+        /**
+         * Whether exception consumer isolation is enabled.
+         * @type {boolean || null}
+         */
+        this.IsolateConsumerEnable = null;
+
+        /**
+         * Consumer Ack timeout period in seconds. value range: 60-(3600*24).
+         * @type {number || null}
+         */
+        this.AckTimeOut = null;
 
     }
 
@@ -9621,98 +19853,18 @@ class ModifyTopicRequest extends  AbstractModel {
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
+        this.UnackPolicy = 'UnackPolicy' in params ? params.UnackPolicy : null;
+        this.IsolateConsumerEnable = 'IsolateConsumerEnable' in params ? params.IsolateConsumerEnable : null;
+        this.AckTimeOut = 'AckTimeOut' in params ? params.AckTimeOut : null;
 
     }
 }
 
 /**
- * ResetMsgSubOffsetByTimestamp request structure.
- * @class
- */
-class ResetMsgSubOffsetByTimestampRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Subscriber name.
-         * @type {string || null}
-         */
-        this.Subscription = null;
-
-        /**
-         * Timestamp, accurate down to the millisecond.
-         * @type {number || null}
-         */
-        this.ToTimestamp = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Subscription = 'Subscription' in params ? params.Subscription : null;
-        this.ToTimestamp = 'ToTimestamp' in params ? params.ToTimestamp : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * CreateEnvironmentRole response structure.
- * @class
- */
-class CreateEnvironmentRoleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- *  Consumer
+ * Consumer.
  * @class
  */
 class Consumer extends  AbstractModel {
@@ -9773,74 +19925,60 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeBindVpcs response structure.
+ * CreateCmqSubscribe request structure.
  * @class
  */
-class DescribeBindVpcsResponse extends  AbstractModel {
+class CreateCmqSubscribeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of records.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Set of VPCs.
-         * @type {Array.<VpcBindRecord> || null}
-         */
-        this.VpcSets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VpcSets) {
-            this.VpcSets = new Array();
-            for (let z in params.VpcSets) {
-                let obj = new VpcBindRecord();
-                obj.deserialize(params.VpcSets[z]);
-                this.VpcSets.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteCmqSubscribe request structure.
- * @class
- */
-class DeleteCmqSubscribeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Topic name, which must be unique under the same account in a single region. The name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Subscription name, uniquely identifies under the same topic of the same account in a single region. subscription name is a string of no more than 64 characters, beginning with a letter, the remaining part can contain letters, digits, and hyphens (-).
          * @type {string || null}
          */
         this.SubscriptionName = null;
+
+        /**
+         * Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * `Endpoint` for notification receipt, which is distinguished by `Protocol`. For `http`, `Endpoint` must begin with `http://` and `host` can be a domain name or IP. For `Queue`, enter `QueueName`. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for `Endpoint`, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.
+         * @type {string || null}
+         */
+        this.Endpoint = null;
+
+        /**
+         * CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values: 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
+         * @type {string || null}
+         */
+        this.NotifyStrategy = null;
+
+        /**
+         * Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not configured, no matter whether `MsgTag` is configured, the subscription will receive all messages published to the topic; 2. If the array of `FilterTag` values has a value, only when at least one of the values in the array also exists in the array of `MsgTag` values (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the array of `FilterTag` values has a value, but `MsgTag` is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
+         * @type {Array.<string> || null}
+         */
+        this.FilterTag = null;
+
+        /**
+         * The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
+         * @type {Array.<string> || null}
+         */
+        this.BindingKey = null;
+
+        /**
+         * Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `http`, both options are acceptable, and the default value is `JSON`.
+         * @type {string || null}
+         */
+        this.NotifyContentFormat = null;
 
     }
 
@@ -9853,135 +19991,12 @@ class DeleteCmqSubscribeRequest extends  AbstractModel {
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-    }
-}
-
-/**
- * TDMQ for RabbitMQ user entity details
- * @class
- */
-class RabbitMQUser extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Username, which is used for login.
-         * @type {string || null}
-         */
-        this.User = null;
-
-        /**
-         * Password, which is used for login.
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * User description
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * User tag, which defines a user's permission scope for accessing RabbitMQ Managementu200d.
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * User creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last user modification time
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * User type. Valid values: `System` (Created by system), `User` (Created by user).
-         * @type {string || null}
-         */
-        this.Type = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.User = 'User' in params ? params.User : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.Type = 'Type' in params ? params.Type : null;
-
-    }
-}
-
-/**
- * DescribeCmqDeadLetterSourceQueues response structure.
- * @class
- */
-class DescribeCmqDeadLetterSourceQueuesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of eligible queues
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Source queues of dead letter queue
-         * @type {Array.<CmqDeadLetterSource> || null}
-         */
-        this.QueueSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.QueueSet) {
-            this.QueueSet = new Array();
-            for (let z in params.QueueSet) {
-                let obj = new CmqDeadLetterSource();
-                obj.deserialize(params.QueueSet[z]);
-                this.QueueSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
+        this.NotifyStrategy = 'NotifyStrategy' in params ? params.NotifyStrategy : null;
+        this.FilterTag = 'FilterTag' in params ? params.FilterTag : null;
+        this.BindingKey = 'BindingKey' in params ? params.BindingKey : null;
+        this.NotifyContentFormat = 'NotifyContentFormat' in params ? params.NotifyContentFormat : null;
 
     }
 }
@@ -10001,7 +20016,7 @@ class DeleteSubscriptionsResponse extends  AbstractModel {
         this.SubscriptionTopicSets = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -10072,308 +20087,6 @@ class DeleteRocketMQTopicRequest extends  AbstractModel {
 }
 
 /**
- * Consumption progress details
- * @class
- */
-class ConsumersSchedule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the current partition.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * The number of messages.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * The number of heaped messages.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgBacklog = null;
-
-        /**
-         * The total number of messages delivered by the consumer per second.
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * The size (in bytes) of messages consumed by the consumer per second.
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * Percentage of messages discarded due to timeout.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateExpired = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.MsgBacklog = 'MsgBacklog' in params ? params.MsgBacklog : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.MsgRateExpired = 'MsgRateExpired' in params ? params.MsgRateExpired : null;
-
-    }
-}
-
-/**
- * Set of cluster information
- * @class
- */
-class Cluster extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Cluster name.
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * Remarks.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Number of access points
-         * @type {number || null}
-         */
-        this.EndPointNum = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Whether the cluster is healthy. 1: healthy; 0: exceptional
-         * @type {number || null}
-         */
-        this.Healthy = null;
-
-        /**
-         * Cluster health information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HealthyInfo = null;
-
-        /**
-         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Maximum number of namespaces
-         * @type {number || null}
-         */
-        this.MaxNamespaceNum = null;
-
-        /**
-         * Maximum number of topics
-         * @type {number || null}
-         */
-        this.MaxTopicNum = null;
-
-        /**
-         * Maximum QPS
-         * @type {number || null}
-         */
-        this.MaxQps = null;
-
-        /**
-         * Maximum message retention period in seconds
-         * @type {number || null}
-         */
-        this.MessageRetentionTime = null;
-
-        /**
-         * Maximum storage capacity
-         * @type {number || null}
-         */
-        this.MaxStorageCapacity = null;
-
-        /**
-         * Cluster version
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Version = null;
-
-        /**
-         * Public network access point
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PublicEndPoint = null;
-
-        /**
-         * VPC access point
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VpcEndPoint = null;
-
-        /**
-         * Number of namespaces
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.NamespaceNum = null;
-
-        /**
-         * Limit of used storage in MB
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UsedStorageBudget = null;
-
-        /**
-         * Maximum message production rate in messages
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxPublishRateInMessages = null;
-
-        /**
-         * Maximum message push rate in messages
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxDispatchRateInMessages = null;
-
-        /**
-         * Maximum message production rate in bytes
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxPublishRateInBytes = null;
-
-        /**
-         * Maximum message push rate in bytes
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxDispatchRateInBytes = null;
-
-        /**
-         * Number of created topics
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicNum = null;
-
-        /**
-         * Maximum message delay in seconds
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxMessageDelayInSeconds = null;
-
-        /**
-         * Whether to enable public network access. If this parameter is left empty, the feature will be enabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.PublicAccessEnabled = null;
-
-        /**
-         * Tag
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Billing mode:
-`0`: Pay-as-you-go
-`1`: Monthly subscription
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.EndPointNum = 'EndPointNum' in params ? params.EndPointNum : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Healthy = 'Healthy' in params ? params.Healthy : null;
-        this.HealthyInfo = 'HealthyInfo' in params ? params.HealthyInfo : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
-        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
-        this.MaxQps = 'MaxQps' in params ? params.MaxQps : null;
-        this.MessageRetentionTime = 'MessageRetentionTime' in params ? params.MessageRetentionTime : null;
-        this.MaxStorageCapacity = 'MaxStorageCapacity' in params ? params.MaxStorageCapacity : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
-        this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
-        this.NamespaceNum = 'NamespaceNum' in params ? params.NamespaceNum : null;
-        this.UsedStorageBudget = 'UsedStorageBudget' in params ? params.UsedStorageBudget : null;
-        this.MaxPublishRateInMessages = 'MaxPublishRateInMessages' in params ? params.MaxPublishRateInMessages : null;
-        this.MaxDispatchRateInMessages = 'MaxDispatchRateInMessages' in params ? params.MaxDispatchRateInMessages : null;
-        this.MaxPublishRateInBytes = 'MaxPublishRateInBytes' in params ? params.MaxPublishRateInBytes : null;
-        this.MaxDispatchRateInBytes = 'MaxDispatchRateInBytes' in params ? params.MaxDispatchRateInBytes : null;
-        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
-        this.MaxMessageDelayInSeconds = 'MaxMessageDelayInSeconds' in params ? params.MaxMessageDelayInSeconds : null;
-        this.PublicAccessEnabled = 'PublicAccessEnabled' in params ? params.PublicAccessEnabled : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-
-    }
-}
-
-/**
  * Message retention policy
  * @class
  */
@@ -10409,150 +20122,6 @@ class RetentionPolicy extends  AbstractModel {
 }
 
 /**
- * CreateRocketMQCluster response structure.
- * @class
- */
-class CreateRocketMQClusterResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ReceiveMessage response structure.
- * @class
- */
-class ReceiveMessageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique primary key used to identify the message
-         * @type {string || null}
-         */
-        this.MessageID = null;
-
-        /**
-         * Content of the received message
-         * @type {string || null}
-         */
-        this.MessagePayload = null;
-
-        /**
-         * Provided to the `Ack` API and used to acknowledge messages in the topic
-         * @type {string || null}
-         */
-        this.AckTopic = null;
-
-        /**
-         * Returned error message. If it is an empty string, no error occurred.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ErrorMsg = null;
-
-        /**
-         * Returned subscriber name, which will be used when an acknowledgment consumer is created.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubName = null;
-
-        /**
-         * MessageIDs returned by `BatchReceivePolicy` at a time, which are separated by “###”.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MessageIDList = null;
-
-        /**
-         * Message contents returned by `BatchReceivePolicy` at a time, which are separated by “###”.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MessagesPayload = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MessageID = 'MessageID' in params ? params.MessageID : null;
-        this.MessagePayload = 'MessagePayload' in params ? params.MessagePayload : null;
-        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.SubName = 'SubName' in params ? params.SubName : null;
-        this.MessageIDList = 'MessageIDList' in params ? params.MessageIDList : null;
-        this.MessagesPayload = 'MessagesPayload' in params ? params.MessagesPayload : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteRocketMQNamespace response structure.
- * @class
- */
-class DeleteRocketMQNamespaceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribePublishers response structure.
  * @class
  */
@@ -10574,7 +20143,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Publishers = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -10599,118 +20168,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendMsg request structure.
- * @class
- */
-class SendMsgRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name. If the topic is a partitioned topic, you need to specify the partition; otherwise, messages will be sent to partition 0 by default, such as `my_topic-partition-0`.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Message content, which cannot be empty and can contain up to 5,242,880 bytes.
-         * @type {string || null}
-         */
-        this.MsgContent = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * ResetRocketMQConsumerOffSet request structure.
- * @class
- */
-class ResetRocketMQConsumerOffSetRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace name.
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Consumer group name.
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Reset method. 0: Start from the latest offset; 1: Start from specified time point.
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * The specified timestamp that has been reset, in milliseconds. This parameter only takes effect when the value of `Type` is `1`.
-         * @type {number || null}
-         */
-        this.ResetTimestamp = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.ResetTimestamp = 'ResetTimestamp' in params ? params.ResetTimestamp : null;
 
     }
 }
@@ -10744,154 +20201,15 @@ class DescribeCmqQueueDetailRequest extends  AbstractModel {
 }
 
 /**
- * DescribePulsarProInstances request structure.
+ * CreateRocketMQEnvironmentRole response structure.
  * @class
  */
-class DescribePulsarProInstancesRequest extends  AbstractModel {
+class CreateRocketMQEnvironmentRoleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Query condition filter
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * The maximum number of queried items, which defaults to `20`.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Start offset for query
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * CreateRocketMQTopic request structure.
- * @class
- */
-class CreateRocketMQTopicRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name, which can contain 3–64 letters, digits, hyphens, and underscores
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Topic namespace. Currently, you can create topics only in one single namespace.
-         * @type {Array.<string> || null}
-         */
-        this.Namespaces = null;
-
-        /**
-         * Topic type. Valid values: `Normal`, `PartitionedOrder`, `Transaction`, `DelayScheduled`.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Topic remarks (up to 128 characters)
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Number of partitions, which doesn't take effect for globally sequential messages
-         * @type {number || null}
-         */
-        this.PartitionNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Namespaces = 'Namespaces' in params ? params.Namespaces : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
-
-    }
-}
-
-/**
- * CreateRole response structure.
- * @class
- */
-class CreateRoleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Role name
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Role token
-         * @type {string || null}
-         */
-        this.Token = null;
-
-        /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Namespaces that are bound in batches
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<EnvironmentRoleSet> || null}
-         */
-        this.EnvironmentRoleSets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -10905,73 +20223,33 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
         if (!params) {
             return;
         }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-
-        if (params.EnvironmentRoleSets) {
-            this.EnvironmentRoleSets = new Array();
-            for (let z in params.EnvironmentRoleSets) {
-                let obj = new EnvironmentRoleSet();
-                obj.deserialize(params.EnvironmentRoleSets[z]);
-                this.EnvironmentRoleSets.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DeleteRocketMQCluster request structure.
+ * DescribeRocketMQTopicsByGroup response structure.
  * @class
  */
-class DeleteRocketMQClusterRequest extends  AbstractModel {
+class DescribeRocketMQTopicsByGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the cluster to be deleted.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * DescribePulsarProInstances response structure.
- * @class
- */
-class DescribePulsarProInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The total number of unpaginated items
+         * Total number of entries
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Instance information list
-         * @type {Array.<PulsarProInstance> || null}
+         * Topic list.
+         * @type {Array.<string> || null}
          */
-        this.Instances = null;
+        this.Topics = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -10986,15 +20264,7 @@ class DescribePulsarProInstancesResponse extends  AbstractModel {
             return;
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new PulsarProInstance();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
+        this.Topics = 'Topics' in params ? params.Topics : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11043,83 +20313,6 @@ class DeleteEnvironmentRolesRequest extends  AbstractModel {
 }
 
 /**
- * ClearCmqQueue response structure.
- * @class
- */
-class ClearCmqQueueResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRabbitMQUser response structure.
- * @class
- */
-class ModifyRabbitMQUserResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeBindClusters request structure.
- * @class
- */
-class DescribeBindClustersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
  * CreateRocketMQTopic response structure.
  * @class
  */
@@ -11128,7 +20321,7 @@ class CreateRocketMQTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -11143,118 +20336,6 @@ class CreateRocketMQTopicResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateRabbitMQVirtualHost request structure.
- * @class
- */
-class CreateRabbitMQVirtualHostRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Vhost name
-         * @type {string || null}
-         */
-        this.VirtualHost = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Message trace flag. Valid values: `true` (Enabled), `false` (Disabled, which is the default value).
-         * @type {boolean || null}
-         */
-        this.TraceFlag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.TraceFlag = 'TraceFlag' in params ? params.TraceFlag : null;
-
-    }
-}
-
-/**
- * Set of environment roles
- * @class
- */
-class EnvironmentRole extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace).
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Role name.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Permissions, which is a non-empty string array of `produce` and `consume` at the most.
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * Role description.
-         * @type {string || null}
-         */
-        this.RoleDescribe = null;
-
-        /**
-         * Creation time.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Update time.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
-        this.RoleDescribe = 'RoleDescribe' in params ? params.RoleDescribe : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -11292,7 +20373,7 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.VisibilityTimeout = null;
 
         /**
-         * Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+         * Maximum message length. value range: 1024-1048576 Byte (1-1024K). default value: 1048576.
          * @type {number || null}
          */
         this.MaxMsgSize = null;
@@ -11416,7 +20497,7 @@ class ModifyEnvironmentRoleResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -11436,241 +20517,78 @@ class ModifyEnvironmentRoleResponse extends  AbstractModel {
 }
 
 /**
- * DeleteCmqQueue request structure.
+ * DescribeRocketMQGroups request structure.
  * @class
  */
-class DeleteCmqQueueRequest extends  AbstractModel {
+class DescribeRocketMQGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-
-    }
-}
-
-/**
- * DeleteRabbitMQUser response structure.
- * @class
- */
-class DeleteRabbitMQUserResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQVirtualHostList response structure.
- * @class
- */
-class DescribeRabbitMQVirtualHostListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The number of clusters
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Cluster list
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RabbitMQPrivateVirtualHost> || null}
-         */
-        this.VirtualHostList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VirtualHostList) {
-            this.VirtualHostList = new Array();
-            for (let z in params.VirtualHostList) {
-                let obj = new RabbitMQPrivateVirtualHost();
-                obj.deserialize(params.VirtualHostList[z]);
-                this.VirtualHostList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQClusters response structure.
- * @class
- */
-class DescribeRocketMQClustersResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster information.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RocketMQClusterDetail> || null}
-         */
-        this.ClusterList = null;
-
-        /**
-         * The total number of returned results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ClusterList) {
-            this.ClusterList = new Array();
-            for (let z in params.ClusterList) {
-                let obj = new RocketMQClusterDetail();
-                obj.deserialize(params.ClusterList[z]);
-                this.ClusterList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribePulsarProInstanceDetail request structure.
- * @class
- */
-class DescribePulsarProInstanceDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * CreateRabbitMQUser request structure.
- * @class
- */
-class CreateRabbitMQUserRequest extends  AbstractModel {
-    constructor(){
-        super();
-
         /**
-         * Cluster instance ID
+         * Namespace.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.NamespaceId = null;
 
         /**
-         * Username, which is used for login.
+         * Offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The max number of returned results.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Topic name, which can be used to query all subscription groups under the topic
          * @type {string || null}
          */
-        this.User = null;
+        this.FilterTopic = null;
 
         /**
-         * Password, which is used for login.
+         * Consumer group query by consumer group name. Fuzzy query is supported
          * @type {string || null}
          */
-        this.Password = null;
+        this.FilterGroup = null;
 
         /**
-         * Description
+         * Sorts by the specified field. Valid value: subscribeNum: number of subscribed topics.
          * @type {string || null}
          */
-        this.Description = null;
+        this.SortedBy = null;
 
         /**
-         * User tag, which defines a user's permission scope for accessing RabbitMQ Managementu200d.
-Valid values: `management` (Common console user), monitoring` (Console admin user), other values: Non-console user.
+         * Sort in ascending or descending order. Valid values: `asc`, `desc`.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * Subscription group name. After it is specified, the information of only this subscription group will be returned.
+         * @type {string || null}
+         */
+        this.FilterOneGroup = null;
+
+        /**
+         * Group type
          * @type {Array.<string> || null}
          */
-        this.Tags = null;
+        this.Types = null;
 
         /**
-         * The maximum number of connections for the user. If this parameter is left empty, there's no limit for the number.
-         * @type {number || null}
+         * Tag filter
+         * @type {Array.<TagFilter> || null}
          */
-        this.MaxConnections = null;
-
-        /**
-         * The maximum number of channels for the user. If this parameter is left empty, there's no limit for the number.
-         * @type {number || null}
-         */
-        this.MaxChannels = null;
+        this.TagFilters = null;
 
     }
 
@@ -11681,227 +20599,51 @@ Valid values: `management` (Common console user), monitoring` (Console admin use
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.User = 'User' in params ? params.User : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.MaxConnections = 'MaxConnections' in params ? params.MaxConnections : null;
-        this.MaxChannels = 'MaxChannels' in params ? params.MaxChannels : null;
-
-    }
-}
-
-/**
- * CreateRole request structure.
- * @class
- */
-class CreateRoleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FilterTopic = 'FilterTopic' in params ? params.FilterTopic : null;
+        this.FilterGroup = 'FilterGroup' in params ? params.FilterGroup : null;
+        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.FilterOneGroup = 'FilterOneGroup' in params ? params.FilterOneGroup : null;
+        this.Types = 'Types' in params ? params.Types : null;
 
-    }
-}
-
-/**
- * TDMQ for Pulsar network access point information
- * @class
- */
-class PulsarNetworkAccessPointInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * VPC ID. This field is left empty for supporting network and public network access points.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID. This field is left empty for supporting network and public network access points.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Access address
-         * @type {string || null}
-         */
-        this.Endpoint = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Access point type: 
-`0`: Supporting network access point 
-`1`: VPC access point 
-`2`: Public network access point
-         * @type {number || null}
-         */
-        this.RouteType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.RouteType = 'RouteType' in params ? params.RouteType : null;
 
     }
 }
 
 /**
- * ModifyEnvironmentRole request structure.
+ * DescribeRocketMQMsgTrace response structure.
  * @class
  */
-class ModifyEnvironmentRoleRequest extends  AbstractModel {
+class DescribeRocketMQMsgTraceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment (namespace) name.
+         * Trace details list.
+         * @type {Array.<TraceResult> || null}
+         */
+        this.Result = null;
+
+        /**
+         * Topic Name Displayed on Message Trace Page
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.ShowTopicName = null;
 
         /**
-         * Role name.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Permissions, which is a non-empty string array of `produce` and `consume` at the most.
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * Cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-    }
-}
-
-/**
- * DescribeEnvironmentAttributes response structure.
- * @class
- */
-class DescribeEnvironmentAttributesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days).
-         * @type {number || null}
-         */
-        this.MsgTTL = null;
-
-        /**
-         * Consumption rate limit in bytes/second. 0: unlimited.
-         * @type {number || null}
-         */
-        this.RateInByte = null;
-
-        /**
-         * Consumption rate limit in messages/second. 0: unlimited.
-         * @type {number || null}
-         */
-        this.RateInSize = null;
-
-        /**
-         * Retention policy for consumed messages in hours. 0: deleted immediately after consumption.
-         * @type {number || null}
-         */
-        this.RetentionHours = null;
-
-        /**
-         * Retention policy for consumed messages in GB. 0: deleted immediately after consumption.
-         * @type {number || null}
-         */
-        this.RetentionSize = null;
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Number of replicas.
-         * @type {number || null}
-         */
-        this.Replicas = null;
-
-        /**
-         * Remarks.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -11915,97 +20657,31 @@ class DescribeEnvironmentAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.RateInByte = 'RateInByte' in params ? params.RateInByte : null;
-        this.RateInSize = 'RateInSize' in params ? params.RateInSize : null;
-        this.RetentionHours = 'RetentionHours' in params ? params.RetentionHours : null;
-        this.RetentionSize = 'RetentionSize' in params ? params.RetentionSize : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Replicas = 'Replicas' in params ? params.Replicas : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new TraceResult();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.ShowTopicName = 'ShowTopicName' in params ? params.ShowTopicName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Role instance
+ * ClearCmqSubscriptionFilterTags response structure.
  * @class
  */
-class Role extends  AbstractModel {
+class ClearCmqSubscriptionFilterTagsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Role name.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Value of the role token.
-         * @type {string || null}
-         */
-        this.Token = null;
-
-        /**
-         * Remarks.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Creation time.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Update time.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-
-    }
-}
-
-/**
- * DescribeTopics response structure.
- * @class
- */
-class DescribeTopicsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array of topic sets.
-         * @type {Array.<Topic> || null}
-         */
-        this.TopicSets = null;
-
-        /**
-         * The number of topics.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -12019,16 +20695,6 @@ class DescribeTopicsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12071,7 +20737,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.StorageSize = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -12095,118 +20761,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * CreateRocketMQNamespace response structure.
- * @class
- */
-class CreateRocketMQNamespaceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendBatchMessages request structure.
- * @class
- */
-class SendBatchMessagesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Content of the message to be sent
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-        /**
-         * String-Type token, which is optional and will be automatically obtained by the system.
-         * @type {string || null}
-         */
-        this.StringToken = null;
-
-        /**
-         * Producer name, which must be globally unique. If it is not configured, the system will automatically generate one.
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Message sending timeout period in seconds. Default value: 30s
-         * @type {number || null}
-         */
-        this.SendTimeout = null;
-
-        /**
-         * Maximum number of produced messages which can be cached in the memory. Default value: 1000
-         * @type {number || null}
-         */
-        this.MaxPendingMessages = null;
-
-        /**
-         * Maximum number of messages in each batch. Default value: 1000 messages/batch
-         * @type {number || null}
-         */
-        this.BatchingMaxMessages = null;
-
-        /**
-         * Maximum wait time for each batch, after which the batch will be sent no matter whether the specified number or size of messages in the batch is reached. Default value: 10 ms
-         * @type {number || null}
-         */
-        this.BatchingMaxPublishDelay = null;
-
-        /**
-         * Maximum allowed size of messages in each batch. Default value: 128 KB
-         * @type {number || null}
-         */
-        this.BatchingMaxBytes = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.StringToken = 'StringToken' in params ? params.StringToken : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
-        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
-        this.BatchingMaxMessages = 'BatchingMaxMessages' in params ? params.BatchingMaxMessages : null;
-        this.BatchingMaxPublishDelay = 'BatchingMaxPublishDelay' in params ? params.BatchingMaxPublishDelay : null;
-        this.BatchingMaxBytes = 'BatchingMaxBytes' in params ? params.BatchingMaxBytes : null;
-
-    }
-}
-
-/**
  * DeleteCmqTopic request structure.
  * @class
  */
@@ -12215,7 +20769,7 @@ class DeleteCmqTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * Topic name, which must be unique under the same account in a single region. the name is a string of no more than 64 characters, starting with a letter, and the remaining part may include letters, numbers, and hyphens (-).
          * @type {string || null}
          */
         this.TopicName = null;
@@ -12230,57 +20784,6 @@ class DeleteCmqTopicRequest extends  AbstractModel {
             return;
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQNodeList response structure.
- * @class
- */
-class DescribeRabbitMQNodeListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The number of clusters
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Cluster list
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {Array.<RabbitMQPrivateNode> || null}
-         */
-        this.NodeList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.NodeList) {
-            this.NodeList = new Array();
-            for (let z in params.NodeList) {
-                let obj = new RabbitMQPrivateNode();
-                obj.deserialize(params.NodeList[z]);
-                this.NodeList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12314,7 +20817,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClusterSpecInfo = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
         this.RequestId = null;
@@ -12383,288 +20886,45 @@ class UnbindCmqDeadLetterRequest extends  AbstractModel {
 }
 
 /**
- * ModifyCmqQueueAttribute request structure.
+ * DescribeRoles request structure.
  * @class
  */
-class ModifyCmqQueueAttributeRequest extends  AbstractModel {
+class DescribeRolesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
-         * @type {number || null}
-         */
-        this.MaxMsgHeapNum = null;
-
-        /**
-         * Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
-         * @type {number || null}
-         */
-        this.PollingWaitSeconds = null;
-
-        /**
-         * Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
-         * @type {number || null}
-         */
-        this.VisibilityTimeout = null;
-
-        /**
-         * Max message size, which defaults to 1,024 KB for the queue of TDMQ for CMQ and cannot be modified.
-         * @type {number || null}
-         */
-        this.MaxMsgSize = null;
-
-        /**
-         * The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
-         * @type {number || null}
-         */
-        this.MsgRetentionSeconds = null;
-
-        /**
-         * Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
-         * @type {number || null}
-         */
-        this.RewindSeconds = null;
-
-        /**
-         * First query time
-         * @type {number || null}
-         */
-        this.FirstQueryInterval = null;
-
-        /**
-         * Maximum number of queries
-         * @type {number || null}
-         */
-        this.MaxQueryCount = null;
-
-        /**
-         * Dead letter queue name
-         * @type {string || null}
-         */
-        this.DeadLetterQueueName = null;
-
-        /**
-         * Maximum period in seconds before an unconsumed message expires, which is required if `MaxTimeToLivepolicy` is 1. Value range: 300–43200. This value should be smaller than `MsgRetentionSeconds` (maximum message retention period)
-         * @type {number || null}
-         */
-        this.MaxTimeToLive = null;
-
-        /**
-         * Maximum number of receipts
-         * @type {number || null}
-         */
-        this.MaxReceiveCount = null;
-
-        /**
-         * Dead letter queue policy
-         * @type {number || null}
-         */
-        this.Policy = null;
-
-        /**
-         * Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
-         * @type {boolean || null}
-         */
-        this.Trace = null;
-
-        /**
-         * Whether to enable transaction. 1: yes; 0: no
-         * @type {number || null}
-         */
-        this.Transaction = null;
-
-        /**
-         * Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
-         * @type {number || null}
-         */
-        this.RetentionSizeInMB = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.MaxMsgHeapNum = 'MaxMsgHeapNum' in params ? params.MaxMsgHeapNum : null;
-        this.PollingWaitSeconds = 'PollingWaitSeconds' in params ? params.PollingWaitSeconds : null;
-        this.VisibilityTimeout = 'VisibilityTimeout' in params ? params.VisibilityTimeout : null;
-        this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
-        this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
-        this.RewindSeconds = 'RewindSeconds' in params ? params.RewindSeconds : null;
-        this.FirstQueryInterval = 'FirstQueryInterval' in params ? params.FirstQueryInterval : null;
-        this.MaxQueryCount = 'MaxQueryCount' in params ? params.MaxQueryCount : null;
-        this.DeadLetterQueueName = 'DeadLetterQueueName' in params ? params.DeadLetterQueueName : null;
-        this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
-        this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
-        this.Policy = 'Policy' in params ? params.Policy : null;
-        this.Trace = 'Trace' in params ? params.Trace : null;
-        this.Transaction = 'Transaction' in params ? params.Transaction : null;
-        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
-
-    }
-}
-
-/**
- * TDMQ for RabbitMQ node information
- * @class
- */
-class RabbitMQPrivateNode extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Node name
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.NodeName = null;
-
-        /**
-         * Node status
-Note: This field may return null, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.NodeStatus = null;
-
-        /**
-         * CPU utilization
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CPUUsage = null;
-
-        /**
-         * Memory usage in MB
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Disk utilization
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiskUsage = null;
-
-        /**
-         * The number of RabbitMQ Erlang processes
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProcessNumber = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.NodeStatus = 'NodeStatus' in params ? params.NodeStatus : null;
-        this.CPUUsage = 'CPUUsage' in params ? params.CPUUsage : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
-        this.ProcessNumber = 'ProcessNumber' in params ? params.ProcessNumber : null;
-
-    }
-}
-
-/**
- * DeleteCmqSubscribe response structure.
- * @class
- */
-class DeleteCmqSubscribeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteRabbitMQVipInstance request structure.
- * @class
- */
-class DeleteRabbitMQVipInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * DescribePublisherSummary request structure.
- * @class
- */
-class DescribePublisherSummaryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID.
+         * Cluster ID (required)
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Namespace name.
+         * Fuzzy query by role name
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.RoleName = null;
 
         /**
-         * Topic name.
-         * @type {string || null}
+         * Offset. If this parameter is left empty, 0 will be used by default.
+         * @type {number || null}
          */
-        this.Topic = null;
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * * RoleName
+Filter by role name for exact query.
+Type: String
+Required: no
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -12676,8 +20936,18 @@ class DescribePublisherSummaryRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -12740,103 +21010,54 @@ class DeleteSubscriptionsRequest extends  AbstractModel {
 }
 
 /**
- * VPC configuration information
+ * ResetRocketMQConsumerOffSet request structure.
  * @class
  */
-class VpcConfig extends  AbstractModel {
+class ResetRocketMQConsumerOffSetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-
-    }
-}
-
-/**
- * TDMQ for Pulsar pro cluster information
- * @class
- */
-class PulsarProClusterInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Cluster name
+         * Namespace name.
          * @type {string || null}
          */
-        this.ClusterName = null;
+        this.NamespaceId = null;
 
         /**
-         * Description
+         * Consumer group name.
          * @type {string || null}
          */
-        this.Remark = null;
+        this.GroupId = null;
 
         /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Cluster status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated).
+         * Reset method. 0: Start from the latest offset; 1: Start from specified time point.
          * @type {number || null}
          */
-        this.Status = null;
+        this.Type = null;
 
         /**
-         * Cluster version
+         * Topic name.
          * @type {string || null}
          */
-        this.Version = null;
+        this.Topic = null;
 
         /**
-         * Node distribution
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<InstanceNodeDistribution> || null}
-         */
-        this.NodeDistribution = null;
-
-        /**
-         * Max storage capacity in MB
+         * The specified timestamp that has been reset, in milliseconds. This parameter only takes effect when the value of `Type` is `1`.
          * @type {number || null}
          */
-        this.MaxStorage = null;
+        this.ResetTimestamp = null;
 
         /**
-         * Whether the route can be modified
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
+         * Whether the reset flag is retry topic.
          * @type {boolean || null}
          */
-        this.CanEditRoute = null;
+        this.RetryFlag = null;
 
     }
 
@@ -12848,254 +21069,12 @@ Note: u200dThis field may return null, indicating that no valid values can be ob
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Version = 'Version' in params ? params.Version : null;
-
-        if (params.NodeDistribution) {
-            this.NodeDistribution = new Array();
-            for (let z in params.NodeDistribution) {
-                let obj = new InstanceNodeDistribution();
-                obj.deserialize(params.NodeDistribution[z]);
-                this.NodeDistribution.push(obj);
-            }
-        }
-        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
-        this.CanEditRoute = 'CanEditRoute' in params ? params.CanEditRoute : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQGroup response structure.
- * @class
- */
-class ModifyRocketMQGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQVipInstances response structure.
- * @class
- */
-class DescribeRocketMQVipInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The total number of unpaginated items
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Instance information list
-         * @type {Array.<RocketMQVipInstance> || null}
-         */
-        this.Instances = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new RocketMQVipInstance();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQVipInstances request structure.
- * @class
- */
-class DescribeRabbitMQVipInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query condition filter
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * The maximum number of queried items, which defaults to 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Start offset for query
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * DescribeClusterDetail response structure.
- * @class
- */
-class DescribeClusterDetailResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster details
-         * @type {Cluster || null}
-         */
-        this.ClusterSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ClusterSet) {
-            let obj = new Cluster();
-            obj.deserialize(params.ClusterSet)
-            this.ClusterSet = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendMessages request structure.
- * @class
- */
-class SendMessagesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Content of the message to be sent
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-        /**
-         * Token used for authentication, which is optional and will be automatically obtained by the system.
-         * @type {string || null}
-         */
-        this.StringToken = null;
-
-        /**
-         * Producer name, which is randomly generated and must be globally unique. If you set the producer name manually, the producer may fail to be created, causing message sending failure.
-This parameter is used only when a specific producer is allowed to produce messages. It won’t be used in most cases.
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Message sending timeout period, which is 30s by default.
-         * @type {number || null}
-         */
-        this.SendTimeout = null;
-
-        /**
-         * Maximum number of produced messages which can be cached in the memory. Default value: 1000
-         * @type {number || null}
-         */
-        this.MaxPendingMessages = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.StringToken = 'StringToken' in params ? params.StringToken : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
-        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
+        this.ResetTimestamp = 'ResetTimestamp' in params ? params.ResetTimestamp : null;
+        this.RetryFlag = 'RetryFlag' in params ? params.RetryFlag : null;
 
     }
 }
@@ -13149,390 +21128,353 @@ class CreateEnvironmentRoleRequest extends  AbstractModel {
     }
 }
 
-/**
- * DeleteRabbitMQVipInstance response structure.
- * @class
- */
-class DeleteRabbitMQVipInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Order ID
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TranId = null;
-
-        /**
-         * Instance ID
-Note: u200dThis field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TranId = 'TranId' in params ? params.TranId : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyRocketMQTopic response structure.
- * @class
- */
-class ModifyRocketMQTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRabbitMQVirtualHost request structure.
- * @class
- */
-class DescribeRabbitMQVirtualHostRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Vhost name. If this parameter is not specified, all will be queried by default.
-         * @type {string || null}
-         */
-        this.VirtualHost = null;
-
-        /**
-         * Pagination offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Pagination limit
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy query by vhost name
-         * @type {Filter || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.SortElement = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.SortOrder = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.VirtualHost = 'VirtualHost' in params ? params.VirtualHost : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            let obj = new Filter();
-            obj.deserialize(params.Filters)
-            this.Filters = obj;
-        }
-        this.SortElement = 'SortElement' in params ? params.SortElement : null;
-        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
-
-    }
-}
-
 module.exports = {
-    DescribeRolesResponse: DescribeRolesResponse,
-    DescribeBindClustersResponse: DescribeBindClustersResponse,
-    DescribeRabbitMQVirtualHostResponse: DescribeRabbitMQVirtualHostResponse,
-    CmqDeadLetterPolicy: CmqDeadLetterPolicy,
-    DeleteRabbitMQUserRequest: DeleteRabbitMQUserRequest,
     RocketMQNamespace: RocketMQNamespace,
-    DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
-    DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
-    CreateRocketMQGroupRequest: CreateRocketMQGroupRequest,
-    ModifyRabbitMQVirtualHostRequest: ModifyRabbitMQVirtualHostRequest,
-    ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
-    DeleteClusterResponse: DeleteClusterResponse,
-    SendBatchMessagesResponse: SendBatchMessagesResponse,
-    ModifyCmqSubscriptionAttributeResponse: ModifyCmqSubscriptionAttributeResponse,
-    CreateCmqTopicRequest: CreateCmqTopicRequest,
-    PulsarProClusterSpecInfo: PulsarProClusterSpecInfo,
-    RocketMQTopicDistribution: RocketMQTopicDistribution,
-    DescribeRocketMQNamespacesResponse: DescribeRocketMQNamespacesResponse,
+    CreateRabbitMQBindingResponse: CreateRabbitMQBindingResponse,
     ModifyRocketMQInstanceSpecRequest: ModifyRocketMQInstanceSpecRequest,
-    BindCluster: BindCluster,
-    Sort: Sort,
-    ModifyClusterResponse: ModifyClusterResponse,
-    SendRocketMQMessageRequest: SendRocketMQMessageRequest,
-    RabbitMQPrivateVirtualHost: RabbitMQPrivateVirtualHost,
+    DeleteClusterResponse: DeleteClusterResponse,
+    CreateCmqTopicRequest: CreateCmqTopicRequest,
     RocketMQVipInstance: RocketMQVipInstance,
-    RabbitMQVipInstance: RabbitMQVipInstance,
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
-    CreateRabbitMQVipInstanceRequest: CreateRabbitMQVipInstanceRequest,
-    CreateRabbitMQVirtualHostResponse: CreateRabbitMQVirtualHostResponse,
     DescribeRabbitMQNodeListRequest: DescribeRabbitMQNodeListRequest,
-    PublishCmqMsgRequest: PublishCmqMsgRequest,
-    RocketMQInstanceConfig: RocketMQInstanceConfig,
-    CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
-    RewindCmqQueueResponse: RewindCmqQueueResponse,
-    DeleteClusterRequest: DeleteClusterRequest,
-    CmqSubscription: CmqSubscription,
+    DeleteCmqQueueResponse: DeleteCmqQueueResponse,
+    DescribeRocketMQEnvironmentRolesRequest: DescribeRocketMQEnvironmentRolesRequest,
     DeleteRocketMQGroupRequest: DeleteRocketMQGroupRequest,
     RocketMQGroup: RocketMQGroup,
     ModifyRabbitMQUserRequest: ModifyRabbitMQUserRequest,
-    RocketMQClusterConfig: RocketMQClusterConfig,
-    DeleteCmqTopicResponse: DeleteCmqTopicResponse,
     CreateSubscriptionRequest: CreateSubscriptionRequest,
-    CreateRocketMQNamespaceRequest: CreateRocketMQNamespaceRequest,
-    RabbitMQVirtualHostInfo: RabbitMQVirtualHostInfo,
-    InstanceNodeDistribution: InstanceNodeDistribution,
-    DescribeCmqTopicDetailResponse: DescribeCmqTopicDetailResponse,
-    ModifyRabbitMQVirtualHostResponse: ModifyRabbitMQVirtualHostResponse,
-    CmqQueue: CmqQueue,
-    CreateEnvironmentResponse: CreateEnvironmentResponse,
+    RabbitMQVipInstance: RabbitMQVipInstance,
+    RabbitMQClusterInfo: RabbitMQClusterInfo,
     RabbitMQVirtualHostStatistics: RabbitMQVirtualHostStatistics,
-    CreateSubscriptionResponse: CreateSubscriptionResponse,
-    SendMsgResponse: SendMsgResponse,
-    ModifyCmqTopicAttributeResponse: ModifyCmqTopicAttributeResponse,
-    DescribeCmqSubscriptionDetailRequest: DescribeCmqSubscriptionDetailRequest,
-    Topic: Topic,
-    DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
-    DescribeRocketMQNamespacesRequest: DescribeRocketMQNamespacesRequest,
-    DescribeRocketMQTopicsRequest: DescribeRocketMQTopicsRequest,
-    ModifyRocketMQClusterResponse: ModifyRocketMQClusterResponse,
-    DescribeCmqQueueDetailResponse: DescribeCmqQueueDetailResponse,
-    CreateEnvironmentRequest: CreateEnvironmentRequest,
-    DeleteTopicsResponse: DeleteTopicsResponse,
-    ModifyEnvironmentAttributesResponse: ModifyEnvironmentAttributesResponse,
-    DescribeClustersRequest: DescribeClustersRequest,
-    SubscriptionTopic: SubscriptionTopic,
-    RocketMQTopic: RocketMQTopic,
-    DescribeRocketMQClusterResponse: DescribeRocketMQClusterResponse,
-    DescribeCmqSubscriptionDetailResponse: DescribeCmqSubscriptionDetailResponse,
-    VpcBindRecord: VpcBindRecord,
-    RewindCmqQueueRequest: RewindCmqQueueRequest,
-    DescribeRabbitMQUserResponse: DescribeRabbitMQUserResponse,
-    DescribeRocketMQMsgResponse: DescribeRocketMQMsgResponse,
-    ModifyClusterRequest: ModifyClusterRequest,
-    DescribeEnvironmentAttributesRequest: DescribeEnvironmentAttributesRequest,
-    ModifyRocketMQClusterRequest: ModifyRocketMQClusterRequest,
-    DeleteRabbitMQVirtualHostResponse: DeleteRabbitMQVirtualHostResponse,
-    AcknowledgeMessageRequest: AcknowledgeMessageRequest,
-    ResetRocketMQConsumerOffSetResponse: ResetRocketMQConsumerOffSetResponse,
-    DescribeRocketMQVipInstanceDetailResponse: DescribeRocketMQVipInstanceDetailResponse,
-    PublishCmqMsgResponse: PublishCmqMsgResponse,
-    DescribePublishersRequest: DescribePublishersRequest,
-    CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
-    CreateRabbitMQUserResponse: CreateRabbitMQUserResponse,
-    AcknowledgeMessageResponse: AcknowledgeMessageResponse,
-    DeleteEnvironmentRolesResponse: DeleteEnvironmentRolesResponse,
-    DescribeClusterDetailRequest: DescribeClusterDetailRequest,
-    ModifyRoleResponse: ModifyRoleResponse,
+    DescribeRabbitMQQueuesResponse: DescribeRabbitMQQueuesResponse,
     Tag: Tag,
-    DeleteCmqQueueResponse: DeleteCmqQueueResponse,
-    DescribeRocketMQClusterRequest: DescribeRocketMQClusterRequest,
-    DeleteRocketMQTopicResponse: DeleteRocketMQTopicResponse,
-    SendRocketMQMessageResponse: SendRocketMQMessageResponse,
-    ModifyCmqTopicAttributeRequest: ModifyCmqTopicAttributeRequest,
-    DescribeRabbitMQVipInstancesResponse: DescribeRabbitMQVipInstancesResponse,
-    DeleteRolesRequest: DeleteRolesRequest,
-    Subscription: Subscription,
+    DescribeRocketMQNamespacesRequest: DescribeRocketMQNamespacesRequest,
+    ModifyRocketMQClusterResponse: ModifyRocketMQClusterResponse,
+    DescribeRocketMQTopicStatsResponse: DescribeRocketMQTopicStatsResponse,
+    CreateEnvironmentRequest: CreateEnvironmentRequest,
     CreateCmqSubscribeResponse: CreateCmqSubscribeResponse,
-    Publisher: Publisher,
+    DescribeClustersRequest: DescribeClustersRequest,
+    ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
+    RocketMQDataPoint: RocketMQDataPoint,
     DescribeSubscriptionsResponse: DescribeSubscriptionsResponse,
-    RocketMQMessageTrack: RocketMQMessageTrack,
+    ModifyRocketMQClusterRequest: ModifyRocketMQClusterRequest,
+    SendBatchMessagesResponse: SendBatchMessagesResponse,
+    DescribeRocketMQVipInstanceDetailResponse: DescribeRocketMQVipInstanceDetailResponse,
+    DescribeRabbitMQVirtualHostResponse: DescribeRabbitMQVirtualHostResponse,
+    RabbitMQPermission: RabbitMQPermission,
+    CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
+    DescribeClusterDetailRequest: DescribeClusterDetailRequest,
+    DeleteRocketMQRolesResponse: DeleteRocketMQRolesResponse,
+    DeleteRocketMQTopicResponse: DeleteRocketMQTopicResponse,
+    Publisher: Publisher,
     ModifyRoleRequest: ModifyRoleRequest,
     DescribeRocketMQMsgRequest: DescribeRocketMQMsgRequest,
     SendMessagesResponse: SendMessagesResponse,
-    ReceiveMessageRequest: ReceiveMessageRequest,
     CreateTopicRequest: CreateTopicRequest,
-    DescribeTopicsRequest: DescribeTopicsRequest,
-    DeleteEnvironmentsResponse: DeleteEnvironmentsResponse,
-    DescribeEnvironmentRolesResponse: DescribeEnvironmentRolesResponse,
-    ClearCmqQueueRequest: ClearCmqQueueRequest,
-    ModifyRocketMQGroupRequest: ModifyRocketMQGroupRequest,
-    FilterSubscription: FilterSubscription,
     DescribeCmqTopicsResponse: DescribeCmqTopicsResponse,
+    DescribeRocketMQMsgTraceRequest: DescribeRocketMQMsgTraceRequest,
+    ModifyRocketMQGroupRequest: ModifyRocketMQGroupRequest,
     DescribeCmqTopicDetailRequest: DescribeCmqTopicDetailRequest,
-    CmqTopic: CmqTopic,
     UnbindCmqDeadLetterResponse: UnbindCmqDeadLetterResponse,
+    ModifyRocketMQEnvironmentRoleRequest: ModifyRocketMQEnvironmentRoleRequest,
     ModifyRocketMQNamespaceResponse: ModifyRocketMQNamespaceResponse,
-    SendCmqMsgRequest: SendCmqMsgRequest,
+    DimensionInstance: DimensionInstance,
     DeleteEnvironmentsRequest: DeleteEnvironmentsRequest,
     DescribeRocketMQClustersRequest: DescribeRocketMQClustersRequest,
-    DescribeBindVpcsRequest: DescribeBindVpcsRequest,
+    SendRocketMQMessageRequest: SendRocketMQMessageRequest,
+    CreateClusterResponse: CreateClusterResponse,
+    DeleteRocketMQNamespaceRequest: DeleteRocketMQNamespaceRequest,
+    DeleteRabbitMQPermissionRequest: DeleteRabbitMQPermissionRequest,
+    CreateTopicResponse: CreateTopicResponse,
+    ReceiveMessageResponse: ReceiveMessageResponse,
+    CreateRocketMQVipInstanceRequest: CreateRocketMQVipInstanceRequest,
+    PulsarNetworkAccessPointInfo: PulsarNetworkAccessPointInfo,
+    DescribeRabbitMQVipInstanceRequest: DescribeRabbitMQVipInstanceRequest,
+    DescribeRabbitMQExchangesRequest: DescribeRabbitMQExchangesRequest,
+    DeleteTopicsRequest: DeleteTopicsRequest,
+    DeleteRocketMQEnvironmentRolesResponse: DeleteRocketMQEnvironmentRolesResponse,
+    DeleteCmqSubscribeRequest: DeleteCmqSubscribeRequest,
+    RocketMQClusterConfig: RocketMQClusterConfig,
+    SendMsgResponse: SendMsgResponse,
+    DescribeMsgRequest: DescribeMsgRequest,
+    DeleteRabbitMQPermissionResponse: DeleteRabbitMQPermissionResponse,
+    DeleteRabbitMQBindingResponse: DeleteRabbitMQBindingResponse,
+    DescribePulsarProInstancesRequest: DescribePulsarProInstancesRequest,
+    VpcEndpointInfo: VpcEndpointInfo,
+    ClearCmqQueueResponse: ClearCmqQueueResponse,
+    DescribeTopicMsgsRequest: DescribeTopicMsgsRequest,
+    DeleteCmqQueueRequest: DeleteCmqQueueRequest,
+    DeleteRabbitMQUserResponse: DeleteRabbitMQUserResponse,
+    SetRocketMQPublicAccessPointResponse: SetRocketMQPublicAccessPointResponse,
+    DescribeRocketMQTopicMsgsRequest: DescribeRocketMQTopicMsgsRequest,
+    ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
+    DescribeRocketMQRolesResponse: DescribeRocketMQRolesResponse,
+    SubscriptionTopic: SubscriptionTopic,
+    ModifyRocketMQRoleRequest: ModifyRocketMQRoleRequest,
+    DescribeMqMsgTraceRequest: DescribeMqMsgTraceRequest,
+    SendBatchMessagesRequest: SendBatchMessagesRequest,
+    DescribeRabbitMQNodeListResponse: DescribeRabbitMQNodeListResponse,
+    ProducerInfo: ProducerInfo,
+    ProducerLog: ProducerLog,
+    DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
+    PulsarProClusterInfo: PulsarProClusterInfo,
+    ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
+    EnvironmentRole: EnvironmentRole,
+    DeleteRabbitMQVipInstanceResponse: DeleteRabbitMQVipInstanceResponse,
+    DetailedRolePerm: DetailedRolePerm,
+    RabbitMQClusterAccessInfo: RabbitMQClusterAccessInfo,
+    DescribeBindClustersResponse: DescribeBindClustersResponse,
+    ExportRocketMQMessageDetailResponse: ExportRocketMQMessageDetailResponse,
+    ModifyRabbitMQVirtualHostRequest: ModifyRabbitMQVirtualHostRequest,
+    DescribeRocketMQNamespacesResponse: DescribeRocketMQNamespacesResponse,
+    CreateRabbitMQVipInstanceRequest: CreateRabbitMQVipInstanceRequest,
+    DescribeRabbitMQPermissionResponse: DescribeRabbitMQPermissionResponse,
+    DeleteClusterRequest: DeleteClusterRequest,
+    CmqSubscription: CmqSubscription,
+    VpcInfo: VpcInfo,
+    DeleteCmqTopicResponse: DeleteCmqTopicResponse,
+    CreateRocketMQNamespaceRequest: CreateRocketMQNamespaceRequest,
+    RocketMQSubscription: RocketMQSubscription,
+    ExchangeQuota: ExchangeQuota,
+    ModifyRabbitMQVirtualHostResponse: ModifyRabbitMQVirtualHostResponse,
+    RabbitMQQueueListConsumerDetailInfo: RabbitMQQueueListConsumerDetailInfo,
+    CreateRocketMQRoleResponse: CreateRocketMQRoleResponse,
+    CreateSubscriptionResponse: CreateSubscriptionResponse,
+    DescribeCmqSubscriptionDetailRequest: DescribeCmqSubscriptionDetailRequest,
+    DescribeRocketMQClusterResponse: DescribeRocketMQClusterResponse,
+    ServerLog: ServerLog,
+    DescribeMsgTraceResponse: DescribeMsgTraceResponse,
+    ModifyClusterRequest: ModifyClusterRequest,
+    CreateRocketMQVipInstanceResponse: CreateRocketMQVipInstanceResponse,
+    AcknowledgeMessageRequest: AcknowledgeMessageRequest,
+    RabbitMQQueueListInfo: RabbitMQQueueListInfo,
+    DescribeMsgResponse: DescribeMsgResponse,
+    CreateProClusterResponse: CreateProClusterResponse,
+    ModifyRocketMQInstanceRequest: ModifyRocketMQInstanceRequest,
+    DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
+    CreateProClusterRequest: CreateProClusterRequest,
+    DescribeRabbitMQVipInstancesResponse: DescribeRabbitMQVipInstancesResponse,
+    DeleteRolesRequest: DeleteRolesRequest,
+    ClearCmqQueueRequest: ClearCmqQueueRequest,
+    CreateRocketMQEnvironmentRoleRequest: CreateRocketMQEnvironmentRoleRequest,
+    SetRocketMQPublicAccessPointRequest: SetRocketMQPublicAccessPointRequest,
+    DeleteEnvironmentsResponse: DeleteEnvironmentsResponse,
+    DescribeRabbitMQBindingsResponse: DescribeRabbitMQBindingsResponse,
+    FilterSubscription: FilterSubscription,
+    DescribeRocketMQTopicResponse: DescribeRocketMQTopicResponse,
+    TopicStats: TopicStats,
     DescribeClustersResponse: DescribeClustersResponse,
     ClearCmqSubscriptionFilterTagsRequest: ClearCmqSubscriptionFilterTagsRequest,
-    TopicRecord: TopicRecord,
-    SendCmqMsgResponse: SendCmqMsgResponse,
     CreateRocketMQGroupResponse: CreateRocketMQGroupResponse,
     ModifyRocketMQNamespaceRequest: ModifyRocketMQNamespaceRequest,
-    DescribeEnvironmentRolesRequest: DescribeEnvironmentRolesRequest,
-    DeleteRolesResponse: DeleteRolesResponse,
+    ModifyRocketMQTopicResponse: ModifyRocketMQTopicResponse,
+    DescribeRocketMQProducersRequest: DescribeRocketMQProducersRequest,
+    DeleteRocketMQGroupResponse: DeleteRocketMQGroupResponse,
+    PulsarProInstance: PulsarProInstance,
+    DescribeRocketMQClusterRequest: DescribeRocketMQClusterRequest,
     EnvironmentRoleSet: EnvironmentRoleSet,
-    RocketMQClusterRecentStats: RocketMQClusterRecentStats,
+    DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
+    ModifyRocketMQInstanceSpecResponse: ModifyRocketMQInstanceSpecResponse,
+    RocketMQInstanceConfig: RocketMQInstanceConfig,
+    DescribeCmqTopicsRequest: DescribeCmqTopicsRequest,
+    ConsumerLog: ConsumerLog,
+    DescribeRocketMQTopUsagesResponse: DescribeRocketMQTopUsagesResponse,
+    CreateEnvironmentRoleResponse: CreateEnvironmentRoleResponse,
+    PrometheusEndpointInfo: PrometheusEndpointInfo,
+    Cluster: Cluster,
+    RocketMQMsgLog: RocketMQMsgLog,
+    CreateRocketMQClusterResponse: CreateRocketMQClusterResponse,
+    DeleteRocketMQNamespaceResponse: DeleteRocketMQNamespaceResponse,
+    CreateRocketMQTopicRequest: CreateRocketMQTopicRequest,
+    DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
+    DeleteRocketMQClusterRequest: DeleteRocketMQClusterRequest,
+    DescribePulsarProInstancesResponse: DescribePulsarProInstancesResponse,
+    DescribeMsgTraceRequest: DescribeMsgTraceRequest,
+    DeleteRabbitMQBindingRequest: DeleteRabbitMQBindingRequest,
+    DescribeBindClustersRequest: DescribeBindClustersRequest,
+    CreateRabbitMQVirtualHostRequest: CreateRabbitMQVirtualHostRequest,
+    DescribeRabbitMQQueueDetailRequest: DescribeRabbitMQQueueDetailRequest,
+    RocketMQTopicDistribution: RocketMQTopicDistribution,
+    CreateRoleRequest: CreateRoleRequest,
+    DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
+    DescribeRocketMQRolesRequest: DescribeRocketMQRolesRequest,
+    CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
+    ModifyRocketMQEnvironmentRoleResponse: ModifyRocketMQEnvironmentRoleResponse,
+    CreateCmqQueueResponse: CreateCmqQueueResponse,
+    DeleteRabbitMQVipInstanceRequest: DeleteRabbitMQVipInstanceRequest,
+    Filter: Filter,
+    DescribeRocketMQPublicAccessMonitorDataRequest: DescribeRocketMQPublicAccessMonitorDataRequest,
+    DescribeRolesResponse: DescribeRolesResponse,
+    DescribeRabbitMQPermissionRequest: DescribeRabbitMQPermissionRequest,
+    DeleteRabbitMQUserRequest: DeleteRabbitMQUserRequest,
+    DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
+    InstanceNodeDistribution: InstanceNodeDistribution,
+    CreateRocketMQGroupRequest: CreateRocketMQGroupRequest,
+    Role: Role,
+    DescribeTopicMsgsResponse: DescribeTopicMsgsResponse,
+    ModifyCmqSubscriptionAttributeResponse: ModifyCmqSubscriptionAttributeResponse,
+    SendCmqMsgRequest: SendCmqMsgRequest,
+    RabbitMQUserQuota: RabbitMQUserQuota,
+    CreateRabbitMQVirtualHostResponse: CreateRabbitMQVirtualHostResponse,
+    RewindCmqQueueResponse: RewindCmqQueueResponse,
+    PublicAccessRule: PublicAccessRule,
+    RabbitMQClusterWhiteListInfo: RabbitMQClusterWhiteListInfo,
+    DeleteProClusterRequest: DeleteProClusterRequest,
+    DescribeCmqTopicDetailResponse: DescribeCmqTopicDetailResponse,
+    DescribeRocketMQTopicsRequest: DescribeRocketMQTopicsRequest,
+    ClientSubscriptionInfo: ClientSubscriptionInfo,
+    DescribeCmqSubscriptionDetailResponse: DescribeCmqSubscriptionDetailResponse,
+    VpcBindRecord: VpcBindRecord,
+    DescribeRocketMQMsgResponse: DescribeRocketMQMsgResponse,
+    DescribeEnvironmentAttributesRequest: DescribeEnvironmentAttributesRequest,
+    ModifyPublicNetworkSecurityPolicyResponse: ModifyPublicNetworkSecurityPolicyResponse,
+    DeleteRabbitMQVirtualHostResponse: DeleteRabbitMQVirtualHostResponse,
+    DescribePublishersRequest: DescribePublishersRequest,
+    RabbitMQBindingListInfo: RabbitMQBindingListInfo,
+    ModifyPublicNetworkSecurityPolicyRequest: ModifyPublicNetworkSecurityPolicyRequest,
+    ModifyRoleResponse: ModifyRoleResponse,
+    DescribeRocketMQTopicStatsRequest: DescribeRocketMQTopicStatsRequest,
+    SendRocketMQMessageResponse: SendRocketMQMessageResponse,
+    PulsarProClusterSpecInfo: PulsarProClusterSpecInfo,
+    Subscription: Subscription,
+    DimensionOpt: DimensionOpt,
+    RocketMQMessageTrack: RocketMQMessageTrack,
+    ReceiveMessageRequest: ReceiveMessageRequest,
+    DescribeTopicsRequest: DescribeTopicsRequest,
+    DescribeEnvironmentRolesResponse: DescribeEnvironmentRolesResponse,
+    DescribeRocketMQPublicAccessPointResponse: DescribeRocketMQPublicAccessPointResponse,
+    DescribeRabbitMQExchangesResponse: DescribeRabbitMQExchangesResponse,
+    DescribeRabbitMQQueueDetailResponse: DescribeRabbitMQQueueDetailResponse,
+    DescribeRocketMQTopicMsgsResponse: DescribeRocketMQTopicMsgsResponse,
+    SecurityPolicy: SecurityPolicy,
+    DescribeRocketMQTopUsagesRequest: DescribeRocketMQTopUsagesRequest,
+    DeleteRolesResponse: DeleteRolesResponse,
+    RetryRocketMQDlqMessageResponse: RetryRocketMQDlqMessageResponse,
+    DescribeRabbitMQBindingsRequest: DescribeRabbitMQBindingsRequest,
     ModifyRocketMQTopicRequest: ModifyRocketMQTopicRequest,
     RocketMQClusterInfo: RocketMQClusterInfo,
+    ModifyRocketMQInstanceResponse: ModifyRocketMQInstanceResponse,
+    PartitionsTopic: PartitionsTopic,
+    ResetMsgSubOffsetByTimestampResponse: ResetMsgSubOffsetByTimestampResponse,
+    SendMessagesRequest: SendMessagesRequest,
+    CreateRocketMQRoleRequest: CreateRocketMQRoleRequest,
+    DescribeRocketMQProducersResponse: DescribeRocketMQProducersResponse,
+    DescribeRabbitMQVipInstanceResponse: DescribeRabbitMQVipInstanceResponse,
+    ModifyCmqSubscriptionAttributeRequest: ModifyCmqSubscriptionAttributeRequest,
+    ModifyTopicResponse: ModifyTopicResponse,
+    VirtualHostQuota: VirtualHostQuota,
+    CertificateInfo: CertificateInfo,
+    DescribeRocketMQVipInstanceDetailRequest: DescribeRocketMQVipInstanceDetailRequest,
+    DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
+    CreateCmqTopicResponse: CreateCmqTopicResponse,
+    CmqDeadLetterSource: CmqDeadLetterSource,
+    DescribeRocketMQTopicRequest: DescribeRocketMQTopicRequest,
+    ResetMsgSubOffsetByTimestampRequest: ResetMsgSubOffsetByTimestampRequest,
+    DescribeBindVpcsResponse: DescribeBindVpcsResponse,
+    ModifyRabbitMQPermissionRequest: ModifyRabbitMQPermissionRequest,
+    ConsumersSchedule: ConsumersSchedule,
+    DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
+    TraceResult: TraceResult,
+    DescribeRabbitMQQueuesRequest: DescribeRabbitMQQueuesRequest,
+    SendMsgRequest: SendMsgRequest,
+    DescribeRocketMQEnvironmentRolesResponse: DescribeRocketMQEnvironmentRolesResponse,
+    CreateRoleResponse: CreateRoleResponse,
+    ModifyRabbitMQUserResponse: ModifyRabbitMQUserResponse,
+    Sort: Sort,
+    ConsumerLogs: ConsumerLogs,
+    DescribeMqMsgTraceResponse: DescribeMqMsgTraceResponse,
+    CreateRabbitMQUserRequest: CreateRabbitMQUserRequest,
+    SendCmqMsgResponse: SendCmqMsgResponse,
+    TagFilter: TagFilter,
+    ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
+    RabbitMQClusterSpecInfo: RabbitMQClusterSpecInfo,
+    DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
+    DeleteRocketMQEnvironmentRolesRequest: DeleteRocketMQEnvironmentRolesRequest,
+    VpcConfig: VpcConfig,
+    DescribeRabbitMQVipInstancesRequest: DescribeRabbitMQVipInstancesRequest,
+    DescribeClusterDetailResponse: DescribeClusterDetailResponse,
+    DescribeRabbitMQVirtualHostRequest: DescribeRabbitMQVirtualHostRequest,
+    DeleteRocketMQRolesRequest: DeleteRocketMQRolesRequest,
+    CmqDeadLetterPolicy: CmqDeadLetterPolicy,
+    QueueQuota: QueueQuota,
+    ExportRocketMQMessageDetailRequest: ExportRocketMQMessageDetailRequest,
+    CreateRabbitMQUserResponse: CreateRabbitMQUserResponse,
+    ModifyRocketMQRoleResponse: ModifyRocketMQRoleResponse,
+    CreateRabbitMQBindingRequest: CreateRabbitMQBindingRequest,
+    DescribePulsarProInstanceDetailRequest: DescribePulsarProInstanceDetailRequest,
+    BindCluster: BindCluster,
+    ModifyClusterResponse: ModifyClusterResponse,
+    RocketMQClusterRecentStats: RocketMQClusterRecentStats,
+    DescribeRocketMQPublicAccessPointRequest: DescribeRocketMQPublicAccessPointRequest,
+    RabbitMQPrivateNode: RabbitMQPrivateNode,
+    RetryRocketMQDlqMessageRequest: RetryRocketMQDlqMessageRequest,
+    DescribeRocketMQTopicsByGroupRequest: DescribeRocketMQTopicsByGroupRequest,
+    DescribeRocketMQPublicAccessMonitorDataResponse: DescribeRocketMQPublicAccessMonitorDataResponse,
+    RabbitMQVirtualHostInfo: RabbitMQVirtualHostInfo,
+    CmqQueue: CmqQueue,
+    CreateEnvironmentResponse: CreateEnvironmentResponse,
+    Topic: Topic,
+    ModifyRabbitMQPermissionResponse: ModifyRabbitMQPermissionResponse,
+    DescribeCmqQueueDetailResponse: DescribeCmqQueueDetailResponse,
+    ModifyCmqTopicAttributeResponse: ModifyCmqTopicAttributeResponse,
+    RocketMQTopic: RocketMQTopic,
+    DeleteRocketMQVipInstanceResponse: DeleteRocketMQVipInstanceResponse,
+    DescribeRabbitMQUserResponse: DescribeRabbitMQUserResponse,
+    DescribeTopicsResponse: DescribeTopicsResponse,
+    PublishCmqMsgResponse: PublishCmqMsgResponse,
+    AcknowledgeMessageResponse: AcknowledgeMessageResponse,
+    DeleteEnvironmentRolesResponse: DeleteEnvironmentRolesResponse,
+    PublishCmqMsgRequest: PublishCmqMsgRequest,
+    ModifyCmqTopicAttributeRequest: ModifyCmqTopicAttributeRequest,
+    DeleteTopicsResponse: DeleteTopicsResponse,
+    RewindCmqQueueRequest: RewindCmqQueueRequest,
+    DeleteRocketMQVipInstanceRequest: DeleteRocketMQVipInstanceRequest,
+    MsgLog: MsgLog,
+    CmqTopic: CmqTopic,
+    RabbitMQExchangeListInfo: RabbitMQExchangeListInfo,
+    DescribeBindVpcsRequest: DescribeBindVpcsRequest,
+    TopicRecord: TopicRecord,
+    DescribeEnvironmentRolesRequest: DescribeEnvironmentRolesRequest,
     DescribeRabbitMQUserRequest: DescribeRabbitMQUserRequest,
     DescribeRocketMQTopicsResponse: DescribeRocketMQTopicsResponse,
     Environment: Environment,
     RocketMQClusterDetail: RocketMQClusterDetail,
-    DeleteRocketMQGroupResponse: DeleteRocketMQGroupResponse,
-    CreateCmqQueueResponse: CreateCmqQueueResponse,
-    PulsarProInstance: PulsarProInstance,
-    PartitionsTopic: PartitionsTopic,
     DescribeRocketMQGroupsResponse: DescribeRocketMQGroupsResponse,
-    ResetMsgSubOffsetByTimestampResponse: ResetMsgSubOffsetByTimestampResponse,
-    CreateClusterResponse: CreateClusterResponse,
-    DescribeCmqDeadLetterSourceQueuesRequest: DescribeCmqDeadLetterSourceQueuesRequest,
-    DeleteRocketMQNamespaceRequest: DeleteRocketMQNamespaceRequest,
-    DescribeRolesRequest: DescribeRolesRequest,
     CreateClusterRequest: CreateClusterRequest,
-    DescribeRabbitMQVirtualHostListRequest: DescribeRabbitMQVirtualHostListRequest,
+    DeleteProClusterResponse: DeleteProClusterResponse,
     ModifyCmqQueueAttributeResponse: ModifyCmqQueueAttributeResponse,
-    CreateTopicResponse: CreateTopicResponse,
     DescribeCmqQueuesRequest: DescribeCmqQueuesRequest,
-    DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
-    ModifyCmqSubscriptionAttributeRequest: ModifyCmqSubscriptionAttributeRequest,
-    ModifyTopicResponse: ModifyTopicResponse,
-    ModifyRocketMQInstanceSpecResponse: ModifyRocketMQInstanceSpecResponse,
+    ResetRocketMQConsumerOffSetResponse: ResetRocketMQConsumerOffSetResponse,
+    RabbitMQUser: RabbitMQUser,
     DescribeRocketMQVipInstancesRequest: DescribeRocketMQVipInstancesRequest,
-    DescribeRocketMQVipInstanceDetailRequest: DescribeRocketMQVipInstanceDetailRequest,
     DeleteRabbitMQVirtualHostRequest: DeleteRabbitMQVirtualHostRequest,
-    DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
-    CreateCmqTopicResponse: CreateCmqTopicResponse,
-    CmqDeadLetterSource: CmqDeadLetterSource,
-    ClearCmqSubscriptionFilterTagsResponse: ClearCmqSubscriptionFilterTagsResponse,
     CreateRabbitMQVipInstanceResponse: CreateRabbitMQVipInstanceResponse,
-    DescribeCmqTopicsRequest: DescribeCmqTopicsRequest,
-    Filter: Filter,
-    DeleteTopicsRequest: DeleteTopicsRequest,
+    ModifyEnvironmentAttributesResponse: ModifyEnvironmentAttributesResponse,
     CmqTransactionPolicy: CmqTransactionPolicy,
     ModifyTopicRequest: ModifyTopicRequest,
-    ResetMsgSubOffsetByTimestampRequest: ResetMsgSubOffsetByTimestampRequest,
-    CreateEnvironmentRoleResponse: CreateEnvironmentRoleResponse,
     Consumer: Consumer,
-    DescribeBindVpcsResponse: DescribeBindVpcsResponse,
-    DeleteCmqSubscribeRequest: DeleteCmqSubscribeRequest,
-    RabbitMQUser: RabbitMQUser,
-    DescribeCmqDeadLetterSourceQueuesResponse: DescribeCmqDeadLetterSourceQueuesResponse,
+    CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
     DeleteSubscriptionsResponse: DeleteSubscriptionsResponse,
     DeleteRocketMQTopicRequest: DeleteRocketMQTopicRequest,
-    ConsumersSchedule: ConsumersSchedule,
-    Cluster: Cluster,
     RetentionPolicy: RetentionPolicy,
-    CreateRocketMQClusterResponse: CreateRocketMQClusterResponse,
-    ReceiveMessageResponse: ReceiveMessageResponse,
-    DeleteRocketMQNamespaceResponse: DeleteRocketMQNamespaceResponse,
     DescribePublishersResponse: DescribePublishersResponse,
-    SendMsgRequest: SendMsgRequest,
-    ResetRocketMQConsumerOffSetRequest: ResetRocketMQConsumerOffSetRequest,
     DescribeCmqQueueDetailRequest: DescribeCmqQueueDetailRequest,
-    DescribePulsarProInstancesRequest: DescribePulsarProInstancesRequest,
-    CreateRocketMQTopicRequest: CreateRocketMQTopicRequest,
-    CreateRoleResponse: CreateRoleResponse,
-    DeleteRocketMQClusterRequest: DeleteRocketMQClusterRequest,
-    DescribePulsarProInstancesResponse: DescribePulsarProInstancesResponse,
+    CreateRocketMQEnvironmentRoleResponse: CreateRocketMQEnvironmentRoleResponse,
+    DescribeRocketMQTopicsByGroupResponse: DescribeRocketMQTopicsByGroupResponse,
     DeleteEnvironmentRolesRequest: DeleteEnvironmentRolesRequest,
-    ClearCmqQueueResponse: ClearCmqQueueResponse,
-    ModifyRabbitMQUserResponse: ModifyRabbitMQUserResponse,
-    DescribeBindClustersRequest: DescribeBindClustersRequest,
     CreateRocketMQTopicResponse: CreateRocketMQTopicResponse,
-    CreateRabbitMQVirtualHostRequest: CreateRabbitMQVirtualHostRequest,
-    EnvironmentRole: EnvironmentRole,
     CreateCmqQueueRequest: CreateCmqQueueRequest,
     ModifyEnvironmentRoleResponse: ModifyEnvironmentRoleResponse,
-    DeleteCmqQueueRequest: DeleteCmqQueueRequest,
-    DeleteRabbitMQUserResponse: DeleteRabbitMQUserResponse,
-    DescribeRabbitMQVirtualHostListResponse: DescribeRabbitMQVirtualHostListResponse,
-    DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
-    DescribePulsarProInstanceDetailRequest: DescribePulsarProInstanceDetailRequest,
-    CreateRabbitMQUserRequest: CreateRabbitMQUserRequest,
-    CreateRoleRequest: CreateRoleRequest,
-    PulsarNetworkAccessPointInfo: PulsarNetworkAccessPointInfo,
-    ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
-    DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
-    Role: Role,
-    DescribeTopicsResponse: DescribeTopicsResponse,
+    DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
+    DescribeRocketMQMsgTraceResponse: DescribeRocketMQMsgTraceResponse,
+    ClearCmqSubscriptionFilterTagsResponse: ClearCmqSubscriptionFilterTagsResponse,
     DescribePublisherSummaryResponse: DescribePublisherSummaryResponse,
-    CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
-    SendBatchMessagesRequest: SendBatchMessagesRequest,
     DeleteCmqTopicRequest: DeleteCmqTopicRequest,
-    DescribeRabbitMQNodeListResponse: DescribeRabbitMQNodeListResponse,
     DescribePulsarProInstanceDetailResponse: DescribePulsarProInstanceDetailResponse,
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
-    ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
-    RabbitMQPrivateNode: RabbitMQPrivateNode,
-    DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
-    DeleteRabbitMQVipInstanceRequest: DeleteRabbitMQVipInstanceRequest,
-    DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
+    DescribeRolesRequest: DescribeRolesRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
-    VpcConfig: VpcConfig,
-    PulsarProClusterInfo: PulsarProClusterInfo,
-    ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
-    DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
-    DescribeRabbitMQVipInstancesRequest: DescribeRabbitMQVipInstancesRequest,
-    DescribeClusterDetailResponse: DescribeClusterDetailResponse,
-    SendMessagesRequest: SendMessagesRequest,
+    ResetRocketMQConsumerOffSetRequest: ResetRocketMQConsumerOffSetRequest,
     CreateEnvironmentRoleRequest: CreateEnvironmentRoleRequest,
-    DeleteRabbitMQVipInstanceResponse: DeleteRabbitMQVipInstanceResponse,
-    ModifyRocketMQTopicResponse: ModifyRocketMQTopicResponse,
-    DescribeRabbitMQVirtualHostRequest: DescribeRabbitMQVirtualHostRequest,
 
 }

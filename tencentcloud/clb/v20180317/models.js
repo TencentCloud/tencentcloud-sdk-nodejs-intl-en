@@ -216,7 +216,7 @@ class BatchDeregisterTargetsResponse extends  AbstractModel {
         this.FailListenerIdSet = null;
 
         /**
-         * 
+         * Failed to unbind error reason information.
          * @type {string || null}
          */
         this.Message = null;
@@ -337,15 +337,13 @@ class ExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable VIP direct connection
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to enable VIP Direct Connect
          * @type {boolean || null}
          */
         this.ZhiTong = null;
 
         /**
          * TgwGroup name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TgwGroupName = null;
@@ -361,6 +359,153 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ZhiTong = 'ZhiTong' in params ? params.ZhiTong : null;
         this.TgwGroupName = 'TgwGroupName' in params ? params.TgwGroupName : null;
+
+    }
+}
+
+/**
+ * Classic CLB listener information
+ * @class
+ */
+class ClassicalListener extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * CLB listener port
+         * @type {number || null}
+         */
+        this.ListenerPort = null;
+
+        /**
+         * Backend forwarding port of a listener
+         * @type {number || null}
+         */
+        this.InstancePort = null;
+
+        /**
+         * Listener name
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+        /**
+         * Listener protocol type
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Session persistence time
+         * @type {number || null}
+         */
+        this.SessionExpire = null;
+
+        /**
+         * Whether health check is enabled. 1: enabled; 0: disabled.
+         * @type {number || null}
+         */
+        this.HealthSwitch = null;
+
+        /**
+         * Response timeout period
+         * @type {number || null}
+         */
+        this.TimeOut = null;
+
+        /**
+         * Check interval
+         * @type {number || null}
+         */
+        this.IntervalTime = null;
+
+        /**
+         * Health threshold
+         * @type {number || null}
+         */
+        this.HealthNum = null;
+
+        /**
+         * Unhealthy threshold
+         * @type {number || null}
+         */
+        this.UnhealthNum = null;
+
+        /**
+         * Request balancing method for listeners of the classic public network CLB. An empty string or wrr indicates weighted round robin. ip_hash indicates consistent hashing based on the accessed source IP address. least_conn indicates least connections.
+         * @type {string || null}
+         */
+        this.HttpHash = null;
+
+        /**
+         * Health check return code for HTTP and HTTPS listeners of a public network classic CLB. For more information, see the explanation of the field in the listener creating API.
+         * @type {number || null}
+         */
+        this.HttpCode = null;
+
+        /**
+         * Health check path for HTTP and HTTPS listeners of a public network classic CLB
+         * @type {string || null}
+         */
+        this.HttpCheckPath = null;
+
+        /**
+         * Authentication method for an HTTPS listener of a public network classic CLB
+         * @type {string || null}
+         */
+        this.SSLMode = null;
+
+        /**
+         * Server certificate ID for an HTTPS listener of a public network classic CLB
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * Client certificate ID for an HTTPS listener of a public network classic CLB
+         * @type {string || null}
+         */
+        this.CertCaId = null;
+
+        /**
+         * Listener status. Value range: 0 (creating), 1 (running)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.InstancePort = 'InstancePort' in params ? params.InstancePort : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.SessionExpire = 'SessionExpire' in params ? params.SessionExpire : null;
+        this.HealthSwitch = 'HealthSwitch' in params ? params.HealthSwitch : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
+        this.HealthNum = 'HealthNum' in params ? params.HealthNum : null;
+        this.UnhealthNum = 'UnhealthNum' in params ? params.UnhealthNum : null;
+        this.HttpHash = 'HttpHash' in params ? params.HttpHash : null;
+        this.HttpCode = 'HttpCode' in params ? params.HttpCode : null;
+        this.HttpCheckPath = 'HttpCheckPath' in params ? params.HttpCheckPath : null;
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -402,7 +547,7 @@ class SetSecurityGroupForLoadbalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * Security group ID, such as sg-12345678
+         * Security group ID, such as sg-12345678. can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroup = null;
@@ -415,7 +560,8 @@ DEL: unbind a security group
         this.OperationType = null;
 
         /**
-         * Array of CLB instance IDs
+         * ID array of the clb instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
+Specifies the maximum length supported by the list is 20.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -489,20 +635,20 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.AddressIPVersion = null;
 
         /**
-         * Number of CLBs to be created. Default value: 1.
+         * Specifies the count of cloud load balancers to create, with a default value of 1. the count must not exceed the maximum value allowed for the account, with a default creation maximum value of 20.
          * @type {number || null}
          */
         this.Number = null;
 
         /**
-         * Applicable only to public network IPv4 CLB instances. This parameter specifies the primary AZ ID for cross-AZ disaster recovery. For example, 100001 or ap-guangzhou-1.
-Note: The primary AZ sustains traffic. The secondary AZ does not sustain traffic by default and is used only when the primary AZ is unavailable. Currently, primary and secondary AZs are supported only for IPv4 CLB instances in Guangzhou, Shanghai, Nanjing, Beijing, Chengdu, Shenzhen Finance, Hong Kong (China), Seoul, Frankfurt, and Singapore regions. You can call the [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1) API to query the list of primary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * Applicable only to public network IPv4 cloud load balancer instances. specifies the primary AZ ID for cross-az disaster recovery. both AZ ID and name are supported, such as 100001 or ap-guangzhou-1.
+Note: the primary AZ loads traffic. the secondary AZ does not load traffic by default and is used only if the primary AZ becomes unavailable.
          * @type {string || null}
          */
         this.MasterZoneId = null;
 
         /**
-         * Applicable only to public network IPv4 CLB instances. This parameter specifies the AZ ID for creating a CLB instance. For example, ap-guangzhou-1.
+         * Applicable only to public network IPv4 clb instances. specifies the AZ ID or availability zone name for creating a clb instance. for example, 100001 or ap-guangzhou-1.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -533,7 +679,7 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
         this.Vip = null;
 
         /**
-         * Bandwidth package ID. If this parameter is specified, the network billing mode (InternetAccessible.InternetChargeType) will only support billing by bandwidth package (BANDWIDTH_PACKAGE). The attributes of the bandwidth package determine the settlement method. For IPv6 CLB instances purchased by bill-by-CVM users, if the ISP type is not BGP, the bandwidth package ID cannot be specified.
+         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.comom/document/api/215/19209?from_cn_redirect=1) api. specifies the BANDWIDTH PACKAGE ID. when this parameter is specified, the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE). the attributes of the BANDWIDTH PACKAGE determine the settlement method. for IPv6 clb instances purchased by non-promoted users, if the operator type is not BGP, the BANDWIDTH PACKAGE ID cannot be specified.
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -581,20 +727,20 @@ Note: If the specified VIP is occupied or is not within the IP range of the spec
         this.ClusterTag = null;
 
         /**
-         * Applicable only to public network IPv4 CLB instances. This parameter specifies the secondary AZ ID for cross-AZ disaster recovery. For example, 100001 or ap-guangzhou-1.
-Note: The secondary AZ sustains traffic when the primary AZ encounters faults. You can call the [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1) API to query the list of primary/secondary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+         * Applicable only to public network IPv4 clb instances. specifies the secondary AZ ID for cross-az disaster recovery. both AZ ID and name are supported, such as 100001 or ap-guangzhou-1.
+Note: The secondary AZ sustains traffic when the primary AZ encounters faults. You can call the [DescribeResources](https://www.tencentcloud.comom/document/api/214/70213?from_cn_redirect=1) API to query the list of primary/secondary AZs in a region. If you want to experience this feature, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
          * @type {string || null}
          */
         this.SlaveZoneId = null;
 
         /**
-         * Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance. E.g., `eip-11112222`.
+         * The unique ID of EIP, which can be queried through the DescribeAddresses API (https://www.tencentcloud.comom/document/product/215/16702?from_cn_redirect=1). format: EIP-qhx8udkc. applicable only to private network clb binding EIP.
          * @type {string || null}
          */
         this.EipAddressId = null;
 
         /**
-         * Whether to allow CLB traffic to the target group. `true`: allows CLB traffic to the target group and verifies security groups only on CLB; `false`: denies CLB traffic to the target group and verifies security groups on both CLB and backend instances.
+         * Specifies whether to allow CLB traffic to the Target. enable (true): verify security groups on CLB. disable (false): verify security groups on both CLB and backend instances. IPv6 CLB security group default permit, this parameter is not required.
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
@@ -628,6 +774,12 @@ Note: The secondary AZ sustains traffic when the primary AZ encounters faults. Y
          * @type {string || null}
          */
         this.AccessLogTopicId = null;
+
+        /**
+         * Whether layer-7 advanced routing is enabled.
+         * @type {boolean || null}
+         */
+        this.AdvancedRoute = null;
 
     }
 
@@ -699,6 +851,7 @@ Note: The secondary AZ sustains traffic when the primary AZ encounters faults. Y
         }
         this.LBChargeType = 'LBChargeType' in params ? params.LBChargeType : null;
         this.AccessLogTopicId = 'AccessLogTopicId' in params ? params.AccessLogTopicId : null;
+        this.AdvancedRoute = 'AdvancedRoute' in params ? params.AdvancedRoute : null;
 
     }
 }
@@ -768,37 +921,37 @@ class DeleteRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * CLB listener ID
+         * ID of the CLB instance listener. You can call the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Array of IDs of the forwarding rules to be deleted
+         * Array of ids of forwarding rules to be deleted, can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.comom/document/api/214/46916?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LocationIds = null;
 
         /**
-         * The domain name associated with the forwarding rule to delete. If the rule is associated with multiple domain names, specify any one of them.
+         * Domain name of the forwarding rule to be deleted. if it is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeLoadBalancersDetail](https://www.tencentcloud.comom/document/api/214/46916?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * The forwarding path of the forwarding rule to delete.
+         * Forwarding path of the forwarding rule to be deleted can be accessed through the DescribeLoadBalancersDetail api (https://www.tencentcloud.comom/document/api/214/46916?from_cn_redirect=1).
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
+         * A default domain name must be configured under the listener. when you need to delete the default domain name, you can specify another domain name as the new default domain name. if the new default domain name is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.NewDefaultServerDomain = null;
@@ -831,14 +984,14 @@ class CloneLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * Specifies the clb ID. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Clones the name of the CLB instance. The name must be 1-60 characters containing letters, numbers, "-" or "_".
-Note: if the name of a new CLB instance already exists, a default name will be generated automatically.
+         * Specifies the name of the cloned load balancing instance. rule: 1-60 english letters, chinese characters, digits, connecting lines "-", or underscores "_".
+Note: if the name is identical to that of an existing load balancing instance in the system, the system will automatically generate a name for the created cloud load balancer instance.
          * @type {string || null}
          */
         this.LoadBalancerName = null;
@@ -864,85 +1017,85 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.SlaveZoneId = null;
 
         /**
-         * Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+         * Applicable only to public network clb. AZ ID, both availability zone ID and name are supported. specify availability zone to create a load balancing instance, for example: 100001 or ap-guangzhou-1. if not passed, queries CVM instances in all azs. if needed, call the API for the query DescribeZones (https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1) to specify availability zone.
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * CLB network billing mode. This parameter is applicable only to public network CLB instances.
+         * CLB network billing mode, applicable only to public network CLB instances.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
+         * It only applies to public CLB. Currently, the static single-line IP type is supported only for the regions of Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu, and Chongqing. If you need to experience it, contact your business manager. After approval, you can select the ISP type as China Mobile (CMCC), China Unicom (CUCC), or China Telecom (CTCC). The network billing mode should be selected as billing by bandwidth package (BANDWIDTH_PACKAGE). If this parameter is not specified, BGP is used by default. You can use the DescribeResources API to query ISPs supported for a region.
          * @type {string || null}
          */
         this.VipIsp = null;
 
         /**
-         * Applies for CLB instances for a specified VIP
+         * Specifies the Vip to apply for cloud load balancer.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * Tags a CLB instance when purchasing it
+         * Proceed to purchase cloud load balancer and Tag it at the same time.
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * Dedicated cluster information
+         * Exclusive cluster information.
          * @type {ExclusiveCluster || null}
          */
         this.ExclusiveCluster = null;
 
         /**
-         * Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
+         * BANDWIDTH PACKAGE ID, which can be obtained through the [DescribeBandwidthPackages](https://www.tencentcloud.comom/document/api/215/19209?from_cn_redirect=1) api. specifies this parameter indicates the network billing mode (InternetAccessible.InternetChargeType) supports only billing by BANDWIDTH PACKAGE (BANDWIDTH_PACKAGE).
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
 
         /**
-         * Whether to support binding cross-VPC IPs or cross-region IPs
+         * Specifies whether the cross-regional or cross-Vpc IP binding feature is supported.
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * Creates `SnatIp` when the binding IPs of other VPCs feature is enabled
+         * Enables cross-regional or cross-Vpc IP binding and creates a SnatIp.
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
 
         /**
-         * ID of the public network CLB dedicated cluster
+         * Public network exclusive cluster ID or CDCId. can be obtained through the [DescribeExclusiveClusters](https://www.tencentcloud.comom/document/product/214/49278?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
 
         /**
-         * Specification of the LCU-supported instance.
+         * Performance capacity specification. <li>clb.c2.medium (standard type)</li> <li>clb.c3.small (advanced type 1)</li> <li>clb.c3.medium (advanced type 2)</li> <li>clb.c4.small (high-strength type 1)</li> <li>clb.c4.medium (high-strength type 2)</li> <li>clb.c4.large (high-strength type 3)</li> <li>clb.c4.xlarge (high-strength type 4)</li>.
          * @type {string || null}
          */
         this.SlaType = null;
 
         /**
-         * Tag of the STGW dedicated cluster
+         * Specifies the Tag of the Stgw exclusive cluster.
          * @type {string || null}
          */
         this.ClusterTag = null;
 
         /**
-         * Availability zones for nearby access of private network CLB instances to distribute traffic
+         * Applicable only to private network clb. when connected to nearby, select availability zone for deployment. you can call DescribeZones (https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1) to query the availability zone list.
          * @type {Array.<string> || null}
          */
         this.Zones = null;
 
         /**
-         * Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance (e.g., `eip-11112222`)
+         * The unique ID of EIP, such as EIP-qhx8udkc, applicable only to private network clb binding EIP, can be queried through the DescribeAddresses API (https://www.tencentcloud.comom/document/product/215/16702?from_cn_redirect=1).
          * @type {string || null}
          */
         this.EipAddressId = null;
@@ -1034,18 +1187,48 @@ class DisassociateTargetGroupsResponse extends  AbstractModel {
 }
 
 /**
- * SetLoadBalancerStartStatus response structure.
+ * Details of real servers bound to a listener
  * @class
  */
-class SetLoadBalancerStartStatusResponse extends  AbstractModel {
+class ListenerBackend extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Listener ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ListenerId = null;
+
+        /**
+         * Listener protocol
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Listener port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Information of rules under a listener (applicable only to HTTP/HTTPS listeners)
+         * @type {Array.<RuleTargets> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * List of real servers bound to the listener (applicable only to TCP/UDP/TCP_SSL listener)
+         * @type {Array.<Backend> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * End port in a port range if port range is supported, or 0 if port range is not supported
+         * @type {number || null}
+         */
+        this.EndPort = null;
 
     }
 
@@ -1056,7 +1239,28 @@ class SetLoadBalancerStartStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new RuleTargets();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new Backend();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.EndPort = 'EndPort' in params ? params.EndPort : null;
 
     }
 }
@@ -1098,8 +1302,7 @@ class DescribeLoadBalancerTrafficResponse extends  AbstractModel {
         super();
 
         /**
-         * Information of CLB instances sorted by outbound bandwidth from highest to lowest
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Load balance information sorted in descending order by outbound bandwidth.
          * @type {Array.<LoadBalancerTraffic> || null}
          */
         this.LoadBalancerTraffic = null;
@@ -1210,7 +1413,7 @@ class RsTagRule extends  AbstractModel {
         this.LocationId = null;
 
         /**
-         * Modified tag of the real server. This parameter has a lower priority than the Tag parameter in the aforementioned [Target](https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#Target). The final tag value is based on the Tag parameter in the Target. The Tag parameter in RsTagRule will be used only when the Weight parameter in the Target is empty.
+         * Modified Tag of the backend service. this parameter has a lower priority than the Tag parameter in the aforementioned [Target](https://www.tencentcloud.comom/document/api/214/30694?from_cn_redirect=1#Target). the final Tag value is based on the Tag parameter in the Target. the Tag parameter in RsTagRule will be used only when the Tag parameter in the Target is empty.
          * @type {string || null}
          */
         this.Tag = null;
@@ -1249,19 +1452,19 @@ class ModifyRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * CLB listener ID
+         * ID of the clb listener. can be obtained through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * ID of the forwarding rule to be modified.
+         * Specifies the rule ID of the forwarding rule to be modified, which can be obtained through the DescribeListeners API (https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LocationId = null;
@@ -1287,6 +1490,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
 
         /**
          * Session persistence duration, in seconds. Value range: 0 or 30-86400.
+Defaults to 0.
          * @type {number || null}
          */
         this.SessionExpireTime = null;
@@ -1314,6 +1518,12 @@ They represent weighted round robin, least connections, and IP hash, respectivel
          * @type {OAuth || null}
          */
         this.OAuth = null;
+
+        /**
+         * Specifies the custom cookie name.
+         * @type {string || null}
+         */
+        this.CookieName = null;
 
     }
 
@@ -1345,6 +1555,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
             obj.deserialize(params.OAuth)
             this.OAuth = obj;
         }
+        this.CookieName = 'CookieName' in params ? params.CookieName : null;
 
     }
 }
@@ -1543,7 +1754,7 @@ class DescribeTargetGroupInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter. Currently, only filtering by `TargetGroupId`, `BindIP`, or `InstanceId` is supported.
+         * Filter criteria, currently supported by multiple conditions combined as TargetGroupId, BindIP, and InstanceId.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1585,6 +1796,34 @@ class DescribeTargetGroupInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeLBOperateProtect request structure.
+ * @class
+ */
+class DescribeLBOperateProtectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID.
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+    }
+}
+
+/**
  * DescribeIdleLoadBalancers response structure.
  * @class
  */
@@ -1593,8 +1832,7 @@ class DescribeIdleLoadBalancersResponse extends  AbstractModel {
         super();
 
         /**
-         * List of idle CLBs
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Idle instance list.
          * @type {Array.<IdleLoadBalancer> || null}
          */
         this.IdleLoadBalancers = null;
@@ -1636,18 +1874,36 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * AssociateTargetGroups request structure.
+ * Configuration binding relationship
  * @class
  */
-class AssociateTargetGroupsRequest extends  AbstractModel {
+class BindItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Binding relationship array. A single request supports up to 20 items.
-         * @type {Array.<TargetGroupAssociation> || null}
+         * ID of the CLB instance bound to the configuration
+         * @type {string || null}
          */
-        this.Associations = null;
+        this.LoadBalancerId = null;
+
+        /**
+         * ID of the listener bound to the configuration
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Domain name bound to the configuration
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Rule bound to the configuration
+         * @type {string || null}
+         */
+        this.LocationId = null;
 
     }
 
@@ -1658,13 +1914,65 @@ class AssociateTargetGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
-        if (params.Associations) {
-            this.Associations = new Array();
-            for (let z in params.Associations) {
-                let obj = new TargetGroupAssociation();
-                obj.deserialize(params.Associations[z]);
-                this.Associations.push(obj);
+    }
+}
+
+/**
+ * AddCustomizedConfig request structure.
+ * @class
+ */
+class AddCustomizedConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration name
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * Configuration type. valid values: ["CLB", "SERVER", "LOCATION"], respectively indicating CLB configuration, SERVER configuration, and LOCATION configuration.
+         * @type {string || null}
+         */
+        this.ConfigType = null;
+
+        /**
+         * Specifies the configuration content.
+         * @type {string || null}
+         */
+        this.ConfigContent = null;
+
+        /**
+         * Tag.
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
+        this.ConfigContent = 'ConfigContent' in params ? params.ConfigContent : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -1698,30 +2006,26 @@ class ClassicalTarget extends  AbstractModel {
         this.Weight = null;
 
         /**
-         * Public IP of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Public network IP of the real server
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
 
         /**
-         * Private IP of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Private network IP of the real server
          * @type {Array.<string> || null}
          */
         this.PrivateIpAddresses = null;
 
         /**
-         * Real server instance names
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance name of the real server
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Real server status
-1: failed; 2: running; 3: creating; 4: shut down; 5: returned; 6: returning; 7: restarting; 8: starting; 9: shutting down; 10: resetting password; 11: formatting; 12: making image; 13: setting bandwidth; 14: reinstalling system; 19: upgrading; 21: hot migrating
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Backend service status.
+1: failed; 2: running; 3: creating; 4: shut down; 5: returned; 6: returning; 7: restarting; 8: starting; 9: shutting down; 10: resetting password; 11: formatting; 12: making image; 13: setting bandwidth; 14: reinstalling system; 19: upgrading; 21: hot migrating.
          * @type {number || null}
          */
         this.RunFlag = null;
@@ -1787,8 +2091,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Targets = null;
 
         /**
-         * End port of the listener.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * End port of a port range for a listener
          * @type {number || null}
          */
         this.EndPort = null;
@@ -2014,7 +2317,7 @@ class InquiryPriceModifyLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -2046,6 +2349,48 @@ class InquiryPriceModifyLoadBalancerRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyCustomizedConfig request structure.
+ * @class
+ */
+class ModifyCustomizedConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration name
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * Configuration ID.
+         * @type {string || null}
+         */
+        this.UconfigId = null;
+
+        /**
+         * Specifies the configuration content.
+         * @type {string || null}
+         */
+        this.ConfigContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.UconfigId = 'UconfigId' in params ? params.UconfigId : null;
+        this.ConfigContent = 'ConfigContent' in params ? params.ConfigContent : null;
+
+    }
+}
+
+/**
  * Basic information of a target group bound to a forwarding rule or a listener
  * @class
  */
@@ -2065,6 +2410,12 @@ class BasicTargetGroupInfo extends  AbstractModel {
          */
         this.TargetGroupName = null;
 
+        /**
+         * Specifies the weight of the target group.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
     }
 
     /**
@@ -2076,6 +2427,7 @@ class BasicTargetGroupInfo extends  AbstractModel {
         }
         this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
         this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -2123,8 +2475,7 @@ class ZoneResource extends  AbstractModel {
         this.MasterZone = null;
 
         /**
-         * List of resources
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Resource list.
          * @type {Array.<Resource> || null}
          */
         this.ResourceSet = null;
@@ -2167,8 +2518,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EdgeZone = null;
 
         /**
-         * Network egress
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Specifies the network outbound.
          * @type {string || null}
          */
         this.Egress = null;
@@ -2254,19 +2604,21 @@ class TargetGroupInstance extends  AbstractModel {
         this.BindIP = null;
 
         /**
-         * Port of target group instance
+         * Port of target group instance. this field is not supported for full listen target groups.
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Weight of target group instance
+         * Weight of a target group instance
+Specifies that the Weight must be configured for a v2 target group. when calling the CreateTargetGroup API for target group creation, this parameter is used in combination with the Weight parameter in the create api, and one of them is required.
+Valid values: 0-100.
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * New port of target group instance
+         * The new port of the target group instance. this field is not supported for full listen target groups.
          * @type {number || null}
          */
         this.NewPort = null;
@@ -2405,15 +2757,13 @@ class CrossTargets extends  AbstractModel {
         this.EniId = null;
 
         /**
-         * ID of the CVM instance
-Note: This field may return `null`, indicating that no valid value was found.
+         * Submachine instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Name of the CVM instance
-Note: This field may return `null`, indicating that no valid value was found.
+         * Submachine instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -2474,8 +2824,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * Health status of the real server bound to this rule
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Advanced routing rule ID.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Indicates the health check status of the backend service bound to this rule.
          * @type {Array.<TargetHealth> || null}
          */
         this.Targets = null;
@@ -2492,6 +2847,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -2514,19 +2870,19 @@ class ModifyDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * CLB listener ID.
+         * ID of the clb listener. you can call the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Legacy domain name under a listener.
+         * An existing domain under the listener, can be queried through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Domain = null;
@@ -2555,62 +2911,18 @@ class ModifyDomainRequest extends  AbstractModel {
 }
 
 /**
- * ID of the idle CLB instance
+ * DisassociateCustomizedConfig response structure.
  * @class
  */
-class IdleLoadBalancer extends  AbstractModel {
+class DisassociateCustomizedConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * CLB instance name
-         * @type {string || null}
-         */
-        this.LoadBalancerName = null;
-
-        /**
-         * CLB instance region
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * CLB instance VIP
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * The reason why the load balancer is considered idle. `NO_RULES`: No rules configured. `NO_RS`: The rules are not associated with servers.
-         * @type {string || null}
-         */
-        this.IdleReason = null;
-
-        /**
-         * CLB instance status, including:
-`0`: Creating; `1`: Running.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * CLB type. Value range: `1` (CLB); `0` (classic CLB).
-         * @type {number || null}
-         */
-        this.Forward = null;
-
-        /**
-         * The load balancing hostname.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Domain = null;
+        this.RequestId = null;
 
     }
 
@@ -2621,14 +2933,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.IdleReason = 'IdleReason' in params ? params.IdleReason : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Forward = 'Forward' in params ? params.Forward : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2812,43 +3117,37 @@ class ZoneInfo extends  AbstractModel {
         super();
 
         /**
-         * Unique AZ ID in a numeric form, such as 100001
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Unique ID of the AZ in numeric form, such as 100001
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * Unique AZ ID in a string form, such as ap-guangzhou-1
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Unique ID of the AZ in string format, such as ap-guangzhou-1
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * AZ name, such as Guangzhou Zone 1
-Note: This field may return null, indicating that no valid values can be obtained.
+         * AZ name, such as Guangzhou 1
          * @type {string || null}
          */
         this.ZoneName = null;
 
         /**
-         * AZ region, e.g., ap-guangzhou.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the region of the availability zone, for example: ap-guangzhou.
          * @type {string || null}
          */
         this.ZoneRegion = null;
 
         /**
-         * Whether the AZ is the `LocalZone`, e.g., false.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Indicates whether the AZ is a LocalZone az, for example: false.
          * @type {boolean || null}
          */
         this.LocalZone = null;
 
         /**
-         * Whether the AZ is an edge zone. Values: `true`, `false`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Indicates whether the AZ is an EdgeZone az, for example: false.
          * @type {boolean || null}
          */
         this.EdgeZone = null;
@@ -2965,15 +3264,13 @@ class LoadBalancerHealth extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * CLB instance name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the name of the load balancing instance.
          * @type {string || null}
          */
         this.LoadBalancerName = null;
 
         /**
-         * List of listeners
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Listener list
          * @type {Array.<ListenerHealth> || null}
          */
         this.Listeners = null;
@@ -3097,6 +3394,34 @@ class InquiryPriceCreateLoadBalancerRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyFunctionTargets response structure.
+ * @class
+ */
+class ModifyFunctionTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteLoadBalancerListeners request structure.
  * @class
  */
@@ -3105,13 +3430,13 @@ class DeleteLoadBalancerListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Array of listener IDs to delete (20 IDs at most). If this parameter is left empty, all listeners of the CLB instance will be deleted.
+         * Specifies the listener ID array to be deleted, with a maximum of 20 elements. if left blank, all listeners of the clb will be deleted. can be obtained through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -3312,13 +3637,13 @@ class DescribeCustomizedConfigListRequest extends  AbstractModel {
         this.ConfigType = null;
 
         /**
-         * Pagination offset. Default: 0.
+         * Pagination offset. defaults to 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results per page. Default: 20.
+         * Number of results. default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3330,15 +3655,23 @@ class DescribeCustomizedConfigListRequest extends  AbstractModel {
         this.ConfigName = null;
 
         /**
-         * Configuration ID.
+         * Configuration ID, can be accessed through the [DescribeCustomizedConfigList](https://www.tencentcloud.comom/document/api/214/60009?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.UconfigIds = null;
 
         /**
-         * The filters are:
-<li> loadbalancer-id - String - Required: no - (filter) CLB instance ID, such as "lb-12345678". </li>
-<li> vip - String - Required: no - (filter) CLB instance VIP, such as "1.1.1.1" and "2204::22:3". </li>
+         * Filter criteria as follows:.
+- loadbalancer-id
+Filter by [cloud load balancer ID]. instance billing mode such as lb-9vxezxza.
+Type: String.
+Required: No
+Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1).
+- vip
+Filter by [clb VIP]. network billing mode such as "1.1.1.1", "2204::22:3".
+Type: String.
+Required: No
+Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1).
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3422,6 +3755,84 @@ class AutoRewriteRequest extends  AbstractModel {
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.RewriteCodes = 'RewriteCodes' in params ? params.RewriteCodes : null;
         this.TakeUrls = 'TakeUrls' in params ? params.TakeUrls : null;
+
+    }
+}
+
+/**
+ * ID of the idle CLB instance
+ * @class
+ */
+class IdleLoadBalancer extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB instance name
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * CLB instance region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * CLB instance VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * The reason why the load balancer is considered idle. `NO_RULES`: No rules configured. `NO_RS`: The rules are not associated with servers.
+         * @type {string || null}
+         */
+        this.IdleReason = null;
+
+        /**
+         * CLB instance status, including:
+`0`: Creating; `1`: Running.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * CLB type. Value range: `1` (CLB); `0` (classic CLB).
+         * @type {number || null}
+         */
+        this.Forward = null;
+
+        /**
+         * Specifies the clb domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.IdleReason = 'IdleReason' in params ? params.IdleReason : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Forward = 'Forward' in params ? params.Forward : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -3527,10 +3938,10 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * ModifyFunctionTargets response structure.
+ * ModifyCustomizedConfig response structure.
  * @class
  */
-class ModifyFunctionTargetsResponse extends  AbstractModel {
+class ModifyCustomizedConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3652,7 +4063,7 @@ class DescribeTargetGroupsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Filter array, which is exclusive of `TargetGroupIds`. Valid values: `TargetGroupVpcId` and `TargetGroupName`.
+         * Filter condition array, mutually exclusive with TargetGroupIds, supports TargetGroupVpcId (vpc ID), TargetGroupName (target group name), and Tag.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3704,6 +4115,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.LoadBalancerIds = null;
 
         /**
+         * Auxiliary description information, such as failure cause.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3720,6 +4138,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.Message = 'Message' in params ? params.Message : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3776,13 +4195,13 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique CLB ID
+         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * CLB instance name
+         * Load balancing instance name. rule: 1-60 english letters, chinese characters, digits, hyphens "-", or underscores "_".
          * @type {string || null}
          */
         this.LoadBalancerName = null;
@@ -3800,28 +4219,37 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         this.InternetChargeInfo = null;
 
         /**
-         * Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
+         * Specifies whether to allow CLB traffic to the Target.
+Enable pass-through (true): verify security groups on CLB only.
+Denies CLB traffic to the target (false): verify security groups on both CLB and backend instances.
+Specifies no modification if left blank.
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
 
         /**
-         * Whether to enable cross-region binding 2.0
+         * Specifies whether the cross-region binding 2.0 feature is enabled. leave blank for no modification.
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * Specifies whether to enable deletion protection.
+         * Specifies whether to enable deletion protection. leave it blank to keep the current setting.
          * @type {boolean || null}
          */
         this.DeleteProtect = null;
 
         /**
-         * Modifies the second-level domain name of CLB from mycloud.com to tencentclb.com. Note that the sub-domain names will be changed as well. After the modification, mycloud.com will be invalidated. 
+         * Modifies the second-level domain name of cloud load balancer from mycloud.com to tencentclb.com. the subdomain will be transformed, and the mycloud.com domain name will become invalid after modification. leave it blank if no modification is required.
          * @type {boolean || null}
          */
         this.ModifyClassicDomain = null;
+
+        /**
+         * The associated endpoint Id, which can be queried via the [DescribeVpcEndPoint](https://www.tencentcloud.comom/document/product/215/54679?from_cn_redirect=1) api. input an empty string to unbind.
+         * @type {string || null}
+         */
+        this.AssociateEndpoint = null;
 
     }
 
@@ -3850,6 +4278,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
         this.DeleteProtect = 'DeleteProtect' in params ? params.DeleteProtect : null;
         this.ModifyClassicDomain = 'ModifyClassicDomain' in params ? params.ModifyClassicDomain : null;
+        this.AssociateEndpoint = 'AssociateEndpoint' in params ? params.AssociateEndpoint : null;
 
     }
 }
@@ -3939,7 +4368,8 @@ class SlaUpdateParam extends  AbstractModel {
         super();
 
         /**
-         * ID of the CLB instance
+         * CLB instance ID.
+Can be queried through the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -3974,24 +4404,21 @@ class Target extends  AbstractModel {
         super();
 
         /**
-         * Listening port of a real server
-Note: this parameter is required when binding a CVM or ENI.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the listening port of the backend service.
+Note: this parameter must be specified when binding to CVM (cloud virtual machine) or ENI (elastic network interface).
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Real server type. Value range: CVM (Cloud Virtual Machine), ENI (Elastic Network Interface). This parameter does not take effect currently as an input parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the backend service type. valid values: CVM (cloud virtual machine), ENI (elastic network interface). as an input parameter, this parameter does not take effect currently.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API. It indicates binding the primary IP of the primary ENI.
-Note: Either `InstanceId` or `EniIp` can be passed in.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * This parameter must be passed in when binding to CVM. it represents the unique ID of the CVM and can be obtained from the InstanceId field in the response of the DescribeInstances api. indicates binding the primary IPv4 address of the primary network interface. the InstanceId cannot be specified in the following scenarios: binding to non-CVM resources, binding to auxiliary network interface ips on CVM, binding to CVM through cross-domain 2.0, and binding to IPv6 addresses of CVM.
+Note: you can only input one of the InstanceId parameter or the EniIp parameter.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4003,15 +4430,14 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Weight = null;
 
         /**
-         * It is required when binding an IP. ENI IPs and other private IPs are supported. To bind an ENI IP, the ENI should be bound to a CVM instance before being bound to a CLB instance.
-Note: Either `InstanceId` or `EniIp` can be passed in. `EniIp` is required in a cross-region binding or when the dual-stack IPV6 CVM is bound.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * This parameter must be passed in for IP binding. it supports eni ips and other private IP addresses. if it is an eni, it must first be bound to a CVM before binding to a cloud load balancer instance.
+Note: only one of the InstanceId parameter and EniIp parameter can be passed. if binding a dual-stack IPV6 instance, this parameter must be passed. if it is a cross-region binding, the parameter must be passed and the InstanceId parameter is not supported.
          * @type {string || null}
          */
         this.EniIp = null;
 
         /**
-         * Tag.Note: This field may return null, indicating that no valid values can be obtained.
+         * Tag.
          * @type {string || null}
          */
         this.Tag = null;
@@ -4106,6 +4532,34 @@ class DescribeBlockIPListRequest extends  AbstractModel {
 }
 
 /**
+ * MigrateClassicalLoadBalancers response structure.
+ * @class
+ */
+class MigrateClassicalLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Certificate ID and list of CLB instances associated with it
  * @class
  */
@@ -4120,8 +4574,7 @@ class CertIdRelatedWithLoadBalancers extends  AbstractModel {
         this.CertId = null;
 
         /**
-         * List of CLB instances associated with certificate
-Note: this field may return null, indicating that no valid values can be obtained.
+         * List of CLB instances associated with the certificate
          * @type {Array.<LoadBalancer> || null}
          */
         this.LoadBalancers = null;
@@ -4158,8 +4611,7 @@ class DescribeClassicalLBHealthStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * List of real server health statuses
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Backend health status list.
          * @type {Array.<ClassicalHealth> || null}
          */
         this.HealthList = null;
@@ -4257,13 +4709,13 @@ class Listener extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * Listener protocol
+         * Listener protocol. valid values: TCP, UDP, HTTP, HTTPS, TCP_SSL, QUIC.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Listener port
+         * Listener port. value range: 1-65535.
          * @type {number || null}
          */
         this.Port = null;
@@ -4289,15 +4741,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Scheduler = null;
 
         /**
-         * Session persistence time
+         * Session persistence time, in seconds. value range: 30-3600. default value: 0, indicating that session persistence is not enabled by default. this parameter applies only to TCP and UDP listeners.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
-         * Whether to enable SNI. `1`: Enable; `0`: Do not enable. This parameter is only meaningful for HTTPS listeners.
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Specifies whether to enable the SNI feature. 1: enable; 0: disable. this parameter is applicable only to HTTPS listeners.
          * @type {number || null}
          */
         this.SniSwitch = null;
@@ -4311,27 +4762,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Listener name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ListenerName = null;
 
         /**
          * Listener creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * End port of a port range
-Note: This field may return null, indicating that no valid values can be obtained.
+         * End port of the port range. value range: 2-65535.
          * @type {number || null}
          */
         this.EndPort = null;
 
         /**
-         * Real server type
+         * Backend server type. available values: NODE, POLARIS, TARGETGROUP, TARGETGROUP-V2.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4345,8 +4793,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TargetGroup = null;
 
         /**
-         * Session persistence type. Valid values: Normal: the default session persistence type; QUIC_CID: session persistence by QUIC connection ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Session persistence type. NORMAL: Default session persistence type; QUIC_CID: Session persistence by Quic Connection ID.
          * @type {string || null}
          */
         this.SessionType = null;
@@ -4359,22 +4806,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.KeepaliveEnable = null;
 
         /**
-         * Only the NAT64 CLB TCP listeners are supported.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Supports Nat64 CLB TCP listeners only
          * @type {boolean || null}
          */
         this.Toa = null;
 
         /**
-         * Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Reschedules when unbinding real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
          * @type {boolean || null}
          */
         this.DeregisterTargetRst = null;
 
         /**
-         * Attribute of listener
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Describes the attributes of the listener.
          * @type {Array.<string> || null}
          */
         this.AttrFlags = null;
@@ -4387,15 +4831,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TargetGroupList = null;
 
         /**
-         * Maximum number of concurrent listener connections. If it’s set to `-1`, the listener speed is not limited. 
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Maximum number of connections to a listener. -1 indicates unlimited speed at the listener dimension.
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * Maximum number of new listener connections. If it’s set to `-1`, the listener speed is not limited. 
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Maximum number of new connections to a listener. -1 means no speed limit at the listener dimension.
          * @type {number || null}
          */
         this.MaxCps = null;
@@ -4408,10 +4850,22 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IdleConnectTimeout = null;
 
         /**
-         * Scheduling time. After forced rescheduling is triggered, long connections will be disconnected and reassigned within the set scheduling time.Note: This field may return null, indicating that no valid values can be obtained.
+         * Rescheduling trigger duration, valid values: 0-3600s. only TCP/UDP listeners support this. after triggering rescheduling, persistent connections will disconnect and be reassigned within the set scheduling time.
          * @type {number || null}
          */
         this.RescheduleInterval = null;
+
+        /**
+         * Data compression mode.
+         * @type {string || null}
+         */
+        this.DataCompressMode = null;
+
+        /**
+         * Reschedules the startup time. when configured, rescheduling will be triggered upon arrival of the start time.
+         * @type {number || null}
+         */
+        this.RescheduleStartTime = null;
 
     }
 
@@ -4477,6 +4931,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
         this.IdleConnectTimeout = 'IdleConnectTimeout' in params ? params.IdleConnectTimeout : null;
         this.RescheduleInterval = 'RescheduleInterval' in params ? params.RescheduleInterval : null;
+        this.DataCompressMode = 'DataCompressMode' in params ? params.DataCompressMode : null;
+        this.RescheduleStartTime = 'RescheduleStartTime' in params ? params.RescheduleStartTime : null;
 
     }
 }
@@ -4520,8 +4976,7 @@ class LoadBalancerTraffic extends  AbstractModel {
         this.OutBandwidth = null;
 
         /**
-         * CLB domain name
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the CLB domain name.
          * @type {string || null}
          */
         this.Domain = null;
@@ -4554,13 +5009,16 @@ class SpecAvailability extends  AbstractModel {
         super();
 
         /**
-         * Specification type.<li>clb.c2.medium: Standard</li><li>clb.c3.small: Advanced 1</li><li>clb.c3.medium: Advanced 2</li><li>clb.c4.small: Super Large 1</li><li>clb.c4.medium: Super Large 2</li><li>clb.c4.large: Super Large 3</li><li>clb.c4.xlarge: Super Large 4</li><li>shared: Shared</li>Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the specification type.
+<Li>Clb.C2.Medium (standard type)</li><li>clb.c3.small (advanced type 1)</li><li>clb.c3.medium (advanced type 2)</li>.
+<li>clb.c4.small (high-strength type 1)</li> <li>clb.c4.medium (high-strength type 2)</li> <li>clb.c4.large (high-strength type 3)</li> <li>clb.c4.xlarge (high-strength type 4)</li> <li>shared (shared type)</li>.
+
          * @type {string || null}
          */
         this.SpecType = null;
 
         /**
-         * Specification availability. It indicates the resource availability. Valid values: Available, Unavailable.Note: This field may return null, indicating that no valid values can be obtained.
+         * Specification availability. resource availability, "Available": Available, "Unavailable": Unavailable.
          * @type {string || null}
          */
         this.Availability = null;
@@ -4595,14 +5053,13 @@ class ConfigListItem extends  AbstractModel {
         this.UconfigId = null;
 
         /**
-         * Configuration type.
+         * Configuration type. available values: CLB (instance dimension configuration), SERVER (service dimension configuration), LOCATION (rule dimension configuration).
          * @type {string || null}
          */
         this.ConfigType = null;
 
         /**
-         * Configuration name.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Configuration name
          * @type {string || null}
          */
         this.ConfigName = null;
@@ -4614,13 +5071,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ConfigContent = null;
 
         /**
-         * Creates configuration time.
+         * Specifies the configured creation time.
+Format: YYYY-MM-DD HH:MM:ss.
          * @type {string || null}
          */
         this.CreateTimestamp = null;
 
         /**
-         * Modifies configuration time.
+         * Specifies the modification time of the configuration.
+Format: YYYY-MM-DD HH:MM:ss.
          * @type {string || null}
          */
         this.UpdateTimestamp = null;
@@ -4683,6 +5142,166 @@ class RegisterTargetsWithClassicalLBRequest extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Health check information.
+Note: Custom check parameters are currently supported only in certain beta test regions.
+ * @class
+ */
+class HealthCheck extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable health check. 1: Enable; 0: Disable.
+
+It is enabled by default.
+         * @type {number || null}
+         */
+        this.HealthSwitch = null;
+
+        /**
+         * Health check response timeout, in seconds. Value range: 2–60. Default value: 2. The response timeout should be less than the check interval.
+         * @type {number || null}
+         */
+        this.TimeOut = null;
+
+        /**
+         * Health check interval, in seconds. Default value: 5. Value range: 2–300 for IPv4 CLB instances and 5–300 for IPv6 CLB instances.
+Note: The value range is 5–300 for some IPv4 CLB instances of early versions.
+         * @type {number || null}
+         */
+        this.IntervalTime = null;
+
+        /**
+         * Healthy threshold. Default: 3, indicating that if a forwarding is found healthy three consecutive times, it is considered to be normal. Value range: 2-10. Unit: times.
+         * @type {number || null}
+         */
+        this.HealthNum = null;
+
+        /**
+         * Unhealthy threshold. Default: 3, indicating that if a forwarding is found unhealthy three consecutive times, it is considered to be exceptional. Value range: 2-10. Unit: times.
+         * @type {number || null}
+         */
+        this.UnHealthNum = null;
+
+        /**
+         * Health check status code. (This parameter applies only to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners.) Value range: 1–31. Default value: 31.
+1: return 1xx after the check (healthy); 2: return 2xx after the check (healthy); 4: return 3xx after the check (healthy); 8: return 4xx after the check (healthy); 16: return 5xx after the check (healthy). If you expect that multiple codes represent a healthy real server, set the value to the sum of the corresponding values.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HttpCode = null;
+
+        /**
+         * Health check path (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners).
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HttpCheckPath = null;
+
+        /**
+         * Health check domain name, which will be contained in a Host header field of the HTTP protocol. (This parameter applies only to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners. For TCP listeners, this parameter is required if the HTTP health check method is used.)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HttpCheckDomain = null;
+
+        /**
+         * Health check method (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Default: HEAD. Valid values: HEAD and GET.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HttpCheckMethod = null;
+
+        /**
+         * Custom check parameters. health check port, defaults to the port of the backend service unless you want to specify a specific port, otherwise leave it blank. pass the parameter value -1 to restore default settings. (applicable only to TCP/UDP listener).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CheckPort = null;
+
+        /**
+         * A custom check parameter, which is required if the value of CheckType (health check protocol) is CUSTOM. This parameter represents the input format of the health check. Valid values: HEX and TEXT. If the value is HEX, the characters of SendContext and RecvContext can only be selected from 0123456789ABCDEF and the length must be an even number. (Applicable only to TCP/UDP listeners.)
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContextType = null;
+
+        /**
+         * A custom check parameter, which is required if the value of CheckType (health check protocol) is CUSTOM. This parameter represents the content of the request sent by the health check. Only ASCII visible characters are allowed, and the maximum length is 500. (Applicable only to TCP/UDP listeners.)
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SendContext = null;
+
+        /**
+         * A custom check parameter, which is required if the value of CheckType (health check protocol) is CUSTOM. This parameter represents the result returned by the health check. Only ASCII visible characters are allowed, and the maximum length is 500. (Applicable only to TCP/UDP listeners.)
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecvContext = null;
+
+        /**
+         * Protocol used for health checks. Valid values: TCP (for TCP listeners, TCP_SSL listeners, and QUIC listeners), HTTP (for TCP listeners, TCP_SSL listeners, QUIC listeners, HTTP rules, and HTTPS rules), HTTPS (for HTTPS rules), GRPC (for HTTP rules and HTTPS rules), PING (for UDP listeners), and CUSTOM (for UDP listeners and TCP listeners). The default value is HTTP for HTTP listeners, TCP for TCP, TCP_SSL, and QUIC listeners, and PING for UDP listeners. For HTTPS listeners, the protocol is the same as the backend forwarding protocol.
+         * @type {string || null}
+         */
+        this.CheckType = null;
+
+        /**
+         * HTTP version. This field indicates the HTTP version of real servers and is required if the value of CheckType is HTTP. Valid values: HTTP/1.0 and HTTP/1.1. (This field applies only to TCP listeners.)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HttpVersion = null;
+
+        /**
+         * Source IP address type for health checks. 0: use the LB VIP as the source IP address; 1: use an IP address in the 100.64 range as the source IP address.
+         * @type {number || null}
+         */
+        this.SourceIpType = null;
+
+        /**
+         * Health check status code when the protocol is GRPC. (This parameter applies only to rules with the backend forwarding protocol of GRPC.) Default value: 12. You can enter a single numerical value, multiple numerical values, or a range. For example, 20, 20,25, or 0-99.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExtendedCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HealthSwitch = 'HealthSwitch' in params ? params.HealthSwitch : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
+        this.HealthNum = 'HealthNum' in params ? params.HealthNum : null;
+        this.UnHealthNum = 'UnHealthNum' in params ? params.UnHealthNum : null;
+        this.HttpCode = 'HttpCode' in params ? params.HttpCode : null;
+        this.HttpCheckPath = 'HttpCheckPath' in params ? params.HttpCheckPath : null;
+        this.HttpCheckDomain = 'HttpCheckDomain' in params ? params.HttpCheckDomain : null;
+        this.HttpCheckMethod = 'HttpCheckMethod' in params ? params.HttpCheckMethod : null;
+        this.CheckPort = 'CheckPort' in params ? params.CheckPort : null;
+        this.ContextType = 'ContextType' in params ? params.ContextType : null;
+        this.SendContext = 'SendContext' in params ? params.SendContext : null;
+        this.RecvContext = 'RecvContext' in params ? params.RecvContext : null;
+        this.CheckType = 'CheckType' in params ? params.CheckType : null;
+        this.HttpVersion = 'HttpVersion' in params ? params.HttpVersion : null;
+        this.SourceIpType = 'SourceIpType' in params ? params.SourceIpType : null;
+        this.ExtendedCode = 'ExtendedCode' in params ? params.ExtendedCode : null;
 
     }
 }
@@ -4752,8 +5371,7 @@ class DescribeTargetsResponse extends  AbstractModel {
         super();
 
         /**
-         * Information of real servers bound to the listener
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Information of real servers bound to the listener.
          * @type {Array.<ListenerBackend> || null}
          */
         this.Listeners = null;
@@ -4861,8 +5479,7 @@ Enable this feature with caution if the maximum number of connections is limited
         this.KeepaliveEnable = null;
 
         /**
-         * Whether to send an RST packet to the client when a listener is unbound from a real server. This parameter applies only to TCP listeners.
-True: send an RST packet to the client; False: do not send an RST packet to the client.
+         * Reschedules when unbinding real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
          * @type {boolean || null}
          */
         this.DeregisterTargetRst = null;
@@ -4899,19 +5516,19 @@ Default value: -1, which indicates no limit.
         this.MaxCps = null;
 
         /**
-         * Idle connection timeout, in seconds. This parameter applies only to TCP listeners. Default value: 900. Value range: 300–900 for shared instances and dedicated instances and 300–1980 for LCU-supported instances. To set a value greater than 2000, [submit a ticket for application](https://console.cloud.tencent.com/workorder/category). The maximum value can be 3600.
+         * Specifies the idle connection timeout in seconds. this parameter applies only to TCP/UDP listeners. default value: 900 for TCP listeners and 300 for UDP listeners. value range: 10–900 for shared instances and dedicated instances and 10–1980 for lcu-supported instances. to set a value exceeding 1980, [submit a ticket application](https://console.cloud.tencent.com/workorder/category). the maximum settable value is 3600.
          * @type {number || null}
          */
         this.IdleConnectTimeout = null;
 
         /**
-         * 
+         * Specifies whether PP is supported for TCP_SSL and QUIC.
          * @type {boolean || null}
          */
         this.ProxyProtocol = null;
 
         /**
-         * Whether to enable SNAT. True: enable SNAT; False: do not enable SNAT.
+         * Whether SNAT (source IP replacement) is enabled. valid values: True (enabled), False (disabled). disabled by default. note: when SnatEnable is enabled, the client source IP will be replaced, at this point the `pass through client source IP` option is disabled, and vice versa.
          * @type {boolean || null}
          */
         this.SnatEnable = null;
@@ -4921,6 +5538,36 @@ Default value: -1, which indicates no limit.
          * @type {string || null}
          */
         this.DataCompressMode = null;
+
+        /**
+         * Reschedules when setting backend server weight to 0. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * @type {boolean || null}
+         */
+        this.RescheduleTargetZeroWeight = null;
+
+        /**
+         * Reschedules when health check exceptions occur on real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * @type {boolean || null}
+         */
+        this.RescheduleUnhealthy = null;
+
+        /**
+         * Reschedules when adding or removing backend servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * @type {boolean || null}
+         */
+        this.RescheduleExpandTarget = null;
+
+        /**
+         * Specifies the trigger start time for rescheduling. value range: 0-3600s. supported only by TCP/UDP listeners.
+         * @type {number || null}
+         */
+        this.RescheduleStartTime = null;
+
+        /**
+         * Rescheduling trigger duration. valid values: 0-3600s. only TCP/UDP listeners support this.
+         * @type {number || null}
+         */
+        this.RescheduleInterval = null;
 
     }
 
@@ -4965,6 +5612,39 @@ Default value: -1, which indicates no limit.
         this.ProxyProtocol = 'ProxyProtocol' in params ? params.ProxyProtocol : null;
         this.SnatEnable = 'SnatEnable' in params ? params.SnatEnable : null;
         this.DataCompressMode = 'DataCompressMode' in params ? params.DataCompressMode : null;
+        this.RescheduleTargetZeroWeight = 'RescheduleTargetZeroWeight' in params ? params.RescheduleTargetZeroWeight : null;
+        this.RescheduleUnhealthy = 'RescheduleUnhealthy' in params ? params.RescheduleUnhealthy : null;
+        this.RescheduleExpandTarget = 'RescheduleExpandTarget' in params ? params.RescheduleExpandTarget : null;
+        this.RescheduleStartTime = 'RescheduleStartTime' in params ? params.RescheduleStartTime : null;
+        this.RescheduleInterval = 'RescheduleInterval' in params ? params.RescheduleInterval : null;
+
+    }
+}
+
+/**
+ * SetSecurityGroupForLoadbalancers response structure.
+ * @class
+ */
+class SetSecurityGroupForLoadbalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5024,7 +5704,7 @@ class RegisterTargetsRequest extends  AbstractModel {
         this.Targets = null;
 
         /**
-         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or Domain+Url.
+         * Specifies the forwarding rule ID, which can be obtained through the DescribeListeners API (https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1). you must provide this parameter or either Domain or Url when binding a backend service to a layer-7 forwarding rule.
          * @type {string || null}
          */
         this.LocationId = null;
@@ -5069,135 +5749,24 @@ class RegisterTargetsRequest extends  AbstractModel {
 }
 
 /**
- * Health check information.
-Note: Custom check parameters are currently supported only in certain beta test regions.
+ * DisassociateCustomizedConfig request structure.
  * @class
  */
-class HealthCheck extends  AbstractModel {
+class DisassociateCustomizedConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable health check. 1: Enable; 0: Disable.
-
-It is enabled by default.
-         * @type {number || null}
-         */
-        this.HealthSwitch = null;
-
-        /**
-         * Health check response timeout, in seconds. Value range: 2–60. Default value: 2. The response timeout should be less than the check interval.
-         * @type {number || null}
-         */
-        this.TimeOut = null;
-
-        /**
-         * Health check interval, in seconds. Default value: 5. Value range: 2–300 for IPv4 CLB instances and 5–300 for IPv6 CLB instances.
-Note: The value range is 5–300 for some IPv4 CLB instances of early versions.
-         * @type {number || null}
-         */
-        this.IntervalTime = null;
-
-        /**
-         * Healthy threshold. Default: 3, indicating that if a forwarding is found healthy three consecutive times, it is considered to be normal. Value range: 2-10. Unit: times.
-         * @type {number || null}
-         */
-        this.HealthNum = null;
-
-        /**
-         * Unhealthy threshold. Default: 3, indicating that if a forwarding is found unhealthy three consecutive times, it is considered to be exceptional. Value range: 2-10. Unit: times.
-         * @type {number || null}
-         */
-        this.UnHealthNum = null;
-
-        /**
-         * Health check status code. (This parameter applies only to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners.) Value range: 1–31. Default value: 31.
-1: return 1xx after the check (healthy); 2: return 2xx after the check (healthy); 4: return 3xx after the check (healthy); 8: return 4xx after the check (healthy); 16: return 5xx after the check (healthy). If you expect that multiple codes represent a healthy real server, set the value to the sum of the corresponding values.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.HttpCode = null;
-
-        /**
-         * Health check path (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners).
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Configuration ID.
          * @type {string || null}
          */
-        this.HttpCheckPath = null;
+        this.UconfigId = null;
 
         /**
-         * Health check domain name, which will be contained in a Host header field of the HTTP protocol. (This parameter applies only to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners. For TCP listeners, this parameter is required if the HTTP health check method is used.)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Specifies the list of unbinding.
+         * @type {Array.<BindItem> || null}
          */
-        this.HttpCheckDomain = null;
-
-        /**
-         * Health check method (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Default: HEAD. Valid values: HEAD and GET.
-
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HttpCheckMethod = null;
-
-        /**
-         * A custom check parameter, representing the health check port, which is the port of the real server by default. Unless you want to specify a port, it is recommended to leave it empty. (Applicable only to TCP/UDP listeners)
-
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.CheckPort = null;
-
-        /**
-         * A custom check parameter, which is required if the value of CheckType (health check protocol) is CUSTOM. This parameter represents the input format of the health check. Valid values: HEX and TEXT. If the value is HEX, the characters of SendContext and RecvContext can only be selected from 0123456789ABCDEF and the length must be an even number. (Applicable only to TCP/UDP listeners.)
-
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ContextType = null;
-
-        /**
-         * A custom check parameter, which is required if the value of CheckType (health check protocol) is CUSTOM. This parameter represents the content of the request sent by the health check. Only ASCII visible characters are allowed, and the maximum length is 500. (Applicable only to TCP/UDP listeners.)
-
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SendContext = null;
-
-        /**
-         * A custom check parameter, which is required if the value of CheckType (health check protocol) is CUSTOM. This parameter represents the result returned by the health check. Only ASCII visible characters are allowed, and the maximum length is 500. (Applicable only to TCP/UDP listeners.)
-
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RecvContext = null;
-
-        /**
-         * Protocol used for health checks. Valid values: TCP (for TCP listeners, TCP_SSL listeners, and QUIC listeners), HTTP (for TCP listeners, TCP_SSL listeners, QUIC listeners, HTTP rules, and HTTPS rules), HTTPS (for HTTPS rules), GRPC (for HTTP rules and HTTPS rules), PING (for UDP listeners), and CUSTOM (for UDP listeners and TCP listeners). The default value is HTTP for HTTP listeners, TCP for TCP, TCP_SSL, and QUIC listeners, and PING for UDP listeners. For HTTPS listeners, the protocol is the same as the backend forwarding protocol.
-         * @type {string || null}
-         */
-        this.CheckType = null;
-
-        /**
-         * HTTP version. This field indicates the HTTP version of real servers and is required if the value of CheckType is HTTP. Valid values: HTTP/1.0 and HTTP/1.1. (This field applies only to TCP listeners.)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.HttpVersion = null;
-
-        /**
-         * Source IP address type for health checks. 0: use the LB VIP as the source IP address; 1: use an IP address in the 100.64 range as the source IP address.
-         * @type {number || null}
-         */
-        this.SourceIpType = null;
-
-        /**
-         * Health check status code when the protocol is GRPC. (This parameter applies only to rules with the backend forwarding protocol of GRPC.) Default value: 12. You can enter a single numerical value, multiple numerical values, or a range. For example, 20, 20,25, or 0-99.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExtendedCode = null;
+        this.BindList = null;
 
     }
 
@@ -5208,23 +5777,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.HealthSwitch = 'HealthSwitch' in params ? params.HealthSwitch : null;
-        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
-        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
-        this.HealthNum = 'HealthNum' in params ? params.HealthNum : null;
-        this.UnHealthNum = 'UnHealthNum' in params ? params.UnHealthNum : null;
-        this.HttpCode = 'HttpCode' in params ? params.HttpCode : null;
-        this.HttpCheckPath = 'HttpCheckPath' in params ? params.HttpCheckPath : null;
-        this.HttpCheckDomain = 'HttpCheckDomain' in params ? params.HttpCheckDomain : null;
-        this.HttpCheckMethod = 'HttpCheckMethod' in params ? params.HttpCheckMethod : null;
-        this.CheckPort = 'CheckPort' in params ? params.CheckPort : null;
-        this.ContextType = 'ContextType' in params ? params.ContextType : null;
-        this.SendContext = 'SendContext' in params ? params.SendContext : null;
-        this.RecvContext = 'RecvContext' in params ? params.RecvContext : null;
-        this.CheckType = 'CheckType' in params ? params.CheckType : null;
-        this.HttpVersion = 'HttpVersion' in params ? params.HttpVersion : null;
-        this.SourceIpType = 'SourceIpType' in params ? params.SourceIpType : null;
-        this.ExtendedCode = 'ExtendedCode' in params ? params.ExtendedCode : null;
+        this.UconfigId = 'UconfigId' in params ? params.UconfigId : null;
+
+        if (params.BindList) {
+            this.BindList = new Array();
+            for (let z in params.BindList) {
+                let obj = new BindItem();
+                obj.deserialize(params.BindList[z]);
+                this.BindList.push(obj);
+            }
+        }
 
     }
 }
@@ -5284,7 +5846,9 @@ class CreateTopicRequest extends  AbstractModel {
         this.TopicType = null;
 
         /**
-         * Logset retention period, in days. Default value: 30 days. Value range: [1, 3600].
+         * Storage time in days, defaults to 30.
+-Log access to standard storage supports 1 to 3600 days. a value of 3640 indicates permanent retention.
+-Log access to infrequent storage supports 7 to 3600 days. a value of 3640 indicates permanent retention.
          * @type {number || null}
          */
         this.Period = null;
@@ -5322,13 +5886,13 @@ class DeleteListenerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * ID of the listener to be deleted
+         * The listener ID to be deleted, can be accessed through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -5413,7 +5977,7 @@ class DescribeCustomizedConfigAssociateListRequest extends  AbstractModel {
         super();
 
         /**
-         * Configuration ID.
+         * Specifies the configuration ID, which can be obtained through the [DescribeCustomizedConfigList](https://www.tencentcloud.comom/document/product/214/60009?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.UconfigId = null;
@@ -5431,7 +5995,7 @@ class DescribeCustomizedConfigAssociateListRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Searches for the domain name.
+         * Search Domain. can be queried through the `Domain` field in the [DescribeLoadBalancersDetail](https://www.tencentcloud.comom/document/product/214/46916?from_cn_redirect=1) API return value.
          * @type {string || null}
          */
         this.Domain = null;
@@ -5548,23 +6112,60 @@ class DescribeLoadBalancersDetailRequest extends  AbstractModel {
         this.Fields = null;
 
         /**
-         * When the Fields include TargetId, TargetAddress, TargetPort, TargetWeight, ListenerId, Protocol, Port, LocationId, Domain, and Url, you should select exporting the Target of the target group or a non-target group. Valid values: NODE, GROUP.
+         * When the Fields include TargetId, TargetAddress, TargetPort, TargetWeight, ListenerId, Protocol, Port, LocationId, Domain, and Url, you must select exporting the Target of the Target GROUP or a non-Target GROUP. valid values: NODE, GROUP.
          * @type {string || null}
          */
         this.TargetType = null;
 
         /**
-         * Filter condition of querying lists describing CLB instance details:
-<li> loadbalancer-id - String - Required: no - (Filter condition) CLB instance ID, such as "lb-12345678". </li>
-<li> project-id - String - Required: no - (Filter condition) Project ID, such as "0" and "123".</li>
-<li> network - String - Required: no - (Filter condition) Network type of the CLB instance, such as "Public" and "Private".</li>
-<li> vip - String - Required: no - (Filter condition) CLB instance VIP, such as "1.1.1.1" and "2204::22:3". </li>
-<li> target-ip - String - Required: no - (Filter condition) Private IP of the target real servers, such as"1.1.1.1" and "2203::214:4".</li>
-<li> vpcid - String - Required: no - (Filter condition) Identifier of the VPC instance to which the CLB instance belongs, such as "vpc-12345678".</li>
-<li> zone - String - Required: no - (Filter condition) Availability zone where the CLB instance resides, such as "ap-guangzhou-1".</li>
-<li> tag-key - String - Required: no - (Filter condition) Tag key of the CLB instance, such as "name".</li>
-<li> tag:* - String - Required: no - (Filter condition) CLB instance tag, followed by tag key after the colon ':'. For example, use {"Name": "tag:name","Values": ["zhangsan", "lisi"]} to filter the tag key “name” with the tag value “zhangsan” and “lisi”.</li>
-<li> fuzzy-search - String - Required: no - (Filter condition) Fuzzy search for CLB instance VIP and CLB instance name, such as "1.1".</li>
+         * Querying conditions for cloud load balancer detailed information list. detailed filter criteria.
+- loadbalancer-id
+Filter by [clb ID], for example: lb-rbw5skde.
+Type: String.
+Required: No
+Method for obtaining: [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1).
+- project-id
+Filters by [project ID]. for example: "0", "123".
+Type: String.
+Required: No
+Method for obtaining: [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1).
+- network
+Filters by [clb network type]. for example: Public.
+Type: String.
+Required: No
+Valid values: Private (Private network), Public (Public network).
+- vip
+Filter by [cloud load balancer VIP], such as "1.1.1.1", "2204::22:3".
+Type: String.
+Required: No
+- vpcid
+Filter by the vpc to which the cloud load balancer belongs, such as "vpc-12345678".
+Type: String.
+Required: No
+Method for obtaining: [DescribeZones](https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1).
+- target-ip
+Filters by the private network IP of the backend destination. for example: "1.1.1.1", "2203::214:4".
+Type: String.
+Required: No
+- zone
+Filter by [availability zone of the cloud load balancer]. for example: "ap-guangzhou-1".
+Type: String.
+Required: No
+Method for obtaining: [DescribeZones](https://www.tencentcloud.comom/document/product/213/15707?from_cn_redirect=1).
+- tag-key
+Filters by [tag key of the cloud load balancer tag], for example: "name".
+Type: String.
+Required: No
+Method for obtaining: [DescribeTags](https://www.tencentcloud.comom/document/api/651/35316?from_cn_redirect=1).
+- tag:*
+Filter by [cloud load balancer tag], where ':' is followed by the tag key. for example, to filter by tag key 'name' with tag Values 'zhangsan' and 'lisi', use {"name": "tag:name","Values": ["zhangsan", "lisi"]}.
+Type: String.
+Required: No
+Method for obtaining: [DescribeTagKeys](https://www.tencentcloud.comom/document/api/651/35318?from_cn_redirect=1).
+- fuzzy-search
+Searches by [clb VIP, clb name] using fuzzy search, for example: "1.1".
+Type: String.
+Required: No
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5622,7 +6223,7 @@ class TargetGroupBackend extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Listening port of real server
+         * Specifies the listening port of the backend service. for a port range listener, this field returns 0, representing an invalid port, indicating settings not supported.
          * @type {number || null}
          */
         this.Port = null;
@@ -5634,22 +6235,19 @@ class TargetGroupBackend extends  AbstractModel {
         this.Weight = null;
 
         /**
-         * Public IP of real server
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Public network IP of the real server
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
 
         /**
-         * Private IP of real server
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Private network IP of the real server
          * @type {Array.<string> || null}
          */
         this.PrivateIpAddresses = null;
 
         /**
-         * Real server instance name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Instance name of the real server
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -5662,15 +6260,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.RegisteredTime = null;
 
         /**
-         * Unique ENI ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unique ID of the ENI
          * @type {string || null}
          */
         this.EniId = null;
 
         /**
-         * AZ ID of the real server
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the availability zone ID of the backend service.
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -5807,8 +6403,7 @@ class FunctionTarget extends  AbstractModel {
         super();
 
         /**
-         * SCF related information
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * SCF information
          * @type {FunctionInfo || null}
          */
         this.Function = null;
@@ -5944,7 +6539,7 @@ class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
         this.TargetGroupId = null;
 
         /**
-         * Array of servers for which to modify weights
+         * Array of servers whose weight is to be modified. Port is a required item in this api.
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
@@ -6065,6 +6660,238 @@ class ModifyBlockIPListRequest extends  AbstractModel {
         this.BlockIPList = 'BlockIPList' in params ? params.BlockIPList : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.AddStrategy = 'AddStrategy' in params ? params.AddStrategy : null;
+
+    }
+}
+
+/**
+ * HTTP/HTTPS listener forwarding rule (output)
+ * @class
+ */
+class RuleOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Forwarding rule ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Domain name of the forwarding rule
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Path of forwarding rules.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Session persistence time
+         * @type {number || null}
+         */
+        this.SessionExpireTime = null;
+
+        /**
+         * Health Check Information
+         * @type {HealthCheck || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * Certificate information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CertificateOutput || null}
+         */
+        this.Certificate = null;
+
+        /**
+         * Request forwarding method in the rules.WRR, LEAST_CONN, and IP_HASH respectively indicate weighted round robin, least connections, and IP hash.
+         * @type {string || null}
+         */
+        this.Scheduler = null;
+
+        /**
+         * ID of the listener to which the forwarding rule belongs
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Redirection target information of the forwarding rule
+         * @type {RewriteTarget || null}
+         */
+        this.RewriteTarget = null;
+
+        /**
+         * Whether to enable gzip
+         * @type {boolean || null}
+         */
+        this.HttpGzip = null;
+
+        /**
+         * Whether the forwarding rule is automatically created
+         * @type {boolean || null}
+         */
+        this.BeAutoCreated = null;
+
+        /**
+         * Whether to use as the default domain name
+         * @type {boolean || null}
+         */
+        this.DefaultServer = null;
+
+        /**
+         * Whether to enable Http2
+         * @type {boolean || null}
+         */
+        this.Http2 = null;
+
+        /**
+         * Forwarding protocol between CLB and real server
+         * @type {string || null}
+         */
+        this.ForwardType = null;
+
+        /**
+         * Forwarding rule creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Real server type. NODE indicates binding to a general node, and TARGETGROUP indicates binding to a target group.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * Basic information of a bound target group. This field will be returned if a target group is bound to a rule.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {BasicTargetGroupInfo || null}
+         */
+        this.TargetGroup = null;
+
+        /**
+         * WAF instance ID.
+         * @type {string || null}
+         */
+        this.WafDomainId = null;
+
+        /**
+         * Called server routing. valid when ForwardType is TRPC. currently not yet available.
+         * @type {string || null}
+         */
+        this.TrpcCallee = null;
+
+        /**
+         * TRPC calling service api. valid when ForwardType is TRPC. currently not yet available.
+         * @type {string || null}
+         */
+        this.TrpcFunc = null;
+
+        /**
+         * QUIC status. QUIC_ACTIVE means enabled, QUIC_INACTIVE means not enabled. note that only HTTPS domain names can enable QUIC.
+         * @type {string || null}
+         */
+        this.QuicStatus = null;
+
+        /**
+         * Specifies the domain name list of the forwarding rule.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * List of bound target groups
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BasicTargetGroupInfo> || null}
+         */
+        this.TargetGroupList = null;
+
+        /**
+         * OAuth configuration status.
+         * @type {OAuth || null}
+         */
+        this.OAuth = null;
+
+        /**
+         * Specifies the custom cookie name.
+         * @type {string || null}
+         */
+        this.CookieName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+
+        if (params.HealthCheck) {
+            let obj = new HealthCheck();
+            obj.deserialize(params.HealthCheck)
+            this.HealthCheck = obj;
+        }
+
+        if (params.Certificate) {
+            let obj = new CertificateOutput();
+            obj.deserialize(params.Certificate)
+            this.Certificate = obj;
+        }
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+
+        if (params.RewriteTarget) {
+            let obj = new RewriteTarget();
+            obj.deserialize(params.RewriteTarget)
+            this.RewriteTarget = obj;
+        }
+        this.HttpGzip = 'HttpGzip' in params ? params.HttpGzip : null;
+        this.BeAutoCreated = 'BeAutoCreated' in params ? params.BeAutoCreated : null;
+        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.Http2 = 'Http2' in params ? params.Http2 : null;
+        this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+
+        if (params.TargetGroup) {
+            let obj = new BasicTargetGroupInfo();
+            obj.deserialize(params.TargetGroup)
+            this.TargetGroup = obj;
+        }
+        this.WafDomainId = 'WafDomainId' in params ? params.WafDomainId : null;
+        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
+        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
+        this.QuicStatus = 'QuicStatus' in params ? params.QuicStatus : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+
+        if (params.TargetGroupList) {
+            this.TargetGroupList = new Array();
+            for (let z in params.TargetGroupList) {
+                let obj = new BasicTargetGroupInfo();
+                obj.deserialize(params.TargetGroupList[z]);
+                this.TargetGroupList.push(obj);
+            }
+        }
+
+        if (params.OAuth) {
+            let obj = new OAuth();
+            obj.deserialize(params.OAuth)
+            this.OAuth = obj;
+        }
+        this.CookieName = 'CookieName' in params ? params.CookieName : null;
 
     }
 }
@@ -6214,13 +7041,13 @@ class DescribeListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/api/214/30685?from_cn_redirect=1) api to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Array of CLB listener IDs to query (100 IDs at most).
+         * Specifies the array of clb listener ids to query, with a maximum of 100. you can call the [DescribeListeners](https://www.tencentcloud.comom/document/api/214/30686?from_cn_redirect=1) api to obtain the ids.
          * @type {Array.<string> || null}
          */
         this.ListenerIds = null;
@@ -6232,7 +7059,7 @@ class DescribeListenersRequest extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Port of the listeners to be queried
+         * Port of listener to query. value range: 1-65535.
          * @type {number || null}
          */
         this.Port = null;
@@ -6290,34 +7117,75 @@ class CreateClsLogSetResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCrossTargets request structure.
+ * Details of a real server bound to a listener
  * @class
  */
-class DescribeCrossTargetsRequest extends  AbstractModel {
+class Backend extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of real server lists returned. Default value: 20; maximum value: 100.
-         * @type {number || null}
+         * Specifies the backend service type. valid values: CVM, ENI, CCN, EVM, GLOBALROUTE, NAT, SRV.
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Type = null;
 
         /**
-         * Starting offset of the real server list returned. Default value: 0.
-         * @type {number || null}
+         * Unique ID of a real server, which can be obtained from the unInstanceId field in the return of the DescribeInstances API
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.InstanceId = null;
 
         /**
-         * Filter conditions to query CVMs and ENIs
-<li> `vpc-id` - String - Required: No - (Filter condition) Filter by VPC ID, such as "vpc-12345678".</li>
-<li> `ip` - String - Required: No - (Filter condition) Filter by real server IP, such as "192.168.0.1".</li>
-<li> `listener-id` - String - Required: No - (Filter condition) Filter by listener ID, such as "lbl-12345678".</li>
-<li> `location-id` - String - Required: No - (Filter condition) Filter by forwarding rule ID of the layer-7 listener, such as "loc-12345678".</li>
-         * @type {Array.<Filter> || null}
+         * Specifies the listening port of the backend service. if it is a full listening target group bound to a port range listener, this port returns 0, indicating an invalid port. the port of the bound backend service follows the listener port.
+         * @type {number || null}
          */
-        this.Filters = null;
+        this.Port = null;
+
+        /**
+         * Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Public IP of a real server
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PublicIpAddresses = null;
+
+        /**
+         * Private network IP of the real server
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * Real server instance names
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Real server binding time
+         * @type {string || null}
+         */
+        this.RegisteredTime = null;
+
+        /**
+         * Unique ENI ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EniId = null;
+
+        /**
+         * Tag.
+         * @type {string || null}
+         */
+        this.Tag = null;
 
     }
 
@@ -6328,17 +7196,16 @@ class DescribeCrossTargetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
+        this.EniId = 'EniId' in params ? params.EniId : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
 
     }
 }
@@ -6379,120 +7246,24 @@ class LBChargePrepaid extends  AbstractModel {
 }
 
 /**
- * Classic CLB listener information
+ * AddCustomizedConfig response structure.
  * @class
  */
-class ClassicalListener extends  AbstractModel {
+class AddCustomizedConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB listener ID
+         * Configuration ID.
          * @type {string || null}
          */
-        this.ListenerId = null;
+        this.ConfigId = null;
 
         /**
-         * CLB listener port
-         * @type {number || null}
-         */
-        this.ListenerPort = null;
-
-        /**
-         * Backend forwarding port of a listener
-         * @type {number || null}
-         */
-        this.InstancePort = null;
-
-        /**
-         * Listener name
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ListenerName = null;
-
-        /**
-         * Listener protocol type
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Session persistence time
-         * @type {number || null}
-         */
-        this.SessionExpire = null;
-
-        /**
-         * Whether health check is enabled. 1: enabled; 0: disabled.
-         * @type {number || null}
-         */
-        this.HealthSwitch = null;
-
-        /**
-         * Response timeout period
-         * @type {number || null}
-         */
-        this.TimeOut = null;
-
-        /**
-         * Check interval
-         * @type {number || null}
-         */
-        this.IntervalTime = null;
-
-        /**
-         * Health threshold
-         * @type {number || null}
-         */
-        this.HealthNum = null;
-
-        /**
-         * Unhealthy threshold
-         * @type {number || null}
-         */
-        this.UnhealthNum = null;
-
-        /**
-         * Request balancing method for listeners of the classic public network CLB. An empty string or wrr indicates weighted round robin. ip_hash indicates consistent hashing based on the accessed source IP address. least_conn indicates least connections.
-         * @type {string || null}
-         */
-        this.HttpHash = null;
-
-        /**
-         * Health check return code for HTTP and HTTPS listeners of a public network classic CLB. For more information, see the explanation of the field in the listener creating API.
-         * @type {number || null}
-         */
-        this.HttpCode = null;
-
-        /**
-         * Health check path for HTTP and HTTPS listeners of a public network classic CLB
-         * @type {string || null}
-         */
-        this.HttpCheckPath = null;
-
-        /**
-         * Authentication method for an HTTPS listener of a public network classic CLB
-         * @type {string || null}
-         */
-        this.SSLMode = null;
-
-        /**
-         * Server certificate ID for an HTTPS listener of a public network classic CLB
-         * @type {string || null}
-         */
-        this.CertId = null;
-
-        /**
-         * Client certificate ID for an HTTPS listener of a public network classic CLB
-         * @type {string || null}
-         */
-        this.CertCaId = null;
-
-        /**
-         * Listener status. Value range: 0 (creating), 1 (running)
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -6503,24 +7274,8 @@ class ClassicalListener extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
-        this.InstancePort = 'InstancePort' in params ? params.InstancePort : null;
-        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.SessionExpire = 'SessionExpire' in params ? params.SessionExpire : null;
-        this.HealthSwitch = 'HealthSwitch' in params ? params.HealthSwitch : null;
-        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
-        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
-        this.HealthNum = 'HealthNum' in params ? params.HealthNum : null;
-        this.UnhealthNum = 'UnhealthNum' in params ? params.UnhealthNum : null;
-        this.HttpHash = 'HttpHash' in params ? params.HttpHash : null;
-        this.HttpCode = 'HttpCode' in params ? params.HttpCode : null;
-        this.HttpCheckPath = 'HttpCheckPath' in params ? params.HttpCheckPath : null;
-        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6574,7 +7329,8 @@ class ModifyLoadBalancersProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * IDs of CLB instances ID(s).
+         * One or more load balancing instance ids to be operated. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ids.
+Specifies the maximum length supported by the list is 20.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -6596,6 +7352,49 @@ class ModifyLoadBalancersProjectRequest extends  AbstractModel {
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * AssociateCustomizedConfig request structure.
+ * @class
+ */
+class AssociateCustomizedConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration ID.
+         * @type {string || null}
+         */
+        this.UconfigId = null;
+
+        /**
+         * Associated server or location
+         * @type {Array.<BindItem> || null}
+         */
+        this.BindList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UconfigId = 'UconfigId' in params ? params.UconfigId : null;
+
+        if (params.BindList) {
+            this.BindList = new Array();
+            for (let z in params.BindList) {
+                let obj = new BindItem();
+                obj.deserialize(params.BindList[z]);
+                this.BindList.push(obj);
+            }
+        }
 
     }
 }
@@ -6652,13 +7451,13 @@ Default value: UNIDIRECTIONAL.
         this.CertContent = null;
 
         /**
-         * Name of the uploaded client CA certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+         * Upload client CA certificate name. if SSLMode=MUTUAL and there is no CertCaId, this parameter is required.
          * @type {string || null}
          */
         this.CertCaName = null;
 
         /**
-         * Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
+         * Upload client certificate content. if SSLMode is MUTUAL and there is no CertCaId, this parameter is required.
          * @type {string || null}
          */
         this.CertCaContent = null;
@@ -6729,13 +7528,14 @@ class SetLoadBalancerSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Array of security group IDs. One CLB instance can be bound to up to 50 security groups. If you want to unbind all security groups, you do not need to pass in this parameter, or you can pass in an empty array.
+         * Specifies an array of security group ids. a load balancing instance supports a maximum binding of 50 security groups. to unbind all security groups, omit this parameter.
+Can be queried through the [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.SecurityGroups = null;
@@ -6814,31 +7614,38 @@ class SetCustomizedConfigForLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * Operation type: `ADD`, `DELETE`, `UPDATE`, `BIND`, `UNBIND`
+         * Operation type.
+-ADD. specifies the creation.
+- DELETE: DELETE.
+-UPDATE: modify.
+-BIND: specifies the binding status.
+-UNBIND: unbind.
          * @type {string || null}
          */
         this.OperationType = null;
 
         /**
-         * This field is required except for creating custom configurations, such as "pz-1234abcd".
+         * Personalized configuration ID. this field is required except when creating a custom configuration, for example: pz-1234abcd.
          * @type {string || null}
          */
         this.UconfigId = null;
 
         /**
-         * This field is required when creating or modifying custom configurations.
+         * Specifies the personalized configuration content. this field is required when creating or modifying custom configuration.
+Specifies specific restrictions. view layer-7 personalized configuration (https://www.tencentcloud.comom/document/product/214/15171?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ConfigContent = null;
 
         /**
-         * This field is required when creating or renaming custom configurations.
+         * Custom configuration name. specifies the name when creating or modifying a custom configuration. this field is required.
          * @type {string || null}
          */
         this.ConfigName = null;
 
         /**
-         * This field is required when binding/unbinding resources.
+         * CLB instance ID. this field is required for bind/unbind operations.
+Can be queried through the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) api.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -6932,10 +7739,10 @@ class CreateTargetGroupResponse extends  AbstractModel {
 }
 
 /**
- * MigrateClassicalLoadBalancers response structure.
+ * AssociateCustomizedConfig response structure.
  * @class
  */
-class MigrateClassicalLoadBalancersResponse extends  AbstractModel {
+class AssociateCustomizedConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7002,8 +7809,7 @@ class ClassicalLoadBalancerInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * List of CLB instance IDs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CLB instance ID list
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -7038,8 +7844,7 @@ class DescribeListenersResponse extends  AbstractModel {
         this.Listeners = null;
 
         /**
-         * Total number of listeners (with filters of port, protocol, and listener ID applied).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Total number of listeners (filtered by port, protocol, and listener ID).
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7075,167 +7880,45 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * HTTP/HTTPS listener forwarding rule (output)
+ * Operation protection information of cloud load balancer.
  * @class
  */
-class RuleOutput extends  AbstractModel {
+class LBOperateProtectInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Forwarding rule ID
+         * CLB instance ID.
          * @type {string || null}
          */
-        this.LocationId = null;
+        this.LoadBalancerId = null;
 
         /**
-         * Domain name of the forwarding rule.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Forwarding rule path.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Session persistence time
-         * @type {number || null}
-         */
-        this.SessionExpireTime = null;
-
-        /**
-         * Health check information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {HealthCheck || null}
-         */
-        this.HealthCheck = null;
-
-        /**
-         * Certificate information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CertificateOutput || null}
-         */
-        this.Certificate = null;
-
-        /**
-         * Request forwarding method in the rules.WRR, LEAST_CONN, and IP_HASH respectively indicate weighted round robin, least connections, and IP hash.
-         * @type {string || null}
-         */
-        this.Scheduler = null;
-
-        /**
-         * ID of the listener to which the forwarding rule belongs
-         * @type {string || null}
-         */
-        this.ListenerId = null;
-
-        /**
-         * Redirect target information of a forwarding rule
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {RewriteTarget || null}
-         */
-        this.RewriteTarget = null;
-
-        /**
-         * Whether to enable gzip
+         * Protected status. true means operation protection is enabled. false means operation protection is disabled.
          * @type {boolean || null}
          */
-        this.HttpGzip = null;
+        this.ProtectState = null;
 
         /**
-         * Whether the forwarding rule is automatically created
-         * @type {boolean || null}
-         */
-        this.BeAutoCreated = null;
-
-        /**
-         * Whether to use as the default domain name
-         * @type {boolean || null}
-         */
-        this.DefaultServer = null;
-
-        /**
-         * Whether to enable Http2
-         * @type {boolean || null}
-         */
-        this.Http2 = null;
-
-        /**
-         * Forwarding protocol between CLB and real server
-         * @type {string || null}
-         */
-        this.ForwardType = null;
-
-        /**
-         * Forwarding rule creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Real server type. NODE indicates binding to a general node, and TARGETGROUP indicates binding to a target group.
-         * @type {string || null}
-         */
-        this.TargetType = null;
-
-        /**
-         * Basic information of a bound target group. This field will be returned if a target group is bound to a rule.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {BasicTargetGroupInfo || null}
-         */
-        this.TargetGroup = null;
-
-        /**
-         * WAF instance ID
+         * Specifies the uin for operation protection setting.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.WafDomainId = null;
+        this.OperatorUin = null;
 
         /**
-         * TRPC callee server route, which is valid when `ForwardType` is `TRPC`. This is now only for internal usage.
+         * Specifies the description when setting operation protection.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TrpcCallee = null;
+        this.Description = null;
 
         /**
-         * TRPC calling service API, which is valid when `ForwardType` is `TRPC`. This is now only for internal usage.
+         * Specifies the last modification time.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TrpcFunc = null;
-
-        /**
-         * QUIC status. QUIC_ACTIVE indicates enabled, and QUIC_INACTIVE indicates disabled. Note: QUIC can be enabled only for HTTPS domain names.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.QuicStatus = null;
-
-        /**
-         * List of domain names associated with the forwarding rule
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Domains = null;
-
-        /**
-         * List of bound target groups
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<BasicTargetGroupInfo> || null}
-         */
-        this.TargetGroupList = null;
-
-        /**
-         * OAuth configuration status information.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {OAuth || null}
-         */
-        this.OAuth = null;
+        this.ModifyTime = null;
 
     }
 
@@ -7246,63 +7929,11 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
-
-        if (params.HealthCheck) {
-            let obj = new HealthCheck();
-            obj.deserialize(params.HealthCheck)
-            this.HealthCheck = obj;
-        }
-
-        if (params.Certificate) {
-            let obj = new CertificateOutput();
-            obj.deserialize(params.Certificate)
-            this.Certificate = obj;
-        }
-        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-
-        if (params.RewriteTarget) {
-            let obj = new RewriteTarget();
-            obj.deserialize(params.RewriteTarget)
-            this.RewriteTarget = obj;
-        }
-        this.HttpGzip = 'HttpGzip' in params ? params.HttpGzip : null;
-        this.BeAutoCreated = 'BeAutoCreated' in params ? params.BeAutoCreated : null;
-        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
-        this.Http2 = 'Http2' in params ? params.Http2 : null;
-        this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.TargetType = 'TargetType' in params ? params.TargetType : null;
-
-        if (params.TargetGroup) {
-            let obj = new BasicTargetGroupInfo();
-            obj.deserialize(params.TargetGroup)
-            this.TargetGroup = obj;
-        }
-        this.WafDomainId = 'WafDomainId' in params ? params.WafDomainId : null;
-        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
-        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
-        this.QuicStatus = 'QuicStatus' in params ? params.QuicStatus : null;
-        this.Domains = 'Domains' in params ? params.Domains : null;
-
-        if (params.TargetGroupList) {
-            this.TargetGroupList = new Array();
-            for (let z in params.TargetGroupList) {
-                let obj = new BasicTargetGroupInfo();
-                obj.deserialize(params.TargetGroupList[z]);
-                this.TargetGroupList.push(obj);
-            }
-        }
-
-        if (params.OAuth) {
-            let obj = new OAuth();
-            obj.deserialize(params.OAuth)
-            this.OAuth = obj;
-        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ProtectState = 'ProtectState' in params ? params.ProtectState : null;
+        this.OperatorUin = 'OperatorUin' in params ? params.OperatorUin : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -7379,13 +8010,13 @@ class CreateRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to obtain the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Listener ID
+         * Specifies the listener ID, which can be obtained through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -7457,13 +8088,15 @@ class LbRsItem extends  AbstractModel {
         super();
 
         /**
-         * VPC ID
+         * VPC ID in string format. Only string format is supported.
+Can be queried through the [DescribeVpcs](https://www.tencentcloud.comom/document/api/215/15778?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Private network IP to be queried, which can be of the CVM or ENI.
+         * Specifies the private IP address for backend querying, which can be CVM or eni.
+Can be queried through the [DescribeAddresses](https://www.tencentcloud.comom/document/product/215/16702?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.PrivateIp = null;
@@ -7511,14 +8144,12 @@ class RuleTargets extends  AbstractModel {
 
         /**
          * Real server information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Backend> || null}
          */
         this.Targets = null;
 
         /**
-         * Information about backend SCF functions.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Describes the backend cloud function info.
          * @type {Array.<FunctionTarget> || null}
          */
         this.FunctionTargets = null;
@@ -7615,7 +8246,8 @@ class DeregisterTargetGroupInstancesRequest extends  AbstractModel {
         this.TargetGroupId = null;
 
         /**
-         * Information of server to be unbound
+         * Specifies information on server to be unbound. supports bulk removal with the largest quantity of 20 per operation.
+Port is a required item in this api.
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
@@ -7709,7 +8341,7 @@ class InquiryPriceRefundLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -7765,8 +8397,7 @@ class DescribeTargetHealthResponse extends  AbstractModel {
         super();
 
         /**
-         * CLB instance list
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * LoadBalancer list.
          * @type {Array.<LoadBalancerHealth> || null}
          */
         this.LoadBalancers = null;
@@ -7864,46 +8495,85 @@ class CreateTargetGroupRequest extends  AbstractModel {
         this.TargetGroupName = null;
 
         /**
-         * `vpcid` attribute of a target group. If this parameter is left empty, the default VPC will be used.
+         * Specifies the vpc id attribute of the target group. uses the default vpc if left empty.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Default port of the target group, which can be used for adding servers subsequently. Either the Port or the port in TargetGroupInstances.N should be input.
+         * Specifies the default Port of the target group. the default Port can be used when servers are added subsequently. this parameter is not supported for full-listen target groups. for non-full-listen target groups, either Port or Port in TargetGroupInstances.N is required.
+
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Real server bound to a target group
+         * Specifies the real servers bound to the target group. supports up to 50 at a time.
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
 
         /**
-         * 
+         * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 
+         * Health check.
          * @type {TargetGroupHealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
-         * 
+         * Scheduling algorithm. this parameter is valid only for target groups of the new version V2 when the backend forwarding protocol is HTTP, HTTPS, or GRPC. available values:.
+<ur><li>WRR: weighted round-robin.</li><li>LEAST_CONN: LEAST connection.</li><li>IP_HASH: based on IP HASH.</li><li>default is WRR.</li></ur>.
          * @type {string || null}
          */
         this.ScheduleAlgorithm = null;
+
+        /**
+         * Tag.
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Specifies the default weight of the backend service. among them:.
+<ul><li>Value ranges from 0 to 100.</li><li>after setting this value, when adding a backend service to the target group, if the backend service does not set Weight separately, use the default Weight here.</li><li>Weight parameter settings not supported for v1 target group type.</li></ul>.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Full listen target group flag. valid values: true (yes), false (no). only target groups of the new version V2 event type support this parameter.
+         * @type {boolean || null}
+         */
+        this.FullListenSwitch = null;
+
+        /**
+         * Specifies whether to enable the persistent connection feature. this parameter applies only to HTTP and HTTPS target groups. 0: disable; 1: enable. this feature is off by default.
+         * @type {boolean || null}
+         */
+        this.KeepaliveEnable = null;
+
+        /**
+         * Session hold time, unit: second. value range: 30-3600. default: 0, disabled. this parameter is supported only for target groups with HTTP/HTTPS/GRPC backend forwarding protocol in the new version V2.
+         * @type {number || null}
+         */
+        this.SessionExpireTime = null;
+
+        /**
+         * IP version type.
+         * @type {string || null}
+         */
+        this.IpVersion = null;
 
     }
 
@@ -7935,6 +8605,20 @@ class CreateTargetGroupRequest extends  AbstractModel {
             this.HealthCheck = obj;
         }
         this.ScheduleAlgorithm = 'ScheduleAlgorithm' in params ? params.ScheduleAlgorithm : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.FullListenSwitch = 'FullListenSwitch' in params ? params.FullListenSwitch : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+        this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
 
     }
 }
@@ -7997,43 +8681,37 @@ class BindDetailItem extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * Specifies the ID of listener to be bound
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * ID of the listener bound to the configuration
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * Specifies the domain name to be bound
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Domain name bound to the configuration
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Sets the bound rule.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Rule bound to the configuration
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * Listener name.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Listener name
          * @type {string || null}
          */
         this.ListenerName = null;
 
         /**
-         * Listener protocol.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Listener protocol
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Listener port.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Listener port
          * @type {number || null}
          */
         this.Vport = null;
@@ -8047,7 +8725,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Configuration ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UconfigId = null;
@@ -8128,7 +8805,7 @@ Port range: 1–65535.
         this.SessionExpireTime = null;
 
         /**
-         * Listener forwarding method. Valid values: WRR (weighted round-robin), LEAST_CONN (least connections), and IP_HASH (IP address hash).
+         * Listener forwarding mode. valid values: WRR (weighted round-robin), LEAST_CONN (LEAST connections).
 Default value: WRR. This parameter applies only to TCP, UDP, TCP_SSL, and QUIC listeners.
          * @type {string || null}
          */
@@ -8166,7 +8843,7 @@ Enable this feature with caution if the maximum number of connections is limited
         this.EndPort = null;
 
         /**
-         * Whether to send an RST packet to the client when a listener is unbound from a real server. This parameter applies only to TCP listeners.
+         * Reschedules when unbinding real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
          * @type {boolean || null}
          */
         this.DeregisterTargetRst = null;
@@ -8192,19 +8869,19 @@ Enable this feature with caution if the maximum number of connections is limited
         this.MaxCps = null;
 
         /**
-         * Idle connection timeout, in seconds. This parameter applies only to TCP listeners. Value range: 300–900 for shared instances and dedicated instances and 300–1980 for LCU-supported instances. To set a value, [submit a ticket for application](https://console.cloud.tencent.com/workorder/category).
+         * Specifies the idle connection timeout in seconds. this parameter applies only to TCP/UDP listeners. default value: 900 for TCP listeners and 300 for UDP listeners. value range: 10–900 for shared instances and dedicated instances and 10–1980 for lcu-supported instances. to set a value exceeding the permissible range, [submit a ticket for application](https://console.cloud.tencent.com/workorder/category).
          * @type {number || null}
          */
         this.IdleConnectTimeout = null;
 
         /**
-         * 
+         * Specifies whether PP is supported for TCP_SSL and QUIC.
          * @type {boolean || null}
          */
         this.ProxyProtocol = null;
 
         /**
-         * Whether to enable SNAT. True: enable; False: disable.
+         * Whether SNAT (source IP replacement) is enabled. valid values: True (enabled), False (disabled). disabled by default. note: when SnatEnable is enabled, the client source IP will be replaced, at this point the `pass through client source IP` option is disabled, and vice versa.
          * @type {boolean || null}
          */
         this.SnatEnable = null;
@@ -8216,13 +8893,15 @@ Enable this feature with caution if the maximum number of connections is limited
         this.FullEndPorts = null;
 
         /**
-         * Whether to enable H2C for a private network HTTP listener. True: enable; False: disable.
+         * Enable private network http listener h2c switch. valid values: True (enable), False (disable).
+Disabled by default.
          * @type {boolean || null}
          */
         this.H2cSwitch = null;
 
         /**
-         * Whether to disable SSL for TCP_SSL listeners. Dual-stack binding is still supported after SSL is disabled. True: disable; False: enable.
+         * Whether to disable SSL for TCP_SSL listeners. dual-stack binding is still supported after SSL is disabled. valid values: True (disable), False (enable).
+Disabled by default.
          * @type {boolean || null}
          */
         this.SslCloseSwitch = null;
@@ -8232,6 +8911,36 @@ Enable this feature with caution if the maximum number of connections is limited
          * @type {string || null}
          */
         this.DataCompressMode = null;
+
+        /**
+         * Reschedules when setting backend server weight to 0. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * @type {boolean || null}
+         */
+        this.RescheduleTargetZeroWeight = null;
+
+        /**
+         * Reschedules when health check exceptions occur on real servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * @type {boolean || null}
+         */
+        this.RescheduleUnhealthy = null;
+
+        /**
+         * Reschedules when adding or removing backend servers. only supported for TCP/UDP listeners. toggle on to enable this feature.
+         * @type {boolean || null}
+         */
+        this.RescheduleExpandTarget = null;
+
+        /**
+         * Specifies the trigger start time for rescheduling. value range: 0-3600s. supported only by TCP/UDP listeners.
+         * @type {number || null}
+         */
+        this.RescheduleStartTime = null;
+
+        /**
+         * Rescheduling trigger duration. valid values: 0-3600s. only TCP/UDP listeners support this.
+         * @type {number || null}
+         */
+        this.RescheduleInterval = null;
 
     }
 
@@ -8281,6 +8990,11 @@ Enable this feature with caution if the maximum number of connections is limited
         this.H2cSwitch = 'H2cSwitch' in params ? params.H2cSwitch : null;
         this.SslCloseSwitch = 'SslCloseSwitch' in params ? params.SslCloseSwitch : null;
         this.DataCompressMode = 'DataCompressMode' in params ? params.DataCompressMode : null;
+        this.RescheduleTargetZeroWeight = 'RescheduleTargetZeroWeight' in params ? params.RescheduleTargetZeroWeight : null;
+        this.RescheduleUnhealthy = 'RescheduleUnhealthy' in params ? params.RescheduleUnhealthy : null;
+        this.RescheduleExpandTarget = 'RescheduleExpandTarget' in params ? params.RescheduleExpandTarget : null;
+        this.RescheduleStartTime = 'RescheduleStartTime' in params ? params.RescheduleStartTime : null;
+        this.RescheduleInterval = 'RescheduleInterval' in params ? params.RescheduleInterval : null;
 
     }
 }
@@ -8336,15 +9050,13 @@ class TypeInfo extends  AbstractModel {
         super();
 
         /**
-         * ISP Type
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Operator type.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Specification availability
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specification availability.
          * @type {Array.<SpecAvailability> || null}
          */
         this.SpecAvailabilitySet = null;
@@ -8381,7 +9093,7 @@ class DisassociateTargetGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of rules to be unbound
+         * Specifies the relationship array of rules to be unbound, supports batch operations for multiple listeners with a maximum of 20 per bulk removal.
          * @type {Array.<TargetGroupAssociation> || null}
          */
         this.Associations = null;
@@ -8439,6 +9151,44 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * AssociateTargetGroups request structure.
+ * @class
+ */
+class AssociateTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the binding relationship array. the target group type should be the same.
+Specifies the maximum number of requests supported in a single request is 20.
+
+         * @type {Array.<TargetGroupAssociation> || null}
+         */
+        this.Associations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Associations) {
+            this.Associations = new Array();
+            for (let z in params.Associations) {
+                let obj = new TargetGroupAssociation();
+                obj.deserialize(params.Associations[z]);
+                this.Associations.push(obj);
+            }
+        }
 
     }
 }
@@ -8555,13 +9305,13 @@ OPEN: public network; INTERNAL: private network.
         this.Forward = null;
 
         /**
-         * CLB instance name.
+         * Specifies the name of the clb instance. fuzzy query is supported.
          * @type {string || null}
          */
         this.LoadBalancerName = null;
 
         /**
-         * The domain name that Tencent Cloud assigned for the CLB instance.
+         * Tencent cloud assigns a domain name to the cloud load balancer instance. fuzzy query is supported.
          * @type {string || null}
          */
         this.Domain = null;
@@ -8597,25 +9347,32 @@ OPEN: public network; INTERNAL: private network.
         this.Limit = null;
 
         /**
-         * Sort by parameter. Value range: LoadBalancerName, CreateTime, Domain, LoadBalancerType.
+         * Sorting parameter. supports the following fields:.
+- LoadBalancerName
+- CreateTime
+- Domain
+- LoadBalancerType
+
+Defaults to CreateTime.
+
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * 1: reverse; 0: sequential. Default value: reverse by creation time |
+         * 1 for descending, 0 for ascending, defaults to 1, sorted by creation time in descending order.
          * @type {number || null}
          */
         this.OrderType = null;
 
         /**
-         * Search field which fuzzy matches name, domain name, or VIP.
+         * Specifies the fuzzy search field for fuzzy matching the name, domain name, VIP address, or ID of a cloud load balancer instance.
          * @type {string || null}
          */
         this.SearchKey = null;
 
         /**
-         * ID of the project to which a CLB instance belongs, which can be obtained through the DescribeProject API.
+         * Project ID of the cloud load balancer instance. you can call the [DescribeProject](https://www.tencentcloud.comom/document/api/651/78725?from_cn_redirect=1) api to obtain the ID. defaults to all projects if not passed.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -8627,14 +9384,14 @@ OPEN: public network; INTERNAL: private network.
         this.WithRs = null;
 
         /**
-         * VPC where a CLB instance resides, such as vpc-bhqkbhdx.
-Basic network does not support queries by VpcId.
+         * Specifies the unique vpc ID of the load balancing instance, such as vpc-bhqkbhdx. you can call the [DescribeVpcs](https://www.tencentcloud.comom/document/api/215/15778?from_cn_redirect=1) api to obtain it.
+Searches for cloud load balancer of basic network type. allows input '0'.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Security group ID, e.g., `sg-m1cc****`.
+         * Security group ID, such as sg-m1cc****, can be obtained through the API [DescribeSecurityGroups](https://www.tencentcloud.comom/document/product/215/15808?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroup = null;
@@ -8651,6 +9408,13 @@ Basic network does not support queries by VpcId.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * Specifies the expanded fields to return. not specified, expanded fields do not return by default. supported expanded fields are as follows:.
+<Li>TargetCount: specifies the number of real servers bound to it.</li>.
+         * @type {Array.<string> || null}
+         */
+        this.AdditionalFields = null;
 
     }
 
@@ -8688,6 +9452,7 @@ Basic network does not support queries by VpcId.
                 this.Filters.push(obj);
             }
         }
+        this.AdditionalFields = 'AdditionalFields' in params ? params.AdditionalFields : null;
 
     }
 }
@@ -8841,38 +9606,33 @@ class RewriteTarget extends  AbstractModel {
         super();
 
         /**
-         * Listener ID of a redirect target
-Note: This field may return null, indicating that there is no redirection.
+         * Listener ID of the redirection target. this field is valid only when redirection is configured.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TargetListenerId = null;
 
         /**
-         * Forwarding rule ID of a redirect target
-Note: This field may return null, indicating that there is no redirection.
+         * Specifies the forwarding rule ID of redirection target. field is valid only when redirection is configured.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TargetLocationId = null;
 
         /**
-         * Redirection status code
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the redirection status code.
          * @type {number || null}
          */
         this.RewriteCode = null;
 
         /**
-         * Whether the matched URL is carried in redirection.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether the matched URL is carried in redirection
          * @type {boolean || null}
          */
         this.TakeUrl = null;
 
         /**
-         * Redirection type. Manual: manual redirection; Auto: automatic redirection.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Redirection type. Manual: Manual redirection; Auto: Automatic redirection
          * @type {string || null}
          */
         this.RewriteType = null;
@@ -9059,8 +9819,7 @@ class DescribeLoadBalancersDetailResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of CLB instance details.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Load balancing detail list.
          * @type {Array.<LoadBalancerDetail> || null}
          */
         this.LoadBalancerDetailSet = null;
@@ -9128,7 +9887,7 @@ class TargetHealth extends  AbstractModel {
         this.TargetId = null;
 
         /**
-         * Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+         * Describes the detailed information of the current health status. for example: Alive, Dead, Unknown, Close. Alive status is healthy, Dead state is abnormal, Unknown status includes not started, checking, Unknown status, Close means health check disabled or listener status stop.
          * @type {string || null}
          */
         this.HealthStatusDetail = null;
@@ -9138,6 +9897,18 @@ class TargetHealth extends  AbstractModel {
          * @type {string || null}
          */
         this.HealthStatusDetial = null;
+
+        /**
+         * Target group unique ID.
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Specifies the weight of the Target.
+         * @type {number || null}
+         */
+        this.Weight = null;
 
     }
 
@@ -9154,6 +9925,8 @@ class TargetHealth extends  AbstractModel {
         this.TargetId = 'TargetId' in params ? params.TargetId : null;
         this.HealthStatusDetail = 'HealthStatusDetail' in params ? params.HealthStatusDetail : null;
         this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -9179,9 +9952,9 @@ class LoadBalancerDetail extends  AbstractModel {
         this.LoadBalancerName = null;
 
         /**
-         * CLB instance network type:
-Public: public network; Private: private network.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Network type of the load balancing instance.
+Public: Public network attribute. Private: Private network attribute. for Private network cloud load balancer, bind EIP for Public network access. refer to EIP document.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LoadBalancerType = null;
@@ -9423,33 +10196,35 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.SniSwitch = null;
 
         /**
-         * Domain name of the CLB instance.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the domain name of the load balancing instance.
          * @type {string || null}
          */
         this.LoadBalancerDomain = null;
 
         /**
-         * Network egress
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Specifies the network outbound.
          * @type {string || null}
          */
         this.Egress = null;
 
         /**
-         * 
+         * Specifies the attributes of cloud load balancer.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.AttributeFlags = null;
 
         /**
-         * 
+         * Specification type information for load balancing instances <ul><li>clb.c1.small: minimalist specification</li> <li>clb.c2.medium: standard specification</li> <li>clb.c3.small: advanced type 1 specification</li> <li>clb.c3.medium: advanced type 2 specification</li> <li>clb.c4.small: ultra type 1 specification</li> <li>clb.c4.medium: ultra type 2 specification</li> <li>clb.c4.large: ultra type 3 specification</li> <li>clb.c4.xlarge: ultra type 4 specification</li> <li>"" : non-lcu-supported instance</li></ul>.
+
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SlaType = null;
 
         /**
-         * 
+         * 0 means non-dedicated instance. 1 means dedicated instance.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Exclusive = null;
@@ -9559,15 +10334,13 @@ class LbRsTargets extends  AbstractModel {
         this.Port = null;
 
         /**
-         * VPC ID of the real server.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * vpcId of RS
          * @type {number || null}
          */
         this.VpcId = null;
 
         /**
-         * Weight of the real server.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * RS weight
          * @type {number || null}
          */
         this.Weight = null;
@@ -9769,7 +10542,8 @@ class DescribeLoadBalancerListByCertIdRequest extends  AbstractModel {
         super();
 
         /**
-         * Server or client certificate ID
+         * Specifies the server certificate ID or client certificate ID. can be accessed through the [DescribeCertificate](https://www.tencentcloud.comom/document/api/400/41674?from_cn_redirect=1) api.
+Specifies the maximum length of the array is 20.
          * @type {Array.<string> || null}
          */
         this.CertIds = null;
@@ -9808,6 +10582,12 @@ class TargetRegionInfo extends  AbstractModel {
          */
         this.VpcId = null;
 
+        /**
+         * Target'S network, in the format of 86323 for a private network, or 0 if it is a basic network.
+         * @type {number || null}
+         */
+        this.NumericalVpcId = null;
+
     }
 
     /**
@@ -9819,6 +10599,7 @@ class TargetRegionInfo extends  AbstractModel {
         }
         this.Region = 'Region' in params ? params.Region : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NumericalVpcId = 'NumericalVpcId' in params ? params.NumericalVpcId : null;
 
     }
 }
@@ -9837,6 +10618,18 @@ class DescribeTargetHealthRequest extends  AbstractModel {
          */
         this.LoadBalancerIds = null;
 
+        /**
+         * Specifies the listener ID list to query.
+         * @type {Array.<string> || null}
+         */
+        this.ListenerIds = null;
+
+        /**
+         * Specifies the list of rule ids to be queried.
+         * @type {Array.<string> || null}
+         */
+        this.LocationIds = null;
+
     }
 
     /**
@@ -9847,6 +10640,8 @@ class DescribeTargetHealthRequest extends  AbstractModel {
             return;
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
 
     }
 }
@@ -10010,10 +10805,41 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
         this.TargetGroupName = null;
 
         /**
-         * New default port of target group
+         * The new default port of the target group. this parameter is not supported for full listen target groups.
          * @type {number || null}
          */
         this.Port = null;
+
+        /**
+         * Scheduling algorithm. this parameter is valid only for target groups of the new version V2 when the backend forwarding protocol is HTTP, HTTPS, or GRPC. available values:.
+<ur><li>WRR: weighted round-robin.</li><li>LEAST_CONN: LEAST connection.</li><li>IP_HASH: based on IP HASH.</li><li>default is WRR.</li></ur>.
+         * @type {string || null}
+         */
+        this.ScheduleAlgorithm = null;
+
+        /**
+         * Health check details.
+         * @type {TargetGroupHealthCheck || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * Default Weight for backend service. among them: <ul><li>value ranges from 0 to 100.</li><li>after setting this value, when adding a backend service to the target group, if the backend service does not set Weight separately, use the default Weight here.</li><li>Weight parameter settings not supported for v1 target group type.</li></ul>.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Specifies whether to enable the persistent connection feature. this parameter applies only to HTTP and HTTPS target groups. true: disable; false: enable. this feature is off by default.
+         * @type {boolean || null}
+         */
+        this.KeepaliveEnable = null;
+
+        /**
+         * Specifies the session persistence time in seconds. value range: 30-3600. default: 0 (disabled). this parameter is unsupported for TCP/UDP target groups.
+         * @type {number || null}
+         */
+        this.SessionExpireTime = null;
 
     }
 
@@ -10027,6 +10853,16 @@ class ModifyTargetGroupAttributeRequest extends  AbstractModel {
         this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
         this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
         this.Port = 'Port' in params ? params.Port : null;
+        this.ScheduleAlgorithm = 'ScheduleAlgorithm' in params ? params.ScheduleAlgorithm : null;
+
+        if (params.HealthCheck) {
+            let obj = new TargetGroupHealthCheck();
+            obj.deserialize(params.HealthCheck)
+            this.HealthCheck = obj;
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
 
     }
 }
@@ -10040,19 +10876,19 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the CLB instance. You can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * CLB listener ID
+         * ID of the CLB instance listener. You can call the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * The domain name, which must be associated with an existing forwarding rule. If there are multiple domain names, you only need to specify one.
+         * Domain name (must be a domain name under a created forwarding rule). if it is multiple domains, you can specify any one of the domain name list. it can be accessed through the [DescribeListeners](https://www.tencentcloud.comom/document/product/214/30686?from_cn_redirect=1) api.
          * @type {string || null}
          */
         this.Domain = null;
@@ -10070,19 +10906,22 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.Certificate = null;
 
         /**
-         * Whether to enable HTTP/2. Note: HTTP/2 can be enabled only for HTTPS domain names.
+         * Specifies whether to enable HTTP/2. note that only HTTPS domain names support HTTP/2.
+True: enable HTTP2. false: disable HTTP2.
          * @type {boolean || null}
          */
         this.Http2 = null;
 
         /**
-         * Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
+         * Whether to set as the default domain name. Note: Only one default domain name can be set under a listener.
+True: set as default domain name. false: do not set as default domain name.
          * @type {boolean || null}
          */
         this.DefaultServer = null;
 
         /**
-         * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+         * Specifies whether QUIC is enabled. note that QUIC can only be enabled for HTTPS domains.
+True: enable QUIC. False: disable.
          * @type {boolean || null}
          */
         this.Quic = null;
@@ -10259,13 +11098,13 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a CLB instance, e.g., lb-12345678.
+         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/214/30685?from_cn_redirect=1) API to query the ID, such as lb-12345678.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Information of the SNAT IP to be added. You can specify a SNAT IP or use the one automatically assigned by a subnet.
+         * Added SnatIp information. specify IP for request or designated subnet for automatic application. can be accessed through [DescribeSubnets](https://www.tencentcloud.comom/document/api/215/15784?from_cn_redirect=1) to query and retrieve. the default upper limit for one CLB instance is 10.
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
@@ -10301,7 +11140,7 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Details of target group health check
  * @class
  */
 class TargetGroupHealthCheck extends  AbstractModel {
@@ -10309,103 +11148,114 @@ class TargetGroupHealthCheck extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable the health check.
          * @type {boolean || null}
          */
         this.HealthSwitch = null;
 
         /**
-         * 
+         * Health check method. among them, only the new version V2 target group type supports this parameter. valid values: TCP | HTTP | HTTPS | PING | CUSTOM. among them:.
+<ur><li>When the backend forwarding protocol of the target group is TCP, the health check method supports TCP/HTTP/CUSTOM, with a default value of TCP.</li><li>when the backend forwarding protocol of the target group is UDP, the health check method supports PING/CUSTOM, with a default value of PING.</li><li>when the backend forwarding protocol of the target group is HTTP, the health check method supports HTTP/TCP, with a default value of HTTP.</li><li>when the backend forwarding protocol of the target group is HTTPS, the health check method supports HTTPS/TCP, with a default value of HTTPS.</li><li>when the backend forwarding protocol of the target group is GRPC, the health check method supports GRPC/TCP, with a default value of GRPC.</li></ur>.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 
+         * Custom check parameters. health check port, defaults to the port of the backend service unless you want to specify a specific port, otherwise leave it blank. (applicable only to TCP/UDP target group).
+
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 
+         * Health check timeout. The default is 2 seconds. Value range: 2-30 seconds.
          * @type {number || null}
          */
         this.Timeout = null;
 
         /**
-         * 
+         * Detection interval time. The default is 5 seconds. Value range: 2-300 seconds.
          * @type {number || null}
          */
         this.GapTime = null;
 
         /**
-         * 
+         * Health detection threshold. The default is 3 times. Value range: 2-10 times.
          * @type {number || null}
          */
         this.GoodLimit = null;
 
         /**
-         * 
+         * Unhealth detection threshold. The default is 3 times. Value range: 2-10 times.
          * @type {number || null}
          */
         this.BadLimit = null;
 
         /**
-         * 
+         * Indicates whether jumbo frames are enabled for probe packets of all rss in the target group. enabled by default. this parameter is supported only for GWLB type target groups.
          * @type {boolean || null}
          */
         this.JumboFrame = null;
 
         /**
-         * 
+         * Health check status code (applicable only to HTTP/HTTPS target group and HTTP health check method of TCP target group). value range: 1~31. default: 31. among them: <url> <li>1 means post-detection return value 1xx represents health.</li> <li>2 means return 2xx represents health.</li> <li>4 means return 3xx represents health.</li> <li>8 means return 4xx represents health.</li> <li>16 means return 5xx represents health.</li></url> to have multiple return codes represent health, sum up corresponding values.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HttpCode = null;
 
         /**
-         * 
+         * Health check domain name. among them: <ur><li>applicable only to HTTP/HTTPS target groups and TCP target groups when using HTTP health check method.</li><li>targeting HTTP/HTTPS target groups, this parameter is required when using HTTP health check method.</li></ur>.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpCheckDomain = null;
 
         /**
-         * 
+         * Health check path (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpCheckPath = null;
 
         /**
-         * 
+         * Health check method (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Default: HEAD. Valid values: HEAD and GET.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpCheckMethod = null;
 
         /**
-         * 
+         * Input format of health check. required when health check method is CUSTOM. valid values: HEX or TEXT. among them:<ur><li>TEXT: TEXT format.</li><li>HEX: hexadecimal format. characters of SendContext and RecvContext can only be selected from 0123456789ABCDEF and the length must be an even number.</li><li>applicable only to TCP/UDP target group.</li></ur>.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContextType = null;
 
         /**
-         * 
+         * CUSTOM check parameters. required when the CheckType value is CUSTOM, represents the content of the request sent by the health check, only ASCII visible characters, maximum length limit 500. applicable only to TCP/UDP target group.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SendContext = null;
 
         /**
-         * 
+         * CUSTOM check parameters. required when the CheckType value is CUSTOM. represents the result returned by the health check. only ASCII visible characters are allowed. maximum length limit is 500. (applicable only to TCP/UDP target group).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RecvContext = null;
 
         /**
-         * 
+         * HTTP version, where: <ur><li>this field is required if the value of CheckType is HTTP.</li><li>supports configuration options: HTTP/1.0, HTTP/1.1.</li><li>applicable only to TCP target group.</li></ur>.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpVersion = null;
 
         /**
-         * 
+         * Health check status code when the protocol is GRPC. (this parameter applies only to target groups with the backend forwarding protocol of GRPC.) default value: 12. valid values: a single numerical value, multiple numerical values, or a range. for example, 20, 20,25, or 0-99.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExtendedCode = null;
@@ -10577,8 +11427,7 @@ class Price extends  AbstractModel {
         super();
 
         /**
-         * Instance price.
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Describes the instance pricing.
          * @type {ItemPrice || null}
          */
         this.InstancePrice = null;
@@ -10643,7 +11492,7 @@ class ModifyTargetGroupInstancesPortRequest extends  AbstractModel {
         this.TargetGroupId = null;
 
         /**
-         * Array of servers for which to modify ports
+         * Array of servers whose Port is to be modified. NewPort and Port are required items in this api.
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
@@ -10715,92 +11564,10 @@ class BatchRegisterTargetsRequest extends  AbstractModel {
 }
 
 /**
- * Details of real servers bound to a listener
+ * DeleteCustomizedConfig response structure.
  * @class
  */
-class ListenerBackend extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Listener ID
-         * @type {string || null}
-         */
-        this.ListenerId = null;
-
-        /**
-         * Listener protocol
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Listener port
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * Information of rules under a listener (applicable only to HTTP/HTTPS listeners)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RuleTargets> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * List of real servers bound to a listener (applicable only to TCP/UDP/TCP_SSL listeners)
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Backend> || null}
-         */
-        this.Targets = null;
-
-        /**
-         * Ending port in port range if port range is supported; 0 if port range is not supported
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EndPort = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new RuleTargets();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new Backend();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
-        }
-        this.EndPort = 'EndPort' in params ? params.EndPort : null;
-
-    }
-}
-
-/**
- * SetSecurityGroupForLoadbalancers response structure.
- * @class
- */
-class SetSecurityGroupForLoadbalancersResponse extends  AbstractModel {
+class DeleteCustomizedConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -10818,6 +11585,49 @@ class SetSecurityGroupForLoadbalancersResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLBOperateProtect response structure.
+ * @class
+ */
+class DescribeLBOperateProtectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Describes the returned cloud load balancer operation protection information array.
+         * @type {Array.<LBOperateProtectInfo> || null}
+         */
+        this.LoadBalancerSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoadBalancerSet) {
+            this.LoadBalancerSet = new Array();
+            for (let z in params.LoadBalancerSet) {
+                let obj = new LBOperateProtectInfo();
+                obj.deserialize(params.LoadBalancerSet[z]);
+                this.LoadBalancerSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -10870,7 +11680,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.Scheduler = null;
 
         /**
-         * Forwarding protocol between the CLB instance and backend service. Values: `HTTP`, `HTTPS`, `GRPC` and `TRPC` (only for internal usage). It defaults to `HTTP`.
+         * Specifies the forwarding protocol between cloud load balancer and backend service. currently supports HTTP/HTTPS/GRPC/GRPCS/TRPC. TRPC is not yet available. default HTTP.
          * @type {string || null}
          */
         this.ForwardType = null;
@@ -10923,6 +11733,12 @@ They represent weighted round robin, least connections, and IP hash, respectivel
          */
         this.MultiCertInfo = null;
 
+        /**
+         * Specifies the custom cookie name.
+         * @type {string || null}
+         */
+        this.CookieName = null;
+
     }
 
     /**
@@ -10962,6 +11778,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
             obj.deserialize(params.MultiCertInfo)
             this.MultiCertInfo = obj;
         }
+        this.CookieName = 'CookieName' in params ? params.CookieName : null;
 
     }
 }
@@ -11092,7 +11909,21 @@ class DescribeResourcesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Conditions for querying the list of availability zone resources. Detailed filter criteria are as follows:<li>master-zone -- String - Required: No - (Filter criterion) Filter by region type, such as ap-guangzhou-2.</li><li>ip-version -- String - Required: No - (Filter criterion) Filter by IP type. Valid values: IPv4, IPv6, IPv6_Nat.</li><li> isp -- String - Required: No - (Filter criterion) Filter by ISP type, such as BGP, CMCC, CUCC, and CTCC.</li>
+         * Specifies the conditions for querying the availability zone resource list. detailed filter criteria are as follows:.
+- master-zone
+Filters by regional availability zone, for example: ap-guangzhou-2.
+Type: String.
+Required: No
+- ip-version
+Filter by [IP type], such as IPv4.
+Type: String.
+Required: No
+Valid values: IPv4, IPv6, IPv6_Nat.
+- isp
+Filters by [ISP type], for example: BGP.
+Type: String.
+Required: No
+Optional. valid values: BGP, CMCC (china mobile), CUCC (china unicom), CTCC (china telecom), BGP_PRO, INTERNAL (private network).
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -11130,8 +11961,7 @@ class DescribeClassicalLBListenersResponse extends  AbstractModel {
         super();
 
         /**
-         * Listener list
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the listener list.
          * @type {Array.<ClassicalListener> || null}
          */
         this.Listeners = null;
@@ -11237,6 +12067,34 @@ class ModifyLoadBalancerSlaRequest extends  AbstractModel {
 }
 
 /**
+ * SetLoadBalancerStartStatus response structure.
+ * @class
+ */
+class SetLoadBalancerStartStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBlockIPTask request structure.
  * @class
  */
@@ -11285,15 +12143,13 @@ class Resource extends  AbstractModel {
         this.Isp = null;
 
         /**
-         * Available resources
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Available resources.
          * @type {Array.<ResourceAvailability> || null}
          */
         this.AvailabilitySet = null;
 
         /**
-         * ISP Type
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Operator type info.
          * @type {Array.<TypeInfo> || null}
          */
         this.TypeSet = null;
@@ -11397,7 +12253,7 @@ class ModifyFunctionTargetsRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * The backend cloud functions to modify
+         * Specifies the backend SCF service list to modify. only Event function type is supported.
          * @type {Array.<FunctionTarget> || null}
          */
         this.FunctionTargets = null;
@@ -11499,14 +12355,15 @@ class Quota extends  AbstractModel {
         super();
 
         /**
-         * Quota name. Valid values:
-<li> `TOTAL_OPEN_CLB_QUOTA`: Quota of public network CLB instances in the current region</li>
-<li> `TOTAL_INTERNAL_CLB_QUOTA`: Quota of private network CLB instances in the current region</li>
-<li> `TOTAL_LISTENER_QUOTA`: Quota of listeners under one CLB instance</li>
-<li> `TOTAL_LISTENER_RULE_QUOTA`: Quota of forwarding rules under one listener</li>
-<li> `TOTAL_TARGET_BIND_QUOTA`: Quota of CVM instances can be bound under one forwarding rule</li>
-<li> `TOTAL_SNAP_IP_QUOTA`: Quota of SNAT IPs for cross-region binding 2.0 under one CLB instance </li>
-<li> `TOTAL_ISP_CLB_QUOTA`: Quota of triple-ISP (CMCC/CUCC/CTCC) CLB instances in the current region</li>
+         * Quota name. value range:.
+<Li>TOTAL_OPEN_CLB_QUOTA: specifies the public network clb quota in the current region for the user.</li>.
+<Li>TOTAL_INTERNAL_CLB_QUOTA: specifies the private network clb quota in the current region for the user.</li>.
+<li>TOTAL_LISTENER_QUOTA: specifies the LISTENER QUOTA under a CLB.</li>.
+<Li>TOTAL_LISTENER_RULE_QUOTA: specifies the forwarding rule quota under a listener.</li>.
+<Li>TOTAL_TARGET_BIND_QUOTA: specifies the quota of devices that can be bound to a forwarding rule.</li>.
+<li> TOTAL_SNAT_IP_QUOTA: specifies the SNAT IP QUOTA for a cross-regional 2.0 CLB instance. </li>.
+<Li>TOTAL_ISP_CLB_QUOTA: specifies the quota of triple-isp (cmcc/cucc/ctcc) clb instances in the current region for the user.</li>.
+<li>TOTAL_FULL_PORT_RANGE_LISTENER_QUOTA: specifies the QUOTA of single-protocol FULL PORT RANGE listeners for a CLB instance.</li>.
          * @type {string || null}
          */
         this.QuotaId = null;
@@ -11549,19 +12406,23 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Logset ID of the Cloud Log Service (CLS).<li>When adding or updating a log topic, call the [DescribeLogsets](https://intl.cloud.tencent.com/document/product/614/58624?from_cn_redirect=1) API to obtain the logset ID.</li><li>When deleting a log topic, set this parameter to null.</li>
+         * Log set ID of cloud log service (CLS).
+<li>Specifies the logset ID that can be obtained by calling the [DescribeLogsets](https://www.tencentcloud.comom/document/product/614/58624?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+<Li>When deleting a log topic, set this parameter to an empty string.</li>.
          * @type {string || null}
          */
         this.LogSetId = null;
 
         /**
-         * Log topic ID of the CLS.<li>When adding or updating a log topic, call the [DescribeTopics](https://intl.cloud.tencent.com/document/product/614/56454?from_cn_redirect=1) API to obtain the log topic ID.</li><li>When deleting a log topic, set this parameter to null.</li>
+         * Specifies the log topic ID of cloud log service (CLS).
+<li>Specifies the log topic ID can be obtained by calling the [DescribeTopics](https://www.tencentcloud.comom/document/product/614/56454?from_cn_redirect=1) API when adding or updating a log topic.</li>.
+<Li>When deleting a log topic, set this parameter to an empty string.</li>.
          * @type {string || null}
          */
         this.LogTopicId = null;
@@ -11650,6 +12511,34 @@ class LBItem extends  AbstractModel {
 }
 
 /**
+ * DeleteCustomizedConfig request structure.
+ * @class
+ */
+class DeleteCustomizedConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the configuration ID list for deletion.
+         * @type {Array.<string> || null}
+         */
+        this.UconfigIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UconfigIdList = 'UconfigIdList' in params ? params.UconfigIdList : null;
+
+    }
+}
+
+/**
  * DeleteLoadBalancerListeners response structure.
  * @class
  */
@@ -11698,7 +12587,7 @@ class DescribeIdleLoadBalancersRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * CLB instance region
+         * The Region of the cloud load balancer can be obtained through the `RegionSet.Region` field in the API return value of [DescribeRegions](https://www.tencentcloud.comom/document/product/1596/77930?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LoadBalancerRegion = null;
@@ -11728,13 +12617,13 @@ class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a CLB instance, e.g., lb-12345678.
+         * Specifies the unique ID of the cloud load balancer. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID, such as lb-12345678.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * Array of the SNAT IP addresses to be deleted
+         * Specifies the address array of SnatIp to delete. maximum deletion supported is 20.
          * @type {Array.<string> || null}
          */
         this.Ips = null;
@@ -11778,7 +12667,15 @@ class InternetAccessible extends  AbstractModel {
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Bandwidth package type, such as SINGLEISP (single-line) and BGP (multi-line).Note: This field may return null, indicating that no valid values can be obtained.
+         * Bandwidth package type, for example BGP (multi-line).
+Type as follows:.
+SINGLEISP: single isp.
+BGP: multi-line.
+HIGH_QUALITY_BGP: specifies a dedicated bgp bandwidth package.
+SINGLEISP_CMCC: specifies a cmcc bandwidth package.
+SINGLEISP_CTCC: specifies the ctcc bandwidth package.
+SINGLEISP_CUCC: specifies the china unicom bandwidth package.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BandwidthpkgSubType = null;
@@ -11808,13 +12705,19 @@ class OAuth extends  AbstractModel {
         super();
 
         /**
-         * Enable or disable authentication.True: Enable;False: Disable.Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies whether to turn on or off authentication.
+True: enable.
+False: disabled.
+Disabled by default.
          * @type {boolean || null}
          */
         this.OAuthEnable = null;
 
         /**
-         * Whether to reject or allow the request if all IAPs fail. BYPASS: Allow;REJECT: Reject.Note: This field may return null, indicating that no valid values can be obtained.
+         * Deny requests or allow when all iaps fail.
+BYPASS: specifies the bypass.
+REJECT.
+Defaults to BYPASS.
          * @type {string || null}
          */
         this.OAuthFailureStatus = null;
@@ -11843,8 +12746,7 @@ class DescribeClassicalLBTargetsResponse extends  AbstractModel {
         super();
 
         /**
-         * Real server list
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Real server list.
          * @type {Array.<ClassicalTarget> || null}
          */
         this.Targets = null;
@@ -12160,8 +13062,8 @@ class TargetGroupInfo extends  AbstractModel {
         this.TargetGroupName = null;
 
         /**
-         * Default port of target group
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the default port of the target group. for a full listen target group, this field returns 0, indicating an invalid port.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Port = null;
@@ -12185,22 +13087,86 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AssociatedRule = null;
 
         /**
-         * 
+         * Backend forwarding protocol of the target group. only returns valid values for the new version (v2) target group.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 
+         * Scheduling algorithm. returns a valid value only when the backend forwarding protocol is HTTP, HTTPS, or GRPC. available values:.
+<ur>
+<Li>WRR: weighted round-robin.</li>.
+<Li>LEAST_CONN: specifies the least connection.</li>.
+<Li>IP_HASH: based on ip hash.</li>.
+</ur>
+
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ScheduleAlgorithm = null;
 
         /**
-         * 
+         * Health check details.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TargetGroupHealthCheck || null}
          */
         this.HealthCheck = null;
+
+        /**
+         * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group). defaults to v1 (legacy version target group).
+         * @type {string || null}
+         */
+        this.TargetGroupType = null;
+
+        /**
+         * Number of rules associated with the target group.
+         * @type {number || null}
+         */
+        this.AssociatedRuleCount = null;
+
+        /**
+         * Specifies the number of instances in the target group.
+         * @type {number || null}
+         */
+        this.RegisteredInstancesCount = null;
+
+        /**
+         * Tag.
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Default weight. only target groups of v2 type return this field. when NULL is returned, it means the default weight is not set.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Specifies whether to listen to all target groups.
+         * @type {boolean || null}
+         */
+        this.FullListenSwitch = null;
+
+        /**
+         * Whether to enable persistent connections. valid only when the backend forwarding protocol is HTTP/HTTPS/GRPC and returned by the target group.
+         * @type {boolean || null}
+         */
+        this.KeepaliveEnable = null;
+
+        /**
+         * Session persistence time. valid only when the backend forwarding protocol is HTTP/HTTPS/GRPC and the target group returns a valid value.
+         * @type {number || null}
+         */
+        this.SessionExpireTime = null;
+
+        /**
+         * IP version.
+         * @type {string || null}
+         */
+        this.IpVersion = null;
 
     }
 
@@ -12234,6 +13200,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.HealthCheck)
             this.HealthCheck = obj;
         }
+        this.TargetGroupType = 'TargetGroupType' in params ? params.TargetGroupType : null;
+        this.AssociatedRuleCount = 'AssociatedRuleCount' in params ? params.AssociatedRuleCount : null;
+        this.RegisteredInstancesCount = 'RegisteredInstancesCount' in params ? params.RegisteredInstancesCount : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.FullListenSwitch = 'FullListenSwitch' in params ? params.FullListenSwitch : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+        this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
 
     }
 }
@@ -12303,7 +13286,7 @@ class InquiryPriceRenewLoadBalancerRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -12349,6 +13332,12 @@ class CertificateOutput extends  AbstractModel {
         this.SSLMode = null;
 
         /**
+         * Specifies whether client certificate verification is enabled. this parameter is valid only when mutual authentication is enabled.
+         * @type {string || null}
+         */
+        this.SSLVerifyClient = null;
+
+        /**
          * Server certificate ID.
          * @type {string || null}
          */
@@ -12356,14 +13345,12 @@ class CertificateOutput extends  AbstractModel {
 
         /**
          * Client certificate ID.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertCaId = null;
 
         /**
-         * IDs of extra server certificates
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the server certificate ID for multi-server certificate scenario expansion.
          * @type {Array.<string> || null}
          */
         this.ExtCertIds = null;
@@ -12378,6 +13365,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.SSLVerifyClient = 'SSLVerifyClient' in params ? params.SSLVerifyClient : null;
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
         this.ExtCertIds = 'ExtCertIds' in params ? params.ExtCertIds : null;
@@ -12394,7 +13382,7 @@ class DeleteTargetGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Target group ID array
+         * Specifies the ID array of the target group. supports up to 20 deletions.
          * @type {Array.<string> || null}
          */
         this.TargetGroupIds = null;
@@ -12484,7 +13472,7 @@ class SetLoadBalancerStartStatusRequest extends  AbstractModel {
         this.OperationType = null;
 
         /**
-         * CLB instance ID.
+         * ID of the cloud load balancer instance. you can call the [DescribeLoadBalancers](https://www.tencentcloud.comom/document/product/1108/48459?from_cn_redirect=1) API to query the ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
@@ -12582,8 +13570,7 @@ class ListenerHealth extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * Listener name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Listener name.
          * @type {string || null}
          */
         this.ListenerName = null;
@@ -12602,7 +13589,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * List of forwarding rules of the listener
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RuleHealth> || null}
          */
         this.Rules = null;
@@ -12698,6 +13684,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ListenerName = null;
 
+        /**
+         * Weight associated with the target group. this parameter takes effect only for the new version v2 target group.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * Advanced routing rule ID.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
     }
 
     /**
@@ -12716,82 +13714,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Url = 'Url' in params ? params.Url : null;
         this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
         this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
 
 /**
- * Details of a real server bound to a listener
+ * DescribeCrossTargets request structure.
  * @class
  */
-class Backend extends  AbstractModel {
+class DescribeCrossTargetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Real server type. Valid values: CVM, ENI, CCN.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Unique ID of a real server, which can be obtained from the unInstanceId field in the return of the DescribeInstances API
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Listening port of a real server
+         * Number of real server lists returned. Default value: 20; maximum value: 100.
          * @type {number || null}
          */
-        this.Port = null;
+        this.Limit = null;
 
         /**
-         * Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
+         * Starting offset of the real server list returned. Default value: 0.
          * @type {number || null}
          */
-        this.Weight = null;
+        this.Offset = null;
 
         /**
-         * Public IP of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * Filter conditions to query CVMs and ENIs
+<li> `vpc-id` - String - Required: No - (Filter condition) Filter by VPC ID, such as "vpc-12345678".</li>
+<li> `ip` - String - Required: No - (Filter condition) Filter by real server IP, such as "192.168.0.1".</li>
+<li> `listener-id` - String - Required: No - (Filter condition) Filter by listener ID, such as "lbl-12345678".</li>
+<li> `location-id` - String - Required: No - (Filter condition) Filter by forwarding rule ID of the layer-7 listener, such as "loc-12345678".</li>
+         * @type {Array.<Filter> || null}
          */
-        this.PublicIpAddresses = null;
-
-        /**
-         * Private IP of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.PrivateIpAddresses = null;
-
-        /**
-         * Real server instance names
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Bound time of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegisteredTime = null;
-
-        /**
-         * Unique ENI ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EniId = null;
-
-        /**
-         * Tag.Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Tag = null;
+        this.Filters = null;
 
     }
 
@@ -12802,16 +13759,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
-        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
-        this.EniId = 'EniId' in params ? params.EniId : null;
-        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -12831,7 +13789,7 @@ class RegisterTargetGroupInstancesRequest extends  AbstractModel {
         this.TargetGroupId = null;
 
         /**
-         * Server instance array
+         * Server instance array. the VPC of the server and target group must be the same.
          * @type {Array.<TargetGroupInstance> || null}
          */
         this.TargetGroupInstances = null;
@@ -12880,8 +13838,8 @@ class LoadBalancer extends  AbstractModel {
         this.LoadBalancerName = null;
 
         /**
-         * CLB instance network type:
-OPEN: public network; INTERNAL: private network.
+         * Network type of the load balancing instance.
+OPEN: public network attribute. INTERNAL: private network attribute. for a cloud load balancer with private network attribute, you can bind an EIP for public network access. for details, see the EIP document on binding elastic IP (https://www.tencentcloud.comom/document/product/215/16700?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LoadBalancerType = null;
@@ -12893,36 +13851,34 @@ OPEN: public network; INTERNAL: private network.
         this.Forward = null;
 
         /**
-         * Domain name of the CLB instance. This field is provided only for classic public network CLB instances and domain name-based CLB instances. It is being gradually phased out, so use LoadBalancerDomain instead.Note: This field may return null, indicating that no valid values can be obtained.
+         * The domain name of the cloud load balancer instance. this field is only provided for public network classic and domain name-based load balancing instances. it is being gradually phased out. we recommend using LoadBalancerDomain instead.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
          * List of VIPs of a CLB instance.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerVips = null;
 
         /**
-         * CLB instance status, including:
-0: creating; 1: running.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the state of the load balancing instance, including.
+0: creating. 1: normal operation.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * CLB instance creation time.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * CLB instance creation time
+Format: YYYY-MM-DD HH:MM:ss.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last status change time of a CLB instance.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Last status transition time of the CLB instance.
+Format: YYYY-MM-DD HH:MM:ss.
          * @type {string || null}
          */
         this.StatusTime = null;
@@ -12935,28 +13891,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * VPC ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Protective CLB identifier. Value range: 1 (protective), 0 (non-protective).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Anti-DDoS Pro identifier for CLB. 1: CLB with Anti-DDoS Pro; 0: CLB without Anti-DDoS Pro.
          * @type {number || null}
          */
         this.OpenBgp = null;
 
         /**
-         * SNAT is enabled for all private network classic CLB created before December 2016.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether SNAT is enabled. for traditional private network clbs before december 2016, SNAT was enabled.
          * @type {boolean || null}
          */
         this.Snat = null;
 
         /**
-         * 0: not isolated; 1: isolated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether isolated. 0 means not isolated. 1 means isolated.
          * @type {number || null}
          */
         this.Isolation = null;
@@ -12969,56 +13921,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Log = null;
 
         /**
-         * Subnet where a CLB instance resides (meaningful only for private network VPC CLB)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Subnet of the CLB instance (applicable only to VPC-type CLB instances on private networks)
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
          * CLB instance tag information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
         /**
-         * Security group of a CLB instance
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Security group of the CLB instance
          * @type {Array.<string> || null}
          */
         this.SecureGroups = null;
 
         /**
-         * Basic information of a backend server bound to a CLB instance
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Basic information of real servers bound to the CLB instance
          * @type {TargetRegionInfo || null}
          */
         this.TargetRegionInfo = null;
 
         /**
-         * Anycast CLB publishing region. For non-anycast CLB, this field returns an empty string.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Anycast CLB release domain. For non-anycast CLB, this field returns an empty string.
          * @type {string || null}
          */
         this.AnycastZone = null;
 
         /**
-         * IP version. Valid values: ipv4, ipv6
-Note: this field may return null, indicating that no valid values can be obtained.
+         * IP Version, ipv4 | ipv6
          * @type {string || null}
          */
         this.AddressIPVersion = null;
 
         /**
-         * VPC ID in a numeric form
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the VPC ID in numerical form, obtainable through the DescribeVpcs API (https://www.tencentcloud.comom/document/product/215/15778?from_cn_redirect=1).
          * @type {number || null}
          */
         this.NumericalVpcId = null;
 
         /**
-         * ISP for the IP address of the CLB instance. Valid values: BGP, CMCC, CTCC, CUCC.Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the ISP of the load balancer IP address.
+
+-BGP (multi-line).
+- CMCC: CMCC single line network.
+-CTCC: ctcc single-line.
+- CUCC: china unicom single-line.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VipIsp = null;
@@ -13038,7 +13989,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BackupZoneSet = null;
 
         /**
-         * CLB instance isolation time
+         * Specifies the isolation time of the cloud load balancer instance.
+Format: YYYY-MM-DD HH:MM:ss.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -13073,15 +14025,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PrepaidAttributes = null;
 
         /**
-         * Logset ID of CLB Log Service (CLS)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Log set ID of Cloud Log Service (CLS) for CLB
          * @type {string || null}
          */
         this.LogSetId = null;
 
         /**
-         * Log topic ID of CLB Log Service (CLS)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Log topic ID of Cloud Log Service (CLS) for CLB
          * @type {string || null}
          */
         this.LogTopicId = null;
@@ -13102,75 +14052,70 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Whether an Anti-DDoS Pro instance can be bound
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsDDos = null;
 
         /**
-         * Custom configuration ID at the CLB instance level
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Custom configuration IDs of CLB instances
          * @type {string || null}
          */
         this.ConfigId = null;
 
         /**
-         * Whether a real server opens the traffic from a CLB instance to the internet
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether the real server allows traffic from CLB
          * @type {boolean || null}
          */
         this.LoadBalancerPassToTarget = null;
 
         /**
-         * Private network dedicated cluster
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Exclusive cluster on the private network
          * @type {ExclusiveCluster || null}
          */
         this.ExclusiveCluster = null;
 
         /**
-         * This field is meaningful only when the IP address version is `ipv6`. Valid values: IPv6Nat64, IPv6FullChain
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the field is meaningful when the IP address version is ipv6. valid values: ipv6Nat64 | ipv6FullChain.
+IPv6Nat64: specifies a load balancer based on Nat64 IPv6 transition technology.
+IPv6FullChain: specifies a cloud load balancer implemented based on ipv6 single-stack technology.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IPv6Mode = null;
 
         /**
-         * Whether to enable SnatPro.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies whether SnatPro is enabled.
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * `SnatIp` list after SnatPro load balancing is enabled.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Enables the SnatIp list after turning on SnatPro load balancing.
          * @type {Array.<SnatIp> || null}
          */
         this.SnatIps = null;
 
         /**
-         * Specification of the LCU-supported instance. <ul><li> clb.c2.medium: Standard </li><li> clb.c3.small: Advanced 1 </li><li> clb.c3.medium: Advanced 2 </li><li> clb.c4.small: Super Large 1 </li><li> clb.c4.medium: Super Large 2 </li><li> clb.c4.large: Super Large 3 </li><li> clb.c4.xlarge: Super Large 4 </li><li>null: Shared instance</li></ul>Note: This field may return null, indicating that no valid values can be obtained.
+         * Performance capacity specification. <ul><li> clb.c1.small: minimalist specification </li> <li> clb.c2.medium: standard specification </li> <li> clb.c3.small: advanced type 1 specification </li> <li> clb.c3.medium: advanced type 2 specification </li> <li> clb.c4.small: super type 1 specification </li> <li> clb.c4.medium: super type 2 specification </li> <li> clb.c4.large: super type 3 specification </li> <li> clb.c4.xlarge: super type 4 specification </li> <li>"" : non-performance capacity instance</li></ul>.
          * @type {string || null}
          */
         this.SlaType = null;
 
         /**
          * Whether VIP is blocked
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsBlock = null;
 
         /**
-         * Time blocked or unblocked
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies the blocking or unblocking time.
+Format: YYYY-MM-DD HH:MM:ss.
          * @type {string || null}
          */
         this.IsBlockTime = null;
 
         /**
-         * Whether the IP type is the local BGP
+         * Whether the IP type is Local BGP
          * @type {boolean || null}
          */
         this.LocalBgp = null;
@@ -13183,8 +14128,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ClusterTag = null;
 
         /**
-         * If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with an IPv4 and an IPv6 CVM instance simultaneously.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * If the layer-7 listener of an IPv6FullChain CLB instance is enabled, the CLB instance can be bound with IPv4 and IPv6 CVM instances simultaneously.
          * @type {boolean || null}
          */
         this.MixIpTarget = null;
@@ -13204,15 +14148,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.NfvInfo = null;
 
         /**
-         * Health check logset ID of CLB CLS
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Health check log set ID of Cloud Log Service (CLS) for CLB
          * @type {string || null}
          */
         this.HealthLogSetId = null;
 
         /**
-         * Health check log topic ID of CLB CLS
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Health check log topic ID of Cloud Log Service (CLS) for CLB
          * @type {string || null}
          */
         this.HealthLogTopicId = null;
@@ -13225,31 +14167,63 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClusterIds = null;
 
         /**
-         * CLB attribute
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Attributes of cloud load balancer, input an array of strings to determine whether it is enabled.
+DeleteProtect: specifies deletion protection. once enabled, it prevents the cloud load balancer from being accidentally deleted. 
+UserInVisible: invisible to users, controls load balancing visibility to users. 
+BlockStatus: specifies the blockage status, used to limit certain operations or traffic for cloud load balancer. 
+NoLBNat: disables the NAT feature of cloud load balancer for direct forwarding of traffic in specific scenarios. 
+BanStatus: specifies the blocking status for suspending the clb service or restricting access. 
+ShiftupFlag: specifies the upgrade flag used to identify if the cloud load balancer requires a configuration upgrade or performance improvement. 
+Specifies the stopped status. once enabled, the cloud load balancer suspends service. 
+NoVpcGw: specifies not to use VPC gateway to bypass the gateway for direct traffic handling. 
+SgInTgw: specifies the security group in TGW (Transit Gateway) involving network security policy configuration. 
+SharedLimitFlag: specifies the shared limit flag used to control the resource constraints of cloud load balancer. 
+WafFlag: specifies the Web application firewall (WAF) flag. enabled to enable WAF protection. 
+IsDomainCLB: indicates whether the cloud load balancer is domain name-based for traffic distribution. 
+IPv6Snat: IPv6 source address translation (Snat), used for source address processing in IPv6 networks. 
+HideDomain. specifies whether to hide the domain name for privacy protection or to avoid exposing it in specific scenarios. 
+JumboFrame: specifies giant frame support. once enabled, it supports larger data frames to improve network efficiency. 
+NoLBNatL4IPdc: specifies layer 4 IP direct connection without NAT, used for direct forwarding of IP traffic in layer 4 load balancing. 
+VpcGwL3Service: specifies the VPC gateway layer-3 Service, which involves the gateway feature of the layer-3 network. 
+Ipv62Flag: specifies the Ipv6 expansion Flag for specific feature support. 
+Ipv62ExclusiveFlag: specifies the Ipv6 exclusive flag used for exclusive Ipv6 traffic processing. 
+BgpPro: specifies BGP Pro support. 
+ToaClean: TOA (TCP Option Address) cleanup. clears Address information in TCP options. 
+
          * @type {Array.<string> || null}
          */
         this.AttributeFlags = null;
 
         /**
-         * Domain name of the CLB instance.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the domain name of the load balancing instance.
          * @type {string || null}
          */
         this.LoadBalancerDomain = null;
 
         /**
-         * Network egress
-Note: This field may return·null, indicating that no valid values can be obtained.
+         * Specifies the network outbound.
          * @type {string || null}
          */
         this.Egress = null;
 
         /**
-         * 
+         * Indicates whether the instance type is dedicated. 1: dedicated instance. 0: non-dedicated instance.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Exclusive = null;
+
+        /**
+         * Specifies the number of bound backend services.
+         * @type {number || null}
+         */
+        this.TargetCount = null;
+
+        /**
+         * Specifies the Endpoint id associated with the clb instance.
+         * @type {string || null}
+         */
+        this.AssociateEndpoint = null;
 
     }
 
@@ -13370,6 +14344,8 @@ Note: This field may return·null, indicating that no valid values can be obtain
         this.LoadBalancerDomain = 'LoadBalancerDomain' in params ? params.LoadBalancerDomain : null;
         this.Egress = 'Egress' in params ? params.Egress : null;
         this.Exclusive = 'Exclusive' in params ? params.Exclusive : null;
+        this.TargetCount = 'TargetCount' in params ? params.TargetCount : null;
+        this.AssociateEndpoint = 'AssociateEndpoint' in params ? params.AssociateEndpoint : null;
 
     }
 }
@@ -13383,6 +14359,7 @@ module.exports = {
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
     RulesItems: RulesItems,
     ExtraInfo: ExtraInfo,
+    ClassicalListener: ClassicalListener,
     BatchModifyTargetWeightResponse: BatchModifyTargetWeightResponse,
     SetSecurityGroupForLoadbalancersRequest: SetSecurityGroupForLoadbalancersRequest,
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
@@ -13390,7 +14367,7 @@ module.exports = {
     DeleteRuleRequest: DeleteRuleRequest,
     CloneLoadBalancerRequest: CloneLoadBalancerRequest,
     DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
-    SetLoadBalancerStartStatusResponse: SetLoadBalancerStartStatusResponse,
+    ListenerBackend: ListenerBackend,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     DescribeLoadBalancerTrafficResponse: DescribeLoadBalancerTrafficResponse,
     MultiCertInfo: MultiCertInfo,
@@ -13401,14 +14378,17 @@ module.exports = {
     DescribeRewriteRequest: DescribeRewriteRequest,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
+    DescribeLBOperateProtectRequest: DescribeLBOperateProtectRequest,
     DescribeIdleLoadBalancersResponse: DescribeIdleLoadBalancersResponse,
-    AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
+    BindItem: BindItem,
+    AddCustomizedConfigRequest: AddCustomizedConfigRequest,
     ClassicalTarget: ClassicalTarget,
     ListenerItem: ListenerItem,
     RsWeightRule: RsWeightRule,
     RegisterFunctionTargetsRequest: RegisterFunctionTargetsRequest,
     DeregisterTargetsFromClassicalLBRequest: DeregisterTargetsFromClassicalLBRequest,
     InquiryPriceModifyLoadBalancerRequest: InquiryPriceModifyLoadBalancerRequest,
+    ModifyCustomizedConfigRequest: ModifyCustomizedConfigRequest,
     BasicTargetGroupInfo: BasicTargetGroupInfo,
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
     ZoneResource: ZoneResource,
@@ -13419,7 +14399,7 @@ module.exports = {
     CrossTargets: CrossTargets,
     RuleHealth: RuleHealth,
     ModifyDomainRequest: ModifyDomainRequest,
-    IdleLoadBalancer: IdleLoadBalancer,
+    DisassociateCustomizedConfigResponse: DisassociateCustomizedConfigResponse,
     BatchModifyTargetTagRequest: BatchModifyTargetTagRequest,
     RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
@@ -13429,6 +14409,7 @@ module.exports = {
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
     InquiryPriceCreateLoadBalancerRequest: InquiryPriceCreateLoadBalancerRequest,
+    ModifyFunctionTargetsResponse: ModifyFunctionTargetsResponse,
     DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
@@ -13437,9 +14418,10 @@ module.exports = {
     DeregisterFunctionTargetsResponse: DeregisterFunctionTargetsResponse,
     DescribeCustomizedConfigListRequest: DescribeCustomizedConfigListRequest,
     AutoRewriteRequest: AutoRewriteRequest,
+    IdleLoadBalancer: IdleLoadBalancer,
     DescribeCrossTargetsResponse: DescribeCrossTargetsResponse,
     FunctionInfo: FunctionInfo,
-    ModifyFunctionTargetsResponse: ModifyFunctionTargetsResponse,
+    ModifyCustomizedConfigResponse: ModifyCustomizedConfigResponse,
     DescribeLoadBalancerListByCertIdResponse: DescribeLoadBalancerListByCertIdResponse,
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
@@ -13452,6 +14434,7 @@ module.exports = {
     Target: Target,
     DescribeLoadBalancerTrafficRequest: DescribeLoadBalancerTrafficRequest,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
+    MigrateClassicalLoadBalancersResponse: MigrateClassicalLoadBalancersResponse,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
     ModifyLoadBalancerSlaResponse: ModifyLoadBalancerSlaResponse,
@@ -13461,13 +14444,15 @@ module.exports = {
     SpecAvailability: SpecAvailability,
     ConfigListItem: ConfigListItem,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
+    HealthCheck: HealthCheck,
     ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
     DescribeTargetsResponse: DescribeTargetsResponse,
     ModifyListenerRequest: ModifyListenerRequest,
+    SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
     DeregisterTargetGroupInstancesResponse: DeregisterTargetGroupInstancesResponse,
     RegisterTargetsRequest: RegisterTargetsRequest,
-    HealthCheck: HealthCheck,
+    DisassociateCustomizedConfigRequest: DisassociateCustomizedConfigRequest,
     AssociateTargetGroupsResponse: AssociateTargetGroupsResponse,
     CreateTopicRequest: CreateTopicRequest,
     DeleteListenerRequest: DeleteListenerRequest,
@@ -13485,16 +14470,18 @@ module.exports = {
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     ManualRewriteResponse: ManualRewriteResponse,
     ModifyBlockIPListRequest: ModifyBlockIPListRequest,
+    RuleOutput: RuleOutput,
     ModifyBlockIPListResponse: ModifyBlockIPListResponse,
     ExclusiveCluster: ExclusiveCluster,
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     DescribeListenersRequest: DescribeListenersRequest,
     CreateClsLogSetResponse: CreateClsLogSetResponse,
-    DescribeCrossTargetsRequest: DescribeCrossTargetsRequest,
+    Backend: Backend,
     LBChargePrepaid: LBChargePrepaid,
-    ClassicalListener: ClassicalListener,
+    AddCustomizedConfigResponse: AddCustomizedConfigResponse,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     ModifyLoadBalancersProjectRequest: ModifyLoadBalancersProjectRequest,
+    AssociateCustomizedConfigRequest: AssociateCustomizedConfigRequest,
     CertificateInput: CertificateInput,
     ResourceAvailability: ResourceAvailability,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
@@ -13502,11 +14489,11 @@ module.exports = {
     SetCustomizedConfigForLoadBalancerRequest: SetCustomizedConfigForLoadBalancerRequest,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
-    MigrateClassicalLoadBalancersResponse: MigrateClassicalLoadBalancersResponse,
+    AssociateCustomizedConfigResponse: AssociateCustomizedConfigResponse,
     CreateLoadBalancerSnatIpsResponse: CreateLoadBalancerSnatIpsResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     DescribeListenersResponse: DescribeListenersResponse,
-    RuleOutput: RuleOutput,
+    LBOperateProtectInfo: LBOperateProtectInfo,
     RegisterFunctionTargetsResponse: RegisterFunctionTargetsResponse,
     CreateTopicResponse: CreateTopicResponse,
     CreateRuleRequest: CreateRuleRequest,
@@ -13528,6 +14515,7 @@ module.exports = {
     TypeInfo: TypeInfo,
     DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
     Filter: Filter,
+    AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
     ModifyDomainResponse: ModifyDomainResponse,
     RegisterTargetsResponse: RegisterTargetsResponse,
     DeregisterTargetsFromClassicalLBResponse: DeregisterTargetsFromClassicalLBResponse,
@@ -13567,8 +14555,8 @@ module.exports = {
     Price: Price,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
     BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
-    ListenerBackend: ListenerBackend,
-    SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
+    DeleteCustomizedConfigResponse: DeleteCustomizedConfigResponse,
+    DescribeLBOperateProtectResponse: DescribeLBOperateProtectResponse,
     RuleInput: RuleInput,
     TagInfo: TagInfo,
     SnatIp: SnatIp,
@@ -13577,6 +14565,7 @@ module.exports = {
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     ModifyLoadBalancerSlaRequest: ModifyLoadBalancerSlaRequest,
+    SetLoadBalancerStartStatusResponse: SetLoadBalancerStartStatusResponse,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     Resource: Resource,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
@@ -13585,6 +14574,7 @@ module.exports = {
     Quota: Quota,
     SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     LBItem: LBItem,
+    DeleteCustomizedConfigRequest: DeleteCustomizedConfigRequest,
     DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeIdleLoadBalancersRequest: DescribeIdleLoadBalancersRequest,
     DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
@@ -13607,7 +14597,7 @@ module.exports = {
     TargetGroupAssociation: TargetGroupAssociation,
     ListenerHealth: ListenerHealth,
     AssociationItem: AssociationItem,
-    Backend: Backend,
+    DescribeCrossTargetsRequest: DescribeCrossTargetsRequest,
     RegisterTargetGroupInstancesRequest: RegisterTargetGroupInstancesRequest,
     LoadBalancer: LoadBalancer,
 

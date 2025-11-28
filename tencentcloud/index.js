@@ -120,6 +120,7 @@ module.exports = {
     tms: require("./tms"),
     tmt: require("./tmt"),
     trabbit: require("./trabbit"),
+    trocket: require("./trocket"),
     trro: require("./trro"),
     trtc: require("./trtc"),
     tts: require("./tts"),

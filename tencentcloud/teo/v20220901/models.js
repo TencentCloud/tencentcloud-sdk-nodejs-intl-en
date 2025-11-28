@@ -4513,7 +4513,7 @@ class PostMaxSizeParameters extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Maximum size of the file uploaded for streaming via a post request. Takes effect only when Switch is on. Range: 1 MB - 800 MB (bytes).
+         * Specifies the maximum limit for file streaming transmission in POST request upload. this field is valid only when Switch is on. value range: 1MB to 800MB. unit: byte.
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -6477,6 +6477,12 @@ The original configuration will apply if it is not specified.
         this.Grpc = null;
 
         /**
+         * Network Error Logging configuration. The original configuration will apply if it is not specified.
+         * @type {NetworkErrorLogging || null}
+         */
+        this.NetworkErrorLogging = null;
+
+        /**
          * Image optimization. 
 It is disabled if this parameter is not specified.
          * @type {ImageOptimize || null}
@@ -6612,6 +6618,12 @@ It is disabled if this parameter is not specified.
             let obj = new Grpc();
             obj.deserialize(params.Grpc)
             this.Grpc = obj;
+        }
+
+        if (params.NetworkErrorLogging) {
+            let obj = new NetworkErrorLogging();
+            obj.deserialize(params.NetworkErrorLogging)
+            this.NetworkErrorLogging = obj;
         }
 
         if (params.ImageOptimize) {
@@ -9584,8 +9596,8 @@ class MaxAge extends  AbstractModel {
         this.FollowOrigin = null;
 
         /**
-         * Specifies the maximum amount of time (in seconds). Value range: 0 to 315360000.
-Note: The value `0` means not to cache.
+         * MaxAge specifies the time setting in seconds. value range: 0–315360000.
+Specifies the time when the cache is disabled if set to 0.
          * @type {number || null}
          */
         this.MaxAgeTime = null;
@@ -11120,6 +11132,13 @@ Note: this field may return null, which indicates a failure to obtain a valid va
         this.Grpc = null;
 
         /**
+         * Network Error Logging configuration.
+Note: This field may return null, which indicates a failure to obtain a valid value.
+         * @type {NetworkErrorLoggingParameters || null}
+         */
+        this.NetworkErrorLogging = null;
+
+        /**
          * Accelerate optimization and configuration in mainland china.
 Note: this field may return null, which indicates a failure to obtain a valid value.
          * @type {AccelerateMainlandParameters || null}
@@ -11262,6 +11281,12 @@ Note: this field may return null, which indicates a failure to obtain a valid va
             let obj = new GrpcParameters();
             obj.deserialize(params.Grpc)
             this.Grpc = obj;
+        }
+
+        if (params.NetworkErrorLogging) {
+            let obj = new NetworkErrorLoggingParameters();
+            obj.deserialize(params.NetworkErrorLogging)
+            this.NetworkErrorLogging = obj;
         }
 
         if (params.AccelerateMainland) {
@@ -25734,6 +25759,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Grpc = null;
 
         /**
+         * Network Error Logging configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {NetworkErrorLogging || null}
+         */
+        this.NetworkErrorLogging = null;
+
+        /**
          * Image optimization configuration. 
 Note: This field may return `null`, indicating that no valid value was found.
          * @type {ImageOptimize || null}
@@ -25879,6 +25911,12 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             let obj = new Grpc();
             obj.deserialize(params.Grpc)
             this.Grpc = obj;
+        }
+
+        if (params.NetworkErrorLogging) {
+            let obj = new NetworkErrorLogging();
+            obj.deserialize(params.NetworkErrorLogging)
+            this.NetworkErrorLogging = obj;
         }
 
         if (params.ImageOptimize) {
@@ -28633,11 +28671,11 @@ class Https extends  AbstractModel {
         this.OcspStapling = null;
 
         /**
-         * Tls version settings, valid values:.
-<Li>`TLSv1`: tlsv1 version;</li>.
-<li>`TLSv1.1`: TLSv1.1 version;</li>.
-<li>TLSv1.2: specifies the TLSv1.2 version.</li>.
-<Li>TLSv1.3: specifies the TLSv1.3 version. consecutive versions must be enabled when modifying.</li>.
+         * Tls version settings. valid values:.
+<Li>TLSv1: specifies the tlsv1 version.</li>.
+<Li>TLSv1.1: specifies the tlsv1.1 version.</li>.
+<Li>TLSv1.2: specifies the tlsv1.2 version.</li>.
+<Li>TLSv1.3: specifies the tlsv1.3 version. consecutive versions must be enabled when modifying.</li>.
          * @type {Array.<string> || null}
          */
         this.TlsVersion = null;
@@ -29039,6 +29077,36 @@ Note: This field may return null, which indicates a failure to obtain a valid va
             obj.deserialize(params.RemoteAuth)
             this.RemoteAuth = obj;
         }
+
+    }
+}
+
+/**
+ * Network Error Logging configuration.
+ * @class
+ */
+class NetworkErrorLoggingParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether Network Error Logging configuration is enabled. Valid values:
+<li>`on`: Enable;</li>
+<li>`off`: Disable.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -30553,6 +30621,36 @@ class UpstreamRequestCookie extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * Network Error Logging configuration.
+ * @class
+ */
+class NetworkErrorLogging extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether the Network Error Logging configuration is enabled. Valid values:.
+<li>`on`: Enable;</li>
+<li>`off`: Disable.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -33477,7 +33575,7 @@ class PostMaxSize extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Maximum limit.Takes effect only when Switch is on. Range:1 MB - 800 MB (bytes).
+         * Specifies the maximum limit. this field is valid only when Switch is on. value range: 1MB to 800MB. unit: byte.
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -37230,6 +37328,7 @@ module.exports = {
     ExportZoneConfigRequest: ExportZoneConfigRequest,
     OriginGroupHealthStatusDetail: OriginGroupHealthStatusDetail,
     L4ProxyRule: L4ProxyRule,
+    NetworkErrorLoggingParameters: NetworkErrorLoggingParameters,
     CacheKeyQueryString: CacheKeyQueryString,
     AdvancedFilter: AdvancedFilter,
     DescribeDDoSAttackDataResponse: DescribeDDoSAttackDataResponse,
@@ -37263,6 +37362,7 @@ module.exports = {
     IncreasePlanQuotaRequest: IncreasePlanQuotaRequest,
     FunctionRule: FunctionRule,
     UpstreamRequestCookie: UpstreamRequestCookie,
+    NetworkErrorLogging: NetworkErrorLogging,
     DescribeDDoSAttackTopDataRequest: DescribeDDoSAttackTopDataRequest,
     Quic: Quic,
     DescribeDDoSAttackDataRequest: DescribeDDoSAttackDataRequest,

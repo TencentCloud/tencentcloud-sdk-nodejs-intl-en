@@ -2302,6 +2302,14 @@ The default value is blink. The different action types passed in this parameter 
          */
         this.ActionList = null;
 
+        /**
+         * Whether expired identity documents are permitted to proceed to the liveness detection process. This parameter only takes effect when the document type is Hong Kong Identity Card (HKID).
+true (default value): Expired HKID is allowed to enter the liveness process.
+false : Expired HKID is rejected and cannot enter the liveness process.
+         * @type {boolean || null}
+         */
+        this.AllowExpiredDocument = null;
+
     }
 
     /**
@@ -2322,6 +2330,7 @@ The default value is blink. The different action types passed in this parameter 
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
         this.ActionList = 'ActionList' in params ? params.ActionList : null;
+        this.AllowExpiredDocument = 'AllowExpiredDocument' in params ? params.AllowExpiredDocument : null;
 
     }
 }

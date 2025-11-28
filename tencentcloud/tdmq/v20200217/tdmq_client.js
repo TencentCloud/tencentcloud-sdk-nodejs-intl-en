@@ -16,243 +16,353 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeRolesResponse = models.DescribeRolesResponse;
-const DescribeBindClustersResponse = models.DescribeBindClustersResponse;
-const DescribeRabbitMQVirtualHostResponse = models.DescribeRabbitMQVirtualHostResponse;
-const CmqDeadLetterPolicy = models.CmqDeadLetterPolicy;
-const DeleteRabbitMQUserRequest = models.DeleteRabbitMQUserRequest;
 const RocketMQNamespace = models.RocketMQNamespace;
-const DescribeSubscriptionsRequest = models.DescribeSubscriptionsRequest;
-const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
-const CreateRocketMQGroupRequest = models.CreateRocketMQGroupRequest;
-const ModifyRabbitMQVirtualHostRequest = models.ModifyRabbitMQVirtualHostRequest;
-const ModifyEnvironmentAttributesRequest = models.ModifyEnvironmentAttributesRequest;
-const DeleteClusterResponse = models.DeleteClusterResponse;
-const SendBatchMessagesResponse = models.SendBatchMessagesResponse;
-const ModifyCmqSubscriptionAttributeResponse = models.ModifyCmqSubscriptionAttributeResponse;
-const CreateCmqTopicRequest = models.CreateCmqTopicRequest;
-const PulsarProClusterSpecInfo = models.PulsarProClusterSpecInfo;
-const RocketMQTopicDistribution = models.RocketMQTopicDistribution;
-const DescribeRocketMQNamespacesResponse = models.DescribeRocketMQNamespacesResponse;
+const CreateRabbitMQBindingResponse = models.CreateRabbitMQBindingResponse;
 const ModifyRocketMQInstanceSpecRequest = models.ModifyRocketMQInstanceSpecRequest;
-const BindCluster = models.BindCluster;
-const Sort = models.Sort;
-const ModifyClusterResponse = models.ModifyClusterResponse;
-const SendRocketMQMessageRequest = models.SendRocketMQMessageRequest;
-const RabbitMQPrivateVirtualHost = models.RabbitMQPrivateVirtualHost;
+const DeleteClusterResponse = models.DeleteClusterResponse;
+const CreateCmqTopicRequest = models.CreateCmqTopicRequest;
 const RocketMQVipInstance = models.RocketMQVipInstance;
-const RabbitMQVipInstance = models.RabbitMQVipInstance;
 const DescribeCmqQueuesResponse = models.DescribeCmqQueuesResponse;
-const CreateRabbitMQVipInstanceRequest = models.CreateRabbitMQVipInstanceRequest;
-const CreateRabbitMQVirtualHostResponse = models.CreateRabbitMQVirtualHostResponse;
 const DescribeRabbitMQNodeListRequest = models.DescribeRabbitMQNodeListRequest;
-const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
-const RocketMQInstanceConfig = models.RocketMQInstanceConfig;
-const CreateCmqSubscribeRequest = models.CreateCmqSubscribeRequest;
-const RewindCmqQueueResponse = models.RewindCmqQueueResponse;
-const DeleteClusterRequest = models.DeleteClusterRequest;
-const CmqSubscription = models.CmqSubscription;
+const DeleteCmqQueueResponse = models.DeleteCmqQueueResponse;
+const DescribeRocketMQEnvironmentRolesRequest = models.DescribeRocketMQEnvironmentRolesRequest;
 const DeleteRocketMQGroupRequest = models.DeleteRocketMQGroupRequest;
 const RocketMQGroup = models.RocketMQGroup;
 const ModifyRabbitMQUserRequest = models.ModifyRabbitMQUserRequest;
-const RocketMQClusterConfig = models.RocketMQClusterConfig;
-const DeleteCmqTopicResponse = models.DeleteCmqTopicResponse;
 const CreateSubscriptionRequest = models.CreateSubscriptionRequest;
-const CreateRocketMQNamespaceRequest = models.CreateRocketMQNamespaceRequest;
-const RabbitMQVirtualHostInfo = models.RabbitMQVirtualHostInfo;
-const InstanceNodeDistribution = models.InstanceNodeDistribution;
-const DescribeCmqTopicDetailResponse = models.DescribeCmqTopicDetailResponse;
-const ModifyRabbitMQVirtualHostResponse = models.ModifyRabbitMQVirtualHostResponse;
-const CmqQueue = models.CmqQueue;
-const CreateEnvironmentResponse = models.CreateEnvironmentResponse;
+const RabbitMQVipInstance = models.RabbitMQVipInstance;
+const RabbitMQClusterInfo = models.RabbitMQClusterInfo;
 const RabbitMQVirtualHostStatistics = models.RabbitMQVirtualHostStatistics;
-const CreateSubscriptionResponse = models.CreateSubscriptionResponse;
-const SendMsgResponse = models.SendMsgResponse;
-const ModifyCmqTopicAttributeResponse = models.ModifyCmqTopicAttributeResponse;
-const DescribeCmqSubscriptionDetailRequest = models.DescribeCmqSubscriptionDetailRequest;
-const Topic = models.Topic;
-const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
-const DescribeRocketMQNamespacesRequest = models.DescribeRocketMQNamespacesRequest;
-const DescribeRocketMQTopicsRequest = models.DescribeRocketMQTopicsRequest;
-const ModifyRocketMQClusterResponse = models.ModifyRocketMQClusterResponse;
-const DescribeCmqQueueDetailResponse = models.DescribeCmqQueueDetailResponse;
-const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
-const DeleteTopicsResponse = models.DeleteTopicsResponse;
-const ModifyEnvironmentAttributesResponse = models.ModifyEnvironmentAttributesResponse;
-const DescribeClustersRequest = models.DescribeClustersRequest;
-const SubscriptionTopic = models.SubscriptionTopic;
-const RocketMQTopic = models.RocketMQTopic;
-const DescribeRocketMQClusterResponse = models.DescribeRocketMQClusterResponse;
-const DescribeCmqSubscriptionDetailResponse = models.DescribeCmqSubscriptionDetailResponse;
-const VpcBindRecord = models.VpcBindRecord;
-const RewindCmqQueueRequest = models.RewindCmqQueueRequest;
-const DescribeRabbitMQUserResponse = models.DescribeRabbitMQUserResponse;
-const DescribeRocketMQMsgResponse = models.DescribeRocketMQMsgResponse;
-const ModifyClusterRequest = models.ModifyClusterRequest;
-const DescribeEnvironmentAttributesRequest = models.DescribeEnvironmentAttributesRequest;
-const ModifyRocketMQClusterRequest = models.ModifyRocketMQClusterRequest;
-const DeleteRabbitMQVirtualHostResponse = models.DeleteRabbitMQVirtualHostResponse;
-const AcknowledgeMessageRequest = models.AcknowledgeMessageRequest;
-const ResetRocketMQConsumerOffSetResponse = models.ResetRocketMQConsumerOffSetResponse;
-const DescribeRocketMQVipInstanceDetailResponse = models.DescribeRocketMQVipInstanceDetailResponse;
-const PublishCmqMsgResponse = models.PublishCmqMsgResponse;
-const DescribePublishersRequest = models.DescribePublishersRequest;
-const CreateRocketMQClusterRequest = models.CreateRocketMQClusterRequest;
-const CreateRabbitMQUserResponse = models.CreateRabbitMQUserResponse;
-const AcknowledgeMessageResponse = models.AcknowledgeMessageResponse;
-const DeleteEnvironmentRolesResponse = models.DeleteEnvironmentRolesResponse;
-const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
-const ModifyRoleResponse = models.ModifyRoleResponse;
+const DescribeRabbitMQQueuesResponse = models.DescribeRabbitMQQueuesResponse;
 const Tag = models.Tag;
-const DeleteCmqQueueResponse = models.DeleteCmqQueueResponse;
-const DescribeRocketMQClusterRequest = models.DescribeRocketMQClusterRequest;
-const DeleteRocketMQTopicResponse = models.DeleteRocketMQTopicResponse;
-const SendRocketMQMessageResponse = models.SendRocketMQMessageResponse;
-const ModifyCmqTopicAttributeRequest = models.ModifyCmqTopicAttributeRequest;
-const DescribeRabbitMQVipInstancesResponse = models.DescribeRabbitMQVipInstancesResponse;
-const DeleteRolesRequest = models.DeleteRolesRequest;
-const Subscription = models.Subscription;
+const DescribeRocketMQNamespacesRequest = models.DescribeRocketMQNamespacesRequest;
+const ModifyRocketMQClusterResponse = models.ModifyRocketMQClusterResponse;
+const DescribeRocketMQTopicStatsResponse = models.DescribeRocketMQTopicStatsResponse;
+const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
 const CreateCmqSubscribeResponse = models.CreateCmqSubscribeResponse;
-const Publisher = models.Publisher;
+const DescribeClustersRequest = models.DescribeClustersRequest;
+const ModifyEnvironmentAttributesRequest = models.ModifyEnvironmentAttributesRequest;
+const RocketMQDataPoint = models.RocketMQDataPoint;
 const DescribeSubscriptionsResponse = models.DescribeSubscriptionsResponse;
-const RocketMQMessageTrack = models.RocketMQMessageTrack;
+const ModifyRocketMQClusterRequest = models.ModifyRocketMQClusterRequest;
+const SendBatchMessagesResponse = models.SendBatchMessagesResponse;
+const DescribeRocketMQVipInstanceDetailResponse = models.DescribeRocketMQVipInstanceDetailResponse;
+const DescribeRabbitMQVirtualHostResponse = models.DescribeRabbitMQVirtualHostResponse;
+const RabbitMQPermission = models.RabbitMQPermission;
+const CreateRocketMQClusterRequest = models.CreateRocketMQClusterRequest;
+const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
+const DeleteRocketMQRolesResponse = models.DeleteRocketMQRolesResponse;
+const DeleteRocketMQTopicResponse = models.DeleteRocketMQTopicResponse;
+const Publisher = models.Publisher;
 const ModifyRoleRequest = models.ModifyRoleRequest;
 const DescribeRocketMQMsgRequest = models.DescribeRocketMQMsgRequest;
 const SendMessagesResponse = models.SendMessagesResponse;
-const ReceiveMessageRequest = models.ReceiveMessageRequest;
 const CreateTopicRequest = models.CreateTopicRequest;
-const DescribeTopicsRequest = models.DescribeTopicsRequest;
-const DeleteEnvironmentsResponse = models.DeleteEnvironmentsResponse;
-const DescribeEnvironmentRolesResponse = models.DescribeEnvironmentRolesResponse;
-const ClearCmqQueueRequest = models.ClearCmqQueueRequest;
-const ModifyRocketMQGroupRequest = models.ModifyRocketMQGroupRequest;
-const FilterSubscription = models.FilterSubscription;
 const DescribeCmqTopicsResponse = models.DescribeCmqTopicsResponse;
+const DescribeRocketMQMsgTraceRequest = models.DescribeRocketMQMsgTraceRequest;
+const ModifyRocketMQGroupRequest = models.ModifyRocketMQGroupRequest;
 const DescribeCmqTopicDetailRequest = models.DescribeCmqTopicDetailRequest;
-const CmqTopic = models.CmqTopic;
 const UnbindCmqDeadLetterResponse = models.UnbindCmqDeadLetterResponse;
+const ModifyRocketMQEnvironmentRoleRequest = models.ModifyRocketMQEnvironmentRoleRequest;
 const ModifyRocketMQNamespaceResponse = models.ModifyRocketMQNamespaceResponse;
-const SendCmqMsgRequest = models.SendCmqMsgRequest;
+const DimensionInstance = models.DimensionInstance;
 const DeleteEnvironmentsRequest = models.DeleteEnvironmentsRequest;
 const DescribeRocketMQClustersRequest = models.DescribeRocketMQClustersRequest;
-const DescribeBindVpcsRequest = models.DescribeBindVpcsRequest;
+const SendRocketMQMessageRequest = models.SendRocketMQMessageRequest;
+const CreateClusterResponse = models.CreateClusterResponse;
+const DeleteRocketMQNamespaceRequest = models.DeleteRocketMQNamespaceRequest;
+const DeleteRabbitMQPermissionRequest = models.DeleteRabbitMQPermissionRequest;
+const CreateTopicResponse = models.CreateTopicResponse;
+const ReceiveMessageResponse = models.ReceiveMessageResponse;
+const CreateRocketMQVipInstanceRequest = models.CreateRocketMQVipInstanceRequest;
+const PulsarNetworkAccessPointInfo = models.PulsarNetworkAccessPointInfo;
+const DescribeRabbitMQVipInstanceRequest = models.DescribeRabbitMQVipInstanceRequest;
+const DescribeRabbitMQExchangesRequest = models.DescribeRabbitMQExchangesRequest;
+const DeleteTopicsRequest = models.DeleteTopicsRequest;
+const DeleteRocketMQEnvironmentRolesResponse = models.DeleteRocketMQEnvironmentRolesResponse;
+const DeleteCmqSubscribeRequest = models.DeleteCmqSubscribeRequest;
+const RocketMQClusterConfig = models.RocketMQClusterConfig;
+const SendMsgResponse = models.SendMsgResponse;
+const DescribeMsgRequest = models.DescribeMsgRequest;
+const DeleteRabbitMQPermissionResponse = models.DeleteRabbitMQPermissionResponse;
+const DeleteRabbitMQBindingResponse = models.DeleteRabbitMQBindingResponse;
+const DescribePulsarProInstancesRequest = models.DescribePulsarProInstancesRequest;
+const VpcEndpointInfo = models.VpcEndpointInfo;
+const ClearCmqQueueResponse = models.ClearCmqQueueResponse;
+const DescribeTopicMsgsRequest = models.DescribeTopicMsgsRequest;
+const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
+const DeleteRabbitMQUserResponse = models.DeleteRabbitMQUserResponse;
+const SetRocketMQPublicAccessPointResponse = models.SetRocketMQPublicAccessPointResponse;
+const DescribeRocketMQTopicMsgsRequest = models.DescribeRocketMQTopicMsgsRequest;
+const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
+const DescribeRocketMQRolesResponse = models.DescribeRocketMQRolesResponse;
+const SubscriptionTopic = models.SubscriptionTopic;
+const ModifyRocketMQRoleRequest = models.ModifyRocketMQRoleRequest;
+const DescribeMqMsgTraceRequest = models.DescribeMqMsgTraceRequest;
+const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
+const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
+const ProducerInfo = models.ProducerInfo;
+const ProducerLog = models.ProducerLog;
+const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
+const PulsarProClusterInfo = models.PulsarProClusterInfo;
+const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
+const EnvironmentRole = models.EnvironmentRole;
+const DeleteRabbitMQVipInstanceResponse = models.DeleteRabbitMQVipInstanceResponse;
+const DetailedRolePerm = models.DetailedRolePerm;
+const RabbitMQClusterAccessInfo = models.RabbitMQClusterAccessInfo;
+const DescribeBindClustersResponse = models.DescribeBindClustersResponse;
+const ExportRocketMQMessageDetailResponse = models.ExportRocketMQMessageDetailResponse;
+const ModifyRabbitMQVirtualHostRequest = models.ModifyRabbitMQVirtualHostRequest;
+const DescribeRocketMQNamespacesResponse = models.DescribeRocketMQNamespacesResponse;
+const CreateRabbitMQVipInstanceRequest = models.CreateRabbitMQVipInstanceRequest;
+const DescribeRabbitMQPermissionResponse = models.DescribeRabbitMQPermissionResponse;
+const DeleteClusterRequest = models.DeleteClusterRequest;
+const CmqSubscription = models.CmqSubscription;
+const VpcInfo = models.VpcInfo;
+const DeleteCmqTopicResponse = models.DeleteCmqTopicResponse;
+const CreateRocketMQNamespaceRequest = models.CreateRocketMQNamespaceRequest;
+const RocketMQSubscription = models.RocketMQSubscription;
+const ExchangeQuota = models.ExchangeQuota;
+const ModifyRabbitMQVirtualHostResponse = models.ModifyRabbitMQVirtualHostResponse;
+const RabbitMQQueueListConsumerDetailInfo = models.RabbitMQQueueListConsumerDetailInfo;
+const CreateRocketMQRoleResponse = models.CreateRocketMQRoleResponse;
+const CreateSubscriptionResponse = models.CreateSubscriptionResponse;
+const DescribeCmqSubscriptionDetailRequest = models.DescribeCmqSubscriptionDetailRequest;
+const DescribeRocketMQClusterResponse = models.DescribeRocketMQClusterResponse;
+const ServerLog = models.ServerLog;
+const DescribeMsgTraceResponse = models.DescribeMsgTraceResponse;
+const ModifyClusterRequest = models.ModifyClusterRequest;
+const CreateRocketMQVipInstanceResponse = models.CreateRocketMQVipInstanceResponse;
+const AcknowledgeMessageRequest = models.AcknowledgeMessageRequest;
+const RabbitMQQueueListInfo = models.RabbitMQQueueListInfo;
+const DescribeMsgResponse = models.DescribeMsgResponse;
+const CreateProClusterResponse = models.CreateProClusterResponse;
+const ModifyRocketMQInstanceRequest = models.ModifyRocketMQInstanceRequest;
+const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
+const CreateProClusterRequest = models.CreateProClusterRequest;
+const DescribeRabbitMQVipInstancesResponse = models.DescribeRabbitMQVipInstancesResponse;
+const DeleteRolesRequest = models.DeleteRolesRequest;
+const ClearCmqQueueRequest = models.ClearCmqQueueRequest;
+const CreateRocketMQEnvironmentRoleRequest = models.CreateRocketMQEnvironmentRoleRequest;
+const SetRocketMQPublicAccessPointRequest = models.SetRocketMQPublicAccessPointRequest;
+const DeleteEnvironmentsResponse = models.DeleteEnvironmentsResponse;
+const DescribeRabbitMQBindingsResponse = models.DescribeRabbitMQBindingsResponse;
+const FilterSubscription = models.FilterSubscription;
+const DescribeRocketMQTopicResponse = models.DescribeRocketMQTopicResponse;
+const TopicStats = models.TopicStats;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClearCmqSubscriptionFilterTagsRequest = models.ClearCmqSubscriptionFilterTagsRequest;
-const TopicRecord = models.TopicRecord;
-const SendCmqMsgResponse = models.SendCmqMsgResponse;
 const CreateRocketMQGroupResponse = models.CreateRocketMQGroupResponse;
 const ModifyRocketMQNamespaceRequest = models.ModifyRocketMQNamespaceRequest;
-const DescribeEnvironmentRolesRequest = models.DescribeEnvironmentRolesRequest;
-const DeleteRolesResponse = models.DeleteRolesResponse;
+const ModifyRocketMQTopicResponse = models.ModifyRocketMQTopicResponse;
+const DescribeRocketMQProducersRequest = models.DescribeRocketMQProducersRequest;
+const DeleteRocketMQGroupResponse = models.DeleteRocketMQGroupResponse;
+const PulsarProInstance = models.PulsarProInstance;
+const DescribeRocketMQClusterRequest = models.DescribeRocketMQClusterRequest;
 const EnvironmentRoleSet = models.EnvironmentRoleSet;
-const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
+const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
+const ModifyRocketMQInstanceSpecResponse = models.ModifyRocketMQInstanceSpecResponse;
+const RocketMQInstanceConfig = models.RocketMQInstanceConfig;
+const DescribeCmqTopicsRequest = models.DescribeCmqTopicsRequest;
+const ConsumerLog = models.ConsumerLog;
+const DescribeRocketMQTopUsagesResponse = models.DescribeRocketMQTopUsagesResponse;
+const CreateEnvironmentRoleResponse = models.CreateEnvironmentRoleResponse;
+const PrometheusEndpointInfo = models.PrometheusEndpointInfo;
+const Cluster = models.Cluster;
+const RocketMQMsgLog = models.RocketMQMsgLog;
+const CreateRocketMQClusterResponse = models.CreateRocketMQClusterResponse;
+const DeleteRocketMQNamespaceResponse = models.DeleteRocketMQNamespaceResponse;
+const CreateRocketMQTopicRequest = models.CreateRocketMQTopicRequest;
+const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
+const DeleteRocketMQClusterRequest = models.DeleteRocketMQClusterRequest;
+const DescribePulsarProInstancesResponse = models.DescribePulsarProInstancesResponse;
+const DescribeMsgTraceRequest = models.DescribeMsgTraceRequest;
+const DeleteRabbitMQBindingRequest = models.DeleteRabbitMQBindingRequest;
+const DescribeBindClustersRequest = models.DescribeBindClustersRequest;
+const CreateRabbitMQVirtualHostRequest = models.CreateRabbitMQVirtualHostRequest;
+const DescribeRabbitMQQueueDetailRequest = models.DescribeRabbitMQQueueDetailRequest;
+const RocketMQTopicDistribution = models.RocketMQTopicDistribution;
+const CreateRoleRequest = models.CreateRoleRequest;
+const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
+const DescribeRocketMQRolesRequest = models.DescribeRocketMQRolesRequest;
+const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
+const ModifyRocketMQEnvironmentRoleResponse = models.ModifyRocketMQEnvironmentRoleResponse;
+const CreateCmqQueueResponse = models.CreateCmqQueueResponse;
+const DeleteRabbitMQVipInstanceRequest = models.DeleteRabbitMQVipInstanceRequest;
+const Filter = models.Filter;
+const DescribeRocketMQPublicAccessMonitorDataRequest = models.DescribeRocketMQPublicAccessMonitorDataRequest;
+const DescribeRolesResponse = models.DescribeRolesResponse;
+const DescribeRabbitMQPermissionRequest = models.DescribeRabbitMQPermissionRequest;
+const DeleteRabbitMQUserRequest = models.DeleteRabbitMQUserRequest;
+const DescribeSubscriptionsRequest = models.DescribeSubscriptionsRequest;
+const InstanceNodeDistribution = models.InstanceNodeDistribution;
+const CreateRocketMQGroupRequest = models.CreateRocketMQGroupRequest;
+const Role = models.Role;
+const DescribeTopicMsgsResponse = models.DescribeTopicMsgsResponse;
+const ModifyCmqSubscriptionAttributeResponse = models.ModifyCmqSubscriptionAttributeResponse;
+const SendCmqMsgRequest = models.SendCmqMsgRequest;
+const RabbitMQUserQuota = models.RabbitMQUserQuota;
+const CreateRabbitMQVirtualHostResponse = models.CreateRabbitMQVirtualHostResponse;
+const RewindCmqQueueResponse = models.RewindCmqQueueResponse;
+const PublicAccessRule = models.PublicAccessRule;
+const RabbitMQClusterWhiteListInfo = models.RabbitMQClusterWhiteListInfo;
+const DeleteProClusterRequest = models.DeleteProClusterRequest;
+const DescribeCmqTopicDetailResponse = models.DescribeCmqTopicDetailResponse;
+const DescribeRocketMQTopicsRequest = models.DescribeRocketMQTopicsRequest;
+const ClientSubscriptionInfo = models.ClientSubscriptionInfo;
+const DescribeCmqSubscriptionDetailResponse = models.DescribeCmqSubscriptionDetailResponse;
+const VpcBindRecord = models.VpcBindRecord;
+const DescribeRocketMQMsgResponse = models.DescribeRocketMQMsgResponse;
+const DescribeEnvironmentAttributesRequest = models.DescribeEnvironmentAttributesRequest;
+const ModifyPublicNetworkSecurityPolicyResponse = models.ModifyPublicNetworkSecurityPolicyResponse;
+const DeleteRabbitMQVirtualHostResponse = models.DeleteRabbitMQVirtualHostResponse;
+const DescribePublishersRequest = models.DescribePublishersRequest;
+const RabbitMQBindingListInfo = models.RabbitMQBindingListInfo;
+const ModifyPublicNetworkSecurityPolicyRequest = models.ModifyPublicNetworkSecurityPolicyRequest;
+const ModifyRoleResponse = models.ModifyRoleResponse;
+const DescribeRocketMQTopicStatsRequest = models.DescribeRocketMQTopicStatsRequest;
+const SendRocketMQMessageResponse = models.SendRocketMQMessageResponse;
+const PulsarProClusterSpecInfo = models.PulsarProClusterSpecInfo;
+const Subscription = models.Subscription;
+const DimensionOpt = models.DimensionOpt;
+const RocketMQMessageTrack = models.RocketMQMessageTrack;
+const ReceiveMessageRequest = models.ReceiveMessageRequest;
+const DescribeTopicsRequest = models.DescribeTopicsRequest;
+const DescribeEnvironmentRolesResponse = models.DescribeEnvironmentRolesResponse;
+const DescribeRocketMQPublicAccessPointResponse = models.DescribeRocketMQPublicAccessPointResponse;
+const DescribeRabbitMQExchangesResponse = models.DescribeRabbitMQExchangesResponse;
+const DescribeRabbitMQQueueDetailResponse = models.DescribeRabbitMQQueueDetailResponse;
+const DescribeRocketMQTopicMsgsResponse = models.DescribeRocketMQTopicMsgsResponse;
+const SecurityPolicy = models.SecurityPolicy;
+const DescribeRocketMQTopUsagesRequest = models.DescribeRocketMQTopUsagesRequest;
+const DeleteRolesResponse = models.DeleteRolesResponse;
+const RetryRocketMQDlqMessageResponse = models.RetryRocketMQDlqMessageResponse;
+const DescribeRabbitMQBindingsRequest = models.DescribeRabbitMQBindingsRequest;
 const ModifyRocketMQTopicRequest = models.ModifyRocketMQTopicRequest;
 const RocketMQClusterInfo = models.RocketMQClusterInfo;
+const ModifyRocketMQInstanceResponse = models.ModifyRocketMQInstanceResponse;
+const PartitionsTopic = models.PartitionsTopic;
+const ResetMsgSubOffsetByTimestampResponse = models.ResetMsgSubOffsetByTimestampResponse;
+const SendMessagesRequest = models.SendMessagesRequest;
+const CreateRocketMQRoleRequest = models.CreateRocketMQRoleRequest;
+const DescribeRocketMQProducersResponse = models.DescribeRocketMQProducersResponse;
+const DescribeRabbitMQVipInstanceResponse = models.DescribeRabbitMQVipInstanceResponse;
+const ModifyCmqSubscriptionAttributeRequest = models.ModifyCmqSubscriptionAttributeRequest;
+const ModifyTopicResponse = models.ModifyTopicResponse;
+const VirtualHostQuota = models.VirtualHostQuota;
+const CertificateInfo = models.CertificateInfo;
+const DescribeRocketMQVipInstanceDetailRequest = models.DescribeRocketMQVipInstanceDetailRequest;
+const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
+const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
+const CmqDeadLetterSource = models.CmqDeadLetterSource;
+const DescribeRocketMQTopicRequest = models.DescribeRocketMQTopicRequest;
+const ResetMsgSubOffsetByTimestampRequest = models.ResetMsgSubOffsetByTimestampRequest;
+const DescribeBindVpcsResponse = models.DescribeBindVpcsResponse;
+const ModifyRabbitMQPermissionRequest = models.ModifyRabbitMQPermissionRequest;
+const ConsumersSchedule = models.ConsumersSchedule;
+const DescribeRocketMQClustersResponse = models.DescribeRocketMQClustersResponse;
+const TraceResult = models.TraceResult;
+const DescribeRabbitMQQueuesRequest = models.DescribeRabbitMQQueuesRequest;
+const SendMsgRequest = models.SendMsgRequest;
+const DescribeRocketMQEnvironmentRolesResponse = models.DescribeRocketMQEnvironmentRolesResponse;
+const CreateRoleResponse = models.CreateRoleResponse;
+const ModifyRabbitMQUserResponse = models.ModifyRabbitMQUserResponse;
+const Sort = models.Sort;
+const ConsumerLogs = models.ConsumerLogs;
+const DescribeMqMsgTraceResponse = models.DescribeMqMsgTraceResponse;
+const CreateRabbitMQUserRequest = models.CreateRabbitMQUserRequest;
+const SendCmqMsgResponse = models.SendCmqMsgResponse;
+const TagFilter = models.TagFilter;
+const ModifyCmqQueueAttributeRequest = models.ModifyCmqQueueAttributeRequest;
+const RabbitMQClusterSpecInfo = models.RabbitMQClusterSpecInfo;
+const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
+const DeleteRocketMQEnvironmentRolesRequest = models.DeleteRocketMQEnvironmentRolesRequest;
+const VpcConfig = models.VpcConfig;
+const DescribeRabbitMQVipInstancesRequest = models.DescribeRabbitMQVipInstancesRequest;
+const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
+const DescribeRabbitMQVirtualHostRequest = models.DescribeRabbitMQVirtualHostRequest;
+const DeleteRocketMQRolesRequest = models.DeleteRocketMQRolesRequest;
+const CmqDeadLetterPolicy = models.CmqDeadLetterPolicy;
+const QueueQuota = models.QueueQuota;
+const ExportRocketMQMessageDetailRequest = models.ExportRocketMQMessageDetailRequest;
+const CreateRabbitMQUserResponse = models.CreateRabbitMQUserResponse;
+const ModifyRocketMQRoleResponse = models.ModifyRocketMQRoleResponse;
+const CreateRabbitMQBindingRequest = models.CreateRabbitMQBindingRequest;
+const DescribePulsarProInstanceDetailRequest = models.DescribePulsarProInstanceDetailRequest;
+const BindCluster = models.BindCluster;
+const ModifyClusterResponse = models.ModifyClusterResponse;
+const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
+const DescribeRocketMQPublicAccessPointRequest = models.DescribeRocketMQPublicAccessPointRequest;
+const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
+const RetryRocketMQDlqMessageRequest = models.RetryRocketMQDlqMessageRequest;
+const DescribeRocketMQTopicsByGroupRequest = models.DescribeRocketMQTopicsByGroupRequest;
+const DescribeRocketMQPublicAccessMonitorDataResponse = models.DescribeRocketMQPublicAccessMonitorDataResponse;
+const RabbitMQVirtualHostInfo = models.RabbitMQVirtualHostInfo;
+const CmqQueue = models.CmqQueue;
+const CreateEnvironmentResponse = models.CreateEnvironmentResponse;
+const Topic = models.Topic;
+const ModifyRabbitMQPermissionResponse = models.ModifyRabbitMQPermissionResponse;
+const DescribeCmqQueueDetailResponse = models.DescribeCmqQueueDetailResponse;
+const ModifyCmqTopicAttributeResponse = models.ModifyCmqTopicAttributeResponse;
+const RocketMQTopic = models.RocketMQTopic;
+const DeleteRocketMQVipInstanceResponse = models.DeleteRocketMQVipInstanceResponse;
+const DescribeRabbitMQUserResponse = models.DescribeRabbitMQUserResponse;
+const DescribeTopicsResponse = models.DescribeTopicsResponse;
+const PublishCmqMsgResponse = models.PublishCmqMsgResponse;
+const AcknowledgeMessageResponse = models.AcknowledgeMessageResponse;
+const DeleteEnvironmentRolesResponse = models.DeleteEnvironmentRolesResponse;
+const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
+const ModifyCmqTopicAttributeRequest = models.ModifyCmqTopicAttributeRequest;
+const DeleteTopicsResponse = models.DeleteTopicsResponse;
+const RewindCmqQueueRequest = models.RewindCmqQueueRequest;
+const DeleteRocketMQVipInstanceRequest = models.DeleteRocketMQVipInstanceRequest;
+const MsgLog = models.MsgLog;
+const CmqTopic = models.CmqTopic;
+const RabbitMQExchangeListInfo = models.RabbitMQExchangeListInfo;
+const DescribeBindVpcsRequest = models.DescribeBindVpcsRequest;
+const TopicRecord = models.TopicRecord;
+const DescribeEnvironmentRolesRequest = models.DescribeEnvironmentRolesRequest;
 const DescribeRabbitMQUserRequest = models.DescribeRabbitMQUserRequest;
 const DescribeRocketMQTopicsResponse = models.DescribeRocketMQTopicsResponse;
 const Environment = models.Environment;
 const RocketMQClusterDetail = models.RocketMQClusterDetail;
-const DeleteRocketMQGroupResponse = models.DeleteRocketMQGroupResponse;
-const CreateCmqQueueResponse = models.CreateCmqQueueResponse;
-const PulsarProInstance = models.PulsarProInstance;
-const PartitionsTopic = models.PartitionsTopic;
 const DescribeRocketMQGroupsResponse = models.DescribeRocketMQGroupsResponse;
-const ResetMsgSubOffsetByTimestampResponse = models.ResetMsgSubOffsetByTimestampResponse;
-const CreateClusterResponse = models.CreateClusterResponse;
-const DescribeCmqDeadLetterSourceQueuesRequest = models.DescribeCmqDeadLetterSourceQueuesRequest;
-const DeleteRocketMQNamespaceRequest = models.DeleteRocketMQNamespaceRequest;
-const DescribeRolesRequest = models.DescribeRolesRequest;
 const CreateClusterRequest = models.CreateClusterRequest;
-const DescribeRabbitMQVirtualHostListRequest = models.DescribeRabbitMQVirtualHostListRequest;
+const DeleteProClusterResponse = models.DeleteProClusterResponse;
 const ModifyCmqQueueAttributeResponse = models.ModifyCmqQueueAttributeResponse;
-const CreateTopicResponse = models.CreateTopicResponse;
 const DescribeCmqQueuesRequest = models.DescribeCmqQueuesRequest;
-const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
-const ModifyCmqSubscriptionAttributeRequest = models.ModifyCmqSubscriptionAttributeRequest;
-const ModifyTopicResponse = models.ModifyTopicResponse;
-const ModifyRocketMQInstanceSpecResponse = models.ModifyRocketMQInstanceSpecResponse;
+const ResetRocketMQConsumerOffSetResponse = models.ResetRocketMQConsumerOffSetResponse;
+const RabbitMQUser = models.RabbitMQUser;
 const DescribeRocketMQVipInstancesRequest = models.DescribeRocketMQVipInstancesRequest;
-const DescribeRocketMQVipInstanceDetailRequest = models.DescribeRocketMQVipInstanceDetailRequest;
 const DeleteRabbitMQVirtualHostRequest = models.DeleteRabbitMQVirtualHostRequest;
-const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
-const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
-const CmqDeadLetterSource = models.CmqDeadLetterSource;
-const ClearCmqSubscriptionFilterTagsResponse = models.ClearCmqSubscriptionFilterTagsResponse;
 const CreateRabbitMQVipInstanceResponse = models.CreateRabbitMQVipInstanceResponse;
-const DescribeCmqTopicsRequest = models.DescribeCmqTopicsRequest;
-const Filter = models.Filter;
-const DeleteTopicsRequest = models.DeleteTopicsRequest;
+const ModifyEnvironmentAttributesResponse = models.ModifyEnvironmentAttributesResponse;
 const CmqTransactionPolicy = models.CmqTransactionPolicy;
 const ModifyTopicRequest = models.ModifyTopicRequest;
-const ResetMsgSubOffsetByTimestampRequest = models.ResetMsgSubOffsetByTimestampRequest;
-const CreateEnvironmentRoleResponse = models.CreateEnvironmentRoleResponse;
 const Consumer = models.Consumer;
-const DescribeBindVpcsResponse = models.DescribeBindVpcsResponse;
-const DeleteCmqSubscribeRequest = models.DeleteCmqSubscribeRequest;
-const RabbitMQUser = models.RabbitMQUser;
-const DescribeCmqDeadLetterSourceQueuesResponse = models.DescribeCmqDeadLetterSourceQueuesResponse;
+const CreateCmqSubscribeRequest = models.CreateCmqSubscribeRequest;
 const DeleteSubscriptionsResponse = models.DeleteSubscriptionsResponse;
 const DeleteRocketMQTopicRequest = models.DeleteRocketMQTopicRequest;
-const ConsumersSchedule = models.ConsumersSchedule;
-const Cluster = models.Cluster;
 const RetentionPolicy = models.RetentionPolicy;
-const CreateRocketMQClusterResponse = models.CreateRocketMQClusterResponse;
-const ReceiveMessageResponse = models.ReceiveMessageResponse;
-const DeleteRocketMQNamespaceResponse = models.DeleteRocketMQNamespaceResponse;
 const DescribePublishersResponse = models.DescribePublishersResponse;
-const SendMsgRequest = models.SendMsgRequest;
-const ResetRocketMQConsumerOffSetRequest = models.ResetRocketMQConsumerOffSetRequest;
 const DescribeCmqQueueDetailRequest = models.DescribeCmqQueueDetailRequest;
-const DescribePulsarProInstancesRequest = models.DescribePulsarProInstancesRequest;
-const CreateRocketMQTopicRequest = models.CreateRocketMQTopicRequest;
-const CreateRoleResponse = models.CreateRoleResponse;
-const DeleteRocketMQClusterRequest = models.DeleteRocketMQClusterRequest;
-const DescribePulsarProInstancesResponse = models.DescribePulsarProInstancesResponse;
+const CreateRocketMQEnvironmentRoleResponse = models.CreateRocketMQEnvironmentRoleResponse;
+const DescribeRocketMQTopicsByGroupResponse = models.DescribeRocketMQTopicsByGroupResponse;
 const DeleteEnvironmentRolesRequest = models.DeleteEnvironmentRolesRequest;
-const ClearCmqQueueResponse = models.ClearCmqQueueResponse;
-const ModifyRabbitMQUserResponse = models.ModifyRabbitMQUserResponse;
-const DescribeBindClustersRequest = models.DescribeBindClustersRequest;
 const CreateRocketMQTopicResponse = models.CreateRocketMQTopicResponse;
-const CreateRabbitMQVirtualHostRequest = models.CreateRabbitMQVirtualHostRequest;
-const EnvironmentRole = models.EnvironmentRole;
 const CreateCmqQueueRequest = models.CreateCmqQueueRequest;
 const ModifyEnvironmentRoleResponse = models.ModifyEnvironmentRoleResponse;
-const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
-const DeleteRabbitMQUserResponse = models.DeleteRabbitMQUserResponse;
-const DescribeRabbitMQVirtualHostListResponse = models.DescribeRabbitMQVirtualHostListResponse;
-const DescribeRocketMQClustersResponse = models.DescribeRocketMQClustersResponse;
-const DescribePulsarProInstanceDetailRequest = models.DescribePulsarProInstanceDetailRequest;
-const CreateRabbitMQUserRequest = models.CreateRabbitMQUserRequest;
-const CreateRoleRequest = models.CreateRoleRequest;
-const PulsarNetworkAccessPointInfo = models.PulsarNetworkAccessPointInfo;
-const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
-const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
-const Role = models.Role;
-const DescribeTopicsResponse = models.DescribeTopicsResponse;
+const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
+const DescribeRocketMQMsgTraceResponse = models.DescribeRocketMQMsgTraceResponse;
+const ClearCmqSubscriptionFilterTagsResponse = models.ClearCmqSubscriptionFilterTagsResponse;
 const DescribePublisherSummaryResponse = models.DescribePublisherSummaryResponse;
-const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
-const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
 const DeleteCmqTopicRequest = models.DeleteCmqTopicRequest;
-const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
 const DescribePulsarProInstanceDetailResponse = models.DescribePulsarProInstanceDetailResponse;
 const UnbindCmqDeadLetterRequest = models.UnbindCmqDeadLetterRequest;
-const ModifyCmqQueueAttributeRequest = models.ModifyCmqQueueAttributeRequest;
-const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
-const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
-const DeleteRabbitMQVipInstanceRequest = models.DeleteRabbitMQVipInstanceRequest;
-const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
+const DescribeRolesRequest = models.DescribeRolesRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
-const VpcConfig = models.VpcConfig;
-const PulsarProClusterInfo = models.PulsarProClusterInfo;
-const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
-const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
-const DescribeRabbitMQVipInstancesRequest = models.DescribeRabbitMQVipInstancesRequest;
-const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
-const SendMessagesRequest = models.SendMessagesRequest;
+const ResetRocketMQConsumerOffSetRequest = models.ResetRocketMQConsumerOffSetRequest;
 const CreateEnvironmentRoleRequest = models.CreateEnvironmentRoleRequest;
-const DeleteRabbitMQVipInstanceResponse = models.DeleteRabbitMQVipInstanceResponse;
-const ModifyRocketMQTopicResponse = models.ModifyRocketMQTopicResponse;
-const DescribeRabbitMQVirtualHostRequest = models.DescribeRabbitMQVirtualHostRequest;
 
 
 /**
@@ -296,6 +406,39 @@ class TdmqClient extends AbstractClient {
     DescribeRocketMQNamespaces(req, cb) {
         let resp = new DescribeRocketMQNamespacesResponse();
         this.request("DescribeRocketMQNamespaces", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of TDMQ for RabbitMQ exchanges.
+     * @param {DescribeRabbitMQExchangesRequest} req
+     * @param {function(string, DescribeRabbitMQExchangesResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQExchanges(req, cb) {
+        let resp = new DescribeRabbitMQExchangesResponse();
+        this.request("DescribeRabbitMQExchanges", req, resp, cb);
+    }
+
+    /**
+     * Queries message trajectory
+     * @param {DescribeRocketMQMsgTraceRequest} req
+     * @param {function(string, DescribeRocketMQMsgTraceResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQMsgTrace(req, cb) {
+        let resp = new DescribeRocketMQMsgTraceResponse();
+        this.request("DescribeRocketMQMsgTrace", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a role.
+     * @param {CreateRocketMQRoleRequest} req
+     * @param {function(string, CreateRocketMQRoleResponse):void} cb
+     * @public
+     */
+    CreateRocketMQRole(req, cb) {
+        let resp = new CreateRocketMQRoleResponse();
+        this.request("CreateRocketMQRole", req, resp, cb);
     }
 
     /**
@@ -365,6 +508,39 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a professional cluster with prepayment via API calls.
+     * @param {DeleteProClusterRequest} req
+     * @param {function(string, DeleteProClusterResponse):void} cb
+     * @public
+     */
+    DeleteProCluster(req, cb) {
+        let resp = new DeleteProClusterResponse();
+        this.request("DeleteProCluster", req, resp, cb);
+    }
+
+    /**
+     * Deletes roles. Batch deletion is supported.
+     * @param {DeleteRocketMQRolesRequest} req
+     * @param {function(string, DeleteRocketMQRolesResponse):void} cb
+     * @public
+     */
+    DeleteRocketMQRoles(req, cb) {
+        let resp = new DeleteRocketMQRolesResponse();
+        this.request("DeleteRocketMQRoles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of topics under an environment.
+     * @param {DescribeTopicsRequest} req
+     * @param {function(string, DescribeTopicsResponse):void} cb
+     * @public
+     */
+    DescribeTopics(req, cb) {
+        let resp = new DescribeTopicsResponse();
+        this.request("DescribeTopics", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a TDMQ for RabbitMQ user.
      * @param {CreateRabbitMQUserRequest} req
      * @param {function(string, CreateRabbitMQUserResponse):void} cb
@@ -376,7 +552,7 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of the purchased TDMQ for RabbitMQ exclusive instances.
+     * This API is used to query the RabbitMQ managed instance list of user purchases.
      * @param {DescribeRabbitMQVipInstancesRequest} req
      * @param {function(string, DescribeRabbitMQVipInstancesResponse):void} cb
      * @public
@@ -395,6 +571,17 @@ class TdmqClient extends AbstractClient {
     RewindCmqQueue(req, cb) {
         let resp = new RewindCmqQueueResponse();
         this.request("RewindCmqQueue", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the topic production details list.
+     * @param {DescribeRocketMQTopicStatsRequest} req
+     * @param {function(string, DescribeRocketMQTopicStatsResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQTopicStats(req, cb) {
+        let resp = new DescribeRocketMQTopicStatsResponse();
+        this.request("DescribeRocketMQTopicStats", req, resp, cb);
     }
 
     /**
@@ -475,26 +662,36 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of topics under an environment.
-     * @param {DescribeTopicsRequest} req
-     * @param {function(string, DescribeTopicsResponse):void} cb
+     * This API is used to query the list of TDMQ for RabbitMQ permissions.
+     * @param {DescribeRabbitMQPermissionRequest} req
+     * @param {function(string, DescribeRabbitMQPermissionResponse):void} cb
      * @public
      */
-    DescribeTopics(req, cb) {
-        let resp = new DescribeTopicsResponse();
-        this.request("DescribeTopics", req, resp, cb);
+    DescribeRabbitMQPermission(req, cb) {
+        let resp = new DescribeRabbitMQPermissionResponse();
+        this.request("DescribeRabbitMQPermission", req, resp, cb);
     }
 
     /**
-     * This API is used to send a single message.
-The message cannot be sent to a persistent topic.
-     * @param {SendMessagesRequest} req
-     * @param {function(string, SendMessagesResponse):void} cb
+     * This API is used to modify the public network security policy for pulsar Pro Edition.
+     * @param {ModifyPublicNetworkSecurityPolicyRequest} req
+     * @param {function(string, ModifyPublicNetworkSecurityPolicyResponse):void} cb
      * @public
      */
-    SendMessages(req, cb) {
-        let resp = new SendMessagesResponse();
-        this.request("SendMessages", req, resp, cb);
+    ModifyPublicNetworkSecurityPolicy(req, cb) {
+        let resp = new ModifyPublicNetworkSecurityPolicyResponse();
+        this.request("ModifyPublicNetworkSecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * Modifies environment role authorization
+     * @param {ModifyRocketMQEnvironmentRoleRequest} req
+     * @param {function(string, ModifyRocketMQEnvironmentRoleResponse):void} cb
+     * @public
+     */
+    ModifyRocketMQEnvironmentRole(req, cb) {
+        let resp = new ModifyRocketMQEnvironmentRoleResponse();
+        this.request("ModifyRocketMQEnvironmentRole", req, resp, cb);
     }
 
     /**
@@ -506,6 +703,28 @@ The message cannot be sent to a persistent topic.
     ModifyRocketMQTopic(req, cb) {
         let resp = new ModifyRocketMQTopicResponse();
         this.request("ModifyRocketMQTopic", req, resp, cb);
+    }
+
+    /**
+     * Query RocketMQ messages.
+     * @param {DescribeRocketMQTopicMsgsRequest} req
+     * @param {function(string, DescribeRocketMQTopicMsgsResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQTopicMsgs(req, cb) {
+        let resp = new DescribeRocketMQTopicMsgsResponse();
+        this.request("DescribeRocketMQTopicMsgs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the producer client list under a specified topic in RocketMQ.
+     * @param {DescribeRocketMQProducersRequest} req
+     * @param {function(string, DescribeRocketMQProducersResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQProducers(req, cb) {
+        let resp = new DescribeRocketMQProducersResponse();
+        this.request("DescribeRocketMQProducers", req, resp, cb);
     }
 
     /**
@@ -564,17 +783,6 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to delete a cluster.
-     * @param {DeleteClusterRequest} req
-     * @param {function(string, DeleteClusterResponse):void} cb
-     * @public
-     */
-    DeleteCluster(req, cb) {
-        let resp = new DeleteClusterResponse();
-        this.request("DeleteCluster", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete a CMQ topic.
      * @param {DeleteCmqTopicRequest} req
      * @param {function(string, DeleteCmqTopicResponse):void} cb
@@ -583,6 +791,17 @@ The message cannot be sent to a persistent topic.
     DeleteCmqTopic(req, cb) {
         let resp = new DeleteCmqTopicResponse();
         this.request("DeleteCmqTopic", req, resp, cb);
+    }
+
+    /**
+     * Modify the RocketMQ dedicated instance.
+     * @param {ModifyRocketMQInstanceRequest} req
+     * @param {function(string, ModifyRocketMQInstanceResponse):void} cb
+     * @public
+     */
+    ModifyRocketMQInstance(req, cb) {
+        let resp = new ModifyRocketMQInstanceResponse();
+        this.request("ModifyRocketMQInstance", req, resp, cb);
     }
 
     /**
@@ -608,14 +827,14 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to modify the attributes of a CMQ topic.
-     * @param {ModifyCmqTopicAttributeRequest} req
-     * @param {function(string, ModifyCmqTopicAttributeResponse):void} cb
+     * This API is used to obtain RocketMQ topic details.
+     * @param {DescribeRocketMQTopicRequest} req
+     * @param {function(string, DescribeRocketMQTopicResponse):void} cb
      * @public
      */
-    ModifyCmqTopicAttribute(req, cb) {
-        let resp = new ModifyCmqTopicAttributeResponse();
-        this.request("ModifyCmqTopicAttribute", req, resp, cb);
+    DescribeRocketMQTopic(req, cb) {
+        let resp = new DescribeRocketMQTopicResponse();
+        this.request("DescribeRocketMQTopic", req, resp, cb);
     }
 
     /**
@@ -641,14 +860,14 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to enumerate the source queues of a CMQ dead letter queue.
-     * @param {DescribeCmqDeadLetterSourceQueuesRequest} req
-     * @param {function(string, DescribeCmqDeadLetterSourceQueuesResponse):void} cb
+     * This API is used to delete a cluster.
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
      * @public
      */
-    DescribeCmqDeadLetterSourceQueues(req, cb) {
-        let resp = new DescribeCmqDeadLetterSourceQueuesResponse();
-        this.request("DescribeCmqDeadLetterSourceQueues", req, resp, cb);
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
     }
 
     /**
@@ -663,6 +882,61 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
+     * This API is used to delete RabbitMQ permissions.
+     * @param {DeleteRabbitMQPermissionRequest} req
+     * @param {function(string, DeleteRabbitMQPermissionResponse):void} cb
+     * @public
+     */
+    DeleteRabbitMQPermission(req, cb) {
+        let resp = new DeleteRabbitMQPermissionResponse();
+        this.request("DeleteRabbitMQPermission", req, resp, cb);
+    }
+
+    /**
+     * Creates environment role authorization
+     * @param {CreateRocketMQEnvironmentRoleRequest} req
+     * @param {function(string, CreateRocketMQEnvironmentRoleResponse):void} cb
+     * @public
+     */
+    CreateRocketMQEnvironmentRole(req, cb) {
+        let resp = new CreateRocketMQEnvironmentRoleResponse();
+        this.request("CreateRocketMQEnvironmentRole", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain information about one RabbitMQ managed instance.
+     * @param {DescribeRabbitMQVipInstanceRequest} req
+     * @param {function(string, DescribeRabbitMQVipInstanceResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQVipInstance(req, cb) {
+        let resp = new DescribeRabbitMQVipInstanceResponse();
+        this.request("DescribeRabbitMQVipInstance", req, resp, cb);
+    }
+
+    /**
+     * Obtains the list of topics subscribed under a specified consumer group
+     * @param {DescribeRocketMQTopicsByGroupRequest} req
+     * @param {function(string, DescribeRocketMQTopicsByGroupResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQTopicsByGroup(req, cb) {
+        let resp = new DescribeRocketMQTopicsByGroupResponse();
+        this.request("DescribeRocketMQTopicsByGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull public network metric monitoring data from TCOP. Currently, only inbound bandwidth and outbound bandwidth metrics from client to LB are supported.
+     * @param {DescribeRocketMQPublicAccessMonitorDataRequest} req
+     * @param {function(string, DescribeRocketMQPublicAccessMonitorDataResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQPublicAccessMonitorData(req, cb) {
+        let resp = new DescribeRocketMQPublicAccessMonitorDataResponse();
+        this.request("DescribeRocketMQPublicAccessMonitorData", req, resp, cb);
+    }
+
+    /**
      * This API is used to reset the consumption offset of a specified consumer group to a specified timestamp.
      * @param {ResetRocketMQConsumerOffSetRequest} req
      * @param {function(string, ResetRocketMQConsumerOffSetResponse):void} cb
@@ -674,6 +948,17 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
+     * This API is used to enable/disable public network access, and set the security access policy.
+     * @param {SetRocketMQPublicAccessPointRequest} req
+     * @param {function(string, SetRocketMQPublicAccessPointResponse):void} cb
+     * @public
+     */
+    SetRocketMQPublicAccessPoint(req, cb) {
+        let resp = new SetRocketMQPublicAccessPointResponse();
+        this.request("SetRocketMQPublicAccessPoint", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of subscribers under the specified environment and topic.
      * @param {DescribeSubscriptionsRequest} req
      * @param {function(string, DescribeSubscriptionsResponse):void} cb
@@ -682,6 +967,19 @@ The message cannot be sent to a persistent topic.
     DescribeSubscriptions(req, cb) {
         let resp = new DescribeSubscriptionsResponse();
         this.request("DescribeSubscriptions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch send messages.
+
+Note: the batch message sending API in TDMQ is to package messages into a batch on the service side of TDMQ-HTTP and then send the batch as a TCP request inside the service. Therefore, when using this API, you should still follow the logic of sending a single message: each message is an independent HTTP request, and multiple HTTP requests are aggregated into one batch inside the TDMQ-HTTP service and then sent to the server; that is, batch sending messages is the same as sending a single message in terms of usage, and batch aggregation is completed inside the TDMQ-HTTP service.
+     * @param {SendBatchMessagesRequest} req
+     * @param {function(string, SendBatchMessagesResponse):void} cb
+     * @public
+     */
+    SendBatchMessages(req, cb) {
+        let resp = new SendBatchMessagesResponse();
+        this.request("SendBatchMessages", req, resp, cb);
     }
 
     /**
@@ -704,6 +1002,17 @@ The message cannot be sent to a persistent topic.
     DescribeRocketMQVipInstanceDetail(req, cb) {
         let resp = new DescribeRocketMQVipInstanceDetailResponse();
         this.request("DescribeRocketMQVipInstanceDetail", req, resp, cb);
+    }
+
+    /**
+     * Obtains the list of roles
+     * @param {DescribeRocketMQRolesRequest} req
+     * @param {function(string, DescribeRocketMQRolesResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQRoles(req, cb) {
+        let resp = new DescribeRocketMQRolesResponse();
+        this.request("DescribeRocketMQRoles", req, resp, cb);
     }
 
     /**
@@ -806,7 +1115,40 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to query the list of TDMQ for RabbitMQ exclusive cluster nodes.
+     * This API is used to create a TDMQ for RabbitMQ routing relationship.
+     * @param {CreateRabbitMQBindingRequest} req
+     * @param {function(string, CreateRabbitMQBindingResponse):void} cb
+     * @public
+     */
+    CreateRabbitMQBinding(req, cb) {
+        let resp = new CreateRabbitMQBindingResponse();
+        this.request("CreateRabbitMQBinding", req, resp, cb);
+    }
+
+    /**
+     * Queries message trajectory
+     * @param {DescribeMsgTraceRequest} req
+     * @param {function(string, DescribeMsgTraceResponse):void} cb
+     * @public
+     */
+    DescribeMsgTrace(req, cb) {
+        let resp = new DescribeMsgTraceResponse();
+        this.request("DescribeMsgTrace", req, resp, cb);
+    }
+
+    /**
+     * Modifies roles
+     * @param {ModifyRocketMQRoleRequest} req
+     * @param {function(string, ModifyRocketMQRoleResponse):void} cb
+     * @public
+     */
+    ModifyRocketMQRole(req, cb) {
+        let resp = new ModifyRocketMQRoleResponse();
+        this.request("ModifyRocketMQRole", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the RabbitMQ managed node list.
      * @param {DescribeRabbitMQNodeListRequest} req
      * @param {function(string, DescribeRabbitMQNodeListResponse):void} cb
      * @public
@@ -836,6 +1178,39 @@ The message cannot be sent to a persistent topic.
     DeleteRocketMQTopic(req, cb) {
         let resp = new DeleteRocketMQTopicResponse();
         this.request("DeleteRocketMQTopic", req, resp, cb);
+    }
+
+    /**
+     * Resend the RocketMQ dead letter messages.
+     * @param {RetryRocketMQDlqMessageRequest} req
+     * @param {function(string, RetryRocketMQDlqMessageResponse):void} cb
+     * @public
+     */
+    RetryRocketMQDlqMessage(req, cb) {
+        let resp = new RetryRocketMQDlqMessageResponse();
+        this.request("RetryRocketMQDlqMessage", req, resp, cb);
+    }
+
+    /**
+     * Export the RocketMQ message details.
+     * @param {ExportRocketMQMessageDetailRequest} req
+     * @param {function(string, ExportRocketMQMessageDetailResponse):void} cb
+     * @public
+     */
+    ExportRocketMQMessageDetail(req, cb) {
+        let resp = new ExportRocketMQMessageDetailResponse();
+        this.request("ExportRocketMQMessageDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of TDMQ for RabbitMQ queues.
+     * @param {DescribeRabbitMQQueuesRequest} req
+     * @param {function(string, DescribeRabbitMQQueuesResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQQueues(req, cb) {
+        let resp = new DescribeRabbitMQQueuesResponse();
+        this.request("DescribeRabbitMQQueues", req, resp, cb);
     }
 
     /**
@@ -872,7 +1247,29 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to create a TDMQ for RabbitMQ exclusive instance.
+     * Used to obtain the RocketMQ metric sorting list, such as sorting topics under a cluster instance by the most occupied storage space.
+     * @param {DescribeRocketMQTopUsagesRequest} req
+     * @param {function(string, DescribeRocketMQTopUsagesResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQTopUsages(req, cb) {
+        let resp = new DescribeRocketMQTopUsagesResponse();
+        this.request("DescribeRocketMQTopUsages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify RabbitMQ permissions.
+     * @param {ModifyRabbitMQPermissionRequest} req
+     * @param {function(string, ModifyRabbitMQPermissionResponse):void} cb
+     * @public
+     */
+    ModifyRabbitMQPermission(req, cb) {
+        let resp = new ModifyRabbitMQPermissionResponse();
+        this.request("ModifyRabbitMQPermission", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a RabbitMQ managed instance.
      * @param {CreateRabbitMQVipInstanceRequest} req
      * @param {function(string, CreateRabbitMQVipInstanceResponse):void} cb
      * @public
@@ -880,6 +1277,17 @@ The message cannot be sent to a persistent topic.
     CreateRabbitMQVipInstance(req, cb) {
         let resp = new CreateRabbitMQVipInstanceResponse();
         this.request("CreateRabbitMQVipInstance", req, resp, cb);
+    }
+
+    /**
+     * Queries message trajectory
+     * @param {DescribeMqMsgTraceRequest} req
+     * @param {function(string, DescribeMqMsgTraceResponse):void} cb
+     * @public
+     */
+    DescribeMqMsgTrace(req, cb) {
+        let resp = new DescribeMqMsgTraceResponse();
+        this.request("DescribeMqMsgTrace", req, resp, cb);
     }
 
     /**
@@ -894,14 +1302,25 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * This API is used to send a CMQ topic message.
-     * @param {PublishCmqMsgRequest} req
-     * @param {function(string, PublishCmqMsgResponse):void} cb
+     * This API is used to create a RocketMQ topic.
+     * @param {CreateRocketMQTopicRequest} req
+     * @param {function(string, CreateRocketMQTopicResponse):void} cb
      * @public
      */
-    PublishCmqMsg(req, cb) {
-        let resp = new PublishCmqMsgResponse();
-        this.request("PublishCmqMsg", req, resp, cb);
+    CreateRocketMQTopic(req, cb) {
+        let resp = new CreateRocketMQTopicResponse();
+        this.request("CreateRocketMQTopic", req, resp, cb);
+    }
+
+    /**
+     * Obtains the namespace role list
+     * @param {DescribeRocketMQEnvironmentRolesRequest} req
+     * @param {function(string, DescribeRocketMQEnvironmentRolesResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQEnvironmentRoles(req, cb) {
+        let resp = new DescribeRocketMQEnvironmentRolesResponse();
+        this.request("DescribeRocketMQEnvironmentRoles", req, resp, cb);
     }
 
     /**
@@ -927,6 +1346,17 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
+     * This api is used to create a professional cluster with prepayment via api calls.
+     * @param {CreateProClusterRequest} req
+     * @param {function(string, CreateProClusterResponse):void} cb
+     * @public
+     */
+    CreateProCluster(req, cb) {
+        let resp = new CreateProClusterResponse();
+        this.request("CreateProCluster", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete one or multiple roles.
      * @param {DeleteRolesRequest} req
      * @param {function(string, DeleteRolesResponse):void} cb
@@ -938,27 +1368,26 @@ The message cannot be sent to a persistent topic.
     }
 
     /**
-     * Currently, the `ReceiveMessage` API only supports partitioned topics. It is used to receive messages sent to a specified partitioned topic. If it is called when there are no messages in the partitioned topic, the `ReceiveTimeout` exception will be reported.
+     * This API is used to receive messages sent to a specified Partitioned Topic. It supports only Partitioned Topic type. When there are no messages in the Partitioned Topic but the API is still called, it throws a ReceiveTimeout exception.
 
-Instructions on how to use `BatchReceivePolicy`:
+This API is used to batch receive policies.
 
-`BatchReceive` has three parameters:
+This API is used to provide the following three parameters:.
 
-● `MaxNumMessages`: The maximum number of messages returned by `Receive` when `BatchReceive` is used.
-● `MaxNumBytes`: The maximum size (in bytes) of the message returned by `Receive` when `BatchReceive` is used.
-● `Timeout`: The maximum timeout period (in milliseconds) of calling `Receive` when `BatchReceive` is used.
+MaxNumMessages: The maximum number of messages returned by the Receive API each time when using BatchReceive.
+MaxNumBytes: the maximum size of messages returned by the Receive API in a single BatchReceive operation, in bytes.
+Timeout: The maximum timeout period for each Receive API call when using BatchReceive is how long, in MS.
 
-By default, if you don’t specify any of the three parameters, the `BatchReceive` feature is disabled; if one of the three parameter values is above zero, `BatchReceive` is enabled. `BatchReceive` will be disabled when any of the three parameter values reaches the threshold you specify.
+This API is used to disable the BatchReceive feature if none of the three parameters are specified. If any one of the three parameters has a value greater than 0, BatchReceive is enabled. BatchReceive completes when reaching the threshold specified in any one of the three parameters.
 
-Note: The values of both `MaxNumMessages` and `MaxNumBytes` are subject to the value of `ReceiveQueueSize`. If the values of `ReceiveQueueSize` and `MaxNumMessages` are 5 and 10, respectively, you can receive up to five rather than 10 messages when `BatchReceive` is used.
+Note: MaxNumMessages and MaxNumBytes are subject to the size of ReceiveQueueSize for each receipt of messages. If ReceiveQueueSize is set to 5 and MaxNumMessages is set to 10, then BatchReceive will receive at most 5 messages at once rather than 10.
 
 
 
-The API configured with `BatchReceivePolicy` returns multiple messages at a time.
+This API is used to return multiple messages at one time.
 
-1. These messages are separated by “###”. After receiving them, you can separate them with split tools in different languages.
-2. MessageIDs are separated by “###”. After receiving the messages, you can separate the MessageIDs with split tools in different languages, so that you can obtain the `MessageID` field information required for calling the `AcknowledgeMessage` API.
-
+This API is used to Split multiple messages with the special character '###', allowing the business side to use Split tools in different languages to separate messages after receiving them.
+Multiple MessageIDs use the special character '###' to separate with each other. After receiving the message, the business side can leverage the Split tool provided by different languages to separate different messages. (Used for filling in the necessary MessageID field information when calling the AcknowledgeMessage API.).
      * @param {ReceiveMessageRequest} req
      * @param {function(string, ReceiveMessageResponse):void} cb
      * @public
@@ -1046,6 +1475,28 @@ The API configured with `BatchReceivePolicy` returns multiple messages at a time
     }
 
     /**
+     * This API is used to get message details.
+     * @param {DescribeMsgRequest} req
+     * @param {function(string, DescribeMsgResponse):void} cb
+     * @public
+     */
+    DescribeMsg(req, cb) {
+        let resp = new DescribeMsgResponse();
+        this.request("DescribeMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a CMQ topic.
+     * @param {ModifyCmqTopicAttributeRequest} req
+     * @param {function(string, ModifyCmqTopicAttributeResponse):void} cb
+     * @public
+     */
+    ModifyCmqTopicAttribute(req, cb) {
+        let resp = new ModifyCmqTopicAttributeResponse();
+        this.request("ModifyCmqTopicAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an environment role.
      * @param {CreateEnvironmentRoleRequest} req
      * @param {function(string, CreateEnvironmentRoleResponse):void} cb
@@ -1090,6 +1541,18 @@ The API configured with `BatchReceivePolicy` returns multiple messages at a time
     }
 
     /**
+     * This API is used to send a single message.
+The message cannot be sent to a persistent topic.
+     * @param {SendMessagesRequest} req
+     * @param {function(string, SendMessagesResponse):void} cb
+     * @public
+     */
+    SendMessages(req, cb) {
+        let resp = new SendMessagesResponse();
+        this.request("SendMessages", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the topic remarks and number of partitions.
      * @param {ModifyTopicRequest} req
      * @param {function(string, ModifyTopicResponse):void} cb
@@ -1098,6 +1561,17 @@ The API configured with `BatchReceivePolicy` returns multiple messages at a time
     ModifyTopic(req, cb) {
         let resp = new ModifyTopicResponse();
         this.request("ModifyTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of RabbitMQ route relations.
+     * @param {DescribeRabbitMQBindingsRequest} req
+     * @param {function(string, DescribeRabbitMQBindingsResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQBindings(req, cb) {
+        let resp = new DescribeRabbitMQBindingsResponse();
+        this.request("DescribeRabbitMQBindings", req, resp, cb);
     }
 
     /**
@@ -1123,16 +1597,14 @@ The API configured with `BatchReceivePolicy` returns multiple messages at a time
     }
 
     /**
-     * This API is used to batch send messages.
-
-Note: the batch message sending API in TDMQ is to package messages into a batch on the service side of TDMQ-HTTP and then send the batch as a TCP request inside the service. Therefore, when using this API, you should still follow the logic of sending a single message: each message is an independent HTTP request, and multiple HTTP requests are aggregated into one batch inside the TDMQ-HTTP service and then sent to the server; that is, batch sending messages is the same as sending a single message in terms of usage, and batch aggregation is completed inside the TDMQ-HTTP service.
-     * @param {SendBatchMessagesRequest} req
-     * @param {function(string, SendBatchMessagesResponse):void} cb
+     * This API is used to query messages.
+     * @param {DescribeTopicMsgsRequest} req
+     * @param {function(string, DescribeTopicMsgsResponse):void} cb
      * @public
      */
-    SendBatchMessages(req, cb) {
-        let resp = new SendBatchMessagesResponse();
-        this.request("SendBatchMessages", req, resp, cb);
+    DescribeTopicMsgs(req, cb) {
+        let resp = new DescribeTopicMsgsResponse();
+        this.request("DescribeTopicMsgs", req, resp, cb);
     }
 
     /**
@@ -1180,6 +1652,17 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
+     * This API is used to query the details of RabbitMQ queues.
+     * @param {DescribeRabbitMQQueueDetailRequest} req
+     * @param {function(string, DescribeRabbitMQQueueDetailResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQQueueDetail(req, cb) {
+        let resp = new DescribeRabbitMQQueueDetailResponse();
+        this.request("DescribeRabbitMQQueueDetail", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the TDMQ for RocketMQ message details.
      * @param {DescribeRocketMQMsgRequest} req
      * @param {function(string, DescribeRocketMQMsgResponse):void} cb
@@ -1202,7 +1685,7 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to delete a TDMQ for RabbitMQ exclusive instance.
+     * This API is used to delete a RabbitMQ managed instance.
      * @param {DeleteRabbitMQVipInstanceRequest} req
      * @param {function(string, DeleteRabbitMQVipInstanceResponse):void} cb
      * @public
@@ -1213,14 +1696,14 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to create a RocketMQ topic.
-     * @param {CreateRocketMQTopicRequest} req
-     * @param {function(string, CreateRocketMQTopicResponse):void} cb
+     * This API is used to send a CMQ topic message.
+     * @param {PublishCmqMsgRequest} req
+     * @param {function(string, PublishCmqMsgResponse):void} cb
      * @public
      */
-    CreateRocketMQTopic(req, cb) {
-        let resp = new CreateRocketMQTopicResponse();
-        this.request("CreateRocketMQTopic", req, resp, cb);
+    PublishCmqMsg(req, cb) {
+        let resp = new PublishCmqMsgResponse();
+        this.request("PublishCmqMsg", req, resp, cb);
     }
 
     /**
@@ -1257,7 +1740,18 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This document is used to send a TDMQ for RocketMQ message.
+     * This API is used to delete a RocketMQ Exclusive Edition instance.
+     * @param {DeleteRocketMQVipInstanceRequest} req
+     * @param {function(string, DeleteRocketMQVipInstanceResponse):void} cb
+     * @public
+     */
+    DeleteRocketMQVipInstance(req, cb) {
+        let resp = new DeleteRocketMQVipInstanceResponse();
+        this.request("DeleteRocketMQVipInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send messages through RocketMQ. It is only used for sending a small number of test messages from the console and does not provide SLA. Cloud API is subject to traffic throttling. In real business scenarios, use the RocketMQ SDK to send messages.
      * @param {SendRocketMQMessageRequest} req
      * @param {function(string, SendRocketMQMessageResponse):void} cb
      * @public
@@ -1290,6 +1784,28 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
+     * This API is used to query the public network access information of RocketMQ instances.
+     * @param {DescribeRocketMQPublicAccessPointRequest} req
+     * @param {function(string, DescribeRocketMQPublicAccessPointResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQPublicAccessPoint(req, cb) {
+        let resp = new DescribeRocketMQPublicAccessPointResponse();
+        this.request("DescribeRocketMQPublicAccessPoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind RabbitMQ routing relationships.
+     * @param {DeleteRabbitMQBindingRequest} req
+     * @param {function(string, DeleteRabbitMQBindingResponse):void} cb
+     * @public
+     */
+    DeleteRabbitMQBinding(req, cb) {
+        let resp = new DeleteRabbitMQBindingResponse();
+        this.request("DeleteRabbitMQBinding", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a role.
      * @param {ModifyRoleRequest} req
      * @param {function(string, ModifyRoleResponse):void} cb
@@ -1301,14 +1817,25 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     }
 
     /**
-     * This API is used to query the list of TDMQ for RabbitMQ exclusive vhosts.
-     * @param {DescribeRabbitMQVirtualHostListRequest} req
-     * @param {function(string, DescribeRabbitMQVirtualHostListResponse):void} cb
+     * This API is used to create a RocketMQ Exclusive Edition instance.
+     * @param {CreateRocketMQVipInstanceRequest} req
+     * @param {function(string, CreateRocketMQVipInstanceResponse):void} cb
      * @public
      */
-    DescribeRabbitMQVirtualHostList(req, cb) {
-        let resp = new DescribeRabbitMQVirtualHostListResponse();
-        this.request("DescribeRabbitMQVirtualHostList", req, resp, cb);
+    CreateRocketMQVipInstance(req, cb) {
+        let resp = new CreateRocketMQVipInstanceResponse();
+        this.request("CreateRocketMQVipInstance", req, resp, cb);
+    }
+
+    /**
+     * Deletes environment role authorization
+     * @param {DeleteRocketMQEnvironmentRolesRequest} req
+     * @param {function(string, DeleteRocketMQEnvironmentRolesResponse):void} cb
+     * @public
+     */
+    DeleteRocketMQEnvironmentRoles(req, cb) {
+        let resp = new DeleteRocketMQEnvironmentRolesResponse();
+        this.request("DeleteRocketMQEnvironmentRoles", req, resp, cb);
     }
 
     /**

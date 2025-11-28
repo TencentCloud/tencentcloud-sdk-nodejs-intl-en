@@ -1032,6 +1032,7 @@ class GetCardVerificationExternalResultResponse extends  AbstractModel {
         /**
          * Indicates the status. valid values: 
 PASSED
+PROCESSING
 WARNING
          * @type {string || null}
          */

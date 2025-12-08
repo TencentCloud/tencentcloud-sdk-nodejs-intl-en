@@ -20410,7 +20410,7 @@ class ItemPrice extends  AbstractModel {
         super();
 
         /**
-         * The pay-as-you-go billing method. Unit: CNY.
+         * The pay-as-you-go billing method. Unit: USD.
          * @type {number || null}
          */
         this.UnitPrice = null;
@@ -20422,13 +20422,13 @@ class ItemPrice extends  AbstractModel {
         this.ChargeUnit = null;
 
         /**
-         * Original price of the prepaid product. Unit: CNY.
+         * Original price of the prepaid product. Unit: USD.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discount price of the prepaid product. Unit: CNY.
+         * Discount price of the prepaid product. Unit: USD.
          * @type {number || null}
          */
         this.DiscountPrice = null;

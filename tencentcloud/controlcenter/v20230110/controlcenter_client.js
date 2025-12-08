@@ -17,8 +17,20 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const BaselineConfigItem = models.BaselineConfigItem;
+const UpdateAccountFactoryBaselineResponse = models.UpdateAccountFactoryBaselineResponse;
+const BaselineStepTaskInfo = models.BaselineStepTaskInfo;
+const ListAccountFactoryBaselineItemsRequest = models.ListAccountFactoryBaselineItemsRequest;
+const DependsOnItem = models.DependsOnItem;
 const BatchApplyAccountBaselinesResponse = models.BatchApplyAccountBaselinesResponse;
+const UpdateAccountFactoryBaselineRequest = models.UpdateAccountFactoryBaselineRequest;
+const ListDeployStepTasksRequest = models.ListDeployStepTasksRequest;
+const AccountFactoryItem = models.AccountFactoryItem;
 const BatchApplyAccountBaselinesRequest = models.BatchApplyAccountBaselinesRequest;
+const GetAccountFactoryBaselineResponse = models.GetAccountFactoryBaselineResponse;
+const ListAccountFactoryBaselineItemsResponse = models.ListAccountFactoryBaselineItemsResponse;
+const GetAccountFactoryBaselineRequest = models.GetAccountFactoryBaselineRequest;
+const BaselineInfoItem = models.BaselineInfoItem;
+const ListDeployStepTasksResponse = models.ListDeployStepTasksResponse;
 
 
 /**
@@ -32,6 +44,39 @@ class ControlcenterClient extends AbstractClient {
     }
     
     /**
+     * This API is used to retrieve the application history of a certain baseline item.
+     * @param {ListDeployStepTasksRequest} req
+     * @param {function(string, ListDeployStepTasksResponse):void} cb
+     * @public
+     */
+    ListDeployStepTasks(req, cb) {
+        let resp = new ListDeployStepTasksResponse();
+        this.request("ListDeployStepTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to retrieve user baseline configuration data.
+     * @param {GetAccountFactoryBaselineRequest} req
+     * @param {function(string, GetAccountFactoryBaselineResponse):void} cb
+     * @public
+     */
+    GetAccountFactoryBaseline(req, cb) {
+        let resp = new GetAccountFactoryBaselineResponse();
+        this.request("GetAccountFactoryBaseline", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the current baseline item configuration of a user. The baseline configuration will be overwritten with the current configuration. When adding new baseline items, the newly-added baseline configuration needs to be added to the existing configuration. When deleting baseline items, the deleted baseline configuration needs to be removed from the existing configuration, then save the latest baseline configuration.
+     * @param {UpdateAccountFactoryBaselineRequest} req
+     * @param {function(string, UpdateAccountFactoryBaselineResponse):void} cb
+     * @public
+     */
+    UpdateAccountFactoryBaseline(req, cb) {
+        let resp = new UpdateAccountFactoryBaselineResponse();
+        this.request("UpdateAccountFactoryBaseline", req, resp, cb);
+    }
+
+    /**
      * This API is used to apply baselines to existing accounts in batches.
      * @param {BatchApplyAccountBaselinesRequest} req
      * @param {function(string, BatchApplyAccountBaselinesResponse):void} cb
@@ -40,6 +85,17 @@ class ControlcenterClient extends AbstractClient {
     BatchApplyAccountBaselines(req, cb) {
         let resp = new BatchApplyAccountBaselinesResponse();
         this.request("BatchApplyAccountBaselines", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain account factory system baseline items.
+     * @param {ListAccountFactoryBaselineItemsRequest} req
+     * @param {function(string, ListAccountFactoryBaselineItemsResponse):void} cb
+     * @public
+     */
+    ListAccountFactoryBaselineItems(req, cb) {
+        let resp = new ListAccountFactoryBaselineItemsResponse();
+        this.request("ListAccountFactoryBaselineItems", req, resp, cb);
     }
 
 

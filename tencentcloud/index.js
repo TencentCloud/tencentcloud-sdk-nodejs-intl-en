@@ -96,6 +96,7 @@ module.exports = {
     rum: require("./rum"),
     scf: require("./scf"),
     ses: require("./ses"),
+    smh: require("./smh"),
     sms: require("./sms"),
     sqlserver: require("./sqlserver"),
     ssl: require("./ssl"),

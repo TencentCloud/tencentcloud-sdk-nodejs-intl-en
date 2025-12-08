@@ -53,6 +53,7 @@ const DescribeStreamLiveRegionsRequest = models.DescribeStreamLiveRegionsRequest
 const DescribeStreamLiveChannelAlertsRequest = models.DescribeStreamLiveChannelAlertsRequest;
 const AudioSelectorInfo = models.AudioSelectorInfo;
 const LogInfo = models.LogInfo;
+const WebVTTFontStyle = models.WebVTTFontStyle;
 const DescribeStreamLiveWatermarkRequest = models.DescribeStreamLiveWatermarkRequest;
 const CaptionSelector = models.CaptionSelector;
 const DrmSettingsInfo = models.DrmSettingsInfo;

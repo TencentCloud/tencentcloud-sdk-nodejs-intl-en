@@ -2070,6 +2070,97 @@ It contains the value of `StreamStart` which refers to the push information.
 }
 
 /**
+ * WebVTT format configuration.
+ * @class
+ */
+class WebVTTFontStyle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text color, RGB hexadecimal representation, 6 hexadecimal characters (no # needed).
+         * @type {string || null}
+         */
+        this.TextColor = null;
+
+        /**
+         * Background color, RGB hexadecimal representation, 6 hexadecimal characters (no # needed).
+         * @type {string || null}
+         */
+        this.BackgroundColor = null;
+
+        /**
+         * Background opacity parameter, a number from 0 to 100, with 0 being the default for full transparency.
+         * @type {number || null}
+         */
+        this.BackgroundAlpha = null;
+
+        /**
+         * Font size, in units of vh (1% of height), default value 0 means automatic.
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * The position of the text box, default value AUTO, can be empty; represents the percentage of video height, supports integers from 0 to 100.
+         * @type {string || null}
+         */
+        this.Line = null;
+
+        /**
+         * The alignment of the text box on the Line. Optional values: START, CENTER, END. Which can be empty.
+         * @type {string || null}
+         */
+        this.LineAlignment = null;
+
+        /**
+         * The text box is positioned in another direction as a percentage of the video's width. It defaults to AUTO and can be empty.
+         * @type {string || null}
+         */
+        this.Position = null;
+
+        /**
+         * The alignment of the text box on the Position. Optional values are LINE_LEFT, LINE_RIGHT, CENTER, and AUTO. The default value is AUTO, and it can be empty.
+         * @type {string || null}
+         */
+        this.PositionAlignment = null;
+
+        /**
+         * Text box size, a percentage of video width/height, with values (0, 100), default AUTO, can be empty.
+         * @type {string || null}
+         */
+        this.CueSize = null;
+
+        /**
+         * Text alignment, with possible values  START, CENTER, END, LEFT, and RIGHT; the default value is CENTER, which can be empty.
+         * @type {string || null}
+         */
+        this.TextAlignment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TextColor = 'TextColor' in params ? params.TextColor : null;
+        this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
+        this.BackgroundAlpha = 'BackgroundAlpha' in params ? params.BackgroundAlpha : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.Line = 'Line' in params ? params.Line : null;
+        this.LineAlignment = 'LineAlignment' in params ? params.LineAlignment : null;
+        this.Position = 'Position' in params ? params.Position : null;
+        this.PositionAlignment = 'PositionAlignment' in params ? params.PositionAlignment : null;
+        this.CueSize = 'CueSize' in params ? params.CueSize : null;
+        this.TextAlignment = 'TextAlignment' in params ? params.TextAlignment : null;
+
+    }
+}
+
+/**
  * DescribeStreamLiveWatermark request structure.
  * @class
  */
@@ -4988,13 +5079,13 @@ class SubtitleConf extends  AbstractModel {
         this.CaptionSource = null;
 
         /**
-         * Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language). Required when CaptionSource selects `ANALYSIS `.
+         * Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language). Required when CaptionSource selects `ANALYSIS `. When outputting as WebVTT, a single template can only output one language.
          * @type {number || null}
          */
         this.ContentType = null;
 
         /**
-         * Output mode: 1 Burn in, 2 Embedded. Support `2` when CaptionSource selects `INPUT`. Support `1` when CaptionSource selects `ANALYSIS `.
+         * Output mode: 1 Burn in, 2 Embedded, 3 WebVTT. Support `2` when CaptionSource selects `INPUT`. Support `1` and `3` when CaptionSource selects `ANALYSIS `.
          * @type {number || null}
          */
         this.TargetType = null;
@@ -5020,7 +5111,7 @@ Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource
         this.FontStyle = null;
 
         /**
-         * There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY. Required when CaptionSource selects `ANALYSIS `.
+         * There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY. Required when CaptionSource selects `ANALYSIS `. When the output is WebVTT, only STEADY can be selected.
          * @type {string || null}
          */
         this.StateEffectMode = null;
@@ -5030,6 +5121,30 @@ Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource
          * @type {number || null}
          */
         this.SteadyStateDelayedTime = null;
+
+        /**
+         * Audio selector name, required for generating WebVTT subtitles using speech recognition, can be empty.
+         * @type {string || null}
+         */
+        this.AudioSelectorName = null;
+
+        /**
+         * Format configuration for speech recognition output on WebVTT.
+         * @type {WebVTTFontStyle || null}
+         */
+        this.WebVTTFontStyle = null;
+
+        /**
+         * Language code, length 2-20. ISO 639-2 three-digit code is recommend.
+         * @type {string || null}
+         */
+        this.LanguageCode = null;
+
+        /**
+         * Language description, less than 100 characters in length.
+         * @type {string || null}
+         */
+        this.LanguageDescription = null;
 
     }
 
@@ -5055,6 +5170,15 @@ Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource
         }
         this.StateEffectMode = 'StateEffectMode' in params ? params.StateEffectMode : null;
         this.SteadyStateDelayedTime = 'SteadyStateDelayedTime' in params ? params.SteadyStateDelayedTime : null;
+        this.AudioSelectorName = 'AudioSelectorName' in params ? params.AudioSelectorName : null;
+
+        if (params.WebVTTFontStyle) {
+            let obj = new WebVTTFontStyle();
+            obj.deserialize(params.WebVTTFontStyle)
+            this.WebVTTFontStyle = obj;
+        }
+        this.LanguageCode = 'LanguageCode' in params ? params.LanguageCode : null;
+        this.LanguageDescription = 'LanguageDescription' in params ? params.LanguageDescription : null;
 
     }
 }
@@ -8788,6 +8912,7 @@ module.exports = {
     DescribeStreamLiveChannelAlertsRequest: DescribeStreamLiveChannelAlertsRequest,
     AudioSelectorInfo: AudioSelectorInfo,
     LogInfo: LogInfo,
+    WebVTTFontStyle: WebVTTFontStyle,
     DescribeStreamLiveWatermarkRequest: DescribeStreamLiveWatermarkRequest,
     CaptionSelector: CaptionSelector,
     DrmSettingsInfo: DrmSettingsInfo,

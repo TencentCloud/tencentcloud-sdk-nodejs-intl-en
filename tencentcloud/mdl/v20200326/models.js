@@ -4694,7 +4694,7 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
         this.AVTemplates = null;
 
         /**
-         * Subtitle template configuration, only AVTemplates are valid.
+         * Subtitle template configuration.
          * @type {Array.<SubtitleConf> || null}
          */
         this.CaptionTemplates = null;
@@ -7982,7 +7982,7 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
         this.AVTemplates = null;
 
         /**
-         * Subtitle template configuration, only AVTemplates are valid.
+         * Subtitle template configuration.
          * @type {Array.<SubtitleConf> || null}
          */
         this.CaptionTemplates = null;

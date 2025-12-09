@@ -6632,6 +6632,12 @@ Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some docume
          */
         this.ImageUrlBack = null;
 
+        /**
+         * Whether to extract the ID portrait. Default value: false.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
     }
 
     /**
@@ -6647,6 +6653,7 @@ Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some docume
         this.ImageBase64Back = 'ImageBase64Back' in params ? params.ImageBase64Back : null;
         this.ImageUrlFront = 'ImageUrlFront' in params ? params.ImageUrlFront : null;
         this.ImageUrlBack = 'ImageUrlBack' in params ? params.ImageUrlBack : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
 
     }
 }

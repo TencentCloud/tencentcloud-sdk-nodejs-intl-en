@@ -793,6 +793,41 @@ class DetachCcnResponse extends  AbstractModel {
 }
 
 /**
+ * ShareBlueprintAcrossAccounts request structure.
+ * @class
+ */
+class ShareBlueprintAcrossAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image ID, which can be obtained through the BlueprintId returned by the [DescribeBlueprints](https://www.tencentcloud.comom/document/product/1207/47689?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+        /**
+         * List of [account IDs](https://www.tencentcloud.comom/document/product/213/4944?from_cn_redirect=1#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id) that receive the shared images. The account ID is different from the QQ number. To query a user account ID, view the account ID column in the account information. The maximum number of accounts is 10.
+         * @type {Array.<string> || null}
+         */
+        this.AccountIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+        this.AccountIds = 'AccountIds' in params ? params.AccountIds : null;
+
+    }
+}
+
+/**
  * BlueprintPrice	Custom image price parameter.
  * @class
  */
@@ -4119,26 +4154,53 @@ class StopInstancesResponse extends  AbstractModel {
 }
 
 /**
- * CreateInstances response structure.
+ * DescribeImagesToShare request structure.
  * @class
  */
-class CreateInstancesResponse extends  AbstractModel {
+class DescribeImagesToShareRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
-
-You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
+         * List of CVM image IDs, which can be obtained through the ImageId in the returned value of the [DescribeImages](https://www.tencentcloud.comom/document/api/213/15715?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
-        this.InstanceIdSet = null;
+        this.ImageIds = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Offset. The default value is 0. For more information on `Offset`, see the relevant section in API [Introduction](https://www.tencentcloud.comom/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Offset = null;
+
+        /**
+         * Number of returned results. The default value is 20, and the maximum value is 100. For more information on `Limit`, see the relevant section in API [Introduction](https://www.tencentcloud.comom/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter list.
+<li>image-id</li>: filter by [CVM image ID].
+Type: string.
+Required: no.
+<li>image-name</li>: filter by [CVM image name].
+Type: string.
+Required: no.
+
+<li>image-type</li>: filter by [CVM image type].
+Type: string.
+Required: no.
+Valid values:
+PRIVATE_IMAGE: private image (image created by the account).
+PUBLIC_IMAGE: public image (Tencent Cloud official image).
+SHARED_IMAGE: shared image (image shared by other accounts to this account).
+
+The maximum number of Filters per request is 10, and the maximum number of Filter.Values per request is 5.
+ImageIds and Filters cannot be specified simultaneously for parameters.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -4149,8 +4211,18 @@ You can call `DescribeInstances` API, and find the instance ID in the `Instances
         if (!params) {
             return;
         }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageIds = 'ImageIds' in params ? params.ImageIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4184,30 +4256,107 @@ class ModifyBlueprintAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeFirewallRulesTemplate response structure.
+ * CVM image information.
  * @class
  */
-class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
+class Image extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible firewall rules.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Firewall rule details list.
-         * @type {Array.<FirewallRuleInfo> || null}
-         */
-        this.FirewallRuleSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * CVM Image ID, which is the unique identifier of the image.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageId = null;
+
+        /**
+         * Image name.
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * Image description.
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * Image size, in GB.
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * Image source.
+<li>CREATE_IMAGE: custom image.</li>
+<li>EXTERNAL_IMPORT: externally imported image.</li>
+         * @type {string || null}
+         */
+        this.ImageSource = null;
+
+        /**
+         * Image classification.
+<li>SystemImage: system disk image.</li>
+<li>InstanceImage: full-instance image.</li>
+         * @type {string || null}
+         */
+        this.ImageClass = null;
+
+        /**
+         * Image status.
+CREATING: creating.
+NORMAL: normal.
+CREATEFAILED: creation failed.
+USING: in use.
+SYNCING: synchronizing.
+IMPORTING: importing.
+IMPORTFAILED: import failed.
+         * @type {string || null}
+         */
+        this.ImageState = null;
+
+        /**
+         * Whether the image supports Cloudinit.
+         * @type {boolean || null}
+         */
+        this.IsSupportCloudinit = null;
+
+        /**
+         * Image architecture.
+         * @type {string || null}
+         */
+        this.Architecture = null;
+
+        /**
+         * Image operating system.
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image source platform.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * Image creation time.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Whether the image can be shared to Lighthouse.
+         * @type {boolean || null}
+         */
+        this.IsShareable = null;
+
+        /**
+         * Reason for not being shared.
+         * @type {string || null}
+         */
+        this.UnshareableReason = null;
 
     }
 
@@ -4218,17 +4367,93 @@ class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+        this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
+        this.ImageClass = 'ImageClass' in params ? params.ImageClass : null;
+        this.ImageState = 'ImageState' in params ? params.ImageState : null;
+        this.IsSupportCloudinit = 'IsSupportCloudinit' in params ? params.IsSupportCloudinit : null;
+        this.Architecture = 'Architecture' in params ? params.Architecture : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.IsShareable = 'IsShareable' in params ? params.IsShareable : null;
+        this.UnshareableReason = 'UnshareableReason' in params ? params.UnshareableReason : null;
 
-        if (params.FirewallRuleSet) {
-            this.FirewallRuleSet = new Array();
-            for (let z in params.FirewallRuleSet) {
-                let obj = new FirewallRuleInfo();
-                obj.deserialize(params.FirewallRuleSet[z]);
-                this.FirewallRuleSet.push(obj);
+    }
+}
+
+/**
+ * DescribeModifyInstanceBundles request structure.
+ * @class
+ */
+class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Filter list
+<li>bundle-id</li>Filter by the **bundle ID**.
+Type: String
+Required: No
+<li>support-platform-type</li>Filter by the **OS type**.
+Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
+Type: String
+Required: No
+<li>bundle-type</li>Filter by the **bundle type**.
+Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+Type: String
+Required: No
+<li>bundle-state</li>Filter by the **bundle status**.
+Valid values: `ONLINE`, `OFFLINE`
+Type: String
+Required: No
+Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5019,6 +5244,62 @@ class CreateKeyPairResponse extends  AbstractModel {
             this.KeyPair = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Firewall rule information.
+ * @class
+ */
+class FirewallRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Protocol. Valid values: TCP, UDP, ICMP, ALL.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * Valid values: ACCEPT, DROP. Default value: ACCEPT.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Firewall rule description.
+         * @type {string || null}
+         */
+        this.FirewallRuleDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.FirewallRuleDescription = 'FirewallRuleDescription' in params ? params.FirewallRuleDescription : null;
 
     }
 }
@@ -6015,6 +6296,41 @@ The password of a `WINDOWS` instance must contain 12–30 characters in at least
 }
 
 /**
+ * ResizeDisks request structure.
+ * @class
+ */
+class ResizeDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk ID list, which can be queried via the [DescribeDisks](https://www.tencentcloud.comom/document/api/1207/66093?from_cn_redirect=1) API. The maximum length of the list is 15.
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * Size of the cloud disk after scale-out, in GB. The value range of the Premium Disk size is [10, 4000], and that of the Cloud SSD size is [20, 4000]. The cloud disk size after scale-out must be greater than the current disk size.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
  * Parameter settings for the monthly subscribed cloud disk
  * @class
  */
@@ -6173,6 +6489,34 @@ Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot 
 }
 
 /**
+ * ShareBlueprintAcrossAccounts response structure.
+ * @class
+ */
+class ShareBlueprintAcrossAccountsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetachCcn request structure.
  * @class
  */
@@ -6196,6 +6540,56 @@ class DetachCcnRequest extends  AbstractModel {
             return;
         }
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+    }
+}
+
+/**
+ * DescribeImagesToShare response structure.
+ * @class
+ */
+class DescribeImagesToShareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of images that meet the conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of CVM image detailed information.
+         * @type {Array.<Image> || null}
+         */
+        this.ImageSet = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ImageSet) {
+            this.ImageSet = new Array();
+            for (let z in params.ImageSet) {
+                let obj = new Image();
+                obj.deserialize(params.ImageSet[z]);
+                this.ImageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6867,42 +7261,26 @@ class ContainerEnv extends  AbstractModel {
 }
 
 /**
- * Firewall rule information.
+ * CreateInstances response structure.
  * @class
  */
-class FirewallRule extends  AbstractModel {
+class CreateInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Protocol. Valid values: TCP, UDP, ICMP, ALL.
-         * @type {string || null}
+         * List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
+
+You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
+         * @type {Array.<string> || null}
          */
-        this.Protocol = null;
+        this.InstanceIdSet = null;
 
         /**
-         * Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Port = null;
-
-        /**
-         * IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
-         * @type {string || null}
-         */
-        this.CidrBlock = null;
-
-        /**
-         * Valid values: ACCEPT, DROP. Default value: ACCEPT.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * Firewall rule description.
-         * @type {string || null}
-         */
-        this.FirewallRuleDescription = null;
+        this.RequestId = null;
 
     }
 
@@ -6913,11 +7291,8 @@ class FirewallRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.FirewallRuleDescription = 'FirewallRuleDescription' in params ? params.FirewallRuleDescription : null;
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7825,6 +8200,34 @@ class ResetInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ResizeDisks response structure.
+ * @class
+ */
+class ResizeDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDiskConfigs response structure.
  * @class
  */
@@ -8687,52 +9090,30 @@ class StopInstancesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeModifyInstanceBundles request structure.
+ * DescribeFirewallRulesTemplate response structure.
  * @class
  */
-class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
+class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * Number of eligible firewall rules.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Firewall rule details list.
+         * @type {Array.<FirewallRuleInfo> || null}
+         */
+        this.FirewallRuleSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Filter list
-<li>bundle-id</li>Filter by the **bundle ID**.
-Type: String
-Required: No
-<li>support-platform-type</li>Filter by the **OS type**.
-Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
-Type: String
-Required: No
-<li>bundle-type</li>Filter by the **bundle type**.
-Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
-Type: String
-Required: No
-<li>bundle-state</li>Filter by the **bundle status**.
-Valid values: `ONLINE`, `OFFLINE`
-Type: String
-Required: No
-Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -8743,18 +9124,17 @@ Each request can contain up to 10 `Filters`, and each filter can have up to 5 `F
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.FirewallRuleSet) {
+            this.FirewallRuleSet = new Array();
+            for (let z in params.FirewallRuleSet) {
+                let obj = new FirewallRuleInfo();
+                obj.deserialize(params.FirewallRuleSet[z]);
+                this.FirewallRuleSet.push(obj);
             }
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9527,6 +9907,7 @@ module.exports = {
     InquirePriceCreateDisksRequest: InquirePriceCreateDisksRequest,
     ModifyBundle: ModifyBundle,
     DetachCcnResponse: DetachCcnResponse,
+    ShareBlueprintAcrossAccountsRequest: ShareBlueprintAcrossAccountsRequest,
     BlueprintPrice: BlueprintPrice,
     DescribeScenesResponse: DescribeScenesResponse,
     InquirePriceRenewInstancesResponse: InquirePriceRenewInstancesResponse,
@@ -9601,9 +9982,10 @@ module.exports = {
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
     IsolateInstancesRequest: IsolateInstancesRequest,
     StopInstancesResponse: StopInstancesResponse,
-    CreateInstancesResponse: CreateInstancesResponse,
+    DescribeImagesToShareRequest: DescribeImagesToShareRequest,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
-    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
+    Image: Image,
+    DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     InquirePriceCreateBlueprintResponse: InquirePriceCreateBlueprintResponse,
@@ -9619,6 +10001,7 @@ module.exports = {
     DockerContainerVolume: DockerContainerVolume,
     IsolateInstancesResponse: IsolateInstancesResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
+    FirewallRule: FirewallRule,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     ModifyFirewallRulesResponse: ModifyFirewallRulesResponse,
     DiskPrice: DiskPrice,
@@ -9636,10 +10019,13 @@ module.exports = {
     DescribeSnapshotsDeniedActionsRequest: DescribeSnapshotsDeniedActionsRequest,
     DescribeDiskDiscountResponse: DescribeDiskDiscountResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
+    ResizeDisksRequest: ResizeDisksRequest,
     DiskChargePrepaid: DiskChargePrepaid,
     CreateKeyPairRequest: CreateKeyPairRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,
+    ShareBlueprintAcrossAccountsResponse: ShareBlueprintAcrossAccountsResponse,
     DetachCcnRequest: DetachCcnRequest,
+    DescribeImagesToShareResponse: DescribeImagesToShareResponse,
     Filter: Filter,
     DescribeSnapshotsResponse: DescribeSnapshotsResponse,
     Snapshot: Snapshot,
@@ -9654,7 +10040,7 @@ module.exports = {
     DescribeFirewallRulesResponse: DescribeFirewallRulesResponse,
     DescribeInstancesReturnableResponse: DescribeInstancesReturnableResponse,
     ContainerEnv: ContainerEnv,
-    FirewallRule: FirewallRule,
+    CreateInstancesResponse: CreateInstancesResponse,
     DeleteBlueprintsRequest: DeleteBlueprintsRequest,
     FirewallRuleInfo: FirewallRuleInfo,
     CreateFirewallRulesResponse: CreateFirewallRulesResponse,
@@ -9675,6 +10061,7 @@ module.exports = {
     RenewDiskChargePrepaid: RenewDiskChargePrepaid,
     TerminateDisksRequest: TerminateDisksRequest,
     ResetInstanceRequest: ResetInstanceRequest,
+    ResizeDisksResponse: ResizeDisksResponse,
     DescribeDiskConfigsResponse: DescribeDiskConfigsResponse,
     RenewDisksResponse: RenewDisksResponse,
     InternetAccessible: InternetAccessible,
@@ -9698,7 +10085,7 @@ module.exports = {
     DescribeGeneralResourceQuotasResponse: DescribeGeneralResourceQuotasResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
     StopInstancesRequest: StopInstancesRequest,
-    DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
+    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
     RenewInstancesResponse: RenewInstancesResponse,
     ResetInstanceResponse: ResetInstanceResponse,
     IsolateDisksResponse: IsolateDisksResponse,

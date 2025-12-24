@@ -33,6 +33,7 @@ const InstanceDeniedActions = models.InstanceDeniedActions;
 const InquirePriceCreateDisksRequest = models.InquirePriceCreateDisksRequest;
 const ModifyBundle = models.ModifyBundle;
 const DetachCcnResponse = models.DetachCcnResponse;
+const ShareBlueprintAcrossAccountsRequest = models.ShareBlueprintAcrossAccountsRequest;
 const BlueprintPrice = models.BlueprintPrice;
 const DescribeScenesResponse = models.DescribeScenesResponse;
 const InquirePriceRenewInstancesResponse = models.InquirePriceRenewInstancesResponse;
@@ -107,9 +108,10 @@ const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const IsolateInstancesRequest = models.IsolateInstancesRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
-const CreateInstancesResponse = models.CreateInstancesResponse;
+const DescribeImagesToShareRequest = models.DescribeImagesToShareRequest;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
-const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
+const Image = models.Image;
+const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const InquirePriceCreateBlueprintResponse = models.InquirePriceCreateBlueprintResponse;
@@ -125,6 +127,7 @@ const Instance = models.Instance;
 const DockerContainerVolume = models.DockerContainerVolume;
 const IsolateInstancesResponse = models.IsolateInstancesResponse;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
+const FirewallRule = models.FirewallRule;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const ModifyFirewallRulesResponse = models.ModifyFirewallRulesResponse;
 const DiskPrice = models.DiskPrice;
@@ -142,10 +145,13 @@ const InquirePriceCreateInstancesResponse = models.InquirePriceCreateInstancesRe
 const DescribeSnapshotsDeniedActionsRequest = models.DescribeSnapshotsDeniedActionsRequest;
 const DescribeDiskDiscountResponse = models.DescribeDiskDiscountResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
+const ResizeDisksRequest = models.ResizeDisksRequest;
 const DiskChargePrepaid = models.DiskChargePrepaid;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const ShareBlueprintAcrossAccountsResponse = models.ShareBlueprintAcrossAccountsResponse;
 const DetachCcnRequest = models.DetachCcnRequest;
+const DescribeImagesToShareResponse = models.DescribeImagesToShareResponse;
 const Filter = models.Filter;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
@@ -160,7 +166,7 @@ const Software = models.Software;
 const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
 const DescribeInstancesReturnableResponse = models.DescribeInstancesReturnableResponse;
 const ContainerEnv = models.ContainerEnv;
-const FirewallRule = models.FirewallRule;
+const CreateInstancesResponse = models.CreateInstancesResponse;
 const DeleteBlueprintsRequest = models.DeleteBlueprintsRequest;
 const FirewallRuleInfo = models.FirewallRuleInfo;
 const CreateFirewallRulesResponse = models.CreateFirewallRulesResponse;
@@ -181,6 +187,7 @@ const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const RenewDiskChargePrepaid = models.RenewDiskChargePrepaid;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const ResetInstanceRequest = models.ResetInstanceRequest;
+const ResizeDisksResponse = models.ResizeDisksResponse;
 const DescribeDiskConfigsResponse = models.DescribeDiskConfigsResponse;
 const RenewDisksResponse = models.RenewDisksResponse;
 const InternetAccessible = models.InternetAccessible;
@@ -204,7 +211,7 @@ const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
-const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
+const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const IsolateDisksResponse = models.IsolateDisksResponse;
@@ -514,6 +521,17 @@ In the `FirewallRules` parameter:
     }
 
     /**
+     * This API is used to query the list of Cloud Virtual Machine (CVM) custom images and share the images to Tencent Cloud Lighthouse (Lighthouse).
+     * @param {DescribeImagesToShareRequest} req
+     * @param {function(string, DescribeImagesToShareResponse):void} cb
+     * @public
+     */
+    DescribeImagesToShare(req, cb) {
+        let resp = new DescribeImagesToShareResponse();
+        this.request("DescribeImagesToShare", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the traffic package details of one or more instances.
      * @param {DescribeInstancesTrafficPackagesRequest} req
      * @param {function(string, DescribeInstancesTrafficPackagesResponse):void} cb
@@ -616,6 +634,17 @@ An image to be canceled sharing must be a custom image that is originally shared
     DescribeBundleDiscount(req, cb) {
         let resp = new DescribeBundleDiscountResponse();
         this.request("DescribeBundleDiscount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale out a cloud disk. The operation currently only supports cloud disks of the data disk type that are in the ATTACHED or UNATTACHED status.
+     * @param {ResizeDisksRequest} req
+     * @param {function(string, ResizeDisksResponse):void} cb
+     * @public
+     */
+    ResizeDisks(req, cb) {
+        let resp = new ResizeDisksResponse();
+        this.request("ResizeDisks", req, resp, cb);
     }
 
     /**
@@ -1187,6 +1216,19 @@ Sharing CVM images to Lighthouse requires the following conditions to be met:
     CreateBlueprint(req, cb) {
         let resp = new CreateBlueprintResponse();
         this.request("CreateBlueprint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to share an image across accounts.
+This API is used to share custom images only, and the status of the shared image must be NORMAL.
+The account receiving the shared image must be a root account.
+     * @param {ShareBlueprintAcrossAccountsRequest} req
+     * @param {function(string, ShareBlueprintAcrossAccountsResponse):void} cb
+     * @public
+     */
+    ShareBlueprintAcrossAccounts(req, cb) {
+        let resp = new ShareBlueprintAcrossAccountsResponse();
+        this.request("ShareBlueprintAcrossAccounts", req, resp, cb);
     }
 
     /**

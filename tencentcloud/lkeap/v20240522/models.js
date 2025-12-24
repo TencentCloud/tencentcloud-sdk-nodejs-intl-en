@@ -610,10 +610,39 @@ class ReconstructDocumentSSERequest extends  AbstractModel {
         super();
 
         /**
+         * File type.
+**Supported file types**: PDF, DOC, DOCX, PPT, PPTX, MD, TXT, XLS, XLSX, CSV, PNG, JPG, JPEG, BMP, GIF, WEBP, HEIC, EPS, ICNS, IM, PCX, PPM, TIFF, XBM, HEIF, JP2.
+**Supported file sizes**: 
+- Max 100 MB for PDF, DOC, DOCX, PPT, and PPTX .
+- Max 10 MB for MD, TXT, XLS, XLSX, and CSV.
+- Max20 MB for others.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * File URL. It is recommended to store the file in Tencent Cloud as the URL where the file is stored in Tencent Cloud can ensure higher download speed and stability. External URL may affect the speed and stability. Refer to: [Tencent Cloud COS Documentation](https://www.tencentcloud.com/document/product/436/7749)
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
          * The base64 value of the file. File size limit: the downloaded file shall not exceed 8MB after base64 encoding. File download time does not exceed 3 seconds. Supported image pixels: the length of a single side is between 20-10000px. Either FileUrl or FileBase64 of the file must be provided. If both are provided, only the FileUrl is used.
          * @type {string || null}
          */
         this.FileBase64 = null;
+
+        /**
+         * The starting page number of the file. When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the starting page number for recognition, including the current value.
+         * @type {number || null}
+         */
+        this.FileStartPageNumber = null;
+
+        /**
+         * The end page number of the file. When type of the uploaded file is pdf, doc, docx, ppt, or pptx, it specifies the end page number for recognition, including the current value.
+         * @type {number || null}
+         */
+        this.FileEndPageNumber = null;
 
         /**
          * Document parsing configuration information.	
@@ -630,7 +659,11 @@ class ReconstructDocumentSSERequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.FileBase64 = 'FileBase64' in params ? params.FileBase64 : null;
+        this.FileStartPageNumber = 'FileStartPageNumber' in params ? params.FileStartPageNumber : null;
+        this.FileEndPageNumber = 'FileEndPageNumber' in params ? params.FileEndPageNumber : null;
 
         if (params.Config) {
             let obj = new ReconstructDocumentSSEConfig();

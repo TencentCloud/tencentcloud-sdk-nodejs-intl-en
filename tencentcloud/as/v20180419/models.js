@@ -814,6 +814,18 @@ class ModifyScheduledActionRequest extends  AbstractModel {
          */
         this.Recurrence = null;
 
+        /**
+         * Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:
+- When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+- When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+- When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+         * @type {boolean || null}
+         */
+        this.DisableUpdateDesiredCapacity = null;
+
     }
 
     /**
@@ -831,6 +843,7 @@ class ModifyScheduledActionRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
+        this.DisableUpdateDesiredCapacity = 'DisableUpdateDesiredCapacity' in params ? params.DisableUpdateDesiredCapacity : null;
 
     }
 }
@@ -1630,16 +1643,16 @@ class CreateScheduledActionRequest extends  AbstractModel {
         this.ScheduledActionName = null;
 
         /**
-         * The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
-         * @type {number || null}
-         */
-        this.MaxSize = null;
-
-        /**
          * The minimum number of instances set for the auto scaling group when the scheduled task is triggered.
          * @type {number || null}
          */
         this.MinSize = null;
+
+        /**
+         * Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
+         * @type {string || null}
+         */
+        this.StartTime = null;
 
         /**
          * The desired number of instances set for the auto scaling group when the scheduled task is triggered.
@@ -1648,10 +1661,10 @@ class CreateScheduledActionRequest extends  AbstractModel {
         this.DesiredCapacity = null;
 
         /**
-         * Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
-         * @type {string || null}
+         * The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
+         * @type {number || null}
          */
-        this.StartTime = null;
+        this.MaxSize = null;
 
         /**
          * End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br><br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
@@ -1665,6 +1678,18 @@ class CreateScheduledActionRequest extends  AbstractModel {
          */
         this.Recurrence = null;
 
+        /**
+         * Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:
+- When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+- When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+- When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+         * @type {boolean || null}
+         */
+        this.DisableUpdateDesiredCapacity = null;
+
     }
 
     /**
@@ -1676,12 +1701,13 @@ class CreateScheduledActionRequest extends  AbstractModel {
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
-        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
+        this.DisableUpdateDesiredCapacity = 'DisableUpdateDesiredCapacity' in params ? params.DisableUpdateDesiredCapacity : null;
 
     }
 }
@@ -6712,6 +6738,18 @@ class ScheduledAction extends  AbstractModel {
          */
         this.ScheduledType = null;
 
+        /**
+         * Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+
+Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+The following cases assume that DisableUpdateDesiredCapacity is True:
+- When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+- When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+- When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+         * @type {boolean || null}
+         */
+        this.DisableUpdateDesiredCapacity = null;
+
     }
 
     /**
@@ -6732,6 +6770,7 @@ class ScheduledAction extends  AbstractModel {
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.ScheduledType = 'ScheduledType' in params ? params.ScheduledType : null;
+        this.DisableUpdateDesiredCapacity = 'DisableUpdateDesiredCapacity' in params ? params.DisableUpdateDesiredCapacity : null;
 
     }
 }

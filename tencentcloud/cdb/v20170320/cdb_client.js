@@ -172,13 +172,14 @@ const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeDBInstanceLogToCLSRequest = models.DescribeDBInstanceLogToCLSRequest;
+const AnalysisNodeInfo = models.AnalysisNodeInfo;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
 const OpenDBInstanceEncryptionRequest = models.OpenDBInstanceEncryptionRequest;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const ModifyInstancePasswordComplexityResponse = models.ModifyInstancePasswordComplexityResponse;
 const DeviceMemInfo = models.DeviceMemInfo;
 const AuditLogAggregationResult = models.AuditLogAggregationResult;
-const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
+const SlowLogItem = models.SlowLogItem;
 const DescribeRemoteBackupConfigRequest = models.DescribeRemoteBackupConfigRequest;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -219,7 +220,7 @@ const ParameterDetail = models.ParameterDetail;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
-const SlowLogItem = models.SlowLogItem;
+const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const CloneItem = models.CloneItem;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
@@ -319,6 +320,7 @@ const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResp
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;
 const CreateCloneInstanceRequest = models.CreateCloneInstanceRequest;
+const ClusterInfo = models.ClusterInfo;
 const CloseCDBProxyRequest = models.CloseCDBProxyRequest;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
@@ -1401,7 +1403,8 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
+     * This API is used to query the list of TencentDB for MySQL instances. It supports filtering instances by conditions such as project ID, instance ID, access address, and instance status. It also supports querying the list of information about primary instances, disaster recovery instances, and read-only instances.
+This API is used to return the availability zone (AZ) status during purchase, which does not change along with the proactive HA switch. If you want to know the AZ status in real time, query through the [DescribeDBInstanceConfig](https://www.tencentcloud.comom/document/product/236/17491?from_cn_redirect=1) API.
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
      * @public

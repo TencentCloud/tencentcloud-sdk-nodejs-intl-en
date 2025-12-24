@@ -5762,24 +5762,6 @@ class DescribeTelCdrRequest extends  AbstractModel {
         this.EndTimeStamp = null;
 
         /**
-         * Instance id (deprecated).
-         * @type {number || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Maximum number of returned entries (deprecated).
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset (deprecated).
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
          * Application id (required) can be found at https://console.cloud.tencent.com/ccc.
          * @type {number || null}
          */
@@ -5796,6 +5778,24 @@ class DescribeTelCdrRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.PageNumber = null;
+
+        /**
+         * Instance id (deprecated).
+         * @type {number || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Maximum number of returned entries (deprecated).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset (deprecated).
+         * @type {number || null}
+         */
+        this.Offset = null;
 
         /**
          * Filter by phone number.
@@ -5820,12 +5820,12 @@ class DescribeTelCdrRequest extends  AbstractModel {
         }
         this.StartTimeStamp = 'StartTimeStamp' in params ? params.StartTimeStamp : null;
         this.EndTimeStamp = 'EndTimeStamp' in params ? params.EndTimeStamp : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
         this.Phones = 'Phones' in params ? params.Phones : null;
         this.SessionIds = 'SessionIds' in params ? params.SessionIds : null;
 
@@ -8114,9 +8114,9 @@ VoIP user client timeout.
 
 Audio dial-in 503 VoIP user client error.
 
-Chinese description (https://www.tencentcloud.com/zh/document/product/1229/71847).
+Chinese version please go domestic site (https://cloud.tencent.com/document/product/679/123938).
 
-English description (https://www.tencentcloud.com/document/product/1229/71847?lang=en).
+English version please go international site (https://www.tencentcloud.com/document/product/1229/71847?lang=en).
          * @type {number || null}
          */
         this.EndStatus = null;

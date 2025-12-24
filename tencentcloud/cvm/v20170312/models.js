@@ -144,7 +144,7 @@ class RenewInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.comom/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 100.
+         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258). The maximum number of instances per request is 100.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1819,7 +1819,6 @@ The names of availability zones across the network are as follows:
 <li> ap-shenzhen-fsi-2 </li>
 <li> ap-shenzhen-fsi-3 (sold out)</li>
 <li> ap-guangzhou-1 (sold out)</li>
-<li> ap-guangzhou-2 (sold out)</li>
 <li> ap-guangzhou-3 </li>
 <li> ap-guangzhou-4 </li>
 <li> ap-guangzhou-6 </li>
@@ -2436,7 +2435,7 @@ class ModifyInstancesChargeTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * One or more instance ids to be operated. you can obtain the instance ID through the `InstanceId` in the return value from the api [DescribeInstances](https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1). the maximum number of instances per request is 30.
+         * One or more instance ids to be operated. you can obtain the instance ID through the `InstanceId` in the return value from the api [DescribeInstances](https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1). the maximum number of instances per request is 20.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3136,7 +3135,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
+         * Instance ID(s). To obtain the instance IDs, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3178,7 +3177,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.DisableApiTermination = null;
 
         /**
-         * Role type, used in conjunction with CamRoleName. this value can be obtained from the RoleType field in the API response of CAM [DescribeRoleList](https://www.tencentcloud.comom/document/product/598/36223?from_cn_redirect=1) or [GetRole](https://www.tencentcloud.comom/document/product/598/36221?from_cn_redirect=1). currently, only user, system, and service_linked types are accepted.
+         * Role type, used in conjunction with CamRoleName. this value can be obtained from the RoleType field in the API response of CAM [DescribeRoleList](https://www.tencentcloud.com/document/product/1219/67889) or [GetRole](https://www.tencentcloud.com/document/product/598/33557?lang=en). currently, only user, system, and service_linked types are accepted.
 For example, when CamRoleName contains "LinkedRoleIn" (such as TKE_QCSLinkedRoleInPrometheusService), DescribeRoleList and GetRole return RoleType as service_linked, this parameter must also transmit service_linked.
 The parameter default value is user. this parameter can be omitted if CameRoleName is not of the service_linked kind.
          * @type {string || null}
@@ -3469,7 +3468,7 @@ class Placement extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Instance'S project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProject](https://www.tencentcloud.com/document/product/651/54679). default value 0 means default project.
+         * Instance'S project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProjects](https://www.tencentcloud.com/document/product/651/54679). default value 0 means default project.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -4110,7 +4109,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information. </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [CVM console](https://console.tencentcloud.com/cvm/image/index?rid=1&tab=PUBLIC_IMAGE&imageType=PUBLIC_IMAGE) to query the information. </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
  <b>Note: `ImageId` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `ImageId` prevails.</b>
          * @type {string || null}
          */
@@ -4130,7 +4129,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
 
         /**
          * Instance model. Different instance models specify different resource specifications.
-<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, specifies the specific values obtained BY calling the [DescribeInstanceTypeConfigs](https://www.tencentcloud.comom/document/api/213/15749?from_cn_redirect=1) api for the latest specification table or referring to [instance specifications](https://www.tencentcloud.comom/document/product/213/11518?from_cn_redirect=1). if not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><br><li>for instances created with the payment mode CDHPAID, indicates this parameter uses the prefix "CDH_" and is generated based on CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
+<br><li>For instances created with the payment modes PREPAID or POSTPAID_BY_HOUR, specifies the specific values obtained BY calling the [DescribeInstanceTypeConfig](https://www.tencentcloud.com/document/product/1119/45686?lang=en) api for the latest specification table or referring to [instance specifications](https://www.tencentcloud.com/document/product/213/11518). if not specified, the system will dynamically assign a default model based on the current resource sales situation in a region.</li><br><li>for instances created with the payment mode CDHPAID, indicates this parameter uses the prefix "CDH_" and is generated based on CPU and memory configuration. the specific format is: CDH_XCXG. for example, for creating a CDH instance with 1 CPU core and 1 gb memory, this parameter should be CDH_1C1G.</li>.
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -4148,13 +4147,13 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * VPC configurations (VPC ID, subnet ID, etc). If it’s not specified, the classic network will be used by default. If a VPC IP is specified in this parameter, the `InstanceCount` can only be 1.
+         * VPC configurations (VPC ID, subnet ID, etc). If It's not specified, the classic network will be used by default. If a VPC IP is specified in this parameter, the `InstanceCount` can only be 1.
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
 
         /**
-         * Configuration of public network bandwidth. If it’s not specified, 0 Mbps is used by default.
+         * Configuration of public network bandwidth. If it's not specified, 0 Mbps is used by default.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
@@ -4178,8 +4177,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * Security group to which an instance belongs. obtain this parameter by calling the `SecurityGroupId` field in the return value of [DescribeSecurityGroups](https://www.tencentcloud.comom/document/api/215/15808?from_cn_redirect=1). if not specified, bind the default security group under the designated project. if the default security group does not exist, automatically create it.
-
+         * Security group to which an instance belongs. obtain this parameter by calling the `SecurityGroupId` field in the return value of [DescribeSecurityGroups](https://www.tencentcloud.com/document/product/215/15808). if not specified, bind the default security group under the designated project. if the default security group does not exist, automatically create it.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -5773,7 +5771,7 @@ class InquiryPriceModifyInstancesChargeTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 100.
+         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 20.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -10958,7 +10956,7 @@ class InquiryPriceRenewInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.comom/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 100.
+         * One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://www.tencentcloud.com/zh/document/api/213/33258). The maximum number of instances per request is 100.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;

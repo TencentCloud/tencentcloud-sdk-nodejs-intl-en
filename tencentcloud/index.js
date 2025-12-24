@@ -1,5 +1,6 @@
 module.exports = {
     advisor: require("./advisor"),
+    ai3d: require("./ai3d"),
     aiart: require("./aiart"),
     ams: require("./ams"),
     antiddos: require("./antiddos"),
@@ -62,6 +63,7 @@ module.exports = {
     gpm: require("./gpm"),
     gse: require("./gse"),
     gwlb: require("./gwlb"),
+    hunyuan: require("./hunyuan"),
     iai: require("./iai"),
     iap: require("./iap"),
     ims: require("./ims"),

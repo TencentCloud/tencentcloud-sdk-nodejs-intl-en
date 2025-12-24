@@ -847,9 +847,7 @@ The default value is blink. The different action types passed in this parameter 
         this.ActionList = null;
 
         /**
-         * PLUS: Plus Version.
-ENHANCED: Enhanced Version.
-BASIC: Basic Version (Default).
+         * BASIC: Basic Version (Default).
          * @type {string || null}
          */
         this.SdkVersion = null;
@@ -2303,9 +2301,7 @@ Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photoco
         this.Extra = null;
 
         /**
-         * PLUS: Plus Version.
-ENHANCED: Enhanced Version.
-BASIC: Basic Version (default).
+         * BASIC: Basic Version (default).
          * @type {string || null}
          */
         this.SdkVersion = null;

@@ -43,6 +43,7 @@ const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
+const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const ModifyInstancesBundleRequest = models.ModifyInstancesBundleRequest;
 const InstancePriceDetail = models.InstancePriceDetail;
 const InquirePriceRenewInstancesRequest = models.InquirePriceRenewInstancesRequest;
@@ -55,7 +56,7 @@ const RebootInstancesRequest = models.RebootInstancesRequest;
 const ResetAttachCcnRequest = models.ResetAttachCcnRequest;
 const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
-const ImportKeyPairResponse = models.ImportKeyPairResponse;
+const CancelShareBlueprintAcrossAccountsResponse = models.CancelShareBlueprintAcrossAccountsResponse;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TerminateDisksResponse = models.TerminateDisksResponse;
 const KeyPair = models.KeyPair;
@@ -64,7 +65,7 @@ const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ModifyBlueprintAttributeRequest = models.ModifyBlueprintAttributeRequest;
 const InquirePriceRenewDisksRequest = models.InquirePriceRenewDisksRequest;
 const Disk = models.Disk;
-const ZoneInfo = models.ZoneInfo;
+const DestinationRegionBlueprint = models.DestinationRegionBlueprint;
 const DescribeBlueprintInstancesRequest = models.DescribeBlueprintInstancesRequest;
 const ApplyInstanceSnapshotResponse = models.ApplyInstanceSnapshotResponse;
 const DetachDisksRequest = models.DetachDisksRequest;
@@ -74,7 +75,7 @@ const DeleteFirewallRulesRequest = models.DeleteFirewallRulesRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyFirewallRuleDescriptionRequest = models.ModifyFirewallRuleDescriptionRequest;
 const InstanceTrafficPackage = models.InstanceTrafficPackage;
-const StartInstancesResponse = models.StartInstancesResponse;
+const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const TrafficPackage = models.TrafficPackage;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
@@ -101,6 +102,7 @@ const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPair
 const DataDiskPrice = models.DataDiskPrice;
 const SceneInfo = models.SceneInfo;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
+const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const IsolateInstancesRequest = models.IsolateInstancesRequest;
@@ -116,6 +118,7 @@ const DiskReturnable = models.DiskReturnable;
 const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const SyncBlueprintResponse = models.SyncBlueprintResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const LoginSettings = models.LoginSettings;
 const Instance = models.Instance;
@@ -146,10 +149,12 @@ const DetachCcnRequest = models.DetachCcnRequest;
 const Filter = models.Filter;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
+const ZoneInfo = models.ZoneInfo;
 const ModifyFirewallRuleDescriptionResponse = models.ModifyFirewallRuleDescriptionResponse;
 const DescribeDiskDiscountRequest = models.DescribeDiskDiscountRequest;
 const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
+const StartInstancesResponse = models.StartInstancesResponse;
 const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
 const Software = models.Software;
 const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
@@ -212,10 +217,12 @@ const DescribeModifyInstanceBundlesResponse = models.DescribeModifyInstanceBundl
 const AttachDetail = models.AttachDetail;
 const ModifyDisksAttributeResponse = models.ModifyDisksAttributeResponse;
 const CreateInstanceSnapshotRequest = models.CreateInstanceSnapshotRequest;
+const CancelShareBlueprintAcrossAccountsRequest = models.CancelShareBlueprintAcrossAccountsRequest;
 const BlueprintInstance = models.BlueprintInstance;
 const InquirePriceCreateDisksResponse = models.InquirePriceCreateDisksResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
+const SyncBlueprintRequest = models.SyncBlueprintRequest;
 const DescribeInstanceLoginKeyPairAttributeResponse = models.DescribeInstanceLoginKeyPairAttributeResponse;
 
 
@@ -313,18 +320,23 @@ In the `FirewallRule` parameter:
     }
 
     /**
-     * This API is used to return one or more Lighthouse instances. 
-* Only `RUNNING` and `STOPPED` instances can be returned. 
-* The instance status goes to `SHUTDOWN` after the API is called successfully. 
-* Batch operations are supported. Up to 20 resources (including instances and data disks) can be returned in each request. 
-* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
-     * @param {IsolateInstancesRequest} req
-     * @param {function(string, IsolateInstancesResponse):void} cb
+     * This API is used to delete a firewall rule of an instance.
+
+* `FirewallVersion` is used to specify the version of the firewall to be manipulated. If the `FirewallVersion` value passed in is not equal to the current latest version of the firewall, a failure will be returned. If `FirewallVersion` is not passed in, the specified rule will be deleted directly.
+
+In the `FirewallRules` parameter:
+* Valid values of the `Protocol` field include `TCP`, `UDP`, `ICMP`, and `ALL`.
+* For the `Port` field, you can enter only `ALL`, a single port number, several port numbers separated by commas, or a port range indicated by two port numbers separated by a minus sign. If `Port` is a range, the port number on the left of the minus sign must be smaller than the one on the right. If `Protocol` is not `TCP` or `UDP`, `Port` can only be empty or `ALL`. The length of the `Port` field cannot exceed 64 characters.
+* For the `CidrBlock` field, you can enter any string that conforms to the CIDR format standard. Multi-Tenant network isolation rules take precedence over private network rules in the firewall.
+* For the `Action` field, you can enter only `ACCEPT` or `DROP`.
+* The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
+     * @param {DeleteFirewallRulesRequest} req
+     * @param {function(string, DeleteFirewallRulesResponse):void} cb
      * @public
      */
-    IsolateInstances(req, cb) {
-        let resp = new IsolateInstancesResponse();
-        this.request("IsolateInstances", req, resp, cb);
+    DeleteFirewallRules(req, cb) {
+        let resp = new DeleteFirewallRulesResponse();
+        this.request("DeleteFirewallRules", req, resp, cb);
     }
 
     /**
@@ -535,6 +547,21 @@ In the `FirewallRules` parameter:
     }
 
     /**
+     * This API is used to return one or more Lighthouse instances. 
+* Only `RUNNING` and `STOPPED` instances can be returned. 
+* The instance status goes to `SHUTDOWN` after the API is called successfully. 
+* Batch operations are supported. Up to 20 resources (including instances and data disks) can be returned in each request. 
+* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * @param {IsolateInstancesRequest} req
+     * @param {function(string, IsolateInstancesResponse):void} cb
+     * @public
+     */
+    IsolateInstances(req, cb) {
+        let resp = new IsolateInstancesResponse();
+        this.request("IsolateInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind a user-specified key pair to an instance.
 * Only instances on LINUX_UNIX in [RUNNING, STOPPED] status are supported. Instances in `RUNNING` status will be forcibly shut down before binding.
 * If the public key of a key pair is written to the SSH configuration of the instance, you will be able to log in to the instance with the private key of the key pair.
@@ -552,23 +579,15 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to delete a firewall rule of an instance.
-
-* `FirewallVersion` is used to specify the version of the firewall to be manipulated. If the `FirewallVersion` value passed in is not equal to the current latest version of the firewall, a failure will be returned. If `FirewallVersion` is not passed in, the specified rule will be deleted directly.
-
-In the `FirewallRules` parameter:
-* Valid values of the `Protocol` field include `TCP`, `UDP`, `ICMP`, and `ALL`.
-* For the `Port` field, you can enter only `ALL`, a single port number, several port numbers separated by commas, or a port range indicated by two port numbers separated by a minus sign. If `Port` is a range, the port number on the left of the minus sign must be smaller than the one on the right. If `Protocol` is not `TCP` or `UDP`, `Port` can only be empty or `ALL`. The length of the `Port` field cannot exceed 64 characters.
-* For the `CidrBlock` field, you can enter any string that conforms to the CIDR format standard. Multi-Tenant network isolation rules take precedence over private network rules in the firewall.
-* For the `Action` field, you can enter only `ACCEPT` or `DROP`.
-* The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
-     * @param {DeleteFirewallRulesRequest} req
-     * @param {function(string, DeleteFirewallRulesResponse):void} cb
+     * This API is used to cancel image sharing across accounts.
+An image to be canceled sharing must be a custom image that is originally shared from another account to your account.
+     * @param {CancelShareBlueprintAcrossAccountsRequest} req
+     * @param {function(string, CancelShareBlueprintAcrossAccountsResponse):void} cb
      * @public
      */
-    DeleteFirewallRules(req, cb) {
-        let resp = new DeleteFirewallRulesResponse();
-        this.request("DeleteFirewallRules", req, resp, cb);
+    CancelShareBlueprintAcrossAccounts(req, cb) {
+        let resp = new CancelShareBlueprintAcrossAccountsResponse();
+        this.request("CancelShareBlueprintAcrossAccounts", req, resp, cb);
     }
 
     /**
@@ -657,6 +676,23 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     DescribeDisksDeniedActions(req, cb) {
         let resp = new DescribeDisksDeniedActionsResponse();
         this.request("DescribeDisksDeniedActions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to synchronize a custom image to other regions.
+
+* Synchronization to multiple regions is supported. Up to 10 regions are supported.
+* Synchronization to the source region is not supported.
+* Only images in the NORMAL status are supported for synchronization.
+* Synchronization between Chinese mainland regions and regions outside the Chinese mainland is not supported.
+ * You can use the [DescribeBlueprints](https://www.tencentcloud.comom/document/api/1207/47689?from_cn_redirect=1) API to query the image status. When the status is NORMAL, it indicates that the source region synchronization ends.
+     * @param {SyncBlueprintRequest} req
+     * @param {function(string, SyncBlueprintResponse):void} cb
+     * @public
+     */
+    SyncBlueprint(req, cb) {
+        let resp = new SyncBlueprintResponse();
+        this.request("SyncBlueprint", req, resp, cb);
     }
 
     /**
@@ -1122,6 +1158,24 @@ This API is async. After the request is sent, a `RequestId` is returned. At this
     CreateInstances(req, cb) {
         let resp = new CreateInstancesResponse();
         this.request("CreateInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to share and cancel sharing of CVM custom images to the Lighthouse service.
+Sharing CVM images to Lighthouse requires the following conditions to be met:
+1. Images that have been shared cannot be shared again.
+2. Images imported from external sources are not supported for sharing.
+3. Full-instance images are not supported for sharing.
+4. Images need to support CloudInit to be eligible for sharing.
+5. The Platform and OsName of the images must meet the sharing conditions before the images are eligible for sharing.
+6. Only images in the NORMAL status are supported for sharing.
+     * @param {ModifyImageSharePermissionRequest} req
+     * @param {function(string, ModifyImageSharePermissionResponse):void} cb
+     * @public
+     */
+    ModifyImageSharePermission(req, cb) {
+        let resp = new ModifyImageSharePermissionResponse();
+        this.request("ModifyImageSharePermission", req, resp, cb);
     }
 
     /**

@@ -1776,6 +1776,24 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.MindMapUrl = null;
 
+        /**
+         * Path of the mind map of a summary task.
+         * @type {string || null}
+         */
+        this.MindMapPath = null;
+
+        /**
+         * Subtitle file path of the video.
+         * @type {string || null}
+         */
+        this.SubtitlePath = null;
+
+        /**
+         * Storage location of the summary file.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
     }
 
     /**
@@ -1799,6 +1817,14 @@ Note: This field may return null, indicating that no valid value can be obtained
             }
         }
         this.MindMapUrl = 'MindMapUrl' in params ? params.MindMapUrl : null;
+        this.MindMapPath = 'MindMapPath' in params ? params.MindMapPath : null;
+        this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
 
     }
 }
@@ -5798,8 +5824,9 @@ This value only distinguishes template types. The task uses the values of Remove
         this.PureAudio = null;
 
         /**
-         * Sharding type. available values: <li>ts-segment: HLS+ts segment</li> <li>ts-byterange: HLS+ts byte range</li> <li>mp4-segment: HLS+mp4 segment</li> <li>mp4-byterange: HLS+mp4 byte range</li> <li>ts-packed-audio: ts+packed audio</li> <li>mp4-packed-audio: mp4+packed audio</li> default value: ts-segment. 
-Note: the shard format of the adaptive bitrate stream is based on this field.
+         * Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
+ 
+Note: The segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
          * @type {string || null}
          */
         this.SegmentType = null;
@@ -8970,6 +8997,149 @@ class ComposeTargetInfo extends  AbstractModel {
             let obj = new ComposeAudioStream();
             obj.deserialize(params.AudioStream)
             this.AudioStream = obj;
+        }
+
+    }
+}
+
+/**
+ * Statistical data of the task.
+ * @class
+ */
+class TaskStatData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task type.
+<li>Transcode: transcoding.</li>
+<li>Enhance: enhancement.</li>
+<li>AIAnalysis: intelligent analysis.</li>
+<li>AIRecognition: intelligent recognition.</li>
+<li>AIReview: content moderation.</li>
+<li>Snapshot: screenshot.</li>
+<li>AnimatedGraphics: conversion to GIF.</li>
+<li>ImageProcess: image processing.</li>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Statistical data overview of the number of tasks.
+<li>Transcode: The unit of usage is seconds.</li>
+<li>Enhance: The unit of usage is seconds.</li>
+<li>AIAnalysis: The unit of usage is seconds.</li>
+<li>AIRecognition: The unit of usage is seconds.</li>
+<li>AIReview: The unit of usage is seconds.</li>
+<li>Snapshot: The unit of usage is images.</li>
+<li>AnimatedGraphics: The unit of usage is seconds.</li>
+<li>ImageProcess: The unit of usage is images.</li>.
+         * @type {Array.<TaskStatDataItem> || null}
+         */
+        this.Summary = null;
+
+        /**
+         * Statistical data details for tasks of various specifications.
+1. Transcoding specification:
+<li>Audio: audio-only.</li>
+<li>Remuxing: conversion to muxing.</li>
+<li>Other transcoding specifications: {TYPE}.{CODEC}.{SPECIFICATION}.</li> Specifically, valid values for TYPE:
+    Standard: standard transcoding.
+    TESHD-10: TSC transcoding for videos.
+    TESHD-20: TSC transcoding for audios.
+    TESHD-30: TSC transcoding for audios/videos.
+    TESHD-30-SDK: duration-based billing of TSC transcoding SDK for audios/videos.
+    TESHD-30-SDKCores: core number-based billing of TSC transcoding SDK for audios/videos.
+    Edit: video editing.
+  Specifically, valid values for CODEC:
+    H264: H. 264 encoding.
+    H265: H.265 encoding.
+    AV1: AV1 encoding.
+    MV-HEVC: MV-HEVC encoding.
+  Specifically, valid values for SPECIFICATION:
+    SD: standard definition.
+    HD: high definition.
+    FHD: full HD.
+    2K: 2K.
+    4K: 4K.
+For example, TESHD-10.H265.HD indicates TSC transcoding using the H.265 encoding method.
+2. Enhancement specification: video enhancement format: {TYPE}.{CODEC}.{SPECIFICATION}.{FPS}, where valid values for CODEC and SPECIFICATION follow the transcoding descriptions mentioned above, and FPS is valid only when the atomic enhancement type is used; audio enhancement format: {TYPE}.
+Valid values for enhancement TYPE:
+<li>Enhance: common enhancement type, which might be any atomic enhancement type.</li>
+<li>Atomic enhancement type</li>. Valid values for video atomic enhancement type:
+    Sdr2hdr: SDR2HDR.
+    SuperResolution: super resolution.
+    InsertFrame: frame interpolation.
+    ComprehensiveEnhancement: comprehensive enhancement.
+    NoiseReduction: video noise reduction.
+    ColorEnhancement: color enhancement.
+    RemoveScratches: scratch removal.
+    Deburr:  artifacts removal.
+    DetailEnhancement: detail enhancement.
+    LightEnhancement: low-light enhancement.
+    FaceEnhancement: face enhancement.
+  Valid value for audio atomic enhancement type.
+    AudioNoiseReduction
+    VolumeBalance
+    AudioBeautify
+    AudioSeparation
+
+3. Screenshot specification:
+<li>ImageSprite: sprite.</li>
+<li>SampleSnapshot: sampled screenshot.</li>
+<li>SnapshotByTime: time point screenshot.</li>
+4. Image processing specification: {TYPE}.{CODEC}.{SPECIFICATION}.
+<li> ImageCompression: image encoding.</li>
+<li> ImageSuperResolution: image super resolution.</li>
+<li>EnhanceImageColor: image color enhancement.</li>
+5. Intelligent analysis specification:
+<li>AIAnalysis: major category for analysis.</li>
+<li>VideoTag: video tag.</li>
+<li>VideoClassification: video category.</li>
+<li>SmartCover: smart cover.</li>
+<li>FrameLabel: frame tag.</li>
+<li>VideoSplit: video splitting.</li>
+<li>Highlights: highlights.</li>
+<li>OpeningAndEnding: opening and ending clips.</li>
+6. Intelligent recognition specification:
+<li>AIRecognition: major category for recognition without splitting.</li>
+<li>FaceRecognition: face recognition.</li>
+<li>TextRecognition: optical character recognition.</li>
+<li>ObjectRecognition: object recognition.</li>
+<li>VoiceRecognition: automatic speech recognition.</li>
+<li>VoiceTranslation: speech translation.</li>
+7. There are no segmentation specifications for content moderation and conversion to GIF.
+         * @type {Array.<SpecificationDataItem> || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+
+        if (params.Summary) {
+            this.Summary = new Array();
+            for (let z in params.Summary) {
+                let obj = new TaskStatDataItem();
+                obj.deserialize(params.Summary[z]);
+                this.Summary.push(obj);
+            }
+        }
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new SpecificationDataItem();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
         }
 
     }
@@ -13815,8 +13985,8 @@ This value only distinguishes template types. The task uses the values of Remove
         this.PureAudio = null;
 
         /**
-         * HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
-Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+         * Segment type. Valid values: <li>ts-segment: HLS+TS segment</li>; <li>ts-byterange: HLS+TS byte range</li>; <li>mp4-segment: HLS+MP4 segment</li>; <li>mp4-byterange: HLS/DASH+MP4 byte range</li>; <li>ts-packed-audio: TS+Packed Audio</li>; <li>mp4-packed-audio: MP4+Packed Audio</li>. The default value is ts-segment.
+Note: The HLS segment format for the adaptive bitrate streaming is based on this field. The value of SegmentType can only be mp4-byterange in DASH format.
          * @type {string || null}
          */
         this.SegmentType = null;
@@ -20846,7 +21016,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID filter of video content analysis templates. Array length limit: 10.
+         * Filter condition for the unique identifier of the video content analysis template. The array can contain up to 100 unique identifiers.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -20981,6 +21151,7 @@ If not filled in, default relative path: `{inputName}.{format}`.
 
         /**
          * Unique identifier of the image processing template.
+The image template feature is in beta testing. If you want to use it, submit a ticket for application.
          * @type {number || null}
          */
         this.Definition = null;
@@ -22545,6 +22716,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
+ * Statistical data of the task, including the number of tasks and usage.
+ * @class
+ */
+class TaskStatDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of the time interval where the data resides. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). For example, when the time granularity is day, 2018-12-01T00:00:00+08:00 indicates the interval from December 1, 2018 (inclusive) to December 2, 2018 (exclusive).
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Number of tasks.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Task usage.
+         * @type {number || null}
+         */
+        this.Usage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Usage = 'Usage' in params ? params.Usage : null;
 
     }
 }
@@ -24308,6 +24521,49 @@ class DescribeBatchTaskDetailRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeUsageData response structure.
+ * @class
+ */
+class DescribeUsageDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * MPS statistical data overview, which displays an overview and detailed data of the queried task.
+         * @type {Array.<TaskStatData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new TaskStatData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -26409,6 +26665,49 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
                 let obj = new MediaContentReviewAsrTextSegmentItem();
                 obj.deserialize(params.SegmentSet[z]);
                 this.SegmentSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Statistical data for the task of the specified specification.
+ * @class
+ */
+class SpecificationDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task specification.
+         * @type {string || null}
+         */
+        this.Specification = null;
+
+        /**
+         * Statistical data.
+         * @type {Array.<TaskStatDataItem> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Specification = 'Specification' in params ? params.Specification : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new TaskStatDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
 
@@ -33650,6 +33949,84 @@ class DescribeSmartSubtitleTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeUsageData request structure.
+ * @class
+ */
+class DescribeUsageDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End date, which should be greater than or equal to the start date. Use the [ISO date and time format](https://www.tencentcloud.comom/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Queries the MPS task type. The transcoding task is queried by default.
+<li>Transcode: transcoding.</li>
+<li>Enhance: enhancement.</li>
+<li>AIAnalysis: intelligent analysis.</li>
+<li>AIRecognition: intelligent recognition.</li>
+<li>AIReview: content moderation.</li>
+<li>Snapshot: screenshot.</li>
+<li>AnimatedGraphics: conversion to GIF.</li>
+<li>AiQualityControl: media quality inspection.</li>
+<li>Evaluation: video assessment.</li>
+<li>ImageProcess: image processing.</li>
+<li>AddBlindWatermark: add a basic copyright digital watermark.</li>
+<li>AddNagraWatermark: add a NAGRA digital watermark.</li>
+<li>ExtractBlindWatermark: extract a basic copyright digital watermark.</li>
+         * @type {Array.<string> || null}
+         */
+        this.Types = null;
+
+        /**
+         * MPS park. ap-guangzhou park is returned by default.
+<li>ap-guangzhou: Guangzhou.</li>
+<li>ap-hongkong: Hong Kong (China).</li>
+<li>ap-taipei: Taipei (China).</li>
+<li>ap-singapore: Singapore.</li>
+<li>ap-mumbai: India.</li>
+<li>ap-jakarta: Jakarta.</li>
+<li>ap-seoul: Seoul.</li>
+<li>ap-bangkok: Thailand.</li>
+<li>ap-tokyo: Japan.</li>
+<li>na-siliconvalley: Silicon Valley.</li>
+<li>na-ashburn: Virginia.</li>
+<li>na-toronto: Toronto.</li>
+<li>sa-saopaulo: São Paulo.</li>
+<li>eu-frankfurt: Frankfurt.</li>
+<li>eu-moscow: Russia.</li>
+<li>aws: AWS.</li>
+         * @type {Array.<string> || null}
+         */
+        this.ProcessRegions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Types = 'Types' in params ? params.Types : null;
+        this.ProcessRegions = 'ProcessRegions' in params ? params.ProcessRegions : null;
+
+    }
+}
+
+/**
  * The details of a scheme.
  * @class
  */
@@ -38895,7 +39272,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID filter of video content recognition templates. Array length limit: 10.
+         * Filter condition for the unique identifier of the video content recognition template. The array can contain up to 100 unique identifiers.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -39328,6 +39705,7 @@ module.exports = {
     ScheduleRecognitionTaskResult: ScheduleRecognitionTaskResult,
     ImageProcessTaskOutput: ImageProcessTaskOutput,
     ComposeTargetInfo: ComposeTargetInfo,
+    TaskStatData: TaskStatData,
     MediaProcessTaskInput: MediaProcessTaskInput,
     DisableScheduleRequest: DisableScheduleRequest,
     AiAnalysisTaskHorizontalToVerticalResult: AiAnalysisTaskHorizontalToVerticalResult,
@@ -39551,6 +39929,7 @@ module.exports = {
     DeleteAsrHotwordsResponse: DeleteAsrHotwordsResponse,
     SmartSubtitleTaskAsrFullTextSegmentItem: SmartSubtitleTaskAsrFullTextSegmentItem,
     QualityControlItem: QualityControlItem,
+    TaskStatDataItem: TaskStatDataItem,
     LiveStreamAsrFullTextRecognitionResult: LiveStreamAsrFullTextRecognitionResult,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     CreateAsrHotwordsRequest: CreateAsrHotwordsRequest,
@@ -39581,6 +39960,7 @@ module.exports = {
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
     AiAnalysisTaskDelLogoOutput: AiAnalysisTaskDelLogoOutput,
     DescribeBatchTaskDetailRequest: DescribeBatchTaskDetailRequest,
+    DescribeUsageDataResponse: DescribeUsageDataResponse,
     AiReviewProhibitedAsrTaskOutput: AiReviewProhibitedAsrTaskOutput,
     LiveStreamFaceRecognitionResult: LiveStreamFaceRecognitionResult,
     LiveStreamAiReviewResultInfo: LiveStreamAiReviewResultInfo,
@@ -39613,6 +39993,7 @@ module.exports = {
     S3OutputStorage: S3OutputStorage,
     CosFileUploadTrigger: CosFileUploadTrigger,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
+    SpecificationDataItem: SpecificationDataItem,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
@@ -39727,6 +40108,7 @@ module.exports = {
     AiAnalysisTaskHeadTailInput: AiAnalysisTaskHeadTailInput,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     DescribeSmartSubtitleTemplatesResponse: DescribeSmartSubtitleTemplatesResponse,
+    DescribeUsageDataRequest: DescribeUsageDataRequest,
     SchedulesInfo: SchedulesInfo,
     DisableWorkflowRequest: DisableWorkflowRequest,
     FrameRateWithDenConfig: FrameRateWithDenConfig,

@@ -3261,31 +3261,31 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Queried metric. valid values:.
-<li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>.
-<li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>.
-<li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>.
-<li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>.
-<li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>.
-<li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>.
-<li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>.
-<li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>.
-<li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>.
-<li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>.
-<li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>.
-<li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>.
-<li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>.
-<li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>.
-<li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>.
-<li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>.
-<li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>.
-<li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>.
-<li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>.
-<li>l7Flow_request_referer: specifies l7 access request count metrics by referer dimension.</li>.
-<li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>.
-<li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>.
-<li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>.
-<li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>.
+         * Queried metric. Valid values:
+<li> l7Flow_outFlux_country: specifies the l7 EdgeOne response traffic metric counted by the country/region dimension.</li>
+<li> l7Flow_outFlux_province: specifies the l7 EdgeOne response traffic metric counted by the dimension of provinces in chinese mainland.</li>
+<li> l7Flow_outFlux_statusCode: specifies the l7 EdgeOne response traffic metric by status code dimension.</li>
+<li> l7Flow_outFlux_domain: specifies the l7 EdgeOne response traffic metric counted by domain name dimension.</li>
+<li>l7Flow_outFlux_url: specifies the l7 EdgeOne response traffic metric counted by url Path dimension.</li>
+<li> l7Flow_outFlux_resourceType: specifies the l7 EdgeOne response traffic metric counted by resource type dimension.</li>
+<li> l7Flow_outFlux_sip: specifies the l7 EdgeOne response traffic metric counted by the client IP dimension.</li>
+<li>l7Flow_outFlux_referers: specifies the l7 EdgeOne response traffic statistics by Referer dimension.</li>
+<li> l7Flow_outFlux_ua_device: specifies the l7 EdgeOne response traffic metric counted by device type dimension.</li>
+<li> l7Flow_outFlux_ua_browser: specifies the l7 EdgeOne response traffic metric by browser type dimension.</li>
+<li> l7Flow_outFlux_ua_os: specifies the l7 EdgeOne response traffic metric counted by the operating system type dimension.</li>
+<li> l7Flow_outFlux_ua: specifies the l7 EdgeOne response traffic metric by User-Agent dimension statistics.</li>
+<li> l7Flow_request_country: specifies the l7 access request count metric by country/region dimension.</li>
+<li> l7Flow_request_province: specifies the l7 access request count metric by province in the chinese mainland.</li>
+<li> l7Flow_request_statusCode: specifies the l7 access request count metric by status code dimension.</li>
+<li> l7Flow_request_domain: specifies the l7 access request count metric counted by the domain name dimension.</li>
+<li> l7Flow_request_url: specifies the l7 access request count metric counted by url Path dimension. </li>
+<li> l7Flow_request_resourceType: specifies the l7 access request count metric counted by the resource type dimension.</li>
+<li> l7Flow_request_sip: specifies the l7 access request count metric counted by the client IP dimension.</li>
+<li>l7Flow_request_referers: specifies l7 access request count metrics by referer dimension.</li>
+<li> l7Flow_request_ua_device: specifies the l7 access request count metric by device type dimension.</li>
+<li> l7Flow_request_ua_browser: specifies the l7 access request count metric by browser type dimension.</li>
+<li> l7Flow_request_ua_os: specifies the l7 access request count metric counted by the operating system type dimension.</li>
+<li> l7Flow_request_ua: l7 access request count metric counted by the User-Agent dimension.</li>
          * @type {string || null}
          */
         this.MetricName = null;
@@ -3505,6 +3505,48 @@ class IdentifyZoneResponse extends  AbstractModel {
             this.FileAscription = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityAPIService request structure.
+ * @class
+ */
+class DescribeSecurityAPIServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.		
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Paginated query limit. default value: 20, maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The offset of paginated query. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -4648,18 +4690,30 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * DisableOriginACL request structure.
+ * DescribeTimingL7OriginPullData response structure.
  * @class
  */
-class DisableOriginACLRequest extends  AbstractModel {
+class DescribeTimingL7OriginPullDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies the site ID.
+         * Total number of entries in the query result.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Time series data list for origin-pull data.
+         * @type {Array.<TimingDataRecord> || null}
+         */
+        this.TimingDataRecords = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.RequestId = null;
 
     }
 
@@ -4670,7 +4724,17 @@ class DisableOriginACLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TimingDataRecords) {
+            this.TimingDataRecords = new Array();
+            for (let z in params.TimingDataRecords) {
+                let obj = new TimingDataRecord();
+                obj.deserialize(params.TimingDataRecords[z]);
+                this.TimingDataRecords.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7148,30 +7212,58 @@ class CustomField extends  AbstractModel {
 }
 
 /**
- * DescribeSecurityAPIService request structure.
+ * Bot managed rules. The rule IDs can be obtained from the output of DescribeBotManagedRules.
  * @class
  */
-class DescribeSecurityAPIServiceRequest extends  AbstractModel {
+class BotManagedRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Zone ID.		
+         * The rule action. Values:
+<li>`drop`: Block</li>
+<li>`trans`: Allow</li>
+<li>`alg`: JavaScript challenge</li>
+<li>`monitor`: Observe</li>
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.Action = null;
 
         /**
-         * Paginated query limit. default value: 20, maximum value: 100.
+         * The rule ID, which is only used as an output parameter.
          * @type {number || null}
          */
-        this.Limit = null;
+        this.RuleID = null;
 
         /**
-         * The offset of paginated query. Default value: 0.
-         * @type {number || null}
+         * Rule ID to allow. defaults to no rules configured for allowance.
+         * @type {Array.<number> || null}
          */
-        this.Offset = null;
+        this.TransManagedIds = null;
+
+        /**
+         * Rule ID of the JS challenge. default is all rules without configuring the JS challenge.
+         * @type {Array.<number> || null}
+         */
+        this.AlgManagedIds = null;
+
+        /**
+         * The rule ID for digit verification code. by default, all rules do not configure digit verification code.
+         * @type {Array.<number> || null}
+         */
+        this.CapManagedIds = null;
+
+        /**
+         * Rule ID for observation. by default, observation is not configured for all rules.
+         * @type {Array.<number> || null}
+         */
+        this.MonManagedIds = null;
+
+        /**
+         * Rule ID for interception. by default, all rules have no configuration interception.
+         * @type {Array.<number> || null}
+         */
+        this.DropManagedIds = null;
 
     }
 
@@ -7182,9 +7274,13 @@ class DescribeSecurityAPIServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.TransManagedIds = 'TransManagedIds' in params ? params.TransManagedIds : null;
+        this.AlgManagedIds = 'AlgManagedIds' in params ? params.AlgManagedIds : null;
+        this.CapManagedIds = 'CapManagedIds' in params ? params.CapManagedIds : null;
+        this.MonManagedIds = 'MonManagedIds' in params ? params.MonManagedIds : null;
+        this.DropManagedIds = 'DropManagedIds' in params ? params.DropManagedIds : null;
 
     }
 }
@@ -7287,58 +7383,30 @@ class RangeOriginPullParameters extends  AbstractModel {
 }
 
 /**
- * Bot managed rules. The rule IDs can be obtained from the output of DescribeBotManagedRules.
+ * ApplyFreeCertificate response structure.
  * @class
  */
-class BotManagedRule extends  AbstractModel {
+class ApplyFreeCertificateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The rule action. Values:
-<li>`drop`: Block</li>
-<li>`trans`: Allow</li>
-<li>`alg`: JavaScript challenge</li>
-<li>`monitor`: Observe</li>
+         * Specifies the verification information for free certificate application when VerificationMethod is dns_challenge.
+         * @type {DnsVerification || null}
+         */
+        this.DnsVerification = null;
+
+        /**
+         * Specifies the verification information related to the free certificate application for the domain name when VerificationMethod is http_challenge.
+         * @type {FileVerification || null}
+         */
+        this.FileVerification = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Action = null;
-
-        /**
-         * The rule ID, which is only used as an output parameter.
-         * @type {number || null}
-         */
-        this.RuleID = null;
-
-        /**
-         * Rule ID to allow. defaults to no rules configured for allowance.
-         * @type {Array.<number> || null}
-         */
-        this.TransManagedIds = null;
-
-        /**
-         * Rule ID of the JS challenge. default is all rules without configuring the JS challenge.
-         * @type {Array.<number> || null}
-         */
-        this.AlgManagedIds = null;
-
-        /**
-         * The rule ID for digit verification code. by default, all rules do not configure digit verification code.
-         * @type {Array.<number> || null}
-         */
-        this.CapManagedIds = null;
-
-        /**
-         * Rule ID for observation. by default, observation is not configured for all rules.
-         * @type {Array.<number> || null}
-         */
-        this.MonManagedIds = null;
-
-        /**
-         * Rule ID for interception. by default, all rules have no configuration interception.
-         * @type {Array.<number> || null}
-         */
-        this.DropManagedIds = null;
+        this.RequestId = null;
 
     }
 
@@ -7349,13 +7417,19 @@ class BotManagedRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-        this.RuleID = 'RuleID' in params ? params.RuleID : null;
-        this.TransManagedIds = 'TransManagedIds' in params ? params.TransManagedIds : null;
-        this.AlgManagedIds = 'AlgManagedIds' in params ? params.AlgManagedIds : null;
-        this.CapManagedIds = 'CapManagedIds' in params ? params.CapManagedIds : null;
-        this.MonManagedIds = 'MonManagedIds' in params ? params.MonManagedIds : null;
-        this.DropManagedIds = 'DropManagedIds' in params ? params.DropManagedIds : null;
+
+        if (params.DnsVerification) {
+            let obj = new DnsVerification();
+            obj.deserialize(params.DnsVerification)
+            this.DnsVerification = obj;
+        }
+
+        if (params.FileVerification) {
+            let obj = new FileVerification();
+            obj.deserialize(params.FileVerification)
+            this.FileVerification = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10406,7 +10480,7 @@ class ModifyL4ProxyStatusResponse extends  AbstractModel {
 }
 
 /**
- * Information required for verifying via a file. It's applicable to sites connected via CNAMEs.
+ * Information required for HTTP access verification file when applying for a free certificate in CNAME mode integration to verify ownership of a site or domain name.
  * @class
  */
 class FileVerification extends  AbstractModel {
@@ -10414,7 +10488,7 @@ class FileVerification extends  AbstractModel {
         super();
 
         /**
-         * EdgeOne obtains the file verification information in the format of "Scheme + Host + URL Path", (e.g. https://www.example.com/.well-known/teo-verification/z12h416twn.txt). This field is the URL path section of the URL you need to create.
+         * EdgeOne backend server will get file verification information via http://{Host}{URL Path} (for example http://www.example.com/.well-known/teo-verification/z12h416twn.txt). among them, this field specifies the URL Path part you need to create, and Host indicates the current accelerated domain.
          * @type {string || null}
          */
         this.Path = null;
@@ -11305,6 +11379,85 @@ Note: this field may return null, which indicates a failure to obtain a valid va
 }
 
 /**
+ * DescribeTimingL7OriginPullData request structure.
+ * @class
+ */
+class DescribeTimingL7OriginPullDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Metric list. Valid values:.
+<li>l7Flow_outFlux_hy: specifies the request traffic from the EdgeOne node to the origin server. Unit: byte.</li>
+<li>l7Flow_outBandwidth_hy: specifies the request bandwidth from EdgeOne node to origin server. Unit: bps.</li>
+<li>l7Flow_request_hy: specifies the request count from EdgeOne node to origin server. Unit: times.</li>
+<li>l7Flow_inFlux_hy: specifies the response traffic from the origin server to the EdgeOne node. Unit: byte.</li>
+<li>l7Flow_inBandwidth_hy: specifies the response bandwidth from the origin server to the EdgeOne node. Unit: bps.</li>
+
+         * @type {Array.<string> || null}
+         */
+        this.MetricNames = null;
+
+        /**
+         * Site ID set. This parameter is required. A maximum of 100 zone-ids can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. Querying account-level data requires permissions for all site resources in this interface.
+         * @type {Array.<string> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Time granularity of the query. Valid values:
+<Li>min: 1 minute.</li><Li>5min: 5 minutes;</li><Li>hour: 1 hour;</li><li>day: 1 day.</li>If this parameter is not input, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Filter conditions. Details:
+<li>domain: specifies the domain name in client requests. When the domain is onboarded via a wildcard, the recorded value is the wildcard domain itself, not the specific subdomain.</li>
+         * @type {Array.<QueryCondition> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricNames = 'MetricNames' in params ? params.MetricNames : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new QueryCondition();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Custom header that can be configured for HTTP/HTTPS health check policies under a LoadBalancer.
  * @class
  */
@@ -11476,54 +11629,24 @@ class ModifyDnsRecordsStatusRequest extends  AbstractModel {
 }
 
 /**
- * ModifyZone request structure.
+ * Managed rule automatic update option.
  * @class
  */
-class ModifyZoneRequest extends  AbstractModel {
+class ManagedRuleAutoUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
+         * Enable automatic update to the latest version or not. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.AutoUpdateToLatestVersion = null;
 
         /**
-         * Site access method. Valid values:
-<li>full: NS access.</li>
-<li>partial: CNAME access. If the site is currently accessed with no domain name, it can be switched only to CNAME access.</li>
-<li>dnsPodAccess: DNSPod hosted access. To use this access mode, your domain name should have been hosted on DNSPod.</li>If this parameter is not input, the original configuration is maintained.
+         * Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
-         * @type {VanityNameServers || null}
-         */
-        this.VanityNameServers = null;
-
-        /**
-         * Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters.
-         * @type {string || null}
-         */
-        this.AliasZoneName = null;
-
-        /**
-         * The region where the site requests access. Values:
-<li> `global`: Global coverage</li>
-<li> `mainland`: Chinese mainland</li>
-<li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
-         * @type {string || null}
-         */
-        this.ZoneName = null;
+        this.RulesetVersion = null;
 
     }
 
@@ -11534,17 +11657,8 @@ class ModifyZoneRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.VanityNameServers) {
-            let obj = new VanityNameServers();
-            obj.deserialize(params.VanityNameServers)
-            this.VanityNameServers = obj;
-        }
-        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.AutoUpdateToLatestVersion = 'AutoUpdateToLatestVersion' in params ? params.AutoUpdateToLatestVersion : null;
+        this.RulesetVersion = 'RulesetVersion' in params ? params.RulesetVersion : null;
 
     }
 }
@@ -19895,10 +20009,15 @@ class ModifyHostsCertificateRequest extends  AbstractModel {
         this.Hosts = null;
 
         /**
-         * Certificate configuration mode. Values:
-<li>`disable`: (Default) Do not configure the certificate</li>
-<li>`eofreecert`: Use a free certificate provided by EdgeOne</li>
-<li>`sslcert`: Configure an SSL certificate.</li>
+         * Configures the server certificate mode. valid values:.
+
+- disable: without configuring server certificate.
+- eofreecert: specifies to apply for a free certificate through automatic validation and deploy it. for verification methods, see [free certificate application supported verification methods](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1).
+    - In ns or DNSPod hosting access mode, free certificates can only be applied for via automatic validation.
+    - When a free certificate application fails, it can cause deployment failure. you can obtain the failure reason through the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1)'>check free certificate application result</a> .
+- eofreecert_manual: specifies the deployment of free certificates applied through DNS delegation verification or file verification. before deploying a free certificate, you need to trigger the [apply for free certificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1)) api to apply for a free certificate. once the application is successful, you can use this enumeration value to deploy the free certificate.
+Note: when deploying a free certificate, ensure a successful application for a free certificate already exists. you can check whether a successful application for a free certificate already exists through the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1)'>check free certificate application result</a> api.
+- sslcert: specifies the configuration of the managed service side certificate.
          * @type {string || null}
          */
         this.Mode = null;
@@ -19925,7 +20044,7 @@ Default value: `none`.
         this.ClientCertInfo = null;
 
         /**
-         * Configures the certificate presented by the EO node during origin-pull for mutual TLS authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+         * Specifies the certificate carried during EO node origin-pull for origin-pull mutual authentication handshake, off by default. leave blank to indicate retaining the original configuration. this configuration is currently in closed beta testing for the allowlist feature. if you need to use it, please contact us (https://www.tencentcloud.comom/online?from_cn_redirect=1-service).
          * @type {UpstreamCertInfo || null}
          */
         this.UpstreamCertInfo = null;
@@ -19963,6 +20082,49 @@ Default value: `none`.
             let obj = new UpstreamCertInfo();
             obj.deserialize(params.UpstreamCertInfo)
             this.UpstreamCertInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyOriginACL request structure.
+ * @class
+ */
+class ModifyOriginACLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies the site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Specifies the instance that needs to configurate origin ACLs.
+         * @type {Array.<OriginACLEntity> || null}
+         */
+        this.OriginACLEntities = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.OriginACLEntities) {
+            this.OriginACLEntities = new Array();
+            for (let z in params.OriginACLEntities) {
+                let obj = new OriginACLEntity();
+                obj.deserialize(params.OriginACLEntities[z]);
+                this.OriginACLEntities.push(obj);
+            }
         }
 
     }
@@ -23173,24 +23335,37 @@ class ModifySecurityClientAttesterResponse extends  AbstractModel {
 }
 
 /**
- * ModifyOriginACL request structure.
+ * CheckFreeCertificateVerification response structure.
  * @class
  */
-class ModifyOriginACLRequest extends  AbstractModel {
+class CheckFreeCertificateVerificationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Specifies the site ID.
+         * Specifies the domain name to which the certificate is issued when the free certificate application succeeds.
+Note: only one free certificate can be applied for a domain name. if a wildcard certificate has been applied for the domain name, its subdomains will use the wildcard certificate.
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.CommonName = null;
 
         /**
-         * Specifies the instance that needs to configurate origin ACLs.
-         * @type {Array.<OriginACLEntity> || null}
+         * Specifies the signature algorithm used by the certificate when the free certificate application succeeds. currently only support RSA 2048.
+         * @type {string || null}
          */
-        this.OriginACLEntities = null;
+        this.SignatureAlgorithm = null;
+
+        /**
+         * Expiration time of the certificate when the free certificate application is successful. the time is in coordinated universal time (UTC), following the ISO 8601 standard date and time format.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -23201,16 +23376,10 @@ class ModifyOriginACLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-
-        if (params.OriginACLEntities) {
-            this.OriginACLEntities = new Array();
-            for (let z in params.OriginACLEntities) {
-                let obj = new OriginACLEntity();
-                obj.deserialize(params.OriginACLEntities[z]);
-                this.OriginACLEntities.push(obj);
-            }
-        }
+        this.CommonName = 'CommonName' in params ? params.CommonName : null;
+        this.SignatureAlgorithm = 'SignatureAlgorithm' in params ? params.SignatureAlgorithm : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23754,6 +23923,80 @@ class CreateL4ProxyRequest extends  AbstractModel {
             obj.deserialize(params.DDosProtectionConfig)
             this.DDosProtectionConfig = obj;
         }
+
+    }
+}
+
+/**
+ * ModifyZone request structure.
+ * @class
+ */
+class ModifyZoneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Site access method. Valid values:
+<li>full: NS access.</li>
+<li>partial: CNAME access. If the site is currently accessed with no domain name, it can be switched only to CNAME access.</li>
+<li>dnsPodAccess: DNSPod hosted access. To use this access mode, your domain name should have been hosted on DNSPod.</li>If this parameter is not input, the original configuration is maintained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
+         * @type {VanityNameServers || null}
+         */
+        this.VanityNameServers = null;
+
+        /**
+         * Identical site identifier. limits input to numbers, english letters, ".", "-", and "_", with a character limit of 200 characters.
+         * @type {string || null}
+         */
+        this.AliasZoneName = null;
+
+        /**
+         * The region where the site requests access. Values:
+<li> `global`: Global coverage</li>
+<li> `mainland`: Chinese mainland</li>
+<li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.VanityNameServers) {
+            let obj = new VanityNameServers();
+            obj.deserialize(params.VanityNameServers)
+            this.VanityNameServers = obj;
+        }
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -29465,24 +29708,18 @@ class ModifyApplicationProxyRuleStatusResponse extends  AbstractModel {
 }
 
 /**
- * Managed rule automatic update option.
+ * DisableOriginACL request structure.
  * @class
  */
-class ManagedRuleAutoUpdate extends  AbstractModel {
+class DisableOriginACLRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Enable automatic update to the latest version or not. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+         * Specifies the site ID.
          * @type {string || null}
          */
-        this.AutoUpdateToLatestVersion = null;
-
-        /**
-         * Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
-         * @type {string || null}
-         */
-        this.RulesetVersion = null;
+        this.ZoneId = null;
 
     }
 
@@ -29493,8 +29730,7 @@ class ManagedRuleAutoUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoUpdateToLatestVersion = 'AutoUpdateToLatestVersion' in params ? params.AutoUpdateToLatestVersion : null;
-        this.RulesetVersion = 'RulesetVersion' in params ? params.RulesetVersion : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -29665,7 +29901,7 @@ class ModifyMultiPathGatewayStatusResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Information required for DNS resolution verification when applying for a free certificate in CNAME mode integration to verify ownership of a site or domain name.
  * @class
  */
 class DnsVerification extends  AbstractModel {
@@ -31467,6 +31703,52 @@ class DescribeMultiPathGatewayOriginACLRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.GatewayId = 'GatewayId' in params ? params.GatewayId : null;
+
+    }
+}
+
+/**
+ * ApplyFreeCertificate request structure.
+ * @class
+ */
+class ApplyFreeCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Specifies the target domain name for free certificate application.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Specifies the verification method for applying for a free certificate. for detailed verification methods, refer to the [free certificate application documentation](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). valid values:.
+<li>http_challenge: specifies the file validation mode for http access. verifies by getting file information from the specified URL of the access domain to complete free certificate application.</li>
+<li>dns_challenge: specifies the dns delegation verification method. verifies the free certificate application by adding the designated host record pointing to EdgeOne.</li>
+
+Note: after triggering this api, you need to complete the verification content configuration based on the returned verification information. once configured, you must also verify by calling the <a href = 'https://www.tencentcloud.comom/document/product/1552/124806?from_cn_redirect=1'>check free certificate application result</a> api. after verification passes, the application succeeds. once the application is successful, you can call the <a href = 'https://www.tencentcloud.comom/document/product/1552/80764?from_cn_redirect=1'>configure domain name certificate</a> API to deploy a free certificate for the current domain name.
+         * @type {string || null}
+         */
+        this.VerificationMethod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.VerificationMethod = 'VerificationMethod' in params ? params.VerificationMethod : null;
 
     }
 }
@@ -35001,6 +35283,41 @@ class CheckCnameStatusRequest extends  AbstractModel {
 }
 
 /**
+ * CheckFreeCertificateVerification request structure.
+ * @class
+ */
+class CheckFreeCertificateVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Zone ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Acceleration domain name, that domain name used when [applying for free certificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
  * Length limit detection condition configuration.
  * @class
  */
@@ -36855,6 +37172,7 @@ module.exports = {
     DescribeSecurityIPGroupContentRequest: DescribeSecurityIPGroupContentRequest,
     SwitchConfig: SwitchConfig,
     IdentifyZoneResponse: IdentifyZoneResponse,
+    DescribeSecurityAPIServiceRequest: DescribeSecurityAPIServiceRequest,
     UpstreamRequestQueryString: UpstreamRequestQueryString,
     DeleteJustInTimeTranscodeTemplatesRequest: DeleteJustInTimeTranscodeTemplatesRequest,
     ModifyLoadBalancerResponse: ModifyLoadBalancerResponse,
@@ -36875,7 +37193,7 @@ module.exports = {
     PostMaxSizeParameters: PostMaxSizeParameters,
     S3: S3,
     DescribeDDoSAttackEventResponse: DescribeDDoSAttackEventResponse,
-    DisableOriginACLRequest: DisableOriginACLRequest,
+    DescribeTimingL7OriginPullDataResponse: DescribeTimingL7OriginPullDataResponse,
     DeleteL4ProxyRulesResponse: DeleteL4ProxyRulesResponse,
     ForceRedirect: ForceRedirect,
     CodeAction: CodeAction,
@@ -36920,11 +37238,11 @@ module.exports = {
     DeleteMultiPathGatewayRequest: DeleteMultiPathGatewayRequest,
     DeleteCustomErrorPageRequest: DeleteCustomErrorPageRequest,
     CustomField: CustomField,
-    DescribeSecurityAPIServiceRequest: DescribeSecurityAPIServiceRequest,
+    BotManagedRule: BotManagedRule,
     CacheKeyHeader: CacheKeyHeader,
     DeleteZoneRequest: DeleteZoneRequest,
     RangeOriginPullParameters: RangeOriginPullParameters,
-    BotManagedRule: BotManagedRule,
+    ApplyFreeCertificateResponse: ApplyFreeCertificateResponse,
     CurrentOriginACL: CurrentOriginACL,
     SecurityConfig: SecurityConfig,
     CreateSecurityIPGroupRequest: CreateSecurityIPGroupRequest,
@@ -36999,11 +37317,12 @@ module.exports = {
     DescribeL4ProxyRulesResponse: DescribeL4ProxyRulesResponse,
     OriginHealthStatus: OriginHealthStatus,
     ZoneConfig: ZoneConfig,
+    DescribeTimingL7OriginPullDataRequest: DescribeTimingL7OriginPullDataRequest,
     CustomizedHeader: CustomizedHeader,
     ModifyDDoSProtectionResponse: ModifyDDoSProtectionResponse,
     DescribeFunctionsRequest: DescribeFunctionsRequest,
     ModifyDnsRecordsStatusRequest: ModifyDnsRecordsStatusRequest,
-    ModifyZoneRequest: ModifyZoneRequest,
+    ManagedRuleAutoUpdate: ManagedRuleAutoUpdate,
     CustomRule: CustomRule,
     BotExtendAction: BotExtendAction,
     CreatePurgeTaskResponse: CreatePurgeTaskResponse,
@@ -37163,6 +37482,7 @@ module.exports = {
     UpstreamURLRewriteParameters: UpstreamURLRewriteParameters,
     DescribeL4ProxyResponse: DescribeL4ProxyResponse,
     ModifyHostsCertificateRequest: ModifyHostsCertificateRequest,
+    ModifyOriginACLRequest: ModifyOriginACLRequest,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
     DeleteAccelerationDomainsRequest: DeleteAccelerationDomainsRequest,
     RenewPlanResponse: RenewPlanResponse,
@@ -37229,7 +37549,7 @@ module.exports = {
     SecurityPolicy: SecurityPolicy,
     AscriptionInfo: AscriptionInfo,
     ModifySecurityClientAttesterResponse: ModifySecurityClientAttesterResponse,
-    ModifyOriginACLRequest: ModifyOriginACLRequest,
+    CheckFreeCertificateVerificationResponse: CheckFreeCertificateVerificationResponse,
     FirstPartConfig: FirstPartConfig,
     Waf: Waf,
     CreateApplicationProxyRuleRequest: CreateApplicationProxyRuleRequest,
@@ -37239,6 +37559,7 @@ module.exports = {
     DescribeDnsRecordsResponse: DescribeDnsRecordsResponse,
     CreateWebSecurityTemplateRequest: CreateWebSecurityTemplateRequest,
     CreateL4ProxyRequest: CreateL4ProxyRequest,
+    ModifyZoneRequest: ModifyZoneRequest,
     CreatePlanResponse: CreatePlanResponse,
     DescribeApplicationProxiesRequest: DescribeApplicationProxiesRequest,
     DescribeContentQuotaRequest: DescribeContentQuotaRequest,
@@ -37338,7 +37659,7 @@ module.exports = {
     ConfirmMultiPathGatewayOriginACLRequest: ConfirmMultiPathGatewayOriginACLRequest,
     DeleteL4ProxyResponse: DeleteL4ProxyResponse,
     ModifyApplicationProxyRuleStatusResponse: ModifyApplicationProxyRuleStatusResponse,
-    ManagedRuleAutoUpdate: ManagedRuleAutoUpdate,
+    DisableOriginACLRequest: DisableOriginACLRequest,
     ClientIPCountryParameters: ClientIPCountryParameters,
     IncreasePlanQuotaResponse: IncreasePlanQuotaResponse,
     DescribeIPRegionResponse: DescribeIPRegionResponse,
@@ -37376,6 +37697,7 @@ module.exports = {
     ContentIdentifier: ContentIdentifier,
     CreateCustomizeErrorPageResponse: CreateCustomizeErrorPageResponse,
     DescribeMultiPathGatewayOriginACLRequest: DescribeMultiPathGatewayOriginACLRequest,
+    ApplyFreeCertificateRequest: ApplyFreeCertificateRequest,
     StatusCodeCacheParameters: StatusCodeCacheParameters,
     RewriteAction: RewriteAction,
     TemplateScope: TemplateScope,
@@ -37456,6 +37778,7 @@ module.exports = {
     DescribeWebSecurityTemplatesResponse: DescribeWebSecurityTemplatesResponse,
     Quota: Quota,
     CheckCnameStatusRequest: CheckCnameStatusRequest,
+    CheckFreeCertificateVerificationRequest: CheckFreeCertificateVerificationRequest,
     DetectLengthLimitCondition: DetectLengthLimitCondition,
     ModifySecurityAPIResourceResponse: ModifySecurityAPIResourceResponse,
     DescribeSecurityIPGroupResponse: DescribeSecurityIPGroupResponse,

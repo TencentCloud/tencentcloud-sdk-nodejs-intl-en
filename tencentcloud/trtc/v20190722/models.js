@@ -2664,7 +2664,7 @@ Example value: 0.
         this.Vendor = null;
 
         /**
-         * [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent COS.
+         * [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent COS.
 Example value: cn-shanghai-1.
 [Region information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
 Example value: ap-southeast-3.	
@@ -2695,7 +2695,7 @@ Example value: test-secretkey.
         this.SecretKey = null;
 
         /**
-         * Specified location of the cloud bucket, which consists of an array of strings. Value range for the strings is lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (_-). For example, under the feature of ["prefix1", "prefix2"], the audio slicing file (xxx.mp3) is stored as prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC time}.ogg, while the video frame is stored as prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC time}.png.
+         * Specified location of the cloud bucket, which consists of an array of strings. Value range for the strings is lowercase letters (a-z), uppercase letters (A-Z), digits (0-9), and special characters (_-). For example, under the feature of ["prefix1", "prefix2"], the audio slicing file (xxx.mp3) is stored as prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC time}.ogg, while the video frame is stored as prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC time}.png.
          * @type {Array.<string> || null}
          */
         this.FileNamePrefix = null;
@@ -3981,7 +3981,7 @@ Example value: 0.
         this.Vendor = null;
 
         /**
-         * [Region information](https://www.tencentcloud.comom/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent COS.
+         * [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent COS.
 Example value: cn-shanghai-1.
 
 [Region information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
@@ -4013,7 +4013,7 @@ Example value: test-secretkey.
         this.SecretKey = null;
 
         /**
-         * Specified location of the cloud bucket, which consists of arrays of strings. Value range for the strings is lowercase letters (a–z), uppercase letters (A–Z), digits (0–9), and special characters (_-). For example, under the feature of ["prefix1", "prefix2"], the audio slicing file (xxx.mp3) is stored as prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC time}.ogg, while the video frame is stored as prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC time}.png.
+         * Specified location of the cloud bucket, which consists of arrays of strings. Value range for the strings is lowercase letters (a-z), uppercase letters (A-Z), digits (0-9), and special characters (_-). For example, under the feature of ["prefix1", "prefix2"], the audio slicing file (xxx.mp3) is stored as prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC time}.ogg, while the video frame is stored as prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC time}.png.
          * @type {Array.<string> || null}
          */
         this.FileNamePrefix = null;
@@ -6737,13 +6737,13 @@ class CreateCloudModerationRequest extends  AbstractModel {
         super();
 
         /**
-         * [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
+         * [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
+         * [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
          * @type {string || null}
          */
         this.RoomId = null;
@@ -7189,13 +7189,13 @@ class CreateCloudSliceTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * [SdkAppId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
+         * [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the TRTC room.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * [RoomId](https://www.tencentcloud.comom/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
+         * [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the TRTC room.
          * @type {string || null}
          */
         this.RoomId = null;
@@ -7323,7 +7323,7 @@ Yidun: NetEase Yidun moderation. (Valid values: 1: audio slicing moderation; 2: 
         this.ModerationSupplierParam = null;
 
         /**
-         * Whether to save the hit file. 0: not save by default; 1: save.
+         * Whether to save file. 0: not save by default; 1: save; 2 save the hit file.
          * @type {number || null}
          */
         this.SaveModerationFile = null;

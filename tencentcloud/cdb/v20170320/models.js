@@ -1448,7 +1448,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.SecurityGroupId = null;
 
         /**
-         * Billing method. Value range: 0 (monthly subscribed), 1 (hourly).
+         * Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.
          * @type {Array.<number> || null}
          */
         this.PayTypes = null;
@@ -1460,7 +1460,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InstanceNames = null;
 
         /**
-         * Instance task status. Valid values: <br>0 - no task <br>1 - upgrading <br>2 - importing data <br>3 - enabling secondary instance access <br>4 - enabling public network access <br>5 - batch operation in progress <br>6 - rolling back <br>7 - disabling public network access <br>8 - modifying password <br>9 - renaming instance <br>10 - restarting <br>12 - migrating self-built database <br>13 - dropping tables <br>14 - Disaster recovery instance creating sync task <br>15 - waiting for switch <br>16 - switching <br>17 - upgrade and switch completed <br>19 - parameter settings to be executed
+         * Instance task status. Valid values:<br>0 - no task;<br>1 - upgrading;<br>2 - importing data;<br>3 - enabling secondary nodes;<br>4 - enabling public network access;<br>5 - executing batch operations;<br>6 - rolling back;<br>7 - disabling public network access;<br>8 - changing the password;<br>9 - renaming the instance;<br>10 - restarting;<br>12 - migrating self-built databases;<br>13 - deleting databases and tables;<br>14 - synchronizing the creation of disaster recovery instances;<br>15 - pending upgrade switch;<br>16 - under upgrade switch;<br>17 - upgrade switch completed;<br>19 - parameter settings pending execution;<br>34 - in-place upgrade pending execution.
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
@@ -1496,19 +1496,20 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.CdbErrors = null;
 
         /**
-         * Sort by field of the returned result set. Currently, supported values include "InstanceId", "InstanceName", "CreateTime", and "DeadlineTime".
+         * Sorting field of the query results. Valid values: "instanceId", "instanceName", "createTime", and "deadlineTime".
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Sorting method of the returned result set. Currently, "ASC" or "DESC" is supported.
+         * Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default value is "DESC".
          * @type {string || null}
          */
         this.OrderDirection = null;
 
         /**
-         * Whether security group ID is used as a filter
+         * Whether to use the security group ID as the filter condition.
+Note: 0 indicates no; 1 indicates yes.
          * @type {number || null}
          */
         this.WithSecurityGroup = null;
@@ -1592,7 +1593,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.UniqSubnetIds = null;
 
         /**
-         * Tag key value
+         * Tag key value.
+Note that tags cannot be queried for instances being created.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -1610,10 +1612,16 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ProxyIds = null;
 
         /**
-         * Database engine type
+         * Database engine type. Valid values: InnoDB; RocksDB.
          * @type {Array.<string> || null}
          */
         this.EngineTypes = null;
+
+        /**
+         * Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.
+         * @type {boolean || null}
+         */
+        this.QueryClusterInfo = null;
 
     }
 
@@ -1667,6 +1675,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ProxyVips = 'ProxyVips' in params ? params.ProxyVips : null;
         this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
         this.EngineTypes = 'EngineTypes' in params ? params.EngineTypes : null;
+        this.QueryClusterInfo = 'QueryClusterInfo' in params ? params.QueryClusterInfo : null;
 
     }
 }
@@ -6090,8 +6099,7 @@ class SlaveInfo extends  AbstractModel {
         this.First = null;
 
         /**
-         * Information of secondary server 2
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Second secondary server information.
          * @type {SlaveInstanceInfo || null}
          */
         this.Second = null;
@@ -8182,6 +8190,83 @@ class DescribeDBInstanceLogToCLSRequest extends  AbstractModel {
 }
 
 /**
+ * Analysis engine node information.
+ * @class
+ */
+class AnalysisNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node status.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Data loading status.
+         * @type {string || null}
+         */
+        this.DataStatus = null;
+
+        /**
+         * Number of CPU cores, in cores.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory size, in MB.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Disk size, in GB.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Node AZ.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Data synchronization error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DataStatus = 'DataStatus' in params ? params.DataStatus : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * StartBatchRollback request structure.
  * @class
  */
@@ -8403,24 +8488,89 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Database name and character set
+ * Structured slow log details
  * @class
  */
-class DatabasesWithCharacterLists extends  AbstractModel {
+class SlowLogItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database name
-         * @type {string || null}
+         * SQL execution time.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.DatabaseName = null;
+        this.Timestamp = null;
 
         /**
-         * Character set
+         * SQL execution duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * SQL statement.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.CharacterSet = null;
+        this.SqlText = null;
+
+        /**
+         * Client address.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * Username.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Database name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Lock duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * Number of scanned rows.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * Number of rows in result set.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+        /**
+         * SQL template.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * SQL statement MD5.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Md5 = null;
 
     }
 
@@ -8431,8 +8581,17 @@ class DatabasesWithCharacterLists extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -10703,6 +10862,7 @@ class RoGroup extends  AbstractModel {
 
         /**
          * Read-only group ID.
+Note: If the data structure is used during instance purchase, this item is required only when the read-only group mode is set to join.
          * @type {string || null}
          */
         this.RoGroupId = null;
@@ -10720,7 +10880,7 @@ class RoGroup extends  AbstractModel {
         this.RoOfflineDelay = null;
 
         /**
-         * Latency threshold
+         * Delay threshold, in seconds. Value range: 1–10000. The value is an integer.
          * @type {number || null}
          */
         this.RoMaxDelayTime = null;
@@ -10762,36 +10922,31 @@ class RoGroup extends  AbstractModel {
         this.Vport = null;
 
         /**
-         * VPC ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Virtual Private Cloud (VPC) ID.
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
          * Subnet ID.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UniqSubnetId = null;
 
         /**
-         * Read-only group region.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Region of the read-only group.
          * @type {string || null}
          */
         this.RoGroupRegion = null;
 
         /**
-         * Read-only group AZ.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * AZ of the read-only group.
          * @type {string || null}
          */
         this.RoGroupZone = null;
 
         /**
-         * Replication delay.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Replication delay time, in seconds. Value range: 1–259200. The value is an integer.
          * @type {number || null}
          */
         this.DelayReplicationTime = null;
@@ -11080,89 +11235,24 @@ class DescribeBackupDownloadRestrictionResponse extends  AbstractModel {
 }
 
 /**
- * Structured slow log details
+ * Database name and character set
  * @class
  */
-class SlowLogItem extends  AbstractModel {
+class DatabasesWithCharacterLists extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * SQL execution time.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * SQL execution duration in seconds.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.QueryTime = null;
-
-        /**
-         * SQL statement.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Database name
          * @type {string || null}
          */
-        this.SqlText = null;
+        this.DatabaseName = null;
 
         /**
-         * Client address.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Character set
          * @type {string || null}
          */
-        this.UserHost = null;
-
-        /**
-         * Username.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Database name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Database = null;
-
-        /**
-         * Lock duration in seconds.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LockTime = null;
-
-        /**
-         * Number of scanned rows.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RowsExamined = null;
-
-        /**
-         * Number of rows in result set.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RowsSent = null;
-
-        /**
-         * SQL template.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SqlTemplate = null;
-
-        /**
-         * SQL statement MD5.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Md5 = null;
+        this.CharacterSet = null;
 
     }
 
@@ -11173,17 +11263,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
-        this.SqlText = 'SqlText' in params ? params.SqlText : null;
-        this.UserHost = 'UserHost' in params ? params.UserHost : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Database = 'Database' in params ? params.Database : null;
-        this.LockTime = 'LockTime' in params ? params.LockTime : null;
-        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
-        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
-        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
-        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.CharacterSet = 'CharacterSet' in params ? params.CharacterSet : null;
 
     }
 }
@@ -12647,8 +12728,7 @@ class InstanceInfo extends  AbstractModel {
         this.InitFlag = null;
 
         /**
-         * VIP information of a read-only instance. This field is exclusive to read-only instances where read-only access is enabled separately
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Read-only VIP information. This field is available only for read-only instances with dedicated access enabled.
          * @type {RoVipInfo || null}
          */
         this.RoVipInfo = null;
@@ -12672,8 +12752,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VpcId = null;
 
         /**
-         * Information of a secondary server
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Secondary server information.
          * @type {SlaveInfo || null}
          */
         this.SlaveInfo = null;
@@ -12703,8 +12782,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProtectMode = null;
 
         /**
-         * Details of a read-only group
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detailed information about the read-only group.
          * @type {Array.<RoGroup> || null}
          */
         this.RoGroups = null;
@@ -12752,8 +12830,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TaskStatus = null;
 
         /**
-         * Details of a primary instance
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detailed information about the primary instance.
          * @type {MasterInfo || null}
          */
         this.MasterInfo = null;
@@ -12777,8 +12854,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceName = null;
 
         /**
-         * Details of a disaster recovery instance
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Detailed information about the disaster recovery instance.
          * @type {Array.<DrInfo> || null}
          */
         this.DrInfo = null;
@@ -12862,22 +12938,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ZoneName = null;
 
         /**
-         * Physical machine model
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Physical server model.
          * @type {string || null}
          */
         this.DeviceClass = null;
 
         /**
-         * Placement group ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Placement group ID.
          * @type {string || null}
          */
         this.DeployGroupId = null;
 
         /**
-         * AZ ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * AZ ID.
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -12889,31 +12962,62 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InstanceNodes = null;
 
         /**
-         * List of tags
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Tag list.
          * @type {Array.<TagInfoItem> || null}
          */
         this.TagList = null;
 
         /**
-         * Engine type
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Engine type.
          * @type {string || null}
          */
         this.EngineType = null;
 
         /**
-         * Maximum delay threshold
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Maximum delay threshold.
          * @type {number || null}
          */
         this.MaxDelayTime = null;
 
         /**
-         * Instance disk type, which is returned only for the instances of cloud disk edition. Valid values: `CLOUD_SSD` (SSD), `CLOUD_HSSD` (Enhanced SSD).
+         * Instance disk type. Valid values are returned only for Cluster Edition and single-node (cloud disk) instances.
+Note:
+1. If "DiskType": "CLOUD_HSSD" is returned, it indicates that the instance disk type is Enhanced SSD.
+2. If "DiskType": "CLOUD_SSD" is returned, it indicates that the instance disk type is Cloud SSD.
+3. If "DiskType": "" is returned and the DeviceType parameter value is UNIVERSAL or EXCLUSIVE, it indicates that the instance uses a local SSD.
          * @type {string || null}
          */
         this.DiskType = null;
+
+        /**
+         * Current number of CPU cores for scale-out.
+         * @type {number || null}
+         */
+        this.ExpandCpu = null;
+
+        /**
+         * Cluster Edition instance node information.
+         * @type {Array.<ClusterInfo> || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * Analysis engine node list.
+         * @type {Array.<AnalysisNodeInfo> || null}
+         */
+        this.AnalysisNodeInfos = null;
+
+        /**
+         * Device bandwidth, in GB. This parameter is valid when DeviceClass is specified. For example, 25 means the current device bandwidth is 25 GB; 10 means the current device bandwidth is 10 GB.
+         * @type {number || null}
+         */
+        this.DeviceBandwidth = null;
+
+        /**
+         * Instance termination protection status. on indicates enabled; otherwise, the protection is disabled.
+         * @type {string || null}
+         */
+        this.DestroyProtect = null;
 
     }
 
@@ -13009,6 +13113,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.ExpandCpu = 'ExpandCpu' in params ? params.ExpandCpu : null;
+
+        if (params.ClusterInfo) {
+            this.ClusterInfo = new Array();
+            for (let z in params.ClusterInfo) {
+                let obj = new ClusterInfo();
+                obj.deserialize(params.ClusterInfo[z]);
+                this.ClusterInfo.push(obj);
+            }
+        }
+
+        if (params.AnalysisNodeInfos) {
+            this.AnalysisNodeInfos = new Array();
+            for (let z in params.AnalysisNodeInfos) {
+                let obj = new AnalysisNodeInfo();
+                obj.deserialize(params.AnalysisNodeInfos[z]);
+                this.AnalysisNodeInfos.push(obj);
+            }
+        }
+        this.DeviceBandwidth = 'DeviceBandwidth' in params ? params.DeviceBandwidth : null;
+        this.DestroyProtect = 'DestroyProtect' in params ? params.DestroyProtect : null;
 
     }
 }
@@ -13636,7 +13761,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Pay-as-you-go billing status. Value range: 1 (normal), 2 (in arrears)
+         * Pay-as-you-go status. Valid values: 1 - normal; 2 - in arrears.
          * @type {number || null}
          */
         this.HourFeeStatus = null;
@@ -13708,10 +13833,16 @@ class RoInstanceInfo extends  AbstractModel {
         this.DeadlineTime = null;
 
         /**
-         * RO instance billing method. Value range: 0 (monthly subscribed), 1 (pay-as-you-go), 2 (monthly postpaid)
+         * Billing type of the RO instance. Valid values: 0 - yearly/monthly subscription; 1 - pay-as-you-go; 2-postpaid by month.
          * @type {number || null}
          */
         this.PayType = null;
+
+        /**
+         * RO replication delay status.
+         * @type {string || null}
+         */
+        this.ReplicationStatus = null;
 
     }
 
@@ -13745,6 +13876,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
         this.PayType = 'PayType' in params ? params.PayType : null;
+        this.ReplicationStatus = 'ReplicationStatus' in params ? params.ReplicationStatus : null;
 
     }
 }
@@ -15393,15 +15525,13 @@ class TagInfoItem extends  AbstractModel {
         super();
 
         /**
-         * Tag key
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Tag key.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Tag value.
          * @type {string || null}
          */
         this.TagValue = null;
@@ -16962,6 +17092,48 @@ which is left empty by default. Specify this parameter when cloning a strong syn
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.CageId = 'CageId' in params ? params.CageId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * Cluster Edition node information.
+ * @class
+ */
+class ClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node type: primary node and secondary node.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -19536,13 +19708,14 @@ module.exports = {
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeCloneListResponse: DescribeCloneListResponse,
     DescribeDBInstanceLogToCLSRequest: DescribeDBInstanceLogToCLSRequest,
+    AnalysisNodeInfo: AnalysisNodeInfo,
     StartBatchRollbackRequest: StartBatchRollbackRequest,
     OpenDBInstanceEncryptionRequest: OpenDBInstanceEncryptionRequest,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     ModifyInstancePasswordComplexityResponse: ModifyInstancePasswordComplexityResponse,
     DeviceMemInfo: DeviceMemInfo,
     AuditLogAggregationResult: AuditLogAggregationResult,
-    DatabasesWithCharacterLists: DatabasesWithCharacterLists,
+    SlowLogItem: SlowLogItem,
     DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
@@ -19583,7 +19756,7 @@ module.exports = {
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     DescribeBackupDownloadRestrictionResponse: DescribeBackupDownloadRestrictionResponse,
-    SlowLogItem: SlowLogItem,
+    DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     CloneItem: CloneItem,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     CreateAccountsRequest: CreateAccountsRequest,
@@ -19683,6 +19856,7 @@ module.exports = {
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     RollbackInstancesInfo: RollbackInstancesInfo,
     CreateCloneInstanceRequest: CreateCloneInstanceRequest,
+    ClusterInfo: ClusterInfo,
     CloseCDBProxyRequest: CloseCDBProxyRequest,
     DeleteBackupResponse: DeleteBackupResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,

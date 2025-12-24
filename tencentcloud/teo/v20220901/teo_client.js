@@ -83,6 +83,7 @@ const CreateMultiPathGatewaySecretKeyResponse = models.CreateMultiPathGatewaySec
 const DescribeSecurityIPGroupContentRequest = models.DescribeSecurityIPGroupContentRequest;
 const SwitchConfig = models.SwitchConfig;
 const IdentifyZoneResponse = models.IdentifyZoneResponse;
+const DescribeSecurityAPIServiceRequest = models.DescribeSecurityAPIServiceRequest;
 const UpstreamRequestQueryString = models.UpstreamRequestQueryString;
 const DeleteJustInTimeTranscodeTemplatesRequest = models.DeleteJustInTimeTranscodeTemplatesRequest;
 const ModifyLoadBalancerResponse = models.ModifyLoadBalancerResponse;
@@ -103,7 +104,7 @@ const CreateFunctionRequest = models.CreateFunctionRequest;
 const PostMaxSizeParameters = models.PostMaxSizeParameters;
 const S3 = models.S3;
 const DescribeDDoSAttackEventResponse = models.DescribeDDoSAttackEventResponse;
-const DisableOriginACLRequest = models.DisableOriginACLRequest;
+const DescribeTimingL7OriginPullDataResponse = models.DescribeTimingL7OriginPullDataResponse;
 const DeleteL4ProxyRulesResponse = models.DeleteL4ProxyRulesResponse;
 const ForceRedirect = models.ForceRedirect;
 const CodeAction = models.CodeAction;
@@ -148,11 +149,11 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const DeleteMultiPathGatewayRequest = models.DeleteMultiPathGatewayRequest;
 const DeleteCustomErrorPageRequest = models.DeleteCustomErrorPageRequest;
 const CustomField = models.CustomField;
-const DescribeSecurityAPIServiceRequest = models.DescribeSecurityAPIServiceRequest;
+const BotManagedRule = models.BotManagedRule;
 const CacheKeyHeader = models.CacheKeyHeader;
 const DeleteZoneRequest = models.DeleteZoneRequest;
 const RangeOriginPullParameters = models.RangeOriginPullParameters;
-const BotManagedRule = models.BotManagedRule;
+const ApplyFreeCertificateResponse = models.ApplyFreeCertificateResponse;
 const CurrentOriginACL = models.CurrentOriginACL;
 const SecurityConfig = models.SecurityConfig;
 const CreateSecurityIPGroupRequest = models.CreateSecurityIPGroupRequest;
@@ -227,11 +228,12 @@ const Task = models.Task;
 const DescribeL4ProxyRulesResponse = models.DescribeL4ProxyRulesResponse;
 const OriginHealthStatus = models.OriginHealthStatus;
 const ZoneConfig = models.ZoneConfig;
+const DescribeTimingL7OriginPullDataRequest = models.DescribeTimingL7OriginPullDataRequest;
 const CustomizedHeader = models.CustomizedHeader;
 const ModifyDDoSProtectionResponse = models.ModifyDDoSProtectionResponse;
 const DescribeFunctionsRequest = models.DescribeFunctionsRequest;
 const ModifyDnsRecordsStatusRequest = models.ModifyDnsRecordsStatusRequest;
-const ModifyZoneRequest = models.ModifyZoneRequest;
+const ManagedRuleAutoUpdate = models.ManagedRuleAutoUpdate;
 const CustomRule = models.CustomRule;
 const BotExtendAction = models.BotExtendAction;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
@@ -391,6 +393,7 @@ const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
 const UpstreamURLRewriteParameters = models.UpstreamURLRewriteParameters;
 const DescribeL4ProxyResponse = models.DescribeL4ProxyResponse;
 const ModifyHostsCertificateRequest = models.ModifyHostsCertificateRequest;
+const ModifyOriginACLRequest = models.ModifyOriginACLRequest;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const DeleteAccelerationDomainsRequest = models.DeleteAccelerationDomainsRequest;
 const RenewPlanResponse = models.RenewPlanResponse;
@@ -457,7 +460,7 @@ const CreateZoneRequest = models.CreateZoneRequest;
 const SecurityPolicy = models.SecurityPolicy;
 const AscriptionInfo = models.AscriptionInfo;
 const ModifySecurityClientAttesterResponse = models.ModifySecurityClientAttesterResponse;
-const ModifyOriginACLRequest = models.ModifyOriginACLRequest;
+const CheckFreeCertificateVerificationResponse = models.CheckFreeCertificateVerificationResponse;
 const FirstPartConfig = models.FirstPartConfig;
 const Waf = models.Waf;
 const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
@@ -467,6 +470,7 @@ const TCCaptchaOption = models.TCCaptchaOption;
 const DescribeDnsRecordsResponse = models.DescribeDnsRecordsResponse;
 const CreateWebSecurityTemplateRequest = models.CreateWebSecurityTemplateRequest;
 const CreateL4ProxyRequest = models.CreateL4ProxyRequest;
+const ModifyZoneRequest = models.ModifyZoneRequest;
 const CreatePlanResponse = models.CreatePlanResponse;
 const DescribeApplicationProxiesRequest = models.DescribeApplicationProxiesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
@@ -566,7 +570,7 @@ const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const ConfirmMultiPathGatewayOriginACLRequest = models.ConfirmMultiPathGatewayOriginACLRequest;
 const DeleteL4ProxyResponse = models.DeleteL4ProxyResponse;
 const ModifyApplicationProxyRuleStatusResponse = models.ModifyApplicationProxyRuleStatusResponse;
-const ManagedRuleAutoUpdate = models.ManagedRuleAutoUpdate;
+const DisableOriginACLRequest = models.DisableOriginACLRequest;
 const ClientIPCountryParameters = models.ClientIPCountryParameters;
 const IncreasePlanQuotaResponse = models.IncreasePlanQuotaResponse;
 const DescribeIPRegionResponse = models.DescribeIPRegionResponse;
@@ -604,6 +608,7 @@ const AccelerationDomain = models.AccelerationDomain;
 const ContentIdentifier = models.ContentIdentifier;
 const CreateCustomizeErrorPageResponse = models.CreateCustomizeErrorPageResponse;
 const DescribeMultiPathGatewayOriginACLRequest = models.DescribeMultiPathGatewayOriginACLRequest;
+const ApplyFreeCertificateRequest = models.ApplyFreeCertificateRequest;
 const StatusCodeCacheParameters = models.StatusCodeCacheParameters;
 const RewriteAction = models.RewriteAction;
 const TemplateScope = models.TemplateScope;
@@ -684,6 +689,7 @@ const Function = models.Function;
 const DescribeWebSecurityTemplatesResponse = models.DescribeWebSecurityTemplatesResponse;
 const Quota = models.Quota;
 const CheckCnameStatusRequest = models.CheckCnameStatusRequest;
+const CheckFreeCertificateVerificationRequest = models.CheckFreeCertificateVerificationRequest;
 const DetectLengthLimitCondition = models.DetectLengthLimitCondition;
 const ModifySecurityAPIResourceResponse = models.ModifySecurityAPIResourceResponse;
 const DescribeSecurityIPGroupResponse = models.DescribeSecurityIPGroupResponse;
@@ -1073,14 +1079,14 @@ A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/
     }
 
     /**
-     * This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
-     * @param {DescribeEnvironmentsRequest} req
-     * @param {function(string, DescribeEnvironmentsResponse):void} cb
+     * This API is used to create content identifiers, where you can set descriptions, tags, and other information. It is also necessary to bind an enterprise edition package for billing data statistics. A content identifier can only bind one billing package, while a billing package can bind multiple content identifiers. This feature is only available to the allowlist.
+     * @param {CreateContentIdentifierRequest} req
+     * @param {function(string, CreateContentIdentifierResponse):void} cb
      * @public
      */
-    DescribeEnvironments(req, cb) {
-        let resp = new DescribeEnvironmentsResponse();
-        this.request("DescribeEnvironments", req, resp, cb);
+    CreateContentIdentifier(req, cb) {
+        let resp = new CreateContentIdentifierResponse();
+        this.request("CreateContentIdentifier", req, resp, cb);
     }
 
     /**
@@ -1405,6 +1411,18 @@ Before creating a task, we recommend that you first call [DescribeRealtimeLogDel
     ModifyL4Proxy(req, cb) {
         let resp = new ModifyL4ProxyResponse();
         this.request("ModifyL4Proxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to verify a free certificate and obtain the application result. If verified, you can query the free certificate information for the corresponding domain name application through this API. If failed to apply, this API will return the corresponding verification failure message.
+This API is used to check the free certificate application result after triggering the [ApplyFreeCertificate](https://www.tencentcloud.comom/document/product/1552/124807?from_cn_redirect=1) . Once the application is successful, you need to configure through the [ModifyHostsCertificate](https://www.tencentcloud.comom/document/product/1552/80764?from_cn_redirect=1) to deploy the free certificate to the acceleration domain.
+     * @param {CheckFreeCertificateVerificationRequest} req
+     * @param {function(string, CheckFreeCertificateVerificationResponse):void} cb
+     * @public
+     */
+    CheckFreeCertificateVerification(req, cb) {
+        let resp = new CheckFreeCertificateVerificationResponse();
+        this.request("CheckFreeCertificateVerification", req, resp, cb);
     }
 
     /**
@@ -2488,17 +2506,6 @@ This API is used to learn about the detailed capacity of JIT transcoding. EdgeOn
     }
 
     /**
-     * This API is used to create content identifiers, where you can set descriptions, tags, and other information. It is also necessary to bind an enterprise edition package for billing data statistics. A content identifier can only bind one billing package, while a billing package can bind multiple content identifiers. This feature is only available to the allowlist.
-     * @param {CreateContentIdentifierRequest} req
-     * @param {function(string, CreateContentIdentifierResponse):void} cb
-     * @public
-     */
-    CreateContentIdentifier(req, cb) {
-        let resp = new CreateContentIdentifierResponse();
-        this.request("CreateContentIdentifier", req, resp, cb);
-    }
-
-    /**
      * This API is an old version. EdgeOne has fully upgraded the APIs related to the rule engine. You can obtain detailed configurations of domain names through [DescribeL7AccSetting](https://intl.cloud.tencent.com/document/product/1552/115819?from_cn_redirect=1) and [DescribeL7AccRules](https://intl.cloud.tencent.com/document/product/1552/115820?from_cn_redirect=1).
      * @param {DescribeHostsSettingRequest} req
      * @param {function(string, DescribeHostsSettingResponse):void} cb
@@ -2697,6 +2704,49 @@ Note: Starting from June 27, 2025, the legacy version APIs will stop updating. N
     DeleteZone(req, cb) {
         let resp = new DeleteZoneResponse();
         this.request("DeleteZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query time series data for layer-7 domain services' origin-pull data.
+     * @param {DescribeTimingL7OriginPullDataRequest} req
+     * @param {function(string, DescribeTimingL7OriginPullDataResponse):void} cb
+     * @public
+     */
+    DescribeTimingL7OriginPullData(req, cb) {
+        let resp = new DescribeTimingL7OriginPullDataResponse();
+        this.request("DescribeTimingL7OriginPullData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply for a free certificate. If you need to proceed with DNS delegated verification or file verification, you can call this API to initiate the certificate application and obtain the corresponding verification content based on the application method. The order for API calls is as follows:.
+Step 1: Call ApplyFreeCertificate, specify the verification method for free certificate application, and obtain the verification content.
+Step 2: Configure the corresponding domain as verification content.
+Step 3: Call CheckFreeCertificateVerification to verify. After verification passes, the free certificate application is completed.
+Step 4: Call ModifyHostsCertificate to issue a domain certificate configured to use the EdgeOne free certificate.
+
+The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.comom/document/product/1552/90437?from_cn_redirect=1). 
+description:.
+- Only CNAME access mode can call this API to specify the free certificate application method. NS/DNSPod hosting access modes use automatic validation to apply for free certificates with no need to call this API.
+- If you need to switch the free certificate authentication method, you can call this API again by changing the VerificationMethod field to update it.
+- A domain name can only apply for one free certificate. After calling this API, the backend will trigger the free certificate application task. You need to complete the domain name verification info configuration within 2 days, then finish certificate authentication.
+     * @param {ApplyFreeCertificateRequest} req
+     * @param {function(string, ApplyFreeCertificateResponse):void} cb
+     * @public
+     */
+    ApplyFreeCertificate(req, cb) {
+        let resp = new ApplyFreeCertificateResponse();
+        this.request("ApplyFreeCertificate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query environment information in version management mode. The response includes the environment ID, type, and current effective version. The version management feature is currently undergoing beta testing and is accessible only to users on the whitelist.
+     * @param {DescribeEnvironmentsRequest} req
+     * @param {function(string, DescribeEnvironmentsResponse):void} cb
+     * @public
+     */
+    DescribeEnvironments(req, cb) {
+        let resp = new DescribeEnvironmentsResponse();
+        this.request("DescribeEnvironments", req, resp, cb);
     }
 
     /**

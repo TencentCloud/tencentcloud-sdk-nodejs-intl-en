@@ -160,6 +160,7 @@ const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTi
 const ScheduleRecognitionTaskResult = models.ScheduleRecognitionTaskResult;
 const ImageProcessTaskOutput = models.ImageProcessTaskOutput;
 const ComposeTargetInfo = models.ComposeTargetInfo;
+const TaskStatData = models.TaskStatData;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const DisableScheduleRequest = models.DisableScheduleRequest;
 const AiAnalysisTaskHorizontalToVerticalResult = models.AiAnalysisTaskHorizontalToVerticalResult;
@@ -383,6 +384,7 @@ const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrF
 const DeleteAsrHotwordsResponse = models.DeleteAsrHotwordsResponse;
 const SmartSubtitleTaskAsrFullTextSegmentItem = models.SmartSubtitleTaskAsrFullTextSegmentItem;
 const QualityControlItem = models.QualityControlItem;
+const TaskStatDataItem = models.TaskStatDataItem;
 const LiveStreamAsrFullTextRecognitionResult = models.LiveStreamAsrFullTextRecognitionResult;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const CreateAsrHotwordsRequest = models.CreateAsrHotwordsRequest;
@@ -413,6 +415,7 @@ const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
 const AiAnalysisTaskDelLogoOutput = models.AiAnalysisTaskDelLogoOutput;
 const DescribeBatchTaskDetailRequest = models.DescribeBatchTaskDetailRequest;
+const DescribeUsageDataResponse = models.DescribeUsageDataResponse;
 const AiReviewProhibitedAsrTaskOutput = models.AiReviewProhibitedAsrTaskOutput;
 const LiveStreamFaceRecognitionResult = models.LiveStreamFaceRecognitionResult;
 const LiveStreamAiReviewResultInfo = models.LiveStreamAiReviewResultInfo;
@@ -445,6 +448,7 @@ const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate
 const S3OutputStorage = models.S3OutputStorage;
 const CosFileUploadTrigger = models.CosFileUploadTrigger;
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
+const SpecificationDataItem = models.SpecificationDataItem;
 const TEHDConfigForUpdate = models.TEHDConfigForUpdate;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
@@ -559,6 +563,7 @@ const AsrHotwordsSet = models.AsrHotwordsSet;
 const AiAnalysisTaskHeadTailInput = models.AiAnalysisTaskHeadTailInput;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const DescribeSmartSubtitleTemplatesResponse = models.DescribeSmartSubtitleTemplatesResponse;
+const DescribeUsageDataRequest = models.DescribeUsageDataRequest;
 const SchedulesInfo = models.SchedulesInfo;
 const DisableWorkflowRequest = models.DisableWorkflowRequest;
 const FrameRateWithDenConfig = models.FrameRateWithDenConfig;
@@ -839,20 +844,19 @@ Instead of initiating a video processing task, this API is used to help generate
     }
 
     /**
-     * This API is used to initiate a processing task for URL video links or media files in COS. Features include:.
-This API is used to perform video transcoding, including standard transcoding, TSC transcoding, and audio/video enhancement.
-This API is used to generate animated images.
-This API is used to take screenshots at specified time points.
-This API is used to take sampled screenshots from videos.
-This API is used to take sprite screenshots of videos.
-This API is used to transcode to adaptive bitrate streaming.
-This API is used to perform intelligent content moderation, such as pornography detection and sensitive information detection.
-This API is used to perform intelligent content analysis such as tag, category, cover, frame tag, video splitting, highlight, opening and ending clips, and game tracking.
-This API is used to perform intelligent content recognition such as human face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition.
-This API is used to perform media quality inspection, such as media format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, screen glitch, noise, mosaic, QR code, and other issues), and no-reference scoring.
-11. Smart subtitle (such as ASR, hotword, and speech translation).
-
-This API is used to perform intelligent erasure (watermark removal, subtitle removal, privacy protection).
+     * This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
+- Audio/Video transcoding (such as standard transcoding, top speed codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
+- Adaptive bitrate streaming conversion for audios/videos.
+- Video-to-GIF conversion.
+- Time point screenshot of videos.
+- Sampled screenshot of videos.
+- Image sprite of video screenshots.
+- Media quality inspection (such as media format diagnosis, audio/video content detection, and scoring without reference, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
+- Smart subtitle (such as subtitle generation and translation).
+- Smart erasing (such as watermark removal, subtitle removal, and privacy protection).
+- Smart content moderation (such as pornography detection and sensitive information detection).
+- Smart content analysis (such as tags, classifications, covers, frame tags, video splitting, highlights, opening and ending clips, and marking points for games).
+- Smart content recognition (such as human faces, full texts, text keywords, full speech, speech keywords, speech translation, and object recognition).
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public
@@ -1280,7 +1284,7 @@ Note: templates with an ID below 10000 are preset and cannot be deleted.
     }
 
     /**
-     * This API is used to create a user-defined digital watermark template with an upper limit of 1000.
+     * This API is used to create a user-defined digital watermark template.
      * @param {CreateBlindWatermarkTemplateRequest} req
      * @param {function(string, CreateBlindWatermarkTemplateResponse):void} cb
      * @public
@@ -1580,6 +1584,19 @@ This API is used to create an orchestration, which is in disable status by defau
     CreateSchedule(req, cb) {
         let resp = new CreateScheduleResponse();
         this.request("CreateSchedule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return the daily Media Processing Service (MPS) usage information within the specified query time range.
+   1. MPS statistical data from the last 365 days can be queried.
+   2. The query time span should not exceed 90 days.
+     * @param {DescribeUsageDataRequest} req
+     * @param {function(string, DescribeUsageDataResponse):void} cb
+     * @public
+     */
+    DescribeUsageData(req, cb) {
+        let resp = new DescribeUsageDataResponse();
+        this.request("DescribeUsageData", req, resp, cb);
     }
 
     /**

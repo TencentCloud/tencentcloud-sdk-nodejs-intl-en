@@ -20,7 +20,7 @@ const DeleteStreamLiveChannelResponse = models.DeleteStreamLiveChannelResponse;
 const VideoEnhanceSetting = models.VideoEnhanceSetting;
 const AudioTrackInfo = models.AudioTrackInfo;
 const CreateStreamLiveInputSecurityGroupResponse = models.CreateStreamLiveInputSecurityGroupResponse;
-const InputLossBehaviorInfo = models.InputLossBehaviorInfo;
+const CreateWatermarkDetectionRequest = models.CreateWatermarkDetectionRequest;
 const StreamInfo = models.StreamInfo;
 const StreamVideoInfo = models.StreamVideoInfo;
 const CreateStreamLivePlanRequest = models.CreateStreamLivePlanRequest;
@@ -44,15 +44,17 @@ const InputInfo = models.InputInfo;
 const InputAnalysisInfo = models.InputAnalysisInfo;
 const AVTemplate = models.AVTemplate;
 const DestinationInfo = models.DestinationInfo;
+const Tag = models.Tag;
 const DeleteStreamLiveInputRequest = models.DeleteStreamLiveInputRequest;
 const ModifyStreamLiveInputSecurityGroupResponse = models.ModifyStreamLiveInputSecurityGroupResponse;
 const AmazonS3Settings = models.AmazonS3Settings;
 const ModifyStreamLiveInputRequest = models.ModifyStreamLiveInputRequest;
 const DescribeStreamLiveChannelResponse = models.DescribeStreamLiveChannelResponse;
-const DescribeStreamLiveRegionsRequest = models.DescribeStreamLiveRegionsRequest;
+const DescribeWatermarkDetectionResponse = models.DescribeWatermarkDetectionResponse;
 const DescribeStreamLiveChannelAlertsRequest = models.DescribeStreamLiveChannelAlertsRequest;
 const AudioSelectorInfo = models.AudioSelectorInfo;
 const LogInfo = models.LogInfo;
+const TimeShiftSettingsInfo = models.TimeShiftSettingsInfo;
 const WebVTTFontStyle = models.WebVTTFontStyle;
 const DescribeStreamLiveWatermarkRequest = models.DescribeStreamLiveWatermarkRequest;
 const CaptionSelector = models.CaptionSelector;
@@ -61,6 +63,7 @@ const PipelineOutputStatistics = models.PipelineOutputStatistics;
 const DeleteStreamLivePlanResponse = models.DeleteStreamLivePlanResponse;
 const CreateTextSettings = models.CreateTextSettings;
 const DashRemuxSettingsInfo = models.DashRemuxSettingsInfo;
+const UrlInputInfo = models.UrlInputInfo;
 const CreateStreamLiveWatermarkRequest = models.CreateStreamLiveWatermarkRequest;
 const ColorSpaceSetting = models.ColorSpaceSetting;
 const StaticImageSettings = models.StaticImageSettings;
@@ -69,10 +72,11 @@ const DeleteStreamLiveInputSecurityGroupRequest = models.DeleteStreamLiveInputSe
 const AttachedInput = models.AttachedInput;
 const QueryInputStreamStateResponse = models.QueryInputStreamStateResponse;
 const DescribeStreamLiveWatermarksRequest = models.DescribeStreamLiveWatermarksRequest;
+const DescribeWatermarkDetectionsRequest = models.DescribeWatermarkDetectionsRequest;
 const TimedMetadataInfo = models.TimedMetadataInfo;
-const Tag = models.Tag;
+const DescribeStreamLiveRegionsRequest = models.DescribeStreamLiveRegionsRequest;
 const DescribeTranscodeDetailInfo = models.DescribeTranscodeDetailInfo;
-const TimeShiftSettingsInfo = models.TimeShiftSettingsInfo;
+const AbWatermarkInputInfo = models.AbWatermarkInputInfo;
 const DeliveryRestrictionsInfo = models.DeliveryRestrictionsInfo;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const TimingSettingsReq = models.TimingSettingsReq;
@@ -95,11 +99,14 @@ const AudioTemplateInfo = models.AudioTemplateInfo;
 const InputTracks = models.InputTracks;
 const StreamPackageSettingsInfo = models.StreamPackageSettingsInfo;
 const DescribeStreamLiveChannelsResponse = models.DescribeStreamLiveChannelsResponse;
+const CreateWatermarkDetectionResponse = models.CreateWatermarkDetectionResponse;
+const LogMessageInfo = models.LogMessageInfo;
 const QueryInputStreamStateRequest = models.QueryInputStreamStateRequest;
 const PlanReq = models.PlanReq;
 const DeleteStreamLiveWatermarkRequest = models.DeleteStreamLiveWatermarkRequest;
 const CreateStreamLiveChannelRequest = models.CreateStreamLiveChannelRequest;
 const MotionGraphicsSetting = models.MotionGraphicsSetting;
+const AbWatermarkDetectionInfo = models.AbWatermarkDetectionInfo;
 const CosSettings = models.CosSettings;
 const StreamLiveRegionInfo = models.StreamLiveRegionInfo;
 const DescribeStreamLiveChannelRequest = models.DescribeStreamLiveChannelRequest;
@@ -110,7 +117,7 @@ const DescribeStreamLiveTranscodeDetailResponse = models.DescribeStreamLiveTrans
 const CreateStreamLiveWatermarkResponse = models.CreateStreamLiveWatermarkResponse;
 const DescribeStreamLiveInputsResponse = models.DescribeStreamLiveInputsResponse;
 const ModifyStreamLiveInputResponse = models.ModifyStreamLiveInputResponse;
-const DescribeStreamLiveChannelAlertsResponse = models.DescribeStreamLiveChannelAlertsResponse;
+const DescribeWatermarkDetectionsResponse = models.DescribeWatermarkDetectionsResponse;
 const ThumbnailSettings = models.ThumbnailSettings;
 const PlanResp = models.PlanResp;
 const AudioNormalizationSettings = models.AudioNormalizationSettings;
@@ -124,11 +131,11 @@ const DescribeWatermarkInfo = models.DescribeWatermarkInfo;
 const EventSettingsDestinationReq = models.EventSettingsDestinationReq;
 const VideoPipelineInputStatistics = models.VideoPipelineInputStatistics;
 const EventSettingsReq = models.EventSettingsReq;
-const DrmKey = models.DrmKey;
+const CreateStreamLiveInputResponse = models.CreateStreamLiveInputResponse;
 const EventSettingsDestinationResp = models.EventSettingsDestinationResp;
 const OutputInfo = models.OutputInfo;
+const DescribeStreamLiveChannelAlertsResponse = models.DescribeStreamLiveChannelAlertsResponse;
 const StaticImageDeactivateSetting = models.StaticImageDeactivateSetting;
-const DescribeStreamLiveInputSecurityGroupRequest = models.DescribeStreamLiveInputSecurityGroupRequest;
 const VideoCodecDetail = models.VideoCodecDetail;
 const CreateStreamLiveChannelResponse = models.CreateStreamLiveChannelResponse;
 const DescribeStreamLiveChannelInputStatisticsResponse = models.DescribeStreamLiveChannelInputStatisticsResponse;
@@ -151,6 +158,7 @@ const TimingSettingsResp = models.TimingSettingsResp;
 const DescribeStreamLiveWatermarkResponse = models.DescribeStreamLiveWatermarkResponse;
 const StreamScte35Info = models.StreamScte35Info;
 const StreamAudioInfo = models.StreamAudioInfo;
+const DrmKey = models.DrmKey;
 const OutputsStatistics = models.OutputsStatistics;
 const InputSecurityGroupInfo = models.InputSecurityGroupInfo;
 const RegionInfo = models.RegionInfo;
@@ -160,23 +168,26 @@ const PipelineInputStatistics = models.PipelineInputStatistics;
 const ModifyStreamLiveChannelResponse = models.ModifyStreamLiveChannelResponse;
 const DeleteStreamLiveInputSecurityGroupResponse = models.DeleteStreamLiveInputSecurityGroupResponse;
 const StopStreamLiveChannelRequest = models.StopStreamLiveChannelRequest;
+const DescribeWatermarkDetectionRequest = models.DescribeWatermarkDetectionRequest;
 const DescribeStreamLiveInputResponse = models.DescribeStreamLiveInputResponse;
 const InputStatistics = models.InputStatistics;
-const LogMessageInfo = models.LogMessageInfo;
+const InputLossBehaviorInfo = models.InputLossBehaviorInfo;
 const DescribeStreamLiveInputsRequest = models.DescribeStreamLiveInputsRequest;
 const Scte35SettingsInfo = models.Scte35SettingsInfo;
 const ModifyStreamLiveWatermarkResponse = models.ModifyStreamLiveWatermarkResponse;
 const ModifyStreamLiveChannelRequest = models.ModifyStreamLiveChannelRequest;
 const DescribeTextSettings = models.DescribeTextSettings;
+const InputFileInfo = models.InputFileInfo;
 const DescribeStreamLiveInputSecurityGroupsRequest = models.DescribeStreamLiveInputSecurityGroupsRequest;
 const DeleteStreamLiveWatermarkResponse = models.DeleteStreamLiveWatermarkResponse;
-const CreateStreamLiveInputResponse = models.CreateStreamLiveInputResponse;
+const DescribeStreamLiveInputSecurityGroupRequest = models.DescribeStreamLiveInputSecurityGroupRequest;
 const DescribeStreamLiveInputSecurityGroupResponse = models.DescribeStreamLiveInputSecurityGroupResponse;
 const StreamLiveChannelInfo = models.StreamLiveChannelInfo;
 const SegmentationDescriptorInfo = models.SegmentationDescriptorInfo;
 const InputSettingInfo = models.InputSettingInfo;
 const DescribeImageSettings = models.DescribeImageSettings;
 const DeleteStreamLiveChannelRequest = models.DeleteStreamLiveChannelRequest;
+const TaskNotifyConfig = models.TaskNotifyConfig;
 
 
 /**
@@ -198,6 +209,17 @@ class MdlClient extends AbstractClient {
     DescribeStreamLiveChannelAlerts(req, cb) {
         let resp = new DescribeStreamLiveChannelAlertsResponse();
         this.request("DescribeStreamLiveChannelAlerts", req, resp, cb);
+    }
+
+    /**
+     * Describe watermark detection task
+     * @param {DescribeWatermarkDetectionRequest} req
+     * @param {function(string, DescribeWatermarkDetectionResponse):void} cb
+     * @public
+     */
+    DescribeWatermarkDetection(req, cb) {
+        let resp = new DescribeWatermarkDetectionResponse();
+        this.request("DescribeWatermarkDetection", req, resp, cb);
     }
 
     /**
@@ -242,6 +264,17 @@ class MdlClient extends AbstractClient {
     DescribeStreamLiveInputSecurityGroups(req, cb) {
         let resp = new DescribeStreamLiveInputSecurityGroupsResponse();
         this.request("DescribeStreamLiveInputSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a watermark.
+     * @param {ModifyStreamLiveWatermarkRequest} req
+     * @param {function(string, ModifyStreamLiveWatermarkResponse):void} cb
+     * @public
+     */
+    ModifyStreamLiveWatermark(req, cb) {
+        let resp = new ModifyStreamLiveWatermarkResponse();
+        this.request("ModifyStreamLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -366,14 +399,25 @@ class MdlClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a watermark.
-     * @param {ModifyStreamLiveWatermarkRequest} req
-     * @param {function(string, ModifyStreamLiveWatermarkResponse):void} cb
+     * Batch Describe watermark detection task
+     * @param {DescribeWatermarkDetectionsRequest} req
+     * @param {function(string, DescribeWatermarkDetectionsResponse):void} cb
      * @public
      */
-    ModifyStreamLiveWatermark(req, cb) {
-        let resp = new ModifyStreamLiveWatermarkResponse();
-        this.request("ModifyStreamLiveWatermark", req, resp, cb);
+    DescribeWatermarkDetections(req, cb) {
+        let resp = new DescribeWatermarkDetectionsResponse();
+        this.request("DescribeWatermarkDetections", req, resp, cb);
+    }
+
+    /**
+     * Create a watermark detection task
+     * @param {CreateWatermarkDetectionRequest} req
+     * @param {function(string, CreateWatermarkDetectionResponse):void} cb
+     * @public
+     */
+    CreateWatermarkDetection(req, cb) {
+        let resp = new CreateWatermarkDetectionResponse();
+        this.request("CreateWatermarkDetection", req, resp, cb);
     }
 
     /**

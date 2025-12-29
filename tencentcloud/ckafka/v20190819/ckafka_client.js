@@ -85,6 +85,7 @@ const DescribeGroupResponse = models.DescribeGroupResponse;
 const DeleteAclRuleRequest = models.DeleteAclRuleRequest;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const DescribeModifyTypeRequest = models.DescribeModifyTypeRequest;
 const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
@@ -112,8 +113,10 @@ const CreateAclResponse = models.CreateAclResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
+const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const DeleteInstancePreResponse = models.DeleteInstancePreResponse;
+const DeleteGroupSubscribeTopicRequest = models.DeleteGroupSubscribeTopicRequest;
 const DatahubTopicResp = models.DatahubTopicResp;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const InquiryPublicNetworkParam = models.InquiryPublicNetworkParam;
@@ -135,6 +138,7 @@ const Group = models.Group;
 const GroupInfoResponse = models.GroupInfoResponse;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const AclResponse = models.AclResponse;
+const DescribeModifyTypeResponse = models.DescribeModifyTypeResponse;
 const ZoneResponse = models.ZoneResponse;
 const ModifyRoutineMaintenanceTaskRequest = models.ModifyRoutineMaintenanceTaskRequest;
 const Instance = models.Instance;
@@ -158,7 +162,7 @@ const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
 const UpgradeBrokerVersionResponse = models.UpgradeBrokerVersionResponse;
 const CreateInstancePostData = models.CreateInstancePostData;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
-const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
+const DescModifyType = models.DescModifyType;
 const GroupOffsetPartition = models.GroupOffsetPartition;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
@@ -178,6 +182,7 @@ const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const Region = models.Region;
 const InstanceScalingDownResponse = models.InstanceScalingDownResponse;
 const CreateConsumerRequest = models.CreateConsumerRequest;
+const DeleteGroupSubscribeTopicResponse = models.DeleteGroupSubscribeTopicResponse;
 const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const CreateDatahubTopicResponse = models.CreateDatahubTopicResponse;
 const CreatePostPaidInstanceResponse = models.CreatePostPaidInstanceResponse;
@@ -189,6 +194,7 @@ const SendMessageResponse = models.SendMessageResponse;
 const InquiryBasePrice = models.InquiryBasePrice;
 const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
+const Price = models.Price;
 const ListCvmAndIpInfoRsp = models.ListCvmAndIpInfoRsp;
 const CreateRouteResponse = models.CreateRouteResponse;
 const InstanceResponse = models.InstanceResponse;
@@ -233,8 +239,9 @@ const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
 const AclRuleResp = models.AclRuleResp;
+const InstanceVersion = models.InstanceVersion;
 const SecurityGroupRouteResp = models.SecurityGroupRouteResp;
-const Price = models.Price;
+const LatestBrokerVersion = models.LatestBrokerVersion;
 const DescribeCkafkaVersionRequest = models.DescribeCkafkaVersionRequest;
 
 
@@ -480,6 +487,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete topics subscribed by a consumption group. The consumption group status must be Empty.
+     * @param {DeleteGroupSubscribeTopicRequest} req
+     * @param {function(string, DeleteGroupSubscribeTopicResponse):void} cb
+     * @public
+     */
+    DeleteGroupSubscribeTopic(req, cb) {
+        let resp = new DeleteGroupSubscribeTopicResponse();
+        this.request("DeleteGroupSubscribeTopic", req, resp, cb);
+    }
+
+    /**
      * Delete consumer groups.
      * @param {DeleteGroupRequest} req
      * @param {function(string, DeleteGroupResponse):void} cb
@@ -653,6 +671,17 @@ class CkafkaClient extends AbstractClient {
     CreatePartition(req, cb) {
         let resp = new CreatePartitionResponse();
         this.request("CreatePartition", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance specification change types.
+     * @param {DescribeModifyTypeRequest} req
+     * @param {function(string, DescribeModifyTypeResponse):void} cb
+     * @public
+     */
+    DescribeModifyType(req, cb) {
+        let resp = new DescribeModifyTypeResponse();
+        this.request("DescribeModifyType", req, resp, cb);
     }
 
     /**

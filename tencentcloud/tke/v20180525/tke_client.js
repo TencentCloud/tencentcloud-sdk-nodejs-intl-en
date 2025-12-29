@@ -69,6 +69,7 @@ const ModifyClusterTagsResponse = models.ModifyClusterTagsResponse;
 const DescribeEdgeAvailableExtraArgsResponse = models.DescribeEdgeAvailableExtraArgsResponse;
 const DescribeEnableVpcCniProgressRequest = models.DescribeEnableVpcCniProgressRequest;
 const Instance = models.Instance;
+const DisableControlPlaneLogsRequest = models.DisableControlPlaneLogsRequest;
 const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const CreateEksLogConfigRequest = models.CreateEksLogConfigRequest;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
@@ -154,6 +155,7 @@ const GetClusterLevelPriceResponse = models.GetClusterLevelPriceResponse;
 const DescribeResourceUsageResponse = models.DescribeResourceUsageResponse;
 const EdgeClusterInternalLB = models.EdgeClusterInternalLB;
 const DescribeAvailableClusterVersionRequest = models.DescribeAvailableClusterVersionRequest;
+const DisableControlPlaneLogsResponse = models.DisableControlPlaneLogsResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const ModifyClusterRuntimeConfigRequest = models.ModifyClusterRuntimeConfigRequest;
 const RegionInstance = models.RegionInstance;
@@ -182,11 +184,12 @@ const SetNodePoolNodeProtectionRequest = models.SetNodePoolNodeProtectionRequest
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DescribeClusterEndpointsResponse = models.DescribeClusterEndpointsResponse;
 const EdgeCluster = models.EdgeCluster;
-const UninstallEdgeLogAgentRequest = models.UninstallEdgeLogAgentRequest;
+const DescribeEncryptionStatusResponse = models.DescribeEncryptionStatusResponse;
 const DescribeClusterLevelChangeRecordsRequest = models.DescribeClusterLevelChangeRecordsRequest;
 const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
 const InstanceUpgradePreCheckResultItem = models.InstanceUpgradePreCheckResultItem;
 const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
+const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
 const Filter = models.Filter;
 const KMSConfiguration = models.KMSConfiguration;
@@ -213,6 +216,7 @@ const CreateClusterVirtualNodePoolRequest = models.CreateClusterVirtualNodePoolR
 const AutoScalingGroupRange = models.AutoScalingGroupRange;
 const VirtualNodeSpec = models.VirtualNodeSpec;
 const CreateEksLogConfigResponse = models.CreateEksLogConfigResponse;
+const DescribeControlPlaneLogsRequest = models.DescribeControlPlaneLogsRequest;
 const DescribeReservedInstanceUtilizationRateRequest = models.DescribeReservedInstanceUtilizationRateRequest;
 const VersionInstance = models.VersionInstance;
 const DescribeIPAMDResponse = models.DescribeIPAMDResponse;
@@ -232,13 +236,14 @@ const CreatePrometheusAlertRuleResponse = models.CreatePrometheusAlertRuleRespon
 const ECMEnhancedService = models.ECMEnhancedService;
 const ModifyClusterAuthenticationOptionsResponse = models.ModifyClusterAuthenticationOptionsResponse;
 const EdgeClusterPublicLB = models.EdgeClusterPublicLB;
-const OptionalRuntimes = models.OptionalRuntimes;
+const EnableEncryptionProtectionRequest = models.EnableEncryptionProtectionRequest;
 const EnhancedService = models.EnhancedService;
 const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
 const TagSpecification = models.TagSpecification;
 const DeleteEdgeClusterInstancesResponse = models.DeleteEdgeClusterInstancesResponse;
 const DeleteTKEEdgeClusterRequest = models.DeleteTKEEdgeClusterRequest;
 const DescribeClusterAuthenticationOptionsResponse = models.DescribeClusterAuthenticationOptionsResponse;
+const ComponentLogConfig = models.ComponentLogConfig;
 const OIDCConfigAuthenticationOptions = models.OIDCConfigAuthenticationOptions;
 const DescribeClusterLevelAttributeResponse = models.DescribeClusterLevelAttributeResponse;
 const PrometheusGrafanaInfo = models.PrometheusGrafanaInfo;
@@ -278,6 +283,7 @@ const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse
 const CreatePrometheusAlertRuleRequest = models.CreatePrometheusAlertRuleRequest;
 const CreateTKEEdgeClusterRequest = models.CreateTKEEdgeClusterRequest;
 const DescribeSupportedRuntimeResponse = models.DescribeSupportedRuntimeResponse;
+const DescribePodChargeInfoResponse = models.DescribePodChargeInfoResponse;
 const CreateClusterVirtualNodePoolResponse = models.CreateClusterVirtualNodePoolResponse;
 const CreateEdgeLogConfigResponse = models.CreateEdgeLogConfigResponse;
 const InstallEdgeLogAgentResponse = models.InstallEdgeLogAgentResponse;
@@ -296,10 +302,10 @@ const DrainClusterVirtualNodeResponse = models.DrainClusterVirtualNodeResponse;
 const DescribeVpcCniPodLimitsResponse = models.DescribeVpcCniPodLimitsResponse;
 const DescribeVersionsResponse = models.DescribeVersionsResponse;
 const DeleteEdgeClusterInstancesRequest = models.DeleteEdgeClusterInstancesRequest;
-const EnableEncryptionProtectionRequest = models.EnableEncryptionProtectionRequest;
+const OptionalRuntimes = models.OptionalRuntimes;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DescribeImagesResponse = models.DescribeImagesResponse;
-const DescribeEncryptionStatusResponse = models.DescribeEncryptionStatusResponse;
+const UninstallEdgeLogAgentRequest = models.UninstallEdgeLogAgentRequest;
 const ClusterExtraArgs = models.ClusterExtraArgs;
 const AnnotationValue = models.AnnotationValue;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
@@ -321,9 +327,10 @@ const CreateECMInstancesResponse = models.CreateECMInstancesResponse;
 const FailedResource = models.FailedResource;
 const UnavailableReason = models.UnavailableReason;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
+const DescribeControlPlaneLogsResponse = models.DescribeControlPlaneLogsResponse;
 const DescribeEdgeCVMInstancesResponse = models.DescribeEdgeCVMInstancesResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
-const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
+const EnableControlPlaneLogsRequest = models.EnableControlPlaneLogsRequest;
 const DeleteECMInstancesResponse = models.DeleteECMInstancesResponse;
 const DescribeEdgeClusterUpgradeInfoResponse = models.DescribeEdgeClusterUpgradeInfoResponse;
 const ModifyClusterNodePoolResponse = models.ModifyClusterNodePoolResponse;
@@ -362,7 +369,7 @@ const ModifyClusterRuntimeConfigResponse = models.ModifyClusterRuntimeConfigResp
 const DescribeTKEEdgeScriptRequest = models.DescribeTKEEdgeScriptRequest;
 const AddVpcCniSubnetsResponse = models.AddVpcCniSubnetsResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
-const DescribePodChargeInfoResponse = models.DescribePodChargeInfoResponse;
+const EnableControlPlaneLogsResponse = models.EnableControlPlaneLogsResponse;
 const DescribeClusterVirtualNodeResponse = models.DescribeClusterVirtualNodeResponse;
 const DescribeAvailableClusterVersionResponse = models.DescribeAvailableClusterVersionResponse;
 const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
@@ -934,6 +941,17 @@ class TkeClient extends AbstractClient {
     AddVpcCniSubnets(req, cb) {
         let resp = new AddVpcCniSubnetsResponse();
         this.request("AddVpcCniSubnets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the log collection configuration of a plugin.
+     * @param {DisableControlPlaneLogsRequest} req
+     * @param {function(string, DisableControlPlaneLogsResponse):void} cb
+     * @public
+     */
+    DisableControlPlaneLogs(req, cb) {
+        let resp = new DisableControlPlaneLogsResponse();
+        this.request("DisableControlPlaneLogs", req, resp, cb);
     }
 
     /**
@@ -1531,6 +1549,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create log collection settings for plugins.
+     * @param {EnableControlPlaneLogsRequest} req
+     * @param {function(string, EnableControlPlaneLogsResponse):void} cb
+     * @public
+     */
+    EnableControlPlaneLogs(req, cb) {
+        let resp = new EnableControlPlaneLogsResponse();
+        this.request("EnableControlPlaneLogs", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the model of instances in a node pool.
      * @param {ModifyNodePoolInstanceTypesRequest} req
      * @param {function(string, ModifyNodePoolInstanceTypesResponse):void} cb
@@ -1550,6 +1579,17 @@ class TkeClient extends AbstractClient {
     CheckInstancesUpgradeAble(req, cb) {
         let resp = new CheckInstancesUpgradeAbleResponse();
         this.request("CheckInstancesUpgradeAble", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query plug-in log collection settings.
+     * @param {DescribeControlPlaneLogsRequest} req
+     * @param {function(string, DescribeControlPlaneLogsResponse):void} cb
+     * @public
+     */
+    DescribeControlPlaneLogs(req, cb) {
+        let resp = new DescribeControlPlaneLogsResponse();
+        this.request("DescribeControlPlaneLogs", req, resp, cb);
     }
 
     /**

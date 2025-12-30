@@ -78,6 +78,7 @@ const ModifySmartEraseTemplateResponse = models.ModifySmartEraseTemplateResponse
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const VideoEnhanceConfig = models.VideoEnhanceConfig;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
+const SubtitleResult = models.SubtitleResult;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const ModifyScheduleRequest = models.ModifyScheduleRequest;
@@ -92,6 +93,7 @@ const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSeg
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const SmartEraseTaskResult = models.SmartEraseTaskResult;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
+const SmartSubtitleTaskTextResultOutput = models.SmartSubtitleTaskTextResultOutput;
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const DescribeBatchTaskDetailResponse = models.DescribeBatchTaskDetailResponse;
@@ -428,6 +430,7 @@ const DescribeQualityControlTemplatesResponse = models.DescribeQualityControlTem
 const PoliticalImgReviewTemplateInfoForUpdate = models.PoliticalImgReviewTemplateInfoForUpdate;
 const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
+const SmartSubtitleTaskFullTextResult = models.SmartSubtitleTaskFullTextResult;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const SmartSubtitleTemplateItem = models.SmartSubtitleTemplateItem;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
@@ -514,6 +517,7 @@ const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput
 const VolumeBalanceConfig = models.VolumeBalanceConfig;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
+const SelectingSubtitleAreasConfig = models.SelectingSubtitleAreasConfig;
 const AiRecognitionTaskTransTextResultOutput = models.AiRecognitionTaskTransTextResultOutput;
 const SmartSubtitlesResult = models.SmartSubtitlesResult;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
@@ -551,6 +555,7 @@ const CreateSmartSubtitleTemplateRequest = models.CreateSmartSubtitleTemplateReq
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const QualityControlData = models.QualityControlData;
 const DrmInfo = models.DrmInfo;
+const TextTranslationRequest = models.TextTranslationRequest;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
 const DescribeProcessImageTemplatesRequest = models.DescribeProcessImageTemplatesRequest;
 const ComposeImageItem = models.ComposeImageItem;
@@ -608,6 +613,7 @@ const DescribeStreamLinkSecurityGroupRequest = models.DescribeStreamLinkSecurity
 const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
 const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
 const UpdateSmartErasePrivacyConfig = models.UpdateSmartErasePrivacyConfig;
+const TextTranslationResponse = models.TextTranslationResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const ModifySmartSubtitleTemplateRequest = models.ModifySmartSubtitleTemplateRequest;
 const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
@@ -1770,6 +1776,17 @@ HTTP callbacks are supported for live stream processing events. Notifications ca
     DescribeImageTaskDetail(req, cb) {
         let resp = new DescribeImageTaskDetailResponse();
         this.request("DescribeImageTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to translate text.
+     * @param {TextTranslationRequest} req
+     * @param {function(string, TextTranslationResponse):void} cb
+     * @public
+     */
+    TextTranslation(req, cb) {
+        let resp = new TextTranslationResponse();
+        this.request("TextTranslation", req, resp, cb);
     }
 
     /**

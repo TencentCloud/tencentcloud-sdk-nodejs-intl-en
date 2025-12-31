@@ -45,7 +45,7 @@ class DeleteStreamLiveChannelResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * VideoEnhanceSetting
  * @class
  */
 class VideoEnhanceSetting extends  AbstractModel {
@@ -53,13 +53,13 @@ class VideoEnhanceSetting extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Video enhancement types, optional: "GameEnhance", "ColorEnhance", "Debur", "Comprehensive", "Denoising", "SR", "OutdoorSportsCompetitions", "IndoorSportsCompetitions", "ShowEnhance"
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Video enhancement intensity, 0-1.0, granularity 0.1
          * @type {number || null}
          */
         this.Strength = null;
@@ -1490,13 +1490,13 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.AudioTracks = null;
 
         /**
-         * 
+         * Do you want to enable video enhancement? 1: Enable 0: Do not enable.
          * @type {number || null}
          */
         this.VideoEnhanceEnabled = null;
 
         /**
-         * 
+         * Video enhancement configuration array.
          * @type {Array.<VideoEnhanceSetting> || null}
          */
         this.VideoEnhanceSettings = null;
@@ -1518,6 +1518,12 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
          * @type {ColorSpaceSetting || null}
          */
         this.ColorSpaceSettings = null;
+
+        /**
+         * Traceability watermark.
+         * @type {Array.<string> || null}
+         */
+        this.ForensicWatermarkIds = null;
 
     }
 
@@ -1604,6 +1610,7 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
             obj.deserialize(params.ColorSpaceSettings)
             this.ColorSpaceSettings = obj;
         }
+        this.ForensicWatermarkIds = 'ForensicWatermarkIds' in params ? params.ForensicWatermarkIds : null;
 
     }
 }
@@ -2617,7 +2624,7 @@ class UrlInputInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Video URL, starting with http/https, supports up to 512 characters, currently only supports complete single file videos, does not support streaming formats based on playlists and segments (such as HLS or DASH)
          * @type {string || null}
          */
         this.Url = null;
@@ -3397,13 +3404,13 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.VideoCodecDetails = null;
 
         /**
-         * 
+         * Video enhancement switch, 1: on 0: off.
          * @type {number || null}
          */
         this.VideoEnhanceEnabled = null;
 
         /**
-         * 
+         * Video enhancement parameter array.
          * @type {Array.<VideoEnhanceSetting> || null}
          */
         this.VideoEnhanceSettings = null;
@@ -3413,6 +3420,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          * @type {ColorSpaceSetting || null}
          */
         this.ColorSpaceSettings = null;
+
+        /**
+         * Traceability watermark.
+         * @type {Array.<string> || null}
+         */
+        this.ForensicWatermarkIds = null;
 
     }
 
@@ -3467,6 +3480,7 @@ Note: This field may return `null`, indicating that no valid value was found.
             obj.deserialize(params.ColorSpaceSettings)
             this.ColorSpaceSettings = obj;
         }
+        this.ForensicWatermarkIds = 'ForensicWatermarkIds' in params ? params.ForensicWatermarkIds : null;
 
     }
 }
@@ -7374,7 +7388,7 @@ class StartStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * AB watermark configuration.
  * @class
  */
 class AbWatermarkSettingsReq extends  AbstractModel {
@@ -7382,7 +7396,7 @@ class AbWatermarkSettingsReq extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Optional values: A/B.
          * @type {string || null}
          */
         this.Type = null;
@@ -8648,13 +8662,13 @@ class DescribeTextSettings extends  AbstractModel {
         this.Location = null;
 
         /**
-         * The watermark image’s horizontal distance from the origin as a percentage of the video width
+         * The watermark image's horizontal distance from the origin as a percentage of the video width
          * @type {number || null}
          */
         this.XPos = null;
 
         /**
-         * The watermark image’s vertical distance from the origin as a percentage of the video height
+         * The watermark image's vertical distance from the origin as a percentage of the video height
          * @type {number || null}
          */
         this.YPos = null;
@@ -9373,13 +9387,13 @@ class TaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Notification type. Currently only supports URLs
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * Callback URL. Starting with http/https, supporting a maximum of 512 characters
          * @type {string || null}
          */
         this.NotifyUrl = null;

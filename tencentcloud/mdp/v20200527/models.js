@@ -448,13 +448,13 @@ class CdnDomainInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Total list size.
          * @type {number || null}
          */
         this.TotalSize = null;
 
         /**
-         * 
+         * List of associated domain name information.
          * @type {Array.<DomainRecordInfo> || null}
          */
         this.Records = null;
@@ -663,6 +663,18 @@ class ClipRangeInfo extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Start offset, Valid when the Type is SpecifyTimeRange.
+         * @type {number || null}
+         */
+        this.StartOffset = null;
+
+        /**
+         * End offset, valid when Type is SpecifyTimeRange.
+         * @type {number || null}
+         */
+        this.EndOffset = null;
+
     }
 
     /**
@@ -674,6 +686,8 @@ class ClipRangeInfo extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.StartOffset = 'StartOffset' in params ? params.StartOffset : null;
+        this.EndOffset = 'EndOffset' in params ? params.EndOffset : null;
 
     }
 }
@@ -1821,6 +1835,12 @@ class SSAIChannelInfo extends  AbstractModel {
          */
         this.Region = null;
 
+        /**
+         * Used for clickthrough addresses
+         * @type {string || null}
+         */
+        this.SessionInitPrefix = null;
+
     }
 
     /**
@@ -1841,6 +1861,7 @@ class SSAIChannelInfo extends  AbstractModel {
             this.SSAIInfo = obj;
         }
         this.Region = 'Region' in params ? params.Region : null;
+        this.SessionInitPrefix = 'SessionInitPrefix' in params ? params.SessionInitPrefix : null;
 
     }
 }
@@ -1992,25 +2013,25 @@ class DomainRecordInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Associated playback domain name.
          * @type {string || null}
          */
         this.CdnDomain = null;
 
         /**
-         * 
+         * Belonging region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * Channel ID.
          * @type {string || null}
          */
         this.ChannelId = null;
 
         /**
-         * 
+         * The ID of a record
          * @type {string || null}
          */
         this.Id = null;
@@ -3471,6 +3492,12 @@ class HarvestJobResp extends  AbstractModel {
          */
         this.Region = null;
 
+        /**
+         * Callback URL after recording is completed
+         * @type {string || null}
+         */
+        this.CallbackURL = null;
+
     }
 
     /**
@@ -3493,6 +3520,7 @@ class HarvestJobResp extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
         this.Region = 'Region' in params ? params.Region : null;
+        this.CallbackURL = 'CallbackURL' in params ? params.CallbackURL : null;
 
     }
 }
@@ -3694,6 +3722,12 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
          */
         this.DRMInfo = null;
 
+        /**
+         * The switch of absolute path.
+         * @type {boolean || null}
+         */
+        this.AbsolutePathEnable = null;
+
     }
 
     /**
@@ -3731,6 +3765,7 @@ The parameters can only contain digits, letters, underscores (_), and hyphens (-
             obj.deserialize(params.DRMInfo)
             this.DRMInfo = obj;
         }
+        this.AbsolutePathEnable = 'AbsolutePathEnable' in params ? params.AbsolutePathEnable : null;
 
     }
 }
@@ -5509,19 +5544,19 @@ class CosInputInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * COS bucket name
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * 
+         * Region
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * File object path
          * @type {string || null}
          */
         this.Object = null;
@@ -6607,13 +6642,14 @@ class SourceTag extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The key of the source tag supports capital letters, numbers, underscores, and dashes from 1 to 50 digits
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * 
+         * The value of the source tag supports letters, numbers, underscores, dashes, periods, and percent signs (%) ranging from 1 to 200 characters
+
          * @type {string || null}
          */
         this.Value = null;
@@ -7871,6 +7907,72 @@ class UsageDetail extends  AbstractModel {
          */
         this.PreReplaceRate = null;
 
+        /**
+         * Number of ad tags found in the list
+         * @type {number || null}
+         */
+        this.ADMarkerFound = null;
+
+        /**
+         * Request advertising frequency from ADS
+         * @type {number || null}
+         */
+        this.MakeAdsRequest = null;
+
+        /**
+         * Received VAST returns from ADS
+         * @type {number || null}
+         */
+        this.VASTResponse = null;
+
+        /**
+         * Successfully filled the ad count
+         * @type {number || null}
+         */
+        this.FilledAvail = null;
+
+        /**
+         * The number of issues encountered during ad replacement execution
+         * @type {number || null}
+         */
+        this.WarningNoAd = null;
+
+        /**
+         * The number of timeouts returned by ADS
+         * @type {number || null}
+         */
+        this.ErrorAdsTimeout = null;
+
+        /**
+         * The number of empty VAST responses returned by ADS
+         * @type {number || null}
+         */
+        this.EmptyVASTResponse = null;
+
+        /**
+         * The number of empty VMAP responses returned by ADS
+         * @type {number || null}
+         */
+        this.EmptyVMAPResponse = null;
+
+        /**
+         * Date
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -7898,6 +8000,17 @@ class UsageDetail extends  AbstractModel {
         this.PreReqNum = 'PreReqNum' in params ? params.PreReqNum : null;
         this.PreReplacedNum = 'PreReplacedNum' in params ? params.PreReplacedNum : null;
         this.PreReplaceRate = 'PreReplaceRate' in params ? params.PreReplaceRate : null;
+        this.ADMarkerFound = 'ADMarkerFound' in params ? params.ADMarkerFound : null;
+        this.MakeAdsRequest = 'MakeAdsRequest' in params ? params.MakeAdsRequest : null;
+        this.VASTResponse = 'VASTResponse' in params ? params.VASTResponse : null;
+        this.FilledAvail = 'FilledAvail' in params ? params.FilledAvail : null;
+        this.WarningNoAd = 'WarningNoAd' in params ? params.WarningNoAd : null;
+        this.ErrorAdsTimeout = 'ErrorAdsTimeout' in params ? params.ErrorAdsTimeout : null;
+        this.EmptyVASTResponse = 'EmptyVASTResponse' in params ? params.EmptyVASTResponse : null;
+        this.EmptyVMAPResponse = 'EmptyVMAPResponse' in params ? params.EmptyVMAPResponse : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }

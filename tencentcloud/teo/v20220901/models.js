@@ -22863,7 +22863,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.MetricNames = null;
 
         /**
-         * Site ID list. The parameter will change from optional to mandatory after May 30, 2024.Refer to [Cloud API Change Notification](https://www.tencentcloud.com/document/product/1145/59980). A maximum of 100 site IDs can be imported. Use `*` to query data for all sites under the Tencent Cloud root account. To query account-level data, you must have resource permissions for all sites in this API.
+         * Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -22879,7 +22879,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.Interval = null;
 
         /**
-         * Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.comom/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
+         * Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.com/document/product/1145/56985#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
 If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
          * @type {Array.<QueryCondition> || null}
          */

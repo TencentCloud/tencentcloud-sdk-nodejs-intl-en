@@ -26,7 +26,6 @@ class CreatePresetKeyResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {PresetResp || null}
          */
         this.Data = null;
@@ -211,6 +210,12 @@ class ModifyApplicationRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * Scheme
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
     }
 
     /**
@@ -228,6 +233,7 @@ class ModifyApplicationRequest extends  AbstractModel {
         this.AndroidAppKey = 'AndroidAppKey' in params ? params.AndroidAppKey : null;
         this.IosAppKey = 'IosAppKey' in params ? params.IosAppKey : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
 
     }
 }
@@ -321,21 +327,18 @@ class CreateApplicationSensitiveAPIReq extends  AbstractModel {
 
         /**
          * API name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.APIName = null;
 
         /**
          * API description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.APIDesc = null;
 
         /**
-         * API type. 1: System; 2: Custom
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API type. 1: system; 2: custom.
          * @type {number || null}
          */
         this.APIType = null;
@@ -443,7 +446,6 @@ class DescribeMNPPreviewResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeMNPPreviewResp || null}
          */
         this.Data = null;
@@ -484,14 +486,12 @@ class DescribeMNPListResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeMNPListData> || null}
          */
         this.DataList = null;
@@ -529,56 +529,48 @@ class DescribeMNPPreviewResp extends  AbstractModel {
 
         /**
          * Mini program ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
          * Mini program name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
          * Mini program description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Mini program version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mini program version.
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * Mini program introduction
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Describes the mini program version.
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
 
         /**
-         * Mini program QR code
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the mini program qr code.
          * @type {string || null}
          */
         this.QRCodeUrl = null;
 
         /**
-         * Path to the preview
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the path to the preview version.
          * @type {string || null}
          */
         this.PreviewEntrancePath = null;
 
         /**
-         * QR code content
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the qr code content.
          * @type {string || null}
          */
         this.QRCodeContent = null;
@@ -734,7 +726,6 @@ class DescribeMNPListResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeMNPListResp || null}
          */
         this.Data = null;
@@ -930,7 +921,6 @@ class ModifyUserResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -971,56 +961,48 @@ class DescribeTeamMemberInfoResp extends  AbstractModel {
 
         /**
          * User ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
          * User account
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
          * User name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
          * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Team role name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the team role name.
          * @type {string || null}
          */
         this.TeamRoleName = null;
 
         /**
-         * Team role ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the team role ID.
          * @type {number || null}
          */
         this.TeamRoleId = null;
 
         /**
-         * Editable or not
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether it is editable
          * @type {boolean || null}
          */
         this.CanEdit = null;
@@ -1155,57 +1137,49 @@ class DescribeMNPSensitiveAPIPermissionApprovalListData extends  AbstractModel {
         this.ApprovalStatus = null;
 
         /**
-         * Approver
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the review user.
          * @type {string || null}
          */
         this.ApprovalUser = null;
 
         /**
-         * Approval time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Approval time.
          * @type {string || null}
          */
         this.ApprovalTime = null;
 
         /**
          * Approval notes
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApprovalNote = null;
 
         /**
          * Application ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
          * Application name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Application icon
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the application icon.
          * @type {string || null}
          */
         this.ApplicationLogo = null;
 
         /**
-         * API type. 1: System; 2: Custom
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API type. 1: system; 2: custom.
          * @type {number || null}
          */
         this.APIType = null;
 
         /**
-         * API feature description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API feature description.
          * @type {string || null}
          */
         this.APIDesc = null;
@@ -1251,7 +1225,6 @@ class DeleteMNPResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1291,128 +1264,110 @@ class DescribeMPAllStageVersionsResp extends  AbstractModel {
         super();
 
         /**
-         * Mini program ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mini program ID.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program version ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the mini program version primary key id.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
          * Mini program name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
-         * Mini program icon
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the mini program avatar.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
          * Mini program type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
          * Mini program introduction
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
          * Mini program description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Developer
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the developer.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * The time when the developer created it
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Developer creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Mini program version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mini program version.
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * Version features
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Describes version features.
          * @type {string || null}
          */
         this.MNPVersionIntro = null;
 
         /**
-         * Phase. Values: [Develop,Platform,Online]
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Development Platform Online.
          * @type {string || null}
          */
         this.Phase = null;
 
         /**
-         * 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0 pending review; 1 under review; 2 review rejection; 3 pass review; 4 review cancellation.
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * Approval request number
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Approval ticket ID
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
-         * Whether it is a preview
-0: Not a preview; 1: Preview
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies whether it is a trial version.
+Specifies the version type. valid values: 0 (non-preview version); 1 (trial version).
          * @type {number || null}
          */
         this.ShowCase = null;
 
         /**
-         * Version number to roll back to
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Version number to roll back to.
          * @type {number || null}
          */
         this.RollbackVersion = null;
 
         /**
-         * Release status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Indicates the release status.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Version approval status. 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the current main status of the version. valid values: "0" (pending review), "1" (under review), "2" (review rejection), "3" (pass review), "4" (review cancellation).
          * @type {number || null}
          */
         this.VersionCurrentStatus = null;
@@ -1708,7 +1663,6 @@ class DeleteApplicationResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -1789,115 +1743,105 @@ class DescribeApplicationResp extends  AbstractModel {
 
         /**
          * Application ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Product ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Product ID.
          * @type {number || null}
          */
         this.AppIdentityId = null;
 
         /**
          * Application name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Application icon
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the application icon.
          * @type {string || null}
          */
         this.Logo = null;
 
         /**
          * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
          * Android package name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AndroidAppKey = null;
 
         /**
          * iOS bundleId
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IosAppKey = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Updater
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the updater.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Application description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Describes the application description.
          * @type {string || null}
          */
         this.Intro = null;
 
         /**
          * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Number of sensitive APIs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of sensitive apis.
          * @type {number || null}
          */
         this.SensitiveApiCount = null;
 
         /**
          * Application type. 1: Test; 2: Formal
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ApplicationType = null;
+
+        /**
+         * Specifies the application Scheme.
+         * @type {string || null}
+         */
+        this.Scheme = null;
 
     }
 
@@ -1924,6 +1868,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TeamName = 'TeamName' in params ? params.TeamName : null;
         this.SensitiveApiCount = 'SensitiveApiCount' in params ? params.SensitiveApiCount : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
 
     }
 }
@@ -1978,14 +1923,12 @@ class DescribeRoleListResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeRoleListData> || null}
          */
         this.DataList = null;
@@ -2377,35 +2320,30 @@ class QueryOnlineVersionResp extends  AbstractModel {
 
         /**
          * Mini program ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Version number
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
-         * Version ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Version ID.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
-         * Version note
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Version remarks.
          * @type {string || null}
          */
         this.MNPVersionNote = null;
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2438,21 +2376,18 @@ class DescribeApplicationListData extends  AbstractModel {
 
         /**
          * Application ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * App ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * App Id.
          * @type {number || null}
          */
         this.AppIdentityId = null;
 
         /**
          * Name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
@@ -2471,42 +2406,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Android app package name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AndroidAppKey = null;
 
         /**
          * iOS App bundleId
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IosAppKey = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Updater
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the updater.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2518,29 +2447,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Intro = null;
 
         /**
-         * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Team Id.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Number of sensitive APIs
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Number of sensitive apis.
          * @type {number || null}
          */
         this.SensitiveApiCount = null;
 
         /**
          * Application type. 1: Test; 2: Formal
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ApplicationType = null;
@@ -2710,71 +2635,61 @@ class DescribeMNPListData extends  AbstractModel {
         this.MNPType = null;
 
         /**
-         * Whether the mini program is released. 1: Released; 2: Removed
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the mini program listing status. valid values: 1 (submitted), 2 (removed).
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Mini program introduction
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Updater
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the updater.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
          * Application name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Effective status of the bound application. 1: Not effective; 2: Effective
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Effective status of the bound application. valid values: 1 (not effective), 2 (effective).
          * @type {number || null}
          */
         this.EffectStatus = null;
 
         /**
-         * ID of the application bound with the mini program
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the ID of the application bound with the mini program.
          * @type {number || null}
          */
         this.EffectMNPVersionId = null;
 
         /**
-         * Effective version number of the application that bound with the mini program
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the effective version number of the application bound to the mini program.
          * @type {string || null}
          */
         this.EffectMNPVersion = null;
@@ -3131,7 +3046,6 @@ class ModifyMNPDomainResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -3177,16 +3091,16 @@ class DescribeApplicationConfigFileRequest extends  AbstractModel {
         this.ApplicationId = null;
 
         /**
-         * Application platform. 2: Android; 3: iOS
-         * @type {number || null}
-         */
-        this.AppType = null;
-
-        /**
          * Platform ID
          * @type {string || null}
          */
         this.PlatformId = null;
+
+        /**
+         * Application platform. 2: Android; 3: iOS
+         * @type {number || null}
+         */
+        this.AppType = null;
 
     }
 
@@ -3198,8 +3112,8 @@ class DescribeApplicationConfigFileRequest extends  AbstractModel {
             return;
         }
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.AppType = 'AppType' in params ? params.AppType : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
+        this.AppType = 'AppType' in params ? params.AppType : null;
 
     }
 }
@@ -3277,7 +3191,6 @@ class DeleteUserResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -3357,8 +3270,7 @@ class CreateMNPVersionResp extends  AbstractModel {
         super();
 
         /**
-         * ID of the task to create a mini program version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the ID of the task to create a mini program version.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -3386,15 +3298,13 @@ class DescribeDomainInfoParam extends  AbstractModel {
         super();
 
         /**
-         * Multiple domain separators ';'
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Multiple domain separators ';'.
          * @type {string || null}
          */
         this.DomainUrl = null;
 
         /**
-         * Domain type 1-requests domain 2-WebView load domain
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Domain type 1-requests domain 2-business domain.
          * @type {number || null}
          */
         this.DomainType = null;
@@ -3463,134 +3373,115 @@ class DescribeMNPApprovalListData extends  AbstractModel {
         super();
 
         /**
-         * Approval request ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Approval ticket ID
          * @type {string || null}
          */
         this.ApprovalNo = null;
 
         /**
          * Application ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Approval status : 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Approval status. valid values: 1 (processing), 2 (rejected), 3 (approved), 4 (cancelled).
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
          * Mini program ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
-         * Mini program version
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mini program version.
          * @type {string || null}
          */
         this.MNPVersion = null;
 
         /**
          * Mini program version ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MNPVersionId = null;
 
         /**
          * Applicant
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplyUser = null;
 
         /**
          * Application time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplyTime = null;
 
         /**
          * Mini program name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
          * Mini program icon
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
          * Application name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * Application icon
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the application icon.
          * @type {string || null}
          */
         this.ApplicationLogo = null;
 
         /**
          * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Mini Program QR code
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mini program review qr code.
          * @type {string || null}
          */
         this.MNPQrCodeUrl = null;
 
         /**
          * Mini program type
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
-         * Approver
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the reviewer.
          * @type {string || null}
          */
         this.ApprovalUser = null;
 
         /**
-         * Approval time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Approval time.
          * @type {string || null}
          */
         this.ApprovalTime = null;
 
         /**
          * Approval notes
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApprovalNote = null;
@@ -3636,11 +3527,10 @@ class ResourceIdInfo extends  AbstractModel {
         super();
 
         /**
-         * Resource ID
-0: No preview
-1. A preview is currently available and uploaded by the current user.
-2. A preview is currently available and uploaded by another user.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the resource ID returned by the business.
+0: no trial version available.
+A trial version is currently available and uploaded by the current user.
+2: a trial version is currently available and uploaded by another user.
          * @type {number || null}
          */
         this.ResourceId = null;
@@ -3926,7 +3816,6 @@ class DescribeUserListResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeUserListResp || null}
          */
         this.Data = null;
@@ -4147,42 +4036,36 @@ class DescribeMNPSensitiveAPIPermissionListData extends  AbstractModel {
 
         /**
          * API ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * API name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API name.
          * @type {string || null}
          */
         this.APIName = null;
 
         /**
          * API request method
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.APIMethod = null;
 
         /**
-         * API status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API status.
          * @type {number || null}
          */
         this.APIStatus = null;
 
         /**
-         * API application status
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API application status.
          * @type {number || null}
          */
         this.APIApplyStatus = null;
 
         /**
-         * Reason for rejection
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reason for rejection.
          * @type {string || null}
          */
         this.RejectReason = null;
@@ -4195,35 +4078,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Application ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
-         * Application icon
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the application icon.
          * @type {string || null}
          */
         this.ApplicationIcon = null;
 
         /**
          * Application name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
-         * API type. 1: System; 2: Custom
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API type. 1: system; 2: custom.
          * @type {number || null}
          */
         this.APIType = null;
 
         /**
-         * API feature description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API feature description.
          * @type {string || null}
          */
         this.APIDesc = null;
@@ -4303,7 +4181,6 @@ class DescribeUserResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeUserDetailResp || null}
          */
         this.Data = null;
@@ -4383,8 +4260,7 @@ class GlobalDomainModifyRespResp extends  AbstractModel {
         super();
 
         /**
-         * 0: Success; 1: Allowed domains; 2: Blocked domains
-Note: This field may return null, indicating that no valid values can be obtained.
+         * 0: success; 1: allowed domains exist; 2: blocked domains exist.
          * @type {number || null}
          */
         this.Result = null;
@@ -4599,30 +4475,26 @@ class DescribeUserDetailResp extends  AbstractModel {
         super();
 
         /**
-         * User ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * User iD.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
          * User account
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
          * User account
-1 - Super admin 2 - Platform admin 3 - Member
-Note: This field may return null, indicating that no valid values can be obtained.
+1 - super admin 2 - platform admin 3 - ordinary member. not passing indicates all.
          * @type {number || null}
          */
         this.AccountType = null;
 
         /**
          * User name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserName = null;
@@ -4688,8 +4560,7 @@ class DescribeMNPSensitiveAPIPermissionListResponse extends  AbstractModel {
         super();
 
         /**
-         * Response parameters
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Response parameters.
          * @type {DescribeMNPSensitiveAPIPermissionListResp || null}
          */
         this.Data = null;
@@ -4798,7 +4669,6 @@ class CreateMNPSensitiveAPIPermissionApprovalResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ResourceIdStringInfo || null}
          */
         this.Data = null;
@@ -5112,7 +4982,6 @@ class DescribeMNPSensitiveAPIPermissionListResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -5192,35 +5061,30 @@ class DescribeRoleListData extends  AbstractModel {
 
         /**
          * Role ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RoleId = null;
 
         /**
-         * Role name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Role name.
          * @type {string || null}
          */
         this.RoleName = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Role type 1-Preset role 2-Custom role
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Role type 1-preset role 2-custom role.
          * @type {number || null}
          */
         this.RoleType = null;
@@ -5293,15 +5157,13 @@ class DescribeGlobalDomainsResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of results
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Domain name information
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Describes the domain information.
          * @type {Array.<DescribeGlobalDomainsListData> || null}
          */
         this.DataList = null;
@@ -5339,14 +5201,12 @@ class DescribeRevertOnlineVersionPageResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<QueryOnlineVersionResp> || null}
          */
         this.DataList = null;
@@ -5384,14 +5244,12 @@ class DescribeMNPApprovalListResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeMNPApprovalListData> || null}
          */
         this.DataList = null;
@@ -5429,49 +5287,42 @@ class DescribeMNPSensitiveAPIPermissionApprovalData extends  AbstractModel {
 
         /**
          * API ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.APIId = null;
 
         /**
-         * API request method
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API method.
          * @type {string || null}
          */
         this.APIMethod = null;
 
         /**
-         * Reason for the request
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reason for application
          * @type {string || null}
          */
         this.ApplyReason = null;
 
         /**
-         * Reason for rejection
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reason for rejection.
          * @type {string || null}
          */
         this.RejectReason = null;
 
         /**
-         * Approval status. 20: Rejected; 30: Approved
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Approval status. valid values: 20 (rejected), 30 (approved).
          * @type {number || null}
          */
         this.ApprovalStatus = null;
 
         /**
-         * API feature description
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API feature description.
          * @type {string || null}
          */
         this.APIDesc = null;
 
         /**
-         * API type. 1: System; 2: Custom
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API type. 1: system; 2: custom.
          * @type {number || null}
          */
         this.APIType = null;
@@ -5602,14 +5453,12 @@ class DescribeApplicationListResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeApplicationListData> || null}
          */
         this.DataList = null;
@@ -6100,49 +5949,42 @@ class DescribeGlobalDomainsListData extends  AbstractModel {
 
         /**
          * Domain ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DomainId = null;
 
         /**
          * Domain name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DomainUrl = null;
 
         /**
-         * Type. 1: Allowed; 2: Blocked
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Type. 1: allowlist; 2: blocklist.
          * @type {number || null}
          */
         this.DomainType = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Updater
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the updater.
          * @type {string || null}
          */
         this.UpdateUser = null;
 
         /**
          * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -6177,84 +6019,72 @@ class DescribeMNPManagerDetailData extends  AbstractModel {
 
         /**
          * Mini program type 
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPType = null;
 
         /**
          * Mini program ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPId = null;
 
         /**
          * Mini program name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPName = null;
 
         /**
          * Mini program icon
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPIcon = null;
 
         /**
          * Mini program introduction
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPIntro = null;
 
         /**
          * Mini program description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MNPDesc = null;
 
         /**
-         * Creation time, timestamp
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Creation time, timestamp.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Connection status. 1: Not connected; 2: Connected
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Access status. 1: not connected; 2: connected.
          * @type {number || null}
          */
         this.AccessStatus = null;
 
         /**
-         * The name of the associated team
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Name of the associated team
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
          * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
-         * Mini program release status. 1: Released; 2: Removed
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the mini program listing status. valid values: 1 (submitted), 2 (removed).
          * @type {number || null}
          */
         this.Status = null;
@@ -6294,49 +6124,42 @@ class DescribeUserListData extends  AbstractModel {
 
         /**
          * User ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
          * User account
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserAccount = null;
 
         /**
-         * Account type. 1: Super admin; 2: Platform admin; 3: Member
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Account type. 1: super administrator; 2: platform administrator; 3: ordinary member.
          * @type {number || null}
          */
         this.AccountType = null;
 
         /**
          * User name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Status. 1: Normal; 2: Disabled
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status. 1: normal; 2: disabled.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
@@ -6958,7 +6781,6 @@ class CreateMNPDomainACLResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BooleanInfo || null}
          */
         this.Data = null;
@@ -7048,7 +6870,6 @@ class DescribeMNPApprovalListResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeMNPApprovalListResp || null}
          */
         this.Data = null;
@@ -7203,16 +7024,16 @@ class CreateApplicationRequest extends  AbstractModel {
         this.TeamId = null;
 
         /**
-         * Application type. 1: Test; 2: Formal
-         * @type {number || null}
-         */
-        this.ApplicationType = null;
-
-        /**
          * Introduction
          * @type {string || null}
          */
         this.Intro = null;
+
+        /**
+         * Application type. 1: Test; 2: Formal
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
 
         /**
          * Android app package name
@@ -7232,6 +7053,12 @@ class CreateApplicationRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * Scheme
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
     }
 
     /**
@@ -7245,11 +7072,12 @@ class CreateApplicationRequest extends  AbstractModel {
         this.Logo = 'Logo' in params ? params.Logo : null;
         this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
         this.TeamId = 'TeamId' in params ? params.TeamId : null;
-        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.Intro = 'Intro' in params ? params.Intro : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.AndroidAppKey = 'AndroidAppKey' in params ? params.AndroidAppKey : null;
         this.IosAppKey = 'IosAppKey' in params ? params.IosAppKey : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
 
     }
 }
@@ -7263,43 +7091,37 @@ class MNPTypeDefine extends  AbstractModel {
         super();
 
         /**
-         * Mini program category name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the mini program category name.
          * @type {string || null}
          */
         this.TypeName = null;
 
         /**
-         * Mini program category value
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mini program category value.
          * @type {Array.<string> || null}
          */
         this.TypeValue = null;
 
         /**
-         * Category ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Category ID.
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
          * Creator
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateUser = null;
 
         /**
-         * Whether it is a system category
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Indicates whether it is a system category.
          * @type {boolean || null}
          */
         this.IsSystem = null;
@@ -7332,8 +7154,7 @@ class StringData extends  AbstractModel {
         super();
 
         /**
-         * String type response data
-Note: This field may return null, indicating that no valid values can be obtained.
+         * string type response data.
          * @type {string || null}
          */
         this.Data = null;
@@ -7362,7 +7183,6 @@ class DescribeTempSecret4UploadFile2CosResponse extends  AbstractModel {
 
         /**
          * Response data
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {UploadFileTempSecret || null}
          */
         this.Data = null;
@@ -7587,7 +7407,6 @@ class DescribeApplicationSensitiveAPIListData extends  AbstractModel {
 
         /**
          * API description
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.APIDesc = null;
@@ -7618,49 +7437,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Application ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationId = null;
 
         /**
          * Application name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ApplicationName = null;
 
         /**
          * Team ID
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamId = null;
 
         /**
          * Team name
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeamName = null;
 
         /**
-         * Application icon
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Specifies the application icon.
          * @type {string || null}
          */
         this.ApplicationLogo = null;
 
         /**
-         * API type. 1: System; 2: Custom
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API type. 1: system; 2: custom.
          * @type {number || null}
          */
         this.APIType = null;
 
         /**
-         * API status. 0: Public; 1: Restricted
-Note: This field may return null, indicating that no valid values can be obtained.
+         * API status. 0: public; 1: restricted.
          * @type {number || null}
          */
         this.Status = null;
@@ -7703,14 +7515,12 @@ class DescribeApplicationSensitiveAPIListResp extends  AbstractModel {
 
         /**
          * Total number of entries
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeApplicationSensitiveAPIListData> || null}
          */
         this.DataList = null;
@@ -7913,8 +7723,7 @@ class PresetResp extends  AbstractModel {
         super();
 
         /**
-         * RSA encryption public key
-Note: This field may return null, indicating that no valid values can be obtained.
+         * RSA encryption public key.
          * @type {string || null}
          */
         this.Key = null;
@@ -8120,8 +7929,7 @@ class GlobalDomainDeleteResp extends  AbstractModel {
         super();
 
         /**
-         * Response result
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Result.
          * @type {boolean || null}
          */
         this.Result = null;
@@ -8295,28 +8103,24 @@ class CreateGlobalDomainResp extends  AbstractModel {
 
         /**
          * Result
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.Result = null;
 
         /**
-         * List of duplicate domain names
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Indicates the duplicate domain name.
          * @type {Array.<string> || null}
          */
         this.RepeatUrls = null;
 
         /**
-         * List of allowed domain names
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Lists allowed domain names.
          * @type {Array.<string> || null}
          */
         this.ExistsWhiteUrls = null;
 
         /**
-         * List of blocked domain names
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Indicates the domain name already exists in the blocklist.
          * @type {Array.<string> || null}
          */
         this.ExistsBlackUrls = null;
@@ -8492,15 +8296,13 @@ class DescribeTeamMemberListPageResp extends  AbstractModel {
         super();
 
         /**
-         * Total number of results.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of entries
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
          * List information
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DescribeTeamMemberInfoResp> || null}
          */
         this.DataList = null;

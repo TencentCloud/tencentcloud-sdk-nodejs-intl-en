@@ -160,6 +160,7 @@ const QualityInspectTask = models.QualityInspectTask;
 const CacheConfigNoCache = models.CacheConfigNoCache;
 const FileDeleteTask = models.FileDeleteTask;
 const ResourceTag = models.ResourceTag;
+const ImportMediaKnowledgeRequest = models.ImportMediaKnowledgeRequest;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
 const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
 const SetVodDomainCertificateRequest = models.SetVodDomainCertificateRequest;
@@ -350,6 +351,7 @@ const ModifyReviewTemplateRequest = models.ModifyReviewTemplateRequest;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const MPSSubTaskResult = models.MPSSubTaskResult;
 const MediaTrackItem = models.MediaTrackItem;
+const ImportMediaKnowledgeResponse = models.ImportMediaKnowledgeResponse;
 const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
@@ -482,6 +484,7 @@ const OutputVideoStream = models.OutputVideoStream;
 const ProcedureTemplate = models.ProcedureTemplate;
 const DomainDetailInfo = models.DomainDetailInfo;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
+const SemanticsSearchResult = models.SemanticsSearchResult;
 const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
 const DescribeImageReviewUsageDataRequest = models.DescribeImageReviewUsageDataRequest;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
@@ -618,6 +621,7 @@ const MediaCastEvent = models.MediaCastEvent;
 const HeuristicCache = models.HeuristicCache;
 const DeleteProcedureTemplateRequest = models.DeleteProcedureTemplateRequest;
 const WatermarkInput = models.WatermarkInput;
+const SearchMediaBySemanticsResponse = models.SearchMediaBySemanticsResponse;
 const AiSampleWordInfo = models.AiSampleWordInfo;
 const AdaptiveDynamicStreamingInfoItem = models.AdaptiveDynamicStreamingInfoItem;
 const LiveRealTimeClipStreamInfo = models.LiveRealTimeClipStreamInfo;
@@ -847,6 +851,7 @@ const ComposeMediaOutput = models.ComposeMediaOutput;
 const DeleteJustInTimeTranscodeTemplateResponse = models.DeleteJustInTimeTranscodeTemplateResponse;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const DescribeJustInTimeTranscodeTemplatesRequest = models.DescribeJustInTimeTranscodeTemplatesRequest;
+const SearchMediaBySemanticsRequest = models.SearchMediaBySemanticsRequest;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
@@ -2270,6 +2275,17 @@ If using event notification, the event notification type is [task flow status ch
     }
 
     /**
+     * This API is used to import AI analysis results into the knowledge base.
+     * @param {ImportMediaKnowledgeRequest} req
+     * @param {function(string, ImportMediaKnowledgeResponse):void} cb
+     * @public
+     */
+    ImportMediaKnowledge(req, cb) {
+        let resp = new ImportMediaKnowledgeResponse();
+        this.request("ImportMediaKnowledge", req, resp, cb);
+    }
+
+    /**
      * This API is used to manage initiated tasks.
      * @param {ManageTaskRequest} req
      * @param {function(string, ManageTaskResponse):void} cb
@@ -2896,6 +2912,17 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     CreatePersonSample(req, cb) {
         let resp = new CreatePersonSampleResponse();
         this.request("CreatePersonSample", req, resp, cb);
+    }
+
+    /**
+     * This API is used to conduct semantic search on media using natural language.
+     * @param {SearchMediaBySemanticsRequest} req
+     * @param {function(string, SearchMediaBySemanticsResponse):void} cb
+     * @public
+     */
+    SearchMediaBySemantics(req, cb) {
+        let resp = new SearchMediaBySemanticsResponse();
+        this.request("SearchMediaBySemantics", req, resp, cb);
     }
 
     /**

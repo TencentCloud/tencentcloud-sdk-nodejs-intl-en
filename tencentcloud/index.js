@@ -84,6 +84,7 @@ module.exports = {
     mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     mps: require("./mps"),
+    mqtt: require("./mqtt"),
     msp: require("./msp"),
     ocr: require("./ocr"),
     omics: require("./omics"),

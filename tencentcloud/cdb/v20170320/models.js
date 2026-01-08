@@ -3075,7 +3075,7 @@ class BackupConfig extends  AbstractModel {
         this.ReplicationMode = null;
 
         /**
-         * Name of the AZ of secondary database 2, such as ap-shanghai-1
+         * Name of the AZ of secondary database 2, such as ap-shanghai-2
          * @type {string || null}
          */
         this.Zone = null;
@@ -7761,7 +7761,7 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         this.DeployMode = null;
 
         /**
-         * Instance AZ information in the format of "ap-shanghai-1".
+         * Instance AZ information in the format of "ap-shanghai-2".
          * @type {string || null}
          */
         this.Zone = null;
@@ -7837,7 +7837,7 @@ class SlaveConfig extends  AbstractModel {
         this.ReplicationMode = null;
 
         /**
-         * AZ name of the secondary database, such as ap-shanghai-1
+         * AZ name of the secondary database, such as ap-shanghai-2
          * @type {string || null}
          */
         this.Zone = null;
@@ -13731,7 +13731,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * Name of RO AZ, such as ap-shanghai-1
+         * Name of RO AZ, such as ap-shanghai-2
          * @type {string || null}
          */
         this.Zone = null;

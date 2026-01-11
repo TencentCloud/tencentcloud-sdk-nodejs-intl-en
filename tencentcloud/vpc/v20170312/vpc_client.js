@@ -217,6 +217,7 @@ const DescribeNetDetectsRequest = models.DescribeNetDetectsRequest;
 const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
 const AssociateIPv6AddressRequest = models.AssociateIPv6AddressRequest;
 const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
+const ReplaceRoutesWithRoutePolicyResponse = models.ReplaceRoutesWithRoutePolicyResponse;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const EnableSnapshotPoliciesResponse = models.EnableSnapshotPoliciesResponse;
 const Vpc = models.Vpc;
@@ -224,6 +225,7 @@ const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
 const DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse;
 const FlowLogStorage = models.FlowLogStorage;
 const DeleteRoutePolicyResponse = models.DeleteRoutePolicyResponse;
+const ReplaceRoutesWithRoutePolicyRoute = models.ReplaceRoutesWithRoutePolicyRoute;
 const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse;
 const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
 const ModifyCcnRegionBandwidthLimitsTypeRequest = models.ModifyCcnRegionBandwidthLimitsTypeRequest;
@@ -599,6 +601,7 @@ const DescribeVpcInstancesRequest = models.DescribeVpcInstancesRequest;
 const DeleteVpcEndPointServiceWhiteListResponse = models.DeleteVpcEndPointServiceWhiteListResponse;
 const DescribeSgSnapshotFileContentRequest = models.DescribeSgSnapshotFileContentRequest;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
+const ReplaceRoutesWithRoutePolicyRequest = models.ReplaceRoutesWithRoutePolicyRequest;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const AuditCrossBorderComplianceResponse = models.AuditCrossBorderComplianceResponse;
@@ -2135,6 +2138,17 @@ This API is completed asynchronously. If you need to query the execution result 
     DeleteNetworkAclQuintupleEntries(req, cb) {
         let resp = new DeleteNetworkAclQuintupleEntriesResponse();
         this.request("DeleteNetworkAclQuintupleEntries", req, resp, cb);
+    }
+
+    /**
+     * This API (ReplaceRoutes) modifies the specified routing policy (Route) based on the routing policy ID (RouteId), supporting batch modifications.
+     * @param {ReplaceRoutesWithRoutePolicyRequest} req
+     * @param {function(string, ReplaceRoutesWithRoutePolicyResponse):void} cb
+     * @public
+     */
+    ReplaceRoutesWithRoutePolicy(req, cb) {
+        let resp = new ReplaceRoutesWithRoutePolicyResponse();
+        this.request("ReplaceRoutesWithRoutePolicy", req, resp, cb);
     }
 
     /**

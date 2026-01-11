@@ -817,6 +817,12 @@ Default value: 0.
         this.TEHDConfig = null;
 
         /**
+         * Audio/Video enhancement parameter.
+         * @type {EnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
+        /**
          * The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
 <li>ts: TS segment</li>
 <li>fmp4: fMP4 segment</li>
@@ -857,6 +863,12 @@ Default: ts
             let obj = new TEHDConfig();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
         }
         this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
@@ -2539,6 +2551,53 @@ class ModifyJustInTimeTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * Audio/Video enhancement configuration.
+ * @class
+ */
+class EnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoEnhanceConfig || null}
+         */
+        this.VideoEnhance = null;
+
+        /**
+         * The audio enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioEnhanceConfig || null}
+         */
+        this.AudioEnhance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VideoEnhance) {
+            let obj = new VideoEnhanceConfig();
+            obj.deserialize(params.VideoEnhance)
+            this.VideoEnhance = obj;
+        }
+
+        if (params.AudioEnhance) {
+            let obj = new AudioEnhanceConfig();
+            obj.deserialize(params.AudioEnhance)
+            this.AudioEnhance = obj;
+        }
+
+    }
+}
+
+/**
  * Information, name, and customer ID of the source video to be processed
  * @class
  */
@@ -3355,6 +3414,71 @@ class RefreshUrlCacheRequest extends  AbstractModel {
 }
 
 /**
+ * Control parameter of face recognition task
+ * @class
+ */
+class FaceConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of face recognition task. Valid values:
+<li>ON: enables intelligent face recognition task;</li>
+<li>OFF: disables intelligent face recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Default face filter labels, which specify the types of faces to return. If this parameter is left empty or an empty value is entered, the recognition results for all labels are returned. Valid values:
+<li>`entertainment`: people in the entertainment industry</li>
+<li>`sport`: sports celebrities</li>
+<li>`politician`: politically sensitive people</li>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
+You can specify up to 100 labels, with each containing up to 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * Figure library. Valid values:
+<li>Default: default figure library;</li>
+<li>UserDefine: custom figure library.</li>
+<li>All: both default and custom figure libraries will be used.</li>
+         * @type {string || null}
+         */
+        this.FaceLibrary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+
+    }
+}
+
+/**
  * Intelligent recognition template details
  * @class
  */
@@ -3517,6 +3641,174 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Video enhancement configuration.
+ * @class
+ */
+class VideoEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Enhancement scenario configuration. Valid values:
+<li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+<li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+<li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+<li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+<li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+<li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+<li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+<li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+<li>Input of a null string indicates that the enhancement scenario is not used.</li>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnhanceScenarioType = null;
+
+        /**
+         * Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with Large Model enhancement.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SuperResolutionInfo || null}
+         */
+        this.SuperResolution = null;
+
+        /**
+         * HDR configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HDRInfo || null}
+         */
+        this.Hdr = null;
+
+        /**
+         * Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoDenoiseInfo || null}
+         */
+        this.Denoise = null;
+
+        /**
+         * Comprehensive enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ImageQualityEnhanceInfo || null}
+         */
+        this.ImageQualityEnhance = null;
+
+        /**
+         * Color enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ColorEnhanceInfo || null}
+         */
+        this.ColorEnhance = null;
+
+        /**
+         * Low-light enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LowLightEnhanceInfo || null}
+         */
+        this.LowLightEnhance = null;
+
+        /**
+         * Banding removal configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScratchRepairInfo || null}
+         */
+        this.ScratchRepair = null;
+
+        /**
+         * Artifacts removal configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ArtifactRepairInfo || null}
+         */
+        this.ArtifactRepair = null;
+
+        /**
+         * Large Model enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DiffusionEnhanceInfo || null}
+         */
+        this.DiffusionEnhance = null;
+
+        /**
+         * Frame rate configuration for the frame interpolation, which supports fractions. Note that it is mutually exclusive with FrameRate. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FrameRateWithDenInfo || null}
+         */
+        this.FrameRateWithDen = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnhanceScenarioType = 'EnhanceScenarioType' in params ? params.EnhanceScenarioType : null;
+
+        if (params.SuperResolution) {
+            let obj = new SuperResolutionInfo();
+            obj.deserialize(params.SuperResolution)
+            this.SuperResolution = obj;
+        }
+
+        if (params.Hdr) {
+            let obj = new HDRInfo();
+            obj.deserialize(params.Hdr)
+            this.Hdr = obj;
+        }
+
+        if (params.Denoise) {
+            let obj = new VideoDenoiseInfo();
+            obj.deserialize(params.Denoise)
+            this.Denoise = obj;
+        }
+
+        if (params.ImageQualityEnhance) {
+            let obj = new ImageQualityEnhanceInfo();
+            obj.deserialize(params.ImageQualityEnhance)
+            this.ImageQualityEnhance = obj;
+        }
+
+        if (params.ColorEnhance) {
+            let obj = new ColorEnhanceInfo();
+            obj.deserialize(params.ColorEnhance)
+            this.ColorEnhance = obj;
+        }
+
+        if (params.LowLightEnhance) {
+            let obj = new LowLightEnhanceInfo();
+            obj.deserialize(params.LowLightEnhance)
+            this.LowLightEnhance = obj;
+        }
+
+        if (params.ScratchRepair) {
+            let obj = new ScratchRepairInfo();
+            obj.deserialize(params.ScratchRepair)
+            this.ScratchRepair = obj;
+        }
+
+        if (params.ArtifactRepair) {
+            let obj = new ArtifactRepairInfo();
+            obj.deserialize(params.ArtifactRepair)
+            this.ArtifactRepair = obj;
+        }
+
+        if (params.DiffusionEnhance) {
+            let obj = new DiffusionEnhanceInfo();
+            obj.deserialize(params.DiffusionEnhance)
+            this.DiffusionEnhance = obj;
+        }
+
+        if (params.FrameRateWithDen) {
+            let obj = new FrameRateWithDenInfo();
+            obj.deserialize(params.FrameRateWithDen)
+            this.FrameRateWithDen = obj;
+        }
 
     }
 }
@@ -4571,6 +4863,48 @@ class ModifySubAppIdInfoRequest extends  AbstractModel {
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * LLM enhancement configuration.
+ * @class
+ */
+class DiffusionEnhanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable LLM enhancement. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: OFF.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>weak</li>
+<li>normal</li>
+<li>strong</li>
+Default value: normal.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -6013,51 +6347,30 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Control parameter of face recognition task
+ * The audio improvement configuration.
  * @class
  */
-class FaceConfigureInfoForUpdate extends  AbstractModel {
+class AudioBeautifyInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of face recognition task. Valid values:
-<li>ON: enables intelligent face recognition task;</li>
-<li>OFF: disables intelligent face recognition task.</li>
+         * Whether to enable audio improvement. Valid values:
+<li>`ON`</li>
+<li>`OFF` </li>
+Default value: `OFF`.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * Default face filter labels, which specify the types of faces to return. If this parameter is left empty or an empty value is entered, the recognition results for all labels are returned. Valid values:
-<li>`entertainment`: people in the entertainment industry</li>
-<li>`sport`: sports celebrities</li>
-<li>`politician`: politically sensitive people</li>
+         * The audio improvement options. You can specify multiple options. Valid values:
+<li>`declick`: Noise removal.</li>
+<li>`deesser`: De-essing.</li>
+Default: `declick`.
          * @type {Array.<string> || null}
          */
-        this.DefaultLibraryLabelSet = null;
-
-        /**
-         * Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
-You can specify up to 100 labels, with each containing up to 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.UserDefineLibraryLabelSet = null;
-
-        /**
-         * Figure library. Valid values:
-<li>Default: default figure library;</li>
-<li>UserDefine: custom figure library.</li>
-<li>All: both default and custom figure libraries will be used.</li>
-         * @type {string || null}
-         */
-        this.FaceLibrary = null;
+        this.Types = null;
 
     }
 
@@ -6069,10 +6382,7 @@ You can specify up to 100 labels, with each containing up to 16 characters.
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
-        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
-        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+        this.Types = 'Types' in params ? params.Types : null;
 
     }
 }
@@ -6150,6 +6460,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.TEHDConfig = null;
 
         /**
+         * Audio/Video enhancement parameter.
+         * @type {EnhanceConfigForUpdate || null}
+         */
+        this.EnhanceConfig = null;
+
+        /**
          * The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
 <li>ts: TS segment</li>
 <li>fmp4: fMP4 segment</li>
@@ -6190,6 +6506,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
             let obj = new TEHDConfigForUpdate();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfigForUpdate();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
         }
         this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
@@ -6368,18 +6690,44 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteAIAnalysisTemplate response structure.
+ * DescribeImageSpriteTemplates request structure.
  * @class
  */
-class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
+class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Unique ID filter of image sprite generating templates. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Paged offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Template type filter. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Type = null;
 
     }
 
@@ -6390,7 +6738,11 @@ class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -10411,6 +10763,51 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
 }
 
 /**
+ * Frame interpolation configuration, which supports fractional frame rates.
+ * @class
+ */
+class FrameRateWithDenInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Capability configuration switch. Valid values:
+<li>ON: enabled.</li>
+<li>OFF: disabled.</li>
+Default value: OFF.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Frame rate numerator. Value range: non-negative number, which should be less than 100 when divided by the denominator, and in the unit of Hz. The default value is 0. Note: For transcoding, this parameter will overwrite the Fps in the VideoTemplate.
+         * @type {number || null}
+         */
+        this.FpsNum = null;
+
+        /**
+         * Frame rate denominator.Value range: numbers equal to or greater than 1. The default value is 1. Note: For transcoding, this parameter will overwrite the FpsDenominator in the VideoTemplate.
+         * @type {number || null}
+         */
+        this.FpsDen = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.FpsNum = 'FpsNum' in params ? params.FpsNum : null;
+        this.FpsDen = 'FpsDen' in params ? params.FpsDen : null;
+
+    }
+}
+
+/**
  * The information of a digital watermark.
  * @class
  */
@@ -11014,6 +11411,34 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
 }
 
 /**
+ * ModifyReviewTemplate response structure.
+ * @class
+ */
+class ModifyReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  *  
  * @class
  */
@@ -11342,6 +11767,7 @@ class SuperResolutionInfo extends  AbstractModel {
 <li>ON</li>
 <li>`OFF`</li>
 If super resolution is enabled, the output resolution will double.
+Default value: `OFF`.
          * @type {string || null}
          */
         this.Switch = null;
@@ -19663,39 +20089,30 @@ class ManageTaskRequest extends  AbstractModel {
 }
 
 /**
- * Carousel program information
+ * The volume equalization configuration.
  * @class
  */
-class RoundPlayListItemInfo extends  AbstractModel {
+class AudioVolumeBalanceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The file ID.
+         * Whether to enable volume equalization. Valid values:
+<li>`ON`</li>
+<li>`OFF` </li>
+Default value: `OFF`.
          * @type {string || null}
          */
-        this.FileId = null;
+        this.Switch = null;
 
         /**
-         * The type of the media played. Valid values:
-<li>`Transcode`: A transcoding output. Because a file may be bound to multiple transcoding templates, you need to specify `Definition` if the type is `Transcode`.</li>
-<li>`Original`: The original file.</li>
-The file must be in HLS format.
+         * The type. Valid values:
+<li>`loudNorm`: Loudness normalization.</li>
+<li>`gainControl`: Volume leveling.</li>
+Default value: `loudNorm`.
          * @type {string || null}
          */
-        this.AudioVideoType = null;
-
-        /**
-         * ID of the program to be played, assigned by the system.
-         * @type {string || null}
-         */
-        this.ItemId = null;
-
-        /**
-         * The transcoding template to be played is specified. this parameter is required if `audiovideotype` is `transcode`.
-         * @type {number || null}
-         */
-        this.Definition = null;
+        this.Type = null;
 
     }
 
@@ -19706,10 +20123,8 @@ The file must be in HLS format.
         if (!params) {
             return;
         }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
-        this.ItemId = 'ItemId' in params ? params.ItemId : null;
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -20983,6 +21398,53 @@ Default value: 0, which indicates to delete all videos of the type specified by 
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * Audio/Video enhancement configuration.
+ * @class
+ */
+class EnhanceConfigForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoEnhanceConfig || null}
+         */
+        this.VideoEnhance = null;
+
+        /**
+         * The audio enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioEnhanceConfig || null}
+         */
+        this.AudioEnhance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VideoEnhance) {
+            let obj = new VideoEnhanceConfig();
+            obj.deserialize(params.VideoEnhance)
+            this.VideoEnhance = obj;
+        }
+
+        if (params.AudioEnhance) {
+            let obj = new AudioEnhanceConfig();
+            obj.deserialize(params.AudioEnhance)
+            this.AudioEnhance = obj;
+        }
 
     }
 }
@@ -22510,6 +22972,81 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * DescribePersonSamples request structure.
+ * @class
+ */
+class DescribePersonSamplesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Type of samples to pull. Valid values:
+<li>UserDefine: custom sample library</li>
+<li>Default: default sample library</li>
+
+Default value: UserDefine. Samples in the custom sample library will be pulled.
+Note: samples from the default library can only be pulled by providing the name or both the ID and name of a sample. Only one face image will be returned.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * IDs of samples. Array length limit: 100.
+         * @type {Array.<string> || null}
+         */
+        this.PersonIds = null;
+
+        /**
+         * Names of samples. Array length limit: 20.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * Tags of a sample. Array length limit: 20.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries to be returned. Default value: 100. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PersonIds = 'PersonIds' in params ? params.PersonIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Release on WeChat Mini Program task information
  * @class
  */
@@ -23967,44 +24504,18 @@ When the value is 0, it means that the video bitrate remains the same as the ori
 }
 
 /**
- * DescribeImageSpriteTemplates request structure.
+ * DeleteAIAnalysisTemplate response structure.
  * @class
  */
-class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
+class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Unique ID filter of image sprite generating templates. Array length limit: 100.
-         * @type {Array.<number> || null}
-         */
-        this.Definitions = null;
-
-        /**
-         * Paged offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Template type filter. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Type = null;
+        this.RequestId = null;
 
     }
 
@@ -24015,11 +24526,7 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -25116,18 +25623,39 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyReviewTemplate response structure.
+ * The audio separation configuration.
  * @class
  */
-class ModifyReviewTemplateResponse extends  AbstractModel {
+class AudioSeparateInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * Whether to enable audio separation. Valid values:
+<li>`ON`</li>
+<li>`OFF` </li>
+Default value: `OFF`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Switch = null;
+
+        /**
+         * The scenario. Valid values:
+<li>`normal`: Separate voice and background audio.</li>
+<li>`music`: Separate vocals and instrumentals.</li>
+Default value: `normal`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The output audio track. Valid values:
+<li>`vocal`: Voice.</li>
+<li>`background`: Output background audio if the scenario is `normal`, and output instrumentals if the scenario is `music`.</li>
+Default value: `vocal`.
+         * @type {string || null}
+         */
+        this.Track = null;
 
     }
 
@@ -25138,7 +25666,9 @@ class ModifyReviewTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Track = 'Track' in params ? params.Track : null;
 
     }
 }
@@ -28257,12 +28787,13 @@ class ScratchRepairInfo extends  AbstractModel {
          * Whether to enable banding removal. Valid values:
 <li>`ON`</li>
 <li>`OFF`</li>
+Default value: `OFF`.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * The banding removal strength. Value range: 0.0 – 1.0. This parameter is valid only if `Switch` is `ON`.
+         * The banding removal strength. Value range: 0.0 - 1.0. This parameter is valid only if `Switch` is `ON`.
 Default value: `0.0`.
          * @type {number || null}
          */
@@ -29728,6 +30259,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TEHDConfig = null;
 
         /**
+         * Audio/Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {EnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
+        /**
          * Container filter. Valid values:
 <li>Video: video container that can contain both video stream and audio stream;</li>
 <li>PureAudio: audio container that can contain only audio stream.</li>
@@ -29786,6 +30324,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new TEHDConfig();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
         }
         this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
@@ -31257,6 +31801,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.TEHDConfig = null;
 
+        /**
+         * Audio/Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {EnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
     }
 
     /**
@@ -31285,6 +31836,12 @@ Note: This field may return `null`, indicating that no valid value was found.
             let obj = new TEHDConfig();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
         }
 
     }
@@ -37983,6 +38540,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Overall enhancement configuration.
+ * @class
+ */
+class ImageQualityEnhanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable overall enhancement. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: OFF.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>weak</li>
+<li>normal</li>
+<li>strong</li>
+Default value: weak.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * Input of full text recognition.
  * @class
  */
@@ -40809,6 +41408,58 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Carousel program information
+ * @class
+ */
+class RoundPlayListItemInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The type of the media played. Valid values:
+<li>`Transcode`: A transcoding output. Because a file may be bound to multiple transcoding templates, you need to specify `Definition` if the type is `Transcode`.</li>
+<li>`Original`: The original file.</li>
+The file must be in HLS format.
+         * @type {string || null}
+         */
+        this.AudioVideoType = null;
+
+        /**
+         * ID of the program to be played, assigned by the system.
+         * @type {string || null}
+         */
+        this.ItemId = null;
+
+        /**
+         * The transcoding template to be played is specified. this parameter is required if `audiovideotype` is `transcode`.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * EnhanceMediaByTemplate request structure.
  * @class
  */
@@ -42730,6 +43381,31 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Enhancement type. Valid values:
+<li>VideoEnhance: video enhancement only.</li>
+<li>AudioEnhance: audio enhancement only.</li>
+<li>AudioVideoEnhance: video and audio enhancement included.</li>
+<li> AnyEnhance: `VideoEnhance`, `AudioEnhance ` and `AudioVideoEnhance` included.</li>
+<li> None: Not any enhancement type</li>
+         * @type {string || null}
+         */
+        this.EnhanceType = null;
+
+        /**
+         * Enhancement scenario configuration. Valid values:
+<li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
+<li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
+<li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
+<li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
+<li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
+<li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
+<li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
+<li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
+         * @type {string || null}
+         */
+        this.EnhanceScenarioType = null;
+
     }
 
     /**
@@ -42746,6 +43422,8 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         this.TEHDType = 'TEHDType' in params ? params.TEHDType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EnhanceType = 'EnhanceType' in params ? params.EnhanceType : null;
+        this.EnhanceScenarioType = 'EnhanceScenarioType' in params ? params.EnhanceScenarioType : null;
 
     }
 }
@@ -45865,16 +46543,15 @@ class AudioDenoiseInfo extends  AbstractModel {
          * Whether to enable noise removal. Valid values:
 <li>`ON`</li>
 <li>`OFF`</li>
+Default value: `OFF`.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * The noise removal type. This parameter is valid only if `Switch` is `ON`. Valid values:
-<li>`weak`</li>
 <li>`normal`</li>
-<li>`strong`</li>
-Default value: `weak`.
+Default value: `normal`.
          * @type {string || null}
          */
         this.Type = null;
@@ -48328,59 +49005,40 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribePersonSamples request structure.
+ * The audio enhancement configuration.
  * @class
  */
-class DescribePersonSamplesRequest extends  AbstractModel {
+class AudioEnhanceConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-         * @type {number || null}
+         * The audio noise reduction configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioDenoiseInfo || null}
          */
-        this.SubAppId = null;
+        this.Denoise = null;
 
         /**
-         * Type of samples to pull. Valid values:
-<li>UserDefine: custom sample library</li>
-<li>Default: default sample library</li>
-
-Default value: UserDefine. Samples in the custom sample library will be pulled.
-Note: samples from the default library can only be pulled by providing the name or both the ID and name of a sample. Only one face image will be returned.
-         * @type {string || null}
+         * The audio separation configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioSeparateInfo || null}
          */
-        this.Type = null;
+        this.Separate = null;
 
         /**
-         * IDs of samples. Array length limit: 100.
-         * @type {Array.<string> || null}
+         * The volume equalization configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioVolumeBalanceInfo || null}
          */
-        this.PersonIds = null;
+        this.VolumeBalance = null;
 
         /**
-         * Names of samples. Array length limit: 20.
-         * @type {Array.<string> || null}
+         * The audio improvement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioBeautifyInfo || null}
          */
-        this.Names = null;
-
-        /**
-         * Tags of a sample. Array length limit: 20.
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Pagination offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries to be returned. Default value: 100. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.Beautify = null;
 
     }
 
@@ -48391,13 +49049,30 @@ Note: samples from the default library can only be pulled by providing the name 
         if (!params) {
             return;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.PersonIds = 'PersonIds' in params ? params.PersonIds : null;
-        this.Names = 'Names' in params ? params.Names : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Denoise) {
+            let obj = new AudioDenoiseInfo();
+            obj.deserialize(params.Denoise)
+            this.Denoise = obj;
+        }
+
+        if (params.Separate) {
+            let obj = new AudioSeparateInfo();
+            obj.deserialize(params.Separate)
+            this.Separate = obj;
+        }
+
+        if (params.VolumeBalance) {
+            let obj = new AudioVolumeBalanceInfo();
+            obj.deserialize(params.VolumeBalance)
+            this.VolumeBalance = obj;
+        }
+
+        if (params.Beautify) {
+            let obj = new AudioBeautifyInfo();
+            obj.deserialize(params.Beautify)
+            this.Beautify = obj;
+        }
 
     }
 }
@@ -49831,6 +50506,7 @@ class HDRInfo extends  AbstractModel {
          * Whether to enable HDR. Valid values:
 <li>`ON`</li>
 <li>`OFF`</li>
+Default value: `OFF`.
          * @type {string || null}
          */
         this.Switch = null;
@@ -49842,7 +50518,7 @@ class HDRInfo extends  AbstractModel {
 
 Note:
 <li>This parameter is valid only if `Switch` is `ON`.</li>
-<li>For audio/video remastering, this parameter is valid only if the output video codec is `libx265`.</li>
+<li>For audio/video remastering, this parameter is valid only if the output video codec is `libx264` or`libx265`.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -50093,6 +50769,7 @@ module.exports = {
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
     ModifyJustInTimeTranscodeTemplateRequest: ModifyJustInTimeTranscodeTemplateRequest,
+    EnhanceConfig: EnhanceConfig,
     MediaInputInfo: MediaInputInfo,
     CreateImageSpriteTask2017: CreateImageSpriteTask2017,
     ClipFileInfo2017: ClipFileInfo2017,
@@ -50105,8 +50782,10 @@ module.exports = {
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     RefreshUrlCacheRequest: RefreshUrlCacheRequest,
+    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
+    VideoEnhanceConfig: VideoEnhanceConfig,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     NoiseConfigureInfo: NoiseConfigureInfo,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
@@ -50127,6 +50806,7 @@ module.exports = {
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     ModifyEnhanceMediaTemplateResponse: ModifyEnhanceMediaTemplateResponse,
     ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
+    DiffusionEnhanceInfo: DiffusionEnhanceInfo,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     ProcedureReviewAudioVideoTaskInput: ProcedureReviewAudioVideoTaskInput,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
@@ -50149,12 +50829,12 @@ module.exports = {
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     ModifyEnhanceMediaTemplateRequest: ModifyEnhanceMediaTemplateRequest,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
-    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
+    AudioBeautifyInfo: AudioBeautifyInfo,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     RuleCache: RuleCache,
     ProcessMediaByMPS: ProcessMediaByMPS,
     EditMediaTaskInput: EditMediaTaskInput,
-    DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
+    DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
     DeleteImageProcessingTemplateRequest: DeleteImageProcessingTemplateRequest,
     DescribeDailyPlayStatFileListResponse: DescribeDailyPlayStatFileListResponse,
     AbnormalLightingConfigureInfo: AbnormalLightingConfigureInfo,
@@ -50228,6 +50908,7 @@ module.exports = {
     SplitMediaTaskConfig: SplitMediaTaskConfig,
     PlayStatFileInfo: PlayStatFileInfo,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
+    FrameRateWithDenInfo: FrameRateWithDenInfo,
     TraceWatermarkInput: TraceWatermarkInput,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     ReviewAudioVideoSegmentItem: ReviewAudioVideoSegmentItem,
@@ -50239,6 +50920,7 @@ module.exports = {
     ReduceMediaBitrateTranscodeResult: ReduceMediaBitrateTranscodeResult,
     MediaSubtitleInfo: MediaSubtitleInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
+    ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
     CreateVodDomainRequest: CreateVodDomainRequest,
@@ -50394,7 +51076,7 @@ module.exports = {
     CreateJustInTimeTranscodeTemplateRequest: CreateJustInTimeTranscodeTemplateRequest,
     ComplexAdaptiveDynamicStreamingTaskAudioInput: ComplexAdaptiveDynamicStreamingTaskAudioInput,
     ManageTaskRequest: ManageTaskRequest,
-    RoundPlayListItemInfo: RoundPlayListItemInfo,
+    AudioVolumeBalanceInfo: AudioVolumeBalanceInfo,
     ModifyEventConfigRequest: ModifyEventConfigRequest,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     DescribeHeadTailTemplatesRequest: DescribeHeadTailTemplatesRequest,
@@ -50417,6 +51099,7 @@ module.exports = {
     DescribeSubAppIdsResponse: DescribeSubAppIdsResponse,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
     MediaDeleteItem: MediaDeleteItem,
+    EnhanceConfigForUpdate: EnhanceConfigForUpdate,
     PoliticalImageResult: PoliticalImageResult,
     AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
@@ -50448,6 +51131,7 @@ module.exports = {
     ComplexAdaptiveDynamicStreamingTaskInput: ComplexAdaptiveDynamicStreamingTaskInput,
     SortBy: SortBy,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
+    DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
     DescribeDrmKeyProviderInfoRequest: DescribeDrmKeyProviderInfoRequest,
     ModifyDefaultStorageRegionResponse: ModifyDefaultStorageRegionResponse,
@@ -50471,7 +51155,7 @@ module.exports = {
     ModifyVodDomainConfigResponse: ModifyVodDomainConfigResponse,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
     VideoConfigureInfo: VideoConfigureInfo,
-    DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
+    DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     ModifyRebuildMediaTemplateResponse: ModifyRebuildMediaTemplateResponse,
     CreateEnhanceMediaTemplateRequest: CreateEnhanceMediaTemplateRequest,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
@@ -50488,7 +51172,7 @@ module.exports = {
     CreateSubAppIdResponse: CreateSubAppIdResponse,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
-    ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
+    AudioSeparateInfo: AudioSeparateInfo,
     DescribeImageProcessingTemplatesRequest: DescribeImageProcessingTemplatesRequest,
     QualityInspectTaskInput: QualityInspectTaskInput,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
@@ -50700,6 +51384,7 @@ module.exports = {
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
     ReduceMediaBitrateMediaProcessTaskResult: ReduceMediaBitrateMediaProcessTaskResult,
+    ImageQualityEnhanceInfo: ImageQualityEnhanceInfo,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     SplitMediaOutputConfig: SplitMediaOutputConfig,
     CreateVodDomainResponse: CreateVodDomainResponse,
@@ -50742,6 +51427,7 @@ module.exports = {
     ComplexAdaptiveDynamicStreamingTaskStreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara,
     RebuildMediaByTemplateResponse: RebuildMediaByTemplateResponse,
     MediaAudioStreamItem: MediaAudioStreamItem,
+    RoundPlayListItemInfo: RoundPlayListItemInfo,
     EnhanceMediaByTemplateRequest: EnhanceMediaByTemplateRequest,
     SubAppIdInfo: SubAppIdInfo,
     DescribeAllClassResponse: DescribeAllClassResponse,
@@ -50861,7 +51547,7 @@ module.exports = {
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     HwPrivateAccess: HwPrivateAccess,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
-    DescribePersonSamplesRequest: DescribePersonSamplesRequest,
+    AudioEnhanceConfig: AudioEnhanceConfig,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
     DeleteEnhanceMediaTemplateRequest: DeleteEnhanceMediaTemplateRequest,
